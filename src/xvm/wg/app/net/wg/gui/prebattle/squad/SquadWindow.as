@@ -4,8 +4,6 @@ package net.wg.gui.prebattle.squad
     import net.wg.infrastructure.base.meta.ISquadWindowMeta;
     import net.wg.gui.components.windows.Window;
     import scaleform.clik.utils.Padding;
-    import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
-    import net.wg.gui.events.MessengerBarEvent;
     import net.wg.data.constants.generated.PREBATTLE_ALIASES;
     import net.wg.data.Aliases;
     import scaleform.clik.events.InputEvent;
@@ -47,13 +45,12 @@ package net.wg.gui.prebattle.squad
             window.useBottomBtns = true;
             canDrag = true;
             canMinimize = true;
-            isCentered = false;
+            isCentered = true;
             showWindowBgForm = false;
             var _loc1_:Padding = window.contentPadding as Padding;
             _loc1_.bottom = 19;
             _loc1_.right = 13;
             window.contentPadding = _loc1_;
-            geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
             App.utils.scheduler.envokeInNextFrame(this.windowIsUpdated);
             registerComponent(this.squadView,PREBATTLE_ALIASES.SQUAD_VIEW_PY);
             registerComponent(this.squadView.getChannelComponent(),Aliases.CHANNEL_COMPONENT);

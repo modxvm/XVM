@@ -60,6 +60,10 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
         
         private var date:Date = null;
         
+        private var _uniqueIdentifier:Number = -1;
+        
+        private var _firstDeltaTime:Number = -1;
+        
         public function setData(param1:ClanBattleTimerVO) : void
         {
             if(param1 == null)
@@ -67,10 +71,19 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
                 return;
             }
             this.model = param1;
-            this.updateFilters();
-            this.updateSeparator();
-            this.leftTime = this.model.deltaTime;
-            this.timerHandler();
+            if(this.model.useUniqueIdentifier)
+            {
+                if(!(this._uniqueIdentifier == this.model.uniqueIdentifier) || !(this._firstDeltaTime == this.model.deltaTime))
+                {
+                    this._uniqueIdentifier = this.model.uniqueIdentifier;
+                    this._firstDeltaTime = this.model.deltaTime;
+                    this.initTimer();
+                }
+            }
+            else
+            {
+                this.initTimer();
+            }
         }
         
         public function stopTimer() : void
@@ -86,6 +99,14 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
         public function formatDelta(param1:int) : void
         {
             this.date = new Date(null,null,null,null,null,param1);
+        }
+        
+        public function dispose() : void
+        {
+            App.utils.scheduler.cancelTask(this.timerHandler);
+            this.minutes = null;
+            this.seconds = null;
+            this.separator = null;
         }
         
         protected function updateSeparator() : void
@@ -126,6 +147,14 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             }
         }
         
+        private function initTimer() : void
+        {
+            this.updateFilters();
+            this.updateSeparator();
+            this.leftTime = this.model.deltaTime;
+            this.timerHandler();
+        }
+        
         private function timerHandler() : void
         {
             if(this.leftTime <= 0)
@@ -154,14 +183,6 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             this.min = this.getMinutes();
             this.sec = this.getSeconds();
             this.updateText();
-        }
-        
-        public function dispose() : void
-        {
-            App.utils.scheduler.cancelTask(this.timerHandler);
-            this.minutes = null;
-            this.seconds = null;
-            this.separator = null;
         }
     }
 }

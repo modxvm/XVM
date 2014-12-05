@@ -6,13 +6,14 @@ package net.wg.gui.cyberSport.views
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.text.TextField;
     import net.wg.gui.cyberSport.controls.SelectedVehiclesMsg;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.data.constants.Tooltips;
     import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
     import net.wg.gui.rally.events.RallyViewsEvent;
+    import scaleform.gfx.TextFieldEx;
     
     public class IntroView extends CyberSportIntroMeta implements ICyberSportIntroMeta, IBaseRallyViewMeta
     {
@@ -21,6 +22,8 @@ package net.wg.gui.cyberSport.views
         {
             this._selectedVehicles = [];
             super();
+            TextFieldEx.setVerticalAlign(listRoomDescrLbl,TextFieldEx.VALIGN_CENTER);
+            TextFieldEx.setVerticalAlign(this.createDescrLbl,TextFieldEx.VALIGN_CENTER);
         }
         
         public var autoMatchBtn:SoundButtonEx;
@@ -35,7 +38,7 @@ package net.wg.gui.cyberSport.views
         
         public var selectedVehiclesInfo:SelectedVehiclesMsg;
         
-        public var chooseVehiclesButton:ButtonDnmIcon;
+        public var chooseVehiclesButton:IButtonIconLoader;
         
         private var _selectedVehicles:Array;
         
@@ -71,6 +74,7 @@ package net.wg.gui.cyberSport.views
             this.chooseVehiclesButton.addEventListener(ButtonEvent.CLICK,this.csVehicleBtnOnClick);
             this.chooseVehiclesButton.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.chooseVehiclesButton.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
+            this.chooseVehiclesButton.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_CYBERSPORT_TANKICON;
             this.selectedVehiclesInfo.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.selectedVehiclesInfo.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
         }
@@ -137,7 +141,7 @@ package net.wg.gui.cyberSport.views
         }));
     }
     
-    override protected function onListRoomBtnClick(param1:ButtonEvent) : void
+    override protected function showListRoom(param1:ButtonEvent) : void
     {
         var _loc2_:Object = {"alias":CYBER_SPORT_ALIASES.UNITS_LIST_VIEW_UI,
         "itemId":Number.NaN,

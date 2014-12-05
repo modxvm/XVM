@@ -65,6 +65,7 @@ package net.wg.app.impl
         public function Application()
         {
             this.browserBgClassValue = Application_browserBgClassValue;
+            this.altBrowserBgClassValue = Application_altBrowserBgClassValue;
             this._librariesList = Vector.<String>(["windows.swf","popovers.swf","animations.swf"]);
             super();
             Extensions.enabled = true;
@@ -75,6 +76,8 @@ package net.wg.app.impl
         public static var APP_REG_CMD:String = "registerApplication";
         
         public var browserBgClassValue:Class;
+        
+        public var altBrowserBgClassValue:Class;
         
         private var _librariesList:Vector.<String>;
         
@@ -106,6 +109,11 @@ package net.wg.app.impl
         override public function get browserBgClass() : Class
         {
             return this.browserBgClassValue;
+        }
+        
+        override public function get altBrowserBgClass() : Class
+        {
+            return this.altBrowserBgClassValue;
         }
         
         override public function get systemMessages() : DisplayObjectContainer

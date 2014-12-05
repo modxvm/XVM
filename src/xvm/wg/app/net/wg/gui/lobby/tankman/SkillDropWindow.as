@@ -5,6 +5,7 @@ package net.wg.gui.lobby.tankman
     import scaleform.clik.controls.ButtonGroup;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.TankmanTrainingSmallButton;
+    import flash.text.TextField;
     import flash.events.Event;
     import flash.events.MouseEvent;
     import scaleform.clik.events.ButtonEvent;
@@ -37,6 +38,8 @@ package net.wg.gui.lobby.tankman
         public var creditsButton:TankmanTrainingSmallButton;
         
         public var freeButton:TankmanTrainingSmallButton;
+        
+        public var freeDropTf:TextField;
         
         public var model:SkillDropModel;
         
@@ -118,14 +121,27 @@ package net.wg.gui.lobby.tankman
         
         override protected function draw() : void
         {
+            var _loc1_:* = false;
             super.draw();
             if((isInvalid(INVALID_DATA)) && (this.model))
             {
-                this.goldButton.level = Math.round(this.model.dropSkillGold.xpReuseFraction * 100);
-                this.creditsButton.level = Math.round(this.model.dropSkillCredits.xpReuseFraction * 100);
-                this.freeButton.level = Math.round(this.model.dropSkillFree.xpReuseFraction * 100);
-                this.goldButton.nation = this.creditsButton.nation = this.freeButton.nation = this.model.nationID;
-                this.updateSavingModes();
+                _loc1_ = this.model.skillsCount <= 1 && this.model.lastSkillLevel < 1;
+                this.goldButton.visible = !_loc1_;
+                this.creditsButton.visible = !_loc1_;
+                this.freeButton.visible = !_loc1_;
+                this.freeDropTf.visible = _loc1_;
+                if(!_loc1_)
+                {
+                    this.goldButton.level = Math.round(this.model.dropSkillGold.xpReuseFraction * 100);
+                    this.creditsButton.level = Math.round(this.model.dropSkillCredits.xpReuseFraction * 100);
+                    this.freeButton.level = Math.round(this.model.dropSkillFree.xpReuseFraction * 100);
+                    this.goldButton.nation = this.creditsButton.nation = this.freeButton.nation = this.model.nationID;
+                    this.updateSavingModes();
+                }
+                else
+                {
+                    this.freeDropTf.htmlText = this.model.freeDropText;
+                }
                 this.beforeBlock.nation = this.afterBlock.nation = this.model.nation;
                 this.beforeBlock.tankmanName = this.afterBlock.tankmanName = this.model.tankmanName;
                 this.beforeBlock.portraitSource = this.afterBlock.portraitSource = this.model.tankmanIcon;

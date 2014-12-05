@@ -14,34 +14,30 @@ package net.wg.gui.components.tooltips
             this.contentList = new Vector.<TextField>();
         }
         
-        private static var COLOR_HEADER:String = "#fdf4ce";
+        private static var CONTENT_COLOR:String = "#8C8C7E";
+        
+        private static var CONTENT_FONT:String = "$FieldFont";
+        
+        private static var CONTENT_FONT_SIZE:Number = 14;
         
         private static function setTextProp(param1:TextField, param2:String, param3:TextFormat, param4:String) : void
         {
             param3.align = param4;
-            param3.leading = 2;
+            param3.leading = 0;
             param1.wordWrap = true;
             param1.multiline = true;
             param1.autoSize = param4;
             param1.embedFonts = true;
-            var _loc5_:Number = App.utils.toUpperOrLowerCase(param2,false).indexOf("face=\"",0);
-            if(_loc5_ > 0)
+            if(App.utils.toUpperOrLowerCase(param2,false).indexOf("face=",0) == -1)
             {
-                param3.font = param2.slice(_loc5_ + 6,param2.indexOf("\"",_loc5_ + 6));
-            }
-            else
-            {
-                param3.font = "$TextFont";
+                param3.font = CONTENT_FONT;
             }
             if(param2.slice(0,1) == "#")
             {
-                param1.htmlText = param2;
-                param1.textColor = Utils.instance.convertStringColorToNumber(COLOR_HEADER);
+                param2 = App.utils.locale.makeString(param2);
+                param1.textColor = Utils.instance.convertStringColorToNumber(CONTENT_COLOR);
             }
-            else
-            {
-                param1.htmlText = "<font color=\"" + COLOR_HEADER + "\" size=\"12\">" + param2 + "</font>";
-            }
+            param1.htmlText = "<font color=\"" + CONTENT_COLOR + "\" size=\"" + CONTENT_FONT_SIZE + "\">" + param2 + "</font>";
             param1.setTextFormat(param3);
         }
         
@@ -51,11 +47,11 @@ package net.wg.gui.components.tooltips
         
         private var _leftMargin:Number = 10;
         
-        private var _rightMargin:Number = 10;
+        private var _rightMargin:Number = 11;
         
         private var _topMargin:Number = 6;
         
-        private var _bottomMargin:Number = 11;
+        private var _bottomMargin:Number = 12;
         
         private var contTopMargin:Number = 10;
         
@@ -153,20 +149,18 @@ package net.wg.gui.components.tooltips
         this._bottomMargin = 11;
         var _loc2_:String = param1.toString();
         var _loc3_:Number = this.contTopMargin;
-        var _loc4_:Number = 0;
-        var _loc5_:TextFormat = new TextFormat();
-        _loc6_ = 10;
-        var _loc7_:Number = this._minWidth == 0?500:this._minWidth;
-        var _loc8_:TextField = new TextField();
-        _loc8_.x = this.contLeftMargin;
-        _loc8_.y = _loc3_;
-        _loc8_.width = _loc7_;
-        _loc8_.height = _loc6_;
-        setTextProp(_loc8_,_loc2_,_loc5_,"left");
-        _loc8_.width = _loc8_.textWidth + 4;
-        _loc4_ = _loc8_.textHeight;
-        this.contentList.push(_loc8_);
-        addChild(_loc8_);
+        var _loc4_:TextFormat = new TextFormat();
+        var _loc5_:Number = 10;
+        _loc6_ = this._minWidth == 0?500:this._minWidth;
+        var _loc7_:TextField = new TextField();
+        _loc7_.x = this.contLeftMargin;
+        _loc7_.y = _loc3_;
+        _loc7_.width = _loc6_;
+        _loc7_.height = _loc5_;
+        setTextProp(_loc7_,_loc2_,_loc4_,"left");
+        _loc7_.width = _loc7_.textWidth + 4;
+        this.contentList.push(_loc7_);
+        addChild(_loc7_);
     }
 }
 }

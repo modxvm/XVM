@@ -130,7 +130,7 @@ package net.wg.gui.components.controls
     
     public function showTooltip() : void
     {
-        App.toolTipMgr.showSpecial(Tooltips.ACTION_PRICE,null,this._vo.type,this._vo.key,this._vo.newPrices,this._vo.oldPrices,this._vo.isBuying,this._vo.forCredits);
+        App.toolTipMgr.showSpecial(Tooltips.ACTION_PRICE,null,this._vo.type,this._vo.key,this._vo.newPrices,this._vo.oldPrices,this._vo.isBuying,this._vo.forCredits,this._vo.rentPackage);
     }
     
     public function hideTooltip() : void

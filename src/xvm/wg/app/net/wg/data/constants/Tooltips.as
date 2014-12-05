@@ -16,7 +16,7 @@ package net.wg.data.constants
         
         public static var GLOBAL_RATING:String = "globalRating";
         
-        public static var TANK_CLASS:String = "tankClass";
+        public static var MARK_OF_MASTERY:String = "markOfMastery";
         
         public static var MARKS_ON_GUN_ACHIEVEMENT:String = "marksOnGun";
         
@@ -82,6 +82,8 @@ package net.wg.data.constants
         
         public static var FORT_BUILDING_INFO:String = "fortBuildingInfo";
         
+        public static var FORT_WRONG_TIME:String = "fortWrongTime";
+        
         public static var TYPE_WARNING:String = "WARNING";
         
         public static var TYPE_INFO:String = "INFO";
@@ -109,5 +111,11 @@ package net.wg.data.constants
         public static var SIMPLE:String = "simple";
         
         public static var COMPLEX:String = "complex";
+        
+        public static var PRIVATE_QUESTS_TILE:String = "privateQuestsTile";
+        
+        public static var PRIVATE_QUESTS_CHAIN:String = "privateQuestsChain";
+        
+        public static var MAP_SMALL:String = "mapSmall";
     }
 }

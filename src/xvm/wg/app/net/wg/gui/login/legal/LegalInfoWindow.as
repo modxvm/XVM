@@ -72,7 +72,6 @@ package net.wg.gui.login.legal
                 return;
             }
             invalidateData();
-            super.draw();
         }
         
         private function onClose(param1:ButtonEvent) : void

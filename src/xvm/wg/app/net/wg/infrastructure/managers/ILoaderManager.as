@@ -5,6 +5,6 @@ package net.wg.infrastructure.managers
     public interface ILoaderManager extends ILoaderManagerMeta
     {
         
-        function stopLoadingByAliases(param1:Array) : Array;
+        function stopLoadingByAliases(param1:Array) : void;
     }
 }

@@ -7,7 +7,7 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
     import flash.text.TextField;
     import net.wg.gui.lobby.fortifications.cmp.main.IFortHeaderClanInfo;
     import net.wg.gui.components.controls.IconTextButton;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import net.wg.gui.components.advanced.ToggleSoundButton;
     import net.wg.gui.lobby.fortifications.utils.IFortsControlsAligner;
     import flash.display.DisplayObject;
@@ -32,9 +32,11 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         private static var DEPOT_QUANTITY_RIGHT_OFFSET:Number = TRANSPORT_BTN_RIGHT_OFFSET + 8;
         
-        private static var SETTING_BTN_LEFT_OFFSET:Number = 15;
+        private static var SETTING_BTN_LEFT_OFFSET:Number = 17;
         
         public var headerBitmapFill:BitmapFill = null;
+        
+        private var _timeAlert:FortTimeAlertIcon = null;
         
         private var _tutorialArrow:IUIComponentEx = null;
         
@@ -54,7 +56,7 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         private var _calendarBtn:IconTextButton = null;
         
-        private var _settingBtn:ButtonDnmIcon = null;
+        private var _settingBtn:IButtonIconLoader = null;
         
         private var _transportBtn:ToggleSoundButton = null;
         
@@ -68,9 +70,10 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this.helper.centerControl(this._clanInfo,true);
             this.helper.rightControl(this._transportBtn,TRANSPORT_BTN_RIGHT_OFFSET);
             this._tutorialArrow.x = this._transportBtn.x + (this._transportBtn.width - this._tutorialArrow.width >> 1);
-            this.helper.rightControl(this._totalDepotQuantityText,DEPOT_QUANTITY_RIGHT_OFFSET + this._transportBtn.width);
+            this.helper.rightControl(this._totalDepotQuantityText,DEPOT_QUANTITY_RIGHT_OFFSET + (this._transportBtn.visible?this._transportBtn.width:0));
             var _loc1_:Rectangle = DisplayObject(this.clanInfo).getRect(this);
             this.settingBtn.x = _loc1_.x + _loc1_.width + SETTING_BTN_LEFT_OFFSET;
+            App.utils.commons.moveDsiplObjToEndOfText(this._timeAlert,this._infoTF);
         }
         
         public function getComponentForFocus() : InteractiveObject
@@ -128,12 +131,12 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._transportBtn = param1;
         }
         
-        public function get settingBtn() : ButtonDnmIcon
+        public function get settingBtn() : IButtonIconLoader
         {
             return this._settingBtn;
         }
         
-        public function set settingBtn(param1:ButtonDnmIcon) : void
+        public function set settingBtn(param1:IButtonIconLoader) : void
         {
             this._settingBtn = param1;
         }
@@ -233,7 +236,19 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._tutorialArrow.dispose();
             this._tutorialArrow = null;
             this.helper = null;
+            this._timeAlert.dispose();
+            this._timeAlert = null;
             super.onDispose();
+        }
+        
+        public function get timeAlert() : FortTimeAlertIcon
+        {
+            return this._timeAlert;
+        }
+        
+        public function set timeAlert(param1:FortTimeAlertIcon) : void
+        {
+            this._timeAlert = param1;
         }
     }
 }

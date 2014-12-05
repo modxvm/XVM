@@ -7,7 +7,7 @@ package net.wg.infrastructure.base.meta
         
         function saveSortingS(param1:String, param2:String, param3:int) : void;
         
-        function showEventsWindowS(param1:String) : void;
+        function showEventsWindowS(param1:String, param2:int) : void;
         
         function getClanEmblemS(param1:String, param2:Number) : void;
         

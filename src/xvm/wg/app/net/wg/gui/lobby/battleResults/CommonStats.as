@@ -346,7 +346,7 @@ private function onDetailsClick(param1:ButtonEvent) : void
 
 private function showQuest(param1:QuestEvent) : void
 {
-    this.myParent.showEventsWindow(param1.questID);
+    this.myParent.showEventsWindowS(param1.questID,param1.eventType);
 }
 
 public function canShowAutomatically() : Boolean

@@ -132,6 +132,8 @@ package net.wg.data
         
         public static var MESSENGER_BAR:String = "messengerBar";
         
+        public static var RECRUIT_PARAMS:String = "recruitParams";
+        
         public static var NOTIFICATION_LIST_BUTTON:String = "notificationListButton";
         
         public static var CONTACTS_LIST_BUTTON:String = "contactsListButton";
@@ -155,6 +157,8 @@ package net.wg.data
         public static var CALENDAR:String = "calendar";
         
         public static var SERVER_STATS:String = "serverStats";
+        
+        public static var REPORT_BUG:String = "reportBug";
         
         public static var PROFILE_TAB_NAVIGATOR:String = "profileTabNavigator";
         

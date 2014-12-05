@@ -4,7 +4,6 @@ package net.wg.gui.components.controls.achievements
     import net.wg.gui.components.interfaces.ICounterComponent;
     import flash.display.MovieClip;
     import flash.text.TextFieldAutoSize;
-    import flash.events.Event;
     
     public class CounterComponent extends SoundButtonEx implements ICounterComponent
     {
@@ -63,20 +62,6 @@ package net.wg.gui.components.controls.achievements
         override public function get width() : Number
         {
             return actualWidth;
-        }
-        
-        override protected function handleStageChange(param1:Event) : void
-        {
-            if(param1.type == Event.ADDED_TO_STAGE)
-            {
-                removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange,false);
-                addEventListener(Event.RENDER,validateNow,false,0,true);
-                addEventListener(Event.ENTER_FRAME,validateNow,false,0,true);
-                if(stage != null)
-                {
-                    stage.invalidate();
-                }
-            }
         }
         
         public function get minBgWindowWidth() : uint

@@ -28,5 +28,7 @@ package net.wg.infrastructure.base.meta
         function as_setCtrlQuestion(param1:String) : void;
         
         function as_setControlNumber(param1:Boolean, param2:String) : void;
+        
+        function as_cleanInputSumm() : void;
     }
 }

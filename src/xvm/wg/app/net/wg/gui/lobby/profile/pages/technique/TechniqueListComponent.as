@@ -39,91 +39,52 @@ package net.wg.gui.lobby.profile.pages.technique
         
         private static function getHeadersProvider() : DataProvider
         {
-            var _loc4_:Array = null;
-            var _loc13_:NormalSortingBtnInfo = null;
-            var _loc1_:* = "../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
-            var _loc2_:* = "../maps/icons/buttons/tab_sort_button/descProfileSortArrow.png";
-            var _loc3_:Number = 40;
-            _loc4_ = [];
-            var _loc5_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc5_.iconId = TechniqueList.NATION_INDEX;
-            _loc5_.iconSource = "../maps/icons/filters/nations/all.png";
-            _loc5_.buttonWidth = 36;
-            _loc5_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NATION;
-            _loc5_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
-            _loc5_.sortOrder = 0;
-            _loc5_.inverted = true;
-            _loc4_.push(_loc5_);
+            var _loc2_:NormalSortingBtnInfo = null;
+            var _loc1_:Array = [];
+            _loc2_ = createTableBtnInfo(TechniqueList.NATION_INDEX,36,0,PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NATION,SortingInfo.ASCENDING_SORT);
+            _loc2_.iconSource = "../maps/icons/filters/nations/all.png";
+            _loc2_.inverted = true;
+            _loc1_.push(_loc2_);
+            _loc2_ = createTableBtnInfo(TechniqueList.TYPE_INDEX,34,1,PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE,SortingInfo.ASCENDING_SORT);
+            _loc2_.iconSource = "../maps/icons/filters/tanks/all.png";
+            _loc2_.inverted = true;
+            _loc1_.push(_loc2_);
+            _loc2_ = createTableBtnInfo(TechniqueList.LEVEL,32,2,PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_LVL,SortingInfo.DESCENDING_SORT);
+            _loc2_.iconSource = "../maps/icons/buttons/tab_sort_button/level.png";
+            _loc1_.push(_loc2_);
+            _loc2_ = createTableBtnInfo(TechniqueList.SHORT_USER_NAME,154,7,PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NAME,SortingInfo.ASCENDING_SORT);
+            _loc2_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_VEHICLENAME;
+            _loc2_.dataSortType = Array.CASEINSENSITIVE;
+            _loc1_.push(_loc2_);
+            _loc2_ = createTableBtnInfo(TechniqueList.BATTLES_COUNT,74,3,PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT,SortingInfo.DESCENDING_SORT);
+            _loc2_.label = PROFILE.SECTION_SUMMARY_SCORES_TOTALBATTLES;
+            _loc1_.push(_loc2_);
+            _loc2_ = createTableBtnInfo(TechniqueList.WINS_EFFICIENCY,74,4,PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_WINS,SortingInfo.DESCENDING_SORT);
+            _loc2_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_TOTALWINS;
+            _loc1_.push(_loc2_);
+            _loc2_ = createTableBtnInfo(TechniqueList.AVG_EXPERIENCE,90,5,PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP,SortingInfo.DESCENDING_SORT);
+            _loc2_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_AVGEXPERIENCE;
+            _loc1_.push(_loc2_);
+            _loc2_ = createTableBtnInfo(TechniqueList.MARK_OF_MASTERY,83,6,PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY,SortingInfo.DESCENDING_SORT);
+            _loc2_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_CLASSINESS;
+            _loc2_.showSeparator = false;
+            _loc1_.push(_loc2_);
+            return new DataProvider(_loc1_);
+        }
+        
+        private static function createTableBtnInfo(param1:String, param2:Number, param3:Number, param4:String, param5:String) : NormalSortingBtnInfo
+        {
             var _loc6_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc6_.iconId = TechniqueList.TYPE_INDEX;
-            _loc6_.iconSource = "../maps/icons/filters/tanks/all.png";
-            _loc6_.buttonWidth = 34;
-            _loc6_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE;
-            _loc6_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
-            _loc6_.sortOrder = 1;
-            _loc6_.inverted = true;
-            _loc4_.push(_loc6_);
-            var _loc7_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc7_.iconId = TechniqueList.LEVEL;
-            _loc7_.iconSource = "../maps/icons/buttons/tab_sort_button/level.png";
-            _loc7_.buttonWidth = 32;
-            _loc7_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_LVL;
-            _loc7_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
-            _loc7_.sortOrder = 2;
-            _loc4_.push(_loc7_);
-            var _loc8_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc8_.iconId = TechniqueList.SHORT_USER_NAME;
-            _loc8_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_VEHICLENAME;
-            _loc8_.buttonWidth = 154;
-            _loc8_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NAME;
-            _loc8_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
-            _loc8_.sortOrder = 7;
-            _loc8_.dataSortType = Array.CASEINSENSITIVE;
-            _loc4_.push(_loc8_);
-            var _loc9_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc9_.iconId = TechniqueList.BATTLES_COUNT;
-            _loc9_.buttonWidth = 74;
-            _loc9_.label = PROFILE.SECTION_SUMMARY_SCORES_TOTALBATTLES;
-            _loc9_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT;
-            _loc9_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
-            _loc9_.sortOrder = 3;
-            _loc4_.push(_loc9_);
-            var _loc10_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc10_.iconId = TechniqueList.WINS_EFFICIENCY;
-            _loc10_.buttonWidth = 74;
-            _loc10_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_TOTALWINS;
-            _loc10_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_WINS;
-            _loc10_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
-            _loc10_.sortOrder = 4;
-            _loc4_.push(_loc10_);
-            var _loc11_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc11_.iconId = TechniqueList.AVG_EXPERIENCE;
-            _loc11_.buttonWidth = 90;
-            _loc11_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_AVGEXPERIENCE;
-            _loc11_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP;
-            _loc11_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
-            _loc11_.sortOrder = 5;
-            _loc4_.push(_loc11_);
-            var _loc12_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc12_.iconId = TechniqueList.MARK_OF_MASTERY;
-            _loc12_.buttonWidth = 83;
-            _loc12_.showSeparator = false;
-            _loc12_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_CLASSINESS;
-            _loc12_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY;
-            _loc12_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
-            _loc12_.sortOrder = 6;
-            _loc4_.push(_loc12_);
-            var _loc14_:* = 0;
-            while(_loc14_ < _loc4_.length)
-            {
-                _loc13_ = _loc4_[_loc14_];
-                _loc13_.ascendingIconSource = _loc1_;
-                _loc13_.descendingIconSource = _loc2_;
-                _loc13_.buttonHeight = _loc3_;
-                _loc13_.enabled = true;
-                _loc14_++;
-            }
-            return new DataProvider(_loc4_);
+            _loc6_.buttonWidth = param2;
+            _loc6_.sortOrder = param3;
+            _loc6_.toolTip = param4;
+            _loc6_.iconId = param1;
+            _loc6_.defaultSortDirection = param5;
+            _loc6_.ascendingIconSource = "../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
+            _loc6_.descendingIconSource = "../maps/icons/buttons/tab_sort_button/descProfileSortArrow.png";
+            _loc6_.buttonHeight = 40;
+            _loc6_.enabled = true;
+            return _loc6_;
         }
         
         public var lowerShadow:MovieClip;

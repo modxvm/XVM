@@ -21,7 +21,7 @@ package net.wg.gui.lobby.profile.components
         {
             if(this._data)
             {
-                App.toolTipMgr.showSpecial(Tooltips.TANK_CLASS,null,this._data.markOfMasteryBlock,"markOfMastery",this._data.markOfMastery);
+                App.toolTipMgr.showSpecial(Tooltips.MARK_OF_MASTERY,null,this._data.markOfMasteryBlock,"markOfMastery",this._data.markOfMastery);
             }
         }
         

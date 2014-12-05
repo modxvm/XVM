@@ -195,6 +195,7 @@ package net.wg.gui.lobby.sellDialog
                 this.userInput.text = "";
             }
             this.showErrorState(false);
+            dispatchEvent(new Event(USER_INPUT_HANDLER));
         }
     }
 }

@@ -3,8 +3,7 @@ package net.wg.gui.rally
     import net.wg.infrastructure.base.meta.impl.BaseRallyViewMeta;
     import net.wg.infrastructure.base.meta.IBaseRallyViewMeta;
     import flash.text.TextField;
-    import net.wg.gui.interfaces.ISoundButton;
-    import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.interfaces.ISoundButtonEx;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.gui.utils.ComplexTooltipHelper;
@@ -24,9 +23,9 @@ package net.wg.gui.rally
         
         public var descrLbl:TextField;
         
-        public var backBtn:ISoundButton;
+        public var backBtn:ISoundButtonEx;
         
-        public var createBtn:SoundButtonEx;
+        public var createBtn:ISoundButtonEx;
         
         private var _coolDownRequests:Array;
         

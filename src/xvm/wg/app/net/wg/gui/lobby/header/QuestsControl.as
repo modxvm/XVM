@@ -5,15 +5,19 @@ package net.wg.gui.lobby.header
     import net.wg.infrastructure.interfaces.IDAAPIModule;
     import net.wg.gui.interfaces.IHelpLayoutComponent;
     import flash.display.MovieClip;
+    import flash.text.TextField;
     import flash.display.DisplayObject;
-    import flash.events.MouseEvent;
-    import scaleform.clik.constants.InvalidationType;
-    import scaleform.clik.events.ComponentEvent;
     import net.wg.infrastructure.exceptions.base.WGGUIException;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import net.wg.utils.IHelpLayout;
     import flash.geom.Rectangle;
     import net.wg.data.constants.Directions;
+    import flash.events.MouseEvent;
+    import net.wg.gui.lobby.header.vo.QuestsControlBtnVO;
+    import scaleform.clik.constants.InvalidationType;
+    import scaleform.clik.events.ComponentEvent;
+    import flash.text.TextFieldAutoSize;
+    import org.idmedia.as3commons.util.StringUtils;
     
     public class QuestsControl extends QuestsControlMeta implements IQuestsControlMeta, IDAAPIModule, IHelpLayoutComponent
     {
@@ -23,15 +27,15 @@ package net.wg.gui.lobby.header
             super();
         }
         
-        private static var ANIMATE:String = "animate";
-        
-        private static var PAUSE:String = "pause";
-        
         private static var NEW:String = "New";
         
-        public var anim:MovieClip = null;
-        
         public var bg:MovieClip = null;
+        
+        public var alertIcon:MovieClip = null;
+        
+        public var bagIcon:MovieClip = null;
+        
+        public var txtMessage:TextField = null;
         
         private var _disposed:Boolean = false;
         
@@ -41,103 +45,18 @@ package net.wg.gui.lobby.header
         
         private var _helpLayout:DisplayObject = null;
         
-        public function get disposed() : Boolean
-        {
-            return this._disposed;
-        }
+        private var tooltipStr:String = "";
         
-        public function as_highlightControl() : void
+        private var additionalText:String = "";
+        
+        public function as_isShowAlertIcon(param1:Boolean, param2:Boolean) : void
         {
-            this._hasNew = true;
+            this._hasNew = param2;
+            this.alertIcon.visible = param1;
             invalidate(NEW);
-        }
-        
-        public function as_resetControl() : void
-        {
-            this._hasNew = false;
-            invalidate(NEW);
-        }
-        
-        override protected function configUI() : void
-        {
-            super.configUI();
-            this.label = QUESTS.QUESTSCONTROL_TITLE;
-            addEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
-            addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
-            addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-            this.mouseChildren = false;
-            this.bg.mouseEnabled = false;
-            this.bg.mouseChildren = false;
-        }
-        
-        override protected function onDispose() : void
-        {
-            removeEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
-            removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
-            removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-            this.anim = null;
-            this._helpLayout = null;
-            super.onDispose();
-        }
-        
-        override protected function draw() : void
-        {
-            if(isInvalid(NEW))
-            {
-                if(this._hasNew)
-                {
-                    this.anim.gotoAndPlay(ANIMATE);
-                }
-                else
-                {
-                    this.anim.gotoAndStop(PAUSE);
-                }
-                setState("up");
-            }
-            if(isInvalid(InvalidationType.STATE))
-            {
-                if(_newFrame)
-                {
-                    gotoAndPlay(_newFrame);
-                    _newFrame = null;
-                }
-                if((focusIndicator) && (_newFocusIndicatorFrame))
-                {
-                    focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
-                    _newFocusIndicatorFrame = null;
-                }
-                updateAfterStateChange();
-                dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
-                invalidate(InvalidationType.DATA,InvalidationType.SIZE);
-            }
-            if(isInvalid(InvalidationType.DATA))
-            {
-                updateText();
-            }
-        }
-        
-        private function onPress(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
-            if(App.utils.commons.isLeftButton(param1))
-            {
-                this.anim.gotoAndStop(PAUSE);
-                showQuestsWindowS();
-            }
-        }
-        
-        override protected function getStatePrefixes() : Vector.<String>
-        {
-            var _loc1_:* = "new_";
-            return this._hasNew?Vector.<String>([_loc1_]):statesDefault;
         }
         
         public function as_isDAAPIInited() : Boolean
-        {
-            return this._isDAAPIInited;
-        }
-        
-        public function get isDAAPIInited() : Boolean
         {
             return this._isDAAPIInited;
         }
@@ -162,16 +81,6 @@ package net.wg.gui.lobby.header
             }
         }
         
-        private function hideTooltip(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
-        }
-        
-        private function showTooltip(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.showComplex(TOOLTIPS.QUESTS_NOTIFIER);
-        }
-        
         public function showHelpLayout() : void
         {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
@@ -185,6 +94,119 @@ package net.wg.gui.lobby.header
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._helpLayout);
             this._helpLayout = null;
+        }
+        
+        public function get disposed() : Boolean
+        {
+            return this._disposed;
+        }
+        
+        public function get isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.tooltipStr = null;
+            this.txtMessage = null;
+            this.bagIcon = null;
+            removeEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
+            removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+            removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+            this.additionalText = null;
+            this._helpLayout = null;
+            this.alertIcon = null;
+            super.onDispose();
+        }
+        
+        override protected function setData(param1:QuestsControlBtnVO) : void
+        {
+            this.label = param1.titleText;
+            this.additionalText = param1.additionalText;
+            this.txtMessage.htmlText = param1.additionalText;
+            this.tooltipStr = param1.tooltip;
+            param1.dispose();
+            var param1:QuestsControlBtnVO = null;
+        }
+        
+        override protected function configUI() : void
+        {
+            super.configUI();
+            addEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
+            addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+            addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+            this.mouseChildren = false;
+            this.bg.mouseEnabled = false;
+            this.bg.mouseChildren = false;
+        }
+        
+        override protected function draw() : void
+        {
+            var _loc1_:* = 0;
+            if(isInvalid(NEW))
+            {
+                setState("up");
+            }
+            if(isInvalid(InvalidationType.STATE))
+            {
+                if(_newFrame)
+                {
+                    gotoAndPlay(_newFrame);
+                    _newFrame = null;
+                }
+                if((focusIndicator) && (_newFocusIndicatorFrame))
+                {
+                    focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
+                    _newFocusIndicatorFrame = null;
+                }
+                updateAfterStateChange();
+                dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
+                invalidate(InvalidationType.DATA,InvalidationType.SIZE);
+            }
+            if(isInvalid(InvalidationType.DATA))
+            {
+                if(this.txtMessage)
+                {
+                    this.txtMessage.htmlText = this.additionalText;
+                }
+                updateText();
+            }
+            if((isInvalid(InvalidationType.DATA)) && (textField))
+            {
+                textField.autoSize = TextFieldAutoSize.LEFT;
+                this.txtMessage.autoSize = TextFieldAutoSize.LEFT;
+                _loc1_ = Math.max(this.txtMessage.width,textField.width);
+                hitMc.width = this.txtMessage.x - hitMc.x + _loc1_ ^ 0;
+            }
+        }
+        
+        override protected function getStatePrefixes() : Vector.<String>
+        {
+            var _loc1_:* = "new_";
+            return this._hasNew?Vector.<String>([_loc1_]):statesDefault;
+        }
+        
+        private function onPress(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+            if(App.utils.commons.isLeftButton(param1))
+            {
+                showQuestsWindowS();
+            }
+        }
+        
+        private function hideTooltip(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
+        
+        private function showTooltip(param1:MouseEvent) : void
+        {
+            if(StringUtils.isNotEmpty(this.tooltipStr))
+            {
+                App.toolTipMgr.showComplex(this.tooltipStr);
+            }
         }
     }
 }

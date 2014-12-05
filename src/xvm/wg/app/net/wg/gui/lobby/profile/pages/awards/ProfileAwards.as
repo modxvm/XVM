@@ -10,7 +10,7 @@ package net.wg.gui.lobby.profile.pages.awards
     import net.wg.gui.lobby.profile.pages.awards.data.AchievementFilterVO;
     import scaleform.clik.data.DataProvider;
     import scaleform.clik.events.ListEvent;
-    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
+    import net.wg.gui.lobby.profile.data.AchievementProfileVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.lobby.profile.ProfileConstants;
     
@@ -97,7 +97,7 @@ package net.wg.gui.lobby.profile.pages.awards
         override protected function applyData(param1:Object) : Object
         {
             var _loc7_:AwardsBlock = null;
-            var _loc11_:ProfileAchievementVO = null;
+            var _loc11_:AchievementProfileVO = null;
             var _loc12_:Array = null;
             var _loc13_:Array = null;
             var _loc14_:uint = 0;
@@ -137,7 +137,7 @@ package net.wg.gui.lobby.profile.pages.awards
                 _loc16_ = 0;
                 while(_loc16_ < _loc15_)
                 {
-                    _loc11_ = new ProfileAchievementVO(_loc13_[_loc16_]);
+                    _loc11_ = new AchievementProfileVO(_loc13_[_loc16_]);
                     if(_loc10_ == 0)
                     {
                         if(_loc11_.isInDossier)

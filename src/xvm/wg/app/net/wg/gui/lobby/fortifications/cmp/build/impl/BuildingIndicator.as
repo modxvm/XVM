@@ -81,6 +81,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.hpIndicator = null;
             this.defResIndicator.dispose();
             this.defResIndicator = null;
+            this._labels.dispose();
             this._labels = null;
             this.buildingLevel = null;
             super.onDispose();

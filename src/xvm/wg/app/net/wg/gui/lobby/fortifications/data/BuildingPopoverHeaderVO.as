@@ -1,13 +1,16 @@
 package net.wg.gui.lobby.fortifications.data
 {
+    import net.wg.gui.components.tooltips.VO.MapVO;
+    
     public class BuildingPopoverHeaderVO extends BuildingPopoverBaseVO
     {
         
         public function BuildingPopoverHeaderVO(param1:Object)
         {
-            this.mapTooltip = [];
             super(param1);
         }
+        
+        private static var TOOLTIP_DATA:String = "tooltipData";
         
         public var upgradeButtonToolTip:String = "";
         
@@ -37,6 +40,28 @@ package net.wg.gui.lobby.fortifications.data
         
         public var mapInfo:String = "";
         
-        public var mapTooltip:Array;
+        public var tooltipData:MapVO = null;
+        
+        public var isToolTipSpecial:Boolean = false;
+        
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
+            if(param1 == TOOLTIP_DATA)
+            {
+                this[param1] = new MapVO(param2);
+                return false;
+            }
+            return super.onDataWrite(param1,param2);
+        }
+        
+        override protected function onDispose() : void
+        {
+            if(this.tooltipData)
+            {
+                this.tooltipData.dispose();
+                this.tooltipData = null;
+            }
+            super.onDispose();
+        }
     }
 }

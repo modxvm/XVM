@@ -18,10 +18,6 @@ package net.wg.gui.lobby.fortifications.data.battleRoom.clanBattle
         
         public var mineClanName:String = "";
         
-        public var mineClanIcon:String = "";
-        
         public var enemyClanName:String = "";
-        
-        public var enemyClanIcon:String = "";
     }
 }

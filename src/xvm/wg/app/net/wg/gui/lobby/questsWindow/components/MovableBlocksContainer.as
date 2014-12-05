@@ -54,7 +54,7 @@ package net.wg.gui.lobby.questsWindow.components
             super.clearBlocks();
         }
         
-        override protected function addBlock(param1:Object) : void
+        override protected function addBlock(param1:Object) : IResizableContent
         {
             var _loc2_:IResizableContent = App.utils.classFactory.getComponent(param1.linkage,IResizableContent);
             _loc2_.addEventListener(ResizableBlockEvent.READY_FOR_ANIMATION,this.startAnimation);
@@ -70,6 +70,7 @@ package net.wg.gui.lobby.questsWindow.components
             _loc2_.validateNow();
             _blocks.push(_loc2_);
             addChild(DisplayObject(_loc2_));
+            return _loc2_;
         }
         
         public function get sortingFunction() : Function

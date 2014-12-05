@@ -3,7 +3,7 @@ package net.wg.gui.rally.views.list
     import scaleform.clik.core.UIComponent;
     import net.wg.gui.rally.interfaces.IRallyNoSortieScreen;
     import flash.text.TextField;
-    import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.interfaces.ISoundButtonEx;
     import flash.display.Sprite;
     import net.wg.gui.rally.interfaces.IRallyVO;
     import flash.display.DisplayObject;
@@ -22,6 +22,7 @@ package net.wg.gui.rally.views.list
         {
             super();
             this.slots = this.getSlots();
+            this.noRallyScreen.update(FORTIFICATIONS.SORTIE_LISTVIEW_NOTSELECTED);
         }
         
         public var noRallyScreen:IRallyNoSortieScreen;
@@ -36,7 +37,7 @@ package net.wg.gui.rally.views.list
         
         public var joinInfoTF:TextField;
         
-        public var joinButton:SoundButtonEx;
+        public var joinButton:ISoundButtonEx;
         
         public var slotsBg:Sprite = null;
         
@@ -115,6 +116,7 @@ package net.wg.gui.rally.views.list
             var _loc1_:RallySimpleSlotRenderer = null;
             this.changedVisibilityList.splice(0,this.changedVisibilityList.length);
             this.changedVisibilityList = null;
+            this.noRallyScreen.dispose();
             if(this.joinButton)
             {
                 this.joinButton.removeEventListener(ButtonEvent.CLICK,this.onJoinClick);

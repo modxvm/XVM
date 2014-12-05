@@ -2,7 +2,7 @@ package net.wg.gui.lobby.profile.pages.awards
 {
     import scaleform.clik.core.UIComponent;
     import net.wg.gui.lobby.profile.components.AwardsTileListBlock;
-    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
+    import net.wg.gui.lobby.profile.data.AchievementProfileVO;
     import net.wg.utils.ILocale;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
@@ -19,7 +19,7 @@ package net.wg.gui.lobby.profile.pages.awards
         private static function applyBlockData(param1:AwardsTileListBlock, param2:Array) : Boolean
         {
             var _loc6_:* = false;
-            var _loc7_:ProfileAchievementVO = null;
+            var _loc7_:AchievementProfileVO = null;
             var _loc8_:* = 0;
             var _loc9_:* = false;
             var _loc3_:Array = param1.dataProvider;
@@ -34,7 +34,7 @@ package net.wg.gui.lobby.profile.pages.awards
                 _loc8_ = 0;
                 while(_loc8_ < _loc5_)
                 {
-                    _loc7_ = ProfileAchievementVO(param2[_loc8_]);
+                    _loc7_ = AchievementProfileVO(param2[_loc8_]);
                     _loc9_ = _loc7_.isEquals(_loc3_[_loc8_]);
                     if(!_loc9_)
                     {

@@ -5,6 +5,7 @@ package net.wg.gui.messenger.windows
     import net.wg.gui.messenger.ChannelComponent;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
+    import flash.display.DisplayObject;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import net.wg.data.Aliases;
     import scaleform.clik.utils.Padding;
@@ -46,7 +47,7 @@ package net.wg.gui.messenger.windows
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement("messageArea",this.channelComponent.messageArea,Constraints.ALL);
             constraints.addElement("messageInput",this.channelComponent.messageInput,Constraints.LEFT | Constraints.RIGHT | Constraints.BOTTOM);
-            constraints.addElement("sendButton",this.channelComponent.sendButton,Constraints.RIGHT | Constraints.BOTTOM);
+            constraints.addElement("sendButton",this.channelComponent.sendButton as DisplayObject,Constraints.RIGHT | Constraints.BOTTOM);
             this.channelComponent.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
         }
         

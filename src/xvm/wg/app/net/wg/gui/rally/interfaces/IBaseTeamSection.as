@@ -25,6 +25,8 @@ package net.wg.gui.rally.interfaces
         
         function set vehiclesLabel(param1:String) : void;
         
+        function get vehiclesLabel() : String;
+        
         function get rallyData() : IRallyVO;
         
         function set rallyData(param1:IRallyVO) : void;

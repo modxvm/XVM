@@ -15,14 +15,15 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
     import net.wg.infrastructure.events.FocusRequestEvent;
     import scaleform.clik.events.ListEvent;
     import scaleform.clik.events.FocusHandlerEvent;
-    import net.wg.gui.lobby.fortifications.data.FortInterFilterVO;
+    import net.wg.gui.lobby.fortifications.data.FortIntelFilterVO;
     import scaleform.clik.data.DataProvider;
+    import org.idmedia.as3commons.util.StringUtils;
     import flash.events.IEventDispatcher;
     import scaleform.clik.events.ButtonEvent;
     import flash.text.TextFormat;
+    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     import net.wg.gui.lobby.fortifications.intelligence.FortIntelligenceWindowHelper;
     import scaleform.gfx.MouseEventEx;
-    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     import flash.ui.Keyboard;
     import scaleform.clik.constants.InputValue;
     
@@ -78,6 +79,8 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         private var tooltips:Object = null;
         
         private var _isSearchTextMaxCharsSetted:Boolean = false;
+        
+        private var tagTooltip:String = "#tooltips:fortification/intelligenceWindow/tagSearchTextInput";
         
         public function getComponentForFocus() : InteractiveObject
         {
@@ -145,7 +148,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
             super.configUI();
             dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
             this.tooltips = {};
-            this.tooltips[this.tagSearchTextInput] = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT;
+            this.tooltips[this.tagSearchTextInput] = this.tagTooltip;
             this.tooltips[this.tagSearchButton] = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON;
             this.tooltips[this.clearFilterBtn] = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_CLEARFILTERBTN;
             this.tooltips[this.filterButton] = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_FILTERBUTTON;
@@ -173,13 +176,17 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
             this.tagSearchTextInput.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
         }
         
-        override protected function setData(param1:FortInterFilterVO) : void
+        override protected function setData(param1:FortIntelFilterVO) : void
         {
             this.clanTypeDropDn.dataProvider = new DataProvider(param1.clanTypes);
             this.clanTypeDropDn.removeEventListener(ListEvent.INDEX_CHANGE,this.onClanTypeDropDnIndexChangeHandler);
             this.clanTypeDropDn.selectedIndex = param1.selectedFilterType;
             this.clanTypeDropDn.addEventListener(ListEvent.INDEX_CHANGE,this.onClanTypeDropDnIndexChangeHandler);
             this.updateControlsVisibility(param1.selectedFilterType);
+            if(StringUtils.isNotEmpty(param1.tagTooltip))
+            {
+                this.tagTooltip = param1.tagTooltip;
+            }
             param1.dispose();
         }
         
@@ -205,6 +212,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
             this.filterButton = null;
             this.filterResultTextField = null;
             this.filterButtonStatusTextField = null;
+            this.tagTooltip = null;
             super.onDispose();
         }
         
@@ -284,6 +292,14 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
             this.tagSearchTextInput.validateNow();
         }
         
+        private function updateControlsVisibility(param1:int) : void
+        {
+            var _loc2_:* = false;
+            _loc2_ = param1 == FORTIFICATION_ALIASES.CLAN_TYPE_FILTER_STATE_ALL;
+            this.tagSearchTextInput.visible = this.filterButton.visible = this.tagSearchButton.visible = _loc2_;
+            this.filterButtonStatusTextFieldWithEffect.alpha = this.filterButtonStatusTextField.alpha = _loc2_?1:0;
+        }
+        
         private function onMouseOverHandler(param1:MouseEvent) : void
         {
             var _loc2_:String = this.tooltips[param1.currentTarget];
@@ -336,14 +352,6 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         {
             this.updateControlsVisibility(param1.index);
             this.applyFilter();
-        }
-        
-        private function updateControlsVisibility(param1:int) : void
-        {
-            var _loc2_:* = false;
-            _loc2_ = param1 == FORTIFICATION_ALIASES.CLAN_TYPE_FILTER_STATE_ALL;
-            this.tagSearchTextInput.visible = this.filterButton.visible = this.tagSearchButton.visible = _loc2_;
-            this.filterButtonStatusTextFieldWithEffect.alpha = this.filterButtonStatusTextField.alpha = _loc2_?1:0;
         }
         
         override public function handleInput(param1:InputEvent) : void

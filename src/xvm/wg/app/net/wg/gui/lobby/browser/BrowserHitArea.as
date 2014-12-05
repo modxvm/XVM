@@ -3,6 +3,7 @@ package net.wg.gui.lobby.browser
     import scaleform.clik.core.UIComponent;
     import net.wg.utils.IEventCollector;
     import flash.display.Bitmap;
+    import flash.display.BitmapData;
     import flash.events.MouseEvent;
     
     public class BrowserHitArea extends UIComponent
@@ -20,6 +21,29 @@ package net.wg.gui.lobby.browser
         
         private var isMouseDown:Boolean = false;
         
+        public function setBgClass(param1:Boolean) : void
+        {
+            var _loc2_:Class = null;
+            if(param1)
+            {
+                _loc2_ = App.browserBgClass;
+            }
+            else
+            {
+                _loc2_ = App.altBrowserBgClass;
+            }
+            this.bgImg = new _loc2_();
+            addChild(this.bgImg);
+        }
+        
+        public function setMaskSize(param1:Number, param2:Number) : void
+        {
+            var _loc3_:BitmapData = new BitmapData(param1,param2,true,0);
+            var _loc4_:Bitmap = new Bitmap(_loc3_);
+            this.mask = _loc4_;
+            addChild(_loc4_);
+        }
+        
         override protected function onDispose() : void
         {
             super.onDispose();
@@ -36,9 +60,6 @@ package net.wg.gui.lobby.browser
         override protected function configUI() : void
         {
             super.configUI();
-            var _loc1_:Class = App.browserBgClass;
-            this.bgImg = new _loc1_();
-            addChild(this.bgImg);
             addEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler,false,0,true);
             addEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler,false,0,true);
             this.events.addEvent(App.stage,MouseEvent.MOUSE_DOWN,this.onMouseDownHandler,false,0,true);

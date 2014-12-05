@@ -77,7 +77,7 @@ package net.wg.gui.lobby.questsWindow.components
                     this.icon.source = data.iconSource;
                     description.visible = true;
                     description.x = Math.round(data.iconSource?this.icon.width + ICON_PADDING:0);
-                    if((data.battlesLeft) || (data.showDone))
+                    if((data.counterValue) || (data.showDone))
                     {
                         description.width = DEFAULT_WIDTH - description.x;
                     }
@@ -88,8 +88,8 @@ package net.wg.gui.lobby.questsWindow.components
                     description.htmlText = data.description;
                     description.height = description.textHeight + TEXT_PADDING;
                 }
-                counter.text = data.battlesLeft.toString();
-                counter.visible = battlesLeftTF.visible = Boolean(data.battlesLeft && !data.showDone);
+                counter.text = data.counterValue.toString();
+                counter.visible = battlesLeftTF.visible = Boolean(data.counterValue && !data.showDone);
                 statusMC.visible = data.showDone;
                 progressElementsContainer.isReadyForLayout = false;
                 progressElementsContainer.setData(data.progressElements);

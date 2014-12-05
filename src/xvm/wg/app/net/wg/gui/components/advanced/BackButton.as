@@ -1,8 +1,8 @@
 package net.wg.gui.components.advanced
 {
-    import net.wg.gui.components.controls.SoundButton;
+    import net.wg.gui.components.controls.SoundButtonEx;
     
-    public class BackButton extends SoundButton
+    public class BackButton extends SoundButtonEx
     {
         
         public function BackButton()

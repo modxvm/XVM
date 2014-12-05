@@ -126,6 +126,11 @@ package net.wg.gui.rally.views.room
             invalidate(RallyInvalidationType.TEAM_LABEL);
         }
         
+        public function get vehiclesLabel() : String
+        {
+            return this._vehiclesLabel;
+        }
+        
         public function set vehiclesLabel(param1:String) : void
         {
             this._vehiclesLabel = param1;
@@ -156,10 +161,14 @@ package net.wg.gui.rally.views.room
         {
             super.configUI();
             this.teamLabel = BaseRallyMainWindow.getTeamHeader(this.getMembersStr(),this._rallyData);
-            this.lblTeamVehicles.htmlText = this.getVehiclesStaticStr();
+            this.setVehiclesStr();
             this._slotsUi = this.getSlotsUI();
             this.btnFight.addEventListener(ButtonEvent.CLICK,this.onReadyToggle);
             this.btnNotReady.addEventListener(ButtonEvent.CLICK,this.onReadyToggle);
+        }
+        
+        protected function setVehiclesStr() : void
+        {
         }
         
         override protected function draw() : void
@@ -167,7 +176,7 @@ package net.wg.gui.rally.views.room
             super.draw();
             if(isInvalid(RallyInvalidationType.VEHICLE_LABEL))
             {
-                this.lblTeamVehicles.htmlText = this._vehiclesLabel;
+                this.lblTeamVehicles.htmlText = this.vehiclesLabel;
             }
             if(isInvalid(RallyInvalidationType.TEAM_LABEL))
             {
@@ -225,16 +234,6 @@ package net.wg.gui.rally.views.room
         }
         
         protected function getMembersStr() : String
-        {
-            return null;
-        }
-        
-        protected function getVehiclesStr() : String
-        {
-            return null;
-        }
-        
-        protected function getVehiclesStaticStr() : String
         {
             return null;
         }

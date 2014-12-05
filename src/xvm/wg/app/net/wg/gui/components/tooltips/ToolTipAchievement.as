@@ -185,7 +185,7 @@ package net.wg.gui.components.tooltips
                 _loc2_ = 0;
                 while(_loc2_ < _loc3_)
                 {
-                    _loc9_ = _loc9_ + Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.achievement_params(_loc5_.params[_loc2_].id)),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont");
+                    _loc9_ = _loc9_ + Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.ACHIEVEMENT_PARAMS + "/" + _loc5_.params[_loc2_].id),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont");
                     _loc2_++;
                 }
                 this.vLeftTF.htmlText = _loc9_;
@@ -466,7 +466,7 @@ package net.wg.gui.components.tooltips
                         _loc10_ = 0;
                         while(_loc10_ < _loc9_)
                         {
-                            _loc11_ = _loc8_.makeString(TOOLTIPS.achievement_params(param2[_loc10_].id)) + " " + param2[_loc10_].val;
+                            _loc11_ = _loc8_.makeString(TOOLTIPS.ACHIEVEMENT_PARAMS + "/" + param2[_loc10_].id) + " " + param2[_loc10_].val;
                             _loc7_ = _loc7_ + Utils.instance.htmlWrapper(_loc11_,Utils.instance.COLOR_NORMAL,12,"$TextFont");
                             _loc10_++;
                         }
@@ -519,7 +519,7 @@ package net.wg.gui.components.tooltips
                 {
                     _loc4_ = _loc4_ + "<br/><font size=\"7\"></font><br/>";
                 }
-                _loc4_ = _loc4_ + (Utils.instance.htmlWrapper(_loc5_.makeString(TOOLTIPS.achievement_params("left" + (param1 - 1))) + " " + _loc5_.makeString(TOOLTIPS.achievement_params(param3[_loc7_].id)),Utils.instance.COLOR_ADD_INFO,12,"$TextFont") + ": " + Utils.instance.htmlWrapper(_loc5_.numberWithoutZeros(param3[_loc7_].val),Utils.instance.COLOR_NUMBER,12,"$TextFont"));
+                _loc4_ = _loc4_ + (Utils.instance.htmlWrapper(_loc5_.makeString(TOOLTIPS.ACHIEVEMENT_PARAMS + "/" + ("left" + (param1 - 1))) + " " + _loc5_.makeString(TOOLTIPS.ACHIEVEMENT_PARAMS + "/" + param3[_loc7_].id),Utils.instance.COLOR_ADD_INFO,12,"$TextFont") + ": " + Utils.instance.htmlWrapper(_loc5_.numberWithoutZeros(param3[_loc7_].val),Utils.instance.COLOR_NUMBER,12,"$TextFont"));
                 _loc7_++;
             }
             return _loc4_;

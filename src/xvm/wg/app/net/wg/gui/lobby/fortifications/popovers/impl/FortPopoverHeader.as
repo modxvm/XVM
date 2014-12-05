@@ -7,12 +7,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import flash.filters.GlowFilter;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.IconTextButton;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import net.wg.gui.lobby.fortifications.data.BuildingPopoverHeaderVO;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.data.constants.Values;
     import net.wg.gui.lobby.fortifications.events.FortBuildingCardPopoverEvent;
+    import net.wg.data.constants.Tooltips;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import flash.text.TextFieldAutoSize;
     
@@ -60,7 +61,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         public var upgradeBtn:IconTextButton = null;
         
-        public var destroyBtn:ButtonDnmIcon = null;
+        public var destroyBtn:IButtonIconLoader = null;
         
         public var buildLevel:TextField = null;
         
@@ -74,6 +75,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.upgradeBtn.icon = UPGRADE_BTN_ICON_PNG;
             this.upgradeBtn.mouseEnabledOnDisabled = true;
             this.destroyBtn.mouseEnabledOnDisabled = true;
+            this.destroyBtn.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_FORTIFICATION_DESTRUCTION;
         }
         
         override protected function onDispose() : void
@@ -190,9 +192,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         private function onMapInfoRollOver(param1:MouseEvent) : void
         {
             var _loc2_:String = null;
-            if((this.model) && (this.model.mapTooltip.length))
+            if(this.model.isToolTipSpecial)
             {
-                _loc2_ = new ComplexTooltipHelper().addHeader(this.model.mapTooltip[0]).addBody(this.model.mapTooltip[1]).make();
+                App.toolTipMgr.showSpecial(Tooltips.MAP_SMALL,null,this.model.tooltipData);
+            }
+            else
+            {
+                _loc2_ = new ComplexTooltipHelper().addHeader(this.model.tooltipData.mapName).addBody(this.model.tooltipData.description).make();
                 if(_loc2_.length > 0)
                 {
                     App.toolTipMgr.showComplex(_loc2_);

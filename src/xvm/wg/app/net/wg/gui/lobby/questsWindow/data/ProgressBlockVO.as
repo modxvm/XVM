@@ -17,7 +17,9 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _iconSource:String = "";
         
-        private var _battlesLeft:Number = NaN;
+        private var _counterValue:Number = NaN;
+        
+        private var _counterDescr:String = "";
         
         private var _progressElements:Array;
         
@@ -45,14 +47,14 @@ package net.wg.gui.lobby.questsWindow.data
             this._description = param1;
         }
         
-        public function get battlesLeft() : Number
+        public function get counterValue() : Number
         {
-            return this._battlesLeft;
+            return this._counterValue;
         }
         
-        public function set battlesLeft(param1:Number) : void
+        public function set counterValue(param1:Number) : void
         {
-            this._battlesLeft = param1;
+            this._counterValue = param1;
         }
         
         public function get progressElements() : Array
@@ -93,6 +95,16 @@ package net.wg.gui.lobby.questsWindow.data
         public function set showDone(param1:Boolean) : void
         {
             this._showDone = param1;
+        }
+        
+        public function get counterDescr() : String
+        {
+            return this._counterDescr;
+        }
+        
+        public function set counterDescr(param1:String) : void
+        {
+            this._counterDescr = param1;
         }
     }
 }

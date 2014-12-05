@@ -38,5 +38,7 @@ package net.wg.infrastructure.base.meta
         function isShowTickerS() : Boolean;
         
         function isRentalsEnabledS() : Boolean;
+        
+        function isPotapovQuestEnabledS() : Boolean;
     }
 }

@@ -7,7 +7,7 @@ package net.wg.gui.cyberSport.views
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.text.TextField;
     import net.wg.gui.cyberSport.controls.CSVehicleButton;
-    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
+    import net.wg.gui.components.controls.ButtonIconTextTransparent;
     import net.wg.gui.rally.vo.SettingRosterVO;
     import net.wg.gui.cyberSport.controls.VehicleSelector;
     import net.wg.infrastructure.base.interfaces.IWindow;
@@ -49,7 +49,7 @@ package net.wg.gui.cyberSport.views
         
         public var selectedResultBtn:CSVehicleButton;
         
-        public var refreshBtn:GrayTransparentButton;
+        public var refreshBtn:ButtonIconTextTransparent;
         
         public var headerText:TextField;
         

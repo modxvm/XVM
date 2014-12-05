@@ -14,6 +14,8 @@ package
         
         public static var LABELS_LEVEL:String = "#prebattle:labels/level";
         
+        public static var LABELS_MEMBERS:String = "#prebattle:labels/members";
+        
         public static var LABELS_STATS_MAXPLAYERS:String = "#prebattle:labels/stats/maxPlayers";
         
         public static var LABELS_STATS_TOTALLEVEL:String = "#prebattle:labels/stats/totalLevel";

@@ -2,7 +2,7 @@ package net.wg.gui.cyberSport.views.unit
 {
     import net.wg.gui.rally.views.room.BaseWaitListSection;
     import flash.text.TextField;
-    import net.wg.gui.cyberSport.controls.GrayButtonText;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.data.constants.Values;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
@@ -34,7 +34,7 @@ private static var BOTTOM:String = "bottom";
 
 public var lblTeamAvailability:TextField;
 
-public var btnCloseRoom:GrayButtonText;
+public var btnCloseRoom:SoundButtonEx;
 
 public function enableCloseButton(param1:Boolean) : void
 {

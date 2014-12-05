@@ -39,10 +39,17 @@ package net.wg.gui.rally.views.intro
                 this.listRoomBtn.dispose();
                 this.listRoomBtn = null;
             }
+            this.listRoomTitleLbl = null;
+            this.listRoomDescrLbl = null;
             super.onDispose();
         }
         
-        protected function onListRoomBtnClick(param1:ButtonEvent) : void
+        private function onListRoomBtnClick(param1:ButtonEvent) : void
+        {
+            this.showListRoom(param1);
+        }
+        
+        protected function showListRoom(param1:ButtonEvent) : void
         {
         }
     }

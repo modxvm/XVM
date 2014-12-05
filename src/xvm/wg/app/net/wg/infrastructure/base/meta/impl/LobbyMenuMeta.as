@@ -21,6 +21,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var quitClick:Function = null;
         
+        public var versionInfoClick:Function = null;
+        
         public function settingsClickS() : void
         {
             App.utils.asserter.assertNotNull(this.settingsClick,"settingsClick" + Errors.CANT_NULL);
@@ -49,6 +51,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.quitClick,"quitClick" + Errors.CANT_NULL);
             this.quitClick();
+        }
+        
+        public function versionInfoClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.versionInfoClick,"versionInfoClick" + Errors.CANT_NULL);
+            this.versionInfoClick();
         }
     }
 }

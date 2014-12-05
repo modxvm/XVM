@@ -4,9 +4,9 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import net.wg.infrastructure.base.meta.IFortFixedPlayersWindowMeta;
     import scaleform.clik.data.DataProvider;
     import net.wg.infrastructure.interfaces.IImageUrlProperties;
+    import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import net.wg.data.constants.SortingInfo;
-    import flash.text.TextFieldAutoSize;
     import flash.events.MouseEvent;
     import net.wg.gui.components.controls.SortableTable;
     import net.wg.gui.components.controls.UILoaderAlt;
@@ -55,44 +55,25 @@ package net.wg.gui.lobby.fortifications.windows.impl
             var _loc1_:Array = [];
             var _loc2_:IImageUrlProperties = App.utils.getImageUrlProperties(RES_ICONS.MAPS_ICONS_LIBRARY_FORTIFICATION_NUT,16,16) as IImageUrlProperties;
             var _loc3_:String = App.utils.getHtmlIconTextS(_loc2_);
-            var _loc4_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc4_.iconId = MEMBER_NAME;
-            _loc4_.label = FORTIFICATIONS.CLANLISTWINDOW_TABLE_MEMBERNAME;
-            _loc4_.buttonWidth = 140;
-            _loc4_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
-            _loc4_.sortOrder = 0;
-            _loc4_.textAlign = TextFieldAutoSize.LEFT;
-            _loc4_.toolTip = TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_NIC;
-            _loc4_.dataSortType = Array.CASEINSENSITIVE;
-            _loc1_.push(_loc4_);
-            var _loc5_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc5_.iconId = ROLE_ID;
-            _loc5_.label = FORTIFICATIONS.CLANLISTWINDOW_TABLE_ROLE;
-            _loc5_.buttonWidth = 199;
-            _loc5_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
-            _loc5_.sortOrder = 1;
-            _loc5_.textAlign = TextFieldAutoSize.LEFT;
-            _loc5_.toolTip = TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_FORTROLE;
-            _loc1_.push(_loc5_);
-            var _loc6_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc6_.iconId = WEEK_MINING;
-            _loc6_.label = App.utils.locale.makeString(FORTIFICATIONS.FIXEDPLAYERS_LISTHEADER_FIELDWEEK,{"icon":_loc3_});
-            _loc6_.buttonWidth = 103;
-            _loc6_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
-            _loc6_.textAlign = TextFieldAutoSize.RIGHT;
-            _loc6_.toolTip = TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_WEEK;
-            _loc6_.sortOrder = 2;
-            _loc1_.push(_loc6_);
-            var _loc7_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc7_.iconId = TOTAL_MINING;
-            _loc7_.label = App.utils.locale.makeString(FORTIFICATIONS.FIXEDPLAYERS_LISTHEADER_FIELDALLTIME,{"icon":_loc3_});
-            _loc7_.buttonWidth = 113;
-            _loc7_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
-            _loc7_.textAlign = TextFieldAutoSize.RIGHT;
-            _loc7_.toolTip = TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_ALLTIME;
-            _loc7_.sortOrder = 3;
-            _loc1_.push(_loc7_);
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.CLANLISTWINDOW_TABLE_MEMBERNAME,MEMBER_NAME,140,0,TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_NIC,TextFieldAutoSize.LEFT,Array.CASEINSENSITIVE));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.CLANLISTWINDOW_TABLE_ROLE,ROLE_ID,199,1,TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_FORTROLE,TextFieldAutoSize.LEFT));
+            _loc1_.push(createTableBtnInfo(App.utils.locale.makeString(FORTIFICATIONS.FIXEDPLAYERS_LISTHEADER_FIELDWEEK,{"icon":_loc3_}),WEEK_MINING,103,2,TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_WEEK,TextFieldAutoSize.RIGHT));
+            _loc1_.push(createTableBtnInfo(App.utils.locale.makeString(FORTIFICATIONS.FIXEDPLAYERS_LISTHEADER_FIELDALLTIME,{"icon":_loc3_}),TOTAL_MINING,113,3,TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_ALLTIME,TextFieldAutoSize.RIGHT));
             return new DataProvider(_loc1_);
+        }
+        
+        private static function createTableBtnInfo(param1:String, param2:String, param3:Number, param4:Number, param5:String, param6:String, param7:Number = 16) : NormalSortingBtnInfo
+        {
+            var _loc8_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            _loc8_.label = param1;
+            _loc8_.buttonWidth = param3;
+            _loc8_.sortOrder = param4;
+            _loc8_.toolTip = param5;
+            _loc8_.iconId = param2;
+            _loc8_.textAlign = param6;
+            _loc8_.dataSortType = param7;
+            _loc8_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
+            return _loc8_;
         }
         
         private static function onRollOutToolTipAreaHandler(param1:MouseEvent) : void

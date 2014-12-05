@@ -13,26 +13,18 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onShowRecruitWindowClick:Function = null;
         
-        public var unloadTankman:Function = null;
-        
         public var unloadAllTankman:Function = null;
         
         public var equipTankman:Function = null;
         
-        public var openPersonalCase:Function = null;
-        
         public var updateTankmen:Function = null;
+        
+        public var openPersonalCase:Function = null;
         
         public function onShowRecruitWindowClickS(param1:Object, param2:Boolean) : void
         {
             App.utils.asserter.assertNotNull(this.onShowRecruitWindowClick,"onShowRecruitWindowClick" + Errors.CANT_NULL);
             this.onShowRecruitWindowClick(param1,param2);
-        }
-        
-        public function unloadTankmanS(param1:String) : void
-        {
-            App.utils.asserter.assertNotNull(this.unloadTankman,"unloadTankman" + Errors.CANT_NULL);
-            this.unloadTankman(param1);
         }
         
         public function unloadAllTankmanS() : void
@@ -47,16 +39,16 @@ package net.wg.infrastructure.base.meta.impl
             this.equipTankman(param1,param2);
         }
         
-        public function openPersonalCaseS(param1:String, param2:uint) : void
-        {
-            App.utils.asserter.assertNotNull(this.openPersonalCase,"openPersonalCase" + Errors.CANT_NULL);
-            this.openPersonalCase(param1,param2);
-        }
-        
         public function updateTankmenS() : void
         {
             App.utils.asserter.assertNotNull(this.updateTankmen,"updateTankmen" + Errors.CANT_NULL);
             this.updateTankmen();
+        }
+        
+        public function openPersonalCaseS(param1:String, param2:uint) : void
+        {
+            App.utils.asserter.assertNotNull(this.openPersonalCase,"openPersonalCase" + Errors.CANT_NULL);
+            this.openPersonalCase(param1,param2);
         }
     }
 }

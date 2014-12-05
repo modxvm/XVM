@@ -2,15 +2,14 @@ package net.wg.gui.lobby.tankman
 {
     import flash.geom.Point;
     import net.wg.gui.components.advanced.TabButton;
-    import flash.display.Sprite;
     import flash.text.TextField;
+    import net.wg.gui.components.advanced.TankmanCard;
     import net.wg.gui.components.advanced.ButtonBarEx;
     import net.wg.gui.components.advanced.ViewStack;
     import net.wg.gui.components.carousels.SkillsCarousel;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import flash.display.MovieClip;
-    import net.wg.gui.components.controls.UILoaderAlt;
     import scaleform.clik.controls.StatusIndicator;
+    import flash.display.MovieClip;
     import net.wg.gui.components.controls.IconTextButton;
     import net.wg.infrastructure.interfaces.IViewStackContent;
     import scaleform.clik.events.ButtonEvent;
@@ -23,6 +22,8 @@ package net.wg.gui.lobby.tankman
     import scaleform.clik.utils.Padding;
     import net.wg.utils.IUtils;
     import net.wg.data.constants.Linkages;
+    import net.wg.data.VO.TankmanCardVO;
+    import net.wg.data.constants.Values;
     import net.wg.utils.ILocale;
     import flash.text.TextFormat;
     import flash.events.EventDispatcher;
@@ -50,23 +51,18 @@ package net.wg.gui.lobby.tankman
         
         private static var SPECIALIZATION_MARGIN:Number = 4;
         
+        private static function getFullName(param1:PersonalCaseModel) : String
+        {
+            return param1.firstname + " " + param1.lastname;
+        }
+        
         public var tabButtonVisibleFalse:TabButton;
-        
-        public var drop_skills_button_bg_line:Sprite;
-        
-        public var s_tab_line:Sprite;
-        
-        public var _name:TextField;
-        
-        public var rank:TextField;
         
         public var role:TextField;
         
         public var levelValue:TextField;
         
-        public var inTankLabel:TextField;
-        
-        public var inTankValue:TextField;
+        public var tankmanCard:TankmanCard;
         
         public var tabs:ButtonBarEx;
         
@@ -91,12 +87,6 @@ package net.wg.gui.lobby.tankman
         public var dismissBtn:SoundButtonEx;
         
         public var closeBtn:SoundButtonEx;
-        
-        public var bg_switcher:MovieClip;
-        
-        public var icon1:UILoaderAlt;
-        
-        public var rankIcon:UILoaderAlt;
         
         public var accTeachingOfSkillBtn:SoundButtonEx;
         
@@ -142,8 +132,7 @@ package net.wg.gui.lobby.tankman
             this.skills_mc = null;
             this.tabButtonVisibleFalse.dispose();
             this.tabButtonVisibleFalse = null;
-            this.icon1.dispose();
-            this.rankIcon.dispose();
+            this.tankmanCard.dispose();
             this.specialization.dispose();
             this.currentView = null;
             data = null;
@@ -277,7 +266,7 @@ package net.wg.gui.lobby.tankman
             this.initializeGeneralProperties();
             if(window)
             {
-                window.title = this._name.text + ", " + data.role + " - " + _loc1_.locale.makeString(MENU.TANKMANPERSONALCASE_TITLE);
+                window.title = getFullName(data) + ", " + data.role + " - " + _loc1_.locale.makeString(MENU.TANKMANPERSONALCASE_TITLE);
             }
             this.initializeTabButton();
             validateNow();
@@ -331,18 +320,6 @@ this.runtimeUpdateByInstance(_loc2_);
 
 private function initializeGeneralProperties() : void
 {
-if(!(data.iconFile == null) && !(data.iconFile == this.icon1.source))
-{
-this.icon1.visible = true;
-this.icon1.source = data.iconFile;
-}
-if(!(data.rankIconFile == null) && !(data.rankIconFile == this.rankIcon.source))
-{
-this.rankIcon.visible = true;
-this.rankIcon.source = data.rankIconFile;
-}
-this._name.text = data.firstname + " " + data.lastname;
-this.rank.text = data.rank;
 this.role.text = data.role;
 this.levelValue.text = data.specializationLevel.toString() + "%";
 this.specialization.setData(data.nativeVehicle.userName,data.nativeVehicle.contourIconFile);
@@ -350,19 +327,16 @@ this.usingLevelLoadingBar.maximum = 100;
 this.usingLevelLoadingBar.minimum = 0;
 this.usingLevelLoadingBar.position = data.specializationLevel;
 this.roleIcon.gotoAndStop(data.roleType);
-this.bg_switcher.gotoAndPlay(this.currentNation);
 this.descrSkillButton.visible = true;
 this.descrSkillButton.text = App.utils.locale.makeString(DIALOGS.ADDSKILLWINDOW_LABEL);
-if(data.inTank)
-{
-this.inTankLabel.visible = this.inTankValue.visible = true;
-this.inTankLabel.text = MENU.TANKMANPERSONALCASE_CREW;
-this.inTankValue.htmlText = data.currentVehicle.currentVehicleName + (" <font color=\'#ff0000\'>" + data.currentVehicle.currentVehicleLockMessage + "</font>");
-}
-else
-{
-this.inTankLabel.visible = this.inTankValue.visible = false;
-}
+var _loc1_:TankmanCardVO = new TankmanCardVO({});
+_loc1_.name = getFullName(data);
+_loc1_.nation = this.currentNation;
+_loc1_.rank = data.rank;
+_loc1_.vehicle = data.currentVehicle?data.currentVehicle.currentVehicleName + (" <font color=\'#ff0000\'>" + data.currentVehicle.currentVehicleLockMessage + "</font>"):Values.EMPTY_STR;
+_loc1_.faceIcon = data.iconFile;
+_loc1_.rankIcon = data.rankIconFile;
+this.tankmanCard.model = _loc1_;
 this.unloadBtn.enabled = this.enableButtons(!data.inTank,this.tankmanInBattle);
 if(data.inTank)
 {

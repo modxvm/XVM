@@ -135,7 +135,7 @@ package net.wg.gui.notification
                 if(this._data)
                 {
                     _loc1_ = this._data.messageVO;
-                    this.textField.htmlText = _loc1_.message;
+                    this.textField.htmlText = _loc1_.message + " ";
                     _loc2_ = _loc1_.type;
                     if(_loc1_.icon)
                     {

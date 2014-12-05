@@ -138,6 +138,8 @@ public static var FOV:String = "fov";
 
 public static var DYNAMIC_FOV:String = "dynamicFov";
 
+public static var HAVOK_ENABLED:String = "HAVOK_ENABLED";
+
 public static var FULL_SCREEN:String = "fullScreen";
 
 public static var RESOLUTION:String = "resolution";
@@ -244,7 +246,10 @@ public static var settingsData:Object = {"GameSettings":{"enableOlFilter":new Se
 "replayEnabled":new SettingsControlProp(null,null,TYPE_DROPDOWN),
 "useServerAim":new SettingsControlProp(null,null,TYPE_CHECKBOX),
 "showVehiclesCounter":new SettingsControlProp(null,null,TYPE_CHECKBOX),
-"showMarksOnGun":new SettingsControlProp(null,null,TYPE_CHECKBOX)
+"showMarksOnGun":new SettingsControlProp(null,null,TYPE_CHECKBOX),
+"showVehModelsOnMap":new SettingsControlProp(null,null,TYPE_DROPDOWN),
+"showVectorOnMap":new SettingsControlProp(null,null,TYPE_CHECKBOX),
+"showSectorOnMap":new SettingsControlProp(null,null,TYPE_CHECKBOX)
 },
 "GraphicSettings":{"monitor":new SettingsControlProp(null,null,TYPE_DROPDOWN),
 "aspectRatio":new SettingsControlProp(null,null,TYPE_DROPDOWN),
@@ -259,6 +264,7 @@ public static var settingsData:Object = {"GameSettings":{"enableOlFilter":new Se
 "dynamicRenderer":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
 "fov":new SettingsControlProp(null,null,TYPE_RANGE_SLIDER),
 "dynamicFov":new SettingsControlProp(null,null,TYPE_CHECKBOX),
+"HAVOK_ENABLED":new SettingsControlProp(null,null,TYPE_DROPDOWN,true,false,null,false,false,null,true),
 "colorFilterIntensity":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
 "colorFilterImages":null,
 "fullScreen":new SettingsControlProp(null,null,TYPE_CHECKBOX),

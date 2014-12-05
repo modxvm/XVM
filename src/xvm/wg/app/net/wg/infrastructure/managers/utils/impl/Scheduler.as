@@ -173,7 +173,7 @@ class TaskStack extends Object
     function TaskStack()
     {
         super();
-        this._tasks = new Vector.<Task>();
+        this._tasks = new Vector.<TaskStack>();
     }
     
     private var _tasks:Vector.<Task> = null;

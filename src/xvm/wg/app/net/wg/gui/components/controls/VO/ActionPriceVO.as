@@ -40,6 +40,8 @@ package net.wg.gui.components.controls.VO
         
         private var _forCredits:Boolean = true;
         
+        private var _rentPackage:int = -1;
+        
         private var _ico:String = "credits";
         
         private var _useSign:Boolean = false;
@@ -224,6 +226,16 @@ package net.wg.gui.components.controls.VO
                 return;
             }
             this._externalSign = param1;
+        }
+        
+        public function get rentPackage() : int
+        {
+            return this._rentPackage;
+        }
+        
+        public function set rentPackage(param1:int) : void
+        {
+            this._rentPackage = param1;
         }
     }
 }

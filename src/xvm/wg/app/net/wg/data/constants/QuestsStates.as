@@ -12,6 +12,8 @@ package net.wg.data.constants
         
         public static var NOT_AVAILABLE:String = "notAvailable";
         
+        public static var NOT_DONE:String = "notDone";
+        
         public static var CURRENT:String = "current";
         
         public static var STRATEGIC:String = "strategic";
@@ -41,5 +43,7 @@ package net.wg.data.constants
         public static var CLR_STATUS_NOT_AVAILABLE:int = 6381142;
         
         public static var CLR_STATUS_DONE:int = 7785801;
+        
+        public static var CLR_STATUS_NOT_DONE:uint = 11414058;
     }
 }

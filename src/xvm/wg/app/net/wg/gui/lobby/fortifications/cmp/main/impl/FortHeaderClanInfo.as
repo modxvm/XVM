@@ -16,6 +16,7 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         public function FortHeaderClanInfo()
         {
             super();
+            this.clanName.autoSize = TextFieldAutoSize.LEFT;
             this.toolTipArea.addEventListener(MouseEvent.ROLL_OVER,onRollOverHandler);
             this.toolTipArea.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
         }
@@ -41,18 +42,13 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         public function applyClanData(param1:FortificationVO) : void
         {
             this.clanName.htmlText = param1.clanName;
+            this.clanName.x = this.clanName.x ^ 0;
             this.levelText.text = param1.levelTitle;
         }
         
         public function setClanImage(param1:String) : void
         {
             this.clanEmblem.setImage(param1);
-        }
-        
-        override protected function configUI() : void
-        {
-            super.configUI();
-            this.clanName.autoSize = TextFieldAutoSize.LEFT;
         }
         
         override protected function onDispose() : void

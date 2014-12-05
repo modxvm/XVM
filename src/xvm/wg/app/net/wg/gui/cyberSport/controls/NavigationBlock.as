@@ -1,6 +1,7 @@
 package net.wg.gui.cyberSport.controls
 {
     import scaleform.clik.core.UIComponent;
+    import net.wg.gui.components.controls.ButtonIconTextTransparent;
     import net.wg.gui.cyberSport.vo.NavigationBlockVO;
     import scaleform.clik.events.ButtonEvent;
     import flash.display.InteractiveObject;
@@ -15,9 +16,9 @@ package net.wg.gui.cyberSport.controls
             super();
         }
         
-        public var previousButton:GrayTransparentButton;
+        public var previousButton:ButtonIconTextTransparent;
         
-        public var nextButton:GrayTransparentButton;
+        public var nextButton:ButtonIconTextTransparent;
         
         public function setup(param1:NavigationBlockVO) : void
         {

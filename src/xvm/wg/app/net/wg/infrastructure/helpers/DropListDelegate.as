@@ -1,14 +1,13 @@
 package net.wg.infrastructure.helpers
 {
-    import flash.display.MovieClip;
+    import flash.display.Sprite;
     import net.wg.infrastructure.helpers.interfaces.IDropListDelegate;
     import flash.display.InteractiveObject;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.infrastructure.interfaces.entity.IDropItem;
     import net.wg.infrastructure.events.DropEvent;
-    import flash.display.Sprite;
     
-    public class DropListDelegate extends MovieClip implements IDropListDelegate
+    public class DropListDelegate extends Sprite implements IDropListDelegate
     {
         
         public function DropListDelegate(param1:InteractiveObject, param2:String)

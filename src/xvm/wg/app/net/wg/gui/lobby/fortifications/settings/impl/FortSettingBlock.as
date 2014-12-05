@@ -2,14 +2,16 @@ package net.wg.gui.lobby.fortifications.settings.impl
 {
     import scaleform.clik.core.UIComponent;
     import net.wg.gui.lobby.fortifications.settings.IFortSettingsContainer;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import flash.text.TextField;
     import net.wg.gui.lobby.fortifications.data.settings.FortSettingsBlockVO;
     import net.wg.data.constants.Values;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.events.ButtonEvent;
+    import flash.events.MouseEvent;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import net.wg.gui.lobby.fortifications.events.FortSettingsEvent;
+    import flash.display.DisplayObject;
     
     public class FortSettingBlock extends UIComponent implements IFortSettingsContainer
     {
@@ -19,9 +21,10 @@ package net.wg.gui.lobby.fortifications.settings.impl
             super();
             this.blockButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_SETTINGS;
             this.scaleX = this.scaleY = 1;
+            this.textFieldsForToolTip = new <TextField>[this.blockCondition,this.blockDescr];
         }
         
-        public var blockButton:ButtonDnmIcon = null;
+        public var blockButton:IButtonIconLoader = null;
         
         public var blockCondition:TextField = null;
         
@@ -29,10 +32,13 @@ package net.wg.gui.lobby.fortifications.settings.impl
         
         public var blockDescr:TextField = null;
         
+        private var descriptionTooltip:String = "";
+        
+        private var textFieldsForToolTip:Vector.<TextField> = null;
+        
         public function update(param1:Object) : void
         {
-            var _loc2_:FortSettingsBlockVO = null;
-            _loc2_ = FortSettingsBlockVO(param1);
+            var _loc2_:FortSettingsBlockVO = FortSettingsBlockVO(param1);
             this.blockButton.enabled = _loc2_.blockBtnEnabled;
             if(_loc2_.dayAfterVacation != Values.DEFAULT_INT)
             {
@@ -47,6 +53,8 @@ package net.wg.gui.lobby.fortifications.settings.impl
             this.alertMessage.autoSize = TextFieldAutoSize.RIGHT;
             this.alertMessage.htmlText = _loc2_.alertMessage;
             this.blockDescr.htmlText = _loc2_.blockDescr;
+            this.blockCondition.autoSize = TextFieldAutoSize.LEFT;
+            this.descriptionTooltip = _loc2_.descriptionTooltip;
         }
         
         override protected function configUI() : void
@@ -54,10 +62,31 @@ package net.wg.gui.lobby.fortifications.settings.impl
             super.configUI();
             this.blockButton.mouseEnabledOnDisabled = true;
             this.blockButton.addEventListener(ButtonEvent.CLICK,this.onBlockBtnClickHandler);
+            var _loc1_:int = this.textFieldsForToolTip.length;
+            var _loc2_:* = 0;
+            while(_loc2_ < _loc1_)
+            {
+                this.textFieldsForToolTip[_loc2_].addEventListener(MouseEvent.ROLL_OVER,this.onDescriptionRollOverHandler);
+                this.textFieldsForToolTip[_loc2_].addEventListener(MouseEvent.ROLL_OUT,this.onDescriptionRollOutHandler);
+                _loc2_++;
+            }
         }
         
         override protected function onDispose() : void
         {
+            var _loc1_:int = this.textFieldsForToolTip.length;
+            var _loc2_:* = 0;
+            while(_loc2_ < _loc1_)
+            {
+                this.textFieldsForToolTip[_loc2_].removeEventListener(MouseEvent.ROLL_OVER,this.onDescriptionRollOverHandler);
+                this.textFieldsForToolTip[_loc2_].removeEventListener(MouseEvent.ROLL_OUT,this.onDescriptionRollOutHandler);
+                _loc2_++;
+            }
+            if(this.textFieldsForToolTip)
+            {
+                this.textFieldsForToolTip.splice(0,_loc1_);
+                this.textFieldsForToolTip = null;
+            }
             this.blockButton.removeEventListener(ButtonEvent.CLICK,this.onBlockBtnClickHandler);
             this.blockButton.dispose();
             this.blockButton = null;
@@ -76,8 +105,18 @@ package net.wg.gui.lobby.fortifications.settings.impl
         private function onBlockBtnClickHandler(param1:ButtonEvent) : void
         {
             var _loc2_:FortSettingsEvent = new FortSettingsEvent(FortSettingsEvent.CLICK_BLOCK_BUTTON);
-            _loc2_.blockButtonPoints = this.blockButton;
+            _loc2_.blockButtonPoints = this.blockButton as DisplayObject;
             dispatchEvent(_loc2_);
+        }
+        
+        private function onDescriptionRollOverHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.showComplex(this.descriptionTooltip);
+        }
+        
+        private function onDescriptionRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
     }
 }

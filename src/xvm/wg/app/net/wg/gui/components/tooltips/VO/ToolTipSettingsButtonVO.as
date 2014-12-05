@@ -20,6 +20,6 @@ package net.wg.gui.components.tooltips.VO
         
         public var playersOnServer:String = "";
         
-        public var servers:Object = null;
+        public var serversStats:String = "";
     }
 }

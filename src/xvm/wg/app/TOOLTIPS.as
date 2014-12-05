@@ -8,6 +8,48 @@ package
             super();
         }
         
+        public static var ACHIEVEMENT_PARAMS:String = "#tooltips:achievement/params";
+        
+        public static var SHOWVECTORONMAP:String = "#tooltips:showVectorOnMap";
+        
+        public static var SHOWSECTORONMAP:String = "#tooltips:showSectorOnMap";
+        
+        public static var SHOWVEHMODELSONMAP:String = "#tooltips:showVehModelsOnMap";
+        
+        public static var PRIVATEQUESTS_AWARDSBUTTON:String = "#tooltips:privateQuests/awardsButton";
+        
+        public static var PRIVATEQUESTS_SLOT_EMPTY:String = "#tooltips:privateQuests/slot/empty";
+        
+        public static var PRIVATEQUESTS_SLOT_MISSION:String = "#tooltips:privateQuests/slot/mission";
+        
+        public static var PRIVATEQUESTS_SLOT_MISSIONCOMPLETE:String = PRIVATEQUESTS_SLOT_MISSION + "Complete";
+        
+        public static var PRIVATEQUESTS_BACKBUTTON:String = "#tooltips:privateQuests/backButton";
+        
+        public static var PRIVATEQUESTS_TASKLISTITEM:String = "#tooltips:privateQuests/taskListItem";
+        
+        public static var PRIVATEQUESTS_ABOUTVEHICLE:String = "#tooltips:privateQuests/aboutVehicle";
+        
+        public static var PRIVATEQUESTS_SHOWVEHICLE:String = "#tooltips:privateQuests/showVehicle";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_PERFORM:String = "#tooltips:privateQuests/actionPannel/perform";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_ABORT:String = "#tooltips:privateQuests/actionPannel/abort";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_RECEIVETHEAWARD:String = "#tooltips:privateQuests/actionPannel/receiveTheAward";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_REPEAT:String = "#tooltips:privateQuests/actionPannel/repeat";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_NEW:String = "#tooltips:privateQuests/questControl/new";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_AVAILABLE:String = "#tooltips:privateQuests/questControl/available";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_RECEIVETHEAWARD:String = "#tooltips:privateQuests/questControl/receiveTheAward";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_EMPTY:String = "#tooltips:privateQuests/questControl/empty";
+        
+        public static var PRIVATEQUESTS_QUESTSSTATS_TOKEN:String = "#tooltips:privateQuests/questsStats/token";
+        
         public static var SQUADWINDOW_BUTTONS_INVITE:String = "#tooltips:squadWindow/buttons/invite";
         
         public static var SQUADWINDOW_BUTTONS_RECOMMEND:String = "#tooltips:squadWindow/buttons/recommend";
@@ -23,6 +65,8 @@ package
         public static var SQUADWINDOW_BATTLETYPEINFO:String = "#tooltips:squadWindow/battleTypeInfo";
         
         public static var LOGIN_LEGAL:String = "#tooltips:login/legal";
+        
+        public static var LOBBYMENU_VERSIONINFOBUTTON:String = "#tooltips:lobbyMenu/versionInfoButton";
         
         public static var PREBATTLE_NAMEFILTERBUTTON:String = "#tooltips:prebattle/nameFilterButton";
         
@@ -183,6 +227,8 @@ package
         public static var HANGAR_XPTOTMENCHECKBOX:String = "#tooltips:hangar/xpToTmenCheckbox";
         
         public static var QUESTS_NOTIFIER:String = "#tooltips:quests/notifier";
+        
+        public static var QUESTS_VEHICLESEASONAWARD_ABOUTBTN:String = "#tooltips:quests/vehicleSeasonAward/aboutBtn";
         
         public static var WALLET_NOT_AVAILABLE_GOLD:String = "#tooltips:wallet/not_available_gold";
         
@@ -422,8 +468,6 @@ package
         
         public static var FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYBATTLE:String = "#tooltips:fortification/popOver/upgradeBtn_DisabledByBattle";
         
-        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN:String = "#tooltips:fortification/fortSettingsWindow/perepheryBtn";
-        
         public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNENABLED:String = "#tooltips:fortification/fortSettingsWindow/defenceBtnEnabled";
         
         public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNDISABLED:String = "#tooltips:fortification/fortSettingsWindow/defenceBtnDisabled";
@@ -452,6 +496,12 @@ package
         
         public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME:String = "#tooltips:fortification/fortClanBattleList/battleTime";
         
+        public static var FORTIFICATION_SORTIE_LISTROOM_DESCR:String = "#tooltips:fortification/sortie/listRoom/descr";
+        
+        public static var FORTIFICATION_SORTIE_LISTROOM_STATUS:String = "#tooltips:fortification/sortie/listRoom/status";
+        
+        public static var FORTIFICATION_SORTIE_LISTROOM_BATTLESTATUS:String = "#tooltips:fortification/sortie/listRoom/battleStatus";
+        
         public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_ENABLED:String = "#tooltips:ReferralManagementWindow/createSquadBtn/enabled";
         
         public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_ISOFFLINE:String = "#tooltips:ReferralManagementWindow/createSquadBtn/disabled/isOffline";
@@ -459,6 +509,148 @@ package
         public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_SQUADISFULL:String = "#tooltips:ReferralManagementWindow/createSquadBtn/disabled/squadIsFull";
         
         public static var REFERRALMANAGEMENTWINDOW_TABLE_EXPERIENCE:String = "#tooltips:ReferralManagementWindow/table/experience";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEPERIODDESCRIPTION:String = "#tooltips:fortification/fortSettingsWindow/defencePeriodDescription";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DAYOFFDESCRIPTION:String = "#tooltips:fortification/fortSettingsWindow/dayOffDescription";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONDESCRIPTION:String = "#tooltips:fortification/fortSettingsWindow/vacationDescription";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PERIPHERYDESCRIPTION:String = "#tooltips:fortification/fortSettingsWindow/peripheryDescription";
+        
+        public static var PRIVATEQUESTS_AWARDSBUTTON_HEADER:String = PRIVATEQUESTS_AWARDSBUTTON + "/header";
+        
+        public static var PRIVATEQUESTS_AWARDSBUTTON_BODY:String = PRIVATEQUESTS_AWARDSBUTTON + "/body";
+        
+        public static var PRIVATEQUESTS_SLOT_EMPTY_HEADER:String = PRIVATEQUESTS_SLOT_EMPTY + "/header";
+        
+        public static var PRIVATEQUESTS_SLOT_EMPTY_BODY:String = PRIVATEQUESTS_SLOT_EMPTY + "/body";
+        
+        public static var PRIVATEQUESTS_SLOT_MISSION_HEADER:String = PRIVATEQUESTS_SLOT_MISSION + "/header";
+        
+        public static var PRIVATEQUESTS_SLOT_MISSION_BODY:String = PRIVATEQUESTS_SLOT_MISSION + "/body";
+        
+        public static var PRIVATEQUESTS_SLOT_MISSION_NOTE:String = PRIVATEQUESTS_SLOT_MISSION + "/note";
+        
+        public static var PRIVATEQUESTS_SLOT_MISSIONCOMPLETE_HEADER:String = PRIVATEQUESTS_SLOT_MISSION + "Complete/header";
+        
+        public static var PRIVATEQUESTS_SLOT_MISSIONCOMPLETE_BODY:String = PRIVATEQUESTS_SLOT_MISSION + "Complete/body";
+        
+        public static var PRIVATEQUESTS_SLOT_MISSIONCOMPLETE_ATTENTION:String = PRIVATEQUESTS_SLOT_MISSION + "Complete/attention";
+        
+        public static var PRIVATEQUESTS_BACKBUTTON_HEADER:String = PRIVATEQUESTS_BACKBUTTON + "/header";
+        
+        public static var PRIVATEQUESTS_BACKBUTTON_BODY:String = PRIVATEQUESTS_BACKBUTTON + "/body";
+        
+        public static var PRIVATEQUESTS_TASKLISTITEM_BODY:String = PRIVATEQUESTS_TASKLISTITEM + "/body";
+        
+        public static var PRIVATEQUESTS_ABOUTVEHICLE_HEADER:String = PRIVATEQUESTS_ABOUTVEHICLE + "/header";
+        
+        public static var PRIVATEQUESTS_ABOUTVEHICLE_BODY:String = PRIVATEQUESTS_ABOUTVEHICLE + "/body";
+        
+        public static var PRIVATEQUESTS_SHOWVEHICLE_HEADER:String = PRIVATEQUESTS_SHOWVEHICLE + "/header";
+        
+        public static var PRIVATEQUESTS_SHOWVEHICLE_BODY:String = PRIVATEQUESTS_SHOWVEHICLE + "/body";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_PERFORM_HEADER:String = PRIVATEQUESTS_ACTIONPANNEL_PERFORM + "/header";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_PERFORM_BODY:String = PRIVATEQUESTS_ACTIONPANNEL_PERFORM + "/body";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_PERFORM_NOTE:String = PRIVATEQUESTS_ACTIONPANNEL_PERFORM + "/note";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_ABORT_HEADER:String = PRIVATEQUESTS_ACTIONPANNEL_ABORT + "/header";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_ABORT_BODY:String = PRIVATEQUESTS_ACTIONPANNEL_ABORT + "/body";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_ABORT_NOTE:String = PRIVATEQUESTS_ACTIONPANNEL_ABORT + "/note";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_RECEIVETHEAWARD_HEADER:String = PRIVATEQUESTS_ACTIONPANNEL_RECEIVETHEAWARD + "/header";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_RECEIVETHEAWARD_BODY:String = PRIVATEQUESTS_ACTIONPANNEL_RECEIVETHEAWARD + "/body";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_REPEAT_HEADER:String = PRIVATEQUESTS_ACTIONPANNEL_REPEAT + "/header";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_REPEAT_BODY:String = PRIVATEQUESTS_ACTIONPANNEL_REPEAT + "/body";
+        
+        public static var PRIVATEQUESTS_ACTIONPANNEL_REPEAT_NOTE:String = PRIVATEQUESTS_ACTIONPANNEL_REPEAT + "/note";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_NEW_HEADER:String = PRIVATEQUESTS_QUESTCONTROL_NEW + "/header";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_NEW_BODY:String = PRIVATEQUESTS_QUESTCONTROL_NEW + "/body";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_NEW_ATTENTION:String = PRIVATEQUESTS_QUESTCONTROL_NEW + "/attention";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_AVAILABLE_HEADER:String = PRIVATEQUESTS_QUESTCONTROL_AVAILABLE + "/header";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_AVAILABLE_BODY:String = PRIVATEQUESTS_QUESTCONTROL_AVAILABLE + "/body";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_AVAILABLE_ATTENTION:String = PRIVATEQUESTS_QUESTCONTROL_AVAILABLE + "/attention";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_RECEIVETHEAWARD_HEADER:String = PRIVATEQUESTS_QUESTCONTROL_RECEIVETHEAWARD + "/header";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_RECEIVETHEAWARD_BODY:String = PRIVATEQUESTS_QUESTCONTROL_RECEIVETHEAWARD + "/body";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_RECEIVETHEAWARD_ATTENTION:String = PRIVATEQUESTS_QUESTCONTROL_RECEIVETHEAWARD + "/attention";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_EMPTY_HEADER:String = PRIVATEQUESTS_QUESTCONTROL_EMPTY + "/header";
+        
+        public static var PRIVATEQUESTS_QUESTCONTROL_EMPTY_BODY:String = PRIVATEQUESTS_QUESTCONTROL_EMPTY + "/body";
+        
+        public static var PRIVATEQUESTS_QUESTSSTATS_TOKEN_HEADER:String = PRIVATEQUESTS_QUESTSSTATS_TOKEN + "/header";
+        
+        public static var PRIVATEQUESTS_QUESTSSTATS_TOKEN_BODY:String = PRIVATEQUESTS_QUESTSSTATS_TOKEN + "/body";
+        
+        public static var PRIVATEQUESTS_QUESTSSTATS_TOKEN_NOTE:String = PRIVATEQUESTS_QUESTSSTATS_TOKEN + "/note";
+        
+        public static var PRIVATEQUESTS_PROGRESS_CONDITION:String = "#tooltips:privateQuests/progress/condition";
+        
+        public static var PRIVATEQUESTS_SLOT_CONDITION_VEHICLE:String = "#tooltips:privateQuests/slot/condition/vehicle";
+        
+        public static var PRIVATEQUESTS_SLOT_CONDITION_ANIM:String = "#tooltips:privateQuests/slot/condition/anim";
+        
+        public static var PRIVATEQUESTS_SLOT_HEADER:String = "#tooltips:privateQuests/slot/header";
+        
+        public static var PRIVATEQUESTS_SLOT_DESCR:String = "#tooltips:privateQuests/slot/descr";
+        
+        public static var PRIVATEQUESTS_PROGRESS_HEADER:String = "#tooltips:privateQuests/progress/header";
+        
+        public static var PRIVATEQUESTS_PROGRESS_TYPE_LIGHTTANK:String = "#tooltips:privateQuests/progress/type/lightTank";
+        
+        public static var PRIVATEQUESTS_PROGRESS_TYPE_MEDIUMTANK:String = "#tooltips:privateQuests/progress/type/mediumTank";
+        
+        public static var PRIVATEQUESTS_PROGRESS_TYPE_HEAVYTANK:String = "#tooltips:privateQuests/progress/type/heavyTank";
+        
+        public static var PRIVATEQUESTS_PROGRESS_TYPE_SPG:String = "#tooltips:privateQuests/progress/type/SPG";
+        
+        public static var PRIVATEQUESTS_PROGRESS_TYPE_AT_SPG:String = "#tooltips:privateQuests/progress/type/AT-SPG";
+        
+        public static var PRIVATEQUESTS_STATUS_NOTRECEIVED_HEADER:String = "#tooltips:privateQuests/status/notReceived/header";
+        
+        public static var PRIVATEQUESTS_STATUS_RECEIVED_HEADER:String = "#tooltips:privateQuests/status/received/header";
+        
+        public static var PRIVATEQUESTS_STATUS_COMPLETED_HEADER:String = "#tooltips:privateQuests/status/completed/header";
+        
+        public static var PRIVATEQUESTS_STATUS_AVAILABLE_HEADER:String = "#tooltips:privateQuests/status/available/header";
+        
+        public static var PRIVATEQUESTS_STATUS_AVAILABLE_DESCR:String = "#tooltips:privateQuests/status/available/descr";
+        
+        public static var PRIVATEQUESTS_STATUS_LOCK_HEADER:String = "#tooltips:privateQuests/status/lock/header";
+        
+        public static var PRIVATEQUESTS_STATUS_LOCK_DESCR:String = "#tooltips:privateQuests/status/lock/descr";
+        
+        public static var PRIVATEQUESTS_STATUS_INPROGRESS_HEADER:String = "#tooltips:privateQuests/status/inProgress/header";
+        
+        public static var PRIVATEQUESTS_STATUS_INPROGRESS_DESCR:String = "#tooltips:privateQuests/status/inProgress/descr";
+        
+        public static var PRIVATEQUESTS_PARAMS_SHEETS:String = "#tooltips:privateQuests/params/sheets";
+        
+        public static var PRIVATEQUESTS_PARAMS_RECRUITTANKMANFEMALE:String = "#tooltips:privateQuests/params/recruitTankmanFemale";
+        
+        public static var PRIVATEQUESTS_PARAMS_COLLECTEDSHEETS:String = "#tooltips:privateQuests/params/collectedSheets";
+        
+        public static var PRIVATEQUESTS_PARAMS_COMPETEDTASKS:String = "#tooltips:privateQuests/params/competedTasks";
+        
+        public static var PRIVATEQUESTS_PARAMS_RECRUITEDTANKMANFEMALE:String = "#tooltips:privateQuests/params/recruitedTankmanFemale";
         
         public static var SQUADWINDOW_BATTLETYPEINFO_HEADER:String = SQUADWINDOW_BATTLETYPEINFO + "/header";
         
@@ -508,6 +700,8 @@ package
         
         public static var SETTINGSCONTROL_RECOMMENDED:String = "#tooltips:settingsControl/recommended";
         
+        public static var LOBBYMENU_VERSIONINFOBUTTON_BODY:String = LOBBYMENU_VERSIONINFOBUTTON + "/body";
+        
         public static var ACTIONPRICE_HEADER:String = "#tooltips:actionPrice/header";
         
         public static var ACTIONPRICE_BODY:String = "#tooltips:actionPrice/body";
@@ -545,6 +739,20 @@ package
         public static var SHOWMARKSONGUN_HEADER:String = SHOWMARKSONGUN + "/header";
         
         public static var SHOWMARKSONGUN_BODY:String = SHOWMARKSONGUN + "/body";
+        
+        public static var SHOWVEHMODELSONMAP_HEADER:String = SHOWVEHMODELSONMAP + "/header";
+        
+        public static var SHOWVEHMODELSONMAP_BODY:String = SHOWVEHMODELSONMAP + "/body";
+        
+        public static var SHOWVEHMODELSONMAP_ATTENTION:String = SHOWVEHMODELSONMAP + "/attention";
+        
+        public static var SHOWVECTORONMAP_HEADER:String = SHOWVECTORONMAP + "/header";
+        
+        public static var SHOWVECTORONMAP_BODY:String = SHOWVECTORONMAP + "/body";
+        
+        public static var SHOWSECTORONMAP_HEADER:String = SHOWSECTORONMAP + "/header";
+        
+        public static var SHOWSECTORONMAP_BODY:String = SHOWSECTORONMAP + "/body";
         
         public static var GOLD_HEADER:String = "#tooltips:gold/header";
         
@@ -734,63 +942,71 @@ package
         
         public static var ACHIEVEMENT_CLOSETORECORD:String = "#tooltips:achievement/closeToRecord";
         
-        public static var ACHIEVEMENT_PARAMS_MAXSNIPERSERIES:String = "#tooltips:achievement/params/maxSniperSeries";
+        public static var ACHIEVEMENT_NEWRECORD:String = "#tooltips:achievement/newRecord";
         
-        public static var ACHIEVEMENT_PARAMS_MAXINVINCIBLESERIES:String = "#tooltips:achievement/params/maxInvincibleSeries";
+        public static var ACHIEVEMENT_RECORDONVEHICLE:String = "#tooltips:achievement/recordOnVehicle";
         
-        public static var ACHIEVEMENT_PARAMS_MAXDIEHARDSERIES:String = "#tooltips:achievement/params/maxDiehardSeries";
+        public static var ACHIEVEMENT_PARAMS_MAXSNIPERSERIES:String = ACHIEVEMENT_PARAMS + "/maxSniperSeries";
         
-        public static var ACHIEVEMENT_PARAMS_MAXKILLINGSERIES:String = "#tooltips:achievement/params/maxKillingSeries";
+        public static var ACHIEVEMENT_PARAMS_MAXINVINCIBLESERIES:String = ACHIEVEMENT_PARAMS + "/maxInvincibleSeries";
         
-        public static var ACHIEVEMENT_PARAMS_MAXRELIABLECOMRADESERIES:String = "#tooltips:achievement/params/maxReliableComradeSeries";
+        public static var ACHIEVEMENT_PARAMS_MAXDIEHARDSERIES:String = ACHIEVEMENT_PARAMS + "/maxDiehardSeries";
         
-        public static var ACHIEVEMENT_PARAMS_MAXAIMERSERIES:String = "#tooltips:achievement/params/maxAimerSeries";
+        public static var ACHIEVEMENT_PARAMS_MAXKILLINGSERIES:String = ACHIEVEMENT_PARAMS + "/maxKillingSeries";
         
-        public static var ACHIEVEMENT_PARAMS_MAXWFC2014WINSERIES:String = "#tooltips:achievement/params/maxWFC2014WinSeries";
+        public static var ACHIEVEMENT_PARAMS_MAXRELIABLECOMRADESERIES:String = ACHIEVEMENT_PARAMS + "/maxReliableComradeSeries";
         
-        public static var ACHIEVEMENT_PARAMS_MAXDEATHTRACKWINSERIES:String = "#tooltips:achievement/params/maxDeathTrackWinSeries";
+        public static var ACHIEVEMENT_PARAMS_MAXAIMERSERIES:String = ACHIEVEMENT_PARAMS + "/maxAimerSeries";
         
-        public static var ACHIEVEMENT_PARAMS_MAXPIERCINGSERIES:String = "#tooltips:achievement/params/maxPiercingSeries";
+        public static var ACHIEVEMENT_PARAMS_MAXWFC2014WINSERIES:String = ACHIEVEMENT_PARAMS + "/maxWFC2014WinSeries";
         
-        public static var ACHIEVEMENT_PARAMS_MAXTACTICALBREAKTHROUGHSERIES:String = "#tooltips:achievement/params/maxTacticalBreakthroughSeries";
+        public static var ACHIEVEMENT_PARAMS_MAXDEATHTRACKWINSERIES:String = ACHIEVEMENT_PARAMS + "/maxDeathTrackWinSeries";
         
-        public static var ACHIEVEMENT_PARAMS_NO_CLASS_ACHIEVEMENT_LEFT:String = "#tooltips:achievement/params/no_class_achievement_left";
+        public static var ACHIEVEMENT_PARAMS_MAXPIERCINGSERIES:String = ACHIEVEMENT_PARAMS + "/maxPiercingSeries";
         
-        public static var ACHIEVEMENT_PARAMS_LEFT4:String = "#tooltips:achievement/params/left4";
+        public static var ACHIEVEMENT_PARAMS_MAXTACTICALBREAKTHROUGHSERIES:String = ACHIEVEMENT_PARAMS + "/maxTacticalBreakthroughSeries";
         
-        public static var ACHIEVEMENT_PARAMS_LEFT3:String = "#tooltips:achievement/params/left3";
+        public static var ACHIEVEMENT_PARAMS_NO_CLASS_ACHIEVEMENT_LEFT:String = ACHIEVEMENT_PARAMS + "/no_class_achievement_left";
         
-        public static var ACHIEVEMENT_PARAMS_LEFT2:String = "#tooltips:achievement/params/left2";
+        public static var ACHIEVEMENT_PARAMS_LEFT4:String = ACHIEVEMENT_PARAMS + "/left4";
         
-        public static var ACHIEVEMENT_PARAMS_LEFT1:String = "#tooltips:achievement/params/left1";
+        public static var ACHIEVEMENT_PARAMS_LEFT3:String = ACHIEVEMENT_PARAMS + "/left3";
         
-        public static var ACHIEVEMENT_PARAMS_HEROESLEFT:String = "#tooltips:achievement/params/heroesLeft";
+        public static var ACHIEVEMENT_PARAMS_LEFT2:String = ACHIEVEMENT_PARAMS + "/left2";
         
-        public static var ACHIEVEMENT_PARAMS_PAIRWINSLEFT:String = "#tooltips:achievement/params/pairWinsLeft";
+        public static var ACHIEVEMENT_PARAMS_LEFT1:String = ACHIEVEMENT_PARAMS + "/left1";
         
-        public static var ACHIEVEMENT_PARAMS_VEHICLESLEFT:String = "#tooltips:achievement/params/vehiclesLeft";
+        public static var ACHIEVEMENT_PARAMS_HEROESLEFT:String = ACHIEVEMENT_PARAMS + "/heroesLeft";
         
-        public static var ACHIEVEMENT_PARAMS_DAMAGELEFT:String = "#tooltips:achievement/params/damageLeft";
+        public static var ACHIEVEMENT_PARAMS_PAIRWINSLEFT:String = ACHIEVEMENT_PARAMS + "/pairWinsLeft";
         
-        public static var ACHIEVEMENT_PARAMS_BATTLESLEFT:String = "#tooltips:achievement/params/battlesLeft";
+        public static var ACHIEVEMENT_PARAMS_VEHICLESLEFT:String = ACHIEVEMENT_PARAMS + "/vehiclesLeft";
         
-        public static var ACHIEVEMENT_PARAMS_CAPTUREPOINTSLEFT:String = "#tooltips:achievement/params/capturePointsLeft";
+        public static var ACHIEVEMENT_PARAMS_QUESTSLEFT:String = ACHIEVEMENT_PARAMS + "/questsLeft";
         
-        public static var ACHIEVEMENT_PARAMS_DROPPOINTSLEFT:String = "#tooltips:achievement/params/dropPointsLeft";
+        public static var ACHIEVEMENT_PARAMS_TANKWOMENLEFT:String = ACHIEVEMENT_PARAMS + "/tankwomenLeft";
         
-        public static var ACHIEVEMENT_PARAMS_WINSLEFT:String = "#tooltips:achievement/params/winsLeft";
+        public static var ACHIEVEMENT_PARAMS_DAMAGELEFT:String = ACHIEVEMENT_PARAMS + "/damageLeft";
         
-        public static var ACHIEVEMENT_PARAMS_ACHIEVESLEFT:String = "#tooltips:achievement/params/achievesLeft";
+        public static var ACHIEVEMENT_PARAMS_BATTLESLEFT:String = ACHIEVEMENT_PARAMS + "/battlesLeft";
         
-        public static var ACHIEVEMENT_PARAMS_FORTDEFRESLEFT:String = "#tooltips:achievement/params/fortDefResLeft";
+        public static var ACHIEVEMENT_PARAMS_CAPTUREPOINTSLEFT:String = ACHIEVEMENT_PARAMS + "/capturePointsLeft";
         
-        public static var ACHIEVEMENT_PARAMS_VEHICLESTAKEPART:String = "#tooltips:achievement/params/vehiclesTakePart";
+        public static var ACHIEVEMENT_PARAMS_DROPPOINTSLEFT:String = ACHIEVEMENT_PARAMS + "/dropPointsLeft";
         
-        public static var ACHIEVEMENT_PARAMS_VEHICLESTOKILL:String = "#tooltips:achievement/params/vehiclesToKill";
+        public static var ACHIEVEMENT_PARAMS_WINSLEFT:String = ACHIEVEMENT_PARAMS + "/winsLeft";
         
-        public static var ACHIEVEMENT_PARAMS_VEHICLESTORESEARCH:String = "#tooltips:achievement/params/vehiclesToResearch";
+        public static var ACHIEVEMENT_PARAMS_ACHIEVESLEFT:String = ACHIEVEMENT_PARAMS + "/achievesLeft";
         
-        public static var ACHIEVEMENT_PARAMS_VEHICLES:String = "#tooltips:achievement/params/vehicles";
+        public static var ACHIEVEMENT_PARAMS_FORTDEFRESLEFT:String = ACHIEVEMENT_PARAMS + "/fortDefResLeft";
+        
+        public static var ACHIEVEMENT_PARAMS_VEHICLESTAKEPART:String = ACHIEVEMENT_PARAMS + "/vehiclesTakePart";
+        
+        public static var ACHIEVEMENT_PARAMS_VEHICLESTOKILL:String = ACHIEVEMENT_PARAMS + "/vehiclesToKill";
+        
+        public static var ACHIEVEMENT_PARAMS_VEHICLESTORESEARCH:String = ACHIEVEMENT_PARAMS + "/vehiclesToResearch";
+        
+        public static var ACHIEVEMENT_PARAMS_VEHICLES:String = ACHIEVEMENT_PARAMS + "/vehicles";
         
         public static var ACHIEVEMENT_ACTION_UNAVAILABLE_DESCR:String = "#tooltips:achievement/action/unavailable/descr";
         
@@ -1116,6 +1332,10 @@ package
         
         public static var LOBBY_MESSENGER_REFERRER_BODY:String = "#tooltips:lobby_messenger/referrer/body";
         
+        public static var LOBBY_HEADER_BUYPREMIUMACCOUNT_DISABLED_HEADER:String = "#tooltips:lobby/header/buyPremiumAccount/disabled/header";
+        
+        public static var LOBBY_HEADER_BUYPREMIUMACCOUNT_DISABLED_BODY:String = "#tooltips:lobby/header/buyPremiumAccount/disabled/body";
+        
         public static var TRAINING_CREATE_INVITES_CHECKBOX_HEADER:String = TRAINING_CREATE_INVITES_CHECKBOX + "/header";
         
         public static var TRAINING_CREATE_INVITES_CHECKBOX_BODY:String = TRAINING_CREATE_INVITES_CHECKBOX + "/body";
@@ -1151,6 +1371,8 @@ package
         public static var HEADER_INFO_PLAYERS_ONLINE_FULL_HEADER:String = "#tooltips:header/info/players_online_full/header";
         
         public static var HEADER_INFO_PLAYERS_ONLINE_FULL_BODY:String = "#tooltips:header/info/players_online_full/body";
+        
+        public static var HEADER_VERSIONINFOHINT:String = "#tooltips:header/versionInfoHint";
         
         public static var SETTING_WINDOW_CONTROLS_KEY_INPUT_WARNING:String = "#tooltips:setting_window/controls/key_input/warning";
         
@@ -1304,6 +1526,12 @@ package
         
         public static var CUSTOMIZATION_INSCRIPTION_IGR_BODY:String = CUSTOMIZATION_INSCRIPTION_IGR + "/body";
         
+        public static var CUSTOMIZATION_QUESTAWARD_CURRENTVEHICLE:String = "#tooltips:customization/questAward/currentVehicle";
+        
+        public static var CUSTOMIZATION_QUESTAWARD_EXACTVEHICLE:String = "#tooltips:customization/questAward/exactVehicle";
+        
+        public static var CUSTOMIZATION_QUESTAWARD_DENYVEHICLE:String = "#tooltips:customization/questAward/denyVehicle";
+        
         public static var VEHICLEPARAMS_SPEEDLIMITS:String = "#tooltips:vehicleParams/speedLimits";
         
         public static var VEHICLEPARAMS_ENGINEPOWER:String = "#tooltips:vehicleParams/enginePower";
@@ -1420,6 +1648,8 @@ package
         
         public static var QUESTS_STATUS_NOTREADY:String = "#tooltips:quests/status/notready";
         
+        public static var QUESTS_STATUS_NOTDONE:String = "#tooltips:quests/status/notDone";
+        
         public static var QUESTS_COMPLEXTASK_LABEL:String = "#tooltips:quests/complexTask/label";
         
         public static var QUESTS_RENDERER_LABEL:String = "#tooltips:quests/renderer/label";
@@ -1429,6 +1659,10 @@ package
         public static var QUESTS_NOTIFIER_HEADER:String = QUESTS_NOTIFIER + "/header";
         
         public static var QUESTS_NOTIFIER_BODY:String = QUESTS_NOTIFIER + "/body";
+        
+        public static var QUESTS_VEHICLESEASONAWARD_ABOUTBTN_HEADER:String = QUESTS_VEHICLESEASONAWARD_ABOUTBTN + "/header";
+        
+        public static var QUESTS_VEHICLESEASONAWARD_ABOUTBTN_BODY:String = QUESTS_VEHICLESEASONAWARD_ABOUTBTN + "/body";
         
         public static var VEHICLESTATUS_BATTLE_HEADER:String = "#tooltips:vehicleStatus/battle/header";
         
@@ -2056,6 +2290,18 @@ package
         
         public static var FORTIFICATION_SORTIE_LISTROOM_SORTNAMEBTN_BODY:String = FORTIFICATION_SORTIE_LISTROOM_SORTNAMEBTN + "/body";
         
+        public static var FORTIFICATION_SORTIE_LISTROOM_DESCR_HEADER:String = FORTIFICATION_SORTIE_LISTROOM_DESCR + "/header";
+        
+        public static var FORTIFICATION_SORTIE_LISTROOM_DESCR_BODY:String = FORTIFICATION_SORTIE_LISTROOM_DESCR + "/body";
+        
+        public static var FORTIFICATION_SORTIE_LISTROOM_STATUS_HEADER:String = FORTIFICATION_SORTIE_LISTROOM_STATUS + "/header";
+        
+        public static var FORTIFICATION_SORTIE_LISTROOM_STATUS_BODY:String = FORTIFICATION_SORTIE_LISTROOM_STATUS + "/body";
+        
+        public static var FORTIFICATION_SORTIE_LISTROOM_BATTLESTATUS_HEADER:String = FORTIFICATION_SORTIE_LISTROOM_BATTLESTATUS + "/header";
+        
+        public static var FORTIFICATION_SORTIE_LISTROOM_BATTLESTATUS_BODY:String = FORTIFICATION_SORTIE_LISTROOM_BATTLESTATUS + "/body";
+        
         public static var FORTIFICATION_SORTIE_LISTROOM_SORTDIVISIONBTN_HEADER:String = FORTIFICATION_SORTIE_LISTROOM_SORTDIVISIONBTN + "/header";
         
         public static var FORTIFICATION_SORTIE_LISTROOM_SORTDIVISIONBTN_BODY:String = FORTIFICATION_SORTIE_LISTROOM_SORTDIVISIONBTN + "/body";
@@ -2077,6 +2323,14 @@ package
         public static var BATTLETYPES_FORTIFICATION_HEADER:String = BATTLETYPES_FORTIFICATION + "/header";
         
         public static var BATTLETYPES_FORTIFICATION_BODY:String = BATTLETYPES_FORTIFICATION + "/body";
+        
+        public static var FORTIFICATION_DISABLED_NO_CLAN_HEADER:String = "#tooltips:fortification/disabled/no_clan/header";
+        
+        public static var FORTIFICATION_DISABLED_NO_CLAN_BODY:String = "#tooltips:fortification/disabled/no_clan/body";
+        
+        public static var FORTIFICATION_DISABLED_NO_FORT_HEADER:String = "#tooltips:fortification/disabled/no_fort/header";
+        
+        public static var FORTIFICATION_DISABLED_NO_FORT_BODY:String = "#tooltips:fortification/disabled/no_fort/body";
         
         public static var BATTLETYPES_LEAVEFORTIFICATION_HEADER:String = BATTLETYPES_LEAVEFORTIFICATION + "/header";
         
@@ -2266,6 +2520,14 @@ package
         
         public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT + "/body";
         
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT_CN_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT + "/CN/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT_CN_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT + "/CN/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT_KR_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT + "/KR/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT_KR_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT + "/KR/body";
+        
         public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON + "/header";
         
         public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON + "/body";
@@ -2374,9 +2636,17 @@ package
         
         public static var FORTIFICATION_FORTSETTINGSWINDOW_STATUSSTRING_CANNOTBEACTIVATED:String = "#tooltips:fortification/fortSettingsWindow/statusString/canNotBeActivated";
         
-        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN + "/header";
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_HEADER:String = "#tooltips:fortification/fortSettingsWindow/perepheryBtn/header";
         
-        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN + "/body";
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_ENABLED_BODY:String = "#tooltips:fortification/fortSettingsWindow/perepheryBtn/enabled/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_DISABLED_BODY:String = "#tooltips:fortification/fortSettingsWindow/perepheryBtn/disabled/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_DISABLED_BODY_DAYS:String = "#tooltips:fortification/fortSettingsWindow/perepheryBtn/disabled/body/days";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_DISABLED_BODY_HOURS:String = "#tooltips:fortification/fortSettingsWindow/perepheryBtn/disabled/body/hours";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_DISABLED_BODY_MIN:String = "#tooltips:fortification/fortSettingsWindow/perepheryBtn/disabled/body/min";
         
         public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNENABLED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNENABLED + "/header";
         
@@ -2405,6 +2675,22 @@ package
         public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED + "/header";
         
         public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEPERIODDESCRIPTION_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEPERIODDESCRIPTION + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEPERIODDESCRIPTION_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEPERIODDESCRIPTION + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DAYOFFDESCRIPTION_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_DAYOFFDESCRIPTION + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DAYOFFDESCRIPTION_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_DAYOFFDESCRIPTION + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONDESCRIPTION_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONDESCRIPTION + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONDESCRIPTION_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONDESCRIPTION + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PERIPHERYDESCRIPTION_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_PERIPHERYDESCRIPTION + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PERIPHERYDESCRIPTION_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_PERIPHERYDESCRIPTION + "/body";
         
         public static var FORTIFICATION_FORTSETTINGSDAYOFFPOPOVER_APPLY_ENABLED_NOTE:String = FORTIFICATION_FORTSETTINGSDAYOFFPOPOVER_APPLY_ENABLED + "/note";
         
@@ -2498,11 +2784,17 @@ package
         
         public static var CALENDAR_PREVMONTH:String = "#tooltips:Calendar/prevMonth";
         
+        public static var FORTWRONGTIME_HEADER:String = "#tooltips:fortWrongTime/header";
+        
+        public static var FORTWRONGTIME_BODY:String = "#tooltips:fortWrongTime/body";
+        
+        public static var BATTLERESULTS_FORTRESOURCE_LEGIONER_BODY:String = "#tooltips:battleResults/FortResource/legioner/body";
+        
         public static var TECHTREEPAGE_NATIONS_ENUM:Array = [TECHTREEPAGE_NATIONS_USSR,TECHTREEPAGE_NATIONS_GERMANY,TECHTREEPAGE_NATIONS_USA,TECHTREEPAGE_NATIONS_CHINA,TECHTREEPAGE_NATIONS_FRANCE,TECHTREEPAGE_NATIONS_UK,TECHTREEPAGE_NATIONS_JAPAN];
         
         public static var FORTIFICATION_TRANSPORTING_ENUM:Array = [FORTIFICATION_TRANSPORTING_EMPTYSTORAGE_HEADER,FORTIFICATION_TRANSPORTING_EMPTYSTORAGE_BODY,FORTIFICATION_TRANSPORTING_COOLDOWN_HEADER,FORTIFICATION_TRANSPORTING_COOLDOWN_BODY,FORTIFICATION_TRANSPORTING_FOUNDATION_HEADER,FORTIFICATION_TRANSPORTING_FOUNDATION_BODY,FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_HEADER,FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_BODY];
         
-        public static var ACHIEVEMENT_PARAMS_ENUM:Array = [ACHIEVEMENT_PARAMS_MAXSNIPERSERIES,ACHIEVEMENT_PARAMS_MAXINVINCIBLESERIES,ACHIEVEMENT_PARAMS_MAXDIEHARDSERIES,ACHIEVEMENT_PARAMS_MAXKILLINGSERIES,ACHIEVEMENT_PARAMS_MAXRELIABLECOMRADESERIES,ACHIEVEMENT_PARAMS_MAXAIMERSERIES,ACHIEVEMENT_PARAMS_MAXWFC2014WINSERIES,ACHIEVEMENT_PARAMS_MAXDEATHTRACKWINSERIES,ACHIEVEMENT_PARAMS_MAXPIERCINGSERIES,ACHIEVEMENT_PARAMS_MAXTACTICALBREAKTHROUGHSERIES,ACHIEVEMENT_PARAMS_NO_CLASS_ACHIEVEMENT_LEFT,ACHIEVEMENT_PARAMS_LEFT4,ACHIEVEMENT_PARAMS_LEFT3,ACHIEVEMENT_PARAMS_LEFT2,ACHIEVEMENT_PARAMS_LEFT1,ACHIEVEMENT_PARAMS_HEROESLEFT,ACHIEVEMENT_PARAMS_PAIRWINSLEFT,ACHIEVEMENT_PARAMS_VEHICLESLEFT,ACHIEVEMENT_PARAMS_DAMAGELEFT,ACHIEVEMENT_PARAMS_BATTLESLEFT,ACHIEVEMENT_PARAMS_CAPTUREPOINTSLEFT,ACHIEVEMENT_PARAMS_DROPPOINTSLEFT,ACHIEVEMENT_PARAMS_WINSLEFT,ACHIEVEMENT_PARAMS_ACHIEVESLEFT,ACHIEVEMENT_PARAMS_FORTDEFRESLEFT,ACHIEVEMENT_PARAMS_VEHICLESTAKEPART,ACHIEVEMENT_PARAMS_VEHICLESTOKILL,ACHIEVEMENT_PARAMS_VEHICLESTORESEARCH,ACHIEVEMENT_PARAMS_VEHICLES];
+        public static var PRIVATEQUESTS_PARAMS_ENUM:Array = [PRIVATEQUESTS_PARAMS_SHEETS,PRIVATEQUESTS_PARAMS_RECRUITTANKMANFEMALE,PRIVATEQUESTS_PARAMS_COLLECTEDSHEETS,PRIVATEQUESTS_PARAMS_COMPETEDTASKS,PRIVATEQUESTS_PARAMS_RECRUITEDTANKMANFEMALE];
         
         public static var TANKCARUSEL_LOCK_ENUM:Array = [TANKCARUSEL_LOCK_HEADER,TANKCARUSEL_LOCK_TO,TANKCARUSEL_LOCK_CLAN,TANKCARUSEL_LOCK_TOURNAMENT,TANKCARUSEL_LOCK_ROAMING];
         
@@ -2513,6 +2805,8 @@ package
         public static var TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_ENUM:Array = [TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_CREDITS,TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_TANKMAN,TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_VEHICLEWITHTANKMEN];
         
         public static var LEVEL_ENUM:Array = [LEVEL_1,LEVEL_2,LEVEL_3,LEVEL_4,LEVEL_5,LEVEL_6,LEVEL_7,LEVEL_8,LEVEL_9,LEVEL_10];
+        
+        public static var ACHIEVEMENT_PARAMS_LEFT_ENUM:Array = [ACHIEVEMENT_PARAMS_LEFT4,ACHIEVEMENT_PARAMS_LEFT3,ACHIEVEMENT_PARAMS_LEFT2,ACHIEVEMENT_PARAMS_LEFT1];
         
         public static var VEHICLE_ENUM:Array = [VEHICLE_GRAPH_NOTES_SHOWCONTEXTMENU,VEHICLE_GRAPH_NOTES_SHOWINFOWINDOW,VEHICLE_GRAPH_NOTES_VEHICLEUNLOCK,VEHICLE_GRAPH_NOTES_MODULEUNLOCK,VEHICLE_GRAPH_NOTES_EQUIP,VEHICLE_GRAPH_NOTES_BUYANDEQUIP,VEHICLE_GRAPH_NOTES_GOTONATIONTREE,VEHICLE_GRAPH_NOTES_GOTONEXTVEHICLE,VEHICLE_GRAPH_BODY_MODULEINSTALLED,VEHICLE_GRAPH_BODY_NOTENOUGH,VEHICLEPARAMS_SPEEDLIMITS,VEHICLEPARAMS_ENGINEPOWER,VEHICLEPARAMS_CHASSISROTATIONSPEED,VEHICLEPARAMS_DAMAGE,VEHICLEPARAMS_HULLARMOR,VEHICLEPARAMS_TURRETARMOR,VEHICLEPARAMS_PIERCINGPOWER,VEHICLE_INVENTORYCOUNT,VEHICLE_VEHICLECOUNT,VEHICLE_LEVEL,VEHICLE_ELITE,VEHICLE_CREW,VEHICLE_AMMO,VEHICLE_XP,VEHICLE_MULTIPLIED_XP,VEHICLE_UNLOCK_PRICE,VEHICLE_BUY_PRICE,VEHICLE_ACTION_PRC,VEHICLE_MINRENTALSPRICE,VEHICLE_BUY_PRICE_ACTION,VEHICLE_SELL_PRICE,VEHICLE_EQUIPMENTS,VEHICLE_DEVICES,VEHICLE_FAVORITE,VEHICLE_DAILYXPFACTOR,VEHICLE_SPEEDLIMITS,VEHICLE_DAMAGE,VEHICLE_TURRETROTATIONSPEED,VEHICLE_RADIODISTANCE,VEHICLE_TEXTDELIMITER_OR,VEHICLE_RENTLEFT_DAYS,VEHICLE_RENTLEFT_HOURS,VEHICLEIGR_SPECIALABILITY,VEHICLEIGR_DAYS,VEHICLEIGR_HOURS,VEHICLESTATUS_BATTLE_HEADER,VEHICLESTATUS_LOCKED_HEADER,VEHICLESTATUS_RENTALISOVER_HEADER,VEHICLESTATUS_IGRRENTALISOVER_HEADER,VEHICLESTATUS_INPREMIUMIGRONLY_HEADER,VEHICLESTATUS_INPREBATTLE_HEADER,VEHICLESTATUS_CLANLOCKED_HEADER,VEHICLESTATUS_AMMONOTFULL_HEADER,VEHICLESTATUS_DAMAGED_HEADER,VEHICLESTATUS_DESTROYED_HEADER,VEHICLESTATUS_EXPLODED_HEADER,VEHICLESTATUS_NOTPRESENT_HEADER,VEHICLESTATUS_UNDAMAGED_HEADER,VEHICLESTATUS_CREWNOTFULL_HEADER,VEHICLESTATUS_NOTUNLOCKED_HEADER,VEHICLESTATUS_INHANGAR_HEADER,VEHICLESTATUS_SERVERRESTRICTION_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_TEXT,VEHICLESTATUS_NOTENOUGHGOLD_HEADER,VEHICLESTATUS_NOTENOUGHGOLD_TEXT,VEHICLESTATUS_NOTSUITABLE_HEADER,VEHICLESELLDIALOG_RENDERER_ALERTICON_HEADER,VEHICLESELLDIALOG_RENDERER_ALERTICON_BODY,VEHICLESELECTOR_FILTER_NATION,VEHICLESELECTOR_FILTER_VEHTYPE,VEHICLESELECTOR_FILTER_VEHLVL,VEHICLESELECTOR_FILTER_MAINVEHICLE,VEHICLESELECTOR_SORTING_NATION_HEADER,VEHICLESELECTOR_SORTING_NATION_BODY,VEHICLESELECTOR_SORTING_VEHTYPE_HEADER,VEHICLESELECTOR_SORTING_VEHTYPE_BODY,VEHICLESELECTOR_SORTING_VEHLVL_HEADER,VEHICLESELECTOR_SORTING_VEHLVL_BODY,VEHICLESELECTOR_SORTING_VEHNAME_HEADER,VEHICLESELECTOR_SORTING_VEHNAME_BODY,VEHICLESELECTOR_OVERFLOWLEVEL_HEADER,VEHICLESELECTOR_OVERFLOWLEVEL_BODY];
         
@@ -2538,11 +2832,11 @@ package
             return _loc2_;
         }
         
-        public static function achievement_params(param1:String) : String
+        public static function privatequests_params(param1:String) : String
         {
             var _loc2_:String = null;
-            _loc2_ = "#tooltips:achievement/params/" + param1;
-            App.utils.asserter.assert(!(ACHIEVEMENT_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            _loc2_ = "#tooltips:privateQuests/params/" + param1;
+            App.utils.asserter.assert(!(PRIVATEQUESTS_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
@@ -2583,6 +2877,14 @@ package
             var _loc2_:String = null;
             _loc2_ = "#tooltips:level/" + param1;
             App.utils.asserter.assert(!(LEVEL_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function achievement_params_left(param1:String) : String
+        {
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:achievement/params/left4" + param1;
+            App.utils.asserter.assert(!(ACHIEVEMENT_PARAMS_LEFT_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         

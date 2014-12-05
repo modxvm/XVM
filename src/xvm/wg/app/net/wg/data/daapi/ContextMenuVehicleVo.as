@@ -27,5 +27,7 @@ package net.wg.data.daapi
         public var rentalIsOver:Boolean = false;
         
         public var canBuyOrRent:Boolean = false;
+        
+        public var isPremiumIGR:Boolean = false;
     }
 }

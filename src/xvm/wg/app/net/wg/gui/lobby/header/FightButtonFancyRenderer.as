@@ -35,6 +35,7 @@ package net.wg.gui.lobby.header
         override protected function configUI() : void
         {
             super.configUI();
+            mouseEnabledOnDisabled = true;
             if(!constraintsDisabled)
             {
                 constraints.addElement(this.icon.name,this.icon,Constraints.LEFT | Constraints.TOP);
@@ -61,15 +62,18 @@ package net.wg.gui.lobby.header
         
         private function onButtonClick(param1:ButtonEvent) : void
         {
+            App.toolTipMgr.hide();
+            if(!enabled)
+            {
+                return;
+            }
             dispatchEvent(new FancyRendererEvent(FancyRendererEvent.RENDERER_CLICK,true));
         }
         
         protected function onMouseOver(param1:MouseEvent) : void
         {
-            if(data.tooltip)
-            {
-                App.toolTipMgr.showComplex(this.data.tooltip);
-            }
+            var _loc2_:BattleSelectDropDownVO = BattleSelectDropDownVO(data);
+            dispatchEvent(new FancyRendererEvent(FancyRendererEvent.RENDERER_OVER,true,false,_loc2_.data));
         }
         
         protected function onMouseOut(param1:MouseEvent) : void

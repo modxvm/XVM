@@ -23,6 +23,12 @@ package net.wg.infrastructure.base.meta
         
         function as_loadingStop() : void;
         
-        function as_configure(param1:String, param2:Boolean) : void;
+        function as_configure(param1:Boolean, param2:String, param3:Boolean) : void;
+        
+        function as_setBrowserSize(param1:Number, param2:Number) : void;
+        
+        function as_showServiceView(param1:String, param2:String) : void;
+        
+        function as_hideServiceView() : void;
     }
 }

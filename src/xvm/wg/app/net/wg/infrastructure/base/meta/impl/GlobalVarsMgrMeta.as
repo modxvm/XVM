@@ -45,6 +45,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var isRentalsEnabled:Function = null;
         
+        public var isPotapovQuestEnabled:Function = null;
+        
         public function isDevelopmentS() : Boolean
         {
             App.utils.asserter.assertNotNull(this.isDevelopment,"isDevelopment" + Errors.CANT_NULL);
@@ -145,6 +147,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.isRentalsEnabled,"isRentalsEnabled" + Errors.CANT_NULL);
             return this.isRentalsEnabled();
+        }
+        
+        public function isPotapovQuestEnabledS() : Boolean
+        {
+            App.utils.asserter.assertNotNull(this.isPotapovQuestEnabled,"isPotapovQuestEnabled" + Errors.CANT_NULL);
+            return this.isPotapovQuestEnabled();
         }
     }
 }

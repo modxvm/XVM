@@ -504,5 +504,10 @@ package net.wg.gui.components.controls
         this.hitMc = null;
         super.onDispose();
     }
+    
+    public function canPlaySound(param1:String) : Boolean
+    {
+        return this.enabled;
+    }
 }
 }

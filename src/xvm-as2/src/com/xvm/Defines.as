@@ -5,7 +5,7 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "5.4.1.3";
+    public static var XVM_VERSION:String = "5.4.2-dev";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.9.4";
     public static var CONFIG_VERSION:String = "5.1.0";

@@ -30,7 +30,7 @@ package net.wg.infrastructure.base.meta.impl
             this.viewLoadError(param1,param2,param3);
         }
         
-        public function viewInitializationErrorS(param1:String, param2:Object, param3:String) : void
+        public function viewInitializationErrorS(param1:Object, param2:String, param3:String) : void
         {
             App.utils.asserter.assertNotNull(this.viewInitializationError,"viewInitializationError" + Errors.CANT_NULL);
             this.viewInitializationError(param1,param2,param3);

@@ -7,6 +7,7 @@ package net.wg.gui.lobby.header
     import net.wg.gui.lobby.header.events.BattleTypeSelectorEvent;
     import scaleform.clik.events.ListEvent;
     import net.wg.gui.components.controls.events.FancyRendererEvent;
+    import net.wg.data.constants.Values;
     import net.wg.gui.components.popOvers.PopOverConst;
     import flash.display.Graphics;
     import scaleform.clik.constants.InvalidationType;
@@ -64,6 +65,16 @@ package net.wg.gui.lobby.header
             if(!hasEventListener(ListEvent.INDEX_CHANGE))
             {
                 addEventListener(FancyRendererEvent.RENDERER_CLICK,this.onFightSelect,false,0,true);
+                addEventListener(FancyRendererEvent.RENDERER_OVER,this.onFightItemOver,false,0,true);
+            }
+        }
+        
+        private function onFightItemOver(param1:FancyRendererEvent) : void
+        {
+            var _loc2_:String = getTooltipData(param1.itemData);
+            if((_loc2_) && !(_loc2_ == Values.EMPTY_STR))
+            {
+                App.toolTipMgr.showComplex(_loc2_);
             }
         }
         
@@ -162,6 +173,7 @@ package net.wg.gui.lobby.header
             this.demonstrationItem.removeEventListener(BattleTypeSelectorEvent.BATTLE_TYPE_ITEM_EVENT,this.onDemoClick);
             this.demonstrationItem.dispose();
             removeEventListener(FancyRendererEvent.RENDERER_CLICK,this.onFightSelect);
+            removeEventListener(FancyRendererEvent.RENDERER_OVER,this.onFightItemOver);
             super.onDispose();
         }
         

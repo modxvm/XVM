@@ -5,6 +5,7 @@ package net.wg.gui.components.advanced
     import net.wg.infrastructure.interfaces.entity.IFocusContainer;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import flash.text.TextField;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import flash.display.Sprite;
     import net.wg.gui.components.advanced.calendar.DayRenderer;
     import flash.display.InteractiveObject;
@@ -64,9 +65,9 @@ package net.wg.gui.components.advanced
         
         public var messageTF:TextField;
         
-        public var prevMonthButton:ButtonDnmIcon;
+        public var prevMonthButton:IButtonIconLoader;
         
-        public var nextMonthButton:ButtonDnmIcon;
+        public var nextMonthButton:IButtonIconLoader;
         
         public var weekDaysContainer:Sprite;
         
@@ -180,18 +181,18 @@ package net.wg.gui.components.advanced
         
         override protected function draw() : void
         {
-            var _loc1_:String = null;
+            var _loc1_:* = NaN;
             super.draw();
             if(isInvalid(INVALID_DISPLAY_DATE,INVALID_HEADER))
             {
-                _loc1_ = App.utils.dateTime.getMonthName(this._displayDate.month,false);
                 if(this._showYear)
                 {
-                    this.monthTF.text = _loc1_ + " " + this._displayDate.fullYear;
+                    _loc1_ = App.utils.dateTime.toPyTimestamp(this._displayDate);
+                    this.monthTF.text = formatYMHeaderS(_loc1_);
                 }
                 else
                 {
-                    this.monthTF.text = _loc1_;
+                    this.monthTF.text = App.utils.dateTime.getMonthName(this._displayDate.month,false);
                 }
             }
             if(isInvalid(INVALID_WEEK_START_DAY,INVALID_WEEK_DAY_RENDERER,INVALID_DAYS_LAYOUT))

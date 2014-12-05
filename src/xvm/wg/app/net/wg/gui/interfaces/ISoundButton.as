@@ -41,5 +41,9 @@ package net.wg.gui.interfaces
         function get toggle() : Boolean;
         
         function set toggle(param1:Boolean) : void;
+        
+        function get mouseEnabledOnDisabled() : Boolean;
+        
+        function set mouseEnabledOnDisabled(param1:Boolean) : void;
     }
 }

@@ -123,7 +123,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             {
                 this.controlPanel.setData(this.model.actionData);
             }
-            this.assignPlayers.setData(this.model.assignLbl,this.model.playerCount,this.model.isTutorial,this.model.maxPlayerCount);
+            var _loc3_:String = this.model.isAssigned?this.model.assignLbl:null;
+            this.assignPlayers.setData(_loc3_,this.model.garrisonLbl,this.model.playerCount,this.model.isTutorial,this.model.maxPlayerCount);
             if(!_loc2_)
             {
                 this.dynSeparator.y = Math.round(this.body.y + this.body.height - DYN_SEPARATOR_PADDING);

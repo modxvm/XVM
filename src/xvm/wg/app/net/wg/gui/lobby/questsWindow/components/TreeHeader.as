@@ -31,6 +31,7 @@ package net.wg.gui.lobby.questsWindow.components
         {
             super.configUI();
             this.slideCheckBox.addEventListener(Event.SELECT,this.cbSelectHandler,false,0,true);
+            this.htmlTF.mouseEnabled = false;
         }
         
         private function cbSelectHandler(param1:Event) : void
@@ -57,11 +58,13 @@ package net.wg.gui.lobby.questsWindow.components
         
         override public function setData(param1:Object) : void
         {
-            var _loc2_:TreeContentVO = TreeContentVO(param1);
+            var _loc2_:TreeContentVO = null;
+            _loc2_ = TreeContentVO(param1);
             this.slideCheckBox.selected = _loc2_.isOpened;
             this.slideCheckBox.enabled = _loc2_.isResizable;
             this.label = _loc2_.headerTitle;
             this.htmlLabel = _loc2_.headerHtmlPart;
+            super.setData(param1);
         }
         
         override public function get selected() : Boolean

@@ -18,20 +18,19 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     import net.wg.gui.lobby.fortifications.data.FunctionalStates;
     import flash.display.DisplayObject;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.gui.events.ContextMenuEvent;
     import net.wg.gui.lobby.fortifications.events.FortBuildingAnimationEvent;
     import flash.events.MouseEvent;
     import net.wg.data.constants.Values;
-    import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingsContainer;
     import net.wg.infrastructure.exceptions.InfrastructureException;
     import net.wg.gui.lobby.fortifications.cmp.build.IArrowWithNut;
     import net.wg.data.constants.Cursors;
-    import net.wg.gui.lobby.fortifications.events.FortBuildingEvent;
-    import net.wg.gui.lobby.fortifications.utils.IBuildingsCIGenerator;
-    import scaleform.gfx.MouseEventEx;
     import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
-    import net.wg.gui.lobby.fortifications.utils.impl.BuildingsCIGenerator;
+    import net.wg.gui.lobby.fortifications.events.FortBuildingEvent;
     import flash.events.Event;
+    import net.wg.gui.lobby.fortifications.utils.impl.BuildingsCIGenerator;
+    import net.wg.gui.lobby.fortifications.utils.IBuildingsCIGenerator;
+    import flash.events.IEventDispatcher;
+    import net.wg.gui.events.ContextMenuEvent;
     
     public class FortBuilding extends FortBuildingUIBase implements IFortBuilding
     {
@@ -54,6 +53,18 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         private static var ALPHA_ENABLED:Number = 1;
         
         private static var HALF_TURN_SCHEDULER_TIME:int = 2000;
+        
+        private static var RIGHT_BUTTON_ACTION_TYPE:int = 1;
+        
+        private static var LEFT_BUTTON_ACTION_TYPE:int = 2;
+        
+        private static var DEFAULT_ACTION_TYPE:int = 0;
+        
+        private static var MAX_FRAME_COUNT:int = 2;
+        
+        private static var INCREMENT_STEP:int = 1;
+        
+        private static var DEFAULT_FRAME_COUNT:int = 0;
         
         private static var hitAreas:Array = [new Rectangle(15,50,140,82),new Rectangle(6,54,160,91),new Rectangle(49,58,83,65),new Rectangle(15,51,134,81),new Rectangle(10,49,145,85),new Rectangle(13,51,137,82),new Rectangle(28,52,118,82),new Rectangle(34,57,82,56),new Rectangle(12,52,135,82),new Rectangle(25,52,95,65)];
         
@@ -127,11 +138,16 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var latestLevel:int = -1;
         
-        private var forceResetAnimation:Boolean = false;
+        private var _getAdvancedTooltipData:Function = null;
         
         public function getCustomHitArea() : InteractiveObject
         {
             return hitAreaControl;
+        }
+        
+        public function set getAdvancedToolTipFunc(param1:Function) : void
+        {
+            this._getAdvancedTooltipData = param1;
         }
         
         public function setData(param1:BuildingVO) : void
@@ -181,7 +197,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         public function updateTransportMode(param1:FortModeVO) : void
         {
-            DebugUtils.LOG_DEBUG("building: " + name + " uid:" + this.uid + " inited:" + initialized);
             switch(FortCommonUtils.instance.getFunctionalState(param1))
             {
                 case FunctionalStates.ENTER:
@@ -330,8 +345,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                 return;
             }
-            this.frameCount = 0;
-            this.actionType = 0;
+            this.frameCount = DEFAULT_FRAME_COUNT;
+            this.actionType = DEFAULT_ACTION_TYPE;
             this.selected = param1;
         }
         
@@ -380,15 +395,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 this.model = null;
             }
             this.commons = null;
-            if(this._contextMenu != null)
-            {
-                DisplayObject(this._contextMenu).removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
-                DisplayObject(this._contextMenu).removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.closeEventHandler);
-                this._contextMenu = null;
-            }
+            this.removeContextMenu();
             animationController.removeEventListener(FortBuildingAnimationEvent.END_ANIMATION,this.animationControllerEndAnimation);
             animationController.dispose();
             animationController = null;
+            this._getAdvancedTooltipData = null;
             super.onDispose();
         }
         
@@ -682,8 +693,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         private function updateOrderTime() : void
         {
             var _loc1_:Boolean = this.canShowOrderTime();
-            var _loc2_:Boolean = orderProcess.visible;
-            var _loc3_:String = orderProcess.currentLabel;
+            var _loc2_:String = orderProcess.currentLabel;
             orderProcess.visible = _loc1_;
             if(_loc1_)
             {
@@ -696,7 +706,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 }
                 else
                 {
-                    if(_loc3_ != "normal")
+                    if(_loc2_ != "normal")
                     {
                         orderProcess.gotoAndStop("normal");
                     }
@@ -743,7 +753,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private function getBuildingTooltipData(param1:String) : Array
         {
-            return IFortBuildingsContainer(parent).getBuildingTooltipData(param1);
+            App.utils.asserter.assertNotNull(this._getAdvancedTooltipData,"_getAdvancedTooltipData function" + Errors.CANT_NULL);
+            return this._getAdvancedTooltipData(param1);
         }
         
         private function createSimpleTooltipData() : void
@@ -773,32 +784,32 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private function setState(param1:Number) : void
         {
-            var _loc2_:String = null;
+            var _loc3_:String = null;
             App.utils.asserter.assert(!(FORTIFICATION_ALIASES.STATES.indexOf(param1) == -1),"Unknown build state:" + param1,InfrastructureException);
             if(!this.isInNormalMode())
             {
                 this.updateBuildingState();
                 return;
             }
-            this.forceResetAnimation = false;
+            var _loc2_:* = false;
             if(animationController.isPlayingAnimation)
             {
                 if(this.model.uid == FORTIFICATION_ALIASES.FORT_UNKNOWN && !(this.latestUID == null))
                 {
-                    this.forceResetAnimation = true;
+                    _loc2_ = true;
                     this.latestUID = null;
                 }
                 if(!(this.model.uid == FORTIFICATION_ALIASES.FORT_UNKNOWN) && this.latestUID == null)
                 {
                     this.latestUID = this.model.uid;
-                    this.forceResetAnimation = true;
+                    _loc2_ = true;
                 }
                 if(this.model.buildingLevel > this.latestLevel && this.model.buildingLevel >= 2)
                 {
-                    this.forceResetAnimation = true;
+                    _loc2_ = true;
                     this.latestLevel = this.model.buildingLevel;
                 }
-                if(this.forceResetAnimation)
+                if(_loc2_)
                 {
                     this._lastState = -1;
                     animationController.resetAnimationType();
@@ -832,8 +843,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                     {
                         this.gotoBuildingState(this.model.progress,this.model.uid);
                         trowel.visible = false;
-                        _loc2_ = this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION_DEF?FORTIFICATION_ALIASES.FORT_FOUNDATION:buildingMc.currentState();
-                        animationController.setAnimationType(this.model.animationType,_loc2_);
+                        _loc3_ = this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION_DEF?FORTIFICATION_ALIASES.FORT_FOUNDATION:buildingMc.currentState();
+                        animationController.setAnimationType(this.model.animationType,_loc3_);
                         return;
                     }
                 }
@@ -1043,7 +1054,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         {
             if(this.isDisableCursor)
             {
-                App.cursor.setCursor(Cursors.ARROW);
+                App.cursor.as_setCursor(Cursors.ARROW);
             }
             this.mouseOverTrigger = true;
             if(!this.selected)
@@ -1063,82 +1074,94 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private function onDownHitAreaHandler(param1:MouseEvent) : void
         {
-            var _loc3_:FortBuildingEvent = null;
-            var _loc4_:IBuildingsCIGenerator = null;
-            var _loc2_:MouseEventEx = param1 as MouseEventEx;
-            if(!this._userCanAddBuilding && (this.commons.isLeftButton(MouseEventEx(param1))) && (this.isTrowelState()))
+            if(!this._userCanAddBuilding && (this.commons.isLeftButton(param1)) && (this.isTrowelState()))
             {
                 return;
             }
-            if(!this.model.isOpenCtxMenu && (this.commons.isRightButton(MouseEventEx(param1))))
+            if(!this.model.isOpenCtxMenu && (this.commons.isRightButton(param1)))
             {
                 return;
             }
-            if(this.model.progress == FORTIFICATION_ALIASES.STATE_TROWEL && (this._userCanAddBuilding) && !this.model.isFortFrozen && !this.model.isBaseBuildingDamaged && (this.commons.isLeftButton(_loc2_)))
+            if(this.model.progress == FORTIFICATION_ALIASES.STATE_TROWEL && (this._userCanAddBuilding) && !this.model.isFortFrozen && !this.model.isBaseBuildingDamaged && (this.commons.isLeftButton(param1)))
             {
-                _loc3_ = new FortBuildingEvent(FortBuildingEvent.BUY_BUILDINGS);
-                _loc3_.position = this.model.position;
-                _loc3_.direction = this.model.direction;
-                dispatchEvent(_loc3_);
+                this.dispatchBuyBuildingEvent();
                 return;
             }
-            if((this.commons.isRightButton(_loc2_)) && (this.isShowCtxMenu) && (this.model.ctxMenuData))
+            if((this.commons.isRightButton(param1)) && (this.isShowCtxMenu) && (this.model.ctxMenuData))
             {
                 App.eventLogManager.logSubSystem(EVENT_LOG_CONSTANTS.SST_CONTEXT_MENU,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_OPEN,0,0);
                 if(this.isTutorial)
                 {
                     return;
                 }
-                _loc4_ = new BuildingsCIGenerator();
-                this.data = _loc4_.generateGeneralCtxItems(this.model.ctxMenuData);
-                this.actionType = 1;
-                App.stage.addEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
+                this.onProcessingRightButton();
             }
-            else if(this.commons.isLeftButton(_loc2_))
+            else if(this.commons.isLeftButton(param1))
             {
-                this.actionType = 2;
-                App.stage.addEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
+                this.onProcessingLeftButton();
             }
             
         }
         
-        private function enterFrameHandlerA(param1:Event) : void
+        private function dispatchBuyBuildingEvent() : void
+        {
+            var _loc1_:FortBuildingEvent = new FortBuildingEvent(FortBuildingEvent.BUY_BUILDINGS);
+            _loc1_.position = this.model.position;
+            _loc1_.direction = this.model.direction;
+            dispatchEvent(_loc1_);
+        }
+        
+        private function onProcessingLeftButton() : void
+        {
+            this.actionType = LEFT_BUTTON_ACTION_TYPE;
+            App.stage.addEventListener(Event.ENTER_FRAME,this.onEnterFrameStageHandler);
+        }
+        
+        private function onProcessingRightButton() : void
+        {
+            var _loc1_:IBuildingsCIGenerator = new BuildingsCIGenerator();
+            this.data = _loc1_.generateGeneralCtxItems(this.model.ctxMenuData);
+            this.actionType = RIGHT_BUTTON_ACTION_TYPE;
+            App.stage.addEventListener(Event.ENTER_FRAME,this.onEnterFrameStageHandler);
+        }
+        
+        private function onEnterFrameStageHandler(param1:Event) : void
         {
             var _loc2_:FortBuildingEvent = null;
-            if(this.frameCount >= 2)
+            if(this.frameCount >= MAX_FRAME_COUNT)
             {
-                if(this.actionType == 1)
+                if(this.actionType == RIGHT_BUTTON_ACTION_TYPE)
                 {
                     if(this.requestOpenCtxMenu)
                     {
-                        this.actionType = 0;
-                        this.frameCount = 0;
-                        App.stage.removeEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
+                        this.actionType = DEFAULT_ACTION_TYPE;
+                        this.frameCount = DEFAULT_FRAME_COUNT;
+                        App.stage.removeEventListener(Event.ENTER_FRAME,this.onEnterFrameStageHandler);
                         return;
                     }
                     this.updateExternalRequest(true);
                     App.popoverMgr.hide();
                     this._contextMenu = App.contextMenuMgr.showFortificationCtxMenu(buildingMc,this.data,this.model.uid);
-                    DisplayObject(this._contextMenu).addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
-                    DisplayObject(this._contextMenu).addEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.closeEventHandler);
+                    IEventDispatcher(this._contextMenu).addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
+                    IEventDispatcher(this._contextMenu).addEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.closeEventHandler);
                 }
-                else if(this.actionType == 2)
+                else if(this.actionType == LEFT_BUTTON_ACTION_TYPE)
                 {
                     this.updateExternalRequest(false);
                     App.contextMenuMgr.hide();
                 }
                 
-                if(this.actionType > 0)
+                if(this.actionType > DEFAULT_ACTION_TYPE)
                 {
-                    this.actionType = 0;
+                    this.actionType = DEFAULT_ACTION_TYPE;
                 }
                 _loc2_ = new FortBuildingEvent(FortBuildingEvent.BUILDING_SELECTED);
                 _loc2_.uid = this.uid;
                 _loc2_.isOpenedCtxMenu = this.requestOpenCtxMenu;
                 dispatchEvent(_loc2_);
-                App.stage.removeEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
+                App.stage.removeEventListener(Event.ENTER_FRAME,this.onEnterFrameStageHandler);
             }
-            this.frameCount = this.frameCount + 1;
+            this.frameCount = this.frameCount + INCREMENT_STEP;
         }
         
         private function closeEventHandler(param1:ContextMenuEvent) : void
@@ -1148,9 +1171,17 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                 this.forceSelected = false;
             }
-            DisplayObject(this._contextMenu).removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
-            DisplayObject(this._contextMenu).removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.closeEventHandler);
-            this._contextMenu = null;
+            this.removeContextMenu();
+        }
+        
+        private function removeContextMenu() : void
+        {
+            if(this._contextMenu != null)
+            {
+                IEventDispatcher(this._contextMenu).removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
+                IEventDispatcher(this._contextMenu).removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.closeEventHandler);
+                this._contextMenu = null;
+            }
         }
     }
 }

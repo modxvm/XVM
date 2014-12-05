@@ -14,5 +14,9 @@ package net.wg.infrastructure.base.meta
         function logoffClickS() : void;
         
         function quitClickS() : void;
+        
+        function versionInfoClickS() : void;
+        
+        function as_setVersionMessage(param1:String, param2:Boolean) : void;
     }
 }

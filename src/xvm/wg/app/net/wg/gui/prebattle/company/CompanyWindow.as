@@ -3,7 +3,7 @@ package net.wg.gui.prebattle.company
     import net.wg.gui.prebattle.meta.impl.CompanyWindowMeta;
     import net.wg.gui.prebattle.meta.ICompanyWindowMeta;
     import net.wg.gui.prebattle.controls.TeamMemberRenderer;
-    import net.wg.gui.components.controls.IconButton;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import flash.text.TextField;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.TextInput;
@@ -49,21 +49,23 @@ package net.wg.gui.prebattle.company
         
         public var levelTooltip:String;
         
-        public var upAllButton:IconButton;
+        public var upAllButton:IButtonIconLoader;
         
-        public var downAllButton:IconButton;
+        public var addToAssignBtn:IButtonIconLoader;
+        
+        public var removeFromAssignBtn:IButtonIconLoader;
+        
+        public var commitEditButton:IButtonIconLoader;
+        
+        public var downAllButton:IButtonIconLoader;
+        
+        public var editButton:IButtonIconLoader;
         
         public var limitsLabel:TextField;
         
         public var levelSPGTooltip:String;
         
         public var levelTotalTooltip:String;
-        
-        public var addToAssignBtn:IconButton;
-        
-        public var removeFromAssignBtn:IconButton;
-        
-        public var commitEditButton:IconButton;
         
         public var topBG:MovieClip;
         
@@ -100,8 +102,6 @@ package net.wg.gui.prebattle.company
         public var inviteButton:SoundButtonEx;
         
         public var division:DropdownMenu;
-        
-        public var editButton:IconButton;
         
         public var unassignedList:ScrollingListEx;
         
@@ -396,6 +396,12 @@ package net.wg.gui.prebattle.company
         override protected function configUI() : void
         {
             super.configUI();
+            this.upAllButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_DOUBLE_RIGHT_ARROW_ICON;
+            this.addToAssignBtn.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_SINGLE_RIGHT_ARROW_ICON;
+            this.removeFromAssignBtn.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_SINGLE_LEFT_ARROW_ICON;
+            this.downAllButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_DOUBLE_LEFT_ARROW_ICON;
+            this.commitEditButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_ENTER;
+            this.editButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_EDIT;
             this.hiddenItemRenderer.visible = false;
             this.assignedList.labelField = "fullName";
             this.unassignedList.labelField = "fullName";

@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onDateSelected:Function = null;
         
+        public var formatYMHeader:Function = null;
+        
         public function onMonthChangedS(param1:Number) : void
         {
             App.utils.asserter.assertNotNull(this.onMonthChanged,"onMonthChanged" + Errors.CANT_NULL);
@@ -25,6 +27,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onDateSelected,"onDateSelected" + Errors.CANT_NULL);
             this.onDateSelected(param1);
+        }
+        
+        public function formatYMHeaderS(param1:Number) : String
+        {
+            App.utils.asserter.assertNotNull(this.formatYMHeader,"formatYMHeader" + Errors.CANT_NULL);
+            return this.formatYMHeader(param1);
         }
     }
 }

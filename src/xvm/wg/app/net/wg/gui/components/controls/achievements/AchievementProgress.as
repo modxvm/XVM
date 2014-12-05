@@ -1,7 +1,7 @@
 package net.wg.gui.components.controls.achievements
 {
+    import net.wg.gui.lobby.profile.data.ProgressSimpleInfo;
     import flash.events.Event;
-    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
     
     public class AchievementProgress extends AchievementCounter
     {
@@ -59,13 +59,31 @@ package net.wg.gui.components.controls.achievements
         
         private var progress:AchievementProgressComponent;
         
-        private var progressBarNeedToShow:Boolean;
+        private var _progressInfo:ProgressSimpleInfo;
+        
+        public function set progressInfo(param1:ProgressSimpleInfo) : void
+        {
+            if(this._progressInfo != param1)
+            {
+                this._progressInfo = param1;
+                invalidate(PROGRESS_BAR_INVALID);
+            }
+            else if((this._progressInfo) && (param1))
+            {
+                if(!this._progressInfo.isEquals(param1))
+                {
+                    this._progressInfo = param1;
+                    invalidate(PROGRESS_BAR_INVALID);
+                }
+            }
+            
+        }
         
         override protected function draw() : void
         {
             if(isInvalid(PROGRESS_BAR_INVALID))
             {
-                if(this.progressBarNeedToShow)
+                if(this._progressInfo != null)
                 {
                     if(!this.progress)
                     {
@@ -73,6 +91,13 @@ package net.wg.gui.components.controls.achievements
                         this.progress.x = loader.x + (loader.originalWidth - this.progress.width) >> 1;
                         this.progress.y = loader.y + loader.originalHeight;
                         addChild(this.progress);
+                    }
+                    if(this.progress)
+                    {
+                        this.progress.progressBar.minimum = this._progressInfo.min;
+                        this.progress.progressBar.maximum = this._progressInfo.max;
+                        this.progress.progressBar.value = this._progressInfo.current;
+                        this.progress.progressTextField.text = getShortTextValue(this._progressInfo.current) + " / " + getShortTextValue(this._progressInfo.max);
                     }
                 }
                 else if(this.progress)
@@ -82,7 +107,7 @@ package net.wg.gui.components.controls.achievements
                     this.progress = null;
                 }
                 
-                this.applyData();
+                applyData();
             }
             super.draw();
         }
@@ -90,45 +115,6 @@ package net.wg.gui.components.controls.achievements
         override public function validateNow(param1:Event = null) : void
         {
             super.validateNow(param1);
-        }
-        
-        override protected function applyData() : void
-        {
-            var _loc2_:* = NaN;
-            var _loc3_:* = NaN;
-            super.applyData();
-            var _loc1_:ProfileAchievementVO = data as ProfileAchievementVO;
-            if(_loc1_)
-            {
-                _loc2_ = _loc1_.lvlUpTotalValue;
-                _loc3_ = _loc2_ - _loc1_.lvlUpValue;
-                if(this.progress)
-                {
-                    this.progress.progressBar.minimum = 0;
-                    this.progress.progressBar.maximum = _loc2_;
-                    this.progress.progressBar.value = _loc3_;
-                    this.progress.progressTextField.text = getShortTextValue(_loc3_) + " / " + getShortTextValue(_loc2_);
-                }
-            }
-        }
-        
-        protected function showProgress() : void
-        {
-            this.setProgressBarVisible(true);
-        }
-        
-        protected function hideProgress() : void
-        {
-            this.setProgressBarVisible(false);
-        }
-        
-        private function setProgressBarVisible(param1:Boolean) : void
-        {
-            if(this.progressBarNeedToShow != param1)
-            {
-                this.progressBarNeedToShow = param1;
-                invalidate(PROGRESS_BAR_INVALID);
-            }
         }
     }
 }

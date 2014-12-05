@@ -5,7 +5,7 @@ package net.wg.gui.lobby.settings
     import net.wg.gui.components.controls.Slider;
     import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.components.controls.DropdownMenu;
-    import net.wg.gui.components.controls.IconButton;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import net.wg.gui.lobby.settings.components.KeyInput;
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.text.TextField;
@@ -71,7 +71,7 @@ package net.wg.gui.lobby.settings
         
         public var alternativeVoicesDropDown:DropdownMenu = null;
         
-        public var testAlternativeVoicesButton:IconButton = null;
+        public var testAlternativeVoicesButton:IButtonIconLoader = null;
         
         public var voiceConnectFieldSet:FieldSet = null;
         
@@ -124,6 +124,9 @@ package net.wg.gui.lobby.settings
             this.guiVolumeLabel.text = SETTINGS.SOUNDS_GUI;
             this.ambientVolumeLabel.text = SETTINGS.SOUNDS_AMBIENT;
             this.nationalVoicesCheckbox.label = SETTINGS.SOUND_NATIONALVOICES;
+            this.testAlternativeVoicesButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_SOUND;
+            this.testAlternativeVoicesButton.iconOffsetLeft = 2;
+            this.testAlternativeVoicesButton.iconOffsetTop = -1;
             this.voiceConnectFieldSet.label = SETTINGS.VOICE_CHAT_FIELDSET_HEADER;
             this.enableVoIPCheckbox.label = SETTINGS.VOICE_CHAT_VOICECHATENABLE;
             this.PTTLabel.text = SETTINGS.VOICE_CHAT_PTT;

@@ -10,8 +10,8 @@ package net.wg.infrastructure.base.meta
         
         function viewLoadErrorS(param1:String, param2:String, param3:String) : void;
         
-        function viewInitializationErrorS(param1:String, param2:Object, param3:String) : void;
+        function viewInitializationErrorS(param1:Object, param2:String, param3:String) : void;
         
-        function as_loadView(param1:Object, param2:String, param3:String, param4:String) : void;
+        function as_loadView(param1:Object, param2:String, param3:String) : void;
     }
 }

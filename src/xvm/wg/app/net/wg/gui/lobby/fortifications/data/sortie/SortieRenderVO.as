@@ -17,6 +17,10 @@ package net.wg.gui.lobby.fortifications.data.sortie
         
         public var creatorName:String = "";
         
+        public var description:String = "";
+        
+        public var isInBattle:Boolean = false;
+        
         public var divisionName:String = "";
         
         public var division:int = -1;

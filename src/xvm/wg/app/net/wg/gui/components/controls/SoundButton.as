@@ -297,5 +297,10 @@ package net.wg.gui.components.controls
                 }
             }
         }
+        
+        public function canPlaySound(param1:String) : Boolean
+        {
+            return this.enabled;
+        }
     }
 }

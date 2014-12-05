@@ -1,7 +1,11 @@
 @echo off
 
-set patch_swfs=battle.swf Minimap.swf PlayersPanel.swf
-set patch_swfs=%patch_swfs% StatisticForm.swf TeamBasesPanel.swf VehicleMarkersManager.swf
+set patch_swfs=battle.swf
+set patch_swfs=%patch_swfs% Minimap.swf
+set patch_swfs=%patch_swfs% PlayersPanel.swf
+set patch_swfs=%patch_swfs% StatisticForm.swf
+set patch_swfs=%patch_swfs% TeamBasesPanel.swf
+set patch_swfs=%patch_swfs% VehicleMarkersManager.swf
 
 rem Patch SWFs
 for %%i in (%patch_swfs%) do call :do_patch_swf %%~ni

@@ -103,7 +103,7 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
                 for(_loc2_ in param1)
                 {
                     _loc3_ = Number(_loc2_);
-                    _loc4_ = this._vehiclesDataListIndexes.indexOf(_loc3_);
+                    _loc4_ = this.getIndexByCD(_loc3_);
                     if(param1[_loc2_] == null && _loc4_ >= 0)
                     {
                         this.deleteByIndex(_loc4_);
@@ -166,6 +166,16 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             var _loc2_:VehicleCarouselVO = this._vehiclesDataList[param1];
             this._vehiclesDataList.splice(param1,1);
             this._removedData.push(_loc2_);
+        }
+        
+        private function getIndexByCD(param1:Number) : Number
+        {
+            return this._vehiclesDataListIndexes.indexOf(param1);
+        }
+        
+        public function getVOByCD(param1:Number) : VehicleCarouselVO
+        {
+            return this.getVOByNum(this.getIndexByCD(param1));
         }
         
         public function getVOByNum(param1:Number) : VehicleCarouselVO

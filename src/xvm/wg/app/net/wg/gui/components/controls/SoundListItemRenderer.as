@@ -25,6 +25,8 @@ package net.wg.gui.components.controls
         
         private var _useRightButton:Boolean = false;
         
+        private var _mouseEnabledOnDisabled:Boolean = false;
+        
         public function get soundType() : String
         {
             return this._soundType;
@@ -41,12 +43,15 @@ package net.wg.gui.components.controls
         override public function set enabled(param1:Boolean) : void
         {
             super.enabled = param1;
+            buttonMode = param1;
+            this.updateMouseEnabled();
         }
         
         override protected function configUI() : void
         {
             super.configUI();
-            buttonMode = true;
+            buttonMode = enabled;
+            this.updateMouseEnabled();
             if(App.soundMgr)
             {
                 App.soundMgr.addSoundsHdlrs(this);
@@ -130,10 +135,11 @@ package net.wg.gui.components.controls
         
         protected function handleMousePressEx(param1:MouseEvent) : void
         {
+            var _loc4_:uint = 0;
             var _loc5_:ButtonEvent = null;
             var _loc2_:MouseEventEx = param1 as MouseEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
-            var _loc4_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
+            _loc4_ = _loc2_ == null?0:_loc2_.buttonIdx;
             _mouseDown = _mouseDown | 1 << _loc3_;
             if(enabled)
             {
@@ -232,6 +238,30 @@ package net.wg.gui.components.controls
                 App.soundMgr.removeSoundHdlrs(this);
             }
             super.onDispose();
+        }
+        
+        public function get mouseEnabledOnDisabled() : Boolean
+        {
+            return this._mouseEnabledOnDisabled;
+        }
+        
+        public function set mouseEnabledOnDisabled(param1:Boolean) : void
+        {
+            this._mouseEnabledOnDisabled = param1;
+            this.updateMouseEnabled();
+        }
+        
+        private function updateMouseEnabled() : void
+        {
+            if((this._mouseEnabledOnDisabled) && !enabled)
+            {
+                mouseEnabled = true;
+            }
+        }
+        
+        public function canPlaySound(param1:String) : Boolean
+        {
+            return this.enabled;
         }
     }
 }

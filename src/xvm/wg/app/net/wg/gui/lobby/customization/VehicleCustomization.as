@@ -412,11 +412,13 @@ super.onDispose();
 
 private function onViewChange(param1:IndexEvent) : void
 {
-if((this.accordion.view.currentView) && (this.accordion.view.currentView.initialized))
+var _loc2_:BaseTimedCustomizationSectionView = this.accordion.view.currentView as BaseTimedCustomizationSectionView;
+if((_loc2_) && (_loc2_.initialized))
 {
-    this.showView(this.accordion.view.currentView.getViewLinkage());
-    this.accordion.view.currentView.refreshSelection(true);
-    this.accordion.view.currentView.requestCurrentItem();
+    this.showView(_loc2_.getViewLinkage());
+    _loc2_.getItemsDP().invalidateRemote(true);
+    _loc2_.refreshSelection(true);
+    _loc2_.requestCurrentItem();
 }
 }
 

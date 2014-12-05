@@ -288,7 +288,7 @@ package net.wg.gui.components.controls
                 _loc5_.setData(param1[_loc4_]);
                 _loc5_.validateNow();
                 _loc9_ = _loc5_ as Sprite;
-                _loc9_.buttonMode = _buttonModeEnabled;
+                _loc9_.buttonMode = (_buttonModeEnabled) && (_loc5_.enabled);
                 _loc4_++;
             }
         }

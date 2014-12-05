@@ -10,12 +10,6 @@ package net.wg.data.VO
             super(param1);
         }
         
-        private var _description:String = "";
-        
-        private var _isActive:Boolean = false;
-        
-        private var _levelUpValue:String = "";
-        
         private var _name:String = "";
         
         private var _block:String = "";
@@ -24,21 +18,19 @@ package net.wg.data.VO
         
         private var _type:String = "";
         
-        private var _userName:String = "";
-        
-        private var _value:Number = -1;
+        private var _isInDossier:Boolean = false;
         
         private var _localizedValue:String = "0";
         
-        private var _isInDossier:Boolean = false;
-        
         private var _icon:Object;
         
-        public var dossierCompDescr:String = "";
+        private var _value:Number = -1;
+        
+        public var iconAlpha:Number;
         
         public var dossierType:int;
         
-        private var _showSeparator:Boolean = false;
+        public var dossierCompDescr:String = "";
         
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
@@ -50,54 +42,14 @@ package net.wg.data.VO
             return this.hasOwnProperty(param1);
         }
         
-        public function get showSeparator() : Boolean
+        public function get localizedValue() : String
         {
-            return this._showSeparator;
+            return this._localizedValue;
         }
         
-        public function set showSeparator(param1:Boolean) : void
+        public function set localizedValue(param1:String) : void
         {
-            this._showSeparator = param1;
-        }
-        
-        public function get icon() : Object
-        {
-            return this._icon;
-        }
-        
-        public function set icon(param1:Object) : void
-        {
-            this._icon = param1;
-        }
-        
-        public function get description() : String
-        {
-            return this._description;
-        }
-        
-        public function set description(param1:String) : void
-        {
-            this._description = param1;
-        }
-        
-        public function get isActive() : Boolean
-        {
-            return this._isActive;
-        }
-        
-        public function set isActive(param1:Boolean) : void
-        {
-            this._isActive = param1;
-        }
-        
-        public function get levelUpValue() : String
-        {
-            return this._levelUpValue;
-        }
-        
-        public function set levelUpValue(param1:String) : void
-        {
-            this._levelUpValue = param1;
+            this._localizedValue = param1;
         }
         
         public function get block() : String
@@ -130,6 +82,16 @@ package net.wg.data.VO
             this._section = param1;
         }
         
+        public function get icon() : Object
+        {
+            return this._icon;
+        }
+        
+        public function set icon(param1:Object) : void
+        {
+            this._icon = param1;
+        }
+        
         public function get type() : String
         {
             return this._type;
@@ -140,14 +102,14 @@ package net.wg.data.VO
             this._type = param1;
         }
         
-        public function get userName() : String
+        public function get isInDossier() : Boolean
         {
-            return this._userName;
+            return this._isInDossier;
         }
         
-        public function set userName(param1:String) : void
+        public function set isInDossier(param1:Boolean) : void
         {
-            this._userName = param1;
+            this._isInDossier = param1;
         }
         
         public function get value() : int
@@ -158,26 +120,6 @@ package net.wg.data.VO
         public function set value(param1:int) : void
         {
             this._value = param1;
-        }
-        
-        public function get localizedValue() : String
-        {
-            return this._localizedValue;
-        }
-        
-        public function set localizedValue(param1:String) : void
-        {
-            this._localizedValue = param1;
-        }
-        
-        public function get isInDossier() : Boolean
-        {
-            return this._isInDossier;
-        }
-        
-        public function set isInDossier(param1:Boolean) : void
-        {
-            this._isInDossier = param1;
         }
     }
 }

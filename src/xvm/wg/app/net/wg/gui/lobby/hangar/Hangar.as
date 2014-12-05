@@ -72,7 +72,9 @@ package net.wg.gui.lobby.hangar
         
         public var serverInfoBg:Sprite;
         
-        private var _serverInfoData:Object = null;
+        private var _serverInfoStats:String = null;
+        
+        private var _serverInfoToolTipType:String = null;
         
         private var _isShowHelpLayout:Boolean = false;
         
@@ -119,9 +121,10 @@ package net.wg.gui.lobby.hangar
             }
         }
         
-        public function as_setServerStats(param1:Object) : void
+        public function as_setServerStats(param1:String, param2:String) : void
         {
-            this._serverInfoData = param1;
+            this._serverInfoStats = param1;
+            this._serverInfoToolTipType = param2;
             invalidate(INVALIDATE_SERVER_INFO);
         }
         
@@ -279,7 +282,6 @@ package net.wg.gui.lobby.hangar
         
         override protected function onDispose() : void
         {
-            var _loc1_:String = null;
             App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
             this.igrLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onIgrRollOver);
             this.igrLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onIgrRollOut);
@@ -305,12 +307,6 @@ package net.wg.gui.lobby.hangar
             this.igrActionDaysLeft.dispose();
             this.igrActionDaysLeft = null;
             this.questsControl = null;
-            for(_loc1_ in this._serverInfoData)
-            {
-                delete this._serverInfoData[_loc1_];
-                true;
-            }
-            this._serverInfoData = null;
             this.serverInfo.dispose();
             super.onDispose();
         }
@@ -356,7 +352,7 @@ package net.wg.gui.lobby.hangar
             }
             if(isInvalid(INVALIDATE_SERVER_INFO))
             {
-                this.serverInfo.setValues(this._serverInfoData);
+                this.serverInfo.setValues(this._serverInfoStats,this._serverInfoToolTipType);
             }
         }
         

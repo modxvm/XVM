@@ -9,7 +9,7 @@ package net.wg.gui.lobby.training
     import scaleform.clik.interfaces.IDataProvider;
     import scaleform.clik.data.DataProvider;
     import flash.text.TextField;
-    import net.wg.gui.components.controls.SoundButton;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.UserNameField;
     import net.wg.gui.components.controls.TextFieldShort;
@@ -117,7 +117,7 @@ package net.wg.gui.lobby.training
         
         public var arenaVOIPLabel:TextField;
         
-        public var swapButton:SoundButton;
+        public var swapButton:IButtonIconLoader;
         
         public var closeButton:SoundButtonEx;
         
@@ -223,7 +223,7 @@ package net.wg.gui.lobby.training
         
         public function as_startCoolDownSwapButton(param1:Number) : void
         {
-            startDisableCoolDown(this.finishDisable_swapButton_CoolDownHandler,param1,this.swapButton);
+            startDisableCoolDown(this.finishDisable_swapButton_CoolDownHandler,param1,this.swapButton as UIComponent);
         }
         
         public function as_startCoolDownObserver(param1:Number) : void
@@ -357,6 +357,7 @@ package net.wg.gui.lobby.training
         this.battleIconBig.gotoAndStop(TrainingRoom.TRAINING);
         this.description.autoScroll = false;
         App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+        this.swapButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_SWAP;
         this.timeout.buttonMode = false;
         this.timeout.autoSize = this.maxPlayers.autoSize = TextFieldAutoSize.LEFT;
         this.maxPlayers.buttonMode = false;

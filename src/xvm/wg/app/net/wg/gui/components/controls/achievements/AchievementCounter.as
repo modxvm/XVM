@@ -4,7 +4,6 @@ package net.wg.gui.components.controls.achievements
     import flash.utils.getDefinitionByName;
     import net.wg.data.constants.Tooltips;
     import net.wg.gui.events.UILoaderEvent;
-    import flash.events.Event;
     import flash.events.MouseEvent;
     
     public class AchievementCounter extends CustomAchievement
@@ -21,23 +20,11 @@ package net.wg.gui.components.controls.achievements
         
         public static var LAYOUT_INVALID:String = "layoutInvalid";
         
-        public static var NONE:String = "";
-        
-        public static var RED:String = "red";
-        
-        public static var GREY:String = "grey";
-        
-        public static var YELLOW:String = "yellow";
-        
-        public static var BEIGE:String = "beige";
-        
-        public static var SMALL:String = "small";
-        
         protected var counter:CounterComponent;
         
-        private var currentCounterClassName:String;
-        
         private var _counterType:String;
+        
+        private var _oldCounterType:String;
         
         private var _counterValue:String;
         
@@ -54,8 +41,11 @@ package net.wg.gui.components.controls.achievements
         
         public function set counterType(param1:String) : void
         {
-            this._counterType = param1;
-            invalidate(COUNTER_TYPE_INVALID);
+            if(this._counterType != param1)
+            {
+                this._counterType = param1;
+                invalidate(COUNTER_TYPE_INVALID);
+            }
         }
         
         public function get counterValue() : String
@@ -79,51 +69,26 @@ package net.wg.gui.components.controls.achievements
         
         override protected function draw() : void
         {
-            var _loc1_:String = null;
             super.draw();
             if(isInvalid(COUNTER_TYPE_INVALID))
             {
-                if(this._counterType == GREY)
+                if(this._oldCounterType != this._counterType)
                 {
-                    _loc1_ = "GreyCounter_UI";
-                }
-                else if(this._counterType == YELLOW)
-                {
-                    _loc1_ = "YellowCounter_UI";
-                }
-                else if(this._counterType == RED)
-                {
-                    _loc1_ = "RedCounter_UI";
-                }
-                else if(this._counterType == BEIGE)
-                {
-                    _loc1_ = "BeigeCounter_UI";
-                }
-                else if(this._counterType == SMALL)
-                {
-                    _loc1_ = "SmallCounter_UI";
-                }
-                
-                
-                
-                
-                if(this.currentCounterClassName != _loc1_)
-                {
-                    this.currentCounterClassName = _loc1_;
+                    this._oldCounterType = this._counterType;
                     if(this.counter)
                     {
                         this.counter.parent.removeChild(this.counter);
                         this.counter = null;
                     }
-                    if((_loc1_) && !(_loc1_ == ""))
+                    if((this._counterType) && !(this._counterType == ""))
                     {
                         if(App.utils)
                         {
-                            this.counter = App.utils.classFactory.getComponent(_loc1_,CounterComponent);
+                            this.counter = App.utils.classFactory.getComponent(this._counterType,CounterComponent);
                         }
                         else
                         {
-                            this.counter = getDefinitionByName(_loc1_) as CounterComponent;
+                            this.counter = getDefinitionByName(this._counterType) as CounterComponent;
                         }
                         invalidate(LAYOUT_INVALID);
                     }
@@ -177,7 +142,7 @@ package net.wg.gui.components.controls.achievements
             {
                 if(data.name == "markOfMastery")
                 {
-                    App.toolTipMgr.showSpecial(Tooltips.TANK_CLASS,null,data.block,data.name,data.value);
+                    App.toolTipMgr.showSpecial(Tooltips.MARK_OF_MASTERY,null,data.block,data.name,data.value);
                 }
                 else if(data.name == "marksOnGun")
                 {
@@ -195,20 +160,6 @@ package net.wg.gui.components.controls.achievements
         {
             super.onComplete(param1);
             invalidate(LAYOUT_INVALID);
-        }
-        
-        override protected function handleStageChange(param1:Event) : void
-        {
-            if(param1.type == Event.ADDED_TO_STAGE)
-            {
-                removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange,false);
-                addEventListener(Event.RENDER,validateNow,false,0,true);
-                addEventListener(Event.ENTER_FRAME,handleEnterFrameValidation,false,0,true);
-                if(stage != null)
-                {
-                    stage.invalidate();
-                }
-            }
         }
         
         override protected function handleMouseRollOver(param1:MouseEvent) : void

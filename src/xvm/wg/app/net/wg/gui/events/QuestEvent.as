@@ -15,9 +15,21 @@ package net.wg.gui.events
         
         public var questID:String = "";
         
+        private var _eventType:int = -1;
+        
         override public function clone() : Event
         {
             return new QuestEvent(type,this.questID);
+        }
+        
+        public function get eventType() : int
+        {
+            return this._eventType;
+        }
+        
+        public function set eventType(param1:int) : void
+        {
+            this._eventType = param1;
         }
     }
 }

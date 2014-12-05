@@ -17,6 +17,8 @@ package net.wg.gui.lobby.questsWindow
             this._availableQuests = new Vector.<String>();
         }
         
+        private static var ADDITIONAL_LINK:String = "PersonalQuestSubTaskUI";
+        
         private static var DISABLED_QUESTS:String = "disabledQuests";
         
         private var data:Array;
@@ -131,30 +133,42 @@ package net.wg.gui.lobby.questsWindow
             var _loc2_:* = 0;
             var _loc3_:* = 0;
             var _loc4_:* = 0;
-            var _loc5_:ISubtaskComponent = null;
-            var _loc6_:ISubtaskComponent = null;
+            var _loc5_:* = 0;
+            var _loc6_:Object = null;
+            var _loc7_:ISubtaskComponent = null;
+            var _loc8_:String = null;
+            var _loc9_:ISubtaskComponent = null;
             if(this.data)
             {
                 _loc1_ = this.data.length;
                 if(this._tasks.length < _loc1_)
                 {
                     _loc3_ = _loc1_ - this._tasks.length;
-                    _loc4_ = 0;
-                    while(_loc4_ < _loc3_)
+                    _loc4_ = this._tasks.length;
+                    _loc5_ = 0;
+                    while(_loc5_ < _loc3_)
                     {
-                        _loc5_ = App.utils.classFactory.getComponent(this._linkage,ISubtaskComponent);
-                        this._tasks.push(_loc5_);
-                        addChild(DisplayObject(_loc5_));
+                        _loc6_ = this.data[_loc5_];
+                        _loc7_ = null;
+                        _loc8_ = this._linkage;
+                        if((_loc6_.hasOwnProperty("questType")) && _loc6_.questType == 8)
+                        {
+                            _loc8_ = ADDITIONAL_LINK;
+                        }
+                        _loc7_ = App.utils.classFactory.getComponent(_loc8_,ISubtaskComponent);
+                        this._tasks.push(_loc7_);
+                        addChild(DisplayObject(_loc7_));
                         _loc4_++;
+                        _loc5_++;
                     }
                 }
                 else if(this._tasks.length > _loc1_)
                 {
                     while(this._tasks.length > _loc1_)
                     {
-                        _loc6_ = this._tasks.pop();
-                        _loc6_.dispose();
-                        removeChild(DisplayObject(_loc6_));
+                        _loc9_ = this._tasks.pop();
+                        _loc9_.dispose();
+                        removeChild(DisplayObject(_loc9_));
                     }
                 }
                 

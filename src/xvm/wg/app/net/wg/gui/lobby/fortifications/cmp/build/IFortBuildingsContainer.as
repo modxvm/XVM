@@ -10,8 +10,6 @@ package net.wg.gui.lobby.fortifications.cmp.build
         
         function update(param1:Vector.<BuildingVO>, param2:Boolean) : void;
         
-        function getBuildingTooltipData(param1:String) : Array;
-        
         function get buildings() : Vector.<IFortBuilding>;
         
         function setBuildingData(param1:BuildingVO, param2:Boolean) : void;

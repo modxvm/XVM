@@ -17,6 +17,8 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _containerElements:Array;
         
+        public var id:int;
+        
         public function get linkage() : String
         {
             return this._linkage;

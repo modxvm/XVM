@@ -99,7 +99,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
             super.onDispose();
         }
         
-        override protected function onListRoomBtnClick(param1:ButtonEvent) : void
+        override protected function showListRoom(param1:ButtonEvent) : void
         {
             App.eventLogManager.logUIEvent(param1,0);
             var _loc2_:String = param1.target == this.fortBattleBtn?FORTIFICATION_ALIASES.FORT_CLAN_BATTLE_LIST_VIEW_UI:FORTIFICATION_ALIASES.FORT_BATTLE_ROOM_LIST_VIEW_UI;
@@ -126,7 +126,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
     
     private function onClickFortBattleBtnHandler(param1:ButtonEvent) : void
     {
-        this.onListRoomBtnClick(param1);
+        this.showListRoom(param1);
     }
     
     private function updateIntroData() : void

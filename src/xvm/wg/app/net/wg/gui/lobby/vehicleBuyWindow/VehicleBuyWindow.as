@@ -191,12 +191,11 @@ package net.wg.gui.lobby.vehicleBuyWindow
             var _loc4_:Object = null;
             var _loc5_:String = null;
             var _loc6_:ActionPriceVO = null;
-            var _loc7_:ActionPriceVO = null;
-            var _loc8_:DropShadowFilter = null;
-            var _loc9_:Object = null;
+            var _loc7_:DropShadowFilter = null;
+            var _loc8_:Object = null;
+            var _loc9_:* = NaN;
             var _loc10_:* = NaN;
-            var _loc11_:* = NaN;
-            var _loc12_:* = false;
+            var _loc11_:* = false;
             super.draw();
             if((window) && (isInvalid(WindowViewInvalidationType.POSITION_INVALID)))
             {
@@ -242,25 +241,22 @@ package net.wg.gui.lobby.vehicleBuyWindow
                 this.bodyMc.scoolBtn.data = this.initInfo.studyPriceCredits;
                 this.bodyMc.academyBtn.data = this.initInfo.studyPriceGold;
                 this.bodyMc.freeBtn.data = 0;
-                _loc6_ = this.initInfo.ammoActionPriceDataVo;
-                this.bodyMc.ammoActionPrice.setData(_loc6_);
-                this.bodyMc.ammoPrice.text = _loc1_.integer(this.initInfo.ammoPrice);
-                this.bodyMc.ammoPrice.visible = !this.bodyMc.ammoActionPrice.visible;
+                this.checkAmmo();
                 this.bodyMc.slotPrice.text = _loc1_.integer(this.initInfo.slotPrice);
-                _loc7_ = this.initInfo.slotActionPriceDataVo;
-                this.bodyMc.slotActionPrice.setData(_loc7_);
+                _loc6_ = this.initInfo.slotActionPriceDataVo;
+                this.bodyMc.slotActionPrice.setData(_loc6_);
                 this.bodyMc.slotPrice.visible = !this.bodyMc.slotActionPrice.visible;
                 this.bodyMc.scoolBtn.nation = this.bodyMc.academyBtn.nation = this.bodyMc.freeBtn.nation = this.initInfo.nation;
                 this.isTotalResultChanged = true;
-                _loc8_ = this.headerMc.tankPriceLabel.filters[0];
-                this.bodyMc.crewCheckbox.textField.filters = [_loc8_.clone()];
-                this.bodyMc.ammoCheckbox.textField.filters = [_loc8_.clone()];
-                this.bodyMc.slotCheckbox.textField.filters = [_loc8_.clone()];
+                _loc7_ = this.headerMc.tankPriceLabel.filters[0];
+                this.bodyMc.crewCheckbox.textField.filters = [_loc7_.clone()];
+                this.bodyMc.ammoCheckbox.textField.filters = [_loc7_.clone()];
+                this.bodyMc.slotCheckbox.textField.filters = [_loc7_.clone()];
                 this.updateRentItems();
-                _loc9_ = this.headerMc.rentDD.dataProvider[this.headerMc.rentDD.selectedIndex];
-                if((this.headerMc.rentDD.visible) && (_loc9_))
+                _loc8_ = this.headerMc.rentDD.dataProvider[this.headerMc.rentDD.selectedIndex];
+                if((this.headerMc.rentDD.visible) && (_loc8_))
                 {
-                    this.checkRentDDSelectedItem(_loc9_.data);
+                    this.checkRentDDSelectedItem(_loc8_.data);
                 }
                 else
                 {
@@ -276,53 +272,71 @@ package net.wg.gui.lobby.vehicleBuyWindow
             {
                 this.isTotalResultChanged = false;
                 this.headerMc.rentIcon.visible = !(this.selectedRentId == VehicleBuyRentItemVO.DEF_ITEM_ID);
+                _loc9_ = 0;
                 _loc10_ = 0;
-                _loc11_ = 0;
-                _loc10_ = _loc10_ + (this.bodyMc.slotCheckbox.selected?this.initInfo.slotPrice:0);
-                _loc11_ = _loc11_ + (this.bodyMc.ammoCheckbox.selected?this.initInfo.ammoPrice:0);
+                _loc9_ = _loc9_ + (this.bodyMc.slotCheckbox.selected?this.initInfo.slotPrice:0);
+                _loc10_ = _loc10_ + (this.bodyMc.ammoCheckbox.selected?this.initInfo.ammoPrice:0);
                 if(this.initInfo.vehiclePrice.isGold)
                 {
-                    _loc10_ = _loc10_ + this.initInfo.vehiclePrice.price;
+                    _loc9_ = _loc9_ + this.initInfo.vehiclePrice.price;
                 }
                 else
                 {
-                    _loc11_ = _loc11_ + this.initInfo.vehiclePrice.price;
+                    _loc10_ = _loc10_ + this.initInfo.vehiclePrice.price;
                 }
                 if(!this.bodyMc.crewCheckbox.selected)
                 {
                     if(this.bodyMc.isGoldPriceSelected)
                     {
-                        _loc10_ = _loc10_ + this.bodyMc.selectedPrice;
+                        _loc9_ = _loc9_ + this.bodyMc.selectedPrice;
                     }
                     else
                     {
-                        _loc11_ = _loc11_ + this.bodyMc.selectedPrice;
+                        _loc10_ = _loc10_ + this.bodyMc.selectedPrice;
                     }
                 }
-                this.footerMc.totalGoldPrice.text = _loc1_.gold(_loc10_);
-                _loc11_ = isNaN(_loc11_)?0:_loc11_;
-                this.footerMc.totalCreditsPrice.text = _loc1_.integer(_loc11_);
-                _loc12_ = true;
-                if(_loc10_ > this.userTotalGold)
+                this.footerMc.totalGoldPrice.text = _loc1_.gold(_loc9_);
+                _loc10_ = isNaN(_loc10_)?0:_loc10_;
+                this.footerMc.totalCreditsPrice.text = _loc1_.integer(_loc10_);
+                _loc11_ = true;
+                if(_loc9_ > this.userTotalGold)
                 {
                     this.footerMc.totalGoldPrice.textColor = IconText.ERROR_COLOR;
-                    _loc12_ = false;
+                    _loc11_ = false;
                 }
                 else
                 {
                     this.footerMc.totalGoldPrice.textColor = goldColor;
                 }
-                if(_loc11_ > this.userTotalCredits)
+                if(_loc10_ > this.userTotalCredits)
                 {
                     this.footerMc.totalCreditsPrice.textColor = IconText.ERROR_COLOR;
-                    _loc12_ = false;
+                    _loc11_ = false;
                 }
                 else
                 {
                     this.footerMc.totalCreditsPrice.textColor = creditsColor;
                 }
-                this.footerMc.submitBtn.enabled = (_loc12_) && (this._isSubmitBtnEnabled);
+                this.footerMc.submitBtn.enabled = (_loc11_) && (this._isSubmitBtnEnabled);
             }
+        }
+        
+        private function checkAmmo() : void
+        {
+            var _loc1_:ILocale = null;
+            if(this.initInfo.isNoAmmo)
+            {
+                _loc1_ = App.utils.locale;
+                this.bodyMc.ammoActionPrice.setData(this.initInfo.ammoActionPriceDataVo);
+                this.bodyMc.ammoPrice.text = _loc1_.integer(this.initInfo.ammoPrice);
+                this.bodyMc.ammoPrice.visible = !this.bodyMc.ammoActionPrice.visible;
+                this.bodyMc.ammoCheckbox.selected = false;
+            }
+            else
+            {
+                this.bodyMc.ammoPrice.visible = this.bodyMc.ammoActionPrice.visible = this.initInfo.isNoAmmo;
+            }
+            this.bodyMc.ammoCheckbox.visible = this.initInfo.isNoAmmo;
         }
         
         private function updateVehiclePrice() : void
@@ -338,7 +352,6 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         private function updateRentItems() : void
         {
-            var _loc1_:ILocale = null;
             this.headerMc.rentDD.visible = this.initInfo.isRentable;
             this.bodyMc.btnGroupEnabled = !this.initInfo.isStudyDisabled;
             this.bodyMc.scoolBtn.showPriceLabel = !this.initInfo.isStudyDisabled;
@@ -346,6 +359,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.bodyMc.freeBtn.showPriceLabel = !this.initInfo.isStudyDisabled;
             this.bodyMc.crewCheckbox.visible = !this.initInfo.isStudyDisabled;
             this.bodyMc.crewInVehicle.visible = this.initInfo.isStudyDisabled;
+            this.checkAmmo();
             if(this.initInfo.isRentable)
             {
                 this.headerMc.rentDD.dataProvider = new DataProvider(this.initInfo.rentDataProviderDD);
@@ -356,19 +370,6 @@ package net.wg.gui.lobby.vehicleBuyWindow
                     this.headerMc.rentDD.addEventListener(ListEvent.INDEX_CHANGE,this.onRentChange);
                     this.headerMc.rentDD.selectedIndex = this.initInfo.defSelectedRentIndex;
                 }
-                if(this.initInfo.isNoAmmo)
-                {
-                    _loc1_ = App.utils.locale;
-                    this.bodyMc.ammoActionPrice.setData(this.initInfo.ammoActionPriceDataVo);
-                    this.bodyMc.ammoPrice.text = _loc1_.integer(this.initInfo.ammoPrice);
-                    this.bodyMc.ammoPrice.visible = !this.bodyMc.ammoActionPrice.visible;
-                    this.bodyMc.ammoCheckbox.selected = false;
-                }
-                else
-                {
-                    this.bodyMc.ammoPrice.visible = this.bodyMc.ammoActionPrice.visible = this.initInfo.isNoAmmo;
-                }
-                this.bodyMc.ammoCheckbox.visible = this.initInfo.isNoAmmo;
                 if(this.initInfo.isStudyDisabled)
                 {
                     this.bodyMc.crewCheckbox.selected = false;

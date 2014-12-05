@@ -2,7 +2,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
 {
     import net.wg.gui.rally.views.list.BaseRallyDetailsSection;
     import flash.events.MouseEvent;
-    import net.wg.gui.cyberSport.controls.GrayButtonText;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.fortifications.cmp.battleRoom.SortieSimpleSlot;
     import net.wg.gui.rally.interfaces.IRallyVO;
     import net.wg.data.constants.Values;
@@ -28,7 +28,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         private var helper:SortieSlotHelper;
         
-        public var joinSortieButton:GrayButtonText;
+        public var joinSortieButton:SoundButtonEx;
         
         public var slot0:SortieSimpleSlot;
         

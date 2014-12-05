@@ -48,6 +48,8 @@ package
         
         public static var BONUSES_ITEMS_NAME:String = "#quests:bonuses/items/name";
         
+        public static var BONUSES_CUSTOMIZATION_VALUE:String = "#quests:bonuses/customization/value";
+        
         public static var BONUSES_VEHICLES_NAME:String = "#quests:bonuses/vehicles/name";
         
         public static var BONUSES_VEHICLES_CREWLVL:String = "#quests:bonuses/vehicles/crewLvl";
@@ -78,6 +80,8 @@ package
         
         public static var BONUSES_TANKMEN_DESCRIPTION:String = "#quests:bonuses/tankmen/description";
         
+        public static var BONUSES_ITEM_TANKWOMAN:String = "#quests:bonuses/item/tankwoman";
+        
         public static var QUESTS_TITLE:String = "#quests:quests/title";
         
         public static var QUESTS_CONDITIONS:String = "#quests:quests/conditions";
@@ -90,11 +94,21 @@ package
         
         public static var QUESTS_CONTENT_NOQUESTSINROAMING:String = "#quests:quests/content/noQuestsInRoaming";
         
+        public static var QUESTS_TABS_PERSONAL:String = "#quests:quests/tabs/personal";
+        
         public static var QUESTS_TABS_CURRENT:String = "#quests:quests/tabs/current";
         
         public static var QUESTS_TABS_FUTURE:String = "#quests:quests/tabs/future";
         
         public static var QUESTSCONTROL_TITLE:String = "#quests:questsControl/title";
+        
+        public static var QUESTSCONTROL_ADDITIONALTITLE_NEEDRECEIVEDAWARD:String = "#quests:questsControl/additionalTitle/needReceivedAward";
+        
+        public static var QUESTSCONTROL_ADDITIONALTITLE_FREESLOTSANDFREEQUESTS:String = "#quests:questsControl/additionalTitle/freeSlotsAndFreeQuests";
+        
+        public static var QUESTSCONTROL_ADDITIONALTITLE_FIRSTRUN:String = "#quests:questsControl/additionalTitle/firstRun";
+        
+        public static var QUESTSCONTROL_ADDITIONALTITLE_EMPTY:String = "#quests:questsControl/additionalTitle/empty";
         
         public static var QUESTS_STATUS_DONE:String = "#quests:quests/status/done";
         
@@ -103,6 +117,8 @@ package
         public static var QUESTS_STATUS_NOTDONE:String = "#quests:quests/status/notDone";
         
         public static var QUESTS_TABLE_NOVEHICLES:String = "#quests:quests/table/noVehicles";
+        
+        public static var QUESTS_TABLE_AMOUNT:String = "#quests:quests/table/amount";
         
         public static var QUESTS_TABLE_BATTLESLEFT:String = "#quests:quests/table/battlesLeft";
         
@@ -156,6 +172,8 @@ package
         
         public static var ITEM_TYPE_QUESTSTRATEGIC:String = "#quests:item/type/questStrategic";
         
+        public static var ITEM_TYPE_POTAPOV:String = "#quests:item/type/potapov";
+        
         public static var ITEM_TIMER_TILLSTART:String = "#quests:item/timer/tillStart";
         
         public static var ITEM_TIMER_TILLSTART_DAYS:String = "#quests:item/timer/tillStart/days";
@@ -177,6 +195,22 @@ package
         public static var ITEM_TIMER_TILLFINISH_LESSTHANHOUR:String = "#quests:item/timer/tillFinish/lessThanHour";
         
         public static var ITEM_TIMER_TILLFINISH_SHORTFORMAT:String = "#quests:item/timer/tillFinish/shortFormat";
+        
+        public static var PERSONAL_SEASONS_AWARDSBUTTON:String = "#quests:personal/seasons/awardsButton";
+        
+        public static var PERSONAL_SEASONS_ITEMTITLE:String = "#quests:personal/seasons/itemTitle";
+        
+        public static var PERSONAL_SEASONS_TILELABEL:String = "#quests:personal/seasons/tileLabel";
+        
+        public static var PERSONAL_SEASONS_TILEPROGRESS:String = "#quests:personal/seasons/tileProgress";
+        
+        public static var PERSONAL_SEASONS_SLOTS_NODATA:String = "#quests:personal/seasons/slots/noData";
+        
+        public static var PERSONAL_SEASONS_SLOTS_GETAWARD:String = "#quests:personal/seasons/slots/getAward";
+        
+        public static var PERSONAL_SEASONS_SLOTS_TITLE:String = "#quests:personal/seasons/slots/title";
+        
+        public static var PERSONAL_SEASONS_SLOTS_NOACTIVESLOTS:String = "#quests:personal/seasons/slots/noActiveSlots";
         
         public static var DETAILS_HEADER_INFO_TITLE:String = "#quests:details/header/info/title";
         
@@ -702,6 +736,18 @@ package
         
         public static var DETAILS_DOSSIER_MAXPIERCINGSERIES:String = "#quests:details/dossier/maxPiercingSeries";
         
+        public static var DETAILS_DOSSIER_MAXXP:String = "#quests:details/dossier/maxXP";
+        
+        public static var DETAILS_DOSSIER_MAXXPVEHICLE:String = "#quests:details/dossier/maxXPVehicle";
+        
+        public static var DETAILS_DOSSIER_MAXFRAGS:String = "#quests:details/dossier/maxFrags";
+        
+        public static var DETAILS_DOSSIER_MAXFRAGSVEHICLE:String = "#quests:details/dossier/maxFragsVehicle";
+        
+        public static var DETAILS_DOSSIER_MAXDAMAGE:String = "#quests:details/dossier/maxDamage";
+        
+        public static var DETAILS_DOSSIER_MAXDAMAGEVEHICLE:String = "#quests:details/dossier/maxDamageVehicle";
+        
         public static var DETAILS_DOSSIER_MARKOFMASTERY:String = "#quests:details/dossier/markOfMastery";
         
         public static var DETAILS_DOSSIER_WARRIOR:String = "#quests:details/dossier/warrior";
@@ -885,6 +931,10 @@ package
         public static var DETAILS_DOSSIER_RANDOM_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/random/damageAssistedTrack";
         
         public static var DETAILS_DOSSIER_RANDOM_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/random/damageAssistedRadio";
+        
+        public static var DETAILS_DOSSIER_RANDOM_SHOTS:String = "#quests:details/dossier/random/shots";
+        
+        public static var DETAILS_DOSSIER_RANDOM_EXPLOSIONHITSRECEIVED:String = "#quests:details/dossier/random/explosionHitsReceived";
         
         public static var DETAILS_DOSSIER_COMPANY_XP:String = "#quests:details/dossier/company/xp";
         
@@ -1142,15 +1192,27 @@ package
         
         public static var DETAILS_MODIFIERS_VEHICLE:String = "#quests:details/modifiers/vehicle";
         
+        public static var DETAILS_MODIFIERS_RENTVEHICLE:String = "#quests:details/modifiers/rentVehicle";
+        
+        public static var DETAILS_MODIFIERS_VEHRENTPACKAGE:String = "#quests:details/modifiers/vehRentPackage";
+        
         public static var DETAILS_MODIFIERS_VEHICLE_SELL:String = "#quests:details/modifiers/vehicle/sell";
         
         public static var DETAILS_MODIFIERS_VEHICLE_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/goldPriceMultiplier";
         
         public static var DETAILS_MODIFIERS_VEHICLE_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/creditsPriceMultiplier";
         
+        public static var DETAILS_MODIFIERS_VEHICLE_RENT_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/rent/goldPriceMultiplier";
+        
+        public static var DETAILS_MODIFIERS_VEHICLE_RENT_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/rent/creditsPriceMultiplier";
+        
         public static var DETAILS_MODIFIERS_VEHICLE_NATION_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/nation/goldPriceMultiplier";
         
         public static var DETAILS_MODIFIERS_VEHICLE_NATION_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/nation/creditsPriceMultiplier";
+        
+        public static var DETAILS_MODIFIERS_VEHICLE_RENT_NATION_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/rent/nation/goldPriceMultiplier";
+        
+        public static var DETAILS_MODIFIERS_VEHICLE_RENT_NATION_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/rent/nation/creditsPriceMultiplier";
         
         public static var DETAILS_MODIFIERS_CUSTOMIZATION_VEHCAMOUFLAGE:String = "#quests:details/modifiers/customization/vehCamouflage";
         
@@ -1165,5 +1227,154 @@ package
         public static var CLASSES_SPG:String = "#quests:classes/SPG";
         
         public static var CLASSES_AT_SPG:String = "#quests:classes/AT-SPG";
+        
+        public static var SEASONAWARDSWINDOW_TITLE:String = "#quests:seasonAwardsWindow/title";
+        
+        public static var SEASONAWARDSWINDOW_VEHICLEAWARD_BUTTONABOUT_TEXT:String = "#quests:seasonAwardsWindow/vehicleAward/buttonAbout/text";
+        
+        public static var SEASONAWARDSWINDOW_BASICAWARDS_TITLE:String = "#quests:seasonAwardsWindow/basicAwards/title";
+        
+        public static var SEASONAWARDSWINDOW_EXTRAAWARDS_TITLE:String = "#quests:seasonAwardsWindow/extraAwards/title";
+        
+        public static var SEASONAWARDSWINDOW_FEMALETANKMANAWARD_TITLE:String = "#quests:seasonAwardsWindow/femaleTankmanAward/title";
+        
+        public static var SEASONAWARDSWINDOW_FEMALETANKMANAWARD_DESCRIPTION:String = "#quests:seasonAwardsWindow/femaleTankmanAward/description";
+        
+        public static var SEASONAWARDSWINDOW_COMMENDATIONLISTSAWARD_TITLE:String = "#quests:seasonAwardsWindow/commendationListsAward/title";
+        
+        public static var SEASONAWARDSWINDOW_COMMENDATIONLISTSAWARD_DESCRIPTION:String = "#quests:seasonAwardsWindow/commendationListsAward/description";
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_MAINTITLE_TEXTLABEL:String = "#quests:QuestsPersonalWelcomeView/mainTitle/textLabel";
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_BTNLABEL:String = "#quests:QuestsPersonalWelcomeView/btnLabel";
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_HEADER_BLOCK1:String = "#quests:QuestsPersonalWelcomeView/textBlock/header/block1";
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_BODY_BLOCK1:String = "#quests:QuestsPersonalWelcomeView/textBlock/body/block1";
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_HEADER_BLOCK2:String = "#quests:QuestsPersonalWelcomeView/textBlock/header/block2";
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_BODY_BLOCK2:String = "#quests:QuestsPersonalWelcomeView/textBlock/body/block2";
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_HEADER_BLOCK3:String = "#quests:QuestsPersonalWelcomeView/textBlock/header/block3";
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_BODY_BLOCK3:String = "#quests:QuestsPersonalWelcomeView/textBlock/body/block3";
+        
+        public static var TILECHAINSVIEW_BUTTONBACK_TEXT:String = "#quests:tileChainsView/buttonBack/text";
+        
+        public static var TILECHAINSVIEW_TITLE:String = "#quests:tileChainsView/title";
+        
+        public static var TILECHAINSVIEW_FILTERSLABEL_TEXT:String = "#quests:tileChainsView/filtersLabel/text";
+        
+        public static var TILECHAINSVIEW_HIDECOMPLETEDTASKS_TEXT:String = "#quests:tileChainsView/hideCompletedTasks/text";
+        
+        public static var TILECHAINSVIEW_NOTASKSLABEL_TEXT:String = "#quests:tileChainsView/noTasksLabel/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPEFILTER_ALLITEMS_TEXT:String = "#quests:tileChainsView/taskTypeFilter/allItems/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPEFILTER_COMPLETEDITEMS_TEXT:String = "#quests:tileChainsView/taskTypeFilter/completedItems/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPEFILTER_ITEMSINPROGRESS_TEXT:String = "#quests:tileChainsView/taskTypeFilter/itemsInProgress/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPEFILTER_AWARDSNOTRECEIVEDITEMS_TEXT:String = "#quests:tileChainsView/taskTypeFilter/awardsNotReceivedItems/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPE_COMPLETED_TEXT:String = "#quests:tileChainsView/taskType/completed/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPE_FULLCOMPLETED_TEXT:String = "#quests:tileChainsView/taskType/fullCompleted/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPE_INPROGRESS_TEXT:String = "#quests:tileChainsView/taskType/inProgress/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPE_AVAILABLE_TEXT:String = "#quests:tileChainsView/taskType/available/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPE_UNAVAILABLE_TEXT:String = "#quests:tileChainsView/taskType/unavailable/text";
+        
+        public static var TILECHAINSVIEW_TASKTYPE_AWARDNOTRECEIVED_TEXT:String = "#quests:tileChainsView/taskType/awardNotReceived/text";
+        
+        public static var TILECHAINSVIEW_STATISTICSLABEL_TEXT:String = "#quests:tileChainsView/statisticsLabel/text";
+        
+        public static var TILECHAINSVIEW_CHAINNAME_LIGHTTANK:String = "#quests:tileChainsView/chainName/lightTank";
+        
+        public static var TILECHAINSVIEW_CHAINNAME_MEDIUMTANK:String = "#quests:tileChainsView/chainName/mediumTank";
+        
+        public static var TILECHAINSVIEW_CHAINNAME_HEAVYTANK:String = "#quests:tileChainsView/chainName/heavyTank";
+        
+        public static var TILECHAINSVIEW_CHAINNAME_AT_SPG:String = "#quests:tileChainsView/chainName/AT-SPG";
+        
+        public static var TILECHAINSVIEW_CHAINNAME_SPG:String = "#quests:tileChainsView/chainName/SPG";
+        
+        public static var QUESTSCHAINPROGRESSVIEW_HEADER:String = "#quests:QuestsChainProgressView/header";
+        
+        public static var QUESTSCHAINPROGRESSVIEW_MAINAWARD:String = "#quests:QuestsChainProgressView/mainAward";
+        
+        public static var QUESTSCHAINPROGRESSVIEW_CHAINSPROGRESS:String = "#quests:QuestsChainProgressView/chainsProgress";
+        
+        public static var QUESTSCHAINPROGRESSVIEW_ABOUTTANKBTNLABEL:String = "#quests:QuestsChainProgressView/aboutTankBtnLabel";
+        
+        public static var QUESTSCHAINPROGRESSVIEW_SHOWINHANGARBTNLABEL:String = "#quests:QuestsChainProgressView/showInHangarBtnLabel";
+        
+        public static var QUESTSCHAINPROGRESSVIEW_CHAINPROGRESSCOUNT:String = "#quests:QuestsChainProgressView/chainProgressCount";
+        
+        public static var QUESTSCHAINPROGRESSVIEW_STATUS_EXCELLENTDONE:String = "#quests:QuestsChainProgressView/status/excellentDone";
+        
+        public static var QUESTSCHAINPROGRESSVIEW_STATUS_DONE:String = "#quests:QuestsChainProgressView/status/done";
+        
+        public static var QUESTTASKDETAILSVIEW_HEADER:String = "#quests:QuestTaskDetailsView/header";
+        
+        public static var QUESTTASKDETAILSVIEW_MAINCONDITIONS:String = "#quests:QuestTaskDetailsView/mainConditions";
+        
+        public static var QUESTTASKDETAILSVIEW_ADDITIONALCONDITIONS:String = "#quests:QuestTaskDetailsView/additionalConditions";
+        
+        public static var QUESTTASKDETAILSVIEW_REQUIREMENTS:String = "#quests:QuestTaskDetailsView/requirements";
+        
+        public static var QUESTTASKDETAILSVIEW_REQUIREMENTS_TEXT:String = "#quests:QuestTaskDetailsView/requirements/text";
+        
+        public static var QUESTTASKDETAILSVIEW_DESCRIPTION:String = "#quests:QuestTaskDetailsView/description";
+        
+        public static var QUESTTASKDETAILSVIEW_BTNLABEL_BEGIN:String = "#quests:QuestTaskDetailsView/btnLabel/begin";
+        
+        public static var QUESTTASKDETAILSVIEW_BTNLABEL_CANCEL:String = "#quests:QuestTaskDetailsView/btnLabel/cancel";
+        
+        public static var QUESTTASKDETAILSVIEW_BTNLABEL_TAKEAWARD:String = "#quests:QuestTaskDetailsView/btnLabel/takeAward";
+        
+        public static var QUESTTASKDETAILSVIEW_BTNLABEL_REPEAT:String = "#quests:QuestTaskDetailsView/btnLabel/repeat";
+        
+        public static var QUESTTASKDETAILSVIEW_TASKDESCRIPTION_DONE:String = "#quests:QuestTaskDetailsView/taskDescription/done";
+        
+        public static var QUESTTASKDETAILSVIEW_TASKDESCRIPTION_EXCELLENTDONE:String = "#quests:QuestTaskDetailsView/taskDescription/excellentDone";
+        
+        public static var QUESTTASKDETAILSVIEW_TASKDESCRIPTION_MAXTASKSTAKEN:String = "#quests:QuestTaskDetailsView/taskDescription/maxTasksTaken";
+        
+        public static var QUESTTASKDETAILSVIEW_TASKDESCRIPTION_DOPREVTASKS:String = "#quests:QuestTaskDetailsView/taskDescription/doPrevTasks";
+        
+        public static var QUESTTASKDETAILSVIEW_TASKDESCRIPTION_ONLYONETASK:String = "#quests:QuestTaskDetailsView/taskDescription/onlyOneTask";
+        
+        public static var QUESTTASKDETAILSVIEW_FORADDITIONALAWARD:String = "#quests:QuestTaskDetailsView/forAdditionalAward";
+        
+        public static var QUESTSCONTROL_ADDITIONALTITLE_ENUM:Array = [QUESTSCONTROL_ADDITIONALTITLE_NEEDRECEIVEDAWARD,QUESTSCONTROL_ADDITIONALTITLE_FREESLOTSANDFREEQUESTS,QUESTSCONTROL_ADDITIONALTITLE_FIRSTRUN,QUESTSCONTROL_ADDITIONALTITLE_EMPTY];
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_BODY_ENUM:Array = [QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_BODY_BLOCK1,QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_BODY_BLOCK2,QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_BODY_BLOCK3];
+        
+        public static var QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_HEADER_ENUM:Array = [QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_HEADER_BLOCK1,QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_HEADER_BLOCK2,QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_HEADER_BLOCK3];
+        
+        public static function questscontrol_additionaltitle(param1:String) : String
+        {
+            var _loc2_:String = "#quests:questsControl/additionalTitle/" + param1;
+            App.utils.asserter.assert(!(QUESTSCONTROL_ADDITIONALTITLE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function questspersonalwelcomeview_textblock_body(param1:String) : String
+        {
+            var _loc2_:String = "#quests:QuestsPersonalWelcomeView/textBlock/body/" + param1;
+            App.utils.asserter.assert(!(QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_BODY_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function questspersonalwelcomeview_textblock_header(param1:String) : String
+        {
+            var _loc2_:String = "#quests:QuestsPersonalWelcomeView/textBlock/header/" + param1;
+            App.utils.asserter.assert(!(QUESTSPERSONALWELCOMEVIEW_TEXTBLOCK_HEADER_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
     }
 }

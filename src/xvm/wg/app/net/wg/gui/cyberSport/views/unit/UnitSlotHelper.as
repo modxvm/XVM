@@ -9,7 +9,7 @@ package net.wg.gui.cyberSport.views.unit
     import net.wg.gui.utils.ComplexTooltipHelper;
     import net.wg.data.constants.Tooltips;
     import net.wg.gui.cyberSport.controls.CSVehicleButton;
-    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
+    import net.wg.gui.components.controls.ButtonIconTextTransparent;
     
     public class UnitSlotHelper extends BaseRallySlotHelper
     {
@@ -192,7 +192,7 @@ switch(param1)
         break;
 }
 var _loc7_:SlotRenderer = param2 as SlotRenderer;
-if((_loc7_) && (param1 == _loc7_.removeBtn) && _loc7_.removeBtn.icon == GrayTransparentButton.ICON_LOCK)
+if((_loc7_) && (param1 == _loc7_.removeBtn) && _loc7_.removeBtn.icon == ButtonIconTextTransparent.ICON_LOCK)
 {
     _loc9_ = new ComplexTooltipHelper().addHeader(MENU.contextmenu(_loc5_.isClosed?"unlockSlot":"lockSlot"),true).addBody("",true).make();
     if(_loc9_.length > 0)

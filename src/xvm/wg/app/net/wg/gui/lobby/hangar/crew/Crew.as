@@ -114,7 +114,6 @@ package net.wg.gui.lobby.hangar.crew
             this.list.removeEventListener(ListEventEx.ITEM_PRESS,hideTooltip);
             App.stage.removeEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
             App.stage.removeEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
-            removeEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
             removeEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
             this.list.dispose();
             this.list = null;
@@ -132,7 +131,6 @@ package net.wg.gui.lobby.hangar.crew
         {
             super.configUI();
             mouseEnabled = false;
-            addEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
             addEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
             App.stage.addEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
             App.stage.addEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
@@ -170,11 +168,6 @@ package net.wg.gui.lobby.hangar.crew
         private function onEquipTankman(param1:CrewEvent) : void
         {
             equipTankmanS(param1.initProp.tankmanID,param1.initProp.slot);
-        }
-        
-        private function onUnloadTankman(param1:CrewEvent) : void
-        {
-            unloadTankmanS(param1.initProp.tankmanID);
         }
         
         private function onShowRecruitWindow(param1:CrewEvent) : void

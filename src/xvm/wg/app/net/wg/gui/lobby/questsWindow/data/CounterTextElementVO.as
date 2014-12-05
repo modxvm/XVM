@@ -8,20 +8,22 @@ package net.wg.gui.lobby.questsWindow.data
             super(param1);
         }
         
-        private var _battlesLeft:Number = 0;
+        private var _counterValue:Number = 0;
         
         private var _showDone:Boolean = false;
         
         private var _fullLabel:String = "";
         
-        public function get battlesLeft() : Number
+        private var _counterDescr:String = "";
+        
+        public function get counterValue() : Number
         {
-            return this._battlesLeft;
+            return this._counterValue;
         }
         
-        public function set battlesLeft(param1:Number) : void
+        public function set counterValue(param1:Number) : void
         {
-            this._battlesLeft = param1;
+            this._counterValue = param1;
         }
         
         public function get showDone() : Boolean
@@ -42,6 +44,16 @@ package net.wg.gui.lobby.questsWindow.data
         public function set fullLabel(param1:String) : void
         {
             this._fullLabel = param1;
+        }
+        
+        public function get counterDescr() : String
+        {
+            return this._counterDescr;
+        }
+        
+        public function set counterDescr(param1:String) : void
+        {
+            this._counterDescr = param1;
         }
     }
 }

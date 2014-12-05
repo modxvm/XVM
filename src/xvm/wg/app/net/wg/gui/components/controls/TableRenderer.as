@@ -19,7 +19,7 @@ package net.wg.gui.components.controls
         
         public static var INV_PASSIVE:String = "invPassive";
         
-        private static var TIME_CLICK:uint = 220;
+        private static var TIME_CLICK:uint = 200;
         
         public var rendererBg:MovieClip;
         
@@ -32,6 +32,15 @@ package net.wg.gui.components.controls
         private var _isPassive:Boolean = false;
         
         private var firstClick:Boolean = false;
+        
+        private var _isEnableDoubleClickSimulation:Boolean = false;
+        
+        override public function setSize(param1:Number, param2:Number) : void
+        {
+            _width = param1;
+            _height = param2;
+            invalidateSize();
+        }
         
         override public function set buttonMode(param1:Boolean) : void
         {
@@ -59,13 +68,6 @@ package net.wg.gui.components.controls
                 this.disableMc.heightFill = Math.round(this.height);
             }
             constraints = null;
-        }
-        
-        override public function setSize(param1:Number, param2:Number) : void
-        {
-            _width = param1;
-            _height = param2;
-            invalidateSize();
         }
         
         override protected function draw() : void
@@ -180,14 +182,24 @@ package net.wg.gui.components.controls
         
         protected function startSimulationDoubleClick() : void
         {
+            this._isEnableDoubleClickSimulation = true;
             this.addEventListener(MouseEvent.MOUSE_DOWN,this.simulationDoubleClickHandler);
         }
         
         protected function stopSimulationDoubleClick() : void
         {
+            this._isEnableDoubleClickSimulation = false;
             App.utils.scheduler.cancelTask(this.clearFirstClick);
             this.stageRemoveListener();
             this.removeEventListener(MouseEvent.MOUSE_DOWN,this.simulationDoubleClickHandler);
+        }
+        
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
+            if(!this._isEnableDoubleClickSimulation)
+            {
+                super.handleMouseRelease(param1);
+            }
         }
         
         private function stageAddListener() : void
@@ -220,8 +232,12 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function clearFirstClick() : void
+        private function clearFirstClick(param1:MouseEvent = null) : void
         {
+            if((this.firstClick) && (param1))
+            {
+                super.handleMouseRelease(param1);
+            }
             this.firstClick = false;
             this.stageRemoveListener();
         }
@@ -255,7 +271,7 @@ package net.wg.gui.components.controls
                     param1.preventDefault();
                     param1.stopImmediatePropagation();
                     this.stageAddListener();
-                    App.utils.scheduler.scheduleTask(this.clearFirstClick,TIME_CLICK);
+                    App.utils.scheduler.scheduleTask(this.clearFirstClick,TIME_CLICK,param1);
                 }
             }
             else

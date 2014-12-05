@@ -9,6 +9,7 @@ package net.wg.gui.lobby.hangar.tcarousel
     import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
     import net.wg.data.constants.SoundTypes;
     import net.wg.data.constants.SoundManagerStates;
+    import scaleform.clik.events.ButtonEvent;
     import flash.text.TextFormat;
     import flash.text.TextFormatAlign;
     import net.wg.gui.lobby.hangar.tcarousel.helper.VehicleCarouselVOBuilder;
@@ -82,7 +83,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 this.dataVO = VehicleCarouselVO(param1);
                 this.visible = false;
-                this.enabled = true;
+                this.enabled = this.dataVO.enabled;
                 empty = this.dataVO.empty;
                 _dataDirty = true;
                 invalidate();
@@ -91,7 +92,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         override public function toString() : String
         {
-            return "[WG TankCarouselItemRenderer]";
+            return "[WG TankCarouselItemRenderer]" + this.name + " " + this.label;
         }
         
         override public function set enabled(param1:Boolean) : void
@@ -100,6 +101,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             useHandCursor = param1;
             if((this.dataVO) && (this.dataVO.buySlot))
             {
+                this.dataVO.enabled = param1;
                 this.mouseChildren = param1;
             }
         }
@@ -128,6 +130,12 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 this.hitArea = this.hitMC;
             }
+        }
+        
+        override public function canPlaySound(param1:String) : Boolean
+        {
+            var _loc2_:TankCarousel = TankCarousel(owner);
+            return (this.enabled) && !((_loc2_.isMoving) && param1 == ButtonEvent.PRESS);
         }
         
         override protected function draw() : void

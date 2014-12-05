@@ -5,7 +5,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     import net.wg.gui.lobby.fortifications.data.BuildingVO;
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuilding;
     import net.wg.gui.lobby.fortifications.data.FortModeVO;
-    import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingCmp;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.gui.lobby.fortifications.events.FortBuildingEvent;
     
@@ -104,11 +103,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public function update(param1:Vector.<BuildingVO>, param2:Boolean) : void
         {
             updateBuildings(param1,this.buildings,param2);
-        }
-        
-        public function getBuildingTooltipData(param1:String) : Array
-        {
-            return IFortBuildingCmp(parent).getBuildingTooltipDataS(param1);
         }
         
         public function get buildings() : Vector.<IFortBuilding>

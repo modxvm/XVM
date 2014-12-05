@@ -15,10 +15,6 @@ package net.wg.gui.lobby.messengerBar.carousel.events
         
         public static var CLOSE_CHANNEL:String = "closeChannel";
         
-        public static var MINIMIZE_ALL_CHANNELS:String = "minimizeAllChannels";
-        
-        public static var CLOSE_ALL_EXCEPT_CURRENT:String = "closeAllExceptCurrent";
-        
         public static var CLOSE_ALL:String = "closeAll";
         
         public var clientID:Number;

@@ -6,6 +6,7 @@ package net.wg.gui.components.tooltips
     import net.wg.gui.components.tooltips.VO.ToolTipSettingsButtonVO;
     import net.wg.gui.components.tooltips.helpers.Utils;
     import flash.text.TextFormatAlign;
+    import net.wg.data.constants.Values;
     
     public class ToolTipSettingsButton extends ToolTipSpecial
     {
@@ -44,12 +45,13 @@ package net.wg.gui.components.tooltips
         
         override protected function redraw() : void
         {
+            var _loc3_:ToolTipSettingsButtonVO = null;
             var _loc4_:* = NaN;
             topPosition = bgShadowMargin.top + contentMargin.top;
             var _loc1_:Separator = null;
             separators = new Vector.<Separator>();
             var _loc2_:Number = 5;
-            var _loc3_:ToolTipSettingsButtonVO = new ToolTipSettingsButtonVO(_data);
+            _loc3_ = new ToolTipSettingsButtonVO(_data);
             this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc3_.name,Utils.instance.COLOR_HEADER,18,"$TitleFont");
             this.headerTF.width = this.headerTF.textWidth + _loc2_;
             this.descriptionTF.multiline = true;
@@ -68,7 +70,7 @@ package net.wg.gui.components.tooltips
             else
             {
                 this.serverStatsHeader.htmlText = Utils.instance.htmlWrapper(_loc3_.playersOnServer,Utils.instance.COLOR_BLOCK_HEADER,14,"$TitleFont",true);
-                this.serverInfo.setValues(_loc3_.servers);
+                this.serverInfo.setValues(_loc3_.serversStats,Values.EMPTY_STR);
             }
             this.serverStatsHeader.width = this.serverStatsHeader.textWidth + _loc2_;
             _loc4_ = contentMargin.left + bgShadowMargin.left;

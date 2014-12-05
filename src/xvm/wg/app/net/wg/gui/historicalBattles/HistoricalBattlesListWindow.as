@@ -5,10 +5,9 @@ package net.wg.gui.historicalBattles
     import net.wg.gui.historicalBattles.controls.BattlesCarousel;
     import net.wg.gui.historicalBattles.controls.TeamsVehicleList;
     import net.wg.gui.components.controls.UILoaderAlt;
-    import net.wg.gui.cyberSport.controls.GrayButtonText;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.DropdownMenu;
     import flash.display.MovieClip;
-    import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.Sprite;
     import flash.text.TextField;
     import net.wg.gui.historicalBattles.data.HistoricalBattleVO;
@@ -47,7 +46,7 @@ package net.wg.gui.historicalBattles
         
         public var mapImage:UILoaderAlt;
         
-        public var showFullDescrButton:GrayButtonText;
+        public var showFullDescrButton:SoundButtonEx;
         
         public var priceDD:DropdownMenu;
         

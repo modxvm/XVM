@@ -97,7 +97,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.resourceNumericStepper.enabled = !param1;
             if(hasFocus)
             {
-                this.updateFocus();
+                App.utils.scheduler.envokeInNextFrame(this.updateFocus);
             }
             invalidate(FortInvalidationType.INVALID_ENABLING);
         }
@@ -209,6 +209,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         override protected function onDispose() : void
         {
+            App.utils.scheduler.cancelTask(this.updateFocus);
             getTweenAnimator().removeAnims(this.footerFadingText);
             getTweenAnimator().removeAnims(this.sourceIndicator.labels);
             getTweenAnimator().removeAnims(this.targetIndicator.labels);

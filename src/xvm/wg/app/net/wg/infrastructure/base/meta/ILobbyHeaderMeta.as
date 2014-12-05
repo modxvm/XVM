@@ -37,7 +37,7 @@ package net.wg.infrastructure.base.meta
         
         function as_setClanEmblem(param1:String) : void;
         
-        function as_setPremiumParams(param1:Boolean, param2:String, param3:String, param4:Boolean) : void;
+        function as_setPremiumParams(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:String, param6:String) : void;
         
         function as_updateBattleType(param1:String, param2:String, param3:Boolean) : void;
         
@@ -52,5 +52,7 @@ package net.wg.infrastructure.base.meta
         function as_setFightButton(param1:String) : void;
         
         function as_setCoolDownForReady(param1:uint) : void;
+        
+        function as_showBubbleTooltip(param1:String, param2:int) : void;
     }
 }

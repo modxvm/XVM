@@ -125,9 +125,10 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
         }
         
-        public function as_setHeaderMessage(param1:String) : void
+        public function as_setHeaderMessage(param1:String, param2:Boolean) : void
         {
             this._header.infoTF.htmlText = param1;
+            this._header.timeAlert.showAlert(param2);
         }
         
         public function canShowAutomatically() : Boolean
@@ -263,6 +264,14 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             if(param1.mode != this._mode)
             {
                 App.utils.asserter.assert(!(FORTIFICATION_ALIASES.MODES.indexOf(param1.mode) == -1),"unknown fort mode:" + param1.mode);
+                if(this.isInTransportingMode(param1.mode))
+                {
+                    addEventListener(InputEvent.INPUT,this.handleEscape);
+                }
+                else
+                {
+                    removeEventListener(InputEvent.INPUT,this.handleEscape);
+                }
                 this.invokeStateMethod(false,this._mode,this.getFortMode(param1.mode));
                 this.invokeStateMethod(true,param1.mode,this.getFortMode(param1.mode));
                 this._mode = param1.mode;
@@ -431,12 +440,10 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             App.eventLogManager.logUIEvent(param1,0);
             if(this.isInTransportingMode(this._mode))
             {
-                removeEventListener(InputEvent.INPUT,this.handleEscape);
                 onLeaveTransportingClickS();
             }
             else
             {
-                addEventListener(InputEvent.INPUT,this.handleEscape);
                 onEnterTransportingClickS();
             }
             this.updateControlPositions();

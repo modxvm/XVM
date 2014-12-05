@@ -12,6 +12,7 @@ package net.wg.gui.lobby.battleResults
     import net.wg.infrastructure.interfaces.IColorScheme;
     import net.wg.data.constants.ColorSchemeNames;
     import net.wg.data.VO.UserVO;
+    import net.wg.gui.utils.ComplexTooltipHelper;
     
     public class TeamMemberItemRenderer extends SoundListItemRenderer
     {
@@ -73,12 +74,13 @@ package net.wg.gui.lobby.battleResults
         
         override protected function onDispose() : void
         {
-            super.onDispose();
+            this.subscribeResField(false);
             this.medalIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onMedalRollOver);
             this.medalIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onMedalRollOut);
             this.medalIcon.removeEventListener(MouseEvent.CLICK,this.onMedalClick);
             this.medalIcon.dispose();
             this.vehicleIcon.dispose();
+            super.onDispose();
         }
         
         private function onMedalRollOver(param1:MouseEvent) : void
@@ -204,7 +206,16 @@ package net.wg.gui.lobby.battleResults
                     this.resourceIcon.x = _loc2_ + 429;
                     this.resourceLbl.visible = true;
                     this.resourceIcon.visible = true;
-                    this.resourceLbl.text = data.resourceCount;
+                    if(int(data.resourceCount))
+                    {
+                        this.resourceLbl.text = data.resourceCount;
+                        this.subscribeResField(false);
+                    }
+                    else
+                    {
+                        this.resourceLbl.text = "-";
+                        this.subscribeResField(true);
+                    }
                 }
                 this.playerName.userVO = new UserVO({"fullName":data.playerFullName,
                 "userName":data.playerName,
@@ -270,6 +281,28 @@ package net.wg.gui.lobby.battleResults
     this.mouseChildren = true;
 }
 
+private function subscribeResField(param1:Boolean) : void
+{
+    if(param1)
+    {
+        if(!this.resourceLbl.hasEventListener(MouseEvent.ROLL_OVER))
+        {
+            this.resourceLbl.addEventListener(MouseEvent.ROLL_OVER,this.onResOver);
+            this.resourceLbl.addEventListener(MouseEvent.ROLL_OUT,this.onMedalRollOut);
+            this.resourceIcon.addEventListener(MouseEvent.ROLL_OVER,this.onResOver);
+            this.resourceIcon.addEventListener(MouseEvent.ROLL_OUT,this.onMedalRollOut);
+        }
+    }
+    else if(this.resourceLbl.hasEventListener(MouseEvent.ROLL_OVER))
+    {
+        this.resourceLbl.removeEventListener(MouseEvent.ROLL_OVER,this.onResOver);
+        this.resourceLbl.removeEventListener(MouseEvent.ROLL_OUT,this.onMedalRollOut);
+        this.resourceIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onResOver);
+        this.resourceIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onMedalRollOut);
+    }
+    
+}
+
 private function getColorForAlias(param1:String, param2:Number) : Number
 {
     var alias:String = param1;
@@ -283,6 +316,12 @@ private function getColorForAlias(param1:String, param2:Number) : Number
     {
         result = defaultColor;
     }
+}
+
+private function onResOver(param1:MouseEvent) : void
+{
+    var _loc2_:String = new ComplexTooltipHelper().addBody(TOOLTIPS.BATTLERESULTS_FORTRESOURCE_LEGIONER_BODY,true).make();
+    App.toolTipMgr.showComplex(_loc2_);
 }
 }
 }

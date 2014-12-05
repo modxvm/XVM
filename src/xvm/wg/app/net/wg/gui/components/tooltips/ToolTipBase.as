@@ -188,7 +188,7 @@ package net.wg.gui.components.tooltips
             this.y = _loc4_ | 0;
             this.visible = true;
             this.tryClearTween();
-            this.tween = new Tween(300,this,{"alpha":1},{"paused":false,
+            this.tween = new Tween(100,this,{"alpha":1},{"paused":false,
             "onComplete":this.onTweenComplete,
             "ease":Strong.easeInOut
         });

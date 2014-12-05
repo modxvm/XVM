@@ -275,6 +275,11 @@ package net.wg.app.impl.base
             return null;
         }
         
+        public function get altBrowserBgClass() : Class
+        {
+            return null;
+        }
+        
         public function get systemMessages() : DisplayObjectContainer
         {
             throw new AbstractException("AbstractApplication.systemMessages" + Errors.ABSTRACT_INVOKE);

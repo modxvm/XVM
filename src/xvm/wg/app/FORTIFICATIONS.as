@@ -440,6 +440,8 @@ package
         
         public static var BUILDINGPOPOVER_DEFRESACTIONS_MANAGEMENT:String = "#fortifications:BuildingPopover/defResActions/management";
         
+        public static var BUILDINGPOPOVER_GARRISONLABEL:String = "#fortifications:BuildingPopover/garrisonLabel";
+        
         public static var BUILDINGPOPOVER_ASSIGNPLAYERS:String = "#fortifications:BuildingPopover/assignPlayers";
         
         public static var BUILDINGPOPOVER_ORDERPROCESS_INPAUSE:String = "#fortifications:BuildingPopover/orderProcess/inPause";
@@ -650,6 +652,10 @@ package
         
         public static var SORTIE_LISTVIEW_LISTCOLUMNS_NAME:String = "#fortifications:sortie/listView/listColumns/name";
         
+        public static var SORTIE_LISTVIEW_LISTCOLUMNS_DESCR:String = "#fortifications:sortie/listView/listColumns/descr";
+        
+        public static var SORTIE_LISTVIEW_LISTCOLUMNS_STATUS:String = "#fortifications:sortie/listView/listColumns/status";
+        
         public static var SORTIE_LISTVIEW_LISTCOLUMNS_DIVISION:String = "#fortifications:sortie/listView/listColumns/division";
         
         public static var SORTIE_LISTVIEW_LISTCOLUMNS_MEMBERSCOUNT:String = "#fortifications:sortie/listView/listColumns/membersCount";
@@ -666,9 +672,15 @@ package
         
         public static var SORTIE_LISTVIEW_ENTERBTN:String = "#fortifications:sortie/listView/enterBtn";
         
+        public static var SORTIE_LISTVIEW_ALERTTEXT_TITLE:String = "#fortifications:sortie/listView/alertText/title";
+        
+        public static var SORTIE_LISTVIEW_ALERTTEXT_BODY:String = "#fortifications:sortie/listView/alertText/body";
+        
         public static var SORTIE_LISTVIEW_ENTERTEXT:String = "#fortifications:sortie/listView/enterText";
         
         public static var SORTIE_LISTVIEW_SLOT_CLOSED:String = "#fortifications:sortie/listView/slot/closed";
+        
+        public static var SORTIE_LISTVIEW_ABSENTDIVISIONS:String = "#fortifications:sortie/listView/absentDivisions";
         
         public static var SORTIE_ROOM_CANDIDATES:String = "#fortifications:sortie/room/candidates";
         
@@ -825,6 +837,8 @@ package
         public static var FORTINTELLIGENCE_ADDITIONALTEXT_COMINGSOON:String = "#fortifications:FortIntelligence/additionalText/comingSoon";
         
         public static var FORTINTELLIGENCE_STATUS_EMPTY:String = "#fortifications:FortIntelligence/status/empty";
+        
+        public static var FORTINTELLIGENCE_STATUS_DEFAULTREQUEST_EMPTY:String = "#fortifications:FortIntelligence/status/defaultRequest/empty";
         
         public static var FORTINTELLIGENCE_STATUS_EMPTYABBREV:String = "#fortifications:FortIntelligence/status/emptyAbbrev";
         
@@ -1274,9 +1288,9 @@ package
         
         public static var FORTCLANBATTLELIST_RENDERBATTLENAME_ENUM:Array = [FORTCLANBATTLELIST_RENDERBATTLENAME_CLANBATTLEDEFENCE,FORTCLANBATTLELIST_RENDERBATTLENAME_CLANBATTLEOFFENCE];
         
-        public static var CHOICEDIVISION_DIVISIONTYPE_ENUM:Array = [CHOICEDIVISION_DIVISIONTYPE_MIDDLEDIVISION,CHOICEDIVISION_DIVISIONTYPE_CHAMPIONDIVISION,CHOICEDIVISION_DIVISIONTYPE_ABSOLUTEDIVISION];
-        
         public static var ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM:Array = [ORDERS_ORDERPOPOVER_ORDERTYPE_BATTLEPAYMENTS,ORDERS_ORDERPOPOVER_ORDERTYPE_REQUISITION,ORDERS_ORDERPOPOVER_ORDERTYPE_EVACUATION,ORDERS_ORDERPOPOVER_ORDERTYPE_HEAVYTRUCKS,ORDERS_ORDERPOPOVER_ORDERTYPE_MILITARYMANEUVERS,ORDERS_ORDERPOPOVER_ORDERTYPE_ADDITIONALBRIEFING,ORDERS_ORDERPOPOVER_ORDERTYPE_TACTICALTRAINING,ORDERS_ORDERPOPOVER_ORDERTYPE_SPECIALMISSION];
+        
+        public static var CHOICEDIVISION_DIVISIONTYPE_ENUM:Array = [CHOICEDIVISION_DIVISIONTYPE_MIDDLEDIVISION,CHOICEDIVISION_DIVISIONTYPE_CHAMPIONDIVISION,CHOICEDIVISION_DIVISIONTYPE_ABSOLUTEDIVISION];
         
         public static var FORTMAINVIEW_ENUM:Array = [FORTMAINVIEW_COMMON_TOTALDEPOTQUANTITYTEXT,FORTMAINVIEW_COMMON_TITLE,FORTMAINVIEW_DIRECTIONS_TITLE,FORTMAINVIEW_DIRECTIONS_SELECTINGSTATUS,FORTMAINVIEW_TRANSPORTING_TITLE,FORTMAINVIEW_TRANSPORTING_EXPORTINGSTATUS,FORTMAINVIEW_TRANSPORTING_IMPORTINGSTATUS,FORTMAINVIEW_TRANSPORTING_NOTAVAILABLESTATUS,FORTMAINVIEW_TRANSPORTING_TUTORIALDESCR,FORTMAINVIEW_SORTIEBUTTON_TITLE,FORTMAINVIEW_INTELLIGENCEBUTTON_TITLE,FORTMAINVIEW_HEADER_LEVELSLBL,FORTMAINVIEW_HEADER_DEFENCEPERIOD,FORTMAINVIEW_HEADER_FORTFROZEN,FORTMAINVIEW_LEAVE_BUTTON_LABEL,FORTMAINVIEW_DIRECTIONSTUTOR_TITLE,FORTMAINVIEW_COMMONTUTOR_TITLE,FORTMAINVIEW_TRANSPORTINGTUTOR_TITLE];
         
@@ -1339,17 +1353,17 @@ package
             return _loc2_;
         }
         
-        public static function choicedivision_divisiontype(param1:String) : String
-        {
-            var _loc2_:String = "#fortifications:ChoiceDivision/divisionType/" + param1;
-            App.utils.asserter.assert(!(CHOICEDIVISION_DIVISIONTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
-            return _loc2_;
-        }
-        
         public static function orders_orderpopover_ordertype(param1:String) : String
         {
             var _loc2_:String = "#fortifications:Orders/orderPopover/orderType/" + param1;
             App.utils.asserter.assert(!(ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function choicedivision_divisiontype(param1:String) : String
+        {
+            var _loc2_:String = "#fortifications:ChoiceDivision/divisionType/" + param1;
+            App.utils.asserter.assert(!(CHOICEDIVISION_DIVISIONTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         

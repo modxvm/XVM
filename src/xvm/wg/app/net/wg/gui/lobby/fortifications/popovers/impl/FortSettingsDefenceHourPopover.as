@@ -8,6 +8,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import net.wg.gui.components.controls.TimeNumericStepper;
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.MovieClip;
+    import net.wg.gui.lobby.fortifications.cmp.main.impl.FortTimeAlertIcon;
     import net.wg.infrastructure.interfaces.IWrapper;
     import net.wg.gui.components.popOvers.PopOver;
     import flash.events.Event;
@@ -58,9 +59,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         public var separatorBottom:MovieClip = null;
         
+        public var timeAlert:FortTimeAlertIcon = null;
+        
         private var isAmericanStyle:Boolean = false;
         
         private var currentDefenceHour:int = -1;
+        
+        private var _isWrongLocalTime:Boolean = false;
         
         override public function set wrapper(param1:IWrapper) : void
         {
@@ -72,6 +77,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         {
             super.configUI();
             this.applyBtn.mouseEnabledOnDisabled = true;
+            App.utils.commons.moveDsiplObjToEndOfText(this.timeAlert,this.tillHourTF);
             this.applyBtn.addEventListener(ButtonEvent.CLICK,this.onApplyBtnClick);
             this.applyBtn.addEventListener(MouseEvent.MOUSE_OVER,this.onApplyBtnRollOver);
             this.applyBtn.addEventListener(MouseEvent.MOUSE_OUT,onApplyBtnRollOut);
@@ -103,6 +109,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.separatorBottom = null;
             this.timeStepper.dispose();
             this.timeStepper = null;
+            this.timeAlert.dispose();
+            this.timeAlert = null;
             super.onDispose();
         }
         
@@ -138,6 +146,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.tillHourTF.visible = this.dashTF.visible = !this.timeStepper.currentValueIsDefault;
             this.tillHourTF.text = FortCommonUtils.instance.getNextHourText(param1.hour);
             this.applyBtn.enabled = false;
+            this._isWrongLocalTime = param1.isWrongLocalTime;
+            this.timeAlert.showAlert((this.tillHourTF.visible) && (this._isWrongLocalTime));
         }
         
         override protected function setTexts(param1:DefenceHourPopoverVO) : void
@@ -173,6 +183,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.tillHourTF.visible = this.dashTF.visible = !this.timeStepper.currentValueIsDefault;
             this.tillHourTF.text = FortCommonUtils.instance.getNextHourText(this.timeStepper.value);
             this.applyBtn.enabled = !(this.timeStepper.value == this.currentDefenceHour);
+            this.timeAlert.showAlert((this.tillHourTF.visible) && (this._isWrongLocalTime));
         }
     }
 }

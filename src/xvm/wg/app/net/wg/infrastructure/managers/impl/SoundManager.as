@@ -6,7 +6,6 @@ package net.wg.infrastructure.managers.impl
     import flash.events.MouseEvent;
     import net.wg.data.constants.SoundManagerStates;
     import scaleform.clik.events.ButtonEvent;
-    import scaleform.clik.interfaces.IUIComponent;
     import flash.events.Event;
     
     public class SoundManager extends SoundManagerMeta implements ISoundManager
@@ -51,15 +50,6 @@ package net.wg.infrastructure.managers.impl
             this._mouseToSoundEvents = null;
         }
         
-        private function canPlaySound(param1:ISoundable) : Boolean
-        {
-            if(param1 is IUIComponent)
-            {
-                return IUIComponent(param1).enabled;
-            }
-            return true;
-        }
-        
         private function subscribeObject(param1:ISoundable) : void
         {
             param1.addEventListener(MouseEvent.MOUSE_OVER,this.onMouseHandler);
@@ -84,7 +74,7 @@ package net.wg.infrastructure.managers.impl
                 }
             }
             var _loc2_:ISoundable = ISoundable(param1.currentTarget);
-            if(this.canPlaySound(_loc2_))
+            if(_loc2_.canPlaySound(param1.type))
             {
                 this.playControlsSnd(this._mouseToSoundEvents[param1.type],_loc2_.getSoundType(),_loc2_.getSoundId());
             }

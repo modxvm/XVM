@@ -3,19 +3,18 @@ package net.wg.infrastructure.managers.impl
     import net.wg.infrastructure.base.meta.impl.ContextMenuManagerMeta;
     import net.wg.infrastructure.managers.IContextMenuManager;
     import net.wg.infrastructure.interfaces.IContextMenu;
-    import net.wg.infrastructure.interfaces.IContextItem;
+    import net.wg.infrastructure.interfaces.IContextMenuListener;
     import flash.display.DisplayObject;
+    import net.wg.data.daapi.ContextMenuOptionsVO;
+    import net.wg.gui.events.ContextMenuEvent;
+    import net.wg.infrastructure.interfaces.IContextItem;
     import net.wg.utils.IClassFactory;
     import net.wg.data.constants.Linkages;
     import flash.geom.Point;
-    import net.wg.gui.events.ContextMenuEvent;
     import flash.events.Event;
     import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
     import net.wg.data.daapi.PlayerInfo;
-    import net.wg.data.daapi.ContextMenuVehicleVo;
-    import net.wg.infrastructure.interfaces.IVehicleContextMenuGenerator;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import net.wg.data.components.VehicleContextMenuGenerator;
     
     public class ContextMenuManager extends ContextMenuManagerMeta implements IContextMenuManager
     {
@@ -29,28 +28,66 @@ package net.wg.infrastructure.managers.impl
         
         private var _handler:Function = null;
         
+        private var _listener:IContextMenuListener = null;
+        
         private var _extraHandler:Function = null;
+        
+        public function showNewWrapper(param1:String, param2:String, param3:DisplayObject, param4:Object = null, param5:IContextMenuListener = null) : void
+        {
+            this._listener = param5;
+            this.showNew(param1,param2,param3,param4);
+        }
+        
+        public function showNew(param1:String, param2:String, param3:DisplayObject, param4:Object = null) : void
+        {
+            this.hide();
+            this._handler = this.onItemSelect;
+            this._currentMenu = this.constructMenu(null,param3);
+            requestOptionsS(param1,param2,param4);
+        }
+        
+        override protected function setOptions(param1:ContextMenuOptionsVO) : void
+        {
+            //assert(this._currentMenu,"Current context menu is null in setOptions call");
+            this._currentMenu.build(param1.options,this._currentMenu.clickPoint);
+        }
+        
+        private function onItemSelect(param1:ContextMenuEvent) : void
+        {
+            onOptionSelectS(param1.id);
+            if(this._listener)
+            {
+                this._listener.onOptionSelect(param1.id);
+            }
+        }
         
         public function show(param1:Vector.<IContextItem>, param2:DisplayObject, param3:Function = null, param4:Object = null) : IContextMenu
         {
             this.hide();
             this._handler = param3;
-            var _loc5_:IClassFactory = App.utils.classFactory;
-            this._currentMenu = _loc5_.getComponent(Linkages.CONTEXT_MENU,IContextMenu);
-            App.utils.popupMgr.show(DisplayObject(this._currentMenu),param2.mouseX,param2.mouseY);
-            var _loc6_:Point = param2.localToGlobal(new Point(param2.mouseX,param2.mouseY));
-            this._currentMenu.build(param1,_loc6_.x,_loc6_.y);
+            this._currentMenu = this.constructMenu(param1,param2);
             if(param4)
             {
                 this._currentMenu.setMemberItemData(param4);
             }
+            return this._currentMenu;
+        }
+        
+        protected function constructMenu(param1:Vector.<IContextItem>, param2:DisplayObject) : IContextMenu
+        {
+            var _loc3_:IClassFactory = App.utils.classFactory;
+            var _loc4_:IContextMenu = _loc3_.getComponent(Linkages.CONTEXT_MENU,IContextMenu);
+            var _loc5_:DisplayObject = DisplayObject(_loc4_);
+            var _loc6_:Point = param2.localToGlobal(new Point(param2.mouseX,param2.mouseY));
+            App.utils.popupMgr.show(_loc5_,_loc6_.x,_loc6_.y);
+            _loc4_.build(param1,_loc6_);
             if(this._handler != null)
             {
-                DisplayObject(this._currentMenu).addEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.onContextMenuAction);
+                _loc5_.addEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.onContextMenuAction);
             }
-            DisplayObject(this._currentMenu).addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
-            DisplayObject(this._currentMenu).stage.addEventListener(Event.RESIZE,this.closeEventHandler);
-            return this._currentMenu;
+            _loc5_.addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
+            _loc5_.stage.addEventListener(Event.RESIZE,this.closeEventHandler);
+            return _loc4_;
         }
         
         public function showUserContextMenu(param1:DisplayObject, param2:Object, param3:IUserContextMenuGenerator, param4:Function = null) : IContextMenu
@@ -63,16 +100,10 @@ package net.wg.infrastructure.managers.impl
                 _loc5_ = new PlayerInfo(_getUserInfoS(param2.uid,param2.userName));
                 _loc6_ = _getDenunciationsS();
                 _loc7_ = param3.generateData(_loc5_,_loc6_);
+                this._extraHandler = param4;
                 return this.show(_loc7_,param1,this.handleUserContextMenu,param2);
             }
             return null;
-        }
-        
-        public function showVehicleContextMenu(param1:DisplayObject, param2:ContextMenuVehicleVo, param3:IVehicleContextMenuGenerator, param4:Function = null) : IContextMenu
-        {
-            var _loc5_:Vector.<IContextItem> = param3.generateData(param2);
-            this._extraHandler = param4;
-            return this.show(_loc5_,param1,this.handleVehicleContextMenu,param2);
         }
         
         public function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>, param3:Object = null) : IContextMenu
@@ -92,70 +123,40 @@ package net.wg.infrastructure.managers.impl
         
         public function hide() : void
         {
+            var _loc1_:DisplayObject = null;
             if(this._currentMenu != null)
             {
-                if(!(this._handler == null) && (DisplayObject(this._currentMenu).hasEventListener(ContextMenuEvent.ON_ITEM_SELECT)))
+                _loc1_ = DisplayObject(this._currentMenu);
+                if(!(this._handler == null) && (_loc1_.hasEventListener(ContextMenuEvent.ON_ITEM_SELECT)))
                 {
-                    DisplayObject(this._currentMenu).removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.onContextMenuAction);
+                    _loc1_.removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.onContextMenuAction);
                     this._handler = null;
                 }
-                if(DisplayObject(this._currentMenu).hasEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE))
+                if(_loc1_.hasEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE))
                 {
-                    DisplayObject(this._currentMenu).removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
+                    _loc1_.removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
                 }
-                if((DisplayObject(this._currentMenu).stage) && (DisplayObject(this._currentMenu).stage.hasEventListener(Event.RESIZE)))
+                if((_loc1_.stage) && (_loc1_.stage.hasEventListener(Event.RESIZE)))
                 {
-                    DisplayObject(this._currentMenu).stage.removeEventListener(Event.RESIZE,this.closeEventHandler);
+                    _loc1_.stage.removeEventListener(Event.RESIZE,this.closeEventHandler);
                 }
                 if(this._currentMenu is IDisposable)
                 {
                     IDisposable(this._currentMenu).dispose();
                 }
-                App.utils.popupMgr.popupCanvas.removeChild(DisplayObject(this._currentMenu));
+                App.utils.popupMgr.popupCanvas.removeChild(_loc1_);
                 this._currentMenu = null;
                 this._extraHandler = null;
+                this._listener = null;
+            }
+            if(!disposed)
+            {
+                onHideS();
             }
         }
         
         public function dispose() : void
         {
-            this.hide();
-        }
-        
-        private function handleVehicleContextMenu(param1:ContextMenuEvent) : void
-        {
-            var _loc2_:ContextMenuVehicleVo = param1.memberItemData as ContextMenuVehicleVo;
-            switch(param1.id)
-            {
-                case VehicleContextMenuGenerator.VEHICLE_INFO:
-                    showVehicleInfoS(_loc2_.inventoryId);
-                    break;
-                case VehicleContextMenuGenerator.VEHICLE_SELL:
-                    vehicleSellS(_loc2_.inventoryId);
-                    break;
-                case VehicleContextMenuGenerator.VEHICLE_RESEARCH:
-                    toResearchS(_loc2_.compactDescr);
-                    break;
-                case VehicleContextMenuGenerator.VEHICLE_CHECK:
-                    favoriteVehicleS(_loc2_.inventoryId,true);
-                    break;
-                case VehicleContextMenuGenerator.VEHICLE_UNCHECK:
-                    favoriteVehicleS(_loc2_.inventoryId,false);
-                    break;
-                case VehicleContextMenuGenerator.VEHICLE_STATISTIC:
-                    showVehicleStatsS(_loc2_.compactDescr);
-                    break;
-                case VehicleContextMenuGenerator.VEHICLE_BUY:
-                    vehicleBuyS(_loc2_.inventoryId);
-                    break;
-                case VehicleContextMenuGenerator.VEHICLE_REMOVE:
-                    vehicleSellS(_loc2_.inventoryId);
-                    break;
-            }
-            if(this._extraHandler != null)
-            {
-                this._extraHandler(param1);
-            }
             this.hide();
         }
         
@@ -250,11 +251,6 @@ package net.wg.infrastructure.managers.impl
                 this._handler(param1);
                 this.hide();
             }
-        }
-        
-        public function getContextMenuVehicleDataByInvCD(param1:Number) : Object
-        {
-            return getContextMenuVehicleDataS(param1);
         }
     }
 }

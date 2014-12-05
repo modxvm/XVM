@@ -15,6 +15,7 @@ package net.wg.gui.lobby.header.headerButtonBar
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.events.MouseEvent;
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
+    import net.wg.gui.utils.ComplexTooltipHelper;
     import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.data.constants.Tooltips;
     import net.wg.utils.IHelpLayout;
@@ -97,7 +98,6 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         public function updateContentData() : void
         {
-            this.helpConnectorLength = this._dataVo.helpConnectorLength;
             this.helpDirection = this._dataVo.helpDirection;
             this.helpText = this._dataVo.helpText;
             this.enabled = this._dataVo.enabled;
@@ -171,6 +171,7 @@ package net.wg.gui.lobby.header.headerButtonBar
             this._dataVo = HeaderButtonVo(data);
             this._dataVo.headerButton = this;
             this.tooltip = this._dataVo.tooltip;
+            this.mouseEnabledOnDisabled = this._dataVo.id == HeaderButtonsHelper.ITEM_ID_PREM;
             invalidate(_loc2_);
         }
         
@@ -186,11 +187,20 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         override public function showTooltip(param1:MouseEvent) : void
         {
+            var _loc2_:HBC_PremDataVo = null;
             if(this._dataVo)
             {
                 if(this._dataVo.id == HeaderButtonsHelper.ITEM_ID_PREM)
                 {
-                    this.tooltip = HBC_PremDataVo(this._dataVo.data).isPrem?TOOLTIPS.HEADER_PREMIUM_EXTEND:TOOLTIPS.HEADER_PREMIUM_BUY;
+                    _loc2_ = HBC_PremDataVo(this._dataVo.data);
+                    if(!_loc2_.isYear)
+                    {
+                        this.tooltip = new ComplexTooltipHelper().addHeader(_loc2_.disableTTHeader).addBody(_loc2_.disableTTBody).make();
+                    }
+                    else
+                    {
+                        this.tooltip = _loc2_.isPrem?TOOLTIPS.HEADER_PREMIUM_EXTEND:TOOLTIPS.HEADER_PREMIUM_BUY;
+                    }
                 }
                 else if(this._dataVo.id == HeaderButtonsHelper.ITEM_ID_SQUAD)
                 {

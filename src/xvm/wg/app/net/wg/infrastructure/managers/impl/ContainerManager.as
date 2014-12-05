@@ -18,7 +18,6 @@ package net.wg.infrastructure.managers.impl
         
         public function ContainerManager()
         {
-            this.tokenToView = {};
             this.nameToView = {};
             super();
             this._containersMap = new Dictionary();
@@ -29,8 +28,6 @@ package net.wg.infrastructure.managers.impl
         {
             return param1.sourceView.as_name;
         }
-        
-        private var tokenToView:Object;
         
         private var nameToView:Object;
         
@@ -76,37 +73,16 @@ package net.wg.infrastructure.managers.impl
             return _loc2_;
         }
         
-        public function as_getNameByToken(param1:String) : String
-        {
-            var _loc2_:ViewInfo = this.tokenToView[param1];
-            if(_loc2_)
-            {
-                return _loc2_.view.as_name;
-            }
-            return null;
-        }
-        
-        public function as_getViewTypeByToken(param1:String) : String
-        {
-            var _loc2_:ViewInfo = this.tokenToView[param1];
-            if(_loc2_)
-            {
-                return _loc2_.container.type;
-            }
-            return null;
-        }
-        
         public function as_show(param1:String, param2:int = 0, param3:int = 0) : Boolean
         {
             var _loc4_:* = false;
-            var _loc5_:ViewInfo = this.tokenToView[param1];
+            var _loc5_:ViewInfo = this.nameToView[param1];
             if((_loc5_) && (_loc5_.view))
             {
                 _loc5_.view.x = param2;
                 _loc5_.view.y = param3;
                 _loc5_.addView();
                 this.updateFocus();
-                this.nameToView[_loc5_.view.as_name] = _loc5_;
                 _loc4_ = true;
                 if(_loc5_.view.as_config.type == ContainerTypes.CURSOR)
                 {
@@ -118,14 +94,14 @@ package net.wg.infrastructure.managers.impl
                 }
                 return _loc4_;
             }
-            throw new Error("net.wg.infrastructure.base.BaseView is not found using token = " + param1);
+            throw new Error("net.wg.infrastructure.base.BaseView is not found using name = " + param1);
         }
         
         public function as_hide(param1:String) : Boolean
         {
             var _loc5_:* = NaN;
             var _loc2_:* = false;
-            var _loc3_:ViewInfo = this.tokenToView[param1];
+            var _loc3_:ViewInfo = this.nameToView[param1];
             var _loc4_:String = _loc3_.view.as_config.type;
             if(this._containersForLoadingViews[_loc4_])
             {
@@ -139,8 +115,6 @@ package net.wg.infrastructure.managers.impl
             {
                 delete this.nameToView[_loc3_.view.as_name];
                 true;
-                delete this.tokenToView[param1];
-                true;
                 _loc3_.removeView();
                 _loc3_.dispose();
                 _loc3_ = null;
@@ -148,17 +122,17 @@ package net.wg.infrastructure.managers.impl
                 this.updateFocus();
                 return _loc2_;
             }
-            throw new Error("net.wg.infrastructure.base.AbstractView is not found using token = " + param1);
+            throw new Error("net.wg.infrastructure.base.AbstractView is not found using name = " + param1);
         }
         
         public function as_registerContainer(param1:String, param2:String) : void
         {
             assert(!this.containersMap.hasOwnProperty(param1),"ContainerManager.as_registerContainer container for type " + param1 + " is already registered");
-            var _loc3_:ViewInfo = this.tokenToView[param2];
+            var _loc3_:ViewInfo = this.nameToView[param2];
             var _loc4_:IView = _loc3_.view;
-            assert(!(_loc3_ == null) && !(_loc3_.view == null),"ContainerManager.as_registerContainer view not found for token " + param2);
+            assert(!(_loc3_ == null) && !(_loc3_.view == null),"ContainerManager.as_registerContainer view not found for name " + param2);
             var _loc5_:IManagedContainer = _loc4_.getSubContainer();
-            assert(!(_loc5_ == null),"ContainerManager.as_registerContainer container is null for type " + param1 + " in view for token " + param2);
+            assert(!(_loc5_ == null),"ContainerManager.as_registerContainer container is null for type " + param1 + " in view for name " + param2);
             this.containersMap[param1] = _loc5_;
             _loc5_.addEventListener(FocusEvent.FOCUS_OUT,this.onContainerFocusOut);
         }
@@ -313,18 +287,20 @@ package net.wg.infrastructure.managers.impl
         override protected function onDispose() : void
         {
             var key:String = null;
+            var viewInfo:ViewInfo = null;
             var container:IManagedContainer = null;
             try
             {
-                for(key in this.tokenToView)
+                for(key in this.nameToView)
                 {
+                    viewInfo = this.nameToView[key];
                     if(!this.as_hide(key))
                     {
-                        delete this.tokenToView[key];
+                        delete this.nameToView[key];
                         true;
                     }
                 }
-                this.tokenToView = null;
+                this.nameToView = null;
                 for(key in this.containersMap)
                 {
                     container = this.getContainer(key);
@@ -361,11 +337,6 @@ package net.wg.infrastructure.managers.impl
             true;
         }
         
-        public function as_cancelLoadingsForContainer(param1:String) : void
-        {
-            this.cancelLoadingsForContainer(param1);
-        }
-        
         private function clearContainersForViewsDict() : void
         {
             var _loc1_:String = null;
@@ -394,6 +365,7 @@ package net.wg.infrastructure.managers.impl
             var viewType:String = null;
             var alias:String = null;
             var container:IManagedContainer = null;
+            var vi:ViewInfo = null;
             var viewIndex:int = 0;
             var e:LoaderEvent = param1;
             try
@@ -402,7 +374,8 @@ package net.wg.infrastructure.managers.impl
                 alias = e.view.as_alias;
                 container = this.getContainer(viewType);
                 assert(!(container == null),"container is null for type " + e.view.as_config.type + " of " + alias + " view.");
-                this.tokenToView[e.token] = new ViewInfo(container,IView(e.view));
+                vi = new ViewInfo(container,IView(e.view));
+                this.nameToView[vi.view.as_name] = vi;
                 viewIndex = this._containersForLoadingViews[viewType].indexOf(alias);
                 assert(!(viewIndex == -1),"view " + alias + " has been loaded, but it not exists in loading views.");
                 this._containersForLoadingViews[viewType].splice(viewIndex,1);

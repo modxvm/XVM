@@ -16,5 +16,9 @@ package net.wg.infrastructure.base.meta
         function as_setTimerDelta(param1:Object) : void;
         
         function as_updateDirections(param1:Object) : void;
+        
+        function as_setMineClanIcon(param1:String) : void;
+        
+        function as_setEnemyClanIcon(param1:String) : void;
     }
 }

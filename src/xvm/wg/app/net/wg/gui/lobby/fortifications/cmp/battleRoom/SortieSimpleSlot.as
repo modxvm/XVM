@@ -2,7 +2,7 @@ package net.wg.gui.lobby.fortifications.cmp.battleRoom
 {
     import net.wg.gui.rally.controls.RallySimpleSlotRenderer;
     import flash.display.Sprite;
-    import net.wg.gui.rally.controls.interfaces.IGrayTransparentButton;
+    import net.wg.gui.interfaces.IButtonIconTextTransparent;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.data.constants.Errors;
     import flash.events.MouseEvent;
@@ -17,12 +17,12 @@ package net.wg.gui.lobby.fortifications.cmp.battleRoom
         
         public var lockBackground:Sprite = null;
         
-        public function get grayTakePlaceFirstButton() : IGrayTransparentButton
+        public function get grayTakePlaceFirstButton() : IButtonIconTextTransparent
         {
-            return takePlaceFirstTimeBtn as IGrayTransparentButton;
+            return takePlaceFirstTimeBtn as IButtonIconTextTransparent;
         }
         
-        public function set grayTakePlaceFirstButton(param1:IGrayTransparentButton) : void
+        public function set grayTakePlaceFirstButton(param1:IButtonIconTextTransparent) : void
         {
             takePlaceFirstTimeBtn = param1 as SoundButtonEx;
         }

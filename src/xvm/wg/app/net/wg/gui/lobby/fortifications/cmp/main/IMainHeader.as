@@ -5,9 +5,10 @@ package net.wg.gui.lobby.fortifications.cmp.main
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconTextButton;
     import net.wg.gui.components.advanced.ToggleSoundButton;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import net.wg.gui.lobby.fortifications.cmp.main.impl.VignetteYellow;
     import net.wg.infrastructure.interfaces.IUIComponentEx;
+    import net.wg.gui.lobby.fortifications.cmp.main.impl.FortTimeAlertIcon;
     
     public interface IMainHeader extends IFilledBar, IFocusContainer
     {
@@ -32,9 +33,9 @@ package net.wg.gui.lobby.fortifications.cmp.main
         
         function set transportBtn(param1:ToggleSoundButton) : void;
         
-        function get settingBtn() : ButtonDnmIcon;
+        function get settingBtn() : IButtonIconLoader;
         
-        function set settingBtn(param1:ButtonDnmIcon) : void;
+        function set settingBtn(param1:IButtonIconLoader) : void;
         
         function get vignetteYellow() : VignetteYellow;
         
@@ -55,5 +56,9 @@ package net.wg.gui.lobby.fortifications.cmp.main
         function get tutorialArrow() : IUIComponentEx;
         
         function set tutorialArrow(param1:IUIComponentEx) : void;
+        
+        function get timeAlert() : FortTimeAlertIcon;
+        
+        function set timeAlert(param1:FortTimeAlertIcon) : void;
     }
 }

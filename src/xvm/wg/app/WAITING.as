@@ -14,6 +14,8 @@ package
         
         public static var LOADPAGE:String = "#waiting:loadPage";
         
+        public static var LOADCONTENT:String = "#waiting:loadContent";
+        
         public static var LOGIN:String = "#waiting:login";
         
         public static var ENTER:String = "#waiting:enter";

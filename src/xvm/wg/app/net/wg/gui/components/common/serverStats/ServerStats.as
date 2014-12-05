@@ -37,7 +37,9 @@ package net.wg.gui.components.common.serverStats
         
         public var textField:TextField;
         
-        private var _serverInfoData:Object = null;
+        private var _serverInfoStats:String = null;
+        
+        private var _serverInfoToolTipType:String = null;
         
         private var _serversList:Array;
         
@@ -46,7 +48,7 @@ package net.wg.gui.components.common.serverStats
         override protected function configUI() : void
         {
             super.configUI();
-            this.textField.text = MENU.LOBBY_MENU_SERVERS_TITLE;
+            this.textField.text = App.utils.locale.makeString(MENU.LOBBY_MENU_SERVERS_TITLE,{"sName":""});
             this.serverInfo.visible = App.globalVarsMgr.isShowServerStatsS();
             this.serverInfo.focusable = false;
             this.serverInfo.relativelyOwner = this.regionDD;
@@ -58,7 +60,7 @@ package net.wg.gui.components.common.serverStats
             super.draw();
             if(isInvalid(INVALIDATE_SERVER_INFO))
             {
-                this.serverInfo.setValues(this._serverInfoData);
+                this.serverInfo.setValues(this._serverInfoStats,this._serverInfoToolTipType);
             }
             if(isInvalid(INV_CSIS_LISTENING))
             {
@@ -91,20 +93,14 @@ package net.wg.gui.components.common.serverStats
         
         override protected function onDispose() : void
         {
-            var _loc1_:String = null;
             if(!App.globalVarsMgr.isChinaS())
             {
                 this.regionDD.removeEventListener(DropdownMenuEvent.SHOW_DROP_DOWN,this.onServersDDClick);
                 this.regionDD.removeEventListener(DropdownMenuEvent.CLOSE_DROP_DOWN,this.onServersDDClick);
                 this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
             }
-            for(_loc1_ in this._serverInfoData)
-            {
-                delete this._serverInfoData[_loc1_];
-                true;
-            }
-            this._serverInfoData = null;
             this.serverInfo.dispose();
+            this.regionDD.dispose();
             this.regionDD = null;
             super.onDispose();
         }
@@ -141,7 +137,7 @@ package net.wg.gui.components.common.serverStats
                 _loc3_++;
             }
             this.textField.autoSize = TextFieldAutoSize.CENTER;
-            this.textField.htmlText = App.utils.locale.makeString(MENU.LOBBY_MENU_SERVERS_TITLE) + " <font color=\"#8C8C7C\">" + _loc2_ + "</font>";
+            this.textField.htmlText = App.utils.locale.makeString(MENU.LOBBY_MENU_SERVERS_TITLE,{"sName":_loc2_});
         }
         
         public function as_setServersList(param1:Array) : void
@@ -155,9 +151,10 @@ package net.wg.gui.components.common.serverStats
             this.regionDD.enabled = !param1;
         }
         
-        public function as_setServerStats(param1:Object) : void
+        public function as_setServerStats(param1:String, param2:String) : void
         {
-            this._serverInfoData = param1;
+            this._serverInfoStats = param1;
+            this._serverInfoToolTipType = param2;
             invalidate(INVALIDATE_SERVER_INFO);
         }
         

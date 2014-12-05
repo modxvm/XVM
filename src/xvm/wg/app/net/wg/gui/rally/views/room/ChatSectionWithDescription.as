@@ -1,7 +1,7 @@
 package net.wg.gui.rally.views.room
 {
     import net.wg.gui.rally.interfaces.IChatSectionWithDescription;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import flash.text.TextField;
     import net.wg.gui.components.controls.TextInput;
     import scaleform.clik.events.ButtonEvent;
@@ -30,9 +30,9 @@ package net.wg.gui.rally.views.room
         
         protected static var INVALID_EDIT_MODE:String = "invalidEditMode";
         
-        public var editDescriptionButton:ButtonDnmIcon;
+        public var editDescriptionButton:IButtonIconLoader;
         
-        public var editCommitButton:ButtonDnmIcon;
+        public var editCommitButton:IButtonIconLoader;
         
         public var descriptionTF:TextField;
         
@@ -48,7 +48,9 @@ package net.wg.gui.rally.views.room
             this.editDescriptionButton.visible = false;
             this.editCommitButton.visible = false;
             this.editCommitButton.addEventListener(ButtonEvent.CLICK,this.onEditCommitClick);
+            this.editCommitButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_ENTERWHITE;
             this.editDescriptionButton.addEventListener(ButtonEvent.CLICK,this.onEditClick);
+            this.editDescriptionButton.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_PEN;
             this.descriptionInput.addEventListener(InputEvent.INPUT,this.descriptionInputHandler);
             var _loc1_:TextFormat = this.descriptionInput.textField.getTextFormat();
             _loc1_.italic = false;

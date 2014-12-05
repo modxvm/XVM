@@ -22,6 +22,10 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _dataBlock:String = "";
         
+        private var _counter:String = "";
+        
+        private var _iconAutoSize:Boolean = true;
+        
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
             if(param1 == "dataValue")
@@ -94,6 +98,26 @@ package net.wg.gui.lobby.questsWindow.data
         public function set dataBlock(param1:String) : void
         {
             this._dataBlock = param1;
+        }
+        
+        public function get counter() : String
+        {
+            return this._counter;
+        }
+        
+        public function set counter(param1:String) : void
+        {
+            this._counter = param1;
+        }
+        
+        public function get iconAutoSize() : Boolean
+        {
+            return this._iconAutoSize;
+        }
+        
+        public function set iconAutoSize(param1:Boolean) : void
+        {
+            this._iconAutoSize = param1;
         }
     }
 }

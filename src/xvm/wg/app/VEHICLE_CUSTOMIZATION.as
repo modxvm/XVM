@@ -38,6 +38,8 @@ package
         
         public static var CAMOUFLAGE_NATION_FRANCE:String = "#vehicle_customization:camouflage/nation/france";
         
+        public static var CUSTOMIZATION_STORED:String = "#vehicle_customization:customization/stored";
+        
         public static var TIMELEFT_TEMPORAL_USED:String = "#vehicle_customization:timeLeft/temporal/used";
         
         public static var TIMELEFT_TEMPORAL:String = "#vehicle_customization:timeLeft/temporal";

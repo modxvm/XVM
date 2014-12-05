@@ -150,7 +150,6 @@ package net.wg.gui.components.controls
         override protected function alignForAutoSize() : void
         {
             var _loc1_:* = NaN;
-            var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
             if(!initialized || _autoSize == TextFieldAutoSize.NONE || !textField)
@@ -158,7 +157,7 @@ package net.wg.gui.components.controls
                 return;
             }
             _loc1_ = _width;
-            _loc2_ = _width = this.calculateWidth();
+            var _loc2_:Number = _width = this.calculateWidth();
             switch(_autoSize)
             {
                 case TextFieldAutoSize.RIGHT:

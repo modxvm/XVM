@@ -7,8 +7,8 @@ package net.wg.infrastructure.base.meta
         
         function showQuestsWindowS() : void;
         
-        function as_highlightControl() : void;
+        function as_isShowAlertIcon(param1:Boolean, param2:Boolean) : void;
         
-        function as_resetControl() : void;
+        function as_setData(param1:Object) : void;
     }
 }

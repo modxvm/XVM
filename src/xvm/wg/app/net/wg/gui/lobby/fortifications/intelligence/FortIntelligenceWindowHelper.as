@@ -47,14 +47,16 @@ package net.wg.gui.lobby.fortifications.intelligence
             return param1 > param2;
         }
         
-        public function getDefaultFilterData() : IntelligenceClanFilterVO
+        public function getDefaultFilterData(param1:int, param2:Boolean) : IntelligenceClanFilterVO
         {
-            var _loc1_:Object = {};
-            _loc1_.minClanLevel = int(FORTIFICATION_ALIASES.CLAN_FILTER_MIN_LEVEL);
-            _loc1_.maxClanLevel = int(FORTIFICATION_ALIASES.CLAN_FILTER_MAX_LEVEL);
-            _loc1_.startDefenseHour = int(FORTIFICATION_ALIASES.CLAN_FILTER_DEFAULT_HOUR);
-            var _loc2_:IntelligenceClanFilterVO = new IntelligenceClanFilterVO(_loc1_);
-            return _loc2_;
+            var _loc3_:Object = {};
+            _loc3_.minClanLevel = int(FORTIFICATION_ALIASES.CLAN_FILTER_MIN_LEVEL);
+            _loc3_.maxClanLevel = int(FORTIFICATION_ALIASES.CLAN_FILTER_MAX_LEVEL);
+            _loc3_.startDefenseHour = int(FORTIFICATION_ALIASES.CLAN_FILTER_DEFAULT_HOUR);
+            _loc3_.yourOwnClanStartDefenseHour = param1;
+            _loc3_.isWrongLocalTime = param2;
+            var _loc4_:IntelligenceClanFilterVO = new IntelligenceClanFilterVO(_loc3_);
+            return _loc4_;
         }
     }
 }

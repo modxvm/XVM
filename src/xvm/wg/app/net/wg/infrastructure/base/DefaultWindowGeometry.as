@@ -33,24 +33,22 @@ package net.wg.infrastructure.base
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
             var _loc2_:IAbstractWindowView = param1.windowContent;
-            if(_loc2_)
+            if((_loc2_) && (_loc2_.isCentered))
             {
-                if((_loc2_.isCentered) || (_loc2_.isModal))
+                _loc3_ = Math.round(App.appWidth - param1.width >> 1);
+                _loc4_ = Math.max(Math.round(App.appHeight - param1.height >> 1),this.minY);
+                if(_loc2_.isModal)
                 {
-                    _loc3_ = Math.round(App.appWidth - param1.width >> 1);
-                    _loc4_ = Math.max(Math.round(App.appHeight - param1.height >> 1),this.minY);
-                    if(this.doPositionOnce)
-                    {
-                        param1.x = param1.x + _loc3_;
-                        param1.y = param1.y + _loc4_;
-                        this.doPositionOnce = false;
-                    }
-                    else
-                    {
-                        param1.x = _loc3_;
-                        param1.y = _loc4_;
-                    }
+                    param1.x = _loc3_;
+                    param1.y = _loc4_;
                 }
+                else if(this.doPositionOnce)
+                {
+                    param1.x = param1.x + _loc3_;
+                    param1.y = param1.y + _loc4_;
+                    this.doPositionOnce = false;
+                }
+                
             }
             return true;
         }

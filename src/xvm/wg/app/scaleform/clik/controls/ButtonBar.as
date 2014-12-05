@@ -601,5 +601,15 @@ package scaleform.clik.controls
             }
             _loc1_.displayFocus = _focused > 0;
         }
+        
+        public function get renderers() : Array
+        {
+            return this._renderers;
+        }
+        
+        public function set renderers(param1:Array) : void
+        {
+            this._renderers = param1;
+        }
     }
 }

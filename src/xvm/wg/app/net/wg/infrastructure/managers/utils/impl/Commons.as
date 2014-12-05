@@ -460,6 +460,14 @@ package net.wg.infrastructure.managers.utils.impl
             param1.x = _loc9_;
             param1.y = _loc10_;
         }
+        
+        public function rgbToArgb(param1:uint, param2:Number) : uint
+        {
+            var _loc3_:uint = param1;
+            var param2:Number = param2 * 100;
+            _loc3_ = _loc3_ + (param2 << 24);
+            return _loc3_;
+        }
     }
 }
 import net.wg.infrastructure.interfaces.IUserProps;

@@ -19,6 +19,11 @@ package net.wg.gui.lobby.questsWindow.components
             this._data = param1;
         }
         
+        public function getData() : Object
+        {
+            return this._data;
+        }
+        
         override protected function onDispose() : void
         {
             this._data = null;

@@ -37,8 +37,6 @@ package net.wg.infrastructure.base
         
         private var _disposed:Boolean = false;
         
-        private var _token:String = null;
-        
         private var _alias:String = null;
         
         private var _name:String = null;
@@ -173,16 +171,6 @@ package net.wg.infrastructure.base
         public function get disposed() : Boolean
         {
             return this._disposed;
-        }
-        
-        public function get as_token() : String
-        {
-            return this._token;
-        }
-        
-        public function set as_token(param1:String) : void
-        {
-            this._token = param1;
         }
         
         public function get as_alias() : String

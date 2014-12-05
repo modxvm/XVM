@@ -293,7 +293,7 @@ package net.wg.gui.components.controls
                 {
                     _loc4_ = getRendererAt(_loc3_);
                     _loc5_ = _loc4_ as Sprite;
-                    _loc5_.buttonMode = this._buttonModeEnabled;
+                    _loc5_.buttonMode = (this._buttonModeEnabled) && (_loc4_.enabled);
                     _loc3_++;
                 }
             }
@@ -610,7 +610,7 @@ package net.wg.gui.components.controls
                 _loc5_.setData(param1[_loc4_]);
                 _loc5_.validateNow();
                 _loc8_ = _loc5_ as Sprite;
-                _loc8_.buttonMode = this._buttonModeEnabled;
+                _loc8_.buttonMode = (this._buttonModeEnabled) && (_loc5_.enabled);
                 _loc4_++;
             }
         }

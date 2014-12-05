@@ -27,9 +27,9 @@ package net.wg.gui.lobby.hangar.tcarousel
     import net.wg.gui.lobby.hangar.tcarousel.helper.VehicleCarouselVOBuilder;
     import scaleform.clik.data.DataProvider;
     import net.wg.utils.INations;
-    import net.wg.data.daapi.ContextMenuVehicleVo;
-    import net.wg.data.components.VehicleContextMenuGenerator;
+    import net.wg.data.constants.generated.CONTEXT_MENU_HANDLER_TYPE;
     import scaleform.clik.data.ListData;
+    import net.wg.data.constants.VehicleState;
     
     public class TankCarousel extends TankCarouselMeta implements ITankCarouselMeta, IDAAPIModule, IHelpLayoutComponent
     {
@@ -418,15 +418,17 @@ package net.wg.gui.lobby.hangar.tcarousel
         {
             var _loc2_:String = null;
             var _loc3_:IListItemRenderer = null;
+            var _loc4_:VehicleCarouselVO = null;
             super.enabled = param1;
             if(this._createdRendersListByCompDescr != null)
             {
                 for(_loc2_ in this._createdRendersListByCompDescr)
                 {
                     _loc3_ = this._createdRendersListByCompDescr[_loc2_];
+                    _loc4_ = this._vehiclesVOManager.getVOByCD(Number(_loc2_));
                     if(_loc3_ != null)
                     {
-                        _loc3_.enabled = enabled;
+                        _loc3_.enabled = _loc4_?this.getItemEnabledState(_loc4_):enabled;
                     }
                 }
             }
@@ -821,10 +823,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private function showContextMenu(param1:Number) : void
         {
-            var _loc2_:Object = App.contextMenuMgr.getContextMenuVehicleDataByInvCD(param1);
-            var _loc3_:ContextMenuVehicleVo = new ContextMenuVehicleVo(_loc2_);
-            _loc3_.component = VehicleContextMenuGenerator.COMPONENT_HANGAR;
-            App.contextMenuMgr.showVehicleContextMenu(this,_loc3_,new VehicleContextMenuGenerator());
+            App.contextMenuMgr.showNew(String(param1),CONTEXT_MENU_HANDLER_TYPE.VEHICLE,this);
         }
         
         private function rebuildRenderers() : void
@@ -908,8 +907,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             var _loc8_:ListData = null;
             var _loc6_:DisplayObject = param2 as DisplayObject;
             var _loc7_:TankCarouselItemRenderer = param2 as TankCarouselItemRenderer;
-            _loc7_.enabled = enabled;
             _loc7_.dragEnabled = dragEnabled;
+            param3.enabled = this.getItemEnabledState(param3);
             _loc7_.setDataVO(param3);
             if(!param4)
             {
@@ -927,6 +926,11 @@ package net.wg.gui.lobby.hangar.tcarousel
                 _loc6_.visible = true;
             }
             
+        }
+        
+        private function getItemEnabledState(param1:VehicleCarouselVO) : Boolean
+        {
+            return param1.stat == VehicleState.IN_PREBATTLE || (this.enabled);
         }
         
         private function getRendererByCompactDescr(param1:Number) : IListItemRenderer

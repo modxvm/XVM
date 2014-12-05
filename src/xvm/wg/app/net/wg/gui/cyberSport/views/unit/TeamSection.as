@@ -2,7 +2,7 @@ package net.wg.gui.cyberSport.views.unit
 {
     import net.wg.gui.rally.views.room.TeamSectionWithDropIndicators;
     import net.wg.gui.components.advanced.ToggleButton;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import flash.text.TextField;
     import net.wg.gui.rally.controls.interfaces.IRallySimpleSlotRenderer;
     import net.wg.gui.rally.controls.SlotDropIndicator;
@@ -26,14 +26,13 @@ package net.wg.gui.cyberSport.views.unit
         public function TeamSection()
         {
             super();
-            this.btnFreeze.externalSource = true;
         }
         
         private static var LABEL_ICON_GAP:Number = 20;
         
         public var btnFreeze:ToggleButton;
         
-        public var btnConfigure:ButtonDnmIcon;
+        public var btnConfigure:IButtonIconLoader;
         
         public var lblTeamPoints:TextField;
         
@@ -130,14 +129,9 @@ package net.wg.gui.cyberSport.views.unit
             return CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS;
         }
         
-        override protected function getVehiclesStr() : String
+        override protected function setVehiclesStr() : void
         {
-            return CYBERSPORT.WINDOW_UNIT_TEAMVEHICLES;
-        }
-        
-        override protected function getVehiclesStaticStr() : String
-        {
-            return CYBERSPORT.WINDOW_UNIT_TEAMVEHICLESSTUB;
+            vehiclesLabel = CYBERSPORT.WINDOW_UNIT_TEAMVEHICLESSTUB;
         }
         
         override protected function getSlotsUI() : Vector.<IRallySimpleSlotRenderer>
@@ -175,6 +169,8 @@ package net.wg.gui.cyberSport.views.unit
             this.settingsIcons.x = lblTeamHeader.x + lblTeamHeader.textWidth + LABEL_ICON_GAP;
             this.btnFreeze.addEventListener(ButtonEvent.CLICK,this.onStatusToggle);
             tooltipSubscribe([this.btnFreeze,this.btnConfigure,this.lblTeamPoints]);
+            this.btnFreeze.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_FLAKE;
+            this.btnConfigure.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_GEAR;
         }
         
         override protected function draw() : void

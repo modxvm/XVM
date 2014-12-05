@@ -48,6 +48,10 @@ package net.wg.gui.lobby.tankman
             _loc2_.dropSkillGold = DropSkillsCost.parseFromObject(param1.dropSkillsCost[2]);
             _loc2_.dropSkillGold.id = 2;
             _loc2_.defaultSavingMode = param1.defaultSavingMode;
+            if(param1.texts)
+            {
+                _loc2_.freeDropText = param1.texts.freeDrop;
+            }
             return _loc2_;
         }
         
@@ -88,6 +92,8 @@ package net.wg.gui.lobby.tankman
         public var dropSkillGold:DropSkillsCost;
         
         public var defaultSavingMode:int;
+        
+        public var freeDropText:String = "";
         
         public function get nation() : String
         {

@@ -2,7 +2,7 @@ package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.infrastructure.base.BaseDAAPIComponent;
     import net.wg.data.constants.Errors;
-    import net.wg.gui.lobby.fortifications.data.FortInterFilterVO;
+    import net.wg.gui.lobby.fortifications.data.FortIntelFilterVO;
     import net.wg.infrastructure.exceptions.AbstractException;
     
     public class FortIntelFilterMeta extends BaseDAAPIComponent
@@ -31,11 +31,11 @@ package net.wg.infrastructure.base.meta.impl
         
         public function as_setData(param1:Object) : void
         {
-            var _loc2_:FortInterFilterVO = new FortInterFilterVO(param1);
+            var _loc2_:FortIntelFilterVO = new FortIntelFilterVO(param1);
             this.setData(_loc2_);
         }
         
-        protected function setData(param1:FortInterFilterVO) : void
+        protected function setData(param1:FortIntelFilterVO) : void
         {
             var _loc2_:String = "as_setData" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);

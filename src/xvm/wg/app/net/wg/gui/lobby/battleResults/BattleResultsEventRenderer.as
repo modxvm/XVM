@@ -246,7 +246,9 @@ package net.wg.gui.lobby.battleResults
         private function linkBtnHandler(param1:ButtonEvent) : void
         {
             App.toolTipMgr.hide();
-            dispatchEvent(new QuestEvent(QuestEvent.SELECT_QUEST,this.data.questInfo.questID));
+            var _loc2_:QuestEvent = new QuestEvent(QuestEvent.SELECT_QUEST,this.data.questInfo.questID);
+            _loc2_.eventType = this.data.questInfo.eventType;
+            dispatchEvent(_loc2_);
         }
     }
 }

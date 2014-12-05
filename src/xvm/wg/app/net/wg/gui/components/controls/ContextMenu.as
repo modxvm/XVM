@@ -2,9 +2,10 @@ package net.wg.gui.components.controls
 {
     import scaleform.clik.core.UIComponent;
     import net.wg.infrastructure.interfaces.IContextMenu;
+    import flash.display.MovieClip;
     import scaleform.clik.utils.Padding;
     import net.wg.infrastructure.interfaces.IContextItem;
-    import flash.display.MovieClip;
+    import flash.geom.Point;
     import scaleform.clik.motion.Tween;
     import net.wg.gui.utils.ExcludeTweenManager;
     import net.wg.utils.IClassFactory;
@@ -13,9 +14,9 @@ package net.wg.gui.components.controls
     import scaleform.clik.events.ButtonEvent;
     import flash.display.DisplayObject;
     import flash.events.MouseEvent;
-    import net.wg.gui.events.ContextMenuEvent;
     import net.wg.data.VO.SeparateItem;
     import fl.transitions.easing.Strong;
+    import net.wg.gui.events.ContextMenuEvent;
     
     public class ContextMenu extends UIComponent implements IContextMenu
     {
@@ -31,31 +32,31 @@ package net.wg.gui.components.controls
             this.padding = new Padding(0,0,0,0);
         }
         
+        public var bgMc:MovieClip;
+        
+        public var groupItemSelected:ContextMenuItem;
+        
+        public var hit:MovieClip = null;
+        
         private var MARGIN:Number = 0;
         
         private var _padding:Padding;
         
         private var _data:Vector.<IContextItem> = null;
         
-        public var bgMc:MovieClip;
-        
         private var _bgShadowBorder:Padding;
         
         private var _hitAreMargin:Padding;
-        
-        private var FIRST_ELEM_TOP_PADDING:Number = 9;
-        
-        private var LAST_ELEM_BOTTOM_PADDING:Number = 9;
         
         private var startX:Number;
         
         private var startY:Number;
         
+        private var _clickPoint:Point;
+        
         private var showHideSubTween:Tween;
         
         private var expandTween:Tween;
-        
-        public var groupItemSelected:ContextMenuItem;
         
         private var items:Array;
         
@@ -63,118 +64,114 @@ package net.wg.gui.components.controls
         
         private var tweenManager:ExcludeTweenManager;
         
-        public var hit:MovieClip = null;
+        private var FIRST_ELEM_TOP_PADDING:Number = 9;
         
-        override protected function configUI() : void
+        private var LAST_ELEM_BOTTOM_PADDING:Number = 9;
+        
+        override public function toString() : String
         {
-            super.configUI();
-            if(this.hit)
-            {
-                hitArea = this.hit;
-            }
-            if(this.bgMc)
-            {
-                this.bgMc.mouseEnabled = false;
-                this.bgMc.mouseChildren = false;
-                this.bgMc.tabEnabled = false;
-                this.bgMc.tabChildren = false;
-            }
+            return "[Wargaming ContextMenu " + name + "]";
         }
         
-        public function build(param1:Vector.<IContextItem>, param2:Number, param3:Number) : void
+        public function build(param1:Vector.<IContextItem>, param2:Point) : void
         {
-            var _loc4_:Vector.<IContextItem> = null;
-            var _loc5_:uint = 0;
+            var _loc3_:* = NaN;
+            var _loc5_:Vector.<IContextItem> = null;
             var _loc6_:uint = 0;
-            var _loc7_:* = NaN;
+            var _loc7_:uint = 0;
             var _loc8_:* = NaN;
             var _loc9_:* = NaN;
             var _loc10_:* = NaN;
-            var _loc11_:uint = 0;
+            var _loc11_:* = NaN;
             var _loc12_:uint = 0;
-            var _loc13_:IClassFactory = null;
-            var _loc14_:* = NaN;
-            var _loc15_:* = undefined;
-            var _loc16_:ContextMenuItem = null;
-            var _loc17_:ContextMenuItemSeparate = null;
-            var _loc18_:IContextItem = null;
-            var _loc19_:* = NaN;
+            var _loc13_:uint = 0;
+            var _loc14_:IClassFactory = null;
+            var _loc15_:* = NaN;
+            var _loc16_:* = undefined;
+            var _loc17_:ContextMenuItem = null;
+            var _loc18_:ContextMenuItemSeparate = null;
+            var _loc19_:IContextItem = null;
+            var _loc20_:* = NaN;
+            this._clickPoint = param2;
+            _loc3_ = param2.x;
+            var _loc4_:Number = param2.y;
+            this.clearItems();
             this._data = param1;
             if(this._data)
             {
-                _loc4_ = this._data;
-                _loc7_ = this.MARGIN + this._bgShadowBorder.left;
-                _loc8_ = this.MARGIN + this._bgShadowBorder.top + this.FIRST_ELEM_TOP_PADDING;
-                _loc9_ = _loc7_;
+                _loc5_ = this._data;
+                _loc8_ = this.MARGIN + this._bgShadowBorder.left;
+                _loc9_ = this.MARGIN + this._bgShadowBorder.top + this.FIRST_ELEM_TOP_PADDING;
                 _loc10_ = _loc8_;
-                _loc11_ = 0;
+                _loc11_ = _loc9_;
                 _loc12_ = 0;
+                _loc13_ = 0;
                 this.items = new Array();
-                _loc13_ = App.utils.classFactory;
-                _loc14_ = _loc4_.length;
-                _loc16_ = null;
-                _loc5_ = 0;
-                while(_loc5_ < _loc14_)
+                _loc14_ = App.utils.classFactory;
+                _loc15_ = _loc5_.length;
+                _loc17_ = null;
+                _loc6_ = 0;
+                while(_loc6_ < _loc15_)
                 {
-                    _loc17_ = null;
-                    _loc18_ = _loc4_[_loc5_];
-                    if(_loc18_.id == ContextMenuConstants.SEPARATE)
+                    _loc18_ = null;
+                    _loc19_ = _loc5_[_loc6_];
+                    if(_loc19_.id == ContextMenuConstants.SEPARATE)
                     {
-                        _loc17_ = _loc13_.getComponent(Linkages.CONTEXT_MENU_SEPARATE,ContextMenuItemSeparate);
-                        _loc17_.index = _loc5_;
-                        _loc17_.id = _loc18_.id;
-                        _loc17_.x = _loc9_;
-                        _loc17_.y = _loc10_;
-                        _loc10_ = _loc10_ + (_loc17_.height + this.padding.bottom + this.padding.top);
-                        this.items.push(_loc17_);
+                        _loc18_ = _loc14_.getComponent(Linkages.CONTEXT_MENU_SEPARATE,ContextMenuItemSeparate);
+                        _loc18_.index = _loc6_;
+                        _loc18_.id = _loc19_.id;
+                        _loc18_.x = _loc10_;
+                        _loc18_.y = _loc11_;
+                        _loc11_ = _loc11_ + (_loc18_.height + this.padding.bottom + this.padding.top);
+                        this.items.push(_loc18_);
                     }
                     else
                     {
-                        _loc15_ = _loc13_.getComponent(Linkages.CONTEXT_MENU_ITEM,ContextMenuItem,_loc18_.initData);
-                        _loc15_.index = _loc5_;
-                        _loc15_.items = _loc4_[_loc5_].submenu?_loc4_[_loc5_].submenu.slice(0,_loc4_[_loc5_].submenu.length):new Vector.<IContextItem>();
-                        _loc15_.addEventListener(ButtonEvent.CLICK,this.onItemClick);
-                        _loc15_.id = _loc18_.id;
-                        _loc15_.label = _loc18_.label;
-                        _loc15_.invalidWidth();
-                        _loc11_ = Math.max(_loc11_,_loc15_.width);
-                        _loc15_.x = _loc9_;
-                        _loc15_.y = _loc10_;
-                        _loc10_ = _loc10_ + (_loc15_.height + this.padding.bottom + this.padding.top);
-                        if(_loc15_.items.length > 0)
+                        _loc16_ = _loc14_.getComponent(Linkages.CONTEXT_MENU_ITEM,ContextMenuItem,_loc19_.initData);
+                        _loc16_.index = _loc6_;
+                        _loc16_.items = _loc5_[_loc6_].submenu?_loc5_[_loc6_].submenu.slice(0,_loc5_[_loc6_].submenu.length):new Vector.<IContextItem>();
+                        _loc16_.addEventListener(ButtonEvent.CLICK,this.onItemClick);
+                        _loc16_.id = _loc19_.id;
+                        _loc16_.label = _loc19_.label;
+                        _loc16_.invalidWidth();
+                        _loc12_ = Math.max(_loc12_,_loc16_.width);
+                        _loc16_.x = _loc10_;
+                        _loc16_.y = _loc11_;
+                        _loc11_ = _loc11_ + (_loc16_.height + this.padding.bottom + this.padding.top);
+                        if(_loc16_.items.length > 0)
                         {
-                            _loc11_ = Math.max(_loc11_,this.createSubItems(_loc15_));
+                            _loc12_ = Math.max(_loc12_,this.createSubItems(_loc16_));
                         }
-                        this.items.push(_loc15_);
+                        this.items.push(_loc16_);
                     }
-                    this.addChild(_loc17_ != null?_loc17_:_loc15_);
-                    _loc5_++;
+                    this.addChild(_loc18_ != null?_loc18_:_loc16_);
+                    _loc6_++;
                 }
-                _loc14_ = this.items.length;
-                _loc5_ = 0;
-                while(_loc5_ < this.items.length)
+                _loc15_ = this.items.length;
+                _loc6_ = 0;
+                while(_loc6_ < this.items.length)
                 {
-                    _loc15_ = this.items[_loc5_];
-                    _loc15_.width = _loc11_;
-                    _loc19_ = _loc15_.subItems.length;
-                    _loc6_ = 0;
-                    while(_loc6_ < _loc19_)
+                    _loc16_ = this.items[_loc6_];
+                    _loc16_.width = _loc12_;
+                    _loc20_ = _loc16_.subItems.length;
+                    _loc7_ = 0;
+                    while(_loc7_ < _loc20_)
                     {
-                        _loc16_ = _loc15_.subItems[_loc6_];
-                        _loc16_.width = _loc11_;
-                        _loc6_++;
+                        _loc17_ = _loc16_.subItems[_loc7_];
+                        _loc17_.width = _loc12_;
+                        _loc7_++;
                     }
-                    _loc5_++;
+                    _loc6_++;
                 }
-                _loc12_ = _loc10_ - this.MARGIN - this.padding.bottom - this.padding.top - this._bgShadowBorder.top - this.FIRST_ELEM_TOP_PADDING;
-                this.bgMc.width = _loc11_ + this.MARGIN * 2 + this._bgShadowBorder.left + this._bgShadowBorder.right ^ 0;
-                this.bgMc.height = _loc12_ + this.MARGIN * 2 + this._bgShadowBorder.top + this._bgShadowBorder.bottom + this.FIRST_ELEM_TOP_PADDING + this.LAST_ELEM_BOTTOM_PADDING ^ 0;
-                this.hit.x = _loc7_ - this._hitAreMargin.left;
-                this.hit.y = _loc8_ - this.FIRST_ELEM_TOP_PADDING - this._hitAreMargin.top;
+                _loc13_ = _loc11_ - this.MARGIN - this.padding.bottom - this.padding.top - this._bgShadowBorder.top - this.FIRST_ELEM_TOP_PADDING;
+                this.bgMc.width = _loc12_ + this.MARGIN * 2 + this._bgShadowBorder.left + this._bgShadowBorder.right ^ 0;
+                this.bgMc.height = _loc13_ + this.MARGIN * 2 + this._bgShadowBorder.top + this._bgShadowBorder.bottom + this.FIRST_ELEM_TOP_PADDING + this.LAST_ELEM_BOTTOM_PADDING ^ 0;
+                this.hit.x = _loc8_ - this._hitAreMargin.left;
+                this.hit.y = _loc9_ - this.FIRST_ELEM_TOP_PADDING - this._hitAreMargin.top;
                 this.hit.width = this.bgMc.width - (this._bgShadowBorder.horizontal + this.MARGIN * 2) + this._hitAreMargin.horizontal;
                 this.hit.height = this.bgMc.height - (this._bgShadowBorder.vertical + this.MARGIN * 2) + this._hitAreMargin.vertical;
-                this.x = param2 - this._bgShadowBorder.left;
-                this.y = param3 - this._bgShadowBorder.top;
+                this.x = _loc3_ - this._bgShadowBorder.left;
+                this.y = _loc4_ - this._bgShadowBorder.top;
                 if(this.y + this.bgMc.height > App.instance.appHeight)
                 {
                     this.y = this.y - this.hit.height + this._hitAreMargin.vertical ^ 0;
@@ -194,14 +191,82 @@ package net.wg.gui.components.controls
                 this.startX = this.x;
                 this.startY = this.y;
             }
-            App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.mouseDownHandler);
         }
         
-        private function mouseDownHandler(param1:MouseEvent) : void
+        public function setMemberItemData(param1:Object) : void
         {
-            if(!this.hit.hitTestPoint(App.stage.mouseX,App.stage.mouseY))
+            this._memberItemData = param1;
+        }
+        
+        public function get padding() : Padding
+        {
+            return this._padding;
+        }
+        
+        public function set padding(param1:Padding) : void
+        {
+            this._padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
+        }
+        
+        override protected function configUI() : void
+        {
+            super.configUI();
+            App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.mouseDownHandler);
+            if(this.hit)
             {
-                dispatchEvent(new ContextMenuEvent(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE));
+                hitArea = this.hit;
+            }
+            if(this.bgMc)
+            {
+                this.bgMc.mouseEnabled = false;
+                this.bgMc.mouseChildren = false;
+                this.bgMc.tabEnabled = false;
+                this.bgMc.tabChildren = false;
+            }
+        }
+        
+        override protected function onDispose() : void
+        {
+            super.onDispose();
+            if(App.instance.stage.hasEventListener(MouseEvent.MOUSE_DOWN))
+            {
+                App.instance.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.mouseDownHandler);
+            }
+            this.tweenManager.unregisterAll();
+            this.clearItems();
+        }
+        
+        protected function clearItems() : void
+        {
+            var _loc1_:uint = 0;
+            var _loc2_:uint = 0;
+            if(this.items)
+            {
+                _loc1_ = 0;
+                while(_loc1_ < this.items.length)
+                {
+                    if(this.items[_loc1_].subItems)
+                    {
+                        _loc2_ = 0;
+                        while(_loc2_ < this.items[_loc1_].subItems.length)
+                        {
+                            if(this.items[_loc1_].subItems[_loc2_].hasEventListener(ButtonEvent.CLICK))
+                            {
+                                this.items[_loc1_].subItems[_loc2_].removeEventListener(ButtonEvent.CLICK,this.onItemClick);
+                            }
+                            this.removeChild(this.items[_loc1_].subItems[_loc2_]);
+                            _loc2_++;
+                        }
+                    }
+                    if(this.items[_loc1_].hasEventListener(ButtonEvent.CLICK))
+                    {
+                        this.items[_loc1_].removeEventListener(ButtonEvent.CLICK,this.onItemClick);
+                    }
+                    this.removeChild(this.items[_loc1_]);
+                    _loc1_++;
+                }
+                this.items.splice();
+                this.items = null;
             }
         }
         
@@ -239,16 +304,6 @@ package net.wg.gui.components.controls
                 _loc7_++;
             }
             return _loc6_;
-        }
-        
-        private function onItemClick(param1:ButtonEvent) : void
-        {
-            var _loc2_:ContextMenuItem = ContextMenuItem(param1.target);
-            this.beginAnimExpand(_loc2_);
-            if(_loc2_.type != _loc2_.CONTEXT_MENU_ITEM_GROUP)
-            {
-                dispatchEvent(new ContextMenuEvent(ContextMenuEvent.ON_ITEM_SELECT,_loc2_.id,this._data,this._memberItemData));
-            }
         }
         
         private function beginAnimExpand(param1:ContextMenuItem) : void
@@ -379,64 +434,27 @@ _loc2_.visible = false;
 this.tweenManager.unregister(param1);
 }
 
-public function get padding() : Padding
+private function mouseDownHandler(param1:MouseEvent) : void
 {
-return this._padding;
-}
-
-public function set padding(param1:Padding) : void
+if(!this.hit.hitTestPoint(App.stage.mouseX,App.stage.mouseY))
 {
-this._padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
-}
-
-override protected function onDispose() : void
-{
-var _loc3_:uint = 0;
-var _loc4_:uint = 0;
-super.onDispose();
-if(App.instance.stage.hasEventListener(MouseEvent.MOUSE_DOWN))
-{
-App.instance.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.mouseDownHandler);
-}
-this.tweenManager.unregisterAll();
-var _loc1_:uint = 0;
-var _loc2_:uint = this.numChildren;
-if(this.items)
-{
-_loc3_ = 0;
-while(_loc3_ < this.items.length)
-{
-if(this.items[_loc3_].subItems)
-{
-    _loc4_ = 0;
-    while(_loc4_ < this.items[_loc3_].subItems.length)
-    {
-        if(this.items[_loc3_].subItems[_loc4_].hasEventListener(ButtonEvent.CLICK))
-        {
-            this.items[_loc3_].subItems[_loc4_].removeEventListener(ButtonEvent.CLICK,this.onItemClick);
-        }
-        this.removeChild(this.items[_loc3_].subItems[_loc4_]);
-        _loc4_++;
-    }
-}
-if(this.items[_loc3_].hasEventListener(ButtonEvent.CLICK))
-{
-    this.items[_loc3_].removeEventListener(ButtonEvent.CLICK,this.onItemClick);
-}
-this.removeChild(this.items[_loc3_]);
-_loc3_++;
-}
+dispatchEvent(new ContextMenuEvent(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE));
 }
 }
 
-public function setMemberItemData(param1:Object) : void
+private function onItemClick(param1:ButtonEvent) : void
 {
-this._memberItemData = param1;
+var _loc2_:ContextMenuItem = ContextMenuItem(param1.target);
+this.beginAnimExpand(_loc2_);
+if(_loc2_.type != _loc2_.CONTEXT_MENU_ITEM_GROUP)
+{
+dispatchEvent(new ContextMenuEvent(ContextMenuEvent.ON_ITEM_SELECT,_loc2_.id,this._data,this._memberItemData));
+}
 }
 
-override public function toString() : String
+public function get clickPoint() : Point
 {
-return "[Wargaming ContextMenu " + name + "]";
+return this._clickPoint;
 }
 }
 }

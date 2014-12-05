@@ -2,6 +2,7 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
 {
     import net.wg.infrastructure.base.meta.impl.FortClanBattleListMeta;
     import net.wg.infrastructure.base.meta.IFortClanBattleListMeta;
+    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import flash.text.TextField;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.lobby.fortifications.data.battleRoom.clanBattle.ClanBattleListVO;
@@ -12,7 +13,6 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.gui.rally.interfaces.IRallyListItemVO;
-    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import scaleform.clik.data.DataProvider;
     import net.wg.data.constants.SortingInfo;
     import net.wg.gui.rally.data.ManualSearchDataProvider;
@@ -26,6 +26,18 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             super();
             listDataProvider = new ManualSearchDataProvider(ClanBattleRenderListVO);
             detailsSection.addEventListener(RallyViewsEvent.CREATE_CLAN_BATTLE_ROOM,this.onCreateClanBattleRoomHandler);
+        }
+        
+        private static function createTableBtnInfo(param1:String, param2:String, param3:Number, param4:Number, param5:String, param6:String) : NormalSortingBtnInfo
+        {
+            var _loc7_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            _loc7_.label = param1;
+            _loc7_.buttonWidth = param3;
+            _loc7_.sortOrder = param4;
+            _loc7_.toolTip = param5;
+            _loc7_.iconId = param2;
+            _loc7_.textAlign = param6;
+            return _loc7_;
         }
         
         public var currentBattlesCount:TextField;
@@ -127,33 +139,11 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
 
 private function initListColumns() : void
 {
-    var _loc1_:NormalSortingBtnInfo = null;
-    var _loc2_:Array = [];
-    _loc1_ = new NormalSortingBtnInfo();
-    _loc1_.label = FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_BATTLENAME;
-    _loc1_.buttonWidth = 247;
-    _loc1_.textAlign = TextFieldAutoSize.LEFT;
-    _loc1_.iconId = "direction";
-    _loc1_.toolTip = TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME;
-    _loc1_.sortOrder = 1;
-    _loc2_.push(_loc1_);
-    _loc1_ = new NormalSortingBtnInfo();
-    _loc1_.label = FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_DAYOFBATTLE;
-    _loc1_.buttonWidth = 200;
-    _loc1_.iconId = "description";
-    _loc1_.textAlign = TextFieldAutoSize.CENTER;
-    _loc1_.toolTip = TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE;
-    _loc1_.sortOrder = 2;
-    _loc2_.push(_loc1_);
-    _loc1_ = new NormalSortingBtnInfo();
-    _loc1_.label = FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_BATTLETIME;
-    _loc1_.textAlign = TextFieldAutoSize.RIGHT;
-    _loc1_.buttonWidth = 122;
-    _loc1_.iconId = "startTimeLeft";
-    _loc1_.toolTip = TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME;
-    _loc1_.sortOrder = 0;
-    _loc2_.push(_loc1_);
-    rallyTable.headerDP = new DataProvider(_loc2_);
+    var _loc1_:Array = [];
+    _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_BATTLENAME,"direction",247,1,TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME,TextFieldAutoSize.LEFT));
+    _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_DAYOFBATTLE,"description",200,2,TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE,TextFieldAutoSize.CENTER));
+    _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_BATTLETIME,"startTimeLeft",122,0,TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME,TextFieldAutoSize.RIGHT));
+    rallyTable.headerDP = new DataProvider(_loc1_);
     rallyTable.sortByField("startTimeLeft",SortingInfo.ASCENDING_SORT);
 }
 

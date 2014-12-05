@@ -3,7 +3,6 @@ package net.wg.infrastructure.managers.utils.impl
     import net.wg.utils.IDateTime;
     import net.wg.utils.IAssertable;
     import net.wg.data.constants.Time;
-    import net.wg.data.daapi.DateParams;
     
     public class DateTime extends Object implements IDateTime
     {
@@ -132,10 +131,7 @@ package net.wg.infrastructure.managers.utils.impl
         
         public function fromPyTimestamp(param1:Number) : Date
         {
-            var _loc2_:Object = App.utils.getDateParamsS(param1);
-            var _loc3_:DateParams = new DateParams(_loc2_);
-            var _loc4_:Date = new Date(_loc3_.year,_loc3_.month,_loc3_.date,_loc3_.hour,_loc3_.minute,_loc3_.second,_loc3_.millisecond);
-            return _loc4_;
+            return new Date(param1 * Time.MILLISECOND_IN_SECOND);
         }
         
         public function getAS3FirstDayOfWeek() : int

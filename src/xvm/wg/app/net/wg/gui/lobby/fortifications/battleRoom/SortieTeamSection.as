@@ -80,7 +80,6 @@ package net.wg.gui.lobby.fortifications.battleRoom
         override protected function configUI() : void
         {
             super.configUI();
-            lblTeamVehicles.htmlText = this.getVehiclesStaticStr();
             this.updateTeamHeader();
         }
         
@@ -96,16 +95,6 @@ package net.wg.gui.lobby.fortifications.battleRoom
         override protected function getMembersStr() : String
         {
             return FORTIFICATIONS.SORTIE_ROOM_MEMBERS;
-        }
-        
-        override protected function getVehiclesStr() : String
-        {
-            return App.utils.locale.makeString(FORTIFICATIONS.SORTIE_ROOM_VEHICLES);
-        }
-        
-        override protected function getVehiclesStaticStr() : String
-        {
-            return App.utils.locale.makeString(FORTIFICATIONS.SORTIE_ROOM_VEHICLES);
         }
         
         override protected function getSlotsUI() : Vector.<IRallySimpleSlotRenderer>

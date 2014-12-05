@@ -10,6 +10,22 @@ package net.wg.gui.lobby.fortifications.data.battleRoom
             super(param1);
         }
         
+        private static var ALERT_VIEW:String = "alertView";
+        
+        public var isShowAlertView:Boolean = false;
+        
+        public var alertView:SortieAlertViewVO = null;
+        
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
+            if(param1 == ALERT_VIEW && !(param2 == null))
+            {
+                this.alertView = new SortieAlertViewVO(param2);
+                return false;
+            }
+            return super.onDataWrite(param1,param2);
+        }
+        
         override protected function initSlotsVO(param1:Object) : void
         {
             var _loc3_:Object = null;

@@ -2,6 +2,7 @@ package net.wg.gui.lobby.window
 {
     import net.wg.infrastructure.base.meta.impl.ReferralManagementWindowMeta;
     import net.wg.infrastructure.base.meta.IReferralManagementWindowMeta;
+    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import flash.text.TextField;
     import net.wg.gui.components.controls.HyperLink;
     import net.wg.gui.components.controls.SoundButtonEx;
@@ -15,7 +16,6 @@ package net.wg.gui.lobby.window
     import flash.events.MouseEvent;
     import net.wg.gui.lobby.referralSystem.ReferralManagementEvent;
     import net.wg.gui.lobby.referralSystem.data.ComplexProgressIndicatorVO;
-    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import flash.text.TextFieldAutoSize;
     import net.wg.data.constants.Tooltips;
     import net.wg.data.constants.Values;
@@ -35,6 +35,24 @@ package net.wg.gui.lobby.window
         }
         
         private static var INFO_ICON_VERTICAL_OFFSET:int = 10;
+        
+        private static function createTableBtnInfo(param1:String, param2:Number, param3:Number, param4:String, param5:String = "", param6:String = "") : NormalSortingBtnInfo
+        {
+            var _loc7_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            _loc7_.label = param1;
+            _loc7_.buttonWidth = param2;
+            _loc7_.sortOrder = param3;
+            _loc7_.textAlign = param4;
+            if(param6)
+            {
+                _loc7_.setToolTipSpecial(param6);
+            }
+            else
+            {
+                _loc7_.toolTip = param5;
+            }
+            return _loc7_;
+        }
         
         public var infoHeaderTF:TextField = null;
         
@@ -153,34 +171,11 @@ package net.wg.gui.lobby.window
         
         private function getHeadersDP() : DataProvider
         {
-            var _loc2_:NormalSortingBtnInfo = null;
             var _loc1_:Array = [];
-            _loc2_ = new NormalSortingBtnInfo();
-            _loc2_.label = this.model.tableNickText;
-            _loc2_.buttonWidth = 176;
-            _loc2_.sortOrder = 0;
-            _loc2_.textAlign = TextFieldAutoSize.CENTER;
-            _loc1_.push(_loc2_);
-            _loc2_ = new NormalSortingBtnInfo();
-            _loc2_.label = this.model.tableExpText;
-            _loc2_.buttonWidth = 113;
-            _loc2_.sortOrder = 0;
-            _loc2_.textAlign = TextFieldAutoSize.RIGHT;
-            _loc2_.toolTip = this.model.tableExpTT;
-            _loc1_.push(_loc2_);
-            _loc2_ = new NormalSortingBtnInfo();
-            _loc2_.label = this.model.tableExpMultiplierText;
-            _loc2_.buttonWidth = 193;
-            _loc2_.sortOrder = 0;
-            _loc2_.textAlign = TextFieldAutoSize.CENTER;
-            _loc2_.setToolTipSpecial(Tooltips.REF_SYS_XP_MULTIPLIER);
-            _loc1_.push(_loc2_);
-            _loc2_ = new NormalSortingBtnInfo();
-            _loc2_.label = Values.EMPTY_STR;
-            _loc2_.buttonWidth = 166;
-            _loc2_.sortOrder = 0;
-            _loc2_.textAlign = TextFieldAutoSize.CENTER;
-            _loc1_.push(_loc2_);
+            _loc1_.push(createTableBtnInfo(this.model.tableNickText,146,0,TextFieldAutoSize.LEFT));
+            _loc1_.push(createTableBtnInfo(this.model.tableExpText,143,0,TextFieldAutoSize.RIGHT,this.model.tableExpTT));
+            _loc1_.push(createTableBtnInfo(this.model.tableExpMultiplierText,193,0,TextFieldAutoSize.CENTER,"",Tooltips.REF_SYS_XP_MULTIPLIER));
+            _loc1_.push(createTableBtnInfo(Values.EMPTY_STR,166,0,TextFieldAutoSize.CENTER));
             return new DataProvider(_loc1_);
         }
         

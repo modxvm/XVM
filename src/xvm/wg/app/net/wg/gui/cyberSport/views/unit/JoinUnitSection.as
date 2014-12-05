@@ -3,7 +3,7 @@ package net.wg.gui.cyberSport.views.unit
     import net.wg.gui.rally.views.list.BaseRallyDetailsSection;
     import flash.text.TextField;
     import flash.display.MovieClip;
-    import net.wg.gui.cyberSport.controls.GrayButtonText;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.Sprite;
     import net.wg.gui.rally.vo.RallyShortVO;
     import net.wg.gui.rally.BaseRallyMainWindow;
@@ -29,7 +29,7 @@ package net.wg.gui.cyberSport.views.unit
         
         public var restrictionIcon:MovieClip;
         
-        public var joinUnitButton:GrayButtonText;
+        public var joinUnitButton:SoundButtonEx;
         
         public var slot0:SimpleSlotRenderer;
         

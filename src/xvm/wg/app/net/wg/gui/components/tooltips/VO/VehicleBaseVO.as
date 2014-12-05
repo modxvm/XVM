@@ -12,7 +12,11 @@ package net.wg.gui.components.tooltips.VO
         
         public static var DEF_SELL_PRICE:String = "def_sell_price";
         
+        public static var DEF_RENT_PRICE:String = "defRentPrice";
+        
         public static var ACTION_PRC:String = "action_prc";
+        
+        public static var RENT_ACTION_PRC:String = "rentActionPrc";
         
         public var vName:String = null;
         

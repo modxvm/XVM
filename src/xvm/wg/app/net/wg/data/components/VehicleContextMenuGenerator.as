@@ -80,8 +80,11 @@ package net.wg.data.components
             var _loc2_:Array = [VEHICLE_INFO,{},VEHICLE_STATISTIC,{"enabled":param1.wasInBattle},ContextMenuConstants.SEPARATE,{}];
             if(param1.isRented)
             {
-                _loc2_.push(VEHICLE_BUY);
-                _loc2_.push({"enabled":param1.canBuyOrRent});
+                if(!param1.isPremiumIGR)
+                {
+                    _loc2_.push(VEHICLE_BUY);
+                    _loc2_.push({"enabled":param1.canBuyOrRent});
+                }
                 _loc2_.push(VEHICLE_REMOVE);
                 _loc2_.push({"enabled":param1.rentalIsOver && param1.canSell});
             }

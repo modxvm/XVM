@@ -68,6 +68,8 @@ package net.wg.app
         
         function get browserBgClass() : Class;
         
+        function get altBrowserBgClass() : Class;
+        
         function get libraryLoader() : ILibraryLoader;
     }
 }

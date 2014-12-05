@@ -54,5 +54,7 @@ package net.wg.utils
         function initTabIndex(param1:Array) : void;
         
         function moveDsiplObjToEndOfText(param1:DisplayObject, param2:TextField, param3:int = 0, param4:int = 0) : void;
+        
+        function rgbToArgb(param1:uint, param2:Number) : uint;
     }
 }

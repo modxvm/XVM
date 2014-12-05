@@ -23,10 +23,10 @@ package net.wg.infrastructure.base.meta.impl
             this.saveSorting(param1,param2,param3);
         }
         
-        public function showEventsWindowS(param1:String) : void
+        public function showEventsWindowS(param1:String, param2:int) : void
         {
             App.utils.asserter.assertNotNull(this.showEventsWindow,"showEventsWindow" + Errors.CANT_NULL);
-            this.showEventsWindow(param1);
+            this.showEventsWindow(param1,param2);
         }
         
         public function getClanEmblemS(param1:String, param2:Number) : void

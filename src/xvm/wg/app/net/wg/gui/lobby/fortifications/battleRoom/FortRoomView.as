@@ -2,7 +2,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
 {
     import net.wg.infrastructure.base.meta.impl.FortRoomMeta;
     import net.wg.infrastructure.base.meta.IFortRoomMeta;
-    import net.wg.gui.components.controls.SoundButton;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.InfoIcon;
     import flash.text.TextField;
     import net.wg.gui.rally.interfaces.IRallyVO;
@@ -34,7 +34,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         private static var SET_PLAYER_STATE:int = 6;
         
-        public var changeDivisionBtn:SoundButton = null;
+        public var changeDivisionBtn:SoundButtonEx = null;
         
         public var filterInfo:InfoIcon = null;
         

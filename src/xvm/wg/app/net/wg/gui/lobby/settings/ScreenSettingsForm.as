@@ -61,6 +61,10 @@ package net.wg.gui.lobby.settings
         
         public var dynamicFovCheckbox:CheckBox = null;
         
+        public var HAVOK_ENABLEDLabel:LabelControl = null;
+        
+        public var HAVOK_ENABLEDDropDown:DropdownMenu = null;
+        
         public var colorFilterDefaultImg:UILoaderAlt = null;
         
         public var colorFilterOverlayImg:UILoaderAlt = null;
@@ -130,6 +134,8 @@ package net.wg.gui.lobby.settings
             this.fovLabel.dispose();
             this.fovRangeSlider.dispose();
             this.dynamicFovCheckbox.dispose();
+            this.HAVOK_ENABLEDLabel.dispose();
+            this.HAVOK_ENABLEDDropDown.dispose();
             this.monitorLabel = null;
             this.monitorDropDown = null;
             this.fullScreenCheckbox = null;
@@ -156,6 +162,8 @@ package net.wg.gui.lobby.settings
             this.fovLabel = null;
             this.fovRangeSlider = null;
             this.dynamicFovCheckbox = null;
+            this.HAVOK_ENABLEDLabel = null;
+            this.HAVOK_ENABLEDDropDown = null;
             this.topShadow = null;
             this.bottomShadow = null;
             super.onDispose();

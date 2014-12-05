@@ -7,11 +7,7 @@ package net.wg.infrastructure.base.meta
         
         function channelOpenClickS(param1:Number) : void;
         
-        function minimizeAllChannelsS() : void;
-        
         function closeAllS() : void;
-        
-        function closeAllExceptCurrentS(param1:Number) : void;
         
         function channelCloseClickS(param1:Number) : void;
         

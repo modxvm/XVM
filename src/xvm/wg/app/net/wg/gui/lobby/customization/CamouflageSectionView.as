@@ -143,11 +143,6 @@ package net.wg.gui.lobby.customization
                 _loc2_++;
             }
             this.updateTimeLeftVisibility();
-            if(view != null)
-            {
-                view.selectedItemIdx = 0;
-                view.invalidateListData(true);
-            }
         }
         
         override public function onDropSuccess() : void

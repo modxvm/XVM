@@ -10,6 +10,10 @@ package net.wg.gui.lobby.fortifications.data.battleRoom.clanBattle
             super(param1);
         }
         
+        public var useUniqueIdentifier:Boolean = false;
+        
+        public var uniqueIdentifier:Number = -1;
+        
         public var deltaTime:int = -1;
         
         public var htmlFormatter:String = "";

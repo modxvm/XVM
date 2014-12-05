@@ -143,7 +143,7 @@ package net.wg.gui.lobby.tankman
             this.rightDashLine.dispose();
             this.rightDashLine = null;
             this.skills.removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
-            this.skills.removeEventListener(MouseEvent.MOUSE_MOVE,this.onMouseOver);
+            this.skills.removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOver);
             this.skills.removeEventListener(MouseEvent.CLICK,this.skills_mouseClickHandler);
             this.skills.removeEventListener(ButtonEvent.CLICK,this.skills_buttonClickHandler);
             this.skills.dispose();
@@ -179,7 +179,7 @@ package net.wg.gui.lobby.tankman
         {
             this.skills.buttonMode = true;
             this.skills.addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
-            this.skills.addEventListener(MouseEvent.MOUSE_MOVE,this.onMouseOver);
+            this.skills.addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOver);
             this.skills.addEventListener(MouseEvent.CLICK,this.skills_mouseClickHandler);
             this.skills.addEventListener(ButtonEvent.CLICK,this.skills_buttonClickHandler);
         }
@@ -191,7 +191,7 @@ package net.wg.gui.lobby.tankman
         
         private function onMouseOver(param1:MouseEvent) : void
         {
-            App.cursor.setCursor(Cursors.BUTTON);
+            App.cursor.as_setCursor(Cursors.BUTTON);
             if(!this.model.hasOwnProperty("name") && !this.model.hasOwnProperty("tankmanID") && !(this.model.name == null))
             {
                 return;
@@ -208,7 +208,7 @@ package net.wg.gui.lobby.tankman
         
         private function onMouseOut(param1:MouseEvent) : void
         {
-            App.cursor.setCursor(Cursors.ARROW);
+            App.cursor.as_setCursor(Cursors.ARROW);
             App.toolTipMgr.hide();
         }
         

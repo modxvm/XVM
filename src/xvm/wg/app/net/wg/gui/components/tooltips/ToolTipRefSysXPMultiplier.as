@@ -28,9 +28,9 @@ package net.wg.gui.components.tooltips
         
         private static var BG_WIDTH:int = 374;
         
-        private static var BG_HEIGHT:int = 304;
+        private static var BOTTOM_SEPARATOR_PADDING:int = 15;
         
-        private static var WHITE_BG_HEIGHT:int = 120;
+        private static var BOTTOM_PADDING:int = 25;
         
         private static var TEXT_PADDING:int = 5;
         
@@ -87,7 +87,7 @@ package net.wg.gui.components.tooltips
         {
             super.updateSize();
             background.width = BG_WIDTH;
-            background.height = BG_HEIGHT;
+            background.height = this.bottomTF.y + this.bottomTF.height + BOTTOM_PADDING ^ 0;
         }
         
         override protected function updatePositions() : void
@@ -104,20 +104,22 @@ package net.wg.gui.components.tooltips
             this.whiteBg.x = 0;
             this.whiteBg.y = _loc1_.y + _loc1_.height ^ 0;
             this.whiteBg.width = background.width;
-            this.whiteBg.height = WHITE_BG_HEIGHT;
             this.conditionsTF.y = _loc1_.y + _loc1_.height + 16 ^ 0;
             this.conditionsTF.height = this.conditionsTF.textHeight;
             var _loc3_:int = this.model.xpBlocksVOs.length;
-            var _loc4_:* = 0;
-            while(_loc4_ < _loc3_)
+            var _loc4_:int = this.conditionsTF.y + BOTTOM_PADDING;
+            var _loc5_:* = 0;
+            while(_loc5_ < _loc3_)
             {
                 _loc2_ = this.createXPBlock(content);
-                _loc2_.update(this.model.xpBlocksVOs[_loc4_]);
+                _loc2_.update(this.model.xpBlocksVOs[_loc5_]);
                 _loc2_.x = this.conditionsTF.x + XP_BLOCK_PADDING;
-                _loc2_.y = this.conditionsTF.y + 25 + _loc2_.height * _loc4_ ^ 0;
+                _loc2_.y = _loc4_ ^ 0;
+                _loc4_ = _loc4_ + _loc2_.height;
                 this.xpBlocks.push(_loc2_);
-                _loc4_++;
+                _loc5_++;
             }
+            this.whiteBg.height = _loc2_.y + _loc2_.height - this.whiteBg.y + BOTTOM_SEPARATOR_PADDING ^ 0;
             _loc1_ = Utils.instance.createSeparate(content);
             _loc1_.y = this.whiteBg.y + this.whiteBg.height ^ 0;
             separators.push(_loc1_);

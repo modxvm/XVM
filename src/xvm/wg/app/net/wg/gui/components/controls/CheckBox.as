@@ -50,7 +50,7 @@ package net.wg.gui.components.controls
         
         private var _wordWrap:Boolean = false;
         
-        private var _toolTip:String = "";
+        private var _tooltip:String = "";
         
         private var _infoIcoType:String = "";
         
@@ -116,6 +116,7 @@ package net.wg.gui.components.controls
             if(!(_label == null) && !(textField == null))
             {
                 textField.htmlText = _label;
+                invalidate(this.INVALIDATION_TEXT_FIELD_HEIGHT);
             }
         }
         
@@ -227,16 +228,16 @@ package net.wg.gui.components.controls
         
         public function set toolTip(param1:String) : void
         {
-            if((param1) && !(param1 == this._toolTip))
+            if((param1) && !(param1 == this._tooltip))
             {
-                this._toolTip = param1;
+                this._tooltip = param1;
                 invalidate(this.INFO_INV);
             }
         }
         
         public function get toolTip() : String
         {
-            return this._toolTip;
+            return this._tooltip;
         }
         
         public function get multiline() : Boolean
@@ -320,17 +321,18 @@ package net.wg.gui.components.controls
                     _loc1_.leading = this._textLineSpacing;
                     textField.setTextFormat(_loc1_);
                     textField.alpha = enabled?1:this._disabledTextAlpha;
+                    invalidate(this.INVALIDATION_TEXT_FIELD_HEIGHT);
                 }
             }
             if(isInvalid(this.INFO_INV))
             {
-                if(!(this._infoIcoType == "") && !(this._toolTip == ""))
+                if(!(this._infoIcoType == "") && !(this._tooltip == ""))
                 {
                     if(!this._infoIco)
                     {
                         this.createInfoIco();
                     }
-                    this._infoIco.tooltip = this._toolTip;
+                    this._infoIco.tooltip = this._tooltip;
                     this._infoIco.icoType = this._infoIcoType;
                     this.repositionInfoIcon();
                 }
@@ -363,7 +365,7 @@ package net.wg.gui.components.controls
             if(this._infoIco)
             {
                 this._infoIco.x = this.x + textField.x + textField.textWidth + InfoIcon.CHECK_BOX_MARGIN;
-                this._infoIco.y = this.y + (textField.y + textField.height >> 1) - 1;
+                this._infoIco.y = this.y + (textField.y + textField.height >> 1);
             }
         }
         
@@ -415,6 +417,11 @@ package net.wg.gui.components.controls
             }
             this._textLineSpacing = param1;
             invalidate(this.TEXT_FORMAT_INV);
+        }
+        
+        public function canPlaySound(param1:String) : Boolean
+        {
+            return this.enabled;
         }
     }
 }

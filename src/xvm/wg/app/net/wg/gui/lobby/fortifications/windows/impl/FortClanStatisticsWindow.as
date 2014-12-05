@@ -34,6 +34,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         public var mcLineAsset:MovieClip;
         
+        private var emptyMCHitArea:MovieClip;
+        
         public function as_setData(param1:Object) : void
         {
             this.model = new ClanStatsVO(param1);
@@ -44,6 +46,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
         {
             super.configUI();
             this.tabs.visible = App.globalVarsMgr.isFortificationBattleAvailableS();
+            this.emptyMCHitArea = new MovieClip();
+            this.mcLineAsset.hitArea = this.emptyMCHitArea;
         }
         
         override protected function draw() : void
@@ -63,6 +67,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         override protected function onDispose() : void
         {
             this.sortieForm.dispose();
+            this.emptyMCHitArea = null;
             this.sortieForm = null;
             this.periodDefenceForm.dispose();
             this.periodDefenceForm = null;

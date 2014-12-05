@@ -223,7 +223,7 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        protected function addBlock(param1:Object) : void
+        protected function addBlock(param1:Object) : IResizableContent
         {
             var _loc2_:IResizableContent = App.utils.classFactory.getComponent(param1.linkage,IResizableContent);
             _loc2_.isReadyForLayout = false;
@@ -234,6 +234,7 @@ package net.wg.gui.lobby.questsWindow.components
             _loc2_.validateNow();
             this._blocks.push(_loc2_);
             addChild(DisplayObject(_loc2_));
+            return _loc2_;
         }
         
         protected function layoutBlocks() : void
@@ -249,6 +250,11 @@ package net.wg.gui.lobby.questsWindow.components
             setSize(this.width,_loc2_);
             this.isReadyForLayout = true;
             dispatchEvent(new Event(Event.RESIZE));
+        }
+        
+        public function getBlocksRef() : Vector.<IResizableContent>
+        {
+            return this._blocks;
         }
         
         protected function componentsResizeHandler(param1:ResizableBlockEvent) : void

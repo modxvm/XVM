@@ -1,7 +1,6 @@
 package net.wg.gui.components.controls
 {
     import scaleform.clik.controls.ScrollBar;
-    import scaleform.clik.constants.ScrollBarTrackMode;
     import flash.events.MouseEvent;
     import flash.events.Event;
     import scaleform.gfx.MouseEventEx;
@@ -12,9 +11,11 @@ package net.wg.gui.components.controls
         
         public function ScrollBar()
         {
-            _trackMode = ScrollBarTrackMode.SCROLL_TO_CURSOR;
+            _minThumbSize = MIN_THUMB_SIZE;
             super();
         }
+        
+        private static var MIN_THUMB_SIZE:int = 53;
         
         public var upArrowWg:SoundButton;
         
@@ -22,27 +23,51 @@ package net.wg.gui.components.controls
         
         public var thumbWg:SoundButton;
         
+        override public function setScrollProperties(param1:Number, param2:Number, param3:Number, param4:Number = undefined) : void
+        {
+            trackScrollPageSize = param1;
+            super.setScrollProperties(param1,param2,param3,param4);
+        }
+        
+        override public function get minThumbSize() : Number
+        {
+            return _minThumbSize;
+        }
+        
+        override public function set minThumbSize(param1:Number) : void
+        {
+            var param1:Number = Math.max(MIN_THUMB_SIZE,param1);
+            _minThumbSize = param1;
+            invalidateSize();
+        }
+        
+        override public function get enabled() : Boolean
+        {
+            return super.enabled;
+        }
+        
+        override public function set enabled(param1:Boolean) : void
+        {
+            super.enabled = param1;
+            upArrow.enabled = param1;
+            downArrow.enabled = param1;
+            thumb.enabled = param1;
+            mouseEnabled = mouseChildren = param1;
+        }
+        
         override protected function configUI() : void
         {
             super.configUI();
         }
         
-        override public function get trackMode() : String
+        override protected function scrollUp() : void
         {
-            return _trackMode;
+            position = position - 1;
         }
         
-        override public function set trackMode(param1:String) : void
+        override protected function scrollDown() : void
         {
-            if(param1 == _trackMode)
-            {
-                return;
-            }
-            _trackMode = param1;
-            if(initialized)
-            {
-                track.autoRepeat = this.trackMode == ScrollBarTrackMode.SCROLL_PAGE;
-            }
+            position = position + 1;
         }
         
         override protected function initialize() : void
@@ -93,20 +118,6 @@ package net.wg.gui.components.controls
                 return;
             }
             super.handleTrackClick(param1);
-        }
-        
-        override public function get enabled() : Boolean
-        {
-            return super.enabled;
-        }
-        
-        override public function set enabled(param1:Boolean) : void
-        {
-            super.enabled = param1;
-            upArrow.enabled = param1;
-            downArrow.enabled = param1;
-            thumb.enabled = param1;
-            mouseEnabled = mouseChildren = param1;
         }
     }
 }

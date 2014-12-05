@@ -4,8 +4,9 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.events.MouseEvent;
     import flash.text.TextField;
-    import scaleform.clik.controls.StatusIndicator;
+    import net.wg.gui.components.controls.StatusIndicatorAnim;
     import net.wg.gui.lobby.fortifications.data.BuildingIndicatorsVO;
+    import net.wg.gui.lobby.fortifications.data.BuildingProgressLblVO;
     
     public class BuildingIndicatorsCmp extends MovieClip implements IDisposable
     {
@@ -13,6 +14,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public function BuildingIndicatorsCmp()
         {
             super();
+            this.hpProgress.callback = this.updateHpLabel;
+            this.defResProgress.callback = this.updateResLabel;
         }
         
         private static function onRollOutHandler(param1:MouseEvent) : void
@@ -24,9 +27,9 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         public var defResLbl:TextField;
         
-        public var hpProgress:StatusIndicator;
+        public var hpProgress:StatusIndicatorAnim;
         
-        public var defResProgress:StatusIndicator;
+        public var defResProgress:StatusIndicatorAnim;
         
         public var hpProgressLabels:ProgressTotalLabels;
         
@@ -37,6 +40,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public var defResToolTipArea:MovieClip;
         
         private var model:BuildingIndicatorsVO;
+        
+        private var _invokeFirstTime:Boolean = true;
         
         public function dispose() : void
         {
@@ -67,11 +72,43 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.hpLbl.htmlText = this.model.hpLabel;
             this.defResLbl.htmlText = this.model.defResLabel;
             this.hpProgress.maximum = this.model.hpTotalValue;
-            this.hpProgress.value = this.model.hpCurrentValue;
             this.defResProgress.maximum = this.model.defResTotalValue;
+            if(this._invokeFirstTime)
+            {
+                this.hpProgress.useAnim = false;
+                this.defResProgress.useAnim = false;
+                this._invokeFirstTime = false;
+            }
+            else
+            {
+                this.hpProgress.useAnim = true;
+                this.defResProgress.useAnim = true;
+            }
+            this.hpProgress.value = this.model.hpCurrentValue;
             this.defResProgress.value = this.model.defResCurrentValue;
-            this.hpProgressLabels.setData = this.model.hpProgressLabels;
-            this.defResLabels.setData = this.model.defResProgressLabels;
+        }
+        
+        private function updateHpLabel() : void
+        {
+            if(this.model)
+            {
+                this.model.hpProgressLabels.currentValue = App.utils.locale.integer(this.hpProgress.value);
+                this.updateLabel(this.hpProgressLabels,this.model.hpProgressLabels);
+            }
+        }
+        
+        private function updateResLabel() : void
+        {
+            if(this.model)
+            {
+                this.model.defResProgressLabels.currentValue = App.utils.locale.integer(this.defResProgress.value);
+                this.updateLabel(this.defResLabels,this.model.defResProgressLabels);
+            }
+        }
+        
+        private function updateLabel(param1:ProgressTotalLabels, param2:BuildingProgressLblVO) : void
+        {
+            param1.setData = param2;
         }
         
         public function showToolTips(param1:Boolean) : void

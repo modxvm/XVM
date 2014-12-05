@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var demoClick:Function = null;
         
+        public var getTooltipData:Function = null;
+        
         public function selectFightS(param1:String) : void
         {
             App.utils.asserter.assertNotNull(this.selectFight,"selectFight" + Errors.CANT_NULL);
@@ -25,6 +27,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.demoClick,"demoClick" + Errors.CANT_NULL);
             this.demoClick();
+        }
+        
+        public function getTooltipDataS(param1:String) : String
+        {
+            App.utils.asserter.assertNotNull(this.getTooltipData,"getTooltipData" + Errors.CANT_NULL);
+            return this.getTooltipData(param1);
         }
     }
 }

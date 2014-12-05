@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.profile.pages.technique.data
 {
     import net.wg.gui.lobby.profile.data.ProfileCommonInfoVO;
-    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
+    import net.wg.gui.lobby.profile.data.AchievementProfileVO;
     import net.wg.gui.lobby.profile.pages.statistics.body.DetailedStatisticsUnitVO;
     
     public class ProfileVehicleDossierVO extends ProfileCommonInfoVO
@@ -24,7 +24,7 @@ package net.wg.gui.lobby.profile.pages.technique.data
         {
             var _loc3_:Array = null;
             var _loc4_:uint = 0;
-            var _loc5_:ProfileAchievementVO = null;
+            var _loc5_:AchievementProfileVO = null;
             var _loc6_:uint = 0;
             var _loc7_:Array = null;
             var _loc8_:Array = null;
@@ -48,7 +48,7 @@ package net.wg.gui.lobby.profile.pages.technique.data
                     _loc11_ = 0;
                     while(_loc11_ < _loc10_)
                     {
-                        _loc5_ = new ProfileAchievementVO(_loc8_[_loc11_]);
+                        _loc5_ = new AchievementProfileVO(_loc8_[_loc11_]);
                         _loc7_.push(_loc5_);
                         _loc11_++;
                     }

@@ -48,6 +48,7 @@ package net.wg.gui.components.advanced.calendar
         override protected function configUI() : void
         {
             super.configUI();
+            _stateMap["selecting"] = ["up"];
             mouseEnabledOnDisabled = true;
             addEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
             addEventListener(MouseEvent.ROLL_OUT,onRollOut);
@@ -160,6 +161,30 @@ package net.wg.gui.components.advanced.calendar
                 focused = 0;
                 selected = false;
                 setState(ComponentState.OUT);
+            }
+        }
+        
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
+            super.handleMouseRollOver(param1);
+            if(enabled)
+            {
+                if(!focused || (selected))
+                {
+                    setState(ComponentState.OVER);
+                }
+            }
+        }
+        
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
+            super.handleMouseRollOut(param1);
+            if(enabled)
+            {
+                if(!focused || (selected))
+                {
+                    setState(ComponentState.OUT);
+                }
             }
         }
         

@@ -1,9 +1,10 @@
 package net.wg.gui.components.advanced
 {
+    import net.wg.gui.components.controls.ButtonIconLoader;
     import flash.display.Sprite;
     import flash.display.MovieClip;
     import scaleform.clik.constants.InvalidationType;
-    import flash.events.Event;
+    import scaleform.clik.utils.Padding;
     
     public class ToggleButton extends ButtonIconLoader
     {
@@ -13,6 +14,7 @@ package net.wg.gui.components.advanced
             super();
             this.rFlagsFrame.visible = false;
             this.vType.visible = false;
+            disabledFillPadding = new Padding(2,0,2,0);
             _data = {};
             this.hightLight.visible = false;
         }
@@ -38,7 +40,6 @@ package net.wg.gui.components.advanced
         override public function set enabled(param1:Boolean) : void
         {
             super.enabled = param1;
-            this.alpha = param1?1:0.5;
         }
         
         public function get vehicleType() : String
@@ -66,7 +67,6 @@ package net.wg.gui.components.advanced
             if((param1) && !(param1 == "") && !(param1 == "none"))
             {
                 this._nationFlag = param1;
-                externalSource = true;
                 _data = this._nationFlag;
                 iconSource = FLAGS_SOURCE + this._nationFlag + ".png";
                 this.rFlagsFrame.visible = true;
@@ -94,10 +94,6 @@ package net.wg.gui.components.advanced
         
         protected function changeViewState(param1:Boolean) : void
         {
-            if(externalSource)
-            {
-                return;
-            }
             this.vType.visible = param1;
             if(param1)
             {
@@ -106,17 +102,27 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function completeHandler(param1:Event) : void
+        override protected function configIcon() : void
         {
-            if((loader) && (this.toggleBg.contains(loader)))
+            if((container) && (loader))
             {
-                this.toggleBg.removeChild(loader);
+                container.x = Math.floor((hitArea.width - loader.width) / 2 + _iconOffsetLeft);
+                container.y = Math.floor((hitArea.height - loader.height) / 2 + _iconOffsetTop);
             }
-            loader.scaleX = 1 / this.toggleBg.scaleX;
-            loader.scaleY = 1 / this.toggleBg.scaleY;
-            loader.x = Math.floor((this.toggleBg.width / this.toggleBg.scaleX - loader.width) / 2);
-            loader.y = Math.floor((this.toggleBg.height / this.toggleBg.scaleY - loader.height) / 2);
-            this.toggleBg.addChild(loader);
+        }
+        
+        override protected function updateDisable() : void
+        {
+            if(disableMc != null)
+            {
+                disableMc.x = disabledFillPadding.left;
+                disableMc.y = disabledFillPadding.top;
+                disableMc.scaleX = 1 / this.scaleX;
+                disableMc.scaleY = 1 / this.scaleY;
+                disableMc.widthFill = Math.round(this.toggleBg.width * this.scaleX) - disabledFillPadding.horizontal;
+                disableMc.heightFill = Math.round(this.toggleBg.height * this.scaleY) - disabledFillPadding.vertical;
+                disableMc.visible = !enabled;
+            }
         }
     }
 }

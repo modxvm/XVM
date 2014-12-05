@@ -189,7 +189,8 @@ package net.wg.gui.lobby.battleResults
         
         private function drawLayout() : void
         {
-            var _loc8_:MovieClip = null;
+            var _loc8_:* = NaN;
+            var _loc9_:MovieClip = null;
             var _loc1_:Number = this.renderers.length;
             var _loc2_:MovieClip = null;
             var _loc3_:Number = Math.round(this.renderers[0].width);
@@ -206,7 +207,8 @@ package net.wg.gui.lobby.battleResults
             }
             else if(this._align == ALIGN_CENTER)
             {
-                _loc6_ = Math.round((width - _loc5_ * _loc1_) / 2);
+                _loc8_ = _loc5_ * (_loc1_ - 1) + _loc3_;
+                _loc6_ = Math.round((width - _loc8_) / 2);
             }
             
             var _loc7_:Number = 0;
@@ -226,12 +228,12 @@ package net.wg.gui.lobby.battleResults
                 _loc2_.index = _loc7_;
                 if(!(this._stripeRenderer == "") && (isDisplaySpecial(_loc2_.data)))
                 {
-                    _loc8_ = this.stripes[_loc7_];
-                    if(_loc8_)
+                    _loc9_ = this.stripes[_loc7_];
+                    if(_loc9_)
                     {
-                        _loc8_.x = _loc2_.x - Math.round((_loc8_.width - _loc2_.width) / 2);
-                        _loc8_.y = _loc2_.y - Math.round((_loc8_.height - _loc2_.height) / 2);
-                        _loc8_.visible = true;
+                        _loc9_.x = _loc2_.x - Math.round((_loc9_.width - _loc2_.width) / 2);
+                        _loc9_.y = _loc2_.y - Math.round((_loc9_.height - _loc2_.height) / 2);
+                        _loc9_.visible = true;
                     }
                 }
                 _loc2_.visible = true;
@@ -325,7 +327,7 @@ package net.wg.gui.lobby.battleResults
                 _loc8_ = this.dataProvider[_loc3_.index];
                 if(_loc8_.type == "markOfMastery")
                 {
-                    _loc9_ = Tooltips.TANK_CLASS;
+                    _loc9_ = Tooltips.MARK_OF_MASTERY;
                 }
                 else if(_loc8_.type == "marksOnGun")
                 {

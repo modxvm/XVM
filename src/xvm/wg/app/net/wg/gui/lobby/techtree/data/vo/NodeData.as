@@ -60,6 +60,8 @@ package net.wg.gui.lobby.techtree.data.vo
         
         public var isRemovable:Boolean = false;
         
+        public var isPremiumIGR:Boolean = false;
+        
         public function get earnedXP() : Number
         {
             return this._earnedXP;
@@ -139,6 +141,10 @@ package net.wg.gui.lobby.techtree.data.vo
             if(param1.hasOwnProperty("isRemovable"))
             {
                 this.isRemovable = param1["isRemovable"];
+            }
+            if(param1.hasOwnProperty("isPremiumIGR"))
+            {
+                this.isPremiumIGR = param1["isPremiumIGR"];
             }
             if(param1.hasOwnProperty("statusLevel"))
             {

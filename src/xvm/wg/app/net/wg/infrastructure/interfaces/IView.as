@@ -20,10 +20,6 @@ package net.wg.infrastructure.interfaces
         
         function updateStage(param1:Number, param2:Number) : void;
         
-        function get as_token() : String;
-        
-        function set as_token(param1:String) : void;
-        
         function get as_alias() : String;
         
         function set as_alias(param1:String) : void;

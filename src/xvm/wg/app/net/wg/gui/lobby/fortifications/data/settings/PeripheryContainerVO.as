@@ -13,5 +13,11 @@ package net.wg.gui.lobby.fortifications.data.settings
         public var peripheryTitle:String = "";
         
         public var peripheryName:String = "";
+        
+        public var buttonEnabled:Boolean = true;
+        
+        public var buttonToolTip:String = "";
+        
+        public var descriptionTooltip:String = "";
     }
 }

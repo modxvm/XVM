@@ -9,6 +9,7 @@ package net.wg.gui.login.impl.components
     import scaleform.clik.motion.Tween;
     import net.wg.gui.login.impl.components.Vo.RssItemVo;
     import scaleform.clik.events.ButtonEvent;
+    import scaleform.gfx.TextFieldEx;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.Values;
     import fl.transitions.easing.Strong;
@@ -26,6 +27,12 @@ package net.wg.gui.login.impl.components
         
         public static var HIDED:String = "hided";
         
+        private static var SELECTION_TEXT_COLOR:Number = 4.280163867E9;
+        
+        private static var SELECTION_TEXT_BG_COLOR:Number = 4.288059015E9;
+        
+        private static var ANIM_DISTANCE:Number = 30;
+        
         public var alertIco:AlertIco = null;
         
         public var description:TextField = null;
@@ -38,8 +45,6 @@ package net.wg.gui.login.impl.components
         
         private var _hideAnimationSpeed:Number = 350;
         
-        private var ANIM_DISTANCE:Number = 30;
-        
         private var _isUsed:Boolean = false;
         
         private var _dataVo:RssItemVo = null;
@@ -48,6 +53,10 @@ package net.wg.gui.login.impl.components
         {
             super.configUI();
             this.hyperLink.addEventListener(ButtonEvent.CLICK,this.onReedMoreClick);
+            TextFieldEx.setSelectionTextColor(this.description,SELECTION_TEXT_COLOR);
+            TextFieldEx.setInactiveSelectionTextColor(this.description,SELECTION_TEXT_COLOR);
+            TextFieldEx.setSelectionBkgColor(this.description,SELECTION_TEXT_BG_COLOR);
+            TextFieldEx.setInactiveSelectionBkgColor(this.description,SELECTION_TEXT_BG_COLOR);
         }
         
         private function onReedMoreClick(param1:ButtonEvent) : void
@@ -140,7 +149,7 @@ package net.wg.gui.login.impl.components
         {
             if(alpha == 0)
             {
-                this.y = param1 + this.ANIM_DISTANCE;
+                this.y = param1 + ANIM_DISTANCE;
             }
             this.moveTween = this.tweenManager.registerAndLaunch(MOOVING_ANIMATION_SPEED,this,{"y":param1,
             "alpha":1

@@ -8,6 +8,7 @@ package net.wg.gui.lobby.header
     import net.wg.gui.lobby.header.headerButtonBar.HeaderButtonBar;
     import net.wg.gui.lobby.header.mainMenuButtonBar.MainMenuHelper;
     import net.wg.gui.lobby.header.headerButtonBar.HeaderButtonsHelper;
+    import net.wg.gui.components.tooltips.ToolTipComplex;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
     import scaleform.clik.events.ButtonEvent;
@@ -24,6 +25,9 @@ package net.wg.gui.lobby.header
     import net.wg.gui.lobby.header.vo.HBC_SettingsVo;
     import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.data.constants.IconsTypes;
+    import net.wg.data.managers.impl.TooltipProps;
+    import net.wg.data.constants.Tooltips;
+    import net.wg.data.constants.Linkages;
     
     public class LobbyHeader extends LobbyHeaderMeta implements ILobbyHeaderMeta, IHelpLayoutComponent
     {
@@ -39,6 +43,10 @@ package net.wg.gui.lobby.header
         public static var WIDE_SCREEN:String = "wideScreen";
         
         public static var MAX_SCREEN:String = "maxScreen";
+        
+        private static var BUBBLE_TOOLTIP_X:Number = 16;
+        
+        private static var BUBBLE_TOOLTIP_Y:Number = 32;
         
         public var centerBg:Sprite = null;
         
@@ -57,6 +65,8 @@ package net.wg.gui.lobby.header
         public var _headerButtonsHelper:HeaderButtonsHelper;
         
         private var _isShowHelpLayout:Boolean = false;
+        
+        private var _bubbleTooltip:ToolTipComplex;
         
         private var _currentScreen:String = "";
         
@@ -145,6 +155,7 @@ package net.wg.gui.lobby.header
             this.fightBtn.removeEventListener(ButtonEvent.CLICK,this.onFightClick);
             this._headerButtonsHelper.dispose();
             this._headerButtonsHelper = null;
+            this.disposeBubbleToolTip();
             super.onDispose();
         }
         
@@ -225,15 +236,17 @@ package net.wg.gui.lobby.header
         }
     }
     
-    public function as_setPremiumParams(param1:Boolean, param2:String, param3:String, param4:Boolean) : void
+    public function as_setPremiumParams(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:String, param6:String) : void
     {
-        var _loc5_:HBC_PremDataVo = HBC_PremDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_PREM));
-        if(_loc5_)
+        var _loc7_:HBC_PremDataVo = HBC_PremDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_PREM));
+        if(_loc7_)
         {
-            _loc5_.isPrem = param1;
-            _loc5_.btnLabel = param2;
-            _loc5_.doLabel = param3;
-            _loc5_.isYear = param4;
+            _loc7_.isPrem = param1;
+            _loc7_.btnLabel = param2;
+            _loc7_.doLabel = param3;
+            _loc7_.isYear = param4;
+            _loc7_.disableTTHeader = param5;
+            _loc7_.disableTTBody = param6;
             this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_PREM);
         }
     }
@@ -315,6 +328,16 @@ package net.wg.gui.lobby.header
         this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_FREEXP);
     }
     
+    public function as_showBubbleTooltip(param1:String, param2:int) : void
+    {
+        this.disposeBubbleToolTip();
+        var _loc3_:TooltipProps = new TooltipProps(Tooltips.TYPE_INFO,BUBBLE_TOOLTIP_X,BUBBLE_TOOLTIP_Y);
+        this._bubbleTooltip = App.utils.classFactory.getComponent(Linkages.TOOL_TIP_COMPLEX,ToolTipComplex);
+        addChild(this._bubbleTooltip);
+        this._bubbleTooltip.build(param1,_loc3_);
+        App.utils.scheduler.scheduleTask(this.hideBubbleTooltip,param2);
+    }
+    
     public function showHelpLayout() : void
     {
         if(!this._isShowHelpLayout)
@@ -369,6 +392,26 @@ package net.wg.gui.lobby.header
     {
         this._isInCoolDown = false;
         this.fightBtn.enabled = this._actualEnabledVal;
+    }
+    
+    private function disposeBubbleToolTip() : void
+    {
+        if(this._bubbleTooltip)
+        {
+            App.utils.scheduler.cancelTask(this.hideBubbleTooltip);
+            App.utils.tweenAnimator.removeAnims(this._bubbleTooltip);
+            removeChild(this._bubbleTooltip);
+            this._bubbleTooltip.dispose();
+            this._bubbleTooltip = null;
+        }
+    }
+    
+    private function hideBubbleTooltip() : void
+    {
+        if(this._bubbleTooltip)
+        {
+            App.utils.tweenAnimator.addFadeOutAnim(this._bubbleTooltip,null);
+        }
     }
 }
 }

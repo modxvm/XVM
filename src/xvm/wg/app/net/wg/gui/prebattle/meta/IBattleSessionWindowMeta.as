@@ -22,5 +22,7 @@ package net.wg.gui.prebattle.meta
         function as_setClassesLimits(param1:Object, param2:Boolean) : void;
         
         function as_setCommonLimits(param1:Number, param2:Number, param3:Number, param4:Number) : void;
+        
+        function as_setPlayersCountText(param1:String) : void;
     }
 }

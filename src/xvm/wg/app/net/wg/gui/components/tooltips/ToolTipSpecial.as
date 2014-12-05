@@ -34,7 +34,7 @@ package net.wg.gui.components.tooltips
         
         public static var MIN_RENTALS_PRICE:String = "minRentalsPrice";
         
-        public static var SKIP_FIELDS:Array = [VehicleBaseVO.DEF_BUY_PRICE,VehicleBaseVO.DEF_SELL_PRICE,VehicleBaseVO.ACTION_PRC];
+        public static var SKIP_FIELDS:Array = [VehicleBaseVO.DEF_BUY_PRICE,VehicleBaseVO.DEF_SELL_PRICE,VehicleBaseVO.ACTION_PRC,VehicleBaseVO.DEF_RENT_PRICE,VehicleBaseVO.RENT_ACTION_PRC];
         
         protected var blockResults:Vector.<ToolTipBlockResultVO> = null;
         

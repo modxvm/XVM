@@ -28,5 +28,7 @@ package net.wg.gui.lobby.fortifications.cmp.build
         function set forceSelected(param1:Boolean) : void;
         
         function get selected() : Boolean;
+        
+        function set getAdvancedToolTipFunc(param1:Function) : void;
     }
 }

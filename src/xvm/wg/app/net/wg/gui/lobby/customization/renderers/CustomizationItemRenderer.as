@@ -321,11 +321,13 @@ package net.wg.gui.lobby.customization.renderers
                         {
                             this.disabledMc.visible = true;
                             this.uiLoader.alpha = 0.4;
+                            this.enabled = false;
                         }
                         else
                         {
                             this.disabledMc.visible = false;
                             this.uiLoader.alpha = 1;
+                            this.enabled = true;
                         }
                     }
                     this.checkTooltip();
@@ -436,7 +438,7 @@ package net.wg.gui.lobby.customization.renderers
             {
                 if(data.isSpecialTooltip)
                 {
-                    this.toolTipMgr.showSpecial(Tooltips.CUSTOMIZATION_ITEM,null,data.type,data.id,data.nationId);
+                    this.toolTipMgr.showSpecial(Tooltips.CUSTOMIZATION_ITEM,null,data.type,data.id,data.nationId,data.timeLeftValue,data.isPermanent,data.value,data.current);
                 }
                 else if(data.description.length > 0)
                 {

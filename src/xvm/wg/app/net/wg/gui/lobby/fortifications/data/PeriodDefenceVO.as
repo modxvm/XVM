@@ -44,5 +44,7 @@ package net.wg.gui.lobby.fortifications.data
         public var isTwelveHoursFormat:Boolean = false;
         
         public var skipValues:Array;
+        
+        public var isWrongLocalTime:Boolean = false;
     }
 }

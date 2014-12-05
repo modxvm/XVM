@@ -99,5 +99,10 @@ package net.wg.gui.lobby.store
             }
             super.onDispose();
         }
+        
+        public function canPlaySound(param1:String) : Boolean
+        {
+            return this.enabled;
+        }
     }
 }

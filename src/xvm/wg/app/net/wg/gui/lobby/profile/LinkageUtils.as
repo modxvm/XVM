@@ -20,6 +20,16 @@ package net.wg.gui.lobby.profile
             this.aliasesByLinkage[param2] = param1;
         }
         
+        public function updateEntityWithLinkage(param1:String, param2:String) : void
+        {
+            if(this.aliasesByLinkage[param1])
+            {
+                delete this.linkageByAlias[this.aliasesByLinkage[param1]];
+                true;
+                this.addEntity(param2,param1);
+            }
+        }
+        
         public function getLinkageByAlias(param1:String) : String
         {
             return this.linkageByAlias[param1];

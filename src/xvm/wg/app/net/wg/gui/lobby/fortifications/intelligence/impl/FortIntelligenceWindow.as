@@ -2,21 +2,20 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
 {
     import net.wg.infrastructure.base.meta.impl.FortIntelligenceWindowMeta;
     import net.wg.infrastructure.base.meta.IFortIntelligenceWindowMeta;
+    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.gui.lobby.fortifications.intelligence.IFortIntelFilter;
     import net.wg.gui.components.controls.SortableTable;
-    import net.wg.data.SortableVoDAAPIDataProvider;
+    import net.wg.gui.rally.data.ManualSearchDataProvider;
     import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import flash.events.Event;
     import net.wg.gui.events.SortableTableListEvent;
     import flash.display.InteractiveObject;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import scaleform.clik.data.DataProvider;
     import net.wg.data.constants.SortingInfo;
-    import net.wg.gui.rally.data.ManualSearchDataProvider;
     import net.wg.gui.lobby.fortifications.data.IntelligenceRendererVO;
     
     public class FortIntelligenceWindow extends FortIntelligenceWindowMeta implements IFortIntelligenceWindowMeta
@@ -33,6 +32,17 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
             this.listDataProvider = new ManualSearchDataProvider(IntelligenceRendererVO);
         }
         
+        private static function createTableBtnInfo(param1:String, param2:String, param3:Number, param4:Number, param5:String) : NormalSortingBtnInfo
+        {
+            var _loc6_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            _loc6_.label = param1;
+            _loc6_.buttonWidth = param3;
+            _loc6_.sortOrder = param4;
+            _loc6_.toolTip = param5;
+            _loc6_.iconId = param2;
+            return _loc6_;
+        }
+        
         public var horSeparator:MovieClip = null;
         
         public var verSeparator:MovieClip = null;
@@ -45,7 +55,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         public var clanDescription:FortIntelligenceClanDescription = null;
         
-        protected var listDataProvider:SortableVoDAAPIDataProvider;
+        private var listDataProvider:ManualSearchDataProvider;
         
         override public function updateStage(param1:Number, param2:Number) : void
         {
@@ -141,38 +151,13 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private function initTable() : void
         {
-            var _loc1_:NormalSortingBtnInfo = null;
-            var _loc2_:Array = [];
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = getLevelColumnIconsS();
-            _loc1_.buttonWidth = 64;
-            _loc1_.sortOrder = 0;
-            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_LEVEL;
-            _loc1_.iconId = "clanLvl";
-            _loc2_.push(_loc1_);
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = FORTIFICATIONS.FORTINTELLIGENCE_SORTBTNS_CLANTAG;
-            _loc1_.buttonWidth = 132;
-            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG;
-            _loc1_.iconId = "clanTag";
-            _loc1_.sortOrder = 1;
-            _loc2_.push(_loc1_);
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = FORTIFICATIONS.FORTINTELLIGENCE_SORTBTNS_DEFENCETIME;
-            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_DEFENCETIME;
-            _loc1_.buttonWidth = 203;
-            _loc1_.iconId = "defenceStartTime";
-            _loc1_.sortOrder = 2;
-            _loc2_.push(_loc1_);
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = FORTIFICATIONS.FORTINTELLIGENCE_SORTBTNS_BUILDINGS;
-            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_BUILDINGS;
-            _loc1_.buttonWidth = 195;
-            _loc1_.iconId = "avgBuildingLvl";
-            _loc1_.sortOrder = 3;
-            _loc2_.push(_loc1_);
+            var _loc1_:Array = [];
+            _loc1_.push(createTableBtnInfo(getLevelColumnIconsS(),"clanLvl",64,0,TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_LEVEL));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTINTELLIGENCE_SORTBTNS_CLANTAG,"clanTag",132,1,TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTINTELLIGENCE_SORTBTNS_DEFENCETIME,"defenceStartTime",203,2,TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_DEFENCETIME));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTINTELLIGENCE_SORTBTNS_BUILDINGS,"avgBuildingLvl",195,3,TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_BUILDINGS));
             this.intelligenceTable.listDP = this.listDataProvider;
-            this.intelligenceTable.headerDP = new DataProvider(_loc2_);
+            this.intelligenceTable.headerDP = new DataProvider(_loc1_);
             this.intelligenceTable.sortByField("clanTag",SortingInfo.ASCENDING_SORT);
         }
         

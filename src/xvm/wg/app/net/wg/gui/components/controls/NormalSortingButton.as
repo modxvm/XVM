@@ -307,12 +307,12 @@ package net.wg.gui.components.controls
                 }
                 if(_loc2_.toolTip)
                 {
-                    App.utils.asserter.assertNull(_loc2_.toolTipSpecialType,"Can not show common tooltip and tooltip special at one time");
+                    App.utils.asserter.assert(!Boolean(_loc2_.toolTipSpecialType),"Can not show common tooltip and tooltip special at one time");
                     tooltip = _loc2_.toolTip;
                 }
                 if(_loc2_.toolTipSpecialType)
                 {
-                    App.utils.asserter.assertNull(_loc2_.toolTip,"Can not show common tooltip and tooltip special at one time");
+                    App.utils.asserter.assert(!Boolean(_loc2_.toolTip),"Can not show common tooltip and tooltip special at one time");
                     this._toolTipSpecialType = _loc2_.toolTipSpecialType;
                 }
                 if(_loc2_.toolTipSpecialProps)

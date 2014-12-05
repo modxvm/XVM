@@ -8,14 +8,12 @@ package net.wg.gui.lobby.questsWindow.components
             super();
         }
         
-        private static var HEADER_HEIGHT:int = 25;
-        
         private static var AVAILABLE_WIDTH:int = 365;
         
         override protected function configUI() : void
         {
+            headerYShift = -4;
             super.configUI();
-            header.height = HEADER_HEIGHT;
             resizableContainer.availableWidth = AVAILABLE_WIDTH;
         }
     }

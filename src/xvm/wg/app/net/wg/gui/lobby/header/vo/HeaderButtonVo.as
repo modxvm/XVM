@@ -33,8 +33,6 @@ package net.wg.gui.lobby.header.vo
         
         public var helpDirection:String = "";
         
-        public var helpConnectorLength:Number = 0;
-        
         public function set linkage(param1:String) : void
         {
             this._linkage = param1;

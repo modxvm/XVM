@@ -92,8 +92,6 @@ package net.wg.gui.lobby.messengerBar.carousel
             this.scrollBar.downArrow.preventAutosizing = true;
             addEventListener(ChannelListEvent.OPEN_CHANNEL,this.onChannelOpenClick,false,0,true);
             addEventListener(ChannelListEvent.CLOSE_CHANNEL,this.onChannelCloseClick,false,0,true);
-            addEventListener(ChannelListEvent.MINIMIZE_ALL_CHANNELS,this.onChannelMinimize,false,0,true);
-            addEventListener(ChannelListEvent.CLOSE_ALL_EXCEPT_CURRENT,this.onCloseAllExceptCurrent,false,0,true);
             this._dataProvider.addEventListener(Event.CHANGE,this.onDataChange);
             this.preBattlesGroup.addEventListener(Event.RESIZE,this.preBattleGroupResizeHandler,false,0,true);
             this.list.dataProvider = this._dataProvider;
@@ -168,8 +166,6 @@ package net.wg.gui.lobby.messengerBar.carousel
             this.preBattlesGroup.removeEventListener(Event.RESIZE,this.preBattleGroupResizeHandler,false);
             removeEventListener(ChannelListEvent.OPEN_CHANNEL,this.onChannelOpenClick);
             removeEventListener(ChannelListEvent.CLOSE_CHANNEL,this.onChannelCloseClick);
-            removeEventListener(ChannelListEvent.MINIMIZE_ALL_CHANNELS,this.onChannelMinimize);
-            removeEventListener(ChannelListEvent.CLOSE_ALL_EXCEPT_CURRENT,this.onCloseAllExceptCurrent);
             App.stage.removeEventListener(MessengerBarEvent.PIN_CAROUSEL_WINDOW,this.handlePinChannelWindow);
             this._battlesDataProvider.cleanUp();
             this._battlesDataProvider = null;
@@ -202,18 +198,6 @@ package net.wg.gui.lobby.messengerBar.carousel
         {
             param1.stopImmediatePropagation();
             channelCloseClickS(param1.clientID);
-        }
-        
-        private function onChannelMinimize(param1:ChannelListEvent) : void
-        {
-            param1.stopImmediatePropagation();
-            minimizeAllChannelsS();
-        }
-        
-        private function onCloseAllExceptCurrent(param1:ChannelListEvent) : void
-        {
-            param1.stopImmediatePropagation();
-            closeAllExceptCurrentS(param1.clientID);
         }
         
         private function handlePinChannelWindow(param1:MessengerBarEvent) : void

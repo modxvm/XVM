@@ -4,6 +4,7 @@ package net.wg.gui.lobby.tankman
     import net.wg.gui.interfaces.IPersonalCaseBlockTitle;
     import flash.text.TextField;
     import net.wg.gui.components.controls.UILoaderAlt;
+    import net.wg.gui.events.UILoaderEvent;
     import net.wg.data.constants.Values;
     import flash.text.TextFieldAutoSize;
     import scaleform.gfx.TextFieldEx;
@@ -18,6 +19,8 @@ package net.wg.gui.lobby.tankman
             this.rightText.autoSize = TextFieldAutoSize.RIGHT;
             TextFieldEx.setVerticalAlign(this.rightText,TextFieldEx.VALIGN_CENTER);
         }
+        
+        private static var ICON_PADDING:int = -1;
         
         public var blockName:TextField = null;
         
@@ -34,6 +37,7 @@ package net.wg.gui.lobby.tankman
         {
             this.blockName = null;
             this.rightText = null;
+            this.premIcon.removeEventListener(UILoaderEvent.COMPLETE,this.onLoadHandler);
             this.premIcon.dispose();
             this.premIcon = null;
         }
@@ -50,11 +54,16 @@ package net.wg.gui.lobby.tankman
             if(!(param1 == Values.EMPTY_STR) && !(param1 == null))
             {
                 this.premIcon.visible = true;
+                this.premIcon.addEventListener(UILoaderEvent.COMPLETE,this.onLoadHandler);
                 this.premIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_PREM_SMALL_ICON;
-                this.premIcon.x = this.rightText.x - this.premIcon.width ^ 0;
-                this.premIcon.y = this.premIcon.y ^ 0;
-                this.premIcon.alpha = this.rightText.alpha;
             }
+        }
+        
+        private function onLoadHandler(param1:UILoaderEvent) : void
+        {
+            this.premIcon.x = this.rightText.x - this.premIcon.width + ICON_PADDING ^ 0;
+            this.premIcon.y = this.premIcon.y ^ 0;
+            this.premIcon.alpha = this.rightText.alpha;
         }
     }
 }

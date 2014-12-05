@@ -2,6 +2,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
 {
     import net.wg.infrastructure.base.meta.impl.FortBattleResultsWindowMeta;
     import net.wg.infrastructure.base.meta.IFortBattleResultsWindowMeta;
+    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.gui.components.controls.SortableTable;
@@ -10,7 +11,6 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.fortifications.events.FortBattleResultsEvent;
     import scaleform.clik.data.DataProvider;
-    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import flash.text.TextFieldAutoSize;
     
     public class FortBattleResultsWindow extends FortBattleResultsWindowMeta implements IFortBattleResultsWindowMeta
@@ -24,6 +24,16 @@ package net.wg.gui.lobby.fortifications.windows.impl
         }
         
         private static var RES_ICON_PADDING:int = 4;
+        
+        private static function createTableBtnInfo(param1:String, param2:Number, param3:Number, param4:String) : NormalSortingBtnInfo
+        {
+            var _loc5_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            _loc5_.label = param1;
+            _loc5_.buttonWidth = param2;
+            _loc5_.sortOrder = param3;
+            _loc5_.textAlign = param4;
+            return _loc5_;
+        }
         
         public var bgImage:MovieClip = null;
         
@@ -158,26 +168,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private function getHeadersDP() : DataProvider
         {
-            var _loc2_:NormalSortingBtnInfo = null;
             var _loc1_:Array = [];
-            _loc2_ = new NormalSortingBtnInfo();
-            _loc2_.label = FORTIFICATIONS.FORTBATTLERESULTSWINDOW_TABLE_STARTTIME;
-            _loc2_.buttonWidth = 88;
-            _loc2_.sortOrder = 0;
-            _loc2_.textAlign = TextFieldAutoSize.LEFT;
-            _loc1_.push(_loc2_);
-            _loc2_ = new NormalSortingBtnInfo();
-            _loc2_.label = FORTIFICATIONS.FORTBATTLERESULTSWINDOW_TABLE_BUILDING;
-            _loc2_.buttonWidth = 320;
-            _loc2_.sortOrder = 0;
-            _loc2_.textAlign = TextFieldAutoSize.LEFT;
-            _loc1_.push(_loc2_);
-            _loc2_ = new NormalSortingBtnInfo();
-            _loc2_.label = FORTIFICATIONS.FORTBATTLERESULTSWINDOW_TABLE_RESULT;
-            _loc2_.buttonWidth = 180;
-            _loc2_.sortOrder = 0;
-            _loc2_.textAlign = TextFieldAutoSize.LEFT;
-            _loc1_.push(_loc2_);
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTBATTLERESULTSWINDOW_TABLE_STARTTIME,88,0,TextFieldAutoSize.LEFT));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTBATTLERESULTSWINDOW_TABLE_BUILDING,320,0,TextFieldAutoSize.LEFT));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.FORTBATTLERESULTSWINDOW_TABLE_RESULT,180,0,TextFieldAutoSize.LEFT));
             return new DataProvider(_loc1_);
         }
         

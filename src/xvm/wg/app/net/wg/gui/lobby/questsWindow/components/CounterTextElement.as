@@ -30,7 +30,6 @@ package net.wg.gui.lobby.questsWindow.components
         override protected function configUI() : void
         {
             super.configUI();
-            this.battlesLeftTF.text = QUESTS.QUESTS_TABLE_BATTLESLEFT;
             this.counter.visible = this.battlesLeftTF.visible = false;
             this.statusMC.setStatus(QuestsStates.DONE);
             this.statusMC.textAlign = TextFieldAutoSize.RIGHT;
@@ -67,9 +66,9 @@ package net.wg.gui.lobby.questsWindow.components
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
                 this.description.visible = true;
-                this.counter.visible = this.battlesLeftTF.visible = (this.data.battlesLeft) && !this.data.showDone;
-                this.counter.text = this.data.battlesLeft.toString();
-                this.description.width = (this.data.battlesLeft) || (this.data.showDone)?DEFAULT_WIDTH:availableWidth;
+                this.counter.visible = this.battlesLeftTF.visible = (this.data.counterValue) && !this.data.showDone;
+                this.counter.text = this.data.counterValue.toString();
+                this.description.width = (this.data.counterValue) || (this.data.showDone)?DEFAULT_WIDTH:availableWidth;
                 this.description.label = this.data.label;
                 this.description.value = this.data.value;
                 this.description.linkID = this.data.linkID;
@@ -77,6 +76,7 @@ package net.wg.gui.lobby.questsWindow.components
                 this.description.isNotAvailable = this.data.isNotAvailable;
                 this.statusMC.visible = this.data.showDone;
                 this.description.validateNow();
+                this.battlesLeftTF.text = this.data.counterDescr;
                 this.layoutBlocks();
             }
         }
@@ -84,7 +84,7 @@ package net.wg.gui.lobby.questsWindow.components
         protected function layoutBlocks() : void
         {
             var _loc1_:Number = this.data.label?Math.round(this.description.height):0;
-            var _loc2_:Number = Boolean(this.data.battlesLeft > 0)?Math.round(this.counter.height + this.counter.y):0;
+            var _loc2_:Number = Boolean(this.data.counterValue > 0)?Math.round(this.counter.height + this.counter.y):0;
             var _loc3_:Number = Math.max(_loc1_,_loc2_);
             setSize(this.width,_loc3_);
             isReadyForLayout = true;

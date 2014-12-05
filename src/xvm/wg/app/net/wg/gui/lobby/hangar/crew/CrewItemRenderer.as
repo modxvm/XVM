@@ -24,14 +24,11 @@ package net.wg.gui.lobby.hangar.crew
     import flash.events.MouseEvent;
     import flash.display.DisplayObject;
     import net.wg.utils.ICommons;
-    import net.wg.infrastructure.interfaces.IContextItem;
-    import net.wg.data.components.UserContextItem;
-    import net.wg.data.VO.SeparateItem;
+    import net.wg.data.constants.generated.CONTEXT_MENU_HANDLER_TYPE;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.gfx.MouseEventEx;
     import flash.utils.Timer;
     import flash.events.TimerEvent;
-    import net.wg.gui.events.ContextMenuEvent;
     import flash.events.Event;
     import scaleform.clik.events.InputEvent;
     
@@ -621,7 +618,7 @@ override protected function handleMouseRelease(param1:MouseEvent) : void
     {
         if(_loc3_.tankmanID > 0 && (this.enabled))
         {
-            App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("personalCase"),new SeparateItem(),new UserContextItem("tankmanUnload")]),this,this.onContextMenuAction);
+            App.contextMenuMgr.showNew(String(_loc3_.tankmanID),CONTEXT_MENU_HANDLER_TYPE.CREW,this);
             App.toolTipMgr.hide();
         }
     }
@@ -663,19 +660,6 @@ override protected function handleMousePress(param1:MouseEvent) : void
             dispatchEvent(_loc5_);
             this.playSound("press");
         }
-    }
-}
-
-private function onContextMenuAction(param1:ContextMenuEvent) : void
-{
-    switch(param1.id)
-    {
-        case "personalCase":
-            this.openPersonalCase();
-            break;
-        case "tankmanUnload":
-            dispatchEvent(new CrewEvent(CrewEvent.UNLOAD_TANKMAN,this.data));
-            break;
     }
 }
 

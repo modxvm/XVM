@@ -5,7 +5,7 @@ package net.wg.gui.rally.views.room
     import net.wg.gui.rally.interfaces.IBaseChatSection;
     import flash.events.MouseEvent;
     import flash.text.TextField;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import net.wg.gui.messenger.ChannelComponent;
     import net.wg.gui.rally.interfaces.IRallyVO;
     import scaleform.clik.constants.InvalidationType;
@@ -34,7 +34,7 @@ package net.wg.gui.rally.views.room
         
         public var lblChatHeader:TextField;
         
-        public var chatSubmitButton:ButtonDnmIcon;
+        public var chatSubmitButton:IButtonIconLoader;
         
         public var channelComponent:ChannelComponent;
         
@@ -77,6 +77,7 @@ package net.wg.gui.rally.views.room
             this.channelComponent.messageArea.bgForm.alpha = 0;
             this.channelComponent.messageArea.bgForm.visible = false;
             this.chatSubmitButton.tooltip = this.chatSubmitBtnTooltip;
+            this.chatSubmitButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_ENTERWHITE;
         }
         
         override protected function draw() : void

@@ -4,7 +4,7 @@ package net.wg.gui.rally.controls
     import net.wg.gui.rally.controls.interfaces.IRallySimpleSlotRenderer;
     import net.wg.gui.components.advanced.IndicationOfStatus;
     import flash.text.TextField;
-    import net.wg.gui.rally.controls.interfaces.IGrayTransparentButton;
+    import net.wg.gui.interfaces.IButtonIconTextTransparent;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.cyberSport.controls.interfaces.IVehicleButton;
     import flash.display.Sprite;
@@ -38,7 +38,7 @@ package net.wg.gui.rally.controls
         
         public var slotLabel:TextField;
         
-        public var takePlaceBtn:IGrayTransparentButton;
+        public var takePlaceBtn:IButtonIconTextTransparent;
         
         public var takePlaceFirstTimeBtn:SoundButtonEx;
         

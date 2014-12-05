@@ -1,6 +1,7 @@
 package net.wg.gui.components.controls
 {
     import scaleform.clik.controls.Button;
+    import flash.text.TextFieldAutoSize;
     
     public class HyperLink extends Button
     {
@@ -14,6 +15,8 @@ package net.wg.gui.components.controls
         
         override protected function configUI() : void
         {
+            constraintsDisabled = true;
+            preventAutosizing = true;
             super.configUI();
             mouseChildren = true;
             textField.mouseEnabled = true;
@@ -27,7 +30,6 @@ package net.wg.gui.components.controls
                 return;
             }
             this.forceFocusView = _focused > 0;
-            setState((_focused) || (_displayFocus)?"over":"out");
             if((_pressedByKeyboard) && !_focused)
             {
                 _pressedByKeyboard = false;
@@ -46,7 +48,23 @@ package net.wg.gui.components.controls
                     _loc1_ = App.utils.styleSheetManager.setForceFocusedStyle(_loc1_);
                 }
                 textField.htmlText = "<a href=\'event:hyperLink\'>" + _loc1_ + "</a>";
+                textField.width = textField.textWidth + 4 | 0;
+                textField.autoSize = TextFieldAutoSize.LEFT;
+                this.updatePosition();
             }
+        }
+        
+        private function updatePosition() : void
+        {
+            if(autoSize == TextFieldAutoSize.CENTER)
+            {
+                textField.x = -textField.width >> 1;
+            }
+            else if(autoSize == TextFieldAutoSize.RIGHT)
+            {
+                textField.x = -textField.width;
+            }
+            
         }
         
         public function get forceFocusView() : Boolean

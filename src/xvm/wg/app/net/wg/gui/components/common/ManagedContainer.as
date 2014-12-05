@@ -81,7 +81,7 @@ package net.wg.gui.components.common
                     }
                     if(_loc6_)
                     {
-                        this.addGroupCounter(_loc6_,_loc2_.as_token);
+                        this.addGroupCounter(_loc6_,_loc2_.as_name);
                         this.movieViewToVector(_loc5_,_loc6_);
                     }
                 }
@@ -117,7 +117,7 @@ package net.wg.gui.components.common
                     if((_loc5_) && (this.groupCounters.hasOwnProperty(_loc5_)))
                     {
                         _loc6_ = this.groupCounters[_loc5_];
-                        _loc6_.decrement(_loc3_.as_token);
+                        _loc6_.decrement(_loc3_.as_name);
                         if(_loc6_.views.length == 0)
                         {
                             delete this.groupCounters[_loc5_];

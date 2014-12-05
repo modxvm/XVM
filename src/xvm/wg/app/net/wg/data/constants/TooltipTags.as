@@ -19,5 +19,9 @@ package net.wg.data.constants
         public static var NOTE_OPEN_TAG:String = "{NOTE}";
         
         public static var NOTE_CLOSE_TAG:String = "{/NOTE}";
+        
+        public static var ATTENTION_OPEN_TAG:String = "{ATTENTION}";
+        
+        public static var ATTENTION_CLOSE_TAG:String = "{/ATTENTION}";
     }
 }

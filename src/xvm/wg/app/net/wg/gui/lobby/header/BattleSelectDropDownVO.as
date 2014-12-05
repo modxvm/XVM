@@ -16,8 +16,6 @@ package net.wg.gui.lobby.header
         
         public var disabled:Boolean;
         
-        public var tooltip:String = "";
-        
         public var description:String = "";
         
         public var icon:String = "";

@@ -73,7 +73,7 @@ package net.wg.gui.messenger.windows
                 this._needToHideList = false;
                 this.membersList.visible = false;
                 _loc1_ = channelComponent.messageArea;
-                _loc2_ = channelComponent.sendButton;
+                _loc2_ = channelComponent.sendButton as DisplayObject;
                 _loc1_.width = _loc2_.x + _loc2_.width - _loc1_.x * 2;
                 this.background.width = _loc2_.x + _loc2_.width;
                 constraints.removeElement("background");

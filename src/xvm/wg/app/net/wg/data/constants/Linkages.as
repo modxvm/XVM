@@ -102,8 +102,6 @@ package net.wg.data.constants
         
         public static var ACHIEVEMENT_COMMON:String = "AchievementCommon_UI";
         
-        public static var ACHIEVEMENT_COMMON_VEHICLE:String = "AchievementCommonVehicle_UI";
-        
         public static var DETAILED_STATISTICS_UNIT:String = "DetailedStatisticsUnit_UI";
         
         public static var CANDIDATE_LIST_ITEM_RENDERER_UI:String = "CandidateListItemRendererDragUI";
@@ -113,10 +111,6 @@ package net.wg.data.constants
         public static var DELIMETER_UI:String = "Delimeter_UI";
         
         public static var SUBTASK_COMPONENT_UI:String = "SubtaskComponent_UI";
-        
-        public static var CURRENT_TAB_UI:String = "CurrentTab_UI";
-        
-        public static var FUTURE_TAB_UI:String = "FutureTab_UI";
         
         public static var BR_SUBTASK_COMPONENT_UI:String = "BR_SubtaskComponent_UI";
         
@@ -153,5 +147,19 @@ package net.wg.data.constants
         public static var PRE_BATTLE_CHANNEL_RENDERER:String = "PreBattleChannelRendererUI";
         
         public static var PROGRESS_STEP_RENDERER:String = "ProgressStepRendererUI";
+        
+        public static var SEASON_VIEW_RENDERER:String = "SeasonViewRendererUI";
+        
+        public static var QUEST_TILE_RENDERER:String = "QuestTileRendererUI";
+        
+        public static var VEHICLE_SEASON_AWARD:String = "VehicleSeasonAwardUI";
+        
+        public static var FEMALE_TANKMAN_SEASON_AWARD:String = "FemaleTankmanSeasonAwardUI";
+        
+        public static var COMMENDATION_LISTS_SEASON_AWARD:String = "commendationLitsSeasonAwardUI";
+        
+        public static var QUESTS_CHAIN_PROGRESS_VIEW:String = "QuestsChainProgressViewUI";
+        
+        public static var QUEST_TASK_DETAILS_VIEW:String = "QuestTaskDetailsViewUI";
     }
 }

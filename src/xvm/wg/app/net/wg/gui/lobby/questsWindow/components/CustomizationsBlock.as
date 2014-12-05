@@ -11,6 +11,8 @@ package net.wg.gui.lobby.questsWindow.components
             super();
         }
         
+        private static var RENDERERS_GAP:int = 5;
+        
         private var _data:Object;
         
         private var _renderers:Array;
@@ -59,8 +61,9 @@ package net.wg.gui.lobby.questsWindow.components
                 "y":0,
                 "data":_loc2_
             }));
+            _loc3_.validateNow();
             addChild(_loc3_);
-            _loc1_ = _loc1_ + (5 + (_loc2_.type == 2?68:35));
+            _loc1_ = _loc1_ + (RENDERERS_GAP + _loc3_.actualWidth);
         }
     }
 }

@@ -16,6 +16,10 @@ package net.wg.gui.lobby.fortifications.data
         
         public var startDefenseHour:int = -1;
         
+        public var yourOwnClanStartDefenseHour:int = -1;
+        
+        public var isWrongLocalTime:Boolean = false;
+        
         override protected function onDispose() : void
         {
             super.onDispose();

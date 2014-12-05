@@ -4,6 +4,8 @@ package net.wg.gui.lobby.questsWindow.components
     import net.wg.gui.components.controls.UILoaderAlt;
     import flash.text.TextField;
     import net.wg.gui.lobby.questsWindow.data.QuestIconElementVO;
+    import flash.text.TextFieldAutoSize;
+    import net.wg.gui.events.UILoaderEvent;
     import scaleform.clik.constants.InvalidationType;
     
     public class QuestIconElement extends AbstractResizableContent
@@ -25,11 +27,14 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var labelTF:TextField;
         
+        public var counterTF:TextField = null;
+        
         private var dataVO:QuestIconElementVO = null;
         
         override protected function configUI() : void
         {
             super.configUI();
+            this.counterTF.autoSize = TextFieldAutoSize.LEFT;
             this.icon.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.icon.addEventListener(MouseEvent.CLICK,hideTooltip);
             this.icon.addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
@@ -40,8 +45,10 @@ package net.wg.gui.lobby.questsWindow.components
             this.icon.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.icon.removeEventListener(MouseEvent.CLICK,hideTooltip);
             this.icon.removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+            this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.onIconLoadedHandler);
             this.icon.dispose();
             this.labelTF = null;
+            this.counterTF = null;
             if(this.dataVO)
             {
                 this.dataVO.dispose();
@@ -63,21 +70,35 @@ package net.wg.gui.lobby.questsWindow.components
         override protected function draw() : void
         {
             var _loc1_:* = NaN;
+            var _loc2_:* = 0;
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.dataVO))
             {
                 this.icon.source = this.dataVO.icon;
+                this.icon.autoSize = this.dataVO.iconAutoSize;
+                this.counterTF.htmlText = this.dataVO.counter;
                 this.labelTF.htmlText = this.dataVO.label;
                 _loc1_ = Math.round(this.labelTF.height);
+                _loc2_ = 0;
+                if(this.dataVO.counter)
+                {
+                    _loc2_ = this.counterTF.textWidth + TEXT_PADDING;
+                }
                 if(this.dataVO.icon)
                 {
-                    this.labelTF.x = this.icon.width + TEXT_PADDING;
+                    this.icon.x = _loc2_;
+                    _loc2_ = _loc2_ + (this.icon.width + TEXT_PADDING);
+                }
+                this.labelTF.x = _loc2_;
+                setSize(this.width,_loc1_);
+                if(!this.dataVO.iconAutoSize)
+                {
+                    this.icon.addEventListener(UILoaderEvent.COMPLETE,this.onIconLoadedHandler);
                 }
                 else
                 {
-                    this.labelTF.x = 0;
+                    this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.onIconLoadedHandler);
                 }
-                setSize(this.width,_loc1_);
             }
         }
         
@@ -87,6 +108,16 @@ package net.wg.gui.lobby.questsWindow.components
             {
                 App.toolTipMgr.showSpecial(this.dataVO.dataType,null,this.dataVO.dataBlock,this.dataVO.dataName);
             }
+            else if(this.dataVO.dataType)
+            {
+                App.toolTipMgr.showComplex(this.dataVO.dataType);
+            }
+            
+        }
+        
+        private function onIconLoadedHandler(param1:UILoaderEvent) : void
+        {
+            this.icon.y = _height - this.icon.height >> 1;
         }
     }
 }

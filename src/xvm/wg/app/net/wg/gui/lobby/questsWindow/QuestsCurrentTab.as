@@ -60,7 +60,7 @@ package net.wg.gui.lobby.questsWindow
         
         public function getComponentForFocus() : InteractiveObject
         {
-            return null;
+            return this;
         }
         
         public function canShowAutomatically() : Boolean

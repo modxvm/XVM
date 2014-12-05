@@ -1,6 +1,6 @@
 package net.wg.gui.rally.controls
 {
-    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
+    import net.wg.gui.components.controls.ButtonIconTextTransparent;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.gui.rally.events.RallyViewsEvent;
@@ -13,7 +13,7 @@ package net.wg.gui.rally.controls
             super();
         }
         
-        public var removeBtn:GrayTransparentButton;
+        public var removeBtn:ButtonIconTextTransparent;
         
         override public function cooldown(param1:Boolean) : void
         {

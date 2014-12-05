@@ -165,20 +165,20 @@ package net.wg.gui.lobby.window
             }
         }
         
-        override protected function applyWaitingChanges() : void
+        override protected function applyWaitingChanges(param1:int, param2:int) : void
         {
-            var _loc1_:DisplayObject = null;
-            super.applyWaitingChanges();
-            var _loc2_:int = numChildren;
-            var _loc3_:* = 0;
-            while(_loc3_ < _loc2_)
+            var _loc3_:DisplayObject = null;
+            super.applyWaitingChanges(param1,param2);
+            var _loc4_:int = numChildren;
+            var _loc5_:* = 0;
+            while(_loc5_ < _loc4_)
             {
-                _loc1_ = this.getChildAt(_loc3_);
-                if(_loc1_ != waiting)
+                _loc3_ = this.getChildAt(_loc5_);
+                if(_loc3_ != waiting)
                 {
-                    _loc1_.visible = !showWaiting;
+                    _loc3_.visible = !showWaiting;
                 }
-                _loc3_++;
+                _loc5_++;
             }
         }
         

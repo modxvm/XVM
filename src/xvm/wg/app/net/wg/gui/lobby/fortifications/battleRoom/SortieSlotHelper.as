@@ -9,7 +9,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
     import net.wg.gui.lobby.fortifications.cmp.battleRoom.SortieSlot;
     import net.wg.gui.rally.interfaces.IRallySlotVO;
     import net.wg.gui.rally.vo.RallySlotVO;
-    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
+    import net.wg.gui.components.controls.ButtonIconTextTransparent;
     import net.wg.data.constants.Values;
     import flash.display.InteractiveObject;
     import net.wg.gui.utils.ComplexTooltipHelper;
@@ -117,7 +117,7 @@ if(_loc5_)
                 if(_loc3_.player)
                 {
                     _loc5_.removeBtn.visible = _loc5_.index > 0;
-                    _loc5_.removeBtn.icon = GrayTransparentButton.ICON_CROSS;
+                    _loc5_.removeBtn.icon = ButtonIconTextTransparent.ICON_CROSS;
                     _loc5_.removeBtn.width = BTN_PROPS.remove.width;
                     _loc5_.removeBtn.x = BTN_PROPS.remove.x;
                     _loc5_.removeBtn.label = Values.EMPTY_STR;
@@ -133,7 +133,7 @@ if(_loc5_)
                 _loc5_.removeBtn.visible = _loc8_;
                 if(_loc8_)
                 {
-                    _loc5_.removeBtn.icon = GrayTransparentButton.ICON_CROSS;
+                    _loc5_.removeBtn.icon = ButtonIconTextTransparent.ICON_CROSS;
                     _loc5_.removeBtn.width = BTN_PROPS.remove.width;
                     _loc5_.removeBtn.x = BTN_PROPS.remove.x;
                     _loc5_.removeBtn.label = Values.EMPTY_STR;
@@ -144,7 +144,7 @@ if(_loc5_)
         else
         {
             _loc5_.removeBtn.visible = _loc3_.isCommanderState;
-            _loc5_.removeBtn.icon = GrayTransparentButton.ICON_NO_ICON;
+            _loc5_.removeBtn.icon = ButtonIconTextTransparent.ICON_NO_ICON;
             _loc5_.removeBtn.width = BTN_PROPS.lock.width;
             _loc5_.removeBtn.x = BTN_PROPS.lock.x;
             _loc5_.removeBtn.label = CYBERSPORT.WINDOW_UNIT_UNLOCKSLOT;
@@ -257,7 +257,7 @@ switch(param1)
         break;
 }
 var _loc6_:SortieSlot = param2 as SortieSlot;
-if((_loc6_) && (param1 == _loc6_.removeBtn) && _loc6_.removeBtn.icon == GrayTransparentButton.ICON_CROSS)
+if((_loc6_) && (param1 == _loc6_.removeBtn) && _loc6_.removeBtn.icon == ButtonIconTextTransparent.ICON_CROSS)
 {
     App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_SORTIE_REMOVEBTN);
 }

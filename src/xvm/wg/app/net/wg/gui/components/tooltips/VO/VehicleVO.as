@@ -45,7 +45,11 @@ package net.wg.gui.components.tooltips.VO
         
         public var isAction:Boolean = false;
         
+        public var isRentAction:Boolean = false;
+        
         public var actionPrc:Number = NaN;
+        
+        public var rentActionPrc:Number = NaN;
         
         public var rentLeft:Number = NaN;
         
@@ -58,6 +62,8 @@ package net.wg.gui.components.tooltips.VO
         public var defSellPrice:Array = null;
         
         public var defBuyPrice:Array = null;
+        
+        public var defRentPrice:Array = null;
         
         private function parsHash(param1:Object) : void
         {
@@ -73,6 +79,7 @@ package net.wg.gui.components.tooltips.VO
             var _loc12_:* = NaN;
             var _loc13_:* = NaN;
             var _loc14_:* = NaN;
+            var _loc15_:* = NaN;
             vName = (param1.hasOwnProperty("name")) && !(param1["name"] == undefined)?param1["name"]:"";
             vLevel = (param1.hasOwnProperty("level")) && !(param1["level"] == undefined)?param1["level"]:1;
             vType = (param1.hasOwnProperty("type")) && !(param1["type"] == undefined)?param1["type"]:"";
@@ -132,17 +139,29 @@ package net.wg.gui.components.tooltips.VO
                     {
                         this.defSellPrice = _loc9_[1];
                     }
+                    else if(_loc10_ == VehicleBaseVO.DEF_RENT_PRICE)
+                    {
+                        this.defRentPrice = _loc9_[1];
+                    }
                     else if(_loc10_ == VehicleBaseVO.ACTION_PRC)
                     {
                         _loc14_ = _loc9_[1];
                         this.isAction = !(_loc14_ == 0);
                         this.actionPrc = _loc14_;
                     }
+                    else if(_loc10_ == VehicleBaseVO.RENT_ACTION_PRC)
+                    {
+                        _loc15_ = _loc9_[1];
+                        this.isRentAction = !(_loc15_ == 0);
+                        this.rentActionPrc = _loc15_;
+                    }
                     else if(_loc10_ == ToolTipSpecial.RENTALS && (_loc9_[1]))
                     {
                         this.rentLeft = (_loc9_[1].hasOwnProperty("left")) && !(_loc9_[1].hasOwnProperty("left") == undefined)?_loc9_[1].left:this.rentLeft;
                         this.rentDescr = (_loc9_[1].hasOwnProperty("descr")) && !(_loc9_[1].hasOwnProperty("descr") == undefined)?_loc9_[1].descr:this.rentDescr;
                     }
+                    
+                    
                     
                     
                     

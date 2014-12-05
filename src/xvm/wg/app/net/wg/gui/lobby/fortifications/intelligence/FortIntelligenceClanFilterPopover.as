@@ -7,9 +7,11 @@ package net.wg.gui.lobby.fortifications.intelligence
     import net.wg.gui.components.controls.TimeNumericStepper;
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.Sprite;
+    import net.wg.gui.lobby.fortifications.cmp.main.impl.FortTimeAlertIcon;
     import net.wg.gui.lobby.fortifications.data.IntelligenceClanFilterVO;
     import net.wg.infrastructure.interfaces.IWrapper;
     import net.wg.gui.components.popOvers.PopOver;
+    import net.wg.data.constants.Values;
     import net.wg.gui.components.popOvers.PopOverConst;
     import scaleform.clik.events.SliderEvent;
     import scaleform.clik.events.ButtonEvent;
@@ -17,7 +19,6 @@ package net.wg.gui.lobby.fortifications.intelligence
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.fortifications.data.FortInvalidationType;
     import flash.display.InteractiveObject;
-    import net.wg.data.constants.Values;
     import net.wg.gui.lobby.fortifications.utils.impl.FortCommonUtils;
     import scaleform.clik.interfaces.IDataProvider;
     import scaleform.clik.events.ListEvent;
@@ -56,6 +57,8 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         public var bottomSeparator:Sprite;
         
+        public var timeAlert:FortTimeAlertIcon = null;
+        
         private var _lastSentData:IntelligenceClanFilterVO;
         
         private var _defaultFilterData:IntelligenceClanFilterVO;
@@ -63,6 +66,8 @@ package net.wg.gui.lobby.fortifications.intelligence
         private var _isGlobalDataSet:Boolean;
         
         private var _currentData:IntelligenceClanFilterVO;
+        
+        private var _isWrongLocalTime:Boolean = false;
         
         override public function set wrapper(param1:IWrapper) : void
         {
@@ -79,6 +84,8 @@ package net.wg.gui.lobby.fortifications.intelligence
             _loc1_.minClanLevel = int(this.rangeSlider.leftValue);
             _loc1_.maxClanLevel = int(this.rangeSlider.rightValue);
             _loc1_.startDefenseHour = int(this.defenseStartNumericStepper.value);
+            _loc1_.yourOwnClanStartDefenseHour = this._currentData?int(this._currentData.yourOwnClanStartDefenseHour):Values.DEFAULT_INT;
+            _loc1_.isWrongLocalTime = this._isWrongLocalTime;
             this._filterData = new IntelligenceClanFilterVO(_loc1_);
             return this._filterData;
         }
@@ -160,6 +167,8 @@ package net.wg.gui.lobby.fortifications.intelligence
             this.defaultButton = null;
             this.applyButton = null;
             this.cancelButton = null;
+            this.timeAlert.dispose();
+            this.timeAlert = null;
             this._defaultFilterData.dispose();
             this._defaultFilterData = null;
             this.disposeLastSentData();
@@ -170,15 +179,21 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         override protected function setData(param1:IntelligenceClanFilterVO) : void
         {
+            var _loc2_:int = param1.yourOwnClanStartDefenseHour;
+            this._isWrongLocalTime = param1.isWrongLocalTime;
             if(!this._defaultFilterData)
             {
-                this._defaultFilterData = this.getHelper().getDefaultFilterData();
+                this._defaultFilterData = this.getHelper().getDefaultFilterData(_loc2_,this._isWrongLocalTime);
             }
             this._isGlobalDataSet = true;
             assert(param1.maxClanLevel <= this._defaultFilterData.maxClanLevel && param1.maxClanLevel >= param1.minClanLevel,"FortIntelligenceClanFilterPopover | setData | incorrect maxClanLevel");
             assert(param1.minClanLevel <= this._defaultFilterData.maxClanLevel && param1.minClanLevel >= param1.minClanLevel,"FortIntelligenceClanFilterPopover | setData | incorrect minClanLevel");
             assert(param1.minClanLevel <= param1.maxClanLevel,"FortIntelligenceClanFilterPopover | setData | incorrect minClanLevel should be less or equal to maxClanLevel");
             this._currentData = new IntelligenceClanFilterVO(param1.toHash());
+            if(_loc2_ != Values.DEFAULT_INT)
+            {
+                this.defenseStartNumericStepper.skipValues = [_loc2_,_loc2_ + 1];
+            }
             if(!this._lastSentData)
             {
                 this._lastSentData = new IntelligenceClanFilterVO(param1.toHash());
@@ -240,7 +255,9 @@ package net.wg.gui.lobby.fortifications.intelligence
             {
                 this.defenseEndTF.htmlText = PERIOD_DELIMITER + Values.SPACE_STR + FortCommonUtils.instance.getNextHourText(param1.startDefenseHour);
                 this.defenseEndTF.visible = true;
+                App.utils.commons.moveDsiplObjToEndOfText(this.timeAlert,this.defenseEndTF);
             }
+            this.timeAlert.showAlert((this.defenseEndTF.visible) && (this._isWrongLocalTime));
         }
         
         private function disposeFilterData() : void

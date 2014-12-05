@@ -27,7 +27,6 @@ package net.wg.gui.lobby.header.headerButtonBar
             "data":new HBC_SettingsVo(),
             "helpText":LOBBY_HELP.HEADER_SETTINGS_BUTTON,
             "helpDirection":"B",
-            "helpConnectorLength":12,
             "enabled":true
         });
         this.accountData = new HeaderButtonVo({"id":ITEM_ID_ACCOUNT,
@@ -39,7 +38,6 @@ package net.wg.gui.lobby.header.headerButtonBar
         "data":new HBC_AccountDataVo(),
         "helpText":LOBBY_HELP.HEADER_ACCOUNT_BUTTON,
         "helpDirection":"B",
-        "helpConnectorLength":39,
         "enabled":true
     });
     this.premData = new HeaderButtonVo({"id":ITEM_ID_PREM,
@@ -51,7 +49,6 @@ package net.wg.gui.lobby.header.headerButtonBar
     "data":new HBC_PremDataVo(),
     "helpText":LOBBY_HELP.HEADER_PREMIUM_BUTTON,
     "helpDirection":"B",
-    "helpConnectorLength":39,
     "enabled":true
 });
 this.squadData = new HeaderButtonVo({"id":ITEM_ID_SQUAD,
@@ -63,7 +60,6 @@ this.squadData = new HeaderButtonVo({"id":ITEM_ID_SQUAD,
 "data":new HBC_SquadDataVo(),
 "helpText":LOBBY_HELP.HEADER_SQUAD_BUTTON,
 "helpDirection":"B",
-"helpConnectorLength":39,
 "enabled":true
 });
 this.battleSelectorData = new HeaderButtonVo({"id":ITEM_ID_BATTLE_SELECTOR,
@@ -75,7 +71,6 @@ this.battleSelectorData = new HeaderButtonVo({"id":ITEM_ID_BATTLE_SELECTOR,
 "data":new HBC_BattleTypeVo(),
 "helpText":LOBBY_HELP.HEADER_BATTLETYPE_BUTTON,
 "helpDirection":"B",
-"helpConnectorLength":39,
 "enabled":true
 });
 this.goldData = new HeaderButtonVo({"id":ITEM_ID_GOLD,
@@ -87,7 +82,6 @@ this.goldData = new HeaderButtonVo({"id":ITEM_ID_GOLD,
 "data":new HBC_FinanceVo(),
 "helpText":Values.EMPTY_STR,
 "helpDirection":"B",
-"helpConnectorLength":39,
 "enabled":true
 });
 this.silverData = new HeaderButtonVo({"id":ITEM_ID_SILVER,
@@ -99,7 +93,6 @@ this.silverData = new HeaderButtonVo({"id":ITEM_ID_SILVER,
 "data":new HBC_FinanceVo(),
 "helpText":Values.EMPTY_STR,
 "helpDirection":"B",
-"helpConnectorLength":39,
 "enabled":true
 });
 this.freeXPData = new HeaderButtonVo({"id":ITEM_ID_FREEXP,
@@ -111,7 +104,6 @@ this.freeXPData = new HeaderButtonVo({"id":ITEM_ID_FREEXP,
 "data":new HBC_FinanceVo(),
 "helpText":Values.EMPTY_STR,
 "helpDirection":"B",
-"helpConnectorLength":39,
 "enabled":true
 });
 super();

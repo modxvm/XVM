@@ -263,7 +263,6 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         private function updateControlPositions() : void
         {
             var _loc1_:DisplayObject = null;
-            var _loc4_:* = NaN;
             var _loc2_:uint = Math.round(App.appWidth * RIGHT_ALIGN_FACTOR);
             var _loc3_:uint = TEXT_V_ALIGN_START_POSITION_Y;
             for each(_loc1_ in this.rightAlignedControls)
@@ -280,7 +279,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this.warningText.x = this.searchClanText.x;
             this.warningText.y = this.createFortBtn.y + this.createFortBtn.height + WARNING_OFFSET_Y;
             this.searchClanText.y = this.createClanText.y = this.requirementText.y + this.requirementText.height;
-            _loc4_ = Math.min(MIN_NORMAL_WIDTH,App.appWidth) / MIN_NORMAL_WIDTH;
+            var _loc4_:Number = Math.min(MIN_NORMAL_WIDTH,App.appWidth) / MIN_NORMAL_WIDTH;
             _loc4_ = Math.max(MIN_ASPECT_RATIO,_loc4_);
             this.promoMC.width = PROMO_START_WIDTH * _loc4_;
             this.promoMC.height = PROMO_START_HEIGHT * _loc4_;

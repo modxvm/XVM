@@ -13,6 +13,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.interfaces.ISoundButtonEx;
     import net.wg.gui.components.controls.TimeNumericStepper;
+    import net.wg.gui.lobby.fortifications.cmp.main.impl.FortTimeAlertIcon;
     import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     import flash.text.TextFieldAutoSize;
@@ -106,15 +107,25 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         public var timeStepper:TimeNumericStepper;
         
+        public var timeAlert:FortTimeAlertIcon = null;
+        
         private var helper:FortPeriodDefenceWindowHelper;
         
         private var isPeripherySelected:Boolean = true;
         
         private var isHolidaySelected:Boolean = true;
         
+        private var isWrongLocalTime:Boolean = false;
+        
         private var tooltipInfoByTextField:Object;
         
         private var textFieldsWithTooltip:Vector.<TextField>;
+        
+        override protected function configUI() : void
+        {
+            this.timeAlert.visible = false;
+            App.utils.commons.moveDsiplObjToEndOfText(this.timeAlert,this.hourDefenceTimeTF);
+        }
         
         override public function setWindow(param1:IWindow) : void
         {
@@ -211,6 +222,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.timeStepper.dispose();
             this.timeStepper = null;
             this.helper = null;
+            this.timeAlert.dispose();
+            this.timeAlert = null;
             super.onDispose();
         }
         
@@ -288,6 +301,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.timeStepper.skipValues = param1.skipValues;
             this.hourDefenceTimeTF.visible = this.dashTF.visible = !this.timeStepper.currentValueIsDefault;
             this.hourDefenceTimeTF.text = FortCommonUtils.instance.getNextHourText(param1.hour);
+            this.isWrongLocalTime = param1.isWrongLocalTime;
+            this.timeAlert.showAlert((this.hourDefenceTimeTF.visible) && (this.isWrongLocalTime));
         }
         
         private function get btnIsEnabled() : Boolean
@@ -298,6 +313,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         private function timeStepperStateChangeHandler(param1:ComponentEvent) : void
         {
             this.hourDefenceTimeTF.visible = this.dashTF.visible = true;
+            this.timeAlert.showAlert(this.isWrongLocalTime);
         }
         
         private function timeStepperChangeHandler(param1:Event) : void
@@ -306,6 +322,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             {
                 this.hourDefenceTimeTF.visible = this.dashTF.visible = true;
             }
+            this.timeAlert.showAlert(this.isWrongLocalTime);
             this.hourDefenceTimeTF.text = FortCommonUtils.instance.getNextHourText(this.timeStepper.value);
             dispatchEvent(new Event(DATA_CHANGED));
         }

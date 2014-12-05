@@ -10,7 +10,7 @@ package net.wg.infrastructure.events
         {
             super(param1,true,true);
             this.config = param2;
-            this.token = param3;
+            this.name = param3;
             this.view = param4;
         }
         
@@ -30,11 +30,11 @@ package net.wg.infrastructure.events
         
         public var config:Object;
         
-        public var token:String;
+        public var name:String;
         
         override public function clone() : Event
         {
-            return new LoaderEvent(type,this.config,this.token,this.view);
+            return new LoaderEvent(type,this.config,this.name,this.view);
         }
     }
 }

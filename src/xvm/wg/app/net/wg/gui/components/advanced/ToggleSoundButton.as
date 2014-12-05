@@ -1,7 +1,7 @@
 package net.wg.gui.components.advanced
 {
+    import net.wg.gui.components.controls.ButtonIconLoader;
     import scaleform.clik.constants.InvalidationType;
-    import flash.events.Event;
     
     public class ToggleSoundButton extends ButtonIconLoader
     {
@@ -22,6 +22,7 @@ package net.wg.gui.components.advanced
         override protected function configUI() : void
         {
             super.configUI();
+            iconOffsetTop = this.hitMc.height - height >> 1;
             this.updateIndicatorSelection(_selected);
         }
         
@@ -38,19 +39,6 @@ package net.wg.gui.components.advanced
         {
             this.updateIndicator();
             super.updateAfterStateChange();
-        }
-        
-        override protected function completeHandler(param1:Event) : void
-        {
-            if((loader) && (container.contains(loader)))
-            {
-                container.removeChild(loader);
-            }
-            container.scaleX = 1 / scaleX;
-            container.scaleY = 1 / scaleY;
-            loader.x = Math.floor((bgMc.width * scaleX - loader.width) / 2);
-            loader.y = Math.floor((bgMc.height * scaleY - loader.height) / 2);
-            container.addChild(loader);
         }
         
         private function updateIndicator() : void

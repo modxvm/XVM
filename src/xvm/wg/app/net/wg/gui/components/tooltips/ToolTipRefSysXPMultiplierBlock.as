@@ -12,6 +12,8 @@ package net.wg.gui.components.tooltips
         public function ToolTipRefSysXPMultiplierBlock()
         {
             super();
+            this.descriptionTF.wordWrap = true;
+            this.descriptionTF.multiline = true;
         }
         
         public var xpIconLoader:UILoaderAlt = null;
@@ -34,6 +36,7 @@ package net.wg.gui.components.tooltips
             this.xpIconLoader.source = _loc2_.xpIconSource;
             this.multiplierTF.htmlText = _loc2_.multiplierText;
             this.descriptionTF.htmlText = _loc2_.descriptionText;
+            this.descriptionTF.height = this.descriptionTF.textHeight + 5;
         }
     }
 }

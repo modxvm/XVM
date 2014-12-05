@@ -362,7 +362,7 @@ package net.wg.infrastructure.base
         {
             if(isInvalid(WindowViewInvalidationType.WAITING_INVALID))
             {
-                this.applyWaitingChanges();
+                this.applyWaitingChanges(width,height);
             }
             super.draw();
             if((this.geometry) && (this._window) && (isInvalid(WindowViewInvalidationType.POSITION_INVALID)))
@@ -372,7 +372,7 @@ package net.wg.infrastructure.base
             }
         }
         
-        protected function applyWaitingChanges() : void
+        protected function applyWaitingChanges(param1:int, param2:int) : void
         {
             if(this._showWaiting)
             {
@@ -380,7 +380,7 @@ package net.wg.infrastructure.base
                 {
                     this._waiting = new Waiting();
                     addChild(this._waiting);
-                    this._waiting.setSize(width,height);
+                    this._waiting.setSize(param1,param2);
                     this._waiting.validateNow();
                 }
                 this._waiting.setMessage(this.waitingMessage);

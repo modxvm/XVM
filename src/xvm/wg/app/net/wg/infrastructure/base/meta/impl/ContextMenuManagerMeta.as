@@ -2,6 +2,8 @@ package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.infrastructure.base.BaseDAAPIModule;
     import net.wg.data.constants.Errors;
+    import net.wg.data.daapi.ContextMenuOptionsVO;
+    import net.wg.infrastructure.exceptions.AbstractException;
     
     public class ContextMenuManagerMeta extends BaseDAAPIModule
     {
@@ -11,7 +13,11 @@ package net.wg.infrastructure.base.meta.impl
             super();
         }
         
-        public var getOptions:Function = null;
+        public var requestOptions:Function = null;
+        
+        public var onOptionSelect:Function = null;
+        
+        public var onHide:Function = null;
         
         public var _getUserInfo:Function = null;
         
@@ -65,24 +71,22 @@ package net.wg.infrastructure.base.meta.impl
         
         public var fortPrepareOrder:Function = null;
         
-        public var getContextMenuVehicleData:Function = null;
-        
-        public var showVehicleInfo:Function = null;
-        
-        public var toResearch:Function = null;
-        
-        public var vehicleSell:Function = null;
-        
-        public var favoriteVehicle:Function = null;
-        
-        public var showVehicleStats:Function = null;
-        
-        public var vehicleBuy:Function = null;
-        
-        public function getOptionsS(param1:String, param2:String, param3:Number, param4:Object) : Array
+        public function requestOptionsS(param1:String, param2:String, param3:Object = null) : void
         {
-            App.utils.asserter.assertNotNull(this.getOptions,"getOptions" + Errors.CANT_NULL);
-            return this.getOptions(param1,param2,param3,param4);
+            App.utils.asserter.assertNotNull(this.requestOptions,"requestOptions" + Errors.CANT_NULL);
+            this.requestOptions(param1,param2,param3);
+        }
+        
+        public function onOptionSelectS(param1:String) : void
+        {
+            App.utils.asserter.assertNotNull(this.onOptionSelect,"onOptionSelect" + Errors.CANT_NULL);
+            this.onOptionSelect(param1);
+        }
+        
+        public function onHideS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onHide,"onHide" + Errors.CANT_NULL);
+            this.onHide();
         }
         
         public function _getUserInfoS(param1:Number, param2:String) : Object
@@ -241,46 +245,17 @@ package net.wg.infrastructure.base.meta.impl
             this.fortPrepareOrder(param1);
         }
         
-        public function getContextMenuVehicleDataS(param1:Number) : Object
+        public function as_setOptions(param1:Object) : void
         {
-            App.utils.asserter.assertNotNull(this.getContextMenuVehicleData,"getContextMenuVehicleData" + Errors.CANT_NULL);
-            return this.getContextMenuVehicleData(param1);
+            var _loc2_:ContextMenuOptionsVO = new ContextMenuOptionsVO(param1);
+            this.setOptions(_loc2_);
         }
         
-        public function showVehicleInfoS(param1:Number) : void
+        protected function setOptions(param1:ContextMenuOptionsVO) : void
         {
-            App.utils.asserter.assertNotNull(this.showVehicleInfo,"showVehicleInfo" + Errors.CANT_NULL);
-            this.showVehicleInfo(param1);
-        }
-        
-        public function toResearchS(param1:Number) : void
-        {
-            App.utils.asserter.assertNotNull(this.toResearch,"toResearch" + Errors.CANT_NULL);
-            this.toResearch(param1);
-        }
-        
-        public function vehicleSellS(param1:Number) : void
-        {
-            App.utils.asserter.assertNotNull(this.vehicleSell,"vehicleSell" + Errors.CANT_NULL);
-            this.vehicleSell(param1);
-        }
-        
-        public function favoriteVehicleS(param1:Number, param2:Boolean) : void
-        {
-            App.utils.asserter.assertNotNull(this.favoriteVehicle,"favoriteVehicle" + Errors.CANT_NULL);
-            this.favoriteVehicle(param1,param2);
-        }
-        
-        public function showVehicleStatsS(param1:Number) : void
-        {
-            App.utils.asserter.assertNotNull(this.showVehicleStats,"showVehicleStats" + Errors.CANT_NULL);
-            this.showVehicleStats(param1);
-        }
-        
-        public function vehicleBuyS(param1:Number) : void
-        {
-            App.utils.asserter.assertNotNull(this.vehicleBuy,"vehicleBuy" + Errors.CANT_NULL);
-            this.vehicleBuy(param1);
+            var _loc2_:String = "as_setOptions" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
         }
     }
 }

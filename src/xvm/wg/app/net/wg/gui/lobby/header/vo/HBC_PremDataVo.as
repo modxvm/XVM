@@ -15,5 +15,9 @@ package net.wg.gui.lobby.header.vo
         public var doLabel:String = "";
         
         public var isYear:Boolean = false;
+        
+        public var disableTTHeader:String = "";
+        
+        public var disableTTBody:String = "";
     }
 }

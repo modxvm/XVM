@@ -21,55 +21,52 @@ package net.wg.infrastructure.managers
         public function LoaderManager()
         {
             super();
-            this.loaderToToken = new Dictionary(true);
+            this.loaderToInfo = new Dictionary(true);
         }
         
-        private var loaderToToken:Dictionary;
+        private var loaderToInfo:Dictionary;
         
         private var firstTimeLoadLobby:Boolean = false;
         
-        public function as_loadView(param1:Object, param2:String, param3:String, param4:String) : void
+        public function as_loadView(param1:Object, param2:String, param3:String) : void
         {
-            if(param3 == Aliases.LOBBY && !this.firstTimeLoadLobby)
+            if(param2 == Aliases.LOBBY && !this.firstTimeLoadLobby)
             {
                 App.libraryLoader.load(Vector.<String>(["toolTips.swf"]));
                 this.firstTimeLoadLobby = true;
             }
-            var _loc5_:URLRequest = new URLRequest(param1.url);
-            var _loc6_:Loader = new Loader();
-            var _loc7_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
-            _loc6_.load(_loc5_,_loc7_);
-            _loc6_.contentLoaderInfo.addEventListener(Event.INIT,this.onSWFLoaded,false,0,true);
-            _loc6_.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError,false,0,true);
-            this.loaderToToken[_loc6_] = new LoadInfo(param2,param3,param4,param1);
-            this.dispatchLoaderEvent(LoaderEvent.VIEW_LOADING,param1,param2);
+            var _loc4_:URLRequest = new URLRequest(param1.url);
+            var _loc5_:Loader = new Loader();
+            var _loc6_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
+            _loc5_.load(_loc4_,_loc6_);
+            _loc5_.contentLoaderInfo.addEventListener(Event.INIT,this.onSWFLoaded,false,0,true);
+            _loc5_.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError,false,0,true);
+            this.loaderToInfo[_loc5_] = new LoadInfo(param2,param3,param1);
+            this.dispatchLoaderEvent(LoaderEvent.VIEW_LOADING,param1,param3);
         }
         
-        public function stopLoadingByAliases(param1:Array) : Array
+        public function stopLoadingByAliases(param1:Array) : void
         {
-            var _loc3_:* = undefined;
-            var _loc4_:Loader = null;
-            var _loc5_:LoadInfo = null;
-            var _loc6_:* = 0;
-            var _loc2_:Array = [];
-            for(_loc3_ in this.loaderToToken)
+            var _loc2_:* = undefined;
+            var _loc3_:Loader = null;
+            var _loc4_:LoadInfo = null;
+            var _loc5_:* = 0;
+            for(_loc2_ in this.loaderToInfo)
             {
-                _loc4_ = Loader(_loc3_);
-                _loc5_ = this.loaderToToken[_loc4_];
-                _loc6_ = param1.indexOf(_loc5_.alias);
-                if(_loc6_ != -1)
+                _loc3_ = Loader(_loc2_);
+                _loc4_ = this.loaderToInfo[_loc3_];
+                _loc5_ = param1.indexOf(_loc4_.alias);
+                if(_loc5_ != -1)
                 {
-                    param1.splice(_loc6_,1);
-                    _loc2_.push(_loc5_.token);
-                    _loc3_.contentLoaderInfo.removeEventListener(Event.INIT,this.onSWFLoaded,false);
-                    _loc3_.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError,false);
-                    _loc4_.unloadAndStop(true);
-                    _loc5_.dispose();
-                    delete this.loaderToToken[_loc3_];
+                    param1.splice(_loc5_,1);
+                    _loc2_.contentLoaderInfo.removeEventListener(Event.INIT,this.onSWFLoaded,false);
+                    _loc2_.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError,false);
+                    _loc3_.unloadAndStop(true);
+                    _loc4_.dispose();
+                    delete this.loaderToInfo[_loc2_];
                     true;
                 }
             }
-            return _loc2_;
         }
         
         override protected function onDispose() : void
@@ -77,15 +74,15 @@ package net.wg.infrastructure.managers
             var _loc1_:Object = null;
             var _loc2_:Loader = null;
             var _loc3_:LoadInfo = null;
-            for(_loc1_ in this.loaderToToken)
+            for(_loc1_ in this.loaderToInfo)
             {
-                _loc3_ = this.loaderToToken[_loc1_];
+                _loc3_ = this.loaderToInfo[_loc1_];
                 _loc3_.dispose();
                 _loc2_ = _loc1_ as Loader;
                 _loc2_.close();
                 _loc2_.contentLoaderInfo.removeEventListener(Event.INIT,this.onSWFLoaded);
                 _loc2_.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError);
-                delete this.loaderToToken[_loc2_];
+                delete this.loaderToInfo[_loc2_];
                 true;
             }
         }
@@ -102,9 +99,8 @@ package net.wg.infrastructure.managers
             var loader:Loader = info.loader;
             info.removeEventListener(Event.INIT,this.onSWFLoaded);
             info.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError);
-            var data:LoadInfo = this.loaderToToken[loader];
+            var data:LoadInfo = this.loaderToInfo[loader];
             var config:Object = data.config;
-            var token:String = data.token;
             var alias:String = data.alias;
             var view:IView = loader.content as IView;
             if(!view)
@@ -121,21 +117,20 @@ package net.wg.infrastructure.managers
             if(view)
             {
                 this.applyViewData(view,data,loader);
-                this.dispatchLoaderEvent(LoaderEvent.VIEW_LOADED,config,token,view);
-                viewLoadedS(token,view);
+                this.dispatchLoaderEvent(LoaderEvent.VIEW_LOADED,config,data.name,view);
+                viewLoadedS(data.name,view);
             }
             else
             {
-                viewInitializationErrorS(token,config,alias);
+                viewInitializationErrorS(config,alias,data.name);
             }
             data.dispose();
-            delete this.loaderToToken[loader];
+            delete this.loaderToInfo[loader];
             true;
         }
         
         private function applyViewData(param1:IView, param2:LoadInfo, param3:Loader) : void
         {
-            param1.as_token = param2.token;
             param1.as_config = param2.config;
             param1.as_alias = param2.alias;
             param1.as_name = param2.name;
@@ -164,15 +159,14 @@ package net.wg.infrastructure.managers
             var _loc3_:Loader = _loc2_.loader;
             _loc2_.removeEventListener(Event.INIT,this.onSWFLoaded);
             _loc2_.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError);
-            var _loc4_:LoadInfo = this.loaderToToken[_loc3_];
-            var _loc5_:String = _loc4_.token;
-            var _loc6_:String = _loc4_.alias;
-            var _loc7_:Object = _loc4_.config;
-            viewLoadErrorS(_loc5_,_loc6_,param1.text);
+            var _loc4_:LoadInfo = this.loaderToInfo[_loc3_];
+            var _loc5_:String = _loc4_.alias;
+            var _loc6_:Object = _loc4_.config;
+            viewLoadErrorS(_loc5_,_loc4_.name,param1.text);
             _loc4_.dispose();
-            delete this.loaderToToken[_loc3_];
+            delete this.loaderToInfo[_loc3_];
             true;
-            dispatchEvent(new LoaderEvent(LoaderEvent.VIEW_LOAD_ERROR,_loc7_));
+            dispatchEvent(new LoaderEvent(LoaderEvent.VIEW_LOAD_ERROR,_loc6_,_loc4_.name));
             _loc3_.unloadAndStop();
         }
     }
@@ -180,16 +174,13 @@ package net.wg.infrastructure.managers
 class LoadInfo extends Object
 {
     
-    function LoadInfo(param1:String, param2:String, param3:String, param4:Object)
+    function LoadInfo(param1:String, param2:String, param3:Object)
     {
         super();
-        this.token = param1;
-        this.alias = param2;
-        this.name = param3;
-        this.config = param4;
+        this.alias = param1;
+        this.name = param2;
+        this.config = param3;
     }
-    
-    public var token:String;
     
     public var alias:String;
     
@@ -199,7 +190,6 @@ class LoadInfo extends Object
     
     public function dispose() : void
     {
-        this.token = null;
         this.alias = null;
         this.name = null;
         this.config = null;

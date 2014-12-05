@@ -2,6 +2,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
 {
     import net.wg.infrastructure.base.meta.impl.FortListMeta;
     import net.wg.infrastructure.base.meta.IFortListMeta;
+    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import flash.text.TextField;
     import net.wg.gui.components.controls.DropdownMenu;
     import net.wg.gui.components.controls.InfoIcon;
@@ -14,12 +15,11 @@ package net.wg.gui.lobby.fortifications.battleRoom
     import flash.events.MouseEvent;
     import net.wg.gui.events.SortableTableListEvent;
     import scaleform.clik.events.ButtonEvent;
-    import net.wg.gui.components.controls.NormalSortingBtnInfo;
-    import flash.text.TextFieldAutoSize;
     import scaleform.clik.data.DataProvider;
     import net.wg.data.constants.SortingInfo;
     import net.wg.gui.rally.data.ManualSearchDataProvider;
     import net.wg.gui.lobby.fortifications.data.sortie.SortieRenderVO;
+    import scaleform.gfx.TextFieldEx;
     
     public class FortListView extends FortListMeta implements IFortListMeta
     {
@@ -32,9 +32,25 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.filterDivision.UIID = 50;
             listDataProvider = new ManualSearchDataProvider(SortieRenderVO);
             this.divisionsDP = new DAAPIDataProvider();
+            TextFieldEx.setVerticalAlign(this.textMessage,TextFieldEx.VALIGN_CENTER);
+            this.textMessage.text = FORTIFICATIONS.SORTIE_LISTVIEW_ABSENTDIVISIONS;
+            this.textMessage.visible = false;
+        }
+        
+        private static function createTableBtnInfo(param1:String, param2:String, param3:Number, param4:Number, param5:String) : NormalSortingBtnInfo
+        {
+            var _loc6_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            _loc6_.label = param1;
+            _loc6_.buttonWidth = param3;
+            _loc6_.sortOrder = param4;
+            _loc6_.toolTip = param5;
+            _loc6_.iconId = param2;
+            return _loc6_;
         }
         
         public var searchResultsTF:TextField;
+        
+        public var textMessage:TextField = null;
         
         public var filterTF:TextField;
         
@@ -61,6 +77,12 @@ package net.wg.gui.lobby.fortifications.battleRoom
         public function as_setCreationEnabled(param1:Boolean) : void
         {
             createBtn.enabled = param1;
+            var _loc2_:int = listDataProvider.length;
+            if(_loc2_ > 0)
+            {
+                this.textMessage.visible = false;
+            }
+            App.utils.scheduler.scheduleTask(this.showTextMsg,_loc2_ > 0?100:300);
         }
         
         override protected function convertToRallyVO(param1:Object) : IRallyVO
@@ -81,6 +103,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
         override protected function configUI() : void
         {
             super.configUI();
+            this.textMessage.y = rallyTable.y + (rallyTable.height - this.textMessage.height >> 1) ^ 0;
+            this.textMessage.x = rallyTable.x + (rallyTable.width - this.textMessage.width >> 1) ^ 0;
             this.initListColumns();
             createBtn.label = FORTIFICATIONS.SORTIE_LISTVIEW_CREATE;
             titleLbl.text = FORTIFICATIONS.SORTIE_LISTVIEW_TITLE;
@@ -98,6 +122,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         override protected function onDispose() : void
         {
+            App.utils.scheduler.cancelTask(this.showTextMsg);
+            this.textMessage = null;
             this.filterDivision.removeEventListener(ListEvent.INDEX_CHANGE,this.onFilterChange);
             if(this.filterInfo)
             {
@@ -146,33 +172,22 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
+        private function showTextMsg() : void
+        {
+            var _loc1_:* = listDataProvider.length <= 0;
+            this.textMessage.visible = _loc1_;
+            detailsSection.noRallyScreen.showText(!_loc1_);
+        }
+        
         private function initListColumns() : void
         {
-            var _loc1_:NormalSortingBtnInfo = null;
-            var _loc2_:Array = [];
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_NAME;
-            _loc1_.buttonWidth = 332;
-            _loc1_.textAlign = TextFieldAutoSize.LEFT;
-            _loc1_.sortOrder = 0;
-            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTNAMEBTN;
-            _loc1_.iconId = "creatorName";
-            _loc2_.push(_loc1_);
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_DIVISION;
-            _loc1_.buttonWidth = 115;
-            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTDIVISIONBTN;
-            _loc1_.iconId = "division";
-            _loc1_.sortOrder = 1;
-            _loc2_.push(_loc1_);
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_MEMBERSCOUNT;
-            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTSQUADBTN;
-            _loc1_.buttonWidth = 130;
-            _loc1_.iconId = "playersCount";
-            _loc1_.sortOrder = 2;
-            _loc2_.push(_loc1_);
-            rallyTable.headerDP = new DataProvider(_loc2_);
+            var _loc1_:Array = [];
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_NAME,"creatorName",141,0,TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTNAMEBTN));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_DESCR,"description",140,1,TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_DESCR));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_DIVISION,"division",115,2,TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTDIVISIONBTN));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_MEMBERSCOUNT,"playersCount",107,3,TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTSQUADBTN));
+            _loc1_.push(createTableBtnInfo(FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_STATUS,"isInBattle",74,4,TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_STATUS));
+            rallyTable.headerDP = new DataProvider(_loc1_);
             rallyTable.sortByField("creatorName",SortingInfo.ASCENDING_SORT);
         }
         

@@ -83,11 +83,19 @@ package net.wg.gui.lobby.questsWindow.components
                     this.textField.textColor = QuestsStates.CLR_STATUS_DONE;
                     this._statusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
                 }
+                else if(this._status == QuestsStates.NOT_DONE)
+                {
+                    gotoAndStop(QuestsStates.NOT_DONE);
+                    this.textField.text = QUESTS.QUESTS_STATUS_NOTDONE;
+                    this.textField.textColor = QuestsStates.CLR_STATUS_NOT_DONE;
+                    this._statusTooltip = TOOLTIPS.QUESTS_STATUS_NOTDONE;
+                }
                 else
                 {
                     visible = false;
                     this._statusTooltip = "";
                 }
+                
                 
             }
             if(isInvalid(this.INV_ALIGN))

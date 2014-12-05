@@ -2,7 +2,7 @@ package net.wg.gui.lobby.profile.pages.summary
 {
     import net.wg.infrastructure.base.meta.impl.ProfileSummaryMeta;
     import net.wg.infrastructure.base.meta.IProfileSummaryMeta;
-    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
+    import net.wg.gui.lobby.profile.data.AchievementProfileVO;
     import net.wg.gui.components.advanced.LineDescrIconText;
     import net.wg.gui.lobby.profile.components.LditValued;
     import net.wg.gui.lobby.profile.components.LditBattles;
@@ -25,16 +25,12 @@ package net.wg.gui.lobby.profile.pages.summary
         
         protected static function getAchievementVector(param1:Array, param2:Boolean = false) : Array
         {
-            var _loc4_:ProfileAchievementVO = null;
+            var _loc4_:AchievementProfileVO = null;
             var _loc5_:Object = null;
             var _loc3_:Array = [];
             for each(_loc5_ in param1)
             {
-                _loc4_ = new ProfileAchievementVO(_loc5_);
-                if(param2)
-                {
-                    _loc4_.showProgress = false;
-                }
+                _loc4_ = new AchievementProfileVO(_loc5_);
                 _loc3_.push(_loc4_);
             }
             return _loc3_;

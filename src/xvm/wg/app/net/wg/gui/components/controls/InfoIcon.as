@@ -16,7 +16,7 @@ package net.wg.gui.components.controls
         
         public static var TYPE_INFO:String = "info";
         
-        public static var CHECK_BOX_MARGIN:Number = 14;
+        public static var CHECK_BOX_MARGIN:Number = 10;
         
         private var INVALIDATE_ICO:String = "ico_invalid";
         

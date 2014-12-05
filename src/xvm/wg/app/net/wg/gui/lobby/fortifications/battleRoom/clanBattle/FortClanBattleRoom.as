@@ -18,6 +18,7 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
     import net.wg.gui.rally.interfaces.IRallyVO;
     import net.wg.gui.lobby.fortifications.data.battleRoom.SortieVO;
     import net.wg.gui.rally.interfaces.IChatSectionWithDescription;
+    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.Tooltips;
     
@@ -64,17 +65,6 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
         
         private var model:FortClanBattleRoomVO = null;
         
-        public function as_updateTeamHeaderText(param1:String) : void
-        {
-            FortClanBattleTeamSection(teamSection).updateTeamHeaderText(param1);
-        }
-        
-        public function as_updateReadyStatus(param1:Boolean, param2:Boolean) : void
-        {
-            this.mineReadyStatus.gotoAndStop(param1?IndicationOfStatus.STATUS_READY:IndicationOfStatus.STATUS_NORMAL);
-            this.enemyReadyStatus.gotoAndStop(param2?IndicationOfStatus.STATUS_READY:IndicationOfStatus.STATUS_NORMAL);
-        }
-        
         override protected function setBattleRoomData(param1:FortClanBattleRoomVO) : void
         {
             this.model = param1;
@@ -84,9 +74,7 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             this.headerDesrc.autoSize = TextFieldAutoSize.RIGHT;
             this.infoIcon.x = Math.round(this.mapName.x - INFO_ICON_PADDING);
             this.mineClanName.htmlText = param1.mineClanName;
-            this.mineClanIcon.setImage(param1.mineClanIcon);
             this.enemyClanName.htmlText = param1.enemyClanName;
-            this.enemyClanIcon.setImage(param1.enemyClanIcon);
         }
         
         override protected function setTimerDelta(param1:ClanBattleTimerVO) : void
@@ -113,11 +101,6 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             this.connectedDirections.rightDirection.alwaysShowLevels = true;
         }
         
-        private function onTimerAlertHandler(param1:ClanBattleTimerEvent) : void
-        {
-            onTimerAlertS();
-        }
-        
         override protected function onPopulate() : void
         {
             super.onPopulate();
@@ -133,6 +116,10 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             this.infoIcon.removeEventListener(MouseEvent.ROLL_OUT,onRollOutInfoIconHandler);
             this.infoIcon.dispose();
             this.infoIcon = null;
+            this.mineClanIcon.dispose();
+            this.mineClanIcon = null;
+            this.enemyClanIcon.dispose();
+            this.enemyClanIcon = null;
             this.connectedDirections.dispose();
             this.connectedDirections = null;
             if(this.model)
@@ -141,7 +128,9 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
                 this.model = null;
             }
             this.mineReadyStatus.dispose();
+            this.mineReadyStatus = null;
             this.enemyReadyStatus.dispose();
+            this.enemyReadyStatus = null;
             super.onDispose();
         }
         
@@ -174,6 +163,33 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             super.coolDownControls(param1,param2);
         }
         
+        public function as_setEnemyClanIcon(param1:String) : void
+        {
+            if((!_baseDisposed) && (this.enemyClanIcon) && (StringUtils.isNotEmpty(param1)))
+            {
+                this.enemyClanIcon.setImage(param1);
+            }
+        }
+        
+        public function as_setMineClanIcon(param1:String) : void
+        {
+            if((!_baseDisposed) && (this.mineClanIcon) && (StringUtils.isNotEmpty(param1)))
+            {
+                this.mineClanIcon.setImage(param1);
+            }
+        }
+        
+        public function as_updateReadyStatus(param1:Boolean, param2:Boolean) : void
+        {
+            this.mineReadyStatus.gotoAndStop(param1?IndicationOfStatus.STATUS_READY:IndicationOfStatus.STATUS_NORMAL);
+            this.enemyReadyStatus.gotoAndStop(param2?IndicationOfStatus.STATUS_READY:IndicationOfStatus.STATUS_NORMAL);
+        }
+        
+        public function as_updateTeamHeaderText(param1:String) : void
+        {
+            FortClanBattleTeamSection(teamSection).updateTeamHeaderText(param1);
+        }
+        
         override protected function onControlRollOver(param1:MouseEvent) : void
         {
             super.onControlRollOver(param1);
@@ -183,6 +199,11 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
                     App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_SORTIE_BATTLEROOM_LEAVEBTN);
                     break;
             }
+        }
+        
+        private function onTimerAlertHandler(param1:ClanBattleTimerEvent) : void
+        {
+            onTimerAlertS();
         }
         
         private function onRollOverMapInfoHandler(param1:MouseEvent) : void

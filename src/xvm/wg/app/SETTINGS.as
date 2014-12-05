@@ -254,6 +254,18 @@ package
         
         public static var GAME_REPLAYENABLED_ALL:String = "#settings:game/replayEnabled/all";
         
+        public static var GAME_SHOWVEHMODELSONMAP:String = "#settings:game/showVehModelsOnMap";
+        
+        public static var GAME_SHOWVEHMODELSONMAP_NEVER:String = "#settings:game/showVehModelsOnMap/never";
+        
+        public static var GAME_SHOWVEHMODELSONMAP_ALT:String = "#settings:game/showVehModelsOnMap/alt";
+        
+        public static var GAME_SHOWVEHMODELSONMAP_ALWAYS:String = "#settings:game/showVehModelsOnMap/always";
+        
+        public static var GAME_SHOWVECTORONMAP:String = "#settings:game/showVectorOnMap";
+        
+        public static var GAME_SHOWSECTORONMAP:String = "#settings:game/showSectorOnMap";
+        
         public static var GAME_DYNAMICCAMERA:String = "#settings:game/dynamicCamera";
         
         public static var MONITOR:String = "#settings:monitor";
@@ -436,7 +448,7 @@ package
         
         public static var GAME_SHOWEXINFOFORDESTROYVEHICLE:String = "#settings:game/showExInfoForDestroyVehicle";
         
-        public static var GAME_PLAYERPANELSETTINGS:String = "#settings:game/playerPanelSettings";
+        public static var GAME_BATTLEPANELSETTINGS:String = "#settings:game/battlePanelSettings";
         
         public static var GAME_PPSHOWLEVELS:String = "#settings:game/ppShowLevels";
         

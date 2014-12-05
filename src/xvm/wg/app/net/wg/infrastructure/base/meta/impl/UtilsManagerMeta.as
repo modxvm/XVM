@@ -31,8 +31,6 @@ package net.wg.infrastructure.base.meta.impl
         
         public var getMonthsNames:Function = null;
         
-        public var getDateParams:Function = null;
-        
         public var intToStringWithPrefixPatern:Function = null;
         
         public var isTwelveHoursFormat:Function = null;
@@ -89,12 +87,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.getMonthsNames,"getMonthsNames" + Errors.CANT_NULL);
             return this.getMonthsNames(param1,param2,param3);
-        }
-        
-        public function getDateParamsS(param1:Number) : Object
-        {
-            App.utils.asserter.assertNotNull(this.getDateParams,"getDateParams" + Errors.CANT_NULL);
-            return this.getDateParams(param1);
         }
         
         public function intToStringWithPrefixPaternS(param1:int, param2:int, param3:String) : String

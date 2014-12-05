@@ -3,6 +3,10 @@ package net.wg.gui.lobby.settings
     import scaleform.clik.core.UIComponent;
     import net.wg.infrastructure.interfaces.IViewStackContent;
     import net.wg.gui.interfaces.ISettingsBase;
+    import flash.utils.Dictionary;
+    import flash.display.DisplayObject;
+    import flash.events.MouseEvent;
+    import net.wg.data.constants.Tooltips;
     import net.wg.gui.components.controls.LabelControl;
     import flash.text.TextField;
     import net.wg.gui.components.controls.CheckBox;
@@ -22,6 +26,8 @@ package net.wg.gui.lobby.settings
         
         protected var headDependedControls:Vector.<String> = null;
         
+        protected var toolTipMapping:Dictionary = null;
+        
         override protected function configUI() : void
         {
             super.configUI();
@@ -29,6 +35,39 @@ package net.wg.gui.lobby.settings
             {
                 this.setData(this._data);
             }
+            this.toolTipMapping = new Dictionary(true);
+            this.initToolTipMapping();
+        }
+        
+        protected function initToolTipMapping() : void
+        {
+            var _loc1_:DisplayObject = null;
+            var _loc2_:Object = null;
+            for(_loc2_ in this.toolTipMapping)
+            {
+                _loc1_ = _loc2_ as DisplayObject;
+                _loc1_.addEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
+                _loc1_.addEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
+            }
+        }
+        
+        private function onControlOut(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
+        
+        private function onControlOver(param1:MouseEvent) : void
+        {
+            var _loc2_:String = this.getControlId(param1.currentTarget as DisplayObject);
+            if(_loc2_)
+            {
+                App.toolTipMgr.showSpecial(Tooltips.SETTINGS_CONTROL,null,_loc2_);
+            }
+        }
+        
+        protected function getControlId(param1:DisplayObject) : String
+        {
+            return this.toolTipMapping[param1];
         }
         
         protected function trySetLabel(param1:String, param2:String = "") : void
@@ -118,7 +157,18 @@ package net.wg.gui.lobby.settings
         
         override protected function onDispose() : void
         {
+            var _loc1_:DisplayObject = null;
+            var _loc2_:Object = null;
             super.onDispose();
+            for(_loc2_ in this.toolTipMapping)
+            {
+                _loc1_ = _loc2_ as DisplayObject;
+                _loc1_.removeEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
+                _loc1_.removeEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
+                delete this.toolTipMapping[_loc2_];
+                true;
+            }
+            this.toolTipMapping = null;
             while(this.headDependedControls.length)
             {
                 this.headDependedControls.pop();

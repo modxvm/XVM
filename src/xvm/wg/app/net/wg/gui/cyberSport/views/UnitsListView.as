@@ -3,8 +3,9 @@ package net.wg.gui.cyberSport.views
     import net.wg.infrastructure.base.meta.impl.CyberSportUnitsListMeta;
     import net.wg.infrastructure.base.meta.ICyberSportUnitsListMeta;
     import net.wg.infrastructure.base.meta.IBaseRallyViewMeta;
+    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import net.wg.gui.cyberSport.controls.NavigationBlock;
-    import net.wg.gui.components.advanced.ButtonDnmIcon;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import flash.text.TextField;
     import net.wg.gui.cyberSport.vo.NavigationBlockVO;
     import net.wg.gui.rally.interfaces.IRallyVO;
@@ -14,7 +15,6 @@ package net.wg.gui.cyberSport.views
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
-    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.rally.data.ManualSearchDataProvider;
     import net.wg.gui.cyberSport.vo.CSCommandVO;
@@ -30,9 +30,17 @@ package net.wg.gui.cyberSport.views
         
         private static var REFRESH_BUTTON_OFFSET:Number = 14;
         
+        private static function createTableBtnInfo(param1:String, param2:Number) : NormalSortingBtnInfo
+        {
+            var _loc3_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            _loc3_.label = param1;
+            _loc3_.buttonWidth = param2;
+            return _loc3_;
+        }
+        
         public var navigationBlock:NavigationBlock;
         
-        public var refreshBtn:ButtonDnmIcon = null;
+        public var refreshBtn:IButtonIconLoader = null;
         
         public var searchResultsTF:TextField;
         
@@ -54,7 +62,7 @@ package net.wg.gui.cyberSport.views
         public function as_setSearchResultText(param1:String) : void
         {
             this.searchResultsTF.htmlText = param1;
-            this.refreshBtn.x = this.searchResultsTF.x + this.searchResultsTF.textWidth + REFRESH_BUTTON_OFFSET;
+            this.refreshBtn.x = this.searchResultsTF.x + this.searchResultsTF.textWidth + REFRESH_BUTTON_OFFSET | 0;
         }
         
         override protected function convertToRallyVO(param1:Object) : IRallyVO
@@ -79,6 +87,9 @@ package net.wg.gui.cyberSport.views
             this.refreshBtn.addEventListener(ButtonEvent.CLICK,this.onRefreshClick);
             this.refreshBtn.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.refreshBtn.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
+            this.refreshBtn.iconOffsetTop = -1;
+            this.refreshBtn.iconOffsetLeft = 1;
+            this.refreshBtn.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_CYBERSPORT_REFRESHICON;
             this.navigationBlock.addEventListener(CSComponentEvent.LOAD_PREVIOUS_REQUEST,this.onLoadPreviousRequest);
             this.navigationBlock.addEventListener(CSComponentEvent.LOAD_NEXT_REQUEST,this.onLoadNextRequest);
             createBtn.label = CYBERSPORT.WINDOW_UNITLISTVIEW_CREATE_BTN;
@@ -138,25 +149,12 @@ package net.wg.gui.cyberSport.views
         
         private function initListColumns() : void
         {
-            var _loc1_:NormalSortingBtnInfo = null;
-            var _loc2_:Array = [];
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = CYBERSPORT.WINDOW_UNIT_UNITLISTVIEW_RATING;
-            _loc1_.buttonWidth = 105;
-            _loc2_.push(_loc1_);
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = CYBERSPORT.WINDOW_UNIT_UNITLISTVIEW_COMMANDER;
-            _loc1_.buttonWidth = 150;
-            _loc2_.push(_loc1_);
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = CYBERSPORT.WINDOW_UNIT_UNITLISTVIEW_DESCRIPTION;
-            _loc1_.buttonWidth = 200;
-            _loc2_.push(_loc1_);
-            _loc1_ = new NormalSortingBtnInfo();
-            _loc1_.label = CYBERSPORT.WINDOW_UNIT_UNITLISTVIEW_PLAYERS;
-            _loc1_.buttonWidth = 80;
-            _loc2_.push(_loc1_);
-            rallyTable.headerDP = new DataProvider(_loc2_);
+            var _loc1_:Array = [];
+            _loc1_.push(createTableBtnInfo(CYBERSPORT.WINDOW_UNIT_UNITLISTVIEW_RATING,105));
+            _loc1_.push(createTableBtnInfo(CYBERSPORT.WINDOW_UNIT_UNITLISTVIEW_COMMANDER,150));
+            _loc1_.push(createTableBtnInfo(CYBERSPORT.WINDOW_UNIT_UNITLISTVIEW_DESCRIPTION,200));
+            _loc1_.push(createTableBtnInfo(CYBERSPORT.WINDOW_UNIT_UNITLISTVIEW_PLAYERS,80));
+            rallyTable.headerDP = new DataProvider(_loc1_);
         }
     }
 }

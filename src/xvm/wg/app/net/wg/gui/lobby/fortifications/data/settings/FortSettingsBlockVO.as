@@ -21,5 +21,7 @@ package net.wg.gui.lobby.fortifications.data.settings
         public var alertMessage:String = "";
         
         public var blockDescr:String = "";
+        
+        public var descriptionTooltip:String = "";
     }
 }

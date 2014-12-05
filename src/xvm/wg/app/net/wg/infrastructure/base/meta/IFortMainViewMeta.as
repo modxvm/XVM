@@ -41,7 +41,7 @@ package net.wg.infrastructure.base.meta
         
         function as_setClanIconId(param1:String) : void;
         
-        function as_setHeaderMessage(param1:String) : void;
+        function as_setHeaderMessage(param1:String, param2:Boolean) : void;
         
         function as_setBattlesDirectionData(param1:Object) : void;
     }

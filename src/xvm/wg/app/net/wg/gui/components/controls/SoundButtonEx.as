@@ -50,6 +50,8 @@ package net.wg.gui.components.controls
         
         public var _textColor:Number;
         
+        private var _minWidth:Number = NaN;
+        
         override protected function configUI() : void
         {
             super.configUI();
@@ -286,6 +288,17 @@ package net.wg.gui.components.controls
             this.updateAfterStateChange();
         }
         
+        public function get minWidth() : Number
+        {
+            return this._minWidth;
+        }
+        
+        public function set minWidth(param1:Number) : void
+        {
+            this._minWidth = param1;
+            invalidateSize();
+        }
+        
         override protected function calculateWidth() : Number
         {
             var _loc2_:* = NaN;
@@ -300,6 +313,10 @@ package net.wg.gui.components.controls
                 }
                 _loc3_ = constraints.getElement("textField");
                 _loc1_ = Math.ceil(textField.textWidth + _loc3_.left + _loc3_.right + 5 + _loc2_ * 2);
+            }
+            if(!isNaN(this._minWidth))
+            {
+                _loc1_ = Math.max(_loc1_,this._minWidth);
             }
             return _loc1_;
         }

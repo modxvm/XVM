@@ -11,10 +11,7 @@ package net.wg.gui.lobby.settings
     import net.wg.gui.components.controls.RangeSlider;
     import net.wg.gui.lobby.settings.components.RadioButtonBar;
     import net.wg.gui.lobby.settings.components.SettingsStepSlider;
-    import flash.utils.Dictionary;
     import flash.display.DisplayObject;
-    import flash.events.MouseEvent;
-    import net.wg.data.constants.Tooltips;
     
     public class GraphicSettingsBase extends SettingsBaseView
     {
@@ -23,7 +20,6 @@ package net.wg.gui.lobby.settings
         {
             super();
             this.initControls();
-            this.initToolTipMapping();
         }
         
         public var tabs:ContentTabBar;
@@ -97,6 +93,10 @@ package net.wg.gui.lobby.settings
         public var fovRangeSlider:RangeSlider = null;
         
         public var dynamicFovCheckbox:CheckBox = null;
+        
+        public var HAVOK_ENABLEDLabel:LabelControl = null;
+        
+        public var HAVOK_ENABLEDDropDown:DropdownMenu = null;
         
         public var RENDER_PIPELINELabel:LabelControl = null;
         
@@ -196,8 +196,6 @@ package net.wg.gui.lobby.settings
         
         public var SEMITRANSPARENT_LEAVES_ENABLEDCheckbox:CheckBox = null;
         
-        protected var toolTipMapping:Dictionary = null;
-        
         protected var _isFullScreen:Boolean = false;
         
         override protected function configUI() : void
@@ -234,6 +232,8 @@ package net.wg.gui.lobby.settings
             this.fovLabel = this.screenForm.fovLabel;
             this.fovRangeSlider = this.screenForm.fovRangeSlider;
             this.dynamicFovCheckbox = this.screenForm.dynamicFovCheckbox;
+            this.HAVOK_ENABLEDDropDown = this.screenForm.HAVOK_ENABLEDDropDown;
+            this.HAVOK_ENABLEDLabel = this.screenForm.HAVOK_ENABLEDLabel;
             var _loc1_:AdvancedGraphicContentForm = this.advancedForm.scrollPane.target as AdvancedGraphicContentForm;
             this.RENDER_PIPELINELabel = _loc1_.RENDER_PIPELINELabel;
             this.RENDER_PIPELINEButtonBar = _loc1_.RENDER_PIPELINEButtonBar;
@@ -286,112 +286,90 @@ package net.wg.gui.lobby.settings
             this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox = _loc1_.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox;
         }
         
-        private function initToolTipMapping() : void
+        override protected function initToolTipMapping() : void
         {
-            var _loc1_:DisplayObject = null;
-            var _loc2_:Object = null;
-            this.toolTipMapping = new Dictionary(true);
-            this.toolTipMapping[this.graphicsQualityDropDown] = SettingsConfig.GRAPHIC_QUALITY;
-            this.toolTipMapping[this.graphicsQualityLabel] = SettingsConfig.GRAPHIC_QUALITY;
-            this.toolTipMapping[this.dynamicRendererSlider] = SettingsConfig.DYNAMIC_RENDERER;
-            this.toolTipMapping[this.dynamicRendererLabel] = SettingsConfig.DYNAMIC_RENDERER;
-            this.toolTipMapping[this.dynamicRendererValue] = SettingsConfig.DYNAMIC_RENDERER;
-            this.toolTipMapping[this.autodetectQuality] = SettingsConfig.AUTODETECT_BUTTON;
-            this.toolTipMapping[this.monitorDropDown] = SettingsConfig.MONITOR;
-            this.toolTipMapping[this.monitorLabel] = SettingsConfig.MONITOR;
-            this.toolTipMapping[this.sizesDropDown] = SettingsConfig.SIZE;
-            this.toolTipMapping[this.sizesLabel] = SettingsConfig.SIZE;
-            this.toolTipMapping[this.refreshRateDropDown] = SettingsConfig.REFRESH_RATE;
-            this.toolTipMapping[this.refreshRateLabel] = SettingsConfig.REFRESH_RATE;
-            this.toolTipMapping[this.aspectRatioDropDown] = SettingsConfig.ASPECTRATIO;
-            this.toolTipMapping[this.aspectRatioLabel] = SettingsConfig.ASPECTRATIO;
-            this.toolTipMapping[this.smoothingDropDown] = SettingsConfig.SMOOTHING;
-            this.toolTipMapping[this.smoothingLabel] = SettingsConfig.SMOOTHING;
-            this.toolTipMapping[this.fullScreenCheckbox] = SettingsConfig.FULL_SCREEN;
-            this.toolTipMapping[this.vertSyncCheckbox] = SettingsConfig.VERTICAL_SYNC;
-            this.toolTipMapping[this.tripleBufferedCheckbox] = SettingsConfig.TRIPLE_BUFFERED;
-            this.toolTipMapping[this.isColorBlindCheckbox] = SettingsConfig.IS_COLOR_BLIND;
-            this.toolTipMapping[this.gammaSlider] = SettingsConfig.GAMMA;
-            this.toolTipMapping[this.gammaLabel] = SettingsConfig.GAMMA;
-            this.toolTipMapping[this.fovRangeSlider] = SettingsConfig.FOV;
-            this.toolTipMapping[this.fovLabel] = SettingsConfig.FOV;
-            this.toolTipMapping[this.dynamicFovCheckbox] = SettingsConfig.DYNAMIC_FOV;
-            this.toolTipMapping[this.COLOR_GRADING_TECHNIQUEDropDown] = SettingsConfig.COLOR_GRADING_TECHNIQUE;
-            this.toolTipMapping[this.COLOR_GRADING_TECHNIQUELabel] = SettingsConfig.COLOR_GRADING_TECHNIQUE;
-            this.toolTipMapping[this.colorFilterIntensitySlider] = SettingsConfig.COLOR_FILTER_INTENSITY;
-            this.toolTipMapping[this.colorFilterIntensityLabel] = SettingsConfig.COLOR_FILTER_INTENSITY;
-            this.toolTipMapping[this.colorFilterIntensityValue] = SettingsConfig.COLOR_FILTER_INTENSITY;
-            this.toolTipMapping[this.RENDER_PIPELINEButtonBar] = SettingsConfig.RENDER_PIPELINE;
-            this.toolTipMapping[this.RENDER_PIPELINELabel] = SettingsConfig.RENDER_PIPELINE;
-            this.toolTipMapping[this.TEXTURE_QUALITYLabel] = SettingsConfig.TEXTURE_QUALITY;
-            this.toolTipMapping[this.TEXTURE_QUALITYValue] = SettingsConfig.TEXTURE_QUALITY;
-            this.toolTipMapping[this.DECALS_QUALITYLabel] = SettingsConfig.DECALS_QUALITY;
-            this.toolTipMapping[this.DECALS_QUALITYValue] = SettingsConfig.DECALS_QUALITY;
-            this.toolTipMapping[this.SHADOWS_QUALITYLabel] = SettingsConfig.SHADOWS_QUALITY;
-            this.toolTipMapping[this.SHADOWS_QUALITYValue] = SettingsConfig.SHADOWS_QUALITY;
-            this.toolTipMapping[this.TERRAIN_QUALITYLabel] = SettingsConfig.TERRAIN_QUALITY;
-            this.toolTipMapping[this.TERRAIN_QUALITYValue] = SettingsConfig.TERRAIN_QUALITY;
-            this.toolTipMapping[this.WATER_QUALITYLabel] = SettingsConfig.WATER_QUALITY;
-            this.toolTipMapping[this.WATER_QUALITYValue] = SettingsConfig.WATER_QUALITY;
-            this.toolTipMapping[this.LIGHTING_QUALITYLabel] = SettingsConfig.LIGHTING_QUALITY;
-            this.toolTipMapping[this.LIGHTING_QUALITYValue] = SettingsConfig.LIGHTING_QUALITY;
-            this.toolTipMapping[this.SPEEDTREE_QUALITYLabel] = SettingsConfig.SPEEDTREE_QUALITY;
-            this.toolTipMapping[this.SPEEDTREE_QUALITYValue] = SettingsConfig.SPEEDTREE_QUALITY;
-            this.toolTipMapping[this.FLORA_QUALITYLabel] = SettingsConfig.FLORA_QUALITY;
-            this.toolTipMapping[this.FLORA_QUALITYValue] = SettingsConfig.FLORA_QUALITY;
-            this.toolTipMapping[this.EFFECTS_QUALITYLabel] = SettingsConfig.EFFECTS_QUALITY;
-            this.toolTipMapping[this.EFFECTS_QUALITYValue] = SettingsConfig.EFFECTS_QUALITY;
-            this.toolTipMapping[this.POST_PROCESSING_QUALITYLabel] = SettingsConfig.POST_PROCESSING_QUALITY;
-            this.toolTipMapping[this.POST_PROCESSING_QUALITYValue] = SettingsConfig.POST_PROCESSING_QUALITY;
-            this.toolTipMapping[this.MOTION_BLUR_QUALITYLabel] = SettingsConfig.MOTION_BLUR_QUALITY;
-            this.toolTipMapping[this.MOTION_BLUR_QUALITYValue] = SettingsConfig.MOTION_BLUR_QUALITY;
-            this.toolTipMapping[this.FAR_PLANELabel] = SettingsConfig.FAR_PLANE;
-            this.toolTipMapping[this.FAR_PLANEValue] = SettingsConfig.FAR_PLANE;
-            this.toolTipMapping[this.OBJECT_LODLabel] = SettingsConfig.OBJECT_LOD;
-            this.toolTipMapping[this.OBJECT_LODValue] = SettingsConfig.OBJECT_LOD;
-            this.toolTipMapping[this.SNIPER_MODE_EFFECTS_QUALITYLabel] = SettingsConfig.SNIPER_MODE_EFFECTS_QUALITY;
-            this.toolTipMapping[this.SNIPER_MODE_EFFECTS_QUALITYValue] = SettingsConfig.SNIPER_MODE_EFFECTS_QUALITY;
-            this.toolTipMapping[this.fpsPerfomancerCheckbox] = SettingsConfig.FPS_PERFORMANCER;
-            this.toolTipMapping[this.SNIPER_MODE_GRASS_ENABLEDCheckbox] = SettingsConfig.SNIPER_MODE_GRASS_ENABLED;
-            this.toolTipMapping[this.VEHICLE_DUST_ENABLEDCheckbox] = SettingsConfig.VEHICLE_DUST_ENABLED;
-            this.toolTipMapping[this.VEHICLE_TRACES_ENABLEDCheckbox] = SettingsConfig.VEHICLE_TRACES_ENABLED;
-            this.toolTipMapping[this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox] = SettingsConfig.SEMITRANSPARENT_LEAVES_ENABLED;
-            for(_loc2_ in this.toolTipMapping)
-            {
-                _loc1_ = _loc2_ as DisplayObject;
-                _loc1_.addEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
-                _loc1_.addEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
-            }
+            toolTipMapping[this.graphicsQualityDropDown] = SettingsConfig.GRAPHIC_QUALITY;
+            toolTipMapping[this.graphicsQualityLabel] = SettingsConfig.GRAPHIC_QUALITY;
+            toolTipMapping[this.dynamicRendererSlider] = SettingsConfig.DYNAMIC_RENDERER;
+            toolTipMapping[this.dynamicRendererLabel] = SettingsConfig.DYNAMIC_RENDERER;
+            toolTipMapping[this.dynamicRendererValue] = SettingsConfig.DYNAMIC_RENDERER;
+            toolTipMapping[this.autodetectQuality] = SettingsConfig.AUTODETECT_BUTTON;
+            toolTipMapping[this.monitorDropDown] = SettingsConfig.MONITOR;
+            toolTipMapping[this.monitorLabel] = SettingsConfig.MONITOR;
+            toolTipMapping[this.sizesDropDown] = SettingsConfig.SIZE;
+            toolTipMapping[this.sizesLabel] = SettingsConfig.SIZE;
+            toolTipMapping[this.refreshRateDropDown] = SettingsConfig.REFRESH_RATE;
+            toolTipMapping[this.refreshRateLabel] = SettingsConfig.REFRESH_RATE;
+            toolTipMapping[this.aspectRatioDropDown] = SettingsConfig.ASPECTRATIO;
+            toolTipMapping[this.aspectRatioLabel] = SettingsConfig.ASPECTRATIO;
+            toolTipMapping[this.smoothingDropDown] = SettingsConfig.SMOOTHING;
+            toolTipMapping[this.smoothingLabel] = SettingsConfig.SMOOTHING;
+            toolTipMapping[this.fullScreenCheckbox] = SettingsConfig.FULL_SCREEN;
+            toolTipMapping[this.vertSyncCheckbox] = SettingsConfig.VERTICAL_SYNC;
+            toolTipMapping[this.tripleBufferedCheckbox] = SettingsConfig.TRIPLE_BUFFERED;
+            toolTipMapping[this.isColorBlindCheckbox] = SettingsConfig.IS_COLOR_BLIND;
+            toolTipMapping[this.gammaSlider] = SettingsConfig.GAMMA;
+            toolTipMapping[this.gammaLabel] = SettingsConfig.GAMMA;
+            toolTipMapping[this.fovRangeSlider] = SettingsConfig.FOV;
+            toolTipMapping[this.fovLabel] = SettingsConfig.FOV;
+            toolTipMapping[this.dynamicFovCheckbox] = SettingsConfig.DYNAMIC_FOV;
+            toolTipMapping[this.HAVOK_ENABLEDDropDown] = SettingsConfig.HAVOK_ENABLED;
+            toolTipMapping[this.HAVOK_ENABLEDLabel] = SettingsConfig.HAVOK_ENABLED;
+            toolTipMapping[this.COLOR_GRADING_TECHNIQUEDropDown] = SettingsConfig.COLOR_GRADING_TECHNIQUE;
+            toolTipMapping[this.COLOR_GRADING_TECHNIQUELabel] = SettingsConfig.COLOR_GRADING_TECHNIQUE;
+            toolTipMapping[this.colorFilterIntensitySlider] = SettingsConfig.COLOR_FILTER_INTENSITY;
+            toolTipMapping[this.colorFilterIntensityLabel] = SettingsConfig.COLOR_FILTER_INTENSITY;
+            toolTipMapping[this.colorFilterIntensityValue] = SettingsConfig.COLOR_FILTER_INTENSITY;
+            toolTipMapping[this.RENDER_PIPELINEButtonBar] = SettingsConfig.RENDER_PIPELINE;
+            toolTipMapping[this.RENDER_PIPELINELabel] = SettingsConfig.RENDER_PIPELINE;
+            toolTipMapping[this.TEXTURE_QUALITYLabel] = SettingsConfig.TEXTURE_QUALITY;
+            toolTipMapping[this.TEXTURE_QUALITYValue] = SettingsConfig.TEXTURE_QUALITY;
+            toolTipMapping[this.DECALS_QUALITYLabel] = SettingsConfig.DECALS_QUALITY;
+            toolTipMapping[this.DECALS_QUALITYValue] = SettingsConfig.DECALS_QUALITY;
+            toolTipMapping[this.SHADOWS_QUALITYLabel] = SettingsConfig.SHADOWS_QUALITY;
+            toolTipMapping[this.SHADOWS_QUALITYValue] = SettingsConfig.SHADOWS_QUALITY;
+            toolTipMapping[this.TERRAIN_QUALITYLabel] = SettingsConfig.TERRAIN_QUALITY;
+            toolTipMapping[this.TERRAIN_QUALITYValue] = SettingsConfig.TERRAIN_QUALITY;
+            toolTipMapping[this.WATER_QUALITYLabel] = SettingsConfig.WATER_QUALITY;
+            toolTipMapping[this.WATER_QUALITYValue] = SettingsConfig.WATER_QUALITY;
+            toolTipMapping[this.LIGHTING_QUALITYLabel] = SettingsConfig.LIGHTING_QUALITY;
+            toolTipMapping[this.LIGHTING_QUALITYValue] = SettingsConfig.LIGHTING_QUALITY;
+            toolTipMapping[this.SPEEDTREE_QUALITYLabel] = SettingsConfig.SPEEDTREE_QUALITY;
+            toolTipMapping[this.SPEEDTREE_QUALITYValue] = SettingsConfig.SPEEDTREE_QUALITY;
+            toolTipMapping[this.FLORA_QUALITYLabel] = SettingsConfig.FLORA_QUALITY;
+            toolTipMapping[this.FLORA_QUALITYValue] = SettingsConfig.FLORA_QUALITY;
+            toolTipMapping[this.EFFECTS_QUALITYLabel] = SettingsConfig.EFFECTS_QUALITY;
+            toolTipMapping[this.EFFECTS_QUALITYValue] = SettingsConfig.EFFECTS_QUALITY;
+            toolTipMapping[this.POST_PROCESSING_QUALITYLabel] = SettingsConfig.POST_PROCESSING_QUALITY;
+            toolTipMapping[this.POST_PROCESSING_QUALITYValue] = SettingsConfig.POST_PROCESSING_QUALITY;
+            toolTipMapping[this.MOTION_BLUR_QUALITYLabel] = SettingsConfig.MOTION_BLUR_QUALITY;
+            toolTipMapping[this.MOTION_BLUR_QUALITYValue] = SettingsConfig.MOTION_BLUR_QUALITY;
+            toolTipMapping[this.FAR_PLANELabel] = SettingsConfig.FAR_PLANE;
+            toolTipMapping[this.FAR_PLANEValue] = SettingsConfig.FAR_PLANE;
+            toolTipMapping[this.OBJECT_LODLabel] = SettingsConfig.OBJECT_LOD;
+            toolTipMapping[this.OBJECT_LODValue] = SettingsConfig.OBJECT_LOD;
+            toolTipMapping[this.SNIPER_MODE_EFFECTS_QUALITYLabel] = SettingsConfig.SNIPER_MODE_EFFECTS_QUALITY;
+            toolTipMapping[this.SNIPER_MODE_EFFECTS_QUALITYValue] = SettingsConfig.SNIPER_MODE_EFFECTS_QUALITY;
+            toolTipMapping[this.fpsPerfomancerCheckbox] = SettingsConfig.FPS_PERFORMANCER;
+            toolTipMapping[this.SNIPER_MODE_GRASS_ENABLEDCheckbox] = SettingsConfig.SNIPER_MODE_GRASS_ENABLED;
+            toolTipMapping[this.VEHICLE_DUST_ENABLEDCheckbox] = SettingsConfig.VEHICLE_DUST_ENABLED;
+            toolTipMapping[this.VEHICLE_TRACES_ENABLEDCheckbox] = SettingsConfig.VEHICLE_TRACES_ENABLED;
+            toolTipMapping[this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox] = SettingsConfig.SEMITRANSPARENT_LEAVES_ENABLED;
+            super.initToolTipMapping();
         }
         
-        private function onControlOut(param1:MouseEvent) : void
+        override protected function getControlId(param1:DisplayObject) : String
         {
-            App.toolTipMgr.hide();
-        }
-        
-        private function onControlOver(param1:MouseEvent) : void
-        {
-            var _loc2_:String = this.toolTipMapping[param1.currentTarget];
+            var _loc2_:String = toolTipMapping[param1];
             if(_loc2_ == SettingsConfig.SIZE)
             {
-                _loc2_ = this._isFullScreen?SettingsConfig.RESOLUTION:SettingsConfig.WINDOW_SIZE;
+                return this._isFullScreen?SettingsConfig.RESOLUTION:SettingsConfig.WINDOW_SIZE;
             }
-            App.toolTipMgr.showSpecial(Tooltips.SETTINGS_CONTROL,null,_loc2_);
+            return _loc2_;
         }
         
         override protected function onDispose() : void
         {
-            var _loc1_:DisplayObject = null;
-            var _loc2_:Object = null;
-            for(_loc2_ in this.toolTipMapping)
-            {
-                _loc1_ = _loc2_ as DisplayObject;
-                _loc1_.removeEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
-                _loc1_.removeEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
-                delete this.toolTipMapping[_loc2_];
-                true;
-            }
-            this.toolTipMapping = null;
             this.monitorLabel = null;
             this.monitorDropDown = null;
             this.fullScreenCheckbox = null;

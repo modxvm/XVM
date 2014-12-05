@@ -9,6 +9,8 @@ package net.wg.infrastructure.base.meta
         
         function onDateSelectedS(param1:Number) : void;
         
+        function formatYMHeaderS(param1:Number) : String;
+        
         function as_openMonth(param1:Number) : void;
         
         function as_selectDate(param1:Number) : void;

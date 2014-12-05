@@ -180,6 +180,8 @@ package
         
         public static var DIALOGS_CONTACTS_TREE_MUTED:String = "#messenger:dialogs/contacts/tree/muted";
         
+        public static var DIALOGS_CONTACTS_TREE_FRIENDSHIP_REQUEST:String = "#messenger:dialogs/contacts/tree/friendship_request";
+        
         public static var DIALOGS_CONTACTS_CONTACT_USERINFO:String = "#messenger:dialogs/contacts/contact/userInfo";
         
         public static var DIALOGS_CONTACTS_CONTACT_MONEYTRANSFER:String = "#messenger:dialogs/contacts/contact/moneyTransfer";
@@ -558,6 +560,8 @@ package
         
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_REFSYSTEMCONTRIBUTEXP:String = "#messenger:serviceChannelMessages/battleResults/refSystemContributeXp";
         
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_POTAPOVQUESTS:String = "#messenger:serviceChannelMessages/battleResults/potapovQuests";
+        
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORTRESOURCE:String = "#messenger:serviceChannelMessages/battleResults/fortResource";
         
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORTBUILDING:String = "#messenger:serviceChannelMessages/battleResults/fortBuilding";
@@ -623,6 +627,10 @@ package
         public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_SLOTSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/slotsAccrued";
         
         public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_SLOTSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/slotsDebited";
+        
+        public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_BERTHSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/berthsAccrued";
+        
+        public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_BERTHSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/berthsDebited";
         
         public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_COMPENSATION:String = "#messenger:serviceChannelMessages/invoiceReceived/compensation";
         
@@ -848,6 +856,8 @@ package
         
         public static var SERVICECHANNELMESSAGES_FORT_VACATION_STARTED:String = "#messenger:serviceChannelMessages/fort/VACATION_STARTED";
         
+        public static var SERVICECHANNELMESSAGES_FORT_VACATION_FINISHED:String = "#messenger:serviceChannelMessages/fort/VACATION_FINISHED";
+        
         public static var SERVICECHANNELMESSAGES_FORT_PERIPHERY_CHANGED:String = "#messenger:serviceChannelMessages/fort/PERIPHERY_CHANGED";
         
         public static var SERVICECHANNELMESSAGES_FORT_BUILDING_DAMAGED:String = "#messenger:serviceChannelMessages/fort/BUILDING_DAMAGED";
@@ -863,6 +873,10 @@ package
         public static var SERVICECHANNELMESSAGES_FORT_DEFENCE_PLANNED:String = "#messenger:serviceChannelMessages/fort/DEFENCE_PLANNED";
         
         public static var SERVICECHANNELMESSAGES_FORT_BATTLE_DELETED:String = "#messenger:serviceChannelMessages/fort/BATTLE_DELETED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_SPECIAL_ORDER_EXPIRED_EVACUATION:String = "#messenger:serviceChannelMessages/fort/SPECIAL_ORDER_EXPIRED_EVACUATION";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_SPECIAL_ORDER_EXPIRED_REQUISITION:String = "#messenger:serviceChannelMessages/fort/SPECIAL_ORDER_EXPIRED_REQUISITION";
         
         public static var COMMAND_SUCCESS_USERBAN:String = "#messenger:command/success/USERBAN";
         

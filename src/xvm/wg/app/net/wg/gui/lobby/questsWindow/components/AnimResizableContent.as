@@ -21,8 +21,6 @@ package net.wg.gui.lobby.questsWindow.components
         
         private static var ANIMATION_DURATION:int = 500;
         
-        private static var HEADER_HEIGHT:int = 26;
-        
         protected var data:BaseResizableContentVO = null;
         
         public var header:BaseResizableContentHeader;
@@ -39,11 +37,15 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var _sortingFunction:Function = null;
         
+        protected var headerYShift:Number = -3;
+        
+        private var headerHeight:Number;
+        
         override protected function configUI() : void
         {
             super.configUI();
             this.resizableContainer.verticalPadding = 3;
-            this.header.height = HEADER_HEIGHT;
+            this.headerHeight = this.header.height + this.headerYShift | 0;
             this.resizableContainer.sortingFunction = this._sortingFunction;
             this.header.addEventListener(Event.SELECT,this.startAnimation);
             this.resizableContainer.addEventListener(ResizableBlockEvent.READY_FOR_ANIMATION,this.containerAnimationHandler);
@@ -95,7 +97,7 @@ package net.wg.gui.lobby.questsWindow.components
             var _loc4_:* = NaN;
             if(isReadyForLayout)
             {
-                _loc2_ = this.header.selected?this.contentHeight + this.header.height:this.header.height;
+                _loc2_ = this.header.selected?this.contentHeight + this.headerHeight:this.headerHeight;
                 _loc3_ = _loc2_ - this.contentMask.height;
                 dispatchEvent(new ResizableBlockEvent(ResizableBlockEvent.READY_FOR_ANIMATION,false,_loc3_));
                 this.playResizeAnimation(_loc2_,ANIMATION_DURATION,this.onEndAnimation);
@@ -170,6 +172,7 @@ override protected function draw() : void
         if(this.data)
         {
             this.header.setData(this.data);
+            this.header.validateNow();
             this.resizableContainer.setData(this.data.containerElements);
             this.resizableContainer.validateNow();
         }
@@ -183,12 +186,11 @@ override protected function draw() : void
 
 private function layoutComponents() : void
 {
-    var _loc1_:Number = this.header.height;
-    this.resizableContainer.y = Math.round(_loc1_);
+    this.resizableContainer.y = this.headerHeight;
     this.contentHeight = this.resizableContainer.height;
-    this.contentMask.height = this.header.selected?this.contentHeight + _loc1_:_loc1_;
-    var _loc2_:Number = _loc1_ + this.contentHeight;
-    setSize(this.width,this.header.selected?_loc2_:_loc1_);
+    this.contentMask.height = this.header.selected?this.contentHeight + this.headerHeight:this.headerHeight;
+    var _loc1_:Number = this.headerHeight + this.contentHeight;
+    setSize(this.width,this.header.selected?_loc1_:this.headerHeight);
     isReadyForLayout = true;
 }
 

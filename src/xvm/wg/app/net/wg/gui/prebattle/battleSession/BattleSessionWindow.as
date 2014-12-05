@@ -6,7 +6,7 @@ package net.wg.gui.prebattle.battleSession
     import scaleform.clik.interfaces.IListItemRenderer;
     import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
     import scaleform.clik.interfaces.IDataProvider;
-    import net.wg.gui.components.controls.IconButton;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.gui.prebattle.controls.TeamMemberRenderer;
@@ -14,6 +14,7 @@ package net.wg.gui.prebattle.battleSession
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.advanced.TextAreaSimple;
     import flash.utils.Timer;
+    import scaleform.clik.utils.Padding;
     import scaleform.clik.data.DataProvider;
     import flash.events.TimerEvent;
     import net.wg.data.Aliases;
@@ -31,6 +32,7 @@ package net.wg.gui.prebattle.battleSession
         
         public function BattleSessionWindow()
         {
+            this.contentPadding = new Padding(40,14,14,14);
             super();
             this._canKickPlayer = false;
             this._isReady = false;
@@ -40,6 +42,10 @@ package net.wg.gui.prebattle.battleSession
         }
         
         private static var INVALIDATE_TEAMS:String = "InvalidateTeams";
+        
+        private static var NUMBERING_LINKAGE:String = "Numbering_UI";
+        
+        private static var MAX_PLAYERS_COUNT:int = 15;
         
         private static function checkStatus(param1:CoreList, param2:Object) : void
         {
@@ -68,13 +74,13 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        public var upAllButton:IconButton;
+        public var upAllButton:IButtonIconLoader;
         
-        public var upButton:IconButton;
+        public var upButton:IButtonIconLoader;
         
-        public var downButton:IconButton;
+        public var downButton:IButtonIconLoader;
         
-        public var downAllButton:IconButton;
+        public var downAllButton:IButtonIconLoader;
         
         public var topBG:MovieClip;
         
@@ -120,6 +126,8 @@ package net.wg.gui.prebattle.battleSession
         
         public var commentValue:TextAreaSimple;
         
+        public var numberingContainer:MovieClip = null;
+        
         private var _canKickPlayer:Boolean;
         
         private var _isReady:Boolean;
@@ -132,6 +140,10 @@ package net.wg.gui.prebattle.battleSession
         
         private var firstLength:Number = 0;
         
+        private var numberingTFs:Vector.<MovieClip> = null;
+        
+        private var contentPadding:Padding;
+        
         override public function as_refreshPermissions() : void
         {
             this._isReady = isPlayerReadyS();
@@ -143,13 +155,9 @@ package net.wg.gui.prebattle.battleSession
             this.upButton.enabled = (canMoveToAssignedS()) && this.memberStackList.dataProvider.length > 0;
         }
         
-        private function enableLeave(param1:Boolean) : void
-        {
-            enabledCloseBtn = this.leaveButton.enabled = param1;
-        }
-        
         override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void
         {
+            var _loc5_:* = 0;
             this.firstLength = param2?param3.length:this.firstLength;
             var _loc4_:* = 0;
             while(_loc4_ < param3.length)
@@ -160,6 +168,17 @@ package net.wg.gui.prebattle.battleSession
             if(param2)
             {
                 this.memberList.dataProvider = new DataProvider(param3);
+                if(!this.numberingTFs)
+                {
+                    this.createNumbering();
+                }
+                _loc5_ = this.memberList.dataProvider.length;
+                _loc4_ = 0;
+                while(_loc4_ < MAX_PLAYERS_COUNT)
+                {
+                    this.numberingTFs[_loc4_].visible = _loc4_ >= _loc5_;
+                    _loc4_++;
+                }
             }
             else
             {
@@ -201,6 +220,13 @@ package net.wg.gui.prebattle.battleSession
         {
             this._isReady = !param1;
             this.readyButton.label = this._isReady?PREBATTLE.DIALOGS_BUTTONS_NOTREADY:PREBATTLE.DIALOGS_BUTTONS_READY;
+        }
+        
+        override public function as_setGeometry(param1:Number, param2:Number, param3:Number, param4:Number) : void
+        {
+            var param3:Number = this.leaveButton.x + this.leaveButton.width + this.contentPadding.left + this.contentPadding.right;
+            var param4:Number = this.leaveButton.y + this.leaveButton.height + this.contentPadding.top + this.contentPadding.bottom;
+            super.as_setGeometry(param1,param2,param3,param4);
         }
         
         public function as_setInfo(param1:String, param2:String, param3:String, param4:String, param5:String, param6:String, param7:String) : void
@@ -280,6 +306,11 @@ package net.wg.gui.prebattle.battleSession
             this.setTimeValue();
         }
         
+        public function as_setPlayersCountText(param1:String) : void
+        {
+            this.listTitle.membersTF.htmlText = param1;
+        }
+        
         override protected function onPopulate() : void
         {
             super.onPopulate();
@@ -299,6 +330,10 @@ package net.wg.gui.prebattle.battleSession
             this.hiddenRenderer.visible = false;
             this.hiddenRenderer.data = null;
             this.queueLabel.text = PREBATTLE.LABELS_COMPANY_QUEUE;
+            this.upAllButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_DOUBLE_RIGHT_ARROW_ICON;
+            this.upButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_SINGLE_RIGHT_ARROW_ICON;
+            this.downButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_SINGLE_LEFT_ARROW_ICON;
+            this.downAllButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_DOUBLE_LEFT_ARROW_ICON;
             this.setControlsLabels();
             this.memberList.addEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
             this.memberList.addEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.handleDoubleClick);
@@ -319,13 +354,25 @@ package net.wg.gui.prebattle.battleSession
         
         override protected function onDispose() : void
         {
-            super.onDispose();
+            var _loc1_:MovieClip = null;
+            while(this.numberingContainer.numChildren)
+            {
+                _loc1_ = this.numberingContainer.getChildAt(0) as MovieClip;
+                this.numberingContainer.removeChild(_loc1_);
+            }
+            if(this.numberingTFs)
+            {
+                this.numberingTFs.splice(0,this.numberingTFs.length);
+                this.numberingTFs = null;
+            }
+            this.numberingContainer = null;
             this.memberList.removeEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
             this.memberStackList.removeEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
             this.upButton.removeEventListener(ButtonEvent.CLICK,this.handleUpClick);
             this.downButton.removeEventListener(ButtonEvent.CLICK,this.handleDownClick);
             this.readyButton.removeEventListener(ButtonEvent.CLICK,this.handleReadyClick);
             this.leaveButton.removeEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
+            super.onDispose();
         }
         
         override protected function draw() : void
@@ -339,6 +386,28 @@ package net.wg.gui.prebattle.battleSession
             if(isInvalid(INVALIDATE_TEAMS))
             {
                 this.redrawList();
+            }
+        }
+        
+        private function enableLeave(param1:Boolean) : void
+        {
+            enabledCloseBtn = this.leaveButton.enabled = param1;
+        }
+        
+        private function createNumbering() : void
+        {
+            var _loc1_:MovieClip = null;
+            this.numberingTFs = new Vector.<MovieClip>();
+            var _loc2_:* = 0;
+            while(_loc2_ < MAX_PLAYERS_COUNT)
+            {
+                _loc1_ = App.utils.classFactory.getComponent(NUMBERING_LINKAGE,MovieClip);
+                _loc1_.textField.text = String(_loc2_ + 1);
+                _loc1_.y = _loc1_.y + _loc1_.height * _loc2_;
+                _loc1_.visible = false;
+                this.numberingTFs[_loc2_] = _loc1_;
+                this.numberingContainer.addChild(this.numberingTFs[_loc2_]);
+                _loc2_++;
             }
         }
         
@@ -363,9 +432,6 @@ package net.wg.gui.prebattle.battleSession
         {
             this.topStats.titleTF.text = PREBATTLE.LABELS_STATS_LEVEL;
             this.playersStats.titleTF.text = PREBATTLE.LABELS_STATS_MAXPLAYERS;
-            this.listTitle.player.text = PREBATTLE.LABELS_PLAYER;
-            this.listTitle.vehicle.text = PREBATTLE.LABELS_VEHICLE;
-            this.listTitle.level.text = PREBATTLE.LABELS_LEVEL;
             this.topInfo.startTimeText.text = PREBATTLE.TITLE_BATTLESESSION_HEADER_STARTTIME;
             this.commentText.text = PREBATTLE.TITLE_BATTLESESSION_COMMENT;
             this.mapText.text = PREBATTLE.TITLE_BATTLESESSION_ARENATYPE;

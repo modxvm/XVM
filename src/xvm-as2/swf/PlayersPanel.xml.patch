@@ -1,5 +1,5 @@
---- orig\PlayersPanel.xml	2014-10-25 13:14:15 +0300
-+++ PlayersPanel.xml	2014-10-25 13:14:15 +0300
+--- "orig\\PlayersPanel.xml"	2014-12-05 11:58:11.180948500 +0200
++++ PlayersPanel.xml	2014-12-05 11:58:11.405971000 +0200
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>

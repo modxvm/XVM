@@ -130,6 +130,11 @@ package net.wg.gui.lobby.sellDialog
             invalidate(INV_CONTROL_QUESTION);
         }
         
+        public function as_cleanInputSumm() : void
+        {
+            this.controlQuestion.cleanField();
+        }
+        
         public function as_enableButton(param1:Boolean) : void
         {
             var _loc2_:* = false;
@@ -324,6 +329,10 @@ package net.wg.gui.lobby.sellDialog
             if(this.compCompletedTween())
             {
                 this.updateComponentsPosition();
+                if(this.controlQuestion.userInput == lastFocusedElement)
+                {
+                    App.utils.scheduler.envokeInNextFrame(setFocus,this.controlQuestion.userInput);
+                }
             }
         }
         
@@ -417,6 +426,7 @@ package net.wg.gui.lobby.sellDialog
             if(isInvalid(INV_CONTROL_QUESTION))
             {
                 this.updateComponentsPosition();
+                this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
             }
         }
         
@@ -602,7 +612,6 @@ package net.wg.gui.lobby.sellDialog
             window.updateSize(this.width,_loc2_,true);
             window.x = App.appWidth - window.width >> 1;
             window.y = App.appHeight - window.height >> 1;
-            this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
         }
         
         private function playSlidingAnimation() : void
@@ -722,7 +731,7 @@ this.listVisibleHight = param1.listVisibleHight;
 this.updateComponentsPosition();
 }
 
-private function updateMoneyResult(param1:VehicleSellDialogEvent) : void
+private function updateMoneyResult(param1:VehicleSellDialogEvent = null) : void
 {
 this.headerComponent.creditsCommon = this.headerComponent.tankPrice;
 this.creditsComplDev = 0;

@@ -136,7 +136,12 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         override protected function onPopulate() : void
         {
+            var _loc1_:IFortBuilding = null;
             super.onPopulate();
+            for each(_loc1_ in this._buildingContainer.buildings)
+            {
+                _loc1_.getAdvancedToolTipFunc = getBuildingTooltipDataS;
+            }
         }
         
         override protected function onDispose() : void

@@ -30,18 +30,9 @@ package net.wg.gui.lobby.battleResults
         
         public var loader:UILoaderAlt;
         
-        protected var _dataDirty:Boolean = false;
+        public var useBigIcon:Boolean = false;
         
-        override protected function onDispose() : void
-        {
-            if(this.loader)
-            {
-                this.loader.dispose();
-                this.loader.removeEventListener(UILoaderEvent.COMPLETE,this.onComplete);
-                this.loader = null;
-            }
-            super.onDispose();
-        }
+        protected var _dataDirty:Boolean = false;
         
         override public function setData(param1:Object) : void
         {
@@ -52,6 +43,17 @@ package net.wg.gui.lobby.battleResults
             this.data = param1;
             this._dataDirty = true;
             this.drawLoader();
+        }
+        
+        override protected function onDispose() : void
+        {
+            if(this.loader)
+            {
+                this.loader.dispose();
+                this.loader.removeEventListener(UILoaderEvent.COMPLETE,this.onComplete);
+                this.loader = null;
+            }
+            super.onDispose();
         }
         
         protected function drawLoader() : void
@@ -71,7 +73,14 @@ package net.wg.gui.lobby.battleResults
                     this.loader.addEventListener(UILoaderEvent.COMPLETE,this.onComplete);
                     if(data.icon is IconVO)
                     {
-                        this.loader.source = data.icon.small;
+                        if(this.useBigIcon)
+                        {
+                            this.loader.source = data.icon.big;
+                        }
+                        else
+                        {
+                            this.loader.source = data.icon.small;
+                        }
                     }
                     else
                     {

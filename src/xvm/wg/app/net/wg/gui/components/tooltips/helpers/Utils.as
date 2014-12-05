@@ -119,6 +119,10 @@ package net.wg.gui.components.tooltips.helpers
                 case "rentals":
                     _loc5_ = IconsTypes.RENTALS;
                     break;
+                case "sheets":
+                case "collectedSheets":
+                    _loc5_ = IconsTypes.REWARD_SHEET;
+                    break;
                 default:
                     _loc5_ = IconsTypes.EMPTY;
             }

@@ -47,7 +47,6 @@ package net.wg.gui.lobby.questsWindow.components
             this.progressElementsContainer.verticalPadding = VERTICAL_PADDING;
             this.progressElementsContainer.bottomPadding = 0;
             this.progressElementsContainer.isNumerated = true;
-            this.battlesLeftTF.text = QUESTS.QUESTS_TABLE_BATTLESLEFT;
             this.progressElementsContainer.sortingFunction = this._sortingFunction;
             this.statusMC.setStatus(QuestsStates.DONE);
             this.statusMC.textAlign = TextFieldAutoSize.RIGHT;
@@ -91,15 +90,16 @@ package net.wg.gui.lobby.questsWindow.components
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
                 this.description.visible = true;
-                this.counter.visible = this.battlesLeftTF.visible = Boolean(this.data.battlesLeft && !this.data.showDone);
-                this.description.width = (this.data.battlesLeft) || (this.data.showDone)?DEFAULT_WIDTH:availableWidth;
+                this.counter.visible = this.battlesLeftTF.visible = Boolean(this.data.counterValue && !this.data.showDone);
+                this.description.width = (this.data.counterValue) || (this.data.showDone)?DEFAULT_WIDTH:availableWidth;
                 this.description.htmlText = this.data.description;
                 this.description.height = this.description.textHeight + TEXT_PADDING;
-                this.counter.text = this.data.battlesLeft.toString();
+                this.counter.text = this.data.counterValue.toString();
                 this.statusMC.visible = this.data.showDone;
                 this.progressElementsContainer.isReadyForLayout = false;
                 this.progressElementsContainer.setData(this.data.progressElements);
                 this.progressElementsContainer.validateNow();
+                this.battlesLeftTF.text = this.data.counterDescr;
                 this.layoutBlocks();
             }
             super.draw();

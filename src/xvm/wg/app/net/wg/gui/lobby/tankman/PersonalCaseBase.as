@@ -2,7 +2,7 @@ package net.wg.gui.lobby.tankman
 {
     import net.wg.infrastructure.base.meta.impl.PersonalCaseMeta;
     import net.wg.infrastructure.base.meta.IPersonalCaseMeta;
-    import net.wg.data.VO.AchievementItemVO;
+    import net.wg.data.VO.TankmanAchievementVO;
     import net.wg.data.constants.VehicleTypes;
     import scaleform.gfx.Extensions;
     import net.wg.gui.components.controls.VO.ActionPriceVO;
@@ -46,7 +46,7 @@ package net.wg.gui.lobby.tankman
             var _loc5_:Array = null;
             var _loc6_:* = 0;
             var _loc7_:* = 0;
-            var _loc8_:AchievementItemVO = null;
+            var _loc8_:TankmanAchievementVO = null;
             var _loc2_:Array = [];
             var _loc3_:int = param1.achievements.length;
             var _loc4_:* = 0;
@@ -57,7 +57,7 @@ package net.wg.gui.lobby.tankman
                 _loc7_ = 0;
                 while(_loc7_ < _loc6_)
                 {
-                    _loc8_ = new AchievementItemVO(_loc5_[_loc7_]);
+                    _loc8_ = new TankmanAchievementVO(_loc5_[_loc7_]);
                     _loc2_.push(_loc8_);
                     _loc7_++;
                 }

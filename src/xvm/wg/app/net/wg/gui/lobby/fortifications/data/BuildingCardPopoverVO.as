@@ -33,7 +33,11 @@ package net.wg.gui.lobby.fortifications.data
         
         public var actionData:BuildingPopoverActionVO;
         
+        public var isAssigned:Boolean;
+        
         public var assignLbl:String = "";
+        
+        public var garrisonLbl:String = "";
         
         public var playerCount:int = -1;
         

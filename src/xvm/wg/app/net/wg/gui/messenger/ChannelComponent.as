@@ -4,7 +4,7 @@ package net.wg.gui.messenger
     import net.wg.gui.components.controls.ScrollBar;
     import net.wg.gui.components.advanced.TextAreaSimple;
     import net.wg.gui.components.controls.TextInput;
-    import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.interfaces.ISoundButtonEx;
     import flash.display.InteractiveObject;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.events.InputEvent;
@@ -32,7 +32,7 @@ package net.wg.gui.messenger
         
         public var messageInput:TextInput = null;
         
-        public var sendButton:SoundButtonEx = null;
+        public var sendButton:ISoundButtonEx = null;
         
         private var _isJoined:Boolean = false;
         
@@ -65,12 +65,12 @@ package net.wg.gui.messenger
             }
         }
         
-        public function get externalButton() : SoundButtonEx
+        public function get externalButton() : ISoundButtonEx
         {
             return this.sendButton;
         }
         
-        public function set externalButton(param1:SoundButtonEx) : void
+        public function set externalButton(param1:ISoundButtonEx) : void
         {
             if(!param1)
             {

@@ -237,6 +237,11 @@ package net.wg.gui.lobby.techtree.nodes
             return (this.dataInited) && (this._valueObject.state & NodeState.VEHICLE_IN_RENT) > 0;
         }
         
+        public function isPremiumIGR() : Boolean
+        {
+            return (this.dataInited) && (this._valueObject.isPremiumIGR);
+        }
+        
         public function isActionEnabled() : Boolean
         {
             if(!this.dataInited)

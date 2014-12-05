@@ -25,6 +25,8 @@ package net.wg.gui.lobby.fortifications.data.settings
         
         public var skipValues:Array;
         
+        public var isWrongLocalTime:Boolean = false;
+        
         override protected function onDispose() : void
         {
             this.descriptionText = null;

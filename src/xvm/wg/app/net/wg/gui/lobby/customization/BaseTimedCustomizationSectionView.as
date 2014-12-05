@@ -94,10 +94,6 @@ package net.wg.gui.lobby.customization
                 this.newItemData = this.getEmptyDataItem();
                 this.newItemRenderer.setData(this.newItemData);
                 this.newItemRenderer.enabled = false;
-                if(this.view != null)
-                {
-                    this.view.invalidateListData(true);
-                }
             }
         }
         
@@ -302,7 +298,6 @@ package net.wg.gui.lobby.customization
         public function refreshSelection(param1:Boolean = false) : void
         {
             var _loc4_:* = 0;
-            var _loc6_:Object = null;
             var _loc7_:Object = null;
             var _loc2_:Number = 0;
             var _loc3_:Object = this.form.getSectionData(this.getSectionName());
@@ -318,7 +313,8 @@ package net.wg.gui.lobby.customization
                 }
             }
             var _loc5_:int = this._groupsDataProvider.length;
-            if(!this._groupsDataProvider.requestItemAt(_loc2_).enabled)
+            var _loc6_:Object = this._groupsDataProvider.requestItemAt(_loc2_);
+            if((_loc6_) && !_loc6_.enabled)
             {
                 _loc4_ = 0;
                 while(_loc4_ < _loc5_)

@@ -59,5 +59,10 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
                     break;
             }
         }
+        
+        override protected function setVehiclesStr() : void
+        {
+            vehiclesLabel = FORTIFICATIONS.SORTIE_ROOM_VEHICLES;
+        }
     }
 }

@@ -24,11 +24,5 @@ package net.wg.infrastructure.base.meta
         function as_isOnTop(param1:String, param2:String) : Boolean;
         
         function as_bringToFront(param1:String, param2:String) : void;
-        
-        function as_getNameByToken(param1:String) : String;
-        
-        function as_getViewTypeByToken(param1:String) : String;
-        
-        function as_cancelLoadingsForContainer(param1:String) : void;
     }
 }

@@ -6,7 +6,7 @@ package net.wg.gui.lobby.fortifications.settings.impl
     import net.wg.gui.components.controls.InfoIcon;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.fortifications.settings.IFortSettingsContainer;
-    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
+    import net.wg.gui.components.controls.ButtonIconTextTransparent;
     import flash.display.DisplayObject;
     import net.wg.gui.lobby.fortifications.data.settings.FortSettingsActivatedViewVO;
     import flash.display.InteractiveObject;
@@ -43,7 +43,7 @@ package net.wg.gui.lobby.fortifications.settings.impl
         
         public var block3:IFortSettingsContainer = null;
         
-        public var disableDefenceTime:GrayTransparentButton = null;
+        public var disableDefenceTime:ButtonIconTextTransparent = null;
         
         private var popoverButton:DisplayObject = null;
         

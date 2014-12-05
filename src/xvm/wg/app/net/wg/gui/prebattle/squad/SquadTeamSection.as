@@ -54,9 +54,9 @@ package net.wg.gui.prebattle.squad
             return MESSENGER.DIALOGS_SQUADCHANNEL_MEMBERS;
         }
         
-        override protected function getVehiclesStaticStr() : String
+        override protected function setVehiclesStr() : void
         {
-            return MESSENGER.DIALOGS_SQUADCHANNEL_VEHICLES;
+            vehiclesLabel = MESSENGER.DIALOGS_SQUADCHANNEL_VEHICLES;
         }
     }
 }

@@ -24,6 +24,8 @@ package
         
         public static var CHAT_CONTACTS_CHANNEL:String = "#lobby_help:chat/contacts-channel";
         
+        public static var CHANNELCAROUSEL_CHANNELS:String = "#lobby_help:channelCarousel/channels";
+        
         public static var HANGAR_MODULES:String = "#lobby_help:hangar/modules";
         
         public static var HANGAR_OPTIONAL_DEVICES:String = "#lobby_help:hangar/optional-devices";

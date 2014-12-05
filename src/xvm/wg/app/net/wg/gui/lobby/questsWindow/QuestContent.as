@@ -1,12 +1,14 @@
 package net.wg.gui.lobby.questsWindow
 {
     import scaleform.clik.core.UIComponent;
+    import net.wg.infrastructure.interfaces.entity.IFocusContainer;
     import net.wg.gui.lobby.questsWindow.components.SortingPanel;
     import net.wg.gui.lobby.questsWindow.components.AlertMessage;
     import net.wg.gui.components.controls.ScrollBar;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.ResizableScrollPane;
     import net.wg.gui.components.common.waiting.Waiting;
+    import flash.display.InteractiveObject;
     import net.wg.gui.lobby.questsWindow.data.QuestDataVO;
     import scaleform.clik.motion.Tween;
     import scaleform.clik.events.IndexEvent;
@@ -21,8 +23,9 @@ package net.wg.gui.lobby.questsWindow
     import net.wg.gui.lobby.questsWindow.data.QuestRendererVO;
     import scaleform.clik.data.DataProvider;
     import net.wg.infrastructure.base.meta.IQuestsCurrentTabMeta;
+    import net.wg.infrastructure.events.FocusRequestEvent;
     
-    public class QuestContent extends UIComponent
+    public class QuestContent extends UIComponent implements IFocusContainer
     {
         
         public function QuestContent()
@@ -78,6 +81,8 @@ package net.wg.gui.lobby.questsWindow
         private var totalTasks:Number = 0;
         
         private var _waiting:Waiting = null;
+        
+        private var _componentForFocus:InteractiveObject;
         
         private var questData:QuestDataVO = null;
         
@@ -146,6 +151,7 @@ package net.wg.gui.lobby.questsWindow
             this.questInfo.addEventListener(Event.RESIZE,this.layoutBlocks);
             this.questsList.addEventListener(ListEventEx.ITEM_CLICK,this.handleItemClick);
             this.questsList.addEventListener(ListEvent.INDEX_CHANGE,this.handleItemClick);
+            this.questsList.addEventListener(ListEvent.INDEX_CHANGE,this.onQuestListIndexChangeHandler);
             this.sortingPanel.doneCB.addEventListener(Event.SELECT,this.handleCheckBox);
             this.sortingPanel.sortingDD.addEventListener(ListEvent.INDEX_CHANGE,this.handleSortingDD);
             this.questInfo.addEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
@@ -161,6 +167,7 @@ package net.wg.gui.lobby.questsWindow
             this.questInfo.removeEventListener(Event.RESIZE,this.layoutBlocks);
             this.questsList.removeEventListener(ListEventEx.ITEM_CLICK,this.handleItemClick);
             this.questsList.removeEventListener(ListEvent.INDEX_CHANGE,this.handleItemClick);
+            this.questsList.removeEventListener(ListEvent.INDEX_CHANGE,this.onQuestListIndexChangeHandler);
             this.sortingPanel.doneCB.removeEventListener(Event.SELECT,this.handleCheckBox);
             this.sortingPanel.sortingDD.removeEventListener(ListEvent.INDEX_CHANGE,this.handleSortingDD);
             this.questInfo.removeEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
@@ -214,6 +221,7 @@ package net.wg.gui.lobby.questsWindow
             this.listHidingBG = null;
             this.questBG = null;
             this._sortingFunction = null;
+            this._componentForFocus = null;
             super.onDispose();
         }
         
@@ -447,6 +455,12 @@ this.awards.visible = false;
 this.currentQuest = "";
 }
 
+private function onQuestListIndexChangeHandler(param1:ListEvent) : void
+{
+this._componentForFocus = param1.target as InteractiveObject;
+dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
+}
+
 private function handleItemClick(param1:ListEvent) : void
 {
 var _loc2_:QuestRendererVO = null;
@@ -603,6 +617,11 @@ public function set sortingFunction(param1:Function) : void
 {
 this._sortingFunction = param1;
 invalidate(INVALIDATE_SORTING_FUNC);
+}
+
+public function getComponentForFocus() : InteractiveObject
+{
+return this._componentForFocus;
 }
 }
 }

@@ -6,7 +6,7 @@ package net.wg.gui.prebattle.company
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.ScrollBar;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.gui.components.controls.IconButton;
+    import net.wg.gui.interfaces.IButtonIconLoader;
     import net.wg.gui.components.controls.TextInput;
     import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.components.controls.DropdownMenu;
@@ -53,9 +53,9 @@ package net.wg.gui.prebattle.company
         
         public var cmpList:CompaniesScrollingList;
         
-        public var refreshButton:IconButton;
+        public var refreshButton:IButtonIconLoader;
         
-        public var filterButton:IconButton;
+        public var filterButton:IButtonIconLoader;
         
         public var filterTextField:TextInput;
         
@@ -145,18 +145,20 @@ package net.wg.gui.prebattle.company
         {
             super.configUI();
             registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
+            this.refreshButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_REFRESH;
+            this.filterButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_FILTER;
             this.createButton.label = PREBATTLE.BUTTONS_COMPANY_CREATE;
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             var _loc1_:DisplayObject = this.channelComponent.messageArea;
             constraints.addElement(_loc1_.name,_loc1_,Constraints.ALL);
             _loc1_ = this.channelComponent.messageInput;
             constraints.addElement(_loc1_.name,_loc1_,Constraints.BOTTOM | Constraints.LEFT | Constraints.RIGHT);
-            _loc1_ = this.channelComponent.sendButton;
+            _loc1_ = this.channelComponent.sendButton as DisplayObject;
             constraints.addElement(_loc1_.name,_loc1_,Constraints.BOTTOM | Constraints.RIGHT);
             constraints.addElement(this.cmpList.name,this.cmpList,Constraints.TOP | Constraints.BOTTOM | Constraints.RIGHT);
             constraints.addElement(this.topPanel.name,this.topPanel,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement(this.refreshButton.name,this.refreshButton,Constraints.TOP | Constraints.RIGHT);
-            constraints.addElement(this.filterButton.name,this.filterButton,Constraints.TOP | Constraints.RIGHT);
+            constraints.addElement(this.refreshButton.name,this.refreshButton as DisplayObject,Constraints.TOP | Constraints.RIGHT);
+            constraints.addElement(this.filterButton.name,this.filterButton as DisplayObject,Constraints.TOP | Constraints.RIGHT);
             constraints.addElement(this.filterTextField.name,this.filterTextField,Constraints.TOP | Constraints.RIGHT | Constraints.LEFT);
             constraints.addElement(this.filterInBattleCheckbox.name,this.filterInBattleCheckbox,Constraints.TOP | Constraints.RIGHT);
             constraints.addElement(this.groupsScrollBar.name,this.groupsScrollBar,Constraints.TOP | Constraints.BOTTOM | Constraints.RIGHT);
