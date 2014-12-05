@@ -291,7 +291,10 @@ class Xvm(object):
                 return
 
             vehId = vehicle.id
-            playerId = player.arena.vehicles[vehId]['accountDBID']
+            arenaVehicle = player.arena.vehicles.get(vehId, None)
+            if arenaVehicle is None:
+                return
+            playerId = veh['accountDBID']
             self._battleStateData[vehId] = getVehicleStateData(vehicle, playerId)
             if self._battleStateTimersId.get(vehId, None) == None:
                 self._battleStateTimersId[vehId] = \
