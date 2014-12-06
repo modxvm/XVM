@@ -157,7 +157,10 @@ package xvm.profile
                         var playerName:String = WGUtils.GetPlayerName(((view as ProfileWindow).window as Window).title);
 
                         // get player id from the view name.
-                        var playerId:int = parseInt(view.as_name.replace("window_", ""));
+                        var playerId:int = parseInt(view.as_name.replace("profileWindow_", ""));
+
+                        //Logger.addObject(view);
+                        //Logger.add(playerId.toString());
 
                         var tw:TechniqueWindow = new TechniqueWindow(window, playerName, playerId);
                         window.addChild(tw);
