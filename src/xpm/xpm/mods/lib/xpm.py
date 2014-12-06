@@ -243,7 +243,7 @@ if os.path.isfile(_xvm_swf_file_name):
 
         class XvmView(View):
             def xvm_cmd(self, cmd, *args):
-                debug('[XPM] # ' + cmd + str(args))
+                debug('[XPM] # ' + str(cmd) + str(args))
                 if cmd == _XPM_COMMAND_GETMODS:
                     return _xpm_getMods()
                 elif cmd == _XPM_COMMAND_INITIALIZED:

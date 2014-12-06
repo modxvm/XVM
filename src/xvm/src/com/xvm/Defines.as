@@ -195,6 +195,7 @@ package com.xvm
         public static const XPM_AS_COMMAND_RELOAD_CONFIG:String = "xpm.as.reload_config";
 
         public static const XVM_COMMAND_GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
+        public static const XVM_COMMAND_UNLOAD_TANKMAN:String = "xvm.unload_tankman";
         public static const XVM_AS_COMMAND_SET_SVC_SETTINGS:String = "xvm.as.set_svc_settings";
     }
 }

@@ -27,6 +27,7 @@ import utils
 import userprefs
 from websock import g_websock
 from minimap_circles import g_minimap_circles
+import wgcompat
 from test import runTest
 
 _LOG_COMMANDS = (
@@ -34,6 +35,7 @@ _LOG_COMMANDS = (
   COMMAND_LOADBATTLERESULTSSTAT,
   COMMAND_LOGSTAT,
   COMMAND_TEST,
+  XVM_COMMAND_UNLOAD_TANKMAN,
   )
 
 class Xvm(object):
@@ -57,6 +59,9 @@ class Xvm(object):
             if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
                 token.getToken()
                 return (token.networkServicesSettings, True)
+            if cmd == XVM_COMMAND_UNLOAD_TANKMAN:
+                wgcompat.g_instance.unloadTankman(args[0])
+                return (None, True)
         except Exception, ex:
             err(traceback.format_exc())
             return (None, False)

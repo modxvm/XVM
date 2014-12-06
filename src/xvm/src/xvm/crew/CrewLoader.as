@@ -93,7 +93,7 @@ package xvm.crew
                         break;
 
                     case "tankmanUnload":
-                        renderer.dispatchEvent(new CrewEvent(CrewEvent.UNLOAD_TANKMAN, renderer.data));
+                        Xvm.cmd(Defines.XVM_COMMAND_UNLOAD_TANKMAN, renderer.data.tankmanID);
                         break;
 
                     // from crew button

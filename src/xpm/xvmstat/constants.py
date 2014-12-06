@@ -10,6 +10,7 @@ XVM_WS_URL = "wss://echo.websocket.org/"
 # DAAPI commands
 
 XVM_COMMAND_GET_SVC_SETTINGS = "xvm.get_svc_settings"
+XVM_COMMAND_UNLOAD_TANKMAN = "xvm.unload_tankman"
 
 XVM_AS_COMMAND_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"
 
