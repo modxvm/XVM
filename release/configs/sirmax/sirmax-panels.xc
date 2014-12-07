@@ -23,6 +23,7 @@
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
       { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
+      //{ "x": 0, "y": 5, "align": "center", "valign": "top", "bindToIcon": "true", "format": "{{spotted}}", "shadow": {} },
       {}
     ],
     "extraFieldsRight": [
@@ -36,6 +37,7 @@
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
       { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
+      { "x": 0, "y": 5, "align": "center", "valign": "top", "bindToIcon": "true", "format": "{{spotted}}", "shadow": {} },
       {}
     ],
     "width": 120
@@ -62,22 +64,5 @@
   "removeSquadIcon": true,
   //"removeSelectedBackground": true,
   "removePanelsModeSwitcher": true,
-  "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-  "enemySpottedMarker": {
-    "enabled": true,
-    "Xoffset": -15,
-    "Yoffset": 0,
-    "format": {
-      "neverSeen": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
-      "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
-      "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
-      "dead": "<font face='$FieldFont' size='24' color='#222222'>*</font>",
-      "artillery": {
-        "neverSeen": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
-        "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
-        "revealed": "<font face='$FieldFont' size='24' color='#DE0000'>*</font>",
-        "dead": "<font face='$FieldFont' size='24' color='#222222'>*</font>"
-      }
-    }
-  }
+  "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 }
 }

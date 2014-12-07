@@ -1,9 +1,12 @@
 /**
- * ...
- * @author sirmax2
+ * XVM
+ * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
  */
+import com.xvm.*;
+
 class com.xvm.BattleState
 {
+
     private static var _userData:Object = { };
     private static var _screenSize:Object = { };
     private static var _selfUserName:String = null;

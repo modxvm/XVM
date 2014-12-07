@@ -32,6 +32,8 @@ _SWFS = [_APPLICATION_SWF, _BATTLE_SWF, _VMM_SWF]
 #####################################################################
 # event handlers
 
+# INIT
+
 def start():
     debug('start')
     from gui.shared import g_eventBus
@@ -91,6 +93,8 @@ def VehicleMarkersManager_invokeMarker(base, self, handle, function, args = None
     #debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
+# HANGAR
+
 def ProfileTechniqueWindowRequestData(base, self, data):
     if data.vehicleId:
         base(self, data)
@@ -102,36 +106,6 @@ def LoginView_onSetOptions(base, self, optionsList, host):
     if config.config is not None and config.config['login']['saveLastServer']:
         self.saveLastSelectedServer(host)
     base(self, optionsList, host)
-
-def onArenaCreated():
-    #debug('> onArenaCreated')
-    g_xvm.updateCurrentVehicle()
-
-# on any player marker appear (spectators only)
-def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
-    #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
-    g_xvm.invalidateBattleState(vehicle)
-
-# on any player marker lost
-def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
-    #debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
-    g_xvm.invalidateBattleState(vehicle)
-
-## on any vehicle health update
-#def Vehicle_set_health(self, prev):
-#    #debug("> Vehicle_set_health: %i, %i" % (self.health, prev))
-#    g_xvm.invalidateBattleState(self)
-
-# on any vehicle hit received
-def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_xvm.invalidateBattleState(self)
-
-def BattleArenaController_invalidateVehicleStatus(self, flags, vo, arenaDP):
-    g_xvm.updateVehicleStatus(vo)
-
-def BattleArenaController_invalidateVehicleStats(self, flags, vo, arenaDP):
-    g_xvm.updateVehicleStats(vo)
 
 def PreDefinedHostList_autoLoginQuery(base, callback):
     #debug('> PreDefinedHostList_autoLoginQuery')
@@ -150,10 +124,6 @@ def PreDefinedHostList_onPingPerformed(result):
     from predefined_hosts import g_preDefinedHosts
     g_preDefinedHosts._PreDefinedHostList__onPingPerformed(result)
 
-def AmmunitionPanel_highlightParams(self, type):
-    #debug('> AmmunitionPanel_highlightParams')
-    g_xvm.updateTankParams()
-
 def onClientVersionDiffers():
     if config.config is None:
         BigWorld.callback(0, onClientVersionDiffers)
@@ -164,6 +134,59 @@ def onClientVersionDiffers():
     g_replayCtrl.scriptModalWindowsEnabled = not config.config['login']['confirmOldReplays']
     g_replayCtrl.onClientVersionDiffers()
     g_replayCtrl.scriptModalWindowsEnabled = savedValue
+
+# BATTLE
+
+def onArenaCreated():
+    debug('> onArenaCreated')
+    g_xvm.updateCurrentVehicle()
+
+# on current player enters world
+def PlayerAvatar_onEnterWorld(self, prereqs):
+    #debug("> PlayerAvatar_onEnterWorld")
+    g_xvm.onEnterWorld()
+
+# on current player leaves world
+def PlayerAvatar_onLeaveWorld(self):
+    #debug("> PlayerAvatar_onLeaveWorld")
+    g_xvm.onLeaveWorld()
+
+# on any player marker appear
+def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
+    #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
+    g_xvm.invalidateBattleState(vehicle)
+
+# on any player marker lost
+def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
+    #debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
+    g_xvm.invalidateBattleState(vehicle)
+
+# on any vehicle hit received
+def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
+    #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
+    g_xvm.invalidateBattleState(self)
+
+# isAlive, isAvatarReady
+def BattleArenaController_invalidateVehicleStatus(self, flags, vo, arenaDP):
+    g_xvm.updateVehicleStatus(vo)
+
+# frags
+def BattleArenaController_invalidateVehicleStats(self, flags, vo, arenaDP):
+    g_xvm.updateVehicleStats(vo)
+
+# stereoscope
+def AmmunitionPanel_highlightParams(self, type):
+    #debug('> AmmunitionPanel_highlightParams')
+    g_xvm.updateTankParams()
+
+# spotted status
+def _Minimap__addEntry(self, id, location, doMark):
+    #debug('> _Minimap__addEntry')
+    g_xvm.invalidateSpottedStatus(id, True)
+
+def _Minimap__delEntry(self, id, inCallback = False):
+    #debug('> _Minimap__delEntry')
+    g_xvm.invalidateSpottedStatus(id, False)
 
 #####################################################################
 # Register events
@@ -195,11 +218,12 @@ def _RegisterEvents():
     g_playerEvents.onArenaCreated += onArenaCreated
 
     from Avatar import PlayerAvatar
+    RegisterEvent(PlayerAvatar, 'onEnterWorld', PlayerAvatar_onEnterWorld)
+    RegisterEvent(PlayerAvatar, 'onLeaveWorld', PlayerAvatar_onLeaveWorld)
     RegisterEvent(PlayerAvatar, 'vehicle_onEnterWorld', PlayerAvatar_vehicle_onEnterWorld)
     RegisterEvent(PlayerAvatar, 'vehicle_onLeaveWorld', PlayerAvatar_vehicle_onLeaveWorld)
 
     from Vehicle import Vehicle
-    #RegisterEvent(Vehicle, 'set_health', Vehicle_set_health, True)
     RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
 
     from gui.battle_control.battle_arena_ctrl import BattleArenaController
@@ -215,5 +239,9 @@ def _RegisterEvents():
 
     from BattleReplay import g_replayCtrl
     g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
+
+    from gui.Scaleform.Minimap import Minimap
+    RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
+    RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
 
 BigWorld.callback(0, _RegisterEvents)

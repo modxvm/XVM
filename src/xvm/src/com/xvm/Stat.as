@@ -161,7 +161,6 @@ package com.xvm
                         Macros.RegisterStatMacrosData(name);
                         //Logger.addObject(stat[name], 3, "stat[" + name + "]");
                     }
-                    Macros.RegisterBattleTierData(guessBattleTier());
                 }
             }
             catch (ex:Error)
@@ -255,7 +254,6 @@ package com.xvm
                         statCache[name] = sd;
                         Macros.RegisterStatMacrosData(name);
                     }
-                    Macros.RegisterBattleTierData(guessBattleTier());
                 }
             }
             catch (e:Error)
@@ -512,51 +510,6 @@ package com.xvm
 
             //Logger.add(stat.v.data.shortName + " teff=" + stat.teff + " e:" + stat.te);
             //Logger.addObject(stat);
-        }
-
-        private function guessBattleTier():Number
-        {
-            // 1. Collect all vehicles info
-            var vis:Array = [];
-            for (var pname:String in Stat.stat)
-            {
-                var stat:StatData = Stat.getData(pname);
-                var vdata:VehicleData = stat.v.data;
-                if (vdata == null || vdata.key == "ussr:Observer")
-                    continue;
-                vis.push( {
-                    level: vdata.level,
-                    Tmin: vdata.tierLo,
-                    Tmax: vdata.tierHi
-                });
-            }
-
-            if (vis.length == 0)
-                return 0;
-
-            // 2. Sort vehicles info by top tiers descending
-            vis.sortOn("Tmax", Array.NUMERIC | Array.DESCENDING);
-
-            // 3. Find minimum Tmax and maximum Tmin
-            var Tmin:Number = vis[0].Tmin;
-            var Tmax:Number = vis[0].Tmax;
-            //Logger.add("T before=" + Tmin + ".." + Tmax);
-            var vis_length:int = vis.length;
-            for (var i:int = 1; i < vis_length; ++i)
-            {
-                var vi:Object = vis[i];
-                //Logger.add("l=" + vi.level + " Tmin=" + vi.Tmin + " Tmax=" + vi.Tmax);
-                if (vi.Tmax < Tmin) // Skip "trinkets"
-                    continue;
-                if (vi.Tmin > Tmin)
-                    Tmin = vi.Tmin;
-                if (vi.Tmax < Tmax)
-                    Tmax = vi.Tmax;
-            }
-            //Logger.add("T after=" + Tmin + ".." + Tmax);
-
-            // 4. Return battle tier
-            return (Tmax > 10) ? Tmax : Tmin;
         }
     }
 }

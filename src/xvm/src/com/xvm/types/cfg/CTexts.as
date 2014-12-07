@@ -9,5 +9,6 @@ package com.xvm.types.cfg
         // Text for {{vtype}} macro
         public var vtype:CTextsVType;
         public var marksOnGun:CTextsMarksOnGun;
+        public var spotted:CTextsSpotted;
     }
 }

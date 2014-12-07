@@ -1,3 +1,7 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
+ */
 import com.xvm.Config;
 import wot.VehicleMarkersManager.VehicleStateProxy;
 

@@ -354,23 +354,6 @@ package com.xvm.misc
             // Playes/clan icon parameters.
             c.clanIcon = { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 };
             // Display options for icons of never seen enemies
-            c.enemySpottedMarker = {
-              enabled: true,
-              Xoffset: 15,
-              Yoffset: 0,
-              format: {
-                neverSeen: "",
-                lost: "<font face='$FieldFont' size='24' color='#999999'>*</font>",
-                revealed: "<font face='$FieldFont' size='24' color='#FFFFFF'>*</font>",
-                dead: "",
-                artillery: {
-                  neverSeen: "",
-                  lost: "<font face='$FieldFont' size='24' color='#999999'>*</font>",
-                  revealed: "<font face='$FieldFont' size='24' color='#FFFFFF'>*</font>",
-                  dead: ""
-                }
-              }
-            };
             c.none = {
                 enabled: true,
                 layout: "vertical",
@@ -397,7 +380,9 @@ package com.xvm.misc
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
-                extraFieldsRight: []
+                extraFieldsRight: [
+                    { x: 0, y: 5, valign: "top", bindToIcon: "true", format: "{{spotted}}", shadow: {} }
+                ]
             };
             // Medium1 mode.
             c.medium = {
@@ -410,7 +395,9 @@ package com.xvm.misc
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
-                extraFieldsRight: []
+                extraFieldsRight: [
+                    { x: 0, y: 5, valign: "top", bindToIcon: "true", format: "{{spotted}}", shadow: {} }
+                ]
             };
             // Medium2 mode.
             c.medium2 = {
@@ -423,7 +410,9 @@ package com.xvm.misc
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
-                extraFieldsRight: []
+                extraFieldsRight: [
+                    { x: 0, y: 5, valign: "top", bindToIcon: "true", format: "{{spotted}}", shadow: {} }
+                ]
             };
             // Large mode.
             c.large = {
@@ -438,7 +427,9 @@ package com.xvm.misc
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
-                extraFieldsRight: []
+                extraFieldsRight: [
+                    { x: 0, y: 5, valign: "top", bindToIcon: "true", format: "{{spotted}}", shadow: {} }
+                ]
             };
 
             return c;
@@ -1276,6 +1267,12 @@ package com.xvm.misc
             c.marksOnGun._1 = "1";
             c.marksOnGun._2 = "2";
             c.marksOnGun._3 = "3";
+
+            c.spotted = new CTextsSpotted();
+            c.spotted.neverSeen = "";
+            c.spotted.lost = "<font face='$FieldFont' size='24' color='#999999'>*</font>";
+            c.spotted.revealed = "<font face='$FieldFont' size='24' color='#FFFFFF'>*</font>";
+            c.spotted.dead = "";
 
             return c;
         }

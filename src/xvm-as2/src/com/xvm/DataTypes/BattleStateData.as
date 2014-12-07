@@ -1,3 +1,7 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
+ */
 class com.xvm.DataTypes.BattleStateData
 {
     public var playerName:String = null;
@@ -7,8 +11,9 @@ class com.xvm.DataTypes.BattleStateData
     public var curHealth:Number = 0;
     public var maxHealth:Number = 0;
     public var marksOnGun:Number = 0;
+    public var spotted:String = null;
 
-    public function BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth, marksOnGun)
+    public function BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth, marksOnGun, spotted)
     {
         this.playerName = playerName;
         this.playerId = playerId;
@@ -17,5 +22,6 @@ class com.xvm.DataTypes.BattleStateData
         this.curHealth = curHealth;
         this.maxHealth = maxHealth;
         this.marksOnGun = marksOnGun;
+        this.spotted = spotted;
     }
 }

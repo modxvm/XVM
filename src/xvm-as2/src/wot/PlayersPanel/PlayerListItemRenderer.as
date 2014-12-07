@@ -64,7 +64,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private var m_iconset: IconLoader = null;
     private var m_iconLoaded: Boolean = false;
 
-    private var spotStatusView:SpotStatusView = null;
     private var extraFields:Object;
     private var extraFieldsLayout:String;
 
@@ -100,12 +99,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
     {
         try
         {
-            if (!isLeftPanel)
-            {
-                if (Config.config.playersPanel.enemySpottedMarker.enabled && spotStatusView == null)
-                    spotStatusView = new SpotStatusView(this, Config.config.playersPanel.enemySpottedMarker);
-            }
-
             // remove old text fields
             // TODO: is all children will be deleted?
             if (extraFields.none != null)    extraFields.none.removeMovieClip();
@@ -194,9 +187,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 // Player/clan icons
                 attachClanIconToPlayer();
 
-                // Spot Status View
-                updateSpotStatusView();
-
                 // Extra Text Fields
                 updateExtraFields();
             }
@@ -280,8 +270,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
             wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
             wrapper.iconLoader._x -= 80;
             wrapper.vehicleLevel._x = wrapper.iconLoader._x + 15;
-            if (spotStatusView != null)
-                spotStatusView.draw();
+
+            updateExtraFields();
         }
     }
 
@@ -299,12 +289,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
         PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan);
         m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
-    }
-
-    private function updateSpotStatusView():Void
-    {
-        if (spotStatusView != null)
-            spotStatusView.invalidateData(m_name, m_vehicleState);
     }
 
     // Extra fields
@@ -507,7 +491,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     // cleanup formats without macros to remove extra checks
     private function cleanupFormat(field, format:Object)
     {
-        if (format.x != null && (typeof format.x != "string" || format.x.indexOf("{{") < 0))
+        if (format.x != null && (typeof format.x != "string" || format.x.indexOf("{{") < 0) && !format.bindToIcon)
             delete format.x;
         if (format.y != null && (typeof format.y != "string" || format.y.indexOf("{{") < 0))
             delete format.y;
@@ -557,6 +541,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (format.x != null)
         {
             f.data.x = parseFloat(Macros.Format(m_name, format.x, obj)) || 0;
+            if (format.bindToIcon)
+                f.data.x += isLeftPanel ? panel.m_list._x + panel.m_list.width : BattleState.screenSize.width - panel._x - panel.m_list._x + panel.m_list.width;
+
             needAlign = true;
         }
         if (format.y != null)
@@ -648,7 +635,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var data:Object = field["data"];
         //Logger.addObject(data);
 
-        var x:Number = (isLeftPanel ? data.x : -data.x);
+        var x:Number = isLeftPanel ? data.x : -data.x;
         var y:Number = data.y;
         var w:Number = isNaN(data.w) ? img.content._width : data.w;
         var h:Number = isNaN(data.h) ? img.content._height : data.h;
@@ -692,6 +679,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
     }
 
+    var _savedScreenWidth = 0;
+    var _savedX = 0;
     private function adjustExtraFieldsLeft(e)
     {
         //Logger.add("adjustExtraFieldsLeft: " + e.state);
@@ -721,6 +710,12 @@ class wot.PlayersPanel.PlayerListItemRenderer
             // other modes
             mc._x = -panel.m_list._x;
             mc._y = 0;
+        }
+
+        if (_savedX != panel.m_list._x)
+        {
+            _savedX = panel.m_list._x;
+            updateExtraFields();
         }
     }
 
@@ -755,6 +750,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
             mc._y = 0;
         }
         //Logger.add(BattleState.screenSize.width + " " + panel.m_list.width + " " + panel.m_list._x);
+
+        if (_savedScreenWidth != BattleState.screenSize.width || _savedX != panel.m_list._x)
+        {
+            //Logger.add('updateExtraFields');
+            _savedScreenWidth = BattleState.screenSize.width;
+            _savedX = panel.m_list._x;
+            updateExtraFields();
+        }
     }
 
     private static function createMouseHandler():Void

@@ -20,7 +20,7 @@ from pinger import *
 from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr
-from vehstate import getVehicleStateData
+import vehstate
 import token
 import comments
 import utils
@@ -35,7 +35,6 @@ _LOG_COMMANDS = (
   COMMAND_LOADBATTLERESULTSSTAT,
   COMMAND_LOGSTAT,
   COMMAND_TEST,
-  XVM_COMMAND_UNLOAD_TANKMAN,
   )
 
 class Xvm(object):
@@ -59,12 +58,19 @@ class Xvm(object):
             if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
                 token.getToken()
                 return (token.networkServicesSettings, True)
-            if cmd == XVM_COMMAND_UNLOAD_TANKMAN:
+            elif cmd == XVM_COMMAND_UNLOAD_TANKMAN:
                 wgcompat.g_instance.unloadTankman(args[0])
                 return (None, True)
+            elif cmd == XVM_COMMAND_GET_BATTLE_LEVEL:
+                arena = getattr(BigWorld.player(), 'arena', None)
+                if arena is not None:
+                    return (arena.extraData.get('battleLevel'), True)
+                return (0, True)
+
         except Exception, ex:
             err(traceback.format_exc())
-            return (None, False)
+
+        return (None, False)
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
@@ -101,7 +107,7 @@ class Xvm(object):
             elif cmd == COMMAND_GETDOSSIER:
                 getDossier(proxy, args)
             elif cmd == COMMAND_RETURN_CREW:
-                self.__processReturnCrew()
+                wgcompat.g_instance.processReturnCrew()
             elif cmd == COMMAND_OPEN_URL:
                 if len(args[0]):
                     utils.openWebBrowser(args[0], False)
@@ -246,6 +252,8 @@ class Xvm(object):
         if e.uniqueName == 'hangar':
             self.hangarInit()
 
+    # HANGAR
+
     def hangarInit(self):
         from CurrentVehicle import g_currentVehicle
         g_currentVehicle.onChanged += self.updateTankParams
@@ -269,6 +277,16 @@ class Xvm(object):
 
     def updateCurrentVehicle(self):
         g_minimap_circles.updateCurrentVehicle()
+
+    # BATTLE
+
+    def onEnterWorld(self):
+        #debug('onEnterWorld: ' + str(BigWorld.player().arena))
+        pass
+
+    def onLeaveWorld(self):
+        #debug('onLeaveWorld')
+        self.cleanupBattleData()
 
     def invalidateBattleStates(self):
         import Vehicle
@@ -295,36 +313,61 @@ class Xvm(object):
             if player is None or not hasattr(player, 'arena') or player.arena is None:
                 return
 
-            vehId = vehicle.id
-            arenaVehicle = player.arena.vehicles.get(vehId, None)
-            if arenaVehicle is None:
-                return
-            playerId = arenaVehicle['accountDBID']
-            self._battleStateData[vehId] = getVehicleStateData(vehicle, playerId)
-            if self._battleStateTimersId.get(vehId, None) == None:
-                self._battleStateTimersId[vehId] = \
-                    BigWorld.callback(0.3, lambda: self.updateBattleState(vehId))
+            id = vehicle.id
 
-    def updateBattleState(self, vehId):
+            state = vehstate.getVehicleStateData(id, vehicle)
+            if state is None:
+                return
+
+            self._battleStateData[id] = state
+
+            if self._battleStateTimersId.get(id, None) is None:
+                self._battleStateTimersId[id] = \
+                    BigWorld.callback(0.3, lambda: self.updateBattleState(id))
+
+    def invalidateSpottedStatus(self, id, spotted):
+        player = BigWorld.player()
+        if player is None or not hasattr(player, 'arena') or player.arena is None:
+            return
+
+        prev = vehstate.getSpottedStatus(id)
+        vehstate.updateSpottedStatus(id, spotted)
+        if prev == vehstate.getSpottedStatus(id):
+            return
+
+        state = vehstate.getVehicleStateData(id)
+        if state is None:
+            return
+        self._battleStateData[id] = state
+
+        if self._battleStateTimersId.get(id, None) is None:
+            self._battleStateTimersId[id] = \
+                BigWorld.callback(0.3, lambda: self.updateBattleState(id))
+
+    def updateBattleState(self, id):
         try:
-            #log("updateBattleState: " + str(vehId))
-            self._battleStateTimersId[vehId] = None
-            if self.battleFlashObject is not None:
-                vdata = self._battleStateData.get(vehId, None)
-                if vdata is not None:
-                    movie = self.battleFlashObject.movie
-                    if movie is not None:
-                        movie.invoke((RESPOND_BATTLESTATE,
-                            vdata['playerName'],
-                            vdata['playerId'],
-                            vdata['vehId'],
-                            vdata['dead'],
-                            vdata['curHealth'],
-                            vdata['maxHealth'],
-                            vdata['marksOnGun'],
-                        ))
+            #log("updateBattleState: " + str(id))
+            if self.battleFlashObject is None:
+                return
+
+            state = self._battleStateData.get(id, None)
+            #debug(state)
+            if state is not None:
+                movie = self.battleFlashObject.movie
+                if movie is not None:
+                    movie.invoke((RESPOND_BATTLESTATE,
+                        state['playerName'],
+                        state['playerId'],
+                        state['vehId'],
+                        state['dead'],
+                        state['curHealth'],
+                        state['maxHealth'],
+                        state['marksOnGun'],
+                        state['spotted'],
+                    ))
         except Exception, ex:
             err('updateBattleState(): ' + traceback.format_exc())
+        self._battleStateTimersId[id] = None
 
     def updateVehicleStatus(self, vo):
         try:
@@ -360,14 +403,8 @@ class Xvm(object):
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 
-    # taken from gui.Scaleform.daapi.view.lobby.crewOperations.CrewOperationsPopOver
-    @decorators.process('crewReturning')
-    def __processReturnCrew(self):
-        from gui.shared.gui_items.processors.tankman import TankmanReturn
-        from CurrentVehicle import g_currentVehicle
-        result = yield TankmanReturn(g_currentVehicle.item).request()
-        if len(result.userMsg):
-            SystemMessages.g_instance.pushI18nMessage(result.userMsg, type = result.sysMsgType)
+    def cleanupBattleData(self):
+        vehstate.cleanupBattleData()
 
 g_xvm = Xvm()
 

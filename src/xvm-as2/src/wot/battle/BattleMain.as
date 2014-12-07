@@ -204,9 +204,10 @@ class wot.battle.BattleMain
     }
 
     private function onBattleStateChanged(playerName:String, playerId:Number, vehId:Number,
-        dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number):Void
+        dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
     {
-        var data = new BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth, marksOnGun);
+        //Logger.addObject(arguments);
+        var data = new BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth, marksOnGun, spotted);
 
         //Logger.addObject(data);
         BattleState.setUserData(playerName, data);

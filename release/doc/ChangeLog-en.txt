@@ -1,5 +1,10 @@
 ﻿XVM-5.4.2-dev:
   * adaptation to Wot 0.9.5
+  * added texts/spotted section with text replacements for vehicle spotted status.
+    Available values: "neverSeen", "lost", "revealed", "dead".
+  * added new macro {{spotted}} with values from texts/spotted section
+  * removed section playersPanel/enemySpottedMarker (use extra fields with {{spotted}} macro instead)
+  * added new option to extraFields: "bindToIcon" - if enabled, x position is binded to vehicle icon (default false)
 
 XVM-5.4.1.3:
   * new in-battle macros:

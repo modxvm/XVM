@@ -196,6 +196,8 @@ package com.xvm
 
         public static const XVM_COMMAND_GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
         public static const XVM_COMMAND_UNLOAD_TANKMAN:String = "xvm.unload_tankman";
+        public static const XVM_COMMAND_GET_BATTLE_LEVEL:String = "xvm.get_battle_level";
+
         public static const XVM_AS_COMMAND_SET_SVC_SETTINGS:String = "xvm.as.set_svc_settings";
     }
 }

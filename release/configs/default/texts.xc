@@ -25,6 +25,14 @@
       "_1": "1",
       "_2": "2",
       "_3": "3"
+    },
+    // Text for {{spotted}} macro.
+    // Текст для макроса {{spotted}}
+    "spotted": {
+      "neverSeen": "",
+      "lost": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
+      "revealed": "<font face='$FieldFont' size='24' color='#FFFFFF'>*</font>",
+      "dead": ""
     }
   }
 }

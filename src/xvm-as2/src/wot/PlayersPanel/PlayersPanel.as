@@ -1,6 +1,7 @@
 ﻿/**
-/**
- * @author sirmax2, ilitvinov87
+ * XVM
+ * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
+ * @author ilitvinov87
  */
 import com.xvm.*;
 import gfx.controls.*;

@@ -349,6 +349,15 @@ package com.xvm.utils
 
         // Macros registration
 
+        public static function RegisterGlobalMacrosData():void
+        {
+            if (globals["battletier"] == null)
+            {
+                // {{battletier}}
+                globals["battletier"] = Xvm.cmd(Defines.XVM_COMMAND_GET_BATTLE_LEVEL) + 1;
+            }
+        }
+
         /**
          * Register minimal macros values for player
          * @param fullPlayerName full player name with extra tags (clan, region, etc)
@@ -356,6 +365,8 @@ package com.xvm.utils
          */
         public static function RegisterMinimalMacrosData(playerId:Number, fullPlayerName:String, vid:int):void
         {
+            RegisterGlobalMacrosData();
+
             if (fullPlayerName == null || fullPlayerName == "")
                 throw new Error("empty name");
 
@@ -600,12 +611,6 @@ package com.xvm.utils
             pdata["a:tfb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
             // {{a:tsb}}
             pdata["a:tsb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
-        }
-
-        public static function RegisterBattleTierData(battletier:Number):void
-        {
-            // {{battletier}}
-            globals["battletier"] = battletier;
         }
 
         public static function RegisterVehiclesMacros():void

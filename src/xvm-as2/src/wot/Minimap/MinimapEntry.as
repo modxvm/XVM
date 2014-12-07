@@ -192,7 +192,6 @@ class wot.Minimap.MinimapEntry
     private function initExtendedBehaviour():Void
     {
         uid = SyncModel.instance.getTestUid();
-        // Inform PlayersPanel
         if (uid != null)
         {
             //Logger.add("add:   " + uid);

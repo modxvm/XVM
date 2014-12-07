@@ -85,6 +85,16 @@ class com.xvm.Utils
         return v;
     }
 
+    public static function getSpottedText(value:String):String
+    {
+        if (value == null || !Config.config.texts.spotted[value])
+            return null;
+        var v:String = Config.config.texts.spotted[value];
+        if (v.indexOf("{{l10n:") >= 0)
+            v = Locale.get(v);
+        return v;
+    }
+
     ////////////////////
 
     public static function indexOf(array:Array, value:Object):Number
