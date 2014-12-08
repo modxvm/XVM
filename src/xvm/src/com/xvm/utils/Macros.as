@@ -633,6 +633,9 @@ package com.xvm.utils
                     if (o == null || o.__subname == null)
                         return null;
                     var date:Date = App.utils.dateTime.now();
+                    var H:Number = date.hours % 12;
+                    if (H == 0)
+                        H = 12;
                     switch (o.__subname)
                     {
                         case "Y": return date.fullYear;
@@ -645,7 +648,7 @@ package com.xvm.utils
                         case "h": return date.hours;
                         case "m": return date.minutes;
                         case "s": return date.seconds;
-                        case "H": return date.hours % 12;
+                        case "H": return H;
                         case "AM": return date.hours < 12 ? "AM" : null;
                         default: return "";
                     }
