@@ -202,7 +202,33 @@ class Xvm(object):
            self.app.loaderManager.onViewLoaded -= self.onViewLoaded
 
     def initBattle(self):
-        g_minimap_circles.updateConfig(BigWorld.player().vehicleTypeDescriptor)
+        debug('> initBattle()')
+        try:
+            # Save/restore arena data
+            player = BigWorld.player()
+            fileName = 'arenas_data/{0}.dat'.format(player.arenaUniqueID)
+
+            cfg = config.config['minimap']['circles']
+            vehId = player.vehicleTypeDescriptor.type.compactDescr
+            if vehId and vehId == cfg.get('_internal', {}).get('vehId', None):
+                # Normal battle start. Update data and save to userprefs cache
+                userprefs.set(fileName, {
+                  'ver': '1.0',
+                  'minimap_circles': cfg['_internal'],
+                })
+            else:
+                # Replay, training or restarted battle after crash. Try to restore data.
+                arena_data = userprefs.get(fileName)
+                if arena_data is None:
+                    # Set default vehicle data if it is not available.in the cache.
+                    g_minimap_circles.updateConfig(player.vehicleTypeDescriptor)
+                else:
+                    # Apply restored data.
+                    cfg['_internal'] = arena_data['minimap_circles']
+
+        except Exception, ex:
+            err(traceback.format_exc())
+
         self.config_str = simplejson.dumps(config.config)
         self.sendConfig(self.battleFlashObject)
         BigWorld.callback(0, self.invalidateBattleStates)
@@ -268,31 +294,41 @@ class Xvm(object):
 
     def updateTankParams(self):
         try:
-            self.updateCurrentVehicle()
+            g_minimap_circles.updateCurrentVehicle()
             if self.app is not None:
                 data = simplejson.dumps(config.config['minimap']['circles']['_internal'])
                 self.app.movie.invoke((RESPOND_UPDATECURRENTVEHICLE, [data]))
         except Exception, ex:
-            err('updateTankParams(): ' + traceback.format_exc())
+            err(traceback.format_exc())
 
-    def updateCurrentVehicle(self):
+    # PREBATTLE
+
+    def onArenaCreated(self):
         g_minimap_circles.updateCurrentVehicle()
 
+
     # BATTLE
+
+    def onAvatarBecomePlayer(self):
+        pass
+
 
     def onEnterWorld(self):
         #debug('onEnterWorld: ' + str(BigWorld.player().arena))
         pass
 
+
     def onLeaveWorld(self):
         #debug('onLeaveWorld')
         self.cleanupBattleData()
+
 
     def invalidateBattleStates(self):
         import Vehicle
         for v in BigWorld.entities.values():
             if isinstance(v, Vehicle.Vehicle) and v.isStarted:
                 self.invalidateBattleState(v)
+
 
     def invalidateBattleState(self, vehicle):
         #log("invalidateBattleState: " + str(vehicle.id))
@@ -325,6 +361,7 @@ class Xvm(object):
                 self._battleStateTimersId[id] = \
                     BigWorld.callback(0.3, lambda: self.updateBattleState(id))
 
+
     def invalidateSpottedStatus(self, id, spotted):
         player = BigWorld.player()
         if player is None or not hasattr(player, 'arena') or player.arena is None:
@@ -343,6 +380,7 @@ class Xvm(object):
         if self._battleStateTimersId.get(id, None) is None:
             self._battleStateTimersId[id] = \
                 BigWorld.callback(0.3, lambda: self.updateBattleState(id))
+
 
     def updateBattleState(self, id):
         try:
@@ -369,6 +407,7 @@ class Xvm(object):
             err('updateBattleState(): ' + traceback.format_exc())
         self._battleStateTimersId[id] = None
 
+
     def updateVehicleStatus(self, vo):
         try:
             if self.vmmFlashObject is not None:
@@ -377,6 +416,7 @@ class Xvm(object):
                     self.vmmFlashObject.invokeMarker(vehicle.marker, 'setStatus', [vo.vehicleStatus])
         except Exception, ex:
             err('updateVehicleStatus(): ' + traceback.format_exc())
+
 
     def updateVehicleStats(self, vo):
         try:
@@ -387,6 +427,8 @@ class Xvm(object):
         except Exception, ex:
             err('updateVehicleStats(): ' + traceback.format_exc())
 
+
+    # on battle only
     def sendConfig(self, flashObject):
         if config.config is None or flashObject is None:
             return
@@ -397,22 +439,15 @@ class Xvm(object):
                 movie.invoke((RESPOND_CONFIG, [
                     self.config_str,
                     self.lang_str,
+                    BigWorld.player().arena.extraData['battleLevel'] + 1,
                     getVehicleInfoDataStr(),
                     simplejson.dumps(token.networkServicesSettings),
                     comments.getXvmUserComments(not isReplay())]))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 
+
     def cleanupBattleData(self):
         vehstate.cleanupBattleData()
 
 g_xvm = Xvm()
-
-
-from . import XPM_MOD_VERSION, XPM_MOD_URL, XPM_GAME_VERSIONS
-log("xvm %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))
-try:
-    from __version__ import __branch__, __revision__
-    log("Branch: %s, Revision: %s" % (__branch__, __revision__))
-except Exception, ex:
-    err(traceback.format_exc())

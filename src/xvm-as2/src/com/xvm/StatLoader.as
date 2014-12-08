@@ -58,7 +58,6 @@ class com.xvm.StatLoader
                     Macros.RegisterStatMacros(nm, stat);
                     //Logger.addObject(Stat.s_data[nm], 2, "s_data[" + nm + "]");
                 }
-                Macros.RegisterBattleTierData(guessBattleTier());
             }
         }
         catch (ex)
@@ -200,47 +199,5 @@ class com.xvm.StatLoader
 
         //Logger.add(stat.v.data.shortName + " teff=" + stat.v.teff + " e:" + stat.v.te);
 //        Logger.addObject(stat);
-    }
-
-    private function guessBattleTier():Number
-    {
-        // 1. Collect all vehicles info
-        var vis: Array = [];
-        for (var pname:String in Stat.s_data)
-        {
-            var stat:StatData = Stat.s_data[pname].stat;
-            var vdata:VehicleData = stat.v.data;
-            if (vdata == null || vdata.key == "ussr:Observer")
-                continue;
-            vis.push( {
-                level: vdata.level,
-                Tmin: vdata.tierLo,
-                Tmax: vdata.tierHi
-            });
-        }
-
-        // 2. Sort vehicles info by top tiers descending
-        vis.sortOn("Tmax", Array.NUMERIC | Array.DESCENDING);
-
-        // 3. Find minimum Tmax and maximum Tmin
-        var Tmin = vis[0].Tmin;
-        var Tmax = vis[0].Tmax;
-        //Logger.add("T before=" + Tmin + ".." + Tmax);
-        var vis_length = vis.length;
-        for (var i = 1; i < vis_length; ++i)
-        {
-            var vi = vis[i];
-            //Logger.add("l=" + vi.level + " Tmin=" + vi.Tmin + " Tmax=" + vi.Tmax);
-            if (vi.Tmax < Tmin) // Skip "trinkets"
-                continue;
-            if (vi.Tmin > Tmin)
-                Tmin = vi.Tmin;
-            if (vi.Tmax < Tmax)
-                Tmax = vi.Tmax;
-        }
-        //Logger.add("T after=" + Tmin + ".." + Tmax);
-
-        // 4. Return battle tier
-        return (Tmax > 10) ? Tmax : Tmin;
     }
 }

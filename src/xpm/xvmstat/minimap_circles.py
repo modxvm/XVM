@@ -163,6 +163,7 @@ class _MinimapCircles(object):
 
         # Set values
         cfg['_internal'] = {
+            'vehId': descr.type.compactDescr,
             'base_commander_skill': self.base_commander_skill,
             'base_radioman_skill': self.base_radioman_skill,
             'base_loaders_skill': self.base_loaders_skill,

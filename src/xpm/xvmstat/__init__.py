@@ -12,6 +12,7 @@ XPM_GAME_VERSIONS  = ["0.9.4","0.9.5"]
 
 from pprint import pprint
 import time
+import traceback
 
 import BigWorld
 
@@ -139,16 +140,20 @@ def onClientVersionDiffers():
 
 def onArenaCreated():
     debug('> onArenaCreated')
-    g_xvm.updateCurrentVehicle()
+    g_xvm.onArenaCreated()
+
+def onAvatarBecomePlayer():
+    debug('> onAvatarBecomePlayer')
+    g_xvm.onAvatarBecomePlayer()
 
 # on current player enters world
 def PlayerAvatar_onEnterWorld(self, prereqs):
-    #debug("> PlayerAvatar_onEnterWorld")
+    debug("> PlayerAvatar_onEnterWorld")
     g_xvm.onEnterWorld()
 
 # on current player leaves world
 def PlayerAvatar_onLeaveWorld(self):
-    #debug("> PlayerAvatar_onLeaveWorld")
+    debug("> PlayerAvatar_onLeaveWorld")
     g_xvm.onLeaveWorld()
 
 # on any player marker appear
@@ -216,6 +221,7 @@ def _RegisterEvents():
 
     from PlayerEvents import g_playerEvents
     g_playerEvents.onArenaCreated += onArenaCreated
+    g_playerEvents.onAvatarBecomePlayer += onAvatarBecomePlayer
 
     from Avatar import PlayerAvatar
     RegisterEvent(PlayerAvatar, 'onEnterWorld', PlayerAvatar_onEnterWorld)
@@ -245,3 +251,14 @@ def _RegisterEvents():
     RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
 
 BigWorld.callback(0, _RegisterEvents)
+
+
+#####################################################################
+# Log version info
+
+log("xvm %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))
+try:
+    from __version__ import __branch__, __revision__
+    log("Branch: %s, Revision: %s" % (__branch__, __revision__))
+except Exception, ex:
+    err(traceback.format_exc())

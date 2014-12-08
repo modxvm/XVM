@@ -45,6 +45,9 @@ class _UserPrefs():
         fd = None
         try:
             fileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
+            dirName = os.path.dirname(fileName)
+            if not os.path.exists(dirName):
+                os.makedirs(dirName)
             fd = open(fileName, 'wb')
             cPickle.dump(value, fd, -1)
             os.fsync(fd)
