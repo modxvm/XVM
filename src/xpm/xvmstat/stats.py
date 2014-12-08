@@ -122,25 +122,36 @@ class _Stat(object):
     # Threaded
 
     def getBattleStat(self):
-        player = BigWorld.player()
-        if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
-            self._get_battle()
-            return
+        try:
+            player = BigWorld.player()
+            if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
+                self._get_battle()
+                return
+        except Exception, ex:
+            err(traceback.format_exc())
         with self.lock:
             self.resp = {}
 
 
     def getBattleResultsStat(self):
-        player = BigWorld.player()
-        if player.__class__.__name__ == 'PlayerAccount':
-            self._get_battleresults()
-            return
+        try:
+            player = BigWorld.player()
+            if player.__class__.__name__ == 'PlayerAccount':
+                self._get_battleresults()
+                return
+        except Exception, ex:
+            err(traceback.format_exc())
         with self.lock:
             self.resp = {}
 
 
     def getUserData(self):
-        self._get_user()
+        try:
+            self._get_user()
+        except Exception, ex:
+            err(traceback.format_exc())
+        with self.lock:
+            self.resp = {}
 
 
     def _get_battle(self):
