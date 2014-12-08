@@ -103,12 +103,8 @@ package xvm.hangar.components.BattleLoading
                 if (data == null)
                     return;
 
-                var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Config.config.battleLoading.darkenNotReadyIcon || proxy.enabled);
-
-                proxy.iconLoader.transform.colorTransform =
-                        App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
-
                 var formatOptions:MacrosFormatOptions = new MacrosFormatOptions();
+                
                 formatOptions.alive = data.isAlive();
                 formatOptions.ready = data.isReady();
                 formatOptions.selected = data.isCurrentPlayer;
@@ -117,6 +113,13 @@ package xvm.hangar.components.BattleLoading
                 formatOptions.squadIndex = data.squadIndex;
                 formatOptions.position = proxy.index + 1;
                 formatOptions.isTeamKiller = data.isTeamKiller();
+                
+                var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Config.config.battleLoading.darkenNotReadyIcon || proxy.enabled) && formatOptions.alive;
+
+                proxy.iconLoader.transform.colorTransform =
+                        App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
+
+                
 
                 // Set Text Fields
                 if (_savedTextFieldColor == null)
