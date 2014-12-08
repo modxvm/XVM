@@ -133,15 +133,24 @@ package xvm.clock
 
         private function tick():void
         {
-            if (prevWidth != App.appWidth || prevHeight != App.appHeight)
-                invalidateSize();
+            App.utils.scheduler.cancelTask(tick);
 
-            var time:int = int(App.utils.dateTime.now().time / 1000);
-            if (prevTime != time)
+            try
             {
-                prevTime = time;
-                data = Macros.Format(null, cfg.format.split("{{").join("{{_clock."));
-                invalidateData();
+                if (prevWidth != App.appWidth || prevHeight != App.appHeight)
+                    invalidateSize();
+
+                var time:int = int(App.utils.dateTime.now().time / 1000);
+                if (prevTime != time)
+                {
+                    prevTime = time;
+                    data = Macros.Format(null, cfg.format.split("{{").join("{{_clock."));
+                    invalidateData();
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
             }
 
             App.utils.scheduler.scheduleTask(tick, 100);
