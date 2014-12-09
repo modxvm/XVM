@@ -2,15 +2,15 @@
 
 # PUBLIC
 
-def getVehicleStateData(id, vehicle=None):
-    return _getVehicleStateData(id, vehicle)
+def getVehicleStateData(vID):
+    return _getVehicleStateData(vID)
 
-def updateSpottedStatus(id, spotted):
-    _updateSpottedStatus(id, spotted)
+def updateSpottedStatus(vID, spotted):
+    _updateSpottedStatus(vID, spotted)
 
-def getSpottedStatus(id):
+def getSpottedStatus(vID):
     global _spotted_cache
-    return _spotted_cache.get(id, 'neverSeen')
+    return _spotted_cache.get(vID, 'neverSeen')
 
 def cleanupBattleData():
     global _spotted_cache
@@ -23,24 +23,28 @@ import BigWorld
 from xpm import *
 from logger import *
 
-def _getVehicleStateData(id, vehicle):
+def _getVehicleStateData(vID):
     #log(vars(vehicle))
     #log(vars(vehicle.typeDescriptor))
     #self.maxHealth = vData['vehicleType'].maxHealth
 
-    arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+    arenaVehicle = BigWorld.player().arena.vehicles.get(vID, None)
     if arenaVehicle is None:
         return None
 
-    if vehicle is None:
-        vehicle = BigWorld.entities.get(id, None)
+    vehicle = BigWorld.entity(vID)
+
+    dead = not arenaVehicle['isAlive']
+    if dead:
+        global _spotted_cache
+        _spotted_cache[vID] = 'dead'
 
     return {
         'playerName': arenaVehicle['name'],
         'playerId': arenaVehicle['accountDBID'],
-        'vehId': id,
-        'dead': not arenaVehicle['isAlive'],
-        'spotted': getSpottedStatus(id),
+        'vId': vID,
+        'dead': dead,
+        'spotted': getSpottedStatus(vID),
         'curHealth': max(0, vehicle.health) if vehicle else None,
         'maxHealth': vehicle.typeDescriptor.maxHealth if vehicle else None,
         'marksOnGun': vehicle.publicInfo.marksOnGun if vehicle else None,
@@ -48,20 +52,20 @@ def _getVehicleStateData(id, vehicle):
 
 _spotted_cache = {}
 
-def _updateSpottedStatus(id, spotted):
+def _updateSpottedStatus(vID, spotted):
     global _spotted_cache
 
-    arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+    arenaVehicle = BigWorld.player().arena.vehicles.get(vID, None)
     if arenaVehicle is None:
         return
 
     if not arenaVehicle['isAlive']:
-        _spotted_cache[id] = 'dead'
+        _spotted_cache[vID] = 'dead'
         return
 
     if spotted:
-        _spotted_cache[id] = 'revealed'
-        return 
+        _spotted_cache[vID] = 'revealed'
+        return
 
-    if id in _spotted_cache:
-        _spotted_cache[id] = 'lost'
+    if vID in _spotted_cache:
+        _spotted_cache[vID] = 'lost'

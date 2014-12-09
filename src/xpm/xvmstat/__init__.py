@@ -159,30 +159,17 @@ def PlayerAvatar_onLeaveWorld(self):
 # on any player marker appear
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
-    g_xvm.invalidateBattleState(vehicle)
+    g_xvm.invalidateBattleState(vehicle.id)
 
 # on any player marker lost
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
-    g_xvm.invalidateBattleState(vehicle)
+    g_xvm.invalidateBattleState(vehicle.id)
 
 # on any vehicle hit received
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_xvm.invalidateBattleState(self)
-
-# isAlive, isAvatarReady
-def BattleArenaController_invalidateVehicleStatus(self, flags, vo, arenaDP):
-    g_xvm.updateVehicleStatus(vo)
-
-# frags
-def BattleArenaController_invalidateVehicleStats(self, flags, vo, arenaDP):
-    g_xvm.updateVehicleStats(vo)
-
-# stereoscope
-def AmmunitionPanel_highlightParams(self, type):
-    #debug('> AmmunitionPanel_highlightParams')
-    g_xvm.updateTankParams()
+    g_xvm.invalidateBattleState(self.id)
 
 # spotted status
 def _Minimap__addEntry(self, id, location, doMark):
@@ -192,6 +179,11 @@ def _Minimap__addEntry(self, id, location, doMark):
 def _Minimap__delEntry(self, id, inCallback = False):
     #debug('> _Minimap__delEntry')
     g_xvm.invalidateSpottedStatus(id, False)
+
+# stereoscope
+def AmmunitionPanel_highlightParams(self, type):
+    #debug('> AmmunitionPanel_highlightParams')
+    g_xvm.updateTankParams()
 
 #####################################################################
 # Register events
@@ -232,9 +224,9 @@ def _RegisterEvents():
     from Vehicle import Vehicle
     RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
 
-    from gui.battle_control.battle_arena_ctrl import BattleArenaController
-    RegisterEvent(BattleArenaController, 'invalidateVehicleStatus', BattleArenaController_invalidateVehicleStatus)
-    RegisterEvent(BattleArenaController, 'invalidateVehicleStats', BattleArenaController_invalidateVehicleStats)
+    from gui.Scaleform.Minimap import Minimap
+    RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
+    RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
 
     # enable for pinger_wg
     #from predefined_hosts import g_preDefinedHosts
@@ -245,10 +237,6 @@ def _RegisterEvents():
 
     from BattleReplay import g_replayCtrl
     g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
-
-    from gui.Scaleform.Minimap import Minimap
-    RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
-    RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
 
 BigWorld.callback(0, _RegisterEvents)
 
