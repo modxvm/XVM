@@ -381,7 +381,7 @@ package com.xvm.misc
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 0, y: 5, valign: "top", bindToIcon: "true", format: "{{spotted}}", shadow: {} }
+                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} }
                 ]
             };
             // Medium1 mode.
@@ -396,7 +396,7 @@ package com.xvm.misc
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 0, y: 5, valign: "top", bindToIcon: "true", format: "{{spotted}}", shadow: {} }
+                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} }
                 ]
             };
             // Medium2 mode.
@@ -411,7 +411,7 @@ package com.xvm.misc
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 0, y: 5, valign: "top", bindToIcon: "true", format: "{{spotted}}", shadow: {} }
+                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} }
                 ]
             };
             // Large mode.
@@ -428,7 +428,7 @@ package com.xvm.misc
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 0, y: 5, valign: "top", bindToIcon: "true", format: "{{spotted}}", shadow: {} }
+                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} }
                 ]
             };
 
