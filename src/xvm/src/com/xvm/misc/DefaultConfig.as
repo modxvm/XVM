@@ -1139,13 +1139,12 @@ package com.xvm.misc
                 { value: 99.9,  color: Defines.C_BLUE },
                 { value: 101,   color: Defines.C_PURPLE }
             ];
-            // TODO:values
             c.hitsRatio = [
-                { value: 20,    color: Defines.C_RED },
-                { value: 60,    color: Defines.C_ORANGE },
-                { value: 90,    color: Defines.C_YELLOW },
-                { value: 99,    color: Defines.C_GREEN },
-                { value: 99.9,  color: Defines.C_BLUE },
+                { value: 47.5,  color: Defines.C_RED },
+                { value: 60.5,  color: Defines.C_ORANGE },
+                { value: 68.5,  color: Defines.C_YELLOW },
+                { value: 74.5,  color: Defines.C_GREEN },
+                { value: 98.5,  color: Defines.C_BLUE },
                 { value: 101,   color: Defines.C_PURPLE }
             ];
             return c;
