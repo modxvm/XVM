@@ -22,7 +22,7 @@ package xvm.hangar.components.BattleResults
             this.page = page;
 
             // Add stat loading handler
-            Stat.loadBattleResultsStat(this, onStatLoaded, page.as_name.replace("battleResults", ""));
+            Stat.loadBattleResultsStat(this, onStatLoaded, page.as_name.replace("battleResults_", ""));
         }
 
         private function onStatLoaded(response:Object):void

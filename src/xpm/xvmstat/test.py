@@ -24,10 +24,8 @@ from logger import *
 def _showBattleResults(arenaUniqueID):
     OverrideMethod(BigWorld.player().battleResultsCache, 'get', _getBattleResults)
 
-    from gui.shared import events
-    from gui.shared import g_eventBus
-    g_eventBus.handleEvent(events.ShowWindowEvent(events.ShowWindowEvent.SHOW_BATTLE_RESULTS, {
-        'data': int(arenaUniqueID) }))
+    from gui.shared import event_dispatcher as shared_events
+    shared_events.showBattleResults(arenaUniqueID)
 
 def _getBattleResults(base, arenaUniqueID, callback):
     try:
