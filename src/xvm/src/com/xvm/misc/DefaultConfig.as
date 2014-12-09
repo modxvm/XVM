@@ -313,8 +313,8 @@ package com.xvm.misc
             c.darkenNotReadyIcon = true;
             c.formatLeftNick = "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>";
             c.formatRightNick = "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>";
-            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font> <img src='xvm://res/icons/lang/{{lang}}.png' width='16' height='11'></font>";
+            c.formatRightVehicle = "<font face='Lucida Console' size='12'><img src='xvm://res/icons/lang/{{lang}}.png' width='16' height='11'> <font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -336,8 +336,8 @@ package com.xvm.misc
             // Dispay format.
             c.formatLeftNick = "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>";
             c.formatRightNick = "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>";
-            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font> <img src='xvm://res/icons/lang/{{lang}}.png' width='16' height='11'></font>";
+            c.formatRightVehicle = "<font face='Lucida Console' size='12'><img src='xvm://res/icons/lang/{{lang}}.png' width='16' height='11'> <font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -420,8 +420,8 @@ package com.xvm.misc
                 // 0..250 - player name field width.
                 width: 170,
                 // Dispay format.
-                nickFormatLeft: "<font color='{{c:xwn8}}'>{{xwn8}}</font> {{nick}}",
-                nickFormatRight: "{{nick}} <font color='{{c:xwn8}}'>{{xwn8}}</font>",
+                nickFormatLeft: "<font color='{{c:xwn8}}'>{{xwn8}}</font> <img src='xvm://res/icons/lang/{{lang}}.png' width='16' height='11'> {{nick}}",
+                nickFormatRight: "{{nick}} <img src='xvm://res/icons/lang/{{lang}}.png' width='16' height='11'> <font color='{{c:xwn8}}'>{{xwn8}}</font>",
                 vehicleFormatLeft: "{{vehicle}}",
                 vehicleFormatRight: "{{vehicle}}",
                 fragsFormatLeft: "{{frags}}",

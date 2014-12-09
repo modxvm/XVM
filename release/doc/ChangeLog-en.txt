@@ -2,7 +2,9 @@
   * adaptation to Wot 0.9.5
   * added texts/spotted section with text replacements for vehicle spotted status.
     Available values: "neverSeen", "lost", "revealed", "dead".
-  * added new macro {{spotted}} with values from texts/spotted section
+  * added new macros:
+        {{lang}} - player's client language
+        {{spotted}} with values from texts/spotted section
   * removed section playersPanel/enemySpottedMarker (use extra fields with {{spotted}} macro instead)
   * added new option to extraFields: "bindToIcon" - if enabled, x position is binded to vehicle icon (default false)
 

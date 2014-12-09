@@ -17,6 +17,7 @@ class com.xvm.DataTypes.StatData
         public var frg:Number = NaN;           // frags (int)
         public var def:Number = NaN;           // defence (int)
         public var lvl:Number = NaN;           // average level (float)
+        public var lang:String = null;         // client language
         public var e:Number = NaN;             // eff (int)
         public var wn6:Number = NaN;           // WN6 rating (int)
         public var wn8:Number = NaN;           // WN8 rating (int)

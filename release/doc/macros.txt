@@ -122,5 +122,6 @@ Legend:
 │ {{c:t-rating}}  │ X │ X │ X │ X │ X │ color depending on current vehicle win ratio
 │ {{c:t-battles}} │ X │ X │ X │ X │ X │ color depending on current vehicle battles
 │ {{marksOnGun}}  │   │ X │ X │ X │ X │ marks on gun (only for spotted vehicles)
+│ {{lang}}        │ X │ X │ X │ X │ X │ player's client language
 └─────────────────┴───┴───┴───┴───┴───┴────────────────────────────────────────────────────────────────
   * Any color macro you can change to transparency macro (e.g. {{a:tdb}}).

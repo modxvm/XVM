@@ -6,8 +6,8 @@
     "c2": "0xFF0F0F"
   },
   "large": {
-    "nickFormatLeft": "        {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>       &nbsp;",
+    "nickFormatLeft": "        <img src='xvm://res/icons/lang/{{lang}}.png' width='16' height='11'> {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
+    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font> <img src='xvm://res/icons/lang/{{lang}}.png' width='16' height='11'>       &nbsp;",
     "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
     "vehicleFormatRight": "{{hp}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:rating}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
