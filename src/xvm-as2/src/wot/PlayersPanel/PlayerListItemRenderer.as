@@ -540,10 +540,13 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var needAlign:Boolean = false;
         if (format.x != null)
         {
-            f.data.x = parseFloat(Macros.Format(m_name, format.x, obj)) || 0;
+            f.data.x = !isNaN(format.x) ? format.x : (parseFloat(Macros.Format(m_name, format.x, obj)) || 0);
             if (format.bindToIcon)
-                f.data.x += isLeftPanel ? panel.m_list._x + panel.m_list.width : BattleState.screenSize.width - panel._x - panel.m_list._x + panel.m_list.width;
-
+            {
+                f.data.x += isLeftPanel
+                    ? panel.m_list._x + panel.m_list.width
+                    : BattleState.screenSize.width - panel._x - panel.m_list._x + panel.m_list.width;
+            }
             needAlign = true;
         }
         if (format.y != null)
