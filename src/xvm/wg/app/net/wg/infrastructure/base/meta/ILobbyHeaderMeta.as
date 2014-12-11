@@ -54,5 +54,7 @@ package net.wg.infrastructure.base.meta
         function as_setCoolDownForReady(param1:uint) : void;
         
         function as_showBubbleTooltip(param1:String, param2:int) : void;
+        
+        function as_isEventSquad(param1:Boolean) : void;
     }
 }

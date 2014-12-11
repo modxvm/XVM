@@ -9,8 +9,18 @@ package net.wg.gui.lobby.quests.data.questsTileChains
         {
             super();
             this.type = param1;
-            this.data = param2;
             this.tooltip = param3;
+            switch(param1)
+            {
+                case QuestTaskListRendererVO.STATISTICS:
+                    this.statData = param2 as QuestTileStatisticsVO;
+                    break;
+                case QuestTaskListRendererVO.CHAIN:
+                    this.chainData = param2 as QuestChainVO;
+                    break;
+                case QuestTaskListRendererVO.TASK:
+                    this.taskData = param2 as QuestTaskVO;
+            }
         }
         
         public static var STATISTICS:int = 0;
@@ -21,13 +31,19 @@ package net.wg.gui.lobby.quests.data.questsTileChains
         
         public var type:int;
         
-        public var data:Object;
+        public var statData:QuestTileStatisticsVO;
+        
+        public var chainData:QuestChainVO;
+        
+        public var taskData:QuestTaskVO;
         
         public var tooltip:String;
         
         public function dispose() : void
         {
-            this.data = null;
+            this.statData = null;
+            this.chainData = null;
+            this.taskData = null;
             this.tooltip = null;
         }
     }

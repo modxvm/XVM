@@ -46,6 +46,8 @@ package net.wg.gui.lobby.fortifications.data
         
         private var _infoTF:uint = 0;
         
+        private var _timeAlert:uint = 0;
+        
         public function getYellowVignette() : FortModeElementProperty
         {
             return new FortModeElementProperty(this._yellowVignette);
@@ -119,6 +121,11 @@ package net.wg.gui.lobby.fortifications.data
         public function getInfoTF() : FortModeElementProperty
         {
             return new FortModeElementProperty(this._infoTF);
+        }
+        
+        public function getTimeAlert() : FortModeElementProperty
+        {
+            return new FortModeElementProperty(this._timeAlert);
         }
         
         public function get statsBtn() : uint
@@ -316,6 +323,16 @@ package net.wg.gui.lobby.fortifications.data
         public function set infoTF(param1:uint) : void
         {
             this._infoTF = param1;
+        }
+        
+        public function get timeAlert() : uint
+        {
+            return this._timeAlert;
+        }
+        
+        public function set timeAlert(param1:uint) : void
+        {
+            this._timeAlert = param1;
         }
     }
 }

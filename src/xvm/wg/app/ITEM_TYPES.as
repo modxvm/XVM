@@ -126,6 +126,10 @@ package
         
         public static var TANKMAN_SKILLS_BROTHERHOOD_DESCR:String = "#item_types:tankman/skills/brotherhood_descr";
         
+        public static var TANKMAN_SKILLS_BROTHERHOOD_FEMALE:String = "#item_types:tankman/skills/brotherhood_female";
+        
+        public static var TANKMAN_SKILLS_BROTHERHOOD_FEMALE_DESCR:String = "#item_types:tankman/skills/brotherhood_female_descr";
+        
         public static var TANKMAN_SKILLS_COMMANDER_TUTOR:String = "#item_types:tankman/skills/commander_tutor";
         
         public static var TANKMAN_SKILLS_COMMANDER_TUTOR_DESCR:String = "#item_types:tankman/skills/commander_tutor_descr";
@@ -232,6 +236,8 @@ package
         
         public static var SHELL_KINDS_HIGH_EXPLOSIVE:String = "#item_types:shell/kinds/HIGH_EXPLOSIVE";
         
+        public static var SHELL_KINDS_EVENT:String = "#item_types:shell/kinds/EVENT";
+        
         public static var SHELL_KINDSABBREVIATION_ARMOR_PIERCING:String = "#item_types:shell/kindsAbbreviation/ARMOR_PIERCING";
         
         public static var SHELL_KINDSABBREVIATION_ARMOR_PIERCING_CR:String = "#item_types:shell/kindsAbbreviation/ARMOR_PIERCING_CR";
@@ -242,6 +248,8 @@ package
         
         public static var SHELL_KINDSABBREVIATION_HIGH_EXPLOSIVE:String = "#item_types:shell/kindsAbbreviation/HIGH_EXPLOSIVE";
         
+        public static var SHELL_KINDSABBREVIATION_EVENT:String = "#item_types:shell/kindsAbbreviation/EVENT";
+        
         public static var SHELL_DIMENSION_SM:String = "#item_types:shell/dimension/sm";
         
         public static var SHELL_DIMENSION_INCH:String = "#item_types:shell/dimension/inch";
@@ -250,9 +258,9 @@ package
         
         public static var TANKMAN_SKILLS_TYPE_ENUM:Array = [TANKMAN_SKILLS_TYPE_SKILL,TANKMAN_SKILLS_TYPE_PERK,TANKMAN_SKILLS_TYPE_PERK_COMMON];
         
-        public static var SHELL_KINDS_ENUM:Array = [SHELL_KINDS_ARMOR_PIERCING,SHELL_KINDS_ARMOR_PIERCING_CR,SHELL_KINDS_ARMOR_PIERCING_HE,SHELL_KINDS_HOLLOW_CHARGE,SHELL_KINDS_HIGH_EXPLOSIVE];
+        public static var SHELL_KINDS_ENUM:Array = [SHELL_KINDS_ARMOR_PIERCING,SHELL_KINDS_ARMOR_PIERCING_CR,SHELL_KINDS_ARMOR_PIERCING_HE,SHELL_KINDS_HOLLOW_CHARGE,SHELL_KINDS_HIGH_EXPLOSIVE,SHELL_KINDS_EVENT];
         
-        public static var SHELL_KINDSABBREVIATION_ENUM:Array = [SHELL_KINDSABBREVIATION_ARMOR_PIERCING,SHELL_KINDSABBREVIATION_ARMOR_PIERCING_CR,SHELL_KINDSABBREVIATION_ARMOR_PIERCING_HE,SHELL_KINDSABBREVIATION_HOLLOW_CHARGE,SHELL_KINDSABBREVIATION_HIGH_EXPLOSIVE];
+        public static var SHELL_KINDSABBREVIATION_ENUM:Array = [SHELL_KINDSABBREVIATION_ARMOR_PIERCING,SHELL_KINDSABBREVIATION_ARMOR_PIERCING_CR,SHELL_KINDSABBREVIATION_ARMOR_PIERCING_HE,SHELL_KINDSABBREVIATION_HOLLOW_CHARGE,SHELL_KINDSABBREVIATION_HIGH_EXPLOSIVE,SHELL_KINDSABBREVIATION_EVENT];
         
         public static function tankman_skills_type(param1:String) : String
         {

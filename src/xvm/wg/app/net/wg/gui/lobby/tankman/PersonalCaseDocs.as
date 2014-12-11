@@ -90,7 +90,6 @@ package net.wg.gui.lobby.tankman
                 return;
             }
             this.model = param1 as PersonalCaseDocsModel;
-            this.cleanTempData();
             this.firstnames.updateData(this.model.firstNames,this.model.currentTankmanFirstName);
             this.firstnames.searchText.maxChars = this.model.fistNameMaxChars;
             this.lastnames.updateData(this.model.lastNames,this.model.currentTankmanLastName);
@@ -102,12 +101,12 @@ package net.wg.gui.lobby.tankman
             this.gold.visible = !this.actionPriceGold.visible;
             this.credits.visible = !this.actionPriceCredits.visible && (this.model.priceOfCredits);
             this.updateTextColor();
-            this.submitBtn.enabled = false;
             if(!this.isDataProviderUpdated)
             {
                 this.updatePortraitsDocs();
                 this.isDataProviderUpdated = true;
             }
+            this.checkSelectedItems();
         }
         
         override protected function draw() : void

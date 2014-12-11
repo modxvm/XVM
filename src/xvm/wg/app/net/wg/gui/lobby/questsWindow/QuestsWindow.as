@@ -182,6 +182,7 @@ private function initFocusChain() : void
     }
     else
     {
+        setFocus(this);
         this._focusList = this.getFocusChain();
         App.utils.commons.initTabIndex(this._focusList);
         if(this._currentViewAlias == QUESTS_ALIASES.PERSONAL_WELCOME_VIEW_ALIAS)

@@ -30,7 +30,7 @@ package net.wg.gui.lobby.tankman
         
         private var dataProvider:DataProvider;
         
-        private var currentName:String = null;
+        private var originalName:String = null;
         
         private var _selectedItem:Object = null;
         
@@ -68,11 +68,14 @@ package net.wg.gui.lobby.tankman
         override protected function draw() : void
         {
             super.draw();
-            if((isInvalid(this.UPDATE_DATA)) && (this.dataProvider) && (this.currentName))
+            if((isInvalid(this.UPDATE_DATA)) && (this.dataProvider) && (this.originalName))
             {
-                this.searchText.text = this.currentName;
                 this.list.dataProvider = this.dataProvider;
-                this.list.selectedIndex = this.searchIndex(this.currentName);
+                if(this.list.selectedIndex == -1)
+                {
+                    this.searchText.text = this.originalName;
+                    this.list.selectedIndex = this.searchIndex(this.originalName);
+                }
                 this.list.validateNow();
             }
         }
@@ -98,7 +101,7 @@ package net.wg.gui.lobby.tankman
         public function updateData(param1:Array, param2:String) : void
         {
             this.dataProvider = new DataProvider(param1);
-            this.currentName = param2;
+            this.originalName = param2;
             invalidate(this.UPDATE_DATA);
         }
         

@@ -74,13 +74,9 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        public var upAllButton:IButtonIconLoader;
-        
         public var upButton:IButtonIconLoader;
         
         public var downButton:IButtonIconLoader;
-        
-        public var downAllButton:IButtonIconLoader;
         
         public var topBG:MovieClip;
         
@@ -330,10 +326,8 @@ package net.wg.gui.prebattle.battleSession
             this.hiddenRenderer.visible = false;
             this.hiddenRenderer.data = null;
             this.queueLabel.text = PREBATTLE.LABELS_COMPANY_QUEUE;
-            this.upAllButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_DOUBLE_RIGHT_ARROW_ICON;
             this.upButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_SINGLE_RIGHT_ARROW_ICON;
             this.downButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_SINGLE_LEFT_ARROW_ICON;
-            this.downAllButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_DOUBLE_LEFT_ARROW_ICON;
             this.setControlsLabels();
             this.memberList.addEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
             this.memberList.addEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.handleDoubleClick);

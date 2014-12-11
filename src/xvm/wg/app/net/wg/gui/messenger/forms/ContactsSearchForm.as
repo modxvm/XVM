@@ -90,6 +90,7 @@ package net.wg.gui.messenger.forms
             this.list.addEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
             this.list.addEventListener(ListEvent.INDEX_CHANGE,this.updateButtons);
             this.list.sbPadding = new Padding(-1,-1,-1,-1);
+            this.list.smartScrollBar = true;
             this.textInput.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
             this.addToFriendsButton.enabled = false;
             this.addToIgnoredButton.enabled = false;

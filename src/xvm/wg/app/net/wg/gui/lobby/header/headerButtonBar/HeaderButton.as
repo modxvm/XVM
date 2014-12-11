@@ -11,12 +11,14 @@ package net.wg.gui.lobby.header.headerButtonBar
     import scaleform.clik.core.UIComponent;
     import net.wg.gui.lobby.header.events.HeaderEvents;
     import flash.text.TextFieldAutoSize;
+    import flash.geom.ColorTransform;
+    import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
+    import flash.display.BlendMode;
     import flash.display.DisplayObject;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.events.MouseEvent;
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
     import net.wg.gui.utils.ComplexTooltipHelper;
-    import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.data.constants.Tooltips;
     import net.wg.utils.IHelpLayout;
     import flash.geom.Rectangle;
@@ -98,9 +100,28 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         public function updateContentData() : void
         {
+            var _loc1_:ColorTransform = null;
             this.helpDirection = this._dataVo.helpDirection;
             this.helpText = this._dataVo.helpText;
             this.enabled = this._dataVo.enabled;
+            if(this._dataVo.id == HeaderButtonsHelper.ITEM_ID_SQUAD)
+            {
+                if(HBC_SquadDataVo(this._dataVo.data).isEventSquad)
+                {
+                    this.states.blendMode = BlendMode.ADD;
+                    _loc1_ = this.states.transform.colorTransform;
+                    _loc1_.blueOffset = 255;
+                    _loc1_.redOffset = 255;
+                    _loc1_.greenOffset = 255;
+                    _loc1_.alphaMultiplier = 0.5;
+                    this.states.transform.colorTransform = _loc1_;
+                }
+                else
+                {
+                    this.states.blendMode = BlendMode.NORMAL;
+                    this.states.transform.colorTransform = new ColorTransform();
+                }
+            }
             this._content.data = this._dataVo.data;
             this.separator.visible = this.isShowSeparator;
             this.updateScreen(this._screen,this._wideScreenPrc,this._maxScreenPrc);

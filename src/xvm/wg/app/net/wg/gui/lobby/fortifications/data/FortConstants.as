@@ -9,5 +9,7 @@ package net.wg.gui.lobby.fortifications.data
         }
         
         public static var ON_FORT_CREATE_EVENT:String = "onFortCreateEvent";
+        
+        public static var CHAT_HEIGHT:Number = 33;
     }
 }

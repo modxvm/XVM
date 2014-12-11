@@ -38,8 +38,11 @@ package net.wg.gui.lobby.browser
         
         public function setMaskSize(param1:Number, param2:Number) : void
         {
+            var _loc4_:Bitmap = null;
+            this.width = param1;
+            this.height = param2;
             var _loc3_:BitmapData = new BitmapData(param1,param2,true,0);
-            var _loc4_:Bitmap = new Bitmap(_loc3_);
+            _loc4_ = new Bitmap(_loc3_);
             this.mask = _loc4_;
             addChild(_loc4_);
         }

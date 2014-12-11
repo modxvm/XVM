@@ -134,7 +134,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         public function canShowAutomatically() : Boolean
         {
-            return true;
+            return false;
         }
         
         override protected function setCommonData(param1:FortWelcomeViewVO) : void
@@ -309,6 +309,13 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         {
             this.promoMC.removeEventListener(SimpleLoader.LOADED,this.onPromoMCLoaded);
             this.promoMC.visible = true;
+            this.show();
+        }
+        
+        private function show() : void
+        {
+            onViewReadyS();
+            this.visible = true;
         }
     }
 }

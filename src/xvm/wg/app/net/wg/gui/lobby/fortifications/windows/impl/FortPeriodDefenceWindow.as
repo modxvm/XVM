@@ -123,6 +123,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         override protected function configUI() : void
         {
+            super.configUI();
             this.timeAlert.visible = false;
             App.utils.commons.moveDsiplObjToEndOfText(this.timeAlert,this.hourDefenceTimeTF);
         }

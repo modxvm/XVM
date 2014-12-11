@@ -9,8 +9,6 @@ package net.wg.infrastructure.base.meta
         
         function onSourceLoadedS() : void;
         
-        function onTryClosingS() : Boolean;
-        
         function as_showWaiting(param1:String, param2:Object) : void;
         
         function as_hideWaiting() : void;

@@ -228,6 +228,8 @@ package
         
         public static var MAPS_ICONS_ACHIEVEMENT_32X32_NOMANSLAND:String = "../maps/icons/achievement/32x32/noMansLand.png";
         
+        public static var MAPS_ICONS_ACHIEVEMENT_32X32_OPERATIONWINTER:String = "../maps/icons/achievement/32x32/operationWinter.png";
+        
         public static var MAPS_ICONS_ACHIEVEMENT_32X32_PREMATUREDETONATIONMEDAL:String = "../maps/icons/achievement/32x32/prematureDetonationMedal.png";
         
         public static var MAPS_ICONS_ACHIEVEMENT_32X32_PROMISINGFIGHTERMEDAL:String = "../maps/icons/achievement/32x32/promisingFighterMedal.png";
@@ -654,6 +656,8 @@ package
         
         public static var MAPS_ICONS_ACHIEVEMENT_BIG_NOMANSLAND:String = "../maps/icons/achievement/big/noMansLand.png";
         
+        public static var MAPS_ICONS_ACHIEVEMENT_BIG_OPERATIONWINTER:String = "../maps/icons/achievement/big/operationWinter.png";
+        
         public static var MAPS_ICONS_ACHIEVEMENT_BIG_PATTONVALLEY:String = "../maps/icons/achievement/big/pattonValley.png";
         
         public static var MAPS_ICONS_ACHIEVEMENT_BIG_PREMATUREDETONATIONMEDAL:String = "../maps/icons/achievement/big/prematureDetonationMedal.png";
@@ -1078,6 +1082,8 @@ package
         
         public static var MAPS_ICONS_ACHIEVEMENT_NOMANSLAND:String = "../maps/icons/achievement/noMansLand.png";
         
+        public static var MAPS_ICONS_ACHIEVEMENT_OPERATIONWINTER:String = "../maps/icons/achievement/operationWinter.png";
+        
         public static var MAPS_ICONS_ACHIEVEMENT_PATTONVALLEY:String = "../maps/icons/achievement/pattonValley.png";
         
         public static var MAPS_ICONS_ACHIEVEMENT_PREMATUREDETONATIONMEDAL:String = "../maps/icons/achievement/prematureDetonationMedal.png";
@@ -1204,6 +1210,10 @@ package
         
         public static var MAPS_ICONS_AMMOPANEL_AMMO_ARMOR_PIERCING_HE:String = "../maps/icons/ammopanel/ammo/ARMOR_PIERCING_HE.png";
         
+        public static var MAPS_ICONS_AMMOPANEL_AMMO_EVENT_ARMOR_PIERCING_CR:String = "../maps/icons/ammopanel/ammo/EVENT_ARMOR_PIERCING_CR.png";
+        
+        public static var MAPS_ICONS_AMMOPANEL_AMMO_EVENT_NO_ARMOR_PIERCING_CR:String = "../maps/icons/ammopanel/ammo/EVENT_NO_ARMOR_PIERCING_CR.png";
+        
         public static var MAPS_ICONS_AMMOPANEL_AMMO_HIGH_EXPLOSIVE:String = "../maps/icons/ammopanel/ammo/HIGH_EXPLOSIVE.png";
         
         public static var MAPS_ICONS_AMMOPANEL_AMMO_HIGH_EXPLOSIVE_PREMIUM:String = "../maps/icons/ammopanel/ammo/HIGH_EXPLOSIVE_PREMIUM.png";
@@ -1316,6 +1326,8 @@ package
         
         public static var MAPS_ICONS_BATTLETYPES_40X40_COMPANYLIST:String = "../maps/icons/battleTypes/40x40/companyList.png";
         
+        public static var MAPS_ICONS_BATTLETYPES_40X40_EVENTSQUAD:String = "../maps/icons/battleTypes/40x40/eventSquad.png";
+        
         public static var MAPS_ICONS_BATTLETYPES_40X40_HISTORICAL:String = "../maps/icons/battleTypes/40x40/historical.png";
         
         public static var MAPS_ICONS_BATTLETYPES_40X40_JOINRANDOMQUEUE:String = "../maps/icons/battleTypes/40x40/joinRandomQueue.png";
@@ -1337,6 +1349,8 @@ package
         public static var MAPS_ICONS_BATTLETYPES_6:String = "../maps/icons/battleTypes/6.png";
         
         public static var MAPS_ICONS_BATTLETYPES_64X64_COMPANYLIST:String = "../maps/icons/battleTypes/64x64/companyList.png";
+        
+        public static var MAPS_ICONS_BATTLETYPES_64X64_EVENTSQUAD:String = "../maps/icons/battleTypes/64x64/eventSquad.png";
         
         public static var MAPS_ICONS_BATTLETYPES_64X64_HISTORICAL:String = "../maps/icons/battleTypes/64x64/historical.png";
         
@@ -1994,6 +2008,8 @@ package
         
         public static var MAPS_ICONS_MAP_103_RUINBERG_WINTER:String = "../maps/icons/map/103_ruinberg_winter.png";
         
+        public static var MAPS_ICONS_MAP_109_BATTLECITY_NY:String = "../maps/icons/map/109_battlecity_ny.png";
+        
         public static var MAPS_ICONS_MAP_10_HILLS:String = "../maps/icons/map/10_hills.png";
         
         public static var MAPS_ICONS_MAP_11_MUROVANKA:String = "../maps/icons/map/11_murovanka.png";
@@ -2091,6 +2107,8 @@ package
         public static var MAPS_ICONS_MAP_STATS_100_THEPIT:String = "../maps/icons/map/stats/100_thepit.png";
         
         public static var MAPS_ICONS_MAP_STATS_103_RUINBERG_WINTER:String = "../maps/icons/map/stats/103_ruinberg_winter.png";
+        
+        public static var MAPS_ICONS_MAP_STATS_109_BATTLECITY_NY:String = "../maps/icons/map/stats/109_Battlecity_NY.png";
         
         public static var MAPS_ICONS_MAP_STATS_10_HILLS:String = "../maps/icons/map/stats/10_hills.png";
         
@@ -2491,6 +2509,8 @@ package
         public static var MAPS_ICONS_SHELL_ARMOR_PIERCING_CR:String = "../maps/icons/shell/ARMOR_PIERCING_CR.png";
         
         public static var MAPS_ICONS_SHELL_ARMOR_PIERCING_HE:String = "../maps/icons/shell/ARMOR_PIERCING_HE.png";
+        
+        public static var MAPS_ICONS_SHELL_EVENT_ARMOR_PIERCING_CR:String = "../maps/icons/shell/EVENT_ARMOR_PIERCING_CR.png";
         
         public static var MAPS_ICONS_SHELL_HIGH_EXPLOSIVE:String = "../maps/icons/shell/HIGH_EXPLOSIVE.png";
         
@@ -5134,6 +5154,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_ELC_AMX_IGR:String = "../maps/icons/vehicle/contour/france-ELC_AMX_IGR.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_F00_AMX_50FOCH_155:String = "../maps/icons/vehicle/contour/france-F00_AMX_50Foch_155.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_F10_AMX_50B:String = "../maps/icons/vehicle/contour/france-F10_AMX_50B.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_F68_AMX_CHASSEUR_DE_CHAR_46:String = "../maps/icons/vehicle/contour/france-F68_AMX_Chasseur_de_char_46.png";
@@ -5554,6 +5576,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UNKNOWN:String = "../maps/icons/vehicle/contour/unknown.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_A00_T110E5:String = "../maps/icons/vehicle/contour/usa-A00_T110E5.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_A101_M56:String = "../maps/icons/vehicle/contour/usa-A101_M56.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_A102_T28_CONCEPT:String = "../maps/icons/vehicle/contour/usa-A102_T28_concept.png";
@@ -5812,6 +5836,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_OBSERVER:String = "../maps/icons/vehicle/contour/ussr-Observer.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_R00_T_50_2:String = "../maps/icons/vehicle/contour/ussr-R00_T_50_2.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_R04_T_34:String = "../maps/icons/vehicle/contour/ussr-R04_T-34.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_R104_OBJECT_430_II:String = "../maps/icons/vehicle/contour/ussr-R104_Object_430_II.png";
@@ -5973,6 +5999,8 @@ package
         public static var MAPS_ICONS_VEHICLE_FRANCE_ELC_AMX:String = "../maps/icons/vehicle/france-ELC_AMX.png";
         
         public static var MAPS_ICONS_VEHICLE_FRANCE_ELC_AMX_IGR:String = "../maps/icons/vehicle/france-ELC_AMX_IGR.png";
+        
+        public static var MAPS_ICONS_VEHICLE_FRANCE_F00_AMX_50FOCH_155:String = "../maps/icons/vehicle/france-F00_AMX_50Foch_155.png";
         
         public static var MAPS_ICONS_VEHICLE_FRANCE_F10_AMX_50B:String = "../maps/icons/vehicle/france-F10_AMX_50B.png";
         
@@ -6371,6 +6399,8 @@ package
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_ELC_AMX:String = "../maps/icons/vehicle/small/france-ELC_AMX.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_ELC_AMX_IGR:String = "../maps/icons/vehicle/small/france-ELC_AMX_IGR.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_F00_AMX_50FOCH_155:String = "../maps/icons/vehicle/small/france-F00_AMX_50Foch_155.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_F10_AMX_50B:String = "../maps/icons/vehicle/small/france-F10_AMX_50B.png";
         
@@ -6786,6 +6816,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB83_FV4005:String = "../maps/icons/vehicle/small/uk-GB83_FV4005.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_USA_A00_T110E5:String = "../maps/icons/vehicle/small/usa-A00_T110E5.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_A101_M56:String = "../maps/icons/vehicle/small/usa-A101_M56.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_A102_T28_CONCEPT:String = "../maps/icons/vehicle/small/usa-A102_T28_concept.png";
@@ -7044,6 +7076,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_OBSERVER:String = "../maps/icons/vehicle/small/ussr-Observer.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_USSR_R00_T_50_2:String = "../maps/icons/vehicle/small/ussr-R00_T_50_2.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_R04_T_34:String = "../maps/icons/vehicle/small/ussr-R04_T-34.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_R104_OBJECT_430_II:String = "../maps/icons/vehicle/small/ussr-R104_Object_430_II.png";
@@ -7295,6 +7329,8 @@ package
         public static var MAPS_ICONS_VEHICLE_UNIQUE_USA_T95_E2:String = "../maps/icons/vehicle/unique/usa-T95_E2.png";
         
         public static var MAPS_ICONS_VEHICLE_UNIQUE_USSR_R110_OBJECT_260:String = "../maps/icons/vehicle/unique/ussr-R110_Object_260.png";
+        
+        public static var MAPS_ICONS_VEHICLE_USA_A00_T110E5:String = "../maps/icons/vehicle/usa-A00_T110E5.png";
         
         public static var MAPS_ICONS_VEHICLE_USA_A101_M56:String = "../maps/icons/vehicle/usa-A101_M56.png";
         
@@ -7553,6 +7589,8 @@ package
         public static var MAPS_ICONS_VEHICLE_USSR_OBJECT_907:String = "../maps/icons/vehicle/ussr-Object_907.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_OBSERVER:String = "../maps/icons/vehicle/ussr-Observer.png";
+        
+        public static var MAPS_ICONS_VEHICLE_USSR_R00_T_50_2:String = "../maps/icons/vehicle/ussr-R00_T_50_2.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_R04_T_34:String = "../maps/icons/vehicle/ussr-R04_T-34.png";
         

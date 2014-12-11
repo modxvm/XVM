@@ -57,6 +57,8 @@ package net.wg.gui.lobby.quests.views
         
         public var filtersListDelimiter:MovieClip;
         
+        public var detailsDelimiter:MovieClip;
+        
         public var noTasksLabel:TextField;
         
         public var delimiterHitArea:MovieClip;
@@ -74,6 +76,7 @@ package net.wg.gui.lobby.quests.views
             super.configUI();
             this.filtersHeaderDelimiter.hitArea = this.delimiterHitArea;
             this.filtersListDelimiter.hitArea = this.delimiterHitArea;
+            this.detailsDelimiter.hitArea = this.delimiterHitArea;
         }
         
         public function canShowAutomatically() : Boolean
@@ -112,7 +115,6 @@ package net.wg.gui.lobby.quests.views
         
         private function updateTileView(param1:QuestTileVO) : void
         {
-            var _loc4_:* = false;
             var _loc5_:QuestChainVO = null;
             var _loc6_:QuestTaskVO = null;
             if(this.tasksScrollingList.canCleanDataProvider)
@@ -122,7 +124,7 @@ package net.wg.gui.lobby.quests.views
             var _loc2_:Array = [];
             var _loc3_:QuestTaskListRendererVO = new QuestTaskListRendererVO(QuestTaskListRendererVO.STATISTICS,param1.statistics,param1.statistics.tooltip);
             _loc2_.push(_loc3_);
-            _loc4_ = param1.hasTasks();
+            var _loc4_:Boolean = param1.hasTasks();
             if(_loc4_)
             {
                 for each(_loc5_ in param1.chains)
@@ -148,7 +150,6 @@ package net.wg.gui.lobby.quests.views
         public function as_setSelectedTask(param1:Number) : void
         {
             var _loc2_:QuestTaskListRendererVO = null;
-            var _loc4_:QuestTaskVO = null;
             _loc2_ = null;
             var _loc3_:* = 0;
             while(_loc3_ < this.tasksScrollingList.dataProvider.length)
@@ -157,8 +158,7 @@ package net.wg.gui.lobby.quests.views
                 App.utils.asserter.assertNotNull(_loc2_,"item must be QuestTaskListRendererVO");
                 if(_loc2_.type == QuestTaskListRendererVO.TASK)
                 {
-                    _loc4_ = _loc2_.data as QuestTaskVO;
-                    if(_loc4_.id == param1)
+                    if(_loc2_.taskData.id == param1)
                     {
                         this.tasksScrollingList.selectedIndex = _loc3_;
                         this.showDetails(_loc2_);
@@ -167,7 +167,7 @@ package net.wg.gui.lobby.quests.views
                 }
                 _loc3_++;
             }
-            App.utils.asserter.assert(false,"Can\'t find taskId " + param1 + " in list");
+            this.scheduleUpdateTileData();
         }
         
         private function scheduleUpdateTileData() : void
@@ -196,15 +196,13 @@ package net.wg.gui.lobby.quests.views
         
         private function showDetails(param1:QuestTaskListRendererVO) : void
         {
-            var _loc2_:QuestTaskVO = null;
             if(param1.type == QuestTaskListRendererVO.STATISTICS)
             {
                 getChainProgressS();
             }
             else if(param1.type == QuestTaskListRendererVO.TASK)
             {
-                _loc2_ = param1.data as QuestTaskVO;
-                getTaskDetailsS(_loc2_.id);
+                getTaskDetailsS(param1.taskData.id);
             }
             else
             {
@@ -299,6 +297,7 @@ package net.wg.gui.lobby.quests.views
             this.taskDetailsViewStack.dispose();
             this.filtersHeaderDelimiter.hitArea = null;
             this.filtersListDelimiter.hitArea = null;
+            this.detailsDelimiter.hitArea = null;
             this.header = null;
             this.taskFilters = null;
             this.tasksScrollingList = null;
@@ -307,6 +306,7 @@ package net.wg.gui.lobby.quests.views
             this.taskDetailsViewStack = null;
             this.filtersHeaderDelimiter = null;
             this.filtersListDelimiter = null;
+            this.detailsDelimiter = null;
             this.noTasksLabel = null;
             this.delimiterHitArea = null;
             if(this._headerData != null)

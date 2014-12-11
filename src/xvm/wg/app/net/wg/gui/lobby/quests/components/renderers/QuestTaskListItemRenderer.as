@@ -4,11 +4,7 @@ package net.wg.gui.lobby.quests.components.renderers
     import flash.text.TextField;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.lobby.quests.data.questsTileChains.QuestTaskListRendererVO;
-    import flash.utils.Dictionary;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.gui.lobby.quests.data.questsTileChains.QuestTileStatisticsVO;
-    import net.wg.gui.lobby.quests.data.questsTileChains.QuestChainVO;
-    import net.wg.gui.lobby.quests.data.questsTileChains.QuestTaskVO;
     import flash.events.MouseEvent;
     
     public class QuestTaskListItemRenderer extends TableRenderer
@@ -25,20 +21,11 @@ package net.wg.gui.lobby.quests.components.renderers
         
         public var taskStatus:TextField;
         
+        public var taskStatusIcon:UILoaderAlt;
+        
         public var arrow:UILoaderAlt;
         
         private var _rendererVO:QuestTaskListRendererVO;
-        
-        private var _stateSetters:Dictionary;
-        
-        override protected function configUI() : void
-        {
-            super.configUI();
-            this._stateSetters = new Dictionary();
-            this._stateSetters[QuestTaskListRendererVO.STATISTICS] = this.setStatisticsView;
-            this._stateSetters[QuestTaskListRendererVO.CHAIN] = this.setChainView;
-            this._stateSetters[QuestTaskListRendererVO.TASK] = this.setTaskView;
-        }
         
         override public function setData(param1:Object) : void
         {
@@ -56,14 +43,95 @@ package net.wg.gui.lobby.quests.components.renderers
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
-                this.clear();
+                this.clearView();
                 this.setView(this._rendererVO);
                 this.updateDisable();
             }
             if(isInvalid(InvalidationType.STATE))
             {
-                this.arrow.visible = selected;
+                this.arrow.visible = (selected) && (this.isNotChain());
             }
+        }
+        
+        private function isNotChain() : Boolean
+        {
+            return !(this._rendererVO == null) && !(this._rendererVO.type == QuestTaskListRendererVO.CHAIN);
+        }
+        
+        override protected function updateDisable() : void
+        {
+            super.updateDisable();
+            if(disableMc != null)
+            {
+                disableMc.visible = !enabled && (this.isNotChain());
+            }
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.arrow.dispose();
+            this.taskStatusIcon.dispose();
+            if(this._rendererVO != null)
+            {
+                this._rendererVO.dispose();
+            }
+            this.mainLabel = null;
+            this.taskChainProgress = null;
+            this.taskStatus = null;
+            this.arrow = null;
+            this.taskStatusIcon = null;
+            this._rendererVO = null;
+            super.onDispose();
+        }
+        
+        private function setView(param1:Object) : void
+        {
+            var _loc2_:* = false;
+            if(this._rendererVO != null)
+            {
+                switch(this._rendererVO.type)
+                {
+                    case QuestTaskListRendererVO.STATISTICS:
+                        this.mainLabel.htmlText = this._rendererVO.statData.label;
+                        this.arrow.source = this._rendererVO.statData.arrowIconPath;
+                        this.mainLabel.visible = true;
+                        this.arrow.visible = true;
+                        break;
+                    case QuestTaskListRendererVO.CHAIN:
+                        this.mainLabel.htmlText = this._rendererVO.chainData.name;
+                        this.taskChainProgress.htmlText = this._rendererVO.chainData.progressText;
+                        this.mainLabel.visible = true;
+                        this.taskChainProgress.visible = true;
+                        break;
+                    case QuestTaskListRendererVO.TASK:
+                        this.mainLabel.htmlText = this._rendererVO.taskData.name;
+                        this.taskStatus.htmlText = this._rendererVO.taskData.stateName;
+                        this.taskStatusIcon.source = this._rendererVO.taskData.stateIconPath;
+                        this.arrow.source = this._rendererVO.taskData.arrowIconPath;
+                        this.mainLabel.visible = true;
+                        this.arrow.visible = true;
+                        this.taskStatusIcon.visible = this.taskStatus.text.length > 0;
+                        this.taskStatus.visible = true;
+                        break;
+                }
+                _loc2_ = this.isNotChain();
+                enabled = _loc2_;
+                this.arrow.visible = _loc2_;
+                if(rendererBg != null)
+                {
+                    rendererBg.visible = _loc2_;
+                }
+            }
+        }
+        
+        private function clearView() : void
+        {
+            this.taskChainProgress.visible = false;
+            this.taskStatus.visible = false;
+            rendererBg.visible = false;
+            this.mainLabel.visible = false;
+            this.arrow.visible = false;
+            this.taskStatusIcon.visible = false;
         }
         
         override public function set selected(param1:Boolean) : void
@@ -73,53 +141,6 @@ package net.wg.gui.lobby.quests.components.renderers
                 App.toolTipMgr.hide();
             }
             super.selected = param1;
-        }
-        
-        override protected function updateDisable() : void
-        {
-            super.updateDisable();
-            if(disableMc != null)
-            {
-                disableMc.visible = (_data) && !enabled && !(this._rendererVO.type == QuestTaskListRendererVO.CHAIN);
-            }
-        }
-        
-        private function setView(param1:Object) : void
-        {
-            var _loc2_:Function = null;
-            var _loc3_:* = false;
-            if(this._rendererVO != null)
-            {
-                _loc2_ = this._stateSetters[this._rendererVO.type] as Function;
-                App.utils.asserter.assertNotNull(_loc2_,"Cant find view setter for type ");
-                _loc2_(this._rendererVO.data);
-                _loc3_ = !(this._rendererVO.type == QuestTaskListRendererVO.CHAIN);
-                enabled = _loc3_;
-                this.arrow.visible = _loc3_;
-                if(rendererBg != null)
-                {
-                    rendererBg.visible = _loc3_;
-                }
-            }
-        }
-        
-        private function setStatisticsView(param1:QuestTileStatisticsVO) : void
-        {
-            this.mainLabel.htmlText = param1.label;
-            this.arrow.source = param1.arrowIconPath;
-        }
-        
-        private function setChainView(param1:QuestChainVO) : void
-        {
-            this.mainLabel.htmlText = param1.name;
-            this.taskChainProgress.htmlText = param1.progressText;
-        }
-        
-        private function setTaskView(param1:QuestTaskVO) : void
-        {
-            this.mainLabel.htmlText = param1.name;
-            this.taskStatus.htmlText = param1.stateName;
-            this.arrow.source = param1.arrowIconPath;
         }
         
         override protected function handleMouseRollOver(param1:MouseEvent) : void
@@ -135,40 +156,6 @@ package net.wg.gui.lobby.quests.components.renderers
         {
             super.handleMouseRollOut(param1);
             App.toolTipMgr.hide();
-        }
-        
-        private function clear() : void
-        {
-            this.mainLabel.htmlText = "";
-            this.taskChainProgress.htmlText = "";
-            this.taskStatus.htmlText = "";
-            this.arrow.unload();
-            rendererBg.visible = false;
-        }
-        
-        override protected function onDispose() : void
-        {
-            var _loc1_:* = undefined;
-            this.arrow.dispose();
-            if(this._rendererVO != null)
-            {
-                this._rendererVO.dispose();
-            }
-            this.mainLabel = null;
-            this.taskChainProgress = null;
-            this.taskStatus = null;
-            this.arrow = null;
-            this._rendererVO = null;
-            if(this._stateSetters)
-            {
-                for(_loc1_ in this._stateSetters)
-                {
-                    delete this._stateSetters[_loc1_];
-                    true;
-                }
-                this._stateSetters = null;
-            }
-            super.onDispose();
         }
     }
 }

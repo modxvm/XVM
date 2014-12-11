@@ -36,7 +36,7 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         public function showAlert(param1:Boolean) : void
         {
-            visible = param1;
+            this.alertIcon.visible = param1;
         }
     }
 }

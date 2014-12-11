@@ -18,7 +18,11 @@ package net.wg.data.constants.generated
         
         public static var SQUAD_VIEW_PY:String = "prebattle/company/squad";
         
+        public static var SQUAD_VIEW_NY_PY:String = "prebattle/company/squad";
+        
         public static var SQUAD_WINDOW_PY:String = "prb_windows/squadWindow";
+        
+        public static var SQUAD_WINDOW_NY_PY:String = "prb_windows/squadWindowNY";
         
         public static var COMPANY_WINDOW_PY:String = "prb_windows/companyWindow";
         

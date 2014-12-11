@@ -4,8 +4,8 @@ package net.wg.gui.prebattle.squad
     import net.wg.infrastructure.base.meta.ISquadWindowMeta;
     import net.wg.gui.components.windows.Window;
     import scaleform.clik.utils.Padding;
-    import net.wg.data.constants.generated.PREBATTLE_ALIASES;
     import net.wg.data.Aliases;
+    import net.wg.data.constants.generated.PREBATTLE_ALIASES;
     import scaleform.clik.events.InputEvent;
     import flash.ui.Keyboard;
     import scaleform.clik.constants.InputValue;
@@ -18,15 +18,10 @@ package net.wg.gui.prebattle.squad
         public function SquadWindow()
         {
             super();
+            currentView = this.squadView;
         }
         
         public var squadView:SquadView = null;
-        
-        override protected function configUI() : void
-        {
-            super.configUI();
-            currentView = this.squadView;
-        }
         
         override protected function draw() : void
         {
@@ -52,8 +47,13 @@ package net.wg.gui.prebattle.squad
             _loc1_.right = 13;
             window.contentPadding = _loc1_;
             App.utils.scheduler.envokeInNextFrame(this.windowIsUpdated);
-            registerComponent(this.squadView,PREBATTLE_ALIASES.SQUAD_VIEW_PY);
+            registerComponent(this.squadView,this.getViewAlias());
             registerComponent(this.squadView.getChannelComponent(),Aliases.CHANNEL_COMPONENT);
+        }
+        
+        protected function getViewAlias() : String
+        {
+            return PREBATTLE_ALIASES.SQUAD_VIEW_PY;
         }
         
         private function windowIsUpdated() : void

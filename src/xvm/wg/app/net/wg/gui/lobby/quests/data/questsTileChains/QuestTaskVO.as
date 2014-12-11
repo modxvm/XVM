@@ -14,6 +14,8 @@ package net.wg.gui.lobby.quests.data.questsTileChains
         
         public var stateName:String = "";
         
+        public var stateIconPath:String = "";
+        
         public var arrowIconPath:String = "";
         
         public var id:Number = -1;

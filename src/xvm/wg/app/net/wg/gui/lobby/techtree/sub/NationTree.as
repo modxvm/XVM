@@ -453,6 +453,7 @@ package net.wg.gui.lobby.techtree.sub
             {
                 this.scrollBar.setScrollProperties(this.scrollPageSize,0,this.maxScroll);
                 this.scrollBar.position = this.scrollPosition;
+                this.scrollBar.visible = this.maxScroll > 0;
             }
         }
         

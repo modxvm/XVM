@@ -84,7 +84,7 @@ package net.wg.gui.lobby.tankman
                 while(_loc1_ < this.vehicleButtons.length)
                 {
                     _loc2_ = this.vehicleButtons[_loc1_] as VehicleTypeButton;
-                    _loc2_.removeEventListener(ButtonEvent.PRESS,this.vehicleType_buttonPressHandler);
+                    _loc2_.removeEventListener(ButtonEvent.CLICK,this.vehicleType_buttonPressHandler);
                     _loc1_++;
                 }
                 this.vehicleButtons = null;
@@ -96,7 +96,7 @@ package net.wg.gui.lobby.tankman
                 {
                     _loc4_ = this.retrainingButtons[_loc3_] as TankmanTrainingSmallButton;
                     _loc4_.dispose();
-                    _loc4_.removeEventListener(ButtonEvent.CLICK,this.retrainingTypeClick);
+                    _loc4_.removeEventListener(ButtonEvent.PRESS,this.retrainingTypeClick);
                     _loc3_++;
                 }
                 this.retrainingButtons = null;
@@ -183,7 +183,7 @@ package net.wg.gui.lobby.tankman
             while(_loc1_ < this.retrainingButtons.length)
             {
                 _loc2_ = this.retrainingButtons[_loc1_] as TankmanTrainingSmallButton;
-                _loc2_.addEventListener(ButtonEvent.CLICK,this.retrainingTypeClick);
+                _loc2_.addEventListener(ButtonEvent.PRESS,this.retrainingTypeClick);
                 _loc2_.groupName = "retrainingButtonGroup";
                 _loc2_.retraining = true;
                 _loc2_.allowDeselect = false;
@@ -231,7 +231,7 @@ package net.wg.gui.lobby.tankman
             while(_loc1_ < this.vehicleButtons.length)
             {
                 _loc2_ = this.vehicleButtons[_loc1_] as VehicleTypeButton;
-                _loc2_.addEventListener(ButtonEvent.PRESS,this.vehicleType_buttonPressHandler);
+                _loc2_.addEventListener(ButtonEvent.CLICK,this.vehicleType_buttonPressHandler);
                 this.setToolTipListeners(_loc2_);
                 _loc2_.groupName = "vehicleGroup";
                 _loc2_.allowDeselect = false;

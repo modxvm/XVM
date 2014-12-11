@@ -25,6 +25,7 @@ package net.wg.gui.cyberSport.controls
         
         public function VehicleSelector()
         {
+            this._filtersMode = VehicleSelectorFilter.MODE_ALL_VEHICLES;
             this._localSelectionOverrides = [];
             super();
         }
@@ -43,7 +44,7 @@ package net.wg.gui.cyberSport.controls
         
         private var _multiSelection:Boolean = false;
         
-        private var _filtersMode:String = "allVehicles";
+        private var _filtersMode:String;
         
         private var _selectedItemVO:VehicleSelectorItemVO;
         
@@ -177,6 +178,7 @@ package net.wg.gui.cyberSport.controls
             super.configUI();
             this.allCheckBox.label = CYBERSPORT.WINDOW_VEHICLESELECTOR_FILTERS_ALL;
             this.allCheckBox.addEventListener(Event.SELECT,this.onAllCheckBoxChanged);
+            this.list.smartScrollBar = true;
             this.list.addEventListener(VehicleSelectorItemEvent.SELECT_VEHICLE,this.dispatchUpdate);
             this.header.addEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingChangedHandler,false,0,true);
         }

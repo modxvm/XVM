@@ -16,6 +16,8 @@ package net.wg.gui.lobby.header.vo
         
         private var _isInSquad:Boolean = false;
         
+        public var isEventSquad:Boolean = false;
+        
         public function get isInSquad() : Boolean
         {
             return this._isInSquad;

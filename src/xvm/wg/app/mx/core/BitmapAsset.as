@@ -27,7 +27,7 @@ package mx.core
             }
         }
         
-        mx_internal  static var VERSION:String = "4.6.0.23201";
+        mx_internal  static var VERSION:String = "4.5.1.21328";
         
         private static var FlexVersionClass:Class;
         

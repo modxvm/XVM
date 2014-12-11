@@ -74,6 +74,7 @@ package net.wg.gui.notification
                 scrollBar.setScrollProperties(scrollPageSize,0,maxScroll);
                 scrollBar.position = scrollPosition;
                 scrollBar.trackScrollPageSize = scrollPageSize;
+                scrollBar.visible = maxScroll > 0;
                 dispatchEvent(new NotificationListEvent(NotificationListEvent.UPDATE_INDEXES,_dataProvider.length));
             }
         }

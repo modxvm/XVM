@@ -834,6 +834,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.fortifications.data.FortModeStateStringsVO;
     import net.wg.gui.lobby.fortifications.data.FortModeStateVO;
     import net.wg.gui.lobby.fortifications.data.FortModeVO;
+    import net.wg.gui.lobby.fortifications.data.FortWaitingVO;
     import net.wg.gui.lobby.fortifications.data.FortWelcomeViewVO;
     import net.wg.gui.lobby.fortifications.data.FortificationVO;
     import net.wg.gui.lobby.fortifications.data.FunctionalStates;
@@ -1011,8 +1012,11 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.header.FightButton;
     import net.wg.gui.lobby.header.FightButtonFancyRenderer;
     import net.wg.gui.lobby.header.FightButtonFancySelect;
+    import net.wg.gui.lobby.header.HeaderBg;
     import net.wg.gui.lobby.header.LobbyHeader;
     import net.wg.gui.lobby.header.QuestsControl;
+    import net.wg.gui.lobby.header.SquadButtonFancyRenderer;
+    import net.wg.gui.lobby.header.SquadTypeSelectPopover;
     import net.wg.gui.lobby.header.TankPanel;
     import net.wg.gui.lobby.header.events.BattleTypeSelectorEvent;
     import net.wg.gui.lobby.header.events.HeaderEvents;
@@ -1028,6 +1032,9 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.header.headerButtonBar.HeaderButtonsHelper;
     import net.wg.gui.lobby.header.mainMenuButtonBar.MainMenuButtonBar;
     import net.wg.gui.lobby.header.mainMenuButtonBar.MainMenuHelper;
+    import net.wg.gui.lobby.header.ny.Flake;
+    import net.wg.gui.lobby.header.ny.FlakeAnim;
+    import net.wg.gui.lobby.header.ny.SnowPlace;
     import net.wg.gui.lobby.header.vo.AccountPopoverBlockVo;
     import net.wg.gui.lobby.header.vo.AccountPopoverReferralBlockVO;
     import net.wg.gui.lobby.header.vo.HBC_AccountDataVo;
@@ -1742,9 +1749,12 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.prebattle.squad.SquadSlotHelper;
     import net.wg.gui.prebattle.squad.SquadSlotRenderer;
     import net.wg.gui.prebattle.squad.SquadTeamSection;
+    import net.wg.gui.prebattle.squad.SquadTeamSectionNY;
     import net.wg.gui.prebattle.squad.SquadView;
+    import net.wg.gui.prebattle.squad.SquadViewNY;
     import net.wg.gui.prebattle.squad.SquadWindow;
     import net.wg.gui.prebattle.squad.SquadWindowCIGenerator;
+    import net.wg.gui.prebattle.squad.SquadWindowNY;
     import net.wg.gui.prebattle.squad.UserDataFlags;
     import net.wg.gui.rally.AbstractRallyView;
     import net.wg.gui.rally.AbstractRallyWindow;
@@ -2004,6 +2014,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.ISimpleDialogMeta;
     import net.wg.infrastructure.base.meta.ISkillDropMeta;
     import net.wg.infrastructure.base.meta.ISmartPopOverViewMeta;
+    import net.wg.infrastructure.base.meta.ISquadTypeSelectPopoverMeta;
     import net.wg.infrastructure.base.meta.ISquadViewMeta;
     import net.wg.infrastructure.base.meta.ISquadWindowMeta;
     import net.wg.infrastructure.base.meta.IStoreMeta;
@@ -3725,6 +3736,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODEVO:Class = FortModeVO;
         
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTWAITINGVO:Class = FortWaitingVO;
+        
         public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTWELCOMEVIEWVO:Class = FortWelcomeViewVO;
         
         public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTIFICATIONVO:Class = FortificationVO;
@@ -4079,9 +4092,15 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYSELECT:Class = FightButtonFancySelect;
         
+        public static var NET_WG_GUI_LOBBY_HEADER_HEADERBG:Class = HeaderBg;
+        
         public static var NET_WG_GUI_LOBBY_HEADER_LOBBYHEADER:Class = LobbyHeader;
         
         public static var NET_WG_GUI_LOBBY_HEADER_QUESTSCONTROL:Class = QuestsControl;
+        
+        public static var NET_WG_GUI_LOBBY_HEADER_SQUADBUTTONFANCYRENDERER:Class = SquadButtonFancyRenderer;
+        
+        public static var NET_WG_GUI_LOBBY_HEADER_SQUADTYPESELECTPOPOVER:Class = SquadTypeSelectPopover;
         
         public static var NET_WG_GUI_LOBBY_HEADER_TANKPANEL:Class = TankPanel;
         
@@ -4112,6 +4131,12 @@ package net.wg.infrastructure.base.meta.impl
         public static var NET_WG_GUI_LOBBY_HEADER_MAINMENUBUTTONBAR_MAINMENUBUTTONBAR:Class = MainMenuButtonBar;
         
         public static var NET_WG_GUI_LOBBY_HEADER_MAINMENUBUTTONBAR_MAINMENUHELPER:Class = MainMenuHelper;
+        
+        public static var NET_WG_GUI_LOBBY_HEADER_NY_FLAKE:Class = Flake;
+        
+        public static var NET_WG_GUI_LOBBY_HEADER_NY_FLAKEANIM:Class = FlakeAnim;
+        
+        public static var NET_WG_GUI_LOBBY_HEADER_NY_SNOWPLACE:Class = SnowPlace;
         
         public static var NET_WG_GUI_LOBBY_HEADER_VO_ACCOUNTPOPOVERBLOCKVO:Class = AccountPopoverBlockVo;
         
@@ -5541,11 +5566,17 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADTEAMSECTION:Class = SquadTeamSection;
         
+        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADTEAMSECTIONNY:Class = SquadTeamSectionNY;
+        
         public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADVIEW:Class = SquadView;
+        
+        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADVIEWNY:Class = SquadViewNY;
         
         public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOW:Class = SquadWindow;
         
         public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOWCIGENERATOR:Class = SquadWindowCIGenerator;
+        
+        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOWNY:Class = SquadWindowNY;
         
         public static var NET_WG_GUI_PREBATTLE_SQUAD_USERDATAFLAGS:Class = UserDataFlags;
         
@@ -6065,6 +6096,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_INFRASTRUCTURE_BASE_META_ISMARTPOPOVERVIEWMETA:Class = ISmartPopOverViewMeta;
         
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISQUADTYPESELECTPOPOVERMETA:Class = ISquadTypeSelectPopoverMeta;
+        
         public static var NET_WG_INFRASTRUCTURE_BASE_META_ISQUADVIEWMETA:Class = ISquadViewMeta;
         
         public static var NET_WG_INFRASTRUCTURE_BASE_META_ISQUADWINDOWMETA:Class = ISquadWindowMeta;
@@ -6418,6 +6451,8 @@ package net.wg.infrastructure.base.meta.impl
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SKILLDROPMETA:Class = SkillDropMeta;
         
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SMARTPOPOVERVIEWMETA:Class = SmartPopOverViewMeta;
+        
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SQUADTYPESELECTPOPOVERMETA:Class = SquadTypeSelectPopoverMeta;
         
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SQUADVIEWMETA:Class = SquadViewMeta;
         

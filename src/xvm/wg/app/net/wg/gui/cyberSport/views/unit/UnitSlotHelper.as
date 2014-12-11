@@ -2,14 +2,15 @@ package net.wg.gui.cyberSport.views.unit
 {
     import net.wg.gui.rally.controls.BaseRallySlotHelper;
     import net.wg.gui.rally.controls.interfaces.IRallySimpleSlotRenderer;
-    import net.wg.gui.rally.interfaces.IRallySlotVO;
-    import net.wg.gui.rally.controls.RallySimpleSlotRenderer;
-    import net.wg.gui.rally.vo.RallySlotVO;
     import flash.display.InteractiveObject;
+    import net.wg.gui.rally.interfaces.IRallySlotVO;
     import net.wg.gui.utils.ComplexTooltipHelper;
+    import net.wg.gui.rally.vo.RallySlotVO;
+    import net.wg.gui.rally.controls.RallySimpleSlotRenderer;
     import net.wg.data.constants.Tooltips;
     import net.wg.gui.cyberSport.controls.CSVehicleButton;
     import net.wg.gui.components.controls.ButtonIconTextTransparent;
+    import net.wg.data.constants.Values;
     
     public class UnitSlotHelper extends BaseRallySlotHelper
     {
@@ -54,64 +55,6 @@ if(_loc3_)
     _loc3_.levelLbl.text = "0";
     _loc3_.levelLbl.alpha = 0.33;
     _loc3_.lockBackground.visible = false;
-}
-}
-
-override public function updateComponents(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
-{
-super.updateComponents(param1,param2);
-this.updateCommonControls(param1,param2);
-var _loc3_:RallySimpleSlotRenderer = param1 as RallySimpleSlotRenderer;
-var _loc4_:IRallySlotVO = param2 as IRallySlotVO;
-var _loc5_:SlotRenderer = param1 as SlotRenderer;
-if(_loc5_)
-{
-    if(_loc4_)
-    {
-        _loc5_.setStatus(_loc4_.playerStatus);
-        _loc5_.levelLbl.text = String(_loc4_.selectedVehicleLevel);
-        _loc5_.levelLbl.alpha = _loc4_.selectedVehicleLevel?1:0.33;
-        if(_loc4_.player)
-        {
-            _loc5_.setSpeakers(_loc4_.player.isPlayerSpeaking,true);
-            _loc5_.selfBg.visible = _loc4_.player.himself;
-            _loc5_.commander.visible = _loc4_.player.isCommander;
-        }
-        else
-        {
-            _loc5_.commander.visible = false;
-            _loc5_.selfBg.visible = false;
-            _loc5_.setSpeakers(false,true);
-        }
-        _loc5_.orderNo.visible = !_loc5_.commander.visible;
-    }
-    _loc5_.updateVoiceWave();
-}
-}
-
-private function updateCommonControls(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
-{
-var _loc3_:RallySlotVO = param2 as RallySlotVO;
-var _loc4_:Object = param1;
-if(_loc3_)
-{
-    if(!_loc3_.isClosed)
-    {
-        if(_loc3_.player)
-        {
-            _loc4_.ratingTF.text = _loc3_.player.rating;
-            _loc4_.ratingTF.visible = true;
-            _loc4_.slotLabel.width = _loc4_.ratingTF.x + _loc4_.ratingTF.width - _loc4_.slotLabel.x - _loc4_.ratingTF.textWidth - 10;
-        }
-        else
-        {
-            _loc4_.ratingTF.visible = false;
-        }
-    }
-    else
-    {
-        _loc4_.lockBackground.visible = true;
-    }
 }
 }
 
@@ -198,6 +141,109 @@ if((_loc7_) && (param1 == _loc7_.removeBtn) && _loc7_.removeBtn.icon == ButtonIc
     if(_loc9_.length > 0)
     {
         App.toolTipMgr.showComplex(_loc9_);
+    }
+}
+}
+
+override public function updateComponents(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
+{
+var _loc4_:IRallySlotVO = null;
+var _loc6_:* = false;
+var _loc7_:String = null;
+super.updateComponents(param1,param2);
+this.updateCommonControls(param1,param2);
+var _loc3_:RallySimpleSlotRenderer = param1 as RallySimpleSlotRenderer;
+_loc4_ = param2 as IRallySlotVO;
+var _loc5_:SlotRenderer = param1 as SlotRenderer;
+if(_loc5_)
+{
+    if(_loc4_)
+    {
+        _loc5_.setStatus(_loc4_.playerStatus);
+        _loc5_.levelLbl.text = String(_loc4_.selectedVehicleLevel);
+        _loc5_.levelLbl.alpha = _loc4_.selectedVehicleLevel?1:0.33;
+        if(!_loc4_.isClosed)
+        {
+            if(_loc4_.isCommanderState)
+            {
+                if(_loc4_.player)
+                {
+                    _loc5_.removeBtn.visible = _loc5_.index > 0;
+                    _loc5_.removeBtn.icon = ButtonIconTextTransparent.ICON_CROSS;
+                    _loc5_.removeBtn.width = BTN_PROPS.remove.width;
+                    _loc5_.removeBtn.x = BTN_PROPS.remove.x;
+                    _loc5_.removeBtn.label = Values.EMPTY_STR;
+                }
+            }
+            else
+            {
+                _loc6_ = false;
+                if((_loc4_) && (_loc4_.player))
+                {
+                    _loc6_ = (_loc4_.player) && (_loc4_.player.himself);
+                }
+                _loc5_.removeBtn.visible = _loc6_;
+                if(_loc6_)
+                {
+                    _loc5_.removeBtn.icon = ButtonIconTextTransparent.ICON_CROSS;
+                    _loc5_.removeBtn.width = BTN_PROPS.remove.width;
+                    _loc5_.removeBtn.x = BTN_PROPS.remove.x;
+                    _loc5_.removeBtn.label = Values.EMPTY_STR;
+                }
+            }
+        }
+        _loc5_.statusIndicator.visible = true;
+    }
+    else
+    {
+        _loc5_.removeBtn.visible = _loc4_.isCommanderState;
+        _loc5_.removeBtn.icon = ButtonIconTextTransparent.ICON_NO_ICON;
+        _loc5_.removeBtn.width = BTN_PROPS.lock.width;
+        _loc5_.removeBtn.x = BTN_PROPS.lock.x;
+        _loc5_.removeBtn.label = CYBERSPORT.WINDOW_UNIT_UNLOCKSLOT;
+        _loc5_.statusIndicator.visible = false;
+    }
+    if(_loc4_.player)
+    {
+        _loc7_ = _loc4_.player.userName;
+        _loc5_.setSpeakers(_loc4_.player.isPlayerSpeaking,true);
+        _loc5_.selfBg.visible = _loc4_.player.himself;
+        _loc5_.commander.visible = _loc4_.player.isCommander;
+    }
+    else
+    {
+        _loc5_.commander.visible = false;
+        _loc5_.selfBg.visible = false;
+        _loc5_.setSpeakers(false,true);
+    }
+    _loc5_.orderNo.visible = !_loc5_.commander.visible;
+    _loc5_.updateVoiceWave();
+}
+}
+
+private function updateCommonControls(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
+{
+var _loc3_:RallySlotVO = param2 as RallySlotVO;
+var _loc4_:Object = param1;
+if(_loc3_)
+{
+    if(!_loc3_.isClosed)
+    {
+        if(_loc3_.player)
+        {
+            _loc4_.ratingTF.text = _loc3_.player.rating;
+            _loc4_.ratingTF.visible = true;
+            _loc4_.slotLabel.width = _loc4_.ratingTF.x + _loc4_.ratingTF.width - _loc4_.slotLabel.x - _loc4_.ratingTF.textWidth - 10;
+            formatPlayerName(_loc4_.slotLabel,param2);
+        }
+        else
+        {
+            _loc4_.ratingTF.visible = false;
+        }
+    }
+    else
+    {
+        _loc4_.lockBackground.visible = true;
     }
 }
 }

@@ -95,6 +95,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
             fadeSomeElementSimply(param1.getTransportToggle(),DisplayObject(this._mainView.header.transportBtn));
             fadeSomeElementSimply(param1.getStatsBtn(),DisplayObject(this._mainView.header.statsBtn));
             fadeSomeElementSimply(param1.getInfoTF(),this._mainView.header.infoTF);
+            fadeSomeElementSimply(param1.getTimeAlert(),this._mainView.header.timeAlert);
             this._mainView.header.title.htmlText = param1.stateTexts.headerTitle;
             fadeSomeElementSimply(param1.getTotalDepotQuantity(),this._mainView.header.totalDepotQuantityText);
             if((param1.getTutorialArrow().isVisible) && (param1.getTutorialArrow().isAnimated))

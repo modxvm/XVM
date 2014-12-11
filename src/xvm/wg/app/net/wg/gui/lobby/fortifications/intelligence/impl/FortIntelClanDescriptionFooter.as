@@ -32,6 +32,10 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private static var ALPHA_DISABLE:Number = 0.5;
         
+        private static var DEFAULT_WAR_TIME_POSITION:int = 46;
+        
+        private static var WAR_TIME_Y_OFFSET:int = 2;
+        
         private static function onCalendarBtnRollOut(param1:MouseEvent) : void
         {
             App.toolTipMgr.hide();
@@ -245,6 +249,31 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
                 this.removeLinkBtnListeners();
             }
             
+            
+            if(this._model.warPlannedTime)
+            {
+                this.updateWarTimePosition();
+            }
+        }
+        
+        private function updateWarTimePosition() : void
+        {
+            if(!this.warTimeTF.visible)
+            {
+                return;
+            }
+            if(this.linkBtn.visible)
+            {
+                this.warTimeTF.y = this.linkBtn.y - WAR_TIME_Y_OFFSET;
+            }
+            else if(this.calendarBtn.visible)
+            {
+                this.warTimeTF.y = this.calendarBtn.y - WAR_TIME_Y_OFFSET;
+            }
+            else
+            {
+                this.warTimeTF.y = DEFAULT_WAR_TIME_POSITION;
+            }
             
         }
         

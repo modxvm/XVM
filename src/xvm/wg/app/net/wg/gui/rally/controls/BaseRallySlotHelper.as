@@ -4,9 +4,10 @@ package net.wg.gui.rally.controls
     import net.wg.gui.rally.controls.interfaces.IRallySimpleSlotRenderer;
     import net.wg.data.constants.Values;
     import net.wg.gui.interfaces.IResettable;
-    import net.wg.gui.rally.interfaces.IRallySlotVO;
-    import net.wg.infrastructure.interfaces.IUserProps;
     import flash.display.InteractiveObject;
+    import net.wg.gui.rally.interfaces.IRallySlotVO;
+    import flash.text.TextField;
+    import net.wg.infrastructure.interfaces.IUserProps;
     
     public class BaseRallySlotHelper extends Object implements ISlotRendererHelper
     {
@@ -36,10 +37,18 @@ package net.wg.gui.rally.controls
             IResettable(_loc2_.vehicleBtn).reset();
         }
         
+        public function onControlRollOver(param1:InteractiveObject, param2:IRallySimpleSlotRenderer, param3:IRallySlotVO, param4:* = null) : void
+        {
+            var _loc5_:RallySimpleSlotRenderer = param2 as RallySimpleSlotRenderer;
+            if((param1 == _loc5_.contextMenuArea) && (param3) && (param3.player))
+            {
+                App.toolTipMgr.show(param3.player.getToolTip());
+            }
+        }
+        
         public function updateComponents(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
         {
             var _loc5_:* = false;
-            var _loc6_:IUserProps = null;
             var _loc3_:RallySimpleSlotRenderer = param1 as RallySimpleSlotRenderer;
             var _loc4_:* = false;
             if(param2)
@@ -98,16 +107,7 @@ package net.wg.gui.rally.controls
                 _loc3_.slotLabel.visible = !_loc4_;
                 if(param2.player)
                 {
-                    _loc6_ = App.utils.commons.getUserProps(param2.player.userName,param2.player.clanAbbrev,param2.player.region,param2.player.igrType,param2.player.referralType);
-                    if(!param2.player.himself)
-                    {
-                        _loc6_.rgb = param2.player.color;
-                    }
-                    else
-                    {
-                        _loc6_.rgb = 13224374;
-                    }
-                    App.utils.commons.formatPlayerName(_loc3_.slotLabel,_loc6_);
+                    this.formatPlayerName(_loc3_.slotLabel,param2);
                     if(_loc3_.contextMenuArea)
                     {
                         _loc3_.contextMenuArea.width = _loc3_.slotLabel.width;
@@ -120,13 +120,18 @@ package net.wg.gui.rally.controls
             }
         }
         
-        public function onControlRollOver(param1:InteractiveObject, param2:IRallySimpleSlotRenderer, param3:IRallySlotVO, param4:* = null) : void
+        protected function formatPlayerName(param1:TextField, param2:IRallySlotVO) : void
         {
-            var _loc5_:RallySimpleSlotRenderer = param2 as RallySimpleSlotRenderer;
-            if((param1 == _loc5_.contextMenuArea) && (param3) && (param3.player))
+            var _loc3_:IUserProps = App.utils.commons.getUserProps(param2.player.userName,param2.player.clanAbbrev,param2.player.region,param2.player.igrType,param2.player.referralType);
+            if(!param2.player.himself)
             {
-                App.toolTipMgr.show(param3.player.getToolTip());
+                _loc3_.rgb = param2.player.color;
             }
+            else
+            {
+                _loc3_.rgb = 13224374;
+            }
+            App.utils.commons.formatPlayerName(param1,_loc3_);
         }
         
         protected function isShowSlotRestrictions(param1:RallySimpleSlotRenderer, param2:IRallySlotVO) : Boolean

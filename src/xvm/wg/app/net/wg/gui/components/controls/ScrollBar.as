@@ -1,6 +1,10 @@
 package net.wg.gui.components.controls
 {
     import scaleform.clik.controls.ScrollBar;
+    import flash.display.Sprite;
+    import flash.text.TextField;
+    import scaleform.clik.constants.InvalidationType;
+    import flash.geom.Rectangle;
     import flash.events.MouseEvent;
     import flash.events.Event;
     import scaleform.gfx.MouseEventEx;
@@ -22,6 +26,8 @@ package net.wg.gui.components.controls
         public var downArrowWg:SoundButton;
         
         public var thumbWg:SoundButton;
+        
+        private var container:Sprite;
         
         override public function setScrollProperties(param1:Number, param2:Number, param3:Number, param4:Number = undefined) : void
         {
@@ -60,6 +66,26 @@ package net.wg.gui.components.controls
             super.configUI();
         }
         
+        override protected function draw() : void
+        {
+            var _loc1_:TextField = null;
+            if(isInvalid(InvalidationType.SIZE))
+            {
+                this.layoutContainer();
+                updateThumb();
+            }
+            else if(isInvalid(InvalidationType.DATA))
+            {
+                if(_scrollTarget is TextField)
+                {
+                    _loc1_ = _scrollTarget as TextField;
+                    this.setScrollProperties(_loc1_.bottomScrollV - _loc1_.scrollV,1,_loc1_.maxScrollV);
+                }
+                updateThumbPosition();
+            }
+            
+        }
+        
         override protected function scrollUp() : void
         {
             position = position - 1;
@@ -76,10 +102,14 @@ package net.wg.gui.components.controls
             downArrow = this.downArrowWg;
             thumb = this.thumbWg;
             super.initialize();
+            constraints.removeAllElements();
+            this.initContainer();
+            scale9Grid = new Rectangle(0,0,1,1);
         }
         
         override protected function onDispose() : void
         {
+            this.container = null;
             super.onDispose();
         }
         
@@ -118,6 +148,28 @@ package net.wg.gui.components.controls
                 return;
             }
             super.handleTrackClick(param1);
+        }
+        
+        private function initContainer() : void
+        {
+            this.container = new Sprite();
+            removeChild(upArrow);
+            removeChild(downArrow);
+            removeChild(thumb);
+            removeChild(track);
+            this.container.addChild(track);
+            this.container.addChild(upArrow);
+            this.container.addChild(downArrow);
+            this.container.addChild(thumb);
+            addChild(this.container);
+        }
+        
+        private function layoutContainer() : void
+        {
+            var _loc1_:Number = isHorizontal?_width:_height;
+            downArrow.y = _loc1_;
+            track.y = upArrow.y + upArrow.height;
+            track.height = _loc1_ - track.y - downArrow.height;
         }
     }
 }

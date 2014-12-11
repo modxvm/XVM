@@ -246,6 +246,8 @@ package
         
         public static var TEAM_STATS_LABELS_MILEAGE:String = "#battle_results:team/stats/labels_mileage";
         
+        public static var TEAM_STATS_LABELS_HEALEDHP:String = "#battle_results:team/stats/labels_healedHP";
+        
         public static var TEAM_STATS_MILEAGE:String = "#battle_results:team/stats/mileage";
         
         public static var TEAM_STATS_CLOSE:String = "#battle_results:team/stats/close";

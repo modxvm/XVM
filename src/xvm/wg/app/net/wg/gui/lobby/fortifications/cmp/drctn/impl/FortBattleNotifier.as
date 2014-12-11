@@ -60,22 +60,34 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         
         override protected function draw() : void
         {
-            var _loc1_:String = null;
             buttonMode = true;
             useHandCursor = true;
             if(isInvalid(InvalidationType.DATA))
             {
                 if(this.data)
                 {
-                    this.visible = true;
-                    this.updateHover();
-                    _loc1_ = this.data.hasActiveBattles?HAS_ACTIVE_BATTLES:NORMAL;
-                    gotoAndPlay(_loc1_);
+                    App.utils.scheduler.envokeInNextFrame(this.applyData);
                 }
                 else
                 {
                     this.visible = false;
                 }
+            }
+        }
+        
+        private function applyData() : void
+        {
+            var _loc1_:String = null;
+            if(this.data)
+            {
+                this.visible = true;
+                this.updateHover();
+                _loc1_ = this.data.hasActiveBattles?HAS_ACTIVE_BATTLES:NORMAL;
+                gotoAndPlay(_loc1_);
+            }
+            else
+            {
+                this.visible = false;
             }
         }
         

@@ -58,6 +58,7 @@ package net.wg.gui.prebattle.invites
             this.rosterList.useRightButton = true;
             this.rosterList.useRightButtonForSelect = true;
             this.rosterList.dataProvider = this.dataProvider as IDataProvider;
+            this.rosterList.smartScrollBar = true;
             this.initDispatcher(SendInvitesEvent.INIT_COMPONENT,this);
         }
         

@@ -5,6 +5,8 @@ package net.wg.infrastructure.base.meta
     public interface IFortWelcomeViewMeta extends IEventDispatcher
     {
         
+        function onViewReadyS() : void;
+        
         function onCreateBtnClickS() : void;
         
         function onNavigateS(param1:String) : void;

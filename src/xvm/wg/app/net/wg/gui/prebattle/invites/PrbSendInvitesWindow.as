@@ -240,6 +240,7 @@ this.sendButton.enabled = false;
 this.receiverList.addEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.receiverList_itemDoubleClickHandler);
 this.receiverList.addEventListener(ListEventEx.ITEM_CLICK,this.receiverList_ClickHandler);
 this.receiverList.dataProvider = this.receiverData;
+this.receiverList.smartScrollBar = true;
 this.friendMemberDataProvider.addEventListener(Event.CHANGE,this.onUsersListChange);
 this.clanMemberDataProvider.addEventListener(Event.CHANGE,this.onUsersListChange);
 this.searchMemberDataProvider.addEventListener(Event.CHANGE,this.onUsersListChange);

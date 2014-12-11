@@ -3,6 +3,7 @@ package net.wg.gui.prebattle.squad
     import net.wg.gui.rally.controls.VoiceRallySlotRenderer;
     import net.wg.gui.components.advanced.InviteIndicator;
     import flash.events.MouseEvent;
+    import net.wg.gui.rally.interfaces.IRallySlotVO;
     import net.wg.gui.components.advanced.IndicationOfStatus;
     import net.wg.data.VO.ExtendedUserVO;
     import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
@@ -45,6 +46,12 @@ package net.wg.gui.prebattle.squad
             super.onDispose();
         }
         
+        override public function set slotData(param1:IRallySlotVO) : void
+        {
+            visible = Boolean(param1);
+            super.slotData = param1;
+        }
+        
         override public function setStatus(param1:int) : String
         {
             var _loc2_:String = IndicationOfStatus.STATUS_NORMAL;
@@ -71,6 +78,24 @@ package net.wg.gui.prebattle.squad
                     App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
                 }
             }
+        }
+        
+        override protected function initControlsState() : void
+        {
+            if(!helper)
+            {
+                return;
+            }
+            super.initControlsState();
+        }
+        
+        override public function updateComponents() : void
+        {
+            if(!helper)
+            {
+                return;
+            }
+            super.updateComponents();
         }
         
         public function set isCreator(param1:Boolean) : void

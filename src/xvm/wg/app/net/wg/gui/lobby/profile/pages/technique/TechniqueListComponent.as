@@ -150,6 +150,7 @@ package net.wg.gui.lobby.profile.pages.technique
             this.sortableButtonBar.dataProvider = getHeadersProvider();
             this.sortableButtonBar.addEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingChangedHandler,false,0,true);
             this.techniqueList.columnsData = this.sortableButtonBar.dataProvider;
+            this.techniqueList.smartScrollBar = true;
             this.applyDefaultSorting();
         }
         

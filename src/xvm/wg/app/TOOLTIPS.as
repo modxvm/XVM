@@ -172,6 +172,10 @@ package
         
         public static var BATTLETYPES_BATTLETUTORIAL:String = "#tooltips:battleTypes/battleTutorial";
         
+        public static var BATTLETYPES_SQUAD:String = "#tooltips:battleTypes/squad";
+        
+        public static var BATTLETYPES_EVENTSQUAD:String = "#tooltips:battleTypes/eventSquad";
+        
         public static var REDBUTTON_DISABLED_BUYNEEDED:String = "#tooltips:redButton/disabled/buyNeeded";
         
         public static var REDBUTTON_DISABLED_REPAIRNEEDED:String = "#tooltips:redButton/disabled/repairNeeded";
@@ -867,6 +871,14 @@ package
         public static var BATTLETYPES_BATTLETUTORIAL_HEADER:String = BATTLETYPES_BATTLETUTORIAL + "/header";
         
         public static var BATTLETYPES_BATTLETUTORIAL_BODY:String = BATTLETYPES_BATTLETUTORIAL + "/body";
+        
+        public static var BATTLETYPES_SQUAD_HEADER:String = BATTLETYPES_SQUAD + "/header";
+        
+        public static var BATTLETYPES_SQUAD_BODY:String = BATTLETYPES_SQUAD + "/body";
+        
+        public static var BATTLETYPES_EVENTSQUAD_HEADER:String = BATTLETYPES_EVENTSQUAD + "/header";
+        
+        public static var BATTLETYPES_EVENTSQUAD_BODY:String = BATTLETYPES_EVENTSQUAD + "/body";
         
         public static var REDBUTTON_DISABLED_BUYNEEDED_HEADER:String = REDBUTTON_DISABLED_BUYNEEDED + "/header";
         

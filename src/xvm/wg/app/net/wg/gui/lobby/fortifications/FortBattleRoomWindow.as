@@ -19,6 +19,7 @@ package net.wg.gui.lobby.fortifications
         public function FortBattleRoomWindow()
         {
             super();
+            isSourceTracked = true;
             showWindowBgForm = true;
             canMinimize = true;
             UIID = 29;

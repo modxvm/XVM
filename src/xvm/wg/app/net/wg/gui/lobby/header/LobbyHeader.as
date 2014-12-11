@@ -4,6 +4,7 @@ package net.wg.gui.lobby.header
     import net.wg.infrastructure.base.meta.ILobbyHeaderMeta;
     import net.wg.gui.interfaces.IHelpLayoutComponent;
     import flash.display.Sprite;
+    import net.wg.gui.lobby.header.ny.SnowPlace;
     import net.wg.gui.lobby.header.mainMenuButtonBar.MainMenuButtonBar;
     import net.wg.gui.lobby.header.headerButtonBar.HeaderButtonBar;
     import net.wg.gui.lobby.header.mainMenuButtonBar.MainMenuHelper;
@@ -48,9 +49,11 @@ package net.wg.gui.lobby.header
         
         private static var BUBBLE_TOOLTIP_Y:Number = 32;
         
-        public var centerBg:Sprite = null;
+        public var centerBg:HeaderBg = null;
         
         public var resizeBg:Sprite = null;
+        
+        public var snowPlace:SnowPlace = null;
         
         public var mainMenuGradient:Sprite = null;
         
@@ -76,6 +79,8 @@ package net.wg.gui.lobby.header
         
         private var MAX_SCREEN_SIZE:Number = 1600;
         
+        private var _isEventSquad:Boolean = false;
+        
         override protected function onPopulate() : void
         {
             super.onPopulate();
@@ -86,6 +91,7 @@ package net.wg.gui.lobby.header
             super.configUI();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement("centerBg",this.centerBg,Constraints.CENTER_H);
+            constraints.addElement("snowPlace",this.snowPlace,Constraints.CENTER_H);
             constraints.addElement("resizeBg",this.resizeBg,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
             constraints.addElement("fightBtn",this.fightBtn,Constraints.CENTER_H);
             constraints.addElement("mainMenuButtonBar",this.mainMenuButtonBar,Constraints.CENTER_H);
@@ -183,7 +189,14 @@ package net.wg.gui.lobby.header
                     showPremiumDialogS();
                     break;
                 case HeaderButtonsHelper.ITEM_ID_SQUAD:
-                    showSquadS();
+                    if(this.isEventSquad)
+                    {
+                        App.popoverMgr.show(_loc2_,Aliases.SQUAD_TYPE_SELECT_POPOVER,null,_loc2_);
+                    }
+                    else
+                    {
+                        showSquadS();
+                    }
                     break;
                 case HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR:
                     App.popoverMgr.show(_loc2_,Aliases.BATTLE_TYPE_SELECT_POPOVER,null,_loc2_);
@@ -256,6 +269,7 @@ package net.wg.gui.lobby.header
         var _loc2_:HBC_SquadDataVo = HBC_SquadDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SQUAD));
         if(_loc2_)
         {
+            _loc2_.isEventSquad = this._isEventSquad;
             _loc2_.isInSquad = param1;
             this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_SQUAD);
         }
@@ -412,6 +426,41 @@ package net.wg.gui.lobby.header
         {
             App.utils.tweenAnimator.addFadeOutAnim(this._bubbleTooltip,null);
         }
+    }
+    
+    public function get isEventSquad() : Boolean
+    {
+        return this._isEventSquad;
+    }
+    
+    public function set isEventSquad(param1:Boolean) : void
+    {
+        this._isEventSquad = param1;
+        this.centerBg.bg_eventSquad.visible = this._isEventSquad;
+        this.centerBg.bg.visible = !this._isEventSquad;
+        var _loc2_:HBC_SquadDataVo = HBC_SquadDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SQUAD));
+        if(_loc2_)
+        {
+            _loc2_.isEventSquad = this._isEventSquad;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+        }
+        if(this._isEventSquad)
+        {
+            this.snowPlace.start();
+        }
+        else
+        {
+            this.snowPlace.stop();
+        }
+    }
+    
+    public function as_isEventSquad(param1:Boolean) : void
+    {
+        if(this.isEventSquad == param1)
+        {
+            return;
+        }
+        this.isEventSquad = param1;
     }
 }
 }

@@ -14,5 +14,7 @@ package net.wg.infrastructure.base.meta
         function as_loadView(param1:String, param2:String) : void;
         
         function as_setCommonData(param1:Object) : void;
+        
+        function as_waitingData(param1:Object) : void;
     }
 }

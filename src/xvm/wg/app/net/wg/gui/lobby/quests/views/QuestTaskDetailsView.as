@@ -29,6 +29,8 @@ package net.wg.gui.lobby.quests.views
         
         private static var VERTICAL_OFFSET:int = 15;
         
+        private static var SCROLLBAR_AWARD_GAP:int = 10;
+        
         public var headerTF:TextField = null;
         
         public var scrollPane:ResizableScrollPane = null;
@@ -80,6 +82,11 @@ package net.wg.gui.lobby.quests.views
             this.scrollPane.addEventListener(ScrollPaneEvent.POSITION_CHANGED,this.onScrollBarPositionChangedHandler);
             this.applyBtn.addEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler);
+            this.taskDescriptionTF.wordWrap = true;
+            this.taskDescriptionTF.multiline = true;
+            this.taskDescriptionTF.mouseEnabled = false;
+            this.awardsBlock.visible = false;
+            this.awardsBlock.addEventListener(Event.RESIZE,this.onAwardsBlockResizeHandler);
         }
         
         override protected function draw() : void
@@ -111,6 +118,7 @@ package net.wg.gui.lobby.quests.views
                     {
                         if((this.applyBtn.visible) || (this.cancelBtn.visible))
                         {
+                            this.taskDescriptionTF.height = this.taskDescriptionTF.textHeight + 5;
                             this.taskDescriptionTF.y = this.applyBtn.y - VERTICAL_OFFSET - this.taskDescriptionTF.height;
                         }
                         else
@@ -137,6 +145,7 @@ package net.wg.gui.lobby.quests.views
             this.scrollPane.removeEventListener(ScrollPaneEvent.POSITION_CHANGED,this.onScrollBarPositionChangedHandler);
             this.applyBtn.removeEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
             this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler);
+            this.awardsBlock.removeEventListener(Event.RESIZE,this.onAwardsBlockResizeHandler);
             this.headerTF = null;
             this.scrollPane.dispose();
             this.scrollPane = null;
@@ -157,6 +166,11 @@ package net.wg.gui.lobby.quests.views
             super.onDispose();
         }
         
+        private function showAwardsBlock() : void
+        {
+            this.awardsBlock.visible = true;
+        }
+        
         private function onResizeEvent(param1:Event) : void
         {
             var _loc2_:int = this.awardsBlock.y;
@@ -175,7 +189,7 @@ package net.wg.gui.lobby.quests.views
             
             
             this.awardsBlock.y = _loc2_;
-            this.scrollPane.height = this.awardsBlock.y - this.scrollPane.y - 5;
+            this.scrollPane.height = this.awardsBlock.y - this.scrollPane.y - SCROLLBAR_AWARD_GAP;
             this.scrollBar.height = this.scrollPane.height;
             this.scrollPane.invalidateSize();
         }
@@ -208,6 +222,12 @@ package net.wg.gui.lobby.quests.views
         private function onCancelBtnClickHandler(param1:ButtonEvent) : void
         {
             dispatchEvent(new QuestTaskDetailsViewEvent(QuestTaskDetailsViewEvent.CANCEL_TASK,this._model.taskID));
+        }
+        
+        private function onAwardsBlockResizeHandler(param1:Event) : void
+        {
+            this.awardsBlock.removeEventListener(Event.RESIZE,this.onAwardsBlockResizeHandler);
+            App.utils.scheduler.envokeInNextFrame(this.showAwardsBlock);
         }
     }
 }

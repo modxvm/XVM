@@ -24,6 +24,14 @@ package net.wg.gui.lobby.quests.components
             this.hideCompletedTasks.addEventListener(Event.SELECT,this.onHideCompletedTasksSelect);
         }
         
+        private static var LEFT_MARGIN:Number = 19;
+        
+        private static var LABEL_FILTERS_GAP:Number = 9;
+        
+        private static var FILTERS_GAP:Number = 5;
+        
+        private static var FILTERS_CHECKBOX_GAP:Number = 14;
+        
         public var filtersLabelTf:TextField;
         
         public var vehicleTypeFilter:DropDownImageText;
@@ -120,7 +128,21 @@ package net.wg.gui.lobby.quests.components
             if((isInvalid(InvalidationType.DATA)) && !(this._data == null))
             {
                 this.filtersLabelTf.htmlText = this._data.filtersLabel;
+                this.layoutComponents();
             }
+        }
+        
+        private function layoutComponents() : void
+        {
+            var _loc1_:* = NaN;
+            _loc1_ = LEFT_MARGIN;
+            this.filtersLabelTf.x = Math.round(_loc1_);
+            _loc1_ = _loc1_ + (this.filtersLabelTf.textWidth + LABEL_FILTERS_GAP);
+            this.vehicleTypeFilter.x = Math.round(_loc1_);
+            _loc1_ = _loc1_ + (this.vehicleTypeFilter.width + FILTERS_GAP);
+            this.taskTypeFilter.x = Math.round(_loc1_);
+            _loc1_ = _loc1_ + (this.taskTypeFilter.width + FILTERS_CHECKBOX_GAP);
+            this.hideCompletedTasks.x = Math.round(_loc1_);
         }
         
         override protected function onDispose() : void

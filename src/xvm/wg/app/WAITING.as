@@ -282,6 +282,8 @@ package
         
         public static var FORT_FAVORITE_REMOVE:String = "#waiting:fort/favorite/remove";
         
+        public static var FORT_SERVERCONNECTION:String = "#waiting:fort/serverConnection";
+        
         public static var MESSAGE_ENUM:Array = [MESSAGE_QUEUE,MESSAGE_USEAUTOSEARCH,MESSAGE_AUTOLOGIN,MESSAGE_ANOTHER_PERIPHERY,MESSAGE_CHECKOUT_ERROR,MESSAGE_AUTO_LOGIN_QUERY_FAILED,MESSAGE_AUTO_LOGIN_ACTIVATING];
         
         public static var TITLES_ENUM:Array = [TITLES_QUEUE,TITLES_REGISTERING,TITLES_ANOTHER_PERIPHERY,TITLES_CHECKOUT_ERROR,TITLES_AUTO_LOGIN_QUERY_FAILED];

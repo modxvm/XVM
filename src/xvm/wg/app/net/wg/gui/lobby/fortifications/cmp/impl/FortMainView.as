@@ -25,6 +25,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
     import net.wg.gui.lobby.fortifications.data.FunctionalStates;
     import net.wg.gui.lobby.fortifications.data.FortModeVO;
     import flash.geom.Point;
+    import net.wg.gui.lobby.fortifications.data.FortConstants;
     import net.wg.gui.lobby.fortifications.utils.impl.FortsControlsAligner;
     import net.wg.infrastructure.events.LibraryLoaderEvent;
     import flash.events.Event;
@@ -51,8 +52,6 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this.fortWelcomeCommanderViewImporter = null;
             this.visible = false;
         }
-        
-        private static var CHAT_HEIGHT:Number = 33;
         
         private static function onTransportButtonMouseOutHandler(param1:MouseEvent) : void
         {
@@ -344,7 +343,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         private function updateControlPositions() : void
         {
             var _loc1_:Number = localToGlobal(new Point(0,0)).y;
-            var _loc2_:Number = App.appHeight - _loc1_ - CHAT_HEIGHT;
+            var _loc2_:Number = App.appHeight - _loc1_ - FortConstants.CHAT_HEIGHT;
             this.landscapeMask.setActualSize(App.appWidth,_loc2_);
             FortsControlsAligner.instance.centerControl(this._buildings,false);
             this._buildings.y = Math.round((this.landscapeMask.height - this._buildings.height) / 2);

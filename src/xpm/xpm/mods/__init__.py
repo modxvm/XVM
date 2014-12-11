@@ -1,11 +1,11 @@
 """ XPM mods loader (c) www.modxvm.com 2013-2014 """
 
-_XPM_VER = '1.6.0'
+_XPM_VER = '1.6.1'
 
 import glob
 import os
 import ResMgr
-from gui import VERSION_FILE_PATH
+from helpers import VERSION_FILE_PATH
 
 # get version
 ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')

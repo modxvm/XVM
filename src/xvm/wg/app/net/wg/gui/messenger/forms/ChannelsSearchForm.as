@@ -64,6 +64,7 @@ package net.wg.gui.messenger.forms
             constraints.addElement("bg",this.bg,Constraints.ALL);
             constraints.addElement("joinButton",this.joinButton,Constraints.LEFT | Constraints.BOTTOM);
             this.searchResultList.sbPadding = new Padding(2,2,2,2);
+            this.searchResultList.smartScrollBar = true;
         }
         
         override public function setSize(param1:Number, param2:Number) : void

@@ -16,6 +16,8 @@ package net.wg.gui.lobby.profile.pages.technique
             super();
         }
         
+        private static var SB_MARGIN:Number = 10;
+        
         private static function isHasAchievements(param1:Array) : Boolean
         {
             var _loc2_:Array = null;
@@ -44,6 +46,7 @@ package net.wg.gui.lobby.profile.pages.technique
             this.warningTextField.text = PROFILE.SECTION_TECHNIQUE_AWARDS_NOACHIEVEMENTS;
             this.warningTextField.visible = false;
             this.scrollPane.visible = false;
+            this.scrollPane.scrollBarMargin = SB_MARGIN;
             this.getPaneContent().gapBetweenBlocks = 6;
         }
         

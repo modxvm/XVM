@@ -1,6 +1,7 @@
 package net.wg.gui.components.controls
 {
     import flash.display.MovieClip;
+    import scaleform.clik.core.UIComponent;
     import scaleform.clik.constants.InvalidationType;
     
     public class ScrollThumb extends SoundButton
@@ -13,9 +14,14 @@ package net.wg.gui.components.controls
         
         public var icon:MovieClip;
         
+        public var states:MovieClip;
+        
         override public function gotoAndPlay(param1:Object, param2:String = null) : void
         {
-            super.gotoAndPlay(param1,param2);
+            if(this.states)
+            {
+                this.states.gotoAndPlay(param1);
+            }
             if(this.icon)
             {
                 this.icon.gotoAndPlay(param1);
@@ -24,11 +30,29 @@ package net.wg.gui.components.controls
         
         override public function gotoAndStop(param1:Object, param2:String = null) : void
         {
-            super.gotoAndStop(param1,param2);
+            if(this.states)
+            {
+                this.states.gotoAndStop(param1);
+            }
             if(this.icon)
             {
                 this.icon.gotoAndStop(param1);
             }
+        }
+        
+        override protected function initialize() : void
+        {
+            super.initialize();
+            if(this.states)
+            {
+                _labelHash = UIComponent.generateLabelHash(this.states);
+            }
+        }
+        
+        override protected function configUI() : void
+        {
+            super.configUI();
+            initSize();
         }
         
         override protected function draw() : void
@@ -36,8 +60,11 @@ package net.wg.gui.components.controls
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
-                this.icon.scaleX = 1 / scaleX;
-                this.icon.scaleY = 1 / scaleY;
+                this.states.width = _width;
+                this.states.height = _height;
+                this.icon.y = _height >> 1;
+                setActualScale(1,1);
+                setSize(actualWidth,actualHeight);
             }
         }
         
@@ -45,6 +72,7 @@ package net.wg.gui.components.controls
         {
             super.onDispose();
             this.icon = null;
+            this.states = null;
         }
     }
 }

@@ -8,15 +8,15 @@ package net.wg.gui.lobby.recruitWindow
     import scaleform.clik.controls.ButtonGroup;
     import net.wg.dev.utils.LocalDebugUtils;
     import scaleform.clik.data.DataProvider;
-    import scaleform.clik.events.ButtonEvent;
+    import flash.events.Event;
     import flash.events.MouseEvent;
+    import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.events.ListEvent;
     import net.wg.gui.components.controls.VO.ActionPriceVO;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.IconsTypes;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
-    import flash.events.Event;
     import flash.events.IEventDispatcher;
     
     public class RecruitWindow extends RecruitWindowMeta implements IRecruitWindowMeta
@@ -189,17 +189,15 @@ package net.wg.gui.lobby.recruitWindow
             this.btnAcademy.groupName = _loc1_;
             this.btnScool.groupName = _loc1_;
             this.btnCourses.groupName = _loc1_;
+            this.btnGroup.addEventListener(Event.CHANGE,this.onButtonStudySelect);
             this.btnAcademy.doubleClickEnabled = true;
             this.btnAcademy.allowDeselect = false;
-            this.btnAcademy.addEventListener(ButtonEvent.CLICK,this.onButtonStudyTypeClick);
             this.btnAcademy.addEventListener(MouseEvent.DOUBLE_CLICK,this.onButtonStudyTypeDoubleClick);
             this.btnScool.doubleClickEnabled = true;
             this.btnScool.allowDeselect = false;
-            this.btnScool.addEventListener(ButtonEvent.CLICK,this.onButtonStudyTypeClick);
             this.btnScool.addEventListener(MouseEvent.DOUBLE_CLICK,this.onButtonStudyTypeDoubleClick);
             this.btnCourses.doubleClickEnabled = true;
             this.btnCourses.allowDeselect = false;
-            this.btnCourses.addEventListener(ButtonEvent.CLICK,this.onButtonStudyTypeClick);
             this.btnCourses.addEventListener(MouseEvent.DOUBLE_CLICK,this.onButtonStudyTypeDoubleClick);
             this.btnCourses.selected = true;
             this.btnCancel.addEventListener(ButtonEvent.CLICK,this.onClose);
@@ -295,11 +293,9 @@ constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
 override protected function onDispose() : void
 {
 super.onDispose();
-this.btnAcademy.removeEventListener(ButtonEvent.CLICK,this.onButtonStudyTypeClick);
+this.btnGroup.removeEventListener(Event.CHANGE,this.onButtonStudySelect);
 this.btnAcademy.removeEventListener(MouseEvent.DOUBLE_CLICK,this.onButtonStudyTypeDoubleClick);
-this.btnScool.removeEventListener(ButtonEvent.CLICK,this.onButtonStudyTypeClick);
 this.btnScool.removeEventListener(MouseEvent.DOUBLE_CLICK,this.onButtonStudyTypeDoubleClick);
-this.btnCourses.removeEventListener(ButtonEvent.CLICK,this.onButtonStudyTypeClick);
 this.btnCourses.removeEventListener(MouseEvent.DOUBLE_CLICK,this.onButtonStudyTypeDoubleClick);
 this.nationDropdown.removeEventListener(ListEvent.INDEX_CHANGE,this.recruitButtonCheck);
 this.vehicleClassDropdown.removeEventListener(ListEvent.INDEX_CHANGE,this.recruitButtonCheck);
@@ -403,9 +399,9 @@ private function recruitButtonCheck(param1:ListEvent) : void
 this.btnRecruit.enabled = !(this.nationDropdown.selectedIndex == 0 || this.vehicleClassDropdown.selectedIndex == 0 || this.vehicleTypeDropdown.selectedIndex == 0 || this.roleDropdown.selectedIndex == 0);
 }
 
-public function onButtonStudyTypeClick(param1:ButtonEvent) : void
+public function onButtonStudySelect(param1:Event) : void
 {
-switch(param1.target)
+switch(this.btnGroup.selectedButton)
 {
 case this.btnAcademy:
     this.studyType = 2;

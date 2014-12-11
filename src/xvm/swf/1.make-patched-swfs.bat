@@ -24,7 +24,7 @@ for %%i in (Application.*.patch) do (
     rem rmdir /S /Q %n%.orig-0
     exit
   )
-  echo.
+  rem echo.
 )
 
 echo patch ok: %n%.swf

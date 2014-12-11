@@ -49,15 +49,11 @@ package net.wg.gui.prebattle.company
         
         public var levelTooltip:String;
         
-        public var upAllButton:IButtonIconLoader;
-        
         public var addToAssignBtn:IButtonIconLoader;
         
         public var removeFromAssignBtn:IButtonIconLoader;
         
         public var commitEditButton:IButtonIconLoader;
-        
-        public var downAllButton:IButtonIconLoader;
         
         public var editButton:IButtonIconLoader;
         
@@ -396,10 +392,8 @@ package net.wg.gui.prebattle.company
         override protected function configUI() : void
         {
             super.configUI();
-            this.upAllButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_DOUBLE_RIGHT_ARROW_ICON;
             this.addToAssignBtn.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_SINGLE_RIGHT_ARROW_ICON;
             this.removeFromAssignBtn.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_SINGLE_LEFT_ARROW_ICON;
-            this.downAllButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_DOUBLE_LEFT_ARROW_ICON;
             this.commitEditButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_ENTER;
             this.editButton.iconSource = RES_ICONS.MAPS_ICONS_MESSENGER_ICONS_EDIT;
             this.hiddenItemRenderer.visible = false;

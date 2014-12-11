@@ -78,6 +78,8 @@ package net.wg.data
         
         public static var BATTLE_TYPE_SELECT_POPOVER:String = "battleTypeSelectPopover";
         
+        public static var SQUAD_TYPE_SELECT_POPOVER:String = "squadTypeSelectPopover";
+        
         public static var ACCOUNT_POPOVER:String = "accountPopover";
         
         public static var SYSTEM_MESSAGES_GENERATOR_WINDOW:String = "SystemMessagesGenerator";

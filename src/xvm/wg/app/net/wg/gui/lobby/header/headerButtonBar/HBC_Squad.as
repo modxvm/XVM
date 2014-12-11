@@ -19,11 +19,17 @@ package net.wg.gui.lobby.header.headerButtonBar
             _hideDisplayObjList.push(this.icon);
         }
         
+        private static var DEF_TEXT_COLOR:Number = 9211006;
+        
+        private static var EVENT_TEXT_COLOR:Number = 15073279;
+        
         public var textField:TextField = null;
         
         public var icon:UILoaderAlt = null;
         
         private var _squadDataVo:HBC_SquadDataVo = null;
+        
+        private var _iconWidth:Number = 0;
         
         override protected function configUI() : void
         {
@@ -34,12 +40,18 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         private function onIcoLoaded(param1:UILoaderEvent) : void
         {
+            if(this._iconWidth == 0)
+            {
+                this._iconWidth = this.icon.width;
+            }
             this.updateData();
+            this.updateSize();
         }
         
         override protected function updateSize() : void
         {
-            bounds.width = this.icon.visible?this.icon.x + this.icon.width:this.textField.x + this.textField.width;
+            var _loc1_:Number = this._iconWidth?this._iconWidth:this.icon.width;
+            bounds.width = (this.icon.source) && (this.icon.visible)?this.icon.x + _loc1_:this.textField.x + this.textField.width;
             super.updateSize();
         }
         
@@ -47,10 +59,13 @@ package net.wg.gui.lobby.header.headerButtonBar
         {
             if(data)
             {
+                this.icon.source = this._squadDataVo.isEventSquad?RES_ICONS.MAPS_ICONS_BATTLETYPES_40X40_EVENTSQUAD:RES_ICONS.MAPS_ICONS_BATTLETYPES_40X40_SQUAD;
                 this.textField.text = this._squadDataVo.buttonName;
+                this.textField.textColor = this._squadDataVo.isEventSquad?EVENT_TEXT_COLOR:DEF_TEXT_COLOR;
             }
             else
             {
+                this.icon.source = RES_ICONS.MAPS_ICONS_BATTLETYPES_40X40_SQUAD;
                 this.textField.text = MENU.HEADERBUTTONS_BTNLABEL_CREATESQUAD;
             }
             if(this.isNeedUpdateFont())

@@ -95,9 +95,13 @@ package net.wg.gui.lobby.browser
         
         public function as_setBrowserSize(param1:Number, param2:Number) : void
         {
-            this._browserWidth = param1;
-            this._browserHeight = param2;
-            App.utils.scheduler.envokeInNextFrame(this.updateWindowSize);
+            this.width = this._browserWidth = param1;
+            this.height = this._browserHeight = param2;
+            if(this.actionBtn.y < 0)
+            {
+                this.height = this.height + Math.abs(this.actionBtn.y);
+            }
+            this.updateWindowSize();
         }
         
         override protected function onPopulate() : void
@@ -113,7 +117,6 @@ package net.wg.gui.lobby.browser
         override protected function onDispose() : void
         {
             super.onDispose();
-            App.utils.scheduler.cancelTask(this.updateWindowSize);
             this.actionBtn.dispose();
             this.actionBtn.removeEventListener(BrowserEvent.ACTION_LOADING,this.onBtnAction);
             this.actionBtn.removeEventListener(BrowserEvent.ACTION_RELOAD,this.onBtnAction);
@@ -158,23 +161,9 @@ package net.wg.gui.lobby.browser
         
         private function updateWindowSize() : void
         {
-            if(!initialized)
-            {
-                App.utils.scheduler.envokeInNextFrame(this.updateWindowSize);
-                return;
-            }
             this.browserHitArea.setMaskSize(this._browserWidth,this._browserHeight);
             this.actionBtn.x = this._browserWidth - ACTION_BUTTON_OFFSET;
-            var _loc1_:Number = this.browserHitArea.x + this._browserWidth;
-            var _loc2_:Number = this.browserHitArea.y + this._browserHeight;
-            if(this.actionBtn.y < 0)
-            {
-                _loc2_ = _loc2_ + Math.abs(this.actionBtn.y);
-            }
-            window.updateSize(_loc1_,_loc2_,true);
-            window.validateNow();
-            this.updatePosition();
-            DisplayObject(window).visible = true;
+            invalidate(WindowViewInvalidationType.POSITION_INVALID);
         }
         
         private function updatePosition() : void
@@ -188,6 +177,7 @@ package net.wg.gui.lobby.browser
             }
             window.x = App.appWidth - _loc1_ >> 1;
             window.y = App.appHeight - _loc2_ >> 1;
+            DisplayObject(window).visible = true;
         }
         
         private function onBtnAction(param1:BrowserEvent) : void

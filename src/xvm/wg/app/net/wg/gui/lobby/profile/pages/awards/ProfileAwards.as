@@ -24,6 +24,8 @@ package net.wg.gui.lobby.profile.pages.awards
         
         private static var INVOKE_UPD_INVALID:String = "invokeUpdInv";
         
+        private static var SB_MARGIN:Number = 10;
+        
         private static function generateDropdownItem(param1:String) : Object
         {
             return {"label":App.utils.locale.makeString(param1)};
@@ -47,6 +49,7 @@ package net.wg.gui.lobby.profile.pages.awards
             AwardsBlock(_loc1_.blockSpecialAwards).showProgress = false;
             this.dropdownMenu.addEventListener(MouseEvent.MOUSE_OVER,this.checkBoxMouseOverHandler,false,0,true);
             this.dropdownMenu.addEventListener(MouseEvent.MOUSE_OUT,this.checkBoxMouseOutHandler,false,0,true);
+            this.mainScrollPane.scrollBarMargin = SB_MARGIN;
         }
         
         private function checkBoxMouseOverHandler(param1:MouseEvent) : void

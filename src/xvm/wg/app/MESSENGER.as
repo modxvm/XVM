@@ -876,7 +876,11 @@ package
         
         public static var SERVICECHANNELMESSAGES_FORT_SPECIAL_ORDER_EXPIRED_EVACUATION:String = "#messenger:serviceChannelMessages/fort/SPECIAL_ORDER_EXPIRED_EVACUATION";
         
+        public static var SERVICECHANNELMESSAGES_FORT_SPECIAL_ORDER_EXPIRED_EVACUATION_ADDITIONAL:String = "#messenger:serviceChannelMessages/fort/SPECIAL_ORDER_EXPIRED_EVACUATION_ADDITIONAL";
+        
         public static var SERVICECHANNELMESSAGES_FORT_SPECIAL_ORDER_EXPIRED_REQUISITION:String = "#messenger:serviceChannelMessages/fort/SPECIAL_ORDER_EXPIRED_REQUISITION";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_SPECIAL_ORDER_EXPIRED_REQUISITION_ADDITIONAL:String = "#messenger:serviceChannelMessages/fort/SPECIAL_ORDER_EXPIRED_REQUISITION_ADDITIONAL";
         
         public static var COMMAND_SUCCESS_USERBAN:String = "#messenger:command/success/USERBAN";
         

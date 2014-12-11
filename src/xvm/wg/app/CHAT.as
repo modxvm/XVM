@@ -12,6 +12,10 @@ package
         
         public static var CHANNELS_SQUADNOTREADY_TOOLTIP:String = "#chat:channels/squadNotReady/tooltip";
         
+        public static var CHANNELS_EVENTSQUADREADY_TOOLTIP:String = "#chat:channels/eventSquadReady/tooltip";
+        
+        public static var CHANNELS_EVENTSQUADNOTREADY_TOOLTIP:String = "#chat:channels/eventSquadNotReady/tooltip";
+        
         public static var CHANNELS_PREBATTLE:String = "#chat:channels/prebattle";
         
         public static var CHANNELS_SYSTEM:String = "#chat:channels/system";
@@ -47,6 +51,16 @@ package
         public static var CHANNELS_SQUADNOTREADY_TOOLTIP_HEADER:String = CHANNELS_SQUADNOTREADY_TOOLTIP + "/header";
         
         public static var CHANNELS_SQUADNOTREADY_TOOLTIP_BODY:String = CHANNELS_SQUADNOTREADY_TOOLTIP + "/body";
+        
+        public static var CHANNELS_EVENTSQUAD:String = "#chat:channels/eventSquad";
+        
+        public static var CHANNELS_EVENTSQUADREADY_TOOLTIP_HEADER:String = CHANNELS_EVENTSQUADREADY_TOOLTIP + "/header";
+        
+        public static var CHANNELS_EVENTSQUADREADY_TOOLTIP_BODY:String = CHANNELS_EVENTSQUADREADY_TOOLTIP + "/body";
+        
+        public static var CHANNELS_EVENTSQUADNOTREADY_TOOLTIP_HEADER:String = CHANNELS_EVENTSQUADNOTREADY_TOOLTIP + "/header";
+        
+        public static var CHANNELS_EVENTSQUADNOTREADY_TOOLTIP_BODY:String = CHANNELS_EVENTSQUADNOTREADY_TOOLTIP + "/body";
         
         public static var ERRORS_USERBANHIMSELF:String = "#chat:errors/userbanhimself";
         

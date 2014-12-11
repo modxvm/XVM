@@ -13,9 +13,17 @@ package net.wg.infrastructure.base.meta.impl
             super();
         }
         
+        public var onViewReady:Function = null;
+        
         public var onCreateBtnClick:Function = null;
         
         public var onNavigate:Function = null;
+        
+        public function onViewReadyS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onViewReady,"onViewReady" + Errors.CANT_NULL);
+            this.onViewReady();
+        }
         
         public function onCreateBtnClickS() : void
         {

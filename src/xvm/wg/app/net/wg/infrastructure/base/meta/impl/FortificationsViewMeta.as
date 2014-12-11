@@ -4,6 +4,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.Errors;
     import net.wg.gui.lobby.fortifications.data.FortificationVO;
     import net.wg.infrastructure.exceptions.AbstractException;
+    import net.wg.gui.lobby.fortifications.data.FortWaitingVO;
     
     public class FortificationsViewMeta extends AbstractView
     {
@@ -46,6 +47,19 @@ package net.wg.infrastructure.base.meta.impl
         protected function setCommonData(param1:FortificationVO) : void
         {
             var _loc2_:String = "as_setCommonData" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
+        }
+        
+        public function as_waitingData(param1:Object) : void
+        {
+            var _loc2_:FortWaitingVO = new FortWaitingVO(param1);
+            this.waitingData(_loc2_);
+        }
+        
+        protected function waitingData(param1:FortWaitingVO) : void
+        {
+            var _loc2_:String = "as_waitingData" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
         }

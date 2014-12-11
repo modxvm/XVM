@@ -458,6 +458,18 @@ package
         
         public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_01_DESCRIPTION:String = "#vehicle_customization:camouflage/Clan_camouflage_01/description";
         
+        public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_02_LABEL:String = "#vehicle_customization:camouflage/Clan_camouflage_02/label";
+        
+        public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_02_DESCRIPTION:String = "#vehicle_customization:camouflage/Clan_camouflage_02/description";
+        
+        public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_03_LABEL:String = "#vehicle_customization:camouflage/Clan_camouflage_03/label";
+        
+        public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_03_DESCRIPTION:String = "#vehicle_customization:camouflage/Clan_camouflage_03/description";
+        
+        public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_04_LABEL:String = "#vehicle_customization:camouflage/Clan_camouflage_04/label";
+        
+        public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_04_DESCRIPTION:String = "#vehicle_customization:camouflage/Clan_camouflage_04/description";
+        
         public static var EMBLEM:String = "#vehicle_customization:emblem";
         
         public static var EMBLEM_AUTO:String = "#vehicle_customization:emblem/auto";

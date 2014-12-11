@@ -82,6 +82,8 @@ package
         
         public static var BONUSES_ITEM_TANKWOMAN:String = "#quests:bonuses/item/tankwoman";
         
+        public static var BONUSES_ITEM_ADDITIONBONUS:String = "#quests:bonuses/item/additionBonus";
+        
         public static var QUESTS_TITLE:String = "#quests:quests/title";
         
         public static var QUESTS_CONDITIONS:String = "#quests:quests/conditions";

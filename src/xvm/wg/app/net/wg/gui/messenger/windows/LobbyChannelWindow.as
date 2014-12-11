@@ -62,6 +62,7 @@ package net.wg.gui.messenger.windows
             this.membersList.sbPadding = new Padding(0,0,0,0);
             this.membersList.addEventListener(ListEventEx.ITEM_CLICK,this.onMemberItemClick);
             this.membersList.dataProvider = this._membersDP;
+            this.membersList.smartScrollBar = true;
         }
         
         override protected function draw() : void
