@@ -54,6 +54,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         $37_caucasus:           { size: 100 }, // Mountain Pass
         $38_mannerheim_line:    { size: 100 }, // Arctic Region
         $39_crimea:             { size: 100 }, // South Coast
+        $42_north_america:      { size: 83 },  // Port
         $43_north_america:      { size: 100 }, // Northwest
         $44_north_america:      { size: 100 }, // Live Oaks
         $45_north_america:      { size: 100 }, // Highway
@@ -66,10 +67,13 @@ class wot.Minimap.model.mapSize.MapInfoData
         $73_asia_korea:         { size: 100 }, // Sacred Valley
         $83_kharkiv:            { size: 80 },  // Kharkiv
         $84_winter:             { size: 100 }, // Windstorm
+        $85_winter:             { size: 100 }, // Severogorsk
         $86_himmelsdorf_winter: { size: 70 },  // Winter Himmelsdorf
+        $87_ruinberg_on_fire:   { size: 80 },  // Ruinberg on Fire
         $92_stalingrad:         { size: 95 },  // Stalingrad
         $95_lost_city:          { size: 80 },  // Lost City
         $96_prohorovka_defense: { size: 100 }, // Fiery Salient
+        $99_himmelball:         { size: 70 },  // Himmelsdorf Football
         $100_thepit:            { size: 60 },  // The Pit
         $103_ruinberg_winter:   { size: 80 },  // Winter Ruinberg
         $109_battlecity_ny:     { size: 50 },  // Battle City
