@@ -320,18 +320,26 @@ class Xvm(object):
     def onEnterWorld(self):
         #debug('onEnterWorld: ' + str(BigWorld.player().arena))
 
-        arena = BigWorld.player().arena
-        arena.onVehicleKilled += self._onVehicleKilled
-        arena.onAvatarReady += self._onAvatarReady
-        arena.onVehicleStatisticsUpdate += self.updateVehicleStats
+        try:
+            arena = BigWorld.player().arena
+            if arena:
+                arena.onVehicleKilled += self._onVehicleKilled
+                arena.onAvatarReady += self._onAvatarReady
+                arena.onVehicleStatisticsUpdate += self.updateVehicleStats
+        except Exception, ex:
+            err(traceback.format_exc())
 
     def onLeaveWorld(self):
         #debug('onLeaveWorld')
 
-        arena = BigWorld.player().arena
-        arena.onVehicleKilled -= self._onVehicleKilled
-        arena.onAvatarReady -= self._onAvatarReady
-        arena.onVehicleStatisticsUpdate -= self.updateVehicleStats
+        try:
+            arena = BigWorld.player().arena
+            if arena:
+                arena.onVehicleKilled -= self._onVehicleKilled
+                arena.onAvatarReady -= self._onAvatarReady
+                arena.onVehicleStatisticsUpdate -= self.updateVehicleStats
+        except Exception, ex:
+            err(traceback.format_exc())
 
         self.cleanupBattleData()
 
