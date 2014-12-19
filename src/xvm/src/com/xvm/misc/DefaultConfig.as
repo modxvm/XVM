@@ -395,11 +395,11 @@ package com.xvm.misc
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [
-                    { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{lang}}.png" }
+                    { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
                 ],
                 extraFieldsRight: [
                     { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} },
-					{ "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{lang}}.png" }
+                    { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
                 ]
             };
             // Medium2 mode.
@@ -430,11 +430,11 @@ package com.xvm.misc
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [
-                    { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{lang}}.png" }
+                    { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
                 ],
                 extraFieldsRight: [
                     { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} },
-					{ "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{lang}}.png" }
+                    { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
                 ]
             };
 

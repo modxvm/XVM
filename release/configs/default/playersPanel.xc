@@ -167,13 +167,13 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
-        { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{lang}}.png" }
+        { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
       ],
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
         { "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} },
-        { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{lang}}.png" }
+        { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
       ]
     },
     // Options for the "medium2" panels - the second of the medium panels.
@@ -230,13 +230,13 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
-        { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{lang}}.png" }
+        { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
       ],
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
         { "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} },
-        { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{lang}}.png" }
+        { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
       ]
     }
   }

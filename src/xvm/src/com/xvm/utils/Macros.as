@@ -475,8 +475,8 @@ package com.xvm.utils
 
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
-            // {{lang}}
-            pdata["lang"] = stat.lang;
+            // {{language}}
+            pdata["language"] = stat.lang;
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn6}}
