@@ -77,6 +77,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (cfg.shell.enabled)
         {
             var radius:Number = scaleFactor * ci.shell_range;
+            //Logger.add(radius.toString());
             if (radius > 0)
                 shellMc = drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
         }

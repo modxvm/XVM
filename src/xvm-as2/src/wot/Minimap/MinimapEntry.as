@@ -54,6 +54,8 @@ class wot.Minimap.MinimapEntry
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    private static var _minimap_initialized:Boolean = false;
+
     public var playerId:Number;
 
     // Used only for camera entry to define if entry is processed with Lines class
@@ -61,21 +63,18 @@ class wot.Minimap.MinimapEntry
 
     //private var labelMc:MovieClip;
 
-
     function MinimapEntryCtor()
     {
         Utils.TraceXvmModule("Minimap");
 
-        return;
-
-        var $this = this;
-        wrapper["$removeMovieClip"] = wrapper.removeMovieClip;
-        wrapper.removeMovieClip = function()
-        {
-            //Logger.add("remove: " + $this.uid);
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, $this.playerId));
-            this["$removeMovieClip"]()
-        }
+        //var $this = this;
+        //wrapper["$removeMovieClip"] = wrapper.removeMovieClip;
+        //wrapper.removeMovieClip = function()
+        //{
+            ////Logger.add("remove: " + $this.uid);
+            //GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, $this.playerId));
+            //this["$removeMovieClip"]()
+        //}
     }
 
     function init_xvmImpl(playerId:Number)
@@ -109,6 +108,12 @@ class wot.Minimap.MinimapEntry
         base.draw();
 
         MarkerColor.setColor(wrapper);
+
+        if (!_minimap_initialized && wrapper.selfIcon)
+        {
+            _minimap_initialized = true;
+            GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
+        }
 
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, this, playerId));
 

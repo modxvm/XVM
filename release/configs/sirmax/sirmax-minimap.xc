@@ -1,6 +1,6 @@
 {
   "minimap": {
-    "enabled": true,
+    //"enabled": false,
     "iconScale": 1.5,
     "hideCameraTriangle": true,
     "cameraAlpha": 90,

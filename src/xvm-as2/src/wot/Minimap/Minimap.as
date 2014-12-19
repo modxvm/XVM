@@ -79,6 +79,7 @@ class wot.Minimap.Minimap
 
     function drawImpl()
     {
+        //Logger.add("Minimap.draw()");
         var sizeIsInvalid:Boolean = wrapper.sizeIsInvalid;
         base.draw();
         if (sizeIsInvalid)
@@ -89,30 +90,16 @@ class wot.Minimap.Minimap
 
     private function onConfigLoaded()
     {
-        if (Config.config.minimap.enabled && Config.config.minimapAlt.enabled)
-            GlobalEventDispatcher.addEventListener(Defines.E_MM_ALT_MODE, this, setAltMode);
-
+        //Logger.add("onConfigLoaded");
         if (MapConfig.enabled)
         {
+            if (Config.config.minimapAlt.enabled)
+                GlobalEventDispatcher.addEventListener(Defines.E_MM_ALT_MODE, this, setAltMode);
             Features.init();
-            checkLoading();
         }
     }
 
-    private function checkLoading():Void
-    {
-        var $this = this;
-        wrapper.icons.onEnterFrame = function():Void
-        {
-            if (this.MinimapEntry0)
-            {
-                delete this.onEnterFrame;
-                GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
-            }
-        }
-    }
-
-    // Dynamic circles
+    // Dynamic circles and alt mode
 
     private var stereoscope_exists:Boolean = false;
     private var stereoscope_enabled:Boolean = false;
