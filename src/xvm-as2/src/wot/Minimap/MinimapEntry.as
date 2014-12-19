@@ -109,9 +109,10 @@ class wot.Minimap.MinimapEntry
 
         MarkerColor.setColor(wrapper);
 
-        if (!_minimap_initialized && wrapper.selfIcon)
+        if (!_minimap_initialized && wrapper._name == "MinimapEntry1")
         {
             _minimap_initialized = true;
+            //Logger.addObject(wrapper, 2);
             GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
         }
 
