@@ -467,7 +467,7 @@ package com.xvm.misc
             var c:CMinimap = new CMinimap();
             c.enabled = true;
             c.mapBackgroundImageAlpha = 100;
-            c.selfIconAlpha = 100;
+            c.selfIconAlpha = 75;
             c.hideCameraTriangle = false;
             c.cameraAlpha = 100;
             c.iconScale = 1;

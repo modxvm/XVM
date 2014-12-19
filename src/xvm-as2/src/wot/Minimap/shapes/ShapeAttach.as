@@ -10,6 +10,8 @@ import wot.Minimap.model.mapSize.*;
 
 class wot.Minimap.shapes.ShapeAttach
 {
+    public static var isSelfDead:Boolean = false;
+
     /**
      * Internal MoviecLip minimap size in points without scaling.
      *
@@ -39,19 +41,16 @@ class wot.Minimap.shapes.ShapeAttach
         /** Hide sphapes on players dead event (postmortem mod) */
         GlobalEventDispatcher.addEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
 
-        update();
+        if (isSelfDead)
+        {
+            var $this = this;
+            setTimeout(function() { $this.postmortemMod(null); }, 1);
+        }
     }
 
     public function Dispose()
     {
         GlobalEventDispatcher.removeEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
-    }
-
-    public function update()
-    {
-        var ud = BattleState.getSelfUserData();
-        if (ud != null && ud.dead == true)
-            postmortemMod();
     }
 
     // -- Private
@@ -63,6 +62,8 @@ class wot.Minimap.shapes.ShapeAttach
 
     private function postmortemMod(event)
     {
+        Logger.add("postmortemMod");
+        isSelfDead = true;
         selfAttachments._visible = false;
     }
 }

@@ -19,6 +19,11 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     public static var ENTRY_NAME_FIELD_NAME:String = "entryName";
     public static var VEHICLE_CLASS_FIELD_NAME:String = "vehicleClass";
 
+    public static function init():Void
+    {
+        instance._init();
+    }
+
     // MinimapEntry requests a label
     public static function getLabel(uid:Number):MovieClip
     {
@@ -50,13 +55,18 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function LabelsContainer()
     {
-        var icons:MovieClip = MinimapProxy.wrapper.icons;
-        holderMc = icons.createEmptyMovieClip(CONTAINER_NAME, wot.Minimap.Minimap.LABELS);
+        //var icons:MovieClip = MinimapProxy.wrapper.icons;
+        //holderMc = icons.createEmptyMovieClip(CONTAINER_NAME, MinimapConstants.LABELS);
 
-        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_REVEALED, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onMinimapEvent);
+        //GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
+        //GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onMinimapEvent);
+        //GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
+        //GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onMinimapEvent);
+    }
+
+    private function _init()
+    {
+        // empty function required for instance creation
     }
 
     private function onMinimapEvent(e)
@@ -124,7 +134,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
         labelMc[VEHICLE_CLASS_FIELD_NAME] = vehicleClass;
         labelMc[STATUS_FIELD_NAME] = Player.PLAYER_REVEALED;
-        Macros.RegisterMinimapMacros(playerInfo, MinimapEntry.getVehicleClassSymbol(vehicleClass));
+        Macros.RegisterMinimapMacros(playerInfo, getVehicleClassSymbol(vehicleClass));
 
         /**
          * Label stays at creation point some time before first move.
@@ -174,12 +184,12 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         return depth;
     }
 
-    private function getPresenceStatus(uid:Number):Number
+    private function getPresenceStatus(playerId:Number):Number
     {
         //Logger.add("LabelsContainer.getPresenceStatus()");
         var status:Number;
 
-        if (IconsProxy.isIconIsPresentAtMinimap(uid))
+        if (IconsProxy.entry(playerId) != null)
         {
             status = Player.PLAYER_REVEALED;
         }
@@ -190,7 +200,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
              * He is either dead or lost.
              * Uids that has never been seen are not passed to this method.
              */
-            if (PlayersPanelProxy.isDead(uid))
+            if (PlayersPanelProxy.isDead(playerId))
             {
                 status = Player.PLAYER_DEAD;
             }
@@ -200,7 +210,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             }
         }
 
-        var player:Player = PlayersPanelProxy.getPlayerInfo(uid);
+        var player:Player = PlayersPanelProxy.getPlayerInfo(playerId);
         if (player.teamKiller)
         {
             /**
@@ -211,5 +221,26 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         }
 
         return status;
+    }
+
+    public static function getVehicleClassSymbol(vehicleClass:String):String
+    {
+        switch (vehicleClass)
+        {
+            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_LIGHT:
+                return MapConfig.lightSymbol;
+            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_MEDIUM:
+                return MapConfig.mediumSymbol;
+            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_HEAVY:
+                return MapConfig.heavySymbol;
+            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_TD:
+                return MapConfig.tdSymbol;
+            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_SPG:
+                return MapConfig.spgSymbol;
+            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_SUPER:
+                return MapConfig.superSymbol;
+            default:
+                return "";
+        }
     }
 }

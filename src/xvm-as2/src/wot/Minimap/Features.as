@@ -9,9 +9,9 @@ class wot.Minimap.Features
 {
     private static var _instance:Features;
 
-    private static var MAP_MIN_SIZE_INDEX:Number = 0;
-    private static var MAP_MAX_SIZE_INDEX:Number = 25;
-
+    /**
+     * Global minimap features
+     */
     private var markerScaling:MarkerScaling;
     private var zoom:Zoom;
     private var mapSizeLabel:MapSizeLabel
@@ -36,8 +36,62 @@ class wot.Minimap.Features
 
     public function Features()
     {
+        markerScaling = new MarkerScaling();
+
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onEntryUpdated);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onEntryUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
+
+        //GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, updateEntries);
+        //GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, updateEntries);
+
+        LabelsContainer.init();
     }
+
+    private function onRefreshEvent(e)
+    {
+        applyFeatures();
+        scaleMarkers();
+
+        var entries:Array = IconsProxy.allEntries;
+        for (var i in entries)
+            entries[i].invalidate();
+    }
+
+    //public function updateEntries()
+    //{
+        //var waitFrame:Boolean = Features.instance.setCameraAlpha();
+        /*if (!waitFrame)
+            updateEntries2();
+        else
+        {
+            var $this = this;
+            IconsProxy.cameraEntry.wrapper.onEnterFrame = function():Void
+            {
+                delete this.onEnterFrame;
+                $this.updateEntries2();
+            }
+        }*/
+    //}
+
+    private function applyFeatures():Void
+    {
+        setBGMapImageAlpha();
+        setPlayerIconAlpha();
+
+        initializeZoomFeature();
+
+        // Features dependent on successful map size recognition
+        if (MapSizeModel.instance.getCellSide())
+        {
+            initializeMapSizeFeature();
+            initializeSquareFeature();
+            initializeCirclesFeature();
+            initializeLinesFeature();
+        }
+    }
+
+    // GLOBAL
 
     /**
      * Have to be public.
@@ -45,43 +99,71 @@ class wot.Minimap.Features
      */
     public function scaleMarkers():Void
     {
-        if (!markerScaling)
-        {
-            markerScaling = new MarkerScaling();
-        }
         markerScaling.scale();
     }
 
     /**
-     * Have to be public.
-     * Invoked each time minimap.correctSizeIndexImpl is called.
+     * Set alpha of background map image.
+     * Does not affect markers
      */
-    public function disableMapWindowSizeLimitation(sizeIndex:Number):Number
+    private function setBGMapImageAlpha():Void
     {
-        /** base.correctSizeIndex code is omitted to drop limits */
+        MinimapProxy.wrapper.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
+    }
 
-        if (sizeIndex < MAP_MIN_SIZE_INDEX)
+    /**
+     * Zoom minimap on key press
+     */
+    private function initializeZoomFeature():Void
+    {
+        if (zoom != null)
         {
-            sizeIndex = MAP_MIN_SIZE_INDEX;
+            zoom.Dispose();
+            delete zoom;
+            zoom = null;
         }
 
-        if (sizeIndex > MAP_MAX_SIZE_INDEX)
+        if (Config.config.hotkeys.minimapZoom.enabled)
         {
-            sizeIndex = MAP_MAX_SIZE_INDEX;
+            zoom = new Zoom();
         }
+    }
 
-        return sizeIndex;
+    /**
+     * Draw map size at map corner
+     */
+    private function initializeMapSizeFeature():Void
+    {
+        if (mapSizeLabel != null)
+        {
+            mapSizeLabel.Dispose();
+            delete mapSizeLabel;
+            mapSizeLabel = null;
+        }
+        if (MapConfig.mapSizeLabelEnabled)
+        {
+            mapSizeLabel = new MapSizeLabel();
+        }
+    }
+
+    // ENTRY
+
+    private function onEntryUpdated(e:MinimapEvent):Void
+    {
+        markerScaling.scaleEntry(e.entry.wrapper);
+
+        if (e.entry == IconsProxy.cameraEntry)
+            Features.instance.setCameraAlpha();
     }
 
     /**
      * Setup alpha for camera of player himself.
      * Looks like green highlighted corner.
-     * TODO: Detach camera line
      *
      * Have to be public.
      * Invoked each time minimap.onEntryInited is called.
      */
-    public function setCameraAlpha():Boolean
+    private function setCameraAlpha():Boolean
     {
         var waitFrame:Boolean = false;
 
@@ -106,55 +188,18 @@ class wot.Minimap.Features
                 }
             }
 
+            camera.vehicleNameTextFieldClassic._visible = false;
+            camera.vehicleNameTextFieldAlt._visible = false;
             camera._alpha = MapConfig.cameraAlpha;
         }
 
         return waitFrame;
     }
 
-    public function updateSquare():Void
-    {
-        if (square != null)
-            square.update();
-    }
-
-    public function applyMajorMods():Void
-    {
-        setBGMapImageAlpha();
-        setPlayerIconAlpha();
-
-        /** With enable switch */
-        zoomFeature();
-        /** And dependent on successful map size recognition */
-        if (MapSizeModel.instance.getCellSide())
-        {
-            mapSizeFeature();
-            shapesFeatures();
-        }
-    }
-
-    //-- Private
-
-    private function onRefreshEvent(e)
-    {
-        scaleMarkers(); // for Alt mode
-        applyMajorMods();
-    }
-
-    /**
-     * Set alpha of background map image.
-     * Does not affect markers
-     */
-    private function setBGMapImageAlpha():Void
-    {
-        MinimapProxy.wrapper.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
-    }
-
     /**
      * Setup alpha for icon of player himself.
      * Looks like white arrow.
      * Does not affect attached shapes.
-     * TODO: check when swithing in spec mode
      */
     private function setPlayerIconAlpha():Void
     {
@@ -162,55 +207,48 @@ class wot.Minimap.Features
         selfIcon.wrapper.selfIcon._alpha = MapConfig.selfIconAlpha;
     }
 
-    private function zoomFeature():Void
+    /**
+     * Draw customized circles.
+     * Outlines distance in meters.
+     */
+    private function initializeCirclesFeature():Void
     {
-        if (zoom != null)
-        {
-            zoom.Dispose();
-            delete zoom;
-        }
-
-        if (Config.config.hotkeys.minimapZoom.enabled)
-        {
-            zoom = new Zoom();
-        }
-    }
-
-    private function mapSizeFeature():Void
-    {
-        if (mapSizeLabel != null)
-        {
-            mapSizeLabel.Dispose();
-            delete mapSizeLabel;
-        }
-
-        /** Draw map size at map corner */
-        if (MapConfig.mapSizeLabelEnabled)
-        {
-            mapSizeLabel = new MapSizeLabel();
-        }
-    }
-
-    private function shapesFeatures():Void
-    {
-        /**
-         * Draw customized circles.
-         * Outlines distance in meters.
-         */
         if (circles != null)
         {
             circles.Dispose();
             delete circles;
+            circles = null;
         }
         if (MapConfig.circles.enabled)
         {
-            circles = new Circles(); /** Total map side distance in meters */
+            circles = new Circles();
         }
+    }
 
-        /**
-         * Draw customized circles.
-         * Outlines distance in meters.
-         */
+    /**
+     * Draw customized lines.
+     * Outlines vehicle direction, gun horizontal traverse angle
+     * and possibly distance in meters.
+     */
+    private function initializeLinesFeature():Void
+    {
+        if (lines != null)
+        {
+            lines.Dispose();
+            delete lines;
+            lines = null;
+        }
+        if (MapConfig.linesEnabled)
+        {
+            lines = new Lines();
+        }
+    }
+
+    /**
+     * Draw visible range square.
+     */
+    private function initializeSquareFeature():Void
+    {
         if (square != null)
         {
             square.Dispose();
@@ -219,22 +257,7 @@ class wot.Minimap.Features
         }
         if (MapConfig.squareEnabled)
         {
-            square = new Square(); /** Total map side distance in meters */
-        }
-
-        /**
-         * Draw customized lines.
-         * Outlines vehicle direction, gun horizontal traverse angle
-         * and possibly distance in meters.
-         */
-        if (lines != null)
-        {
-            lines.Dispose();
-            delete lines;
-        }
-        if (MapConfig.linesEnabled)
-        {
-            lines = new Lines(); /** Total map side distance in meters  */
+            square = new Square();
         }
     }
 }

@@ -19,15 +19,14 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     public function Square()
     {
-        /** Disable square mod if user is artillery class*/
+        /// Disable square mod if user is artillery class
         if (!MapConfig.artiEnabled && isArtillery())
-        {
             return;
-        }
 
         super();
 
         squareClip = createSquareClip();
+        squareClip._visible = !isSelfDead;
         defineStyle();
         drawLines();
         updatePosition();
@@ -46,7 +45,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function createSquareClip():MovieClip
     {
-        return IconsProxy.createEmptyMovieClip("square", Minimap.SQUARE_1KM_INDEX);
+        return IconsProxy.createEmptyMovieClip("square", MinimapConstants.SQUARE_1KM_INDEX);
     }
 
     private function defineStyle():Void

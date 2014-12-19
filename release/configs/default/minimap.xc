@@ -12,7 +12,7 @@
     "mapBackgroundImageAlpha": 100,
     // Self icon transparency. White pointing arrow.
     // Прозрачность своей иконки. Белая стрелка.
-    "selfIconAlpha": 100,
+    "selfIconAlpha": 75,
     // Hide camera direction green triangle.
     // Спрятать зеленый треугольник направления камеры.
     "hideCameraTriangle": false,

@@ -1,74 +1,81 @@
 import com.xvm.*;
-import wot.Minimap.*;
+import net.wargaming.ingame.MinimapEntry;
+import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.*;
 
 class wot.Minimap.view.MarkerScaling
 {
+    // PUBLIC
 
-    public function MarkerScaling()
-    {
-        /**
-         * TODO: Check if this is correctrly invoked right on battle start.
-         */
-    }
-
+    /**
+     * This behaviour allows to keep original sizes
+     * of static entries and modify dynamic entries scaling.
+     *
+     * Writing alternative implemention
+     * of original size scaling attempt failed.
+     * This is why original WG algorithm is invoked first.
+     *
+     * Static entry: capture base, respawn point
+     * Dynamic entry: tank
+     */
     public function scale():Void
     {
-        /**
-         * This behaviour allows to keep original sizes
-         * of static entries and modify dynamic entries scaling.
-         *
-         * Writing alternative implemention
-         * of original size scaling attempt failed.
-         * This is why original WG algorithm is invoked first.
-         *
-         * Static entry: capture base, respawn point
-         * Dynamic entry: tank
-         */
         scaleAllMarkersToOriginalSizes();
         alternateVehicleScaling();
     }
 
-    // -- Private
-
-    private function scaleAllMarkersToOriginalSizes():Void
+    /**
+     * Scale single entry
+     * @param entry
+     * @param scaleFactor
+     */
+    public function scaleEntry(entry:MinimapEntry, scaleFactor:Number):Void
     {
-        /** Original WG scaling behaviour invocation */
-        MinimapProxy.base.scaleMarkers(net.wargaming.ingame.Minimap.MARKERS_SCALING);
-    }
+        //Logger.add("scaleEntry: " + entry.entryName + " " + MapConfig.iconScale);
 
-    private function alternateVehicleScaling():Void
-    {
-        /**
-         * Modified WG scaling cut-pasted algorithm.
-         * Static entries are omitted in scale alteration.
-         *
-         * icons._xscale is changed by minimap resize
-         */
-        var scaleFactor = 100 * MapConfig.iconScale;
+        if (isNaN(scaleFactor))
+            scaleFactor = 100 * MapConfig.iconScale;
 
-        for (var i in icons)
+        if (entry._currentframe == 5 || entry._currentframe == 6) // cursors
+            return;
+
+        var icon:MovieClip = entry.selfIcon || entry.player.litIcon || entry.player.icon || entry.player.selfIcon;
+        if (icon)
         {
-            if (icons[i] instanceof net.wargaming.ingame.MinimapEntry)
-            {
-                var entry = icons[i];
-                if (entry._currentframe == 5 || entry._currentframe == 6) // cursors
-                    continue;
-
-                if (entry.player != null)
-                {
-                    entry.player.litIcon._xscale = entry.player.litIcon._yscale = scaleFactor;
-                }
-                else if (entry.selfIcon != null)
-                {
-                    entry.selfIcon._xscale = entry.selfIcon._yscale = scaleFactor;
-                }
-            }
+            // FIXIT: dirty hack to fix unexpected behavior
+            if (icon == entry.player.selfIcon)
+                scaleFactor *= 2;
+            // /FIXIT
+            icon._xscale = icon._yscale = scaleFactor;
         }
     }
 
-    private function get icons():MovieClip
+    // PRIVATE
+
+    /**
+     * Original WG scaling behaviour invocation
+     */
+    private function scaleAllMarkersToOriginalSizes():Void
     {
-        return MinimapProxy.wrapper.icons;
+        MinimapProxy.base.scaleMarkers(net.wargaming.ingame.Minimap.MARKERS_SCALING);
+    }
+
+    /**
+     * Modified WG scaling cut-pasted algorithm.
+     * Static entries are omitted in scale alteration.
+     *
+     * icons._xscale is changed by minimap resize
+     */
+    private function alternateVehicleScaling():Void
+    {
+        //Logger.add("alternateVehicleScaling: " + MapConfig.iconScale);
+
+        var scaleFactor:Number = 100 * MapConfig.iconScale;
+        var icons = MinimapProxy.wrapper.icons;
+        for (var i in icons)
+        {
+            if (icons[i] instanceof net.wargaming.ingame.MinimapEntry)
+                scaleEntry(icons[i], scaleFactor);
+        }
     }
 }

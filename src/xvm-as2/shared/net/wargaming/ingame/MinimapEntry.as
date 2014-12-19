@@ -17,8 +17,11 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     var isDead;
     var vehicleClass;
     var selfIcon:MovieClip;
+    var cameraWithDirection:MovieClip;
     var m_type:String; /** ally enemy points*/
     var teamPoint:MovieClip; /** Clip is present if entry is capture base */
+    var vehicleNameTextFieldClassic:TextField;
+    var vehicleNameTextFieldAlt:TextField;
 
     function configUI();
     function init(markerType, entryName, vehicleClass, markLabel);

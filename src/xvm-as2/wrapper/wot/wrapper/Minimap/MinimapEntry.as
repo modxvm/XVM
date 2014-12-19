@@ -7,8 +7,7 @@ class wot.wrapper.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         super();
 
         var OVERRIDE_FUNCTIONS:Array = [
-            "lightPlayer",
-            "init",
+            "init_xvm",
             "invalidate",
             "draw"
         ];

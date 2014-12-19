@@ -193,37 +193,25 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         return cfg;
     }
 
-    private function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number):MovieClip
+    function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number):MovieClip
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
         var mc:MovieClip = selfAttachments.createEmptyMovieClip("circle" + depth, depth);
-        mc.lineStyle(thickness, color, alpha);
-
-        var centerX:Number = 0;
-        var centerY:Number = 0;
-
-        mc.moveTo(centerX + radius,  centerY);
-        for (var i = 0; i <= CIRCLE_SIDES; i++)
+        with (mc)
         {
-            var pointRatio:Number = i / CIRCLE_SIDES;
-            var xSteps:Number = magicTrigFunctionX(pointRatio);
-            var ySteps:Number = magicTrigFunctionY(pointRatio);
-            var pointX:Number = centerX + xSteps * radius;
-            var pointY:Number = centerY + ySteps * radius;
-            mc.lineTo(pointX, pointY);
+            lineStyle(thickness, color, alpha);
+            moveTo(radius, 0);
+            curveTo(radius, Math.tan(Math.PI / 8) * radius, Math.sin(Math.PI / 4) * radius, Math.sin(Math.PI / 4) * radius);
+            curveTo(Math.tan(Math.PI / 8) * radius, radius, 0, radius);
+            curveTo(-Math.tan(Math.PI / 8) * radius, radius, -Math.sin(Math.PI / 4) * radius, Math.sin(Math.PI / 4) * radius);
+            curveTo(-radius, Math.tan(Math.PI / 8) * radius, -radius, 0);
+            curveTo(-radius, -Math.tan(Math.PI / 8) * radius, -Math.sin(Math.PI / 4) * radius, -Math.sin(Math.PI / 4) * radius);
+            curveTo(-Math.tan(Math.PI / 8) * radius, -radius, 0, -radius);
+            curveTo(Math.tan(Math.PI / 8) * radius, -radius, Math.sin(Math.PI / 4) * radius, -Math.sin(Math.PI / 4) * radius);
+            curveTo(radius, -Math.tan(Math.PI / 8) * radius, radius, 0);
         }
 
         return mc;
-    }
-
-    private function magicTrigFunctionX(pointRatio):Number
-    {
-        return Math.cos(pointRatio * 2 * Math.PI);
-    }
-
-    private function magicTrigFunctionY(pointRatio):Number
-    {
-        return Math.sin(pointRatio * 2 * Math.PI);
     }
 
     private function onModuleDestroyed(event)

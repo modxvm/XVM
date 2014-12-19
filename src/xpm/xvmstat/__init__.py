@@ -180,6 +180,16 @@ def _Minimap__delEntry(self, id, inCallback = False):
     #debug('> _Minimap__delEntry')
     g_xvm.invalidateSpottedStatus(id, False)
 
+def _Minimap__callEntryFlash(base, self, id, methodName, args = None):
+    base(self, id, methodName, args)
+    if self._Minimap__isStarted:
+        if methodName == 'init':
+            if len(args) != 5:
+                base(self, id, 'init_xvm', [0])
+            else:
+                arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+                base(self, id, 'init_xvm', [arenaVehicle['accountDBID']])
+
 # stereoscope
 def AmmunitionPanel_highlightParams(self, type):
     #debug('> AmmunitionPanel_highlightParams')
@@ -227,6 +237,7 @@ def _RegisterEvents():
     from gui.Scaleform.Minimap import Minimap
     RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
     RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
+    OverrideMethod(Minimap, '_Minimap__callEntryFlash', _Minimap__callEntryFlash)
 
     # enable for pinger_wg
     #from predefined_hosts import g_preDefinedHosts

@@ -2,9 +2,10 @@
   "minimap": {
     "enabled": true,
     "iconScale": 1.5,
-    "zoom": { "centered": false },
     "hideCameraTriangle": true,
     "cameraAlpha": 90,
+    "selfIconAlpha": 75,
+    "zoom": { "centered": false },
     "circles": {
         "view": [
             { "enabled": true, "state": 1, "distance": 50, "scale": 1, "thickness": 0.5, "alpha": 70, "color": "0xFFFFFF" },
@@ -61,6 +62,7 @@
     "circles": {
       //"enabled": false,
       "view": [
+          { "enabled": true, "state": 3, "distance": 50, "scale": 1, "thickness": 0.5, "alpha": 70, "color": "0xFFFFFF" },
           { "enabled": true, "state": 1, "distance": 250, "scale": 1, "thickness": 0.5, "alpha": 70, "color": "0xFFFFFF" }
       ]
     },

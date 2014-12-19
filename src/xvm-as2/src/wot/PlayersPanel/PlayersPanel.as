@@ -125,8 +125,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         centeredTextY = wrapper.m_names._y - 5;
         wrapper.m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
         wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
-
-        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
     }
 
     private var isAltMode:Boolean = false;

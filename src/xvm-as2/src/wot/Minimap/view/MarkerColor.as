@@ -1,9 +1,10 @@
-import com.xvm.*;
-import wot.Minimap.MinimapEntry
-
 /**
- * @author sirmax
+ * @author m.schedriviy(at)gmail.com
  */
+
+import com.xvm.*;
+import wot.Minimap.*;
+
 class wot.Minimap.view.MarkerColor
 {
     public static function setColor(wrapper:net.wargaming.ingame.MinimapEntry):Void
@@ -12,7 +13,7 @@ class wot.Minimap.view.MarkerColor
         if (wrapper.m_type == null || wrapper.vehicleClass == null || wr_entryName == null || wr_entryName == "")
             return;
 
-        if (wr_entryName == MinimapEntry.STATIC_ICON_CONTROL)
+        if (wr_entryName == MinimapConstants.STATIC_ICON_CONTROL)
             return;
 
         if (wrapper.m_type == "player" && wr_entryName == "postmortemCamera")
@@ -21,9 +22,9 @@ class wot.Minimap.view.MarkerColor
         var color = null;
         if (Config.config.markers.useStandardMarkers)
         {
-            if (wr_entryName == MinimapEntry.STATIC_ICON_BASE)
+            if (wr_entryName == MinimapConstants.STATIC_ICON_BASE)
                 return;
-            var schemeName = wr_entryName != MinimapEntry.STATIC_ICON_SPAWN ? wrapper.colorSchemeName
+            var schemeName = wr_entryName != MinimapConstants.STATIC_ICON_SPAWN ? wrapper.colorSchemeName
                 : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
             if (!schemeName)
                 return;
@@ -32,8 +33,8 @@ class wot.Minimap.view.MarkerColor
         else
         {
             // use standard team bases if color is not changed
-            var isBase:Boolean = wr_entryName == MinimapEntry.STATIC_ICON_BASE;
-            var isSpawn:Boolean = wr_entryName == MinimapEntry.STATIC_ICON_SPAWN;
+            var isBase:Boolean = wr_entryName == MinimapConstants.STATIC_ICON_BASE;
+            var isSpawn:Boolean = wr_entryName == MinimapConstants.STATIC_ICON_SPAWN;
             if (isBase)
             {
                 var aa = Config.config.colors.system["ally_base"];
@@ -51,11 +52,11 @@ class wot.Minimap.view.MarkerColor
                 entryName = "enemy";
             if (entryName != null)
                 color = ColorsManager.getSystemColor(entryName, wrapper.isDead, false, isBase);
-            if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
+            if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
             {
                 if (wrapper.orig_entryName == null)
                     wrapper.orig_entryName = wrapper.entryName;
-                wrapper.setEntryName(MinimapEntry.STATIC_ICON_CONTROL);
+                wrapper.setEntryName(MinimapConstants.STATIC_ICON_CONTROL);
             }
         }
 

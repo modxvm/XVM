@@ -1,11 +1,14 @@
+/**
+ * @author ilitvinov87(at)gmail.com
+ * @author m.schedriviy(at)gmail.com
+ */
+
 import com.xvm.*;
+import gfx.io.*;
+import net.wargaming.ingame.Minimap;
 import wot.Minimap.*;
 import wot.Minimap.model.*;
 import wot.Minimap.model.externalProxy.*;
-
-/**
- * @author ilitvinov87@gmail.com
- */
 
 class wot.Minimap.Minimap
 {
@@ -24,9 +27,9 @@ class wot.Minimap.Minimap
         MinimapCtor();
     }
 
-    function onEntryInited()
+    function scaleMarkers()
     {
-        return this.onEntryInitedImpl.apply(this, arguments);
+        return this.scaleMarkersImpl.apply(this, arguments);
     }
 
     function correctSizeIndex()
@@ -39,16 +42,6 @@ class wot.Minimap.Minimap
         return this.drawImpl.apply(this, arguments);
     }
 
-    function sizeUp()
-    {
-        return this.sizeUpImpl.apply(this, arguments);
-    }
-
-    function scaleMarkers()
-    {
-        return this.scaleMarkersImpl.apply(this, arguments);
-    }
-
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -57,86 +50,39 @@ class wot.Minimap.Minimap
         Utils.TraceXvmModule("Minimap");
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, updateEntries);
-        GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, updateEntries);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, updateEntries);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
-
         GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
         GlobalEventDispatcher.addEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
-
-        checkLoading();
     }
-
-    /**
-     * icons Z indexes from Minimap.pyc:
-     *  _BACK_ICONS_RANGE = (25, 49)
-     *  _DEAD_VEHICLE_RANGE = (50, 99)
-     *  _VEHICLE_RANGE = (101, 150)
-     *  _FIXED_INDEXES = {'cameraNormal': 100,
-     *  'self': 151,
-     *  'cameraStrategic': 152,
-     *  'cell': 153 }
-     */
-    public static var MAX_DEAD_ZINDEX:Number = 99;
-    public static var LABELS:Number = MAX_DEAD_ZINDEX;
-    public static var SQUARE_1KM_INDEX:Number = MAX_DEAD_ZINDEX - 1;
-    public static var EXTERNAL_CUSTOM_INDEX:Number = MAX_DEAD_ZINDEX - 1;
-    public static var CAMERA_NORMAL_ZINDEX:Number = 100;
-    public static var SELF_ZINDEX:Number = 151;
-
-    private var isMinimapReady:Boolean = false;
-    private var isPanelReady:Boolean = false;
-    private var loadComplete:Boolean = false;
-    private var mapExtended:Boolean = false;
-    private var stereoscope_exists:Boolean = false;
-    private var stereoscope_enabled:Boolean = false;
-    private var is_moving:Boolean = false;
 
     function scaleMarkersImpl(factor:Number)
     {
+        //Logger.add("scaleMarkers");
         if (MapConfig.enabled)
         {
             Features.instance.scaleMarkers();
-            updateEntries();
         }
         else
         {
-            /** Original WG scaling behaviour */
+            // Original WG scaling behavior
             base.scaleMarkers(factor);
-        }
-    }
-
-    function onEntryInitedImpl()
-    {
-        base.onEntryInited();
-
-        if (mapExtended)
-        {
-            //Logger.add("Minimap.onEntryInitedImpl()#extended");
-            SyncModel.instance.updateIconUids();
-
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ON_ENTRY_INITED));
         }
     }
 
     function correctSizeIndexImpl(sizeIndex:Number, stageHeight:Number):Number
     {
-        var featureSizeIndex:Number = Features.instance.disableMapWindowSizeLimitation(sizeIndex);
-
-        return featureSizeIndex;
+        if (sizeIndex < MinimapConstants.MAP_MIN_ZOOM_INDEX)
+            sizeIndex = MinimapConstants.MAP_MIN_ZOOM_INDEX;
+        if (sizeIndex > MinimapConstants.MAP_MAX_ZOOM_INDEX)
+            sizeIndex = MinimapConstants.MAP_MAX_ZOOM_INDEX;
+        return sizeIndex;
     }
 
-    function drawImpl():Void
+    function drawImpl()
     {
+        var sizeIsInvalid:Boolean = wrapper.sizeIsInvalid;
         base.draw();
-    }
-
-    /** Suitable for manual debug tracing by pushing "=" button */
-    function sizeUpImpl()
-    {
-        base.sizeUp();
+        if (sizeIsInvalid)
+            GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
     }
 
     // -- Private
@@ -145,72 +91,29 @@ class wot.Minimap.Minimap
     {
         if (Config.config.minimap.enabled && Config.config.minimapAlt.enabled)
             GlobalEventDispatcher.addEventListener(Defines.E_MM_ALT_MODE, this, setAltMode);
-        updateEntries();
+
+        if (MapConfig.enabled)
+            checkLoading();
     }
 
     private function checkLoading():Void
     {
-        wrapper.icons.onEnterFrame = function()
+        var $this = this;
+        wrapper.icons.onEnterFrame = function():Void
         {
             if (this.MinimapEntry0)
             {
                 delete this.onEnterFrame;
-                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.MINIMAP_READY));
+                GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
             }
         }
     }
 
-    private function onReady(event:MinimapEvent):Void
-    {
-        switch (event.type)
-        {
-            case MinimapEvent.MINIMAP_READY:
-                isMinimapReady = true;
-                break;
-            case MinimapEvent.PANEL_READY:
-                isPanelReady = true;
-                break;
-        }
+    // Dynamic circles
 
-        loadComplete = isMinimapReady && isPanelReady;
-
-        if (loadComplete && MapConfig.enabled && !mapExtended)
-        {
-            startExtendedProcedure();
-            mapExtended = true;
-        }
-    }
-
-    private function updateEntries():Void
-    {
-        var waitFrame:Boolean = Features.instance.setCameraAlpha();
-        if (!waitFrame)
-            updateEntries2();
-        else
-        {
-            var $this = this;
-            IconsProxy.cameraEntry.wrapper.onEnterFrame = function():Void
-            {
-                delete this.onEnterFrame;
-                $this.updateEntries2();
-            }
-        }
-    }
-
-    private function updateEntries2():Void
-    {
-        Features.instance.updateSquare();
-        var entries:Array = IconsProxy.allEntries;
-        for (var i in entries)
-            entries[i].invalidate();
-    }
-
-    private function startExtendedProcedure():Void
-    {
-        SyncModel.instance.updateIconUids();
-
-        _global.setTimeout(function() { Features.instance.applyMajorMods(); }, 1);
-    }
+    private var stereoscope_exists:Boolean = false;
+    private var stereoscope_enabled:Boolean = false;
+    private var is_moving:Boolean = false;
 
     private function onMovingStateChanged(event)
     {
@@ -226,9 +129,6 @@ class wot.Minimap.Minimap
 
     private function setAltMode(e:Object):Void
     {
-        if (!mapExtended)
-            return;
-
         //Logger.add("setAltMode: " + e.isDown);
         if (Config.config.hotkeys.minimapAltMode.onHold)
             MapConfig.isAltMode = e.isDown;
@@ -238,6 +138,7 @@ class wot.Minimap.Minimap
             return;
 
         GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
+
         if (stereoscope_exists)
         {
             var en:Boolean = stereoscope_enabled;
