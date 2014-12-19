@@ -4,6 +4,7 @@
     Доступные значения: "neverSeen", "lost", "revealed", "dead".
   * добавлены новые макросы:
       {{language}} - язык клиента игрока
+      {{region}} - текущий регион игры (RU, EU, NA, CN, ASIA, VTC, KR, CT)
       {{spotted}} со значениями из секции texts/spotted
   * удалена секция playersPanel/enemySpottedMarker (используйте экстра-поля с макросом {{spotted}})
   * добавлена новая опция в экстра-поля: "bindToIcon" - если включена, позиция x привязывается к

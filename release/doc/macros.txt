@@ -123,5 +123,6 @@ Legend:
 │ {{c:t-battles}} │ X │ X │ X │ X │ X │ color depending on current vehicle battles
 │ {{marksOnGun}}  │   │ X │ X │ X │ X │ marks on gun (only for spotted vehicles)
 │ {{language}}    │ X │ X │ X │ X │ X │ player's client language
+│ {{region}}      │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
 └─────────────────┴───┴───┴───┴───┴───┴────────────────────────────────────────────────────────────────
   * Any color macro you can change to transparency macro (e.g. {{a:tdb}}).

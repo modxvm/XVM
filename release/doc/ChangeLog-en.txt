@@ -4,6 +4,7 @@
     Available values: "neverSeen", "lost", "revealed", "dead".
   * added new macros:
         {{language}} - player's client language
+        {{region}} - current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
         {{spotted}} with values from texts/spotted section
   * removed section playersPanel/enemySpottedMarker (use extra fields with {{spotted}} macro instead)
   * added new option to extraFields: "bindToIcon" - if enabled, x position is binded to vehicle icon (default false)

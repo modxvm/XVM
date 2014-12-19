@@ -477,6 +477,8 @@ package com.xvm.utils
             pdata["avglvl"] = stat.lvl;
             // {{language}}
             pdata["language"] = stat.lang;
+            // {{region}}
+            pdata["region"] = Config.gameRegion;
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn6}}
