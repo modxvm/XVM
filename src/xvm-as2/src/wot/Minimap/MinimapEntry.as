@@ -99,8 +99,6 @@ class wot.Minimap.MinimapEntry
         //Logger.add('invalidateImpl: ' + wrapper.entryName);
         base.invalidate();
 
-        MarkerColor.setColor(wrapper);
-
         //LabelViewBuilder.updateTextField(labelMc);
     }
 
@@ -109,6 +107,8 @@ class wot.Minimap.MinimapEntry
         //Logger.add('drawImpl: ' + wrapper.entryName);
 
         base.draw();
+
+        MarkerColor.setColor(wrapper);
 
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, this, playerId));
 

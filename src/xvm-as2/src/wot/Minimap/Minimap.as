@@ -59,7 +59,7 @@ class wot.Minimap.Minimap
         //Logger.add("scaleMarkers");
         if (MapConfig.enabled)
         {
-            Features.instance.scaleMarkers();
+            Features.scaleMarkers();
         }
         else
         {
@@ -93,7 +93,10 @@ class wot.Minimap.Minimap
             GlobalEventDispatcher.addEventListener(Defines.E_MM_ALT_MODE, this, setAltMode);
 
         if (MapConfig.enabled)
+        {
+            Features.init();
             checkLoading();
+        }
     }
 
     private function checkLoading():Void

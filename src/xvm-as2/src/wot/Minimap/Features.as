@@ -24,18 +24,35 @@ class wot.Minimap.Features
     private var square:Square;
     private var lines:Lines;
 
-    public static function get instance():Features
+    /**
+     * Invoked when config loaded
+     */
+    public static function init():Void
+    {
+        instance._init();
+    }
+
+    /**
+     * Invoked each time minimap.scaleMarkers is called.
+     */
+    public static function scaleMarkers():Void
+    {
+        instance._scaleMarkers();
+    }
+
+    private static function get instance():Features
     {
         if (!_instance)
-        {
             _instance = new Features();
-        }
 
         return _instance;
     }
 
     public function Features()
     {
+        if (!MapConfig.enabled)
+            return;
+
         markerScaling = new MarkerScaling();
 
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onEntryUpdated);
@@ -48,10 +65,15 @@ class wot.Minimap.Features
         LabelsContainer.init();
     }
 
+    private function _init()
+    {
+        // empty function required for instance creation
+    }
+
     private function onRefreshEvent(e)
     {
         applyFeatures();
-        scaleMarkers();
+        _scaleMarkers();
 
         var entries:Array = IconsProxy.allEntries;
         for (var i in entries)
@@ -93,11 +115,7 @@ class wot.Minimap.Features
 
     // GLOBAL
 
-    /**
-     * Have to be public.
-     * Invoked each time minimap.scaleMarkers is called.
-     */
-    public function scaleMarkers():Void
+    private function _scaleMarkers():Void
     {
         markerScaling.scale();
     }
@@ -153,7 +171,7 @@ class wot.Minimap.Features
         markerScaling.scaleEntry(e.entry.wrapper);
 
         if (e.entry == IconsProxy.cameraEntry)
-            Features.instance.setCameraAlpha();
+            setCameraAlpha();
     }
 
     /**

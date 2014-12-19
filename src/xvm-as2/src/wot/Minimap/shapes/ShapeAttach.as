@@ -62,7 +62,7 @@ class wot.Minimap.shapes.ShapeAttach
 
     private function postmortemMod(event)
     {
-        Logger.add("postmortemMod");
+        //Logger.add("postmortemMod");
         isSelfDead = true;
         selfAttachments._visible = false;
     }
