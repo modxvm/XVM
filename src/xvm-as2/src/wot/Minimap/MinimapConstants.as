@@ -12,9 +12,8 @@
      *  'cameraVideo': 160}
      */
     public static var MAX_DEAD_ZINDEX:Number = 99;
-    public static var LABELS:Number = MAX_DEAD_ZINDEX;
-    public static var SQUARE_1KM_INDEX:Number = MAX_DEAD_ZINDEX - 1;
-    public static var EXTERNAL_CUSTOM_INDEX:Number = MAX_DEAD_ZINDEX - 1;
+    public static var LABELS_ZINDEX:Number = MAX_DEAD_ZINDEX - 1;
+    public static var SQUARE_1KM_ZINDEX:Number = MAX_DEAD_ZINDEX - 2;
     public static var CAMERA_NORMAL_ZINDEX:Number = 100;
     public static var SELF_ZINDEX:Number = 151;
 

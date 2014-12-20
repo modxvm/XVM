@@ -145,7 +145,6 @@ class com.xvm.Defines
     public static var E_PP_ALT_MODE = "pp_alt_mode";
     public static var E_MM_ALT_MODE = "mm_alt_mode";
     public static var E_MM_ZOOM = "mm_zoom";
-    public static var E_BATTLE_STATE_CHANGED = "battle_state_changed";
     public static var E_STEREOSCOPE_TOGGLED = "stereoscope_toggled";
     public static var E_PLAYER_DEAD = "player_dead";
     public static var E_SELF_DEAD = "self_dead";

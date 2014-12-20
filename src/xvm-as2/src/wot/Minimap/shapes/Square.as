@@ -45,7 +45,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function createSquareClip():MovieClip
     {
-        return IconsProxy.createEmptyMovieClip("square", MinimapConstants.SQUARE_1KM_INDEX);
+        return IconsProxy.createEmptyMovieClip("square", MinimapConstants.SQUARE_1KM_ZINDEX);
     }
 
     private function defineStyle():Void

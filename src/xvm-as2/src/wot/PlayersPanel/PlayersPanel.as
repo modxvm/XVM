@@ -4,6 +4,7 @@
  * @author ilitvinov87
  */
 import com.xvm.*;
+import com.xvm.events.*;
 import gfx.controls.*;
 import wot.Minimap.*;
 
@@ -65,7 +66,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, update2);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, update2);
-        GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, update2);
+        GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, update2);
     }
 
     // PRIVATE

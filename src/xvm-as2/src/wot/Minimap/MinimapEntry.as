@@ -14,6 +14,7 @@
  */
 
 import com.xvm.*;
+import net.wargaming.ingame.MinimapEntry;
 import wot.Minimap.*;
 import wot.Minimap.dataTypes.*;
 import wot.Minimap.model.*;
@@ -41,11 +42,6 @@ class wot.Minimap.MinimapEntry
         return this.init_xvmImpl.apply(this, arguments);
     }
 
-    function invalidate()
-    {
-        return this.invalidateImpl.apply(this, arguments);
-    }
-
     function draw()
     {
         return this.drawImpl.apply(this, arguments);
@@ -61,20 +57,20 @@ class wot.Minimap.MinimapEntry
     // Used only for camera entry to define if entry is processed with Lines class
     public var cameraExtendedToken:Boolean;
 
-    //private var labelMc:MovieClip;
+    private var labelMc:MovieClip;
 
     function MinimapEntryCtor()
     {
         Utils.TraceXvmModule("Minimap");
 
-        //var $this = this;
-        //wrapper["$removeMovieClip"] = wrapper.removeMovieClip;
-        //wrapper.removeMovieClip = function()
-        //{
-            ////Logger.add("remove: " + $this.uid);
-            //GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, $this.playerId));
-            //this["$removeMovieClip"]()
-        //}
+        var $this = this;
+        wrapper["$removeMovieClip"] = wrapper.removeMovieClip;
+        wrapper.removeMovieClip = function()
+        {
+            Logger.add("remove: " + $this.playerId);
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, $this.playerId));
+            this["$removeMovieClip"]()
+        }
     }
 
     function init_xvmImpl(playerId:Number)
@@ -90,15 +86,7 @@ class wot.Minimap.MinimapEntry
 
         //Logger.add("add:   " + playerId);
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_INITED, this, playerId));
-        //this.onEntryRevealed();
-    }
-
-    function invalidateImpl()
-    {
-        //Logger.add('invalidateImpl: ' + wrapper.entryName);
-        base.invalidate();
-
-        //LabelViewBuilder.updateTextField(labelMc);
+        this.onEntryRevealed();
     }
 
     function drawImpl()
@@ -116,7 +104,8 @@ class wot.Minimap.MinimapEntry
             GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
         }
 
-        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, this, playerId));
+        if (playerId)
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, this, playerId));
 
         rescaleAttachments();
     }
@@ -150,43 +139,39 @@ class wot.Minimap.MinimapEntry
 
     // -- Private
 
-    //private function onEntryRevealed()
-    //{
-        //if (!MapConfig.revealedEnabled)
-            //return;
-//
-        //labelMc = LabelsContainer.getLabel(playerId);
-        //if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
-        //{
-            //if (wrapper.orig_entryName == null)
-                //wrapper.orig_entryName = wrapper.entryName;
-            //wrapper.setEntryName(MinimapConstants.STATIC_ICON_CONTROL);
-        //}
-//
-        ////setLabelToMimicEntryMoves();
-    //}
+    private function onEntryRevealed()
+    {
+        if (!MapConfig.revealedEnabled)
+            return;
 
-    /*
+        this.labelMc = LabelsContainer.getLabel(playerId);
+        if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
+        {
+            if (wrapper.orig_entryName == null)
+                wrapper.orig_entryName = wrapper.entryName;
+            wrapper.setEntryName(MinimapConstants.STATIC_ICON_CONTROL);
+        }
+
+        setLabelToMimicEntryMoves();
+    }
+
+    private var intervalId:Number = 0;
     private function setLabelToMimicEntryMoves():Void
     {
-        /**
-         * No FPS drop discovered.
-         * Okay.
-         */
-     /*   wrapper.onEnterFrame = function()
+        var $this:MinimapEntry = this;
+        var wrapper:net.wargaming.ingame.MinimapEntry = this.wrapper;
+        if (intervalId)
+            clearInterval(intervalId);
+        intervalId = setInterval(function()
         {
-            /**
-             * Seldom error workaround.
-             * Wreck sometimes is placed at map center.
-             */
-       /*     if (!this._x && !this._y)
-            {
-                return;
-            }
+            //Logger.add($this.playerId + " " + wrapper._x + " " + wrapper._y);
 
-            var entry:wot.Minimap.MinimapEntry = this.xvm_worker;
-            entry.labelMc._x = this._x;
-            entry.labelMc._y = this._y;
-        }
-    }*/
+            // Seldom error workaround. Wreck sometimes is placed at map center.
+            if (!wrapper._x && !wrapper._y)
+                return;
+
+            $this.labelMc._x = wrapper._x;
+            $this.labelMc._y = wrapper._y;
+        }, 1);
+    }
 }

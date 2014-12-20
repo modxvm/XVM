@@ -12,6 +12,8 @@ class wot.Minimap.view.LabelViewBuilder
 
     public static function createTextField(label:MovieClip):Void
     {
+        removeTextField(label);
+
         var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
         var playerInfo:Player = label[LabelsContainer.PLAYER_INFO_FIELD_NAME];
         var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
@@ -20,6 +22,7 @@ class wot.Minimap.view.LabelViewBuilder
         var offset:Point = MapConfig.unitLabelOffset(entryName, status);
 
         var textField:TextField = label.createTextField(TEXT_FIELD_NAME, TF_DEPTH, offset.x, offset.y, 100, 40);
+        label[TEXT_FIELD_NAME] = textField;
         textField.antiAliasType = "advanced";
         textField.html = true;
         textField.multiline = true;
@@ -70,6 +73,16 @@ class wot.Minimap.view.LabelViewBuilder
         for (var i in playerInfo)
             obj[i] = playerInfo[i];
         var text:String = Macros.Format(playerInfo.userName, format, obj);
+        //Logger.add(text);
         textField.htmlText = text;
+    }
+
+    public static function removeTextField(label:MovieClip):Void
+    {
+        var textField:TextField = label[TEXT_FIELD_NAME];
+        if (textField == null)
+            return;
+        textField.removeTextField();
+        label[TEXT_FIELD_NAME] = null;
     }
 }

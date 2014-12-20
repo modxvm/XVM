@@ -1,4 +1,6 @@
 import com.xvm.*;
+import com.xvm.DataTypes.*;
+import com.xvm.events.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.model.mapSize.*;
@@ -59,8 +61,8 @@ class wot.Minimap.Features
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onEntryUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
 
-        //GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, updateEntries);
-        //GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, updateEntries);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onRefreshEvent);
+        GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
 
         LabelsContainer.init();
     }
@@ -77,24 +79,19 @@ class wot.Minimap.Features
 
         var entries:Array = IconsProxy.allEntries;
         for (var i in entries)
-            entries[i].invalidate();
+            entries[i].wrapper.invalidate();
     }
 
-    //public function updateEntries()
-    //{
-        //var waitFrame:Boolean = Features.instance.setCameraAlpha();
-        /*if (!waitFrame)
-            updateEntries2();
-        else
-        {
-            var $this = this;
-            IconsProxy.cameraEntry.wrapper.onEnterFrame = function():Void
-            {
-                delete this.onEnterFrame;
-                $this.updateEntries2();
-            }
-        }*/
-    //}
+    private function onBattleStateChanged(e:EBattleStateChanged)
+    {
+        var pdata:BattleStateData = BattleState.getUserData(e.playerName);
+        if (pdata == null)
+            return;
+        var entry:MinimapEntry = IconsProxy.entry(pdata.playerId);
+        if (entry == null)
+            return;
+        entry.wrapper.invalidate();
+    }
 
     private function applyFeatures():Void
     {

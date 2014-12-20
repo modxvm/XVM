@@ -6,6 +6,7 @@ import com.greensock.*;
 import com.greensock.plugins.*;
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import com.xvm.events.*;
 import flash.external.*;
 import wot.battle.*;
 
@@ -211,15 +212,15 @@ class wot.battle.BattleMain
 
         //Logger.addObject(data);
         BattleState.setUserData(playerName, data);
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED, playerName: playerName } );
+        GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
     }
 
     private function onMarksOnGun(playerName:String, marksOnGun:Number)
     {
+        //Logger.add("marksOnGun: " + marksOnGun);
         BattleState.setUserData(playerName, { marksOnGun:marksOnGun } );
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED, playerName: playerName } );
+        GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
     }
-
 
     private var debugTextField:TextField = null;
     function onDebugText(text)
