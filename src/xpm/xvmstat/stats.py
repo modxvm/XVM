@@ -126,11 +126,11 @@ class _Stat(object):
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
                 self._get_battle()
-                return
         except Exception, ex:
             err(traceback.format_exc())
         with self.lock:
-            self.resp = {}
+            if not self.resp:
+                self.resp = {}
 
 
     def getBattleResultsStat(self):
@@ -138,11 +138,11 @@ class _Stat(object):
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAccount':
                 self._get_battleresults()
-                return
         except Exception, ex:
             err(traceback.format_exc())
         with self.lock:
-            self.resp = {}
+            if not self.resp:
+                self.resp = {}
 
 
     def getUserData(self):
@@ -151,7 +151,8 @@ class _Stat(object):
         except Exception, ex:
             err(traceback.format_exc())
         with self.lock:
-            self.resp = {}
+            if not self.resp:
+                self.resp = {}
 
 
     def _get_battle(self):
@@ -281,6 +282,8 @@ class _Stat(object):
                     server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
                     (response, duration, errStr) = loadUrl(server, req)
 
+                    #log(response)
+
                     if not response:
                         #err('Empty response or parsing error')
                         pass
@@ -302,7 +305,7 @@ class _Stat(object):
                 err('_get_user() exception: ' + traceback.format_exc())
 
         with self.lock:
-            self.resp = self.cacheUser[cacheKey] if cacheKey in self.cacheUser else {}
+            self.resp = self.cacheUser.get(cacheKey, {})
 
 
     def _get_battle_stub(self, pl):
