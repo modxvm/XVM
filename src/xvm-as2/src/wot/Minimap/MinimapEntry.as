@@ -155,23 +155,16 @@ class wot.Minimap.MinimapEntry
         setLabelToMimicEntryMoves();
     }
 
-    private var intervalId:Number = 0;
     private function setLabelToMimicEntryMoves():Void
     {
-        var $this:MinimapEntry = this;
-        var wrapper:net.wargaming.ingame.MinimapEntry = this.wrapper;
-        if (intervalId)
-            clearInterval(intervalId);
-        intervalId = setInterval(function()
+        this.wrapper.onEnterFrame = function()
         {
-            //Logger.add($this.playerId + " " + wrapper._x + " " + wrapper._y);
-
             // Seldom error workaround. Wreck sometimes is placed at map center.
-            if (!wrapper._x && !wrapper._y)
+            if (isNaN(this._x) || isNaN(this._y))
                 return;
 
-            $this.labelMc._x = wrapper._x;
-            $this.labelMc._y = wrapper._y;
-        }, 1);
+            this.xvm_worker.labelMc._x = this._x;
+            this.xvm_worker.labelMc._y = this._y;
+        };
     }
 }
