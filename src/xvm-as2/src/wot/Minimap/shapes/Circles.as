@@ -196,20 +196,23 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number):MovieClip
     {
-        var depth:Number = selfAttachments.getNextHighestDepth();
-        var mc:MovieClip = selfAttachments.createEmptyMovieClip("circle" + depth, depth);
+        var depth:Number = holderMc.getNextHighestDepth();
+        var mc:MovieClip = holderMc.createEmptyMovieClip(depth.toString(), depth);
+
         with (mc)
         {
             lineStyle(thickness, color, alpha);
+            var c1 = radius * (Math.SQRT2 - 1);
+            var c2 = radius * Math.SQRT2 / 2;
             moveTo(radius, 0);
-            curveTo(radius, Math.tan(Math.PI / 8) * radius, Math.sin(Math.PI / 4) * radius, Math.sin(Math.PI / 4) * radius);
-            curveTo(Math.tan(Math.PI / 8) * radius, radius, 0, radius);
-            curveTo(-Math.tan(Math.PI / 8) * radius, radius, -Math.sin(Math.PI / 4) * radius, Math.sin(Math.PI / 4) * radius);
-            curveTo(-radius, Math.tan(Math.PI / 8) * radius, -radius, 0);
-            curveTo(-radius, -Math.tan(Math.PI / 8) * radius, -Math.sin(Math.PI / 4) * radius, -Math.sin(Math.PI / 4) * radius);
-            curveTo(-Math.tan(Math.PI / 8) * radius, -radius, 0, -radius);
-            curveTo(Math.tan(Math.PI / 8) * radius, -radius, Math.sin(Math.PI / 4) * radius, -Math.sin(Math.PI / 4) * radius);
-            curveTo(radius, -Math.tan(Math.PI / 8) * radius, radius, 0);
+            curveTo(radius, c1, c2, c2);
+            curveTo(c1, radius, 0, radius);
+            curveTo(-c1, radius, -c2, c2);
+            curveTo(-radius, c1, -radius, 0);
+            curveTo(-radius, -c1, -c2, -c2);
+            curveTo(-c1, -radius, 0, -radius);
+            curveTo(c1, -radius, c2, -c2);
+            curveTo(radius,-c1, radius, 0);
         }
 
         return mc;

@@ -63,13 +63,19 @@ class wot.Minimap.MinimapEntry
     {
         Utils.TraceXvmModule("Minimap");
 
-        var $this = this;
-        wrapper["$removeMovieClip"] = wrapper.removeMovieClip;
-        wrapper.removeMovieClip = function()
+        if (this.wrapper._name == "MinimapEntry0")
+            return;
+
+        var old_removeMovieClip:Function = this.wrapper.removeMovieClip;
+        this.wrapper.removeMovieClip = function()
         {
-            Logger.add("remove: " + $this.playerId);
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, $this.playerId));
-            this["$removeMovieClip"]()
+            if (!this.xvm_worker.playerId)
+            {
+                Logger.add("remove: " + this.xvm_worker.playerId);
+                Logger.addObject(this);
+            }
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this.xvm_worker.playerId));
+            old_removeMovieClip()
         }
     }
 
@@ -106,6 +112,8 @@ class wot.Minimap.MinimapEntry
 
         if (playerId)
             GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, this, playerId));
+        else if (this.wrapper._name == "MinimapEntry0")
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.CAMERA_UPDATED, this));
 
         rescaleAttachments();
     }

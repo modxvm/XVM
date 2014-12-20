@@ -4,6 +4,7 @@ class wot.Minimap.MinimapEvent
 {
     public static var ENTRY_INITED:String = "ENTRY_INITED";
     public static var ENTRY_UPDATED:String = "ENTRY_UPDATED";
+    public static var CAMERA_UPDATED:String = "CAMERA_UPDATED";
     public static var ENTRY_LOST:String = "ENTRY_LOST";
     public static var REFRESH:String = "REFRESH";
 

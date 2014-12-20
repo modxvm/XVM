@@ -9,7 +9,7 @@ import wot.Minimap.dataTypes.cfg.*;
  * Draws lines of sight and horizontal focusing angles
  */
 
-class wot.Minimap.shapes.Lines extends ShapeAttach
+class wot.Minimap.shapes.Lines extends ShapeAttachSelf
 {
     private var camAttach:MovieClip = null;
     private var vehLines:MovieClip = null;
@@ -35,11 +35,13 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
          * Camera entry (MinimapEntry0) is reinitialized spontaniously many times in a round.
          */
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onEntryInited);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.CAMERA_UPDATED, this, onEntryInited);
     }
 
     public function Dispose()
     {
         GlobalEventDispatcher.removeEventListener(MinimapEvent.ENTRY_INITED, this, onEntryInited);
+        GlobalEventDispatcher.removeEventListener(MinimapEvent.CAMERA_UPDATED, this, onEntryInited);
 
         if (camAttach != null)
         {
