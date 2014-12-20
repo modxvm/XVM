@@ -120,10 +120,10 @@
         // Field offset relative to current icon (except lost - relative to enemy last seen position).
         // Смещение полей относительно текущей иконки (кроме lost и dead- относительно последних координат видимой позиции).
         "offset": {
-          "ally":           {"x": 3, "y": -1},
-          "teamkiller":     {"x": 3, "y": -1},
-          "enemy":          {"x": 3, "y": -1},
-          "squad":          {"x": 3, "y": -2},
+          "ally":           {"x": 3, "y": -2},
+          "teamkiller":     {"x": 3, "y": -2},
+          "enemy":          {"x": 3, "y": -2},
+          "squad":          {"x": 3, "y": -3},
           "oneself":        {"x": 0, "y": 0},
           "lostally":       {"x": -5, "y": -11},
           "lostteamkiller": {"x": -5, "y": -11},

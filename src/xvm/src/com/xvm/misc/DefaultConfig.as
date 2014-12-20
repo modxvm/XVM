@@ -648,10 +648,10 @@ package com.xvm.misc
                 deadsquad:      { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 }
             };
             c.labels.units.offset = {
-                ally:           {x: 3, y: -1},
-                teamkiller:     {x: 3, y: -1},
-                enemy:          {x: 3, y: -1},
-                squad:          {x: 3, y: -2},
+                ally:           {x: 3, y: -2},
+                teamkiller:     {x: 3, y: -2},
+                enemy:          {x: 3, y: -2},
+                squad:          {x: 3, y: -3},
                 oneself:        {x: 0, y: 0},
                 lostally:       {x: -5, y: -11},
                 lostteamkiller: {x: -5, y: -11},

@@ -1,8 +1,9 @@
 import com.xvm.*;
 import flash.geom.*;
-import wot.Minimap.dataTypes.Player;
-import wot.Minimap.model.externalProxy.MapConfig;
-import wot.Minimap.view.LabelsContainer;
+import wot.Minimap.*;
+import wot.Minimap.dataTypes.*;
+import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.view.*;
 
 class wot.Minimap.view.LabelViewBuilder
 {
@@ -75,6 +76,13 @@ class wot.Minimap.view.LabelViewBuilder
         var text:String = Macros.Format(playerInfo.userName, format, obj);
         //Logger.add(text);
         textField.htmlText = text;
+
+        var scale:Number = IconsProxy.selfEntry.wrapper._xscale;
+        if (textField._xscale != scale)
+        {
+            //Logger.add("rescale: " + textField._xscale + " => " + scale);
+            textField._xscale = textField._yscale = scale;
+        }
     }
 
     public static function removeTextField(label:MovieClip):Void
