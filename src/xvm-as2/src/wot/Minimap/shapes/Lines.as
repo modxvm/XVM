@@ -9,7 +9,7 @@ import wot.Minimap.dataTypes.cfg.*;
  * Draws lines of sight and horizontal focusing angles
  */
 
-class wot.Minimap.shapes.Lines extends ShapeAttachSelf
+class wot.Minimap.shapes.Lines extends ShapeAttach
 {
     private var camAttach:MovieClip = null;
     private var vehLines:MovieClip = null;
