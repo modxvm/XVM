@@ -62,26 +62,11 @@ class wot.Minimap.MinimapEntry
     function MinimapEntryCtor()
     {
         Utils.TraceXvmModule("Minimap");
-
-        if (this.wrapper._name == "MinimapEntry0")
-            return;
-
-        var old_removeMovieClip:Function = this.wrapper.removeMovieClip;
-        this.wrapper.removeMovieClip = function()
-        {
-            if (!this.xvm_worker.playerId)
-            {
-                Logger.add("remove: " + this.xvm_worker.playerId);
-                Logger.addObject(this);
-            }
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this.xvm_worker.playerId));
-            old_removeMovieClip()
-        }
     }
 
     function init_xvmImpl(playerId:Number)
     {
-        //Logger.add("init_xvmImpl");
+        //Logger.add("init_xvmImpl: " + playerId);
 
         MarkerColor.setColor(wrapper);
 
@@ -90,14 +75,26 @@ class wot.Minimap.MinimapEntry
 
         this.playerId = playerId;
 
+        IconsProxy.playerIds[playerId] = this;
+
         //Logger.add("add:   " + playerId);
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_INITED, this, playerId));
+
         this.onEntryRevealed();
+
+        this.wrapper["_xvm_removeMovieClip"] = this.wrapper.removeMovieClip;
+        this.wrapper.removeMovieClip = function()
+        {
+            //Logger.add("remove: " + playerId);
+            delete IconsProxy.playerIds[playerId];
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this.xvm_worker, playerId));
+            this["_xvm_removeMovieClip"]()
+        }
     }
 
     function drawImpl()
     {
-        //Logger.add('drawImpl: ' + wrapper.entryName);
+        //Logger.add('draw: ' + playerId + " " + wrapper.entryName + " " + wrapper.m_type + " " + wrapper.vehicleClass);
 
         base.draw();
 

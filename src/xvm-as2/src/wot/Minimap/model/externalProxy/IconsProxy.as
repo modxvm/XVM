@@ -12,6 +12,8 @@ import wot.Minimap.*;
 
 class wot.Minimap.model.externalProxy.IconsProxy
 {
+    public static var playerIds:Object = {}
+
     public static function get allEntries():Array
     {
         return _allEntries;

@@ -1,4 +1,5 @@
 import com.xvm.*;
+import com.xvm.DataTypes.BattleStateData;
 import flash.geom.*;
 import wot.Minimap.*;
 import wot.Minimap.dataTypes.*;
@@ -72,6 +73,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     private function onMinimapEvent(e:MinimapEvent)
     {
         //Logger.add("e.value = " + e.value);
+        //if (isNaN(e.value))
+        //    Logger.addObject(e, 2, "onMinimapEvent: null value");
         invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
         invalidate();
     }
@@ -79,6 +82,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     private function onPlayerDeadEvent(e:Object)
     {
         //Logger.add("(dead) e.value = " + e.value);
+        //if (isNaN(e.value))
+        //    Logger.addObject(e, 2, "onPlayerDeadEvent: null value");
         invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
         invalidate();
     }
@@ -199,7 +204,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         //Logger.add("LabelsContainer.getPresenceStatus()");
         var status:Number;
 
-        if (IconsProxy.entry(playerId) != null)
+        if (IconsProxy.playerIds[playerId] != null)
         {
             status = Player.PLAYER_REVEALED;
         }
