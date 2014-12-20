@@ -13,29 +13,7 @@ class com.xvm.DataTypes.BattleStateData
     public var marksOnGun:Number = NaN;
     public var spotted:String = null;
 
-    public function BattleStateData(playerName:String, playerId:Number, vehId:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String)
+    /*public function BattleStateData(playerName:String, playerId:Number, vehId:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String)
     {
-        if (playerName != null)
-            this.playerName = playerName;
-
-        if (!isNaN(playerId))
-            this.playerId = playerId;
-
-        if (!isNaN(vehId))
-            this.vehId = vehId;
-
-        this.dead = dead;
-
-        if (!isNaN(curHealth))
-            this.curHealth = curHealth;
-
-        if (!isNaN(maxHealth))
-            this.maxHealth = maxHealth;
-
-        if (!isNaN(marksOnGun))
-            this.marksOnGun = marksOnGun;
-
-        if (spotted != null)
-            this.spotted = spotted;
-    }
+    }*/
 }
