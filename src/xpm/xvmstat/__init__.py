@@ -13,6 +13,7 @@ XPM_GAME_VERSIONS  = ["0.9.4","0.9.5"]
 from pprint import pprint
 import time
 import traceback
+import cPickle
 
 import BigWorld
 
@@ -195,6 +196,23 @@ def AmmunitionPanel_highlightParams(self, type):
     #debug('> AmmunitionPanel_highlightParams')
     g_xvm.updateTankParams()
 
+def BattleResultsCache_get(base, self, arenaUniqueID, callback):
+    try:
+        filename = '{0}.dat'.format(arenaUniqueID)
+        if not os.path.exists(filename):
+            base(self, arenaUniqueID, callback)
+        else:
+            fileHandler = open(filename, 'rb')
+            (version, battleResults) = cPickle.load(fileHandler)
+            if battleResults is not None:
+                if callback is not None:
+                    import AccountCommands
+                    from account_helpers.BattleResultsCache import convertToFullForm
+                    callback(AccountCommands.RES_CACHE, convertToFullForm(battleResults))
+    except Exception, ex:
+        err(traceback.format_exc())
+        base(self, arenaUniqueID, callback)
+
 #####################################################################
 # Register events
 
@@ -248,6 +266,9 @@ def _RegisterEvents():
 
     from BattleReplay import g_replayCtrl
     g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
+
+    from account_helpers.BattleResultsCache import BattleResultsCache
+    OverrideMethod(BattleResultsCache, 'get', BattleResultsCache_get)
 
 BigWorld.callback(0, _RegisterEvents)
 

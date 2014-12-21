@@ -68,7 +68,7 @@ class Xvm(object):
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:
                     return (arena.extraData.get('battleLevel'), True)
-                return (0, True)
+                return (None, True)
 
         except Exception, ex:
             err(traceback.format_exc())
