@@ -487,7 +487,7 @@ class Xvm(object):
                 movie.invoke((RESPOND_CONFIG, [
                     self.config_str,
                     self.lang_str,
-                    BigWorld.player().arena.extraData['battleLevel'] + 1,
+                    BigWorld.player().arena.extraData['battleLevel'],
                     getVehicleInfoDataStr(),
                     simplejson.dumps(token.networkServicesSettings),
                     comments.getXvmUserComments(not isReplay())]))
