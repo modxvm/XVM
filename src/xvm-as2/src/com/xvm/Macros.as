@@ -105,7 +105,7 @@ class com.xvm.Macros
             //    Logger.add(pname + "> " + format);
 
             //Logger.add(pname + "> " + format);
-            //Logger.add(pname + "> " + res);
+            //Logger.add(pname + "= " + res);
             return res;
         }
         catch (ex:Error)

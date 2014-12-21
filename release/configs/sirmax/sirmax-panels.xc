@@ -23,7 +23,6 @@
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
       { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
-      //{ "x": 10, "y": 0, "align": "center", "valign": "top", "bindToIcon": true, "format": "<img src='xvm://res/icons/lang/{{lang|eu}}.png' width='16' height='11'>", "shadow": {} },
       {}
     ],
     "extraFieldsRight": [
@@ -37,7 +36,6 @@
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
       { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
-      //{ "x": 10, "y": 0, "align": "center", "valign": "top", "bindToIcon": true, "format": "<img src='xvm://res/icons/lang/{{lang|eu}}.png' width='16' height='11'>", "shadow": {} },
       { "x": 0, "y": 5, "align": "center", "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} },
       {}
     ],

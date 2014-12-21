@@ -29,7 +29,7 @@ package xvm.hangar.views
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
 
-            //Cmd.runTest("battleResults", "4154918420461371.dat");
+            //Cmd.runTest("battleResults", "3158266965484148.dat");
             //Cmd.runTest("battleResults", "19708158929042709.dat");
         }
     }

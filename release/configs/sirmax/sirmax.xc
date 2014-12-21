@@ -4,7 +4,7 @@
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/lang/{{language}}.png' width='16' height='11'> <font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{c:tdv|#666666}}'>{{tdv%0.1f|---}}|<font color='{{c:e|#666666}}'>{{e|-}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
+    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/lang/{{language|empty}}.png' width='16' height='11'> <font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{c:tdv|#666666}}'>{{tdv%0.1f|---}}|<font color='{{c:e|#666666}}'>{{e|-}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
     //"formatVehicle": "<font color='{{c:teff|#666666}}'>{{teff%4d|----}}</font>",
 
