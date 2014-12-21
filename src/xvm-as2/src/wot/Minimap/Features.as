@@ -59,6 +59,7 @@ class wot.Minimap.Features
 
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onEntryUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onEntryUpdated);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.CAMERA_UPDATED, this, onCameraUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
 
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onRefreshEvent);
@@ -166,49 +167,34 @@ class wot.Minimap.Features
     private function onEntryUpdated(e:MinimapEvent):Void
     {
         markerScaling.scaleEntry(e.entry.wrapper);
-
-        if (e.entry == IconsProxy.cameraEntry)
-            setCameraAlpha();
     }
 
     /**
      * Setup alpha for camera of player himself.
      * Looks like green highlighted corner.
-     *
-     * Have to be public.
-     * Invoked each time minimap.onEntryInited is called.
      */
-    private function setCameraAlpha():Boolean
+    private function onCameraUpdated(e:MinimapEvent):Void
     {
-        var waitFrame:Boolean = false;
-
-        if (MapConfig.enabled)
+        var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry.wrapper;
+        if (MapConfig.hideCameraTriangle)
         {
-            var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry.wrapper;
-            if (MapConfig.hideCameraTriangle)
+            if (camera._currentframe != 2)
             {
-                if (camera._currentframe != 2)
-                {
-                    waitFrame = true;
-                    camera.gotoAndStop(2); // "ally"
-                    camera.player._visible = false;
-                }
+                camera.gotoAndStop(2); // "ally"
+                camera.player._visible = false;
             }
-            else
+        }
+        else
+        {
+            if (camera._currentframe != 4)
             {
-                if (camera._currentframe != 4)
-                {
-                    waitFrame = true;
-                    camera.gotoAndStop(4); // "cameraNormal"
-                }
+                camera.gotoAndStop(4); // "cameraNormal"
             }
-
-            camera.vehicleNameTextFieldClassic._visible = false;
-            camera.vehicleNameTextFieldAlt._visible = false;
-            camera._alpha = MapConfig.cameraAlpha;
         }
 
-        return waitFrame;
+        camera.vehicleNameTextFieldClassic._visible = false;
+        camera.vehicleNameTextFieldAlt._visible = false;
+        camera._alpha = MapConfig.cameraAlpha;
     }
 
     /**
