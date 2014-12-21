@@ -427,14 +427,16 @@ class Xvm(object):
                     movie = self.battleFlashObject.movie
                     if movie is not None:
                         #debug('updateBattleState: {0} {1}'.format(vID, set(state.items())^set((last if last else {}).items())))
+                        cfgAllowHp = config.config['battle']['allowHpInPanelsAndMinimap']
+                        cfgMarksOnGun = config.config['battle']['allowMarksOnGunInPanelsAndMinimap']
                         movie.invoke((RESPOND_BATTLESTATE,
                             state['playerName'],
                             state['playerId'],
                             state['vId'],
                             state['dead'],
-                            state['curHealth'],
-                            state['maxHealth'],
-                            state['marksOnGun'],
+                            state['curHealth'] if cfgAllowHp else None,
+                            state['maxHealth'] if cfgAllowHp else None,
+                            state['marksOnGun'] if cfgAllowHp or cfgMarksOnGun else None,
                             state['spotted'],
                         ))
 
