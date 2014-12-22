@@ -6,10 +6,10 @@ BUILD_LIBS=0
 ### Path vars can be assigned at .bashrc
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
 
+cd $(dirname $0)
+
 [ "$GAME_VER" = "" ] && GAME_VER=$(<../../build/target_version)
 GAME_VER=`echo $GAME_VER | tr -d '\n\r'`
-
-cd $(dirname $0)
 
 ### Find Python executable
   PY_EXEC="/cygdrive/c/Python27/python.exe"

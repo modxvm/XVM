@@ -66,7 +66,7 @@ package com.xvm.misc
                         text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1);
                     }
                 }
-                if (showTier)
+                if (showTier && Chance.battleTier != 0)
                 {
                     if (text != "")
                         text += ". ";
@@ -118,11 +118,12 @@ package com.xvm.misc
         // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
         private static function ChanceFuncG(vdata:VehicleData, stat:StatData):Number
         {
-            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
+            var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battles = 8 level
+            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
 
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
-            var T:Number = battleTier;
+            var T:Number = tier;
             //Logger.addObject(stat);
             chanceLog.push(stat);
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
@@ -153,11 +154,12 @@ package com.xvm.misc
         /*
         private static function ChanceFuncT(vdata:VehicleData, stat:StatData):Number
         {
-            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
+            var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battles = 8 level
+            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
 
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
-            var T:Number = battleTier;
+            var T:Number = tier;
             var Bt:Number = stat.v.b || 0;
             var Et:Number = stat.v.teff || 0;
             var Rt:Number = stat.v.r || 0;
@@ -202,11 +204,12 @@ package com.xvm.misc
             if (!stat.alive)
                 return 0;
 
-            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
+            var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battles = 8 level
+            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
 
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
-            var T:Number = battleTier;
+            var T:Number = tier;
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
@@ -238,11 +241,12 @@ package com.xvm.misc
             if (!stat.alive)
                 return 0;
 
-            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
+            var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battles = 8 level
+            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
 
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
-            var T:Number = battleTier;
+            var T:Number = tier;
             var Bt:Number = stat.v.b || 0;
             var Et:Number = stat.v.teff || 0;
             var Rt:Number = stat.v.r || 0;
