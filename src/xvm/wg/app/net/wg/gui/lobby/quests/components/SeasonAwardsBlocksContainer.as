@@ -66,10 +66,9 @@ package net.wg.gui.lobby.quests.components
         
         private function layoutContainer() : void
         {
-            var _loc2_:* = false;
             var _loc3_:* = false;
             var _loc1_:Number = 0.0;
-            _loc2_ = this.basicAwardsContainer.getItemsCount() > 0;
+            var _loc2_:* = this.basicAwardsContainer.getItemsCount() > 0;
             this.basicAwardsContainer.visible = _loc2_;
             if(_loc2_)
             {

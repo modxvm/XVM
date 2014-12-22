@@ -25,7 +25,6 @@ package net.wg.gui.cyberSport.controls
         
         public function VehicleSelector()
         {
-            this._filtersMode = VehicleSelectorFilter.MODE_ALL_VEHICLES;
             this._localSelectionOverrides = [];
             super();
         }
@@ -44,7 +43,7 @@ package net.wg.gui.cyberSport.controls
         
         private var _multiSelection:Boolean = false;
         
-        private var _filtersMode:String;
+        private var _filtersMode:String = "allVehicles";
         
         private var _selectedItemVO:VehicleSelectorItemVO;
         

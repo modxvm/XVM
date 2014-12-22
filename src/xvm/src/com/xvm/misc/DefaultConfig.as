@@ -311,10 +311,10 @@ package com.xvm.misc
             c.clanIcon.alpha = 90;
             // Dispay format. Macro-substitutiones allowed.
             c.darkenNotReadyIcon = true;
-            c.formatLeftNick = "{{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>";
-            c.formatRightNick = "{{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatRightNick = "{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font> <img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'>";
             c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><<font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -334,10 +334,10 @@ package com.xvm.misc
             c.clanIcon.w = 16;
             c.clanIcon.alpha = 90;
             // Dispay format.
-            c.formatLeftNick = "{{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>";
-            c.formatRightNick = "{{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatRightNick = "{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font> <img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'>";
             c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><<font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -390,16 +390,13 @@ package com.xvm.misc
                 // 0..250 - player name field width.
                 width: 46,
                 // Dispay format.
-                formatLeft: "        <font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.20s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
-                formatRight: "<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.20s~..}}</font>        <font size='0'>.</font>",
+                formatLeft: "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
+                formatRight: "<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font>",
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
-                extraFieldsLeft: [
-                    { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
-                ],
+                extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} },
-                    { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
+                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} }
                 ]
             };
             // Medium2 mode.
@@ -421,20 +418,17 @@ package com.xvm.misc
             c.large = {
                 enabled: true,
                 // 0..250 - player name field width.
-                width: 170,
+                width: 100,
                 // Dispay format.
-                nickFormatLeft: "<font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>        {{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>",
-                nickFormatRight: "<font alpha='#A0'>{{clan}}</font> {{name%.20s~..}}        <font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>",
+                nickFormatLeft: "<font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
+                nickFormatRight: "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>",
                 vehicleFormatLeft: "{{vehicle}}",
                 vehicleFormatRight: "{{vehicle}}",
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
-                extraFieldsLeft: [
-                    { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
-                ],
+                extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} },
-                    { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
+                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} }
                 ]
             };
 
@@ -617,20 +611,20 @@ package com.xvm.misc
                 deadsquad:      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{nick%.5s}}</i></span>"
             };
             c.labels.units.css = {
-                ally:            ".mm_a{font-family:$FieldFont; font-size:10px; color:#C8FFA6;}",
-                teamkiller:      ".mm_t{font-family:$FieldFont; font-size:10px; color:#A6F8FF;}",
-                enemy:           ".mm_e{font-family:$FieldFont; font-size:10px; color:#FCA9A4;}",
-                squad:           ".mm_s{font-family:$FieldFont; font-size:10px; color:#FFC099;}",
-                lost:            ".mm_l{font-family:$FieldFont; font-size:10px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
-                oneself:         ".mm_o{font-family:$FieldFont; font-size:10px; color:#FFFFFF;}",
-                lostally:       ".mm_la{font-family:$FieldFont; font-size:10px; color:#C8FFA6;} .mm_dot{font-family:Arial; font-size:17px; color:#B4E595;}",
-                lostteamkiller: ".mm_lt{font-family:$FieldFont; font-size:10px; color:#A6F8FF;} .mm_dot{font-family:Arial; font-size:17px; color:#00D2E5;}",
-                lost:            ".mm_l{font-family:$FieldFont; font-size:10px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#E59995;}",
-                lostsquad:      ".mm_ls{font-family:$FieldFont; font-size:10px; color:#FFD099;} .mm_dot{font-family:Arial; font-size:17px; color:#E5BB8A;}",
-                deadally:       ".mm_da{font-family:$FieldFont; font-size:10px; color:#6E8C5B;} .mm_dot{font-family:Arial; font-size:17px; color:#004D00;}",
-                deadteamkiller: ".mm_dt{font-family:$FieldFont; font-size:10px; color:#5B898C;} .mm_dot{font-family:Arial; font-size:17px; color:#043A40;}",
-                deadenemy:      ".mm_de{font-family:$FieldFont; font-size:10px; color:#996763;} .mm_dot{font-family:Arial; font-size:17px; color:#4D0300;}",
-                deadsquad:      ".mm_ds{font-family:$FieldFont; font-size:10px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
+                ally:            ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
+                teamkiller:      ".mm_t{font-family:$FieldFont; font-size:8px; color:#A6F8FF;}",
+                enemy:           ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
+                squad:           ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
+                lost:            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
+                oneself:         ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}",
+                lostally:       ".mm_la{font-family:$FieldFont; font-size:8px; color:#C8FFA6;} .mm_dot{font-family:Arial; font-size:17px; color:#B4E595;}",
+                lostteamkiller: ".mm_lt{font-family:$FieldFont; font-size:8px; color:#A6F8FF;} .mm_dot{font-family:Arial; font-size:17px; color:#00D2E5;}",
+                lost:            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#E59995;}",
+                lostsquad:      ".mm_ls{font-family:$FieldFont; font-size:8px; color:#FFD099;} .mm_dot{font-family:Arial; font-size:17px; color:#E5BB8A;}",
+                deadally:       ".mm_da{font-family:$FieldFont; font-size:8px; color:#6E8C5B;} .mm_dot{font-family:Arial; font-size:17px; color:#004D00;}",
+                deadteamkiller: ".mm_dt{font-family:$FieldFont; font-size:8px; color:#5B898C;} .mm_dot{font-family:Arial; font-size:17px; color:#043A40;}",
+                deadenemy:      ".mm_de{font-family:$FieldFont; font-size:8px; color:#996763;} .mm_dot{font-family:Arial; font-size:17px; color:#4D0300;}",
+                deadsquad:      ".mm_ds{font-family:$FieldFont; font-size:8px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
             };
             c.labels.units.shadow = {
                 ally:           { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },

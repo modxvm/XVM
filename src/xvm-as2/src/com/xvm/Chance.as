@@ -59,11 +59,11 @@ class com.xvm.Chance
                 text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chLive);
             }
         }
-        if (showBattleTier)
+        if (showBattleTier && Chance.battleTier != 0)
         {
             if (text !== "")
                 text += ". ";
-            text += Locale.get("chanceBattleTier") + ": " + battleTier;
+            text += Locale.get("chanceBattleTier") + ": " + Chance.battleTier;
         }
         //Logger.add(text);
         return text;
@@ -111,11 +111,12 @@ class com.xvm.Chance
     // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
     private static function ChanceFuncG(vdata:VehicleData, stat:StatData, battleStateData:BattleStateData):Number
     {
-        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
+        var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
+        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
 
         var Tmin = vdata.tierLo;
         var Tmax = vdata.tierHi;
-        var T = battleTier;
+        var T = tier;
         var Ea = stat.xwn8 == null ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
         var Ra = stat.r || Config.config.consts.AVG_GWR;
@@ -144,11 +145,12 @@ class com.xvm.Chance
     /*
     private static function ChanceFuncT(vdata:VehicleData, stat, battleStateData:BattleStateData):Number
     {
-        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
+        var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
+        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
 
         var Tmin = vdata.tierLo;
         var Tmax = vdata.tierHi;
-        var T = battleTier;
+        var T = tier;
         var Bt = stat.tb || 0;
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
@@ -193,11 +195,12 @@ class com.xvm.Chance
         if (battleStateData.dead == true)
             return 0;
 
-        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
+        var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
+        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
 
         var Tmin = vdata.tierLo;
         var Tmax = vdata.tierHi;
-        var T = battleTier;
+        var T = tier;
         var Ea = stat.xwn8 == null ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
         var Ra = stat.r || Config.config.consts.AVG_GWR;

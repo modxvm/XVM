@@ -190,7 +190,6 @@ package net.wg.gui.lobby.GUIEditor
 }
 }
 import net.wg.gui.lobby.GUIEditor.ComponentInfoVo;
-import net.wg.gui.lobby.GUIEditor.GUIEditorHelper;
 import net.wg.infrastructure.exceptions.ArgumentException;
 import flash.display.DisplayObjectContainer;
 import flash.display.DisplayObject;
@@ -205,11 +204,11 @@ function ComponentsInfoContainer()
     this._information = {};
     this.LINKAGES = {};
     super();
-    this.LINKAGES[GUIEditorHelper.TYPE_SIMPLE] = this._SIMPLE_CONTROLS_LINKAGES;
-    this.LINKAGES[GUIEditorHelper.TYPE_STANDART] = this._CONTROLS_LINKAGES;
-    this.LINKAGES[GUIEditorHelper.TYPE_ADVANCED] = this._ADVANCED_CONTROLS_LINKAGES;
-    this.LINKAGES[GUIEditorHelper.TYPE_NON_SMART] = this._SIMPLE_CONTROLS_LINKAGES.concat(this._CONTROLS_LINKAGES).concat(this._ADVANCED_CONTROLS_LINKAGES);
-    this.LINKAGES[GUIEditorHelper.TYPE_SMART] = [];
+    this.LINKAGES[ComponentsInfoContainer.TYPE_SIMPLE] = this._SIMPLE_CONTROLS_LINKAGES;
+    this.LINKAGES[ComponentsInfoContainer.TYPE_STANDART] = this._CONTROLS_LINKAGES;
+    this.LINKAGES[ComponentsInfoContainer.TYPE_ADVANCED] = this._ADVANCED_CONTROLS_LINKAGES;
+    this.LINKAGES[ComponentsInfoContainer.TYPE_NON_SMART] = this._SIMPLE_CONTROLS_LINKAGES.concat(this._CONTROLS_LINKAGES).concat(this._ADVANCED_CONTROLS_LINKAGES);
+    this.LINKAGES[ComponentsInfoContainer.TYPE_SMART] = [];
     for(_loc1_ in this.LINKAGES)
     {
         this._information[_loc1_] = this.createComponentsInfoByType(_loc1_);
@@ -242,16 +241,16 @@ public function getComponentsList(param1:String) : Vector.<ComponentInfoVo>
 {
     switch(param1)
     {
-        case GUIEditorHelper.TYPE_ALL:
+        case ComponentsInfoContainer.TYPE_ALL:
             this.updateSmartControls(App.stage);
-            return this._information[GUIEditorHelper.TYPE_NON_SMART].concat(this._information[GUIEditorHelper.TYPE_SMART]);
-        case GUIEditorHelper.TYPE_SMART:
+            return this._information[ComponentsInfoContainer.TYPE_NON_SMART].concat(this._information[ComponentsInfoContainer.TYPE_SMART]);
+        case ComponentsInfoContainer.TYPE_SMART:
             this.updateSmartControls(App.stage);
-            return this._information[GUIEditorHelper.TYPE_SMART];
-        case GUIEditorHelper.TYPE_SIMPLE:
-        case GUIEditorHelper.TYPE_STANDART:
-        case GUIEditorHelper.TYPE_ADVANCED:
-        case GUIEditorHelper.TYPE_NON_SMART:
+            return this._information[ComponentsInfoContainer.TYPE_SMART];
+        case ComponentsInfoContainer.TYPE_SIMPLE:
+        case ComponentsInfoContainer.TYPE_STANDART:
+        case ComponentsInfoContainer.TYPE_ADVANCED:
+        case ComponentsInfoContainer.TYPE_NON_SMART:
             return this._information[param1];
         default:
             throw new ArgumentException("Unknown components type: " + param1);
@@ -269,10 +268,10 @@ private function updateSmartControls(param1:DisplayObjectContainer) : void
         _loc4_ = getQualifiedClassName(_loc3_);
         if(_loc4_.indexOf(".app.") == -1)
         {
-            if(this.LINKAGES[GUIEditorHelper.TYPE_NON_SMART].indexOf(_loc4_) == -1 && this.LINKAGES[GUIEditorHelper.TYPE_SMART].indexOf(_loc4_) == -1)
+            if(this.LINKAGES[ComponentsInfoContainer.TYPE_NON_SMART].indexOf(_loc4_) == -1 && this.LINKAGES[ComponentsInfoContainer.TYPE_SMART].indexOf(_loc4_) == -1)
             {
-                this._information[GUIEditorHelper.TYPE_SMART].push(new ComponentInfoVo(_loc4_));
-                this.LINKAGES[GUIEditorHelper.TYPE_SMART].push(_loc4_);
+                this._information[ComponentsInfoContainer.TYPE_SMART].push(new ComponentInfoVo(_loc4_));
+                this.LINKAGES[ComponentsInfoContainer.TYPE_SMART].push(_loc4_);
             }
         }
         if(_loc3_ is DisplayObjectContainer)

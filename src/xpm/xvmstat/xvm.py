@@ -67,7 +67,7 @@ class Xvm(object):
             elif cmd == XVM_COMMAND_GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:
-                    return (arena.extraData.get('battleLevel'), True)
+                    return (arena.extraData.get('battleLevel', 0), True)
                 return (None, True)
 
         except Exception, ex:
@@ -487,7 +487,7 @@ class Xvm(object):
                 movie.invoke((RESPOND_CONFIG, [
                     self.config_str,
                     self.lang_str,
-                    BigWorld.player().arena.extraData['battleLevel'],
+                    BigWorld.player().arena.extraData.get('battleLevel', 0),
                     getVehicleInfoDataStr(),
                     simplejson.dumps(token.networkServicesSettings),
                     comments.getXvmUserComments(not isReplay())]))

@@ -108,8 +108,7 @@ package net.wg.gui.prebattle.squad
         
         public function as_updateBattleType(param1:String) : void
         {
-            var _loc2_:* = false;
-            _loc2_ = (param1) && !(param1 == Values.EMPTY_STR);
+            var _loc2_:Boolean = (param1) && !(param1 == Values.EMPTY_STR);
             this.battleType.visible = _loc2_;
             this.battleTypeHeader.visible = _loc2_;
             this.battleTypeInfo.visible = BATTLE_TYPE_INFO_VISIBLE_TEMP;

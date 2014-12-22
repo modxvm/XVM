@@ -5,16 +5,13 @@ package net.wg.gui.login.EULA
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.advanced.TextAreaSimple;
     import flash.display.InteractiveObject;
-    import net.wg.utils.IAssertable;
-    import net.wg.data.constants.Errors;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
     import scaleform.clik.utils.Padding;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.TextEvent;
-    import scaleform.clik.events.InputEvent;
-    import scaleform.clik.constants.InputValue;
-    import flash.ui.Keyboard;
+    import net.wg.utils.IAssertable;
+    import net.wg.data.constants.Errors;
     
     public class EULADlg extends EULAMeta implements IEULAMeta
     {
@@ -30,18 +27,6 @@ package net.wg.gui.login.EULA
         public var applyButton:SoundButtonEx = null;
         
         public var textArea:TextAreaSimple = null;
-        
-        override protected function configUI() : void
-        {
-            super.configUI();
-            App.utils.styleSheetManager.setLinkStyle(this.textArea.textField);
-        }
-        
-        override protected function onInitModalFocus(param1:InteractiveObject) : void
-        {
-            super.onInitModalFocus(param1);
-            setFocus(this.applyButton);
-        }
         
         override public final function setViewSize(param1:Number, param2:Number) : void
         {
@@ -61,6 +46,49 @@ package net.wg.gui.login.EULA
             {
                 super.updateStage(param1,param2);
             }
+        }
+        
+        override protected function configUI() : void
+        {
+            super.configUI();
+            App.utils.styleSheetManager.setLinkStyle(this.textArea.textField);
+        }
+        
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
+            super.onInitModalFocus(param1);
+            setFocus(this.applyButton);
+        }
+        
+        override protected function preInitialize() : void
+        {
+            constraints = new Constraints(this,ConstrainMode.REFLOW);
+        }
+        
+        override protected function onPopulate() : void
+        {
+            super.onPopulate();
+            window.useBottomBtns = true;
+            var _loc1_:Padding = window.contentPadding as Padding;
+            _loc1_.bottom = _loc1_.bottom - 1;
+            window.contentPadding = _loc1_;
+            this.applyButton.addEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
+            this.textArea.addEventListener(TextEvent.LINK,this.onLinkClickHandler);
+            constraints.addElement(this.applyButton.name,this.applyButton,Constraints.BOTTOM | Constraints.RIGHT);
+            window.title = DIALOGS.EULA_TITLE;
+            this.updateStage(App.appWidth,App.appHeight);
+            requestEULATextS();
+        }
+        
+        override protected function onDispose() : void
+        {
+            super.onDispose();
+            this.applyButton.removeEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
+            this.textArea.removeEventListener(TextEvent.LINK,this.onLinkClickHandler);
+            this.textArea.dispose();
+            this.textArea = null;
+            this.applyButton.dispose();
+            this.applyButton = null;
         }
         
         public function as_setEULAText(param1:String) : void
@@ -86,39 +114,6 @@ package net.wg.gui.login.EULA
             }
         }
         
-        override protected function preInitialize() : void
-        {
-            constraints = new Constraints(this,ConstrainMode.REFLOW);
-        }
-        
-        override protected function onPopulate() : void
-        {
-            super.onPopulate();
-            window.useBottomBtns = true;
-            var _loc1_:Padding = window.contentPadding as Padding;
-            _loc1_.bottom = _loc1_.bottom - 1;
-            window.contentPadding = _loc1_;
-            this.applyButton.addEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
-            this.textArea.addEventListener(TextEvent.LINK,this.onLinkClickHandler);
-            addEventListener(InputEvent.INPUT,this.handleInput);
-            constraints.addElement(this.applyButton.name,this.applyButton,Constraints.BOTTOM | Constraints.RIGHT);
-            window.title = DIALOGS.EULA_TITLE;
-            this.updateStage(App.appWidth,App.appHeight);
-            requestEULATextS();
-        }
-        
-        override protected function onDispose() : void
-        {
-            super.onDispose();
-            this.applyButton.removeEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
-            this.textArea.removeEventListener(TextEvent.LINK,this.onLinkClickHandler);
-            this.textArea.dispose();
-            this.textArea = null;
-            this.applyButton.dispose();
-            this.applyButton = null;
-            removeEventListener(InputEvent.INPUT,this.handleInput);
-        }
-        
         protected function isAutoResize() : Boolean
         {
             return true;
@@ -137,19 +132,6 @@ package net.wg.gui.login.EULA
         private function onLinkClickHandler(param1:TextEvent) : void
         {
             onLinkClickS(param1.text);
-        }
-        
-        override public function handleInput(param1:InputEvent) : void
-        {
-            super.handleInput(param1);
-            if(param1.handled)
-            {
-                return;
-            }
-            if(param1.details.value == InputValue.KEY_DOWN && param1.details.code == Keyboard.ENTER)
-            {
-                onApply();
-            }
         }
     }
 }
