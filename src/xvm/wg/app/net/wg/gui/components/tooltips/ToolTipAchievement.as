@@ -6,8 +6,8 @@ package net.wg.gui.components.tooltips
     import net.wg.gui.components.interfaces.ICounterComponent;
     import net.wg.data.managers.ITooltipProps;
     import flash.display.DisplayObject;
-    import net.wg.gui.components.tooltips.VO.AchievementVO;
     import net.wg.utils.ILocale;
+    import net.wg.gui.components.tooltips.VO.AchievementVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
@@ -132,11 +132,12 @@ package net.wg.gui.components.tooltips
         
         override protected function redraw() : void
         {
+            var _loc1_:ILocale = null;
             var _loc4_:* = NaN;
             var _loc5_:AchievementVO = null;
             var _loc9_:String = null;
             var _loc10_:String = null;
-            var _loc1_:ILocale = App.utils.locale;
+            _loc1_ = App.utils.locale;
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
             _loc4_ = 300;

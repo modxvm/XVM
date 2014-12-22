@@ -5,14 +5,12 @@ package net.wg.gui.lobby.header.vo
         
         public function HBC_SquadDataVo()
         {
-            this.buttonName = MENU.HEADERBUTTONS_BTNLABEL_CREATESQUAD;
-            this.tooltip = TOOLTIPS.HEADER_SQUAD;
             super();
         }
         
-        public var buttonName:String;
+        public var buttonName:String = "#menu:headerButtons/btnLabel/createSquad";
         
-        public var tooltip:String;
+        public var tooltip:String = "#tooltips:header/squad";
         
         private var _isInSquad:Boolean = false;
         

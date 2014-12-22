@@ -4,9 +4,10 @@ CLEAR=0
 BUILD_LIBS=0
 
 ### Path vars can be assigned at .bashrc
-#[ "$GAME_VER" = "" ] && GAME_VER="0.9.4"
-[ "$GAME_VER" = "" ] && GAME_VER="0.9.5 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
+
+[ "$GAME_VER" = "" ] && GAME_VER=$(<../../build/target_version)
+GAME_VER=`echo $GAME_VER | tr -d '\n\r'`
 
 cd $(dirname $0)
 

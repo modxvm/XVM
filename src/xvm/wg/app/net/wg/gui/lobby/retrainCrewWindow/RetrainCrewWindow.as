@@ -144,7 +144,7 @@ package net.wg.gui.lobby.retrainCrewWindow
                         _loc5_ = this.initCrewOperationVO.tankmanCost[this.btnsGroup.selectedId].credits;
                     }
                     this.summIconText.text = _loc4_ + " x " + _loc1_.integer(_loc5_);
-                    this.result.valueTextColor = _loc7_?this.enough_money_color:NOT_ENOUGH_MONEY_COLOR;
+                    this.result.valueTextColor = _loc7_?IconsTypes.getTextColor(this.resultIcon.icon):NOT_ENOUGH_MONEY_COLOR;
                     this.submitBtn.enabled = _loc7_;
                 }
                 this.result.value = _loc1_.integer(_loc6_);
