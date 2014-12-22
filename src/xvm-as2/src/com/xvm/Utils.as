@@ -4,6 +4,7 @@
  */
 import com.xvm.*;
 import flash.filters.*;
+import com.xvm.DataTypes.*;
 
 class com.xvm.Utils
 {
@@ -85,13 +86,20 @@ class com.xvm.Utils
         return v;
     }
 
-    public static function getSpottedText(value:String):String
+    public static function getSpottedText(value:String, vehId:Number):String
     {
-        if (value == null || !Config.config.texts.spotted[value])
+        if (value == null)
             return null;
+
+        var vdata:VehicleData = VehicleInfo.get(vehId);
+        value += (vdata != null && vdata.vclass == "SPG") ? "_arty" : "";
+        if (!Config.config.texts.spotted[value])
+            return null;
+
         var v:String = Config.config.texts.spotted[value];
         if (v.indexOf("{{l10n:") >= 0)
             v = Locale.get(v);
+
         return v;
     }
 

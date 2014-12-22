@@ -163,13 +163,7 @@
   },
   "texts": {
     //"vtype": { "LT":  "ЛТ" },
-    "marksOnGun": { "_0": "0", "_1": "1", "_2": "2", "_3": "3" },
-    "spotted": {
-      "neverSeen": "",
-      "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
-      "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
-      "dead": ""
-    }
+    "marksOnGun": { "_0": "0", "_1": "1", "_2": "2", "_3": "3" }
   },
   "colors": {
     "system": {

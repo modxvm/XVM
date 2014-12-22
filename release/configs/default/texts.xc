@@ -31,8 +31,12 @@
     "spotted": {
       "neverSeen": "",
       "lost": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
-      "revealed": "<font face='$FieldFont' size='24' color='#FFFFFF'>*</font>",
-      "dead": ""
+      "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
+      "dead": "",
+      "neverSeen_arty": "",
+      "lost_arty": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
+      "revealed_arty": "<font face='$FieldFont' size='24' color='#DE0000'>*</font>",
+      "dead_arty": ""
     }
   }
 }

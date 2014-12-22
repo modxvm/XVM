@@ -1,7 +1,9 @@
 ﻿XVM-5.4.2-dev:
   * адаптация к Wot 0.9.5
   * добавлена секция texts/spotted с подстановками текста для статуса засвета.
-    Доступные значения: "neverSeen", "lost", "revealed", "dead".
+    Доступные значения:
+      Для обычного танка: "neverSeen", "lost", "revealed", "dead"
+      Для арты: "neverSeen_arty", "lost_arty", "revealed_arty", "dead_arty"
   * добавлены новые макросы:
       {{language}} - язык клиента игрока
       {{region}} - текущий регион игры (RU, EU, NA, CN, ASIA, VTC, KR, CT)

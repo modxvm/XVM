@@ -1270,8 +1270,12 @@ package com.xvm.misc
             c.spotted = new CTextsSpotted();
             c.spotted.neverSeen = "";
             c.spotted.lost = "<font face='$FieldFont' size='24' color='#999999'>*</font>";
-            c.spotted.revealed = "<font face='$FieldFont' size='24' color='#FFFFFF'>*</font>";
+            c.spotted.revealed = "<font face='$FieldFont' size='24' color='#00DE00'>*</font>";
             c.spotted.dead = "";
+            c.spotted.neverSeen_arty = "";
+            c.spotted.lost_arty = "<font face='$FieldFont' size='24' color='#999999'>*</font>";
+            c.spotted.revealed_arty = "<font face='$FieldFont' size='24' color='#DE0000'>*</font>";
+            c.spotted.dead_arty = "";
 
             return c;
         }

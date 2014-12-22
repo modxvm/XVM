@@ -1,7 +1,10 @@
 ﻿XVM-5.4.2-dev:
   * adaptation to Wot 0.9.5
   * added texts/spotted section with text replacements for vehicle spotted status.
-    Available values: "neverSeen", "lost", "revealed", "dead".
+    Available values:
+      for usual vehicle: "neverSeen", "lost", "revealed", "dead"
+      for arty: "neverSeen_arty", "lost_arty", "revealed_arty", "dead_arty"
+
   * added new macros:
         {{language}} - player's client language
         {{region}} - current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)

@@ -73,7 +73,7 @@ Legend:
 │ {{l10n:ID}}        │   │ X │   │   │ X │ X │ X │ X │ localizated text, see en.xc for id
 │ {{xvm-stat}}       │ X │ X │ X │ X │ X │   │   │   │ value 'stat' is statistic is active, empty if not
 │ {{position}}       │ X │ X │ X │ X │   │   │   │   │ position of the player in the beginning of the battle (1-15)
-│ {{spotted}}        │   │ X │ X │   │   │   │   │   │ Enemy spotted status with values "neverSeen", "lost", "revealed", "dead"
+│ {{spotted}}        │   │ X │ X │   │   │   │   │   │ Vehicle spotted status with values from texts/spotted section
 └────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
 
   Statistic macros
