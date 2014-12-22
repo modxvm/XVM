@@ -10,6 +10,9 @@
     // Opacity percentage of icons in the panels. 0 - transparent ... 100 - opaque.
     // Прозрачность в процентах иконок в ушах. 0 - прозрачные, 100 - не прозрачные.
     "iconAlpha": 100,
+    // Opacity percentage of spotted markers in the panels. 0 - transparent (disabled) ... 100 - opaque.
+    // Прозрачность в процентах маркеров засвета в ушах. 0 - полностью прозрачные (отключены), 100 - не прозрачные.
+    "spottedMarkersAlpha": 100,
     // true - Disable Platoon icons.
     // true - убрать отображение иконки взвода.
     "removeSquadIcon": false,
@@ -141,7 +144,7 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
-        { "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} }
+        { "alpha": ${"playersPanel.spottedMarkersAlpha"}, "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} }
       ]
     },
     // Options for the "medium" panels - the first of the medium panels.
@@ -170,7 +173,7 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
-        { "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} }
+        { "alpha": ${"playersPanel.spottedMarkersAlpha"}, "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} }
       ]
     },
     // Options for the "medium2" panels - the second of the medium panels.
@@ -199,7 +202,7 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
-        { "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} }
+        { "alpha": ${"playersPanel.spottedMarkersAlpha"}, "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} }
       ]
     },
     // Options for the "large" panels - the widest panels.
@@ -230,7 +233,7 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
-        { "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} }
+        { "alpha": ${"playersPanel.spottedMarkersAlpha"}, "x": 0, "y": 5, "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} }
       ]
     }
   }
