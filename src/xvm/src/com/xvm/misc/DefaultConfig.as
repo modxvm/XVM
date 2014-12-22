@@ -311,10 +311,10 @@ package com.xvm.misc
             c.clanIcon.alpha = 90;
             // Dispay format. Macro-substitutiones allowed.
             c.darkenNotReadyIcon = true;
-            c.formatLeftNick = "{{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>";
-            c.formatRightNick = "{{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatRightNick = "{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font> <img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'>";
             c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><<font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -334,10 +334,10 @@ package com.xvm.misc
             c.clanIcon.w = 16;
             c.clanIcon.alpha = 90;
             // Dispay format.
-            c.formatLeftNick = "{{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>";
-            c.formatRightNick = "{{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatRightNick = "{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font> <img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'>";
             c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><<font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -390,16 +390,13 @@ package com.xvm.misc
                 // 0..250 - player name field width.
                 width: 46,
                 // Dispay format.
-                formatLeft: "        <font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.20s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
-                formatRight: "<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.20s~..}}</font>        <font size='0'>.</font>",
+                formatLeft: "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
+                formatRight: "<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font>",
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
-                extraFieldsLeft: [
-                    { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
-                ],
+                extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} },
-                    { "x": 5, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
+                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} }
                 ]
             };
             // Medium2 mode.
@@ -421,20 +418,17 @@ package com.xvm.misc
             c.large = {
                 enabled: true,
                 // 0..250 - player name field width.
-                width: 170,
+                width: 100,
                 // Dispay format.
-                nickFormatLeft: "<font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>        {{name%.20s~..}} <font alpha='#A0'>{{clan}}</font>",
-                nickFormatRight: "<font alpha='#A0'>{{clan}}</font> {{name%.20s~..}}        <font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>",
+                nickFormatLeft: "<font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
+                nickFormatRight: "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>",
                 vehicleFormatLeft: "{{vehicle}}",
                 vehicleFormatRight: "{{vehicle}}",
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
-                extraFieldsLeft: [
-                    { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
-                ],
+                extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} },
-                    { "x": 46, "y": 5, "src": "xvm://res/icons/lang/16x16/{{language}}.png" }
+                    { x: 0, y: 5, valign: "top", bindToIcon: true, format: "{{spotted}}", shadow: {} }
                 ]
             };
 
