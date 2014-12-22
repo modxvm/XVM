@@ -183,13 +183,17 @@ def _Minimap__delEntry(self, id, inCallback = False):
 
 def _Minimap__callEntryFlash(base, self, id, methodName, args = None):
     base(self, id, methodName, args)
-    if self._Minimap__isStarted:
-        if methodName == 'init':
-            if len(args) != 5:
-                base(self, id, 'init_xvm', [0])
-            else:
-                arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
-                base(self, id, 'init_xvm', [arenaVehicle['accountDBID']])
+    try:
+        if self._Minimap__isStarted:
+            if methodName == 'init':
+                if len(args) != 5:
+                    base(self, id, 'init_xvm', [0])
+                else:
+                    arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+                    base(self, id, 'init_xvm', [arenaVehicle['accountDBID']])
+    except:
+        # hide an errors for 3rd-party Minimap.swf
+        pass
 
 # stereoscope
 def AmmunitionPanel_highlightParams(self, type):
