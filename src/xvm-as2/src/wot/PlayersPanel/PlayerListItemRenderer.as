@@ -148,8 +148,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
         try
         {
             var data:Object = wrapper.data;
-            //Logger.addObject(data);
             //Logger.add("update: " + (data ? data.userName : "(null)"))
+            //Logger.addObject(data);
 
             var saved_icon:String;
             if (data == null)
@@ -158,6 +158,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 m_clan = null;
                 m_vehicleState = 0;
                 m_dead = true;
+                extraFields.none._visible = false;
             }
             else
             {
@@ -290,7 +291,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
             var cfg:Object = Config.config.playersPanel.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
             if (cfg.formats == null || cfg.formats.length <= 0)
                 return null;
+
             var mc:MovieClip = _internal_createExtraFields(extraPanelsHolder, "none", cfg.formats, cfg.width, cfg.height, cfg);
+            mc._visible = false;
+
             var menu_mc:Button = UIComponent.createInstance(mc, "HiddenButton", "menu_mc", mc.getNextHighestDepth(), {
                 _x: isLeftPanel ? 0 : -cfg.width,
                 width:cfg.width,

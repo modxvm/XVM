@@ -175,6 +175,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var startingTime:Number = getTimer();
         //Logger.add("PlayersPanel.setData(): " + wrapper.state);
         //Logger.addObject(data, 3);
+        //Logger.addObject(wrapper.m_list, 3);
         //Logger.add(vehiclesStrOrig);
         //Logger.add(namesStr);
         try

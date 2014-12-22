@@ -23,8 +23,8 @@ FILES_SCALEFORM="
   xvm.swf"
 
 CUSTOM_TESTER_FILES="configs/xvm.xc"
-XVM_DIRS="configs mods res/icons"
-XVM_FILES="l10n/en.xc l10n/ru.xc"
+XVM_DIRS="configs mods l10n res/icons"
+XVM_FILES=""
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 

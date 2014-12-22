@@ -286,7 +286,10 @@ class com.xvm.Macros
                         break;
                     value = vdata.hpTop;
                 }
-                var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1];
+                var tier:Number = globals["battletier"];
+                if (tier == 0)
+                    tier = 8; // command battle
+                var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[tier - 1];
                 if (pdata["veh-id"] == 65313) // M24 Chaffee Sport
                     maxBattleTierHp = 1000;
                 res = Math.round(parseInt(norm) * value / maxBattleTierHp).toString();
