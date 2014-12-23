@@ -23,8 +23,8 @@ FILES_SCALEFORM="
   xvm.swf"
 
 CUSTOM_TESTER_FILES="configs/xvm.xc"
-XVM_DIRS="configs mods l10n res/icons"
-XVM_FILES=""
+XVM_DIRS="configs mods res/icons"
+XVM_FILES="l10n/en.xc l10n/ru.xc"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 
@@ -76,6 +76,7 @@ copy_xvm_file()
   [ -f "$RES_MODS_DIR/xvm/$1" ] && rm -f "$RES_MODS_DIR/xvm/$1"
   [ -f "../release/$1" ] && {
     echo "=> $1"
+    mkdir -p `dirname "$RES_MODS_DIR/xvm/$1"`
     cp -p "../release/$1" "$RES_MODS_DIR/xvm/$1"
   }
 }

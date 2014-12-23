@@ -67,8 +67,7 @@ class _Stat(object):
         self.resp = None
         self.arenaId = None
         self.players = None
-        self.playersSkip = None
-        self.cache = {}
+        self.cacheBattle = {}
         self.cacheUser = {}
 
     def enqueue(self, req):
@@ -160,7 +159,6 @@ class _Stat(object):
         if player.arenaUniqueID is None or self.arenaId != player.arenaUniqueID:
             self.arenaId = player.arenaUniqueID
             self.players = {}
-            self.playersSkip = {}
 
         # update players
         vehicles = BigWorld.player().arena.vehicles
@@ -176,13 +174,12 @@ class _Stat(object):
         for vehId in self.players:
             pl = self.players[vehId]
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
-            if cacheKey not in self.cache:
+            if cacheKey not in self.cacheBattle:
                 cacheKey = "%d" % (pl.playerId)
-                if cacheKey not in self.cache:
-                    self.playersSkip[str(pl.playerId)] = True
+                if cacheKey not in self.cacheBattle:
                     players[pl.name] = self._get_battle_stub(pl)
                     continue
-            stat = self.cache[cacheKey]
+            stat = self.cacheBattle[cacheKey]
             self._fix(stat)
             players[pl.name] = stat
         #pprint(players)
@@ -207,7 +204,6 @@ class _Stat(object):
             #pprint(value)
 
             self.players = {}
-            self.playersSkip = {}
 
             # update players
             for vehId in value['vehicles']:
@@ -226,13 +222,12 @@ class _Stat(object):
             for vehId in self.players:
                 pl = self.players[vehId]
                 cacheKey = "%d=%d" % (pl.playerId, pl.vId)
-                if cacheKey not in self.cache:
+                if cacheKey not in self.cacheBattle:
                     cacheKey = "%d" % (pl.playerId)
-                    if cacheKey not in self.cache:
-                        self.playersSkip[str(pl.playerId)] = True
+                    if cacheKey not in self.cacheBattle:
                         players[pl.name] = self._get_battle_stub(pl)
                         continue
-                stat = self.cache[cacheKey]
+                stat = self.cacheBattle[cacheKey]
                 self._fix(stat)
                 players[pl.name] = stat
             #pprint(players)
@@ -321,14 +316,13 @@ class _Stat(object):
         requestList = []
 
         replay = isReplay()
+        all_cached = True
         for vehId in self.players:
             pl = self.players[vehId]
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
 
-            #if cacheKey in self.cache:
-            #    continue
-            if str(pl.playerId) in self.playersSkip:
-                continue
+            if not cacheKey in self.cacheBattle:
+                all_cached = False
 
             #if pl.vId in [None, '', 'UNKNOWN']:
             #    requestList.append(str(pl.playerId))
@@ -336,7 +330,7 @@ class _Stat(object):
             requestList.append("%d=%d%s" % (pl.playerId, pl.vId,
                 '=1' if not replay and pl.vehId == playerVehicleID else ''))
 
-        if not requestList:
+        if all_cached or not requestList:
             return
 
         try:
@@ -382,7 +376,7 @@ class _Stat(object):
                 if 'b' not in stat or stat['b'] <= 0:
                     continue
                 cacheKey = "%d=%d" % (stat['_id'], stat.get('v', {}).get('id', 0))
-                self.cache[cacheKey] = stat
+                self.cacheBattle[cacheKey] = stat
 
         except Exception, ex:
             err('_load_stat() exception: ' + traceback.format_exc())
