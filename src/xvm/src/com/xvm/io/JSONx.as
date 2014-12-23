@@ -412,6 +412,7 @@ package com.xvm.io
                         if (ch == ':') {
                             _next();
                             f = p;
+                            _white();
                             p = _string();
                             _white();
                         }
