@@ -40,9 +40,9 @@
     "labels": {
       "units": {
         "format": {
-          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font> {{vehicle-short}}</span>",
-          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font> {{vehicle-short}}</span>",
-          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font> {{vehicle-short}}</span>"
+          "ally":       "<textformat leading='-15'><span class='mm_a'>{{vehicle-short}}\n<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span></textformat>",
+          "teamkiller": "<textformat leading='-15'><span class='mm_t'>{{vehicle-short}}\n<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span></textformat>",
+          "enemy":      "<textformat leading='-15'><span class='mm_e'>{{vehicle-short}}\n<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span></textformat>"
         },
         "alpha" : {
           //"deadenemy": 50
@@ -78,10 +78,10 @@
     "labels": {
       "units": {
         "format": {
-          "ally":           "<span class='mm_a'><font size='7' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-          "squad":          "<span class='mm_s'><font size='7' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-          "teamkiller":     "<span class='mm_t'><font size='7' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-          "enemy":          "<span class='mm_e'><font size='7' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
+          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
+          "squad":          "<span class='mm_s'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
+          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
+          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
           "lostally":       "<span class='mm_la'>{{vehicle-class}}</span>",
           "lost":           "<span class='mm_l'>{{vehicle-class}}</span>",
           "deadally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'><i>{{nick%.5s}}</i></span>",

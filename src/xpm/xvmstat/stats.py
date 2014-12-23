@@ -175,10 +175,9 @@ class _Stat(object):
             pl = self.players[vehId]
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
             if cacheKey not in self.cacheBattle:
-                cacheKey = "%d" % (pl.playerId)
-                if cacheKey not in self.cacheBattle:
-                    players[pl.name] = self._get_battle_stub(pl)
-                    continue
+                cacheKey2 = "%d" % (pl.playerId)
+                if cacheKey2 not in self.cacheBattle:
+                    self.cacheBattle[cacheKey] = self._get_battle_stub(pl)
             stat = self.cacheBattle[cacheKey]
             self._fix(stat)
             players[pl.name] = stat
@@ -186,7 +185,6 @@ class _Stat(object):
 
         with self.lock:
             self.resp = {'players': players}
-
 
 
     def _get_battleresults(self):
@@ -223,10 +221,9 @@ class _Stat(object):
                 pl = self.players[vehId]
                 cacheKey = "%d=%d" % (pl.playerId, pl.vId)
                 if cacheKey not in self.cacheBattle:
-                    cacheKey = "%d" % (pl.playerId)
-                    if cacheKey not in self.cacheBattle:
-                        players[pl.name] = self._get_battle_stub(pl)
-                        continue
+                    cacheKey2 = "%d" % (pl.playerId)
+                    if cacheKey2 not in self.cacheBattle:
+                        self.cacheBattle[cacheKey] = self._get_battle_stub(pl)
                 stat = self.cacheBattle[cacheKey]
                 self._fix(stat)
                 players[pl.name] = stat

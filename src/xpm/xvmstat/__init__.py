@@ -174,11 +174,11 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 # spotted status
 def _Minimap__addEntry(self, id, location, doMark):
-    #debug('> _Minimap__addEntry')
+    #debug('> _Minimap__addEntry: {0}'.format(id))
     g_xvm.invalidateSpottedStatus(id, True)
 
 def _Minimap__delEntry(self, id, inCallback = False):
-    #debug('> _Minimap__delEntry')
+    #debug('> _Minimap__delEntry: {0}'.format(id))
     g_xvm.invalidateSpottedStatus(id, False)
 
 def _Minimap__callEntryFlash(base, self, id, methodName, args = None):
