@@ -33,10 +33,11 @@ class wot.VehicleMarkersManager.log.HitLog
 
     public function HitLog(cfg:Object)
     {
-        x = cfg.x;
-        y = cfg.y;
-        w = cfg.w;
-        h = cfg.h;
+        x = Macros.FormatGlobalNumberValue(cfg.x);
+        y = Macros.FormatGlobalNumberValue(cfg.y);
+        w = Macros.FormatGlobalNumberValue(cfg.w);
+        h = Macros.FormatGlobalNumberValue(cfg.h);
+
         lines = Math.min(100, Math.max(0, cfg.lines));
         direction = cfg.direction.toLowerCase() == "up" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
         insertOrder = cfg.insertOrder.toLowerCase() == "begin" ? Defines.INSERTORDER_BEGIN : Defines.INSERTORDER_END;

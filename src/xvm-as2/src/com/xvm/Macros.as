@@ -1,6 +1,5 @@
 ﻿import com.xvm.*;
 import com.xvm.DataTypes.*;
-import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.dataTypes.*;
 
 class com.xvm.Macros
@@ -115,6 +114,28 @@ class com.xvm.Macros
 
         return "";
     }
+
+    public static function FormatGlobalNumberValue(value):Number
+    {
+        if (!isNaN(value))
+            return value;
+
+        // FIXIT: dirty hack
+        var pname:String = null;
+        for (var n in dict)
+        {
+            pname = n;
+            break;
+        }
+
+        if (pname == null)
+            return NaN;
+
+        var obj:Object = BattleState.getUserData(pname);
+        return parseFloat(Macros.Format(pname, value, obj));
+    }
+
+    // PRIVATE
 
     private static function GetMacroParts(macro:String, pdata:Object):Array
     {

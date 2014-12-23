@@ -425,12 +425,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var squadSize:Number = 0;
 
         var cfg:Object = Config.config.playersPanel;
-        var w = cfg[wrapper.state].width;
-        if (isNaN(w))
-        {
-            var obj:Object = BattleState.getUserData(m_data.userName);
-            w = parseInt(Macros.Format(m_data[0].userName, w, obj));
-        }
+        var w = Macros.FormatGlobalNumberValue(cfg[wrapper.state].width);
 
         switch (wrapper.state)
         {
