@@ -15,6 +15,7 @@ Legend:
   '.' - TODO
   '-' - Obsoleted (will be replaced with other macro)
 
+  Personal macros (applied for player)
 ┌────────────────────┬───┬───┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
 │ macro              │ BL│ PP│ SF│ MM│ VM│ HI│ HL│ CB│ Description
 ├────────────────────┼───┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
@@ -30,7 +31,6 @@ Legend:
 │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ X │   │ vehicle id
 │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │   │ vehicle level (Arabic numerals)
 │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │   │ vehicle level (Roman numerals)
-│ {{battletier}}     │ X │ X │ X │ X │ X │ X │ X │   │ guessed current battle tier
 │ {{alive}}          │ X │ X │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
 │ {{ready}}          │ X │ X │ X │ X │ X │   │   │   │ value 'ready' if player loaded to the game, '' if not
 │ {{player}}         │ X │ X │ X │ X │   │   │   │   │ value 'pl' for current player, empty for others
@@ -66,14 +66,23 @@ Legend:
 │ {{time-sec}}       │   │   │   │   │   │   │   │ X │ time left to full capture; seconds only;
 │ {{speed}}          │   │   │   │   │   │   │   │ X │ capture speed in points per second;
 │ {{vehicle-class}}  │   │   │   │ X │   │   │   │   │ places special symbol depending on subject vehicle class
-│ {{cellsize}}       │   │   │   │ X │   │   │   │   │ minimap cell side size
 │ {{vtype-l}}        │ X │   │   │   │   │   │   │   │ vehicle class (text substitution from locale)
 │ {{battletier-min}} │ X │   │   │   │   │   │   │   │ minimal vehicle battle tier
 │ {{battletier-max}} │ X │   │   │   │   │   │   │   │ maximal vehicle battle tier
-│ {{l10n:ID}}        │   │ X │   │   │ X │ X │ X │ X │ localizated text, see en.xc for id
-│ {{xvm-stat}}       │ X │ X │ X │ X │ X │   │   │   │ value 'stat' is statistic is active, empty if not
 │ {{position}}       │ X │ X │ X │ X │   │   │   │   │ position of the player in the beginning of the battle (1-15)
 │ {{spotted}}        │   │ X │ X │   │   │   │   │   │ Vehicle spotted status with values from texts/spotted section
+│ {{language}}       │   │ X │ X │   │   │   │   │   │ Player's client language
+└────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
+
+  Global macros (does not depend on the player)
+┌────────────────────┬───┬───┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
+│ macro              │ BL│ PP│ SF│ MM│ VM│ HI│ HL│ CB│ Description
+├────────────────────┼───┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
+│ {{battletier}}     │ X │ X │ X │ X │ X │ X │ X │   │ current battle tier
+│ {{cellsize}}       │   │   │   │ X │   │   │   │   │ minimap cell side size
+│ {{l10n:ID}}        │   │ X │   │   │ X │ X │ X │ X │ localizated text, see en.xc for id
+│ {{xvm-stat}}       │ X │ X │ X │ X │ X │   │   │   │ value 'stat' is statistic is active, empty if not
+│ {{region}}         │ X │ X │ X │ X │ X │   │   │   │ current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
 └────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
 
   Statistic macros
