@@ -82,24 +82,25 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private function onConfigLoaded()
     {
-        var startMode:String = String(Config.config.playersPanel.startMode).toLowerCase();
+        var cfg:Object = Config.config.playersPanel;
+        var startMode:String = String(cfg.startMode).toLowerCase();
         if (net.wargaming.ingame.PlayersPanel.STATES[startMode] == null)
             startMode = net.wargaming.ingame.PlayersPanel.STATES.large.name;
-        Config.config.playersPanel[startMode].enabled = true;
+        cfg[startMode].enabled = true;
         setStartMode(startMode, wrapper);
 
         m_savedState = null;
-        m_altMode = String(Config.config.playersPanel.altMode).toLowerCase();
+        m_altMode = String(cfg.altMode).toLowerCase();
         if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
             m_altMode = null;
         if (m_altMode != null)
             GlobalEventDispatcher.addEventListener(Defines.E_PP_ALT_MODE, this, setAltMode);
 
-        _root.switcher_mc.noneBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
-        _root.switcher_mc.shortBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;
-        _root.switcher_mc.mediumBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.medium.name].enabled;
-        _root.switcher_mc.mediumBtn2.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.medium2.name].enabled;
-        _root.switcher_mc.largeBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.large.name].enabled;
+        _root.switcher_mc.noneBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
+        _root.switcher_mc.shortBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;
+        _root.switcher_mc.mediumBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.medium.name].enabled;
+        _root.switcher_mc.mediumBtn2.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.medium2.name].enabled;
+        _root.switcher_mc.largeBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.large.name].enabled;
         _root.switcher_mc.noneBtn._alpha = _root.switcher_mc.noneBtn.enabled ? 100 : 50;
         _root.switcher_mc.shortBtn._alpha = _root.switcher_mc.shortBtn.enabled ? 100 : 50;
         _root.switcher_mc.mediumBtn._alpha = _root.switcher_mc.mediumBtn.enabled ? 100 : 50;
@@ -375,66 +376,31 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     {
         //Logger.add("getTextValue()");
         var format:String = null;
-        switch (wrapper.state)
+        var cfg:Object = Config.config.playersPanel[wrapper.state];
+        var isLeftPanel:Boolean = wrapper.type == "left";
+        if (fieldType == Defines.FIELDTYPE_FRAGS)
         {
-            case "short":
-                if (fieldType == Defines.FIELDTYPE_FRAGS)
-                {
-                    format = (wrapper.type == "left")
-                        ? Config.config.playersPanel.short.fragsFormatLeft
-                        : Config.config.playersPanel.short.fragsFormatRight;
-                }
-                break;
-            case "medium":
-                if (fieldType == Defines.FIELDTYPE_NICK)
-                {
-                    format = (wrapper.type == "left")
-                        ? Config.config.playersPanel.medium.formatLeft
-                        : Config.config.playersPanel.medium.formatRight;
-                }
-                else if (fieldType == Defines.FIELDTYPE_FRAGS)
-                {
-                    format = (wrapper.type == "left")
-                        ? Config.config.playersPanel.medium.fragsFormatLeft
-                        : Config.config.playersPanel.medium.fragsFormatRight;
-                }
-                break;
-            case "medium2":
-                if (fieldType == Defines.FIELDTYPE_VEHICLE)
-                {
-                    format = (wrapper.type == "left")
-                        ? Config.config.playersPanel.medium2.formatLeft
-                        : Config.config.playersPanel.medium2.formatRight;
-                }
-                else if (fieldType == Defines.FIELDTYPE_FRAGS)
-                {
-                    format = (wrapper.type == "left")
-                        ? Config.config.playersPanel.medium2.fragsFormatLeft
-                        : Config.config.playersPanel.medium2.fragsFormatRight;
-                }
-                break;
-            case "large":
-                if (fieldType == Defines.FIELDTYPE_NICK)
-                {
-                    format = (wrapper.type == "left")
-                        ? Config.config.playersPanel.large.nickFormatLeft
-                        : Config.config.playersPanel.large.nickFormatRight;
-                }
-                else if (fieldType == Defines.FIELDTYPE_VEHICLE)
-                {
-                    format = (wrapper.type == "left")
-                        ? Config.config.playersPanel.large.vehicleFormatLeft
-                        : Config.config.playersPanel.large.vehicleFormatRight;
-                }
-                else if (fieldType == Defines.FIELDTYPE_FRAGS)
-                {
-                    format = (wrapper.type == "left")
-                        ? Config.config.playersPanel.large.fragsFormatLeft
-                        : Config.config.playersPanel.large.fragsFormatRight;
-                }
-                break;
-            default:
-                break;
+            format = isLeftPanel ? cfg.fragsFormatLeft : cfg.fragsFormatRight;
+        }
+        else
+        {
+            switch (wrapper.state)
+            {
+                case "medium":
+                    if (fieldType == Defines.FIELDTYPE_NICK)
+                        format = isLeftPanel ? cfg.formatLeft : cfg.formatRight;
+                    break;
+                case "medium2":
+                    if (fieldType == Defines.FIELDTYPE_VEHICLE)
+                        format = isLeftPanel ? cfg.formatLeft : cfg.formatRight;
+                    break;
+                case "large":
+                    if (fieldType == Defines.FIELDTYPE_NICK)
+                        format = isLeftPanel ? cfg.nickFormatLeft : cfg.nickFormatRight;
+                    else if (fieldType == Defines.FIELDTYPE_VEHICLE)
+                        format = isLeftPanel ? cfg.vehicleFormatLeft : cfg.vehicleFormatRight;
+                    break;
+            }
         }
 
         if (format == null)
@@ -451,31 +417,40 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     {
         //Logger.add("PlayersPanel.XVMAdjustPanelSize()");
 
-        var namesWidthDefault = 46;
-        var namesWidth = namesWidthDefault;
-        var vehiclesWidthDefault = 65;
-        var vehiclesWidth = vehiclesWidthDefault;
-        var widthDelta = 0;
-        var squadSize = 0;
+        var namesWidthDefault:Number = 46;
+        var namesWidth:Number = namesWidthDefault;
+        var vehiclesWidthDefault:Number = 65;
+        var vehiclesWidth:Number = vehiclesWidthDefault;
+        var widthDelta:Number = 0;
+        var squadSize:Number = 0;
+
+        var cfg:Object = Config.config.playersPanel;
+        var w = cfg[wrapper.state].width;
+        if (isNaN(w))
+        {
+            var obj:Object = BattleState.getUserData(m_data.userName);
+            w = parseInt(Macros.Format(m_data[0].userName, w, obj));
+        }
+
         switch (wrapper.state)
         {
             case "short":
-                widthDelta = -Config.config.playersPanel.short.width;
+                widthDelta = -w;
                 break;
             case "medium":
-                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.config.playersPanel.medium.width);
+                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), w);
                 widthDelta = namesWidthDefault - namesWidth;
                 break;
             case "medium2":
-                vehiclesWidth = Config.config.playersPanel.medium2.width;
+                vehiclesWidth = w;
                 widthDelta = vehiclesWidthDefault - vehiclesWidth;
                 break;
             case "large":
                 namesWidthDefault = 296;
-                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.config.playersPanel.large.width);
+                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), w);
                 vehiclesWidth = XVMGetMaximumFieldWidth(wrapper.m_vehicles);
                 //Logger.add("w: " + vehiclesWidth + " " + wrapper.m_vehicles.htmlText);
-                squadSize = Config.config.playersPanel.removeSquadIcon ? 0 : net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
+                squadSize = cfg.removeSquadIcon ? 0 : net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 break;
             default:
