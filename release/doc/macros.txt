@@ -71,7 +71,7 @@ Legend:
 │ {{battletier-max}} │ X │   │   │   │   │   │   │   │ maximal vehicle battle tier
 │ {{position}}       │ X │ X │ X │ X │   │   │   │   │ position of the player in the beginning of the battle (1-15)
 │ {{spotted}}        │   │ X │ X │   │   │   │   │   │ Vehicle spotted status with values from texts/spotted section
-│ {{language}}       │   │ X │ X │   │   │   │   │   │ Player's client language
+│ {{language}}       │ X │ X │ X │ X │ X │   │   │   │ Player's client language
 └────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
 
   Global macros (does not depend on the player)
@@ -131,7 +131,5 @@ Legend:
 │ {{c:t-rating}}  │ X │ X │ X │ X │ X │ color depending on current vehicle win ratio
 │ {{c:t-battles}} │ X │ X │ X │ X │ X │ color depending on current vehicle battles
 │ {{marksOnGun}}  │   │ X │ X │ X │ X │ marks on gun (only for spotted vehicles)
-│ {{language}}    │ X │ X │ X │ X │ X │ player's client language
-│ {{region}}      │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
 └─────────────────┴───┴───┴───┴───┴───┴────────────────────────────────────────────────────────────────
   * Any color macro you can change to transparency macro (e.g. {{a:tdb}}).
