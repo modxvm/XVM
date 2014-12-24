@@ -64,9 +64,9 @@ class wot.Minimap.MinimapEntry
         Utils.TraceXvmModule("Minimap");
     }
 
-    function init_xvmImpl(playerId:Number)
+    function init_xvmImpl(playerId:Number, isLit:Boolean)
     {
-        //Logger.add("init_xvmImpl: " + playerId);
+        //Logger.add("init_xvmImpl: id:" + playerId + " lit:" + isLit);
 
         MarkerColor.setColor(wrapper);
 
@@ -74,6 +74,15 @@ class wot.Minimap.MinimapEntry
             return;
 
         this.playerId = playerId;
+
+        if (IconsProxy.playerIds[playerId])
+        {
+            delete IconsProxy.playerIds[playerId];
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this, playerId));
+        }
+
+        if (isLit)
+            return;
 
         IconsProxy.playerIds[playerId] = this;
 

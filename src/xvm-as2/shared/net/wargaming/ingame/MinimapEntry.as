@@ -41,4 +41,6 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     function updateIfEntryIsPlayer();
     function draw();
     function getMinimap():net.wargaming.ingame.Minimap;
+    function updateVehicleName();
+    function setVisible(value);
 }

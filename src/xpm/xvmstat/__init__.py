@@ -190,10 +190,23 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args = None):
                     base(self, id, 'init_xvm', [0])
                 else:
                     arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
-                    base(self, id, 'init_xvm', [arenaVehicle['accountDBID']])
-    except:
-        # hide an errors for 3rd-party Minimap.swf
-        pass
+                    base(self, id, 'init_xvm', [arenaVehicle['accountDBID'], False])
+    except Exception, ex:
+        if IS_DEVELOPMENT:
+            err(traceback.format_exc())
+
+def _Minimap__addEntryLit(self, id, matrix, visible = True):
+    from gui.battle_control import g_sessionProvider
+    battleCtx = g_sessionProvider.getCtx()
+    if battleCtx.isObserver(id) or matrix is None:
+        return
+    try:
+        entry = self._Minimap__entrieLits[id]
+        arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+        self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm', [arenaVehicle['accountDBID'], True]))
+    except Exception, ex:
+        if IS_DEVELOPMENT:
+            err(traceback.format_exc())
 
 # stereoscope
 def AmmunitionPanel_highlightParams(self, type):
@@ -260,6 +273,7 @@ def _RegisterEvents():
     RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
     RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
     OverrideMethod(Minimap, '_Minimap__callEntryFlash', _Minimap__callEntryFlash)
+    RegisterEvent(Minimap, '_Minimap__addEntryLit', _Minimap__addEntryLit)
 
     # enable for pinger_wg
     #from predefined_hosts import g_preDefinedHosts
