@@ -151,9 +151,11 @@ class com.xvm.GraphicsUtil
 
         try
         {
+            if (!value)
+                return "";
             if (isArty)
                 value += "_arty";
-            if (!value || !Config.config.colors.spotted[value])
+            if (!Config.config.colors.spotted[value])
                 return "";
             return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
         }
@@ -168,9 +170,11 @@ class com.xvm.GraphicsUtil
     {
         try
         {
+            if (!value)
+                return NaN;
             if (isArty)
                 value += "_arty";
-            if (!value || !Config.config.alpha.spotted[value])
+            if (Config.config.alpha.spotted[value] == null)
                 return NaN;
             return Config.config.alpha.spotted[value];
         }
