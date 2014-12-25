@@ -86,13 +86,14 @@ class com.xvm.Utils
         return v;
     }
 
-    public static function getSpottedText(value:String, vehId:Number):String
+    public static function getSpottedText(value:String, isArty:Boolean):String
     {
         if (value == null)
             return null;
 
-        var vdata:VehicleData = VehicleInfo.get(vehId);
-        value += (vdata != null && vdata.vclass == "SPG") ? "_arty" : "";
+        if (isArty)
+            value += "_arty";
+
         if (!Config.config.texts.spotted[value])
             return null;
 

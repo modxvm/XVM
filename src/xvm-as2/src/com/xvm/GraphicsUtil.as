@@ -144,13 +144,15 @@ class com.xvm.GraphicsUtil
         return null;
     }
 
-    public static function GetSpottedColorValue(value:String, prefix:String):String
+    public static function GetSpottedColorValue(value:String, isArty:Boolean, prefix:String):String
     {
         if (!prefix)
             prefix = "#";
 
         try
         {
+            if (isArty)
+                value += "_arty";
             if (!value || !Config.config.colors.spotted[value])
                 return "";
             return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
@@ -162,10 +164,12 @@ class com.xvm.GraphicsUtil
         return null;
     }
 
-    public static function GetSpottedAlphaValue(value:String)
+    public static function GetSpottedAlphaValue(value:String, isArty:Boolean)
     {
         try
         {
+            if (isArty)
+                value += "_arty";
             if (!value || !Config.config.alpha.spotted[value])
                 return null;
             return Config.config.alpha.spotted[value];
