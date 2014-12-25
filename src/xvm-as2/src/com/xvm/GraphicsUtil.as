@@ -164,21 +164,21 @@ class com.xvm.GraphicsUtil
         return null;
     }
 
-    public static function GetSpottedAlphaValue(value:String, isArty:Boolean)
+    public static function GetSpottedAlphaValue(value:String, isArty:Boolean):Number
     {
         try
         {
             if (isArty)
                 value += "_arty";
             if (!value || !Config.config.alpha.spotted[value])
-                return null;
+                return NaN;
             return Config.config.alpha.spotted[value];
         }
         catch (ex:Error)
         {
-            return null;
+            return NaN;
         }
-        return null;
+        return NaN;
     }
 
     public static function GetDmgSrcValue(damageSource:String, damageDest:String, isDead:Boolean, isBlowedUp:Boolean, prefix:String):String
