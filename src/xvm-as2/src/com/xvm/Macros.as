@@ -8,7 +8,7 @@ class com.xvm.Macros
 
     public static function Format(pname:String, format:String, options:Object):String
     {
-        return _instance._Format(pname, format, options, false);
+        return _instance._Format(pname, format, options);
     }
 
     public static function FormatGlobalNumberValue(value):Number
@@ -63,7 +63,7 @@ class com.xvm.Macros
     private var isStaticMacro;
 
     // {{name[:norm][%[flag][width][.prec]type][~suf][?rep][|def]}}
-    private function _Format(pname:String, format:String, options:Object, disableStaticMacro:Boolean):String
+    private function _Format(pname:String, format:String, options:Object):String
     {
         //Logger.add("format:" + format + " player:" + pname);
         if (format == null || pname == null)
@@ -89,7 +89,7 @@ class com.xvm.Macros
 
             var res:String = formatArr[0];
             var len:Number = formatArr.length;
-            isStaticMacro = !disableStaticMacro;
+            isStaticMacro = true;
             if (len > 1)
             {
                 for (var i:Number = 1; i < len; ++i)
@@ -107,18 +107,19 @@ class com.xvm.Macros
                 }
             }
 
+            if (res.indexOf("{{") >= 0 && options != null)
+            {
+                //Logger.add("recursive: " + pname + " " + res);
+                res = _Format(pname, res, options);
+                isStaticMacro = false;
+            }
+
             res = Utils.fixImgTag(res);
 
             if (isStaticMacro)
                 player_cache[dead_value][format] = res;
             //else
             //    Logger.add(pname + "> " + format);
-
-            if (res.indexOf("{{") >= 0 && options != null)
-            {
-                //Logger.add("recursive: " + pname + " " + res);
-                res = _Format(pname, res, options, true);
-            }
 
             //Logger.add(pname + "> " + format);
             //Logger.add(pname + "= " + res);
@@ -392,7 +393,7 @@ class com.xvm.Macros
             return NaN;
 
         var obj:Object = BattleState.getUserData(pname);
-        return parseFloat(_Format(pname, value, obj, false));
+        return parseFloat(_Format(pname, value, obj));
     }
 
     // Macros registration
