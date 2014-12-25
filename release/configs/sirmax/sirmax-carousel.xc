@@ -31,6 +31,8 @@
       "__stub__": {}
     },
     "extraFields": [
+        { "x": 140, "y": 15, "w": 50, "h": 20, "align": "right", "format": "{{v.earnedXP%d}}" },
+        { "x": 140, "y": 17, "src": "img://gui/maps/icons/library/XpIcon.png" },
         { "x": 135, "y": 57, "w": 25, "h": 25, "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png"
         },
         { "x": 4, "y": 20, "src": "xvm://configs/sirmax/img/marksOnGun/{{v.marksOnGun|x}}.png"

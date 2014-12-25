@@ -74,6 +74,7 @@ package com.xvm.types.dossier
                         c_wn8effd = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8EFFD, wn8effd, "#");
                     }
 
+                    earnedXP = isNaN(vdossier.earnedXP) ? NaN : vdossier.earnedXP;
                     marksOnGun = isNaN(vdossier.marksOnGun) || level < 5 ? null : Utils.getMarksOnGunText(vdossier.marksOnGun);
                     damageRating = level < 5 ? NaN : vdossier.damageRating;
                     c_damageRating = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, "#");
@@ -126,6 +127,7 @@ package com.xvm.types.dossier
         public var wn8expd:Number;
         public var wn8effd:Number;
         public var c_wn8effd:String;
+        public var earnedXP:Number;
         public var marksOnGun:String;
         public var damageRating:Number;
         public var c_damageRating:String;

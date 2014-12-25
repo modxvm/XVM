@@ -43,8 +43,12 @@ class _Dossier(object):
             dossier = g_itemsCache.items.getAccountDossier(self.playerId)
             res = self._prepareAccountResult(dossier)
         else:
-            dossier = g_itemsCache.items.getVehicleDossier(int(self.vehId), self.playerId)
-            res = self._prepareVehicleResult(dossier)
+            vehId = int(self.vehId)
+            dossier = g_itemsCache.items.getVehicleDossier(vehId, self.playerId)
+            xpVehs = g_itemsCache.items.stats.vehiclesXPs
+            earnedXP = xpVehs.get(vehId, 0)
+            #log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
+            res = self._prepareVehicleResult(dossier, earnedXP)
 
         # respond
         if proxy and proxy.component and proxy.movie:
@@ -152,7 +156,7 @@ class _Dossier(object):
 
         return res
 
-    def _prepareVehicleResult(self, dossier):
+    def _prepareVehicleResult(self, dossier, earnedXP):
         res = {}
         if dossier is None:
             return res
@@ -161,6 +165,7 @@ class _Dossier(object):
 
         res.update({
             'vehId': int(self.vehId),
+            'earnedXP': earnedXP,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
         })
