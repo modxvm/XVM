@@ -46,7 +46,7 @@ package xvm.company.renderers
             var s:String = "";
 
             // line 1
-            s += pname + "<font color='#CCCCCC'>" + WGUtils.GetClanNameWithBrackets(fullPlayerName) + "</font>";
+            s += pname + "<font color='#CCCCCC'>" + (WGUtils.GetClanNameWithBrackets(fullPlayerName) || "") + "</font>";
             s += "<br>";
             // line 2
             s += "WN8: " + (!stat.wn8 ? "--" :

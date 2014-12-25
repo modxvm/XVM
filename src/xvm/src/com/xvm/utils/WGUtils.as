@@ -32,10 +32,10 @@ package com.xvm.utils
         public static function GetClanNameWithoutBrackets(fullplayername:String):String
         {
             if (fullplayername == null)
-                return "";
+                return null;
             var pos:Number = fullplayername.indexOf("[");
             if (pos < 0)
-                return "";
+                return null;
             var n:String = fullplayername.slice(pos + 1);
             return n.slice(0, n.indexOf("]"));
         }
@@ -43,7 +43,7 @@ package com.xvm.utils
         public static function GetClanNameWithBrackets(fullplayername:String):String
         {
             var clan:String = GetClanNameWithoutBrackets(fullplayername);
-            return clan ? "[" + clan + "]" : "";
+            return clan ? "[" + clan + "]" : null;
         }
     }
 }

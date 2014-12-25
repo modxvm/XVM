@@ -16,6 +16,11 @@ class com.xvm.Macros
         return _instance._FormatGlobalNumberValue(value);
     }
 
+    public static function getGlobalValue(key:String)
+    {
+        return _instance.m_globals[key];
+    }
+
     public static function RegisterPlayerData(pname:String, data:Object, team:Number)
     {
         _instance._RegisterPlayerData(pname, data, team);
@@ -44,11 +49,6 @@ class com.xvm.Macros
     public static function RegisterCommentsData(json_str:String)
     {
         _instance._RegisterCommentsData(json_str);
-    }
-
-    public static function get globals():Object
-    {
-        return _instance.m_globals;
     }
 
     // PRIVATE
@@ -107,11 +107,15 @@ class com.xvm.Macros
                 }
             }
 
-            if (res.indexOf("{{") >= 0 && options != null)
+            if (options != null)
             {
-                //Logger.add("recursive: " + pname + " " + res);
-                res = _Format(pname, res, options);
-                isStaticMacro = false;
+                var iMacroPos:Number = res.indexOf("{{");
+                if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
+                {
+                    //Logger.add("recursive: " + pname + " " + res);
+                    res = _Format(pname, res, options);
+                    isStaticMacro = false;
+                }
             }
 
             res = Utils.fixImgTag(res);

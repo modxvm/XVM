@@ -39,7 +39,7 @@ class com.xvm.Chance
 
         maxTeamsCount = Math.max(teamsCount.ally, teamsCount.enemy);
 
-        Chance.battleTier = Macros.globals["battletier"];
+        Chance.battleTier = Macros.getGlobalValue("battletier");
 
         var chG = GetChance(ChanceFuncG);
         chanceG = chG;

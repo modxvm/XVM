@@ -15,10 +15,63 @@ package com.xvm.utils
 
     public class Macros
     {
-        private static var macros_cache:Object = { };
-        private static var dict:Object = new Object(); //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
-        private static var globals:Object = new Object();
-        public static var comments:Object = null;
+        // PUBLIC STATIC
+
+        public static function Format(pname:String, format:String, options:MacrosFormatOptions = null):String
+        {
+            return _instance._Format(pname, format, options);
+        }
+
+        public static function FormatGlobalNumberValue(value:*):Number
+        {
+            return _instance._FormatGlobalNumberValue(value);
+        }
+
+        public static function getGlobalValue(key:String):*
+        {
+            return _instance.m_globals[key];
+        }
+
+        public static function RegisterGlobalMacrosData():void
+        {
+            return _instance._RegisterGlobalMacrosData();
+        }
+
+        public static function RegisterMinimalMacrosData(playerId:Number, fullPlayerName:String, vid:int):void
+        {
+            return _instance._RegisterMinimalMacrosData(playerId, fullPlayerName, vid);
+        }
+
+        public static function RegisterStatMacrosData(pname:String):void
+        {
+            return _instance._RegisterStatMacrosData(pname);
+        }
+
+        public static function RegisterVehiclesMacros():void
+        {
+            return _instance._RegisterVehiclesMacros();
+        }
+
+        public static function RegisterClockMacros():void
+        {
+            return _instance._RegisterClockMacros();
+        }
+
+        public static function RegisterCommentsData():void
+        {
+            return _instance._RegisterCommentsData();
+        }
+
+        // PRIVATE
+
+        private static var _instance:Macros = new Macros();
+
+        private var m_macros_cache:Object = { };
+        private var m_dict:Object = new Object(); //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+        private var m_globals:Object = new Object();
+        private var m_comments:Object = null;
+
+        private var isStaticMacro:Boolean = true;
 
         /**
          * Format string with macros substitutions
@@ -27,14 +80,11 @@ package com.xvm.utils
          * @param options data for dynamic values
          * @return Formatted string
          */
-        public static function Format(pname:String, format:String, options:MacrosFormatOptions = null):String
+        public function _Format(pname:String, format:String, options:MacrosFormatOptions):String
         {
             //Logger.add("format:" + format + " player:" + pname);
             if (format == null || format == "")
                 return "";
-
-            if (format.indexOf("{{") < 0)
-                return Utils.fixImgTag(format);
 
             try
             {
@@ -46,11 +96,11 @@ package com.xvm.utils
                 var dead_value:String;
                 if (pname != null && pname != "")
                 {
-                    player_cache = macros_cache[pname];
+                    player_cache = m_macros_cache[pname];
                     if (player_cache == null)
                     {
-                        macros_cache[pname] = { alive: { }, dead: { }};
-                        player_cache = macros_cache[pname];
+                        m_macros_cache[pname] = { alive: { }, dead: { }};
+                        player_cache = m_macros_cache[pname];
                     }
                     dead_value = (options.alive == true) ? "alive" : "dead";
                     var cached_value:* = player_cache[dead_value][format];
@@ -66,71 +116,30 @@ package com.xvm.utils
 
                 var res:String = formatArr[0];
                 var len:int = formatArr.length;
-                var isStaticMacro:Boolean = true;
+                isStaticMacro = true;
                 if (len > 1)
                 {
                     for (var i:int = 1; i < len; ++i)
                     {
                         var part:String = formatArr[i];
-                        var arr2:Array = part.split("}}", 2);
-                        var macro:String = arr2[0];
-                        if (arr2.length == 1 || (options.skip && options.skip.hasOwnProperty[macro]))
+                        var idx:Number = part.indexOf("}}");
+                        if (idx < 0)
                         {
                             res += "{{" + part;
                         }
                         else
                         {
-                            // Process tag
-                            var pdata:* = pname == null ? globals : dict[pname];
-                            if (pdata != null)
-                            {
-                                var parts:Array = GetMacroParts(macro, pdata);
-
-                                var macroName:String = parts[0];
-                                var norm:String = parts[1];
-                                var def:String = parts[5];
-
-                                var dotPos:int = macroName.indexOf(".");
-                                if (dotPos > 0 && options != null)
-                                {
-                                    options.__subname = macroName.slice(dotPos + 1);
-                                    macroName = parts[0] = macroName.slice(0, dotPos);
-                                }
-
-                                var value:* = pdata[macroName];
-
-                                if (value === undefined)
-                                    value = globals[macroName];
-
-                                //Logger.add("macroname:" + macroName + "| norm:" + norm + "| def:" + def + "| value:" + value + "| format:" + format);
-
-                                if (value === undefined)
-                                {
-                                    //process l10n macro
-                                    if (macroName.indexOf("l10n") == 0)
-                                        res += prepareValue(NaN, macroName, norm, def, pdata);
-                                    else
-                                        res += def;
-                                    isStaticMacro = false;
-                                }
-                                else if (value == null)
-                                {
-                                    //Logger.add(macroName + " " + norm + " " + def + "  " + format);
-                                    res += prepareValue(NaN, macroName, norm, def, pdata);
-                                }
-                                else
-                                {
-                                    // is static macro
-                                    var type:String = typeof value;
-                                    if (type == "function" && macroName != "alive")
-                                        isStaticMacro = false;
-
-                                    res += FormatMacro(macro, parts, value, pdata, options);
-                                }
-                            }
-                            res += arr2[1];
+                            res += FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2);
                         }
                     }
+                }
+
+                var iMacroPos:int = res.indexOf("{{");
+                if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
+                {
+                    //Logger.add("recursive: " + pname + " " + res);
+                    res = _Format(pname, res, options);
+                    isStaticMacro = false;
                 }
 
                 res = Utils.fixImgTag(res);
@@ -154,7 +163,63 @@ package com.xvm.utils
             return "";
         }
 
-        private static function GetMacroParts(macro:String, pdata:Object):Array
+        private function FormatPart(macro:String, pname:String, options:MacrosFormatOptions):String
+        {
+            // Process tag
+            var pdata:* = pname == null ? m_globals : m_dict[pname];
+            if (pdata == null)
+                return "";
+
+            var res:String = "";
+
+            var parts:Array = GetMacroParts(macro, pdata);
+
+            var macroName:String = parts[0];
+            var norm:String = parts[1];
+            var def:String = parts[5];
+
+            var dotPos:int = macroName.indexOf(".");
+            if (dotPos > 0 && options != null)
+            {
+                options.__subname = macroName.slice(dotPos + 1);
+                macroName = parts[0] = macroName.slice(0, dotPos);
+            }
+
+            var value:* = pdata[macroName];
+
+            if (value === undefined)
+                value = m_globals[macroName];
+
+            //Logger.add("macro:" + macro + " | macroname:" + macroName + " | norm:" + norm + " | def:" + def + " | value:" + value);
+
+            if (value === undefined)
+            {
+                //process l10n macro
+                if (macroName.indexOf("l10n") == 0)
+                    res += prepareValue(NaN, macroName, norm, def, pdata);
+                else
+                    res += def;
+                isStaticMacro = false;
+            }
+            else if (value == null)
+            {
+                //Logger.add(macroName + " " + norm + " " + def + "  " + format);
+                res += prepareValue(NaN, macroName, norm, def, pdata);
+            }
+            else
+            {
+                // is static macro
+                var type:String = typeof value;
+                if (type == "function" && macroName != "alive")
+                    isStaticMacro = false;
+
+                res += FormatMacro(macro, parts, value, pdata, options);
+            }
+
+            return res;
+        }
+
+        private function GetMacroParts(macro:String, pdata:Object):Array
         {
             //Logger.addObject(pdata);
             var parts:Array = [null,null,null,null,null,null];
@@ -226,7 +291,7 @@ package com.xvm.utils
             return parts;
         }
 
-        private static function FormatMacro(macro:String, parts:Array, value:*, pdata:Object, options:Object):String
+        private function FormatMacro(macro:String, parts:Array, value:*, pdata:Object, options:Object):String
         {
             var name:String = parts[0];
             var norm:String = parts[1];
@@ -247,8 +312,6 @@ package com.xvm.utils
             var res:String = value;
             if (type == "function")
             {
-                if (options == null)
-                    return "{{" + macro + "}}";
                 value = value(options);
                 if (value == null)
                     return prepareValue(NaN, name, norm, def, pdata);
@@ -305,7 +368,7 @@ package com.xvm.utils
             return res;
         }
 
-        private static function prepareValue(value:Number, name:String, norm:String, def:String, pdata:Object):String
+        private function prepareValue(value:Number, name:String, norm:String, def:String, pdata:Object):String
         {
             if (norm == null)
                 return def;
@@ -324,7 +387,7 @@ package com.xvm.utils
                             break;
                         value = vdata.hpTop;
                     }
-                    res = Math.round(parseInt(norm) * value / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
+                    res = Math.round(parseInt(norm) * value / Defines.MAX_BATTLETIER_HPS[m_globals["battletier"] - 1]).toString();
                     //Logger.add("res: " + res);
                     break;
                 case "hp-ratio":
@@ -342,19 +405,21 @@ package com.xvm.utils
             return res;
         }
 
-        public static function getGlobalValue(key:String):*
+        private function _FormatGlobalNumberValue(value:*):Number
         {
-            return globals[key];
+            if (!isNaN(value))
+                return value;
+            return parseFloat(_Format(null, value, null));
         }
 
         // Macros registration
 
-        public static function RegisterGlobalMacrosData():void
+        private function _RegisterGlobalMacrosData():void
         {
-            if (globals["battletier"] == null)
+            if (m_globals["battletier"] == null)
             {
                 // {{battletier}}
-                globals["battletier"] = Xvm.cmd(Defines.XVM_COMMAND_GET_BATTLE_LEVEL);
+                m_globals["battletier"] = Xvm.cmd(Defines.XVM_COMMAND_GET_BATTLE_LEVEL);
             }
         }
 
@@ -363,7 +428,7 @@ package com.xvm.utils
          * @param fullPlayerName full player name with extra tags (clan, region, etc)
          * @param vid vehicle id
          */
-        public static function RegisterMinimalMacrosData(playerId:Number, fullPlayerName:String, vid:int):void
+        private function _RegisterMinimalMacrosData(playerId:Number, fullPlayerName:String, vid:int):void
         {
             RegisterGlobalMacrosData();
 
@@ -373,32 +438,32 @@ package com.xvm.utils
             var pname:String = WGUtils.GetPlayerName(fullPlayerName);
 
             // check if already registered
-            if (dict.hasOwnProperty(pname))
+            if (m_dict.hasOwnProperty(pname))
             {
-                if (dict[pname]["vid"] == vid)
+                if (m_dict[pname]["vid"] == vid)
                     return;
             }
             else
             {
-                dict[pname] = new Object();
+                m_dict[pname] = new Object();
             }
 
-            var pdata:Object = dict[pname];
+            var pdata:Object = m_dict[pname];
 
-            var nick:String = getCustomPlayerName(pname, playerId);
-            var clanIdx:int = nick.indexOf("[");
+            var name:String = getCustomPlayerName(pname, playerId);
+            var clanIdx:int = name.indexOf("[");
             if (clanIdx > 0)
             {
-                fullPlayerName = nick;
-                nick = StringUtils.trim(nick.slice(0, clanIdx));
+                fullPlayerName = name;
+                name = StringUtils.trim(name.slice(0, clanIdx));
             }
             var clanWithoutBrackets:String = WGUtils.GetClanNameWithoutBrackets(fullPlayerName);
             var clanWithBrackets:String = WGUtils.GetClanNameWithBrackets(fullPlayerName);
 
             // {{nick}}
-            pdata["nick"] = nick + clanWithBrackets;
+            pdata["nick"] = name + (clanWithBrackets || "");
             // {{name}}
-            pdata["name"] = nick;
+            pdata["name"] = name;
             // {{clan}}
             pdata["clan"] = clanWithBrackets;
             // {{clannb}}
@@ -460,7 +525,7 @@ package com.xvm.utils
          * Register stat macros values for player
          * @param pname player name without extra tags (clan, region, etc)
          */
-        public static function RegisterStatMacrosData(pname:String):void
+        private function _RegisterStatMacrosData(pname:String):void
         {
             var stat:StatData = Stat.getData(pname);
             if (stat == null)
@@ -468,7 +533,7 @@ package com.xvm.utils
 
             RegisterMinimalMacrosData(stat._id, stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id);
 
-            var pdata:Object = dict[pname];
+            var pdata:Object = m_dict[pname];
 
             if (Config.networkServicesSettings.servicesActive == false)
                 return;
@@ -617,11 +682,11 @@ package com.xvm.utils
             pdata["a:tsb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
         }
 
-        public static function RegisterVehiclesMacros():void
+        private function _RegisterVehiclesMacros():void
         {
-            if (!globals.hasOwnProperty("v"))
+            if (!m_globals.hasOwnProperty("v"))
             {
-                globals["v"] = function(o:MacrosFormatOptions):* {
+                m_globals["v"] = function(o:MacrosFormatOptions):* {
                     if (o == null || o.__subname == null || o.vdata == null)
                         return null;
                     return o.vdata[o.__subname];
@@ -629,11 +694,11 @@ package com.xvm.utils
             }
         }
 
-        public static function RegisterClockMacros():void
+        private function _RegisterClockMacros():void
         {
-            if (!globals.hasOwnProperty("_clock"))
+            if (!m_globals.hasOwnProperty("_clock"))
             {
-                globals["_clock"] = function(o:MacrosFormatOptions):* {
+                m_globals["_clock"] = function(o:MacrosFormatOptions):* {
                     if (o == null || o.__subname == null)
                         return null;
                     var date:Date = App.utils.dateTime.now();
@@ -660,20 +725,20 @@ package com.xvm.utils
             }
         }
 
-        public static function RegisterCommentsData():void
+        private function _RegisterCommentsData():void
         {
             //Logger.add("Macros::RegisterCommentsData");
-            Cmd.getComments(null, onGetCommentsReceived);
+            Cmd.getComments(this, onGetCommentsReceived);
         }
 
-        public static function onGetCommentsReceived(json_str:String):void
+        private function onGetCommentsReceived(json_str:String):void
         {
             try
             {
                 //Logger.addObject(json_str);
                 var o:Object = JSONx.parse(json_str);
-                comments = (o != null && o.hasOwnProperty("players")) ? o.players : null;
-                //Logger.addObject(comments);
+                m_comments = (o != null && o.hasOwnProperty("players")) ? o.players : null;
+                //Logger.addObject(m_comments);
             }
             catch (ex:Error)
             {
@@ -681,14 +746,12 @@ package com.xvm.utils
             }
         }
 
-        // PRIVATE
-
         /**
          * Change nicks for XVM developers.
          * @param pname player name
          * @return personal name
          */
-        private static function getCustomPlayerName(pname:String, uid:Number):String
+        private function getCustomPlayerName(pname:String, uid:Number):String
         {
             switch (Config.gameRegion)
             {
@@ -706,7 +769,7 @@ package com.xvm.utils
                 case "CT":
                     if (pname == "M_r_A_RU" || pname == "M_r_A_EU")
                         return "Fluttershy is best pony!";
-                    if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU")
+                    if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU" || pname == "0x01_EU")
                         return "«sir Max» (XVM)";
                     break;
 
@@ -723,9 +786,9 @@ package com.xvm.utils
                     break;
             }
 
-            if (comments != null)
+            if (m_comments != null)
             {
-                var cdata:Object = comments[String(uid)];
+                var cdata:Object = m_comments[String(uid)];
                 if (cdata != null)
                 {
                     if (cdata.nick != null && cdata.nick != "")
