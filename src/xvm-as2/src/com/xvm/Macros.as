@@ -114,13 +114,14 @@ class com.xvm.Macros
             //else
             //    Logger.add(pname + "> " + format);
 
-            //Logger.add(pname + "> " + format);
-            //Logger.add(pname + "= " + res);
-            if (res.indexOf("{{") >= 0)
+            if (res.indexOf("{{") >= 0 && options != null)
             {
-                //Logger.add("recursive: " + pname + "= " + res);
+                //Logger.add("recursive: " + pname + " " + res);
                 res = _Format(pname, res, options, true);
             }
+
+            //Logger.add(pname + "> " + format);
+            //Logger.add(pname + "= " + res);
 
             return res;
         }
