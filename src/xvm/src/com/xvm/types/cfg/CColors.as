@@ -10,6 +10,7 @@ package com.xvm.types.cfg
         public var damage:Object;
         public var dmg_kind:Object;
         public var vtype:Object;
+        public var spotted:Object;
         public var hp:Array;
         public var hp_ratio:Array;
         public var x:Array;

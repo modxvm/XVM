@@ -124,7 +124,7 @@ class com.xvm.GraphicsUtil
         return max;
     }
 
-    public static function GetVTypeColorValue(iconSource:String, prefix:String, darker:Boolean):String
+    public static function GetVTypeColorValue(iconSource:String, prefix:String):String
     {
         if (!prefix)
             prefix = "#";
@@ -136,6 +136,39 @@ class com.xvm.GraphicsUtil
             if (!vtype || !Config.config.colors.vtype[vtype])
                 return "";
             return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
+        }
+        catch (ex:Error)
+        {
+            return null;
+        }
+        return null;
+    }
+
+    public static function GetSpottedColorValue(value:String, prefix:String):String
+    {
+        if (!prefix)
+            prefix = "#";
+
+        try
+        {
+            if (!value || !Config.config.colors.spotted[value])
+                return "";
+            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
+        }
+        catch (ex:Error)
+        {
+            return null;
+        }
+        return null;
+    }
+
+    public static function GetSpottedAlphaValue(value:String)
+    {
+        try
+        {
+            if (!value || !Config.config.alpha.spotted[value])
+                return null;
+            return Config.config.alpha.spotted[value];
         }
         catch (ex:Error)
         {

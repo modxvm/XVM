@@ -85,6 +85,18 @@
       // Включить/выключить использование премиумного цвета.
       "usePremiumColor": false
     },
+    // Dynamic color by spotted status
+    // Динамический цвет по статусу засвета
+    "spotted": {
+      "neverSeen": "0x000000",
+      "lost": "0x999999",
+      "revealed": "0x00DE00",
+      "dead": "0x000000",
+      "neverSeen_arty": "0x000000",
+      "lost_arty": "0x999999",
+      "revealed_arty": "0xDE0000",
+      "dead_arty": "0x000000"
+    },
     // Color settings for damage.
     // Настройки цвета для урона.
     "damage": {

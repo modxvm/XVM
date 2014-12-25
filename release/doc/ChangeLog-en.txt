@@ -5,9 +5,10 @@
       for usual vehicle: "neverSeen", "lost", "revealed", "dead"
       for arty: "neverSeen_arty", "lost_arty", "revealed_arty", "dead_arty"
   * added new macros:
-        {{language}} - player's client language
-        {{region}} - current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
-        {{spotted}} with values from texts/spotted section
+      {{language}} - player's client language
+      {{region}} - current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
+      {{spotted}} with values from texts/spotted section
+      {{c:spotted}}, {{a:spotted}} for color and transparency by spotted status
   * removed section playersPanel/enemySpottedMarker (use extra fields with {{spotted}} macro instead)
   * added new option to extraFields: "bindToIcon" - if enabled, x position is binded to vehicle icon (default false)
 

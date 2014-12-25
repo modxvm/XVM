@@ -989,13 +989,23 @@ package com.xvm.misc
                 other:           "0xCCCCCC"
             };
             c.vtype = {
-                LT:  "0xA2FF9A",        // Color for light tanks
-                MT:  "0xFFF198",        // Color for medium tanks
-                HT:  "0xFFACAC",        // Color for heavy tanks
-                SPG: "0xEFAEFF",        // Color for arty
-                TD:  "0xA0CFFF",        // Color for tank destroyers
-                premium: "0xFFCC66",    // Color for premium tanks
-                usePremiumColor: false  // Enable/disable premium color usage
+                LT:		"0xA2FF9A", // Color for light tanks
+                MT:		"0xFFF198", // Color for medium tanks
+                HT:		"0xFFACAC", // Color for heavy tanks
+                SPG:		"0xEFAEFF", // Color for arty
+                TD:		"0xA0CFFF", // Color for tank destroyers
+                premium:	"0xFFCC66", // Color for premium tanks
+                usePremiumColor: false      // Enable/disable premium color usage
+            };
+            c.spotted = {
+                neverSeen:	"0x000000",
+                lost:		"0x999999",
+                revealed:	"0x00DE00",
+                dead:		"0x000000",
+                neverSeen_arty:	"0x000000",
+                lost_arty:	"0x999999",
+                revealed_arty:	"0xDE0000",
+                dead_arty:	"0x000000"
             };
             // values - from min to max, colors are for values 'lesser then ...'
             c.hp = [
@@ -1153,6 +1163,17 @@ package com.xvm.misc
         private static function getAlphaSection():CAlpha
         {
             var c:CAlpha = new CAlpha();
+
+            c.spotted = {
+                neverSeen: 100,
+                lost: 100,
+                revealed: 100,
+                dead: 100,
+                neverSeen_arty: 100,
+                lost_arty: 100,
+                revealed_arty: 100,
+                dead_arty: 100
+            };
             // values - from min to max, transparency are for values 'lesser then ...'
             c.hp = [
                 { value: 200,  alpha: 100 },

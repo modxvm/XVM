@@ -442,6 +442,10 @@ class com.xvm.Macros
             pdata["marksOnGun"] = function(o):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun); }
             // {{spotted}}
             pdata["spotted"] = function(o):String { return Utils.getSpottedText(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, pdata["veh-id"]); }
+            // {{c:spotted}}
+            pdata["c:spotted"] = function(o):String { return GraphicsUtil.GetSpottedColorValue(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, pdata["veh-id"]); }
+            // {{a:spotted}}
+            pdata["a:spotted"] = function(o) { return GraphicsUtil.GetSpottedAlphaValue(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, pdata["veh-id"]); }
             // {{selected}}
             pdata["selected"] = function(o):String { return o.selected == true ? 'sel' : null; }
             // {{position}}

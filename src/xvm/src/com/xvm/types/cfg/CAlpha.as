@@ -6,6 +6,7 @@ package com.xvm.types.cfg
 {
     public dynamic class CAlpha extends Object
     {
+        //spotted
         //// values - from min to max, transparency are for values 'lesser then ...'
         //hp: [
             //{ value: 200,  alpha: 100 },

@@ -71,6 +71,8 @@ Legend:
 │ {{battletier-max}} │ X │   │   │   │   │   │   │   │ maximal vehicle battle tier
 │ {{position}}       │ X │ X │ X │ X │   │   │   │   │ position of the player in the beginning of the battle (1-15)
 │ {{spotted}}        │   │ X │ X │   │   │   │   │   │ Vehicle spotted status with values from texts/spotted section
+│ {{c:spotted}}      │   │ X │ X │   │   │   │   │   │ Dynamic color by vehicle spotted status
+│ {{a:spotted}}      │   │ X │ X │   │   │   │   │   │ Dynamic transparency by vehicle spotted status
 │ {{language}}       │ X │ X │ X │ X │ X │   │   │   │ Player's client language
 └────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
 

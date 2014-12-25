@@ -81,6 +81,7 @@ class com.xvm.Defines
     public static var DYNAMIC_COLOR_WGR:Number = 14;
     public static var DYNAMIC_COLOR_X:Number = 15;
     public static var DYNAMIC_COLOR_AVGLVL:Number = 16;
+    public static var DYNAMIC_COLOR_SPOTTED:Number = 17;
 
     // Dynamic alpha types
     public static var DYNAMIC_ALPHA_EFF:Number = 1;
@@ -99,6 +100,7 @@ class com.xvm.Defines
     public static var DYNAMIC_ALPHA_WGR:Number = 14;
     public static var DYNAMIC_ALPHA_X:Number = 15;
     public static var DYNAMIC_ALPHA_AVGLVL:Number = 16;
+    public static var DYNAMIC_ALPHA_SPOTTED:Number = 17;
 
     // Damage flag at Xvm.as: updateHealth
     public static var FROM_UNKNOWN:Number = 0;

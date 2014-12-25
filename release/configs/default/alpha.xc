@@ -22,6 +22,18 @@
     "above_average":    "0"     // above-average  / выше среднего
   },
   "alpha": {
+    // Dynamic transparency by spotted status
+    // Динамическая прозрачность по статусу засвета
+    "spotted": {
+      "neverSeen": 100,
+      "lost": 100,
+      "revealed": 100,
+      "dead": 100,
+      "neverSeen_arty": 100,
+      "lost_arty": 100,
+      "revealed_arty": 100,
+      "dead_arty": 100
+    },
     // Dynamic transparency by remaining health.
     // Динамическая прозрачность по оставшемуся здоровью.
     "hp": [
