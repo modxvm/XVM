@@ -511,7 +511,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         //Logger.add("updateExtraFields");
         var state:String = panel.state;
 
-        if (extraFields.none != null )      extraFields.none._visible = state == "none";
+        if (extraFields.none != null )      extraFields.none._visible = state == "none" && wrapper.data != null;
         if (extraFields.short != null )     extraFields.short._visible = state == "short";
         if (extraFields.medium != null )    extraFields.medium._visible = state == "medium";
         if (extraFields.medium2 != null )   extraFields.medium2._visible = state == "medium2";
