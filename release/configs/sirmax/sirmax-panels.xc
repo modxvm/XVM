@@ -6,8 +6,8 @@
     "c2": "0xFF0F0F"
   },
   "large": {
-    "nickFormatLeft": "        {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>       &nbsp;",
+    "nickFormatLeft": "        <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
+    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>       &nbsp;",
     "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
     "vehicleFormatRight": "{{hp}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:rating}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
@@ -44,7 +44,11 @@
   "medium": {
     "width": 120,
     "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
-    "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>"
+    "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
+    "extraFieldsLeft": [
+    ],
+    "extraFieldsRight": [
+    ]
   },
   "medium2": {
     "width": 120,
@@ -52,7 +56,7 @@
     "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>"
   },
   "short": {
-    //"width": 120
+    //"width": 120,
   },
   "none": {
     //"layout": "horizontal",

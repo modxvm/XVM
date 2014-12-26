@@ -17,7 +17,6 @@ class com.xvm.DataTypes.StatData
         public var frg:Number = NaN;           // frags (int)
         public var def:Number = NaN;           // defence (int)
         public var lvl:Number = NaN;           // average level (float)
-        public var lang:String = null;         // client language
         public var e:Number = NaN;             // eff (int)
         public var wn6:Number = NaN;           // WN6 rating (int)
         public var wn8:Number = NaN;           // WN8 rating (int)
@@ -31,6 +30,8 @@ class com.xvm.DataTypes.StatData
 
         public var clan:String = null;         // clan name ("CLAN")
         public var name:String = null;         // player name in current game ("sirmax2_RU" for Common Test)
+        public var status:Number = NaN;        // XVM activation status
+        public var lang:String = null;         // client language
         public var team:Number = NaN;          // team (1 or 2)
         public var squadnum:Number = NaN;      // squad number (0, 1, ...)
         public var alive:Boolean = false;      // alive // TODO: remove

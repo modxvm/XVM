@@ -1,4 +1,9 @@
-﻿XVM-5.5.0:
+﻿XVM-5.5.1-dev:
+  * added new macros:
+      {{xvm-user}} - value 'on' for XVM users with stat in battle enabled,
+        value 'off' for XVM users with stat in battle disabled, else empty
+
+XVM-5.5.0:
   * adaptation to Wot 0.9.5
   * Macro in macro allowed: {{xvm-stat?{{alive?80|30}}|0}}
   * added texts/spotted section with text replacements for vehicle spotted status.

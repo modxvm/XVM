@@ -625,13 +625,14 @@ class com.xvm.Macros
 
         // {{squad-num}}
         pdata["squad-num"] = stat.squadnum > 0 ? stat.squadnum : null;
-
-        // {{avglvl}}
-        pdata["avglvl"] = stat.lvl;
+        // {{xvm-user}}
+        pdata["xvm-user"] = isNaN(stat.status) ? null : (stat.status & 0x01) ? 'on' : 'off';
         // {{language}}
         pdata["language"] = stat.lang;
         // {{region}}
         pdata["region"] = Config.config.region;
+        // {{avglvl}}
+        pdata["avglvl"] = stat.lvl;
         // {{xeff}}
         pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
