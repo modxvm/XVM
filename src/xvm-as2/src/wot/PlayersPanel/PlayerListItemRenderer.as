@@ -599,7 +599,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 f.source = src;
             }
 
-            if (format.highlight == true)
+            var highlight = format.highlight;
+            if (typeof(format.highlight) == 'string')
+                highlight = Utils.toBool(Macros.Format(m_name, format.highlight, obj).toLowerCase(), false);
+            if (highlight == true)
             {
                 var state = wrapper.data.vehicleState;
                 var sn = PlayerStatus.getStatusColorSchemeNames(
