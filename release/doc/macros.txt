@@ -91,6 +91,7 @@ Legend:
 ┌─────────────────┬───┬───┬───┬───┬───┬────────────────────────────────────────────────────────────────
 │ macro           │ BL│ PP│ SF│ MM│ VM│ Description
 ├─────────────────┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────────────
+│ {{xvm-user}}    │ X │ X │ X │ X │ X │ 'on' - user sees your stat, 'off' - don't sees your stat, empty - hasn't activated XVM services
 │ {{avglvl}}      │ X │ X │ X │ X │ X │ average level (tier) of tanks
 │ {{eff}}         │ X │ X │ X │ X │ X │ player efficiency: http://wot-news.com/index.php/stat/calc/en/
 │ {{teff}}, {{e}} │ X │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
