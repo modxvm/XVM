@@ -12,11 +12,11 @@
     // Положение поля по осям
     "x": 0,
     "y": -67,
-    // Opacity (dynamic transparency allowed, see readme-en.txt).
-    // Прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+    // Opacity (dynamic transparency allowed, see macros.txt).
+    // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
     "alpha": 100,
-    // Color (dynamic colors allowed, see readme-en.txt).
-    // Цвет (допускается использование динамического цвета, см. readme-ru.txt)
+    // Color (dynamic colors allowed, see macros.txt).
+    // Цвет (допускается использование динамического цвета, см. macros.txt)
     "color": null,
     // Параметры шрифта.
     "font": {
@@ -41,11 +41,11 @@
     // Maximum distance of target for which damage rises.
     // Расстояние, на которое отлетает урон.
     "maxRange": 40,
-    // Text for normal damage (see description of macros in the readme-en.txt).
-    // Текст при обычном уроне (см. описание макросов в readme-ru.txt).
+    // Text for normal damage (see description of macros in the macros.txt).
+    // Текст при обычном уроне (см. описание макросов в macros.txt).
     "damageMessage": "{{dmg}}",
-    // Text for ammo rack explosion (see description of macros in the readme-en.txt).
-    // Текст при взрыве боеукладки (см. описание макросов в readme-ru.txt).
+    // Text for ammo rack explosion (see description of macros in the macros.txt).
+    // Текст при взрыве боеукладки (см. описание макросов в macros.txt).
     "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
   },
   // Настройки для союзников.
@@ -92,8 +92,8 @@
       "visible": true,                  //   false - не отображать
       "x": -41,                         //   положение по оси X
       "y": -33,                         //   положение по оси Y
-      "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-      "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
+      "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "color": null,                    //   цвет основной (допускается использование динамического цвета, см. macros.txt)
       "lcolor": null,                   //   цвет дополнительный (для градиента)
       "width": 80,                      //   ширина полосы здоровья
       "height": 12,                     //   высота полосы здоровья
@@ -134,11 +134,11 @@
       // Положение поля по осям.
       "x": 6,
       "y": -65,
-      // Opacity (dynamic transparency allowed, see readme-en.txt).
-      // Прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt).
+      // Opacity (dynamic transparency allowed, see macros.txt).
+      // Прозрачность (допускается использование динамической прозрачности, см. macros.txt).
       "alpha": 100,
-      // Color (dynamic colors allowed, see readme-en.txt).
-      // Цвет (допускается использование динамического цвета, см. readme-ru.txt).
+      // Color (dynamic colors allowed, see macros.txt).
+      // Цвет (допускается использование динамического цвета, см. macros.txt).
       "color": null,
       // Color intensity from 0 to 100. The default is 0 (off).
       // Интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
@@ -152,8 +152,8 @@
       "y": -67,          // Position on the Y axis / Положение по оси Y.
       "w": 16,           // Width                  / Ширина.
       "h": 16,           // Height                 / Высота.
-      // Opacity (dynamic transparency allowed, see readme-en.txt).
-      // Прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+      // Opacity (dynamic transparency allowed, see macros.txt).
+      // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       "alpha": 100
     },
     // Vehicle tier.
@@ -182,8 +182,8 @@
         "visible": true,                // false - не отображать
         "x": 0,                         // положение по оси X
         "y": -36,                       // положение по оси Y
-        "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-        "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+        "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+        "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
         // Параметры шрифта.
         "font": {
           "name": "$FieldFont",         //   название
@@ -201,7 +201,7 @@
           "size": 6,                    //   размер
           "strength": 200               //   интенсивность
         },
-        "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+        "format": "{{nick}}"            // формат текста. См. описание макросов в macros.txt
       },
       // Text field with the percentage of remaining health.
       // Текстовое поле с процентом оставшегося здоровья.

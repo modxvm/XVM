@@ -153,8 +153,8 @@
       // Minimum width of the column, 0-250. Default is 0.
       // Минимальная ширина поля, 0-250. По умолчанию: 0.
       "width": 0,
-      // Display format for frags (macros allowed, see readme-en.txt).
-      // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for frags (macros allowed, see macros.txt).
+      // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
@@ -178,14 +178,14 @@
       // Minimum width of the player's name column, 0-250. Default is 46.
       // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 46.
       "width": 46,
-      // Display format for the left panel (macros allowed, see readme-en.txt).
-      // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for the left panel (macros allowed, see macros.txt).
+      // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
       "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
-      // Display format for the right panel (macros allowed, see readme-en.txt).
-      // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for the right panel (macros allowed, see macros.txt).
+      // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
       "formatRight": "<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font>",
-      // Display format for frags (macros allowed, see readme-en.txt).
-      // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for frags (macros allowed, see macros.txt).
+      // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
@@ -209,14 +209,14 @@
       // Maximum width of the vehicle name column, 0-250. Default is 65.
       // Максимальная ширина поля названия танка, 0-250. По умолчанию: 65.
       "width": 65,
-      // Display format for the left panel (macros allowed, see readme-en.txt).
-      // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for the left panel (macros allowed, see macros.txt).
+      // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
       "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
-      // Display format for the right panel (macros allowed, see readme-en.txt).
-      // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for the right panel (macros allowed, see macros.txt).
+      // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
       "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
-      // Display format for frags (macros allowed, see readme-en.txt).
-      // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for frags (macros allowed, see macros.txt).
+      // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
@@ -240,16 +240,16 @@
       // Minimum width of the player's name column, 0-250. Default is 170.
       // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 170.
       "width": 100,
-      // Display format for player nickname (macros allowed, see readme-en.txt).
-      // Формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for player nickname (macros allowed, see macros.txt).
+      // Формат отображения имени игрока (допускаются макроподстановки, см. macros.txt).
       "nickFormatLeft": "<font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
       "nickFormatRight": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}}<img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>",
-      // Display format for vehicle name (macros allowed, see readme-en.txt).
-      // Формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for vehicle name (macros allowed, see macros.txt).
+      // Формат отображения названия танка (допускаются макроподстановки, см. macros.txt).
       "vehicleFormatLeft": "{{vehicle}}",
       "vehicleFormatRight": "{{vehicle}}",
-      // Display format for frags (macros allowed, see readme-en.txt).
-      // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
+      // Display format for frags (macros allowed, see macros.txt).
+      // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.

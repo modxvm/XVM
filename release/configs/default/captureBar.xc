@@ -17,8 +17,8 @@
     // Append plus to three capturers. Cant calculate more than three.
     // Дописывать плюс к тройке захватчиков. Невозможно рассчитать более трёх.
     "appendPlus" : true,
-    // Capture format (macros allowed, see readme-en.txt).
-    // Формат захвата (допускаются макроподстановки, см. readme-ru.txt).
+    // Capture format (macros allowed, see macros.txt).
+    // Формат захвата (допускаются макроподстановки, см. macros.txt).
     "enemy": { // Вражеской.
       // Upper textfield.
       // Верхнее текстовое поле.
