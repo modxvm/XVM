@@ -578,8 +578,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
             var txt:String = Macros.Format(m_name, format.format, obj);
             //Logger.add(m_name + " " + txt);
             f.htmlText = "<span class='extraField'>" + txt + "</span>";
-            //if (format.format.indexOf("{{") < 0) // TODO
-            //    delete format.format;
             needAlign = true;
         }
 
@@ -619,6 +617,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
                     (new Transform(f)).colorTransform = this.__getColorTransform(sn.vehicleSchemeName, true);
                     //Logger.add(f.source + " " + sn.vehicleSchemeName);
                 }
+            }
+            else
+            {
+                (new Transform(f)).colorTransform = null;
             }
         }
 
