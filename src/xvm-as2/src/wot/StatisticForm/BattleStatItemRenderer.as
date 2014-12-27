@@ -91,8 +91,7 @@ class wot.StatisticForm.BattleStatItemRenderer
     {
         if (s_state <= 0)
             s_state = 1;
-
-        wrapper.col3.condenseWhite = true;
+        wrapper.col3.condenseWhite = false;
     }
 
     // override
@@ -109,8 +108,6 @@ class wot.StatisticForm.BattleStatItemRenderer
         var name = Utils.GetPlayerName(wrapper.data.label);
         var saved_icon = wrapper.data.icon;
         var saved_label = wrapper.data.label;
-
-        wrapper.col3.condenseWhite = !Config.networkServicesSettings.servicesActive || !Stat.s_loaded;
 
         // Add data for Win Chance calculation
         //Logger.addObject(wrapper.data);

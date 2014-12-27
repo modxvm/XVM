@@ -7,7 +7,7 @@
   },
   "large": {
     "nickFormatLeft": "        <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}<img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'></font>       &nbsp;",
+    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>       &nbsp;",
     "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
     "vehicleFormatRight": "{{hp}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:rating}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
@@ -23,6 +23,7 @@
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
       { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
+      { "x": -75, "y": 0, "bindToIcon": true, "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png" },
       {}
     ],
     "extraFieldsRight": [
@@ -37,6 +38,7 @@
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
       { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
       { "x": 0, "y": 5, "align": "center", "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} },
+      { "x": -75, "y": 0, "bindToIcon": true, "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png" },
       {}
     ],
     "width": 120
