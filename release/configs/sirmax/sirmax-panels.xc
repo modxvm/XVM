@@ -7,7 +7,7 @@
   },
   "large": {
     "nickFormatLeft": "        <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>       &nbsp;",
+    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}<img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'></font>       &nbsp;",
     "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
     "vehicleFormatRight": "{{hp}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:rating}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",

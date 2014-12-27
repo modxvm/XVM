@@ -55,7 +55,7 @@ done
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   if [ "$XPM_DEVELOPMENT" != "" -a "$BUILD_LIBS" = "0" ]; then
-    if [[ $f = kwg_waiting_fix/* ]]; then continue; fi
+    if [[ $f = xvm_waiting_fix/* ]]; then continue; fi
     if [[ $f = xpm/mods/lib/six.py ]]; then continue; fi
     if [[ $f = xpm/mods/lib/ssl.py ]]; then continue; fi
     if [[ $f = xpm/mods/lib/simplejson/* ]]; then continue; fi
