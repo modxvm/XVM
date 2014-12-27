@@ -419,7 +419,7 @@ package com.xvm.utils
             if (m_globals["battletier"] == null)
             {
                 // {{battletier}}
-                m_globals["battletier"] = Xvm.cmd(Defines.XVM_COMMAND_GET_BATTLE_LEVEL);
+                m_globals["battletier"] = Xvm.cmd(Defines.XVM_COMMAND_GET_BATTLE_LEVEL) || NaN;
             }
         }
 
