@@ -85,7 +85,7 @@ package com.xvm
 
                 this.config = DefaultConfig.config;
 
-                var res:Object = JSONxLoader.Load(Defines.XVM_CONFIG_FILE_NAME);
+                var res:* = JSONxLoader.Load(Defines.XVM_CONFIG_FILE_NAME);
 
                 //Logger.addObject(res, 2);
 
@@ -106,15 +106,14 @@ package com.xvm
                         stateInfo = { error: text };
                         Logger.add(text);
                     }
-                    return;
                 }
-
-                config = ConfigUtils.MergeConfigs(ConfigUtils.FixConfig(res), config);
-
-                //Logger.addObject(config, 2);
-                //Logger.addObject(config.markers.enemy.alive.normal, 3);
-                stateInfo = { };
-
+                else
+                {
+                    stateInfo = { };
+                    config = ConfigUtils.MergeConfigs(ConfigUtils.FixConfig(res), config);
+                    //Logger.addObject(config, 2);
+                    //Logger.addObject(config.markers.enemy.alive.normal, 3);
+                }
                 ConfigUtils.TuneupConfig(config);
             }
             catch (e:Error)
