@@ -78,8 +78,8 @@
   <hiddenPaths>
     <hidden path="swf" />
     <hidden path="wg" />
-    <hidden path="build-swc.sh" />
-    <hidden path="build-swc-wg.sh" />
+    <hidden path="build-xfw.sh" />
+    <hidden path="build-applicationswf.sh" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

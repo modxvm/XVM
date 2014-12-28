@@ -79,8 +79,8 @@
   <hiddenPaths>
     <hidden path="swf" />
     <hidden path="wg" />
-    <hidden path="build-swc.sh" />
-    <hidden path="build-swc-wg.sh" />
+    <hidden path="build-xfw.sh" />
+    <hidden path="build-applicationswf.sh" />
     <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
