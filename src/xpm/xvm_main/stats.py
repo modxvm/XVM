@@ -79,11 +79,15 @@ class _Stat(object):
             return self.queue.pop(0) if self.queue else None
 
     def processQueue(self):
+        debug('processQueue')
         with self.lock:
             if self.thread is not None:
+                debug('already working')
                 return
+        debug('dequeue')
         self.req = self.dequeue()
         if self.req is None:
+            debug('no req')
             return
         self.resp = None
         self.thread = threading.Thread(target=self.req['func'])
@@ -91,7 +95,8 @@ class _Stat(object):
         self.thread.start()
         #self.req['func']()
         debug('start')
-        self._checkResult()
+        #self._checkResult()
+        BigWorld.callback(0.05, self._checkResult)
 
     def _checkResult(self):
         with self.lock:
@@ -108,9 +113,12 @@ class _Stat(object):
             finally:
                 debug('done')
                 if self.thread:
+                    debug('join')
                     self.thread.join()
+                    debug('thread deleted')
                     self.thread = None
-                    self.processQueue()
+                    #self.processQueue()
+                    BigWorld.callback(0.05, self.processQueue)
 
     def _respond(self):
         debug("respond: " + self.req['method'])
@@ -120,11 +128,17 @@ class _Stat(object):
 
     # Threaded
 
-    def getBattleStat(self):
+    def getBattleStat(self, tries=0):
         try:
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
                 self._get_battle()
+            else:
+                debug('WARNING: arena not created, but getBattleStat() called')
+            #    # Long initialization with high ping
+            #    if tries < 5:
+            #        time.sleep(1)
+            #    self.getBattleStat(tries+1)
         except Exception, ex:
             err(traceback.format_exc())
         with self.lock:

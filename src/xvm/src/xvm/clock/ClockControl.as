@@ -133,8 +133,6 @@ package xvm.clock
 
         private function tick():void
         {
-            App.utils.scheduler.cancelTask(tick);
-
             try
             {
                 if (prevWidth != App.appWidth || prevHeight != App.appHeight)
