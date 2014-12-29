@@ -370,7 +370,7 @@ if os.path.isfile(_xvm_swf_file_name):
             _configWatchdog()
 
     def _configWatchdog():
-        #log('_configWatchdog')
+        #log('_configWatchdog()')
 
         global _xvm_config_dir_name
         global _lastConfigDirState
@@ -417,9 +417,10 @@ if os.path.isfile(_xvm_swf_file_name):
 
     def _isConfigReloadingEnabled():
         try:
-            from gui.mods.xvmstat.config import config
+            from gui.mods.xvm_main.config import config
             return config['autoReloadConfig'] == True
         except:
+            err(traceback.format_exc())
             return False
 
     # register events
