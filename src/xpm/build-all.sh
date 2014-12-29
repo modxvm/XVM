@@ -23,6 +23,15 @@ clear()
   rm -rf "../../bin/xpm"
 }
 
+build_xfw()
+  {
+    export xfw_path_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    export xfw_output_python_path="../../bin/xpm"
+    pushd ../xfw/src/python/ >/dev/null
+    ./build.sh
+    popd >/dev/null
+  }
+
 build()
 {
   echo "Build: $1"
@@ -34,19 +43,16 @@ build()
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
   [ ! -f $1c ] && exit
 
-  if [ -z "$2" ]; then
-    mkdir -p "../../bin/xpm/scripts/client/gui/$d"
-    cp $1c "../../bin/xpm/scripts/client/gui/${f}c"
-  else
-    mkdir -p "../../bin/xpm/scripts/client/gui/$2/$d"
-    cp $1c "../../bin/xpm/scripts/client/gui/$2/${f}c"
-  fi
+  mkdir -p "../../bin/xpm/scripts/client/gui/$2/$d"
+  cp $1c "../../bin/xpm/scripts/client/gui/$2/${f}c"
   rm -f $1c
 }
 
 [ "$XPM_DEVELOPMENT" != "" -a "$CLEAR" != "0" ] && clear
 
-for dir in $(find . -maxdepth 1 -type "d" ! -path "./xpm*" ! -path "."); do
+build_xfw
+
+for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
   echo "__revision__ = '`cd $dir && hg parent --template "{rev}"`'" >> $dir/__version__.py
   echo "__branch__ = '`cd $dir && hg parent --template "{branch}"`'" >> $dir/__version__.py
@@ -54,21 +60,13 @@ done
 
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
+  m=${f%%/*}
+
   if [ "$XPM_DEVELOPMENT" != "" -a "$BUILD_LIBS" = "0" ]; then
     if [[ $f = xvm_waiting_fix/* ]]; then continue; fi
-    if [[ $f = xpm/mods/lib/six.py ]]; then continue; fi
-    if [[ $f = xpm/mods/lib/ssl.py ]]; then continue; fi
-    if [[ $f = xpm/mods/lib/simplejson/* ]]; then continue; fi
-    if [[ $f = xpm/mods/lib/tlslite/* ]]; then continue; fi
-    if [[ $f = xpm/mods/lib/websocket/* ]]; then continue; fi
   fi
+  build $f mods/$m
 
-  m=${f%%/*}
-  if [ "$m" = "xpm" ]; then
-    build $f
-  else
-    build $f mods/$m
-  fi
 done
 
 if [ "$OS" = "Windows_NT" ]; then
