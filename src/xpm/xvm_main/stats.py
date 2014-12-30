@@ -96,7 +96,7 @@ class _Stat(object):
         #self.req['func']()
         debug('start')
         #self._checkResult()
-        BigWorld.callback(0.05, self._checkResult)
+        BigWorld.callback(0, self._checkResult)
 
     def _checkResult(self):
         with self.lock:
@@ -118,7 +118,7 @@ class _Stat(object):
                     debug('thread deleted')
                     self.thread = None
                     #self.processQueue()
-                    BigWorld.callback(0.05, self.processQueue)
+                    BigWorld.callback(0, self.processQueue)
 
     def _respond(self):
         debug("respond: " + self.req['method'])
@@ -133,6 +133,7 @@ class _Stat(object):
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
                 self._get_battle()
+                return # required to prevent deadlock
             else:
                 debug('WARNING: arena not created, but getBattleStat() called')
             #    # Long initialization with high ping
@@ -151,6 +152,7 @@ class _Stat(object):
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAccount':
                 self._get_battleresults()
+                return # required to prevent deadlock
         except Exception, ex:
             err(traceback.format_exc())
         with self.lock:
@@ -161,6 +163,7 @@ class _Stat(object):
     def getUserData(self):
         try:
             self._get_user()
+            return # required to prevent deadlock
         except Exception, ex:
             err(traceback.format_exc())
         with self.lock:
