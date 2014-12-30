@@ -20,13 +20,13 @@ GAME_VER=`echo $GAME_VER | tr -d '\n\r'`
 
 clear()
 {
-  rm -rf "../../bin/xpm"
+  rm -rf "../../bin/mods"
 }
 
 build_xfw()
   {
     export xfw_path_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    export xfw_output_python_path="../../bin/xpm"
+    export xfw_output_python_path="../../bin/"
     pushd ../xfw/src/python/ >/dev/null
     ./build.sh
     popd >/dev/null
@@ -43,8 +43,8 @@ build()
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
   [ ! -f $1c ] && exit
 
-  mkdir -p "../../bin/xpm/scripts/client/gui/$2/$d"
-  cp $1c "../../bin/xpm/scripts/client/gui/$2/${f}c"
+  mkdir -p "../../bin/$2/python/$d"
+  cp $1c "../../bin/$2/python/${f}c"
   rm -f $1c
 }
 
@@ -65,7 +65,7 @@ for fn in $(find . -type "f" -name "*.py"); do
   if [ "$XPM_DEVELOPMENT" != "" -a "$BUILD_LIBS" = "0" ]; then
     if [[ $f = xvm_waiting_fix/* ]]; then continue; fi
   fi
-  build $f mods/$m
+  build $f mods/packages/$m
 
 done
 
@@ -77,5 +77,5 @@ if [ "$OS" = "Windows_NT" ]; then
     sh "../../utils/test.sh" --no-deploy
   }
 
-  run
+ # run
 fi

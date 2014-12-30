@@ -23,7 +23,7 @@ from gui.Scaleform.locale.PROFILE import PROFILE
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
 
-from xpm import *
+from xfw import *
 
 from constants import *
 from logger import *

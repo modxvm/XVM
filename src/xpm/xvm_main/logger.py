@@ -2,7 +2,7 @@
 
 import datetime
 
-from xpm import *
+from xfw import *
 
 from constants import XVM_LOG_FILE_NAME
 

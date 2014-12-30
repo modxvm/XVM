@@ -7,7 +7,7 @@
 import math
 import BigWorld
 from adisp import async, process
-from xpm import *
+from xfw import *
 from logger import *
 
 import config
