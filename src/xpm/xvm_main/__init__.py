@@ -294,7 +294,7 @@ BigWorld.callback(0, _RegisterEvents)
 #####################################################################
 # Log version info
 
-log("xvm %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))
+log("xvm %s (%s) for WoT %s" % (XFW_MOD_VERSION, XFW_MOD_URL, ", ".join(XFW_GAME_VERSIONS)))
 try:
     from __version__ import __branch__, __revision__
     log("Branch: %s, Revision: %s" % (__branch__, __revision__))
