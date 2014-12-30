@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\release\mods\xvm-autologin.swf" />
+    <movie path="..\..\bin\mods\packages\xvm_comments\actionscript\xvm_comments.swf" />
     <movie fps="30" />
     <movie width="1" />
     <movie height="1" />
@@ -24,6 +24,7 @@
     <option allowSourcePathOverlap="False" />
     <option benchmark="False" />
     <option es="False" />
+    <option inline="False" />
     <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
@@ -72,7 +73,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\xvm\autologin\AutoLoginXvmMod.as" />
+    <compile path="src\xvm\comments\CommentsXvmMod.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
@@ -80,6 +81,7 @@
     <hidden path="wg" />
     <hidden path="build-xfw.sh" />
     <hidden path="build-applicationswf.sh" />
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

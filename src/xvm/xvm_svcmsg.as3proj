@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\release\mods\xvm-comments.swf" />
+    <movie path="..\..\bin\mods\packages\xvm_svcmsg\actionscript\xvm_svcmsg.swf" />
     <movie fps="30" />
     <movie width="1" />
     <movie height="1" />
@@ -73,7 +73,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\xvm\comments\CommentsXvmMod.as" />
+    <compile path="src\xvm\svcmsg\ServiceMessageXvmMod.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
