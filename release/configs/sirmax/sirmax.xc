@@ -65,7 +65,7 @@
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
     "highlightVehicleIcon": false,
-    "allowHpInPanelsAndMinimap": true,
+    //"allowHpInPanelsAndMinimap": true,
     "allowMarksOnGunInPanelsAndMinimap": true,
     "clanIconsFolder": "clanicons",
     "elements": ${"elements"}
@@ -163,7 +163,7 @@
   },
   "texts": {
     //"vtype": { "LT":  "ЛТ" },
-    "marksOnGun": { "_0": "0", "_1": "1", "_2": "2", "_3": "3" }
+    "marksOnGun": { "_0": "-", "_1": "1", "_2": "2", "_3": "3" }
   },
   "colors": {
     "system": {
