@@ -1,7 +1,8 @@
-﻿XVM-5.5.1-dev:
+﻿XVM-5.5.1:
   * added new macros:
       {{xvm-user}} - value 'on' for XVM users with stat in battle enabled,
         value 'off' for XVM users with stat in battle disabled, else empty
+  * bugs fixed
 
 XVM-5.5.0:
   * adaptation to Wot 0.9.5

@@ -43,6 +43,9 @@ for m in glob.iglob('%s/*' % wd):
     if os.path.isdir(m) and os.path.exists('%s/__init__.pyc' % m):
         try:
             m = m[m.replace("\\", "/").rfind("/")+1:]
+            # temporary stub to skip obsoleted folders
+            if m in ['xvmstat', 'kwg_waiting_fix']:
+                continue
             print("[XPM] Loading mod: " + m),
             mod = __import__("gui.mods.%s" % m, globals(), locals(),
                 ['XPM_MOD_VERSION',
