@@ -469,7 +469,7 @@ package com.xvm.utils
             // {{clannb}}
             pdata["clannb"] = clanWithoutBrackets;
             // {{xvm-stat}}
-            pdata["xvm-stat"] = Config.networkServicesSettings.servicesActive == true ? 'stat' : null;
+            pdata["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
 
             // Next macro unique for vehicle
             var vdata:VehicleData = VehicleInfo.get(vid);
@@ -535,7 +535,7 @@ package com.xvm.utils
 
             var pdata:Object = m_dict[pname];
 
-            if (Config.networkServicesSettings.servicesActive == false)
+            if (Config.networkServicesSettings.servicesActive != true)
                 return;
 
             // {{xvm-user}}
