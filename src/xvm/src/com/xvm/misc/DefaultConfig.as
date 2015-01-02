@@ -311,10 +311,10 @@ package com.xvm.misc
             c.clanIcon.alpha = 90;
             // Dispay format. Macro-substitutiones allowed.
             c.darkenNotReadyIcon = true;
-            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
-            c.formatRightNick = "{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'>";
-            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatRightNick = "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'>";
+            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='{{xvm-stat?12|0}}'> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:rating}}'>{{rating%2d~%|--%}}</font></font>";
+            c.formatRightVehicle = "<font face='Lucida Console' size='{{xvm-stat?12|0}}'><font color='{{c:rating}}'>{{rating%2d~%|--%}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -334,10 +334,10 @@ package com.xvm.misc
             c.clanIcon.w = 16;
             c.clanIcon.alpha = 90;
             // Dispay format.
-            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
-            c.formatRightNick = "{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'>";
-            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatRightNick = "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <img src='xvm://res/icons/lang/{{region|CT}}/{{language|default}}.png' width='16' height='13'>";
+            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='{{xvm-stat?12|0}}'> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:rating}}'>{{rating%2d~%|--%}}</font></font>";
+            c.formatRightVehicle = "<font face='Lucida Console' size='{{xvm-stat?12|0}}'><font color='{{c:rating}}'>{{rating%2d~%|--%}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -420,8 +420,8 @@ package com.xvm.misc
                 // 0..250 - player name field width.
                 width: 100,
                 // Dispay format.
-                nickFormatLeft: "<font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'>{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
-                nickFormatRight: "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}}<img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>",
+                nickFormatLeft: "<font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
+                nickFormatRight: "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <font face='Lucida Console' size='12' color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8}}</font>",
                 vehicleFormatLeft: "{{vehicle}}",
                 vehicleFormatRight: "{{vehicle}}",
                 fragsFormatLeft: "{{frags}}",
