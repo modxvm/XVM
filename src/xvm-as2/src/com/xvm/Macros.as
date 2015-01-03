@@ -459,7 +459,7 @@ class com.xvm.Macros
             // {{player}}
             pdata["player"] = data.himself == true ? "pl" : null;
             // {{xvm-stat}}
-            pdata["xvm-stat"] = Config.networkServicesSettings.servicesActive == true ? 'stat' : null;
+            pdata["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
         }
 
         // vehicle

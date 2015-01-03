@@ -9,6 +9,7 @@ package xvm.clock
     import com.xvm.types.*;
     import com.xvm.utils.*;
     import flash.display.*;
+    import flash.utils.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
     import net.wg.gui.events.*;
     import scaleform.clik.constants.*;
@@ -22,6 +23,8 @@ package xvm.clock
         private var prevHeight:Number = 0;
         private var prevTime:int = 0;
         private var data:String = "";
+
+        private var intervalId:uint = 0;
 
         public function ClockControl(cfg:CClock)
         {
@@ -65,12 +68,20 @@ package xvm.clock
                 textField.filters = [ Utils.createShadowFilter(cfg.shadow) ];
 
             invalidate();
-            tick();
+
+            if (intervalId)
+                clearInterval(intervalId);
+            intervalId = setInterval(tick, 100);
         }
 
         override protected function onDispose():void
         {
-            App.utils.scheduler.cancelTask(tick);
+            if (intervalId)
+            {
+                clearInterval(intervalId);
+                intervalId = 0;
+            }
+
             super.onDispose();
         }
 
@@ -150,8 +161,6 @@ package xvm.clock
             {
                 Logger.add(ex.getStackTrace());
             }
-
-            App.utils.scheduler.scheduleTask(tick, 100);
         }
     }
 }
