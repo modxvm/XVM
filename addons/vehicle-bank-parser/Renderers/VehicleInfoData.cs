@@ -184,6 +184,7 @@ package com.xvm.vehinfo
                 {"ussr_Object252", new int[2]{ 8, 9 }},
                 {"france_FCM_50t", new int[2]{ 8, 9 }},
                 {"usa_T26_E4_SuperPershing", new int[2]{ 8, 9 }},
+                {"china_Ch03_WZ_111", new int[2]{ 8, 9 }},
                 {"china_Ch23_112", new int[2]{ 8, 9 }},
                 {"china_Ch14_T34_3", new int[2]{ 8, 9 }},
                 {"china_Ch01_Type59", new int[2]{ 8, 9 }},
