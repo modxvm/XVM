@@ -44,7 +44,7 @@ for m in glob.iglob('%s/*' % wd):
         try:
             m = m[m.replace("\\", "/").rfind("/")+1:]
             # temporary stub to skip obsoleted folders
-            if m in ['xvmstat', 'kwg_waiting_fix']:
+            if m in ['xvmstat', '_xvmstat', 'kwg_waiting_fix', '_kwg_waiting_fix']:
                 continue
             print("[XPM] Loading mod: " + m),
             mod = __import__("gui.mods.%s" % m, globals(), locals(),
