@@ -69,6 +69,7 @@ _special = {
     'china:Ch23_112':               [ 8, 9 ],
     'china:Ch14_T34_3':             [ 8, 9 ],
     'china:Ch01_Type59':            [ 8, 9 ],
+    'china:Ch03_WZ-111':            [ 8, 9 ],
     'germany:JagdTiger_SdKfz_185':  [ 8, 9 ],
 }
 
