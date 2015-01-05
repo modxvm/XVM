@@ -362,6 +362,8 @@ class com.xvm.Macros
                 var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[tier - 1];
                 if (pdata["veh-id"] == 65313) // M24 Chaffee Sport
                     maxBattleTierHp = 1000;
+                if (pdata["veh-id"] == 64769 || pdata["veh-id"] == 64801 || pdata["veh-id"] == 65089) // Winter Battle
+                    maxBattleTierHp = 5000;
                 res = Math.round(parseInt(norm) * value / maxBattleTierHp).toString();
                 //Logger.add("res: " + res);
                 break;
