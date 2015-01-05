@@ -25,11 +25,10 @@ clear()
 
 build_xfw()
   {
-    export xfw_path_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    export xfw_output_python_path="../../bin/"
     pushd ../xfw/src/python/ >/dev/null
     ./build.sh
     popd >/dev/null
+    cp -a ../xfw/~output/python/* ../../bin/
   }
 
 build()
