@@ -1,4 +1,7 @@
-﻿XVM-5.5.1:
+﻿XVM-5.5.1.1:
+  * fixed Application.swf
+
+XVM-5.5.1:
   * added new macros:
       {{xvm-user}} - value 'on' for XVM users with stat in battle enabled,
         value 'off' for XVM users with stat in battle disabled, else empty
