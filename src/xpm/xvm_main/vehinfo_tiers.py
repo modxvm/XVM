@@ -59,6 +59,7 @@ _special = {
     'ussr:T44_122':                 [ 7, 8 ],
     'usa:T23E3':                    [ 7, 8 ],
     'germany:E-25':                 [ 7, 8 ],
+    'uk:GB71_AT_15A':               [ 7, 8 ],
 
     # level 8
     'ussr:KV-5':                    [ 8, 9 ],
