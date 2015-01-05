@@ -11,7 +11,6 @@ If you can write code, [you can help us](https://confluence.atlassian.com/displa
 * [News](http://www.modxvm.com/en/news/)
 * [Download XVM](http://www.modxvm.com/en/download-xvm/)
 * [Manual: installation and configuration](http://www.modxvm.com/en/xvm-installation-and-settings/)
-* [Easy configuration editor](http://www.modxvm.com/en/xvm-xvm-xvmconf-configuration-editor/)
 * [FAQ: frequently asked questions and answers](http://www.modxvm.com/en/faq/)
 * [Nightly Builds](http://nightly.modxvm.com/) Don't use it if you are not experienced tester. Nightly Builds could be unstable or not work at all.
 * [Translation server](http://translation.by-reservation.com/)
