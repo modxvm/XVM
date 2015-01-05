@@ -178,6 +178,7 @@ package com.xvm.vehinfo
                 {"ussr_T44_85", new int[2]{ 7, 8 }},
                 {"ussr_T44_122", new int[2]{ 7, 8 }},
                 {"germany_E_25",  new int[2]{ 7, 8 }},
+                {"uk_GB71_AT_15A",  new int[2]{ 7, 8 }},
 
                 // level 8
                 {"ussr_KV_5", new int[2]{ 8, 9 }},
