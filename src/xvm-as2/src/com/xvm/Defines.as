@@ -13,8 +13,9 @@ class com.xvm.Defines
     // Locale
     public static var LOCALE_AUTO_DETECTION:String = "auto";
 
+    // Paths relative to /res_mods/0.x.x/gui/scaleform/
     // res_mods/xvm/
-    public static var XVM_ROOT:String = "../../../xvm/";
+    public static var XVM_ROOT:String = "../../../shared_resources/xvm/";
 
     // res_mods/xvm/configs/
     public static var XVMCONF_ROOT:String = XVM_ROOT + "configs/";
@@ -22,13 +23,14 @@ class com.xvm.Defines
     // res_mods/xvm/res/
     public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
 
-    // res_mods/xvm/ (for <img> tag)
-    public static var XVM_IMG_ROOT:String = "../xvm/";
+    // Paths relative to /res_mods/0.x.x/
+    // res_mods/mods/shared_resources/xvm/ (for <img> tag))
+    public static var XVM_IMG_ROOT:String = "../mods/shared_resources/xvm/";
 
-    // res_mods/xvm/res/ (for <img> tag)
-    public static var XVMRES_IMG_ROOT:String = "../xvm/res/";
+    // res_mods/mods/shared_resources/xvm/res/ (for <img> tag)
+    public static var XVMRES_IMG_ROOT:String = "../mods/shared_resources/xvm/res/";
 
-    // res_mods/xvm/res/SixthSense.png
+    // res_mods/mods/shared_resources/xvm/res/SixthSense.png
     public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
 
     // res_mods/xvm/configs/xvm.xc
