@@ -39,6 +39,8 @@ import simplejson
 import BigWorld
 from gui import SystemMessages
 
+from xfw import *
+
 import config
 from constants import *
 from logger import *
