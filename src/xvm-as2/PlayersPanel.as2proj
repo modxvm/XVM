@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="swf\PlayersPanel.swf" />
-    <movie path="..\..\~output\gui\scaleform\PlayersPanel.swf" />
+    <movie path="..\..\~output\~ver\gui\scaleform\PlayersPanel.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />

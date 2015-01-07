@@ -1,13 +1,8 @@
 #!/bin/sh
 
-# TODO - refactor
 
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
-
-###
-
-[ "$GAME_VER" = "" ] && GAME_VER=$(<../build/target_version)
-GAME_VER=`echo $GAME_VER | tr -d '\n\r'`
+#############################
+# INTERNAL
 
 FILES_FLASH="
   Application.swf

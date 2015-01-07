@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="swf\Minimap.swf" />
-    <movie path="..\..\~output\gui\scaleform\Minimap.swf" />
+    <movie path="..\..\~output\~ver\gui\scaleform\Minimap.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />

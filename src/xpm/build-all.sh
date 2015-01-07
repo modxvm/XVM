@@ -17,16 +17,20 @@ if [ ! -f $PY_EXEC ]; then
 fi
 ###
 
-make_dirs()
-{
-  mkdir -p ../../~output/~ver/scripts
-  mkdir -p ../../~output/mods
-}
-
 clear()
 {
+  rm -rf "../../~output/~ver/gui/flash"
   rm -rf "../../~output/~ver/scripts"
-  rm -rf "../../~output/mods"
+  rm -rf "../../~output/mods/xfw"
+}
+
+make_dirs()
+{
+  mkdir -p ../../~output/~ver/gui/flash/
+  mkdir -p ../../~output/~ver/scripts
+  mkdir -p ../../~output/mods/xfw/actionscript/
+  mkdir -p ../../~output/mods/xfw/python/
+  mkdir -p ../../~output/mods/xfw/resources/
 }
 
 build_xfw()
@@ -34,6 +38,9 @@ build_xfw()
   pushd ../xfw/src/python/ >/dev/null
   ./build.sh
   popd >/dev/null
+
+  cp -a ../xfw/~output/swf_wg/* ../../~output/~ver/gui/flash/
+  cp -a ../xfw/~output/swf/* ../../~output/mods/xfw/actionscript/
   cp -a ../xfw/~output/python/scripts/* ../../~output/~ver/scripts/
   cp -a ../xfw/~output/python/mods/* ../../~output/mods/
 }
@@ -56,8 +63,9 @@ build()
 
 # MAIN
 
-make_dirs
 clear
+
+make_dirs
 
 build_xfw
 
