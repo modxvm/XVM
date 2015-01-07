@@ -1,15 +1,14 @@
 #!/bin/bash
 
-CLEAR=0
-BUILD_LIBS=0
+#############################
+# CONFIG
 
-### Path vars can be assigned at .bashrc
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
+RUN_TEST=0
+
+#############################
+# INTERNAL
 
 cd $(dirname $0)
-
-[ "$GAME_VER" = "" ] && GAME_VER=$(<../../build/target_version)
-GAME_VER=`echo $GAME_VER | tr -d '\n\r'`
 
 ### Find Python executable
 PY_EXEC="/cygdrive/c/Python27/python.exe"
@@ -18,9 +17,16 @@ if [ ! -f $PY_EXEC ]; then
 fi
 ###
 
+make_dirs()
+{
+  mkdir -p ../../~output/~ver/scripts
+  mkdir -p ../../~output/mods
+}
+
 clear()
 {
-  rm -rf "../../bin/mods"
+  rm -rf "../../~output/~ver/scripts"
+  rm -rf "../../~output/mods"
 }
 
 build_xfw()
@@ -28,7 +34,8 @@ build_xfw()
   pushd ../xfw/src/python/ >/dev/null
   ./build.sh
   popd >/dev/null
-  cp -a ../xfw/~output/python/* ../../bin/
+  cp -a ../xfw/~output/python/scripts/* ../../~output/~ver/scripts/
+  cp -a ../xfw/~output/python/mods/* ../../~output/mods/
 }
 
 build()
@@ -42,42 +49,33 @@ build()
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
   [ ! -f $1c ] && exit
 
-  mkdir -p "../../bin/$2/python/$d"
-  cp $1c "../../bin/$2/python/${f}c"
+  mkdir -p "../../~output/$2/python/$d"
+  cp $1c "../../~output/$2/python/${f}c"
   rm -f $1c
 }
 
 # MAIN
 
-mkdir -p ../../bin
-
-[ "$XPM_DEVELOPMENT" != "" -a "$CLEAR" != "0" ] && clear
+make_dirs
+clear
 
 build_xfw
 
+# create __version__.py files
 for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
   echo "__revision__ = '`cd $dir && hg parent --template "{rev}"`'" >> $dir/__version__.py
   echo "__branch__ = '`cd $dir && hg parent --template "{branch}"`'" >> $dir/__version__.py
 done
 
+# build *.py files
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}
-
-  if [ "$XPM_DEVELOPMENT" != "" -a "$BUILD_LIBS" = "0" ]; then
-    if [[ $f = xvm_waiting_fix/* ]]; then continue; fi
-  fi
   build $f mods/packages/$m
 done
 
-if [ "$OS" = "Windows_NT" ]; then
-  run()
-  {
-    rm -rf "$WOT_DIRECTORY/res_mods/$GAME_VER/scripts"
-    cp -R ../../bin/xpm/scripts "$WOT_DIRECTORY/res_mods/$GAME_VER"
-    sh "../../utils/test.sh" --no-deploy
-  }
-
- # run
+# run test
+if [ "$OS" = "Windows_NT" -a "$RUN_TEST" = "1" ]; then
+  sh "../../utils/test.sh"
 fi

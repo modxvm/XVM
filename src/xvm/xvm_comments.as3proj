@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\bin\mods\packages\xvm_comments\actionscript\xvm_comments.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_comments\actionscript\xvm_comments.swf" />
     <movie fps="30" />
     <movie width="1" />
     <movie height="1" />

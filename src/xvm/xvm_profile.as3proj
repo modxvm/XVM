@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\bin\mods\packages\xvm_profile\actionscript\xvm_profile.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_profile\actionscript\xvm_profile.swf" />
     <movie fps="30" />
     <movie width="1" />
     <movie height="1" />
