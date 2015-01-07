@@ -8,8 +8,6 @@ RUN_TEST=0
 #############################
 # INTERNAL
 
-cd $(dirname $0)
-
 ### Find Python executable
 PY_EXEC="/cygdrive/c/Python27/python.exe"
 if [ ! -f $PY_EXEC ]; then
@@ -28,6 +26,7 @@ make_dirs()
 {
   mkdir -p ../../~output/~ver/gui/flash/
   mkdir -p ../../~output/~ver/scripts
+  mkdir -p ../../~output/mods/shared_resources/
   mkdir -p ../../~output/mods/xfw/actionscript/
   mkdir -p ../../~output/mods/xfw/python/
   mkdir -p ../../~output/mods/xfw/resources/
@@ -62,6 +61,8 @@ build()
 }
 
 # MAIN
+
+cd $(dirname $0)
 
 clear
 

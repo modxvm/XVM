@@ -3,7 +3,7 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION    = "1.6.0"
+XFW_MOD_VERSION    = "2.0.0"
 XFW_MOD_URL        = "http://www.modxvm.com/"
 XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
 XFW_GAME_VERSIONS  = ["0.9.4","0.9.5"]
