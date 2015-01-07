@@ -23,7 +23,7 @@ FILES_SCALEFORM="
   xvm.swf"
 
 CUSTOM_TESTER_FILES="configs/xvm.xc"
-XVM_DIRS="configs mods res/icons"
+XVM_DIRS="configs res/icons"
 XVM_FILES="l10n/en.xc l10n/ru.xc"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
@@ -46,19 +46,19 @@ copy_file_flash()
 copy_file_scaleform()
 {
   [ -f "$SWF_DIR/scaleform/$1" ] && rm -f "$SWF_DIR/scaleform/$1"
-  [ -f "../bin/$1" ] && {
+  [ -f "../bin/swf-as2/$1" ] && {
     echo "=> $1"
     mkdir -p "$SWF_DIR/scaleform"
-    cp -p "../bin/$1" "$SWF_DIR/scaleform/${1##*/}"
+    cp -p "../bin/swf-as2/$1" "$SWF_DIR/scaleform/${1##*/}"
   }
 }
 
 copy_custom_tester_files()
 {
   [ -f "$RES_MODS_DIR/xvm/$1" ] && rm -f "$RES_MODS_DIR/xvm/$1"
-  [ -f "../bin/$1" ] && {
+  [ -f "test/$1" ] && {
     echo "=> $1"
-    cp -p "../bin/$1" "$RES_MODS_DIR/xvm/$1"
+    cp -p "test/$1" "$RES_MODS_DIR/xvm/$1"
   }
 }
 

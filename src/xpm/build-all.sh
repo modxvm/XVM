@@ -12,10 +12,10 @@ cd $(dirname $0)
 GAME_VER=`echo $GAME_VER | tr -d '\n\r'`
 
 ### Find Python executable
-  PY_EXEC="/cygdrive/c/Python27/python.exe"
-  if [ ! -f $PY_EXEC ]; then
-    PY_EXEC="python2.7" # Installed by cygwin or *nix
-  fi
+PY_EXEC="/cygdrive/c/Python27/python.exe"
+if [ ! -f $PY_EXEC ]; then
+  PY_EXEC="python2.7" # Installed by cygwin or *nix
+fi
 ###
 
 clear()
@@ -24,12 +24,12 @@ clear()
 }
 
 build_xfw()
-  {
-    pushd ../xfw/src/python/ >/dev/null
-    ./build.sh
-    popd >/dev/null
-    cp -a ../xfw/~output/python/* ../../bin/
-  }
+{
+  pushd ../xfw/src/python/ >/dev/null
+  ./build.sh
+  popd >/dev/null
+  cp -a ../xfw/~output/python/* ../../bin/
+}
 
 build()
 {
@@ -46,6 +46,10 @@ build()
   cp $1c "../../bin/$2/python/${f}c"
   rm -f $1c
 }
+
+# MAIN
+
+mkdir -p ../../bin
 
 [ "$XPM_DEVELOPMENT" != "" -a "$CLEAR" != "0" ] && clear
 
@@ -65,7 +69,6 @@ for fn in $(find . -type "f" -name "*.py"); do
     if [[ $f = xvm_waiting_fix/* ]]; then continue; fi
   fi
   build $f mods/packages/$m
-
 done
 
 if [ "$OS" = "Windows_NT" ]; then
