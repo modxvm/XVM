@@ -148,13 +148,13 @@
     ]
   },
   "iconset": {
-    "battleLoadingAlly": "contour/HARDicons",
-    "battleLoadingEnemy": "contour/HARDicons",
-    "statisticFormAlly": "contour/HARDicons",
-    "statisticFormEnemy": "contour/HARDicons",
-    "playersPanelAlly":  "contour/HARDicons",
-    "playersPanelEnemy":  "contour/HARDicons",
-    "vehicleMarker": "contour/Aslain/iconset2"
+    "battleLoadingAlly": "contour/Master_XH",
+    "battleLoadingEnemy": "contour/Master_XH",
+    "statisticFormAlly": "contour/Master_XH",
+    "statisticFormEnemy": "contour/Master_XH",
+    "playersPanelAlly":  "contour/Master_XH",
+    "playersPanelEnemy":  "contour/Master_XH",
+    "vehicleMarker": "Aslain/contouricons/regular"
   },
   "vehicleNames": {
     "ussr-T-34": { "name": "т-34.", "short": "т-34" },

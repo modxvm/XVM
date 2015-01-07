@@ -13,11 +13,11 @@ class com.xvm.Defines
     // Locale
     public static var LOCALE_AUTO_DETECTION:String = "auto";
 
-    // Paths relative to /res_mods/0.x.x/gui/scaleform/
-    // res_mods/xvm/
-    public static var XVM_ROOT:String = "../../../shared_resources/xvm/";
+    // Paths relative to /res_mods/x.x.x/gui/scaleform/
+    // res_mods/mods/shared_resources/xvm/
+    public static var XVM_ROOT:String = "../../../mods/shared_resources/xvm/";
 
-    // res_mods/xvm/res/
+    // res_mods/mods/shared_resources/xvm/res/
     public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
 
     // Paths relative to /res_mods/0.x.x/
