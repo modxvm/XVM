@@ -3,7 +3,7 @@
 #############################
 # CONFIG
 
-RUN_TEST=0
+RUN_TEST=1
 
 #############################
 # INTERNAL
@@ -26,6 +26,7 @@ make_dirs()
 {
   mkdir -p ../../~output/~ver/gui/flash/
   mkdir -p ../../~output/~ver/scripts
+  mkdir -p ../../~output/configs/
   mkdir -p ../../~output/mods/shared_resources/
   mkdir -p ../../~output/mods/xfw/actionscript/
   mkdir -p ../../~output/mods/xfw/python/
@@ -37,11 +38,6 @@ build_xfw()
   pushd ../xfw/src/python/ >/dev/null
   ./build.sh
   popd >/dev/null
-
-  cp -a ../xfw/~output/swf_wg/* ../../~output/~ver/gui/flash/
-  cp -a ../xfw/~output/swf/* ../../~output/mods/xfw/actionscript/
-  cp -a ../xfw/~output/python/scripts/* ../../~output/~ver/scripts/
-  cp -a ../xfw/~output/python/mods/* ../../~output/mods/
 }
 
 build()
@@ -62,7 +58,7 @@ build()
 
 # MAIN
 
-cd $(dirname $0)
+pushd $(dirname $0) >/dev/null
 
 clear
 
@@ -84,7 +80,9 @@ for fn in $(find . -type "f" -name "*.py"); do
   build $f mods/packages/$m
 done
 
+popd >/dev/null
+
 # run test
-if [ "$OS" = "Windows_NT" -a "$RUN_TEST" = "1" ]; then
-  sh "../../utils/test.sh"
+if [ "$OS" = "Windows_NT" -a "$XPM_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
+  sh "$(dirname $(realpath $(cygpath --unix $0)))/../../utils/test.sh"
 fi

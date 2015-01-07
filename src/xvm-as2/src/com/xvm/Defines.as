@@ -17,18 +17,16 @@ class com.xvm.Defines
     // res_mods/xvm/
     public static var XVM_ROOT:String = "../../../shared_resources/xvm/";
 
-    // res_mods/xvm/configs/
-    public static var XVMCONF_ROOT:String = XVM_ROOT + "configs/";
-
     // res_mods/xvm/res/
     public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
 
     // Paths relative to /res_mods/0.x.x/
-    // res_mods/mods/shared_resources/xvm/ (for <img> tag))
-    public static var XVM_IMG_ROOT:String = "../mods/shared_resources/xvm/";
+    // res_mods/configs/xvm/ (for <img> tag))
+    public static var XVM_IMG_CFG_ROOT:String = "../configs/xvm/";
 
-    // res_mods/mods/shared_resources/xvm/res/ (for <img> tag)
-    public static var XVMRES_IMG_ROOT:String = "../mods/shared_resources/xvm/res/";
+    // Paths relative to /res_mods/0.x.x/
+    // res_mods/mods/shared_resources/xvm/ (for <img> tag))
+    public static var XVM_IMG_RES_ROOT:String = "../mods/shared_resources/xvm/";
 
     // res_mods/mods/shared_resources/xvm/res/SixthSense.png
     public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
