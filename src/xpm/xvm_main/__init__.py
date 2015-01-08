@@ -3,10 +3,10 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XPM_MOD_VERSION    = "1.6.0"
-XPM_MOD_URL        = "http://www.modxvm.com/"
-XPM_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XPM_GAME_VERSIONS  = ["0.9.4","0.9.5"]
+XFW_MOD_VERSION    = "2.0.0"
+XFW_MOD_URL        = "http://www.modxvm.com/"
+XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
+XFW_GAME_VERSIONS  = ["0.9.4","0.9.5"]
 
 #####################################################################
 
@@ -17,7 +17,7 @@ import cPickle
 
 import BigWorld
 
-from xpm import *
+from xfw import *
 
 import config
 from logger import *
@@ -230,6 +230,15 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
         err(traceback.format_exc())
         base(self, arenaUniqueID, callback)
 
+# stub for fixing waiting bug
+
+def WaitingViewMeta_fix(base, self, *args):
+    try:
+        base(self, *args)
+        #raise Exception('Test')
+    except Exception, ex:
+        log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
+
 #####################################################################
 # Register events
 
@@ -288,13 +297,17 @@ def _RegisterEvents():
     from account_helpers.BattleResultsCache import BattleResultsCache
     OverrideMethod(BattleResultsCache, 'get', BattleResultsCache_get)
 
+    from gui.Scaleform.daapi.view.meta.WaitingViewMeta import WaitingViewMeta
+    OverrideMethod(WaitingViewMeta, 'showS', WaitingViewMeta_fix)
+    OverrideMethod(WaitingViewMeta, 'hideS', WaitingViewMeta_fix)
+
 BigWorld.callback(0, _RegisterEvents)
 
 
 #####################################################################
 # Log version info
 
-log("xvm %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))
+log("xvm %s (%s) for WoT %s" % (XFW_MOD_VERSION, XFW_MOD_URL, ", ".join(XFW_GAME_VERSIONS)))
 try:
     from __version__ import __branch__, __revision__
     log("Branch: %s, Revision: %s" % (__branch__, __revision__))

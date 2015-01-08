@@ -10,7 +10,7 @@ import GUI
 from gui.shared.utils import decorators
 from gui import SystemMessages
 
-from xpm import *
+from xfw import *
 
 import config
 from constants import *
@@ -289,7 +289,7 @@ class Xvm(object):
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
 
-        from xpm import g_xvmView
+        from xfw import g_xvmView
         g_xvmView.as_xvm_cmdS(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
 
     def hangarDispose(self):

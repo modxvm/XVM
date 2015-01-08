@@ -20,7 +20,7 @@ def cleanupBattleData():
 
 from pprint import pprint
 import BigWorld
-from xpm import *
+from xfw import *
 from logger import *
 
 def _getVehicleStateData(vID):

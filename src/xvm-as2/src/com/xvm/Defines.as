@@ -5,7 +5,7 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "5.5.1.1";
+    public static var XVM_VERSION:String = "6.0.0-dev";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.9.5";
     public static var CONFIG_VERSION:String = "5.1.0";
@@ -13,22 +13,22 @@ class com.xvm.Defines
     // Locale
     public static var LOCALE_AUTO_DETECTION:String = "auto";
 
-    // res_mods/xvm/
-    public static var XVM_ROOT:String = "../../../xvm/";
+    // Paths relative to /res_mods/x.x.x/gui/scaleform/
+    // res_mods/mods/shared_resources/xvm/
+    public static var XVM_ROOT:String = "../../../mods/shared_resources/xvm/";
 
-    // res_mods/xvm/configs/
-    public static var XVMCONF_ROOT:String = XVM_ROOT + "configs/";
-
-    // res_mods/xvm/res/
+    // res_mods/mods/shared_resources/xvm/res/
     public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
 
-    // res_mods/xvm/ (for <img> tag)
-    public static var XVM_IMG_ROOT:String = "../xvm/";
+    // Paths relative to /res_mods/0.x.x/
+    // res_mods/configs/xvm/ (for <img> tag))
+    public static var XVM_IMG_CFG_ROOT:String = "../configs/xvm/";
 
-    // res_mods/xvm/res/ (for <img> tag)
-    public static var XVMRES_IMG_ROOT:String = "../xvm/res/";
+    // Paths relative to /res_mods/0.x.x/
+    // res_mods/mods/shared_resources/xvm/ (for <img> tag))
+    public static var XVM_IMG_RES_ROOT:String = "../mods/shared_resources/xvm/";
 
-    // res_mods/xvm/res/SixthSense.png
+    // res_mods/mods/shared_resources/xvm/res/SixthSense.png
     public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
 
     // res_mods/xvm/configs/xvm.xc

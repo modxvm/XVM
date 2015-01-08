@@ -43,7 +43,7 @@ import simplejson
 import BigWorld
 from items.vehicles import VEHICLE_CLASS_TAGS
 
-from xpm import *
+from xfw import *
 
 import config
 from constants import *

@@ -6,6 +6,7 @@ import traceback
 import BigWorld
 from gui import SystemMessages
 
+from xfw import *
 from constants import *
 from logger import *
 import utils

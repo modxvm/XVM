@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="swf\VehicleMarkersManager.swf" />
-    <movie path="..\..\bin\VehicleMarkersManager.swf" />
+    <movie path="..\..\~output\~ver\gui\scaleform\VehicleMarkersManager.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />

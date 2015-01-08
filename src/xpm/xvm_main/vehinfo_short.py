@@ -1,6 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2014 """
 
-from xpm import *
+from xfw import *
 from logger import *
 
 # PUBLIC

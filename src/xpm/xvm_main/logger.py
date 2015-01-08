@@ -1,40 +1,15 @@
 """ XVM (c) www.modxvm.com 2013-2014 """
 
-import datetime
-
-from xpm import *
-
 from constants import XVM_LOG_FILE_NAME
-
-#############################
-# Command
+from xfw import Logger
 
 def log(s, prefix=""):
     _logger.add(prefix + str(s))
 
 def err(s):
-    log(s, '[ERROR] ')
+    _logger.error(s)
 
 def debug(s):
-    if IS_DEVELOPMENT:
-        log(s, '[DEBUG] ')
+    _logger.debug(s)
 
-
-#############################
-# Private
-
-class _Logger(object):
-    def __init__(self):
-        self.logfile = open(XVM_LOG_FILE_NAME, "w", 2 if IS_DEVELOPMENT else 8192)
-
-    def __del__(self):
-        self.logfile.close()
-
-    def add(self, s):
-        try:
-            self.logfile.write("%s: %s\n" %
-                (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), s))
-        except:
-            logtrace(__file__)
-
-_logger = _Logger()
+_logger = Logger(XVM_LOG_FILE_NAME)

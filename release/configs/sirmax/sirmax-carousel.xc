@@ -36,7 +36,7 @@
 
         { "x": 135, "y": 57, "w": 25, "h": 25, "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png" },
 
-        { "x": 140, "y": 40, "src": "xvm://configs/sirmax/img/marksOnGun/{{v.marksOnGun|empty}}.png" },
+        { "x": 140, "y": 40, "src": "cfg://sirmax/img/marksOnGun/{{v.marksOnGun|empty}}.png" },
         { "x": 147, "y": "{{v.marksOnGun?38|37}}", "align": "center",
           "format": "<b><font size='9' color='#C8C8B5'>{{v.marksOnGun}}</font></b></font>",
           "shadow": {}
@@ -51,6 +51,7 @@
           "shadow": ${ "def.textFieldShadow" }
         },
 
+        { "x": 0, "y": 15, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/wins40x32.png" },
         { "x": 21, "y": 15,
           "format": "<b><font size='12' color='{{v.c_winrate}}'>{{v.winrate%2d~%}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }

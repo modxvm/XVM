@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="swf\battle.swf" />
-    <movie path="..\..\bin\battle.swf" />
+    <movie path="..\..\~output\~ver\gui\scaleform\battle.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />

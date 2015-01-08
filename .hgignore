@@ -4,23 +4,19 @@ syntax: glob
 *~
 
 addons/clanicons/archives/*.*
-addons/clanicons/icons
+addons/clanicons/icons/
 addons/stat-utils/db/players-test.qvw
 addons/stat-utils/db/top.qvw
 addons/xvm-stat-log/*.xml
-addons/xvm-stat-log/work
+addons/xvm-stat-log/work/
 
-bin
-release/mods
+~output/
 
 src/xpm/*/__version__.py
 
-src/xvm-as2/include
+src/xvm-as2/include/
 src/xvm-as2/swf/*.swf
 
-src/xvm/lib
-src/xvm/obj
-src/xvm/swf/Application.swf
-src/xvm/wg/app.orig
+src/xvm/obj/
 
 utils/replays/*.wotreplay
