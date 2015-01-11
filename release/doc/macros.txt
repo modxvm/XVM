@@ -93,11 +93,11 @@ Legend:
 ├─────────────────┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────────────
 │ {{xvm-user}}    │ X │ X │ X │ X │ X │ 'on' - user sees your stat, 'off' - don't sees your stat, empty - hasn't activated XVM services
 │ {{avglvl}}      │ X │ X │ X │ X │ X │ average level (tier) of tanks
-│ {{eff}}         │ X │ X │ X │ X │ X │ player efficiency: http://wot-news.com/index.php/stat/calc/en/
+│ {{eff}}         │ X │ X │ X │ X │ X │ player efficiency: http://www.koreanrandom.com/forum/topic/13386-
 │ {{teff}}, {{e}} │ X │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
-│ {{wn6}}         │ X │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
-│ {{wn8}}         │ X │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
-│ {{wgr}}         │ X │ X │ X │ X │ X │ WG rating: http://www.koreanrandom.com/forum/topic/13433-
+│ {{wn6}}         │ X │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/13388-
+│ {{wn8}}         │ X │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/13434-
+│ {{wgr}}         │ X │ X │ X │ X │ X │ WG rating:  http://www.koreanrandom.com/forum/topic/13433-
 │ {{xeff}}        │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
 │ {{xwn6}}        │ X │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
 │ {{xwn8}}        │ X │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
