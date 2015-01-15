@@ -311,10 +311,10 @@ package net.wg.gui.components.common.video
         }
     }
     
-    //public function get metaData() : Object
-    //{
-    //    return this._metaData;
-    //}
+    /*public function get metaData() : Object
+    {
+        return this._metaData;
+    }*/
     
     public function get currentTime() : Number
     {

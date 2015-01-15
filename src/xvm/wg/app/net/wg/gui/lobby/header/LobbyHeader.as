@@ -65,8 +65,14 @@ package net.wg.gui.lobby.header
         
         private var _mainMenuHelper:MainMenuHelper;
         
-        public var _headerButtonsHelper:HeaderButtonsHelper;
+        private var _headerButtonsHelper:HeaderButtonsHelper;
         
+        // XVM
+        public function get xvm_headerButtonsHelper():HeaderButtonsHelper
+        {
+            return _headerButtonsHelper;
+        }
+
         private var _isShowHelpLayout:Boolean = false;
         
         private var _bubbleTooltip:ToolTipComplex;

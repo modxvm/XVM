@@ -109,9 +109,29 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private var _vehiclesVOManager:VehicleCarouselVOManager = null;
         
-        protected var _slotForBuySlot:IListItemRenderer = null;
+        private var _slotForBuySlot:IListItemRenderer = null;
+
+        // XVM
+        public function get xvm_slotForBuySlot():IListItemRenderer
+        {
+            return _slotForBuySlot;
+        }
+        public function set xvm_slotForBuySlot(value:IListItemRenderer):void
+        {
+            _slotForBuySlot = value;
+        }
         
-        protected var _slotForBuyVehicle:IListItemRenderer = null;
+        private var _slotForBuyVehicle:IListItemRenderer = null;
+
+        // XVM
+        public function get xvm_slotForBuyVehicle():IListItemRenderer
+        {
+            return _slotForBuyVehicle;
+        }
+        public function set xvm_slotForBuyVehicle(value:IListItemRenderer):void
+        {
+            _slotForBuyVehicle = value;
+        }
         
         private var _updateInProgress:Boolean = false;
         

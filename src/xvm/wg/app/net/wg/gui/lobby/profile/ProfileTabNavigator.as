@@ -36,7 +36,13 @@ package net.wg.gui.lobby.profile
         
         public var viewStack:ResizableViewStack;
         
-        public var initData:ProfileMenuInfoVO;
+        private var initData:ProfileMenuInfoVO;
+
+        // XVM
+        public function get xvm_initData():ProfileMenuInfoVO
+        {
+            return initData;
+        }
         
         private var _sectionsDataUtil:LinkageUtils;
         

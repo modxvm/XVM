@@ -28,7 +28,7 @@ package xvm.profile
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            var accountData:HBC_AccountDataVo = HBC_AccountDataVo(page.header._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
+            var accountData:HBC_AccountDataVo = HBC_AccountDataVo(page.header.xvm_headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
             if (accountData)
                 Globals[Globals.NAME] = accountData.userVO.userName;
         }

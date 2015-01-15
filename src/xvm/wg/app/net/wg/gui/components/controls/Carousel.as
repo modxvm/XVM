@@ -91,9 +91,29 @@ package net.wg.gui.components.controls
         
         protected var selectedItemRenderer:IListItemRenderer = null;
         
-        protected var scopeWidth:Number = 0;
+        private var scopeWidth:Number = 0;
+
+        // XVM
+        public function get xvm_scopeWidth():Number
+        {
+            return scopeWidth;
+        }
+        public function set xvm_scopeWidth(value:Number):void
+        {
+            scopeWidth = value;
+        }
         
-        protected var courseFactor:Number = 0;
+        private var courseFactor:Number = 0;
+
+        // XVM
+        public function get xvm_courseFactor():Number
+        {
+            return courseFactor;
+        }
+        public function set xvm_courseFactor(value:Number):void
+        {
+            courseFactor = value;
+        }
         
         private var slideAcceleratorAfterDrag:Number = 16;
         

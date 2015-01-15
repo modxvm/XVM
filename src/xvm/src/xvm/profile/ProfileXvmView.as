@@ -107,18 +107,18 @@ package xvm.profile
 
             try
             {
-                if (tabNavigator.initData == null)
+                if (tabNavigator.xvm_initData == null)
                 {
                     //Logger.add("tabNavigator.initData == null");
                     App.utils.scheduler.envokeInNextFrame(tabNavigator_onAfterPopulate);
                     return;
                 }
                 // initialize start page
-                var alias:String = tabNavigator.initData.selectedAlias;
+                var alias:String = tabNavigator.xvm_initData.selectedAlias;
                 if (alias == "profileSummaryPage" || alias == "")
                 {
                     var index:int = Config.config.userInfo.startPage - 1;
-                    if (index > 0 && index < tabNavigator.initData.sectionsData.length)
+                    if (index > 0 && index < tabNavigator.xvm_initData.sectionsData.length)
                         tabNavigator.bar.selectedIndex = index;
                 }
             }

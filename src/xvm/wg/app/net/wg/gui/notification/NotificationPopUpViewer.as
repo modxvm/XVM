@@ -45,7 +45,13 @@ package net.wg.gui.notification
     
     private var maxAvailaleMessagesCount:uint = 5;
     
-    public var popupClass:Class;
+    private var popupClass:Class;
+
+    // XVM
+    public function set xvm_popupClass(value:Class):void
+    {
+        popupClass = value;
+    }
     
     private var animationManager:ExcludeTweenManager;
     

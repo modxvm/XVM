@@ -1,29 +1,33 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/notification/NotificationPopUpViewer.class.asasm Application.orig-0/net/wg/gui/notification/NotificationPopUpViewer.class.asasm
---- Application.orig-0.orig/net/wg/gui/notification/NotificationPopUpViewer.class.asasm	2014-11-04 21:03:12 +0300
-+++ Application.orig-0/net/wg/gui/notification/NotificationPopUpViewer.class.asasm	2014-11-04 21:16:15 +0300
-@@ -52,7 +52,7 @@
- 
-      getlocal0
-      getlocal1
--     initproperty        QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "popupClass")
-+     initproperty        QName(PackageNamespace(""), "popupClass")
- 
-      returnvoid
-     end ; code
-@@ -66,7 +66,7 @@
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "isMessagesCountInvalid") type QName(PackageNamespace(""), "Boolean") end
+--- Application.orig-0.orig/net/wg/gui/notification/NotificationPopUpViewer.class.asasm	2015-01-08 15:57:53.971991900 +0200
++++ Application.orig-0/net/wg/gui/notification/NotificationPopUpViewer.class.asasm	2015-01-08 15:59:37.312136600 +0200
+@@ -67,6 +67,29 @@
    trait slot QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "arrangeLayout") type QName(PackageNamespace(""), "Boolean") end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "maxAvailaleMessagesCount") type QName(PackageNamespace(""), "uint") value Integer(5) end
--  trait slot QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "popupClass") type QName(PackageNamespace(""), "Class") end
-+  trait slot QName(PackageNamespace(""), "popupClass") type QName(PackageNamespace(""), "Class") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "popupClass") type QName(PackageNamespace(""), "Class") end
++  trait setter QName(PackageNamespace(""), "xvm_popupClass")
++   method
++    refid "net.wg.gui.notification:NotificationPopUpViewer/instance#0/xvm_popupClass/setter"
++    param QName(PackageNamespace(""), "Class")
++    returns QName(PackageNamespace(""), "void")
++    body
++     maxstack 2
++     localcount 2
++     initscopedepth 11
++     maxscopedepth 12
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getlocal1
++      initproperty        QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "popupClass")
++
++      returnvoid
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
    trait slot QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "animationManager") type QName(PackageNamespace("net.wg.gui.utils"), "ExcludeTweenManager") end
    trait const QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "TWEEN_DURATION") type QName(PackageNamespace(""), "uint") value Integer(500) end
    trait method QName(ProtectedNamespace("net.wg.gui.notification:NotificationPopUpViewer"), "configUI") flag OVERRIDE
-@@ -308,7 +308,7 @@
-       ifnlt               L139
- 
-       getlocal0
--      constructprop       QName(PrivateNamespace(null, "net.wg.gui.notification:NotificationPopUpViewer/instance#0"), "popupClass"), 0
-+      constructprop       QName(PackageNamespace(""), "popupClass"), 0
-       coerce              QName(PackageNamespace("net.wg.gui.notification"), "ServiceMessagePopUp")
-       setlocal            4
