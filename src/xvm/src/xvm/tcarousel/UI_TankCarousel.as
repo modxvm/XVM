@@ -284,7 +284,7 @@ package xvm.tcarousel
             {
                 if (_renderers == null)
                     return;
-                this.scopeWidth = Math.ceil(Math.max(_renderers.length, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
+                this.xvm_scopeWidth = Math.ceil(Math.max(_renderers.length, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
             }
             catch (ex:Error)
             {
@@ -339,12 +339,12 @@ package xvm.tcarousel
             try
             {
                 super.arrowSlide();
-                if (this.courseFactor == -1)
+                if (this.xvm_courseFactor == -1)
                 {
                     if (this._currentFirstRendererOnAnim >= Math.ceil((_renderers.length - _visibleSlots) / cfg.rows))
                     {
                         this.currentFirstRenderer = _renderers.length - this._visibleSlots;
-                        this.courseFactor = 0;
+                        this.xvm_courseFactor = 0;
                     }
                 }
             }
@@ -491,10 +491,10 @@ package xvm.tcarousel
                 renderer = getRendererAt(i);
                 if (Config.config.hangar.carousel.hideBuyTank == true)
                 {
-                    if (this._slotForBuyVehicle)
+                    if (this.xvm_slotForBuyVehicle)
                     {
-                        this.cleanUpRenderer(this._slotForBuyVehicle);
-                        this._slotForBuyVehicle = null;
+                        this.cleanUpRenderer(this.xvm_slotForBuyVehicle);
+                        this.xvm_slotForBuyVehicle = null;
                     }
                 }
                 else
@@ -511,10 +511,10 @@ package xvm.tcarousel
                 renderer = getRendererAt(i);
                 if (Config.config.hangar.carousel.hideBuySlot == true)
                 {
-                    if (this._slotForBuySlot)
+                    if (this.xvm_slotForBuySlot)
                     {
-                        this.cleanUpRenderer(this._slotForBuySlot);
-                        this._slotForBuySlot = null;
+                        this.cleanUpRenderer(this.xvm_slotForBuySlot);
+                        this.xvm_slotForBuySlot = null;
                     }
                 }
                 else
