@@ -1,31 +1,31 @@
 ﻿{
     "RU": {
-        "ver": "5.5.1.2",
+        "ver": "5.5.1.3",
         "wot": "0.9.5",
         "message": "  * WoT 0.9.5\n  * новые возможности\n  * исправлены ошибки"
     },
     "EU": {
-        "ver": "5.5.1.2",
+        "ver": "5.5.1.3",
         "wot": "0.9.5",
         "message": "  * WoT 0.9.5\n  * new features\n  * bugs fixed"
     },
     "US": {
-        "ver": "5.5.1.2",
+        "ver": "5.5.1.3",
         "wot": "0.9.5",
         "message": "  * WoT 0.9.5\n  * new features\n  * bugs fixed"
     },
     "SEA": {
-        "ver": "5.5.1.2",
+        "ver": "5.5.1.3",
         "wot": "0.9.5",
         "message": "  * WoT 0.9.5\n  * new features\n  * bugs fixed"
     },
     "VTC": {
-        "ver": "5.5.1.2",
+        "ver": "5.5.1.3",
         "wot": "0.9.5",
         "message": "  * WoT 0.9.5\n  * new features\n  * bugs fixed"
     },
     "CT":  {
-        "ver": "5.5.1.2",
+        "ver": "5.5.1.3",
         "wot": "0.9.5",
         "message": "  * WoT 0.9.5 Common Test\n  * bugs fixed"
     }
