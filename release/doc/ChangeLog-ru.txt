@@ -1,4 +1,7 @@
-﻿XVM-5.5.1.1:
+﻿XVM-5.5.1.2:
+  * исправлен Application.swf
+
+XVM-5.5.1.1:
   * исправлен Application.swf
 
 XVM-5.5.1:
