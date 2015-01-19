@@ -1,4 +1,9 @@
-﻿XVM-5.5.1.1:
+﻿XVM-6.0.0:
+  * XFW: XVM Framework
+  * New mod xvm_quests for personal missions.
+	Currently implemented new filters and saving filters settings
+
+XVM-5.5.1.1:
   * fixed Application.swf
 
 XVM-5.5.1:

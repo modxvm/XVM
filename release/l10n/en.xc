@@ -170,10 +170,14 @@
     "Group": "Group",
     "Comment": "Comment",
 
-    //Vehicle status
+    // Vehicle status
     "Destroyed": "Destroyed",
     "No data": "No data",
     "Not ready": "Not ready",
+
+    // Quests
+    "Hide with honors": "Hide with honors",
+    "Hide not available": "Hide not available",
 
     // Config loading
     "XVM config reloaded": "XVM config reloaded",

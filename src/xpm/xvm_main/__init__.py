@@ -239,6 +239,7 @@ def WaitingViewMeta_fix(base, self, *args):
     except Exception, ex:
         log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
 
+
 #####################################################################
 # Register events
 

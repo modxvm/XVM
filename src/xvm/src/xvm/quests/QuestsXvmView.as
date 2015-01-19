@@ -1,0 +1,36 @@
+/**
+ * XVM - squad window
+ * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ */
+package xvm.quests
+{
+    import com.xvm.*;
+    import com.xvm.infrastructure.*;
+    import flash.utils.*;
+    import net.wg.data.constants.generated.*;
+    import net.wg.gui.lobby.questsWindow.*;
+    import net.wg.gui.events.*;
+    import net.wg.infrastructure.events.*;
+    import net.wg.infrastructure.interfaces.*;
+    import scaleform.clik.events.*;
+
+    public class QuestsXvmView extends XvmViewBase
+    {
+        private static const UI_LINKAGE:String = getQualifiedClassName(UI_QuestsTileChainsView);
+
+        public function QuestsXvmView(view:IView)
+        {
+            super(view);
+        }
+
+        public function get page():QuestsWindow
+        {
+            return super.view as QuestsWindow;
+        }
+
+        public override function onAfterPopulate(e:LifeCycleEvent):void
+        {
+            //Logger.addObject(page);
+        }
+    }
+}

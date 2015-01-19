@@ -175,6 +175,10 @@
     "No data": "Нет данных",
     "Not ready": "Не готов",
 
+    // Quests
+    "Hide with honors": "Скрыть с отличием",
+    "Hide not available": "Скрыть недоступные",
+
     // Config loading
     "XVM config reloaded": "Конфиг XVM перезагружен",
     "Config file xvm.xc was not found, using the built-in config": "Файл конфигурации xvm.xc не найден, используем встроенную конфигурацию",
