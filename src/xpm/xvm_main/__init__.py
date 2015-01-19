@@ -109,23 +109,6 @@ def LoginView_onSetOptions(base, self, optionsList, host):
         self.saveLastSelectedServer(host)
     base(self, optionsList, host)
 
-def PreDefinedHostList_autoLoginQuery(base, callback):
-    #debug('> PreDefinedHostList_autoLoginQuery')
-    import pinger_wg
-    if pinger_wg.request_sent:
-        BigWorld.callback(0, lambda: PreDefinedHostList_autoLoginQuery(base, callback))
-    else:
-        #debug('login ping: start')
-        pinger_wg.request_sent = True
-        BigWorld.WGPinger.setOnPingCallback(PreDefinedHostList_onPingPerformed)
-        base(callback)
-
-def PreDefinedHostList_onPingPerformed(result):
-    #debug('login ping: end')
-    pinger_wg.request_sent = False
-    from predefined_hosts import g_preDefinedHosts
-    g_preDefinedHosts._PreDefinedHostList__onPingPerformed(result)
-
 def onClientVersionDiffers():
     if config.config is None:
         BigWorld.callback(0, onClientVersionDiffers)
@@ -284,10 +267,6 @@ def _RegisterEvents():
     RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
     OverrideMethod(Minimap, '_Minimap__callEntryFlash', _Minimap__callEntryFlash)
     RegisterEvent(Minimap, '_Minimap__addEntryLit', _Minimap__addEntryLit)
-
-    # enable for pinger_wg
-    #from predefined_hosts import g_preDefinedHosts
-    #OverrideMethod(g_preDefinedHosts, 'autoLoginQuery', PreDefinedHostList_autoLoginQuery)
 
     from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
     RegisterEvent(AmmunitionPanel, 'highlightParams', AmmunitionPanel_highlightParams)

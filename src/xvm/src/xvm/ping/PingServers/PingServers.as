@@ -11,6 +11,9 @@ package xvm.ping.PingServers
 
     public class PingServers extends EventDispatcher
     {
+        private static const XPM_COMMAND_PING:String = "xpm.ping";
+        private static const XPM_AS_COMMAND_PINGDATA:String = "xpm.pingdata";
+
         private static var _instance:PingServers = null;
         private static function get instance():PingServers
         {
@@ -61,7 +64,8 @@ package xvm.ping.PingServers
 
         function PingServers()
         {
-            ExternalInterface.addCallback(Cmd.RESPOND_PINGDATA, pingCallback);
+            Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+
             pingTimer = 0;
             pingTimeouts = null;
         }
@@ -69,21 +73,39 @@ package xvm.ping.PingServers
         private function ping():void
         {
             //Logger.add("ping");
-            Cmd.ping();
+            Xvm.cmd(XPM_COMMAND_PING);
         }
 
-        private function pingCallback(answer:String):void
+        private function handleXpmCommand(e:ObjectEvent):void
         {
+            //Logger.add("handleXpmCommand: " + e.result.cmd);
+            try
+            {
+                switch (e.result.cmd)
+                {
+                    case XPM_AS_COMMAND_PINGDATA:
+                        pingCallback(e.result.args[0]);
+                        break;
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+        }
+
+        private function pingCallback(answer:Object):void
+        {
+            //Logger.addObject(answer, 2);
             //Logger.add("pingCallback:" + arguments.toString());
-            if (answer == null || answer == "")
+            if (!answer)
                 return;
 
-            var parsedAnswerObj:Object = JSONx.parse(answer);
             var responseTimeList:Array = [];
-            for (var name:String in parsedAnswerObj)
+            for (var name:String in answer)
             {
                 var cluster:String = StringUtils.startsWith(name, "WOT ") ? name.substring(4) : name;
-                responseTimeList.push({ cluster: cluster, time: parsedAnswerObj[name] });
+                responseTimeList.push({ cluster: cluster, time: answer[name] });
             }
             responseTimeList.sortOn(["cluster"]);
 

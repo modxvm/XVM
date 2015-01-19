@@ -3,8 +3,8 @@
 #############################
 # Command
 
-def ping(proxy):
-    _ping.ping(proxy)
+def ping():
+    _ping.ping()
 
 #############################
 # Private
@@ -17,13 +17,12 @@ import os
 import re
 from subprocess import Popen, PIPE, STARTUPINFO, STARTF_USESHOWWINDOW, SW_HIDE
 
-import simplejson
-
 import BigWorld
 import ResMgr
 
-from logger import *
-from constants import *
+import simplejson
+
+from xvm_main.python.logger import *
 
 #############################
 
@@ -33,7 +32,6 @@ NOTE: ICMP requires root privileges. Don't use it.
 class _Ping(object):
 
     def __init__(self):
-        self.listeners = []
         self.lock = threading.RLock()
         self.thread = None
         self.resp = None
@@ -46,15 +44,11 @@ class _Ping(object):
                     'name':subSec.readStrings('name')[0],
                     'url':subSec.readStrings('url')[0]})
 
-    def ping(self, proxy):
-        if proxy not in self.listeners:
-            self.listeners.append(proxy)
+    def ping(self):
         with self.lock:
             if self.thread is not None:
                 return
-        self._ping()
-
-    def _ping(self):
+        self.resp = None
         # create thread
         self.thread = threading.Thread(target=self._pingAsync)
         self.thread.daemon = False
@@ -77,13 +71,10 @@ class _Ping(object):
 
     def _respond(self):
         #debug("respond: " + simplejson.dumps(self.resp))
-        try:
-            strdata = simplejson.dumps(self.resp)
-            for proxy in self.listeners:
-                if proxy and hasattr(proxy, 'component') and hasattr(proxy, 'movie') and proxy.movie:
-                    proxy.movie.invoke((RESPOND_PINGDATA, [strdata]))
-        finally:
-            self.listeners = []
+        from xfw import g_xvmView
+        if g_xvmView:
+            from . import XPM_AS_COMMAND_PINGDATA
+            g_xvmView.as_xvm_cmdS(XPM_AS_COMMAND_PINGDATA, self.resp)
 
     # Threaded
 

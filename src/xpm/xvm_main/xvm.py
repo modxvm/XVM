@@ -15,8 +15,6 @@ from xfw import *
 import config
 from constants import *
 from logger import *
-from pinger import *
-#from pinger_wg import *
 from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr
@@ -92,9 +90,6 @@ class Xvm(object):
                     self.lang_data = simplejson.loads(self.lang_str)
                 self.sendConfig(self.battleFlashObject)
                 self.sendConfig(self.vmmFlashObject)
-            elif cmd == COMMAND_PING:
-                #return
-                ping(proxy)
             elif cmd == COMMAND_GETSCREENSIZE:
                 #return
                 res = simplejson.dumps(list(GUI.screenResolution()))
