@@ -42,7 +42,7 @@
           "shadow": {}
         },
         { "x": 140, "y": "{{v.marksOnGun?38|37}}", "align": "right",
-          "format": "<font size='13' color='{{v.c_damageRating}}'>{{v.damageRating~%}}</font>",
+          "format": "<font size='13' color='{{v.c_damageRating}}'>{{v.damageRating%.2f~%}}</font>",
           "shadow": ${ "def.textFieldShadow" }
         },
 

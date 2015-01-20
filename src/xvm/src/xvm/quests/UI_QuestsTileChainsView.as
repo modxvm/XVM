@@ -4,9 +4,11 @@ package xvm.quests
     import com.xvm.io.*;
     import flash.events.*;
     import net.wg.gui.components.controls.*;
+    import net.wg.gui.lobby.quests.data.*;
     import net.wg.gui.lobby.quests.data.questsTileChains.*;
     import net.wg.gui.lobby.quests.events.*;
     import org.idmedia.as3commons.util.*;
+    import net.wg.gui.events.*;
 
     public dynamic class UI_QuestsTileChainsView extends QuestsTileChainsViewUI
     {
@@ -16,6 +18,14 @@ package xvm.quests
         {
             //Logger.add("UI_QuestsTileChainsView");
             super();
+
+            tasksScrollingList.addEventListener(ListEventEx.ITEM_CLICK, onListItemSelected);
+        }
+
+        override protected function onDispose():void
+        {
+            tasksScrollingList.removeEventListener(ListEventEx.ITEM_CLICK, onListItemSelected);
+            super.onDispose();
         }
 
         override protected function configUI():void
@@ -34,20 +44,6 @@ package xvm.quests
             }
         }
 
-        override protected function updateTileData(data:QuestTileVO):void
-        {
-            //Logger.addObject(data);
-            try
-            {
-                saveSettings();
-                super.updateTileData(ApplyFilter(data));
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
-        }
-
         override protected function setHeaderData(param1:QuestsTileChainsViewVO):void
         {
             blockFiltersChangedEvent = true;
@@ -55,11 +51,72 @@ package xvm.quests
             blockFiltersChangedEvent = false;
         }
 
+        override protected function updateTileData(data:QuestTileVO):void
+        {
+            //Logger.addObject(data);
+            try
+            {
+                super.updateTileData(ApplyFilter(data));
+                if (loadedSettings != null)
+                {
+                    App.utils.scheduler.envokeInNextFrame(function():void { applyLoadedSettings(); } );
+                }
+                else
+                {
+                    saveSettings();
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+        }
+
+        override protected function updateChainProgress(param1:ChainProgressVO):void
+        {
+            //Logger.add("updateChainProgress: " + param1);
+            super.updateChainProgress(param1);
+
+            App.utils.scheduler.envokeInNextFrame(function():void
+            {
+                //Logger.add("id=" + selectedId);
+                var idx:Number = 0;
+                var item:QuestTaskListRendererVO = null;
+                if (selectedId >= 0)
+                {
+                    var len:int = tasksScrollingList.dataProvider.length;
+                    for (var i:int = 0; i < len; ++i)
+                    {
+                        item = tasksScrollingList.dataProvider.requestItemAt(i) as QuestTaskListRendererVO;
+                        if (item.type == QuestTaskListRendererVO.TASK && item.taskData.id == selectedId)
+                        {
+                            idx = i;
+                            break;
+                        }
+                    }
+                }
+                if (tasksScrollingList.selectedIndex != idx)
+                {
+                    //Logger.add("idx=" + idx);
+                    tasksScrollingList.selectedIndex = idx;
+                    tasksScrollingList.dispatchEvent(new ListEventEx(ListEventEx.ITEM_CLICK, false, true, idx, -1, -1, tasksScrollingList.getRendererAt(idx), item));
+                }
+            });
+        }
+
         // PRIVATE
 
+        private var loadedSettings:Object = null;
+        private var selectedId:Number = -1;
         private var hideFullyCompletedTasks:CheckBox;
         private var hideNotAvailableTasks:CheckBox;
         private var blockFiltersChangedEvent:Boolean = false;
+
+        private function onListItemSelected(e:ListEventEx) : void
+        {
+            selectedId = e.itemData.type == QuestTaskListRendererVO.TASK ? e.itemData.taskData.id : -1;
+            //Logger.add("selectedId=" + selectedId);
+        }
 
         private function createHideFullyCompletedTasksCheckBox():void
         {
@@ -141,20 +198,41 @@ package xvm.quests
 
         private function restoreSettings(json_str:String):void
         {
-            if (json_str == null || json_str == "")
-                return;
             try
             {
-                var settings:Object = JSONx.parse(json_str);
-                taskFilters.vehicleTypeFilter.selectedIndex = settings.vehicleTypeFilter;
-                taskFilters.taskTypeFilter.selectedIndex = settings.taskTypeFilter;
-                taskFilters.hideCompletedTasks.selected = settings.hideCompletedTasks;
-                this.hideFullyCompletedTasks.selected = settings.hideFullyCompletedTasks;
-                this.hideNotAvailableTasks.selected = settings.hideNotAvailableTasks;
+                loadedSettings = (json_str == null || json_str == "") ? null : JSONx.parse(json_str);
             }
             catch (ex:Error)
             {
                 Logger.add(ex.getStackTrace());
+            }
+        }
+
+        private function applyLoadedSettings():void
+        {
+            try
+            {
+                if (loadedSettings == null)
+                    return;
+
+                var selected:QuestTaskListRendererVO = tasksScrollingList.getSelectedVO() as QuestTaskListRendererVO;
+                if (selected == null)
+                    return;
+                selectedId = selected.type == QuestTaskListRendererVO.TASK ? selected.taskData.id : -1;
+
+                taskFilters.vehicleTypeFilter.selectedIndex = loadedSettings.vehicleTypeFilter;
+                taskFilters.taskTypeFilter.selectedIndex = loadedSettings.taskTypeFilter;
+                taskFilters.hideCompletedTasks.selected = loadedSettings.hideCompletedTasks;
+                this.hideFullyCompletedTasks.selected = loadedSettings.hideFullyCompletedTasks;
+                this.hideNotAvailableTasks.selected = loadedSettings.hideNotAvailableTasks;
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+            finally
+            {
+                loadedSettings = null;
             }
         }
     }
