@@ -16,7 +16,9 @@ package xvm.crew
 
         private static const _views:Object =
         {
+            /* TODO:0.9.6
             "hangar": CrewXvmView
+            */
         }
 
         public override function get views():Object

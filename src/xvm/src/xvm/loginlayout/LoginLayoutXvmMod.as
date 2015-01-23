@@ -16,7 +16,9 @@ package xvm.loginlayout
 
         private static const _views:Object =
         {
+            /* TODO:0.9.6
             "login": LoginLayoutXvmView
+            */
         }
 
         public override function get views():Object

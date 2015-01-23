@@ -62,6 +62,7 @@ package xvm.autologin
 
         private function autoLogin(page:LoginPage):void
         {
+            /* TODO:0.9.6
             App.utils.scheduler.scheduleTask(function():void
             {
                 if (!ready)
@@ -71,6 +72,7 @@ package xvm.autologin
                 if (rememberPwdCheckbox.selected)
                     page.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
             }, 100);
+            */
         }
     }
 }
