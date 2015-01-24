@@ -4,11 +4,14 @@
  */
 package xvm.loginlayout
 {
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import net.wg.gui.components.controls.TextInput;
-    import net.wg.gui.login.impl.LoginPage;
-    import net.wg.infrastructure.events.LifeCycleEvent;
-    import net.wg.infrastructure.interfaces.IView;
+    import net.wg.gui.components.controls.*;
+    import net.wg.gui.events.*;
+    import net.wg.gui.login.impl.*;
+    import net.wg.gui.login.impl.views.*;
+    import net.wg.infrastructure.events.*;
+    import net.wg.infrastructure.interfaces.*;
 
     public class LoginLayoutXvmView extends XvmViewBase
     {
@@ -24,20 +27,23 @@ package xvm.loginlayout
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            initLoginLayout();
+            page.viewStackLoginForm.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
+        }
+
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            page.viewStackLoginForm.removeEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
         }
 
         // PRIVATE
 
-        private function initLoginLayout():void
+        private function onViewChanged(e:ViewStackEvent):void
         {
-            var login:TextInput = page.form.login as TextInput;
-            var pass:TextInput = page.form.pass as TextInput;
-            if (!login || !pass)
+            var form:SimpleForm = e.view as SimpleForm;
+            if (form == null || form.login == null || form.pass == null)
                 return;
-
-            login.textField.restrict = "a-z A-Z 0-9 _ \\- @ .";
-            pass.textField.restrict = "a-z A-Z 0-9 _";
+            form.login.textField.restrict = "a-z A-Z 0-9 _ \\- @ .";
+            form.pass.textField.restrict = "a-z A-Z 0-9 _";
         }
     }
 }
