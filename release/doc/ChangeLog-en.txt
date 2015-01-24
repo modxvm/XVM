@@ -1,7 +1,8 @@
-﻿XVM-6.0.0:
+﻿XVM-6.0.0-dev:
+  * adaptation to Wot 0.9.6
   * XFW: XVM Framework
   * New mod xvm_quests for personal missions.
-	Currently implemented new filters and saving filters settings
+    Currently implemented new filters and saving filters settings
 
 XVM-5.5.1.1:
   * fixed Application.swf
