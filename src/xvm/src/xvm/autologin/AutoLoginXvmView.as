@@ -10,9 +10,11 @@ package xvm.autologin
     import flash.ui.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.components.windows.*;
+    import net.wg.gui.events.*;
     import net.wg.gui.intro.*;
     import net.wg.gui.lobby.dialogs.*;
     import net.wg.gui.login.impl.*;
+    import net.wg.gui.login.impl.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.constants.*;
@@ -29,10 +31,23 @@ package xvm.autologin
             super(view);
         }
 
+        public function get loginPage():LoginPage
+        {
+            return super.view as LoginPage;
+        }
+
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             initAutoLogin();
         }
+
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            if (loginPage != null)
+                loginPage.viewStackLoginForm.removeEventListener(ViewStackEvent.VIEW_CHANGED, autoLogin);
+        }
+
+        // PRIVATE
 
         private function initAutoLogin():void
         {
@@ -45,8 +60,8 @@ package xvm.autologin
                     break;
 
                 case "login":
-                    if (Config.config.login.autologin == true)
-                        autoLogin(view as LoginPage);
+                    if (loginPage != null)
+                        loginPage.viewStackLoginForm.addEventListener(ViewStackEvent.VIEW_CHANGED, autoLogin);
                     break;
 
                 case "lobby":
@@ -60,19 +75,40 @@ package xvm.autologin
             intro.videoPlayer.stopPlayback();
         }
 
-        private function autoLogin(page:LoginPage):void
+        private function autoLogin(e:ViewStackEvent):void
         {
-            /* TODO:0.9.6
+            if (Config.config.login.autologin != true)
+                return;
+
+            if (!ready)
+                return;
+            ready = false;
+
+            if (e.view is SocialForm)
+            {
+                doAutologin();
+            }
+            else
+            {
+                var form:SimpleForm = e.view as SimpleForm;
+                if (form)
+                {
+                    App.utils.scheduler.scheduleTask(function():void
+                    {
+                        if (form.rememberPwdCheckbox.selected)
+                            doAutologin();
+                    }, 100);
+                }
+            }
+        }
+
+        private function doAutologin():void
+        {
             App.utils.scheduler.scheduleTask(function():void
             {
-                if (!ready)
-                    return;
-                ready = false;
-                var rememberPwdCheckbox:CheckBox = page.form.rememberPwdCheckbox;
-                if (rememberPwdCheckbox.selected)
-                    page.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
+                if (loginPage != null)
+                    loginPage.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
             }, 100);
-            */
         }
     }
 }
