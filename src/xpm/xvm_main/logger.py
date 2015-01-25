@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2014 """
+""" XVM (c) www.modxvm.com 2013-2015 """
 
 from constants import XVM_LOG_FILE_NAME
 from xfw import Logger
