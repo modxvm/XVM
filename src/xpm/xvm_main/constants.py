@@ -10,7 +10,6 @@ XVM_WS_URL = "wss://echo.websocket.org/"
 # DAAPI commands
 
 XVM_COMMAND_GET_SVC_SETTINGS = "xvm.get_svc_settings"
-XVM_COMMAND_UNLOAD_TANKMAN = "xvm.unload_tankman"
 XVM_COMMAND_GET_BATTLE_LEVEL = "xvm.get_battle_level"
 
 XVM_AS_COMMAND_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"
@@ -25,7 +24,6 @@ COMMAND_LOADBATTLESTAT = "loadBattleStat"
 COMMAND_LOADBATTLERESULTSSTAT = "loadBattleResultsStat"
 COMMAND_LOADUSERDATA = "loadUserData"
 COMMAND_GETDOSSIER = "getDossier"
-COMMAND_RETURN_CREW = "returnCrew"
 COMMAND_OPEN_URL = "openUrl"
 COMMAND_LOAD_SETTINGS = "load_settings"
 COMMAND_SAVE_SETTINGS = "save_settings"

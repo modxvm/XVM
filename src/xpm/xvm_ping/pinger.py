@@ -22,6 +22,8 @@ import ResMgr
 
 import simplejson
 
+from xfw import *
+
 from xvm_main.python.logger import *
 
 #############################
@@ -71,10 +73,8 @@ class _Ping(object):
 
     def _respond(self):
         #debug("respond: " + simplejson.dumps(self.resp))
-        from xfw import g_xvmView
-        if g_xvmView:
-            from . import XPM_AS_COMMAND_PINGDATA
-            g_xvmView.as_xvm_cmdS(XPM_AS_COMMAND_PINGDATA, self.resp)
+        from . import XPM_AS_COMMAND_PINGDATA
+        as_xvm_cmd(XPM_AS_COMMAND_PINGDATA, self.resp)
 
     # Threaded
 

@@ -6,12 +6,14 @@
 package xvm.crew
 {
     import com.xvm.*;
+    import com.xvm.events.*;
     import com.xvm.io.*;
     import com.xvm.utils.*;
     import flash.display.*;
-    import flash.events.MouseEvent;
+    import flash.events.*;
     import flash.utils.*;
     import net.wg.data.components.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.data.VO.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.hangar.*;
@@ -20,6 +22,10 @@ package xvm.crew
 
     public class CrewLoader extends Sprite
     {
+        private static const PUT_OWN_CREW:String = 'xvm_crew.as_PutOwnCrew';
+        private static const PUT_BEST_CREW:String = 'xvm_crew.as_PutBestCrew';
+        private static const PUT_CLASS_CREW:String = 'xvm_crew.as_PutClassCrew';
+
         private static var _instance:CrewLoader = null;
 
         private static function get instance():CrewLoader
@@ -42,6 +48,7 @@ package xvm.crew
         function CrewLoader():void
         {
             page = null;
+            Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
         }
 
         private function handleMouseRelease(e:MouseEvent):void
@@ -54,67 +61,25 @@ package xvm.crew
 
             if (App.utils.commons.isRightButton(e) && renderer.enabled)
             {
-                if (!data.tankmanID || data.tankmanID < 0)
-                {
-                    App.contextMenuMgr.show(Vector.<IContextItem>([
-                        new ContextItem("PutOwnCrew", Locale.get("PutOwnCrew")),
-                        new SeparateItem(),
-                        new ContextItem("PutBestCrew", Locale.get("PutBestCrew")),
-                        new SeparateItem(),
-                        new ContextItem("PutClassCrew", Locale.get("PutClassCrew")),
-                        new SeparateItem(),
-                        new ContextItem("PutPreviousCrew", Locale.get("PutPreviousCrew"))
-                    ]), this, this.onContextMenuAction, renderer);
-                }
-                else
-                {
-                    App.contextMenuMgr.show(Vector.<IContextItem>([
-                        new UserContextItem("personalCase"),
-                        new SeparateItem(),
-                        new UserContextItem("tankmanUnload"),
-                        new SeparateItem(),
-                        new ContextItem("UnloadAllCrew", Locale.get("DropAllCrew"))
-                    ]), this, this.onContextMenuAction, renderer);
-                }
+                App.contextMenuMgr.show(CONTEXT_MENU_HANDLER_TYPE.CREW, this, { "tankmanID": (!data.tankmanID || data.tankmanID < 0) ? 0 : data.tankmanID });
+                App.toolTipMgr.hide();
             }
         }
 
-        private function onContextMenuAction(e:ContextMenuEvent):void
+        private function handleXpmCommand(e:ObjectEvent):void
         {
+            //Logger.add("handleXpmCommand: " + e.result.cmd);
             try
             {
-                var renderer:CrewItemRenderer = e.memberItemData as CrewItemRenderer;
-
-                switch (e.id)
+                switch (e.result.cmd)
                 {
-                    // original
-                    case "personalCase":
-                        renderer.openPersonalCase();
-                        break;
-
-                    case "tankmanUnload":
-                        Xvm.cmd(Defines.XVM_COMMAND_UNLOAD_TANKMAN, renderer.data.tankmanID);
-                        break;
-
-                    // from crew button
-                    case "PutPreviousCrew":
-                        Cmd.returnCrew();
-                        break;
-
-                    case "UnloadAllCrew":
-                        page.crew.unloadAllTankman();
-                        break;
-
-                    // added by XVM
-                    case "PutOwnCrew":
+                    case PUT_OWN_CREW:
                         GetCrew(CheckOwn);
                         break;
-
-                    case "PutBestCrew":
+                    case PUT_BEST_CREW:
                         GetCrew(CheckBest);
                         break;
-
-                    case "PutClassCrew":
+                    case PUT_CLASS_CREW:
                         GetCrew(CheckClass);
                         break;
                 }
@@ -127,39 +92,46 @@ package xvm.crew
 
         private function GetCrew(checkFunc:Function):void
         {
-            /** tankmanId: { tankman:Object, slot:Number } */
-            var selectedTankmans:Dictionary = new Dictionary();
-
-            for each (var renderer:RecruitRendererVO in page.crew.list.dataProvider)
+            try
             {
-                if (renderer.inTank == true)
-                    continue;
+                // tankmanId: { tankman:Object, slot:Number }
+                var selectedTankmans:Dictionary = new Dictionary();
 
-                    var best:Object = null;
-                    for (var i:int = 1; i < renderer.recruitList.length; i++)
-                    {
-                        var tankman:Object = renderer.recruitList[i];
+                for each (var renderer:RecruitRendererVO in page.crew.list.dataProvider)
+                {
+                    if (renderer.inTank == true)
+                        continue;
 
-                        // already in tank or selected for other slot
-                        if (tankman.inTank == true || selectedTankmans.hasOwnProperty(tankman.tankmanID))
-                            continue;
-
-                        // first tankman in RecruitRendererVO.recruitList contain tank info
-                        if (checkFunc(tankman, best, renderer.recruitList[0], renderer.vehicleElite))
+                        var best:Object = null;
+                        for (var i:int = 1; i < renderer.recruitList.length; i++)
                         {
-                            //Logger.addObject(best, "crew: old best");
-                            //Logger.addObject(tankman, "crew: new best");
-                            best = tankman;
-                        }
-                    }
-                    if (best != null)
-                    {
-                        selectedTankmans[best.tankmanID] = {tankman: best, slot: renderer.slot};
-                    }
-            }
+                            var tankman:Object = renderer.recruitList[i];
 
-            for each (var obj:Object in selectedTankmans)
-                page.crew.equipTankman(obj.tankman.tankmanID, obj.slot);
+                            // already in tank or selected for other slot
+                            if (tankman.inTank == true || selectedTankmans.hasOwnProperty(tankman.tankmanID))
+                                continue;
+
+                            // first tankman in RecruitRendererVO.recruitList contain tank info
+                            if (checkFunc(tankman, best, renderer.recruitList[0], renderer.vehicleElite))
+                            {
+                                //Logger.addObject(best, "crew: old best");
+                                //Logger.addObject(tankman, "crew: new best");
+                                best = tankman;
+                            }
+                        }
+                        if (best != null)
+                        {
+                            selectedTankmans[best.tankmanID] = {tankman: best, slot: renderer.slot};
+                        }
+                }
+
+                for each (var obj:Object in selectedTankmans)
+                    page.crew.equipTankman(obj.tankman.tankmanID, obj.slot);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         private function CheckOwn(tankman:Object, best:Object, slot:Object, isPremVehicle:Boolean):Boolean

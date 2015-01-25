@@ -59,9 +59,6 @@ class Xvm(object):
             if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
                 token.getToken()
                 return (token.networkServicesSettings, True)
-            elif cmd == XVM_COMMAND_UNLOAD_TANKMAN:
-                wgcompat.g_instance.unloadTankman(args[0])
-                return (None, True)
             elif cmd == XVM_COMMAND_GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:
@@ -104,8 +101,6 @@ class Xvm(object):
                 getUserData(proxy, args)
             elif cmd == COMMAND_GETDOSSIER:
                 getDossier(proxy, args)
-            elif cmd == COMMAND_RETURN_CREW:
-                wgcompat.g_instance.processReturnCrew()
             elif cmd == COMMAND_OPEN_URL:
                 if len(args[0]):
                     utils.openWebBrowser(args[0], False)
@@ -284,8 +279,7 @@ class Xvm(object):
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
 
-        from xfw import g_xvmView
-        g_xvmView.as_xvm_cmdS(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
+        as_xvm_cmd(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
 
     def hangarDispose(self):
         from CurrentVehicle import g_currentVehicle

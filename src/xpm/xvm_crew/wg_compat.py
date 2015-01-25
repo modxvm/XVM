@@ -15,15 +15,4 @@ class _WGCompat():
         if len(result.userMsg):
             SystemMessages.g_instance.pushI18nMessage(result.userMsg, type = result.sysMsgType)
 
-    # removed in 0.9.5
-    @decorators.process('unloading')
-    def unloadTankman(self, tmanInvID):
-        from gui.shared import g_itemsCache
-        from gui.shared.gui_items.processors.tankman import TankmanUnload
-        from CurrentVehicle import g_currentVehicle
-        tankman = g_itemsCache.items.getTankman(int(tmanInvID))
-        result = yield TankmanUnload(g_currentVehicle.item, tankman.vehicleSlotIdx).request()
-        if len(result.userMsg):
-            SystemMessages.g_instance.pushI18nMessage(result.userMsg, type = result.sysMsgType)
-
 g_instance = _WGCompat()
