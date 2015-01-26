@@ -25,7 +25,6 @@ import utils
 import userprefs
 from websock import g_websock
 from minimap_circles import g_minimap_circles
-import wgcompat
 from test import runTest
 
 _LOG_COMMANDS = (
