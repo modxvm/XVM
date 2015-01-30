@@ -91,7 +91,7 @@ def onXvmCommand(proxy, id, cmd, *args):
         res = None
 
         if cmd == COMMAND_GETCOMMENTS:
-            res = comments.getXvmUserComments(args[0])
+            res = comments.getXvmUserComments(False)
         else:
             return
 
