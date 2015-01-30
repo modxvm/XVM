@@ -46,9 +46,9 @@ class com.xvm.Macros
         _instance._RegisterMarkerData(pname, data);
     }
 
-    public static function RegisterCommentsData(json_str:String)
+    public static function RegisterCommentsData(comments:Object)
     {
-        _instance._RegisterCommentsData(json_str);
+        _instance._RegisterCommentsData(comments);
     }
 
     // PRIVATE
@@ -820,17 +820,9 @@ class com.xvm.Macros
         pdata["turret"] = data.turret || "";
     }
 
-    public function _RegisterCommentsData(json_str:String)
+    public function _RegisterCommentsData(comments:Object)
     {
-        try
-        {
-            m_comments = JSONx.parse(json_str).players;
-            //Logger.addObject(m_comments, 2);
-        }
-        catch (ex)
-        {
-            Logger.add("RegisterCommentsData: ERROR: " + Utils.parseError(ex));
-        }
+        m_comments = comments;
     }
 
     // PRIVATE

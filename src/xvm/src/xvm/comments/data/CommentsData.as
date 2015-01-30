@@ -25,7 +25,7 @@
                     for (var id:String in obj.players)
                     {
                         var d:Object = obj.players[id];
-                        res.players[id] = new PlayerCommentData(d.nick, d.group, d.comment);
+                        res.players[id] = new PlayerCommentData(d.nick, d.comment);
                     }
                 }
             }

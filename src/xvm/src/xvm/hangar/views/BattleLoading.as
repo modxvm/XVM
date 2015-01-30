@@ -48,10 +48,10 @@ package xvm.hangar.views
             try
             {
                 var json_str:String = Xvm.cmd(XPM_COMMAND_GET_COMMENTS);
-                Logger.addObject(json_str);
+                //Logger.addObject(json_str);
                 var o:Object = JSONx.parse(json_str);
                 var comments:Object = (o != null && o.hasOwnProperty("players")) ? o.players : null;
-                Logger.addObject(comments);
+                //Logger.addObject(comments);
                 Macros.RegisterCommentsData(comments);
             }
             catch (ex:Error)

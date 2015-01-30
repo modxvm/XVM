@@ -21,7 +21,7 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, vehInfoData:String, networkServicesSettings:String, comments:String)
+    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, vehInfoData:String, networkServicesSettings:String)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
@@ -32,7 +32,8 @@ class com.xvm.Config
             Macros.RegisterBattleTierData(battleLevel);
             VehicleInfo.onVehicleInfoData(vehInfoData);
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
-            Macros.RegisterCommentsData(comments);
+
+            Cmd.getComments( TODO );
 
             Logger.add("Config: Loaded");
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );
