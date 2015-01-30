@@ -26,6 +26,6 @@ class wot.VehicleMarkersManager.ErrorHandler
         et.multiline = true;
         et.setNewTextFormat(new TextFormat("$FieldFont", 12, 0xFF6666, false, false, false, null, null, "left"));
         et.html = true;
-        et.filters = [new DropShadowFilter(0, 0, 0, 100, 3, 3, 2, 3)];
+        et.filters = [new DropShadowFilter(0, 0, 0, 100, 3, 3, 2)];
     }
 }

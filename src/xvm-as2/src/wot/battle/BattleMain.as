@@ -170,7 +170,7 @@ class wot.battle.BattleMain
         var tf: TextFormat = fps.getNewTextFormat();
         clock.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_clock",
             tf.color, tf.font, tf.size, "left", tf.bold, tf.italic));
-        clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
+        clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5)];
 
         _global.setInterval(function() {
             clock.htmlText = Utils.fixImgTag("<span class='xvm_clock'>" + Strings.FormatDate(format, new Date()) + "</span>");

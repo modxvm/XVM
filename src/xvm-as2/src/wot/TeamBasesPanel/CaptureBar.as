@@ -152,8 +152,8 @@ class wot.TeamBasesPanel.CaptureBar
         * Shadow style and new macro should be defined already.
         * If not, than original WG data will be displayed to user before first update tick.
         */
-        wrapper.m_titleTF.filters = getShadowFilter(capColor);
-        wrapper.m_timerTF.filters = getShadowFilter(capColor);
+        wrapper.m_titleTF.filters = [getShadowFilter(capColor)];
+        wrapper.m_timerTF.filters = [getShadowFilter(capColor)];
         wrapper.m_titleTF.htmlText = m_macro.getPrimaryText();
         wrapper.m_timerTF.htmlText = m_macro.getSecondaryText();
     }
@@ -213,20 +213,27 @@ class wot.TeamBasesPanel.CaptureBar
 
     // -- Private
 
-    private function getShadowFilter():Array
+    private function getShadowFilter():DropShadowFilter
     {
-        return [new DropShadowFilter(
+        var alpha = CapConfig.shadowAlpha(m_capColor);
+        if (!alpha)
+            return null;
+        var blur = CapConfig.shadowBlur(m_capColor);
+        if (blur)
+            return null;
+        var strength = CapConfig.shadowStrength(m_capColor);
+        if (strength)
+            return null;
+        return new DropShadowFilter(
                 0, // distance
                 0, // angle
                 CapConfig.shadowColor(m_capColor),
                 // DropShadowFilter accepts alpha be from 0 to 1.
                 // 90 at default config.
-                CapConfig.shadowAlpha(m_capColor) / 100,
-                CapConfig.shadowBlur(m_capColor),
-                CapConfig.shadowBlur(m_capColor),
-                CapConfig.shadowStrength(m_capColor),
-                3 // quality
-            )];
+                alpha / 100,
+                blur,
+                blur,
+                strength);
     }
 
    /**

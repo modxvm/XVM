@@ -460,16 +460,17 @@ class wot.PlayersPanel.PlayerListItemRenderer
             tf.borderColor = tf.backgroundColor;
         }
 
-        if (format.shadow != null)
+        if (format.shadow && format.shadow.alpha != 0 && format.shadow.strength != 0 && format.shadow.blur != 0)
         {
+            var blur = format.shadow.blur != null ? format.shadow.blur : 2;
             tf.filters = [
                 new DropShadowFilter(
                     format.shadow.distance != null ? format.shadow.distance : 0,
                     format.shadow.angle != null ? format.shadow.angle : 0,
                     format.shadow.color != null ? parseInt(format.shadow.color) : 0x000000,
                     format.shadow.alpha != null ? format.shadow.alpha : 0.75,
-                    format.shadow.blur != null ? format.shadow.blur : 2,
-                    format.shadow.blur != null ? format.shadow.blur : 2,
+                    blur,
+                    blur,
                     format.shadow.strength != null ? format.shadow.strength : 1)
             ];
         }

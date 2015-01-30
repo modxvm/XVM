@@ -33,7 +33,7 @@ class com.xvm.Config
             VehicleInfo.onVehicleInfoData(vehInfoData);
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
 
-            Cmd.getComments( TODO );
+            Cmd.getComments(this, onGetCommentsCallback);
 
             Logger.add("Config: Loaded");
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );
@@ -41,6 +41,20 @@ class com.xvm.Config
         catch (ex)
         {
             Logger.add("CONFIG LOAD ERROR: " + Utils.parseError(ex));
+        }
+    }
+
+    private function onGetCommentsCallback(json_str:String)
+    {
+        try
+        {
+            var comments:Object = JSONx.parse(json_str).players;
+            //Logger.addObject(comments, 2);
+            Macros.RegisterCommentsData(comments);
+        }
+        catch (ex)
+        {
+            Logger.add("onGetCommentsCallback: ERROR: " + Utils.parseError(ex));
         }
     }
 }

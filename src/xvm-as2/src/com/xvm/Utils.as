@@ -463,17 +463,17 @@ class com.xvm.Utils
     /** Create DropShadowFilter from config section */
     public static function extractShadowFilter(source:Object):DropShadowFilter
     {
+        if (!source || !source.alpha || !source.strength || !source.blur)
+            return null;
         return new DropShadowFilter(
             source.distance, // distance
             source.angle, // angle
             parseInt(source.color, 16),
             // DropShadowFilter accepts alpha be from 0 to 1.
             // 90 at default config.
-            source.alpha / 100,
+            source.alpha * 0.01,
             source.blur,
             source.blur,
-            source.strength,
-            3 // quality
-        )
+            source.strength);
     }
 }

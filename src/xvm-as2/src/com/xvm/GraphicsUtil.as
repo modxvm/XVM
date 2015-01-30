@@ -12,9 +12,9 @@ class com.xvm.GraphicsUtil
     public static function createShadowFilter(distance:Number, angle:Number, color:Number,
         alpha:Number, size:Number, strength:Number):DropShadowFilter
     {
-        if (alpha == null || strength == null || size == null)
+        if (!alpha || !strength || !size)
             return null;
-        return new DropShadowFilter(distance, angle, color, alpha * 0.01, size, size, strength * 0.01, 3);
+        return new DropShadowFilter(distance, angle, color, alpha * 0.01, size, size, strength * 0.01);
     }
 
     public static function colorByRatio($value:Number, $start:Number, $end:Number):Number
