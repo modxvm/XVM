@@ -465,11 +465,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
             tf.filters = [
                 new DropShadowFilter(
                     format.shadow.distance != null ? format.shadow.distance : 0,
-                    format.shadow.angle != null ? format.shadow.angle : 45,
+                    format.shadow.angle != null ? format.shadow.angle : 0,
                     format.shadow.color != null ? parseInt(format.shadow.color) : 0x000000,
-                    format.shadow.alpha != null ? format.shadow.alpha : 1,
-                    format.shadow.blur != null ? format.shadow.blur : 4,
-                    format.shadow.blur != null ? format.shadow.blur : 4,
+                    format.shadow.alpha != null ? format.shadow.alpha : 0.75,
+                    format.shadow.blur != null ? format.shadow.blur : 2,
+                    format.shadow.blur != null ? format.shadow.blur : 2,
                     format.shadow.strength != null ? format.shadow.strength : 1)
             ];
         }
