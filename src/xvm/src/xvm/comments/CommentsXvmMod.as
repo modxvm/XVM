@@ -17,9 +17,7 @@ package xvm.comments
 
         private static const _views:Object =
         {
-            /* TODO:0.9.6
-            "messenger/contactsWindow": CommentsXvmView
-            */
+            "ContactsPopover": CommentsXvmView
         }
 
         public override function get views():Object

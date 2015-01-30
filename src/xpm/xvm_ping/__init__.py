@@ -45,8 +45,9 @@ def fini():
 # onXpmCommand
 
 _LOG_COMMANDS = (
-  #XPM_COMMAND_PING,
-  )
+    #XPM_COMMAND_PING,
+    )
+
 # returns: (result, status)
 def onXpmCommand(cmd, *args):
     try:
@@ -57,6 +58,7 @@ def onXpmCommand(cmd, *args):
             return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
+        return (None, True)
     return (None, False)
 
 

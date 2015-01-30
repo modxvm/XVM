@@ -12,15 +12,14 @@ def setXvmUserComments(value):
 
 from random import randint
 import traceback
-import urllib
 
 import simplejson
 
-from constants import *
-from loadurl import loadUrl
-from logger import *
-import token
-import utils
+from xvm_main.python.constants import *
+from xvm_main.python.loadurl import loadUrl
+from xvm_main.python.logger import *
+import xvm_main.python.token as token
+import xvm_main.python.utils as utils
 
 class _Comments:
     def __init__(self):

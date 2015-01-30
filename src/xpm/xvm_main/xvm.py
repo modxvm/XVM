@@ -20,7 +20,6 @@ from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr
 import vehstate
 import token
-import comments
 import utils
 import userprefs
 from websock import g_websock
@@ -28,11 +27,11 @@ from minimap_circles import g_minimap_circles
 from test import runTest
 
 _LOG_COMMANDS = (
-  COMMAND_LOADBATTLESTAT,
-  COMMAND_LOADBATTLERESULTSSTAT,
-  COMMAND_LOGSTAT,
-  COMMAND_TEST,
-  )
+    COMMAND_LOADBATTLESTAT,
+    COMMAND_LOADBATTLERESULTSSTAT,
+    COMMAND_LOGSTAT,
+    COMMAND_TEST,
+    )
 
 class Xvm(object):
     def __init__(self):
@@ -55,6 +54,7 @@ class Xvm(object):
         try:
             if (cmd in _LOG_COMMANDS):
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
+
             if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
                 token.getToken()
                 return (token.networkServicesSettings, True)
@@ -66,6 +66,7 @@ class Xvm(object):
 
         except Exception, ex:
             err(traceback.format_exc())
+            return (None, True)
 
         return (None, False)
 
@@ -107,10 +108,6 @@ class Xvm(object):
                 res = userprefs.get(args[0])
             elif cmd == COMMAND_SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
-            elif cmd == COMMAND_GETCOMMENTS:
-                res = comments.getXvmUserComments(args[0])
-            elif cmd == COMMAND_SETCOMMENTS:
-                res = comments.setXvmUserComments(args[0])
             elif cmd == COMMAND_CAPTUREBARGETBASENUM:
                 n = int(args[0])
                 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
@@ -118,7 +115,7 @@ class Xvm(object):
             elif cmd == COMMAND_TEST:
                 runTest(args)
             else:
-                err("unknown command: " + str(cmd))
+                return
             proxy.movie.invoke(('xvm.respond',
                 [id] + res if isinstance(res, list) else [id, res]))
         except Exception, ex:
@@ -477,8 +474,7 @@ class Xvm(object):
                     self.lang_str,
                     BigWorld.player().arena.extraData.get('battleLevel', 0),
                     getVehicleInfoDataStr(),
-                    simplejson.dumps(token.networkServicesSettings),
-                    comments.getXvmUserComments(not isReplay())]))
+                    simplejson.dumps(token.networkServicesSettings)]))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 

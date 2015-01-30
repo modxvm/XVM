@@ -76,11 +76,11 @@ package xvm.comments.UI
 
         private function showContextMenu(e:SendInvitesEvent) : void
         {
-            if (e.initItem)
+/* TODO:0.9.6            if (e.initItem)
             {
                 var menu:IContextMenu = App.contextMenuMgr.showUserContextMenu(this, e.initItem, new PrbSendInviteCIGeneratorX());
                 DisplayObject(menu).addEventListener(ContextMenuEvent.ON_ITEM_SELECT, this.onContextMenuAction);
-            }
+            }*/
         }
 
         private function onContextMenuAction(e:ContextMenuEvent):void
