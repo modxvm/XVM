@@ -477,7 +477,7 @@ _data = {
     'uk:GB20_Crusader':                 'Crus',
     'ussr:Matilda_II_LL':               'MatLL',
     'germany:PzIV_Hydro':               'Pz4H',
-    'germany:Stug_IV':                  'StugIV'
+    'germany:Stug_IV':                  'StugIV',
     'usa:M4A2E4':                       'SheE4',
     'uk:GB68_Matilda_Black_Prince':     'MatilBP',
     'japan:Chi_Nu_Kai':                 'ChiNuKai',
