@@ -23,7 +23,6 @@ import ResMgr
 import simplejson
 
 from xfw import *
-
 from xvm_main.python.logger import *
 
 #############################

@@ -155,5 +155,9 @@
 
   // Vehicle names mapping.
   // Замена названий танков.
-  "vehicleNames": ${"vehicleNames.xc":"vehicleNames"}
+  "vehicleNames": ${"vehicleNames.xc":"vehicleNames"},
+
+  // Export data
+  // Выгрузка данных
+  "export": ${"export.xc":"export"}
 }

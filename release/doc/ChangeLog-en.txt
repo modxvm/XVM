@@ -8,6 +8,7 @@
     Source: http://forum.worldoftanks.eu/index.php?/topic/468409-/
   * added texts/xvmuser section with text replacements for {{xvm-user}} macro.
     Available values: "on", "off", "none".
+  * added new mod xvm_export, and config section "export".
 
 XVM-5.5.1.1:
   * fixed Application.swf

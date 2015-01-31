@@ -183,5 +183,10 @@
       //"enemy_allytk_kill":     "0x00EAFF"
     }
   },
+  "export": {
+    "fps": {
+      "enabled": true
+    }
+  },
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }

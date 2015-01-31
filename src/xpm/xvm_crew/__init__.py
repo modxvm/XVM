@@ -13,7 +13,6 @@ XFW_GAME_VERSIONS  = ["0.9.6"]
 import BigWorld
 
 from xfw import *
-
 from xvm_main.python.logger import *
 
 import wg_compat

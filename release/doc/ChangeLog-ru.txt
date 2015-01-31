@@ -8,6 +8,7 @@
     нормальное распределение. Источник: http://forum.worldoftanks.eu/index.php?/topic/468409-/
   * добавлена секция texts/xvmuser с подстановками текста для макроса {{xvm-user}}.
     Доступные значения: "on", "off", "none".
+  * добавлен новый мод xvm_export и секция конфига "export".
 
 XVM-5.5.1.1:
   * исправлен Application.swf

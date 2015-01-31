@@ -26,9 +26,8 @@ import traceback
 
 import BigWorld
 
-from xfw import *
 import simplejson
-
+from xfw import *
 from xvm_main.python.logger import *
 
 import comments

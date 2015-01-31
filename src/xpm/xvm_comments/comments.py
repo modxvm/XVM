@@ -14,7 +14,6 @@ from random import randint
 import traceback
 
 import simplejson
-
 from xvm_main.python.constants import *
 from xvm_main.python.loadurl import loadUrl
 from xvm_main.python.logger import *
