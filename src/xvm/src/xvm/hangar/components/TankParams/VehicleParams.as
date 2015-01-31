@@ -21,6 +21,9 @@ package xvm.hangar.components.TankParams
             if (params == null)
                 return;
 
+            if (!Config.config.minimap.circles._internal.is_full_crew)
+                return;
+
             var list:WgScrollingList = params.list;
             var dp:DataProvider = list.dataProvider as DataProvider;
             //Logger.addObject(dp, 2);

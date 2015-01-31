@@ -19,6 +19,7 @@ class _MinimapCircles(object):
     def clear(self):
         self.item = None
         self.crew = []
+        self.is_full_crew = False
         self.view_distance_vehicle = 0
         self.base_commander_skill = 100.0
         self.base_radioman_skill = 0.0
@@ -164,6 +165,7 @@ class _MinimapCircles(object):
         # Set values
         cfg['_internal'] = {
             'vehId': descr.type.compactDescr,
+            'is_full_crew': self.is_full_crew,
             'base_commander_skill': self.base_commander_skill,
             'base_radioman_skill': self.base_radioman_skill,
             'base_loaders_skill': self.base_loaders_skill,
@@ -191,10 +193,13 @@ class _MinimapCircles(object):
         from gui.shared.utils.requesters.deprecated import Requester
 
         self.crew = []
+        self.is_full_crew = True
         barracks = yield Requester('tankman').getFromInventory()
         for tankman in barracks:
             for crewman in self.item.crew:
-                if crewman[1] is not None and crewman[1].invID == tankman.inventoryId:
+                if crewman[1] is None:
+                    self.is_full_crew = False
+                elif crewman[1].invID == tankman.inventoryId:
                     (factor, addition) = tankman.descriptor.efficiencyOnVehicle(self.item.descriptor)
                     crew_member = {
                         'level': tankman.roleLevel * factor,
