@@ -49,14 +49,14 @@ package xvm.comments.UI
                             {
                                 if (pd.nick != null)
                                 {
-                                    Logger.addObject(d.data, 3);
-                                    d.data.originalDisplayName = d.data.userProps.userName;
-                                    d.data.userProps.userName = pd.nick;
+                                    d.data.xvm_originalUserName = d.data.userProps.userName;
+                                    //d.data.userProps.userName = pd.nick;
+                                    d.data.xvm_userName = pd.nick;
                                 }
 
                                 if (pd.comment != null)
                                 {
-                                    d.data.comment = pd.comment;
+                                    d.data.xvm_comment = pd.comment;
                                 }
                             }
                             nickImg.visible = pd != null && pd.nick != null && pd.nick != "";
@@ -80,11 +80,13 @@ package xvm.comments.UI
             if (!d)
                 return;
 
-            var comment:String = d.data.comment;
+            var comment:String = d.data.xvm_comment;
             if (!comment)
                 return;
 
-            var userName:String = d.data.originalDisplayName || d.data.userProps.userName;
+            //var userPropsVO:IUserProps = new ContactItemVO(d.data).userPropsVO;
+            //var userName:String = App.utils.commons.getFullPlayerName(userPropsVO);
+            var userName:String = d.data.xvm_originalUserName;
             App.toolTipMgr.show(userName +
                 (comment == null ? "" : "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>"));
         }

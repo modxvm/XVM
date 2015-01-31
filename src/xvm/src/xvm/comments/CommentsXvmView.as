@@ -44,7 +44,7 @@ package xvm.comments
             try
             {
                 //App.waiting.show("Loading...");
-                init();
+                page.treeComponent.list.itemRenderer = UI_ContactsTreeItemRenderer;
                 updateComments(Xvm.cmd(XPM_COMMAND_GET_COMMENTS), true);
                 CommentsGlobalData.instance.addEventListener(Event.CHANGE, onCommentsDataChange);
             }
@@ -61,29 +61,6 @@ package xvm.comments
         }
 
         // PRIVATE
-
-        private function init():void
-        {
-            Logger.add("init");
-
-            Logger.addObject(page.treeComponent.list);
-            page.treeComponent.list.itemRenderer = UI_ContactsTreeItemRenderer;
-
-            /*
-
-            var dp:IDataProvider = page.tabs.dataProvider;
-            if (dp == null || dp.length == 0)
-            {
-                App.utils.scheduler.envokeInNextFrame(initTabs);
-            }
-            else
-            {
-                dp[0]["linkage"] = getQualifiedClassName(UI_ContactsListForm);
-                page.tabs.selectedIndex = -1;
-                page.tabs.selectedIndex = 0;
-                page.validateNow();
-            }*/
-        }
 
         private function updateComments(json_str:String, isGetCommand:Boolean):void
         {
