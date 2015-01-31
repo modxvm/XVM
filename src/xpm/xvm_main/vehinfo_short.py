@@ -477,6 +477,7 @@ _data = {
     'uk:GB20_Crusader':                 'Crus',
     'ussr:Matilda_II_LL':               'MatLL',
     'germany:PzIV_Hydro':               'Pz4H',
+    'germany:Stug_IV':                  'StugIV'
     'usa:M4A2E4':                       'SheE4',
     'uk:GB68_Matilda_Black_Prince':     'MatilBP',
     'japan:Chi_Nu_Kai':                 'ChiNuKai',
@@ -493,13 +494,16 @@ _data = {
     'ussr:T44_85':                      'T44-85',
     'germany:Panther_M10':              'PaM10',
     'germany:E-25':                     'E25',
+    'usa:T28_concept':                  'T28C',
     'usa:T26_E4_SuperPershing':         'Super',
     'china:Ch01_Type59':                '59',
     'china:Ch01_Type59_Gold':           '59G',
     'china:Ch14_T34_3':                 '34/3',
     'ussr:KV-5':                        'KV5',
     'ussr:Object252':                   'IS6',
+    'germany:T-55_NVA_DDR':             'T55',
     'china:Ch23_112':                   '112',
     'france:FCM_50t':                   'Fcm50',
     'germany:JagdTiger_SdKfz_185':      'JgT88',
+    'ussr:Object_260':                  '260'
 }
