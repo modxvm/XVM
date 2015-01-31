@@ -160,6 +160,7 @@
     "Normal": "Normal",
     "MultiXP": "Multi XP",
     "NoMaster": "No master",
+    "CompleteCrew": "Complete crew",
 
     // Comments
     "Error loading comments": "Error loading comments",

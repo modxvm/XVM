@@ -160,6 +160,7 @@
     "Normal": "Обычный",
     "MultiXP": "Мультиопыт",
     "NoMaster": "Нет мастера",
+    "CompleteCrew": "Полный экипаж",
 
     // Comments
     "Error loading comments": "Ошибка загрузки комментариев",

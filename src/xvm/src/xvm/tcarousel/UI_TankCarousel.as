@@ -9,6 +9,7 @@ package xvm.tcarousel
     import com.xvm.types.veh.*;
     import flash.display.*;
     import flash.events.*;
+    import net.wg.data.constants.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
@@ -720,6 +721,7 @@ package xvm.tcarousel
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_ELITE) >= 0 && dataVO.elite == true);
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && dataVO.doubleXPReceived < 0);
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
+                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_FULLCREW) >= 0 && dataVO.stat == VehicleState.CREW_NOT_FULL);
 
                     var removePrem:Boolean = prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0;
                     var removeNorm:Boolean = prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0;
