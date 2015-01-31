@@ -41,9 +41,12 @@
     // Text for {{xvm-user}} macro.
     // Текст для макроса {{xvm-user}}
     "xvmuser": {
-      "on": "on",    // xvm with stat enabled
-      "off": "off",  // xvm with stat disabled
-      "none": "none" // no xvm
+      // XVM with enabled statistics / XVM со включенной статистикой.
+      "on": "on",
+      // XVM with disabled statistics / XVM со выключенной статистикой.
+      "off": "off",
+      // Without XVM / Без XVM.
+      "none": "none"
     }
   }
 }
