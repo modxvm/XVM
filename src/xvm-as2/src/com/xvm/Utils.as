@@ -104,6 +104,20 @@ class com.xvm.Utils
         return v;
     }
 
+    public static function getXvmUserText(status):String
+    {
+        var value:String = isNaN(status) ? 'none' : (status & 0x01) ? 'on' : 'off';
+
+        if (!Config.config.texts.xvmuser[value])
+            return null;
+
+        var v:String = Config.config.texts.xvmuser[value];
+        if (v.indexOf("{{l10n:") >= 0)
+            v = Locale.get(v);
+
+        return v;
+    }
+
     ////////////////////
 
     public static function indexOf(array:Array, value:Object):Number

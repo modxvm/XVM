@@ -91,7 +91,7 @@ Legend:
 ┌─────────────────┬───┬───┬───┬───┬───┬────────────────────────────────────────────────────────────────
 │ macro           │ BL│ PP│ SF│ MM│ VM│ Description
 ├─────────────────┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────────────
-│ {{xvm-user}}    │ X │ X │ X │ X │ X │ 'on' - user sees stats in the battle, 'off' - don't sees stats in the battle, empty - didn't used XVM in the last month
+│ {{xvm-user}}    │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
 │ {{avglvl}}      │ X │ X │ X │ X │ X │ average level (tier) of tanks
 │ {{eff}}         │ X │ X │ X │ X │ X │ player efficiency: http://www.koreanrandom.com/forum/topic/13386-
 │ {{teff}}, {{e}} │ X │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-

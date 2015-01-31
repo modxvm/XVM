@@ -23,7 +23,7 @@
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
       { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
-      { "x": -75, "y": 5, "bindToIcon": true, "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png" },
+      { "x": -75, "y": 5, "bindToIcon": true, "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png" },
       {}
     ],
     "extraFieldsRight": [
@@ -38,7 +38,7 @@
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
       { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
       { "x": 0, "y": 5, "align": "center", "valign": "top", "bindToIcon": true, "format": "{{spotted}}", "shadow": {} },
-      { "x": -75, "y": 5, "bindToIcon": true, "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png" },
+      { "x": -75, "y": 5, "bindToIcon": true, "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png" },
       {}
     ],
     "width": 120

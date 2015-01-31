@@ -6,6 +6,8 @@
   * added config section for winChance colors: "colors"/"winChance"
   * win chance calclulation changed - use standard normal distrubution for chance result.
     Source: http://forum.worldoftanks.eu/index.php?/topic/468409-/
+  * added texts/xvmuser section with text replacements for {{xvm-user}} macro.
+    Available values: "on", "off", "none".
 
 XVM-5.5.1.1:
   * fixed Application.swf

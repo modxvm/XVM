@@ -37,6 +37,13 @@
       "lost_arty": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
       "revealed_arty": "<font face='$FieldFont' size='24' color='#DE0000'>*</font>",
       "dead_arty": ""
+    },
+    // Text for {{xvm-user}} macro.
+    // Текст для макроса {{xvm-user}}
+    "xvmuser": {
+      "on": "on",    // xvm with stat enabled
+      "off": "off",  // xvm with stat disabled
+      "none": "none" // no xvm
     }
   }
 }

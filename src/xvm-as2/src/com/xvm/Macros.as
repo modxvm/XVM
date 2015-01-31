@@ -628,7 +628,7 @@ class com.xvm.Macros
         // {{squad-num}}
         pdata["squad-num"] = stat.squadnum > 0 ? stat.squadnum : null;
         // {{xvm-user}}
-        pdata["xvm-user"] = isNaN(stat.status) ? null : (stat.status & 0x01) ? 'on' : 'off';
+        pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
         // {{language}}
         pdata["language"] = stat.lang;
         // {{region}}
