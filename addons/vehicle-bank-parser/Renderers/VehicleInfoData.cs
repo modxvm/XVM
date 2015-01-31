@@ -156,6 +156,7 @@ package com.xvm.vehinfo
 
                 // level 5
                 {"germany_PzIV_Hydro", new int[2]{ 5, 6 }},
+                {"germany_Stug_IV", new int[2]{ 5, 6 }},
                 {"ussr_Churchill_LL", new int[2]{ 5, 6 }},
                 {"ussr_SU_85I", new int[2]{ 5, 6}},
                 {"ussr_Matilda_II_LL", new int[2]{ 5, 6 }},
