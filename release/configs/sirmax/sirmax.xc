@@ -8,7 +8,11 @@
     //"formatVehicle": "{{vehicle}}",
     //"formatVehicle": "<font color='{{c:teff|#666666}}'>{{teff%4d|----}}</font>",
 
-    "pingServers": { "enabled": true, "updateInterval": 5000 },
+    "pingServers": {
+      //"y": 70,
+      "enabled": true,
+      "updateInterval": 5000
+    },
 
     "__stub__": null
   },

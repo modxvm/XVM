@@ -15,6 +15,8 @@ package xvm.ping
 
     public class PingLoginXvmView extends XvmViewBase
     {
+        private var _initialized:Boolean = false;
+
         public function PingLoginXvmView(view:IView)
         {
             super(view);
@@ -27,17 +29,21 @@ package xvm.ping
 
         override public function onConfigLoaded(e:Event):void
         {
+            if (!_initialized)
+                return;
             remove();
             init();
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
+            _initialized = true;
             init();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            _initialized = false;
             remove();
         }
 
