@@ -219,10 +219,10 @@ class wot.TeamBasesPanel.CaptureBar
         if (!alpha)
             return null;
         var blur = CapConfig.shadowBlur(m_capColor);
-        if (blur)
+        if (!blur)
             return null;
         var strength = CapConfig.shadowStrength(m_capColor);
-        if (strength)
+        if (!strength)
             return null;
         return new DropShadowFilter(
                 0, // distance
