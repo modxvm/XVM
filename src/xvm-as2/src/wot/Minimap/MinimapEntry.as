@@ -155,7 +155,7 @@ class wot.Minimap.MinimapEntry
 
     private function onEntryRevealed()
     {
-        if (!MapConfig.revealedEnabled)
+        if (!MapConfig.enabled || !MapConfig.revealedEnabled)
             return;
 
         this.labelMc = LabelsContainer.getLabel(playerId);
