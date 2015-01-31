@@ -3,6 +3,9 @@
   * XFW: XVM Framework
   * New mod xvm_quests for personal missions.
     Currently implemented new filters and saving filters settings
+  * added config section for winChance colors: "colors"/"winChance"
+  * win chance calclulation changed - use standard normal distrubution for chance result.
+    Source: http://forum.worldoftanks.eu/index.php?/topic/468409-/
 
 XVM-5.5.1.1:
   * fixed Application.swf

@@ -82,6 +82,7 @@ class com.xvm.Defines
     public static var DYNAMIC_COLOR_X:Number = 15;
     public static var DYNAMIC_COLOR_AVGLVL:Number = 16;
     public static var DYNAMIC_COLOR_SPOTTED:Number = 17;
+    public static var DYNAMIC_COLOR_WINCHANCE:Number = 18;
 
     // Dynamic alpha types
     public static var DYNAMIC_ALPHA_EFF:Number = 1;

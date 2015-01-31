@@ -242,21 +242,48 @@ class com.xvm.Chance
         return { ally: nally, enemy: nenemy };
     }
 
-    private static function PrepareChanceResults(Ea, Ee)
+    private static function PrepareChanceResults(Ka, Ke)
     {
-        if (Ea == 0 && Ee == 0) Ea = Ee = 1;
-        //Logger.add("Ea=" + Math.round(Ea) + " Ee=" + Math.round(Ee));
+        if (Ka == 0 && Ke == 0) Ka = Ke = 1;
+        //Logger.add("Ka=" + Math.round(Ka) + " Ke=" + Math.round(Ke));
 
-        var p:Number = Math.max(0.05, Math.min(0.95, (0.5 + (Ea / (Ea + Ee) - 0.5) * 1.5))) * 100;
+        //var p:Number = Math.max(0.05, Math.min(0.95, (0.5 + (Ka / (Ka + Ke) - 0.5) * 1.5))) * 100;
+
+        // Spitfeuer117: http://forum.worldoftanks.eu/index.php?/topic/468409-a-1000-battle-study-on-xvm-win-chance-accuracy/
+        var s:Number = 30;
+        var p:Number = Phi((Ka - Ke) / s) * 100;
+        // old code:
+        //var p:Number = (0.5 + (Ka / (Ka + Ke) - 0.5) * 1.5) * 100;
 
         // Normalize (5..95)
         return {
-            ally: Ea,
-            enemy: Ee,
-            percent: Math.round(p),
-            raw: Ea / (Ea + Ee) * 100,
+            ally: Ka,
+            enemy: Ke,
+            percent: Math.round(Math.max(5, Math.min(95, p))),
+            raw: p,
             percentF: Math.round(1000 * p) / 1000
         };
+    }
+
+    /**
+     * The function Φ(x) is the cumulative density function (CDF) of a standard normal (Gaussian) random variable.
+     */
+    private static function Phi(x:Number):Number
+    {
+        var a1:Number = 0.254829592;
+        var a2:Number = -0.284496736;
+        var a3:Number = 1.421413741;
+        var a4:Number = -1.453152027;
+        var a5:Number = 1.061405429;
+        var p:Number = 0.3275911;
+
+        var sign:Number = (x < 0) ? -1 : 1;
+        x = Math.abs(x) / Math.sqrt(2.0);
+
+        var t:Number = 1.0 / (1.0 + p*x);
+        var y:Number = 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t * Math.exp(-x*x);
+
+        return 0.5 * (1.0 + sign*y);
     }
 
     private static function FormatChangeText(txt, chance)
@@ -266,7 +293,7 @@ class com.xvm.Chance
             htmlText += "-";
         else
         {
-            var color = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
+            var color:Number = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
             var s:String = "<font color='#" + color.toString(16) + "'>" + chance.percent + "%</font>";
 
             /*var n:Number = 5;

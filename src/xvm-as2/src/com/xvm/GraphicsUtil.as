@@ -260,6 +260,7 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_COLOR_TDV:             cfg = cfg_root.tdv; break;
             case Defines.DYNAMIC_COLOR_TFB:             cfg = cfg_root.tfb; break;
             case Defines.DYNAMIC_COLOR_TSB:             cfg = cfg_root.tsb; break;
+            case Defines.DYNAMIC_COLOR_WINCHANCE:       cfg = cfg_root.winChance; break;
             default: return null;
         }
 

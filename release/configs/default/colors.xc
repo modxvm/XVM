@@ -265,6 +265,16 @@
       { "value": 9,    "color": ${"def.colorRating.very_good"} },
       { "value": 20,   "color": ${"def.colorRating.unique"   } }
     ],
+    // Dynamic color for win chance
+    // Динамический цвет для шанса на победу
+    "winChance": [
+      { "value": 14.5, "color": ${"def.colorRating.very_bad" } },
+      { "value": 34.5, "color": ${"def.colorRating.bad"      } },
+      { "value": 64.5, "color": ${"def.colorRating.normal"   } },
+      { "value": 79.5, "color": ${"def.colorRating.good"     } },
+      { "value": 89.5, "color": ${"def.colorRating.very_good"} },
+      { "value": 101,  "color": ${"def.colorRating.unique"   } }
+    ],
     // Dynamic color by win percent
     // Динамический цвет по проценту побед
     "rating": [
