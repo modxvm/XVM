@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) 2005 JSON.org
 Copyright (c) 2013 m.schedriviy@gmail.com (JSONx extension)
 
@@ -29,6 +29,11 @@ SOFTWARE.
         Internal: "obj": ${"path.to.object"}
         External: "obj": ${"filename":"path.to.object"}
         Root object: "obj": ${"."}
+        
+    3. Identifiers:
+        "identifier1": {} is valid
+        identifier2: {} is valid
+        identifier_3: {} same...
 */
 
 /*
@@ -211,10 +216,27 @@ class com.xvm.JSONx {
             }
         }
     }
+	
+	var _isCharOrDigit:Function = function(s): Boolean {
+		return (s >= "A" && s <= "Z") || (s >= "a" && s <= "z") || (s >= "0" && s <= "9") 
+	}
+	
+	var _identifier:Function = function() {
+        var result = '';
+			
+		do {
+			if (_isCharOrDigit(ch) || ch == '_') {
+                result += ch;
+            } else {
+                break;
+            }
+		} while(_next())
+        return result == '' ? null : result;
+    }
 
     var _string:Function = function() {
         var i, s = '', t, u;
-                    var outer:Boolean = false;
+        var outer:Boolean = false;
 
         if (ch == '"') {
                             while (_next()) {
@@ -262,7 +284,7 @@ class com.xvm.JSONx {
                 }
             }
         }
-        _error("Bad string");
+        return null;
     }
 
     var _array:Function = function() {
@@ -300,7 +322,10 @@ class com.xvm.JSONx {
             return o;
         }
         while (ch) {
-            k = _string();
+            k = _string() || _identifier();
+			if (k == null) {
+				break;
+			}
             _white();
             if (ch != ':') {
                 break;
