@@ -185,7 +185,7 @@
   },
   "export": {
     "fps": {
-      "enabled": true
+      //"enabled": true
     }
   },
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
