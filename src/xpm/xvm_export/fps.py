@@ -46,7 +46,7 @@ class _Fps():
         if self.intervalId is not None:
             BigWorld.cancelCallback(self.intervalId)
             self.intervalId = None
-        if len(self.values):
+        if self.values and len(self.values):
             #log(self.values)
             try:
                 if not os.path.isdir(self.outputDir):
