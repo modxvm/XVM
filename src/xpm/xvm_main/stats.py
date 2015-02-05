@@ -402,14 +402,10 @@ class _Stat(object):
         if not 'v' in stat:
             stat['v'] = {}
         # temporary workaround
-        if 'clan' in stat:
-            if not 'clanstat' in stat:
-                stat['clanstat'] = stat['clan']
-            del stat['clan']
-        if 'wn' in stat:
-            if not 'wn6' in stat:
-                stat['wn6'] = stat['wn']
-            del stat['wn']
+        #if 'clan' in stat:
+        #    del stat['clan']
+        #if 'wn' in stat:
+        #    del stat['wn']
         if stat.get('wn6', 0) <= 0:
             stat['wn6'] = None
         if stat.get('wn8', 0) <= 0:
