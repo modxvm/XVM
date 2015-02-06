@@ -26,6 +26,7 @@ class _Fps():
         from BattleReplay import g_replayCtrl
         self.replayCtrl = g_replayCtrl
         self.isReplay = g_replayCtrl.isPlaying
+        self.values = None
 
     def start(self):
         if not config.config:
