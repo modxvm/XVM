@@ -73,10 +73,12 @@ class com.xvm.Chance
     private static var _LiveLogged = false;
     private static function GetChance(chanceFunc: Function): Object
     {
-        var Ka = 0;
-        var Ke = 0;
+        var Ka:Number = 0;
+        var Ke:Number = 0;
+        var len:Number = 0;
         for (var pname in Stat.s_data)
         {
+            len++;
             var stat:StatData = Stat.s_data[pname].stat;
             var battleStateData:BattleStateData = BattleState.getUserData(pname);
             var vdata:VehicleData = stat.v.data;
@@ -105,7 +107,7 @@ class com.xvm.Chance
         }
 */
 
-        return PrepareChanceResults(Ka, Ke);
+        return PrepareChanceResults(Ka, Ke, len);
     }
 
     // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
@@ -242,7 +244,7 @@ class com.xvm.Chance
         return { ally: nally, enemy: nenemy };
     }
 
-    private static function PrepareChanceResults(Ka, Ke)
+    private static function PrepareChanceResults(Ka:Number, Ke:Number, playersCount:Number)
     {
         if (Ka == 0 && Ke == 0) Ka = Ke = 1;
         //Logger.add("Ka=" + Math.round(Ka) + " Ke=" + Math.round(Ke));
@@ -250,8 +252,8 @@ class com.xvm.Chance
         //var p:Number = Math.max(0.05, Math.min(0.95, (0.5 + (Ka / (Ka + Ke) - 0.5) * 1.5))) * 100;
 
         // Spitfeuer117: http://forum.worldoftanks.eu/index.php?/topic/468409-a-1000-battle-study-on-xvm-win-chance-accuracy/
-        var s:Number = 30;
-        var p:Number = Phi((Ka - Ke) / s) * 100;
+        // http://www.koreanrandom.com/forum/topic/2598-/page-34#entry223858
+        var p:Number = Phi((Ka - Ke) / playersCount) * 100;
         // old code:
         //var p:Number = (0.5 + (Ka / (Ka + Ke) - 0.5) * 1.5) * 100;
 
