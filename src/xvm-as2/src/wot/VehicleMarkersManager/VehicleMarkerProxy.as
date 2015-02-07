@@ -301,6 +301,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private var isAltMode:Boolean = false;
     public function showExInfo(show:Boolean):Void
     {
+        if (!Config.config.hotkeys.markersAltMode.enabled)
+            return;
         if (Config.config.hotkeys.markersAltMode.onHold)
             isAltMode = show;
         else if (show)
