@@ -14,6 +14,11 @@ def getXvmActiveTokenData():
 def getXvmMessageHeader():
     return _getXvmMessageHeader()
 
+def getToken():
+    _getXvmActiveTokenData()
+    global _token
+    return _token
+
 def clearToken(value=None):
     global _token
     _token = value
