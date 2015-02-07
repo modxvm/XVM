@@ -109,7 +109,7 @@ class _Stat(object):
             try:
                 self._respond()
             except Exception, ex:
-                err('_checkResult() exception: ' + traceback.format_exc())
+                err(traceback.format_exc())
             finally:
                 debug('done')
                 if self.thread:
@@ -186,10 +186,10 @@ class _Stat(object):
 
         plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
         self._load_stat(plVehId)
+        self._load_clanIcons()
 
         players = {}
-        for vehId in self.players:
-            pl = self.players[vehId]
+        for (vehId, pl) in self.players.items():
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
             if cacheKey not in self.cacheBattle:
                 cacheKey2 = "%d" % (pl.playerId)
@@ -221,21 +221,21 @@ class _Stat(object):
             self.players = {}
 
             # update players
-            for vehId in value['vehicles']:
-                accountDBID = value['vehicles'][vehId]['accountDBID']
+            for (vehId, vehData) in value['vehicles'].items():
+                accountDBID = vehData['accountDBID']
+                plData = value['players'][accountDBID]
                 vData = {
                   'accountDBID': accountDBID,
-                  'name': value['players'][accountDBID]['name'],
-                  'clanAbbrev': value['players'][accountDBID]['clanAbbrev'],
-                  'typeCompDescr': value['vehicles'][vehId]['typeCompDescr'],
-                  'team': value['vehicles'][vehId]['team']}
+                  'name': plData['name'],
+                  'clanAbbrev': plData['clanAbbrev'],
+                  'typeCompDescr': vehData['typeCompDescr'],
+                  'team': vehData['team']}
                 self.players[vehId] = _Player(vehId, vData)
 
             self._load_stat(0)
 
             players = {}
-            for vehId in self.players:
-                pl = self.players[vehId]
+            for (vehId, pl) in self.players.items():
                 cacheKey = "%d=%d" % (pl.playerId, pl.vId)
                 if cacheKey not in self.cacheBattle:
                     cacheKey2 = "%d" % (pl.playerId)
@@ -250,7 +250,7 @@ class _Stat(object):
                 self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players}
 
         except Exception, ex:
-            err('_battleResultsCallback() exception: ' + traceback.format_exc())
+            err(traceback.format_exc())
             print('=================================')
             print('_battleResultsCallback() exception: ' + traceback.format_exc())
             pprint(value)
@@ -311,7 +311,7 @@ class _Stat(object):
                             self.cacheUser[cacheKey] = {}
 
             except Exception, ex:
-                err('_get_user() exception: ' + traceback.format_exc())
+                err(traceback.format_exc())
 
         with self.lock:
             self.resp = self.cacheUser.get(cacheKey, {})
@@ -331,8 +331,7 @@ class _Stat(object):
 
         replay = isReplay()
         all_cached = True
-        for vehId in self.players:
-            pl = self.players[vehId]
+        for (vehId, pl) in self.players.items():
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
 
             if not cacheKey in self.cacheBattle:
@@ -373,8 +372,8 @@ class _Stat(object):
                 if isReplay():
                     log('XVM network services inactive (id=%s)' % playerVehicleID)
                 players = []
-                for vehId in self.players:
-                    players.append(self._get_battle_stub(self.players[vehId]))
+                for (vehId, pl) in self.players.items():
+                    players.append(self._get_battle_stub(pl))
                 data = {'players':players}
 
             if 'players' not in data:
@@ -393,10 +392,9 @@ class _Stat(object):
                 self.cacheBattle[cacheKey] = stat
 
         except Exception, ex:
-            err('_load_stat() exception: ' + traceback.format_exc())
+            err(traceback.format_exc())
 
     def _fix(self, stat, orig_name=None):
-        #self._r(stat, 'id', '_id')
         if 'twr' in stat:
             del stat['twr']
         if not 'v' in stat:
@@ -416,8 +414,7 @@ class _Stat(object):
 
         if self.players is not None:
             # TODO: optimize
-            for vehId in self.players:
-                pl = self.players[vehId]
+            for (vehId, pl) in self.players.items():
                 if pl.playerId == stat['_id']:
                     if pl.clan:
                         stat['clan'] = pl.clan
@@ -439,16 +436,17 @@ class _Stat(object):
         return stat
 
 
-    def _r(self, r, a, b):
-        if a in r:
-            if not b in r:
-                r[b] = r[a]
-            del r[a]
+    def _load_clanIcons(self):
+        try:
+            pass
+            #for (vehId, pl) in self.players.items():
+            #    log("{0} {1}".format(pl.name, pl.clan))
 
+#                server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+#                (response, duration, errStr) = loadUrl(server, updateRequest)
 
-    def _d(self, r, a, d):
-        if a not in r:
-            r[a] = d
+        except Exception, ex:
+            err(traceback.format_exc())
 
 
 class _Player(object):

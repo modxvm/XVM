@@ -2,6 +2,8 @@
 
 # PUBLIC
 
+versionChecked = False
+
 def checkVersion():
     _checkVersion()
 
@@ -24,6 +26,10 @@ def clearToken(value=None):
     _token = value
     global networkServicesSettings
     networkServicesSettings = _makeNetworkServicesSettings(None)
+
+def getClansInfo():
+    global _clansInfo
+    return _clansInfo
 
 # PRIVATE
 
@@ -49,6 +55,7 @@ import userprefs
 import utils
 from websock import g_websock
 
+_clansInfo = None
 _verInfo = None
 _tdataPrev = None
 _token = None
@@ -67,41 +74,6 @@ def _makeNetworkServicesSettings(tdata):
     }
 
 networkServicesSettings = _makeNetworkServicesSettings(None)
-
-def _checkVersion():
-    playerId = getCurrentPlayerId()
-    if playerId is None:
-        return
-
-    try:
-        req = "checkVersion/%d" % playerId
-        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
-        (response, duration, errStr) = loadUrl(server, req)
-
-        #response =
-        """ {"US":{"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "RU": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "CT": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "SEA":{"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "EU": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "VTC":{"message":"www.modxvm.com","ver":"5.2.1-test2"}}"""
-
-        global _verInfo
-        _verInfo = None
-        if not response:
-            #err('Empty response or parsing error')
-            pass
-        else:
-            try:
-                if response is not None:
-                    response = response.strip()
-                    if response not in ('', '[]'):
-                        _verInfo = simplejson.loads(response)
-            except Exception, ex:
-                err('  Bad answer: ' + response)
-                _verInfo = None
-    except Exception, ex:
-        err(traceback.format_exc())
 
 def _getXvmActiveTokenData():
     playerId = getCurrentPlayerId()
@@ -127,9 +99,51 @@ def _getXvmActiveTokenData():
         networkServicesSettings = _makeNetworkServicesSettings(tdata)
     return tdata
 
+def _checkVersion():
+    playerId = getCurrentPlayerId()
+    if playerId is None:
+        return
+
+    global versionChecked
+    versionChecked = True
+
+    try:
+        req = "checkVersion/%d" % playerId
+        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+        (response, duration, errStr) = loadUrl(server, req)
+
+        #response =
+        """ {
+              "topClans":{"MGRD":{"rank":"747","cid":"156781"},...},
+              "persistClans":{"WG-A":{"rank":"0","cid":"17996"},...},
+              "info":{"RU": {"message":"www.modxvm.com","ver":"5.2.1-test2"},...}
+            }"""
+
+        global _clansInfo, _verInfo
+        _clansInfo = None
+        _verInfo = None
+        if not response:
+            #err('Empty response or parsing error')
+            pass
+        else:
+            try:
+                if response is not None:
+                    response = response.strip()
+                    if response not in ('', '[]'):
+                        data = simplejson.loads(response)
+                        if data is not None:
+                            _clansInfo = _processClansInfo(data)
+                            _verInfo = data.get('info', None)
+            except Exception, ex:
+                err('  Bad answer: ' + response)
+                err(traceback.format_exc())
+                _clansInfo = None
+                _verInfo = None
+    except Exception, ex:
+        err(traceback.format_exc())
+
 def _initializeXvmToken():
     global _tdataPrev
-
     clearToken()
 
     playerId = getCurrentPlayerId()
@@ -243,3 +257,11 @@ def _getVersionText(curVer):
             if utils.compareVersions(data['ver'], curVer) == 1:
                 return '{{l10n:ver/newVersion:%s:%s}}\n' % (data['ver'], data['message'])
     return ''
+
+def _processClansInfo(data):
+    clans = data.get('topClans', {})
+    clans.update(data.get('persistClans', {}))
+    return clans
+    #res = [{'name':k, 'rank':v['rank']} for k, v in clans.items()]
+    #log(res)
+    #return res

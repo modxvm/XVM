@@ -193,6 +193,10 @@ class Xvm(object):
     def initBattle(self):
         debug('> initBattle()')
         try:
+            # check version if game restarted after crash or in replay
+            if not token.versionChecked:
+                token.checkVersion()
+
             # Save/restore arena data
             player = BigWorld.player()
 
