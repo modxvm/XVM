@@ -87,6 +87,7 @@
     //"minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
     //"minimapAltMode": { "enabled": true, "keyCode": 29, "onHold": true },
     "playersPanelAltMode": { "enabled": true, "keyCode": 56 }, // LAlt
+    //"markersAltMode":      { "onHold": false },
     "__stub__": {}
   },
   "battleLoading": {

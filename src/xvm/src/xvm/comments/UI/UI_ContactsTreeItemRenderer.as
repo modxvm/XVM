@@ -86,7 +86,7 @@ package xvm.comments.UI
 
             //var userPropsVO:IUserProps = new ContactItemVO(d.data).userPropsVO;
             //var userName:String = App.utils.commons.getFullPlayerName(userPropsVO);
-            var userName:String = d.data.xvm_originalUserName;
+            var userName:String = d.data.xvm_originalUserName || d.data.userProps.userName;
             App.toolTipMgr.show(userName +
                 (comment == null ? "" : "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>"));
         }

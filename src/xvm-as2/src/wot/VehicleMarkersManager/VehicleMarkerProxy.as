@@ -33,7 +33,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private var m_playerName:String;
     private var m_playerClan:String;
     private var m_playerRegion:String;
-    //private var m_playerFullName:String;
     private var m_curHealth:Number;
     private var m_defaultIconSource:String;
     private var m_vehicleClass:String;
@@ -156,8 +155,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         for (var i:Number = 0; i < len; ++i)
         {
             var data = pendingCalls[i];
-            //if (data.func != "showExInfo")
-            //    trace("deferred");
             call(data.func, data.args, data.pre);
             delete data;
         }
@@ -219,7 +216,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_playerName = pName; // alex
         m_playerClan = pClan; // "" || ALX
         m_playerRegion = pRegion; // null || ?
-        //m_playerFullName = pFullName; // alex[ALX] (MS-1)
         m_defaultIconSource = vIconSource;
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
@@ -302,10 +298,18 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         return call("updateState", arguments);
     }
 
+    private var isAltMode:Boolean = false;
     public function showExInfo(show:Boolean):Void
     {
-        GlobalEventDispatcher.dispatchEvent(new VMMEvent(VMMEvent.ALT_STATE_INFORM, show));
-        return call("showExInfo", arguments);
+        if (Config.config.hotkeys.markersAltMode.onHold)
+            isAltMode = show;
+        else if (show)
+            isAltMode = !isAltMode;
+        else
+            return;
+
+        GlobalEventDispatcher.dispatchEvent(new VMMEvent(VMMEvent.ALT_STATE_INFORM, isAltMode));
+        return call("showExInfo", [isAltMode]);
     }
 
     public function showActionMarker(actionState):Void
