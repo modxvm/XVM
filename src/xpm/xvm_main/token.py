@@ -14,11 +14,6 @@ def getXvmActiveTokenData():
 def getXvmMessageHeader():
     return _getXvmMessageHeader()
 
-def getToken():
-    if isReplay():
-        getXvmActiveTokenData()
-    return _token
-
 def clearToken(value=None):
     global _token
     _token = value
@@ -123,16 +118,14 @@ def _getXvmActiveTokenData():
     if tdata is not None:
         global _token
         _token = tdata.get('token', '').encode('ascii')
-        if isReplay():
-            global networkServicesSettings
-            networkServicesSettings = _makeNetworkServicesSettings(tdata)
+        global networkServicesSettings
+        networkServicesSettings = _makeNetworkServicesSettings(tdata)
     return tdata
 
 def _initializeXvmToken():
     global _tdataPrev
 
-    global networkServicesSettings
-    networkServicesSettings = _makeNetworkServicesSettings(None)
+    clearToken()
 
     playerId = getCurrentPlayerId()
     if playerId is None:
@@ -177,8 +170,7 @@ def _initializeXvmToken():
         userprefs.set('tokens.{0}'.format(playerId), tdata)
         userprefs.set('tokens.lastPlayerId', playerId)
 
-        if tdata['status'] == 'active':
-            networkServicesSettings = _makeNetworkServicesSettings(tdata)
+        networkServicesSettings = _makeNetworkServicesSettings(tdata)
 
     global _token
     _token = '' if tdata is None else tdata.get('token', '').encode('ascii')

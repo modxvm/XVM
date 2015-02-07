@@ -56,7 +56,7 @@ class Xvm(object):
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
 
             if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
-                token.getToken()
+                token.getXvmActiveTokenData()
                 return (token.networkServicesSettings, True)
             elif cmd == XVM_COMMAND_GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)

@@ -35,7 +35,7 @@ class _Comments:
 
     def _doRequest(self, cmd, body, useCache, cachedOnly):
         try:
-            t = token.getToken()
+            t = token.getXvmActiveTokenData()
             if t is None:
                 return {'error':'NOT_INITIALIZED'}
             if t == '':
