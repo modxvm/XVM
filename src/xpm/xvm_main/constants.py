@@ -2,7 +2,7 @@
 
 XVM_API_VERSION = "3.0"
 XVM_SERVERS = [ "https://stat.modxvm.com:443/{API}/{REQ}" ] # TODO - config
-XVM_CLANICONS_URL_TEMPLATE = 'stat.modxvm.com/emblems/64x64/{0}.png'
+XVM_CLANICONS_URL_TEMPLATE = 'http://stat.modxvm.com/emblems/32x32/{0}.png'
 XVM_FINGERPRINT = "46169f8bd6f743733b23066f5cce2cd3d0392af8" # fingerprint for SSL certificate
 XVM_TIMEOUT = 5000 # TODO - config
 #XVM_WS_URL = "ws://echo.websocket.org/"
