@@ -27,9 +27,9 @@ def clearToken(value=None):
     global networkServicesSettings
     networkServicesSettings = _makeNetworkServicesSettings(None)
 
-def getClansInfo():
+def getClanInfo(clanAbbrev):
     global _clansInfo
-    return _clansInfo
+    return _clansInfo.get(clanAbbrev, None) if _clansInfo else None
 
 # PRIVATE
 
@@ -101,6 +101,9 @@ def _getXvmActiveTokenData():
 
 def _checkVersion():
     playerId = getCurrentPlayerId()
+    # fallback to the last player id if replay is running
+    if playerId is None and isReplay():
+        playerId = userprefs.get('tokens.lastPlayerId')
     if playerId is None:
         return
 
@@ -261,6 +264,16 @@ def _getVersionText(curVer):
 def _processClansInfo(data):
     clans = data.get('topClans', {})
     clans.update(data.get('persistClans', {}))
+    # DEBUG
+    #clans['JKHU'] = {'rank':0,'cid':1}
+    #clans['MWJL'] = {'rank':0,'cid':2}
+    #clans['GPTX'] = {'rank':0,'cid':3}
+    #clans['MADY'] = {'rank':0,'cid':1}
+    #clans['MKFK'] = {'rank':0,'cid':2}
+    #clans['GUTY'] = {'rank':0,'cid':3}
+    #clans['MNAA'] = {'rank':0,'cid':2}
+    #clans['CJBZ'] = {'rank':0,'cid':1}
+    # /DEBUG
     return clans
     #res = [{'name':k, 'rank':v['rank']} for k, v in clans.items()]
     #log(res)

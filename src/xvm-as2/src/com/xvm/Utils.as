@@ -271,8 +271,8 @@ class com.xvm.Utils
         return style;
     }
 
-    // Fix <img src='xvm://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'>
-    // Fix <img src='cfg://...'> to <img src='img://XVM_IMG_RES_ROOT/...'>
+    // Fix <img src='xvm://...'> to <img src='img://XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
+    // Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
     public static function fixImgTag(str:String):String
     {
         str = str.split("xvm://").join("img://" + Defines.XVM_IMG_RES_ROOT);

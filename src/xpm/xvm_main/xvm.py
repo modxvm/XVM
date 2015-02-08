@@ -193,10 +193,6 @@ class Xvm(object):
     def initBattle(self):
         debug('> initBattle()')
         try:
-            # check version if game restarted after crash or in replay
-            if not token.versionChecked:
-                token.checkVersion()
-
             # Save/restore arena data
             player = BigWorld.player()
 
@@ -303,7 +299,9 @@ class Xvm(object):
     # BATTLE
 
     def onAvatarBecomePlayer(self):
-        pass
+        # check version if game restarted after crash or in replay
+        if not token.versionChecked:
+            token.checkVersion()
 
 
     def onEnterWorld(self):

@@ -1,7 +1,8 @@
 package xvm.hangar.components.BattleLoading
 {
     import com.xvm.*;
-    import com.xvm.types.MacrosFormatOptions;
+    import com.xvm.types.*;
+    import com.xvm.types.stat.StatData;
     import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.veh.*;
@@ -20,6 +21,7 @@ package xvm.hangar.components.BattleLoading
     {
         private var proxy:PlayerItemRenderer;
 
+        private var playerId:Number = NaN;
         private var fullPlayerName:String = null;
 
         public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer)
@@ -60,6 +62,8 @@ package xvm.hangar.components.BattleLoading
                 if (data == null)
                     return;
 
+                playerId = data.accountDBID;
+
                 if (fullPlayerName == null)
                 {
                     fullPlayerName = App.utils.commons.getFullPlayerName(
@@ -70,9 +74,6 @@ package xvm.hangar.components.BattleLoading
                 Macros.RegisterMinimalMacrosData(data.accountDBID, fullPlayerName, vdata.vid);
                 data.playerName = Macros.Format(data.playerName, "{{name}}");
                 data.clanAbbrev = Macros.Format(data.playerName, "{{clannb}}");
-
-                // ClanIcon
-                attachClanIconToPlayer(data);
 
                 // Alternative icon set
                 if (proxy.iconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)
@@ -149,34 +150,6 @@ package xvm.hangar.components.BattleLoading
             return (proxy is UI_LeftItemRenderer) ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
         }
 
-        private var _clanIconLoaded:Boolean = false;
-        private function attachClanIconToPlayer(data:VehicleInfoVO):void
-        {
-            if (_clanIconLoaded)
-                return;
-            _clanIconLoaded = true;
-
-            var cfg:CClanIcon = Config.config.battleLoading.clanIcon;
-            if (!cfg.show)
-                return;
-            var icon:ClanIcon = new ClanIcon(cfg, proxy.iconLoader.x, proxy.iconLoader.y, team,
-                data.accountDBID,
-                WGUtils.GetPlayerName(fullPlayerName),
-                WGUtils.GetClanNameWithoutBrackets(fullPlayerName));
-            icon.addEventListener(Event.COMPLETE, function():void
-            {
-                // don't add empty icons to the form
-                if (icon.source == "")
-                    return;
-
-                // unpredictable effects appear when added to the renderer item because of scaleXY.
-                // add to the main form, that is not scaled, and adjust XY values.
-                proxy.parent.parent.parent.addChild(icon);
-                icon.x += proxy.parent.parent.x + proxy.parent.x + proxy.x;
-                icon.y += proxy.parent.parent.y + proxy.parent.y + proxy.y;
-            });
-        }
-
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void
         {
             //Logger.add("onVehicleIconLoadComplete: " + fullPlayerName);
@@ -209,6 +182,51 @@ package xvm.hangar.components.BattleLoading
             //draw();
             if (proxy.constraints != null)
                 proxy.invalidateData();
+            // ClanIcon
+            attachClanIconToPlayer();
+        }
+
+        private var _clanIconLoaded:Boolean = false;
+        private function attachClanIconToPlayer():void
+        {
+            if (_clanIconLoaded)
+                return;
+
+            if (isNaN(playerId))
+            {
+                Logger.add('attachClanIconToPlayer: wait');
+                App.utils.scheduler.envokeInNextFrame(attachClanIconToPlayer);
+                return;
+            }
+
+            _clanIconLoaded = true;
+
+            var name:String = WGUtils.GetPlayerName(fullPlayerName);
+
+            var statData:StatData = Stat.getData(name);
+            if (statData == null)
+                return;
+
+            var cfg:CClanIcon = Config.config.battleLoading.clanIcon;
+            if (!cfg.show)
+                return;
+            var icon:ClanIcon = new ClanIcon(cfg, proxy.iconLoader.x, proxy.iconLoader.y, team,
+                playerId,
+                name,
+                WGUtils.GetClanNameWithoutBrackets(fullPlayerName),
+                statData.emblem);
+            icon.addEventListener(Event.COMPLETE, function():void
+            {
+                // don't add empty icons to the form
+                if (icon.source == "")
+                    return;
+
+                // unpredictable effects appear when added to the renderer item because of scaleXY.
+                // add to the main form, that is not scaled, and adjust XY values.
+                proxy.parent.parent.parent.addChild(icon);
+                icon.x += proxy.parent.parent.x + proxy.parent.x + proxy.x;
+                icon.y += proxy.parent.parent.y + proxy.parent.y + proxy.y;
+            });
         }
     }
 

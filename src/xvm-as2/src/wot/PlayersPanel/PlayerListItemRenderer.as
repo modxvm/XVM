@@ -2,6 +2,7 @@
  * @author sirmax2
  */
 import com.xvm.*;
+import com.xvm.DataTypes.*;
 import flash.filters.*;
 import flash.geom.*;
 import gfx.core.*;
@@ -271,13 +272,18 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (!cfg.show)
             return;
 
+        var statData:Object = Stat.s_data[m_name];
+        if (statData == null)
+            return;
+        var emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.emblem;
+
         if (m_clanIcon == null)
         {
             var x = (!m_iconLoaded || Config.config.battle.mirroredVehicleIcons || isLeftPanel)
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
             m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, team);
         }
-        PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan);
+        PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan, emblem);
         m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
     }
 

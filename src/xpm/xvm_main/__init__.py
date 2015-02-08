@@ -20,10 +20,11 @@ import BigWorld
 from xfw import *
 
 import config
+import filecache
 from logger import *
-from xvm import g_xvm
-from websock import g_websock
 import utils
+from websock import g_websock
+from xvm import g_xvm
 
 _APPLICATION_SWF = 'Application.swf'
 _BATTLE_SWF = 'battle.swf'
@@ -57,6 +58,7 @@ def fini():
     g_websock.on_message -= g_xvm.on_websock_message
     g_websock.on_error -= g_xvm.on_websock_error
     g_websock.stop()
+    filecache.fin()
 
 def FlashInit(self, swf, className = 'Flash', args = None, path = None):
     self.swf = swf

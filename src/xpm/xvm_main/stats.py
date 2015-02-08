@@ -37,6 +37,8 @@ import traceback
 import time
 from random import randint
 import threading
+import uuid
+import imghdr
 
 import simplejson
 
@@ -47,6 +49,7 @@ from xfw import *
 
 import config
 from constants import *
+import filecache
 from logger import *
 from loadurl import loadUrl
 import token
@@ -181,12 +184,13 @@ class _Stat(object):
         vehicles = BigWorld.player().arena.vehicles
         for (vehId, vData) in vehicles.items():
             if vehId not in self.players:
-                self.players[vehId] = _Player(vehId, vData)
+                pl = _Player(vehId, vData)
+                self._load_clanIcon(pl)
+                self.players[vehId] = pl
             self.players[vehId].update(vData)
 
         plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
         self._load_stat(plVehId)
-        self._load_clanIcons()
 
         players = {}
         for (vehId, pl) in self.players.items():
@@ -418,6 +422,8 @@ class _Stat(object):
                 if pl.playerId == stat['_id']:
                     if pl.clan:
                         stat['clan'] = pl.clan
+                        stat['clanInfoId'] = pl.clanInfo['cid'] if pl.clanInfo else None
+                        stat['clanInfoRank'] = pl.clanInfo['rank'] if pl.clanInfo else None
                     stat['name'] = pl.name
                     stat['team'] = TEAM_ALLY if team == pl.team else TEAM_ENEMY
                     stat['squadnum'] = pl.squadnum
@@ -425,6 +431,8 @@ class _Stat(object):
                         stat['alive'] = pl.alive
                     if hasattr(pl, 'ready'):
                         stat['ready'] = pl.ready
+                    if stat.get('emblem', '') == '' and hasattr(pl, 'emblem'):
+                        stat['emblem'] = pl.emblem
                     if 'id' not in stat['v']:
                         stat['v']['id'] = pl.vId
                     break;
@@ -435,27 +443,44 @@ class _Stat(object):
         #log(simplejson.dumps(stat))
         return stat
 
-
-    def _load_clanIcons(self):
+    def _load_clanIcon(self, pl):
         try:
-            pass
-            #for (vehId, pl) in self.players.items():
-            #    log("{0} {1}".format(pl.name, pl.clan))
-
-#                server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
-#                (response, duration, errStr) = loadUrl(server, updateRequest)
-
+            if pl.clanInfo:
+                tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
+                url = XVM_CLANICONS_URL_TEMPLATE.format(pl.clanInfo['cid'])
+                self._loading = True
+                filecache.get_url(url, (lambda url, bytes: self._load_clanIcons_callback(pl, tID, bytes)))
+                while self._loading:
+                    time.sleep(0.001)
         except Exception, ex:
             err(traceback.format_exc())
 
+    def _load_clanIcons_callback(self, pl, tID, bytes):
+        try:
+            #debug(tID + " " + str(len(bytes)))
+            if bytes and imghdr.what(None, bytes) is not None:
+                #imgid = str(uuid.uuid4())
+                #BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
+                imgid = 'icons/{0}.png'.format(pl.clan)
+                filecache.save(imgid, bytes)
+                pl.emblem = 'xvm://cache/{0}'.format(imgid)
+        except Exception, ex:
+            err(traceback.format_exc())
+        finally:
+            self._loading = False
+
 
 class _Player(object):
+
+    __slots__ = ('vehId', 'playerId', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
+        'vId', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'emblem')
 
     def __init__(self, vehId, vData):
         self.vehId = vehId
         self.playerId = vData['accountDBID']
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
+        self.clanInfo = token.getClanInfo(self.clan)
         self.vId = None
         if 'typeCompDescr' in vData:
             self.vId = vData['typeCompDescr']
