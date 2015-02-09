@@ -10,6 +10,7 @@
   * added texts/xvmuser section with text replacements for {{xvm-user}} macro.
     Available values: "on", "off", "none".
   * added new mod xvm_export, and config section "export".
+  * top clans icons now taken from the XVM server and tops list is updated daily.
 
 XVM-5.5.1.1:
   * fixed Application.swf
