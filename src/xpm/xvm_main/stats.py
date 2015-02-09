@@ -422,8 +422,8 @@ class _Stat(object):
                 if pl.playerId == stat['_id']:
                     if pl.clan:
                         stat['clan'] = pl.clan
-                        stat['clanInfoId'] = pl.clanInfo['cid'] if pl.clanInfo else None
-                        stat['clanInfoRank'] = pl.clanInfo['rank'] if pl.clanInfo else None
+                        stat['clanInfoId'] = pl.clanInfo.get('cid', None) if pl.clanInfo else None
+                        stat['clanInfoRank'] = pl.clanInfo.get('rank', None) if pl.clanInfo else None
                     stat['name'] = pl.name
                     stat['team'] = TEAM_ALLY if team == pl.team else TEAM_ENEMY
                     stat['squadnum'] = pl.squadnum
@@ -446,12 +446,13 @@ class _Stat(object):
     def _load_clanIcon(self, pl):
         try:
             if pl.clanInfo:
-                tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
-                url = XVM_CLANICONS_URL_TEMPLATE.format(pl.clanInfo['cid'])
-                self._loading = True
-                filecache.get_url(url, (lambda url, bytes: self._load_clanIcons_callback(pl, tID, bytes)))
-                while self._loading:
-                    time.sleep(0.001)
+                url = pl.clanInfo.get('emblem', None)
+                if url:
+                    tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
+                    self._loading = True
+                    filecache.get_url(url, (lambda url, bytes: self._load_clanIcons_callback(pl, tID, bytes)))
+                    while self._loading:
+                        time.sleep(0.001)
         except Exception, ex:
             err(traceback.format_exc())
 

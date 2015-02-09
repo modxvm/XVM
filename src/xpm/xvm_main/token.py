@@ -262,8 +262,8 @@ def _getVersionText(curVer):
     return ''
 
 def _processClansInfo(data):
-    clans = data.get('topClans', {})
-    clans.update(data.get('persistClans', {}))
+    clans = data.get('persistClans', {})
+    clans.update(data.get('topClans', {}))
     # DEBUG
     #clans['JKHU'] = {'rank':0,'cid':1}
     #clans['MWJL'] = {'rank':0,'cid':2}
@@ -275,6 +275,3 @@ def _processClansInfo(data):
     #clans['CJBZ'] = {'rank':0,'cid':1}
     # /DEBUG
     return clans
-    #res = [{'name':k, 'rank':v['rank']} for k, v in clans.items()]
-    #log(res)
-    #return res
