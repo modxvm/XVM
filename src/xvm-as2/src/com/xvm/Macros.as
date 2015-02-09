@@ -631,6 +631,8 @@ class com.xvm.Macros
         pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
         // {{language}}
         pdata["language"] = stat.lang;
+        // {{clanrank}}
+        pdata["clanrank"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" : String(stat.clanInfoRank);
         // {{region}}
         pdata["region"] = Config.config.region;
         // {{avglvl}}

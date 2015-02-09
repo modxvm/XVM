@@ -11,6 +11,9 @@
     Available values: "on", "off", "none".
   * added new mod xvm_export, and config section "export".
   * top clans icons now taken from the XVM server and tops list is updated daily.
+  * added macro {{clanrank}} - Global map clan rating
+    Values from 1 to 1000, and "persist" for persistent clans (WG administration and XVM friends)
+    Detailed info: http://worldoftanks.eu/leaderboard/clans/
 
 XVM-5.5.1.1:
   * fixed Application.swf

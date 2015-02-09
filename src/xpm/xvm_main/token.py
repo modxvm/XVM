@@ -71,6 +71,7 @@ def _makeNetworkServicesSettings(tdata):
         'comments': svc.get('comments', active),
         'chance': svc.get('chance', False),
         'chanceLive': svc.get('chanceLive', False),
+        'topClansCount': svc.get('topClansCount', 100),
     }
 
 networkServicesSettings = _makeNetworkServicesSettings(None)
@@ -265,13 +266,13 @@ def _processClansInfo(data):
     clans = data.get('persistClans', {})
     clans.update(data.get('topClans', {}))
     # DEBUG
-    #clans['JKHU'] = {'rank':0,'cid':1}
-    #clans['MWJL'] = {'rank':0,'cid':2}
+    #clans['JKHU'] = {'rank':100,'cid':1}
+    #clans['MWJL'] = {'rank':101,'cid':2}
     #clans['GPTX'] = {'rank':0,'cid':3}
+    #clans['CJBZ'] = {'rank':1,'cid':4}
     #clans['MADY'] = {'rank':0,'cid':1}
     #clans['MKFK'] = {'rank':0,'cid':2}
     #clans['GUTY'] = {'rank':0,'cid':3}
-    #clans['MNAA'] = {'rank':0,'cid':2}
-    #clans['CJBZ'] = {'rank':0,'cid':1}
+    #clans['MNAA'] = {'rank':0,'cid':4}
     # /DEBUG
     return clans
