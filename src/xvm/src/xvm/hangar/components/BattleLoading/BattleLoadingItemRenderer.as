@@ -195,7 +195,8 @@ package xvm.hangar.components.BattleLoading
             if (isNaN(playerId))
             {
                 Logger.add('attachClanIconToPlayer: wait');
-                App.utils.scheduler.envokeInNextFrame(attachClanIconToPlayer);
+                var $this:* = this;
+                setTimeout(function():void { $this.attachClanIconToPlayer(); }, 1);
                 return;
             }
 
