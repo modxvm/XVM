@@ -446,12 +446,14 @@ class _Stat(object):
     def _load_clanIcon(self, pl):
         try:
             if pl.clanInfo:
-                rank = pl.clanInfo.get('rank', None)
+                rank = int(pl.clanInfo.get('rank', -1))
                 url = pl.clanInfo.get('emblem', None)
-                if url and rank is not None and rank <= token.networkServicesSettings['topClansCount']:
+                #debug('rank={0} url={1}'.format(rank, url))
+                if url and rank >= 0 and rank <= token.networkServicesSettings['topClansCount']:
                     url = url.replace('{size}', '32x32')
                     tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
                     self._loading = True
+                    #debug('rank={0} url={1}'.format(rank, url))
                     filecache.get_url(url, (lambda url, bytes: self._load_clanIcons_callback(pl, tID, bytes)))
                     while self._loading:
                         time.sleep(0.001)
