@@ -3,6 +3,7 @@ package xvm.quests
     import com.xvm.*;
     import com.xvm.io.*;
     import flash.events.*;
+    import flash.utils.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.quests.data.*;
     import net.wg.gui.lobby.quests.data.questsTileChains.*;
@@ -59,7 +60,8 @@ package xvm.quests
                 super.updateTileData(ApplyFilter(data));
                 if (loadedSettings != null)
                 {
-                    App.utils.scheduler.envokeInNextFrame(function():void { applyLoadedSettings(); } );
+                    var $this:* = this;
+                    setTimeout(function():void { $this.applyLoadedSettings(); }, 1);
                 }
                 else
                 {
@@ -77,31 +79,8 @@ package xvm.quests
             //Logger.add("updateChainProgress: " + param1);
             super.updateChainProgress(param1);
 
-            App.utils.scheduler.envokeInNextFrame(function():void
-            {
-                //Logger.add("id=" + selectedId);
-                var idx:Number = 0;
-                var item:QuestTaskListRendererVO = null;
-                if (selectedId >= 0)
-                {
-                    var len:int = tasksScrollingList.dataProvider.length;
-                    for (var i:int = 0; i < len; ++i)
-                    {
-                        item = tasksScrollingList.dataProvider.requestItemAt(i) as QuestTaskListRendererVO;
-                        if (item.type == QuestTaskListRendererVO.TASK && item.taskData.id == selectedId)
-                        {
-                            idx = i;
-                            break;
-                        }
-                    }
-                }
-                if (tasksScrollingList.selectedIndex != idx)
-                {
-                    //Logger.add("idx=" + idx);
-                    tasksScrollingList.selectedIndex = idx;
-                    tasksScrollingList.dispatchEvent(new ListEventEx(ListEventEx.ITEM_CLICK, false, true, idx, -1, -1, tasksScrollingList.getRendererAt(idx), item));
-                }
-            });
+            var $this:* = this;
+            setTimeout(function():void { $this.updateChainProgressNextFrame(); }, 1);
         }
 
         // PRIVATE
@@ -233,6 +212,32 @@ package xvm.quests
             finally
             {
                 loadedSettings = null;
+            }
+        }
+
+        private function updateChainProgressNextFrame():void
+        {
+            //Logger.add("id=" + selectedId);
+            var idx:Number = 0;
+            var item:QuestTaskListRendererVO = null;
+            if (selectedId >= 0)
+            {
+                var len:int = tasksScrollingList.dataProvider.length;
+                for (var i:int = 0; i < len; ++i)
+                {
+                    item = tasksScrollingList.dataProvider.requestItemAt(i) as QuestTaskListRendererVO;
+                    if (item.type == QuestTaskListRendererVO.TASK && item.taskData.id == selectedId)
+                    {
+                        idx = i;
+                        break;
+                    }
+                }
+            }
+            if (tasksScrollingList.selectedIndex != idx)
+            {
+                //Logger.add("idx=" + idx);
+                tasksScrollingList.selectedIndex = idx;
+                tasksScrollingList.dispatchEvent(new ListEventEx(ListEventEx.ITEM_CLICK, false, true, idx, -1, -1, tasksScrollingList.getRendererAt(idx), item));
             }
         }
     }
