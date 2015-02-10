@@ -253,7 +253,7 @@ class com.xvm.Chance
 
         // Spitfeuer117: http://forum.worldoftanks.eu/index.php?/topic/468409-a-1000-battle-study-on-xvm-win-chance-accuracy/
         // http://www.koreanrandom.com/forum/topic/2598-/page-34#entry223858
-        var p:Number = Phi((Ka - Ke) / playersCount / 2) * 100;
+        var p:Number = Phi((Ka - Ke) / playersCount / 1.5) * 100;
         // old code:
         //var p:Number = (0.5 + (Ka / (Ka + Ke) - 0.5) * 1.5) * 100;
 
