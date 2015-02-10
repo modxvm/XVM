@@ -75,6 +75,7 @@ Legend:
 │ {{a:spotted}}      │   │ X │ X │   │   │   │   │   │ Dynamic transparency by vehicle spotted status
 │ {{language}}       │ X │ X │ X │ X │ X │   │   │   │ Player's client language
 │ {{clanrank}}       │ X │ X │ X │ X │ X │   │   │   │ Global map clan rating, from 1 to 1000 (http://worldoftanks.eu/leaderboard/clans/)
+│ {{topclan}}        │ X │ X │ X │ X │ X │   │   │   │ value 'top' for top clans, 'persist' for persistent clans, empty for other
 └────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
 
   Global macros (does not depend on the player)

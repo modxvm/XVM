@@ -633,6 +633,9 @@ class com.xvm.Macros
         pdata["language"] = stat.lang;
         // {{clanrank}}
         pdata["clanrank"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" : String(stat.clanInfoRank);
+        // {{topclan}}
+        pdata["topclan"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" :
+            stat.clanInfoRank <= Config.networkServicesSettings.topClansCount ? "top" : null;
         // {{region}}
         pdata["region"] = Config.config.region;
         // {{avglvl}}

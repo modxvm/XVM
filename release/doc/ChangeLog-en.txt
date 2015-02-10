@@ -14,6 +14,7 @@
   * added macro {{clanrank}} - Global map clan rating
     Values from 1 to 1000, and "persist" for persistent clans (WG administration and XVM friends)
     Detailed info: http://worldoftanks.eu/leaderboard/clans/
+  * added macro {{topclan}} - returns "top" for top clans, 'persist' for persistent clans, empty for other
 
 XVM-5.5.1.1:
   * fixed Application.swf

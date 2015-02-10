@@ -15,6 +15,8 @@
     Значения от 1 до 1000, и "persist" для постоянных кланов (администрация WG и друзья XVM)
     Дополнительная информация: http://worldoftanks.ru/leaderboard/clans/
     Формула: http://worldoftanks.ru/ru/content/cr_formulae/
+  * добавлен макрос {{topclan}} - возвращает "top" для топовых кланов, 'persist' для постоянных
+    кланов, пусто для других
 
 XVM-5.5.1.1:
   * исправлен Application.swf
