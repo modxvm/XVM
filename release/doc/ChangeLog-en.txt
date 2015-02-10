@@ -1,4 +1,4 @@
-﻿XVM-6.0.0-dev:
+﻿XVM-6.0.0:
   * adaptation to Wot 0.9.6
   * XFW: XVM Framework
   * New mod xvm_quests for personal missions.
