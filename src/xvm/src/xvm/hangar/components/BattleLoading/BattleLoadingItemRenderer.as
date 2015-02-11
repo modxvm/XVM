@@ -24,6 +24,8 @@ package xvm.hangar.components.BattleLoading
         private var playerId:Number = NaN;
         private var fullPlayerName:String = null;
 
+        private var _vehicleIconLoaded:Boolean = false;
+
         public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer)
         {
             this.proxy = proxy;
@@ -164,6 +166,8 @@ package xvm.hangar.components.BattleLoading
                 proxy.iconLoader.scaleY = c;
             }*/
 
+            _vehicleIconLoaded = true;
+
             // crop large icons to avoid invalid resizing of item
             proxy.iconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
 
@@ -228,7 +232,10 @@ package xvm.hangar.components.BattleLoading
                 // unpredictable effects appear when added to the renderer item because of scaleXY.
                 // add to the main form, that is not scaled, and adjust XY values.
                 proxy.parent.parent.parent.addChild(icon);
-                icon.x += proxy.parent.parent.x + proxy.parent.x + proxy.x;
+                var offset:int = 0;
+                if (_vehicleIconLoaded && Config.config.battle.mirroredVehicleIcons == false && team == Defines.TEAM_ENEMY)
+                    offset = 80;
+                icon.x += proxy.parent.parent.x + proxy.parent.x + proxy.x + offset;
                 icon.y += proxy.parent.parent.y + proxy.parent.y + proxy.y;
             });
         }
