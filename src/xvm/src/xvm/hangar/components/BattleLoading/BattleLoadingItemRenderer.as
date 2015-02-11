@@ -62,7 +62,8 @@ package xvm.hangar.components.BattleLoading
                 if (data == null)
                     return;
 
-                playerId = data.accountDBID;
+                if (isNaN(playerId))
+                    playerId = data.accountDBID;
 
                 if (fullPlayerName == null)
                 {
@@ -187,16 +188,18 @@ package xvm.hangar.components.BattleLoading
         }
 
         private var _clanIconLoaded:Boolean = false;
-        private function attachClanIconToPlayer():void
+        private function attachClanIconToPlayer(cnt:int = 0):void
         {
             if (_clanIconLoaded)
                 return;
 
             if (isNaN(playerId))
             {
+                if (cnt > 10)
+                    return;
                 Logger.add('attachClanIconToPlayer: wait');
                 var $this:* = this;
-                setTimeout(function():void { $this.attachClanIconToPlayer(); }, 1);
+                setTimeout(function():void { $this.attachClanIconToPlayer(cnt + 1); }, 50);
                 return;
             }
 
