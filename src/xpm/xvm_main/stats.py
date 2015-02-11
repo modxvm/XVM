@@ -189,15 +189,16 @@ class _Stat(object):
                 self._load_clanIcon(pl)
                 self.players[vehId] = pl
             self.players[vehId].update(vData)
-        sleepCounter = 0
+
+        #sleepCounter = 0
         while self._loadingClanIconsCount > 0:
             time.sleep(0.01)
 
-            # FIX: temporary workaround
-            sleepCounter += 1
-            if sleepCounter > 1000: # 10 sec
-                log('WARNING: icons loading too long')
-                break;
+            ## FIX: temporary workaround
+            #sleepCounter += 1
+            #if sleepCounter > 1000: # 10 sec
+            #    log('WARNING: icons loading too long')
+            #    break;
 
         plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
         self._load_stat(plVehId)

@@ -33,7 +33,7 @@ class _FileCache():
 
     def get_url(self, url, callback):
         if self.customFilesCache:
-            self.customFilesCache.get(url, callback, True)
+            self.customFilesCache.get(url, callback)
 
     def save(self, name, bytes):
         try:
