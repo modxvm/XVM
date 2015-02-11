@@ -183,10 +183,13 @@ class _Stat(object):
         # update players
         vehicles = BigWorld.player().arena.vehicles
         for (vehId, vData) in vehicles.items():
+            self._loadingClanIconsCount = 0
             if vehId not in self.players:
                 pl = _Player(vehId, vData)
                 self._load_clanIcon(pl)
                 self.players[vehId] = pl
+            while self._loadingClanIconsCount > 0:
+                time.sleep(0.01)
             self.players[vehId].update(vData)
 
         plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
@@ -448,21 +451,19 @@ class _Stat(object):
             if pl.clanInfo:
                 rank = int(pl.clanInfo.get('rank', -1))
                 url = pl.clanInfo.get('emblem', None)
-                #debug('rank={0} url={1}'.format(rank, url))
+                #url = 'http://stat.modxvm.com:21'
                 if url and rank >= 0 and rank <= token.networkServicesSettings['topClansCount']:
                     url = url.replace('{size}', '32x32')
                     tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
-                    self._loading = True
-                    #debug('rank={0} url={1}'.format(rank, url))
+                    self._loadingClanIconsCount += 1
+                    debug('clan={0} rank={1} url={2}'.format(pl.clan, rank, url))
                     filecache.get_url(url, (lambda url, bytes: self._load_clanIcons_callback(pl, tID, bytes)))
-                    while self._loading:
-                        time.sleep(0.001)
         except Exception, ex:
             err(traceback.format_exc())
 
     def _load_clanIcons_callback(self, pl, tID, bytes):
         try:
-            #debug(tID + " " + str(len(bytes)))
+            debug(tID + " " + (str(len(bytes)) if bytes else '(none)'))
             if bytes and imghdr.what(None, bytes) is not None:
                 #imgid = str(uuid.uuid4())
                 #BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
@@ -472,7 +473,7 @@ class _Stat(object):
         except Exception, ex:
             err(traceback.format_exc())
         finally:
-            self._loading = False
+            self._loadingClanIconsCount -= 1
 
 
 class _Player(object):
