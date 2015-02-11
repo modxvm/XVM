@@ -1,6 +1,6 @@
 ﻿/**
- * Icon sets. Path relative res_mods/xvm/res.
- * Наборы иконок. Пути относительно res_mods/xvm/res.
+ * Icon sets. Path relative res_mods/mods/shared_resources/xvm/res.
+ * Наборы иконок. Пути относительно res_mods/mods/shared_resources/xvm/res.
  */
 {
   "iconset": {

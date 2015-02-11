@@ -22,8 +22,8 @@
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
     "clockFormat": "H:N", // TODO: "H:i"
-    // Path to clan icons folder relative to res_mods/xvm/res.
-    // Путь к папке иконок кланов относительно res_mods/xvm/res.
+    // Path to clan icons folder relative to res_mods/mods/shared_resources/xvm/res.
+    // Путь к папке иконок кланов относительно res_mods/mods/shared_resources/xvm/res.
     "clanIconsFolder": "clanicons/",
     // GUI elements settings (experts only)
     // Настройки графических элементов (только для экспертов!)
