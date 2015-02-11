@@ -181,16 +181,16 @@ class _Stat(object):
             self.players = {}
 
         # update players
+        self._loadingClanIconsCount = 0
         vehicles = BigWorld.player().arena.vehicles
         for (vehId, vData) in vehicles.items():
-            self._loadingClanIconsCount = 0
             if vehId not in self.players:
                 pl = _Player(vehId, vData)
                 self._load_clanIcon(pl)
                 self.players[vehId] = pl
-            while self._loadingClanIconsCount > 0:
-                time.sleep(0.01)
             self.players[vehId].update(vData)
+        while self._loadingClanIconsCount > 0:
+            time.sleep(0.01)
 
         plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
         self._load_stat(plVehId)
@@ -451,7 +451,7 @@ class _Stat(object):
             if pl.clanInfo:
                 rank = int(pl.clanInfo.get('rank', -1))
                 url = pl.clanInfo.get('emblem', None)
-                #url = 'http://stat.modxvm.com:21'
+                #url = 'http://stat.modxvm.com:81'
                 if url and rank >= 0 and rank <= token.networkServicesSettings['topClansCount']:
                     url = url.replace('{size}', '32x32')
                     tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
