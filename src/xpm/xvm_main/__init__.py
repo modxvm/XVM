@@ -225,6 +225,44 @@ def WaitingViewMeta_fix(base, self, *args):
         log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
 
 
+def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
+    log('_CustomFilesCache__get')
+    base(self, url, showImmediately, checkedInCache)
+def _CustomFilesCache__readLocalFile(base, self, url, showImmediately):
+    log('_CustomFilesCache__readLocalFile')
+    base(self, url, showImmediately)
+def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately, file, d1, d2):
+    log('_CustomFilesCache__onReadLocalFile')
+    base(self, url, showImmediately, file, d1, d2)
+def _CustomFilesCache__checkFile(base, self, url, showImmediately):
+    log('_CustomFilesCache__checkFile')
+    base(self, url, showImmediately)
+def _CustomFilesCache__onCheckFile(base, self, url, showImmediately, res, d1, d2):
+    log('_CustomFilesCache__onCheckFile')
+    base(self, url, showImmediately, res, d1, d2)
+def _CustomFilesCache__readRemoteFile(base, self, url, modified_time, showImmediately):
+    log('_CustomFilesCache__readRemoteFile')
+    base(self, url, modified_time, showImmediately)
+def _CustomFilesCache__onReadRemoteFile(base, self, url, showImmediately, file, last_modified, expires):
+    log('_CustomFilesCache__onReadRemoteFile')
+    base(self, url, showImmediately, file, last_modified, expires)
+def _CustomFilesCache__prepareCache(base, self):
+    log('_CustomFilesCache__prepareCache')
+    base(self)
+def _CustomFilesCache__writeCache(base, self, name, packet):
+    log('_CustomFilesCache__writeCache')
+    base(self, name, packet)
+def _CustomFilesCache__onWriteCache(base, self, name, d1, d2, d3):
+    log('_CustomFilesCache__onWriteCache')
+    base(self, name, d1, d2, d3)
+def _CustomFilesCache__postTask(base, self, url, file, invokeAndReleaseCallbacks):
+    log('_CustomFilesCache__postTask')
+    base(self, url, file, invokeAndReleaseCallbacks)
+def _CustomFilesCache__onPostTask(base, self, url, invokeAndReleaseCallbacks, file):
+    log('_CustomFilesCache__onPostTask')
+    base(self, url, invokeAndReleaseCallbacks, file)
+
+
 #####################################################################
 # Register events
 
@@ -282,6 +320,20 @@ def _RegisterEvents():
     from gui.Scaleform.daapi.view.meta.WaitingViewMeta import WaitingViewMeta
     OverrideMethod(WaitingViewMeta, 'showS', WaitingViewMeta_fix)
     OverrideMethod(WaitingViewMeta, 'hideS', WaitingViewMeta_fix)
+
+    from account_helpers.CustomFilesCache import CustomFilesCache
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__get', _CustomFilesCache__get)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__readLocalFile', _CustomFilesCache__readLocalFile)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile', _CustomFilesCache__onReadLocalFile)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__checkFile', _CustomFilesCache__checkFile)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__onCheckFile', _CustomFilesCache__onCheckFile)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__readRemoteFile', _CustomFilesCache__readRemoteFile)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__onReadRemoteFile', _CustomFilesCache__onReadRemoteFile)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__prepareCache', _CustomFilesCache__prepareCache)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__writeCache', _CustomFilesCache__writeCache)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__onWriteCache', _CustomFilesCache__onWriteCache)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__postTask', _CustomFilesCache__postTask)
+    OverrideMethod(CustomFilesCache, '_CustomFilesCache__onPostTask', _CustomFilesCache__onPostTask)
 
 BigWorld.callback(0, _RegisterEvents)
 
