@@ -13,6 +13,6 @@ class _WGCompat():
         from CurrentVehicle import g_currentVehicle
         result = yield TankmanReturn(g_currentVehicle.item).request()
         if len(result.userMsg):
-            SystemMessages.g_instance.pushI18nMessage(result.userMsg, type = result.sysMsgType)
+            SystemMessages.g_instance.pushI18nMessage(result.userMsg, type=result.sysMsgType)
 
 g_instance = _WGCompat()

@@ -31,7 +31,7 @@ def EventsWindow_loadView(base, self, linkage, alias):
     base(self, linkage, alias)
 
 def EventsWindow_onRegisterFlashComponent(base, self, viewPy, alias):
-    if alias in (UI_LINKAGE):
+    if alias in UI_LINKAGE:
         viewPy._setMainView(self)
     base(self, viewPy, alias)
 
@@ -45,7 +45,8 @@ def _RegisterEvents():
     from gui.Scaleform.framework import ViewTypes
     from gui.Scaleform.framework import ScopeTemplates
     from gui.Scaleform.framework import g_entitiesFactories
-    config.VIEWS_SETTINGS += (ViewSettings(UI_LINKAGE, QuestsTileChainsView, None, ViewTypes.COMPONENT, None, ScopeTemplates.DEFAULT_SCOPE),)
+    config.VIEWS_SETTINGS += (ViewSettings(UI_LINKAGE, QuestsTileChainsView, None,
+                                           ViewTypes.COMPONENT, None, ScopeTemplates.DEFAULT_SCOPE),)
     g_entitiesFactories.initSettings(config.VIEWS_SETTINGS)
 
     from gui.Scaleform.daapi.view.lobby.server_events.EventsWindow import EventsWindow

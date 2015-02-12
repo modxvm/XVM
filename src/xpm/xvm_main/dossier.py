@@ -32,11 +32,11 @@ from logger import *
 
 class _Dossier(object):
 
-    #@process
+    # @process
     def getDossier(self, proxy, args):
         (self.battlesType, self.playerId, self.vehId) = args
 
-        #log(str(args))
+        # log(str(args))
 
         from gui.shared import g_itemsCache
         if self.vehId is None:
@@ -47,7 +47,7 @@ class _Dossier(object):
             dossier = g_itemsCache.items.getVehicleDossier(vehId, self.playerId)
             xpVehs = g_itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehId, 0)
-            #log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
+            # log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
             res = self._prepareVehicleResult(dossier, earnedXP)
 
         # respond
@@ -55,7 +55,7 @@ class _Dossier(object):
             strdata = simplejson.dumps(res)
             proxy.movie.invoke((RESPOND_DOSSIER, [self.playerId, self.vehId, strdata]))
 
-        #log(str(args) + " done")
+        # log(str(args) + " done")
 
 
     def _getStatsBlock(self, dossier):
@@ -140,8 +140,7 @@ class _Dossier(object):
             'creationTime': glob.getCreationTime(),
             'lastBattleTime': lbt,
             'lastBattleTimeStr': makeString(MENU.PROFILE_HEADER_LASTBATTLEDATETITLE) + ' ' +
-                ('%s %s' % (BigWorld.wg_getLongDateFormat(lbt), BigWorld.wg_getShortTimeFormat(lbt))),
-
+                                 ('%s %s' % (BigWorld.wg_getLongDateFormat(lbt), BigWorld.wg_getShortTimeFormat(lbt))),
             'vehicles': {}
         })
 
@@ -170,12 +169,12 @@ class _Dossier(object):
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
         })
 
-        #from gui.shared import g_itemsCache
-        #vehicle = g_itemsCache.items.getItemByCD(res['vehId'])
-        #if vehicle is not None and vehicle.invID >= 0:
-        #_, nID, innID = vehicles.parseIntCompactDescr(res['vehId'])
-        #vehDescr = vehicles.VehicleDescr(typeID = (nID, innID))
-        #if vehDescr is not None:
+        # from gui.shared import g_itemsCache
+        # vehicle = g_itemsCache.items.getItemByCD(res['vehId'])
+        # if vehicle is not None and vehicle.invID >= 0:
+        # _, nID, innID = vehicles.parseIntCompactDescr(res['vehId'])
+        # vehDescr = vehicles.VehicleDescr(typeID = (nID, innID))
+        # if vehDescr is not None:
         #    if res['vehId'] == 4657:
         #        log("ok %i %i %i" % (res['vehId'], vehDescr.maxHealth, vehDescr.turret['maxHealth']))
         #        #log(vars(vehDescr))

@@ -60,7 +60,7 @@ def fini():
     g_websock.stop()
     filecache.fin()
 
-def FlashInit(self, swf, className = 'Flash', args = None, path = None):
+def FlashInit(self, swf, className='Flash', args=None, path=None):
     self.swf = swf
     if self.swf not in _SWFS:
         return
@@ -89,12 +89,12 @@ def FlashBeforeDelete(self):
     if self.swf == _VMM_SWF:
         g_xvm.vmmFlashObject = None
 
-def Flash_call(base, self, methodName, args = None):
-    #debug("> call: %s, %s" % (methodName, str(args)))
+def Flash_call(base, self, methodName, args=None):
+    # debug("> call: %s, %s" % (methodName, str(args)))
     base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
 
-def VehicleMarkersManager_invokeMarker(base, self, handle, function, args = None):
-    #debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
+def VehicleMarkersManager_invokeMarker(base, self, handle, function, args=None):
+    # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
 # HANGAR
@@ -106,7 +106,7 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 #        self.as_responseVehicleDossierS({})
 
 def LoginView_onSetOptions(base, self, optionsList, host):
-    #log('LoginView_onSetOptions')
+    # log('LoginView_onSetOptions')
     if config.config is not None and config.config['login']['saveLastServer']:
         self.saveLastSelectedServer(host)
     base(self, optionsList, host)
@@ -144,29 +144,29 @@ def PlayerAvatar_onLeaveWorld(self):
 
 # on any player marker appear
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
-    #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
+    # debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
     g_xvm.invalidateBattleState(vehicle.id)
 
 # on any player marker lost
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
-    #debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
+    # debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
     g_xvm.invalidateBattleState(vehicle.id)
 
 # on any vehicle hit received
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
+    # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.invalidateBattleState(self.id)
 
 # spotted status
 def _Minimap__addEntry(self, id, location, doMark):
-    #debug('> _Minimap__addEntry: {0}'.format(id))
+    # debug('> _Minimap__addEntry: {0}'.format(id))
     g_xvm.invalidateSpottedStatus(id, True)
 
-def _Minimap__delEntry(self, id, inCallback = False):
-    #debug('> _Minimap__delEntry: {0}'.format(id))
+def _Minimap__delEntry(self, id, inCallback=False):
+    # debug('> _Minimap__delEntry: {0}'.format(id))
     g_xvm.invalidateSpottedStatus(id, False)
 
-def _Minimap__callEntryFlash(base, self, id, methodName, args = None):
+def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     base(self, id, methodName, args)
     try:
         if self._Minimap__isStarted:
@@ -180,7 +180,7 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args = None):
         if IS_DEVELOPMENT:
             err(traceback.format_exc())
 
-def _Minimap__addEntryLit(self, id, matrix, visible = True):
+def _Minimap__addEntryLit(self, id, matrix, visible=True):
     from gui.battle_control import g_sessionProvider
     battleCtx = g_sessionProvider.getCtx()
     if battleCtx.isObserver(id) or matrix is None:
@@ -195,7 +195,7 @@ def _Minimap__addEntryLit(self, id, matrix, visible = True):
 
 # stereoscope
 def AmmunitionPanel_highlightParams(self, type):
-    #debug('> AmmunitionPanel_highlightParams')
+    # debug('> AmmunitionPanel_highlightParams')
     g_xvm.updateTankParams()
 
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
@@ -220,12 +220,12 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
 def WaitingViewMeta_fix(base, self, *args):
     try:
         base(self, *args)
-        #raise Exception('Test')
+        # raise Exception('Test')
     except Exception, ex:
         log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
 
 
-#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
+'''#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
 #    debug('_CustomFilesCache__get')
 #    base(self, url, showImmediately, checkedInCache)
 #def _CustomFilesCache__readLocalFile(base, self, url, showImmediately):
@@ -263,7 +263,7 @@ def WaitingViewMeta_fix(base, self, *args):
 #    base(self, url, invokeAndReleaseCallbacks, file)
 #def _WorkerThread__run_download(base, self, url, modified_time, callback, **params):
 #    debug('_WorkerThread__run_download')
-#    base(self, url, modified_time, callback, **params)
+#    base(self, url, modified_time, callback, **params)'''
 
 
 #####################################################################
@@ -324,23 +324,23 @@ def _RegisterEvents():
     OverrideMethod(WaitingViewMeta, 'showS', WaitingViewMeta_fix)
     OverrideMethod(WaitingViewMeta, 'hideS', WaitingViewMeta_fix)
 
-    #import account_helpers.CustomFilesCache as cache
-    #cache._MIN_LIFE_TIME = 15
-    #cache._MAX_LIFE_TIME = 24
-    #from account_helpers.CustomFilesCache import CustomFilesCache, WorkerThread
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__get', _CustomFilesCache__get)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__readLocalFile', _CustomFilesCache__readLocalFile)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile', _CustomFilesCache__onReadLocalFile)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__checkFile', _CustomFilesCache__checkFile)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__onCheckFile', _CustomFilesCache__onCheckFile)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__readRemoteFile', _CustomFilesCache__readRemoteFile)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__onReadRemoteFile', _CustomFilesCache__onReadRemoteFile)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__prepareCache', _CustomFilesCache__prepareCache)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__writeCache', _CustomFilesCache__writeCache)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__onWriteCache', _CustomFilesCache__onWriteCache)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__postTask', _CustomFilesCache__postTask)
-    #OverrideMethod(CustomFilesCache, '_CustomFilesCache__onPostTask', _CustomFilesCache__onPostTask)
-    #OverrideMethod(WorkerThread, '_WorkerThread__run_download', _WorkerThread__run_download)
+    # import account_helpers.CustomFilesCache as cache
+    # cache._MIN_LIFE_TIME = 15
+    # cache._MAX_LIFE_TIME = 24
+    # from account_helpers.CustomFilesCache import CustomFilesCache, WorkerThread
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__get', _CustomFilesCache__get)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__readLocalFile', _CustomFilesCache__readLocalFile)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile', _CustomFilesCache__onReadLocalFile)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__checkFile', _CustomFilesCache__checkFile)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__onCheckFile', _CustomFilesCache__onCheckFile)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__readRemoteFile', _CustomFilesCache__readRemoteFile)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__onReadRemoteFile', _CustomFilesCache__onReadRemoteFile)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__prepareCache', _CustomFilesCache__prepareCache)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__writeCache', _CustomFilesCache__writeCache)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__onWriteCache', _CustomFilesCache__onWriteCache)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__postTask', _CustomFilesCache__postTask)
+    # OverrideMethod(CustomFilesCache, '_CustomFilesCache__onPostTask', _CustomFilesCache__onPostTask)
+    # OverrideMethod(WorkerThread, '_WorkerThread__run_download', _WorkerThread__run_download)
 
 BigWorld.callback(0, _RegisterEvents)
 

@@ -30,25 +30,25 @@ class _Fps():
 
     def start(self):
         if not config.config:
-            #debug('wait')
+            # debug('wait')
             BigWorld.callback(0, self.start)
             return
         if self.intervalId is not None:
             stop()
         if config.config['export']['fps']['enabled']:
-            #debug('fps start')
+            # debug('fps start')
             self.interval = config.config['export']['fps']['interval']
             self.outputDir = config.config['export']['fps']['outputDir']
             self.intervalId = BigWorld.callback(self.interval, self.update)
             self.values = []
 
     def stop(self):
-        #debug('fps stop')
+        # debug('fps stop')
         if self.intervalId is not None:
             BigWorld.cancelCallback(self.intervalId)
             self.intervalId = None
         if self.values and len(self.values):
-            #log(self.values)
+            # log(self.values)
             try:
                 if not os.path.isdir(self.outputDir):
                     os.makedirs(self.outputDir)
@@ -63,7 +63,7 @@ class _Fps():
             self.values = []
 
     def update(self):
-        #debug('update')
+        # debug('update')
         period = getArenaPeriod()
         time = BigWorld.time()
         fps = BigWorld.getFPS()[1]
@@ -74,8 +74,8 @@ class _Fps():
         self.intervalId = BigWorld.callback(self.interval, self.update)
 
     def add_value(self, period, time, fps):
-        #debug('fps: {0} per: {1} time: {2}'.format(fps, period, time))
-        self.values.append({'period':period,'time':time,'fps':fps})
+        # debug('fps: {0} per: {1} time: {2}'.format(fps, period, time))
+        self.values.append({'period': period, 'time': time, 'fps': fps})
         pass
 
 _g_fps = None

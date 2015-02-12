@@ -31,7 +31,7 @@ _LOG_COMMANDS = (
     COMMAND_LOADBATTLERESULTSSTAT,
     COMMAND_LOGSTAT,
     COMMAND_TEST,
-    )
+)
 
 class Xvm(object):
     def __init__(self):
@@ -52,7 +52,7 @@ class Xvm(object):
     # returns: (result, status)
     def onXpmCommand(self, cmd, *args):
         try:
-            if (cmd in _LOG_COMMANDS):
+            if cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
 
             if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
@@ -72,14 +72,14 @@ class Xvm(object):
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
-            #debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-            if (cmd in _LOG_COMMANDS):
+            # debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
+            if cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
             res = None
             if cmd == COMMAND_LOG:
                 log(*args)
             elif cmd == COMMAND_SET_CONFIG:
-                #debug('setConfig')
+                # debug('setConfig')
                 self.config_str = args[0]
                 config.config = simplejson.loads(self.config_str)
                 if len(args) >= 2:
@@ -88,10 +88,10 @@ class Xvm(object):
                 self.sendConfig(self.battleFlashObject)
                 self.sendConfig(self.vmmFlashObject)
             elif cmd == COMMAND_GETSCREENSIZE:
-                #return
+                # return
                 res = simplejson.dumps(list(GUI.screenResolution()))
             elif cmd == COMMAND_GETVEHICLEINFODATA:
-                #return
+                # return
                 res = getVehicleInfoDataStr()
             elif cmd == COMMAND_LOADBATTLESTAT:
                 getBattleStat(proxy, args)
@@ -117,19 +117,19 @@ class Xvm(object):
             else:
                 return
             proxy.movie.invoke(('xvm.respond',
-                [id] + res if isinstance(res, list) else [id, res]))
+                                [id] + res if isinstance(res, list) else [id, res]))
         except Exception, ex:
             err(traceback.format_exc())
 
     def extendInvokeArgs(self, swf, methodName, args):
-        #debug('overrideMovieInvoke: %s %s %s' % (swf, methodName, str(args)))
+        # debug('overrideMovieInvoke: %s %s %s' % (swf, methodName, str(args)))
         return args
 
     def extendVehicleMarkerArgs(self, handle, function, args):
         try:
             if function == 'init':
                 if len(args) > 5:
-                    #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
+                    # debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
                     v = utils.getVehicleByName(args[5])
                     if hasattr(v, 'publicInfo'):
                         vInfo = utils.getVehicleInfo(v.id)
@@ -141,7 +141,7 @@ class Xvm(object):
                             vStats.frags,
                         ])
             elif function not in ['showExInfo']:
-                #debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))
+                # debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))
                 pass
         except Exception, ex:
             err('extendVehicleMarkerArgs(): ' + traceback.format_exc())
@@ -153,8 +153,8 @@ class Xvm(object):
             isDown = event.isKeyDown()
             isRepeated = event.isRepeatedEvent()
             if not isRepeated:
-                #debug("key=" + str(key) + ' ' + ('down' if isDown else 'up'))
-                #g_websock.send("%s/%i" % ('down' if isDown else 'up', key))
+                # debug("key=" + str(key) + ' ' + ('down' if isDown else 'up'))
+                # g_websock.send("%s/%i" % ('down' if isDown else 'up', key))
                 if config.config is not None:
                     if self.battleFlashObject is not None:
                         if self.checkKeyEventBattle(key, isDown):
@@ -173,11 +173,11 @@ class Xvm(object):
 
         c = config.config['hotkeys']
 
-        if (c['minimapZoom']['enabled'] == True and c['minimapZoom']['keyCode'] == key):
+        if (c['minimapZoom']['enabled'] is True and c['minimapZoom']['keyCode'] == key):
             return True
-        if (c['minimapAltMode']['enabled'] == True and c['minimapAltMode']['keyCode'] == key):
+        if (c['minimapAltMode']['enabled'] is True and c['minimapAltMode']['keyCode'] == key):
             return True
-        if (c['playersPanelAltMode']['enabled'] == True and c['playersPanelAltMode']['keyCode'] == key):
+        if (c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key):
             return True
 
         return False
@@ -188,7 +188,7 @@ class Xvm(object):
     def deleteApplication(self):
         self.hangarDispose()
         if self.app is not None and self.app.loaderManager is not None:
-           self.app.loaderManager.onViewLoaded -= self.onViewLoaded
+            self.app.loaderManager.onViewLoaded -= self.onViewLoaded
 
     def initBattle(self):
         debug('> initBattle()')
@@ -203,8 +203,8 @@ class Xvm(object):
             if vehId and vehId == cfg.get('_internal', {}).get('vehId', None):
                 # Normal battle start. Update data and save to userprefs cache
                 userprefs.set(fileName, {
-                  'ver': '1.0',
-                  'minimap_circles': cfg['_internal'],
+                    'ver': '1.0',
+                    'minimap_circles': cfg['_internal'],
                 })
             else:
                 # Replay, training or restarted battle after crash. Try to restore data.
@@ -229,10 +229,10 @@ class Xvm(object):
     def on_websock_message(self, message):
         try:
             pass
-            #type = SystemMessages.SM_TYPE.Information
-            #msg += message
-            #msg += '</textformat>'
-            #SystemMessages.pushMessage(msg, type)
+            # type = SystemMessages.SM_TYPE.Information
+            # msg += message
+            # msg += '</textformat>'
+            # SystemMessages.pushMessage(msg, type)
         except:
             debug(traceback.format_exc())
 
@@ -260,7 +260,7 @@ class Xvm(object):
             token.initializeXvmToken()
             g_websock.send('id/%d' % playerId)
         if self.app is not None:
-           self.app.loaderManager.onViewLoaded += self.onViewLoaded
+            self.app.loaderManager.onViewLoaded += self.onViewLoaded
 
     def onViewLoaded(self, e=None):
         if e is None:
@@ -305,7 +305,7 @@ class Xvm(object):
 
 
     def onEnterWorld(self):
-        #debug('onEnterWorld: ' + str(BigWorld.player().arena))
+        # debug('onEnterWorld: ' + str(BigWorld.player().arena))
 
         try:
             arena = BigWorld.player().arena
@@ -317,7 +317,7 @@ class Xvm(object):
             err(traceback.format_exc())
 
     def onLeaveWorld(self):
-        #debug('onLeaveWorld')
+        # debug('onLeaveWorld')
 
         try:
             arena = BigWorld.player().arena
@@ -339,7 +339,7 @@ class Xvm(object):
 
 
     def invalidateBattleStates(self):
-        #debug('invalidateBattleStates')
+        # debug('invalidateBattleStates')
         self._battleStateLast.clear()
         self._vehicleStatusLast.clear()
         self._vehicleStatsLast.clear()
@@ -348,7 +348,7 @@ class Xvm(object):
             self.invalidateBattleState(vID)
 
     def invalidateBattleState(self, vID):
-        #debug('invalidateBattleState: {0}'.format(vID))
+        # debug('invalidateBattleState: {0}'.format(vID))
 
         if config.config is None:
             return
@@ -369,7 +369,7 @@ class Xvm(object):
 
             if self._battleStateTimersId.get(vID, None) is None:
                 self._battleStateTimersId[vID] = \
-                    BigWorld.callback(0.3, lambda:self.updateBattleState(vID))
+                    BigWorld.callback(0.3, lambda: self.updateBattleState(vID))
         else:
             if cfgMarksOnGun and self.battleFlashObject is not None:
                 vehicle = BigWorld.entity(vID)
@@ -377,12 +377,12 @@ class Xvm(object):
                     movie = self.battleFlashObject.movie
                     if movie is not None:
                         movie.invoke((RESPOND_MARKSONGUN,
-                            vehicle.publicInfo.name,
-                            vehicle.publicInfo.marksOnGun))
+                                      vehicle.publicInfo.name,
+                                      vehicle.publicInfo.marksOnGun))
 
 
     def invalidateSpottedStatus(self, vID, spotted):
-        #debug('invalidateSpottedStatus: {0} {1}'.format(vID, spotted))
+        # debug('invalidateSpottedStatus: {0} {1}'.format(vID, spotted))
 
         player = BigWorld.player()
         if player is None or not hasattr(player, 'arena') or player.arena is None:
@@ -400,31 +400,32 @@ class Xvm(object):
 
         if self._battleStateTimersId.get(vID, None) is None:
             self._battleStateTimersId[vID] = \
-                BigWorld.callback(0.3, lambda:self.updateBattleState(vID))
+                BigWorld.callback(0.3, lambda: self.updateBattleState(vID))
 
     def updateBattleState(self, vID):
         try:
-            #debug('updateBattleState: {0}'.format(vID))
+            # debug('updateBattleState: {0}'.format(vID))
             if self.battleFlashObject is not None:
                 last = self._battleStateLast.get(vID, None)
                 state = self._battleStateData.get(vID, None)
-                #debug(state)
+                # debug(state)
                 if state is not None and state != last:
                     self._battleStateLast[vID] = state
                     movie = self.battleFlashObject.movie
                     if movie is not None:
-                        #debug('updateBattleState: {0} {1}'.format(vID, set(state.items())^set((last if last else {}).items())))
+                        # debug('updateBattleState: {0} {1}'.format(vID, set(state.items())^
+                        # set((last if last else {}).items())))
                         cfgAllowHp = config.config['battle']['allowHpInPanelsAndMinimap']
                         cfgMarksOnGun = config.config['battle']['allowMarksOnGunInPanelsAndMinimap']
                         movie.invoke((RESPOND_BATTLESTATE,
-                            state['playerName'],
-                            state['playerId'],
-                            state['vId'],
-                            state['dead'],
-                            state['curHealth'] if cfgAllowHp else None,
-                            state['maxHealth'] if cfgAllowHp else None,
-                            state['marksOnGun'] if cfgAllowHp or cfgMarksOnGun else None,
-                            state['spotted'],
+                                      state['playerName'],
+                                      state['playerId'],
+                                      state['vId'],
+                                      state['dead'],
+                                      state['curHealth'] if cfgAllowHp else None,
+                                      state['maxHealth'] if cfgAllowHp else None,
+                                      state['marksOnGun'] if cfgAllowHp or cfgMarksOnGun else None,
+                                      state['spotted'],
                         ))
 
             if self.vmmFlashObject is not None:
@@ -436,7 +437,7 @@ class Xvm(object):
                     status = g_sessionProvider.getArenaDP().getVehicleInfo(vID).vehicleStatus
                     if status != last:
                         self._vehicleStatusLast[vID] = status
-                        #debug('updateBattleState: {0} {1}->{2}'.format(vID, last, status))
+                        # debug('updateBattleState: {0} {1}->{2}'.format(vID, last, status))
                         self.vmmFlashObject.invokeMarker(vehicle.marker, 'setStatus', [status])
 
         except Exception, ex:
@@ -447,7 +448,7 @@ class Xvm(object):
 
     def updateVehicleStats(self, vID):
         try:
-            #debug('updateVehicleStats: {0}'.format(vID))
+            # debug('updateVehicleStats: {0}'.format(vID))
             if self.vmmFlashObject is not None:
                 vehicle = BigWorld.entity(vID)
                 if vehicle is not None and hasattr(vehicle, 'marker'):
@@ -457,7 +458,7 @@ class Xvm(object):
                         last = self._vehicleStatsLast.get(vID, None)
                         if frags != last:
                             self._vehicleStatsLast[vID] = frags
-                            #debug('updateVehicleStats: {0} {1}->{2}'.format(vID, last, frags))
+                            # debug('updateVehicleStats: {0} {1}->{2}'.format(vID, last, frags))
                             self.vmmFlashObject.invokeMarker(vehicle.marker, 'setFrags', [stat['frags']])
         except Exception, ex:
             err(traceback.format_exc())
@@ -467,7 +468,7 @@ class Xvm(object):
     def sendConfig(self, flashObject):
         if config.config is None or flashObject is None:
             return
-        #debug('sendConfig')
+        # debug('sendConfig')
         try:
             movie = flashObject.movie
             if movie is not None:

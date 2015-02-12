@@ -36,13 +36,13 @@ class _MinimapCircles(object):
         self.camouflage = []
 
     def updateCurrentVehicle(self):
-        #debug('updateCurrentVehicle')
+        # debug('updateCurrentVehicle')
 
         self.clear()
 
         from CurrentVehicle import g_currentVehicle
-        #debug(g_currentVehicle)
-        #debug(g_currentVehicle.item)
+        # debug(g_currentVehicle)
+        # debug(g_currentVehicle.item)
         self.item = g_currentVehicle.item
         if self.item is None:
             return
@@ -90,7 +90,7 @@ class _MinimapCircles(object):
                 if self.radioman_inventor < skill:
                     self.radioman_inventor = skill
 
-            self.camouflage.append({'name':name, 'skill':skills.get('camouflage', 0)})
+            self.camouflage.append({'name': name, 'skill': skills.get('camouflage', 0)})
 
             if 'brotherhood' not in skills or skills['brotherhood'] != 100:
                 self.brothers_in_arms = False
@@ -139,8 +139,8 @@ class _MinimapCircles(object):
     def updateConfig(self, descr):
         cfg = config.config['minimap']['circles']
 
-        #debug(vars(descr))
-        #debug(vars(descr.type))
+        # debug(vars(descr))
+        # debug(vars(descr.type))
 
         # View Range
         if isReplay():
@@ -159,8 +159,8 @@ class _MinimapCircles(object):
         if shell_range >= 707:
             shell_range = 0
 
-        #log(descr.gun)
-        #log(descr.radio)
+        # log(descr.gun)
+        # log(descr.radio)
 
         # Set values
         cfg['_internal'] = {
@@ -216,12 +216,12 @@ class _MinimapCircles(object):
                     for skill in skills:
                         crew_member['skill'][skill['name']] = skill['level']
 
-                    #debug(tankman.descriptor.role + " " + str(crew_member['level']))
+                    # debug(tankman.descriptor.role + " " + str(crew_member['level']))
                     self.crew.append({'name': tankman.descriptor.role, 'data': crew_member})
 
     def _isOptionalEquipped(self, optional_name):
         for item in self.item.descriptor.optionalDevices:
-            #debug(vars(item))
+            # debug(vars(item))
             if item is not None and optional_name in item.name:
                 return True
         return False
@@ -229,7 +229,7 @@ class _MinimapCircles(object):
     def _isConsumableEquipped(self, consumable_names):
         from gui.shared.utils.requesters import VehicleItemsRequester
         for item in self.item.eqsLayout:
-            #debug(vars(item))
+            # debug(vars(item))
             if item is not None and item.descriptor.name in consumable_names:
                 return True
         return False
