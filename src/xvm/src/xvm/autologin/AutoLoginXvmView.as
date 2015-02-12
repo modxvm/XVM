@@ -8,6 +8,7 @@ package xvm.autologin
     import com.xvm.infrastructure.*;
     import flash.display.*;
     import flash.ui.*;
+    import flash.utils.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
@@ -93,21 +94,23 @@ package xvm.autologin
                 var form:SimpleForm = e.view as SimpleForm;
                 if (form)
                 {
-                    App.utils.scheduler.scheduleTask(function():void
+                    var $this:AutoLoginXvmView = this;
+                    setTimeout(function():void
                     {
                         if (form.rememberPwdCheckbox.selected)
-                            doAutologin();
-                    }, 100);
+                            $this.doAutologin();
+                    }, 300);
                 }
             }
         }
 
         private function doAutologin():void
         {
-            App.utils.scheduler.scheduleTask(function():void
+            var $this:AutoLoginXvmView = this;
+            setTimeout(function():void
             {
-                if (loginPage != null)
-                    loginPage.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
+                if ($this.loginPage != null)
+                    $this.loginPage.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
             }, 100);
         }
     }
