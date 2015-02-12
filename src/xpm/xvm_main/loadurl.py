@@ -16,6 +16,13 @@ from constants import *
 from logger import *
 import utils
 
+_USER_AGENT = 'xvm'
+try:
+    from __version__ import __branch__, __revision__
+    _USER_AGENT += '-{0}/{1}'.format(__branch__, __revision__)
+except Exception, ex:
+    pass
+
 # result: (response, duration)
 def loadUrl(url, req=None, body=None, showLog=True):
     url = url.replace("{API}", XVM_API_VERSION)
@@ -60,7 +67,9 @@ def _loadUrl(u, timeout, fingerprint, body): # timeout in msec
             conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout/1000, checker=checker)
         else:
             conn = httplib.HTTPConnection(u.netloc, timeout=timeout/1000)
+        global _USER_AGENT
         headers = {
+            "User-Agent":_USER_AGENT,
             "Connection":"Keep-Alive",
             "Accept-Encoding":"gzip",
             "Content-Type": "text/plain; charset=utf-8"}
