@@ -3,6 +3,7 @@
 # PUBLIC
 
 versionChecked = False
+isOnline = False
 
 def checkVersion():
     _checkVersion()
@@ -138,6 +139,8 @@ def _checkVersion():
                         if data is not None:
                             _clansInfo = _processClansInfo(data)
                             _verInfo = data.get('info', None)
+                            global isOnline
+                            isOnline = True
             except Exception, ex:
                 err('  Bad answer: ' + response)
                 err(traceback.format_exc())

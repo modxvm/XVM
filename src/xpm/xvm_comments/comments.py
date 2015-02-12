@@ -26,10 +26,14 @@ class _Comments:
         self.cached_token = None
 
     def getXvmUserComments(self, cachedOnly):
+        if not token.isOnline:
+            return None
         res = self._doRequest('getComments', None, True, cachedOnly)
         return res if isinstance(res, str) else simplejson.dumps(res)
 
     def setXvmUserComments(self, value):
+        if not token.isOnline:
+            return None
         res = self._doRequest('addComments', value, False, False)
         return res if isinstance(res, str) else simplejson.dumps(res)
 
