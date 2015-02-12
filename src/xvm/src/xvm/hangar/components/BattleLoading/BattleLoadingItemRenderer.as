@@ -21,7 +21,6 @@ package xvm.hangar.components.BattleLoading
     {
         private var proxy:PlayerItemRenderer;
 
-        private var playerId:Number = NaN;
         private var fullPlayerName:String = null;
 
         private var _vehicleIconLoaded:Boolean = false;
@@ -63,9 +62,6 @@ package xvm.hangar.components.BattleLoading
             {
                 if (data == null)
                     return;
-
-                if (isNaN(playerId))
-                    playerId = data.accountDBID;
 
                 if (fullPlayerName == null)
                 {
@@ -197,13 +193,17 @@ package xvm.hangar.components.BattleLoading
             if (_clanIconLoaded)
                 return;
 
+            var data:VehicleInfoVO = proxy.data as VehicleInfoVO;
+            if (data == null)
+            {
+                Logger.add("WARNING: [attachClanIconToPlayer] data is null");
+                return;
+            }
+
+            var playerId:Number = data.accountDBID;
             if (isNaN(playerId))
             {
-                if (cnt > 10)
-                    return;
-                Logger.add('attachClanIconToPlayer: wait');
-                var $this:* = this;
-                setTimeout(function():void { $this.attachClanIconToPlayer(cnt + 1); }, 50);
+                Logger.add("WARNING: [attachClanIconToPlayer] playerId is NaN");
                 return;
             }
 
