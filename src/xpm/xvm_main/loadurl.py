@@ -36,19 +36,16 @@ def loadUrl(url, req=None, body=None, showLog=True):
 
     elapsed = datetime.datetime.now() - startTime
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
+    duration = None
     if response:
         log("  Time: %d ms, Size: %d (%d) bytes" % (msec, compressedSize, len(response)), '[INFO]  ')
         #debug('response: ' + response)
         if not response.lower().startswith('onexception'):
             duration = msec
-    else:
-        duration = None
 
     return (response, duration, errStr)
 
 def _loadUrl(u, timeout, fingerprint, body): # timeout in msec
-    response = None
-
     response = None
     compressedSize = None
     errStr = None

@@ -446,7 +446,7 @@ class _Stat(object):
                         stat['emblem'] = pl.emblem
                     if 'id' not in stat['v']:
                         stat['v']['id'] = pl.vId
-                    break;
+                    break
 
         if orig_name is not None:
             stat['name'] = orig_name
@@ -460,7 +460,7 @@ class _Stat(object):
                 rank = int(pl.clanInfo.get('rank', -1))
                 url = pl.clanInfo.get('emblem', None)
                 #url = 'http://stat.modxvm.com:81'
-                if url and rank >= 0 and rank <= token.networkServicesSettings['topClansCount']:
+                if url and 0 <= rank <= token.networkServicesSettings['topClansCount']:
                     url = url.replace('{size}', '32x32')
                     tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
                     self._loadingClanIconsCount += 1

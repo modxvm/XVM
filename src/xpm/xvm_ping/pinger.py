@@ -122,7 +122,6 @@ class _Ping(object):
         for x in self.hosts:
             processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, startupinfo=si)
 
-        # Ответ от 178.20.235.151: число байт=32 время=23мс TTL=58
         #pattern = '.*=.*=(\d+)[^\s].*=.*'   #original pattern, working with russian, not with others
         pattern = '.*=.*=(\d+).*[^\s].*=.*'  #fixed pattern, need testing but should work with every language
 
