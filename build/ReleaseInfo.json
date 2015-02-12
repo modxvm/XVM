@@ -1,13 +1,13 @@
 ﻿{
     "RU": {
-        "ver": "6.0.0.1",
+        "ver": "6.0.0.2",
         "wot": "0.9.6",
         "message": "  * WoT 0.9.6\n  * новые возможности\n  * исправлены ошибки"
     },
     "EU": {
-        "ver": "5.5.1.3",
-        "wot": "0.9.5",
-        "message": "  * WoT 0.9.5\n  * new features\n  * bugs fixed"
+        "ver": "6.0.0.2",
+        "wot": "0.9.6",
+        "message": "  * WoT 0.9.6\n  * new features\n  * bugs fixed"
     },
     "US": {
         "ver": "5.5.1.3",
