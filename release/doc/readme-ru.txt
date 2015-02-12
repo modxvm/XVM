@@ -42,19 +42,19 @@
   2. По умолчанию ничего настраивать не надо.
 
     Если нужны нестандартные настройки, необходимо переименовать загрузочный файл:
-      \res_mods\xvm\configs\xvm.xc.sample в xvm.xc
+      \res_mods\configs\xvm\xvm.xc.sample в xvm.xc
     Инструкции по его настройке находятся внутри.
 
     Увидеть все возможные настройки можно в папке
-      \res_mods\xvm\configs\@Default\
+      \res_mods\configs\xvm\@Default\
 
     Внимание: если вы меняете конфиг вручную, используйте Блокнот (notepad),
     НЕ используйте word, wordpad и подобные редакторы
 
   3. Если XVM неправильно определяет язык клиента игры,
-    то в конфигурационном файле (по умолчанию \res_mods\xvm\configs\@default\@xvm.xc )
+    то в конфигурационном файле (по умолчанию \res_mods\configs\xvm\@default\@xvm.xc )
     смените значение переменной "language" с "auto" на код языка.
-    Код языка должен совпадать с именем файла в папке \res_mods\xvm\l10n\ (например, "en").
+    Код языка должен совпадать с именем файла в папке \res_mods\mods\shared_resources\xvm\l10n\ (например, "en").
 
   4. Существует возможность установки ночных сборок XVM.
     Скачать ночные сборки можно на http://nightly.modxvm.com/
@@ -73,12 +73,12 @@
 -----------------------------------------------------------
 
   Конфигурационные файлы мода:
-    \res_mods\xvm\configs\@Default\
-  Можно скопировать готовый конфиг из папки \res_mods\xvm\configs\user configs\
+    \res_mods\configs\xvm\@Default\
+  Можно скопировать готовый конфиг из папки \res_mods\configs\xvm\user configs\
 
   Все возможные параметры конфига можно посмотреть в конфиге с русскими комментариями,
   который находится в папке документации в архиве мода:
-    \res_mods\xvm\configs\@Default\
+    \res_mods\configs\xvm\@Default\
 
   Поддерживаемые теги HTML:
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
@@ -118,11 +118,11 @@
       Подробнее: http://ru.wikipedia.org/wiki/Printf
 
     Использование макросов перевода - {{l10n:localizationKey}}
-      Макросы представляют собой ссылки на перевод в файлах res_mods/xvm/l10n/XX.xc file (XX означает код языка).
+      Макросы представляют собой ссылки на перевод в файлах \res_mods\mods\shared_resources\xvm\l10n\XX.xc file (XX означает код языка).
       Если перевод не найден, отображается "localizationKey".
 
       Пример с полосой захвата, используется язык en:
-        /l10n/en.xc
+        \l10n\en.xc
           "enemyBaseCaptured": "Base captured by allies!"
         captureBar.xc
           "captureDoneFormat":    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
