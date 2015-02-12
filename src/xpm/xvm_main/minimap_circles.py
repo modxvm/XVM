@@ -96,7 +96,7 @@ class _MinimapCircles(object):
                 self.brothers_in_arms = False
 
         if loaders_count > 0:
-            self.base_loaders_skill /= loaders_count;
+            self.base_loaders_skill /= loaders_count
 
         debug('  base_commander_skill: %.0f' % self.base_commander_skill)
         debug('  base_radioman_skill: %.0f' % self.base_radioman_skill)
