@@ -35,8 +35,8 @@ class COMMANDS(object):
 #####################################################################
 # event handlers
 
-def CrewContextMenuHandler__init__(base, self, cmProxy, ctx = None):
-    #debug('CrewContextMenuHandler__init__')
+def CrewContextMenuHandler__init__(base, self, cmProxy, ctx=None):
+    # debug('CrewContextMenuHandler__init__')
     import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as crew
     super(crew.CrewContextMenuHandler, self).__init__(cmProxy, ctx, {
         crew.CREW.PERSONAL_CASE: 'showPersonalCase',
@@ -46,16 +46,16 @@ def CrewContextMenuHandler__init__(base, self, cmProxy, ctx = None):
         CREW.PUT_BEST_CREW: CREW.PUT_BEST_CREW,
         CREW.PUT_CLASS_CREW: CREW.PUT_CLASS_CREW,
         CREW.PUT_PREVIOUS_CREW: CREW.PUT_PREVIOUS_CREW,
-        })
+    })
     self._cmProxy = cmProxy
 
 def CrewContextMenuHandler_generateOptions(base, self):
-    #debug('CrewContextMenuHandler_generateOptions')
+    # debug('CrewContextMenuHandler_generateOptions')
     if self._tankmanID:
         return base(self) + [
             self._makeSeparator(),
             self._makeItem(CREW.DROP_ALL_CREW, l10n(CREW.DROP_ALL_CREW)),
-            ]
+        ]
     else:
         return [
             self._makeItem(CREW.PUT_OWN_CREW, l10n(CREW.PUT_OWN_CREW)),
@@ -65,7 +65,7 @@ def CrewContextMenuHandler_generateOptions(base, self):
             self._makeItem(CREW.PUT_CLASS_CREW, l10n(CREW.PUT_CLASS_CREW)),
             self._makeSeparator(),
             self._makeItem(CREW.PUT_PREVIOUS_CREW, l10n(CREW.PUT_PREVIOUS_CREW)),
-            ]
+        ]
 
 #####################################################################
 # Menu item handlers

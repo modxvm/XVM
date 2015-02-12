@@ -24,9 +24,9 @@ from xfw import *
 from logger import *
 
 def _getVehicleStateData(vID):
-    #log(vars(vehicle))
-    #log(vars(vehicle.typeDescriptor))
-    #self.maxHealth = vData['vehicleType'].maxHealth
+    # log(vars(vehicle))
+    # log(vars(vehicle.typeDescriptor))
+    # self.maxHealth = vData['vehicleType'].maxHealth
 
     arenaVehicle = BigWorld.player().arena.vehicles.get(vID, None)
     if arenaVehicle is None:

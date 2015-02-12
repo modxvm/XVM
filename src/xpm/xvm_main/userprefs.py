@@ -21,7 +21,7 @@ class _UserPrefs():
     def __init__(self):
         try:
             self.cache_dir = os.path.join(
-                os.path.dirname(unicode(BigWorld.wg_getPreferencesFilePath(), 'utf-8', errors = 'ignore')),
+                os.path.dirname(unicode(BigWorld.wg_getPreferencesFilePath(), 'utf-8', errors='ignore')),
                 'xvm')
             if not os.path.isdir(self.cache_dir):
                 os.makedirs(self.cache_dir)

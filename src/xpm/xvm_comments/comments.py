@@ -41,34 +41,34 @@ class _Comments:
         try:
             t = token.getToken()
             if t is None:
-                return {'error':'NOT_INITIALIZED'}
+                return {'error': 'NOT_INITIALIZED'}
             if t == '':
-                return {'error':'NO_TOKEN'}
+                return {'error': 'NO_TOKEN'}
 
             if useCache:
                 if self.cached_token is not None and self.cached_token == t:
                     return self.cached_data
 
             if cachedOnly:
-                return {'error':'NOT_CACHED'}
+                return {'error': 'NOT_CACHED'}
 
             req = '{0}/{1}'.format(cmd, t)
             server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
             (response, duration, errStr) = loadUrl(server, req, body=body)
 
             if not response:
-                return {'error':'NO_RESPONSE', 'errStr':errStr}
+                return {'error': 'NO_RESPONSE', 'errStr': errStr}
 
             response = response.strip()
             if response in ('', '[]', '{}'):
                 response = None
-            #log(utils.hide_guid(response))
+            # log(utils.hide_guid(response))
             self.cached_token = t
             self.cached_data = response
             return response
         except Exception, ex:
             errStr = str(ex)
             err(traceback.format_exc())
-            return {'error':'EXCEPTION', 'errStr':errStr}
+            return {'error': 'EXCEPTION', 'errStr': errStr}
 
 _comments = _Comments()

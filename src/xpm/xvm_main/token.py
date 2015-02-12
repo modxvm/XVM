@@ -91,7 +91,7 @@ def _getXvmActiveTokenData():
                 return None
             tdata = userprefs.get('tokens.{0}'.format(playerId))
 
-    if tdata is not None and not 'token' in tdata:
+    if tdata is not None and 'token' not in tdata:
         tdata = None
 
     if tdata is not None:
@@ -117,7 +117,7 @@ def _checkVersion():
         server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
-        #response =
+        # response =
         """ {
               "topClans":{"MGRD":{"rank":"747","cid":"156781"},...},
               "persistClans":{"WG-A":{"rank":"0","cid":"17996"},...},
@@ -128,7 +128,7 @@ def _checkVersion():
         _clansInfo = None
         _verInfo = None
         if not response:
-            #err('Empty response or parsing error')
+            # err('Empty response or parsing error')
             pass
         else:
             try:
@@ -174,7 +174,7 @@ def _initializeXvmToken():
         type = SystemMessages.SM_TYPE.GameGreeting
         msg += '{{l10n:token/active}}\n'
         s = time.time()
-        e = tdata['expires_at']/1000
+        e = tdata['expires_at'] / 1000
         days_left = int((e - s) / 86400)
         hours_left = int((e - s) / 3600) % 24
         mins_left = int((e - s) / 60) % 60
@@ -191,7 +191,7 @@ def _initializeXvmToken():
 
     if tdata is not None:
         _tdataPrev = tdata
-        if not 'token' in tdata and tdataActive is not None:
+        if 'token' not in tdata and tdataActive is not None:
             tdata['token'] = tdataActive['token']
         userprefs.set('tokens.{0}'.format(playerId), tdata)
         userprefs.set('tokens.lastPlayerId', playerId)
@@ -213,12 +213,14 @@ def _checkToken(playerId, token):
         server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
-        #response= """{"status":"inactive"}"""
-        #response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active","token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
-        #response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken","start_at":1393608331657}"""
+        # response= """{"status":"inactive"}"""
+        # response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active",
+        # "token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
+        # response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken",
+        # "start_at":1393608331657}"""
 
         if not response:
-            #err('Empty response or parsing error')
+            # err('Empty response or parsing error')
             pass
         else:
             try:
@@ -238,7 +240,8 @@ def _checkToken(playerId, token):
     return (data, errStr)
 
 def _getXvmMessageHeader():
-    msg = '<textformat tabstops="[130]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" vspace="-5">'
+    msg = '<textformat tabstops="[130]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" ' \
+          'vspace="-5">'
     msg += '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
     rev = ''
     try:
@@ -269,9 +272,9 @@ def _processClansInfo(data):
     clans = data.get('persistClans', {})
     clans.update(data.get('topClans', {}))
     # DEBUG
-    #clans['JKHU'] = {'rank':100,'cid':1,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    #clans['MWJL'] = {'rank':101,'cid':2,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    #clans['GPTX'] = {'rank':0,'cid':3,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    #clans['CJBZ'] = {'rank':1,'cid':4,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    # clans['JKHU'] = {'rank':100,'cid':1,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    # clans['MWJL'] = {'rank':101,'cid':2,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    # clans['GPTX'] = {'rank':0,'cid':3,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    # clans['CJBZ'] = {'rank':1,'cid':4,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
     # /DEBUG
     return clans

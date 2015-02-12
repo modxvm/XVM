@@ -5,26 +5,26 @@
 
 def getBattleStat(proxy, args):
     _stat.enqueue({
-        'func':_stat.getBattleStat,
-        'proxy':proxy,
-        'method':RESPOND_BATTLEDATA,
-        'args':args})
+        'func': _stat.getBattleStat,
+        'proxy': proxy,
+        'method': RESPOND_BATTLEDATA,
+        'args': args})
     _stat.processQueue()
 
 def getBattleResultsStat(proxy, args):
     _stat.enqueue({
-        'func':_stat.getBattleResultsStat,
-        'proxy':proxy,
-        'method':RESPOND_BATTLERESULTSDATA,
-        'args':args})
+        'func': _stat.getBattleResultsStat,
+        'proxy': proxy,
+        'method': RESPOND_BATTLERESULTSDATA,
+        'args': args})
     _stat.processQueue()
 
 def getUserData(proxy, args):
     _stat.enqueue({
-        'func':_stat.getUserData,
-        'proxy':proxy,
-        'method':RESPOND_USERDATA,
-        'args':args})
+        'func': _stat.getUserData,
+        'proxy': proxy,
+        'method': RESPOND_USERDATA,
+        'args': args})
     _stat.processQueue()
 
 
@@ -63,7 +63,7 @@ class _Stat(object):
 
     def __init__(self):
         player = BigWorld.player()
-        self.queue = [] # HINT: Since WoT 0.9.0 use Queue() leads to Access Violation after client closing
+        self.queue = []  # HINT: Since WoT 0.9.0 use Queue() leads to Access Violation after client closing
         self.lock = threading.RLock()
         self.thread = None
         self.req = None
@@ -96,16 +96,16 @@ class _Stat(object):
         self.thread = threading.Thread(target=self.req['func'])
         self.thread.daemon = False
         self.thread.start()
-        #self.req['func']()
+        # self.req['func']()
         debug('start')
-        #self._checkResult()
+        # self._checkResult()
         BigWorld.callback(0, self._checkResult)
 
     def _checkResult(self):
         with self.lock:
             debug("checkResult: " + ("no" if self.resp is None else "yes"))
             if self.thread is not None:
-                self.thread.join(0.01) # 10 ms
+                self.thread.join(0.01)  # 10 ms
             if self.resp is None:
                 BigWorld.callback(0.05, self._checkResult)
                 return
@@ -120,7 +120,7 @@ class _Stat(object):
                     self.thread.join()
                     debug('thread deleted')
                     self.thread = None
-                    #self.processQueue()
+                    # self.processQueue()
                     BigWorld.callback(0, self.processQueue)
 
     def _respond(self):
@@ -136,7 +136,7 @@ class _Stat(object):
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
                 self._get_battle()
-                return # required to prevent deadlock
+                return  # required to prevent deadlock
             else:
                 debug('WARNING: arena not created, but getBattleStat() called')
             #    # Long initialization with high ping
@@ -155,7 +155,7 @@ class _Stat(object):
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAccount':
                 self._get_battleresults()
-                return # required to prevent deadlock
+                return  # required to prevent deadlock
         except Exception, ex:
             err(traceback.format_exc())
         with self.lock:
@@ -166,7 +166,7 @@ class _Stat(object):
     def getUserData(self):
         try:
             self._get_user()
-            return # required to prevent deadlock
+            return  # required to prevent deadlock
         except Exception, ex:
             err(traceback.format_exc())
         with self.lock:
@@ -190,13 +190,13 @@ class _Stat(object):
                 self.players[vehId] = pl
             self.players[vehId].update(vData)
 
-        #sleepCounter = 0
+        # sleepCounter = 0
         while self._loadingClanIconsCount > 0:
             time.sleep(0.01)
 
-            ## FIX: temporary workaround
-            #sleepCounter += 1
-            #if sleepCounter > 1000: # 10 sec
+            # # FIX: temporary workaround
+            # sleepCounter += 1
+            # if sleepCounter > 1000: # 10 sec
             #    log('WARNING: icons loading too long')
             #    break;
 
@@ -207,13 +207,13 @@ class _Stat(object):
         for (vehId, pl) in self.players.items():
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
             if cacheKey not in self.cacheBattle:
-                cacheKey2 = "%d" % (pl.playerId)
+                cacheKey2 = "%d" % pl.playerId
                 if cacheKey2 not in self.cacheBattle:
                     self.cacheBattle[cacheKey] = self._get_battle_stub(pl)
             stat = self.cacheBattle[cacheKey]
             self._fix(stat)
             players[pl.name] = stat
-        #pprint(players)
+        # pprint(players)
 
         with self.lock:
             self.resp = {'players': players}
@@ -224,14 +224,14 @@ class _Stat(object):
         player = BigWorld.player()
         player.battleResultsCache.get(int(arenaUniqueId), self._battleResultsCallback)
 
-    def _battleResultsCallback(self, responseCode, value = None, revision = 0):
+    def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
             if responseCode < 0:
                 with self.lock:
                     self.resp = {}
                 return
 
-            #pprint(value)
+            # pprint(value)
 
             self.players = {}
 
@@ -240,11 +240,11 @@ class _Stat(object):
                 accountDBID = vehData['accountDBID']
                 plData = value['players'][accountDBID]
                 vData = {
-                  'accountDBID': accountDBID,
-                  'name': plData['name'],
-                  'clanAbbrev': plData['clanAbbrev'],
-                  'typeCompDescr': vehData['typeCompDescr'],
-                  'team': vehData['team']}
+                    'accountDBID': accountDBID,
+                    'name': plData['name'],
+                    'clanAbbrev': plData['clanAbbrev'],
+                    'typeCompDescr': vehData['typeCompDescr'],
+                    'team': vehData['team']}
                 self.players[vehId] = _Player(vehId, vData)
 
             self._load_stat(0)
@@ -253,13 +253,13 @@ class _Stat(object):
             for (vehId, pl) in self.players.items():
                 cacheKey = "%d=%d" % (pl.playerId, pl.vId)
                 if cacheKey not in self.cacheBattle:
-                    cacheKey2 = "%d" % (pl.playerId)
+                    cacheKey2 = "%d" % pl.playerId
                     if cacheKey2 not in self.cacheBattle:
                         self.cacheBattle[cacheKey] = self._get_battle_stub(pl)
                 stat = self.cacheBattle[cacheKey]
                 self._fix(stat)
                 players[pl.name] = stat
-            #pprint(players)
+            # pprint(players)
 
             with self.lock:
                 self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players}
@@ -295,7 +295,7 @@ class _Stat(object):
         if cacheKey not in self.cacheUser:
             try:
                 tdata = token.getXvmActiveTokenData()
-                if tdata is None or not 'token' in tdata:
+                if tdata is None or 'token' not in tdata:
                     err('No valid token for XVM network services (key=%s)' % cacheKey)
                 else:
                     tok = tdata['token'].encode('ascii')
@@ -306,10 +306,10 @@ class _Stat(object):
                     server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
                     (response, duration, errStr) = loadUrl(server, req)
 
-                    #log(response)
+                    # log(response)
 
                     if not response:
-                        #err('Empty response or parsing error')
+                        # err('Empty response or parsing error')
                         pass
                     else:
                         try:
@@ -336,7 +336,7 @@ class _Stat(object):
         s = {
             '_id': pl.playerId,
             'nm': pl.name,
-            'v': { 'id':pl.vId },
+            'v': {'id': pl.vId},
         }
         return self._fix(s)
 
@@ -349,14 +349,14 @@ class _Stat(object):
         for (vehId, pl) in self.players.items():
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
 
-            if not cacheKey in self.cacheBattle:
+            if cacheKey not in self.cacheBattle:
                 all_cached = False
 
-            #if pl.vId in [None, '', 'UNKNOWN']:
+            # if pl.vId in [None, '', 'UNKNOWN']:
             #    requestList.append(str(pl.playerId))
-            #else:
+            # else:
             requestList.append("%d=%d%s" % (pl.playerId, pl.vId,
-                '=1' if not replay and pl.vehId == playerVehicleID else ''))
+                                            '=1' if not replay and pl.vehId == playerVehicleID else ''))
 
         if all_cached or not requestList:
             return
@@ -364,7 +364,7 @@ class _Stat(object):
         try:
             tdata = token.getXvmActiveTokenData()
             if token.networkServicesSettings['statBattle']:
-                if tdata is None or not 'token' in tdata:
+                if tdata is None or 'token' not in tdata:
                     err('No valid token for XVM network services (id=%s)' % playerVehicleID)
                     return
 
@@ -379,26 +379,26 @@ class _Stat(object):
                 (response, duration, errStr) = loadUrl(server, updateRequest)
 
                 if not response:
-                    #err('Empty response or parsing error')
+                    # err('Empty response or parsing error')
                     return
 
                 data = simplejson.loads(response)
+                if 'players' not in data:
+                    err('Stat request failed: ' + str(response))
+                    return
+
             else:
                 if isReplay():
                     log('XVM network services inactive (id=%s)' % playerVehicleID)
                 players = []
                 for (vehId, pl) in self.players.items():
                     players.append(self._get_battle_stub(pl))
-                data = {'players':players}
-
-            if 'players' not in data:
-                err('Stat request failed: ' + str(response))
-                return
+                data = {'players': players}
 
             for stat in data['players']:
-                #debug(simplejson.dumps(stat))
+                # debug(simplejson.dumps(stat))
                 self._fix(stat)
-                #pprint(stat)
+                # pprint(stat)
                 if 'nm' not in stat or not stat['nm']:
                     continue
                 if 'b' not in stat or stat['b'] <= 0:
@@ -412,12 +412,12 @@ class _Stat(object):
     def _fix(self, stat, orig_name=None):
         if 'twr' in stat:
             del stat['twr']
-        if not 'v' in stat:
+        if 'v' not in stat:
             stat['v'] = {}
         # temporary workaround
-        #if 'clan' in stat:
+        # if 'clan' in stat:
         #    del stat['clan']
-        #if 'wn' in stat:
+        # if 'wn' in stat:
         #    del stat['wn']
         if stat.get('wn6', 0) <= 0:
             stat['wn6'] = None
@@ -446,12 +446,12 @@ class _Stat(object):
                         stat['emblem'] = pl.emblem
                     if 'id' not in stat['v']:
                         stat['v']['id'] = pl.vId
-                    break;
+                    break
 
         if orig_name is not None:
             stat['name'] = orig_name
 
-        #log(simplejson.dumps(stat))
+        # log(simplejson.dumps(stat))
         return stat
 
     def _load_clanIcon(self, pl):
@@ -459,8 +459,8 @@ class _Stat(object):
             if pl.clanInfo:
                 rank = int(pl.clanInfo.get('rank', -1))
                 url = pl.clanInfo.get('emblem', None)
-                #url = 'http://stat.modxvm.com:81'
-                if url and rank >= 0 and rank <= token.networkServicesSettings['topClansCount']:
+                # url = 'http://stat.modxvm.com:81'
+                if url and 0 <= rank <= token.networkServicesSettings['topClansCount']:
                     url = url.replace('{size}', '32x32')
                     tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
                     self._loadingClanIconsCount += 1
@@ -473,8 +473,8 @@ class _Stat(object):
         try:
             debug(tID + " " + (str(len(bytes)) if bytes else '(none)'))
             if bytes and imghdr.what(None, bytes) is not None:
-                #imgid = str(uuid.uuid4())
-                #BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
+                # imgid = str(uuid.uuid4())
+                # BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
                 imgid = 'icons/{0}.png'.format(pl.clan)
                 filecache.save(imgid, bytes)
                 pl.emblem = 'xvm://cache/{0}'.format(imgid)
@@ -487,7 +487,7 @@ class _Stat(object):
 class _Player(object):
 
     __slots__ = ('vehId', 'playerId', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
-        'vId', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'emblem')
+                 'vId', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'emblem')
 
     def __init__(self, vehId, vData):
         self.vehId = vehId
@@ -509,7 +509,7 @@ class _Player(object):
         if arenaDP is not None:
             vInfo = arenaDP.getVehicleInfo(vID=vehId)
             self.squadnum = vInfo.squadIndex
-            #if self.squadnum > 0:
+            # if self.squadnum > 0:
             #    log("team=%d, squad=%d %s" % (self.team, self.squadnum, self.name))
 
     def update(self, vData):
@@ -517,8 +517,8 @@ class _Player(object):
         self.vLevel = vData['vehicleType'].type.level
         self.maxHealth = vData['vehicleType'].maxHealth
         self.vIcon = vData['vehicleType'].type.name.replace(':', '-')
-        #self.vn = vData['vehicleType'].type.name
-        #self.vn = self.vn[self.vn.find(':')+1:].upper()
+        # self.vn = vData['vehicleType'].type.name
+        # self.vn = self.vn[self.vn.find(':')+1:].upper()
         self.vType = set(VEHICLE_CLASS_TAGS.intersection(vData['vehicleType'].type.tags)).pop()
         self.team = vData['team']
         self.alive = vData['isAlive']
