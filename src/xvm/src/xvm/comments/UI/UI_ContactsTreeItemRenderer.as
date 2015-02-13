@@ -8,8 +8,11 @@ package xvm.comments.UI
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
+    import net.wg.gui.messenger.controls.ContactItem;
     import net.wg.gui.messenger.data.*;
+    import net.wg.infrastructure.interfaces.IUserProps;
     import scaleform.clik.constants.*;
+    import scaleform.clik.core.UIComponent;
     import xvm.comments.*;
     import xvm.comments.data.*;
 
@@ -22,60 +25,74 @@ package xvm.comments.UI
         {
             //Logger.add("UI_ContactsTreeItemRenderer");
             super();
-
-            createControls();
         }
 
         override protected function draw():void
         {
-            if (isInvalid(InvalidationType.DATA))
+            try
             {
-                var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-                if (d)
+                if (isInvalid(InvalidationType.DATA))
                 {
-                    var id:Number = d.id as Number;
-                    if (d.isBrunch || !id)
+                    var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
+                    if (d)
                     {
-                        nickImg.visible = false;
-                        commentImg.visible = false;
-                    }
-                    else
-                    {
-                        try
+                        var id:Number = d.id as Number;
+                        if (!d.isBrunch && id)
                         {
-                            var pd:PlayerCommentData = CommentsGlobalData.instance.getPlayerData(id);
+                            // prepare
+                            d.data.xvm_comment = null;
+                            d.data.xvm_originalUserName = null;
+                            d.data.xvm_userName = null;
 
+                            var pd:PlayerCommentData = CommentsGlobalData.instance.getPlayerData(id);
                             if (pd != null)
                             {
-                                if (pd.nick != null)
+                                if (pd.nick != null && pd.nick != "")
                                 {
                                     d.data.xvm_originalUserName = d.data.userProps.userName;
-                                    //d.data.userProps.userName = pd.nick;
                                     d.data.xvm_userName = pd.nick;
                                 }
 
-                                if (pd.comment != null)
+                                if (pd.comment != null && pd.comment != "")
                                 {
                                     d.data.xvm_comment = pd.comment;
                                 }
                             }
-                            nickImg.visible = pd != null && pd.nick != null && pd.nick != "";
-                            commentImg.visible = pd != null && pd.comment != null && pd.comment != "";
-                        }
-                        catch (ex:Error)
-                        {
-                            Logger.add(ex.getStackTrace());
                         }
                     }
                 }
-            }
 
-            super.draw();
+                // draw
+                super.draw();
+return;
+
+                var contactItem:ContactItem = this.getCurrentContentItem() as ContactItem;
+                if (contactItem is ContactItemUI && !(contactItem is UI_ContactItem))
+                {
+                    var ci:ContactItem = this.xvm_contactItem;
+                    this.xvm_contactItem = new UI_ContactItem();
+                    this.xvm_contactItem.x = ci.x;
+                    removeChild(ci);
+                    addChild(this.xvm_contactItem);
+                    this.xvm_currentContentItem = this.xvm_contactItem;
+                    this.xvm_contactItem.update(data.data);
+                    this.xvm_contactItem.validateNow();
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         override protected function handleMouseRollOver(param1:MouseEvent):void
         {
             super.handleMouseRollOver(param1);
+return;
+            var currentContentItem:UIComponent = this.getCurrentContentItem();
+            if (!(currentContentItem is ContactItem))
+                return;
+
             var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
             if (!d)
                 return;
@@ -84,41 +101,9 @@ package xvm.comments.UI
             if (!comment)
                 return;
 
-            //var userPropsVO:IUserProps = new ContactItemVO(d.data).userPropsVO;
-            //var userName:String = App.utils.commons.getFullPlayerName(userPropsVO);
-            var userName:String = d.data.xvm_originalUserName || d.data.userProps.userName;
+            var userName:String = d.data.xvm_originalUserName || d.data.userPropsVO.userName;
             App.toolTipMgr.show(userName +
                 (comment == null ? "" : "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>"));
-        }
-
-        // PRIVATE
-
-        private function createControls():void
-        {
-            var mc:Sprite = this.addChildAt(new Sprite(), 0) as Sprite;
-            mc.x = width - 32;
-
-            this.nickImg = mc.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
-                autoSize: true,
-                maintainAspectRatio: false,
-                x: 6,
-                y: 3,
-                width: 10,
-                height: 20,
-                alpha: 0.5,
-                source: "../maps/icons/messenger/iconContacts.png"
-            })) as UILoaderAlt;
-
-            this.commentImg = mc.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
-                autoSize: true,
-                maintainAspectRatio: false,
-                x: 14,
-                y: 4,
-                width: 16,
-                height: 16,
-                alpha: 0.5,
-                source: "../maps/icons/messenger/service_channel_icon.png"
-            })) as UILoaderAlt;
         }
     }
 }
