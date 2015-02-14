@@ -85,6 +85,7 @@ package xvm.hangar.views
                 "                               XVM_VERSION=" + Defines.XVM_VERSION + " for WoT " + Defines.WOT_VERSION +"\n" +
                 "                               gameRegion=" + Config.gameRegion + "\n" +
                 "                               configVersion=" + Config.config.configVersion + "\n" +
+                "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +
                 "                               useStandardMarkers=" + Config.config.markers.useStandardMarkers + "\n" +
                 "                               servicesActive=" + Config.networkServicesSettings.servicesActive + "\n" +
                 "                               statBattle=" + Config.networkServicesSettings.statBattle);

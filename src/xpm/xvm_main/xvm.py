@@ -52,7 +52,7 @@ class Xvm(object):
     # returns: (result, status)
     def onXpmCommand(self, cmd, *args):
         try:
-            if cmd in _LOG_COMMANDS:
+            if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
 
             if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
@@ -73,7 +73,7 @@ class Xvm(object):
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
             # debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-            if cmd in _LOG_COMMANDS:
+            if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
             res = None
             if cmd == COMMAND_LOG:
@@ -339,7 +339,7 @@ class Xvm(object):
 
 
     def invalidateBattleStates(self):
-        # debug('invalidateBattleStates')
+        #debug('invalidateBattleStates')
         self._battleStateLast.clear()
         self._vehicleStatusLast.clear()
         self._vehicleStatsLast.clear()
@@ -348,7 +348,7 @@ class Xvm(object):
             self.invalidateBattleState(vID)
 
     def invalidateBattleState(self, vID):
-        # debug('invalidateBattleState: {0}'.format(vID))
+        #debug('invalidateBattleState: {0}'.format(vID))
 
         if config.config is None:
             return
@@ -382,7 +382,7 @@ class Xvm(object):
 
 
     def invalidateSpottedStatus(self, vID, spotted):
-        # debug('invalidateSpottedStatus: {0} {1}'.format(vID, spotted))
+        #debug('invalidateSpottedStatus: {0} {1}'.format(vID, spotted))
 
         player = BigWorld.player()
         if player is None or not hasattr(player, 'arena') or player.arena is None:
@@ -404,16 +404,16 @@ class Xvm(object):
 
     def updateBattleState(self, vID):
         try:
-            # debug('updateBattleState: {0}'.format(vID))
+            #debug('updateBattleState: {0}'.format(vID))
             if self.battleFlashObject is not None:
                 last = self._battleStateLast.get(vID, None)
                 state = self._battleStateData.get(vID, None)
-                # debug(state)
+                #debug(state)
                 if state is not None and state != last:
                     self._battleStateLast[vID] = state
                     movie = self.battleFlashObject.movie
                     if movie is not None:
-                        # debug('updateBattleState: {0} {1}'.format(vID, set(state.items())^
+                        # debug('updateBattleState: {0} {1}'.format(vID, set(state.items())
                         # set((last if last else {}).items())))
                         cfgAllowHp = config.config['battle']['allowHpInPanelsAndMinimap']
                         cfgMarksOnGun = config.config['battle']['allowMarksOnGunInPanelsAndMinimap']

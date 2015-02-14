@@ -44,13 +44,13 @@ def fini():
 # onXpmCommand
 
 _LOG_COMMANDS = (
-    # XPM_COMMAND_PING,
+    #XPM_COMMAND_PING,
 )
 
 # returns: (result, status)
 def onXpmCommand(cmd, *args):
     try:
-        if cmd in _LOG_COMMANDS:
+        if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
             debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
         if cmd == XPM_COMMAND_PING:
             pinger.ping()

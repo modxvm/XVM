@@ -72,7 +72,7 @@ _LOG_COMMANDS = (
 # returns: (result, status)
 def onXpmCommand(cmd, *args):
     try:
-        if cmd in _LOG_COMMANDS:
+        if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
             debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
         if cmd == XPM_COMMAND_GET_COMMENTS:
             return (comments.getXvmUserComments(args[0] if len(args) else False), True)
@@ -85,7 +85,7 @@ def onXpmCommand(cmd, *args):
 
 def onXvmCommand(proxy, id, cmd, *args):
     try:
-        if cmd in _LOG_COMMANDS:
+        if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
             debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
         res = None
 
