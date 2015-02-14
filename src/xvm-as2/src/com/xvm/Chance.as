@@ -41,7 +41,7 @@ class com.xvm.Chance
 
         Chance.battleTier = Macros.getGlobalValue("battletier");
 
-        var chG = GetChance(ChanceFuncG);
+        var chG = GetChance(ChanceFuncG, false);
         chanceG = chG;
 
         var text = "";
@@ -55,7 +55,7 @@ class com.xvm.Chance
             //text += Locale.get("Team strength") + ": " + FormatChangeText("", chG);
             if (showLive)
             {
-                var chLive = GetChance(ChanceFuncLive);
+                var chLive = GetChance(ChanceFuncLive, true);
                 text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chLive);
             }
         }
@@ -71,16 +71,16 @@ class com.xvm.Chance
 
     // PRIVATE
     private static var _LiveLogged = false;
-    private static function GetChance(chanceFunc: Function): Object
+    private static function GetChance(chanceFunc: Function, live:Boolean): Object
     {
         var Ka:Number = 0;
         var Ke:Number = 0;
         var len:Number = 0;
         for (var pname in Stat.s_data)
         {
-            len++;
             var stat:StatData = Stat.s_data[pname].stat;
             var battleStateData:BattleStateData = BattleState.getUserData(pname);
+            len += live && battleStateData.dead ? 0 : 1;
             var vdata:VehicleData = stat.v.data;
             if (!vdata)
                 return { error: "[1] No data for: " + stat.nm };
