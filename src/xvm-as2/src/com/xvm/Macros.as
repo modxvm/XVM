@@ -166,8 +166,10 @@ class com.xvm.Macros
             if (macroName.indexOf("l10n") == 0)
                 res += prepareValue(NaN, macroName, norm, def, pdata);
             else
+            {
                 res += def;
-            isStaticMacro = false;
+                isStaticMacro = false;
+            }
         }
         else if (value == null)
         {
@@ -482,8 +484,14 @@ class com.xvm.Macros
                 pdata["vehicle-short"] = vdata.shortName;
                 // {{vtype}}
                 pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
+                // {{vtype-l}} - Medium Tank
+                pdata["vtype-l"] = Locale.get(vdata.vtype);
                 // {{c:vtype}}
                 pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon);
+                // {{battletier-min}}
+                pdata["battletier-min"] = vdata.tierLo;
+                // {{battletier-max}}
+                pdata["battletier-max"] = vdata.tierHi;
                 // {{level}}
                 pdata["level"] = vdata.level;
                 // {{rlevel}}
@@ -626,6 +634,9 @@ class com.xvm.Macros
             m_dict[pname] = { };
         var pdata = m_dict[pname];
 
+        // {{region}}
+        pdata["region"] = Config.config.region;
+
         // {{squad-num}}
         pdata["squad-num"] = stat.squadnum > 0 ? stat.squadnum : null;
         // {{xvm-user}}
@@ -637,10 +648,13 @@ class com.xvm.Macros
         // {{topclan}}
         pdata["topclan"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" :
             stat.clanInfoRank <= Config.networkServicesSettings.topClansCount ? "top" : null;
-        // {{region}}
-        pdata["region"] = Config.config.region;
+
         // {{avglvl}}
         pdata["avglvl"] = stat.lvl;
+        // {{e}}
+        pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
+        // {{teff}}
+        pdata["teff"] = stat.v.teff;
         // {{xeff}}
         pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
@@ -661,10 +675,6 @@ class com.xvm.Macros
         pdata["wn"] = pdata["wn8"];
         // {{wgr}}
         pdata["wgr"] = stat.wgr;
-        // {{e}}
-        pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
-        // {{teff}}
-        pdata["teff"] = stat.v.teff;
 
         // {{rating}}
         pdata["rating"] = stat.r;
@@ -695,6 +705,9 @@ class com.xvm.Macros
         pdata["tsb"] = stat.v.sb;
 
         // Dynamic colors
+        // {{c:e}}
+        pdata["c:e"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
+        pdata["c:e#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
         // {{c:xeff}}
         pdata["c:xeff"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", false);
         pdata["c:xeff#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", true);
@@ -725,9 +738,6 @@ class com.xvm.Macros
         // {{c:wgr}}
         pdata["c:wgr"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#", false);
         pdata["c:wgr#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#", true);
-        // {{c:e}}
-        pdata["c:e"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
-        pdata["c:e#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
         // {{c:rating}}
         pdata["c:rating"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#", false);
         pdata["c:rating#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#", true);
