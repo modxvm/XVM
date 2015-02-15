@@ -73,8 +73,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     // Centered _y value of text field
     private var centeredTextY:Number;
-    private var textFormatNames:TextFormat;
-    private var textFormatVehicles:TextFormat;
 
     private var m_altMode:String = null;
     private var m_savedState:String = null;
@@ -124,12 +122,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
         // initialize
 
-        textFormatNames = wrapper.m_names.getNewTextFormat();
-        textFormatNames.font = null;
-        textFormatNames.color = NaN;
-        textFormatVehicles = wrapper.m_vehicles.getNewTextFormat();
-        textFormatVehicles.font = null;
-        textFormatVehicles.color = NaN;
         centeredTextY = wrapper.m_names._y - 5;
         wrapper.m_names.condenseWhite = false;
         wrapper.m_vehicles.condenseWhite = false;
@@ -172,7 +164,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private function setDataImpl()
     {
         m_data_arguments = arguments;
-        validateNow(); // TODO: invalidate(100);
+        validateNow();
+        //invalidate(10);
     }
 
     private function draw()
@@ -218,27 +211,39 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 fragsArr.push(value_splitted.join(getTextValue(Defines.FIELDTYPE_FRAGS, item, item.frags)));
             }
 
-            var namesStr:String = namesArr.join("<br/>");
-            var vehiclesStr:String = vehiclesArr.join("<br/>");
-            var fragsStr:String = fragsArr.join("<br/>");
+            var namesStr:String = namesArr.join("\n");
+            var vehiclesStr:String = vehiclesArr.join("\n");
+            var fragsStr:String = fragsArr.join("\n");
 
             //Logger.add(vehiclesStr);
 
             var deadCountPrev:Number = wrapper.saved_params[wrapper.m_type].dPC;
 
-            base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
+            var needAdjustSize:Boolean = false;
+            if (prevNamesStr != namesStr)
+            {
+                needAdjustSize = true;
+                prevNamesStr = namesStr;
+                wrapper.m_names.htmlText = namesStr;
+                AdjustLeading(wrapper.m_names);
+            }
+
+            base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, wrapper.m_names.htmlText);
             base.saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig);
 
             // new player added in the FoW mode
             if (m_knownPlayersCount != data.length)
                 m_knownPlayersCount = data.length;
 
-            if (prevNamesStr != namesStr || prevVehiclesStr != vehiclesStr)
+            if (prevVehiclesStr != vehiclesStr)
             {
-                prevNamesStr = namesStr;
+                needAdjustSize = true;
                 prevVehiclesStr = vehiclesStr;
-                XVMAdjustPanelSize();
+                AdjustLeading(wrapper.m_vehicles);
             }
+
+            if (needAdjustSize)
+                XVMAdjustPanelSize();
 
             // notice about dead players
             if (dead_players_count != deadCountPrev)
@@ -462,22 +467,10 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         }
 
         if (wrapper.m_names._visible)
-        {
             wrapper.m_names._width = namesWidth;
-            // set leasing and centering on cell, because of align=top
-            textFormatNames.leading = 29 - XVMGetMaximumFieldHeight(wrapper.m_names);
-            wrapper.m_names.setTextFormat(textFormatNames);
-            wrapper.m_names._y = centeredTextY + textFormatNames.leading / 2.0;
-        }
 
         if (wrapper.m_vehicles._visible)
-        {
             wrapper.m_vehicles._width = vehiclesWidth;
-            // set leasing and centering on cell, because of align=top
-            textFormatVehicles.leading = 29 - XVMGetMaximumFieldHeight(wrapper.m_vehicles);
-            wrapper.m_vehicles.setTextFormat(textFormatVehicles);
-            wrapper.m_vehicles._y = centeredTextY + textFormatVehicles.leading / 2.0;
-        }
 
         if (wrapper.type == "left")
         {
@@ -510,23 +503,25 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var len:Number = field.numLines;
         for (var i = 0; i < len; ++i)
         {
-            var w = field.getLineMetrics(i).width;
+            var w:Number = field.getLineMetrics(i).width;
             if (w > max_width)
                 max_width = w;
         }
         return Math.round(max_width) + 4; // 4 is the size of gutters
     }
 
-    private function XVMGetMaximumFieldHeight(field:TextField)
+    // set leading and centering on cell, because of align=top
+    private function AdjustLeading(field:TextField)
     {
-        var max_height = 0;
-        var len:Number = field.numLines;
-        for (var i = 0; i < len; ++i)
+        if (!field._visible)
+            return;
+
+        var leading:Number = Math.round(33.95 - (field.textHeight + 9) / field.numLines);
+        if (leading != 9)
         {
-            var w = field.getLineMetrics(i).height;
-            if (w > max_height)
-                max_height = w;
+            field.htmlText = field.htmlText.split('LEADING="9"').join('LEADING="' + leading + '"');
+            field._y = centeredTextY + leading / 2.0;
         }
-        return Math.round(max_height) + 4; // 4 is the size of gutters
+        //Logger.add(field.htmlText);
     }
 }
