@@ -41,9 +41,9 @@ Legend:
 │ D │ {{alive}}          │ X │ X │ X │ X │ X │ X │ X │ value 'alive' for alive, '' for dead
 │ D │ {{tk}}             │ X │ X │ X │ X │ X │   │   │ value 'tk' for teamkiller, empty for others
 │ D │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │   │ marks on gun (only for spotted vehicles)
-│ D │ {{spotted}}        │   │ X │ X │   │   │   │   │ Vehicle spotted status with values from texts/spotted section
-│ D │ {{c:spotted}}      │   │ X │ X │   │   │   │   │ Dynamic color by vehicle spotted status
-│ D │ {{a:spotted}}      │   │ X │ X │   │   │   │   │ Dynamic transparency by vehicle spotted status
+│ D │ {{spotted}}        │   │ X │ X │ X │   │   │   │ Vehicle spotted status with values from texts/spotted section
+│ D │ {{c:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic color by vehicle spotted status
+│ D │ {{a:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic transparency by vehicle spotted status
 │ D │ {{selected}}       │ X │ X │ X │ X │   │   │   │ value 'sel' for selected player, empty for others
 │ D │ {{position}}       │ X │ X │ X │ X │   │   │   │ position of the player in the beginning of the battle (1-15)
 │ D │ {{hp}}             │   │ X │ X │ X │ X │ X │ X │ current health points
@@ -53,11 +53,6 @@ Legend:
 │ D │ {{c:hp-ratio}}     │   │ X │ X │ X │ X │ X │ X │ color depending on current health ratio (only in vehicle markers)
 │ D │ {{a:hp}}           │   │ X │ X │ X │ X │ X │ X │ transparency depending on current health points (only in vehicle markers)
 │ D │ {{a:hp-ratio}}     │   │ X │ X │ X │ X │ X │ X │ transparency depending on current health ratio (only in vehicle markers)
-│ D │ {{dmg}}            │   │   │   │   │ X │ X │   │ damage health points / last hit value
-│ D │ {{dmg-ratio}}      │   │   │   │   │ X │   │   │ damage health ratio (without '%' sign)
-│ D │ {{dmg-kind}}       │   │   │   │   │ X │ X │   │ damage kind (attack, fire, ramming, ...)
-│ D │ {{c:dmg}}          │   │   │   │   │ X │   │   │ color depending on damage source
-│ D │ {{c:dmg-kind}}     │   │   │   │   │ X │ X │   │ color depending on damage kind
 │ D │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
 │ S │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
@@ -66,6 +61,11 @@ Legend:
 │ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ value 'top' for top clans, 'persist' for persistent clans, empty for other
 │ S │ {{vehicle-class}}  │   │   │   │ X │   │   │   │ places special symbol depending on subject vehicle class
 │ S │ {{turret}}         │   │   │   │   │ X │   │   │ stock turret marker
+│ D │ {{dmg}}            │   │   │   │   │ X │ X │   │ damage health points / last hit value
+│ D │ {{dmg-ratio}}      │   │   │   │   │ X │   │   │ damage health ratio (without '%' sign)
+│ D │ {{dmg-kind}}       │   │   │   │   │ X │ X │   │ damage kind (attack, fire, ramming, ...)
+│ D │ {{c:dmg}}          │   │   │   │   │ X │   │   │ color depending on damage source
+│ D │ {{c:dmg-kind}}     │   │   │   │   │ X │ X │   │ color depending on damage kind
 │ D │ {{dead}}           │   │   │   │   │   │ X │   │ tank's death marker
 │ D │ {{n}}              │   │   │   │   │   │ X │   │ total number of hits
 │ D │ {{dmg-total}}      │   │   │   │   │   │ X │   │ total sum of hits
