@@ -125,7 +125,11 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         // initialize
 
         textFormatNames = wrapper.m_names.getNewTextFormat();
+        textFormatNames.font = null;
+        textFormatNames.color = NaN;
         textFormatVehicles = wrapper.m_vehicles.getNewTextFormat();
+        textFormatVehicles.font = null;
+        textFormatVehicles.color = NaN;
         centeredTextY = wrapper.m_names._y - 5;
         wrapper.m_names.condenseWhite = false;
         wrapper.m_vehicles.condenseWhite = false;
