@@ -113,8 +113,9 @@ class com.xvm.Macros
                 if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
                 {
                     //Logger.add("recursive: " + pname + " " + res);
+                    var isStatic:Boolean = isStaticMacro;
                     res = _Format(pname, res, options);
-                    isStaticMacro = false;
+                    isStaticMacro = isStatic && isStaticMacro;
                 }
             }
 
@@ -387,7 +388,7 @@ class com.xvm.Macros
         if (!isNaN(value))
             return value;
 
-        // FIXIT: dirty hack
+        // FIXIT: dirty hack (find any player in the dict)
         var pname:String = null;
         for (var n in m_dict)
         {

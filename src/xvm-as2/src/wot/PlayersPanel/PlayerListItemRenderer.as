@@ -146,6 +146,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function updateImpl()
     {
+//base.update();
+//return;
         try
         {
             var data:Object = wrapper.data;
@@ -515,6 +517,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function updateExtraFields():Void
     {
+//return;
         //Logger.add("updateExtraFields");
         var state:String = panel.state;
 
