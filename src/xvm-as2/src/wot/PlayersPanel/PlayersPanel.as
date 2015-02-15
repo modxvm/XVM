@@ -432,7 +432,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var squadSize:Number = 0;
 
         var cfg:Object = Config.config.playersPanel;
-        var w = Macros.FormatGlobalNumberValue(cfg[wrapper.state].width);
+        var w:Number = Macros.FormatGlobalNumberValue(cfg[wrapper.state].width);
+        var value:Number;
 
         switch (wrapper.state)
         {
@@ -456,45 +457,109 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 break;
             default:
-                wrapper.m_list._x = wrapper.players_bg._x = (wrapper.type == "left")
+                value = (wrapper.type == "left")
                     ? net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x
                     : wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x;
-                GlobalEventDispatcher.dispatchEvent( {
-                    type: wrapper.type == "left" ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
-                    state: wrapper.state
-                } );
+                if (wrapper.m_list._x != value || wrapper.players_bg._x != value)
+                {
+                    wrapper.m_list._x = value;
+                    wrapper.players_bg._x = value;
+                    GlobalEventDispatcher.dispatchEvent({
+                        type: wrapper.type == "left" ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
+                        state: wrapper.state
+                    });
+                }
                 return;
         }
 
-        if (wrapper.m_names._visible)
-            wrapper.m_names._width = namesWidth;
+        var changed:Boolean = false;
 
-        if (wrapper.m_vehicles._visible)
+        if (wrapper.m_names._visible && wrapper.m_names._width != namesWidth)
+        {
+            changed = true;
+            wrapper.m_names._width = namesWidth;
+        }
+
+        if (wrapper.m_vehicles._visible && wrapper.m_vehicles._width != vehiclesWidth)
+        {
+            changed = true;
             wrapper.m_vehicles._width = vehiclesWidth;
+        }
 
         if (wrapper.type == "left")
         {
-            wrapper.m_names._x = squadSize;
-            wrapper.m_frags._x = wrapper.m_names._x + wrapper.m_names._width;
-            wrapper.m_vehicles._x = wrapper.m_frags._x + wrapper.m_frags._width;
-            wrapper.m_list._x = wrapper.players_bg._x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x - widthDelta;
-            if (squadSize > 0)
+            value = squadSize;
+            if (wrapper.m_names._x != value)
+            {
+                changed = true;
+                wrapper.m_names._x = value;
+            }
+
+            value = wrapper.m_names._x + wrapper.m_names._width;
+            if (wrapper.m_frags._x != value)
+            {
+                changed = true;
+                wrapper.m_frags._x = value;
+            }
+
+            value = wrapper.m_frags._x + wrapper.m_frags._width;
+            if (wrapper.m_vehicles._x != value)
+            {
+                changed = true;
+                wrapper.m_vehicles._x = wrapper.m_frags._x + wrapper.m_frags._width;
+            }
+
+            value = wrapper.players_bg._x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x - widthDelta;
+            if (wrapper.m_list._x != value)
+            {
+                changed = true;
+                wrapper.m_list._x = value;
+            }
+
+            if (squadSize > 0 && changed)
                 wrapper.m_list.updateSquadIconPosition(-wrapper.m_list._x);
         }
         else
         {
-            wrapper.m_names._x = wrapper.players_bg._width - wrapper.m_names._width - squadSize;
-            wrapper.m_frags._x = wrapper.m_names._x - wrapper.m_frags._width;
-            wrapper.m_vehicles._x = wrapper.m_frags._x - wrapper.m_vehicles._width;
-            wrapper.m_list._x = wrapper.players_bg._x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x + widthDelta;
-            if (squadSize > 0)
+            value = wrapper.players_bg._width - wrapper.m_names._width - squadSize;
+            if (wrapper.m_names._x != value)
+            {
+                changed = true;
+                wrapper.m_names._x = value;
+            }
+
+            value = wrapper.m_names._x - wrapper.m_frags._width;
+            if (wrapper.m_frags._x != value)
+            {
+                changed = true;
+                wrapper.m_frags._x = value;
+            }
+
+            value = wrapper.m_frags._x - wrapper.m_vehicles._width;
+            if (wrapper.m_vehicles._x != value)
+            {
+                changed = true;
+                wrapper.m_vehicles._x = value;
+            }
+
+            value = wrapper.players_bg._x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x + widthDelta;
+            if (wrapper.m_list._x != value)
+            {
+                changed = true;
+                wrapper.m_list._x = value;
+            }
+
+            if (squadSize > 0 && changed)
                 wrapper.m_list.updateSquadIconPosition(-440 + wrapper.m_frags._width + wrapper.m_names._width + wrapper.m_vehicles._width + squadSize);
         }
 
-        GlobalEventDispatcher.dispatchEvent({
-            type: wrapper.type == "left" ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
-            state: wrapper.state
-        });
+        if (changed)
+        {
+            GlobalEventDispatcher.dispatchEvent({
+                type: wrapper.type == "left" ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
+                state: wrapper.state
+            });
+        }
     }
 
     private function XVMGetMaximumFieldWidth(field:TextField)
