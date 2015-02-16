@@ -51,6 +51,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private static var TF_DEFAULT_WIDTH = 300;
     private static var TF_DEFAULT_HEIGHT = 25;
 
+    private var cfg:Object;
+
     private var m_name:String = null;
     private var m_clan:String = null;
     private var m_vehicleState:Number = 0;
@@ -72,6 +74,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         extraFields = null;
 
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, initializeExtraFields);
         if (isLeftPanel)
         {
             GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
@@ -106,7 +110,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     function setStateImpl()
     {
         var savedValue = wrapper.data.isPostmortemView;
-        if (Config.config.playersPanel.removeSelectedBackground)
+        if (cfg.removeSelectedBackground)
             wrapper.data.isPostmortemView = false;
         base.setState();
         wrapper.data.isPostmortemView = savedValue;
@@ -137,9 +141,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 m_vehicleState = data.vehicleState;
                 m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
 
-                if (extraFields == null)
-                    initializeExtraFields();
-
                 saved_icon = data.icon;
 
                 // Alternative icon set
@@ -157,15 +158,16 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 attachClanIconToPlayer();
 
                 // Extra Text Fields
-                updateExtraFields();
+                if (extraFields != null)
+                    updateExtraFields();
             }
 
             if (wrapper.squadIcon != null)
-                wrapper.squadIcon._visible = (panel.state == "large" && !Config.config.playersPanel.removeSquadIcon);
+                wrapper.squadIcon._visible = (panel.state == "large" && !cfg.removeSquadIcon);
 
             base.update();
 
-            wrapper.iconLoader.content._alpha = Config.config.playersPanel.iconAlpha;
+            wrapper.iconLoader.content._alpha = cfg.iconAlpha;
 
             if (data != null)
                 data.icon = saved_icon;
@@ -215,22 +217,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     // misc
 
-    private function initializeExtraFields()
+    private function onConfigLoaded()
     {
-        try
-        {
-            extraFields = {
-                none: createFieldsForNoneMode(),
-                short: createExtraFields("short"),
-                medium: createExtraFields("medium"),
-                medium2: createExtraFields("medium2"),
-                large: createExtraFields("large")
-            };
-        }
-        catch (ex:Error)
-        {
-            Logger.add(ex.toString());
-        }
+        this.cfg = Config.config.playersPanel;
     }
 
     private function completeLoad()
@@ -258,8 +247,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function attachClanIconToPlayer():Void
     {
-        var cfg:Object = Config.config.playersPanel.clanIcon;
-        if (!cfg.show)
+        var clanIconCfg:Object = cfg.clanIcon;
+        if (!clanIconCfg.show)
             return;
 
         var statData:Object = Stat.s_data[m_name];
@@ -271,7 +260,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             var x = (!m_iconLoaded || Config.config.battle.mirroredVehicleIcons || isLeftPanel)
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
-            m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, team);
+            m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", clanIconCfg, x, wrapper.iconLoader._y, team);
         }
         PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan, emblem);
         m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
@@ -279,12 +268,34 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     // Extra fields
 
+    private function initializeExtraFields()
+    {
+        try
+        {
+            extraFields = {
+                none: createFieldsForNoneMode(),
+                short: createExtraFields("short"),
+                medium: createExtraFields("medium"),
+                medium2: createExtraFields("medium2"),
+                large: createExtraFields("large")
+            };
+            // TODO: FIXIT: dirty hack to redraw extrafields.
+            var st:String = panel.state
+            panel.state = st == "none" ? "large" : "none";
+            panel.state = st;
+        }
+        catch (ex:Error)
+        {
+            Logger.add(ex.toString());
+        }
+    }
+
     private function createFieldsForNoneMode():MovieClip
     {
         try
         {
-            extraFieldsLayout = Config.config.playersPanel.none.layout;
-            var cfg:Object = Config.config.playersPanel.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+            extraFieldsLayout = cfg.none.layout;
+            var cfg:Object = this.cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
             if (cfg.formats == null || cfg.formats.length <= 0)
                 return null;
 
@@ -312,7 +323,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function createExtraFields(mode:String):MovieClip
     {
-        var formats:Array = Config.config.playersPanel[mode]["extraFields" + (isLeftPanel ? "Left" : "Right")];
+        var formats:Array = cfg[mode]["extraFields" + (isLeftPanel ? "Left" : "Right")];
         if (formats == null || formats.length <= 0)
             return null;
         return _internal_createExtraFields(wrapper, mode, formats, TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT, null);
@@ -376,6 +387,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             return def;
         if (isNaN(value))
         {
+            //Logger.add(value + " => " + Macros.Format(m_name, value, null));
             value = Macros.Format(m_name, value, null);
             format[fieldName] = value;
         }
@@ -523,11 +535,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
         //Logger.add("updateExtraFields");
         var state:String = panel.state;
 
-        if (extraFields.none != null )      extraFields.none._visible = state == "none" && wrapper.data != null;
-        if (extraFields.short != null )     extraFields.short._visible = state == "short";
-        if (extraFields.medium != null )    extraFields.medium._visible = state == "medium";
-        if (extraFields.medium2 != null )   extraFields.medium2._visible = state == "medium2";
-        if (extraFields.large != null )     extraFields.large._visible = state == "large";
+        if (extraFields == null)
+            return;
+
+        extraFields.none._visible = state == "none" && wrapper.data != null;
+        extraFields.short._visible = state == "short";
+        extraFields.medium._visible = state == "medium";
+        extraFields.medium2._visible = state == "medium2";
+        extraFields.large._visible = state == "large";
 
         var mc:MovieClip = extraFields[state];
         if (mc == null)
@@ -728,7 +743,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (mc == null)
             return;
 
-        var cfg = mc.cfg;
+        var cfg:Object = mc.cfg;
         if (cfg != null)
         {
             // none mode
@@ -766,7 +781,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (mc == null)
             return;
 
-        var cfg = mc.cfg;
+        var cfg:Object = mc.cfg;
         if (cfg != null)
         {
             // none mode

@@ -50,9 +50,6 @@ package xvm.hangar.components.BattleLoading
             proxy.vehicleField.scaleX = 1;
             if (team == Defines.TEAM_ALLY)
                 proxy.vehicleField.x -= 103;
-
-            // Add stat loading handler
-            Stat.loadBattleStat(this, onStatLoaded);
         }
 
         public function setData(data:VehicleInfoVO):void
@@ -66,6 +63,9 @@ package xvm.hangar.components.BattleLoading
 
                 if (isNaN(playerId))
                     playerId = data.accountDBID;
+
+                // Add stat loading handler
+                Stat.loadBattleStat(this, onStatLoaded);
 
                 if (fullPlayerName == null)
                 {

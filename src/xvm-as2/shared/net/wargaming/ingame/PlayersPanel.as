@@ -26,6 +26,7 @@ intrinsic class net.wargaming.ingame.PlayersPanel extends UIComponent
     function get state(); // none, short, medium, medium2, large
     function set state(state);
     function update();
+    function updateAlphas();
     function onRecreateDevice(width, height);
     function _setVehiclesStr(data, sel, isColorBlind, knownPlayersCount);
     function _setNamesStr(data, sel, isColorBlind, knownPlayersCount);

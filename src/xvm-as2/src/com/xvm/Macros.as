@@ -107,7 +107,8 @@ class com.xvm.Macros
                 }
             }
 
-            if (options != null)
+            //if (options != null)
+            if (res != format)
             {
                 var iMacroPos:Number = res.indexOf("{{");
                 if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
