@@ -1,5 +1,5 @@
---- "orig\\PlayersPanel.xml"	2014-12-05 11:58:11.180948500 +0200
-+++ PlayersPanel.xml	2014-12-05 11:58:11.405971000 +0200
+--- "orig\\PlayersPanel.xml"	2015-02-16 13:17:49.684231500 +0200
++++ PlayersPanel.xml	2015-02-16 13:17:49.872250300 +0200
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -8,6 +8,13 @@
 +      </ImportAssets2>
        <DefineBitsLossless2 objectID="1" format="5" width="200" height="40">
          <data>
+@@ -31942,5 +31945,5 @@
+               <String value="isColorBlind"/>
+               <String value="m_frags"/>
+-              <String value="htmlText"/>
++              <String value="_xvm_disabled_htmlText"/>
+               <String value="m_names"/>
+               <String value="updateWidthOfLongestName"/>
 @@ -55811,6 +55814,6 @@
                <String value=" "/>
                <String value="\"/>

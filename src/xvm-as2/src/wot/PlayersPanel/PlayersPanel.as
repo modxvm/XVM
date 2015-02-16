@@ -175,6 +175,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     var prevState:String = null;
     var prevNamesStr:String = null;
     var prevVehiclesStr:String = null;
+    var prevFragsStr:String = null;
     private function setDataInternal(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
         //Logger.add("PlayersPanel.setData(): " + wrapper.state);
@@ -229,19 +230,26 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 AdjustLeading(wrapper.m_names);
             }
 
-            base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, wrapper.m_names.htmlText);
-            base.saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig);
-
-            // new player added in the FoW mode
-            if (m_knownPlayersCount != data.length)
-                m_knownPlayersCount = data.length;
-
             if (prevVehiclesStr != vehiclesStr)
             {
                 needAdjustSize = true;
                 prevVehiclesStr = vehiclesStr;
+                wrapper.m_vehicles.htmlText = vehiclesStr;
                 AdjustLeading(wrapper.m_vehicles);
             }
+
+            if (prevFragsStr != fragsStr)
+            {
+                prevFragsStr = fragsStr;
+                wrapper.m_frags.htmlText = fragsStr;
+                //AdjustLeading(wrapper.m_frags);
+            }
+
+            base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig);
+
+            // new player added in the FoW mode
+            if (m_knownPlayersCount != data.length)
+                m_knownPlayersCount = data.length;
 
             if (prevState != wrapper.state)
             {
