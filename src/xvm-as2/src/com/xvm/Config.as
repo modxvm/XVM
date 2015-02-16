@@ -21,7 +21,7 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, vehInfoData:String, networkServicesSettings:String)
+    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, vehInfoData:String, networkServicesSettings:String)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
@@ -29,7 +29,7 @@ class com.xvm.Config
             Config.config = JSONx.parse(config_data);
             //Logger.addObject(Config.config);
             Locale.initializeLanguageFile(lang_str);
-            Macros.RegisterBattleTierData(battleLevel);
+            Macros.RegisterBattleTypeData(battleLevel, battleType);
             VehicleInfo.onVehicleInfoData(vehInfoData);
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
 

@@ -14,6 +14,7 @@ XVM_WS_URL = "wss://echo.websocket.org/"
 
 XVM_COMMAND_GET_SVC_SETTINGS = "xvm.get_svc_settings"
 XVM_COMMAND_GET_BATTLE_LEVEL = "xvm.get_battle_level"
+XVM_COMMAND_GET_BATTLE_TYPE = "xvm.get_battle_type"
 
 XVM_AS_COMMAND_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"
 

@@ -63,6 +63,11 @@ class Xvm(object):
                 if arena is not None:
                     return (arena.extraData.get('battleLevel', 0), True)
                 return (None, True)
+            elif cmd == XVM_COMMAND_GET_BATTLE_TYPE:
+                arena = getattr(BigWorld.player(), 'arena', None)
+                if arena is not None:
+                    return (arena.bonusType, True)
+                return (None, True)
 
         except Exception, ex:
             err(traceback.format_exc())
@@ -472,10 +477,12 @@ class Xvm(object):
         try:
             movie = flashObject.movie
             if movie is not None:
+                arena = BigWorld.player().arena
                 movie.invoke((RESPOND_CONFIG, [
                     self.config_str,
                     self.lang_str,
-                    BigWorld.player().arena.extraData.get('battleLevel', 0),
+                    arena.extraData.get('battleLevel', 0),
+                    arena.bonusType,
                     getVehicleInfoDataStr(),
                     simplejson.dumps(token.networkServicesSettings)]))
         except Exception, ex:

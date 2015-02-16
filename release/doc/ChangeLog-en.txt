@@ -1,4 +1,7 @@
-﻿XVM-6.0.0.3:
+﻿  * added new macro {{battletype}} - current battle type
+  * added texts/battletype section with text replacements for {{battletype}} macro
+
+XVM-6.0.0.3:
   * bugs fixed
 
 XVM-6.0.0:
@@ -6,10 +9,9 @@ XVM-6.0.0:
   * XFW: XVM Framework
   * New mod xvm_quests for personal missions.
     Currently implemented new filters and saving filters settings
-  * added config section for winChance colors: "colors"/"winChance"
+  * added config section for winChance colors: colors/winChance
   * win chance calclulation changed - use standard normal distrubution for chance result.
     Source: http://forum.worldoftanks.eu/index.php?/topic/468409-/
-  * added colors/winChance section
   * added texts/xvmuser section with text replacements for {{xvm-user}} macro.
     Available values: "on", "off", "none".
   * added new mod xvm_export, and config section "export".

@@ -80,6 +80,7 @@ Legend:
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ S │ {{xvm-stat}}       │ X │ X │ X │ X │ X │ X │ X │ value 'stat' is statistic is active, empty if not
 │ S │ {{battletier}}     │ X │ X │ X │ X │ X │ X │ X │ current battle tier
+│ S │ {{battletype}}     │ X │ X │ X │ X │ X │ X │ X │ current battle type (values from texts/battletype section)
 │ S │ {{region}}         │ X │ X │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
 │ S │ {{l10n:ID}}        │ X │ X │ X │ X │ X │ X │ X │ localizated text, see en.xc for id
 │ S │ {{cellsize}}       │   │   │   │ X │   │   │   │ minimap cell side size

@@ -158,4 +158,19 @@ class com.xvm.Defines
     public static var E_MOVING_STATE_CHANGED = "moving_state_changed";
     public static var E_MODULE_DESTROYED = "module_destroyed";
     public static var E_MODULE_REPAIRED = "module_repaired";
+
+    // BattleTypes
+    public static var BATTLE_TYPE_UNKNOWN = 0;
+    public static var BATTLE_TYPE_REGULAR = 1;
+    public static var BATTLE_TYPE_TRAINING = 2;
+    public static var BATTLE_TYPE_COMPANY = 3;
+    public static var BATTLE_TYPE_TOURNAMENT = 4;
+    public static var BATTLE_TYPE_CLAN = 5;
+    public static var BATTLE_TYPE_TUTORIAL = 6;
+    public static var BATTLE_TYPE_CYBERSPORT = 7;
+    public static var BATTLE_TYPE_HISTORICAL = 8;
+    public static var BATTLE_TYPE_EVENT_BATTLES = 9;
+    public static var BATTLE_TYPE_SORTIE = 10;
+    public static var BATTLE_TYPE_FORT_BATTLE = 11;
+    public static var BATTLE_TYPE_RATED_CYBERSPORT = 12;
 }

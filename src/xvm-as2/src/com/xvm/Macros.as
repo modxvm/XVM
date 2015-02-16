@@ -26,9 +26,9 @@ class com.xvm.Macros
         _instance._RegisterPlayerData(pname, data, team);
     }
 
-    public static function RegisterBattleTierData(battletier:Number)
+    public static function RegisterBattleTypeData(battleTier:Number, battleType:Number)
     {
-        _instance._RegisterBattleTierData(battletier);
+        _instance._RegisterBattleTypeData(battleTier, battleType);
     }
 
     public static function RegisterStatMacros(pname:String, stat:StatData)
@@ -385,8 +385,6 @@ class com.xvm.Macros
                 if (!isNaN(value))
                 {
                     var tier:Number = m_globals["battletier"];
-                    if (tier == 0)
-                        tier = 8; // command battle
                     var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[tier - 1];
                     if (vehId == 65313) // M24 Chaffee Sport
                         maxBattleTierHp = 1000;
@@ -645,10 +643,27 @@ class com.xvm.Macros
         }
     }
 
-    public function _RegisterBattleTierData(battletier:Number)
+    public function _RegisterBattleTypeData(battleTier:Number, battleType:Number)
     {
-        // {{battletier}}
-        m_globals["battletier"] = battletier;
+        if (m_globals["battletier"] == null)
+        {
+            switch (battleType)
+            {
+                case Defines.BATTLE_TYPE_CYBERSPORT:
+                    battleTier = 8;
+                    break;
+                case Defines.BATTLE_TYPE_REGULAR:
+                    break;
+                default:
+                    battleTier = 10;
+                    break;
+            }
+
+            // {{battletype}}
+            m_globals["battletype"] = Utils.getBattleTypeText(battleType);
+            // {{battletier}}
+            m_globals["battletier"] = battleTier;
+        }
     }
 
     public function _RegisterStatMacros(pname:String, stat:StatData)

@@ -104,7 +104,7 @@ class com.xvm.Utils
         return v;
     }
 
-    public static function getXvmUserText(status):String
+    public static function getXvmUserText(status:Number):String
     {
         var value:String = isNaN(status) ? 'none' : (status & 0x01) ? 'on' : 'off';
 
@@ -116,6 +116,40 @@ class com.xvm.Utils
             v = Locale.get(v);
 
         return v;
+    }
+
+    public static function getBattleTypeText(battleType:Number):String
+    {
+        var value:String = getBattleTypeStr(battleType);
+
+        if (!Config.config.texts.battletype[value])
+            return null;
+
+        var v:String = Config.config.texts.battletype[value];
+        if (v.indexOf("{{l10n:") >= 0)
+            v = Locale.get(v);
+
+        return v;
+    }
+
+    public static function getBattleTypeStr(battleType:Number):String
+    {
+        switch (battleType)
+        {
+            case 1: return 'regular';
+            case 2: return 'training';
+            case 3: return 'company';
+            case 4: return 'tournament';
+            case 5: return 'clan';
+            case 6: return 'tutorial';
+            case 7: return 'cybersport';
+            case 8: return 'historical';
+            case 9: return 'event_battles';
+            case 10: return 'sortie';
+            case 11: return 'fort_battle';
+            case 12: return 'rated_cybersport';
+            default: return 'unknown';
+        }
     }
 
     ////////////////////

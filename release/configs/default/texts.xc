@@ -47,6 +47,23 @@
       "off": "off",
       // Without XVM / Без XVM.
       "none": "none"
+    },
+    // Text for {{battletype}} macro.
+    // Текст для макроса {{battletype}}
+    "battletype": {
+      "unknown": "unknown",
+      "regular": "regular",
+      "training": "training",
+      "company": "company",
+      "tournament": "tournament",
+      "clan": "clan",
+      "tutorial": "tutorial",
+      "cybersport": "cybersport",
+      "historical": "historical",
+      "event_battles": "event_battles",
+      "sortie": "sortie",
+      "fort_battle": "fort_battle",
+      "rated_cybersport": "rated_cybersport"
     }
   }
 }
