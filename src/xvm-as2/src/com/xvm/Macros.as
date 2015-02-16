@@ -55,7 +55,7 @@ class com.xvm.Macros
 
     private static var _instance:Macros = new Macros();
 
-    private var m_macros_cache = { };
+    private var m_macros_cache:Object = {};
     private var m_dict:Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
     private var m_globals:Object = {};
     private var m_comments:Object = null;
@@ -147,7 +147,7 @@ class com.xvm.Macros
 
         var res:String = "";
 
-        var parts:Array = GetMacroParts(macro, pdata, dead);
+        var parts:Array = GetMacroParts(macro, pdata);
 
         var macroName = parts[0];
         var norm = parts[1];
@@ -189,10 +189,17 @@ class com.xvm.Macros
         return res;
     }
 
+    private var _macro_parts_cache:Object = {};
     private function GetMacroParts(macro:String, pdata:Object):Array
     {
+        var parts:Array = _macro_parts_cache[macro];
+        if (parts)
+            return parts;
+
+        //Logger.add("GetMacroParts: " + macro);
         //Logger.addObject(pdata);
-        var parts:Array = [null,null,null,null,null,null];
+
+        parts = [null,null,null,null,null,null];
 
         // split parts: name[:norm][%[flag][width][.prec]type][~suf][?rep][|def]
         var macroArr:Array = macro.split("");
@@ -258,6 +265,7 @@ class com.xvm.Macros
             parts[5] = "";
 
         //Logger.add("[AS2][MACROS][GetMacroParts]: [0]:" + parts[0] +"| [1]:" + parts[1] +"| [2]:" + parts[2] +"| [3]:" + parts[3] +"| [4]:" + parts[4] +"| [5]:" + parts[5]);
+        _macro_parts_cache[macro] = parts;
         return parts;
     }
 
