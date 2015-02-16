@@ -1,4 +1,5 @@
-﻿intrinsic class net.wargaming.ingame.PlayersPanel extends MovieClip
+﻿import gfx.core.UIComponent;
+intrinsic class net.wargaming.ingame.PlayersPanel extends UIComponent
 {
     /////////////////////////////////////////////////////////////////
     // XVM

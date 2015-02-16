@@ -125,9 +125,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         // initialize
 
         centeredTextY = wrapper.m_names._y - 5;
-        wrapper.m_names.condenseWhite = false;
-        wrapper.m_vehicles.condenseWhite = false;
-        wrapper.m_frags.wordWrap = false;
         wrapper.m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
         wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
     }
@@ -348,6 +345,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private function updateAlphasImpl()
     {
+        if (wrapper.m_names.condenseWhite)
+            wrapper.m_names.condenseWhite = false;
+        if (wrapper.m_vehicles.condenseWhite)
+            wrapper.m_vehicles.condenseWhite = false;
+        if (wrapper.m_frags.wordWrap)
+            wrapper.m_frags.wordWrap = false;
         wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
         wrapper.m_list._alpha = 100;
     }
