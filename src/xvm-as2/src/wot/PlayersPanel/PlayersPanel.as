@@ -59,6 +59,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
 
+    private var cfg:Object;
+
     public function PlayersPanelCtor()
     {
         Utils.TraceXvmModule("PlayersPanel");
@@ -80,7 +82,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private function onConfigLoaded()
     {
-        var cfg:Object = Config.config.playersPanel;
+        cfg = Config.config.playersPanel;
         var startMode:String = String(cfg.startMode).toLowerCase();
         if (net.wargaming.ingame.PlayersPanel.STATES[startMode] == null)
             startMode = net.wargaming.ingame.PlayersPanel.STATES.large.name;
@@ -173,6 +175,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         setDataInternal.apply(this, m_data_arguments);
     }
 
+    var prevState:String = null;
     var prevNamesStr:String = null;
     var prevVehiclesStr:String = null;
     private function setDataInternal(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
@@ -206,9 +209,10 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
                 var value_splitted:Array = value.split(item.vehicle);
-                namesArr.push(value_splitted.join(getTextValue(Defines.FIELDTYPE_NICK, item, item.userName)));
-                vehiclesArr.push(value_splitted.join(getTextValue(Defines.FIELDTYPE_VEHICLE, item, item.vehicle)));
-                fragsArr.push(value_splitted.join(getTextValue(Defines.FIELDTYPE_FRAGS, item, item.frags)));
+                var cfg_state:Object = cfg[wrapper.state];
+                namesArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_NICK, item, item.userName)));
+                vehiclesArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_VEHICLE, item, item.vehicle)));
+                fragsArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_FRAGS, item, item.frags)));
             }
 
             var namesStr:String = namesArr.join("\n");
@@ -240,6 +244,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 needAdjustSize = true;
                 prevVehiclesStr = vehiclesStr;
                 AdjustLeading(wrapper.m_vehicles);
+            }
+
+            if (prevState != wrapper.state)
+            {
+                needAdjustSize = true;
+                prevState = wrapper.state;
             }
 
             if (needAdjustSize)
@@ -379,15 +389,14 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         } // end if
     }
 
-    private function getTextValue(fieldType, data, text)
+    private function getTextValue(cfg_state, fieldType, data, text)
     {
         //Logger.add("getTextValue()");
         var format:String = null;
-        var cfg:Object = Config.config.playersPanel[wrapper.state];
         var isLeftPanel:Boolean = wrapper.type == "left";
         if (fieldType == Defines.FIELDTYPE_FRAGS)
         {
-            format = isLeftPanel ? cfg.fragsFormatLeft : cfg.fragsFormatRight;
+            format = isLeftPanel ? cfg_state.fragsFormatLeft : cfg_state.fragsFormatRight;
         }
         else
         {
@@ -395,17 +404,17 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             {
                 case "medium":
                     if (fieldType == Defines.FIELDTYPE_NICK)
-                        format = isLeftPanel ? cfg.formatLeft : cfg.formatRight;
+                        format = isLeftPanel ? cfg_state.formatLeft : cfg_state.formatRight;
                     break;
                 case "medium2":
                     if (fieldType == Defines.FIELDTYPE_VEHICLE)
-                        format = isLeftPanel ? cfg.formatLeft : cfg.formatRight;
+                        format = isLeftPanel ? cfg_state.formatLeft : cfg_state.formatRight;
                     break;
                 case "large":
                     if (fieldType == Defines.FIELDTYPE_NICK)
-                        format = isLeftPanel ? cfg.nickFormatLeft : cfg.nickFormatRight;
+                        format = isLeftPanel ? cfg_state.nickFormatLeft : cfg_state.nickFormatRight;
                     else if (fieldType == Defines.FIELDTYPE_VEHICLE)
-                        format = isLeftPanel ? cfg.vehicleFormatLeft : cfg.vehicleFormatRight;
+                        format = isLeftPanel ? cfg_state.vehicleFormatLeft : cfg_state.vehicleFormatRight;
                     break;
             }
         }
@@ -431,7 +440,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var widthDelta:Number = 0;
         var squadSize:Number = 0;
 
-        var cfg:Object = Config.config.playersPanel;
         var w:Number = Macros.FormatGlobalNumberValue(cfg[wrapper.state].width);
         var value:Number;
 
