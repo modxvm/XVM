@@ -164,7 +164,7 @@ class com.xvm.Macros
         {
             //process l10n macro
             if (macroName.indexOf("l10n") == 0)
-                res += prepareValue(NaN, macroName, norm, def, pdata);
+                res += prepareValue(NaN, macroName, norm, def, pdata["veh-id"]);
             else
             {
                 res += def;
@@ -174,7 +174,7 @@ class com.xvm.Macros
         else if (value == null)
         {
             //Logger.add(macroName + " " + norm + " " + def + "  " + format);
-            res += prepareValue(NaN, macroName, norm, def, pdata);
+            res += prepareValue(NaN, macroName, norm, def, pdata["veh-id"]);
         }
         else
         {
@@ -183,7 +183,7 @@ class com.xvm.Macros
             if (type == "function" && (macroName != "alive" || options == null))
                 isStaticMacro = false;
 
-            res += FormatMacro(macro, parts, value, pdata, options);
+            res += FormatMacro(macro, parts, value, pdata["veh-id"], options);
         }
 
         return res;
@@ -269,7 +269,8 @@ class com.xvm.Macros
         return parts;
     }
 
-    private function FormatMacro(macro:String, parts:Array, value, pdata, options:Object):String
+    private var _format_macro_fmt_suf_cache:Object = {};
+    private function FormatMacro(macro:String, parts:Array, value, vehId:Number, options:Object):String
     {
         var name:String = parts[0];
         var norm:String = parts[1];
@@ -285,7 +286,7 @@ class com.xvm.Macros
         //Logger.add("type:" + type + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
         if (type == "number" && isNaN(value))
-            return prepareValue(NaN, name, norm, def, pdata);
+            return prepareValue(NaN, name, norm, def, vehId);
 
         var res:String = value;
         if (type == "function")
@@ -294,10 +295,10 @@ class com.xvm.Macros
                 return "{{" + macro + "}}";
             value = value(options);
             if (value == null)
-                return prepareValue(NaN, name, norm, def, pdata);
+                return prepareValue(NaN, name, norm, def, vehId);
             type = typeof value;
             if (type == "number" && isNaN(value))
-                return prepareValue(NaN, name, norm, def, pdata);
+                return prepareValue(NaN, name, norm, def, vehId);
             res = value;
         }
 
@@ -305,7 +306,15 @@ class com.xvm.Macros
             return rep;
 
         if (norm != null && type == "number")
-            res = prepareValue(value, name, norm, def, pdata);
+            res = prepareValue(value, name, norm, def, vehId);
+
+        if (fmt == null && suf == null)
+            return res;
+
+        var fmt_suf_key:String = fmt + "," + suf + "," + res;
+        var fmt_suf_res:String = _format_macro_fmt_suf_cache[fmt_suf_key];
+        if (fmt_suf_res)
+            return fmt_suf_res;
 
         if (fmt != null)
         {
@@ -345,10 +354,12 @@ class com.xvm.Macros
         }
 
         //Logger.add(res);
+        _format_macro_fmt_suf_cache[fmt_suf_key] = res;
         return res;
     }
 
-    private function prepareValue(value:Number, name:String, norm:String, def:String, pdata:Object):String
+    private var _prepare_value_cache:Object = {};
+    private function prepareValue(value:Number, name:String, norm:String, def:String, vehId:Number):String
     {
         if (norm == null)
             return def;
@@ -360,23 +371,30 @@ class com.xvm.Macros
             case "hp-max":
                 if (Config.config.battle.allowHpInPanelsAndMinimap == false)
                     break;
+                var key:String = name + "," + norm + "," + value;
+                res = _prepare_value_cache[key];
+                if (res)
+                    return res;
                 if (isNaN(value))
                 {
-                    var vdata:VehicleData = VehicleInfo.get(pdata["veh-id"]);
-                    if (vdata == null)
-                        break;
-                    value = vdata.hpTop;
+                    var vdata:VehicleData = VehicleInfo.get(vehId);
+                    if (vdata != null)
+                        value = vdata.hpTop;
                 }
-                var tier:Number = m_globals["battletier"];
-                if (tier == 0)
-                    tier = 8; // command battle
-                var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[tier - 1];
-                if (pdata["veh-id"] == 65313) // M24 Chaffee Sport
-                    maxBattleTierHp = 1000;
-                if (pdata["veh-id"] == 64769 || pdata["veh-id"] == 64801 || pdata["veh-id"] == 65089) // Winter Battle
-                    maxBattleTierHp = 5000;
-                res = Math.round(parseInt(norm) * value / maxBattleTierHp).toString();
-                //Logger.add("res: " + res);
+                if (!isNaN(value))
+                {
+                    var tier:Number = m_globals["battletier"];
+                    if (tier == 0)
+                        tier = 8; // command battle
+                    var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[tier - 1];
+                    if (vehId == 65313) // M24 Chaffee Sport
+                        maxBattleTierHp = 1000;
+                    if (vehId == 64769 || vehId == 64801 || vehId == 65089) // Winter Battle
+                        maxBattleTierHp = 5000;
+                    res = Math.round(parseInt(norm) * value / maxBattleTierHp).toString();
+                }
+                _prepare_value_cache[key] = res;
+                //Logger.add(key + " => " + res);
                 break;
             case "hp-ratio":
                 if (Config.config.battle.allowHpInPanelsAndMinimap == false)
