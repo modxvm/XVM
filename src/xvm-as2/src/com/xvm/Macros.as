@@ -60,7 +60,7 @@ class com.xvm.Macros
     private var m_globals:Object = {};
     private var m_comments:Object = null;
 
-    private var isStaticMacro;
+    private var isStaticMacro:Boolean;
 
     // {{name[:norm][%[flag][width][.prec]type][~suf][?rep][|def]}}
     private function _Format(pname:String, format:String, options:Object):String
@@ -180,7 +180,7 @@ class com.xvm.Macros
         {
             // is static macro
             var type:String = typeof value;
-            if (type == "function" && macroName != "alive")
+            if (type == "function" && (macroName != "alive" || options == null))
                 isStaticMacro = false;
 
             res += FormatMacro(macro, parts, value, pdata, options);
