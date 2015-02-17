@@ -279,10 +279,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 medium2: createExtraFields("medium2"),
                 large: createExtraFields("large")
             };
-            // TODO: FIXIT: dirty hack to redraw extrafields.
-            var st:String = panel.state
-            panel.state = st == "none" ? "large" : "none";
-            panel.state = st;
+            panel.xvm_worker.refresh();
         }
         catch (ex:Error)
         {

@@ -6,6 +6,7 @@
     "c2": "0xFF0F0F"
   },
   "large": {
+    //"enabled": false,
     "nickFormatLeft": "        {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>       &nbsp;",
     "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
@@ -46,6 +47,7 @@
     "width": 120
   },
   "medium": {
+    //"enabled": false,
     "width": 120,
     "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
@@ -55,14 +57,18 @@
     ]
   },
   "medium2": {
+    //"enabled": false,
     "width": 120,
     "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>"
   },
   "short": {
+    //"enabled": false,
     //"width": 120,
+    "__stub__": null
   },
   "none": {
+    //"enabled": false,
     //"layout": "horizontal",
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },

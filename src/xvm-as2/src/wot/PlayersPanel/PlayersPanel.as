@@ -71,6 +71,16 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, updateWithoutHideMenu);
     }
 
+    public function refresh()
+    {
+        // TODO: FIXIT: dirty hack to redraw extrafields.
+        var st:String = wrapper.state;
+        wrapper.gotoAndStop(wrapper.m_type + "_" + (st == "none" ? "large" : "none"));
+        wrapper.gotoAndPlay(wrapper.m_type + "_" + st);
+        wrapper.update();
+        wrapper.updateAlphas();
+    }
+
     // PRIVATE
 
     // Centered _y value of text field
@@ -173,9 +183,9 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     }
 
     var prevState:String = null;
-    var prevNamesStr:String = null;
-    var prevVehiclesStr:String = null;
-    var prevFragsStr:String = null;
+    var prevNamesHtmlText:String = null;
+    var prevVehiclesHtmlText:String = null;
+    var prevFragsHtmlText:String = null;
     private function setDataInternal(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
         //Logger.add("PlayersPanel.setData(): " + wrapper.state);
@@ -222,26 +232,26 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             var deadCountPrev:Number = wrapper.saved_params[wrapper.m_type].dPC;
 
             var needAdjustSize:Boolean = false;
-            if (prevNamesStr != namesStr)
+            if (prevNamesHtmlText != wrapper.m_names.htmlText)
             {
                 needAdjustSize = true;
-                prevNamesStr = namesStr;
                 wrapper.m_names.htmlText = namesStr;
+                prevNamesHtmlText = wrapper.m_names.htmlText;
                 AdjustLeading(wrapper.m_names);
             }
 
-            if (prevVehiclesStr != vehiclesStr)
+            if (prevVehiclesHtmlText != wrapper.m_vehicles.htmlText)
             {
                 needAdjustSize = true;
-                prevVehiclesStr = vehiclesStr;
                 wrapper.m_vehicles.htmlText = vehiclesStr;
+                prevVehiclesHtmlText = wrapper.m_vehicles.htmlText;
                 AdjustLeading(wrapper.m_vehicles);
             }
 
-            if (prevFragsStr != fragsStr)
+            if (prevFragsHtmlText != wrapper.m_frags.htmlText)
             {
-                prevFragsStr = fragsStr;
                 wrapper.m_frags.htmlText = fragsStr;
+                prevFragsHtmlText = wrapper.m_frags.htmlText;
                 //AdjustLeading(wrapper.m_frags);
             }
 
@@ -451,6 +461,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var widthDelta:Number = 0;
         var squadSize:Number = 0;
 
+        var isLeftPanel:Boolean = wrapper.type == "left";
         var w:Number = Macros.FormatGlobalNumberValue(cfg[wrapper.state].width);
         var value:Number;
 
@@ -476,7 +487,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 break;
             default:
-                value = (wrapper.type == "left")
+                value = isLeftPanel
                     ? net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x
                     : wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x;
                 if (wrapper.m_list._x != value || wrapper.players_bg._x != value)
@@ -484,7 +495,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                     wrapper.m_list._x = value;
                     wrapper.players_bg._x = value;
                     GlobalEventDispatcher.dispatchEvent({
-                        type: wrapper.type == "left" ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
+                        type: isLeftPanel ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
                         state: wrapper.state
                     });
                 }
@@ -505,7 +516,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             wrapper.m_vehicles._width = vehiclesWidth;
         }
 
-        if (wrapper.type == "left")
+        if (isLeftPanel)
         {
             value = squadSize;
             if (wrapper.m_names._x != value)
@@ -575,7 +586,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         if (changed)
         {
             GlobalEventDispatcher.dispatchEvent({
-                type: wrapper.type == "left" ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
+                type: isLeftPanel ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
                 state: wrapper.state
             });
         }
