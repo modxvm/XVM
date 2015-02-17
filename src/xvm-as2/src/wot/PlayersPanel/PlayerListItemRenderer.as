@@ -64,6 +64,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private var extraFields:Object;
     private var extraFieldsLayout:String;
+    private var extraFieldsConfigured:Boolean;
 
     public function PlayerListItemRendererCtor()
     {
@@ -73,9 +74,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
             return;
 
         extraFields = null;
+        extraFieldsConfigured = false;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, configureExtraFields);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, update);
+
         if (isLeftPanel)
         {
             GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
@@ -158,7 +161,12 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 attachClanIconToPlayer();
 
                 // Extra fields
-                updateExtraFields();
+                if (Stat.s_loaded)
+                {
+                    if (!extraFieldsConfigured)
+                        configureExtraFields();
+                    updateExtraFields();
+                }
             }
 
             if (wrapper.squadIcon != null)
@@ -222,6 +230,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             this.cfg = Config.config.playersPanel;
 
+            //Logger.add("onConfigLoaded: " + m_name);
             if (extraFields == null)
             {
                 extraFields = {
@@ -233,6 +242,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 };
             }
 
+            extraFieldsConfigured = false;
             if (m_name)
                 configureExtraFields();
         }
@@ -340,6 +350,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 Logger.add("WARNING: extraFields == null");
                 return;
             }
+
+            if (extraFieldsConfigured)
+                return;
+
+            extraFieldsConfigured = true;
 
             // remove old text fields
             Utils.removeChildren(extraFields.none);
@@ -583,11 +598,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         var state:String = panel.state;
 
-        extraFields.none._visible = state == "none" && wrapper.data != null;
-        extraFields.short._visible = state == "short";
-        extraFields.medium._visible = state == "medium";
-        extraFields.medium2._visible = state == "medium2";
-        extraFields.large._visible = state == "large";
+        if (extraFields.none != null)    extraFields.none._visible = state == "none" && wrapper.data != null;
+        if (extraFields.short != null)   extraFields.short._visible = state == "short";
+        if (extraFields.medium != null)  extraFields.medium._visible = state == "medium";
+        if (extraFields.medium2 != null) extraFields.medium2._visible = state == "medium2";
+        if (extraFields.large != null)   extraFields.large._visible = state == "large";
 
         var mc:MovieClip = extraFields[state];
         if (mc == null)
