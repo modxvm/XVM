@@ -233,7 +233,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 };
             }
 
-            configureExtraFields();
+            if (m_name)
+                configureExtraFields();
         }
         catch (ex:Error)
         {
@@ -332,6 +333,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
     {
         try
         {
+            //Logger.add("configureExtraFields: " + m_name);
+
             if (extraFields == null)
             {
                 Logger.add("WARNING: extraFields == null");
@@ -361,17 +364,15 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function _internal_createExtraFields(state:String, width:Number, height:Number)
     {
-        Logger.add("_internal_createExtraFields: " + state);
+        //Logger.add("_internal_createExtraFields: " + state);
         var mc:MovieClip = extraFields[state];
         if (mc == null)
             return;
 
-        Logger.add("1");
         var formats:Array = mc.orig_formats;
         if (formats == null || formats.length <= 0)
             return;
 
-        Logger.add("2");
         mc.formats = [];
         var n:Number = 0;
         var len:Number = formats.length;
@@ -406,7 +407,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 fmt[nm] = format[nm];
             mc.formats.push(fmt);
 
-            Logger.add("n: " + n);
             if (fmt.src != null)
             {
                 createExtraMovieClip(mc, fmt, n);

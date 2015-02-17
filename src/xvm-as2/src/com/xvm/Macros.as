@@ -372,7 +372,7 @@ class com.xvm.Macros
             case "hp-max":
                 if (Config.config.battle.allowHpInPanelsAndMinimap == false)
                     break;
-                var key:String = name + "," + norm + "," + value;
+                var key:String = name + "," + norm + "," + value + "," + vehId;
                 res = _prepare_value_cache[key];
                 if (res)
                     return res;
