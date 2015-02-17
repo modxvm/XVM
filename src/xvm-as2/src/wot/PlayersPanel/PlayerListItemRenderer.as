@@ -377,44 +377,48 @@ class wot.PlayersPanel.PlayerListItemRenderer
         return mc;
     }
 
-    private function getFormattedNumberValue(format:Object, fieldName:String, def:Number, isColorValue:Boolean):Number
+    private function getFormattedNumberValue(format:Object, fieldName:String, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
     {
         var value = format[fieldName];
         if (value == null)
-            return def;
+            return nullValue;
         if (isNaN(value))
         {
             //Logger.add(value + " => " + Macros.Format(m_name, value, null));
             value = Macros.Format(m_name, value, null);
+            if (value == "X")
+                value = 10;
+            else if (value == "XX")
+                value = 100;
             if (isColorValue)
                 value = value.split("#").join("0x");
             format[fieldName] = value;
         }
         if (isNaN(value))
-            return def;
-        return Number(value)
+            return emptyValue;
+        return Number(value);
     }
 
     private function createExtraMovieClip(mc:MovieClip, format:Object, n:Number)
     {
         //Logger.addObject(format);
-        var x:Number = getFormattedNumberValue(format, "x", 0);
-        var y:Number = getFormattedNumberValue(format, "y", 0);
-        var w:Number = getFormattedNumberValue(format, "w", NaN);
-        var h:Number = getFormattedNumberValue(format, "h", NaN);
+        var x:Number = getFormattedNumberValue(format, "x", 0, 0);
+        var y:Number = getFormattedNumberValue(format, "y", 0, 0);
+        var w:Number = getFormattedNumberValue(format, "w", NaN, 0);
+        var h:Number = getFormattedNumberValue(format, "h", NaN, 0);
 
         var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
         img["data"] = {
             x: x, y: y, w: w, h: h,
             format: format,
             align: format.align != null ? format.align : (isLeftPanel ? "left" : "right"),
-            scaleX: getFormattedNumberValue(format, "scaleX", 1) * 100,
-            scaleY: getFormattedNumberValue(format, "scaleY", 1) * 100
+            scaleX: getFormattedNumberValue(format, "scaleX", 1, 1) * 100,
+            scaleY: getFormattedNumberValue(format, "scaleY", 1, 1) * 100
         };
         //Logger.addObject(img["data"]);
 
-        img._alpha = getFormattedNumberValue(format, "alpha", 100);
-        img._rotation = getFormattedNumberValue(format, "rotation", 0);
+        img._alpha = getFormattedNumberValue(format, "alpha", 100, 100);
+        img._rotation = getFormattedNumberValue(format, "rotation", 0, 0);
         img.autoSize = true;
         img.maintainAspectRatio = false;
         var me = this;
@@ -448,20 +452,20 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)
     {
         //Logger.addObject(format);
-        var x:Number = getFormattedNumberValue(format, "x", 0);
-        var y:Number = getFormattedNumberValue(format, "y", 0);
-        var w:Number = getFormattedNumberValue(format, "w", defW);
-        var h:Number = getFormattedNumberValue(format, "h", defH);
+        var x:Number = getFormattedNumberValue(format, "x", 0, 0);
+        var y:Number = getFormattedNumberValue(format, "y", 0, 0);
+        var w:Number = getFormattedNumberValue(format, "w", defW, 0);
+        var h:Number = getFormattedNumberValue(format, "h", defH, 0);
         var tf:TextField = mc.createTextField("f" + n, n, 0, 0, 0, 0);
         tf.data = {
             x: x, y: y, w: w, h: h,
             align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
         };
 
-        tf._xscale = getFormattedNumberValue(format, "scaleX", 1) * 100;
-        tf._yscale = getFormattedNumberValue(format, "scaleY", 1) * 100;
-        tf._alpha = getFormattedNumberValue(format, "alpha", 100);
-        tf._rotation = getFormattedNumberValue(format, "rotation", 0);
+        tf._xscale = getFormattedNumberValue(format, "scaleX", 1, 1) * 100;
+        tf._yscale = getFormattedNumberValue(format, "scaleY", 1, 1) * 100;
+        tf._alpha = getFormattedNumberValue(format, "alpha", 100, 100);
+        tf._rotation = getFormattedNumberValue(format, "rotation", 0, 0);
         tf.selectable = false;
         tf.html = true;
         tf.multiline = true;
@@ -472,9 +476,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
 
         tf.border = format.borderColor != null;
-        tf.borderColor = getFormattedNumberValue(format, "borderColor", 0xCCCCCC, true);
+        tf.borderColor = getFormattedNumberValue(format, "borderColor", 0xCCCCCC, 0xCCCCCC, true);
         tf.background = format.bgColor != null;
-        tf.backgroundColor = getFormattedNumberValue(format, "bgColor", 0x000000, true);
+        tf.backgroundColor = getFormattedNumberValue(format, "bgColor", 0x000000, 0x000000, true);
         if (tf.background && !tf.border)
         {
             format.borderColor = format.bgColor;
