@@ -50,6 +50,8 @@ Legend:
 │ {{v.wn8effd}}              │ X │ . │ WN8 effective tank damage (avgdmg / expected_dmg)
 │ {{v.c_wn8effd}}            │ X │ . │ dynamic color for this macro
 │ {{v.earnedXP}}             │ X │ . │ earned XP
+│ {{v.requiredXP}}           │ X │ . │ XP required for elite vehicle
+│ {{v.freeXP}}               │ X │ . │ free XP
 │ {{v.marksOnGun}}           │ X │ . │ marks on gun
 │ {{v.damageRating}}         │ X │ . │ damage rating in percents for marks on gun
 │ {{v.c_damageRating}}       │ X │ . │ dynamic color for this macro

@@ -49,7 +49,18 @@ class _Dossier(object):
             earnedXP = xpVehs.get(vehId, 0)
             freeXP = g_itemsCache.items.stats.actualFreeXP
             # log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
-            res = self._prepareVehicleResult(dossier, earnedXP, freeXP)
+
+            requiredXP = -earnedXP
+            unlocks = g_itemsCache.items.stats.unlocks
+            _, nID, invID = vehicles.parseIntCompactDescr(vehId)
+            vType = vehicles.g_cache.vehicle(nID, invID)
+            for data in vType.unlocksDescrs:
+                if data[1] not in unlocks:
+                    requiredXP += data[0]
+
+            requiredXP = max(0, requiredXP)
+
+            res = self._prepareVehicleResult(dossier, earnedXP, freeXP, requiredXP)
 
         # respond
         if proxy and proxy.component and proxy.movie:
@@ -156,32 +167,21 @@ class _Dossier(object):
 
         return res
 
-    def _prepareVehicleResult(self, dossier, earnedXP, freeXP):
+    def _prepareVehicleResult(self, dossier, earnedXP, freeXP, requiredXP):
         res = {}
         if dossier is None:
             return res
 
         res = self._prepareCommonResult(dossier)
 
-        vehId = int(self.vehId)
-
         res.update({
-            'vehId': vehId,
+            'vehId': int(self.vehId),
             'earnedXP': earnedXP,
             'freeXP': freeXP,
+            'requiredXP': requiredXP,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
         })
-
-        # from gui.shared import g_itemsCache
-        # vehicle = g_itemsCache.items.getItemByCD(res['vehId'])
-        # if vehicle is not None and vehicle.invID >= 0:
-        # _, nID, innID = vehicles.parseIntCompactDescr(res['vehId'])
-        # vehDescr = vehicles.VehicleDescr(typeID = (nID, innID))
-        # if vehDescr is not None:
-        #    if res['vehId'] == 4657:
-        #        log("ok %i %i %i" % (res['vehId'], vehDescr.maxHealth, vehDescr.turret['maxHealth']))
-        #        #log(vars(vehDescr))
 
         return res
 
