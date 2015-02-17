@@ -3,6 +3,7 @@
  * Class don't contain any workflow logic.
  */
 import com.xvm.*;
+import flash.filters.*
 import wot.VehicleMarkersManager.*;
 import wot.VehicleMarkersManager.components.*;
 import wot.VehicleMarkersManager.components.damage.*;
@@ -100,21 +101,21 @@ class wot.VehicleMarkersManager.XvmBase
      */
     public function formatDynamicText(format:String, curHealth:Number, delta:Number, damageFlag:Number, damageType:String):String
     {
-        return Strings.trim(Macros.Format(m_playerName, format,
-            {
-                curHealth:curHealth,
-                delta:isBlowedUp ? delta + 1 : delta, // curHealth = -1 for blowedUp
-                damageFlag:damageFlag,
-                damageType:damageType,
-                entityName:m_entityName,
-                ready:m_isReady,
-                dead:m_isDead,
-                blowedUp:isBlowedUp,
-                teamKiller:m_entityName == "teamKiller",
-                playerId:m_playerId,
-                marksOnGun:m_marksOnGun,
-                frags:m_frags
-            }));
+        var obj:Object = {
+            curHealth:curHealth,
+            delta:isBlowedUp ? delta - 1 : delta, // curHealth = -1 for blowedUp
+            damageFlag:damageFlag,
+            damageType:damageType,
+            entityName:m_entityName,
+            ready:m_isReady,
+            dead:m_isDead,
+            blowedUp:isBlowedUp,
+            teamKiller:m_entityName == "teamKiller",
+            playerId:m_playerId,
+            marksOnGun:m_marksOnGun,
+            frags:m_frags
+        };
+        return Strings.trim(Macros.Format(m_playerName, format, obj));
     }
 
     public function formatStaticColorText(format:String):String
@@ -128,12 +129,12 @@ class wot.VehicleMarkersManager.XvmBase
         if (!format)
             return getCurrentSystemColor();
 
-        if (isFinite(format))
+        if (!isNaN(format))
             return Number(format);
 
         format = formatDynamicText(format, curHealth, delta, damageFlag, damageType).split("#").join("0x");
 
-        return isFinite(format) ? Number(format) : getCurrentSystemColor();
+        return !isNaN(format) ? Number(format) : getCurrentSystemColor();
     }
 
     public function formatDynamicAlpha(format:String, curHealth:Number):Number
@@ -183,13 +184,13 @@ class wot.VehicleMarkersManager.XvmBase
 //            Logger.add(XvmHelper.createCSS(cfg.font, formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
 
             // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
-            var shadow: flash.filters.DropShadowFilter = null;
+            var shadow:DropShadowFilter = null;
             if (cfg.shadow)
             {
                 var sh_color:Number = formatDynamicColor(sh_color_format_static, m_curHealth);
                 var sh_alpha:Number = formatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
                 shadow = GraphicsUtil.createShadowFilter(cfg.shadow.distance,
-                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength)
+                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength);
                 textField.filters = [ shadow ];
             }
 

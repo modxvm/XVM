@@ -384,7 +384,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
                     tfi.shadow.color = formatDynamicColor(tfi.sh_color, m_curHealth);
                     tfi.shadow.alpha = formatDynamicAlpha(tfi.sh_alpha, m_curHealth) / 100;
-                    tfi.field.filters = [  tfi.shadow ];
+                    tfi.field.filters = [ tfi.shadow ];
                 }
             }
         }
