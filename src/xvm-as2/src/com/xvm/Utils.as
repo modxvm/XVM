@@ -152,6 +152,21 @@ class com.xvm.Utils
         }
     }
 
+    public static function getTopClanText(clanInfoRank:Number):String
+    {
+        var value:String = isNaN(clanInfoRank) ? "regular" : clanInfoRank == 0 ? "persist" :
+            clanInfoRank <= Config.networkServicesSettings.topClansCount ? "top" : "regular";
+
+        if (!Config.config.texts.topclan[value])
+            return null;
+
+        var v:String = Config.config.texts.topclan[value];
+        if (v.indexOf("{{l10n:") >= 0)
+            v = Locale.get(v);
+
+        return v;
+    }
+
     ////////////////////
 
     public static function indexOf(array:Array, value:Object):Number

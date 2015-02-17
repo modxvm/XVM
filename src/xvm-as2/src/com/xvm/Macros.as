@@ -688,8 +688,7 @@ class com.xvm.Macros
         // {{clanrank}}
         pdata["clanrank"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" : String(stat.clanInfoRank);
         // {{topclan}}
-        pdata["topclan"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" :
-            stat.clanInfoRank <= Config.networkServicesSettings.topClansCount ? "top" : null;
+        pdata["battletype"] = Utils.getBattleTypeText(stat.clanInfoRank);
 
         // {{avglvl}}
         pdata["avglvl"] = stat.lvl;

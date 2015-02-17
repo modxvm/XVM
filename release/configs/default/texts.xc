@@ -64,6 +64,13 @@
       "sortie": "sortie",
       "fort_battle": "fort_battle",
       "rated_cybersport": "rated_cybersport"
+    },
+    // Text for {{topclan}} macro.
+    // Текст для макроса {{topclan}}
+    "topclan": {
+      "top": "top",
+      "persist": "persist",
+      "regular": ""
     }
   }
 }

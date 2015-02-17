@@ -58,7 +58,7 @@ Legend:
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
 │ S │ {{language}}       │ X │ X │ X │ X │ X │ X │ X │ Player's client language
 │ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ Global map clan rating, from 1 to 1000 (http://worldoftanks.eu/leaderboard/clans/)
-│ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ value 'top' for top clans, 'persist' for persistent clans, empty for other
+│ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
 │ S │ {{vehicle-class}}  │   │   │   │ X │   │   │   │ places special symbol depending on subject vehicle class
 │ S │ {{turret}}         │   │   │   │   │ X │   │   │ stock turret marker
 │ D │ {{dmg}}            │   │   │   │   │ X │ X │   │ damage health points / last hit value
