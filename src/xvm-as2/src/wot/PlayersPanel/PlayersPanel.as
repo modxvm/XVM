@@ -183,9 +183,9 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     }
 
     var prevState:String = null;
-    var prevNamesHtmlText:String = null;
-    var prevVehiclesHtmlText:String = null;
-    var prevFragsHtmlText:String = null;
+    var prevNamesStr:String = null;
+    var prevVehiclesStr:String = null;
+    var prevFragsStr:String = null;
     private function setDataInternal(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
         //Logger.add("PlayersPanel.setData(): " + wrapper.state);
@@ -232,26 +232,26 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             var deadCountPrev:Number = wrapper.saved_params[wrapper.m_type].dPC;
 
             var needAdjustSize:Boolean = false;
-            if (prevNamesHtmlText != wrapper.m_names.htmlText)
+            if (prevNamesStr != namesStr || wrapper.m_names.htmlText == "")
             {
                 needAdjustSize = true;
+                prevNamesStr = namesStr;
                 wrapper.m_names.htmlText = namesStr;
-                prevNamesHtmlText = wrapper.m_names.htmlText;
                 AdjustLeading(wrapper.m_names);
             }
 
-            if (prevVehiclesHtmlText != wrapper.m_vehicles.htmlText)
+            if (prevVehiclesStr != vehiclesStr || wrapper.m_vehicles.htmlText == "")
             {
                 needAdjustSize = true;
+                prevVehiclesStr = vehiclesStr;
                 wrapper.m_vehicles.htmlText = vehiclesStr;
-                prevVehiclesHtmlText = wrapper.m_vehicles.htmlText;
                 AdjustLeading(wrapper.m_vehicles);
             }
 
-            if (prevFragsHtmlText != wrapper.m_frags.htmlText)
+            if (prevFragsStr != fragsStr || wrapper.m_frags.htmlText == "")
             {
+                prevFragsStr = fragsStr;
                 wrapper.m_frags.htmlText = fragsStr;
-                prevFragsHtmlText = wrapper.m_frags.htmlText;
                 //AdjustLeading(wrapper.m_frags);
             }
 
