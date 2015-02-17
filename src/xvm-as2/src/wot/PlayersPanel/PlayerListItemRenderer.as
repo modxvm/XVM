@@ -75,7 +75,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         extraFields = null;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, initializeExtraFields);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, configureExtraFields);
         if (isLeftPanel)
         {
             GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
@@ -157,9 +157,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 // Player/clan icons
                 attachClanIconToPlayer();
 
-                // Extra Text Fields
-                if (extraFields != null)
-                    updateExtraFields();
+                // Extra fields
+                updateExtraFields();
             }
 
             if (wrapper.squadIcon != null)
@@ -219,7 +218,27 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function onConfigLoaded()
     {
-        this.cfg = Config.config.playersPanel;
+        try
+        {
+            this.cfg = Config.config.playersPanel;
+
+            if (extraFields == null)
+            {
+                extraFields = {
+                    none:    createFieldsHolderForNoneState(),
+                    short:   createExtraFieldsHolder("short"),
+                    medium:  createExtraFieldsHolder("medium"),
+                    medium2: createExtraFieldsHolder("medium2"),
+                    large:   createExtraFieldsHolder("large")
+                };
+            }
+
+            configureExtraFields();
+        }
+        catch (ex:Error)
+        {
+            Logger.add(ex.toString());
+        }
     }
 
     private function completeLoad()
@@ -268,48 +287,70 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     // Extra fields
 
-    private function initializeExtraFields()
+    private function createFieldsHolderForNoneState():MovieClip
     {
-        try
-        {
-            extraFields = {
-                none: createFieldsForNoneMode(),
-                short: createExtraFields("short"),
-                medium: createExtraFields("medium"),
-                medium2: createExtraFields("medium2"),
-                large: createExtraFields("large")
-            };
-            panel.xvm_worker.refresh();
-        }
-        catch (ex:Error)
-        {
-            Logger.add(ex.toString());
-        }
-    }
+        extraFieldsLayout = cfg.none.layout;
+        var cfg_xf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
 
-    private function createFieldsForNoneMode():MovieClip
-    {
-        try
+        var mc:MovieClip = _internal_createExtraFieldsHolder(extraPanelsHolder, "none", cfg_xf.formats, cfg_xf);
+        mc._visible = false;
+
+        if (cfg_xf.formats != null && cfg_xf.formats.length > 0)
         {
-            extraFieldsLayout = cfg.none.layout;
-            var cfg:Object = this.cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
-            if (cfg.formats == null || cfg.formats.length <= 0)
-                return null;
-
-            var mc:MovieClip = _internal_createExtraFields(extraPanelsHolder, "none", cfg.formats, cfg.width, cfg.height, cfg);
-            mc._visible = false;
-
             var menu_mc:Button = UIComponent.createInstance(mc, "HiddenButton", "menu_mc", mc.getNextHighestDepth(), {
-                _x: isLeftPanel ? 0 : -cfg.width,
-                width:cfg.width,
-                height:cfg.height,
+                _x: isLeftPanel ? 0 : -cfg_xf.width,
+                width:cfg_xf.width,
+                height:cfg_xf.height,
                 panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
                 owner: this } );
             menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
             menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
             menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
+        }
 
-            return mc;
+        return mc;
+    }
+
+    private function createExtraFieldsHolder(state:String):MovieClip
+    {
+        var formats:Array = cfg[state]["extraFields" + (isLeftPanel ? "Left" : "Right")];
+        return _internal_createExtraFieldsHolder(wrapper, state, formats, null);
+    }
+
+    private function _internal_createExtraFieldsHolder(owner:MovieClip, state:String, formats:Array, cfg:Object):MovieClip
+    {
+        var idx = parseInt(wrapper._name.split("renderer").join(""));
+        var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + team + "_" + state + "_" + idx, owner.getNextHighestDepth());
+        mc._visible = false;
+        mc.idx = idx;
+        mc.orig_formats = formats;
+        mc.cfg = cfg;
+        return mc;
+    }
+
+    private function configureExtraFields()
+    {
+        try
+        {
+            if (extraFields == null)
+            {
+                Logger.add("WARNING: extraFields == null");
+                return;
+            }
+
+            // remove old text fields
+            Utils.removeChildren(extraFields.none);
+            Utils.removeChildren(extraFields.short);
+            Utils.removeChildren(extraFields.medium);
+            Utils.removeChildren(extraFields.medium2);
+            Utils.removeChildren(extraFields.large);
+
+            var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+            _internal_createExtraFields("none", cf.width, cf.height);
+            _internal_createExtraFields("short", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
+            _internal_createExtraFields("medium", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
+            _internal_createExtraFields("medium2", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
+            _internal_createExtraFields("large", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
         }
         catch (ex:Error)
         {
@@ -318,25 +359,22 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
     }
 
-    private function createExtraFields(mode:String):MovieClip
+    private function _internal_createExtraFields(state:String, width:Number, height:Number)
     {
-        var formats:Array = cfg[mode]["extraFields" + (isLeftPanel ? "Left" : "Right")];
+        Logger.add("_internal_createExtraFields: " + state);
+        var mc:MovieClip = extraFields[state];
+        if (mc == null)
+            return;
+
+        Logger.add("1");
+        var formats:Array = mc.orig_formats;
         if (formats == null || formats.length <= 0)
-            return null;
-        return _internal_createExtraFields(wrapper, mode, formats, TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT, null);
-    }
+            return;
 
-    private function _internal_createExtraFields(owner:MovieClip, mode:String, formats:Array, width:Number, height:Number, cfg:Object):MovieClip
-    {
-        var idx = parseInt(wrapper._name.split("renderer").join(""));
-        var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + team + "_" + mode + "_" + idx, owner.getNextHighestDepth());
-        mc._visible = false;
-        mc.idx = idx;
-        if (cfg != null)
-            mc.cfg = cfg;
-
-        var len = formats.length;
+        Logger.add("2");
         mc.formats = [];
+        var n:Number = 0;
+        var len:Number = formats.length;
         for (var i:Number = 0; i < len; ++i)
         {
             var format = formats[i];
@@ -354,7 +392,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 continue;
 
             var isEmpty:Boolean = true;
-            for (var n in format)
+            for (var nm in format)
             {
                 isEmpty = false;
                 break;
@@ -364,17 +402,21 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
             // make a copy of format, because it will be changed
             var fmt:Object = { };
-            for (var n in format)
-                fmt[n] = format[n];
+            for (var nm in format)
+                fmt[nm] = format[nm];
             mc.formats.push(fmt);
 
+            Logger.add("n: " + n);
             if (fmt.src != null)
-                createExtraMovieClip(mc, fmt, mc.formats.length - 1);
+            {
+                createExtraMovieClip(mc, fmt, n);
+            }
             else
-                createExtraTextField(mc, fmt, mc.formats.length - 1, width, height);
+            {
+                createExtraTextField(mc, fmt, n, width, height);
+            }
+            n++;
         }
-
-        return mc;
     }
 
     private function getFormattedNumberValue(format:Object, fieldName:String, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
@@ -536,10 +578,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private function updateExtraFields():Void
     {
         //Logger.add("updateExtraFields");
-        var state:String = panel.state;
-
         if (extraFields == null)
             return;
+
+        var state:String = panel.state;
 
         extraFields.none._visible = state == "none" && wrapper.data != null;
         extraFields.short._visible = state == "short";
@@ -749,7 +791,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var cfg:Object = mc.cfg;
         if (cfg != null)
         {
-            // none mode
+            // none state
             switch (extraFieldsLayout)
             {
                 case "horizontal":
@@ -764,7 +806,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
         else
         {
-            // other modes
+            // other states
             mc._x = -panel.m_list._x;
             mc._y = 0;
         }
@@ -787,7 +829,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var cfg:Object = mc.cfg;
         if (cfg != null)
         {
-            // none mode
+            // none state
             switch (extraFieldsLayout)
             {
                 case "horizontal":
@@ -802,7 +844,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
         else
         {
-            // other modes
+            // other states
             mc._x = panel.m_list.width - panel.m_list._x;
             mc._y = 0;
         }

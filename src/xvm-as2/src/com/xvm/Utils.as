@@ -240,6 +240,14 @@ class com.xvm.Utils
         return result;
     }
 
+    public static function removeChildren(mc:MovieClip):Void
+    {
+        var children:Array = getChildrenOf(mc, false);
+        var len:Number = children.length;
+        for (var i:Number = 0; i < len; ++i)
+            MovieClip(children[i]).removeMovieClip();
+    }
+
     /**
      * Array subtraction
      * [1,2,3,4,5,6] - [1,2,3] = [4,5,6]

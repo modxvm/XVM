@@ -71,16 +71,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, updateWithoutHideMenu);
     }
 
-    public function refresh()
-    {
-        // TODO: FIXIT: dirty hack to redraw extrafields.
-        var st:String = wrapper.state;
-        wrapper.gotoAndStop(wrapper.m_type + "_" + (st == "none" ? "large" : "none"));
-        wrapper.gotoAndPlay(wrapper.m_type + "_" + st);
-        wrapper.update();
-        wrapper.updateAlphas();
-    }
-
     // PRIVATE
 
     // Centered _y value of text field
