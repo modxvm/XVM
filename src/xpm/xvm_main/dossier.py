@@ -47,8 +47,9 @@ class _Dossier(object):
             dossier = g_itemsCache.items.getVehicleDossier(vehId, self.playerId)
             xpVehs = g_itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehId, 0)
+            freeXP = g_itemsCache.items.stats.actualFreeXP
             # log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
-            res = self._prepareVehicleResult(dossier, earnedXP)
+            res = self._prepareVehicleResult(dossier, earnedXP, freeXP)
 
         # respond
         if proxy and proxy.component and proxy.movie:
@@ -155,16 +156,19 @@ class _Dossier(object):
 
         return res
 
-    def _prepareVehicleResult(self, dossier, earnedXP):
+    def _prepareVehicleResult(self, dossier, earnedXP, freeXP):
         res = {}
         if dossier is None:
             return res
 
         res = self._prepareCommonResult(dossier)
 
+        vehId = int(self.vehId)
+
         res.update({
-            'vehId': int(self.vehId),
+            'vehId': vehId,
             'earnedXP': earnedXP,
+            'freeXP': freeXP,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
         })
