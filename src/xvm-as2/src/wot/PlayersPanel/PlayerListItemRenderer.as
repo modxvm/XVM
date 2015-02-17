@@ -377,7 +377,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         return mc;
     }
 
-    private function getFormattedNumberValue(format:Object, fieldName:String, def:Number):Number
+    private function getFormattedNumberValue(format:Object, fieldName:String, def:Number, isColorValue:Boolean):Number
     {
         var value = format[fieldName];
         if (value == null)
@@ -386,6 +386,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             //Logger.add(value + " => " + Macros.Format(m_name, value, null));
             value = Macros.Format(m_name, value, null);
+            if (isColorValue)
+                value = value.split("#").join("0x");
             format[fieldName] = value;
         }
         if (isNaN(value))
@@ -470,9 +472,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
 
         tf.border = format.borderColor != null;
-        tf.borderColor = getFormattedNumberValue(format, "borderColor", 0xCCCCCC);
+        tf.borderColor = getFormattedNumberValue(format, "borderColor", 0xCCCCCC, true);
         tf.background = format.bgColor != null;
-        tf.backgroundColor = getFormattedNumberValue(format, "bgColor", 0x000000);
+        tf.backgroundColor = getFormattedNumberValue(format, "bgColor", 0x000000, true);
         if (tf.background && !tf.border)
         {
             format.borderColor = format.bgColor;
