@@ -1,12 +1,11 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
 XVM_API_VERSION = "3.0"
-XVM_SERVERS = ["https://stat.modxvm.com:443/{API}/{REQ}"]  # TODO - config
-# XVM_FINGERPRINTS = [ # fingerprints for SSL certificate
-#    "46169f8bd6f743733b23066f5cce2cd3d0392af8",
-#    "8ca0ecb26af30a24a78ca3335f53a4dcf054dfa0"]
+XVM_SERVERS = ["https://stat.modxvm.com:443/{API}/{REQ}"]
 XVM_FINGERPRINT = "46169f8bd6f743733b23066f5cce2cd3d0392af8"  # fingerprints for SSL certificate
-XVM_TIMEOUT = 5000  # TODO - config
+#XVM_SERVERS = ["https://stat2.modxvm.com:443/{API}/{REQ}"]
+#XVM_FINGERPRINT = "918154b8f25c74c2bcdeaf767cda7badf7f8a5e1"  # fingerprints for SSL certificate
+XVM_TIMEOUT = 5000
 # XVM_WS_URL = "ws://echo.websocket.org/"
 XVM_WS_URL = "wss://echo.websocket.org/"
 
