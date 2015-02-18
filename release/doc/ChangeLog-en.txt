@@ -6,7 +6,9 @@
       {{v.xpToElite}} - XP required for elite vehicle
       {{v.xpToEliteLeft}} - XP left to gain for elite vehicle
       {{v.freeXP}} - free XP
-  * macros formatting: added "'" flag for thousands separator (hangar only)
+  * macros formatting:
+      added "'" flag for thousands separator (hangar only)
+      added "=match" part for value matching ({{battletype=clan?CLAN WAR}})
 
 XVM-6.0.0.3:
   * bugs fixed
