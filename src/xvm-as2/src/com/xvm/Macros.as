@@ -693,7 +693,7 @@ class com.xvm.Macros
         // {{avglvl}}
         pdata["avglvl"] = stat.lvl;
         // {{e}}
-        pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
+        pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "X" : String(stat.v.te);
         // {{teff}}
         pdata["teff"] = stat.v.teff;
         // {{xeff}}
