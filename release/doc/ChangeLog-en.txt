@@ -1,9 +1,12 @@
-﻿  * added new macro {{battletype}} - current battle type
+﻿XVM-6.0.1-dev:
+  * added new macro {{battletype}} - current battle type
   * added texts/battletype section with text replacements for {{battletype}} macro
   * added texts/topclan section with text replacements for {{topclan}} macro
   * added new carousel macros:
-      {{v.requiredXP}} - XP required for elite vehicle
+      {{v.xpToElite}} - XP required for elite vehicle
+      {{v.xpToEliteLeft}} - XP left to gain for elite vehicle
       {{v.freeXP}} - free XP
+  * macros formatting: added "'" flag for thousands separator (hangar only)
 
 XVM-6.0.0.3:
   * bugs fixed

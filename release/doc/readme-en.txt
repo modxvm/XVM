@@ -252,6 +252,7 @@
 
         flag  - "-" for left align, else right align
                 "0" for filling with leading zeros
+                "'" for thousands separator (only for integer numbers)
         width - minimum width
         prec  - depended from the type:
                 - maximum width for strings

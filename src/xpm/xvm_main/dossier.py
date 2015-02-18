@@ -50,17 +50,17 @@ class _Dossier(object):
             freeXP = g_itemsCache.items.stats.actualFreeXP
             # log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
 
-            requiredXP = -earnedXP
+            xpToElite = 0
             unlocks = g_itemsCache.items.stats.unlocks
             _, nID, invID = vehicles.parseIntCompactDescr(vehId)
             vType = vehicles.g_cache.vehicle(nID, invID)
             for data in vType.unlocksDescrs:
                 if data[1] not in unlocks:
-                    requiredXP += data[0]
+                    xpToElite += data[0]
 
-            requiredXP = max(0, requiredXP)
+            xpToElite = max(0, xpToElite)
 
-            res = self._prepareVehicleResult(dossier, earnedXP, freeXP, requiredXP)
+            res = self._prepareVehicleResult(dossier, earnedXP, freeXP, xpToElite)
 
         # respond
         if proxy and proxy.component and proxy.movie:
@@ -167,7 +167,7 @@ class _Dossier(object):
 
         return res
 
-    def _prepareVehicleResult(self, dossier, earnedXP, freeXP, requiredXP):
+    def _prepareVehicleResult(self, dossier, earnedXP, freeXP, xpToElite):
         res = {}
         if dossier is None:
             return res
@@ -178,7 +178,7 @@ class _Dossier(object):
             'vehId': int(self.vehId),
             'earnedXP': earnedXP,
             'freeXP': freeXP,
-            'requiredXP': requiredXP,
+            'xpToElite': xpToElite,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
         })
