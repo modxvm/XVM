@@ -64,7 +64,7 @@ class com.xvm.Macros
 
     /**
      * Format string with macros substitutions
-     *   {{name[:norm][%[flag][width][.prec]type][~suf][?rep][|def]}}
+     *   {{name[:norm][%[flag][width][.prec]type][~suf][=match][?rep][|def]}}
      * @param pname player name without extra tags (clan, region, etc)
      * @param format string template
      * @param options data for dynamic values
@@ -172,10 +172,12 @@ class com.xvm.Macros
         var def:String = parts[6];
 
         var dotPos:Number = macroName.indexOf(".");
-        if (dotPos > 0 && options != null)
+        if (dotPos > 0)
         {
+            if (options == null)
+                options = { };
             options.__subname = macroName.slice(dotPos + 1);
-            macroName = parts[0] = macroName.slice(0, dotPos);
+            macroName = macroName.slice(0, dotPos);
         }
 
         var value = pdata[macroName];
