@@ -9,6 +9,7 @@
   * macros formatting:
       added "'" flag for thousands separator (hangar only)
       added "=match" part for value matching ({{battletype=clan?CLAN WAR}})
+  * added option minimap/labels/units/antiAliasType - text fields antialias type.
 
 XVM-6.0.0.3:
   * bugs fixed
