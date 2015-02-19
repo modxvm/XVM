@@ -222,7 +222,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             var deadCountPrev:Number = wrapper.saved_params[wrapper.m_type].dPC;
 
             var needAdjustSize:Boolean = false;
-            if (prevNamesStr != namesStr || wrapper.m_names.htmlText == "")
+            //Logger.addObject(wrapper.m_names.text);
+            if (prevNamesStr != namesStr || wrapper.m_names.text == "" || wrapper.m_names.text == "\r")
             {
                 needAdjustSize = true;
                 prevNamesStr = namesStr;
@@ -230,7 +231,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 AdjustLeading(wrapper.m_names);
             }
 
-            if (prevVehiclesStr != vehiclesStr || wrapper.m_vehicles.htmlText == "")
+            if (prevVehiclesStr != vehiclesStr || wrapper.m_vehicles.text == "" || wrapper.m_vehicles.text == "\r")
             {
                 needAdjustSize = true;
                 prevVehiclesStr = vehiclesStr;
@@ -238,7 +239,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 AdjustLeading(wrapper.m_vehicles);
             }
 
-            if (prevFragsStr != fragsStr || wrapper.m_frags.htmlText == "")
+            if (prevFragsStr != fragsStr || wrapper.m_frags.text == "" || wrapper.m_frags.text == "\r")
             {
                 prevFragsStr = fragsStr;
                 wrapper.m_frags.htmlText = fragsStr;
