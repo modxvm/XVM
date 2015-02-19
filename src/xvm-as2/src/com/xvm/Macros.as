@@ -26,9 +26,9 @@ class com.xvm.Macros
         _instance._RegisterPlayerData(pname, data, team);
     }
 
-    public static function RegisterBattleTypeData(battleTier:Number, battleType:Number)
+    public static function RegisterGlobalMacrosData(battleTier:Number, battleType:Number)
     {
-        _instance._RegisterBattleTypeData(battleTier, battleType);
+        _instance._RegisterGlobalMacrosData(battleTier, battleType);
     }
 
     public static function RegisterStatMacros(pname:String, stat:StatData)
@@ -65,6 +65,7 @@ class com.xvm.Macros
     private static var _instance:Macros = new Macros();
 
     private var m_macros_cache:Object = { };
+    private var m_macros_cache_global:Object = { };
     private var m_dict:Object = { }; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
     private var m_globals:Object = { };
     private var m_comments:Object = null;
@@ -90,6 +91,7 @@ class com.xvm.Macros
             // Check cached value
             var player_cache:Object;
             var dead_value:String;
+            var cached_value;
             if (pname != null && pname != "" && options != null)
             {
                 player_cache = m_macros_cache[pname];
@@ -99,12 +101,17 @@ class com.xvm.Macros
                     player_cache = m_macros_cache[pname];
                 }
                 dead_value = options.dead == true ? "dead" : "alive";
-                var cached_value = player_cache[dead_value][format];
-                if (cached_value !== undefined)
-                {
-                    //Logger.add("cached: " + cached_value);
-                    return cached_value;
-                }
+                cached_value = player_cache[dead_value][format];
+            }
+            else
+            {
+                cached_value = m_macros_cache_global[format];
+            }
+
+            if (cached_value !== undefined)
+            {
+                //Logger.add("cached: " + cached_value);
+                return cached_value;
             }
 
             // Split tags
@@ -146,8 +153,15 @@ class com.xvm.Macros
 
             if (isStaticMacro)
             {
-                if (pname != null && pname != "" && options != null)
-                    player_cache[dead_value][format] = res;
+                if (pname != null && pname != "")
+                {
+                    if (options != null)
+                        player_cache[dead_value][format] = res;
+                }
+                else
+                {
+                    m_macros_cache_global[format] = res;
+                }
             }
             //else
             //    Logger.add(pname + "> " + format);
@@ -544,8 +558,6 @@ class com.xvm.Macros
             pdata["clannb"] = clannb;
             // {{player}}
             pdata["player"] = data.himself == true ? "pl" : null;
-            // {{xvm-stat}}
-            pdata["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
         }
 
         // vehicle
@@ -699,9 +711,15 @@ class com.xvm.Macros
         }
     }
 
-    private function _RegisterBattleTypeData(battleTier:Number, battleType:Number)
+    private function _RegisterGlobalMacrosData(battleTier:Number, battleType:Number)
     {
-        if (m_globals["battletier"] == null)
+        if (m_globals["xvm-stat"] === undefined)
+        {
+            // {{xvm-stat}}
+            m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
+        }
+
+        if (m_globals["battletier"] === undefined)
         {
             switch (battleType)
             {

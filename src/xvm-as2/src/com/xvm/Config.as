@@ -28,10 +28,10 @@ class com.xvm.Config
         {
             Config.config = JSONx.parse(config_data);
             //Logger.addObject(Config.config);
-            Locale.initializeLanguageFile(lang_str);
-            Macros.RegisterBattleTypeData(battleLevel, battleType);
-            VehicleInfo.onVehicleInfoData(vehInfoData);
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
+            Macros.RegisterGlobalMacrosData(battleLevel, battleType);
+            Locale.initializeLanguageFile(lang_str);
+            VehicleInfo.onVehicleInfoData(vehInfoData);
 
             Cmd.getComments(this, onGetCommentsCallback);
 
