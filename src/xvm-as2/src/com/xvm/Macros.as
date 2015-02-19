@@ -53,6 +53,15 @@ class com.xvm.Macros
 
     // PRIVATE
 
+    private static var PART_NAME:Number = 0;
+    private static var PART_NORM:Number = 1;
+    private static var PART_FMT:Number = 2;
+    private static var PART_SUF:Number = 3;
+    private static var PART_MATCH_OP:Number = 4;
+    private static var PART_MATCH:Number = 5;
+    private static var PART_REP:Number = 6;
+    private static var PART_DEF:Number = 7;
+
     private static var _instance:Macros = new Macros();
 
     private var m_macros_cache:Object = { };
@@ -64,7 +73,7 @@ class com.xvm.Macros
 
     /**
      * Format string with macros substitutions
-     *   {{name[:norm][%[flag][width][.prec]type][~suf][=match][?rep][|def]}}
+     *   {{name[:norm][%[flag][width][.prec]type][~suf][(=|<|>)match][?rep][|def]}}
      * @param pname player name without extra tags (clan, region, etc)
      * @param format string template
      * @param options data for dynamic values
@@ -167,9 +176,9 @@ class com.xvm.Macros
 
         var parts:Array = GetMacroParts(macro, pdata);
 
-        var macroName:String = parts[0];
-        var norm:String = parts[1];
-        var def:String = parts[6];
+        var macroName:String = parts[PART_NAME];
+        var norm:String = parts[PART_NORM];
+        var def:String = parts[PART_DEF];
 
         var dotPos:Number = macroName.indexOf(".");
         if (dotPos > 0)
@@ -227,10 +236,9 @@ class com.xvm.Macros
         //Logger.add("GetMacroParts: " + macro);
         //Logger.addObject(pdata);
 
-        parts = [null,null,null,null,null,null,null];
+        parts = [null,null,null,null,null,null,null,null];
 
-        // split parts: name[:norm][%[flag][width][.prec]type][~suf][=match][?rep][|def]
-        var matchNotFlag:Boolean = false;
+        // split parts: name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]
         var macroArr:Array = macro.split("");
         var len:Number = macroArr.length;
         var part:String = "";
@@ -253,17 +261,28 @@ class com.xvm.Macros
                     if (section < 3)
                         nextSection = 3;
                     break;
+                case "!":
                 case "=":
+                case ">":
+                case "<":
                     if (section < 4)
-                        nextSection = 4;
+                    {
+                        if (i < len - 1 && macroArr[i + 1] == "=")
+                        {
+                            i++;
+                            ch += macroArr[i];
+                        }
+                        parts[PART_MATCH_OP] = ch;
+                        nextSection = 5;
+                    }
                     break;
                 case "?":
-                    if (section < 5)
-                        nextSection = 5;
-                    break;
-                case "|":
                     if (section < 6)
                         nextSection = 6;
+                    break;
+                case "|":
+                    if (section < 7)
+                        nextSection = 7;
                     break;
             }
 
@@ -280,10 +299,10 @@ class com.xvm.Macros
         }
         parts[section] = part;
 
-        if (parts[6] == null)
-            parts[6] = "";
+        if (parts[PART_DEF] == null)
+            parts[PART_DEF] = "";
 
-        //Logger.add("[AS2][MACROS][GetMacroParts]: [0]:" + parts[0] + "| [1]:" + parts[1] + "| [2]:" + parts[2] + "| [3]:" + parts[3] + "| [4]:" + parts[4] + "| [5]:" + parts[5] + "| [6]:" + parts[6]);
+        //Logger.add("[AS2][MACROS][GetMacroParts]: " + parts.join(", "));
         _macro_parts_cache[macro] = parts;
         return parts;
     }
@@ -291,13 +310,14 @@ class com.xvm.Macros
     private var _format_macro_fmt_suf_cache:Object = {};
     private function FormatMacro(macro:String, parts:Array, value, vehId:Number, options:Object):String
     {
-        var name:String = parts[0];
-        var norm:String = parts[1];
-        var fmt:String = parts[2];
-        var suf:String = parts[3];
-        var match:String = parts[4];
-        var rep:String = parts[5];
-        var def:String = parts[6];
+        var name:String = parts[PART_NAME];
+        var norm:String = parts[PART_NORM];
+        var fmt:String = parts[PART_FMT];
+        var suf:String = parts[PART_SUF];
+        var match_op:String = parts[PART_MATCH_OP];
+        var match:String = parts[PART_MATCH];
+        var rep:String = parts[PART_REP];
+        var def:String = parts[PART_DEF];
 
         // substitute
         //Logger.add("name:" + name + " norm:" + norm + " fmt:" + fmt + " suf:" + suf + " rep:" + rep + " def:" + def);
@@ -322,8 +342,34 @@ class com.xvm.Macros
             res = value;
         }
 
-        if (match != null && value != match)
-            return prepareValue(NaN, name, norm, def, vehId);
+        if (match != null)
+        {
+            var matched:Boolean = false;
+            switch (match_op)
+            {
+                case "=":
+                case "==":
+                    matched = value == match;
+                    break;
+                case "!=":
+                    matched = value != match;
+                    break;
+                case "<":
+                    matched = Number(value) < Number(match);
+                    break;
+                case "<=":
+                    matched = Number(value) <= Number(match);
+                    break;
+                case ">":
+                    matched = Number(value) > Number(match);
+                    break;
+                case ">=":
+                    matched = Number(value) >= Number(match);
+                    break;
+            }
+            if (!matched)
+                return prepareValue(NaN, name, norm, def, vehId);
+        }
 
         if (rep != null)
             return rep;
