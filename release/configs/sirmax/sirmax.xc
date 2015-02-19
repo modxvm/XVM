@@ -16,19 +16,18 @@
 
     "__stub__": null
   },
+  "hotkeys": {
+    //"minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
+    //"minimapAltMode": { "enabled": true, "keyCode": 29, "onHold": true },
+    "playersPanelAltMode": { "enabled": true, "keyCode": 56 }, // LAlt
+    //"markersAltMode":      { "enabled": false, "onHold": false },
+    "__stub__": {}
+  },
   "elements": [
     ${"sirmax-snippet-test.xc":"."},
     //${"sirmax-snippet-pp.xc":"."},  // players panels
     ${"sirmax-snippet-bt.xc":"."} // battle timer
   ],
-  "definition": {
-    "author": "sirmax2",
-    "description": "Sirmax's settings for XVM",
-    "url": "http://www.modxvm.com/",
-    "date": "10.10.2012",
-    "gameVersion": "0.8.0",
-    "modMinVersion": "3.0.4"
-  },
   "login": {
     "skipIntro": true,
     "saveLastServer": true,
@@ -82,13 +81,6 @@
     //"allyColor": "0xFFFF00",
     //"enemyColor": "0x00FFFF",
     "__stub__": null
-  },
-  "hotkeys": {
-    //"minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
-    //"minimapAltMode": { "enabled": true, "keyCode": 29, "onHold": true },
-    "playersPanelAltMode": { "enabled": true, "keyCode": 56 }, // LAlt
-    //"markersAltMode":      { "enabled": false, "onHold": false },
-    "__stub__": {}
   },
   "battleLoading": {
     "showBattleTier": true,
@@ -188,6 +180,14 @@
     "fps": {
       //"enabled": true
     }
+  },
+  "definition": {
+    "author": "sirmax2",
+    "description": "Sirmax's settings for XVM",
+    "url": "http://www.modxvm.com/",
+    "date": "10.10.2012",
+    "gameVersion": "0.8.0",
+    "modMinVersion": "3.0.4"
   },
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }

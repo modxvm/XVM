@@ -81,7 +81,7 @@ class com.xvm.Macros
             // Check cached value
             var player_cache:Object;
             var dead_value:String;
-            if (pname != null && pname != "")
+            if (pname != null && pname != "" && options != null)
             {
                 player_cache = m_macros_cache[pname];
                 if (player_cache == null)
@@ -89,7 +89,7 @@ class com.xvm.Macros
                     m_macros_cache[pname] = { alive: { }, dead: { }};
                     player_cache = m_macros_cache[pname];
                 }
-                dead_value = (options != null && options.dead == true) ? "dead" : "alive";
+                dead_value = options.dead == true ? "dead" : "alive";
                 var cached_value = player_cache[dead_value][format];
                 if (cached_value !== undefined)
                 {
@@ -137,7 +137,7 @@ class com.xvm.Macros
 
             if (isStaticMacro)
             {
-                if (pname != null && pname != "")
+                if (pname != null && pname != "" && options != null)
                     player_cache[dead_value][format] = res;
             }
             //else
