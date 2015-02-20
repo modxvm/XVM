@@ -30,6 +30,7 @@ class com.xvm.Config
             //Logger.addObject(Config.config);
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
             Macros.RegisterGlobalMacrosData(battleLevel, battleType);
+            ApplyGlobalMacros();
             Locale.initializeLanguageFile(lang_str);
             VehicleInfo.onVehicleInfoData(vehInfoData);
 
@@ -56,5 +57,26 @@ class com.xvm.Config
         {
             Logger.add("onGetCommentsCallback: ERROR: " + Utils.parseError(ex));
         }
+    }
+
+    private function ApplyGlobalMacros()
+    {
+        // playersPanel
+        var cfg = Config.config.playersPanel;
+        cfg.startMode = Macros.FormatGlobalStringValue(cfg.startMode);
+        cfg.altMode = Macros.FormatGlobalStringValue(cfg.altMode);
+        cfg.short.enabled = Macros.FormatGlobalBooleanValue(cfg.short.enabled);
+        cfg.medium.enabled = Macros.FormatGlobalBooleanValue(cfg.medium.enabled);
+        cfg.medium2.enabled = Macros.FormatGlobalBooleanValue(cfg.medium2.enabled);
+        cfg.large.enabled = Macros.FormatGlobalBooleanValue(cfg.large.enabled);
+        cfg.none.enabled = Macros.FormatGlobalBooleanValue(cfg.none.enabled);
+        cfg.none.leftPanel.x = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.x);
+        cfg.none.leftPanel.y = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.y);
+        cfg.none.leftPanel.width = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.width);
+        cfg.none.leftPanel.height = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.height);
+        cfg.none.rightPanel.x = Macros.FormatGlobalNumberValue(cfg.none.rightPanel.x);
+        cfg.none.rightPanel.y = Macros.FormatGlobalNumberValue(cfg.none.rightPanel.y);
+        cfg.none.rightPanel.width = Macros.FormatGlobalNumberValue(cfg.none.rightPanel.width);
+        cfg.none.rightPanel.height = Macros.FormatGlobalNumberValue(cfg.none.rightPanel.height);
     }
 }

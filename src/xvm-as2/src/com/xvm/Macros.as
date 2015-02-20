@@ -16,6 +16,16 @@ class com.xvm.Macros
         return _instance._FormatGlobalNumberValue(value);
     }
 
+    public static function FormatGlobalBooleanValue(value):Boolean
+    {
+        return _instance._FormatGlobalBooleanValue(value);
+    }
+
+    public static function FormatGlobalStringValue(value):String
+    {
+        return _instance._FormatGlobalStringValue(value);
+    }
+
     public static function getGlobalValue(key:String)
     {
         return _instance.m_globals[key];
@@ -498,6 +508,18 @@ class com.xvm.Macros
         if (!isNaN(value))
             return value;
         return parseFloat(_Format(null, value, null));
+    }
+
+    private function _FormatGlobalBooleanValue(value):Boolean
+    {
+        if (typeof value == "boolean")
+            return value;
+        return _Format(null, value, null).toLowerCase() == 'true';
+    }
+
+    private function _FormatGlobalStringValue(value):String
+    {
+        return _Format(null, String(value), null);
     }
 
     // Macros registration
