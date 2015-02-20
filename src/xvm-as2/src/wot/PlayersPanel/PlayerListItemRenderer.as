@@ -442,14 +442,16 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (isNaN(value))
         {
             //Logger.add(value + " => " + Macros.Format(m_name, value, null));
-            value = Macros.Format(m_name, value, null);
-            if (value == "X")
-                value = 10;
-            else if (value == "XX")
-                value = 100;
+            var v = Macros.Format(m_name, value, null);
+            if (v == "X")
+                v = 10;
+            else if (v == "XX")
+                v = 100;
             if (isColorValue)
-                value = value.split("#").join("0x");
-            format[fieldName] = value;
+                v = v.split("#").join("0x");
+            if (Macros.IsCached(m_name, value))
+                format[fieldName] = v;
+            value = v;
         }
         if (isNaN(value))
             return emptyValue;

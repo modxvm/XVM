@@ -16,6 +16,11 @@ class com.xvm.Macros
         return _instance._FormatGlobalNumberValue(value);
     }
 
+    public static function IsCached(pname:String, format:String, alive:Boolean):Boolean
+    {
+        return _instance._IsCached(pname, format, alive);
+    }
+
     public static function getGlobalValue(key:String)
     {
         return _instance.m_globals[key];
@@ -498,6 +503,31 @@ class com.xvm.Macros
         if (!isNaN(value))
             return value;
         return parseFloat(_Format(null, value, null));
+    }
+
+    /**
+     * Is macros value cached
+     * @param pname player name without extra tags (clan, region, etc)
+     * @param format string template
+     * @param options data for dynamic values
+     * @return true if macros value is cached else false
+     */
+    private function _IsCached(pname:String, format:String, alive:Boolean):Boolean
+    {
+        if (format == null || format == "")
+            return false;
+
+        if (pname != null && pname != "")
+        {
+            var player_cache:Object = m_macros_cache[pname];
+            if (player_cache == null)
+                return false;
+            return player_cache[alive ? "alive" : "dead"][format] !== undefined;
+        }
+        else
+        {
+            return m_macros_cache_global[format] !== undefined;
+        }
     }
 
     // Macros registration
