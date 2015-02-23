@@ -68,7 +68,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, updateWithoutHideMenu);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, updateWithoutHideMenu);
-        GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, updateWithoutHideMenu);
+        GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
     }
 
     // PRIVATE
@@ -392,6 +392,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         }
         //currentType = value;
         btn.selected = true;
+    }
+
+    private function onBattleStateChanged(e:EBattleStateChanged)
+    {
+        //updateWithoutHideMenu
+        invalidate(300);
     }
 
     // update without hide menu

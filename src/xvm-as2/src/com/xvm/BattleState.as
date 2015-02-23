@@ -29,7 +29,7 @@ class com.xvm.BattleState
     public static function updateUserData(userName:String, data:Object):Boolean
     {
         var updated:Boolean = false;
-        var ud = getUserData(userName);
+        var ud:BattleStateData = getUserData(userName);
         for (var i in data)
         {
             if (ud[i] != data[i])
