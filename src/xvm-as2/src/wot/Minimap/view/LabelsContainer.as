@@ -128,7 +128,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         }
         invalidateList = { };
 
-        Cmd.profMethodStart("Minimap.Labels.draw()");
+        Cmd.profMethodEnd("Minimap.Labels.draw()");
     }
 
     private function _getLabel(playerId:Number):MovieClip

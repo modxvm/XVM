@@ -195,13 +195,17 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             Cmd.profMethodStart("PlayersPanel.setData(): " + wrapper.type);
 
             //wrapper.m_list._visible = true; // _visible == false for "none" mode
+            Cmd.profMethodStart("PlayersPanel.setData(): #0 - split");
             var values:Array = vehiclesStrOrig.split("<br/>");
+            Cmd.profMethodEnd("PlayersPanel.setData(): #0 - split");
+            Cmd.profMethodStart("PlayersPanel.setData(): #1 - prepare");
             var len = data.length;
             var namesArr:Array = [];
             var vehiclesArr:Array = [];
             var fragsArr:Array = [];
             for (var i = 0; i < len; ++i)
             {
+                Cmd.profMethodStart("PlayersPanel.setData(): #1.0 - register macros");
                 var item = data[i];
                 var value = values[i];
 
@@ -209,14 +213,23 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
                 //Logger.addObject(item);
                 Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+                Cmd.profMethodEnd("PlayersPanel.setData(): #1.0 - register macros");
 
                 var value_splitted:Array = value.split(item.vehicle);
                 var cfg_state:Object = cfg[wrapper.state];
+                Cmd.profMethodStart("PlayersPanel.setData(): #1.1 - format names");
                 namesArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_NICK, item, item.userName)));
+                Cmd.profMethodEnd("PlayersPanel.setData(): #1.1 - format names");
+                Cmd.profMethodStart("PlayersPanel.setData(): #1.2 - format vehicle");
                 vehiclesArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_VEHICLE, item, item.vehicle)));
+                Cmd.profMethodEnd("PlayersPanel.setData(): #1.2 - format vehicle");
+                Cmd.profMethodStart("PlayersPanel.setData(): #1.3 - format frags");
                 fragsArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_FRAGS, item, item.frags)));
+                Cmd.profMethodEnd("PlayersPanel.setData(): #1.3 - format frags");
             }
+            Cmd.profMethodEnd("PlayersPanel.setData(): #1 - prepare");
 
+            Cmd.profMethodStart("PlayersPanel.setData(): #2 - join arrays and set htmlText");
             var namesStr:String = namesArr.join("\n");
             var vehiclesStr:String = vehiclesArr.join("\n");
             var fragsStr:String = fragsArr.join("\n");
@@ -252,9 +265,13 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 wrapper.m_frags.htmlText = fragsStr;
                 //AdjustLeading(wrapper.m_frags);
             }
+            Cmd.profMethodEnd("PlayersPanel.setData(): #2 - join arrays and set htmlText");
 
+            Cmd.profMethodStart("PlayersPanel.setData(): #3 - base.setData()");
             base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig);
+            Cmd.profMethodEnd("PlayersPanel.setData(): #3 - base.setData()");
 
+            Cmd.profMethodStart("PlayersPanel.setData(): #4");
             // new player added in the FoW mode
             if (m_knownPlayersCount != data.length)
                 m_knownPlayersCount = data.length;
@@ -283,6 +300,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                     }
                 }
             }
+            Cmd.profMethodEnd("PlayersPanel.setData(): #4");
         }
         catch (ex:Error)
         {
