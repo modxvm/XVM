@@ -262,13 +262,13 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         if (delta < 0) // Damage has been done
         {
-            // markers{ally{alive{normal
+            // markers.ally.alive.normal
             var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
             healthBarComponent.updateState(vehicleStateCfg);
             healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta, flag, damageType);
             var cfg = flag == Defines.FROM_PLAYER ? vehicleStateCfg.damageTextPlayer
                 : flag == Defines.FROM_SQUAD ? vehicleStateCfg.damageTextSquadman : vehicleStateCfg.damageText;
-            //Logger.addObject(cfg, m_playerName);
+            //Logger.addObject(cfg, 1, m_playerName);
             damageTextComponent.showDamage(cfg, newHealth, -delta, flag, damageType);
         }
 

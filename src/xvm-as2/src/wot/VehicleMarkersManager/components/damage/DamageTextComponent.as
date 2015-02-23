@@ -4,7 +4,6 @@ import wot.VehicleMarkersManager.components.damage.*;
 class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 {
     private var proxy:DamageTextProxy;
-    private var cfg:Object;
 
     private var damage:MovieClip;
 
@@ -28,12 +27,10 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
      */
     public function showDamage(cfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:String)
     {
-        this.cfg = cfg;// new DamageTextConfig(dmgReceiverCfg, dmgSourceCfg, flag, damageType);
-
         if (!cfg.visible)
             return;
 
-        var text:String = defineText(newHealth, delta, flag, damageType);
+        var text:String = defineText(cfg, newHealth, delta, flag, damageType);
 
         var color:Number;
         if (cfg.color == null)
@@ -73,14 +70,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
     public function updateState(state_cfg:Object)
     {
-        var cfg = state_cfg.damageText;
-        var visible = cfg.visible;
-        if (visible)
-        {
-            damage._x = cfg.x;
-            damage._y = cfg.y;
-        }
-        damage._visible = visible;
+        damage._visible = true;
     }
 
     // PRIVATE METHODS
@@ -88,7 +78,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
     private function createTextField(color:Number, shadowColor:Number, cfg):TextField
     {
         var n = damage.getNextHighestDepth();
-        var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 200, 100);
+        var tf: TextField = damage.createTextField("txt" + n, n, cfg.x, cfg.y, 200, 100);
 
         tf.antiAliasType = "advanced";
         tf.multiline = true;
@@ -100,7 +90,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance, cfg.shadow.angle, shadowColor,
             cfg.shadow.alpha, cfg.shadow.size, cfg.shadow.strength) ];
 
-        tf._x = -(tf._width / 2.0);
+        tf._x -= (tf._width / 2.0);
 
 /*        var b1:flash.display.BitmapData = new flash.display.BitmapData(16, 16);
         var matrix:flash.geom.Matrix = new flash.geom.Matrix()
@@ -110,7 +100,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         return tf;
     }
 
-    private function defineText(newHealth:Number, delta:Number, damageFlag:Number, damageType:String):String
+    private function defineText(cfg:Object, newHealth:Number, delta:Number, damageFlag:Number, damageType:String):String
     {
         var msg = (newHealth < 0) ? Locale.get(cfg.blowupMessage) : cfg.damageMessage;
         var text = proxy.formatDynamicText(msg, newHealth, delta, damageFlag, damageType);

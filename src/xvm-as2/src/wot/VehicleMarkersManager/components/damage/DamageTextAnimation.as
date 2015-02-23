@@ -9,7 +9,6 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
 
     private var tf:TextField;
     private var timeline:TimelineLite;
-    private var cfg:Object
 
     private static var EMERGE_DURATION:Number = 0.3;
     private static var TINT_DURATION:Number = 0.3;
@@ -39,10 +38,9 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
     public function DamageTextAnimation(cfg:Object, tf:TextField)
     {
         this.tf = tf;
-        this.cfg = cfg;
 
-        var movementDuration:Number = cfg.speed; // TODO: alias config val to duration?
-        var distanceUpward:Number = - cfg.maxRange;
+        var movementDuration:Number = cfg.speed;
+        var distanceUpward:Number = - cfg.maxRange + cfg.y;
 
         timeline = new TimelineLite({onComplete:removeTextField});
 
