@@ -12,8 +12,8 @@
     "rows": 2,
     "padding": { "horizontal": 5, "vertical": 5 },
     "alwaysShowFilters": true,
-    "hideBuyTank": false,
-    "hideBuySlot": false,
+    //"hideBuyTank": true,
+    //"hideBuySlot": true,
     "filters": {
       "nation":   { "enabled": true },
       "type":     { "enabled": true },
