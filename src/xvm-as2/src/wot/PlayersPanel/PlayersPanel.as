@@ -192,7 +192,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             if (data == null)
                 return;
 
-            Cmd.profMethodStart("PlayersPanel.setData: " + wrapper.type);
+            Cmd.profMethodStart("PlayersPanel.setData(): " + wrapper.type);
 
             //wrapper.m_list._visible = true; // _visible == false for "none" mode
             var values:Array = vehiclesStrOrig.split("<br/>");
@@ -289,7 +289,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             Logger.add(ex.toString());
         }
 
-        Cmd.profMethodEnd("PlayersPanel.setData: " + wrapper.type);
+        Cmd.profMethodEnd("PlayersPanel.setData(): " + wrapper.type);
     }
 
     private function fixBattleState(data)

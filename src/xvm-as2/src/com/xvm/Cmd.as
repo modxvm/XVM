@@ -59,7 +59,7 @@ class com.xvm.Cmd
             _call(null, null, [COMMAND_PROF_METHOD_START, name]);
     }
 
-    public static function profMethodEnd(target:Object, callback:Function, name:String)
+    public static function profMethodEnd(name:String)
     {
         if (Config.IS_DEVELOPMENT)
             _call(null, null, [COMMAND_PROF_METHOD_END, name]);

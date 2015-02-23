@@ -27,10 +27,7 @@ COMMAND_PROF_METHOD_START = "profMethodStart"
 COMMAND_PROF_METHOD_END = "profMethodEnd"
 
 #####################################################################
-# as2profile
-
-def fini():
-    as2profiler.showResult()
+# as2profiler
 
 _BATTLE_SWF = 'battle.swf'
 _VMM_SWF = 'VehicleMarkersManager.swf'
@@ -52,16 +49,10 @@ def FlashBeforeDelete(self):
 
 def onXvmCommand(proxy, id, cmd, *args):
     try:
-        res = None
-
         if cmd == COMMAND_PROF_METHOD_START:
-            res = as2profiler.methodStart(args[0])
+            as2profiler.g_as2profiler.methodStart(args[0])
         if cmd == COMMAND_PROF_METHOD_END:
-            res = as2profiler.methodEnd(args[0])
-        else:
-            return
-
-        proxy.movie.invoke(('xvm.respond', [id] + res if isinstance(res, list) else [id, res]))
+            as2profiler.g_as2profiler.methodEnd(args[0])
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -73,6 +64,8 @@ _pr = cProfile.Profile()
 # on map load (battle loading)
 def PlayerAvatar_onEnterWorld(self, *args):
     def en():
+        as2profiler.g_as2profiler.init()
+
         global _pr
         log('xvm_profiler enabled')
         _pr.enable()
@@ -80,13 +73,14 @@ def PlayerAvatar_onEnterWorld(self, *args):
 
 # on map close
 def PlayerAvatar_onLeaveWorld(self, *args):
+    as2profiler.g_as2profiler.showResult()
+
     global _pr
     _pr.disable()
-
     s = StringIO.StringIO()
     sortby = 'cumulative'
     p = pstats.Stats(_pr, stream=s).sort_stats(sortby)
-    p.print_stats('(xfw|xvm)', 20)
+    p.print_stats('(xfw|xvm)', 10)
     log(s.getvalue())
 
 #####################################################################
@@ -99,12 +93,9 @@ RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
 
 # Delayed registration
 def _RegisterEvents():
-    import game
-    RegisterEvent(game, 'fini', fini)
-
     from Avatar import PlayerAvatar
     RegisterEvent(PlayerAvatar, 'onEnterWorld', PlayerAvatar_onEnterWorld)
     RegisterEvent(PlayerAvatar, 'onLeaveWorld', PlayerAvatar_onLeaveWorld)
 
-#if IS_DEVELOPMENT:
-#    BigWorld.callback(0, _RegisterEvents)
+if IS_DEVELOPMENT:
+    BigWorld.callback(0, _RegisterEvents)
