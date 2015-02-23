@@ -12,6 +12,7 @@ def fin():
 # PRIVATE
 
 import os
+import shutil
 import traceback
 
 import BigWorld
@@ -23,6 +24,7 @@ class _FileCache():
     def __init__(self):
         try:
             self.cache_dir = 'res_mods/mods/shared_resources/xvm/cache'
+            self.clean()
             self.customFilesCache = CustomFilesCache.CustomFilesCache()
         except:
             err(traceback.format_exc())
@@ -30,6 +32,11 @@ class _FileCache():
     def fin(self):
         self.customFilesCache.close()
         self.customFilesCache = None
+        self.clean()
+
+    def clean(self):
+        if os.path.isdir(self.cache_dir):
+            shutil.rmtree(self.cache_dir)
 
     def get_url(self, url, callback):
         if self.customFilesCache:
