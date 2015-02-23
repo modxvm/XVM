@@ -26,11 +26,19 @@ class com.xvm.BattleState
         return getUserData(_selfUserName);
     }
 
-    public static function setUserData(userName:String, data:Object)
+    public static function updateUserData(userName:String, data:Object):Boolean
     {
+        var updated:Boolean = false;
         var ud = getUserData(userName);
         for (var i in data)
-            ud[i] = data[i];
+        {
+            if (ud[i] != data[i])
+            {
+                updated = true;
+                ud[i] = data[i];
+            }
+        }
+        return updated;
     }
 
     public static function setSelfUserName(userName:String):Void

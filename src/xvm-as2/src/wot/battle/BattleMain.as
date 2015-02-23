@@ -44,7 +44,6 @@ class wot.battle.BattleMain
 
         ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
         ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATE, instance, instance.onBattleStateChanged);
-        ExternalInterface.addCallback(Cmd.RESPOND_MARKSONGUN, instance, instance.onMarksOnGun);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
 
         // TODO: ditry hack
@@ -204,38 +203,34 @@ class wot.battle.BattleMain
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
     }
 
-    private function onBattleStateChanged(playerName:String, playerId:Number, vehId:Number,
+    private function onBattleStateChanged(targets:Number, playerName:String, playerId:Number, vehId:Number,
         dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
     {
         //Logger.addObject(arguments);
         var data:Object = { };
         if (playerName != null)
-            data["playerId"] = playerId;
+            data["playerName"] = playerName;
         if (!isNaN(playerId))
             data["playerId"] = playerId;
         if (!isNaN(vehId))
             data["vehId"] = vehId;
         data["dead"] = dead;
-        if (!isNaN(curHealth))
+        if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(curHealth))
+        {
             data["curHealth"] = curHealth;
-        if (!isNaN(maxHealth))
+        }
+        if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(maxHealth))
             data["maxHealth"] = maxHealth;
-        if (!isNaN(marksOnGun))
+        if ((Config.config.battle.allowHpInPanelsAndMinimap || Config.config.battle.allowMarksOnGunInPanelsAndMinimap) && !isNaN(marksOnGun))
             data["marksOnGun"] = marksOnGun;
-        if (spotted != null)
+        if (Config.config.battle.allowSpottedStatus && spotted != null)
             data["spotted"] = spotted;
 
         //Logger.addObject(data);
-        BattleState.setUserData(playerName, data);
-        GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
-    }
-
-    private function onMarksOnGun(playerName:String, marksOnGun:Number)
-    {
-        //Logger.add("marksOnGun: " + marksOnGun);
-        if (!isNaN(marksOnGun))
+        var updated:Boolean = BattleState.updateUserData(playerName, data);
+        if (updated)
         {
-            BattleState.setUserData(playerName, { marksOnGun:marksOnGun } );
+            //Logger.add("updated: " + playerName);
             GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
         }
     }

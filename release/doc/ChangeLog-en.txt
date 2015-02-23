@@ -11,6 +11,8 @@
       added "match" part for value matching ({{battletype=clan?CLAN WAR}})
         allowed operators: =, !=, >, >=, <, <=
   * added option minimap/labels/units/antiAliasType - text fields antialias type.
+  * new option battle/allowSpottedStatus - enable {{spotted}} macro in players panels and minimap.
+    WARNING: performance expensive
 
 XVM-6.0.0.3:
   * bugs fixed

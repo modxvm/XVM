@@ -223,7 +223,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
             var needAdjustSize:Boolean = false;
             //Logger.addObject(wrapper.m_names.text);
-            if (prevNamesStr != namesStr || wrapper.m_names.text == "" || wrapper.m_names.text == "\r")
+            var text:String = wrapper.m_names.text;
+            if (prevNamesStr != namesStr || text == "" || text == "\r")
             {
                 needAdjustSize = true;
                 prevNamesStr = namesStr;
@@ -231,7 +232,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 AdjustLeading(wrapper.m_names);
             }
 
-            if (prevVehiclesStr != vehiclesStr || wrapper.m_vehicles.text == "" || wrapper.m_vehicles.text == "\r")
+            text = wrapper.m_vehicles.text;
+            if (prevVehiclesStr != vehiclesStr || text == "" || text == "\r")
             {
                 needAdjustSize = true;
                 prevVehiclesStr = vehiclesStr;
@@ -239,7 +241,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 AdjustLeading(wrapper.m_vehicles);
             }
 
-            if (prevFragsStr != fragsStr || wrapper.m_frags.text == "" || wrapper.m_frags.text == "\r")
+            text = wrapper.m_frags.text;
+            if (prevFragsStr != fragsStr || text == "" || text == "\r")
             {
                 prevFragsStr = fragsStr;
                 wrapper.m_frags.htmlText = fragsStr;

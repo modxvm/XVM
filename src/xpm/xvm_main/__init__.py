@@ -20,9 +20,11 @@ import BigWorld
 from xfw import *
 
 import config
+from constants import *
 import filecache
 from logger import *
 import utils
+import vehstate
 from websock import g_websock
 from xvm import g_xvm
 
@@ -145,26 +147,28 @@ def PlayerAvatar_onLeaveWorld(self):
 # on any player marker appear
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     # debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
-    g_xvm.invalidateBattleState(vehicle.id)
+    g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
 
 # on any player marker lost
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
     # debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
-    g_xvm.invalidateBattleState(vehicle.id)
+    g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
 
 # on any vehicle hit received
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_xvm.invalidateBattleState(self.id)
+    g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
 # spotted status
 def _Minimap__addEntry(self, id, location, doMark):
     # debug('> _Minimap__addEntry: {0}'.format(id))
-    g_xvm.invalidateSpottedStatus(id, True)
+    vehstate.updateSpottedStatus(id, True)
+    g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
 
 def _Minimap__delEntry(self, id, inCallback=False):
     # debug('> _Minimap__delEntry: {0}'.format(id))
-    g_xvm.invalidateSpottedStatus(id, False)
+    vehstate.updateSpottedStatus(id, False)
+    g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
 
 def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     base(self, id, methodName, args)

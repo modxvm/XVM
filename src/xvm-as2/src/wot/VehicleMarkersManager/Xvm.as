@@ -346,25 +346,24 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         XVMUpdateStyle();
     }
 
-    function setStatus(vehicleStatus:Number)
+    function setMarkerState(targets:Number, vehicleStatus:Number, frags:Number)
     {
-        var prev = m_isReady;
+        var needUpdate:Boolean = false;
+
+        var prev:Boolean = m_isReady;
         m_isReady = (vehicleStatus & 2) != 0; // 2 - IS_AVATAR_READY
         if (prev != m_isReady)
-        {
-            //Logger.add('setStatus: ' + prev + ' -> ' + m_isReady);
-            XVMUpdateStyle();
-        }
-    }
+            needUpdate = true;
 
-    function setFrags(frags:Number)
-    {
         if (m_frags != frags)
         {
-            //Logger.add('setFrags: ' + frags);
+            //Logger.add('setMarkerState: ' + m_frags + " => " + ftags + " " + m_playerName);
             m_frags = frags;
-            XVMUpdateStyle();
+            needUpdate = true;
         }
+
+        if (needUpdate)
+            XVMUpdateStyle();
     }
 
     function XVMUpdateDynamicTextFields()

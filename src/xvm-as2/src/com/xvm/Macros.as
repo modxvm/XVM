@@ -171,7 +171,10 @@ class com.xvm.Macros
                 if (pname != null && pname != "")
                 {
                     if (options != null)
+                    {
+                        //Logger.add("add to cache: " + format + " => " + res);
                         player_cache[dead_value][format] = res;
+                    }
                 }
                 else
                 {

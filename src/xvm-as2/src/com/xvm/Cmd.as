@@ -20,7 +20,6 @@ class com.xvm.Cmd
 
     public static var RESPOND_BATTLEDATA:String = "xvm.battledata";
     public static var RESPOND_BATTLESTATE:String = "xvm.battleState";
-    public static var RESPOND_MARKSONGUN:String = "xvm.marksOnGun";
 
     public static function log(str:String)
     {

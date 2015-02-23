@@ -38,7 +38,6 @@ RESPOND_DOSSIER = "xvm.dossier"
 RESPOND_BATTLEDATA = "xvm.battledata"
 RESPOND_BATTLERESULTSDATA = "xvm.battleresultsdata"
 RESPOND_BATTLESTATE = "xvm.battleState"
-RESPOND_MARKSONGUN = "xvm.marksOnGun"
 RESPOND_USERDATA = "xvm.userdata"
 RESPOND_UPDATECURRENTVEHICLE = "xvm.updatecurrentvehicle"
 
@@ -49,3 +48,18 @@ XVM_STAT_LOG_FILE_NAME = 'xvm-stat.log'
 
 TEAM_ALLY = 1
 TEAM_ENEMY = 2
+
+# Invalidation targets
+class INV(object):
+    NONE              = 0x0000
+    
+    BATTLE_STATE      = 0x0001
+    BATTLE_HP         = 0x0002
+    BATTLE_SPOTTED    = 0x0004
+    BATTLE_ALL        = 0x00FF
+
+    MARKER_STATUS     = 0x0100
+    MARKER_FRAGS      = 0x0200
+    MARKER_ALL        = 0xFF00
+
+    ALL               = 0xFFFF

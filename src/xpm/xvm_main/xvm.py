@@ -43,11 +43,8 @@ class Xvm(object):
         self.app = None
         self.battleFlashObject = None
         self.vmmFlashObject = None
-        self._battleStateTimersId = dict()
-        self._battleStateData = dict()
-        self._battleStateLast = dict()
-        self._vehicleStatusLast = dict()
-        self._vehicleStatsLast = dict()
+        self._invalidateTimerId = dict()
+        self._invalidateTargets = dict()
 
     # returns: (result, status)
     def onXpmCommand(self, cmd, *args):
@@ -195,42 +192,6 @@ class Xvm(object):
         if self.app is not None and self.app.loaderManager is not None:
             self.app.loaderManager.onViewLoaded -= self.onViewLoaded
 
-    def initBattle(self):
-        debug('> initBattle()')
-        try:
-            # Save/restore arena data
-            player = BigWorld.player()
-
-            fileName = 'arenas_data/{0}'.format(player.arenaUniqueID)
-
-            cfg = config.config['minimap']['circles']
-            vehId = player.vehicleTypeDescriptor.type.compactDescr
-            if vehId and vehId == cfg.get('_internal', {}).get('vehId', None):
-                # Normal battle start. Update data and save to userprefs cache
-                userprefs.set(fileName, {
-                    'ver': '1.0',
-                    'minimap_circles': cfg['_internal'],
-                })
-            else:
-                # Replay, training or restarted battle after crash. Try to restore data.
-                arena_data = userprefs.get(fileName)
-                if arena_data is None:
-                    # Set default vehicle data if it is not available.in the cache.
-                    g_minimap_circles.updateConfig(player.vehicleTypeDescriptor)
-                else:
-                    # Apply restored data.
-                    cfg['_internal'] = arena_data['minimap_circles']
-
-        except Exception, ex:
-            err(traceback.format_exc())
-
-        self.config_str = simplejson.dumps(config.config)
-        self.sendConfig(self.battleFlashObject)
-        BigWorld.callback(0, self.invalidateBattleStates)
-
-    def initVmm(self):
-        self.sendConfig(self.vmmFlashObject)
-
     def on_websock_message(self, message):
         try:
             pass
@@ -308,168 +269,49 @@ class Xvm(object):
         if not token.versionChecked:
             token.checkVersion()
 
-
-    def onEnterWorld(self):
-        # debug('onEnterWorld: ' + str(BigWorld.player().arena))
-
+    def initBattle(self):
+        debug('> initBattle()')
         try:
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleKilled += self._onVehicleKilled
-                arena.onAvatarReady += self._onAvatarReady
-                arena.onVehicleStatisticsUpdate += self.updateVehicleStats
-        except Exception, ex:
-            err(traceback.format_exc())
-
-    def onLeaveWorld(self):
-        # debug('onLeaveWorld')
-
-        try:
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleKilled -= self._onVehicleKilled
-                arena.onAvatarReady -= self._onAvatarReady
-                arena.onVehicleStatisticsUpdate -= self.updateVehicleStats
-        except Exception, ex:
-            err(traceback.format_exc())
-
-        self.cleanupBattleData()
-
-
-    def _onVehicleKilled(self, victimID, killerID, reason):
-        self.invalidateBattleState(victimID)
-
-    def _onAvatarReady(self, vID):
-        self.invalidateBattleState(vID)
-
-
-    def invalidateBattleStates(self):
-        #debug('invalidateBattleStates')
-        self._battleStateLast.clear()
-        self._vehicleStatusLast.clear()
-        self._vehicleStatsLast.clear()
-
-        for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
-            self.invalidateBattleState(vID)
-
-    def invalidateBattleState(self, vID):
-        #debug('invalidateBattleState: {0}'.format(vID))
-
-        if config.config is None:
-            return
-
-        cfgAllowHp = config.config['battle']['allowHpInPanelsAndMinimap']
-        cfgMarksOnGun = config.config['battle']['allowMarksOnGunInPanelsAndMinimap']
-
-        if cfgAllowHp:
+            # Save/restore arena data
             player = BigWorld.player()
-            if player is None or not hasattr(player, 'arena') or player.arena is None:
-                return
 
-            state = vehstate.getVehicleStateData(vID)
-            if state is None:
-                return
+            fileName = 'arenas_data/{0}'.format(player.arenaUniqueID)
 
-            self._battleStateData[vID] = state
-
-            if self._battleStateTimersId.get(vID, None) is None:
-                self._battleStateTimersId[vID] = \
-                    BigWorld.callback(0.3, lambda: self.updateBattleState(vID))
-        else:
-            if cfgMarksOnGun and self.battleFlashObject is not None:
-                vehicle = BigWorld.entity(vID)
-                if vehicle is not None:
-                    movie = self.battleFlashObject.movie
-                    if movie is not None:
-                        movie.invoke((RESPOND_MARKSONGUN,
-                                      vehicle.publicInfo.name,
-                                      vehicle.publicInfo.marksOnGun))
-
-
-    def invalidateSpottedStatus(self, vID, spotted):
-        #debug('invalidateSpottedStatus: {0} {1}'.format(vID, spotted))
-
-        player = BigWorld.player()
-        if player is None or not hasattr(player, 'arena') or player.arena is None:
-            return
-
-        prev = vehstate.getSpottedStatus(vID)
-        vehstate.updateSpottedStatus(vID, spotted)
-        if prev == vehstate.getSpottedStatus(vID):
-            return
-
-        state = vehstate.getVehicleStateData(vID)
-        if state is None:
-            return
-        self._battleStateData[vID] = state
-
-        if self._battleStateTimersId.get(vID, None) is None:
-            self._battleStateTimersId[vID] = \
-                BigWorld.callback(0.3, lambda: self.updateBattleState(vID))
-
-    def updateBattleState(self, vID):
-        try:
-            #debug('updateBattleState: {0}'.format(vID))
-            if self.battleFlashObject is not None:
-                last = self._battleStateLast.get(vID, None)
-                state = self._battleStateData.get(vID, None)
-                #debug(state)
-                if state is not None and state != last:
-                    self._battleStateLast[vID] = state
-                    movie = self.battleFlashObject.movie
-                    if movie is not None:
-                        # debug('updateBattleState: {0} {1}'.format(vID, set(state.items())
-                        # set((last if last else {}).items())))
-                        cfgAllowHp = config.config['battle']['allowHpInPanelsAndMinimap']
-                        cfgMarksOnGun = config.config['battle']['allowMarksOnGunInPanelsAndMinimap']
-                        movie.invoke((RESPOND_BATTLESTATE,
-                                      state['playerName'],
-                                      state['playerId'],
-                                      state['vId'],
-                                      state['dead'],
-                                      state['curHealth'] if cfgAllowHp else None,
-                                      state['maxHealth'] if cfgAllowHp else None,
-                                      state['marksOnGun'] if cfgAllowHp or cfgMarksOnGun else None,
-                                      state['spotted'],
-                        ))
-
-            if self.vmmFlashObject is not None:
-                arenaVehicle = BigWorld.player().arena.vehicles.get(vID, None)
-                vehicle = BigWorld.entity(vID)
-                if arenaVehicle is not None and vehicle is not None and hasattr(vehicle, 'marker'):
-                    from gui.battle_control import g_sessionProvider
-                    last = self._vehicleStatusLast.get(vID, None)
-                    status = g_sessionProvider.getArenaDP().getVehicleInfo(vID).vehicleStatus
-                    if status != last:
-                        self._vehicleStatusLast[vID] = status
-                        # debug('updateBattleState: {0} {1}->{2}'.format(vID, last, status))
-                        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setStatus', [status])
+            cfg = config.config['minimap']['circles']
+            vehId = player.vehicleTypeDescriptor.type.compactDescr
+            if vehId and vehId == cfg.get('_internal', {}).get('vehId', None):
+                # Normal battle start. Update data and save to userprefs cache
+                userprefs.set(fileName, {
+                    'ver': '1.0',
+                    'minimap_circles': cfg['_internal'],
+                })
+            else:
+                # Replay, training or restarted battle after crash. Try to restore data.
+                arena_data = userprefs.get(fileName)
+                if arena_data is None:
+                    # Set default vehicle data if it is not available.in the cache.
+                    g_minimap_circles.updateConfig(player.vehicleTypeDescriptor)
+                else:
+                    # Apply restored data.
+                    cfg['_internal'] = arena_data['minimap_circles']
 
         except Exception, ex:
             err(traceback.format_exc())
 
-        self._battleStateTimersId[vID] = None
+        self.config_str = simplejson.dumps(config.config)
+        self.sendConfig(self.battleFlashObject)
 
+        BigWorld.callback(0, self.invalidateAll)
 
-    def updateVehicleStats(self, vID):
-        try:
-            # debug('updateVehicleStats: {0}'.format(vID))
-            if self.vmmFlashObject is not None:
-                vehicle = BigWorld.entity(vID)
-                if vehicle is not None and hasattr(vehicle, 'marker'):
-                    stat = BigWorld.player().arena.statistics.get(vID, None)
-                    if stat is not None:
-                        frags = stat['frags']
-                        last = self._vehicleStatsLast.get(vID, None)
-                        if frags != last:
-                            self._vehicleStatsLast[vID] = frags
-                            # debug('updateVehicleStats: {0} {1}->{2}'.format(vID, last, frags))
-                            self.vmmFlashObject.invokeMarker(vehicle.marker, 'setFrags', [stat['frags']])
-        except Exception, ex:
-            err(traceback.format_exc())
+    def invalidateAll(self):
+        #debug('invalidateAll')
+        self._invalidateTargets.clear()
+        for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
+            self.invalidate(vID, INV.ALL)
 
+    def initVmm(self):
+        self.sendConfig(self.vmmFlashObject)
 
-    # on battle only
     def sendConfig(self, flashObject):
         if config.config is None or flashObject is None:
             return
@@ -488,11 +330,120 @@ class Xvm(object):
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 
+    def onEnterWorld(self):
+        # debug('onEnterWorld: ' + str(BigWorld.player().arena))
+        try:
+            arena = BigWorld.player().arena
+            if arena:
+                arena.onVehicleKilled += self._onVehicleKilled
+                arena.onAvatarReady += self._onAvatarReady
+                arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
+        except Exception, ex:
+            err(traceback.format_exc())
 
-    def cleanupBattleData(self):
+    def onLeaveWorld(self):
+        # debug('onLeaveWorld')
+        try:
+            arena = BigWorld.player().arena
+            if arena:
+                arena.onVehicleKilled -= self._onVehicleKilled
+                arena.onAvatarReady -= self._onAvatarReady
+                arena.onVehicleStatisticsUpdate -= self._onVehicleStatisticsUpdate
+        except Exception, ex:
+            err(traceback.format_exc())
+
         vehstate.cleanupBattleData()
-        self._battleStateLast.clear()
-        self._vehicleStatusLast.clear()
-        self._vehicleStatsLast.clear()
+
+    def _onVehicleKilled(self, victimID, killerID, reason):
+        self.invalidate(victimID, INV.BATTLE_STATE | INV.MARKER_STATUS)
+
+    def _onAvatarReady(self, vID):
+        self.invalidate(vID, INV.MARKER_STATUS)
+
+    def _onVehicleStatisticsUpdate(self, vID):
+        self.invalidate(vID, INV.MARKER_FRAGS)
+
+    def invalidate(self, vID, inv):
+        self._invalidateTargets[vID] = self._invalidateTargets.get(vID, INV.NONE) | inv
+        if self._invalidateTimerId.get(vID, None) is None:
+            self._invalidateTimerId[vID] = BigWorld.callback(0.3, lambda: self.invalidateCallback(vID))
+
+    def invalidateCallback(self, vID):
+        #debug('invalidateCallback: {0}'.format(vID))
+        try:
+            targets = self._invalidateTargets.get(vID, INV.NONE)
+            if targets & INV.BATTLE_ALL:
+                self.updateBattle(vID, targets)
+            if targets & INV.MARKER_ALL:
+                self.updateMarker(vID, targets)
+        except Exception, ex:
+            err(traceback.format_exc())
+        self._invalidateTargets[vID] = INV.NONE
+        self._invalidateTimerId[vID] = None
+
+    def updateBattle(self, vID, targets):
+        #debug('updateBattle: {0} {1}'.format(targets, vID))
+
+        if self.battleFlashObject is None:
+            return
+
+        player = BigWorld.player()
+        if player is None or not hasattr(player, 'arena') or player.arena is None:
+            return
+
+        state = vehstate.getVehicleStateData(vID)
+        if state is None:
+            return
+
+        movie = self.battleFlashObject.movie
+        if movie is None:
+            return
+
+        #debug('updateBattle: {0} {1}'.format(vID, set(state.items())))
+        movie.invoke((RESPOND_BATTLESTATE,
+                      targets,
+                      state['playerName'],
+                      state['playerId'],
+                      state['vId'],
+                      state['dead'],
+                      state['curHealth'],
+                      state['maxHealth'],
+                      state['marksOnGun'],
+                      state['spotted'],
+        ))
+
+    def updateMarker(self, vID, targets):
+        #debug('updateMarker: {0} {1}'.format(targets, vID))
+
+        if self.vmmFlashObject is None:
+            return
+
+        arena = BigWorld.player().arena
+        arenaVehicle = arena.vehicles.get(vID, None)
+        if arenaVehicle is None:
+            return
+
+        stat = arena.statistics.get(vID, None)
+        if stat is None:
+            return
+
+        vehicle = BigWorld.entity(vID)
+        if vehicle is None or not hasattr(vehicle, 'marker'):
+            return
+
+        from gui.battle_control.arena_info.settings import VEHICLE_STATUS
+        isAlive = arenaVehicle['isAlive']
+        isAvatarReady = arenaVehicle['isAvatarReady']
+        status = VEHICLE_STATUS.NOT_AVAILABLE
+        if isAlive is not None and isAvatarReady is not None:
+            if isAlive:
+                status |= VEHICLE_STATUS.IS_ALIVE
+            if isAvatarReady:
+                status |= VEHICLE_STATUS.IS_READY
+
+        frags = stat['frags']
+
+        #debug('updateVehicleStatus: {0} st={1} fr={2}'.format(vID, status, frags))
+        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerState', [targets, status, frags])
 
 g_xvm = Xvm()
