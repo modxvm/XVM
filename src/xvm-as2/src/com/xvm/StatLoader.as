@@ -29,7 +29,7 @@ class com.xvm.StatLoader
 
     private function StatLoader()
     {
-        ExternalInterface.addCallback(Cmd.RESPOND_BATTLEDATA, this, LoadStatDataCallback);
+        ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATDATA, this, LoadStatDataCallback);
     }
 
     private function LoadStatDataCallback(json_str)

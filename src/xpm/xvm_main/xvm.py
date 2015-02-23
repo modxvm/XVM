@@ -326,7 +326,9 @@ class Xvm(object):
                     arena.extraData.get('battleLevel', 0),
                     arena.bonusType,
                     getVehicleInfoDataStr(),
-                    simplejson.dumps(token.networkServicesSettings)]))
+                    simplejson.dumps(token.networkServicesSettings),
+                    IS_DEVELOPMENT,
+                ]))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 

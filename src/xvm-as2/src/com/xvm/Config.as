@@ -9,6 +9,7 @@ class com.xvm.Config
     // Public vars
     public static var config:Object = null;
     public static var networkServicesSettings:Object = null;
+    public static var IS_DEVELOPMENT:Boolean = false;
 
     // INTERNAL
 
@@ -21,7 +22,7 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, vehInfoData:String, networkServicesSettings:String)
+    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, vehInfoData:String, networkServicesSettings:String, IS_DEVELOPMENT:Boolean)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
@@ -29,6 +30,7 @@ class com.xvm.Config
             Config.config = JSONx.parse(config_data);
             //Logger.addObject(Config.config);
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
+            Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
             Macros.RegisterGlobalMacrosData(battleLevel, battleType);
             ApplyGlobalMacros();
             Locale.initializeLanguageFile(lang_str);

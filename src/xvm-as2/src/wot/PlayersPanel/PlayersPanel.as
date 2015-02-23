@@ -1,4 +1,5 @@
 ﻿/**
+/**
  * XVM
  * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
  * @author ilitvinov87
@@ -66,8 +67,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         Utils.TraceXvmModule("PlayersPanel");
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, updateWithoutHideMenu);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, updateWithoutHideMenu);
+        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, invalidate);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
     }
 
@@ -183,12 +184,15 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         //Logger.addObject(wrapper.m_list, 3);
         //Logger.add(vehiclesStrOrig);
         //Logger.add(namesStr);
+
         try
         {
             m_data = data;
 
             if (data == null)
                 return;
+
+            Cmd.profMethodStart("PlayersPanel.setData: " + wrapper.type);
 
             //wrapper.m_list._visible = true; // _visible == false for "none" mode
             var values:Array = vehiclesStrOrig.split("<br/>");
@@ -284,6 +288,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         {
             Logger.add(ex.toString());
         }
+
+        Cmd.profMethodEnd("PlayersPanel.setData: " + wrapper.type);
     }
 
     private function fixBattleState(data)
@@ -401,6 +407,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     }
 
     // update without hide menu
+    /*
     private function updateWithoutHideMenu()
     {
         if (wrapper.m_list instanceof ScrollingList)
@@ -409,6 +416,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             wrapper.setData(p.data, p.sel, p.pIdx, p.isCB, p.kPC, p.dPC, p.fragsStr, p.vehiclesStr, p.namesStr);
         } // end if
     }
+    */
 
     private function getTextValue(cfg_state, fieldType, data, text)
     {

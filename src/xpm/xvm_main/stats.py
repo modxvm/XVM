@@ -7,7 +7,7 @@ def getBattleStat(proxy, args):
     _stat.enqueue({
         'func': _stat.getBattleStat,
         'proxy': proxy,
-        'method': RESPOND_BATTLEDATA,
+        'method': RESPOND_BATTLESTATDATA,
         'args': args})
     _stat.processQueue()
 
