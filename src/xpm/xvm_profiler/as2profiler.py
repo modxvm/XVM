@@ -26,7 +26,7 @@ class _AS2Profiler(object):
 
     def showResult(self):
         s = '\n\nAS2Profiler:\n\n   ncalls  cumtime  percall  name'
-        for i in sorted(self.data.values(), key=lambda x: x['cumtime']):
+        for i in sorted(self.data.values(), key=lambda x: x['cumtime'], reverse=True):
             percall = i['cumtime'] / i['ncalls'] if i['ncalls'] > 0 else 0
             s += '\n {:>8d} {:>8.3f} {:>8.3f}  {}'.format(i['ncalls'], i['cumtime'], percall, i['name'])
         log(s + '\n\n')

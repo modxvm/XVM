@@ -81,6 +81,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String)
         /* added by XVM: playerId:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
     {
+        Cmd.profMethodStart("Xvm.init()");
+
         m_playerName = pName; // alex
         m_playerClan = pClan; // "" || ALX
         m_playerRegion = pRegion; // null || ?
@@ -140,6 +142,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         {
             GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
         }
+
+        Cmd.profMethodEnd("Xvm.init()");
     }
 
     public function setupMarkerFrame()
@@ -447,6 +451,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
     function XVMUpdateStyle()
     {
+        Cmd.profMethodStart("Xvm.XVMUpdateStyle()");
+
         //trace("XVMUpdateStyle: " + m_playerName + m_vname + " " + " scale=" + proxy.marker._xscale);
         try
         {
@@ -493,5 +499,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         {
             ErrorHandler.setText("ERROR: XVMUpdateStyle():" + String(e));
         }
+
+        Cmd.profMethodEnd("Xvm.XVMUpdateStyle()");
     }
 }

@@ -101,6 +101,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     // override
     function draw()
     {
+        Cmd.profMethodStart("Minimap.Labels.draw()");
+
         //Logger.add("LabelsContainer.updateLabelsStyle()");
         for (var playerIdStr:String in invalidateList)
         {
@@ -125,6 +127,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             }
         }
         invalidateList = { };
+
+        Cmd.profMethodStart("Minimap.Labels.draw()");
     }
 
     private function _getLabel(playerId:Number):MovieClip
