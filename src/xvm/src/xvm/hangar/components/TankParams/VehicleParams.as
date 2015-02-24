@@ -34,12 +34,12 @@ package xvm.hangar.components.TankParams
             // Reload time
             idx = getIndex(dp, MENU.TANK_PARAMS_RELOADTIME);
             var v_reloadTime:String = App.utils.locale.float(getReloadTime());
-            var reloadTimeColor1:String = Utils.toHtmlColor(dp[idx].selected ? Defines.UICOLOR_TEXT1 : Defines.UICOLOR_TEXT2);
-            var reloadTimeColor2:String = Utils.toHtmlColor(dp[idx].selected ? Defines.UICOLOR_TEXT2 : Defines.UICOLOR_TEXT3);
+            var reloadTimeColor1:String = Utils.toHtmlColor(idx >= 0 && dp[idx].selected ? Defines.UICOLOR_TEXT1 : Defines.UICOLOR_TEXT2);
+            var reloadTimeColor2:String = Utils.toHtmlColor(idx >= 0 && dp[idx].selected ? Defines.UICOLOR_TEXT2 : Defines.UICOLOR_TEXT3);
             var l_reloadTime:String =
                 "<font color='" + reloadTimeColor1 + "'>" + Locale.get("gun_reload_time/actual") + " </font>" +
                 "<font color='" + reloadTimeColor2 + "'>" + Locale.get("(sec)") + "</font>";
-            if (getIndex(dp, "xvm_reloadTime") < 0)
+            if (idx >= 0 && getIndex(dp, "xvm_reloadTime") < 0)
                 dp.splice(idx + 1, 0, new HangarParamVO( { text: "xvm_reloadTime", param: v_reloadTime, selected: false } ));
 
             // View range
@@ -68,19 +68,33 @@ package xvm.hangar.components.TankParams
             // fix text
             var param:TankParam;
 
-            (list.getRendererAt(getIndex(dp, "xvm_reloadTime")) as TankParam).tfField.htmlText = l_reloadTime;
+            idx = getIndex(dp, "xvm_reloadTime");
+            if (idx >= 0)
+            {
+                (list.getRendererAt(idx) as TankParam).tfField.htmlText = l_reloadTime;
+            }
 
             //(list.getRendererAt(getIndex(dp, "xvm_viewRange")) as TankParam).tfField.htmlText = l_viewRange;
-            param = list.getRendererAt(getIndex(dp, MENU.TANK_PARAMS_CIRCULARVISIONRADIUS)) as TankParam;
-            param.paramField.htmlText += " / " + v_viewRange;
-            //Logger.add(param.tfField.htmlText);
-            param.tfField.htmlText = param.tfField.htmlText.split(" </FONT><FONT ").join(l_viewRange + " </FONT><FONT ");
+
+            idx = getIndex(dp, MENU.TANK_PARAMS_CIRCULARVISIONRADIUS);
+            if (idx >= 0)
+            {
+                param = list.getRendererAt(idx) as TankParam;
+                param.paramField.htmlText += " / " + v_viewRange;
+                //Logger.add(param.tfField.htmlText);
+                param.tfField.htmlText = param.tfField.htmlText.split(" </FONT><FONT ").join(l_viewRange + " </FONT><FONT ");
+            }
 
             //(list.getRendererAt(getIndex(dp, "xvm_radioRange")) as TankParam).tfField.htmlText = l_radioRange;
-            param = list.getRendererAt(getIndex(dp, MENU.TANK_PARAMS_RADIODISTANCE)) as TankParam;
-            param.paramField.htmlText += " / " + v_radioRange;
-            //Logger.add(param.tfField.htmlText);
-            param.tfField.htmlText = param.tfField.htmlText.split(" </FONT><FONT ").join(l_radioRange + " </FONT><FONT ");
+
+            idx = getIndex(dp, MENU.TANK_PARAMS_RADIODISTANCE);
+            if (idx >= 0)
+            {
+                param = list.getRendererAt(idx) as TankParam;
+                param.paramField.htmlText += " / " + v_radioRange;
+                //Logger.add(param.tfField.htmlText);
+                param.tfField.htmlText = param.tfField.htmlText.split(" </FONT><FONT ").join(l_radioRange + " </FONT><FONT ");
+            }
         }
 
         private static function getIndex(dp:DataProvider, textId:String):Number
