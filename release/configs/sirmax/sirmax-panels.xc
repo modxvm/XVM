@@ -1,6 +1,6 @@
 ﻿{
-  //"startMode": "none",
-  //"altMode": "short",
+  //"startMode": "{{battletype=regular?medium|{{battletype=clan?none}}}}",
+  //"altMode": "{{battletype=regular?medium2|{{battletype=clan?short}}}}",
   "def": {
     "c1": "0x13C313",
     "c2": "0xFF0F0F"
