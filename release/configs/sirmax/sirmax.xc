@@ -38,6 +38,7 @@
   "hangar": {
     "masteryMarkInTechTree": true,
     "hidePricesInTechTree": true,
+    "allowExchangeXPInTechTree": false,
     "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },
