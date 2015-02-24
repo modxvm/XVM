@@ -446,6 +446,6 @@ class Xvm(object):
         frags = stat['frags']
 
         #debug('updateVehicleStatus: {0} st={1} fr={2}'.format(vID, status, frags))
-        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerState', [targets, status, frags])
+        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags])
 
 g_xvm = Xvm()

@@ -350,7 +350,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         XVMUpdateStyle();
     }
 
-    function setMarkerState(targets:Number, vehicleStatus:Number, frags:Number)
+    function setMarkerStateXvm(targets:Number, vehicleStatus:Number, frags:Number)
     {
         var needUpdate:Boolean = false;
 
@@ -361,7 +361,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         if (m_frags != frags)
         {
-            //Logger.add('setMarkerState: ' + m_frags + " => " + ftags + " " + m_playerName);
+            //Logger.add('setMarkerStateXvm: ' + m_frags + " => " + ftags + " " + m_playerName);
             m_frags = frags;
             needUpdate = true;
         }
