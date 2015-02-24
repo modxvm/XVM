@@ -58,8 +58,6 @@ class _Dossier(object):
                 if data[1] not in unlocks:
                     xpToElite += data[0]
 
-            xpToElite = max(0, xpToElite)
-
             res = self._prepareVehicleResult(dossier, earnedXP, freeXP, xpToElite)
 
         # respond
