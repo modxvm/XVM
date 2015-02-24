@@ -8,6 +8,7 @@ import com.xvm.*;
 import com.xvm.DataTypes.*;
 import com.xvm.events.*;
 import flash.external.*;
+import gfx.io.*;
 import wot.battle.*;
 
 class wot.battle.BattleMain
@@ -34,19 +35,19 @@ class wot.battle.BattleMain
         TweenPlugin.activate([TintPlugin]);
 
         instance = new BattleMain();
-        gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
-        gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
+        GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
+        GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
 
-        gfx.io.GameDelegate.addCallBack("battle.damagePanel.setMaxHealth", instance, "setMaxHealth");
-        gfx.io.GameDelegate.addCallBack("battle.damagePanel.updateHealth", instance, "updateHealth");
-        gfx.io.GameDelegate.addCallBack("battle.damagePanel.updateState", instance, "updateState");
-        gfx.io.GameDelegate.addCallBack("battle.damagePanel.updateSpeed", instance, "updateSpeed");
+        GameDelegate.addCallBack("battle.damagePanel.setMaxHealth", instance, "setMaxHealth");
+        GameDelegate.addCallBack("battle.damagePanel.updateHealth", instance, "updateHealth");
+        GameDelegate.addCallBack("battle.damagePanel.updateState", instance, "updateState");
+        GameDelegate.addCallBack("battle.damagePanel.updateSpeed", instance, "updateSpeed");
 
         ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
         ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATE, instance, instance.onBattleStateChanged);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
 
-        // TODO: ditry hack
+        // TODO: dirty hack
         _root.consumablesPanel.addOptionalDeviceSlot_x = _root.consumablesPanel.addOptionalDeviceSlot;
         _root.consumablesPanel.addOptionalDeviceSlot = instance.addOptionalDeviceSlot;
         _root.consumablesPanel.setCoolDownTime_x = _root.consumablesPanel.setCoolDownTime;
@@ -206,32 +207,39 @@ class wot.battle.BattleMain
     private function onBattleStateChanged(targets:Number, playerName:String, playerId:Number, vehId:Number,
         dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
     {
-        //Logger.addObject(arguments);
-        var data:Object = { };
-        if (playerName != null)
-            data["playerName"] = playerName;
-        if (!isNaN(playerId))
-            data["playerId"] = playerId;
-        if (!isNaN(vehId))
-            data["vehId"] = vehId;
-        data["dead"] = dead;
-        if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(curHealth))
+        try
         {
-            data["curHealth"] = curHealth;
-        }
-        if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(maxHealth))
-            data["maxHealth"] = maxHealth;
-        if ((Config.config.battle.allowHpInPanelsAndMinimap || Config.config.battle.allowMarksOnGunInPanelsAndMinimap) && !isNaN(marksOnGun))
-            data["marksOnGun"] = marksOnGun;
-        if (Config.config.battle.allowSpottedStatus && spotted != null)
-            data["spotted"] = spotted;
+            //Logger.addObject(arguments);
+            var data:Object = { };
+            if (playerName != null)
+                data["playerName"] = playerName;
+            if (!isNaN(playerId))
+                data["playerId"] = playerId;
+            if (!isNaN(vehId))
+                data["vehId"] = vehId;
+            data["dead"] = dead;
+            if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(curHealth))
+            {
+                data["curHealth"] = curHealth;
+            }
+            if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(maxHealth))
+                data["maxHealth"] = maxHealth;
+            if ((Config.config.battle.allowHpInPanelsAndMinimap || Config.config.battle.allowMarksOnGunInPanelsAndMinimap) && !isNaN(marksOnGun))
+                data["marksOnGun"] = marksOnGun;
+            if (Config.config.battle.allowSpottedStatus && spotted != null)
+                data["spotted"] = spotted;
 
-        //Logger.addObject(data);
-        var updated:Boolean = BattleState.updateUserData(playerName, data);
-        if (updated)
+            //Logger.addObject(data);
+            var updated:Boolean = BattleState.updateUserData(playerName, data);
+            if (updated)
+            {
+                //Logger.add("updated: " + playerName);
+                GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
+            }
+        }
+        catch (ex:Error)
         {
-            //Logger.add("updated: " + playerName);
-            GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
+            Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
         }
     }
 
