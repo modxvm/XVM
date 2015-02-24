@@ -191,11 +191,16 @@ def _initializeXvmToken():
 
     if tdata is not None:
         _tdataPrev = tdata
-        if 'token' not in tdata and tdataActive is not None:
-            tdata['token'] = tdataActive['token']
+        if tdata['status'] == 'active':
+            if 'token' not in tdata and tdataActive is not None:
+                tdata['token'] = tdataActive['token']
+        else:
+            if 'token' in tdata:
+                del tdata['token']
         userprefs.set('tokens.{0}'.format(playerId), tdata)
         userprefs.set('tokens.lastPlayerId', playerId)
 
+        global networkServicesSettings
         networkServicesSettings = _makeNetworkServicesSettings(tdata)
 
     global _token
