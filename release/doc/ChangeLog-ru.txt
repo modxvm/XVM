@@ -13,7 +13,7 @@
   * добавлена опция minimap/labels/units/antiAliasType - тип сглаживания текстовых полей.
   * новая опция battle/allowSpottedStatus - включить макрос {{spotted}} в ушах и на миникарте.
     ВНИМАНИЕ: может понизить производительность
-  * новая опция battle/allowExchangeXPInTechTree - учет обмена опыта за голду в дереве исследований
+  * новая опция hangar/allowExchangeXPInTechTree - учет обмена опыта за голду в дереве исследований
 
 XVM-6.0.0.3:
   * исправлены ошибки
