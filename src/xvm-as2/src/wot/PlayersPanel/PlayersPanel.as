@@ -126,8 +126,11 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         // initialize
 
         centeredTextY = wrapper.m_names._y - 5;
-        wrapper.m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
-        wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+
+        // for incomplete team - cannot set to "center"
+        wrapper.m_names.verticalAlign = "top";
+        wrapper.m_vehicles.verticalAlign = "top";
+        wrapper.m_frags.verticalAlign = "top";
     }
 
     private var isAltMode:Boolean = false;
@@ -639,10 +642,10 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
         var leading:Number = Math.round(33.95 - (field.textHeight + 9) / field.numLines);
         if (leading != 9)
-        {
             field.htmlText = field.htmlText.split('LEADING="9"').join('LEADING="' + leading + '"');
-            field._y = centeredTextY + leading / 2.0;
-        }
+
+        field._y = centeredTextY + leading / 2.0;
+
         //Logger.add(field.htmlText);
     }
 }
