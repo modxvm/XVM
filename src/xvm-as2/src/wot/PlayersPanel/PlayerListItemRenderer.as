@@ -799,8 +799,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
     var _savedX = 0;
     private function adjustExtraFieldsLeft(e)
     {
-        //Logger.add("adjustExtraFieldsLeft: " + e.state);
-        var state:String = e.state;
+        var state:String = e.state || panel.m_state;
+        //Logger.add("adjustExtraFieldsLeft: " + state);
         var mc:MovieClip = extraFields[state];
         if (mc == null)
             return;
@@ -837,8 +837,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function adjustExtraFieldsRight(e)
     {
-        //Logger.add("adjustExtraFieldsRight: " + e.state);
-        var state:String = e.state;
+        var state:String = e.state || panel.m_state;
+        //Logger.add("adjustExtraFieldsRight: " + state);
         var mc:MovieClip = extraFields[state];
         if (mc == null)
             return;

@@ -15,6 +15,7 @@ intrinsic class net.wargaming.ingame.PlayersPanel extends UIComponent
     var m_vehicles: TextField;
     var m_list: MovieClip;
     var m_type: String;
+    var m_state: String;
     var players_bg: MovieClip;
     var saved_params:Object;
 
