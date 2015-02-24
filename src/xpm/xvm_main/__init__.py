@@ -91,9 +91,9 @@ def FlashBeforeDelete(self):
     if self.swf == _VMM_SWF:
         g_xvm.vmmFlashObject = None
 
-def Flash_call(base, self, methodName, args=None):
-    # debug("> call: %s, %s" % (methodName, str(args)))
-    base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
+#def Flash_call(base, self, methodName, args=None):
+#    # debug("> call: %s, %s" % (methodName, str(args)))
+#    base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
 
 def VehicleMarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
@@ -277,7 +277,7 @@ def WaitingViewMeta_fix(base, self, *args):
 from gui.Scaleform.Flash import Flash
 RegisterEvent(Flash, '__init__', FlashInit)
 RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
-OverrideMethod(Flash, 'call', Flash_call)
+#OverrideMethod(Flash, 'call', Flash_call)
 
 # Delayed registration
 def _RegisterEvents():

@@ -59,7 +59,7 @@ class wot.battle.SixthSenseIndicator
 
     private function sixthSenseIndicator_gotoAndPlay(frame)
     {
-        Logger.add("sixthSenseIndicator_gotoAndPlay: " + frame);
+        //Logger.add("sixthSenseIndicator_gotoAndPlay: " + frame);
 
         if (frame == "active")
             SoundManager.playSound("sixthsense", "normal", "");

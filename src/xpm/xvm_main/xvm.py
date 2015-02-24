@@ -123,15 +123,15 @@ class Xvm(object):
         except Exception, ex:
             err(traceback.format_exc())
 
-    def extendInvokeArgs(self, swf, methodName, args):
-        # debug('overrideMovieInvoke: %s %s %s' % (swf, methodName, str(args)))
-        return args
+    #def extendInvokeArgs(self, swf, methodName, args):
+    #    #debug('overrideMovieInvoke: %s %s %s' % (swf, methodName, str(args)))
+    #    return args
 
     def extendVehicleMarkerArgs(self, handle, function, args):
         try:
             if function == 'init':
                 if len(args) > 5:
-                    # debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
+                    #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
                     v = utils.getVehicleByName(args[5])
                     if hasattr(v, 'publicInfo'):
                         vInfo = utils.getVehicleInfo(v.id)

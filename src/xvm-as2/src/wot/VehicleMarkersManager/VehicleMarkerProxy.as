@@ -169,7 +169,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private function call(func:String, args:Array, pre:Function)
     {
         //if (func != "showExInfo")
-        //    trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
+        //    Logger.add("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
 
         if (subject != null)
         {
