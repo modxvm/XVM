@@ -84,14 +84,14 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private function onConfigLoaded()
     {
         cfg = Config.config.playersPanel;
-        var startMode:String = Macros.FormatGlobalStringValue(cfg.startMode).toLowerCase();
+        var startMode:String = String(cfg.startMode).toLowerCase();
         if (net.wargaming.ingame.PlayersPanel.STATES[startMode] == null)
             startMode = net.wargaming.ingame.PlayersPanel.STATES.large.name;
         cfg[startMode].enabled = true;
         setStartMode(startMode, wrapper);
 
         m_savedState = null;
-        m_altMode = Macros.FormatGlobalStringValue(cfg.altMode).toLowerCase();
+        m_altMode = String(cfg.altMode).toLowerCase();
         if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
             m_altMode = null;
         if (m_altMode != null)
