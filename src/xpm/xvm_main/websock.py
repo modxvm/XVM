@@ -60,7 +60,7 @@ class _WebSock(object):
         sslopt = {
             'cert_reqs': ssl.CERT_NONE,
             'check_hostname': False,
-            'fingerprint': XVM_FINGERPRINT,
+            'fingerprint': XVM_FINGERPRINTS,
             # 'fingerprint': '8a95feb7be9825fbe3f4f50a6662dc880764c876', # 'wss://echo.websocket.org/'
         }
         self._ws.run_forever(sslopt=sslopt)

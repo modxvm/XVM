@@ -38,7 +38,7 @@ def loadUrl(url, req=None, body=None, showLog=True):
 
     startTime = datetime.datetime.now()
 
-    (response, compressedSize, errStr) = _loadUrl(u, XVM_TIMEOUT, XVM_FINGERPRINT, body)
+    (response, compressedSize, errStr) = _loadUrl(u, XVM_TIMEOUT, XVM_FINGERPRINTS, body)
 
     elapsed = datetime.datetime.now() - startTime
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
@@ -59,7 +59,7 @@ def _loadUrl(u, timeout, fingerprint, body):  # timeout in msec
     try:
         # log(u)
         if u.scheme.lower() == 'https':
-            checker = tlslite.Checker(x509Fingerprint=fingerprint)
+            checker = tlslite.CheckerXvm(x509Fingerprint=fingerprint)
             conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout / 1000, checker=checker)
         else:
             conn = httplib.HTTPConnection(u.netloc, timeout=timeout / 1000)
@@ -98,6 +98,12 @@ def _loadUrl(u, timeout, fingerprint, body):  # timeout in msec
     except tlslite.TLSLocalAlert as ex:
         response = None
         err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
+        errStr = str(ex)
+
+    except tlslite.TLSFingerprintError as ex:
+        response = None
+        err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
+        from pprint import pprint
         errStr = str(ex)
 
     except Exception as ex:
