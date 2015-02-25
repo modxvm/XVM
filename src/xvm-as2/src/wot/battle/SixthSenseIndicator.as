@@ -11,14 +11,16 @@ class wot.battle.SixthSenseIndicator
 {
     var sixthSenseIndicatorXvm:MovieClip;
     var icon:UILoaderAlt;
+    var orig_gotoAndPlay:Function;
 
     public function SixthSenseIndicator()
     {
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, onUpdateStage);
 
-        // override _root.sixthSenseIndicator.gotoAndPlay()
-        _root.sixthSenseIndicator.gotoAndPlay2 = _root.sixthSenseIndicator.gotoAndPlay;
-        _root.sixthSenseIndicator.gotoAndPlay = sixthSenseIndicator_gotoAndPlay;
+        // replace _root.sixthSenseIndicator.gotoAndPlay()
+        var $this = this;
+        orig_gotoAndPlay = _root.sixthSenseIndicator.gotoAndPlay;
+        _root.sixthSenseIndicator.gotoAndPlay = function(frame) { $this.gotoAndPlayXvm(frame); };
 
         sixthSenseIndicatorXvm = _root.createEmptyMovieClip("sixthSenseIndicatorXvm", _root.getNextHighestDepth());
         sixthSenseIndicatorXvm._y = 80;
@@ -55,18 +57,16 @@ class wot.battle.SixthSenseIndicator
             sixthSenseIndicatorXvm._x = BattleState.screenSize.width / 2 - icon.content._width / 2;
     }
 
-    // context: _root.sixthSenseIndicator
-
-    private function sixthSenseIndicator_gotoAndPlay(frame)
+    private function gotoAndPlayXvm(frame)
     {
-        //Logger.add("sixthSenseIndicator_gotoAndPlay: " + frame);
+        //Logger.add("gotoAndPlayXvm: " + frame);
 
         if (frame == "active")
             SoundManager.playSound("sixthsense", "normal", "");
 
         if (icon.source == "")
         {
-            _root.sixthSenseIndicator.gotoAndPlay2(frame);
+            orig_gotoAndPlay.apply(_root.sixthSenseIndicator, arguments);
             return;
         }
 
@@ -74,14 +74,14 @@ class wot.battle.SixthSenseIndicator
         {
             case "active":
                 var timeline = new TimelineLite();
-                timeline.insert(TweenLite.to(_root.sixthSenseIndicatorXvm, 0.2, { _alpha:100, ease:Linear.easeNone } ), 0);
-                timeline.append(TweenLite.from(_root.sixthSenseIndicatorXvm, 0.2, { tint:"0xFFFFFF", ease: Linear.easeNone } ), 0);
+                timeline.insert(TweenLite.to(sixthSenseIndicatorXvm, 0.2, { _alpha:100, ease:Linear.easeNone } ), 0);
+                timeline.append(TweenLite.from(sixthSenseIndicatorXvm, 0.2, { tint:"0xFFFFFF", ease: Linear.easeNone } ), 0);
                 break;
             case "inactive":
- 		TweenLite.to(_root.sixthSenseIndicatorXvm, 0.2, {_alpha:70});
+ 		TweenLite.to(sixthSenseIndicatorXvm, 0.2, {_alpha:70});
                 break;
             case "fade":
- 		TweenLite.to(_root.sixthSenseIndicatorXvm, 0.5, {_alpha:0});
+ 		TweenLite.to(sixthSenseIndicatorXvm, 0.5, {_alpha:0});
                 break;
         }
     }
