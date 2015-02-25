@@ -337,6 +337,16 @@ class com.xvm.Utils
         return str;
     }
 
+    // Fix 'img://...' to '../...'> (res_mods/x.x.x/gui/maps/icons)
+    // Fix 'xvm://...' to '../../XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
+    // Fix 'cfg://...' to '../../XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
+    public static function fixImgTagSrc(str:String):String
+    {
+        if (Strings.startsWith("img://gui/maps/icons/", str.toLowerCase()))
+            return "../" + str.slice(10);
+        return "../../" + Utils.fixImgTag(str).split("img://").join("");
+    }
+
     // Duplicate text field
     public static function duplicateTextField(mc:MovieClip, name:String, textField:TextField, yOffset:Number, align:String):TextField
     {

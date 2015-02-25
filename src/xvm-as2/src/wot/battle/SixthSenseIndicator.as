@@ -15,6 +15,12 @@ class wot.battle.SixthSenseIndicator
 
     public function SixthSenseIndicator()
     {
+        var iconPath = Config.config.battle.sixthSenseIcon;
+        if (!iconPath || iconPath == "")
+            return;
+
+        iconPath = Utils.fixImgTagSrc(Macros.FormatGlobalStringValue(iconPath));
+
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, onUpdateStage);
 
         // replace _root.sixthSenseIndicator.gotoAndPlay()
@@ -29,7 +35,7 @@ class wot.battle.SixthSenseIndicator
         icon = (UILoaderAlt)(sixthSenseIndicatorXvm.attachMovie("UILoaderAlt", "icon", 0));
 
         var il:IconLoader = new IconLoader(this, completeLoadSixthSenseIcon);
-        il.init(icon, [ Defines.SIXTH_SENSE_IMG, "" ], false);
+        il.init(icon, [ iconPath, "" ], false);
 
         icon.source = il.currentIcon;
         icon.onLoadInit = icon_onLoadInit;

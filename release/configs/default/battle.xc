@@ -28,6 +28,9 @@
     // Path to clan icons folder relative to res_mods/mods/shared_resources/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/mods/shared_resources/xvm/res.
     "clanIconsFolder": "clanicons/",
+    // Path to sixth sense icon ("" for original icon).
+    // Путь к иконке 6-го чувства ("" для оригинальной иконки).
+    "sixthSenseIcon": "xvm://res/SixthSense.png",
     // GUI elements settings (experts only)
     // Настройки графических элементов (только для экспертов!)
     "elements": ${"elements.xc":"elements"}

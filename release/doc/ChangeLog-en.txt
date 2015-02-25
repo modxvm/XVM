@@ -14,6 +14,7 @@
   * new option battle/allowSpottedStatus - enable {{spotted}} macro in players panels and minimap.
     WARNING: performance expensive
   * new option hangar/allowExchangeXPInTechTree - consider the exchange of experience with gold in tech tree
+  * new option battle/sixthSenseIcon - path to sixth sense icon ("" for original icon).
 
 XVM-6.0.0.3:
   * bugs fixed

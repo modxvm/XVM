@@ -28,9 +28,6 @@ class com.xvm.Defines
     // res_mods/mods/shared_resources/xvm/ (for <img> tag))
     public static var XVM_IMG_RES_ROOT:String = "../mods/shared_resources/xvm/";
 
-    // res_mods/mods/shared_resources/xvm/res/SixthSense.png
-    public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
-
     // res_mods/xvm/configs/xvm.xc
     public static var CONFIG_FILE_NAME:String = "xvm.xc";
     // res_mods/x.x.x/gui/flash/XVM.xvmconf
