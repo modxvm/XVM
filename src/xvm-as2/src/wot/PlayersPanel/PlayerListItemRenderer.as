@@ -708,18 +708,17 @@ class wot.PlayersPanel.PlayerListItemRenderer
             }
 
             var highlight = format.highlight;
-            if (typeof(format.highlight) == 'string')
-                highlight = Utils.toBool(Macros.Format(m_name, format.highlight, obj).toLowerCase(), false);
-            if (highlight == true)
+            if (highlight != null && highlight != false)
             {
-                var state = wrapper.data.vehicleState;
+                if (typeof(format.highlight) == 'string')
+                    highlight = Utils.toBool(Macros.Format(m_name, format.highlight, obj).toLowerCase(), false);
                 var sn = PlayerStatus.getStatusColorSchemeNames(
-                    (state & net.wargaming.ingame.VehicleStateInBattle.NOT_AVAILABLE) != 0,
-                    !obj.dead,
-                    wrapper.selected,
-                    wrapper.data.squad,
-                    wrapper.data.teamKiller,
-                    wrapper.data.VIP,
+                    (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.NOT_AVAILABLE) != 0,
+                    true,
+                    highlight != true ? false : wrapper.selected,
+                    highlight != true ? false : wrapper.data.squad,
+                    highlight != true ? false : wrapper.data.teamKiller,
+                    highlight != true ? false : wrapper.data.VIP,
                     !obj.ready);
                 if (sn.vehicleSchemeName != format.__last_vehicleSchemeName)
                 {
@@ -727,10 +726,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
                     (new Transform(f)).colorTransform = this.__getColorTransform(sn.vehicleSchemeName, true);
                     //Logger.add(f.source + " " + sn.vehicleSchemeName);
                 }
-            }
-            else
-            {
-                (new Transform(f)).colorTransform = new ColorTransform();
             }
         }
 
