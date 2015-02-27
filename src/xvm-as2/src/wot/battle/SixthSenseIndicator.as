@@ -15,18 +15,15 @@ class wot.battle.SixthSenseIndicator
 
     public function SixthSenseIndicator()
     {
-        var iconPath = Config.config.battle.sixthSenseIcon;
-        if (!iconPath || iconPath == "")
-            return;
-
-        iconPath = Utils.fixImgTagSrc(Macros.FormatGlobalStringValue(iconPath));
-
-        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, onUpdateStage);
-
         // replace _root.sixthSenseIndicator.gotoAndPlay()
         var $this = this;
         orig_gotoAndPlay = _root.sixthSenseIndicator.gotoAndPlay;
         _root.sixthSenseIndicator.gotoAndPlay = function(frame) { $this.gotoAndPlayXvm(frame); };
+
+        var iconPath = Config.config.battle.sixthSenseIcon;
+        if (!iconPath || iconPath == "")
+            return;
+        iconPath = Utils.fixImgTagSrc(Macros.FormatGlobalStringValue(iconPath));
 
         sixthSenseIndicatorXvm = _root.createEmptyMovieClip("sixthSenseIndicatorXvm", _root.getNextHighestDepth());
         sixthSenseIndicatorXvm._y = 80;
@@ -40,6 +37,8 @@ class wot.battle.SixthSenseIndicator
 
         icon.source = il.currentIcon;
         icon.onLoadInit = icon_onLoadInit;
+
+        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, onUpdateStage);
     }
 
     function icon_onLoadInit(mc:MovieClip)
@@ -71,7 +70,7 @@ class wot.battle.SixthSenseIndicator
         if (frame == "active")
             SoundManager.playSound("sixthsense", "normal", "");
 
-        if (icon.source == "")
+        if (icon == null || icon.source == "")
         {
             orig_gotoAndPlay.apply(_root.sixthSenseIndicator, arguments);
             return;
