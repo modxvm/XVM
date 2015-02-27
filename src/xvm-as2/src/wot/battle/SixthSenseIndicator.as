@@ -31,6 +31,7 @@ class wot.battle.SixthSenseIndicator
         sixthSenseIndicatorXvm = _root.createEmptyMovieClip("sixthSenseIndicatorXvm", _root.getNextHighestDepth());
         sixthSenseIndicatorXvm._y = 80;
         sixthSenseIndicatorXvm._alpha = 0;
+        sixthSenseIndicatorXvm.hitTestDisable = true;
 
         icon = (UILoaderAlt)(sixthSenseIndicatorXvm.attachMovie("UILoaderAlt", "icon", 0));
 

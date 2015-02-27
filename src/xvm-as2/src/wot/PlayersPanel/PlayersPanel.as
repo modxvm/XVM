@@ -220,15 +220,15 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
                 var value_splitted:Array = value.split(item.vehicle);
                 var cfg_state:Object = cfg[wrapper.state];
-                Cmd.profMethodStart("PlayersPanel.setData(): #1.1 - format names");
+//                Cmd.profMethodStart("PlayersPanel.setData(): #1.1 - format names");
                 namesArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_NICK, item, item.userName)));
-                Cmd.profMethodEnd("PlayersPanel.setData(): #1.1 - format names");
-                Cmd.profMethodStart("PlayersPanel.setData(): #1.2 - format vehicle");
+//                Cmd.profMethodEnd("PlayersPanel.setData(): #1.1 - format names");
+//                Cmd.profMethodStart("PlayersPanel.setData(): #1.2 - format vehicle");
                 vehiclesArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_VEHICLE, item, item.vehicle)));
-                Cmd.profMethodEnd("PlayersPanel.setData(): #1.2 - format vehicle");
-                Cmd.profMethodStart("PlayersPanel.setData(): #1.3 - format frags");
+//                Cmd.profMethodEnd("PlayersPanel.setData(): #1.2 - format vehicle");
+//                Cmd.profMethodStart("PlayersPanel.setData(): #1.3 - format frags");
                 fragsArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_FRAGS, item, item.frags)));
-                Cmd.profMethodEnd("PlayersPanel.setData(): #1.3 - format frags");
+//                Cmd.profMethodEnd("PlayersPanel.setData(): #1.3 - format frags");
             }
             Cmd.profMethodEnd("PlayersPanel.setData(): #1 - prepare");
 
