@@ -143,7 +143,7 @@
       "<font color='{{c:xwn8}}'>{{rating}}</font>"
 
   Dynamic color and transparency usage examples:
-    "color": "{{c:xwn8}}" - color depending on WN8
+    "color": "{{c:xwn8}}" - color depending on XVM Scale for WN8
     "alpha": "{{a:hp}}" - transparency depending on current health
 
   Clan and players icons.
