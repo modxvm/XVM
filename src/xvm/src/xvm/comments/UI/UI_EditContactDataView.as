@@ -1,46 +1,48 @@
-﻿package xvm.comments.editors
+﻿package xvm.comments.UI
 {
     import com.xvm.*;
     import com.xvm.components.*;
     import com.xvm.io.*;
-    import flash.display.DisplayObject;
-    import flash.display.InteractiveObject;
     import flash.events.*;
     import flash.ui.*;
     import net.wg.data.constants.*;
     import net.wg.gui.components.controls.SoundButtonEx; // '*' conflicts with UI classes
     import net.wg.gui.components.controls.TextInput;
     import net.wg.infrastructure.base.*;
+    import net.wg.infrastructure.interfaces.entity.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.events.*;
     import scaleform.gfx.*;
     import xvm.comments.*;
-    import xvm.comments.data.PlayerCommentData;
+    import xvm.comments.data.*;
 
-    public class EditDataView extends AbstractWindowView
+    public class UI_EditContactDataView extends ContactNoteManageViewUI implements IUpdatable
     {
         private static const WINDOW_WIDTH:uint = 350;
-        private static const WINDOW_HEIGHT:uint = 265;
+        private static const WINDOW_HEIGHT:uint = 240;
 
         private var data:Object;
 
         private var playerNameField:LabelControl;
         private var nickLabel:LabelControl;
         private var nickTextInput:TextInput;
-        private var groupLabel:LabelControl;
-        private var groupDropDown:DropDown;
         private var commentLabel:LabelControl;
         private var commentTextArea:TextAreaSimple;
         private var submitButton:SoundButtonEx;
         private var cancelButton:SoundButtonEx;
 
-        public function EditDataView(data:Object)
+        public function UI_EditContactDataView()
         {
             //Logger.add("EditDataView");
             super();
+        }
+
+        override public function update(data:Object):void
+        {
+            super.update(data);
 
             this.visible = true;
-            this.isModal = false;
+            /*this.isModal = false;
             this.isCentered = true;
             this.canClose = true;
             this.enabledCloseBtn = true;
@@ -55,7 +57,7 @@
             onTryClosing = function():Boolean { return true; }
             onWindowClose = function():void { (window as EditDataWindow).close(); }
 
-            createControls();
+            createControls();*/
         }
 
         override protected function configUI():void
@@ -63,19 +65,17 @@
             //Logger.add("EditDataView.configUI");
             super.configUI();
 
-            window.title = Locale.get("Edit data");
+            /*window.title = Locale.get("Edit data");
 
             nickTextInput.addEventListener(Event.CHANGE, onDataChange);
-            groupDropDown.addEventListener(Event.CHANGE, onDataChange);
             commentTextArea.addEventListener(Event.CHANGE, onDataChange);
-            submitButton.addEventListener(MouseEvent.CLICK, onSumbitButtonClick);
-            cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
+            submitButton.addEventListener(ButtonEvent.CLICK, onSumbitButtonClick);
+            cancelButton.addEventListener(ButtonEvent.CLICK, onWindowClose);
 
             var pd:Object = CommentsGlobalData.instance.getPlayerData(data.uid);
-            nickTextInput.text = (pd != null && pd.nick != null && pd.nick != "") ? pd.nick : (data.originalDisplayName || data.displayName);
+            nickTextInput.text = (pd != null && pd.nick != null && pd.nick != "") ? pd.nick : data.userName;
             if (pd != null)
             {
-                groupDropDown.selectedIndex = 0; // pd.group
                 commentTextArea.text = pd.comment;
             }
 
@@ -84,17 +84,16 @@
             commentTextArea.validateNow();
             commentTextArea.textField.setSelection(commentTextArea.length, commentTextArea.length);
 
-            setFocus(nickTextInput);
+            setFocus(nickTextInput);*/
         }
 
         override protected function onDispose():void
         {
-            nickTextInput.removeEventListener(Event.CHANGE, onDataChange);
-            groupDropDown.removeEventListener(Event.CHANGE, onDataChange);
+            /*nickTextInput.removeEventListener(Event.CHANGE, onDataChange);
             commentTextArea.removeEventListener(Event.CHANGE, onDataChange);
-            submitButton.removeEventListener(MouseEvent.CLICK, onSumbitButtonClick);
-            cancelButton.removeEventListener(MouseEvent.CLICK, onWindowClose);
-            super.onDispose();
+            submitButton.removeEventListener(ButtonEvent.CLICK, onSumbitButtonClick);
+            cancelButton.removeEventListener(ButtonEvent.CLICK, onWindowClose);
+            super.onDispose();*/
         }
 
         override public function handleInput(e:InputEvent):void
@@ -108,14 +107,14 @@
                     {
                         case Keyboard.ESCAPE:
                             e.handled = true;
-                            onWindowClose();
+                            //onWindowClose();
                             break;
 
                         case Keyboard.ENTER:
                             if (e.details.ctrlKey)
                             {
                                 e.handled = true;
-                                submitButton.dispatchEvent(new MouseEventEx(MouseEvent.CLICK));
+                                submitButton.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK));
                             }
                             break;
                     }
@@ -134,7 +133,7 @@
                 y: -2,
                 width: this.width,
                 height: 30,
-                htmlText: "<font face='$TitleFont' size='18'>" + data.displayName + "</font>"
+                htmlText: "<font face='$TitleFont' size='18'>" + data.userName + "</font>"
             })) as LabelControl;
 
             nickLabel = addChild(App.utils.classFactory.getComponent("LabelControl", LabelControl, {
@@ -153,24 +152,9 @@
                 maxChars: 50
             })) as TextInput;
 
-            groupLabel = addChild(App.utils.classFactory.getComponent("LabelControl", LabelControl, {
-                x: 0,
-                y: 55,
-                width: 55,
-                height: 30,
-                text: Locale.get("Group")
-            })) as LabelControl;
-
-            groupDropDown = addChild(new DropDown()) as DropDown;
-            groupDropDown.x = 60;
-            groupDropDown.y = 50;
-            groupDropDown.width = WINDOW_WIDTH - 60;
-            groupDropDown.height = 30;
-            groupDropDown.enabled = false;
-
             commentLabel = addChild(App.utils.classFactory.getComponent("LabelControl", LabelControl, {
                 x: 0,
-                y: 80,
+                y: 55,
                 width: WINDOW_WIDTH,
                 height: 20,
                 text: Locale.get("Comment")
@@ -178,9 +162,9 @@
 
             commentTextArea = addChild(App.utils.classFactory.getComponent("TextAreaSimple", TextAreaSimple, {
                 x: 0,
-                y: 105,
+                y: 80,
                 width: WINDOW_WIDTH,
-                height: WINDOW_HEIGHT - 120,
+                height: WINDOW_HEIGHT - 95,
                 tabChildren: true,
                 selectable: true,
                 maxChars: 1000
@@ -209,25 +193,24 @@
         {
             submitButton.label =
                 (nickTextInput.text == null || nickTextInput.text == "") &&
-                (groupDropDown.dataProvider[groupDropDown.selectedIndex] == null || groupDropDown.dataProvider[groupDropDown.selectedIndex] == "") &&
                 (commentTextArea.text == null || commentTextArea.text == "")
                 ? Locale.get("Remove") : Locale.get("Save");
         }
 
-        private function onSumbitButtonClick(e:MouseEventEx):void
+        private function onSumbitButtonClick(e:ButtonEvent):void
         {
-            //Logger.add("onSumbitButtonClick");
+            Logger.add("onSumbitButtonClick");
             try
             {
+                Logger.addObject(e);
                 if (e.buttonIdx == 0)
                 {
                     CommentsGlobalData.instance.setPlayerData(
                         data.uid,
                         new PlayerCommentData(
-                            nickTextInput.text == (data.originalDisplayName || data.displayName) ? null : nickTextInput.text,
-                            groupDropDown.dataProvider[groupDropDown.selectedIndex],
+                            nickTextInput.text == data.userName ? null : nickTextInput.text,
                             commentTextArea.text));
-                    onWindowClose();
+                    //onWindowClose();
                 }
             }
             catch (ex:Error)
@@ -239,13 +222,7 @@
 }
 /*
 data: {
-  "userName": "M_r_A",
-  "himself": false,
-  "chatRoster": 1,
-  "displayName": "M_r_A [CLAN]",
-  "group": "group_2",
-  "colors": "8761728,6127961",
-  "online": false,
-  "uid": 7294494
+  "uid": 7294494,
+  "userName": "M_r_A"
 }
 */

@@ -163,6 +163,7 @@
     "CompleteCrew": "Complete crew",
 
     // Comments
+    "Network services unavailable": "Network services unavailable",
     "Error loading comments": "Error loading comments",
     "Error saving comments": "Error saving comments",
     "Comments disabled": "Comments disabled",

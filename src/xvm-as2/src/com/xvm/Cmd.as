@@ -13,9 +13,10 @@ class com.xvm.Cmd
     private static var COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
     private static var COMMAND_LOADUSERDATA:String = "loadUserData";
     private static var COMMAND_CAPTUREBARGETBASENUM:String = "captureBarGetBaseNum";
-    private static var COMMAND_GETCOMMENTS:String = "getComments";
     private static var COMMAND_PROF_METHOD_START:String = "profMethodStart";
     private static var COMMAND_PROF_METHOD_END:String = "profMethodEnd";
+
+    //private static var COMMAND_GETCOMMENTS:String = "xvm_comments.get_comments";
 
     public static var RESPOND_CONFIG:String = "xvm.config";
     public static var RESPOND_KEY_EVENT:String = "xvm.keyevent";
@@ -48,10 +49,12 @@ class com.xvm.Cmd
         _call(target, callback, [COMMAND_CAPTUREBARGETBASENUM, id]);
     }
 
+    /*
     public static function getComments(target:Object, callback:Function)
     {
         _call(target, callback, [COMMAND_GETCOMMENTS]);
     }
+    */
 
     public static function profMethodStart(name:String)
     {

@@ -6,7 +6,6 @@ package xvm.comments
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import xvm.hangar.views.*;
 
     public class CommentsXvmMod extends XvmModBase
     {

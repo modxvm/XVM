@@ -1,5 +1,4 @@
-﻿package xvm.comments
-{
+﻿package xvm.comments.old {
     import com.xvm.*;
     import com.xvm.io.*;
     import flash.events.*;

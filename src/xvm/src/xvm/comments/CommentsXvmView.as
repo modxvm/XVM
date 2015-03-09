@@ -5,27 +5,25 @@
 package xvm.comments
 {
     import com.xvm.*;
+    import com.xvm.events.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.io.*;
-    import com.xvm.types.cfg.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import net.wg.gui.events.*;
     import net.wg.gui.messenger.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.interfaces.*;
     import xvm.comments.UI.*;
 
     public class CommentsXvmView extends XvmViewBase
     {
-        private static const XPM_COMMAND_GET_COMMENTS:String = "xpm.get_comments";
-        private static const XPM_COMMAND_SET_COMMENTS:String = "xpm.set_comments";
+        //private static const CMD_XVM_COMMENTS_GET_COMMENTS:String = "xvm_comments.get_comments";
+        //private static const CMD_XVM_COMMENTS_EDIT_CONTACT_DATA:String = "xvm_comments.as_edit_contact_data";
+        //private static const CMD_XVM_COMMENTS_UPDATE_DATA:String = "xvm_comments.as_update_data";
+
+        //private static const XVM_EDIT_CONTACT_DATA_ALIAS:String = 'XvmEditContactDataView';
 
         public function CommentsXvmView(view:IView)
         {
             super(view);
-            CommentsGlobalData.instance.clearData();
+            //CommentsGlobalData.instance.clearData();
         }
 
         public function get page():ContactsListPopover
@@ -41,33 +39,45 @@ package xvm.comments
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            //Logger.add("onAfterPopulate: " + view.as_alias);
-
-            if (Config.networkServicesSettings.comments != true)
+            if (!Config.networkServicesSettings.comments)
                 return;
 
-            // TODO: async
-            try
-            {
-                //App.waiting.show("Loading...");
-                page.treeComponent.list.itemRenderer = UI_ContactsTreeItemRenderer;
-                updateComments(Xvm.cmd(XPM_COMMAND_GET_COMMENTS), true);
-                CommentsGlobalData.instance.addEventListener(Event.CHANGE, onCommentsDataChange);
-            }
-            finally
-            {
-                //App.waiting.hide("");
-            }
+            Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+            page.treeComponent.list.itemRenderer = UI_ContactsTreeItemRenderer;
+            //page.xvm_linkageUtils.addEntity(XVM_EDIT_CONTACT_DATA_ALIAS, getQualifiedClassName(UI_EditContactDataView));
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            //Logger.add("onBeforeDispose: " + view.as_alias);
-            CommentsGlobalData.instance.removeEventListener(Event.CHANGE, onCommentsDataChange);
+            Xvm.removeEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
         }
 
         // PRIVATE
 
+        private function handleXpmCommand(e:ObjectEvent):void
+        {
+            //Logger.add("handleXpmCommand: " + e.result.cmd);
+            try
+            {
+                switch (e.result.cmd)
+                {
+                    /*
+                    case CMD_XVM_COMMENTS_EDIT_CONTACT_DATA:
+                        var data:ContactListMainInfo = new ContactListMainInfo(e.result.args[0], e.result.args[1]);
+                        IUpdatable(page.viewStack.show(getQualifiedClassName(UI_EditContactDataView))).update(data);
+                        break;
+                    case CMD_XVM_COMMENTS_UPDATE_DATA:
+                        updateComments.apply(this, e.result.args);
+                    */
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+        }
+
+        /*
         private function updateComments(json_str:String, isGetCommand:Boolean):void
         {
             //Logger.add("updateComments: " + json_str);
@@ -110,18 +120,6 @@ package xvm.comments
                 Logger.add(ex.getStackTrace());
             }
         }
-
-        private function onCommentsDataChange(e:Event):void
-        {
-            try
-            {
-                //App.waiting.show("Saving...");
-                updateComments(Xvm.cmd(XPM_COMMAND_SET_COMMENTS, CommentsGlobalData.instance.toJson()), false);
-            }
-            finally
-            {
-                //App.waiting.hide("");
-            }
-        }
+        */
     }
 }

@@ -1,5 +1,4 @@
-﻿package xvm.comments.data
-{
+﻿package xvm.comments.old {
     public class CommentsData extends Object
     {
         public var ver:String = "1.0";

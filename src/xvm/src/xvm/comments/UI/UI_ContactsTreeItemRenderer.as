@@ -5,22 +5,14 @@ package xvm.comments.UI
 {
     import com.xvm.*;
     import com.xvm.utils.*;
-    import flash.display.*;
     import flash.events.*;
-    import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
     import net.wg.gui.messenger.controls.ContactItem;
     import net.wg.gui.messenger.data.*;
-    import net.wg.infrastructure.interfaces.IUserProps;
     import scaleform.clik.constants.*;
-    import scaleform.clik.core.UIComponent;
-    import xvm.comments.*;
-    import xvm.comments.data.*;
+    import scaleform.clik.core.*;
 
     public class UI_ContactsTreeItemRenderer extends ContactsTreeItemRendererUI
     {
-        private var nickImg:UILoaderAlt = null;
-        private var commentImg:UILoaderAlt = null;
-
         public function UI_ContactsTreeItemRenderer()
         {
             //Logger.add("UI_ContactsTreeItemRenderer");
@@ -31,53 +23,21 @@ package xvm.comments.UI
         {
             try
             {
+                //Logger.addObject(data, 3);
+
                 if (isInvalid(InvalidationType.DATA))
                 {
-                    var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-                    if (d)
+                    var myData:ITreeItemInfo = this.getData() as ITreeItemInfo;
+                    if (myData && !myData.isBrunch && myData.data != null)
                     {
-                        var id:Number = d.id as Number;
-                        if (!d.isBrunch && id)
+                        if (this.xvm_contactItem == null)
                         {
-                            // prepare
-                            d.data.xvm_comment = null;
-                            d.data.xvm_originalUserName = null;
-                            d.data.xvm_userName = null;
-
-                            var pd:PlayerCommentData = CommentsGlobalData.instance.getPlayerData(id);
-                            if (pd != null)
-                            {
-                                if (pd.nick != null && pd.nick != "")
-                                {
-                                    d.data.xvm_originalUserName = d.data.userProps.userName;
-                                    d.data.xvm_userName = pd.nick;
-                                }
-
-                                if (pd.comment != null && pd.comment != "")
-                                {
-                                    d.data.xvm_comment = pd.comment;
-                                }
-                            }
+                            this.xvm_contactItem = new UI_ContactItem();
                         }
                     }
                 }
 
-                // draw
                 super.draw();
-return;
-
-                var contactItem:ContactItem = this.getCurrentContentItem() as ContactItem;
-                if (contactItem is ContactItemUI && !(contactItem is UI_ContactItem))
-                {
-                    var ci:ContactItem = this.xvm_contactItem;
-                    this.xvm_contactItem = new UI_ContactItem();
-                    this.xvm_contactItem.x = ci.x;
-                    removeChild(ci);
-                    addChild(this.xvm_contactItem);
-                    this.xvm_currentContentItem = this.xvm_contactItem;
-                    this.xvm_contactItem.update(data.data);
-                    this.xvm_contactItem.validateNow();
-                }
             }
             catch (ex:Error)
             {
@@ -85,10 +45,10 @@ return;
             }
         }
 
-        override protected function handleMouseRollOver(param1:MouseEvent):void
+        override protected function handleMouseRollOver(e:MouseEvent):void
         {
-            super.handleMouseRollOver(param1);
-return;
+            super.handleMouseRollOver(e);
+
             var currentContentItem:UIComponent = this.getCurrentContentItem();
             if (!(currentContentItem is ContactItem))
                 return;
@@ -97,31 +57,20 @@ return;
             if (!d)
                 return;
 
-            var comment:String = d.data.xvm_comment;
+            var comment:String = d.data.xvm_contact_data.comment;
             if (!comment)
                 return;
 
-            var userName:String = d.data.xvm_originalUserName || d.data.userPropsVO.userName;
-            App.toolTipMgr.show(userName +
-                (comment == null ? "" : "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>"));
+            //App.toolTipMgr.show(d.data.userPropsVO.userName + "\n" +
+            //    "<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
         }
     }
 }
 /*
 data: { // net.wg.gui.messenger.data::ContactsListTreeItemInfo
-  "parent": { // net.wg.gui.messenger.data::ContactsListTreeItemInfo
-    "parent": null,
-    "isBrunch": false,
-    "isOpened": false,
-    "children": null,
-    "data": "[object Object]",
-    "gui": "[object Object]",
-    "id": 0,
-    "parentItemData": null
-  },
+  "id": 13494688,
   "isBrunch": false,
   "isOpened": false,
-  "children": null,
   "data": {
     "isOnline": false,
     "userProps": {
@@ -136,12 +85,15 @@ data: { // net.wg.gui.messenger.data::ContactsListTreeItemInfo
       "suffix": " <IMG SRC='img://gui/maps/icons/messenger/contactConfirmNeeded.png' width='16' height='16' vspace='-6' hspace='0'/>"
     },
     "note": "",
+    "xvm_contact_data": {
+      "nick": "nick",
+      "comment": "comment"
+    },
     "dbID": 7027996
   },
-  "gui": {
-    "id": 13494688
-  },
-  "id": 13494688,
+  "gui": { "id": 13494688 },
+  "parent": {...}, // net.wg.gui.messenger.data::ContactsListTreeItemInfo
+  "children": null,
   "parentItemData": null
 }
 */

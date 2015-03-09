@@ -9,6 +9,9 @@ def log(s, prefix=""):
 def err(s):
     _logger.error(s)
 
+def warn(s):
+    _logger.warning(s)
+
 def debug(s):
     _logger.debug(s)
 

@@ -1,5 +1,4 @@
-﻿package xvm.comments.data
-{
+﻿package xvm.comments.old {
     public class PlayerCommentData
     {
         public var nick:String;

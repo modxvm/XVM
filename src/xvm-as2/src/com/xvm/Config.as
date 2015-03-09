@@ -36,7 +36,7 @@ class com.xvm.Config
             Locale.initializeLanguageFile(lang_str);
             VehicleInfo.onVehicleInfoData(vehInfoData);
 
-            Cmd.getComments(this, onGetCommentsCallback);
+            //Cmd.getComments(this, onGetCommentsCallback);
 
             Logger.add("Config: Loaded");
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );

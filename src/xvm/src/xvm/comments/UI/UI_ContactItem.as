@@ -4,17 +4,17 @@
 package xvm.comments.UI
 {
     import com.xvm.*;
-    import com.xvm.utils.*;
+    //import com.xvm.utils.*;
     import flash.display.*;
-    import flash.events.*;
+    //import flash.events.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
-    import net.wg.gui.messenger.controls.ContactItem;
-    import net.wg.gui.messenger.data.*;
-    import net.wg.infrastructure.interfaces.IUserProps;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.UIComponent;
-    import xvm.comments.*;
-    import xvm.comments.data.*;
+    //import net.wg.gui.messenger.controls.ContactItem;
+    //import net.wg.gui.messenger.data.*;
+    //import net.wg.infrastructure.interfaces.IUserProps;
+    //import scaleform.clik.constants.*;
+    //import scaleform.clik.core.UIComponent;
+    //import xvm.comments.*;
+    //import xvm.comments.data.*;
 
     public class UI_ContactItem extends ContactItemUI
     {
@@ -24,18 +24,19 @@ package xvm.comments.UI
 
         public function UI_ContactItem()
         {
-            Logger.add("UI_ContactItem");
+            //Logger.add("UI_ContactItem");
             super();
+            /*
             if (nickImg == null)
-                createControls();
+                createControls();*/
         }
 
         override protected function draw():void
         {
-            panel.x = width - x + 32;
+            /*panel.x = width - x + 32;
 
             nickImg.visible = true;
-            commentImg.visible = true;
+            commentImg.visible = true;*/
             super.draw();
             /*try
             {
@@ -102,7 +103,7 @@ package xvm.comments.UI
 
         // PRIVATE
 
-        private function createControls():void
+        /*private function createControls():void
         {
             panel = this.addChildAt(new Sprite(), 0) as Sprite;
 
@@ -129,6 +130,6 @@ package xvm.comments.UI
                 source: "../maps/icons/messenger/service_channel_icon.png",
                 visible: false
             })) as UILoaderAlt;
-        }
+        }*/
     }
 }

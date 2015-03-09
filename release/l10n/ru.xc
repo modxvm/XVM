@@ -163,6 +163,7 @@
     "CompleteCrew": "Полный экипаж",
 
     // Comments
+    "Network services unavailable": "Сетевые сервисы недоступны",
     "Error loading comments": "Ошибка загрузки комментариев",
     "Error saving comments": "Ошибка сохранения комментариев",
     "Comments disabled": "Комментарии отключены",
