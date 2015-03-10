@@ -1,31 +1,20 @@
 ﻿package xvm.comments.UI
 {
     import com.xvm.*;
-    import com.xvm.components.*;
-    import com.xvm.io.*;
+    import flash.display.*;
     import flash.events.*;
-    import flash.ui.*;
     import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.SoundButtonEx; // '*' conflicts with UI classes
-    import net.wg.gui.components.controls.TextInput;
-    import net.wg.infrastructure.base.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    import scaleform.gfx.*;
-    import xvm.comments.*;
+    import net.wg.gui.components.controls.TextInput; // '*' conflicts with UI classes
+    import net.wg.gui.messenger.data.*;
 
-    public class UI_EditContactDataView extends ContactNoteManageViewUI implements IUpdatable
+    public class UI_EditContactDataView extends ContactNoteManageViewUI
     {
-        private var data:Object;
+        private var userProps:ContactUserPropVO = null;
 
-        private var playerNameField:LabelControl;
         private var nickLabel:LabelControl;
         private var nickTextInput:TextInput;
         private var commentLabel:LabelControl;
         private var commentTextArea:TextAreaSimple;
-        private var submitButton:SoundButtonEx;
-        private var cancelButton:SoundButtonEx;
 
         public function UI_EditContactDataView()
         {
@@ -33,27 +22,14 @@
             super();
         }
 
-        override public function update(data:Object):void
+        override public function getComponentForFocus():InteractiveObject
         {
-            super.update(data);
+            return nickTextInput;
+        }
 
-            this.visible = true;
-            /*this.isModal = false;
-            this.isCentered = true;
-            this.canClose = true;
-            this.enabledCloseBtn = true;
-            this.width = WINDOW_WIDTH;
-            this.height = WINDOW_HEIGHT;
-            this.tabChildren = true;
-
-            this.data = data;
-
-            this.as_config = { type: ContainerTypes.WINDOW };
-
-            onTryClosing = function():Boolean { return true; }
-            onWindowClose = function():void { (window as EditDataWindow).close(); }
-
-            createControls();*/
+        override public function getFocusChain():Array
+        {
+            return [nickTextInput, commentTextArea].concat(super.getFocusChain());
         }
 
         override protected function configUI():void
@@ -61,138 +37,117 @@
             //Logger.add("EditDataView.configUI");
             super.configUI();
 
-            /*window.title = Locale.get("Edit data");
+            createControls();
 
             nickTextInput.addEventListener(Event.CHANGE, onDataChange);
             commentTextArea.addEventListener(Event.CHANGE, onDataChange);
-            submitButton.addEventListener(ButtonEvent.CLICK, onSumbitButtonClick);
-            cancelButton.addEventListener(ButtonEvent.CLICK, onWindowClose);
-
-            var pd:Object = CommentsGlobalData.instance.getPlayerData(data.uid);
-            nickTextInput.text = (pd != null && pd.nick != null && pd.nick != "") ? pd.nick : data.userName;
-            if (pd != null)
-            {
-                commentTextArea.text = pd.comment;
-            }
-
-            onDataChange(null);
-
-            commentTextArea.validateNow();
-            commentTextArea.textField.setSelection(commentTextArea.length, commentTextArea.length);
-
-            setFocus(nickTextInput);*/
         }
 
         override protected function onDispose():void
         {
-            /*nickTextInput.removeEventListener(Event.CHANGE, onDataChange);
+            nickTextInput.removeEventListener(Event.CHANGE, onDataChange);
             commentTextArea.removeEventListener(Event.CHANGE, onDataChange);
-            submitButton.removeEventListener(ButtonEvent.CLICK, onSumbitButtonClick);
-            cancelButton.removeEventListener(ButtonEvent.CLICK, onWindowClose);
-            super.onDispose();*/
+
+            super.onDispose();
+        }
+
+        override public function as_setUserProps(value:Object):void
+        {
+            //Logger.addObject(value, 2, "as_setUserProps");
+
+            var xvm_contact_data:Object = value.xvm_contact_data;
+            delete value.xvm_contact_data;
+
+            userProps = new ContactUserPropVO(value);
+
+            super.as_setUserProps(value);
+
+            nickTextInput.text = (xvm_contact_data.nick != null && xvm_contact_data.nick != "") ? xvm_contact_data.nick : value.userName;
+            commentTextArea.text = xvm_contact_data.comment;
+            //onDataChange(null);
+        }
+
+        override public function onOkS(value:Object):void
+        {
+            App.utils.asserter.assertNotNull(this.onOk,"onOk" + Errors.CANT_NULL);
+            this.onOk({
+                nick: nickTextInput.text,
+                comment: commentTextArea.text
+            });
         }
 
         // PRIVATE
 
-        /*
         private function createControls():void
         {
-            playerNameField = addChild(App.utils.classFactory.getComponent("LabelControl", LabelControl, {
-                x: 5,
-                y: -2,
-                width: this.width,
-                height: 30,
-                htmlText: "<font face='$TitleFont' size='18'>" + data.userName + "</font>"
-            })) as LabelControl;
+            input.enabled = false;
+            input.visible = false;
+
+            var x:Number = input.x;
+            var y:Number = input.y + 5;
+            var w:Number = input.width;
 
             nickLabel = addChild(App.utils.classFactory.getComponent("LabelControl", LabelControl, {
-                x: 0,
-                y: 30,
+                x: x,
+                y: y,
                 width: 55,
                 height: 30,
                 text: Locale.get("Nick")
             })) as LabelControl;
 
             nickTextInput = addChild(App.utils.classFactory.getComponent("TextInput", TextInput, {
-                x: 60,
-                y: 25,
-                width: WINDOW_WIDTH - 60,
+                x: x,
+                y: y + 20,
+                width: w,
                 height: 30,
                 maxChars: 50
             })) as TextInput;
+            nickTextInput.focusable
 
             commentLabel = addChild(App.utils.classFactory.getComponent("LabelControl", LabelControl, {
-                x: 0,
-                y: 55,
-                width: WINDOW_WIDTH,
+                x: x,
+                y: y + 55,
+                width: w,
                 height: 20,
                 text: Locale.get("Comment")
             })) as LabelControl;
 
             commentTextArea = addChild(App.utils.classFactory.getComponent("TextAreaSimple", TextAreaSimple, {
-                x: 0,
-                y: 80,
-                width: WINDOW_WIDTH,
-                height: WINDOW_HEIGHT - 95,
+                x: x,
+                y: y + 80,
+                width: w,
+                height: 110,
                 tabChildren: true,
                 selectable: true,
-                maxChars: 1000
+                maxChars: 1000,
+                showBgForm: true
             })) as TextAreaSimple;
 
-            submitButton = addChild(App.utils.classFactory.getComponent("ButtonNormal", SoundButtonEx, {
-                x: WINDOW_WIDTH - 205,
-                y: WINDOW_HEIGHT - 22,
-                width: 100,
-                height: 25,
-                soundType: "okButton",
-                label: Locale.get("Save")
-            })) as SoundButtonEx;
-
-            cancelButton = addChild(App.utils.classFactory.getComponent("ButtonNormal", SoundButtonEx, {
-                x: WINDOW_WIDTH - 100,
-                y: WINDOW_HEIGHT - 22,
-                width: 100,
-                height: 25,
-                soundType: "cancelButton",
-                label: Locale.get("Cancel")
-            })) as SoundButtonEx;
+            btns.y = y + 200;
         }
-        */
 
         private function onDataChange(e:Event):void
         {
-            submitButton.label =
-                (nickTextInput.text == null || nickTextInput.text == "") &&
+            btns.btnOk.label =
+                (nickTextInput.text == null || nickTextInput.text == "" || nickTextInput.text == userProps.userName) &&
                 (commentTextArea.text == null || commentTextArea.text == "")
                 ? Locale.get("Remove") : Locale.get("Save");
-        }
-
-        private function onSumbitButtonClick(e:ButtonEvent):void
-        {
-            Logger.add("onSumbitButtonClick");
-            try
-            {
-                Logger.addObject(e);
-                if (e.buttonIdx == 0)
-                {
-                    /*CommentsGlobalData.instance.setPlayerData(
-                        data.uid,
-                        new PlayerCommentData(
-                            nickTextInput.text == data.userName ? null : nickTextInput.text,
-                            commentTextArea.text));*/
-                    //onWindowClose();
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
         }
     }
 }
 /*
-data: {
-  "uid": 7294494,
-  "userName": "M_r_A"
+userProps: {
+  "tags": [
+    "sub/none",
+    "friend"
+  ],
+  "rgb": 13224374,
+  "igrVspace": -4,
+  "suffix": "",
+  "prefix": "",
+  "igrType": 0,
+  "region": null,
+  "clanAbbrev": null,
+  "userName": "Ural4ik"
 }
 */

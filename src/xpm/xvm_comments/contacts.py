@@ -11,6 +11,9 @@ def isAvailable():
 def getXvmContactData(uid):
     return _contacts.getXvmContactData(uid)
 
+def setXvmContactData(uid, value):
+    return _contacts.setXvmContactData(uid, value)
+
 # PRIVATE
 
 from random import randint
@@ -76,7 +79,7 @@ class _Contacts:
             SystemMessages.pushMessage(errstr, type=SystemMessages.SM_TYPE.Warning)
             warn(traceback.format_exc())
 
-        log(self.cached_data)
+        #log(self.cached_data)
 
     def getXvmContactData(self, uid):
         nick = None
@@ -87,6 +90,10 @@ class _Contacts:
                 nick = data.get('nick', None)
                 comment = data.get('comment', None)
         return {'nick':nick,'comment':comment}
+
+    def setXvmContactData(self, uid, value):
+        # TODO
+        return True
 
     # PRIVATE
 
