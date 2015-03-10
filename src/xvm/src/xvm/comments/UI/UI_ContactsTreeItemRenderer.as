@@ -5,18 +5,30 @@ package xvm.comments.UI
 {
     import com.xvm.*;
     import com.xvm.utils.*;
+    import flash.display.*;
     import flash.events.*;
-    import net.wg.gui.messenger.controls.ContactItem;
+    import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
+    import net.wg.gui.messenger.controls.*;
     import net.wg.gui.messenger.data.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.core.*;
 
     public class UI_ContactsTreeItemRenderer extends ContactsTreeItemRendererUI
     {
+        private var panel:Sprite = null;
+        private var nickImg:UILoaderAlt = null;
+        private var commentImg:UILoaderAlt = null;
+
         public function UI_ContactsTreeItemRenderer()
         {
             //Logger.add("UI_ContactsTreeItemRenderer");
             super();
+        }
+
+        override protected function configUI():void
+        {
+            super.configUI();
+            createControls();
         }
 
         override protected function draw():void
@@ -37,7 +49,22 @@ package xvm.comments.UI
                     }
                 }
 
+                nickImg.visible = false;
+                commentImg.visible = false;
+
                 super.draw();
+
+                if (this.xvm_currentContentItem is ContactItem)
+                {
+                    var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
+                    if (d)
+                    {
+                        var nick:String = d.data.xvm_contact_data.nick;
+                        var comment:String = d.data.xvm_contact_data.comment;
+                        nickImg.visible = nick != null && nick != "";
+                        commentImg.visible = comment != null && comment != "";
+                    }
+                }
             }
             catch (ex:Error)
             {
@@ -61,8 +88,40 @@ package xvm.comments.UI
             if (!comment)
                 return;
 
-            //App.toolTipMgr.show(d.data.userPropsVO.userName + "\n" +
-            //    "<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+            App.toolTipMgr.show(d.data.userProps.userName + "\n\n" +
+                "<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+        }
+
+        // PRIVATE
+
+        private function createControls():void
+        {
+            panel = this.addChildAt(new Sprite(), 0) as Sprite;
+            panel.x = width - 34;
+
+            this.nickImg = panel.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+                autoSize: true,
+                maintainAspectRatio: false,
+                x: 6,
+                y: 3,
+                width: 10,
+                height: 20,
+                alpha: 0.5,
+                source: "../maps/icons/messenger/iconContacts.png",
+                visible: false
+            })) as UILoaderAlt;
+
+            this.commentImg = panel.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+                autoSize: true,
+                maintainAspectRatio: false,
+                x: 14,
+                y: 4,
+                width: 16,
+                height: 16,
+                alpha: 0.5,
+                source: "../maps/icons/messenger/service_channel_icon.png",
+                visible: false
+            })) as UILoaderAlt;
         }
     }
 }

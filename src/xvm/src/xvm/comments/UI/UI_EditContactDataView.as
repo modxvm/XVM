@@ -14,13 +14,9 @@
     import scaleform.clik.events.*;
     import scaleform.gfx.*;
     import xvm.comments.*;
-    import xvm.comments.data.*;
 
     public class UI_EditContactDataView extends ContactNoteManageViewUI implements IUpdatable
     {
-        private static const WINDOW_WIDTH:uint = 350;
-        private static const WINDOW_HEIGHT:uint = 240;
-
         private var data:Object;
 
         private var playerNameField:LabelControl;
@@ -96,36 +92,9 @@
             super.onDispose();*/
         }
 
-        override public function handleInput(e:InputEvent):void
-        {
-            if (!e.handled)
-            {
-                //Logger.addObject(e.details);
-                if (e.details.value == InputValue.KEY_DOWN /*|| e.details.value == InputValue.KEY_HOLD*/)
-                {
-                    switch (e.details.code)
-                    {
-                        case Keyboard.ESCAPE:
-                            e.handled = true;
-                            //onWindowClose();
-                            break;
-
-                        case Keyboard.ENTER:
-                            if (e.details.ctrlKey)
-                            {
-                                e.handled = true;
-                                submitButton.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK));
-                            }
-                            break;
-                    }
-                }
-            }
-
-            super.handleInput(e);
-        }
-
         // PRIVATE
 
+        /*
         private function createControls():void
         {
             playerNameField = addChild(App.utils.classFactory.getComponent("LabelControl", LabelControl, {
@@ -188,6 +157,7 @@
                 label: Locale.get("Cancel")
             })) as SoundButtonEx;
         }
+        */
 
         private function onDataChange(e:Event):void
         {
@@ -205,11 +175,11 @@
                 Logger.addObject(e);
                 if (e.buttonIdx == 0)
                 {
-                    CommentsGlobalData.instance.setPlayerData(
+                    /*CommentsGlobalData.instance.setPlayerData(
                         data.uid,
                         new PlayerCommentData(
                             nickTextInput.text == data.userName ? null : nickTextInput.text,
-                            commentTextArea.text));
+                            commentTextArea.text));*/
                     //onWindowClose();
                 }
             }

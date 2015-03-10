@@ -11,16 +11,15 @@ XFW_GAME_VERSIONS  = ["0.9.6"]
 #####################################################################
 # constants
 
-#class COMMANDS(object):
+class COMMANDS(object):
+    AS_EDIT_CONTACT_DATA = "xvm_contacts.as_edit_contact_data"
 #    GET_CONTACTS = "xvm_contacts.get_contacts"
-#    AS_EDIT_CONTACT_DATA = "xvm_contacts.as_edit_contact_data"
-#    AS_UPDATE_DATA = "xvm_contacts.as_update_data"
 
-#class MENU(object):
-#    XVM_EDIT_CONTACT_DATA = 'XvmEditContactData'
+class MENU(object):
+    XVM_EDIT_CONTACT_DATA = 'XvmEditContactData'
 
-#class VIEW(object):
-#    XVM_EDIT_CONTACT_DATA_ALIAS = 'XvmEditContactDataView'
+class VIEW(object):
+    XVM_EDIT_CONTACT_DATA_ALIAS = 'XvmEditContactDataView'
 
 #####################################################################
 # includes
@@ -28,8 +27,6 @@ XFW_GAME_VERSIONS  = ["0.9.6"]
 import traceback
 
 import BigWorld
-
-#import simplejson
 
 from xfw import *
 from xvm_main.python.logger import *
@@ -45,16 +42,16 @@ def start():
     from gui.shared import g_eventBus
     g_eventBus.addListener(XPM_CMD, onXpmCommand)
 
-#    import view
-#    from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
-#    from gui.Scaleform.framework.entities.View import View
-#    g_entitiesFactories.addSettings(ViewSettings(
-#        VIEW.XVM_EDIT_CONTACT_DATA_ALIAS,
-#        view.XvmEditContactDataView,
-#        None,
-#        ViewTypes.COMPONENT,
-#        None,
-#        ScopeTemplates.DEFAULT_SCOPE))
+    import view
+    from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
+    from gui.Scaleform.framework.entities.View import View
+    g_entitiesFactories.addSettings(ViewSettings(
+        VIEW.XVM_EDIT_CONTACT_DATA_ALIAS,
+        view.XvmEditContactDataView,
+        None,
+        ViewTypes.COMPONENT,
+        None,
+        ScopeTemplates.DEFAULT_SCOPE))
 
 def fini():
     from gui.shared import g_eventBus
@@ -159,9 +156,9 @@ def _RegisterEvents():
     from messenger.gui.Scaleform.data.contacts_vo_converter import ContactConverter
     OverrideMethod(ContactConverter, 'makeVO', ContactConverter_makeVO)
 
-    #from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHandler
-    #OverrideMethod(PlayerContactsCMHandler, '_getHandlers', PlayerContactsCMHandler_getHandlers)
-    #OverrideMethod(PlayerContactsCMHandler, '_generateOptions', PlayerContactsCMHandler_generateOptions)
-    #PlayerContactsCMHandler._XvmEditContactData = _XvmEditContactData
+    from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHandler
+    OverrideMethod(PlayerContactsCMHandler, '_getHandlers', PlayerContactsCMHandler_getHandlers)
+    OverrideMethod(PlayerContactsCMHandler, '_generateOptions', PlayerContactsCMHandler_generateOptions)
+    PlayerContactsCMHandler._XvmEditContactData = _XvmEditContactData
 
 BigWorld.callback(0, _RegisterEvents)
