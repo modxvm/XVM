@@ -113,7 +113,7 @@
     "view_range/stereoscope": "with stereoscope",
     "radio_range/base": "base",
     "radio_range/actual": "actual",
-    "SPG_shootingRadius": "Shooting radius",
+    "shootingRadius": "Shooting radius",
     "(sec)": "(sec)",
     "(m)": "(m)",
 

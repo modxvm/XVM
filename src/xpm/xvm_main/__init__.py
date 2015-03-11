@@ -247,12 +247,16 @@ def VehicleParamsField_getValue(base, self):
             for paramName in self.PARAMS.get(vehicle.type, 'default'):
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:
                     result[-1].append(self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams))
-        if vehicle.type == 'SPG' and config.config['hangar']['showArtyShootRangeTooltip']:
+        if config.config['hangar']['showShootRangeTooltip']:
             from vehinfo import _getRanges
             from items import vehicles
             cur_veh = vehicles.g_cache.vehicle(vehicle.nationID, vehicle.innationID)
-            artyRadius = _getRanges(vehicle.turret.descriptor, vehicle.gun.descriptor, vehicle.nationName, vehicle.type)[2]
-            result[-1].append(['<h1>' + l10n('SPG_shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(artyRadius)+ '</h1>'])
+            (viewRange, shellRadius, artiRadius) = _getRanges(vehicle.turret.descriptor, vehicle.gun.descriptor, vehicle.nationName, vehicle.type)
+            if vehicle.type == 'SPG':   # arti
+                result[-1].append(['<h1>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(artiRadius)+ '</h1>'])
+            else:                       # not arti
+                if shellRadius < 707: # short range weapons
+                    result[-1].append(['<h1>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(shellRadius)+ '</h1>'])
         result.append([])
         if crew:
             currentCrewSize = 0

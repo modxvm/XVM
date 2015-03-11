@@ -15,7 +15,7 @@
     WARNING: performance expensive
   * new option hangar/allowExchangeXPInTechTree - consider the exchange of experience with gold in tech tree
   * new option hangar/autoPutPreviousCrewInTanks - automatically put previous crew upon vehicle change in hangar
-  * new option hangar/showArtyShootRangeTooltip - show artillery shooting range in tooltips
+  * new option hangar/showShootRangeTooltip - show artillery and machine guns shooting range in tooltips
   * new option battle/sixthSenseIcon - path to sixth sense icon ("" for original icon).
 
 XVM-6.0.0.3:
