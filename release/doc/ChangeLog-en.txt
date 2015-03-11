@@ -1,4 +1,8 @@
-﻿XVM-6.0.1:
+﻿XVM-6.0.2-dev:
+  * new option hangar/autoPutPreviousCrewInTanks - automatically put previous crew upon vehicle change in hangar
+  * new option hangar/showShootRangeTooltip - show artillery and machine guns shooting range in tooltips
+
+XVM-6.0.1:
   * added new macro {{battletype}} - current battle type
   * added texts/battletype section with text replacements for {{battletype}} macro
   * added texts/topclan section with text replacements for {{topclan}} macro
@@ -14,8 +18,6 @@
   * new option battle/allowSpottedStatus - enable {{spotted}} macro in players panels and minimap.
     WARNING: performance expensive
   * new option hangar/allowExchangeXPInTechTree - consider the exchange of experience with gold in tech tree
-  * new option hangar/autoPutPreviousCrewInTanks - automatically put previous crew upon vehicle change in hangar
-  * new option hangar/showShootRangeTooltip - show artillery and machine guns shooting range in tooltips
   * new option battle/sixthSenseIcon - path to sixth sense icon ("" for original icon).
 
 XVM-6.0.0.3:

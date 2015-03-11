@@ -39,9 +39,6 @@ import contacts
 # INIT
 
 def start():
-    from gui.shared import g_eventBus
-    g_eventBus.addListener(XPM_CMD, onXpmCommand)
-
     import view
     from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
     from gui.Scaleform.framework.entities.View import View
@@ -52,10 +49,6 @@ def start():
         ViewTypes.COMPONENT,
         None,
         ScopeTemplates.DEFAULT_SCOPE))
-
-def fini():
-    from gui.shared import g_eventBus
-    g_eventBus.removeListener(XPM_CMD, onXpmCommand)
 
 _BATTLE_SWF = 'battle.swf'
 _VMM_SWF = 'VehicleMarkersManager.swf'
@@ -69,25 +62,6 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
 def FlashBeforeDelete(self):
     if self.swf in _SWFS:
         self.removeExternalCallback('xvm.cmd')
-
-# onXpmCommand
-
-#_LOG_COMMANDS = (
-#    COMMANDS.GET_CONTACTS,
-#)
-
-# returns: (result, status)
-def onXpmCommand(cmd, *args):
-    return (None, False) # TODO
-#    try:
-#        if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
-#            debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-#        if cmd == COMMANDS.GET_CONTACTS:
-#            return (contacts.getXvmUserContacts(args[0] if len(args) else False), True)
-#    except Exception, ex:
-#        err(traceback.format_exc())
-#        return (None, True)
-#    return (None, False)
 
 def onXvmCommand(proxy, id, cmd, *args):
     return # TODO
@@ -146,9 +120,6 @@ RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
 # Delayed registration
 def _RegisterEvents():
     start()
-
-    import game
-    RegisterEvent(game, 'fini', fini)
 
     from messenger.gui.Scaleform.view.ContactsListPopover import ContactsListPopover
     RegisterEvent(ContactsListPopover, '_populate', ContactsListPopover_populate)
