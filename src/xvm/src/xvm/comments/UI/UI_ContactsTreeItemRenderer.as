@@ -57,7 +57,7 @@ package xvm.comments.UI
                 if (this.xvm_currentContentItem is ContactItem)
                 {
                     var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-                    if (d)
+                    if (d && d.data.xvm_contact_data)
                     {
                         var nick:String = d.data.xvm_contact_data.nick;
                         var comment:String = d.data.xvm_contact_data.comment;
@@ -81,7 +81,7 @@ package xvm.comments.UI
                 return;
 
             var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-            if (!d)
+            if (!d || !d.data.xvm_contact_data)
                 return;
 
             var comment:String = d.data.xvm_contact_data.comment;

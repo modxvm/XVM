@@ -62,9 +62,12 @@
 
             super.as_setUserProps(value);
 
-            nickTextInput.text = (xvm_contact_data.nick != null && xvm_contact_data.nick != "") ? xvm_contact_data.nick : value.userName;
-            commentTextArea.text = xvm_contact_data.comment;
-            //onDataChange(null);
+            if (xvm_contact_data)
+            {
+                nickTextInput.text = (xvm_contact_data.nick != null && xvm_contact_data.nick != "") ? xvm_contact_data.nick : value.userName;
+                commentTextArea.text = xvm_contact_data.comment;
+                //onDataChange(null);
+            }
         }
 
         override public function onOkS(value:Object):void
@@ -129,7 +132,7 @@
         private function onDataChange(e:Event):void
         {
             btns.btnOk.label =
-                (nickTextInput.text == null || nickTextInput.text == "" || nickTextInput.text == userProps.userName) &&
+                (nickTextInput.text == null || nickTextInput.text == "") &&
                 (commentTextArea.text == null || commentTextArea.text == "")
                 ? Locale.get("Remove") : Locale.get("Save");
         }

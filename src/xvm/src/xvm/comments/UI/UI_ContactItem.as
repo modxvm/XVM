@@ -25,7 +25,7 @@ package xvm.comments.UI
         override protected function draw():void
         {
             var d:ContactItemVO = data as ContactItemVO;
-            if (!d)
+            if (!d || !xvm_contact_data)
             {
                 super.draw();
                 return;
