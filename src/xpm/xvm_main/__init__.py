@@ -228,6 +228,50 @@ def WaitingViewMeta_fix(base, self, *args):
     except Exception, ex:
         log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
 
+# adding tooltip in hangar for SPG shooting range
+
+def VehicleParamsField_getValue(base, self):
+    try:
+        from gui.shared.utils import ItemsParameters, ParametersCache
+        result = list()
+        vehicle = self._tooltip.item
+        configuration = self._tooltip.context.getParamsConfiguration(vehicle)
+        params = configuration.params
+        crew = configuration.crew
+        eqs = configuration.eqs
+        devices = configuration.devices
+        vehicleCommonParams = dict(ItemsParameters.g_instance.getParameters(vehicle.descriptor))
+        vehicleRawParams = dict(ParametersCache.g_instance.getParameters(vehicle.descriptor))
+        result.append([])
+        if params:
+            for paramName in self.PARAMS.get(vehicle.type, 'default'):
+                if paramName in vehicleCommonParams or paramName in vehicleRawParams:
+                    result[-1].append(self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams))
+        if vehicle.type == 'SPG' and config.config['hangar']['showArtyShootRangeTooltip']:
+            from vehinfo import _getRanges
+            from items import vehicles
+            cur_veh = vehicles.g_cache.vehicle(vehicle.nationID, vehicle.innationID)
+            artyRadius = _getRanges(vehicle.turret.descriptor, vehicle.gun.descriptor, vehicle.nationName, vehicle.type)[2]
+            result[-1].append(['<h1>' + l10n('SPG_shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(artyRadius)+ '</h1>'])
+        result.append([])
+        if crew:
+            currentCrewSize = 0
+            if vehicle.isInInventory:
+                currentCrewSize = len([ x for _, x in vehicle.crew if x is not None ])
+            result[-1].append({'label': 'crew',
+             'current': currentCrewSize,
+             'total': len(vehicle.descriptor.type.crewRoles)})
+        if eqs:
+            result[-1].append({'label': 'equipments',
+             'current': len([ x for x in vehicle.eqs if x ]),
+             'total': len(vehicle.eqs)})
+        if devices:
+            result[-1].append({'label': 'devices',
+             'current': len([ x for x in vehicle.descriptor.optionalDevices if x ]),
+             'total': len(vehicle.descriptor.optionalDevices)})
+        return result
+    except:
+        return base(self)
 
 '''#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
 #    debug('_CustomFilesCache__get')
@@ -327,6 +371,9 @@ def _RegisterEvents():
     from gui.Scaleform.daapi.view.meta.WaitingViewMeta import WaitingViewMeta
     OverrideMethod(WaitingViewMeta, 'showS', WaitingViewMeta_fix)
     OverrideMethod(WaitingViewMeta, 'hideS', WaitingViewMeta_fix)
+
+    from gui.shared.tooltips.vehicle import VehicleParamsField
+    OverrideMethod(VehicleParamsField, '_getValue', VehicleParamsField_getValue)
 
     # import account_helpers.CustomFilesCache as cache
     # cache._MIN_LIFE_TIME = 15

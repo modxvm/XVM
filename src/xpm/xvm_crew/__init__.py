@@ -83,8 +83,12 @@ def PutBestCrew(self):
 def PutClassCrew(self):
     as_xvm_cmd(COMMANDS.PUT_CLASS_CREW)
 
-def PutPreviousCrew(self):
-    wg_compat.g_instance.processReturnCrew()
+def PutPreviousCrew(self, print_message = True):
+    wg_compat.g_instance.processReturnCrew(print_message)
+
+def ClientHangarSpace_PutPreviousCrew(self, vDesc, vState, onVehicleLoadedCallback = None):
+    if config.config['hangar']['autoPutPreviousCrewInTanks']:
+        PutPreviousCrew(self, False)
 
 #####################################################################
 # Register events
@@ -98,5 +102,7 @@ def _RegisterEvents():
     CrewContextMenuHandler.PutBestCrew = PutBestCrew
     CrewContextMenuHandler.PutClassCrew = PutClassCrew
     CrewContextMenuHandler.PutPreviousCrew = PutPreviousCrew
+    from gui.ClientHangarSpace import ClientHangarSpace
+    RegisterEvent(ClientHangarSpace, 'recreateVehicle', ClientHangarSpace_PutPreviousCrew)
 
 BigWorld.callback(0, _RegisterEvents)

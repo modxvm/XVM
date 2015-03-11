@@ -5,14 +5,14 @@ from gui import SystemMessages
 
 class _WGCompat():
 
-    # removed in 0.9.4
-    # taken from gui.Scaleform.daapi.view.lobby.crewOperations.CrewOperationsPopOver
     @decorators.process('crewReturning')
-    def processReturnCrew(self):
+    def processReturnCrew(self, print_message = True):
         from gui.shared.gui_items.processors.tankman import TankmanReturn
         from CurrentVehicle import g_currentVehicle
+        if not g_currentVehicle.isInHangar() or g_currentVehicle.isInBattle() or g_currentVehicle.isLocked():
+            return
         result = yield TankmanReturn(g_currentVehicle.item).request()
-        if len(result.userMsg):
+        if len(result.userMsg) and print_message:
             SystemMessages.g_instance.pushI18nMessage(result.userMsg, type=result.sysMsgType)
 
 g_instance = _WGCompat()

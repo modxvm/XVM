@@ -16,6 +16,12 @@
     // true - Allow to consider the exchange of experience with gold in tech tree
     // true - Разрешить учитывать обмен опыта за голду в дереве исследований
     "allowExchangeXPInTechTree": true,
+    // true - Automatically put previous crew upon vehicle change
+    // true - Автоматически садить предыдущий экипаж при смене танка
+    "autoPutPreviousCrewInTanks": false,
+    // true - Show artillery shooting range in carousel and techtree tooltips
+    // true - Показывать дальность стрельбы артиллерии в всплывающих подсказках карусели и дерева исследований
+    "showArtyShootRangeTooltip": false,
     // true - Enable widgets
     // true - включить виджеты
     "widgetsEnabled": false,

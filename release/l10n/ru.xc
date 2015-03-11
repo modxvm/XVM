@@ -113,6 +113,7 @@
     "view_range/stereoscope": "со стереотрубой",
     "radio_range/base": "базовая",
     "radio_range/actual": "расчетная",
+    "SPG_shootingRadius": "Дальность стрельбы",
     "(sec)": "(сек)",
     "(m)": "(м)",
 
