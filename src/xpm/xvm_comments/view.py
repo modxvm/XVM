@@ -6,6 +6,7 @@ from xfw import *
 from xvm_main.python.logger import *
 
 import contacts
+import wg_compat
 
 class XvmEditContactDataView(ContactEditNoteView):
 
@@ -23,4 +24,5 @@ class XvmEditContactDataView(ContactEditNoteView):
             value.nick = None
         success = contacts.setXvmContactData(self._dbID, {'nick':value.nick,'comment':value.comment})
         if success:
+            wg_compat.refreshContacts()
             self.as_closeViewS()
