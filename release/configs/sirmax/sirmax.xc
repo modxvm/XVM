@@ -39,6 +39,8 @@
     "masteryMarkInTechTree": true,
     "hidePricesInTechTree": true,
     "allowExchangeXPInTechTree": false,
+    "autoPutPreviousCrewInTanks": true,
+    "showShootRangeTooltip": true,
     "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },
