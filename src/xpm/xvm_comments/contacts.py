@@ -48,6 +48,7 @@ class _Contacts:
                 return
 
             if not token.networkServicesSettings['comments']:
+                self.contacts_disabled = True
                 return
 
             if token.isOnline:
@@ -84,11 +85,16 @@ class _Contacts:
     def getXvmContactData(self, uid):
         nick = None
         comment = None
-        if self.cached_data is not None and 'players' in self.cached_data:
+
+        if not self.contacts_disabled and self.cached_data is None:
+            self.initialize()
+
+        if not self.contacts_disabled and self.cached_data is not None and 'players' in self.cached_data:
             data = self.cached_data['players'].get(str(uid), None)
             if data is not None:
                 nick = data.get('nick', None)
                 comment = data.get('comment', None)
+
         return {'nick':nick,'comment':comment}
 
     def setXvmContactData(self, uid, value):
@@ -104,6 +110,7 @@ class _Contacts:
             json_data = simplejson.dumps(self.cached_data)
             #log(json_data)
             self._doRequest('addComments', json_data)
+
             return True
 
         except Exception as ex:

@@ -17,8 +17,6 @@ package xvm.hangar.views
 
     public class BattleLoading extends XvmViewBase
     {
-        //private static const CMD_XVM_COMMENTS_GET_COMMENTS:String = "xvm_comments.get_comments";
-
         public function BattleLoading(view:IView)
         {
             super(view);
@@ -37,30 +35,8 @@ package xvm.hangar.views
 
             logBriefConfigurationInfo();
 
-            //updateComments();
-
             waitInit();
         }
-
-        // TODO: load comments only for players in the current battle
-        /*
-        private function updateComments():void
-        {
-            try
-            {
-                var json_str:String = Xvm.cmd(CMD_XVM_COMMENTS_GET_COMMENTS);
-                //Logger.addObject(json_str);
-                var o:Object = JSONx.parse(json_str);
-                var comments:Object = (o != null && o.hasOwnProperty("players")) ? o.players : null;
-                //Logger.addObject(comments);
-                Macros.RegisterCommentsData(comments);
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
-        }
-        */
 
         private function waitInit():void
         {

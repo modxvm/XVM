@@ -50,35 +50,6 @@ def start():
         None,
         ScopeTemplates.DEFAULT_SCOPE))
 
-_BATTLE_SWF = 'battle.swf'
-_VMM_SWF = 'VehicleMarkersManager.swf'
-_SWFS = [_BATTLE_SWF, _VMM_SWF]
-
-def FlashInit(self, swf, className='Flash', args=None, path=None):
-    self.swf = swf
-    if self.swf in _SWFS:
-        self.addExternalCallback('xvm.cmd', lambda *args: onXvmCommand(self, *args))
-
-def FlashBeforeDelete(self):
-    if self.swf in _SWFS:
-        self.removeExternalCallback('xvm.cmd')
-
-def onXvmCommand(proxy, id, cmd, *args):
-    return # TODO
-#    try:
-#        if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
-#            debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-#        res = None
-#
-#        if cmd == COMMAND_GETCONTACTS:
-#            res = comments.getXvmUserContacts(False)
-#        else:
-#            return
-#
-#        proxy.movie.invoke(('xvm.respond', [id] + res if isinstance(res, list) else [id, res]))
-#    except Exception, ex:
-#        err(traceback.format_exc())
-
 def ContactsListPopover_populate(self):
     #log('ContactsListPopover_populate')
     contacts.initialize()
@@ -111,11 +82,6 @@ def _XvmEditContactData(self):
 
 #####################################################################
 # Register events
-
-# Early registration
-from gui.Scaleform.Flash import Flash
-RegisterEvent(Flash, '__init__', FlashInit)
-RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
 
 # Delayed registration
 def _RegisterEvents():

@@ -188,19 +188,19 @@ class com.xvm.Utils
         return (pos < 0) ? fullplayername : Strings.trim(fullplayername.slice(0, pos));
     }
 
-    public static function GetClanName(fullplayername:String):String
+    public static function GetClanNameWithoutBrackets(fullplayername:String):String
     {
-        var pos = fullplayername.indexOf("[");
+        var pos:Number = fullplayername.indexOf("[");
         if (pos < 0)
-            return "";
-        var n = fullplayername.slice(pos + 1);
+            return null;
+        var n:String = fullplayername.slice(pos + 1);
         return n.slice(0, n.indexOf("]"));
     }
 
     public static function GetClanNameWithBrackets(fullplayername:String):String
     {
-        var clan = GetClanName(fullplayername);
-        return clan ? "[" + clan + "]" : "";
+        var clan:String = GetClanNameWithoutBrackets(fullplayername);
+        return clan ? "[" + clan + "]" : null;
     }
 
     private static var xvmModules: Array = [];

@@ -36,28 +36,12 @@ class com.xvm.Config
             Locale.initializeLanguageFile(lang_str);
             VehicleInfo.onVehicleInfoData(vehInfoData);
 
-            //Cmd.getComments(this, onGetCommentsCallback);
-
             Logger.add("Config: Loaded");
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );
         }
         catch (ex)
         {
             Logger.add("CONFIG LOAD ERROR: " + Utils.parseError(ex));
-        }
-    }
-
-    private function onGetCommentsCallback(json_str:String)
-    {
-        try
-        {
-            var comments:Object = JSONx.parse(json_str).players;
-            //Logger.addObject(comments, 2);
-            Macros.RegisterCommentsData(comments);
-        }
-        catch (ex)
-        {
-            Logger.add("onGetCommentsCallback: ERROR: " + Utils.parseError(ex));
         }
     }
 

@@ -41,6 +41,8 @@ class com.xvm.DataTypes.StatData
         public var maxHealth:Number = NaN;     // max health
         public var turretType:Number = NaN;    // turret type
 
+        public var xvm_contact_data:Object = null;
+
         // calculated
         public var r:Number = NaN;             // global win rate (int)
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
