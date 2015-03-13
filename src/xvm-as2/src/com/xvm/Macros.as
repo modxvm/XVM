@@ -480,13 +480,16 @@ class com.xvm.Macros
                 }
                 if (!isNaN(value))
                 {
-                    var tier:Number = m_globals["battletier"];
+                    var maxHp:Number = m_globals["maxhp"];
+                    res = Math.round(parseInt(norm) * value / maxHp).toString();
+                    /*
                     var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[tier - 1];
                     if (vehId == 65313) // M24 Chaffee Sport
                         maxBattleTierHp = 1000;
                     if (vehId == 64769 || vehId == 64801 || vehId == 65089) // Winter Battle
                         maxBattleTierHp = 5000;
                     res = Math.round(parseInt(norm) * value / maxBattleTierHp).toString();
+                    */
                 }
                 _prepare_value_cache[key] = res;
                 //Logger.add(key + " => " + res);
@@ -624,6 +627,8 @@ class com.xvm.Macros
             //Logger.addObject(vdata);
             if (vdata != null)
             {
+                if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
+                    m_globals["maxhp"] = vdata.hpTop;
                 // {{veh-id}}
                 pdata["veh-id"] = vdata.vid;
                 // {{vehicle}}

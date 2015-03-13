@@ -44,7 +44,7 @@ class com.xvm.Defines
     // Default path to vehicle icons (relative)
     public static var WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
 
-    public static var MAX_BATTLETIER_HPS = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000, 3000];
+    //public static var MAX_BATTLETIER_HPS = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000, 3000];
 
     // Team
     public static var TEAM_ALLY:Number = 1;
