@@ -420,7 +420,8 @@ class Xvm(object):
         if self.vmmFlashObject is None:
             return
 
-        arena = BigWorld.player().arena
+        player = BigWorld.player()
+        arena = player.arena
         arenaVehicle = arena.vehicles.get(vID, None)
         if arenaVehicle is None:
             return
@@ -445,7 +446,12 @@ class Xvm(object):
 
         frags = stat['frags']
 
+        my_frags = 0
+        stat = arena.statistics.get(player.playerVehicleID, None)
+        if stat is not None:
+            my_frags = stat['frags']
+
         #debug('updateVehicleStatus: {0} st={1} fr={2}'.format(vID, status, frags))
-        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags])
+        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags, my_frags])
 
 g_xvm = Xvm()

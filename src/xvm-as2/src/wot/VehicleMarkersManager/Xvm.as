@@ -350,7 +350,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         XVMUpdateStyle();
     }
 
-    function setMarkerStateXvm(targets:Number, vehicleStatus:Number, frags:Number)
+    function setMarkerStateXvm(targets:Number, vehicleStatus:Number, frags:Number, my_frags:Number)
     {
         var needUpdate:Boolean = false;
 
@@ -365,6 +365,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             m_frags = frags;
             needUpdate = true;
         }
+
+        if (Macros.UpdateMyFrags(my_frags))
+            needUpdate = true;
 
         if (needUpdate)
             XVMUpdateStyle();

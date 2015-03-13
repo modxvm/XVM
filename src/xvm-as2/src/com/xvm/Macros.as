@@ -61,6 +61,16 @@ class com.xvm.Macros
         _instance._RegisterMarkerData(pname, data);
     }
 
+    public static function UpdateMyFrags(frags:Number)
+    {
+        if (Macros.s_my_frags == frags)
+            return false;
+        Macros.s_my_frags = frags;
+        return true;
+    }
+
+    public static var s_my_frags:Number = 0;
+
     // PRIVATE
 
     private static var PART_NAME:Number = 0;
@@ -513,19 +523,19 @@ class com.xvm.Macros
     {
         if (!isNaN(value))
             return value;
-        return parseFloat(_Format(null, value, null));
+        return parseFloat(_Format(null, value, {}));
     }
 
     private function _FormatGlobalBooleanValue(value):Boolean
     {
         if (typeof value == "boolean")
             return value;
-        return _Format(null, value, null).toLowerCase() == 'true';
+        return String(_Format(null, value, {})).toLowerCase() == 'true';
     }
 
     private function _FormatGlobalStringValue(value):String
     {
-        return _Format(null, String(value), null);
+        return _Format(null, String(value), {});
     }
 
     /**
@@ -775,31 +785,28 @@ class com.xvm.Macros
 
     private function _RegisterGlobalMacrosData(battleTier:Number, battleType:Number)
     {
-        if (m_globals["xvm-stat"] === undefined)
+        // {{xvm-stat}}
+        m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
+
+        switch (battleType)
         {
-            // {{xvm-stat}}
-            m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
+            case Defines.BATTLE_TYPE_CYBERSPORT:
+                battleTier = 8;
+                break;
+            case Defines.BATTLE_TYPE_REGULAR:
+                break;
+            default:
+                battleTier = 10;
+                break;
         }
 
-        if (m_globals["battletier"] === undefined)
-        {
-            switch (battleType)
-            {
-                case Defines.BATTLE_TYPE_CYBERSPORT:
-                    battleTier = 8;
-                    break;
-                case Defines.BATTLE_TYPE_REGULAR:
-                    break;
-                default:
-                    battleTier = 10;
-                    break;
-            }
+        // {{battletype}}
+        m_globals["battletype"] = Utils.getBattleTypeText(battleType);
+        // {{battletier}}
+        m_globals["battletier"] = battleTier;
 
-            // {{battletype}}
-            m_globals["battletype"] = Utils.getBattleTypeText(battleType);
-            // {{battletier}}
-            m_globals["battletier"] = battleTier;
-        }
+        // {{my-frags}}
+        m_globals["my-frags"] = function(o:Object) { return isNaN(Macros.s_my_frags) || Macros.s_my_frags == 0 ? NaN : Macros.s_my_frags; }
     }
 
     private function _RegisterStatMacros(pname:String, stat:StatData)

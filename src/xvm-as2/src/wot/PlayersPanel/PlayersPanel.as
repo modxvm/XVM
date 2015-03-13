@@ -215,6 +215,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 fixBattleState(item);
 
                 //Logger.addObject(item);
+                if (item.himself)
+                    Macros.UpdateMyFrags(item.frags);
                 Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
                 Cmd.profMethodEnd("PlayersPanel.setData(): #1.0 - register macros");
 

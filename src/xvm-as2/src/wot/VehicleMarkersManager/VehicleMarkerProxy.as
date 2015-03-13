@@ -257,7 +257,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function updateHealth(curHealth:Number, flag:Number, damageType:String):Void
     {
         if (curHealth <= 0)
+        {
             m_dead = true;
+            if (flag == Defines.FROM_PLAYER)
+                Macros.s_my_frags++;
+        }
 
         var curHealthAbsolute:Number = (curHealth < 0 ? 0 : curHealth);
 

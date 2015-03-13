@@ -1,6 +1,7 @@
 ﻿XVM-6.0.2-dev:
   * new option hangar/autoPutPreviousCrewInTanks - automatically put previous crew upon vehicle change in hangar
   * new option hangar/showShootRangeTooltip - show artillery and machine guns shooting range in tooltips
+  * added global macro {{my-frags}}
 
 XVM-6.0.1:
   * added new macro {{battletype}} - current battle type
