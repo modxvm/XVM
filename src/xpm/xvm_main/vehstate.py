@@ -55,7 +55,11 @@ _spotted_cache = {}
 def _updateSpottedStatus(vID, spotted):
     global _spotted_cache
 
-    arenaVehicle = BigWorld.player().arena.vehicles.get(vID, None)
+    arena = getattr(BigWorld.player(), 'arena', None)
+    if arena is None:
+        return
+
+    arenaVehicle = arena.vehicles.get(vID, None)
     if arenaVehicle is None:
         return
 
