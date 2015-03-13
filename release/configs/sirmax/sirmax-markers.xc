@@ -23,6 +23,7 @@
   "ally": {
     "alive": {
       "normal": {
+        //"clanIcon": { "visible": true, "x": 0, "y": -67 },
         "vehicleIcon": {
           "maxScale": 100,
           "color": ${"def.markers.vehicleIconColor"}

@@ -23,6 +23,9 @@ class wot.VehicleMarkersManager.components.ClanIconComponent
 
     public function updateState(state_cfg:Object)
     {
+        if (!Stat.s_loaded)
+            return;
+
         if (m_clanIcon != null && m_clanIcon.source == "")
             return;
 
