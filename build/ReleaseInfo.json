@@ -1,31 +1,31 @@
 ﻿{
     "RU": {
-        "ver": "6.0.1",
+        "ver": "6.0.2",
         "wot": "0.9.6",
         "message": "  * WoT 0.9.6\n  * новые возможности\n  * исправлены ошибки"
     },
     "EU": {
-        "ver": "6.0.1",
+        "ver": "6.0.2",
         "wot": "0.9.6",
         "message": "  * WoT 0.9.6\n  * new features\n  * bugs fixed"
     },
     "US": {
-        "ver": "6.0.1",
+        "ver": "6.0.2",
         "wot": "0.9.6",
         "message": "  * WoT 0.9.6\n  * new features\n  * bugs fixed"
     },
     "SEA": {
-        "ver": "6.0.1",
+        "ver": "6.0.2",
         "wot": "0.9.6",
         "message": "  * WoT 0.9.6\n  * new features\n  * bugs fixed"
     },
     "VTC": {
-        "ver": "6.0.1",
+        "ver": "6.0.2",
         "wot": "0.9.6",
         "message": "  * WoT 0.9.6\n  * new features\n  * bugs fixed"
     },
     "CT":  {
-        "ver": "6.0.1",
+        "ver": "6.0.2",
         "wot": "0.9.6",
         "message": "  * WoT 0.9.6\n  * new features\n  * bugs fixed"
     }
