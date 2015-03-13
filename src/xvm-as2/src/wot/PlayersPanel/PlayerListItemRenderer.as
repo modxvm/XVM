@@ -48,6 +48,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    public static var MENU_MC_NAME = "menu_mc";
+
     private static var TF_DEFAULT_WIDTH = 300;
     private static var TF_DEFAULT_HEIGHT = 25;
 
@@ -217,7 +219,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             var depth:Number = -16377; // the only one free depth for panels
             _root["extraPanels"] = _root.createEmptyMovieClip("extraPanels", depth);
-            createMouseHandler();
+            createMouseHandler(_root["extraPanels"]);
         }
         return _root["extraPanels"];
     }
@@ -308,10 +310,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         if (cfg_xf.formats != null && cfg_xf.formats.length > 0)
         {
-            var menu_mc:Button = UIComponent.createInstance(mc, "HiddenButton", "menu_mc", mc.getNextHighestDepth(), {
+            var menu_mc:UIComponent = UIComponent.createInstance(mc, "HiddenButton", MENU_MC_NAME, mc.getNextHighestDepth(), {
                 _x: isLeftPanel ? 0 : -cfg_xf.width,
-                width:cfg_xf.width,
-                height:cfg_xf.height,
+                width: cfg_xf.width,
+                height: cfg_xf.height,
                 panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
                 owner: this } );
             menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
@@ -357,7 +359,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             extraFieldsConfigured = true;
 
             // remove old text fields
-            Utils.removeChildren(extraFields.none);
+            Utils.removeChildren(extraFields.none, function(mc:MovieClip) { return mc._name != PlayerListItemRenderer.MENU_MC_NAME; } );
             Utils.removeChildren(extraFields.short);
             Utils.removeChildren(extraFields.medium);
             Utils.removeChildren(extraFields.medium2);
@@ -867,7 +869,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
     }
 
-    private static function createMouseHandler():Void
+    private static function createMouseHandler(extraPanels:MovieClip):Void
     {
         var mouseHandler:Object = new Object();
         Mouse.addListener(mouseHandler);
@@ -877,14 +879,16 @@ class wot.PlayersPanel.PlayerListItemRenderer
             if (_root["leftPanel"].state != net.wargaming.ingame.PlayersPanel.STATES.none.name)
                 return;
 
-            var extraPanels:MovieClip = _root["extraPanels"];
+            if (!_root.g_cursorVisible)
+                return;
+
             var t = null;
             for (var n in extraPanels)
             {
                 var a:MovieClip = extraPanels[n];
                 if (a == null)
                     continue;
-                var b:MovieClip = a["menu_mc"];
+                var b:MovieClip = a[PlayerListItemRenderer.MENU_MC_NAME];
                 if (b == null)
                     continue;
                 if (b.hitTest(_root._xmouse, _root._ymouse, true))
@@ -902,18 +906,15 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
             if (button == Mouse.RIGHT)
             {
-                if (_root.g_cursorVisible)
-                {
-                    var xmlKeyConverter = new net.wargaming.managers.XMLKeyConverter();
-                    net.wargaming.ingame.MinimapEntry.unhighlightLastEntry();
-                    var ignored = net.wargaming.messenger.MessengerUtils.isIgnored(data);
-                    net.wargaming.ingame.BattleContextMenuHandler.showMenu(extraPanels, data, [
-                        [ { id: net.wargaming.messenger.MessengerUtils.isFriend(data) ? "removeFromFriends" : "addToFriends", disabled: !data.isEnabledInRoaming } ],
-                        [ ignored ? "removeFromIgnored" : "addToIgnored" ],
-                        t.panel.getDenunciationsSubmenu(xmlKeyConverter, data.denunciations, data.squad),
-                        [ !ignored && _global.wg_isShowVoiceChat ? (net.wargaming.messenger.MessengerUtils.isMuted(data) ? "unsetMuted" : "setMuted") : null ]
-                        ]);
-                }
+                var xmlKeyConverter = new net.wargaming.managers.XMLKeyConverter();
+                net.wargaming.ingame.MinimapEntry.unhighlightLastEntry();
+                var ignored = net.wargaming.messenger.MessengerUtils.isIgnored(data);
+                net.wargaming.ingame.BattleContextMenuHandler.showMenu(extraPanels, data, [
+                    [ { id: net.wargaming.messenger.MessengerUtils.isFriend(data) ? "removeFromFriends" : "addToFriends", disabled: !data.isEnabledInRoaming } ],
+                    [ ignored ? "removeFromIgnored" : "addToIgnored" ],
+                    t.panel.getDenunciationsSubmenu(xmlKeyConverter, data.denunciations, data.squad),
+                    [ !ignored && _global.wg_isShowVoiceChat ? (net.wargaming.messenger.MessengerUtils.isMuted(data) ? "unsetMuted" : "setMuted") : null ]
+                    ]);
             }
             else if (!net.wargaming.ingame.BattleContextMenuHandler.hitTestToCurrentMenu())
             {

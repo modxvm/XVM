@@ -255,12 +255,19 @@ class com.xvm.Utils
         return result;
     }
 
-    public static function removeChildren(mc:MovieClip):Void
+    public static function removeChildren(mc:MovieClip, match:Function):Void
     {
         var children:Array = getChildrenOf(mc, false);
         var len:Number = children.length;
         for (var i:Number = 0; i < len; ++i)
-            MovieClip(children[i]).removeMovieClip();
+        {
+            var child:MovieClip = MovieClip(children[i]);
+            if (child == null)
+                continue;
+            if (match != null && !match(child))
+                continue
+            child.removeMovieClip();
+        }
     }
 
     /**
