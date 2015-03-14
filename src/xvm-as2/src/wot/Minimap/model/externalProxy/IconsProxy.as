@@ -38,7 +38,6 @@ class wot.Minimap.model.externalProxy.IconsProxy
     /** Looks like white arrow */
     public static function get selfEntry():MinimapEntry
     {
-        //Logger.addObject(_icons);
         return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(MinimapConstants.SELF_ZINDEX)).xvm_worker;
     }
 
