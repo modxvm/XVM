@@ -17,4 +17,4 @@ def runTest(args):
 
 def _showBattleResults(arenaUniqueID):
     from gui.shared import event_dispatcher as shared_events
-    shared_events.showBattleResults(arenaUniqueID)
+    shared_events.showMyBattleResults(arenaUniqueID)
