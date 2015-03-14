@@ -5,11 +5,11 @@ package xvm.quests
     import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.components.controls.*;
+    import net.wg.gui.events.*;
     import net.wg.gui.lobby.quests.data.*;
     import net.wg.gui.lobby.quests.data.questsTileChains.*;
     import net.wg.gui.lobby.quests.events.*;
     import org.idmedia.as3commons.util.*;
-    import net.wg.gui.events.*;
 
     public dynamic class UI_QuestsTileChainsView extends QuestsTileChainsViewUI
     {

@@ -6,20 +6,15 @@ package xvm.autologin
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import flash.display.*;
     import flash.ui.*;
     import flash.utils.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.intro.*;
-    import net.wg.gui.lobby.dialogs.*;
     import net.wg.gui.login.impl.*;
     import net.wg.gui.login.impl.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
     import scaleform.clik.events.*;
     import scaleform.clik.ui.*;
 

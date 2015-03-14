@@ -2,10 +2,8 @@ package xvm.hangar.components.BattleResults
 {
     import com.xvm.*;
     import com.xvm.misc.*;
-    import com.xvm.types.stat.StatData;
-    import com.xvm.types.veh.VehicleData;
+    import com.xvm.types.stat.*;
     import com.xvm.utils.*;
-    import flash.display.Sprite;
     import flash.text.*;
     import net.wg.gui.lobby.battleResults.*;
 

@@ -1,14 +1,9 @@
 package xvm.profile.components
 {
     import com.xvm.*;
-    import com.xvm.events.*;
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
-    import com.xvm.types.stat.*;
-    import flash.events.*;
     import flash.text.*;
-    import flash.utils.*;
-    import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
 
     public class ProfileTechniqueRenderer

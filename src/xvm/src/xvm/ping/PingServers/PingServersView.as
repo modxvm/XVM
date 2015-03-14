@@ -1,13 +1,11 @@
 package xvm.ping.PingServers
 {
     import com.xvm.*;
-    import com.xvm.types.cfg.*;
     import com.xvm.events.*;
+    import com.xvm.types.cfg.*;
     import com.xvm.utils.*;
-    import flash.display.*;
     import flash.text.*;
-    import flash.filters.*;
-    import scaleform.clik.core.UIComponent;
+    import scaleform.clik.core.*;
 
     public class PingServersView extends UIComponent
     {

@@ -6,7 +6,7 @@ package xvm.crew
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import net.wg.gui.lobby.hangar.Hangar;
+    import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
 

@@ -1,13 +1,10 @@
 package xvm.ping.PingServers
 {
-    import com.xvm.types.cfg.*;
     import com.xvm.*;
     import com.xvm.events.*;
-    import com.xvm.io.*;
     import flash.events.*;
     import flash.utils.*;
-    import flash.external.ExternalInterface;
-    import org.idmedia.as3commons.util.StringUtils;
+    import org.idmedia.as3commons.util.*;
 
     public class PingServers extends EventDispatcher
     {

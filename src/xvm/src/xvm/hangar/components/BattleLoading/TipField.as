@@ -1,9 +1,8 @@
 package xvm.hangar.components.BattleLoading
 {
     import com.xvm.*;
-    import com.xvm.utils.*;
     import flash.text.*;
-    import net.wg.gui.lobby.battleloading.BattleLoading;
+    import net.wg.gui.lobby.battleloading.*;
 
     public class TipField
     {

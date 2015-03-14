@@ -8,7 +8,6 @@ package xvm.svcmsg
     import com.xvm.io.*;
     import com.xvm.infrastructure.*;
     import flash.events.*;
-    import net.wg.data.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.notification.*;
     import net.wg.gui.notification.vo.*;

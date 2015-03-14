@@ -7,18 +7,12 @@ package xvm.crew
 {
     import com.xvm.*;
     import com.xvm.events.*;
-    import com.xvm.io.*;
-    import com.xvm.utils.*;
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.data.components.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.data.VO.*;
-    import net.wg.gui.events.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.crew.*;
-    import net.wg.infrastructure.interfaces.*;
 
     public class CrewLoader extends Sprite
     {

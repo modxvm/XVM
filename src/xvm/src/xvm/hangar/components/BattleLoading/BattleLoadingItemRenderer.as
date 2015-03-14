@@ -2,18 +2,17 @@ package xvm.hangar.components.BattleLoading
 {
     import com.xvm.*;
     import com.xvm.types.*;
-    import com.xvm.types.stat.StatData;
-    import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
+    import com.xvm.utils.*;
     import flash.events.*;
     import flash.geom.*;
     import flash.text.*;
-    import flash.utils.*;
-    import net.wg.gui.lobby.battleloading.vo.*;
-    import scaleform.gfx.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.battleloading.*;
+    import net.wg.gui.lobby.battleloading.vo.*;
+    import scaleform.gfx.*;
     import xvm.hangar.components.ClanIcon.*;
     import xvm.hangar.UI.battleLoading.*;
 

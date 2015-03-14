@@ -1,11 +1,9 @@
 package xvm.hangar.components.BattleLoading
 {
-    import flash.display.Sprite;
-    import flash.text.*;
-    import net.wg.gui.lobby.battleloading.BattleLoading;
     import com.xvm.*;
     import com.xvm.misc.*;
     import com.xvm.utils.*;
+    import net.wg.gui.lobby.battleloading.*;
 
     public class WinChances
     {

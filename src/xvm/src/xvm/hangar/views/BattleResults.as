@@ -7,13 +7,11 @@ package xvm.hangar.views
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.events.ViewStackEvent;
+    import net.wg.gui.events.*;
     import net.wg.gui.lobby.battleResults.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.events.IndexEvent;
+    import scaleform.clik.events.*;
     import xvm.hangar.components.BattleResults.*;
 
     public class BattleResults extends XvmViewBase
