@@ -9,6 +9,7 @@ import com.xvm.DataTypes.*;
 import com.xvm.events.*;
 import flash.external.*;
 import gfx.io.*;
+import net.wargaming.managers.*;
 import wot.battle.*;
 
 class wot.battle.BattleMain
@@ -16,7 +17,7 @@ class wot.battle.BattleMain
     static var instance: BattleMain;
     var sixthSenseIndicator:SixthSenseIndicator;
 
-    private static var soundManager = new net.wargaming.managers.SoundManager();
+    private static var soundManager = new SoundManager();
 
     static function main()
     {
@@ -26,13 +27,13 @@ class wot.battle.BattleMain
         _global.gfxExtensions = true;
         _global.noInvisibleAdvance = true;
 
-        ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, BattleMainConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
-
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
         TweenPlugin.activate([TintPlugin]);
+
+        ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, BattleMainConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
 
         instance = new BattleMain();
         GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
@@ -86,18 +87,19 @@ class wot.battle.BattleMain
             _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
     }
 
-    function onUpdateStage(width, height)
+    function onUpdateStage(width, height, scale)
     {
-        _root.onUpdateStage(width, height);
+        _root.onUpdateStage(width, height, scale);
         Elements.width = width;
         Elements.height = height;
+        Elements.scale = scale;
         Elements.SetupElements();
 
         fixMinimapSize();
 
-        BattleState.setScreenSize(width, height);
-        //Logger.add("update stage: " + width + "," + height);
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height });
+        BattleState.setScreenSize(width, height, scale);
+        //Logger.add("update stage: " + width + "," + height + "," + scale);
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height, scale: scale });
     }
 
     function addOptionalDeviceSlot(idx, timeRemaining, deviceIconPath, tooltipText)

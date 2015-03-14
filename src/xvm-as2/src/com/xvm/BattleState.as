@@ -51,9 +51,10 @@ class com.xvm.BattleState
         return _screenSize;
     }
 
-    public static function setScreenSize(width:Number, height:Number):Void
+    public static function setScreenSize(width:Number, height:Number, scale:Number):Void
     {
         _screenSize.width = width;
         _screenSize.height = height;
+        _screenSize.scale = scale;
     }
 }
