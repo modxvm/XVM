@@ -28,10 +28,10 @@ import vehstate
 from websock import g_websock
 from xvm import g_xvm
 
-_APPLICATION_SWF = 'Application.swf'
+_LOBBY_SWF = 'lobby.swf'
 _BATTLE_SWF = 'battle.swf'
 _VMM_SWF = 'VehicleMarkersManager.swf'
-_SWFS = [_APPLICATION_SWF, _BATTLE_SWF, _VMM_SWF]
+_SWFS = [_LOBBY_SWF, _BATTLE_SWF, _VMM_SWF]
 
 
 #####################################################################
@@ -68,9 +68,9 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
         return
     log("FlashInit: " + self.swf)
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
-    if self.swf == _APPLICATION_SWF:
+    if self.swf == _LOBBY_SWF:
         g_xvm.app = self
-        g_xvm.initApplication()
+        g_xvm.initLobby()
     if self.swf == _BATTLE_SWF:
         g_xvm.battleFlashObject = self
         g_xvm.initBattle()
@@ -83,8 +83,8 @@ def FlashBeforeDelete(self):
         return
     log("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
-    if self.swf == _APPLICATION_SWF:
-        g_xvm.deleteApplication()
+    if self.swf == _LOBBY_SWF:
+        g_xvm.deleteLobby()
         g_xvm.app = None
     if self.swf == _BATTLE_SWF:
         g_xvm.battleFlashObject = None

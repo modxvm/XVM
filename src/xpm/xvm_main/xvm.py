@@ -184,10 +184,10 @@ class Xvm(object):
 
         return False
 
-    def initApplication(self):
+    def initLobby(self):
         pass
 
-    def deleteApplication(self):
+    def deleteLobby(self):
         self.hangarDispose()
         if self.app is not None and self.app.loaderManager is not None:
             self.app.loaderManager.onViewLoaded -= self.onViewLoaded

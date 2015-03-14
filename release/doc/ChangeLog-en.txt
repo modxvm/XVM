@@ -1,4 +1,7 @@
-﻿XVM-6.0.2:
+﻿XVM-6.1.0-dev:
+  * adaptation to WoT 0.9.7
+
+XVM-6.0.2:
   * new option hangar/autoPutPreviousCrewInTanks - automatically put previous crew upon vehicle change in hangar
   * new option hangar/showShootRangeTooltip - show artillery and machine guns shooting range in tooltips
   * added global macro {{my-frags}}
