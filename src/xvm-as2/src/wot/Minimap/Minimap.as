@@ -93,7 +93,6 @@ class wot.Minimap.Minimap
 
     private function onConfigLoaded()
     {
-        //Logger.add("onConfigLoaded");
         if (MapConfig.enabled)
         {
             if (Config.config.minimapAlt.enabled)
