@@ -228,8 +228,7 @@ def WaitingViewMeta_fix(base, self, *args):
     except Exception, ex:
         log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
 
-# adding tooltip in hangar for SPG shooting range
-
+# adding tooltip in hangar for shooting range of SPG/machine guns
 def VehicleParamsField_getValue(base, self):
     try:
         from gui.shared.utils import ItemsParameters, ParametersCache
@@ -247,16 +246,12 @@ def VehicleParamsField_getValue(base, self):
             for paramName in self.PARAMS.get(vehicle.type, 'default'):
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:
                     result[-1].append(self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams))
-        if config.config['hangar']['showShootRangeTooltip']:
-            from vehinfo import _getRanges
-            from items import vehicles
-            cur_veh = vehicles.g_cache.vehicle(vehicle.nationID, vehicle.innationID)
-            (viewRange, shellRadius, artiRadius) = _getRanges(vehicle.turret.descriptor, vehicle.gun.descriptor, vehicle.nationName, vehicle.type)
-            if vehicle.type == 'SPG':   # arti
-                result[-1].append(['<h1>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(artiRadius)+ '</h1>'])
-            else:                       # not arti
-                if shellRadius < 707: # short range weapons
-                    result[-1].append(['<h1>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(shellRadius)+ '</h1>'])
+        from vehinfo import _getRanges
+        (viewRange, shellRadius, artiRadius) = _getRanges(vehicle.turret.descriptor, vehicle.gun.descriptor, vehicle.nationName, vehicle.type)
+        if vehicle.type == 'SPG':   # arti
+            result[-1].append(['<h1>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(artiRadius)+ '</h1>'])
+        elif shellRadius < 707:     # not arti, short range weapons
+            result[-1].append(['<h1>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(shellRadius)+ '</h1>'])
         result.append([])
         if crew:
             currentCrewSize = 0
@@ -274,7 +269,8 @@ def VehicleParamsField_getValue(base, self):
              'current': len([ x for x in vehicle.descriptor.optionalDevices if x ]),
              'total': len(vehicle.descriptor.optionalDevices)})
         return result
-    except:
+    except Exception, ex:
+        err(traceback.format_exc())
         return base(self)
 
 '''#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
