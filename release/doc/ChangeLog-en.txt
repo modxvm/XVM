@@ -3,7 +3,10 @@
 
 XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
-  * macro {{rating}} renamed to {{winrate}}
+  * macros renamed:
+      {{rating}} => {{winrate}}
+      {{t-rating}} => {{t-winrate}}
+  * colors and alpha sections renamed: "rating" => "winrate"
 
 XVM-6.0.2:
   * new option hangar/autoPutPreviousCrewInTanks - automatically put previous crew upon vehicle change in hangar
