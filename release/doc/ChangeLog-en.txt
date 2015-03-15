@@ -1,4 +1,4 @@
-﻿XVM-6.0.3-dev:
+﻿XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
   * macro {{rating}} renamed to {{winrate}}
 

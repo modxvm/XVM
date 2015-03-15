@@ -138,9 +138,9 @@
     1. Отобразить количество кило-боев, эффективность и процент побед без изменения цвета:
       "{{kb}} {{xwn8}} {{winrate}}"
     2. То же самое, но раскрасить каждое число в зависимости от его значения:
-      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{winrate}}%</font>"
+      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:winrate}}'>{{winrate}}%</font>"
     3. То же, что и 2, но с выравниванием колонок:
-      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb%2d}}k</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d}}%</font></font>"
+      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb%2d}}k</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:winrate}}'>{{rating%2d}}%</font></font>"
     4. Отобразить процент побед, подкрашенный в зависимости от рейтинга WN8:
       "<font color='{{c:xwn8}}'>{{winrate}}</font>"
 

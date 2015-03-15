@@ -125,7 +125,7 @@ Legend:
 │ S │ {{c:wn6}}       │ X │ X │ X │ X │ X │ color depending on WN6 rating
 │ S │ {{c:wn8}}       │ X │ X │ X │ X │ X │ color depending on WN8 rating
 │ S │ {{c:wgr}}       │ X │ X │ X │ X │ X │ color depending on WG rating
-│ S │ {{c:rating}}    │ X │ X │ X │ X │ X │ color depending on GWR
+│ S │ {{c:winrate}}   │ X │ X │ X │ X │ X │ color depending on GWR
 │ S │ {{c:kb}}        │ X │ X │ X │ X │ X │ color depending on kilo-battles
 │ S │ {{c:avglvl}}    │ X │ X │ X │ X │ X │ color depending on average level of tanks
 │ S │ {{c:t-rating}}  │ X │ X │ X │ X │ X │ color depending on current vehicle win ratio

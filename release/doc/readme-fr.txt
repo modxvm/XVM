@@ -238,7 +238,7 @@
       {{c:wn}}        - couleur en fonction du classement WN8
       {{c:xeff}}      - couleur en fonction de l'XVM Scale pour l'ER
       {{c:xwn}}       - couleur en fonction de l'XVM Scale pour le WN8
-      {{c:rating}}    - couleur en fonction du GWR
+      {{c:winrate}}   - couleur en fonction du GWR
       {{c:kb}}        - couleur en fonction du nombre de kilo-batailles
       {{c:avglvl}}    - couleur en fonction du tier moyen des tanks joués
       {{c:t-rating}}  - couleur en fonction du % de victoire du tank actuel
@@ -289,9 +289,9 @@
     1. Affiche le nombre de kilo-batailles, l'échelle d'efficacité et le % de victoires sans changer de couleur :
       "{{kb}} {{xwn}} {{winrate}}"
     2. La même chose avec chaque valeur et sa couleur correspondante :
-      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{winrate}}</font>"
+      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:winrate}}'>{{winrate}}</font>"
     3. Encore la même chose, mais avec des colonnes alignées :
-      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:winrate}}'>{{rating:3}}</font></font>"
     4. Affiche le % de victoires colorisé par le xwn:
       "<font color='{{c:xwn}}'>{{winrate}}</font>"
 

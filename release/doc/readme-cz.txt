@@ -237,7 +237,7 @@
       {{c:wn}}        - barva závislá na WN6 hodnocení
       {{c:xeff}}      - barva závislá na XVM rozsah pro efektivitu
       {{c:xwn}}       - barva závislá na XVM rozsah pro WN6
-      {{c:rating}}    - barva závislá na poměru celkového počtu výher k celkovému počtu bitev
+      {{c:winrate}}   - barva závislá na poměru celkového počtu výher k celkovému počtu bitev
       {{c:kb}}        - barva závislá na celkovém počtu bitev v tisících
       {{c:t-rating}}  - barva závislá na poměru výher daného vozidla
       {{c:t-battles}} - barva závislá na počtu bitev daného vozidla
@@ -265,10 +265,10 @@
         "{{kb}} {{xvm}} {{winrate}}"
 
     b.  To samé co příklad 'a', ale s různou barvou textu podle hodnoty:
-        "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{winrate}}</font>"
+        "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:winrate}}'>{{winrate}}</font>"
 
     c.  To samé co příklad 'b', ale se zaokrouhlenými hodnotami:
-        "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+        "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:winrate}}'>{{rating:3}}</font></font>"
 
     d.  Zobrazení poměru celkového počtu výher k celkovému počtu bitev s barvou textu závislou na xwn:
         "<font color='{{c:xwn}}'>{{winrate}}</font>"
