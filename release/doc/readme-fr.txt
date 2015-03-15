@@ -212,7 +212,7 @@
       {{wn}}          - classement WN8 : http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - XVM Scale pour l'ER (de 00 à 99, XX pour les tops serveur)
       {{xwn}}         - XVM Scale pour le WN8 (de 00 à 99, XX pour les tops serveur)
-      {{rating}}      - GWR (Global Win Ratio) = % de victoire global du joueur
+      {{winrate}}     - GWR (Global Win Ratio) = % de victoire global du joueur
       {{rating:3}}    - GWR aligné à gauche sur 3 caractères
       {{battles}}     - nombre total de batailles
       {{wins}}        - nombre total de victoires
@@ -287,13 +287,13 @@
 
   Exemple du champ "format" :
     1. Affiche le nombre de kilo-batailles, l'échelle d'efficacité et le % de victoires sans changer de couleur :
-      "{{kb}} {{xwn}} {{rating}}"
+      "{{kb}} {{xwn}} {{winrate}}"
     2. La même chose avec chaque valeur et sa couleur correspondante :
-      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{winrate}}</font>"
     3. Encore la même chose, mais avec des colonnes alignées :
       "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
     4. Affiche le % de victoires colorisé par le xwn:
-      "<font color='{{c:xwn}}'>{{rating}}</font>"
+      "<font color='{{c:xwn}}'>{{winrate}}</font>"
 
   Exemple d'utilisation des couleurs dynamiques et de la transparence :
     "color": "{{c:xwn}}" - couleur dépendant de la macro xwn

@@ -867,8 +867,10 @@ class com.xvm.Macros
         // {{wgr}}
         pdata["wgr"] = stat.wgr;
 
-        // {{rating}}
-        pdata["rating"] = stat.r;
+        // {{winrate}}
+        pdata["winrate"] = stat.r;
+        // {{rating}} (obsolete)
+        pdata["rating"] = pdata["winrate"];
         // {{battles}}
         pdata["battles"] = stat.b;
         // {{wins}}

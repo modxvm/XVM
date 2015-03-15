@@ -92,6 +92,7 @@ Legend:
 │S/D│ macro           │ BL│ PP│ SF│ MM│ VM│ Description
 ├───┼─────────────────┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────────────
 │ S │ {{avglvl}}      │ X │ X │ X │ X │ X │ average level (tier) of tanks
+│ S │ {{r}}           │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
 │ S │ {{e}}           │ X │ X │ X │ X │ X │ player per-vehicle efficiency (0-9, X for Tops)
 │ S │ {{teff}}        │ X │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
 │ S │ {{xeff}}        │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
@@ -102,7 +103,7 @@ Legend:
 │ S │ {{wn6}}         │ X │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/13388-
 │ S │ {{wn8}}         │ X │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/13434-
 │ S │ {{wgr}}         │ X │ X │ X │ X │ X │ WG rating:  http://www.koreanrandom.com/forum/topic/13433-
-│ S │ {{rating}}      │ X │ X │ X │ X │ X │ GWR (Global Win Ratio)
+│ S │ {{winrate}}     │ X │ X │ X │ X │ X │ GWR (Global Win Ratio)
 │ S │ {{battles}}     │ X │ X │ X │ X │ X │ total battles count
 │ S │ {{wins}}        │ X │ X │ X │ X │ X │ total wins count
 │ S │ {{kb}}          │ X │ X │ X │ X │ X │ number of kilo-battles (total battles count divided by 1000)

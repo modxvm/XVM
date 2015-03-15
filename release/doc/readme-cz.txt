@@ -211,7 +211,7 @@
       {{wn}}          - WN6 hodnocení: http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - XVM rozsah pro efektivitu (hodnoty 00-99, XX pro nejlepší)
       {{xwn}}         - XVM rozsah pro WN6 (hodnoty 00-99, XX pro nejlepší)
-      {{rating}}      - celkový poměr výher k celkovému počtu bitev
+      {{winrate}}     - celkový poměr výher k celkovému počtu bitev
       {{rating:3}}    - celkový poměr výher k celkovému počtu bitev, zaokrouhlený na 3 místa zleva
       {{battles}}     - celkový počet bitev
       {{wins}}        - celkový počet výher
@@ -262,16 +262,16 @@
   Příklady:
 
     a.  Zobrazení počtu bitev v tisících, efektivity hráče a celkového poměru výher bez změny barev:
-        "{{kb}} {{xvm}} {{rating}}"
+        "{{kb}} {{xvm}} {{winrate}}"
 
     b.  To samé co příklad 'a', ale s různou barvou textu podle hodnoty:
-        "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+        "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{winrate}}</font>"
 
     c.  To samé co příklad 'b', ale se zaokrouhlenými hodnotami:
         "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
 
     d.  Zobrazení poměru celkového počtu výher k celkovému počtu bitev s barvou textu závislou na xwn:
-        "<font color='{{c:xwn}}'>{{rating}}</font>"
+        "<font color='{{c:xwn}}'>{{winrate}}</font>"
 
     Příklad použití dynamické změny barvy a průhlednosti:
         "color": "{{c:xwn}}" - barva závislá na xwn
