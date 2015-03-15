@@ -112,7 +112,7 @@
     ],
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед
-    "rating": [
+    "winrate": [
       { "value": 47,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 49,  "alpha": ${"alphaRating.bad"      } },
       { "value": 52,  "alpha": ${"alphaRating.normal"   } },

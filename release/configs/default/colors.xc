@@ -277,7 +277,7 @@
     ],
     // Dynamic color by win percent
     // Динамический цвет по проценту побед
-    "rating": [
+    "winrate": [
       { "value": 46.5, "color": ${"def.colorRating.very_bad" } },   //  0   - 46.5  - very bad   (20% of players)
       { "value": 48.5, "color": ${"def.colorRating.bad"      } },   // 46.5 - 48.5  - bad        (better then 20% of players)
       { "value": 51.5, "color": ${"def.colorRating.normal"   } },   // 48.5 - 51.5  - normal     (better then 60% of players)
