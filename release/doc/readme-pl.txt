@@ -216,7 +216,7 @@ Zawartość:
       {{xeff}}        - Skala XVM dla "efficiency" (wartości 00-99)
       {{xwn6}}        - Skala XVM dla WN6 (wartości 00-99)
       {{xwn8}}        - Skala XVM dla WN8 (wartości 00-99)
-      {{rating}}      - GWR (Global Win Ratio)
+      {{winrate}}     - GWR (Global Win Ratio)
       {{rating:3}}    - GWR zaokrąglone do 3 liczb z lewej
       {{battles}}     - Całkowita liczba bitw
       {{wins}}        - Całkowita liczba wygranych bitw
@@ -244,7 +244,7 @@ Zawartość:
       {{c:xeff}}      - Kolor zależny od skali XVM dla "efficiency"
       {{c:xwn6}}      - Kolor zależny od skali XVM dla WN6
       {{c:xwn8}}      - Kolor zależny od skali XVM dla WN8    
-      {{c:rating}}    - Kolor zależny od GWR
+      {{c:winrate}}   - Kolor zależny od GWR
       {{c:kb}}        - Kolor zależny od kilo-bitw
       {{c:avglvl}}    - Kolor zależny od przeciętnego poziomu pojazdów  
       {{c:t-rating}}  - Kolor zależny od aktualnej wartości wygranych
@@ -288,13 +288,13 @@ Zawartość:
 
   Przykłady formatów:
     1. Pokaż liczbę kilo-bitw, "efficiency" i GWR bez zmiany koloru:
-      "{{kb}} {{xwn}} {{rating}}"
+      "{{kb}} {{xwn}} {{winrate}}"
     2. To samo, tylko z przypisanymi kolorami według typu:
-      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:winrate}}'>{{winrate}}</font>"
     3. To samo co numer 2, tylko z przypisanymi kolumnami:
-      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:winrate}}'>{{rating:3}}</font></font>"
     4. Pokaż kolor GWR według XVM:
-      "<font color='{{c:xwn}}'>{{rating}}</font>"
+      "<font color='{{c:xwn}}'>{{winrate}}</font>"
 
   Przykłady koloru i przezroczystości:
     "color": "{{c:xwn}}" - kolor zależny od xvm

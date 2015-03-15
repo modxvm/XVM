@@ -1,9 +1,12 @@
 ﻿XVM-6.1.0-dev:
   * adaptation to WoT 0.9.7
 
+XVM-6.0.3:
+  * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+  * macro {{rating}} renamed to {{winrate}}
+
 XVM-6.0.2:
   * new option hangar/autoPutPreviousCrewInTanks - automatically put previous crew upon vehicle change in hangar
-  * new option hangar/showShootRangeTooltip - show artillery and machine guns shooting range in tooltips
   * added global macro {{my-frags}}
 
 XVM-6.0.1:

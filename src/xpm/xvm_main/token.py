@@ -73,6 +73,8 @@ def _makeNetworkServicesSettings(tdata):
         'chance': svc.get('chance', False),
         'chanceLive': svc.get('chanceLive', False),
         'topClansCount': svc.get('topClansCount', 100),
+        'scale': svc.get('scale', 'xvm'),
+        'rating': svc.get('rating', 'wgr'),
     }
 
 networkServicesSettings = _makeNetworkServicesSettings(None)

@@ -134,13 +134,13 @@
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:
-      "{{kb}} {{xwn8}} {{rating}}"
+      "{{kb}} {{xwn8}} {{winrate}}"
     2. The same but with each number colored by its value:
-      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating}}%</font>"
+      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:winrate}}'>{{winrate}}%</font>"
     3. Same as 2, but with aligned columns:
-      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb%2d}}k</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d}}%</font></font>"
+      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb%2d}}k</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:winrate}}'>{{rating%2d}}%</font></font>"
     4. Show GWR colored by xwn:
-      "<font color='{{c:xwn8}}'>{{rating}}</font>"
+      "<font color='{{c:xwn8}}'>{{winrate}}</font>"
 
   Dynamic color and transparency usage examples:
     "color": "{{c:xwn8}}" - color depending on XVM Scale for WN8
