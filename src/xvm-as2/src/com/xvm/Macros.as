@@ -880,8 +880,10 @@ class com.xvm.Macros
         // {{kb}}
         pdata["kb"] = stat.b / 1000;
 
-        // {{t-rating}}
-        pdata["t-rating"] = stat.v.r;
+        // {{t-winrate}}
+        pdata["t-winrate"] = stat.v.r;
+        // {{t-rating}} (obsolete)
+        pdata["t-rating"] = pdata["t-winrate"];
         // {{t-battles}}
         pdata["t-battles"] = stat.v.b;
         // {{t-wins}}
@@ -949,9 +951,12 @@ class com.xvm.Macros
         // {{c:avglvl}}
         pdata["c:avglvl"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", false);
         pdata["c:avglvl#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", true);
-        // {{c:t-rating}}
-        pdata["c:t-rating"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#", false);
-        pdata["c:t-rating#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#", true);
+        // {{c:t-winrate}}
+        pdata["c:t-winrate"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#", false);
+        pdata["c:t-winrate#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#", true);
+        // {{c:t-rating}} (obsolete)
+        pdata["c:t-rating"] =   pdata["c:t-winrate"];
+        pdata["c:t-rating#d"] = pdata["c:t-winrate#d"];
         // {{c:t-battles}}
         pdata["c:t-battles"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#", false);
         pdata["c:t-battles#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#", true);
@@ -1002,8 +1007,10 @@ class com.xvm.Macros
         pdata["a:kb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.b / 1000);
         // {{a:avglvl}}
         pdata["a:avglvl"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
-        // {{a:t-rating}}
-        pdata["a:t-rating"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.v.r);
+        // {{a:t-winrate}}
+        pdata["a:t-winrate"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.v.r);
+        // {{a:t-rating}} (obsolete)
+        pdata["a:t-rating"] = pdata["a:t-winrate"];
         // {{a:t-battles}}
         pdata["a:t-battles"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
         // {{a:tdb}}

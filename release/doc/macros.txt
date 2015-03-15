@@ -107,7 +107,7 @@ Legend:
 │ S │ {{battles}}     │ X │ X │ X │ X │ X │ total battles count
 │ S │ {{wins}}        │ X │ X │ X │ X │ X │ total wins count
 │ S │ {{kb}}          │ X │ X │ X │ X │ X │ number of kilo-battles (total battles count divided by 1000)
-│ S │ {{t-rating}}    │ X │ X │ X │ X │ X │ vehicle win ratio
+│ S │ {{t-winrate}}   │ X │ X │ X │ X │ X │ vehicle win ratio
 │ S │ {{t-battles}}   │ X │ X │ X │ X │ X │ total battles count for current vehicle
 │ S │ {{t-wins}}      │ X │ X │ X │ X │ X │ total wins count for current vehicle
 │ S │ {{t-kb}}        │ X │ X │ X │ X │ X │ number of kilo-battles for current vehicle
@@ -128,7 +128,7 @@ Legend:
 │ S │ {{c:winrate}}   │ X │ X │ X │ X │ X │ color depending on GWR
 │ S │ {{c:kb}}        │ X │ X │ X │ X │ X │ color depending on kilo-battles
 │ S │ {{c:avglvl}}    │ X │ X │ X │ X │ X │ color depending on average level of tanks
-│ S │ {{c:t-rating}}  │ X │ X │ X │ X │ X │ color depending on current vehicle win ratio
+│ S │ {{c:t-winrate}} │ X │ X │ X │ X │ X │ color depending on current vehicle win ratio
 │ S │ {{c:t-battles}} │ X │ X │ X │ X │ X │ color depending on current vehicle battles
 │ S │ {{c:tdb}}       │ X │ X │ X │ X │ X │ dynamic colors for this macros
 │ S │ {{c:tdv}}       │ X │ X │ X │ X │ X │ dynamic colors for this macros
