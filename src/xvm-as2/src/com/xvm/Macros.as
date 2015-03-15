@@ -867,7 +867,7 @@ class com.xvm.Macros
         // {{wgr}}
         pdata["wgr"] = stat.wgr;
         // {{r}}
-        pdata["r"] = getRating(stat, pdata, "");
+        pdata["r"] = getRating(stat, pdata, "", "");
 
         // {{winrate}}
         pdata["winrate"] = stat.r;
@@ -1096,12 +1096,12 @@ class com.xvm.Macros
 
     private static var RATING_MATRIX:Object =
     {
-        xvm_wgr: "xwrg",
+        xvm_wgr: "xwgr",
         xvm_wn6: "xwn6",
         xvm_wn8: "xwn8",
         xvm_eff: "xeff",
         xvm_e: "e",
-        basic_wgr: "xwrg",
+        basic_wgr: "xwgr",
         basic_wn6: "xwn6",
         basic_wn8: "xwn8",
         basic_eff: "xeff",
