@@ -866,6 +866,8 @@ class com.xvm.Macros
         pdata["wn"] = pdata["wn8"];
         // {{wgr}}
         pdata["wgr"] = stat.wgr;
+        // {{r}}
+        pdata["r"] = getRating(stat, pdata);
 
         // {{winrate}}
         pdata["winrate"] = stat.r;
@@ -1078,5 +1080,30 @@ class com.xvm.Macros
         }
 
         return pname;
+    }
+
+    private static var RATING_MATRIX:Object =
+    {
+        xvm_wgr: "xwrg",
+        xvm_wn6: "xwn6",
+        xvm_wn8: "xwn8",
+        xvm_eff: "xeff",
+        xvm_e: "e",
+        basic_wgr: "xwrg",
+        basic_wn6: "xwn6",
+        basic_wn8: "xwn8",
+        basic_eff: "xeff",
+        basic_e: "e"
+    }
+
+    /**
+     * Returns rating according settings in the personal cabinet
+     */
+    public static function getRating(stat:StatData, pdata:Object)
+    {
+        var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
+        if (!RATING_MATRIX.hasOwnProperty(n))
+            n = "xvm_wgr";
+        return pdata[RATING_MATRIX[n]];
     }
 }
