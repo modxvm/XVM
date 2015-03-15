@@ -114,6 +114,8 @@
     "radio_range/base": "базовая",
     "radio_range/actual": "расчетная",
     "shootingRadius": "Дальность стрельбы",
+    "pitchLimits": "Углы ВН",
+    "traverseLimits": "Углы ГН",
     "(sec)": "(сек)",
     "(m)": "(м)",
 
