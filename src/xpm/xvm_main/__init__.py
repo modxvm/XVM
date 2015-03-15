@@ -232,6 +232,14 @@ def WaitingViewMeta_fix(base, self, *args):
 def VehicleParamsField_getValue(base, self):
     try:
         from gui.shared.utils import ItemsParameters, ParametersCache
+        from math import degrees
+        from helpers import i18n
+        self.PARAMS = {'lightTank':  ('circularVisionRadius', 'piercingPower', 'damageAvg', 'damageAvgPerMinute', 'shotDispersionAngle', 'aimingTime', 'reloadTimeSecs', 'enginePower', 'enginePowerPerTon', 'speedLimits', 'chassisRotationSpeed', 'hullArmor', 'turretArmor'),
+                       'mediumTank': ('circularVisionRadius', 'piercingPower', 'damageAvg', 'damageAvgPerMinute', 'shotDispersionAngle', 'aimingTime', 'reloadTimeSecs', 'enginePower', 'enginePowerPerTon', 'speedLimits', 'chassisRotationSpeed', 'hullArmor', 'turretArmor'),
+                       'heavyTank':  ('circularVisionRadius', 'piercingPower', 'damageAvg', 'damageAvgPerMinute', 'shotDispersionAngle', 'aimingTime', 'reloadTimeSecs', 'enginePower', 'enginePowerPerTon', 'speedLimits', 'chassisRotationSpeed', 'hullArmor', 'turretArmor'),
+                       'AT-SPG':     ('circularVisionRadius', 'piercingPower', 'damageAvg', 'damageAvgPerMinute', 'shotDispersionAngle', 'aimingTime', 'reloadTimeSecs', 'enginePower', 'enginePowerPerTon', 'speedLimits', 'chassisRotationSpeed', 'hullArmor', 'turretArmor'),
+                       'default':    ('circularVisionRadius', 'piercingPower', 'damageAvg', 'damageAvgPerMinute', 'shotDispersionAngle', 'aimingTime', 'reloadTimeSecs', 'enginePower', 'enginePowerPerTon', 'speedLimits', 'chassisRotationSpeed', 'hullArmor', 'turretArmor'),
+                       'SPG':        ('circularVisionRadius', 'piercingPower', 'explosionRadius', 'damageAvg', 'damageAvgPerMinute', 'shotDispersionAngle', 'aimingTime', 'reloadTimeSecs', 'enginePower', 'enginePowerPerTon', 'speedLimits', 'chassisRotationSpeed', 'hullArmor', 'turretArmor')}
         result = list()
         vehicle = self._tooltip.item
         configuration = self._tooltip.context.getParamsConfiguration(vehicle)
@@ -242,16 +250,42 @@ def VehicleParamsField_getValue(base, self):
         vehicleCommonParams = dict(ItemsParameters.g_instance.getParameters(vehicle.descriptor))
         vehicleRawParams = dict(ParametersCache.g_instance.getParameters(vehicle.descriptor))
         result.append([])
+        gun = vehicle.gun.descriptor
         if params:
             for paramName in self.PARAMS.get(vehicle.type, 'default'):
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:
+                    if paramName == 'turretArmor' and not vehicle.hasTurrets:
+                        continue
+                    if paramName == 'reloadTimeSecs' and vehicle.gun.isClipGun():
+                        (shellsCount, shellReloadingTime) = gun['clip']
+                        reloadMagazineTime = gun['reloadTime']
+                        shellReloadingTime_str = "%g" % round(shellReloadingTime, 2)  #nice representation
+                        reloadMagazineTime_str = "%g" % round(reloadMagazineTime, 2)
+                        result[-1].append([i18n.makeString('#menu:moduleInfo/params/shellsCount').replace('h>', 'h1>'), '<h1>' + str(shellsCount) + '</h1>'])
+                        result[-1].append([i18n.makeString('#menu:moduleInfo/params/shellReloadingTime').replace('h>', 'h1>'), '<h1>' + shellReloadingTime_str + '</h1>'])
+                        result[-1].append([i18n.makeString('#menu:moduleInfo/params/reloadMagazineTime').replace('h>', 'h1>'), '<h1>' + reloadMagazineTime_str + '</h1>'])
+                        continue
                     result[-1].append(self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams))
+
+        # gun traverse limits
+        if gun['turretYawLimits']:
+            (traverseMin, traverseMax) = gun['turretYawLimits']
+            traverseLimits_str = str(int(round(degrees(traverseMin)))) + '..+' + str(int(round(degrees(traverseMax))))
+            result[-1].append(['<h1>' + l10n('traverseLimits') + '</h1>', '<h1>' + traverseLimits_str + '</h1>'])
+
+        # elevation limits
+        (pitchMax, pitchMin) = gun['pitchLimits']['absolute']
+        pitchLimits_str = str(int(round(degrees(-pitchMin)))) + '..+' + str(int(round(degrees(-pitchMax))))
+        result[-1].append(['<h1>' + l10n('pitchLimits') + '</h1>', '<h1>' + pitchLimits_str + '</h1>'])
+
+        # shooting range
         from vehinfo import _getRanges
         (viewRange, shellRadius, artiRadius) = _getRanges(vehicle.turret.descriptor, vehicle.gun.descriptor, vehicle.nationName, vehicle.type)
         if vehicle.type == 'SPG':   # arti
             result[-1].append(['<h1>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(artiRadius)+ '</h1>'])
         elif shellRadius < 707:     # not arti, short range weapons
             result[-1].append(['<h1>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h1>', '<h1>' + str(shellRadius)+ '</h1>'])
+
         result.append([])
         if crew:
             currentCrewSize = 0
