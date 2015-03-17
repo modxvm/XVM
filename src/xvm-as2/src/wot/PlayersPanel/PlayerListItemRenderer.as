@@ -308,19 +308,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var mc:MovieClip = _internal_createExtraFieldsHolder(extraPanelsHolder, "none", cfg_xf.formats, cfg_xf);
         mc._visible = false;
 
-        if (cfg_xf.formats != null && cfg_xf.formats.length > 0)
-        {
-            var menu_mc:UIComponent = UIComponent.createInstance(mc, "HiddenButton", MENU_MC_NAME, mc.getNextHighestDepth(), {
-                _x: isLeftPanel ? 0 : -cfg_xf.width,
-                width: cfg_xf.width,
-                height: cfg_xf.height,
-                panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
-                owner: this } );
-            menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
-            menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
-            menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
-        }
-
         return mc;
     }
 
@@ -359,7 +346,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             extraFieldsConfigured = true;
 
             // remove old text fields
-            Utils.removeChildren(extraFields.none, function(mc:MovieClip) { return mc._name != PlayerListItemRenderer.MENU_MC_NAME; } );
+            Utils.removeChildren(extraFields.none);
             Utils.removeChildren(extraFields.short);
             Utils.removeChildren(extraFields.medium);
             Utils.removeChildren(extraFields.medium2);
@@ -434,6 +421,25 @@ class wot.PlayersPanel.PlayerListItemRenderer
             }
             n++;
         }
+
+        if (state == "none")
+            _internal_createMenuForNoneState(mc);
+    }
+
+    private function _internal_createMenuForNoneState(mc:MovieClip)
+    {
+        var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+        if (cf.formats == null || cf.formats.length <= 0)
+            return;
+        var menu_mc:UIComponent = UIComponent.createInstance(mc, "HiddenButton", MENU_MC_NAME, mc.getNextHighestDepth(), {
+            _x: isLeftPanel ? 0 : -cf.width,
+            width: cf.width,
+            height: cf.height,
+            panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
+            owner: this } );
+        menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
+        menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
+        menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
     }
 
     private function getFormattedNumberValue(format:Object, fieldName:String, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
