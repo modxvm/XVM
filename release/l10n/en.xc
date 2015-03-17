@@ -116,6 +116,10 @@
     "shootingRadius": "Shooting radius",
     "pitchLimits": "Elevation arc",
     "traverseLimits": "Gun traverse arc",
+    "terrainResistance": "Terrain resistance",
+    "gravity": "Gravity",
+    "shellSpeed": "Shell speed",
+    "(m/sec)": "(m/sec)",
     "(sec)": "(sec)",
     "(m)": "(m)",
 

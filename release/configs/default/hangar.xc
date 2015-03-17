@@ -102,6 +102,9 @@
     "carousel": ${"carousel.xc":"carousel"},
     // Parameters for hangar clock
     // Параметры часов в ангаре
-    "clock": ${"clock.xc":"clock"}
+    "clock": ${"clock.xc":"clock"},
+    // Parameters for vehicle tooltips in hangar
+    // Параметры всплывающих подсказок к танкам в ангаре
+    "tooltips": ${"tooltips.xc":"tooltips"}
   }
 }

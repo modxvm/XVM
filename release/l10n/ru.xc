@@ -116,6 +116,10 @@
     "shootingRadius": "Дальность стрельбы",
     "pitchLimits": "Углы ВН",
     "traverseLimits": "Углы ГН",
+    "terrainResistance": "Сопротивление грунтов",
+    "gravity": "Гравитация",
+    "shellSpeed": "Скорость снаряда",
+    "(m/sec)": "(м/сек)",
     "(sec)": "(сек)",
     "(m)": "(м)",
 
