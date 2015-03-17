@@ -1,23 +1,25 @@
-﻿# Embedded file name: xvm_hangar/__init__.py
-""" XVM (c) www.modxvm.com 2013-2015 """
+﻿""" XVM (c) www.modxvm.com 2013-2015 """
+
+#####################################################################
+# MOD INFO (mandatory)
+
 XFW_MOD_VERSION = '2.0.0'
 XFW_MOD_URL = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
 XFW_GAME_VERSIONS = ['0.9.6']
+
+#####################################################################
+
 import BigWorld
+
 from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from math import degrees
-#from pprint import pprint
 
-#def print_r(obj):
-#  for attr in dir(obj):
-#    try:
-#        print "obj.%s = %s" % (attr, getattr(obj, attr))
-#    except:
-#        print "obj." + attr + " = <error>"
+#####################################################################
+# event handlers
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 def VehicleParamsField_getValue(base, self):
@@ -201,6 +203,9 @@ def VehicleParamsField_getValue(base, self):
         return base(self)
 
     return
+
+#####################################################################
+# Register events
 
 def _RegisterEvents():
     from gui.shared.tooltips.vehicle import VehicleParamsField
