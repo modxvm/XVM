@@ -6,6 +6,7 @@
   "tooltips": {
     "lightTank":    [
                     "circularVisionRadius",
+                    "maxHealth",
                     "turretArmor",
                     "hullArmor",
                     "shootingRadius",
@@ -24,6 +25,7 @@
                     ],
     "mediumTank":   [
                     "circularVisionRadius",
+                    "maxHealth",
                     "turretArmor",
                     "hullArmor",
                     "shootingRadius",
@@ -42,6 +44,7 @@
                     ],
     "heavyTank":    [
                     "circularVisionRadius",
+                    "maxHealth",
                     "turretArmor",
                     "hullArmor",
                     "shootingRadius",
@@ -59,6 +62,7 @@
                     ],
     "TD":           [
                     "circularVisionRadius",
+                    "maxHealth",
                     "turretArmor",
                     "hullArmor",
                     "shootingRadius",
@@ -77,6 +81,7 @@
                     ],
     "SPG":          [
                     "circularVisionRadius",
+                    "maxHealth",
                     "turretArmor",
                     "hullArmor",
                     "shootingRadius",
