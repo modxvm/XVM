@@ -1,5 +1,7 @@
 ﻿XVM-6.1.0-dev:
   * adaptation to WoT 0.9.7
+  * added new section in config hangar/tooltips.xc, where you can choose desired tooltips for each type of vehicle
+  * in barracks added nation flag for tanksman and their skills
 
 XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
