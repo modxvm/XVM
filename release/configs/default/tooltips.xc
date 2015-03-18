@@ -11,6 +11,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "damageAvgPerMinute",
+                    "reloadTimeSecs",
                     "piercingPowerAvgSummary",
                     "pitchLimits",
                     "aimingTime",
@@ -28,6 +29,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "damageAvgPerMinute",
+                    "reloadTimeSecs",
                     "piercingPowerAvgSummary",
                     "pitchLimits",
                     "aimingTime",
@@ -45,6 +47,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "damageAvgPerMinute",
+                    "reloadTimeSecs",
                     "piercingPowerAvgSummary",
                     "pitchLimits",
                     "aimingTime",
@@ -61,6 +64,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "damageAvgPerMinute",
+                    "reloadTimeSecs",
                     "piercingPowerAvgSummary",
                     "pitchLimits",
                     "traverseLimits",
@@ -78,6 +82,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "damageAvgPerMinute",
+                    "reloadTimeSecs",
                     "piercingPowerAvgSummary",
                     "explosionRadius",
                     "pitchLimits",
@@ -121,6 +126,8 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "equipmentIcons",                       - Значки снаряжения (будут показаны в конце) \ Icons of equipment (will be shown at the end)
 "gravity",                              - Гравитация \ Gravity
 "shellSpeedSummary",                    - Сводка скоростей снарядов \ Summary of shell speeds
+"radioRange",                           - Дальность рации \ Range of radio signal
+"rateOfFire",                           - Скорострельность оружия (в барабанах заменяется их специфичными) \ Rate of Fire (for clip guns will be shown their specific)
 ...
 
 

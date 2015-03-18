@@ -53,6 +53,11 @@ def VehicleParamsField_getValue(base, self):
                     gravity_str = "%g" % round(veh_descr.shot['gravity'], 2)
                     result[-1].append(['<h1>' + l10n('gravity') + '</h1>', '<h1>' + gravity_str + '</h1>'])
                     continue
+                #radioRange
+                if paramName == 'radioRange':
+                    radioRange_str = "%s" % int(vehicle.radio.descriptor['distance'])
+                    result[-1].append([i18n.makeString('#menu:moduleInfo/params/radioDistance').replace('h>', 'h1>'), '<h1>' + radioRange_str + '</h1>'])
+                    continue
                 #explosionRadius
                 if paramName == 'explosionRadius':
                     explosionRadiusMin = 999
@@ -74,7 +79,7 @@ def VehicleParamsField_getValue(base, self):
                 if paramName == 'shellSpeedSummary':
                     shellSpeedSummary_arr = []
                     for key in gun['shots']:
-                        shellSpeedSummary_arr.append(str(int(key['speed']*1.25)))
+                        shellSpeedSummary_arr.append(str(int(key['speed'] * 1.25)))
                     delimiter = "/"
                     shellSpeedSummary_str = delimiter.join(shellSpeedSummary_arr)
                     result[-1].append(['<h1>%s <p>%s</p></h1>' % (l10n('shellSpeed'), l10n('(m/sec)')), '<h1>' + shellSpeedSummary_str + '</h1>'])
@@ -103,7 +108,7 @@ def VehicleParamsField_getValue(base, self):
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/avgDamage').replace('h>', 'h1>'), '<h1>' + damageAvgSummary_str + '</h1>'])
                     continue
                 #magazine loading
-                if paramName == 'reloadTimeSecs' and vehicle.gun.isClipGun():
+                if (paramName == 'reloadTimeSecs' or paramName == 'rateOfFire') and vehicle.gun.isClipGun():
                     (shellsCount, shellReloadingTime) = gun['clip']
                     reloadMagazineTime = gun['reloadTime']
                     shellReloadingTime_str = "%g" % round(shellReloadingTime, 2)  #nice representation
@@ -111,6 +116,11 @@ def VehicleParamsField_getValue(base, self):
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/shellsCount').replace('h>', 'h1>'), '<h1>' + str(shellsCount) + '</h1>'])
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/shellReloadingTime').replace('h>', 'h1>'), '<h1>' + shellReloadingTime_str + '</h1>'])
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/reloadMagazineTime').replace('h>', 'h1>'), '<h1>' + reloadMagazineTime_str + '</h1>'])
+                    continue
+                #rate of fire
+                if paramName == 'rateOfFire' and not vehicle.gun.isClipGun():
+                    rateOfFire_str = '%g' % round(60 / gun['reloadTime'], 2)
+                    result[-1].append([i18n.makeString('#menu:moduleInfo/params/reloadTime').replace('h>', 'h1>'), '<h1>' + rateOfFire_str + '</h1>'])
                     continue
                 # gun traverse limits
                 if paramName == 'traverseLimits' and gun['turretYawLimits']:
@@ -202,7 +212,23 @@ def VehicleParamsField_getValue(base, self):
         err(traceback.format_exc())
         return base(self)
 
-    return
+def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenInBarracks, berthPrice, actionPriceData, berthBuyCount, tankmanArr):
+    import nations
+    from gui.shared import g_itemsCache
+    for tankman in tankmanArr:
+        tankman['rank'] = tankman['role']
+        tankman['role'] = nation_icon = "<img src='img://gui/maps/icons/filters/nations/%s.png' height='14' width='22' vspace='-7'>" % nations.NAMES[tankman['nationID']]
+        tankman_full_info = g_itemsCache.items.getTankman(tankman['tankmanID'])
+        skills_str = ''
+        for skill in tankman_full_info.skills:
+            skills_str += "<img src='img://gui/maps/icons/tankmen/skills/small/%s' width='14' height='14' vspace='-3'>" % skill.icon
+        if len(tankman_full_info.skills):
+            skills_str += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
+        if tankman_full_info.hasNewSkill:
+            skills_str += "<img src='img://gui/maps/icons/tankmen/skills/small/new_skill.png' width='14' height='14' vspace='-3'>x%s" % tankman_full_info.newSkillCount[0]
+        if skills_str:
+            tankman['role'] += ' ' + skills_str
+    return base(self, tankmenCount, placesCount, tankmenInBarracks, berthPrice, actionPriceData, berthBuyCount, tankmanArr)
 
 #####################################################################
 # Register events
@@ -210,5 +236,7 @@ def VehicleParamsField_getValue(base, self):
 def _RegisterEvents():
     from gui.shared.tooltips.vehicle import VehicleParamsField
     OverrideMethod(VehicleParamsField, '_getValue', VehicleParamsField_getValue)
+    from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
+    OverrideMethod(BarracksMeta, 'as_setTankmenS', BarracksMeta_as_setTankmenS)
 
 BigWorld.callback(0, _RegisterEvents)
