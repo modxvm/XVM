@@ -845,7 +845,7 @@ class com.xvm.Macros
         // {{e}}
         pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "X" : String(stat.v.te);
         // {{teff}}
-        pdata["teff"] = stat.v.teff;
+        pdata["teff"] = isNaN(stat.v.teff) ? null : Math.round(stat.v.teff);
         // {{xeff}}
         pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
@@ -857,15 +857,15 @@ class com.xvm.Macros
         // {{xwgr}}
         pdata["xwgr"] = isNaN(stat.xwgr) ? null : stat.xwgr == 100 ? "XX" : (stat.xwgr < 10 ? "0" : "") + stat.xwgr;
         // {{eff}}
-        pdata["eff"] = stat.e;
+        pdata["eff"] = isNaN(stat.e) ? null : Math.round(stat.e);
         // {{wn6}}
-        pdata["wn6"] = stat.wn6;
+        pdata["wn6"] = isNaN(stat.wn6) ? null : Math.round(stat.wn6);
         // {{wn8}}
-        pdata["wn8"] = stat.wn8;
+        pdata["wn8"] = isNaN(stat.wn8) ? null : Math.round(stat.wn8);
         // {{wn}}
         pdata["wn"] = pdata["wn8"];
         // {{wgr}}
-        pdata["wgr"] = stat.wgr;
+        pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
         // {{r}}
         pdata["r"] = getRating(stat, pdata, "", "");
 
@@ -1108,11 +1108,11 @@ class com.xvm.Macros
         xvm_wn8: "xwn8",
         xvm_eff: "xeff",
         xvm_e: "e",
-        basic_wgr: "xwgr",
-        basic_wn6: "xwn6",
-        basic_wn8: "xwn8",
-        basic_eff: "xeff",
-        basic_e: "e"
+        basic_wgr: "wgr",
+        basic_wn6: "wn6",
+        basic_wn8: "wn8",
+        basic_eff: "eff",
+        basic_e: "teff"
     }
 
     /**
