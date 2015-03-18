@@ -105,6 +105,7 @@
     "PutClassCrew": "Экипаж того же класса",
     "PutPreviousCrew": "Предыдущий экипаж",
     "DropAllCrew": "Высадить весь экипаж",
+    "noSkills": "Нет умений",
 
     // Vehicle Params
     "gun_reload_time/actual": "Расчетное время перезарядки орудия",

@@ -128,6 +128,8 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "shellSpeedSummary",                    - Сводка скоростей снарядов \ Summary of shell speeds
 "radioRange",                           - Дальность рации \ Range of radio signal
 "rateOfFire",                           - Скорострельность оружия (в барабанах заменяется их специфичными) \ Rate of Fire (for clip guns will be shown their specific)
+"battleTiers",                          - Уровни боев танка \ Battle tiers of vehicle
+"maxHealth",                            - ХП танка \ HP of vehicle
 ...
 
 

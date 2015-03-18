@@ -105,6 +105,7 @@
     "PutClassCrew": "Put same class crew",
     "PutPreviousCrew": "Put previous crew",
     "DropAllCrew": "Drop all crew",
+    "noSkills": "No skills",
 
     // Vehicle Params
     "gun_reload_time/actual": "Actual gun reload time",

@@ -16,6 +16,7 @@ from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
+from xvm_main.python.vehinfo_tiers import getTiers
 from math import degrees
 
 #####################################################################
@@ -47,6 +48,15 @@ def VehicleParamsField_getValue(base, self):
                 params_list = self.PARAMS.get(vehicle.type, 'default')               # old way
             for paramName in params_list:
                 if paramName == 'turretArmor' and not vehicle.hasTurrets:
+                    continue
+                #maxHealth
+                if paramName == 'maxHealth':
+                    result[-1].append(["<h1>%s</h1>" % i18n.makeString('#menu:vehicleInfo/params/maxHealth'), '<h1>' + str(veh_descr.maxHealth) + '</h1>'])
+                    continue
+                #battle tiers
+                if paramName == 'battleTiers':
+                    (minTier, maxTier) = getTiers(vehicle.level, vehicle.type, vehicle.name)
+                    result[-1].append(['<h1>' + l10n('Battle tiers') + '</h1>', '<h1>%s..%s</h1>' % (minTier, maxTier)])
                     continue
                 #gravity
                 if paramName == 'gravity':
@@ -150,6 +160,8 @@ def VehicleParamsField_getValue(base, self):
                     continue
                 #turret rotation speed
                 if paramName == 'turretRotationSpeed':
+                    if not vehicle.hasTurrets:
+                        paramName = 'gunRotationSpeed'
                     turretRotationSpeed_str = str(int(degrees(veh_descr.turret['rotationSpeed'])))
                     result[-1].append([self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)[0], turretRotationSpeed_str])
                     continue
@@ -212,6 +224,7 @@ def VehicleParamsField_getValue(base, self):
         err(traceback.format_exc())
         return base(self)
 
+#barracks: add nation flag and skills for tanksman
 def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenInBarracks, berthPrice, actionPriceData, berthBuyCount, tankmanArr):
     import nations
     from gui.shared import g_itemsCache
@@ -226,8 +239,9 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenIn
             skills_str += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
         if tankman_full_info.hasNewSkill:
             skills_str += "<img src='img://gui/maps/icons/tankmen/skills/small/new_skill.png' width='14' height='14' vspace='-3'>x%s" % tankman_full_info.newSkillCount[0]
-        if skills_str:
-            tankman['role'] += ' ' + skills_str
+        if not skills_str:
+            skills_str = l10n('noSkills')
+        tankman['role'] += ' ' + skills_str
     return base(self, tankmenCount, placesCount, tankmenInBarracks, berthPrice, actionPriceData, berthBuyCount, tankmanArr)
 
 #####################################################################
