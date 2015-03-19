@@ -1,3 +1,3 @@
-${"sirmax/sirmax.xc":"."}
-//${"default/@xvm.xc":"."}
 //${"test/@xvm.xc":"."}
+//${"default/@xvm.xc":"."}
+${"sirmax/sirmax.xc":"."}
