@@ -20,3 +20,4 @@ src/xvm-as2/swf/*.swf
 src/xvm/obj/
 
 utils/replays/*.wotreplay
+src/xvm-as2/obj

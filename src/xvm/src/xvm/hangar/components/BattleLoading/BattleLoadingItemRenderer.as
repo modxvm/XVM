@@ -122,8 +122,6 @@ package xvm.hangar.components.BattleLoading
                 proxy.iconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
 
-
-
                 // Set Text Fields
                 if (_savedTextFieldColor == null)
                     _savedTextFieldColor = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
