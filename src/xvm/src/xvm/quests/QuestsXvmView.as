@@ -1,5 +1,5 @@
 /**
- * XVM - squad window
+ * XVM
  * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  */
 package xvm.quests
