@@ -176,7 +176,12 @@ def VehicleParamsField_getValue(base, self):
                         resistances_arr.append("%g" % round(key, 2))
                     delimiter = "/"
                     terrainResistance_str = delimiter.join(resistances_arr)
-                    result[-1].append(['<h1>' + l10n('terrainResistance') + '</h1>', '<h1>' + terrainResistance_str + '</h1>'])
+                    result[-1].append([h1_pad(l10n('terrainResistance')), h1_pad(terrainResistance_str)])
+                    continue
+                #custom text
+                if paramName.startswith('TEXT:'):
+                    customtext = paramName[5:]
+                    result[-1].append([h1_pad(customtext), ''])
                     continue
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:
                     result[-1].append(self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams))
