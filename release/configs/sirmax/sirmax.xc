@@ -36,8 +36,9 @@
     "pingServers": ${"def.pingServers"}
   },
   "hangar": {
-    "masteryMarkInTechTree": true,
+    "defaultBoughtForCredits": true,
     "hidePricesInTechTree": true,
+    "masteryMarkInTechTree": true,
     "allowExchangeXPInTechTree": false,
     "autoPutPreviousCrewInTanks": true,
     "showShootRangeTooltip": true,

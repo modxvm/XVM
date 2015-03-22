@@ -7,12 +7,15 @@
     // true - Show XWN8 instead of XEFF in company windows
     // true - показывать XWN8 вместо XEFF в окнах рот
     "xwnInCompany": true,
-    // true - Show mastery mark in tech tree
-    // true - Показывать знак мастерства в дереве исследований
-    "masteryMarkInTechTree": true,
+    // true - Use credits instead of gold as default currency for ammo and equipment
+    // true - Использовать кредиты, а не золото как валюту по умолчанию для снарядов и снаряжения
+    "defaultBoughtForCredits": false,
     // true - Hide price button in tech tree
     // true - Прятать кнопку с ценой в дереве исследований
     "hidePricesInTechTree": false,
+    // true - Show mastery mark in tech tree
+    // true - Показывать знак мастерства в дереве исследований
+    "masteryMarkInTechTree": true,
     // true - Allow to consider the exchange of experience with gold in tech tree
     // true - Разрешить учитывать обмен опыта за голду в дереве исследований
     "allowExchangeXPInTechTree": true,
