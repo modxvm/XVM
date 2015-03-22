@@ -3,7 +3,10 @@
   * added new section in config hangar/tooltips.xc, where you can choose desired tooltips for each type of vehicle
   * in barracks added nation flag for tanksman and their skills
   * added embedded fonts: 'xvm' (symbol) and 'mono' (monospace), recommended for default use
-  * new option "defaultBoughtForCredits" - Use credits instead of gold as default currency for ammo and equipment
+  * new options:
+      "enableGoldLocker" - enable locker for gold
+      "enableFreeXpLocker" - enable locker for free XP
+      "defaultBoughtForCredits" - Use credits instead of gold as default currency for ammo and equipment
 
 XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)

@@ -24,13 +24,13 @@ freeXP_enable = 1
 
 #enable or disable active usage of gold (does not affect auto-refill ammo/equip)
 def StatsRequester_gold(base, self):
-    if gold_enable:
+    if not config.config['hangar']['enableGoldLocker'] or gold_enable:
         return max(self.actualGold, 0)
     return 0
 
 #enable or disable usage of free experience
 def StatsRequester_freeXP(base, self):
-    if freeXP_enable:
+    if not config.config['hangar']['enableFreeXpLocker'] or freeXP_enable:
         return max(self.actualFreeXP, 0)
     return 0
 
