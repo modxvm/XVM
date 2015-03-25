@@ -66,12 +66,12 @@ def _makeNetworkServicesSettings(tdata):
     active = tdata is not None and tdata.get('token', None) is not None
     return {
         'servicesActive': active,
-        'statBattle': svc.get('statBattle', active),
-        'statAwards': svc.get('statAwards', active),
-        'statCompany': svc.get('statCompany', active),
-        'comments': svc.get('comments', active),
-        'chance': svc.get('chance', False),
-        'chanceLive': svc.get('chanceLive', False),
+        'statBattle': svc.get('statBattle', True) if active else False,
+        'statAwards': svc.get('statAwards', True) if active else False,
+        'statCompany': svc.get('statCompany', True) if active else False,
+        'comments': svc.get('comments', True) if active else False,
+        'chance': svc.get('chance', False) if active else False,
+        'chanceLive': svc.get('chanceLive', False) if active else False,
         'topClansCount': svc.get('topClansCount', 100),
         'scale': svc.get('scale', 'xvm'),
         'rating': svc.get('rating', 'wgr'),
