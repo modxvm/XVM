@@ -33,7 +33,7 @@
 
     // X position (negative values - bind to right side of screen).
     // Позиция X (отрицательные значения - привязать к правой стороне экрана).
-    "x": 335,
+    "x": 390,
     // Y position (negative values - bind to bottom side of screen).
     // Позиция Y (отрицательные значения - привязать к нижней стороне экрана).
     "y": 40,
