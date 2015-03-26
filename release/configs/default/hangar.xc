@@ -23,7 +23,7 @@
     // true - Показывать знак мастерства в дереве исследований
     "masteryMarkInTechTree": true,
     // true - Allow to consider the exchange of experience with gold in tech tree
-    // true - Разрешить учитывать обмен опыта за голду в дереве исследований
+    // true - Разрешить учитывать обмен опыта за золото в дереве исследований
     "allowExchangeXPInTechTree": true,
     // true - Automatically return previous crew upon vehicle change
     // true - Автоматически возвращать предыдущий экипаж при смене танка

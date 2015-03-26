@@ -51,18 +51,31 @@
     // Text for {{battletype}} macro.
     // Текст для макроса {{battletype}}
     "battletype": {
+      // Неизвестный бой.
       "unknown": "unknown",
+      // Случайный бой.
       "regular": "regular",
+      // Тренировочный бой.
       "training": "training",
+      // Ротный бой.
       "company": "company",
+      // Турнир.
       "tournament": "tournament",
+      // Клановый бой.
       "clan": "clan",
+      // Учебный бой.
       "tutorial": "tutorial",
+      // Командный бой.
       "cybersport": "cybersport",
+      // Исторический бой.
       "historical": "historical",
+      // Бой спецрежима (гонки, футбол и т.п.).
       "event_battles": "event_battles",
+      // Вылазка.
       "sortie": "sortie",
+      // Бой за укрепрайон.
       "fort_battle": "fort_battle",
+      // Киберспортивный командный бой.
       "rated_cybersport": "rated_cybersport"
     },
     // Text for {{topclan}} macro.
