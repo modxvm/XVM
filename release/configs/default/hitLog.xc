@@ -33,7 +33,7 @@
 
     // X position (negative values - bind to right side of screen).
     // Позиция X (отрицательные значения - привязать к правой стороне экрана).
-    "x": 390,
+    "x": 270,
     // Y position (negative values - bind to bottom side of screen).
     // Позиция Y (отрицательные значения - привязать к нижней стороне экрана).
     "y": 40,
@@ -45,7 +45,7 @@
     "h": 1000,
     // Number of lines with hits. Old lines will be pushed out.
     // Количество строк с попаданиями. Устаревшие данные выталкиваются.
-    "lines": 15,
+    "lines": 0,
     // Log direction: up - lines will be added from up to down, down - from down to up.
     // Направление лога: up - строки добавляются сверху, down - снизу.
     "direction": "down",
