@@ -29,6 +29,11 @@ SOFTWARE.
         Internal: "obj": ${"path.to.object"}
         External: "obj": ${"filename":"path.to.object"}
         Root object: "obj": ${"."}
+        
+    3. Identifiers:
+        "identifier1": {} is valid
+        identifier2: {} is valid
+        identifier_3: {} same...
 */
 
 /*
@@ -271,9 +276,11 @@ class com.xvm.JSONx {
     }
 
     var _string:Function = function() {
-        if (_quotedString() == null) {
-            _error("Bad string");
+        var result = _quotedString();
+		if (result != null) {
+			return result;
         }
+		_error("Bad string");
     }
     
     var _unquotedIdentifier:Function = function() {
@@ -368,12 +375,12 @@ class com.xvm.JSONx {
                 return null;
             }
             while (ch) {
-                p = _identifier();
+                p = _string();
                 _white();
                 if (ch == ':') {
                     _next();
                     f = p;
-                    p = _identifier();
+                    p = _string();
                     _white();
                 }
                 if (ch != '}')
