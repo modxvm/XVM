@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) 2005 JSON.org
 Copyright (c) 2013 m.schedriviy@gmail.com (JSONx extension)
 
@@ -34,12 +34,12 @@ SOFTWARE.
 /*
 ported to Actionscript May 2005 by Trannie Carter <tranniec@designvox.com>, wwww.designvox.com
 USAGE:
-	try {
-		var o:Object = JSON.parse(jsonStr);
-		var s:String = JSON.stringify(obj);
-	} catch(ex) {
-		trace(ex.name + ":" + ex.message + ":" + ex.at + ":" + ex.text);
-	}
+    try {
+        var o:Object = JSON.parse(jsonStr);
+        var s:String = JSON.stringify(obj);
+    } catch(ex) {
+        trace(ex.name + ":" + ex.message + ":" + ex.at + ":" + ex.text);
+    }
 
 */
 
@@ -154,8 +154,9 @@ class com.xvm.JSONx {
 }
 
   static function parse(text:String):Object {
-    if (!text || text == "")
+    if (!text || text == "") {
         return null;
+    }
     var ta: Array = text.split(''); // charAt is much slower in Flash then array
     var talen = ta.length;
     var at = 0;
@@ -211,13 +212,17 @@ class com.xvm.JSONx {
             }
         }
     }
-
-    var _string:Function = function() {
+    
+    var _isCharOrDigit:Function = function(s): Boolean {
+        return (s >= "A" && s <= "Z") || (s >= "a" && s <= "z") || (s >= "0" && s <= "9") 
+    }
+    
+    var _quotedString:Function = function() {
         var i, s = '', t, u;
-                    var outer:Boolean = false;
+        var outer:Boolean = false;
 
         if (ch == '"') {
-                            while (_next()) {
+            while (_next()) {
                 if (ch == '"') {
                     _next();
                     return s;
@@ -262,7 +267,33 @@ class com.xvm.JSONx {
                 }
             }
         }
-        _error("Bad string");
+        return null;
+    }
+
+    var _string:Function = function() {
+        if (_quotedString() == null) {
+            _error("Bad string");
+        }
+    }
+    
+    var _unquotedIdentifier:Function = function() {
+        var result = '';
+            
+        do {
+            if (_isCharOrDigit(ch) || ch == '_' || ch == '-' || ch == '.') {
+                result += ch;
+            } else {
+                return result == '' ? null : result;
+            }
+        } while(_next())
+    }
+    
+    var _quotedIdentifier:Function = function() {
+        return _quotedString();
+    }
+    
+    var _identifier:Function = function() {
+        return _quotedIdentifier() || _unquotedIdentifier();
     }
 
     var _array:Function = function() {
@@ -300,7 +331,11 @@ class com.xvm.JSONx {
             return o;
         }
         while (ch) {
-            k = _string();
+            k = _identifier();
+            if (k == null) {
+                _error("Bad identifier");
+                return;
+            }
             _white();
             if (ch != ':') {
                 break;
@@ -333,12 +368,12 @@ class com.xvm.JSONx {
                 return null;
             }
             while (ch) {
-                p = _string();
+                p = _identifier();
                 _white();
                 if (ch == ':') {
                     _next();
                     f = p;
-                    p = _string();
+                    p = _identifier();
                     _white();
                 }
                 if (ch != '}')
@@ -418,7 +453,6 @@ class com.xvm.JSONx {
                 return ch >= '0' && ch <= '9' ? _number() : _word();
         }
     }
-
     return _value();
   }
 }
