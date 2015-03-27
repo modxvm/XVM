@@ -7,9 +7,7 @@ package xvm.techtree
     import com.xvm.*;
     import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
-    import flash.display.*;
     import flash.text.*;
-    import net.wg.gui.lobby.profile.pages.technique.data.*;
     import net.wg.gui.lobby.techtree.constants.*;
     import net.wg.gui.lobby.techtree.data.state.*;
     import net.wg.gui.lobby.techtree.data.vo.*;

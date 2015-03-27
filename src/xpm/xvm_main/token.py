@@ -2,6 +2,9 @@
 
 # PUBLIC
 
+versionChecked = False
+isOnline = False
+
 def checkVersion():
     _checkVersion()
 
@@ -15,8 +18,8 @@ def getXvmMessageHeader():
     return _getXvmMessageHeader()
 
 def getToken():
-    if isReplay():
-        getXvmActiveTokenData()
+    _getXvmActiveTokenData()
+    global _token
     return _token
 
 def clearToken(value=None):
@@ -24,6 +27,10 @@ def clearToken(value=None):
     _token = value
     global networkServicesSettings
     networkServicesSettings = _makeNetworkServicesSettings(None)
+
+def getClanInfo(clanAbbrev):
+    global _clansInfo
+    return _clansInfo.get(clanAbbrev, None) if _clansInfo else None
 
 # PRIVATE
 
@@ -49,6 +56,7 @@ import userprefs
 import utils
 from websock import g_websock
 
+_clansInfo = None
 _verInfo = None
 _tdataPrev = None
 _token = None
@@ -58,50 +66,18 @@ def _makeNetworkServicesSettings(tdata):
     active = tdata is not None and tdata.get('token', None) is not None
     return {
         'servicesActive': active,
-        'statBattle': svc.get('statBattle', active),
-        'statAwards': svc.get('statAwards', active),
-        'statCompany': svc.get('statCompany', active),
-        'comments': svc.get('comments', active),
-        'chance': svc.get('chance', False),
-        'chanceLive': svc.get('chanceLive', False),
+        'statBattle': svc.get('statBattle', True) if active else False,
+        'statAwards': svc.get('statAwards', True) if active else False,
+        'statCompany': svc.get('statCompany', True) if active else False,
+        'comments': svc.get('comments', True) if active else False,
+        'chance': svc.get('chance', False) if active else False,
+        'chanceLive': svc.get('chanceLive', False) if active else False,
+        'topClansCount': svc.get('topClansCount', 100),
+        'scale': svc.get('scale', 'xvm'),
+        'rating': svc.get('rating', 'wgr'),
     }
 
 networkServicesSettings = _makeNetworkServicesSettings(None)
-
-def _checkVersion():
-    playerId = getCurrentPlayerId()
-    if playerId is None:
-        return
-
-    try:
-        req = "checkVersion/%d" % playerId
-        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
-        (response, duration, errStr) = loadUrl(server, req)
-
-        #response =
-        """ {"US":{"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "RU": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "CT": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "SEA":{"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "EU": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
-            "VTC":{"message":"www.modxvm.com","ver":"5.2.1-test2"}}"""
-
-        global _verInfo
-        _verInfo = None
-        if not response:
-            #err('Empty response or parsing error')
-            pass
-        else:
-            try:
-                if response is not None:
-                    response = response.strip()
-                    if response not in ('', '[]'):
-                        _verInfo = simplejson.loads(response)
-            except Exception, ex:
-                err('  Bad answer: ' + response)
-                _verInfo = None
-    except Exception, ex:
-        err(traceback.format_exc())
 
 def _getXvmActiveTokenData():
     playerId = getCurrentPlayerId()
@@ -117,22 +93,67 @@ def _getXvmActiveTokenData():
                 return None
             tdata = userprefs.get('tokens.{0}'.format(playerId))
 
-    if tdata is not None and not 'token' in tdata:
+    if tdata is not None and 'token' not in tdata:
         tdata = None
 
     if tdata is not None:
         global _token
         _token = tdata.get('token', '').encode('ascii')
-        if isReplay():
-            global networkServicesSettings
-            networkServicesSettings = _makeNetworkServicesSettings(tdata)
+        global networkServicesSettings
+        networkServicesSettings = _makeNetworkServicesSettings(tdata)
     return tdata
+
+def _checkVersion():
+    playerId = getCurrentPlayerId()
+    # fallback to the last player id if replay is running
+    if playerId is None and isReplay():
+        playerId = userprefs.get('tokens.lastPlayerId')
+    if playerId is None:
+        return
+
+    global versionChecked
+    versionChecked = True
+
+    try:
+        req = "checkVersion/%d" % playerId
+        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+        (response, duration, errStr) = loadUrl(server, req)
+
+        # response =
+        """ {
+              "topClans":{"MGRD":{"rank":"747","cid":"156781"},...},
+              "persistClans":{"WG-A":{"rank":"0","cid":"17996"},...},
+              "info":{"RU": {"message":"www.modxvm.com","ver":"5.2.1-test2"},...}
+            }"""
+
+        global _clansInfo, _verInfo
+        _clansInfo = None
+        _verInfo = None
+        if not response:
+            # err('Empty response or parsing error')
+            pass
+        else:
+            try:
+                if response is not None:
+                    response = response.strip()
+                    if response not in ('', '[]'):
+                        data = simplejson.loads(response)
+                        if data is not None:
+                            _clansInfo = _processClansInfo(data)
+                            _verInfo = data.get('info', None)
+                            global isOnline
+                            isOnline = True
+            except Exception, ex:
+                err('  Bad answer: ' + response)
+                err(traceback.format_exc())
+                _clansInfo = None
+                _verInfo = None
+    except Exception, ex:
+        err(traceback.format_exc())
 
 def _initializeXvmToken():
     global _tdataPrev
-
-    global networkServicesSettings
-    networkServicesSettings = _makeNetworkServicesSettings(None)
+    clearToken()
 
     playerId = getCurrentPlayerId()
     if playerId is None:
@@ -155,7 +176,7 @@ def _initializeXvmToken():
         type = SystemMessages.SM_TYPE.GameGreeting
         msg += '{{l10n:token/active}}\n'
         s = time.time()
-        e = tdata['expires_at']/1000
+        e = tdata['expires_at'] / 1000
         days_left = int((e - s) / 86400)
         hours_left = int((e - s) / 3600) % 24
         mins_left = int((e - s) / 60) % 60
@@ -172,13 +193,17 @@ def _initializeXvmToken():
 
     if tdata is not None:
         _tdataPrev = tdata
-        if not 'token' in tdata and tdataActive is not None:
-            tdata['token'] = tdataActive['token']
+        if tdata['status'] == 'active':
+            if 'token' not in tdata and tdataActive is not None:
+                tdata['token'] = tdataActive['token']
+        else:
+            if 'token' in tdata:
+                del tdata['token']
         userprefs.set('tokens.{0}'.format(playerId), tdata)
         userprefs.set('tokens.lastPlayerId', playerId)
 
-        if tdata['status'] == 'active':
-            networkServicesSettings = _makeNetworkServicesSettings(tdata)
+        global networkServicesSettings
+        networkServicesSettings = _makeNetworkServicesSettings(tdata)
 
     global _token
     _token = '' if tdata is None else tdata.get('token', '').encode('ascii')
@@ -195,12 +220,14 @@ def _checkToken(playerId, token):
         server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
-        #response= """{"status":"inactive"}"""
-        #response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active","token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
-        #response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken","start_at":1393608331657}"""
+        # response= """{"status":"inactive"}"""
+        # response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active",
+        # "token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
+        # response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken",
+        # "start_at":1393608331657}"""
 
         if not response:
-            #err('Empty response or parsing error')
+            # err('Empty response or parsing error')
             pass
         else:
             try:
@@ -220,7 +247,8 @@ def _checkToken(playerId, token):
     return (data, errStr)
 
 def _getXvmMessageHeader():
-    msg = '<textformat tabstops="[130]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" vspace="-5">'
+    msg = '<textformat tabstops="[130]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" ' \
+          'vspace="-5">'
     msg += '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
     rev = ''
     try:
@@ -246,3 +274,14 @@ def _getVersionText(curVer):
             if utils.compareVersions(data['ver'], curVer) == 1:
                 return '{{l10n:ver/newVersion:%s:%s}}\n' % (data['ver'], data['message'])
     return ''
+
+def _processClansInfo(data):
+    clans = data.get('persistClans', {})
+    clans.update(data.get('topClans', {}))
+    # DEBUG
+    # clans['JKHU'] = {'rank':100,'cid':1,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    # clans['MWJL'] = {'rank':101,'cid':2,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    # clans['GPTX'] = {'rank':0,'cid':3,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    # clans['CJBZ'] = {'rank':1,'cid':4,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    # /DEBUG
+    return clans

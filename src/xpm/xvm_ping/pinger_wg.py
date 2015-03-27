@@ -20,7 +20,7 @@ import ResMgr
 
 import simplejson
 from logger import *
-from constants import *
+# from constants import *
 
 #############################
 
@@ -38,11 +38,11 @@ class _Ping(object):
         if loginSection is not None:
             for (name, subSec) in loginSection.items():
                 self.hosts.append({
-                    'name':subSec.readStrings('name')[0],
-                    'url':subSec.readStrings('url')[0]})
+                    'name': subSec.readStrings('name')[0],
+                    'url': subSec.readStrings('url')[0]})
 
     def ping(self, proxy):
-        #debug("ping")
+        # debug("ping")
         if proxy not in self.listeners:
             self.listeners.append(proxy)
 
@@ -55,7 +55,7 @@ class _Ping(object):
             return
 
         try:
-            #debug("ping: start")
+            # debug("ping: start")
             request_sent = True
             peripheries = map((lambda host: host['url']), self.hosts)
             BigWorld.WGPinger.setOnPingCallback(self._onPingPerformed)
@@ -64,9 +64,9 @@ class _Ping(object):
             err('_do_ping() exception: ' + traceback.format_exc())
 
     def _onPingPerformed(self, result):
-        #log("_onPingPerformed")
+        # log("_onPingPerformed")
         try:
-            #debug("ping: end")
+            # debug("ping: end")
             try:
                 BigWorld.WGPinger.clearOnPingCallback()
             except:
@@ -85,12 +85,12 @@ class _Ping(object):
                 BigWorld.callback(0, self._do_ping)
             else:
                 self._respond(res)
-                listeners = []
+                self.listeners = []
 
         except Exception, ex:
             err('_onPingPerformed() exception: ' + traceback.format_exc())
-            self._respond({"Error":ex})
-            listeners = []
+            self._respond({"Error": ex})
+            self.listeners = []
 
     def _respond(self, res):
         try:

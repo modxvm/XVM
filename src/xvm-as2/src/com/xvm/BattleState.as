@@ -26,11 +26,19 @@ class com.xvm.BattleState
         return getUserData(_selfUserName);
     }
 
-    public static function setUserData(userName:String, data:Object)
+    public static function updateUserData(userName:String, data:Object):Boolean
     {
-        var ud = getUserData(userName);
+        var updated:Boolean = false;
+        var ud:BattleStateData = getUserData(userName);
         for (var i in data)
-            ud[i] = data[i];
+        {
+            if (ud[i] != data[i])
+            {
+                updated = true;
+                ud[i] = data[i];
+            }
+        }
+        return updated;
     }
 
     public static function setSelfUserName(userName:String):Void
@@ -43,9 +51,10 @@ class com.xvm.BattleState
         return _screenSize;
     }
 
-    public static function setScreenSize(width:Number, height:Number):Void
+    public static function setScreenSize(width:Number, height:Number, scale:Number):Void
     {
         _screenSize.width = width;
         _screenSize.height = height;
+        _screenSize.scale = scale;
     }
 }

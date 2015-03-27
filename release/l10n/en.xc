@@ -105,6 +105,7 @@
     "PutClassCrew": "Put same class crew",
     "PutPreviousCrew": "Put previous crew",
     "DropAllCrew": "Drop all crew",
+    "noSkills": "No skills",
 
     // Vehicle Params
     "gun_reload_time/actual": "Actual gun reload time",
@@ -113,6 +114,13 @@
     "view_range/stereoscope": "with stereoscope",
     "radio_range/base": "base",
     "radio_range/actual": "actual",
+    "shootingRadius": "Shooting radius",
+    "pitchLimits": "Elevation arc",
+    "traverseLimits": "Gun traverse arc",
+    "terrainResistance": "Terrain resistance",
+    "gravity": "Gravity",
+    "shellSpeed": "Shell speed",
+    "(m/sec)": "(m/sec)",
     "(sec)": "(sec)",
     "(m)": "(m)",
 
@@ -163,6 +171,7 @@
     "CompleteCrew": "Complete crew",
 
     // Comments
+    "Network services unavailable": "Network services unavailable",
     "Error loading comments": "Error loading comments",
     "Error saving comments": "Error saving comments",
     "Comments disabled": "Comments disabled",

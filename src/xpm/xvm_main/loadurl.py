@@ -1,6 +1,5 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
-from pprint import pprint
 import httplib
 from urlparse import urlparse
 import tlslite
@@ -16,6 +15,13 @@ from constants import *
 from logger import *
 import utils
 
+_USER_AGENT = 'xvm'
+try:
+    from __version__ import __branch__, __revision__
+    _USER_AGENT += '-{0}/{1}'.format(__branch__, __revision__)
+except Exception, ex:
+    pass
+
 # result: (response, duration)
 def loadUrl(url, req=None, body=None, showLog=True):
     url = url.replace("{API}", XVM_API_VERSION)
@@ -27,46 +33,45 @@ def loadUrl(url, req=None, body=None, showLog=True):
         # hide some chars of token in the log
         path_log = utils.hide_guid(u.path) if not IS_DEVELOPMENT else u.path
         log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
-    #import time
-    #time.sleep(3)
+    # import time
+    # time.sleep(3)
 
     startTime = datetime.datetime.now()
 
-    (response, compressedSize, errStr) = _loadUrl(u, XVM_TIMEOUT, XVM_FINGERPRINT, body)
+    (response, compressedSize, errStr) = _loadUrl(u, XVM_TIMEOUT, XVM_FINGERPRINTS, body)
 
     elapsed = datetime.datetime.now() - startTime
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
+    duration = None
     if response:
         log("  Time: %d ms, Size: %d (%d) bytes" % (msec, compressedSize, len(response)), '[INFO]  ')
-        #debug('response: ' + response)
+        # debug('response: ' + response)
         if not response.lower().startswith('onexception'):
             duration = msec
-    else:
-        duration = None
 
     return (response, duration, errStr)
 
-def _loadUrl(u, timeout, fingerprint, body): # timeout in msec
-    response = None
-
+def _loadUrl(u, timeout, fingerprint, body):  # timeout in msec
     response = None
     compressedSize = None
     errStr = None
     conn = None
     try:
-        #log(u)
+        # log(u)
         if u.scheme.lower() == 'https':
-            checker = tlslite.Checker(x509Fingerprint=fingerprint)
-            conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout/1000, checker=checker)
+            checker = tlslite.CheckerXvm(x509Fingerprint=fingerprint)
+            conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout / 1000, checker=checker)
         else:
-            conn = httplib.HTTPConnection(u.netloc, timeout=timeout/1000)
+            conn = httplib.HTTPConnection(u.netloc, timeout=timeout / 1000)
+        global _USER_AGENT
         headers = {
-            "Connection":"Keep-Alive",
-            "Accept-Encoding":"gzip",
+            "User-Agent": _USER_AGENT,
+            "Connection": "Keep-Alive",
+            "Accept-Encoding": "gzip",
             "Content-Type": "text/plain; charset=utf-8"}
         conn.request("POST" if body else "GET", u.path, body, headers)
         resp = conn.getresponse()
-        #log(resp.status)
+        # log(resp.status)
 
         response = resp.read()
         compressedSize = len(response)
@@ -74,15 +79,15 @@ def _loadUrl(u, timeout, fingerprint, body): # timeout in msec
         encoding = resp.getheader('content-encoding')
 
         if encoding is None:
-            pass # leave response as is
+            pass  # leave response as is
         elif encoding == 'gzip':
             response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
         else:
-            raise Exception('Encoding not supported: %s' % (encoding))
+            raise Exception('Encoding not supported: %s' % encoding)
 
-        #log(response)
-        if not resp.status in [200, 202]: # 200 OK, 202 Accepted
-            m = re.search(r'<body[^>]+?>\r?\n?(.+?)</body>', response, flags=re.S|re.I)
+        # log(response)
+        if resp.status not in [200, 202, 204]:  # 200 OK, 202 Accepted, 204 No Content
+            m = re.search(r'<body[^>]+?>\r?\n?(.+?)</body>', response, flags=re.S | re.I)
             if m:
                 response = m.group(1)
             response = re.sub(r'<[^>]+>', '', response)
@@ -95,17 +100,23 @@ def _loadUrl(u, timeout, fingerprint, body): # timeout in msec
         err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
         errStr = str(ex)
 
+    except tlslite.TLSFingerprintError as ex:
+        response = None
+        err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
+        from pprint import pprint
+        errStr = str(ex)
+
     except Exception as ex:
         response = None
         errStr = str(ex)
         if not isinstance(errStr, unicode):
             errStr = errStr.decode(locale.getdefaultlocale()[1]).encode("utf-8")
-        #log(errStr)
+        # log(errStr)
         tb = traceback.format_exc(1).split('\n')
         err('loadUrl failed: %s%s' % (utils.hide_guid(errStr), tb[1]))
 
-    #finally:
-        #if conn is not None:
+    # finally:
+        # if conn is not None:
         #    conn.close()
 
     return (response, compressedSize, errStr)

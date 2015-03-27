@@ -7,7 +7,6 @@ package xvm.profile
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.misc.*;
-    import com.xvm.utils.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
     import net.wg.gui.lobby.header.vo.*;

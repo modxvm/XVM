@@ -9,9 +9,7 @@ package xvm.tcarousel
     import com.xvm.misc.*;
     import com.xvm.utils.*;
     import com.xvm.types.dossier.*;
-    import net.wg.data.*;
     import net.wg.gui.lobby.hangar.*;
-    import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 

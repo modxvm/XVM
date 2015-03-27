@@ -5,17 +5,11 @@
 package xvm.hangar.views
 {
     import com.xvm.*;
-    import com.xvm.io.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.types.cfg.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.external.*;
     import flash.utils.*;
     import net.wg.gui.login.impl.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import xvm.hangar.*;
 
     public class Login extends XvmViewBase
     {

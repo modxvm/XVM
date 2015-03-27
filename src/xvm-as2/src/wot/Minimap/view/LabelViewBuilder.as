@@ -24,7 +24,7 @@ class wot.Minimap.view.LabelViewBuilder
 
         var textField:TextField = label.createTextField(TEXT_FIELD_NAME, TF_DEPTH, offset.x, offset.y, 100, 40);
         label[TEXT_FIELD_NAME] = textField;
-        textField.antiAliasType = "advanced";
+        textField.antiAliasType = Config.config.minimap.labels.units.antiAliasType;
         textField.html = true;
         textField.multiline = true;
         textField.selectable = false;

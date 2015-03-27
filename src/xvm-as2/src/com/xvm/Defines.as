@@ -5,7 +5,7 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "6.0.0-dev";
+    public static var XVM_VERSION:String = "6.1.0-dev";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.9.6";
     public static var CONFIG_VERSION:String = "5.1.0";
@@ -28,9 +28,6 @@ class com.xvm.Defines
     // res_mods/mods/shared_resources/xvm/ (for <img> tag))
     public static var XVM_IMG_RES_ROOT:String = "../mods/shared_resources/xvm/";
 
-    // res_mods/mods/shared_resources/xvm/res/SixthSense.png
-    public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
-
     // res_mods/xvm/configs/xvm.xc
     public static var CONFIG_FILE_NAME:String = "xvm.xc";
     // res_mods/x.x.x/gui/flash/XVM.xvmconf
@@ -47,7 +44,7 @@ class com.xvm.Defines
     // Default path to vehicle icons (relative)
     public static var WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
 
-    public static var MAX_BATTLETIER_HPS = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000, 3000];
+    //public static var MAX_BATTLETIER_HPS = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000, 3000];
 
     // Team
     public static var TEAM_ALLY:Number = 1;
@@ -158,4 +155,19 @@ class com.xvm.Defines
     public static var E_MOVING_STATE_CHANGED = "moving_state_changed";
     public static var E_MODULE_DESTROYED = "module_destroyed";
     public static var E_MODULE_REPAIRED = "module_repaired";
+
+    // BattleTypes
+    public static var BATTLE_TYPE_UNKNOWN = 0;
+    public static var BATTLE_TYPE_REGULAR = 1;
+    public static var BATTLE_TYPE_TRAINING = 2;
+    public static var BATTLE_TYPE_COMPANY = 3;
+    public static var BATTLE_TYPE_TOURNAMENT = 4;
+    public static var BATTLE_TYPE_CLAN = 5;
+    public static var BATTLE_TYPE_TUTORIAL = 6;
+    public static var BATTLE_TYPE_CYBERSPORT = 7;
+    public static var BATTLE_TYPE_HISTORICAL = 8;
+    public static var BATTLE_TYPE_EVENT_BATTLES = 9;
+    public static var BATTLE_TYPE_SORTIE = 10;
+    public static var BATTLE_TYPE_FORT_BATTLE = 11;
+    public static var BATTLE_TYPE_RATED_CYBERSPORT = 12;
 }

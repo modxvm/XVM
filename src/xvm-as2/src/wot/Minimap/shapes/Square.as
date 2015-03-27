@@ -8,8 +8,8 @@ import wot.PlayersPanel.*;
 class wot.Minimap.shapes.Square extends ShapeAttach
 {
     /**
-     * Draw 1km x 1km box.
-     * Represents maximun draw distance.
+     * Draw 1km x 1km rectangle.
+     * Represents maximum draw distance.
      * Game engine limitation.
      */
 
@@ -19,7 +19,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     public function Square()
     {
-        /// Disable square mod if user is artillery class
+        // Disable square mod if user is artillery class
         if (!MapConfig.artiEnabled && isArtillery())
             return;
 

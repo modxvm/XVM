@@ -1,5 +1,5 @@
 /**
- * XVM - squad window
+ * XVM
  * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  */
 package xvm.quests
@@ -7,12 +7,9 @@ package xvm.quests
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import flash.utils.*;
-    import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.questsWindow.*;
-    import net.wg.gui.events.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.events.*;
 
     public class QuestsXvmView extends XvmViewBase
     {

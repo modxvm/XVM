@@ -6,9 +6,7 @@ package xvm.hangar.views
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.io.*;
     import com.xvm.types.*;
-    import com.xvm.utils.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
     import net.wg.gui.lobby.battleloading.*;
@@ -17,8 +15,6 @@ package xvm.hangar.views
 
     public class BattleLoading extends XvmViewBase
     {
-        private static const XPM_COMMAND_GET_COMMENTS:String = "xpm.get_comments";
-
         public function BattleLoading(view:IView)
         {
             super(view);
@@ -37,27 +33,7 @@ package xvm.hangar.views
 
             logBriefConfigurationInfo();
 
-            updateComments();
-
             waitInit();
-        }
-
-        // TODO: load comments only for players in the current battle
-        private function updateComments():void
-        {
-            try
-            {
-                var json_str:String = Xvm.cmd(XPM_COMMAND_GET_COMMENTS);
-                //Logger.addObject(json_str);
-                var o:Object = JSONx.parse(json_str);
-                var comments:Object = (o != null && o.hasOwnProperty("players")) ? o.players : null;
-                //Logger.addObject(comments);
-                Macros.RegisterCommentsData(comments);
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
         }
 
         private function waitInit():void
@@ -85,6 +61,7 @@ package xvm.hangar.views
                 "                               XVM_VERSION=" + Defines.XVM_VERSION + " for WoT " + Defines.WOT_VERSION +"\n" +
                 "                               gameRegion=" + Config.gameRegion + "\n" +
                 "                               configVersion=" + Config.config.configVersion + "\n" +
+                "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +
                 "                               useStandardMarkers=" + Config.config.markers.useStandardMarkers + "\n" +
                 "                               servicesActive=" + Config.networkServicesSettings.servicesActive + "\n" +
                 "                               statBattle=" + Config.networkServicesSettings.statBattle);

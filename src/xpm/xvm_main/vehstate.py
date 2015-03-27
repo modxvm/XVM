@@ -24,9 +24,9 @@ from xfw import *
 from logger import *
 
 def _getVehicleStateData(vID):
-    #log(vars(vehicle))
-    #log(vars(vehicle.typeDescriptor))
-    #self.maxHealth = vData['vehicleType'].maxHealth
+    # log(vars(vehicle))
+    # log(vars(vehicle.typeDescriptor))
+    # self.maxHealth = vData['vehicleType'].maxHealth
 
     arenaVehicle = BigWorld.player().arena.vehicles.get(vID, None)
     if arenaVehicle is None:
@@ -55,7 +55,11 @@ _spotted_cache = {}
 def _updateSpottedStatus(vID, spotted):
     global _spotted_cache
 
-    arenaVehicle = BigWorld.player().arena.vehicles.get(vID, None)
+    arena = getattr(BigWorld.player(), 'arena', None)
+    if arena is None:
+        return
+
+    arenaVehicle = arena.vehicles.get(vID, None)
     if arenaVehicle is None:
         return
 

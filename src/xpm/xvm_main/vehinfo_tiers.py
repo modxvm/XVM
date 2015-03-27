@@ -37,7 +37,7 @@ _special = {
 
     # level 5
     'germany:PzIV_Hydro':           [ 5, 6 ],
-    'germany:Stug_IV':              [ 5, 6 ],
+    'germany:G104_Stug_IV':         [ 5, 6 ],
     'ussr:Churchill_LL':            [ 5, 6 ],
     'ussr:SU_85I':                  [ 5, 6 ],
     'ussr:Matilda_II_LL':           [ 5, 6 ],

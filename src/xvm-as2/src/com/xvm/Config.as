@@ -9,6 +9,7 @@ class com.xvm.Config
     // Public vars
     public static var config:Object = null;
     public static var networkServicesSettings:Object = null;
+    public static var IS_DEVELOPMENT:Boolean = false;
 
     // INTERNAL
 
@@ -21,19 +22,19 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, vehInfoData:String, networkServicesSettings:String)
+    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, vehInfoData:String, networkServicesSettings:String, IS_DEVELOPMENT:Boolean)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
         {
             Config.config = JSONx.parse(config_data);
             //Logger.addObject(Config.config);
-            Locale.initializeLanguageFile(lang_str);
-            Macros.RegisterBattleTierData(battleLevel);
-            VehicleInfo.onVehicleInfoData(vehInfoData);
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
-
-            Cmd.getComments(this, onGetCommentsCallback);
+            Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
+            Macros.RegisterGlobalMacrosData(battleLevel, battleType);
+            ApplyGlobalMacros();
+            Locale.initializeLanguageFile(lang_str);
+            VehicleInfo.onVehicleInfoData(vehInfoData);
 
             Logger.add("Config: Loaded");
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );
@@ -44,17 +45,24 @@ class com.xvm.Config
         }
     }
 
-    private function onGetCommentsCallback(json_str:String)
+    private function ApplyGlobalMacros()
     {
-        try
-        {
-            var comments:Object = JSONx.parse(json_str).players;
-            //Logger.addObject(comments, 2);
-            Macros.RegisterCommentsData(comments);
-        }
-        catch (ex)
-        {
-            Logger.add("onGetCommentsCallback: ERROR: " + Utils.parseError(ex));
-        }
+        // playersPanel
+        var cfg = Config.config.playersPanel;
+        cfg.startMode = Macros.FormatGlobalStringValue(cfg.startMode);
+        cfg.altMode = Macros.FormatGlobalStringValue(cfg.altMode);
+        cfg.short.enabled = Macros.FormatGlobalBooleanValue(cfg.short.enabled);
+        cfg.medium.enabled = Macros.FormatGlobalBooleanValue(cfg.medium.enabled);
+        cfg.medium2.enabled = Macros.FormatGlobalBooleanValue(cfg.medium2.enabled);
+        cfg.large.enabled = Macros.FormatGlobalBooleanValue(cfg.large.enabled);
+        cfg.none.enabled = Macros.FormatGlobalBooleanValue(cfg.none.enabled);
+        cfg.none.leftPanel.x = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.x);
+        cfg.none.leftPanel.y = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.y);
+        cfg.none.leftPanel.width = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.width);
+        cfg.none.leftPanel.height = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.height);
+        cfg.none.rightPanel.x = Macros.FormatGlobalNumberValue(cfg.none.rightPanel.x);
+        cfg.none.rightPanel.y = Macros.FormatGlobalNumberValue(cfg.none.rightPanel.y);
+        cfg.none.rightPanel.width = Macros.FormatGlobalNumberValue(cfg.none.rightPanel.width);
+        cfg.none.rightPanel.height = Macros.FormatGlobalNumberValue(cfg.none.rightPanel.height);
     }
 }

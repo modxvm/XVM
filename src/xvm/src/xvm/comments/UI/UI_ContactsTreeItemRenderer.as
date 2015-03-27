@@ -8,13 +8,14 @@ package xvm.comments.UI
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
+    import net.wg.gui.messenger.controls.*;
     import net.wg.gui.messenger.data.*;
     import scaleform.clik.constants.*;
-    import xvm.comments.*;
-    import xvm.comments.data.*;
+    import scaleform.clik.core.*;
 
     public class UI_ContactsTreeItemRenderer extends ContactsTreeItemRendererUI
     {
+        private var panel:Sprite = null;
         private var nickImg:UILoaderAlt = null;
         private var commentImg:UILoaderAlt = null;
 
@@ -22,83 +23,83 @@ package xvm.comments.UI
         {
             //Logger.add("UI_ContactsTreeItemRenderer");
             super();
+        }
 
+        override protected function configUI():void
+        {
+            super.configUI();
             createControls();
         }
 
         override protected function draw():void
         {
-            if (isInvalid(InvalidationType.DATA))
+            try
             {
-                var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-                if (d)
+                //Logger.addObject(data, 3);
+
+                if (isInvalid(InvalidationType.DATA))
                 {
-                    var id:Number = d.id as Number;
-                    if (d.isBrunch || !id)
+                    var myData:ITreeItemInfo = this.getData() as ITreeItemInfo;
+                    if (myData && !myData.isBrunch && myData.data != null)
                     {
-                        nickImg.visible = false;
-                        commentImg.visible = false;
-                    }
-                    else
-                    {
-                        try
+                        if (this.xvm_contactItem == null)
                         {
-                            var pd:PlayerCommentData = CommentsGlobalData.instance.getPlayerData(id);
-
-                            if (pd != null)
-                            {
-                                if (pd.nick != null)
-                                {
-                                    d.data.xvm_originalUserName = d.data.userProps.userName;
-                                    //d.data.userProps.userName = pd.nick;
-                                    d.data.xvm_userName = pd.nick;
-                                }
-
-                                if (pd.comment != null)
-                                {
-                                    d.data.xvm_comment = pd.comment;
-                                }
-                            }
-                            nickImg.visible = pd != null && pd.nick != null && pd.nick != "";
-                            commentImg.visible = pd != null && pd.comment != null && pd.comment != "";
-                        }
-                        catch (ex:Error)
-                        {
-                            Logger.add(ex.getStackTrace());
+                            this.xvm_contactItem = new UI_ContactItem();
                         }
                     }
                 }
-            }
 
-            super.draw();
+                nickImg.visible = false;
+                commentImg.visible = false;
+
+                super.draw();
+
+                if (this.xvm_currentContentItem is ContactItem)
+                {
+                    var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
+                    if (d && d.data.xvm_contact_data)
+                    {
+                        var nick:String = d.data.xvm_contact_data.nick;
+                        var comment:String = d.data.xvm_contact_data.comment;
+                        nickImg.visible = nick != null && nick != "";
+                        commentImg.visible = comment != null && comment != "";
+                    }
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
-        override protected function handleMouseRollOver(param1:MouseEvent):void
+        override protected function handleMouseRollOver(e:MouseEvent):void
         {
-            super.handleMouseRollOver(param1);
-            var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-            if (!d)
+            super.handleMouseRollOver(e);
+
+            var currentContentItem:UIComponent = this.getCurrentContentItem();
+            if (!(currentContentItem is ContactItem))
                 return;
 
-            var comment:String = d.data.xvm_comment;
+            var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
+            if (!d || !d.data.xvm_contact_data)
+                return;
+
+            var comment:String = d.data.xvm_contact_data.comment;
             if (!comment)
                 return;
 
-            //var userPropsVO:IUserProps = new ContactItemVO(d.data).userPropsVO;
-            //var userName:String = App.utils.commons.getFullPlayerName(userPropsVO);
-            var userName:String = d.data.xvm_originalUserName;
-            App.toolTipMgr.show(userName +
-                (comment == null ? "" : "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>"));
+            App.toolTipMgr.show(d.data.userProps.userName + "\n\n" +
+                "<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
         }
 
         // PRIVATE
 
         private function createControls():void
         {
-            var mc:Sprite = this.addChildAt(new Sprite(), 0) as Sprite;
-            mc.x = width - 32;
+            panel = this.addChildAt(new Sprite(), 0) as Sprite;
+            panel.x = width - 34;
 
-            this.nickImg = mc.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+            this.nickImg = panel.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
                 autoSize: true,
                 maintainAspectRatio: false,
                 x: 6,
@@ -106,10 +107,11 @@ package xvm.comments.UI
                 width: 10,
                 height: 20,
                 alpha: 0.5,
-                source: "../maps/icons/messenger/iconContacts.png"
+                source: "../maps/icons/messenger/iconContacts.png",
+                visible: false
             })) as UILoaderAlt;
 
-            this.commentImg = mc.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+            this.commentImg = panel.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
                 autoSize: true,
                 maintainAspectRatio: false,
                 x: 14,
@@ -117,26 +119,17 @@ package xvm.comments.UI
                 width: 16,
                 height: 16,
                 alpha: 0.5,
-                source: "../maps/icons/messenger/service_channel_icon.png"
+                source: "../maps/icons/messenger/service_channel_icon.png",
+                visible: false
             })) as UILoaderAlt;
         }
     }
 }
 /*
 data: { // net.wg.gui.messenger.data::ContactsListTreeItemInfo
-  "parent": { // net.wg.gui.messenger.data::ContactsListTreeItemInfo
-    "parent": null,
-    "isBrunch": false,
-    "isOpened": false,
-    "children": null,
-    "data": "[object Object]",
-    "gui": "[object Object]",
-    "id": 0,
-    "parentItemData": null
-  },
+  "id": 13494688,
   "isBrunch": false,
   "isOpened": false,
-  "children": null,
   "data": {
     "isOnline": false,
     "userProps": {
@@ -151,12 +144,15 @@ data: { // net.wg.gui.messenger.data::ContactsListTreeItemInfo
       "suffix": " <IMG SRC='img://gui/maps/icons/messenger/contactConfirmNeeded.png' width='16' height='16' vspace='-6' hspace='0'/>"
     },
     "note": "",
+    "xvm_contact_data": {
+      "nick": "nick",
+      "comment": "comment"
+    },
     "dbID": 7027996
   },
-  "gui": {
-    "id": 13494688
-  },
-  "id": 13494688,
+  "gui": { "id": 13494688 },
+  "parent": {...}, // net.wg.gui.messenger.data::ContactsListTreeItemInfo
+  "children": null,
   "parentItemData": null
 }
 */

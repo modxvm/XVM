@@ -268,16 +268,16 @@
     // Dynamic color for win chance
     // Динамический цвет для шанса на победу
     "winChance": [
-      { "value": 14.5, "color": ${"def.colorRating.very_bad" } },
-      { "value": 34.5, "color": ${"def.colorRating.bad"      } },
-      { "value": 64.5, "color": ${"def.colorRating.normal"   } },
-      { "value": 79.5, "color": ${"def.colorRating.good"     } },
+      { "value": 24.5, "color": ${"def.colorRating.very_bad" } },
+      { "value": 39.5, "color": ${"def.colorRating.bad"      } },
+      { "value": 59.5, "color": ${"def.colorRating.normal"   } },
+      { "value": 74.5, "color": ${"def.colorRating.good"     } },
       { "value": 89.5, "color": ${"def.colorRating.very_good"} },
       { "value": 101,  "color": ${"def.colorRating.unique"   } }
     ],
     // Dynamic color by win percent
     // Динамический цвет по проценту побед
-    "rating": [
+    "winrate": [
       { "value": 46.5, "color": ${"def.colorRating.very_bad" } },   //  0   - 46.5  - very bad   (20% of players)
       { "value": 48.5, "color": ${"def.colorRating.bad"      } },   // 46.5 - 48.5  - bad        (better then 20% of players)
       { "value": 51.5, "color": ${"def.colorRating.normal"   } },   // 48.5 - 51.5  - normal     (better then 60% of players)

@@ -6,19 +6,15 @@ package xvm.autologin
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import flash.display.*;
     import flash.ui.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.windows.*;
+    import flash.utils.*;
     import net.wg.gui.events.*;
     import net.wg.gui.intro.*;
-    import net.wg.gui.lobby.dialogs.*;
     import net.wg.gui.login.impl.*;
     import net.wg.gui.login.impl.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
     import scaleform.clik.events.*;
     import scaleform.clik.ui.*;
 
@@ -93,21 +89,23 @@ package xvm.autologin
                 var form:SimpleForm = e.view as SimpleForm;
                 if (form)
                 {
-                    App.utils.scheduler.scheduleTask(function():void
+                    var $this:AutoLoginXvmView = this;
+                    setTimeout(function():void
                     {
                         if (form.rememberPwdCheckbox.selected)
-                            doAutologin();
-                    }, 100);
+                            $this.doAutologin();
+                    }, 300);
                 }
             }
         }
 
         private function doAutologin():void
         {
-            App.utils.scheduler.scheduleTask(function():void
+            var $this:AutoLoginXvmView = this;
+            setTimeout(function():void
             {
-                if (loginPage != null)
-                    loginPage.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
+                if ($this.loginPage != null)
+                    $this.loginPage.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
             }, 100);
         }
     }

@@ -29,6 +29,8 @@ class com.xvm.DataTypes.StatData
         public var vehicles:Object = null;     // vehicles stat data, key - vId
 
         public var clan:String = null;         // clan name ("CLAN")
+        public var clanInfoId:Number = NaN;    // clan id
+        public var clanInfoRank:Number = NaN;  // clan rank (ELO)
         public var name:String = null;         // player name in current game ("sirmax2_RU" for Common Test)
         public var status:Number = NaN;        // XVM activation status
         public var lang:String = null;         // client language
@@ -38,6 +40,8 @@ class com.xvm.DataTypes.StatData
         public var ready:Boolean = false;      // avatarReady // TODO: remove
         public var maxHealth:Number = NaN;     // max health
         public var turretType:Number = NaN;    // turret type
+
+        public var xvm_contact_data:Object = null;
 
         // calculated
         public var r:Number = NaN;             // global win rate (int)

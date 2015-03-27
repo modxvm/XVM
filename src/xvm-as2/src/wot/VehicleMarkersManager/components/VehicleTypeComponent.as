@@ -70,7 +70,6 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
 
     public function setMarkerState(value)
     {
-        //Logger.add("setMarkerState: " + value + " " + proxy['xvm'].m_playerFullName);
         m_markerState = value;
         var state = /*m_markerState == "immediate_dead" ? "dead" :*/ m_markerState;
         proxy.marker.gotoAndPlay(state);

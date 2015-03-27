@@ -36,7 +36,7 @@ class com.xvm.PlayerInfo extends MovieClip
         return icon;
     }
 
-    public static function setSource(icon: UILoaderAlt, playerId:Number, nick: String, clan: String)
+    public static function setSource(icon:UILoaderAlt, playerId:Number, nick:String, clan:String, emblem:String)
     {
         if (icon["nick"] == nick)
             return;
@@ -60,6 +60,11 @@ class com.xvm.PlayerInfo extends MovieClip
             paths.push(prefix + "ID/" + playerId + ".png");
             prefix += Config.config.region + "/";
             paths.push(prefix + "nick/" + nick + ".png");
+            if (emblem != null)
+            {
+                //Logger.add('emblem: ' + Utils.fixImgTag(emblem));
+                paths.push(Utils.fixImgTag(emblem));
+            }
             if (clan)
             {
                 paths.push(prefix + "clan/" + clan + ".png");

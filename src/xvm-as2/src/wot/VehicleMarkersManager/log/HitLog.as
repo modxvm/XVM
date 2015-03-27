@@ -191,6 +191,6 @@ class wot.VehicleMarkersManager.log.HitLog
         style.parseCSS("." + STYLE_NAME + "{font-family:$FieldFont;font-size:15px;color:#f4efe8;}");
         textField.styleSheet = style;
 
-        saveText(defaultHeader);
+        saveText(Macros.FormatGlobalStringValue(defaultHeader));
     }
 }

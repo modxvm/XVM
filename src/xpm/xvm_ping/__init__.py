@@ -6,7 +6,7 @@
 XFW_MOD_VERSION    = "2.0.0"
 XFW_MOD_URL        = "http://www.modxvm.com/"
 XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XFW_GAME_VERSIONS  = ["0.9.6"]
+XFW_GAME_VERSIONS  = ["0.9.6","0.9.7"]
 
 #####################################################################
 # constants
@@ -26,7 +26,7 @@ from xfw import *
 from xvm_main.python.logger import *
 
 import pinger
-#import pinger_wg as pinger
+# import pinger_wg as pinger
 
 #####################################################################
 # event handlers
@@ -45,12 +45,12 @@ def fini():
 
 _LOG_COMMANDS = (
     #XPM_COMMAND_PING,
-    )
+)
 
 # returns: (result, status)
 def onXpmCommand(cmd, *args):
     try:
-        if (cmd in _LOG_COMMANDS):
+        if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
             debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
         if cmd == XPM_COMMAND_PING:
             pinger.ping()
@@ -64,18 +64,18 @@ def onXpmCommand(cmd, *args):
 # WGPinger (WARNING: bugs with the multiple hosts)
 
 def PreDefinedHostList_autoLoginQuery(base, callback):
-    #debug('> PreDefinedHostList_autoLoginQuery')
+    # debug('> PreDefinedHostList_autoLoginQuery')
     import pinger_wg
     if pinger_wg.request_sent:
         BigWorld.callback(0, lambda: PreDefinedHostList_autoLoginQuery(base, callback))
     else:
-        #debug('login ping: start')
+        # debug('login ping: start')
         pinger_wg.request_sent = True
         BigWorld.WGPinger.setOnPingCallback(PreDefinedHostList_onPingPerformed)
         base(callback)
 
 def PreDefinedHostList_onPingPerformed(result):
-    #debug('login ping: end')
+    # debug('login ping: end')
     pinger_wg.request_sent = False
     from predefined_hosts import g_preDefinedHosts
     g_preDefinedHosts._PreDefinedHostList__onPingPerformed(result)
@@ -88,7 +88,7 @@ def _RegisterEvents():
     RegisterEvent(game, 'fini', fini)
 
     # enable for pinger_wg
-    #from predefined_hosts import g_preDefinedHosts
-    #OverrideMethod(g_preDefinedHosts, 'autoLoginQuery', PreDefinedHostList_autoLoginQuery)
+    # from predefined_hosts import g_preDefinedHosts
+    # OverrideMethod(g_preDefinedHosts, 'autoLoginQuery', PreDefinedHostList_autoLoginQuery)
 
 BigWorld.callback(0, _RegisterEvents)

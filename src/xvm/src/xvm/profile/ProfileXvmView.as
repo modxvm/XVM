@@ -8,19 +8,13 @@ package xvm.profile
     import com.xvm.infrastructure.*;
     import com.xvm.misc.*;
     import com.xvm.utils.*;
-    import flash.events.*;
-    import flash.utils.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.gui.lobby.profile.data.SectionLayoutManager;
-    import net.wg.gui.lobby.profile.pages.awards.ProfileAwards;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.window.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.events.*;
     import xvm.profile.components.*;
 
     public class ProfileXvmView extends XvmViewBase

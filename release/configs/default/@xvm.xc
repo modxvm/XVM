@@ -27,10 +27,10 @@
 
   // Language used in mod
   // "auto" - automatically detect language from game client,
-  // or specify file name located in res_mods/xvm/l10n/ (ex: "en")
+  // or specify file name located in res_mods/mods/shared_resources/xvm/l10n/ (ex: "en")
   // Используемый язык в моде
   // "auto" - автоматически определять язык клиента игры,
-  // или укажите имя файла в папке res_mods/xvm/l10n/ (например, "en")
+  // или укажите имя файла в папке res_mods/mods/shared_resources/xvm/l10n/ (например, "en")
   "language": "auto",
 
   // Game Region
@@ -58,7 +58,7 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "25.12.2014",
+    "date": "14.03.2015",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
@@ -66,7 +66,7 @@
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "5.5.1.1"
+    "modMinVersion": "6.1.0"
   },
 
   // Parameters for login screen.

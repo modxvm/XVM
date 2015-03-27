@@ -31,6 +31,8 @@ TURRET_TYPE_ONLY_ONE = 0
 TURRET_TYPE_TOP_GUN_POSSIBLE = 1
 TURRET_TYPE_NO_TOP_GUN = 2
 
+CONST_45_IN_RADIANS = radians(45)
+
 _VEHICLE_TYPE_XML_PATH = 'scripts/item_defs/vehicles/'
 
 def _init():
@@ -43,8 +45,8 @@ def _init():
                     continue
 
                 item = vehicles.g_cache.vehicle(nationID, id)
-                #pprint(vars(item))
-                #log('%i	%i	%s' % (descr['level'], descr['compactDescr'], descr['name']))
+                # pprint(vars(item))
+                # log('%i	%i	%s' % (descr['level'], descr['compactDescr'], descr['name']))
 
                 data = dict()
                 data['vid'] = descr['compactDescr']
@@ -59,12 +61,15 @@ def _init():
 
                 stockTurret = item.turrets[0][0]
                 topTurret = item.turrets[0][-1]
+                topGun = topTurret['guns'][-1]
+
                 if len(item.hulls) != 1:
                     log('WARNING: TODO: len(hulls) != 1 for vehicle ' + descr['name'])
                 data['hpStock'] = item.hulls[0]['maxHealth'] + stockTurret['maxHealth']
                 data['hpTop'] = item.hulls[0]['maxHealth'] + topTurret['maxHealth']
                 data['turret'] = _getTurretType(item, nation)
-                (data['visRadius'], data['firingRadius'], data['artyRadius']) = _getRanges(topTurret, data['nation'], data['vclass'])
+                (data['visRadius'], data['firingRadius'], data['artyRadius']) = _getRanges(topTurret, topGun,
+                                                                                           data['nation'], data['vclass'])
 
                 (data['tierLo'], data['tierHi']) = getTiers(data['level'], data['vclass'], data['key'])
 
@@ -91,32 +96,36 @@ def _init():
     except Exception, ex:
         err(traceback.format_exc())
 
-    #pprint(res[0])
-    #pprint(res)
+    # pprint(res[0])
+    # pprint(res)
     return simplejson.dumps(res)
 
-def _getRanges(turret, nation, vclass):
+def _getRanges(turret, gun, nation, vclass):
     visionRadius = firingRadius = artyRadius = 0
     gunsInfoPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml/shared/'
 
     # Turret-dependent
-    visionRadius = int(turret['circularVisionRadius']) # 240..420
-    gun = turret['guns'][-1]
+    visionRadius = int(turret['circularVisionRadius'])  # 240..420
 
     # Gun-dependent
     shots = gun['shots']
     for shot in shots:
         radius = int(shot['maxDistance'])
         if firingRadius < radius:
-            firingRadius = radius # 10000, 720, 395, 360, 350
+            firingRadius = radius  # 10000, 720, 395, 360, 350
 
         if vclass == 'SPG' and shot['shell']['kind'] == 'HIGH_EXPLOSIVE':
-            pitchLimit = ResMgr.openSection(gunsInfoPath + gun['name']).readInt('pitchLimits')
-            pitchLimit = min(45, -pitchLimit) # -35..-65
+            try:    # faster way
+                pitchLimit_rad = min(CONST_45_IN_RADIANS, -gun['pitchLimits']['basic'][0])
+            except: # old way
+                gunsInfoPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml/shared/'
+                pitchLimit = ResMgr.openSection(gunsInfoPath + gun['name']).readInt('pitchLimits')
+                pitchLimit = min(45, -pitchLimit)  # -35..-65
+                pitchLimit_rad = radians(pitchLimit)
 
-            radius = int(pow(shot['speed'], 2) * sin(radians(2 * pitchLimit)) / shot['gravity'])
+            radius = int(pow(shot['speed'], 2) * sin(2 * pitchLimit_rad) / shot['gravity'])
             if artyRadius < radius:
-                artyRadius = radius # 485..1469
+                artyRadius = radius  # 485..1469
 
     return (visionRadius, firingRadius, artyRadius)
 

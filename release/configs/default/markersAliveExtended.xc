@@ -237,7 +237,7 @@
         "x": 0,
         "y": -46,
         "alpha": 100,
-        "color": "{{c:rating}}",
+        "color": "{{c:winrate}}",
         "font": {
           "name": "$FieldFont",
           "size": 11,
@@ -253,7 +253,7 @@
           "size": 6,
           "strength": 200
         },
-        "format": "{{rating%2d~%}}"
+        "format": "{{winrate%2d~%}}"
       }
     ]
   },
@@ -414,7 +414,7 @@
         "x": 0,
         "y": -46,
         "alpha": 100,
-        "color": "{{c:rating}}",
+        "color": "{{c:winrate}}",
         "font": {
           "name": "$FieldFont",
           "size": 11,
@@ -430,7 +430,7 @@
           "size": 6,
           "strength": 200
         },
-        "format": "{{rating%2d~%}}"
+        "format": "{{winrate%2d~%}}"
       }
     ]
   }

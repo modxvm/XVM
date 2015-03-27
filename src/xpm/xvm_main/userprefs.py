@@ -10,8 +10,8 @@ def set(key, value):
 # PRIVATE
 
 import os
-import traceback
 import cPickle
+import traceback
 
 import BigWorld
 
@@ -21,12 +21,12 @@ class _UserPrefs():
     def __init__(self):
         try:
             self.cache_dir = os.path.join(
-                os.path.dirname(unicode(BigWorld.wg_getPreferencesFilePath(), 'utf-8', errors = 'ignore')),
+                os.path.dirname(unicode(BigWorld.wg_getPreferencesFilePath(), 'utf-8', errors='ignore')),
                 'xvm')
             if not os.path.isdir(self.cache_dir):
                 os.makedirs(self.cache_dir)
         except:
-            err('userPrefs.__init__() exception: ' + traceback.format_exc())
+            err(traceback.format_exc())
 
     def get(self, key):
         fd = None
@@ -36,7 +36,7 @@ class _UserPrefs():
                 fd = open(fileName, 'rb')
                 return cPickle.load(fd)
         except:
-            err('userPrefs.get() exception: ' + traceback.format_exc())
+            err(traceback.format_exc())
         finally:
             if fd is not None:
                 fd.close()
@@ -52,7 +52,7 @@ class _UserPrefs():
             cPickle.dump(value, fd, -1)
             os.fsync(fd)
         except:
-            err('userPrefs.set() exception: ' + traceback.format_exc())
+            err(traceback.format_exc())
         finally:
             if fd is not None:
                 fd.close()

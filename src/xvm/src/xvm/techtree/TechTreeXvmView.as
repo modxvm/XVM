@@ -7,13 +7,11 @@ package xvm.techtree
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.misc.*;
-    import com.xvm.utils.*;
     import flash.utils.*;
     import net.wg.gui.lobby.techtree.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.events.*;
-    import xvm.techtree.*;
 
     public class TechTreeXvmView extends XvmViewBase
     {

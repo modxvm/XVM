@@ -3,10 +3,7 @@ package xvm.profile.components
     import com.xvm.*;
     import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
-    import flash.utils.*;
-    import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
-    import net.wg.infrastructure.events.*;
 
     public class TechniquePage extends Technique
     {

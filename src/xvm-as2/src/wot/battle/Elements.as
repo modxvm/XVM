@@ -10,7 +10,7 @@ import com.xvm.Strings;
 
 class wot.battle.Elements
 {
-    public static var width, height;
+    public static var width, height, scale;
 
     public static var CMD_LOG:String = "$log";
     public static var CMD_DELAY:String = "$delay";

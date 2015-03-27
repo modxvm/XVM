@@ -20,7 +20,7 @@ from subprocess import Popen, PIPE, STARTUPINFO, STARTF_USESHOWWINDOW, SW_HIDE
 import BigWorld
 import ResMgr
 
-import simplejson
+# import simplejson
 
 from xfw import *
 from xvm_main.python.logger import *
@@ -42,8 +42,8 @@ class _Ping(object):
         if loginSection is not None:
             for (name, subSec) in loginSection.items():
                 self.hosts.append({
-                    'name':subSec.readStrings('name')[0],
-                    'url':subSec.readStrings('url')[0]})
+                    'name': subSec.readStrings('name')[0],
+                    'url': subSec.readStrings('url')[0]})
 
     def ping(self):
         with self.lock:
@@ -59,7 +59,7 @@ class _Ping(object):
 
     def _checkResult(self):
         with self.lock:
-            #debug("checkResult: " + ("no" if self.resp is None else "yes"))
+            # debug("checkResult: " + ("no" if self.resp is None else "yes"))
             if self.resp is None:
                 BigWorld.callback(0.05, self._checkResult)
                 return
@@ -71,7 +71,7 @@ class _Ping(object):
                 self.thread = None
 
     def _respond(self):
-        #debug("respond: " + simplejson.dumps(self.resp))
+        # debug("respond: " + simplejson.dumps(self.resp))
         from . import XPM_AS_COMMAND_PINGDATA
         as_xvm_cmd(XPM_AS_COMMAND_PINGDATA, self.resp)
 
@@ -109,7 +109,7 @@ class _Ping(object):
         except Exception, ex:
             err('_pingAsync() exception: ' + traceback.format_exc())
             with self.lock:
-                self.resp = {"Error":ex}
+                self.resp = {"Error": ex}
 
     def _pingAsyncWindows(self):
         args = 'ping -n 1 -w 1000 '
@@ -122,9 +122,8 @@ class _Ping(object):
         for x in self.hosts:
             processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, startupinfo=si)
 
-        # Ответ от 178.20.235.151: число байт=32 время=23мс TTL=58
-        #pattern = '.*=.*=(\d+)[^\s].*=.*'   #original pattern, working with russian, not with others
-        pattern = '.*=.*=(\d+).*[^\s].*=.*'  #fixed pattern, need testing but should work with every language
+        # pattern = '.*=.*=(\d+)[^\s].*=.*'   # original pattern, working with russian, not with others
+        pattern = '.*=.*=(\d+).*[^\s].*=.*'  # fixed pattern, need testing but should work with every language
 
         return (pattern, processes)
 

@@ -13,14 +13,14 @@ class com.xvm.Cmd
     private static var COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
     private static var COMMAND_LOADUSERDATA:String = "loadUserData";
     private static var COMMAND_CAPTUREBARGETBASENUM:String = "captureBarGetBaseNum";
-    private static var COMMAND_GETCOMMENTS:String = "getComments";
+    private static var COMMAND_PROF_METHOD_START:String = "profMethodStart";
+    private static var COMMAND_PROF_METHOD_END:String = "profMethodEnd";
 
     public static var RESPOND_CONFIG:String = "xvm.config";
     public static var RESPOND_KEY_EVENT:String = "xvm.keyevent";
 
-    public static var RESPOND_BATTLEDATA:String = "xvm.battledata";
+    public static var RESPOND_BATTLESTATDATA:String = "xvm.battlestatdata";
     public static var RESPOND_BATTLESTATE:String = "xvm.battleState";
-    public static var RESPOND_MARKSONGUN:String = "xvm.marksOnGun";
 
     public static function log(str:String)
     {
@@ -47,9 +47,16 @@ class com.xvm.Cmd
         _call(target, callback, [COMMAND_CAPTUREBARGETBASENUM, id]);
     }
 
-    public static function getComments(target:Object, callback:Function)
+    public static function profMethodStart(name:String)
     {
-        _call(target, callback, [COMMAND_GETCOMMENTS]);
+        if (Config.IS_DEVELOPMENT)
+            _call(null, null, [COMMAND_PROF_METHOD_START, name]);
+    }
+
+    public static function profMethodEnd(name:String)
+    {
+        if (Config.IS_DEVELOPMENT)
+            _call(null, null, [COMMAND_PROF_METHOD_END, name]);
     }
 
     /////////////////////////////////////////////////////////////////

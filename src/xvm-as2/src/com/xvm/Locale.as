@@ -12,12 +12,17 @@ class com.xvm.Locale
     public static var s_lang:Object;
     private static var s_lang_fallback:Object = {};
     private static var s_filename:String;
+    public static var s_lang_cache:Object = {};
 
     /////////////////////////////////////////////////////////////////
     // PUBLIC STATIC
 
     public static function get(format:String):String
     {
+        var res = s_lang_cache[format];
+        if (res)
+            return res;
+
         //Logger.add("[AS2][Locale][get]: id: " + format + " | value: " + s_lang[format] + " | fallback value: " + s_lang_fallback[format]);
         if (s_lang && s_lang.hasOwnProperty(format))
             format =  s_lang[format];
@@ -27,7 +32,7 @@ class com.xvm.Locale
         var formatParts:Array = format.split("{{" + MACRO_PREFIX + ":");
 
         /** begin part until first macro start */
-        var res = formatParts.shift();
+        res = formatParts.shift();
 
         for (var i = 0; i < formatParts.length; ++i)
         {
@@ -48,6 +53,8 @@ class com.xvm.Locale
             /** write rest of text after macro, without }} */
             res += part.slice(macroEnd + 2, part.length);
         }
+
+        s_lang_cache[format] = res;
         return res;
     }
 

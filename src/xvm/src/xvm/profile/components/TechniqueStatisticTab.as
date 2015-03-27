@@ -4,12 +4,8 @@ package xvm.profile.components
     import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
-    import com.xvm.types.veh.*;
     import com.xvm.utils.*;
-    import flash.display.Sprite;
     import flash.text.*;
-    import flash.utils.*;
-    import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import xvm.profile.UI.*;

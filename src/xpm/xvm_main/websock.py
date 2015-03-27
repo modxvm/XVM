@@ -47,10 +47,10 @@ class _WebSock(object):
     def _start(self):
         self._ws = websocket.WebSocketApp(
             XVM_WS_URL,
-            on_open = self._on_open,
-            on_message = self._on_message,
-            on_error = self._on_error,
-            on_close = self._on_close)
+            on_open=self._on_open,
+            on_message=self._on_message,
+            on_error=self._on_error,
+            on_close=self._on_close)
         self._thread = threading.Thread(target=self.run)
         self._thread.daemon = True
         self._thread.start()
@@ -60,9 +60,9 @@ class _WebSock(object):
         sslopt = {
             'cert_reqs': ssl.CERT_NONE,
             'check_hostname': False,
-            'fingerprint': XVM_FINGERPRINT,
-            #'fingerprint': '8a95feb7be9825fbe3f4f50a6662dc880764c876', # 'wss://echo.websocket.org/'
-            }
+            'fingerprint': XVM_FINGERPRINTS,
+            # 'fingerprint': '8a95feb7be9825fbe3f4f50a6662dc880764c876', # 'wss://echo.websocket.org/'
+        }
         self._ws.run_forever(sslopt=sslopt)
 
     def stop(self, e=None):
@@ -76,7 +76,7 @@ class _WebSock(object):
             self._ws.on_error = None
             self._ws.close()
         if self._thread:
-            #self._thread.join()
+            # self._thread.join()
             self._thread = None
         self._ws = None
 
@@ -106,7 +106,7 @@ class _WebSock(object):
         self.on_close.fire()
 
     def _on_message(self, ws, message):
-        #debug('WebSocket recv: %s ' % message)
+        # debug('WebSocket recv: %s ' % message)
         self.on_message.fire(message)
 
     def _on_error(self, ws, error):

@@ -1,14 +1,61 @@
-﻿XVM-6.0.0-dev:
+﻿XVM-6.1.0-dev:
+  * adaptation to WoT 0.9.7
+  * added new section in config hangar/tooltips.xc, where you can choose desired tooltips for each type of vehicle
+  * in barracks added nation flag for tanksman and their skills
+  * added embedded fonts: 'xvm' (symbol) and 'mono' (monospace), recommended for default use
+  * new options:
+      "enableGoldLocker" - enable locker for gold
+      "enableFreeXpLocker" - enable locker for free XP
+      "defaultBoughtForCredits" - Use credits instead of gold as default currency for ammo and equipment
+
+XVM-6.0.3:
+  * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+  * macros renamed:
+      {{rating}} => {{winrate}}
+      {{t-rating}} => {{t-winrate}}
+  * colors and alpha sections renamed: "rating" => "winrate"
+
+XVM-6.0.2:
+  * new option hangar/autoPutPreviousCrewInTanks - automatically put previous crew upon vehicle change in hangar
+  * added global macro {{my-frags}}
+
+XVM-6.0.1:
+  * added new macro {{battletype}} - current battle type
+  * added texts/battletype section with text replacements for {{battletype}} macro
+  * added texts/topclan section with text replacements for {{topclan}} macro
+  * added new carousel macros:
+      {{v.xpToElite}} - XP required for elite vehicle
+      {{v.xpToEliteLeft}} - XP left to gain for elite vehicle
+      {{v.freeXP}} - free XP
+  * macros formatting:
+      added "'" flag for thousands separator (hangar only)
+      added "match" part for value matching ({{battletype=clan?CLAN WAR}})
+        allowed operators: =, !=, >, >=, <, <=
+  * added option minimap/labels/units/antiAliasType - text fields antialias type.
+  * new option battle/allowSpottedStatus - enable {{spotted}} macro in players panels and minimap.
+    WARNING: performance expensive
+  * new option hangar/allowExchangeXPInTechTree - consider the exchange of experience with gold in tech tree
+  * new option battle/sixthSenseIcon - path to sixth sense icon ("" for original icon).
+
+XVM-6.0.0.3:
+  * bugs fixed
+
+XVM-6.0.0:
   * adaptation to Wot 0.9.6
   * XFW: XVM Framework
   * New mod xvm_quests for personal missions.
     Currently implemented new filters and saving filters settings
-  * added config section for winChance colors: "colors"/"winChance"
+  * added config section for winChance colors: colors/winChance
   * win chance calclulation changed - use standard normal distrubution for chance result.
     Source: http://forum.worldoftanks.eu/index.php?/topic/468409-/
   * added texts/xvmuser section with text replacements for {{xvm-user}} macro.
     Available values: "on", "off", "none".
   * added new mod xvm_export, and config section "export".
+  * top clans icons now taken from the XVM server and tops list is updated daily.
+  * added macro {{clanrank}} - Global map clan rating
+    Values from 1 to 1000, and "persist" for persistent clans (WG administration and XVM friends)
+    Detailed info: http://worldoftanks.eu/leaderboard/clans/
+  * added macro {{topclan}} - returns "top" for top clans, 'persist' for persistent clans, empty for other
 
 XVM-5.5.1.1:
   * fixed Application.swf

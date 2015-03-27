@@ -234,7 +234,7 @@ _data = {
     'france:ELC_AMX':                   'ELC',
     'ussr:R04_T-34':                    '34',
     'germany:PzIII_IV':                 'Pz3/4',
-    'germany:PzIV':                     'Pz4', # not used
+    'germany:PzIV':                     'Pz4',  # not used
     'germany:Pz_IV_AusfH':              'Pz4',
     'germany:T-25':                     'T-25',
     'usa:M4_Sherman':                   'Sherm',

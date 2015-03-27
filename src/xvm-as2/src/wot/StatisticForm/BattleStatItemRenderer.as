@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import com.xvm.*;
+import com.xvm.DataTypes.*;
 import net.wargaming.controls.*;
 import net.wargaming.ingame.*;
 import wot.StatisticForm.*;
@@ -174,6 +175,13 @@ class wot.StatisticForm.BattleStatItemRenderer
         if (!cfg.show)
             return;
 
+        var name:String = Utils.GetPlayerName(data.userName);
+
+        var statData:Object = Stat.s_data[name];
+        if (statData == null)
+            return;
+        var emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.emblem;
+
         if (m_clanIcon == null)
         {
             var x = (!m_iconLoaded || Config.config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
@@ -183,7 +191,7 @@ class wot.StatisticForm.BattleStatItemRenderer
                 wrapper.iconLoader._y + wrapper._parent._parent._y + wrapper._parent._y + wrapper._y,
                 team);
         }
-        PlayerInfo.setSource(m_clanIcon, data.uid, Utils.GetPlayerName(data.userName), data.clanAbbrev);
+        PlayerInfo.setSource(m_clanIcon, data.uid, name, data.clanAbbrev, emblem);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) != 0) ? 100 : 50;
     }
 }

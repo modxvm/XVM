@@ -67,11 +67,15 @@ class wot.Minimap.MinimapEntry
     function init_xvmImpl(playerId:Number, isLit:Boolean)
     {
         //Logger.add("init_xvmImpl: id:" + playerId + " lit:" + isLit);
+        Cmd.profMethodStart("MinimapEntry.init_xvm()");
 
         MarkerColor.setColor(wrapper);
 
         if (playerId <= 0)
+        {
+            Cmd.profMethodEnd("MinimapEntry.init_xvm()");
             return;
+        }
 
         this.playerId = playerId;
 
@@ -82,7 +86,10 @@ class wot.Minimap.MinimapEntry
         }
 
         if (isLit)
+        {
+            Cmd.profMethodEnd("MinimapEntry.init_xvm()");
             return;
+        }
 
         IconsProxy.playerIds[playerId] = this;
 
@@ -99,10 +106,14 @@ class wot.Minimap.MinimapEntry
             GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this.xvm_worker, playerId));
             this["_xvm_removeMovieClip"]()
         }
+
+        Cmd.profMethodEnd("MinimapEntry.init_xvm()");
     }
 
     function drawImpl()
     {
+        Cmd.profMethodStart("MinimapEntry.draw()");
+
         //Logger.add('draw: ' + playerId + " " + wrapper.entryName + " " + wrapper.m_type + " " + wrapper.vehicleClass);
 
         base.draw();
@@ -122,6 +133,8 @@ class wot.Minimap.MinimapEntry
             GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.CAMERA_UPDATED, this));
 
         rescaleAttachments();
+
+        Cmd.profMethodEnd("MinimapEntry.draw()");
     }
 
     // INTERNAL

@@ -5,9 +5,7 @@
 package xvm.svcmsg.UI
 {
     import com.xvm.*;
-    import com.xvm.misc.*;
     import flash.events.*;
-    import net.wg.gui.notification.*;
     import net.wg.gui.notification.vo.*;
     import xvm.svcmsg.*;
 

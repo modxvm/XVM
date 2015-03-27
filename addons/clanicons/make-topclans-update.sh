@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Disabled: top clans are taken from the XVM server now"
+exit
+
 if [ "$OS" = "Windows_NT" ]; then
     export PATH=$(pwd):$PATH
 fi

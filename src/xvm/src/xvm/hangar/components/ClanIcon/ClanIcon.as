@@ -4,13 +4,12 @@
  */
 package xvm.hangar.components.ClanIcon
 {
-    import flash.display.*;
-    import flash.events.Event;
-    import flash.utils.Dictionary;
-    import com.xvm.misc.IconLoader;
     import com.xvm.*;
-    import com.xvm.types.cfg.CClanIcon;
-    import net.wg.gui.components.controls.UILoaderAlt;
+    import com.xvm.misc.*;
+    import com.xvm.utils.*;
+    import com.xvm.types.cfg.*;
+    import flash.events.*;
+    import flash.utils.*;
 
     public class ClanIcon extends IconLoader
     {
@@ -19,7 +18,7 @@ package xvm.hangar.components.ClanIcon
         private var cfg:CClanIcon;
         private var nick:String;
 
-        public function ClanIcon(cfg:CClanIcon, dx:Number, dy:Number, team:Number, playerId:Number, nick:String, clan:String)
+        public function ClanIcon(cfg:CClanIcon, dx:Number, dy:Number, team:Number, playerId:Number, nick:String, clan:String, emblem:String)
         {
             super();
 
@@ -36,12 +35,12 @@ package xvm.hangar.components.ClanIcon
             autoSize = false;
             visible = false;
 
-            setSource(playerId, nick, clan);
+            setSource(playerId, nick, clan, emblem);
         }
 
-        public function setSource(playerId:Number, nick:String, clan:String):void
+        public function setSource(playerId:Number, nick:String, clan:String, emblem:String):void
         {
-            // Load order: id -> nick -> clan -> default clan -> default nick
+            // Load order: id -> nick -> emblem -> clan -> default clan -> default nick
             var paths:Vector.<String> = new Vector.<String>();
             var src:String = s_playersIconSources[nick];
             if (src != null)
@@ -60,11 +59,19 @@ package xvm.hangar.components.ClanIcon
 
                 prefix += Config.gameRegion + "/";
                 paths.push(prefix + "nick/" + nick + ".png");
+
+                if (emblem != null)
+                {
+                    //Logger.add('emblem: ' + Utils.fixImgTag(emblem));
+                    paths.push(Utils.fixImgTag(emblem));
+                }
+
                 if (clan != null && clan != "")
                 {
                     paths.push(prefix + "clan/" + clan + ".png");
                     paths.push(prefix + "clan/default.png");
                 }
+
                 paths.push(prefix + "nick/default.png");
             }
 

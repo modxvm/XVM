@@ -6,7 +6,6 @@ package xvm.clock
 {
     import com.xvm.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.types.*;
     import com.xvm.utils.*;
     import flash.display.*;
     import flash.utils.*;

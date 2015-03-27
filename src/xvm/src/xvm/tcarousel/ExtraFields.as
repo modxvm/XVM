@@ -7,7 +7,6 @@
     import flash.display.*;
     import flash.filters.*;
     import flash.text.*;
-    import flash.utils.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.events.*;
     import scaleform.gfx.*;

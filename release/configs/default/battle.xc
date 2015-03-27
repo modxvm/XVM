@@ -13,6 +13,9 @@
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
+    // true - enable {{spotted}} macro in players panels and minimap. WARNING: performance expensive
+    // true - включить макрос {{spotted}} в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
+    "allowSpottedStatus": true,
     // true - enable {{hp*}} macros ability in players panels and minimap. WARNING: performance expensive
     // true - включить возможность {{hp*}} макросов в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
     "allowHpInPanelsAndMinimap": false,
@@ -22,9 +25,12 @@
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
     "clockFormat": "H:N", // TODO: "H:i"
-    // Path to clan icons folder relative to res_mods/xvm/res.
-    // Путь к папке иконок кланов относительно res_mods/xvm/res.
+    // Path to clan icons folder relative to res_mods/mods/shared_resources/xvm/res.
+    // Путь к папке иконок кланов относительно res_mods/mods/shared_resources/xvm/res.
     "clanIconsFolder": "clanicons/",
+    // Path to sixth sense icon ("" for original icon).
+    // Путь к иконке 6-го чувства ("" для оригинальной иконки).
+    "sixthSenseIcon": "xvm://res/SixthSense.png",
     // GUI elements settings (experts only)
     // Настройки графических элементов (только для экспертов!)
     "elements": ${"elements.xc":"elements"}

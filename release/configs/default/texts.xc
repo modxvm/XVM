@@ -30,13 +30,13 @@
     // Текст для макроса {{spotted}}
     "spotted": {
       "neverSeen": "",
-      "lost": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
-      "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
-      "dead": "",
+      "lost": "<font face='xvm' size='23' color='#D9D9D9'>&#x70;</font>",
+      "revealed": "<font face='xvm' size='23' color='#FE0E00'>&#x70;</font>",
+      "dead": "<font face='xvm' size='23' color='#FFFFFF' alpha='#80'>&#x76;</font>",
       "neverSeen_arty": "",
-      "lost_arty": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
-      "revealed_arty": "<font face='$FieldFont' size='24' color='#DE0000'>*</font>",
-      "dead_arty": ""
+      "lost_arty": "<font face='xvm' size='23' color='#D9D9D9'>&#x70;</font>",
+      "revealed_arty": "<font face='xvm' size='23' color='#FE0E00'>&#x70;</font>",
+      "dead_arty": "<font face='xvm' size='23' color='#FFFFFF' alpha='#80'>&#x76;</font>"
     },
     // Text for {{xvm-user}} macro.
     // Текст для макроса {{xvm-user}}
@@ -47,6 +47,43 @@
       "off": "off",
       // Without XVM / Без XVM.
       "none": "none"
+    },
+    // Text for {{battletype}} macro.
+    // Текст для макроса {{battletype}}
+    "battletype": {
+      // Неизвестный бой.
+      "unknown": "unknown",
+      // Случайный бой.
+      "regular": "regular",
+      // Тренировочный бой.
+      "training": "training",
+      // Ротный бой.
+      "company": "company",
+      // Турнир.
+      "tournament": "tournament",
+      // Клановый бой.
+      "clan": "clan",
+      // Учебный бой.
+      "tutorial": "tutorial",
+      // Командный бой.
+      "cybersport": "cybersport",
+      // Исторический бой.
+      "historical": "historical",
+      // Бой спецрежима (гонки, футбол и т.п.).
+      "event_battles": "event_battles",
+      // Вылазка.
+      "sortie": "sortie",
+      // Бой за укрепрайон.
+      "fort_battle": "fort_battle",
+      // Киберспортивный командный бой.
+      "rated_cybersport": "rated_cybersport"
+    },
+    // Text for {{topclan}} macro.
+    // Текст для макроса {{topclan}}
+    "topclan": {
+      "top": "top",
+      "persist": "persist",
+      "regular": ""
     }
   }
 }

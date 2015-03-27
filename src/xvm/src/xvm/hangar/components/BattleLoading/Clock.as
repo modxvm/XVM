@@ -1,11 +1,10 @@
 package xvm.hangar.components.BattleLoading
 {
-    import flash.display.*;
+    import com.xvm.*;
+    import com.xvm.utils.*;
     import flash.text.*;
     import flash.utils.*;
-    import com.xvm.*;
-    import com.xvm.utils.Utils;
-    import net.wg.gui.lobby.battleloading.BattleLoading;
+    import net.wg.gui.lobby.battleloading.*;
 
     public class Clock
     {

@@ -2,8 +2,6 @@ package xvm.profile.components
 {
     import com.xvm.*;
     import com.xvm.misc.*;
-    import com.xvm.types.dossier.*;
-    import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
 
     public class TechniqueWindow extends Technique

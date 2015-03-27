@@ -79,18 +79,20 @@ class wot.Minimap.Minimap
 
     function drawImpl()
     {
-        //Logger.add("Minimap.draw()");
+        Cmd.profMethodStart("Minimap.draw()");
+
         var sizeIsInvalid:Boolean = wrapper.sizeIsInvalid;
         base.draw();
         if (sizeIsInvalid)
             GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
+
+        Cmd.profMethodEnd("Minimap.draw()");
     }
 
     // -- Private
 
     private function onConfigLoaded()
     {
-        //Logger.add("onConfigLoaded");
         if (MapConfig.enabled)
         {
             if (Config.config.minimapAlt.enabled)

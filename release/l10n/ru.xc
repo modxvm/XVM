@@ -105,6 +105,7 @@
     "PutClassCrew": "Экипаж того же класса",
     "PutPreviousCrew": "Предыдущий экипаж",
     "DropAllCrew": "Высадить весь экипаж",
+    "noSkills": "Нет умений",
 
     // Vehicle Params
     "gun_reload_time/actual": "Расчетное время перезарядки орудия",
@@ -113,6 +114,13 @@
     "view_range/stereoscope": "со стереотрубой",
     "radio_range/base": "базовая",
     "radio_range/actual": "расчетная",
+    "shootingRadius": "Дальность стрельбы",
+    "pitchLimits": "Углы ВН",
+    "traverseLimits": "Углы ГН",
+    "terrainResistance": "Сопротивление грунтов",
+    "gravity": "Гравитация",
+    "shellSpeed": "Скорость снаряда",
+    "(m/sec)": "(м/сек)",
     "(sec)": "(сек)",
     "(m)": "(м)",
 
@@ -163,6 +171,7 @@
     "CompleteCrew": "Полный экипаж",
 
     // Comments
+    "Network services unavailable": "Сетевые сервисы недоступны",
     "Error loading comments": "Ошибка загрузки комментариев",
     "Error saving comments": "Ошибка сохранения комментариев",
     "Comments disabled": "Комментарии отключены",

@@ -20,8 +20,8 @@ def rm(fname):
         os.remove(fname)
 
 def hide_guid(txt):
-    return re.sub('([0-9A-Fa-f]{8}-)[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}(-[0-9A-Fa-f]{12})', \
-        '\\1****-****-****\\2', txt)
+    return re.sub('([0-9A-Fa-f]{8}-)[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{8}([0-9A-Fa-f]{4})',
+                  '\\1****-****-****-********\\2', txt)
 
 def show_threads():
     for t in threading.enumerate():
@@ -86,6 +86,6 @@ def compareVersions(v1, v2):
             if int(a[i]) > int(b[i]):
                 return 1
     except Exception, ex:
-        #err(traceback.format_exc())
+        # err(traceback.format_exc())
         return -2
     return 0

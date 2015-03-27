@@ -1,7 +1,7 @@
-import net.wargaming.controls.UILoaderAlt;
-import com.xvm.PlayerInfo;
-import com.xvm.Utils;
-import wot.VehicleMarkersManager.components.ClanIconProxy;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
+import net.wargaming.controls.*;
+import wot.VehicleMarkersManager.components.*;
 
 class wot.VehicleMarkersManager.components.ClanIconComponent
 {
@@ -23,6 +23,9 @@ class wot.VehicleMarkersManager.components.ClanIconComponent
 
     public function updateState(state_cfg:Object)
     {
+        if (!Stat.s_loaded)
+            return;
+
         if (m_clanIcon != null && m_clanIcon.source == "")
             return;
 
@@ -34,7 +37,11 @@ class wot.VehicleMarkersManager.components.ClanIconComponent
         {
             if (m_clanIcon == null && mc != null)
                 m_clanIcon = PlayerInfo.createIcon(mc, "clanicon", cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0));
-            PlayerInfo.setSource(m_clanIcon, proxy.playerId, proxy.playerName, proxy.playerClan);
+
+            var statData:Object = Stat.s_data[proxy.playerName];
+            var emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.emblem;
+
+            PlayerInfo.setSource(m_clanIcon, proxy.playerId, proxy.playerName, proxy.playerClan, emblem);
             draw(cfg);
         }
 
