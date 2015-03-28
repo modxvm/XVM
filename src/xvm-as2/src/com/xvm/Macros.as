@@ -352,8 +352,10 @@ class com.xvm.Macros
     {
         var res = Utils.getObjectValueByPath(Config.config, path);
         //Logger.addObject(res, 1, path);
+        if (res == null)
+            return "";
         if (typeof(res) == "object")
-            return JSONx.stringify(res, '', true);
+            return JSONx.stringify(res, "", true);
         return String(res);
     }
 
