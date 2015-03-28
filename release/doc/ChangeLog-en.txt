@@ -7,6 +7,8 @@
       "enableGoldLocker" - enable locker for gold
       "enableFreeXpLocker" - enable locker for free XP
       "defaultBoughtForCredits" - Use credits instead of gold as default currency for ammo and equipment
+  * new macro {{.}} for config value substitution: {{.path.to.config.value}}
+      ex. {{.language}}, {{.def.mycolors.ally}}
 
 XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)

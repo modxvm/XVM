@@ -23,7 +23,7 @@ package xvm.company.renderers
                 proxy.numberField.width = 15;
                 proxy.textField.x = 15;
                 effField = new TextField();
-                effField.styleSheet = Utils.createTextStyleSheet("eff", proxy.textField.defaultTextFormat);
+                effField.styleSheet = WGUtils.createTextStyleSheet("eff", proxy.textField.defaultTextFormat);
                 effField.x = 20 + proxy.textField.width;
                 effField.y = proxy.textField.y;
                 effField.width = 20;

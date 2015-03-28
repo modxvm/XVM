@@ -224,7 +224,7 @@ package xvm.profile.components
             lastBattleTimeTF.y = -30;
             lastBattleTimeTF.width = 450;
             lastBattleTimeTF.height = 25;
-            lastBattleTimeTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, Defines.UICOLOR_LABEL));
+            lastBattleTimeTF.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, Defines.UICOLOR_LABEL));
             lastBattleTimeTF.mouseEnabled = false;
             proxy.addChild(lastBattleTimeTF);
         }
@@ -242,7 +242,7 @@ package xvm.profile.components
             ratingTF.y = /*proxy.battlesDL.y - 62*/0;
             ratingTF.width = 400;
             ratingTF.height = 200;
-            ratingTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
+            ratingTF.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
             ratingTF.mouseEnabled = false;
             proxy.addChild(ratingTF);
         }

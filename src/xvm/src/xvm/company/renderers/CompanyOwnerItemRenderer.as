@@ -24,7 +24,7 @@ package xvm.company.renderers
                 this.proxy = proxy;
 
                 effField = new TextField();
-                effField.styleSheet = Utils.createTextStyleSheet("eff", proxy.pCountField.defaultTextFormat);
+                effField.styleSheet = WGUtils.createTextStyleSheet("eff", proxy.pCountField.defaultTextFormat);
                 effField.x = proxy.pCountField.x - 15;
                 effField.y = proxy.pCountField.y;
                 effField.width = 20;

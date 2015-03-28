@@ -64,7 +64,7 @@ package xvm.clock
                 createBackgroundImage(cfg.bgImage);
             textField.rotation = cfg.rotation;
             if (cfg.shadow.enabled)
-                textField.filters = [ Utils.createShadowFilter(cfg.shadow) ];
+                textField.filters = [ WGUtils.createShadowFilter(cfg.shadow) ];
 
             invalidate();
 

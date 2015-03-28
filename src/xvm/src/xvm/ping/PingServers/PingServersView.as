@@ -151,11 +151,11 @@ package xvm.ping.PingServers
             tf.multiline = true;
             tf.wordWrap = false;
             tf.selectable = false;
-            tf.styleSheet = Utils.createStyleSheet(createCss());
+            tf.styleSheet = WGUtils.createStyleSheet(createCss());
             tf.alpha = cfg.alpha / 100.0;
             tf.htmlText =  "";
             if (cfg.shadow.enabled)
-                tf.filters = [ Utils.createShadowFilter(cfg.shadow) ];
+                tf.filters = [ WGUtils.createShadowFilter(cfg.shadow) ];
             addChild(tf);
             return tf;
         }
@@ -181,7 +181,7 @@ package xvm.ping.PingServers
             var name:String = cfg.fontStyle.name;
             var color:Number = parseInt(cfg.fontStyle.color[quality], 16);
 
-            return Utils.createCSS(PingServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
+            return WGUtils.createCSS(PingServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
         }
     }
 }

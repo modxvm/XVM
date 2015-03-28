@@ -161,7 +161,7 @@
             tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : AntiAliasType.ADVANCED;
             tf.autoSize = TextFieldAutoSize.NONE;
             TextFieldEx.setVerticalAlign(tf, format.valign != null ? format.valign : TextFieldEx.VALIGN_NONE);
-            tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
+            tf.styleSheet = WGUtils.createStyleSheet(WGUtils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
 
             tf.border = format.borderColor != null;
             tf.borderColor = format.borderColor != null && !isNaN(format.borderColor) ? format.borderColor : 0xCCCCCC;

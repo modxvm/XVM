@@ -40,28 +40,7 @@ class com.xvm.Utils
         return defaultValue ? value != "false" : value == "true";
     }
 
-    public static function toHtmlColor(value:Number):String
-    {
-        return "#" + Strings.padLeft(value.toString(16), 6, '0');
-    }
-
-    public static function Timeout(target:Object, callback:Function, timeout:Number)
-    {
-        return _global.setTimeout(function() { callback.call(target) }, timeout);
-    }
-
-    public static function Interval(target:Object, callback:Function, timeout:Number)
-    {
-        return _global.setInterval(function() { callback.call(target) }, timeout);
-    }
-
-    public static function fixPath(path:String):String
-    {
-        path = path.split("\\").join("/");
-        if (!Strings.endsWith("/", path))
-            path += "/";
-        return path;
-    }
+    ////////////////////
 
     public static function vehicleClassToVehicleType(vclass:String):String
     {
@@ -167,20 +146,26 @@ class com.xvm.Utils
         return v;
     }
 
-    ////////////////////
-
-    public static function indexOf(array:Array, value:Object):Number
+    //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
+    public static function damageFlagToDamageSource(damageFlag:Number):String
     {
-        var i:Number = 0;
-        var len:Number = array.length;
-        while(i < len)
+        switch (damageFlag)
         {
-            if (array[i] === value)
-                return i;
-            ++i;
+            case Defines.FROM_ALLY:
+                return "ally";
+            case Defines.FROM_ENEMY:
+                return "enemy";
+            case Defines.FROM_PLAYER:
+                return "player";
+            case Defines.FROM_SQUAD:
+                return "squadman";
+            case Defines.FROM_UNKNOWN:
+            default:
+                return "unknown";
         }
-        return -1;
     }
+
+    ////////////////////
 
     public static function GetPlayerName(fullplayername:String):String
     {
@@ -215,24 +200,7 @@ class com.xvm.Utils
         Logger.add("xvm -> [\"" + xvmModules.join("\", \"") + "\"]");
     }
 
-    //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
-    public static function damageFlagToDamageSource(damageFlag:Number):String
-    {
-        switch (damageFlag)
-        {
-            case Defines.FROM_ALLY:
-                return "ally";
-            case Defines.FROM_ENEMY:
-                return "enemy";
-            case Defines.FROM_PLAYER:
-                return "player";
-            case Defines.FROM_SQUAD:
-                return "squadman";
-            case Defines.FROM_UNKNOWN:
-            default:
-                return "unknown";
-        }
-    }
+    ////////////////////
 
     /**
      * Get children MovieClips of MovieClip
@@ -270,33 +238,23 @@ class com.xvm.Utils
         }
     }
 
-    /**
-     * Array subtraction
-     * [1,2,3,4,5,6] - [1,2,3] = [4,5,6]
-     * minuend − subtrahend = difference
-     */
-    public static function subtractArray(minuend:Array, subtrahend:Array):Array
+    // Duplicate text field
+    public static function duplicateTextField(mc:MovieClip, name:String, textField:TextField, yOffset:Number, align:String):TextField
     {
-        var difference:Array = [];
+        var res:TextField = mc.createTextField(name, mc.getNextHighestDepth(),
+            textField._x, textField._y + yOffset, textField._width, textField._height);
+        res.antiAliasType = "advanced";
+        res.html = true;
+        res.selectable = false;
+        res.autoSize = align; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
+        var tf: TextFormat = textField.getNewTextFormat();
+        res.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_" + name,
+            tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
 
-        for (var i in minuend)
-        {
-            var testVal = minuend[i];
-            var testIsAbcentInSubtrahend:Boolean = true;
-            for (var j in subtrahend)
-            {
-                if (testVal == subtrahend[j])
-                {
-                    testIsAbcentInSubtrahend = false;
-                    break;
-                }
-            }
-            if (testIsAbcentInSubtrahend)
-                difference.push(minuend[i])
-        }
-
-        return difference;
+        return res;
     }
+
+    ////////////////////
 
     /**
      * Create CSS
@@ -335,6 +293,25 @@ class com.xvm.Utils
         return style;
     }
 
+    /** Create DropShadowFilter from config section */
+    public static function extractShadowFilter(source:Object):DropShadowFilter
+    {
+        if (!source || !source.alpha || !source.strength || !source.blur)
+            return null;
+        return new DropShadowFilter(
+            source.distance, // distance
+            source.angle, // angle
+            parseInt(source.color, 16),
+            // DropShadowFilter accepts alpha be from 0 to 1.
+            // 90 at default config.
+            source.alpha * 0.01,
+            source.blur,
+            source.blur,
+            source.strength);
+    }
+
+    ////////////////////
+
     // Fix <img src='xvm://...'> to <img src='img://XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
     // Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
     public static function fixImgTag(str:String):String
@@ -354,117 +331,50 @@ class com.xvm.Utils
         return "../../" + Utils.fixImgTag(str).split("img://").join("");
     }
 
-    // Duplicate text field
-    public static function duplicateTextField(mc:MovieClip, name:String, textField:TextField, yOffset:Number, align:String):TextField
+    public static function indexOf(array:Array, value:Object):Number
     {
-        var res:TextField = mc.createTextField(name, mc.getNextHighestDepth(),
-            textField._x, textField._y + yOffset, textField._width, textField._height);
-        res.antiAliasType = "advanced";
-        res.html = true;
-        res.selectable = false;
-        res.autoSize = align; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
-        var tf: TextFormat = textField.getNewTextFormat();
-        res.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_" + name,
-            tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
-
-        return res;
+        var i:Number = 0;
+        var len:Number = array.length;
+        while(i < len)
+        {
+            if (array[i] === value)
+                return i;
+            ++i;
+        }
+        return -1;
     }
 
-    public static function createButton(mc:MovieClip, name:String, x:Number, y:Number, txt:String, align:String):MovieClip
+    public static function getObjectValueByPath(obj, path:String)
     {
-        var b:MovieClip = mc.attachMovie("Button", name, mc.getNextHighestDepth());
-        b._x = x;
-        b._y = y;
-        b.autoSize = true;
-        b.label = txt;
+        if (obj === undefined)
+            return undefined;
 
-        if (align == "right")
-            b._x -= Math.round(b.textField.textWidth + 21);
+        if (path == "." || path == "")
+            return obj;
 
-        b.addEventListener("rollOver", showTooltip);
-        b.addEventListener("rollOut", hideTooltip);
-
-        return b;
+        var p:Array = path.split("."); // "path.to.value"
+        var o = obj;
+        var p_len:Number = p.length;
+        for (var i:Number = 0; i < p_len; ++i)
+        {
+            var opi = o[p[i]];
+            if (opi === undefined)
+                return undefined;
+            o = opi;
+        }
+        return o == null ? null : Utils.clone(o);
     }
 
-    public static function createRadioButton(mc:MovieClip, name:String, x:Number, y:Number, width:Number, txt:String, group:String):MovieClip
+    /**
+     * Deep copy
+     */
+    public static function clone(obj:Object):Object
     {
-        var b:MovieClip = mc.attachMovie("RadioButton", name, mc.getNextHighestDepth());
-        b._x = x;
-        b._y = y;
-        b.autoSize = false;
-        b.width = width;
-        b.label = txt;
-        b.group = group;
-
-        b.addEventListener("rollOver", showTooltip);
-        b.addEventListener("rollOut", hideTooltip);
-
-        return b;
-    }
-
-    public static function createCheckBox(mc:MovieClip, name:String, x:Number, y:Number, txt:String, align:String):MovieClip
-    {
-        var b:MovieClip = mc.attachMovie("CheckBox", name, mc.getNextHighestDepth());
-        b._x = x;
-        b._y = y;
-        b.autoSize = true;
-        b.label = txt;
-
-        if (align == "right")
-            b._x -= Math.round(b.textField.textWidth + 21);
-
-        b.addEventListener("rollOver", showTooltip);
-        b.addEventListener("rollOut", hideTooltip);
-
-        return b;
-    }
-
-    public static function createTextInput(mc:MovieClip, name:String, x:Number, y:Number, width:Number):gfx.controls.TextInput
-    {
-        var c:gfx.controls.TextInput = gfx.controls.TextInput(mc.attachMovie("TextInput", name, mc.getNextHighestDepth()));
-        c._x = x;
-        c._y = y;
-        c._width = width;
-        return c;
-    }
-
-    public static function duplicateButton(src:Object, name:String, offsetX:Number, offsetY:Number,
-        text:String, iconSource:String, toolTip:String):MovieClip
-    {
-        var mc = src.duplicateMovieClip(name, 0);
-        mc._x = src._x + offsetX;
-        mc._y = src._y + offsetY;
-        mc._autoSize = true;
-        mc._iconSource = iconSource;
-        mc.tooltipText = toolTip;
-
-        mc.addEventListener("rollOver", showTooltip);
-        mc.addEventListener("rollOut", hideTooltip);
-
-        mc.configUI();
-
-        return mc;
-    }
-
-    public static function addEventListeners(obj:Object, target:Object, handlers:Object):Void
-    {
-        if (!obj || !target || !handlers)
-            return;
-        for (var name in handlers)
-            obj.addEventListener(name, target, handlers[name]);
-    }
-
-    private static function showTooltip(e:Object):Void
-    {
-        var b = e.target;
-        if (b.tooltipText)
-            net.wargaming.managers.ToolTipManager.instance.show(b.tooltipText);
-    }
-
-    private static function hideTooltip(e:Object):Void
-    {
-        net.wargaming.managers.ToolTipManager.instance.hide();
+        /*var temp:ByteArray = new ByteArray();
+        temp.writeObject(obj);
+        temp.position = 0;
+        return temp.readObject();*/
+        return JSONx.parse(JSONx.stringify(obj, "", true));
     }
 
     public static function parseError(ex):String
@@ -546,22 +456,5 @@ class com.xvm.Utils
                 + 0.01048)
                 + 0.4
             )));
-    }
-
-    /** Create DropShadowFilter from config section */
-    public static function extractShadowFilter(source:Object):DropShadowFilter
-    {
-        if (!source || !source.alpha || !source.strength || !source.blur)
-            return null;
-        return new DropShadowFilter(
-            source.distance, // distance
-            source.angle, // angle
-            parseInt(source.color, 16),
-            // DropShadowFilter accepts alpha be from 0 to 1.
-            // 90 at default config.
-            source.alpha * 0.01,
-            source.blur,
-            source.blur,
-            source.strength);
     }
 }

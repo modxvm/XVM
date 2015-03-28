@@ -218,7 +218,11 @@ class com.xvm.Macros
         var def:String = parts[PART_DEF];
 
         var dotPos:Number = macroName.indexOf(".");
-        if (dotPos > 0)
+        if (dotPos == 0)
+        {
+            return SubstituteConfigPart(macroName.slice(1));
+        }
+        else if (dotPos > 0)
         {
             if (options == null)
                 options = { };
@@ -342,6 +346,15 @@ class com.xvm.Macros
         //Logger.add("[AS2][MACROS][GetMacroParts]: " + parts.join(", "));
         _macro_parts_cache[macro] = parts;
         return parts;
+    }
+
+    private function SubstituteConfigPart(path:String):String
+    {
+        var res = Utils.getObjectValueByPath(Config.config, path);
+        //Logger.addObject(res, 1, path);
+        if (typeof(res) == "object")
+            return JSONx.stringify(res, '', true);
+        return String(res);
     }
 
     private var _format_macro_fmt_suf_cache:Object = {};
@@ -492,14 +505,6 @@ class com.xvm.Macros
                 {
                     var maxHp:Number = m_globals["maxhp"];
                     res = Math.round(parseInt(norm) * value / maxHp).toString();
-                    /*
-                    var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[tier - 1];
-                    if (vehId == 65313) // M24 Chaffee Sport
-                        maxBattleTierHp = 1000;
-                    if (vehId == 64769 || vehId == 64801 || vehId == 65089) // Winter Battle
-                        maxBattleTierHp = 5000;
-                    res = Math.round(parseInt(norm) * value / maxBattleTierHp).toString();
-                    */
                 }
                 _prepare_value_cache[key] = res;
                 //Logger.add(key + " => " + res);
@@ -564,6 +569,32 @@ class com.xvm.Macros
     }
 
     // Macros registration
+
+    private function _RegisterGlobalMacrosData(battleTier:Number, battleType:Number)
+    {
+        // {{xvm-stat}}
+        m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
+
+        switch (battleType)
+        {
+            case Defines.BATTLE_TYPE_CYBERSPORT:
+                battleTier = 8;
+                break;
+            case Defines.BATTLE_TYPE_REGULAR:
+                break;
+            default:
+                battleTier = 10;
+                break;
+        }
+
+        // {{battletype}}
+        m_globals["battletype"] = Utils.getBattleTypeText(battleType);
+        // {{battletier}}
+        m_globals["battletier"] = battleTier;
+
+        // {{my-frags}}
+        m_globals["my-frags"] = function(o:Object) { return isNaN(Macros.s_my_frags) || Macros.s_my_frags == 0 ? NaN : Macros.s_my_frags; }
+    }
 
     /**
      * Register minimal macros values for player
@@ -781,32 +812,6 @@ class com.xvm.Macros
             // {{dmg-player}}
             pdata["dmg-player"] = function(o):Number { return o.total };
         }
-    }
-
-    private function _RegisterGlobalMacrosData(battleTier:Number, battleType:Number)
-    {
-        // {{xvm-stat}}
-        m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
-
-        switch (battleType)
-        {
-            case Defines.BATTLE_TYPE_CYBERSPORT:
-                battleTier = 8;
-                break;
-            case Defines.BATTLE_TYPE_REGULAR:
-                break;
-            default:
-                battleTier = 10;
-                break;
-        }
-
-        // {{battletype}}
-        m_globals["battletype"] = Utils.getBattleTypeText(battleType);
-        // {{battletier}}
-        m_globals["battletier"] = battleTier;
-
-        // {{my-frags}}
-        m_globals["my-frags"] = function(o:Object) { return isNaN(Macros.s_my_frags) || Macros.s_my_frags == 0 ? NaN : Macros.s_my_frags; }
     }
 
     private function _RegisterStatMacros(pname:String, stat:StatData)

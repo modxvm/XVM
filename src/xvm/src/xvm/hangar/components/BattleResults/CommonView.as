@@ -169,7 +169,7 @@ package xvm.hangar.components.BattleResults
             newTf.height = view.detailsMc.xpTitleLbl.height;
             newTf.alpha = 1;
 
-            newTf.styleSheet = Utils.createTextStyleSheet(CSS_FIELD_CLASS, view.detailsMc.xpTitleLbl.defaultTextFormat);
+            newTf.styleSheet = WGUtils.createTextStyleSheet(CSS_FIELD_CLASS, view.detailsMc.xpTitleLbl.defaultTextFormat);
             newTf.selectable = false;
 
             var y_space:Number = view.detailsMc.xpTitleLbl.height;

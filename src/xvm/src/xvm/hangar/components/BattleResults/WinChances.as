@@ -35,7 +35,7 @@ package xvm.hangar.components.BattleResults
                 textField.y = 2;
                 textField.width = 400;
                 textField.height = 30;
-                textField.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
+                textField.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
                 page.addChild(textField);
             }
 

@@ -27,7 +27,7 @@ package xvm.company.renderers
                 effField = new TextField();
                 var tf:TextFormat = proxy.vehicleLevelField.defaultTextFormat;
                 tf.align = TextFormatAlign.RIGHT;
-                effField.styleSheet = Utils.createTextStyleSheet("eff", tf);
+                effField.styleSheet = WGUtils.createTextStyleSheet("eff", tf);
                 effField.x = proxy.width - 15;
                 effField.y = proxy.vehicleLevelField.y;
                 effField.width = 20;
