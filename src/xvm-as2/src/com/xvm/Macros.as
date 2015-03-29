@@ -692,6 +692,8 @@ class com.xvm.Macros
                 pdata["battletier-min"] = vdata.tierLo;
                 // {{battletier-max}}
                 pdata["battletier-max"] = vdata.tierHi;
+                // {{nation}}
+                pdata["nation"] = vdata.nation;
                 // {{level}}
                 pdata["level"] = vdata.level;
                 // {{rlevel}}

@@ -34,6 +34,7 @@ Legend:
 │ S │ {{c:vtype}}        │ X │ X │ X │ X │ X │ X │ X │ color depending on vehicle type
 │ S │ {{battletier-min}} │ X │ X │ X │ X │ X │ X │ X │ minimal vehicle battle tier
 │ S │ {{battletier-max}} │ X │ X │ X │ X │ X │ X │ X │ maximal vehicle battle tier
+│ S │ {{nation}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle nation
 │ S │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
 │ S │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
 │ S │ {{squad}}          │ X │ X │ X │ X │ X │ X │ X │ value 'sq' for own squad, empty for others
