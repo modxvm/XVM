@@ -7,7 +7,7 @@
 #SAMPLE_REPLAY=test1.wotreplay
 #SAMPLE_REPLAY=test2.wotreplay
 #SAMPLE_REPLAY=test3.wotreplay
-#SAMPLE_REPLAY=cw.wotreplay
+SAMPLE_REPLAY=cw.wotreplay
 #SAMPLE_REPLAY=tk.wotreplay
 
 #############################
