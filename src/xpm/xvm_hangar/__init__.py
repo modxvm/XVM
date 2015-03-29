@@ -114,7 +114,6 @@ def VehicleParamsField_getValue(base, self):
                     piercingPowerAvgSummary_arr = []
                     for key in gun['shots']:
                         piercingPowerAvgSummary_arr.append(str(int(key['piercingPower'][0])))
-
                     delimiter = '/'
                     piercingPowerAvgSummary_str = delimiter.join(piercingPowerAvgSummary_arr)
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/avgPiercingPower').replace('h>', 'h1>'), h1_pad(piercingPowerAvgSummary_str)])
@@ -124,7 +123,6 @@ def VehicleParamsField_getValue(base, self):
                     damageAvgSummary_arr = []
                     for key in gun['shots']:
                         damageAvgSummary_arr.append(str(int(key['shell']['damage'][0])))
-
                     delimiter = '/'
                     damageAvgSummary_str = delimiter.join(damageAvgSummary_arr)
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/avgDamage').replace('h>', 'h1>'), h1_pad(damageAvgSummary_str)])
