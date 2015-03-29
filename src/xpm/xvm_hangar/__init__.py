@@ -17,6 +17,7 @@ import xvm_main.python.config as config
 from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
+from xvm_main.python.vehinfo_camo import getCamoValues
 from math import degrees
 
 #####################################################################
@@ -61,12 +62,20 @@ def VehicleParamsField_getValue(base, self):
                     continue
                 #gravity
                 if paramName == 'gravity':
-                    gravity_str = "%g" % round(veh_descr.shot['gravity'], 2)
+                    gravity_str = '%g' % round(veh_descr.shot['gravity'], 2)
                     result[-1].append([h1_pad(l10n('gravity')), h1_pad(gravity_str)])
+                    continue
+                #camo coeffitients
+                if paramName == 'camo_coeff':
+                    topTurret = veh_descr.type.turrets[0][-1]
+                    camo_coeff_arr = getCamoValues(vehicle.name, turret['name'] == topTurret['name'], gun['name'])
+                    delimiter = '/'
+                    camo_coeff_str = delimiter.join(map(smart_round, camo_coeff_arr))
+                    result[-1].append([h1_pad(l10n('camoCoeff') + ' <p>(%)</p>'), h1_pad(camo_coeff_str)])
                     continue
                 #radioRange
                 if paramName == 'radioRange':
-                    radioRange_str = "%s" % int(vehicle.radio.descriptor['distance'])
+                    radioRange_str = '%s' % int(vehicle.radio.descriptor['distance'])
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/radioDistance').replace('h>', 'h1>'), h1_pad(radioRange_str)])
                     continue
                 #explosionRadius
@@ -81,7 +90,7 @@ def VehicleParamsField_getValue(base, self):
                                 explosionRadiusMax = key['shell']['explosionRadius']
                     if explosionRadiusMax == 0: # no HE
                         continue
-                    explosionRadius_str = "%g" % round(explosionRadiusMin, 2)
+                    explosionRadius_str = '%g' % round(explosionRadiusMin, 2)
                     if explosionRadiusMin != explosionRadiusMax:
                         explosionRadius_str += ' (%g %s)' % (round(explosionRadiusMax, 2), i18n.makeString('#menu:headerButtons/btnLabel/premium'))
                     result[-1].append([self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)[0], h1_pad(explosionRadius_str)])
@@ -91,13 +100,13 @@ def VehicleParamsField_getValue(base, self):
                     shellSpeedSummary_arr = []
                     for key in gun['shots']:
                         shellSpeedSummary_arr.append(str(int(key['speed'] * 1.25)))
-                    delimiter = "/"
+                    delimiter = '/'
                     shellSpeedSummary_str = delimiter.join(shellSpeedSummary_arr)
                     result[-1].append([h1_pad('%s <p>%s</p>' % (l10n('shellSpeed'), l10n('(m/sec)'))), h1_pad(shellSpeedSummary_str)])
                     continue
                 #piercingPowerAvg
                 if paramName == 'piercingPowerAvg':
-                    piercingPowerAvg = "%g" % veh_descr.shot['piercingPower'][0]
+                    piercingPowerAvg = '%g' % veh_descr.shot['piercingPower'][0]
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/avgPiercingPower').replace('h>', 'h1>'), h1_pad(piercingPowerAvg)])
                     continue
                 #piercingPowerAvgSummary
@@ -105,7 +114,8 @@ def VehicleParamsField_getValue(base, self):
                     piercingPowerAvgSummary_arr = []
                     for key in gun['shots']:
                         piercingPowerAvgSummary_arr.append(str(int(key['piercingPower'][0])))
-                    delimiter = "/"
+
+                    delimiter = '/'
                     piercingPowerAvgSummary_str = delimiter.join(piercingPowerAvgSummary_arr)
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/avgPiercingPower').replace('h>', 'h1>'), h1_pad(piercingPowerAvgSummary_str)])
                     continue
@@ -114,7 +124,8 @@ def VehicleParamsField_getValue(base, self):
                     damageAvgSummary_arr = []
                     for key in gun['shots']:
                         damageAvgSummary_arr.append(str(int(key['shell']['damage'][0])))
-                    delimiter = "/"
+
+                    delimiter = '/'
                     damageAvgSummary_str = delimiter.join(damageAvgSummary_arr)
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/avgDamage').replace('h>', 'h1>'), h1_pad(damageAvgSummary_str)])
                     continue
@@ -124,8 +135,8 @@ def VehicleParamsField_getValue(base, self):
                         continue
                     (shellsCount, shellReloadingTime) = gun['clip']
                     reloadMagazineTime = gun['reloadTime']
-                    shellReloadingTime_str = "%g" % round(shellReloadingTime, 2)  #nice representation
-                    reloadMagazineTime_str = "%g" % round(reloadMagazineTime, 2)
+                    shellReloadingTime_str = '%g' % round(shellReloadingTime, 2)
+                    reloadMagazineTime_str = '%g' % round(reloadMagazineTime, 2)
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/shellsCount').replace('h>', 'h1>'), h1_pad(shellsCount)])
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/shellReloadingTime').replace('h>', 'h1>'), h1_pad(shellReloadingTime_str)])
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/reloadMagazineTime').replace('h>', 'h1>'), h1_pad(reloadMagazineTime_str)])
@@ -159,7 +170,7 @@ def VehicleParamsField_getValue(base, self):
                 #reverse max speed
                 if paramName == 'speedLimits':
                     (speedLimitForward, speedLimitReverse) = veh_descr.physics['speedLimits']
-                    speedLimits_str = str(int(speedLimitForward*3.6)) + '/' + str(int(speedLimitReverse*3.6))
+                    speedLimits_str = str(int(speedLimitForward * 3.6)) + '/' + str(int(speedLimitReverse * 3.6))
                     result[-1].append([self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)[0], speedLimits_str])
                     continue
                 #turret rotation speed
@@ -173,8 +184,8 @@ def VehicleParamsField_getValue(base, self):
                 if paramName == 'terrainResistance':
                     resistances_arr = []
                     for key in veh_descr.chassis['terrainResistance']:
-                        resistances_arr.append("%g" % round(key, 2))
-                    delimiter = "/"
+                        resistances_arr.append('%g' % round(key, 2))
+                    delimiter = '/'
                     terrainResistance_str = delimiter.join(resistances_arr)
                     result[-1].append([h1_pad(l10n('terrainResistance')), h1_pad(terrainResistance_str)])
                     continue
@@ -186,31 +197,35 @@ def VehicleParamsField_getValue(base, self):
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:
                     result[-1].append(self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams))
 
-        # optional devices icons, must be in the end
-        if 'optDevicesIcons' in params_list:
-            optDevicesIcons_arr = []
-            for key in vehicle.optDevices:
-                if key:
-                    imgPath = 'img://gui' + key.icon.lstrip('.')
-                else:
-                    imgPath = 'img://gui/maps/icons/artefact/empty.png'
-                optDevicesIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
-            delimiter = " "
-            optDevicesIcons_str = delimiter.join(optDevicesIcons_arr)
-            result[-1].append([optDevicesIcons_str, ''])
+        if vehicle.isInInventory:
+            # optional devices icons, must be in the end
+            if 'optDevicesIcons' in params_list:
+                optDevicesIcons_arr = []
+                for key in vehicle.optDevices:
+                    if key:
+                        imgPath = 'img://gui' + key.icon.lstrip('.')
+                    else:
+                        imgPath = 'img://gui/maps/icons/artefact/empty.png'
+                    optDevicesIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
+                delimiter = ' '
+                optDevicesIcons_str = delimiter.join(optDevicesIcons_arr)
+                result[-1].append([optDevicesIcons_str, ''])
 
-        # equipment icons, must be in the end
-        if 'equipmentIcons' in params_list:
-            equipmentIcons_arr = []
-            for key in vehicle.eqs:
-                if key:
-                    imgPath = 'img://gui' + key.icon.lstrip('.')
+            # equipment icons, must be in the end
+            if 'equipmentIcons' in params_list:
+                equipmentIcons_arr = []
+                for key in vehicle.eqs:
+                    if key:
+                        imgPath = 'img://gui' + key.icon.lstrip('.')
+                    else:
+                        imgPath = 'img://gui/maps/icons/artefact/empty.png'
+                    equipmentIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
+                delimiter = ' '
+                equipmentIcons_str = delimiter.join(equipmentIcons_arr)
+                if 'combine_icons' in config.config['hangar']['tooltips'] and config.config['hangar']['tooltips']['combine_icons']:
+                    result[-1][-1][0] += ' ' + equipmentIcons_str
                 else:
-                    imgPath = 'img://gui/maps/icons/artefact/empty.png'
-                equipmentIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
-            delimiter = " "
-            equipmentIcons_str = delimiter.join(equipmentIcons_arr)
-            result[-1].append([equipmentIcons_str, ''])
+                    result[-1].append([equipmentIcons_str, ''])
 
         # crew roles icons, must be in the end
         if 'crewRolesIcons' in params_list:
@@ -218,34 +233,47 @@ def VehicleParamsField_getValue(base, self):
             for tankman_role in vehicle.descriptor.type.crewRoles:
                 imgPath = 'img://gui/maps/icons/tankmen/roles/medium/%s.png' % tankman_role[0]
                 crewRolesIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
-            delimiter = ""
+            delimiter = ''
             crewRolesIcons_str = delimiter.join(crewRolesIcons_arr)
             result[-1].append([crewRolesIcons_str, ''])
 
         result.append([])
-        if crew:
-            currentCrewSize = 0
-            if vehicle.isInInventory:
-                currentCrewSize = len([ x for _, x in vehicle.crew if x is not None ])
-            result[-1].append({'label': 'crew',
-             'current': currentCrewSize,
-             'total': len(vehicle.descriptor.type.crewRoles)})
-        if eqs:
-            result[-1].append({'label': 'equipments',
-             'current': len([ x for x in vehicle.eqs if x ]),
-             'total': len(vehicle.eqs)})
-        if devices:
-            result[-1].append({'label': 'devices',
-             'current': len([ x for x in vehicle.descriptor.optionalDevices if x ]),
-             'total': len(vehicle.descriptor.optionalDevices)})
+        if 'hide_bottom_text' in config.config['hangar']['tooltips'] and config.config['hangar']['tooltips']['hide_bottom_text']:
+            pass
+        else:
+            if crew:
+                currentCrewSize = 0
+                if vehicle.isInInventory:
+                    currentCrewSize = len([ x for _, x in vehicle.crew if x is not None ])
+                result[-1].append({'label': 'crew',
+                 'current': currentCrewSize,
+                 'total': len(vehicle.descriptor.type.crewRoles)})
+            if eqs:
+                result[-1].append({'label': 'equipments',
+                 'current': len([ x for x in vehicle.eqs if x ]),
+                 'total': len(vehicle.eqs)})
+            if devices:
+                result[-1].append({'label': 'devices',
+                 'current': len([ x for x in vehicle.descriptor.optionalDevices if x ]),
+                 'total': len(vehicle.descriptor.optionalDevices)})
+
         return result
     except Exception as ex:
         err(traceback.format_exc())
         return base(self)
 
-#utility function
+#utility functions
+
 def h1_pad(text):
     return '<h1>%s</h1>' % text
+
+def smart_round(value):
+    if value >= 10:
+        return '%g' % round(value)
+    elif value >= 1:
+        return '%g' % round(value, 1)
+    else: # < 1
+        return '%g' % round(value, 2)
 
 #barracks: add nation flag and skills for tanksman
 def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenInBarracks, berthPrice, actionPriceData, berthBuyCount, tankmanArr):

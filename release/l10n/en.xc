@@ -120,6 +120,7 @@
     "terrainResistance": "Terrain resistance",
     "gravity": "Gravity",
     "shellSpeed": "Shell speed",
+    "camoCoeff": "Camo coefficients",
     "(m/sec)": "(m/sec)",
     "(sec)": "(sec)",
     "(m)": "(m)",

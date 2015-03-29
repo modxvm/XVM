@@ -4,8 +4,16 @@
  */
 {
   "tooltips": {
+    // true - Combine icons of equipment and optional devices into one row.
+    // true - Объединить значки оборудования и доп.модулей в одну строку.
+    "combine_icons": false,
+    // true - Hide text at bottom of tooltip showing quantity of used eqipment, optional devices and crew.
+    // true - Спрятать текст внизу подсказки показывающий количество используемого оборудования, доп. модулей и экипаж.
+    "hide_bottom_text": false,
+
     "lightTank":    [
                     "circularVisionRadius",
+                    "camo_coeff",
                     "maxHealth",
                     "turretArmor",
                     "hullArmor",
@@ -62,6 +70,7 @@
                     ],
     "TD":           [
                     "circularVisionRadius",
+                    "camo_coeff",
                     "maxHealth",
                     "turretArmor",
                     "hullArmor",
@@ -129,19 +138,22 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "terrainResistance",                    - Сводка сопротивлений грунтов \ Summary of terrain resistances
 "optDevicesIcons",                      - Значки дополнительного оборудования (будут показаны в конце) \ Icons of optional devices (will be shown at the end)
 "equipmentIcons",                       - Значки снаряжения (будут показаны в конце) \ Icons of equipment (will be shown at the end)
-"crewRolesIcons",                       - Значки профессий экипажа танка \ Icons of crew roles of vehicle
+"crewRolesIcons",                       - Значки профессий экипажа танка (будут показаны в конце) \ Icons of crew roles of vehicle (will be shown at the end)
 "gravity",                              - Гравитация \ Gravity
 "shellSpeedSummary",                    - Сводка скоростей снарядов \ Summary of shell speeds
 "radioRange",                           - Дальность связи \ Range of radio signal
 "rateOfFire",                           - Скорострельность оружия (в барабанах заменяется их специфичными) \ Rate of Fire (for clip guns will be shown their specific)
 "battleTiers",                          - Уровни боев танка \ Battle tiers of vehicle
 "maxHealth",                            - ХП танка \ HP of vehicle
-"TEXT:customtext"                       - Показывать произвольный текст (с поддержкой ActionScript HTML) \ Show custom text (with ActionScript HTML support)
+"TEXT:customtext",                      - Показывать произвольный текст (с поддержкой ActionScript HTML) \ Show custom text (with ActionScript HTML support)
+"camo_coeff",                           - Коэффициенты маскировки (неподвижно/в движении/при выстреле) \ Camo coefficients (standing still/moving/shooting)
 ...
 
 
 
-
+Camo data taken from following source, special thanks to authors!
+Показатели маскировки взяты из следущего источника, особая благодарность авторам!
+http://forum.worldoftanks.ru/index.php?/topic/1047590-
 
 
 */

@@ -7,8 +7,11 @@
       "enableGoldLocker" - enable locker for gold
       "enableFreeXpLocker" - enable locker for free XP
       "defaultBoughtForCredits" - Use credits instead of gold as default currency for ammo and equipment
+      "combine_icons" - in tank tooltips combine icons of equipment and optional modules
+      "hide_bottom_text" - in tank tooltips hide text at bottom showing quantity of used equipment etc.
   * new macro {{.}} for config value substitution: {{.path.to.config.value}}
       ex. {{.language}}, {{.def.mycolors.ally}}
+  * in tank tooltips added feature of custom text and camo coefficients data
 
 XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
