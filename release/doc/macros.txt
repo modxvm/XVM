@@ -23,6 +23,7 @@ Legend:
 │ S │ {{name}}           │ X │ X │ X │ X │ X │ X │ X │ player nickname without clan name
 │ S │ {{clan}}           │ X │ X │ X │ X │ X │ X │ X │ clan name with brackets (empty if no clan)
 │ S │ {{clannb}}         │ X │ X │ X │ X │ X │ X │ X │ clan name without brackets
+│ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, '' for enemy team
 │ S │ {{player}}         │ X │ X │ X │ X │   │   │   │ value 'pl' for current player, empty for others
 │ S │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle id
 │ S │ {{vehicle}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle name
