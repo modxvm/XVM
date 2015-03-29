@@ -5,6 +5,7 @@ package xvm.comments.UI
 {
     import com.xvm.*;
     import net.wg.gui.messenger.data.*;
+    import scaleform.clik.constants.*;
 
     public class UI_ContactItem extends ContactItemUI
     {
@@ -22,25 +23,25 @@ package xvm.comments.UI
             xvm_contact_data = value.xvm_contact_data;
         }
 
-        override protected function draw():void
+        override public function applyLayout():void
         {
             var d:ContactItemVO = data as ContactItemVO;
             if (!d || !xvm_contact_data)
             {
-                super.draw();
+                super.applyLayout();
                 return;
             }
 
             var nick:String = xvm_contact_data.nick;
             if (!nick || nick == null || nick == "")
             {
-                super.draw();
+                super.applyLayout();
                 return;
             }
 
             var userName:String = d.userPropsVO.userName;
             d.userPropsVO.userName = nick;
-            super.draw();
+            super.applyLayout();
             d.userPropsVO.userName = userName;
         }
     }
