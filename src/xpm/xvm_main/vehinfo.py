@@ -77,11 +77,11 @@ def _init():
 
                 wn8data = wn8.getWN8ExpectedData(data['vid'])
                 if wn8data is not None:
-                    data['wn8expDamage'] = wn8data['expDamage']
-                    data['wn8expSpot'] = wn8data['expSpot']
-                    data['wn8expWinRate'] = wn8data['expWinRate']
-                    data['wn8expDef'] = wn8data['expDef']
-                    data['wn8expFrag'] = wn8data['expFrag']
+                    data['wn8expDamage'] = float(wn8data['expDamage'])
+                    data['wn8expSpot'] = float(wn8data['expSpot'])
+                    data['wn8expWinRate'] = float(wn8data['expWinRate'])
+                    data['wn8expDef'] = float(wn8data['expDef'])
+                    data['wn8expFrag'] = float(wn8data['expFrag'])
 
                 # TODO: load avg/top data from server
                 data['avg'] = {}
