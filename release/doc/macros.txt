@@ -23,6 +23,7 @@ Legend:
 │ S │ {{name}}           │ X │ X │ X │ X │ X │ X │ X │ player nickname without clan name
 │ S │ {{clan}}           │ X │ X │ X │ X │ X │ X │ X │ clan name with brackets (empty if no clan)
 │ S │ {{clannb}}         │ X │ X │ X │ X │ X │ X │ X │ clan name without brackets
+│ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, '' for enemy team
 │ S │ {{player}}         │ X │ X │ X │ X │   │   │   │ value 'pl' for current player, empty for others
 │ S │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle id
 │ S │ {{vehicle}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle name
@@ -33,6 +34,7 @@ Legend:
 │ S │ {{c:vtype}}        │ X │ X │ X │ X │ X │ X │ X │ color depending on vehicle type
 │ S │ {{battletier-min}} │ X │ X │ X │ X │ X │ X │ X │ minimal vehicle battle tier
 │ S │ {{battletier-max}} │ X │ X │ X │ X │ X │ X │ X │ maximal vehicle battle tier
+│ S │ {{nation}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle nation
 │ S │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
 │ S │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
 │ S │ {{squad}}          │ X │ X │ X │ X │ X │ X │ X │ value 'sq' for own squad, empty for others

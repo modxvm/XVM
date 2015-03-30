@@ -604,7 +604,7 @@ class com.xvm.Macros
      * @param playerId player id
      * @param fullPlayerName full player name with extra tags (clan, region, etc)
      */
-    private function _RegisterMinimalMacrosData(pname:String, playerId:Number, fullPlayerName:String)
+    private function _RegisterMinimalMacrosData(pname:String, playerId:Number, fullPlayerName:String, team:Number)
     {
         if (!Config.config)
             return;
@@ -633,6 +633,8 @@ class com.xvm.Macros
             pdata["clan"] = clanWithBrackets;
             // {{clannb}}
             pdata["clannb"] = clanWithoutBrackets;
+            // {{ally}}
+            pdata["ally"] = team == Defines.TEAM_ALLY ? 'ally' : null;
         }
     }
 
@@ -655,7 +657,7 @@ class com.xvm.Macros
         var idx:Number = fullPlayerName.indexOf("[");
         if (idx < 0 && data.clanAbbrev != null && data.clanAbbrev != "")
             fullPlayerName += "[" + data.clanAbbrev + "]";
-        _RegisterMinimalMacrosData(pname, data.uid, fullPlayerName);
+        _RegisterMinimalMacrosData(pname, data.uid, fullPlayerName, team);
 
         if (!pdata.hasOwnProperty("player"))
         {
@@ -690,6 +692,8 @@ class com.xvm.Macros
                 pdata["battletier-min"] = vdata.tierLo;
                 // {{battletier-max}}
                 pdata["battletier-max"] = vdata.tierHi;
+                // {{nation}}
+                pdata["nation"] = vdata.nation;
                 // {{level}}
                 pdata["level"] = vdata.level;
                 // {{rlevel}}
@@ -831,7 +835,7 @@ class com.xvm.Macros
         delete m_macros_cache[pname];
         delete pdata["name"];
         m_contacts[String(stat._id)] = stat.xvm_contact_data;
-        _RegisterMinimalMacrosData(pname, stat._id, stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"));
+        _RegisterMinimalMacrosData(pname, stat._id, stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.team);
 
         // {{region}}
         pdata["region"] = Config.config.region;

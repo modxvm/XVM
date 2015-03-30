@@ -51,6 +51,11 @@
             super.onDispose();
         }
 
+        override public function as_setOkBtnEnabled(param1:Boolean):void
+        {
+            return; // disable original behavior
+        }
+
         override public function as_setUserProps(value:Object):void
         {
             //Logger.addObject(value, 2, "as_setUserProps");

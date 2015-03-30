@@ -33,8 +33,8 @@ package xvm.comments
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
-            page.borderLip.y += 100;
-            page.treeComponent.setListTopBound(50);
+            //page.borderLip.y += 100;
+            //page.treeComponent.setListTopBound(50);
         }
 
         override public function onAfterPopulate(e:LifeCycleEvent):void

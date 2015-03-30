@@ -73,7 +73,7 @@ package xvm.hangar.components.BattleLoading
                 }
 
                 var vdata:VehicleData = VehicleInfo.getByIcon(data.vehicleIcon);
-                Macros.RegisterMinimalMacrosData(data.accountDBID, fullPlayerName, vdata.vid);
+                Macros.RegisterMinimalMacrosData(data.accountDBID, fullPlayerName, vdata.vid, team);
                 data.playerName = Macros.Format(data.playerName, "{{name}}");
                 data.clanAbbrev = Macros.Format(data.playerName, "{{clannb}}");
 

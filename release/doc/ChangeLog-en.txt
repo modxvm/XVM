@@ -12,6 +12,8 @@
   * new macro {{.}} for config value substitution: {{.path.to.config.value}}
       ex. {{.language}}, {{.def.mycolors.ally}}
   * in tank tooltips added feature of custom text and camo coefficients data
+  * new macro {{ally}} returns 'ally' for ally team and empty for enemy team
+  * new macro {{nation}} returns vehicle nation
 
 XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
