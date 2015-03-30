@@ -14,6 +14,8 @@
   * in tank tooltips added feature of custom text and camo coefficients data
   * new macro {{ally}} returns 'ally' for ally team and empty for enemy team
   * new macro {{nation}} returns vehicle nation
+  * added new feature of sorting tanks in carousel from config (carousel.xc)
+  * in battle, in HE tooltip added explosion radius
 
 XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
