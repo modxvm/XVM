@@ -75,6 +75,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         $96_prohorovka_defense: { size: 100 }, // Fiery Salient
         $99_himmelball:         { size: 70 },  // Himmelsdorf Football
         $100_thepit:            { size: 60 },  // The Pit
+        $101_dday:              { size: 100 }, // Overlord
         $103_ruinberg_winter:   { size: 80 },  // Winter Ruinberg
         $109_battlecity_ny:     { size: 50 },  // Battle City
         __end__: null
