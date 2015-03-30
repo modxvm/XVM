@@ -188,7 +188,7 @@
 
     // Quests
     "Hide with honors": "Hide with honors",
-    "Hide not available": "Hide not available",
+    "Hide unavailable": "Hide unavailable",
 
     // Config loading
     "XVM config reloaded": "XVM config reloaded",

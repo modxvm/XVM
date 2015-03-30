@@ -188,7 +188,7 @@
 
     // Quests
     "Hide with honors": "Скрыть с отличием",
-    "Hide not available": "Скрыть недоступные",
+    "Hide unavailable": "Скрыть недоступные",
 
     // Config loading
     "XVM config reloaded": "Конфиг XVM перезагружен",

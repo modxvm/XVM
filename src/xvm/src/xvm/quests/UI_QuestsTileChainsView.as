@@ -36,7 +36,13 @@ package xvm.quests
                 super.configUI();
                 taskFilters.hideCompletedTasks.y -= 18;
                 createHideFullyCompletedTasksCheckBox();
-                createHideNotAvailableTasksCheckBox();
+                createHideUnavailableTasksCheckBox();
+                setTimeout(function():void {
+                    hideFullyCompletedTasks.x = taskFilters.hideCompletedTasks.x;
+                    hideFullyCompletedTasks.visible = true;
+                    hideUnavailableTasks.x = taskFilters.hideCompletedTasks.x;
+                    hideUnavailableTasks.visible = true;
+                }, 0);
                 Cmd.loadSettings(this, restoreSettings, "questsTileChainsViewFilters");
             }
             catch (ex:Error)
@@ -88,7 +94,7 @@ package xvm.quests
         private var loadedSettings:Object = null;
         private var selectedId:Number = -1;
         private var hideFullyCompletedTasks:CheckBox;
-        private var hideNotAvailableTasks:CheckBox;
+        private var hideUnavailableTasks:CheckBox;
         private var blockFiltersChangedEvent:Boolean = false;
 
         private function onListItemSelected(e:ListEventEx) : void
@@ -105,26 +111,28 @@ package xvm.quests
                 name = "hideFullyCompletedTasks";
                 label = Locale.get("Hide with honors");
                 autoSize = "left";
-                x = taskFilters.hideCompletedTasks.x + 3;
+                x = taskFilters.hideCompletedTasks.x;
                 y = taskFilters.hideCompletedTasks.y + 18;
+                visible = false;
             }
             hideFullyCompletedTasks.addEventListener(Event.SELECT, onHideTasksChanged);
             taskFilters.addChild(hideFullyCompletedTasks);
         }
 
-        private function createHideNotAvailableTasksCheckBox():void
+        private function createHideUnavailableTasksCheckBox():void
         {
-            hideNotAvailableTasks = App.utils.classFactory.getComponent("CheckBox", CheckBox);
-            with (hideNotAvailableTasks)
+            hideUnavailableTasks = App.utils.classFactory.getComponent("CheckBox", CheckBox);
+            with (hideUnavailableTasks)
             {
-                name = "hideNotAvailableTasks";
-                label = Locale.get("Hide not available");
+                name = "hideUnavailableTasks";
+                label = Locale.get("Hide unavailable");
                 autoSize = "left";
-                x = taskFilters.hideCompletedTasks.x + 3;
+                x = taskFilters.hideCompletedTasks.x;
                 y = taskFilters.hideCompletedTasks.y + 36;
+                visible = false;
             }
-            hideNotAvailableTasks.addEventListener(Event.SELECT, onHideTasksChanged);
-            taskFilters.addChild(hideNotAvailableTasks);
+            hideUnavailableTasks.addEventListener(Event.SELECT, onHideTasksChanged);
+            taskFilters.addChild(hideUnavailableTasks);
         }
 
         private function ApplyFilter(data:QuestTileVO):QuestTileVO
@@ -140,7 +148,7 @@ package xvm.quests
                     {
                         chain.tasks.splice(i, 1);
                     }
-                    else if (hideNotAvailableTasks.selected && StringUtils.contains(task.stateIconPath, "/notAvailableIcon."))
+                    else if (hideUnavailableTasks.selected && StringUtils.contains(task.stateIconPath, "/notAvailableIcon."))
                     {
                         chain.tasks.splice(i, 1);
                     }
@@ -170,7 +178,7 @@ package xvm.quests
                 taskTypeFilter: taskFilters.taskTypeFilter.selectedIndex,
                 hideCompletedTasks: taskFilters.hideCompletedTasks.selected,
                 hideFullyCompletedTasks: this.hideFullyCompletedTasks.selected,
-                hideNotAvailableTasks: this.hideNotAvailableTasks.selected
+                hideUnavailableTasks: this.hideUnavailableTasks.selected
             };
             Cmd.saveSettings("questsTileChainsViewFilters", JSONx.stringify(settings));
         }
@@ -203,7 +211,7 @@ package xvm.quests
                 taskFilters.taskTypeFilter.selectedIndex = loadedSettings.taskTypeFilter;
                 taskFilters.hideCompletedTasks.selected = loadedSettings.hideCompletedTasks;
                 this.hideFullyCompletedTasks.selected = loadedSettings.hideFullyCompletedTasks;
-                this.hideNotAvailableTasks.selected = loadedSettings.hideNotAvailableTasks;
+                this.hideUnavailableTasks.selected = loadedSettings.hideUnavailableTasks;
             }
             catch (ex:Error)
             {
