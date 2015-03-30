@@ -70,6 +70,15 @@
       // Sign of mastery.
       // Знак мастерства.
       { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" }
-    ]
+    ],
+    // Order of nations.
+    // Порядок наций.
+    "nations_order": ["ussr", "germany", "usa", "france", "uk", "china", "japan"],
+    // Order of types of vehicles.
+    // Порядок классов техники.
+    "types_order":   ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
+    // Tank sorting criteria, available options: "nation", "type", "level". Sorting will be in given order.
+    // Критерии сортировки танков, доступные значения: "nation", "type", "level". Сортировка будет в заданном порядке.
+    "sorting_criteria": ["nation", "type", "level"]
   }
 }
