@@ -57,6 +57,19 @@ package xvm.tcarousel
                         vdata.selected = this.selected ? "sel" : null;
                         ExtraFields.updateVehicleExtraFields(extraFields, vdata);
                     }
+
+                    // Fix statusText position
+                    if (this.statusText && this.statusText.visible)
+                    {
+                        if (this.clanLockUI.visible)
+                        {
+                            //this.statusText.y = Math.round(this.clanLockUI.y + this.clanLockUI.textField.height + this.STATUS_MARGIN);
+                        }
+                        else
+                        {
+                            this.statusText.y = _height / scaleY - this.statusText.textHeight >> 1;
+                        }
+                    }
                 }
             }
             catch (ex:Error)

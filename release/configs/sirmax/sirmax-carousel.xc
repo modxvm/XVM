@@ -8,7 +8,7 @@
   },
   "carousel": {
     "enabled": true,
-    "zoom": 1,
+    //"zoom": 0.5,
     "rows": 2,
     "padding": { "horizontal": 5, "vertical": 5 },
     "alwaysShowFilters": true,
