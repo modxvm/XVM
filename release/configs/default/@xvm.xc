@@ -159,5 +159,9 @@
 
   // Export data
   // Выгрузка данных
-  "export": ${"export.xc":"export"}
+  "export": ${"export.xc":"export"},
+
+  // Parameters for tooltips
+  // Параметры всплывающих подсказок
+  "tooltips": ${"tooltips.xc":"tooltips"}
 }
