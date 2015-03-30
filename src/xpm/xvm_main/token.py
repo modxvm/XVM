@@ -72,7 +72,7 @@ def _makeNetworkServicesSettings(tdata):
         'comments': svc.get('comments', True) if active else False,
         'chance': svc.get('chance', False) if active else False,
         'chanceLive': svc.get('chanceLive', False) if active else False,
-        'topClansCount': svc.get('topClansCount', 100),
+        'topClansCount': svc.get('topClansCount', 50),
         'scale': svc.get('scale', 'xvm'),
         'rating': svc.get('rating', 'wgr'),
     }
