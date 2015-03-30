@@ -1069,6 +1069,8 @@ class com.xvm.Macros
         switch (Config.config.region)
         {
             case "RU":
+                if (pname == "www_modxvm_com")
+                    return "www.modxvm.com";
                 if (pname == "M_r_A")
                     return "Флаттершай - лучшая пони!";
                 if (pname == "sirmax2" || pname == "0x01" || pname == "_SirMax_")
@@ -1080,6 +1082,8 @@ class com.xvm.Macros
                 break;
 
             case "CT":
+                if (pname == "www_modxvm_com")
+                    return "www.modxvm.com";
                 if (pname == "M_r_A_RU" || pname == "M_r_A_EU")
                     return "Fluttershy is best pony!";
                 if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU")
