@@ -163,6 +163,12 @@
     "token/cnt": "Количество запросов:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Неизвестный статус",
 
+    // Lobby header
+    "lobby/header/gold_locked_tooltip": "Золото заблокировано",
+    "lobby/header/gold_unlocked_tooltip": "Золото разблокировано",
+    "lobby/header/freexp_locked_tooltip": "Свободный опыт заблокирован",
+    "lobby/header/freexp_unlocked_tooltip": "Свободный опыт разблокирован",
+
     // Carousel
     "NonElite": "Не элитный",
     "Premium": "Премиум",

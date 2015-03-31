@@ -7,6 +7,7 @@ package xvm.limits
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
+    import flash.events.Event;
     import flash.utils.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.events.*;
@@ -17,6 +18,11 @@ package xvm.limits
 
     public class LimitsXvmView extends XvmViewBase
     {
+        private const L10N_GOLD_LOCKED_TOOLTIP:String = "lobby/header/gold_locked_tooltip";
+        private const L10N_GOLD_UNLOCKED_TOOLTIP:String = "lobby/header/gold_unlocked_tooltip";
+        private const L10N_FREEXP_LOCKED_TOOLTIP:String = "lobby/header/freexp_locked_tooltip";
+        private const L10N_FREEXP_UNLOCKED_TOOLTIP:String = "lobby/header/freexp_unlocked_tooltip";
+
         public function LimitsXvmView(view:IView)
         {
             super(view);
@@ -46,30 +52,21 @@ package xvm.limits
 
         private function init():void
         {
-            var goldControl:HeaderButton = page.header.xvm_headerButtonsHelper.xvm_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
-            var freeXpControl:HeaderButton = page.header.xvm_headerButtonsHelper.xvm_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
-
-            if (goldControl == null || freeXpControl == null)
-            {
-                var self:LimitsXvmView = this;
-                setTimeout(function():void { self.init(); }, 1);
-                return;
-            }
-
             if (Config.config.hangar.enableGoldLocker)
             {
-                var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
-                goldContent.addEventListener(HeaderEvents.HBC_SIZE_UPDATED, this.onGoldContentUpdated);
-                goldLocker = page.header.headerButtonBar.addChild(new LockerControl()) as LockerControl;
-                //goldLocker.addEventListener(
+                goldLocker = page.header.addChild(new LockerControl()) as LockerControl;
+                goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched);
+                onGoldLockerSwitched(null);
             }
 
             if (Config.config.hangar.enableFreeXpLocker)
             {
-                var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
-                freeXpContent.addEventListener(HeaderEvents.HBC_SIZE_UPDATED, this.onFreeXpContentUpdated);
-                freeXpLocker = page.header.headerButtonBar.addChild(new LockerControl()) as LockerControl;
+                freeXpLocker = page.header.addChild(new LockerControl()) as LockerControl;
+                freeXpLocker.addEventListener(Event.SELECT, onFreeXpLockerSwitched);
+                onFreeXpLockerSwitched(null);
             }
+
+            page.header.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION, this.onHeaderButtonsReposition);
         }
 
         private function dispose():void
@@ -86,16 +83,39 @@ package xvm.limits
             }
         }
 
-        private function onGoldContentUpdated(e:HeaderEvents):void
+        private function onHeaderButtonsReposition(e:HeaderEvents):void
         {
-            goldLocker.x = e.target.x + e.target.moneyIconText.x;
-            goldLocker.y = e.target.y + e.target.moneyIconText.y + 20;
+            var goldControl:HeaderButton = page.header.xvm_headerButtonsHelper.xvm_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
+            if (goldControl)
+            {
+                var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
+                if (goldContent)
+                {
+                    goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 2;
+                    goldLocker.y = goldControl.y + goldContent.x + goldContent.moneyIconText.y + 12;
+                }
+            }
+
+            var freeXpControl:HeaderButton = page.header.xvm_headerButtonsHelper.xvm_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
+            if (freeXpControl)
+            {
+                var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
+                if (freeXpContent)
+                {
+                    freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 2;
+                    freeXpLocker.y = freeXpControl.y + freeXpContent.x + freeXpContent.moneyIconText.y + 12;
+                }
+            }
         }
 
-        private function onFreeXpContentUpdated(e:HeaderEvents):void
+        private function onGoldLockerSwitched(e:Event):void
         {
-            freeXpLocker.x = e.target.x + e.target.moneyIconText.x;
-            freeXpLocker.y = e.target.y + e.target.moneyIconText.y + 20;
+            goldLocker.toolTip = Locale.get(goldLocker.selected ? L10N_GOLD_LOCKED_TOOLTIP : L10N_GOLD_UNLOCKED_TOOLTIP);
+        }
+
+        private function onFreeXpLockerSwitched(e:Event):void
+        {
+            freeXpLocker.toolTip = Locale.get(freeXpLocker.selected ? L10N_FREEXP_LOCKED_TOOLTIP : L10N_FREEXP_UNLOCKED_TOOLTIP);
         }
     }
 }

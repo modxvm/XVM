@@ -163,6 +163,12 @@
     "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Unknown status",
 
+    // Lobby header
+    "lobby/header/gold_locked_tooltip": "Gold is locked",
+    "lobby/header/gold_unlocked_tooltip": "Gold is unlocked",
+    "lobby/header/freexp_locked_tooltip": "Free XP is locked",
+    "lobby/header/freexp_unlocked_tooltip": "Free XP is unlocked",
+
     // Carousel
     "NonElite": "Non elite",
     "Premium": "Premium",

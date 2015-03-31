@@ -7,6 +7,7 @@ package xvm.limits.controls
     import com.xvm.*;
     import flash.display.*;
     import flash.events.*;
+    import flash.geom.*;
     import net.wg.data.constants.*;
     import net.wg.infrastructure.interfaces.entity.*;
     import scaleform.clik.constants.*;
@@ -23,6 +24,11 @@ package xvm.limits.controls
         private var imgUnlockedClass:Class;
         private var imgUnlocked:Bitmap = new imgUnlockedClass();
 
+        // Constants
+
+        private const ALPHA_MOUSE_OUT:Number = 0.8;
+        private const ALPHA_MOUSE_OVER:Number = 1.0;
+
         // Protected vars
 
         protected var _selected:Boolean = false;
@@ -31,6 +37,8 @@ package xvm.limits.controls
 
         public function LockerControl()
         {
+            scrollRect = new Rectangle(0, 0, 16, 16);
+            setSize(16, 16);
         }
 
         // ISoundable
@@ -71,11 +79,10 @@ package xvm.limits.controls
         {
             super.configUI();
 
-            alpha = 75;
-
             this.addChild(imgLocked);
             this.addChild(imgUnlocked);
-            imgUnlocked.x = 1;
+
+            alpha = ALPHA_MOUSE_OUT;
 
             buttonMode = true;
             mouseEnabled = true;
@@ -86,7 +93,7 @@ package xvm.limits.controls
 
             selected = false;
 
-            if(App.soundMgr != null)
+            if (App.soundMgr != null)
                 App.soundMgr.addSoundsHdlrs(this);
         }
 
@@ -94,7 +101,7 @@ package xvm.limits.controls
         {
             super.onDispose();
 
-            if(App.soundMgr)
+            if (App.soundMgr)
                 App.soundMgr.removeSoundHdlrs(this);
         }
 
@@ -112,11 +119,13 @@ package xvm.limits.controls
 
         protected function handleMouseRollOver(e:MouseEvent):void
         {
+            alpha = ALPHA_MOUSE_OVER;
             this.showTooltip();
         }
 
         protected function handleMouseRollOut(e:MouseEvent):void
         {
+            alpha = ALPHA_MOUSE_OUT;
             this.hideTooltip();
         }
 
