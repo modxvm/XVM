@@ -65,6 +65,12 @@ class Xvm(object):
                 if arena is not None:
                     return (arena.bonusType, True)
                 return (None, True)
+            elif cmd == XVM_COMMAND_LOAD_SETTINGS:
+                default = None if len(args) < 2 else args[1]
+                return (userprefs.get(args[0], default), True)
+            elif cmd == XVM_COMMAND_SAVE_SETTINGS:
+                userprefs.set(args[0], args[1])
+                return (None, True)
 
         except Exception, ex:
             err(traceback.format_exc())

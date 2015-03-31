@@ -26,8 +26,8 @@ package xvm.limits.controls
 
         // Constants
 
-        private const ALPHA_MOUSE_OUT:Number = 0.8;
-        private const ALPHA_MOUSE_OVER:Number = 1.0;
+        private static const ALPHA_MOUSE_OUT:Number = 0.8;
+        private static const ALPHA_MOUSE_OVER:Number = 1.0;
 
         // Protected vars
 
@@ -39,6 +39,7 @@ package xvm.limits.controls
         {
             scrollRect = new Rectangle(0, 0, 16, 16);
             setSize(16, 16);
+            _selected = false;
         }
 
         // ISoundable
@@ -90,8 +91,6 @@ package xvm.limits.controls
             addEventListener(MouseEvent.ROLL_OUT, this.handleMouseRollOut);
             addEventListener(MouseEvent.MOUSE_DOWN, this.handleMousePress);
             addEventListener(MouseEvent.CLICK, this.handleMouseRelease);
-
-            selected = false;
 
             if (App.soundMgr != null)
                 App.soundMgr.addSoundsHdlrs(this);

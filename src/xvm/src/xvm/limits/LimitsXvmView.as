@@ -18,10 +18,16 @@ package xvm.limits
 
     public class LimitsXvmView extends XvmViewBase
     {
-        private const L10N_GOLD_LOCKED_TOOLTIP:String = "lobby/header/gold_locked_tooltip";
-        private const L10N_GOLD_UNLOCKED_TOOLTIP:String = "lobby/header/gold_unlocked_tooltip";
-        private const L10N_FREEXP_LOCKED_TOOLTIP:String = "lobby/header/freexp_locked_tooltip";
-        private const L10N_FREEXP_UNLOCKED_TOOLTIP:String = "lobby/header/freexp_unlocked_tooltip";
+        private static const SETTINGS_GOLD_LOCK_STATUS:String = "xvm_limits/gold_lock_status";
+        private static const SETTINGS_FREEXP_LOCK_STATUS:String = "xvm_limits/freexp_lock_status";
+
+        private static const XPM_COMMAND_SET_GOLD_LOCK_STATUS:String = "xpm.set_gold_lock_status";
+        private static const XPM_COMMAND_SET_FREEXP_LOCK_STATUS:String = "xpm.set_freexp_lock_status";
+
+        private static const L10N_GOLD_LOCKED_TOOLTIP:String = "lobby/header/gold_locked_tooltip";
+        private static const L10N_GOLD_UNLOCKED_TOOLTIP:String = "lobby/header/gold_unlocked_tooltip";
+        private static const L10N_FREEXP_LOCKED_TOOLTIP:String = "lobby/header/freexp_locked_tooltip";
+        private static const L10N_FREEXP_UNLOCKED_TOOLTIP:String = "lobby/header/freexp_unlocked_tooltip";
 
         public function LimitsXvmView(view:IView)
         {
@@ -35,13 +41,11 @@ package xvm.limits
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            //Logger.add("onAfterPopulate: " + view.as_alias);
             init();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            //Logger.add("onBeforeDispose: " + view.as_alias);
             dispose();
         }
 
@@ -52,18 +56,23 @@ package xvm.limits
 
         private function init():void
         {
+            if (!Config.config.hangar.enableGoldLocker && !Config.config.hangar.enableFreeXpLocker)
+                return;
+
             if (Config.config.hangar.enableGoldLocker)
             {
                 goldLocker = page.header.addChild(new LockerControl()) as LockerControl;
                 goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched);
-                onGoldLockerSwitched(null);
+                goldLocker.toolTip = Locale.get(L10N_GOLD_UNLOCKED_TOOLTIP);
+                goldLocker.selected = Xvm.cmd(Defines.XVM_COMMAND_LOAD_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, false);
             }
 
             if (Config.config.hangar.enableFreeXpLocker)
             {
                 freeXpLocker = page.header.addChild(new LockerControl()) as LockerControl;
                 freeXpLocker.addEventListener(Event.SELECT, onFreeXpLockerSwitched);
-                onFreeXpLockerSwitched(null);
+                freeXpLocker.toolTip = Locale.get(L10N_FREEXP_UNLOCKED_TOOLTIP);
+                freeXpLocker.selected = Xvm.cmd(Defines.XVM_COMMAND_LOAD_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, false);
             }
 
             page.header.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION, this.onHeaderButtonsReposition);
@@ -110,11 +119,15 @@ package xvm.limits
 
         private function onGoldLockerSwitched(e:Event):void
         {
+            Xvm.cmd(XPM_COMMAND_SET_GOLD_LOCK_STATUS, goldLocker.selected);
+            Xvm.cmd(Defines.XVM_COMMAND_SAVE_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, goldLocker.selected);
             goldLocker.toolTip = Locale.get(goldLocker.selected ? L10N_GOLD_LOCKED_TOOLTIP : L10N_GOLD_UNLOCKED_TOOLTIP);
         }
 
         private function onFreeXpLockerSwitched(e:Event):void
         {
+            Xvm.cmd(XPM_COMMAND_SET_FREEXP_LOCK_STATUS, freeXpLocker.selected);
+            Xvm.cmd(Defines.XVM_COMMAND_SAVE_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, freeXpLocker.selected);
             freeXpLocker.toolTip = Locale.get(freeXpLocker.selected ? L10N_FREEXP_LOCKED_TOOLTIP : L10N_FREEXP_UNLOCKED_TOOLTIP);
         }
     }
