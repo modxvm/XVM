@@ -9,6 +9,7 @@ package xvm.limits
     import com.xvm.types.cfg.*;
     import flash.utils.*;
     import net.wg.gui.lobby.*;
+    import net.wg.gui.lobby.header.events.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -58,18 +59,16 @@ package xvm.limits
             if (Config.config.hangar.enableGoldLocker)
             {
                 var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
-                goldLocker = goldContent.addChild(new LockerControl()) as LockerControl;
-                goldLocker.x = goldContent.moneyIconText.x;
-                goldLocker.y = goldContent.moneyIconText.y + 20;
+                goldContent.addEventListener(HeaderEvents.HBC_SIZE_UPDATED, this.onGoldContentUpdated);
+                goldLocker = page.header.headerButtonBar.addChild(new LockerControl()) as LockerControl;
                 //goldLocker.addEventListener(
             }
 
             if (Config.config.hangar.enableFreeXpLocker)
             {
                 var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
-                freeXpLocker = freeXpContent.addChild(new LockerControl()) as LockerControl;
-                freeXpLocker.x = freeXpContent.moneyIconText.x;
-                freeXpLocker.y = freeXpContent.moneyIconText.y + 20;
+                freeXpContent.addEventListener(HeaderEvents.HBC_SIZE_UPDATED, this.onFreeXpContentUpdated);
+                freeXpLocker = page.header.headerButtonBar.addChild(new LockerControl()) as LockerControl;
             }
         }
 
@@ -86,6 +85,17 @@ package xvm.limits
                 freeXpLocker = null;
             }
         }
-    }
 
+        private function onGoldContentUpdated(e:HeaderEvents):void
+        {
+            goldLocker.x = e.target.x + e.target.moneyIconText.x;
+            goldLocker.y = e.target.y + e.target.moneyIconText.y + 20;
+        }
+
+        private function onFreeXpContentUpdated(e:HeaderEvents):void
+        {
+            freeXpLocker.x = e.target.x + e.target.moneyIconText.x;
+            freeXpLocker.y = e.target.y + e.target.moneyIconText.y + 20;
+        }
+    }
 }
