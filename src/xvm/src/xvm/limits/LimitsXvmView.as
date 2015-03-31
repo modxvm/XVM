@@ -10,9 +10,9 @@ package xvm.limits
     import flash.utils.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
-    import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    import xvm.limits.controls.*;
 
     public class LimitsXvmView extends XvmViewBase
     {
@@ -61,6 +61,7 @@ package xvm.limits
                 goldLocker = goldContent.addChild(new LockerControl()) as LockerControl;
                 goldLocker.x = goldContent.moneyIconText.x;
                 goldLocker.y = goldContent.moneyIconText.y + 20;
+                //goldLocker.addEventListener(
             }
 
             if (Config.config.hangar.enableFreeXpLocker)

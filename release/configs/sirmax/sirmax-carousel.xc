@@ -57,6 +57,12 @@
           "shadow": ${ "def.textFieldShadow" }
         },
 
+        { "x": 0, "y": 33, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/avgDamage40x32.png" },
+        { "x": 21, "y": 35,
+          "format": "<b><font size='12' color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font></b>",
+          "shadow": ${ "def.textFieldShadow" }
+        },
+
         { "x": 158, "y": 77, "align": "right", "alpha": "{{v.premium?100|0}}",
           "format": "<font size='15' color='#FEA659'>{{v.name}}</font>",
           "shadow": { "color": "0xFC3700", "alpha": 1, "blur": 10, "strength": 2, "distance": 0, "angle": 0 }

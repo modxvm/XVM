@@ -37,7 +37,7 @@ def _load():
                 for x in data['data']:
                     n = x['IDNum']
                     del x['IDNum']
-                    res[n] = x
+                    res[str(n)] = x
             except Exception, ex:
                 err('  Bad answer: ' + response)
                 res = {}
