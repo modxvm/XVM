@@ -163,11 +163,14 @@
     "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Unknown status",
 
-    // Lobby header
+    // Lobby
     "lobby/header/gold_locked_tooltip": "Gold is locked",
     "lobby/header/gold_unlocked_tooltip": "Gold is unlocked",
     "lobby/header/freexp_locked_tooltip": "Free XP is locked",
     "lobby/header/freexp_unlocked_tooltip": "Free XP is unlocked",
+
+    "lobby/crew/enable_prev_crew": "Auto previous crew",
+    "lobby/crew/enable_prev_crew_tooltip": "Automatically put previous crew",
 
     // Carousel
     "NonElite": "Non elite",

@@ -101,7 +101,7 @@ package xvm.limits
                 if (goldContent)
                 {
                     goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 2;
-                    goldLocker.y = goldControl.y + goldContent.x + goldContent.moneyIconText.y + 12;
+                    goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 20;
                 }
             }
 
@@ -112,7 +112,7 @@ package xvm.limits
                 if (freeXpContent)
                 {
                     freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 2;
-                    freeXpLocker.y = freeXpControl.y + freeXpContent.x + freeXpContent.moneyIconText.y + 12;
+                    freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 20;
                 }
             }
         }

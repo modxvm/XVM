@@ -169,6 +169,9 @@
     "lobby/header/freexp_locked_tooltip": "Свободный опыт заблокирован",
     "lobby/header/freexp_unlocked_tooltip": "Свободный опыт разблокирован",
 
+    "lobby/crew/enable_prev_crew": "Авто предыдущий экипаж",
+    "lobby/crew/enable_prev_crew_tooltip": "Автоматически возвращать предыдущий экипаж",
+
     // Carousel
     "NonElite": "Не элитный",
     "Premium": "Премиум",

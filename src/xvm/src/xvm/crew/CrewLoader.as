@@ -13,12 +13,13 @@ package xvm.crew
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.crew.*;
+    import scaleform.clik.controls.*;
 
     public class CrewLoader extends Sprite
     {
-        private static const PUT_OWN_CREW:String = 'xvm_crew.as_PutOwnCrew';
-        private static const PUT_BEST_CREW:String = 'xvm_crew.as_PutBestCrew';
-        private static const PUT_CLASS_CREW:String = 'xvm_crew.as_PutClassCrew';
+        private static const PUT_OWN_CREW:String = 'xvm_crew.as_put_own_crew';
+        private static const PUT_BEST_CREW:String = 'xvm_crew.as_put_best_crew';
+        private static const PUT_CLASS_CREW:String = 'xvm_crew.as_put_class_crew';
 
         private static var _instance:CrewLoader = null;
 
@@ -91,7 +92,7 @@ package xvm.crew
                 // tankmanId: { tankman:Object, slot:Number }
                 var selectedTankmans:Dictionary = new Dictionary();
 
-                for each (var renderer:RecruitRendererVO in page.crew.list.dataProvider)
+                for each (var renderer:RecruitRendererVO in (page.crew.list as CoreList).dataProvider)
                 {
                     if (renderer.inTank == true)
                         continue;
