@@ -27,7 +27,7 @@
     "allowExchangeXPInTechTree": true,
     // true - enable crew auto return function
     // true - включить функцию автовозврата экипажа
-     "enableCrewAutoReturn": false,
+     "enableCrewAutoReturn": true,
     // true - Enable widgets
     // true - включить виджеты
     "widgetsEnabled": false,
