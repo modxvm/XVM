@@ -128,8 +128,8 @@ class wot.Minimap.model.externalProxy.MapConfig
         else
             xvmFullEntry = xvmPrefix + xvmPostfix;
 
-        if (xvmFullEntry == "lostenemy")
-            xvmFullEntry = "lost"; /** Backwards config compatibility */
+        //if (xvmFullEntry == "lostenemy")
+        //    xvmFullEntry = "lost"; /** Backwards config compatibility */
 
         return xvmFullEntry;
     }
