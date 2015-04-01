@@ -43,7 +43,7 @@ package xvm.crew
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
-            if (Config.config.hangar.autoPutPreviousCrewInTanks)
+            if (Config.config.hangar.enableCrewAutoReturn)
             {
                 Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
                 initTmenXpPanel();

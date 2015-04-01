@@ -169,8 +169,8 @@
     "lobby/header/freexp_locked_tooltip": "Свободный опыт заблокирован",
     "lobby/header/freexp_unlocked_tooltip": "Свободный опыт разблокирован",
 
-    "lobby/crew/enable_prev_crew": "Авто предыдущий экипаж",
-    "lobby/crew/enable_prev_crew_tooltip": "Автоматически возвращать предыдущий экипаж",
+    "lobby/crew/enable_prev_crew": "Автоматический возврат экипажа",
+    "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nАвтоматически вернуть экипаж, который в предыдущем\nбою был на данной машине",
 
     // Carousel
     "NonElite": "Не элитный",

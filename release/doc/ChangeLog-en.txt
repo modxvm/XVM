@@ -16,6 +16,9 @@
   * new macro {{nation}} returns vehicle nation
   * added new feature of sorting tanks in carousel from config (carousel.xc)
   * in battle, in HE tooltip added explosion radius
+  * option hangar/autoPutPreviousCrewInTanks renamed to hangar/enableCrewAutoReturn
+  * when enableCrewAutoReturn enabled, the checkbox is shown in the hangar for enabling/disabling
+    crew auto return. Checkbox settings are stored for each tank separately.
 
 XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)

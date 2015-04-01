@@ -121,7 +121,7 @@ def PutPreviousCrew(self, print_message = True):
 prevVehId = 0
 def TmenXpPanel_onVehicleChange(self):
     #log('TmenXpPanel_onVehicleChange')
-    if config.config['hangar']['autoPutPreviousCrewInTanks']:
+    if config.config['hangar']['enableCrewAutoReturn']:
         from CurrentVehicle import g_currentVehicle
         global prevVehId
         if g_currentVehicle.invID == prevVehId:

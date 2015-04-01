@@ -169,8 +169,8 @@
     "lobby/header/freexp_locked_tooltip": "Free XP is locked",
     "lobby/header/freexp_unlocked_tooltip": "Free XP is unlocked",
 
-    "lobby/crew/enable_prev_crew": "Auto previous crew",
-    "lobby/crew/enable_prev_crew_tooltip": "Automatically put previous crew",
+    "lobby/crew/enable_prev_crew": "Automatically return crew",
+    "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nAutomatically return the crew that fought\nin this vehicle in the previous battle",
 
     // Carousel
     "NonElite": "Non elite",
