@@ -170,6 +170,23 @@ def _Minimap__delEntry(self, id, inCallback=False):
     vehstate.updateSpottedStatus(id, False)
     g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
 
+def _Minimap_start(self):
+    try:
+        from gui.battle_control import g_sessionProvider
+        from items.vehicles import VEHICLE_CLASS_TAGS
+        if not g_sessionProvider.getCtx().isPlayerObserver():
+            player = BigWorld.player()
+            id = player.playerVehicleID
+            entryVehicle = player.arena.vehicles[id]
+            playerId = entryVehicle['accountDBID']
+            tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
+            vClass = tags.pop() if len(tags) > 0 else ''
+            BigWorld.callback(0, lambda:self._Minimap__callEntryFlash(id, 'init_xvm', [playerId, False, 'player', vClass]))
+
+    except Exception, ex:
+        if IS_DEVELOPMENT:
+            err(traceback.format_exc())
+
 def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     base(self, id, methodName, args)
     try:
@@ -311,6 +328,7 @@ def _RegisterEvents():
     from gui.Scaleform.Minimap import Minimap
     RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
     RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
+    RegisterEvent(Minimap, 'start', _Minimap_start)
     OverrideMethod(Minimap, '_Minimap__callEntryFlash', _Minimap__callEntryFlash)
     RegisterEvent(Minimap, '_Minimap__addEntryLit', _Minimap__addEntryLit)
 

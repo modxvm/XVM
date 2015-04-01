@@ -14,10 +14,7 @@
  */
 
 import com.xvm.*;
-import net.wargaming.ingame.MinimapEntry;
 import wot.Minimap.*;
-import wot.Minimap.dataTypes.*;
-import wot.Minimap.model.*;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.view.*;
 
@@ -64,9 +61,9 @@ class wot.Minimap.MinimapEntry
         Utils.TraceXvmModule("Minimap");
     }
 
-    function init_xvmImpl(playerId:Number, isLit:Boolean)
+    function init_xvmImpl(playerId:Number, isLit:Boolean, entryName:String, vClass:String)
     {
-        //Logger.add("init_xvmImpl: id:" + playerId + " lit:" + isLit);
+        //Logger.add("init_xvmImpl: id=" + playerId + " lit=" + isLit);
         Cmd.profMethodStart("MinimapEntry.init_xvm()");
 
         MarkerColor.setColor(wrapper);
@@ -92,6 +89,13 @@ class wot.Minimap.MinimapEntry
         }
 
         IconsProxy.playerIds[playerId] = this;
+
+        if (entryName == 'player')
+        {
+            var entry:MinimapEntry = IconsProxy.entry(playerId);
+            entry.wrapper.entryName = entryName;
+            entry.wrapper.vehicleClass = vClass;
+        }
 
         //Logger.add("add:   " + playerId);
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_INITED, this, playerId));
