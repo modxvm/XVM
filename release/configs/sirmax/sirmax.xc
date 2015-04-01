@@ -42,7 +42,7 @@
     "hidePricesInTechTree": true,
     "masteryMarkInTechTree": true,
     "allowExchangeXPInTechTree": false,
-    //"enableCrewAutoReturn": true,
+    //"enableCrewAutoReturn": false,
     "showShootRangeTooltip": true,
     "widgetsEnabled": true,
     "pingServers": {

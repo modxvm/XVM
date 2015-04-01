@@ -24,8 +24,6 @@ package xvm.crew
         private static const L10N_ENABLE_PREV_CREW:String = "lobby/crew/enable_prev_crew";
         private static const L10N_ENABLE_PREV_CREW_TOOLTIP:String = "lobby/crew/enable_prev_crew_tooltip";
 
-        private static var savedState:Object = null;
-
         private var enablePrevCrewCheckBox:CheckBox;
         private var currentVehId:Number;
         private var savedValue:Boolean = false;
@@ -43,12 +41,11 @@ package xvm.crew
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
+            //Logger.add('onBeforePopulate');
             if (Config.config.hangar.enableCrewAutoReturn)
             {
                 Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
                 initTmenXpPanel();
-                if (savedState != null)
-                    onVehicleChanged.apply(this, savedState);
             }
         }
 
@@ -103,15 +100,17 @@ package xvm.crew
                 setTimeout(function():void { App.toolTipMgr.show(e.target.toolTip); }, 1);
         }
 
-        private function handleXpmCommand(e:ObjectEvent):void
+        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
         {
+            //Logger.add("handleXpmCommand");
             try
             {
-                switch (e.result.cmd)
+                switch (e.cmd)
                 {
                     case AS_VEHICLE_CHANGED:
-                        onVehicleChanged.apply(this, e.result.args);
-                        break;
+                        e.stopImmediatePropagation();
+                        onVehicleChanged.apply(this, e.args);
+                        return;
                 }
             }
             catch (ex:Error)
@@ -123,8 +122,6 @@ package xvm.crew
         private function onVehicleChanged(vehId:Number, isElite:Boolean):void
         {
             //Logger.add('onVehicleChanged: ' + vehId);
-
-            savedState = arguments;
 
             currentVehId = vehId;
 

@@ -29,7 +29,7 @@ class CREW(object):
     PUT_PREVIOUS_CREW = 'PutPreviousCrew'
 
 class COMMANDS(object):
-    PUT_PREVIOUS_CREW = 'xvm_crew.put_previous_crew';
+    PUT_PREVIOUS_CREW = 'xvm_crew.put_previous_crew'
     AS_VEHICLE_CHANGED = 'xvm_crew.as_vehicle_changed'
     AS_PUT_OWN_CREW = 'xvm_crew.as_put_own_crew'
     AS_PUT_BEST_CREW = 'xvm_crew.as_put_best_crew'
@@ -118,20 +118,14 @@ def PutClassCrew(self):
 def PutPreviousCrew(self, print_message = True):
     wg_compat.g_instance.processReturnCrew(print_message)
 
-prevVehId = 0
 def TmenXpPanel_onVehicleChange(self):
     #log('TmenXpPanel_onVehicleChange')
     if config.config['hangar']['enableCrewAutoReturn']:
         from CurrentVehicle import g_currentVehicle
-        global prevVehId
-        if g_currentVehicle.invID == prevVehId:
-            return
-        prevVehId = g_currentVehicle.invID
         vehicle = g_currentVehicle.item
-        if vehicle is None:
-            as_xvm_cmd(COMMANDS.AS_VEHICLE_CHANGED, 0, False)
-        else:
-            as_xvm_cmd(COMMANDS.AS_VEHICLE_CHANGED, g_currentVehicle.invID, vehicle.isElite)
+        vehId = g_currentVehicle.invID if vehicle is not None else 0
+        isElite = vehicle.isElite if vehicle is not None else 0
+        as_xvm_cmd(COMMANDS.AS_VEHICLE_CHANGED, vehId, isElite)
 
 
 #####################################################################

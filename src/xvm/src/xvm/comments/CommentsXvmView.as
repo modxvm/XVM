@@ -54,15 +54,16 @@ package xvm.comments
 
         // PRIVATE
 
-        private function handleXpmCommand(e:ObjectEvent):void
+        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
         {
             //Logger.add("handleXpmCommand: " + e.result.cmd);
             try
             {
-                switch (e.result.cmd)
+                switch (e.cmd)
                 {
                     case CMD_XVM_COMMENTS_AS_EDIT_CONTACT_DATA:
-                        var data:ContactListMainInfo = new ContactListMainInfo(e.result.args[0], e.result.args[1]);
+                        e.stopImmediatePropagation();
+                        var data:ContactListMainInfo = new ContactListMainInfo(e.args[0], e.args[1]);
                         IUpdatable(page.viewStack.show(getQualifiedClassName(UI_EditContactDataView))).update(data);
                         break;
                 }

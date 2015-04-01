@@ -61,20 +61,23 @@ package xvm.crew
             }
         }
 
-        private function handleXpmCommand(e:ObjectEvent):void
+        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
         {
             //Logger.add("handleXpmCommand: " + e.result.cmd);
             try
             {
-                switch (e.result.cmd)
+                switch (e.cmd)
                 {
                     case PUT_OWN_CREW:
+                        e.stopImmediatePropagation();
                         GetCrew(CheckOwn);
                         break;
                     case PUT_BEST_CREW:
+                        e.stopImmediatePropagation();
                         GetCrew(CheckBest);
                         break;
                     case PUT_CLASS_CREW:
+                        e.stopImmediatePropagation();
                         GetCrew(CheckClass);
                         break;
                 }

@@ -73,15 +73,16 @@ package xvm.ping.PingServers
             Xvm.cmd(XPM_COMMAND_PING);
         }
 
-        private function handleXpmCommand(e:ObjectEvent):void
+        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
         {
-            //Logger.add("handleXpmCommand: " + e.result.cmd);
+            //Logger.add("handleXpmCommand: " + e.cmd);
             try
             {
-                switch (e.result.cmd)
+                switch (e.cmd)
                 {
                     case XPM_AS_COMMAND_PINGDATA:
-                        pingCallback(e.result.args[0]);
+                        e.stopImmediatePropagation();
+                        pingCallback(e.args[0]);
                         break;
                 }
             }
