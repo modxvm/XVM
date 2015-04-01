@@ -1,6 +1,5 @@
 import com.xvm.*;
 import flash.geom.*;
-import wot.Minimap.*;
 import wot.Minimap.dataTypes.*;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.view.*;
@@ -74,7 +73,7 @@ class wot.Minimap.view.LabelViewBuilder
         for (var i in playerInfo)
             obj[i] = playerInfo[i];
         var text:String = Macros.Format(playerInfo.userName, format, obj);
-        //Logger.add(text);
+        //Logger.add(playerInfo.userName + ": " + text);
         textField.htmlText = text;
 
         /*var scale:Number = IconsProxy.selfEntry.wrapper._xscale;

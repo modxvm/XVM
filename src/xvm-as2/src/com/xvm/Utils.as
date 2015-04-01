@@ -4,7 +4,6 @@
  */
 import com.xvm.*;
 import flash.filters.*;
-import com.xvm.DataTypes.*;
 
 class com.xvm.Utils
 {

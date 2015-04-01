@@ -1,5 +1,4 @@
 import com.xvm.*;
-import com.xvm.DataTypes.BattleStateData;
 import flash.geom.*;
 import wot.Minimap.*;
 import wot.Minimap.dataTypes.*;
@@ -103,7 +102,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         Cmd.profMethodStart("Minimap.Labels.draw()");
 
-        //Logger.add("LabelsContainer.updateLabelsStyle()");
         for (var playerIdStr:String in invalidateList)
         {
             var playerId:Number = Number(playerIdStr);
@@ -112,7 +110,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             var previousStatus:Number = labelMc[STATUS_FIELD_NAME];
             var actualStatus:Number = getPresenceStatus(playerId);
 
-            //Logger.add(playerId + " " + force + " " + previousStatus + " " + actualStatus);
+            //Logger.add(IconsProxy.entry(playerId).wrapper.entryName + ": " + playerId + " " + force + " " + previousStatus + " " + actualStatus);
 
             if (previousStatus != actualStatus || force)
             {

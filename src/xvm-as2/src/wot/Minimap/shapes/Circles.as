@@ -1,5 +1,4 @@
 import com.xvm.*;
-import com.xvm.*;
 import com.xvm.DataTypes.*;
 import wot.Minimap.dataTypes.*;
 import wot.Minimap.model.externalProxy.*;

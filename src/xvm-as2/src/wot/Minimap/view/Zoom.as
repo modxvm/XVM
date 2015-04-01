@@ -1,6 +1,5 @@
 import com.xvm.*;
 import net.wargaming.ingame.*;
-import wot.Minimap.Features;
 import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.*;
 

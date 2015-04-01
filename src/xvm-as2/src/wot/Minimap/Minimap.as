@@ -4,10 +4,7 @@
  */
 
 import com.xvm.*;
-import gfx.io.*;
-import net.wargaming.ingame.Minimap;
 import wot.Minimap.*;
-import wot.Minimap.model.*;
 import wot.Minimap.model.externalProxy.*;
 
 class wot.Minimap.Minimap

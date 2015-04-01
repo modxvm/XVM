@@ -6,8 +6,6 @@
  */
 import com.xvm.*;
 import com.xvm.events.*;
-import gfx.controls.*;
-import wot.Minimap.*;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {

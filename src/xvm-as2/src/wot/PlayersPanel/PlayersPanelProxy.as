@@ -72,7 +72,6 @@ class wot.PlayersPanel.PlayersPanelProxy
             if (player.himself == true)
                 return player;
         }
-
         return null;
     }
 
@@ -81,9 +80,10 @@ class wot.PlayersPanel.PlayersPanelProxy
     private static function _getPlayerInfoFrom(players:Array, uid:Number):Player
     {
         for (var i:Number = 0; i < players.length; i++)
+        {
             if (players[i].uid == uid)
                 return players[i];
-
+        }
         return null;
     }
 
