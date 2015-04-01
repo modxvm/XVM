@@ -25,6 +25,7 @@ package xvm.crew
         private static const L10N_ENABLE_PREV_CREW_TOOLTIP:String = "lobby/crew/enable_prev_crew_tooltip";
 
         private var enablePrevCrewCheckBox:CheckBox;
+        private var prevVehId:Number;
         private var currentVehId:Number;
         private var savedValue:Boolean = false;
         private var xpToTmenCheckbox_y:Number;
@@ -141,7 +142,11 @@ package xvm.crew
             page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y - 10;
             enablePrevCrewCheckBox.y = xpToTmenCheckbox_y + (isElite ? 7 : 0);
 
-            tryPutPrevCrew();
+            if (prevVehId != currentVehId)
+            {
+                prevVehId = currentVehId;
+                tryPutPrevCrew();
+            }
         }
 
         private function onEnablePrevCrewSwitched(e:Event):void
