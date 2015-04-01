@@ -130,10 +130,8 @@ def TmenXpPanel_onVehicleChange(self):
         vehicle = g_currentVehicle.item
         if vehicle is None:
             as_xvm_cmd(COMMANDS.AS_VEHICLE_CHANGED, 0, False)
-            BigWorld.callback(0, lambda:as_xvm_cmd(COMMANDS.AS_VEHICLE_CHANGED, 0, False))
         else:
             as_xvm_cmd(COMMANDS.AS_VEHICLE_CHANGED, g_currentVehicle.invID, vehicle.isElite)
-            BigWorld.callback(0, lambda:as_xvm_cmd(COMMANDS.AS_VEHICLE_CHANGED, g_currentVehicle.invID, vehicle.isElite))
 
 
 #####################################################################

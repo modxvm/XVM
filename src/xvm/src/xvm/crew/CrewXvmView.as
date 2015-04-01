@@ -24,6 +24,8 @@ package xvm.crew
         private static const L10N_ENABLE_PREV_CREW:String = "lobby/crew/enable_prev_crew";
         private static const L10N_ENABLE_PREV_CREW_TOOLTIP:String = "lobby/crew/enable_prev_crew_tooltip";
 
+        private static var savedState:Object = null;
+
         private var enablePrevCrewCheckBox:CheckBox;
         private var currentVehId:Number;
         private var savedValue:Boolean = false;
@@ -39,6 +41,17 @@ package xvm.crew
             return super.view as net.wg.gui.lobby.hangar.Hangar;
         }
 
+        override public function onBeforePopulate(e:LifeCycleEvent):void
+        {
+            if (Config.config.hangar.autoPutPreviousCrewInTanks)
+            {
+                Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+                initTmenXpPanel();
+                if (savedState != null)
+                    onVehicleChanged.apply(this, savedState);
+            }
+        }
+
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
             init();
@@ -46,8 +59,6 @@ package xvm.crew
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            super.onBeforeDispose(e);
-
             if (enablePrevCrewCheckBox != null)
             {
                 Xvm.removeEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
@@ -61,9 +72,6 @@ package xvm.crew
         private function init():void
         {
             CrewLoader.init(page);
-
-            if (Config.config.hangar.autoPutPreviousCrewInTanks)
-                initTmenXpPanel();
         }
 
         // Tankmen XP Panel
@@ -74,13 +82,12 @@ package xvm.crew
             {
                 xpToTmenCheckbox_y = page.tmenXpPanel.xpToTmenCheckbox.y;
                 enablePrevCrewCheckBox = page.tmenXpPanel.addChild(new CheckBoxTankers()) as CheckBox;
+                enablePrevCrewCheckBox.autoSize = "left";
                 enablePrevCrewCheckBox.addEventListener(MouseEvent.ROLL_OVER, handleMouseRollOver);
                 enablePrevCrewCheckBox.addEventListener(Event.SELECT, onEnablePrevCrewSwitched);
                 enablePrevCrewCheckBox.x = page.tmenXpPanel.xpToTmenCheckbox.x;
                 enablePrevCrewCheckBox.label = Locale.get(L10N_ENABLE_PREV_CREW);
                 enablePrevCrewCheckBox.toolTip = Locale.get(L10N_ENABLE_PREV_CREW_TOOLTIP);
-
-                Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
 
                 //Logger.add('init');
             }
@@ -117,6 +124,8 @@ package xvm.crew
         {
             //Logger.add('onVehicleChanged: ' + vehId);
 
+            savedState = arguments;
+
             currentVehId = vehId;
 
             enablePrevCrewCheckBox.enabled = enablePrevCrewCheckBox.visible = vehId > 0;
@@ -128,6 +137,8 @@ package xvm.crew
 
             savedValue = Xvm.cmd(Defines.XVM_COMMAND_LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, false);
             enablePrevCrewCheckBox.selected = savedValue;
+
+            page.tmenXpPanel.validateNow();
 
             page.tmenXpPanel.checkboxTankersBg.visible = true;
             page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y - 10;
