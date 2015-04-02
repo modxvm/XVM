@@ -57,8 +57,6 @@ import utils
 
 #############################
 
-_PUBLIC_TOKEN = 'xpm'
-
 class _Stat(object):
 
     def __init__(self):
