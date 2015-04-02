@@ -43,7 +43,7 @@ package xvm.crew
         function CrewLoader():void
         {
             page = null;
-            Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+            Xvm.addEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
         }
 
         private function handleMouseRelease(e:MouseEvent):void
@@ -61,9 +61,9 @@ package xvm.crew
             }
         }
 
-        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
+        private function handleXfwCommand(e:XfwCmdReceivedEvent):void
         {
-            //Logger.add("handleXpmCommand: " + e.result.cmd);
+            //Logger.add("handleXfwCommand: " + e.result.cmd);
             try
             {
                 switch (e.cmd)

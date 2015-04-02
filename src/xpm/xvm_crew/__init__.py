@@ -41,18 +41,18 @@ class COMMANDS(object):
 
 def start():
     from gui.shared import g_eventBus
-    g_eventBus.addListener(XPM_CMD, onXpmCommand)
+    g_eventBus.addListener(XFW_CMD, onXfwCommand)
 
 def fini():
     from gui.shared import g_eventBus
-    g_eventBus.removeListener(XPM_CMD, onXpmCommand)
+    g_eventBus.removeListener(XFW_CMD, onXfwCommand)
 
 
 #####################################################################
-# onXpmCommand
+# onXfwCommand
 
 # returns: (result, status)
-def onXpmCommand(cmd, *args):
+def onXfwCommand(cmd, *args):
     try:
         if cmd == COMMANDS.PUT_PREVIOUS_CREW:
             from CurrentVehicle import g_currentVehicle

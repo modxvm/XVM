@@ -45,7 +45,7 @@ package xvm.crew
             //Logger.add('onBeforePopulate');
             if (Config.config.hangar.enableCrewAutoReturn)
             {
-                Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+                Xvm.addEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
                 initTmenXpPanel();
             }
         }
@@ -59,7 +59,7 @@ package xvm.crew
         {
             if (enablePrevCrewCheckBox != null)
             {
-                Xvm.removeEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+                Xvm.removeEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
                 enablePrevCrewCheckBox.dispose();
                 enablePrevCrewCheckBox = null;
             }
@@ -101,9 +101,9 @@ package xvm.crew
                 setTimeout(function():void { App.toolTipMgr.show(e.target.toolTip); }, 1);
         }
 
-        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
+        private function handleXfwCommand(e:XfwCmdReceivedEvent):void
         {
-            //Logger.add("handleXpmCommand");
+            //Logger.add("handleXfwCommand");
             try
             {
                 switch (e.cmd)

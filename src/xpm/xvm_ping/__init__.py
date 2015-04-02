@@ -11,8 +11,8 @@ XFW_GAME_VERSIONS  = ["0.9.6","0.9.7"]
 #####################################################################
 # constants
 
-XPM_COMMAND_PING = "xpm.ping"
-XPM_AS_COMMAND_PINGDATA = "xpm.pingdata"
+XFW_COMMAND_PING = "xfw.ping"
+XFW_AS_COMMAND_PINGDATA = "xfw.pingdata"
 
 #####################################################################
 # includes
@@ -35,24 +35,24 @@ import pinger
 
 def start():
     from gui.shared import g_eventBus
-    g_eventBus.addListener(XPM_CMD, onXpmCommand)
+    g_eventBus.addListener(XFW_CMD, onXfwCommand)
 
 def fini():
     from gui.shared import g_eventBus
-    g_eventBus.removeListener(XPM_CMD, onXpmCommand)
+    g_eventBus.removeListener(XFW_CMD, onXfwCommand)
 
-# onXpmCommand
+# onXfwCommand
 
 _LOG_COMMANDS = (
-    #XPM_COMMAND_PING,
+    #XFW_COMMAND_PING,
 )
 
 # returns: (result, status)
-def onXpmCommand(cmd, *args):
+def onXfwCommand(cmd, *args):
     try:
         if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
             debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-        if cmd == XPM_COMMAND_PING:
+        if cmd == XFW_COMMAND_PING:
             pinger.ping()
             return (None, True)
     except Exception, ex:

@@ -21,8 +21,8 @@ package xvm.limits
         private static const SETTINGS_GOLD_LOCK_STATUS:String = "xvm_limits/gold_lock_status";
         private static const SETTINGS_FREEXP_LOCK_STATUS:String = "xvm_limits/freexp_lock_status";
 
-        private static const XPM_COMMAND_SET_GOLD_LOCK_STATUS:String = "xpm.set_gold_lock_status";
-        private static const XPM_COMMAND_SET_FREEXP_LOCK_STATUS:String = "xpm.set_freexp_lock_status";
+        private static const XFW_COMMAND_SET_GOLD_LOCK_STATUS:String = "xfw.set_gold_lock_status";
+        private static const XFW_COMMAND_SET_FREEXP_LOCK_STATUS:String = "xfw.set_freexp_lock_status";
 
         private static const L10N_GOLD_LOCKED_TOOLTIP:String = "lobby/header/gold_locked_tooltip";
         private static const L10N_GOLD_UNLOCKED_TOOLTIP:String = "lobby/header/gold_unlocked_tooltip";
@@ -119,14 +119,14 @@ package xvm.limits
 
         private function onGoldLockerSwitched(e:Event):void
         {
-            Xvm.cmd(XPM_COMMAND_SET_GOLD_LOCK_STATUS, goldLocker.selected);
+            Xvm.cmd(XFW_COMMAND_SET_GOLD_LOCK_STATUS, goldLocker.selected);
             Xvm.cmd(Defines.XVM_COMMAND_SAVE_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, goldLocker.selected);
             goldLocker.toolTip = Locale.get(goldLocker.selected ? L10N_GOLD_LOCKED_TOOLTIP : L10N_GOLD_UNLOCKED_TOOLTIP);
         }
 
         private function onFreeXpLockerSwitched(e:Event):void
         {
-            Xvm.cmd(XPM_COMMAND_SET_FREEXP_LOCK_STATUS, freeXpLocker.selected);
+            Xvm.cmd(XFW_COMMAND_SET_FREEXP_LOCK_STATUS, freeXpLocker.selected);
             Xvm.cmd(Defines.XVM_COMMAND_SAVE_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, freeXpLocker.selected);
             freeXpLocker.toolTip = Locale.get(freeXpLocker.selected ? L10N_FREEXP_LOCKED_TOOLTIP : L10N_FREEXP_UNLOCKED_TOOLTIP);
         }

@@ -42,21 +42,21 @@ package xvm.comments
             if (!Config.networkServicesSettings.comments)
                 return;
 
-            Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+            Xvm.addEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
             page.treeComponent.list.itemRenderer = UI_ContactsTreeItemRenderer;
             page.xvm_linkageUtils.addEntity(XVM_EDIT_CONTACT_DATA_ALIAS, getQualifiedClassName(UI_EditContactDataView));
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            Xvm.removeEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+            Xvm.removeEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
         }
 
         // PRIVATE
 
-        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
+        private function handleXfwCommand(e:XfwCmdReceivedEvent):void
         {
-            //Logger.add("handleXpmCommand: " + e.result.cmd);
+            //Logger.add("handleXfwCommand: " + e.result.cmd);
             try
             {
                 switch (e.cmd)

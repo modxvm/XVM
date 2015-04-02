@@ -8,8 +8,8 @@ package xvm.ping.PingServers
 
     public class PingServers extends EventDispatcher
     {
-        private static const XPM_COMMAND_PING:String = "xpm.ping";
-        private static const XPM_AS_COMMAND_PINGDATA:String = "xpm.pingdata";
+        private static const XFW_COMMAND_PING:String = "xfw.ping";
+        private static const XFW_AS_COMMAND_PINGDATA:String = "xfw.pingdata";
 
         private static var _instance:PingServers = null;
         private static function get instance():PingServers
@@ -61,7 +61,7 @@ package xvm.ping.PingServers
 
         function PingServers()
         {
-            Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+            Xvm.addEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
 
             pingTimer = 0;
             pingTimeouts = null;
@@ -70,17 +70,17 @@ package xvm.ping.PingServers
         private function ping():void
         {
             //Logger.add("ping");
-            Xvm.cmd(XPM_COMMAND_PING);
+            Xvm.cmd(XFW_COMMAND_PING);
         }
 
-        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
+        private function handleXfwCommand(e:XfwCmdReceivedEvent):void
         {
-            //Logger.add("handleXpmCommand: " + e.cmd);
+            //Logger.add("handleXfwCommand: " + e.cmd);
             try
             {
                 switch (e.cmd)
                 {
-                    case XPM_AS_COMMAND_PINGDATA:
+                    case XFW_AS_COMMAND_PINGDATA:
                         e.stopImmediatePropagation();
                         pingCallback(e.args[0]);
                         break;

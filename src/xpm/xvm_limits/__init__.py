@@ -11,8 +11,8 @@ XFW_GAME_VERSIONS = ['0.9.6','0.9.7']
 #####################################################################
 # constants
 
-XPM_COMMAND_SET_GOLD_LOCK_STATUS = "xpm.set_gold_lock_status"
-XPM_COMMAND_SET_FREEXP_LOCK_STATUS = "xpm.set_freexp_lock_status"
+XFW_COMMAND_SET_GOLD_LOCK_STATUS = "xfw.set_gold_lock_status"
+XFW_COMMAND_SET_FREEXP_LOCK_STATUS = "xfw.set_freexp_lock_status"
 
 
 #####################################################################
@@ -29,11 +29,11 @@ import xvm_main.python.userprefs as userprefs
 
 def start():
     from gui.shared import g_eventBus
-    g_eventBus.addListener(XPM_CMD, onXpmCommand)
+    g_eventBus.addListener(XFW_CMD, onXfwCommand)
 
 def fini():
     from gui.shared import g_eventBus
-    g_eventBus.removeListener(XPM_CMD, onXpmCommand)
+    g_eventBus.removeListener(XFW_CMD, onXfwCommand)
 
 
 #####################################################################
@@ -80,16 +80,16 @@ def Vehicle_parseShells(base, self, layoutList, defaultLayoutList, proxy):
 
 
 #####################################################################
-# onXpmCommand
+# onXfwCommand
 
 # returns: (result, status)
-def onXpmCommand(cmd, *args):
+def onXfwCommand(cmd, *args):
     try:
-        if cmd == XPM_COMMAND_SET_GOLD_LOCK_STATUS:
+        if cmd == XFW_COMMAND_SET_GOLD_LOCK_STATUS:
             global gold_enable
             gold_enable = not args[0]
             return (None, True)
-        elif cmd == XPM_COMMAND_SET_FREEXP_LOCK_STATUS:
+        elif cmd == XFW_COMMAND_SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
             freeXP_enable = not args[0]
             return (None, True)

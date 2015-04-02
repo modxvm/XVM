@@ -83,6 +83,6 @@ done
 popd >/dev/null
 
 # run test
-if [ "$OS" = "Windows_NT" -a "$XPM_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
+if [ "$OS" = "Windows_NT" -a "$XFW_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
   sh "$(dirname $(realpath $(cygpath --unix $0)))/../../utils/test.sh"
 fi

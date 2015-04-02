@@ -45,7 +45,7 @@ def FlashBeforeDelete(self):
     # log("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
 
-# onXpmCommand
+# onXvmCommand
 
 def onXvmCommand(proxy, id, cmd, *args):
     try:

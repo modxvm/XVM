@@ -47,7 +47,7 @@ class Xvm(object):
         self._invalidateTargets = dict()
 
     # returns: (result, status)
-    def onXpmCommand(self, cmd, *args):
+    def onXfwCommand(self, cmd, *args):
         try:
             if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
