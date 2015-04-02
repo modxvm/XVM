@@ -1,6 +1,6 @@
 /**
  * Widgets Settings Dialog
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import gfx.controls.Button;
 import gfx.controls.ButtonBar;

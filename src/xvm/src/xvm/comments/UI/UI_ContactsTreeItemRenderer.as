@@ -1,5 +1,5 @@
 ﻿/**
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.comments.UI
 {

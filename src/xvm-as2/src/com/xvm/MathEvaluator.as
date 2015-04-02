@@ -32,7 +32,7 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 
-  Converted to AS2 by Maxim Schedriviy <m.schedriviy@gmail.com> 2013-06-12
+  Converted to AS2 by Maxim Schedriviy <max@modxvm.com> 2013-06-12
 */
 
 /**

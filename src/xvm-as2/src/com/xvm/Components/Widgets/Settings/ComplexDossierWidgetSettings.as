@@ -1,6 +1,6 @@
 /**
  * Complex Dossier Widget Settings
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.xvm.Components.Widgets.ComplexDossierWidget;
 import com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog;

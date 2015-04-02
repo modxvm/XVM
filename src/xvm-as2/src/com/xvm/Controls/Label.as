@@ -1,6 +1,6 @@
 /**
  * Label control
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import flash.geom.Point;
 import gfx.core.UIComponent;

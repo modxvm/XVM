@@ -2,7 +2,7 @@
  * @author ilitvinov87@gmail.com
  * @author Pavel Máca
  * @author Mr.A
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import net.wargaming.managers.Localization;
 

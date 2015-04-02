@@ -1,7 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 """
-@author Maxim Schedriviy "m.schedriviy(at)gmail.com"
 @author Omegaice
+@author Maxim Schedriviy <max(at)modxvm.com>
 """
 
 import math

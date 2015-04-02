@@ -1,6 +1,6 @@
 /**
  * EventTypes for widgets
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 class com.xvm.Components.Widgets.WidgetsEventTypes
 {

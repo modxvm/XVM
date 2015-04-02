@@ -1,6 +1,6 @@
 /*
 Copyright (c) 2005 JSON.org
-Copyright (c) 2013 m.schedriviy@gmail.com (JSONx extension)
+Copyright (c) 2013 max@modxvm.com (JSONx extension)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
