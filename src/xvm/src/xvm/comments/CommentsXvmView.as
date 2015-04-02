@@ -44,7 +44,7 @@ package xvm.comments
 
             Xvm.addEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
             page.treeComponent.list.itemRenderer = UI_ContactsTreeItemRenderer;
-            page.xvm_linkageUtils.addEntity(XVM_EDIT_CONTACT_DATA_ALIAS, getQualifiedClassName(UI_EditContactDataView));
+            page.xfw_linkageUtils.addEntity(XVM_EDIT_CONTACT_DATA_ALIAS, getQualifiedClassName(UI_EditContactDataView));
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void

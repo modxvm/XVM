@@ -285,7 +285,7 @@ package xvm.tcarousel
             {
                 if (_renderers == null)
                     return;
-                this.xvm_scopeWidth = Math.ceil(Math.max(_totalRenderers, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
+                this.xfw_scopeWidth = Math.ceil(Math.max(_totalRenderers, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
             }
             catch (ex:Error)
             {
@@ -340,12 +340,12 @@ package xvm.tcarousel
             try
             {
                 super.arrowSlide();
-                if (this.xvm_courseFactor == -1)
+                if (this.xfw_courseFactor == -1)
                 {
                     if (this._currentFirstRendererOnAnim >= Math.ceil((_totalRenderers - _visibleSlots) / cfg.rows))
                     {
                         this.currentFirstRenderer = _totalRenderers - this._visibleSlots;
-                        this.xvm_courseFactor = 0;
+                        this.xfw_courseFactor = 0;
                     }
                 }
             }

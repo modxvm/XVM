@@ -42,9 +42,9 @@ package xvm.comments.UI
                     var myData:ITreeItemInfo = this.getData() as ITreeItemInfo;
                     if (myData && !myData.isBrunch && myData.data != null)
                     {
-                        if (this.xvm_contactItem == null)
+                        if (this.xfw_contactItem == null)
                         {
-                            this.xvm_contactItem = new UI_ContactItem();
+                            this.xfw_contactItem = new UI_ContactItem();
                         }
                     }
                 }
@@ -54,7 +54,7 @@ package xvm.comments.UI
 
                 super.draw();
 
-                if (this.xvm_currentContentItem is ContactItem)
+                if (this.xfw_currentContentItem is ContactItem)
                 {
                     var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
                     if (d && d.data.xvm_contact_data)

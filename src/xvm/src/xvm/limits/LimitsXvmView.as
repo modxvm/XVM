@@ -94,7 +94,7 @@ package xvm.limits
 
         private function onHeaderButtonsReposition(e:HeaderEvents):void
         {
-            var goldControl:HeaderButton = page.header.xvm_headerButtonsHelper.xvm_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
+            var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
             if (goldControl)
             {
                 var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
@@ -105,7 +105,7 @@ package xvm.limits
                 }
             }
 
-            var freeXpControl:HeaderButton = page.header.xvm_headerButtonsHelper.xvm_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
+            var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
             if (freeXpControl)
             {
                 var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;

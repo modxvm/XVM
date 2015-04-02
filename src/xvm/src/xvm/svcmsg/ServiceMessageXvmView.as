@@ -81,7 +81,7 @@ package xvm.svcmsg
 
         private function initLobby(v:LobbyPage):void
         {
-            v.notificationPopupViewer.xvm_popupClass = UI_ServiceMessagePopUp;
+            v.notificationPopupViewer.xfw_popupClass = UI_ServiceMessagePopUp;
         }
 
         private function initNotificationList(v:NotificationListView):void
