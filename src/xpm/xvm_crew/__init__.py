@@ -3,10 +3,10 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION    = "2.0.0"
+XFW_MOD_VERSION    = "3.0.0"
 XFW_MOD_URL        = "http://www.modxvm.com/"
 XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XFW_GAME_VERSIONS  = ["0.9.6","0.9.7"]
+XFW_GAME_VERSIONS  = ["0.9.7"]
 
 #####################################################################
 
@@ -15,6 +15,7 @@ import BigWorld
 from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
+from xvm_main.python.xvm import l10n
 
 import wg_compat
 
@@ -41,11 +42,11 @@ class COMMANDS(object):
 
 def start():
     from gui.shared import g_eventBus
-    g_eventBus.addListener(XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
 def fini():
     from gui.shared import g_eventBus
-    g_eventBus.removeListener(XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
 
 #####################################################################

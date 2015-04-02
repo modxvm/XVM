@@ -18,6 +18,7 @@ XVM_COMMAND_LOAD_SETTINGS = "xvm.load_settings"
 XVM_COMMAND_SAVE_SETTINGS = "xvm.save_settings"
 
 XVM_AS_COMMAND_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"
+XVM_AS_COMMAND_L10N = "xvm.as.l10n"
 
 # ExternalInterface commands
 
@@ -28,7 +29,6 @@ COMMAND_GETSCREENSIZE = "getScreenSize"
 COMMAND_LOADBATTLESTAT = "loadBattleStat"
 COMMAND_LOADBATTLERESULTSSTAT = "loadBattleResultsStat"
 COMMAND_LOADUSERDATA = "loadUserData"
-COMMAND_GETDOSSIER = "getDossier"
 COMMAND_OPEN_URL = "openUrl"
 COMMAND_LOAD_SETTINGS = "load_settings"
 COMMAND_SAVE_SETTINGS = "save_settings"
@@ -38,7 +38,6 @@ COMMAND_TEST = "test"
 
 RESPOND_CONFIG = "xvm.config"
 RESPOND_KEY_EVENT = "xvm.keyevent"
-RESPOND_DOSSIER = "xvm.dossier"
 RESPOND_BATTLESTATDATA = "xvm.battlestatdata"
 RESPOND_BATTLERESULTSDATA = "xvm.battleresultsdata"
 RESPOND_BATTLESTATE = "xvm.battleState"

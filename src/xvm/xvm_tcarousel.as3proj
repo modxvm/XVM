@@ -76,10 +76,7 @@
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <hidden path="swf" />
-    <hidden path="wg" />
-    <hidden path="build-xfw.sh" />
-    <hidden path="build-applicationswf.sh" />
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

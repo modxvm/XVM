@@ -29,6 +29,7 @@ from xvm_main.python.loadurl import loadUrl
 from xvm_main.python.logger import *
 import xvm_main.python.token as token
 import xvm_main.python.utils as utils
+from xvm_main.python.xvm import l10n
 
 _CONTACTS_DATA_VERSION = '1.0'
 _SYSTEM_MESSAGE_TPL = '''<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png"
