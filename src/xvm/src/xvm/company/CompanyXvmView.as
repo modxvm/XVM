@@ -4,8 +4,8 @@
  */
 package xvm.company
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
     import net.wg.data.constants.generated.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;

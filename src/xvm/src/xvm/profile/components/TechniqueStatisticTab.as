@@ -1,10 +1,10 @@
 package xvm.profile.components
 {
-    import com.xvm.*;
-    import com.xvm.misc.*;
-    import com.xvm.types.dossier.*;
-    import com.xvm.types.stat.*;
-    import com.xvm.utils.*;
+    import com.xfw.*;
+    import com.xfw.misc.*;
+    import com.xfw.types.dossier.*;
+    import com.xfw.types.stat.*;
+    import com.xfw.utils.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;

@@ -4,8 +4,8 @@
  */
 package xvm.autologin
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
     import flash.ui.*;
     import flash.utils.*;
     import net.wg.gui.events.*;

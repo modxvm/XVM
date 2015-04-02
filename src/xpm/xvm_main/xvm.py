@@ -33,7 +33,7 @@ _LOG_COMMANDS = (
 )
 
 def l10n(value):
-    return as_xvm_cmd(XVM_AS_COMMAND_L10N, value)
+    return as_xfw_cmd(XVM_AS_COMMAND_L10N, value)
 
 class Xvm(object):
     def __init__(self):
@@ -247,7 +247,7 @@ class Xvm(object):
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
 
-        as_xvm_cmd(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
+        as_xfw_cmd(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
 
     def hangarDispose(self):
         from CurrentVehicle import g_currentVehicle

@@ -4,8 +4,8 @@
  */
 package xvm.hangar
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
     import xvm.hangar.views.*;
 
     public class HangarXvmMod extends XvmModBase

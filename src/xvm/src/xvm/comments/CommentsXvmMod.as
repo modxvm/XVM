@@ -4,8 +4,8 @@
  */
 package xvm.comments
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
 
     public class CommentsXvmMod extends XvmModBase
     {

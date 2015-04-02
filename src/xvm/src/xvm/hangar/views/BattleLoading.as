@@ -4,9 +4,9 @@
  */
 package xvm.hangar.views
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
-    import com.xvm.types.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
+    import com.xfw.types.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
     import net.wg.gui.lobby.battleloading.*;

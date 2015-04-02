@@ -1,6 +1,6 @@
 package xvm.profile.UI
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import fl.transitions.easing.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;

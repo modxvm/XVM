@@ -108,13 +108,13 @@ def DropAllCrew(self):
     Crew.unloadCrew()
 
 def PutOwnCrew(self):
-    as_xvm_cmd(COMMANDS.AS_PUT_OWN_CREW)
+    as_xfw_cmd(COMMANDS.AS_PUT_OWN_CREW)
 
 def PutBestCrew(self):
-    as_xvm_cmd(COMMANDS.AS_PUT_BEST_CREW)
+    as_xfw_cmd(COMMANDS.AS_PUT_BEST_CREW)
 
 def PutClassCrew(self):
-    as_xvm_cmd(COMMANDS.AS_PUT_CLASS_CREW)
+    as_xfw_cmd(COMMANDS.AS_PUT_CLASS_CREW)
 
 def PutPreviousCrew(self, print_message = True):
     wg_compat.g_instance.processReturnCrew(print_message)
@@ -126,7 +126,7 @@ def TmenXpPanel_onVehicleChange(self):
         vehicle = g_currentVehicle.item
         vehId = g_currentVehicle.invID if vehicle is not None else 0
         isElite = vehicle.isElite if vehicle is not None else 0
-        as_xvm_cmd(COMMANDS.AS_VEHICLE_CHANGED, vehId, isElite)
+        as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, vehId, isElite)
 
 
 #####################################################################

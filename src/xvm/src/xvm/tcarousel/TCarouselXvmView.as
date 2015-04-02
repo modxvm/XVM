@@ -4,11 +4,11 @@
  */
 package xvm.tcarousel
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
-    import com.xvm.misc.*;
-    import com.xvm.utils.*;
-    import com.xvm.types.dossier.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
+    import com.xfw.misc.*;
+    import com.xfw.utils.*;
+    import com.xfw.types.dossier.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;

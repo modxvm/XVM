@@ -24,6 +24,7 @@
     <option allowSourcePathOverlap="False" />
     <option benchmark="False" />
     <option es="False" />
+    <option inline="False" />
     <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
@@ -57,6 +58,7 @@
   <externalLibraryPaths>
     <element path="..\xfw\~output\swc\wg.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
+    <element path="..\..\~output\swc\xvm_main.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

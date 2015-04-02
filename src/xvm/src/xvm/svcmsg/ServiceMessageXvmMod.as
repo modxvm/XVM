@@ -4,8 +4,8 @@
  */
 package xvm.svcmsg
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
 
     public class ServiceMessageXvmMod extends XvmModBase
     {

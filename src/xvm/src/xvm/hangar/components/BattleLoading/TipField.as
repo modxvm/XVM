@@ -1,6 +1,6 @@
 package xvm.hangar.components.BattleLoading
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import flash.text.*;
     import net.wg.gui.lobby.battleloading.*;
 

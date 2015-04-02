@@ -1,6 +1,6 @@
 ﻿package xvm.comments.UI
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.data.constants.*;

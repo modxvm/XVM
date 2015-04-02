@@ -3,7 +3,7 @@
  */
 package xvm.comments.UI
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import net.wg.gui.messenger.data.*;
     import scaleform.clik.constants.*;
 

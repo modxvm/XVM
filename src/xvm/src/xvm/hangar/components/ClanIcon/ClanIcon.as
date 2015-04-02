@@ -4,10 +4,10 @@
  */
 package xvm.hangar.components.ClanIcon
 {
-    import com.xvm.*;
-    import com.xvm.misc.*;
-    import com.xvm.utils.*;
-    import com.xvm.types.cfg.*;
+    import com.xfw.*;
+    import com.xfw.misc.*;
+    import com.xfw.utils.*;
+    import com.xfw.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;
 

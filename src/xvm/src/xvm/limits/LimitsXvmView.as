@@ -4,9 +4,9 @@
  */
 package xvm.limits
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
-    import com.xvm.types.cfg.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
+    import com.xfw.types.cfg.*;
     import flash.events.Event;
     import flash.utils.*;
     import net.wg.gui.lobby.*;

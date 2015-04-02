@@ -4,10 +4,10 @@
  */
 package xvm.profile
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
-    import com.xvm.misc.*;
-    import com.xvm.utils.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
+    import com.xfw.misc.*;
+    import com.xfw.utils.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;

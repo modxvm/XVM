@@ -4,9 +4,9 @@
  */
 package xvm.svcmsg
 {
-    import com.xvm.*;
-    import com.xvm.io.*;
-    import com.xvm.infrastructure.*;
+    import com.xfw.*;
+    import com.xfw.io.*;
+    import com.xfw.infrastructure.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.notification.*;

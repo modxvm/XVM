@@ -1,7 +1,7 @@
 package xvm.ping.PingServers
 {
-    import com.xvm.*;
-    import com.xvm.events.*;
+    import com.xfw.*;
+    import com.xfw.events.*;
     import flash.events.*;
     import flash.utils.*;
     import org.idmedia.as3commons.util.*;
@@ -47,12 +47,12 @@ package xvm.ping.PingServers
             }
         }
 
-        public static function addListener(listener:Function):void
+        public static function addEventListener(listener:Function):void
         {
             instance.addEventListener(Event.COMPLETE, listener);
         }
 
-        public static function removeListener(listener:Function):void
+        public static function removeEventListener(listener:Function):void
         {
             instance.removeEventListener(Event.COMPLETE, listener);
         }
@@ -61,7 +61,7 @@ package xvm.ping.PingServers
 
         function PingServers()
         {
-            Xvm.addEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
+            Xfw.addCommandListener(XFW_AS_COMMAND_PINGDATA, pingCallback);
 
             pingTimer = 0;
             pingTimeouts = null;
@@ -70,26 +70,7 @@ package xvm.ping.PingServers
         private function ping():void
         {
             //Logger.add("ping");
-            Xvm.cmd(XFW_COMMAND_PING);
-        }
-
-        private function handleXfwCommand(e:XfwCmdReceivedEvent):void
-        {
-            //Logger.add("handleXfwCommand: " + e.cmd);
-            try
-            {
-                switch (e.cmd)
-                {
-                    case XFW_AS_COMMAND_PINGDATA:
-                        e.stopImmediatePropagation();
-                        pingCallback(e.args[0]);
-                        break;
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
+            Xfw.cmd(XFW_COMMAND_PING);
         }
 
         private function pingCallback(answer:Object):void

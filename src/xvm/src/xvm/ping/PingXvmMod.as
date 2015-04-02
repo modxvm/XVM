@@ -4,6 +4,7 @@
  */
 package xvm.ping
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import xvm.ping.PingServers.*;

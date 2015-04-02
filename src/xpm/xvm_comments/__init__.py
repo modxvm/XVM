@@ -79,7 +79,7 @@ def PlayerContactsCMHandler_generateOptions(base, self):
 
 def _XvmEditContactData(self):
     #log('_XvmEditContactData')
-    as_xvm_cmd(COMMANDS.AS_EDIT_CONTACT_DATA, self.userName, self.databaseID)
+    as_xfw_cmd(COMMANDS.AS_EDIT_CONTACT_DATA, self.userName, self.databaseID)
 
 #####################################################################
 # Register events

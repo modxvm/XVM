@@ -1,7 +1,7 @@
 package xvm.quests
 {
-    import com.xvm.*;
-    import com.xvm.io.*;
+    import com.xfw.*;
+    import com.xfw.io.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.components.controls.*;

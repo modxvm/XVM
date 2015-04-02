@@ -4,9 +4,9 @@
  */
 package xvm.crew
 {
-    import com.xvm.*;
-    import com.xvm.events.*;
-    import com.xvm.infrastructure.*;
+    import com.xfw.*;
+    import com.xfw.events.*;
+    import com.xfw.infrastructure.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.components.controls.CheckBox;

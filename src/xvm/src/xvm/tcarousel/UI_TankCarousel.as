@@ -1,12 +1,12 @@
 package xvm.tcarousel
 {
-    import com.xvm.*;
-    import com.xvm.controls.*;
-    import com.xvm.io.*;
-    import com.xvm.misc.*;
-    import com.xvm.types.cfg.*;
-    import com.xvm.types.dossier.*;
-    import com.xvm.types.veh.*;
+    import com.xfw.*;
+    import com.xfw.controls.*;
+    import com.xfw.io.*;
+    import com.xfw.misc.*;
+    import com.xfw.types.cfg.*;
+    import com.xfw.types.dossier.*;
+    import com.xfw.types.veh.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.data.constants.*;

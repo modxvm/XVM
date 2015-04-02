@@ -1,6 +1,6 @@
 package xvm.hangar.UI.battleResults
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import flash.events.*;
     import scaleform.clik.constants.*;
 

@@ -3,9 +3,9 @@
  */
 package xvm.hangar.components.TankParams
 {
-    import com.xvm.*;
-    import com.xvm.utils.*;
-    import com.xvm.types.cfg.*;
+    import com.xfw.*;
+    import com.xfw.utils.*;
+    import com.xfw.types.cfg.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.data.*;

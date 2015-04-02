@@ -3,9 +3,9 @@
  */
 package xvm.company.renderers
 {
-    import com.xvm.*;
-    import com.xvm.types.stat.*;
-    import com.xvm.utils.*;
+    import com.xfw.*;
+    import com.xfw.types.stat.*;
+    import com.xfw.utils.*;
     import net.wg.gui.prebattle.squad.*;
 
     public class TeamRendererHelper

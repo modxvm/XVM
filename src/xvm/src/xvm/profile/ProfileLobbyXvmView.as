@@ -4,9 +4,9 @@
  */
 package xvm.profile
 {
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
-    import com.xvm.misc.*;
+    import com.xfw.*;
+    import com.xfw.infrastructure.*;
+    import com.xfw.misc.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
     import net.wg.gui.lobby.header.vo.*;

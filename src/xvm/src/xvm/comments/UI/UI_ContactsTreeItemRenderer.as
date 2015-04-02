@@ -3,8 +3,8 @@
  */
 package xvm.comments.UI
 {
-    import com.xvm.*;
-    import com.xvm.utils.*;
+    import com.xfw.*;
+    import com.xfw.utils.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes

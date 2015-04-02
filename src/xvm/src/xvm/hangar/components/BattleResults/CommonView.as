@@ -1,8 +1,8 @@
 package xvm.hangar.components.BattleResults
 {
-    import com.xvm.*;
-    import com.xvm.types.veh.*;
-    import com.xvm.utils.*;
+    import com.xfw.*;
+    import com.xfw.types.veh.*;
+    import com.xfw.utils.*;
     import flash.events.*;
     import flash.text.*;
     import flash.utils.*;

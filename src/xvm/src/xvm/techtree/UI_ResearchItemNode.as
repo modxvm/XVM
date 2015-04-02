@@ -4,7 +4,7 @@
  */
 package xvm.techtree
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import flash.events.*;
     import net.wg.gui.lobby.techtree.data.state.*;
 

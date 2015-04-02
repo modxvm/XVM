@@ -1,9 +1,9 @@
 package xvm.company.renderers
 {
-    import com.xvm.*;
-    import com.xvm.utils.*;
-    import com.xvm.events.*;
-    import com.xvm.types.stat.*;
+    import com.xfw.*;
+    import com.xfw.utils.*;
+    import com.xfw.events.*;
+    import com.xfw.types.stat.*;
     import flash.events.*;
     import flash.text.*;
     import net.wg.gui.components.controls.*;
