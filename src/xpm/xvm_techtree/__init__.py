@@ -14,6 +14,7 @@ import BigWorld
 
 from xfw import *
 import xvm_main.python.config as config
+from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.logger import *
 
 #####################################################################
