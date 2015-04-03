@@ -8,7 +8,7 @@
   "enemySpottedMarker": {
     // Opacity percentage of spotted markers in the panels. 0 - transparent (disabled) ... 100 - opaque.
     // Прозрачность в процентах маркеров засвета в ушах. 0 - полностью прозрачные (отключены), 100 - не прозрачные.
-    "alpha": 100,
+    "alpha": "{{a:spotted}}",
     // x position.
     // положение по горизонтали.
     "x": 6,
@@ -23,7 +23,7 @@
     "bindToIcon": true,
     // enemy spotted status marker format.
     // формат маркера статуса засвета.
-    "format": "{{spotted}}",
+    "format": "<font color='{{c:spotted}}'>{{spotted}}</font>",
     // shadow (see below).
     // настройки тени (см. ниже).
     "shadow": {}
