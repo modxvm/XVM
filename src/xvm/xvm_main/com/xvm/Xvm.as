@@ -44,7 +44,7 @@ package com.xvm
             _instance = this;
             Config.load();
 
-            Xfw.addCommandListener(Defines.XVM_AS_COMMAND_RELOAD_CONFIG, onReloadConfig);
+            Xfw.addCommandListener(XvmCommand.AS_RELOAD_CONFIG, onReloadConfig);
         }
 
         // DAAPI Python-Flash interface
