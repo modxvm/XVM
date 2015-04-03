@@ -89,13 +89,13 @@
     // Динамический цвет по статусу засвета
     "spotted": {
       "neverSeen": "0x000000",
-      "lost": "0x999999",
-      "revealed": "0x00DE00",
-      "dead": "0x000000",
+      "lost": "0xD9D9D9",
+      "revealed": "0xFE0E00",
+      "dead": "0xFFFFFF",
       "neverSeen_arty": "0x000000",
-      "lost_arty": "0x999999",
-      "revealed_arty": "0xDE0000",
-      "dead_arty": "0x000000"
+      "lost_arty": "0xD9D9D9",
+      "revealed_arty": "0xFE0E00",
+      "dead_arty": "0xFFFFFF"
     },
     // Color settings for damage.
     // Настройки цвета для урона.
