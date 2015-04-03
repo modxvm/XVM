@@ -13,20 +13,24 @@ internal class XvmLinks
 
 import com.xvm.*;
 Config;
+Dossier;
 Locale;
+Stat;
+VehicleInfo;
+XvmGlobals;
 
-// Stat;
-//import com.xvm.components.*; DropDown; ImageCheckBoxItemRenderer; MultiSelectionDropDown;
-//import com.xvm.controls.*; NationMultiSelectionDropDown; ClassMultiSelectionDropDown; LevelMultiSelectionDropDown; PrefMultiSelectionDropDown;
+import com.xvm.controls.*;
+NationMultiSelectionDropDown;
+ClassMultiSelectionDropDown;
+LevelMultiSelectionDropDown;
+PrefMultiSelectionDropDown;
 
 import com.xvm.infrastructure.*;
 XvmModBase;
 XvmViewBase;
 
-//import com.xvm.misc.*;
-//Chance; Dossier; Globals; IconLoader;
-
 import com.xvm.utils.*;
+Chance;
 Utils;
 
 }

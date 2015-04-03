@@ -1,16 +1,16 @@
 /**
- * XVM Config utils
+ * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.misc
+package com.xvm.utils
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.io.*;
-    import com.xvm.utils.*;
+    //import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
-    import flash.text.*;
-    import org.idmedia.as3commons.util.*;
+    //import flash.text.*;
+    //import org.idmedia.as3commons.util.*;
 
     public class Chance
     {
@@ -102,8 +102,8 @@ package com.xvm.misc
 
                 var K:Number = chanceFunc(stat.v.data, stat);
 
-                Ka += (stat.team == Defines.TEAM_ALLY) ? K : 0;
-                Ke += (stat.team == Defines.TEAM_ENEMY) ? K : 0;
+                Ka += (stat.team == XfwConst.TEAM_ALLY) ? K : 0;
+                Ke += (stat.team == XfwConst.TEAM_ENEMY) ? K : 0;
             }
 
             Ka /= maxTeamsCount;
@@ -302,7 +302,7 @@ package com.xvm.misc
                 // skip unknown tanks (Fog of War mode) and observer
                 if (vdata == null || vdata.key == "ussr:Observer")
                     continue;
-                if (stat.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
+                if (stat.team == XfwConst.TEAM_ALLY) ++nally else ++nenemy;
             }
             return { ally: nally, enemy: nenemy };
         }
@@ -356,8 +356,8 @@ package com.xvm.misc
                 htmlText += "-";
             else
             {
-                var color:Number = GraphicsUtil.brightenColor(MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
-                var s:String = "<font color='" + Utils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
+                var color:Number = GraphicsUtil.brightenColor(MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
+                var s:String = "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
 
                 /*var n:int = 5;
                 var maxValue:Number = Math.max(chanceG.ally, chanceG.enemy);

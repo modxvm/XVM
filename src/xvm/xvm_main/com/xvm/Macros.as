@@ -2,15 +2,14 @@
  * XVM Macro substitutions
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.utils
+package com.xvm
 {
-    import com.xvm.*;
-    import com.xvm.io.*;
+    import com.xfw.*;
     import com.xvm.types.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
-    import org.idmedia.as3commons.util.StringUtils;
+    import org.idmedia.as3commons.util.*;
 
     public class Macros
     {
@@ -350,7 +349,7 @@ package com.xvm.utils
 
         private function SubstituteConfigPart(path:String):String
         {
-            var res:* = Utils.getObjectValueByPath(Config.config, path);
+            var res:* = XfwUtils.getObjectValueByPath(Config.config, path);
             if (res == null)
                 return "";
             if (typeof(res) == "object")
@@ -581,8 +580,8 @@ package com.xvm.utils
 
             if (m_globals["battletier"] === undefined)
             {
-                var battleType:Number = Xvm.cmd(Defines.XVM_COMMAND_GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
-                var battleTier:Number = Xvm.cmd(Defines.XVM_COMMAND_GET_BATTLE_LEVEL) || NaN;
+                var battleTier:Number = Xfw.cmd(XvmCommands.GET_BATTLE_LEVEL) || NaN;
+                var battleType:Number = Xfw.cmd(XvmCommands.GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
 
                 switch (battleType)
                 {
@@ -597,7 +596,7 @@ package com.xvm.utils
                 }
 
                 // {{battletype}}
-                m_globals["battletype"] = WGUtils.getBattleTypeText(battleType);
+                m_globals["battletype"] = Utils.getBattleTypeText(battleType);
                 // {{battletier}}
                 m_globals["battletier"] = battleTier;
             }
@@ -650,7 +649,7 @@ package com.xvm.utils
             // {{clannb}}
             pdata["clannb"] = clanWithoutBrackets;
             // {{ally}}
-            pdata["ally"] = team == Defines.TEAM_ALLY ? 'ally' : null;
+            pdata["ally"] = team == XfwConst.TEAM_ALLY ? 'ally' : null;
 
             // Next macro unique for vehicle
             var vdata:VehicleData = VehicleInfo.get(vid);
@@ -671,7 +670,7 @@ package com.xvm.utils
             // {{vtype-l}} - Medium Tank
             pdata["vtype-l"] = Locale.get(vdata.vtype);
             // {{c:vtype}}
-            pdata["c:vtype"] = MacrosUtil.GetVClassColorValue(vdata);
+            pdata["c:vtype"] = MacrosUtils.GetVClassColorValue(vdata);
             // {{battletier-min}}
             pdata["battletier-min"] = vdata.tierLo;
             // {{battletier-max}}
@@ -727,13 +726,13 @@ package com.xvm.utils
                 return;
 
             // {{xvm-user}}
-            pdata["xvm-user"] = WGUtils.getXvmUserText(stat.status);
+            pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
             // {{language}}
             pdata["language"] = stat.lang;
             // {{clanrank}}
             pdata["clanrank"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" : String(stat.clanInfoRank);
             // {{topclan}}
-            pdata["topclan"] = WGUtils.getTopClanText(stat.clanInfoRank);
+            pdata["topclan"] = Utils.getTopClanText(stat.clanInfoRank);
             // {{region}}
             pdata["region"] = Config.gameRegion;
             // {{avglvl}}
@@ -799,101 +798,101 @@ package com.xvm.utils
 
             // Dynamic colors
             // {{c:xeff}}
-            pdata["c:xeff"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#"); }
+            pdata["c:xeff"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#"); }
             // {{c:xwn6}}
-            pdata["c:xwn6"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#"); }
+            pdata["c:xwn6"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#"); }
             // {{c:xwn8}}
-            pdata["c:xwn8"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#"); }
+            pdata["c:xwn8"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#"); }
             // {{c:xwn}}
             pdata["c:xwn"] = pdata["c:xwn8"]
             // {{c:xwgr}}
-            pdata["c:xwgr"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#"); }
+            pdata["c:xwgr"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#"); }
             // {{c:eff}}
-            pdata["c:eff"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#"); }
+            pdata["c:eff"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#"); }
             // {{c:wn6}}
-            pdata["c:wn6"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#"); }
+            pdata["c:wn6"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#"); }
             // {{c:wn8}}
-            pdata["c:wn8"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#"); }
+            pdata["c:wn8"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#"); }
             // {{c:wn}}
             pdata["c:wn"] = pdata["c:wn8"];
             // {{c:wgr}}
-            pdata["c:wgr"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#"); }
+            pdata["c:wgr"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#"); }
             // {{c:e}}
-            pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#"); }
+            pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#"); }
             // {{c:r}}
             pdata["c:r"] = getRating(stat, pdata, "c:");
 
             // {{c:winrate}}
-            pdata["c:winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#"); }
+            pdata["c:winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#"); }
             // {{c:rating}} (obsolete)
             pdata["c:rating"] = pdata["c:winrate"]
             // {{c:kb}}
-            pdata["c:kb"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000.0, "#"); }
+            pdata["c:kb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000.0, "#"); }
             // {{c:avglvl}}
-            pdata["c:avglvl"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#"); }
+            pdata["c:avglvl"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#"); }
             // {{c:t-winrate}}
-            pdata["c:t-winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#"); }
+            pdata["c:t-winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#"); }
             // {{c:t-rating}} (obsolete)
             pdata["c:t-rating"] = pdata["c:t-winrate"];
             // {{c:t-battles}}
-            pdata["c:t-battles"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#"); }
+            pdata["c:t-battles"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#"); }
             // {{c:tdb}}
-            pdata["c:tdb"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#"); }
+            pdata["c:tdb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#"); }
             // {{c:tdv}}
-            pdata["c:tdv"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#"); }
+            pdata["c:tdv"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#"); }
             // {{c:tfb}}
-            pdata["c:tfb"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#"); }
+            pdata["c:tfb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#"); }
             // {{c:tsb}}
-            pdata["c:tsb"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#"); }
+            pdata["c:tsb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#"); }
 
             // Alpha
             // {{a:xeff}}
-            pdata["a:xeff"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
+            pdata["a:xeff"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
             // {{a:xwn6}}
-            pdata["a:xwn6"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
+            pdata["a:xwn6"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
             // {{a:xwn8}}
-            pdata["a:xwn8"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
+            pdata["a:xwn8"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
             // {{a:xwn}}
             pdata["a:xwn"] = pdata["a:xwn8"];
             // {{a:xwgr}}
-            pdata["a:xwgr"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
+            pdata["a:xwgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
             // {{a:eff}}
-            pdata["a:eff"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
+            pdata["a:eff"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
             // {{a:wn6}}
-            pdata["a:wn6"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
+            pdata["a:wn6"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
             // {{a:wn8}}
-            pdata["a:wn8"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
+            pdata["a:wn8"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
             // {{a:wn}}
             pdata["a:wn"] = pdata["a:wn8"];
             // {{a:wgr}}
-            pdata["a:wgr"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
+            pdata["a:wgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
             // {{a:e}}
-            pdata["a:e"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
+            pdata["a:e"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
             // {{a:r}}
             pdata["a:r"] = getRating(stat, pdata, "a:");
 
             // {{a:winrate}}
-            pdata["a:winrate"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.r);
+            pdata["a:winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.r);
             // {{a:rating}} (obsolete)
             pdata["a:rating"] = pdata["a:winrate"];
             // {{a:kb}}
-            pdata["a:kb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.b / 1000);
+            pdata["a:kb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.b / 1000);
             // {{a:avglvl}}
-            pdata["a:avglvl"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
+            pdata["a:avglvl"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
             // {{a:t-winrate}}
-            pdata["a:t-winrate"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.v.r);
+            pdata["a:t-winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.v.r);
             // {{a:t-rating}} (obsolete)
             pdata["a:t-rating"] = pdata["a:t-winrate"];
             // {{a:t-battles}}
-            pdata["a:t-battles"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
+            pdata["a:t-battles"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
             // {{a:tdb}}
-            pdata["a:tdb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
+            pdata["a:tdb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
             // {{a:tdv}}
-            pdata["a:tdv"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv);
+            pdata["a:tdv"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv);
             // {{a:tfb}}
-            pdata["a:tfb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
+            pdata["a:tfb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
             // {{a:tsb}}
-            pdata["a:tsb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
+            pdata["a:tsb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
         }
 
         private function _RegisterVehiclesMacros():void

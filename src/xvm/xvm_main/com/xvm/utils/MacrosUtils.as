@@ -4,12 +4,13 @@
  */
 package com.xvm.utils
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.veh.*;
     import org.idmedia.as3commons.util.*;
 
-    public class MacrosUtil
+    public class MacrosUtils
     {
         public static function GetDynamicColorValueInt(type:Number, value:Number, darker:Boolean = false):int
         {
@@ -54,7 +55,7 @@ package com.xvm.utils
             for (var i:int = 0; i < cfg_len; ++i)
             {
                 var cvalue:Number = cfg[i].value;
-                color = Utils.toInt(cfg[i].color, 0xFFFFFF);
+                color = XfwUtils.toInt(cfg[i].color, 0xFFFFFF);
                 if (value < cvalue)
                     break;
             }
@@ -114,7 +115,7 @@ package com.xvm.utils
                 var vtype:String = (usePremium && vdata.premium == 1) ? "premium" : vdata.vtype;
                 if (!vtype || !Config.config.colors.vtype.hasOwnProperty(vtype))
                     return null;
-                var value:int = Utils.toInt(Config.config.colors.vtype[vtype], -1);
+                var value:int = XfwUtils.toInt(Config.config.colors.vtype[vtype], -1);
                 if (value < 0)
                     return null;
                 return prefix + StringUtils.leftPad(value.toString(16), 6, "0");
@@ -136,7 +137,7 @@ package com.xvm.utils
                 key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
                 if (Config.config.colors.damage[key] == null)
                     return null;
-                var value:int = Utils.toInt(Config.config.colors.damage[key], -1);
+                var value:int = XfwUtils.toInt(Config.config.colors.damage[key], -1);
                 if (value < 0)
                     return null;
                 return prefix + StringUtils.leftPad(value.toString(16), 6, "0");
@@ -154,7 +155,7 @@ package com.xvm.utils
             {
                 if (dmg_kind == null || !Config.config.colors.dmg_kind[dmg_kind])
                     return null;
-                var value:int = Utils.toInt(Config.config.colors.dmg_kind[dmg_kind], -1);
+                var value:int = XfwUtils.toInt(Config.config.colors.dmg_kind[dmg_kind], -1);
                 if (value < 0)
                     return null;
                 return prefix + StringUtils.leftPad(value.toString(16), 6, "0");

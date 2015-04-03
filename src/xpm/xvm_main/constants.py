@@ -13,44 +13,44 @@ class XVM(object):
 # DAAPI commands
 
 class XVM_COMMAND(object):
-    SET_CONFIG = "xvm.set_config"
-    GET_VEHINFO = "xvm.get_vehinfo"
+    GET_BATTLE_LEVEL = "xvm.get_battle_level"
+    GET_BATTLE_TYPE = "xvm.get_battle_type"
     GET_DOSSIER = "xvm.get_dossier"
     #GET_SVC_SETTINGS = "xvm.get_svc_settings"
-    #GET_BATTLE_LEVEL = "xvm.get_battle_level"
-    #GET_BATTLE_TYPE = "xvm.get_battle_type"
+    GET_VEHINFO = "xvm.get_vehinfo"
     #LOAD_SETTINGS = "xvm.load_settings"
+    LOAD_STAT_BATTLE = "xvm.load_stat_battle"
+    LOAD_STAT_BATTLE_RESULTS = "xvm.load_stat_battle_results"
+    LOAD_STAT_USER = "xvm.load_stat_user"
     #SAVE_SETTINGS = "xvm.save_settings"
-
-class XVM_AS_COMMAND(object):
-    RELOAD_CONFIG = "xvm.as.reload_config"
-    DOSSIER = "xvm.as.dossier"
-    #SET_SVC_SETTINGS = "xvm.as.set_svc_settings"
-    #L10N = "xvm.as.l10n"
+    SET_CONFIG = "xvm.set_config"
+    AS_DOSSIER = "xvm.as.dossier"
+    AS_L10N = "xvm.as.l10n"
+    AS_RELOAD_CONFIG = "xvm.as.reload_config"
+    AS_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"
+    AS_STAT_BATTLE_DATA = "xvm.as.stat_battle_data"
+    AS_STAT_BATTLE_RESULTS_DATA = "xvm.as.stat_battle_results_data"
+    AS_STAT_USER_DATA = "xvm.as.stat_user_data"
 
 # ExternalInterface commands
 
 class AS2COMMAND(object):
+    CAPTURE_BAR_GET_BASE_NUM = "capture_bar_get_base_num"
+    GET_SCREEN_SIZE = "get_screen_size"
     LOG = "log"
-    GETSCREENSIZE = "getScreenSize"
-    LOADBATTLESTAT = "loadBattleStat"
-    LOADBATTLERESULTSSTAT = "loadBattleResultsStat"
-    LOADUSERDATA = "loadUserData"
-    OPEN_URL = "openUrl"
-    LOAD_SETTINGS = "load_settings"
-    SAVE_SETTINGS = "save_settings"
-    CAPTUREBARGETBASENUM = "captureBarGetBaseNum"
     LOGSTAT = "logstat"
+    LOAD_BATTLE_STAT = "load_battle_stat"
+    LOAD_SETTINGS = "load_settings"
+    OPEN_URL = "openUrl"
+    SAVE_SETTINGS = "save_settings"
     TEST = "test"
 
 class AS2RESPOND(object):
+    BATTLE_STATE = "xvm.battle_state"
+    BATTLE_STAT_DATA = "xvm.battle_stat_data"
     CONFIG = "xvm.config"
     KEY_EVENT = "xvm.keyevent"
-    BATTLESTATDATA = "xvm.battlestatdata"
-    BATTLERESULTSDATA = "xvm.battleresultsdata"
-    BATTLESTATE = "xvm.battleState"
-    USERDATA = "xvm.userdata"
-    UPDATECURRENTVEHICLE = "xvm.updatecurrentvehicle"
+    UPDATE_CURRENT_VEHICLE = "xvm.update_current_vehicle"
 
 class TEAM(object):
     ALLY = 1

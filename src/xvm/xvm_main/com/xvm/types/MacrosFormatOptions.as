@@ -1,6 +1,7 @@
 ﻿package com.xvm.types
 {
     import com.xvm.types.dossier.VehicleDossierCut;
+
     public class MacrosFormatOptions
     {
         public var skip:Object = null;

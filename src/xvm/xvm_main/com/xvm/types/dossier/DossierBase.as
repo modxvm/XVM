@@ -4,6 +4,7 @@
  */
 package com.xvm.types.dossier
 {
+    import com.xvm.types.stat.*;
     import net.wg.data.daapi.base.*;
 
     public class DossierBase extends DAAPIDataClass
@@ -56,6 +57,9 @@ package com.xvm.types.dossier
         public var treesCut:int;
 
         // CALCULATIONS
+
+        // Stat
+        public var stat:StatData = null;
 
         // Values
         public function get deaths():Number { return battles - survived; }

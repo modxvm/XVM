@@ -24,8 +24,8 @@ import as2profiler
 
 # for AS2
 class XVM_PROFILER_AS2COMMAND(object):
-    PROF_METHOD_START = "profMethodStart"
-    PROF_METHOD_END = "profMethodEnd"
+    PROF_METHOD_START = "prof_method_start"
+    PROF_METHOD_END = "prof_method_end"
 
 #####################################################################
 # as2profiler

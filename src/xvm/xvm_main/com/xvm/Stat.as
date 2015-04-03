@@ -4,14 +4,14 @@
  */
 package com.xvm
 {
-    import com.xvm.*;
-    import com.xvm.events.*;
-    import com.xvm.io.*;
+    import com.xfw.*;
+    import com.xfw.events.*;
+    //import com.xvm.io.*;
     import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
     import flash.events.*;
-    import flash.external.*;
+    //import flash.external.*;
     import flash.utils.*;
 
     public class Stat extends EventDispatcher
@@ -98,9 +98,9 @@ package com.xvm
             listenersBattle = new Vector.<Object>();
             listenersBattleResults = new Dictionary();
             listenersUser = new Dictionary();
-            ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATDATA, battleLoaded);
-            ExternalInterface.addCallback(Cmd.RESPOND_BATTLERESULTSDATA, battleResultsLoaded);
-            ExternalInterface.addCallback(Cmd.RESPOND_USERDATA, userLoaded);
+            Xfw.addCommandListener(XvmCommands.AS_STAT_BATTLE_DATA, battleLoaded);
+            Xfw.addCommandListener(XvmCommands.AS_STAT_BATTLE_RESULTS_DATA, battleResultsLoaded);
+            Xfw.addCommandListener(XvmCommands.AS_STAT_USER_DATA, userLoaded);
         }
 
         private function loadBattleStat(target:Object, callback:Function, force:Boolean):void
@@ -127,7 +127,7 @@ package com.xvm
                     return;
                 loading = true;
 
-                Cmd.loadBattleStat();
+                Xfw.cmd(XvmCommands.LOAD_STAT_BATTLE);
             }
             catch (ex:Error)
             {
@@ -229,7 +229,7 @@ package com.xvm
             }
 
             if (!inProgress)
-                Cmd.loadBattleResultsStat(arenaUniqueId);
+                Xfw.cmd(XvmCommands.LOAD_STAT_BATTLE_RESULTS, arenaUniqueId);
         }
 
         private function battleResultsLoaded(json_str:String):void
@@ -320,7 +320,7 @@ package com.xvm
                 }
 
                 if (!inProgress)
-                    Cmd.loadUserData(value, isId);
+                    Xfw.cmd(XvmCommands.LOAD_STAT_USER, value, isId);
             }
             catch (ex:Error)
             {

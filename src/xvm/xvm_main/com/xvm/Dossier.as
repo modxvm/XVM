@@ -5,7 +5,7 @@
 package com.xvm
 {
     import com.xfw.*;
-    import com.xfw.types.dossier.*;
+    import com.xvm.types.dossier.*;
 
     public class Dossier
     {
@@ -38,26 +38,12 @@ package com.xvm
         private static var _requests:Object = {};
         private static var _cache:Object = {};
 
-        /////////////////////
-
-        private static function init():void
-        {
-            if (_initialized)
-                return;
-
-            _initialized = true;
-
-            Xfw.addCommandListener(XFW_AS_COMMAND_DOSSIER, dossierLoaded);
-        }
-
-        /////////////////////
-
         private static function loadDossierInternal(target:Object, callback:Function, battleType:String, playerId:Number, vehId:Number):void
         {
             if (!_initialized)
             {
                 _initialized = true;
-                Xfw.addCommandListener(XFW_AS_COMMAND_DOSSIER, dossierLoaded);
+                Xfw.addCommandListener(XvmCommands.AS_DOSSIER, dossierLoaded);
             }
 
             var key:String = playerId + "," + vehId;
@@ -66,7 +52,7 @@ package com.xvm
                 _requests[key] = [];
             if (callback != null)
                 _requests[key].push( { target: target, callback: callback } );
-            Xfw.cmd(XFW_COMMAND_GETDOSSIER, battleType, playerId, vehId);
+            Xfw.cmd(XvmCommands.GET_DOSSIER, battleType, playerId, vehId);
         }
 
         private static function dossierLoaded(playerId:int, vehId:int, str:String):void

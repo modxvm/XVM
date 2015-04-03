@@ -13,7 +13,7 @@ package com.xvm
 
         public static function populateData():void
         {
-            instance.onVehicleInfoData(Xfw.cmd(XvmCommand.GET_VEHINFO));
+            instance.onVehicleInfoData(Xfw.cmd(XvmCommands.GET_VEHINFO));
         }
 
         public static function get(vehId:int):VehicleData
@@ -31,7 +31,6 @@ package com.xvm
             return instance._getByLocalizedShortName(localizedShortName);
         }
 
-        /*
         public static function getVTypeText(vtype:String):String
         {
             // vtype = HT
@@ -52,7 +51,6 @@ package com.xvm
                 return "";
             return vkey.split(":").join("-");
         }
-        */
 
         // PRIVATE
 
@@ -92,7 +90,6 @@ package com.xvm
                 for each (var obj:Object in data_array)
                 {
                     var data:VehicleData = new VehicleData(obj);
-                    /*
                     var preferredNames:Object = Config.config.vehicleNames[data.key.split(':').join('-')];
                     if (preferredNames != null)
                     {
@@ -101,7 +98,6 @@ package com.xvm
                         if (preferredNames['short'] != null && preferredNames['short'] != '')
                             data.shortName = preferredNames['short'];
                     }
-                    */
                     //Logger.addObject(data);
                     vehicles[data.vid] = data;
                     vehiclesMapKey[data.key] = data.vid; // for getByIcon()

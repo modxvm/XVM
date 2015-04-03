@@ -8,18 +8,17 @@ import flash.external.*;
 class com.xvm.Cmd
 {
     private static var COMMAND_LOG:String = "log";
-    private static var COMMAND_GETSCREENSIZE:String = "getScreenSize";
-    private static var COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
-    private static var COMMAND_LOADUSERDATA:String = "loadUserData";
-    private static var COMMAND_CAPTUREBARGETBASENUM:String = "captureBarGetBaseNum";
-    private static var COMMAND_PROF_METHOD_START:String = "profMethodStart";
-    private static var COMMAND_PROF_METHOD_END:String = "profMethodEnd";
+    private static var COMMAND_GET_SCREEN_SIZE:String = "get_screen_size";
+    private static var COMMAND_LOAD_BATTLE_STAT:String = "load_battle_stat";
+    private static var COMMAND_CAPTURE_BAR_GET_BASE_NUM:String = "capture_bar_get_base_num";
+    private static var COMMAND_PROF_METHOD_START:String = "prof_method_start";
+    private static var COMMAND_PROF_METHOD_END:String = "prof_method_end";
 
     public static var RESPOND_CONFIG:String = "xvm.config";
     public static var RESPOND_KEY_EVENT:String = "xvm.keyevent";
 
-    public static var RESPOND_BATTLESTATDATA:String = "xvm.battlestatdata";
-    public static var RESPOND_BATTLESTATE:String = "xvm.battleState";
+    public static var RESPOND_BATTLE_STAT_DATA:String = "xvm.battle_stat_data";
+    public static var RESPOND_BATTLE_STATE:String = "xvm.battle_state";
 
     public static function log(str:String)
     {
@@ -33,7 +32,7 @@ class com.xvm.Cmd
 
     public static function loadBattleStat(players:Array)
     {
-        _call(null, null, [COMMAND_LOADBATTLESTAT, players]);
+        _call(null, null, [COMMAND_LOAD_BATTLE_STAT, players]);
     }
 
     public static function captureBarGetBaseNum(target:Object, callback:Function, id:Number)

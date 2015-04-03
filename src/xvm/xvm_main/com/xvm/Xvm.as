@@ -7,16 +7,9 @@ package com.xvm
     XvmLinks;
 
     import com.xfw.*;
-    //import com.xfw.events.*;
-    //import com.xfw.types.*;
-    //import com.xfw.utils.*;
+    import com.xvm.types.*;
     import flash.display.*;
     import flash.events.*;
-    //import net.wg.app.*;
-    //import net.wg.data.constants.*;
-    //import net.wg.infrastructure.base.*;
-    //import net.wg.infrastructure.events.*;
-    //import net.wg.infrastructure.managers.*;
 
     public class Xvm extends Sprite //AbstractView
     {
@@ -44,10 +37,17 @@ package com.xvm
             _instance = this;
             Config.load();
 
-            Xfw.addCommandListener(XvmCommand.AS_RELOAD_CONFIG, onReloadConfig);
+            Xfw.addCommandListener(XvmCommands.AS_L10N, onL10n);
+            Xfw.addCommandListener(XvmCommands.AS_RELOAD_CONFIG, onReloadConfig);
+            Xfw.addCommandListener(XvmCommands.AS_SET_SVC_SETTINGS, onSetSvcSettings);
         }
 
         // DAAPI Python-Flash interface
+
+        private function onL10n(value:String):String
+        {
+            return Locale.get(value);
+        }
 
         private function onReloadConfig():void
         {
@@ -66,51 +66,11 @@ package com.xvm
                 type = "Error";
             }
             Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
-            //Xfw.cmd(_XFW_COMMAND_INITIALIZED);
         }
 
-        /*
-        public function as_xvm_cmd(cmd:*, ...rest):*
+        private function onSetSvcSettings(nss:NetworkServicesSettings):void
         {
-            //Logger.add("as_xvm_cmd: " + cmd + " " + rest.join(", "));
-
-            try
-            {
-                switch (cmd)
-                {
-                    case Defines.XFW_AS_COMMAND_L10N:
-                        return Locale.get(rest[0]);
-
-                    default:
-                        var e:XfwCmdReceivedEvent = new XfwCmdReceivedEvent(cmd, rest);
-                        dispatchEvent(e);
-                        return e.retValue;
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            Config.networkServicesSettings = new NetworkServicesSettings(nss);
         }
-
-        private function handleXfwCommand(e:XfwCmdReceivedEvent):void
-        {
-            //Logger.add("handleXfwCommand: " + e.result.cmd);
-            try
-            {
-                switch (e.cmd)
-                {
-                    case Defines.XVM_AS_COMMAND_SET_SVC_SETTINGS:
-                        e.stopImmediatePropagation();
-                        Config.networkServicesSettings = new NetworkServicesSettings(e.args[0]);
-                        break;
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-        */
     }
 }

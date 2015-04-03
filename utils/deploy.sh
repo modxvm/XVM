@@ -58,9 +58,6 @@ copy_output()
 
   echo "=> res_mods/mods"
   cp -a ../~output/mods/* "$WOT_PATH/res_mods/mods" || err "copy_output"
-
-  rm -rf "$WOT_PATH/res_mods/mods/packages"
-  mkdir "$WOT_PATH/res_mods/mods/packages"
 }
 
 copy_configs()

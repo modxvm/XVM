@@ -28,14 +28,16 @@ from minimap_circles import g_minimap_circles
 from test import runTest
 
 _LOG_COMMANDS = (
-    AS2COMMAND.LOADBATTLESTAT,
-    AS2COMMAND.LOADBATTLERESULTSSTAT,
+    XVM_COMMAND.LOAD_STAT_BATTLE,
+    XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS,
+    XVM_COMMAND.LOAD_STAT_USER,
+    AS2COMMAND.LOAD_BATTLE_STAT,
     AS2COMMAND.LOGSTAT,
     AS2COMMAND.TEST,
 )
 
-#def l10n(value):
-#    return as_xfw_cmd(XVM_AS_COMMAND.L10N, value)
+def l10n(value):
+    return as_xfw_cmd(XVM_COMMAND.AS_L10N, value)
 
 class Xvm(object):
     def __init__(self):
@@ -71,9 +73,12 @@ class Xvm(object):
                 return (getVehicleInfoDataStr(), True)
             elif cmd == XVM_COMMAND.GET_DOSSIER:
                 dossier.getDossier(args)
-            elif cmd == XVM_COMMAND.GET_SVC_SETTINGS:
-                token.getToken()
-                return (token.networkServicesSettings, True)
+            elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
+                getBattleStat(args)
+            elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS:
+                getBattleResultsStat(args)
+            elif cmd == XVM_COMMAND.LOAD_STAT_USER:
+                getUserData(args)
             elif cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:
@@ -84,12 +89,15 @@ class Xvm(object):
                 if arena is not None:
                     return (arena.bonusType, True)
                 return (None, True)
-            elif cmd == XVM_COMMAND.LOAD_SETTINGS:
-                default = None if len(args) < 2 else args[1]
-                return (userprefs.get(args[0], default), True)
-            elif cmd == XVM_COMMAND.SAVE_SETTINGS:
-                userprefs.set(args[0], args[1])
-                return (None, True)
+            #elif cmd == XVM_COMMAND.GET_SVC_SETTINGS:
+            #    token.getToken()
+            #    return (token.networkServicesSettings, True)
+            #elif cmd == XVM_COMMAND.LOAD_SETTINGS:
+            #    default = None if len(args) < 2 else args[1]
+            #    return (userprefs.get(args[0], default), True)
+            #elif cmd == XVM_COMMAND.SAVE_SETTINGS:
+            #    userprefs.set(args[0], args[1])
+            #    return (None, True)
 
         except Exception, ex:
             err(traceback.format_exc())
@@ -105,15 +113,11 @@ class Xvm(object):
             res = None
             if cmd == AS2COMMAND.LOG:
                 log(*args)
-            elif cmd == AS2COMMAND.GETSCREENSIZE:
+            elif cmd == AS2COMMAND.GET_SCREEN_SIZE:
                 # return
                 res = simplejson.dumps(list(GUI.screenResolution()))
-            elif cmd == AS2COMMAND.LOADBATTLESTAT:
-                getBattleStat(proxy, args)
-            elif cmd == AS2COMMAND.LOADBATTLERESULTSSTAT:
-                getBattleResultsStat(proxy, args)
-            elif cmd == AS2COMMAND.LOADUSERDATA:
-                getUserData(proxy, args)
+            elif cmd == AS2COMMAND.LOAD_BATTLE_STAT:
+                getBattleStatBattle(proxy, args)
             elif cmd == AS2COMMAND.OPEN_URL:
                 if len(args[0]):
                     utils.openWebBrowser(args[0], False)
@@ -121,7 +125,7 @@ class Xvm(object):
                 res = userprefs.get(args[0])
             elif cmd == AS2COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
-            elif cmd == AS2COMMAND.CAPTUREBARGETBASENUM:
+            elif cmd == AS2COMMAND.CAPTURE_BAR_GET_BASE_NUM:
                 n = int(args[0])
                 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
                 res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3, n >> 2)
@@ -252,7 +256,7 @@ class Xvm(object):
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
 
-        as_xfw_cmd(XVM_AS_COMMAND.SET_SVC_SETTINGS, token.networkServicesSettings)
+        as_xfw_cmd(XVM_COMMAND.AS_SET_SVC_SETTINGS, token.networkServicesSettings)
 
     def hangarDispose(self):
         from CurrentVehicle import g_currentVehicle
@@ -263,7 +267,7 @@ class Xvm(object):
             g_minimap_circles.updateCurrentVehicle()
             if self.app is not None:
                 data = simplejson.dumps(config.config['minimap']['circles']['_internal'])
-                self.app.movie.invoke((AS2RESPOND.UPDATECURRENTVEHICLE, [data]))
+                self.app.movie.invoke((AS2RESPOND.UPDATE_CURRENT_VEHICLE, [data]))
         except Exception, ex:
             err(traceback.format_exc())
 

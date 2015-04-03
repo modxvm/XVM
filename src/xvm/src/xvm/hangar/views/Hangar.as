@@ -37,7 +37,7 @@ package xvm.hangar.views
 
         private function initVehicleParams():void
         {
-            ExternalInterface.addCallback(Cmd.RESPOND_UPDATECURRENTVEHICLE, onUpdateCurrentVehicle);
+            ExternalInterface.addCallback(Cmd.RESPOND_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
         }
 
         private function onUpdateCurrentVehicle(json_str:String):void

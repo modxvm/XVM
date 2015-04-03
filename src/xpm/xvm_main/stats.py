@@ -3,27 +3,25 @@
 #############################
 # Command
 
-def getBattleStat(proxy, args):
+def getBattleStat(args, proxy=None):
     _stat.enqueue({
         'func': _stat.getBattleStat,
-        'proxy': proxy,
-        'method': AS2RESPOND.BATTLESTATDATA,
-        'args': args})
+        'cmd': XVM_COMMAND.AS_STAT_BATTLE_DATA if proxy is None else AS2RESPOND.BATTLE_STAT_DATA,
+        'args': args,
+        'proxy': proxy})
     _stat.processQueue()
 
-def getBattleResultsStat(proxy, args):
+def getBattleResultsStat(args):
     _stat.enqueue({
         'func': _stat.getBattleResultsStat,
-        'proxy': proxy,
-        'method': AS2RESPOND.BATTLERESULTSDATA,
+        'cmd': XVM_COMMAND.AS_STAT_BATTLE_RESULTS_DATA,
         'args': args})
     _stat.processQueue()
 
-def getUserData(proxy, args):
+def getUserData(args):
     _stat.enqueue({
         'func': _stat.getUserData,
-        'proxy': proxy,
-        'method': AS2RESPOND.USERDATA,
+        'cmd': XVM_COMMAND.AS_STAT_USER_DATA,
         'args': args})
     _stat.processQueue()
 
@@ -122,10 +120,13 @@ class _Stat(object):
                     BigWorld.callback(0, self.processQueue)
 
     def _respond(self):
-        debug("respond: " + self.req['method'])
-        if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
-            strdata = simplejson.dumps(self.resp)
-            self.req['proxy'].movie.invoke((self.req['method'], [strdata]))
+        debug("respond: " + self.req['cmd'])
+        if not self.req['proxy']:
+            as_xfw_cmd(self.req['cmd'], strdata)
+        else:
+            if self.req['proxy'].component and self.req['proxy'].movie:
+                strdata = simplejson.dumps(self.resp)
+                self.req['proxy'].movie.invoke((self.req['cmd'], [strdata]))
 
     # Threaded
 

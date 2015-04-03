@@ -1,9 +1,7 @@
 package com.xvm.controls
 {
+    import com.xfw.components.*;
     import com.xvm.*;
-    import com.xvm._old.components.MultiSelectionDropDown;
-    import com.xvm.components.*;
-    import flash.geom.Rectangle;
     import scaleform.clik.data.*;
 
     public class PrefMultiSelectionDropDown extends MultiSelectionDropDown

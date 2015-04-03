@@ -27,10 +27,33 @@ package com.xvm.types.veh
         public var tierLo:int;
         public var tierHi:int;
 
+        public var localizedName:String = Values.EMPTY_STR; // can be overrided by user
         public var localizedShortName:String = Values.EMPTY_STR;
         public var localizedFullName:String = Values.EMPTY_STR;
 
         public var turret:int;
+
+        public var wn8expDamage:Number;
+        public var wn8expSpot:Number;
+        public var wn8expWinRate:Number;
+        public var wn8expDef:Number;
+        public var wn8expFrag:Number;
+
+        // additional
+
+        public var shortName:String = Values.EMPTY_STR;
+
+        public var avg:StatValues;
+        public var top:StatValues;
+
+        public function VehicleData(data:Object)
+        {
+            if (data.avg != null && !(data.avg is StatValues))
+                data.avg = new StatValues(data.avg);
+            if (data.top != null && !(data.top is StatValues))
+                data.top = new StatValues(data.top);
+            super(data);
+        }
 
         // PROPERTIES
 
@@ -42,11 +65,6 @@ package com.xvm.types.veh
         public function get sysname():String
         {
             return key.replace(':', '-');
-        }
-
-        public function VehicleData(data:Object)
-        {
-            super(data);
         }
 
         // PRIVATE
@@ -66,4 +84,19 @@ package com.xvm.types.veh
             }
         }
    }
+}
+
+class StatValues extends net.wg.data.daapi.base.DAAPIDataClass
+{
+    public var R:Number;
+    public var D:Number;
+    public var E:Number;
+    public var F:Number;
+    public var S:Number;
+    public var U:Number;
+
+    public function StatValues(data:Object)
+    {
+      super(data);
+    }
 }

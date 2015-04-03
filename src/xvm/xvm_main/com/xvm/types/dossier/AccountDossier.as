@@ -5,6 +5,7 @@
 package com.xvm.types.dossier
 {
     import com.xfw.*;
+    import com.xvm.*;
     import net.wg.data.constants.*;
 
     public class AccountDossier extends DossierBase
@@ -23,9 +24,9 @@ package com.xvm.types.dossier
             if (data.maxDamageVehId)
                 _maxDamageVehicleName = VehicleInfo.get(maxDamageVehId).localizedFullName;
 
-            //vehicles = {};
-            //for (var vehId:String in vehiclesData)
-            //    vehicles[vehId] = new VehicleDossierCut(parseInt(vehId), vehiclesData[vehId]);
+            vehicles = {};
+            for (var vehId:String in vehiclesData)
+                vehicles[vehId] = new VehicleDossierCut(parseInt(vehId), vehiclesData[vehId]);
         }
 
         public var maxXPVehId:int;
@@ -55,6 +56,13 @@ package com.xvm.types.dossier
         public function get maxDamageVehicleName():String
         {
             return _maxDamageVehicleName;
+        }
+
+        public function getVehicleDossierCut(vehId:int):VehicleDossierCut
+        {
+            if (!vehicles.hasOwnProperty(vehId))
+                vehicles[vehId] = new VehicleDossierCut(vehId, { } );
+            return vehicles[vehId];
         }
     }
 }

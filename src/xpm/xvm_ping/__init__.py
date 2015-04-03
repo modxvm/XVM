@@ -12,10 +12,8 @@ XFW_GAME_VERSIONS  = ["0.9.7"]
 # constants
 
 class XVM_PING_COMMAND(object):
-    PING = "xvm.ping"
-
-class XVM_PING_AS_COMMAND(object):
-    _PINGDATA = "xvm.as.pingdata"
+    PING = "xvm_ping.ping"
+    AS_PINGDATA = "xvm_ping.as.pingdata"
 
 #####################################################################
 # includes
