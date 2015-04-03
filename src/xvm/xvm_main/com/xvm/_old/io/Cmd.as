@@ -13,7 +13,6 @@ package com.xvm.io
     {
         private static const COMMAND_LOG:String = "log";
         private static const COMMAND_GETSCREENSIZE:String = "getScreenSize";
-        private static const COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
         private static const COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
         private static const COMMAND_LOADBATTLERESULTSSTAT:String = "loadBattleResultsStat";
         private static const COMMAND_LOADUSERDATA:String = "loadUserData";
@@ -39,11 +38,6 @@ package com.xvm.io
         public static function getScreenSize(target:Object, callback:Function):void
         {
             _call(target, callback, [COMMAND_GETSCREENSIZE]);
-        }
-
-        public static function getVehicleInfoData(target:Object, callback:Function):void
-        {
-            _call(target, callback, [COMMAND_GETVEHICLEINFODATA]);
         }
 
         public static function loadBattleStat(players:Array = null):void

@@ -7,7 +7,7 @@ def getBattleStat(proxy, args):
     _stat.enqueue({
         'func': _stat.getBattleStat,
         'proxy': proxy,
-        'method': RESPOND_BATTLESTATDATA,
+        'method': AS2RESPOND.BATTLESTATDATA,
         'args': args})
     _stat.processQueue()
 
@@ -15,7 +15,7 @@ def getBattleResultsStat(proxy, args):
     _stat.enqueue({
         'func': _stat.getBattleResultsStat,
         'proxy': proxy,
-        'method': RESPOND_BATTLERESULTSDATA,
+        'method': AS2RESPOND.BATTLERESULTSDATA,
         'args': args})
     _stat.processQueue()
 
@@ -23,7 +23,7 @@ def getUserData(proxy, args):
     _stat.enqueue({
         'func': _stat.getUserData,
         'proxy': proxy,
-        'method': RESPOND_USERDATA,
+        'method': AS2RESPOND.USERDATA,
         'args': args})
     _stat.processQueue()
 
@@ -301,7 +301,7 @@ class _Stat(object):
                         req = "user/%s/%s" % (tok, value)
                     else:
                         req = "nick/%s/%s/%s" % (tok, reg, value)
-                    server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+                    server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
                     (response, duration, errStr) = loadUrl(server, req)
 
                     # log(response)
@@ -369,11 +369,11 @@ class _Stat(object):
                 cmd = 'rplstat' if isReplay() else 'stat'
                 updateRequest = '%s/%s/%s' % (cmd, tdata['token'].encode('ascii'), ','.join(requestList))
 
-                if XVM_SERVERS is None or len(XVM_SERVERS) <= 0:
+                if XVM.SERVERS is None or len(XVM.SERVERS) <= 0:
                     err('Cannot read data: no suitable server was found.')
                     return
 
-                server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+                server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
                 (response, duration, errStr) = loadUrl(server, updateRequest)
 
                 if not response:
@@ -434,7 +434,7 @@ class _Stat(object):
                         stat['clanInfoId'] = pl.clanInfo.get('cid', None) if pl.clanInfo else None
                         stat['clanInfoRank'] = pl.clanInfo.get('rank', None) if pl.clanInfo else None
                     stat['name'] = pl.name
-                    stat['team'] = TEAM_ALLY if team == pl.team else TEAM_ENEMY
+                    stat['team'] = TEAM.ALLY if team == pl.team else TEAM.ENEMY
                     stat['squadnum'] = pl.squadnum
                     if hasattr(pl, 'alive'):
                         stat['alive'] = pl.alive

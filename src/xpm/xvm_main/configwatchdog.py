@@ -59,7 +59,7 @@ def _isConfigReloadingEnabled():
 def _onConfigChanged():
     try:
         _stopConfigWatchdog()
-        as_xfw_cmd(XVM_AS_COMMAND_RELOAD_CONFIG)
+        as_xfw_cmd(XVM_AS_COMMAND.RELOAD_CONFIG)
 
         from gui.WindowsManager import g_windowsManager
         from gui.Scaleform.framework import ViewTypes

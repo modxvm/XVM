@@ -23,8 +23,9 @@ import as2profiler
 # constants
 
 # for AS2
-COMMAND_PROF_METHOD_START = "profMethodStart"
-COMMAND_PROF_METHOD_END = "profMethodEnd"
+class XVM_PROFILER_AS2COMMAND(object):
+    PROF_METHOD_START = "profMethodStart"
+    PROF_METHOD_END = "profMethodEnd"
 
 #####################################################################
 # as2profiler
@@ -49,9 +50,9 @@ def FlashBeforeDelete(self):
 
 def onXvmCommand(proxy, id, cmd, *args):
     try:
-        if cmd == COMMAND_PROF_METHOD_START:
+        if cmd == XVM_PROFILER_AS2COMMAND.PROF_METHOD_START:
             as2profiler.g_as2profiler.methodStart(args[0])
-        if cmd == COMMAND_PROF_METHOD_END:
+        if cmd == XVM_PROFILER_AS2COMMAND.PROF_METHOD_END:
             as2profiler.g_as2profiler.methodEnd(args[0])
     except Exception, ex:
         err(traceback.format_exc())

@@ -11,8 +11,11 @@ XFW_GAME_VERSIONS  = ["0.9.7"]
 #####################################################################
 # constants
 
-XFW_COMMAND_PING = "xfw.ping"
-XFW_AS_COMMAND_PINGDATA = "xfw.pingdata"
+class XVM_PING_COMMAND(object):
+    PING = "xvm.ping"
+
+class XVM_PING_AS_COMMAND(object):
+    _PINGDATA = "xvm.as.pingdata"
 
 #####################################################################
 # includes
@@ -44,7 +47,7 @@ def fini():
 # onXfwCommand
 
 _LOG_COMMANDS = (
-    #XFW_COMMAND_PING,
+    #XVM_PING_COMMAND.PING,
 )
 
 # returns: (result, status)
@@ -52,7 +55,7 @@ def onXfwCommand(cmd, *args):
     try:
         if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
             debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-        if cmd == XFW_COMMAND_PING:
+        if cmd == XVM_PING_COMMAND.PING:
             pinger.ping()
             return (None, True)
     except Exception, ex:

@@ -22,19 +22,20 @@ import token
 import utils
 import userprefs
 import configwatchdog
+import dossier
 from websock import g_websock
 from minimap_circles import g_minimap_circles
 from test import runTest
 
 _LOG_COMMANDS = (
-    COMMAND_LOADBATTLESTAT,
-    COMMAND_LOADBATTLERESULTSSTAT,
-    COMMAND_LOGSTAT,
-    COMMAND_TEST,
+    AS2COMMAND.LOADBATTLESTAT,
+    AS2COMMAND.LOADBATTLERESULTSSTAT,
+    AS2COMMAND.LOGSTAT,
+    AS2COMMAND.TEST,
 )
 
-def l10n(value):
-    return as_xfw_cmd(XVM_AS_COMMAND_L10N, value)
+#def l10n(value):
+#    return as_xfw_cmd(XVM_AS_COMMAND.L10N, value)
 
 class Xvm(object):
     def __init__(self):
@@ -55,8 +56,8 @@ class Xvm(object):
             if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
 
-            if cmd == XVM_COMMAND_SETCONFIG:
-                # debug(XVM_COMMAND_SETCONFIG)
+            if cmd == XVM_COMMAND.SET_CONFIG:
+                # debug(XVM_COMMAND.SET_CONFIG)
                 self.config_str = args[0]
                 config.config = simplejson.loads(self.config_str)
                 if len(args) >= 2:
@@ -66,23 +67,27 @@ class Xvm(object):
                 self.sendConfig(self.vmmFlashObject)
                 configwatchdog.startConfigWatchdog()
                 return (None, True)
-            elif cmd == XVM_COMMAND_GET_SVC_SETTINGS:
+            elif cmd == XVM_COMMAND.GET_VEHINFO:
+                return (getVehicleInfoDataStr(), True)
+            elif cmd == XVM_COMMAND.GET_DOSSIER:
+                dossier.getDossier(args)
+            elif cmd == XVM_COMMAND.GET_SVC_SETTINGS:
                 token.getToken()
                 return (token.networkServicesSettings, True)
-            elif cmd == XVM_COMMAND_GET_BATTLE_LEVEL:
+            elif cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:
                     return (arena.extraData.get('battleLevel', 0), True)
                 return (None, True)
-            elif cmd == XVM_COMMAND_GET_BATTLE_TYPE:
+            elif cmd == XVM_COMMAND.GET_BATTLE_TYPE:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:
                     return (arena.bonusType, True)
                 return (None, True)
-            elif cmd == XVM_COMMAND_LOAD_SETTINGS:
+            elif cmd == XVM_COMMAND.LOAD_SETTINGS:
                 default = None if len(args) < 2 else args[1]
                 return (userprefs.get(args[0], default), True)
-            elif cmd == XVM_COMMAND_SAVE_SETTINGS:
+            elif cmd == XVM_COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
                 return (None, True)
 
@@ -98,32 +103,29 @@ class Xvm(object):
             if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
             res = None
-            if cmd == COMMAND_LOG:
+            if cmd == AS2COMMAND.LOG:
                 log(*args)
-            elif cmd == COMMAND_GETSCREENSIZE:
+            elif cmd == AS2COMMAND.GETSCREENSIZE:
                 # return
                 res = simplejson.dumps(list(GUI.screenResolution()))
-            elif cmd == COMMAND_GETVEHICLEINFODATA:
-                # return
-                res = getVehicleInfoDataStr()
-            elif cmd == COMMAND_LOADBATTLESTAT:
+            elif cmd == AS2COMMAND.LOADBATTLESTAT:
                 getBattleStat(proxy, args)
-            elif cmd == COMMAND_LOADBATTLERESULTSSTAT:
+            elif cmd == AS2COMMAND.LOADBATTLERESULTSSTAT:
                 getBattleResultsStat(proxy, args)
-            elif cmd == COMMAND_LOADUSERDATA:
+            elif cmd == AS2COMMAND.LOADUSERDATA:
                 getUserData(proxy, args)
-            elif cmd == COMMAND_OPEN_URL:
+            elif cmd == AS2COMMAND.OPEN_URL:
                 if len(args[0]):
                     utils.openWebBrowser(args[0], False)
-            elif cmd == COMMAND_LOAD_SETTINGS:
+            elif cmd == AS2COMMAND.LOAD_SETTINGS:
                 res = userprefs.get(args[0])
-            elif cmd == COMMAND_SAVE_SETTINGS:
+            elif cmd == AS2COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
-            elif cmd == COMMAND_CAPTUREBARGETBASENUM:
+            elif cmd == AS2COMMAND.CAPTUREBARGETBASENUM:
                 n = int(args[0])
                 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
                 res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3, n >> 2)
-            elif cmd == COMMAND_TEST:
+            elif cmd == AS2COMMAND.TEST:
                 runTest(args)
             else:
                 return
@@ -171,7 +173,7 @@ class Xvm(object):
                         if self.checkKeyEventBattle(key, isDown):
                             movie = self.battleFlashObject.movie
                             if movie is not None:
-                                movie.invoke((RESPOND_KEY_EVENT, key, isDown))
+                                movie.invoke((AS2RESPOND.KEY_EVENT, key, isDown))
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())
         return True
@@ -250,7 +252,7 @@ class Xvm(object):
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
 
-        as_xfw_cmd(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
+        as_xfw_cmd(XVM_AS_COMMAND.SET_SVC_SETTINGS, token.networkServicesSettings)
 
     def hangarDispose(self):
         from CurrentVehicle import g_currentVehicle
@@ -261,7 +263,7 @@ class Xvm(object):
             g_minimap_circles.updateCurrentVehicle()
             if self.app is not None:
                 data = simplejson.dumps(config.config['minimap']['circles']['_internal'])
-                self.app.movie.invoke((RESPOND_UPDATECURRENTVEHICLE, [data]))
+                self.app.movie.invoke((AS2RESPOND.UPDATECURRENTVEHICLE, [data]))
         except Exception, ex:
             err(traceback.format_exc())
 
@@ -329,7 +331,7 @@ class Xvm(object):
             movie = flashObject.movie
             if movie is not None:
                 arena = BigWorld.player().arena
-                movie.invoke((RESPOND_CONFIG, [
+                movie.invoke((AS2RESPOND.CONFIG, [
                     self.config_str,
                     self.lang_str,
                     arena.extraData.get('battleLevel', 0),
@@ -411,7 +413,7 @@ class Xvm(object):
             return
 
         #debug('updateBattle: {0} {1}'.format(vID, set(state.items())))
-        movie.invoke((RESPOND_BATTLESTATE,
+        movie.invoke((AS2RESPOND.BATTLESTATE,
                       targets,
                       state['playerName'],
                       state['playerId'],
