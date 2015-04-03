@@ -13,7 +13,7 @@ package com.xvm
 
         public static function populateData():void
         {
-            instance.onVehicleInfoData(Xfw.cmd(XvmCommands.GET_VEHINFO));
+            instance.onVehicleInfoData(Xfw.cmd(XvmCommandsInternal.GET_VEHINFO));
         }
 
         public static function get(vehId:int):VehicleData

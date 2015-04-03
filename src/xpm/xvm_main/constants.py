@@ -16,13 +16,13 @@ class XVM_COMMAND(object):
     GET_BATTLE_LEVEL = "xvm.get_battle_level"
     GET_BATTLE_TYPE = "xvm.get_battle_type"
     GET_DOSSIER = "xvm.get_dossier"
-    #GET_SVC_SETTINGS = "xvm.get_svc_settings"
+    GET_SVC_SETTINGS = "xvm.get_svc_settings"
     GET_VEHINFO = "xvm.get_vehinfo"
-    #LOAD_SETTINGS = "xvm.load_settings"
+    LOAD_SETTINGS = "xvm.load_settings"
     LOAD_STAT_BATTLE = "xvm.load_stat_battle"
     LOAD_STAT_BATTLE_RESULTS = "xvm.load_stat_battle_results"
     LOAD_STAT_USER = "xvm.load_stat_user"
-    #SAVE_SETTINGS = "xvm.save_settings"
+    SAVE_SETTINGS = "xvm.save_settings"
     SET_CONFIG = "xvm.set_config"
     AS_DOSSIER = "xvm.as.dossier"
     AS_L10N = "xvm.as.l10n"
@@ -31,6 +31,7 @@ class XVM_COMMAND(object):
     AS_STAT_BATTLE_DATA = "xvm.as.stat_battle_data"
     AS_STAT_BATTLE_RESULTS_DATA = "xvm.as.stat_battle_results_data"
     AS_STAT_USER_DATA = "xvm.as.stat_user_data"
+    AS_UPDATE_CURRENT_VEHICLE = "xvm.as.update_current_vehicle"
 
 # ExternalInterface commands
 
@@ -50,7 +51,6 @@ class AS2RESPOND(object):
     BATTLE_STAT_DATA = "xvm.battle_stat_data"
     CONFIG = "xvm.config"
     KEY_EVENT = "xvm.keyevent"
-    UPDATE_CURRENT_VEHICLE = "xvm.update_current_vehicle"
 
 class TEAM(object):
     ALLY = 1

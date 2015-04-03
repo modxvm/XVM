@@ -43,7 +43,7 @@ package com.xvm
             if (!_initialized)
             {
                 _initialized = true;
-                Xfw.addCommandListener(XvmCommands.AS_DOSSIER, dossierLoaded);
+                Xfw.addCommandListener(XvmCommandsInternal.AS_DOSSIER, dossierLoaded);
             }
 
             var key:String = playerId + "," + vehId;
@@ -52,7 +52,7 @@ package com.xvm
                 _requests[key] = [];
             if (callback != null)
                 _requests[key].push( { target: target, callback: callback } );
-            Xfw.cmd(XvmCommands.GET_DOSSIER, battleType, playerId, vehId);
+            Xfw.cmd(XvmCommandsInternal.GET_DOSSIER, battleType, playerId, vehId);
         }
 
         private static function dossierLoaded(playerId:int, vehId:int, str:String):void

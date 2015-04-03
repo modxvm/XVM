@@ -5,11 +5,12 @@
 package xvm.hangar.views
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xfw.types.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.events.*;
+    import com.xvm.types.*;
     import net.wg.gui.lobby.battleloading.*;
+    import net.wg.infrastructure.events.*;
+    import net.wg.infrastructure.interfaces.*;
     import xvm.hangar.components.BattleLoading.*;
     import xvm.hangar.UI.battleLoading.*;
 
@@ -29,7 +30,7 @@ package xvm.hangar.views
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
 
-            Config.networkServicesSettings = new NetworkServicesSettings(Xvm.cmd(Defines.XVM_COMMAND_GET_SVC_SETTINGS));
+            Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
 
             logBriefConfigurationInfo();
 

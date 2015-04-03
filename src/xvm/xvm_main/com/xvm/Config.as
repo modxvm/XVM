@@ -170,7 +170,7 @@ package com.xvm
                     _config.languageDetected ? "detected" : "config"));
                 //Logger.addObject(_config, "config", 10);
 
-                Xfw.cmd(XvmCommands.SET_CONFIG, JSONx.stringify(Config.config, '', true), JSONx.stringify(Locale.s_lang, '', true));
+                Xfw.cmd(XvmCommandsInternal.SET_CONFIG, JSONx.stringify(Config.config, '', true), JSONx.stringify(Locale.s_lang, '', true));
                 Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
             }
             catch (ex:Error)

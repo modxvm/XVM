@@ -27,7 +27,7 @@ class com.xvm.Cmd
 
     public static function getScreenSize(target:Object, callback:Function)
     {
-        _call(target, callback, [COMMAND_GETSCREENSIZE]);
+        _call(target, callback, [COMMAND_GET_SCREEN_SIZE]);
     }
 
     public static function loadBattleStat(players:Array)
@@ -37,7 +37,7 @@ class com.xvm.Cmd
 
     public static function captureBarGetBaseNum(target:Object, callback:Function, id:Number)
     {
-        _call(target, callback, [COMMAND_CAPTUREBARGETBASENUM, id]);
+        _call(target, callback, [COMMAND_CAPTURE_BAR_GET_BASE_NUM, id]);
     }
 
     public static function profMethodStart(name:String)

@@ -17,6 +17,7 @@ Dossier;
 Locale;
 Stat;
 VehicleInfo;
+XvmCommands;
 XvmGlobals;
 
 import com.xvm.controls.*;

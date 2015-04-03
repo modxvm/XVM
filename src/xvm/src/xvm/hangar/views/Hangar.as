@@ -5,9 +5,8 @@
 package xvm.hangar.views
 {
     import com.xfw.*;
-    import com.xfw.io.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import flash.external.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -37,9 +36,10 @@ package xvm.hangar.views
 
         private function initVehicleParams():void
         {
-            ExternalInterface.addCallback(Cmd.RESPOND_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
+            Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
         }
 
+        // TODO: try without serialization
         private function onUpdateCurrentVehicle(json_str:String):void
         {
             try

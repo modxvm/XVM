@@ -20,8 +20,12 @@ package com.xvm
         //// Region
         public static const REGION_AUTO_DETECTION:String = "auto";
 
+        // Default path to vehicle icons (relative)
+        public static const WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
+        public static const WG_CONTOUR_ICON_NOIMAGE:String = WG_CONTOUR_ICON_PATH + "noImage.png";
+
         // res_mods/mods/shared_resources/xvm/res/
-        //public static const XVMRES_ROOT:String = "../../../mods/shared_resources/xvm/res/";
+        public static const XVMRES_ROOT:String = "../../../mods/shared_resources/xvm/res/";
 
         // Paths relative to /res_mods/0.x.x/
         // res_mods/mods/shared_resources/xvm/ (for <img> tag)
@@ -42,10 +46,6 @@ package com.xvm
 
         // res_mods/mods/shared_resources/xvm/l10n
         public static const XVM_L10N_DIR_NAME:String = XVM_RESOURCES_DIR_NAME + "l10n/";
-
-        //// Default path to vehicle icons (relative)
-        //public static const WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
-        //public static const WG_CONTOUR_ICON_NOIMAGE:String = WG_CONTOUR_ICON_PATH + "noImage.png";
 
         //public static const MAX_BATTLETIER_HPS:Array = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000];
 

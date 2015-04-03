@@ -1,8 +1,8 @@
 package xvm.hangar.components.BattleLoading
 {
     import com.xfw.*;
-    import com.xfw.misc.*;
-    import com.xfw.utils.*;
+    import com.xvm.*;
+    import com.xvm.utils.*;
     import net.wg.gui.lobby.battleloading.*;
 
     public class WinChances

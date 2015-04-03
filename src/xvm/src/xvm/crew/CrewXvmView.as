@@ -133,7 +133,7 @@ package xvm.crew
                 return;
             }
 
-            savedValue = Xvm.cmd(Defines.XVM_COMMAND_LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, false);
+            savedValue = Xvm.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, false);
             enablePrevCrewCheckBox.selected = savedValue;
 
             page.tmenXpPanel.validateNow();
@@ -153,7 +153,7 @@ package xvm.crew
         {
             if (enablePrevCrewCheckBox.enabled && enablePrevCrewCheckBox.selected != savedValue)
             {
-                Xvm.cmd(Defines.XVM_COMMAND_SAVE_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, enablePrevCrewCheckBox.selected);
+                Xvm.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, enablePrevCrewCheckBox.selected);
                 savedValue = enablePrevCrewCheckBox.selected;
                 tryPutPrevCrew();
             }

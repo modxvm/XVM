@@ -98,9 +98,9 @@ package com.xvm
             listenersBattle = new Vector.<Object>();
             listenersBattleResults = new Dictionary();
             listenersUser = new Dictionary();
-            Xfw.addCommandListener(XvmCommands.AS_STAT_BATTLE_DATA, battleLoaded);
-            Xfw.addCommandListener(XvmCommands.AS_STAT_BATTLE_RESULTS_DATA, battleResultsLoaded);
-            Xfw.addCommandListener(XvmCommands.AS_STAT_USER_DATA, userLoaded);
+            Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_BATTLE_DATA, battleLoaded);
+            Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_BATTLE_RESULTS_DATA, battleResultsLoaded);
+            Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_USER_DATA, userLoaded);
         }
 
         private function loadBattleStat(target:Object, callback:Function, force:Boolean):void
@@ -127,7 +127,7 @@ package com.xvm
                     return;
                 loading = true;
 
-                Xfw.cmd(XvmCommands.LOAD_STAT_BATTLE);
+                Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE);
             }
             catch (ex:Error)
             {
@@ -229,7 +229,7 @@ package com.xvm
             }
 
             if (!inProgress)
-                Xfw.cmd(XvmCommands.LOAD_STAT_BATTLE_RESULTS, arenaUniqueId);
+                Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE_RESULTS, arenaUniqueId);
         }
 
         private function battleResultsLoaded(json_str:String):void
@@ -320,7 +320,7 @@ package com.xvm
                 }
 
                 if (!inProgress)
-                    Xfw.cmd(XvmCommands.LOAD_STAT_USER, value, isId);
+                    Xfw.cmd(XvmCommandsInternal.LOAD_STAT_USER, value, isId);
             }
             catch (ex:Error)
             {

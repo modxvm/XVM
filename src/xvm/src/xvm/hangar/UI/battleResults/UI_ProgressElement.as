@@ -11,7 +11,7 @@ package xvm.hangar.UI.battleResults
         public function UI_ProgressElement()
         {
             super();
-            progressIndicator.textField.textColor = Defines.UICOLOR_VALUE;
+            progressIndicator.textField.textColor = XfwConst.UICOLOR_VALUE;
             var tf:TextFormat = progressIndicator.textField.defaultTextFormat;
             tf.size = 10;
             this.progressIndicator.textField.defaultTextFormat = tf;

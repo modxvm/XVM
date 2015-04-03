@@ -580,8 +580,8 @@ package com.xvm
 
             if (m_globals["battletier"] === undefined)
             {
-                var battleTier:Number = Xfw.cmd(XvmCommands.GET_BATTLE_LEVEL) || NaN;
-                var battleType:Number = Xfw.cmd(XvmCommands.GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
+                var battleTier:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_LEVEL) || NaN;
+                var battleType:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
 
                 switch (battleType)
                 {
