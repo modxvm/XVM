@@ -246,7 +246,7 @@ package xvm.hangar.components.BattleResults
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

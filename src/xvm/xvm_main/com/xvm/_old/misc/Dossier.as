@@ -92,9 +92,9 @@ package com.xvm.misc
                         target.callback.call(target.target, dossier);
                 }
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
+                Logger.err(ex);
             }
         }
 

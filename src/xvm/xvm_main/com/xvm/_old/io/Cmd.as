@@ -139,7 +139,7 @@ package com.xvm.io
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             finally
             {

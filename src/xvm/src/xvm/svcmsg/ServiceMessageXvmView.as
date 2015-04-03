@@ -34,7 +34,7 @@ package xvm.svcmsg
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

@@ -129,10 +129,10 @@ package com.xvm
 
                 Cmd.loadBattleStat();
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
-                throw e;
+                Logger.err(ex);
+                throw ex;
             }
         }
 
@@ -165,7 +165,7 @@ package com.xvm
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
                 Logger.add(json_str);
                 throw ex;
             }
@@ -181,13 +181,13 @@ package com.xvm
                     {
                         l.callback.call(l.target);
                     }
-                    catch (e:Error)
+                    catch (ex:Error)
                     {
-                        Logger.add(e.getStackTrace());
+                        Logger.err(ex);
                     }
-                    catch (e:*)
+                    catch (ex:*)
                     {
-                        Logger.addObject(e, 1, "exception");
+                        Logger.addObject(ex, 1, "exception");
                     }
                 }
                 listenersBattle = new Vector.<Object>();
@@ -256,10 +256,10 @@ package com.xvm
                     }
                 }
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
-                throw e;
+                Logger.err(ex);
+                throw ex;
             }
             finally
             {
@@ -278,9 +278,9 @@ package com.xvm
                         delete listenersBattleResults[arenaUniqueId];
                     }
                 }
-                catch (e:Error)
+                catch (ex:Error)
                 {
-                    Logger.add(e.getStackTrace());
+                    Logger.err(ex);
                 }
                 dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueId));
             }
@@ -322,10 +322,10 @@ package com.xvm
                 if (!inProgress)
                     Cmd.loadUserData(value, isId);
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
-                throw e;
+                Logger.err(ex);
+                throw ex;
             }
         }
 
@@ -347,10 +347,10 @@ package com.xvm
                 userCache[key2] = sd;
                 //Logger.add(key1 + ", " + key2);
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
-                throw e;
+                Logger.err(ex);
+                throw ex;
             }
             finally
             {
@@ -377,9 +377,9 @@ package com.xvm
                     delete listenersUser[key];
                 }
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
+                Logger.err(ex);
             }
         }
 

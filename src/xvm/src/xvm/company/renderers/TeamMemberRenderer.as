@@ -37,7 +37,7 @@ package xvm.company.renderers
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
 
         }
@@ -79,7 +79,7 @@ package xvm.company.renderers
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

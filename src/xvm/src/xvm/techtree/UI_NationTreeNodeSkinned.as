@@ -70,7 +70,7 @@ package xvm.techtree
                 }
                 catch (ex:Error)
                 {
-                    Logger.add(ex.getStackTrace());
+                    Logger.err(ex);
                 }
                 finally
                 {

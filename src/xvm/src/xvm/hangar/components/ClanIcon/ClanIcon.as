@@ -92,7 +92,7 @@ package xvm.hangar.components.ClanIcon
             }
             catch (ex:Error)
             {
-                Logger.addObject(ex.getStackTrace());
+                Logger.err(ex);
             }
 
             super.onLoadComplete(e);

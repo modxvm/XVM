@@ -112,9 +112,9 @@ package com.xvm
                 }
                 ConfigUtils.TuneupConfig(_config);
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -129,9 +129,9 @@ package com.xvm
                 if (_config.regionDetected)
                     _config.region = Xfw.cmd(XfwConst.XFW_COMMAND_GETGAMEREGION);
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -148,9 +148,9 @@ package com.xvm
                     _config.language = Xfw.cmd(XfwConst.XFW_COMMAND_GETGAMELANGUAGE);
                 Locale.LoadLocaleFile();
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -173,9 +173,9 @@ package com.xvm
                 Xfw.cmd(Defines.XVM_COMMAND_SETCONFIG, JSONx.stringify(Config.config, '', true), JSONx.stringify(Locale.s_lang, '', true));
                 Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
             }
-            catch (e:Error)
+            catch (ex:Error)
             {
-                Logger.add(e.getStackTrace());
+                Logger.err(ex);
             }
         }
     }

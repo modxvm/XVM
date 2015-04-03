@@ -80,7 +80,7 @@ package xvm.hangar.views
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

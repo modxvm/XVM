@@ -93,7 +93,7 @@ package xvm.hangar.components.BattleLoading
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -139,7 +139,7 @@ package xvm.hangar.components.BattleLoading
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

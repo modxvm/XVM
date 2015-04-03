@@ -26,7 +26,7 @@ package xvm.svcmsg.UI
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -38,7 +38,7 @@ package xvm.svcmsg.UI
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
     }

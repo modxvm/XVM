@@ -121,7 +121,7 @@ package com.xvm.utils
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return null;
         }
@@ -143,7 +143,7 @@ package com.xvm.utils
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return null;
         }
@@ -161,7 +161,7 @@ package com.xvm.utils
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return null;
         }
