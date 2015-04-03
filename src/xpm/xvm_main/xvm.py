@@ -54,7 +54,17 @@ class Xvm(object):
             if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
 
-            if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
+            if cmd == XVM_COMMAND_SETCONFIG:
+                # debug(XVM_COMMAND_SETCONFIG)
+                self.config_str = args[0]
+                config.config = simplejson.loads(self.config_str)
+                if len(args) >= 2:
+                    self.lang_str = args[1]
+                    self.lang_data = simplejson.loads(self.lang_str)
+                self.sendConfig(self.battleFlashObject)
+                self.sendConfig(self.vmmFlashObject)
+                return (None, True)
+            elif cmd == XVM_COMMAND_GET_SVC_SETTINGS:
                 token.getToken()
                 return (token.networkServicesSettings, True)
             elif cmd == XVM_COMMAND_GET_BATTLE_LEVEL:
@@ -88,15 +98,6 @@ class Xvm(object):
             res = None
             if cmd == COMMAND_LOG:
                 log(*args)
-            elif cmd == COMMAND_SET_CONFIG:
-                # debug('setConfig')
-                self.config_str = args[0]
-                config.config = simplejson.loads(self.config_str)
-                if len(args) >= 2:
-                    self.lang_str = args[1]
-                    self.lang_data = simplejson.loads(self.lang_str)
-                self.sendConfig(self.battleFlashObject)
-                self.sendConfig(self.vmmFlashObject)
             elif cmd == COMMAND_GETSCREENSIZE:
                 # return
                 res = simplejson.dumps(list(GUI.screenResolution()))

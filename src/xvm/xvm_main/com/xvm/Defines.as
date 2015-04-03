@@ -157,15 +157,14 @@ package com.xvm
         //public static const BATTLE_TYPE_SORTIE:int = 10;
         //public static const BATTLE_TYPE_FORT_BATTLE:int = 11;
         //public static const BATTLE_TYPE_RATED_CYBERSPORT:int = 12;
-//
-        //// Events
+
+        // Events
         //public static const XFW_EVENT_CMD_RECEIVED:String = "xfw.cmd_rvcd";
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";
-//
-        //// DAAPI commands
-        public static const XFW_COMMAND_SETCONFIG:String = "xvm.setconfig";
 
-//
+        // DAAPI commands
+        public static const XVM_COMMAND_SETCONFIG:String = "xvm.setconfig";
+
         //public static const XFW_COMMAND_LOADFILE:String = "xfw.loadFile";
         //public static const XFW_COMMAND_GETGAMEREGION:String = "xfw.gameRegion";
         //public static const XFW_COMMAND_GETGAMELANGUAGE:String = "xfw.gameLanguage";

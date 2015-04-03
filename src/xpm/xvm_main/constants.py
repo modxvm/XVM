@@ -11,6 +11,8 @@ XVM_WS_URL = "wss://echo.websocket.org/"
 
 # DAAPI commands
 
+XVM_COMMAND_SETCONFIG = "xvm.setconfig"
+
 XVM_COMMAND_GET_SVC_SETTINGS = "xvm.get_svc_settings"
 XVM_COMMAND_GET_BATTLE_LEVEL = "xvm.get_battle_level"
 XVM_COMMAND_GET_BATTLE_TYPE = "xvm.get_battle_type"
@@ -23,7 +25,6 @@ XVM_AS_COMMAND_L10N = "xvm.as.l10n"
 # ExternalInterface commands
 
 COMMAND_LOG = "log"
-COMMAND_SET_CONFIG = "setConfig"
 COMMAND_GETVEHICLEINFODATA = "getVehicleInfoData"
 COMMAND_GETSCREENSIZE = "getScreenSize"
 COMMAND_LOADBATTLESTAT = "loadBattleStat"

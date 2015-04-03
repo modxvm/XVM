@@ -12,7 +12,6 @@ package com.xvm.io
     public class Cmd
     {
         private static const COMMAND_LOG:String = "log";
-        //private static const COMMAND_SET_CONFIG:String = "setConfig";
         private static const COMMAND_GETSCREENSIZE:String = "getScreenSize";
         private static const COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
         private static const COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
@@ -36,13 +35,6 @@ package com.xvm.io
         {
             _call(null, null, [COMMAND_LOG, str]);
         }
-
-        /*public static function setConfig():void
-        {
-            _call(null, null, [COMMAND_SET_CONFIG,
-                JSONx.stringify(Config.config, '', true),
-                JSONx.stringify(Locale.s_lang, '', true)]);
-        }*/
 
         public static function getScreenSize(target:Object, callback:Function):void
         {

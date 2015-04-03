@@ -8,7 +8,6 @@ import flash.external.*;
 class com.xvm.Cmd
 {
     private static var COMMAND_LOG:String = "log";
-    private static var COMMAND_SET_CONFIG:String = "setConfig";
     private static var COMMAND_GETSCREENSIZE:String = "getScreenSize";
     private static var COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
     private static var COMMAND_LOADUSERDATA:String = "loadUserData";
@@ -25,11 +24,6 @@ class com.xvm.Cmd
     public static function log(str:String)
     {
         _call(null, null, [COMMAND_LOG, str]);
-    }
-
-    public static function setConfig()
-    {
-        _call(null, null, [COMMAND_SET_CONFIG, JSONx.stringify(Config.config, '', true)]);
     }
 
     public static function getScreenSize(target:Object, callback:Function)
