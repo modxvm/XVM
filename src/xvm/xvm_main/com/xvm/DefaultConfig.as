@@ -2,13 +2,13 @@
  * XVM Default Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.misc
+package com.xvm
 {
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
 
-    public class DefaultConfig
+    internal class DefaultConfig
     {
         public static function get config():CConfig
         {
@@ -72,7 +72,7 @@ package com.xvm.misc
 
             // Show ping to the servers
             c.pingServers = new CPingServers;
-            c.pingServers.enabled = true;
+            c.pingServers.enabled = false;
             c.pingServers.updateInterval = 10000; // msec
             c.pingServers.x = 5;
             c.pingServers.y = 30;

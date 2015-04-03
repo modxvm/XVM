@@ -5,7 +5,6 @@
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.misc.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;

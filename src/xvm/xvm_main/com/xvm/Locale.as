@@ -7,7 +7,6 @@
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.misc.*;
     import flash.events.*;
 
     public class Locale extends EventDispatcher

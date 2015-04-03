@@ -156,7 +156,7 @@ package xvm.ping.PingServers
             tf.alpha = cfg.alpha / 100.0;
             tf.htmlText =  "";
             if (cfg.shadow.enabled)
-                tf.filters = [ Utils.createShadowFilter(cfg.shadow) ];
+                tf.filters = [ Utils.createShadowFilterFromConfig(cfg.shadow) ];
             addChild(tf);
             return tf;
         }

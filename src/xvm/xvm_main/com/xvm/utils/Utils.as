@@ -16,7 +16,7 @@ package com.xvm.utils
         /**
          * Create DropShadowFilter from config section
          */
-        public static function createShadowFilter(cfg:CShadow):DropShadowFilter
+        public static function createShadowFilterFromConfig(cfg:CShadow):DropShadowFilter
         {
             // NOTE: quality arg is not working with Scaleform 4.2 AS3
             return cfg.enabled == false ? null : new DropShadowFilter(

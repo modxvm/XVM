@@ -2,7 +2,7 @@
  * XVM Config utils
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.misc
+package com.xvm
 {
     import com.xfw.*;
     import com.xvm.types.cfg.*;
@@ -10,7 +10,7 @@ package com.xvm.misc
     import flash.utils.*;
     import org.idmedia.as3commons.util.*;
 
-    public class ConfigUtils extends Object
+    internal class ConfigUtils
     {
         /**
          * Recursive walk default config and merge with loaded values.

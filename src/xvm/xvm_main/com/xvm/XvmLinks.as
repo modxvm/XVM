@@ -23,8 +23,7 @@ import com.xvm.infrastructure.*;
 XvmModBase;
 XvmViewBase;
 
-import com.xvm.misc.*;
-DefaultConfig;
+//import com.xvm.misc.*;
 //Chance; Dossier; Globals; IconLoader;
 
 import com.xvm.utils.*;
