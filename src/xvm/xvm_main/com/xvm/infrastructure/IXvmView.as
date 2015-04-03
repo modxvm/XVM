@@ -4,7 +4,7 @@
  */
 package com.xvm.infrastructure
 {
-    import com.xvm.infrastructure.*;
+    import com.xfw.infrastructure.*;
     import flash.events.*;
 
     public interface IXvmView extends IXfwView
