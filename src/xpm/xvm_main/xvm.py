@@ -21,6 +21,7 @@ import vehstate
 import token
 import utils
 import userprefs
+import configwatchdog
 from websock import g_websock
 from minimap_circles import g_minimap_circles
 from test import runTest
@@ -63,6 +64,7 @@ class Xvm(object):
                     self.lang_data = simplejson.loads(self.lang_str)
                 self.sendConfig(self.battleFlashObject)
                 self.sendConfig(self.vmmFlashObject)
+                configwatchdog.startConfigWatchdog()
                 return (None, True)
             elif cmd == XVM_COMMAND_GET_SVC_SETTINGS:
                 token.getToken()

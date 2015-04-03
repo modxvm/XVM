@@ -165,6 +165,8 @@ package com.xvm
         // DAAPI commands
         public static const XVM_COMMAND_SETCONFIG:String = "xvm.setconfig";
 
+        public static const XVM_AS_COMMAND_RELOAD_CONFIG:String = "xvm.as.reload_config";
+
         //public static const XFW_COMMAND_LOADFILE:String = "xfw.loadFile";
         //public static const XFW_COMMAND_GETGAMEREGION:String = "xfw.gameRegion";
         //public static const XFW_COMMAND_GETGAMELANGUAGE:String = "xfw.gameLanguage";
@@ -172,9 +174,7 @@ package com.xvm
         //public static const XFW_COMMAND_MESSAGEBOX:String = 'xfw.messageBox';
         //// args: message, type
         //// Types: gui.SystemMessages.SM_TYPE: 'Error', 'Warning', 'Information', 'GameGreeting', ...
-        //public static const XFW_COMMAND_SYSMESSAGE:String = 'xfw.systemMessage';
         //public static const XFW_AS_COMMAND_L10N:String = "xfw.as.l10n";
-        //public static const XFW_AS_COMMAND_RELOAD_CONFIG:String = "xfw.as.reload_config";
 //
         //public static const XVM_COMMAND_GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
         //public static const XVM_COMMAND_GET_BATTLE_LEVEL:String = "xvm.get_battle_level";
