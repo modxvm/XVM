@@ -1,8 +1,8 @@
 package xvm.profile.components
 {
     import com.xfw.*;
-    import com.xfw.misc.*;
-    import com.xfw.types.dossier.*;
+    import com.xvm.*;
+    import com.xvm.types.dossier.*;
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;

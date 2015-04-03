@@ -5,8 +5,9 @@
 package xvm.clock
 {
     import com.xfw.*;
-    import com.xfw.types.cfg.*;
-    import com.xfw.utils.*;
+    import com.xvm.*;
+    import com.xvm.types.cfg.*;
+    import com.xvm.utils.*;
     import flash.display.*;
     import flash.utils.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
@@ -64,7 +65,7 @@ package xvm.clock
                 createBackgroundImage(cfg.bgImage);
             textField.rotation = cfg.rotation;
             if (cfg.shadow.enabled)
-                textField.filters = [ WGUtils.createShadowFilter(cfg.shadow) ];
+                textField.filters = [ Utils.createShadowFilterFromConfig(cfg.shadow) ];
 
             invalidate();
 

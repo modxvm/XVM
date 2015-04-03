@@ -452,7 +452,7 @@ class _Stat(object):
 
         # try to add changed nick and comment
         try:
-            import xvm_comments.python.contacts as contacts
+            import xvm_contacts.python.contacts as contacts
             stat['xvm_contact_data'] = contacts.getXvmContactData(stat['_id'])
         except:
             #err(traceback.format_exc())

@@ -1,8 +1,8 @@
 package xvm.company.renderers
 {
     import com.xfw.*;
-    import com.xfw.utils.*;
-    import com.xfw.types.stat.*;
+    import com.xvm.*;
+    import com.xvm.types.stat.*;
     import flash.events.*;
     import flash.text.*;
     import net.wg.gui.prebattle.controls.*;

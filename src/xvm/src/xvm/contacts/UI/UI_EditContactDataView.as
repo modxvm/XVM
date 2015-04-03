@@ -1,6 +1,11 @@
-﻿package xvm.comments.UI
+﻿/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
+package xvm.contacts.UI
 {
     import com.xfw.*;
+    import com.xvm.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.data.constants.*;

@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_comments\actionscript\xvm_comments.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_contacts\actionscript\xvm_contacts.swf" />
     <movie fps="30" />
     <movie width="1" />
     <movie height="1" />
@@ -74,7 +74,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\xvm\comments\CommentsXvmMod.as" />
+    <compile path="src\xvm\contacts\ContactsXvmMod.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

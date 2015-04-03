@@ -88,6 +88,10 @@ class Xvm(object):
             elif cmd == XVM_COMMAND.LOAD_STAT_USER:
                 getUserData(args)
                 return (None, True)
+            elif cmd == XVM_COMMAND.OPEN_URL:
+                if len(args[0]):
+                    utils.openWebBrowser(args[0], False)
+                return (None, True)
             elif cmd == XVM_COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
                 return (None, True)
@@ -122,9 +126,6 @@ class Xvm(object):
                 res = simplejson.dumps(list(GUI.screenResolution()))
             elif cmd == AS2COMMAND.LOAD_BATTLE_STAT:
                 getBattleStat(args, proxy)
-            elif cmd == AS2COMMAND.OPEN_URL:
-                if len(args[0]):
-                    utils.openWebBrowser(args[0], False)
             elif cmd == AS2COMMAND.LOAD_SETTINGS:
                 res = userprefs.get(args[0])
             elif cmd == AS2COMMAND.SAVE_SETTINGS:

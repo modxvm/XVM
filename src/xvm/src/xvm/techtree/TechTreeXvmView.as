@@ -5,8 +5,8 @@
 package xvm.techtree
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xfw.misc.*;
     import flash.utils.*;
     import net.wg.gui.lobby.techtree.*;
     import net.wg.infrastructure.events.*;

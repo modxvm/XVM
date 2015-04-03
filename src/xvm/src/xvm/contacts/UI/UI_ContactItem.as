@@ -1,7 +1,8 @@
 ﻿/**
+ * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.comments.UI
+package xvm.contacts.UI
 {
     import com.xfw.*;
     import net.wg.gui.messenger.data.*;

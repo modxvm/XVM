@@ -22,6 +22,7 @@ class XVM_COMMAND(object):
     LOAD_STAT_BATTLE = "xvm.load_stat_battle"
     LOAD_STAT_BATTLE_RESULTS = "xvm.load_stat_battle_results"
     LOAD_STAT_USER = "xvm.load_stat_user"
+    OPEN_URL = "xvm.open_url"
     SAVE_SETTINGS = "xvm.save_settings"
     SET_CONFIG = "xvm.set_config"
     AS_DOSSIER = "xvm.as.dossier"
@@ -42,7 +43,6 @@ class AS2COMMAND(object):
     LOGSTAT = "logstat"
     LOAD_BATTLE_STAT = "load_battle_stat"
     LOAD_SETTINGS = "load_settings"
-    OPEN_URL = "openUrl"
     SAVE_SETTINGS = "save_settings"
     TEST = "test"
 

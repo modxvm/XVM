@@ -5,6 +5,7 @@
 package xvm.company
 {
     import com.xfw.*;
+    import com.xvm.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.gui.prebattle.company.*;
     import xvm.company.UI.*;

@@ -1,9 +1,9 @@
 package xvm.tcarousel
 {
     import com.xfw.*;
-    import com.xfw.misc.*;
-    import com.xfw.types.cfg.*;
-    import com.xfw.types.dossier.*;
+    import com.xvm.*;
+    import com.xvm.types.cfg.*;
+    import com.xvm.types.dossier.*;
     import flash.display.*;
     import flash.geom.*;
     import flash.text.*;

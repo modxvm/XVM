@@ -1,12 +1,11 @@
 package xvm.tcarousel
 {
     import com.xfw.*;
-    import com.xfw.controls.*;
-    import com.xfw.io.*;
-    import com.xfw.misc.*;
-    import com.xfw.types.cfg.*;
-    import com.xfw.types.dossier.*;
-    import com.xfw.types.veh.*;
+    import com.xvm.*;
+    import com.xvm.controls.*;
+    import com.xvm.types.cfg.*;
+    import com.xvm.types.dossier.*;
+    import com.xvm.types.veh.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.data.constants.*;
@@ -100,7 +99,7 @@ package xvm.tcarousel
 
                 //return; // temporary disabled
                 createFilters();
-                Cmd.loadSettings(this, onFiltersLoaded, SETTINGS_CAROUSEL_FILTERS_KEY);
+                onFiltersLoaded(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
             }
             catch (ex:Error)
             {
@@ -629,13 +628,12 @@ package xvm.tcarousel
             }
         }
 
-        private function onFiltersLoaded(filter_str:String):void
+        private function onFiltersLoaded(filter:Object):void
         {
             //Logger.add("UI_TankCarousel.onFiltersLoaded()");
 
             try
             {
-                var filter:Object = JSONx.parse(filter_str);
                 if (filter != null)
                 {
                     levelFilter.selectedItems = filter.levels;
@@ -655,8 +653,7 @@ package xvm.tcarousel
 
             try
             {
-                Cmd.saveSettings(SETTINGS_CAROUSEL_FILTERS_KEY,
-                    JSONx.stringify( { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, '', true));
+                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems });
                 onFilterChanged();
             }
             catch (ex:Error)

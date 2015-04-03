@@ -1,7 +1,7 @@
 package xvm.quests
 {
     import com.xfw.*;
-    import com.xfw.io.*;
+    import com.xvm.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.components.controls.*;
@@ -14,6 +14,7 @@ package xvm.quests
     public dynamic class UI_QuestsTileChainsView extends QuestsTileChainsViewUI
     {
         private static const SETTINGS_VERSION:String = "1.0";
+        private static const SETTINGS_TILE_CHAINS_VIEW_FILTERS:String = "xvm_quests/tile_chains_view_filters";
 
         public function UI_QuestsTileChainsView()
         {
@@ -43,7 +44,7 @@ package xvm.quests
                     hideUnavailableTasks.x = taskFilters.hideCompletedTasks.x;
                     hideUnavailableTasks.visible = true;
                 }, 0);
-                Cmd.loadSettings(this, restoreSettings, "questsTileChainsViewFilters");
+                loadedSettings = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, null);
             }
             catch (ex:Error)
             {
@@ -180,19 +181,8 @@ package xvm.quests
                 hideFullyCompletedTasks: this.hideFullyCompletedTasks.selected,
                 hideUnavailableTasks: this.hideUnavailableTasks.selected
             };
-            Cmd.saveSettings("questsTileChainsViewFilters", JSONx.stringify(settings));
-        }
 
-        private function restoreSettings(json_str:String):void
-        {
-            try
-            {
-                loadedSettings = (json_str == null || json_str == "") ? null : JSONx.parse(json_str);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, settings);
         }
 
         private function applyLoadedSettings():void

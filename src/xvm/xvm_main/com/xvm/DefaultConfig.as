@@ -492,7 +492,7 @@ package com.xvm
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 6, y: 1, align: "center", bindToIcon: true, format: "{{spotted}}", shadow: {} }
+                    { x: 6, y: 1, align: "center", bindToIcon: true, alpha: "{{a:spotted}}", format: "<font color='{{c:spotted}}'>{{spotted}}</font>", shadow: {} }
                 ]
             };
             // Medium1 mode.
@@ -507,7 +507,7 @@ package com.xvm
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 6, y: 1, align: "center", bindToIcon: true, format: "{{spotted}}", shadow: {} }
+                    { x: 6, y: 1, align: "center", bindToIcon: true, alpha: "{{a:spotted}}", format: "<font color='{{c:spotted}}'>{{spotted}}</font>", shadow: {} }
                 ]
             };
             // Medium2 mode.
@@ -522,7 +522,7 @@ package com.xvm
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 6, y: 1, align: "center", bindToIcon: true, format: "{{spotted}}", shadow: {} }
+                    { x: 6, y: 1, align: "center", bindToIcon: true, alpha: "{{a:spotted}}", format: "<font color='{{c:spotted}}'>{{spotted}}</font>", shadow: {} }
                 ]
             };
             // Large mode.
@@ -539,7 +539,7 @@ package com.xvm
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: [
-                    { x: 6, y: 1, align: "center", bindToIcon: true, format: "{{spotted}}", shadow: {} }
+                    { x: 6, y: 1, align: "center", bindToIcon: true, alpha: "{{a:spotted}}", format: "<font color='{{c:spotted}}'>{{spotted}}</font>", shadow: {} }
                 ]
             };
 
@@ -1111,13 +1111,13 @@ package com.xvm
             };
             c.spotted = {
                 neverSeen:	"0x000000",
-                lost:		"0x999999",
-                revealed:	"0x00DE00",
-                dead:		"0x000000",
+                lost:		"0xD9D9D9",
+                revealed:	"0xFE0E00",
+                dead:		"0xFFFFFF",
                 neverSeen_arty:	"0x000000",
-                lost_arty:	"0x999999",
-                revealed_arty:	"0xDE0000",
-                dead_arty:	"0x000000"
+                lost_arty:	"0xD9D9D9",
+                revealed_arty:	"0xFE0E00",
+                dead_arty:	"0xFFFFFF"
             };
             // values - from min to max, colors are for values 'lesser then ...'
             c.hp = [
@@ -1410,13 +1410,13 @@ package com.xvm
 
             c.spotted = new CTextsSpotted();
             c.spotted.neverSeen = "";
-            c.spotted.lost = "<font face='xvm' size='23' color='#D9D9D9'>&#x70;</font>";
-            c.spotted.revealed = "<font face='xvm' size='23' color='#FE0E00'>&#x70;</font>";
-            c.spotted.dead = "<font face='xvm' size='23' color='#FFFFFF' alpha='#80'>&#x76;</font>";
+            c.spotted.lost = "<font face='xvm' size='23'>&#x70;</font>";
+            c.spotted.revealed = "<font face='xvm' size='23'>&#x70;</font>";
+            c.spotted.dead = "<font face='xvm' size='23' alpha='#80'>&#x76;</font>";
             c.spotted.neverSeen_arty = "";
-            c.spotted.lost_arty = "<font face='xvm' size='23' color='#D9D9D9'>&#x70;</font>";
-            c.spotted.revealed_arty = "<font face='xvm' size='23' color='#FE0E00'>&#x70;</font>";
-            c.spotted.dead_arty = "<font face='xvm' size='23' color='#FFFFFF' alpha='#80'>&#x76;</font>";
+            c.spotted.lost_arty = "<font face='xvm' size='23'>&#x70;</font>";
+            c.spotted.revealed_arty = "<font face='xvm' size='23'>&#x70;</font>";
+            c.spotted.dead_arty = "<font face='xvm' size='23' alpha='#80'>&#x76;</font>";
 
             c.xvmuser = new CTextsXvmUser();
             c.xvmuser.on = "on";

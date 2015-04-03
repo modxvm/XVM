@@ -5,7 +5,8 @@
 package xvm.company
 {
     import com.xfw.*;
-    import net.wg.gui.components.controls.*;
+    import com.xvm.*;
+    import net.wg.gui.components.controls.CheckBox;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.gui.prebattle.company.*;
     import xvm.company.UI.*;

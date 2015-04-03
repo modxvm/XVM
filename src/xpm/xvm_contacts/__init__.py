@@ -13,7 +13,6 @@ XFW_GAME_VERSIONS  = ["0.9.7"]
 
 class COMMANDS(object):
     AS_EDIT_CONTACT_DATA = "xvm_contacts.as_edit_contact_data"
-#    GET_CONTACTS = "xvm_contacts.get_contacts"
 
 class MENU(object):
     XVM_EDIT_CONTACT_DATA = 'XvmEditContactData'

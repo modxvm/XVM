@@ -5,9 +5,8 @@
 package xvm.profile
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xfw.misc.*;
-    import com.xfw.utils.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;
@@ -134,7 +133,7 @@ package xvm.profile
                     {
                         page.listComponent.techniqueList.rowHeight = 32;
 
-                        var tp:TechniquePage = new TechniquePage(page, Globals[Globals.NAME]);
+                        var tp:TechniquePage = new TechniquePage(page, XvmGlobals[XvmGlobals.CURRENT_USER_NAME]);
                         page.addChild(tp);
                     }
                     return;

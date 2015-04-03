@@ -5,9 +5,9 @@
 package xvm.squad
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xfw.utils.*;
-    import com.xfw.types.veh.*;
+    import com.xvm.types.veh.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.prebattle.squad.*;
     import net.wg.infrastructure.events.*;

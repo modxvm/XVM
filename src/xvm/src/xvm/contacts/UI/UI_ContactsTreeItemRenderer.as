@@ -1,10 +1,12 @@
 ﻿/**
+ * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.comments.UI
+package xvm.contacts.UI
 {
     import com.xfw.*;
-    import com.xfw.utils.*;
+    import com.xvm.*;
+    import com.xvm.utils.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
@@ -89,7 +91,7 @@ package xvm.comments.UI
                 return;
 
             App.toolTipMgr.show(d.data.userProps.userName + "\n\n" +
-                "<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+                "<font color='" + XfwUtils.toHtmlColor(XfwConst.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
         }
 
         // PRIVATE

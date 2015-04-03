@@ -5,8 +5,8 @@
 package xvm.techtree
 {
     import com.xfw.*;
-    import com.xfw.misc.*;
-    import com.xfw.types.dossier.*;
+    import com.xvm.*;
+    import com.xvm.types.dossier.*;
     import flash.text.*;
     import net.wg.gui.lobby.techtree.constants.*;
     import net.wg.gui.lobby.techtree.data.state.*;
