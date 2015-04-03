@@ -5,7 +5,7 @@
 package xvm.techtree
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
 
     public class TechTreeXvmMod extends XvmModBase
     {

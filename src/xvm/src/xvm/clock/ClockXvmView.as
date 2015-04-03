@@ -5,7 +5,7 @@
 package xvm.clock
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import com.xfw.types.cfg.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.events.*;

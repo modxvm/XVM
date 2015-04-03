@@ -5,7 +5,7 @@
 package xvm.quests
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
 
     public class QuestsXvmMod extends XvmModBase
     {

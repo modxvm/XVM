@@ -5,7 +5,7 @@
 package xvm.tcarousel
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import com.xfw.misc.*;
     import com.xfw.utils.*;
     import com.xfw.types.dossier.*;

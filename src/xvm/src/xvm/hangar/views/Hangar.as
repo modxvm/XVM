@@ -6,7 +6,7 @@ package xvm.hangar.views
 {
     import com.xfw.*;
     import com.xfw.io.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import flash.external.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;

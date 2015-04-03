@@ -6,7 +6,7 @@ package xvm.comments
 {
     import com.xfw.*;
     import com.xfw.events.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import flash.utils.*;
     import net.wg.gui.messenger.*;
     import net.wg.gui.messenger.data.*;

@@ -5,7 +5,7 @@
 package xvm.clock
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
 
     public class ClockXvmMod extends XvmModBase
     {

@@ -5,7 +5,7 @@
 package xvm.profile
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
 
     public class ProfileXvmMod extends XvmModBase
     {

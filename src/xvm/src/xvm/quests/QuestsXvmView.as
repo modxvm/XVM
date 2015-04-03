@@ -5,7 +5,7 @@
 package xvm.quests
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import flash.utils.*;
     import net.wg.gui.lobby.questsWindow.*;
     import net.wg.infrastructure.events.*;

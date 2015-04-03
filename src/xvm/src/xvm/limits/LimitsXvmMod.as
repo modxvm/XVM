@@ -5,7 +5,7 @@
 package xvm.limits
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
 
     public class LimitsXvmMod extends XvmModBase
     {

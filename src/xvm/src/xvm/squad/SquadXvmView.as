@@ -5,7 +5,7 @@
 package xvm.squad
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import com.xfw.utils.*;
     import com.xfw.types.veh.*;
     import net.wg.gui.components.windows.*;

@@ -5,7 +5,7 @@
 package xvm.profile
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import com.xfw.misc.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;

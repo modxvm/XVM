@@ -5,7 +5,7 @@
 package xvm.hangar.views
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import flash.utils.*;
     import net.wg.gui.login.impl.*;
     import net.wg.infrastructure.events.*;

@@ -5,7 +5,7 @@
 package xvm.limits
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import com.xfw.types.cfg.*;
     import flash.events.Event;
     import flash.utils.*;

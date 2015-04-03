@@ -5,7 +5,7 @@
 package xvm.company
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
 
     public class CompanyXvmMod extends XvmModBase
     {

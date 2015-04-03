@@ -5,7 +5,7 @@
 package xvm.profile
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import com.xfw.misc.*;
     import com.xfw.utils.*;
     import net.wg.gui.components.windows.*;

@@ -5,7 +5,7 @@
 package com.xvm.infrastructure
 {
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xvm.infrastructure.*;
     import flash.events.*;
     import net.wg.infrastructure.interfaces.*;
 
