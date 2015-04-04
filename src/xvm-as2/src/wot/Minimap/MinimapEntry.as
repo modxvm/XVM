@@ -44,6 +44,11 @@ class wot.Minimap.MinimapEntry
         return this.drawImpl.apply(this, arguments);
     }
 
+    function onEnterFrameHandler()
+    {
+        return this.onEnterFrameHandlerImpl.apply(this, arguments);
+    }
+
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -139,6 +144,13 @@ class wot.Minimap.MinimapEntry
         rescaleAttachments();
 
         Cmd.profMethodEnd("MinimapEntry.draw()");
+    }
+
+    function onEnterFrameHandlerImpl()
+    {
+        base.onEnterFrameHandler();
+        labelMc._x = wrapper._x;
+        labelMc._y = wrapper._y;
     }
 
     // INTERNAL

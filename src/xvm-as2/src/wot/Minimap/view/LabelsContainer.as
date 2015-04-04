@@ -115,7 +115,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             if (previousStatus != actualStatus || force)
             {
                 labelMc[STATUS_FIELD_NAME] = actualStatus;
-                LabelViewBuilder.removeTextField(labelMc);
                 LabelViewBuilder.createTextField(labelMc);
                 updateLabelDepth(labelMc);
             }
@@ -131,7 +130,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function _getLabel(playerId:Number):MovieClip
     {
-
         if (holderMc[playerId] == null)
             createLabel(playerId);
         return holderMc[playerId];
@@ -167,11 +165,9 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
          * It makes unpleasant label positioning at map center.
          * Workaround.
          */
-        var offmapPoint:Point = new Point(OFFMAP_COORDINATE, OFFMAP_COORDINATE);
-        labelMc._x = offmapPoint.x;
-        labelMc._y = offmapPoint.y;
+        labelMc._x = OFFMAP_COORDINATE;
+        labelMc._y = OFFMAP_COORDINATE;
 
-        LabelViewBuilder.removeTextField(labelMc);
         LabelViewBuilder.createTextField(labelMc);
     }
 
