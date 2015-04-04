@@ -1,7 +1,7 @@
 package xvm.profile.components
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
 

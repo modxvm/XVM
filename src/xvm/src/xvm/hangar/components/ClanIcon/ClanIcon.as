@@ -4,8 +4,9 @@
  */
 package xvm.hangar.components.ClanIcon
 {
+    import com.xfw.*;
+    import com.xfw.components.*;
     import com.xvm.*;
-    import com.xvm.misc.*;
     import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
@@ -25,10 +26,10 @@ package xvm.hangar.components.ClanIcon
             this.cfg = cfg;
             this.nick = nick;
 
-            x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
-            if (team == Defines.TEAM_ENEMY)
+            x = dx + (team == XfwConst.TEAM_ALLY ? cfg.x : -cfg.xr);
+            if (team == XfwConst.TEAM_ENEMY)
                 x -= cfg.w;
-            y = dy + (team == Defines.TEAM_ALLY ? cfg.y : cfg.yr);
+            y = dy + (team == XfwConst.TEAM_ALLY ? cfg.y : cfg.yr);
 
             alpha = isFinite(cfg.alpha) ? cfg.alpha : 100;
 
@@ -92,7 +93,7 @@ package xvm.hangar.components.ClanIcon
             }
             catch (ex:Error)
             {
-                Logger.addObject(ex.getStackTrace());
+                Logger.err(ex);
             }
 
             super.onLoadComplete(e);

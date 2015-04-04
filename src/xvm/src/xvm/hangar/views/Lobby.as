@@ -4,7 +4,7 @@
  */
 package xvm.hangar.views
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.events.*;

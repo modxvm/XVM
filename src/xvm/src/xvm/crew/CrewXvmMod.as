@@ -4,7 +4,7 @@
  */
 package xvm.crew
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
 
     public class CrewXvmMod extends XvmModBase

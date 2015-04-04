@@ -1,7 +1,7 @@
 package xvm.company.renderers
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import flash.events.*;
     import flash.text.*;
@@ -37,7 +37,7 @@ package xvm.company.renderers
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
 
         }
@@ -79,7 +79,7 @@ package xvm.company.renderers
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

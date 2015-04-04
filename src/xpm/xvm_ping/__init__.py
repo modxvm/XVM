@@ -3,16 +3,17 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION    = "2.0.0"
+XFW_MOD_VERSION    = "3.0.0"
 XFW_MOD_URL        = "http://www.modxvm.com/"
 XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XFW_GAME_VERSIONS  = ["0.9.6","0.9.7"]
+XFW_GAME_VERSIONS  = ["0.9.7"]
 
 #####################################################################
 # constants
 
-XFW_COMMAND_PING = "xfw.ping"
-XFW_AS_COMMAND_PINGDATA = "xfw.pingdata"
+class XVM_PING_COMMAND(object):
+    PING = "xvm_ping.ping"
+    AS_PINGDATA = "xvm_ping.as.pingdata"
 
 #####################################################################
 # includes
@@ -35,16 +36,16 @@ import pinger
 
 def start():
     from gui.shared import g_eventBus
-    g_eventBus.addListener(XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
 def fini():
     from gui.shared import g_eventBus
-    g_eventBus.removeListener(XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
 # onXfwCommand
 
 _LOG_COMMANDS = (
-    #XFW_COMMAND_PING,
+    #XVM_PING_COMMAND.PING,
 )
 
 # returns: (result, status)
@@ -52,7 +53,7 @@ def onXfwCommand(cmd, *args):
     try:
         if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
             debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-        if cmd == XFW_COMMAND_PING:
+        if cmd == XVM_PING_COMMAND.PING:
             pinger.ping()
             return (None, True)
     except Exception, ex:

@@ -1,7 +1,7 @@
 package xvm.profile.components
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import flash.display.*;
     import flash.events.*;
@@ -57,7 +57,7 @@ package xvm.profile.components
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -99,7 +99,7 @@ package xvm.profile.components
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -132,7 +132,7 @@ package xvm.profile.components
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

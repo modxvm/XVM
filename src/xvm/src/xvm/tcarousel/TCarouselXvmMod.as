@@ -4,7 +4,7 @@
  */
 package xvm.tcarousel
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
 
     public class TCarouselXvmMod extends XvmModBase

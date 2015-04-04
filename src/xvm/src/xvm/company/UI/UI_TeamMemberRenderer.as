@@ -1,6 +1,6 @@
 package xvm.company.UI
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import flash.events.*;
     import xvm.company.renderers.*;
 

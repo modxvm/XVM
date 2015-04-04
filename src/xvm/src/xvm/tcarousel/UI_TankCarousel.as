@@ -1,9 +1,8 @@
 package xvm.tcarousel
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.controls.*;
-    import com.xvm.io.*;
-    import com.xvm.misc.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.veh.*;
@@ -100,11 +99,11 @@ package xvm.tcarousel
 
                 //return; // temporary disabled
                 createFilters();
-                Cmd.loadSettings(this, onFiltersLoaded, SETTINGS_CAROUSEL_FILTERS_KEY);
+                onFiltersLoaded(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -124,7 +123,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -140,7 +139,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -161,7 +160,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -175,7 +174,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -224,7 +223,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -241,7 +240,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return _visibleSlots;
         }
@@ -273,7 +272,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -289,7 +288,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -305,7 +304,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -328,7 +327,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return _currentFirstRendererOnAnim;
         }
@@ -351,7 +350,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -367,7 +366,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -403,7 +402,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -435,7 +434,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return false;
         }
@@ -579,7 +578,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -625,17 +624,16 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
-        private function onFiltersLoaded(filter_str:String):void
+        private function onFiltersLoaded(filter:Object):void
         {
             //Logger.add("UI_TankCarousel.onFiltersLoaded()");
 
             try
             {
-                var filter:Object = JSONx.parse(filter_str);
                 if (filter != null)
                 {
                     levelFilter.selectedItems = filter.levels;
@@ -645,7 +643,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -655,13 +653,12 @@ package xvm.tcarousel
 
             try
             {
-                Cmd.saveSettings(SETTINGS_CAROUSEL_FILTERS_KEY,
-                    JSONx.stringify( { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, '', true));
+                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems });
                 onFilterChanged();
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -723,7 +720,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
 
             //Logger.add("< " + vehIds.length);

@@ -4,10 +4,9 @@
  */
 package xvm.profile
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.misc.*;
-    import com.xvm.utils.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;
@@ -69,7 +68,7 @@ package xvm.profile
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             */
         }
@@ -82,7 +81,7 @@ package xvm.profile
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -118,7 +117,7 @@ package xvm.profile
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -134,7 +133,7 @@ package xvm.profile
                     {
                         page.listComponent.techniqueList.rowHeight = 32;
 
-                        var tp:TechniquePage = new TechniquePage(page, Globals[Globals.NAME]);
+                        var tp:TechniquePage = new TechniquePage(page, XvmGlobals[XvmGlobals.CURRENT_USER_NAME]);
                         page.addChild(tp);
                     }
                     return;
@@ -164,7 +163,7 @@ package xvm.profile
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
     }

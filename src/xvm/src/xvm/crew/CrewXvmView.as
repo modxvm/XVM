@@ -4,8 +4,8 @@
  */
 package xvm.crew
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.events.*;
     import com.xvm.infrastructure.*;
     import flash.events.*;
     import flash.utils.*;
@@ -18,8 +18,8 @@ package xvm.crew
     {
         private static const SETTINGS_AUTO_PREV_CREW:String = "xvm_crew/auto_prev_crew/";
 
-        private static const COMMAND_PUT_PREVIOUS_CREW:String = 'xvm_crew.put_previous_crew';
-        private static const AS_VEHICLE_CHANGED:String = 'xvm_crew.as_vehicle_changed';
+        private static const COMMAND_XVM_CREW_PUT_PREVIOUS_CREW:String = 'xvm_crew.put_previous_crew';
+        private static const COMMAND_XVM_CREW_AS_VEHICLE_CHANGED:String = 'xvm_crew.as_vehicle_changed';
 
         private static const L10N_ENABLE_PREV_CREW:String = "lobby/crew/enable_prev_crew";
         private static const L10N_ENABLE_PREV_CREW_TOOLTIP:String = "lobby/crew/enable_prev_crew_tooltip";
@@ -45,7 +45,7 @@ package xvm.crew
             //Logger.add('onBeforePopulate');
             if (Config.config.hangar.enableCrewAutoReturn)
             {
-                Xvm.addEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
+                Xfw.addCommandListener(COMMAND_XVM_CREW_AS_VEHICLE_CHANGED, onVehicleChanged);
                 initTmenXpPanel();
             }
         }
@@ -59,7 +59,7 @@ package xvm.crew
         {
             if (enablePrevCrewCheckBox != null)
             {
-                Xvm.removeEventListener(Defines.XFW_EVENT_CMD_RECEIVED, handleXfwCommand);
+                Xfw.removeCommandListener(COMMAND_XVM_CREW_AS_VEHICLE_CHANGED, onVehicleChanged);
                 enablePrevCrewCheckBox.dispose();
                 enablePrevCrewCheckBox = null;
             }
@@ -91,7 +91,7 @@ package xvm.crew
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -99,25 +99,6 @@ package xvm.crew
         {
             if (e.target.toolTip)
                 setTimeout(function():void { App.toolTipMgr.show(e.target.toolTip); }, 1);
-        }
-
-        private function handleXfwCommand(e:XfwCmdReceivedEvent):void
-        {
-            //Logger.add("handleXfwCommand");
-            try
-            {
-                switch (e.cmd)
-                {
-                    case AS_VEHICLE_CHANGED:
-                        e.stopImmediatePropagation();
-                        onVehicleChanged.apply(this, e.args);
-                        return;
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
         }
 
         private function onVehicleChanged(vehId:Number, isElite:Boolean):void
@@ -133,7 +114,7 @@ package xvm.crew
                 return;
             }
 
-            savedValue = Xvm.cmd(Defines.XVM_COMMAND_LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, false);
+            savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, false);
             enablePrevCrewCheckBox.selected = savedValue;
 
             page.tmenXpPanel.validateNow();
@@ -153,7 +134,7 @@ package xvm.crew
         {
             if (enablePrevCrewCheckBox.enabled && enablePrevCrewCheckBox.selected != savedValue)
             {
-                Xvm.cmd(Defines.XVM_COMMAND_SAVE_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, enablePrevCrewCheckBox.selected);
+                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, enablePrevCrewCheckBox.selected);
                 savedValue = enablePrevCrewCheckBox.selected;
                 tryPutPrevCrew();
             }
@@ -162,7 +143,7 @@ package xvm.crew
         private function tryPutPrevCrew():void
         {
             if (savedValue)
-                Xvm.cmd(COMMAND_PUT_PREVIOUS_CREW);
+                Xfw.cmd(COMMAND_XVM_CREW_PUT_PREVIOUS_CREW);
         }
 
     }

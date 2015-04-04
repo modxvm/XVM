@@ -1,18 +1,20 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
-from constants import XVM_LOG_FILE_NAME
-from xfw import Logger
+from xfw import *
+from xfw import swf
+from xfw.constants import PATH
+
+if swf.g_xvmlogger is None:
+    swf.g_xvmlogger = Logger(PATH.XVM_LOG_FILE_NAME)
 
 def log(s, prefix=""):
-    _logger.add(prefix + str(s))
+    swf.g_xvmlogger.add(prefix + str(s))
 
 def err(s):
-    _logger.error(s)
+    swf.g_xvmlogger.error(s)
 
 def warn(s):
-    _logger.warning(s)
+    swf.g_xvmlogger.warning(s)
 
 def debug(s):
-    _logger.debug(s)
-
-_logger = Logger(XVM_LOG_FILE_NAME)
+    swf.g_xvmlogger.debug(s)

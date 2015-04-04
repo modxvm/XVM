@@ -4,7 +4,6 @@
  */
 package xvm.hangar
 {
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import xvm.hangar.views.*;
 

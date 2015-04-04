@@ -1,9 +1,10 @@
 package xvm.ping.PingServers
 {
+    import com.xfw.*;
+    import com.xfw.events.*;
     import com.xvm.*;
-    import com.xvm.events.*;
-    import com.xvm.types.cfg.*;
     import com.xvm.utils.*;
+    import com.xvm.types.cfg.*;
     import flash.text.*;
     import scaleform.clik.core.*;
 
@@ -24,12 +25,12 @@ package xvm.ping.PingServers
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );
-            PingServers.addListener(update);
+            PingServers.addEventListener(update);
         }
 
         override protected function onDispose():void
         {
-            PingServers.removeListener(update);
+            PingServers.removeEventListener(update);
             super.onDispose();
         }
 
@@ -48,7 +49,7 @@ package xvm.ping.PingServers
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -155,7 +156,7 @@ package xvm.ping.PingServers
             tf.alpha = cfg.alpha / 100.0;
             tf.htmlText =  "";
             if (cfg.shadow.enabled)
-                tf.filters = [ WGUtils.createShadowFilter(cfg.shadow) ];
+                tf.filters = [ Utils.createShadowFilterFromConfig(cfg.shadow) ];
             addChild(tf);
             return tf;
         }

@@ -1,8 +1,8 @@
 package xvm.profile.components
 {
-    import com.xvm.*;
-    import com.xvm.events.*;
-    import com.xvm.types.dossier.*;
+    import com.xfw.*;
+    import com.xfw.events.*;
+    import com.xfw.types.dossier.*;
     import flash.events.*;
     import net.wg.data.constants.*;
     import net.wg.gui.components.advanced.*;
@@ -105,7 +105,7 @@ package xvm.profile.components
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
                 throw ex;
             }
             finally

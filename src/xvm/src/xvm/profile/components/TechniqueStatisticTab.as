@@ -1,7 +1,7 @@
 package xvm.profile.components
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
     import com.xvm.utils.*;
@@ -88,7 +88,7 @@ package xvm.profile.components
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -106,7 +106,7 @@ package xvm.profile.components
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -143,7 +143,7 @@ package xvm.profile.components
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -184,7 +184,7 @@ package xvm.profile.components
             return "<font size='" + sz.toString() + "'>" + txt + "</font>";
         }
 
-        private function color(txt:String, color:uint=Defines.UICOLOR_LIGHT):String
+        private function color(txt:String, color:uint = XfwConst.UICOLOR_LIGHT):String
         {
             return "<font color='#" + color.toString(16) + "'>" + txt + "</font>";
         }
@@ -224,7 +224,7 @@ package xvm.profile.components
             lastBattleTimeTF.y = -30;
             lastBattleTimeTF.width = 450;
             lastBattleTimeTF.height = 25;
-            lastBattleTimeTF.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, Defines.UICOLOR_LABEL));
+            lastBattleTimeTF.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, XfwConst.UICOLOR_LABEL));
             lastBattleTimeTF.mouseEnabled = false;
             proxy.addChild(lastBattleTimeTF);
         }
@@ -242,7 +242,7 @@ package xvm.profile.components
             ratingTF.y = /*proxy.battlesDL.y - 62*/0;
             ratingTF.width = 400;
             ratingTF.height = 200;
-            ratingTF.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
+            ratingTF.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, XfwConst.UICOLOR_LABEL));
             ratingTF.mouseEnabled = false;
             proxy.addChild(ratingTF);
         }
@@ -388,7 +388,7 @@ package xvm.profile.components
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -399,28 +399,28 @@ package xvm.profile.components
                 ratingTF.htmlText = "";
             else
             {
-                var dt:String = isNaN(data.stat.ts) ? Locale.get("unknown") : Utils.FormatDate("Y-m-d", new Date(data.stat.ts));
+                var dt:String = isNaN(data.stat.ts) ? Locale.get("unknown") : XfwUtils.FormatDate("Y-m-d", new Date(data.stat.ts));
 
                 s += size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 14) + "\n";
 
                 s += Locale.get("WN8") + ": " + (!data.stat.wn8 ? "-- (-)" :
-                    color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8)) + " (" +
-                    color(App.utils.locale.integer(data.stat.wn8), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN8, data.stat.wn8)) + ")") + " ";
+                    color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8)) + " (" +
+                    color(App.utils.locale.integer(data.stat.wn8), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN8, data.stat.wn8)) + ")") + " ";
                 s += Locale.get("EFF") + ": " + (!data.stat.e ? "-- (-)" :
-                    color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
-                    color(App.utils.locale.integer(data.stat.e), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";
+                    color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
+                    color(App.utils.locale.integer(data.stat.e), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";
 
                 s += Locale.get("Avg level") + ": " + (!data.stat.lvl ? "-" :
-                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
+                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
 
                 // TODO: temporary solution
                 if (tech.playerId == 0)
                 {
                     var adata:AccountDossier = tech.accountDossier;
-                    var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(adata.winPercent));
+                    var ratingColor:int = MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(adata.winPercent));
                     s += size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
-                    formatHtmlText(size(getWinsToNextPercentStr(adata), 13), Defines.UICOLOR_LABEL) + "\n";
-                    s += "<font size='7'>\n\n\n</font>\t\t\t\t   " + formatHtmlText(size(getWinsToNextPercentStr(data)), Defines.UICOLOR_LABEL);
+                    formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL) + "\n";
+                    s += "<font size='7'>\n\n\n</font>\t\t\t\t   " + formatHtmlText(size(getWinsToNextPercentStr(data)), XfwConst.UICOLOR_LABEL);
                 }
 
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
@@ -667,19 +667,19 @@ package xvm.profile.components
             b2 = Math.max(0, b2 % 1 == 0 ? b2 : (int(b2) + 1));
 
             var info:String = (b2 > b1)
-                    ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
-                    : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
+                    ? color(App.utils.locale.integer(b1), XfwConst.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD)
+                    : color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD);
 
             if (Config.config.userInfo.showExtraDataInProfile || page is ProfileTechniquePage)
             {
                 // full
                 info += " / " + ((b2 > b1)
-                    ? color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
-                    : color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD));
+                    ? color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD)
+                    : color(App.utils.locale.integer(b1), XfwConst.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD));
             }
 
             return info;

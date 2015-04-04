@@ -4,8 +4,8 @@
  */
 package xvm.techtree
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import flash.text.*;
     import net.wg.gui.lobby.techtree.constants.*;
@@ -70,7 +70,7 @@ package xvm.techtree
                 }
                 catch (ex:Error)
                 {
-                    Logger.add(ex.getStackTrace());
+                    Logger.err(ex);
                 }
                 finally
                 {

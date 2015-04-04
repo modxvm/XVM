@@ -4,7 +4,7 @@
  */
 package xvm.squad
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
 
     public class SquadXvmMod extends XvmModBase

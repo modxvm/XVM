@@ -4,7 +4,6 @@
  */
 package xvm.autologin
 {
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
 
     public class AutoLoginXvmMod extends XvmModBase

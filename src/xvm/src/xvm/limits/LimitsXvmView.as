@@ -4,10 +4,11 @@
  */
 package xvm.limits
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
-    import flash.events.Event;
+    import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.events.*;
@@ -21,8 +22,8 @@ package xvm.limits
         private static const SETTINGS_GOLD_LOCK_STATUS:String = "xvm_limits/gold_lock_status";
         private static const SETTINGS_FREEXP_LOCK_STATUS:String = "xvm_limits/freexp_lock_status";
 
-        private static const XFW_COMMAND_SET_GOLD_LOCK_STATUS:String = "xfw.set_gold_lock_status";
-        private static const XFW_COMMAND_SET_FREEXP_LOCK_STATUS:String = "xfw.set_freexp_lock_status";
+        private static const XVM_LIMITS_COMMAND_SET_GOLD_LOCK_STATUS:String = "xvm_limits.set_gold_lock_status";
+        private static const XVM_LIMITS_COMMAND_SET_FREEXP_LOCK_STATUS:String = "xvm_limits.set_freexp_lock_status";
 
         private static const L10N_GOLD_LOCKED_TOOLTIP:String = "lobby/header/gold_locked_tooltip";
         private static const L10N_GOLD_UNLOCKED_TOOLTIP:String = "lobby/header/gold_unlocked_tooltip";
@@ -64,7 +65,7 @@ package xvm.limits
                 goldLocker = page.header.addChild(new LockerControl()) as LockerControl;
                 goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched);
                 goldLocker.toolTip = Locale.get(L10N_GOLD_UNLOCKED_TOOLTIP);
-                goldLocker.selected = Xvm.cmd(Defines.XVM_COMMAND_LOAD_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, false);
+                goldLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, false);
             }
 
             if (Config.config.hangar.enableFreeXpLocker)
@@ -72,7 +73,7 @@ package xvm.limits
                 freeXpLocker = page.header.addChild(new LockerControl()) as LockerControl;
                 freeXpLocker.addEventListener(Event.SELECT, onFreeXpLockerSwitched);
                 freeXpLocker.toolTip = Locale.get(L10N_FREEXP_UNLOCKED_TOOLTIP);
-                freeXpLocker.selected = Xvm.cmd(Defines.XVM_COMMAND_LOAD_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, false);
+                freeXpLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, false);
             }
 
             page.header.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION, this.onHeaderButtonsReposition);
@@ -119,15 +120,15 @@ package xvm.limits
 
         private function onGoldLockerSwitched(e:Event):void
         {
-            Xvm.cmd(XFW_COMMAND_SET_GOLD_LOCK_STATUS, goldLocker.selected);
-            Xvm.cmd(Defines.XVM_COMMAND_SAVE_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, goldLocker.selected);
+            Xfw.cmd(XVM_LIMITS_COMMAND_SET_GOLD_LOCK_STATUS, goldLocker.selected);
+            Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, goldLocker.selected);
             goldLocker.toolTip = Locale.get(goldLocker.selected ? L10N_GOLD_LOCKED_TOOLTIP : L10N_GOLD_UNLOCKED_TOOLTIP);
         }
 
         private function onFreeXpLockerSwitched(e:Event):void
         {
-            Xvm.cmd(XFW_COMMAND_SET_FREEXP_LOCK_STATUS, freeXpLocker.selected);
-            Xvm.cmd(Defines.XVM_COMMAND_SAVE_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, freeXpLocker.selected);
+            Xfw.cmd(XVM_LIMITS_COMMAND_SET_FREEXP_LOCK_STATUS, freeXpLocker.selected);
+            Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, freeXpLocker.selected);
             freeXpLocker.toolTip = Locale.get(freeXpLocker.selected ? L10N_FREEXP_LOCKED_TOOLTIP : L10N_FREEXP_UNLOCKED_TOOLTIP);
         }
     }

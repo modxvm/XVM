@@ -3,10 +3,11 @@
  */
 package xvm.hangar.components.TankParams
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
-    import net.wg.gui.components.controls.*;
+    import com.xvm.utils.*;
+    import net.wg.gui.components.controls.WgScrollingList;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.data.*;
     import scaleform.clik.data.*;
@@ -34,8 +35,8 @@ package xvm.hangar.components.TankParams
             // Reload time
             idx = getIndex(dp, MENU.TANK_PARAMS_RELOADTIME);
             var v_reloadTime:String = App.utils.locale.float(getReloadTime());
-            var reloadTimeColor1:String = Utils.toHtmlColor(idx >= 0 && dp[idx].selected ? Defines.UICOLOR_TEXT1 : Defines.UICOLOR_TEXT2);
-            var reloadTimeColor2:String = Utils.toHtmlColor(idx >= 0 && dp[idx].selected ? Defines.UICOLOR_TEXT2 : Defines.UICOLOR_TEXT3);
+            var reloadTimeColor1:String = XfwUtils.toHtmlColor(idx >= 0 && dp[idx].selected ? XfwConst.UICOLOR_TEXT1 : XfwConst.UICOLOR_TEXT2);
+            var reloadTimeColor2:String = XfwUtils.toHtmlColor(idx >= 0 && dp[idx].selected ? XfwConst.UICOLOR_TEXT2 : XfwConst.UICOLOR_TEXT3);
             var l_reloadTime:String =
                 "<font color='" + reloadTimeColor1 + "'>" + Locale.get("gun_reload_time/actual") + " </font>" +
                 "<font color='" + reloadTimeColor2 + "'>" + Locale.get("(sec)") + "</font>";

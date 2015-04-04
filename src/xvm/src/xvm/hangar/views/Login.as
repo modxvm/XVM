@@ -4,6 +4,7 @@
  */
 package xvm.hangar.views
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import flash.utils.*;

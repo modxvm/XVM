@@ -3,14 +3,17 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION = '2.0.0'
+XFW_MOD_VERSION = '3.0.0'
 XFW_MOD_URL = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS = ['0.9.6','0.9.7']
+XFW_GAME_VERSIONS = ['0.9.7']
 
 #####################################################################
 
 import BigWorld
+from math import degrees
+from helpers import i18n
+from gui.shared.utils import ItemsParameters, ParametersCache
 
 from xfw import *
 import xvm_main.python.config as config
@@ -18,9 +21,7 @@ from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.vehinfo_camo import getCamoValues
-from math import degrees
-from helpers import i18n
-from gui.shared.utils import ItemsParameters, ParametersCache
+from xvm_main.python.xvm import l10n
 
 #####################################################################
 # event handlers
