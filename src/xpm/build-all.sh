@@ -20,6 +20,13 @@ clear()
   rm -rf "../../~output/~ver/gui/flash"
   rm -rf "../../~output/~ver/scripts"
   rm -rf "../../~output/mods/xfw"
+
+  # remove _version_.py files
+  for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
+    rm -f $dir/__version__.py
+  done
+
+  find . -depth -empty -delete -type d
 }
 
 make_dirs()
