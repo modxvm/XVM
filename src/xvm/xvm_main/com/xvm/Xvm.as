@@ -68,7 +68,7 @@ package com.xvm
             Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
         }
 
-        private function onSetSvcSettings(nss:NetworkServicesSettings):void
+        private function onSetSvcSettings(nss:Object):void
         {
             Config.networkServicesSettings = new NetworkServicesSettings(nss);
         }

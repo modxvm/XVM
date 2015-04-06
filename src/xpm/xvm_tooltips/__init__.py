@@ -10,6 +10,8 @@ XFW_GAME_VERSIONS = ['0.9.7']
 
 #####################################################################
 
+import traceback
+
 import BigWorld
 from math import degrees
 from helpers import i18n

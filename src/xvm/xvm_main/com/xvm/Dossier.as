@@ -11,12 +11,12 @@ package com.xvm
     {
         // PUBLIC STATIC
 
-        public static function loadAccountDossier(target:Object, callback:Function, battleType:String, playerId:Number = NaN):void
+        public static function loadAccountDossier(target:Object, callback:Function, battleType:String, playerId:Number = 0):void
         {
-            loadDossierInternal(target, callback, battleType, playerId, NaN);
+            loadDossierInternal(target, callback, battleType, playerId, 0);
         }
 
-        public static function loadVehicleDossier(target:Object, callback:Function, battleType:String, vehId:Number, playerId:Number = NaN):void
+        public static function loadVehicleDossier(target:Object, callback:Function, battleType:String, vehId:Number, playerId:Number = 0):void
         {
             loadDossierInternal(target, callback, battleType, playerId, vehId);
         }
@@ -38,7 +38,7 @@ package com.xvm
         private static var _requests:Object = {};
         private static var _cache:Object = {};
 
-        private static function loadDossierInternal(target:Object, callback:Function, battleType:String, playerId:Number, vehId:Number):void
+        private static function loadDossierInternal(target:Object, callback:Function, battleType:String, playerId:int, vehId:int):void
         {
             if (!_initialized)
             {

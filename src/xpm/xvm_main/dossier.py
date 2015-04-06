@@ -39,7 +39,7 @@ class _Dossier(object):
         (self.battlesType, self.playerId, self.vehId) = args
 
         from gui.shared import g_itemsCache
-        if self.vehId is None:
+        if self.vehId == 0:
             dossier = g_itemsCache.items.getAccountDossier(self.playerId)
             res = self._prepareAccountResult(dossier)
         else:

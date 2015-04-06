@@ -99,7 +99,7 @@ package xvm.tcarousel
 
                 //return; // temporary disabled
                 createFilters();
-                onFiltersLoaded(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
+                onFiltersLoaded(JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null)));
             }
             catch (ex:Error)
             {
@@ -653,7 +653,8 @@ package xvm.tcarousel
 
             try
             {
-                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems });
+                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY,
+                    JSONx.stringify({ levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, "", true));
                 onFilterChanged();
             }
             catch (ex:Error)
