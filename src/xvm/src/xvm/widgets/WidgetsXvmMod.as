@@ -4,7 +4,7 @@
  */
 package xvm.widgets
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
 
     public class WidgetsXvmMod extends XvmModBase
@@ -16,8 +16,8 @@ package xvm.widgets
 
         private static const _views:Object =
         {
-            "login": WidgetsXvmView,
-            "lobby": WidgetsXvmView
+            //"login": WidgetsXvmView,
+            //"lobby": WidgetsXvmView
         }
 
         public override function get views():Object

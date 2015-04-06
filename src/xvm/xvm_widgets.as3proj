@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\release\mods\xvm-widgets.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_widgets\actionscript\xvm_widgets.swf" />
     <movie fps="30" />
     <movie width="1" />
     <movie height="1" />
@@ -55,8 +55,9 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="lib\xvm.swc" />
-    <element path="lib\wg.swc" />
+    <element path="..\xfw\~output\swc\wg.swc" />
+    <element path="..\xfw\~output\swc\xfw.swc" />
+    <element path="..\..\~output\swc\xvm_main.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
@@ -76,10 +77,8 @@
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <hidden path="swf" />
-    <hidden path="wg" />
-    <hidden path="build-swc.sh" />
-    <hidden path="build-swc-wg.sh" />
+    <hidden path="obj" />
+    <hidden path="xvm_main" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
