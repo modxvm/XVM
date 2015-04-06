@@ -1,10 +1,10 @@
 /**
  * XVM - lobby
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.hangar.views
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.events.*;

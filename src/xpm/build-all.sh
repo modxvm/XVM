@@ -20,6 +20,13 @@ clear()
   rm -rf "../../~output/~ver/gui/flash"
   rm -rf "../../~output/~ver/scripts"
   rm -rf "../../~output/mods/xfw"
+
+  # remove _version_.py files
+  for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
+    rm -f $dir/__version__.py
+  done
+
+  find . -depth -empty -delete -type d
 }
 
 make_dirs()
@@ -83,6 +90,6 @@ done
 popd >/dev/null
 
 # run test
-if [ "$OS" = "Windows_NT" -a "$XPM_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
+if [ "$OS" = "Windows_NT" -a "$XFW_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
   sh "$(dirname $(realpath $(cygpath --unix $0)))/../../utils/test.sh"
 fi

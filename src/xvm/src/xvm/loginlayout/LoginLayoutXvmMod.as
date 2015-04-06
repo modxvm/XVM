@@ -4,7 +4,6 @@
  */
 package xvm.loginlayout
 {
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
 
     public class LoginLayoutXvmMod extends XvmModBase

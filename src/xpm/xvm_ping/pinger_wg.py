@@ -97,7 +97,7 @@ class _Ping(object):
             strdata = simplejson.dumps(res)
             for proxy in self.listeners:
                 if proxy and hasattr(proxy, 'component') and hasattr(proxy, 'movie') and proxy.movie:
-                    proxy.movie.invoke((RESPOND_PINGDATA, [strdata]))
+                    proxy.movie.invoke((AS2RESPOND.PINGDATA, [strdata]))
         except:
             err('_respond() exception: ' + traceback.format_exc())
 

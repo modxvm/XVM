@@ -1,11 +1,11 @@
 ﻿/**
  * XVM
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.svcmsg
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.io.*;
     import com.xvm.infrastructure.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
@@ -34,7 +34,7 @@ package xvm.svcmsg
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -74,14 +74,14 @@ package xvm.svcmsg
         {
             //Logger.addObject(e);
             if (StringUtils.startsWith(e.text.toLowerCase(), 'http'))
-                Cmd.openUrl(e.text);
+                Xfw.cmd(XvmCommands.OPEN_URL, e.text);
         }
 
         // PRIVATE
 
         private function initLobby(v:LobbyPage):void
         {
-            v.notificationPopupViewer.xvm_popupClass = UI_ServiceMessagePopUp;
+            v.notificationPopupViewer.xfw_popupClass = UI_ServiceMessagePopUp;
         }
 
         private function initNotificationList(v:NotificationListView):void

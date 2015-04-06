@@ -1,6 +1,6 @@
 /**
  * Base Widget Settings (abstract)
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import gfx.controls.CheckBox;
 import gfx.controls.Slider;

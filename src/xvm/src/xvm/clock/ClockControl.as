@@ -1,9 +1,10 @@
 /**
  * XVM - clock control
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.clock
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import com.xvm.utils.*;
@@ -64,7 +65,7 @@ package xvm.clock
                 createBackgroundImage(cfg.bgImage);
             textField.rotation = cfg.rotation;
             if (cfg.shadow.enabled)
-                textField.filters = [ WGUtils.createShadowFilter(cfg.shadow) ];
+                textField.filters = [ Utils.createShadowFilterFromConfig(cfg.shadow) ];
 
             invalidate();
 
@@ -158,7 +159,7 @@ package xvm.clock
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
     }

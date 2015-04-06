@@ -1,6 +1,6 @@
 /**
  * XVM Config
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.xvm.*;
 import com.xvm.DataTypes.*;

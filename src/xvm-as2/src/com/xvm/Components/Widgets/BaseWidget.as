@@ -1,6 +1,6 @@
 /**
  * Base Widget Implementation (abstract)
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.xvm.Logger;
 import com.xvm.Components.Widgets.IWidget;

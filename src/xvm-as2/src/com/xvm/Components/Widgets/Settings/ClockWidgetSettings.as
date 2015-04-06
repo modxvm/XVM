@@ -1,6 +1,6 @@
 /**
  * Clock Widget Settings
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import gfx.controls.TextInput;
 import gfx.core.UIComponent;

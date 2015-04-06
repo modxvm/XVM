@@ -1,12 +1,12 @@
 /**
  * XVM - lobby
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.profile
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.misc.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
     import net.wg.gui.lobby.header.vo.*;
@@ -27,9 +27,9 @@ package xvm.profile
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            var accountData:HBC_AccountDataVo = HBC_AccountDataVo(page.header.xvm_headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
+            var accountData:HBC_AccountDataVo = HBC_AccountDataVo(page.header.xfw_headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
             if (accountData)
-                Globals[Globals.NAME] = accountData.userVO.userName;
+                XvmGlobals[XvmGlobals.CURRENT_USER_NAME] = accountData.userVO.userName;
         }
     }
 

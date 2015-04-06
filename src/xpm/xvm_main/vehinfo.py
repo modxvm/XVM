@@ -73,7 +73,7 @@ def _init():
 
                 (data['tierLo'], data['tierHi']) = getTiers(data['level'], data['vclass'], data['key'])
 
-                data['shortName'] = vehinfo_short.getShortName(data['key'])
+                data['shortName'] = vehinfo_short.getShortName(data['key'], data['level'], data['vclass'])
 
                 wn8data = wn8.getWN8ExpectedData(data['vid'])
                 if wn8data is not None:

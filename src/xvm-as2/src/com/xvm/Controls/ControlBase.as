@@ -1,6 +1,6 @@
 /**
  * Base Control Class (abstract) - based on the ScaleForm's gfx.core.UIComponent
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import gfx.events.EventTypes;
 import com.xvm.Defines;

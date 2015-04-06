@@ -1,6 +1,6 @@
 package xvm.profile.components
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import net.wg.data.constants.*;
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;

@@ -3,16 +3,17 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION = '2.0.0'
+XFW_MOD_VERSION = '3.0.0'
 XFW_MOD_URL = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS = ['0.9.6','0.9.7']
+XFW_GAME_VERSIONS = ['0.9.7']
 
 #####################################################################
 # constants
 
-XPM_COMMAND_SET_GOLD_LOCK_STATUS = "xpm.set_gold_lock_status"
-XPM_COMMAND_SET_FREEXP_LOCK_STATUS = "xpm.set_freexp_lock_status"
+class XVM_LIMITS_COMMAND(object):
+    SET_GOLD_LOCK_STATUS = "xvm_limits.set_gold_lock_status"
+    SET_FREEXP_LOCK_STATUS = "xvm_limits.set_freexp_lock_status"
 
 
 #####################################################################
@@ -29,11 +30,11 @@ import xvm_main.python.userprefs as userprefs
 
 def start():
     from gui.shared import g_eventBus
-    g_eventBus.addListener(XPM_CMD, onXpmCommand)
+    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
 def fini():
     from gui.shared import g_eventBus
-    g_eventBus.removeListener(XPM_CMD, onXpmCommand)
+    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
 
 #####################################################################
@@ -80,16 +81,16 @@ def Vehicle_parseShells(base, self, layoutList, defaultLayoutList, proxy):
 
 
 #####################################################################
-# onXpmCommand
+# onXfwCommand
 
 # returns: (result, status)
-def onXpmCommand(cmd, *args):
+def onXfwCommand(cmd, *args):
     try:
-        if cmd == XPM_COMMAND_SET_GOLD_LOCK_STATUS:
+        if cmd == XVM_LIMITS_COMMAND.SET_GOLD_LOCK_STATUS:
             global gold_enable
             gold_enable = not args[0]
             return (None, True)
-        elif cmd == XPM_COMMAND_SET_FREEXP_LOCK_STATUS:
+        elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
             freeXP_enable = not args[0]
             return (None, True)

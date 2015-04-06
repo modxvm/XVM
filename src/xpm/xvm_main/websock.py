@@ -46,7 +46,7 @@ class _WebSock(object):
 
     def _start(self):
         self._ws = websocket.WebSocketApp(
-            XVM_WS_URL,
+            XVM.WS_URL,
             on_open=self._on_open,
             on_message=self._on_message,
             on_error=self._on_error,
@@ -60,7 +60,7 @@ class _WebSock(object):
         sslopt = {
             'cert_reqs': ssl.CERT_NONE,
             'check_hostname': False,
-            'fingerprint': XVM_FINGERPRINTS,
+            'fingerprint': XVM.FINGERPRINTS,
             # 'fingerprint': '8a95feb7be9825fbe3f4f50a6662dc880764c876', # 'wss://echo.websocket.org/'
         }
         self._ws.run_forever(sslopt=sslopt)

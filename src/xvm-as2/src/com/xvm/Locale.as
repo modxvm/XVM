@@ -1,7 +1,7 @@
 ﻿/**
  * XVM Localization module
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
- * @author Mikhail Paulyshka "mixail(at)modxvm.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ * @author Mikhail Paulyshka <mixail(at)modxvm.com>
  * @author Pavel Máca
  */
 import com.xvm.*;

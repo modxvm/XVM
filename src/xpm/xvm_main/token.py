@@ -116,7 +116,7 @@ def _checkVersion():
 
     try:
         req = "checkVersion/%d" % playerId
-        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+        server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
         # response =
@@ -217,7 +217,7 @@ def _checkToken(playerId, token):
         req = "checkToken/%d" % playerId
         if token is not None:
             req += "/%s" % token.encode('ascii')
-        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+        server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
         # response= """{"status":"inactive"}"""

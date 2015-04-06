@@ -1,9 +1,10 @@
 /**
- * XVM - lobby
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.autologin
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import flash.ui.*;
@@ -27,14 +28,9 @@ package xvm.autologin
             super(view);
         }
 
-        public function get loginPage():LoginPage
-        {
-            return super.view as LoginPage;
-        }
-
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            initAutoLogin();
+            init();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
@@ -45,7 +41,12 @@ package xvm.autologin
 
         // PRIVATE
 
-        private function initAutoLogin():void
+        private function get loginPage():LoginPage
+        {
+            return super.view as LoginPage;
+        }
+
+        private function init():void
         {
             switch (view.as_alias)
             {

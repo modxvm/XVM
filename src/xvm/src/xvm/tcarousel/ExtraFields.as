@@ -1,5 +1,6 @@
 ﻿package xvm.tcarousel
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.*;
     import com.xvm.types.dossier.*;

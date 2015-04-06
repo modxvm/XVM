@@ -1,11 +1,12 @@
 /**
  * XVM - companies list window
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.company
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import net.wg.gui.components.controls.*;
+    import net.wg.gui.components.controls.CheckBox;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.gui.prebattle.company.*;
     import xvm.company.UI.*;
@@ -25,7 +26,7 @@ package xvm.company
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
        }
 

@@ -1,10 +1,10 @@
-""" XVM (c) www.modxvm.com 2013-2015 """
+""" XFW Library (c) www.modxvm.com 2013-2015 """
 
 #############################
 # Command
 
-def getDossier(proxy, args):
-    _dossier.getDossier(proxy, args)
+def getDossier(args):
+    _dossier.getDossier(args)
 
 
 #############################
@@ -33,10 +33,10 @@ from logger import *
 class _Dossier(object):
 
     # @process
-    def getDossier(self, proxy, args):
-        (self.battlesType, self.playerId, self.vehId) = args
-
+    def getDossier(self, args):
         # log(str(args))
+
+        (self.battlesType, self.playerId, self.vehId) = args
 
         from gui.shared import g_itemsCache
         if self.vehId is None:
@@ -182,6 +182,5 @@ class _Dossier(object):
         })
 
         return res
-
 
 _dossier = _Dossier()

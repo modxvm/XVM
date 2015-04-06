@@ -1,7 +1,7 @@
 ﻿/**
 /**
  * XVM
- * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  * @author ilitvinov87
  */
 import com.xvm.*;

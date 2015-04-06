@@ -1,7 +1,7 @@
 package xvm.tcarousel
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.misc.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.dossier.*;
     import flash.display.*;
@@ -74,7 +74,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -120,7 +120,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

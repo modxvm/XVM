@@ -1,7 +1,7 @@
 package xvm.hangar.components.BattleResults
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.misc.*;
     import com.xvm.types.stat.*;
     import com.xvm.utils.*;
     import flash.text.*;
@@ -35,7 +35,7 @@ package xvm.hangar.components.BattleResults
                 textField.y = 2;
                 textField.width = 400;
                 textField.height = 30;
-                textField.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
+                textField.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, XfwConst.UICOLOR_LABEL));
                 page.addChild(textField);
             }
 
@@ -48,12 +48,12 @@ package xvm.hangar.components.BattleResults
                 var sd:StatData = Stat.getData(name);
                 if (sd == null)
                     continue;
-                sd.team = Defines.TEAM_ENEMY;
+                sd.team = XfwConst.TEAM_ENEMY;
                 for each (var pl:Object in page.data.team1)
                 {
                     if (pl.userName == sd.name)
                     {
-                        sd.team = Defines.TEAM_ALLY;
+                        sd.team = XfwConst.TEAM_ALLY;
                         break;
                     }
                 }

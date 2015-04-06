@@ -1,10 +1,10 @@
 /**
  * XVM
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.profile
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
 
     public class ProfileXvmMod extends XvmModBase

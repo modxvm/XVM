@@ -1,15 +1,15 @@
 package xvm.ping.PingServers
 {
-    import com.xvm.*;
-    import com.xvm.events.*;
+    import com.xfw.*;
+    import com.xfw.events.*;
     import flash.events.*;
     import flash.utils.*;
     import org.idmedia.as3commons.util.*;
 
     public class PingServers extends EventDispatcher
     {
-        private static const XPM_COMMAND_PING:String = "xpm.ping";
-        private static const XPM_AS_COMMAND_PINGDATA:String = "xpm.pingdata";
+        private static const COMMAND_PING:String = "xvm_ping.ping";
+        private static const COMMAND_AS_PINGDATA:String = "xvm_ping.as.pingdata";
 
         private static var _instance:PingServers = null;
         private static function get instance():PingServers
@@ -47,12 +47,12 @@ package xvm.ping.PingServers
             }
         }
 
-        public static function addListener(listener:Function):void
+        public static function addEventListener(listener:Function):void
         {
             instance.addEventListener(Event.COMPLETE, listener);
         }
 
-        public static function removeListener(listener:Function):void
+        public static function removeEventListener(listener:Function):void
         {
             instance.removeEventListener(Event.COMPLETE, listener);
         }
@@ -61,7 +61,7 @@ package xvm.ping.PingServers
 
         function PingServers()
         {
-            Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+            Xfw.addCommandListener(COMMAND_AS_PINGDATA, pingCallback);
 
             pingTimer = 0;
             pingTimeouts = null;
@@ -70,26 +70,7 @@ package xvm.ping.PingServers
         private function ping():void
         {
             //Logger.add("ping");
-            Xvm.cmd(XPM_COMMAND_PING);
-        }
-
-        private function handleXpmCommand(e:XpmCmdReceivedEvent):void
-        {
-            //Logger.add("handleXpmCommand: " + e.cmd);
-            try
-            {
-                switch (e.cmd)
-                {
-                    case XPM_AS_COMMAND_PINGDATA:
-                        e.stopImmediatePropagation();
-                        pingCallback(e.args[0]);
-                        break;
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
+            Xfw.cmd(COMMAND_PING);
         }
 
         private function pingCallback(answer:Object):void

@@ -1,13 +1,12 @@
 /**
  * XVM - user info
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.profile
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.misc.*;
-    import com.xvm.utils.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;
@@ -69,7 +68,7 @@ package xvm.profile
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             */
         }
@@ -82,7 +81,7 @@ package xvm.profile
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -101,24 +100,24 @@ package xvm.profile
 
             try
             {
-                if (tabNavigator.xvm_initData == null)
+                if (tabNavigator.xfw_initData == null)
                 {
                     //Logger.add("tabNavigator.initData == null");
                     App.utils.scheduler.envokeInNextFrame(tabNavigator_onAfterPopulate);
                     return;
                 }
                 // initialize start page
-                var alias:String = tabNavigator.xvm_initData.selectedAlias;
+                var alias:String = tabNavigator.xfw_initData.selectedAlias;
                 if (alias == "profileSummaryPage" || alias == "")
                 {
                     var index:int = Config.config.userInfo.startPage - 1;
-                    if (index > 0 && index < tabNavigator.xvm_initData.sectionsData.length)
+                    if (index > 0 && index < tabNavigator.xfw_initData.sectionsData.length)
                         tabNavigator.bar.selectedIndex = index;
                 }
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -134,7 +133,7 @@ package xvm.profile
                     {
                         page.listComponent.techniqueList.rowHeight = 32;
 
-                        var tp:TechniquePage = new TechniquePage(page, Globals[Globals.NAME]);
+                        var tp:TechniquePage = new TechniquePage(page, XvmGlobals[XvmGlobals.CURRENT_USER_NAME]);
                         page.addChild(tp);
                     }
                     return;
@@ -164,7 +163,7 @@ package xvm.profile
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
     }

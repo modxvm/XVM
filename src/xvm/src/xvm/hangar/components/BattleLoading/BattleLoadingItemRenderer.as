@@ -1,11 +1,11 @@
 package xvm.hangar.components.BattleLoading
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
-    import com.xvm.utils.*;
     import flash.events.*;
     import flash.geom.*;
     import flash.text.*;
@@ -47,7 +47,7 @@ package xvm.hangar.components.BattleLoading
 
             proxy.vehicleField.width += 100;
             proxy.vehicleField.scaleX = 1;
-            if (team == Defines.TEAM_ALLY)
+            if (team == XfwConst.TEAM_ALLY)
                 proxy.vehicleField.x -= 103;
         }
 
@@ -82,7 +82,7 @@ package xvm.hangar.components.BattleLoading
                 {
                     proxy.iconLoader.sourceAlt = Defines.WG_CONTOUR_ICON_PATH + vdata.sysname + ".png";
                     data.vehicleIcon = data.vehicleIcon.replace(Defines.WG_CONTOUR_ICON_PATH,
-                        Defines.XVMRES_ROOT + ((team == Defines.TEAM_ALLY)
+                        Defines.XVMRES_ROOT + ((team == XfwConst.TEAM_ALLY)
                         ? Config.config.iconset.battleLoadingAlly
                         : Config.config.iconset.battleLoadingEnemy));
                 }
@@ -93,7 +93,7 @@ package xvm.hangar.components.BattleLoading
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -126,11 +126,11 @@ package xvm.hangar.components.BattleLoading
                 if (_savedTextFieldColor == null)
                     _savedTextFieldColor = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
 
-                var nickFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
+                var nickFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == XfwConst.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftNick : Config.config.battleLoading.formatRightNick, formatOptions);
                 proxy.textField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + nickFieldText + "</font>";
 
-                var vehicleFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
+                var vehicleFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == XfwConst.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftVehicle : Config.config.battleLoading.formatRightVehicle, formatOptions);
                 proxy.vehicleField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + vehicleFieldText + "</font>";
 
@@ -139,7 +139,7 @@ package xvm.hangar.components.BattleLoading
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -147,7 +147,7 @@ package xvm.hangar.components.BattleLoading
 
         private function get team():int
         {
-            return (proxy is UI_LeftItemRenderer) ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+            return (proxy is UI_LeftItemRenderer) ? XfwConst.TEAM_ALLY : XfwConst.TEAM_ENEMY;
         }
 
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void
@@ -169,7 +169,7 @@ package xvm.hangar.components.BattleLoading
             proxy.iconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
 
             // disable icons mirroring (for alternative icons)
-            if (Config.config.battle.mirroredVehicleIcons == false && team == Defines.TEAM_ENEMY)
+            if (Config.config.battle.mirroredVehicleIcons == false && team == XfwConst.TEAM_ENEMY)
             {
                 proxy.iconLoader.scaleX = -Math.abs(proxy.iconLoader.scaleX);
                 proxy.iconLoader.x = 4;
@@ -226,7 +226,7 @@ package xvm.hangar.components.BattleLoading
                 // add to the main form, that is not scaled, and adjust XY values.
                 proxy.parent.parent.parent.addChild(icon);
                 var offset:int = 0;
-                if (_vehicleIconLoaded && Config.config.battle.mirroredVehicleIcons == false && team == Defines.TEAM_ENEMY)
+                if (_vehicleIconLoaded && Config.config.battle.mirroredVehicleIcons == false && team == XfwConst.TEAM_ENEMY)
                     offset = 80;
                 icon.x += proxy.parent.parent.x + proxy.parent.x + proxy.x + offset;
                 icon.y += proxy.parent.parent.y + proxy.parent.y + proxy.y;
