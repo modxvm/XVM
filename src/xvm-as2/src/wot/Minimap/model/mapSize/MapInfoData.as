@@ -25,7 +25,7 @@ class wot.Minimap.model.mapSize.MapInfoData
 
     private static var _systemMapnameList:Object =
     {
-        $00_tank_tutorial:      { size: 100 }, // (Tutorial)
+        $00_tank_tutorial:      { size: 50 }, // (Tutorial)
         $01_karelia:            { size: 100 }, // Karelia
         $02_malinovka:          { size: 100 }, // Malinovka
         $03_campania:           { size: 60 },  // Province
