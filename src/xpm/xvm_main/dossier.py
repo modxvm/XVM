@@ -14,6 +14,8 @@ from pprint import pprint
 import traceback
 from adisp import process
 
+import BigWorld
+
 import simplejson
 
 from gui.shared.gui_items import GUI_ITEM_TYPE
@@ -38,6 +40,9 @@ class _Dossier(object):
 
         (self.battlesType, self.playerId, self.vehId) = args
 
+        if self.playerId == 0:
+            self.playerId = None
+
         from gui.shared import g_itemsCache
         if self.vehId == 0:
             dossier = g_itemsCache.items.getAccountDossier(self.playerId)
@@ -61,9 +66,8 @@ class _Dossier(object):
             res = self._prepareVehicleResult(dossier, earnedXP, freeXP, xpToElite)
 
         # respond
-        if proxy and proxy.component and proxy.movie:
-            strdata = simplejson.dumps(res)
-            proxy.movie.invoke((RESPOND_DOSSIER, [self.playerId, self.vehId, strdata]))
+        #strdata = simplejson.dumps(res)
+        as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, self.playerId, self.vehId, res)
 
         # log(str(args) + " done")
 

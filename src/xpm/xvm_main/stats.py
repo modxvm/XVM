@@ -122,10 +122,10 @@ class _Stat(object):
     def _respond(self):
         debug("respond: " + self.req['cmd'])
         strdata = simplejson.dumps(self.resp)
-        if not self.req['proxy']:
+        if not 'proxy' in self.req:
             as_xfw_cmd(self.req['cmd'], strdata)
         else:
-            if self.req['proxy'].component and self.req['proxy'].movie:
+            if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
                 self.req['proxy'].movie.invoke((self.req['cmd'], [strdata]))
 
     # Threaded

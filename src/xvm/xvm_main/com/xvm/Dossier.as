@@ -55,15 +55,15 @@ package com.xvm
             Xfw.cmd(XvmCommandsInternal.GET_DOSSIER, battleType, playerId, vehId);
         }
 
-        private static function dossierLoaded(playerId:int, vehId:int, str:String):void
+        private static function dossierLoaded(playerId:int, vehId:int, data:Object):void
         {
             try
             {
-                //Logger.add(str);
+                //Logger.addObject(data);
 
                 var key:String = playerId + "," + vehId;
 
-                var data:Object = JSONx.parse(str);
+                //var data:Object = JSONx.parse(str);
 
                 //Logger.addObject(data, 3, key);
 
