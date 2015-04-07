@@ -10,6 +10,7 @@ XFW_GAME_VERSIONS = ['0.9.7']
 
 #####################################################################
 
+import traceback
 import BigWorld
 
 from xfw import *
@@ -17,6 +18,7 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 from operator import attrgetter
 from debug_utils import LOG_DEBUG
+from xvm_main.python.vehinfo_tiers import getTiers
 
 #####################################################################
 # event handlers
@@ -46,6 +48,11 @@ def TankCarousel_showVehicles(base, self):
             if not v1.isFavorite and v2.isFavorite: return 1
             if 'sorting_criteria' in myconfig:
                 for sort_criterion in myconfig['sorting_criteria']:
+                    if sort_criterion.find('-') == 0:
+                        sort_criterion = sort_criterion[1:] #remove minus sign
+                        factor = -1
+                    else:
+                        factor = 1
                     if sort_criterion == 'nation':
                         if 'nations_order' in myconfig and len(myconfig['nations_order']):
                             custom_nations_order = myconfig['nations_order']
@@ -57,8 +64,11 @@ def TankCarousel_showVehicles(base, self):
                         if GUI_NATIONS_ORDER_INDEX[v1.nationName] > GUI_NATIONS_ORDER_INDEX[v2.nationName]: return 1
                         if GUI_NATIONS_ORDER_INDEX[v1.nationName] < GUI_NATIONS_ORDER_INDEX[v2.nationName]: return -1
                     if sort_criterion == 'level':
-                        if v1.level > v2.level: return 1
-                        if v1.level < v2.level: return -1
+                        if v1.level > v2.level: return factor
+                        if v1.level < v2.level: return -factor
+                    if sort_criterion == 'maxBattleTier':
+                        if getTiers(v1.level, v1.type, v1.name)[1] > getTiers(v2.level, v2.type, v2.name)[1]: return factor
+                        if getTiers(v1.level, v1.type, v1.name)[1] < getTiers(v2.level, v2.type, v2.name)[1]: return -factor
                     if sort_criterion == 'type':
                         if 'types_order' in myconfig and len(myconfig['types_order']):
                             custom_types_order = myconfig['types_order']
