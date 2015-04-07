@@ -11,6 +11,7 @@ XFW_GAME_VERSIONS  = ["0.9.7"]
 #####################################################################
 
 from pprint import pprint
+import os
 import time
 import traceback
 import cPickle
