@@ -16,7 +16,7 @@ package xvm.tcarousel
 
         private static const _views:Object =
         {
-            //"hangar": TCarouselXvmView
+            "hangar": TCarouselXvmView
         }
 
         override public function entryPoint():void
