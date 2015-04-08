@@ -143,7 +143,7 @@ package com.xvm
             try
             {
                 //Logger.add("TRACE: STAGE 3: loadLanguage()");
-                _config.languageDetected = _config.language.toLowerCase() == Defines.LOCALE_AUTO_DETECTION
+                _config.languageDetected = (_config.language.toLowerCase() == Defines.LOCALE_AUTO_DETECTION);
                 if (_config.languageDetected)
                     _config.language = Xfw.cmd(XfwConst.XFW_COMMAND_GETGAMELANGUAGE);
                 Locale.LoadLocaleFile();

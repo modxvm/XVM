@@ -21,7 +21,7 @@ package xvm.tcarousel
 
         override public function entryPoint():void
         {
-            //Logger.add((new Error()).getStackTrace());
+            //Logger.err(new Error());
             super.entryPoint();
         }
 

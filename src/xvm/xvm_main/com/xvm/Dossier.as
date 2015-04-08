@@ -78,9 +78,9 @@ package com.xvm
                     var adossier:AccountDossier = getAccountDossier(playerId);
                     if (adossier != null)
                     {
-                        //var vehicle:VehicleDossierCut = adossier.vehicles[vehId];
-                        //if (vehicle != null)
-                        //    vehicle.update();
+                        var vehicle:VehicleDossierCut = adossier.vehicles[vehId];
+                        if (vehicle != null)
+                            vehicle.update();
                     }
                 }
 
