@@ -217,27 +217,33 @@ class com.xvm.Macros
         var norm:String = parts[PART_NORM];
         var def:String = parts[PART_DEF];
 
+        var vehId:Number = pdata["veh-id"];
+
+        var value;
+
         var dotPos:Number = macroName.indexOf(".");
         if (dotPos == 0)
         {
-            return SubstituteConfigPart(macroName.slice(1));
+            value = SubstituteConfigPart(macroName.slice(1));
         }
-        else if (dotPos > 0)
+        else
         {
-            if (options == null)
-                options = { };
-            options.__subname = macroName.slice(dotPos + 1);
-            macroName = macroName.slice(0, dotPos);
-        }
+            if (dotPos > 0)
+            {
+                if (options == null)
+                    options = { };
+                options.__subname = macroName.slice(dotPos + 1);
+                macroName = macroName.slice(0, dotPos);
+            }
 
-        var value = pdata[macroName];
+            value = pdata[macroName];
+
+            if (value === undefined)
+                value = m_globals[macroName];
+        }
 
         //Logger.add("macro:" + macro + " | macroname:" + macroName + " | norm:" + norm + " | def:" + def + " | value:" + value);
 
-        if (value === undefined)
-            value = m_globals[macroName];
-
-        var vehId:Number = pdata["veh-id"];
         if (value === undefined)
         {
             //process l10n macro
@@ -246,7 +252,8 @@ class com.xvm.Macros
             else
             {
                 res += def;
-                isStaticMacro = false;
+                if (dotPos != 0)
+                    isStaticMacro = false;
             }
         }
         else if (value == null)
@@ -353,7 +360,7 @@ class com.xvm.Macros
         var res = Utils.getObjectValueByPath(Config.config, path);
         //Logger.addObject(res, 1, path);
         if (res == null)
-            return "";
+            return res;
         if (typeof(res) == "object")
             return JSONx.stringify(res, "", true);
         return String(res);
