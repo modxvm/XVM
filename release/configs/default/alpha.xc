@@ -25,14 +25,14 @@
     // Dynamic transparency by spotted status
     // Динамическая прозрачность по статусу засвета
     "spotted": {
-      "neverSeen": 100,
-      "lost": 100,
-      "revealed": 100,
-      "dead": 100,
+      "neverSeen":      100,
+      "lost":           100,
+      "revealed":       100,
+      "dead":           100,
       "neverSeen_arty": 100,
-      "lost_arty": 100,
-      "revealed_arty": 100,
-      "dead_arty": 100
+      "lost_arty":      100,
+      "revealed_arty":  100,
+      "dead_arty":      100
     },
     // Dynamic transparency by remaining health.
     // Динамическая прозрачность по оставшемуся здоровью.
@@ -53,51 +53,51 @@
     // Dynamic transparency for XVM Scale
     // Динамическая прозрачность по шкале XVM
     "x": [
-      { "value": 17,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 34,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 53,  "alpha": ${"alphaRating.normal"   } },
-      { "value": 76,  "alpha": ${"alphaRating.good"     } },
-      { "value": 93,  "alpha": ${"alphaRating.very_good"} },
-      { "value": 999, "alpha": ${"alphaRating.unique"   } }
+      { "value": 16.5, "alpha": ${"alphaRating.very_bad" } },
+      { "value": 33.5, "alpha": ${"alphaRating.bad"      } },
+      { "value": 52.5, "alpha": ${"alphaRating.normal"   } },
+      { "value": 75.5, "alpha": ${"alphaRating.good"     } },
+      { "value": 92.5, "alpha": ${"alphaRating.very_good"} },
+      { "value": 999,  "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by efficiency
     // Динамическая прозрачность по эффективности
     "eff": [
       { "value": 610,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 850,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1145, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1475, "alpha": ${"alphaRating.good"     } },
-      { "value": 1775, "alpha": ${"alphaRating.very_good"} },
+      { "value": 865,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1165, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1515, "alpha": ${"alphaRating.good"     } },
+      { "value": 1835, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WN6 rating
     // Динамическая прозрачность по рейтингу WN6
     "wn6": [
-      { "value": 410,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 795,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1185, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1585, "alpha": ${"alphaRating.good"     } },
-      { "value": 1925, "alpha": ${"alphaRating.very_good"} },
+      { "value": 445,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 835,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1210, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1615, "alpha": ${"alphaRating.good"     } },
+      { "value": 1950, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WN8 rating
     // Динамическая прозрачность по рейтингу WN8
     "wn8": [
-      { "value": 355,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 820,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1370, "alpha": ${"alphaRating.normal"   } },
-      { "value": 2020, "alpha": ${"alphaRating.good"     } },
-      { "value": 2620, "alpha": ${"alphaRating.very_good"} },
+      { "value": 360,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 825,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1385, "alpha": ${"alphaRating.normal"   } },
+      { "value": 2055, "alpha": ${"alphaRating.good"     } },
+      { "value": 2675, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WG rating
     // Динамическая прозрачность по рейтингу WG
     "wgr": [
-      { "value": 2020,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 4185,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 6340,  "alpha": ${"alphaRating.normal"   } },
-      { "value": 8525,  "alpha": ${"alphaRating.good"     } },
-      { "value": 9930,  "alpha": ${"alphaRating.very_good"} },
+      { "value": 2405,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 4250,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 6350,  "alpha": ${"alphaRating.normal"   } },
+      { "value": 8550,  "alpha": ${"alphaRating.good"     } },
+      { "value": 9960,  "alpha": ${"alphaRating.very_good"} },
       { "value": 99999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by TEFF (E) rating
@@ -113,12 +113,12 @@
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед
     "winrate": [
-      { "value": 47,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 49,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 52,  "alpha": ${"alphaRating.normal"   } },
-      { "value": 57,  "alpha": ${"alphaRating.good"     } },
-      { "value": 65,  "alpha": ${"alphaRating.very_good"} },
-      { "value": 101, "alpha": ${"alphaRating.unique"   } }
+      { "value": 46.5, "alpha": ${"alphaRating.very_bad" } },
+      { "value": 48.5, "alpha": ${"alphaRating.bad"      } },
+      { "value": 51.5, "alpha": ${"alphaRating.normal"   } },
+      { "value": 57.5, "alpha": ${"alphaRating.good"     } },
+      { "value": 64.5, "alpha": ${"alphaRating.very_good"} },
+      { "value": 101,  "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by kilo-battles
     // Динамическая прозрачность по количеству кило-боев
