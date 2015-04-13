@@ -115,8 +115,8 @@ package com.xvm
         {
             var c:CTooltips = new CTooltips();
             // Tooltips
-            c.combine_icons = false;
-            c.hide_bottom_text = false;
+            c.combineIcons = false;
+            c.hideBottomText = false;
             c.lightTank = [
                 "circularVisionRadius",
                 "camo_coeff",
