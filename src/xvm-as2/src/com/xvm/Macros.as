@@ -893,6 +893,8 @@ class com.xvm.Macros
         pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
         // {{r}}
         pdata["r"] = getRating(pdata, "", "");
+        // {{r_size}}
+        pdata["r_size"] = getRatingDefaultValue().length;
 
         // {{winrate}}
         pdata["winrate"] = stat.r;

@@ -20,9 +20,8 @@
   * option hangar/autoPutPreviousCrewInTanks renamed to hangar/enableCrewAutoReturn
   * when enableCrewAutoReturn enabled, the checkbox is shown in the hangar for enabling/disabling
     crew auto return. Checkbox settings are stored for each tank separately.
-
-XVM-6.0.3:
   * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+  * added macro {{r_size}} - size of the {{r}} macro value (can be useful for fields formatting)
   * macros renamed:
       {{rating}} => {{winrate}}
       {{t-rating}} => {{t-winrate}}

@@ -95,6 +95,7 @@ Legend:
 ├───┼─────────────────┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────
 │ S │ {{avglvl}}      │ X │ X │ X │ X │ X │ average level (tier) of tanks
 │ S │ {{r}}           │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+│ S │ {{r_size}}      │ X │ X │ X │ X │ X │ size of the {{r}} macro value (can be useful for fields formatting)
 │ S │ {{e}}           │ X │ X │ X │ X │ X │ player per-vehicle efficiency (0-9, X for Tops)
 │ S │ {{teff}}        │ X │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
 │ S │ {{xeff}}        │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
