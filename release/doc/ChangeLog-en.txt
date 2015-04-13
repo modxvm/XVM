@@ -2,6 +2,7 @@
   * adaptation to WoT 0.9.7
   * XFW-3.0.0
   * added new section in config hangar/tooltips.xc, where you can choose desired tooltips for each type of vehicle
+  * in tank tooltips added feature of custom text and camo coefficients data
   * in barracks added nation flag for tanksman and their skills
   * added embedded fonts: 'xvm' (symbol) and 'mono' (monospace), recommended for default use
   * new options:
@@ -12,7 +13,6 @@
       "hide_bottom_text" - in tank tooltips hide text at bottom showing quantity of used equipment etc.
   * new macro {{.}} for config value substitution: {{.path.to.config.value}}
       ex. {{.language}}, {{.def.mycolors.ally}}
-  * in tank tooltips added feature of custom text and camo coefficients data
   * new macro {{ally}} returns 'ally' for ally team and empty for enemy team
   * new macro {{nation}} returns vehicle nation
   * added new feature of sorting tanks in carousel from config (carousel.xc)
