@@ -172,6 +172,8 @@ def _Minimap__delEntry(self, id, inCallback=False):
     g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
 
 def _Minimap_start(self):
+    if config.config is None or not config.config['minimap']['enabled']:
+        return
     try:
         from gui.battle_control import g_sessionProvider
         from items.vehicles import VEHICLE_CLASS_TAGS
@@ -190,6 +192,8 @@ def _Minimap_start(self):
 
 def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     base(self, id, methodName, args)
+    if config.config is None or not config.config['minimap']['enabled']:
+        return
     try:
         if self._Minimap__isStarted:
             if methodName == 'init':
@@ -203,6 +207,8 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
             err(traceback.format_exc())
 
 def _Minimap__addEntryLit(self, id, matrix, visible=True):
+    if config.config is None or not config.config['minimap']['enabled']:
+        return
     from gui.battle_control import g_sessionProvider
     battleCtx = g_sessionProvider.getCtx()
     if battleCtx.isObserver(id) or matrix is None:
