@@ -189,7 +189,7 @@ package com.xvm
                 //    Logger.add(pname + "> " + format);
 
                 //Logger.add(pname + "> " + format);
-                //Logger.add(pname + "> " + res);
+                //Logger.add(pname + "= " + res);
 
                 return res;
             }
@@ -348,6 +348,9 @@ package com.xvm
 
             if (parts[PART_DEF] == null)
                 parts[PART_DEF] = "";
+
+            if (parts[PART_NAME] == "r" && parts[PART_DEF] == "")
+                parts[PART_DEF] = getRatingDefaultValue();
 
             //Logger.add("[AS3][MACROS][GetMacroParts]: " + parts.join(", "));
             _macro_parts_cache[macro] = parts;
@@ -769,7 +772,7 @@ package com.xvm
             // {{wgr}}
             pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
             // {{r}}
-            pdata["r"] = getRating(stat, pdata, "");
+            pdata["r"] = getRating(pdata, "");
 
             // {{winrate}}
             pdata["winrate"] = stat.r;
@@ -827,7 +830,7 @@ package com.xvm
             // {{c:e}}
             pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#"); }
             // {{c:r}}
-            pdata["c:r"] = getRating(stat, pdata, "c:");
+            pdata["c:r"] = getRating(pdata, "c:");
 
             // {{c:winrate}}
             pdata["c:winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#"); }
@@ -876,7 +879,7 @@ package com.xvm
             // {{a:e}}
             pdata["a:e"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
             // {{a:r}}
-            pdata["a:r"] = getRating(stat, pdata, "a:");
+            pdata["a:r"] = getRating(pdata, "a:");
 
             // {{a:winrate}}
             pdata["a:winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.r);
@@ -1013,18 +1016,47 @@ package com.xvm
             basic_wn6: "wn6",
             basic_wn8: "wn8",
             basic_eff: "eff",
-            basic_e: "teff"
+            basic_e: "e"
+        }
+
+        private static const RATING_DEFAULTS_MATRIX:Object =
+        {
+            xvm_wgr: "--",
+            xvm_wn6: "--",
+            xvm_wn8: "--",
+            xvm_eff: "--",
+            xvm_e: "--",
+            basic_wgr: "-----",
+            basic_wn6: "----",
+            basic_wn8: "----",
+            basic_eff: "----",
+            basic_e: "--"
         }
 
         /**
          * Returns rating according settings in the personal cabinet
          */
-        public static function getRating(stat:StatData, pdata:Object, prefix:String):*
+        private static function getRating(pdata:Object, prefix:String, suffix:String = ""):*
         {
             var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
             if (!RATING_MATRIX.hasOwnProperty(n))
                 n = "xvm_wgr";
-            return pdata[prefix + RATING_MATRIX[n]];
+            var value:* = pdata[prefix + RATING_MATRIX[n] + suffix];
+            if (prefix != "" || value == null)
+                return value;
+            value = StringUtils.leftPad(String(value), getRatingDefaultValue().length, " ");
+            return value;
+        }
+
+        /**
+         * Returns default value for rating according settings in the personal cabinet
+         */
+        private static function getRatingDefaultValue():String
+        {
+            var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
+            if (!RATING_DEFAULTS_MATRIX.hasOwnProperty(n))
+                n = "xvm_wgr";
+            return RATING_DEFAULTS_MATRIX[n];
         }
     }
 }

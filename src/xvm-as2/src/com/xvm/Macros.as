@@ -1,4 +1,8 @@
-﻿import com.xvm.*;
+﻿/**
+ * XVM Macro substitutions
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
+import com.xvm.*;
 import com.xvm.DataTypes.*;
 import wot.Minimap.dataTypes.*;
 
@@ -94,7 +98,7 @@ class com.xvm.Macros
 
     /**
      * Format string with macros substitutions
-     *   {{name[:norm][%[flag][width][.prec]type][~suf][(=|<|>)match][?rep][|def]}}
+     *   {{name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]}}
      * @param pname player name without extra tags (clan, region, etc)
      * @param format string template
      * @param options data for dynamic values
@@ -349,6 +353,9 @@ class com.xvm.Macros
 
         if (parts[PART_DEF] == null)
             parts[PART_DEF] = "";
+
+        if (parts[PART_NAME] == "r" && parts[PART_DEF] == "")
+            parts[PART_DEF] = getRatingDefaultValue();
 
         //Logger.add("[AS2][MACROS][GetMacroParts]: " + parts.join(", "));
         _macro_parts_cache[macro] = parts;
@@ -885,7 +892,7 @@ class com.xvm.Macros
         // {{wgr}}
         pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
         // {{r}}
-        pdata["r"] = getRating(stat, pdata, "", "");
+        pdata["r"] = getRating(pdata, "", "");
 
         // {{winrate}}
         pdata["winrate"] = stat.r;
@@ -954,8 +961,8 @@ class com.xvm.Macros
         pdata["c:wgr"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#", false);
         pdata["c:wgr#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#", true);
         // {{c:r}}
-        pdata["c:r"] = getRating(stat, pdata, "c:", "");
-        pdata["c:r#d"] = getRating(stat, pdata, "c:", "#d");
+        pdata["c:r"] = getRating(pdata, "c:", "");
+        pdata["c:r#d"] = getRating(pdata, "c:", "#d");
 
         // {{c:winrate}}
         pdata["c:winrate"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#", false);
@@ -1015,7 +1022,7 @@ class com.xvm.Macros
         // {{a:e}}
         pdata["a:e"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
         // {{a:r}}
-        pdata["a:r"] = getRating(stat, pdata, "a:", "");
+        pdata["a:r"] = getRating(pdata, "a:", "");
 
         // {{a:winrate}}
         pdata["a:winrate"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.r);
@@ -1134,17 +1141,46 @@ class com.xvm.Macros
         basic_wn6: "wn6",
         basic_wn8: "wn8",
         basic_eff: "eff",
-        basic_e: "teff"
+        basic_e: "e"
+    }
+
+    private static var RATING_DEFAULTS_MATRIX:Object =
+    {
+        xvm_wgr: "--",
+        xvm_wn6: "--",
+        xvm_wn8: "--",
+        xvm_eff: "--",
+        xvm_e: "--",
+        basic_wgr: "-----",
+        basic_wn6: "----",
+        basic_wn8: "----",
+        basic_eff: "----",
+        basic_e: "--"
     }
 
     /**
      * Returns rating according settings in the personal cabinet
      */
-    public static function getRating(stat:StatData, pdata:Object, prefix:String, suffix:String)
+    private static function getRating(pdata:Object, prefix:String, suffix:String)
     {
         var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
         if (!RATING_MATRIX.hasOwnProperty(n))
             n = "xvm_wgr";
-        return pdata[prefix + RATING_MATRIX[n] + suffix];
+        var value = pdata[prefix + RATING_MATRIX[n] + suffix];
+        if (prefix != "" || value == null)
+            return value;
+        value = Strings.padLeft(String(value), getRatingDefaultValue().length);
+        return value;
+    }
+
+    /**
+     * Returns default value for rating according settings in the personal cabinet
+     */
+    private static function getRatingDefaultValue():String
+    {
+        var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
+        if (!RATING_DEFAULTS_MATRIX.hasOwnProperty(n))
+            n = "xvm_wgr";
+        return RATING_DEFAULTS_MATRIX[n];
     }
 }
