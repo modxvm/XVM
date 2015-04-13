@@ -219,41 +219,41 @@
     // Динамический цвет по эффективности
     "eff": [
       { "value": 610,  "color": ${"def.colorRating.very_bad" } },  //    0 - 609  - very bad   (20% of players)
-      { "value": 850,  "color": ${"def.colorRating.bad"      } },  //  610 - 849  - bad        (better then 20% of players)
-      { "value": 1145, "color": ${"def.colorRating.normal"   } },  //  850 - 1144 - normal     (better then 60% of players)
-      { "value": 1475, "color": ${"def.colorRating.good"     } },  // 1145 - 1474 - good       (better then 90% of players)
-      { "value": 1775, "color": ${"def.colorRating.very_good"} },  // 1475 - 1774 - very good  (better then 99% of players)
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1775 - *    - unique     (better then 99.9% of players)
+      { "value": 865,  "color": ${"def.colorRating.bad"      } },  //  610 - 864  - bad        (better then 20% of players)
+      { "value": 1165, "color": ${"def.colorRating.normal"   } },  //  865 - 1164 - normal     (better then 60% of players)
+      { "value": 1515, "color": ${"def.colorRating.good"     } },  // 1165 - 1514 - good       (better then 90% of players)
+      { "value": 1835, "color": ${"def.colorRating.very_good"} },  // 1515 - 1834 - very good  (better then 99% of players)
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1835 - *    - unique     (better then 99.9% of players)
     ],
     // Dynamic color by WN6 rating
     // Динамический цвет по рейтингу WN6
     "wn6": [
-      { "value": 410,  "color": ${"def.colorRating.very_bad" } },  //    0 - 409  - very bad   (20% of players)
-      { "value": 795,  "color": ${"def.colorRating.bad"      } },  //  410 - 794  - bad        (better then 20% of players)
-      { "value": 1185, "color": ${"def.colorRating.normal"   } },  //  795 - 1184 - normal     (better then 60% of players)
-      { "value": 1585, "color": ${"def.colorRating.good"     } },  // 1185 - 1584 - good       (better then 90% of players)
-      { "value": 1925, "color": ${"def.colorRating.very_good"} },  // 1585 - 1924 - very good  (better then 99% of players)
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1925 - *    - unique     (better then 99.9% of players)
+      { "value": 445,  "color": ${"def.colorRating.very_bad" } },  //    0 - 444  - very bad   (20% of players)
+      { "value": 835,  "color": ${"def.colorRating.bad"      } },  //  445 - 834  - bad        (better then 20% of players)
+      { "value": 1210, "color": ${"def.colorRating.normal"   } },  //  835 - 1209 - normal     (better then 60% of players)
+      { "value": 1615, "color": ${"def.colorRating.good"     } },  // 1210 - 1614 - good       (better then 90% of players)
+      { "value": 1950, "color": ${"def.colorRating.very_good"} },  // 1615 - 1949 - very good  (better then 99% of players)
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1950 - *    - unique     (better then 99.9% of players)
     ],
     // Dynamic color by WN8 rating
     // Динамический цвет по рейтингу WN8
     "wn8": [
-      { "value": 355,  "color": ${"def.colorRating.very_bad" } },  //    0 - 354  - very bad   (20% of players)
-      { "value": 820,  "color": ${"def.colorRating.bad"      } },  //  355 - 819  - bad        (better then 20% of players)
-      { "value": 1370, "color": ${"def.colorRating.normal"   } },  //  820 - 1369 - normal     (better then 60% of players)
-      { "value": 2020, "color": ${"def.colorRating.good"     } },  // 1370 - 2019 - good       (better then 90% of players)
-      { "value": 2620, "color": ${"def.colorRating.very_good"} },  // 2020 - 2619 - very good  (better then 99% of players)
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 2620 - *    - unique     (better then 99.9% of players)
+      { "value": 360,  "color": ${"def.colorRating.very_bad" } },  //    0 - 359  - very bad   (20% of players)
+      { "value": 825,  "color": ${"def.colorRating.bad"      } },  //  360 - 824  - bad        (better then 20% of players)
+      { "value": 1385, "color": ${"def.colorRating.normal"   } },  //  825 - 1384 - normal     (better then 60% of players)
+      { "value": 2055, "color": ${"def.colorRating.good"     } },  // 1385 - 2054 - good       (better then 90% of players)
+      { "value": 2675, "color": ${"def.colorRating.very_good"} },  // 2055 - 2674 - very good  (better then 99% of players)
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 2675 - *    - unique     (better then 99.9% of players)
     ],
     // Dynamic color by WG rating
     // Динамический цвет по рейтингу WG
     "wgr": [
-      { "value": 2020,  "color": ${"def.colorRating.very_bad" } },  //    0 - 2019 - very bad   (20% of players)
-      { "value": 4185,  "color": ${"def.colorRating.bad"      } },  // 2020 - 4184 - bad        (better then 20% of players)
-      { "value": 6340,  "color": ${"def.colorRating.normal"   } },  // 4185 - 6339 - normal     (better then 60% of players)
-      { "value": 8525,  "color": ${"def.colorRating.good"     } },  // 6340 - 8524 - good       (better then 90% of players)
-      { "value": 9930,  "color": ${"def.colorRating.very_good"} },  // 8525 - 9929 - very good  (better then 99% of players)
-      { "value": 99999, "color": ${"def.colorRating.unique"   } }   // 9930 - *    - unique     (better then 99.9% of players)
+      { "value": 2405,  "color": ${"def.colorRating.very_bad" } },  //    0 - 2404 - very bad   (20% of players)
+      { "value": 4250,  "color": ${"def.colorRating.bad"      } },  // 2405 - 4249 - bad        (better then 20% of players)
+      { "value": 6350,  "color": ${"def.colorRating.normal"   } },  // 4250 - 6349 - normal     (better then 60% of players)
+      { "value": 8550,  "color": ${"def.colorRating.good"     } },  // 6350 - 8549 - good       (better then 90% of players)
+      { "value": 9960,  "color": ${"def.colorRating.very_good"} },  // 8550 - 9959 - very good  (better then 99% of players)
+      { "value": 99999, "color": ${"def.colorRating.unique"   } }   // 9960 - *    - unique     (better then 99.9% of players)
     ],
     // Dynamic color by TEFF (E) rating
     // Динамический цвет по рейтингу TEFF (E)
@@ -281,8 +281,8 @@
       { "value": 46.5, "color": ${"def.colorRating.very_bad" } },   //  0   - 46.5  - very bad   (20% of players)
       { "value": 48.5, "color": ${"def.colorRating.bad"      } },   // 46.5 - 48.5  - bad        (better then 20% of players)
       { "value": 51.5, "color": ${"def.colorRating.normal"   } },   // 48.5 - 51.5  - normal     (better then 60% of players)
-      { "value": 56.5, "color": ${"def.colorRating.good"     } },   // 51.5 - 56.5  - good       (better then 90% of players)
-      { "value": 64.5, "color": ${"def.colorRating.very_good"} },   // 56.5 - 64.5  - very good  (better then 99% of players)
+      { "value": 57.5, "color": ${"def.colorRating.good"     } },   // 51.5 - 57.5  - good       (better then 90% of players)
+      { "value": 64.5, "color": ${"def.colorRating.very_good"} },   // 57.5 - 64.5  - very good  (better then 99% of players)
       { "value": 101,  "color": ${"def.colorRating.unique"   } }    // 64.5 - 100   - unique     (better then 99.9% of players)
     ],
     // Dynamic color by kilo-battles

@@ -1101,23 +1101,23 @@ package com.xvm
                 other:           "0xCCCCCC"
             };
             c.vtype = {
-                LT:		"0xA2FF9A", // Color for light tanks
-                MT:		"0xFFF198", // Color for medium tanks
-                HT:		"0xFFACAC", // Color for heavy tanks
-                SPG:		"0xEFAEFF", // Color for arty
-                TD:		"0xA0CFFF", // Color for tank destroyers
-                premium:	"0xFFCC66", // Color for premium tanks
-                usePremiumColor: false      // Enable/disable premium color usage
+                LT:         "0xA2FF9A", // Color for light tanks
+                MT:         "0xFFF198", // Color for medium tanks
+                HT:         "0xFFACAC", // Color for heavy tanks
+                SPG:        "0xEFAEFF", // Color for arty
+                TD:         "0xA0CFFF", // Color for tank destroyers
+                premium:    "0xFFCC66", // Color for premium tanks
+                usePremiumColor: false  // Enable/disable premium color usage
             };
             c.spotted = {
-                neverSeen:	"0x000000",
-                lost:		"0xD9D9D9",
-                revealed:	"0xFE0E00",
-                dead:		"0xFFFFFF",
-                neverSeen_arty:	"0x000000",
-                lost_arty:	"0xD9D9D9",
-                revealed_arty:	"0xFE0E00",
-                dead_arty:	"0xFFFFFF"
+                neverSeen:      "0x000000",
+                lost:           "0xD9D9D9",
+                revealed:       "0xFE0E00",
+                dead:           "0xFFFFFF",
+                neverSeen_arty: "0x000000",
+                lost_arty:      "0xD9D9D9",
+                revealed_arty:  "0xFE0E00",
+                dead_arty:      "0xFFFFFF"
             };
             // values - from min to max, colors are for values 'lesser then ...'
             c.hp = [
@@ -1134,43 +1134,43 @@ package com.xvm
             ];
             // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
             c.x = [
-                { value: 17,  color: XfwConst.C_RED },      // 00   - 16.5 - very bad   (20% of players)
-                { value: 34,  color: XfwConst.C_ORANGE },   // 16.5 - 33.5 - bad        (better then 20% of players)
-                { value: 53,  color: XfwConst.C_YELLOW },   // 33.5 - 52.5 - normal     (better then 60% of players)
-                { value: 76,  color: XfwConst.C_GREEN },    // 52.5 - 75.5 - good       (better then 90% of players)
-                { value: 93,  color: XfwConst.C_BLUE },     // 75.5 - 92.5 - very good  (better then 99% of players)
-                { value: 999, color: XfwConst.C_PURPLE }    // 92.5 - XX   - unique     (better then 99.9% of players)
+                { value: 16.5, color: XfwConst.C_RED },      // 00   - 16.5 - very bad   (20% of players)
+                { value: 33.5, color: XfwConst.C_ORANGE },   // 16.5 - 33.5 - bad        (better then 20% of players)
+                { value: 52.5, color: XfwConst.C_YELLOW },   // 33.5 - 52.5 - normal     (better then 60% of players)
+                { value: 75.5, color: XfwConst.C_GREEN },    // 52.5 - 75.5 - good       (better then 90% of players)
+                { value: 92.5, color: XfwConst.C_BLUE },     // 75.5 - 92.5 - very good  (better then 99% of players)
+                { value: 999,  color: XfwConst.C_PURPLE }    // 92.5 - XX   - unique     (better then 99.9% of players)
             ];
             c.eff = [
                 { value: 610,  color: XfwConst.C_RED },     // very bad
-                { value: 850,  color: XfwConst.C_ORANGE },  // bad
-                { value: 1145, color: XfwConst.C_YELLOW },  // normal
-                { value: 1475, color: XfwConst.C_GREEN },   // good
-                { value: 1775, color: XfwConst.C_BLUE },    // very good
+                { value: 865,  color: XfwConst.C_ORANGE },  // bad
+                { value: 1165, color: XfwConst.C_YELLOW },  // normal
+                { value: 1515, color: XfwConst.C_GREEN },   // good
+                { value: 1835, color: XfwConst.C_BLUE },    // very good
                 { value: 9999, color: XfwConst.C_PURPLE }   // unique
             ];
             c.wn6 = [
-                { value: 410,  color: XfwConst.C_RED },     // very bad
-                { value: 795,  color: XfwConst.C_ORANGE },  // bad
-                { value: 1185, color: XfwConst.C_YELLOW },  // normal
-                { value: 1585, color: XfwConst.C_GREEN },   // good
-                { value: 1925, color: XfwConst.C_BLUE },    // very good
+                { value: 445,  color: XfwConst.C_RED },     // very bad
+                { value: 835,  color: XfwConst.C_ORANGE },  // bad
+                { value: 1210, color: XfwConst.C_YELLOW },  // normal
+                { value: 1615, color: XfwConst.C_GREEN },   // good
+                { value: 1950, color: XfwConst.C_BLUE },    // very good
                 { value: 9999, color: XfwConst.C_PURPLE }   // unique
             ];
             c.wn8 = [
-                { value: 355,  color: XfwConst.C_RED },     // very bad
-                { value: 820,  color: XfwConst.C_ORANGE },  // bad
-                { value: 1370, color: XfwConst.C_YELLOW },  // normal
-                { value: 2020, color: XfwConst.C_GREEN },   // good
-                { value: 2620, color: XfwConst.C_BLUE },    // very good
+                { value: 360,  color: XfwConst.C_RED },     // very bad
+                { value: 825,  color: XfwConst.C_ORANGE },  // bad
+                { value: 1385, color: XfwConst.C_YELLOW },  // normal
+                { value: 2055, color: XfwConst.C_GREEN },   // good
+                { value: 2675, color: XfwConst.C_BLUE },    // very good
                 { value: 9999, color: XfwConst.C_PURPLE }   // unique
             ];
             c.wgr = [
-                { value: 2020,  color: XfwConst.C_RED },     // very bad
-                { value: 4185,  color: XfwConst.C_ORANGE },  // bad
-                { value: 6340,  color: XfwConst.C_YELLOW },  // normal
-                { value: 8525,  color: XfwConst.C_GREEN },   // good
-                { value: 9930,  color: XfwConst.C_BLUE },    // very good
+                { value: 2405,  color: XfwConst.C_RED },     // very bad
+                { value: 4250,  color: XfwConst.C_ORANGE },  // bad
+                { value: 6350,  color: XfwConst.C_YELLOW },  // normal
+                { value: 8550,  color: XfwConst.C_GREEN },   // good
+                { value: 9960,  color: XfwConst.C_BLUE },    // very good
                 { value: 99999, color: XfwConst.C_PURPLE }   // unique
             ];
             c.winChance = [
@@ -1185,7 +1185,7 @@ package com.xvm
                 { value: 46.5,  color: XfwConst.C_RED },      // very bad
                 { value: 48.5,  color: XfwConst.C_ORANGE },   // bad
                 { value: 51.5,  color: XfwConst.C_YELLOW },   // normal
-                { value: 56.5,  color: XfwConst.C_GREEN },    // good
+                { value: 57.5,  color: XfwConst.C_GREEN },    // good
                 { value: 64.5,  color: XfwConst.C_BLUE },     // very good
                 { value: 101,   color: XfwConst.C_PURPLE }    // unique
             ];
@@ -1314,27 +1314,27 @@ package com.xvm
                 { value: 9999, alpha: 40 }
             ];
             c.eff = [
-                { value: 850,  alpha: 100 },
-                { value: 1145, alpha: 80 },
-                { value: 1475, alpha: 60 },
+                { value: 865,  alpha: 100 },
+                { value: 1165, alpha: 80 },
+                { value: 1515, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.wn6 = [
-                { value: 795,  alpha: 100 },
-                { value: 1185, alpha: 80 },
-                { value: 1585, alpha: 60 },
+                { value: 835,  alpha: 100 },
+                { value: 1210, alpha: 80 },
+                { value: 1615, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.wn8 = [
-                { value: 820,  alpha: 100 },
-                { value: 1370, alpha: 80 },
-                { value: 2020, alpha: 60 },
+                { value: 825,  alpha: 100 },
+                { value: 1385, alpha: 80 },
+                { value: 2055, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.wgr = [
-                { value: 4185,  alpha: 100 },
-                { value: 6340,  alpha: 80 },
-                { value: 8525,  alpha: 60 },
+                { value: 4250,  alpha: 100 },
+                { value: 6350,  alpha: 80 },
+                { value: 8550,  alpha: 60 },
                 { value: 99999, alpha: 40 }
             ];
             c.winrate = [
