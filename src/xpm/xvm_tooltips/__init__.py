@@ -223,7 +223,7 @@ def VehicleParamsField_getValue(base, self):
                     equipmentIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
                 delimiter = ' '
                 equipmentIcons_str = delimiter.join(equipmentIcons_arr)
-                if 'combine_icons' in config.config['tooltips'] and config.config['tooltips']['combine_icons']:
+                if 'combineIcons' in config.config['tooltips'] and config.config['tooltips']['combineIcons']:
                     result[-1][-1][0] += ' ' + equipmentIcons_str
                 else:
                     result[-1].append([equipmentIcons_str, ''])
@@ -239,7 +239,7 @@ def VehicleParamsField_getValue(base, self):
             result[-1].append([crewRolesIcons_str, ''])
 
         result.append([])
-        if 'hide_bottom_text' in config.config['tooltips'] and config.config['tooltips']['hide_bottom_text']:
+        if 'hideBottomText' in config.config['tooltips'] and config.config['tooltips']['hideBottomText']:
             pass
         else:
             if crew:

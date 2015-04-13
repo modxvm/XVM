@@ -6,10 +6,10 @@
   "tooltips": {
     // true - Combine icons of equipment and optional devices into one row.
     // true - Объединить значки оборудования и доп.модулей в одну строку.
-    "combine_icons": false,
+    "combineIcons": false,
     // true - Hide text at bottom of tooltip showing quantity of used eqipment, optional devices and crew.
     // true - Спрятать текст внизу подсказки показывающий количество используемого оборудования, доп. модулей и экипаж.
-    "hide_bottom_text": false,
+    "hideBottomText": false,
 
     "lightTank":    [
                     "circularVisionRadius",
