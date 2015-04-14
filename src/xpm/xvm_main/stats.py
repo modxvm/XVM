@@ -542,7 +542,7 @@ class _Stat(object):
         CD = 3.0
         CF = 1.0
 
-        # calcualtion
+        # calculation
         dD = db - avgD
         dF = fb - avgF
         minD = avgD * 0.4
