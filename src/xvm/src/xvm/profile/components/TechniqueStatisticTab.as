@@ -417,7 +417,7 @@ package xvm.profile.components
                 if (tech.playerId == 0)
                 {
                     var adata:AccountDossier = tech.accountDossier;
-                    var ratingColor:int = MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(adata.winPercent));
+                    var ratingColor:int = MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));
                     s += size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
                     formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL) + "\n";
                     s += "<font size='7'>\n\n\n</font>\t\t\t\t   " + formatHtmlText(size(getWinsToNextPercentStr(data)), XfwConst.UICOLOR_LABEL);
@@ -438,7 +438,7 @@ package xvm.profile.components
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battles));
             //TF(proxy.battlesDL).htmlText = formatHtmlText(getWinsToNextPercentStr(data), Defines.UICOLOR_LABEL);
 
-            var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(data.winPercent));
+            var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(data.winPercent));
             proxy.winsDL.value = color(App.utils.locale.integer(data.wins));
             TF(proxy.winsDL).htmlText = formatHtmlText(App.utils.locale.float(data.winPercent) + "%", ratingColor) + "  " +
                 formatHtmlText(getWinsToNextPercentStr(data), Defines.UICOLOR_LABEL);
@@ -591,8 +591,8 @@ package xvm.profile.components
             // wins
             if (vdata.avg.R)
             {
-                colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(vdata.avg.R * 100));
-                colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(vdata.top.R * 100));
+                colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(vdata.avg.R * 100));
+                colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(vdata.top.R * 100));
                 TF(proxy.winsDL).htmlText += formatHtmlText(
                     " " + Locale.get("avg") + ": " + color(App.utils.locale.float(vdata.avg.R * 100), colorAvg) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.float(vdata.top.R * 100), colorTop),

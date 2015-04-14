@@ -121,7 +121,7 @@ class com.xvm.Chance
         var T = tier;
         var Ea = stat.xwn8 == null ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
-        var Ra = stat.r || Config.config.consts.AVG_GWR;
+        var Ra = stat.winrate || Config.config.consts.AVG_GWR;
         var Ba = stat.b || Config.config.consts.AVG_BATTLES;
 
         // 1
@@ -205,7 +205,7 @@ class com.xvm.Chance
         var T = tier;
         var Ea = stat.xwn8 == null ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
-        var Ra = stat.r || Config.config.consts.AVG_GWR;
+        var Ra = stat.winrate || Config.config.consts.AVG_GWR;
         var Ba = stat.b || Config.config.consts.AVG_BATTLES;
 
         // 1

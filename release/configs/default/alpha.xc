@@ -100,16 +100,6 @@
       { "value": 9960,  "alpha": ${"alphaRating.very_good"} },
       { "value": 99999, "alpha": ${"alphaRating.unique"   } }
     ],
-    // Dynamic transparency by TEFF (E) rating
-    // Динамическая прозрачность по рейтингу TEFF (E)
-    "e": [
-      { "value": 2,    "alpha": ${"alphaRating.very_bad" } },
-      { "value": 4,    "alpha": ${"alphaRating.bad"      } },
-      { "value": 5,    "alpha": ${"alphaRating.normal"   } },
-      { "value": 7,    "alpha": ${"alphaRating.good"     } },
-      { "value": 9,    "alpha": ${"alphaRating.very_good"} },
-      { "value": 20,   "alpha": ${"alphaRating.unique"   } }
-    ],
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед
     "winrate": [

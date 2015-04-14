@@ -2,10 +2,16 @@
 
 # PUBLIC
 
+def getVehicleInfoData(vehId):
+    global _vehicleInfoData
+    if _vehicleInfoData is None:
+        _init()
+    return _vehicleInfoData.get(vehId, None)
+
 def getVehicleInfoDataStr():
     global _vehicleInfoDataStr
     if _vehicleInfoDataStr is None:
-        _vehicleInfoDataStr = _init()
+        _init()
     return _vehicleInfoDataStr
 
 # PRIVATE
@@ -23,8 +29,9 @@ from items import vehicles
 from logger import *
 import vehinfo_short
 from vehinfo_tiers import getTiers
-import wn8
+import vehinfo_wn8
 
+_vehicleInfoData = None
 _vehicleInfoDataStr = None
 
 TURRET_TYPE_ONLY_ONE = 0
@@ -75,7 +82,7 @@ def _init():
 
                 data['shortName'] = vehinfo_short.getShortName(data['key'], data['level'], data['vclass'])
 
-                wn8data = wn8.getWN8ExpectedData(data['vid'])
+                wn8data = vehinfo_wn8.getWN8ExpectedData(data['vid'])
                 if wn8data is not None:
                     data['wn8expDamage'] = float(wn8data['expDamage'])
                     data['wn8expSpot'] = float(wn8data['expSpot'])
@@ -83,9 +90,7 @@ def _init():
                     data['wn8expDef'] = float(wn8data['expDef'])
                     data['wn8expFrag'] = float(wn8data['expFrag'])
 
-                # TODO: load avg/top data from server
-                data['avg'] = {}
-                data['top'] = {}
+                #log(data)
 
                 res.append(data)
 
@@ -98,7 +103,11 @@ def _init():
 
     # pprint(res[0])
     # pprint(res)
-    return simplejson.dumps(res)
+    global _vehicleInfoData
+    _vehicleInfoData = {x['vid']:x for x in res}
+
+    global _vehicleInfoDataStr
+    _vehicleInfoDataStr = simplejson.dumps(res)
 
 def _getRanges(turret, gun, nation, vclass):
     visionRadius = firingRadius = artyRadius = 0

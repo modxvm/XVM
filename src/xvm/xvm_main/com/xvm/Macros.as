@@ -748,9 +748,7 @@ package com.xvm
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
             // {{e}}
-            pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "X" : String(stat.v.te);
-            // {{teff}}
-            pdata["teff"] = isNaN(stat.v.teff) ? null : Math.round(stat.v.teff);
+            pdata["e"] = isNaN(stat.v.xe) ? null : stat.v.xe == 100 ? "XX" : (stat.v.xe < 10 ? "0" : "") + stat.v.xe;
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn6}}
@@ -777,7 +775,7 @@ package com.xvm
             pdata["r_size"] = getRatingDefaultValue().length;
 
             // {{winrate}}
-            pdata["winrate"] = stat.r;
+            pdata["winrate"] = stat.winrate;
             // {{rating}} (obsolete)
             pdata["rating"] = pdata["winrate"];
             // {{battles}}
@@ -788,7 +786,7 @@ package com.xvm
             pdata["kb"] = stat.b / 1000;
 
             // {{t-winrate}}
-            pdata["t-winrate"] = stat.v.r;
+            pdata["t-winrate"] = stat.v.winrate;
             // {{t-rating}} (obsolete)
             pdata["t-rating"] = pdata["t-winrate"];
             // {{t-battles}}
@@ -830,12 +828,12 @@ package com.xvm
             // {{c:wgr}}
             pdata["c:wgr"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#"); }
             // {{c:e}}
-            pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#"); }
+            pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xe, "#"); }
             // {{c:r}}
             pdata["c:r"] = getRating(pdata, "c:");
 
             // {{c:winrate}}
-            pdata["c:winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#"); }
+            pdata["c:winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#"); }
             // {{c:rating}} (obsolete)
             pdata["c:rating"] = pdata["c:winrate"]
             // {{c:kb}}
@@ -843,7 +841,7 @@ package com.xvm
             // {{c:avglvl}}
             pdata["c:avglvl"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#"); }
             // {{c:t-winrate}}
-            pdata["c:t-winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#"); }
+            pdata["c:t-winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.v.winrate, "#"); }
             // {{c:t-rating}} (obsolete)
             pdata["c:t-rating"] = pdata["c:t-winrate"];
             // {{c:t-battles}}
@@ -879,12 +877,12 @@ package com.xvm
             // {{a:wgr}}
             pdata["a:wgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
             // {{a:e}}
-            pdata["a:e"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
+            pdata["a:e"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xe);
             // {{a:r}}
             pdata["a:r"] = getRating(pdata, "a:");
 
             // {{a:winrate}}
-            pdata["a:winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.r);
+            pdata["a:winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
             // {{a:rating}} (obsolete)
             pdata["a:rating"] = pdata["a:winrate"];
             // {{a:kb}}
@@ -892,7 +890,7 @@ package com.xvm
             // {{a:avglvl}}
             pdata["a:avglvl"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
             // {{a:t-winrate}}
-            pdata["a:t-winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.v.r);
+            pdata["a:t-winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.v.winrate);
             // {{a:t-rating}} (obsolete)
             pdata["a:t-rating"] = pdata["a:t-winrate"];
             // {{a:t-battles}}

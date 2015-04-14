@@ -33,7 +33,7 @@ class com.xvm.Defines
 
     // Dynamic color types
     public static var DYNAMIC_COLOR_EFF:Number = 1;
-    public static var DYNAMIC_COLOR_RATING:Number = 2;
+    public static var DYNAMIC_COLOR_WINRATE:Number = 2;
     public static var DYNAMIC_COLOR_KB:Number = 3;
     public static var DYNAMIC_COLOR_HP:Number = 4;
     public static var DYNAMIC_COLOR_HP_RATIO:Number = 5;
@@ -42,18 +42,17 @@ class com.xvm.Defines
     public static var DYNAMIC_COLOR_TDV:Number = 8;
     public static var DYNAMIC_COLOR_TFB:Number = 9;
     public static var DYNAMIC_COLOR_TSB:Number = 10;
-    public static var DYNAMIC_COLOR_E:Number = 11;
-    public static var DYNAMIC_COLOR_WN6:Number = 12;
-    public static var DYNAMIC_COLOR_WN8:Number = 13;
-    public static var DYNAMIC_COLOR_WGR:Number = 14;
-    public static var DYNAMIC_COLOR_X:Number = 15;
-    public static var DYNAMIC_COLOR_AVGLVL:Number = 16;
-    public static var DYNAMIC_COLOR_SPOTTED:Number = 17;
-    public static var DYNAMIC_COLOR_WINCHANCE:Number = 18;
+    public static var DYNAMIC_COLOR_WN6:Number = 11;
+    public static var DYNAMIC_COLOR_WN8:Number = 12;
+    public static var DYNAMIC_COLOR_WGR:Number = 13;
+    public static var DYNAMIC_COLOR_X:Number = 14;
+    public static var DYNAMIC_COLOR_AVGLVL:Number = 15;
+    public static var DYNAMIC_COLOR_SPOTTED:Number = 16;
+    public static var DYNAMIC_COLOR_WINCHANCE:Number = 17;
 
     // Dynamic alpha types
     public static var DYNAMIC_ALPHA_EFF:Number = 1;
-    public static var DYNAMIC_ALPHA_RATING:Number = 2;
+    public static var DYNAMIC_ALPHA_WINRATE:Number = 2;
     public static var DYNAMIC_ALPHA_KB:Number = 3;
     public static var DYNAMIC_ALPHA_HP:Number = 4;
     public static var DYNAMIC_ALPHA_HP_RATIO:Number = 5;
@@ -62,13 +61,12 @@ class com.xvm.Defines
     public static var DYNAMIC_ALPHA_TDV:Number = 8;
     public static var DYNAMIC_ALPHA_TFB:Number = 9;
     public static var DYNAMIC_ALPHA_TSB:Number = 10;
-    public static var DYNAMIC_ALPHA_E:Number = 11;
-    public static var DYNAMIC_ALPHA_WN6:Number = 12;
-    public static var DYNAMIC_ALPHA_WN8:Number = 13;
-    public static var DYNAMIC_ALPHA_WGR:Number = 14;
-    public static var DYNAMIC_ALPHA_X:Number = 15;
-    public static var DYNAMIC_ALPHA_AVGLVL:Number = 16;
-    public static var DYNAMIC_ALPHA_SPOTTED:Number = 17;
+    public static var DYNAMIC_ALPHA_WN6:Number = 11;
+    public static var DYNAMIC_ALPHA_WN8:Number = 12;
+    public static var DYNAMIC_ALPHA_WGR:Number = 13;
+    public static var DYNAMIC_ALPHA_X:Number = 14;
+    public static var DYNAMIC_ALPHA_AVGLVL:Number = 15;
+    public static var DYNAMIC_ALPHA_SPOTTED:Number = 16;
 
     // Damage flag at Xvm.as: updateHealth
     public static var FROM_UNKNOWN:Number = 0;

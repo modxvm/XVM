@@ -62,9 +62,9 @@ package xvm.company.renderers
             s += Locale.get("Fights") + ": " + (!stat.b ? "-" :
                 "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000) + "'>" +
                 App.utils.locale.integer(stat.b) + "</font>") + " ";
-            s += Locale.get("Wins") + ": " + (!stat.r ? "-" :
-                "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r) + "'>" +
-                Math.round(stat.r) + "%</font>") + " ";
+            s += Locale.get("Wins") + ": " + (!stat.winrate ? "-" :
+                "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate) + "'>" +
+                Math.round(stat.winrate) + "%</font>") + " ";
             s += "<br>";
             // line 4
             s += Locale.get("Data was updated at") + ": <font color='#CCCCCC'>" + dt + "</font>";
@@ -115,7 +115,7 @@ package xvm.company.renderers
                     //Logger.addObject(stat);
 
                     var effd = td / tb / data.hp || 0;
-                    var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
+                    var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.te);
                     var s2 = "";
                     s2 += "E: " + (!stat.teff ? "-" :
                         "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";

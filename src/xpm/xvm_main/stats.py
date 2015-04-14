@@ -52,6 +52,9 @@ from logger import *
 from loadurl import loadUrl
 import token
 import utils
+import vehinfo
+import vehinfo_xteff
+import xvm_scale
 
 #############################
 
@@ -410,6 +413,8 @@ class _Stat(object):
     def _fix(self, stat, orig_name=None):
         if 'twr' in stat:
             del stat['twr']
+        if 'ip' in stat:
+            del stat['ip']
         if 'v' not in stat:
             stat['v'] = {}
         # temporary workaround
@@ -449,6 +454,107 @@ class _Stat(object):
         if orig_name is not None:
             stat['name'] = orig_name
 
+        if 'b' in stat and 'w' in stat and stat['b'] > 0:
+            self._calculateGWR(stat)
+            self._calculateXvmScale(stat)
+            if 'id' in stat['v']:
+                self._calculateVehicleValues(stat)
+                self._calculateXteff(stat)
+
+        self._addContactData(stat)
+
+        # log(simplejson.dumps(stat))
+        return stat
+
+    # Global Win Rate (GWR)
+    def _calculateGWR(self, stat):
+        stat['winrate'] = float(stat['w']) / float(stat['b']) * 100.0
+
+    # XVM Scale
+    def _calculateXvmScale(self, stat):
+        if 'e' in stat and stat['e'] > 0:
+            stat['xeff'] = xvm_scale.XEFF(stat['e'])
+        if 'wn6' in stat and stat['wn6'] > 0:
+            stat['xwn6'] = xvm_scale.XWN6(stat['wn6'])
+        if 'wn8' in stat and stat['wn8'] > 0:
+            stat['xwn8'] = xvm_scale.XWN8(stat['wn8'])
+        if 'wgr' in stat and stat['wgr'] > 0:
+            stat['xwgr'] = xvm_scale.XWGR(stat['wgr'])
+
+    # calculate Vehicle values
+    def _calculateVehicleValues(self, stat):
+        v = stat['v']
+        vehId = v['id']
+        vData = vehinfo.getVehicleInfoData(vehId)
+        if vData is None:
+            return
+        #log(vData['key'])
+        #log(vData)
+
+        # tank rating
+        if 'b' not in v or 'w' not in v or v['b'] <= 0:
+            v['winrate'] = stat['winrate']
+        else:
+            Tr = float(v['w']) / float(v['b']) * 100.0
+            if v['b'] > 100:
+                v['winrate'] = Tr
+            else:
+                Or = float(stat['winrate'])
+                Tb = float(v['b']) / 100.0
+                Tl = float(min(vData['level'], 4)) / 4.0
+                v['winrate'] = Or - (Or - Tr) * Tb * Tl
+
+        if 'b' not in v or v['b'] <= 0:
+            return
+
+        vb = float(v['b'])
+        if 'dmg' in v and v['dmg'] > 0:
+            v['db'] = float(v['dmg']) / vb
+            v['dv'] = float(v['dmg']) / vb / vData['hpTop']
+        if 'frg' in v and v['frg'] > 0:
+            v['fb'] = float(v['frg']) / vb
+        if 'spo' in v and v['spo'] > 0:
+            v['sb'] = float(v['spo']) / vb
+
+    # calculate xteff
+    def _calculateXteff(self, stat):
+        v = stat['v']
+        vehId = v['id']
+        if 'db' not in v or v['db'] <= 0:
+            return
+        if 'fb' not in v or v['fb'] <= 0:
+            return
+
+        xteff = vehinfo_xteff.getXteffData(vehId)
+        if xteff is None or xteff['td'] == xteff['ad'] or xteff['tf'] == xteff['af']:
+            vData = vehinfo.getVehicleInfoData(vehId)
+            debug('NOTE: No xteff data for vehicle [{}] {}'.format(vehId, vData['key']))
+            return
+
+        # input
+        db = float(v['db'])
+        fb = float(v['fb'])
+        avgD = float(xteff['ad'])
+        topD = float(xteff['td'])
+        avgF = float(xteff['af'])
+        topF = float(xteff['tf'])
+
+        CD = 3.0
+        CF = 1.0
+
+        # calcualtion
+        dD = db - avgD
+        dF = fb - avgF
+        minD = avgD * 0.4
+        minF = avgF * 0.4
+        d = max(0, 1 + dD / (topD - avgD) if db >= avgD else 1 + dD / (avgD - minD))
+        f = max(0, 1 + dF / (topF - avgF) if fb >= avgF else 1 + dF / (avgF - minF))
+
+        teff = (d * CD + f * CF) / (CD + CF) * 1000.0
+        v['xe'] = xvm_scale.XE(vehId, teff)
+        #log(v['xe'])
+
+    def _addContactData(self, stat):
         # try to add changed nick and comment
         try:
             import xvm_contacts.python.contacts as contacts
@@ -457,8 +563,6 @@ class _Stat(object):
             #err(traceback.format_exc())
             pass
 
-        # log(simplejson.dumps(stat))
-        return stat
 
     def _load_clanIcon(self, pl):
         try:

@@ -13,20 +13,15 @@ package com.xvm.types.stat
         public var spo:Number = NaN;     // spotted (int)
         public var def:Number = NaN;     // defence (int)
         public var sur:Number = NaN;     // survived (int)
+        public var cap:Number = NaN;     // capture points (int)
 
-        // calculated
-        public var r:Number = NaN;       // current vehicle win rate (int)
+        public var winrate:Number = NaN; // current vehicle win rate (int)
         public var db:Number = NaN;      // damageDealt per battle (int)
         public var fb:Number = NaN;      // frags per battle (float)
         public var sb:Number = NaN;      // spotted per battle (float)
         public var dv:Number = NaN;      // db/vehicleHP (float)
-        public var te:Number = NaN;      // tank eff (int, 1-10)
-        public var teff:Number = NaN;    // tank eff (int, 1-99999)
+        public var xe:Number = NaN;      // tank eff (int, 1-100)
 
         public var data:VehicleData = null;
-
-        // obsolete
-        public var l:int = 0;           // level
-        public var cl:String = null;    // class
     }
 }

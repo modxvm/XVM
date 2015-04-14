@@ -41,7 +41,7 @@ package xvm.profile.components
             if (Config.networkServicesSettings.statAwards)
             {
                 proxy.winsTF.htmlText = "<font color='" +
-                    MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, proxy.data.winsEfficiency) + "'>" +
+                    MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, proxy.data.winsEfficiency) + "'>" +
                     proxy.data.winsEfficiencyStr +
                     "</font>";
             }

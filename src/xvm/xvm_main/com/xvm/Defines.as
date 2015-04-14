@@ -62,7 +62,7 @@ package com.xvm
 
         // Dynamic color types
         public static const DYNAMIC_COLOR_EFF:int = 1;
-        public static const DYNAMIC_COLOR_RATING:int = 2;
+        public static const DYNAMIC_COLOR_WINRATE:int = 2;
         public static const DYNAMIC_COLOR_KB:int = 3;
         public static const DYNAMIC_COLOR_HP:int = 4;
         public static const DYNAMIC_COLOR_HP_RATIO:int = 5;
@@ -71,20 +71,19 @@ package com.xvm
         public static const DYNAMIC_COLOR_TDV:int = 8;
         public static const DYNAMIC_COLOR_TFB:int = 9;
         public static const DYNAMIC_COLOR_TSB:int = 10;
-        public static const DYNAMIC_COLOR_E:int = 11;
-        public static const DYNAMIC_COLOR_WN6:int = 12;
-        public static const DYNAMIC_COLOR_WN8:int = 13;
-        public static const DYNAMIC_COLOR_WGR:int = 14;
-        public static const DYNAMIC_COLOR_X:int = 15;
-        public static const DYNAMIC_COLOR_AVGLVL:int = 16;
-        public static const DYNAMIC_COLOR_WN8EFFD:int = 17;
-        public static const DYNAMIC_COLOR_DAMAGERATING:int = 18;
-        public static const DYNAMIC_COLOR_HITSRATIO:int = 19;
-        public static const DYNAMIC_COLOR_WINCHANCE:int = 20;
+        public static const DYNAMIC_COLOR_WN6:int = 11;
+        public static const DYNAMIC_COLOR_WN8:int = 12;
+        public static const DYNAMIC_COLOR_WGR:int = 13;
+        public static const DYNAMIC_COLOR_X:int = 14;
+        public static const DYNAMIC_COLOR_AVGLVL:int = 15;
+        public static const DYNAMIC_COLOR_WN8EFFD:int = 16;
+        public static const DYNAMIC_COLOR_DAMAGERATING:int = 17;
+        public static const DYNAMIC_COLOR_HITSRATIO:int = 18;
+        public static const DYNAMIC_COLOR_WINCHANCE:int = 19;
 
         // Dynamic alpha types
         public static const DYNAMIC_ALPHA_EFF:int = 1;
-        public static const DYNAMIC_ALPHA_RATING:int = 2;
+        public static const DYNAMIC_ALPHA_WINRATE:int = 2;
         public static const DYNAMIC_ALPHA_KB:int = 3;
         public static const DYNAMIC_ALPHA_HP:int = 4;
         public static const DYNAMIC_ALPHA_HP_RATIO:int = 5;
@@ -93,12 +92,11 @@ package com.xvm
         public static const DYNAMIC_ALPHA_TDV:int = 8;
         public static const DYNAMIC_ALPHA_TFB:int = 9;
         public static const DYNAMIC_ALPHA_TSB:int = 10;
-        public static const DYNAMIC_ALPHA_E:int = 11;
-        public static const DYNAMIC_ALPHA_WN6:int = 12;
-        public static const DYNAMIC_ALPHA_WN8:int = 13;
-        public static const DYNAMIC_ALPHA_WGR:int = 14;
-        public static const DYNAMIC_ALPHA_X:int = 15;
-        public static const DYNAMIC_ALPHA_AVGLVL:int = 16;
+        public static const DYNAMIC_ALPHA_WN6:int = 11;
+        public static const DYNAMIC_ALPHA_WN8:int = 12;
+        public static const DYNAMIC_ALPHA_WGR:int = 13;
+        public static const DYNAMIC_ALPHA_X:int = 14;
+        public static const DYNAMIC_ALPHA_AVGLVL:int = 15;
 
         // Damage flag at Xvm.as: updateHealth
         public static const FROM_UNKNOWN:int = 0;

@@ -1189,14 +1189,6 @@ package com.xvm
                 { value: 64.5,  color: XfwConst.C_BLUE },     // very good
                 { value: 101,   color: XfwConst.C_PURPLE }    // unique
             ];
-            c.e = [
-                { value: 3,    color: XfwConst.C_RED },     // very bad
-                { value: 6,    color: XfwConst.C_ORANGE },  // bad
-                { value: 7,    color: XfwConst.C_YELLOW },  // normal
-                { value: 8,    color: XfwConst.C_GREEN },   // good
-                { value: 9,    color: XfwConst.C_BLUE },    // very good
-                { value: 20,   color: XfwConst.C_PURPLE }   // unique
-            ];
             c.kb = [
                 { value: 2,   color: XfwConst.C_RED },
                 { value: 6,   color: XfwConst.C_ORANGE },
@@ -1342,12 +1334,6 @@ package com.xvm
                 { value: 53,  alpha: 80 },
                 { value: 60,  alpha: 60 },
                 { value: 101, alpha: 40 }
-            ];
-            c.e = [
-                { value: 5,  alpha: 100 },
-                { value: 7,  alpha: 80 },
-                { value: 9,  alpha: 60 },
-                { value: 20, alpha: 40 }
             ];
             c.kb = [
                 { value: 2,   alpha: 100 },

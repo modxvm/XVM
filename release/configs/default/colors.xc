@@ -255,16 +255,6 @@
       { "value": 9960,  "color": ${"def.colorRating.very_good"} },  // 8550 - 9959 - very good  (better then 99% of players)
       { "value": 99999, "color": ${"def.colorRating.unique"   } }   // 9960 - *    - unique     (better then 99.9% of players)
     ],
-    // Dynamic color by TEFF (E) rating
-    // Динамический цвет по рейтингу TEFF (E)
-    "e": [
-      { "value": 3,    "color": ${"def.colorRating.very_bad" } },
-      { "value": 6,    "color": ${"def.colorRating.bad"      } },
-      { "value": 7,    "color": ${"def.colorRating.normal"   } },
-      { "value": 8,    "color": ${"def.colorRating.good"     } },
-      { "value": 9,    "color": ${"def.colorRating.very_good"} },
-      { "value": 20,   "color": ${"def.colorRating.unique"   } }
-    ],
     // Dynamic color for win chance
     // Динамический цвет для шанса на победу
     "winChance": [

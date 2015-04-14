@@ -50,7 +50,7 @@ package com.xvm.types.dossier
                 hb = battles / 100.0;
                 c_battles = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, battles, "#");
                 winrate = wins / battles * 100;
-                c_winrate = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, winrate, "#");
+                c_winrate = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, winrate, "#");
 
                 var vdossier:VehicleDossier = Dossier.getVehicleDossier(vehId);
                 if (vdossier != null)

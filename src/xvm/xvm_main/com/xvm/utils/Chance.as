@@ -129,7 +129,7 @@ package com.xvm.utils
             chanceLog.push(stat);
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
-            var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
+            var Ra:Number = stat.winrate || Config.config.consts.AVG_GWR;
             var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
 
             // 1
@@ -213,7 +213,7 @@ package com.xvm.utils
             var T:Number = tier;
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
-            var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
+            var Ra:Number = stat.winrate || Config.config.consts.AVG_GWR;
             var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
 
             // 1

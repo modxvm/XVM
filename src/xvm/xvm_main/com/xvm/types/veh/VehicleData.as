@@ -43,15 +43,8 @@ package com.xvm.types.veh
 
         public var shortName:String = Values.EMPTY_STR;
 
-        public var avg:StatValues;
-        public var top:StatValues;
-
         public function VehicleData(data:Object)
         {
-            if (data.avg != null && !(data.avg is StatValues))
-                data.avg = new StatValues(data.avg);
-            if (data.top != null && !(data.top is StatValues))
-                data.top = new StatValues(data.top);
             super(data);
         }
 
@@ -84,19 +77,4 @@ package com.xvm.types.veh
             }
         }
    }
-}
-
-class StatValues extends net.wg.data.daapi.base.DAAPIDataClass
-{
-    public var R:Number;
-    public var D:Number;
-    public var E:Number;
-    public var F:Number;
-    public var S:Number;
-    public var U:Number;
-
-    public function StatValues(data:Object)
-    {
-      super(data);
-    }
 }

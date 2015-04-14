@@ -38,6 +38,7 @@ package com.xvm.types.stat
         public var status:Number = NaN;        // XVM activation status
         public var lang:String = null;         // client language
         public var team:Number = NaN;          // team (1 or 2)
+        public var squadnum:Number = NaN;      // squad number
         public var alive:Boolean = false;      // alive
         public var ready:Boolean = false;      // avatarReady
         public var maxHealth:Number = NaN;     // max health
@@ -49,8 +50,7 @@ package com.xvm.types.stat
         public var cw:CommonStatData = null;
         public var cmp:CommonStatData = null;
 
-        // calculated
-        public var r:Number = NaN;             // global win rate (int)
+        public var winrate:Number = NaN;       // global win rate (int)
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
         public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
