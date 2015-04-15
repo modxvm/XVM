@@ -65,13 +65,16 @@ class _Dossier(object):
                     xpToElite += data[0]
 
             # xteff
-            stats = self._getStatsBlock(dossier)
-            battles = stats.getBattlesCount()
-            dmg = stats.getDamageDealt()
-            frg = stats.getFragsCount()
-            xe = None
-            if battles > 0 and dmg > 0 and frg > 0:
-                xe = vehinfo_xteff.calculateXe(vehId, float(dmg) / battles, float(frg) / battles)
+            if dossier is None:
+                xe = None
+            else:
+                stats = self._getStatsBlock(dossier)
+                battles = stats.getBattlesCount()
+                dmg = stats.getDamageDealt()
+                frg = stats.getFragsCount()
+                xe = None
+                if battles > 0 and dmg > 0 and frg > 0:
+                    xe = vehinfo_xteff.calculateXe(vehId, float(dmg) / battles, float(frg) / battles)
 
             res = self._prepareVehicleResult(dossier, xe, earnedXP, freeXP, xpToElite)
 

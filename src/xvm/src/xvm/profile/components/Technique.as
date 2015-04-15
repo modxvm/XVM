@@ -11,8 +11,11 @@ package xvm.profile.components
     import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
-    import net.wg.gui.lobby.profile.pages.technique.*;
+    import net.wg.gui.components.controls.SortableScrollingList;
+    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import net.wg.gui.components.advanced.*;
+    import net.wg.gui.lobby.profile.pages.technique.*;
+    import scaleform.clik.data.*;
     import scaleform.clik.events.*;
     import xvm.profile.UI.*;
 
@@ -26,24 +29,29 @@ package xvm.profile.components
 
         //private var techniqueListAdjuster:TechniqueListAdjuster;
 
-        public function Technique(page:ProfileTechnique, playerName:String):void
+        public function Technique(page:ProfileTechnique, playerName:String, playerId:int):void
         {
             try
             {
                 this.name = "xvm_extension";
                 this._page = page;
                 this._playerName = playerName;
-                this._playerId = 0;
+                this._playerId = playerId;
+
+                // Change row height: 34 -> 32
+                page.listComponent.techniqueList.rowHeight = 32;
 
                 // remove upper/lower shadow
                 page.listComponent.upperShadow.visible = false;
                 page.listComponent.lowerShadow.visible = false;
 
-                // override renderer
+                // override renderers
                 list.itemRenderer = UI_TechniqueRenderer;
 
                 // Initialize TechniqueStatisticsTab
                 list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
+
+                Dossier.loadAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
 
                 delayedInit();
 
@@ -121,6 +129,10 @@ package xvm.profile.components
                     App.utils.scheduler.envokeInNextFrame(delayedInit);
                     return;
                 }
+
+                // Setup header
+                setupHeader();
+
                 bb.selectedIndex = -1;
                 bb.selectedIndex = btnIndex;
                 b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingInfo.DESCENDING_SORT : SortingInfo.ASCENDING_SORT;
@@ -138,6 +150,37 @@ package xvm.profile.components
             {
                 Logger.err(ex);
             }
+        }
+
+        private function setupHeader():void
+        {
+            /*var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
+            dp[4].buttonWidth = 60; // BATTLES_COUNT,74
+            dp[5].buttonWidth = 60; // WINS_EFFICIENCY,74
+            dp[6].buttonWidth = 70; // AVG_EXPERIENCE,90
+            dp[7].buttonWidth = 60; // MARK_OF_MASTERY,83
+            dp[7].showSeparator = true;
+
+            var bi:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            bi.buttonWidth = 60;
+            bi.sortOrder = 8;
+            bi.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_WINS;
+            bi.iconId = TechniqueList.WINS_EFFICIENCY;
+            bi.defaultSortDirection = SortingInfo.DESCENDING_SORT;
+            bi.ascendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW;
+            bi.descendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW;
+            bi.buttonHeight = 40;
+            bi.enabled = true;
+            bi.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_TOTALWINS;
+            bi.showSeparator = false;
+            dp.push(bi);
+
+            page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
+            page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
+            page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
+
+            //Logger.addObject(page.listComponent.sortableButtonBar.dataProvider, 2);
+            */
         }
 
         protected function get list():TechniqueList
@@ -162,7 +205,7 @@ package xvm.profile.components
             //Logger.add("onStatLoaded: " + playerName);
             if (page != null && page.listComponent != null && page.listComponent.visible)
             {
-                if (page is ProfileTechniqueWindow && page.listComponent.selectedItem.id == 0)
+                if (page is ProfileTechniqueWindow && page.listComponent.selectedItem && page.listComponent.selectedItem.id == 0)
                     page.listComponent.dispatchEvent(new Event(ListEvent.INDEX_CHANGE));
                 else
                     page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));

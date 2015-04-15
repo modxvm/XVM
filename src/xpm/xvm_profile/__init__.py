@@ -40,28 +40,28 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
         try:
             vehId = x['id']
             vehDossier = g_itemsCache.items.getVehicleDossier(vehId, _accountDossier.getPlayerDBID())
+            if vehDossier is not None:
+                if self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL:
+                    stats = vehDossier.getRandomStats()
+                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM:
+                    stats = vehDossier.getTeam7x7Stats()
+                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_STATICTEAM:
+                    stats = vehDossier.getRated7x7Stats()
+                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL:
+                    stats = vehDossier.getHistoricalStats()
+                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES:
+                    stats = vehDossier.getFortSortiesStats()
+                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES:
+                    stats = vehDossier.getFortBattlesStats()
+                else:
+                    raise ValueError('Profile Technique: Unknown battle type: ' + self._battlesType)
 
-            if self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL:
-                stats = vehDossier.getRandomStats()
-            elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM:
-                stats = vehDossier.getTeam7x7Stats()
-            elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_STATICTEAM:
-                stats = vehDossier.getRated7x7Stats()
-            elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL:
-                stats = vehDossier.getHistoricalStats()
-            elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES:
-                stats = vehDossier.getFortSortiesStats()
-            elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES:
-                stats = vehDossier.getFortBattlesStats()
-            else:
-                raise ValueError('Profile Technique: Unknown battle type: ' + self._battlesType)
-
-            battles = stats.getBattlesCount()
-            dmg = stats.getDamageDealt()
-            frg = stats.getFragsCount()
-            x['xvm_xe'] = None
-            if battles > 0 and dmg > 0 and frg > 0:
-                x['xvm_xe'] = vehinfo_xteff.calculateXe(vehId, float(dmg) / battles, float(frg) / battles)
+                battles = stats.getBattlesCount()
+                dmg = stats.getDamageDealt()
+                frg = stats.getFragsCount()
+                x['xvm_xe'] = None
+                if battles > 0 and dmg > 0 and frg > 0:
+                    x['xvm_xe'] = vehinfo_xteff.calculateXe(vehId, float(dmg) / battles, float(frg) / battles)
         except:
             err(traceback.format_exc())
 

@@ -11,12 +11,13 @@ package xvm.profile.UI
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
 
-    public dynamic class UI_TechniqueRenderer extends TechniqueRenderer_UI
+    public dynamic class UI_ProfileSortingButton extends ProfileSortingButton_UI
     {
         private var xeffTF:TextField;
 
-        public function UI_TechniqueRenderer()
+        public function UI_ProfileSortingButton()
         {
+            Logger.add("UI_ProfileSortingButton");
             super();
         }
 
@@ -24,16 +25,22 @@ package xvm.profile.UI
         {
             super.configUI();
 
-            if (Config.networkServicesSettings.statAwards)
+            /*if (Config.networkServicesSettings.statAwards)
             {
                 xeffTF = WGUtils.cloneTextField(winsTF);
-                xeffTF.x = winsTF.x + 80;
+                xeffTF.x = winsTF.x + 180;
                 xeffTF.y = winsTF.y;
                 addChild(xeffTF);
-            }
+            }*/
         }
 
-        override protected function onDispose():void
+        override public function set data(value:Object):void
+        {
+            super.data = value;
+            Logger.addObject(value);
+        }
+
+        /*override protected function onDispose():void
         {
             super.onDispose();
             xeffTF = null;
@@ -80,6 +87,6 @@ package xvm.profile.UI
                         "</font>";
                 }
             }
-        }
+        }*/
     }
 }

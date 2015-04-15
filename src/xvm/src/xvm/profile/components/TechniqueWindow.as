@@ -8,10 +8,7 @@ package xvm.profile.components
     {
         public function TechniqueWindow(window:ProfileTechniqueWindow, playerName:String, playerId:int):void
         {
-            super(window, playerName);
-
-            _playerId = playerId;
-            Dossier.loadAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
+            super(window, playerName, playerId);
         }
 
         override protected function createFilters():void
