@@ -17,9 +17,11 @@ package com.xvm.types
         public var comments:Boolean;
         public var chance:Boolean;
         public var chanceLive:Boolean;
-        public var topClansCount:Number;
+        public var chanceResults:Boolean;
         public var scale:String = Values.EMPTY_STR;
         public var rating:String = Values.EMPTY_STR;
+        public var topClansCount:Number;
+        public var flag:String = Values.EMPTY_STR;
 
         public function NetworkServicesSettings(data:Object)
         {

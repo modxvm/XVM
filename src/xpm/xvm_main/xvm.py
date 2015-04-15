@@ -31,9 +31,9 @@ _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
     XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS,
     XVM_COMMAND.LOAD_STAT_USER,
+    XVM_COMMAND.RUN_TEST,
     AS2COMMAND.LOAD_BATTLE_STAT,
     AS2COMMAND.LOGSTAT,
-    AS2COMMAND.TEST,
 )
 
 def l10n(value):
@@ -106,6 +106,8 @@ class Xvm(object):
                 self.sendConfig(self.vmmFlashObject)
                 configwatchdog.startConfigWatchdog()
                 return (None, True)
+            elif cmd == XVM_COMMAND.RUN_TEST:
+                runTest(args)
 
         except Exception, ex:
             err(traceback.format_exc())
@@ -134,8 +136,6 @@ class Xvm(object):
                 n = int(args[0])
                 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
                 res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3, n >> 2)
-            elif cmd == AS2COMMAND.TEST:
-                runTest(args)
             else:
                 return
             proxy.movie.invoke(('xvm.respond',

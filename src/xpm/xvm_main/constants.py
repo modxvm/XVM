@@ -25,6 +25,7 @@ class XVM_COMMAND(object):
     OPEN_URL = "xvm.open_url"
     SAVE_SETTINGS = "xvm.save_settings"
     SET_CONFIG = "xvm.set_config"
+    RUN_TEST = "xvm.run_test"
     AS_DOSSIER = "xvm.as.dossier"
     AS_L10N = "xvm.as.l10n"
     AS_RELOAD_CONFIG = "xvm.as.reload_config"
@@ -44,7 +45,6 @@ class AS2COMMAND(object):
     LOAD_BATTLE_STAT = "load_battle_stat"
     LOAD_SETTINGS = "load_settings"
     SAVE_SETTINGS = "save_settings"
-    TEST = "test"
 
 class AS2RESPOND(object):
     BATTLE_STATE = "xvm.battle_state"
