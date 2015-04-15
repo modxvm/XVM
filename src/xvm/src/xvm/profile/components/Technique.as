@@ -38,6 +38,10 @@ package xvm.profile.components
                 this._playerName = playerName;
                 this._playerId = playerId;
 
+                //page.listComponent.removeChild(page.listComponent.sortableButtonBar);
+                //page.listComponent.sortableButtonBar.dispose();
+                //page.listComponent.sortableButtonBar = new UI_SortableButtonBar();
+
                 // Change row height: 34 -> 32
                 page.listComponent.techniqueList.rowHeight = 32;
 
