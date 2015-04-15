@@ -65,13 +65,16 @@ package com.xvm.types.dossier
                     c_tfb = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, tfb, "#");
                     tsb = vdossier.avgSpotted;
                     c_tsb = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, tsb, "#");
-                    //teff =
-                    //e =
-                    //c_e =
                     if (wn8expd > 0)
                     {
                         wn8effd = tdb / wn8expd;
                         c_wn8effd = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8EFFD, wn8effd, "#");
+                    }
+
+                    if (!isNaN(vdossier.xe) || vdossier.xe == 0)
+                    {
+                        e = vdossier.xe == 100 ? "XX" : (vdossier.xe < 10 ? "0" : "") + vdossier.xe;
+                        c_e = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xe, "#");
                     }
 
                     earnedXP = isNaN(vdossier.earnedXP) || vdossier.earnedXP == 0 ? NaN : vdossier.earnedXP;
@@ -126,11 +129,11 @@ package com.xvm.types.dossier
         public var tsb:Number;
         public var c_tsb:String;
         public var teff:Number;
-        public var e:Number;
-        public var c_e:String;
         public var wn8expd:Number;
         public var wn8effd:Number;
         public var c_wn8effd:String;
+        public var e:String;
+        public var c_e:String;
         public var earnedXP:Number;
         public var freeXP:Number;
         public var xpToElite:Number;

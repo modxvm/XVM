@@ -519,39 +519,11 @@ class _Stat(object):
     # calculate xteff
     def _calculateXteff(self, stat):
         v = stat['v']
-        vehId = v['id']
         if 'db' not in v or v['db'] <= 0:
             return
         if 'fb' not in v or v['fb'] <= 0:
             return
-
-        xteff = vehinfo_xteff.getXteffData(vehId)
-        if xteff is None or xteff['td'] == xteff['ad'] or xteff['tf'] == xteff['af']:
-            vData = vehinfo.getVehicleInfoData(vehId)
-            debug('NOTE: No xteff data for vehicle [{}] {}'.format(vehId, vData['key']))
-            return
-
-        # input
-        db = float(v['db'])
-        fb = float(v['fb'])
-        avgD = float(xteff['ad'])
-        topD = float(xteff['td'])
-        avgF = float(xteff['af'])
-        topF = float(xteff['tf'])
-
-        CD = 3.0
-        CF = 1.0
-
-        # calculation
-        dD = db - avgD
-        dF = fb - avgF
-        minD = avgD * 0.4
-        minF = avgF * 0.4
-        d = max(0, 1 + dD / (topD - avgD) if db >= avgD else 1 + dD / (avgD - minD))
-        f = max(0, 1 + dF / (topF - avgF) if fb >= avgF else 1 + dF / (avgF - minF))
-
-        teff = (d * CD + f * CF) / (CD + CF) * 1000.0
-        v['xe'] = xvm_scale.XE(vehId, teff)
+        v['xe'] = vehinfo_xteff.calculateXe(v['id'], float(v['db']), float(v['fb']))
         #log(v['xe'])
 
     def _addContactData(self, stat):

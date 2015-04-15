@@ -6,9 +6,6 @@
  @author Maxim Schedriviy <max(at)modxvm.com>
 """
 
-from logger import *
-import vehinfo_xteff
-
 def XEFF(x):
     return 100 if x > 2250 else		\
         round(max(0, min(100,		\
@@ -56,12 +53,3 @@ def XWGR(x):
             - 0.00002225)		\
             + 0.05637)			\
             - 44.443)))
-
-def XE(vehId, x):
-    if x < 1:
-        return None
-    xteff = vehinfo_xteff.getXteffData(vehId)
-    if xteff is None:
-        return None
-    n = next((i for i,v in enumerate(xteff['x']) if v > x), 100)
-    return n
