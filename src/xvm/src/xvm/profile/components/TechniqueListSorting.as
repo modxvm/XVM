@@ -17,7 +17,8 @@ package xvm.profile.components
         private static const F_AVG_EXPERIENCE:String = TechniqueList.AVG_EXPERIENCE;
         private static const F_MARK_OF_MASTERY:String = TechniqueList.MARK_OF_MASTERY;
 
-        private static var SORT_FIELDS:Object = {
+        private static var SORT_FIELDS:Object =
+        {
             "nationIndex":    { field: TechniqueList.NATION_INDEX, options: Array.NUMERIC },
             "typeIndex":      { field: TechniqueList.TYPE_INDEX, options: Array.CASEINSENSITIVE },
             "level":          { field: TechniqueList.LEVEL, options: Array.NUMERIC | Array.DESCENDING },
@@ -28,7 +29,8 @@ package xvm.profile.components
             "markOfMastery":  { field: TechniqueList.MARK_OF_MASTERY, options: Array.NUMERIC | Array.DESCENDING }
         };
 
-        private static var SORT_OPTIONS:Object = {
+        private static var SORT_OPTIONS:Object =
+        {
             "nationIndex":    [ F_NATION_INDEX, F_LEVEL, F_TYPE_INDEX, F_SHORT_USER_NAME ],                   // 1 - nationIndex
             "typeIndex":      [ F_TYPE_INDEX, F_LEVEL, F_NATION_INDEX, F_SHORT_USER_NAME ],                   // 2 - typeIndex
             "level":          [ F_LEVEL, F_NATION_INDEX, F_TYPE_INDEX, F_SHORT_USER_NAME ],                   // 3 - level

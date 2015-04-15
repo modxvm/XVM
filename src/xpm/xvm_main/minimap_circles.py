@@ -48,7 +48,7 @@ class _MinimapCircles(object):
             return
 
         self.view_distance_vehicle = self.item.descriptor.turret['circularVisionRadius']
-        debug('  view_distance_vehicle: %.0f' % self.view_distance_vehicle)
+        #debug('  view_distance_vehicle: %.0f' % self.view_distance_vehicle)
 
         self._updateCrew()
 
@@ -98,29 +98,29 @@ class _MinimapCircles(object):
         if loaders_count > 0:
             self.base_loaders_skill /= loaders_count
 
-        debug('  base_commander_skill: %.0f' % self.base_commander_skill)
-        debug('  base_radioman_skill: %.0f' % self.base_radioman_skill)
-        debug('  base_loaders_skill: %.0f' % self.base_loaders_skill)
-        debug('  commander_eagleEye: %d' % self.commander_eagleEye)
-        debug('  radioman_finder: %d' % self.radioman_finder)
-        debug('  camouflage: %s' % str(self.camouflage))
-        debug('  brothers_in_arms: %s' % str(self.brothers_in_arms))
+        #debug('  base_commander_skill: %.0f' % self.base_commander_skill)
+        #debug('  base_radioman_skill: %.0f' % self.base_radioman_skill)
+        #debug('  base_loaders_skill: %.0f' % self.base_loaders_skill)
+        #debug('  commander_eagleEye: %d' % self.commander_eagleEye)
+        #debug('  radioman_finder: %d' % self.radioman_finder)
+        #debug('  camouflage: %s' % str(self.camouflage))
+        #debug('  brothers_in_arms: %s' % str(self.brothers_in_arms))
 
         # Check for Stereoscope
         self.stereoscope = self._isOptionalEquipped('stereoscope')
-        debug('  stereoscope: %s' % str(self.stereoscope))
+        #debug('  stereoscope: %s' % str(self.stereoscope))
 
         # Check for Ventilation
         self.ventilation = self._isOptionalEquipped('improvedVentilation')
-        debug('  ventilation: %s' % str(self.ventilation))
+        #debug('  ventilation: %s' % str(self.ventilation))
 
         # Check for Coated Optics
         self.coated_optics = self._isOptionalEquipped('coatedOptics')
-        debug('  coated_optics: %s' % str(self.coated_optics))
+        #debug('  coated_optics: %s' % str(self.coated_optics))
 
         # Check for rammer
         self.rammer = self._isOptionalEquipped('Rammer')
-        debug('  rammer: %s' % str(self.rammer))
+        #debug('  rammer: %s' % str(self.rammer))
 
         # Check for Consumable
         self.consumable = self._isConsumableEquipped([
@@ -131,7 +131,7 @@ class _MinimapCircles(object):
             'ration_china',
             'ration_japan',
             'ration_uk'])
-        debug('  consumable: %s' % str(self.consumable))
+        #debug('  consumable: %s' % str(self.consumable))
 
         self.updateConfig(self.item.descriptor)
 
