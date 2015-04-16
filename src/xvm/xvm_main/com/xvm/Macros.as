@@ -748,7 +748,7 @@ package com.xvm
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
             // {{e}}
-            pdata["e"] = isNaN(stat.v.xe) ? null : stat.v.xe == 100 ? "XX" : (stat.v.xe < 10 ? "0" : "") + stat.v.xe;
+            pdata["e"] = isNaN(stat.v.xte) ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn6}}
@@ -828,7 +828,7 @@ package com.xvm
             // {{c:wgr}}
             pdata["c:wgr"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#"); }
             // {{c:e}}
-            pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xe, "#"); }
+            pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#"); }
             // {{c:r}}
             pdata["c:r"] = getRating(pdata, "c:");
 
@@ -877,7 +877,7 @@ package com.xvm
             // {{a:wgr}}
             pdata["a:wgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
             // {{a:e}}
-            pdata["a:e"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xe);
+            pdata["a:e"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
             // {{a:r}}
             pdata["a:r"] = getRating(pdata, "a:");
 

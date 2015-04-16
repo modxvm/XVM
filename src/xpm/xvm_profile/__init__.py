@@ -19,7 +19,7 @@ from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.dossier as dossier
 import xvm_main.python.vehinfo as vehinfo
-import xvm_main.python.vehinfo_xteff as vehinfo_xteff
+import xvm_main.python.vehinfo_xte as vehinfo_xte
 
 #####################################################################
 # event handlers
@@ -59,9 +59,9 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
                 battles = stats.getBattlesCount()
                 dmg = stats.getDamageDealt()
                 frg = stats.getFragsCount()
-                x['xvm_xe'] = None
+                x['xvm_xte'] = None
                 if battles > 0 and dmg > 0 and frg > 0:
-                    x['xvm_xe'] = vehinfo_xteff.calculateXe(vehId, float(dmg) / battles, float(frg) / battles)
+                    x['xvm_xte'] = vehinfo_xte.calculateXTE(vehId, float(dmg) / battles, float(frg) / battles)
         except:
             err(traceback.format_exc())
 

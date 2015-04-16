@@ -45,11 +45,6 @@ package xvm.profile.components
             return Dossier.getAccountDossier(playerId);
         }
 
-        protected function get list():TechniqueList
-        {
-            return page.listComponent.techniqueList;
-        }
-
         // PRIVATE FIELDS
 
         //protected var filter:FilterControl;
@@ -74,10 +69,11 @@ package xvm.profile.components
                 page.listComponent.lowerShadow.visible = false;
 
                 // override renderers
-                list.itemRenderer = UI_TechniqueRenderer;
+                page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
+                page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
 
                 // Initialize TechniqueStatisticsTab
-                list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
+                page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
 
                 Dossier.loadAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
 
@@ -112,11 +108,7 @@ package xvm.profile.components
                     return;
                 }
 
-                // userInfo.sortColumn
-                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-                var btnIndex:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
-                var b:SortingButton = bb.getButtonAt(btnIndex) as SortingButton;
-                if (b == null)
+                if (page.listComponent.sortableButtonBar.dataProvider.length == 0)
                 {
                     var $this:Technique = this;
                     setTimeout(function():void { $this.waitForInitDone(depth + 1); }, 1);
@@ -124,12 +116,44 @@ package xvm.profile.components
                 }
 
                 // Setup header
-                setupHeader();
+                if (Config.networkServicesSettings.statAwards)
+                    setupHeader();
 
+                waitForSortingDone();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
+        private function waitForSortingDone(depth:int = 0):void
+        {
+            Logger.add("waitForSortingDone: " + playerName);
+
+            try
+            {
+                if (depth > 10)
+                {
+                    Logger.add("WARNING: profile technique page sorting timeout");
+                    return;
+                }
+
+                // userInfo.sortColumn
+                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
+                var b:SortingButton = bb.getButtonAt(0) as SortingButton;
+                if (b == null)
+                {
+                    var $this:Technique = this;
+                    setTimeout(function():void { $this.waitForSortingDone(depth + 1); }, 1);
+                    return;
+                }
+
+                // Apply sorting
                 bb.selectedIndex = -1;
-                bb.selectedIndex = btnIndex;
+                bb.selectedIndex = Math.abs(Config.config.userInfo.sortColumn) - 1;
                 b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingInfo.DESCENDING_SORT : SortingInfo.ASCENDING_SORT;
-                list.selectedIndex = 0;
+                page.listComponent.techniqueList.selectedIndex = 0;
 
                 // Focus filter
                 //if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
@@ -147,7 +171,7 @@ package xvm.profile.components
 
         private function initializeTechniqueStatisticTab():void
         {
-            list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
+            page.listComponent.techniqueList.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
             initializeTechniqueStatisticTab2();
         }
 
@@ -182,33 +206,28 @@ package xvm.profile.components
 
         private function setupHeader():void
         {
-            /*var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
-            dp[4].buttonWidth = 60; // BATTLES_COUNT,74
-            dp[5].buttonWidth = 60; // WINS_EFFICIENCY,74
-            dp[6].buttonWidth = 70; // AVG_EXPERIENCE,90
-            dp[7].buttonWidth = 60; // MARK_OF_MASTERY,83
-            dp[7].showSeparator = true;
-
             var bi:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            bi.buttonWidth = 60;
+            bi.buttonWidth = 50;
             bi.sortOrder = 8;
-            bi.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_WINS;
-            bi.iconId = TechniqueList.WINS_EFFICIENCY;
+            bi.toolTip = "xvm_xte";
+            bi.iconId = "";
             bi.defaultSortDirection = SortingInfo.DESCENDING_SORT;
             bi.ascendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW;
             bi.descendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW;
             bi.buttonHeight = 40;
             bi.enabled = true;
-            bi.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_TOTALWINS;
-            bi.showSeparator = false;
-            dp.push(bi);
+            bi.label = "xTE";
 
-            page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
+            var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
+            dp[4].buttonWidth = 64; // BATTLES_COUNT,74
+            dp[5].buttonWidth = 64; // WINS_EFFICIENCY,74
+            dp[6].buttonWidth = 75; // AVG_EXPERIENCE,90
+            dp.push(dp[7]);
+            dp[7] = bi;             // xvm_xte
+            dp[8].buttonWidth = 68; // MARK_OF_MASTERY,83
+
             page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
             page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
-
-            //Logger.addObject(page.listComponent.sortableButtonBar.dataProvider, 2);
-            */
         }
 
         private function onStatLoaded():void

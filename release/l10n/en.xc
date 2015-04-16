@@ -172,6 +172,9 @@
     "lobby/crew/enable_prev_crew": "Automatically return crew",
     "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nAutomatically return the crew that fought\nin this vehicle in the previous battle",
 
+    // Profile
+    "profile/xvm_xte_tooltip": "xTE: per-vehicle efficiency\nMore info at <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+
     // Carousel
     "NonElite": "Non elite",
     "Premium": "Premium",

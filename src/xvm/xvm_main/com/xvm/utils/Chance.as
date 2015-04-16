@@ -162,7 +162,7 @@ package com.xvm.utils
             var Tmax:Number = vdata.tierHi;
             var T:Number = tier;
             var Bt:Number = stat.v.b || 0;
-            var Et:Number = stat.v.teff || 0;
+            var Et:Number = stat.v.xte | 0;
             var Rt:Number = stat.v.r || 0;
             var AvgW:Number = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
@@ -249,7 +249,7 @@ package com.xvm.utils
             var Tmax:Number = vdata.tierHi;
             var T:Number = tier;
             var Bt:Number = stat.v.b || 0;
-            var Et:Number = stat.v.teff || 0;
+            var Et:Number = stat.v.xte || 0;
             var Rt:Number = stat.v.r || 0;
             var AvgW:Number = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;

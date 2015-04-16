@@ -104,16 +104,3 @@
   Par exemple:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
-
-  Rangs d'efficacité pour {{teff}}, {{e}}.
-    TEFF       E
-    0..299     1 - très mauvais joueur
-    300..499   2 - mauvais joueur
-    500..699   3 - joueur médiocre
-    700..899   4 - joueur en dessous de la moyenne
-    900..1099  5 - joueur moyen
-    1100..1299 6 - joueur au-dessus de la moyenne
-    1300..1549 7 - bon joueur
-    1550..1799 8 - excellent joueur
-    1800..1999 9 - maître
-    2000+      E - Expert (joueur présent dans le top-100 pour ce véhicule)

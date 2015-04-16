@@ -53,7 +53,7 @@ from loadurl import loadUrl
 import token
 import utils
 import vehinfo
-import vehinfo_xteff
+import vehinfo_xte
 import xvm_scale
 
 #############################
@@ -459,7 +459,7 @@ class _Stat(object):
             self._calculateXvmScale(stat)
             if 'id' in stat['v']:
                 self._calculateVehicleValues(stat)
-                self._calculateXteff(stat)
+                self._calculateXTE(stat)
 
         self._addContactData(stat)
 
@@ -516,15 +516,15 @@ class _Stat(object):
         if 'spo' in v and v['spo'] > 0:
             v['sb'] = float(v['spo']) / vb
 
-    # calculate xteff
-    def _calculateXteff(self, stat):
+    # calculate xTE
+    def _calculateXTE(self, stat):
         v = stat['v']
         if 'db' not in v or v['db'] <= 0:
             return
         if 'fb' not in v or v['fb'] <= 0:
             return
-        v['xe'] = vehinfo_xteff.calculateXe(v['id'], float(v['db']), float(v['fb']))
-        #log(v['xe'])
+        v['xte'] = vehinfo_xte.calculateXTE(v['id'], float(v['db']), float(v['fb']))
+        #log(v['xte'])
 
     def _addContactData(self, stat):
         # try to add changed nick and comment

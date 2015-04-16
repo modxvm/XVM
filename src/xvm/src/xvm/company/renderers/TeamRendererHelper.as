@@ -117,8 +117,8 @@ package xvm.company.renderers
                     var effd = td / tb / data.hp || 0;
                     var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.te);
                     var s2 = "";
-                    s2 += "E: " + (!stat.teff ? "-" :
-                        "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
+                    s2 += "E: " + (!stat.xte ? "-" :
+                        "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.xte + "</font>)") + "  ";
                     s2 += Locale.get("Eff damage") + ": " + (!effd ? "-" :
                         "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, effd) + "'>" + Sprintf.format("%.2f", effd) + "</font>") + " ";
                     s2 += "(<font color='#ffc133'>" + (data.avgE ? Sprintf.format("%.2f", data.avgE) : "-") + "</font>" +

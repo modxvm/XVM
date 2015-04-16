@@ -58,7 +58,7 @@ Legend:
 │ {{v.marksOnGun}}           │ X │ . │ marks on gun
 │ {{v.damageRating}}         │ X │ . │ damage rating in percents for marks on gun
 │ {{v.c_damageRating}}       │ X │ . │ dynamic color for this macro
-│ {{v.teff}}, {{v.e}}        │ . │ . │ player's per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
+│ {{v.e}}                    │ . │ . │ player's per-vehicle efficiency (xTE): http://www.koreanrandom.com/forum/topic/1643-
 │ {{v.c_e}}                  │ . │ . │ dynamic color for this macro
 │ {{v.equipment1}}           │ . │ . │ small icon of equipment in 1st slot
 │ {{v.equipment2}}           │ . │ . │ small icon of equipment in 2nd slot

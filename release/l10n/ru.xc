@@ -180,6 +180,9 @@
     "NoMaster": "Нет мастера",
     "CompleteCrew": "Полный экипаж",
 
+    // Profile
+    "profile/xvm_xte_tooltip": "xTE: Эффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+
     // Comments
     "Network services unavailable": "Сетевые сервисы недоступны",
     "Error loading comments": "Ошибка загрузки комментариев",

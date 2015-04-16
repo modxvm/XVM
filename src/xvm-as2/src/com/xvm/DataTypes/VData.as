@@ -18,7 +18,7 @@ class com.xvm.DataTypes.VData
         public var fb:Number = NaN;      // frags per battle (float)
         public var sb:Number = NaN;      // spotted per battle (float)
         public var dv:Number = NaN;      // db/vehicleHP (float)
-        public var xe:Number = NaN;      // tank eff (int, 1-100)
+        public var xte:Number = NaN;     // xTE tank eff (int, 1-100)
 
         public var data:VehicleData = null;
 }

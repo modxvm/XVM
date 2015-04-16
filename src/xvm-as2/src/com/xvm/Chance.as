@@ -154,7 +154,7 @@ class com.xvm.Chance
         var Tmax = vdata.tierHi;
         var T = tier;
         var Bt = stat.tb || 0;
-        var Et = stat.teff || 0;
+        var Et = stat.xte || 0;
         var Rt = stat.tr || 0;
         var AvgW = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
         var Ea = stat.xwn8 == null ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;

@@ -71,10 +71,10 @@ package com.xvm.types.dossier
                         c_wn8effd = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8EFFD, wn8effd, "#");
                     }
 
-                    if (!isNaN(vdossier.xe) || vdossier.xe == 0)
+                    if (!isNaN(vdossier.xte) || vdossier.xte == 0)
                     {
-                        e = vdossier.xe == 100 ? "XX" : (vdossier.xe < 10 ? "0" : "") + vdossier.xe;
-                        c_e = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xe, "#");
+                        e = vdossier.xte == 100 ? "XX" : (vdossier.xte < 10 ? "0" : "") + vdossier.xte;
+                        c_e = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, "#");
                     }
 
                     earnedXP = isNaN(vdossier.earnedXP) || vdossier.earnedXP == 0 ? NaN : vdossier.earnedXP;
@@ -128,7 +128,6 @@ package com.xvm.types.dossier
         public var c_tfb:String;
         public var tsb:Number;
         public var c_tsb:String;
-        public var teff:Number;
         public var wn8expd:Number;
         public var wn8effd:Number;
         public var c_wn8effd:String;

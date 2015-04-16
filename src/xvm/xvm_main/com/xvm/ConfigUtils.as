@@ -247,8 +247,6 @@ package com.xvm
                     .split("{{name}}")          .join("{{name%.16s~..}}")
                     .split("{{eff}}")           .join("{{eff%d}}")
                     .split("{{eff:4}}")         .join("{{eff%4d}}")
-                    .split("{{teff}}")          .join("{{teff%4d}}")
-                    .split("{{e}}")             .join("{{e%d}}")
                     .split("{{wn}}")            .join("{{wn8%4d}}")
                     .split("{{wn6}}")           .join("{{wn6%4d}}")
                     .split("{{wn8}}")           .join("{{wn8%4d}}")

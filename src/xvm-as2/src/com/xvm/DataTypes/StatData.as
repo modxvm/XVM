@@ -45,7 +45,7 @@ class com.xvm.DataTypes.StatData
 
         // calculated
         public var winrate:Number = NaN;       // global win rate (int)
-        public var xe:Number = NaN;            // Xeff (int)
+        public var xte:Number = NaN;           // xTE (int)
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
         public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
