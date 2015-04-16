@@ -11,11 +11,13 @@ package xvm.profile.components
     import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
+    import net.wg.gui.events.*;
     import net.wg.gui.components.controls.SortableScrollingList;
     import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import scaleform.clik.data.*;
+    import scaleform.clik.events.*;
     import xvm.profile.UI.*;
 
     public class Technique extends Sprite
@@ -72,8 +74,8 @@ package xvm.profile.components
                 page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
                 page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
 
-                // Initialize TechniqueStatisticsTab
-                page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
+                // add event handlers
+                page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
                 Dossier.loadAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
 
@@ -96,9 +98,11 @@ package xvm.profile.components
 
         // PRIVATE
 
+        // INITIALIZATION
+
         private function waitForInitDone(depth:int = 0):void
         {
-            Logger.add("waitForInitDone: " + playerName);
+            //Logger.add("waitForInitDone: " + playerName);
 
             try
             {
@@ -108,60 +112,36 @@ package xvm.profile.components
                     return;
                 }
 
-                if (page.listComponent.sortableButtonBar.dataProvider.length == 0)
+                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
+                if (bb.dataProvider.length == 0)
                 {
                     var $this:Technique = this;
                     setTimeout(function():void { $this.waitForInitDone(depth + 1); }, 1);
                     return;
                 }
 
-                // Setup header
                 if (Config.networkServicesSettings.statAwards)
+                {
+                    // Setup header
                     setupHeader();
-
-                waitForSortingDone();
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        private function waitForSortingDone(depth:int = 0):void
-        {
-            Logger.add("waitForSortingDone: " + playerName);
-
-            try
-            {
-                if (depth > 10)
-                {
-                    Logger.add("WARNING: profile technique page sorting timeout");
-                    return;
+                    // Load stat
+                    Stat.loadUserData(this, onStatLoaded, playerName, false);
                 }
 
-                // userInfo.sortColumn
-                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-                var b:SortingButton = bb.getButtonAt(0) as SortingButton;
-                if (b == null)
+                // Initial sort
+                // TODO: save sort order to userprofile
+                App.utils.scheduler.envokeInNextFrame(function():void
                 {
-                    var $this:Technique = this;
-                    setTimeout(function():void { $this.waitForSortingDone(depth + 1); }, 1);
-                    return;
-                }
-
-                // Apply sorting
-                bb.selectedIndex = -1;
-                bb.selectedIndex = Math.abs(Config.config.userInfo.sortColumn) - 1;
-                b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingInfo.DESCENDING_SORT : SortingInfo.ASCENDING_SORT;
-                page.listComponent.techniqueList.selectedIndex = 0;
+                    var idx:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
+                    idx = idx == 7 ? 8 : idx == 8 ? 7 : idx > 8 ? 5 : idx; // swap 8 and 9 positions (mastery and xTE columns) and check out of range
+                    bb.selectedIndex = idx;
+                    var bi:NormalSortingBtnInfo = bb.dataProvider[idx] as NormalSortingBtnInfo;
+                    page.listComponent.techniqueList.sortByField(bi.iconId, Config.config.userInfo.sortColumn > 0);
+                });
 
                 // Focus filter
                 //if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
                 //    filter.setFocus();
-
-                // stat
-                if (Config.networkServicesSettings.statAwards)
-                    Stat.loadUserData(this, onStatLoaded, playerName, false);
             }
             catch (ex:Error)
             {
@@ -169,15 +149,9 @@ package xvm.profile.components
             }
         }
 
-        private function initializeTechniqueStatisticTab():void
+        private function initializeTechniqueStatisticTab(depth:int = 0):void
         {
-            page.listComponent.techniqueList.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
-            initializeTechniqueStatisticTab2();
-        }
-
-        private function initializeTechniqueStatisticTab2(depth:int = 0):void
-        {
-            Logger.add("initializeTechniqueStatisticTab: " + playerName);
+            //Logger.add("initializeTechniqueStatisticTab: " + playerName);
 
             try
             {
@@ -191,7 +165,7 @@ package xvm.profile.components
                 if (data == null || data.length == 0 || !(data[0].hasOwnProperty("linkage")))
                 {
                     var $this:Technique = this;
-                    setTimeout(function():void { $this.initializeTechniqueStatisticTab2(depth + 1); }, 1);
+                    setTimeout(function():void { $this.initializeTechniqueStatisticTab(depth + 1); }, 1);
                     return;
                 }
                 data[0].linkage = getQualifiedClassName(UI_TechniqueStatisticTab);
@@ -210,7 +184,7 @@ package xvm.profile.components
             bi.buttonWidth = 50;
             bi.sortOrder = 8;
             bi.toolTip = "xvm_xte";
-            bi.iconId = "";
+            bi.iconId = "xvm_xte";
             bi.defaultSortDirection = SortingInfo.DESCENDING_SORT;
             bi.ascendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW;
             bi.descendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW;
@@ -243,5 +217,19 @@ package xvm.profile.components
             //filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
             //page.addChild(filter);
         //}
+
+        // EVENT HANDLERS
+
+        private var _techniqueStatisticTabInitialized:Boolean = false;
+        private function listSelectedDataChanged(e:Event):void
+        {
+            //Logger.add("listSelectedDataChanged");
+
+            if (_techniqueStatisticTabInitialized == false)
+            {
+                _techniqueStatisticTabInitialized = true;
+                initializeTechniqueStatisticTab();
+            }
+        }
     }
 }
