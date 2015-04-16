@@ -1,6 +1,6 @@
 import json
 
-with open('xteff.csv', 'r') as f:
+with open('xte.csv', 'r') as f:
     lines = f.read().rstrip().split('\n')
 lines.pop(0)
 
@@ -15,5 +15,5 @@ for line in lines:
    x = [float(x) for x in items]
    data[v] = {'ad':ad,'af':af,'td':td,'tf':tf,'x':x}
 
-with open('xteff.json', 'w') as f:
+with open('xte.json', 'w') as f:
     f.writelines(json.dumps(data, separators=(',', ':')))

@@ -7,11 +7,11 @@ from logger import *
 
 # PUBLIC
 
-def calculateXe(vehId, dmg_per_battle, frg_per_battle):
-    xteff = _getXteffData(vehId)
-    if xteff is None or xteff['td'] == xteff['ad'] or xteff['tf'] == xteff['af']:
+def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
+    xte = _getXTEData(vehId)
+    if xte is None or xte['td'] == xte['ad'] or xte['tf'] == xte['af']:
         vData = vehinfo.getVehicleInfoData(vehId)
-        debug('NOTE: No xteff data for vehicle [{}] {}'.format(vehId, vData['key']))
+        debug('NOTE: No xte data for vehicle [{}] {}'.format(vehId, vData['key']))
         return
 
     # constants
@@ -19,10 +19,10 @@ def calculateXe(vehId, dmg_per_battle, frg_per_battle):
     CF = 1.0
 
     # input
-    avgD = float(xteff['ad'])
-    topD = float(xteff['td'])
-    avgF = float(xteff['af'])
-    topF = float(xteff['tf'])
+    avgD = float(xte['ad'])
+    topD = float(xte['td'])
+    avgF = float(xte['af'])
+    topF = float(xte['tf'])
 
     # calculation
     dD = dmg_per_battle - avgD
@@ -32,12 +32,12 @@ def calculateXe(vehId, dmg_per_battle, frg_per_battle):
     d = max(0, 1 + dD / (topD - avgD) if dmg_per_battle >= avgD else 1 + dD / (avgD - minD))
     f = max(0, 1 + dF / (topF - avgF) if frg_per_battle >= avgF else 1 + dF / (avgF - minF))
 
-    teff = (d * CD + f * CF) / (CD + CF) * 1000.0
+    t = (d * CD + f * CF) / (CD + CF) * 1000.0
 
     # calculate XVM Scale
-    if teff < 1:
+    if t < 1:
         return None
-    return next((i for i,v in enumerate(xteff['x']) if v > teff), 100)
+    return next((i for i,v in enumerate(xte['x']) if v > t), 100)
 
 
 # PRIVATE
@@ -49,21 +49,21 @@ import simplejson
 from xfw import *
 from logger import *
 
-_xteffData = None
+_xteData = None
 
-def _getXteffData(vehId):
-    global _xteffData
-    if _xteffData is None:
-        _xteffData = _load()
-    return _xteffData.get(str(vehId), None)
+def _getXTEData(vehId):
+    global _xteData
+    if _xteData is None:
+        _xteData = _load()
+    return _xteData.get(str(vehId), None)
 
 def _load():
-    res = load_config('res_mods/mods/shared_resources/xvm/res/data/xteff.json')
+    res = load_config('res_mods/mods/shared_resources/xvm/res/data/xte.json')
     return res if res is not None else {}
 
 
 import BigWorld
 def _init():
-    global _xteffData
-    _xteffData = _load()
+    global _xteData
+    _xteData = _load()
 BigWorld.callback(1, _init)
