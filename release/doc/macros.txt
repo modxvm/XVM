@@ -96,7 +96,7 @@ Legend:
 │ S │ {{avglvl}}      │ X │ X │ X │ X │ X │ average level (tier) of tanks
 │ S │ {{r}}           │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
 │ S │ {{r_size}}      │ X │ X │ X │ X │ X │ size of the {{r}} macro value (can be useful for fields formatting)
-│ S │ {{e}}           │ X │ X │ X │ X │ X │ player per-vehicle efficiency (xTE) (values 00-99, XX for Tops)
+│ S │ {{xte}}         │ X │ X │ X │ X │ X │ player per-vehicle efficiency (xTE) (values 00-99, XX for Tops)
 │ S │ {{xeff}}        │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
 │ S │ {{xwn6}}        │ X │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
 │ S │ {{xwn8}}        │ X │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
@@ -118,7 +118,7 @@ Legend:
 │ S │ {{tdv}}         │ X │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
 │ S │ {{tfb}}         │ X │ X │ X │ X │ X │ average frags per battle for current tank
 │ S │ {{tsb}}         │ X │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
-│ S │ {{c:e}}         │ X │ X │ X │ X │ X │ color depending on player per-vehicle efficiency
+│ S │ {{c:xte}}       │ X │ X │ X │ X │ X │ color depending on player per-vehicle efficiency
 │ S │ {{c:xeff}}      │ X │ X │ X │ X │ X │ color depending on XVM Scale for efficiency
 │ S │ {{c:xwn6}}      │ X │ X │ X │ X │ X │ color depending on XVM Scale for WN6
 │ S │ {{c:xwn8}}      │ X │ X │ X │ X │ X │ color depending on XVM Scale for WN8

@@ -867,8 +867,8 @@ class com.xvm.Macros
 
         // {{avglvl}}
         pdata["avglvl"] = stat.lvl;
-        // {{e}}
-        pdata["e"] = isNaN(stat.v.xte) ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
+        // {{xte}}
+        pdata["xte"] = isNaN(stat.v.xte) ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
         // {{xeff}}
         pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
@@ -927,9 +927,9 @@ class com.xvm.Macros
         pdata["tsb"] = stat.v.sb;
 
         // Dynamic colors
-        // {{c:e}}
-        pdata["c:e"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#", false);
-        pdata["c:e#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#", true);
+        // {{c:xte}}
+        pdata["c:xte"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#", false);
+        pdata["c:xte#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#", true);
         // {{c:xeff}}
         pdata["c:xeff"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", false);
         pdata["c:xeff#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", true);
@@ -999,6 +999,8 @@ class com.xvm.Macros
         pdata["c:tsb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", true);
 
         // Alpha
+        // {{a:xte}}
+        pdata["a:xte"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
         // {{a:xeff}}
         pdata["a:xeff"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
         // {{a:xwn6}}
@@ -1019,8 +1021,6 @@ class com.xvm.Macros
         pdata["a:wn"] = pdata["a:wn8"];
         // {{a:wgr}}
         pdata["a:wgr"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
-        // {{a:e}}
-        pdata["a:e"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
         // {{a:r}}
         pdata["a:r"] = getRating(pdata, "a:", "");
 

@@ -1,8 +1,8 @@
 ﻿XVM-6.1.0-dev:
   * adaptation to WoT 0.9.7
   * XFW-3.0.0
-  * per-vehicle rating (xTE) enabled ({{e}} macro)
-  * new carousel macros {{v.e}} and {{v.c_e}} for per-vehicle rating
+  * per-vehicle rating (xTE) enabled ({{xte}}, {{c:xte}}, {{a:xte}} macros)
+  * new carousel macros {{v.xte}} and {{v.c_xte}} for per-vehicle rating
   * added new section in config hangar/tooltips.xc, where you can choose desired tooltips for each type of vehicle
   * in tank tooltips added feature of custom text and camo coefficients data
   * in barracks added nation flag for tanksman and their skills

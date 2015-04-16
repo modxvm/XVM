@@ -747,8 +747,8 @@ package com.xvm
             pdata["region"] = Config.gameRegion;
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
-            // {{e}}
-            pdata["e"] = isNaN(stat.v.xte) ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
+            // {{xte}}
+            pdata["xte"] = isNaN(stat.v.xte) ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn6}}
@@ -807,6 +807,8 @@ package com.xvm
             pdata["tsb"] = stat.v.sb;
 
             // Dynamic colors
+            // {{c:xte}}
+            pdata["c:xte"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#"); }
             // {{c:xeff}}
             pdata["c:xeff"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#"); }
             // {{c:xwn6}}
@@ -827,8 +829,6 @@ package com.xvm
             pdata["c:wn"] = pdata["c:wn8"];
             // {{c:wgr}}
             pdata["c:wgr"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#"); }
-            // {{c:e}}
-            pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#"); }
             // {{c:r}}
             pdata["c:r"] = getRating(pdata, "c:");
 
@@ -856,6 +856,8 @@ package com.xvm
             pdata["c:tsb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#"); }
 
             // Alpha
+            // {{a:xte}}
+            pdata["a:xte"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
             // {{a:xeff}}
             pdata["a:xeff"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
             // {{a:xwn6}}
@@ -876,8 +878,6 @@ package com.xvm
             pdata["a:wn"] = pdata["a:wn8"];
             // {{a:wgr}}
             pdata["a:wgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
-            // {{a:e}}
-            pdata["a:e"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
             // {{a:r}}
             pdata["a:r"] = getRating(pdata, "a:");
 
