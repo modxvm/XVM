@@ -137,6 +137,10 @@ package xvm.profile.components
                     bb.selectedIndex = idx;
                     var bi:NormalSortingBtnInfo = bb.dataProvider[idx] as NormalSortingBtnInfo;
                     page.listComponent.techniqueList.sortByField(bi.iconId, Config.config.userInfo.sortColumn > 0);
+                    App.utils.scheduler.envokeInNextFrame(function():void
+                    {
+                        page.listComponent.techniqueList.selectedIndex = 0;
+                    });
                 });
 
                 // Focus filter
