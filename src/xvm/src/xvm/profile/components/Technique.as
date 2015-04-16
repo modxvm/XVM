@@ -21,12 +21,42 @@ package xvm.profile.components
 
     public class Technique extends Sprite
     {
-        protected var _page:ProfileTechnique;
-        protected var _playerName:String;
-        protected var _playerId:int;
+        // PROPERTIES
+
+        private var _page:ProfileTechnique;
+        public function get page():ProfileTechnique
+        {
+            return _page;
+        }
+
+        private var _playerName:String;
+        public function get playerName():String
+        {
+            return _playerName;
+        }
+
+        private var _playerId:int;
+        public function get playerId():int
+        {
+            return _playerId;
+        }
+
+        public function get accountDossier():AccountDossier
+        {
+            return Dossier.getAccountDossier(playerId);
+        }
+
+        protected function get list():TechniqueList
+        {
+            return page.listComponent.techniqueList;
+        }
+
+        // PRIVATE FIELDS
 
         //protected var filter:FilterControl;
         //private var techniqueListAdjuster:TechniqueListAdjuster;
+
+        // CTOR
 
         public function Technique(page:ProfileTechnique, playerName:String, playerId:int):void
         {
@@ -54,12 +84,9 @@ package xvm.profile.components
 
                 waitForInitDone();
 
-                return;
-
                 // Add summary item to the first line of technique list
                 //techniqueListAdjuster = new TechniqueListAdjuster(page);
 
-                // TODO
                 // create filter controls
                 //filter = null;
                 //if (Config.config.userInfo.showFilters)
@@ -72,25 +99,7 @@ package xvm.profile.components
             }
         }
 
-        public function get page():ProfileTechnique
-        {
-            return _page;
-        }
-
-        public function get playerName():String
-        {
-            return _playerName;
-        }
-
-        public function get playerId():int
-        {
-            return _playerId;
-        }
-
-        public function get accountDossier():AccountDossier
-        {
-            return Dossier.getAccountDossier(playerId);
-        }
+        // PRIVATE
 
         private function initializeTechniqueStatisticTab():void
         {
@@ -190,11 +199,6 @@ package xvm.profile.components
             */
         }
 
-        protected function get list():TechniqueList
-        {
-            return page.listComponent.techniqueList;
-        }
-
         // virtual
         //protected function createFilters():void
         //{
@@ -202,10 +206,6 @@ package xvm.profile.components
             //filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
             //page.addChild(filter);
         //}
-
-        // PRIVATE
-
-        // STAT
 
         private function onStatLoaded():void
         {
