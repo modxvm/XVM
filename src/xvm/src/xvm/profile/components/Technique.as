@@ -16,7 +16,6 @@ package xvm.profile.components
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
     import xvm.profile.UI.*;
 
     public class Technique extends Sprite
@@ -101,28 +100,6 @@ package xvm.profile.components
 
         // PRIVATE
 
-        private function initializeTechniqueStatisticTab():void
-        {
-            //Logger.add("initializeTechniqueStatisticTab: " + playerName);
-            list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
-            try
-            {
-                var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
-                if (data == null || data.length == 0 || !(data[0].hasOwnProperty("linkage")))
-                {
-                    App.utils.scheduler.envokeInNextFrame(initializeTechniqueStatisticTab);
-                    return;
-                }
-                data[0].linkage = getQualifiedClassName(UI_TechniqueStatisticTab);
-                page.stackComponent.buttonBar.selectedIndex = -1;
-                page.stackComponent.buttonBar.selectedIndex = 0;
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
         private function waitForInitDone(depth:int = 0):void
         {
             Logger.add("waitForInitDone: " + playerName);
@@ -168,6 +145,41 @@ package xvm.profile.components
             }
         }
 
+        private function initializeTechniqueStatisticTab():void
+        {
+            list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
+            initializeTechniqueStatisticTab2();
+        }
+
+        private function initializeTechniqueStatisticTab2(depth:int = 0):void
+        {
+            Logger.add("initializeTechniqueStatisticTab: " + playerName);
+
+            try
+            {
+                if (depth > 10)
+                {
+                    Logger.add("WARNING: profile technique statistic tab initialization timeout");
+                    return;
+                }
+
+                var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
+                if (data == null || data.length == 0 || !(data[0].hasOwnProperty("linkage")))
+                {
+                    var $this:Technique = this;
+                    setTimeout(function():void { $this.initializeTechniqueStatisticTab2(depth + 1); }, 1);
+                    return;
+                }
+                data[0].linkage = getQualifiedClassName(UI_TechniqueStatisticTab);
+                page.stackComponent.buttonBar.selectedIndex = -1;
+                page.stackComponent.buttonBar.selectedIndex = 0;
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
         private function setupHeader():void
         {
             /*var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
@@ -199,6 +211,12 @@ package xvm.profile.components
             */
         }
 
+        private function onStatLoaded():void
+        {
+            //Logger.add("onStatLoaded: " + playerName);
+            page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
+        }
+
         // virtual
         //protected function createFilters():void
         //{
@@ -206,17 +224,5 @@ package xvm.profile.components
             //filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
             //page.addChild(filter);
         //}
-
-        private function onStatLoaded():void
-        {
-            //Logger.add("onStatLoaded: " + playerName);
-            if (page != null && page.listComponent != null && page.listComponent.visible)
-            {
-                if (page is ProfileTechniqueWindow && page.listComponent.selectedItem && page.listComponent.selectedItem.id == 0)
-                    page.listComponent.dispatchEvent(new Event(ListEvent.INDEX_CHANGE));
-                else
-                    page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
-            }
-        }
     }
 }

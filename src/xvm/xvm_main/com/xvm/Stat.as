@@ -386,7 +386,14 @@ package com.xvm
         // TODO: remove
         public function calculateStatValues(stat:StatData):void
         {
-            stat.v.data = VehicleInfo.get(stat.v.id);
+            if (stat.v == null)
+            {
+                stat.v = new VData();
+            }
+            else
+            {
+                stat.v.data = VehicleInfo.get(stat.v.id);
+            }
         }
     }
 }
