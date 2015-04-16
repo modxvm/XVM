@@ -13,6 +13,8 @@ package xvm.profile.UI
 
     public dynamic class UI_ProfileSortingButton extends ProfileSortingButton_UI
     {
+        #TODO: use or remove
+
         private var xeffTF:TextField;
 
         public function UI_ProfileSortingButton()

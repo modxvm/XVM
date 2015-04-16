@@ -15,6 +15,8 @@ package xvm.profile.components
     // Add summary item to the first line of technique list
     public final class TechniqueListAdjuster extends EventDispatcher
     {
+        #TODO: use or remove
+
         private var page:ProfileTechnique;
 
         private var currentFilter:String = "";

@@ -25,8 +25,7 @@ package xvm.profile.components
         protected var _playerName:String;
         protected var _playerId:int;
 
-        protected var filter:FilterControl;
-
+        //protected var filter:FilterControl;
         //private var techniqueListAdjuster:TechniqueListAdjuster;
 
         public function Technique(page:ProfileTechnique, playerName:String, playerId:int):void
@@ -37,10 +36,6 @@ package xvm.profile.components
                 this._page = page;
                 this._playerName = playerName;
                 this._playerId = playerId;
-
-                //page.listComponent.removeChild(page.listComponent.sortableButtonBar);
-                //page.listComponent.sortableButtonBar.dispose();
-                //page.listComponent.sortableButtonBar = new UI_SortableButtonBar();
 
                 // Change row height: 34 -> 32
                 page.listComponent.techniqueList.rowHeight = 32;
@@ -57,7 +52,7 @@ package xvm.profile.components
 
                 Dossier.loadAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
 
-                delayedInit();
+                waitForInitDone();
 
                 return;
 
@@ -66,9 +61,9 @@ package xvm.profile.components
 
                 // TODO
                 // create filter controls
-                filter = null;
-                if (Config.config.userInfo.showFilters)
-                    createFilters();
+                //filter = null;
+                //if (Config.config.userInfo.showFilters)
+                //    createFilters();
 
             }
             catch (ex:Error)
@@ -119,18 +114,26 @@ package xvm.profile.components
             }
         }
 
-        private function delayedInit():void
+        private function waitForInitDone(depth:int = 0):void
         {
-            //Logger.add("delayedInit: " + playerName);
+            Logger.add("waitForInitDone: " + playerName);
+
             try
             {
+                if (depth > 10)
+                {
+                    Logger.add("WARNING: profile technique page initialization timeout");
+                    return;
+                }
+
                 // userInfo.sortColumn
                 var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
                 var btnIndex:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
                 var b:SortingButton = bb.getButtonAt(btnIndex) as SortingButton;
                 if (b == null)
                 {
-                    App.utils.scheduler.envokeInNextFrame(delayedInit);
+                    var $this:Technique = this;
+                    setTimeout(function():void { $this.waitForInitDone(depth + 1); }, 1);
                     return;
                 }
 
@@ -143,8 +146,8 @@ package xvm.profile.components
                 list.selectedIndex = 0;
 
                 // Focus filter
-                if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
-                    filter.setFocus();
+                //if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
+                //    filter.setFocus();
 
                 // stat
                 if (Config.networkServicesSettings.statAwards)
@@ -193,12 +196,12 @@ package xvm.profile.components
         }
 
         // virtual
-        protected function createFilters():void
-        {
+        //protected function createFilters():void
+        //{
             //filter = new FilterControl();
             //filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
             //page.addChild(filter);
-        }
+        //}
 
         // PRIVATE
 

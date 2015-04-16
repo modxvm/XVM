@@ -13,15 +13,15 @@ package xvm.profile.components
             page.listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
         }
 
-        override protected function createFilters():void
-        {
-            super.createFilters();
-
-            filter.visible = false;
-            var pg:ProfileTechniquePage = page as ProfileTechniquePage;
-            filter.x = pg.checkBoxExistence.x - 260;
-            filter.y = pg.checkBoxExistence.y - 20;
-        }
+//        override protected function createFilters():void
+//        {
+//            super.createFilters();
+//
+//            filter.visible = false;
+//            var pg:ProfileTechniquePage = page as ProfileTechniquePage;
+//            filter.x = pg.checkBoxExistence.x - 260;
+//            filter.y = pg.checkBoxExistence.y - 20;
+//        }
 
         // PRIVATE
 

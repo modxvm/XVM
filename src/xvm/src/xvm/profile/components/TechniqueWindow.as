@@ -11,13 +11,13 @@ package xvm.profile.components
             super(window, playerName, playerId);
         }
 
-        override protected function createFilters():void
-        {
-            super.createFilters();
-
-            filter.visible = false;
-            filter.x = 680;
-            filter.y = -47;
-        }
+//        override protected function createFilters():void
+//        {
+//            super.createFilters();
+//
+//            filter.visible = false;
+//            filter.x = 680;
+//            filter.y = -47;
+//        }
     }
 }

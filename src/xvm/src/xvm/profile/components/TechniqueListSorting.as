@@ -8,6 +8,8 @@ package xvm.profile.components
     // Add summary item to the first line of technique list
     public final class TechniqueListSorting
     {
+        #TODO: use or remove
+
         private static const F_NATION_INDEX:String = TechniqueList.NATION_INDEX;
         private static const F_TYPE_INDEX:String = TechniqueList.TYPE_INDEX;
         private static const F_LEVEL:String = TechniqueList.LEVEL;

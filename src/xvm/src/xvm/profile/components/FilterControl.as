@@ -12,6 +12,8 @@ package xvm.profile.components
     // [           ] [nation|v] [class|v] [level|v] [master|v] [prefs|v] [SAVE]
     public class FilterControl extends Sprite
     {
+        #TODO: use or remove
+
         private var filterTextInput:TextInput;
         //private var nationFilter:DropDown;
         //private var classFilter:DropDown;
