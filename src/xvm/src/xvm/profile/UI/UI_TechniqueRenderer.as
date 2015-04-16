@@ -83,7 +83,7 @@ package xvm.profile.UI
                     {
                         xteTF.htmlText = "";
                     }
-                    if (data.xvm_xte <= 0)
+                    else if (data.xvm_xte <= 0)
                     {
                         xteTF.htmlText = "<font face='$FieldFont' size='15' color='" + XfwUtils.toHtmlColor(XfwConst.UICOLOR_DISABLED) + "'>" + "--" + "</font>";
                     }

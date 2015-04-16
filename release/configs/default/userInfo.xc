@@ -17,6 +17,7 @@
     // 6 - Wins        / Победы
     // 7 - Average XP  / Средний опыт
     // 8 - Class mark  / Классность
+    // 9 - xTE         / xTE
     "sortColumn": -5,
     // true - Show extra data in profile (experimental)
     // true - Показывать расширенные данные в профиле (экспериментально)
