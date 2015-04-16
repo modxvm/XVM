@@ -26,45 +26,34 @@ import xvm_main.python.vehinfo_xte as vehinfo_xte
 
 _accountDossier = None
 
-def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
+def ProfileTechniquePage_sendAccountData(base, self, targetData, accountDossier):
     global _accountDossier
     _accountDossier = accountDossier
     base(self, targetData, accountDossier)
 
-def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
+def ProfileTechniquePage_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
     res = base(self, targetData, addVehiclesThatInHangarOnly)
-    
+
     global _accountDossier
-    from gui.shared import g_itemsCache
     for x in res:
         try:
             vehId = x['id']
-            vehDossier = g_itemsCache.items.getVehicleDossier(vehId, _accountDossier.getPlayerDBID())
-            if vehDossier is not None:
-                if self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL:
-                    stats = vehDossier.getRandomStats()
-                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM:
-                    stats = vehDossier.getTeam7x7Stats()
-                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_STATICTEAM:
-                    stats = vehDossier.getRated7x7Stats()
-                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL:
-                    stats = vehDossier.getHistoricalStats()
-                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES:
-                    stats = vehDossier.getFortSortiesStats()
-                elif self._battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES:
-                    stats = vehDossier.getFortBattlesStats()
-                else:
-                    raise ValueError('Profile Technique: Unknown battle type: ' + self._battlesType)
-
-                battles = stats.getBattlesCount()
-                dmg = stats.getDamageDealt()
-                frg = stats.getFragsCount()
-                x['xvm_xte'] = None
-                if battles > 0 and dmg > 0 and frg > 0:
-                    x['xvm_xte'] = vehinfo_xte.calculateXTE(vehId, float(dmg) / battles, float(frg) / battles)
+            vDossier = dossier.getDossier((self._battlesType, _accountDossier.getPlayerDBID(), vehId))
+            if vDossier is not None:
+                x['xvm_xte'] = vDossier['xte']
         except:
             err(traceback.format_exc())
 
+    return res
+
+def ProfileTechniqueWindow_sendAccountData(base, self, targetData, accountDossier):
+    global _accountDossier
+    _accountDossier = accountDossier
+    base(self, targetData, accountDossier)
+
+def ProfileTechniqueWindow_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
+    # TODO: vehicle data for other players is not loaded yet, so we can't calculate xTE
+    res = base(self, targetData, addVehiclesThatInHangarOnly)
     return res
 
 #####################################################################
@@ -72,10 +61,11 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
 
 # Delayed registration
 def _RegisterEvents():
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechnique
     from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniquePage
-    OverrideMethod(ProfileTechnique, '_sendAccountData', ProfileTechnique_sendAccountData)
-    OverrideMethod(ProfileTechniquePage, '_sendAccountData', ProfileTechnique_sendAccountData)
-    OverrideMethod(ProfileTechnique, '_getTechniqueListVehicles', ProfileTechnique_getTechniqueListVehicles)
+    OverrideMethod(ProfileTechniquePage, '_sendAccountData', ProfileTechniquePage_sendAccountData)
+    OverrideMethod(ProfileTechniquePage, '_getTechniqueListVehicles', ProfileTechniquePage_getTechniqueListVehicles)
+    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+    OverrideMethod(ProfileTechniqueWindow, '_sendAccountData', ProfileTechniqueWindow_sendAccountData)
+    OverrideMethod(ProfileTechniqueWindow, '_getTechniqueListVehicles', ProfileTechniqueWindow_getTechniqueListVehicles)
 
 BigWorld.callback(0, _RegisterEvents)

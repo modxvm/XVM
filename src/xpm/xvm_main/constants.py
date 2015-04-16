@@ -15,7 +15,7 @@ class XVM(object):
 class XVM_COMMAND(object):
     GET_BATTLE_LEVEL = "xvm.get_battle_level"
     GET_BATTLE_TYPE = "xvm.get_battle_type"
-    GET_DOSSIER = "xvm.get_dossier"
+    REQUEST_DOSSIER = "xvm.request_dossier"
     GET_SVC_SETTINGS = "xvm.get_svc_settings"
     GET_VEHINFO = "xvm.get_vehinfo"
     LOAD_SETTINGS = "xvm.load_settings"

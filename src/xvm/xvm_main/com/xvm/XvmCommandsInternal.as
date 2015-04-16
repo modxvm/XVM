@@ -8,7 +8,7 @@ package com.xvm
     {
         internal static const GET_BATTLE_TYPE:String = "xvm.get_battle_type";
         internal static const GET_BATTLE_LEVEL:String = "xvm.get_battle_level";
-        internal static const GET_DOSSIER:String = "xvm.get_dossier";
+        internal static const REQUEST_DOSSIER:String = "xvm.request_dossier";
         internal static const GET_VEHINFO:String = "xvm.get_vehinfo";
         internal static const LOAD_STAT_BATTLE:String = "xvm.load_stat_battle";
         internal static const LOAD_STAT_BATTLE_RESULTS:String = "xvm.load_stat_battle_results";

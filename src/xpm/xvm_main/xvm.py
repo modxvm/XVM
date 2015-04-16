@@ -68,8 +68,8 @@ class Xvm(object):
                 if arena is not None:
                     return (arena.bonusType, True)
                 return (None, True)
-            elif cmd == XVM_COMMAND.GET_DOSSIER:
-                dossier.getDossier(args)
+            elif cmd == XVM_COMMAND.REQUEST_DOSSIER:
+                dossier.requestDossier(args)
                 return (None, True)
             elif cmd == XVM_COMMAND.GET_SVC_SETTINGS:
                 token.getToken()

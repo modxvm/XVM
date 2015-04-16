@@ -77,7 +77,7 @@ package xvm.profile.components
                 // add event handlers
                 page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
-                Dossier.loadAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
+                Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
 
                 waitForInitDone();
 

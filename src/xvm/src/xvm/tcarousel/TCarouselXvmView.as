@@ -74,7 +74,7 @@ package xvm.tcarousel
             if (Config.config.hangar.carousel.enabled != true)
                 return;
             Macros.RegisterVehiclesMacros();
-            Dossier.loadAccountDossier(this, onAccountDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+            Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
         }
 
         private function remove():void
@@ -88,7 +88,7 @@ package xvm.tcarousel
             if (dossier != null)
             {
                 for (var vehId:String in dossier.vehicles)
-                    Dossier.loadVehicleDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, parseInt(vehId));
+                    Dossier.requestVehicleDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, parseInt(vehId));
             }
             page.carousel.invalidateData();
         }

@@ -11,12 +11,12 @@ package com.xvm
     {
         // PUBLIC STATIC
 
-        public static function loadAccountDossier(target:Object, callback:Function, battleType:String, playerId:Number = 0):void
+        public static function requestAccountDossier(target:Object, callback:Function, battleType:String, playerId:Number = 0):void
         {
             loadDossierInternal(target, callback, battleType, playerId, 0);
         }
 
-        public static function loadVehicleDossier(target:Object, callback:Function, battleType:String, vehId:Number, playerId:Number = 0):void
+        public static function requestVehicleDossier(target:Object, callback:Function, battleType:String, vehId:Number, playerId:Number = 0):void
         {
             loadDossierInternal(target, callback, battleType, playerId, vehId);
         }
@@ -52,7 +52,7 @@ package com.xvm
                 _requests[key] = [];
             if (callback != null)
                 _requests[key].push( { target: target, callback: callback } );
-            Xfw.cmd(XvmCommandsInternal.GET_DOSSIER, battleType, playerId, vehId);
+            Xfw.cmd(XvmCommandsInternal.REQUEST_DOSSIER, battleType, playerId, vehId);
         }
 
         private static function dossierLoaded(playerId:int, vehId:int, data:Object):void

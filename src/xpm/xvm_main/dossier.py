@@ -4,8 +4,10 @@
 # Command
 
 def getDossier(args):
-    _dossier.getDossier(args)
+    return _dossier.getDossier(args)
 
+def requestDossier(args):
+    _dossier.requestDossier(args)
 
 #############################
 # Private
@@ -35,9 +37,40 @@ import vehinfo_xte
 
 class _Dossier(object):
 
+    def __init__(self, *args):
+        from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
+        self.__dataReceiver = QueuedVehicleDossierReceiver()
+        self.__dataReceiver.onDataReceived += self.__requestedDataReceived
+        self.__currentlyRequestingVehicleId = None
+
+    def _dispose(self):
+        self.__dataReceiver.onDataReceived -= self.__requestedDataReceived
+        self.__dataReceiver.dispose()
+        self.__dataReceiver = None
+
+    # @process
+    def requestDossier(self, args):
+        (self.battlesType, playerId, vehId) = args
+
+        self.__currentlyRequestingVehicleId = vehId
+        if playerId == 0 or vehId == 0:
+            self.__requestedDataReceived(playerId, vehId)
+        else:
+            self.__dataReceiver.invoke(playerId, vehId)
+
+    def __requestedDataReceived(self, playerId, vehId):
+        #if self.__currentlyRequestingVehicleId != vehId:
+        #    return
+
+        res = self.getDossier((self.battlesType, playerId, vehId))
+
+        # respond
+        #log(res)
+        as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, playerId, vehId, res)
+
     # @process
     def getDossier(self, args):
-        # log(str(args))
+        #log(str(args))
 
         (self.battlesType, self.playerId, self.vehId) = args
 
@@ -54,7 +87,7 @@ class _Dossier(object):
             xpVehs = g_itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehId, 0)
             freeXP = g_itemsCache.items.stats.actualFreeXP
-            # log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
+            #log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
 
             xpToElite = 0
             unlocks = g_itemsCache.items.stats.unlocks
@@ -72,18 +105,16 @@ class _Dossier(object):
                 battles = stats.getBattlesCount()
                 dmg = stats.getDamageDealt()
                 frg = stats.getFragsCount()
-                xte = None
+                xte = 0
                 if battles > 0 and dmg > 0 and frg > 0:
                     xte = vehinfo_xte.calculateXTE(vehId, float(dmg) / battles, float(frg) / battles)
 
             res = self._prepareVehicleResult(dossier, xte, earnedXP, freeXP, xpToElite)
 
-        # respond
-        #strdata = simplejson.dumps(res)
-        as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, self.playerId, self.vehId, res)
+        return res
 
-        # log(str(args) + " done")
 
+    # PRIVATE
 
     def _getStatsBlock(self, dossier):
         if self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL:
@@ -201,4 +232,10 @@ class _Dossier(object):
 
         return res
 
-_dossier = _Dossier()
+_dossier = None
+
+def _init():
+    global _dossier
+    _dossier = _Dossier()
+
+BigWorld.callback(0, _init)
