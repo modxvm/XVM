@@ -96,6 +96,14 @@ package xvm.profile.components
             }
         }
 
+        // DAAPI
+
+        public function as_responseVehicleDossierXvm(data:VehicleDossier):void
+        {
+            //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
+            // TODO
+        }
+
         // PRIVATE
 
         // INITIALIZATION

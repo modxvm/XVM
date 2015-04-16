@@ -56,6 +56,11 @@ def ProfileTechniqueWindow_getTechniqueListVehicles(base, self, targetData, addV
     res = base(self, targetData, addVehiclesThatInHangarOnly)
     return res
 
+def ProfileTechnique_receiveVehicleDossier(self, vehId, playerId):
+    if self._isDAAPIInited():
+        vDossier = dossier.getDossier((self._battlesType, playerId, vehId))
+        self.flashObject.as_responseVehicleDossierXvm(vDossier)
+
 #####################################################################
 # Register events
 
@@ -67,5 +72,7 @@ def _RegisterEvents():
     from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
     OverrideMethod(ProfileTechniqueWindow, '_sendAccountData', ProfileTechniqueWindow_sendAccountData)
     OverrideMethod(ProfileTechniqueWindow, '_getTechniqueListVehicles', ProfileTechniqueWindow_getTechniqueListVehicles)
+    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechnique
+    RegisterEvent(ProfileTechnique, '_receiveVehicleDossier', ProfileTechnique_receiveVehicleDossier)
 
 BigWorld.callback(0, _RegisterEvents)

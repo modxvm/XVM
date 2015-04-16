@@ -5,6 +5,7 @@
 package xvm.profile.UI
 {
     import com.xfw.*;
+    import com.xvm.types.dossier.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.lobby.window.*;
     import xvm.profile.components.*;
@@ -13,6 +14,8 @@ package xvm.profile.UI
     {
         //private const WINDOW_EXTRA_WIDTH:int = 45;
         //private const WINDOW_EXTRA_HEIGHT:int = 35;
+
+        private var technique:Technique;
 
         public function UI_ProfileTechniqueWindow()
         {
@@ -73,7 +76,20 @@ package xvm.profile.UI
             // get player id from the view name.
             var playerId:int = parseInt(profileWindow.as_name.replace("profileWindow_", ""));
 
-            addChild(new TechniqueWindow(this, playerName, playerId));
+            technique = new TechniqueWindow(this, playerName, playerId)
+            addChild(technique);
+        }
+
+        public function as_responseVehicleDossierXvm(data:Object):void
+        {
+            try
+            {
+                technique.as_responseVehicleDossierXvm(new VehicleDossier(data));
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
     }
 }

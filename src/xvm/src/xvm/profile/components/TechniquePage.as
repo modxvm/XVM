@@ -1,8 +1,11 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 package xvm.profile.components
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.types.dossier.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
 
     public class TechniquePage extends Technique
