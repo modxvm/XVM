@@ -83,11 +83,6 @@ package xvm.profile.UI
             super.update(arg);
         }
 
-        public function get baseDisposed():Boolean
-        {
-            return _baseDisposed;
-        }
-
         public function get page():ProfileTechnique
         {
             try

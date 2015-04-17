@@ -27,6 +27,8 @@ package xvm.profile.UI
 
         public function as_responseVehicleDossierXvm(data:Object):void
         {
+            if(_baseDisposed)
+                return;
             try
             {
                 technique.as_responseVehicleDossierXvm(new VehicleDossier(data));

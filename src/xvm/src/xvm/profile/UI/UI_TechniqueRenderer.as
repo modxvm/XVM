@@ -27,11 +27,16 @@ package xvm.profile.UI
             if (Config.networkServicesSettings.statAwards)
             {
                 // xTE
-                xteTF = WGUtils.cloneTextField(winsTF);
-                xteTF.mouseEnabled = false;
+                xteTF = new TextField();
                 xteTF.name = "xteTF";
+                xteTF.antiAliasType = AntiAliasType.ADVANCED;
+                xteTF.multiline = true;
+                xteTF.wordWrap = false;
+                xteTF.selectable = false;
+                xteTF.mouseEnabled = false;
                 xteTF.y = winsTF.y;
                 xteTF.width = 50;
+                xteTF.height = 25;
                 addChild(xteTF);
 
                 battlesTF.x -= 0;
@@ -49,12 +54,20 @@ package xvm.profile.UI
 
         override protected function onDispose():void
         {
+            if (xteTF != null)
+            {
+                removeChild(xteTF);
+                xteTF = null;
+            }
+
             super.onDispose();
-            xteTF = null;
         }
 
         override protected function draw():void
         {
+            if(_baseDisposed)
+                return;
+
             super.draw();
 
             try
