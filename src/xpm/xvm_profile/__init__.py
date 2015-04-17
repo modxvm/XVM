@@ -24,36 +24,24 @@ import xvm_main.python.vehinfo_xte as vehinfo_xte
 #####################################################################
 # event handlers
 
-_accountDossier = None
+_lastPlayerId = None
 
-def ProfileTechniquePage_sendAccountData(base, self, targetData, accountDossier):
-    global _accountDossier
-    _accountDossier = accountDossier
+def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
+    global _lastPlayerId
+    _lastPlayerId = accountDossier.getPlayerDBID()
     base(self, targetData, accountDossier)
 
-def ProfileTechniquePage_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
+def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
+    global _lastPlayerId
     res = base(self, targetData, addVehiclesThatInHangarOnly)
-
-    global _accountDossier
     for x in res:
         try:
             vehId = x['id']
-            vDossier = dossier.getDossier((self._battlesType, _accountDossier.getPlayerDBID(), vehId))
+            vDossier = dossier.getDossier((self._battlesType, _lastPlayerId, vehId))
             if vDossier is not None:
                 x['xvm_xte'] = vDossier['xte']
         except:
             err(traceback.format_exc())
-
-    return res
-
-def ProfileTechniqueWindow_sendAccountData(base, self, targetData, accountDossier):
-    global _accountDossier
-    _accountDossier = accountDossier
-    base(self, targetData, accountDossier)
-
-def ProfileTechniqueWindow_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
-    # TODO: vehicle data for other players is not loaded yet, so we can't calculate xTE
-    res = base(self, targetData, addVehiclesThatInHangarOnly)
     return res
 
 def ProfileTechnique_receiveVehicleDossier(self, vehId, playerId):
@@ -66,13 +54,12 @@ def ProfileTechnique_receiveVehicleDossier(self, vehId, playerId):
 
 # Delayed registration
 def _RegisterEvents():
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniquePage
-    OverrideMethod(ProfileTechniquePage, '_sendAccountData', ProfileTechniquePage_sendAccountData)
-    OverrideMethod(ProfileTechniquePage, '_getTechniqueListVehicles', ProfileTechniquePage_getTechniqueListVehicles)
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
-    OverrideMethod(ProfileTechniqueWindow, '_sendAccountData', ProfileTechniqueWindow_sendAccountData)
-    OverrideMethod(ProfileTechniqueWindow, '_getTechniqueListVehicles', ProfileTechniqueWindow_getTechniqueListVehicles)
     from gui.Scaleform.daapi.view.lobby.profile import ProfileTechnique
+    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniquePage
+    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+    OverrideMethod(ProfileTechniquePage, '_sendAccountData', ProfileTechnique_sendAccountData)
+    OverrideMethod(ProfileTechniqueWindow, '_sendAccountData', ProfileTechnique_sendAccountData)
+    OverrideMethod(ProfileTechnique, '_getTechniqueListVehicles', ProfileTechnique_getTechniqueListVehicles)
     RegisterEvent(ProfileTechnique, '_receiveVehicleDossier', ProfileTechnique_receiveVehicleDossier)
 
 BigWorld.callback(0, _RegisterEvents)
