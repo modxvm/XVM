@@ -50,7 +50,6 @@ package xvm.profile.components
         // PRIVATE FIELDS
 
         //protected var filter:FilterControl;
-        //private var techniqueListAdjuster:TechniqueListAdjuster;
 
         // CTOR
 
@@ -80,9 +79,6 @@ package xvm.profile.components
                 Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
 
                 waitForInitDone();
-
-                // Add summary item to the first line of technique list
-                //techniqueListAdjuster = new TechniqueListAdjuster(page);
 
                 // create filter controls
                 //filter = null;
@@ -226,7 +222,7 @@ package xvm.profile.components
         //protected function createFilters():void
         //{
             //filter = new FilterControl();
-            //filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
+            //filter.addEventListener(Event.CHANGE, applyFilter);
             //page.addChild(filter);
         //}
 

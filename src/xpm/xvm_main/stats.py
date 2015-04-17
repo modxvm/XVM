@@ -188,6 +188,8 @@ class _Stat(object):
             if vehId not in self.players:
                 pl = _Player(vehId, vData)
                 self._load_clanIcon(pl)
+                # cleanup same player with different vehId (bug?)
+                self.players = {k:v for k,v in self.players.iteritems() if v.playerId != pl.playerId}
                 self.players[vehId] = pl
             self.players[vehId].update(vData)
 
