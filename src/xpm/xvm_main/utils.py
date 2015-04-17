@@ -5,10 +5,12 @@ import sys
 import re
 import traceback
 import threading
+import math
 from pprint import pprint
 
 import BigWorld
 
+import config
 from logger import *
 
 def touch(fname, times=None):
@@ -89,3 +91,18 @@ def compareVersions(v1, v2):
         # err(traceback.format_exc())
         return -2
     return 0
+
+def getDynamicColorValue(type, value, prefix='#'):
+    if math.isnan(value):
+        return ''
+
+    if config.config is None:
+        return ''
+
+    cfg = config.config['colors'].get(type, None)
+    if cfg is None:
+        return ''
+
+    color = next((int(x['color'], 0) for x in cfg if value <= float(x['value'])), 0xFFFFFF)
+
+    return "{0}{1:06x}".format(prefix, color)

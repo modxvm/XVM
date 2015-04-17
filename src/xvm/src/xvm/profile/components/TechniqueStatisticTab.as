@@ -5,11 +5,13 @@
 package xvm.profile.components
 {
     import com.xfw.*;
+    import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
     import com.xvm.utils.*;
     import flash.text.*;
+    import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import xvm.profile.UI.*;
@@ -21,12 +23,9 @@ package xvm.profile.components
 
         private var _raw_data:ProfileVehicleDossierVO;
 
-        //private var cache:Dictionary;
-        //private var controlsMap:Dictionary;
-        //private var controls:Array;
-
         public var lastBattleTimeTF:TextField;
         public var ratingTF:TextField;
+        public var xteDL:ProfileDashLineTextItem;
 
         //public var maxDamageDL:DashLineTextItem;
         //public var maxDamageDLLabelTextFormat:TextFormat;
@@ -44,51 +43,10 @@ package xvm.profile.components
 
         public function TechniqueStatisticTab(proxy:UI_TechniqueStatisticTab)
         {
-            //Logger.add("TechniqueStatisticTab::ctor()");
+            //Logger.add("TechniqueStatisticTab");
             try
             {
                 this.proxy = proxy;
-                //cache = new Dictionary();
-                //controlsMap = new Dictionary(true);
-
-                //Logger.addObject(proxy);
-
-                /*
-                controls = [
-                    { y: 60,  width: DL_WIDTH, control: proxy.battlesDL },
-                    { y: 77,  width: DL_WIDTH, control: proxy.winsDL },
-                    { y: 94,  width: DL_WIDTH, control: proxy.defeatsDL },
-                    { y: 111, width: DL_WIDTH, control: proxy.surviveDL },
-                    { y: 128, width: DL_WIDTH, control: proxy.accuracyDL },
-                    { y: 148, control: proxy.efficiencyTF },
-                    { y: 168, width: DL_WIDTH, control: proxy.maxExpDL },
-                    { y: 185, width: DL_WIDTH, control: proxy.maxKillDL },
-                    // y: 202 - maxDamageDL
-                    { y: 224, width: DL_WIDTH, control: proxy.totalKillDL },
-                    { y: 241, width: DL_WIDTH, control: proxy.totalDeadDL },
-                    { y: 258, width: DL_WIDTH, control: proxy.killRatioDL },
-                    { y: 280, width: DL_WIDTH, control: proxy.dealtDmgDL },
-                    { y: 297, width: DL_WIDTH, control: proxy.receivedDmgDL },
-                    { y: 314, width: DL_WIDTH, control: proxy.dmgRatioDL },
-                    { y: 334, control: proxy.avgResultsTF },
-                    { y: 354, width: DL_WIDTH, control: proxy.avgExpDL },
-                    { y: 371, width: DL_WIDTH, control: proxy.avgDmgDealtDL },
-                    { y: 388, width: DL_WIDTH, control: proxy.avgDmgReceivedDL },
-                    { y: 405, width: DL_WIDTH, control: proxy.avgKillsDL },
-                    { y: 422, width: DL_WIDTH, control: proxy.avgDetectedDL }
-                    //{ y: 473, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
-                ];
-                */
-
-                /*
-                controls.push(
-                    { y: 202, width: DL_WIDTH, control: maxDamageDL },
-                    { y: 439, width: DL_WIDTH, control: specDamageDL },         // vehicle only
-                    { y: 439, width: DL_WIDTH, control: avgCaptureDL },         // summary only
-                    { y: 456, width: DL_WIDTH, control: avgDefenceDL },         // summary only
-                    { y: 473, width: DL_WIDTH + 200, control: bottomTF }
-                );
-                */
             }
             catch (ex:Error)
             {
@@ -100,18 +58,23 @@ package xvm.profile.components
         {
             try
             {
-                createLastBattleTimeTF();
-                createRatingTF();
+                tech.addEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded);
+
                 createControls();
 
-                setupControls();
+                //setupControls();
                 //createTextFields();
-                updateCommonData(null);
+                //updateCommonData(null);
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
+        }
+
+        public function onDispose():void
+        {
+            tech.removeEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded);
         }
 
         public function update(raw_data:ProfileVehicleDossierVO):void
@@ -129,10 +92,7 @@ package xvm.profile.components
 
                 //Logger.add("vehId: " + vehId)
 
-                setupControls();
-
-                if (page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
-                    return;
+                //setupControls();
 
                 if (vehId == 0)
                 {
@@ -140,7 +100,8 @@ package xvm.profile.components
                 }
                 else
                 {
-                    updateVehicleData(vehId);
+                    lastBattleTimeTF.htmlText = "";
+                    //updateVehicleData(vehId);
                 }
 
                 proxy.updateBase(raw_data);
@@ -151,54 +112,35 @@ package xvm.profile.components
             }
         }
 
-        // PRIVATE
+        // PRIVATE PROPERTIES
 
         private function get page():ProfileTechnique
         {
             return proxy.page;
         }
 
-        // utils
-
         private function get tech():Technique
         {
             return page ? page.getChildByName("xvm_extension") as Technique : null;
         }
 
-        private function parseNumber(str:String):Number
-        {
-            var s:String = "";
-            var a:Array = str.split('');
-            for (var i:int = 0; i < a.length; ++i)
-            {
-                var x:String = a[i];
-                if (x >= '0' && x <= '9')
-                    s += x;
-            }
-            return parseInt(s);
-        }
+        // PRIVATE METHODS
 
-        private function formatHtmlText(txt:String, color:uint=1):String
-        {
-            return this.color(size("<span class='txt'>" + (color == 1 ? txt : this.color(txt, color)) + "</span>"));
-        }
+        // helpers
 
-        private function size(txt:String, sz:uint=12):String
+        private static function size(txt:String, sz:uint=12):String
         {
             return "<font size='" + sz.toString() + "'>" + txt + "</font>";
         }
 
-        private function color(txt:String, color:uint = XfwConst.UICOLOR_LIGHT):String
+        private static function color(txt:String, color:uint = XfwConst.UICOLOR_LIGHT):String
         {
             return "<font color='#" + color.toString(16) + "'>" + txt + "</font>";
         }
 
-        private function setStatData(data:DossierBase):void
+        private static function formatHtmlText(txt:String, color:uint=1):String
         {
-            var stat:StatData = Stat.getUserDataByName(tech.playerName);
-            if (stat == null)
-                return;
-            data.stat = stat;
+            return TechniqueStatisticTab.color(size("<span class='txt'>" + (color == 1 ? txt : TechniqueStatisticTab.color(txt, color)) + "</span>"));
         }
 
         /*
@@ -215,44 +157,42 @@ package xvm.profile.components
 
         // create controls
 
-        private function createLastBattleTimeTF():void
+        private function _createTextField(x:Number, y:Number, width:Number, height:Number, fontSize:Number):TextField
         {
-            // last battle time
-            lastBattleTimeTF = new TextField();
-            lastBattleTimeTF.antiAliasType = AntiAliasType.ADVANCED;
-            lastBattleTimeTF.selectable = false;
-            lastBattleTimeTF.wordWrap = false;
-            lastBattleTimeTF.x = 0;
-            if (!Config.config.userInfo.showExtraDataInProfile)
-                lastBattleTimeTF.x -= 40;
-            lastBattleTimeTF.y = -30;
-            lastBattleTimeTF.width = 450;
-            lastBattleTimeTF.height = 25;
-            lastBattleTimeTF.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, XfwConst.UICOLOR_LABEL));
-            lastBattleTimeTF.mouseEnabled = false;
-            proxy.addChild(lastBattleTimeTF);
+            var tf:TextField = new TextField();
+            tf.antiAliasType = AntiAliasType.ADVANCED;
+            tf.multiline = true;
+            tf.wordWrap = false;
+            tf.selectable = false;
+            tf.mouseEnabled = false;
+            tf.x = x;
+            tf.y = y;
+            tf.width = width;
+            tf.height = height;
+            tf.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", fontSize, XfwConst.UICOLOR_LABEL));
+            return tf;
         }
 
-        private function createRatingTF():void
+        /*private function _createProfileDashLineTextItem():ProfileDashLineTextItem
         {
-            ratingTF = new TextField();
-            ratingTF.antiAliasType = AntiAliasType.ADVANCED;
-            ratingTF.multiline = true;
-            ratingTF.selectable = false;
-            ratingTF.wordWrap = false;
-            ratingTF.x = /*proxy.efficiencyTF.x +*/ COLUMN1_WIDTH + 5;
-            //if (!Config.config.userInfo.showExtraDataInProfile)
-            //    ratingTF.x -= 20;
-            ratingTF.y = /*proxy.battlesDL.y - 62*/0;
-            ratingTF.width = 400;
-            ratingTF.height = 200;
-            ratingTF.styleSheet = WGUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, XfwConst.UICOLOR_LABEL));
-            ratingTF.mouseEnabled = false;
-            proxy.addChild(ratingTF);
-        }
+            var item:ProfileDashLineTextItem = new UI_DashLineTextItemTechnique();
+            item.x = proxy.
+            return item;
+        }*/
 
         private function createControls():void
         {
+            // last battle time
+            lastBattleTimeTF = _createTextField(Config.config.userInfo.showExtraDataInProfile ? 0 : -40, -30, 450, 25, 14);
+            proxy.addChild(lastBattleTimeTF);
+
+            // rating
+            ratingTF = _createTextField(COLUMN1_WIDTH + 5, 0, 400, 200, 16);
+            proxy.addChild(ratingTF);
+
+            // xTE
+            //xteDL = _createProfileDashLineTextItem();
+
             /*
             if (Config.config.userInfo.showExtraDataInProfile)
             {
@@ -339,7 +279,6 @@ package xvm.profile.components
             */
         }
 
-
         /*
         private function createTextFields():void
         {
@@ -371,6 +310,40 @@ package xvm.profile.components
         }
         */
 
+        /*
+        private function setupControls():void
+        {
+            var battleType = page && page.battlesDropdown ? page.battlesDropdown.selectedItem : null;
+
+            for each (var c:Object in controls)
+            {
+                if (c.hasOwnProperty("y"))
+                    c.control.y = c.y;
+                if (c.hasOwnProperty("width"))
+                    c.control.width = c.width;
+            }
+
+            proxy.winsPercentSign.x = proxy.winsDL.x + proxy.winsDL.width;
+            proxy.winsPercentSign.y = proxy.winsDL.y;
+            proxy.winsPercentSign.antiAliasType = AntiAliasType.NORMAL;
+            proxy.winsPercentSign.visible = team;
+
+            proxy.defeatsPercentSign.x = proxy.defeatsDL.x + proxy.defeatsDL.width;
+            proxy.defeatsPercentSign.y = proxy.defeatsDL.y;
+            proxy.defeatsPercentSign.antiAliasType = AntiAliasType.NORMAL;
+            proxy.defeatsPercentSign.visible = team;
+
+            proxy.survivePercentSign.x = proxy.surviveDL.x + proxy.surviveDL.width;
+            proxy.survivePercentSign.y = proxy.surviveDL.y;
+            proxy.survivePercentSign.antiAliasType = AntiAliasType.NORMAL;
+            proxy.survivePercentSign.visible = team;
+
+            proxy.accuracyPercentSign.x = proxy.accuracyDL.x + proxy.accuracyDL.width;
+            proxy.accuracyPercentSign.y = proxy.accuracyDL.y;
+            proxy.accuracyPercentSign.antiAliasType = AntiAliasType.NORMAL;
+        }
+        */
+
         // update data
 
         private function prepareData(dossier:DossierBase):void
@@ -386,7 +359,11 @@ package xvm.profile.components
                     return;
 
                 if (dossier.stat == null)
-                    setStatData(dossier);
+                {
+                    var stat:StatData = Stat.getUserDataByName(tech.playerName);
+                    if (stat != null)
+                        dossier.stat = stat;
+                }
 
                 //Logger.addObject(data);
             }
@@ -431,9 +408,9 @@ package xvm.profile.components
             }
         }
 
+        /*
         private function updateCommonData(data:DossierBase):void
         {
-            /*
             clearTextFields();
 
             if (data == null)
@@ -499,8 +476,8 @@ package xvm.profile.components
                 showExtraData(data);
 
             //bottomTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(getBottomText(data)) + "</textformat>";
-            */
         }
+        */
 
         private function updateSummaryData():void
         {
@@ -532,57 +509,18 @@ package xvm.profile.components
             //}
         }
 
-
-        private function setupControls():void
-        {
-            /*
-            var team:Boolean = page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM);
-
-            for each (var c:Object in controls)
-            {
-                if (c.hasOwnProperty("y"))
-                    c.control.y = c.y;
-                if (c.hasOwnProperty("width"))
-                    c.control.width = c.width;
-            }
-
-            proxy.winsPercentSign.x = proxy.winsDL.x + proxy.winsDL.width;
-            proxy.winsPercentSign.y = proxy.winsDL.y;
-            proxy.winsPercentSign.antiAliasType = AntiAliasType.NORMAL;
-            proxy.winsPercentSign.visible = team;
-
-            proxy.defeatsPercentSign.x = proxy.defeatsDL.x + proxy.defeatsDL.width;
-            proxy.defeatsPercentSign.y = proxy.defeatsDL.y;
-            proxy.defeatsPercentSign.antiAliasType = AntiAliasType.NORMAL;
-            proxy.defeatsPercentSign.visible = team;
-
-            proxy.survivePercentSign.x = proxy.surviveDL.x + proxy.surviveDL.width;
-            proxy.survivePercentSign.y = proxy.surviveDL.y;
-            proxy.survivePercentSign.antiAliasType = AntiAliasType.NORMAL;
-            proxy.survivePercentSign.visible = team;
-
-            proxy.accuracyPercentSign.x = proxy.accuracyDL.x + proxy.accuracyDL.width;
-            proxy.accuracyPercentSign.y = proxy.accuracyDL.y;
-            proxy.accuracyPercentSign.antiAliasType = AntiAliasType.NORMAL;
-            */
-        }
-
-        private function updateVehicleData(vehId:uint):void
-        {
-            lastBattleTimeTF.htmlText = "";
-            Dossier.requestVehicleDossier(this, updateVehicleDataCallback, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, vehId, tech.playerId);
-        }
-
-        private function updateVehicleDataCallback(dossier:VehicleDossier):void
+        private function onVehicleDossierLoaded(e:ObjectEvent):void
         {
             if (proxy.baseDisposed)
                 return;
 
-            var data:VehicleDossier = dossier;
-            prepareData(data);
+            var dossier:VehicleDossier = e.result as VehicleDossier;
+            //Logger.addObject(dossier);
 
-            updateGlobalRatings(data);
-            /*updateCommonData(data);
+            prepareData(dossier);
+
+            updateGlobalRatings(dossier);
+            /*updateCommonData(dossier);
 
             var vdata:VehicleData = VehicleInfo.get(dossier.vehId);
             if (vdata == null)
@@ -640,7 +578,7 @@ package xvm.profile.components
             }
 
             // specific damage
-            var specDmg:Number = data.avgDamageDealt / vdata.hpTop;
+            var specDmg:Number = dossier.avgDamageDealt / vdata.hpTop;
             specDamageDL.visible = true;
             specDamageDL.value = color(size(App.utils.locale.float(specDmg)));
 

@@ -18,6 +18,11 @@ package xvm.profile.UI
         public function UI_TechniqueRenderer()
         {
             super();
+        }
+
+        override protected function configUI():void
+        {
+            super.configUI();
 
             if (Config.networkServicesSettings.statAwards)
             {
@@ -85,7 +90,9 @@ package xvm.profile.UI
                     }
                     else if (data.xvm_xte <= 0)
                     {
-                        xteTF.htmlText = "<font face='$FieldFont' size='15' color='" + XfwUtils.toHtmlColor(XfwConst.UICOLOR_DISABLED) + "'>" + "--" + "</font>";
+                        xteTF.htmlText = "<p align='center'><font face='$FieldFont' size='15' color='" +
+                            XfwUtils.toHtmlColor(XfwConst.UICOLOR_DISABLED) + "'>" + "--" +
+                            "</font></p>";
                     }
                     else
                     {

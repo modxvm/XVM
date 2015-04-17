@@ -22,10 +22,17 @@ package xvm.profile.UI
             super();
             worker = new TechniqueStatisticTab(this);
         }
+
         override protected function configUI():void
         {
             super.configUI();
             worker.configUI();
+        }
+
+        override protected function onDispose():void
+        {
+            super.onDispose();
+            worker.onDispose();
         }
 
         override public function update(arg1:Object):void

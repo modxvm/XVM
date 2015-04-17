@@ -58,15 +58,36 @@ class TEAM(object):
 
 # Invalidation targets
 class INV(object):
-    NONE              = 0x0000
+    NONE                = 0x0000
 
-    BATTLE_STATE      = 0x0001
-    BATTLE_HP         = 0x0002
-    BATTLE_SPOTTED    = 0x0004
-    BATTLE_ALL        = 0x00FF
+    BATTLE_STATE        = 0x0001
+    BATTLE_HP           = 0x0002
+    BATTLE_SPOTTED      = 0x0004
+    BATTLE_ALL          = 0x00FF
 
-    MARKER_STATUS     = 0x0100
-    MARKER_FRAGS      = 0x0200
-    MARKER_ALL        = 0xFF00
+    MARKER_STATUS       = 0x0100
+    MARKER_FRAGS        = 0x0200
+    MARKER_ALL          = 0xFF00
 
-    ALL               = 0xFFFF
+    ALL                 = 0xFFFF
+
+class DYNAMIC_VALUE_TYPE(object):
+    X              = 'x'
+    HP             = 'hp'
+    HP_RATIO       = 'hp_ratio'
+    EFF            = 'eff'
+    WN6            = 'wn6'
+    WN8            = 'wn8'
+    WGR            = 'wgr'
+    WINRATE        = 'winrate'
+    KB             = 'kb'
+    AVGLVL         = 'avglvl'
+    TBATTLES       = 't_battles'
+    TDB            = 'tdb'
+    TDV            = 'tdv'
+    TFB            = 'tfb'
+    TSB            = 'tsb'
+    WN8EFFD        = 'wn8effd'
+    DAMAGERATING   = 'damageRating'
+    HITSRATIO      = 'hitsRatio'
+    WINCHANCE      = 'winChance'

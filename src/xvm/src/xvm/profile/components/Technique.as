@@ -5,6 +5,7 @@
 package xvm.profile.components
 {
     import com.xfw.*;
+    import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.types.dossier.*;
     import flash.display.*;
@@ -22,6 +23,10 @@ package xvm.profile.components
 
     public class Technique extends Sprite
     {
+        // CONSTANTS
+
+        public static const EVENT_VEHICLE_DOSSIER_LOADED:String = "vehicle_dossier_loaded";
+
         // PROPERTIES
 
         private var _page:ProfileTechnique;
@@ -69,14 +74,17 @@ package xvm.profile.components
                 page.listComponent.upperShadow.visible = false;
                 page.listComponent.lowerShadow.visible = false;
 
-                // override renderers
-                page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
-                page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
+                if (Config.networkServicesSettings.statAwards)
+                {
+                    // override renderers
+                    page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
+                    page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
 
-                // add event handlers
-                page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
+                    // add event handlers
+                    page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
-                Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
+                    Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
+                }
 
                 waitForInitDone();
 
@@ -97,7 +105,7 @@ package xvm.profile.components
         public function as_responseVehicleDossierXvm(data:VehicleDossier):void
         {
             //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
-            // TODO
+            dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
         }
 
         // PRIVATE
