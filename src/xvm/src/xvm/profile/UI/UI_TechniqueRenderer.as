@@ -6,10 +6,14 @@ package xvm.profile.UI
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.types.dossier.VehicleDossier;
+    import com.xvm.types.stat.StatData;
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
+    import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;
+    import xvm.profile.components.*;
 
     public dynamic class UI_TechniqueRenderer extends TechniqueRenderer_UI
     {
@@ -97,11 +101,34 @@ package xvm.profile.UI
                         data.winsEfficiencyStr +
                         "</font></p>";
 
+                    var xte:Number = data.xvm_xte;
+                    var isStat:Boolean = false;
                     if (isNaN(data.xvm_xte))
+                    {
+                        var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.playerId);
+                        //Logger.addObject(vdossier, 1, String(tech.playerId) + " " + data.id);
+                        if (vdossier != null)
+                            xte = vdossier.xte;
+                        else
+                        {
+                            var stat:StatData = Stat.getUserDataById(tech.playerId);
+                            if (stat != null && stat.v != null)
+                            {
+                                var svdata:Object = stat.v[data.id];
+                                if (svdata != null)
+                                {
+                                    isStat = true;
+                                    xte = svdata.xte;
+                                }
+                            }
+                        }
+                    }
+
+                    if (isNaN(xte))
                     {
                         xteTF.htmlText = "";
                     }
-                    else if (data.xvm_xte <= 0)
+                    else if (xte <= 0)
                     {
                         xteTF.htmlText = "<p align='center'><font face='$FieldFont' size='15' color='" +
                             XfwUtils.toHtmlColor(XfwConst.UICOLOR_DISABLED) + "'>" + "--" +
@@ -109,10 +136,11 @@ package xvm.profile.UI
                     }
                     else
                     {
-                        xteTF.htmlText = "<p align='center'><font face='$FieldFont' size='15' color='" +
-                            MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, data.xvm_xte) + "'>" +
-                            (data.xvm_xte == 100 ? "XX" : (data.xvm_xte < 10 ? "0" : "") + data.xvm_xte) +
-                            "</font></p>";
+                        var value:String = xte == 100 ? "XX" : (xte < 10 ? "0" : "") + xte;
+                        if (isStat)
+                            value = "<font alpha='#60'>(</font>" + value + "<font alpha='#60'>)</font>";
+                        xteTF.htmlText = Sprintf.format("<p align='center'><font face='$FieldFont' size='15' color='%s'>%s</font></p>",
+                            MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xte), value);
                     }
                 }
             }
@@ -120,6 +148,25 @@ package xvm.profile.UI
             {
                 Logger.err(ex);
             }
+        }
+
+        // PRIVATE PROPERTIES
+
+        private function get page():ProfileTechnique
+        {
+            try
+            {
+                return parent.parent.parent.parent as ProfileTechnique;
+            }
+            catch (ex:Error)
+            {
+            }
+            return null;
+        }
+
+        private function get tech():Technique
+        {
+            return page ? page.getChildByName("xvm_extension") as Technique : null;
         }
     }
 }

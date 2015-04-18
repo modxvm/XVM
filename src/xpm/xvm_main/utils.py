@@ -93,7 +93,7 @@ def compareVersions(v1, v2):
     return 0
 
 def getDynamicColorValue(type, value, prefix='#'):
-    if math.isnan(value):
+    if value is None or math.isnan(value):
         return ''
 
     if config.config is None:

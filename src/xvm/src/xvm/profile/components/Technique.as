@@ -105,6 +105,8 @@ package xvm.profile.components
         public function as_responseVehicleDossierXvm(data:VehicleDossier):void
         {
             //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
+            Dossier.setVehicleDossier(data);
+            page.listComponent.techniqueList.invalidateData();
             dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
         }
 
@@ -224,6 +226,7 @@ package xvm.profile.components
         {
             //Logger.add("onStatLoaded: " + playerName);
             page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
+            page.listComponent.techniqueList.invalidateData();
         }
 
         // virtual

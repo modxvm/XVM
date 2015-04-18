@@ -31,6 +31,11 @@ package com.xvm
             return getDossier(playerId, vehId);
         }
 
+        public static function setVehicleDossier(vdossier:VehicleDossier):void
+        {
+            _setVehicleDossier(vdossier);
+        }
+
         // PRIVATE
 
         // Private vars
@@ -59,12 +64,7 @@ package com.xvm
         {
             try
             {
-                //Logger.addObject(data);
-
                 var key:String = playerId + "," + vehId;
-
-                //var data:Object = JSONx.parse(str);
-
                 //Logger.addObject(data, 3, key);
 
                 var dossier:* = (vehId == 0)
@@ -102,6 +102,11 @@ package com.xvm
         private static function getDossier(playerId:int, vehId:int):*
         {
             return _cache[playerId + "," + vehId];
+        }
+
+        private static function _setVehicleDossier(vdossier:VehicleDossier):*
+        {
+            _cache[vdossier.playerId + "," + vdossier.vehId] = vdossier;
         }
     }
 }

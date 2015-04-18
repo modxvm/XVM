@@ -321,7 +321,7 @@ class _Stat(object):
                             err('  Bad answer: ' + response)
 
                         if data is not None:
-                            self._fix(data, None if isId else orig_value)
+                            self._fix_user(data, None if isId else orig_value)
                             if 'nm' in data and '_id' in data:
                                 self.cacheUser[reg + "/" + data['nm']] = data
                                 self.cacheUser["ID/" + str(data['_id'])] = data
@@ -460,8 +460,32 @@ class _Stat(object):
             self._calculateGWR(stat)
             self._calculateXvmScale(stat)
             if 'id' in stat['v']:
-                self._calculateVehicleValues(stat)
-                self._calculateXTE(stat)
+                self._calculateVehicleValues(stat, stat['v'])
+                self._calculateXTE(stat['v'])
+
+        self._addContactData(stat)
+
+        # log(simplejson.dumps(stat))
+        return stat
+
+    def _fix_user(self, stat, orig_name=None):
+        if 'v' not in stat:
+            stat['v'] = {}
+        if stat.get('wn6', 0) <= 0:
+            stat['wn6'] = None
+        if stat.get('wn8', 0) <= 0:
+            stat['wn8'] = None
+
+        if orig_name is not None:
+            stat['name'] = orig_name
+
+        if 'b' in stat and 'w' in stat and stat['b'] > 0:
+            self._calculateGWR(stat)
+            self._calculateXvmScale(stat)
+            for vehId, vdata in stat['v'].iteritems():
+                vdata['id'] = int(vehId)
+                self._calculateVehicleValues(stat, vdata)
+                self._calculateXTE(vdata)
 
         self._addContactData(stat)
 
@@ -484,8 +508,7 @@ class _Stat(object):
             stat['xwgr'] = xvm_scale.XWGR(stat['wgr'])
 
     # calculate Vehicle values
-    def _calculateVehicleValues(self, stat):
-        v = stat['v']
+    def _calculateVehicleValues(self, stat, v):
         vehId = v['id']
         vData = vehinfo.getVehicleInfoData(vehId)
         if vData is None:
@@ -519,8 +542,7 @@ class _Stat(object):
             v['sb'] = float(v['spo']) / vb
 
     # calculate xTE
-    def _calculateXTE(self, stat):
-        v = stat['v']
+    def _calculateXTE(self, v):
         if 'db' not in v or v['db'] <= 0:
             return
         if 'fb' not in v or v['fb'] <= 0:

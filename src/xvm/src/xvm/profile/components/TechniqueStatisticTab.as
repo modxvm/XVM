@@ -526,6 +526,7 @@ package xvm.profile.components
             prepareData(dossier);
 
             updateGlobalRatings(dossier);
+
             /*updateCommonData(dossier);
 
             var vdata:VehicleData = VehicleInfo.get(dossier.vehId);
