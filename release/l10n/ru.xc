@@ -181,7 +181,7 @@
     "CompleteCrew": "Полный экипаж",
 
     // Profile
-    "profile/xvm_xte_tooltip": "xTE: Эффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+    "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nЭффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
 
     // Comments
     "Network services unavailable": "Сетевые сервисы недоступны",

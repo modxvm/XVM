@@ -103,8 +103,6 @@ package xvm.profile.components
                     lastBattleTimeTF.htmlText = "";
                     //updateVehicleData(vehId);
                 }
-
-                proxy.updateBase(raw_data);
             }
             catch (ex:Error)
             {
@@ -116,8 +114,16 @@ package xvm.profile.components
 
         private function get page():ProfileTechnique
         {
-            return proxy.page;
+            try
+            {
+                return proxy.parent.parent.parent.parent as ProfileTechnique;
+            }
+            catch (ex:Error)
+            {
+            }
+            return null;
         }
+
 
         private function get tech():Technique
         {

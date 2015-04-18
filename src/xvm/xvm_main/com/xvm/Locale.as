@@ -247,7 +247,7 @@ package com.xvm
             "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nАвтоматически вернуть экипаж, который в предыдущем\nбою был на данной машине",
 
             // Profile
-            "profile/xvm_xte_tooltip": "xTE: Эффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+            "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nЭффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
 
             // Carousel
             "NonElite": "Не элитный",
@@ -370,7 +370,7 @@ package com.xvm
             "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nAutomatically return the crew that fought\nin this vehicle in the previous battle",
 
             // Profile
-            "profile/xvm_xte_tooltip": "xTE: per-vehicle efficiency\nMore info at <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+            "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nPer-vehicle efficiency\nMore info at <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
 
             // Carousel
             "NonElite": "Non elite",

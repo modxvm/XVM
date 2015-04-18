@@ -72,10 +72,10 @@ def DetailedStatisticsUtils_getStatistics(base, targetData):
             #log("xte={} color={}".format(xteStr, color))
         else:
             data = -1
-        res[1]['data'][1] = {
+        res[0]['data'][4] = {
             'label': 'xTE',
             'data': data,
-            'tooltip': 'xTE',
+            'tooltip': 'profile/xvm_xte_tooltip',
             'tooltipData': {'body': None, 'header': {}, 'note': None}}
     except:
         err(traceback.format_exc())
