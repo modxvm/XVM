@@ -31,7 +31,13 @@ package xvm.profile.UI
                 return;
             try
             {
-                technique.as_responseVehicleDossierXvm(new VehicleDossier(data));
+                var vdossier:VehicleDossier = new VehicleDossier(data);
+                if (vdossier != null)
+                {
+                    Dossier.setVehicleDossier(vdossier);
+                    if (technique)
+                        technique.as_responseVehicleDossierXvm(vdossier);
+                }
             }
             catch (ex:Error)
             {
