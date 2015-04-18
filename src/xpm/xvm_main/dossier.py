@@ -92,16 +92,16 @@ class _Dossier(object):
                     xpToElite += data[0]
 
             # xTE
-            if dossier is None:
-                xte = None
-            else:
+            xte = None
+            if dossier is not None:
                 stats = self.__getStatsBlock(dossier)
                 battles = stats.getBattlesCount()
                 dmg = stats.getDamageDealt()
                 frg = stats.getFragsCount()
-                xte = 0
                 if battles > 0 and dmg > 0 and frg > 0:
                     xte = vehinfo_xte.calculateXTE(vehId, float(dmg) / battles, float(frg) / battles)
+                if xte is None:
+                    xte = 0
 
             res = self.__prepareVehicleResult(dossier, xte, earnedXP, freeXP, xpToElite)
 
