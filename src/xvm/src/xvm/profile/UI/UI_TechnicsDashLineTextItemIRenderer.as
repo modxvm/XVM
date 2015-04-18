@@ -10,20 +10,43 @@ package xvm.profile.UI
 
     public dynamic class UI_TechnicsDashLineTextItemIRenderer extends TechnicsDashLineTextItemIRenderer_UI
     {
+        private var _toolTipParams:IToolTipParams;
+
         public function UI_TechnicsDashLineTextItemIRenderer()
         {
             //Logger.add("UI_TechnicsDashLineTextItemIRenderer");
         }
 
+        override public function set toolTipParams(value:IToolTipParams):void
+        {
+            super.toolTipParams = value;
+            this._toolTipParams = value;
+        }
+
         override protected function showToolTip(param1:IToolTipParams):void
         {
-            if (tooltip == "profile/xvm_xte_tooltip")
+            try
             {
-                App.toolTipMgr.show(Locale.get(tooltip));
+                if (tooltip == "xvm_xte")
+                {
+                    var params:Object = _toolTipParams != null ? _toolTipParams.body : null;
+                    var t:String = Sprintf.format("{{l10n:profile/xvm_xte_extended_tooltip:%s:%s:%s:%s:%s:%s}}",
+                        !params.myD  ? "--" : App.utils.locale.integer(Math.round(params.myD)),
+                        !params.myF  ? "--" : App.utils.locale.float(params.myF),
+                        !params.avgD ? "--" : App.utils.locale.integer(Math.round(params.avgD)),
+                        !params.avgF ? "--" : App.utils.locale.float(params.avgF),
+                        !params.topD ? "--" : App.utils.locale.integer(Math.round(params.topD)),
+                        !params.topF ? "--" : App.utils.locale.float(params.topF));
+                    App.toolTipMgr.show(Locale.get(t));
+                }
+                else
+                {
+                    super.showToolTip(param1);
+                }
             }
-            else
+            catch (ex:Error)
             {
-                super.showToolTip(param1);
+                Logger.err(ex);
             }
         }
     }

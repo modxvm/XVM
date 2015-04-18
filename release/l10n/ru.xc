@@ -182,6 +182,7 @@
 
     // Profile
     "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nЭффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+    "profile/xvm_xte_extended_tooltip": "<textformat tabstops='[20, 85, 140]'>{{l10n:profile/xvm_xte_tooltip}}\n\nЭталонные значения:\n\t\tурон\tфраги\n\tМои:\t<font color='#FDF4CE' size='14'>{0}</font>\t<font color='#FDF4CE' size='14'>{1}</font>\n\tСредние:\t<font color='#FDF4CE' size='14'>{2}</font>\t<font color='#FDF4CE' size='14'>{3}</font>\n\tТоповые:\t<font color='#FDF4CE' size='14'>{4}</font>\t<font color='#FDF4CE' size='14'>{5}</font>",
 
     // Comments
     "Network services unavailable": "Сетевые сервисы недоступны",

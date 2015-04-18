@@ -66,17 +66,23 @@ def DetailedStatisticsUtils_getStatistics(base, targetData):
         if battles > 0 and dmg > 0 and frg > 0:
             global _lastVehId
             xte = vehinfo_xte.calculateXTE(_lastVehId, float(dmg) / battles, float(frg) / battles)
+            ref = vehinfo_xte.getReferenceValues(_lastVehId)
+            if ref is None:
+                ref = {}
+            ref['myD'] = float(dmg) / battles
+            ref['myF'] = float(frg) / battles
             color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, xte)
             xteStr = 'XX' if xte == 100 else ('0' if xte < 10 else '') + str(xte)
             data = '<font color="{0}">{1}</font>'.format(color, xteStr)
             #log("xte={} color={}".format(xteStr, color))
         else:
             data = -1
-        res[0]['data'][4] = {
+        del res[0]['data'][4]
+        res[0]['data'].insert(0, {
             'label': 'xTE',
             'data': data,
-            'tooltip': 'profile/xvm_xte_tooltip',
-            'tooltipData': {'body': None, 'header': {}, 'note': None}}
+            'tooltip': 'xvm_xte',
+            'tooltipData': {'body': ref, 'header': {}, 'note': None}})
     except:
         err(traceback.format_exc())
 

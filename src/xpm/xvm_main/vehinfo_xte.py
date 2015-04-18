@@ -7,6 +7,12 @@ from logger import *
 
 # PUBLIC
 
+def getReferenceValues(vehId):
+    xte = _getXTEData(vehId)
+    if xte is None or xte['td'] == xte['ad'] or xte['tf'] == xte['af']:
+        return None
+    return {'avgD': xte['ad'], 'avgF': xte['af'], 'topD': xte['td'], 'topF': xte['tf']}
+
 def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
     xte = _getXTEData(vehId)
     if xte is None or xte['td'] == xte['ad'] or xte['tf'] == xte['af']:
