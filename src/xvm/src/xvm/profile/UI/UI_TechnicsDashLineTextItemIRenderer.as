@@ -31,8 +31,8 @@ package xvm.profile.UI
                 {
                     var params:Object = _toolTipParams != null ? _toolTipParams.body : null;
                     var t:String = Sprintf.format("{{l10n:profile/xvm_xte_extended_tooltip:%s:%s:%s:%s:%s:%s}}",
-                        !params.myD  ? "--" : App.utils.locale.integer(Math.round(params.myD)),
-                        !params.myF  ? "--" : App.utils.locale.float(params.myF),
+                        !params.currentD  ? "--" : App.utils.locale.integer(Math.round(params.currentD)),
+                        !params.currentF  ? "--" : App.utils.locale.float(params.currentF),
                         !params.avgD ? "--" : App.utils.locale.integer(Math.round(params.avgD)),
                         !params.avgF ? "--" : App.utils.locale.float(params.avgF),
                         !params.topD ? "--" : App.utils.locale.integer(Math.round(params.topD)),

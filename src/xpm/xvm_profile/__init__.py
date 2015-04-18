@@ -69,8 +69,8 @@ def DetailedStatisticsUtils_getStatistics(base, targetData):
             ref = vehinfo_xte.getReferenceValues(_lastVehId)
             if ref is None:
                 ref = {}
-            ref['myD'] = float(dmg) / battles
-            ref['myF'] = float(frg) / battles
+            ref['currentD'] = float(dmg) / battles
+            ref['currentF'] = float(frg) / battles
             color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, xte)
             xteStr = 'XX' if xte == 100 else ('0' if xte < 10 else '') + str(xte)
             data = '<font color="{0}">{1}</font>'.format(color, xteStr)
