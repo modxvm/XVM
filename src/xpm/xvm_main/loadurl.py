@@ -31,7 +31,7 @@ def loadUrl(url, req=None, body=None, showLog=True):
     ssl = url.lower().startswith('https://')
     if showLog or IS_DEVELOPMENT:
         # hide some chars of token in the log
-        path_log = utils.hide_guid(u.path) if not IS_DEVELOPMENT else u.path
+        path_log = utils.hide_guid(u.path) if not XFW_NO_TOKEN_MASKING else u.path
         log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
     # import time
     # time.sleep(3)
