@@ -8,6 +8,7 @@ package xvm.profile.components
     import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.types.dossier.*;
+    import com.xvm.types.stat.*;
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
@@ -17,6 +18,7 @@ package xvm.profile.components
     import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
+    import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.clik.data.*;
     import scaleform.clik.events.*;
     import xvm.profile.UI.*;
@@ -224,8 +226,25 @@ package xvm.profile.components
         private function onStatLoaded():void
         {
             //Logger.add("onStatLoaded: " + playerName);
+
+            var vehicles:Array = page.listComponent.techniqueList.dataProvider as Array;
+            for each (var data:TechniqueListVehicleVO in vehicles)
+            {
+                if (data == null || data.xvm_xte >= 0)
+                    continue;
+                data.xvm_xte_flag |= 0x01;
+                var stat:StatData = Stat.getUserDataById(playerId);
+                if (stat != null && stat.v != null)
+                {
+                    var vdata:Object = stat.v[data.id];
+                    if (vdata != null && !isNaN(vdata.xte) && vdata.xte > 0)
+                        data.xvm_xte = vdata.xte;
+                }
+            }
+
+            page.listComponent.vehicles = vehicles;
+            //page.listComponent.techniqueList.invalidateData();
             page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
-            page.listComponent.techniqueList.invalidateData();
         }
 
         // virtual

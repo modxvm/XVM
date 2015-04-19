@@ -92,7 +92,7 @@ class _Dossier(object):
                     xpToElite += data[0]
 
             # xTE
-            xte = None
+            xte = -1
             if dossier is not None:
                 stats = self.__getStatsBlock(dossier)
                 battles = stats.getBattlesCount()

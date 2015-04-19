@@ -103,32 +103,25 @@ package xvm.profile.UI
 
                     var xte:Number = data.xvm_xte;
                     var isStat:Boolean = false;
-                    if (isNaN(data.xvm_xte))
+                    if (data.xvm_xte_flag & 0x01 != 0)
                     {
                         var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.playerId);
-                        //Logger.addObject(vdossier, 1, String(tech.playerId) + " " + data.id);
                         if (vdossier != null)
-                            xte = vdossier.xte;
+                        {
+                            xte = data.xvm_xte = vdossier.xte;
+                            data.xvm_xte_flag ^= 0x01;
+                        }
                         else
                         {
-                            var stat:StatData = Stat.getUserDataById(tech.playerId);
-                            if (stat != null && stat.v != null)
-                            {
-                                var svdata:Object = stat.v[data.id];
-                                if (svdata != null)
-                                {
-                                    isStat = true;
-                                    xte = svdata.xte;
-                                }
-                            }
+                            isStat = true;
                         }
                     }
 
-                    if (isNaN(xte))
+                    if (xte < 0)
                     {
                         xteTF.htmlText = "";
                     }
-                    else if (xte <= 0)
+                    else if (xte == 0)
                     {
                         xteTF.htmlText = "<p align='center'><font face='$FieldFont' size='15' color='" +
                             XfwUtils.toHtmlColor(XfwConst.UICOLOR_DISABLED) + "'>" + "--" +
@@ -138,7 +131,7 @@ package xvm.profile.UI
                     {
                         var value:String = xte == 100 ? "XX" : (xte < 10 ? "0" : "") + xte;
                         if (isStat)
-                            value = "<font alpha='#60'>(</font>" + value + "<font alpha='#60'>)</font>";
+                            value = "<font alpha='#50'>(</font>" + value + "<font alpha='#50'>)</font>";
                         xteTF.htmlText = Sprintf.format("<p align='center'><font face='$FieldFont' size='15' color='%s'>%s</font></p>",
                             MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xte), value);
                     }

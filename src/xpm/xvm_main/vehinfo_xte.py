@@ -21,7 +21,7 @@ def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
             debug('NOTE: No vehicle info for vehicle id = {}'.format(vehId))
         else:
             debug('NOTE: No xte data for vehicle [{}] {}'.format(vehId, vData['key']))
-        return
+        return -1
 
     # constants
     CD = 3.0
@@ -45,7 +45,7 @@ def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
 
     # calculate XVM Scale
     if t < 1:
-        return None
+        return 0
     return next((i for i,v in enumerate(xte['x']) if v > t), 100)
 
 

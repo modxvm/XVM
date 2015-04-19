@@ -43,8 +43,8 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
             try:
                 vehId = x['id']
                 vDossier = dossier.getDossier((self._battlesType, _lastPlayerId, vehId))
-                if vDossier is not None:
-                    x['xvm_xte'] = vDossier['xte']
+                x['xvm_xte'] = int(vDossier['xte']) if vDossier is not None else -1
+                x['xvm_xte_flag'] = 0
             except:
                 err(traceback.format_exc())
     return res
@@ -64,20 +64,20 @@ def DetailedStatisticsUtils_getStatistics(base, targetData):
     res = base(targetData)
     if token.networkServicesSettings['statAwards']:
         try:
+            global _lastVehId
             battles = targetData.getBattlesCount()
             dmg = targetData.getDamageDealt()
             frg = targetData.getFragsCount()
-            ref = {}
+            ref = vehinfo_xte.getReferenceValues(_lastVehId)
+            if ref is None:
+                ref = {}
             data = -1
+            #log('b:{} d:{} f:{}'.format(battles, dmg, frg))
             if battles > 0 and dmg > 0 and frg > 0:
-                global _lastVehId
+                ref['currentD'] = float(dmg) / battles
+                ref['currentF'] = float(frg) / battles
                 xte = vehinfo_xte.calculateXTE(_lastVehId, float(dmg) / battles, float(frg) / battles)
-                if xte is not None:
-                    ref = vehinfo_xte.getReferenceValues(_lastVehId)
-                    if ref is None:
-                        ref = {}
-                    ref['currentD'] = float(dmg) / battles
-                    ref['currentF'] = float(frg) / battles
+                if xte > 0:
                     color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, xte)
                     xteStr = 'XX' if xte == 100 else ('0' if xte < 10 else '') + str(xte)
                     data = '<font color="{0}">{1}</font>'.format(color, xteStr)
