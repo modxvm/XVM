@@ -19,6 +19,7 @@ from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.constants as constants
 import xvm_main.python.dossier as dossier
+import xvm_main.python.token as token
 import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 import xvm_main.python.vehinfo_xte as vehinfo_xte
@@ -35,16 +36,17 @@ def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
     base(self, targetData, accountDossier)
 
 def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
-    global _lastPlayerId
     res = base(self, targetData, addVehiclesThatInHangarOnly)
-    for x in res:
-        try:
-            vehId = x['id']
-            vDossier = dossier.getDossier((self._battlesType, _lastPlayerId, vehId))
-            if vDossier is not None:
-                x['xvm_xte'] = vDossier['xte']
-        except:
-            err(traceback.format_exc())
+    if token.networkServicesSettings['statAwards']:
+        global _lastPlayerId
+        for x in res:
+            try:
+                vehId = x['id']
+                vDossier = dossier.getDossier((self._battlesType, _lastPlayerId, vehId))
+                if vDossier is not None:
+                    x['xvm_xte'] = vDossier['xte']
+            except:
+                err(traceback.format_exc())
     return res
 
 def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
@@ -53,39 +55,41 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
 
     base(self, vehId, playerId)
 
-    if self._isDAAPIInited():
-        vDossier = dossier.getDossier((self._battlesType, playerId, vehId))
-        self.flashObject.as_responseVehicleDossierXvm(vDossier)
+    if token.networkServicesSettings['statAwards']:
+        if self._isDAAPIInited():
+            vDossier = dossier.getDossier((self._battlesType, playerId, vehId))
+            self.flashObject.as_responseVehicleDossierXvm(vDossier)
 
 def DetailedStatisticsUtils_getStatistics(base, targetData):
     res = base(targetData)
-    try:
-        battles = targetData.getBattlesCount()
-        dmg = targetData.getDamageDealt()
-        frg = targetData.getFragsCount()
-        ref = {}
-        data = -1
-        if battles > 0 and dmg > 0 and frg > 0:
-            global _lastVehId
-            xte = vehinfo_xte.calculateXTE(_lastVehId, float(dmg) / battles, float(frg) / battles)
-            if xte is not None:
-                ref = vehinfo_xte.getReferenceValues(_lastVehId)
-                if ref is None:
-                    ref = {}
-                ref['currentD'] = float(dmg) / battles
-                ref['currentF'] = float(frg) / battles
-                color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, xte)
-                xteStr = 'XX' if xte == 100 else ('0' if xte < 10 else '') + str(xte)
-                data = '<font color="{0}">{1}</font>'.format(color, xteStr)
-                #log("xte={} color={}".format(xteStr, color))
-        del res[0]['data'][4]
-        res[0]['data'].insert(0, {
-            'label': 'xTE',
-            'data': data,
-            'tooltip': 'xvm_xte',
-            'tooltipData': {'body': ref, 'header': {}, 'note': None}})
-    except:
-        err(traceback.format_exc())
+    if token.networkServicesSettings['statAwards']:
+        try:
+            battles = targetData.getBattlesCount()
+            dmg = targetData.getDamageDealt()
+            frg = targetData.getFragsCount()
+            ref = {}
+            data = -1
+            if battles > 0 and dmg > 0 and frg > 0:
+                global _lastVehId
+                xte = vehinfo_xte.calculateXTE(_lastVehId, float(dmg) / battles, float(frg) / battles)
+                if xte is not None:
+                    ref = vehinfo_xte.getReferenceValues(_lastVehId)
+                    if ref is None:
+                        ref = {}
+                    ref['currentD'] = float(dmg) / battles
+                    ref['currentF'] = float(frg) / battles
+                    color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, xte)
+                    xteStr = 'XX' if xte == 100 else ('0' if xte < 10 else '') + str(xte)
+                    data = '<font color="{0}">{1}</font>'.format(color, xteStr)
+                    #log("xte={} color={}".format(xteStr, color))
+            del res[0]['data'][4]
+            res[0]['data'].insert(0, {
+                'label': 'xTE',
+                'data': data,
+                'tooltip': 'xvm_xte',
+                'tooltipData': {'body': ref, 'header': {}, 'note': None}})
+        except:
+            err(traceback.format_exc())
 
     return res
 

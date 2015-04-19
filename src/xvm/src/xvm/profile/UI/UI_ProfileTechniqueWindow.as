@@ -30,7 +30,7 @@ package xvm.profile.UI
         {
             super.onPopulate();
 
-            var profileWindow:ProfileWindow = this.dropTarget.parent.parent as ProfileWindow;
+            var profileWindow:ProfileWindow = this.parent.parent.parent.parent as ProfileWindow;
             if (profileWindow == null)
             {
                 Logger.add("WARNING: [UI_ProfileTechniqueWindow] Cannot find ProfileWindow");
