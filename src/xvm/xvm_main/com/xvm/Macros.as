@@ -586,6 +586,8 @@ package com.xvm
             {
                 // {{xvm-stat}}
                 m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
+                // {{r_size}}
+                m_globals["r_size"] = getRatingDefaultValue().length;
             }
 
             if (m_globals["battletier"] === undefined)
@@ -771,8 +773,6 @@ package com.xvm
             pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
             // {{r}}
             pdata["r"] = getRating(pdata, "");
-            // {{r_size}}
-            pdata["r_size"] = getRatingDefaultValue().length;
 
             // {{winrate}}
             pdata["winrate"] = stat.winrate;

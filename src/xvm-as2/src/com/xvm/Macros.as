@@ -591,6 +591,9 @@ class com.xvm.Macros
         // {{xvm-stat}}
         m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
 
+        // {{r_size}}
+        m_globals["r_size"] = getRatingDefaultValue().length;
+
         switch (battleType)
         {
             case Defines.BATTLE_TYPE_CYBERSPORT:
@@ -891,8 +894,6 @@ class com.xvm.Macros
         pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
         // {{r}}
         pdata["r"] = getRating(pdata, "", "");
-        // {{r_size}}
-        pdata["r_size"] = getRatingDefaultValue().length;
 
         // {{winrate}}
         pdata["winrate"] = stat.winrate;
