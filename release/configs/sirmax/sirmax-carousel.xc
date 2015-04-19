@@ -65,7 +65,7 @@
 
         { "x": 0, "y": 51, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/techRatio40x32.png" },
         { "x": 21, "y": 53,
-          "format": "<b><font face='mono' size='12' color='{{v.c_e}}'>{{v.e|--}}</font></b>",
+          "format": "<b><font face='mono' size='12' color='{{v.c_xte}}'>{{v.xte|--}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }
         },
 

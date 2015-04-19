@@ -73,8 +73,8 @@ package com.xvm.types.dossier
 
                     if (!isNaN(vdossier.xte) || vdossier.xte == 0)
                     {
-                        e = vdossier.xte == 100 ? "XX" : (vdossier.xte < 10 ? "0" : "") + vdossier.xte;
-                        c_e = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, "#");
+                        xte = vdossier.xte == 100 ? "XX" : (vdossier.xte < 10 ? "0" : "") + vdossier.xte;
+                        c_xte = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, "#");
                     }
 
                     earnedXP = isNaN(vdossier.earnedXP) || vdossier.earnedXP == 0 ? NaN : vdossier.earnedXP;
@@ -131,8 +131,8 @@ package com.xvm.types.dossier
         public var wn8expd:Number;
         public var wn8effd:Number;
         public var c_wn8effd:String;
-        public var e:String;
-        public var c_e:String;
+        public var xte:String;
+        public var c_xte:String;
         public var earnedXP:Number;
         public var freeXP:Number;
         public var xpToElite:Number;
