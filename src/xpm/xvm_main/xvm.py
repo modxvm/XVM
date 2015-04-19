@@ -108,6 +108,7 @@ class Xvm(object):
                 return (None, True)
             elif cmd == XVM_COMMAND.RUN_TEST:
                 runTest(args)
+                return (None, True)
 
         except Exception, ex:
             err(traceback.format_exc())

@@ -16,8 +16,11 @@ def getReferenceValues(vehId):
 def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
     xte = _getXTEData(vehId)
     if xte is None or xte['td'] == xte['ad'] or xte['tf'] == xte['af']:
-        vData = vehinfo.getVehicleInfoData(vehId)
-        debug('NOTE: No xte data for vehicle [{}] {}'.format(vehId, vData['key']))
+        vdata = vehinfo.getVehicleInfoData(vehId)
+        if vdata is None:
+            debug('NOTE: No vehicle info for vehicle id = {}'.format(vehId))
+        else:
+            debug('NOTE: No xte data for vehicle [{}] {}'.format(vehId, vData['key']))
         return
 
     # constants
