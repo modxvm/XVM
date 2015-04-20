@@ -56,6 +56,7 @@ package xvm.profile.components
 
         // PRIVATE FIELDS
 
+        private var _disposed:Boolean = false;
         private var _waitForInitDoneTimeoutId:uint = 0;
         private var _initializeTechniqueStatisticTab:uint = 0;
         //protected var filter:FilterControl;
@@ -88,9 +89,9 @@ package xvm.profile.components
                     page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
                     Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
-                }
 
-                waitForInitDone();
+                    waitForInitDone();
+                }
 
                 // create filter controls
                 //filter = null;
@@ -106,6 +107,7 @@ package xvm.profile.components
 
         public function dispose():void
         {
+            _disposed = true;
             if (_waitForInitDoneTimeoutId != 0)
             {
                clearTimeout(_waitForInitDoneTimeoutId);
@@ -155,13 +157,10 @@ package xvm.profile.components
                     return;
                 }
 
-                if (Config.networkServicesSettings.statAwards)
-                {
-                    // Setup header
-                    setupHeader();
-                    // Load stat
-                    App.utils.scheduler.envokeInNextFrame(startLoadStat);
-                }
+                // Setup header
+                setupHeader();
+                // Load stat
+                App.utils.scheduler.envokeInNextFrame(startLoadStat);
 
                 // Focus filter
                 //if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
@@ -173,9 +172,67 @@ package xvm.profile.components
             }
         }
 
+        private function setupHeader():void
+        {
+            var bi:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+            bi.buttonWidth = 50;
+            bi.sortOrder = 8;
+            bi.toolTip = "xvm_xte";
+            bi.iconId = "xvm_xte";
+            bi.defaultSortDirection = SortingInfo.DESCENDING_SORT;
+            bi.ascendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW;
+            bi.descendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW;
+            bi.buttonHeight = 40;
+            bi.enabled = true;
+            bi.label = "xTE";
+
+            var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
+            dp[4].buttonWidth = 64; // BATTLES_COUNT,74
+            dp[5].buttonWidth = 64; // WINS_EFFICIENCY,74
+            dp[6].buttonWidth = 75; // AVG_EXPERIENCE,90
+            dp.push(dp[7]);
+            dp[7] = bi;             // xvm_xte
+            dp[8].buttonWidth = 68; // MARK_OF_MASTERY,83
+
+            page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
+            page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
+        }
+
         private function startLoadStat():void
         {
             Stat.loadUserData(this, onStatLoaded, playerName, false);
+        }
+
+        private function onStatLoaded():void
+        {
+            //Logger.add("onStatLoaded: " + playerName);
+
+            try
+            {
+                if (_disposed)
+                    return;
+                var vehicles:Array = page.listComponent.techniqueList.dataProvider as Array;
+                for each (var data:TechniqueListVehicleVO in vehicles)
+                {
+                    if (data == null || data.xvm_xte >= 0)
+                        continue;
+                    data.xvm_xte_flag |= 0x01;
+                    var stat:StatData = Stat.getUserDataById(playerId);
+                    if (stat != null && stat.v != null)
+                    {
+                        var vdata:Object = stat.v[data.id];
+                        if (vdata != null && !isNaN(vdata.xte) && vdata.xte > 0)
+                            data.xvm_xte = vdata.xte;
+                    }
+                }
+
+                page.listComponent.vehicles = vehicles;
+                page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         private function initializeTechniqueStatisticTab(depth:int = 0):void
@@ -230,62 +287,6 @@ package xvm.profile.components
         private function selectFirstItem():void
         {
             page.listComponent.techniqueList.selectedIndex = 0;
-        }
-
-        private function setupHeader():void
-        {
-            var bi:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            bi.buttonWidth = 50;
-            bi.sortOrder = 8;
-            bi.toolTip = "xvm_xte";
-            bi.iconId = "xvm_xte";
-            bi.defaultSortDirection = SortingInfo.DESCENDING_SORT;
-            bi.ascendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW;
-            bi.descendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW;
-            bi.buttonHeight = 40;
-            bi.enabled = true;
-            bi.label = "xTE";
-
-            var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
-            dp[4].buttonWidth = 64; // BATTLES_COUNT,74
-            dp[5].buttonWidth = 64; // WINS_EFFICIENCY,74
-            dp[6].buttonWidth = 75; // AVG_EXPERIENCE,90
-            dp.push(dp[7]);
-            dp[7] = bi;             // xvm_xte
-            dp[8].buttonWidth = 68; // MARK_OF_MASTERY,83
-
-            page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
-            page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
-        }
-
-        private function onStatLoaded():void
-        {
-            //Logger.add("onStatLoaded: " + playerName);
-
-            try
-            {
-                var vehicles:Array = page.listComponent.techniqueList.dataProvider as Array;
-                for each (var data:TechniqueListVehicleVO in vehicles)
-                {
-                    if (data == null || data.xvm_xte >= 0)
-                        continue;
-                    data.xvm_xte_flag |= 0x01;
-                    var stat:StatData = Stat.getUserDataById(playerId);
-                    if (stat != null && stat.v != null)
-                    {
-                        var vdata:Object = stat.v[data.id];
-                        if (vdata != null && !isNaN(vdata.xte) && vdata.xte > 0)
-                            data.xvm_xte = vdata.xte;
-                    }
-                }
-
-                page.listComponent.vehicles = vehicles;
-                page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
         }
 
         // virtual
