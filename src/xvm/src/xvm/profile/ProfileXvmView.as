@@ -68,13 +68,16 @@ package xvm.profile
                 }
 
                 // initialize start page
-                var alias:String = tabNavigator.xfw_initData.selectedAlias;
-                if (alias == Aliases.PROFILE_SUMMARY_PAGE || alias == "")
+                App.utils.scheduler.envokeInNextFrame(function():void
                 {
-                    var index:int = Config.config.userInfo.startPage - 1;
-                    if (index > 0 && index < tabNavigator.xfw_initData.sectionsData.length)
-                        tabNavigator.bar.selectedIndex = index;
-                }
+                    var alias:String = tabNavigator.xfw_initData.selectedAlias;
+                    if (alias == Aliases.PROFILE_SUMMARY_PAGE || alias == "")
+                    {
+                        var index:int = Config.config.userInfo.startPage - 1;
+                        if (index > 0 && index < tabNavigator.xfw_initData.sectionsData.length)
+                            tabNavigator.bar.selectedIndex = index;
+                    }
+                });
             }
             catch (ex:Error)
             {

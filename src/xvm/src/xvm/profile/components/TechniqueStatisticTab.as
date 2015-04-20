@@ -74,7 +74,8 @@ package xvm.profile.components
 
         public function onDispose():void
         {
-            tech.removeEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded);
+            if (tech != null)
+                tech.removeEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded);
         }
 
         public function update(raw_data:ProfileVehicleDossierVO):void

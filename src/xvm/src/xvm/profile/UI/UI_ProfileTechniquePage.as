@@ -20,9 +20,6 @@ package xvm.profile.UI
 
         override protected function onPopulate():void
         {
-            if (_baseDisposed)
-                return;
-
             super.onPopulate();
             technique = new TechniquePage(this, XvmGlobals[XvmGlobals.CURRENT_USER_NAME]);
             addChild(technique);
