@@ -28,6 +28,9 @@ package xvm.profile.UI
 
         override protected function onPopulate():void
         {
+            if (_baseDisposed)
+                return;
+
             super.onPopulate();
 
             var profileWindow:ProfileWindow = this.parent.parent.parent.parent as ProfileWindow;
@@ -47,10 +50,18 @@ package xvm.profile.UI
             addChild(technique);
         }
 
+        // PUBLIC
+
+        public function get baseDisposed():Boolean
+        {
+            return _baseDisposed;
+        }
+
         public function as_responseVehicleDossierXvm(data:Object):void
         {
-            if(_baseDisposed)
+            if (_baseDisposed)
                 return;
+
             try
             {
                 var vdossier:VehicleDossier = new VehicleDossier(data);

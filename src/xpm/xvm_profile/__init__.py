@@ -52,8 +52,8 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
 def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
     global _lastVehId
     _lastVehId = vehId
-
     base(self, vehId, playerId)
+    _lastVehId = None
 
     if token.networkServicesSettings['statAwards']:
         if self._isDAAPIInited():
@@ -62,9 +62,9 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
 
 def DetailedStatisticsUtils_getStatistics(base, targetData):
     res = base(targetData)
-    if token.networkServicesSettings['statAwards']:
+    global _lastVehId
+    if _lastVehId is not None and token.networkServicesSettings['statAwards']:
         try:
-            global _lastVehId
             battles = targetData.getBattlesCount()
             dmg = targetData.getDamageDealt()
             frg = targetData.getFragsCount()

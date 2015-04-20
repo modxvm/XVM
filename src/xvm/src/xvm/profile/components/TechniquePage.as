@@ -7,6 +7,7 @@ package xvm.profile.components
     import com.xfw.*;
     import com.xvm.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
+    import xvm.profile.UI.*;
 
     public class TechniquePage extends Technique
     {
@@ -31,6 +32,8 @@ package xvm.profile.components
         private function initializeInHangarCheckBox():void
         {
             page.listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
+            if ((page as UI_ProfileTechniquePage).baseDisposed)
+                return;
             if (page.listComponent.visible)
             {
                 var pg:ProfileTechniquePage = page as ProfileTechniquePage;

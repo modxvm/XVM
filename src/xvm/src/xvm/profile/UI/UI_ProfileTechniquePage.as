@@ -20,15 +20,26 @@ package xvm.profile.UI
 
         override protected function onPopulate():void
         {
+            if (_baseDisposed)
+                return;
+
             super.onPopulate();
             technique = new TechniquePage(this, XvmGlobals[XvmGlobals.CURRENT_USER_NAME]);
             addChild(technique);
         }
 
+        // PUBLIC
+
+        public function get baseDisposed():Boolean
+        {
+            return _baseDisposed;
+        }
+
         public function as_responseVehicleDossierXvm(data:Object):void
         {
-            if(_baseDisposed)
+            if (_baseDisposed)
                 return;
+
             try
             {
                 var vdossier:VehicleDossier = new VehicleDossier(data);

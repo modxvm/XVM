@@ -69,7 +69,7 @@ package xvm.profile.UI
 
         override protected function draw():void
         {
-            if(_baseDisposed)
+            if (_baseDisposed)
                 return;
 
             super.draw();
