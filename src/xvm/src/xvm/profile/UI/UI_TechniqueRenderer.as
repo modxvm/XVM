@@ -43,10 +43,10 @@ package xvm.profile.UI
                 xteTF.height = 25;
                 addChild(xteTF);
 
-                battlesTF.x -= 0;
+                battlesTF.x -= 5;
                 winsTF.x -= 15;
                 winsTF.width += 10;
-                avgExpTF.x -= 25;
+                avgExpTF.x -= 30;
                 xteTF.x = masteryIcon.x - 55;
                 masteryIcon.x += 5;
                 //battlesTF.border = true; battlesTF.borderColor = 0x00FFFF;
