@@ -91,6 +91,17 @@ package xvm.profile.components
                     Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
 
                     waitForInitDone();
+
+                    // TODO
+//                    var x:String = SysUtils.waitFor(
+//                        this,
+//                        function():Boolean {
+//                            return Math.random() > 0.99;
+//                        },
+//                        function():void {
+//                            Logger.add("done");
+//                        },
+//                        "test", 1000);
                 }
 
                 // create filter controls
@@ -138,7 +149,7 @@ package xvm.profile.components
 
         private function waitForInitDone(depth:int = 0):void
         {
-            //Logger.add("waitForInitDone: " + playerName);
+            Logger.add("waitForInitDone: " + playerName);
             try
             {
                 _waitForInitDoneTimeoutId = 0;
@@ -150,7 +161,8 @@ package xvm.profile.components
                 }
 
                 var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-                if (bb.dataProvider.length == 0)
+                var tl:TechniqueList = page.listComponent.techniqueList;
+                if (bb.dataProvider.length == 0 && tl != null && tl.dataProvider != null)
                 {
                     var $this:Technique = this;
                     _waitForInitDoneTimeoutId = setTimeout(function():void { $this.waitForInitDone(depth + 1); }, 1);
@@ -160,7 +172,8 @@ package xvm.profile.components
                 // Setup header
                 setupHeader();
                 // Load stat
-                App.utils.scheduler.envokeInNextFrame(startLoadStat);
+                //App.utils.scheduler.envokeInNextFrame(startLoadStat);
+                startLoadStat();
 
                 // Focus filter
                 //if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
@@ -196,6 +209,7 @@ package xvm.profile.components
 
             page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
             page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
+            page.listComponent.validateNow();
         }
 
         private function startLoadStat():void
@@ -205,7 +219,7 @@ package xvm.profile.components
 
         private function onStatLoaded():void
         {
-            //Logger.add("onStatLoaded: " + playerName);
+            Logger.add("onStatLoaded: " + playerName);
 
             try
             {
@@ -237,7 +251,7 @@ package xvm.profile.components
 
         private function initializeTechniqueStatisticTab(depth:int = 0):void
         {
-            //Logger.add("initializeTechniqueStatisticTab: " + playerName);
+            Logger.add("initializeTechniqueStatisticTab: " + playerName);
             try
             {
                 _initializeTechniqueStatisticTab = 0;
