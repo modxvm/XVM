@@ -44,11 +44,12 @@ package xvm.quests
                     hideUnavailableTasks.x = taskFilters.hideCompletedTasks.x;
                     hideUnavailableTasks.visible = true;
                 }, 0);
-                loadedSettings = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, null);
+                loadedSettings = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, null));
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
+                loadedSettings = null;
             }
         }
 
@@ -182,7 +183,7 @@ package xvm.quests
                 hideUnavailableTasks: this.hideUnavailableTasks.selected
             };
 
-            Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, settings);
+            Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, JSONx.stringify(settings));
         }
 
         private function applyLoadedSettings():void
