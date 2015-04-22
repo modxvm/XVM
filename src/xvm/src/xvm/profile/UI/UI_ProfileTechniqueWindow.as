@@ -61,9 +61,35 @@ package xvm.profile.UI
 
         // PUBLIC
 
+        public function get currentDataXvm():Object
+        {
+            return currentData;
+        }
+
+        public function get battlesTypeXvm():String
+        {
+            return battlesType;
+        }
+
         public function get baseDisposed():Boolean
         {
             return _baseDisposed;
+        }
+
+        public function as_responseDossierXvm(battlesType:String, vehicles:Object):void
+        {
+            if (_baseDisposed)
+                return;
+
+            try
+            {
+                if (technique)
+                    technique.as_responseDossierXvm(battlesType, vehicles);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         public function as_responseVehicleDossierXvm(data:Object):void

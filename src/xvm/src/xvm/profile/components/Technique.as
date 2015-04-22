@@ -54,11 +54,31 @@ package xvm.profile.components
             return Dossier.getAccountDossier(playerId);
         }
 
+        public function get currentData():Object
+        {
+            var p:UI_ProfileTechniquePage = page as UI_ProfileTechniquePage;
+            if (p != null)
+                return p.currentDataXvm;
+            var w:UI_ProfileTechniqueWindow = page as UI_ProfileTechniqueWindow;
+            if (w != null)
+                return w.currentDataXvm;
+            return null;
+        }
+
+        public function get battlesType():String
+        {
+            var p:UI_ProfileTechniquePage = page as UI_ProfileTechniquePage;
+            if (p != null)
+                return p.battlesTypeXvm;
+            var w:UI_ProfileTechniqueWindow = page as UI_ProfileTechniqueWindow;
+            if (w != null)
+                return w.battlesTypeXvm;
+            return null;
+        }
+
         // PRIVATE FIELDS
 
         private var _disposed:Boolean = false;
-        private var _waitForInitDoneTimeoutId:uint = 0;
-        private var _initializeTechniqueStatisticTab:uint = 0;
         //protected var filter:FilterControl;
 
         // CTOR
@@ -81,34 +101,21 @@ package xvm.profile.components
 
                 if (Config.networkServicesSettings.statAwards)
                 {
+                    Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
+
                     // override renderers
                     page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
                     page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
 
                     // add event handlers
-                    page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
+                    page.listComponent.sortableButtonBar.addEventListener(IndexEvent.INDEX_CHANGE, initializeListComponent);
+                    page.stackComponent.buttonBar.addEventListener(IndexEvent.INDEX_CHANGE, initializeTechniqueStatisticTab);
 
-                    Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
-
-                    waitForInitDone();
-
-                    // TODO
-//                    var x:String = SysUtils.waitFor(
-//                        this,
-//                        function():Boolean {
-//                            return Math.random() > 0.99;
-//                        },
-//                        function():void {
-//                            Logger.add("done");
-//                        },
-//                        "test", 1000);
+                    // create filter controls
+                    //filter = null;
+                    //if (Config.config.userInfo.showFilters)
+                    //    createFilters();
                 }
-
-                // create filter controls
-                //filter = null;
-                //if (Config.config.userInfo.showFilters)
-                //    createFilters();
-
             }
             catch (ex:Error)
             {
@@ -119,25 +126,24 @@ package xvm.profile.components
         public function dispose():void
         {
             _disposed = true;
-            if (_waitForInitDoneTimeoutId != 0)
-            {
-               clearTimeout(_waitForInitDoneTimeoutId);
-               _waitForInitDoneTimeoutId = 0;
-            }
-            if (_initializeTechniqueStatisticTab != 0)
-            {
-               clearTimeout(_initializeTechniqueStatisticTab);
-               _initializeTechniqueStatisticTab = 0;
-            }
-            App.utils.scheduler.cancelTask(startLoadStat);
             App.utils.scheduler.cancelTask(makeInitialSort);
             App.utils.scheduler.cancelTask(selectFirstItem);
         }
 
         // DAAPI
 
+        public function as_responseDossierXvm(battlesType:String, vehicles:Object):void
+        {
+            if (_disposed)
+                return;
+            page.as_responseDossier(battlesType, vehicles);
+            initializeListComponentVehicles();
+        }
+
         public function as_responseVehicleDossierXvm(data:VehicleDossier):void
         {
+            if (_disposed)
+                return;
             //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
             page.listComponent.techniqueList.invalidateData();
             dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
@@ -145,35 +151,43 @@ package xvm.profile.components
 
         // PRIVATE
 
-        // INITIALIZATION
+        // filters
 
-        private function waitForInitDone(depth:int = 0):void
+        // virtual
+        //protected function createFilters():void
+        //{
+            //filter = new FilterControl();
+            //filter.addEventListener(Event.CHANGE, applyFilter);
+            //page.addChild(filter);
+        //}
+
+        // stackComponent
+
+        private function initializeTechniqueStatisticTab():void
         {
-            Logger.add("waitForInitDone: " + playerName);
+            //Logger.add("initializeTechniqueStatisticTab: " + playerName);
+            if (_disposed)
+                return;
+
+            page.stackComponent.buttonBar.removeEventListener(IndexEvent.INDEX_CHANGE, initializeTechniqueStatisticTab);
+
+            var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
+            data[0].linkage = getQualifiedClassName(UI_TechniqueStatisticTab);
+        }
+
+        // listComponent
+
+        private function initializeListComponent():void
+        {
+            //Logger.add("initializeListComponent: " + playerName);
             try
             {
-                _waitForInitDoneTimeoutId = 0;
+                page.listComponent.sortableButtonBar.removeEventListener(IndexEvent.INDEX_CHANGE, initializeListComponent);
 
-                if (depth > 10)
-                {
-                    Logger.add("WARNING: profile technique page initialization timeout");
-                    return;
-                }
+                setupSortableButtonBar();
 
-                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-                var tl:TechniqueList = page.listComponent.techniqueList;
-                if (bb.dataProvider.length == 0 && tl != null && tl.dataProvider != null)
-                {
-                    var $this:Technique = this;
-                    _waitForInitDoneTimeoutId = setTimeout(function():void { $this.waitForInitDone(depth + 1); }, 1);
-                    return;
-                }
-
-                // Setup header
-                setupHeader();
-                // Load stat
-                //App.utils.scheduler.envokeInNextFrame(startLoadStat);
-                startLoadStat();
+                // Sort
+                App.utils.scheduler.envokeInNextFrame(makeInitialSort);
 
                 // Focus filter
                 //if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
@@ -185,7 +199,21 @@ package xvm.profile.components
             }
         }
 
-        private function setupHeader():void
+        private function initializeListComponentVehicles():void
+        {
+            //Logger.add("initializeListComponentVehicles: " + playerName);
+            try
+            {
+                // Load stat
+                Stat.loadUserData(this, onStatLoaded, playerName, false);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
+        private function setupSortableButtonBar():void
         {
             var bi:NormalSortingBtnInfo = new NormalSortingBtnInfo();
             bi.buttonWidth = 50;
@@ -209,80 +237,10 @@ package xvm.profile.components
 
             page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
             page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
-            page.listComponent.validateNow();
-        }
-
-        private function startLoadStat():void
-        {
-            Stat.loadUserData(this, onStatLoaded, playerName, false);
-        }
-
-        private function onStatLoaded():void
-        {
-            Logger.add("onStatLoaded: " + playerName);
-
-            try
-            {
-                if (_disposed)
-                    return;
-                var vehicles:Array = page.listComponent.techniqueList.dataProvider as Array;
-                for each (var data:TechniqueListVehicleVO in vehicles)
-                {
-                    if (data == null || data.xvm_xte >= 0)
-                        continue;
-                    data.xvm_xte_flag |= 0x01;
-                    var stat:StatData = Stat.getUserDataById(playerId);
-                    if (stat != null && stat.v != null)
-                    {
-                        var vdata:Object = stat.v[data.id];
-                        if (vdata != null && !isNaN(vdata.xte) && vdata.xte > 0)
-                            data.xvm_xte = vdata.xte;
-                    }
-                }
-
-                page.listComponent.vehicles = vehicles;
-                page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        private function initializeTechniqueStatisticTab(depth:int = 0):void
-        {
-            Logger.add("initializeTechniqueStatisticTab: " + playerName);
-            try
-            {
-                _initializeTechniqueStatisticTab = 0;
-
-                if (depth > 10)
-                {
-                    Logger.add("WARNING: profile technique statistic tab initialization timeout");
-                    return;
-                }
-
-                var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
-                if (data == null || data.length == 0 || !(data[0].hasOwnProperty("linkage")))
-                {
-                    var $this:Technique = this;
-                    _initializeTechniqueStatisticTab = setTimeout(function():void { $this.initializeTechniqueStatisticTab(depth + 1); }, 1);
-                    return;
-                }
-
-                App.utils.scheduler.envokeInNextFrame(makeInitialSort);
-
-                data[0].linkage = getQualifiedClassName(UI_TechniqueStatisticTab);
-                page.stackComponent.buttonBar.selectedIndex = -1;
-                page.stackComponent.buttonBar.selectedIndex = 0;
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
         }
 
         // Initial sort
+
         // TODO: save sort order to userprofile
         private function makeInitialSort():void
         {
@@ -303,25 +261,34 @@ package xvm.profile.components
             page.listComponent.techniqueList.selectedIndex = 0;
         }
 
-        // virtual
-        //protected function createFilters():void
-        //{
-            //filter = new FilterControl();
-            //filter.addEventListener(Event.CHANGE, applyFilter);
-            //page.addChild(filter);
-        //}
+        // stat
 
-        // EVENT HANDLERS
-
-        private var _techniqueStatisticTabInitialized:Boolean = false;
-        private function listSelectedDataChanged(e:Event):void
+        private function onStatLoaded():void
         {
-            //Logger.add("listSelectedDataChanged");
+            //Logger.add("onStatLoaded: " + playerName);
+            if (_disposed)
+                return;
 
-            if (_techniqueStatisticTabInitialized == false)
+            try
             {
-                _techniqueStatisticTabInitialized = true;
-                initializeTechniqueStatisticTab();
+                for each (var data:Object in currentData)
+                {
+                    if (data == null || data.xvm_xte >= 0)
+                        continue;
+                    data.xvm_xte_flag |= 0x01;
+                    var stat:StatData = Stat.getUserDataById(playerId);
+                    if (stat != null && stat.v != null)
+                    {
+                        var vdata:Object = stat.v[data.id];
+                        if (vdata != null && !isNaN(vdata.xte) && vdata.xte > 0)
+                            data.xvm_xte = vdata.xte;
+                    }
+                }
+                page.invalidate("ddInvalid");
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
     }

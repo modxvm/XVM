@@ -34,7 +34,16 @@ _lastVehId = None
 def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
     global _lastPlayerId
     _lastPlayerId = accountDossier.getPlayerDBID()
-    base(self, targetData, accountDossier)
+
+    if token.networkServicesSettings['statAwards']:
+        if self._isDAAPIInited():
+            isHangar = False
+            if hasattr(self, '_ProfileTechniquePage__isInHangarSelected'):
+                isHangar = self._ProfileTechniquePage__isInHangarSelected
+            self.flashObject.as_responseDossierXvm(self._battlesType,
+                self._getTechniqueListVehicles(targetData, isHangar))
+    else:
+        base(self, targetData, accountDossier)
 
 def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
     res = base(self, targetData, addVehiclesThatInHangarOnly)
