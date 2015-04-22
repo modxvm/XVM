@@ -12,7 +12,7 @@ def getCamoValues(veh_name, turret_is_top = True, gun = None):
 # PRIVATE
 
 # Data from: http://forum.worldoftanks.ru/index.php?/topic/1047590-
-# Updated 28.03.2015
+# Updated 23.04.2015
 # Big thanks to authors of data!
 
 # percentage of lowering vision: [ standing, moving, shooting, top turret modifier ]
@@ -51,6 +51,7 @@ _tanks_camo = {
     'ussr:A44':                               [ 12.54 ,  9.41 , 2.76 , 1     ],
     'ussr:T-44':                              [ 16.03 , 12.05 , 3.35 , 1.983 ],
     'ussr:Object416':                         [ 24.19 , 14.55 , 4.79 , 1.113 ],
+    'ussr:R112_T54_45':                       [ 16.7  , 12.54 , 3.67 , 1     ],
     'ussr:T-54':                              [ 15.59 , 11.70 , 3.26 , 1.977 ],
     'ussr:R104_Object_430_II':                [ 16.59 , 12.42 , 2.56 , 1.977 ],
     'ussr:Object_907':                        [ 17.21 , 12.94 , 3.41 , 1     ],
@@ -85,6 +86,7 @@ _tanks_camo = {
     'ussr:SU-85':                             [ 22.29 , 13.39 , 5.30 , 1     ],
     'ussr:SU100Y':                            [  6.67 ,  3.99 , 1.53 , 1     ],
     'ussr:SU-100':                            [ 22.06 , 13.22 , 4.19 , 1     ],
+    'ussr:T44_122':                           [ 15.68 , 11.74 , 2.98 , 1     ],
     'ussr:SU122_44':                          [ 21.55 , 12.94 , 5.82 , 1     ],
     'ussr:SU-152':                            [ 16.47 ,  9.86 , 2.36 , 1     ],
     'ussr:SU100M1':                           [ 20.18 , 12.09 , 4.22 , 1     ],
@@ -233,6 +235,7 @@ _tanks_camo = {
     'usa:T23E3':                              [ 14.42 , 10.83 , 3.75 , 1     ],
     'usa:T20':                                [ 16.04 , 12.05 , 3.82 , 1.162 ],
     'usa:T26_E4_SuperPershing':               [ 13.17 ,  9.86 , 2.96 , 1     ],
+    'usa:T95_E2':                             [ 18.75 , 18.75 , 4.99 , 1     ],
     'usa:T69':                                [ 12.65 ,  9.52 , 3.01 , 1     ],
     'usa:Pershing':                           [ 12.99 ,  9.71 , 2.92 , 1.118 ],
     'usa:M46_Patton':                         [ 13.34 , 10.03 , 2.64 , 1     ],
@@ -264,6 +267,7 @@ _tanks_camo = {
     'usa:T25_2':                              [ 15.13 ,  9.10 , 3.40 , 1.841 ],
     'usa:T28':                                [ 18.18 , 10.89 , 3.27 , 1     ],
     'usa:T28_Prototype':                      [ 12.60 ,  7.53 , 2.27 , 1     ],
+    'usa:A101_M56':                           [ 22.74 , 13.62 , 5.41 , 1     ],
     'usa:T95':                                [ 18.18 , 10.89 , 2.45 , 1     ],
     'usa:T30':                                [  9.18 ,  5.53 , 1.24 , 1     ],
     'usa:T110E4':                             [  9.07 ,  5.42 , 1.22 , 1     ],
@@ -281,6 +285,8 @@ _tanks_camo = {
 # France
     # Light
     'france:RenaultFT':                       [ 13.57 , 10.20 , 3.99 , 1     ],
+    'france:F50_FCM36_20t':                   [ 13.79 , 10.37 , 4.06 , 1     ],
+    'france:F49_RenaultR35':                  [ 16.3  , 12.26 , 4.79 , 1     ],
     'france:D1':                              [ 12.75 ,  9.59 , 3.75 , 1.895 ],
     'france:Hotchkiss_H35':                   [ 15.73 , 11.80 , 4.63 , 1     ],
     'france:AMX38':                           [ 15.96 , 11.97 , 4.63 , 1     ],
@@ -288,12 +294,18 @@ _tanks_camo = {
     'france:ELC_AMX':                         [ 21.89 , 21.89 , 5.21 , 1     ],
     'france:AMX_12t':                         [ 17.96 , 17.96 , 4.20 , 1     ],
     'france:AMX_13_75':                       [ 17.67 , 17.67 , 4.14 , 1     ],
+    'france:F69_AMX13_57_100_GrandFinal':     [ 18.75 , 18.75 , 4.99 , 1     ],
     'france:AMX_13_90':                       [ 17.67 , 17.67 , 4.21 , 1     ],
     # Medium
     'france:D2':                              [ 12.64 ,  9.49 , 3.67 , 1.921 ],
+    'france:F44_Somua_S35':                   [ 14.9  , 11.2  , 4.32 , 1.013 ],
+    'france:F70_SARL42':                      [  9.83 ,  7.38 , 2.56 , 0.704 ],
+    'france:F11_Renault_G1R':                 [ 14.9  , 11.19 , 3.28 , 1.033 ],
     'france:F68_AMX_Chasseur_de_char_46':     [ 11.12 ,  8.32 , 2.50 , 1     ],
     'france:Lorraine40t':                     [ 11.63 ,  8.72 , 2.30 , 1     ],
+    'france:F71_AMX_30_prototype':            [ 14.91 , 11.18 , 3.12 , 1.006 ],
     'france:Bat_Chatillon25t':                [ 16.87 , 12.65 , 3.34 , 1     ],
+    'france:F72_AMX_30':                      [ 15.28 , 11.46 , 3.19 , 1     ],
     # Heavy  vs. Machine guns =)
     'france:B1':                              [  7.46 ,  3.71 , 2.16 , 1.913 ],
     'france:BDR_G1B':                         [  6.28 ,  3.14 , 1.57 , 1.112 ],
@@ -1298,7 +1310,7 @@ _gun_camo_modifier = {
     '_25mm_Canon_Raccourci_Mle.1934':
         [
             [ ['france:AMX38', 'france:D2'], 0.336 ],
-            [ ['france:D1', 'france:Hotchkiss_H35', 'france:RenaultFT'], 0.294 ]
+            [ ['france:D1', 'france:Hotchkiss_H35', 'france:RenaultFT', 'france:F50_FCM36_20t', 'france:F49_RenaultR35'], 0.294 ]
         ],
     '_25mm_antichar_SA-L_mle_1934':
         [
@@ -1315,26 +1327,30 @@ _gun_camo_modifier = {
     '_37mm_SA38':
         [
             [ ['france:AMX38'], 0.300 ],
-            [ ['france:Hotchkiss_H35'], 0.255 ]
+            [ ['france:Hotchkiss_H35', 'france:F50_FCM36_20t', 'france:F49_RenaultR35'], 0.255 ]
         ],
     '_37mm_APX_SA18':
         [
-            [ ['france:D1', 'france:Hotchkiss_H35', 'france:RenaultFT'], 0.255 ],
+            [ ['france:D1', 'france:Hotchkiss_H35', 'france:RenaultFT', 'france:F50_FCM36_20t', 'france:F49_RenaultR35'], 0.255 ],
             [ ['china:Ch06_Renault_NC31'], 0.255 ],
             [ ['japan:NC27'], 0.255 ]
         ],
-    '_47mm_SA37':
+    '_47mm_SA34':
         [
-            [ ['france:B1', 'france:D2'], 0.290 ]
+            [ ['france:AMX38', 'france:AMX40', 'france:B1', 'france:D2', 'france:F44_Somua_S35', 'france:F70_SARL42'], 0.290 ],
+            [ ['france:D1'], 0.247 ]
         ],
     '_47mm_SA35':
         [
-            [ ['france:AMX38', 'france:AMX40', 'france:B1', 'france:D2'], 0.290 ]
+            [ ['france:AMX38', 'france:AMX40', 'france:B1', 'france:D2', 'france:F44_Somua_S35', 'france:F70_SARL42'], 0.290 ]
         ],
-    '_47mm_SA34':
+    '_47mm_SA37':
         [
-            [ ['france:AMX38', 'france:AMX40', 'france:B1', 'france:D2'], 0.290 ],
-            [ ['france:D1'], 0.247 ]
+            [ ['france:B1', 'france:D2', 'france:F44_Somua_S35', 'france:F70_SARL42'], 0.290 ]
+        ],
+    '_47mm_SA37_ameliore':
+        [
+            [ ['france:F70_SARL42'], 0.290 ]
         ],
     '_47mm_SA-L_Mle.37':
         [
@@ -1351,11 +1367,11 @@ _gun_camo_modifier = {
         ],
     '_75mm_SA32':
         [
-            [ ['france:AMX40', 'france:BDR_G1B', 'france:ELC_AMX'], 0.260 ]
+            [ ['france:AMX40', 'france:BDR_G1B', 'france:ELC_AMX', 'france:F70_SARL42', 'france:F11_Renault_G1R'], 0.260 ]
         ],
     '_75mm_Long_44':
         [
-            [ ['france:BDR_G1B', 'france:ELC_AMX'], 0.260 ]
+            [ ['france:BDR_G1B', 'france:ELC_AMX', 'france:F70_SARL42', 'france:F11_Renault_G1R'], 0.260 ]
         ],
     '_75mm_Long_44_AC':
         [
@@ -1387,7 +1403,7 @@ _gun_camo_modifier = {
         ],
     '_90mm_F3':
         [
-            [ ['france:AMX_13_90', 'france:AMX_50_100', 'france:AMX_M4_1945', 'france:ARL_44', 'france:Bat_Chatillon25t', 'france:Lorraine40t'], 0.238 ]
+            [ ['france:AMX_13_90', 'france:AMX_50_100', 'france:AMX_M4_1945', 'france:ARL_44', 'france:Bat_Chatillon25t', 'france:Lorraine40t', 'france:F71_AMX_30_prototype'], 0.238 ]
         ],
     '_90mm_canon_DCA_45':
         [
@@ -1399,11 +1415,15 @@ _gun_camo_modifier = {
         ],
     '_100mm_SA_47':
         [
-            [ ['france:AMX_50_100', 'france:AMX_50_120', 'france:Bat_Chatillon25t', 'france:Lorraine40t'], 0.198 ]
+            [ ['france:AMX_50_100', 'france:AMX_50_120', 'france:Bat_Chatillon25t', 'france:Lorraine40t', 'france:F71_AMX_30_prototype'], 0.198 ]
         ],
     '_100mm_SA_47_AC':
         [
             [ ['france:AMX_AC_Mle1946', 'france:AMX_AC_Mle1948'], 0.198 ]
+        ],
+    'Canon_de_105_court_mle_1934S_T':
+        [
+            [ ['france:F11_Renault_G1R'], 0.220 ]
         ],
     'Canon_de_105_court_mle_1935B':
         [
@@ -1428,6 +1448,10 @@ _gun_camo_modifier = {
     '_105mm_canon_13TR':
         [
             [ ['france:AMX_M4_1945', 'france:ARL_44'], 0.209 ]
+        ],
+    '_105mm_mle_F1':
+        [
+            [ ['france:F71_AMX_30_prototype', 'france:F72_AMX_30'], 0.209 ]
         ],
     'Canon_de_105_mle_1930_Schneider_AM':
         [
