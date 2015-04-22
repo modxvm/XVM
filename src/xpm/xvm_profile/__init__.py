@@ -17,6 +17,7 @@ from gui.Scaleform.locale.PROFILE import PROFILE
 
 from xfw import *
 from xvm_main.python.logger import *
+import xvm_main.python.config as config
 import xvm_main.python.constants as constants
 import xvm_main.python.dossier as dossier
 import xvm_main.python.token as token
@@ -93,6 +94,33 @@ def DetailedStatisticsUtils_getStatistics(base, targetData):
 
     return res
 
+def DAAPIModule_registerFlashComponent(base, self, component, alias, *args):
+    from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
+    from gui.Scaleform.daapi.view.lobby.profile.ProfilePage import ProfilePage
+    if alias == VIEW_ALIAS.PROFILE_TAB_NAVIGATOR:
+        isProfilePage = isinstance(self, ProfilePage)
+        ctx = args[4] if isProfilePage else None
+        if ctx is not None and ctx.get('itemCD'):
+            selectedAlias = VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE
+        else:
+            startPage = config.config['userInfo']['startPage']
+            if startPage == 2:
+                selectedAlias = VIEW_ALIAS.PROFILE_AWARDS
+            elif startPage == 3:
+                selectedAlias = VIEW_ALIAS.PROFILE_STATISTICS
+            elif startPage == 4:
+                if isProfilePage:
+                    selectedAlias = VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE
+                else:
+                    selectedAlias = VIEW_ALIAS.PROFILE_TECHNIQUE_WINDOW
+            else:
+                if isProfilePage:
+                    selectedAlias = VIEW_ALIAS.PROFILE_SUMMARY_PAGE
+                else:
+                    selectedAlias = VIEW_ALIAS.PROFILE_SUMMARY_WINDOW
+        args[3]['selectedAlias'] = selectedAlias
+
+    base(self, component, alias, *args)
 
 #####################################################################
 # Register events
@@ -107,5 +135,8 @@ def _RegisterEvents():
     OverrideMethod(ProfileTechnique, '_getTechniqueListVehicles', ProfileTechnique_getTechniqueListVehicles)
     OverrideMethod(ProfileTechnique, '_receiveVehicleDossier', ProfileTechnique_receiveVehicleDossier)
     OverrideStaticMethod(DetailedStatisticsUtils, 'getStatistics', DetailedStatisticsUtils_getStatistics)
+
+    from gui.Scaleform.framework.entities.DAAPIModule import DAAPIModule
+    OverrideMethod(DAAPIModule, 'registerFlashComponent', DAAPIModule_registerFlashComponent)
 
 BigWorld.callback(0, _RegisterEvents)
