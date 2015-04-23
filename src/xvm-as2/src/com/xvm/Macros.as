@@ -1166,7 +1166,7 @@ class com.xvm.Macros
     {
         var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
         if (!RATING_MATRIX.hasOwnProperty(n))
-            n = "xvm_wgr";
+            n = "basic_wgr";
         var value = pdata[prefix + RATING_MATRIX[n] + suffix];
         if (prefix != "" || value == null)
             return value;
@@ -1181,7 +1181,7 @@ class com.xvm.Macros
     {
         var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
         if (!RATING_DEFAULTS_MATRIX.hasOwnProperty(n))
-            n = "xvm_wgr";
+            n = "basic_wgr";
         return RATING_DEFAULTS_MATRIX[n];
     }
 }
