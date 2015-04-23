@@ -155,7 +155,7 @@
 
     // Token
     "token/services_unavailable": "Сетевые сервисы недоступны.&nbsp;&nbsp;<a href='#XVM_SITE_UNAVAILABLE#'><font size='11'>подробнее</font></a>",
-    "token/services_inactive": "Сетевые сервисы неактивны.&nbsp;&nbsp;<a href='#XVM_SITE_INACTIVE#'><font size='11'>подробнее</font></a>",
+    "token/services_inactive": "Сетевые сервисы неактивны.&nbsp;&nbsp;<a href='#XVM_SITE_INACTIVE#'><font size='11'>включить</font></a>",
     "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>&nbsp;&nbsp;<a href='#XVM_SITE_BLOCKED#'><font size='11'>подробнее</font></a>",
     "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",
     "token/time_left": "Осталось:<tab/><font color='#EEEEEE'>{0}д. {1}ч. {2}м.</font>",
