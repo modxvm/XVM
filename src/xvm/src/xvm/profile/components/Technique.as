@@ -127,7 +127,6 @@ package xvm.profile.components
         {
             _disposed = true;
             App.utils.scheduler.cancelTask(makeInitialSort);
-            App.utils.scheduler.cancelTask(selectFirstItem);
         }
 
         // DAAPI
@@ -253,12 +252,6 @@ package xvm.profile.components
             bb.selectedIndex = idx;
             var bi:NormalSortingBtnInfo = bb.dataProvider[idx] as NormalSortingBtnInfo;
             page.listComponent.techniqueList.sortByField(bi.iconId, Config.config.userInfo.sortColumn > 0);
-            App.utils.scheduler.envokeInNextFrame(selectFirstItem);
-        }
-
-        private function selectFirstItem():void
-        {
-            page.listComponent.techniqueList.selectedIndex = 0;
         }
 
         // stat
