@@ -6,17 +6,15 @@ package com.xvm.utils
 {
     import com.xfw.*;
     import com.xvm.*;
-    //import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
-    //import flash.text.*;
-    //import org.idmedia.as3commons.util.*;
 
     public class Chance
     {
         private static var battleTier:Number = 0;
         private static var maxTeamsCount:Number = 0;
         private static var chanceG:Object;
+        private static var chanceT:Object;
 
         //public static var lastChances:Object = null;
 
@@ -25,10 +23,8 @@ package com.xvm.utils
             return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
         }
 
-        private static var chanceLog:Array;
-        public static function GetChanceText(playerNames:Vector.<String>, showChance:Boolean, showTier:Boolean, showLive:Boolean = false):String
+        public static function GetChanceText(playerNames:Vector.<String>, showChance:Boolean, showBattleTier:Boolean, showLive:Boolean = false):String
         {
-            chanceLog = [];
             var teamsCount:Object = null;
             Logger.add("========== begin chance calculation ===========");
             try
@@ -47,31 +43,34 @@ package com.xvm.utils
                     Chance.battleTier = GuessBattleTier(playerNames);
                 Logger.add("battleTier=" + Chance.battleTier);
 
-                var chG:Object = GetChance(playerNames, ChanceFuncG);
+                chanceG = GetChance(playerNames, ChanceFuncG);
+                chanceT = GetChance(playerNames, ChanceFuncT);
 
                 var text:String = "";
 
-                if (chG.error)
-                    return ChanceError("[G] " + chG.error);
-
-                chanceG = chG;
+                if (chanceG.error)
+                    return ChanceError("[G] " + chanceG.error);
+                if (chanceT.error)
+                    return ChanceError("[T] " + chanceT.error);
 
                 if (showChance)
                 {
-                    text = Locale.get("Chance to win") + ": " + FormatChangeText("", chG);
-                    //text = Locale.get("Team strength") + ": " + FormatChangeText("", chG);
-                    if (showLive)
+                    text = Locale.get("Chance to win") + ": " + FormatChangeText("", chanceT);
+                    //text = Locale.get("Team strength") + ": " + FormatChangeText("", chanceT);
+                    /*if (showLive)
                     {
-                        var chX1:Object = GetChance(playerNames, ChanceFuncX1);
-                        text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1);
-                    }
+                        var chanceLiveT:Object = GetChance(playerNames, ChanceFuncLiveT, true);
+                        text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chanceLiveT);
+                    }*/
                 }
-                if (showTier && Chance.battleTier != 0)
+
+                if (showBattleTier && Chance.battleTier != 0)
                 {
                     if (text != "")
                         text += ". ";
                     text += Locale.get("chanceBattleTier") + ": " + battleTier;
                 }
+
                 Logger.add("RESULT=" + text);
                 return text;
             }
@@ -83,8 +82,7 @@ package com.xvm.utils
         }
 
         // PRIVATE
-        private static var _x1Logged:Boolean = false;
-        private static var _x2Logged:Boolean = false;
+
         private static function GetChance(playerNames:Vector.<String>, chanceFunc:Function):Object
         {
             var Ka:Number = 0;
@@ -110,23 +108,16 @@ package com.xvm.utils
             Ke /= maxTeamsCount;
 
             var result:Object = PrepareChanceResults(Ka, Ke, len);
-
-            Logger.add("Ka=" + Ka.toFixed(2) + " Ke=" + Ke.toFixed(2) + " percent=" + result.percent);
-
+            Logger.add("Ka=" + Ka.toFixed(2) + " Ke=" + Ke.toFixed(2) + " raw=" + result.raw + " percent=" + result.percent);
             return result;
         }
 
         // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
         private static function ChanceFuncG(vdata:VehicleData, stat:StatData):Number
         {
-            var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battles = 8 level
-            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
-
+            var T:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
-            var T:Number = tier;
-            //Logger.addObject(stat);
-            chanceLog.push(stat);
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.winrate || Config.config.consts.AVG_GWR;
@@ -136,11 +127,11 @@ package com.xvm.utils
             var Klvl:Number = (Tmax + Tmin) / 2 - T;
 
             // 2
-            var Kab:Number = (Ba <= 500) ? 0                   //   0..0.5k  => 0
-                : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
-                : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
-                : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
-                : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
+            var Kab:Number = (Ba <= 500) ? 0                   //   0..0.5k => 0
+                : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k   => 0..0.45
+                : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k  => 0.45..0.7
+                : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k  => 0.7..0.95
+                : 0.95 + (Ba - 20000) / 80000                  // 20k..     => 0.95..
 
             // 3
             var Kra:Number = (100 + Ra - 48.5) / 100;
@@ -152,65 +143,15 @@ package com.xvm.utils
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
         }
 
-        /*
         private static function ChanceFuncT(vdata:VehicleData, stat:StatData):Number
         {
-            var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battles = 8 level
-            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
-
+            var T:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
-            var T:Number = tier;
             var Bt:Number = stat.v.b || 0;
-            var Et:Number = stat.v.xte | 0;
-            var Rt:Number = stat.v.r || 0;
-            var AvgW:Number = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
-            var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
-            var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
-            var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
-            var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
-
-            // 1
-            var Klvl:Number = (Tmax + Tmin) / 2 - T;
-
-            // 2
-            var Ktb:Number = (Bt <= 50) ? 0                    //    0..50  => 0
-                : (Bt <= 500) ? (Bt - 50) / 1000               //  51..500  => 0..0.45
-                : (Bt <= 1000) ? 0.45 + (Bt - 500) / 2000      //  501..1000 => 0.45..0.7
-                : (Bt <= 2000) ? 0.7 + (Bt - 1000) / 4000      // 1001..2000 => 0.7..0.95
-                : 0.95 + (Bt - 2000) / 8000;                   // 2000..     => 0.95..
-            var Kab:Number = (Ba <= 500) ? 0                   //   0..0.5k  => 0
-                : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
-                : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
-                : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
-                : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
-
-            // 3
-            var Krt:Number = (100 + Rt - AvgW) / 100;
-            var Kra:Number = (100 + Ra - 48.5) / 100;
-
-            // 4
-            var Eb:Number = (Et > 0)
-                ? (((3 / 5 * (Et / 20) * Krt) * (Krt + Ktb)) +
-                    ((2 / 5 * Ean * Kra) * (Kra + Kab))) * (Kra + 0.25 * Klvl)
-                : ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
-
-            // 5
-            return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
-        }
-        */
-
-        private static function ChanceFuncX1(vdata:VehicleData, stat:StatData):Number
-        {
-            if (!stat.alive)
-                return 0;
-
-            var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battles = 8 level
-            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
-
-            var Tmin:Number = vdata.tierLo;
-            var Tmax:Number = vdata.tierHi;
-            var T:Number = tier;
+            var Et:Number = stat.v.xte || 0;
+            var Rt:Number = stat.v.winrate || 0;
+            var AvgW:Number = stat.v.data.avgR || Config.config.consts.AVG_GWR;
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.winrate || Config.config.consts.AVG_GWR;
@@ -220,57 +161,16 @@ package com.xvm.utils
             var Klvl:Number = (Tmax + Tmin) / 2 - T;
 
             // 2
-            var Kab:Number = (Ba <= 500) ? 0                   //   0..0.5k  => 0
-                : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
-                : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
-                : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
-                : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
-
-            // 3
-            var Kra:Number = (100 + Ra - 48.5) / 100;
-
-            // 4
-            var Eb:Number = ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
-
-            // 5
-            return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
-        }
-
-        /*
-        private static function ChanceFuncX2(vdata:VehicleData, stat:StatData):Number
-        {
-            if (!stat.alive)
-                return 0;
-
-            var tier:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battles = 8 level
-            var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - tier;
-
-            var Tmin:Number = vdata.tierLo;
-            var Tmax:Number = vdata.tierHi;
-            var T:Number = tier;
-            var Bt:Number = stat.v.b || 0;
-            var Et:Number = stat.v.xte || 0;
-            var Rt:Number = stat.v.r || 0;
-            var AvgW:Number = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
-            var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
-            var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
-            var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
-            var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
-
-            // 1
-            var Klvl:Number = (Tmax + Tmin) / 2 - T;
-
-            // 2
-            var Ktb:Number = (Bt <= 50) ? 0                    //    0..50  => 0
-                : (Bt <= 500) ? (Bt - 50) / 1000               //  51..500  => 0..0.45
+            var Ktb:Number = (Bt <= 50) ? 0                    //    0..50   => 0
+                : (Bt <= 500) ? (Bt - 50) / 1000               //   51..500  => 0..0.45
                 : (Bt <= 1000) ? 0.45 + (Bt - 500) / 2000      //  501..1000 => 0.45..0.7
                 : (Bt <= 2000) ? 0.7 + (Bt - 1000) / 4000      // 1001..2000 => 0.7..0.95
                 : 0.95 + (Bt - 2000) / 8000;                   // 2000..     => 0.95..
-            var Kab:Number = (Ba <= 500) ? 0                   //   0..0.5k  => 0
-                 : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
-                : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
-                : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
-                : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
+            var Kab:Number = (Ba <= 500) ? 0                   //    0..0.5k => 0
+                : (Ba <= 5000) ? (Ba - 500) / 10000            //   1k..5k   => 0..0.45
+                : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //   5k..10k  => 0.45..0.7
+                : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   //  10k..20k  => 0.7..0.95
+                : 0.95 + (Ba - 20000) / 80000                  //  20k..     => 0.95..
 
             // 3
             var Krt:Number = (100 + Rt - AvgW) / 100;
@@ -278,14 +178,13 @@ package com.xvm.utils
 
             // 4
             var Eb:Number = (Et > 0)
-                ? (((3 / 5 * (Et / 20) * Krt) * (Krt + Ktb)) +
+                ? (((3 / 5 * Et * Krt) * (Krt + Ktb)) +
                     ((2 / 5 * Ean * Kra) * (Kra + Kab))) * (Kra + 0.25 * Klvl)
                 : ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
 
             // 5
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
         }
-        */
 
         // return: { ally: Number, enemy: Number }
         private static function CalculateTeamPlayersCount(playerNames:Vector.<String>):Object

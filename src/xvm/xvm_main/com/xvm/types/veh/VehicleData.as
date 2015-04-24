@@ -39,6 +39,13 @@ package com.xvm.types.veh
         public var wn8expDef:Number;
         public var wn8expFrag:Number;
 
+        public var avgR:Number;
+        public var topR:Number;
+        public var avgD:Number;
+        public var topD:Number;
+        public var avgF:Number;
+        public var topF:Number;
+
         // additional
 
         public var shortName:String = Values.EMPTY_STR;
