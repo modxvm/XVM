@@ -750,7 +750,7 @@ package com.xvm
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
             // {{xte}}
-            pdata["xte"] = isNaN(stat.v.xte) ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
+            pdata["xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn6}}

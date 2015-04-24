@@ -451,9 +451,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             //Logger.add(value + " => " + Macros.Format(m_name, value, null));
             var v = Macros.Format(m_name, value, null);
-            if (v == "X")
-                v = 10;
-            else if (v == "XX")
+            if (v == "XX")
                 v = 100;
             if (isColorValue)
                 v = v.split("#").join("0x");

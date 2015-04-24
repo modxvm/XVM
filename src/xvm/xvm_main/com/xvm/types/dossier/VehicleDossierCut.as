@@ -71,7 +71,7 @@ package com.xvm.types.dossier
                         c_wn8effd = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8EFFD, wn8effd, "#");
                     }
 
-                    if (!isNaN(vdossier.xte) || vdossier.xte == 0)
+                    if (!isNaN(vdossier.xte) && vdossier.xte > 0)
                     {
                         xte = vdossier.xte == 100 ? "XX" : (vdossier.xte < 10 ? "0" : "") + vdossier.xte;
                         c_xte = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, "#");
