@@ -5,13 +5,14 @@ import BigWorld
 
 from constants import *
 from logger import *
+import config
 
 _xvm_config_dir_name = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../../../configs/xvm')
 _configWatchdogTimerId = None
 _lastConfigDirState = None
 
 def startConfigWatchdog():
-    #debug('[XVM] _startConfigWatchdog')
+    #debug('startConfigWatchdog')
     _stopConfigWatchdog()
     if _isConfigReloadingEnabled():
         _configWatchdog()
@@ -43,6 +44,7 @@ def _configWatchdog():
         _stopConfigWatchdog()
 
 def _stopConfigWatchdog():
+    #debug('_stopConfigWatchdog')
     global _configWatchdogTimerId
     if _configWatchdogTimerId:
         BigWorld.cancelCallback(_configWatchdogTimerId)
@@ -50,17 +52,22 @@ def _stopConfigWatchdog():
 
 def _isConfigReloadingEnabled():
     try:
-        import config
-        return config.config['autoReloadConfig'] is True
+        if config.config is None:
+            return False
+        enabled = config.config.get('autoReloadConfig', False) is True
+        #debug('_isConfigReloadingEnabled: {}'.format(enabled))
+        return enabled
     except:
         err(traceback.format_exc())
         return False
 
 def _onConfigChanged():
     try:
+        #debug('_onConfigChanged')
         _stopConfigWatchdog()
         as_xfw_cmd(XVM_COMMAND.AS_RELOAD_CONFIG)
 
+        # reload hangar to apply changes
         from gui.WindowsManager import g_windowsManager
         from gui.Scaleform.framework import ViewTypes
         from gui.Scaleform.daapi.settings.views import VIEW_ALIAS

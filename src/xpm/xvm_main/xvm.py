@@ -290,6 +290,9 @@ class Xvm(object):
         if not token.versionChecked:
             token.checkVersion()
 
+        # reenable config watchdog for backward replay revind
+        configwatchdog.startConfigWatchdog()
+
     def initBattle(self):
         debug('> initBattle()')
         try:
