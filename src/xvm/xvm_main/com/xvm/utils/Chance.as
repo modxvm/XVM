@@ -149,8 +149,8 @@ package com.xvm.utils
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
             var Bt:Number = stat.v.b || 0;
-            var Et:Number = stat.v.xte || 0;
-            var Rt:Number = stat.v.winrate || 0;
+            var Rt:Number = stat.v.winrate || Config.config.consts.AVG_GWR;
+            var Et:Number = Bt >= 10 && stat.v.xte ? stat.v.xte : 0;
             var AvgW:Number = stat.v.data.avgR || Config.config.consts.AVG_GWR;
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
