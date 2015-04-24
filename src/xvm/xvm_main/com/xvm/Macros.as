@@ -1011,12 +1011,12 @@ package com.xvm
             xvm_wn6: "xwn6",
             xvm_wn8: "xwn8",
             xvm_eff: "xeff",
-            xvm_e: "e",
+            xvm_xte: "e",
             basic_wgr: "wgr",
             basic_wn6: "wn6",
             basic_wn8: "wn8",
             basic_eff: "eff",
-            basic_e: "e"
+            basic_xte: "e"
         }
 
         private static const RATING_DEFAULTS_MATRIX:Object =
@@ -1025,12 +1025,12 @@ package com.xvm
             xvm_wn6: "--",
             xvm_wn8: "--",
             xvm_eff: "--",
-            xvm_e: "--",
+            xvm_xte: "--",
             basic_wgr: "-----",
             basic_wn6: "----",
             basic_wn8: "----",
             basic_eff: "----",
-            basic_e: "--"
+            basic_xte: "--"
         }
 
         /**
