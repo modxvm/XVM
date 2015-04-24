@@ -115,7 +115,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     function setStateImpl()
     {
         var savedValue = wrapper.data.isPostmortemView;
-        if (cfg.removeSelectedBackground)
+        if (Macros.FormatGlobalBooleanValue(cfg.removeSelectedBackground))
             wrapper.data.isPostmortemView = false;
         base.setState();
         wrapper.data.isPostmortemView = savedValue;

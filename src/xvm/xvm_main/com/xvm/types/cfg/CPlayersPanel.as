@@ -6,8 +6,8 @@ package com.xvm.types.cfg
 {
     public dynamic class CPlayersPanel extends Object
     {
-        public var removeSelectedBackground:Boolean;
-        public var removePanelsModeSwitcher:Boolean;
+        public var removeSelectedBackground:*;
+        public var removePanelsModeSwitcher:*;
         public var startMode:String;
         public var altMode:String;
     }
