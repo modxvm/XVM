@@ -28,7 +28,7 @@ package xvm.profile.UI
         {
             super.configUI();
 
-            if (Config.networkServicesSettings.statAwards)
+            if (Config.networkServicesSettings.statAwards && Config.config.userInfo.showXTEColumn)
             {
                 // xTE
                 xteTF = new TextField();

@@ -60,6 +60,7 @@
     "startPage": 4,
     "sortColumn": 3,
     //"sortColumn": -9,
+    //"showXTEColumn": false,
     "showExtraDataInProfile": true,
     "defaultFilterValue": "+all -premium -master -arty"
   },

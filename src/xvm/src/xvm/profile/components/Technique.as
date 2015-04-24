@@ -214,28 +214,31 @@ package xvm.profile.components
 
         private function setupSortableButtonBar():void
         {
-            var bi:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            bi.buttonWidth = 50;
-            bi.sortOrder = 8;
-            bi.toolTip = "xvm_xte";
-            bi.iconId = "xvm_xte";
-            bi.defaultSortDirection = SortingInfo.DESCENDING_SORT;
-            bi.ascendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW;
-            bi.descendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW;
-            bi.buttonHeight = 40;
-            bi.enabled = true;
-            bi.label = "xTE";
+            if (Config.config.userInfo.showXTEColumn)
+            {
+                var bi:NormalSortingBtnInfo = new NormalSortingBtnInfo();
+                bi.buttonWidth = 50;
+                bi.sortOrder = 8;
+                bi.toolTip = "xvm_xte";
+                bi.iconId = "xvm_xte";
+                bi.defaultSortDirection = SortingInfo.DESCENDING_SORT;
+                bi.ascendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW;
+                bi.descendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW;
+                bi.buttonHeight = 40;
+                bi.enabled = true;
+                bi.label = "xTE";
 
-            var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
-            dp[4].buttonWidth = 64; // BATTLES_COUNT,74
-            dp[5].buttonWidth = 64; // WINS_EFFICIENCY,74
-            dp[6].buttonWidth = 75; // AVG_EXPERIENCE,90
-            dp.push(dp[7]);
-            dp[7] = bi;             // xvm_xte
-            dp[8].buttonWidth = 68; // MARK_OF_MASTERY,83
+                var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
+                dp[4].buttonWidth = 64; // BATTLES_COUNT,74
+                dp[5].buttonWidth = 64; // WINS_EFFICIENCY,74
+                dp[6].buttonWidth = 75; // AVG_EXPERIENCE,90
+                dp.push(dp[7]);
+                dp[7] = bi;             // xvm_xte
+                dp[8].buttonWidth = 68; // MARK_OF_MASTERY,83
 
-            page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
-            page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
+                page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
+                page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
+            }
         }
 
         // Initial sort
@@ -245,8 +248,11 @@ package xvm.profile.components
         {
             var idx:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
             var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-            if (bb.dataProvider.length > 8)
-                idx = idx == 7 ? 8 : idx == 8 ? 7 : idx; // swap 8 and 9 positions (mastery and xTE columns)
+            if (Config.config.userInfo.showXTEColumn)
+            {
+                if (bb.dataProvider.length > 8)
+                    idx = idx == 7 ? 8 : idx == 8 ? 7 : idx; // swap 8 and 9 positions (mastery and xTE columns)
+            }
             if (idx > bb.dataProvider.length - 1)
                 idx = 5;
             bb.selectedIndex = idx;

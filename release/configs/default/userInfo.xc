@@ -19,6 +19,9 @@
     // 8 - Class mark  / Классность
     // 9 - xTE         / xTE
     "sortColumn": -5,
+    // true - Show xTE column in the vehicle list
+    // true - Показывать колонку xTE в списке техники
+    "showXTEColumn": true,
     // true - Show extra data in profile (experimental)
     // true - Показывать расширенные данные в профиле (экспериментально)
     "showExtraDataInProfile": false,

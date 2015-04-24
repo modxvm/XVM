@@ -369,6 +369,7 @@ package com.xvm
             var c:CUserInfo = new CUserInfo();
             c.startPage = 1;
             c.sortColumn = -5;                 // Number of column for sorting
+            c.showXTEColumn = true;
             c.showExtraDataInProfile = false;
             c.inHangarFilterEnabled = false;   // Enable In hangar radio button by default
             c.showFilters = true;              // Show tank filters

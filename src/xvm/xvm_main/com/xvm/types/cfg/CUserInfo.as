@@ -8,6 +8,7 @@ package com.xvm.types.cfg
     {
         public var startPage:Number;                // Initial page
         public var sortColumn:Number;               // Number of column for sorting
+        public var showXTEColumn:Boolean;
         public var showExtraDataInProfile:Boolean;
         public var inHangarFilterEnabled:Boolean;   // Enable In hangar check box by default
         public var showFilters:Boolean;             // Show tank filters
