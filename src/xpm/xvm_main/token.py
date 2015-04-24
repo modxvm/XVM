@@ -82,19 +82,13 @@ def _makeNetworkServicesSettings(tdata):
 networkServicesSettings = _makeNetworkServicesSettings(None)
 
 def _getXvmActiveTokenData():
-    playerId = getCurrentPlayerId()
+    #debug('_getXvmActiveTokenData')
+    # use last player id for replays
+    playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
     if playerId is None:
         return None
 
     tdata = userprefs.get('tokens.{0}'.format(playerId))
-    if tdata is None:
-        # fallback to the last player id if replay is running
-        if isReplay():
-            playerId = userprefs.get('tokens.lastPlayerId')
-            if playerId is None:
-                return None
-            tdata = userprefs.get('tokens.{0}'.format(playerId))
-
     if tdata is not None and 'token' not in tdata:
         tdata = None
 
@@ -153,11 +147,14 @@ def _checkVersion():
     except Exception, ex:
         err(traceback.format_exc())
 
+
 def _initializeXvmToken():
+    #debug('_initializeXvmToken')
     global _tdataPrev
     clearToken()
 
-    playerId = getCurrentPlayerId()
+    # use last player id for replays
+    playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
     if playerId is None:
         return
 
@@ -166,32 +163,33 @@ def _initializeXvmToken():
     if tdata is None:
         tdata = _tdataPrev
 
-    type = SystemMessages.SM_TYPE.Warning
-    msg = _getXvmMessageHeader()
-    if tdata is None:
-        msg += '{{l10n:token/services_unavailable}}\n\n%s' % utils.hide_guid(errStr)
-    elif tdata['status'] == 'badToken' or tdata['status'] == 'inactive':
-        msg += '{{l10n:token/services_inactive}}'
-    elif tdata['status'] == 'blocked':
-        msg += '{{l10n:token/blocked}}'
-    elif tdata['status'] == 'active':
-        type = SystemMessages.SM_TYPE.GameGreeting
-        msg += '{{l10n:token/active}}\n'
-        s = time.time()
-        e = tdata['expires_at'] / 1000
-        days_left = int((e - s) / 86400)
-        hours_left = int((e - s) / 3600) % 24
-        mins_left = int((e - s) / 60) % 60
-        token_name = 'time_left' if days_left >= 3 else 'time_left_warn'
-        msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
-        msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
-    else:
-        type = SystemMessages.SM_TYPE.Error
-        msg += '{{l10n:token/unknown_status}}\n%s' % utils.hide_guid(simplejson.dumps(tdata))
-    msg += '</textformat>'
+    if not isReplay():
+        type = SystemMessages.SM_TYPE.Warning
+        msg = _getXvmMessageHeader()
+        if tdata is None:
+            msg += '{{l10n:token/services_unavailable}}\n\n%s' % utils.hide_guid(errStr)
+        elif tdata['status'] == 'badToken' or tdata['status'] == 'inactive':
+            msg += '{{l10n:token/services_inactive}}'
+        elif tdata['status'] == 'blocked':
+            msg += '{{l10n:token/blocked}}'
+        elif tdata['status'] == 'active':
+            type = SystemMessages.SM_TYPE.GameGreeting
+            msg += '{{l10n:token/active}}\n'
+            s = time.time()
+            e = tdata['expires_at'] / 1000
+            days_left = int((e - s) / 86400)
+            hours_left = int((e - s) / 3600) % 24
+            mins_left = int((e - s) / 60) % 60
+            token_name = 'time_left' if days_left >= 3 else 'time_left_warn'
+            msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
+            msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
+        else:
+            type = SystemMessages.SM_TYPE.Error
+            msg += '{{l10n:token/unknown_status}}\n%s' % utils.hide_guid(simplejson.dumps(tdata))
+        msg += '</textformat>'
 
-    if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
-        SystemMessages.pushMessage(msg, type)
+        if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
+            SystemMessages.pushMessage(msg, type)
 
     if tdata is not None:
         _tdataPrev = tdata
@@ -210,7 +208,6 @@ def _initializeXvmToken():
     global _token
     _token = '' if tdata is None else tdata.get('token', '').encode('ascii')
 
-    return
 
 def _checkToken(playerId, token):
     data = None

@@ -289,6 +289,7 @@ class Xvm(object):
         # check version if game restarted after crash or in replay
         if not token.versionChecked:
             token.checkVersion()
+            token.initializeXvmToken()
 
         # reenable config watchdog for backward replay revind
         configwatchdog.startConfigWatchdog()
