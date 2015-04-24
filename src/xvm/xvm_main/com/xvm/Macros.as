@@ -808,7 +808,7 @@ package com.xvm
 
             // Dynamic colors
             // {{c:xte}}
-            pdata["c:xte"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#"); }
+            pdata["c:xte"] = function(o:MacrosFormatOptions):String { return isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#"); }
             // {{c:xeff}}
             pdata["c:xeff"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#"); }
             // {{c:xwn6}}
@@ -857,7 +857,7 @@ package com.xvm
 
             // Alpha
             // {{a:xte}}
-            pdata["a:xte"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
+            pdata["a:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? NaN : MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
             // {{a:xeff}}
             pdata["a:xeff"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
             // {{a:xwn6}}

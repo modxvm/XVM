@@ -929,8 +929,8 @@ class com.xvm.Macros
 
         // Dynamic colors
         // {{c:xte}}
-        pdata["c:xte"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#", false);
-        pdata["c:xte#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#", true);
+        pdata["c:xte"] =   isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#", false);
+        pdata["c:xte#d"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#", true);
         // {{c:xeff}}
         pdata["c:xeff"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", false);
         pdata["c:xeff#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", true);
@@ -1001,7 +1001,7 @@ class com.xvm.Macros
 
         // Alpha
         // {{a:xte}}
-        pdata["a:xte"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
+        pdata["a:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
         // {{a:xeff}}
         pdata["a:xeff"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
         // {{a:xwn6}}
