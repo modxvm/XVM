@@ -42,8 +42,29 @@ CONST_45_IN_RADIANS = radians(45)
 
 _VEHICLE_TYPE_XML_PATH = 'scripts/item_defs/vehicles/'
 
+_UNKNOWN_VEHICLE_DATA = {
+    'vid': 0,
+    'key': 'unknown',
+    'nation': '',
+    'level': 0,
+    'vclass': '',
+    'localizedName': 'unknown',
+    'localizedShortName': 'unknown',
+    'localizedFullName': 'unknown',
+    'premium':False,
+    'hpStock':0,
+    'hpTop':0,
+    'turret': TURRET_TYPE_ONLY_ONE,
+    'visRadius': 0,
+    'firingRadius': 0,
+    'artyRadius': 0,
+    'tierLo': 0,
+    'tierHi': 0,
+    'shortName': 'unknown',
+}
+
 def _init():
-    res = []
+    res = [_UNKNOWN_VEHICLE_DATA]
     try:
         for nation in nations.NAMES:
             nationID = nations.INDICES[nation]
@@ -75,8 +96,8 @@ def _init():
                 data['hpStock'] = item.hulls[0]['maxHealth'] + stockTurret['maxHealth']
                 data['hpTop'] = item.hulls[0]['maxHealth'] + topTurret['maxHealth']
                 data['turret'] = _getTurretType(item, nation)
-                (data['visRadius'], data['firingRadius'], data['artyRadius']) = _getRanges(topTurret, topGun,
-                                                                                           data['nation'], data['vclass'])
+                (data['visRadius'], data['firingRadius'], data['artyRadius']) = \
+                    _getRanges(topTurret, topGun, data['nation'], data['vclass'])
 
                 (data['tierLo'], data['tierHi']) = getTiers(data['level'], data['vclass'], data['key'])
 

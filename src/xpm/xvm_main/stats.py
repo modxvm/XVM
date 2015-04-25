@@ -355,9 +355,6 @@ class _Stat(object):
             if cacheKey not in self.cacheBattle:
                 all_cached = False
 
-            # if pl.vId in [None, '', 'UNKNOWN']:
-            #    requestList.append(str(pl.playerId))
-            # else:
             requestList.append("%d=%d%s" % (pl.playerId, pl.vId,
                                             '=1' if not replay and pl.vehId == playerVehicleID else ''))
 
@@ -606,7 +603,7 @@ class _Player(object):
             self.vId = vData['typeCompDescr']
         elif 'vehicleType' in vData:
             self.vId = vData['vehicleType'].type.compactDescr
-        else:
+        if self.vId is None:
             self.vId = 0
         self.team = vData['team']
         self.squadnum = 0
