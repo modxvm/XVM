@@ -1094,6 +1094,8 @@ class com.xvm.Macros
                     return "Михаил";
                 if (pname == "STL1te")
                     return "О, СТЛайт!";
+				if (pname == "XIebniDizele4ky" || pname == "Xlebni_Dizele4ky" || pname == "XlebniDizeIe4ku" || pname == "XlebniDize1e4ku" || pname == "XlebniDizele4ku_2013")
+                    return "Alex Artobanana";
                 break;
 
             case "CT":
