@@ -1,0 +1,1 @@
+gui\maps\icons\tankmen\skills\small

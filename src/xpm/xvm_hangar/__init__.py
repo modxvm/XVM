@@ -25,17 +25,18 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenIn
     try:
         import nations
         from gui.shared import g_itemsCache
+        imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
         for tankman in tankmanArr:
             tankman['rank'] = tankman['role']
-            tankman['role'] = nation_icon = "<img src='img://gui/maps/icons/filters/nations/%s.png' height='14' width='22' vspace='-7'>" % nations.NAMES[tankman['nationID']]
+            tankman['role'] = "<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankman['nationID']])
             tankman_full_info = g_itemsCache.items.getTankman(tankman['tankmanID'])
             skills_str = ''
             for skill in tankman_full_info.skills:
-                skills_str += "<img src='img://gui/maps/icons/tankmen/skills/small/%s' width='14' height='14' vspace='-3'>" % skill.icon
+                skills_str += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
             if len(tankman_full_info.skills):
                 skills_str += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
             if tankman_full_info.hasNewSkill:
-                skills_str += "<img src='img://gui/maps/icons/tankmen/skills/small/new_skill.png' width='14' height='14' vspace='-3'>x%s" % tankman_full_info.newSkillCount[0]
+                skills_str += "<img src='%s/skills/new_skill.png' vspace='-3'>x%s" % (imgPath, tankman_full_info.newSkillCount[0])
             if not skills_str:
                 skills_str = l10n('noSkills')
             tankman['role'] += ' ' + skills_str

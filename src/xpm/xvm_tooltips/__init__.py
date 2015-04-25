@@ -230,10 +230,10 @@ def VehicleParamsField_getValue(base, self):
 
         # crew roles icons, must be in the end
         if 'crewRolesIcons' in params_list:
+            imgPath = 'img://../mods/shared_resources/xvm/res/icons/tooltips/roles'
             crewRolesIcons_arr = []
             for tankman_role in vehicle.descriptor.type.crewRoles:
-                imgPath = 'img://gui/maps/icons/tankmen/roles/medium/%s.png' % tankman_role[0]
-                crewRolesIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
+                crewRolesIcons_arr.append('<img src="%s/%s.png" height="16" width="16">' % (imgPath, tankman_role[0]))
             delimiter = ''
             crewRolesIcons_str = delimiter.join(crewRolesIcons_arr)
             result[-1].append([crewRolesIcons_str, ''])
