@@ -1139,12 +1139,12 @@ class com.xvm.Macros
         xvm_wn6: "xwn6",
         xvm_wn8: "xwn8",
         xvm_eff: "xeff",
-        xvm_xte: "e",
+        xvm_xte: "xte",
         basic_wgr: "wgr",
         basic_wn6: "wn6",
         basic_wn8: "wn8",
         basic_eff: "eff",
-        basic_xte: "e"
+        basic_xte: "xte"
     }
 
     private static var RATING_DEFAULTS_MATRIX:Object =
