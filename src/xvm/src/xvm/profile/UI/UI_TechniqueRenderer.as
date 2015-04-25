@@ -94,13 +94,16 @@ package xvm.profile.UI
                         vehicleTF.textColor = XfwConst.UICOLOR_GOLD;
                 }
 
-                if (xteTF != null)
+                if (Config.networkServicesSettings.statAwards)
                 {
                     winsTF.htmlText = "<p align='center'><font color='" +
                         MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, data.winsEfficiency) + "'>" +
                         data.winsEfficiencyStr +
                         "</font></p>";
+                }
 
+                if (xteTF != null)
+                {
                     var xte:Number = data.xvm_xte;
                     var isStat:Boolean = false;
                     if (data.xvm_xte_flag & 0x01 != 0)
