@@ -201,7 +201,7 @@ package com.xvm
         private function loadBattleResultsStat(target:Object, callback:Function, arenaUniqueId:String):void
         {
             //Logger.add("TRACE: loadBattleResultsStat(): target=" + String(target));
-            if (arenaUniqueId == null || arenaUniqueId == "")
+            if (arenaUniqueId == null || arenaUniqueId == "" || arenaUniqueId == "0")
             {
                 callback.call(target, null);
                 return;

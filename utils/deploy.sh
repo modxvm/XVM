@@ -29,7 +29,7 @@ clear()
 {
   rm -rf "$WOT_PATH/res_mods/mods/packages" || err "clear"
   rm -rf "$WOT_PATH/res_mods/mods/xfw" || err "clear"
-  rm -rf "$WOT_PATH/res_mods/$TARGET_VERSION/gui/flash" || err "clear"
+  rm -f "$WOT_PATH/res_mods/$TARGET_VERSION/gui/flash/lobby.swf" || err "clear"
   rm -rf "$WOT_PATH/res_mods/$TARGET_VERSION/gui/scaleform" || err "clear"
   rm -rf "$WOT_PATH/res_mods/$TARGET_VERSION/scripts/client/gui/scaleform/locale" || err "clear"
 }
