@@ -1113,11 +1113,11 @@ package com.xvm
             c.spotted = {
                 neverSeen:      "0x000000",
                 lost:           "0xD9D9D9",
-                revealed:       "0xFE0E00",
+                revealed:       "0xFFBB00",
                 dead:           "0xFFFFFF",
                 neverSeen_arty: "0x000000",
                 lost_arty:      "0xD9D9D9",
-                revealed_arty:  "0xFE0E00",
+                revealed_arty:  "0xFFBB00",
                 dead_arty:      "0xFFFFFF"
             };
             // values - from min to max, colors are for values 'lesser then ...'
