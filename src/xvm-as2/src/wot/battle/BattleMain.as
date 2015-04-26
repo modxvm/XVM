@@ -17,8 +17,6 @@ class wot.battle.BattleMain
     static var instance: BattleMain;
     var sixthSenseIndicator:SixthSenseIndicator;
 
-    private static var soundManager = new SoundManager();
-
     static function main()
     {
         Utils.TraceXvmModule("Battle");

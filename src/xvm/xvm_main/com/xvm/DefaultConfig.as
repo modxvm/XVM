@@ -45,6 +45,7 @@ package com.xvm
             c.export = getExportSection();
             c.consts = getConstsSection();
             c.tooltips = getTooltipsSection();
+            c.sounds = getSoundsSection();
             return c;
         }
 
@@ -1432,6 +1433,14 @@ package com.xvm
 
             return c;
         }
+
+        private static function getSoundsSection():CSounds
+        {
+            var c:CSounds = new CSounds();
+            c.sixthSense = "/xvm/xvm/sixthsense";
+            return c;
+        }
+
 
         private static function getIconsetSection():CIconset
         {

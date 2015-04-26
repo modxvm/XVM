@@ -27,10 +27,11 @@ package com.xvm.types.cfg
         public var minimap:CMinimap;
         public var minimapAlt:CMinimap;
         public var markers:CMarkers;
-
         public var colors:CColors;
         public var alpha:CAlpha;
         public var texts:CTexts;
+        public var tooltips:CTooltips;
+        public var sounds:CSounds;
         public var vehicleNames:Object;
         public var export:CExport;
         public var consts:Object; // internal

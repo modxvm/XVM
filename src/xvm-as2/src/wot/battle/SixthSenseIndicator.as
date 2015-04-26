@@ -67,9 +67,6 @@ class wot.battle.SixthSenseIndicator
     {
         //Logger.add("gotoAndPlayXvm: " + frame);
 
-        if (frame == "active")
-            SoundManager.playSound("sixthsense", "normal", "");
-
         if (icon == null || icon.source == "")
         {
             orig_gotoAndPlay.apply(_root.sixthSenseIndicator, arguments);

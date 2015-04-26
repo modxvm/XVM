@@ -7,8 +7,8 @@ import simplejson
 
 import BigWorld
 import GUI
-from gui.shared.utils import decorators
 from gui import SystemMessages
+from gui.shared.utils import decorators
 
 from xfw import *
 

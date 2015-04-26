@@ -1,10 +1,13 @@
-﻿XVM-6.1.0:
+﻿XVM-6.1.0.1:
+  * added new section in config sounds.xc, where you can setup extra sounds
+
+XVM-6.1.0:
   * adaptation to WoT 0.9.7
   * XFW-3.0.0
   * per-vehicle rating (xTE) enabled ({{xte}}, {{c:xte}}, {{a:xte}} macros)
   * new carousel macros {{v.xte}} and {{v.c_xte}} for per-vehicle rating
   * new option userInfo/showXTEColumn - Show xTE column in the vehicle list
-  * added new section in config hangar/tooltips.xc, where you can choose desired tooltips for each type of vehicle
+  * added new section in config tooltips.xc, where you can choose desired tooltips for each type of vehicle
   * in tank tooltips added feature of custom text and camo coefficients data
   * in barracks added nation flag for tanksman and their skills
   * added embedded fonts: 'xvm' (symbol) and 'mono' (monospace), recommended for default use

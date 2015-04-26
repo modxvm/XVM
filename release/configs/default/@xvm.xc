@@ -163,5 +163,9 @@
 
   // Parameters for tooltips
   // Параметры всплывающих подсказок
-  "tooltips": ${"tooltips.xc":"tooltips"}
+  "tooltips": ${"tooltips.xc":"tooltips"},
+
+  // Extra sounds settings
+  // Настройки дополнительных звуков
+  "sounds": ${"sounds.xc":"sounds"}
 }
