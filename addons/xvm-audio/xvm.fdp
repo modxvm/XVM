@@ -64,7 +64,7 @@
 <trigger_delay_max>0</trigger_delay_max>
 <notes></notes>
 <waveform>
-<filename>sounds/vip_01.wav</filename>
+<filename>sounds/6th_sense_01.wav</filename>
 <soundbankname>xvm</soundbankname>
 <weight>100</weight>
 <percentagelocked>0</percentagelocked>
@@ -292,7 +292,7 @@
 <notes></notes>
 <rebuild>1</rebuild>
 <waveform>
-<filename>sounds/vip_01.wav</filename>
+<filename>sounds/6th_sense_01.wav</filename>
 <guid>{0af17808-b518-4ca8-a753-548704faf114}</guid>
 <mindistance>1</mindistance>
 <maxdistance>10000</maxdistance>

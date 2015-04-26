@@ -30,7 +30,6 @@ def Battle_showSixthSenseIndicator(self, isShow):
         if vehId == 59393: # Rudy
             Sound('/rudy/dog/dog').play()
         else:
-            log(vehId)
             soundId = config.config['sounds']['sixthSense']
             if soundId is not None and soundId != '':
                 Sound(soundId).play()
@@ -41,6 +40,12 @@ def Battle_showSixthSenseIndicator(self, isShow):
 # Register events
 
 def _RegisterEvents():
+    #import FMOD
+    #FMOD.loadEventProject('../mods/shared_resources/xvm/res/audio/xvm')
+    #loadSuccessfully = FMOD.loadSoundBankIntoMemoryFromPath('../mods/shared_resources/xvm/res/audio/xvm.fsb')
+    #log('ok: {}'.format(loadSuccessfully))
+    #log(FMOD.getSoundBanks())
+
     from gui.Scaleform.Battle import Battle
     RegisterEvent(Battle, 'showSixthSenseIndicator', Battle_showSixthSenseIndicator)
 
