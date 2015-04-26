@@ -92,7 +92,7 @@ XVM-5.5.0:
       Для арты: "neverSeen_arty", "lost_arty", "revealed_arty", "dead_arty"
   * добавлены новые макросы:
       {{language}} - язык клиента игрока
-      {{region}} - текущий регион игры (RU, EU, NA, CN, ASIA, VTC, KR, CT)
+      {{region}} - текущий регион игры (RU, EU, NA, ASIA, KR, CN, CT)
       {{spotted}} со значениями из секции texts/spotted
       {{c:spotted}}, {{a:spotted}} для цвета и прозрачности по статусу засвета
   * удалена секция playersPanel/enemySpottedMarker (используйте экстра-поля с макросом {{spotted}})

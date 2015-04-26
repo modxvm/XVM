@@ -90,7 +90,7 @@ XVM-5.5.0:
       for arty: "neverSeen_arty", "lost_arty", "revealed_arty", "dead_arty"
   * added new macros:
       {{language}} - player's client language
-      {{region}} - current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
+      {{region}} - current game region (RU, EU, NA, ASIA, KR, CN, CT)
       {{spotted}} with values from texts/spotted section
       {{c:spotted}}, {{a:spotted}} for color and transparency by spotted status
   * removed section playersPanel/enemySpottedMarker (use extra fields with {{spotted}} macro instead)
