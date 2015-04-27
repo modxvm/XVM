@@ -118,6 +118,7 @@ Legend:
 │ S │ {{tdv}}            │ X │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
 │ S │ {{tfb}}            │ X │ X │ X │ X │ X │ average frags per battle for current tank
 │ S │ {{tsb}}            │ X │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
+│ S │ {{c:r}}            │ X │ X │ X │ X │ X │ color depending on rating type selected in the personal cabinet
 │ S │ {{c:xte}}          │ X │ X │ X │ X │ X │ color depending on player per-vehicle efficiency
 │ S │ {{c:xeff}}         │ X │ X │ X │ X │ X │ color depending on XVM Scale for efficiency
 │ S │ {{c:xwn6}}         │ X │ X │ X │ X │ X │ color depending on XVM Scale for WN6
