@@ -197,5 +197,9 @@
     "gameVersion": "0.8.0",
     "modMinVersion": "3.0.4"
   },
+  "sounds": {
+    //"sixthSense": "/xvm/xvm/sixthsense"
+    "sixthSense": "/GUI/notifications_FX/task_part_complete"
+  },
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }
