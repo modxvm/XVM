@@ -1,5 +1,7 @@
 ﻿XVM-6.1.0.1:
   * added new section in config sounds.xc, where you can setup extra sounds
+  * bugs fixed
+  * added some languages in the personal cabinet
 
 XVM-6.1.0:
   * adaptation to WoT 0.9.7
