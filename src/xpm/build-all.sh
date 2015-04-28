@@ -49,11 +49,23 @@ build_xfw()
 
 build()
 {
-  echo "Build: $1"
+  echo -n "Build: $1 "
   f=${1#*/}
   d=${f%/*}
 
   [ "$d" = "$f" ] && d=""
+
+  if [ ! -d "../../~sha1/python/$2/$d" ]; then
+    mkdir -p "../../~sha1/python/$2/$d"
+  fi
+  if [ -f "../../~sha1/python/$2/$f.sha1" ]; then
+    if [ "$(cat ../../~sha1/python/$2/$f.sha1)" = "$(sha1sum "$1")" ]; then
+      echo "isn't changed"
+      return 0
+    fi
+  fi
+  echo "rebuilding"
+  sha1sum $1 > "../../~sha1/python/$2/$f.sha1"
 
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
   [ ! -f $1c ] && exit
@@ -71,6 +83,7 @@ clear
 
 make_dirs
 
+echo 'building xfw'
 build_xfw
 
 # create __version__.py files
@@ -81,6 +94,7 @@ for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
 done
 
 # build *.py files
+echo 'building .py files'
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}

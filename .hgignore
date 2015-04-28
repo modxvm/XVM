@@ -11,6 +11,7 @@ addons/xvm-stat-log/*.xml
 addons/xvm-stat-log/work/
 
 ~output/
+~sha1/
 
 src/xpm/*/__version__.py
 
