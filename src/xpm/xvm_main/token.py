@@ -277,10 +277,9 @@ def _getVersionText(curVer):
 def _processClansInfo(data):
     clans = data.get('persistClans', {})
     clans.update(data.get('topClans', {}))
+
     # DEBUG
-    # clans['JKHU'] = {'rank':100,'cid':1,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    # clans['MWJL'] = {'rank':101,'cid':2,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    # clans['GPTX'] = {'rank':0,'cid':3,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    # clans['CJBZ'] = {'rank':1,'cid':4,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    #log(clans)
+    # clans['FOREX'] = {"rank":"0","cid":"38503","emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
     # /DEBUG
     return clans
