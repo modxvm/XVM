@@ -65,11 +65,11 @@ build()
     fi
   fi
   echo "rebuilding"
-  sha1sum $1 > "../../~sha1/python/$2/$f.sha1"
 
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
   [ ! -f $1c ] && exit
 
+  sha1sum $1 > "../../~sha1/python/$2/$f.sha1"
   mkdir -p "../../~output/$2/python/$d"
   cp $1c "../../~output/$2/python/${f}c"
   rm -f $1c
