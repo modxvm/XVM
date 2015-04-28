@@ -92,7 +92,11 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         for (var i:String in holderMc)
         {
             if (typeof(holderMc[i]) == "movieclip")
+            {
+                var labelMc:MovieClip = holderMc[i];
+                Macros.RegisterMinimapMacros(labelMc[PLAYER_INFO_FIELD_NAME], getVehicleClassSymbol(labelMc[VEHICLE_CLASS_FIELD_NAME]));
                 invalidateList[i] = INVALIDATE_TYPE_FORCE;
+            }
         }
         invalidate();
     }
