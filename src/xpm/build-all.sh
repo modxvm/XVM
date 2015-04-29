@@ -55,22 +55,17 @@ build()
 
   [ "$d" = "$f" ] && d=""
 
-  if [ ! -d "../../~sha1/python/$2/$d" ]; then
-    mkdir -p "../../~sha1/python/$2/$d"
-  fi
-  if [ -f "../../~sha1/python/$2/$f.sha1" ]; then
-    if [ "$(cat ../../~sha1/python/$2/$f.sha1)" = "$(sha1sum "$1")" ]; then
-      echo "isn't changed"
-      return 0
-    fi
+  if [ -f "../../~output/$2/python/$f.sha1" ] && [ "$(cat ../../~output/$2/python/$f.sha1)" = "$(sha1sum "$1")" ]; then
+    echo "isn't changed"
+    return 0
   fi
   echo "rebuilding"
 
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
   [ ! -f $1c ] && exit
 
-  sha1sum $1 > "../../~sha1/python/$2/$f.sha1"
   mkdir -p "../../~output/$2/python/$d"
+  sha1sum $1 > "../../~output/$2/python/$f.sha1"
   cp $1c "../../~output/$2/python/${f}c"
   rm -f $1c
 }
