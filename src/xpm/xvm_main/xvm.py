@@ -159,6 +159,7 @@ class Xvm(object):
                         vStats = utils.getVehicleStats(v.id)
                         args.extend([
                             vInfo.player.accountDBID,
+                            vInfo.vehicleType.compactDescr,
                             v.publicInfo.marksOnGun,
                             vInfo.vehicleStatus,
                             vStats.frags,

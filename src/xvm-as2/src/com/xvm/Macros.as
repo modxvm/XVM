@@ -683,9 +683,9 @@ class com.xvm.Macros
         }
 
         // vehicle
-        if (!pdata.hasOwnProperty("vehicle"))
+        if (!pdata.hasOwnProperty("veh-id") || (pdata["veh-id"] == 0 && data.vid != 0))
         {
-            var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
+            var vdata:VehicleData = VehicleInfo.get(data.vid);
             //Logger.addObject(vdata);
             if (vdata != null)
             {
@@ -704,7 +704,7 @@ class com.xvm.Macros
                 // {{vtype-l}} - Medium Tank
                 pdata["vtype-l"] = Locale.get(vdata.vtype);
                 // {{c:vtype}}
-                pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon);
+                pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.vid);
                 // {{battletier-min}}
                 pdata["battletier-min"] = vdata.tierLo;
                 // {{battletier-max}}

@@ -160,6 +160,12 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
+# add vid to players panel data
+def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, vStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter):
+    res = base(self, index, playerFullName, vInfoVO, vStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter)
+    res['vid'] = vInfoVO.vehicleType.compactDescr
+    return res
+
 # show quantity of alive instead of dead in frags panel
 # original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
 def FragCorrelationPanel_updateFrags(base, self, playerTeam):
@@ -349,6 +355,9 @@ def _RegisterEvents():
 
     from Vehicle import Vehicle
     RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
+
+    from gui.battle_control.battle_arena_ctrl import BattleArenaController
+    OverrideMethod(BattleArenaController, '_BattleArenaController__makeHash', BattleArenaController__makeHash)
 
     from gui.Scaleform.Battle import FragCorrelationPanel
     OverrideMethod(FragCorrelationPanel, 'updateFrags', FragCorrelationPanel_updateFrags)

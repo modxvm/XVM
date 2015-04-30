@@ -3,6 +3,7 @@
  * Dispatches event for config loading if it is not loaded
  */
 import com.xvm.*;
+import com.xvm.DataTypes.*;
 import wot.VehicleMarkersManager.*;
 import wot.VehicleMarkersManager.log.*;
 
@@ -37,6 +38,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private var m_defaultIconSource:String;
     private var m_vehicleClass:String;
     private var m_dead:Boolean;
+    private var m_vid:Number;
 
     // Components
     private static var logLists:LogLists = null;
@@ -205,7 +207,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
         pFullName:String, pName:String, pClan:String, pRegion:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void
-        /* added by XVM: playerId:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
+        /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
     {
         /**
          * Invoked on new marker creation.
@@ -222,6 +224,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_dead = m_curHealth <= 0;
 
         var playerId = arguments[14];
+        var vid:Number = m_vid = arguments[15];
 
         // for markers, hitlog and hpleft
         var wr = wrapper;
@@ -230,6 +233,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             Macros.RegisterPlayerData(pName,
             {
                 uid: playerId,
+                vid: vid,
                 label: pName + (pClan == "" ? "" : "[" + pClan + "]"),
                 vehicle: vType,
                 icon: vIconSource,
@@ -270,13 +274,13 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             if (logLists != null)
             {
                 var delta = m_curHealth - curHealthAbsolute;
-                var vdata = VehicleInfo.getByIcon(m_defaultIconSource);
+                var vdata = VehicleInfo.get(m_vid);
                 logLists.onHpUpdate(flag, delta, curHealth,
                     vdata.localizedName,
                     m_defaultIconSource,
                     m_playerName, m_level, damageType,
                     Config.config.texts.vtype[vdata.vtype],
-                    GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
+                    GraphicsUtil.GetVTypeColorValue(m_vid),
                     m_dead, curHealthAbsolute);
             }
         }

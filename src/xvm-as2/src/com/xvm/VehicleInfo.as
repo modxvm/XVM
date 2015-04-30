@@ -14,19 +14,9 @@ class com.xvm.VehicleInfo
         instance._onVehicleInfoData(json_str);
     }
 
-    public static function get(vId:Number):VehicleData
+    public static function get(vid:Number):VehicleData
     {
-        return instance._get(vId);
-    }
-
-    public static function getByIcon(icon:String):VehicleData
-    {
-        return instance._getByIcon(icon);
-    }
-
-    public static function getByLocalizedShortName(localizedShortName:String):VehicleData
-    {
-        return instance._getByLocalizedShortName(localizedShortName);
+        return instance._get(vid);
     }
 
     public static function getVTypeText(vtype:String):String
@@ -55,8 +45,6 @@ class com.xvm.VehicleInfo
     public static var initialized:Boolean = false;
 
     private var vehicles:Object;
-    private var vehiclesMapKey:Object;
-    private var vehiclesMapName:Object;
 
     // instance
     private static var _instance:VehicleInfo = null;
@@ -71,8 +59,6 @@ class com.xvm.VehicleInfo
     {
         //Logger.add("VehicleInfo::ctor()")
         this.vehicles = {};
-        this.vehiclesMapKey = {};
-        this.vehiclesMapName = {};
     }
 
     private function _onVehicleInfoData(json_str:String)
@@ -99,8 +85,6 @@ class com.xvm.VehicleInfo
                 //Logger.addObject(data);
 
                 vehicles[data.vid] = data;
-                vehiclesMapKey[data.key] = data.vid; // for getByIcon
-                vehiclesMapName[data.localizedShortName] = data.vid; // for getByLocalizedShortName
             }
         }
         catch (ex)
@@ -109,32 +93,8 @@ class com.xvm.VehicleInfo
         }
     }
 
-    private function _get(vId:Number):VehicleData
+    private function _get(vid:Number):VehicleData
     {
-        return vehicles[vId];
+        return vehicles[vid];
     }
-
-    private function _getByIcon(icon:String):VehicleData
-    {
-        // icon: "ussr-IS-3"
-        //   or  "../maps/icons/vehicle/contour/ussr-IS-3.png"
-        // key: "ussr:IS-3"
-        var n:Number = icon.lastIndexOf("/");
-        if (n > 0)
-            icon = icon.substring(n + 1);
-        n = icon.indexOf(".");
-        if (n > 0)
-            icon = icon.substring(0, n);
-        n = icon.indexOf("-");
-        if (n > 0)
-            icon = icon.substring(0, n) + ":" + icon.substring(n + 1);
-        return vehicles[vehiclesMapKey[icon]];
-    }
-
-    private function _getByLocalizedShortName(localizedShortName:String):VehicleData
-    {
-        // localizedShortName: "ИС-3"
-        return vehicles[vehiclesMapName[localizedShortName]];
-    }
-
 }

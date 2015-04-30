@@ -124,18 +124,15 @@ class com.xvm.GraphicsUtil
         return max;
     }
 
-    public static function GetVTypeColorValue(iconSource:String, prefix:String):String
+    public static function GetVTypeColorValue(vehId:Number):String
     {
-        if (!prefix)
-            prefix = "#";
-
         try
         {
-            var vdata:VehicleData = VehicleInfo.getByIcon(iconSource);
+            var vdata:VehicleData = VehicleInfo.get(vehId);
             var vtype = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
             if (!vtype || !Config.config.colors.vtype[vtype])
                 return "";
-            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
+            return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -144,11 +141,8 @@ class com.xvm.GraphicsUtil
         return null;
     }
 
-    public static function GetSpottedColorValue(value:String, isArty:Boolean, prefix:String):String
+    public static function GetSpottedColorValue(value:String, isArty:Boolean):String
     {
-        if (!prefix)
-            prefix = "#";
-
         try
         {
             if (!value)
@@ -157,7 +151,7 @@ class com.xvm.GraphicsUtil
                 value += "_arty";
             if (!Config.config.colors.spotted[value])
                 return "";
-            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
+            return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
