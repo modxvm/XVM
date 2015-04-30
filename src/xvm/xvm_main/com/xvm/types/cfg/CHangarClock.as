@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CClock extends Object
+    public dynamic class CHangarClock extends Object
     {
         public var enabled:Boolean;
         public var x:Number;

@@ -42,7 +42,7 @@ package xvm.clock
 
         private function createClock():void
         {
-            var cfg:CClock = Config.config.hangar.clock;
+            var cfg:CHangarClock = Config.config.hangar.clock;
             if (cfg.enabled)
                 clock = page.addChildAt(new ClockControl(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as ClockControl;
         }
