@@ -36,6 +36,14 @@ def Battle_showSixthSenseIndicator(self, isShow):
     except:
         err(traceback.format_exc())
 
+def _test():
+    log('test')
+    if config.config is not None:
+        soundId = config.config['sounds']['sixthSense']
+        if soundId is not None and soundId != '':
+            Sound(soundId).play()
+    BigWorld.callback(1, _test)
+
 #####################################################################
 # Register events
 
@@ -48,5 +56,7 @@ def _RegisterEvents():
 
     from gui.Scaleform.Battle import Battle
     RegisterEvent(Battle, 'showSixthSenseIndicator', Battle_showSixthSenseIndicator)
+
+    #BigWorld.callback(10, _test)
 
 BigWorld.callback(0, _RegisterEvents)
