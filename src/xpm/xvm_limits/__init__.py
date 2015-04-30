@@ -179,13 +179,7 @@ def tooltips_getUnlockPrice(*args, **kwargs):
     except Exception, ex:
         err(traceback.format_exc())
 
-# force as_setFreeXPS look at freeXP (which is affected by lock)
-#def ResearchMeta_as_setFreeXPS(base, self, *args, **kwargs):
-#    if self._isDAAPIInited():
-#        from gui.shared import g_itemsCache
-#        return self.flashObject.as_setFreeXP(g_itemsCache_orig.items.stats.freeXP)
-
-# force as_setFreeXPS look at freeXP (which is affected by lock)
+# force invalidateFreeXP to look at freeXP (which is affected by lock)
 def Research_invalidateFreeXP(base, self):
     try:
         if self._isDAAPIInited():
