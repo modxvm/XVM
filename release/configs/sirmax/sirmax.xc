@@ -82,7 +82,7 @@
     "allowHpInPanelsAndMinimap": true,
     "allowMarksOnGunInPanelsAndMinimap": true,
     "clanIconsFolder": "clanicons",
-    "sixthSenseIcon": "{{battletype=regular?cfg://sirmax/img/SixthSense.png|}}",
+    "sixthSenseIcon": "cfg://sirmax/img/SixthSense.png",
     "elements": ${"elements"}
   },
   "fragCorrelation": {
