@@ -103,6 +103,7 @@
           //   "format" - text format (macros allowed)
           //
           // fields available for both MovieClip and TextField formats:
+          //   "enabled" - enable/disable field creation (global macros allowed)
           //   "x" - x position (macros allowed)
           //   "y" - y position (macros allowed)
           //   "w" - width (macros allowed)

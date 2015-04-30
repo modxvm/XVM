@@ -106,6 +106,19 @@
         "strength": 2
       }
     },
+    // Show/hide server info or change its parameters
+    // Показать/спрятать информацию о сервере, или изменить ее параметры
+    "serverInfo": {
+      // Show server info in hangar.
+      // Показывать информацию о сервере в ангаре.
+      "enabled": true,
+      // Transparency in percents [0..100].
+      // Прозрачность в процентах [0..100].
+      "alpha": 100,
+      // Rotation in degrees [0..360].
+      // Угол поворота в градусах [0..360].
+      "rotation": 0
+    },
     // Parameters for tank carousel
     // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"},

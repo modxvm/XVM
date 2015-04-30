@@ -101,7 +101,7 @@ package xvm.limits
                 var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
                 if (goldContent)
                 {
-                    goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 2;
+                    goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
                     goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 20;
                 }
             }
@@ -112,7 +112,7 @@ package xvm.limits
                 var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
                 if (freeXpContent)
                 {
-                    freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 2;
+                    freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
                     freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 20;
                 }
             }

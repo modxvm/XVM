@@ -16,7 +16,8 @@ package com.xvm.types.cfg
         public var enableCrewAutoReturn:Boolean;
         public var widgetsEnabled:Boolean;
         public var pingServers:CPingServers;
+        public var serverInfo:CHangarServerInfo;
         public var carousel:CCarousel;
-        public var clock:CClock;
+        public var clock:CHangarClock;
     }
 }

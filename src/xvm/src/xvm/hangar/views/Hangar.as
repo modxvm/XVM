@@ -7,6 +7,7 @@ package xvm.hangar.views
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.types.cfg.CHangarServerInfo;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -30,6 +31,7 @@ package xvm.hangar.views
             //Logger.addObject(page);
 
             initVehicleParams();
+            initServerInfo();
         }
 
         // PRIVATE
@@ -58,6 +60,16 @@ package xvm.hangar.views
             {
                 Logger.err(ex);
             }
+        }
+
+        // server info
+
+        private function initServerInfo():void
+        {
+            var cfg:CHangarServerInfo = Config.config.hangar.serverInfo;
+            page.serverInfo.visible = cfg.enabled;
+            page.serverInfo.alpha = cfg.alpha / 100.0;
+            page.serverInfo.rotation = cfg.rotation;
         }
     }
 }

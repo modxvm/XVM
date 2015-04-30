@@ -260,6 +260,12 @@ package com.xvm
             c.pingServers.shadow.blur = 4;
             c.pingServers.shadow.strength = 2;
 
+            // Server info
+            c.serverInfo = new CHangarServerInfo();
+            c.serverInfo.enabled = true;
+            c.serverInfo.alpha = 100;
+            c.serverInfo.rotation = 0;
+
             // Tank carousel
             c.carousel = new CCarousel();
             c.carousel.enabled = true;
@@ -291,7 +297,7 @@ package com.xvm
             c.carousel.sorting_criteria = ["nation", "type", "level"];
 
             // Clock
-            c.clock = new CClock();
+            c.clock = new CHangarClock();
             c.clock.enabled = true;
             c.clock.x = -10;
             c.clock.y = 28;

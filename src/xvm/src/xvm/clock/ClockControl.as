@@ -17,7 +17,7 @@ package xvm.clock
 
     public class ClockControl extends LabelControl
     {
-        private var cfg:CClock;
+        private var cfg:CHangarClock;
 
         private var prevWidth:Number = 0;
         private var prevHeight:Number = 0;
@@ -26,7 +26,7 @@ package xvm.clock
 
         private var intervalId:uint = 0;
 
-        public function ClockControl(cfg:CClock)
+        public function ClockControl(cfg:CHangarClock)
         {
             this.cfg = cfg;
             Macros.RegisterClockMacros();

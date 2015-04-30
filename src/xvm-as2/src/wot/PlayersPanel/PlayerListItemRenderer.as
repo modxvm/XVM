@@ -405,6 +405,13 @@ class wot.PlayersPanel.PlayerListItemRenderer
             if (isEmpty)
                 continue;
 
+            if (format.enabled != null)
+            {
+                var enabled:Boolean = Macros.FormatGlobalBooleanValue(format.enabled);
+                if (enabled == false)
+                    continue;
+            }
+
             // make a copy of format, because it will be changed
             var fmt:Object = { };
             for (var nm in format)
