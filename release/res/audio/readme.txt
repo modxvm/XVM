@@ -1,2 +1,5 @@
-Copy xvm.fev and xvm.fsb files to res/audio folder.
-Скопируйте файлы xvm.fev и xvm.fsb в папку res/audio.
+Copy xvm.fev and xvm.fsb files to res/audio folder or /res_mods/0.9.7/audio
+if you are using another sound mods.
+
+Скопируйте файлы xvm.fev и xvm.fsb в папку res/audio или res_mods/0.9.7/audio
+если используете другие звуковые моды.
