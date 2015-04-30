@@ -613,10 +613,19 @@ package xvm.tcarousel
                 var maxRows:int = Math.floor((height - 4) / 34);
                 for (var i:int = 0; i < visibleFilters.length; ++i)
                 {
+                    var offsetX:Number = 0;
+                    var offsetY:Number = 0;
+                    if (visibleFilters[i] == vehicleFilters.checkBoxToMain)
+                    {
+                        offsetX += 3;
+                        offsetY += 3;
+                    }
+
                     var col:int = Math.floor(i / maxRows);
                     var row:int = i % maxRows;
-                    visibleFilters[i].x = col * 60;
-                    visibleFilters[i].y = row * 34 + 2;
+
+                    visibleFilters[i].x = col * 60 + offsetX;
+                    visibleFilters[i].y = row * 34 + 2 + offsetY;
                     w = (col + 1) * 60 - 4;
                 }
 
