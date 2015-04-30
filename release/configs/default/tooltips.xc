@@ -133,6 +133,8 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "hullArmor",                            - Сводка брони корпуса (спереди, сбоку, сзади) \ Summary of hull armor (frontal, side, back)
 "traverseLimits",                       - УГН \ Gun traverse limits
 "pitchLimits",                          - УВН \ Elevation arc limits
+"pitchLimitsSide",                      - УВН (сбоку) \ Elevation arc limits (side)
+"pitchLimitsRear",                      - УВН (сзади) \ Elevation arc limits (rear)
 "shootingRadius",                       - Дальность стрельбы арты, пулеметов \ Shooting range of SPG, machine guns
 "turretRotationSpeed",                  - Скорость вращения башни (и оружия) \ Rotation speed of turret (and gun)
 "terrainResistance",                    - Сводка сопротивлений грунтов \ Summary of terrain resistances

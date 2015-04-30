@@ -116,6 +116,8 @@
     "radio_range/actual": "расчетная",
     "shootingRadius": "Дальность стрельбы",
     "pitchLimits": "Углы ВН",
+    "pitchLimitsSide": "Углы ВН (сбоку)",
+    "pitchLimitsRear": "Углы ВН (сзади)",
     "traverseLimits": "Углы ГН",
     "terrainResistance": "Сопротивление грунтов",
     "gravity": "Гравитация",

@@ -63,6 +63,9 @@ def TankCarousel_showVehicles(base, self):
                                 if custom_nations_order.index(v1.nationName) < custom_nations_order.index(v2.nationName): return -1
                         if GUI_NATIONS_ORDER_INDEX[v1.nationName] > GUI_NATIONS_ORDER_INDEX[v2.nationName]: return 1
                         if GUI_NATIONS_ORDER_INDEX[v1.nationName] < GUI_NATIONS_ORDER_INDEX[v2.nationName]: return -1
+                    if sort_criterion == 'premium':
+                        if not v1.isPremium and v2.isPremium: return factor
+                        if v1.isPremium and not v2.isPremium: return -factor
                     if sort_criterion == 'level':
                         if v1.level > v2.level: return factor
                         if v1.level < v2.level: return -factor

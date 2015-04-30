@@ -13,7 +13,7 @@ XFW_GAME_VERSIONS = ['0.9.7']
 import traceback
 
 import BigWorld
-from math import degrees
+from math import degrees, pi
 from helpers import i18n
 from gui.shared.utils import ItemsParameters, ParametersCache
 
@@ -24,6 +24,7 @@ from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.vehinfo_camo import getCamoValues
 from xvm_main.python.xvm import l10n
+from gun_rotation_shared import calcPitchLimitsFromDesc
 
 #####################################################################
 # event handlers
@@ -151,14 +152,28 @@ def VehicleParamsField_getValue(base, self):
                 # gun traverse limits
                 if paramName == 'traverseLimits' and gun['turretYawLimits']:
                     (traverseMin, traverseMax) = gun['turretYawLimits']
-                    traverseLimits_str = str(int(round(degrees(traverseMin)))) + '..+' + str(int(round(degrees(traverseMax))))
+                    traverseLimits_str = '%g..+%g' % (round(degrees(traverseMin)), round(degrees(traverseMax)))
                     result[-1].append([h1_pad(l10n('traverseLimits')), h1_pad(traverseLimits_str)])
                     continue
-                # elevation limits
+                # elevation limits (front)
                 if paramName == 'pitchLimits':
-                    (pitchMax, pitchMin) = gun['pitchLimits']['absolute']
-                    pitchLimits_str = str(int(round(degrees(-pitchMin)))) + '..+' + str(int(round(degrees(-pitchMax))))
+                    (pitchMax, pitchMin) = calcPitchLimitsFromDesc(0, gun['pitchLimits'])
+                    pitchLimits_str = '%g..+%g' % (round(degrees(-pitchMin)), round(degrees(-pitchMax)))
                     result[-1].append([h1_pad(l10n('pitchLimits')), h1_pad(pitchLimits_str)])
+                    continue
+                # elevation limits (side)
+                if paramName == 'pitchLimitsSide':
+                    if gun['turretYawLimits'] and abs(degrees(gun['turretYawLimits'][0])) < 89: continue # can't look aside 90 degrees
+                    (pitchMax, pitchMin) = calcPitchLimitsFromDesc(pi / 2, gun['pitchLimits'])
+                    pitchLimits_str = '%g..+%g' % (round(degrees(-pitchMin)), round(degrees(-pitchMax)))
+                    result[-1].append([h1_pad(l10n('pitchLimitsSide')), h1_pad(pitchLimits_str)])
+                    continue
+                # elevation limits (rear)
+                if paramName == 'pitchLimitsRear':
+                    if gun['turretYawLimits']: continue # can't look back
+                    (pitchMax, pitchMin) = calcPitchLimitsFromDesc(pi, gun['pitchLimits'])
+                    pitchLimits_str = '%g..+%g' % (round(degrees(-pitchMin)), round(degrees(-pitchMax)))
+                    result[-1].append([h1_pad(l10n('pitchLimitsRear')), h1_pad(pitchLimits_str)])
                     continue
                 # shooting range
                 if paramName == 'shootingRadius':

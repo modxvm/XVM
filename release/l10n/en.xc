@@ -116,6 +116,8 @@
     "radio_range/actual": "actual",
     "shootingRadius": "Shooting radius",
     "pitchLimits": "Elevation arc",
+    "pitchLimitsSide": "Elevation arc (side)",
+    "pitchLimitsRear": "Elevation arc (rear)",
     "traverseLimits": "Gun traverse arc",
     "terrainResistance": "Terrain resistance",
     "gravity": "Gravity",

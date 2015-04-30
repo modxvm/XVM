@@ -2,6 +2,11 @@
   * added new section in config sounds.xc, where you can setup extra sounds
   * bugs fixed
   * added some languages in the personal cabinet
+  * new option:
+      "showAliveNotFrags" - show quantity of alive instead of dead in frags panel. Original idea/code by yaotzinv: http://www.koreanrandom.com/forum/topic/18671-09xпанель-счёта-в-боюколичество-оставшихся-танк/
+  * added sorting criterion for carusel: premium
+  * changing status of gold/free exp locks updates their availability in open windows
+  * in hangar tooltips added elevation arc limits for side and rear directions of the tank
 
 XVM-6.1.0:
   * adaptation to WoT 0.9.7

@@ -286,7 +286,7 @@ package com.xvm
             c.carousel.extraFields = [
                 { x: -1, y: 10, format: "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" }
             ];
-            c.carousel.nations_order = ["ussr", "germany", "usa", "france", "uk", "china", "japan"];
+            c.carousel.nations_order = [];
             c.carousel.types_order = ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"];
             c.carousel.sorting_criteria = ["nation", "type", "level"];
 
@@ -383,6 +383,7 @@ package com.xvm
         {
             var c:CFragCorrelation = new CFragCorrelation();
             c.hideTeamTextFields = true;
+            c.showAliveNotFrags = false;
             return c;
         }
 

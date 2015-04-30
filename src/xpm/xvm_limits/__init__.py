@@ -19,7 +19,7 @@ class XVM_LIMITS_COMMAND(object):
 #####################################################################
 
 import BigWorld
-
+import traceback
 from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
@@ -42,6 +42,14 @@ def fini():
 
 gold_enable = True
 freeXP_enable = True
+TechTree_handler = None
+Research_handler = None
+VehicleCustomization_handler = None
+TechnicalMaintenance_handler = None
+PremiumForm_handler = None
+Shop_handler = None
+RecruitWindow_handler = None
+PersonalCase_handler = None
 
 #enable or disable active usage of gold (does not affect auto-refill ammo/equip)
 def StatsRequester_gold(base, self):
@@ -80,6 +88,115 @@ def Vehicle_parseShells(base, self, layoutList, defaultLayoutList, proxy):
     return base(self, layoutList, defaultLayoutList, proxy)
 
 
+##############################################################
+# handlers of windows that use gold / freeXP
+
+def TechTree_populate(self, *args, **kwargs):
+    global TechTree_handler
+    TechTree_handler = self
+    
+def TechTree_dispose(self, *args, **kwargs):
+    global TechTree_handler
+    TechTree_handler = None
+
+def Research_populate(self, *args, **kwargs):
+    global Research_handler
+    Research_handler = self
+    
+def Research_dispose(self, *args, **kwargs):
+    global Research_handler
+    Research_handler = None
+
+def VehicleCustomization_populate(self, *args, **kwargs):
+    global VehicleCustomization_handler
+    VehicleCustomization_handler = self
+    
+def VehicleCustomization_dispose(self, *args, **kwargs):
+    global VehicleCustomization_handler
+    VehicleCustomization_handler = None
+
+def TechnicalMaintenance_populate(self, *args, **kwargs):
+    global TechnicalMaintenance_handler
+    TechnicalMaintenance_handler = self
+    
+def TechnicalMaintenance_dispose(self, *args, **kwargs):
+    global TechnicalMaintenance_handler
+    TechnicalMaintenance_handler = None
+
+def PremiumForm_populate(self, *args, **kwargs):
+    global PremiumForm_handler
+    PremiumForm_handler = self
+    
+def PremiumForm_dispose(self, *args, **kwargs):
+    global PremiumForm_handler
+    PremiumForm_handler = None
+
+def Shop_populate(self, *args, **kwargs):
+    global Shop_handler
+    Shop_handler = self
+
+def Shop_dispose(self, *args, **kwargs):
+    global Shop_handler
+    Shop_handler = None
+
+def RecruitWindow_populate(self, *args, **kwargs):
+    global RecruitWindow_handler
+    RecruitWindow_handler = self
+    
+def RecruitWindow_dispose(self, *args, **kwargs):
+    global RecruitWindow_handler
+    RecruitWindow_handler = None
+
+def PersonalCase_populate(self, *args, **kwargs):
+    global PersonalCase_handler
+    PersonalCase_handler = self
+    
+def PersonalCase_dispose(self, *args, **kwargs):
+    global PersonalCase_handler
+    PersonalCase_handler = None    
+
+# run function that updates gold/freeXP status in active handlers
+def handlerInvalidate(function, *handlers):
+    from gui.shared import g_itemsCache
+    for handler in handlers:
+        if handler: # is active
+            eval('handler.%s' % function)
+
+
+# force getUnlockPrice to look at freeXP (which is affected by lock)
+def tooltips_getUnlockPrice(*args, **kwargs):
+    try:
+        import gui.shared.tooltips as tooltips
+        from gui.shared import g_itemsCache as g_itemsCache_orig
+        # dirty create same names for use in original function
+        class g_itemsCache():
+            class items():
+                class stats():
+                    actualFreeXP = g_itemsCache_orig.items.stats.freeXP
+                    unlocks = g_itemsCache_orig.items.stats.unlocks
+                    vehiclesXPs = g_itemsCache_orig.items.stats.vehiclesXPs
+        tooltips.g_itemsCache = g_itemsCache
+    except Exception, ex:
+        err(traceback.format_exc())
+
+# force as_setFreeXPS look at freeXP (which is affected by lock)
+#def ResearchMeta_as_setFreeXPS(base, self, *args, **kwargs):
+#    if self._isDAAPIInited():
+#        from gui.shared import g_itemsCache
+#        return self.flashObject.as_setFreeXP(g_itemsCache_orig.items.stats.freeXP)
+
+# force as_setFreeXPS look at freeXP (which is affected by lock)
+def Research_invalidateFreeXP(base, self):
+    try:
+        if self._isDAAPIInited():
+            from gui.shared import g_itemsCache
+            from gui.Scaleform.daapi.view.lobby.techtree.Research import Research
+            self.as_setFreeXPS(g_itemsCache.items.stats.freeXP)
+            super(Research, self).invalidateFreeXP()
+    except Exception, ex:
+        err(traceback.format_exc())
+        base(self)
+
 #####################################################################
 # onXfwCommand
 
@@ -89,16 +206,21 @@ def onXfwCommand(cmd, *args):
         if cmd == XVM_LIMITS_COMMAND.SET_GOLD_LOCK_STATUS:
             global gold_enable
             gold_enable = not args[0]
+            handlerInvalidate('invalidateGold()', TechTree_handler, Research_handler)
+            handlerInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler, PremiumForm_handler)
+            handlerInvalidate('onGoldChange(0)', RecruitWindow_handler)
+            handlerInvalidate('_update()', Shop_handler)
+            handlerInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handler)
             return (None, True)
         elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
             freeXP_enable = not args[0]
+            handlerInvalidate('invalidateFreeXP()', TechTree_handler, Research_handler)
             return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)
     return (None, False)
-
 
 #####################################################################
 # Register events
@@ -118,5 +240,42 @@ def _RegisterEvents():
 
     from gui.shared.gui_items.Vehicle import Vehicle
     OverrideMethod(Vehicle, '_parseShells', Vehicle_parseShells)
+
+    from gui.Scaleform.daapi.view.lobby.techtree.TechTree import TechTree
+    RegisterEvent(TechTree, '_populate', TechTree_populate)
+    RegisterEvent(TechTree, '_dispose', TechTree_dispose)
+
+    from gui.Scaleform.daapi.view.lobby.techtree.Research import Research
+    RegisterEvent(Research, '_populate', Research_populate)
+    RegisterEvent(Research, '_dispose', Research_dispose)
+
+    from gui.Scaleform.daapi.view.lobby.customization.VehicleCustomization import VehicleCustomization
+    RegisterEvent(VehicleCustomization, '_populate', VehicleCustomization_populate)
+    RegisterEvent(VehicleCustomization, '_dispose', VehicleCustomization_dispose)
+
+    from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
+    RegisterEvent(TechnicalMaintenance, '_populate', TechnicalMaintenance_populate)
+    RegisterEvent(TechnicalMaintenance, '_dispose', TechnicalMaintenance_dispose)
+
+    from gui.Scaleform.daapi.view.lobby.PremiumForm import PremiumForm
+    RegisterEvent(PremiumForm, '_populate', PremiumForm_populate)
+    RegisterEvent(PremiumForm, '_dispose', PremiumForm_dispose)
+
+    from gui.Scaleform.daapi.view.lobby.store.Shop import Shop
+    RegisterEvent(Shop, '_populate', Shop_populate)
+    RegisterEvent(Shop, '_dispose', Shop_dispose)
+
+    from gui.Scaleform.daapi.view.lobby.recruitWindow.RecruitWindow import RecruitWindow
+    RegisterEvent(RecruitWindow, '_populate', RecruitWindow_populate)
+    RegisterEvent(RecruitWindow, '_dispose', RecruitWindow_dispose)
+    
+    from gui.Scaleform.daapi.view.lobby.PersonalCase import PersonalCase
+    RegisterEvent(PersonalCase, '_populate', PersonalCase_populate)
+    RegisterEvent(PersonalCase, '_dispose', PersonalCase_dispose)
+
+    import gui.shared.tooltips as tooltips
+    RegisterEvent(tooltips, 'getUnlockPrice', tooltips_getUnlockPrice, True)
+
+    OverrideMethod(Research, 'invalidateFreeXP', Research_invalidateFreeXP)
 
 BigWorld.callback(0, _RegisterEvents)

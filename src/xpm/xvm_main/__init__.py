@@ -160,6 +160,24 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
+# show quantity of alive instead of dead in frags panel
+# original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
+def FragCorrelationPanel_updateFrags(base, self, playerTeam):
+    try:
+        if 'showAliveNotFrags' in config.config['fragCorrelation'] and config.config['fragCorrelation']['showAliveNotFrags']:
+            if not playerTeam:
+                return
+            teamIndex = playerTeam - 1
+            enemyIndex = 1 - teamIndex
+            enemyTeam = enemyIndex + 1
+            team_left = len(self._FragCorrelationPanel__teamsShortLists[playerTeam]) - self._FragCorrelationPanel__teamsFrags[enemyIndex]
+            enemy_left = len(self._FragCorrelationPanel__teamsShortLists[enemyTeam]) - self._FragCorrelationPanel__teamsFrags[teamIndex]
+            self._FragCorrelationPanel__callFlash('updateFrags', [team_left, enemy_left])
+            return
+    except Exception, ex:
+        err(traceback.format_exc())
+    base(self, playerTeam)
+
 # spotted status
 def _Minimap__addEntry(self, id, location, doMark):
     # debug('> _Minimap__addEntry: {0}'.format(id))
@@ -331,6 +349,9 @@ def _RegisterEvents():
 
     from Vehicle import Vehicle
     RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
+
+    from gui.Scaleform.Battle import FragCorrelationPanel
+    OverrideMethod(FragCorrelationPanel, 'updateFrags', FragCorrelationPanel_updateFrags)
 
     from gui.Scaleform.Minimap import Minimap
     RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
