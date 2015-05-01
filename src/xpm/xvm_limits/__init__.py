@@ -49,7 +49,8 @@ TechnicalMaintenance_handler = None
 PremiumForm_handler = None
 Shop_handler = None
 RecruitWindow_handler = None
-PersonalCase_handler = None
+PersonalCase_handlers = []
+ExchangeFreeToTankmanXpWindow_handlers = []
 
 #enable or disable active usage of gold (does not affect auto-refill ammo/equip)
 def StatsRequester_gold(base, self):
@@ -148,20 +149,42 @@ def RecruitWindow_dispose(self, *args, **kwargs):
     RecruitWindow_handler = None
 
 def PersonalCase_populate(self, *args, **kwargs):
-    global PersonalCase_handler
-    PersonalCase_handler = self
+    global PersonalCase_handlers
+    PersonalCase_handlers.append(self)
     
 def PersonalCase_dispose(self, *args, **kwargs):
-    global PersonalCase_handler
-    PersonalCase_handler = None    
+    global PersonalCase_handlers
+    if self in PersonalCase_handlers:
+        PersonalCase_handlers.remove(self)
+    else:
+        err('PersonalCase window is disposed without being populated')
 
+def ExchangeFreeToTankmanXpWindow_populate(self, *args, **kwargs):
+    global ExchangeFreeToTankmanXpWindow_handlers
+    ExchangeFreeToTankmanXpWindow_handlers.append(self)
+    
+def ExchangeFreeToTankmanXpWindow_dispose(self, *args, **kwargs):
+    global ExchangeFreeToTankmanXpWindow_handlers
+    if self in ExchangeFreeToTankmanXpWindow_handlers:
+        ExchangeFreeToTankmanXpWindow_handlers.remove(self)
+    else:
+        err('ExchangeFreeToTankmanXpWindow window is disposed without being populated')
+        
 # run function that updates gold/freeXP status in active handlers
-def handlerInvalidate(function, *handlers):
-    from gui.shared import g_itemsCache
-    for handler in handlers:
-        if handler: # is active
-            eval('handler.%s' % function)
-
+def handlersInvalidate(function, *handlers):
+    try:
+        from gui.shared import g_itemsCache
+        handlers_arr = []
+        for element in handlers:
+            if type(element) in [list, tuple]:
+                handlers_arr.extend(element)
+            else:
+                handlers_arr.append(element)
+        for handler in handlers_arr:
+            if handler: # is active
+                eval('handler.%s' % function)
+    except Exception, ex:
+        err(traceback.format_exc())
 
 # force getUnlockPrice to look at freeXP (which is affected by lock)
 def tooltips_getUnlockPrice(*args, **kwargs):
@@ -200,16 +223,18 @@ def onXfwCommand(cmd, *args):
         if cmd == XVM_LIMITS_COMMAND.SET_GOLD_LOCK_STATUS:
             global gold_enable
             gold_enable = not args[0]
-            handlerInvalidate('invalidateGold()', TechTree_handler, Research_handler)
-            handlerInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler, PremiumForm_handler)
-            handlerInvalidate('onGoldChange(0)', RecruitWindow_handler)
-            handlerInvalidate('_update()', Shop_handler)
-            handlerInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handler)
+            handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
+            handlersInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler, PremiumForm_handler)
+            handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
+            handlersInvalidate('_update()', Shop_handler)
+            handlersInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
             return (None, True)
         elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
             freeXP_enable = not args[0]
-            handlerInvalidate('invalidateFreeXP()', TechTree_handler, Research_handler)
+            handlersInvalidate('invalidateFreeXP()', TechTree_handler, Research_handler)
+            handlersInvalidate("onClientChanged({'stats': 'freeXP'})", PersonalCase_handlers)
+            handlersInvalidate('_ExchangeFreeToTankmanXpWindow__onFreeXpChanged()', ExchangeFreeToTankmanXpWindow_handlers)
             return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
@@ -267,9 +292,12 @@ def _RegisterEvents():
     RegisterEvent(PersonalCase, '_populate', PersonalCase_populate)
     RegisterEvent(PersonalCase, '_dispose', PersonalCase_dispose)
 
+    from gui.Scaleform.daapi.view.lobby.exchange.ExchangeFreeToTankmanXpWindow import ExchangeFreeToTankmanXpWindow
+    RegisterEvent(ExchangeFreeToTankmanXpWindow, '_populate', ExchangeFreeToTankmanXpWindow_populate)
+    RegisterEvent(ExchangeFreeToTankmanXpWindow, '_dispose', ExchangeFreeToTankmanXpWindow_dispose)
+    
     import gui.shared.tooltips as tooltips
     RegisterEvent(tooltips, 'getUnlockPrice', tooltips_getUnlockPrice, True)
-
     OverrideMethod(Research, 'invalidateFreeXP', Research_invalidateFreeXP)
 
 BigWorld.callback(0, _RegisterEvents)
