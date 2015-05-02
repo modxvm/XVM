@@ -62,7 +62,13 @@
       "xp":       { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Vehicle name.
       // Название танка.
-      "tankName": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
+      "tankName": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Status text (Crew incomplete, Repairs required)
+      // Статусный текст (Неполный экипаж, Требуется ремонт).
+      "statusText": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Clan lock timer
+      // Таймер блокировки танка
+      "clanLock":   { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
     },
     // Extra cell fields (see playersPanel.xc).
     // Дополнительные поля ячеек (см. playersPanel.xc).

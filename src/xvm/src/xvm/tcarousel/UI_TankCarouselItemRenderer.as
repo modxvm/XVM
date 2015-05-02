@@ -7,6 +7,7 @@ package xvm.tcarousel
     import flash.display.*;
     import flash.geom.*;
     import flash.text.*;
+    import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.clik.constants.*;
 
@@ -27,6 +28,14 @@ package xvm.tcarousel
         {
             super.configUI();
         }
+
+        /* for tests
+        override public function setDataVO(param1:VehicleCarouselVO):void
+        {
+            if (param1 != null && param1.compactDescr == 273)
+                param1.clanLock = (new Date()).valueOf() / 1000 + 100;
+            super.setDataVO(param1);
+        }*/
 
         override protected function draw():void
         {
@@ -61,13 +70,13 @@ package xvm.tcarousel
                     // Fix statusText position
                     if (this.statusText && this.statusText.visible)
                     {
-                        if (this.clanLockUI.visible)
+                        if (this.clanLockUI.visible && cfg.fields.clanLock.dy == 0 && cfg.fields.statusText.dy == 0)
                         {
-                            //this.statusText.y = Math.round(this.clanLockUI.y + this.clanLockUI.textField.height + this.STATUS_MARGIN);
+                            statusText.y = Math.round(clanLockUI.y / scaleY + clanLockUI.textField.height * cfg.fields.clanLock.scale + 5);
                         }
                         else
                         {
-                            this.statusText.y = _height / scaleY - this.statusText.textHeight >> 1;
+                            statusText.y = Math.round((_height / scaleY - statusText.textHeight) / 2 + cfg.fields.statusText.dy);
                         }
                     }
                 }
@@ -116,6 +125,9 @@ package xvm.tcarousel
 
                 setupTankNameField(cfg.fields.tankName, zoom);
 
+                setupStatusTextField(cfg.fields.statusText);
+                setupClanLockField(cfg.fields.clanLock);
+
                 ExtraFields.createExtraFields(extraFields, w, h, cfg.extraFields);
             }
             catch (ex:Error)
@@ -148,6 +160,22 @@ package xvm.tcarousel
             vehicleIcon.tankNameField.y += cfg.dy;
             vehicleIcon.tankNameBg.x = vehicleIcon.tankNameField.x + vehicleIcon.tankNameField.width - vehicleIcon.tankNameBg.width;
             vehicleIcon.tankNameBg.y = vehicleIcon.tankNameField.y + vehicleIcon.tankNameField.height - vehicleIcon.tankNameBg.height;
+        }
+
+        private function setupStatusTextField(cfg:Object):void
+        {
+            statusText.scaleX = statusText.scaleY = cfg.scale;
+            statusText.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            statusText.x += cfg.dx;
+            statusText.y += cfg.dy;
+        }
+
+        private function setupClanLockField(cfg:Object):void
+        {
+            clanLockUI.scaleX = clanLockUI.scaleY = cfg.scale;
+            clanLockUI.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            clanLockUI.x += cfg.dx;
+            clanLockUI.y += cfg.dy;
         }
     }
 }

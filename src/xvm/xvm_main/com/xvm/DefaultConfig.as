@@ -283,11 +283,13 @@ package com.xvm
               favorite: { enabled: true }
             },
             c.carousel.fields = {
-                tankType: { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
-                level:    { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
-                xp:       { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
-                multiXp:  { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
-                tankName: { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 }
+                tankType:   { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                level:      { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                xp:         { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                multiXp:    { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                tankName:   { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                statusText: { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                clanLock:   { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 }
             };
             c.carousel.extraFields = [
                 { x: -1, y: 10, format: "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" }
