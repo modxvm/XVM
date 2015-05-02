@@ -8,7 +8,7 @@
   },
   "carousel": {
     "enabled": true,
-    //"zoom": 0.5,
+    //"zoom": 0.75,
     "rows": 2,
     "padding": { "horizontal": 5, "vertical": 5 },
     "alwaysShowFilters": true,
@@ -23,11 +23,13 @@
       "__stub__": {}
     },
     "fields": {
-      "tankType": { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "level":    { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "multiXp":  { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "xp":       { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "tankName": { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "tankType":   { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "level":      { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "multiXp":    { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "xp":         { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "tankName":   { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "statusText": { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "clanLock":   { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "__stub__": {}
     },
     "extraFields": [
