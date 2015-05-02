@@ -49,23 +49,25 @@ build_xfw()
 
 build()
 {
-  echo -n "Build: $1 "
   f=${1#*/}
   d=${f%/*}
 
   [ "$d" = "$f" ] && d=""
 
   if [ -f "../../~output/sha1/$2/python/$f.sha1" ] && [ "$(cat ../../~output/sha1/$2/python/$f.sha1)" = "$(sha1sum "$1")" ]; then
-    echo "isn't changed"
     return 0
   fi
-  echo "rebuilding"
 
-  "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
+  echo "Building: $1"
+  result="$("$PY_EXEC" -c "import py_compile; py_compile.compile('$1')" 2>&1)"
+  if [ "$result" == "" ]; then
+    mkdir -p "../../~output/sha1/$2/python/$d"
+    sha1sum $1 > "../../~output/sha1/$2/python/$f.sha1"
+  else
+    echo $result
+  fi  
+
   [ ! -f $1c ] && exit
-
-  mkdir -p "../../~output/sha1/$2/python/$d"
-  sha1sum $1 > "../../~output/sha1/$2/python/$f.sha1"
   mkdir -p "../../~output/$2/python/$d"
   cp $1c "../../~output/$2/python/${f}c"
   rm -f $1c
