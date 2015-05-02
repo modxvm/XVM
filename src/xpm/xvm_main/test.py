@@ -9,7 +9,7 @@ def runTest(args):
     cmd = args[0]
 
     if cmd == 'battleResults':
-        _showBattleResults(args[1])
+        _showBattleResults(int(args[1][:-4]))
 
 ###
 

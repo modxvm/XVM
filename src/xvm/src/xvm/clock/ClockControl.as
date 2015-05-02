@@ -1,9 +1,10 @@
 /**
  * XVM - clock control
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.clock
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import com.xvm.utils.*;
@@ -16,7 +17,7 @@ package xvm.clock
 
     public class ClockControl extends LabelControl
     {
-        private var cfg:CClock;
+        private var cfg:CHangarClock;
 
         private var prevWidth:Number = 0;
         private var prevHeight:Number = 0;
@@ -25,7 +26,7 @@ package xvm.clock
 
         private var intervalId:uint = 0;
 
-        public function ClockControl(cfg:CClock)
+        public function ClockControl(cfg:CHangarClock)
         {
             this.cfg = cfg;
             Macros.RegisterClockMacros();
@@ -64,7 +65,7 @@ package xvm.clock
                 createBackgroundImage(cfg.bgImage);
             textField.rotation = cfg.rotation;
             if (cfg.shadow.enabled)
-                textField.filters = [ Utils.createShadowFilter(cfg.shadow) ];
+                textField.filters = [ Utils.createShadowFilterFromConfig(cfg.shadow) ];
 
             invalidate();
 
@@ -158,7 +159,7 @@ package xvm.clock
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
     }

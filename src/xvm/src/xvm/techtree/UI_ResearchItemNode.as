@@ -1,9 +1,10 @@
 /**
  * XVM
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.techtree
 {
+    import com.xfw.*;
     import com.xvm.*;
     import flash.events.*;
     import net.wg.gui.lobby.techtree.data.state.*;

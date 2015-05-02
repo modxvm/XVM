@@ -1,6 +1,6 @@
 /**
  * Widget View Interface
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 
 interface com.xvm.Components.Widgets.Views.IWidgetView

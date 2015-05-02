@@ -3,27 +3,25 @@
 #############################
 # Command
 
-def getBattleStat(proxy, args):
+def getBattleStat(args, proxy=None):
     _stat.enqueue({
         'func': _stat.getBattleStat,
-        'proxy': proxy,
-        'method': RESPOND_BATTLESTATDATA,
-        'args': args})
+        'cmd': XVM_COMMAND.AS_STAT_BATTLE_DATA if proxy is None else AS2RESPOND.BATTLE_STAT_DATA,
+        'args': args,
+        'proxy': proxy})
     _stat.processQueue()
 
-def getBattleResultsStat(proxy, args):
+def getBattleResultsStat(args):
     _stat.enqueue({
         'func': _stat.getBattleResultsStat,
-        'proxy': proxy,
-        'method': RESPOND_BATTLERESULTSDATA,
+        'cmd': XVM_COMMAND.AS_STAT_BATTLE_RESULTS_DATA,
         'args': args})
     _stat.processQueue()
 
-def getUserData(proxy, args):
+def getUserData(args):
     _stat.enqueue({
         'func': _stat.getUserData,
-        'proxy': proxy,
-        'method': RESPOND_USERDATA,
+        'cmd': XVM_COMMAND.AS_STAT_USER_DATA,
         'args': args})
     _stat.processQueue()
 
@@ -54,10 +52,11 @@ from logger import *
 from loadurl import loadUrl
 import token
 import utils
+import vehinfo
+import vehinfo_xte
+import xvm_scale
 
 #############################
-
-_PUBLIC_TOKEN = 'xpm'
 
 class _Stat(object):
 
@@ -124,10 +123,12 @@ class _Stat(object):
                     BigWorld.callback(0, self.processQueue)
 
     def _respond(self):
-        debug("respond: " + self.req['method'])
-        if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
-            strdata = simplejson.dumps(self.resp)
-            self.req['proxy'].movie.invoke((self.req['method'], [strdata]))
+        debug("respond: " + self.req['cmd'])
+        strdata = simplejson.dumps(self.resp)
+        if not 'proxy' in self.req or self.req['proxy'] is None:
+            as_xfw_cmd(self.req['cmd'], strdata)
+        elif self.req['proxy'].component and self.req['proxy'].movie:
+            self.req['proxy'].movie.invoke((self.req['cmd'], [strdata]))
 
     # Threaded
 
@@ -187,6 +188,8 @@ class _Stat(object):
             if vehId not in self.players:
                 pl = _Player(vehId, vData)
                 self._load_clanIcon(pl)
+                # cleanup same player with different vehId (bug?)
+                self.players = {k:v for k,v in self.players.iteritems() if v.playerId != pl.playerId}
                 self.players[vehId] = pl
             self.players[vehId].update(vData)
 
@@ -303,7 +306,7 @@ class _Stat(object):
                         req = "user/%s/%s" % (tok, value)
                     else:
                         req = "nick/%s/%s/%s" % (tok, reg, value)
-                    server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+                    server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
                     (response, duration, errStr) = loadUrl(server, req)
 
                     # log(response)
@@ -318,7 +321,7 @@ class _Stat(object):
                             err('  Bad answer: ' + response)
 
                         if data is not None:
-                            self._fix(data, None if isId else orig_value)
+                            self._fix_user(data, None if isId else orig_value)
                             if 'nm' in data and '_id' in data:
                                 self.cacheUser[reg + "/" + data['nm']] = data
                                 self.cacheUser["ID/" + str(data['_id'])] = data
@@ -352,9 +355,6 @@ class _Stat(object):
             if cacheKey not in self.cacheBattle:
                 all_cached = False
 
-            # if pl.vId in [None, '', 'UNKNOWN']:
-            #    requestList.append(str(pl.playerId))
-            # else:
             requestList.append("%d=%d%s" % (pl.playerId, pl.vId,
                                             '=1' if not replay and pl.vehId == playerVehicleID else ''))
 
@@ -371,11 +371,11 @@ class _Stat(object):
                 cmd = 'rplstat' if isReplay() else 'stat'
                 updateRequest = '%s/%s/%s' % (cmd, tdata['token'].encode('ascii'), ','.join(requestList))
 
-                if XVM_SERVERS is None or len(XVM_SERVERS) <= 0:
+                if XVM.SERVERS is None or len(XVM.SERVERS) <= 0:
                     err('Cannot read data: no suitable server was found.')
                     return
 
-                server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+                server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
                 (response, duration, errStr) = loadUrl(server, updateRequest)
 
                 if not response:
@@ -412,6 +412,8 @@ class _Stat(object):
     def _fix(self, stat, orig_name=None):
         if 'twr' in stat:
             del stat['twr']
+        if 'ip' in stat:
+            del stat['ip']
         if 'v' not in stat:
             stat['v'] = {}
         # temporary workaround
@@ -436,7 +438,7 @@ class _Stat(object):
                         stat['clanInfoId'] = pl.clanInfo.get('cid', None) if pl.clanInfo else None
                         stat['clanInfoRank'] = pl.clanInfo.get('rank', None) if pl.clanInfo else None
                     stat['name'] = pl.name
-                    stat['team'] = TEAM_ALLY if team == pl.team else TEAM_ENEMY
+                    stat['team'] = TEAM.ALLY if team == pl.team else TEAM.ENEMY
                     stat['squadnum'] = pl.squadnum
                     if hasattr(pl, 'alive'):
                         stat['alive'] = pl.alive
@@ -451,16 +453,109 @@ class _Stat(object):
         if orig_name is not None:
             stat['name'] = orig_name
 
+        if 'b' in stat and 'w' in stat and stat['b'] > 0:
+            self._calculateGWR(stat)
+            self._calculateXvmScale(stat)
+            if 'id' in stat['v']:
+                self._calculateVehicleValues(stat, stat['v'])
+                self._calculateXTE(stat['v'])
+
+        self._addContactData(stat)
+
+        # log(simplejson.dumps(stat))
+        return stat
+
+    def _fix_user(self, stat, orig_name=None):
+        if 'v' not in stat:
+            stat['v'] = {}
+        if stat.get('wn6', 0) <= 0:
+            stat['wn6'] = None
+        if stat.get('wn8', 0) <= 0:
+            stat['wn8'] = None
+
+        if orig_name is not None:
+            stat['name'] = orig_name
+
+        if 'b' in stat and 'w' in stat and stat['b'] > 0:
+            self._calculateGWR(stat)
+            self._calculateXvmScale(stat)
+            for vehId, vdata in stat['v'].iteritems():
+                vdata['id'] = int(vehId)
+                self._calculateVehicleValues(stat, vdata)
+                self._calculateXTE(vdata)
+
+        self._addContactData(stat)
+
+        # log(simplejson.dumps(stat))
+        return stat
+
+    # Global Win Rate (GWR)
+    def _calculateGWR(self, stat):
+        stat['winrate'] = float(stat['w']) / float(stat['b']) * 100.0
+
+    # XVM Scale
+    def _calculateXvmScale(self, stat):
+        if 'e' in stat and stat['e'] > 0:
+            stat['xeff'] = xvm_scale.XEFF(stat['e'])
+        if 'wn6' in stat and stat['wn6'] > 0:
+            stat['xwn6'] = xvm_scale.XWN6(stat['wn6'])
+        if 'wn8' in stat and stat['wn8'] > 0:
+            stat['xwn8'] = xvm_scale.XWN8(stat['wn8'])
+        if 'wgr' in stat and stat['wgr'] > 0:
+            stat['xwgr'] = xvm_scale.XWGR(stat['wgr'])
+
+    # calculate Vehicle values
+    def _calculateVehicleValues(self, stat, v):
+        vehId = v['id']
+        vData = vehinfo.getVehicleInfoData(vehId)
+        if vData is None:
+            return
+        #log(vData['key'])
+        #log(vData)
+
+        # tank rating
+        if 'b' not in v or 'w' not in v or v['b'] <= 0:
+            v['winrate'] = stat['winrate']
+        else:
+            Tr = float(v['w']) / float(v['b']) * 100.0
+            if v['b'] > 100:
+                v['winrate'] = Tr
+            else:
+                Or = float(stat['winrate'])
+                Tb = float(v['b']) / 100.0
+                Tl = float(min(vData['level'], 4)) / 4.0
+                v['winrate'] = Or - (Or - Tr) * Tb * Tl
+
+        if 'b' not in v or v['b'] <= 0:
+            return
+
+        vb = float(v['b'])
+        if 'dmg' in v and v['dmg'] > 0:
+            v['db'] = float(v['dmg']) / vb
+            v['dv'] = float(v['dmg']) / vb / vData['hpTop']
+        if 'frg' in v and v['frg'] > 0:
+            v['fb'] = float(v['frg']) / vb
+        if 'spo' in v and v['spo'] > 0:
+            v['sb'] = float(v['spo']) / vb
+
+    # calculate xTE
+    def _calculateXTE(self, v):
+        if 'db' not in v or v['db'] <= 0:
+            return
+        if 'fb' not in v or v['fb'] <= 0:
+            return
+        v['xte'] = vehinfo_xte.calculateXTE(v['id'], float(v['db']), float(v['fb']))
+        #log(v['xte'])
+
+    def _addContactData(self, stat):
         # try to add changed nick and comment
         try:
-            import xvm_comments.python.contacts as contacts
+            import xvm_contacts.python.contacts as contacts
             stat['xvm_contact_data'] = contacts.getXvmContactData(stat['_id'])
         except:
             #err(traceback.format_exc())
             pass
 
-        # log(simplejson.dumps(stat))
-        return stat
 
     def _load_clanIcon(self, pl):
         try:
@@ -508,7 +603,7 @@ class _Player(object):
             self.vId = vData['typeCompDescr']
         elif 'vehicleType' in vData:
             self.vId = vData['vehicleType'].type.compactDescr
-        else:
+        if self.vId is None:
             self.vId = 0
         self.team = vData['team']
         self.squadnum = 0

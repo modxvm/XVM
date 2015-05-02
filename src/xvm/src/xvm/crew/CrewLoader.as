@@ -1,24 +1,24 @@
 ﻿/**
  * @author LEMAXHO
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  * @author Pavel Máca
  */
 package xvm.crew
 {
-    import com.xvm.*;
-    import com.xvm.events.*;
+    import com.xfw.*;
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.crew.*;
+    import scaleform.clik.controls.*;
 
     public class CrewLoader extends Sprite
     {
-        private static const PUT_OWN_CREW:String = 'xvm_crew.as_PutOwnCrew';
-        private static const PUT_BEST_CREW:String = 'xvm_crew.as_PutBestCrew';
-        private static const PUT_CLASS_CREW:String = 'xvm_crew.as_PutClassCrew';
+        private static const COMMAND_XVM_CREW_PUT_OWN_CREW:String = 'xvm_crew.as_put_own_crew';
+        private static const COMMAND_XVM_CREW_PUT_BEST_CREW:String = 'xvm_crew.as_put_best_crew';
+        private static const COMMAND_XVM_CREW_PUT_CLASS_CREW:String = 'xvm_crew.as_put_class_crew';
 
         private static var _instance:CrewLoader = null;
 
@@ -42,7 +42,9 @@ package xvm.crew
         function CrewLoader():void
         {
             page = null;
-            Xvm.addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
+            Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_OWN_CREW, PutOwnCrew);
+            Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_BEST_CREW, PutBestCrew);
+            Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_CLASS_CREW, PutClassCrew);
         }
 
         private function handleMouseRelease(e:MouseEvent):void
@@ -60,28 +62,19 @@ package xvm.crew
             }
         }
 
-        private function handleXpmCommand(e:ObjectEvent):void
+        private function PutOwnCrew():void
         {
-            //Logger.add("handleXpmCommand: " + e.result.cmd);
-            try
-            {
-                switch (e.result.cmd)
-                {
-                    case PUT_OWN_CREW:
-                        GetCrew(CheckOwn);
-                        break;
-                    case PUT_BEST_CREW:
-                        GetCrew(CheckBest);
-                        break;
-                    case PUT_CLASS_CREW:
-                        GetCrew(CheckClass);
-                        break;
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
+            GetCrew(CheckOwn);
+        }
+
+        private function PutBestCrew():void
+        {
+            GetCrew(CheckBest);
+        }
+
+        private function PutClassCrew():void
+        {
+            GetCrew(CheckClass);
         }
 
         private function GetCrew(checkFunc:Function):void
@@ -91,7 +84,7 @@ package xvm.crew
                 // tankmanId: { tankman:Object, slot:Number }
                 var selectedTankmans:Dictionary = new Dictionary();
 
-                for each (var renderer:RecruitRendererVO in page.crew.list.dataProvider)
+                for each (var renderer:RecruitRendererVO in (page.crew.list as CoreList).dataProvider)
                 {
                     if (renderer.inTank == true)
                         continue;
@@ -124,7 +117,7 @@ package xvm.crew
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

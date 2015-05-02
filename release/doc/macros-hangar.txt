@@ -49,6 +49,8 @@ Legend:
 │ {{v.wn8expd}}              │ X │ . │ WN8 expected tank damage
 │ {{v.wn8effd}}              │ X │ . │ WN8 effective tank damage (avgdmg / expected_dmg)
 │ {{v.c_wn8effd}}            │ X │ . │ dynamic color for this macro
+│ {{v.xte}}                  │ X │ . │ per-vehicle efficiency rating
+│ {{v.c_xte}}                │ X │ . │ dynamic color for this macro (xTE): http://www.koreanrandom.com/forum/topic/1643-
 │ {{v.earnedXP}}             │ X │ . │ earned XP
 │ {{v.xpToElite}}            │ X │ . │ XP required for elite vehicle
 │ {{v.xpToEliteLeft}}        │ X │ . │ XP left to gain for elite vehicle
@@ -56,8 +58,6 @@ Legend:
 │ {{v.marksOnGun}}           │ X │ . │ marks on gun
 │ {{v.damageRating}}         │ X │ . │ damage rating in percents for marks on gun
 │ {{v.c_damageRating}}       │ X │ . │ dynamic color for this macro
-│ {{v.teff}}, {{v.e}}        │ . │ . │ player's per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
-│ {{v.c_e}}                  │ . │ . │ dynamic color for this macro
 │ {{v.equipment1}}           │ . │ . │ small icon of equipment in 1st slot
 │ {{v.equipment2}}           │ . │ . │ small icon of equipment in 2nd slot
 │ {{v.equipment3}}           │ . │ . │ small icon of equipment in 3rd slot

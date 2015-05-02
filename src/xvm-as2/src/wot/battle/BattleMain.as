@@ -1,6 +1,6 @@
 ﻿/**
  * XVM
- * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.greensock.*;
 import com.greensock.plugins.*;
@@ -16,8 +16,6 @@ class wot.battle.BattleMain
 {
     static var instance: BattleMain;
     var sixthSenseIndicator:SixthSenseIndicator;
-
-    private static var soundManager = new SoundManager();
 
     static function main()
     {
@@ -45,7 +43,7 @@ class wot.battle.BattleMain
         GameDelegate.addCallBack("battle.damagePanel.updateSpeed", instance, "updateSpeed");
 
         ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
-        ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATE, instance, instance.onBattleStateChanged);
+        ExternalInterface.addCallback(Cmd.RESPOND_BATTLE_STATE, instance, instance.onBattleStateChanged);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
 
         // TODO: dirty hack

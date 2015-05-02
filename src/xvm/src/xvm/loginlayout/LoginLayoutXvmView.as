@@ -4,7 +4,7 @@
  */
 package xvm.loginlayout
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
     import net.wg.gui.events.*;
     import net.wg.gui.login.impl.*;

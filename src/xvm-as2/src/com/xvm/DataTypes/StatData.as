@@ -44,7 +44,8 @@ class com.xvm.DataTypes.StatData
         public var xvm_contact_data:Object = null;
 
         // calculated
-        public var r:Number = NaN;             // global win rate (int)
+        public var winrate:Number = NaN;       // global win rate (int)
+        public var xte:Number = NaN;           // xTE (int)
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
         public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)

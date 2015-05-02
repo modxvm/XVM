@@ -1,21 +1,35 @@
 /**
  * XVM
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.limits
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
+    import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.lobby.*;
+    import net.wg.gui.lobby.header.events.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
-    import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    import xvm.limits.controls.*;
 
     public class LimitsXvmView extends XvmViewBase
     {
+        private static const SETTINGS_GOLD_LOCK_STATUS:String = "xvm_limits/gold_lock_status";
+        private static const SETTINGS_FREEXP_LOCK_STATUS:String = "xvm_limits/freexp_lock_status";
+
+        private static const XVM_LIMITS_COMMAND_SET_GOLD_LOCK_STATUS:String = "xvm_limits.set_gold_lock_status";
+        private static const XVM_LIMITS_COMMAND_SET_FREEXP_LOCK_STATUS:String = "xvm_limits.set_freexp_lock_status";
+
+        private static const L10N_GOLD_LOCKED_TOOLTIP:String = "lobby/header/gold_locked_tooltip";
+        private static const L10N_GOLD_UNLOCKED_TOOLTIP:String = "lobby/header/gold_unlocked_tooltip";
+        private static const L10N_FREEXP_LOCKED_TOOLTIP:String = "lobby/header/freexp_locked_tooltip";
+        private static const L10N_FREEXP_UNLOCKED_TOOLTIP:String = "lobby/header/freexp_unlocked_tooltip";
+
         public function LimitsXvmView(view:IView)
         {
             super(view);
@@ -28,13 +42,11 @@ package xvm.limits
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            //Logger.add("onAfterPopulate: " + view.as_alias);
             init();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            //Logger.add("onBeforeDispose: " + view.as_alias);
             dispose();
         }
 
@@ -45,31 +57,26 @@ package xvm.limits
 
         private function init():void
         {
-            var goldControl:HeaderButton = page.header.xvm_headerButtonsHelper.xvm_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
-            var freeXpControl:HeaderButton = page.header.xvm_headerButtonsHelper.xvm_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
-
-            if (goldControl == null || freeXpControl == null)
-            {
-                var self:LimitsXvmView = this;
-                setTimeout(function():void { self.init(); }, 1);
+            if (!Config.config.hangar.enableGoldLocker && !Config.config.hangar.enableFreeXpLocker)
                 return;
-            }
 
             if (Config.config.hangar.enableGoldLocker)
             {
-                var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
-                goldLocker = goldContent.addChild(new LockerControl()) as LockerControl;
-                goldLocker.x = goldContent.moneyIconText.x;
-                goldLocker.y = goldContent.moneyIconText.y + 20;
+                goldLocker = page.header.addChild(new LockerControl()) as LockerControl;
+                goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched);
+                goldLocker.toolTip = Locale.get(L10N_GOLD_UNLOCKED_TOOLTIP);
+                goldLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, false);
             }
 
             if (Config.config.hangar.enableFreeXpLocker)
             {
-                var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
-                freeXpLocker = freeXpContent.addChild(new LockerControl()) as LockerControl;
-                freeXpLocker.x = freeXpContent.moneyIconText.x;
-                freeXpLocker.y = freeXpContent.moneyIconText.y + 20;
+                freeXpLocker = page.header.addChild(new LockerControl()) as LockerControl;
+                freeXpLocker.addEventListener(Event.SELECT, onFreeXpLockerSwitched);
+                freeXpLocker.toolTip = Locale.get(L10N_FREEXP_UNLOCKED_TOOLTIP);
+                freeXpLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, false);
             }
+
+            page.header.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION, this.onHeaderButtonsReposition);
         }
 
         private function dispose():void
@@ -85,6 +92,44 @@ package xvm.limits
                 freeXpLocker = null;
             }
         }
-    }
 
+        private function onHeaderButtonsReposition(e:HeaderEvents):void
+        {
+            var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
+            if (goldControl)
+            {
+                var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
+                if (goldContent)
+                {
+                    goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
+                    goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 20;
+                }
+            }
+
+            var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
+            if (freeXpControl)
+            {
+                var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
+                if (freeXpContent)
+                {
+                    freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
+                    freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 20;
+                }
+            }
+        }
+
+        private function onGoldLockerSwitched(e:Event):void
+        {
+            Xfw.cmd(XVM_LIMITS_COMMAND_SET_GOLD_LOCK_STATUS, goldLocker.selected);
+            Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, goldLocker.selected);
+            goldLocker.toolTip = Locale.get(goldLocker.selected ? L10N_GOLD_LOCKED_TOOLTIP : L10N_GOLD_UNLOCKED_TOOLTIP);
+        }
+
+        private function onFreeXpLockerSwitched(e:Event):void
+        {
+            Xfw.cmd(XVM_LIMITS_COMMAND_SET_FREEXP_LOCK_STATUS, freeXpLocker.selected);
+            Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, freeXpLocker.selected);
+            freeXpLocker.toolTip = Locale.get(freeXpLocker.selected ? L10N_FREEXP_LOCKED_TOOLTIP : L10N_FREEXP_UNLOCKED_TOOLTIP);
+        }
+    }
 }

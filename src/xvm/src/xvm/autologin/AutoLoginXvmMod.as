@@ -1,10 +1,9 @@
 /**
  * AutoLogin XVM mod
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.autologin
 {
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
 
     public class AutoLoginXvmMod extends XvmModBase

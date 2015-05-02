@@ -183,16 +183,3 @@
   For example:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
-
-  Efficiency ranges for {{teff}}, {{e}}.
-    TEFF       E
-    0..299     1 - very bad player
-    300..499   2 - bad player
-    500..699   3 - poor
-    700..899   4 - below average
-    900..1099  5 - average
-    1100..1299 6 - above average
-    1300..1549 7 - good
-    1550..1799 8 - great
-    1800..1999 9 - master
-    2000+      E - Expert (top-100 players on this vehicle)

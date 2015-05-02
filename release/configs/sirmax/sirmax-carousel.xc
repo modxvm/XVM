@@ -8,7 +8,7 @@
   },
   "carousel": {
     "enabled": true,
-    "zoom": 1,
+    //"zoom": 0.75,
     "rows": 2,
     "padding": { "horizontal": 5, "vertical": 5 },
     "alwaysShowFilters": true,
@@ -23,11 +23,13 @@
       "__stub__": {}
     },
     "fields": {
-      "tankType": { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "level":    { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "multiXp":  { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "xp":       { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "tankName": { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "tankType":   { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "level":      { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "multiXp":    { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "xp":         { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "tankName":   { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "statusText": { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "clanLock":   { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "__stub__": {}
     },
     "extraFields": [
@@ -54,6 +56,18 @@
         { "x": 0, "y": 15, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/wins40x32.png" },
         { "x": 21, "y": 15,
           "format": "<b><font size='12' color='{{v.c_winrate}}'>{{v.winrate%2d~%}}</font></b>",
+          "shadow": ${ "def.textFieldShadow" }
+        },
+
+        { "x": 0, "y": 33, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/avgDamage40x32.png" },
+        { "x": 21, "y": 35,
+          "format": "<b><font size='12' color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font></b>",
+          "shadow": ${ "def.textFieldShadow" }
+        },
+
+        { "x": 0, "y": 51, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/techRatio40x32.png" },
+        { "x": 21, "y": 53,
+          "format": "<b><font face='mono' size='12' color='{{v.c_xte}}'>{{v.xte|--}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }
         },
 

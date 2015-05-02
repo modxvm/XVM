@@ -1,5 +1,4 @@
 import com.xvm.*;
-import com.xvm.DataTypes.BattleStateData;
 import flash.geom.*;
 import wot.Minimap.*;
 import wot.Minimap.dataTypes.*;
@@ -93,7 +92,11 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         for (var i:String in holderMc)
         {
             if (typeof(holderMc[i]) == "movieclip")
+            {
+                var labelMc:MovieClip = holderMc[i];
+                Macros.RegisterMinimapMacros(labelMc[PLAYER_INFO_FIELD_NAME], getVehicleClassSymbol(labelMc[VEHICLE_CLASS_FIELD_NAME]));
                 invalidateList[i] = INVALIDATE_TYPE_FORCE;
+            }
         }
         invalidate();
     }
@@ -103,7 +106,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         Cmd.profMethodStart("Minimap.Labels.draw()");
 
-        //Logger.add("LabelsContainer.updateLabelsStyle()");
         for (var playerIdStr:String in invalidateList)
         {
             var playerId:Number = Number(playerIdStr);
@@ -112,12 +114,11 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             var previousStatus:Number = labelMc[STATUS_FIELD_NAME];
             var actualStatus:Number = getPresenceStatus(playerId);
 
-            //Logger.add(playerId + " " + force + " " + previousStatus + " " + actualStatus);
+            //Logger.add(IconsProxy.entry(playerId).wrapper.entryName + ": " + playerId + " " + force + " " + previousStatus + " " + actualStatus);
 
             if (previousStatus != actualStatus || force)
             {
                 labelMc[STATUS_FIELD_NAME] = actualStatus;
-                LabelViewBuilder.removeTextField(labelMc);
                 LabelViewBuilder.createTextField(labelMc);
                 updateLabelDepth(labelMc);
             }
@@ -133,7 +134,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function _getLabel(playerId:Number):MovieClip
     {
-
         if (holderMc[playerId] == null)
             createLabel(playerId);
         return holderMc[playerId];
@@ -169,11 +169,9 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
          * It makes unpleasant label positioning at map center.
          * Workaround.
          */
-        var offmapPoint:Point = new Point(OFFMAP_COORDINATE, OFFMAP_COORDINATE);
-        labelMc._x = offmapPoint.x;
-        labelMc._y = offmapPoint.y;
+        labelMc._x = OFFMAP_COORDINATE;
+        labelMc._y = OFFMAP_COORDINATE;
 
-        LabelViewBuilder.removeTextField(labelMc);
         LabelViewBuilder.createTextField(labelMc);
     }
 

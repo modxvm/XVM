@@ -72,27 +72,23 @@ def _makeNetworkServicesSettings(tdata):
         'comments': svc.get('comments', True) if active else False,
         'chance': svc.get('chance', False) if active else False,
         'chanceLive': svc.get('chanceLive', False) if active else False,
-        'topClansCount': svc.get('topClansCount', 100),
+        'chanceResults': svc.get('chanceResults', False) if active else False,
         'scale': svc.get('scale', 'xvm'),
         'rating': svc.get('rating', 'wgr'),
+        'topClansCount': svc.get('topClansCount', 50),
+        'flag': svc.get('flag', None),
     }
 
 networkServicesSettings = _makeNetworkServicesSettings(None)
 
 def _getXvmActiveTokenData():
-    playerId = getCurrentPlayerId()
+    #debug('_getXvmActiveTokenData')
+    # use last player id for replays
+    playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
     if playerId is None:
         return None
 
     tdata = userprefs.get('tokens.{0}'.format(playerId))
-    if tdata is None:
-        # fallback to the last player id if replay is running
-        if isReplay():
-            playerId = userprefs.get('tokens.lastPlayerId')
-            if playerId is None:
-                return None
-            tdata = userprefs.get('tokens.{0}'.format(playerId))
-
     if tdata is not None and 'token' not in tdata:
         tdata = None
 
@@ -116,7 +112,7 @@ def _checkVersion():
 
     try:
         req = "checkVersion/%d" % playerId
-        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+        server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
         # response =
@@ -151,11 +147,14 @@ def _checkVersion():
     except Exception, ex:
         err(traceback.format_exc())
 
+
 def _initializeXvmToken():
+    #debug('_initializeXvmToken')
     global _tdataPrev
     clearToken()
 
-    playerId = getCurrentPlayerId()
+    # use last player id for replays
+    playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
     if playerId is None:
         return
 
@@ -164,32 +163,33 @@ def _initializeXvmToken():
     if tdata is None:
         tdata = _tdataPrev
 
-    type = SystemMessages.SM_TYPE.Warning
-    msg = _getXvmMessageHeader()
-    if tdata is None:
-        msg += '{{l10n:token/services_unavailable}}\n\n%s' % utils.hide_guid(errStr)
-    elif tdata['status'] == 'badToken' or tdata['status'] == 'inactive':
-        msg += '{{l10n:token/services_inactive}}'
-    elif tdata['status'] == 'blocked':
-        msg += '{{l10n:token/blocked}}'
-    elif tdata['status'] == 'active':
-        type = SystemMessages.SM_TYPE.GameGreeting
-        msg += '{{l10n:token/active}}\n'
-        s = time.time()
-        e = tdata['expires_at'] / 1000
-        days_left = int((e - s) / 86400)
-        hours_left = int((e - s) / 3600) % 24
-        mins_left = int((e - s) / 60) % 60
-        token_name = 'time_left' if days_left >= 3 else 'time_left_warn'
-        msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
-        msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
-    else:
-        type = SystemMessages.SM_TYPE.Error
-        msg += '{{l10n:token/unknown_status}}\n%s' % utils.hide_guid(simplejson.dumps(tdata))
-    msg += '</textformat>'
+    if not isReplay():
+        type = SystemMessages.SM_TYPE.Warning
+        msg = _getXvmMessageHeader()
+        if tdata is None:
+            msg += '{{l10n:token/services_unavailable}}\n\n%s' % utils.hide_guid(errStr)
+        elif tdata['status'] == 'badToken' or tdata['status'] == 'inactive':
+            msg += '{{l10n:token/services_inactive}}'
+        elif tdata['status'] == 'blocked':
+            msg += '{{l10n:token/blocked}}'
+        elif tdata['status'] == 'active':
+            type = SystemMessages.SM_TYPE.GameGreeting
+            msg += '{{l10n:token/active}}\n'
+            s = time.time()
+            e = tdata['expires_at'] / 1000
+            days_left = int((e - s) / 86400)
+            hours_left = int((e - s) / 3600) % 24
+            mins_left = int((e - s) / 60) % 60
+            token_name = 'time_left' if days_left >= 3 else 'time_left_warn'
+            msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
+            msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
+        else:
+            type = SystemMessages.SM_TYPE.Error
+            msg += '{{l10n:token/unknown_status}}\n%s' % utils.hide_guid(simplejson.dumps(tdata))
+        msg += '</textformat>'
 
-    if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
-        SystemMessages.pushMessage(msg, type)
+        if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
+            SystemMessages.pushMessage(msg, type)
 
     if tdata is not None:
         _tdataPrev = tdata
@@ -208,7 +208,6 @@ def _initializeXvmToken():
     global _token
     _token = '' if tdata is None else tdata.get('token', '').encode('ascii')
 
-    return
 
 def _checkToken(playerId, token):
     data = None
@@ -217,7 +216,7 @@ def _checkToken(playerId, token):
         req = "checkToken/%d" % playerId
         if token is not None:
             req += "/%s" % token.encode('ascii')
-        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
+        server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
         # response= """{"status":"inactive"}"""
@@ -278,10 +277,9 @@ def _getVersionText(curVer):
 def _processClansInfo(data):
     clans = data.get('persistClans', {})
     clans.update(data.get('topClans', {}))
+
     # DEBUG
-    # clans['JKHU'] = {'rank':100,'cid':1,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    # clans['MWJL'] = {'rank':101,'cid':2,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    # clans['GPTX'] = {'rank':0,'cid':3,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
-    # clans['CJBZ'] = {'rank':1,'cid':4,'emblem':'http://stat.modxvm.com/emblems/top/{size}/61318.png'}
+    #log(clans)
+    # clans['FOREX'] = {"rank":"0","cid":"38503","emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
     # /DEBUG
     return clans

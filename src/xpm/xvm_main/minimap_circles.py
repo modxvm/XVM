@@ -1,7 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 """
-@author Maxim Schedriviy "m.schedriviy(at)gmail.com"
 @author Omegaice
+@author Maxim Schedriviy <max(at)modxvm.com>
 """
 
 import math
@@ -48,79 +48,79 @@ class _MinimapCircles(object):
             return
 
         self.view_distance_vehicle = self.item.descriptor.turret['circularVisionRadius']
-        debug('  view_distance_vehicle: %.0f' % self.view_distance_vehicle)
+        #debug('  view_distance_vehicle: %.0f' % self.view_distance_vehicle)
 
         self._updateCrew()
-
+        crewRoles_arr = self.item.descriptor.type.crewRoles # roles per position in vehicle
+        
         # Search skills and Brothers In Arms
         self.brothers_in_arms = True
         self.camouflage = []
-        radioman_present = next((True for item in self.crew if 'radioman' in item['name']), False)
         loaders_count = 0
-
+        male_count = 0
+        female_count = 0
+        
         for crew_item in self.crew:
             name = crew_item['name']
             data = crew_item['data']
             skills = data['skill']
+            position = data['position'] # position in vehicle
 
-            if name == 'commander':
+            if 'commander' in crewRoles_arr[position]:
                 self.base_commander_skill = data['level']
+                if 'commander_eagleEye' in skills and self.commander_eagleEye < skills['commander_eagleEye']:
+                    self.commander_eagleEye = skills['commander_eagleEye']
 
-            if 'radioman' in name:
+            if 'radioman' in crewRoles_arr[position]:
                 skill = data['level']
                 if self.base_radioman_skill < skill:
                     self.base_radioman_skill = skill
-
-            if 'loader' in name:
+                if 'radioman_finder' in skills and self.radioman_finder < skills['radioman_finder']:
+                    self.radioman_finder = skills['radioman_finder']
+                if 'radioman_inventor' in skills and self.radioman_inventor < skills['radioman_inventor']:
+                    self.radioman_inventor = skills['radioman_inventor']
+                    
+            if 'loader' in crewRoles_arr[position]:
                 self.base_loaders_skill += data['level']
                 loaders_count += 1
 
-            if 'commander_eagleEye' in skills:
-                skill = skills['commander_eagleEye']
-                if self.commander_eagleEye < skill:
-                    self.commander_eagleEye = skill
-
-            if 'radioman_finder' in skills and (not radioman_present or name != 'commander'):
-                skill = skills['radioman_finder']
-                if self.radioman_finder < skill:
-                    self.radioman_finder = skill
-
-            if 'radioman_inventor' in skills and (not radioman_present or name != 'commander'):
-                skill = skills['radioman_inventor']
-                if self.radioman_inventor < skill:
-                    self.radioman_inventor = skill
-
             self.camouflage.append({'name': name, 'skill': skills.get('camouflage', 0)})
 
+            if data['isFemale']:
+                female_count += 1
+            else:
+                male_count += 1
             if 'brotherhood' not in skills or skills['brotherhood'] != 100:
                 self.brothers_in_arms = False
 
-        if loaders_count > 0:
+        if loaders_count > 1:
             self.base_loaders_skill /= loaders_count
+        if male_count > 0 and female_count > 0:
+            self.brothers_in_arms = False
 
-        debug('  base_commander_skill: %.0f' % self.base_commander_skill)
-        debug('  base_radioman_skill: %.0f' % self.base_radioman_skill)
-        debug('  base_loaders_skill: %.0f' % self.base_loaders_skill)
-        debug('  commander_eagleEye: %d' % self.commander_eagleEye)
-        debug('  radioman_finder: %d' % self.radioman_finder)
-        debug('  camouflage: %s' % str(self.camouflage))
-        debug('  brothers_in_arms: %s' % str(self.brothers_in_arms))
+        #debug('  base_commander_skill: %.0f' % self.base_commander_skill)
+        #debug('  base_radioman_skill: %.0f' % self.base_radioman_skill)
+        #debug('  base_loaders_skill: %.0f' % self.base_loaders_skill)
+        #debug('  commander_eagleEye: %d' % self.commander_eagleEye)
+        #debug('  radioman_finder: %d' % self.radioman_finder)
+        #debug('  camouflage: %s' % str(self.camouflage))
+        #debug('  brothers_in_arms: %s' % str(self.brothers_in_arms))
 
         # Check for Stereoscope
         self.stereoscope = self._isOptionalEquipped('stereoscope')
-        debug('  stereoscope: %s' % str(self.stereoscope))
+        #debug('  stereoscope: %s' % str(self.stereoscope))
 
         # Check for Ventilation
         self.ventilation = self._isOptionalEquipped('improvedVentilation')
-        debug('  ventilation: %s' % str(self.ventilation))
+        #debug('  ventilation: %s' % str(self.ventilation))
 
         # Check for Coated Optics
         self.coated_optics = self._isOptionalEquipped('coatedOptics')
-        debug('  coated_optics: %s' % str(self.coated_optics))
+        #debug('  coated_optics: %s' % str(self.coated_optics))
 
         # Check for rammer
         self.rammer = self._isOptionalEquipped('Rammer')
-        debug('  rammer: %s' % str(self.rammer))
+        #debug('  rammer: %s' % str(self.rammer))
 
         # Check for Consumable
         self.consumable = self._isConsumableEquipped([
@@ -131,7 +131,7 @@ class _MinimapCircles(object):
             'ration_china',
             'ration_japan',
             'ration_uk'])
-        debug('  consumable: %s' % str(self.consumable))
+        #debug('  consumable: %s' % str(self.consumable))
 
         self.updateConfig(self.item.descriptor)
 
@@ -202,6 +202,8 @@ class _MinimapCircles(object):
                 elif crewman[1].invID == tankman.inventoryId:
                     (factor, addition) = tankman.descriptor.efficiencyOnVehicle(self.item.descriptor)
                     crew_member = {
+                        'position': crewman[0],
+                        'isFemale': tankman.descriptor.isFemale,
                         'level': tankman.roleLevel * factor,
                         'skill': {}
                     }

@@ -1,14 +1,14 @@
 /**
  * XVM - hangar
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.tcarousel
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.misc.*;
-    import com.xvm.utils.*;
     import com.xvm.types.dossier.*;
+    //import com.xfw.utils.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -40,7 +40,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -65,7 +65,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -74,7 +74,7 @@ package xvm.tcarousel
             if (Config.config.hangar.carousel.enabled != true)
                 return;
             Macros.RegisterVehiclesMacros();
-            Dossier.loadAccountDossier(this, onAccountDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+            Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
         }
 
         private function remove():void
@@ -88,7 +88,7 @@ package xvm.tcarousel
             if (dossier != null)
             {
                 for (var vehId:String in dossier.vehicles)
-                    Dossier.loadVehicleDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, parseInt(vehId));
+                    Dossier.requestVehicleDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, parseInt(vehId));
             }
             page.carousel.invalidateData();
         }

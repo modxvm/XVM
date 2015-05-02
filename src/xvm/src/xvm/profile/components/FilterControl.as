@@ -1,5 +1,10 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 package xvm.profile.components
 {
+    import com.xfw.*;
     import com.xvm.*;
     import flash.display.*;
     import flash.events.*;
@@ -11,6 +16,8 @@ package xvm.profile.components
     // [           ] [nation|v] [class|v] [level|v] [master|v] [prefs|v] [SAVE]
     public class FilterControl extends Sprite
     {
+        #TODO: use or remove
+
         private var filterTextInput:TextInput;
         //private var nationFilter:DropDown;
         //private var classFilter:DropDown;
@@ -98,7 +105,7 @@ package xvm.profile.components
             l.y = y;
             l.autoSize = TextFieldAutoSize.LEFT;
             l.height = 17;
-            l.defaultTextFormat = new TextFormat("$FieldFont", 12, Defines.UICOLOR_LABEL);
+            l.defaultTextFormat = new TextFormat("$FieldFont", 12, XfwConst.UICOLOR_LABEL);
             l.text = Locale.get(label);
             return l;
         }

@@ -2,7 +2,7 @@
  * @author ilitvinov87@gmail.com
  * @author Pavel Máca
  * @author Mr.A
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import net.wargaming.managers.Localization;
 
@@ -25,7 +25,7 @@ class wot.Minimap.model.mapSize.MapInfoData
 
     private static var _systemMapnameList:Object =
     {
-        $00_tank_tutorial:      { size: 100 }, // (Tutorial)
+        $00_tank_tutorial:      { size: 50 }, // (Tutorial)
         $01_karelia:            { size: 100 }, // Karelia
         $02_malinovka:          { size: 100 }, // Malinovka
         $03_campania:           { size: 60 },  // Province
@@ -75,6 +75,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         $96_prohorovka_defense: { size: 100 }, // Fiery Salient
         $99_himmelball:         { size: 70 },  // Himmelsdorf Football
         $100_thepit:            { size: 60 },  // The Pit
+        $101_dday:              { size: 100 }, // Overlord
         $103_ruinberg_winter:   { size: 80 },  // Winter Ruinberg
         $109_battlecity_ny:     { size: 50 },  // Battle City
         __end__: null

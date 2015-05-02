@@ -103,17 +103,4 @@
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
 
-  Rozsahy pro efektivitu {{teff}}, {{e}}.
-    TEFF       E
-    0..299     1 - velmi špatný
-    300..499   2 - špatný
-    500..699   3 - slabý
-    700..899   4 - podprůměrný
-    900..1099  5 - průměrný
-    1100..1299 6 - nadprůměrný
-    1300..1549 7 - dobrý
-    1550..1799 8 - výborný
-    1800..1999 9 - mistr
-    2000+      E - Expert (top-100 hráčů na tomto vozidle)
-
 Přeložil: Shortik (vapokrleo@seznam.cz) a Assassik

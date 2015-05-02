@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <project version="2">
   <!-- Output SWF options -->
   <output>
@@ -24,6 +24,7 @@
     <option allowSourcePathOverlap="False" />
     <option benchmark="False" />
     <option es="False" />
+    <option inline="False" />
     <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
@@ -57,6 +58,7 @@
   <externalLibraryPaths>
     <element path="..\xfw\~output\swc\wg.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
+    <element path="..\..\~output\swc\xvm_main.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
@@ -76,10 +78,8 @@
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <hidden path="swf" />
-    <hidden path="wg" />
-    <hidden path="build-xfw.sh" />
-    <hidden path="build-applicationswf.sh" />
+    <hidden path="obj" />
+    <hidden path="xvm_main" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

@@ -1,8 +1,8 @@
 package xvm.hangar.components.BattleResults
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.veh.*;
-    import com.xvm.utils.*;
     import flash.events.*;
     import flash.text.*;
     import flash.utils.*;
@@ -90,8 +90,8 @@ package xvm.hangar.components.BattleResults
         private const XP_IMG_TXT:String = " <IMG SRC='img://gui/maps/icons/library/XpIcon-1.png' width='16' height='16' vspace='-2'/>";
         private function showTotalExperience(data:Object):void
         {
-            var origXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col1"].split('<')[0]);
-            var premXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);
+            var origXP:int = XfwUtils.forceInt(data.xpData[data.xpData.length - 1]["col1"].split('<')[0]);
+            var premXP:int = XfwUtils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);
             view.detailsMc.xpLbl.htmlText = App.utils.locale.integer(origXP) + XP_IMG_TXT;
             view.detailsMc.premXpLbl.htmlText = App.utils.locale.integer(premXP) + XP_IMG_TXT;
        }
@@ -169,7 +169,7 @@ package xvm.hangar.components.BattleResults
             newTf.height = view.detailsMc.xpTitleLbl.height;
             newTf.alpha = 1;
 
-            newTf.styleSheet = Utils.createTextStyleSheet(CSS_FIELD_CLASS, view.detailsMc.xpTitleLbl.defaultTextFormat);
+            newTf.styleSheet = WGUtils.createTextStyleSheet(CSS_FIELD_CLASS, view.detailsMc.xpTitleLbl.defaultTextFormat);
             newTf.selectable = false;
 
             var y_space:Number = view.detailsMc.xpTitleLbl.height;
@@ -246,7 +246,7 @@ package xvm.hangar.components.BattleResults
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

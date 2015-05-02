@@ -1,9 +1,8 @@
 package xvm.tcarousel
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.controls.*;
-    import com.xvm.io.*;
-    import com.xvm.misc.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.veh.*;
@@ -100,11 +99,11 @@ package xvm.tcarousel
 
                 //return; // temporary disabled
                 createFilters();
-                Cmd.loadSettings(this, onFiltersLoaded, SETTINGS_CAROUSEL_FILTERS_KEY);
+                onFiltersLoaded(JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null)));
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -124,7 +123,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -140,7 +139,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -161,7 +160,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -175,7 +174,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -224,7 +223,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -241,7 +240,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return _visibleSlots;
         }
@@ -273,7 +272,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -285,11 +284,11 @@ package xvm.tcarousel
             {
                 if (_renderers == null)
                     return;
-                this.xvm_scopeWidth = Math.ceil(Math.max(_totalRenderers, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
+                this.xfw_scopeWidth = Math.ceil(Math.max(_totalRenderers, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -305,7 +304,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -328,7 +327,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return _currentFirstRendererOnAnim;
         }
@@ -340,18 +339,18 @@ package xvm.tcarousel
             try
             {
                 super.arrowSlide();
-                if (this.xvm_courseFactor == -1)
+                if (this.xfw_courseFactor == -1)
                 {
                     if (this._currentFirstRendererOnAnim >= Math.ceil((_totalRenderers - _visibleSlots) / cfg.rows))
                     {
                         this.currentFirstRenderer = _totalRenderers - this._visibleSlots;
-                        this.xvm_courseFactor = 0;
+                        this.xfw_courseFactor = 0;
                     }
                 }
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -367,7 +366,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -403,7 +402,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -435,7 +434,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
             return false;
         }
@@ -579,7 +578,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -614,10 +613,19 @@ package xvm.tcarousel
                 var maxRows:int = Math.floor((height - 4) / 34);
                 for (var i:int = 0; i < visibleFilters.length; ++i)
                 {
+                    var offsetX:Number = 0;
+                    var offsetY:Number = 0;
+                    if (visibleFilters[i] == vehicleFilters.checkBoxToMain)
+                    {
+                        offsetX += 3;
+                        offsetY += 3;
+                    }
+
                     var col:int = Math.floor(i / maxRows);
                     var row:int = i % maxRows;
-                    visibleFilters[i].x = col * 60;
-                    visibleFilters[i].y = row * 34 + 2;
+
+                    visibleFilters[i].x = col * 60 + offsetX;
+                    visibleFilters[i].y = row * 34 + 2 + offsetY;
                     w = (col + 1) * 60 - 4;
                 }
 
@@ -625,17 +633,16 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
-        private function onFiltersLoaded(filter_str:String):void
+        private function onFiltersLoaded(filter:Object):void
         {
             //Logger.add("UI_TankCarousel.onFiltersLoaded()");
 
             try
             {
-                var filter:Object = JSONx.parse(filter_str);
                 if (filter != null)
                 {
                     levelFilter.selectedItems = filter.levels;
@@ -645,7 +652,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -655,13 +662,13 @@ package xvm.tcarousel
 
             try
             {
-                Cmd.saveSettings(SETTINGS_CAROUSEL_FILTERS_KEY,
-                    JSONx.stringify( { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, '', true));
+                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY,
+                    JSONx.stringify({ levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, "", true));
                 onFilterChanged();
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 
@@ -723,7 +730,7 @@ package xvm.tcarousel
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
 
             //Logger.add("< " + vehIds.length);

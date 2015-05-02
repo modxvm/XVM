@@ -1,13 +1,13 @@
 /**
  * XVM - hangar
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.hangar.views
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.io.*;
     import com.xvm.infrastructure.*;
-    import flash.external.*;
+    import com.xvm.types.cfg.CHangarServerInfo;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -31,15 +31,17 @@ package xvm.hangar.views
             //Logger.addObject(page);
 
             initVehicleParams();
+            initServerInfo();
         }
 
         // PRIVATE
 
         private function initVehicleParams():void
         {
-            ExternalInterface.addCallback(Cmd.RESPOND_UPDATECURRENTVEHICLE, onUpdateCurrentVehicle);
+            Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
         }
 
+        // TODO: try without serialization
         private function onUpdateCurrentVehicle(json_str:String):void
         {
             try
@@ -56,9 +58,18 @@ package xvm.hangar.views
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
-    }
 
+        // server info
+
+        private function initServerInfo():void
+        {
+            var cfg:CHangarServerInfo = Config.config.hangar.serverInfo;
+            page.serverInfo.visible = cfg.enabled;
+            page.serverInfo.alpha = cfg.alpha / 100.0;
+            page.serverInfo.rotation = cfg.rotation;
+        }
+    }
 }

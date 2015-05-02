@@ -1,6 +1,6 @@
 /**
  * Clock Widget (view)
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import flash.geom.Point;
 import com.xvm.Defines;

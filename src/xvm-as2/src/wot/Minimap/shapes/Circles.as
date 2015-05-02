@@ -1,5 +1,4 @@
 import com.xvm.*;
-import com.xvm.*;
 import com.xvm.DataTypes.*;
 import wot.Minimap.dataTypes.*;
 import wot.Minimap.model.externalProxy.*;
@@ -35,7 +34,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         moving_state = Defines.MOVING_STATE_STOPPED;
 
         var player:Player = PlayersPanelProxy.self;
-        var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
+        var vdata:VehicleData = VehicleInfo.get(player.vid);
 
         var vehicleType:String = vdata.key.split(":").join("-");
         staticCircles = defineStaticCirclesCfg(vehicleType);

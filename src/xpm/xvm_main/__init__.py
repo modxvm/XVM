@@ -3,14 +3,15 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION    = "2.0.0"
+XFW_MOD_VERSION    = "3.0.0"
 XFW_MOD_URL        = "http://www.modxvm.com/"
 XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XFW_GAME_VERSIONS  = ["0.9.6","0.9.7"]
+XFW_GAME_VERSIONS  = ["0.9.7"]
 
 #####################################################################
 
 from pprint import pprint
+import os
 import time
 import traceback
 import cPickle
@@ -45,7 +46,7 @@ def start():
     from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
     g_eventBus.addListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)
     g_eventBus.addListener(VIEW_ALIAS.LOGIN, g_xvm.onShowLogin)
-    g_eventBus.addListener(XPM_CMD, g_xvm.onXpmCommand)
+    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_xvm.onXfwCommand)
     g_websock.start()
     g_websock.on_message += g_xvm.on_websock_message
     g_websock.on_error += g_xvm.on_websock_error
@@ -56,7 +57,7 @@ def fini():
     from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
     g_eventBus.removeListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)
     g_eventBus.removeListener(VIEW_ALIAS.LOGIN, g_xvm.onShowLogin)
-    g_eventBus.removeListener(XPM_CMD, g_xvm.onXpmCommand)
+    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_xvm.onXfwCommand)
     g_websock.on_message -= g_xvm.on_websock_message
     g_websock.on_error -= g_xvm.on_websock_error
     g_websock.stop()
@@ -159,6 +160,30 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
+# add vid to players panel data
+def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, vStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter):
+    res = base(self, index, playerFullName, vInfoVO, vStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter)
+    res['vid'] = vInfoVO.vehicleType.compactDescr
+    return res
+
+# show quantity of alive instead of dead in frags panel
+# original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
+def FragCorrelationPanel_updateFrags(base, self, playerTeam):
+    try:
+        if 'showAliveNotFrags' in config.config['fragCorrelation'] and config.config['fragCorrelation']['showAliveNotFrags']:
+            if not playerTeam:
+                return
+            teamIndex = playerTeam - 1
+            enemyIndex = 1 - teamIndex
+            enemyTeam = enemyIndex + 1
+            team_left = len(self._FragCorrelationPanel__teamsShortLists[playerTeam]) - self._FragCorrelationPanel__teamsFrags[enemyIndex]
+            enemy_left = len(self._FragCorrelationPanel__teamsShortLists[enemyTeam]) - self._FragCorrelationPanel__teamsFrags[teamIndex]
+            self._FragCorrelationPanel__callFlash('updateFrags', [team_left, enemy_left])
+            return
+    except Exception, ex:
+        err(traceback.format_exc())
+    base(self, playerTeam)
+
 # spotted status
 def _Minimap__addEntry(self, id, location, doMark):
     # debug('> _Minimap__addEntry: {0}'.format(id))
@@ -170,8 +195,29 @@ def _Minimap__delEntry(self, id, inCallback=False):
     vehstate.updateSpottedStatus(id, False)
     g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
 
+def _Minimap_start(self):
+    if config.config is None or not config.config['minimap']['enabled']:
+        return
+    try:
+        from gui.battle_control import g_sessionProvider
+        from items.vehicles import VEHICLE_CLASS_TAGS
+        if not g_sessionProvider.getCtx().isPlayerObserver():
+            player = BigWorld.player()
+            id = player.playerVehicleID
+            entryVehicle = player.arena.vehicles[id]
+            playerId = entryVehicle['accountDBID']
+            tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
+            vClass = tags.pop() if len(tags) > 0 else ''
+            BigWorld.callback(0, lambda:self._Minimap__callEntryFlash(id, 'init_xvm', [playerId, False, 'player', vClass]))
+
+    except Exception, ex:
+        if IS_DEVELOPMENT:
+            err(traceback.format_exc())
+
 def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     base(self, id, methodName, args)
+    if config.config is None or not config.config['minimap']['enabled']:
+        return
     try:
         if self._Minimap__isStarted:
             if methodName == 'init':
@@ -185,6 +231,8 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
             err(traceback.format_exc())
 
 def _Minimap__addEntryLit(self, id, matrix, visible=True):
+    if config.config is None or not config.config['minimap']['enabled']:
+        return
     from gui.battle_control import g_sessionProvider
     battleCtx = g_sessionProvider.getCtx()
     if battleCtx.isObserver(id) or matrix is None:
@@ -308,9 +356,16 @@ def _RegisterEvents():
     from Vehicle import Vehicle
     RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
 
+    from gui.battle_control.battle_arena_ctrl import BattleArenaController
+    OverrideMethod(BattleArenaController, '_BattleArenaController__makeHash', BattleArenaController__makeHash)
+
+    from gui.Scaleform.Battle import FragCorrelationPanel
+    OverrideMethod(FragCorrelationPanel, 'updateFrags', FragCorrelationPanel_updateFrags)
+
     from gui.Scaleform.Minimap import Minimap
     RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
     RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
+    RegisterEvent(Minimap, 'start', _Minimap_start)
     OverrideMethod(Minimap, '_Minimap__callEntryFlash', _Minimap__callEntryFlash)
     RegisterEvent(Minimap, '_Minimap__addEntryLit', _Minimap__addEntryLit)
 

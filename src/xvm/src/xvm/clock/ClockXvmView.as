@@ -1,9 +1,10 @@
 /**
  * XVM - clock
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.clock
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
@@ -41,7 +42,7 @@ package xvm.clock
 
         private function createClock():void
         {
-            var cfg:CClock = Config.config.hangar.clock;
+            var cfg:CHangarClock = Config.config.hangar.clock;
             if (cfg.enabled)
                 clock = page.addChildAt(new ClockControl(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as ClockControl;
         }

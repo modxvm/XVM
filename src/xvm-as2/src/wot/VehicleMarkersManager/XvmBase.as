@@ -47,6 +47,7 @@ class wot.VehicleMarkersManager.XvmBase
     public var m_isDead:Boolean;
     public var m_showExInfo:Boolean;
     public var m_defaultIconSource:String;
+    public var m_vid:Number;
 
     // Vehicle State
     public var vehicleState:VehicleState;

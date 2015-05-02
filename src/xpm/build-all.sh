@@ -20,6 +20,13 @@ clear()
   rm -rf "../../~output/~ver/gui/flash"
   rm -rf "../../~output/~ver/scripts"
   rm -rf "../../~output/mods/xfw"
+
+  # remove _version_.py files
+  for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
+    rm -f $dir/__version__.py
+  done
+
+  find . -depth -empty -delete -type d
 }
 
 make_dirs()
@@ -42,15 +49,23 @@ build_xfw()
 
 build()
 {
-  echo "Build: $1"
+  echo -n "Build: $1 "
   f=${1#*/}
   d=${f%/*}
 
   [ "$d" = "$f" ] && d=""
 
+  if [ -f "../../~output/sha1/$2/python/$f.sha1" ] && [ "$(cat ../../~output/sha1/$2/python/$f.sha1)" = "$(sha1sum "$1")" ]; then
+    echo "isn't changed"
+    return 0
+  fi
+  echo "rebuilding"
+
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
   [ ! -f $1c ] && exit
 
+  mkdir -p "../../~output/sha1/$2/python/$d"
+  sha1sum $1 > "../../~output/sha1/$2/python/$f.sha1"
   mkdir -p "../../~output/$2/python/$d"
   cp $1c "../../~output/$2/python/${f}c"
   rm -f $1c
@@ -64,6 +79,7 @@ clear
 
 make_dirs
 
+echo 'building xfw'
 build_xfw
 
 # create __version__.py files
@@ -74,6 +90,7 @@ for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
 done
 
 # build *.py files
+echo 'building .py files'
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}
@@ -83,6 +100,6 @@ done
 popd >/dev/null
 
 # run test
-if [ "$OS" = "Windows_NT" -a "$XPM_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
+if [ "$OS" = "Windows_NT" -a "$XFW_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
   sh "$(dirname $(realpath $(cygpath --unix $0)))/../../utils/test.sh"
 fi

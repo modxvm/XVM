@@ -1,10 +1,10 @@
 /**
  * XVM
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.tcarousel
 {
-    import com.xvm.*;
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
 
     public class TCarouselXvmMod extends XvmModBase
@@ -21,7 +21,7 @@ package xvm.tcarousel
 
         override public function entryPoint():void
         {
-            //Logger.add((new Error()).getStackTrace());
+            //Logger.err(new Error());
             super.entryPoint();
         }
 

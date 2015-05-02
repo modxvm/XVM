@@ -1,10 +1,9 @@
 /**
  * XVM
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.hangar
 {
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import xvm.hangar.views.*;
 

@@ -1,13 +1,10 @@
 /**
  * @author ilitvinov87(at)gmail.com
- * @author m.schedriviy(at)gmail.com
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 
 import com.xvm.*;
-import gfx.io.*;
-import net.wargaming.ingame.Minimap;
 import wot.Minimap.*;
-import wot.Minimap.model.*;
 import wot.Minimap.model.externalProxy.*;
 
 class wot.Minimap.Minimap

@@ -1,7 +1,7 @@
 package xvm.hangar.components.BattleLoading
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.misc.*;
     import com.xvm.utils.*;
     import net.wg.gui.lobby.battleloading.*;
 
@@ -28,7 +28,7 @@ package xvm.hangar.components.BattleLoading
                 page.form.battleText.width += 100;
                 page.form.battleText.x -= 50;
                 page.form.battleText.height *= 2;
-                page.form.battleText.styleSheet = Utils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
+                page.form.battleText.styleSheet = WGUtils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
             }
 
             var playerNames:Vector.<String> = new Vector.<String>();

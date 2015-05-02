@@ -115,7 +115,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     function setStateImpl()
     {
         var savedValue = wrapper.data.isPostmortemView;
-        if (cfg.removeSelectedBackground)
+        if (Macros.FormatGlobalBooleanValue(cfg.removeSelectedBackground))
             wrapper.data.isPostmortemView = false;
         base.setState();
         wrapper.data.isPostmortemView = savedValue;
@@ -405,6 +405,13 @@ class wot.PlayersPanel.PlayerListItemRenderer
             if (isEmpty)
                 continue;
 
+            if (format.enabled != null)
+            {
+                var enabled:Boolean = Macros.FormatGlobalBooleanValue(format.enabled);
+                if (enabled == false)
+                    continue;
+            }
+
             // make a copy of format, because it will be changed
             var fmt:Object = { };
             for (var nm in format)
@@ -451,9 +458,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             //Logger.add(value + " => " + Macros.Format(m_name, value, null));
             var v = Macros.Format(m_name, value, null);
-            if (v == "X")
-                v = 10;
-            else if (v == "XX")
+            if (v == "XX")
                 v = 100;
             if (isColorValue)
                 v = v.split("#").join("0x");

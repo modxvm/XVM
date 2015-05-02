@@ -1,15 +1,46 @@
-﻿XVM-6.1.0-dev:
+﻿XVM-6.1.0.2-dev:
+  * in extrafields in the players panels added "enabled" parameter with global macros support
+  * added section hangar/serverInfo for changing server info visibility
+  * added parameters in carousel config: fields/statusText and fields/clanLock
+
+XVM-6.1.0.1:
+  * added new section in config sounds.xc, where you can setup extra sounds
+  * bugs fixed
+  * added some languages in the personal cabinet
+  * new option:
+      "showAliveNotFrags" - show quantity of alive instead of dead in frags panel. Original idea/code by yaotzinv: http://www.koreanrandom.com/forum/topic/18671-09xпанель-счёта-в-боюколичество-оставшихся-танк/
+  * added sorting criterion for carusel: premium
+  * changing status of gold/free exp locks updates their availability in open windows
+  * in hangar tooltips added elevation arc limits for side and rear directions of the tank
+
+XVM-6.1.0:
   * adaptation to WoT 0.9.7
-  * added new section in config hangar/tooltips.xc, where you can choose desired tooltips for each type of vehicle
+  * XFW-3.0.0
+  * per-vehicle rating (xTE) enabled ({{xte}}, {{c:xte}}, {{a:xte}} macros)
+  * new carousel macros {{v.xte}} and {{v.c_xte}} for per-vehicle rating
+  * new option userInfo/showXTEColumn - Show xTE column in the vehicle list
+  * added new section in config tooltips.xc, where you can choose desired tooltips for each type of vehicle
+  * in tank tooltips added feature of custom text and camo coefficients data
   * in barracks added nation flag for tanksman and their skills
   * added embedded fonts: 'xvm' (symbol) and 'mono' (monospace), recommended for default use
   * new options:
       "enableGoldLocker" - enable locker for gold
       "enableFreeXpLocker" - enable locker for free XP
       "defaultBoughtForCredits" - Use credits instead of gold as default currency for ammo and equipment
-
-XVM-6.0.3:
-  * added macro {{r}} - player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+      "combineIcons" - in tank tooltips combine icons of equipment and optional modules
+      "hideBottomText" - in tank tooltips hide text at bottom showing quantity of used equipment etc.
+  * new macro {{.}} for config value substitution: {{.path.to.config.value}}
+      ex. {{.language}}, {{.def.mycolors.ally}}
+  * new macro {{ally}} returns 'ally' for ally team and empty for enemy team
+  * new macro {{nation}} returns vehicle nation
+  * added new feature of sorting tanks in carousel from config (carousel.xc)
+  * in battle, in HE tooltip added explosion radius
+  * option hangar/autoPutPreviousCrewInTanks renamed to hangar/enableCrewAutoReturn
+  * when enableCrewAutoReturn enabled, the checkbox is shown in the hangar for enabling/disabling
+    crew auto return. Checkbox settings are stored for each tank separately.
+  * added macros {{r}}, {{c:r}}, {{a:r}} - player's rating
+    (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+  * added macro {{r_size}} - size of the {{r}} macro value (can be useful for fields formatting)
   * macros renamed:
       {{rating}} => {{winrate}}
       {{t-rating}} => {{t-winrate}}
@@ -75,7 +106,7 @@ XVM-5.5.0:
       for arty: "neverSeen_arty", "lost_arty", "revealed_arty", "dead_arty"
   * added new macros:
       {{language}} - player's client language
-      {{region}} - current game region (RU, EU, NA, CN, ASIA, VTC, KR, CT)
+      {{region}} - current game region (RU, EU, NA, ASIA, KR, CN, CT)
       {{spotted}} with values from texts/spotted section
       {{c:spotted}}, {{a:spotted}} for color and transparency by spotted status
   * removed section playersPanel/enemySpottedMarker (use extra fields with {{spotted}} macro instead)

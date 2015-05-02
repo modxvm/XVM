@@ -3,10 +3,10 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION    = "2.0.0"
+XFW_MOD_VERSION    = "3.0.0"
 XFW_MOD_URL        = "http://www.modxvm.com/"
 XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XFW_GAME_VERSIONS  = ["0.9.6","0.9.7"]
+XFW_GAME_VERSIONS  = ["0.9.7"]
 
 #####################################################################
 
@@ -15,6 +15,7 @@ import BigWorld
 from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
+from xvm_main.python.xvm import l10n
 
 import wg_compat
 
@@ -29,9 +30,40 @@ class CREW(object):
     PUT_PREVIOUS_CREW = 'PutPreviousCrew'
 
 class COMMANDS(object):
-    PUT_OWN_CREW = 'xvm_crew.as_PutOwnCrew'
-    PUT_BEST_CREW = 'xvm_crew.as_PutBestCrew'
-    PUT_CLASS_CREW = 'xvm_crew.as_PutClassCrew'
+    PUT_PREVIOUS_CREW = 'xvm_crew.put_previous_crew'
+    AS_VEHICLE_CHANGED = 'xvm_crew.as_vehicle_changed'
+    AS_PUT_OWN_CREW = 'xvm_crew.as_put_own_crew'
+    AS_PUT_BEST_CREW = 'xvm_crew.as_put_best_crew'
+    AS_PUT_CLASS_CREW = 'xvm_crew.as_put_class_crew'
+
+
+#####################################################################
+# initialization/finalization
+
+def start():
+    from gui.shared import g_eventBus
+    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+
+def fini():
+    from gui.shared import g_eventBus
+    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+
+
+#####################################################################
+# onXfwCommand
+
+# returns: (result, status)
+def onXfwCommand(cmd, *args):
+    try:
+        if cmd == COMMANDS.PUT_PREVIOUS_CREW:
+            from CurrentVehicle import g_currentVehicle
+            PutPreviousCrew(g_currentVehicle, False)
+            return (None, True)
+    except Exception, ex:
+        err(traceback.format_exc())
+        return (None, True)
+    return (None, False)
+
 
 #####################################################################
 # event handlers
@@ -76,25 +108,36 @@ def DropAllCrew(self):
     Crew.unloadCrew()
 
 def PutOwnCrew(self):
-    as_xvm_cmd(COMMANDS.PUT_OWN_CREW)
+    as_xfw_cmd(COMMANDS.AS_PUT_OWN_CREW)
 
 def PutBestCrew(self):
-    as_xvm_cmd(COMMANDS.PUT_BEST_CREW)
+    as_xfw_cmd(COMMANDS.AS_PUT_BEST_CREW)
 
 def PutClassCrew(self):
-    as_xvm_cmd(COMMANDS.PUT_CLASS_CREW)
+    as_xfw_cmd(COMMANDS.AS_PUT_CLASS_CREW)
 
 def PutPreviousCrew(self, print_message = True):
     wg_compat.g_instance.processReturnCrew(print_message)
 
-def ClientHangarSpace_PutPreviousCrew(self, vDesc, vState, onVehicleLoadedCallback = None):
-    if config.config['hangar']['autoPutPreviousCrewInTanks']:
-        PutPreviousCrew(self, False)
+def TmenXpPanel_onVehicleChange(self):
+    #log('TmenXpPanel_onVehicleChange')
+    if config.config['hangar']['enableCrewAutoReturn']:
+        from CurrentVehicle import g_currentVehicle
+        vehicle = g_currentVehicle.item
+        vehId = g_currentVehicle.invID if vehicle is not None else 0
+        isElite = vehicle.isElite if vehicle is not None else 0
+        as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, vehId, isElite)
+
 
 #####################################################################
 # Register events
 
 def _RegisterEvents():
+    start()
+
+    import game
+    RegisterEvent(game, 'fini', fini)
+
     from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import CrewContextMenuHandler
     OverrideMethod(CrewContextMenuHandler, '__init__', CrewContextMenuHandler__init__)
     OverrideMethod(CrewContextMenuHandler, '_generateOptions', CrewContextMenuHandler_generateOptions)
@@ -103,7 +146,8 @@ def _RegisterEvents():
     CrewContextMenuHandler.PutBestCrew = PutBestCrew
     CrewContextMenuHandler.PutClassCrew = PutClassCrew
     CrewContextMenuHandler.PutPreviousCrew = PutPreviousCrew
-    from gui.ClientHangarSpace import ClientHangarSpace
-    RegisterEvent(ClientHangarSpace, 'recreateVehicle', ClientHangarSpace_PutPreviousCrew)
+
+    from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
+    RegisterEvent(TmenXpPanel, '_onVehicleChange', TmenXpPanel_onVehicleChange)
 
 BigWorld.callback(0, _RegisterEvents)

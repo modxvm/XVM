@@ -1,7 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
-def get(key):
-    return _userPrefs.get(key)
+def get(key, default=None):
+    return _userPrefs.get(key, default)
 
 # key must be valid file name
 def set(key, value):
@@ -28,15 +28,17 @@ class _UserPrefs():
         except:
             err(traceback.format_exc())
 
-    def get(self, key):
+    def get(self, key, default):
         fd = None
         try:
             fileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
             if os.path.isfile(fileName):
                 fd = open(fileName, 'rb')
                 return cPickle.load(fd)
+            return default
         except:
             err(traceback.format_exc())
+            return default
         finally:
             if fd is not None:
                 fd.close()

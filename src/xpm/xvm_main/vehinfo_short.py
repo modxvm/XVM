@@ -5,11 +5,11 @@ from logger import *
 
 # PUBLIC
 
-def getShortName(key):
+def getShortName(key, level, vclass):
     if IS_DEVELOPMENT:
         global _data
         if key not in _data:
-            log("Warning: no short vehicle name for '%s'" % key)
+            log('Warning: no short vehicle name for "{}" level={} class={}'.format(key, level, vclass))
     return _data.get(key, None)
 
 def checkNames(vehs):
@@ -17,7 +17,7 @@ def checkNames(vehs):
         global _data
         for key in _data:
             if not any(x['key'] == key for x in vehs):
-                log("Warning: short name for non-existent vehicle '%s'" % key)
+                log('Warning: short name for non-existent vehicle "{}"'.format(key))
 
 # PRIVATE
 
@@ -46,7 +46,6 @@ _data = {
     'ussr:IS-7_IGR':                    '7',
     'ussr:R110_Object_260':             '260',
     'ussr:R111_ISU130':                 '130',
-    'ussr:R00_T_50_2':                  'Fox',
     'germany:JagdTiger_SdKfz_185_IGR':  'JgT88',
     'germany:Panther_II_IGR':           'Pant2',
     'germany:PzVIB_Tiger_II_IGR':       'Tger2',
@@ -68,7 +67,7 @@ _data = {
     'usa:T34_hvy_IGR':                  'T34Hv',
     'usa:Sherman_Jumbo_IGR':            'SheJm',
     'usa:T67_IGR':                      'T67',
-    'usa:Pershing_IGR':                 'Persh',
+    'usa:A35_Pershing_IGR':             'Persh',
     'usa:T29_IGR':                      'T29',
     'usa:M4_Sherman_IGR':               'Sherm',
     'usa:A78_M4_Improved':              'Sherm',
@@ -76,7 +75,6 @@ _data = {
     'usa:T95_E2':                       '95e2',
     'usa:A101_M56':                     'M56',
     'usa:A102_T28_concept':             'T28c',
-    'usa:A00_T110E5':                   'Mamont',
     'china:Ch17_WZ131_1_WZ132_IGR':     '132',
     'china:Ch11_110_IGR':               '110',
     'china:Ch19_121_IGR':               '121',
@@ -89,7 +87,7 @@ _data = {
     'france:Bat_Chatillon25t_IGR':      'Bat',
     'france:F68_AMX_Chasseur_de_char_46': 'Chass',
     'france:F69_AMX13_57_100':          '1357',
-    'france:F00_AMX_50Foch_155':        'Bear',
+    'france:F69_AMX13_57_100_GrandFinal': '1357GF',
     'uk:GB14_M2':                       'M2',
     'uk:GB15_Stuart_I':                 'Stu1/6',
     'uk:GB17_Grant_I':                  'Grant',
@@ -136,6 +134,8 @@ _data = {
     'china:Ch07_Vickers_MkE_Type_BT26': 'BT26',
     'france:D1':                        'D1',
     'france:Hotchkiss_H35':             'H35',
+    'france:F50_FCM36_20t':             'FCM20t',
+    'france:F49_RenaultR35':            'R35',
     'uk:GB03_Cruiser_Mk_I':             'Cru1',
     'uk:GB58_Cruiser_Mk_III':           'Crui3',
     'uk:GB76_Mk_VIC':                   'Mk6c',
@@ -178,6 +178,7 @@ _data = {
     'germany:S35_captured':             'S35',
     'usa:M2_med':                       'M2MT',
     'france:D2':                        'D2',
+    'france:F44_Somua_S35':             'S35med',
     'uk:GB06_Vickers_Medium_Mk_III':    'Mk3',
     'japan:Chi_Ha':                     'ChiHa',
     'ussr:SU-76':                       'Su76',
@@ -209,6 +210,7 @@ _data = {
     'germany:Pz_IV_AusfD':              'Pz4D',
     'germany:VK2001DB':                 '2001',
     'usa:M3_Grant':                     'M3Lee',
+    'france:F70_SARL42':                'SARL42',
     'uk:GB07_Matilda':                  'Matil',
     'japan:Chi_He':                     'ChiHe',
     'germany:DW_II':                    'DWII',
@@ -234,12 +236,13 @@ _data = {
     'france:ELC_AMX':                   'ELC',
     'ussr:R04_T-34':                    '34',
     'germany:PzIII_IV':                 'Pz3/4',
-    'germany:PzIV':                     'Pz4',  # not used
+    'germany:PzIV':                     'Pz4',
     'germany:Pz_IV_AusfH':              'Pz4',
     'germany:T-25':                     'T-25',
     'usa:M4_Sherman':                   'Sherm',
     'usa:M7_med':                       'M7',
     'usa:Ram-II':                       'Ram2',
+    'france:F11_Renault_G1R':           'G1R',
     'china:Ch21_T34':                   't-34',
     'japan:Chi_Nu':                     'ChiNu',
     'ussr:KV':                          'KV',
@@ -252,7 +255,7 @@ _data = {
     'germany:Pz_Sfl_IVc':               'PzS4c',
     'germany:StuG_40_AusfG':            'StuG',
     'usa:M10_Wolverine':                'Wolv',
-    'france:S_35CA':                    'S35',
+    'france:S_35CA':                    'S35CA',
     'uk:GB73_AT2':                      'AT2',
     'ussr:SU122A':                      '122A',
     'germany:Grille':                   'Grill',
@@ -270,6 +273,7 @@ _data = {
     'france:AMX_12t':                   '12t',
     'ussr:A43':                         'A43',
     'ussr:T-34-85':                     '3485',
+    'ussr:R117_T34_85_Rudy':            'Rudy',
     'germany:PzIV_schmalturm':          'Pz4S',
     'germany:VK3001P':                  '3001P',
     'germany:VK3002DB_V1':              '3002DB',
@@ -279,9 +283,11 @@ _data = {
     'usa:Sherman_Jumbo':                'SheJm',
     'china:Ch20_Type58':                '58',
     'uk:GB21_Cromwell':                 'Cromw',
+    'uk:GB85_Cromwell_Berlin':          'CromBerl',
     'japan:Chi_To':                     'ChiTo',
     'ussr:KV-1s':                       'KV1S',
     'ussr:KV2':                         'KV2',
+    'ussr:R114_Object_244':             'o244',
     'ussr:T150':                        'T150',
     'germany:VK3601H':                  '3601',
     'usa:M6':                           'M6',
@@ -320,6 +326,7 @@ _data = {
     'uk:GB22_Comet':                    'Comet',
     'japan:Chi_Ri':                     'ChiRi',
     'ussr:IS':                          'IS',
+    'ussr:R71_IS_2B':                   'IS2b',
     'ussr:KV-3':                        'KV3',
     'germany:PzVI':                     'Tger',
     'germany:PzVI_Tiger_P':             'TgerP',
@@ -327,9 +334,12 @@ _data = {
     'china:Ch10_IS2':                   'IS2',
     'france:AMX_M4_1945':               'AMX1945',
     'uk:GB10_Black_Prince':             'Princ',
+    'uk:GB52_A45':                      'A45',
     'ussr:SU100M1':                     '100M1',
     'ussr:SU122_44':                    '12244',
     'ussr:SU-152':                      '152',
+    'ussr:R116_ISU122C_Berlin':         'i122Berl',
+    'germany:G109_Steyr_WT':            'SteyrWT',
     'germany:JagdPanther':              'JagP',
     'germany:Sturer_Emil':              'Emil',
     'usa:T25_2':                        '25/2',
@@ -353,7 +363,7 @@ _data = {
     'ussr:R112_T54_45':                 '5445',
     'germany:Indien_Panzer':            'IndPz',
     'germany:Panther_II':               'Pant2',
-    'usa:Pershing':                     'Persh',
+    'usa:A35_Pershing':                 'Persh',
     'usa:T23':                          'T23',
     'usa:T69':                          '69',
     'china:Ch05_T34_2':                 '34/2',
@@ -397,6 +407,7 @@ _data = {
     'usa:T54E1':                        '54E1',
     'china:Ch18_WZ-120':                '120',
     'france:Lorraine40t':               'Lor40',
+    'france:F71_AMX_30_prototype':      '30prot',
     'uk:GB24_Centurion_Mk3':            'Cent3',
     'japan:Type_61':                    '61',
     'ussr:IS8':                         '8',
@@ -433,9 +444,10 @@ _data = {
     'usa:T95_E6':                       'T95E',
     'china:Ch19_121':                   '121',
     'france:Bat_Chatillon25t':          'Bat',
+    'france:F72_AMX_30':                'AMX30',
     'uk:GB70_FV4202_105':               '4202',
     'japan:ST_B1':                      'STB1',
-    'ussr:IS-4':                        '4',
+    'ussr:R90_IS_4M':                   '4',
     'ussr:IS-7':                        '7',
     'germany:E-100':                    '100',
     'germany:Maus':                     'Maus',

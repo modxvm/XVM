@@ -1,13 +1,11 @@
 ﻿/**
 /**
  * XVM
- * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  * @author ilitvinov87
  */
 import com.xvm.*;
 import com.xvm.events.*;
-import gfx.controls.*;
-import wot.Minimap.*;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {
@@ -59,6 +57,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
+
+    private var m_lastPosition:Number = 0;
 
     private var cfg:Object;
 
@@ -330,7 +330,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         obj.entityName = wrapper.type != "left" ? "enemy" : data.squad > 10 ? "squadman" : obj.teamKiller ? "teamKiller" : "ally";
         obj.selected = data.isPostmortemView;
         if (obj.position == null)
-            obj.position = data.position;
+            obj.position = ++m_lastPosition;
 
         if (data.himself)
             BattleState.setSelfUserName(data.userName);

@@ -116,10 +116,13 @@
     "radio_range/actual": "расчетная",
     "shootingRadius": "Дальность стрельбы",
     "pitchLimits": "Углы ВН",
+    "pitchLimitsSide": "Углы ВН (сбоку)",
+    "pitchLimitsRear": "Углы ВН (сзади)",
     "traverseLimits": "Углы ГН",
     "terrainResistance": "Сопротивление грунтов",
     "gravity": "Гравитация",
     "shellSpeed": "Скорость снаряда",
+    "camoCoeff": "Коэффициенты маскировки",
     "(m/sec)": "(м/сек)",
     "(sec)": "(сек)",
     "(m)": "(м)",
@@ -154,13 +157,22 @@
 
     // Token
     "token/services_unavailable": "Сетевые сервисы недоступны.&nbsp;&nbsp;<a href='#XVM_SITE_UNAVAILABLE#'><font size='11'>подробнее</font></a>",
-    "token/services_inactive": "Сетевые сервисы неактивны.&nbsp;&nbsp;<a href='#XVM_SITE_INACTIVE#'><font size='11'>подробнее</font></a>",
+    "token/services_inactive": "Сетевые сервисы неактивны.&nbsp;&nbsp;<a href='#XVM_SITE_INACTIVE#'><font size='11'>включить</font></a>",
     "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>&nbsp;&nbsp;<a href='#XVM_SITE_BLOCKED#'><font size='11'>подробнее</font></a>",
     "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",
     "token/time_left": "Осталось:<tab/><font color='#EEEEEE'>{0}д. {1}ч. {2}м.</font>",
     "token/time_left_warn": "Осталось:<tab/><font color='#EEEE00'>{0}д. {1}ч. {2}м.</font>",
     "token/cnt": "Количество запросов:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Неизвестный статус",
+
+    // Lobby header
+    "lobby/header/gold_locked_tooltip": "Золото заблокировано",
+    "lobby/header/gold_unlocked_tooltip": "Золото разблокировано",
+    "lobby/header/freexp_locked_tooltip": "Свободный опыт заблокирован",
+    "lobby/header/freexp_unlocked_tooltip": "Свободный опыт разблокирован",
+
+    "lobby/crew/enable_prev_crew": "Автоматический возврат экипажа",
+    "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nАвтоматически вернуть экипаж, который в предыдущем\nбою был на данной машине",
 
     // Carousel
     "NonElite": "Не элитный",
@@ -169,6 +181,10 @@
     "MultiXP": "Мультиопыт",
     "NoMaster": "Нет мастера",
     "CompleteCrew": "Полный экипаж",
+
+    // Profile
+    "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nЭффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+    "profile/xvm_xte_extended_tooltip": "<textformat tabstops='[20, 85, 140]'>{{l10n:profile/xvm_xte_tooltip}}\n\nЭталонные значения:\n\t\tурон\tфраги\n\tТекущие:\t<font color='#FDF4CE' size='14'>{0}</font>\t<font color='#FDF4CE' size='14'>{1}</font>\n\tСредние:\t<font color='#FDF4CE' size='14'>{2}</font>\t<font color='#FDF4CE' size='14'>{3}</font>\n\tТоповые:\t<font color='#FDF4CE' size='14'>{4}</font>\t<font color='#FDF4CE' size='14'>{5}</font>",
 
     // Comments
     "Network services unavailable": "Сетевые сервисы недоступны",
@@ -187,7 +203,7 @@
 
     // Quests
     "Hide with honors": "Скрыть с отличием",
-    "Hide not available": "Скрыть недоступные",
+    "Hide unavailable": "Скрыть недоступные",
 
     // Config loading
     "XVM config reloaded": "Конфиг XVM перезагружен",

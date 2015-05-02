@@ -1,12 +1,12 @@
 /**
  * XVM
- * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.techtree
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.misc.*;
     import flash.utils.*;
     import net.wg.gui.lobby.techtree.*;
     import net.wg.infrastructure.events.*;
@@ -34,7 +34,7 @@ package xvm.techtree
 
         private function init():void
         {
-            Dossier.loadAccountDossier(page.nationTree, page.nationTree.invalidateData, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+            Dossier.requestAccountDossier(page.nationTree, page.nationTree.invalidateData, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
 
             page.nationsBar.addEventListener(IndexEvent.INDEX_CHANGE, this.handleIndexChange);
             handleIndexChange();

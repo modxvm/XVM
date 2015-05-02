@@ -1,6 +1,6 @@
 /**
  * Base Widget View
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;

@@ -39,7 +39,7 @@
       { "x": 14, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 31, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 275, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 300, "src": "xvm://res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
+      { "x": 300, "src": "cfg://../../res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
       {}
     ]
   },
@@ -70,7 +70,8 @@
       { "x": 14, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 31, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 275, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 300, "src": "xvm://res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
+      { "x": 300, "src": "cfg://../../res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
+      { "x": 390, "y": 1, "align": "center", "alpha": "{{a:spotted}}", "format": "<font color='{{c:spotted}}'>{{spotted}}</font>", "shadow": {} },
       {}
     ]
   }

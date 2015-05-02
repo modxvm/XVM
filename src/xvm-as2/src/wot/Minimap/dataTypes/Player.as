@@ -3,6 +3,7 @@
  * _level0.leftPanel.m_list._dataProvider[*]
  *
   "uid": 1170763,
+  "vid": 12345, // by XVM
   "vehicle": "BDR G1B",
   "position": 7,
   "denunciations": 4,
@@ -32,8 +33,9 @@ class wot.Minimap.dataTypes.Player
     public static var PLAYER_LOST:Number = 2;
     public static var PLAYER_DEAD:Number = 3;
     public static var TEAM_KILLER_FLAG:Number = -1; /** As multiplier */
-    
+
     public var uid:Number;
+    public var vid:Number;
     public var vehicle:String;
     public var team:String;
     public var level:Number;

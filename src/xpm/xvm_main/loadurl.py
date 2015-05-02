@@ -24,21 +24,21 @@ except Exception, ex:
 
 # result: (response, duration)
 def loadUrl(url, req=None, body=None, showLog=True):
-    url = url.replace("{API}", XVM_API_VERSION)
+    url = url.replace("{API}", XVM.API_VERSION)
     if req is not None:
         url = url.replace("{REQ}", req)
     u = urlparse(url)
     ssl = url.lower().startswith('https://')
     if showLog or IS_DEVELOPMENT:
         # hide some chars of token in the log
-        path_log = utils.hide_guid(u.path) if not IS_DEVELOPMENT else u.path
+        path_log = utils.hide_guid(u.path) if not XFW_NO_TOKEN_MASKING else u.path
         log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
     # import time
     # time.sleep(3)
 
     startTime = datetime.datetime.now()
 
-    (response, compressedSize, errStr) = _loadUrl(u, XVM_TIMEOUT, XVM_FINGERPRINTS, body)
+    (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, XVM.FINGERPRINTS, body)
 
     elapsed = datetime.datetime.now() - startTime
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000

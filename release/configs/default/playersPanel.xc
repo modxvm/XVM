@@ -8,7 +8,7 @@
   "enemySpottedMarker": {
     // Opacity percentage of spotted markers in the panels. 0 - transparent (disabled) ... 100 - opaque.
     // Прозрачность в процентах маркеров засвета в ушах. 0 - полностью прозрачные (отключены), 100 - не прозрачные.
-    "alpha": 100,
+    "alpha": "{{a:spotted}}",
     // x position.
     // положение по горизонтали.
     "x": 6,
@@ -23,7 +23,7 @@
     "bindToIcon": true,
     // enemy spotted status marker format.
     // формат маркера статуса засвета.
-    "format": "{{spotted}}",
+    "format": "<font color='{{c:spotted}}'>{{spotted}}</font>",
     // shadow (see below).
     // настройки тени (см. ниже).
     "shadow": {}
@@ -103,6 +103,7 @@
           //   "format" - text format (macros allowed)
           //
           // fields available for both MovieClip and TextField formats:
+          //   "enabled" - enable/disable field creation (global macros allowed)
           //   "x" - x position (macros allowed)
           //   "y" - y position (macros allowed)
           //   "w" - width (macros allowed)
@@ -245,8 +246,8 @@
       "width": 100,
       // Display format for player nickname (macros allowed, see macros.txt).
       // Формат отображения имени игрока (допускаются макроподстановки, см. macros.txt).
-      "nickFormatLeft": "<font face='mono' size='13' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
-      "nickFormatRight": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> <font face='mono' size='13' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font>",
+      "nickFormatLeft": "<font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> <font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font>",
       // Display format for vehicle name (macros allowed, see macros.txt).
       // Формат отображения названия танка (допускаются макроподстановки, см. macros.txt).
       "vehicleFormatLeft": "{{vehicle}}",

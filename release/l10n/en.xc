@@ -116,10 +116,13 @@
     "radio_range/actual": "actual",
     "shootingRadius": "Shooting radius",
     "pitchLimits": "Elevation arc",
+    "pitchLimitsSide": "Elevation arc (side)",
+    "pitchLimitsRear": "Elevation arc (rear)",
     "traverseLimits": "Gun traverse arc",
     "terrainResistance": "Terrain resistance",
     "gravity": "Gravity",
     "shellSpeed": "Shell speed",
+    "camoCoeff": "Camo coefficients",
     "(m/sec)": "(m/sec)",
     "(sec)": "(sec)",
     "(m)": "(m)",
@@ -154,13 +157,26 @@
 
     // Token
     "token/services_unavailable": "Network services unavailable.&nbsp;&nbsp;<a href='#XVM_SITE_UNAVAILABLE#'><font size='11'>more info</font></a>",
-    "token/services_inactive": "Network services inactive.&nbsp;&nbsp;<a href='#XVM_SITE_INACTIVE#'><font size='11'>more info</font></a>",
+    "token/services_inactive": "Network services inactive.&nbsp;&nbsp;<a href='#XVM_SITE_INACTIVE#'><font size='11'>enable</font></a>",
     "token/blocked": "Status: <font color='#FF0000'>Blocked</font>&nbsp;&nbsp;<a href='#XVM_SITE_BLOCKED'><font size='11'>more info</font></a>",
     "token/active": "Status:<tab/><font color='#00FF00'>Active</font>",
     "token/time_left": "Time left:<tab/><font color='#EEEEEE'>{0}d. {1}h. {2}m.</font>",
     "token/time_left_warn": "Time left:<tab/><font color='#EEEE00'>{0}d. {1}h. {2}m.</font>",
     "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Unknown status",
+
+    // Lobby
+    "lobby/header/gold_locked_tooltip": "Gold is locked",
+    "lobby/header/gold_unlocked_tooltip": "Gold is unlocked",
+    "lobby/header/freexp_locked_tooltip": "Free XP is locked",
+    "lobby/header/freexp_unlocked_tooltip": "Free XP is unlocked",
+
+    "lobby/crew/enable_prev_crew": "Automatically return crew",
+    "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nAutomatically return the crew that fought\nin this vehicle in the previous battle",
+
+    // Profile
+    "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nPer-vehicle efficiency\nMore info at <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+    "profile/xvm_xte_extended_tooltip": "<textformat tabstops='[20, 85, 140]'>{{l10n:profile/xvm_xte_tooltip}}\n\nReference values:\n\t\tdamage\tfrags\n\tCurrent:\t<font color='#FDF4CE' size='14'>{0}</font>\t<font color='#FDF4CE' size='14'>{1}</font>\n\tAverage:\t<font color='#FDF4CE' size='14'>{2}</font>\t<font color='#FDF4CE' size='14'>{3}</font>\n\tTop:\t<font color='#FDF4CE' size='14'>{4}</font>\t<font color='#FDF4CE' size='14'>{5}</font>",
 
     // Carousel
     "NonElite": "Non elite",
@@ -187,7 +203,7 @@
 
     // Quests
     "Hide with honors": "Hide with honors",
-    "Hide not available": "Hide not available",
+    "Hide unavailable": "Hide unavailable",
 
     // Config loading
     "XVM config reloaded": "XVM config reloaded",

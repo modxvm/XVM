@@ -1,7 +1,7 @@
 package xvm.company.renderers
 {
+    import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import flash.events.*;
     import flash.text.*;
@@ -27,7 +27,7 @@ package xvm.company.renderers
                 effField = new TextField();
                 var tf:TextFormat = proxy.vehicleLevelField.defaultTextFormat;
                 tf.align = TextFormatAlign.RIGHT;
-                effField.styleSheet = Utils.createTextStyleSheet("eff", tf);
+                effField.styleSheet = WGUtils.createTextStyleSheet("eff", tf);
                 effField.x = proxy.width - 15;
                 effField.y = proxy.vehicleLevelField.y;
                 effField.width = 20;
@@ -37,7 +37,7 @@ package xvm.company.renderers
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
 
         }
@@ -79,7 +79,7 @@ package xvm.company.renderers
             }
             catch (ex:Error)
             {
-                Logger.add(ex.getStackTrace());
+                Logger.err(ex);
             }
         }
 

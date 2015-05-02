@@ -123,13 +123,13 @@ class wot.Minimap.model.externalProxy.MapConfig
         /** Result */
         var xvmFullEntry:String;
 
-        if (wgEntryName == "")
+        if (wgEntryName == "player")
             xvmFullEntry = "oneself";
         else
             xvmFullEntry = xvmPrefix + xvmPostfix;
 
         if (xvmFullEntry == "lostenemy")
-            xvmFullEntry = "lost"; /** Backwards config compatibility */
+            xvmFullEntry = "lost"; // Backwards config compatibility
 
         return xvmFullEntry;
     }

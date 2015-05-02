@@ -124,18 +124,15 @@ class com.xvm.GraphicsUtil
         return max;
     }
 
-    public static function GetVTypeColorValue(iconSource:String, prefix:String):String
+    public static function GetVTypeColorValue(vehId:Number):String
     {
-        if (!prefix)
-            prefix = "#";
-
         try
         {
-            var vdata:VehicleData = VehicleInfo.getByIcon(iconSource);
+            var vdata:VehicleData = VehicleInfo.get(vehId);
             var vtype = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
             if (!vtype || !Config.config.colors.vtype[vtype])
                 return "";
-            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
+            return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -144,11 +141,8 @@ class com.xvm.GraphicsUtil
         return null;
     }
 
-    public static function GetSpottedColorValue(value:String, isArty:Boolean, prefix:String):String
+    public static function GetSpottedColorValue(value:String, isArty:Boolean):String
     {
-        if (!prefix)
-            prefix = "#";
-
         try
         {
             if (!value)
@@ -157,7 +151,7 @@ class com.xvm.GraphicsUtil
                 value += "_arty";
             if (!Config.config.colors.spotted[value])
                 return "";
-            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
+            return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -247,12 +241,11 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_COLOR_HP:              cfg = cfg_root.hp; break;
             case Defines.DYNAMIC_COLOR_HP_RATIO:        cfg = cfg_root.hp_ratio; break;
             case Defines.DYNAMIC_COLOR_EFF:             cfg = cfg_root.eff; break;
-            case Defines.DYNAMIC_COLOR_E:               cfg = cfg_root.e; break;
             case Defines.DYNAMIC_COLOR_WN6:             cfg = cfg_root.wn6; break;
             case Defines.DYNAMIC_COLOR_WN8:             cfg = cfg_root.wn8; break;
             case Defines.DYNAMIC_COLOR_WGR:             cfg = cfg_root.wgr; break;
             case Defines.DYNAMIC_COLOR_X:               cfg = cfg_root.x; break;
-            case Defines.DYNAMIC_COLOR_RATING:          cfg = cfg_root.winrate; break;
+            case Defines.DYNAMIC_COLOR_WINRATE:         cfg = cfg_root.winrate; break;
             case Defines.DYNAMIC_COLOR_KB:              cfg = cfg_root.kb; break;
             case Defines.DYNAMIC_COLOR_AVGLVL:          cfg = cfg_root.avglvl; break;
             case Defines.DYNAMIC_COLOR_TBATTLES:        cfg = cfg_root.t_battles; break;
@@ -292,12 +285,11 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_ALPHA_HP:              cfg = cfg_root.hp; break;
             case Defines.DYNAMIC_ALPHA_HP_RATIO:        cfg = cfg_root.hp_ratio; break;
             case Defines.DYNAMIC_ALPHA_EFF:             cfg = cfg_root.eff; break;
-            case Defines.DYNAMIC_ALPHA_E:               cfg = cfg_root.e; break;
             case Defines.DYNAMIC_ALPHA_WN6:             cfg = cfg_root.wn6; break;
             case Defines.DYNAMIC_ALPHA_WN8:             cfg = cfg_root.wn8; break;
             case Defines.DYNAMIC_ALPHA_WGR:             cfg = cfg_root.wgr; break;
             case Defines.DYNAMIC_ALPHA_X:               cfg = cfg_root.x; break;
-            case Defines.DYNAMIC_ALPHA_RATING:          cfg = cfg_root.winrate; break;
+            case Defines.DYNAMIC_ALPHA_WINRATE:         cfg = cfg_root.winrate; break;
             case Defines.DYNAMIC_ALPHA_KB:              cfg = cfg_root.kb; break;
             case Defines.DYNAMIC_ALPHA_AVGLVL:          cfg = cfg_root.avglvl; break;
             case Defines.DYNAMIC_ALPHA_TBATTLES:        cfg = cfg_root.t_battles; break;
