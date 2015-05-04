@@ -114,7 +114,7 @@ package xvm.crew
                 return;
             }
 
-            savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, false);
+            savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, true);
             enablePrevCrewCheckBox.selected = savedValue;
 
             page.tmenXpPanel.validateNow();

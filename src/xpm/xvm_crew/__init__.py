@@ -57,7 +57,8 @@ def onXfwCommand(cmd, *args):
     try:
         if cmd == COMMANDS.PUT_PREVIOUS_CREW:
             from CurrentVehicle import g_currentVehicle
-            PutPreviousCrew(g_currentVehicle, False)
+            if g_currentVehicle.isInHangar() and not (g_currentVehicle.isCrewFull() or g_currentVehicle.isInBattle() or g_currentVehicle.isLocked()):
+                PutPreviousCrew(g_currentVehicle, False)
             return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
