@@ -87,6 +87,9 @@
     // Tank sorting criteria, available options: (minus = reverse order)
     // Критерии сортировки танков, доступные значения: (минус = в обратном порядке)
     // "nation", "type", "level", "maxBattleTier", "premium", "-level", "-maxBattleTier", "-premium"
-    "sorting_criteria": ["nation", "type", "level"]
+    "sorting_criteria": ["nation", "type", "level"],
+    // Suppress the tooltips for tanks in carousel
+    // Убрать подсказки к танкам в карусели
+    "suppressCarouselTooltips": false
   }
 }

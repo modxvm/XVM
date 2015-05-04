@@ -297,6 +297,7 @@ package com.xvm
             c.carousel.nations_order = [];
             c.carousel.types_order = ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"];
             c.carousel.sorting_criteria = ["nation", "type", "level"];
+            c.suppressCarouselTooltips = false;
 
             // Clock
             c.clock = new CHangarClock();

@@ -19,5 +19,6 @@ package com.xvm.types.cfg
         public var nations_order:Array;
         public var types_order:Array;
         public var sorting_criteria:Array;
+        public var suppressCarouselTooltips:Boolean;
     }
 }

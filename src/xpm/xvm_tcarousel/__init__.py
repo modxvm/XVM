@@ -26,6 +26,8 @@ from xvm_main.python.vehinfo_tiers import getTiers
 # added sorting orders for tanks in carousel
 def TankCarousel_showVehicles(base, self):
     try:
+        if not config.config['hangar']['carousel']['enabled']:
+            return
         from gui.shared import g_itemsCache, REQ_CRITERIA
         from gui import GUI_NATIONS_ORDER_INDEX
         from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
@@ -90,7 +92,6 @@ def TankCarousel_showVehicles(base, self):
     except Exception as ex:
         err(traceback.format_exc())
         base(self)
-
 
 #####################################################################
 # Register events

@@ -289,6 +289,15 @@ def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
         err(traceback.format_exc())
     return result
 
+# suppress carousel tooltips
+def ToolTip_onCreateTypedTooltip(base, self, type, *args):
+    try:
+        if type == 'carouselVehicle' and 'suppressCarouselTooltips' in config.config['hangar']['carousel'] and config.config['hangar']['carousel']['suppressCarouselTooltips']:
+            return
+    except Exception as ex:
+        err(traceback.format_exc())
+    base(self, type, *args)
+
 #####################################################################
 # Utility functions
 
@@ -311,5 +320,7 @@ def _RegisterEvents():
     OverrideMethod(VehicleParamsField, '_getValue', VehicleParamsField_getValue)
     from gui.Scaleform.daapi.view.battle.ConsumablesPanel import ConsumablesPanel
     OverrideMethod(ConsumablesPanel, '_ConsumablesPanel__makeShellTooltip', ConsumablesPanel__makeShellTooltip)
+    from gui.Scaleform.framework.ToolTip import ToolTip
+    OverrideMethod(ToolTip, 'onCreateTypedTooltip', ToolTip_onCreateTypedTooltip)
 
 BigWorld.callback(0, _RegisterEvents)

@@ -4,6 +4,8 @@
   * added parameters in carousel config: fields/statusText and fields/clanLock
   * performance optimization and some bugfixes
   * added macros {{xr}}, {{c:xr}}, {{a:xr}} - same as {{r}} but always in XVM Scale
+  * new option:
+      "suppressCarouselTooltips" - suppress the tooltips in carousel
 
 XVM-6.1.0.1:
   * added new section in config sounds.xc, where you can setup extra sounds
