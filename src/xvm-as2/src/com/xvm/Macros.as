@@ -302,7 +302,7 @@ class com.xvm.Macros
             switch (ch)
             {
                 case ":":
-                    if (section < 1 && (part != "c" && part != "a" && part != "l10n"))
+                    if (section < 1 && (part != "c" && part != "a"))
                         nextSection = 1;
                     break;
                 case "%":
