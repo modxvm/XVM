@@ -773,6 +773,8 @@ package com.xvm
             pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
             // {{r}}
             pdata["r"] = getRating(pdata, "");
+            // {{xr}}
+            pdata["xr"] = getRating(pdata, "", "xvm");
 
             // {{winrate}}
             pdata["winrate"] = stat.winrate;
@@ -831,6 +833,8 @@ package com.xvm
             pdata["c:wgr"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#"); }
             // {{c:r}}
             pdata["c:r"] = getRating(pdata, "c:");
+            // {{c:xr}}
+            pdata["c:xr"] = getRating(pdata, "c:", "xvm");
 
             // {{c:winrate}}
             pdata["c:winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#"); }
@@ -880,6 +884,8 @@ package com.xvm
             pdata["a:wgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
             // {{a:r}}
             pdata["a:r"] = getRating(pdata, "a:");
+            // {{a:xr}}
+            pdata["a:xr"] = getRating(pdata, "a:", "xvm");
 
             // {{a:winrate}}
             pdata["a:winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
@@ -1036,12 +1042,13 @@ package com.xvm
         /**
          * Returns rating according settings in the personal cabinet
          */
-        private static function getRating(pdata:Object, prefix:String, suffix:String = ""):*
+        private static function getRating(pdata:Object, prefix:String, scale:String = null):*
         {
-            var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
+            var sc:String = (scale == null) ? Config.networkServicesSettings.scale : scale;
+            var n:String = sc + "_" + Config.networkServicesSettings.rating;
             if (!RATING_MATRIX.hasOwnProperty(n))
-                n = "basic_wgr";
-            var value:* = pdata[prefix + RATING_MATRIX[n] + suffix];
+                n = (scale != null ? scale : "basic") + "_wgr";
+            var value:* = pdata[prefix + RATING_MATRIX[n]];
             if (prefix != "" || value == null)
                 return value;
             value = StringUtils.leftPad(String(value), getRatingDefaultValue().length, " ");

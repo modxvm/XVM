@@ -894,6 +894,8 @@ class com.xvm.Macros
         pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
         // {{r}}
         pdata["r"] = getRating(pdata, "", "");
+        // {{xr}}
+        pdata["xr"] = getRating(pdata, "", "", "xvm");
 
         // {{winrate}}
         pdata["winrate"] = stat.winrate;
@@ -964,6 +966,9 @@ class com.xvm.Macros
         // {{c:r}}
         pdata["c:r"] = getRating(pdata, "c:", "");
         pdata["c:r#d"] = getRating(pdata, "c:", "#d");
+        // {{c:xr}}
+        pdata["c:xr"] = getRating(pdata, "c:", "", "xvm");
+        pdata["c:xr#d"] = getRating(pdata, "c:", "#d", "xvm");
 
         // {{c:winrate}}
         pdata["c:winrate"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#", false);
@@ -1024,6 +1029,8 @@ class com.xvm.Macros
         pdata["a:wgr"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
         // {{a:r}}
         pdata["a:r"] = getRating(pdata, "a:", "");
+        // {{a:xr}}
+        pdata["a:xr"] = getRating(pdata, "a:", "", "xvm");
 
         // {{a:winrate}}
         pdata["a:winrate"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
@@ -1164,11 +1171,12 @@ class com.xvm.Macros
     /**
      * Returns rating according settings in the personal cabinet
      */
-    private static function getRating(pdata:Object, prefix:String, suffix:String)
+    private static function getRating(pdata:Object, prefix:String, suffix:String, scale:String)
     {
-        var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
+        var sc:String = (scale == null) ? Config.networkServicesSettings.scale : scale;
+        var n:String = sc + "_" + Config.networkServicesSettings.rating;
         if (!RATING_MATRIX.hasOwnProperty(n))
-            n = "basic_wgr";
+            n = (scale != null ? scale : "basic") + "_wgr";
         var value = pdata[prefix + RATING_MATRIX[n] + suffix];
         if (prefix != "" || value == null)
             return value;
