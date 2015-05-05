@@ -100,7 +100,7 @@ for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
 done
 
 # build *.py files
-echo 'building .py files'
+echo 'building xvm'
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}
