@@ -64,7 +64,9 @@ build()
     return 0
   fi
 
-  echo "Building: $1"
+  if [ "${1##*/}" != "__version__.py" ]; then
+    echo "Building: $1"
+  fi
   result="$("$PY_EXEC" -c "import py_compile; py_compile.compile('$1')" 2>&1)"
   if [ "$result" == "" ]; then
     mkdir -p "$sum_dir"
