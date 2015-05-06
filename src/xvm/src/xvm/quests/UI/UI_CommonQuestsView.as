@@ -1,7 +1,7 @@
 package xvm.quests.UI
 {
     import com.xfw.*;
-    import com.xvm.*;
+    import xvm.quests.*;
 
     public dynamic class UI_CommonQuestsView extends CurrentTab_UI
     {
@@ -15,6 +15,7 @@ package xvm.quests.UI
         {
             super.configUI();
             questContent.questsList.itemRenderer = UI_QuestRenderer;
+            QuestsHelper.updateProgressIndicatorTextFielf(questContent.header.progressIndicator.textField);
         }
     }
 }
