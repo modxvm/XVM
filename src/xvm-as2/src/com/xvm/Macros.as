@@ -271,6 +271,27 @@ class com.xvm.Macros
             var type:String = typeof value;
             if (type == "function" && (macroName != "alive" || options == null))
                 isStaticMacro = false;
+            else if (vehId == 0)
+            {
+                switch (macroName)
+                {
+                    case "maxhp":
+                    case "veh-id":
+                    case "vehicle":
+                    case "vehiclename":
+                    case "vehicle-short":
+                    case "vtype":
+                    case "vtype-l":
+                    case "c:vtype":
+                    case "battletier-min":
+                    case "battletier-max":
+                    case "nation":
+                    case "level":
+                    case "rlevel":
+                        isStaticMacro = false;
+                        break;
+                }
+            }
 
             res += FormatMacro(macro, parts, value, vehId, options);
         }
@@ -707,7 +728,6 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("veh-id") || (pdata["veh-id"] == 0 && data.vid != 0))
         {
             var vdata:VehicleData = VehicleInfo.get(data.vid);
-            //Logger.addObject(vdata);
             if (vdata != null)
             {
                 if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)

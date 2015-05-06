@@ -7,7 +7,7 @@
     "textFieldShadow": { "color": "{{v.premium?0x994400|0x000000}}", "alpha": 0.8, "blur": 2, "strength": 2, "distance": 0, "angle": 0 }
   },
   "carousel": {
-    "enabled": true,
+    //"enabled": false,
     //"zoom": 0.75,
     "rows": 2,
     "padding": { "horizontal": 5, "vertical": 5 },
