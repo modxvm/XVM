@@ -760,8 +760,8 @@ package com.xvm
 
             // {{xvm-user}}
             pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
-            // {{language}}
-            pdata["language"] = stat.lang;
+            // {{flag}}
+            pdata["flag"] = stat.flag;
             // {{clanrank}}
             pdata["clanrank"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" : String(stat.clanInfoRank);
             // {{topclan}}

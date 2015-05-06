@@ -36,7 +36,7 @@ package com.xvm.types.stat
         public var clanInfoRank:Number = NaN;  // clan rank (ELO)
         public var name:String = null;         // player name in current game ("sirmax2_RU" for Common Test)
         public var status:Number = NaN;        // XVM activation status
-        public var lang:String = null;         // client language
+        public var flag:String = null;         // client flag
         public var team:Number = NaN;          // team (1 or 2)
         public var squadnum:Number = NaN;      // squad number
         public var alive:Boolean = false;      // alive

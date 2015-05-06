@@ -902,8 +902,8 @@ class com.xvm.Macros
         pdata["squad-num"] = stat.squadnum > 0 ? stat.squadnum : null;
         // {{xvm-user}}
         pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
-        // {{language}}
-        pdata["language"] = stat.lang;
+        // {{flag}}
+        pdata["flag"] = stat.flag;
         // {{clanrank}}
         pdata["clanrank"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" : String(stat.clanInfoRank);
         // {{topclan}}
