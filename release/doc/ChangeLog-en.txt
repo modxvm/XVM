@@ -1,4 +1,7 @@
-﻿XVM-6.1.1:
+﻿XVM-6.1.1.1-dev:
+  * added embedded fonts 'dynamic' and 'dynamic2' with various indicators
+
+XVM-6.1.1:
   * in extrafields in the players panels added "enabled" parameter with global macros support
   * added section hangar/serverInfo for changing server info visibility
   * added parameters in carousel config: fields/statusText and fields/clanLock
