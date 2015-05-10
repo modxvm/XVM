@@ -116,94 +116,126 @@ package com.xvm
         {
             var c:CTooltips = new CTooltips();
             // Tooltips
-            c.combineIcons = false;
-            c.hideBottomText = false;
+            c.combineIcons = true;
+            c.hideBottomText = true;
             c.lightTank = [
+                "maxHealth",
                 "circularVisionRadius",
                 "camo_coeff",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
-                "pitchLimits",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
                 "speedLimits",
-                "terrainResistance"
+                "terrainResistance",
+                "crewRolesIcons"
             ];
             c.mediumTank = [
+                "maxHealth",
                 "circularVisionRadius",
+                "camo_coeff",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
-                "pitchLimits",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
                 "speedLimits",
-                "terrainResistance"
+                "terrainResistance",
+                "crewRolesIcons"
             ];
             c.heavyTank = [
+                "maxHealth",
                 "circularVisionRadius",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
-                "pitchLimits",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
-                "speedLimits"
+                "speedLimits",
+                "crewRolesIcons"
             ];
             c.TD = [
+                "maxHealth",
                 "circularVisionRadius",
                 "camo_coeff",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
-                "pitchLimits",
-                "traverseLimits",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
-                "speedLimits"
+                "speedLimits",
+                "crewRolesIcons"
             ];
             c.SPG = [
+                "maxHealth",
                 "circularVisionRadius",
-                "turretArmor",
-                "hullArmor",
+                "camo_coeff",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "explosionRadius",
-                "pitchLimits",
-                "traverseLimits",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
-                "speedLimits"
+                "speedLimits",
+                "crewRolesIcons"
             ];
 
             return c;

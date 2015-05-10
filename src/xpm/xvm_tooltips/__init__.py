@@ -208,6 +208,11 @@ def VehicleParamsField_getValue(base, self):
                 #custom text
                 if paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
+                    localizedMacroStart = customtext.find('{{l10n:')
+                    if localizedMacroStart >= 0: # localization macro found
+                        localizedMacroEnd = customtext.index('}}', localizedMacroStart)
+                        localizedMacroText = customtext[localizedMacroStart + 7:localizedMacroEnd]
+                        customtext = customtext[:localizedMacroStart] + l10n(localizedMacroText) + customtext[localizedMacroEnd + 2:]
                     result[-1].append([h1_pad(customtext), ''])
                     continue
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:

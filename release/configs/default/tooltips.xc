@@ -6,107 +6,129 @@
   "tooltips": {
     // true - Combine icons of equipment and optional devices into one row.
     // true - Объединить значки оборудования и доп.модулей в одну строку.
-    "combineIcons": false,
+    "combineIcons": true,
     // true - Hide text at bottom of tooltip showing quantity of used eqipment, optional devices and crew.
     // true - Спрятать текст внизу подсказки показывающий количество используемого оборудования, доп. модулей и экипаж.
-    "hideBottomText": false,
+    "hideBottomText": true,
 
     "lightTank":    [
+                    "maxHealth",
                     "circularVisionRadius",
                     "camo_coeff",
-                    "maxHealth",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                     "turretArmor",
                     "hullArmor",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                     "shootingRadius",
                     "damageAvgSummary",
+                    "piercingPowerAvgSummary",
                     "damageAvgPerMinute",
                     "reloadTimeSecs",
-                    "piercingPowerAvgSummary",
-                    "pitchLimits",
                     "aimingTime",
                     "shotDispersionAngle",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                    "pitchLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
                     "speedLimits",
-                    "terrainResistance"
+                    "terrainResistance",
+                    "crewRolesIcons"
                     ],
     "mediumTank":   [
-                    "circularVisionRadius",
                     "maxHealth",
+                    "circularVisionRadius",
+                    "camo_coeff",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                     "turretArmor",
                     "hullArmor",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                     "shootingRadius",
                     "damageAvgSummary",
+                    "piercingPowerAvgSummary",
                     "damageAvgPerMinute",
                     "reloadTimeSecs",
-                    "piercingPowerAvgSummary",
-                    "pitchLimits",
                     "aimingTime",
                     "shotDispersionAngle",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                    "pitchLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
                     "speedLimits",
-                    "terrainResistance"
+                    "terrainResistance",
+                    "crewRolesIcons"
                     ],
     "heavyTank":    [
-                    "circularVisionRadius",
                     "maxHealth",
+                    "circularVisionRadius",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                     "turretArmor",
                     "hullArmor",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                     "shootingRadius",
                     "damageAvgSummary",
+                    "piercingPowerAvgSummary",
                     "damageAvgPerMinute",
                     "reloadTimeSecs",
-                    "piercingPowerAvgSummary",
-                    "pitchLimits",
                     "aimingTime",
                     "shotDispersionAngle",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                    "pitchLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
-                    "speedLimits"
+                    "speedLimits",
+                    "crewRolesIcons"
                     ],
     "TD":           [
+                    "maxHealth",
                     "circularVisionRadius",
                     "camo_coeff",
-                    "maxHealth",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                     "turretArmor",
                     "hullArmor",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                     "shootingRadius",
                     "damageAvgSummary",
+                    "piercingPowerAvgSummary",
                     "damageAvgPerMinute",
                     "reloadTimeSecs",
-                    "piercingPowerAvgSummary",
-                    "pitchLimits",
-                    "traverseLimits",
                     "aimingTime",
                     "shotDispersionAngle",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                    "pitchLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
-                    "speedLimits"
+                    "speedLimits",
+                    "crewRolesIcons"
                     ],
     "SPG":          [
-                    "circularVisionRadius",
                     "maxHealth",
-                    "turretArmor",
-                    "hullArmor",
+                    "circularVisionRadius",
+                    "camo_coeff",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                     "shootingRadius",
                     "damageAvgSummary",
+                    "piercingPowerAvgSummary",
                     "damageAvgPerMinute",
                     "reloadTimeSecs",
-                    "piercingPowerAvgSummary",
                     "explosionRadius",
-                    "pitchLimits",
-                    "traverseLimits",
                     "aimingTime",
                     "shotDispersionAngle",
+                    "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
+                    "pitchLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
-                    "speedLimits"
+                    "speedLimits",
+                    "crewRolesIcons"
                     ]
   }
 }
@@ -147,7 +169,7 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "rateOfFire",                           - Скорострельность оружия (в барабанах заменяется их специфичными) \ Rate of Fire (for clip guns will be shown their specific)
 "battleTiers",                          - Уровни боев танка \ Battle tiers of vehicle
 "maxHealth",                            - ХП танка \ HP of vehicle
-"TEXT:customtext",                      - Показывать произвольный текст (с поддержкой ActionScript HTML) \ Show custom text (with ActionScript HTML support)
+"TEXT:customtext",                      - Показывать произвольный текст (с поддержкой HTML и макросом {{l10n:text}}) \ Show custom text (with HTML support and macro {{l10n:text}})
 "camo_coeff",                           - Коэффициенты маскировки (неподвижно/в движении/при выстреле) \ Camo coefficients (standing still/moving/shooting)
 ...
 
