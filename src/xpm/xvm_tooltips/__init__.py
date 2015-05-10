@@ -6,7 +6,7 @@
 XFW_MOD_VERSION = '3.0.0'
 XFW_MOD_URL = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS = ['0.9.7']
+XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
 
 #####################################################################
 
@@ -15,7 +15,6 @@ import traceback
 import BigWorld
 from math import degrees, pi
 from helpers import i18n
-from gui.shared.utils import ItemsParameters, ParametersCache
 
 from xfw import *
 import xvm_main.python.config as config
@@ -32,6 +31,7 @@ from gun_rotation_shared import calcPitchLimitsFromDesc
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 def VehicleParamsField_getValue(base, self):
     try:
+        from gui.shared.utils import ItemsParameters, ParametersCache
         result = list()
         vehicle = self._tooltip.item
         configuration = self._tooltip.context.getParamsConfiguration(vehicle)

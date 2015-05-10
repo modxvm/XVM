@@ -20,7 +20,6 @@ import BigWorld
 
 import simplejson
 
-from gui.shared.gui_items import GUI_ITEM_TYPE
 from helpers.i18n import makeString
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.locale.PROFILE import PROFILE
