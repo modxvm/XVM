@@ -16,6 +16,7 @@ from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
+import xvm_main.python.userprefs as userprefs
 
 import wg_compat
 
@@ -129,6 +130,17 @@ def TmenXpPanel_onVehicleChange(self):
         isElite = vehicle.isElite if vehicle is not None else 0
         as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, vehId, isElite)
 
+def VehicleSelectorPopup_onSelectVehicles(self, items):
+    try:
+        if len(items) == 1:
+            id = int(items[0])
+            from gui.shared import g_itemsCache
+            vehicle = g_itemsCache.items.getItemByCD(id)
+            if vehicle and vehicle.isInInventory and not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
+                if config.config['hangar']['enableCrewAutoReturn'] and userprefs.get('xvm_crew/auto_prev_crew/%s' % vehicle.invID, True):
+                    wg_compat.g_instance.processReturnCrewForVehicleSelectorPopup(vehicle)
+    except Exception, ex:
+        err(traceback.format_exc())
 
 #####################################################################
 # Register events
@@ -150,5 +162,8 @@ def _RegisterEvents():
 
     from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
     RegisterEvent(TmenXpPanel, '_onVehicleChange', TmenXpPanel_onVehicleChange)
+
+    from gui.Scaleform.daapi.view.lobby.cyberSport.VehicleSelectorPopup import VehicleSelectorPopup
+    RegisterEvent(VehicleSelectorPopup, 'onSelectVehicles', VehicleSelectorPopup_onSelectVehicles, True)
 
 BigWorld.callback(0, _RegisterEvents)

@@ -15,4 +15,10 @@ class _WGCompat():
         if len(result.userMsg) and print_message:
             SystemMessages.g_instance.pushI18nMessage(result.userMsg, type=result.sysMsgType)
 
+    @decorators.process('crewReturning')
+    def processReturnCrewForVehicleSelectorPopup(self, vehicle):
+        if not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
+            from gui.shared.gui_items.processors.tankman import TankmanReturn
+            yield TankmanReturn(vehicle).request()
+
 g_instance = _WGCompat()

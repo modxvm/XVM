@@ -1,5 +1,6 @@
 ﻿XVM-6.1.1.1-dev:
   * added embedded fonts 'dynamic' and 'dynamic2' with various indicators
+  * added crew auto-return for Stronghold/Company/Team Battles vehicle selections
 
 XVM-6.1.1:
   * in extrafields in the players panels added "enabled" parameter with global macros support
@@ -11,7 +12,7 @@ XVM-6.1.1:
       "suppressCarouselTooltips" - suppress the tooltips in carousel
   * macro {{language}} renamed to {{flag}}, flags images folder renamed from "lang" to "flags"
   * added embedded font 'vtype' with vehicle types symbols
-
+  
 XVM-6.1.0.1:
   * added new section in config sounds.xc, where you can setup extra sounds
   * bugs fixed
