@@ -18,10 +18,11 @@ package xvm.contacts.UI
             super();
         }
 
-        override public function set data(value:Object):void
+        override public function set data(value:ContactItemVO):void
         {
             super.data = value;
-            xvm_contact_data = value.xvm_contact_data;
+            // TODO:0.9.8
+            //xvm_contact_data = value.xvm_contact_data;
         }
 
         override public function applyLayout():void

@@ -113,10 +113,10 @@ package xvm.tcarousel
             //Logger.add("UI_TankCarousel.scrollToIndex(" + index + ")");
             try
             {
-                //Logger.add("scrollToIndex: " + index + " _visibleSlots: " + _visibleSlots);
+                //Logger.add("scrollToIndex: " + index + " xfw_visibleSlots: " + xfw_visibleSlots);
                 if (!container || !_renderers)
                     return;
-                var n:uint = Math.floor(_visibleSlots / cfg.rows / 2);
+                var n:uint = Math.floor(xfw_visibleSlots / cfg.rows / 2);
                 index = Math.floor(index / cfg.rows);
                 currentFirstRenderer = Math.max(0, index - n);
                 goToFirstRenderer();
@@ -179,28 +179,31 @@ package xvm.tcarousel
         }
 
         private var _isMouseOver:Boolean = false;
-        override protected function onItemRollOver(param1:ListEventEx):void
+        override protected function onRendererItemRollOver(param1:VehicleCarouselVO):void
         {
             _isMouseOver = true;
-            super.onItemRollOver(param1);
+            super.onRendererItemRollOver(param1);
         }
 
-        override protected function onItemRollOut(param1:ListEventEx):void
+        override protected function onItemRollOut():void
         {
             _isMouseOver = false;
-            super.onItemRollOut(param1);
+            super.onItemRollOut();
         }
 
         // TankCarousel
+        // TODO:0.9.8
+        /*
         override public function set isSliding(value:Boolean):void
         {
-            this._isSliding = value;
-            if (!this._isSliding && this.dragHitArea && stage && this.dragHitArea.hitTestPoint(stage.mouseX, stage.mouseY, true) && this._isMouseOver)
+            this.xfw_isSliding = value;
+            if (!this.xfw_isSliding && this.dragHitArea && stage && this.dragHitArea.hitTestPoint(stage.mouseX, stage.mouseY, true) && this._isMouseOver)
             {
                 if (selectedItemRenderer != null)
                     (selectedItemRenderer as DragableListItemRenderer).imitateMouseOver();
             }
         }
+        */
 
         // Carousel
         override protected function updateArrowsState():void
@@ -208,13 +211,13 @@ package xvm.tcarousel
             //Logger.add("UI_TankCarousel.updateArrowsState()");
             try
             {
-                //Logger.add("updateArrowsState: " + _totalRenderers  + " " + this._visibleSlots + " " + currentFirstRenderer);
+                //Logger.add("updateArrowsState: " + _totalRenderers  + " " + this.xfw_visibleSlots + " " + currentFirstRenderer);
 
-                if (_totalRenderers > this._visibleSlots && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this._visibleSlots)
+                if (_totalRenderers > this.xfw_visibleSlots && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this.xfw_visibleSlots)
                 {
                     this.leftArrow.enabled = true;
                     this.rightArrow.enabled = false;
-                    this.allowDrag = true;
+                    this.xfw_allowDrag = true;
                 }
                 else
                 {
@@ -234,15 +237,15 @@ package xvm.tcarousel
             try
             {
                 super.updateVisibleSlotsCount();
-                _visibleSlots *= cfg.rows;
-                //Logger.add("_visibleSlots=" + _visibleSlots);
-                return _visibleSlots;
+                xfw_visibleSlots *= cfg.rows;
+                //Logger.add("xfw_visibleSlots=" + xfw_visibleSlots);
+                return xfw_visibleSlots;
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
-            return _visibleSlots;
+            return xfw_visibleSlots;
         }
 
         // Carousel
@@ -255,7 +258,7 @@ package xvm.tcarousel
                 {
                     //Logger.add("RENDERERS");
                     repositionRenderers();
-                    //Logger.add("_visibleSlots=" + _visibleSlots + " _totalRenderers=" + _totalRenderers);
+                    //Logger.add("xfw_visibleSlots=" + xfw_visibleSlots + " _totalRenderers=" + _totalRenderers);
                 }
 
                 //Logger.add("updateUIPosition");
@@ -263,9 +266,9 @@ package xvm.tcarousel
                 removeEmptySlots();
 
                 var slotWidth:Number = this.slotWidth;
-                this.slotWidth /= cfg.rows;
+                this.xfw_slotWidth = this.slotWidth / cfg.rows;
                 super.updateUIPosition();
-                this.slotWidth = slotWidth;
+                this.xfw_slotWidth = slotWidth;
 
                 if (this.bg)
                     bg.height = height;
@@ -284,7 +287,7 @@ package xvm.tcarousel
             {
                 if (_renderers == null)
                     return;
-                this.xfw_scopeWidth = Math.ceil(Math.max(_totalRenderers, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
+                this.xfw_scopeWidth = Math.ceil(Math.max(_totalRenderers, xfw_visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
             }
             catch (ex:Error)
             {
@@ -298,7 +301,7 @@ package xvm.tcarousel
             //Logger.add("UI_TankCarousel.currentFirstRenderer(" + value + ")");
             try
             {
-                var v:uint = Math.min(Math.max(Math.ceil((_totalRenderers - _visibleSlots) / cfg.rows), 0), value);
+                var v:uint = Math.min(Math.max(Math.ceil((_totalRenderers - xfw_visibleSlots) / cfg.rows), 0), value);
                 //Logger.add(" value=" + value + " currentFirstRenderer=" + v);
                 super.currentFirstRenderer = v;
             }
@@ -317,19 +320,19 @@ package xvm.tcarousel
                 super.getCurrentFirstRendererOnAnim();
                 if (container && _renderers)
                 {
-                    var n:Number = -Math.round((container.x - this._defContainerPos) / this.slotWidth);
-                    if (n >= _totalRenderers - this._visibleSlots)
-                        _currentFirstRendererOnAnim = Math.max(0, _totalRenderers - this._visibleSlots);
-                    //Logger.add("_currentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
+                    var n:Number = -Math.round((container.x - this.xfw_defContainerPos) / this.slotWidth);
+                    if (n >= _totalRenderers - this.xfw_visibleSlots)
+                        xfw_currentFirstRendererOnAnim = Math.max(0, _totalRenderers - this.xfw_visibleSlots);
+                    //Logger.add("xfw_currentFirstRendererOnAnim: " + xfw_currentFirstRendererOnAnim);
                 }
-                //Logger.add("getCurrentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
-                return _currentFirstRendererOnAnim;
+                //Logger.add("getCurrentFirstRendererOnAnim: " + xfw_currentFirstRendererOnAnim);
+                return xfw_currentFirstRendererOnAnim;
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
-            return _currentFirstRendererOnAnim;
+            return xfw_currentFirstRendererOnAnim;
         }
 
         // Carousel
@@ -341,9 +344,9 @@ package xvm.tcarousel
                 super.arrowSlide();
                 if (this.xfw_courseFactor == -1)
                 {
-                    if (this._currentFirstRendererOnAnim >= Math.ceil((_totalRenderers - _visibleSlots) / cfg.rows))
+                    if (this.xfw_currentFirstRendererOnAnim >= Math.ceil((_totalRenderers - xfw_visibleSlots) / cfg.rows))
                     {
-                        this.currentFirstRenderer = _totalRenderers - this._visibleSlots;
+                        this.currentFirstRenderer = _totalRenderers - this.xfw_visibleSlots;
                         this.xfw_courseFactor = 0;
                     }
                 }
@@ -360,7 +363,7 @@ package xvm.tcarousel
             //Logger.add("UI_TankCarousel.handleMouseWheel(...)");
             try
             {
-                if (param1.delta <= 0 && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this._visibleSlots)
+                if (param1.delta <= 0 && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this.xfw_visibleSlots)
                     return;
                 super.handleMouseWheel(param1);
             }
@@ -386,10 +389,11 @@ package xvm.tcarousel
                 {
                     leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
                     this.vehicleFilters.visible = true;
+
                     updateDefContainerPos();
-                    if (container && (slidingIntervalId == 0) && !isTween)
+                    if (container && !slidingIsRunning && !isTween)
                     {
-                        container.x = _defContainerPos - currentFirstRenderer * slotWidth;
+                        container.x = xfw_defContainerPos - currentFirstRenderer * slotWidth;
                         renderersMask.x = leftArrow.x + leftArrow.width;
                         dragHitArea.x = renderersMask.x;
                     }

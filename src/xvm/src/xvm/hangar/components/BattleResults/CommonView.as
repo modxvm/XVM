@@ -7,6 +7,7 @@ package xvm.hangar.components.BattleResults
     import flash.text.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.battleResults.*;
     import xvm.hangar.UI.battleResults.*;
 
@@ -136,12 +137,12 @@ package xvm.hangar.components.BattleResults
             damageAssistedTitle = this.createTextField(FIELD_POS_TITLE, 2);
 
             damageAssistedValue = this.createTextField(FIELD_POS_NON_PREM, 2);
-            damageAssistedValue.name = EfficiencyIconRenderer.ASSIST;
+            damageAssistedValue.name = BATTLE_EFFICIENCY_TYPES.ASSIST;
             damageAssistedValue.addEventListener(MouseEvent.ROLL_OVER, onOver);
             damageAssistedValue.addEventListener(MouseEvent.ROLL_OUT, onOut);
 
             damageValue = this.createTextField(FIELD_POS_PREM, 2);
-            damageValue.name = EfficiencyIconRenderer.DAMAGE;
+            damageValue.name = BATTLE_EFFICIENCY_TYPES.DAMAGE;
             damageValue.addEventListener(MouseEvent.ROLL_OVER, onOver);
             damageValue.addEventListener(MouseEvent.ROLL_OUT, onOut);
         }
@@ -211,14 +212,14 @@ package xvm.hangar.components.BattleResults
                 var w:Number = 32;
 
                 // spotted
-                //view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.SPOTTED, x: x, y: y1, width: w, height:h,
+                //view.addChild(createTotalsTextField( { name: BATTLE_EFFICIENCY_TYPES.SPOTTED, x: x, y: y1, width: w, height:h,
                 //    htmlText: getTotalSpottedStr(data) } ));
-                view.addChild(createTotalItem( { x: x, y: y, kind: EfficiencyIconRenderer.SPOTTED,
+                view.addChild(createTotalItem( { x: x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DETECTION,
                     value: getTotalSpotted(data),
                     tooltip: { } } ));
 
                 // damage assisted (radio/tracks)
-                view.addChild(createTotalItem( { x: x + w * 1, y: y, kind: EfficiencyIconRenderer.ASSIST,
+                view.addChild(createTotalItem( { x: x + w * 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.ASSIST,
                     value: getTotalAssistCount(data),
                     tooltip: (data.details == null || data.details.length == 0) ? null : {
                         value: data.damageAssisted,
@@ -227,12 +228,12 @@ package xvm.hangar.components.BattleResults
                     } } ));
 
                 // crits
-                view.addChild(createTotalItem( { x: x + w * 2, y: y, kind: EfficiencyIconRenderer.CRITS,
+                view.addChild(createTotalItem( { x: x + w * 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS,
                     value: getTotalCritsCount(data),
                     tooltip: { value: getTotalCritsCount(data) } } ));
 
                 // piercings
-                view.addChild(createTotalItem( { x: x + w * 3 - 1, y: y, kind: EfficiencyIconRenderer.DAMAGE,
+                view.addChild(createTotalItem( { x: x + w * 3 - 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE,
                     value: data.piercings,
                     tooltip: (data.details == null || data.details.length == 0) ? null : {
                         values: data.damageDealt + "<br/>" + data.piercings,
@@ -240,7 +241,7 @@ package xvm.hangar.components.BattleResults
                     } } ));
 
                 // kills
-                view.addChild(createTotalItem( { x: x + w * 4 - 2, y: y, kind: EfficiencyIconRenderer.KILL,
+                view.addChild(createTotalItem( { x: x + w * 4 - 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION,
                     value: data.kills,
                     tooltip: { value: -1 } } ));
             }

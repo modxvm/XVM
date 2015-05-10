@@ -54,12 +54,15 @@ package xvm.hangar.views
 
                 // tabs: CommonStats, TeamStats, DetailsStats
                 //Logger.add("View loaded: battleResults." + e.linkage);
+                // TODO:0.9.8
+                /*
                 switch (e.linkage)
                 {
                     case "CommonStats":
                         CommonView.init(e.view as CommonStats);
                         break;
                 }
+                */
 
                 processedViews.push(e.linkage);
             }

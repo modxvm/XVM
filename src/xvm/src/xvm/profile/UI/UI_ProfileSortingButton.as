@@ -20,7 +20,7 @@ package xvm.profile.UI
             super();
         }
 
-        override public function showTooltip():void
+        override protected function showTooltip():void
         {
             if (tooltip == "xvm_xte")
             {
