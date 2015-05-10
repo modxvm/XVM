@@ -1,6 +1,6 @@
 ﻿XVM-6.1.1.1-dev:
   * added embedded fonts 'dynamic' and 'dynamic2' with various indicators
-  * added crew auto-return for Stronghold/Company/Team Battles vehicle selections
+  * added crew auto-return for Stronghold/Team Battles vehicle selections
 
 XVM-6.1.1:
   * in extrafields in the players panels added "enabled" parameter with global macros support
