@@ -36,7 +36,7 @@ class _Ping(object):
         self.hosts = list()
         loginSection = ResMgr.openSection('scripts_config.xml')['login']
         if loginSection is not None:
-            for (name, subSec) in loginSection.items():
+            for (name, subSec) in loginSection.iteritems():
                 self.hosts.append({
                     'name': subSec.readStrings('name')[0],
                     'url': subSec.readStrings('url')[0]})

@@ -184,7 +184,7 @@ class _Stat(object):
         # update players
         self._loadingClanIconsCount = 0
         vehicles = BigWorld.player().arena.vehicles
-        for (vehId, vData) in vehicles.items():
+        for (vehId, vData) in vehicles.iteritems():
             if vehId not in self.players:
                 pl = _Player(vehId, vData)
                 self._load_clanIcon(pl)
@@ -207,7 +207,7 @@ class _Stat(object):
         self._load_stat(plVehId)
 
         players = {}
-        for (vehId, pl) in self.players.items():
+        for (vehId, pl) in self.players.iteritems():
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
             if cacheKey not in self.cacheBattle:
                 cacheKey2 = "%d" % pl.playerId
@@ -239,7 +239,7 @@ class _Stat(object):
             self.players = {}
 
             # update players
-            for (vehId, vehData) in value['vehicles'].items():
+            for (vehId, vehData) in value['vehicles'].iteritems():
                 accountDBID = vehData[0]['accountDBID']
                 plData = value['players'][accountDBID]
                 vData = {
@@ -253,7 +253,7 @@ class _Stat(object):
             self._load_stat(0)
 
             players = {}
-            for (vehId, pl) in self.players.items():
+            for (vehId, pl) in self.players.iteritems():
                 cacheKey = "%d=%d" % (pl.playerId, pl.vId)
                 if cacheKey not in self.cacheBattle:
                     cacheKey2 = "%d" % pl.playerId
@@ -349,7 +349,7 @@ class _Stat(object):
 
         replay = isReplay()
         all_cached = True
-        for (vehId, pl) in self.players.items():
+        for (vehId, pl) in self.players.iteritems():
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
 
             if cacheKey not in self.cacheBattle:
@@ -391,7 +391,7 @@ class _Stat(object):
                 if isReplay():
                     log('XVM network services inactive (id=%s)' % playerVehicleID)
                 players = []
-                for (vehId, pl) in self.players.items():
+                for (vehId, pl) in self.players.iteritems():
                     players.append(self._get_battle_stub(pl))
                 data = {'players': players}
 
@@ -431,7 +431,7 @@ class _Stat(object):
 
         if self.players is not None:
             # TODO: optimize
-            for (vehId, pl) in self.players.items():
+            for (vehId, pl) in self.players.iteritems():
                 if pl.playerId == stat['_id']:
                     if pl.clan:
                         stat['clan'] = pl.clan

@@ -10,6 +10,8 @@ XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
 
 #####################################################################
 
+import traceback
+
 import BigWorld
 
 from xfw import *
@@ -21,12 +23,14 @@ from xvm_main.python.xvm import l10n
 # event handlers
 
 #barracks: add nation flag and skills for tanksman
-def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenInBarracks, berthPrice, actionPriceData, berthBuyCount, tankmanArr):
+def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenInBarracks, tankmanArr):
     try:
         import nations
         from gui.shared import g_itemsCache
         imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
         for tankman in tankmanArr:
+            if 'role' not in tankman:
+                continue
             tankman['rank'] = tankman['role']
             tankman['role'] = "<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankman['nationID']])
             tankman_full_info = g_itemsCache.items.getTankman(tankman['tankmanID'])
@@ -42,7 +46,8 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenIn
             tankman['role'] += ' ' + skills_str
     except Exception as ex:
         err(traceback.format_exc())
-    return base(self, tankmenCount, placesCount, tankmenInBarracks, berthPrice, actionPriceData, berthBuyCount, tankmanArr)
+
+    return base(self, tankmenCount, placesCount, tankmenInBarracks, tankmanArr)
 
 #####################################################################
 # Register events
