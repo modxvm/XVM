@@ -53,9 +53,7 @@ package xvm.crew
             if (renderer == null)
                 return;
 
-            // TODO:0.9.8
-            Logger.addObject(renderer.data, 1, "renderer.data");
-            var data:TankmanVO = TankmanVO(renderer.data);
+            var data:TankmanRoleVO = TankmanRoleVO(renderer.data);
 
             if (App.utils.commons.isRightButton(e) && renderer.enabled)
             {
@@ -86,13 +84,10 @@ package xvm.crew
                 // tankmanId: { tankman:Object, slot:Number }
                 var selectedTankmans:Dictionary = new Dictionary();
 
-                // TODO:0.9.8
-                Logger.addObject((page.crew.list as CoreList).dataProvider, 2, "page.crew.list.dataProvider");
                 for each (var renderer:TankmanRoleVO in (page.crew.list as CoreList).dataProvider)
                 {
-                    // TODO:0.9.8
-                    //if (renderer.inTank == true)
-                    //    continue;
+                    if (renderer.tankman.inTank == true)
+                        continue;
 
                     var best:Object = null;
                     for (var i:int = 1; i < renderer.recruitList.length; i++)

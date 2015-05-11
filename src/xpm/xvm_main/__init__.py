@@ -96,7 +96,7 @@ def FlashBeforeDelete(self):
 #    # debug("> call: %s, %s" % (methodName, str(args)))
 #    base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
 
-def VehicleMarkersManager_invokeMarker(base, self, handle, function, args=None):
+def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
@@ -168,7 +168,7 @@ def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, 
 
 # show quantity of alive instead of dead in frags panel
 # original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
-def FragCorrelationPanel_updateFrags(base, self, playerTeam):
+def FragCorrelationPanel_updateScore(base, self, playerTeam):
     try:
         if 'showAliveNotFrags' in config.config['fragCorrelation'] and config.config['fragCorrelation']['showAliveNotFrags']:
             if not playerTeam:
@@ -334,18 +334,33 @@ def _RegisterEvents():
     RegisterEvent(game, 'fini', fini)
     RegisterEvent(game, 'handleKeyEvent', g_xvm.onKeyEvent)
 
-    from gui.Scaleform.Battle import VehicleMarkersManager
-    OverrideMethod(VehicleMarkersManager, 'invokeMarker', VehicleMarkersManager_invokeMarker)
-
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
-    OverrideMethod(ProfileTechniqueWindow, 'requestData', ProfileTechniqueWindowRequestData)
+    # login
 
     from gui.Scaleform.daapi.view.login import LoginView
     OverrideMethod(LoginView, 'onSetOptions', LoginView_onSetOptions)
 
+    # lobby
+
+    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+    OverrideMethod(ProfileTechniqueWindow, 'requestData', ProfileTechniqueWindowRequestData)
+
+    from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
+    RegisterEvent(AmmunitionPanel, 'highlightParams', AmmunitionPanel_highlightParams)
+
+    from account_helpers.BattleResultsCache import BattleResultsCache
+    OverrideMethod(BattleResultsCache, 'get', BattleResultsCache_get)
+
+    from gui.Scaleform.daapi.view.meta.WaitingViewMeta import WaitingViewMeta
+    OverrideMethod(WaitingViewMeta, 'showS', WaitingViewMeta_fix)
+    OverrideMethod(WaitingViewMeta, 'hideS', WaitingViewMeta_fix)
+
+    # pre-battle
+
     from PlayerEvents import g_playerEvents
     g_playerEvents.onArenaCreated += onArenaCreated
     g_playerEvents.onAvatarBecomePlayer += onAvatarBecomePlayer
+
+    # battle
 
     from Avatar import PlayerAvatar
     RegisterEvent(PlayerAvatar, 'onEnterWorld', PlayerAvatar_onEnterWorld)
@@ -359,8 +374,11 @@ def _RegisterEvents():
     from gui.battle_control.battle_arena_ctrl import BattleArenaController
     OverrideMethod(BattleArenaController, '_BattleArenaController__makeHash', BattleArenaController__makeHash)
 
-    from gui.Scaleform.Battle import FragCorrelationPanel
-    OverrideMethod(FragCorrelationPanel, 'updateFrags', FragCorrelationPanel_updateFrags)
+    from gui.Scaleform.daapi.view.battle.markers import MarkersManager
+    OverrideMethod(MarkersManager, 'invokeMarker', MarkersManager_invokeMarker)
+
+    from gui.Scaleform.daapi.view.battle.score_panel import _FragCorrelationPanel
+    OverrideMethod(_FragCorrelationPanel, 'updateScore', FragCorrelationPanel_updateScore)
 
     from gui.Scaleform.Minimap import Minimap
     RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
@@ -369,18 +387,8 @@ def _RegisterEvents():
     OverrideMethod(Minimap, '_Minimap__callEntryFlash', _Minimap__callEntryFlash)
     RegisterEvent(Minimap, '_Minimap__addEntryLit', _Minimap__addEntryLit)
 
-    from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
-    RegisterEvent(AmmunitionPanel, 'highlightParams', AmmunitionPanel_highlightParams)
-
     from BattleReplay import g_replayCtrl
     g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
-
-    from account_helpers.BattleResultsCache import BattleResultsCache
-    OverrideMethod(BattleResultsCache, 'get', BattleResultsCache_get)
-
-    from gui.Scaleform.daapi.view.meta.WaitingViewMeta import WaitingViewMeta
-    OverrideMethod(WaitingViewMeta, 'showS', WaitingViewMeta_fix)
-    OverrideMethod(WaitingViewMeta, 'hideS', WaitingViewMeta_fix)
 
     # import account_helpers.CustomFilesCache as cache
     # cache._MIN_LIFE_TIME = 15
