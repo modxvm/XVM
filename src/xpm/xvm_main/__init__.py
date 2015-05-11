@@ -161,8 +161,8 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
 # add vid to players panel data
-def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, vStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter):
-    res = base(self, index, playerFullName, vInfoVO, vStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter)
+def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter, playerAccountID, inviteSendingProhibited):
+    res = base(self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter, playerAccountID, inviteSendingProhibited)
     res['vid'] = vInfoVO.vehicleType.compactDescr
     return res
 

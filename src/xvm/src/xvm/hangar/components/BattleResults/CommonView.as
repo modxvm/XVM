@@ -39,6 +39,8 @@ package xvm.hangar.components.BattleResults
 
             instance.compactQuests();
 
+            // TODO:0.9.8
+            /*
             view.detailsMc.xpTitleLbl.width = 300;
 
             if (Config.config.battleResults.showExtendedInfo)
@@ -60,6 +62,7 @@ package xvm.hangar.components.BattleResults
 
             if (Config.config.battleResults.showNetIncome)
                 instance.showNetIncome(view.detailsMc.data);
+            */
         }
 
         //
@@ -71,13 +74,15 @@ package xvm.hangar.components.BattleResults
 
         private function compactQuests():void
         {
-            view.questList.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
+            view.progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
 
             // hide shadows
             view.upperShadow.visible = false;
             view.lowerShadow.visible = false;
         }
 
+        // TODO:0.9.8
+        /*
         private function hideDetailBtn():void
         {
             view.detailsMc.detailedReportBtn.visible = false;
@@ -95,13 +100,13 @@ package xvm.hangar.components.BattleResults
             var premXP:int = XfwUtils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);
             view.detailsMc.xpLbl.htmlText = App.utils.locale.integer(origXP) + XP_IMG_TXT;
             view.detailsMc.premXpLbl.htmlText = App.utils.locale.integer(premXP) + XP_IMG_TXT;
-       }
+        }
 
         private function showCrewExperience(data:Object):void
         {
             Logger.add("xp=" + data.xp + " tmenXP=" + data.tmenXP);
-            /*var origCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col1"].split('<')[0]);
-            var premCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);*/
+            //var origCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col1"].split('<')[0]);
+            //var premCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);
 
             var origCrewXP:int = data.tmenXP / (data.isPremium ? (data.premiumXPFactor10 / 10.0) : 1);
             var premCrewXP:int = data.tmenXP * (data.isPremium ? 1 : (data.premiumXPFactor10 / 10.0));
@@ -118,7 +123,7 @@ package xvm.hangar.components.BattleResults
                 "/ " + App.utils.locale.integer(origCrewXP) + " <IMG SRC");
             view.detailsMc.premXpLbl.htmlText = view.detailsMc.premXpLbl.htmlText.replace("<IMG SRC",
                 "/ " + App.utils.locale.integer(premCrewXP) + " <IMG SRC");
-       }
+        }
 
         private function showNetIncome(data:Object):void
         {
@@ -335,8 +340,8 @@ package xvm.hangar.components.BattleResults
                 result[param] = obj2[param];
             return result;
         }
+        */
     }
-
 }
 
 /*

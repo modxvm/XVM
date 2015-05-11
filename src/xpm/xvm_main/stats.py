@@ -240,14 +240,14 @@ class _Stat(object):
 
             # update players
             for (vehId, vehData) in value['vehicles'].items():
-                accountDBID = vehData['accountDBID']
+                accountDBID = vehData[0]['accountDBID']
                 plData = value['players'][accountDBID]
                 vData = {
                     'accountDBID': accountDBID,
                     'name': plData['name'],
                     'clanAbbrev': plData['clanAbbrev'],
-                    'typeCompDescr': vehData['typeCompDescr'],
-                    'team': vehData['team']}
+                    'typeCompDescr': vehData[0]['typeCompDescr'],
+                    'team': vehData[0]['team']}
                 self.players[vehId] = _Player(vehId, vData)
 
             self._load_stat(0)

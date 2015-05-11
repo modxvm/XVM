@@ -1,10 +1,17 @@
 package xvm.hangar.UI.battleResults
 {
+    import com.xfw.*;
     import flash.events.*;
     import scaleform.clik.constants.*;
 
     public dynamic class UI_BattleResultsAwards extends BattleResultsAwards_UI
     {
+        public function UI_BattleResultsAwards()
+        {
+            //Logger.add("UI_BattleResultsAwards");
+            super();
+        }
+
         override protected function draw():void
         {
             super.draw();
