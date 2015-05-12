@@ -21,6 +21,7 @@ package xvm.ping.PingServers
 
         public function PingServersView(cfg:CPingServers)
         {
+            mouseEnabled = false;
             this.cfg = cfg;
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
@@ -152,6 +153,7 @@ package xvm.ping.PingServers
             tf.multiline = true;
             tf.wordWrap = false;
             tf.selectable = false;
+            tf.mouseEnabled = false;
             tf.styleSheet = WGUtils.createStyleSheet(createCss());
             tf.alpha = cfg.alpha / 100.0;
             tf.htmlText =  "";

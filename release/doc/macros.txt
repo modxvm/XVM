@@ -58,7 +58,7 @@ Legend:
 │ D │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
 │ S │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
-│ S │ {{language}}       │ X │ X │ X │ X │ X │ X │ X │ Player's client language
+│ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ Flag for player selected in the personal cabinet or determined from the client language
 │ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ Global map clan rating, from 1 to 1000 (http://worldoftanks.eu/leaderboard/clans/)
 │ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
 │ S │ {{vehicle-class}}  │   │   │   │ X │   │   │   │ places special symbol depending on subject vehicle class
@@ -96,6 +96,7 @@ Legend:
 ├───┼────────────────────┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────
 │ S │ {{avglvl}}         │ X │ X │ X │ X │ X │ average level (tier) of tanks
 │ S │ {{r}}              │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+│ S │ {{xr}}             │ X │ X │ X │ X │ X │ same as {{r}} but always in XVM Scale
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ per-vehicle efficiency (xTE) (values 00-99, XX for Tops)
 │ S │ {{xeff}}           │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
 │ S │ {{xwn6}}           │ X │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
@@ -119,6 +120,7 @@ Legend:
 │ S │ {{tfb}}            │ X │ X │ X │ X │ X │ average frags per battle for current tank
 │ S │ {{tsb}}            │ X │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
 │ S │ {{c:r}}            │ X │ X │ X │ X │ X │ color depending on rating type selected in the personal cabinet
+│ S │ {{c:xr}}           │ X │ X │ X │ X │ X │ color depending on rating type selected in the personal cabinet
 │ S │ {{c:xte}}          │ X │ X │ X │ X │ X │ color depending on player per-vehicle efficiency
 │ S │ {{c:xeff}}         │ X │ X │ X │ X │ X │ color depending on XVM Scale for efficiency
 │ S │ {{c:xwn6}}         │ X │ X │ X │ X │ X │ color depending on XVM Scale for WN6

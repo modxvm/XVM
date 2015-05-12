@@ -7,6 +7,7 @@ package xvm.hangar.components.BattleResults
     import flash.text.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.battleResults.*;
     import xvm.hangar.UI.battleResults.*;
 
@@ -38,6 +39,8 @@ package xvm.hangar.components.BattleResults
 
             instance.compactQuests();
 
+            // TODO:0.9.8
+            /*
             view.detailsMc.xpTitleLbl.width = 300;
 
             if (Config.config.battleResults.showExtendedInfo)
@@ -59,6 +62,7 @@ package xvm.hangar.components.BattleResults
 
             if (Config.config.battleResults.showNetIncome)
                 instance.showNetIncome(view.detailsMc.data);
+            */
         }
 
         //
@@ -70,13 +74,15 @@ package xvm.hangar.components.BattleResults
 
         private function compactQuests():void
         {
-            view.questList.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
+            view.progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
 
             // hide shadows
             view.upperShadow.visible = false;
             view.lowerShadow.visible = false;
         }
 
+        // TODO:0.9.8
+        /*
         private function hideDetailBtn():void
         {
             view.detailsMc.detailedReportBtn.visible = false;
@@ -94,13 +100,13 @@ package xvm.hangar.components.BattleResults
             var premXP:int = XfwUtils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);
             view.detailsMc.xpLbl.htmlText = App.utils.locale.integer(origXP) + XP_IMG_TXT;
             view.detailsMc.premXpLbl.htmlText = App.utils.locale.integer(premXP) + XP_IMG_TXT;
-       }
+        }
 
         private function showCrewExperience(data:Object):void
         {
             Logger.add("xp=" + data.xp + " tmenXP=" + data.tmenXP);
-            /*var origCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col1"].split('<')[0]);
-            var premCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);*/
+            //var origCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col1"].split('<')[0]);
+            //var premCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);
 
             var origCrewXP:int = data.tmenXP / (data.isPremium ? (data.premiumXPFactor10 / 10.0) : 1);
             var premCrewXP:int = data.tmenXP * (data.isPremium ? 1 : (data.premiumXPFactor10 / 10.0));
@@ -117,7 +123,7 @@ package xvm.hangar.components.BattleResults
                 "/ " + App.utils.locale.integer(origCrewXP) + " <IMG SRC");
             view.detailsMc.premXpLbl.htmlText = view.detailsMc.premXpLbl.htmlText.replace("<IMG SRC",
                 "/ " + App.utils.locale.integer(premCrewXP) + " <IMG SRC");
-       }
+        }
 
         private function showNetIncome(data:Object):void
         {
@@ -136,12 +142,12 @@ package xvm.hangar.components.BattleResults
             damageAssistedTitle = this.createTextField(FIELD_POS_TITLE, 2);
 
             damageAssistedValue = this.createTextField(FIELD_POS_NON_PREM, 2);
-            damageAssistedValue.name = EfficiencyIconRenderer.ASSIST;
+            damageAssistedValue.name = BATTLE_EFFICIENCY_TYPES.ASSIST;
             damageAssistedValue.addEventListener(MouseEvent.ROLL_OVER, onOver);
             damageAssistedValue.addEventListener(MouseEvent.ROLL_OUT, onOut);
 
             damageValue = this.createTextField(FIELD_POS_PREM, 2);
-            damageValue.name = EfficiencyIconRenderer.DAMAGE;
+            damageValue.name = BATTLE_EFFICIENCY_TYPES.DAMAGE;
             damageValue.addEventListener(MouseEvent.ROLL_OVER, onOver);
             damageValue.addEventListener(MouseEvent.ROLL_OUT, onOut);
         }
@@ -211,14 +217,14 @@ package xvm.hangar.components.BattleResults
                 var w:Number = 32;
 
                 // spotted
-                //view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.SPOTTED, x: x, y: y1, width: w, height:h,
+                //view.addChild(createTotalsTextField( { name: BATTLE_EFFICIENCY_TYPES.SPOTTED, x: x, y: y1, width: w, height:h,
                 //    htmlText: getTotalSpottedStr(data) } ));
-                view.addChild(createTotalItem( { x: x, y: y, kind: EfficiencyIconRenderer.SPOTTED,
+                view.addChild(createTotalItem( { x: x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DETECTION,
                     value: getTotalSpotted(data),
                     tooltip: { } } ));
 
                 // damage assisted (radio/tracks)
-                view.addChild(createTotalItem( { x: x + w * 1, y: y, kind: EfficiencyIconRenderer.ASSIST,
+                view.addChild(createTotalItem( { x: x + w * 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.ASSIST,
                     value: getTotalAssistCount(data),
                     tooltip: (data.details == null || data.details.length == 0) ? null : {
                         value: data.damageAssisted,
@@ -227,12 +233,12 @@ package xvm.hangar.components.BattleResults
                     } } ));
 
                 // crits
-                view.addChild(createTotalItem( { x: x + w * 2, y: y, kind: EfficiencyIconRenderer.CRITS,
+                view.addChild(createTotalItem( { x: x + w * 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS,
                     value: getTotalCritsCount(data),
                     tooltip: { value: getTotalCritsCount(data) } } ));
 
                 // piercings
-                view.addChild(createTotalItem( { x: x + w * 3 - 1, y: y, kind: EfficiencyIconRenderer.DAMAGE,
+                view.addChild(createTotalItem( { x: x + w * 3 - 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE,
                     value: data.piercings,
                     tooltip: (data.details == null || data.details.length == 0) ? null : {
                         values: data.damageDealt + "<br/>" + data.piercings,
@@ -240,7 +246,7 @@ package xvm.hangar.components.BattleResults
                     } } ));
 
                 // kills
-                view.addChild(createTotalItem( { x: x + w * 4 - 2, y: y, kind: EfficiencyIconRenderer.KILL,
+                view.addChild(createTotalItem( { x: x + w * 4 - 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION,
                     value: data.kills,
                     tooltip: { value: -1 } } ));
             }
@@ -334,8 +340,8 @@ package xvm.hangar.components.BattleResults
                 result[param] = obj2[param];
             return result;
         }
+        */
     }
-
 }
 
 /*

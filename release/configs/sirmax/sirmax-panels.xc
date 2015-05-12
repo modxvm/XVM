@@ -7,8 +7,8 @@
   },
   "large": {
     //"enabled": false,
-    "nickFormatLeft": "        {{r_size=2|{{r_size=4?   |    }}}}{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>{{r_size=2|{{r_size=4?   |    }}}}       &nbsp;",
+    "nickFormatLeft": "        {{r_size=2?|{{r_size=4?   |    }}}}{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
+    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>{{r_size=2?|{{r_size=4?   |    }}}}       &nbsp;",
     "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
     "vehicleFormatRight": "{{hp}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:winrate}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",

@@ -1,5 +1,6 @@
 package xvm.hangar.UI.battleResults
 {
+    import com.xfw.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.lobby.questsWindow.*;
@@ -12,6 +13,7 @@ package xvm.hangar.UI.battleResults
     {
         public function UI_BR_SubtaskComponent()
         {
+            //Logger.add("UI_BR_SubtaskComponent");
             super();
             //return;
 

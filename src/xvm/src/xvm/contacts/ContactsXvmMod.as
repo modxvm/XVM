@@ -11,7 +11,7 @@ package xvm.contacts
     {
         public override function get logPrefix():String
         {
-            return "[XVM:COMMENTS]";
+            return "[XVM:CONTACTS]";
         }
 
         private static const _views:Object =

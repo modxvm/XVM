@@ -1,4 +1,4 @@
-package xvm.quests
+package xvm.quests.UI
 {
     import com.xfw.*;
     import com.xvm.*;

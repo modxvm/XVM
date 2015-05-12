@@ -3,10 +3,10 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION    = "3.0.0"
-XFW_MOD_URL        = "http://www.modxvm.com/"
-XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XFW_GAME_VERSIONS  = ["0.9.7"]
+XFW_MOD_VERSION    = '3.0.0'
+XFW_MOD_URL        = 'http://www.modxvm.com/'
+XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
+XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
 
 #####################################################################
 # constants
@@ -14,11 +14,14 @@ XFW_GAME_VERSIONS  = ["0.9.7"]
 class COMMANDS(object):
     AS_EDIT_CONTACT_DATA = "xvm_contacts.as_edit_contact_data"
 
+
 class MENU(object):
     XVM_EDIT_CONTACT_DATA = 'XvmEditContactData'
 
+
 class VIEW(object):
     XVM_EDIT_CONTACT_DATA_ALIAS = 'XvmEditContactDataView'
+
 
 #####################################################################
 # includes
@@ -50,9 +53,11 @@ def start():
         None,
         ScopeTemplates.DEFAULT_SCOPE))
 
+
 def ContactsListPopover_populate(self):
     #log('ContactsListPopover_populate')
     contacts.initialize()
+
 
 def ContactConverter_makeVO(base, self, contact, includeIcons = True):
     #log('ContactConverter_makeVO')
@@ -62,6 +67,7 @@ def ContactConverter_makeVO(base, self, contact, includeIcons = True):
     #log(res)
     return res
 
+
 # PlayerContactsCMHandler
 
 def PlayerContactsCMHandler_getHandlers(base, self):
@@ -70,15 +76,18 @@ def PlayerContactsCMHandler_getHandlers(base, self):
     handlers.update({MENU.XVM_EDIT_CONTACT_DATA: '_XvmEditContactData'})
     return handlers
 
+
 def PlayerContactsCMHandler_generateOptions(base, self):
     #log('PlayerContactsCMHandler_generateOptions')
     options = base(self)
     options.append(self._makeItem(MENU.XVM_EDIT_CONTACT_DATA, l10n('Edit data'), optInitData={'enabled': contacts.isAvailable()}))
     return options
 
+
 def _XvmEditContactData(self):
     #log('_XvmEditContactData')
     as_xfw_cmd(COMMANDS.AS_EDIT_CONTACT_DATA, self.userName, self.databaseID)
+
 
 #####################################################################
 # Register events

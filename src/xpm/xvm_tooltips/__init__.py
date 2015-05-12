@@ -6,7 +6,7 @@
 XFW_MOD_VERSION = '3.0.0'
 XFW_MOD_URL = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS = ['0.9.7']
+XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
 
 #####################################################################
 
@@ -15,7 +15,6 @@ import traceback
 import BigWorld
 from math import degrees, pi
 from helpers import i18n
-from gui.shared.utils import ItemsParameters, ParametersCache
 
 from xfw import *
 import xvm_main.python.config as config
@@ -32,6 +31,7 @@ from gun_rotation_shared import calcPitchLimitsFromDesc
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 def VehicleParamsField_getValue(base, self):
     try:
+        from gui.shared.utils import ItemsParameters, ParametersCache
         result = list()
         vehicle = self._tooltip.item
         configuration = self._tooltip.context.getParamsConfiguration(vehicle)
@@ -208,6 +208,11 @@ def VehicleParamsField_getValue(base, self):
                 #custom text
                 if paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
+                    localizedMacroStart = customtext.find('{{l10n:')
+                    if localizedMacroStart >= 0: # localization macro found
+                        localizedMacroEnd = customtext.index('}}', localizedMacroStart)
+                        localizedMacroText = customtext[localizedMacroStart + 7:localizedMacroEnd]
+                        customtext = customtext[:localizedMacroStart] + l10n(localizedMacroText) + customtext[localizedMacroEnd + 2:]
                     result[-1].append([h1_pad(customtext), ''])
                     continue
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:
@@ -289,6 +294,15 @@ def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
         err(traceback.format_exc())
     return result
 
+# suppress carousel tooltips
+def ToolTip_onCreateTypedTooltip(base, self, type, *args):
+    try:
+        if type == 'carouselVehicle' and 'suppressCarouselTooltips' in config.config['hangar']['carousel'] and config.config['hangar']['carousel']['suppressCarouselTooltips']:
+            return
+    except Exception as ex:
+        err(traceback.format_exc())
+    base(self, type, *args)
+
 #####################################################################
 # Utility functions
 
@@ -311,5 +325,7 @@ def _RegisterEvents():
     OverrideMethod(VehicleParamsField, '_getValue', VehicleParamsField_getValue)
     from gui.Scaleform.daapi.view.battle.ConsumablesPanel import ConsumablesPanel
     OverrideMethod(ConsumablesPanel, '_ConsumablesPanel__makeShellTooltip', ConsumablesPanel__makeShellTooltip)
+    from gui.Scaleform.framework.ToolTip import ToolTip
+    OverrideMethod(ToolTip, 'onCreateTypedTooltip', ToolTip_onCreateTypedTooltip)
 
 BigWorld.callback(0, _RegisterEvents)

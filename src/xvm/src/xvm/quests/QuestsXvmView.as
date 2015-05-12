@@ -6,14 +6,12 @@ package xvm.quests
 {
     import com.xfw.*;
     import com.xvm.infrastructure.*;
-    import flash.utils.*;
     import net.wg.gui.lobby.questsWindow.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
     public class QuestsXvmView extends XvmViewBase
     {
-        private static const UI_LINKAGE:String = getQualifiedClassName(UI_QuestsTileChainsView);
 
         public function QuestsXvmView(view:IView)
         {

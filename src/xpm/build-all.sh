@@ -49,25 +49,35 @@ build_xfw()
 
 build()
 {
-  echo -n "Build: $1 "
   f=${1#*/}
   d=${f%/*}
 
   [ "$d" = "$f" ] && d=""
 
-  if [ -f "../../~output/sha1/$2/python/$f.sha1" ] && [ "$(cat ../../~output/sha1/$2/python/$f.sha1)" = "$(sha1sum "$1")" ]; then
-    echo "isn't changed"
+  pyc_dir="../../~output/$2/python/$d"
+  pyc_file="../../~output/$2/python/${f}c"
+  sum_dir="../../~output/sha1/$2/python/$d"
+  sum_file="../../~output/sha1/$2/python/$f.sha1"
+  sum=$(sha1sum "$1")
+
+  if [ -f "$pyc_file" ] && [ -f "$sum_file" ] && [ "$(cat $sum_file)" = "$sum" ]; then
     return 0
   fi
-  echo "rebuilding"
 
-  "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
+  if [ "${1##*/}" != "__version__.py" ]; then
+    echo "Building: $1"
+  fi
+  result="$("$PY_EXEC" -c "import py_compile; py_compile.compile('$1')" 2>&1)"
+  if [ "$result" == "" ]; then
+    mkdir -p "$sum_dir"
+    sha1sum $1 > "$sum_file"
+  else
+    echo $result
+  fi
+
   [ ! -f $1c ] && exit
-
-  mkdir -p "../../~output/sha1/$2/python/$d"
-  sha1sum $1 > "../../~output/sha1/$2/python/$f.sha1"
-  mkdir -p "../../~output/$2/python/$d"
-  cp $1c "../../~output/$2/python/${f}c"
+  mkdir -p "$pyc_dir"
+  cp $1c "$pyc_file"
   rm -f $1c
 }
 
@@ -90,7 +100,7 @@ for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
 done
 
 # build *.py files
-echo 'building .py files'
+echo 'building xvm'
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}

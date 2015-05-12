@@ -86,6 +86,7 @@ package xvm.limits
                 goldLocker.dispose();
                 goldLocker = null;
             }
+
             if (freeXpLocker != null)
             {
                 freeXpLocker.dispose();
@@ -95,26 +96,39 @@ package xvm.limits
 
         private function onHeaderButtonsReposition(e:HeaderEvents):void
         {
-            var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
-            if (goldControl)
+            try
             {
-                var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
-                if (goldContent)
+                if (goldLocker != null)
                 {
-                    goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
-                    goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 20;
+                    var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
+                    if (goldControl != null)
+                    {
+                        var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
+                        if (goldContent != null)
+                        {
+                            goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
+                            goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 20;
+                        }
+                    }
+                }
+
+                if (freeXpLocker != null)
+                {
+                    var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
+                    if (freeXpControl != null)
+                    {
+                        var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
+                        if (freeXpContent != null)
+                        {
+                            freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
+                            freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 20;
+                        }
+                    }
                 }
             }
-
-            var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
-            if (freeXpControl)
+            catch (ex:Error)
             {
-                var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
-                if (freeXpContent)
-                {
-                    freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
-                    freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 20;
-                }
+                Logger.err(ex);
             }
         }
 

@@ -18,7 +18,7 @@ package xvm.contacts.UI
             super();
         }
 
-        override public function set data(value:Object):void
+        override public function set data(value:ContactItemVO):void
         {
             super.data = value;
             xvm_contact_data = value.xvm_contact_data;

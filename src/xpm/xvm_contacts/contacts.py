@@ -5,14 +5,18 @@
 def initialize():
     return _contacts.initialize()
 
+
 def isAvailable():
     return _contacts.is_available
+
 
 def getXvmContactData(uid):
     return _contacts.getXvmContactData(uid)
 
+
 def setXvmContactData(uid, value):
     return _contacts.setXvmContactData(uid, value)
+
 
 # PRIVATE
 
@@ -45,11 +49,10 @@ class _Contacts:
 
     def initialize(self):
         try:
-            if self.contacts_disabled:
-                return
+            self.is_available = False
 
-            if not token.networkServicesSettings['comments']:
-                self.contacts_disabled = True
+            self.contacts_disabled = not token.networkServicesSettings['comments']
+            if self.contacts_disabled:
                 return
 
             if token.isOnline:
@@ -66,7 +69,8 @@ class _Contacts:
                     if data['ver'] != _CONTACTS_DATA_VERSION:
                         pass # data = convertOldVersion(data)
                     self.cached_data = data
-                    self.is_available = True
+
+                self.is_available = True
 
         except Exception as ex:
             self.contacts_disabled = True
@@ -146,5 +150,6 @@ class _Contacts:
         # log(utils.hide_guid(response))
 
         return response
+
 
 _contacts = _Contacts()

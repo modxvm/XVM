@@ -116,94 +116,139 @@ package com.xvm
         {
             var c:CTooltips = new CTooltips();
             // Tooltips
-            c.combineIcons = false;
-            c.hideBottomText = false;
+            c.combineIcons = true;
+            c.hideBottomText = true;
             c.lightTank = [
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:general}}</b></font>",
+                "maxHealth",
                 "circularVisionRadius",
                 "camo_coeff",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
-                "pitchLimits",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
                 "speedLimits",
-                "terrainResistance"
+                "terrainResistance",
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:crew}}</b></font>",
+                "crewRolesIcons"
             ];
             c.mediumTank = [
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:general}}</b></font>",
+                "maxHealth",
                 "circularVisionRadius",
+                "camo_coeff",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
-                "pitchLimits",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
                 "speedLimits",
-                "terrainResistance"
+                "terrainResistance",
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:crew}}</b></font>",
+                "crewRolesIcons"
             ];
             c.heavyTank = [
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:general}}</b></font>",
+                "maxHealth",
                 "circularVisionRadius",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
-                "pitchLimits",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
-                "speedLimits"
+                "speedLimits",
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:crew}}</b></font>",
+                "crewRolesIcons"
             ];
             c.TD = [
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:general}}</b></font>",
+                "maxHealth",
                 "circularVisionRadius",
                 "camo_coeff",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
-                "pitchLimits",
-                "traverseLimits",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
-                "speedLimits"
+                "speedLimits",
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:crew}}</b></font>",
+                "crewRolesIcons"
             ];
             c.SPG = [
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:general}}</b></font>",
+                "maxHealth",
                 "circularVisionRadius",
+                "camo_coeff",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:armor}}</b></font>",
                 "turretArmor",
                 "hullArmor",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:firepower}}</b></font>",
                 "shootingRadius",
                 "damageAvgSummary",
-                "damageAvgPerMinute",
                 "piercingPowerAvgSummary",
+                "damageAvgPerMinute",
+                "reloadTimeSecs",
                 "explosionRadius",
-                "pitchLimits",
-                "traverseLimits",
                 "aimingTime",
                 "shotDispersionAngle",
+                "TEXT:<font color='#E8E0BD'><b>{{l10n:mobility}}</b></font>",
+                "pitchLimits",
+                "traverseLimits",
                 "turretRotationSpeed",
                 "chassisRotationSpeed",
                 "enginePowerPerTon",
-                "speedLimits"
+                "speedLimits",
+				"TEXT:<font color='#E8E0BD'><b>{{l10n:crew}}</b></font>",
+                "crewRolesIcons"
             ];
 
             return c;
@@ -297,6 +342,7 @@ package com.xvm
             c.carousel.nations_order = [];
             c.carousel.types_order = ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"];
             c.carousel.sorting_criteria = ["nation", "type", "level"];
+            c.suppressCarouselTooltips = false;
 
             // Clock
             c.clock = new CHangarClock();
@@ -433,8 +479,8 @@ package com.xvm
             c.clanIcon.alpha = 90;
             // Dispay format. Macro-substitutiones allowed.
             c.darkenNotReadyIcon = true;
-            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{language|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
-            c.formatRightNick = "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> <img src='xvm://res/icons/lang/{{language|default}}.png' width='16' height='13'>";
+            c.formatLeftNick = "<img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatRightNick = "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> <img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'>";
             c.formatLeftVehicle = "{{vehicle}}<font face='mono' size='{{xvm-stat?13|0}}'> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font></font>";
             c.formatRightVehicle = "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}";
             return c;
@@ -456,8 +502,8 @@ package com.xvm
             c.clanIcon.w = 16;
             c.clanIcon.alpha = 90;
             // Dispay format.
-            c.formatLeftNick = "<img src='xvm://res/icons/lang/{{language|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
-            c.formatRightNick = "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> <img src='xvm://res/icons/lang/{{language|default}}.png' width='16' height='13'>";
+            c.formatLeftNick = "<img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>";
+            c.formatRightNick = "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> <img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'>";
             c.formatLeftVehicle = "{{vehicle}}<font face='mono' size='{{xvm-stat?13|0}}'> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font></font>";
             c.formatRightVehicle = "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}";
             return c;

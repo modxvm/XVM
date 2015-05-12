@@ -6,6 +6,11 @@ package xvm.quests
 {
     import com.xfw.*;
     import com.xvm.infrastructure.*;
+    import xvm.quests.UI.*;
+
+    // Class links
+    UI_QuestsTileChainsView;
+    UI_CommonQuestsView;
 
     public class QuestsXvmMod extends XvmModBase
     {

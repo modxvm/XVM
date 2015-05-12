@@ -3,10 +3,10 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XFW_MOD_VERSION    = "3.0.0"
-XFW_MOD_URL        = "http://www.modxvm.com/"
-XFW_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XFW_GAME_VERSIONS  = ["0.9.7"]
+XFW_MOD_VERSION    = '3.0.0'
+XFW_MOD_URL        = 'http://www.modxvm.com/'
+XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
+XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
 
 #####################################################################
 
@@ -16,6 +16,7 @@ from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
+import xvm_main.python.userprefs as userprefs
 
 import wg_compat
 
@@ -57,7 +58,8 @@ def onXfwCommand(cmd, *args):
     try:
         if cmd == COMMANDS.PUT_PREVIOUS_CREW:
             from CurrentVehicle import g_currentVehicle
-            PutPreviousCrew(g_currentVehicle, False)
+            if g_currentVehicle.isInHangar() and not (g_currentVehicle.isCrewFull() or g_currentVehicle.isInBattle() or g_currentVehicle.isLocked()):
+                PutPreviousCrew(g_currentVehicle, False)
             return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
@@ -128,6 +130,17 @@ def TmenXpPanel_onVehicleChange(self):
         isElite = vehicle.isElite if vehicle is not None else 0
         as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, vehId, isElite)
 
+def VehicleSelectorPopup_onSelectVehicles(self, items):
+    try:
+        if len(items) == 1:
+            id = int(items[0])
+            from gui.shared import g_itemsCache
+            vehicle = g_itemsCache.items.getItemByCD(id)
+            if vehicle and vehicle.isInInventory and not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
+                if config.config['hangar']['enableCrewAutoReturn'] and userprefs.get('xvm_crew/auto_prev_crew/%s' % vehicle.invID, True):
+                    wg_compat.g_instance.processReturnCrewForVehicleSelectorPopup(vehicle)
+    except Exception, ex:
+        err(traceback.format_exc())
 
 #####################################################################
 # Register events
@@ -149,5 +162,8 @@ def _RegisterEvents():
 
     from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
     RegisterEvent(TmenXpPanel, '_onVehicleChange', TmenXpPanel_onVehicleChange)
+
+    from gui.Scaleform.daapi.view.lobby.cyberSport.VehicleSelectorPopup import VehicleSelectorPopup
+    RegisterEvent(VehicleSelectorPopup, 'onSelectVehicles', VehicleSelectorPopup_onSelectVehicles, True)
 
 BigWorld.callback(0, _RegisterEvents)

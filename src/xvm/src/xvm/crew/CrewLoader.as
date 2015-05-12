@@ -53,7 +53,7 @@ package xvm.crew
             if (renderer == null)
                 return;
 
-            var data:RecruitRendererVO = RecruitRendererVO(renderer.data);
+            var data:TankmanRoleVO = TankmanRoleVO(renderer.data);
 
             if (App.utils.commons.isRightButton(e) && renderer.enabled)
             {
@@ -84,32 +84,32 @@ package xvm.crew
                 // tankmanId: { tankman:Object, slot:Number }
                 var selectedTankmans:Dictionary = new Dictionary();
 
-                for each (var renderer:RecruitRendererVO in (page.crew.list as CoreList).dataProvider)
+                for each (var renderer:TankmanRoleVO in (page.crew.list as CoreList).dataProvider)
                 {
-                    if (renderer.inTank == true)
+                    if (renderer.tankman.inTank == true)
                         continue;
 
-                        var best:Object = null;
-                        for (var i:int = 1; i < renderer.recruitList.length; i++)
-                        {
-                            var tankman:Object = renderer.recruitList[i];
+                    var best:Object = null;
+                    for (var i:int = 1; i < renderer.recruitList.length; i++)
+                    {
+                        var tankman:Object = renderer.recruitList[i];
 
-                            // already in tank or selected for other slot
-                            if (tankman.inTank == true || selectedTankmans.hasOwnProperty(tankman.tankmanID))
-                                continue;
+                        // already in tank or selected for other slot
+                        if (tankman.inTank == true || selectedTankmans.hasOwnProperty(tankman.tankmanID))
+                            continue;
 
-                            // first tankman in RecruitRendererVO.recruitList contain tank info
-                            if (checkFunc(tankman, best, renderer.recruitList[0], renderer.vehicleElite))
-                            {
-                                //Logger.addObject(best, "crew: old best");
-                                //Logger.addObject(tankman, "crew: new best");
-                                best = tankman;
-                            }
-                        }
-                        if (best != null)
+                        // first tankman in RecruitRendererVO.recruitList contain tank info
+                        if (checkFunc(tankman, best, renderer.recruitList[0], renderer.vehicleElite))
                         {
-                            selectedTankmans[best.tankmanID] = {tankman: best, slot: renderer.slot};
+                            //Logger.addObject(best, "crew: old best");
+                            //Logger.addObject(tankman, "crew: new best");
+                            best = tankman;
                         }
+                    }
+                    if (best != null)
+                    {
+                        selectedTankmans[best.tankmanID] = {tankman: best, slot: renderer.slot};
+                    }
                 }
 
                 for each (var obj:Object in selectedTankmans)

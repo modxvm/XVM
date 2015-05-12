@@ -271,6 +271,27 @@ class com.xvm.Macros
             var type:String = typeof value;
             if (type == "function" && (macroName != "alive" || options == null))
                 isStaticMacro = false;
+            else if (vehId == 0)
+            {
+                switch (macroName)
+                {
+                    case "maxhp":
+                    case "veh-id":
+                    case "vehicle":
+                    case "vehiclename":
+                    case "vehicle-short":
+                    case "vtype":
+                    case "vtype-l":
+                    case "c:vtype":
+                    case "battletier-min":
+                    case "battletier-max":
+                    case "nation":
+                    case "level":
+                    case "rlevel":
+                        isStaticMacro = false;
+                        break;
+                }
+            }
 
             res += FormatMacro(macro, parts, value, vehId, options);
         }
@@ -302,7 +323,7 @@ class com.xvm.Macros
             switch (ch)
             {
                 case ":":
-                    if (section < 1 && (pdata.hasOwnProperty(part) || (macro.indexOf("l10n") == 0)))
+                    if (section < 1 && (part != "c" && part != "a"))
                         nextSection = 1;
                     break;
                 case "%":
@@ -356,6 +377,8 @@ class com.xvm.Macros
 
         if (parts[PART_NAME] == "r" && parts[PART_DEF] == "")
             parts[PART_DEF] = getRatingDefaultValue();
+        else if (parts[PART_NAME] == "xr" && parts[PART_DEF] == "")
+            parts[PART_DEF] = getRatingDefaultValue("xvm");
 
         //Logger.add("[AS2][MACROS][GetMacroParts]: " + parts.join(", "));
         _macro_parts_cache[macro] = parts;
@@ -440,7 +463,7 @@ class com.xvm.Macros
         if (rep != null)
             return rep;
 
-        if (norm != null && type == "number")
+        if (norm != null)
             res = prepareValue(value, name, norm, def, vehId);
 
         if (fmt == null && suf == null)
@@ -494,7 +517,7 @@ class com.xvm.Macros
     }
 
     private var _prepare_value_cache:Object = {};
-    private function prepareValue(value:Number, name:String, norm:String, def:String, vehId:Number):String
+    private function prepareValue(value, name:String, norm:String, def:String, vehId:Number):String
     {
         if (norm == null)
             return def;
@@ -530,6 +553,25 @@ class com.xvm.Macros
                     break;
                 if (isNaN(value))
                     value = 100;
+                res = Math.round(parseInt(norm) * value / 100).toString();
+                break;
+            case "r":
+            case "xr":
+            case "xte":
+            case "xwgr":
+            case "xwn":
+            case "xwn6":
+            case "xeff":
+                if (name == "r" && Config.networkServicesSettings.scale != "xvm")
+                    break;
+                if (value == 'XX')
+                    value = 100;
+                else
+                {
+                    value = parseInt(value);
+                    if (isNaN(value))
+                        value = 0;
+                }
                 res = Math.round(parseInt(norm) * value / 100).toString();
                 break;
             case "l10n":
@@ -686,7 +728,6 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("veh-id") || (pdata["veh-id"] == 0 && data.vid != 0))
         {
             var vdata:VehicleData = VehicleInfo.get(data.vid);
-            //Logger.addObject(vdata);
             if (vdata != null)
             {
                 if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
@@ -861,8 +902,8 @@ class com.xvm.Macros
         pdata["squad-num"] = stat.squadnum > 0 ? stat.squadnum : null;
         // {{xvm-user}}
         pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
-        // {{language}}
-        pdata["language"] = stat.lang;
+        // {{flag}}
+        pdata["flag"] = stat.flag;
         // {{clanrank}}
         pdata["clanrank"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" : String(stat.clanInfoRank);
         // {{topclan}}
@@ -894,6 +935,8 @@ class com.xvm.Macros
         pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
         // {{r}}
         pdata["r"] = getRating(pdata, "", "");
+        // {{xr}}
+        pdata["xr"] = getRating(pdata, "", "", "xvm");
 
         // {{winrate}}
         pdata["winrate"] = stat.winrate;
@@ -964,6 +1007,9 @@ class com.xvm.Macros
         // {{c:r}}
         pdata["c:r"] = getRating(pdata, "c:", "");
         pdata["c:r#d"] = getRating(pdata, "c:", "#d");
+        // {{c:xr}}
+        pdata["c:xr"] = getRating(pdata, "c:", "", "xvm");
+        pdata["c:xr#d"] = getRating(pdata, "c:", "#d", "xvm");
 
         // {{c:winrate}}
         pdata["c:winrate"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#", false);
@@ -1024,6 +1070,8 @@ class com.xvm.Macros
         pdata["a:wgr"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
         // {{a:r}}
         pdata["a:r"] = getRating(pdata, "a:", "");
+        // {{a:xr}}
+        pdata["a:xr"] = getRating(pdata, "a:", "", "xvm");
 
         // {{a:winrate}}
         pdata["a:winrate"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
@@ -1133,57 +1181,50 @@ class com.xvm.Macros
         return pname;
     }
 
+    // rating
+
     private static var RATING_MATRIX:Object =
     {
-        xvm_wgr: "xwgr",
-        xvm_wn6: "xwn6",
-        xvm_wn8: "xwn8",
-        xvm_eff: "xeff",
-        xvm_xte: "xte",
-        basic_wgr: "wgr",
-        basic_wn6: "wn6",
-        basic_wn8: "wn8",
-        basic_eff: "eff",
-        basic_xte: "xte"
-    }
-
-    private static var RATING_DEFAULTS_MATRIX:Object =
-    {
-        xvm_wgr: "--",
-        xvm_wn6: "--",
-        xvm_wn8: "--",
-        xvm_eff: "--",
-        xvm_xte: "--",
-        basic_wgr: "-----",
-        basic_wn6: "----",
-        basic_wn8: "----",
-        basic_eff: "----",
-        basic_xte: "--"
+        xvm_wgr:   { name: "xwgr", def: "--" },
+        xvm_wn6:   { name: "xwn6", def: "--" },
+        xvm_wn8:   { name: "xwn8", def: "--" },
+        xvm_eff:   { name: "xeff", def: "--" },
+        xvm_xte:   { name: "xte",  def: "--" },
+        basic_wgr: { name: "wgr",  def: "-----" },
+        basic_wn6: { name: "wn6",  def: "----" },
+        basic_wn8: { name: "wn8",  def: "----" },
+        basic_eff: { name: "eff",  def: "----" },
+        basic_xte: { name: "xte",  def: "--" }
     }
 
     /**
      * Returns rating according settings in the personal cabinet
      */
-    private static function getRating(pdata:Object, prefix:String, suffix:String)
+    private static function getRating(pdata:Object, prefix:String, suffix:String, scale:String)
     {
-        var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
-        if (!RATING_MATRIX.hasOwnProperty(n))
-            n = "basic_wgr";
-        var value = pdata[prefix + RATING_MATRIX[n] + suffix];
+        var name:String = _getRatingName(scale);
+        var value = pdata[prefix + RATING_MATRIX[name].name + suffix];
         if (prefix != "" || value == null)
             return value;
-        value = Strings.padLeft(String(value), getRatingDefaultValue().length);
+        value = Strings.padLeft(String(value), getRatingDefaultValue(scale).length);
         return value;
     }
 
     /**
      * Returns default value for rating according settings in the personal cabinet
      */
-    private static function getRatingDefaultValue():String
+    private static function getRatingDefaultValue(scale:String):String
     {
-        var n:String = Config.networkServicesSettings.scale + "_" + Config.networkServicesSettings.rating;
-        if (!RATING_DEFAULTS_MATRIX.hasOwnProperty(n))
-            n = "basic_wgr";
-        return RATING_DEFAULTS_MATRIX[n];
+        var name:String = _getRatingName(scale);
+        return RATING_MATRIX[name].def;
+    }
+
+    private static function _getRatingName(scale:String):String
+    {
+        var sc:String = (scale == null) ? Config.networkServicesSettings.scale : scale;
+        var name:String = sc + "_" + Config.networkServicesSettings.rating;
+        if (!RATING_MATRIX.hasOwnProperty(name))
+            name = (scale != null ? scale : "basic") + "_wgr";
+        return name;
     }
 }

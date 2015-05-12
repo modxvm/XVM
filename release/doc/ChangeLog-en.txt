@@ -1,8 +1,18 @@
-﻿XVM-6.1.0.2-dev:
+﻿XVM-6.1.1.1-dev:
+  * added embedded fonts 'dynamic' and 'dynamic2' with various indicators
+  * added crew auto-return for Stronghold/Team Battles vehicle selections
+
+XVM-6.1.1:
   * in extrafields in the players panels added "enabled" parameter with global macros support
   * added section hangar/serverInfo for changing server info visibility
   * added parameters in carousel config: fields/statusText and fields/clanLock
-
+  * performance optimization and some bugfixes
+  * added macros {{xr}}, {{c:xr}}, {{a:xr}} - same as {{r}} but always in XVM Scale
+  * new option:
+      "suppressCarouselTooltips" - suppress the tooltips in carousel
+  * macro {{language}} renamed to {{flag}}, flags images folder renamed from "lang" to "flags"
+  * added embedded font 'vtype' with vehicle types symbols
+  
 XVM-6.1.0.1:
   * added new section in config sounds.xc, where you can setup extra sounds
   * bugs fixed

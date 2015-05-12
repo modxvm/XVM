@@ -32,9 +32,9 @@ package xvm.contacts.UI
             return nickTextInput;
         }
 
-        override public function getFocusChain():Array
+        override public function getFocusChain():Vector.<InteractiveObject>
         {
-            return [nickTextInput, commentTextArea].concat(super.getFocusChain());
+            return new <InteractiveObject>[nickTextInput, commentTextArea].concat(super.getFocusChain());
         }
 
         override protected function configUI():void

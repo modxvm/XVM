@@ -427,7 +427,7 @@ class Xvm(object):
         if movie is None:
             return
 
-        #debug('updateBattle: {0} {1}'.format(vID, set(state.items())))
+        #debug('updateBattle: {0} {1}'.format(vID, set(state.iteritems())))
         movie.invoke((AS2RESPOND.BATTLE_STATE,
                       targets,
                       state['playerName'],

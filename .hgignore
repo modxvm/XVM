@@ -3,6 +3,8 @@ syntax: glob
 *.*~
 *~
 
+.idea
+
 addons/clanicons/archives/*.*
 addons/clanicons/icons/
 addons/stat-utils/db/players-test.qvw
