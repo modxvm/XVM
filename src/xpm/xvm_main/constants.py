@@ -1,14 +1,22 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
 class XVM(object):
-    API_VERSION = "3.0"
-    SERVERS = ["https://stat.modxvm.com:443/{API}/{REQ}"]
+    API_VERSION = '3.0'
+    SERVERS = ['https://stat.modxvm.com:443/{API}/{REQ}']
     FINGERPRINTS = [ # fingerprints for SSL certificates
-        "46169f8bd6f743733b23066f5cce2cd3d0392af8", # old
-        "918154b8f25c74c2bcdeaf767cda7badf7f8a5e1"] # new
+        '46169f8bd6f743733b23066f5cce2cd3d0392af8', # old
+        '918154b8f25c74c2bcdeaf767cda7badf7f8a5e1'] # new
     TIMEOUT = 5000
-    # WS_URL = "ws://echo.websocket.org/"
-    WS_URL = "wss://echo.websocket.org/"
+    # WS_URL = 'ws://echo.websocket.org/'
+    WS_URL = 'wss://echo.websocket.org/'
+
+    CONFIG_DIR = 'res_mods/configs/xvm'
+    CONFIG_FILE = CONFIG_DIR + '/xvm.xc'
+    SHARED_RESOURCES_DIR = 'res_mods/mods/shared_resources/xvm/res'
+
+    LOCALE_AUTO_DETECTION = 'auto'
+    REGION_AUTO_DETECTION = 'auto'
+
 
 # DAAPI commands
 

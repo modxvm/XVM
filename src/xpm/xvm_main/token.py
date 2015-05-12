@@ -268,8 +268,8 @@ def _getVersionText(curVer):
     msg = ''
     global _verInfo
     if _verInfo is not None:
-        if gameRegion in _verInfo:
-            data = _verInfo[gameRegion]
+        if GAME_REGION in _verInfo:
+            data = _verInfo[GAME_REGION]
             if utils.compareVersions(data['ver'], curVer) == 1:
                 return '{{l10n:ver/newVersion:%s:%s}}\n' % (data['ver'], data['message'])
     return ''

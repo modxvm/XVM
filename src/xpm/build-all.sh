@@ -107,6 +107,23 @@ for fn in $(find . -type "f" -name "*.py"); do
   build $f mods/packages/$m
 done
 
+# generate default config from .xc files
+# TODO: review and refactor
+echo 'generate default_config.pyc'
+dc_fn=../../~output/mods/packages/xvm_main/python/default_config.py
+rm -f "${dc_fn}c"
+"$PY_EXEC" -c "
+import sys
+sys.path.insert(0, '../xfw/~output/python/mods/xfw/python/lib')
+import JSONxLoader
+result = JSONxLoader.load('../../release/configs/default/@xvm.xc')
+print('DEFAULT_CONFIG={}'.format(result))
+" > $dc_fn 2>&1
+"$PY_EXEC" -c "import py_compile; py_compile.compile('$dc_fn')" 2>&1
+[ ! -f ${dc_fn}c ] && cat "$dc_fn"
+rm -f "$dc_fn"
+[ ! -f ${dc_fn}c ] && exit
+
 popd >/dev/null
 
 # run test

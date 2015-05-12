@@ -20,8 +20,8 @@ import BigWorld
 
 from xfw import *
 
-import config
 from constants import *
+import config
 import filecache
 from logger import *
 import utils
@@ -42,6 +42,7 @@ _SWFS = [_LOBBY_SWF, _BATTLE_SWF, _VMM_SWF]
 
 def start():
     debug('start')
+    config.load(XVM.CONFIG_FILE)
     from gui.shared import g_eventBus
     from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
     g_eventBus.addListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)

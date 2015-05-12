@@ -280,7 +280,7 @@ class _Stat(object):
     def _get_user(self):
         (value, isId) = self.req['args']
         orig_value = value
-        reg = gameRegion
+        reg = GAME_REGION
         if isId:
             value = str(int(value))
         else:

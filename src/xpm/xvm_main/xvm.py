@@ -21,7 +21,6 @@ import vehstate
 import token
 import utils
 import userprefs
-import configwatchdog
 import dossier
 from websock import g_websock
 from minimap_circles import g_minimap_circles
@@ -104,7 +103,6 @@ class Xvm(object):
                     self.lang_data = simplejson.loads(self.lang_str)
                 self.sendConfig(self.battleFlashObject)
                 self.sendConfig(self.vmmFlashObject)
-                configwatchdog.startConfigWatchdog()
                 return (None, True)
             elif cmd == XVM_COMMAND.RUN_TEST:
                 runTest(args)
@@ -291,9 +289,6 @@ class Xvm(object):
         if not token.versionChecked:
             token.checkVersion()
             token.initializeXvmToken()
-
-        # reenable config watchdog for backward replay revind
-        configwatchdog.startConfigWatchdog()
 
     def initBattle(self):
         debug('> initBattle()')
