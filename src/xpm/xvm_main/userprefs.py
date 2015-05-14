@@ -25,7 +25,7 @@ class _UserPrefs():
                 'xvm')
             if not os.path.isdir(self.cache_dir):
                 os.makedirs(self.cache_dir)
-        except:
+        except Exception:
             err(traceback.format_exc())
 
     def get(self, key, default):
@@ -36,7 +36,7 @@ class _UserPrefs():
                 fd = open(fileName, 'rb')
                 return cPickle.load(fd)
             return default
-        except:
+        except Exception:
             err(traceback.format_exc())
             return default
         finally:
@@ -53,7 +53,7 @@ class _UserPrefs():
             fd = open(fileName, 'wb')
             cPickle.dump(value, fd, -1)
             os.fsync(fd)
-        except:
+        except Exception:
             err(traceback.format_exc())
         finally:
             if fd is not None:

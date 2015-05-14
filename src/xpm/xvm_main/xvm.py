@@ -25,6 +25,7 @@ import dossier
 from websock import g_websock
 from minimap_circles import g_minimap_circles
 from test import runTest
+import wgutils
 
 _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
@@ -35,21 +36,46 @@ _LOG_COMMANDS = (
     AS2COMMAND.LOGSTAT,
 )
 
+
 def l10n(value):
     return as_xfw_cmd(XVM_COMMAND.AS_L10N, value)
 
+
 class Xvm(object):
+
     def __init__(self):
         self.currentPlayerId = None
-        config.config = None
-        self.config_str = None
-        self.lang_str = None
-        self.lang_data = None
-        self.app = None
+        self.lobbyFlashObject = None
         self.battleFlashObject = None
         self.vmmFlashObject = None
         self._invalidateTimerId = dict()
         self._invalidateTargets = dict()
+
+
+    def onConfigLoaded(self, e=None):
+        # TODO
+        #log('onConfigLoaded: {}'.format(e))
+
+        wgutils.reloadHangar()
+
+
+    def onShowLogin(self, e=None):
+        if self.currentPlayerId is not None:
+            self.currentPlayerId = None
+            g_websock.send('id')
+            token.clearToken()
+
+
+    def onShowLobby(self, e=None):
+        playerId = getCurrentPlayerId()
+        if playerId is not None and self.currentPlayerId != playerId:
+            self.currentPlayerId = playerId
+            token.checkVersion()
+            token.initializeXvmToken()
+            g_websock.send('id/%d' % playerId)
+        if self.lobbyFlashObject is not None:
+            self.lobbyFlashObject.loaderManager.onViewLoaded += self.onViewLoaded
+
 
     # returns: (result, status)
     def onXfwCommand(self, cmd, *args):
@@ -209,8 +235,8 @@ class Xvm(object):
 
     def deleteLobby(self):
         self.hangarDispose()
-        if self.app is not None and self.app.loaderManager is not None:
-            self.app.loaderManager.onViewLoaded -= self.onViewLoaded
+        if self.lobbyFlashObject is not None and self.lobbyFlashObject.loaderManager is not None:
+            self.lobbyFlashObject.loaderManager.onViewLoaded -= self.onViewLoaded
 
     def on_websock_message(self, message):
         try:
@@ -219,7 +245,7 @@ class Xvm(object):
             # msg += message
             # msg += '</textformat>'
             # SystemMessages.pushMessage(msg, type)
-        except:
+        except Exception:
             debug(traceback.format_exc())
 
     def on_websock_error(self, error):
@@ -229,24 +255,8 @@ class Xvm(object):
             msg += 'WebSocket error: %s' % str(error)
             msg += '</textformat>'
             SystemMessages.pushMessage(msg, type)
-        except:
+        except Exception:
             pass
-
-    def onShowLogin(self, e=None):
-        if self.currentPlayerId is not None:
-            self.currentPlayerId = None
-            g_websock.send('id')
-            token.clearToken()
-
-    def onShowLobby(self, e=None):
-        playerId = getCurrentPlayerId()
-        if playerId is not None and self.currentPlayerId != playerId:
-            self.currentPlayerId = playerId
-            token.checkVersion()
-            token.initializeXvmToken()
-            g_websock.send('id/%d' % playerId)
-        if self.app is not None:
-            self.app.loaderManager.onViewLoaded += self.onViewLoaded
 
     def onViewLoaded(self, e=None):
         if e is None:
@@ -270,7 +280,7 @@ class Xvm(object):
     def updateTankParams(self):
         try:
             g_minimap_circles.updateCurrentVehicle()
-            if self.app is not None:
+            if self.lobbyFlashObject is not None:
                 data = simplejson.dumps(config.config['minimap']['circles']['_internal'])
                 as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE, data)
         except Exception, ex:

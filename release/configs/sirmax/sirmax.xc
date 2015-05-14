@@ -1,6 +1,6 @@
 {
   "configVersion": "5.1.0",
-  //"autoReloadConfig": true,
+  "autoReloadConfig": true,
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",

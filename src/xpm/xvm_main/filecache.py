@@ -26,7 +26,7 @@ class _FileCache():
             self.cache_dir = 'res_mods/mods/shared_resources/xvm/cache'
             self.clean()
             self.customFilesCache = CustomFilesCache.CustomFilesCache()
-        except:
+        except Exception:
             err(traceback.format_exc())
 
     def fin(self):
@@ -50,7 +50,7 @@ class _FileCache():
                 os.makedirs(dirname)
             with open(path, 'wb') as f:
                 f.write(bytes)
-        except:
+        except Exception:
             err(traceback.format_exc())
 
 _fileCache = _FileCache()

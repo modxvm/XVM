@@ -42,27 +42,44 @@ _SWFS = [_LOBBY_SWF, _BATTLE_SWF, _VMM_SWF]
 
 def start():
     debug('start')
-    config.load(XVM.CONFIG_FILE)
-    from gui.shared import g_eventBus
+
+    from gui.shared import g_eventBus, events
     from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-    g_eventBus.addListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)
+
     g_eventBus.addListener(VIEW_ALIAS.LOGIN, g_xvm.onShowLogin)
+    g_eventBus.addListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_xvm.onXfwCommand)
+
+    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, config.load)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
+
     g_websock.start()
     g_websock.on_message += g_xvm.on_websock_message
     g_websock.on_error += g_xvm.on_websock_error
 
+    # reload config
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
+
+
 def fini():
     debug('fini')
+
     from gui.shared import g_eventBus
     from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-    g_eventBus.removeListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)
+
     g_eventBus.removeListener(VIEW_ALIAS.LOGIN, g_xvm.onShowLogin)
+    g_eventBus.removeListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_xvm.onXfwCommand)
+
+    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
+
     g_websock.on_message -= g_xvm.on_websock_message
     g_websock.on_error -= g_xvm.on_websock_error
     g_websock.stop()
+
     filecache.fin()
+
 
 def FlashInit(self, swf, className='Flash', args=None, path=None):
     self.swf = swf
@@ -71,7 +88,7 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
     log("FlashInit: " + self.swf)
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
     if self.swf == _LOBBY_SWF:
-        g_xvm.app = self
+        g_xvm.lobbyFlashObject = self
         g_xvm.initLobby()
     if self.swf == _BATTLE_SWF:
         g_xvm.battleFlashObject = self
@@ -80,6 +97,7 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
         g_xvm.vmmFlashObject = self
         g_xvm.initVmm()
 
+
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
         return
@@ -87,19 +105,22 @@ def FlashBeforeDelete(self):
     self.removeExternalCallback('xvm.cmd')
     if self.swf == _LOBBY_SWF:
         g_xvm.deleteLobby()
-        g_xvm.app = None
+        g_xvm.lobbyFlashObject = None
     if self.swf == _BATTLE_SWF:
         g_xvm.battleFlashObject = None
     if self.swf == _VMM_SWF:
         g_xvm.vmmFlashObject = None
 
+
 #def Flash_call(base, self, methodName, args=None):
 #    # debug("> call: %s, %s" % (methodName, str(args)))
 #    base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
 
+
 def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
+
 
 # HANGAR
 
@@ -109,11 +130,13 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 #    else:
 #        self.as_responseVehicleDossierS({})
 
+
 def LoginView_onSetOptions(base, self, optionsList, host):
     # log('LoginView_onSetOptions')
     if config.config is not None and config.config['login']['saveLastServer']:
         self.saveLastSelectedServer(host)
     base(self, optionsList, host)
+
 
 def onClientVersionDiffers():
     if config.config is None:
@@ -126,46 +149,55 @@ def onClientVersionDiffers():
     g_replayCtrl.onClientVersionDiffers()
     g_replayCtrl.scriptModalWindowsEnabled = savedValue
 
+
 # BATTLE
 
 def onArenaCreated():
     debug('> onArenaCreated')
     g_xvm.onArenaCreated()
 
+
 def onAvatarBecomePlayer():
     debug('> onAvatarBecomePlayer')
     g_xvm.onAvatarBecomePlayer()
+
 
 # on current player enters world
 def PlayerAvatar_onEnterWorld(self, prereqs):
     debug("> PlayerAvatar_onEnterWorld")
     g_xvm.onEnterWorld()
 
+
 # on current player leaves world
 def PlayerAvatar_onLeaveWorld(self):
     debug("> PlayerAvatar_onLeaveWorld")
     g_xvm.onLeaveWorld()
+
 
 # on any player marker appear
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     # debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
     g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
 
+
 # on any player marker lost
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
     # debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
     g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
+
 
 # on any vehicle hit received
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
+
 # add vid to players panel data
 def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter, playerAccountID, inviteSendingProhibited):
     res = base(self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter, playerAccountID, inviteSendingProhibited)
     res['vid'] = vInfoVO.vehicleType.compactDescr
     return res
+
 
 # show quantity of alive instead of dead in frags panel
 # original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
@@ -185,16 +217,19 @@ def FragCorrelationPanel_updateScore(base, self, playerTeam):
         err(traceback.format_exc())
     base(self, playerTeam)
 
+
 # spotted status
 def _Minimap__addEntry(self, id, location, doMark):
     # debug('> _Minimap__addEntry: {0}'.format(id))
     vehstate.updateSpottedStatus(id, True)
     g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
 
+
 def _Minimap__delEntry(self, id, inCallback=False):
     # debug('> _Minimap__delEntry: {0}'.format(id))
     vehstate.updateSpottedStatus(id, False)
     g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
+
 
 def _Minimap_start(self):
     if config.config is None or not config.config['minimap']['enabled']:
@@ -215,6 +250,7 @@ def _Minimap_start(self):
         if IS_DEVELOPMENT:
             err(traceback.format_exc())
 
+
 def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     base(self, id, methodName, args)
     if config.config is None or not config.config['minimap']['enabled']:
@@ -231,6 +267,7 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
         if IS_DEVELOPMENT:
             err(traceback.format_exc())
 
+
 def _Minimap__addEntryLit(self, id, matrix, visible=True):
     if config.config is None or not config.config['minimap']['enabled']:
         return
@@ -246,10 +283,12 @@ def _Minimap__addEntryLit(self, id, matrix, visible=True):
         if IS_DEVELOPMENT:
             err(traceback.format_exc())
 
+
 # stereoscope
 def AmmunitionPanel_highlightParams(self, type):
     # debug('> AmmunitionPanel_highlightParams')
     g_xvm.updateTankParams()
+
 
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
     try:
@@ -268,14 +307,15 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
         err(traceback.format_exc())
         base(self, arenaUniqueID, callback)
 
-# stub for fixing waiting bug
 
+# stub for fixing waiting bug
 def WaitingViewMeta_fix(base, self, *args):
     try:
         base(self, *args)
         # raise Exception('Test')
     except Exception, ex:
         log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
+
 
 '''#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
 #    debug('_CustomFilesCache__get')

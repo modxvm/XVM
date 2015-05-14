@@ -1,10 +1,10 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
-__all__ = ['config', 'configLoadError', 'load']
+__all__ = ['load', 'config', 'config_errors', 'config_str', 'lang_str', 'lang_data']
 
 from copy import deepcopy
 import traceback
-
+import simplejson
 import JSONxLoader
 
 from xfw import *
@@ -12,74 +12,94 @@ from xfw import *
 from constants import *
 from logger import *
 from default_config import DEFAULT_CONFIG
+import configwatchdog
 
 config = None
-configLoadError = None
+config_errors = None
+config_str = None
+lang_str = None
+lang_data = None
 
-def load(filename):
-    load_xvm_xc(filename)
-    load_region()
-    load_language()
-
-    log('Config loaded. Region: {} ({}), Language: {} ({})'.format(
-        config['region'],
-        'detected' if config['regionDetected'] else 'config',
-        config['language'],
-        'detected' if config['languageDetected'] else 'config'))
-
-
-def load_xvm_xc(filename):
+def load(e):
     global config
-    global configLoadError
+    global config_errors
+    global config_str
+    global lang_str
+    global lang_data
+
     try:
-        autoReloadConfig = False if config is None else config['autoReloadConfig'];
+        # TODO: config selection
+        filename = e.ctx.get('filename', XVM.CONFIG_FILE)
 
-        config = deepcopy(DEFAULT_CONFIG)
-        configLoadError = None
+        configwatchdog.stopConfigWatchdog()
 
-        result = JSONxLoader.load(filename, load_log)
-        if result is not None:
-            config = merge_configs(config, fix_config(result))
+        config_str = None
+        lang_str = None
+        lang_data = None
+
+        autoreload = False
+        if config is not None and 'autoReloadConfig' in config:
+            autoreload = config['autoReloadConfig']
+        (config, config_errors) = _load_xvm_xc(filename, autoreload)
+
+        regionDetected = 'region' not in config or config['region'].lower() == XVM.REGION_AUTO_DETECTION
+        if regionDetected:
+            config['region'] = GAME_REGION
+
+        languageDetected = 'language' not in config or config['language'].lower() == XVM.LOCALE_AUTO_DETECTION
+        if languageDetected:
+            config['language'] = GAME_LANGUAGE
+        lang_data = _load_locale_file()
+
+        log('Config loaded. Region: {} ({}), Language: {} ({})'.format(
+            config['region'],
+            'detected' if regionDetected else 'config',
+            config['language'],
+            'detected' if languageDetected else 'config'))
+
+        config_str = simplejson.dumps(config)
+        lang_str = simplejson.dumps(lang_data)
+
     except Exception:
-        config['autoReloadConfig'] = autoReloadConfig;
-        configLoadError = traceback.format_exc()
-        err(configLoadError)
+        err(traceback.format_exc())
+
+    if config.get('autoReloadConfig', False) == True:
+        configwatchdog.startConfigWatchdog()
+
+    from gui.shared import g_eventBus, events
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
+
+
+def _load_xvm_xc(filename, autoreload):
+    debug('_load_xvm_xc: "{}", {}'.format(filename, autoreload))
+    try:
+        config = deepcopy(DEFAULT_CONFIG)
+        errors = None
+        result = JSONxLoader.load(filename, _load_log)
+        if result is not None:
+            config = _merge_configs(config, _fix_config(result))
+    except Exception:
+        config['autoReloadConfig'] = autoreload
+        errors = traceback.format_exc()
+        err(errors)
     #log('config={}'.format(config))
 
-    tuneup_config(config)
+    _tuneup_config(config)
 
-    #configwatchdog.startConfigWatchdog()
-
-
-def load_region():
-    global config
-    try:
-        config['regionDetected'] = 'region' not in config or config['region'].lower() == XVM.REGION_AUTO_DETECTION
-        if config['regionDetected']:
-            config['region'] = GAME_REGION
-    except Exception:
-        err(traceback.format_exc())
+    return (config, errors)
 
 
-def load_language():
-    global config
-    try:
-        config['languageDetected'] = 'language' not in config or config['language'].lower() == XVM.LOCALE_AUTO_DETECTION
-        if config['languageDetected']:
-            config['language'] = GAME_LANGUAGE
-        #TODO
-        #Locale.LoadLocaleFile();
-    except Exception:
-        err(traceback.format_exc())
+def _load_locale_file():
+    # TODO
+    return {}
 
-
-def load_log(msg):
+def _load_log(msg):
     log(msg
         .replace(XVM.CONFIG_DIR, '[cfg]')
         .replace(XVM.SHARED_RESOURCES_DIR, '[res]'))
 
 
-def fix_config(config):
+def _fix_config(config):
     # TODO
     """
             if (!config)
@@ -225,7 +245,7 @@ def fix_config(config):
     return config
 
 
-def merge_configs(orig_config, new_config):
+def _merge_configs(orig_config, new_config):
     # TODO
     """
             if (config === undefined)
@@ -318,7 +338,7 @@ def merge_configs(orig_config, new_config):
     return new_config
 
 
-def tuneup_config(config):
+def _tuneup_config(config):
     # TODO
     """
             config.battle.clanIconsFolder = XfwUtils.fixPath(config.battle.clanIconsFolder);

@@ -147,7 +147,7 @@ def _getRanges(turret, gun, nation, vclass):
         if vclass == 'SPG' and shot['shell']['kind'] == 'HIGH_EXPLOSIVE':
             try:    # faster way
                 pitchLimit_rad = min(CONST_45_IN_RADIANS, -gun['pitchLimits']['basic'][0])
-            except: # old way
+            except Exception: # old way
                 gunsInfoPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml/shared/'
                 pitchLimit = ResMgr.openSection(gunsInfoPath + gun['name']).readInt('pitchLimits')
                 pitchLimit = min(45, -pitchLimit)  # -35..-65

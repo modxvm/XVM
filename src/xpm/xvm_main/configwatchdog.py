@@ -1,87 +1,65 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
+__all__ = ['startConfigWatchdog', 'stopConfigWatchdog']
+
+# PUBLIC
+
+def startConfigWatchdog():
+    # debug('startConfigWatchdog')
+    _g_configWatchdog.stopConfigWatchdog()
+    _g_configWatchdog.configWatchdog()
+
+
+def stopConfigWatchdog():
+    # debug('stopConfigWatchdog')
+    _g_configWatchdog.stopConfigWatchdog()
+
+
+# PRIVATE
+
 import os
 import traceback
 import BigWorld
 
 from constants import *
 from logger import *
-import config
 
-_xvm_config_dir_name = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../../../configs/xvm')
-_configWatchdogTimerId = None
-_lastConfigDirState = None
+class _ConfigWatchdog(object):
 
-def startConfigWatchdog():
-    #debug('startConfigWatchdog')
-    _stopConfigWatchdog()
-    if _isConfigReloadingEnabled():
-        _configWatchdog()
+    configWatchdogTimerId = None
+    lastConfigDirState = None
 
-def _configWatchdog():
-    global _xvm_config_dir_name
-    global _lastConfigDirState
-    global _configWatchdogTimerId
+    def configWatchdog(self):
+        # debug('configWatchdog(): {0}'.format(XVM.CONFIG_DIR))
 
-    #debug('_configWatchdog(): {0}'.format(_xvm_config_dir_name))
+        self.configWatchdogTimerId = None
 
-    try:
-        x = [(nm, os.path.getmtime(nm)) for nm in [os.path.join(p, f)
-                                                   for p, n, fn in os.walk(_xvm_config_dir_name)
-                                                   for f in fn]]
-        if _lastConfigDirState is None:
-            _lastConfigDirState = x
-        elif _lastConfigDirState != x:
-            _lastConfigDirState = x
-            if not _onConfigChanged():
+        try:
+            x = [(nm, os.path.getmtime(nm)) for nm in [os.path.join(p, f)
+                                                       for p, n, fn in os.walk(XVM.CONFIG_DIR)
+                                                       for f in fn]]
+            if self.lastConfigDirState is None:
+                self.lastConfigDirState = x
+            elif self.lastConfigDirState != x:
+                self.lastConfigDirState = x
+
+                # debug('reload config')
+                from gui.shared import g_eventBus, events
+                g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
+                
                 return
 
-    except Exception, ex:
-        err(traceback.format_exc())
+        except Exception, ex:
+            err(traceback.format_exc())
 
-    if _isConfigReloadingEnabled():
-        _configWatchdogTimerId = BigWorld.callback(1, _configWatchdog)
-    else:
-        _stopConfigWatchdog()
+        self.configWatchdogTimerId = BigWorld.callback(1, self.configWatchdog)
 
-def _stopConfigWatchdog():
-    #debug('_stopConfigWatchdog')
-    global _configWatchdogTimerId
-    if _configWatchdogTimerId:
-        BigWorld.cancelCallback(_configWatchdogTimerId)
-        _configWatchdogTimerId = None
 
-def _isConfigReloadingEnabled():
-    try:
-        if config.config is None:
-            return False
-        enabled = config.config.get('autoReloadConfig', False) is True
-        #debug('_isConfigReloadingEnabled: {}'.format(enabled))
-        return enabled
-    except:
-        err(traceback.format_exc())
-        return False
+    def stopConfigWatchdog(self):
+        # debug('stopConfigWatchdog')
+        if self.configWatchdogTimerId is not None:
+            BigWorld.cancelCallback(self.configWatchdogTimerId)
+            self.configWatchdogTimerId = None
 
-def _onConfigChanged():
-    try:
-        #debug('_onConfigChanged')
-        _stopConfigWatchdog()
-        as_xfw_cmd(XVM_COMMAND.AS_RELOAD_CONFIG)
 
-        # reload hangar to apply changes
-        from gui.WindowsManager import g_windowsManager
-        from gui.Scaleform.framework import ViewTypes
-        from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-        from gui.prb_control.events_dispatcher import g_eventDispatcher
-        app = g_windowsManager.window
-        if app:
-            container = app.containerManager.getContainer(ViewTypes.LOBBY_SUB)
-            if container:
-                view = container.getView()
-                if view and view.alias == VIEW_ALIAS.LOBBY_HANGAR:
-                    container.remove(view)
-                g_eventDispatcher.loadHangar()
-        return True
-    except:
-        err(traceback.format_exc())
-        return False
+_g_configWatchdog = _ConfigWatchdog()

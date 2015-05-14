@@ -17,6 +17,9 @@ class XVM(object):
     LOCALE_AUTO_DETECTION = 'auto'
     REGION_AUTO_DETECTION = 'auto'
 
+class XVM_EVENT(object):
+    CONFIG_LOADED = 'xvm.config_loaded'
+    RELOAD_CONFIG = 'xvm.reload_config'
 
 # DAAPI commands
 
@@ -36,7 +39,6 @@ class XVM_COMMAND(object):
     RUN_TEST = "xvm.run_test"
     AS_DOSSIER = "xvm.as.dossier"
     AS_L10N = "xvm.as.l10n"
-    AS_RELOAD_CONFIG = "xvm.as.reload_config"
     AS_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"
     AS_STAT_BATTLE_DATA = "xvm.as.stat_battle_data"
     AS_STAT_BATTLE_RESULTS_DATA = "xvm.as.stat_battle_results_data"

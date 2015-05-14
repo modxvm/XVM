@@ -38,7 +38,6 @@ package com.xvm
             Config.load();
 
             Xfw.addCommandListener(XvmCommandsInternal.AS_L10N, onL10n);
-            Xfw.addCommandListener(XvmCommandsInternal.AS_RELOAD_CONFIG, onReloadConfig);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_SVC_SETTINGS, onSetSvcSettings);
         }
 
@@ -49,6 +48,7 @@ package com.xvm
             return Locale.get(value);
         }
 
+/*
         private function onReloadConfig():void
         {
             Logger.add("reload config");
@@ -67,7 +67,7 @@ package com.xvm
             }
             Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
         }
-
+*/
         private function onSetSvcSettings(nss:Object):void
         {
             Config.networkServicesSettings = new NetworkServicesSettings(nss);
