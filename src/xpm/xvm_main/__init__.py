@@ -85,31 +85,33 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
     self.swf = swf
     if self.swf not in _SWFS:
         return
+
     log("FlashInit: " + self.swf)
+
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
+
     if self.swf == _LOBBY_SWF:
-        g_xvm.lobbyFlashObject = self
-        g_xvm.initLobby()
-    if self.swf == _BATTLE_SWF:
-        g_xvm.battleFlashObject = self
-        g_xvm.initBattle()
-    if self.swf == _VMM_SWF:
-        g_xvm.vmmFlashObject = self
-        g_xvm.initVmm()
+        g_xvm.initLobbySwf(self)
+    elif self.swf == _BATTLE_SWF:
+        g_xvm.initBattleSwf(self)
+    elif self.swf == _VMM_SWF:
+        g_xvm.initVmmSwf(self)
 
 
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
         return
+
     log("FlashBeforeDelete: " + self.swf)
+
     self.removeExternalCallback('xvm.cmd')
+
     if self.swf == _LOBBY_SWF:
-        g_xvm.deleteLobby()
-        g_xvm.lobbyFlashObject = None
-    if self.swf == _BATTLE_SWF:
-        g_xvm.battleFlashObject = None
-    if self.swf == _VMM_SWF:
-        g_xvm.vmmFlashObject = None
+        g_xvm.deleteLobbySwf()
+    elif self.swf == _BATTLE_SWF:
+        g_xvm.deleteBattleSwf()
+    elif self.swf == _VMM_SWF:
+        g_xvm.deleteVmmSwf()
 
 
 #def Flash_call(base, self, methodName, args=None):
@@ -117,12 +119,16 @@ def FlashBeforeDelete(self):
 #    base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
 
 
-def MarkersManager_invokeMarker(base, self, handle, function, args=None):
-    # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
-    base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
+# LOGIN
+
+def LoginView_onSetOptions(base, self, optionsList, host):
+    # log('LoginView_onSetOptions')
+    if config.get('login/saveLastServer'):
+        self.saveLastSelectedServer(host)
+    base(self, optionsList, host)
 
 
-# HANGAR
+# LOBBY
 
 def ProfileTechniqueWindowRequestData(base, self, data):
     if data.vehicleId:
@@ -131,21 +137,10 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 #        self.as_responseVehicleDossierS({})
 
 
-def LoginView_onSetOptions(base, self, optionsList, host):
-    # log('LoginView_onSetOptions')
-    if config.config is not None and config.config['login']['saveLastServer']:
-        self.saveLastSelectedServer(host)
-    base(self, optionsList, host)
-
-
 def onClientVersionDiffers():
-    if config.config is None:
-        BigWorld.callback(0, onClientVersionDiffers)
-        return
-
     from BattleReplay import g_replayCtrl
     savedValue = g_replayCtrl.scriptModalWindowsEnabled
-    g_replayCtrl.scriptModalWindowsEnabled = not config.config['login']['confirmOldReplays']
+    g_replayCtrl.scriptModalWindowsEnabled = savedValue and not config.get('login/confirmOldReplays')
     g_replayCtrl.onClientVersionDiffers()
     g_replayCtrl.scriptModalWindowsEnabled = savedValue
 
@@ -203,7 +198,7 @@ def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, 
 # original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
 def FragCorrelationPanel_updateScore(base, self, playerTeam):
     try:
-        if 'showAliveNotFrags' in config.config['fragCorrelation'] and config.config['fragCorrelation']['showAliveNotFrags']:
+        if config.get('fragCorrelation/showAliveNotFrags'):
             if not playerTeam:
                 return
             teamIndex = playerTeam - 1
@@ -232,62 +227,66 @@ def _Minimap__delEntry(self, id, inCallback=False):
 
 
 def _Minimap_start(self):
-    if config.config is None or not config.config['minimap']['enabled']:
-        return
-    try:
-        from gui.battle_control import g_sessionProvider
-        from items.vehicles import VEHICLE_CLASS_TAGS
-        if not g_sessionProvider.getCtx().isPlayerObserver():
-            player = BigWorld.player()
-            id = player.playerVehicleID
-            entryVehicle = player.arena.vehicles[id]
-            playerId = entryVehicle['accountDBID']
-            tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
-            vClass = tags.pop() if len(tags) > 0 else ''
-            BigWorld.callback(0, lambda:self._Minimap__callEntryFlash(id, 'init_xvm', [playerId, False, 'player', vClass]))
+    if config.get('minimap/enabled'):
+        try:
+            from gui.battle_control import g_sessionProvider
+            from items.vehicles import VEHICLE_CLASS_TAGS
+            if not g_sessionProvider.getCtx().isPlayerObserver():
+                player = BigWorld.player()
+                id = player.playerVehicleID
+                entryVehicle = player.arena.vehicles[id]
+                playerId = entryVehicle['accountDBID']
+                tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
+                vClass = tags.pop() if len(tags) > 0 else ''
+                BigWorld.callback(0, lambda:self._Minimap__callEntryFlash(id, 'init_xvm', [playerId, False, 'player', vClass]))
 
-    except Exception, ex:
-        if IS_DEVELOPMENT:
-            err(traceback.format_exc())
+        except Exception, ex:
+            if IS_DEVELOPMENT:
+                err(traceback.format_exc())
 
 
 def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     base(self, id, methodName, args)
-    if config.config is None or not config.config['minimap']['enabled']:
-        return
-    try:
-        if self._Minimap__isStarted:
-            if methodName == 'init':
-                if len(args) != 5:
-                    base(self, id, 'init_xvm', [0])
-                else:
-                    arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
-                    base(self, id, 'init_xvm', [arenaVehicle['accountDBID'], False])
-    except Exception, ex:
-        if IS_DEVELOPMENT:
-            err(traceback.format_exc())
+
+    if config.get('minimap/enabled'):
+        try:
+            if self._Minimap__isStarted:
+                if methodName == 'init':
+                    if len(args) != 5:
+                        base(self, id, 'init_xvm', [0])
+                    else:
+                        arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+                        base(self, id, 'init_xvm', [arenaVehicle['accountDBID'], False])
+        except Exception, ex:
+            if IS_DEVELOPMENT:
+                err(traceback.format_exc())
 
 
 def _Minimap__addEntryLit(self, id, matrix, visible=True):
-    if config.config is None or not config.config['minimap']['enabled']:
-        return
-    from gui.battle_control import g_sessionProvider
-    battleCtx = g_sessionProvider.getCtx()
-    if battleCtx.isObserver(id) or matrix is None:
-        return
-    try:
-        entry = self._Minimap__entrieLits[id]
-        arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
-        self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm', [arenaVehicle['accountDBID'], True]))
-    except Exception, ex:
-        if IS_DEVELOPMENT:
-            err(traceback.format_exc())
+    if config.get('minimap/enabled'):
+        from gui.battle_control import g_sessionProvider
+        battleCtx = g_sessionProvider.getCtx()
+        if battleCtx.isObserver(id) or matrix is None:
+            return
+
+        try:
+            entry = self._Minimap__entrieLits[id]
+            arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+            self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm', [arenaVehicle['accountDBID'], True]))
+        except Exception, ex:
+            if IS_DEVELOPMENT:
+                err(traceback.format_exc())
 
 
 # stereoscope
 def AmmunitionPanel_highlightParams(self, type):
     # debug('> AmmunitionPanel_highlightParams')
     g_xvm.updateTankParams()
+
+
+def MarkersManager_invokeMarker(base, self, handle, function, args=None):
+    # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
+    base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
 
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):

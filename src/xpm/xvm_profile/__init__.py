@@ -112,7 +112,7 @@ def DAAPIModule_registerFlashComponent(base, self, component, alias, *args):
         if ctx is not None and ctx.get('itemCD'):
             selectedAlias = VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE
         else:
-            startPage = config.config['userInfo']['startPage']
+            startPage = config.get('userInfo/startPage')
             if startPage == 2:
                 selectedAlias = VIEW_ALIAS.PROFILE_AWARDS
             elif startPage == 3:

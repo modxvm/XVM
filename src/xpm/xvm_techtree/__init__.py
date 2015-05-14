@@ -24,7 +24,7 @@ from xvm_main.python.xvm import l10n
 # event handlers
 
 def ItemsData_getAllPossibleXP(base, self, nodeCD, unlockStats):
-    if not config.config['hangar']['allowExchangeXPInTechTree']:
+    if not config.get('hangar/allowExchangeXPInTechTree'):
         return unlockStats.getVehTotalXP(nodeCD)
     return base(self, nodeCD, unlockStats)
 

@@ -96,11 +96,8 @@ def getDynamicColorValue(type, value, prefix='#'):
     if value is None or math.isnan(value):
         return ''
 
-    if config.config is None:
-        return ''
-
-    cfg = config.config['colors'].get(type, None)
-    if cfg is None:
+    cfg = config.get('colors/%s' % type)
+    if not cfg:
         return ''
 
     color = next((int(x['color'], 0) for x in cfg if value <= float(x['value'])), 0xFFFFFF)

@@ -30,7 +30,7 @@ def Battle_showSixthSenseIndicator(self, isShow):
         if vehId == 59393: # Rudy
             Sound('/rudy/dog/dog').play()
         else:
-            soundId = config.config['sounds']['sixthSense']
+            soundId = config.get('sounds/sixthSense')
             if soundId is not None and soundId != '':
                 Sound(soundId).play()
     except:
@@ -38,10 +38,9 @@ def Battle_showSixthSenseIndicator(self, isShow):
 
 def _test():
     log('test')
-    if config.config is not None:
-        soundId = config.config['sounds']['sixthSense']
-        if soundId is not None and soundId != '':
-            Sound(soundId).play()
+    soundId = config.get('sounds/sixthSense')
+    if soundId is not None and soundId != '':
+        Sound(soundId).play()
     BigWorld.callback(1, _test)
 
 #####################################################################

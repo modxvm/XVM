@@ -255,8 +255,8 @@ def _getXvmMessageHeader():
         rev = __revision__
     except Exception, ex:
         err(traceback.format_exc())
-    msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config.config['xvmVersion'], rev)
-    msg += _getVersionText(config.config['xvmVersion']) + '\n'
+    msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config.get('xvmVersion'), rev)
+    msg += _getVersionText(config.get('xvmVersion')) + '\n'
     if g_websock.enabled and g_websock.connected:
         msg += '{{l10n:websock/not_connected}}\n'
         if g_websock.last_error:

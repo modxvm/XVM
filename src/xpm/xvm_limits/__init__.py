@@ -54,20 +54,20 @@ ExchangeFreeToTankmanXpWindow_handlers = []
 
 #enable or disable active usage of gold (does not affect auto-refill ammo/equip)
 def StatsRequester_gold(base, self):
-    if not config.config['hangar']['enableGoldLocker'] or gold_enable:
+    if not config.get('hangar/enableGoldLocker') or gold_enable:
         return max(self.actualGold, 0)
     return 0
 
 #enable or disable usage of free experience
 def StatsRequester_freeXP(base, self):
-    if not config.config['hangar']['enableFreeXpLocker'] or freeXP_enable:
+    if not config.get('hangar/enableFreeXpLocker') or freeXP_enable:
         return max(self.actualFreeXP, 0)
     return 0
 
 #by default use credits for equipment
 def FittingItem__init__(base, self, intCompactDescr, proxy = None, isBoughtForCredits = None):
     if isBoughtForCredits is None:
-        isBoughtForCredits = config.config['hangar']['defaultBoughtForCredits']
+        isBoughtForCredits = config.get('hangar/defaultBoughtForCredits')
     base(self, intCompactDescr, proxy, isBoughtForCredits)
 
 #by default use credits for ammo
@@ -81,7 +81,7 @@ def Vehicle_parseShells(base, self, layoutList, defaultLayoutList, proxy):
                     # nothing is saved for this configuration - new gun
                     for n in xrange(0, len(defaultLayoutList), 2):
                         defaultLayoutList[n] = abs(defaultLayoutList[n])
-                        if config.config['hangar']['defaultBoughtForCredits']:
+                        if config.get('hangar/defaultBoughtForCredits'):
                             defaultLayoutList[n] *= -1
     except Exception as ex:
         err(traceback.format_exc())
