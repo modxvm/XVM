@@ -1,5 +1,5 @@
---- "orig\\TeamBasesPanel.xml"	2015-05-10 22:10:26.462506500 +0300
-+++ TeamBasesPanel.xml	2015-05-10 22:10:26.563512200 +0300
+--- "orig\\TeamBasesPanel.xml"	2015-05-15 00:06:53.539094400 +0300
++++ TeamBasesPanel.xml	2015-05-15 00:06:53.639094600 +0300
 @@ -15,7 +15,10 @@
          </color>
        </SetBackgroundColor>
@@ -47,14 +47,14 @@
 +          <data>eNrt2TENwDAMBEAUUThEpRCpyLsXTSG4SyZDeN1wFF5v/6yqCRBiNBdAkNXcAEF28wCE+Y5X5gPhPc79DiT/4+wwQPKu+gO/5L3C</data>
          </data>
        </DefineBitsLossless2>
-@@ -19625,5 +19628,5 @@
+@@ -19682,5 +19685,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.TeamBasesPanel"/>
 +              <StackString value="wot.wrapper.TeamBasesPanel.TeamBasesPanel"/>
              </items>
            </PushData>
-@@ -19651,5 +19654,5 @@
+@@ -19708,5 +19711,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.CaptureBar"/>
