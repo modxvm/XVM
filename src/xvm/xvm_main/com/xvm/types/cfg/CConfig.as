@@ -4,6 +4,8 @@
  */
 package com.xvm.types.cfg
 {
+    import net.wg.data.daapi.base.DAAPIDataClass;
+
     public dynamic class CConfig extends Object
     {
         public var xvmVersion:String;

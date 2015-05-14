@@ -57,9 +57,12 @@ class Xvm(object):
     def onConfigLoaded(self, e=None):
         # TODO
         #log('onConfigLoaded: {}'.format(e))
-
+        self.respondConfig()
         wgutils.reloadHangar()
 
+
+    def respondConfig(self):
+        as_xfw_cmd(XVM_COMMAND.AS_SET_CONFIG, config.config_str, config.lang_str)
 
     # LOGIN
 
@@ -352,44 +355,7 @@ class Xvm(object):
             if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
 
-            if cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
-                arena = getattr(BigWorld.player(), 'arena', None)
-                if arena is not None:
-                    return (arena.extraData.get('battleLevel', 0), True)
-                return (None, True)
-            elif cmd == XVM_COMMAND.GET_BATTLE_TYPE:
-                arena = getattr(BigWorld.player(), 'arena', None)
-                if arena is not None:
-                    return (arena.bonusType, True)
-                return (None, True)
-            elif cmd == XVM_COMMAND.REQUEST_DOSSIER:
-                dossier.requestDossier(args)
-                return (None, True)
-            elif cmd == XVM_COMMAND.GET_SVC_SETTINGS:
-                token.getToken()
-                return (token.networkServicesSettings, True)
-            elif cmd == XVM_COMMAND.GET_VEHINFO:
-                return (getVehicleInfoDataStr(), True)
-            elif cmd == XVM_COMMAND.LOAD_SETTINGS:
-                default = None if len(args) < 2 else args[1]
-                return (userprefs.get(args[0], default), True)
-            elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
-                getBattleStat(args)
-                return (None, True)
-            elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS:
-                getBattleResultsStat(args)
-                return (None, True)
-            elif cmd == XVM_COMMAND.LOAD_STAT_USER:
-                getUserData(args)
-                return (None, True)
-            elif cmd == XVM_COMMAND.OPEN_URL:
-                if len(args[0]):
-                    utils.openWebBrowser(args[0], False)
-                return (None, True)
-            elif cmd == XVM_COMMAND.SAVE_SETTINGS:
-                userprefs.set(args[0], args[1])
-                return (None, True)
-            #elif cmd == XVM_COMMAND.SET_CONFIG:
+            #if cmd == XVM_COMMAND.SET_CONFIG:
             #    # debug(XVM_COMMAND.SET_CONFIG)
             #    self.config_str = args[0]
             #    config.config = simplejson.loads(self.config_str)
@@ -399,7 +365,60 @@ class Xvm(object):
             #    self.sendConfig(self.battleFlashObject)
             #    self.sendConfig(self.vmmFlashObject)
             #    return (None, True)
-            elif cmd == XVM_COMMAND.RUN_TEST:
+
+            if cmd == XVM_COMMAND.REQUEST_CONFIG:
+                self.respondConfig()
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
+                arena = getattr(BigWorld.player(), 'arena', None)
+                if arena is not None:
+                    return (arena.extraData.get('battleLevel', 0), True)
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.GET_BATTLE_TYPE:
+                arena = getattr(BigWorld.player(), 'arena', None)
+                if arena is not None:
+                    return (arena.bonusType, True)
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.REQUEST_DOSSIER:
+                dossier.requestDossier(args)
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.GET_SVC_SETTINGS:
+                token.getToken()
+                return (token.networkServicesSettings, True)
+            
+            if cmd == XVM_COMMAND.GET_VEHINFO:
+                return (getVehicleInfoDataStr(), True)
+            
+            if cmd == XVM_COMMAND.LOAD_SETTINGS:
+                default = None if len(args) < 2 else args[1]
+                return (userprefs.get(args[0], default), True)
+            
+            if cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
+                getBattleStat(args)
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS:
+                getBattleResultsStat(args)
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.LOAD_STAT_USER:
+                getUserData(args)
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.OPEN_URL:
+                if len(args[0]):
+                    utils.openWebBrowser(args[0], False)
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.SAVE_SETTINGS:
+                userprefs.set(args[0], args[1])
+                return (None, True)
+            
+            if cmd == XVM_COMMAND.RUN_TEST:
                 runTest(args)
                 return (None, True)
 

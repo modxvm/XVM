@@ -39,6 +39,7 @@ package com.xvm
             Xfw.addCommandListener(XvmCommandsInternal.AS_L10N, onL10n);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_SVC_SETTINGS, onSetSvcSettings);
+            Xfw.cmd(XvmCommandsInternal.REQUEST_CONFIG);
         }
 
         // DAAPI Python-Flash interface
@@ -48,9 +49,14 @@ package com.xvm
             return Locale.get(value);
         }
 
-        private function onSetConfig(config_str:String):void
+        private function onSetConfig(config_str:String, lang_str:String):void
         {
-            Config.setConfig(JSONx.parse(config_str) as CConfig);
+            //Logger.add("onSetConfig");
+            var config:CConfig = ObjectConverter.convertData(JSONx.parse(config_str), CConfig);
+            Config.setConfig(config);
+
+            // TODO: Locale
+
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
         }
 

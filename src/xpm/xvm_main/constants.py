@@ -29,6 +29,7 @@ class XVM_EVENT(object):
 # DAAPI commands
 
 class XVM_COMMAND(object):
+    REQUEST_CONFIG = "xvm.request_config"
     GET_BATTLE_LEVEL = "xvm.get_battle_level"
     GET_BATTLE_TYPE = "xvm.get_battle_type"
     REQUEST_DOSSIER = "xvm.request_dossier"

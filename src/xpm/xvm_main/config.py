@@ -91,7 +91,7 @@ def load(e):
 # PRIVATE
 
 def _load_xvm_xc(filename, autoreload):
-    debug('_load_xvm_xc: "{}", {}'.format(filename, autoreload))
+    # debug('_load_xvm_xc: "{}", {}'.format(filename, autoreload))
     try:
         config = deepcopy(DEFAULT_CONFIG)
         errors = None
