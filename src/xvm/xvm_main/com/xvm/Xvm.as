@@ -8,6 +8,7 @@ package com.xvm
 
     import com.xfw.*;
     import com.xvm.types.*;
+    import com.xvm.types.cfg.CConfig;
     import flash.display.*;
     import flash.events.*;
 
@@ -35,9 +36,8 @@ package com.xvm
         public function Xvm():void
         {
             _instance = this;
-            Config.load();
-
             Xfw.addCommandListener(XvmCommandsInternal.AS_L10N, onL10n);
+            Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_SVC_SETTINGS, onSetSvcSettings);
         }
 
@@ -48,6 +48,16 @@ package com.xvm
             return Locale.get(value);
         }
 
+        private function onSetConfig(config_str:String):void
+        {
+            Config.setConfig(JSONx.parse(config_str) as CConfig);
+            Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
+        }
+
+        private function onSetSvcSettings(nss:Object):void
+        {
+            Config.networkServicesSettings = new NetworkServicesSettings(nss);
+        }
 /*
         private function onReloadConfig():void
         {
@@ -68,9 +78,5 @@ package com.xvm
             Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
         }
 */
-        private function onSetSvcSettings(nss:Object):void
-        {
-            Config.networkServicesSettings = new NetworkServicesSettings(nss);
-        }
     }
 }

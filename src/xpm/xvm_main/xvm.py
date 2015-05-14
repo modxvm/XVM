@@ -389,16 +389,16 @@ class Xvm(object):
             elif cmd == XVM_COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
                 return (None, True)
-            elif cmd == XVM_COMMAND.SET_CONFIG:
-                # debug(XVM_COMMAND.SET_CONFIG)
-                self.config_str = args[0]
-                config.config = simplejson.loads(self.config_str)
-                if len(args) >= 2:
-                    self.lang_str = args[1]
-                    self.lang_data = simplejson.loads(self.lang_str)
-                self.sendConfig(self.battleFlashObject)
-                self.sendConfig(self.vmmFlashObject)
-                return (None, True)
+            #elif cmd == XVM_COMMAND.SET_CONFIG:
+            #    # debug(XVM_COMMAND.SET_CONFIG)
+            #    self.config_str = args[0]
+            #    config.config = simplejson.loads(self.config_str)
+            #    if len(args) >= 2:
+            #        self.lang_str = args[1]
+            #        self.lang_data = simplejson.loads(self.lang_str)
+            #    self.sendConfig(self.battleFlashObject)
+            #    self.sendConfig(self.vmmFlashObject)
+            #    return (None, True)
             elif cmd == XVM_COMMAND.RUN_TEST:
                 runTest(args)
                 return (None, True)

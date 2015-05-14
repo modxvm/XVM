@@ -22,7 +22,7 @@ lang_str = None
 lang_data = None
 
 def get(glob, default=None):
-    if _config is None or path is None or path == '':
+    if _config is None or not glob or glob == '':
         return default
     try:
         glob = glob.replace('.', '/')
@@ -30,7 +30,7 @@ def get(glob, default=None):
             glob = '/%s' % glob
         return dpath.util.get(_config, glob)
     except (ValueError, KeyError) as e:
-        err(repr(e))
+        err('[xvm_main] config.get(): %s' % repr(e))
     except Exception:
         err(traceback.format_exc())
     return default
@@ -56,11 +56,15 @@ def load(e):
         autoreload = get('autoReloadConfig', False)
         (_config, config_errors) = _load_xvm_xc(filename, autoreload)
 
-        regionDetected = get('region', XVM.REGION_AUTO_DETECTION).lower() == XVM.REGION_AUTO_DETECTION
+        _config['xvmVersion'] = XVM.XVM_VERSION
+        _config['wotVersion'] = XVM.WOT_VERSION
+        _config['xvmIntro'] = XVM.XVM_INTRO
+
+        regionDetected = 'region' not in _config or _config['region'].lower() == XVM.REGION_AUTO_DETECTION
         if regionDetected:
             _config['region'] = GAME_REGION
 
-        languageDetected = get('language', XVM.LOCALE_AUTO_DETECTION).lower() == XVM.LOCALE_AUTO_DETECTION
+        languageDetected = 'language' not in _config or _config['language'] == XVM.LOCALE_AUTO_DETECTION
         if languageDetected:
             _config['language'] = GAME_LANGUAGE
         lang_data = _load_locale_file()

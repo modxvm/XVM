@@ -22,7 +22,7 @@ package xvm.hangar.components.BattleLoading
         {
             var info:TextField = page.form.helpTip;
 
-            info.text = "XVM v" + Defines.XVM_VERSION + "     " + Defines.XVM_INTRO;
+            info.text = "XVM v" + Config.config.xvmVersion + "     " + Config.config.xvmIntro;
 
             if (Config.stateInfo.warning != null)
             {

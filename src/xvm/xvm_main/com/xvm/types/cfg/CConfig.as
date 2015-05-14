@@ -7,6 +7,8 @@ package com.xvm.types.cfg
     public dynamic class CConfig extends Object
     {
         public var xvmVersion:String;
+        public var wotVersion:String;
+        public var xvmIntro:String;
         public var configVersion:String;
         public var autoReloadConfig:Boolean;
         public var language:String; // auto, en, ru, ...

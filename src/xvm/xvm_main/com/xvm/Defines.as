@@ -8,18 +8,6 @@ package com.xvm
 
     public class Defines
     {
-        // Global versions
-        public static const XVM_VERSION:String = "6.1.1.1-dev";
-        public static const XVM_INTRO:String = "www.modxvm.com";
-        public static const WOT_VERSION:String = "0.9.7";
-        public static const CONFIG_VERSION:String = "5.1.0";
-
-        //// Locale
-        public static const LOCALE_AUTO_DETECTION:String = "auto";
-//
-        //// Region
-        public static const REGION_AUTO_DETECTION:String = "auto";
-
         // Default path to vehicle icons (relative)
         public static const WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
         public static const WG_CONTOUR_ICON_NOIMAGE:String = WG_CONTOUR_ICON_PATH + "noImage.png";
@@ -33,12 +21,6 @@ package com.xvm
 
         // res_mods/configs/xvm/ (for <img> tag)
         public static const XVM_IMG_CFG_ROOT:String = "../configs/xvm/";
-
-        // res_mods/configs/xvm/
-        public static const XVM_CONFIGS_DIR_NAME:String = XfwConst.XFW_CONFIGS_DIR_NAME + "xvm/";
-
-        // res_mods/configs/xvm/xvm.xc
-        public static const XVM_CONFIG_FILE_NAME:String = XVM_CONFIGS_DIR_NAME + "xvm.xc";
 
         // Paths relative to WoT root
         // res_mods/mods/shared_resources/xvm/

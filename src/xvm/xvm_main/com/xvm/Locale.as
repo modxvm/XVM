@@ -424,7 +424,7 @@ package com.xvm
                 else
                 {
                     var text:String = "[" + res.type + "] " + res.message + ": ";
-                    text += ConfigUtils.parseErrorEvent(e);
+                    text += e.getStackTrace(); // ConfigUtils.parseErrorEvent(e);
                     Logger.add(text);
                 }
             }

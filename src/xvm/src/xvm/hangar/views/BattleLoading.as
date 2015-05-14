@@ -59,7 +59,7 @@ package xvm.hangar.views
         {
             Logger.add(
                 "[BattleLoading]\n" +
-                "                               XVM_VERSION=" + Defines.XVM_VERSION + " for WoT " + Defines.WOT_VERSION +"\n" +
+                "                               XVM_VERSION=" + Config.config.xvmVersion + " for WoT " + Config.config.wotVersion +"\n" +
                 "                               gameRegion=" + Config.gameRegion + "\n" +
                 "                               configVersion=" + Config.config.configVersion + "\n" +
                 "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +
