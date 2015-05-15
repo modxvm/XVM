@@ -10,5 +10,6 @@
   function get selected();
 
   function updateData();
+  function applyData();
   function updateState();
 }

@@ -63,7 +63,7 @@
     "Data was updated at": "Данные были обновлены",
     "Load statistics": "Загрузить статистику",
 
-    // UserInfo
+    // Profile
     "General stats": "Общая статистика",
     "Summary": "Общие результаты",
     "Avg level": "Средний уровень",

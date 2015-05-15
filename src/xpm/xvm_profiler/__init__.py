@@ -46,6 +46,10 @@ def FlashBeforeDelete(self):
     # log("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
 
+def fini():
+    if IS_DEVELOPMENT:
+        showPythonResult()
+
 # onXvmCommand
 
 def onXvmCommand(proxy, id, cmd, *args):
@@ -61,6 +65,8 @@ def onXvmCommand(proxy, id, cmd, *args):
 # cProfile
 
 _pr = cProfile.Profile()
+if IS_DEVELOPMENT:
+    _pr.enable()
 
 # on map load (battle loading)
 def PlayerAvatar_onEnterWorld(self, *args):
@@ -76,13 +82,20 @@ def PlayerAvatar_onEnterWorld(self, *args):
 def PlayerAvatar_onLeaveWorld(self, *args):
     as2profiler.g_as2profiler.showResult()
 
-    global _pr
-    _pr.disable()
-    s = StringIO.StringIO()
-    sortby = 'cumulative'
-    p = pstats.Stats(_pr, stream=s).sort_stats(sortby)
-    p.print_stats('(xfw|xvm)', 10)
-    log(s.getvalue())
+    showPythonResult()
+
+_shown = False
+def showPythonResult():
+    global _shown
+    if not _shown:
+        _shown = True
+        global _pr
+        _pr.disable()
+        s = StringIO.StringIO()
+        sortby = 'cumulative'
+        p = pstats.Stats(_pr, stream=s).sort_stats(sortby)
+        p.print_stats('(xfw|xvm)', 10)
+        log(s.getvalue())
 
 #####################################################################
 # Register events
@@ -94,6 +107,8 @@ RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
 
 # Delayed registration
 def _RegisterEvents():
+    import game
+    RegisterEvent(game, 'fini', fini)
     from Avatar import PlayerAvatar
     RegisterEvent(PlayerAvatar, 'onEnterWorld', PlayerAvatar_onEnterWorld)
     RegisterEvent(PlayerAvatar, 'onLeaveWorld', PlayerAvatar_onLeaveWorld)

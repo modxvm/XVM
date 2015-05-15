@@ -46,13 +46,13 @@ package com.xvm
 
         public static function isUserDataCachedByName(name:String):Boolean
         {
-            var key:String = Config.gameRegion + "/" + name;
+            var key:String = Config.config.region + "/" + name;
             return instance.userCache.hasOwnProperty(key);
         }
 
         public static function getUserDataByName(name:String):StatData
         {
-            var key:String = Config.gameRegion + "/" + name;
+            var key:String = Config.config.region + "/" + name;
             return instance.userCache.hasOwnProperty(key) ? instance.userCache[key] : null;
         }
 
@@ -299,7 +299,7 @@ package com.xvm
                 var inProgress:Boolean = false;
                 if (callback != null)
                 {
-                    var key:String = (isId ? "ID" : Config.gameRegion) + "/" + value;
+                    var key:String = (isId ? "ID" : Config.config.region) + "/" + value;
                     if (userCache.hasOwnProperty(key))
                     {
                         callback.call(target, userCache[key]);
@@ -341,7 +341,7 @@ package com.xvm
                 calculateStatValues(sd);
                 name = sd.name || sd.nm;
                 //Logger.addObject(sd, "sd", 2);
-                key1 = Config.gameRegion + "/" + name;
+                key1 = Config.config.region + "/" + name;
                 userCache[key1] = sd;
                 key2 = "ID/" + sd._id;
                 userCache[key2] = sd;

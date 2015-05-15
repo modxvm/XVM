@@ -28,19 +28,23 @@ class _Fps():
         self.isReplay = g_replayCtrl.isPlaying
         self.values = None
 
+
     def start(self):
-        if not config.config:
+        if not config.get('export'):
             # debug('wait')
             BigWorld.callback(0, self.start)
             return
+
         if self.intervalId is not None:
             stop()
-        if config.config['export']['fps']['enabled']:
+
+        if config.get('export/fps/enabled'):
             # debug('fps start')
-            self.interval = config.config['export']['fps']['interval']
-            self.outputDir = config.config['export']['fps']['outputDir']
+            self.interval = config.get('export/fps/interval')
+            self.outputDir = config.get('export/fps/outputDir')
             self.intervalId = BigWorld.callback(self.interval, self.update)
             self.values = []
+
 
     def stop(self):
         # debug('fps stop')
@@ -62,6 +66,7 @@ class _Fps():
                     f.write("{0};{1}\n".format(round(item['time'], 3), round(item['fps'], 3)))
             self.values = []
 
+
     def update(self):
         # debug('update')
         period = getArenaPeriod()
@@ -77,6 +82,7 @@ class _Fps():
         # debug('fps: {0} per: {1} time: {2}'.format(fps, period, time))
         self.values.append({'period': period, 'time': time, 'fps': fps})
         pass
+
 
 _g_fps = None
 def _init():

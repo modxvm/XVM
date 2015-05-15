@@ -51,8 +51,9 @@ def VehicleParamsField_getValue(base, self):
         for shell in vehicle.shells:
             premium_shells[shell.intCompactDescr] = shell.isPremium
         if params:
-            if veh_type_inconfig in config.config['tooltips'] and len(config.config['tooltips'][veh_type_inconfig]):
-                params_list = config.config['tooltips'][veh_type_inconfig] # overriding parameters
+            values = config.get('tooltips/%s' % veh_type_inconfig)
+            if values and len(values):
+                params_list = values # overriding parameters
             else:
                 params_list = self.PARAMS.get(vehicle.type, 'default')               # old way
             for paramName in params_list:
@@ -248,7 +249,7 @@ def VehicleParamsField_getValue(base, self):
                         imgPath = 'img://gui/maps/icons/artefact/empty.png'
                     equipmentIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
                 equipmentIcons_str = ' '.join(equipmentIcons_arr)
-                if 'combineIcons' in config.config['tooltips'] and config.config['tooltips']['combineIcons'] and optDevicesIcons_str:
+                if config.get('tooltips/combineIcons') and optDevicesIcons_str:
                     result[-1][-1][0] += ' ' + equipmentIcons_str
                 else:
                     result[-1].append([equipmentIcons_str, ''])
@@ -263,7 +264,7 @@ def VehicleParamsField_getValue(base, self):
             result[-1].append([crewRolesIcons_str, ''])
 
         result.append([])
-        if 'hideBottomText' in config.config['tooltips'] and config.config['tooltips']['hideBottomText']:
+        if config.get('tooltips/hideBottomText'):
             pass
         else:
             if crew:
@@ -301,7 +302,7 @@ def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
 # suppress carousel tooltips
 def ToolTip_onCreateTypedTooltip(base, self, type, *args):
     try:
-        if type == 'carouselVehicle' and 'suppressCarouselTooltips' in config.config['hangar']['carousel'] and config.config['hangar']['carousel']['suppressCarouselTooltips']:
+        if type == 'carouselVehicle' and config.get('hangar/carousel/suppressCarouselTooltips'):
             return
     except Exception as ex:
         err(traceback.format_exc())

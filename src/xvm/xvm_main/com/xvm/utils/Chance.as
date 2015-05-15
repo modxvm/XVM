@@ -98,7 +98,7 @@ package com.xvm.utils
                     return { error: "[1] No data for: " + stat.v.id };
                 }
 
-                var K:Number = chanceFunc(stat.v.data, stat);
+                var K:Number = chanceFunc(stat);
 
                 Ka += (stat.team == XfwConst.TEAM_ALLY) ? K : 0;
                 Ke += (stat.team == XfwConst.TEAM_ENEMY) ? K : 0;
@@ -113,11 +113,11 @@ package com.xvm.utils
         }
 
         // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
-        private static function ChanceFuncG(vdata:VehicleData, stat:StatData):Number
+        private static function ChanceFuncG(stat:StatData):Number
         {
             var T:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
-            var Tmin:Number = vdata.tierLo;
-            var Tmax:Number = vdata.tierHi;
+            var Tmin:Number = stat.v.data.tierLo;
+            var Tmax:Number = stat.v.data.tierHi;
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.winrate || Config.config.consts.AVG_GWR;
@@ -143,11 +143,11 @@ package com.xvm.utils
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
         }
 
-        private static function ChanceFuncT(vdata:VehicleData, stat:StatData):Number
+        private static function ChanceFuncT(stat:StatData):Number
         {
             var T:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
-            var Tmin:Number = vdata.tierLo;
-            var Tmax:Number = vdata.tierHi;
+            var Tmin:Number = stat.v.data.tierLo;
+            var Tmax:Number = stat.v.data.tierHi;
             var Bt:Number = stat.v.b || 0;
             var Rt:Number = stat.v.winrate || Config.config.consts.AVG_GWR;
             var Et:Number = Bt >= 50 && stat.v.xte ? stat.v.xte : 0;

@@ -767,7 +767,7 @@ package com.xvm
             // {{topclan}}
             pdata["topclan"] = Utils.getTopClanText(stat.clanInfoRank);
             // {{region}}
-            pdata["region"] = Config.gameRegion;
+            pdata["region"] = Config.config.region;
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
             // {{xte}}
@@ -982,7 +982,7 @@ package com.xvm
          */
         private function getCustomPlayerName(pname:String, uid:Number):String
         {
-            switch (Config.gameRegion)
+            switch (Config.config.region)
             {
                 case "RU":
                     if (pname == "www_modxvm_com")

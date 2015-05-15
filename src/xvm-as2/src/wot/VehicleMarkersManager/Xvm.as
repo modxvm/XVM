@@ -76,9 +76,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
-        pFullName:String, pName:String, pClan:String, pRegion:String,
-        curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String)
+    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
+        pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
+        hunt:Boolean, entityType:String, isFlagBearer:Boolean)
         /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
     {
         Cmd.profMethodStart("Xvm.init()");
@@ -103,6 +103,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_entityName = entityName; // ally, enemy, squadman, teamKiller
         m_entityType = entityType; // ally, enemy
         m_maxHealth = maxHealth;
+        m_isFlagbearer = isFlagBearer;
+        wrapper.flagMC._visible = m_isFlagbearer;
 
         m_vname = vType; // AMX50F155
         m_level = vLevel;
@@ -111,11 +113,11 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_isDead    = curHealth <= 0; // -1 for ammunition storage explosion
         m_curHealth = curHealth >= 0 ? curHealth : 0;
 
-        m_playerId = arguments[14];
-        m_vid = arguments[15];
-        m_marksOnGun = arguments[16];
-        m_isReady = (arguments[17] & 2) != 0; // 2 - IS_AVATAR_READY
-        m_frags = arguments[18];
+        m_playerId = arguments[15];
+        m_vid = arguments[16];
+        m_marksOnGun = arguments[17];
+        m_isReady = (arguments[18] & 2) != 0; // 2 - IS_AVATAR_READY
+        m_frags = arguments[19];
 
         healthBarComponent.init();
         contourIconComponent.init(m_entityType);
@@ -320,6 +322,15 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     function showActionMarker(actionState)
     {
         actionMarkerComponent.showActionMarker(actionState);
+    }
+
+    /**
+     * @see IVehicleMarker
+     */
+    function updateFlagbearerState(isFlagbearer:Boolean)
+    {
+        m_isFlagbearer = isFlagbearer;
+        wrapper.flagMC._visible = m_isFlagbearer;
     }
 
     /**

@@ -38,6 +38,7 @@ class wot.VehicleMarkersManager.XvmBase
     public var m_level:Number;
     public var m_speaking:Boolean;
     public var m_entityType:String; // TODO: is the same as proxy.m_team?
+    private var m_isFlagbearer:Boolean;
 
     // Public members
     public var m_playerId:Number;

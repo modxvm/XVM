@@ -28,11 +28,6 @@ class wot.StatisticForm.BattleStatItemRenderer
         return this.updateDataImpl.apply(this, arguments);
     }
 
-    function updateState()
-    {
-        return this.updateStateImpl.apply(this, arguments);
-    }
-
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -153,13 +148,6 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         fmt = Macros.Format(name, (team == Defines.TEAM_ALLY) ? Config.config.statisticForm.formatLeftVehicle : Config.config.statisticForm.formatRightVehicle, obj);
         wrapper.col3.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
-    }
-
-    // override
-    function updateStateImpl()
-    {
-        //Logger.add("updateState");
-        base.updateState();
 
         if (Config.config.battle.highlightVehicleIcon == false && (wrapper.selected || wrapper.data.squad > 10))
         {

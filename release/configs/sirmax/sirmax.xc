@@ -1,6 +1,6 @@
 {
   "configVersion": "5.1.0",
-  //"autoReloadConfig": true,
+  "autoReloadConfig": true,
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
@@ -23,9 +23,9 @@
     "__stub__": {}
   },
   "elements": [
-    ${"sirmax-snippet-test.xc":"."},
-    //${"sirmax-snippet-pp.xc":"."},  // players panels
-    ${"sirmax-snippet-bt.xc":"."} // battle timer
+    //${"sirmax-snippet-pp.xc":"."}, // players panels
+    //${"sirmax-snippet-bt.xc":"."}, // battle timer
+    ${"sirmax-snippet-test.xc":"."}
   ],
   "login": {
     "skipIntro": true,

@@ -35,6 +35,8 @@ package xvm.quests.UI
             try
             {
                 super.configUI();
+                // TODO:0.9.8
+                /*
                 taskFilters.hideCompletedTasks.y -= 18;
                 createHideFullyCompletedTasksCheckBox();
                 createHideUnavailableTasksCheckBox();
@@ -45,6 +47,7 @@ package xvm.quests.UI
                     hideUnavailableTasks.visible = true;
                 }, 0);
                 loadedSettings = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, null));
+                */
             }
             catch (ex:Error)
             {
@@ -174,6 +177,8 @@ package xvm.quests.UI
 
         private function saveSettings():void
         {
+            // TODO:0.9.8
+            /*
             var settings:Object = {
                 ver: SETTINGS_VERSION,
                 vehicleTypeFilter: taskFilters.vehicleTypeFilter.selectedIndex,
@@ -184,6 +189,7 @@ package xvm.quests.UI
             };
 
             Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, JSONx.stringify(settings));
+            */
         }
 
         private function applyLoadedSettings():void
@@ -200,7 +206,10 @@ package xvm.quests.UI
 
                 taskFilters.vehicleTypeFilter.selectedIndex = loadedSettings.vehicleTypeFilter;
                 taskFilters.taskTypeFilter.selectedIndex = loadedSettings.taskTypeFilter;
+                // TODO:0.9.8
+                /*
                 taskFilters.hideCompletedTasks.selected = loadedSettings.hideCompletedTasks;
+                */
                 this.hideFullyCompletedTasks.selected = loadedSettings.hideFullyCompletedTasks;
                 this.hideUnavailableTasks.selected = loadedSettings.hideUnavailableTasks;
             }
