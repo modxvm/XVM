@@ -15,7 +15,6 @@ import traceback
 import BigWorld
 from math import degrees, pi
 from helpers import i18n
-from gui.shared.utils import ItemsParameters, ParametersCache
 
 from xfw import *
 import xvm_main.python.config as config
@@ -32,6 +31,7 @@ from gun_rotation_shared import calcPitchLimitsFromDesc
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 def VehicleParamsField_getValue(base, self):
     try:
+        from gui.shared.utils import ItemsParameters, ParametersCache
         result = list()
         vehicle = self._tooltip.item
         configuration = self._tooltip.context.getParamsConfiguration(vehicle)
@@ -47,6 +47,9 @@ def VehicleParamsField_getValue(base, self):
         result.append([])
         veh_type_inconfig = vehicle.type.replace('AT-SPG', 'TD')
         clipGunInfoShown = False
+        premium_shells = {}
+        for shell in vehicle.shells:
+            premium_shells[shell.intCompactDescr] = shell.isPremium
         if params:
             if veh_type_inconfig in config.config['tooltips'] and len(config.config['tooltips'][veh_type_inconfig]):
                 params_list = config.config['tooltips'][veh_type_inconfig] # overriding parameters
@@ -73,8 +76,7 @@ def VehicleParamsField_getValue(base, self):
                 if paramName == 'camo_coeff':
                     topTurret = veh_descr.type.turrets[0][-1]
                     camo_coeff_arr = getCamoValues(vehicle.name, turret['name'] == topTurret['name'], gun['name'])
-                    delimiter = '/'
-                    camo_coeff_str = delimiter.join(map(smart_round, camo_coeff_arr))
+                    camo_coeff_str = '/'.join(map(smart_round, camo_coeff_arr))
                     result[-1].append([h1_pad(l10n('camoCoeff') + ' <p>(%)</p>'), h1_pad(camo_coeff_str)])
                     continue
                 #radioRange
@@ -86,26 +88,28 @@ def VehicleParamsField_getValue(base, self):
                 if paramName == 'explosionRadius':
                     explosionRadiusMin = 999
                     explosionRadiusMax = 0
-                    for key in gun['shots']:
-                        if 'explosionRadius' in key['shell']:
-                            if key['shell']['explosionRadius'] < explosionRadiusMin:
-                                explosionRadiusMin = key['shell']['explosionRadius']
-                            if key['shell']['explosionRadius'] > explosionRadiusMax:
-                                explosionRadiusMax = key['shell']['explosionRadius']
+                    for shot in gun['shots']:
+                        if 'explosionRadius' in shot['shell']:
+                            if shot['shell']['explosionRadius'] < explosionRadiusMin:
+                                explosionRadiusMin = shot['shell']['explosionRadius']
+                            if shot['shell']['explosionRadius'] > explosionRadiusMax:
+                                explosionRadiusMax = shot['shell']['explosionRadius']
                     if explosionRadiusMax == 0: # no HE
                         continue
                     explosionRadius_str = '%g' % round(explosionRadiusMin, 2)
                     if explosionRadiusMin != explosionRadiusMax:
-                        explosionRadius_str += ' (%g %s)' % (round(explosionRadiusMax, 2), i18n.makeString('#menu:headerButtons/btnLabel/premium'))
+                        explosionRadius_str += '/%g' % gold_pad(round(explosionRadiusMax, 2))
                     result[-1].append([self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)[0], h1_pad(explosionRadius_str)])
                     continue
                 #shellSpeedSummary
                 if paramName == 'shellSpeedSummary':
                     shellSpeedSummary_arr = []
-                    for key in gun['shots']:
-                        shellSpeedSummary_arr.append(str(int(key['speed'] * 1.25)))
-                    delimiter = '/'
-                    shellSpeedSummary_str = delimiter.join(shellSpeedSummary_arr)
+                    for shot in gun['shots']:
+                        shellSpeed_str = '%g' % round(shot['speed'] * 1.25)
+                        if premium_shells[shot['shell']['compactDescr']]:
+                            shellSpeed_str = gold_pad(shellSpeed_str)
+                        shellSpeedSummary_arr.append(shellSpeed_str)
+                    shellSpeedSummary_str = '/'.join(shellSpeedSummary_arr)
                     result[-1].append([h1_pad('%s <p>%s</p>' % (l10n('shellSpeed'), l10n('(m/sec)'))), h1_pad(shellSpeedSummary_str)])
                     continue
                 #piercingPowerAvg
@@ -116,19 +120,23 @@ def VehicleParamsField_getValue(base, self):
                 #piercingPowerAvgSummary
                 if paramName == 'piercingPowerAvgSummary':
                     piercingPowerAvgSummary_arr = []
-                    for key in gun['shots']:
-                        piercingPowerAvgSummary_arr.append(str(int(key['piercingPower'][0])))
-                    delimiter = '/'
-                    piercingPowerAvgSummary_str = delimiter.join(piercingPowerAvgSummary_arr)
+                    for shot in gun['shots']:
+                        piercingPower_str = '%g' % shot['piercingPower'][0]
+                        if premium_shells[shot['shell']['compactDescr']]:
+                            piercingPower_str = gold_pad(piercingPower_str)
+                        piercingPowerAvgSummary_arr.append(piercingPower_str)
+                    piercingPowerAvgSummary_str = '/'.join(piercingPowerAvgSummary_arr)
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/avgPiercingPower').replace('h>', 'h1>'), h1_pad(piercingPowerAvgSummary_str)])
                     continue
                 #damageAvgSummary
                 if paramName == 'damageAvgSummary':
                     damageAvgSummary_arr = []
-                    for key in gun['shots']:
-                        damageAvgSummary_arr.append(str(int(key['shell']['damage'][0])))
-                    delimiter = '/'
-                    damageAvgSummary_str = delimiter.join(damageAvgSummary_arr)
+                    for shot in gun['shots']:
+                        damageAvg_str = '%g' % shot['shell']['damage'][0]
+                        if premium_shells[shot['shell']['compactDescr']]:
+                            damageAvg_str = gold_pad(damageAvg_str)
+                        damageAvgSummary_arr.append(damageAvg_str)
+                    damageAvgSummary_str = '/'.join(damageAvgSummary_arr)
                     result[-1].append([i18n.makeString('#menu:moduleInfo/params/avgDamage').replace('h>', 'h1>'), h1_pad(damageAvgSummary_str)])
                     continue
                 #magazine loading
@@ -201,8 +209,7 @@ def VehicleParamsField_getValue(base, self):
                     resistances_arr = []
                     for key in veh_descr.chassis['terrainResistance']:
                         resistances_arr.append('%g' % round(key, 2))
-                    delimiter = '/'
-                    terrainResistance_str = delimiter.join(resistances_arr)
+                    terrainResistance_str = '/'.join(resistances_arr)
                     result[-1].append([h1_pad(l10n('terrainResistance')), h1_pad(terrainResistance_str)])
                     continue
                 #custom text
@@ -228,8 +235,7 @@ def VehicleParamsField_getValue(base, self):
                     else:
                         imgPath = 'img://gui/maps/icons/artefact/empty.png'
                     optDevicesIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
-                delimiter = ' '
-                optDevicesIcons_str = delimiter.join(optDevicesIcons_arr)
+                optDevicesIcons_str = ' '.join(optDevicesIcons_arr)
                 result[-1].append([optDevicesIcons_str, ''])
 
             # equipment icons, must be in the end
@@ -241,9 +247,8 @@ def VehicleParamsField_getValue(base, self):
                     else:
                         imgPath = 'img://gui/maps/icons/artefact/empty.png'
                     equipmentIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
-                delimiter = ' '
-                equipmentIcons_str = delimiter.join(equipmentIcons_arr)
-                if 'combineIcons' in config.config['tooltips'] and config.config['tooltips']['combineIcons']:
+                equipmentIcons_str = ' '.join(equipmentIcons_arr)
+                if 'combineIcons' in config.config['tooltips'] and config.config['tooltips']['combineIcons'] and optDevicesIcons_str:
                     result[-1][-1][0] += ' ' + equipmentIcons_str
                 else:
                     result[-1].append([equipmentIcons_str, ''])
@@ -254,8 +259,7 @@ def VehicleParamsField_getValue(base, self):
             crewRolesIcons_arr = []
             for tankman_role in vehicle.descriptor.type.crewRoles:
                 crewRolesIcons_arr.append('<img src="%s/%s.png" height="16" width="16">' % (imgPath, tankman_role[0]))
-            delimiter = ''
-            crewRolesIcons_str = delimiter.join(crewRolesIcons_arr)
+            crewRolesIcons_str = ''.join(crewRolesIcons_arr)
             result[-1].append([crewRolesIcons_str, ''])
 
         result.append([])
@@ -308,6 +312,9 @@ def ToolTip_onCreateTypedTooltip(base, self, type, *args):
 
 def h1_pad(text):
     return '<h1>%s</h1>' % text
+
+def gold_pad(text):
+    return "<font color='#FFC363'>%s</font>" % text
 
 def smart_round(value):
     if value >= 10:
