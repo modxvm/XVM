@@ -49,14 +49,12 @@ package com.xvm
             return Locale.get(value);
         }
 
-        private function onSetConfig(config_str:String, lang_str:String):void
+        private function onSetConfig(config_str:String, lang_str:String, vehInfo_str:String):void
         {
             //Logger.add("onSetConfig");
-            var config:CConfig = ObjectConverter.convertData(JSONx.parse(config_str), CConfig);
-            Config.setConfig(config);
-
-            // TODO: Locale
-
+            Config.config = ObjectConverter.convertData(JSONx.parse(config_str), CConfig);
+            Locale.setupLanguage(lang_str);
+            VehicleInfo.setVehicleInfoData(vehInfo_str);
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
         }
 
@@ -64,25 +62,5 @@ package com.xvm
         {
             Config.networkServicesSettings = new NetworkServicesSettings(nss);
         }
-/*
-        private function onReloadConfig():void
-        {
-            Logger.add("reload config");
-            Config.load();
-            var message:String = Locale.get("XVM config reloaded");
-            var type:String = "Information";
-            if (Config.stateInfo.warning != null)
-            {
-                message = Locale.get("Config file xvm.xc was not found, using the built-in config");
-                type = "Warning";
-            }
-            else if (Config.stateInfo.error != null)
-            {
-                message = Locale.get("Error loading XVM config") + ":\n" + XfwUtils.encodeHtmlEntities(Config.stateInfo.error);
-                type = "Error";
-            }
-            Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
-        }
-*/
     }
 }

@@ -63,7 +63,7 @@
     "Data was updated at": "Data was updated at",
     "Load statistics": "Load statistics",
 
-    // UserInfo
+    // Profile
     "General stats": "General stats",
     "Summary": "Summary",
     "Avg level": "Avg level",

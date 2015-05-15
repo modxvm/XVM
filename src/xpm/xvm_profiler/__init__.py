@@ -41,6 +41,8 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
     self.addExternalCallback('xvm.cmd', lambda *args: onXvmCommand(self, *args))
 
 def FlashBeforeDelete(self):
+    if IS_DEVELOPMENT:
+        showPythonResult()
     if self.swf not in _SWFS:
         return
     # log("FlashBeforeDelete: " + self.swf)
@@ -61,6 +63,8 @@ def onXvmCommand(proxy, id, cmd, *args):
 # cProfile
 
 _pr = cProfile.Profile()
+if IS_DEVELOPMENT:
+    _pr.enable()
 
 # on map load (battle loading)
 def PlayerAvatar_onEnterWorld(self, *args):
@@ -76,6 +80,9 @@ def PlayerAvatar_onEnterWorld(self, *args):
 def PlayerAvatar_onLeaveWorld(self, *args):
     as2profiler.g_as2profiler.showResult()
 
+    showPythonResult()
+
+def showPythonResult():
     global _pr
     _pr.disable()
     s = StringIO.StringIO()

@@ -116,8 +116,10 @@ rm -f "${dc_fn}c"
 import sys
 sys.path.insert(0, '../xfw/~output/python/mods/xfw/python/lib')
 import JSONxLoader
-result = JSONxLoader.load('../../release/configs/default/@xvm.xc')
-print('DEFAULT_CONFIG={}'.format(result))
+cfg = JSONxLoader.load('../../release/configs/default/@xvm.xc')
+en = JSONxLoader.load('../../release/l10n/en.xc')
+ru = JSONxLoader.load('../../release/l10n/ru.xc')
+print('DEFAULT_CONFIG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg, en, ru))
 " > $dc_fn 2>&1
 "$PY_EXEC" -c "import py_compile; py_compile.compile('$dc_fn')" 2>&1
 [ ! -f ${dc_fn}c ] && cat "$dc_fn"

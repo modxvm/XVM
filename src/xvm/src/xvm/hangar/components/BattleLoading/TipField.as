@@ -22,20 +22,20 @@ package xvm.hangar.components.BattleLoading
         {
             var info:TextField = page.form.helpTip;
 
-            info.text = "XVM v" + Config.config.xvmVersion + "     " + Config.config.xvmIntro;
+            info.text = "XVM v" + Config.config.__xvmVersion + "     " + Config.config.__xvmIntro;
 
-            if (Config.stateInfo.warning != null)
+            if (Config.config.__stateInfo.warning != null)
             {
                 info.textColor = 0xFFD040;
-                if (Config.stateInfo.warning != "")
-                    setTipText(Config.stateInfo.warning);
+                if (Config.config.__stateInfo.warning != "")
+                    setTipText(Config.config.__stateInfo.warning);
             }
 
-            if (Config.stateInfo.error != null)
+            if (Config.config.__stateInfo.error != null)
             {
                 info.textColor = 0xFF4040;
-                if (Config.stateInfo.error != "")
-                    setTipText(Config.stateInfo.error, true);
+                if (Config.config.__stateInfo.error != "")
+                    setTipText(Config.config.__stateInfo.error, true);
             }
         }
 

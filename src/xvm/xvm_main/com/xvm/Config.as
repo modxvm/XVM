@@ -7,55 +7,30 @@ package com.xvm
     import com.xfw.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
-    import flash.events.*;
 
     public class Config
     {
-        public static var networkServicesSettings:NetworkServicesSettings = new NetworkServicesSettings({});
-
-        // instance
-        private static var _instance:Config = null;
-        private static function get instance():Config
-        {
-            if (_instance == null)
-                _instance = new Config();
-            return _instance;
-        }
+        private static var s_config:CConfig = null;
+        private static var s_networkServicesSettings:NetworkServicesSettings = new NetworkServicesSettings({});
 
         public static function get config():CConfig
         {
-            return instance._config;
+            return s_config;
         }
 
-        public static function setConfig(value:CConfig):void
+        public static function set config(value:CConfig):void
         {
-            instance._config = value;
+            s_config = value;
         }
 
-        public static function get gameRegion():String
+        public static function get networkServicesSettings():NetworkServicesSettings
         {
-            return config.region;
+            return s_networkServicesSettings;
         }
 
-        public static function get language():String
+        public static function set networkServicesSettings(value:NetworkServicesSettings):void
         {
-            return config.language;
-        }
-
-        public static function get stateInfo():Object
-        {
-            return instance._stateInfo;
-        }
-
-        // PRIVATE
-
-        private var _config:CConfig;
-        private var _stateInfo:Object;
-
-        function Config()
-        {
-            _config = null;
-            _stateInfo = { };
+            s_networkServicesSettings = value;
         }
     }
 }

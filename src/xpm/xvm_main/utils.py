@@ -103,3 +103,10 @@ def getDynamicColorValue(type, value, prefix='#'):
     color = next((int(x['color'], 0) for x in cfg if value <= float(x['value'])), 0xFFFFFF)
 
     return "{0}{1:06x}".format(prefix, color)
+
+def fixPath(path):
+    if path is not None:
+        path = path.replace('\\', '/')
+        if path[-1] != '/':
+            path += '/'
+    return path;

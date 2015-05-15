@@ -11,9 +11,9 @@ package com.xvm
     {
         // PUBLIC
 
-        public static function populateData():void
+        public static function setVehicleInfoData(vidata_str:String):void
         {
-            instance.onVehicleInfoData(Xfw.cmd(XvmCommandsInternal.GET_VEHINFO));
+            instance.onVehicleInfoData(vidata_str);
         }
 
         public static function get(vehId:int):VehicleData

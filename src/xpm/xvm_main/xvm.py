@@ -12,11 +12,11 @@ from gui.shared.utils import decorators
 
 from xfw import *
 
-import config
 from constants import *
 from logger import *
-from stats import getBattleStat, getBattleResultsStat, getUserData
-from vehinfo import getVehicleInfoDataStr
+import config
+import stats
+import vehinfo
 import vehstate
 import token
 import utils
@@ -24,7 +24,7 @@ import userprefs
 import dossier
 from websock import g_websock
 from minimap_circles import g_minimap_circles
-from test import runTest
+import test
 import wgutils
 
 _LOG_COMMANDS = (
@@ -62,7 +62,10 @@ class Xvm(object):
 
 
     def respondConfig(self):
-        as_xfw_cmd(XVM_COMMAND.AS_SET_CONFIG, config.config_str, config.lang_str)
+        as_xfw_cmd(XVM_COMMAND.AS_SET_CONFIG,
+                   config.config_str,
+                   config.lang_str,
+                   vehinfo.getVehicleInfoDataStr())
 
     # LOGIN
 
@@ -84,6 +87,23 @@ class Xvm(object):
             g_websock.send('id/%d' % playerId)
         if self.lobbyFlashObject is not None:
             self.lobbyFlashObject.loaderManager.onViewLoaded += self.onViewLoaded
+
+        # TODO
+        """
+            var message:String = Locale.get("XVM config loaded");
+            var type:String = "Information";
+            if (Config.__stateInfo.warning != null)
+            {
+                message = Locale.get("Config file xvm.xc was not found, using the built-in config");
+                type = "Warning";
+            }
+            else if (Config.__stateInfo.error != null)
+            {
+                message = Locale.get("Error loading XVM config") + ":\n" + XfwUtils.encodeHtmlEntities(Config.__stateInfo.error);
+                type = "Error";
+            }
+            Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
+        """
 
 
     def initLobbySwf(self, flashObject):
@@ -369,57 +389,54 @@ class Xvm(object):
             if cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:
                     return (arena.extraData.get('battleLevel', 0), True)
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.GET_BATTLE_TYPE:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:
                     return (arena.bonusType, True)
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.REQUEST_DOSSIER:
                 dossier.requestDossier(args)
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.GET_SVC_SETTINGS:
                 token.getToken()
                 return (token.networkServicesSettings, True)
-            
-            if cmd == XVM_COMMAND.GET_VEHINFO:
-                return (getVehicleInfoDataStr(), True)
-            
+
             if cmd == XVM_COMMAND.LOAD_SETTINGS:
                 default = None if len(args) < 2 else args[1]
                 return (userprefs.get(args[0], default), True)
-            
+
             if cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
-                getBattleStat(args)
+                stats.getBattleStat(args)
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS:
-                getBattleResultsStat(args)
+                stats.getBattleResultsStat(args)
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.LOAD_STAT_USER:
-                getUserData(args)
+                stats.getUserData(args)
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.OPEN_URL:
                 if len(args[0]):
                     utils.openWebBrowser(args[0], False)
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
                 return (None, True)
-            
+
             if cmd == XVM_COMMAND.RUN_TEST:
-                runTest(args)
+                test.runTest(args)
                 return (None, True)
 
         except Exception, ex:
@@ -441,7 +458,7 @@ class Xvm(object):
                 # return
                 res = simplejson.dumps(list(GUI.screenResolution()))
             elif cmd == AS2COMMAND.LOAD_BATTLE_STAT:
-                getBattleStat(args, proxy)
+                stats.getBattleStat(args, proxy)
             elif cmd == AS2COMMAND.LOAD_SETTINGS:
                 res = userprefs.get(args[0])
             elif cmd == AS2COMMAND.SAVE_SETTINGS:

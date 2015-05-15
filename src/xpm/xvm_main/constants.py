@@ -17,7 +17,8 @@ class XVM(object):
 
     CONFIG_DIR = 'res_mods/configs/xvm'
     CONFIG_FILE = CONFIG_DIR + '/xvm.xc'
-    SHARED_RESOURCES_DIR = 'res_mods/mods/shared_resources/xvm/res'
+    SHARED_RESOURCES_DIR = 'res_mods/mods/shared_resources/xvm'
+    LOCALE_DIR = SHARED_RESOURCES_DIR + '/l10n'
 
     LOCALE_AUTO_DETECTION = 'auto'
     REGION_AUTO_DETECTION = 'auto'
@@ -34,7 +35,6 @@ class XVM_COMMAND(object):
     GET_BATTLE_TYPE = "xvm.get_battle_type"
     REQUEST_DOSSIER = "xvm.request_dossier"
     GET_SVC_SETTINGS = "xvm.get_svc_settings"
-    GET_VEHINFO = "xvm.get_vehinfo"
     LOAD_SETTINGS = "xvm.load_settings"
     LOAD_STAT_BATTLE = "xvm.load_stat_battle"
     LOAD_STAT_BATTLE_RESULTS = "xvm.load_stat_battle_results"
