@@ -41,12 +41,14 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
     self.addExternalCallback('xvm.cmd', lambda *args: onXvmCommand(self, *args))
 
 def FlashBeforeDelete(self):
-    if IS_DEVELOPMENT:
-        showPythonResult()
     if self.swf not in _SWFS:
         return
     # log("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
+
+def fini():
+    if IS_DEVELOPMENT:
+        showPythonResult()
 
 # onXvmCommand
 
@@ -82,14 +84,18 @@ def PlayerAvatar_onLeaveWorld(self, *args):
 
     showPythonResult()
 
+_shown = False
 def showPythonResult():
-    global _pr
-    _pr.disable()
-    s = StringIO.StringIO()
-    sortby = 'cumulative'
-    p = pstats.Stats(_pr, stream=s).sort_stats(sortby)
-    p.print_stats('(xfw|xvm)', 10)
-    log(s.getvalue())
+    global _shown
+    if not _shown:
+        _shown = True
+        global _pr
+        _pr.disable()
+        s = StringIO.StringIO()
+        sortby = 'cumulative'
+        p = pstats.Stats(_pr, stream=s).sort_stats(sortby)
+        p.print_stats('(xfw|xvm)', 10)
+        log(s.getvalue())
 
 #####################################################################
 # Register events
@@ -101,6 +107,8 @@ RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
 
 # Delayed registration
 def _RegisterEvents():
+    import game
+    RegisterEvent(game, 'fini', fini)
     from Avatar import PlayerAvatar
     RegisterEvent(PlayerAvatar, 'onEnterWorld', PlayerAvatar_onEnterWorld)
     RegisterEvent(PlayerAvatar, 'onLeaveWorld', PlayerAvatar_onLeaveWorld)

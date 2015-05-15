@@ -204,15 +204,17 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     /**
      * called by Battle.pyc
      */
-    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
-        pFullName:String, pName:String, pClan:String, pRegion:String,
-        curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void
+    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
+        pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
+        hunt:Boolean, entityType:String, isFlagBearer:Boolean):Void
         /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
     {
         /**
          * Invoked on new marker creation.
          * Does not get invoked on Alt or unit death.
          */
+        //Logger.addObject("init: " + arguments);
+
         m_vehicleName = vType;
         m_level = vLevel;
         m_playerName = pName; // alex
@@ -223,8 +225,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_curHealth = curHealth;
         m_dead = m_curHealth <= 0;
 
-        var playerId = arguments[14];
-        var vid:Number = m_vid = arguments[15];
+        var playerId = arguments[15];
+        var vid:Number = m_vid = arguments[16];
 
         // for markers, hitlog and hpleft
         var wr = wrapper;
@@ -324,7 +326,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     public function showActionMarker(actionState):Void
     {
-        call("showActionMarker", [actionState]);
+        call("showActionMarker", arguments);
+    }
+
+    public function updateFlagbearerState(isFlagbearer:Boolean):Void
+    {
+        call("updateFlagbearerState", arguments);
     }
 
     public function onLoad()

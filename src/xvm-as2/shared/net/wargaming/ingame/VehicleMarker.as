@@ -21,6 +21,7 @@
     var pNameField:TextField;
     var healthBar:MovieClip;
     var bgShadow:MovieClip;
+    var flagMC:MovieClip;
 
     static var ICON;
     static var LEVEL;
@@ -30,9 +31,9 @@
     static var V_NAME_LBL;
     static var DAMAGE_PANEL;
 
-    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
-        pFullName:String, pName:String, pClan:String, pRegion:String,
-        curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void;
+    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
+        pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
+        hunt:Boolean, entityType:String, isFlagBearer:Boolean):Void;
     function update():Void;
     function updateMarkerSettings():Void;
     function setSpeaking(value:Boolean):Void;
@@ -41,6 +42,7 @@
     function updateState(newState:String, isImmediate:Boolean):Void;
     function showExInfo(show:Boolean):Void;
     function showActionMarker(actionState):Void;
+    function updateFlagbearerState(isFlagbearer:Boolean):Void;
 
     function getPartVisibility(part);
 

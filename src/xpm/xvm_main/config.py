@@ -88,11 +88,11 @@ def load(e):
 
 # PRIVATE
 
-
 def _load_xvm_xc(filename, autoreload):
     # debug('_load_xvm_xc: "{}", {}'.format(filename, autoreload))
     try:
         config = deepcopy(default_config.DEFAULT_CONFIG)
+        config['consts'] = _constsSection()
         if os.path.isfile(filename):
             result = JSONxLoader.load(filename, _load_log)
             if result is not None:
@@ -175,3 +175,17 @@ def _tuneup_config(config):
         config['playersPanel']['clanIcon']['xr'] = config['playersPanel']['clanIcon']['x']
     if config['playersPanel']['clanIcon']['yr'] is None:
         config['playersPanel']['clanIcon']['yr'] = config['playersPanel']['clanIcon']['y']
+
+
+def _constsSection():
+    return {
+        'AVG_GWR': 48,              # Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
+        'AVG_XVMSCALE': 30,         # Average XVM Scale. Source: http://www.koreanrandom.com/forum/topic/2625-/
+        'AVG_BATTLES': 2000,        # Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
+        'MAX_EBN': 200,             # Maximum Ebn value for win-chance formula
+        'VM_COEFF_VMM': 0.88,       # vehicle markers manager (alive)
+        'VM_COEFF_VMM_DEAD': 0.50,  # vehicle markers manager (dead)
+        'VM_COEFF_MM_PLAYER': 0.93, # minimap (player)
+        'VM_COEFF_MM_BASE': 0.8,    # minimap (base)
+        'VM_COEFF_FC': 0.93         # frag correlation
+    }

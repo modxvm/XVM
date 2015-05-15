@@ -224,11 +224,11 @@ class Xvm(object):
             if movie is not None:
                 arena = BigWorld.player().arena
                 movie.invoke((AS2RESPOND.CONFIG, [
-                    self.config_str,
-                    self.lang_str,
+                    config.config_str,
+                    config.lang_str,
                     arena.extraData.get('battleLevel', 0),
                     arena.bonusType,
-                    getVehicleInfoDataStr(),
+                    vehinfo.getVehicleInfoDataStr(),
                     simplejson.dumps(token.networkServicesSettings),
                     IS_DEVELOPMENT,
                 ]))
@@ -374,17 +374,6 @@ class Xvm(object):
         try:
             if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-
-            #if cmd == XVM_COMMAND.SET_CONFIG:
-            #    # debug(XVM_COMMAND.SET_CONFIG)
-            #    self.config_str = args[0]
-            #    config.config = simplejson.loads(self.config_str)
-            #    if len(args) >= 2:
-            #        self.lang_str = args[1]
-            #        self.lang_data = simplejson.loads(self.lang_str)
-            #    self.sendConfig(self.battleFlashObject)
-            #    self.sendConfig(self.vmmFlashObject)
-            #    return (None, True)
 
             if cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()

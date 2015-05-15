@@ -23,9 +23,9 @@
     "__stub__": {}
   },
   "elements": [
-    ${"sirmax-snippet-test.xc":"."},
-    //${"sirmax-snippet-pp.xc":"."},  // players panels
-    ${"sirmax-snippet-bt.xc":"."} // battle timer
+    //${"sirmax-snippet-pp.xc":"."}, // players panels
+    //${"sirmax-snippet-bt.xc":"."}, // battle timer
+    ${"sirmax-snippet-test.xc":"."}
   ],
   "login": {
     "skipIntro": true,
