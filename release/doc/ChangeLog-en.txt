@@ -1,4 +1,8 @@
-﻿XVM-6.1.1.1:
+﻿XVM-6.1.2-dev:
+  * adaptation to WoT 0.9.8
+  * config loading refactoring
+
+XVM-6.1.1.1:
   * added embedded fonts 'dynamic' and 'dynamic2' with various indicators
   * added crew auto-return for Stronghold/Team Battles vehicle selections
   * localization files were updated

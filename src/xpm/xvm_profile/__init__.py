@@ -6,7 +6,7 @@
 XFW_MOD_VERSION    = '3.0.0'
 XFW_MOD_URL        = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
+XFW_GAME_VERSIONS  = ['0.9.8']
 
 #####################################################################
 
