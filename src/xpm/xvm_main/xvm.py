@@ -23,7 +23,7 @@ import utils
 import userprefs
 import dossier
 from websock import g_websock
-from minimap_circles import g_minimap_circles
+import minimap_circles
 import test
 import wgutils
 
@@ -135,9 +135,9 @@ class Xvm(object):
 
     def updateTankParams(self):
         try:
-            g_minimap_circles.updateCurrentVehicle()
+            minimap_circles.updateCurrentVehicle()
             if self.lobbyFlashObject is not None:
-                data = simplejson.dumps(config.get('minimap/circles/_internal'))
+                data = simplejson.dumps(minimap_circles.getMinimapCirclesData())
                 as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE, data)
         except Exception, ex:
             err(traceback.format_exc())
@@ -146,7 +146,7 @@ class Xvm(object):
     # PREBATTLE
 
     def onArenaCreated(self):
-        g_minimap_circles.updateCurrentVehicle()
+        minimap_circles.updateCurrentVehicle()
 
 
     # BATTLE
@@ -168,23 +168,23 @@ class Xvm(object):
 
             fileName = 'arenas_data/{0}'.format(player.arenaUniqueID)
 
-            cfg = config.get('minimap/circles')
+            mcdata = minimap_circles.getMinimapCirclesData()
             vehId = player.vehicleTypeDescriptor.type.compactDescr
-            if vehId and vehId == cfg.get('_internal', {}).get('vehId', None):
+            if vehId and mcdata is not None and vehId == mcdata.get('vehId', None):
                 # Normal battle start. Update data and save to userprefs cache
                 userprefs.set(fileName, {
                     'ver': '1.0',
-                    'minimap_circles': cfg['_internal'],
+                    'minimap_circles': minimap_circles.getMinimapCirclesData(),
                 })
             else:
                 # Replay, training or restarted battle after crash. Try to restore data.
                 arena_data = userprefs.get(fileName)
                 if arena_data is None:
                     # Set default vehicle data if it is not available.in the cache.
-                    g_minimap_circles.updateConfig(player.vehicleTypeDescriptor)
+                    minimap_circles.updateMinimapCirclesData(player.vehicleTypeDescriptor)
                 else:
                     # Apply restored data.
-                    cfg['_internal'] = arena_data['minimap_circles']
+                    minimap_circles.setMinimapCirclesData(arena_data['minimap_circles'])
 
         except Exception, ex:
             err(traceback.format_exc())
@@ -230,6 +230,7 @@ class Xvm(object):
                     arena.bonusType,
                     vehinfo.getVehicleInfoDataStr(),
                     simplejson.dumps(token.networkServicesSettings),
+                    simplejson.dumps(minimap_circles.getMinimapCirclesData()),
                     IS_DEVELOPMENT,
                 ]))
         except Exception, ex:

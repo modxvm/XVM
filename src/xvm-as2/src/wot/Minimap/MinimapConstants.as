@@ -2,22 +2,26 @@
 {
     /**
      * icons Z indexes from Minimap.pyc:
-     * _MARKER_RANGE = (100, 124)
-     * _BACK_ICONS_RANGE = (125, 149)
-     * _DEAD_VEHICLE_RANGE = (150, 199)
-     * _VEHICLE_RANGE = (201, 250)
-     * _FIXED_INDEXES = {CAMERA_NORMAL: 200,
-     * 'self': 251,
-     * CAMERA_STRATEGIC: 252,
-     * 'cell': 253,
-     * CAMERA_VIDEO: 260}
+     *   _BASES_RANGE = (0, 99)
+     *   _BACK_ICONS_RANGE = (100, 124)
+     *   _MARKER_RANGE = (200, 299)
+     *   _DEAD_VEHICLE_RANGE = (300, 349)
+     *   _VEHICLE_RANGE = (350, 399)
+     *   _FLAG_RANGE = (400, 449)
+     *   _ANIMATION_RANGE = (450, 500)
+     *   _FIXED_INDEXES = {CAMERA_NORMAL: 1000,
+     *    'self': 1001,
+     *    CAMERA_STRATEGIC: 1002,
+     *    'cell': 1003,
+     *    CAMERA_VIDEO: 1004}
      */
 
-    public static var MAX_DEAD_ZINDEX:Number = 199;
+    public static var MAX_DEAD_ZINDEX:Number = 349;
+    public static var CAMERA_NORMAL_ZINDEX:Number = 1000;
+    public static var SELF_ZINDEX:Number = 1001;
+
     public static var LABELS_ZINDEX:Number = MAX_DEAD_ZINDEX - 1;
     public static var SQUARE_1KM_ZINDEX:Number = MAX_DEAD_ZINDEX - 2;
-    public static var CAMERA_NORMAL_ZINDEX:Number = 200;
-    public static var SELF_ZINDEX:Number = 251;
 
     public static var STATIC_ICON_BASE:String = "base"; // Team colored capture base
     public static var STATIC_ICON_CONTROL:String = "control"; // Shared grey capture base
