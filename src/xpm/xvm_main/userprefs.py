@@ -34,7 +34,12 @@ class _UserPrefs():
             fileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
             if os.path.isfile(fileName):
                 fd = open(fileName, 'rb')
-                return cPickle.load(fd)
+                try:
+                    return cPickle.load(fd)
+                except Exception:
+                    os.remove(fileName)
+                    log('[WARNING] Broken file was removed: %s' % fileName)
+                    raise
             return default
         except Exception:
             err(traceback.format_exc())
