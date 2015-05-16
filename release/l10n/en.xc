@@ -207,6 +207,7 @@
     "Not ready": "Not ready",
 
     // Quests
+    "Hide completed": "Hide completed",
     "Hide with honors": "Hide with honors",
     "Hide unavailable": "Hide unavailable",
 

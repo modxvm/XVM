@@ -10,16 +10,16 @@ import wot.Minimap.model.mapSize.MapInfoData;
 class wot.Minimap.model.mapSize.MapSizeModel
 {
     private static var _instance:MapSizeModel;
-    
+
     private var cellSide:Number;
-    
+
     public static function get instance():MapSizeModel
     {
         if (!_instance)
         {
             _instance = new MapSizeModel();
         }
-        
+
         return _instance;
     }
 
@@ -27,7 +27,7 @@ class wot.Minimap.model.mapSize.MapSizeModel
     {
         return cellSide;
     }
-    
+
     public function getFullSide():Number
     {
         return cellSide * 10;
@@ -43,7 +43,7 @@ class wot.Minimap.model.mapSize.MapSizeModel
          */
         var mapText:String = _root.statsData.arenaData.mapText;
         cellSide = MapInfoData.SizeByLocalizedMapName(mapText);
-        if (!ExternalInterface.available) 
+        if (!ExternalInterface.available)
             Logger.add("Minimap: Error - ExternalInterface not ready");
         Logger.add("Minimap: localized map name: " + mapText);
 

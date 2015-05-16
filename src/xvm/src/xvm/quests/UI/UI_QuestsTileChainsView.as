@@ -4,7 +4,7 @@ package xvm.quests.UI
     import com.xvm.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.gui.components.controls.*;
+    import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.quests.data.*;
     import net.wg.gui.lobby.quests.data.questsTileChains.*;
@@ -35,19 +35,18 @@ package xvm.quests.UI
             try
             {
                 super.configUI();
-                // TODO:0.9.8
-                /*
-                taskFilters.hideCompletedTasks.y -= 18;
-                createHideFullyCompletedTasksCheckBox();
-                createHideUnavailableTasksCheckBox();
+                hideCompletedTasks = createFilterCheckBox("hideCompletedTasks", Locale.get("Hide completed"), 0);
+                hideFullyCompletedTasks = createFilterCheckBox("hideFullyCompletedTasks", Locale.get("Hide with honors"), 18);
+                hideUnavailableTasks = createFilterCheckBox("hideUnavailableTasks", Locale.get("Hide unavailable"), 36);
                 setTimeout(function():void {
-                    hideFullyCompletedTasks.x = taskFilters.hideCompletedTasks.x;
+                    hideCompletedTasks.x = filterX;
+                    hideCompletedTasks.visible = true;
+                    hideFullyCompletedTasks.x = filterX;
                     hideFullyCompletedTasks.visible = true;
-                    hideUnavailableTasks.x = taskFilters.hideCompletedTasks.x;
+                    hideUnavailableTasks.x = filterX;
                     hideUnavailableTasks.visible = true;
                 }, 0);
                 loadedSettings = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, null));
-                */
             }
             catch (ex:Error)
             {
@@ -98,9 +97,20 @@ package xvm.quests.UI
 
         private var loadedSettings:Object = null;
         private var selectedId:Number = -1;
+        private var hideCompletedTasks:CheckBox;
         private var hideFullyCompletedTasks:CheckBox;
         private var hideUnavailableTasks:CheckBox;
         private var blockFiltersChangedEvent:Boolean = false;
+
+        private function get filterX():Number
+        {
+            return taskFilters.taskTypeFilter.x + taskFilters.taskTypeFilter.width + 10;
+        }
+
+        private function get filterY():Number
+        {
+            return taskFilters.taskTypeFilter.y - 27;
+        }
 
         private function onListItemSelected(e:ListEventEx) : void
         {
@@ -108,40 +118,23 @@ package xvm.quests.UI
             //Logger.add("selectedId=" + selectedId);
         }
 
-        private function createHideFullyCompletedTasksCheckBox():void
+        private function createFilterCheckBox(name:String, label:String, offsetY:int):CheckBox
         {
-            hideFullyCompletedTasks = App.utils.classFactory.getComponent("CheckBox", CheckBox);
-            with (hideFullyCompletedTasks)
-            {
-                name = "hideFullyCompletedTasks";
-                label = Locale.get("Hide with honors");
-                autoSize = "left";
-                x = taskFilters.hideCompletedTasks.x;
-                y = taskFilters.hideCompletedTasks.y + 18;
-                visible = false;
-            }
-            hideFullyCompletedTasks.addEventListener(Event.SELECT, onHideTasksChanged);
-            taskFilters.addChild(hideFullyCompletedTasks);
-        }
-
-        private function createHideUnavailableTasksCheckBox():void
-        {
-            hideUnavailableTasks = App.utils.classFactory.getComponent("CheckBox", CheckBox);
-            with (hideUnavailableTasks)
-            {
-                name = "hideUnavailableTasks";
-                label = Locale.get("Hide unavailable");
-                autoSize = "left";
-                x = taskFilters.hideCompletedTasks.x;
-                y = taskFilters.hideCompletedTasks.y + 36;
-                visible = false;
-            }
-            hideUnavailableTasks.addEventListener(Event.SELECT, onHideTasksChanged);
-            taskFilters.addChild(hideUnavailableTasks);
+            var cb:CheckBox = App.utils.classFactory.getComponent("CheckBox", CheckBox);
+            cb.name = name;
+            cb.label = label;
+            cb.autoSize = "left";
+            cb.x = filterX;
+            cb.y = filterY + offsetY;
+            cb.visible = false;
+            cb.addEventListener(Event.SELECT, onHideTasksChanged);
+            taskFilters.addChild(cb);
+            return cb;
         }
 
         private function ApplyFilter(data:QuestTileVO):QuestTileVO
         {
+            var completed:String = App.utils.locale.makeString("#quests:tileChainsView/taskType/completed/text");
             var fullCompleted:String = App.utils.locale.makeString("#quests:tileChainsView/taskType/fullCompleted/text");
             for each (var chain:QuestChainVO in data.chains)
             {
@@ -149,7 +142,11 @@ package xvm.quests.UI
                 for (var i:int = len - 1; i >= 0; --i)
                 {
                     var task:QuestTaskVO = chain.tasks[i];
-                    if (hideFullyCompletedTasks.selected && task.stateName.indexOf(">" + fullCompleted + "<") >= 0)
+                    if (hideCompletedTasks.selected && task.stateName.indexOf(">" + completed + "<") >= 0)
+                    {
+                        chain.tasks.splice(i, 1);
+                    }
+                    else if (hideFullyCompletedTasks.selected && task.stateName.indexOf(">" + fullCompleted + "<") >= 0)
                     {
                         chain.tasks.splice(i, 1);
                     }
@@ -177,19 +174,16 @@ package xvm.quests.UI
 
         private function saveSettings():void
         {
-            // TODO:0.9.8
-            /*
             var settings:Object = {
                 ver: SETTINGS_VERSION,
                 vehicleTypeFilter: taskFilters.vehicleTypeFilter.selectedIndex,
                 taskTypeFilter: taskFilters.taskTypeFilter.selectedIndex,
-                hideCompletedTasks: taskFilters.hideCompletedTasks.selected,
+                hideCompletedTasks: this.hideCompletedTasks.selected,
                 hideFullyCompletedTasks: this.hideFullyCompletedTasks.selected,
                 hideUnavailableTasks: this.hideUnavailableTasks.selected
             };
 
             Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_TILE_CHAINS_VIEW_FILTERS, JSONx.stringify(settings));
-            */
         }
 
         private function applyLoadedSettings():void
@@ -206,10 +200,7 @@ package xvm.quests.UI
 
                 taskFilters.vehicleTypeFilter.selectedIndex = loadedSettings.vehicleTypeFilter;
                 taskFilters.taskTypeFilter.selectedIndex = loadedSettings.taskTypeFilter;
-                // TODO:0.9.8
-                /*
-                taskFilters.hideCompletedTasks.selected = loadedSettings.hideCompletedTasks;
-                */
+                this.hideCompletedTasks.selected = loadedSettings.hideCompletedTasks;
                 this.hideFullyCompletedTasks.selected = loadedSettings.hideFullyCompletedTasks;
                 this.hideUnavailableTasks.selected = loadedSettings.hideUnavailableTasks;
             }
