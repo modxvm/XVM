@@ -99,7 +99,7 @@ def VehicleParamsField_getValue(base, self):
                         continue
                     explosionRadius_str = '%g' % round(explosionRadiusMin, 2)
                     if explosionRadiusMin != explosionRadiusMax:
-                        explosionRadius_str += '/%s' % gold_pad(round(explosionRadiusMax, 2))
+                        explosionRadius_str += '/%s' % gold_pad('%g' % round(explosionRadiusMax, 2))
                     result[-1].append([self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)[0], h1_pad(explosionRadius_str)])
                     continue
                 #shellSpeedSummary
