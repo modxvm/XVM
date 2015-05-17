@@ -35,7 +35,7 @@ class com.xvm.Config
             Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
             Macros.RegisterGlobalMacrosData(battleLevel, battleType);
             ApplyGlobalMacros();
-            Locale.initializeLanguageFile(lang_str);
+            Locale.setupLanguage(lang_str);
             VehicleInfo.onVehicleInfoData(vehInfoData);
 
             Logger.add("Config: Loaded");
