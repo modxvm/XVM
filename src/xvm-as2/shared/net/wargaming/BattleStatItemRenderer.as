@@ -1,6 +1,6 @@
 ﻿intrinsic class net.wargaming.BattleStatItemRenderer extends MovieClip // net.wargaming.controls.TextFieldShort
 {
-  var textField: TextField;
+  var playerName:TextField;
   var col3:TextField;
   var data:Object;
   var iconLoader: net.wargaming.controls.UILoaderAlt;

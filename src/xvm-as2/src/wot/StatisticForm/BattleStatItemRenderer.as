@@ -140,11 +140,11 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.data.label = saved_label;
 
         // Set Text Fields
-        var c:String = "#" + Strings.padLeft(wrapper.textField.textColor.toString(16), 6, '0');
+        var c:String = "#" + Strings.padLeft(wrapper.playerName.textColor.toString(16), 6, '0');
 
         var obj = BattleState.getUserData(name);
         var fmt:String = Macros.Format(name, (team == Defines.TEAM_ALLY) ? Config.config.statisticForm.formatLeftNick : Config.config.statisticForm.formatRightNick, obj);
-        wrapper.textField.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
+        wrapper.playerName.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
 
         fmt = Macros.Format(name, (team == Defines.TEAM_ALLY) ? Config.config.statisticForm.formatLeftVehicle : Config.config.statisticForm.formatRightVehicle, obj);
         wrapper.col3.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
