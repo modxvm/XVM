@@ -1,6 +1,8 @@
 ﻿XVM-6.1.2-dev:
   * adaptation to WoT 0.9.8
   * config loading refactoring
+  * new option:
+      "enableEquipAutoReturn": removable equipment auto-return (Camouflage net, Stereoscope, Toolbox)
 
 XVM-6.1.1.1:
   * added embedded fonts 'dynamic' and 'dynamic2' with various indicators

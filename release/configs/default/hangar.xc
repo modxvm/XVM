@@ -25,9 +25,12 @@
     // true - Allow to consider the exchange of experience with gold in tech tree
     // true - Разрешить учитывать обмен опыта за золото в дереве исследований
     "allowExchangeXPInTechTree": true,
-    // true - enable crew auto return function
-    // true - включить функцию автовозврата экипажа
+    // true - Enable crew auto return function
+    // true - Включить функцию автовозврата экипажа
     "enableCrewAutoReturn": true,
+    // true - Enable removable equipment auto return (Camouflage net, Stereoscope, Toolbox)
+    // true - Включить автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами)
+    "enableEquipAutoReturn": false,
     // true - Enable widgets
     // true - включить виджеты
     "widgetsEnabled": false,
