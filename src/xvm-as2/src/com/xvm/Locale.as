@@ -57,7 +57,7 @@ class com.xvm.Locale
             //var stringParts:Array = macro.split(":");
             //macro = stringParts[0];
             //stringParts.shift();
-            //macro = Locale.get(macro);
+            macro = Locale.get(macro);
             //if (stringParts.length > 0)
             //    macro = XfwUtils.substitute(macro, stringParts);
             res += macro;
