@@ -45,6 +45,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
         return this.updateImpl.apply(this, arguments);
     }
 
+    function updateSquadIcons()
+    {
+        return this.updateSquadIconsImpl.apply(this, arguments);
+    }
+
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -185,6 +190,20 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             Logger.addObject(ex.toString());
         }
+    }
+
+    private function updateSquadIconsImpl(squadPositionX, dynamicIcoPotionX)
+    {
+        squadPositionX += 2;
+        dynamicIcoPotionX += 2;
+        //Logger.add(squadPositionX + " " + dynamicIcoPotionX);
+        wrapper.squadIcon._x = squadPositionX;
+        wrapper.addToSquad._x = dynamicIcoPotionX;
+        wrapper.acceptSquadInvite._x = dynamicIcoPotionX;
+        wrapper.inviteWasSent._x = dynamicIcoPotionX;
+        wrapper.inviteReceived._x = dynamicIcoPotionX;
+        wrapper.inviteReceivedFromSquad._x = dynamicIcoPotionX;
+        wrapper.inviteDisabled._x = dynamicIcoPotionX;
     }
 
     // PRIVATE
