@@ -43,6 +43,11 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         return this.updateAlphasImpl.apply(this, arguments);
     }
 
+    function updatePositions()
+    {
+        // stub
+    }
+
     function updateWidthOfLongestName()
     {
         // stub

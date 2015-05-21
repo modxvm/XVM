@@ -11,6 +11,7 @@ class wot.wrapper.PlayersPanel.PlayersPanel extends net.wargaming.ingame.Players
             "onRecreateDevice",
             "update",
             "updateAlphas",
+            "updatePositions",
             "updateWidthOfLongestName",
             "setIsShowExtraModeActive",
             "updateSquadIcons"
