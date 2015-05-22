@@ -48,7 +48,7 @@
   },
   "medium": {
     //"enabled": false,
-    "width": 120,
+    "width": 80,
     "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     //"extraFieldsLeft": [
@@ -59,14 +59,14 @@
   },
   "medium2": {
     //"enabled": false,
-    "width": 120,
+    "width": 80,
     "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "__stub__": null
   },
   "short": {
     //"enabled": false,
-    //"width": 120,
+    //"width": 80,
     "__stub__": null
   },
   "none": {

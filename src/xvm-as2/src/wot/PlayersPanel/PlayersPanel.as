@@ -70,7 +70,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private var DEFAULT_NAMES_WIDTH_LARGE:Number = 263;
     private var DEFAULT_NAMES_WIDTH_MEDIUM:Number = 79;
     private var DEFAULT_VEHICLES_WIDTH:Number = 98;
-    private var DEFAULT_SQUAD_SIZE:Number = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN;
+    private var DEFAULT_SQUAD_SIZE:Number;
 
     private var m_data_arguments:Array;
     private var m_data:Object;
@@ -86,6 +86,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     public function PlayersPanelCtor()
     {
         Utils.TraceXvmModule("PlayersPanel");
+
+        DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, invalidate);
@@ -582,11 +584,11 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
         if (isLeftPanel)
         {
-            wrapper.players_bg._x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x - widthDelta;
-            x = wrapper.players_bg._x;
-            if (wrapper.m_list._x != x)
+            x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x - widthDelta;
+            if (wrapper.players_bg._x != x)
             {
                 changed = true;
+                wrapper.players_bg._x = x;
                 wrapper.m_list._x = x;
                 wrapper.m_list.updateSquadIconPosition(-x);
             }
@@ -624,11 +626,11 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         }
         else
         {
-            wrapper.players_bg._x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x + widthDelta;
-            x = wrapper.players_bg._x;
-            if (wrapper.m_list._x != x)
+            x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x + widthDelta;
+            if (wrapper.players_bg._x != x)
             {
                 changed = true;
+                wrapper.players_bg._x = x;
                 wrapper.m_list._x = x;
                 wrapper.m_list.updateSquadIconPosition(wrapper.players_bg._width - x - squadSize);
             }
