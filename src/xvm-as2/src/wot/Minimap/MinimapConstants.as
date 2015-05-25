@@ -22,6 +22,11 @@
     public static var CAMERA_STRETEGIC_ZINDEX:Number = 1002;
     public static var CELL_ZINDEX:Number = 1003;
 
+    public static var MAIN_PLAYER_ENTRY_NAME:String = "MinimapEntry0";
+    public static var MAIN_CAMERA_ENTRY_NAME:String = "MinimapEntry1";
+
+    public static var STRATEGIC_AIM_ZINDEX:Number = CAMERA_NORMAL_ZINDEX - 1;
+
     public static var LABELS_ZINDEX:Number = MAX_DEAD_ZINDEX - 1;
     public static var SQUARE_1KM_ZINDEX:Number = MAX_DEAD_ZINDEX - 2;
 

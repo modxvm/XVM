@@ -159,14 +159,20 @@ class wot.Minimap.MinimapEntry
     function onEnterFrameHandlerImpl()
     {
         base.onEnterFrameHandler();
+
+        if (wrapper._name != MinimapConstants.MAIN_PLAYER_ENTRY_NAME)
+            return;
+
         labelMc._x = wrapper._x;
         labelMc._y = wrapper._y;
-        var entry = IconsProxy.cameraStrategicEntry;
-        if (entry != null)
+
+        if (!wrapper.isDead)
         {
-            // TODO
-            //Logger.add(entry._x + "," + entry._y + " " + entry._width + " " + entry._height + " " + entry._name);
-            //Logger.add(entry._matrix3d + " " + entry._currentframe + " " + entry.cameraWithDirection);
+            var camera = IconsProxy.cameraStrategicEntry;
+            if (camera != null)
+            {
+                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.SET_STRATEGIC_POS, camera));
+            }
         }
     }
 
