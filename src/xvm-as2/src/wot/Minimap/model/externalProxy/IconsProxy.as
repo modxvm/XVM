@@ -46,6 +46,11 @@ class wot.Minimap.model.externalProxy.IconsProxy
         return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(wot.Minimap.MinimapConstants.CAMERA_NORMAL_ZINDEX));
     }
 
+    public static function get cameraStrategicEntry():net.wargaming.ingame.MinimapEntry
+    {
+        return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(wot.Minimap.MinimapConstants.CAMERA_STRETEGIC_ZINDEX));
+    }
+
     public static function createEmptyMovieClip(name:String, depth:Number):MovieClip
     {
         return _icons.createEmptyMovieClip(name, depth);

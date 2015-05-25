@@ -73,7 +73,7 @@ class wot.Minimap.Features
         // empty function required for instance creation
     }
 
-    private function onRefreshEvent(e)
+    private function onRefreshEvent(e:MinimapEvent)
     {
         applyFeatures();
         _scaleMarkers();
@@ -166,7 +166,7 @@ class wot.Minimap.Features
 
     private function onEntryUpdated(e:MinimapEvent):Void
     {
-        markerScaling.scaleEntry(e.entry.wrapper);
+        markerScaling.scaleEntry(e.entry);
     }
 
     /**

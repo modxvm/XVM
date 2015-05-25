@@ -87,7 +87,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         invalidate();
     }
 
-    private function onRefreshEvent(e)
+    private function onRefreshEvent(e:MinimapEvent)
     {
         for (var i:String in holderMc)
         {

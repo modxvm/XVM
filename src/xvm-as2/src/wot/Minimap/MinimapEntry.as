@@ -84,7 +84,7 @@ class wot.Minimap.MinimapEntry
         if (IconsProxy.playerIds[playerId])
         {
             delete IconsProxy.playerIds[playerId];
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this, playerId));
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, wrapper, playerId));
         }
 
         if (isLit)
@@ -103,7 +103,7 @@ class wot.Minimap.MinimapEntry
         }
 
         //Logger.add("add:   " + playerId);
-        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_INITED, this, playerId));
+        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_INITED, wrapper, playerId));
 
         this.onEntryRevealed();
 
@@ -112,7 +112,7 @@ class wot.Minimap.MinimapEntry
         {
             //Logger.add("remove: " + playerId);
             delete IconsProxy.playerIds[playerId];
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this.xvm_worker, playerId));
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this, playerId));
             this["_xvm_removeMovieClip"]()
         }
 
@@ -123,7 +123,8 @@ class wot.Minimap.MinimapEntry
     {
         Cmd.profMethodStart("MinimapEntry.draw()");
 
-        //Logger.add('draw: playerId=' + playerId + " _name=" + wrapper._name + " entryName=" + wrapper.entryName + " m_type=" + wrapper.m_type + " vehicleClass=" + wrapper.vehicleClass);
+        //Logger.add('draw: playerId=' + playerId + " _name=" + wrapper._name + " entryName=" + wrapper.entryName + " m_type=" + wrapper.m_type +
+        //    " markLabel=" + wrapper.markLabel + " vehicleClass=" + wrapper.vehicleClass);
 
         base.draw();
 
@@ -138,13 +139,15 @@ class wot.Minimap.MinimapEntry
         }*/
 
         if (playerId)
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, this, playerId));
+        {
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, wrapper, playerId));
+        }
         else
         {
             var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
             if (camera != null && camera == wrapper)
             {
-                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.CAMERA_UPDATED, this));
+                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.CAMERA_UPDATED, wrapper));
             }
         }
 
@@ -158,6 +161,13 @@ class wot.Minimap.MinimapEntry
         base.onEnterFrameHandler();
         labelMc._x = wrapper._x;
         labelMc._y = wrapper._y;
+        var entry = IconsProxy.cameraStrategicEntry;
+        if (entry != null)
+        {
+            // TODO
+            //Logger.add(entry._x + "," + entry._y + " " + entry._width + " " + entry._height + " " + entry._name);
+            //Logger.add(entry._matrix3d + " " + entry._currentframe + " " + entry.cameraWithDirection);
+        }
     }
 
     // INTERNAL

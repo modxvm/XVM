@@ -134,7 +134,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
         mc.lineTo(to.x, -to.y);
     }
 
-    private function onEntryInited(event:MinimapEvent):Void
+    private function onEntryInited(e:MinimapEvent):Void
     {
         //Logger.add("Lines.onEntryInited");
         /**
@@ -142,10 +142,15 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
          * Camera object reconstruction occurs sometimes and all its previous props are lost.
          * Reattach lines in that case.
          */
-        var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
-        if (camera != null && !camera.xvm_worker.cameraExtendedToken)
+        var entry = e.entry;
+        if (entry == null)
+            return;
+        if (entry == IconsProxy.cameraEntry)
         {
-            attachCameraLines();
+            if (!entry.xvm_worker.cameraExtendedToken)
+            {
+                attachCameraLines();
+            }
         }
     }
 
