@@ -143,8 +143,9 @@ class wot.Minimap.MinimapEntry
         {
             var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
             if (camera != null && camera == wrapper)
-            //if (wrapper._name == MinimapConstants.CAMERA_NORMAL_MOVIECLIP_NAME)
+            {
                 GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.CAMERA_UPDATED, this));
+            }
         }
 
         rescaleAttachments();

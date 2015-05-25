@@ -3,7 +3,9 @@
   * рефакторинг загрузки конфига
   * новая опция:
       "enableEquipAutoReturn": автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами)
-  * удалена устаревшая опция "fragCorrelation/hideTeamTextFields"
+      "minimap"/"showCameraLineAfterDeath" - отображать линию направления камеры после смерти
+      "minimap"/"minimapAimIcon": путь к иконке для артиллерийского прицела
+  * удалена устаревшая опция "fragCorrelation"/"hideTeamTextFields"
 
 XVM-6.1.1.1:
   * добавлены встроенные шрифты 'dynamic' и 'dynamic2' с различными индикаторами
