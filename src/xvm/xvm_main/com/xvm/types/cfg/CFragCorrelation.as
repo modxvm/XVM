@@ -6,7 +6,6 @@ package com.xvm.types.cfg
 {
     public dynamic class CFragCorrelation extends Object
     {
-        public var hideTeamTextFields:Boolean;
         public var showAliveNotFrags:Boolean;
     }
 }

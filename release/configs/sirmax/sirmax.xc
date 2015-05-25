@@ -86,7 +86,7 @@
     "elements": ${"elements"}
   },
   "fragCorrelation": {
-    "hideTeamTextFields": true
+    //"showAliveNotFrags": true
   },
   "captureBar": {
     //"enabled": false,

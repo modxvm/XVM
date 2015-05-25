@@ -3,6 +3,7 @@
   * config loading refactoring
   * new option:
       "enableEquipAutoReturn": removable equipment auto-return (Camouflage net, Stereoscope, Toolbox)
+  * removed obsoleted option "fragCorrelation/hideTeamTextFields"
 
 XVM-6.1.1.1:
   * added embedded fonts 'dynamic' and 'dynamic2' with various indicators
