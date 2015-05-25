@@ -145,6 +145,39 @@ def onClientVersionDiffers():
     g_replayCtrl.scriptModalWindowsEnabled = savedValue
 
 
+# stereoscope
+def AmmunitionPanel_highlightParams(self, type):
+    # debug('> AmmunitionPanel_highlightParams')
+    g_xvm.updateTankParams()
+
+
+def BattleResultsCache_get(base, self, arenaUniqueID, callback):
+    try:
+        filename = '{0}.dat'.format(arenaUniqueID)
+        if not os.path.exists(filename):
+            base(self, arenaUniqueID, callback)
+        else:
+            fileHandler = open(filename, 'rb')
+            (version, battleResults) = cPickle.load(fileHandler)
+            if battleResults is not None:
+                if callback is not None:
+                    import AccountCommands
+                    from account_helpers.BattleResultsCache import convertToFullForm
+                    callback(AccountCommands.RES_CACHE, convertToFullForm(battleResults))
+    except Exception, ex:
+        err(traceback.format_exc())
+        base(self, arenaUniqueID, callback)
+
+
+# stub for fixing waiting bug
+def WaitingViewMeta_fix(base, self, *args):
+    try:
+        base(self, *args)
+        # raise Exception('Test')
+    except Exception, ex:
+        log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
+
+
 # BATTLE
 
 def onArenaCreated():
@@ -194,25 +227,6 @@ def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, 
     return res
 
 
-# show quantity of alive instead of dead in frags panel
-# original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
-def FragCorrelationPanel_updateScore(base, self, playerTeam):
-    try:
-        if config.get('fragCorrelation/showAliveNotFrags'):
-            if not playerTeam:
-                return
-            teamIndex = playerTeam - 1
-            enemyIndex = 1 - teamIndex
-            enemyTeam = enemyIndex + 1
-            team_left = len(self._FragCorrelationPanel__teamsShortLists[playerTeam]) - self._FragCorrelationPanel__teamsFrags[enemyIndex]
-            enemy_left = len(self._FragCorrelationPanel__teamsShortLists[enemyTeam]) - self._FragCorrelationPanel__teamsFrags[teamIndex]
-            self._FragCorrelationPanel__callFlash('updateFrags', [team_left, enemy_left])
-            return
-    except Exception, ex:
-        err(traceback.format_exc())
-    base(self, playerTeam)
-
-
 # spotted status
 def _Minimap__addEntry(self, id, location, doMark):
     # debug('> _Minimap__addEntry: {0}'.format(id))
@@ -226,94 +240,9 @@ def _Minimap__delEntry(self, id, inCallback=False):
     g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
 
 
-def _Minimap_start(self):
-    if config.get('minimap/enabled'):
-        try:
-            from gui.battle_control import g_sessionProvider
-            from items.vehicles import VEHICLE_CLASS_TAGS
-            if not g_sessionProvider.getCtx().isPlayerObserver():
-                player = BigWorld.player()
-                id = player.playerVehicleID
-                entryVehicle = player.arena.vehicles[id]
-                playerId = entryVehicle['accountDBID']
-                tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
-                vClass = tags.pop() if len(tags) > 0 else ''
-                BigWorld.callback(0, lambda:self._Minimap__callEntryFlash(id, 'init_xvm', [playerId, False, 'player', vClass]))
-
-        except Exception, ex:
-            if IS_DEVELOPMENT:
-                err(traceback.format_exc())
-
-
-def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
-    base(self, id, methodName, args)
-
-    if config.get('minimap/enabled'):
-        try:
-            if self._Minimap__isStarted:
-                if methodName == 'init':
-                    if len(args) != 5:
-                        base(self, id, 'init_xvm', [0])
-                    else:
-                        arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
-                        base(self, id, 'init_xvm', [arenaVehicle['accountDBID'], False])
-        except Exception, ex:
-            if IS_DEVELOPMENT:
-                err(traceback.format_exc())
-
-
-def _Minimap__addEntryLit(self, id, matrix, visible=True):
-    if config.get('minimap/enabled'):
-        from gui.battle_control import g_sessionProvider
-        battleCtx = g_sessionProvider.getCtx()
-        if battleCtx.isObserver(id) or matrix is None:
-            return
-
-        try:
-            entry = self._Minimap__entrieLits[id]
-            arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
-            self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm', [arenaVehicle['accountDBID'], True]))
-        except Exception, ex:
-            if IS_DEVELOPMENT:
-                err(traceback.format_exc())
-
-
-# stereoscope
-def AmmunitionPanel_highlightParams(self, type):
-    # debug('> AmmunitionPanel_highlightParams')
-    g_xvm.updateTankParams()
-
-
 def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
-
-
-def BattleResultsCache_get(base, self, arenaUniqueID, callback):
-    try:
-        filename = '{0}.dat'.format(arenaUniqueID)
-        if not os.path.exists(filename):
-            base(self, arenaUniqueID, callback)
-        else:
-            fileHandler = open(filename, 'rb')
-            (version, battleResults) = cPickle.load(fileHandler)
-            if battleResults is not None:
-                if callback is not None:
-                    import AccountCommands
-                    from account_helpers.BattleResultsCache import convertToFullForm
-                    callback(AccountCommands.RES_CACHE, convertToFullForm(battleResults))
-    except Exception, ex:
-        err(traceback.format_exc())
-        base(self, arenaUniqueID, callback)
-
-
-# stub for fixing waiting bug
-def WaitingViewMeta_fix(base, self, *args):
-    try:
-        base(self, *args)
-        # raise Exception('Test')
-    except Exception, ex:
-        log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
 
 
 '''#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
@@ -414,18 +343,12 @@ def _RegisterEvents():
     from gui.battle_control.battle_arena_ctrl import BattleArenaController
     OverrideMethod(BattleArenaController, '_BattleArenaController__makeHash', BattleArenaController__makeHash)
 
-    from gui.Scaleform.daapi.view.battle.markers import MarkersManager
-    OverrideMethod(MarkersManager, 'invokeMarker', MarkersManager_invokeMarker)
-
-    from gui.Scaleform.daapi.view.battle.score_panel import _FragCorrelationPanel
-    OverrideMethod(_FragCorrelationPanel, 'updateScore', FragCorrelationPanel_updateScore)
-
     from gui.Scaleform.Minimap import Minimap
     RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)
     RegisterEvent(Minimap, '_Minimap__delEntry', _Minimap__delEntry)
-    RegisterEvent(Minimap, 'start', _Minimap_start)
-    OverrideMethod(Minimap, '_Minimap__callEntryFlash', _Minimap__callEntryFlash)
-    RegisterEvent(Minimap, '_Minimap__addEntryLit', _Minimap__addEntryLit)
+
+    from gui.Scaleform.daapi.view.battle.markers import MarkersManager
+    OverrideMethod(MarkersManager, 'invokeMarker', MarkersManager_invokeMarker)
 
     from BattleReplay import g_replayCtrl
     g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers

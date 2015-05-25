@@ -97,9 +97,9 @@ class wot.Minimap.MinimapEntry
 
         if (entryName == 'player')
         {
-            var entry:MinimapEntry = IconsProxy.entry(playerId);
-            entry.wrapper.entryName = entryName;
-            entry.wrapper.vehicleClass = vClass;
+            var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(playerId);
+            entry.entryName = entryName;
+            entry.vehicleClass = vClass;
         }
 
         //Logger.add("add:   " + playerId);
@@ -123,23 +123,29 @@ class wot.Minimap.MinimapEntry
     {
         Cmd.profMethodStart("MinimapEntry.draw()");
 
-        //Logger.add('draw: ' + playerId + " " + wrapper.entryName + " " + wrapper.m_type + " " + wrapper.vehicleClass);
+        //Logger.add('draw: playerId=' + playerId + " _name=" + wrapper._name + " entryName=" + wrapper.entryName + " m_type=" + wrapper.m_type + " vehicleClass=" + wrapper.vehicleClass);
 
         base.draw();
 
         MarkerColor.setColor(wrapper);
 
-        if (!_minimap_initialized && wrapper._name == "MinimapEntry1")
+        /*TODO: remove or refactor
+        if (!_minimap_initialized && wrapper._name == "MimimapEntry1")
         {
             _minimap_initialized = true;
             //Logger.addObject(wrapper, 2);
             GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
-        }
+        }*/
 
         if (playerId)
             GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, this, playerId));
-        else if (this.wrapper._name == "MinimapEntry0")
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.CAMERA_UPDATED, this));
+        else
+        {
+            var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
+            if (camera != null && camera == wrapper)
+            //if (wrapper._name == MinimapConstants.CAMERA_NORMAL_MOVIECLIP_NAME)
+                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.CAMERA_UPDATED, this));
+        }
 
         rescaleAttachments();
 
@@ -160,9 +166,9 @@ class wot.Minimap.MinimapEntry
      */
     public function get attachments():MovieClip
     {
-        if (wrapper.xvm_attachments == null)
-            wrapper.createEmptyMovieClip("xvm_attachments", wrapper.getNextHighestDepth());
-        return wrapper.xvm_attachments;
+        if (wrapper["_xvm_attachments"] == null)
+            wrapper.createEmptyMovieClip("_xvm_attachments", wrapper.getNextHighestDepth());
+        return wrapper["_xvm_attachments"];
     }
 
     /**

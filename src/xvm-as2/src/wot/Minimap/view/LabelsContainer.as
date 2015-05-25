@@ -114,7 +114,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             var previousStatus:Number = labelMc[STATUS_FIELD_NAME];
             var actualStatus:Number = getPresenceStatus(playerId);
 
-            //Logger.add(IconsProxy.entry(playerId).wrapper.entryName + ": " + playerId + " " + force + " " + previousStatus + " " + actualStatus);
+            //Logger.add(IconsProxy.entry(playerId).entryName + ": " + playerId + " " + force + " " + previousStatus + " " + actualStatus);
 
             if (previousStatus != actualStatus || force)
             {
@@ -143,9 +143,9 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         //Logger.add("LabelsContainer.createLabel()");
 
-        var entry:MinimapEntry = IconsProxy.entry(playerId);
-        var entryName = entry.wrapper.entryName;
-        var vehicleClass = entry.wrapper.vehicleClass;
+        var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(playerId);
+        var entryName = entry.entryName;
+        var vehicleClass = entry.vehicleClass;
 
         var depth:Number = getFreeDepth(ALIVE_DEPTH_START);
         var labelMc:MovieClip = holderMc.createEmptyMovieClip(playerId.toString(), depth);

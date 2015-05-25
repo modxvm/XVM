@@ -25,8 +25,10 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
         super();
 
+        if (isSelfDead)
+            return;
+
         squareClip = createSquareClip();
-        squareClip._visible = !isSelfDead;
         defineStyle();
         drawLines();
         updatePosition();
@@ -80,7 +82,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
     {
         IconsProxy.setOnEnterFrame(function()
         {
-            var selfMC:MovieClip = IconsProxy.selfEntry.wrapper;
+            var selfMC:MovieClip = IconsProxy.selfEntry;
             this.square._x = selfMC._x;
             this.square._y = selfMC._y;
         });

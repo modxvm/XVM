@@ -83,9 +83,9 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
     private function attachCameraLines():Void
     {
-        var cameraEntry:MinimapEntry = IconsProxy.cameraEntry;
-        cameraEntry.cameraExtendedToken = true;
-        camAttach = cameraEntry.attachments;
+        var cameraEntry:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
+        cameraEntry.xvm_worker.cameraExtendedToken = true;
+        camAttach = cameraEntry.xvm_worker.attachments;
         var depth:Number = camAttach.getNextHighestDepth();
         var cameraLine:MovieClip = camAttach.createEmptyMovieClip("cameraLine" + depth, 10000);
         attachLines(cameraLine, MapConfig.linesCamera, 0);
@@ -132,13 +132,14 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
     private function onEntryInited(event:MinimapEvent):Void
     {
+        //Logger.add("Lines.onEntryInited");
         /**
          * Check if camera has lines attached.
          * Camera object reconstruction occurs sometimes and all its previous props are lost.
          * Reattach lines in that case.
          */
-        var cam:MinimapEntry = IconsProxy.cameraEntry;
-        if (!cam.cameraExtendedToken)
+        var cam:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
+        if (cam != null && !cam.xvm_worker.cameraExtendedToken)
         {
             attachCameraLines();
         }

@@ -5,7 +5,7 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     /////////////////////////////////////////////////////////////////
     // XVM
     var xvm_worker:wot.Minimap.MinimapEntry;
-    var xvm_attachments:MovieClip;
+    private var _xvm_attachments:MovieClip;
     var orig_entryName:String;
     /////////////////////////////////////////////////////////////////
 

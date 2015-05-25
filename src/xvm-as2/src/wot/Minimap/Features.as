@@ -80,7 +80,7 @@ class wot.Minimap.Features
 
         var entries:Array = IconsProxy.allEntries;
         for (var i in entries)
-            entries[i].wrapper.invalidate();
+            entries[i].invalidate();
     }
 
     private function onBattleStateChanged(e:EBattleStateChanged)
@@ -88,10 +88,10 @@ class wot.Minimap.Features
         var pdata:BattleStateData = BattleState.getUserData(e.playerName);
         if (pdata == null)
             return;
-        var entry:MinimapEntry = IconsProxy.entry(pdata.playerId);
+        var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(pdata.playerId);
         if (entry == null)
             return;
-        entry.wrapper.invalidate();
+        entry.invalidate();
     }
 
     private function applyFeatures():Void
@@ -175,7 +175,7 @@ class wot.Minimap.Features
      */
     private function onCameraUpdated(e:MinimapEvent):Void
     {
-        var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry.wrapper;
+        var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
         if (MapConfig.hideCameraTriangle)
         {
             if (camera._currentframe != 2)
@@ -204,8 +204,8 @@ class wot.Minimap.Features
      */
     private function setPlayerIconAlpha():Void
     {
-        var selfIcon:MinimapEntry = IconsProxy.selfEntry;
-        selfIcon.wrapper.selfIcon._alpha = MapConfig.selfIconAlpha;
+        var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.selfEntry;
+        selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
     }
 
     /**

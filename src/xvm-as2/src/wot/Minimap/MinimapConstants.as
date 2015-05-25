@@ -23,6 +23,8 @@
     public static var LABELS_ZINDEX:Number = MAX_DEAD_ZINDEX - 1;
     public static var SQUARE_1KM_ZINDEX:Number = MAX_DEAD_ZINDEX - 2;
 
+    public static var CAMERA_NORMAL_MOVIECLIP_NAME:String = "MinimapEntry1";
+
     public static var STATIC_ICON_BASE:String = "base"; // Team colored capture base
     public static var STATIC_ICON_CONTROL:String = "control"; // Shared grey capture base
     public static var STATIC_ICON_SPAWN:String = "spawn"; // Spawn point. Diamond shaped with number at center.

@@ -8,7 +8,6 @@
  */
 
 import com.xvm.*;
-import wot.Minimap.*;
 
 class wot.Minimap.model.externalProxy.IconsProxy
 {
@@ -20,15 +19,15 @@ class wot.Minimap.model.externalProxy.IconsProxy
     }
 
     /** Used by VehiclePositionTracking to get vehicle positions */
-    public static function entry(playerId:Number):MinimapEntry
+    public static function entry(playerId:Number):net.wargaming.ingame.MinimapEntry
     {
         var minimapEntries:Array = _allEntries;
 
         var len:Number = minimapEntries.length;
         for (var i:Number = 0; i < len; ++i)
         {
-            var entry = MinimapEntry(minimapEntries[i]);
-            if (entry.playerId == playerId)
+            var entry = net.wargaming.ingame.MinimapEntry(minimapEntries[i]);
+            if (entry.xvm_worker.playerId == playerId)
                 return entry;
         }
 
@@ -36,15 +35,15 @@ class wot.Minimap.model.externalProxy.IconsProxy
     }
 
     /** Looks like white arrow */
-    public static function get selfEntry():MinimapEntry
+    public static function get selfEntry():net.wargaming.ingame.MinimapEntry
     {
-        return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(MinimapConstants.SELF_ZINDEX)).xvm_worker;
+        return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(wot.Minimap.MinimapConstants.SELF_ZINDEX));
     }
 
     /** Looks like green highlighted corner */
-    public static function get cameraEntry():MinimapEntry
+    public static function get cameraEntry():net.wargaming.ingame.MinimapEntry
     {
-        return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(MinimapConstants.CAMERA_NORMAL_ZINDEX)).xvm_worker;
+        return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(wot.Minimap.MinimapConstants.CAMERA_NORMAL_ZINDEX));
     }
 
     public static function createEmptyMovieClip(name:String, depth:Number):MovieClip
@@ -76,7 +75,7 @@ class wot.Minimap.model.externalProxy.IconsProxy
         var entries:Array = [];
         var len = children.length;
         for (var i = 0; i < len; ++i)
-            entries.push(net.wargaming.ingame.MinimapEntry(children[i]).xvm_worker);
+            entries.push(net.wargaming.ingame.MinimapEntry(children[i]));
         return entries;
     }
 }

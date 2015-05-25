@@ -32,8 +32,8 @@ class wot.Minimap.shapes.ShapeAttach
          * Used as a center of circles.
          * Will carry attached circles with itself automatically.
          */
-        var self:MinimapEntry = IconsProxy.selfEntry;
-        selfAttachments = self.attachments;
+        var self:net.wargaming.ingame.MinimapEntry = IconsProxy.selfEntry;
+        selfAttachments = self.xvm_worker.attachments;
 
         var metersPerPoint:Number = MAP_SIZE_IN_POINTS / mapSizeInMeters;
         scaleFactor = metersPerPoint;
