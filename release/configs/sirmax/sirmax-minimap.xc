@@ -5,6 +5,8 @@
     "hideCameraTriangle": true,
     "cameraAlpha": 90,
     "selfIconAlpha": 75,
+    //"showCameraLineAfterDeath": false,
+    "minimapAimIcon": "cfg://sirmax/img/MinimapAim.png",
     "zoom": { "centered": false },
     "circles": {
         "view": [

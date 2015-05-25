@@ -25,6 +25,7 @@ class wot.Minimap.Features
     private var circles:Circles;
     private var square:Square;
     private var lines:Lines;
+    private var strategicAimMarker:StrategicAimMarker;
 
     /**
      * Invoked when config loaded
@@ -65,6 +66,8 @@ class wot.Minimap.Features
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onRefreshEvent);
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
 
+        GlobalEventDispatcher.addEventListener(MinimapEvent.SET_STRATEGIC_POS, this, onSetStrategicPos);
+
         LabelsContainer.init();
     }
 
@@ -73,7 +76,7 @@ class wot.Minimap.Features
         // empty function required for instance creation
     }
 
-    private function onRefreshEvent(e)
+    private function onRefreshEvent(e:MinimapEvent)
     {
         applyFeatures();
         _scaleMarkers();
@@ -92,6 +95,13 @@ class wot.Minimap.Features
         if (entry == null)
             return;
         entry.invalidate();
+    }
+
+    private function onSetStrategicPos(e:MinimapEvent)
+    {
+        if (strategicAimMarker == null)
+            strategicAimMarker = new StrategicAimMarker(e.entry);
+        strategicAimMarker.updatePosition(e.entry);
     }
 
     private function applyFeatures():Void
@@ -166,7 +176,7 @@ class wot.Minimap.Features
 
     private function onEntryUpdated(e:MinimapEvent):Void
     {
-        markerScaling.scaleEntry(e.entry.wrapper);
+        markerScaling.scaleEntry(e.entry);
     }
 
     /**

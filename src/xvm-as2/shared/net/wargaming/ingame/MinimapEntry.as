@@ -7,11 +7,13 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     var xvm_worker:wot.Minimap.MinimapEntry;
     private var _xvm_attachments:MovieClip;
     var orig_entryName:String;
+    function init_xvm();
     /////////////////////////////////////////////////////////////////
 
     var markMC:MovieClip;
     var player:MovieClip;
     var entryName; /** ally/enemy/squad/"" */
+    var markLabel;
     var isPostmortem;
     var isDeadPermanent;
     var isDead;

@@ -19,11 +19,16 @@
     public static var MAX_DEAD_ZINDEX:Number = 349;
     public static var CAMERA_NORMAL_ZINDEX:Number = 1000;
     public static var SELF_ZINDEX:Number = 1001;
+    public static var CAMERA_STRETEGIC_ZINDEX:Number = 1002;
+    public static var CELL_ZINDEX:Number = 1003;
+
+    public static var MAIN_PLAYER_ENTRY_NAME:String = "MinimapEntry0";
+    public static var MAIN_CAMERA_ENTRY_NAME:String = "MinimapEntry1";
+
+    public static var STRATEGIC_AIM_ZINDEX:Number = CAMERA_NORMAL_ZINDEX - 1;
 
     public static var LABELS_ZINDEX:Number = MAX_DEAD_ZINDEX - 1;
     public static var SQUARE_1KM_ZINDEX:Number = MAX_DEAD_ZINDEX - 2;
-
-    public static var CAMERA_NORMAL_MOVIECLIP_NAME:String = "MinimapEntry1";
 
     public static var STATIC_ICON_BASE:String = "base"; // Team colored capture base
     public static var STATIC_ICON_CONTROL:String = "control"; // Shared grey capture base

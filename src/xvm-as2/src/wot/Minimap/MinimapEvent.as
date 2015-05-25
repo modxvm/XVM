@@ -1,5 +1,3 @@
-import wot.Minimap.*;
-
 class wot.Minimap.MinimapEvent
 {
     public static var ENTRY_INITED:String = "ENTRY_INITED";
@@ -7,12 +5,13 @@ class wot.Minimap.MinimapEvent
     public static var CAMERA_UPDATED:String = "CAMERA_UPDATED";
     public static var ENTRY_LOST:String = "ENTRY_LOST";
     public static var REFRESH:String = "REFRESH";
+    public static var SET_STRATEGIC_POS:String = "SET_STRATEGIC_POS";
 
     private var _type:String;
-    private var _entry:MinimapEntry;
+    private var _entry:net.wargaming.ingame.MinimapEntry;
     private var _value:Object;
 
-    public function MinimapEvent(type:String, entry:MinimapEntry, value:Object)
+    public function MinimapEvent(type:String, entry:net.wargaming.ingame.MinimapEntry, value:Object)
     {
         _type = type;
         _entry = entry;
@@ -24,7 +23,7 @@ class wot.Minimap.MinimapEvent
         return _type;
     }
 
-    public function get entry():MinimapEntry
+    public function get entry():net.wargaming.ingame.MinimapEntry
     {
         return _entry;
     }

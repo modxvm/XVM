@@ -36,7 +36,7 @@ class wot.battle.SixthSenseIndicator
         il.init(icon, [ iconPath, "" ], false);
 
         icon.source = il.currentIcon;
-        icon.onLoadInit = icon_onLoadInit;
+        icon.onLoadInit = function(mc:MovieClip) { $this.icon_onLoadInit(mc); }
 
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, onUpdateStage);
     }

@@ -34,16 +34,21 @@ class wot.Minimap.model.externalProxy.IconsProxy
         return null;
     }
 
-    /** Looks like white arrow */
+    // Looks like white arrow
     public static function get selfEntry():net.wargaming.ingame.MinimapEntry
     {
         return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(wot.Minimap.MinimapConstants.SELF_ZINDEX));
     }
 
-    /** Looks like green highlighted corner */
+    // Looks like green highlighted corner
     public static function get cameraEntry():net.wargaming.ingame.MinimapEntry
     {
         return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(wot.Minimap.MinimapConstants.CAMERA_NORMAL_ZINDEX));
+    }
+
+    public static function get cameraStrategicEntry():net.wargaming.ingame.MinimapEntry
+    {
+        return net.wargaming.ingame.MinimapEntry(_icons.getInstanceAtDepth(wot.Minimap.MinimapConstants.CAMERA_STRETEGIC_ZINDEX));
     }
 
     public static function createEmptyMovieClip(name:String, depth:Number):MovieClip
