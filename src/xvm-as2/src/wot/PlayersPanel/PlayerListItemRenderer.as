@@ -194,8 +194,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function updateSquadIconsImpl(squadPositionX, dynamicIcoPotionX)
     {
-        squadPositionX += 2;
-        dynamicIcoPotionX += 2;
         //Logger.add(squadPositionX + " " + dynamicIcoPotionX);
         wrapper.squadIcon._x = squadPositionX;
         wrapper.addToSquad._x = dynamicIcoPotionX;

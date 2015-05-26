@@ -34,6 +34,7 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, onConfigLoaded);
         ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
+        ExternalInterface.addCallback(Cmd.RESPOND_DYNAMIC_SQUAD_CREATED, this, onDynamicSquadCreated);
     }
 
     private function onConfigLoaded()
@@ -68,5 +69,10 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
                 }*/
             }
         }
+    }
+
+    private function onDynamicSquadCreated()
+    {
+        Macros.UpdateDynamicSquad.apply(null, arguments);
     }
 }

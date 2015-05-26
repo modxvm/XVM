@@ -53,11 +53,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         // stub
     }
 
-    function setIsShowExtraModeActive()
-    {
-        return this.setIsShowExtraModeActiveImpl.apply(this, arguments);
-    }
-
     function updateSquadIcons()
     {
         // stub
@@ -87,7 +82,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     {
         Utils.TraceXvmModule("PlayersPanel");
 
-        DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN;
+        DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN * 2;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, invalidate);
@@ -419,14 +414,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         wrapper.m_list._alpha = 100;
     }
 
-    private function setIsShowExtraModeActiveImpl(value:Boolean)
-    {
-        //Logger.add("wrapper.state");
-        //if (wrapper.state != "large")
-        //    value = false;
-        base.setIsShowExtraModeActive(value);
-    }
-
     // PRIVATE
 
     private function updateSwitcherButton()
@@ -526,7 +513,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var namesWidth:Number = DEFAULT_NAMES_WIDTH_MEDIUM;
         var vehiclesWidth:Number = DEFAULT_VEHICLES_WIDTH;
         var widthDelta:Number = 0;
-        var squadSize:Number = 0;
 
         var isLeftPanel:Boolean = wrapper.type == "left";
         var w:Number = Macros.FormatGlobalNumberValue(cfg[wrapper.state].width);
@@ -535,22 +521,21 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         switch (wrapper.state)
         {
             case "short":
-                widthDelta = DEFAULT_WIDTH - w;
+                widthDelta = w;
                 break;
             case "medium":
                 namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), w);
-                widthDelta = DEFAULT_NAMES_WIDTH_MEDIUM - namesWidth;
+                widthDelta = DEFAULT_NAMES_WIDTH_MEDIUM - namesWidth - DEFAULT_WIDTH;
                 break;
             case "medium2":
                 vehiclesWidth = w;
-                widthDelta = DEFAULT_VEHICLES_WIDTH - vehiclesWidth;
+                widthDelta = DEFAULT_VEHICLES_WIDTH - vehiclesWidth - DEFAULT_WIDTH;
                 break;
             case "large":
                 namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), w);
                 vehiclesWidth = XVMGetMaximumFieldWidth(wrapper.m_vehicles);
                 //Logger.add("w: " + vehiclesWidth + " " + wrapper.m_vehicles.htmlText);
-                squadSize = cfg.removeSquadIcon ? 0 : DEFAULT_SQUAD_SIZE;
-                widthDelta = DEFAULT_NAMES_WIDTH_LARGE - namesWidth + DEFAULT_VEHICLES_WIDTH - vehiclesWidth + DEFAULT_SQUAD_SIZE - squadSize;
+                widthDelta = DEFAULT_NAMES_WIDTH_LARGE - namesWidth + DEFAULT_VEHICLES_WIDTH - vehiclesWidth;
                 break;
             default:
                 x = isLeftPanel
@@ -567,6 +552,9 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 }
                 return;
         }
+
+        var squadSize:Number = cfg.removeSquadIcon ? 0 : DEFAULT_SQUAD_SIZE;
+        widthDelta += DEFAULT_SQUAD_SIZE - squadSize;
 
         var changed:Boolean = false;
 
@@ -590,7 +578,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 changed = true;
                 wrapper.players_bg._x = x;
                 wrapper.m_list._x = x;
-                wrapper.m_list.updateSquadIconPosition(-x);
+                wrapper.m_list.updateSquadIconPosition(-x + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN);
             }
 
             x = squadSize;
@@ -632,7 +620,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 changed = true;
                 wrapper.players_bg._x = x;
                 wrapper.m_list._x = x;
-                wrapper.m_list.updateSquadIconPosition(wrapper.players_bg._width - x - squadSize);
+                wrapper.m_list.updateSquadIconPosition(wrapper.players_bg._width - x - squadSize + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN);
             }
 
             x = wrapper.players_bg._width - squadSize;

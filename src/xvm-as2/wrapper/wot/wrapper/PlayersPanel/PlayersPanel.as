@@ -13,7 +13,6 @@ class wot.wrapper.PlayersPanel.PlayersPanel extends net.wargaming.ingame.Players
             "updateAlphas",
             "updatePositions",
             "updateWidthOfLongestName",
-            "setIsShowExtraModeActive",
             "updateSquadIcons"
         ];
         Wrapper.override(this, new wot.PlayersPanel.PlayersPanel(this, super), OVERRIDE_FUNCTIONS);

@@ -368,6 +368,18 @@ class Xvm(object):
         self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags, my_frags])
 
 
+    def updateDynamicSquad(self):
+        if self.battleFlashObject is not None:
+            movie = self.battleFlashObject.movie
+            if movie is not None:
+                movie.invoke((AS2RESPOND.DYNAMIC_SQUAD_CREATED,))
+
+        if self.vmmFlashObject is not None:
+            movie = self.vmmFlashObject.movie
+            if movie is not None:
+                movie.invoke((AS2RESPOND.DYNAMIC_SQUAD_CREATED,))
+
+
     # PRIVATE
 
     # returns: (result, status)

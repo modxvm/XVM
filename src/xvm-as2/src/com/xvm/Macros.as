@@ -65,6 +65,8 @@ class com.xvm.Macros
         _instance._RegisterMarkerData(pname, data);
     }
 
+    public static var s_my_frags:Number = 0;
+
     public static function UpdateMyFrags(frags:Number)
     {
         if (Macros.s_my_frags == frags)
@@ -73,7 +75,10 @@ class com.xvm.Macros
         return true;
     }
 
-    public static var s_my_frags:Number = 0;
+    public static function UpdateDynamicSquad(pname:String, data)
+    {
+        _instance._UpdateDynamicSquad(pname, data);
+    }
 
     // PRIVATE
 
@@ -1095,6 +1100,11 @@ class com.xvm.Macros
         pdata["a:tfb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
         // {{a:tsb}}
         pdata["a:tsb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
+    }
+
+    private function _UpdateDynamicSquad()
+    {
+        Logger.addObject(arguments, 2, "TODO: _UpdateDynamicSquad");
     }
 
     private function _RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)
