@@ -2,6 +2,7 @@
   * adaptation to WoT 0.9.8
   * config loading refactoring
   * new options:
+      "crewReturnByDefault" - return crew check box is selected by default
       "enableEquipAutoReturn" - removable equipment auto-return (Camouflage net, Stereoscope, Toolbox)
       "minimap"/"showCameraLineAfterDeath" - show camera line after death
       "minimap"/"minimapAimIcon" - path to icon for arty aim

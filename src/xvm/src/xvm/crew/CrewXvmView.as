@@ -114,7 +114,7 @@ package xvm.crew
                 return;
             }
 
-            savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, true);
+            savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, Config.config.hangar.crewReturnByDefault);
             enablePrevCrewCheckBox.selected = savedValue;
 
             page.tmenXpPanel.validateNow();

@@ -42,6 +42,8 @@
     "masteryMarkInTechTree": true,
     "allowExchangeXPInTechTree": false,
     //"enableCrewAutoReturn": false,
+    //"crewReturnByDefault": true,
+    "enableEquipAutoReturn": true,
     "showShootRangeTooltip": true,
     "widgetsEnabled": true,
     "pingServers": {
