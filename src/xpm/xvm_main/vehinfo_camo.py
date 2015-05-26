@@ -1820,6 +1820,9 @@ def _getCamoValues(veh_name, turret_is_top = True, gun = None):
             camo_standing = round(camo_standing / turret_modifier, 2)
             camo_moving = round(camo_moving / turret_modifier, 2)
             camo_shooting = round(camo_shooting / turret_modifier, 2)
+        # very special case for T29
+        if veh_name == 'usa:T29' and gun == '_105mm_Gun_T5E1' and not turret_is_top:
+            camo_shooting = 1.00
         return (camo_standing, camo_moving, camo_shooting)
     except Exception as ex:
         err(traceback.format_exc())
