@@ -32,7 +32,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
         /**
          * Warning! Workaround!
-         * Camera entry (MinimapEntry0) is reinitialized spontaniously many times in a round.
+         * Camera entry (MinimapEntry1) is reinitialized spontaniously many times in a round.
          */
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onEntryInited);
         GlobalEventDispatcher.addEventListener(MinimapEvent.CAMERA_UPDATED, this, onEntryInited);
@@ -166,6 +166,6 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
     private function get gunConstraints():Object
     {
-        return net.wargaming.ingame.damagePanel.TankIndicator(_root.damagePanel.componentsContainer.tankIndicator).hull.gunConstraints;
+        return net.wargaming.ingame.damagePanel.TankIndicator(_root.damagePanel.tankIndicator).hull.gunConstraints;
     }
 }
