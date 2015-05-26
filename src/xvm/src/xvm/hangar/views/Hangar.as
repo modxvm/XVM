@@ -70,9 +70,9 @@ package xvm.hangar.views
         private function initServerInfo():void
         {
             var cfg:CHangarServerInfo = Config.config.hangar.serverInfo;
-            page.serverInfo.visible = cfg.enabled;
-            page.serverInfo.alpha = cfg.alpha / 100.0;
-            page.serverInfo.rotation = cfg.rotation;
+            page.serverInfo.visible = page.serverInfoBg.visible = cfg.enabled;
+            page.serverInfo.alpha = page.serverInfoBg.alpha = cfg.alpha / 100.0;
+            page.serverInfo.rotation = page.serverInfoBg.rotation = cfg.rotation;
         }
     }
 }
