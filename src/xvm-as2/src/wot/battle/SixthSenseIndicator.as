@@ -26,7 +26,7 @@ class wot.battle.SixthSenseIndicator
         iconPath = Utils.fixImgTagSrc(Macros.FormatGlobalStringValue(iconPath));
 
         sixthSenseIndicatorXvm = _root.createEmptyMovieClip("sixthSenseIndicatorXvm", _root.getNextHighestDepth());
-        sixthSenseIndicatorXvm._y = 80;
+        sixthSenseIndicatorXvm._y = 120;
         sixthSenseIndicatorXvm._alpha = 0;
         sixthSenseIndicatorXvm.hitTestDisable = true;
 
