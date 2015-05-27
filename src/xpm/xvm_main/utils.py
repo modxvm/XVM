@@ -96,13 +96,17 @@ def getDynamicColorValue(type, value, prefix='#'):
     if value is None or math.isnan(value):
         return ''
 
-    if config.config is None:
-        return ''
-
-    cfg = config.config['colors'].get(type, None)
-    if cfg is None:
+    cfg = config.get('colors/%s' % type)
+    if not cfg:
         return ''
 
     color = next((int(x['color'], 0) for x in cfg if value <= float(x['value'])), 0xFFFFFF)
 
     return "{0}{1:06x}".format(prefix, color)
+
+def fixPath(path):
+    if path is not None:
+        path = path.replace('\\', '/')
+        if path[-1] != '/':
+            path += '/'
+    return path;

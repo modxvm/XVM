@@ -7,8 +7,7 @@ class wot.wrapper.StatisticForm.BattleStatItemRenderer extends net.wargaming.Bat
         super();
 
         var OVERRIDE_FUNCTIONS:Array = [
-            "updateData",
-            "updateState"
+            "updateData"
         ];
         Wrapper.override(this, new wot.StatisticForm.BattleStatItemRenderer(this, super), OVERRIDE_FUNCTIONS);
     }

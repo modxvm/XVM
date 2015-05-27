@@ -25,6 +25,7 @@ class wot.Minimap.Features
     private var circles:Circles;
     private var square:Square;
     private var lines:Lines;
+    private var strategicAimMarker:StrategicAimMarker;
 
     /**
      * Invoked when config loaded
@@ -65,6 +66,8 @@ class wot.Minimap.Features
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onRefreshEvent);
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
 
+        GlobalEventDispatcher.addEventListener(MinimapEvent.SET_STRATEGIC_POS, this, onSetStrategicPos);
+
         LabelsContainer.init();
     }
 
@@ -73,14 +76,14 @@ class wot.Minimap.Features
         // empty function required for instance creation
     }
 
-    private function onRefreshEvent(e)
+    private function onRefreshEvent(e:MinimapEvent)
     {
         applyFeatures();
         _scaleMarkers();
 
         var entries:Array = IconsProxy.allEntries;
         for (var i in entries)
-            entries[i].wrapper.invalidate();
+            entries[i].invalidate();
     }
 
     private function onBattleStateChanged(e:EBattleStateChanged)
@@ -88,10 +91,17 @@ class wot.Minimap.Features
         var pdata:BattleStateData = BattleState.getUserData(e.playerName);
         if (pdata == null)
             return;
-        var entry:MinimapEntry = IconsProxy.entry(pdata.playerId);
+        var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(pdata.playerId);
         if (entry == null)
             return;
-        entry.wrapper.invalidate();
+        entry.invalidate();
+    }
+
+    private function onSetStrategicPos(e:MinimapEvent)
+    {
+        if (strategicAimMarker == null)
+            strategicAimMarker = new StrategicAimMarker(e.entry);
+        strategicAimMarker.updatePosition(e.entry);
     }
 
     private function applyFeatures():Void
@@ -166,7 +176,7 @@ class wot.Minimap.Features
 
     private function onEntryUpdated(e:MinimapEvent):Void
     {
-        markerScaling.scaleEntry(e.entry.wrapper);
+        markerScaling.scaleEntry(e.entry);
     }
 
     /**
@@ -175,7 +185,7 @@ class wot.Minimap.Features
      */
     private function onCameraUpdated(e:MinimapEvent):Void
     {
-        var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry.wrapper;
+        var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
         if (MapConfig.hideCameraTriangle)
         {
             if (camera._currentframe != 2)
@@ -204,8 +214,8 @@ class wot.Minimap.Features
      */
     private function setPlayerIconAlpha():Void
     {
-        var selfIcon:MinimapEntry = IconsProxy.selfEntry;
-        selfIcon.wrapper.selfIcon._alpha = MapConfig.selfIconAlpha;
+        var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.selfEntry;
+        selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
     }
 
     /**

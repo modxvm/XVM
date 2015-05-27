@@ -35,16 +35,7 @@ class wot.battle.FragCorrelation
 
     private function _modify():Void
     {
-        if (Config.config.fragCorrelation.hideTeamTextFields == true)
-            hideFragCorellationBarTeamTextFields();
         colorizeMarkers();
-    }
-
-    private function hideFragCorellationBarTeamTextFields():Void
-    {
-        // Everything outside of this rectangular mask will be invisible
-        mc.scrollRect = new flash.geom.Rectangle(-mc._width / 2, mc._y, mc._width, mc._height / 2);
-        mc._x = -mc._width / 2;
     }
 
     private function colorizeMarkers():Void

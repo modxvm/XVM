@@ -4,9 +4,16 @@
  */
 package com.xvm.types.cfg
 {
+    import net.wg.data.daapi.base.DAAPIDataClass;
+
     public dynamic class CConfig extends Object
     {
-        public var xvmVersion:String;
+        // internal
+        public var __stateInfo:Object;
+        public var __xvmVersion:String;
+        public var __wotVersion:String;
+        public var __xvmIntro:String;
+        // public
         public var configVersion:String;
         public var autoReloadConfig:Boolean;
         public var language:String; // auto, en, ru, ...

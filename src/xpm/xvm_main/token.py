@@ -255,8 +255,8 @@ def _getXvmMessageHeader():
         rev = __revision__
     except Exception, ex:
         err(traceback.format_exc())
-    msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config.config['xvmVersion'], rev)
-    msg += _getVersionText(config.config['xvmVersion']) + '\n'
+    msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config.get('__xvmVersion'), rev)
+    msg += _getVersionText(config.get('__xvmVersion')) + '\n'
     if g_websock.enabled and g_websock.connected:
         msg += '{{l10n:websock/not_connected}}\n'
         if g_websock.last_error:
@@ -268,8 +268,8 @@ def _getVersionText(curVer):
     msg = ''
     global _verInfo
     if _verInfo is not None:
-        if gameRegion in _verInfo:
-            data = _verInfo[gameRegion]
+        if GAME_REGION in _verInfo:
+            data = _verInfo[GAME_REGION]
             if utils.compareVersions(data['ver'], curVer) == 1:
                 return '{{l10n:ver/newVersion:%s:%s}}\n' % (data['ver'], data['message'])
     return ''

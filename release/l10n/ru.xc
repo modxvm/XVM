@@ -63,7 +63,7 @@
     "Data was updated at": "Данные были обновлены",
     "Load statistics": "Загрузить статистику",
 
-    // UserInfo
+    // Profile
     "General stats": "Общая статистика",
     "Summary": "Общие результаты",
     "Avg level": "Средний уровень",
@@ -207,6 +207,7 @@
     "Not ready": "Не готов",
 
     // Quests
+    "Hide completed": "Скрыть выполненные",
     "Hide with honors": "Скрыть с отличием",
     "Hide unavailable": "Скрыть недоступные",
 

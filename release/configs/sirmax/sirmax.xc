@@ -1,6 +1,6 @@
 {
   "configVersion": "5.1.0",
-  //"autoReloadConfig": true,
+  "autoReloadConfig": true,
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
@@ -23,9 +23,9 @@
     "__stub__": {}
   },
   "elements": [
-    ${"sirmax-snippet-test.xc":"."},
-    //${"sirmax-snippet-pp.xc":"."},  // players panels
-    ${"sirmax-snippet-bt.xc":"."} // battle timer
+    //${"sirmax-snippet-pp.xc":"."}, // players panels
+    //${"sirmax-snippet-bt.xc":"."}, // battle timer
+    ${"sirmax-snippet-test.xc":"."}
   ],
   "login": {
     "skipIntro": true,
@@ -42,6 +42,8 @@
     "masteryMarkInTechTree": true,
     "allowExchangeXPInTechTree": false,
     //"enableCrewAutoReturn": false,
+    //"crewReturnByDefault": true,
+    "enableEquipAutoReturn": true,
     "showShootRangeTooltip": true,
     "widgetsEnabled": true,
     "pingServers": {
@@ -86,7 +88,7 @@
     "elements": ${"elements"}
   },
   "fragCorrelation": {
-    "hideTeamTextFields": true
+    //"showAliveNotFrags": true
   },
   "captureBar": {
     //"enabled": false,
@@ -133,8 +135,8 @@
     "direction": "down",
     "insertOrder": "end",
     "groupHitsByPlayer": true,
-    "deadMarker": "<img src='xvm://res/icons/dead.png' width='12' height='12'>",
-    "blowupMarker": "<img src='xvm://res/icons/blowedup.png' width='12' height='12'>",
+    "deadMarker": "<font face='xvm'>\u0077</font>",
+    "blowupMarker": "<font face='xvm'>\u0078</font>",
 //  TEST
 //    "formatHistory": "<textformat tabstops='[20,50,90,150]'><font size='12'>#19</font>:<tab>9999<tab>| 2222<tab>| ramming<tab>| {{n}} {{n-player}} {{nick}}</textformat>",
     "defaultHeader": "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='13'>#0</font></textformat>",

@@ -46,7 +46,7 @@ package xvm.hangar.views
 
         private function setVersion():void
         {
-            page.version.appendText("   XVM " + Defines.XVM_VERSION + " (WoT " + Defines.WOT_VERSION + ")");
+            page.version.appendText("   XVM " + Config.config.__xvmVersion + " (WoT " + Config.config.__wotVersion + ")");
         }
     }
 

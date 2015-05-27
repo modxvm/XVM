@@ -47,7 +47,7 @@ package xvm.svcmsg
             if (value != null)
             {
                 var message:String = Locale.get(value.messageVO.message);
-                if (Config.gameRegion == "RU")
+                if (Config.config.region == "RU")
                 {
                     value.messageVO.message = message
                       .split("#XVM_SITE#")		.join('event:http://www.modxvm.com/#wot-main')

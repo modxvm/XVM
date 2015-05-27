@@ -92,7 +92,7 @@ class _WebSock(object):
                     self._ws.send(msg)
                 else:
                     log('[WARNING] send(): WebSocket closed')
-        except:
+        except Exception:
             err(traceback.format_exc())
 
     # PRIVATE

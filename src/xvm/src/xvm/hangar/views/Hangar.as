@@ -8,6 +8,7 @@ package xvm.hangar.views
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.CHangarServerInfo;
+    import com.xvm.types.cfg.CMinimapCirclesInternal;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -47,6 +48,8 @@ package xvm.hangar.views
             try
             {
                 var data:Object = JSONx.parse(json_str);
+                if (!Config.config.minimap.circles._internal)
+                    Config.config.minimap.circles._internal = new CMinimapCirclesInternal();
                 for (var n:String in data)
                     Config.config.minimap.circles._internal[n] = data[n];
 
@@ -67,9 +70,9 @@ package xvm.hangar.views
         private function initServerInfo():void
         {
             var cfg:CHangarServerInfo = Config.config.hangar.serverInfo;
-            page.serverInfo.visible = cfg.enabled;
-            page.serverInfo.alpha = cfg.alpha / 100.0;
-            page.serverInfo.rotation = cfg.rotation;
+            page.serverInfo.visible = page.serverInfoBg.visible = cfg.enabled;
+            page.serverInfo.alpha = page.serverInfoBg.alpha = cfg.alpha / 100.0;
+            page.serverInfo.rotation = page.serverInfoBg.rotation = cfg.rotation;
         }
     }
 }

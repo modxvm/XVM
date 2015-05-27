@@ -14,6 +14,8 @@ package com.xvm.types.cfg
         public var masteryMarkInTechTree:Boolean;
         public var allowExchangeXPInTechTree:Boolean;
         public var enableCrewAutoReturn:Boolean;
+        public var crewReturnByDefault:Boolean;
+        public var enableEquipAutoReturn:Boolean;
         public var widgetsEnabled:Boolean;
         public var pingServers:CPingServers;
         public var serverInfo:CHangarServerInfo;

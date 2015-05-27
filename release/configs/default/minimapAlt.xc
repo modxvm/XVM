@@ -16,12 +16,18 @@
     // Hide camera direction green triangle (also hides WG camera direction line).
     // Спрятать зеленый треугольник направления камеры (также скрывает луч направления камеры WG).
     "hideCameraTriangle": false,
+    // Show camera line after death
+    // Отображать линию направления камеры после смерти
+    "showCameraLineAfterDeath": true,
     // Camera transparency and its attached geometry (green triangle).
     // Прозрачность камеры и прикрепленной геометрии (зеленый треугольник).
     "cameraAlpha": 100,
     // Vehicles icon size. Does not affect attached geometry and textfields. Floating point allowed: 0.7, 1.4.
     // Размер иконки техники. Не влияет на прикрепленную к геометрию и текстовые поля. Можно дробные: 0.7, 1.4.
     "iconScale": 1,
+    // Path to icon for arty aim
+    // Путь к иконке для артиллерийского прицела
+    "minimapAimIcon": "xvm://res/MinimapAim.png",
     // Map zoom by key pressing. Key is defined at file "hotkeys.xc".
     // Увеличение миникарты по нажатию кнопки. Кнопка задается в файле "hotkeys.xc".
     "zoom": {

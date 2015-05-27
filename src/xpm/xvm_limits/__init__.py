@@ -6,7 +6,7 @@
 XFW_MOD_VERSION = '3.0.0'
 XFW_MOD_URL = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
+XFW_GAME_VERSIONS  = ['0.9.8']
 
 #####################################################################
 # constants
@@ -46,7 +46,7 @@ TechTree_handler = None
 Research_handler = None
 VehicleCustomization_handler = None
 TechnicalMaintenance_handler = None
-PremiumForm_handler = None
+PremiumWindow_handler = None
 Shop_handler = None
 RecruitWindow_handler = None
 PersonalCase_handlers = []
@@ -54,20 +54,20 @@ ExchangeFreeToTankmanXpWindow_handlers = []
 
 #enable or disable active usage of gold (does not affect auto-refill ammo/equip)
 def StatsRequester_gold(base, self):
-    if not config.config['hangar']['enableGoldLocker'] or gold_enable:
+    if not config.get('hangar/enableGoldLocker') or gold_enable:
         return max(self.actualGold, 0)
     return 0
 
 #enable or disable usage of free experience
 def StatsRequester_freeXP(base, self):
-    if not config.config['hangar']['enableFreeXpLocker'] or freeXP_enable:
+    if not config.get('hangar/enableFreeXpLocker') or freeXP_enable:
         return max(self.actualFreeXP, 0)
     return 0
 
 #by default use credits for equipment
 def FittingItem__init__(base, self, intCompactDescr, proxy = None, isBoughtForCredits = None):
     if isBoughtForCredits is None:
-        isBoughtForCredits = config.config['hangar']['defaultBoughtForCredits']
+        isBoughtForCredits = config.get('hangar/defaultBoughtForCredits')
     base(self, intCompactDescr, proxy, isBoughtForCredits)
 
 #by default use credits for ammo
@@ -81,7 +81,7 @@ def Vehicle_parseShells(base, self, layoutList, defaultLayoutList, proxy):
                     # nothing is saved for this configuration - new gun
                     for n in xrange(0, len(defaultLayoutList), 2):
                         defaultLayoutList[n] = abs(defaultLayoutList[n])
-                        if config.config['hangar']['defaultBoughtForCredits']:
+                        if config.get('hangar/defaultBoughtForCredits'):
                             defaultLayoutList[n] *= -1
     except Exception as ex:
         err(traceback.format_exc())
@@ -124,13 +124,13 @@ def TechnicalMaintenance_dispose(self, *args, **kwargs):
     global TechnicalMaintenance_handler
     TechnicalMaintenance_handler = None
 
-def PremiumForm_populate(self, *args, **kwargs):
-    global PremiumForm_handler
-    PremiumForm_handler = self
+def PremiumWindow_populate(self, *args, **kwargs):
+    global PremiumWindow_handler
+    PremiumWindow_handler = self
     
-def PremiumForm_dispose(self, *args, **kwargs):
-    global PremiumForm_handler
-    PremiumForm_handler = None
+def PremiumWindow_dispose(self, *args, **kwargs):
+    global PremiumWindow_handler
+    PremiumWindow_handler = None
 
 def Shop_populate(self, *args, **kwargs):
     global Shop_handler
@@ -224,7 +224,8 @@ def onXfwCommand(cmd, *args):
             global gold_enable
             gold_enable = not args[0]
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
-            handlersInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler, PremiumForm_handler)
+            handlersInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler)
+            handlersInvalidate('_PremiumWindow__onUpdateHandler()', PremiumWindow_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
             handlersInvalidate('_update()', Shop_handler)
             handlersInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
@@ -276,9 +277,9 @@ def _RegisterEvents():
     RegisterEvent(TechnicalMaintenance, '_populate', TechnicalMaintenance_populate)
     RegisterEvent(TechnicalMaintenance, '_dispose', TechnicalMaintenance_dispose)
 
-    from gui.Scaleform.daapi.view.lobby.PremiumForm import PremiumForm
-    RegisterEvent(PremiumForm, '_populate', PremiumForm_populate)
-    RegisterEvent(PremiumForm, '_dispose', PremiumForm_dispose)
+    from gui.Scaleform.daapi.view.lobby.PremiumWindow import PremiumWindow
+    RegisterEvent(PremiumWindow, '_populate', PremiumWindow_populate)
+    RegisterEvent(PremiumWindow, '_dispose', PremiumWindow_dispose)
 
     from gui.Scaleform.daapi.view.lobby.store.Shop import Shop
     RegisterEvent(Shop, '_populate', Shop_populate)

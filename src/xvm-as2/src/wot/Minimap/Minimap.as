@@ -65,7 +65,7 @@ class wot.Minimap.Minimap
         }
     }
 
-    function correctSizeIndexImpl(sizeIndex:Number, stageHeight:Number):Number
+    function correctSizeIndexImpl(sizeIndex:Number, stageHeight:Number, stageWidth:Number):Number
     {
         if (sizeIndex < MinimapConstants.MAP_MIN_ZOOM_INDEX)
             sizeIndex = MinimapConstants.MAP_MIN_ZOOM_INDEX;

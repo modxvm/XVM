@@ -6,7 +6,7 @@
 XFW_MOD_VERSION = '3.0.0'
 XFW_MOD_URL = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
+XFW_GAME_VERSIONS  = ['0.9.8']
 
 #####################################################################
 
@@ -25,12 +25,12 @@ from xvm_main.python.vehinfo_tiers import getTiers
 
 # added sorting orders for tanks in carousel
 def TankCarousel_showVehicles(base, self):
-    if config.config['hangar']['carousel']['enabled']:
+    if config.get('hangar/carousel/enabled'):
         try:
             from gui.shared import g_itemsCache, REQ_CRITERIA
             from gui import GUI_NATIONS_ORDER_INDEX
             from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
-            myconfig = config.config['hangar']['carousel']
+            myconfig = config.get('hangar/carousel')
             filterCriteria = REQ_CRITERIA.INVENTORY
             if self.vehiclesFilter['nation'] != -1:
                 if self.vehiclesFilter['nation'] == 100:

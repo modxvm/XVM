@@ -19,6 +19,7 @@ class wot.wrapper.VehicleMarkersManager.VehicleMarkerProxy extends net.wargaming
             "updateState",
             "showExInfo",
             "showActionMarker",
+            "updateFlagbearerState",
 
             // UIComponent
             "onLoad",

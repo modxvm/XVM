@@ -6,7 +6,7 @@
 XFW_MOD_VERSION    = '3.0.0'
 XFW_MOD_URL        = 'http://www.modxvm.com/'
 XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS  = ['0.9.7','0.9.8']
+XFW_GAME_VERSIONS  = ['0.9.8']
 
 #####################################################################
 
@@ -24,7 +24,7 @@ from xvm_main.python.xvm import l10n
 # event handlers
 
 def ItemsData_getAllPossibleXP(base, self, nodeCD, unlockStats):
-    if not config.config['hangar']['allowExchangeXPInTechTree']:
+    if not config.get('hangar/allowExchangeXPInTechTree'):
         return unlockStats.getVehTotalXP(nodeCD)
     return base(self, nodeCD, unlockStats)
 

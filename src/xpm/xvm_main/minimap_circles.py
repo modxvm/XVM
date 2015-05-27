@@ -10,13 +10,31 @@ from adisp import async, process
 from xfw import *
 from logger import *
 
-import config
+def getMinimapCirclesData():
+    return _g_minimap_circles.minimapCirclesData
+
+
+def setMinimapCirclesData(value):
+    _g_minimap_circles.minimapCirclesData = value
+
+
+def updateCurrentVehicle():
+    _g_minimap_circles.updateCurrentVehicle()
+
+
+def updateMinimapCirclesData(descr):
+    _g_minimap_circles.updateMinimapCirclesData(descr)
+
+
+# PRIVATE
 
 class _MinimapCircles(object):
     def __init__(self):
         self.clear()
 
+
     def clear(self):
+        self.minimapCirclesData = None
         self.item = None
         self.crew = []
         self.is_full_crew = False
@@ -35,6 +53,7 @@ class _MinimapCircles(object):
         self.radioman_inventor = 0.0
         self.camouflage = []
 
+
     def updateCurrentVehicle(self):
         # debug('updateCurrentVehicle')
 
@@ -52,14 +71,14 @@ class _MinimapCircles(object):
 
         self._updateCrew()
         crewRoles_arr = self.item.descriptor.type.crewRoles # roles per position in vehicle
-        
+
         # Search skills and Brothers In Arms
         self.brothers_in_arms = True
         self.camouflage = []
         loaders_count = 0
         male_count = 0
         female_count = 0
-        
+
         for crew_item in self.crew:
             name = crew_item['name']
             data = crew_item['data']
@@ -79,7 +98,7 @@ class _MinimapCircles(object):
                     self.radioman_finder = skills['radioman_finder']
                 if 'radioman_inventor' in skills and self.radioman_inventor < skills['radioman_inventor']:
                     self.radioman_inventor = skills['radioman_inventor']
-                    
+
             if 'loader' in crewRoles_arr[position]:
                 self.base_loaders_skill += data['level']
                 loaders_count += 1
@@ -133,12 +152,10 @@ class _MinimapCircles(object):
             'ration_uk'])
         #debug('  consumable: %s' % str(self.consumable))
 
-        self.updateConfig(self.item.descriptor)
+        self.updateMinimapCirclesData(self.item.descriptor)
 
 
-    def updateConfig(self, descr):
-        cfg = config.config['minimap']['circles']
-
+    def updateMinimapCirclesData(self, descr):
         # debug(vars(descr))
         # debug(vars(descr.type))
 
@@ -163,7 +180,7 @@ class _MinimapCircles(object):
         # log(descr.radio)
 
         # Set values
-        cfg['_internal'] = {
+        self.minimapCirclesData = {
             'vehId': descr.type.compactDescr,
             'is_full_crew': self.is_full_crew,
             'base_commander_skill': self.base_commander_skill,
@@ -185,6 +202,7 @@ class _MinimapCircles(object):
             'base_gun_reload_time': descr.gun['reloadTime'],
             'base_radio_distance': descr.radio['distance'],
         }
+
 
     # PRIVATE
 
@@ -221,12 +239,14 @@ class _MinimapCircles(object):
                     # debug(tankman.descriptor.role + " " + str(crew_member['level']))
                     self.crew.append({'name': tankman.descriptor.role, 'data': crew_member})
 
+
     def _isOptionalEquipped(self, optional_name):
         for item in self.item.descriptor.optionalDevices:
             # debug(vars(item))
             if item is not None and optional_name in item.name:
                 return True
         return False
+
 
     def _isConsumableEquipped(self, consumable_names):
         from gui.shared.utils.requesters import VehicleItemsRequester
@@ -236,4 +256,5 @@ class _MinimapCircles(object):
                 return True
         return False
 
-g_minimap_circles = _MinimapCircles()
+
+_g_minimap_circles = _MinimapCircles()

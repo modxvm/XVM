@@ -25,7 +25,7 @@ class _UserPrefs():
                 'xvm')
             if not os.path.isdir(self.cache_dir):
                 os.makedirs(self.cache_dir)
-        except:
+        except Exception:
             err(traceback.format_exc())
 
     def get(self, key, default):
@@ -34,9 +34,14 @@ class _UserPrefs():
             fileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
             if os.path.isfile(fileName):
                 fd = open(fileName, 'rb')
-                return cPickle.load(fd)
+                try:
+                    return cPickle.load(fd)
+                except Exception:
+                    os.remove(fileName)
+                    log('[WARNING] Broken file was removed: %s' % fileName)
+                    raise
             return default
-        except:
+        except Exception:
             err(traceback.format_exc())
             return default
         finally:
@@ -53,7 +58,7 @@ class _UserPrefs():
             fd = open(fileName, 'wb')
             cPickle.dump(value, fd, -1)
             os.fsync(fd)
-        except:
+        except Exception:
             err(traceback.format_exc())
         finally:
             if fd is not None:

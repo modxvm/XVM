@@ -72,7 +72,7 @@ build()
     mkdir -p "$sum_dir"
     sha1sum $1 > "$sum_file"
   else
-    echo $result
+    echo -e "$result"
   fi
 
   [ ! -f $1c ] && exit
@@ -106,6 +106,25 @@ for fn in $(find . -type "f" -name "*.py"); do
   m=${f%%/*}
   build $f mods/packages/$m
 done
+
+# generate default config from .xc files
+# TODO: review and refactor
+echo 'generate default_config.pyc'
+dc_fn=../../~output/mods/packages/xvm_main/python/default_config.py
+rm -f "${dc_fn}c"
+"$PY_EXEC" -c "
+import sys
+sys.path.insert(0, '../xfw/~output/python/mods/xfw/python/lib')
+import JSONxLoader
+cfg = JSONxLoader.load('../../release/configs/default/@xvm.xc')
+en = JSONxLoader.load('../../release/l10n/en.xc')
+ru = JSONxLoader.load('../../release/l10n/ru.xc')
+print('DEFAULT_CONFIG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg, en, ru))
+" > $dc_fn 2>&1
+"$PY_EXEC" -c "import py_compile; py_compile.compile('$dc_fn')" 2>&1
+[ ! -f ${dc_fn}c ] && cat "$dc_fn"
+rm -f "$dc_fn"
+[ ! -f ${dc_fn}c ] && exit
 
 popd >/dev/null
 

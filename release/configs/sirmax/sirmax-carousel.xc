@@ -12,6 +12,7 @@
     "rows": 2,
     "padding": { "horizontal": 5, "vertical": 5 },
     "alwaysShowFilters": true,
+    "suppressCarouselTooltips": true,
     //"hideBuyTank": true,
     //"hideBuySlot": true,
     "filters": {

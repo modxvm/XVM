@@ -1,6 +1,17 @@
-﻿XVM-6.1.1.1-dev:
+﻿XVM-6.1.2-dev:
+  * adaptation to WoT 0.9.8
+  * config loading refactoring
+  * new options:
+      "crewReturnByDefault" - return crew check box is selected by default
+      "enableEquipAutoReturn" - removable equipment auto-return (Camouflage net, Stereoscope, Toolbox)
+      "minimap"/"showCameraLineAfterDeath" - show camera line after death
+      "minimap"/"minimapAimIcon" - path to icon for arty aim
+  * removed obsoleted option "fragCorrelation"/"hideTeamTextFields"
+
+XVM-6.1.1.1:
   * added embedded fonts 'dynamic' and 'dynamic2' with various indicators
   * added crew auto-return for Stronghold/Team Battles vehicle selections
+  * localization files were updated
 
 XVM-6.1.1:
   * in extrafields in the players panels added "enabled" parameter with global macros support
@@ -12,7 +23,7 @@ XVM-6.1.1:
       "suppressCarouselTooltips" - suppress the tooltips in carousel
   * macro {{language}} renamed to {{flag}}, flags images folder renamed from "lang" to "flags"
   * added embedded font 'vtype' with vehicle types symbols
-  
+
 XVM-6.1.0.1:
   * added new section in config sounds.xc, where you can setup extra sounds
   * bugs fixed

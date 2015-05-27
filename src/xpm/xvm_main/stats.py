@@ -110,7 +110,7 @@ class _Stat(object):
                 return
             try:
                 self._respond()
-            except:
+            except Exception:
                 err(traceback.format_exc())
             finally:
                 debug('done')
@@ -144,7 +144,7 @@ class _Stat(object):
             #    if tries < 5:
             #        time.sleep(1)
             #    self.getBattleStat(tries+1)
-        except:
+        except Exception:
             err(traceback.format_exc())
         with self.lock:
             if not self.resp:
@@ -157,7 +157,7 @@ class _Stat(object):
             if player.__class__.__name__ == 'PlayerAccount':
                 self._get_battleresults()
                 return  # required to prevent deadlock
-        except:
+        except Exception:
             err(traceback.format_exc())
         with self.lock:
             if not self.resp:
@@ -168,7 +168,7 @@ class _Stat(object):
         try:
             self._get_user()
             return  # required to prevent deadlock
-        except:
+        except Exception:
             err(traceback.format_exc())
         with self.lock:
             if not self.resp:
@@ -267,7 +267,7 @@ class _Stat(object):
             with self.lock:
                 self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players}
 
-        except:
+        except Exception:
             err(traceback.format_exc())
             print('=================================')
             print('_battleResultsCallback() exception: ' + traceback.format_exc())
@@ -280,7 +280,7 @@ class _Stat(object):
     def _get_user(self):
         (value, isId) = self.req['args']
         orig_value = value
-        reg = gameRegion
+        reg = GAME_REGION
         if isId:
             value = str(int(value))
         else:
@@ -317,7 +317,7 @@ class _Stat(object):
                     else:
                         try:
                             data = None if response in ('', '[]') else simplejson.loads(response)[0]
-                        except:
+                        except Exception:
                             err('  Bad answer: ' + response)
 
                         if data is not None:
@@ -328,7 +328,7 @@ class _Stat(object):
                         elif response == '[]':
                             self.cacheUser[cacheKey] = {}
 
-            except:
+            except Exception:
                 err(traceback.format_exc())
 
         with self.lock:
@@ -406,7 +406,7 @@ class _Stat(object):
                 cacheKey = "%d=%d" % (stat['_id'], stat.get('v', {}).get('id', 0))
                 self.cacheBattle[cacheKey] = stat
 
-        except:
+        except Exception:
             err(traceback.format_exc())
 
     def _fix(self, stat, orig_name=None):
@@ -552,7 +552,7 @@ class _Stat(object):
         try:
             import xvm_contacts.python.contacts as contacts
             stat['xvm_contact_data'] = contacts.getXvmContactData(stat['_id'])
-        except:
+        except Exception:
             #err(traceback.format_exc())
             pass
 
@@ -569,7 +569,7 @@ class _Stat(object):
                     self._loadingClanIconsCount += 1
                     debug('clan={0} rank={1} url={2}'.format(pl.clan, rank, url))
                     filecache.get_url(url, (lambda url, bytes: self._load_clanIcons_callback(pl, tID, bytes)))
-        except:
+        except Exception:
             err(traceback.format_exc())
 
     def _load_clanIcons_callback(self, pl, tID, bytes):
@@ -581,7 +581,7 @@ class _Stat(object):
                 imgid = 'icons/{0}.png'.format(pl.clan)
                 filecache.save(imgid, bytes)
                 pl.emblem = 'xvm://cache/{0}'.format(imgid)
-        except:
+        except Exception:
             err(traceback.format_exc())
         finally:
             self._loadingClanIconsCount -= 1

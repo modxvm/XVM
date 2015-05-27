@@ -32,7 +32,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
         /**
          * Warning! Workaround!
-         * Camera entry (MinimapEntry0) is reinitialized spontaniously many times in a round.
+         * Camera entry (MinimapEntry1) is reinitialized spontaniously many times in a round.
          */
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onEntryInited);
         GlobalEventDispatcher.addEventListener(MinimapEvent.CAMERA_UPDATED, this, onEntryInited);
@@ -83,12 +83,16 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
     private function attachCameraLines():Void
     {
-        var cameraEntry:MinimapEntry = IconsProxy.cameraEntry;
-        cameraEntry.cameraExtendedToken = true;
-        camAttach = cameraEntry.attachments;
-        var depth:Number = camAttach.getNextHighestDepth();
-        var cameraLine:MovieClip = camAttach.createEmptyMovieClip("cameraLine" + depth, 10000);
-        attachLines(cameraLine, MapConfig.linesCamera, 0);
+        //Logger.add("attachCameraLines");
+        var cameraEntry:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
+        cameraEntry.xvm_worker.cameraExtendedToken = true;
+        if (!isSelfDead || Config.config.minimap.showCameraLineAfterDeath)
+        {
+            camAttach = cameraEntry.xvm_worker.attachments;
+            var depth:Number = camAttach.getNextHighestDepth();
+            var cameraLine:MovieClip = camAttach.createEmptyMovieClip("cameraLine" + depth, 10000);
+            attachLines(cameraLine, MapConfig.linesCamera, 0);
+        }
     }
 
     private function attachLines(mc:MovieClip, linesCfg:Array, angle:Number):Void
@@ -130,17 +134,23 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
         mc.lineTo(to.x, -to.y);
     }
 
-    private function onEntryInited(event:MinimapEvent):Void
+    private function onEntryInited(e:MinimapEvent):Void
     {
+        //Logger.add("Lines.onEntryInited");
         /**
          * Check if camera has lines attached.
          * Camera object reconstruction occurs sometimes and all its previous props are lost.
          * Reattach lines in that case.
          */
-        var cam:MinimapEntry = IconsProxy.cameraEntry;
-        if (!cam.cameraExtendedToken)
+        var entry = e.entry;
+        if (entry == null)
+            return;
+        if (entry == IconsProxy.cameraEntry)
         {
-            attachCameraLines();
+            if (!entry.xvm_worker.cameraExtendedToken)
+            {
+                attachCameraLines();
+            }
         }
     }
 
@@ -156,6 +166,6 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
     private function get gunConstraints():Object
     {
-        return net.wargaming.ingame.damagePanel.TankIndicator(_root.damagePanel.componentsContainer.tankIndicator).hull.gunConstraints;
+        return net.wargaming.ingame.damagePanel.TankIndicator(_root.damagePanel.tankIndicator).hull.gunConstraints;
     }
 }

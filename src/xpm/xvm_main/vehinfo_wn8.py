@@ -50,5 +50,6 @@ def _load():
 import BigWorld
 def _init():
     global _wn8ExpectedData
-    _wn8ExpectedData = _load()
+    if _wn8ExpectedData is None:
+        _wn8ExpectedData = _load()
 BigWorld.callback(1, _init)
