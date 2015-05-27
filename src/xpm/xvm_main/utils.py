@@ -105,8 +105,8 @@ def getDynamicColorValue(type, value, prefix='#'):
     return "{0}{1:06x}".format(prefix, color)
 
 def fixPath(path):
-    if path is not None:
+    if path:
         path = path.replace('\\', '/')
         if path[-1] != '/':
             path += '/'
-    return path;
+    return path
