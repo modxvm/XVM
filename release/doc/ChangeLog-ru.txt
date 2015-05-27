@@ -5,7 +5,7 @@
       "crewReturnByDefault" - включить галочку возврата экипажа по умолчанию
       "enableEquipAutoReturn": автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами)
       "minimap"/"showCameraLineAfterDeath" - отображать линию направления камеры после смерти
-      "minimap"/"minimapAimIcon": путь к иконке для артиллерийского прицела
+      "minimap"/"minimapAimIcon" - путь к иконке для артиллерийского прицела
   * удалена устаревшая опция "fragCorrelation"/"hideTeamTextFields"
 
 XVM-6.1.1.1:

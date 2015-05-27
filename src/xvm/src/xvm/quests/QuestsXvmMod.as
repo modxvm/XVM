@@ -9,7 +9,6 @@ package xvm.quests
     import xvm.quests.UI.*;
 
     // Class links
-    UI_QuestsTileChainsView;
     UI_CommonQuestsView;
 
     public class QuestsXvmMod extends XvmModBase
