@@ -169,15 +169,6 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
         base(self, arenaUniqueID, callback)
 
 
-# stub for fixing waiting bug
-def WaitingViewMeta_fix(base, self, *args):
-    try:
-        base(self, *args)
-        # raise Exception('Test')
-    except Exception, ex:
-        log('[XVM][Waiting fix]: %s throwed exception: %s' % (base.__name__, ex.message))
-
-
 # BATTLE
 
 def onArenaCreated():
@@ -318,10 +309,6 @@ def _RegisterEvents():
 
     from account_helpers.BattleResultsCache import BattleResultsCache
     OverrideMethod(BattleResultsCache, 'get', BattleResultsCache_get)
-
-    from gui.Scaleform.daapi.view.meta.WaitingViewMeta import WaitingViewMeta
-    OverrideMethod(WaitingViewMeta, 'showS', WaitingViewMeta_fix)
-    OverrideMethod(WaitingViewMeta, 'hideS', WaitingViewMeta_fix)
 
     # pre-battle
 
