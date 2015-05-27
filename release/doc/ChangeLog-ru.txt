@@ -6,6 +6,7 @@
       "enableEquipAutoReturn": автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами)
       "minimap"/"showCameraLineAfterDeath" - отображать линию направления камеры после смерти
       "minimap"/"minimapAimIcon" - путь к иконке для артиллерийского прицела
+  * опция "playersPanel"/"removeSquadIcon" перенесена внутрь настроек режимов ушей (секции "short", "medium", "medium2", "large")
   * удалена устаревшая опция "fragCorrelation"/"hideTeamTextFields"
 
 XVM-6.1.1.1:

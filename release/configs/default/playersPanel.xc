@@ -37,9 +37,6 @@
     // Opacity percentage of icons in the panels. 0 - transparent ... 100 - opaque.
     // Прозрачность в процентах иконок в ушах. 0 - прозрачные, 100 - не прозрачные.
     "iconAlpha": 100,
-    // true - Disable Platoon icons.
-    // true - убрать отображение иконки взвода.
-    "removeSquadIcon": false,
     // true - disable background of the selected player.
     // true - убрать подложку выбранного игрока.
     "removeSelectedBackground": false,
@@ -157,6 +154,9 @@
       // Minimum width of the column, 0-250. Default is 0.
       // Минимальная ширина поля, 0-250. По умолчанию: 0.
       "width": 0,
+      // true - disable platoon icons
+      // true - убрать отображение иконок взвода
+      "removeSquadIcon": false,
       // Display format for frags (macros allowed, see macros.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
@@ -182,6 +182,9 @@
       // Minimum width of the player's name column, 0-250. Default is 46.
       // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 46.
       "width": 46,
+      // true - disable platoon icons
+      // true - убрать отображение иконок взвода
+      "removeSquadIcon": false,
       // Display format for the left panel (macros allowed, see macros.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
       "formatLeft": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
@@ -213,6 +216,9 @@
       // Maximum width of the vehicle name column, 0-250. Default is 65.
       // Максимальная ширина поля названия танка, 0-250. По умолчанию: 65.
       "width": 65,
+      // true - disable platoon icons
+      // true - убрать отображение иконок взвода
+      "removeSquadIcon": false,
       // Display format for the left panel (macros allowed, see macros.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
       "formatLeft": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
@@ -244,6 +250,9 @@
       // Minimum width of the player's name column, 0-250. Default is 170.
       // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 170.
       "width": 100,
+      // true - disable platoon icons
+      // true - убрать отображение иконок взвода
+      "removeSquadIcon": false,
       // Display format for player nickname (macros allowed, see macros.txt).
       // Формат отображения имени игрока (допускаются макроподстановки, см. macros.txt).
       "nickFormatLeft": "<font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",

@@ -559,7 +559,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 return;
         }
 
-        var squadSize:Number = cfg.removeSquadIcon ? 0 : DEFAULT_SQUAD_SIZE;
+        var squadSize:Number = cfg[wrapper.state].removeSquadIcon ? 0 : DEFAULT_SQUAD_SIZE;
         widthDelta += DEFAULT_SQUAD_SIZE - squadSize;
 
         var changed:Boolean = false;
