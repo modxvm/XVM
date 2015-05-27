@@ -74,24 +74,25 @@ package xvm.contacts.UI
             }
         }
 
-        override protected function handleMouseRollOver(e:MouseEvent):void
+        override protected function showTooltip():void
         {
-            super.handleMouseRollOver(e);
-
             var currentContentItem:UIComponent = this.getCurrentContentItem();
-            if (!(currentContentItem is ContactItem))
-                return;
-
-            var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-            if (!d || !d.data.xvm_contact_data)
-                return;
-
-            var comment:String = d.data.xvm_contact_data.comment;
-            if (!comment)
-                return;
-
-            App.toolTipMgr.show(d.data.userProps.userName + "\n\n" +
-                "<font color='" + XfwUtils.toHtmlColor(XfwConst.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+            if (currentContentItem is ContactItem)
+            {
+                var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
+                if (d && d.data.xvm_contact_data)
+                {
+                    var comment:String = d.data.xvm_contact_data.comment;
+                    if (comment)
+                    {
+                        App.toolTipMgr.show(d.data.userProps.userName +
+                            (d.data.userProps.clanAbbrev ? "[" + d.data.userProps.clanAbbrev + "]" : "") +
+                            "\n\n<font color='" + XfwUtils.toHtmlColor(XfwConst.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+                        return;
+                    }
+                }
+            }
+            super.showTooltip();
         }
 
         // PRIVATE
