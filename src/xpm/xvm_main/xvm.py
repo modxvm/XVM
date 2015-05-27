@@ -222,12 +222,14 @@ class Xvm(object):
         try:
             movie = flashObject.movie
             if movie is not None:
+                from gui.battle_control import arena_info
                 arena = BigWorld.player().arena
                 movie.invoke((AS2RESPOND.CONFIG, [
                     config.config_str,
                     config.lang_str,
                     arena.extraData.get('battleLevel', 0),
                     arena.bonusType,
+                    'fallout' if arena_info.isEventBattle() else 'normal',
                     vehinfo.getVehicleInfoDataStr(),
                     simplejson.dumps(token.networkServicesSettings),
                     simplejson.dumps(minimap_circles.getMinimapCirclesData()),

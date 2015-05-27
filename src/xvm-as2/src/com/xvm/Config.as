@@ -8,6 +8,8 @@ class com.xvm.Config
 {
     // Public vars
     public static var config:Object = null;
+    public static var battleType:Number = NaN;
+    public static var eventType:String = null;
     public static var networkServicesSettings:Object = null;
     public static var minimapCirclesData:Object = null;
     public static var IS_DEVELOPMENT:Boolean = false;
@@ -23,13 +25,15 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, vehInfoData:String, networkServicesSettings:String, minimapCirclesData:String, IS_DEVELOPMENT:Boolean)
+    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, eventType:String, vehInfoData:String, networkServicesSettings:String, minimapCirclesData:String, IS_DEVELOPMENT:Boolean)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
         {
             Config.config = JSONx.parse(config_data);
             //Logger.addObject(Config.config);
+            Config.battleType = battleType;
+            Config.eventType = eventType;
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
             Config.minimapCirclesData = JSONx.parse(minimapCirclesData);
             Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
