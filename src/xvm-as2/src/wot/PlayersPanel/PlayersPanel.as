@@ -523,7 +523,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         switch (wrapper.state)
         {
             case "short":
-                widthDelta = w;
+                widthDelta = -w;
                 break;
             case "medium":
                 namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), w);
