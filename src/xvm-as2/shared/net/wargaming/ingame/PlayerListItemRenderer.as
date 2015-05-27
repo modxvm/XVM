@@ -21,9 +21,9 @@ intrinsic class net.wargaming.ingame.PlayerListItemRenderer extends UIComponent
     var bg:UIComponent;
     var squadIcon:MovieClip;
     var vehicleActionMarker;
-    var data: Object;
+    var data:Object;
 
-    function configUI();
+    function initDynaicSquadItems();
     function onItemRollOver();
     function onItemRollOut();
     function onItemReleaseOutside();
@@ -34,13 +34,15 @@ intrinsic class net.wargaming.ingame.PlayerListItemRenderer extends UIComponent
     function set speaking(value);
     function get selected();
     function set selected(value);
-    function get isDynamicSquadActive();
-    function set isDynamicSquadActive(value);
-    function get isShowExtraModeActive();
-    function set isShowExtraModeActive(value);
     function __getColorTransform(schemeName);
+    function get isDynamicSquadActive();
+    function set isDynamicSquadActive(val);
+    function get isShowExtraModeActive();
+    function set isShowExtraModeActive(val);
     function setState();
+    function isShowVehicleName(val);
     function update();
+    function updateSquadIcons(squadPositionX, dynamicIcoPotionX);
     function setData(data);
     function setListData(index, label, selected);
 }

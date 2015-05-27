@@ -61,11 +61,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    public static var DEFAULT_SQUAD_SIZE:Number;
+
     private var DEFAULT_WIDTH:Number = 33;
     private var DEFAULT_NAMES_WIDTH_LARGE:Number = 263;
     private var DEFAULT_NAMES_WIDTH_MEDIUM:Number = 79;
     private var DEFAULT_VEHICLES_WIDTH:Number = 98;
-    private var DEFAULT_SQUAD_SIZE:Number;
 
     private var m_data_arguments:Array;
     private var m_data:Object;
@@ -82,7 +83,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     {
         Utils.TraceXvmModule("PlayersPanel");
 
-        DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN * 2;
+        if (!DEFAULT_SQUAD_SIZE)
+            DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN * 2;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, invalidate);
@@ -543,8 +545,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                     : wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x;
                 if (wrapper.m_list._x != x || wrapper.players_bg._x != x)
                 {
-                    wrapper.m_list._x = x;
                     wrapper.players_bg._x = x;
+                    wrapper.m_list._x = x;
+                    var sqx:Number = isLeftPanel
+                        ? -x + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN
+                        : wrapper.players_bg._width - x - DEFAULT_SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN;
+                    wrapper.m_list.updateSquadIconPosition();
                     GlobalEventDispatcher.dispatchEvent({
                         type: isLeftPanel ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
                         state: wrapper.state
