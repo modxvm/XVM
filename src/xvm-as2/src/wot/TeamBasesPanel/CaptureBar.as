@@ -135,6 +135,9 @@ class wot.TeamBasesPanel.CaptureBar
         wrapper.m_titleTF.autoSize = "center";
         wrapper.m_timerTF.autoSize = "center";
 
+        wrapper.m_titleTF.selectable = false;
+        wrapper.m_timerTF.selectable = false;
+
        /**
         * Adjust distance from primary upper field so
         * no overlapping occurs when font size is high.
