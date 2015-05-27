@@ -1,4 +1,4 @@
-﻿XVM-6.1.2-dev:
+﻿XVM-6.1.2-beta1:
   * adaptation to WoT 0.9.8
   * config loading refactoring
   * new options:
