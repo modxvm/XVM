@@ -127,7 +127,7 @@ def _load_log(msg):
         .replace(XVM.SHARED_RESOURCES_DIR, '[res]'))
 
 
-def _merge_configs(original, result):
+def _merge_configs(original, result, path=[]):
     def to_bool(user_data):
         lower = str(user_data).lower()
         if lower == 'true':
@@ -136,15 +136,23 @@ def _merge_configs(original, result):
             return False
         else:
             return user_data
+    if type(result) != type(original):
+        log('[JSONxLoader] merge: /{} expected {}, got {}. Default value loaded'
+            .format('/'.join(path), type(original).__name__, type(result).__name__))
+        return original
     for key, value in original.iteritems():
+        path.append(key)
         if key not in result:
             result[key] = value
         elif isinstance(value, dict):
-            _merge_configs(value, result[key])
+            result[key] = _merge_configs(value, result[key], path)
         elif isinstance(value, bool):
             result[key] = to_bool(result[key])
         elif isinstance(value, list):
-            result[key] = result[key] or []
+            result_list = result[key] or []
+            is_list = isinstance(result_list, list)
+            result[key] = result_list if is_list else value
+        path.pop()
     return result
 
 
