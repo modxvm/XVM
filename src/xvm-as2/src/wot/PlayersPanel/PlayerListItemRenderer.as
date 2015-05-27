@@ -32,21 +32,29 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function __getColorTransform()
     {
+        if (Config.eventType != "normal")
+            return base.__getColorTransform.apply(base, arguments);
         return this.__getColorTransformImpl.apply(this, arguments);
     }
 
     function setState()
     {
+        if (Config.eventType != "normal")
+            return base.setState.apply(base, arguments);
         return this.setStateImpl.apply(this, arguments);
     }
 
     function update()
     {
+        if (Config.eventType != "normal")
+            return base.update.apply(base, arguments);
         return this.updateImpl.apply(this, arguments);
     }
 
     function updateSquadIcons()
     {
+        if (Config.eventType != "normal")
+            return base.updateSquadIcons.apply(base, arguments);
         return this.updateSquadIconsImpl.apply(this, arguments);
     }
 
@@ -84,7 +92,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         extraFieldsConfigured = false;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, update);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
 
         if (isLeftPanel)
         {
@@ -245,6 +253,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function onConfigLoaded()
     {
+        //Logger.add(Config.eventType);
+        if (Config.eventType != "normal")
+            return;
         try
         {
             this.cfg = Config.config.playersPanel;
@@ -269,6 +280,13 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             Logger.add(ex.toString());
         }
+    }
+
+    private function onStatLoaded()
+    {
+        if (Config.eventType != "normal")
+            return;
+        update();
     }
 
     private function completeLoad()
@@ -820,6 +838,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
     var _savedX = 0;
     private function adjustExtraFieldsLeft(e)
     {
+        if (Config.eventType != "normal")
+            return;
+
         var state:String = e.state || panel.m_state;
         //Logger.add("adjustExtraFieldsLeft: " + state);
         var mc:MovieClip = extraFields[state];
@@ -858,6 +879,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function adjustExtraFieldsRight(e)
     {
+        if (Config.eventType != "normal")
+            return;
+
         var state:String = e.state || panel.m_state;
         //Logger.add("adjustExtraFieldsRight: " + state);
         var mc:MovieClip = extraFields[state];

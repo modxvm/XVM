@@ -25,36 +25,43 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     function setData()
     {
+        if (Config.eventType != "normal")
+            return base.setData.apply(base, arguments);
         return this.setDataImpl.apply(this, arguments);
     }
 
     function onRecreateDevice()
     {
+        if (Config.eventType != "normal")
+            return base.onRecreateDevice.apply(base, arguments);
         return this.onRecreateDeviceImpl.apply(this, arguments);
     }
 
     function update()
     {
+        if (Config.eventType != "normal")
+            return base.update.apply(base, arguments);
         return this.updateImpl.apply(this, arguments);
     }
 
     function updateAlphas()
     {
+        if (Config.eventType != "normal")
+            return base.updateAlphas.apply(base, arguments);
         return this.updateAlphasImpl.apply(this, arguments);
     }
 
     function updatePositions()
     {
-        // stub
-    }
-
-    function updateWidthOfLongestName()
-    {
+        if (Config.eventType != "normal")
+            return base.updatePositions.apply(base, arguments);
         // stub
     }
 
     function updateSquadIcons()
     {
+        if (Config.eventType != "normal")
+            return base.updateSquadIcons.apply(base, arguments);
         // stub
     }
 
@@ -103,6 +110,9 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private function onConfigLoaded()
     {
+        if (Config.eventType != "normal")
+            return;
+
         cfg = Config.config.playersPanel;
         var startMode:String = String(cfg.startMode).toLowerCase();
         if (net.wargaming.ingame.PlayersPanel.STATES[startMode] == null)
@@ -193,6 +203,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private function draw()
     {
+        if (Config.eventType != "normal")
+            return;
         setDataInternal.apply(this, m_data_arguments);
     }
 
@@ -371,6 +383,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     {
         //Logger.add("PlayersPanel.onRecreateDevice()");
         base.onRecreateDevice(width, height);
+
         wrapper.update();
     }
 
