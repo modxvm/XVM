@@ -127,24 +127,25 @@ def _load_log(msg):
         .replace(XVM.SHARED_RESOURCES_DIR, '[res]'))
 
 
-def _merge_configs(orig_dict, new_dict):
-    for key, val in new_dict.iteritems():
-        if isinstance(val, collections.Mapping):
-            tmp = _merge_configs(orig_dict.get(key, { }), val)
-            orig_dict[key] = tmp
-        elif isinstance(val, list):
-            orig_dict[key] = val
-        elif key in orig_dict and isinstance(orig_dict[key], bool):
-            strval = str(val).lower()
-            if strval == 'true':
-                orig_dict[key] = True
-            elif strval == 'false':
-                orig_dict[key] = False
-            else:
-                orig_dict[key] = val
+def _merge_configs(original, result):
+    def to_bool(user_data):
+        lower = str(user_data).lower()
+        if lower == 'true':
+            return True
+        elif lower == 'false':
+            return False
         else:
-            orig_dict[key] = val
-    return orig_dict
+            return user_data
+    for key, value in original.iteritems():
+        if key not in result:
+            result[key] = value
+        elif isinstance(value, dict):
+            _merge_configs(value, result[key])
+        elif isinstance(value, bool):
+            result[key] = to_bool(result[key])
+        elif isinstance(value, list):
+            result[key] = result[key] or []
+    return result
 
 
 def _tuneup_config(config):
