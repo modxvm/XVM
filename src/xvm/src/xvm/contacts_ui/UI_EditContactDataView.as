@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.contacts.UI
+package xvm.contacts_ui
 {
     import com.xfw.*;
     import com.xvm.*;
