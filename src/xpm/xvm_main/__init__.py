@@ -1,12 +1,16 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
 #####################################################################
-# MOD INFO (mandatory)
+# MOD INFO
 
-XFW_MOD_VERSION    = '3.0.0'
-XFW_MOD_URL        = 'http://www.modxvm.com/'
-XFW_MOD_UPDATE_URL = 'http://www.modxvm.com/en/download-xvm/'
-XFW_GAME_VERSIONS  = ['0.9.8']
+XFW_MOD_INFO = {
+    # mandatory
+    'VERSION':       '3.1.0',
+    'URL':           'http://www.modxvm.com/',
+    'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
+    'GAME_VERSIONS': ['0.9.8'],
+    # optional
+}
 
 #####################################################################
 
@@ -364,7 +368,7 @@ BigWorld.callback(0, _RegisterEvents)
 #####################################################################
 # Log version info
 
-log("xvm %s (%s) for WoT %s" % (XFW_MOD_VERSION, XFW_MOD_URL, ", ".join(XFW_GAME_VERSIONS)))
+log("xvm %s (%s) for WoT %s" % (XFW_MOD_INFO['VERSION'], XFW_MOD_INFO['URL'], ", ".join(XFW_MOD_INFO['GAME_VERSIONS'])))
 try:
     from __version__ import __branch__, __revision__
     log("Branch: %s, Revision: %s" % (__branch__, __revision__))
