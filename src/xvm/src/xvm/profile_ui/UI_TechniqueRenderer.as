@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.profile.UI
+package xvm.profile_ui
 {
     import com.xfw.*;
     import com.xvm.*;
@@ -13,7 +13,7 @@ package xvm.profile.UI
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;
-    import xvm.profile.components.*;
+    import xvm.profile_ui.components.*;
 
     public dynamic class UI_TechniqueRenderer extends TechniqueRenderer_UI
     {

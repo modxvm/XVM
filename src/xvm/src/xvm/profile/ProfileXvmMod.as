@@ -21,6 +21,12 @@ package xvm.profile
             "profileWindow": ProfileXvmView
         }
 
+        override public function entryPoint():void
+        {
+            //Logger.err(new Error());
+            super.entryPoint();
+        }
+
         public override function get views():Object
         {
             return _views;

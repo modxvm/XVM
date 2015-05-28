@@ -2,12 +2,12 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.profile.components
+package xvm.profile_ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
-    import xvm.profile.UI.*;
+    import xvm.profile_ui.*;
 
     public class TechniquePage extends Technique
     {

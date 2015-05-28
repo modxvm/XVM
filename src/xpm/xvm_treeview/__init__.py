@@ -10,6 +10,5 @@ XFW_MOD_INFO = {
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
     'GAME_VERSIONS': ['0.9.8'],
     # optional
-    'SWF_VIEW_DEPENDS': ['hangar'],
     'SWF_PRELOADS':     ['nodesLib.swf'],
 }

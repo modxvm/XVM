@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.profile.components
+package xvm.profile_ui.components
 {
     import com.xfw.*;
     import com.xfw.events.*;
@@ -21,7 +21,7 @@ package xvm.profile.components
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.clik.data.*;
     import scaleform.clik.events.*;
-    import xvm.profile.UI.*;
+    import xvm.profile_ui.*;
 
     public class Technique extends Sprite
     {

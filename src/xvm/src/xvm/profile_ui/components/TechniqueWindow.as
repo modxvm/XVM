@@ -1,4 +1,8 @@
-package xvm.profile.components
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
+package xvm.profile_ui.components
 {
     import com.xfw.*;
     import com.xvm.*;

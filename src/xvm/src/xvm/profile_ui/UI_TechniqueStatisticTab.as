@@ -1,4 +1,8 @@
-package xvm.profile.UI
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
+package xvm.profile_ui
 {
     import com.xfw.*;
     import fl.transitions.easing.*;
@@ -6,8 +10,8 @@ package xvm.profile.UI
     import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import net.wg.gui.utils.*;
-    import xvm.profile.components.*;
     import scaleform.clik.motion.*;
+    import xvm.profile_ui.components.*;
 
     public dynamic class UI_TechniqueStatisticTab extends TechniqueStatisticTab_UI
     {

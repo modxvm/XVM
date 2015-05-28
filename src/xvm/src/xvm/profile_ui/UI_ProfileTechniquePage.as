@@ -2,12 +2,12 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.profile.UI
+package xvm.profile_ui
 {
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.dossier.*;
-    import xvm.profile.components.*;
+    import xvm.profile_ui.components.*;
 
     public dynamic class UI_ProfileTechniquePage extends ProfileTechniquePage_UI
     {

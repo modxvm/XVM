@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.profile.UI
+package xvm.profile_ui
 {
     import com.xfw.*;
     import com.xvm.*;

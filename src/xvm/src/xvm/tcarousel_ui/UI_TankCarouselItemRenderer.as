@@ -1,4 +1,4 @@
-package xvm.tcarousel
+package xvm.tcarousel_ui
 {
     import com.xfw.*;
     import com.xvm.*;

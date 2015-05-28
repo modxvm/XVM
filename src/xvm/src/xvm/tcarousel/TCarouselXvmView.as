@@ -10,6 +10,7 @@ package xvm.tcarousel
     import com.xvm.types.dossier.*;
     //import com.xfw.utils.*;
     import net.wg.gui.lobby.hangar.*;
+    import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
@@ -28,6 +29,7 @@ package xvm.tcarousel
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
             //Logger.add((new Error()).getStackTrace());
+
             replaceCarouselControl();
         }
 
@@ -42,6 +44,11 @@ package xvm.tcarousel
             {
                 Logger.err(ex);
             }
+        }
+
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            super.onBeforeDispose(e);
         }
 
         // PRIVATE
@@ -59,7 +66,7 @@ package xvm.tcarousel
                 var index:int = page.getChildIndex(page.carousel);
                 page.removeChildAt(index);
                 //page.carousel.dispose(); // TODO: exception
-                var carousel:UI_TankCarousel = new UI_TankCarousel();
+                var carousel:TankCarousel = App.utils.classFactory.getComponent("xvm.tcarousel_ui::UI_TankCarousel", TankCarousel);
                 page.carousel = carousel;
                 page.addChildAt(carousel, index);
             }

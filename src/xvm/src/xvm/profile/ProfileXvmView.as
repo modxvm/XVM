@@ -7,14 +7,12 @@ package xvm.profile
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import flash.utils.*;
     import net.wg.data.*;
     import net.wg.gui.events.ViewStackEvent;
     import net.wg.gui.lobby.profile.*;
     import net.wg.gui.lobby.window.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import xvm.profile.UI.*;
 
     public class ProfileXvmView extends XvmViewBase
     {
@@ -22,6 +20,11 @@ package xvm.profile
         {
             //Logger.add("ProfileXvmView");
             super(view);
+
+            const _name:String = "xvm_profile";
+            const _ui_name:String = _name + "_ui.swf";
+            const _preloads:Array = [];// "profileStatistics.swf", "profileTechnique.swf" ];
+            Xfw.load_ui_swf(_name, _ui_name, _preloads);
         }
 
         public function get tabNavigator():ProfileTabNavigator
@@ -37,8 +40,8 @@ package xvm.profile
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
-            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, getQualifiedClassName(UI_ProfileTechniquePage));
-            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, getQualifiedClassName(UI_ProfileTechniqueWindow));
+            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "xvm.profile_ui::UI_ProfileTechniquePage");
+            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "xvm.profile_ui::UI_ProfileTechniqueWindow");
         }
     }
 }
