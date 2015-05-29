@@ -9,7 +9,6 @@ package xvm.company
     import net.wg.gui.components.controls.CheckBox;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.gui.prebattle.company.*;
-    import xvm.company.UI.*;
 
     public class CompanyList
     {
@@ -39,7 +38,7 @@ package xvm.company
             if (Config.networkServicesSettings.statCompany != true)
                 return;
 
-            view.cmpList.itemRenderer = UI_CompanyListItemRenderer;
+            view.cmpList.itemRendererName = "xvm.company_ui::UI_CompanyListItemRenderer";
 
             updateCheckBox = App.utils.classFactory.getComponent("CheckBox", CheckBox);
             updateCheckBox.name = "updateStatCheckBox";

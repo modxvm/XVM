@@ -1,5 +1,5 @@
 /**
- * XVM - login page
+ * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.ping

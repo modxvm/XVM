@@ -1,3 +1,7 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 package xvm.tcarousel_ui
 {
     import com.xfw.*;

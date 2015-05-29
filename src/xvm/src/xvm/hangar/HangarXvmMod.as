@@ -4,8 +4,8 @@
  */
 package xvm.hangar
 {
+    import com.xfw.*;
     import com.xvm.infrastructure.*;
-    import xvm.hangar.views.*;
 
     public class HangarXvmMod extends XvmModBase
     {
@@ -21,6 +21,15 @@ package xvm.hangar
             "hangar": Hangar,
             "battleLoading": BattleLoading,
             "battleResults": BattleResults
+        }
+
+        override public function entryPoint():void
+        {
+            super.entryPoint();
+            const _name:String = "xvm_hangar";
+            const _ui_name:String = _name + "_ui.swf";
+            const _preloads:Array = [ "battleLoading.swf", "battleResults.swf" ];
+            Xfw.load_ui_swf(_name, _ui_name, _preloads);
         }
 
         public override function get views():Object

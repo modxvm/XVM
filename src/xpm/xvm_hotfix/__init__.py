@@ -36,4 +36,4 @@ def _RegisterEvents():
     from gui.Scaleform.framework.entities.abstract.ContainerManagerMeta import ContainerManagerMeta
     OverrideMethod(ContainerManagerMeta, 'as_showS', hide_exception)
 
-BigWorld.callback(0, _RegisterEvents)
+#BigWorld.callback(0, _RegisterEvents)

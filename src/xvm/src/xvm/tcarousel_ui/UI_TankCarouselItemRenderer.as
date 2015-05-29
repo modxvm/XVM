@@ -1,3 +1,7 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 package xvm.tcarousel_ui
 {
     import com.xfw.*;
@@ -10,6 +14,7 @@ package xvm.tcarousel_ui
     import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.clik.constants.*;
+    import xvm.tcarousel_ui.components.*;
 
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {

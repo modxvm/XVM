@@ -6,7 +6,6 @@ package xvm.techtree
 {
     import com.xfw.*;
     import com.xvm.infrastructure.*;
-    import flash.utils.*;
     import net.wg.gui.lobby.techtree.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -32,8 +31,8 @@ package xvm.techtree
 
         private function init():void
         {
-            page.researchItems.itemNodeName = getQualifiedClassName(UI_ResearchItemNode);
-            page.researchItems.vehicleNodeName = getQualifiedClassName(UI_NationTreeNodeSkinned);
+            page.researchItems.itemNodeName = "xvm.techtree_ui::UI_ResearchItemNode";
+            page.researchItems.vehicleNodeName = "xvm.techtree_ui::UI_NationTreeNodeSkinned";
         }
     }
 }

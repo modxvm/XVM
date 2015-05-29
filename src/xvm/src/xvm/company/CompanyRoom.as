@@ -8,7 +8,6 @@ package xvm.company
     import com.xvm.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.gui.prebattle.company.*;
-    import xvm.company.UI.*;
 
     public class CompanyRoom
     {
@@ -36,8 +35,8 @@ package xvm.company
             if (Config.networkServicesSettings.statCompany != true)
                 return;
 
-            view.assignedList.itemRenderer = UI_TeamMemberRenderer;
-            view.unassignedList.itemRenderer = UI_TeamMemberRenderer;
+            view.assignedList.itemRendererName = "xvm.company_ui::UI_TeamMemberRenderer";
+            view.unassignedList.itemRendererName = "xvm.company_ui::UI_TeamMemberRenderer";
         }
     }
 }

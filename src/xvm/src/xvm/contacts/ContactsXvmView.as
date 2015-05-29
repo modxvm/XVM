@@ -24,7 +24,6 @@ package xvm.contacts
 
         private static const _name:String = "xvm_contacts";
         private static const _ui_name:String = _name + "_ui.swf";
-        private static const _preloads:Array = [];// [ "messengerControls.swf", "contactsTreeComponents.swf", "contactsListPopover.swf" ];
 
         private static var _ui_swf_loaded:Boolean = false;
 
@@ -54,7 +53,7 @@ package xvm.contacts
             if (!_ui_swf_loaded)
             {
                 _ui_swf_loaded = true;
-                Xfw.load_ui_swf(_name, _ui_name, _preloads);
+                Xfw.load_ui_swf(_name, _ui_name);
             }
             else
             {

@@ -1,11 +1,13 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 package xvm.contacts_ui
 {
-
     import com.xfw.*;
     import com.xvm.infrastructure.*;
 
     /**
-     *  @private
      *  This class is used to link UI classes into *_ui.swf
      */
     public class ContactsUIXvmMod extends XvmModBase

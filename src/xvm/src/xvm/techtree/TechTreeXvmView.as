@@ -7,7 +7,6 @@ package xvm.techtree
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import flash.utils.*;
     import net.wg.gui.lobby.techtree.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -43,7 +42,7 @@ package xvm.techtree
         private function handleIndexChange(e:IndexEvent = null) : void
         {
             page.nationTree.dataProvider.displaySettings.fromObject( {
-                nodeRendererName:getQualifiedClassName(UI_NationTreeNodeSkinned),
+                nodeRendererName:"xvm.techtree_ui::UI_NationTreeNodeSkinned",
                 isLevelDisplayed:page.nationTree.dataProvider.displaySettings.isLevelDisplayed
             }, null);
             page.nationTree.invalidateData();

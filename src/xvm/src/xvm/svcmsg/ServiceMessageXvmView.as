@@ -14,7 +14,7 @@ package xvm.svcmsg
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import org.idmedia.as3commons.util.*;
-    import xvm.svcmsg.UI.*;
+    import xvm.svcmsg_ui.*;
 
     public class ServiceMessageXvmView extends XvmViewBase
     {

@@ -16,8 +16,19 @@ package xvm.squad
 
         private static const _views:Object =
         {
-            "prb_windows/squadWindow": SquadXvmView
+            //TODO"prb_windows/squadWindow": SquadXvmView
         }
+
+        /* TODO
+        override public function entryPoint():void
+        {
+            super.entryPoint();
+            const _name:String = "xvm_squad";
+            const _ui_name:String = _name + "_ui.swf";
+            const _preloads:Array = [ "squadWindow.swf" ];
+            Xfw.load_ui_swf(_name, _ui_name, _preloads);
+        }
+        */
 
         public override function get views():Object
         {

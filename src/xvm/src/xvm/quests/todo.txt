@@ -1,2 +1,0 @@
-﻿auto take new task
-position at current task when window opens

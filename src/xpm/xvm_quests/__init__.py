@@ -10,7 +10,6 @@ XFW_MOD_INFO = {
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
     'GAME_VERSIONS': ['0.9.8'],
     # optional
-    'SWF_PRELOADS':     ['questsWindow.swf'],
 }
 
 #####################################################################
@@ -25,7 +24,7 @@ from xvm_main.python.logger import *
 # constants
 
 class LINKAGES(object):
-    UI_LINKAGE_COMMON_QUESTS = "xvm.quests.UI::UI_CommonQuestsView"
+    UI_LINKAGE_COMMON_QUESTS = "xvm.quests_ui::UI_CommonQuestsView"
 
 
 #####################################################################
