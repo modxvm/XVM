@@ -19,11 +19,6 @@ package xvm.quests
             "EventsWindow": QuestsXvmView
         }
 
-        override public function entryPoint():void
-        {
-            super.entryPoint();
-        }
-
         public override function get views():Object
         {
             return _views;

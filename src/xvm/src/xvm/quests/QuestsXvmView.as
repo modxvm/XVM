@@ -12,7 +12,6 @@ package xvm.quests
 
     public class QuestsXvmView extends XvmViewBase
     {
-
         public function QuestsXvmView(view:IView)
         {
             super(view);
