@@ -18,7 +18,7 @@ package xvm.battleloading
 
         private static const _views:Object =
         {
-            "battleLoading": BattleLoadingXvmMod
+            "battleLoading": BattleLoadingXvmView
         }
 
         override protected function processView(view:IView, populated:Boolean):IXfwView

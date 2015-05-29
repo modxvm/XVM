@@ -11,7 +11,7 @@ package xvm.battleloading
     import net.wg.gui.lobby.battleloading.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import xvm.hangar.battleLoading.components.*;
+    import xvm.battleloading.components.*;
 
     public class BattleLoadingXvmView extends XvmViewBase
     {
