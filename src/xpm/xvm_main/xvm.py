@@ -15,6 +15,7 @@ from xfw import *
 from constants import *
 from logger import *
 import config
+import configwatchdog
 import stats
 import vehinfo
 import vehstate
@@ -156,6 +157,8 @@ class Xvm(object):
         if not token.versionChecked:
             token.checkVersion()
             token.initializeXvmToken()
+        if config.get('autoReloadConfig', False) == True:
+            configwatchdog.startConfigWatchdog()
 
 
     def initBattleSwf(self, flashObject):
