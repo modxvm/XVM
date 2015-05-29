@@ -2,7 +2,7 @@
  * XVM - login page
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.hangar
+package xvm.battleloading
 {
     import com.xfw.*;
     import com.xvm.*;
@@ -88,12 +88,12 @@ package xvm.hangar
         {
             page.form.team1List.validateNow();
             page.form.team2List.validateNow();
-            page.form.team1List.itemRendererName = "xvm.hangar_ui.battleLoading::UI_LeftItemRenderer";
-            page.form.team2List.itemRendererName = "xvm.hangar_ui.battleLoading::UI_RightItemRenderer";
+            page.form.team1List.itemRendererName = "xvm.battleloading_ui::UI_LeftItemRenderer";
+            page.form.team2List.itemRendererName = "xvm.battleloading_ui::UI_RightItemRenderer";
             App.utils.scheduler.envokeInNextFrame(function():void
             {
-                page.form.team1List.itemRendererName = "xvm.hangar_ui.battleLoading::UI_LeftItemRenderer";
-                page.form.team2List.itemRendererName = "xvm.hangar_ui.battleLoading::UI_RightItemRenderer";
+                page.form.team1List.itemRendererName = "xvm.battleloading_ui::UI_LeftItemRenderer";
+                page.form.team2List.itemRendererName = "xvm.battleloading_ui::UI_RightItemRenderer";
             });
         }
     }

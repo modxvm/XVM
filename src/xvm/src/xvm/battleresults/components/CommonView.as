@@ -39,7 +39,7 @@ package xvm.battleresults.components
             var instance:CommonView = new CommonView();
             instance.view = view;
 
-            instance.compactQuests();
+            //instance.compactQuests();
 
             // TODO:0.9.8
             /*
@@ -74,14 +74,15 @@ package xvm.battleresults.components
             tooltips = { };
         }
 
-        private function compactQuests():void
+        // TODO:0.9.8
+        /*private function compactQuests():void
         {
             view.progressReport.linkage = "xvm.battleresults_ui::UI_BR_SubtaskComponent";
 
             // hide shadows
             view.upperShadow.visible = false;
             view.lowerShadow.visible = false;
-        }
+        }*/
 
         // TODO:0.9.8
         /*
