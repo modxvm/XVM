@@ -18,14 +18,11 @@ package xvm.quests
             super(view);
         }
 
-        public function get page():QuestsWindow
-        {
-            return super.view as QuestsWindow;
-        }
-
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            //Logger.addObject(page);
+            const _name:String = "xvm_quests";
+            const _ui_name:String = _name + "_ui.swf";
+            Xfw.load_ui_swf(_name, _ui_name);
         }
     }
 }

@@ -5,8 +5,7 @@
 package xvm.quests_ui
 {
     import com.xfw.*;
-    import xvm.quests.*;
-    import xvm.quests_ui.components.QuestsHelper;
+    import xvm.quests_ui.components.*;
 
     public dynamic class UI_CommonQuestsView extends CurrentTab_UI
     {

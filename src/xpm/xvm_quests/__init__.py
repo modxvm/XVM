@@ -33,9 +33,10 @@ class LINKAGES(object):
 def EventsWindow_loadView(base, self, linkage, alias):
     from gui.Scaleform.genConsts.QUESTS_ALIASES import QUESTS_ALIASES
 
-    if linkage == QUESTS_ALIASES.COMMON_QUESTS_VIEW_LINKAGE:
-        linkage = LINKAGES.UI_LINKAGE_COMMON_QUESTS
-        alias = LINKAGES.UI_LINKAGE_COMMON_QUESTS
+    # TODO
+    #if linkage == QUESTS_ALIASES.COMMON_QUESTS_VIEW_LINKAGE:
+    #    linkage = LINKAGES.UI_LINKAGE_COMMON_QUESTS
+    #    alias = LINKAGES.UI_LINKAGE_COMMON_QUESTS
     base(self, linkage, alias)
 
 
