@@ -4,9 +4,7 @@
  */
 package xvm.battleloading
 {
-    import net.wg.infrastructure.interfaces.IView;
     import com.xfw.*;
-    import com.xfw.infrastructure.IXfwView;
     import com.xvm.infrastructure.*;
 
     public class BattleLoadingXvmMod extends XvmModBase

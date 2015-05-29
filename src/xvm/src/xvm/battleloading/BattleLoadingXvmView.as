@@ -1,5 +1,5 @@
 /**
- * XVM - login page
+ * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.battleloading
@@ -12,8 +12,8 @@ package xvm.battleloading
     import net.wg.gui.lobby.battleloading.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import xvm.battleloading.components.*;
     import org.idmedia.as3commons.util.StringUtils;
+    import xvm.battleloading.components.*;
 
     public class BattleLoadingXvmView extends XvmViewBase
     {
@@ -25,9 +25,9 @@ package xvm.battleloading
             super(view);
         }
 
-        public function get page():net.wg.gui.lobby.battleloading.BattleLoading
+        public function get page():BattleLoading
         {
-            return super.view as net.wg.gui.lobby.battleloading.BattleLoading;
+            return super.view as BattleLoading;
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
@@ -92,7 +92,7 @@ package xvm.battleloading
         {
             try
             {
-                initRenderers();
+                BattleLoadingHelper.InitRenderers(page);
 
                 // Components
                 new WinChances(page); // Winning chance info above players list.
@@ -103,19 +103,6 @@ package xvm.battleloading
             {
                 Logger.err(ex);
             }
-        }
-
-        private function initRenderers():void
-        {
-            page.form.team1List.validateNow();
-            page.form.team2List.validateNow();
-            page.form.team1List.itemRendererName = "xvm.battleloading_ui::UI_LeftItemRenderer";
-            page.form.team2List.itemRendererName = "xvm.battleloading_ui::UI_RightItemRenderer";
-            App.utils.scheduler.envokeInNextFrame(function():void
-            {
-                page.form.team1List.itemRendererName = "xvm.battleloading_ui::UI_LeftItemRenderer";
-                page.form.team2List.itemRendererName = "xvm.battleloading_ui::UI_RightItemRenderer";
-            });
         }
     }
 }
