@@ -53,11 +53,33 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenIn
 
     return base(self, tankmenCount, placesCount, tankmenInBarracks, tankmanArr)
 
+# less then 20% ammo => vehicle not ready
+def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
+    try:
+        if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfNoAmmo'):
+            return False
+    except Exception as ex:
+        err(traceback.format_exc())
+    return base(self, *args, **kwargs)
+
+# less then 20% ammo => vehicle not ready
+def Vehicle_isReadyToFight(base, self, *args, **kwargs):
+    try:
+        if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfNoAmmo'):
+            return False
+    except Exception as ex:
+        err(traceback.format_exc())
+    return base.fget(self, *args, **kwargs) # base is property
+
 #####################################################################
 # Register events
 
 def _RegisterEvents():
     from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
     OverrideMethod(BarracksMeta, 'as_setTankmenS', BarracksMeta_as_setTankmenS)
+
+    from gui.shared.gui_items.Vehicle import Vehicle
+    OverrideMethod(Vehicle, 'isReadyToPrebattle', Vehicle_isReadyToPrebattle)
+    OverrideMethod(Vehicle, 'isReadyToFight', Vehicle_isReadyToFight)
 
 BigWorld.callback(0, _RegisterEvents)

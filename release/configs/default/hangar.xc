@@ -34,6 +34,9 @@
     // true - Enable removable equipment auto return (Camouflage net, Stereoscope, Toolbox)
     // true - Включить автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами)
     "enableEquipAutoReturn": false,
+    // true - Make vehicle not ready for battle if less than 20% ammo loaded
+    // true - Сделать машину не готовой к битве если заряжено менее 20% снарядов
+    "blockVehicleIfNoAmmo": true,
     // true - Enable widgets
     // true - включить виджеты
     "widgetsEnabled": false,
