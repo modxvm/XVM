@@ -7,14 +7,20 @@ package xvm.company
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import flash.utils.*;
     import net.wg.data.constants.generated.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
     import net.wg.gui.events.*;
     import net.wg.gui.prebattle.company.*;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class CompanyXvmView extends XvmViewBase
     {
+        private static const _name:String = "xvm_company";
+        private static const _ui_name:String = _name + "_ui.swf";
+        private static var _ui_swf_loaded:Boolean = false;
+
         public function CompanyXvmView(view:IView)
         {
             super(view);
@@ -32,20 +38,57 @@ package xvm.company
             if (Config.networkServicesSettings.statCompany != true)
                 return;
 
-            page.stack.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
+            App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
+
+            if (!_ui_swf_loaded)
+            {
+                _ui_swf_loaded = true;
+                Xfw.load_ui_swf(_name, _ui_name);
+            }
+            else
+            {
+                init();
+            }
+        }
+
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            if (!Config.networkServicesSettings.statCompany)
+                return;
+
+            App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
         }
 
         // PRIVATE
 
+        private function onLibLoaded(e:LibraryLoaderEvent):void
+        {
+            if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+            {
+                init();
+                setView(page.stack.currentView as IViewStackContent);
+            }
+        }
+
+        private function init():void
+        {
+            page.stack.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
+        }
+
         private function onViewChanged(e:ViewStackEvent):void
         {
-            switch (e.linkage)
+            setView(e.view);
+        }
+
+        private function setView(view:IViewStackContent):void
+        {
+            switch (getQualifiedClassName(view))
             {
                 case PREBATTLE_ALIASES.COMPANY_LIST_VIEW_UI:
-                    new CompanyList(e.view);
+                    new CompanyList(view);
                     break;
                 case PREBATTLE_ALIASES.COMPANY_ROOM_VIEW_UI:
-                    new CompanyRoom(e.view);
+                    new CompanyRoom(view);
                     break;
                 default:
                     //Logger.addObject(e);

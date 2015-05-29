@@ -30,7 +30,7 @@ package xvm.company
 
         private function init():void
         {
-            Logger.add("init: " + view.as_getPyAlias());
+            //Logger.add("init: " + view.as_getPyAlias());
 
             if (Config.networkServicesSettings.statCompany != true)
                 return;

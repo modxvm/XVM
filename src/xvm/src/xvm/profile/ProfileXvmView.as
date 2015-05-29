@@ -18,7 +18,6 @@ package xvm.profile
     {
         private static const _name:String = "xvm_profile";
         private static const _ui_name:String = _name + "_ui.swf";
-
         private static var _ui_swf_loaded:Boolean = false;
 
         public function ProfileXvmView(view:IView)
