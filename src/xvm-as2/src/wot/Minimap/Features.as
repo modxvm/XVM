@@ -100,7 +100,11 @@ class wot.Minimap.Features
     private function onSetStrategicPos(e:MinimapEvent)
     {
         if (strategicAimMarker == null)
+        {
+            if (e.entry == null)
+                return;
             strategicAimMarker = new StrategicAimMarker(e.entry);
+        }
         strategicAimMarker.updatePosition(e.entry);
     }
 

@@ -23,6 +23,7 @@ class wot.Minimap.view.StrategicAimMarker
 
         holder = IconsProxy.createEmptyMovieClip(CONTAINER_NAME, MinimapConstants.STRATEGIC_AIM_ZINDEX);
         holder.hitTestDisable = true;
+        holder._xscale = holder._yscale = Config.config.minimap.minimapAimIconScale;
 
         icon = (UILoaderAlt)(holder.attachMovie("UILoaderAlt", "icon", 0));
 
@@ -37,6 +38,10 @@ class wot.Minimap.view.StrategicAimMarker
     public function updatePosition(owner:MovieClip)
     {
         if (!holder)
+            return;
+
+        holder._visible = owner != null;
+        if (owner == null)
             return;
 
         if (prevPos != null && prevPos.xs == owner._xscale && prevPos.ys == owner._yscale && prevPos.x == owner._x && prevPos.y == owner._y)
@@ -56,7 +61,7 @@ class wot.Minimap.view.StrategicAimMarker
     private function icon_onLoadInit(mc:MovieClip)
     {
         icon.setSize(mc._width, mc._height);
-        icon._x = Math.round(mc._width / -2);
-        icon._y = Math.round(mc._height / -2);
+        icon._x = mc._width / -2.0;
+        icon._y = mc._height / -2.0;
     }
 }

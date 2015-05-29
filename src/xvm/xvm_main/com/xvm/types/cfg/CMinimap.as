@@ -14,6 +14,7 @@ package com.xvm.types.cfg
         public var cameraAlpha:Number;
         public var iconScale:Number;
         public var minimapAimIcon:String;
+        public var minimapAimIconScale:Number;
         public var zoom: CMinimapZoom;
         public var square:CMinimapSquare;
         public var circles: CMinimapCircles;

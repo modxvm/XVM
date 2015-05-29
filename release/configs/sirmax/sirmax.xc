@@ -41,6 +41,7 @@
     "hidePricesInTechTree": true,
     "masteryMarkInTechTree": true,
     "allowExchangeXPInTechTree": false,
+    "blockVehicleIfNoAmmo": true,
     //"enableCrewAutoReturn": false,
     //"crewReturnByDefault": true,
     "enableEquipAutoReturn": true,
