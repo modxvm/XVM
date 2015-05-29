@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.hangar_ui.battleResults
+package xvm.battleresults_ui
 {
     import com.xfw.*;
     import flash.events.*;

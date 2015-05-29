@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.hangar_ui.battleLoading.components
+package xvm.battleloading_ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
@@ -17,7 +17,7 @@ package xvm.hangar_ui.battleLoading.components
     import net.wg.gui.lobby.battleloading.*;
     import net.wg.gui.lobby.battleloading.vo.*;
     import scaleform.gfx.*;
-    import xvm.hangar_ui.battleLoading.*;
+    import xvm.battleloading_ui.*;
 
     public class BattleLoadingItemRenderer
     {

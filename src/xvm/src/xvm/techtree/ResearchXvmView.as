@@ -9,9 +9,13 @@ package xvm.techtree
     import net.wg.gui.lobby.techtree.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class ResearchXvmView extends XvmViewBase
     {
+        //private static const _name:String = "xvm_techtree";
+        //private static const _ui_name:String = _name + "_ui.swf";
+
         public function ResearchXvmView(view:IView)
         {
             super(view);
@@ -24,10 +28,27 @@ package xvm.techtree
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            init();
+            //App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
+
+            //if (Xfw.try_load_ui_swf(_name, _ui_name) == XfwConst.SWF_ALREADY_LOADED)
+                init();
         }
 
+        //override public function onBeforeDispose(e:LifeCycleEvent):void
+        //{
+        //    App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
+        //}
+
         // PRIVATE
+
+        //private function onLibLoaded(e:LibraryLoaderEvent):void
+        //{
+        //    if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+        //    {
+        //        init();
+        //        page.researchItems.invalidateData();
+        //    }
+        //}
 
         private function init():void
         {

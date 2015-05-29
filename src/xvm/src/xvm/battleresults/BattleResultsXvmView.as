@@ -2,7 +2,7 @@
  * XVM - battle resultes
  * @author Pavel Máca
  */
-package xvm.hangar
+package xvm.battleresults
 {
     import com.xfw.*;
     import com.xvm.*;
@@ -13,11 +13,11 @@ package xvm.hangar
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.events.*;
-    import xvm.hangar.battleResults.components.*;
+    import xvm.battleresults.components.*;
 
-    public class BattleResults extends XvmViewBase
+    public class BattleResultsXvmView extends XvmViewBase
     {
-        public function BattleResults(view:IView)
+        public function BattleResultsXvmView(view:IView)
         {
             super(view);
         }

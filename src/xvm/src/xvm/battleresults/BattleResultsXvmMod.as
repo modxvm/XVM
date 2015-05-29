@@ -2,23 +2,23 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.hangar
+package xvm.battleresults
 {
+    import net.wg.infrastructure.interfaces.IView;
     import com.xfw.*;
+    import com.xfw.infrastructure.IXfwView;
     import com.xvm.infrastructure.*;
 
-    public class HangarXvmMod extends XvmModBase
+    public class BattleResultsXvmMod extends XvmModBase
     {
         public override function get logPrefix():String
         {
-            return "[XVM:HANGAR]";
+            return "[XVM:BR]";
         }
 
         private static const _views:Object =
         {
-            "login": Login,
-            "lobby": Lobby,
-            "hangar": Hangar
+            "battleResults": BattleResultsXvmView
         }
 
         public override function get views():Object

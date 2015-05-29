@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.hangar.battleResults.components
+package xvm.battleresults.components
 {
     import com.xfw.*;
     import com.xvm.*;

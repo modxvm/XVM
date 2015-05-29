@@ -13,9 +13,9 @@ package xvm.hangar
     import net.wg.infrastructure.interfaces.*;
     import xvm.hangar.battleLoading.components.*;
 
-    public class BattleLoading extends XvmViewBase
+    public class BattleLoadingXvmView extends XvmViewBase
     {
-        public function BattleLoading(view:IView)
+        public function BattleLoadingXvmView(view:IView)
         {
             super(view);
         }

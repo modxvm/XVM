@@ -24,6 +24,7 @@ package xvm.tcarousel_ui
 
         public function UI_TankCarouselItemRenderer()
         {
+            //Logger.add("UI_TankCarouselItemRenderer()");
             super();
             cfg = Config.config.hangar.carousel;
             createExtraFields();

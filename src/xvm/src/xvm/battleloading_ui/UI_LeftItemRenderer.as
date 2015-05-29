@@ -2,16 +2,16 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.hangar_ui.battleLoading
+package xvm.battleloading_ui
 {
     import net.wg.gui.lobby.battleloading.vo.*;
-    import xvm.hangar_ui.battleLoading.components.*;
+    import xvm.battleloading_ui.components.*;
 
-    public dynamic class UI_RightItemRenderer extends RightItemRendererUI
+    public dynamic class UI_LeftItemRenderer extends LeftItemRendererUI
     {
         private var worker:BattleLoadingItemRenderer;
 
-        public function UI_RightItemRenderer()
+        public function UI_LeftItemRenderer()
         {
             super();
             worker = new BattleLoadingItemRenderer(this);

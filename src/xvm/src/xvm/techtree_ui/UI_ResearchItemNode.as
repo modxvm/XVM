@@ -11,6 +11,12 @@ package xvm.techtree_ui
 
     public dynamic class UI_ResearchItemNode extends ResearchItemNode
     {
+        public function UI_ResearchItemNode()
+        {
+            //Logger.add("UI_ResearchItemNode()");
+            super();
+        }
+
         override public function populateUI():void
         {
             if (Config.config.hangar.hidePricesInTechTree)

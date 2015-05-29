@@ -2,18 +2,16 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.hangar.battleResults.components
+package xvm.battleresults.components
 {
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.veh.*;
     import flash.events.*;
     import flash.text.*;
-    import flash.utils.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.battleResults.*;
-    import xvm.hangar_ui.battleResults.*;
 
     /**
      * @author Pavel Máca
@@ -78,7 +76,7 @@ package xvm.hangar.battleResults.components
 
         private function compactQuests():void
         {
-            view.progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
+            view.progressReport.linkage = "xvm.battleresults_ui::UI_BR_SubtaskComponent";
 
             // hide shadows
             view.upperShadow.visible = false;

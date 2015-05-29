@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <project version="2">
   <!-- Output SWF options -->
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_hangar\actionscript\xvm_hangar_ui.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_battleloading\actionscript\xvm_battleloading.swf" />
     <movie fps="30" />
     <movie width="1" />
     <movie height="1" />
@@ -74,7 +74,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\xvm\hangar_ui\HangarUIXvmMod.as" />
+    <compile path="src\xvm\battleloading\BattleLoadingXvmMod.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

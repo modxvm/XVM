@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.hangar_ui.battleLoading.components
+package xvm.battleloading_ui.components
 {
     import com.xfw.*;
     import com.xfw.components.*;

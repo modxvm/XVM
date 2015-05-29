@@ -19,6 +19,7 @@ package xvm.techtree_ui
 
         public function UI_NationTreeNodeSkinned()
         {
+            //Logger.add("UI_NationTreeNodeSkinned()");
             super();
             createControls();
         }

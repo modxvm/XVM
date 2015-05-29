@@ -44,7 +44,7 @@ package xvm.tcarousel_ui
 
         public function UI_TankCarousel()
         {
-            //Logger.add("UI_TankCarousel.ctor()");
+            //Logger.add("UI_TankCarousel()");
             super();
             init();
         }

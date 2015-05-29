@@ -2,24 +2,23 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.techtree
+package xvm.battleloading
 {
+    import net.wg.infrastructure.interfaces.IView;
     import com.xfw.*;
-    import com.xfw.infrastructure.*;
+    import com.xfw.infrastructure.IXfwView;
     import com.xvm.infrastructure.*;
-    import net.wg.infrastructure.interfaces.*;
 
-    public class TechTreeXvmMod extends XvmModBase
+    public class BattleLoadingXvmMod extends XvmModBase
     {
         public override function get logPrefix():String
         {
-            return "[XVM:TECHTREE]";
+            return "[XVM:BL]";
         }
 
         private static const _views:Object =
         {
-            "techtree": TechTreeXvmView,
-            "research": ResearchXvmView
+            "battleLoading": BattleLoadingXvmMod
         }
 
         override protected function processView(view:IView, populated:Boolean):IXfwView
@@ -27,9 +26,10 @@ package xvm.techtree
             // TODO: move to views
             if (view.as_alias == "hangar")
             {
-                const _name:String = "xvm_techtree";
+                super.entryPoint();
+                const _name:String = "xvm_hangar";
                 const _ui_name:String = _name + "_ui.swf";
-                const _preloads:Array = [ "nodesLib.swf" ];
+                const _preloads:Array = [ "battleLoading.swf" ];
                 Xfw.try_load_ui_swf(_name, _ui_name, _preloads);
             }
             return super.processView(view, populated);
