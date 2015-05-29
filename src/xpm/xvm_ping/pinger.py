@@ -98,7 +98,7 @@ class _Ping(object):
                 found = re.search(pattern, out)
                 if not found:
                     res[x['name']] = '?'
-                    err('Ping regexp not found in %s' % out.replace('\n', '\\n'))
+                    debug('Ping regexp not found in %s' % out.replace('\n', '\\n'))
                     continue
 
                 res[x['name']] = found.group(1)
