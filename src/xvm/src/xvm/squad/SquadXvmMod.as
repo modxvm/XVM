@@ -26,7 +26,7 @@ package xvm.squad
             const _name:String = "xvm_squad";
             const _ui_name:String = _name + "_ui.swf";
             const _preloads:Array = [ "squadWindow.swf" ];
-            Xfw.load_ui_swf(_name, _ui_name, _preloads);
+            Xfw.try_load_ui_swf(_name, _ui_name, _preloads);
         }
         */
 

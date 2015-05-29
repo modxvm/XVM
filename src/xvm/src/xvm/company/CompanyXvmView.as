@@ -19,7 +19,6 @@ package xvm.company
     {
         private static const _name:String = "xvm_company";
         private static const _ui_name:String = _name + "_ui.swf";
-        private static var _ui_swf_loaded:Boolean = false;
 
         public function CompanyXvmView(view:IView)
         {
@@ -40,15 +39,8 @@ package xvm.company
 
             App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
 
-            if (!_ui_swf_loaded)
-            {
-                _ui_swf_loaded = true;
-                Xfw.load_ui_swf(_name, _ui_name);
-            }
-            else
-            {
+            if (Xfw.try_load_ui_swf(_name, _ui_name) == XfwConst.SWF_ALREADY_LOADED)
                 init();
-            }
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void

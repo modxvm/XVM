@@ -14,9 +14,15 @@ package xvm.techtree
 
     public class TechTreeXvmView extends XvmViewBase
     {
+        private static const _name:String = "xvm_techtree";
+        private static const _ui_name:String = _name + "_ui.swf";
+
         public function TechTreeXvmView(view:IView)
         {
             super(view);
+
+            if (Xfw.try_load_ui_swf(_name, _ui_name) == XfwConst.SWF_ALREADY_LOADED)
+                init();
         }
 
         public function get page():TechTreePage

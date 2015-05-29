@@ -29,7 +29,7 @@ package xvm.hangar
             const _name:String = "xvm_hangar";
             const _ui_name:String = _name + "_ui.swf";
             const _preloads:Array = [ "battleLoading.swf", "battleResults.swf" ];
-            Xfw.load_ui_swf(_name, _ui_name, _preloads);
+            Xfw.try_load_ui_swf(_name, _ui_name, _preloads);
         }
 
         public override function get views():Object
