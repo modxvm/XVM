@@ -8,13 +8,18 @@ package xvm.battleloading
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.*;
+    import flash.utils.*;
     import net.wg.gui.lobby.battleloading.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import xvm.battleloading.components.*;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class BattleLoadingXvmView extends XvmViewBase
     {
+        private static const _name:String = "xvm_battleloading";
+        private static const _ui_name:String = _name + "_ui.swf";
+
         public function BattleLoadingXvmView(view:IView)
         {
             super(view);
@@ -33,23 +38,18 @@ package xvm.battleloading
 
             logBriefConfigurationInfo();
 
-            waitInit();
+            App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
+
+            if (Xfw.try_load_ui_swf(_name, _ui_name) == XfwConst.SWF_ALREADY_LOADED)
+                waitInit();
         }
 
-        private function waitInit():void
+        override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            if (!page.initialized)
-            {
-                App.utils.scheduler.envokeInNextFrame(waitInit);
+            if (!Config.networkServicesSettings.statCompany)
                 return;
-            }
 
-            init();
-        }
-
-        public override function onBeforeDispose(e:LifeCycleEvent):void
-        {
-            //Logger.add("onBeforeDispose: " + view.as_alias);
+            App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
         }
 
         // PRIVATE
@@ -65,6 +65,27 @@ package xvm.battleloading
                 "                               useStandardMarkers=" + Config.config.markers.useStandardMarkers + "\n" +
                 "                               servicesActive=" + Config.networkServicesSettings.servicesActive + "\n" +
                 "                               statBattle=" + Config.networkServicesSettings.statBattle);
+        }
+
+        private function onLibLoaded(e:LibraryLoaderEvent):void
+        {
+            if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+            {
+                waitInit();
+            }
+        }
+
+        private function waitInit():void
+        {
+            if (!page.initialized)
+            {
+                var $this:* = this;
+                setTimeout(function():void { $this.waitInit(); }, 1);
+            }
+            else
+            {
+                init();
+            }
         }
 
         private function init():void

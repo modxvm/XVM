@@ -21,20 +21,6 @@ package xvm.battleloading
             "battleLoading": BattleLoadingXvmView
         }
 
-        override protected function processView(view:IView, populated:Boolean):IXfwView
-        {
-            // TODO: move to views
-            if (view.as_alias == "hangar")
-            {
-                super.entryPoint();
-                const _name:String = "xvm_hangar";
-                const _ui_name:String = _name + "_ui.swf";
-                const _preloads:Array = [ "battleLoading.swf" ];
-                Xfw.try_load_ui_swf(_name, _ui_name, _preloads);
-            }
-            return super.processView(view, populated);
-        }
-
         public override function get views():Object
         {
             return _views;
