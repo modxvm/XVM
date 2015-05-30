@@ -189,7 +189,8 @@ def _initializeXvmToken():
         msg += '</textformat>'
 
         if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
-            SystemMessages.pushMessage(msg, type)
+            from gui.shared import g_eventBus, events
+            g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg':msg,'type':type}))
 
     if tdata is not None:
         _tdataPrev = tdata

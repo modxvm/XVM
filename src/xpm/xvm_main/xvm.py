@@ -46,6 +46,7 @@ class Xvm(object):
 
     def __init__(self):
         self.currentPlayerId = None
+        self.xvm_main_initialized = False
         self.lobbyFlashObject = None
         self.battleFlashObject = None
         self.vmmFlashObject = None
@@ -67,6 +68,12 @@ class Xvm(object):
                    config.config_str,
                    config.lang_str,
                    vehinfo.getVehicleInfoDataStr())
+
+    # System Message
+
+    def onSystemMessage(self, e=None):
+        SystemMessages.pushMessage(e.ctx.get('msg', None), e.ctx.get('type', None))
+
 
     # LOGIN
 
@@ -117,6 +124,7 @@ class Xvm(object):
             if self.lobbyFlashObject.loaderManager is not None:
                 self.lobbyFlashObject.loaderManager.onViewLoaded -= self.onViewLoaded
             self.lobbyFlashObject = None
+        self.xvm_main_initialized = False
 
 
     # HANGAR
@@ -395,6 +403,10 @@ class Xvm(object):
 
             if cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()
+                return (None, True)
+
+            if cmd == XVM_COMMAND.XVM_MAIN_INITIALIZED:
+                self.xvm_main_initialized = True
                 return (None, True)
 
             if cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
