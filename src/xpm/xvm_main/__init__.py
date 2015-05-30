@@ -241,6 +241,26 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
+def DynSquadEntityController_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
+    #log(playerVehVO)
+    if BigWorld.player().arena.guiType == 1: # ARENA_GUI_TYPE.RANDOM
+        squadIndex = playerVehVO.squadIndex
+        from gui.battle_control.arena_info.settings import INVALIDATE_OP
+        if flags & INVALIDATE_OP.PREBATTLE_CHANGED and squadIndex > 0:
+            from gui.battle_control import arena_info, avatar_getter
+            playerVehId = avatar_getter.getPlayerVehicleID()
+            squadMansToUpdate = arenaDP.getVehIDsByPrebattleID(playerVehVO.team, playerVehVO.prebattleID) or tuple()
+            isSelf = False
+            for vehicleId in squadMansToUpdate:
+                if vehicleId == playerVehId:
+                    isSelf = True
+                    break
+            for vehicleId in squadMansToUpdate:
+                vInfo = arenaDP.getVehicleInfo(vehicleId)
+                #log(vInfo)
+                name = vInfo.player.name
+                g_xvm.updateDynamicSquad(name, vehicleId, squadIndex, isSelf)
+
 
 '''#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
 #    debug('_CustomFilesCache__get')
@@ -345,6 +365,9 @@ def _RegisterEvents():
 
     from BattleReplay import g_replayCtrl
     g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
+
+    from gui.battle_control.dyn_squad_arena_controllers import DynSquadEntityController
+    RegisterEvent(DynSquadEntityController, 'invalidateVehicleInfo', DynSquadEntityController_invalidateVehicleInfo)
 
     # import account_helpers.CustomFilesCache as cache
     # cache._MIN_LIFE_TIME = 15

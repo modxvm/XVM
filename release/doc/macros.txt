@@ -37,7 +37,7 @@ Legend:
 │ S │ {{nation}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle nation
 │ S │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
 │ S │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
-│ S │ {{squad}}          │ X │ X │ X │ X │ X │ X │ X │ value 'sq' for own squad, empty for others
+│ D │ {{squad}}          │ X │ X │ X │ X │ X │ X │ X │ value 'sq' for own squad, empty for others
 │ D │ {{frags}}          │   │ X │ X │ X │ X │   │   │ current frags
 │ D │ {{ready}}          │ X │ X │ X │ X │ X │   │   │ value 'ready' if player loaded to the game, '' if not
 │ D │ {{alive}}          │ X │ X │ X │ X │ X │ X │ X │ value 'alive' for alive, '' for dead
@@ -56,7 +56,7 @@ Legend:
 │ D │ {{a:hp}}           │   │ X │ X │ X │ X │ X │ X │ transparency depending on current health points (only in vehicle markers)
 │ D │ {{a:hp-ratio}}     │   │ X │ X │ X │ X │ X │ X │ transparency depending on current health ratio (only in vehicle markers)
 │ D │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
-│ S │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
+│ D │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ Flag for player selected in the personal cabinet or determined from the client language
 │ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ Global map clan rating, from 1 to 1000 (http://worldoftanks.eu/leaderboard/clans/)

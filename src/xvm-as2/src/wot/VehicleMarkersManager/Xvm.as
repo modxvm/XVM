@@ -198,9 +198,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
      */
     function update()
     {
-        //trace("Xvm::update()");
-        // TODO: check // Update Color Blind mode
-        // TODO: check vehicleTypeComponent.updateMarkerLabel();
         XVMUpdateStyle();
     }
 

@@ -231,9 +231,10 @@ class wot.battle.BattleMain
         }
     }
 
-    private function onDynamicSquadCreated()
+    private function onDynamicSquadCreated(playerName:String, squadIndex:Number, isSelf:Boolean)
     {
-        Macros.UpdateDynamicSquad.apply(null, arguments);
+        Macros.UpdateDynamicSquad(playerName, squadIndex, isSelf);
+        GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
     }
 
     private var debugTextField:TextField = null;

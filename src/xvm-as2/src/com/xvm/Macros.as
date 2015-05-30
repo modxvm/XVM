@@ -75,9 +75,9 @@ class com.xvm.Macros
         return true;
     }
 
-    public static function UpdateDynamicSquad(pname:String, data)
+    public static function UpdateDynamicSquad(playerName:String, squadIndex:Number, isSelf:Boolean)
     {
-        _instance._UpdateDynamicSquad(pname, data);
+        _instance._UpdateDynamicSquad(playerName, squadIndex, isSelf);
     }
 
     // PRIVATE
@@ -299,6 +299,17 @@ class com.xvm.Macros
             }
 
             res += FormatMacro(macro, parts, value, vehId, options);
+        }
+
+        if (isStaticMacro)
+        {
+            switch (macroName)
+            {
+                case "squad":
+                case "squad-num":
+                    isStaticMacro = false;
+                    break;
+            }
         }
 
         return res;
@@ -1102,9 +1113,18 @@ class com.xvm.Macros
         pdata["a:tsb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
     }
 
-    private function _UpdateDynamicSquad()
+    private function _UpdateDynamicSquad(pname:String, squadIndex:Number, isSelf:Boolean)
     {
-        Logger.addObject(arguments, 2, "TODO: _UpdateDynamicSquad");
+        if (!m_dict.hasOwnProperty(pname))
+            return;
+        var pdata = m_dict[pname];
+
+        // {{squad}}
+        pdata["squad"] = isSelf ? "sq" : null;
+        // {{squad-num}}
+        pdata["squad-num"] = squadIndex > 0 ? squadIndex : null;
+
+        //Logger.add(pname + " | " + pdata["squad"] + " | " + pdata["squad-num"]);
     }
 
     private function _RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)

@@ -28,10 +28,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     /////////////////////////////////////////////////////////////////
 
+    // Public members
+    public var m_playerName:String;
+
     // Private members
     private var m_vehicleName:String;
     private var m_level:Number;
-    private var m_playerName:String;
     private var m_playerClan:String;
     private var m_playerRegion:String;
     private var m_curHealth:Number;

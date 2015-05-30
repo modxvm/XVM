@@ -48,31 +48,13 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
                     marker.marker.marker.icon["_xvm_colorized"] = false;
                 marker.m_markerLabel = "";
                 marker.updateMarkerLabel();
-                //var e = marker.m_entityName;
-                //marker.setEntityName("");
-                //marker.setEntityName(e);
                 marker.update();
-/*                if (Config.config.markers.useStandardMarkers == true)
-                {
-                    marker.marker.marker.icon["_xvm_colorized"] = false;
-                    marker.initMarkerLabel();
-                    marker.update();
-                }
-                else
-                {
-                    var x:wot.VehicleMarkersManager.Xvm = wot.VehicleMarkersManager.Xvm(marker);
-                    if (x != null)
-                    {
-                        x.vehicleTypeComponent.
-                        x.update();
-                    }
-                }*/
             }
         }
     }
 
-    private function onDynamicSquadCreated()
+    private function onDynamicSquadCreated(playerName:String, squadIndex:Number, isSelf:Boolean)
     {
-        Macros.UpdateDynamicSquad.apply(null, arguments);
+        Macros.UpdateDynamicSquad(playerName, squadIndex, isSelf);
     }
 }
