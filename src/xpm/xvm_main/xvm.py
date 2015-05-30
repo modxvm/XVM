@@ -47,6 +47,7 @@ class Xvm(object):
     def __init__(self):
         self.currentPlayerId = None
         self.xvm_main_initialized = False
+        self.xvm_svcmsg_initialized = False
         self.lobbyFlashObject = None
         self.battleFlashObject = None
         self.vmmFlashObject = None
@@ -72,7 +73,14 @@ class Xvm(object):
     # System Message
 
     def onSystemMessage(self, e=None):
-        SystemMessages.pushMessage(e.ctx.get('msg', None), e.ctx.get('type', None))
+        is_svcmsg = 'swf_file_name' in xfw_mods_info.info.get('xvm_svcmsg', {})
+        if is_svcmsg and not self.xvm_svcmsg_initialized:
+            BigWorld.callback(0.1, lambda:self.onSystemMessage(e))
+            return
+
+        msg = e.ctx.get('msg', '')
+        type = e.ctx.get('type', SystemMessages.SM_TYPE.Information)
+        SystemMessages.pushMessage(msg, type)
 
 
     # LOGIN
@@ -125,6 +133,7 @@ class Xvm(object):
                 self.lobbyFlashObject.loaderManager.onViewLoaded -= self.onViewLoaded
             self.lobbyFlashObject = None
         self.xvm_main_initialized = False
+        self.xvm_svcmsg_initialized = False
 
 
     # HANGAR
@@ -407,6 +416,10 @@ class Xvm(object):
 
             if cmd == XVM_COMMAND.XVM_MAIN_INITIALIZED:
                 self.xvm_main_initialized = True
+                return (None, True)
+
+            if cmd == XVM_COMMAND.XVM_SVCMSG_INITIALIZED:
+                self.xvm_svcmsg_initialized = True
                 return (None, True)
 
             if cmd == XVM_COMMAND.GET_BATTLE_LEVEL:

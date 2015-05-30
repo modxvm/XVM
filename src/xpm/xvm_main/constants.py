@@ -33,6 +33,7 @@ class XVM_EVENT(object):
 class XVM_COMMAND(object):
     REQUEST_CONFIG = "xvm.request_config"
     XVM_MAIN_INITIALIZED = "xvm.xvm_main_initialized"
+    XVM_SVCMSG_INITIALIZED = "xvm.xvm_svcmsg_initialized"
     GET_BATTLE_LEVEL = "xvm.get_battle_level"
     GET_BATTLE_TYPE = "xvm.get_battle_type"
     REQUEST_DOSSIER = "xvm.request_dossier"
