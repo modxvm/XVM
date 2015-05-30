@@ -113,7 +113,6 @@ class com.xvm.Defines
     public static var E_UPDATE_STAGE = "update_stage";
     public static var E_LEFT_PANEL_SIZE_ADJUSTED = "left_panel_size_adjusted";
     public static var E_RIGHT_PANEL_SIZE_ADJUSTED = "right_panel_size_adjusted";
-    public static var E_UPDATE_SELF_HEALTH = "update_self_health";
     public static var E_MOVING_STATE_CHANGED = "moving_state_changed";
     public static var E_MODULE_DESTROYED = "module_destroyed";
     public static var E_MODULE_REPAIRED = "module_repaired";
