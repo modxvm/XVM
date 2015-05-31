@@ -72,11 +72,11 @@ class Xvm(object):
 
     # System Message
 
-    def onSystemMessage(self, e=None):
+    def onSystemMessage(self, e=None, cnt=0):
         #log('onSystemMessage')
         is_svcmsg = 'swf_file_name' in xfw_mods_info.info.get('xvm_svcmsg', {})
-        if is_svcmsg and not self.xvm_svcmsg_initialized:
-            BigWorld.callback(0.1, lambda:self.onSystemMessage(e))
+        if cnt < 50 and is_svcmsg and not self.xvm_svcmsg_initialized:
+            BigWorld.callback(0.1, lambda:self.onSystemMessage(e, cnt+1))
             return
 
         msg = e.ctx.get('msg', '')
