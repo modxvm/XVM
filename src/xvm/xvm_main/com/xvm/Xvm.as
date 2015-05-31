@@ -40,7 +40,6 @@ package com.xvm
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_SVC_SETTINGS, onSetSvcSettings);
             Xfw.cmd(XvmCommandsInternal.REQUEST_CONFIG);
-            Xfw.cmd(XvmCommandsInternal.XVM_MAIN_INITIALIZED);
         }
 
         // DAAPI Python-Flash interface

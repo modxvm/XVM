@@ -14,12 +14,5 @@ package xvm.svcmsg_ui
     {
         UI_ServiceMessageIR;
         UI_ServiceMessagePopUp;
-
-        private static const XVM_SVCMSG_INITIALIZED:String = "xvm.xvm_svcmsg_initialized";
-
-        override public function entryPoint():void
-        {
-            Xfw.cmd(XVM_SVCMSG_INITIALIZED);
-        }
     }
 }
