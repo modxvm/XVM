@@ -397,9 +397,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                         formatDynamicText(tfi.format, m_curHealth) + "</font></p></textformat>";
 
                     if (tfi.x != null)
-                        tfi.field._x = parseInt(formatDynamicText(tfi.x, m_curHealth));
+                        tfi.field._x = parseInt(formatDynamicText(tfi.x, m_curHealth)) - (tfi.field._width / 2.0);
                     if (tfi.y != null)
-                        tfi.field._y = parseInt(formatDynamicText(tfi.y, m_curHealth));
+                        tfi.field._y = parseInt(formatDynamicText(tfi.y, m_curHealth)) - (/*tfi.field._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
 
                     tfi.field._alpha = formatDynamicAlpha(tfi.alpha, m_curHealth);
 
