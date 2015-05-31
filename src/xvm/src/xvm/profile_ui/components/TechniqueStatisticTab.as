@@ -10,6 +10,7 @@ package xvm.profile_ui.components
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
     import com.xvm.utils.*;
+    import flash.display.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
@@ -196,8 +197,8 @@ package xvm.profile_ui.components
             ratingTF = _createTextField(210, -1, 400, 200, 14);
             proxy.addChild(ratingTF);
 
-            winsToPercentTF = _createTextField(130, 120, 200, 25, 14);
-            proxy.addChild(winsToPercentTF);
+            winsToPercentTF = _createTextField(130, 69, 200, 25, 14);
+            Sprite(proxy.scrollPane.target).addChild(winsToPercentTF);
 
             /*
             if (Config.config.userInfo.showExtraDataInProfile)
