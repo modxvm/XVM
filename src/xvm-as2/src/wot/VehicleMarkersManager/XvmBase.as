@@ -170,6 +170,7 @@ class wot.VehicleMarkersManager.XvmBase
 
             textField.multiline = true;
             textField.wordWrap = false;
+            textField.selectable = false;
 
             //textField.border = true;
             //textField.borderColor = 0xFFFFFF;
@@ -197,14 +198,28 @@ class wot.VehicleMarkersManager.XvmBase
             }
 
             textField._alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
-            textField._x = (isNaN(cfg.x) ? parseInt(formatStaticText(cfg.x)) : cfg.x) - (textField._width / 2.0);
-            textField._y = (isNaN(cfg.y) ? parseInt(formatStaticText(cfg.y)) : cfg.y) - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
             textField._visible = cfg.visible;
+
+            var cfg_x = cfg.x;
+            if (isNaN(cfg_x))
+                cfg_x = formatStaticText(cfg_x);
+            var x:Number = isNaN(cfg_x) ? parseInt(cfg_x) : cfg_x;
+            if (!isNaN(x))
+                textField._x = x - (textField._width / 2.0);
+
+            var cfg_y = cfg.y;
+            if (isNaN(cfg_y))
+                cfg_y = formatStaticText(cfg_y);
+            var y:Number = isNaN(cfg_y) ? parseInt(cfg_y) : cfg_y;
+            if (!isNaN(y))
+                textField._y = y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
 
             return {
                 field: textField,
                 format: formatStaticText(cfg.format),
                 color: cfg_color_format_static,
+                x: isNaN(x) ? cfg_x : null,
+                y: isNaN(y) ? cfg_y : null,
                 alpha: cfg.alpha,
                 shadow: shadow,
                 sh_color: sh_color_format_static,

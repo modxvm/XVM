@@ -395,6 +395,12 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                     tfi.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +
                         "<font color='#" + formatDynamicColor(tfi.color, m_curHealth).toString(16) + "'>" +
                         formatDynamicText(tfi.format, m_curHealth) + "</font></p></textformat>";
+
+                    if (tfi.x != null)
+                        tfi.field._x = parseInt(formatDynamicText(tfi.x, m_curHealth));
+                    if (tfi.y != null)
+                        tfi.field._y = parseInt(formatDynamicText(tfi.y, m_curHealth));
+
                     tfi.field._alpha = formatDynamicAlpha(tfi.alpha, m_curHealth);
 
                     tfi.shadow.color = formatDynamicColor(tfi.sh_color, m_curHealth);
