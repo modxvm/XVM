@@ -391,7 +391,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                 var st = vehicleState.getCurrentState();
                 for (var i in textFields[st])
                 {
-                    var tfi = textFields[st][i];
+                    var tfi:TextField = textFields[st][i];
                     tfi.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +
                         "<font color='#" + formatDynamicColor(tfi.color, m_curHealth).toString(16) + "'>" +
                         formatDynamicText(tfi.format, m_curHealth) + "</font></p></textformat>";
@@ -465,7 +465,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     {
         Cmd.profMethodStart("Xvm.XVMUpdateStyle()");
 
-        //trace("XVMUpdateStyle: " + m_playerName + m_vname + " " + " scale=" + proxy.marker._xscale);
+        //Logger.add("XVMUpdateStyle: " + m_playerName + " " + m_vname + " " + Macros.Format(m_playerName, "{{squad}}"));
         try
         {
             //var start = new Date(); // for debug

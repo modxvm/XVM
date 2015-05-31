@@ -779,7 +779,8 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("squad") && data.hasOwnProperty("squad"))
         {
             // {{squad}}
-            pdata["squad"] = data.squad > 10 ? "sq" : null;
+            var squad = data.squad > 10 ? "sq" : null;
+            pdata["squad"] = function() { return squad; }
         }
 
         // Dynamic macros
@@ -915,7 +916,8 @@ class com.xvm.Macros
         pdata["region"] = Config.config.region;
 
         // {{squad-num}}
-        pdata["squad-num"] = stat.squadnum > 0 ? stat.squadnum : null;
+        var squadnum = stat.squadnum > 0 ? stat.squadnum : null;
+        pdata["squad-num"] = function() { return squadnum; }
         // {{xvm-user}}
         pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
         // {{flag}}
@@ -1120,9 +1122,11 @@ class com.xvm.Macros
         var pdata = m_dict[pname];
 
         // {{squad}}
-        pdata["squad"] = isSelf ? "sq" : null;
+        var squad = isSelf ? "sq" : null;
+        pdata["squad"] = function() { return squad; }
         // {{squad-num}}
-        pdata["squad-num"] = squadIndex > 0 ? squadIndex : null;
+        var squadnum = squadIndex > 0 ? squadIndex : null;
+        pdata["squad-num"] = function() { return squadnum; }
 
         //Logger.add(pname + " | " + pdata["squad"] + " | " + pdata["squad-num"]);
     }
