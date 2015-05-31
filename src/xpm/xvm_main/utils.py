@@ -66,26 +66,32 @@ def compareVersions(v1, v2):
         v1 = v1.replace('-', '.')
         v2 = v2.replace('-', '.')
 
-        a = v1.split('.')
-        while len(a) < 4:
-            a.append('0')
+        aa = v1.split('.')
+        while len(aa) < 4:
+            aa.append('0')
 
-        b = v2.split('.')
-        while len(b) < 4:
-            b.append('0')
+        ba = v2.split('.')
+        while len(ba) < 4:
+            ba.append('0')
 
         for i in xrange(4):
-            da = a[i].isdigit()
-            db = b[i].isdigit()
+            a = aa[i]
+            b = ba[i]
+            da = a.isdigit()
+            db = b.isdigit()
+            if a == 'dev':
+                return -1
+            if b == 'dev':
+                return 1
             if not da and not db:
-                return 0 if a[i] == b[i] else -1 if a[i] < b[i] else 1
+                return 0 if a == b else -1 if a < b else 1
             if not da:
                 return -1
             if not db:
                 return 1
-            if int(a[i]) < int(b[i]):
+            if int(a) < int(b):
                 return -1
-            if int(a[i]) > int(b[i]):
+            if int(a) > int(b):
                 return 1
     except Exception, ex:
         # err(traceback.format_exc())

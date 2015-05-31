@@ -1,4 +1,4 @@
-﻿XVM-6.1.2-beta2:
+﻿XVM-6.1.2-rc2:
   * new options:
       "hangar"/"blockVehicleIfNoAmmo" - make vehicle not ready for battle if less than 20% ammo loaded
       "minimap"/"minimapAimIconScale" - scale factor for the minimap aim icon
