@@ -39,7 +39,6 @@ class wot.battle.BattleMain
 
         ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
         ExternalInterface.addCallback(Cmd.RESPOND_BATTLE_STATE, instance, instance.onBattleStateChanged);
-        ExternalInterface.addCallback(Cmd.RESPOND_DYNAMIC_SQUAD_CREATED, instance, instance.onDynamicSquadCreated);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
 
         // TODO: dirty hack
@@ -229,12 +228,6 @@ class wot.battle.BattleMain
         {
             Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
         }
-    }
-
-    private function onDynamicSquadCreated(playerName:String, squadIndex:Number, isSelf:Boolean)
-    {
-        Macros.UpdateDynamicSquad(playerName, squadIndex, isSelf);
-        GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
     }
 
     private var debugTextField:TextField = null;

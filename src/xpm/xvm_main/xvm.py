@@ -383,23 +383,16 @@ class Xvm(object):
         if stat is not None:
             my_frags = stat['frags']
 
-        #debug('updateVehicleStatus: {0} st={1} fr={2}'.format(vID, status, frags))
-        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags, my_frags])
+        vInfo = utils.getVehicleInfo(vID)
+        squadIndex = vInfo.squadIndex
+        from gui.battle_control import g_sessionProvider
+        arenaDP = g_sessionProvider.getCtx().getArenaDP()
+        squadIndex = vInfo.squadIndex
+        if arenaDP.isSquadMan(vID):
+            squadIndex += 10
 
-
-    def updateDynamicSquad(self, playerName, vehicleId, squadIndex, isSelf):
-        if self.battleFlashObject is not None:
-            movie = self.battleFlashObject.movie
-            if movie is not None:
-                movie.invoke((AS2RESPOND.DYNAMIC_SQUAD_CREATED, playerName, squadIndex, isSelf))
-
-        if self.vmmFlashObject is not None:
-            movie = self.vmmFlashObject.movie
-            if movie is not None:
-                movie.invoke((AS2RESPOND.DYNAMIC_SQUAD_CREATED, playerName, squadIndex, isSelf))
-            vehicle = BigWorld.entity(vehicleId)
-            if vehicle is not None and hasattr(vehicle, 'marker'):
-                self.vmmFlashObject.invokeMarker(vehicle.marker, 'update', [])
+        #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vID, status, frags, squadIndex))
+        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags, my_frags, squadIndex])
 
 
     # PRIVATE
@@ -519,6 +512,7 @@ class Xvm(object):
                             v.publicInfo.marksOnGun,
                             vInfo.vehicleStatus,
                             vStats.frags,
+                            vInfo.squadIndex,
                         ])
             elif function not in ['showExInfo']:
                 # debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))

@@ -75,11 +75,6 @@ class com.xvm.Macros
         return true;
     }
 
-    public static function UpdateDynamicSquad(playerName:String, squadIndex:Number, isSelf:Boolean)
-    {
-        _instance._UpdateDynamicSquad(playerName, squadIndex, isSelf);
-    }
-
     // PRIVATE
 
     private static var PART_NAME:Number = 0;
@@ -779,8 +774,7 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("squad") && data.hasOwnProperty("squad"))
         {
             // {{squad}}
-            var squad = data.squad > 10 ? "sq" : null;
-            pdata["squad"] = function() { return squad; }
+            pdata["squad"] = function(o) { return o.squad > 10 ? "sq" : null; }
         }
 
         // Dynamic macros
@@ -916,8 +910,7 @@ class com.xvm.Macros
         pdata["region"] = Config.config.region;
 
         // {{squad-num}}
-        var squadnum = stat.squadnum > 0 ? stat.squadnum : null;
-        pdata["squad-num"] = function() { return squadnum; }
+        pdata["squad-num"] = function(o) { return o.squad > 10 ? o.squad - 10 : o.squad > 0 ? o.squad : null; }
         // {{xvm-user}}
         pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
         // {{flag}}
@@ -1113,22 +1106,6 @@ class com.xvm.Macros
         pdata["a:tfb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
         // {{a:tsb}}
         pdata["a:tsb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
-    }
-
-    private function _UpdateDynamicSquad(pname:String, squadIndex:Number, isSelf:Boolean)
-    {
-        if (!m_dict.hasOwnProperty(pname))
-            return;
-        var pdata = m_dict[pname];
-
-        // {{squad}}
-        var squad = isSelf ? "sq" : null;
-        pdata["squad"] = function() { return squad; }
-        // {{squad-num}}
-        var squadnum = squadIndex > 0 ? squadIndex : null;
-        pdata["squad-num"] = function() { return squadnum; }
-
-        //Logger.add(pname + " | " + pdata["squad"] + " | " + pdata["squad-num"]);
     }
 
     private function _RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)

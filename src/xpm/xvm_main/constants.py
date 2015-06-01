@@ -66,7 +66,6 @@ class AS2COMMAND(object):
 class AS2RESPOND(object):
     BATTLE_STATE = "xvm.battle_state"
     BATTLE_STAT_DATA = "xvm.battle_stat_data"
-    DYNAMIC_SQUAD_CREATED = "xvm.dynamic_squad_created"
     CONFIG = "xvm.config"
     KEY_EVENT = "xvm.keyevent"
 
@@ -85,6 +84,7 @@ class INV(object):
 
     MARKER_STATUS       = 0x0100
     MARKER_FRAGS        = 0x0200
+    MARKER_SQUAD        = 0x0400
     MARKER_ALL          = 0xFF00
 
     ALL                 = 0xFFFF

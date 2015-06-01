@@ -44,6 +44,7 @@ class wot.VehicleMarkersManager.XvmBase
     public var m_playerId:Number;
     public var m_marksOnGun:Number;
     public var m_frags:Number;
+    public var m_squad:Number;
     public var m_isReady:Boolean;
     public var m_isDead:Boolean;
     public var m_showExInfo:Boolean;
@@ -115,7 +116,8 @@ class wot.VehicleMarkersManager.XvmBase
             teamKiller:m_entityName == "teamKiller",
             playerId:m_playerId,
             marksOnGun:m_marksOnGun,
-            frags:m_frags
+            frags:m_frags,
+            squad:m_squad
         };
         return Strings.trim(Macros.Format(m_playerName, format, obj));
     }

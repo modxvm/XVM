@@ -241,25 +241,16 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
+
 def DynSquadEntityController_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
     #log(playerVehVO)
     if BigWorld.player().arena.guiType == 1: # ARENA_GUI_TYPE.RANDOM
-        squadIndex = playerVehVO.squadIndex
         from gui.battle_control.arena_info.settings import INVALIDATE_OP
-        if flags & INVALIDATE_OP.PREBATTLE_CHANGED and squadIndex > 0:
-            from gui.battle_control import arena_info, avatar_getter
-            playerVehId = avatar_getter.getPlayerVehicleID()
-            squadMansToUpdate = arenaDP.getVehIDsByPrebattleID(playerVehVO.team, playerVehVO.prebattleID) or tuple()
-            isSelf = False
-            for vehicleId in squadMansToUpdate:
-                if vehicleId == playerVehId:
-                    isSelf = True
-                    break
-            for vehicleId in squadMansToUpdate:
-                vInfo = arenaDP.getVehicleInfo(vehicleId)
-                #log(vInfo)
-                name = vInfo.player.name
-                g_xvm.updateDynamicSquad(name, vehicleId, squadIndex, isSelf)
+        if flags & INVALIDATE_OP.PREBATTLE_CHANGED and playerVehVO.squadIndex > 0:
+            isEnemy = playerVehVO.team != arenaDP.getNumberOfTeam()
+            for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(isEnemy)):
+                if vInfoVO.squadIndex > 0:
+                    g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD)
 
 
 '''#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):

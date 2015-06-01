@@ -209,7 +209,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
         pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
         hunt:Boolean, entityType:String, isFlagBearer:Boolean):Void
-        /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
+        /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number, squad:Number*/
     {
         /**
          * Invoked on new marker creation.

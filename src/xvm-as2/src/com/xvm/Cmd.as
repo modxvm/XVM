@@ -19,7 +19,6 @@ class com.xvm.Cmd
 
     public static var RESPOND_BATTLE_STAT_DATA:String = "xvm.battle_stat_data";
     public static var RESPOND_BATTLE_STATE:String = "xvm.battle_state";
-    public static var RESPOND_DYNAMIC_SQUAD_CREATED:String = "xvm.dynamic_squad_created";
 
     public static function log(str:String)
     {
