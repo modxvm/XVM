@@ -558,6 +558,7 @@ package xvm.tcarousel_ui
                 levelFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
 
                 prefFilter = vehicleFilters.addChild(new PrefMultiSelectionDropDown()) as PrefMultiSelectionDropDown;
+                prefFilter.menuWidth = 200;
                 prefFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
 
                 /*

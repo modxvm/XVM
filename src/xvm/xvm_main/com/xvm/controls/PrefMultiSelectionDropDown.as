@@ -31,7 +31,5 @@ package com.xvm.controls
             menuRowCount = dp.length;
             menuDirection = "up";
         }
-
     }
-
 }
