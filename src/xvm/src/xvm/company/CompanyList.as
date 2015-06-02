@@ -35,6 +35,8 @@ package xvm.company
         {
             //Logger.add("init: " + view.as_getPyAlias());
 
+            view.division.menuRowCount = 7; // fix WG issue
+
             if (Config.networkServicesSettings.statCompany != true)
                 return;
 
