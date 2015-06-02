@@ -191,6 +191,7 @@
     "MultiXP": "Multi XP",
     "NoMaster": "No master",
     "CompleteCrew": "Complete crew",
+    "NonDomination": "Remove \"domination\"",
 
     // Comments
     "Network services unavailable": "Network services unavailable",
