@@ -1,0 +1,39 @@
+diff --git a/External/Tools/FDBuild/Building/AS2/AS2ProjectBuilder.cs b/External/Tools/FDBuild/Building/AS2/AS2ProjectBuilder.cs
+index 7067b64..4fb1dfd 100644
+--- a/External/Tools/FDBuild/Building/AS2/AS2ProjectBuilder.cs
++++ b/External/Tools/FDBuild/Building/AS2/AS2ProjectBuilder.cs
+@@ -33,7 +33,7 @@ namespace ProjectManager.Building.AS2
+                 if (File.Exists(mtascPath))
+ 					return mtascPath;
+ 				else
+-					return "mtasc.exe"; // hope you have it in your environment path!
++					return "mtasc"; // hope you have it in your environment path!
+ 			}
+ 		}
+ 		#endregion
+diff --git a/External/Tools/FDBuild/Program.cs b/External/Tools/FDBuild/Program.cs
+index 68cf647..542b7b6 100644
+--- a/External/Tools/FDBuild/Program.cs
++++ b/External/Tools/FDBuild/Program.cs
+@@ -47,7 +47,7 @@ namespace FDBuild
+             if (File.Exists(Path.Combine(swfmillPath, "swfmill.exe")))
+                 SwfmillLibraryBuilder.ExecutablePath = Path.Combine(swfmillPath, "swfmill.exe");
+             else
+-                SwfmillLibraryBuilder.ExecutablePath = "swfmill.exe"; // hope you have it in your environment path!
++                SwfmillLibraryBuilder.ExecutablePath = "swfmill"; // hope you have it in your environment path!
+ 
+             try
+             {
+diff --git a/PluginCore/PluginCore/Helpers/JvmConfigHelper.cs b/PluginCore/PluginCore/Helpers/JvmConfigHelper.cs
+index a538661..a12e5b2 100644
+--- a/PluginCore/PluginCore/Helpers/JvmConfigHelper.cs
++++ b/PluginCore/PluginCore/Helpers/JvmConfigHelper.cs
+@@ -44,7 +44,7 @@ namespace PluginCore.Helpers
+         }
+         public static string GetJavaEXE(Dictionary<string, string> jvmConfig, string flexSdkPath)
+         {
+-            string defaultExe = "java.exe";
++            string defaultExe = "java";
+             string home = GetJavaHome(jvmConfig, flexSdkPath);
+             if (!String.IsNullOrEmpty(home) && !home.StartsWith("%"))
+             {
