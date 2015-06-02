@@ -47,6 +47,7 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         wrapper.col3.html = true;
         wrapper.col3._y = 0;
+        wrapper.col3._x += (team == Defines.TEAM_ALLY) ? 8 : -8;
         wrapper.col3._height = wrapper._height;
         wrapper.col3.verticalAlign = "center";
         wrapper.col3.verticalAutoSize = true;

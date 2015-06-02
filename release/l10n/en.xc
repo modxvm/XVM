@@ -114,6 +114,7 @@
     "view_range/stereoscope": "with stereoscope",
     "radio_range/base": "base",
     "radio_range/actual": "actual",
+    "lowAmmo": "Low ammo",
     "shootingRadius": "Shooting radius",
     "pitchLimits": "Elevation arc",
     "pitchLimitsSide": "Elevation arc (side)",

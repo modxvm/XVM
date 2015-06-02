@@ -16,6 +16,9 @@ package xvm.battleloading.components
 
         public function Clock(page:BattleLoading)
         {
+            if (!page.form.helpTip.visible)
+                return;
+
             var format:String = Config.config.battleLoading.clockFormat;
             if (!format || format == "")
                 return;

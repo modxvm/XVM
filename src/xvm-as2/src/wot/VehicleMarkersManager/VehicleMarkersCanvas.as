@@ -34,7 +34,6 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, onConfigLoaded);
         ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
-        ExternalInterface.addCallback(Cmd.RESPOND_DYNAMIC_SQUAD_CREATED, this, onDynamicSquadCreated);
     }
 
     private function onConfigLoaded()
@@ -48,31 +47,8 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
                     marker.marker.marker.icon["_xvm_colorized"] = false;
                 marker.m_markerLabel = "";
                 marker.updateMarkerLabel();
-                //var e = marker.m_entityName;
-                //marker.setEntityName("");
-                //marker.setEntityName(e);
                 marker.update();
-/*                if (Config.config.markers.useStandardMarkers == true)
-                {
-                    marker.marker.marker.icon["_xvm_colorized"] = false;
-                    marker.initMarkerLabel();
-                    marker.update();
-                }
-                else
-                {
-                    var x:wot.VehicleMarkersManager.Xvm = wot.VehicleMarkersManager.Xvm(marker);
-                    if (x != null)
-                    {
-                        x.vehicleTypeComponent.
-                        x.update();
-                    }
-                }*/
             }
         }
-    }
-
-    private function onDynamicSquadCreated()
-    {
-        Macros.UpdateDynamicSquad.apply(null, arguments);
     }
 }

@@ -71,6 +71,23 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
         err(traceback.format_exc())
     return base.fget(self, *args, **kwargs) # base is property
 
+# less then 20% ammo => vehicle not ready (disable red button)
+def _PrebattleDispatcher_canPlayerDoAction(base, self, *args, **kwargs):
+    try:
+        from CurrentVehicle import g_currentVehicle
+        if not g_currentVehicle.isReadyToFight() and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfNoAmmo'):
+            from gui.prb_control.settings import PREBATTLE_RESTRICTION
+            return (False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
+    except Exception as ex:
+        err(traceback.format_exc())
+    return base(self, *args, **kwargs)
+
+# less then 20% ammo => write on carousel's vehicle 'low ammo'
+def i18n_makeString(base, key, *args, **kwargs):
+    if key == '#menu:tankCarousel/vehicleStates/ammoNotFull': # originally returns empty string
+        return l10n('lowAmmo')
+    return base(key, *args, **kwargs)
+
 #####################################################################
 # Register events
 
@@ -81,5 +98,11 @@ def _RegisterEvents():
     from gui.shared.gui_items.Vehicle import Vehicle
     OverrideMethod(Vehicle, 'isReadyToPrebattle', Vehicle_isReadyToPrebattle)
     OverrideMethod(Vehicle, 'isReadyToFight', Vehicle_isReadyToFight)
+    
+    from gui.prb_control.dispatcher import _PrebattleDispatcher
+    OverrideMethod(_PrebattleDispatcher, 'canPlayerDoAction', _PrebattleDispatcher_canPlayerDoAction)
+    
+    from helpers import i18n
+    OverrideMethod(i18n, 'makeString', i18n_makeString)
 
 BigWorld.callback(0, _RegisterEvents)

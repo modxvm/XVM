@@ -602,7 +602,9 @@ class _Player(object):
         if 'typeCompDescr' in vData:
             self.vId = vData['typeCompDescr']
         elif 'vehicleType' in vData:
-            self.vId = vData['vehicleType'].type.compactDescr
+            vtype = vData['vehicleType']
+            if hasattr(vtype, 'type'):
+                self.vId = vData['vehicleType'].type.compactDescr
         if self.vId is None:
             self.vId = 0
         self.team = vData['team']
@@ -616,13 +618,16 @@ class _Player(object):
             #    log("team=%d, squad=%d %s" % (self.team, self.squadnum, self.name))
 
     def update(self, vData):
-        self.vId = vData['vehicleType'].type.compactDescr
-        self.vLevel = vData['vehicleType'].type.level
-        self.maxHealth = vData['vehicleType'].maxHealth
-        self.vIcon = vData['vehicleType'].type.name.replace(':', '-')
-        # self.vn = vData['vehicleType'].type.name
-        # self.vn = self.vn[self.vn.find(':')+1:].upper()
-        self.vType = set(VEHICLE_CLASS_TAGS.intersection(vData['vehicleType'].type.tags)).pop()
+        vtype = vData['vehicleType']
+        if hasattr(vtype, 'type'):
+            self.vId = vtype.type.compactDescr
+            self.vLevel = vtype.type.level
+            self.vIcon = vtype.type.name.replace(':', '-')
+            # self.vn = vtype.type.name
+            # self.vn = self.vn[self.vn.find(':')+1:].upper()
+            self.vType = set(VEHICLE_CLASS_TAGS.intersection(vtype.type.tags)).pop()
+        if hasattr(vtype, 'maxHealth'):
+            self.maxHealth = vtype.maxHealth
         self.team = vData['team']
         self.alive = vData['isAlive']
         self.ready = vData['isAvatarReady']

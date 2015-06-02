@@ -36,6 +36,9 @@ def EventsWindow_loadView(base, self, linkage, alias):
     if linkage == QUESTS_ALIASES.COMMON_QUESTS_VIEW_LINKAGE:
         linkage = LINKAGES.UI_LINKAGE_COMMON_QUESTS
         alias = LINKAGES.UI_LINKAGE_COMMON_QUESTS
+        if not 'xvm_quests_ui.swf' in xfw_mods_info.loaded_swfs:
+            BigWorld.callback(0, lambda:base(self, linkage, alias))
+            return
     base(self, linkage, alias)
 
 

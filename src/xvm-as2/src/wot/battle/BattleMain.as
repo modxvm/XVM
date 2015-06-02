@@ -37,21 +37,19 @@ class wot.battle.BattleMain
         GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
         GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
 
-        GameDelegate.addCallBack("battle.damagePanel.setMaxHealth", instance, "setMaxHealth");
-        GameDelegate.addCallBack("battle.damagePanel.updateHealth", instance, "updateHealth");
-        GameDelegate.addCallBack("battle.damagePanel.updateState", instance, "updateState");
-        GameDelegate.addCallBack("battle.damagePanel.updateSpeed", instance, "updateSpeed");
-
         ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
         ExternalInterface.addCallback(Cmd.RESPOND_BATTLE_STATE, instance, instance.onBattleStateChanged);
-        ExternalInterface.addCallback(Cmd.RESPOND_DYNAMIC_SQUAD_CREATED, instance, instance.onDynamicSquadCreated);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
 
         // TODO: dirty hack
-        _root.consumablesPanel.addOptionalDeviceSlot_x = _root.consumablesPanel.addOptionalDeviceSlot;
+        _root.consumablesPanel.addOptionalDeviceSlot_xvm = _root.consumablesPanel.addOptionalDeviceSlot;
         _root.consumablesPanel.addOptionalDeviceSlot = instance.addOptionalDeviceSlot;
-        _root.consumablesPanel.setCoolDownTime_x = _root.consumablesPanel.setCoolDownTime;
+        _root.consumablesPanel.setCoolDownTime_xvm = _root.consumablesPanel.setCoolDownTime;
         _root.consumablesPanel.setCoolDownTime = instance.setCoolDownTime;
+        _root.damagePanel.as_updateSpeed_xvm = _root.damagePanel.as_updateSpeed;
+        _root.damagePanel.as_updateSpeed = instance.damagePanel_updateSpeed;
+        _root.damagePanel.as_updateDeviceState_xvm = _root.damagePanel.as_updateDeviceState;
+        _root.damagePanel.as_updateDeviceState = instance.damagePanel_updateDeviceState;
     }
 
     private static function BattleMainConfigLoaded()
@@ -104,7 +102,7 @@ class wot.battle.BattleMain
     function addOptionalDeviceSlot(idx, timeRemaining, deviceIconPath, tooltipText)
     {
         //Logger.add("addOptionalDeviceSlot: " + deviceIconPath);
-        _root.consumablesPanel.addOptionalDeviceSlot_x.apply(_root.consumablesPanel, arguments);
+        _root.consumablesPanel.addOptionalDeviceSlot_xvm.apply(_root.consumablesPanel, arguments);
         if (deviceIconPath.indexOf("/stereoscope.") > 0)
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
     }
@@ -112,29 +110,17 @@ class wot.battle.BattleMain
     function setCoolDownTime(idx, timeRemaining)
     {
         //Logger.add("setCoolDownTime: " + idx);
-        _root.consumablesPanel.setCoolDownTime_x.apply(_root.consumablesPanel, arguments);
+        _root.consumablesPanel.setCoolDownTime_xvm.apply(_root.consumablesPanel, arguments);
         var renderer = _root.consumablesPanel.getRendererBySlotIdx(idx);
         if (renderer.iconPath.indexOf("/stereoscope.") > 0)
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
     }
 
-    private var maxHealth:Number = NaN;
-    function setMaxHealth(health)
-    {
-    	_root.damagePanel.setMaxHealth.apply(_root.damagePanel, arguments);
-        maxHealth = health;
-    }
-
-    function updateHealth(health)
-    {
-    	_root.damagePanel.updateHealth.apply(_root.damagePanel, arguments);
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_SELF_HEALTH, value: health, maxHealth: maxHealth } );
-    }
-
     private var isMoving:Boolean = true;
-    function updateSpeed(speed)
+    function damagePanel_updateSpeed(speed)
     {
-    	_root.damagePanel.updateSpeed.apply(_root.damagePanel, arguments);
+        //Logger.add("updateSpeed: " + speed);
+    	_root.damagePanel.as_updateSpeed_xvm.apply(_root.damagePanel, arguments);
 
         var sp:Number = isMoving ? 1 : 0;
         if ((speed == 0 && !isMoving) || (speed != 0 && isMoving))
@@ -143,10 +129,10 @@ class wot.battle.BattleMain
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MOVING_STATE_CHANGED, value: isMoving } );
     }
 
-    function updateState(moduleName:String, state:String)
+    function damagePanel_updateDeviceState(moduleName:String, state:String)
     {
-        //Logger.add("updateState: " + moduleName + ", " + state);
-    	_root.damagePanel.updateState.apply(_root.damagePanel, arguments);
+        //Logger.add("updateDeviceState: " + moduleName + ", " + state);
+    	_root.damagePanel.as_updateDeviceState_xvm.apply(_root.damagePanel, arguments);
 
         if (state == "destroyed")
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MODULE_DESTROYED, value: moduleName } );
@@ -242,11 +228,6 @@ class wot.battle.BattleMain
         {
             Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
         }
-    }
-
-    private function onDynamicSquadCreated()
-    {
-        Macros.UpdateDynamicSquad.apply(null, arguments);
     }
 
     private var debugTextField:TextField = null;

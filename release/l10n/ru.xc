@@ -114,6 +114,7 @@
     "view_range/stereoscope": "со стереотрубой",
     "radio_range/base": "базовая",
     "radio_range/actual": "расчетная",
+    "lowAmmo": "Мало снарядов",
     "shootingRadius": "Дальность стрельбы",
     "pitchLimits": "Углы ВН",
     "pitchLimitsSide": "Углы ВН (сбоку)",

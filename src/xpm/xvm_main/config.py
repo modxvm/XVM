@@ -99,6 +99,7 @@ def _load_xvm_xc(filename, autoreload):
                 config = _merge_configs(config, result)
             config['__stateInfo'] = {}
         else:
+            log('[WARNING] xvm.xc was not found, using the built-in config')
             config['__stateInfo'] = {'warning':''}
     except Exception as ex:
         config['autoReloadConfig'] = autoreload

@@ -79,7 +79,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
         pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
         hunt:Boolean, entityType:String, isFlagBearer:Boolean)
-        /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
+        /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number, squad:Number*/
     {
         Cmd.profMethodStart("Xvm.init()");
 
@@ -118,6 +118,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_marksOnGun = arguments[17];
         m_isReady = (arguments[18] & 2) != 0; // 2 - IS_AVATAR_READY
         m_frags = arguments[19];
+        m_squad = arguments[20];
 
         healthBarComponent.init();
         contourIconComponent.init(m_entityType);
@@ -198,9 +199,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
      */
     function update()
     {
-        //trace("Xvm::update()");
-        // TODO: check // Update Color Blind mode
-        // TODO: check vehicleTypeComponent.updateMarkerLabel();
         XVMUpdateStyle();
     }
 
@@ -362,7 +360,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         XVMUpdateStyle();
     }
 
-    function setMarkerStateXvm(targets:Number, vehicleStatus:Number, frags:Number, my_frags:Number)
+    function setMarkerStateXvm(targets:Number, vehicleStatus:Number, frags:Number, my_frags:Number, squad:Number)
     {
         var needUpdate:Boolean = false;
 
@@ -373,13 +371,20 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         if (m_frags != frags)
         {
-            //Logger.add('setMarkerStateXvm: ' + m_frags + " => " + ftags + " " + m_playerName);
+            //Logger.add('setMarkerStateXvm: ' + m_frags + " => " + frags + " " + m_playerName);
             m_frags = frags;
             needUpdate = true;
         }
 
         if (Macros.UpdateMyFrags(my_frags))
             needUpdate = true;
+
+        if (m_squad != squad)
+        {
+            //Logger.add('setMarkerStateXvm: ' + m_squad + " => " + squad + " " + m_playerName);
+            m_squad = squad;
+            needUpdate = true;
+        }
 
         if (needUpdate)
             XVMUpdateStyle();
@@ -394,10 +399,16 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                 var st = vehicleState.getCurrentState();
                 for (var i in textFields[st])
                 {
-                    var tfi = textFields[st][i];
+                    var tfi:TextField = textFields[st][i];
                     tfi.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +
                         "<font color='#" + formatDynamicColor(tfi.color, m_curHealth).toString(16) + "'>" +
                         formatDynamicText(tfi.format, m_curHealth) + "</font></p></textformat>";
+
+                    if (tfi.x != null)
+                        tfi.field._x = parseInt(formatDynamicText(tfi.x, m_curHealth)) - (tfi.field._width / 2.0);
+                    if (tfi.y != null)
+                        tfi.field._y = parseInt(formatDynamicText(tfi.y, m_curHealth)) - (/*tfi.field._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
+
                     tfi.field._alpha = formatDynamicAlpha(tfi.alpha, m_curHealth);
 
                     tfi.shadow.color = formatDynamicColor(tfi.sh_color, m_curHealth);
@@ -468,7 +479,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     {
         Cmd.profMethodStart("Xvm.XVMUpdateStyle()");
 
-        //trace("XVMUpdateStyle: " + m_playerName + m_vname + " " + " scale=" + proxy.marker._xscale);
+        //Logger.add("XVMUpdateStyle: " + m_playerName + " " + m_vname);
         try
         {
             //var start = new Date(); // for debug

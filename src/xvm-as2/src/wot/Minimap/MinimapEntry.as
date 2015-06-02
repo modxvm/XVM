@@ -60,6 +60,7 @@ class wot.Minimap.MinimapEntry
     public var cameraExtendedToken:Boolean;
 
     private var labelMc:MovieClip;
+    private var lastCameraModeIsStrategic:Boolean = false;
 
     function MinimapEntryCtor()
     {
@@ -166,12 +167,18 @@ class wot.Minimap.MinimapEntry
         labelMc._x = wrapper._x;
         labelMc._y = wrapper._y;
 
-        if (!wrapper.isDead)
+        var camera = IconsProxy.cameraStrategicEntry;
+        if (camera != null)
         {
-            var camera = IconsProxy.cameraStrategicEntry;
-            if (camera != null)
+            lastCameraModeIsStrategic = true;
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.SET_STRATEGIC_POS, camera));
+        }
+        else
+        {
+            if (lastCameraModeIsStrategic)
             {
-                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.SET_STRATEGIC_POS, camera));
+                lastCameraModeIsStrategic = false;
+                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.SET_STRATEGIC_POS, null));
             }
         }
     }

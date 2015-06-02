@@ -7,6 +7,7 @@
     "selfIconAlpha": 75,
     //"showCameraLineAfterDeath": false,
     "minimapAimIcon": "cfg://sirmax/img/MinimapAim.png",
+    "minimapAimIconScale": 200,
     "zoom": { "centered": false },
     "circles": {
         "view": [

@@ -10,6 +10,7 @@ package xvm.profile_ui.components
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
     import com.xvm.utils.*;
+    import flash.display.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
@@ -18,14 +19,13 @@ package xvm.profile_ui.components
 
     public class TechniqueStatisticTab
     {
-        private static const COLUMN1_WIDTH:int = 210;
         private var proxy:UI_TechniqueStatisticTab;
 
         private var _raw_data:ProfileVehicleDossierVO;
 
         public var lastBattleTimeTF:TextField;
         public var ratingTF:TextField;
-        public var xteDL:ProfileDashLineTextItem;
+        public var winsToPercentTF:TextField;
 
         //public var maxDamageDL:DashLineTextItem;
         //public var maxDamageDLLabelTextFormat:TextFormat;
@@ -102,7 +102,7 @@ package xvm.profile_ui.components
                 else
                 {
                     lastBattleTimeTF.htmlText = "";
-                    //updateVehicleData(vehId);
+                    updateVehicleData(vehId);
                 }
             }
             catch (ex:Error)
@@ -194,11 +194,11 @@ package xvm.profile_ui.components
             proxy.addChild(lastBattleTimeTF);
 
             // rating
-            ratingTF = _createTextField(COLUMN1_WIDTH + 5, 0, 400, 200, 16);
+            ratingTF = _createTextField(210, -1, 400, 200, 14);
             proxy.addChild(ratingTF);
 
-            // xTE
-            //xteDL = _createProfileDashLineTextItem();
+            winsToPercentTF = _createTextField(130, 69, 200, 25, 14);
+            Sprite(proxy.scrollPane.target).addChild(winsToPercentTF);
 
             /*
             if (Config.config.userInfo.showExtraDataInProfile)
@@ -389,7 +389,7 @@ package xvm.profile_ui.components
             {
                 var dt:String = isNaN(data.stat.ts) ? Locale.get("unknown") : XfwUtils.FormatDate("Y-m-d", new Date(data.stat.ts));
 
-                s += size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 14) + "\n";
+                s += size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 13) + "\n";
 
                 s += Locale.get("WN8") + ": " + (!data.stat.wn8 ? "-- (-)" :
                     color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8)) + " (" +
@@ -406,9 +406,9 @@ package xvm.profile_ui.components
                 {
                     var adata:AccountDossier = tech.accountDossier;
                     var ratingColor:int = MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));
-                    s += size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
-                    formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL) + "\n";
-                    s += "<font size='7'>\n\n\n</font>\t\t\t\t   " + formatHtmlText(size(getWinsToNextPercentStr(data)), XfwConst.UICOLOR_LABEL);
+                    s += "<font size='8'>\n</font>" +
+                        size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
+                        formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL);
                 }
 
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
@@ -516,6 +516,10 @@ package xvm.profile_ui.components
             //}
         }
 
+        private function updateVehicleData(vehId:Number):void
+        {
+        }
+
         private function onVehicleDossierLoaded(e:ObjectEvent):void
         {
             if (proxy.baseDisposed)
@@ -527,6 +531,8 @@ package xvm.profile_ui.components
             prepareData(dossier);
 
             updateGlobalRatings(dossier);
+
+            winsToPercentTF.htmlText = "<p align='right'>" + formatHtmlText(size(getWinsToNextPercentStr(dossier)), XfwConst.UICOLOR_LABEL) + "</p>";
 
             /*updateCommonData(dossier);
 

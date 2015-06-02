@@ -15,6 +15,7 @@ from xfw import *
 from constants import *
 from logger import *
 import config
+import configwatchdog
 import stats
 import vehinfo
 import vehstate
@@ -66,6 +67,20 @@ class Xvm(object):
                    config.config_str,
                    config.lang_str,
                    vehinfo.getVehicleInfoDataStr())
+
+    # System Message
+
+    def onSystemMessage(self, e=None, cnt=0):
+        #log('onSystemMessage')
+        is_svcmsg = 'swf_file_name' in xfw_mods_info.info.get('xvm_svcmsg', {})
+        if cnt < 50 and is_svcmsg and not 'xvm_svcmsg_ui.swf' in xfw_mods_info.loaded_swfs:
+            BigWorld.callback(0.1, lambda:self.onSystemMessage(e, cnt+1))
+            return
+
+        msg = e.ctx.get('msg', '')
+        type = e.ctx.get('type', SystemMessages.SM_TYPE.Information)
+        SystemMessages.pushMessage(msg, type)
+
 
     # LOGIN
 
@@ -156,6 +171,8 @@ class Xvm(object):
         if not token.versionChecked:
             token.checkVersion()
             token.initializeXvmToken()
+        if config.get('autoReloadConfig', False) == True:
+            configwatchdog.startConfigWatchdog()
 
 
     def initBattleSwf(self, flashObject):
@@ -366,20 +383,16 @@ class Xvm(object):
         if stat is not None:
             my_frags = stat['frags']
 
-        #debug('updateVehicleStatus: {0} st={1} fr={2}'.format(vID, status, frags))
-        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags, my_frags])
+        vInfo = utils.getVehicleInfo(vID)
+        squadIndex = vInfo.squadIndex
+        from gui.battle_control import g_sessionProvider
+        arenaDP = g_sessionProvider.getCtx().getArenaDP()
+        squadIndex = vInfo.squadIndex
+        if arenaDP.isSquadMan(vID):
+            squadIndex += 10
 
-
-    def updateDynamicSquad(self):
-        if self.battleFlashObject is not None:
-            movie = self.battleFlashObject.movie
-            if movie is not None:
-                movie.invoke((AS2RESPOND.DYNAMIC_SQUAD_CREATED,))
-
-        if self.vmmFlashObject is not None:
-            movie = self.vmmFlashObject.movie
-            if movie is not None:
-                movie.invoke((AS2RESPOND.DYNAMIC_SQUAD_CREATED,))
+        #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vID, status, frags, squadIndex))
+        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags, my_frags, squadIndex])
 
 
     # PRIVATE
@@ -499,6 +512,7 @@ class Xvm(object):
                             v.publicInfo.marksOnGun,
                             vInfo.vehicleStatus,
                             vStats.frags,
+                            vInfo.squadIndex,
                         ])
             elif function not in ['showExInfo']:
                 # debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))

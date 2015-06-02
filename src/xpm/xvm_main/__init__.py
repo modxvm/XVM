@@ -56,6 +56,7 @@ def start():
 
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
+    g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
 
     g_websock.start()
     g_websock.on_message += g_xvm.on_websock_message
@@ -77,6 +78,7 @@ def fini():
 
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
+    g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
 
     g_websock.on_message -= g_xvm.on_websock_message
     g_websock.on_error -= g_xvm.on_websock_error
@@ -240,6 +242,17 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
 
+def DynSquadEntityController_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
+    #log(playerVehVO)
+    if BigWorld.player().arena.guiType == 1: # ARENA_GUI_TYPE.RANDOM
+        from gui.battle_control.arena_info.settings import INVALIDATE_OP
+        if flags & INVALIDATE_OP.PREBATTLE_CHANGED and playerVehVO.squadIndex > 0:
+            isEnemy = playerVehVO.team != arenaDP.getNumberOfTeam()
+            for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(isEnemy)):
+                if vInfoVO.squadIndex > 0:
+                    g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD)
+
+
 '''#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
 #    debug('_CustomFilesCache__get')
 #    base(self, url, showImmediately, checkedInCache)
@@ -343,6 +356,9 @@ def _RegisterEvents():
 
     from BattleReplay import g_replayCtrl
     g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
+
+    from gui.battle_control.dyn_squad_arena_controllers import DynSquadEntityController
+    RegisterEvent(DynSquadEntityController, 'invalidateVehicleInfo', DynSquadEntityController_invalidateVehicleInfo)
 
     # import account_helpers.CustomFilesCache as cache
     # cache._MIN_LIFE_TIME = 15

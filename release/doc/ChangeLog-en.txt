@@ -6,7 +6,8 @@
       "enableEquipAutoReturn" - removable equipment auto-return (Camouflage net, Stereoscope, Toolbox)
       "minimap"/"showCameraLineAfterDeath" - show camera line after death
       "minimap"/"minimapAimIcon" - path to icon for arty aim
-      "hangar/blockVehicleIfNoAmmo" - make vehicle not ready for battle if less than 20% ammo loaded
+      "hangar"/"blockVehicleIfNoAmmo" - make vehicle not ready for battle if less than 20% ammo loaded
+      "minimap"/"minimapAimIconScale" - scale factor for the minimap aim icon
   * option "playersPanel"/"removeSquadIcon" moved into panel mode settings (sections "short", "medium", "medium2", "large")
   * removed obsoleted option "fragCorrelation"/"hideTeamTextFields"
 

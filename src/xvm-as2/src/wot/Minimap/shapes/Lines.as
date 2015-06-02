@@ -21,7 +21,8 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
         attachCameraLines();
         attachVehicleDirectionLines();
-        if (rightAngle != 1)
+        var g = gunConstraints;
+        if (g != null && g._visible)
         {
             /**
              * Tanks without hull gun constraints has 1 angle degree for each side.

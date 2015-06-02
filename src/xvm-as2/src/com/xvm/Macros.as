@@ -75,11 +75,6 @@ class com.xvm.Macros
         return true;
     }
 
-    public static function UpdateDynamicSquad(pname:String, data)
-    {
-        _instance._UpdateDynamicSquad(pname, data);
-    }
-
     // PRIVATE
 
     private static var PART_NAME:Number = 0;
@@ -299,6 +294,17 @@ class com.xvm.Macros
             }
 
             res += FormatMacro(macro, parts, value, vehId, options);
+        }
+
+        if (isStaticMacro)
+        {
+            switch (macroName)
+            {
+                case "squad":
+                case "squad-num":
+                    isStaticMacro = false;
+                    break;
+            }
         }
 
         return res;
@@ -768,7 +774,7 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("squad") && data.hasOwnProperty("squad"))
         {
             // {{squad}}
-            pdata["squad"] = data.squad > 10 ? "sq" : null;
+            pdata["squad"] = function(o) { return o.squad > 10 ? "sq" : null; }
         }
 
         // Dynamic macros
@@ -904,7 +910,7 @@ class com.xvm.Macros
         pdata["region"] = Config.config.region;
 
         // {{squad-num}}
-        pdata["squad-num"] = stat.squadnum > 0 ? stat.squadnum : null;
+        pdata["squad-num"] = function(o) { return o.squad > 10 ? o.squad - 10 : o.squad > 0 ? o.squad : null; }
         // {{xvm-user}}
         pdata["xvm-user"] = Utils.getXvmUserText(stat.status);
         // {{flag}}
@@ -1100,11 +1106,6 @@ class com.xvm.Macros
         pdata["a:tfb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
         // {{a:tsb}}
         pdata["a:tsb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
-    }
-
-    private function _UpdateDynamicSquad()
-    {
-        Logger.addObject(arguments, 2, "TODO: _UpdateDynamicSquad");
     }
 
     private function _RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)
