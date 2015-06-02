@@ -195,20 +195,6 @@ package xvm.tcarousel_ui
             super.onItemRollOut();
         }
 
-        // TankCarousel
-        // TODO:0.9.8
-        /*
-        override public function set isSliding(value:Boolean):void
-        {
-            this.xfw_isSliding = value;
-            if (!this.xfw_isSliding && this.dragHitArea && stage && this.dragHitArea.hitTestPoint(stage.mouseX, stage.mouseY, true) && this._isMouseOver)
-            {
-                if (selectedItemRenderer != null)
-                    (selectedItemRenderer as DragableListItemRenderer).imitateMouseOver();
-            }
-        }
-        */
-
         // Carousel
         override protected function updateArrowsState():void
         {

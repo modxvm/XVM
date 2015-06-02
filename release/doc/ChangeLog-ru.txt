@@ -1,15 +1,12 @@
-﻿XVM-6.1.2-dev:
-  * новая опция:
-    "hangar/blockVehicleIfNoAmmo" - сделать машину не готовой к битве если заряжено менее 20% снарядов
-
-XVM-6.1.2-beta1:
-  * адаптация к WoT 0.9.8
+﻿XVM-6.1.2:
+  * адаптация к WoT 0.9.8.1
   * рефакторинг загрузки конфига
   * новая опция:
       "crewReturnByDefault" - включить галочку возврата экипажа по умолчанию
       "enableEquipAutoReturn": автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами)
       "minimap"/"showCameraLineAfterDeath" - отображать линию направления камеры после смерти
       "minimap"/"minimapAimIcon" - путь к иконке для артиллерийского прицела
+      "hangar/blockVehicleIfNoAmmo" - сделать машину не готовой к битве если заряжено менее 20% снарядов
   * опция "playersPanel"/"removeSquadIcon" перенесена внутрь настроек режимов ушей (секции "short", "medium", "medium2", "large")
   * удалена устаревшая опция "fragCorrelation"/"hideTeamTextFields"
 

@@ -1,15 +1,12 @@
-﻿XVM-6.1.2-dev:
-  * new options:
-    "hangar/blockVehicleIfNoAmmo" - make vehicle not ready for battle if less than 20% ammo loaded
-
-XVM-6.1.2-beta1:
-  * adaptation to WoT 0.9.8
+﻿XVM-6.1.2:
+  * adaptation to WoT 0.9.8.1
   * config loading refactoring
   * new options:
       "crewReturnByDefault" - return crew check box is selected by default
       "enableEquipAutoReturn" - removable equipment auto-return (Camouflage net, Stereoscope, Toolbox)
       "minimap"/"showCameraLineAfterDeath" - show camera line after death
       "minimap"/"minimapAimIcon" - path to icon for arty aim
+      "hangar/blockVehicleIfNoAmmo" - make vehicle not ready for battle if less than 20% ammo loaded
   * option "playersPanel"/"removeSquadIcon" moved into panel mode settings (sections "short", "medium", "medium2", "large")
   * removed obsoleted option "fragCorrelation"/"hideTeamTextFields"
 
