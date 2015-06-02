@@ -96,7 +96,6 @@ package xvm.battleloading
 
                 // Components
                 new WinChances(page); // Winning chance info above players list.
-                new TipField(page);   // Information field below players list.
                 new Clock(page);  // Realworld time at right side of TipField.
             }
             catch (ex:Error)

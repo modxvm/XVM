@@ -36,6 +36,7 @@ package xvm.battleloading.components
             tf.color = 0xFFFFFF;
             tf.align = TextFormatAlign.RIGHT;
             clock.defaultTextFormat = tf;
+            clock.selectable = false;
             clock.filters = f.filters;
             page.form.addChild(clock);
 
