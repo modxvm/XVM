@@ -5,13 +5,13 @@
     <movie outputType="Application" />
     <movie input="" />
     <movie path="..\..\~output\mods\packages\xvm_limits\actionscript\xvm_limits.swf" />
-    <movie fps="30" />
-    <movie width="1" />
-    <movie height="1" />
-    <movie version="10" />
-    <movie minorVersion="2" />
+    <movie fps="50" />
+    <movie width="1024" />
+    <movie height="768" />
+    <movie version="11" />
+    <movie minorVersion="0" />
     <movie platform="Flash Player" />
-    <movie background="#123456" />
+    <movie background="#6D6178" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
