@@ -31,22 +31,6 @@ if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
 fi
 
 ##########################
-####     CONSTANTS    ####
-##########################
-projects_as2_withpatch=(
-    'battle'
-    'Minimap'
-    'PlayersPanel'
-    'StatisticForm'
-    'TeamBasesPanel'
-    'VehicleMarkersManager'
-)
-
-projects_as2_withoutpatch=(
-    'xvm'
-)
-
-##########################
 #### HELPER FUNCTIONS ####
 ##########################
 clean_repodir(){
@@ -119,31 +103,29 @@ load_wotversion(){
 ####  BUILD FUNCTIONS ####
 ##########################
 
-build_as2(){
+patch_as2(){
     echo ""
     echo "Patching AS2 files"
 
     pushd "$XVMBUILD_REPOSITORY_PATH"/src/xvm-as2/swf/ > /dev/null
-    for proj in "${projects_as2_withpatch[@]}";
+    for proj in *.patch
         do
-            echo "Patching $proj.swf"
+            proj="${proj%%.*}"
+            echo "Patching $proj"
             patch_as2_h $proj
         done
     popd > /dev/null
+}
 
+build_as2(){
     echo ""
     echo "Building AS2 files"
 
     pushd "$XVMBUILD_REPOSITORY_PATH"/src/xvm-as2/ > /dev/null
-    for proj in "${projects_as2_withpatch[@]}";
+    for proj in *.as2proj;
         do
-            echo "Building $proj.as2proj"
-            build_as2_h $proj
-        done
-    for proj in "${projects_as2_withoutpatch[@]}";
-        do
-            echo "Building $proj.as2proj"
-            build_as2_h $proj
+            echo "Building $proj"
+            build_as3_h "$proj"
         done
     popd > /dev/null
 }
@@ -310,6 +292,7 @@ create_directories
 build_xpm
 build_xfw
 build_as3
+patch_as2
 build_as2
 
 clean_sha1
