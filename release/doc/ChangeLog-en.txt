@@ -1,5 +1,6 @@
 ﻿XVM-6.1.2.1-dev:
   * added new filter to the tank carousel: remove "domination"
+  * Personal missings: added "Available + improve" filter and saving filter settings
 
 XVM-6.1.2:
   * adaptation to WoT 0.9.8.1
