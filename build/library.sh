@@ -9,7 +9,7 @@ build_as2_h(){
 }
 
 build_as3_h(){
-    $XVMBUILD_MONO_FILENAME "$XVMBUILD_FDBUILD_FILEPATH" -compiler:"$FLEX_HOME" -cp:"" "$1" > /dev/null || exit 1
+    $XVMBUILD_MONO_FILENAME "$XVMBUILD_FDBUILD_FILEPATH" -notrace -compiler:"$FLEX_HOME" -cp:"" "$1" > /dev/null || exit 1
 }
 
 patch_as2_h(){
@@ -66,8 +66,13 @@ detect_mercurial(){
 #
 
 #Build software detection
-detect_fdbuild()
-{
+detect_coreutils(){
+    if !(hash sha1sum 2>/dev/null); then
+        echo "!!! coreutils is not found"
+        exit 1
+    fi
+}
+detect_fdbuild(){
 	#export XVMBUILD_FDBUILD_FILEPATH to set your own fdbuild.exe location
     if [ "$XVMBUILD_FDBUILD_FILEPATH" == "" ]; then
         declare -a arr
@@ -100,7 +105,7 @@ detect_flex(){
     # extend PATH
     export PATH=$PATH:$FLEX_HOME/bin/
 
-    if !(hash mxmlc 2>/dev/null); then
+    if !(hash $FLEX_HOME/bin/mxmlc); then
         echo "!!! Apache Flex is not found"
         exit 1
     fi
@@ -113,7 +118,7 @@ detect_flex(){
     fi
 
     # download playerglobal if not found
-    if [ ! -d "$PLAYERGLOBAL_HOME/10.2/" ]; then
+    if [ ! -d "$PLAYERGLOBAL_HOME/11.0/" ]; then
         if ! detect_git; then
             exit 1
         fi
