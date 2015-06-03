@@ -187,6 +187,7 @@
     "MultiXP": "Мультиопыт",
     "NoMaster": "Нет мастера",
     "CompleteCrew": "Полный экипаж",
+    "NonDomination": "Убрать \"противостояние\"",
 
     // Profile
     "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nЭффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
@@ -211,6 +212,7 @@
     "Hide completed": "Скрыть выполненные",
     "Hide with honors": "Скрыть с отличием",
     "Hide unavailable": "Скрыть недоступные",
+    "Available + improve": "Доступны + улучшить",
 
     // Config loading
     "XVM config reloaded": "Конфиг XVM перезагружен",

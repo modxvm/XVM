@@ -191,6 +191,7 @@
     "MultiXP": "Multi XP",
     "NoMaster": "No master",
     "CompleteCrew": "Complete crew",
+    "NonDomination": "Remove \"domination\"",
 
     // Comments
     "Network services unavailable": "Network services unavailable",
@@ -211,6 +212,7 @@
     "Hide completed": "Hide completed",
     "Hide with honors": "Hide with honors",
     "Hide unavailable": "Hide unavailable",
+    "Available + improve": "Available + improve",
 
     // Config loading
     "XVM config reloaded": "XVM config reloaded",

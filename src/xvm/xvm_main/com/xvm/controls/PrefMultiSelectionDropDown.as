@@ -12,6 +12,7 @@ package com.xvm.controls
         public static const PREF_MULTIXP:String = "multiXp";
         public static const PREF_NOMASTER:String = "noMaster";
         public static const PREF_FULLCREW:String = "fullCrew";
+        public static const PREF_NON_DOMINATION:String = "nonDomination";
 
         public function PrefMultiSelectionDropDown()
         {
@@ -22,6 +23,7 @@ package com.xvm.controls
                 { label: Locale.get("MultiXP"), icon: "../maps/icons/library/multyXp.png", data: PREF_MULTIXP },
                 { label: Locale.get("NoMaster"), icon: "../maps/icons/library/PowerlevelIcon-1.png", data: PREF_NOMASTER },
                 { label: Locale.get("CompleteCrew"), icon: "../maps/icons/messenger/contactIgnored.png", data: PREF_FULLCREW },
+                { label: Locale.get("NonDomination"), icon: "../maps/icons/library/swordsIcon.png", data: PREF_NON_DOMINATION },
             ];
             dataProvider = new DataProvider(dp);
 
@@ -29,7 +31,5 @@ package com.xvm.controls
             menuRowCount = dp.length;
             menuDirection = "up";
         }
-
     }
-
 }

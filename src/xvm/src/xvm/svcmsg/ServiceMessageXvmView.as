@@ -8,13 +8,13 @@ package xvm.svcmsg
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import flash.events.*;
+    import flash.utils.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.notification.*;
     import net.wg.gui.notification.vo.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import org.idmedia.as3commons.util.*;
-    import xvm.svcmsg_ui.*;
 
     public class ServiceMessageXvmView extends XvmViewBase
     {
@@ -81,12 +81,12 @@ package xvm.svcmsg
 
         private function initLobby(v:LobbyPage):void
         {
-            v.notificationPopupViewer.xfw_popupClass = UI_ServiceMessagePopUp;
+            v.notificationPopupViewer.xfw_popupClass =  getDefinitionByName("xvm.svcmsg_ui::UI_ServiceMessagePopUp") as Class;
         }
 
         private function initNotificationList(v:NotificationListView):void
         {
-            v.list.itemRenderer = UI_ServiceMessageIR;
+            v.list.itemRendererName = "xvm.svcmsg_ui::UI_ServiceMessageIR";
         }
     }
 
