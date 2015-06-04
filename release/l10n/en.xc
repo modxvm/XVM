@@ -209,10 +209,7 @@
     "Not ready": "Not ready",
 
     // Quests
-    "Hide completed": "Hide completed",
     "Hide with honors": "Hide with honors",
-    "Hide unavailable": "Hide unavailable",
-    "Available + improve": "Available + improve",
 
     // Config loading
     "XVM config reloaded": "XVM config reloaded",
