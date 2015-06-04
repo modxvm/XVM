@@ -104,16 +104,8 @@ load_wotversion(){
 ##########################
 
 patch_as2(){
-    echo ""
-    echo "Patching AS2 files"
-
     pushd "$XVMBUILD_REPOSITORY_PATH"/src/xvm-as2/swf/ > /dev/null
-    for proj in *.patch
-        do
-            proj="${proj%%.*}"
-            echo "Patching $proj"
-            patch_as2_h $proj
-        done
+    ./make-patched-swfs.sh    
     popd > /dev/null
 }
 
