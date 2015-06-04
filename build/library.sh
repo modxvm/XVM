@@ -3,6 +3,9 @@
 # XVM team (c) www.modxvm.com 2014-2015
 # XVM nightly build system functions library
 
+#constants
+PLAYERGLOBAL_VERSION="11.0"
+
 #AS2/3 compilation and patching
 build_as2_h(){
     $XVMBUILD_MONO_FILENAME "$XVMBUILD_FDBUILD_FILEPATH" $1.as2proj -version "1.14" -notrace > /dev/null || exit 1
@@ -118,12 +121,12 @@ detect_flex(){
     fi
 
     # download playerglobal if not found
-    if [ ! -f "$PLAYERGLOBAL_HOME/11.0/playerglobal.swc" ]; then
+    if [ ! -f "$PLAYERGLOBAL_HOME/$PLAYERGLOBAL_VERSION/playerglobal.swc" ]; then
         if ! detect_wget; then
             exit 1
         fi
-        mkdir -p "$PLAYERGLOBAL_HOME/11.0/"
-        wget --quiet https://github.com/nexussays/playerglobal/raw/master/11.0/playerglobal.swc --output-document="$PLAYERGLOBAL_HOME/11.0/playerglobal.swc"
+        mkdir -p "$PLAYERGLOBAL_HOME/$PLAYERGLOBAL_VERSION/"
+        wget --quiet "https://github.com/nexussays/playerglobal/raw/master/$PLAYERGLOBAL_VERSION/playerglobal.swc" --output-document="$PLAYERGLOBAL_HOME/$PLAYERGLOBAL_VERSION/playerglobal.swc"
     fi
 }
 
