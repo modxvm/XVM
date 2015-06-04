@@ -1,33 +1,18 @@
 #!/bin/bash
 
 # XVM team (c) www.modxvm.com 2014-2015
-# XFW Framework build system
+# XVM build system
 
-# detect OS
-if [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ] || [ "$OS" == "Windows_NT" ]; then
-  xfw_OS=Windows
-elif [ "$(expr substr $(uname -s) 1 4)" == "MSYS" ]; then
-  xfw_OS=Windows
-fi
-#
+currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+source "$currentdir"/../../build/library.sh
 
-# add Flex to PATH
-if [ "$xfw_OS" = "Windows" ]; then
-  if [ "$FLEX_HOME" = "" ]; then
-    FLEX_HOME="$LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0"
-  fi
-fi
-if [ "$PLAYERGLOBAL_HOME" = "" ]; then
-  export PLAYERGLOBAL_HOME=$FLEX_HOME/frameworks/libs/player 
-fi
-compc="$FLEX_HOME/bin/compc"
-PATH=$FLEX_HOME/bin:$PATH
-#
+detect_os
+detect_flex
 
 #xfw.swc
 frswc="$FLEX_HOME/frameworks/libs/framework.swc"
 class="com.xvm.Xvm"
-"$compc" \
+"$XVMBUILD_COMPC_FILEPATH" \
     -framework="$FLEX_HOME/frameworks" \
     -source-path xvm_main \
     -external-library-path+="$frswc" \

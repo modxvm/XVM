@@ -9,10 +9,11 @@ RUN_TEST=1
 # INTERNAL
 
 ### Find Python executable
-PY_EXEC="/cygdrive/c/Python27/python.exe"
-if [ ! -f $PY_EXEC ]; then
-  PY_EXEC="python2.7" # Installed by cygwin or *nix
-fi
+currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+source "$currentdir"/../../build/library.sh
+
+detect_coreutils
+detect_python
 ###
 
 clear()
@@ -67,7 +68,7 @@ build()
   if [ "${1##*/}" != "__version__.py" ]; then
     echo "Building: $1"
   fi
-  result="$("$PY_EXEC" -c "import py_compile; py_compile.compile('$1')" 2>&1)"
+  result="$("$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$1')" 2>&1)"
   if [ "$result" == "" ]; then
     mkdir -p "$sum_dir"
     sha1sum $1 > "$sum_file"
@@ -112,7 +113,7 @@ done
 echo 'generate default_config.pyc'
 dc_fn=../../~output/mods/packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
-"$PY_EXEC" -c "
+"$XVMBUILD_PYTHON_FILEPATH" -c "
 import sys
 sys.path.insert(0, '../xfw/~output/python/mods/xfw/python/lib')
 import JSONxLoader
@@ -121,7 +122,7 @@ en = JSONxLoader.load('../../release/l10n/en.xc')
 ru = JSONxLoader.load('../../release/l10n/ru.xc')
 print('DEFAULT_CONFIG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg, en, ru))
 " > $dc_fn 2>&1
-"$PY_EXEC" -c "import py_compile; py_compile.compile('$dc_fn')" 2>&1
+"$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$dc_fn')" 2>&1
 [ ! -f ${dc_fn}c ] && cat "$dc_fn"
 rm -f "$dc_fn"
 [ ! -f ${dc_fn}c ] && exit
