@@ -105,24 +105,25 @@ detect_flex(){
     # extend PATH
     export PATH=$PATH:$FLEX_HOME/bin/
 
-    if !(hash $FLEX_HOME/bin/mxmlc); then
+    if !(hash "$FLEX_HOME/bin/mxmlc"); then
         echo "!!! Apache Flex is not found"
         exit 1
     fi
 
-    export XVMBUILD_COMPC_FILEPATH="$FLEX_HOME"/bin/compc
+    export XVMBUILD_COMPC_FILEPATH="$FLEX_HOME/bin/compc"
 
     #  fallback PLAYERGLOBAL_HOME variable
     if [ "$PLAYERGLOBAL_HOME" == "" ]; then
-        export PLAYERGLOBAL_HOME=$FLEX_HOME/frameworks/libs/player 
+        export PLAYERGLOBAL_HOME="$FLEX_HOME/frameworks/libs/player" 
     fi
 
     # download playerglobal if not found
-    if [ ! -d "$PLAYERGLOBAL_HOME/11.0/" ]; then
-        if ! detect_git; then
+    if [ ! -f "$PLAYERGLOBAL_HOME/11.0/playerglobal.swc" ]; then
+        if ! detect_wget; then
             exit 1
         fi
-        git clone git://github.com/nexussays/playerglobal.git "$PLAYERGLOBAL_HOME"
+        mkdir -p "$PLAYERGLOBAL_HOME/11.0/"
+        wget --quiet https://github.com/nexussays/playerglobal/raw/master/11.0/playerglobal.swc --output-document="$PLAYERGLOBAL_HOME/11.0/playerglobal.swc"
     fi
 }
 
