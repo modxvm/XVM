@@ -108,7 +108,6 @@ package xvm.profile_ui.components
                     page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
 
                     // add event handlers
-                    page.listComponent.sortableButtonBar.addEventListener(IndexEvent.INDEX_CHANGE, initializeListComponent);
                     page.stackComponent.buttonBar.addEventListener(IndexEvent.INDEX_CHANGE, initializeTechniqueStatisticTab);
 
                     // create filter controls
@@ -116,6 +115,9 @@ package xvm.profile_ui.components
                     //if (Config.config.userInfo.showFilters)
                     //    createFilters();
                 }
+
+                // add event handlers
+                page.listComponent.sortableButtonBar.addEventListener(IndexEvent.INDEX_CHANGE, initializeListComponent);
             }
             catch (ex:Error)
             {
@@ -183,7 +185,10 @@ package xvm.profile_ui.components
             {
                 page.listComponent.sortableButtonBar.removeEventListener(IndexEvent.INDEX_CHANGE, initializeListComponent);
 
-                setupSortableButtonBar();
+                if (Config.networkServicesSettings.statAwards)
+                {
+                    setupSortableButtonBar();
+                }
 
                 // Sort
                 App.utils.scheduler.envokeInNextFrame(makeInitialSort);
