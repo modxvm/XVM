@@ -30,7 +30,7 @@ class LINKAGES(object):
     UI_LINKAGE_COMMON_QUESTS = "xvm.quests_ui::UI_CommonQuestsView"
 
 class FILTERS(object):
-    AVAILABLE_AND_COMPLETED = "availableAndCompleted"
+    HIDE_WITH_HONORS = "hideWithHonors"
 
 #####################################################################
 # event handlers
@@ -54,8 +54,8 @@ def EventsWindow_loadView(base, self, linkage, alias):
 
 def QuestsTileChainsView_as_setHeaderDataS(base, self, data):
     if data:
-        data['filters']['taskTypeFilterData'].insert(2, {'label': l10n('Available + improve'),
-                                                         'data': FILTERS.AVAILABLE_AND_COMPLETED})
+        data['filters']['taskTypeFilterData'].insert(2, {'label': l10n('Hide with honors'),
+                                                         'data': FILTERS.HIDE_WITH_HONORS})
     return base(self, data)
 
 
@@ -136,6 +136,6 @@ def _RegisterEvents():
     RegisterEvent(QuestsTileChainsView, '_QuestsTileChainsView__updateTileData', QuestsTileChainsView__updateTileData)
 
     from gui.Scaleform.daapi.view.lobby.server_events.QuestsTileChainsView import _QuestsFilter
-    _QuestsFilter._FILTER_BY_STATE[FILTERS.AVAILABLE_AND_COMPLETED] = lambda q: q.isUnlocked() and not q.isFullCompleted(True)
+    _QuestsFilter._FILTER_BY_STATE[FILTERS.HIDE_WITH_HONORS] = lambda q: not q.isFullCompleted(True)
 
 BigWorld.callback(0, _RegisterEvents)

@@ -209,10 +209,7 @@
     "Not ready": "Не готов",
 
     // Quests
-    "Hide completed": "Скрыть выполненные",
     "Hide with honors": "Скрыть с отличием",
-    "Hide unavailable": "Скрыть недоступные",
-    "Available + improve": "Доступны + улучшить",
 
     // Config loading
     "XVM config reloaded": "Конфиг XVM перезагружен",
