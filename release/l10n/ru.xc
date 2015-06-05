@@ -187,7 +187,7 @@
     "MultiXP": "Мультиопыт",
     "NoMaster": "Нет мастера",
     "CompleteCrew": "Полный экипаж",
-    "NonDomination": "Убрать \"противостояние\"",
+    "NonDomination": "Убрать \"Превосходство\"",
 
     // Profile
     "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nЭффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
