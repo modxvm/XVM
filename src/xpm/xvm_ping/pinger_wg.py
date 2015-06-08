@@ -1,7 +1,5 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
-# TODO: not updated for XFW
-
 #############################
 # Command
 
