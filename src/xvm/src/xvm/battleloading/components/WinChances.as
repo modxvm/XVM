@@ -45,6 +45,9 @@ package xvm.battleloading.components
                 chanceText = '<span class="chances">' + chanceText + '</span>';
                 page.form.battleText.htmlText = "<textformat leading='-3'>" + originalBattleText + "\n" + chanceText + "</textformat>";
             }
+
+            // TODO if (enableLog == true)
+            // TODO     StatsLogger.saveStatistics("chance", Chance.lastChances);
         }
     }
 }

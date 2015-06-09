@@ -23,60 +23,12 @@ import xvm_main.python.config as config
 from operator import attrgetter
 from debug_utils import LOG_DEBUG
 from xvm_main.python.vehinfo_tiers import getTiers
-import xvm_main.python.wgutils as wgutils
-
-#####################################################################
-# constants
-
-class COMMANDS(object):
-    INIT = "xvm_tcarousel.init"
-
-
-#####################################################################
-# initialization/finalization
-
-def start():
-    from gui.shared import g_eventBus
-    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
-
-
-def fini():
-    from gui.shared import g_eventBus
-    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
-
-
-#####################################################################
-# onXfwCommand
-
-# returns: (result, status)
-def onXfwCommand(cmd, *args):
-    try:
-        if cmd == COMMANDS.INIT:
-            log('init')
-            wgutils.reloadHangar()
-            #global tankCarousel
-            #if tankCarousel:
-            #    log('update')
-            #    tankCarousel.updateVehicles()
-            #    tankCarousel.updateParams()
-                #tankCarousel.showVehicles()
-            return (None, True)
-    except Exception, ex:
-        err(traceback.format_exc())
-        return (None, True)
-    return (None, False)
-
 
 #####################################################################
 # event handlers
 
-#tankCarousel = None
-
 # added sorting orders for tanks in carousel
 def TankCarousel_showVehicles(base, self):
-    #global tankCarousel
-    #tankCarousel = self
-
     if config.get('hangar/carousel/enabled'):
         try:
             from gui.shared import g_itemsCache, REQ_CRITERIA
@@ -95,7 +47,7 @@ def TankCarousel_showVehicles(base, self):
                 filterCriteria |= REQ_CRITERIA.VEHICLE.FAVORITE
             items = g_itemsCache.items
             filteredVehs = items.getVehicles(filterCriteria)
-
+    
             def sorting(v1, v2):
                 if v1.isFavorite and not v2.isFavorite: return -1
                 if not v1.isFavorite and v2.isFavorite: return 1
@@ -136,7 +88,7 @@ def TankCarousel_showVehicles(base, self):
                             if VEHICLE_TYPES_ORDER_INDICES[v1.type] > VEHICLE_TYPES_ORDER_INDICES[v2.type]: return 1
                             if VEHICLE_TYPES_ORDER_INDICES[v1.type] < VEHICLE_TYPES_ORDER_INDICES[v2.type]: return -1
                 return v1.__cmp__(v2)
-
+    
             vehsCDs = map(attrgetter('intCD'), sorted(filteredVehs.itervalues(), sorting))
             LOG_DEBUG('Showing carousel vehicles: ', vehsCDs)
             self.as_showVehiclesS(vehsCDs)
@@ -149,11 +101,6 @@ def TankCarousel_showVehicles(base, self):
 # Register events
 
 def _RegisterEvents():
-    start()
-
-    import game
-    RegisterEvent(game, 'fini', fini)
-
     from gui.Scaleform.daapi.view.lobby.hangar.TankCarousel import TankCarousel
     OverrideMethod(TankCarousel, 'showVehicles', TankCarousel_showVehicles)
 
