@@ -56,7 +56,6 @@ class Xvm(object):
     # CONFIG
 
     def onConfigLoaded(self, e=None):
-        # TODO
         #log('onConfigLoaded: {}'.format(e))
         self.respondConfig()
         wgutils.reloadHangar()
