@@ -1,9 +1,6 @@
-import com.xvm.Config;
-import com.xvm.ColorsManager;
-import com.xvm.GraphicsUtil;
-import com.xvm.Logger;
-import wot.VehicleMarkersManager.ErrorHandler;
-import wot.VehicleMarkersManager.components.VehicleTypeProxy;
+import com.xvm.*;
+import wot.VehicleMarkersManager.*;
+import wot.VehicleMarkersManager.components.*;
 
 class wot.VehicleMarkersManager.components.VehicleTypeComponent
 {
@@ -95,22 +92,23 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
             this.setVehicleClass();
     }
 
-    public function setMarkerLabel(markerLabel:String)
+    public function setMarkerLabel()
     {
         //Logger.add("setMarkerLabel: " + m_markerLabel + " " + m_markerState);
         m_markerLabel = null;
-        updateMarkerLabel();
+        updateMarkerLabel(true);
     }
 
-    public function updateMarkerLabel()
+    public function updateMarkerLabel(skipSetMarkerLabel:Boolean)
     {
-        //Logger.add("updateMarkerLabel: " + m_markerLabel + " " + m_markerState);
+        //Logger.add("updateMarkerLabel: " + m_markerLabel + " <=> " + ColorsManager.getMarkerColorAlias(proxy.entityName));
         var aliasColor = ColorsManager.getMarkerColorAlias(proxy.entityName);
         if (m_markerLabel == aliasColor)
             return;
 
         m_markerLabel = aliasColor;
-        proxy.setMarkerLabel(m_markerLabel);
+        if (!skipSetMarkerLabel)
+            proxy.setMarkerLabel(m_markerLabel);
 
         if (m_vehicleClass == null)
             ErrorHandler.setText("INTERNAL ERROR: m_vehicleClass == null");
