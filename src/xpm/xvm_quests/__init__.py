@@ -31,6 +31,7 @@ class LINKAGES(object):
 
 class FILTERS(object):
     HIDE_WITH_HONORS = "hideWithHonors"
+    STARTED = "started"
 
 #####################################################################
 # event handlers
@@ -56,6 +57,8 @@ def QuestsTileChainsView_as_setHeaderDataS(base, self, data):
     if data:
         data['filters']['taskTypeFilterData'].insert(2, {'label': l10n('Hide with honors'),
                                                          'data': FILTERS.HIDE_WITH_HONORS})
+        data['filters']['taskTypeFilterData'].insert(3, {'label': l10n('Started'),
+                                                         'data': FILTERS.STARTED})
     return base(self, data)
 
 
@@ -137,5 +140,6 @@ def _RegisterEvents():
 
     from gui.Scaleform.daapi.view.lobby.server_events.QuestsTileChainsView import _QuestsFilter
     _QuestsFilter._FILTER_BY_STATE[FILTERS.HIDE_WITH_HONORS] = lambda q: not q.isFullCompleted(True)
+    _QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress()
 
 BigWorld.callback(0, _RegisterEvents)

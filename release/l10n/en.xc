@@ -210,6 +210,7 @@
 
     // Quests
     "Hide with honors": "Hide with honors",
+    "Started": "Started",
 
     // Config loading
     "XVM config reloaded": "XVM config reloaded",
