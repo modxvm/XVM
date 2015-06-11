@@ -271,7 +271,7 @@ class com.xvm.Macros
             var type:String = typeof value;
             if (type == "function" && (macroName != "alive" || options == null))
                 isStaticMacro = false;
-            else if (vehId == 0)
+            else if (vehId == 0 || Config.eventType != "normal")
             {
                 switch (macroName)
                 {
@@ -736,7 +736,7 @@ class com.xvm.Macros
         }
 
         // vehicle
-        if (!pdata.hasOwnProperty("veh-id") || (pdata["veh-id"] == 0 && data.vid != 0))
+        if (!pdata.hasOwnProperty("veh-id") || pdata["veh-id"] != data.vid)
         {
             var vdata:VehicleData = VehicleInfo.get(data.vid);
             if (vdata != null)
@@ -811,26 +811,27 @@ class com.xvm.Macros
             // {{hp}}
             pdata["hp"] = function(o):Number { return isNaN(o.curHealth) ? NaN : o.curHealth; }
             // {{hp-max}}
-            pdata["hp-max"] = function(o):Number { return isNaN(o.maxHealth) ? data.maxHealth : o.maxHealth; };
+            var getMaxHealth:Function = function(o):Number { return isNaN(o.maxHealth) ? data.maxHealth : o.maxHealth; };
+            pdata["hp-max"] = getMaxHealth;
             // {{hp-ratio}}
-            pdata["hp-ratio"] = function(o):Number { return isNaN(o.curHealth) ? NaN : Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
+            pdata["hp-ratio"] = function(o):Number { return isNaN(o.curHealth) ? NaN : Math.round(o.curHealth / getMaxHealth() * 100); }
             // {{c:hp}}
             pdata["c:hp"] = function(o):String { return (isNaN(o.curHealth) && !o.dead) ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth || 0); }
             // {{c:hp-ratio}}
             pdata["c:hp-ratio"] = function(o):String { return (isNaN(o.curHealth) && !o.dead) ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO,
-                isNaN(o.curHealth) ? 0 : o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
+                isNaN(o.curHealth) ? 0 : o.curHealth / getMaxHealth() * 100); }
             // {{a:hp}}
             pdata["a:hp"] = function(o):Number { return (isNaN(o.curHealth) && !o.dead) ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth || 0); }
             // {{a:hp-ratio}}
             pdata["a:hp-ratio"] = function(o):Number { return (isNaN(o.curHealth) && !o.dead) ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
-                isNaN(o.curHealth) ? 0 : o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
+                isNaN(o.curHealth) ? 0 : o.curHealth / getMaxHealth() * 100); }
 
             // dmg
 
             // {{dmg}}
             pdata["dmg"] = function(o):Number { return isNaN(o.delta) ? NaN : o.delta; }
             // {{dmg-ratio}}
-            pdata["dmg-ratio"] = function(o):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / data.maxHealth * 100); }
+            pdata["dmg-ratio"] = function(o):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / getMaxHealth() * 100); }
             // {{dmg-kind}}
             pdata["dmg-kind"] = function(o):String { return o.damageType == null ? null : Locale.get(o.damageType); }
             // {{c:dmg}}

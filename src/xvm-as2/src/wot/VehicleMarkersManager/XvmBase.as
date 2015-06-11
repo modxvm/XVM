@@ -106,6 +106,7 @@ class wot.VehicleMarkersManager.XvmBase
     {
         var obj:Object = {
             curHealth:curHealth,
+            maxHealth:m_maxHealth,
             delta:isBlowedUp ? delta - 1 : delta, // curHealth = -1 for blowedUp
             damageFlag:damageFlag,
             damageType:damageType,

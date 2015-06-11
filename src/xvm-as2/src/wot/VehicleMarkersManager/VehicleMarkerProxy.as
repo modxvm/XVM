@@ -211,10 +211,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         hunt:Boolean, entityType:String, isFlagBearer:Boolean):Void
         /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number, squad:Number*/
     {
-        /**
-         * Invoked on new marker creation.
-         * Does not get invoked on Alt or unit death.
-         */
+        // Invoked on new marker creation
         //Logger.addObject("init: " + arguments);
 
         m_vehicleName = vType;
