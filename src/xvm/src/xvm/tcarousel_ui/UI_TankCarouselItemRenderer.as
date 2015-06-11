@@ -74,15 +74,17 @@ package xvm.tcarousel_ui
                     }
 
                     // Fix statusText position
+                    var c:Object = (dataVO.buySlot || dataVO.buyTank) ? cfg.fields.statusTextBuy : cfg.fields.statusText;
+                    setupStatusTextField(c);
                     if (this.statusText && this.statusText.visible)
                     {
-                        if (this.clanLockUI.visible && cfg.fields.clanLock.dy == 0 && cfg.fields.statusText.dy == 0)
+                        if (this.clanLockUI.visible && cfg.fields.clanLock.dy == 0 && c.dy == 0)
                         {
                             statusText.y = Math.round(clanLockUI.y / scaleY + clanLockUI.textField.height * cfg.fields.clanLock.scale + 5);
                         }
                         else
                         {
-                            statusText.y = Math.round((_height / scaleY - statusText.textHeight) / 2 + cfg.fields.statusText.dy);
+                            statusText.y = Math.round((_height / scaleY - statusText.textHeight) / 2 + c.dy);
                         }
                     }
                 }
