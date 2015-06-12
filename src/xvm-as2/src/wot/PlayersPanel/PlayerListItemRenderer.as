@@ -221,7 +221,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private function get team():Number
     {
         if (_team == 0)
-            _team = wrapper._parent._parent._itemRenderer == "LeftItemRendererIcon" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY
+            _team = wrapper._parent._parent._itemRenderer == "LeftItemRendererIcon" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
         return _team;
     }
 

@@ -65,6 +65,13 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         // stub
     }
 
+    function setIsShowExtraModeActive()
+    {
+        if (Config.eventType != "normal")
+            return base.setIsShowExtraModeActive.apply(base, arguments);
+        return this.setIsShowExtraModeActiveImpl.apply(this, arguments);
+    }
+
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -214,7 +221,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     var prevFragsStr:String = null;
     private function setDataInternal(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
-        //Logger.add("PlayersPanel.setData(): " + wrapper.state);
+        //Logger.add("PlayersPanel.setData(): " + wrapper.state + " " + wrapper.type);
         //Logger.addObject(data, 3);
         //Logger.addObject(wrapper.m_list, 3);
         //Logger.add(vehiclesStrOrig);
@@ -278,7 +285,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             var needAdjustSize:Boolean = false;
             //Logger.addObject(wrapper.m_names.text);
             var text:String = wrapper.m_names.text;
-            if (prevNamesStr != namesStr || text == "" || text == "\r")
+            if (wrapper.m_names._visible && (prevNamesStr != namesStr || text == "" || text == "\r"))
             {
                 needAdjustSize = true;
                 prevNamesStr = namesStr;
@@ -287,7 +294,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             }
 
             text = wrapper.m_vehicles.text;
-            if (prevVehiclesStr != vehiclesStr || text == "" || text == "\r")
+            if (wrapper.m_vehicles._visible && (prevVehiclesStr != vehiclesStr || text == "" || text == "\r"))
             {
                 needAdjustSize = true;
                 prevVehiclesStr = vehiclesStr;
@@ -296,7 +303,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             }
 
             text = wrapper.m_frags.text;
-            if (prevFragsStr != fragsStr || text == "" || text == "\r")
+            if (wrapper.m_frags._visible && (prevFragsStr != fragsStr || text == "" || text == "\r"))
             {
                 prevFragsStr = fragsStr;
                 wrapper.m_frags.htmlText = fragsStr;
@@ -428,6 +435,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             wrapper.m_frags.wordWrap = false;
         wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
         wrapper.m_list._alpha = 100;
+    }
+
+    private function setIsShowExtraModeActiveImpl(val)
+    {
+        base.setIsShowExtraModeActive(val);
+        XVMAdjustPanelSize();
     }
 
     // PRIVATE
