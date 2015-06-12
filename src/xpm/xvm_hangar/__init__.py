@@ -75,7 +75,7 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
 def _PrebattleDispatcher_canPlayerDoAction(base, self, *args, **kwargs):
     try:
         from CurrentVehicle import g_currentVehicle
-        if not g_currentVehicle.isReadyToFight() and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfNoAmmo'):
+        if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfNoAmmo'):
             from gui.prb_control.settings import PREBATTLE_RESTRICTION
             return (False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
     except Exception as ex:
