@@ -16,11 +16,11 @@
     //"hideBuyTank": true,
     //"hideBuySlot": true,
     "filters": {
-      "nation":   { "enabled": true },
-      "type":     { "enabled": true },
-      "level":    { "enabled": true },
-      "favorite": { "enabled": true },
-      "prefs":    { "enabled": true },
+      //"nation":   { "enabled": false },
+      //"type":     { "enabled": false },
+      //"level":    { "enabled": false },
+      //"favorite": { "enabled": false },
+      //"prefs":    { "enabled": false },
       "__stub__": {}
     },
     "fields": {

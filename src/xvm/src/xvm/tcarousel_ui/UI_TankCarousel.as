@@ -40,8 +40,6 @@ package xvm.tcarousel_ui
         private var prefFilter:PrefMultiSelectionDropDown;
         private var lvlFilter:TileList;
 
-        private var disableAllFilters:Boolean = false;
-
         public function UI_TankCarousel()
         {
             //Logger.add("UI_TankCarousel()");
@@ -52,8 +50,6 @@ package xvm.tcarousel_ui
         private function init():void
         {
             this.cfg = Config.config.hangar.carousel;
-
-            disableAllFilters = !(cfg.filters.nation || cfg.filters.type || cfg.filters.level || cfg.filters.prefs || cfg.filters.favorite);
 
             componentInspectorSetting = true;
 
@@ -102,8 +98,25 @@ package xvm.tcarousel_ui
                 super.configUI();
 
                 //return; // temporary disabled
+
                 createFilters();
-                onFiltersLoaded(JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null)));
+                var filter:Object = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
+                if (filter != null)
+                {
+                    levelFilter.selectedItems = filter.levels;
+                    prefFilter.selectedItems = filter.prefs;
+                }
+                if (!cfg.filters.nation.enabled)
+                    vehicleFilters.nationFilter.selectedIndex = 0;
+                if (!cfg.filters.type.enabled)
+                    vehicleFilters.tankFilter.selectedIndex = 0;
+                if (!cfg.filters.favorite.enabled)
+                    vehicleFilters.checkBoxToMain.selected = false;
+                if (!cfg.filters.level.enabled)
+                    levelFilter.selectedItems = [];
+                if (!cfg.filters.prefs.enabled)
+                    prefFilter.selectedItems = [];
+                onFilterChanged();
             }
             catch (ex:Error)
             {
@@ -369,13 +382,7 @@ package xvm.tcarousel_ui
             try
             {
                 rearrangeFilters();
-                if (disableAllFilters)
-                {
-                    leftArrow.x = this.vehicleFilters.x;
-                    this.vehicleFilters.visible = false;
-                    this.vehicleFilters.close();
-                }
-                else if (Config.config.hangar.carousel.alwaysShowFilters == true)
+                if (Config.config.hangar.carousel.alwaysShowFilters == true)
                 {
                     leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
                     this.vehicleFilters.visible = true;
@@ -625,25 +632,6 @@ package xvm.tcarousel_ui
                 }
 
                 vehicleFilters.width = w;
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        private function onFiltersLoaded(filter:Object):void
-        {
-            //Logger.add("UI_TankCarousel.onFiltersLoaded()");
-
-            try
-            {
-                if (filter != null)
-                {
-                    levelFilter.selectedItems = filter.levels;
-                    prefFilter.selectedItems = filter.prefs;
-                    onFilterChanged();
-                }
             }
             catch (ex:Error)
             {
