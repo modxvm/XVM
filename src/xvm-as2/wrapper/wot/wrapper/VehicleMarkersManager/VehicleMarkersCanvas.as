@@ -7,7 +7,7 @@ class wot.wrapper.VehicleMarkersManager.VehicleMarkersCanvas extends net.wargami
         super();
 
         var OVERRIDE_FUNCTIONS:Array = [
-           // requires .ctor() only
+            "setShowExInfoFlag"
         ];
         Wrapper.override(this, new wot.VehicleMarkersManager.VehicleMarkersCanvas(this, super), OVERRIDE_FUNCTIONS);
     }

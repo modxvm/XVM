@@ -4,9 +4,12 @@
  */
 import com.xvm.*;
 import flash.external.*;
+import wot.VehicleMarkersManager.*;
 
 class wot.VehicleMarkersManager.VehicleMarkersCanvas
 {
+    public static var isAltMode:Boolean = false;
+
     /////////////////////////////////////////////////////////////////
     private var wrapper:net.wargaming.ingame.VehicleMarkersCanvas;
     private var base:net.wargaming.ingame.VehicleMarkersCanvas;
@@ -16,6 +19,11 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
         this.wrapper = wrapper;
         this.base = base;
         VehicleMarkersCanvasCtor();
+    }
+
+    function setShowExInfoFlag(flag)
+    {
+        return this.setShowExInfoFlagImpl.apply(this, arguments);
     }
 
     /////////////////////////////////////////////////////////////////
@@ -34,6 +42,22 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, onConfigLoaded);
         ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
+    }
+
+    private function setShowExInfoFlagImpl(flag)
+    {
+        base.setShowExInfoFlag(flag);
+
+        if (!Config.config.hotkeys.markersAltMode.enabled)
+            return;
+        if (Config.config.hotkeys.markersAltMode.onHold)
+            isAltMode = flag;
+        else if (flag)
+            isAltMode = !isAltMode;
+        else
+            return;
+
+        GlobalEventDispatcher.dispatchEvent(new VMMEvent(VMMEvent.ALT_STATE_INFORM, isAltMode));
     }
 
     private function onConfigLoaded()

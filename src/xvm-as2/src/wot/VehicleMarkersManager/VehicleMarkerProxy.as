@@ -308,20 +308,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         return call("updateState", arguments);
     }
 
-    private var isAltMode:Boolean = false;
     public function showExInfo(show:Boolean):Void
     {
-        if (!Config.config.hotkeys.markersAltMode.enabled)
-            return;
-        if (Config.config.hotkeys.markersAltMode.onHold)
-            isAltMode = show;
-        else if (show)
-            isAltMode = !isAltMode;
-        else
-            return;
-
-        GlobalEventDispatcher.dispatchEvent(new VMMEvent(VMMEvent.ALT_STATE_INFORM, isAltMode));
-        return call("showExInfo", [isAltMode]);
+        return call("showExInfo", [VehicleMarkersCanvas.isAltMode]);
     }
 
     public function showActionMarker(actionState):Void
