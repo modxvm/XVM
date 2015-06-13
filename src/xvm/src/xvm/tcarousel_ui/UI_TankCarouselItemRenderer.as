@@ -155,6 +155,7 @@ package xvm.tcarousel_ui
             mc.y += cfg.dy;
         }
 
+        private var orig_vehicleIcon_tankNameField_y:Number = NaN;
         private function setupTankNameField(cfg:Object, zoom:Number):void
         {
             var w:int = width * zoom;
@@ -165,25 +166,39 @@ package xvm.tcarousel_ui
             vehicleIcon.tankNameField.alpha = vehicleIcon.tankNameBg.alpha =
                 cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             vehicleIcon.tankNameField.x = (width - 4) * (1 - cfg.scale) + cfg.dx;
-            vehicleIcon.tankNameField.y += cfg.dy;
+            if (isNaN(orig_vehicleIcon_tankNameField_y))
+                orig_vehicleIcon_tankNameField_y = vehicleIcon.tankNameField.y;
+            vehicleIcon.tankNameField.y = orig_vehicleIcon_tankNameField_y + cfg.dy;
             vehicleIcon.tankNameBg.x = vehicleIcon.tankNameField.x + vehicleIcon.tankNameField.width - vehicleIcon.tankNameBg.width;
             vehicleIcon.tankNameBg.y = vehicleIcon.tankNameField.y + vehicleIcon.tankNameField.height - vehicleIcon.tankNameBg.height;
         }
 
+        private var orig_statusText_x:Number = NaN;
+        private var orig_statusText_y:Number = NaN;
         private function setupStatusTextField(cfg:Object):void
         {
             statusText.scaleX = statusText.scaleY = cfg.scale;
             statusText.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
-            statusText.x += cfg.dx;
-            statusText.y += cfg.dy;
+            if (isNaN(orig_statusText_x))
+                orig_statusText_x = statusText.x;
+            statusText.x = orig_statusText_x + cfg.dx;
+            if (isNaN(orig_statusText_y))
+                orig_statusText_y = statusText.y;
+            statusText.y = orig_statusText_y + cfg.dy;
         }
 
+        private var orig_clanLockUI_x:Number = NaN;
+        private var orig_clanLockUI_y:Number = NaN;
         private function setupClanLockField(cfg:Object):void
         {
             clanLockUI.scaleX = clanLockUI.scaleY = cfg.scale;
             clanLockUI.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
-            clanLockUI.x += cfg.dx;
-            clanLockUI.y += cfg.dy;
+            if (isNaN(orig_clanLockUI_x))
+                orig_clanLockUI_x = clanLockUI.x;
+            clanLockUI.x = orig_clanLockUI_x + cfg.dx;
+            if (isNaN(orig_clanLockUI_y))
+                orig_clanLockUI_y = clanLockUI.y;
+            clanLockUI.y = orig_clanLockUI_y + cfg.dy;
         }
     }
 }
