@@ -15,5 +15,6 @@ package xvm.battleresults_ui
         UI_BattleResultsAwards;
         UI_BR_SubtaskComponent;
         UI_ProgressElement;
+        UI_CommonStats;
     }
 }

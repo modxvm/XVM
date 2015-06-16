@@ -1,5 +1,6 @@
 /**
  * XVM
+ * @author Pavel Máca
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package xvm.battleresults_ui
@@ -10,9 +11,6 @@ package xvm.battleresults_ui
     import net.wg.gui.lobby.questsWindow.*;
     import scaleform.clik.constants.*;
 
-    /**
-     * @author Pavel Máca
-     */
     public dynamic class UI_BR_SubtaskComponent extends BR_SubtaskComponent_UI
     {
         public function UI_BR_SubtaskComponent()
