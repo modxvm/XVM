@@ -168,7 +168,7 @@ package xvm.battleresults_ui
         {
             try
             {
-                var x:int = efficiencyTitle.x + 294;
+                var x:int = efficiencyTitle.x + 278;
                 var y:int = efficiencyTitle.y;
                 var w:Number = 32;
 
@@ -186,13 +186,17 @@ package xvm.battleresults_ui
                         discript: xdata.damageAssistedNames
                     } } ));
 
+                addChild(createTotalItem( { x: x + w * 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.ARMOR,
+                    value: xdata.armorCount,
+                    tooltip: { } } ));
+
                 // crits
-                addChild(createTotalItem( { x: x + w * 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS,
+                addChild(createTotalItem( { x: x + w * 3, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS,
                     value: xdata.critsCount,
                     tooltip: { value: xdata.critsCount } } ));
 
                 // piercings
-                addChild(createTotalItem( { x: x + w * 3 - 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE,
+                addChild(createTotalItem( { x: x + w * 4 - 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE,
                     value: xdata.piercings,
                     tooltip: (_data.personal.details == null || _data.personal.details.length == 0) ? null : {
                         values: xdata.damageDealt + "<br/>" + xdata.piercings,
@@ -200,7 +204,7 @@ package xvm.battleresults_ui
                     } } ));
 
                 // kills
-                addChild(createTotalItem( { x: x + w * 4 - 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION,
+                addChild(createTotalItem( { x: x + w * 5 - 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION,
                     value: xdata.kills,
                     tooltip: { value: -1 } } ));
             }

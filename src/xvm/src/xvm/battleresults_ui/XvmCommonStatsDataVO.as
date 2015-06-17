@@ -6,7 +6,7 @@ package xvm.battleresults_ui
 {
     import net.wg.data.daapi.base.*;
 
-    public class XvmCommonStatsDataVO extends DAAPIDataClass
+    public dynamic class XvmCommonStatsDataVO extends DAAPIDataClass
     {
         public var __xvm:Boolean = false; // XVM data marker
         public var typeCompDescr:int = 0;
@@ -28,6 +28,10 @@ package xvm.battleresults_ui
         public var critsCount:int = 0;
         public var creditsNoPremTotalStr:String = null;
         public var creditsPremTotalStr:String = null;
+        public var armorCount:int = 0;
+        public var damageBlockedByArmor:int = 0;
+        public var riсochetsCount:int = 0;
+        public var nonPenetrationsCount:int = 0;
 
         public function XvmCommonStatsDataVO(data:Object)
         {

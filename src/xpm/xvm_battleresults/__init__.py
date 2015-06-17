@@ -52,7 +52,6 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 
         xdata = {
             '__xvm': True, # XVM data marker
-            'typeCompDescr': typeCompDescr, # not used
             'origXP': origXP,
             'premXP': premXP,
             'shots': g_personalCommonData['shots'],
