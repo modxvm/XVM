@@ -19,75 +19,47 @@ import BigWorld
 from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
+from gui.shared import g_itemsCache, REQ_CRITERIA
+    
+#####################################################################
+# Events
 
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
-#            var origCrewXP:int = xdata.tmenXP / (xdata.isPremium ? (xdata.premiumXPFactor10 / 10.0) : 1);
-#            var premCrewXP:int = xdata.tmenXP * (xdata.isPremium ? 1 : (xdata.premiumXPFactor10 / 10.0));
-#            var vdata:VehicleData = VehicleInfo.get(xdata.typeCompDescr);
-#            if (vdata != null && vdata.premium)
-#            {
-#                origCrewXP *= 1.5;
-#                premCrewXP *= 1.5;
-#            }
-#        private function calcDetails(field:String):Number
-#        {
-#            var n:int = 0;
-#            for each (var obj:Object in _data.personal.details)
-#            {
-#                var v:* = obj[field];
-#                if (v is String)
-#                    n += int(parseInt(v));
-#                else if (v is Boolean)
-#                    n += v == true ? 1 : 0
-#                else
-#                    n += int(v);
-#            }
-#            return n;
-#        }
-#
-#        private function getTotalSpotted():Number
-#        {
-#            return calcDetails("spotted");
-#        }
-#
-#        private function getTotalAssistCount():Number
-#        {
-#            var n:int = 0;
-#            for each (var obj:Object in _data.personal.details)
-#            {
-#                if (obj["damageAssistedRadio"] != 0 || obj["damageAssistedTrack"] != 0)
-#                    n++;
-#            }
-#            return n;
-#        }
-#
-#        private function getTotalCritsCount():Number
-#        {
-#            return calcDetails("critsCount");
-#        }
+        ownResult = findOwnResult(data)
+        (hits, pierced) = ownResult['statValues'][0][1]['value'].split('/')
+        ownVehicleName = ownResult['tankIcon'].split('/')[-1].split('.')[0].replace('-', ':')
+        ownVehicle = g_itemsCache.items.getVehicles(REQ_CRITERIA.VEHICLE.SPECIFIC_BY_NAME(ownVehicleName)).values()[0]
+        origXP = int(data['personal']['xpData'][0][-1]['col1'].split(' ')[0])
+        premXP = int(data['personal']['xpData'][0][-1]['col3'].split(' ')[0])
+        origCrewXP = origXP
+        premCrewXP = premXP
+        if ownVehicle.isPremium:
+            origCrewXP *= 1.5
+            premCrewXP *= 1.5
 
         xdata = {
             '__xvm': True, # XVM data marker
-            'typeCompDescr': 0,
-            'origXP': 0,
-            'premXP': 0,
-            'shots': 0,
-            'hits': 0,
-            'damageDealt': 0,
-            'damageAssisted': 0,
-            'damageAssistedCount': 0,
-            'damageAssistedRadio': 0,
-            'damageAssistedTrack': 0,
-            'damageAssistedNames': 0,
-            'piercings': 0,
-            'kills': 0,
-            'origCrewXP': 0,
-            'premCrewXP': 0,
-            'spotted': 0,
-            'critsCount': 0,
-            'creditsNoPremTotalStr': '',
-            'creditsPremTotalStr': '',
+            'typeCompDescr': 0, # needed?
+            'origXP': origXP,
+            'premXP': premXP,
+            'shots': int(ownResult['statValues'][0][0]['value']),
+            'hits': int(hits),
+            'damageDealt': ownResult['damageDealt'],
+            'damageAssisted': ownResult['damageAssisted'][0],
+            'damageAssistedCount': getTotalAssistCount(data),
+            'damageAssistedRadio': 0, # needed?
+            'damageAssistedTrack': 0, # needed?
+            'damageAssistedNames': 0, # needed?
+            'piercings': int(pierced),
+            'kills': ownResult['kills'],
+            'origCrewXP': origCrewXP,
+            'premCrewXP': premCrewXP,
+            'spotted': calcDetails(data, 'spotted'),
+            #'armorCount': calcDetails(data, 'armorTotalItems'), #blocked damage count
+            'critsCount': calcDetails(data, 'critsCount'),
+            'creditsNoPremTotalStr': data['personal']['creditsData'][0][-1]['col1'],
+            'creditsPremTotalStr': data['personal']['creditsData'][0][-1]['col3'],
         }
 
         # Use first vehicle item for transferring XVM data.
@@ -97,6 +69,40 @@ def BattleResultsWindow_as_setDataS(base, self, data):
         err(traceback.format_exc())
     return base(self, data)
 
+#####################################################################
+# Utility
+
+def calcDetails(data, field):
+    try:
+        n = 0
+        for detail in data['personal']['details'][0]:
+            n += int(detail[field])
+        return n
+    except Exception as ex:
+        err(traceback.format_exc())
+        return 0
+
+def getTotalAssistCount(data):
+    try:
+        n = 0
+        for detail in data['personal']['details'][0]:
+            if detail['damageAssisted'] > 0:
+                n += 1
+        return n
+    except Exception as ex:
+        err(traceback.format_exc())
+        return 0
+
+def findOwnResult(data):
+    try:
+        for result in data['team1']:
+            if result['isSelf']:
+                return result
+        for result in data['team2']: # might happen player in team2?
+            if result['isSelf']:
+                return result
+    except Exception as ex:
+        err(traceback.format_exc())
 
 #####################################################################
 # Register events
