@@ -32,7 +32,6 @@ _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
     XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS,
     XVM_COMMAND.LOAD_STAT_USER,
-    XVM_COMMAND.RUN_TEST,
     AS2COMMAND.LOAD_BATTLE_STAT,
     AS2COMMAND.LOGSTAT,
 )
@@ -140,6 +139,9 @@ class Xvm(object):
         BigWorld.callback(0, self.updateTankParams)
 
         as_xfw_cmd(XVM_COMMAND.AS_SET_SVC_SETTINGS, token.networkServicesSettings)
+
+        if IS_DEVELOPMENT:
+            test.onHangarInit()
 
 
     def hangarDispose(self):
@@ -449,10 +451,6 @@ class Xvm(object):
 
             if cmd == XVM_COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
-                return (None, True)
-
-            if cmd == XVM_COMMAND.RUN_TEST:
-                test.runTest(args)
                 return (None, True)
 
         except Exception, ex:
