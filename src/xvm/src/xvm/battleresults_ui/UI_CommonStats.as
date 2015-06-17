@@ -182,7 +182,7 @@ package xvm.battleresults_ui
                     value: xdata.damageAssistedCount,
                     tooltip: {
                         totalAssistedDamage: xdata.damageAssisted,
-                        values: xdata.damageAssistedRadio + "<br/>" + xdata.damageAssistedTrack,
+                        values: App.utils.locale.integer(xdata.damageAssistedRadio) + "<br/>" + App.utils.locale.integer(xdata.damageAssistedTrack),
                         discript: xdata.damageAssistedNames,
                         totalItemsCount: 2
                     } } ));
@@ -190,7 +190,7 @@ package xvm.battleresults_ui
                 addChild(createTotalItem( { x: x + w * 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.ARMOR,
                     value: xdata.armorCount,
                     tooltip: {
-                        values: xdata.ricochetsCount + "<br/>" + xdata.nonPenetrationsCount + "<br/>" + xdata.damageBlockedByArmor,
+                        values: xdata.ricochetsCount + "<br/>" + xdata.nonPenetrationsCount + "<br/>" + App.utils.locale.integer(xdata.damageBlockedByArmor),
                         discript: xdata.armorNames,
                         totalItemsCount: 3
                     } } ));
@@ -204,7 +204,7 @@ package xvm.battleresults_ui
                 addChild(createTotalItem( { x: x + w * 4 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE,
                     value: xdata.piercings,
                     tooltip: {
-                        values: xdata.damageDealt + "<br/>" + xdata.piercings,
+                        values: App.utils.locale.integer(xdata.damageDealt) + "<br/>" + xdata.piercings,
                         discript: xdata.damageDealtNames,
                         totalItemsCount: 2
                     } } ));

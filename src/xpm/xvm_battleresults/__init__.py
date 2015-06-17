@@ -51,8 +51,8 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 
         xdata = {
             '__xvm': True, # XVM data marker
-            'origXP': self._xvm_data['xpTotal'],
-            'premXP': self._xvm_data['xpPremTotal'],
+            'origXP': self._xvm_data.get('xpTotal', -1),
+            'premXP': self._xvm_data.get('xpPremTotal', -1),
             'shots': personalCommonData['shots'],
             'hits': personalCommonData['directHits'],
             'damageDealt': personalCommonData['damageDealt'],
@@ -60,9 +60,9 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             'damageAssistedCount': getTotalAssistCount(data),
             'damageAssistedRadio': personalCommonData['damageAssistedRadio'],
             'damageAssistedTrack': personalCommonData['damageAssistedTrack'],
-            'damageAssistedNames': self._xvm_data['damageAssistedNames'],
-            'damageDealtNames': self._xvm_data['damageDealtNames'],
-            'armorNames': self._xvm_data['armorNames'],
+            'damageAssistedNames': self._xvm_data.get('damageAssistedNames', None),
+            'damageDealtNames': self._xvm_data.get('damageDealtNames', None),
+            'armorNames': self._xvm_data.get('armorNames', None),
             'piercings': personalCommonData['piercings'],
             'kills': personalCommonData['kills'],
             'origCrewXP': origCrewXP,
