@@ -182,7 +182,9 @@ package xvm.battleresults_ui
                     value: xdata.damageAssistedCount,
                     tooltip: {
                         totalAssistedDamage: xdata.damageAssisted,
-                        values: App.utils.locale.integer(xdata.damageAssistedRadio) + "<br/>" + App.utils.locale.integer(xdata.damageAssistedTrack),
+                        values: App.utils.locale.integer(xdata.damageAssistedRadio) + "<br/>" +
+                            App.utils.locale.integer(xdata.damageAssistedTrack) + "<br/>" +
+                            App.utils.locale.integer(xdata.damageAssisted),
                         discript: xdata.damageAssistedNames,
                         totalItemsCount: 2
                     } } ));
