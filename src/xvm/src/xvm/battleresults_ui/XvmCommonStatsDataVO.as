@@ -30,7 +30,7 @@ package xvm.battleresults_ui
         public var creditsPremTotalStr:String = null;
         public var armorCount:int = 0;
         public var damageBlockedByArmor:int = 0;
-        public var riсochetsCount:int = 0;
+        public var ricochetsCount:int = 0;
         public var nonPenetrationsCount:int = 0;
 
         public function XvmCommonStatsDataVO(data:Object)

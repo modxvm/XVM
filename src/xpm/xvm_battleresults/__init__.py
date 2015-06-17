@@ -70,7 +70,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             'spotted': personalCommonData['spotted'],
             'damageBlockedByArmor': personalCommonData['damageBlockedByArmor'],
             'armorCount': personalCommonData['noDamageDirectHitsReceived'], #number on picture
-            'riсochetsCount': getTotalRicochetsCount(personalCommonData),
+            'ricochetsCount': getTotalRicochetsCount(personalCommonData),
             'nonPenetrationsCount': personalCommonData['noDamageDirectHitsReceived'],
             'critsCount': calcDetails(data, 'critsCount'),
             'creditsNoPremTotalStr': data['personal']['creditsData'][0][-1]['col1'],
