@@ -128,6 +128,16 @@ def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, daily
         self._xvm_data['xpPremTotal'] = result
     return result
 
+# wait for loading xvm_battleresults_ui.swf
+def shared_events_showBattleResults(base, arenaUniqueID, dataProvider, cnt=0):
+    is_swf = 'swf_file_name' in xfw_mods_info.info.get('xvm_battleresults', {})
+    if cnt < 5 and is_swf and not 'xvm_battleresults_ui.swf' in xfw_mods_info.loaded_swfs:
+        BigWorld.callback(0, lambda:shared_events_showBattleResults(base, arenaUniqueID, dataProvider, cnt+1))
+        return
+
+    base(arenaUniqueID, dataProvider)
+
+
 #####################################################################
 # Utility
 
@@ -173,5 +183,8 @@ def _RegisterEvents():
     OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getArmorUsingInfo', _BattleResultsWindow__getArmorUsingInfo)
     OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getDamageInfo', _BattleResultsWindow__getDamageInfo)
     OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__calculateTotalXp',  _BattleResultsWindow__calculateTotalXp)
+
+    from gui.shared import event_dispatcher as shared_events
+    OverrideMethod(shared_events, '_showBattleResults', shared_events_showBattleResults)
 
 BigWorld.callback(0, _RegisterEvents)
