@@ -21,21 +21,12 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
 #####################################################################
-# Globals
-g_data = None
-g_xdata = None
-g_personalCommonData = None
-
-#####################################################################
 # Events
 
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
         from gui.shared import g_itemsCache
         personalCommonData = self._xvm_data['personalCommonData']
-        global g_data, g_xdata, g_personalCommonData
-        g_data = data
-        g_personalCommonData = personalCommonData
 
         origCrewXP = personalCommonData['tmenXP']
         premCrewXP = personalCommonData['tmenXP']
@@ -76,7 +67,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             'creditsNoPremTotalStr': data['personal']['creditsData'][0][-1]['col1'],
             'creditsPremTotalStr': data['personal']['creditsData'][0][-1]['col3'],
         }
-        g_xdata = xdata
+        
         # Use first vehicle item for transferring XVM data.
         # Cannot add to data object because DAAPIDataClass is not dynamic.
         data['vehicles'].insert(0, xdata)
