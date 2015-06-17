@@ -42,7 +42,6 @@ class XVM_COMMAND(object):
     LOAD_STAT_USER = "xvm.load_stat_user"
     OPEN_URL = "xvm.open_url"
     SAVE_SETTINGS = "xvm.save_settings"
-    RUN_TEST = "xvm.run_test"
     AS_DOSSIER = "xvm.as.dossier"
     AS_L10N = "xvm.as.l10n"
     AS_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"

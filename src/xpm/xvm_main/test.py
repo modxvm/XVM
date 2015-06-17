@@ -3,6 +3,12 @@
 #############################
 # Command
 
+def onHangarInit():
+    pass
+    # debug
+    #runTest(('battleResults', '868748764371175.dat'))
+
+
 def runTest(args):
     if args is None:
         return

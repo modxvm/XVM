@@ -10,7 +10,6 @@ package com.xvm
         public static const LOAD_SETTINGS:String = "xvm.load_settings";
         public static const OPEN_URL:String = "xvm.open_url";
         public static const SAVE_SETTINGS:String = "xvm.save_settings";
-        public static const RUN_TEST:String = "xvm.run_test";
 
         public static const AS_UPDATE_CURRENT_VEHICLE:String = "xvm.as.update_current_vehicle";
     }
