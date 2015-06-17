@@ -95,8 +95,7 @@ def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
     result = base(self, iInfo, valsStr)
     if not hasattr(self, '_xvm_data'):
         self._xvm_data = {}
-    if 'damageAssistedNames' in result:
-        self._xvm_data['damageAssistedNames'] = result['damageAssistedNames']
+    self._xvm_data['damageAssistedNames'] = result.get('damageAssistedNames', None)
     return result
 
 # get string 'armorNames'
@@ -104,8 +103,7 @@ def _BattleResultsWindow__getArmorUsingInfo(base, self, iInfo, valsStr):
     result = base(self, iInfo, valsStr)
     if not hasattr(self, '_xvm_data'):
         self._xvm_data = {}
-    if 'armorNames' in result:
-        self._xvm_data['armorNames'] = result['armorNames']
+    self._xvm_data['armorNames'] = result.get('armorNames', None)
     return result
 
 # get string 'getDamageInfo'
@@ -113,8 +111,7 @@ def _BattleResultsWindow__getDamageInfo(base, self, iInfo, valsStr):
     result = base(self, iInfo, valsStr)
     if not hasattr(self, '_xvm_data'):
         self._xvm_data = {}
-    if 'damageDealtNames' in result:
-        self._xvm_data['damageDealtNames'] = result['damageDealtNames']
+    self._xvm_data['damageDealtNames'] = result.get('damageDealtNames', None)
     return result
 
 # save xp
