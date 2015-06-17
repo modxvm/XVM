@@ -19,55 +19,81 @@ import BigWorld
 from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-from gui.shared import g_itemsCache, REQ_CRITERIA
-    
+
+#####################################################################
+# Globals
+g_personalCommonData = None
+g_damageAssistedNames = None
+#g_data = None 
+#g_xdata = None
+
 #####################################################################
 # Events
 
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
-        ownResult = findOwnResult(data)
-        (hits, pierced) = ownResult['statValues'][0][1]['value'].split('/')
-        ownVehicleName = ownResult['tankIcon'].split('/')[-1].split('.')[0].replace('-', ':')
-        ownVehicle = g_itemsCache.items.getVehicles(REQ_CRITERIA.VEHICLE.SPECIFIC_BY_NAME(ownVehicleName)).values()[0]
+        from gui.shared import g_itemsCache
+        #global g_data, g_xdata
+        #g_data = data
         origXP = int(data['personal']['xpData'][0][-1]['col1'].split(' ')[0])
         premXP = int(data['personal']['xpData'][0][-1]['col3'].split(' ')[0])
-        origCrewXP = origXP
-        premCrewXP = premXP
-        if ownVehicle.isPremium:
+
+        origCrewXP = g_personalCommonData['tmenXP']
+        premCrewXP = g_personalCommonData['tmenXP']
+        if g_personalCommonData['isPremium']:
+            origCrewXP = g_personalCommonData['tmenXP'] / (g_personalCommonData['premiumXPFactor10'] / 10.0)
+        else:
+            premCrewXP = g_personalCommonData['tmenXP'] * (g_personalCommonData['premiumXPFactor10'] / 10.0)
+        typeCompDescr = g_personalCommonData['typeCompDescr']
+        ownVehicle = g_itemsCache.items.getItemByCD(typeCompDescr)
+        if ownVehicle and ownVehicle.isPremium:
             origCrewXP *= 1.5
             premCrewXP *= 1.5
 
         xdata = {
             '__xvm': True, # XVM data marker
-            'typeCompDescr': 0, # needed?
+            'typeCompDescr': typeCompDescr, # not used
             'origXP': origXP,
             'premXP': premXP,
-            'shots': int(ownResult['statValues'][0][0]['value']),
-            'hits': int(hits),
-            'damageDealt': ownResult['damageDealt'],
-            'damageAssisted': ownResult['damageAssisted'][0],
+            'shots': g_personalCommonData['shots'],
+            'hits': g_personalCommonData['directHits'],
+            'damageDealt': g_personalCommonData['damageDealt'],
+            'damageAssisted': g_personalCommonData['damageAssistedRadio'] + g_personalCommonData['damageAssistedTrack'],
             'damageAssistedCount': getTotalAssistCount(data),
-            'damageAssistedRadio': 0, # needed?
-            'damageAssistedTrack': 0, # needed?
-            'damageAssistedNames': 0, # needed?
-            'piercings': int(pierced),
-            'kills': ownResult['kills'],
+            'damageAssistedRadio': g_personalCommonData['damageAssistedRadio'],
+            'damageAssistedTrack': g_personalCommonData['damageAssistedTrack'],
+            'damageAssistedNames': g_damageAssistedNames,
+            'piercings': g_personalCommonData['piercings'],
+            'kills': g_personalCommonData['kills'],
             'origCrewXP': origCrewXP,
             'premCrewXP': premCrewXP,
-            'spotted': calcDetails(data, 'spotted'),
+            'spotted': g_personalCommonData['spotted'],
             #'armorCount': calcDetails(data, 'armorTotalItems'), #blocked damage count
             'critsCount': calcDetails(data, 'critsCount'),
             'creditsNoPremTotalStr': data['personal']['creditsData'][0][-1]['col1'],
             'creditsPremTotalStr': data['personal']['creditsData'][0][-1]['col3'],
         }
-
+        #g_xdata = xdata
         # Use first vehicle item for transferring XVM data.
         # Cannot add to data object because DAAPIDataClass is not dynamic.
         data['vehicles'].insert(0, xdata)
     except Exception as ex:
         err(traceback.format_exc())
     return base(self, data)
+
+# save personalCommonData: more info there
+def _BattleResultsWindow__populateAccounting_event(self, commonData, personalCommonData, personalData, playersData, personalDataOutput):
+    global g_personalCommonData
+    g_personalCommonData = personalCommonData
+
+# get string of assisting
+def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
+    result = base(self, iInfo, valsStr)
+    global g_damageAssistedNames
+    if 'damageAssistedNames' in result and not g_damageAssistedNames:
+        g_damageAssistedNames = result['damageAssistedNames']
+    return result
+    
 
 #####################################################################
 # Utility
@@ -93,22 +119,13 @@ def getTotalAssistCount(data):
         err(traceback.format_exc())
         return 0
 
-def findOwnResult(data):
-    try:
-        for result in data['team1']:
-            if result['isSelf']:
-                return result
-        for result in data['team2']: # might happen player in team2?
-            if result['isSelf']:
-                return result
-    except Exception as ex:
-        err(traceback.format_exc())
-
 #####################################################################
 # Register events
 
 def _RegisterEvents():
     from gui.Scaleform.daapi.view.BattleResultsWindow import BattleResultsWindow
     OverrideMethod(BattleResultsWindow, 'as_setDataS', BattleResultsWindow_as_setDataS)
+    RegisterEvent(BattleResultsWindow, '_BattleResultsWindow__populateAccounting', _BattleResultsWindow__populateAccounting_event)
+    OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getAssistInfo', _BattleResultsWindow__getAssistInfo)
 
 BigWorld.callback(0, _RegisterEvents)
