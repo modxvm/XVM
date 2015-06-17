@@ -61,6 +61,8 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             'damageAssistedRadio': personalCommonData['damageAssistedRadio'],
             'damageAssistedTrack': personalCommonData['damageAssistedTrack'],
             'damageAssistedNames': self._xvm_data['damageAssistedNames'],
+            'damageDealtNames': self._xvm_data['damageDealtNames'],
+            'armorNames': self._xvm_data['armorNames'],
             'piercings': personalCommonData['piercings'],
             'kills': personalCommonData['kills'],
             'origCrewXP': origCrewXP,
@@ -88,7 +90,7 @@ def _BattleResultsWindow__populateAccounting_event(self, commonData, personalCom
         self._xvm_data = {}
     self._xvm_data['personalCommonData'] = personalCommonData
 
-# get string of assisting
+# get string 'damageAssistedNames'
 def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
     result = base(self, iInfo, valsStr)
     if not hasattr(self, '_xvm_data'):
@@ -97,7 +99,25 @@ def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
         self._xvm_data['damageAssistedNames'] = result['damageAssistedNames']
     return result
 
-# save xp for premium 
+# get string 'armorNames'
+def _BattleResultsWindow__getArmorUsingInfo(base, self, iInfo, valsStr):
+    result = base(self, iInfo, valsStr)
+    if not hasattr(self, '_xvm_data'):
+        self._xvm_data = {}
+    if 'armorNames' in result:
+        self._xvm_data['armorNames'] = result['armorNames']
+    return result
+
+# get string 'getDamageInfo'
+def _BattleResultsWindow__getDamageInfo(base, self, iInfo, valsStr):
+    result = base(self, iInfo, valsStr)
+    if not hasattr(self, '_xvm_data'):
+        self._xvm_data = {}
+    if 'damageDealtNames' in result:
+        self._xvm_data['damageDealtNames'] = result['damageDealtNames']
+    return result
+
+# save xp
 def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, dailyXpFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor = False):
     result = base(self, pData, aogasFactor, dailyXpFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor)
     if not hasattr(self, '_xvm_data'):
@@ -150,6 +170,8 @@ def _RegisterEvents():
     OverrideMethod(BattleResultsWindow, 'as_setDataS', BattleResultsWindow_as_setDataS)
     RegisterEvent(BattleResultsWindow, '_BattleResultsWindow__populateAccounting', _BattleResultsWindow__populateAccounting_event)
     OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getAssistInfo', _BattleResultsWindow__getAssistInfo)
+    OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getArmorUsingInfo', _BattleResultsWindow__getArmorUsingInfo)
+    OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getDamageInfo', _BattleResultsWindow__getDamageInfo)
     OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__calculateTotalXp',  _BattleResultsWindow__calculateTotalXp)
 
 BigWorld.callback(0, _RegisterEvents)
