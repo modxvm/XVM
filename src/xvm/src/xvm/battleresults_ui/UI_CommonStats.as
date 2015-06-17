@@ -205,7 +205,7 @@ package xvm.battleresults_ui
                     value: xdata.piercings,
                     tooltip: {
                         values: xdata.damageDealt + "<br/>" + xdata.piercings,
-                        discript: _data.personal.details[0].damageDealtNames,
+                        discript: xdata.damageDealtNames,
                         totalItemsCount: 2
                     } } ));
 

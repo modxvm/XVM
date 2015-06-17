@@ -15,6 +15,7 @@ package xvm.battleresults_ui
         public var shots:int = 0;
         public var hits:int = 0;
         public var damageDealt:int = 0;
+        public var damageDealtNames:String = null;
         public var damageAssisted:int = 0;
         public var damageAssistedCount:int = 0;
         public var damageAssistedRadio:int = 0;
@@ -29,6 +30,7 @@ package xvm.battleresults_ui
         public var creditsNoPremTotalStr:String = null;
         public var creditsPremTotalStr:String = null;
         public var armorCount:int = 0;
+        public var armorNames:String = null;
         public var damageBlockedByArmor:int = 0;
         public var ricochetsCount:int = 0;
         public var nonPenetrationsCount:int = 0;
