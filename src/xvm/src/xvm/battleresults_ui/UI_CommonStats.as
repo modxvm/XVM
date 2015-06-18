@@ -256,7 +256,7 @@ package xvm.battleresults_ui
                 // damage assisted (radio/tracks)
                 damageAssistedTotalField.value = xdata.damageAssistedCount;
                 damageAssistedTotalField.enabled = xdata.damageAssistedCount > 0;
-                tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = {
+                tooltips[BATTLE_EFFICIENCY_TYPES.ASSIST] = {
                     totalAssistedDamage: xdata.damageAssisted,
                     values: App.utils.locale.integer(xdata.damageAssistedRadio) + "<br/>" +
                         App.utils.locale.integer(xdata.damageAssistedTrack) + "<br/>" +
