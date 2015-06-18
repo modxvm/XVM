@@ -50,14 +50,18 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             'data': [],
         }
         if data['common']['isFalloutMode']:
+            isFallout = 1
+        else:
+            isFallout = 0
+        if isFallout:
             xdata_fallout_total = {
-                'origXP': self._xvm_data['xpTotal'].pop(0),
-                'premXP': self._xvm_data['xpPremTotal'].pop(0),
+                'origXP': self._xvm_data['xpTotal'][0],
+                'premXP': self._xvm_data['xpPremTotal'][0],
                 'shots': 0,
                 'hits': 0,
                 'damageDealt': 0,
                 'damageAssisted': 0,
-                'damageAssistedCount': 0,
+                'damageAssistedCount': getTotalAssistCount(data['personal']['details'][0]),
                 'damageAssistedRadio': 0,
                 'damageAssistedTrack': 0,
                 'piercings': 0,
@@ -69,9 +73,9 @@ def BattleResultsWindow_as_setDataS(base, self, data):
                 'armorCount': 0, #number on picture
                 'ricochetsCount': 0,
                 'nonPenetrationsCount': 0,
-                'critsCount': 0,
+                'critsCount': calcDetails(data['personal']['details'][0], 'critsCount'),
                 'creditsNoPremTotalStr': data['personal']['creditsData'][0][-1]['col1'],
-                'creditsPremTotalStr': data['personal']['creditsData'].pop(0)[-1]['col3'],
+                'creditsPremTotalStr': data['personal']['creditsData'][0][-1]['col3'],
             }
 
         for index, (typeCompDescr, personalData) in enumerate(self._xvm_data['personalData']):
@@ -86,12 +90,11 @@ def BattleResultsWindow_as_setDataS(base, self, data):
                 origCrewXP = int(origCrewXP * 1.5)
                 premCrewXP = int(premCrewXP * 1.5)
             
-            if data['common']['isFalloutMode']:
+            if isFallout:
                 xdata_fallout_total['shots'] += personalData['shots']
                 xdata_fallout_total['hits'] += personalData['directHits']
                 xdata_fallout_total['damageDealt'] += personalData['damageDealt']
                 xdata_fallout_total['damageAssisted'] += (personalData['damageAssistedRadio'] + personalData['damageAssistedTrack'])
-                xdata_fallout_total['damageAssistedCount'] += getTotalAssistCount(data)
                 xdata_fallout_total['damageAssistedRadio'] += personalData['damageAssistedRadio']
                 xdata_fallout_total['damageAssistedTrack'] += personalData['damageAssistedTrack']
                 xdata_fallout_total['piercings'] += personalData['piercings']
@@ -103,16 +106,14 @@ def BattleResultsWindow_as_setDataS(base, self, data):
                 xdata_fallout_total['armorCount'] += personalData['noDamageDirectHitsReceived'] #number on picture
                 xdata_fallout_total['ricochetsCount'] += getTotalRicochetsCount(personalData)
                 xdata_fallout_total['nonPenetrationsCount'] += personalData['noDamageDirectHitsReceived']
-                xdata_fallout_total['critsCount'] += calcDetails(data, 'critsCount')
-
             xdataList['data'].append({
-                'origXP': self._xvm_data['xpTotal'][index],
-                'premXP': self._xvm_data['xpPremTotal'][index],
+                'origXP': self._xvm_data['xpTotal'][index + isFallout],
+                'premXP': self._xvm_data['xpPremTotal'][index + isFallout],
                 'shots': personalData['shots'],
                 'hits': personalData['directHits'],
                 'damageDealt': personalData['damageDealt'],
                 'damageAssisted': personalData['damageAssistedRadio'] + personalData['damageAssistedTrack'],
-                'damageAssistedCount': getTotalAssistCount(data),
+                'damageAssistedCount': getTotalAssistCount(data['personal']['details'][index + isFallout]),
                 'damageAssistedRadio': personalData['damageAssistedRadio'],
                 'damageAssistedTrack': personalData['damageAssistedTrack'],
                 'piercings': personalData['piercings'],
@@ -124,11 +125,11 @@ def BattleResultsWindow_as_setDataS(base, self, data):
                 'armorCount': personalData['noDamageDirectHitsReceived'], #number on picture
                 'ricochetsCount': getTotalRicochetsCount(personalData),
                 'nonPenetrationsCount': personalData['noDamageDirectHitsReceived'],
-                'critsCount': calcDetails(data, 'critsCount'),
-                'creditsNoPremTotalStr': data['personal']['creditsData'][index][-1]['col1'],
-                'creditsPremTotalStr': data['personal']['creditsData'][index][-1]['col3'],
+                'critsCount': calcDetails(data['personal']['details'][index + isFallout], 'critsCount'),
+                'creditsNoPremTotalStr': data['personal']['creditsData'][index + isFallout][-1]['col1'],
+                'creditsPremTotalStr': data['personal']['creditsData'][index + isFallout][-1]['col3'],
             })
-        if data['common']['isFalloutMode']:
+        if isFallout:
             xdataList['data'].insert(0, xdata_fallout_total)
         g_xdataList = xdataList
         # Use first vehicle item for transferring XVM data.
@@ -183,22 +184,24 @@ def shared_events_showBattleResults(base, arenaUniqueID, dataProvider, cnt=0):
 #####################################################################
 # Utility
 
-def calcDetails(data, field):
+def calcDetails(personal_details_list, field):
     try:
         n = 0
-        for detail in data['personal']['details'][0]:
-            n += int(detail[field])
+        for detail in personal_details_list:
+            if field in detail:
+                n += int(detail[field])
         return n
     except Exception as ex:
         err(traceback.format_exc())
         return 0
 
-def getTotalAssistCount(data):
+def getTotalAssistCount(personal_details_list):
     try:
         n = 0
-        for detail in data['personal']['details'][0]:
-            if detail['damageAssisted'] > 0:
-                n += 1
+        for detail in personal_details_list:
+            if 'damageAssisted' in detail:
+                if detail['damageAssisted'] > 0:
+                    n += 1
         return n
     except Exception as ex:
         err(traceback.format_exc())
