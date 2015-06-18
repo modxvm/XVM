@@ -104,8 +104,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
                 xdata_fallout_total['ricochetsCount'] += getTotalRicochetsCount(personalData)
                 xdata_fallout_total['nonPenetrationsCount'] += personalData['noDamageDirectHitsReceived']
                 xdata_fallout_total['critsCount'] += calcDetails(data, 'critsCount')
-            print data['personal']['creditsData']
-            print index
+
             xdataList['data'].append({
                 'origXP': self._xvm_data['xpTotal'][index],
                 'premXP': self._xvm_data['xpPremTotal'][index],
