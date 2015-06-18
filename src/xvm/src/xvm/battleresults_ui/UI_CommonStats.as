@@ -105,15 +105,6 @@ package xvm.battleresults_ui
                     if (Config.config.battleResults.showTotals)
                         initTotals();
 
-                    if (Config.config.battleResults.showTotalExperience)
-                        showTotalExperience();
-
-                    if (Config.config.battleResults.showCrewExperience)
-                        showCrewExperience();
-
-                    if (Config.config.battleResults.showNetIncome)
-                        showNetIncome();
-
                     updateValues();
                 }
             }
@@ -210,6 +201,85 @@ package xvm.battleresults_ui
             }
         }
 
+        private function updateValues():void
+        {
+            if (Config.config.battleResults.showExtendedInfo)
+                showExtendedInfo();
+
+            if (Config.config.battleResults.showTotals)
+                showTotals();
+
+            if (Config.config.battleResults.showTotalExperience)
+                showTotalExperience();
+
+            if (Config.config.battleResults.showCrewExperience)
+                showCrewExperience();
+
+            if (Config.config.battleResults.showNetIncome)
+                showNetIncome();
+        }
+
+        private function showExtendedInfo():void
+        {
+            shotsTitle.htmlText = formatText(Locale.get("Hit percent"), "#C9C9B6");
+            shotsCount.htmlText = formatText(xdata.hits + "/" + xdata.shots, "#C9C9B6", TextFormatAlign.RIGHT);
+
+            var hitsRatio:Number = (xdata.shots <= 0) ? 0 : (xdata.hits / xdata.shots) * 100;
+            shotsPercent.htmlText = formatText(App.utils.locale.float(hitsRatio) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
+
+            damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
+            damageAssistedValue.htmlText = formatText(App.utils.locale.integer(xdata.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
+            damageValue.htmlText = formatText(App.utils.locale.integer(xdata.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
+        }
+
+        private function showTotals():void
+        {
+            // spotted
+            spottedTotalField.value = xdata.spotted;
+            spottedTotalField.enabled = xdata.spotted > 0;
+            tooltips[BATTLE_EFFICIENCY_TYPES.DETECTION] = { };
+
+            // damage assisted (radio/tracks)
+            damageAssistedTotalField.value = xdata.damageAssistedCount;
+            damageAssistedTotalField.enabled = xdata.damageAssistedCount > 0;
+            tooltips[BATTLE_EFFICIENCY_TYPES.ASSIST] = {
+                totalAssistedDamage: xdata.damageAssisted,
+                values: App.utils.locale.integer(xdata.damageAssistedRadio) + "<br/>" +
+                    App.utils.locale.integer(xdata.damageAssistedTrack) + "<br/>" +
+                    App.utils.locale.integer(xdata.damageAssisted),
+                discript: xdataList.damageAssistedNames,
+                totalItemsCount: 2
+            };
+
+            // armor
+            armorTotalField.value = xdata.armorCount;
+            armorTotalField.enabled = xdata.armorCount > 0;
+            tooltips[BATTLE_EFFICIENCY_TYPES.ARMOR] = {
+                values: xdata.ricochetsCount + "<br/>" + xdata.nonPenetrationsCount + "<br/>" + App.utils.locale.integer(xdata.damageBlockedByArmor),
+                discript: xdataList.armorNames,
+                totalItemsCount: 3
+            };
+
+            // crits
+            critsTotalField.value = xdata.critsCount;
+            critsTotalField.enabled = xdata.critsCount > 0;
+            tooltips[BATTLE_EFFICIENCY_TYPES.CRITS] = { };
+
+            // piercings
+            damageTotalField.value = xdata.piercings;
+            damageTotalField.enabled = xdata.piercings > 0;
+            tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = {
+                values: App.utils.locale.integer(xdata.damageDealt) + "<br/>" + xdata.piercings,
+                discript: xdataList.damageDealtNames,
+                totalItemsCount: 2
+            };
+
+            // kills
+            killsTotalField.value = xdata.kills;
+            killsTotalField.enabled = xdata.kills > 0;
+            tooltips[BATTLE_EFFICIENCY_TYPES.DESTRUCTION] = { };
+        }
+
         private function showTotalExperience():void
         {
             detailsMc.xpLbl.htmlText = App.utils.locale.integer(xdata.origXP) + XP_IMG_TXT;
@@ -229,70 +299,6 @@ package xvm.battleresults_ui
         {
             detailsMc.creditsLbl.htmlText = xdata.creditsNoPremTotalStr;
             detailsMc.premCreditsLbl.htmlText = xdata.creditsPremTotalStr;
-        }
-
-        private function updateValues():void
-        {
-            if (Config.config.battleResults.showExtendedInfo)
-            {
-                shotsTitle.htmlText = formatText(Locale.get("Hit percent"), "#C9C9B6");
-                shotsCount.htmlText = formatText(xdata.hits + "/" + xdata.shots, "#C9C9B6", TextFormatAlign.RIGHT);
-
-                var hitsRatio:Number = (xdata.shots <= 0) ? 0 : (xdata.hits / xdata.shots) * 100;
-                shotsPercent.htmlText = formatText(App.utils.locale.float(hitsRatio) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
-
-                damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
-                damageAssistedValue.htmlText = formatText(App.utils.locale.integer(xdata.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
-                damageValue.htmlText = formatText(App.utils.locale.integer(xdata.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
-            }
-
-            if (Config.config.battleResults.showTotals)
-            {
-                // spotted
-                spottedTotalField.value = xdata.spotted;
-                spottedTotalField.enabled = xdata.spotted > 0;
-                tooltips[BATTLE_EFFICIENCY_TYPES.DETECTION] = { };
-
-                // damage assisted (radio/tracks)
-                damageAssistedTotalField.value = xdata.damageAssistedCount;
-                damageAssistedTotalField.enabled = xdata.damageAssistedCount > 0;
-                tooltips[BATTLE_EFFICIENCY_TYPES.ASSIST] = {
-                    totalAssistedDamage: xdata.damageAssisted,
-                    values: App.utils.locale.integer(xdata.damageAssistedRadio) + "<br/>" +
-                        App.utils.locale.integer(xdata.damageAssistedTrack) + "<br/>" +
-                        App.utils.locale.integer(xdata.damageAssisted),
-                    discript: xdataList.damageAssistedNames,
-                    totalItemsCount: 2
-                };
-
-                // armor
-                armorTotalField.value = xdata.armorCount;
-                armorTotalField.enabled = xdata.armorCount > 0;
-                tooltips[BATTLE_EFFICIENCY_TYPES.ARMOR] = {
-                    values: xdata.ricochetsCount + "<br/>" + xdata.nonPenetrationsCount + "<br/>" + App.utils.locale.integer(xdata.damageBlockedByArmor),
-                    discript: xdataList.armorNames,
-                    totalItemsCount: 3
-                };
-
-                // crits
-                critsTotalField.value = xdata.critsCount;
-                critsTotalField.enabled = xdata.critsCount > 0;
-                tooltips[BATTLE_EFFICIENCY_TYPES.CRITS] = { };
-
-                // piercings
-                damageTotalField.value = xdata.piercings;
-                damageTotalField.enabled = xdata.piercings > 0;
-                tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = {
-                    values: App.utils.locale.integer(xdata.damageDealt) + "<br/>" + xdata.piercings,
-                    discript: xdataList.damageDealtNames,
-                    totalItemsCount: 2
-                };
-
-                // kills
-                killsTotalField.value = xdata.kills;
-                killsTotalField.enabled = xdata.kills > 0;
-                tooltips[BATTLE_EFFICIENCY_TYPES.DESTRUCTION] = { };
-            }
         }
 
         // helpers
