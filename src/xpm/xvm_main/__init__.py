@@ -15,11 +15,11 @@ XFW_MOD_INFO = {
 #####################################################################
 
 from pprint import pprint
+from glob import glob
 import os
 import time
 import traceback
 import cPickle
-
 import BigWorld
 
 from xfw import *
@@ -382,11 +382,14 @@ BigWorld.callback(0, _RegisterEvents)
 
 
 #####################################################################
-# Log version info
+# Log version info + warn about installed XVM fonts
 
 log("xvm %s (%s) for WoT %s" % (XFW_MOD_INFO['VERSION'], XFW_MOD_INFO['URL'], ", ".join(XFW_MOD_INFO['GAME_VERSIONS'])))
 try:
     from __version__ import __branch__, __revision__
     log("Branch: %s, Revision: %s" % (__branch__, __revision__))
+    xvm_fonts_arr = glob(os.environ['WINDIR'] + '/Fonts/*xvm*')
+    if len(xvm_fonts_arr):
+        warn('Following XVM fonts installed: %s' % xvm_fonts_arr)
 except Exception, ex:
     err(traceback.format_exc())
