@@ -21,12 +21,6 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
 #####################################################################
-# Globals
-g_self = None
-g_data = None
-g_xdataList = None
-
-#####################################################################
 # Events
 
 def init(self):
@@ -38,9 +32,6 @@ def init(self):
 
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
-        global g_self, g_data, g_xdataList
-        g_self = self
-        g_data = data
         from gui.shared import g_itemsCache
         xdataList = {
             '__xvm': True, # XVM data marker
@@ -131,7 +122,6 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             })
         if isFallout:
             xdataList['data'].insert(0, xdata_fallout_total)
-        g_xdataList = xdataList
         # Use first vehicle item for transferring XVM data.
         # Cannot add to data object because DAAPIDataClass is not dynamic.
         data['vehicles'].insert(0, xdataList)
@@ -199,9 +189,8 @@ def getTotalAssistCount(personal_details_list):
     try:
         n = 0
         for detail in personal_details_list:
-            if 'damageAssisted' in detail:
-                if detail['damageAssisted'] > 0:
-                    n += 1
+            if 'damageAssisted' in detail and detail['damageAssisted'] > 0:
+                n += 1
         return n
     except Exception as ex:
         err(traceback.format_exc())
