@@ -113,7 +113,7 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
         for vehicle_id in last_vehicles_id_arr[:-1]:
             prev_vehicle = g_itemsCache.items.getItemByCD(vehicle_id)
             if not prev_vehicle or not prev_vehicle.isInInventory: # sold?
-                last_vehicles_id_arr.remove(vehicle.intCD)
+                last_vehicles_id_arr.remove(vehicle_id)
                 continue
             if prev_vehicle.isAlive:
                 for slotIdx, installed_device in enumerate(prev_vehicle.optDevices):
