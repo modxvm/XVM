@@ -112,23 +112,28 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
         devices_arr = []
         for vehicle_id in last_vehicles_id_arr[:-1]:
             prev_vehicle = g_itemsCache.items.getItemByCD(vehicle_id)
-            if prev_vehicle and not (prev_vehicle.isInBattle or prev_vehicle.isLocked):
+            if not prev_vehicle or not prev_vehicle.isInInventory: # sold?
+                last_vehicles_id_arr.remove(vehicle.intCD)
+                continue
+            if prev_vehicle.isAlive:
                 for slotIdx, installed_device in enumerate(prev_vehicle.optDevices):
                     if installed_device and installed_device.isRemovable and installed_device.name not in devices_arr and not updated_inventoryCount[installed_device.name]:
                         #debug('xvm_equip: get %s from %s' % (installed_device.name, prev_vehicle.name))
                         wg_compat.g_instance.processReturnEquip(prev_vehicle, installed_device, slotIdx, False)
                         devices_arr.append(installed_device.name)
 
-        if vehicle.name in equip_settings: # equip all modules from user prefs
-            debug_str = 'xvm_equip: equip to %s devices:' % vehicle.name
-            for slotIdx, installed_device in enumerate(vehicle.optDevices):
-                needed_device_id = equip_settings[vehicle.name][slotIdx]
-                if needed_device_id and (not installed_device or (installed_device.isRemovable and installed_device.intCD != needed_device_id)):
-                    needed_device = g_itemsCache.items.getItemByCD(needed_device_id)
-                    debug_str += ' %s' % needed_device.name
-                    wg_compat.g_instance.processReturnEquip(vehicle, needed_device, slotIdx, True)
-#                    BigWorld.player().inventory.equipOptionalDevice(vehicle.invID, new_device.intCD, slotIdx, False, None)
-            debug(debug_str)
+        if vehicle.name in equip_settings and len(equip_settings[vehicle.name]) == 3: # equip all modules from user prefs
+            if vehicle.isAlive:
+                debug_str = 'xvm_equip: equip to %s devices:' % vehicle.name
+                for slotIdx, installed_device in enumerate(vehicle.optDevices):
+                    needed_device_id = equip_settings[vehicle.name][slotIdx]
+                    if needed_device_id and (not installed_device or (installed_device.isRemovable and installed_device.intCD != needed_device_id)):
+                        needed_device = g_itemsCache.items.getItemByCD(needed_device_id)
+                        debug_str += ' %s' % needed_device.name
+                        wg_compat.g_instance.processReturnEquip(vehicle, needed_device, slotIdx, True)
+                debug(debug_str)
+            else:
+                debug("xvm_equip: can't put equipment, vehicle %s not ready" % vehicle.name)
         else: # no prefs, save currently installed modules to user prefs
             installed_devices(vehicle)
             debug('xvm_equip: no prefs for %s, save installed modules: %s' % (vehicle.name, equip_settings[vehicle.name]))
@@ -167,8 +172,7 @@ def get_settings():
 def installed_devices(vehicle):
     try:
         global equip_settings
-        if vehicle.name not in equip_settings:
-            equip_settings[vehicle.name] = []
+        equip_settings[vehicle.name] = []
         for slotIdx, installed_device in enumerate(vehicle.optDevices):
             if installed_device and installed_device.isRemovable:
                 equip_settings[vehicle.name].append(installed_device.intCD)
@@ -196,8 +200,6 @@ def _RegisterEvents():
     RegisterEvent(AmmunitionPanel, 'setVehicleModule', AmmunitionPanel_setVehicleModule)
     from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
     RegisterEvent(TmenXpPanel, '_onVehicleChange', TmenXpPanel_onVehicleChange)    
-    #from CurrentVehicle import _CurrentVehicle
-    #RegisterEvent(_CurrentVehicle, '_CurrentVehicle__selectVehicle', CurrentVehicle_selectVehicle)
 
 BigWorld.callback(0, _RegisterEvents)
 
