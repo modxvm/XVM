@@ -66,7 +66,7 @@ _special = {
     'ussr:KV-5':                    [ 8, 9 ],
     'ussr:Object252':               [ 8, 9 ],
     'france:FCM_50t':               [ 8, 9 ],
-    'usa:T26_E4_SuperPershing':     [ 8, 9 ],
+    'usa:A80_T26_E4_SuperPershing': [ 8, 9 ],
     'usa:M6A2E1':                   [ 8, 9 ],
     'china:Ch23_112':               [ 8, 9 ],
     'china:Ch14_T34_3':             [ 8, 9 ],
@@ -89,3 +89,10 @@ def _getTiers(level, cls, key):
 
     # default: (<T3 max+1) & (>=T3 max+2) & (>T9 max=11)
     return (level, level + 1 if level < 3 else 11 if level > 9 else level + 2)
+
+def _test_specials():
+    from logger import warn
+    from gui.shared import g_itemsCache, REQ_CRITERIA
+    for veh_name in _special.keys():
+        if not g_itemsCache.items.getVehicles(REQ_CRITERIA.VEHICLE.SPECIFIC_BY_NAME(veh_name)):
+            warn('vehinfo_tiers: vehicle %s declared in _special does not exist!' % veh_name)
