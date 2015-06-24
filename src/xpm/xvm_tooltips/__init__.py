@@ -19,6 +19,7 @@ import traceback
 import BigWorld
 from math import degrees, pi
 from helpers import i18n
+from gui.Scaleform.locale.MENU import MENU
 
 from xfw import *
 import xvm_main.python.config as config
@@ -28,6 +29,10 @@ from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.vehinfo_camo import getCamoValues
 from xvm_main.python.xvm import l10n
 from gun_rotation_shared import calcPitchLimitsFromDesc
+
+#####################################################################
+# globals
+shells_vehicles_compatibility = {}
 
 #####################################################################
 # event handlers
@@ -312,6 +317,18 @@ def ToolTip_onCreateTypedTooltip(base, self, type, *args):
         err(traceback.format_exc())
     base(self, type, *args)
 
+# show compatible vehicles for shells info window in warehouse and shop
+def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
+    try:
+        if moduleInfo.get('type') == 'shell':
+            if not shells_vehicles_compatibility:
+                relate_shells_vehicles()
+            if self.moduleCompactDescr in shells_vehicles_compatibility:
+                moduleInfo['compatible'].append({'type': i18n.makeString(MENU.moduleinfo_compatible('vehicles')), 'value': ', '.join(shells_vehicles_compatibility[self.moduleCompactDescr])})
+    except Exception as ex:
+        err(traceback.format_exc())
+    base(self, moduleInfo)
+
 #####################################################################
 # Utility functions
 
@@ -329,6 +346,31 @@ def smart_round(value):
     else: # < 1
         return '%g' % round(value, 2)
 
+# make dict: shells => compatible vehicles
+def relate_shells_vehicles():
+    global shells_vehicles_compatibility
+    try:
+        shells_vehicles_compatibility = {}
+        from gui.shared import g_itemsCache
+        vehicles = g_itemsCache.items.getVehicles()
+        for vehicle_id in vehicles:
+            vehicle = g_itemsCache.items.getItemByCD(vehicle_id)
+            if vehicle.name.find('_IGR') > 0 or vehicle.name.find('_training') > 0:
+                continue
+            for turrets in vehicle.descriptor.type.turrets:
+                for turret in turrets:
+                    for gun in turret['guns']:
+                        for shot in gun['shots']:
+                            shell_id = shot['shell']['compactDescr']
+                            if shell_id in shells_vehicles_compatibility:
+                                if vehicle.userName not in shells_vehicles_compatibility[shell_id]:
+                                    shells_vehicles_compatibility[shell_id].append(vehicle.userName)
+                            else:
+                                shells_vehicles_compatibility[shell_id] = [vehicle.userName]
+    except Exception as ex:
+        err(traceback.format_exc())
+        shells_vehicles_compatibility = {}
+
 #####################################################################
 # Register events
 
@@ -339,5 +381,7 @@ def _RegisterEvents():
     OverrideMethod(ConsumablesPanel, '_ConsumablesPanel__makeShellTooltip', ConsumablesPanel__makeShellTooltip)
     from gui.Scaleform.framework.ToolTip import ToolTip
     OverrideMethod(ToolTip, 'onCreateTypedTooltip', ToolTip_onCreateTypedTooltip)
+    from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
+    OverrideMethod(ModuleInfoMeta, 'as_setModuleInfoS', ModuleInfoMeta_as_setModuleInfoS)
 
 BigWorld.callback(0, _RegisterEvents)
