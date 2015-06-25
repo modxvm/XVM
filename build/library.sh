@@ -17,7 +17,7 @@ build_as3_h(){
 
 patch_as2_h(){
     swfmill swf2xml orig/$1.swf temp/$1.xml || exit 1
-    patch -s temp/$1.xml $1.xml.patch || exit 1
+    patch temp/$1.xml $1.xml.patch || exit 1
     swfmill xml2swf temp/$1.xml $1.swf || exit 1
 }
 #
