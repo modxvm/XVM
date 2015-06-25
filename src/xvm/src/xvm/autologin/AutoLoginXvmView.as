@@ -36,7 +36,7 @@ package xvm.autologin
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
             if (loginPage != null)
-                loginPage.viewStackLoginForm.removeEventListener(ViewStackEvent.VIEW_CHANGED, autoLogin);
+                loginPage.loginViewStack.removeEventListener(ViewStackEvent.VIEW_CHANGED, autoLogin);
         }
 
         // PRIVATE
@@ -58,7 +58,7 @@ package xvm.autologin
 
                 case "login":
                     if (loginPage != null)
-                        loginPage.viewStackLoginForm.addEventListener(ViewStackEvent.VIEW_CHANGED, autoLogin);
+                        loginPage.loginViewStack.addEventListener(ViewStackEvent.VIEW_CHANGED, autoLogin);
                     break;
 
                 case "lobby":
