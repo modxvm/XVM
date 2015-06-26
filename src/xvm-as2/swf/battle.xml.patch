@@ -1,5 +1,5 @@
---- "orig\\battle.xml"	2015-06-25 23:40:40.488471800 +0300
-+++ battle.xml	2015-06-25 23:40:41.348473000 +0300
+--- orig/battle.xml	2015-06-26 10:15:52.575099000 +0300
++++ battle.xml	2015-06-26 10:15:53.520193500 +0300
 @@ -16,4 +16,7 @@
        </SetBackgroundColor>
        <ScriptLimits maxRecursionDepth="256" timeout="30"/>

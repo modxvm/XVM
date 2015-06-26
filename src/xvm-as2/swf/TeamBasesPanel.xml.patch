@@ -1,5 +1,5 @@
---- "orig\\TeamBasesPanel.xml"	2015-06-25 23:42:20.104650700 +0300
-+++ TeamBasesPanel.xml	2015-06-25 23:42:20.214650800 +0300
+--- orig/TeamBasesPanel.xml	2015-06-26 10:15:56.192460700 +0300
++++ TeamBasesPanel.xml	2015-06-26 10:15:56.315473000 +0300
 @@ -15,7 +15,10 @@
          </color>
        </SetBackgroundColor>
