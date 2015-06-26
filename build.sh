@@ -117,7 +117,7 @@ build_as2(){
     for proj in *.as2proj;
         do
             echo "Building $proj"
-            build_as3_h "$proj"
+            build_as2_h "$proj"
         done
     popd > /dev/null
 }
@@ -281,11 +281,11 @@ clean_repodir
 clean_outputdir
 create_directories
 
+patch_as2
+build_as2
 build_xpm
 build_xfw
 build_as3
-patch_as2
-build_as2
 
 clean_sha1
 copy_files

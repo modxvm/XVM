@@ -8,7 +8,7 @@ PLAYERGLOBAL_VERSION="11.0"
 
 #AS2/3 compilation and patching
 build_as2_h(){
-    $XVMBUILD_MONO_FILENAME "$XVMBUILD_FDBUILD_FILEPATH" $1.as2proj -version "1.14" -notrace > /dev/null || exit 1
+    $XVMBUILD_MONO_FILENAME "$XVMBUILD_FDBUILD_FILEPATH" -notrace $1 > /dev/null || exit 1
 }
 
 build_as3_h(){
@@ -76,7 +76,7 @@ detect_coreutils(){
     fi
 }
 detect_fdbuild(){
-	#export XVMBUILD_FDBUILD_FILEPATH to set your own fdbuild.exe location
+    # export XVMBUILD_FDBUILD_FILEPATH to set your own fdbuild.exe location
     if [ "$XVMBUILD_FDBUILD_FILEPATH" == "" ]; then
         declare -a arr
         arr=$(echo $PATH | tr -s ':' '\n')
@@ -95,7 +95,7 @@ detect_fdbuild(){
 }
 
 detect_flex(){
-	# export FLEX_HOME variable to set your own Apache Flex location
+    # export FLEX_HOME variable to set your own Apache Flex location
     # fallback FLEX_HOME variable
     if [ "$FLEX_HOME" == "" ]; then
         if [[ "$OS" == "Windows" ]]; then
@@ -115,7 +115,7 @@ detect_flex(){
 
     export XVMBUILD_COMPC_FILEPATH="$FLEX_HOME/bin/compc"
 
-    #  fallback PLAYERGLOBAL_HOME variable
+    # fallback PLAYERGLOBAL_HOME variable
     if [ "$PLAYERGLOBAL_HOME" == "" ]; then
         export PLAYERGLOBAL_HOME="$FLEX_HOME/frameworks/libs/player" 
     fi
@@ -131,7 +131,7 @@ detect_flex(){
 }
 
 detect_mono(){
-	#export XVMBUILD_MONO_FILENAME to use mono on windows
+    # export XVMBUILD_MONO_FILENAME to use mono on windows
     if [ "$XVMBUILD_MONO_FILENAME" == "" ]; then 
         if [ "$OS" == "Windows" ]; then
             export XVMBUILD_MONO_FILENAME=
