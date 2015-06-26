@@ -39,6 +39,7 @@
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
     <compile path="wrapper\wot\wrapper\battle\BattleMain.as" />
+    <compile path="wrapper\wot\wrapper\hide_warnings.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -59,6 +60,7 @@
     <hidden path="wrapper\wot\wrapper\TeamRenderer" />
     <hidden path="wrapper\wot\wrapper\UserInfo" />
     <hidden path="wrapper\wot\wrapper\VehicleMarkersManager" />
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand>IGen.exe -clean src include</preBuildCommand>

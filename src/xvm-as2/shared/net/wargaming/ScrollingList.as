@@ -1,4 +1,9 @@
 ﻿intrinsic class net.wargaming.ScrollingList extends gfx.controls.ScrollingList
 {
-    function populateData(data);
+	public var renderers : Object;
+
+	public function ScrollingList();
+
+	public function populateData(data);
+
 }

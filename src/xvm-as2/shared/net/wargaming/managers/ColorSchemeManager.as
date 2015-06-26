@@ -1,12 +1,34 @@
 ﻿intrinsic class net.wargaming.managers.ColorSchemeManager
 {
-    static var _colors = {};
-    static function initialize();
-    static function get instance():ColorSchemeManager;
-    function update();
-    function addChangeCallBack(scope, func_name);
-    function getScheme(schemeName);
-    function getAliasColor(schemeName);
-    function getRGB(schemeName);
-    function getTransform(schemeName);
+	static public var _instance : Object;
+	static public var _colors : Object;
+	public var _callbacks : Object;
+	static public var SET_COLORS_EVENT : Object;
+	static public var GET_COLORS_EVENT : Object;
+
+	static public function get instance() : Object;
+
+
+	public function ColorSchemeManager();
+
+	static public function initialize();
+
+	public function update();
+
+	public function addChangeCallBack(scope, func_name);
+
+	public function __notifyCallbacks();
+
+	public function getScheme(schemeName);
+
+	public function getAdjustMatrixFilter(schemeName);
+
+	public function getAliasColor(schemeName);
+
+	public function getRGB(schemeName);
+
+	public function getTransform(schemeName);
+
+	public function onSetColors();
+
 }

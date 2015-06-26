@@ -40,6 +40,7 @@
   <compileTargets>
     <compile path="wrapper\wot\wrapper\TeamBasesPanel\CaptureBar.as" />
     <compile path="wrapper\wot\wrapper\TeamBasesPanel\TeamBasesPanel.as" />
+    <compile path="wrapper\wot\wrapper\hide_warnings.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -47,7 +48,7 @@
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <!-- example: <hidden path="..." /> -->
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand>IGen.exe -clean src include</preBuildCommand>

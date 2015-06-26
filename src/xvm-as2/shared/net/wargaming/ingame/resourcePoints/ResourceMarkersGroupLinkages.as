@@ -1,0 +1,61 @@
+﻿intrinsic class net.wargaming.ingame.resourcePoints.ResourceMarkersGroupLinkages
+{
+	static public var ACooldownPopup : Object;
+	static public var AConflict : Object;
+	static public var AConflictBlind : Object;
+	static public var AEnemyFreeze : Object;
+	static public var AEnemyFreezeBlind : Object;
+	static public var AOwnMiningFreeze : Object;
+	static public var AOwnMiningFreezeBlind : Object;
+	static public var AReady : Object;
+	static public var ACooldown : Object;
+	static public var AEnemy : Object;
+	static public var AEnemyBlind : Object;
+	static public var AOwn : Object;
+	static public var BConflictBlind : Object;
+	static public var BEnemyFreeze : Object;
+	static public var BEnemyFreezeBlind : Object;
+	static public var BOwnMiningFreeze : Object;
+	static public var BOwnMiningFreezeBlind : Object;
+	static public var BReady : Object;
+	static public var BCooldown : Object;
+	static public var BEnemy : Object;
+	static public var BEnemyBlind : Object;
+	static public var BOwn : Object;
+	static public var BCooldownPopup : Object;
+	static public var BConflict : Object;
+	static public var CConflict : Object;
+	static public var CConflictBlind : Object;
+	static public var CEnemyFreeze : Object;
+	static public var CEnemyFreezeBlind : Object;
+	static public var COwnMiningFreeze : Object;
+	static public var COwnMiningFreezeBlind : Object;
+	static public var CReady : Object;
+	static public var CCooldown : Object;
+	static public var CEnemy : Object;
+	static public var CEnemyBlind : Object;
+	static public var COwn : Object;
+	static public var CCooldownPopup : Object;
+	static public var DConflict : Object;
+	static public var DConflictBlind : Object;
+	static public var DEnemyFreeze : Object;
+	static public var DEnemyFreezeBlind : Object;
+	static public var DOwnMiningFreeze : Object;
+	static public var DOwnMiningFreezeBlind : Object;
+	static public var DReady : Object;
+	static public var DCooldown : Object;
+	static public var DEnemy : Object;
+	static public var DEnemyBlind : Object;
+	static public var DOwn : Object;
+	static public var DCooldownPopup : Object;
+	static public var NormalAnim : Object;
+	static public var CooldownAnim : Object;
+	static public var A_TYPE : Object;
+	static public var B_TYPE : Object;
+	static public var C_TYPE : Object;
+	static public var D_TYPE : Object;
+	static public var LINKAGES_BY_IDX : Object;
+
+	public function ResourceMarkersGroupLinkages();
+
+}

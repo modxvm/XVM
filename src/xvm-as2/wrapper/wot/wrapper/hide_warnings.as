@@ -1,0 +1,43 @@
+﻿class wot.wrapper.hide_warnings
+{
+    var AnimateExplosion:net.wargaming.ingame.AnimateExplosion;
+    var BaseResourcePointItem:net.wargaming.ingame.resourcePoints.BaseResourcePointItem;
+    var BattleFadingMessageList:net.wargaming.ingame.BattleFadingMessageList;
+    var BattleMessageList:net.wargaming.messenger.controls.BattleMessageList;
+    var BattleMessengerInput:net.wargaming.messenger.controls.BattleMessengerInput;
+    var BattlePlayersList:net.wargaming.ingame.BattlePlayersList;
+    var BattleRibbonAnimation:net.wargaming.ingame.ribbons.BattleRibbonAnimation;
+    var BattleRibbonTitleAnimation:net.wargaming.ingame.ribbons.BattleRibbonTitleAnimation;
+    var BattleStatItemRenderer:net.wargaming.BattleStatItemRenderer;
+    var ChassisItem:net.wargaming.ingame.damagePanel.ChassisItem;
+    var DeviceItem:net.wargaming.ingame.damagePanel.DeviceItem;
+    var FadingMessageRenderer:net.wargaming.notification.FadingMessageRenderer;
+    var FlagCTFIndicator:net.wargaming.ingame.FlagCTFIndicator;
+    var FortConsumablesMarker:net.wargaming.ingame.FortConsumablesMarker;
+    var HealthBar:net.wargaming.ingame.HealthBar;
+    var HealthBarAnimatedLabel:net.wargaming.ingame.HealthBarAnimatedLabel;
+    var HealthBarAnimatedPart:net.wargaming.ingame.HealthBarAnimatedPart;
+    var HealthBarTextField:net.wargaming.ingame.HealthBarTextField;
+    var HiddenButton:net.wargaming.HiddenButton;
+    var Label:gfx.controls.Label;
+    var MinimapStrategicCell:net.wargaming.ingame.MinimapStrategicCell;
+    var PlayersPanelInviteReceived:net.wargaming.ingame.components.PlayersPanelInviteReceived;
+    var PlayersPanelSwitcher:net.wargaming.ingame.PlayersPanelSwitcher;
+    var PlayersPanelTypeButton:net.wargaming.ingame.PlayersPanelTypeButton;
+    var PlayersVerticalLayout:net.wargaming.ingame.PlayersVerticalLayout;
+    var ProgressBar:gfx.controls.ProgressBar;
+    var RadialButton:net.wargaming.controls.buttons.RadialButton;
+    var RepairPointIndicator:net.wargaming.ingame.RepairPointIndicator;
+    var ResourcePointMarker:net.wargaming.ingame.resourcePoints.ResourcePointMarker;
+    var ResourcePointMinimapItem:net.wargaming.ingame.resourcePoints.ResourcePointMinimapItem;
+    var ScrollBarUI:net.wargaming.controls.ScrollBarUI;
+    var ScrollingList:net.wargaming.ScrollingList;
+    var SoundButton:net.wargaming.controls.buttons.SoundButton;
+    var StaticObjectMarker:net.wargaming.ingame.StaticObjectMarker;
+    var StatsDialog:net.wargaming.StatsDialog;
+    var TankIndicator:net.wargaming.ingame.damagePanel.TankIndicator;
+    var TeamCounterMarkersList:net.wargaming.ingame.TeamCounterMarkersList;
+    var TileList:net.wargaming.TileList;
+    var TutorialLoader:net.wargaming.tutorial.TutorialLoader;
+    var VehicleActionMarker:net.wargaming.ingame.VehicleActionMarker;
+}

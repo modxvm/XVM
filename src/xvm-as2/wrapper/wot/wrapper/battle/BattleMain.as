@@ -1,4 +1,6 @@
-﻿class wot.wrapper.battle.BattleMain
+﻿import net.wargaming.ingame.MinimapStrategicCell;
+
+class wot.wrapper.battle.BattleMain
 {
     static function main()
     {

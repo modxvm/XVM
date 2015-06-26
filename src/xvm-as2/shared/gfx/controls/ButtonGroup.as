@@ -1,11 +1,29 @@
-﻿intrinsic class gfx.controls.ButtonGroup // extends gfx.events.EventDispatcher
+﻿intrinsic class gfx.controls.ButtonGroup extends gfx.events.EventDispatcher
 {
-    var selectedButton;
-    function get length();
-    function addButton(button);
-    function removeButton(button);
-    function indexOf(button);
-    function getButtonAt(index);
-    function get data();
-    function setSelectedButton(button);
+	public var scope : Object;
+	public var name : Object;
+
+	public function get length() : Object;
+
+	public function get data() : Object;
+
+
+	public function ButtonGroup(name, scope);
+
+	public function addButton(button);
+
+	public function removeButton(button);
+
+	public function indexOf(button);
+
+	public function getButtonAt(index);
+
+	public function setSelectedButton(button);
+
+	public function toString();
+
+	public function handleSelect(event);
+
+	public function handleClick(event);
+
 }

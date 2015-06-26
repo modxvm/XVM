@@ -1,19 +1,40 @@
 ﻿intrinsic class gfx.controls.UILoader extends gfx.core.UIComponent
 {
-  // not implemented function
-  function onLoadInit();
+	public var invalidate : Object;
+	public var _maintainAspectRatio : Object;
+	public var _autoSize : Object;
+	public var _visiblilityBeforeLoad : Object;
 
-  function get source():String;
-  function set source(value:String);
-  function get autoSize():Boolean;
-  function set autoSize(value:Boolean);
-  function get maintainAspectRatio():Boolean;
-  function set maintainAspectRatio(value:Boolean);
-  function get content():MovieClip;
+	public function get autoSize() : Object;
+	public function set autoSize(value) : Void;
 
-  function unload();
-  function load(url:String);
+	public function get source() : Object;
+	public function set source(value) : Void;
 
-  function addEventListener(event, scope, callBack);
-  function removeEventListener(event, scope, callBack);
+	public function get maintainAspectRatio() : Object;
+	public function set maintainAspectRatio(value) : Void;
+
+	public function get content() : Object;
+
+	public function get percentLoaded() : Object;
+
+
+	public function UILoader();
+
+	public function unload();
+
+	public function toString();
+
+	public function configUI();
+
+	public function load(url);
+
+	public function draw();
+
+	public function onLoadError();
+
+	public function onLoadComplete();
+
+	public function checkProgress();
+
 }

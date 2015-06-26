@@ -1,58 +1,73 @@
-﻿import gfx.core.UIComponent;
-intrinsic class net.wargaming.ingame.PlayersPanel extends UIComponent
+﻿intrinsic class net.wargaming.ingame.PlayersPanel extends gfx.core.UIComponent
 {
-    /////////////////////////////////////////////////////////////////
-    // XVM
-    var xvm_worker:wot.PlayersPanel.PlayersPanel;
-    /////////////////////////////////////////////////////////////////
+	static public var STATES : Object;
+	public var dynamicSquadReceived : Object;
+	public var _isDynamicSquadActive : Object;
+	static public var PLAYERS_PANEL_COUNT : Object;
+	static public var LARGE_PANEL_SHIFT : Object;
+	static public var SQUAD_ICO_MARGIN : Object;
+	static public var PLAYER_NAME_LENGTH : Object;
+	static public var MAX_VEHICLE_NAME_LENGTH : Object;
+	static public var SUBMENU : Object;
+	static public var ms_widthOfLongestName : Object;
+	public var _isPrebattleCreator : Object;
+	public var saved_params : Object;
+	public var getChemeFunc : Object;
+	static public var SQUAD_SIZE : Object;
+	public var m_type : Object;
+	public var m_state : Object;
 
-    var players_bg:MovieClip;
-    var m_list:TextField;
-    var m_vehicles:TextField;
-    var m_frags:TextField;
-    var m_names:TextField;
-    var inviteReceived:Boolean;
-    var panel_width:Number;
-    static var STATES:Object;
-    var dynamicSquadReceived:Boolean;
-    var _isDynamicSquadActive:Boolean;
-    static var PLAYERS_PANEL_COUNT:Number;
-    static var LARGE_PANEL_SHIFT:Number;
-    static var SQUAD_ICO_MARGIN:Number;
-    static var PLAYER_NAME_LENGTH:Object;
-    static var MAX_VEHICLE_NAME_LENGTH:Object;
-    static var SUBMENU:Array;
-    static var ms_widthOfLongestName:Number;
-    var _isPrebattleCreator:Boolean;
-    var saved_params:Object;
-    var getChemeFunc:Function;
-    static var SQUAD_SIZE:Number;
-    var m_type:String;
-    var m_state:String;
+	public function get type() : Object;
+	public function set type(type) : Void;
+
+	public function get state() : Object;
+	public function set state(state) : Void;
 
 
-    function isInitialized();
-    function setIsDynamicSquadActive(val);
-    function setIsShowExtraModeActive(val);
-    function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
-    function updateReceivedInviteIcon();
-    function getPlayerNameLength();
-    function getVehicleNameLength();
-    function setPlayerSpeaking(vehicleId, flag);
-    function get type();
-    function set type(type);
-    function get state(); // none, short, medium, medium2, large
-    function set state(state);
-    function update();
-    function onRecreateDevice(width, height);
-    function getHeight();
-    function __getStateName(state);
-    function getDynamicSquadMenuItem(contextMenuData, dynamicSquad, himself, isCommanderBySquad, squadId);
-    function saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
-    function getDenunciationsSubmenu(con, deninciationsLength, squadSize);
-    function getDenunciationsSubmenuData(con, deninciationsLength, squadSize);
-    function updateAlphas();
-    function updatePositions();
-    function updateSquadIcons();
-    function _getHTMLText(colorScheme, text);
+	public function PlayersPanel();
+
+	public function isInitialized();
+
+	public function setIsDynamicSquadActive(val);
+
+	public function setIsShowExtraModeActive(val);
+
+	public function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
+
+	public function updateReceivedInviteIcon();
+
+	public function getPlayerNameLength();
+
+	public function getVehicleNameLength();
+
+	public function setPlayerSpeaking(vehicleId, flag);
+
+	public function update();
+
+	public function onRecreateDevice(width, height);
+
+	public function getHeight();
+
+	public function __getStateName(state);
+
+	public function configUI();
+
+	public function getDynamicSquadMenuItem(contextMenuData, dynamicSquad, himself, isCommanderBySquad, squadId);
+
+	public function draw();
+
+	public function saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
+
+	public function getDenunciationsSubmenu(con, deninciationsLength, squadSize);
+
+	public function getDenunciationsSubmenuData(con, deninciationsLength, squadSize);
+
+	public function updateAlphas();
+
+	public function updatePositions();
+
+	public function updateSquadIcons();
+
+	public function _getHTMLText(colorScheme, text);
+
 }

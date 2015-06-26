@@ -1,29 +1,68 @@
 ﻿intrinsic class gfx.controls.ButtonBar extends gfx.core.UIComponent
 {
-    /////////////////////////////////////////////////////////////////
-    // XVM
-    var xvm_initialized:Boolean;
-    /////////////////////////////////////////////////////////////////
+	public var renderers : Object;
+	public var _itemRenderer : Object;
+	public var _spacing : Object;
+	public var _direction : Object;
+	public var _selectedIndex : Object;
+	public var _autoSize : Object;
+	public var _buttonWidth : Object;
+	public var _labelField : Object;
+	public var reflowing : Object;
 
-    var renderers;
-    
-    function get dataProvider();
-    function set dataProvider(value);
-    function get itemRenderer();
-    function set itemRenderer(value);
-    function get spacing();
-    function set spacing(value);
-    function get direction();
-    function set direction(value);
-    function get autoSize();
-    function set autoSize(value);
-    function get buttonWidth();
-    function set buttonWidth(value);
-    function get selectedIndex();
-    function set selectedIndex(value);
-    function get selectedItem();
-    function get labelField();
-    function set labelField(value);
-    function get labelFunction();
-    function set labelFunction(value);
+	public function get disabled() : Object;
+	public function set disabled(value) : Void;
+
+	public function get dataProvider() : Object;
+	public function set dataProvider(value) : Void;
+
+	public function get itemRenderer() : Object;
+	public function set itemRenderer(value) : Void;
+
+	public function get spacing() : Object;
+	public function set spacing(value) : Void;
+
+	public function get direction() : Object;
+	public function set direction(value) : Void;
+
+	public function get autoSize() : Object;
+	public function set autoSize(value) : Void;
+
+	public function get buttonWidth() : Object;
+	public function set buttonWidth(value) : Void;
+
+	public function get selectedIndex() : Object;
+	public function set selectedIndex(value) : Void;
+
+	public function get selectedItem() : Object;
+
+	public function get data() : Object;
+
+	public function get labelField() : Object;
+	public function set labelField(value) : Void;
+
+	public function get labelFunction() : Object;
+	public function set labelFunction(value) : Void;
+
+
+	public function ButtonBar();
+
+	public function itemToLabel(item);
+
+	public function handleInput(details, pathToFocus);
+
+	public function toString();
+
+	public function draw();
+
+	public function drawLayout();
+
+	public function createRenderer(index);
+
+	public function handleItemClick(event);
+
+	public function selectItem(index);
+
+	public function changeFocus();
+
 }

@@ -41,6 +41,7 @@
     <compile path="wrapper\wot\wrapper\VehicleMarkersManager\ingame\VehicleMarkerAlly.as" />
     <compile path="wrapper\wot\wrapper\VehicleMarkersManager\ingame\VehicleMarkerEnemy.as" />
     <compile path="wrapper\wot\wrapper\VehicleMarkersManager\VehicleMarkersCanvas.as" />
+    <compile path="wrapper\wot\wrapper\hide_warnings.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -61,6 +62,7 @@
     <hidden path="wrapper\wot\wrapper\TeamMemberRenderer" />
     <hidden path="wrapper\wot\wrapper\TeamRenderer" />
     <hidden path="wrapper\wot\wrapper\UserInfo" />
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand>IGen.exe -clean src include</preBuildCommand>
