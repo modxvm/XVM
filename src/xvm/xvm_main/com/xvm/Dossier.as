@@ -60,7 +60,7 @@ package com.xvm
             Xfw.cmd(XvmCommandsInternal.REQUEST_DOSSIER, battleType, playerId, vehId);
         }
 
-        private static function dossierLoaded(playerId:int, vehId:int, data:Object):void
+        private static function dossierLoaded(playerId:int, vehId:int, data:Object):Object
         {
             try
             {
@@ -97,6 +97,8 @@ package com.xvm
             {
                 Logger.err(ex);
             }
+
+            return null;
         }
 
         private static function getDossier(playerId:int, vehId:int):*

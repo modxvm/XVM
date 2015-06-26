@@ -77,12 +77,12 @@ package xvm.ping.PingServers
             Xfw.cmd(COMMAND_PING);
         }
 
-        private function pingCallback(answer:Object):void
+        private function pingCallback(answer:Object):Object
         {
             //Logger.addObject(answer, 2);
             //Logger.add("pingCallback:" + arguments.toString());
             if (!answer)
-                return;
+                return null;
 
             var responseTimeList:Array = [];
             for (var name:String in answer)
@@ -93,6 +93,8 @@ package xvm.ping.PingServers
             responseTimeList.sortOn(["cluster"]);
 
             dispatchEvent(new ObjectEvent(Event.COMPLETE, responseTimeList));
+
+            return null;
         }
     }
 }

@@ -43,7 +43,7 @@ package xvm.hangar
         }
 
         // TODO: try without serialization
-        private function onUpdateCurrentVehicle(json_str:String):void
+        private function onUpdateCurrentVehicle(json_str:String):Object
         {
             try
             {
@@ -63,6 +63,8 @@ package xvm.hangar
             {
                 Logger.err(ex);
             }
+
+            return null;
         }
 
         // server info

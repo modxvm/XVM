@@ -101,7 +101,7 @@ package xvm.crew
                 setTimeout(function():void { App.toolTipMgr.show(e.target.toolTip); }, 1);
         }
 
-        private function onVehicleChanged(vehId:Number, isElite:Boolean):void
+        private function onVehicleChanged(vehId:Number, isElite:Boolean):Object
         {
             //Logger.add('onVehicleChanged: ' + vehId);
 
@@ -111,7 +111,7 @@ package xvm.crew
             if (!enablePrevCrewCheckBox.enabled)
             {
                 page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y;
-                return;
+                return null;
             }
 
             savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, Config.config.hangar.crewReturnByDefault);
@@ -128,6 +128,8 @@ package xvm.crew
                 prevVehId = currentVehId;
                 tryPutPrevCrew();
             }
+
+            return null;
         }
 
         private function onEnablePrevCrewSwitched(e:Event):void

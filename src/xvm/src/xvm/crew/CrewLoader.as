@@ -62,19 +62,22 @@ package xvm.crew
             }
         }
 
-        private function PutOwnCrew():void
+        private function PutOwnCrew():Object
         {
             GetCrew(CheckOwn);
+            return null;
         }
 
-        private function PutBestCrew():void
+        private function PutBestCrew():Object
         {
             GetCrew(CheckBest);
+            return null;
         }
 
-        private function PutClassCrew():void
+        private function PutClassCrew():Object
         {
             GetCrew(CheckClass);
+            return null;
         }
 
         private function GetCrew(checkFunc:Function):void

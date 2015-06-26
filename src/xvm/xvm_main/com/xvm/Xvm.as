@@ -49,18 +49,20 @@ package com.xvm
             return Locale.get(value);
         }
 
-        private function onSetConfig(config_str:String, lang_str:String, vehInfo_str:String):void
+        private function onSetConfig(config_str:String, lang_str:String, vehInfo_str:String):Object
         {
             //Logger.add("onSetConfig");
             Config.config = ObjectConverter.convertData(JSONx.parse(config_str), CConfig);
             Locale.setupLanguage(lang_str);
             VehicleInfo.setVehicleInfoData(vehInfo_str);
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
+            return null;
         }
 
-        private function onSetSvcSettings(nss:Object):void
+        private function onSetSvcSettings(nss:Object):Object
         {
             Config.networkServicesSettings = new NetworkServicesSettings(nss);
+            return null;
         }
     }
 }

@@ -82,10 +82,11 @@ package xvm.contacts
             page.xfw_linkageUtils.addEntity(XVM_EDIT_CONTACT_DATA_ALIAS, "xvm.contacts_ui::UI_EditContactDataView");
         }
 
-        private function editContactData(name:String, dbID:Number):void
+        private function editContactData(name:String, dbID:Number):Object
         {
             var data:ContactListMainInfo = new ContactListMainInfo(name, dbID);
             IUpdatable(page.viewStack.show("xvm.contacts_ui::UI_EditContactDataView")).update(data);
+            return null;
         }
     }
 }

@@ -136,7 +136,7 @@ package com.xvm
             }
         }
 
-        private function battleLoaded(json_str:String):void
+        private function battleLoaded(json_str:String):Object
         {
             //Logger.add("TRACE: battleLoaded()");
 
@@ -196,6 +196,8 @@ package com.xvm
             }
 
             //Logger.add("TRACE: battleLoaded(): end");
+
+            return null;
         }
 
         private function loadBattleResultsStat(target:Object, callback:Function, arenaUniqueId:String):void
@@ -232,7 +234,7 @@ package com.xvm
                 Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE_RESULTS, arenaUniqueId);
         }
 
-        private function battleResultsLoaded(json_str:String):void
+        private function battleResultsLoaded(json_str:String):Object
         {
             //Logger.add("TRACE: battleResultsLoaded()");
             var arenaUniqueId:String = null;
@@ -259,12 +261,17 @@ package com.xvm
             catch (ex:Error)
             {
                 Logger.err(ex);
+                Logger.add(json_str);
                 throw ex;
+            }
+            catch (ex:*)
+            {
+                Logger.add(ex);
             }
             finally
             {
                 if (arenaUniqueId == null)
-                    return;
+                    return null;
                 try
                 {
                     if (listenersBattleResults.hasOwnProperty(arenaUniqueId))
@@ -284,6 +291,8 @@ package com.xvm
                 }
                 dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueId));
             }
+
+            return null;
         }
 
         private function loadUserData(target:Object, callback:Function, value:String, isId:Boolean):void
@@ -329,7 +338,7 @@ package com.xvm
             }
         }
 
-        private function userLoaded(json_str:String):void
+        private function userLoaded(json_str:String):Object
         {
             //Logger.add("TRACE: userLoaded()");
             var name:String = null;
@@ -358,6 +367,8 @@ package com.xvm
                 processUserListener(key2);
                 dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, name));
             }
+
+            return null;
         }
 
         private function processUserListener(key:String):void

@@ -8,7 +8,7 @@ XFW_MOD_INFO = {
     'VERSION':       '3.1.0',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.8.1','0.9.9'],
+    'GAME_VERSIONS': ['0.9.9'],
     # optional
 }
 
@@ -40,10 +40,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             'armorNames': self._xvm_data.get('armorNames', None),
             'data': [],
         }
-        if data['common']['isFalloutMode']:
-            isFallout = 1
-        else:
-            isFallout = 0
+        isFallout = 0 if data['common']['falloutMode'] is None else 1
         if isFallout:
             xdata_fallout_total = {
                 'origXP': self._xvm_data['xpTotal'][0],
