@@ -1,9 +1,5 @@
 ﻿intrinsic class net.wargaming.managers.XMLKeyConverter
 {
-	public var textField : Object;
-
-	public function XMLKeyConverter();
-
-	public function convert(key);
-
+    //var textField, string;
+    function convert(key);
 }

@@ -1,17 +1,9 @@
 ﻿intrinsic class net.wargaming.messenger.MessengerUtils
 {
-	public function MessengerUtils();
-
-	static public function getFullChannelName(item);
-
-	static public function getUserInfoObject(info);
-
-	static public function getUserStatusString(status);
-
-	static public function isFriend(user);
-
-	static public function isIgnored(user);
-
-	static public function isMuted(user);
-
+    static function getFullChannelName(item);
+    static function getUserInfoObject(info);
+    static function getUserStatusString(status);
+    static function isFriend(user);
+    static function isIgnored(user);
+    static function isMuted(user);
 }

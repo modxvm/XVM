@@ -1,13 +1,15 @@
-﻿intrinsic class net.wargaming.BattleStatItemRenderer extends net.wargaming.BattleStatItemRendererBase
+﻿intrinsic class net.wargaming.BattleStatItemRenderer extends MovieClip // net.wargaming.controls.TextFieldShort
 {
-	public var data : Object;
+  var playerName:TextField;
+  var col3:TextField;
+  var data:Object;
+  var iconLoader: net.wargaming.controls.UILoaderAlt;
+  var owner;
+  var squad;
 
-	public function BattleStatItemRenderer();
+  function get selected();
 
-	public function applyData();
-
-	public function updateState();
-
-	public function applyPlayerColor(rgbColor);
-
+  function updateData();
+  function applyData();
+  function updateState();
 }

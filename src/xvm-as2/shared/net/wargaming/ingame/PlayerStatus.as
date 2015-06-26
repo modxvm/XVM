@@ -1,16 +1,12 @@
 ﻿intrinsic class net.wargaming.ingame.PlayerStatus
 {
-	static public var DEFAULT : Object;
-	static public var IS_TEAM_KILLER : Object;
-	static public var IS_SQUAD_MAN : Object;
-	static public var IS_MUTED : Object;
-	static public var IS_OFFLINE : Object;
-	static public var ICO_KILLED : Object;
-	static public var ICO_OFFLINE : Object;
-	static public var ICO_IN_BATTLE : Object;
-
-	public function PlayerStatus();
-
-	static public function getStatusColorSchemeNames(isUnknown, isAlive, selected, squad, isTeamKiller, VIP, isOffline);
-
+    static function getStatusColorSchemeNames(isUnknown, isAlive, selected, squad, isTeamKiller, VIP, isOffline);
+    static var DEFAULT;
+    static var IS_TEAM_KILLER;
+    static var IS_SQUAD_MAN;
+    static var IS_MUTED;
+    static var IS_OFFLINE;
+    static var ICO_KILLED;
+    static var ICO_OFFLINE;
+    static var ICO_IN_BATTLE;
 }

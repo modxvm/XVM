@@ -1,113 +1,49 @@
-﻿intrinsic class net.wargaming.ingame.MinimapEntry extends gfx.core.UIComponent
+import gfx.core.UIComponent;
+
+intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
 {
-	public var hover : Object;
-	static public var showVehicleNames : Object;
-	public var m_type : Object;
-	public var _vehicleName : Object;
-	public var entryName : Object;
-	public var vehicleClass : Object;
-	public var markLabel : Object;
-	public var isTeamKiller : Object;
-	public var isDead : Object;
-	public var isDeadPermanent : Object;
-	public var isPostmortem : Object;
-	public var isMarketLit : Object;
-	static public var ms_lastLitEntry : Object;
-	public var playingTimeoutId : Object;
-	static public var isDebug : Object;
-	public var _needInitSector : Object;
+    /////////////////////////////////////////////////////////////////
+    // XVM
+    var xvm_worker:wot.Minimap.MinimapEntry;
+    private var _xvm_attachments:MovieClip;
+    var orig_entryName:String;
+    function init_xvm();
+    /////////////////////////////////////////////////////////////////
 
-	public function get colorsManager() : Object;
+    var markMC:MovieClip;
+    var player:MovieClip;
+    var entryName; /** ally/enemy/squad/"" */
+    var markLabel;
+    var isPostmortem;
+    var isDeadPermanent;
+    var isDead;
+    var vehicleClass;
+    var selfIcon:MovieClip;
+    var cameraWithDirection:MovieClip;
+    var m_type:String; /** ally enemy points*/
+    var teamPoint:MovieClip; /** Clip is present if entry is capture base */
+    var vehicleNameTextFieldClassic:TextField;
+    var vehicleNameTextFieldAlt:TextField;
 
-	public function get colorSchemeName() : Object;
-
-	public function get vehicleNameTextField() : Object;
-
-
-	public function MinimapEntry();
-
-	public function configUI();
-
-	public function init(markerType, entryName, vehicleClass, markLabel, vehicleName);
-
-	public function showAction(markLabel);
-
-	public function showCameraDirectionLine();
-
-	public function hideCameraDirectionLine();
-
-	public function update();
-
-	public function lightPlayer(visibility);
-
-	public function playPlayer();
-
-	static public function unhighlightLastEntry();
-
-	public function getTextColorSchemeName();
-
-	public function setEntryName(value);
-
-	public function setVehicleClass(value);
-
-	public function setDead(isPermanent);
-
-	public function setPostmortem(isPostmortem);
-
-	public function isTeamPoint();
-
-	public function isFlagPoint();
-
-	public function isRepairPoint();
-
-	public function isResourcePoint();
-
-	public function isBackMarker();
-
-	public function isFortConsumables();
-
-	public function updateType();
-
-	public function showSector(deg1, deg2);
-
-	public function hideSector();
-
-	public function updateIfEntryIsPlayer();
-
-	public function draw();
-
-	public function initSectorLines();
-
-	public function onSectorLine1Loaded();
-
-	public function onSectorLine2Loaded();
-
-	public function onCameraWithDirectionLoaded();
-
-	public function onCameraWithDirectionIOError();
-
-	public function getMinimap();
-
-	public function onEnterFrameHandler();
-
-	public function sectorLineLoaded(sectorLine, deg, callback);
-
-	public function updateLinesScale(parentNormalScale);
-
-	public function checkForSectorLines();
-
-	public function initSectorContent();
-
-	public function updateVehicleName();
-
-	public function setVisible(value);
-
-	public function resumeAnimation();
-
-	public function stopAnimation();
-
-	public function initFlagPoint();
-
-	public function initRepairPoint();
-
+    function configUI();
+    function init(markerType, entryName, vehicleClass, markLabel);
+    function showAction(markLabel);
+    function update();
+    function lightPlayer(visibility);
+    function playPlayer();
+    static function unhighlightLastEntry();
+    function get colorsManager():net.wargaming.managers.ColorSchemeManager;
+    function get colorSchemeName():String;
+    function setEntryName(value);
+    function setDead(isPermanent);
+    function setPostmortem(isPostmortem);
+    function isTeamPoint();
+    function isBackMarker();
+    function updateType();
+    function updateIfEntryIsPlayer();
+    function draw();
+    function getMinimap():net.wargaming.ingame.Minimap;
+    function updateVehicleName();
+    function setVisible(value);
+    function onEnterFrameHandler();
 }
