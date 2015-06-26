@@ -9,11 +9,11 @@ import xvm_main.python.config as config
 
 # show quantity of alive instead of dead in frags panel
 # original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
-def FragCorrelationPanel_updateScore(base, self, playerTeam):
+def FragCorrelationPanel_updateScore(base, self):
     try:
         if config.get('fragCorrelation/showAliveNotFrags'):
-            if not playerTeam:
-                return
+            from gui.battle_control import g_sessionProvider
+            playerTeam = g_sessionProvider.getArenaDP().getNumberOfTeam()
             teamIndex = playerTeam - 1
             enemyIndex = 1 - teamIndex
             enemyTeam = enemyIndex + 1
@@ -23,4 +23,4 @@ def FragCorrelationPanel_updateScore(base, self, playerTeam):
             return
     except Exception, ex:
         err(traceback.format_exc())
-    base(self, playerTeam)
+    base(self)
