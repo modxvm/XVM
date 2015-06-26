@@ -16,7 +16,6 @@ package xvm.hangar
 
         private static const _views:Object =
         {
-            "login": Login,
             "hangar": Hangar
         }
 

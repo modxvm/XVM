@@ -36,6 +36,10 @@ def LoginView_onSetOptions(self, optionsList, host):
             BigWorld.callback(0, self.onDoAutoLogin)
 
 
+def LoginView_as_setVersionS(base, self, version):
+    base(self, '{} | XVM {} (WoT {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))
+
+
 #####################################################################
 # Register events
 
@@ -45,5 +49,6 @@ OverrideMethod(helpers, 'isShowStartupVideo', helpers_isShowStartupVideo)
 def _RegisterEvents():
     from gui.Scaleform.daapi.view.login import LoginView
     RegisterEvent(LoginView, 'onSetOptions', LoginView_onSetOptions)
+    OverrideMethod(LoginView, 'as_setVersionS', LoginView_as_setVersionS)
 
 BigWorld.callback(0, _RegisterEvents)
