@@ -218,8 +218,8 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 
 # add vid to players panel data
-def BattleArenaController__makeHash(base, self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter, playerAccountID, inviteSendingProhibited, invitesReceivingProhibited):
-    res = base(self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, userGetter, isSpeaking, isMenuEnabled, regionGetter, playerAccountID, inviteSendingProhibited, invitesReceivingProhibited)
+def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, playerAccountID, inviteSendingProhibited, invitesReceivingProhibited):
+    res = base(self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, playerAccountID, inviteSendingProhibited, invitesReceivingProhibited)
     res['vid'] = vInfoVO.vehicleType.compactDescr
     return res
 
@@ -316,6 +316,7 @@ def _RegisterEvents():
     from gui.Scaleform.daapi.view.login import LoginView
     OverrideMethod(LoginView, 'onSetOptions', LoginView_onSetOptions)
 
+
     # lobby
 
     from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
@@ -324,8 +325,8 @@ def _RegisterEvents():
     from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
     RegisterEvent(AmmunitionPanel, 'highlightParams', AmmunitionPanel_highlightParams)
 
-    from account_helpers.BattleResultsCache import BattleResultsCache
-    OverrideMethod(BattleResultsCache, 'get', BattleResultsCache_get)
+    from account_helpers import BattleResultsCache
+    OverrideMethod(BattleResultsCache.BattleResultsCache, 'get', BattleResultsCache_get)
 
     # pre-battle
 
@@ -345,7 +346,7 @@ def _RegisterEvents():
     RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
 
     from gui.battle_control.battle_arena_ctrl import BattleArenaController
-    OverrideMethod(BattleArenaController, '_BattleArenaController__makeHash', BattleArenaController__makeHash)
+    OverrideMethod(BattleArenaController, '_makeHash', BattleArenaController_makeHash)
 
     from gui.Scaleform.Minimap import Minimap
     RegisterEvent(Minimap, '_Minimap__addEntry', _Minimap__addEntry)

@@ -55,7 +55,7 @@ def getTipText(text, isError=False):
 # Register events
 
 def _RegisterEvents():
-    from gui.Scaleform.daapi.view.BattleLoading import BattleLoading
+    from gui.Scaleform.daapi.view.battle_loading import BattleLoading
     OverrideMethod(BattleLoading, 'as_setTipTitleS', BattleLoading_as_setTipTitleS)
     OverrideMethod(BattleLoading, 'as_setTipS', BattleLoading_as_setTipS)
 
