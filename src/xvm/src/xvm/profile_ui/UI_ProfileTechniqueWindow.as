@@ -76,7 +76,7 @@ package xvm.profile_ui
             return _baseDisposed;
         }
 
-        public function as_responseDossierXvm(battlesType:String, vehicles:Object):void
+        public function as_responseDossierXvm(battlesType:String, currentData:Object, frameLabel:String, emptyScreenText:String):void
         {
             if (_baseDisposed)
                 return;
@@ -84,7 +84,7 @@ package xvm.profile_ui
             try
             {
                 if (technique)
-                    technique.as_responseDossierXvm(battlesType, vehicles);
+                    technique.as_responseDossierXvm(battlesType, currentData, frameLabel, emptyScreenText);
             }
             catch (ex:Error)
             {

@@ -367,7 +367,7 @@ package xvm.battleresults_ui
                     type:kind,
                     disabled:icon == null ? false : icon.value <= 0
                 });
-                App.toolTipMgr.showSpecial(Tooltips.EFFICIENCY_PARAM, null, kind, data);
+                App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.EFFICIENCY_PARAM, null, kind, data);
             }
             else
             {

@@ -26,12 +26,12 @@ package xvm.loginlayout
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            page.viewStackLoginForm.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
+            page.loginViewStack.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            page.viewStackLoginForm.removeEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
+            page.loginViewStack.removeEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
         }
 
         // PRIVATE

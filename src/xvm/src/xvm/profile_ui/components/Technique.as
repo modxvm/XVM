@@ -133,11 +133,11 @@ package xvm.profile_ui.components
 
         // DAAPI
 
-        public function as_responseDossierXvm(battlesType:String, vehicles:Object):void
+        public function as_responseDossierXvm(battlesType:String, currentData:Object, frameLabel:String, emptyScreenText:String):void
         {
             if (_disposed)
                 return;
-            page.as_responseDossier(battlesType, vehicles);
+            page.as_responseDossier(battlesType, currentData, frameLabel, emptyScreenText);
             initializeListComponentVehicles();
         }
 
