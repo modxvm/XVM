@@ -19,7 +19,6 @@ from glob import glob
 import os
 import time
 import traceback
-import cPickle
 import BigWorld
 
 from xfw import *
@@ -155,24 +154,6 @@ def onClientVersionDiffers():
 def AmmunitionPanel_highlightParams(self, type):
     # debug('> AmmunitionPanel_highlightParams')
     g_xvm.updateTankParams()
-
-
-def BattleResultsCache_get(base, self, arenaUniqueID, callback):
-    try:
-        filename = '{0}.dat'.format(arenaUniqueID)
-        if not os.path.exists(filename):
-            base(self, arenaUniqueID, callback)
-        else:
-            fileHandler = open(filename, 'rb')
-            (version, battleResults) = cPickle.load(fileHandler)
-            if battleResults is not None:
-                if callback is not None:
-                    import AccountCommands
-                    from account_helpers.BattleResultsCache import convertToFullForm
-                    callback(AccountCommands.RES_CACHE, convertToFullForm(battleResults))
-    except Exception, ex:
-        err(traceback.format_exc())
-        base(self, arenaUniqueID, callback)
 
 
 # BATTLE
@@ -324,9 +305,6 @@ def _RegisterEvents():
 
     from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
     RegisterEvent(AmmunitionPanel, 'highlightParams', AmmunitionPanel_highlightParams)
-
-    from account_helpers import BattleResultsCache
-    OverrideMethod(BattleResultsCache.BattleResultsCache, 'get', BattleResultsCache_get)
 
     # pre-battle
 

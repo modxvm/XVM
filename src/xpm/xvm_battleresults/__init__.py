@@ -130,7 +130,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
     return base(self, data)
 
 # save personalCommonData: more info there
-def _BattleResultsWindow__populateAccounting_event(self, commonData, personalCommonData, personalData, playersData, personalDataOutput):
+def _BattleResultsWindow__populateAccounting_event(self, commonData, personalCommonData, personalData, playersData, personalDataOutput, isFallout):
     self._xvm_data['personalData'] = personalData
 
 # get string 'damageAssistedNames'
