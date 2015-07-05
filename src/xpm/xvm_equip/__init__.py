@@ -81,7 +81,7 @@ def AmmunitionPanel_setVehicleModule(self, newId, slotIdx, oldId, isRemove):
                 equip_settings[veh_name][slotIdx] = new_device.intCD
                 settings_changed = True
         if settings_changed:
-            debug('xvm_equip: devices for changed on %s, new set: %s' % (veh_name, equip_settings[veh_name]))
+            debug('xvm_equip: devices changed on %s, new set: %s' % (veh_name, equip_settings[veh_name]))
             save_settings()
     except Exception, ex:
         err(traceback.format_exc())
