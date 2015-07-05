@@ -76,14 +76,12 @@ def AmmunitionPanel_setVehicleModule(self, newId, slotIdx, oldId, isRemove):
             settings_changed = True
         else:
             newId = int(newId)
-            if veh_name not in equip_settings:
-                installed_devices(vehicle)
             new_device = g_itemsCache.items.getItemByCD(newId)
-            if new_device and new_device.isRemovable:
+            if new_device and new_device.isRemovable and new_device.itemTypeName == 'optionalDevice':
                 equip_settings[veh_name][slotIdx] = new_device.intCD
                 settings_changed = True
         if settings_changed:
-            debug('xvm_equip: devices changed, new set: %s' % equip_settings[veh_name])
+            debug('xvm_equip: devices for changed on %s, new set: %s' % (veh_name, equip_settings[veh_name]))
             save_settings()
     except Exception, ex:
         err(traceback.format_exc())
