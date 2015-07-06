@@ -86,6 +86,7 @@ class _Ping(object):
 
             # Parse ping output
             res = dict()
+            best_ping = 999
             for x in self.hosts:
                 proc = processes[x['name']]
 
@@ -102,6 +103,8 @@ class _Ping(object):
                     continue
 
                 res[x['name']] = found.group(1)
+                best_ping = min(best_ping, int(found.group(1)))
+            res['###best_ping###'] = str(best_ping) # will be first in sorting
 
             with self.lock:
                 self.resp = res

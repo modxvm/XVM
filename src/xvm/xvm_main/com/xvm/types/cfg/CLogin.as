@@ -11,5 +11,6 @@ package com.xvm.types.cfg
         public var autologin:Boolean; // Autologin
         public var confirmOldReplays:Boolean; // Auto confirm old replays playing
         public var pingServers:CPingServers; // Show ping to the servers
+        public var onlineServers:COnlineServers; // Show servers online
     }
 }

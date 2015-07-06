@@ -13,6 +13,7 @@ package com.xvm.types.cfg
         public var __xvmVersion:String;
         public var __wotVersion:String;
         public var __xvmIntro:String;
+        public var __wgApiAvailable:Boolean;
         // public
         public var configVersion:String;
         public var autoReloadConfig:Boolean;

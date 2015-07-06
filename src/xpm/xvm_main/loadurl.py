@@ -29,7 +29,7 @@ def loadUrl(url, req=None, body=None, showLog=True):
         url = url.replace("{REQ}", req)
     u = urlparse(url)
     ssl = url.lower().startswith('https://')
-    if showLog or IS_DEVELOPMENT:
+    if showLog:
         # hide some chars of token in the log
         path_log = utils.hide_guid(u.path) if not XFW_NO_TOKEN_MASKING else u.path
         log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
@@ -44,7 +44,8 @@ def loadUrl(url, req=None, body=None, showLog=True):
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
     duration = None
     if response:
-        log("  Time: %d ms, Size: %d (%d) bytes" % (msec, compressedSize, len(response)), '[INFO]  ')
+        if showLog:
+            log("  Time: %d ms, Size: %d (%d) bytes" % (msec, compressedSize, len(response)), '[INFO]  ')
         # debug('response: ' + response)
         if not response.lower().startswith('onexception'):
             duration = msec

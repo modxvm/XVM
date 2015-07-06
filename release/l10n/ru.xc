@@ -14,8 +14,10 @@
     "Yes": "Да",
     "No": "Нет",
 
-    // Ping
+    // Ping & Online
     "Initialization": "Инициализация",
+    "Ping": "Пинг",
+    "Online": "Онлайн",
 
     // Win chance
     "Chance error": "Ошибка расчета шансов",

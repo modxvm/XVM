@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.ping.PingServers
+package xvm.online.OnlineServers
 {
     import com.xfw.*;
     import com.xfw.events.*;
@@ -12,30 +12,30 @@ package xvm.ping.PingServers
     import flash.text.*;
     import scaleform.clik.core.*;
 
-    public class PingServersView extends UIComponent
+    public class OnlineServersView extends UIComponent
     {
         private static const QUALITY_BAD:String = "bad";
         private static const QUALITY_POOR:String = "poor";
         private static const QUALITY_GOOD:String = "good";
         private static const QUALITY_GREAT:String = "great";
-        private static const STYLE_NAME_PREFIX:String = "xvm_ping_";
+        private static const STYLE_NAME_PREFIX:String = "xvm_online_";
 
-        private var cfg:CPingServers;
+        private var cfg:COnlineServers;
         private var fields:Vector.<TextField>;
 
-        public function PingServersView(cfg:CPingServers)
+        public function OnlineServersView(cfg:COnlineServers)
         {
             mouseEnabled = false;
             this.cfg = cfg;
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );
-            PingServers.addEventListener(update);
+            OnlineServers.addEventListener(update);
         }
 
         override protected function onDispose():void
         {
-            PingServers.removeEventListener(update);
+            OnlineServers.removeEventListener(update);
             super.onDispose();
         }
 
@@ -75,28 +75,28 @@ package xvm.ping.PingServers
             alignFields();
         }
 
-        private function makeStyledRow(pingObj:Object):String
+        private function makeStyledRow(onlineObj:Object):String
         {
-            var cluster:String = pingObj.cluster;
-            var time:String = pingObj.time;
+            var cluster:String = onlineObj.cluster;
+            var time:String = onlineObj.time;
             var raw:String = cluster + cfg.delimiter + time;
-            if (cluster == "###best_ping###") //will be first in sorting
-                raw = Locale.get("Ping") + ":";
+            if (cluster == "###best_online###")  //will be first in sorting
+                raw = Locale.get("Online") + ":";
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span></textformat>";
         }
 
-        private function defineQuality(time:String):String
+        private function defineQuality(people_online_str:String):String
         {
-            var t:Number = parseInt(time);
-            if (isNaN(t))
+            var people_online:Number = parseInt(people_online_str);
+            if (isNaN(people_online))
                 return QUALITY_BAD;
-            if (t < cfg.threshold[QUALITY_GREAT])
-                return QUALITY_GREAT;
-            if (t < cfg.threshold[QUALITY_GOOD])
-                return QUALITY_GOOD;
-            else if (t < cfg.threshold[QUALITY_POOR])
+            if (people_online < cfg.threshold[QUALITY_POOR])
+                return QUALITY_BAD;
+            if (people_online < cfg.threshold[QUALITY_GOOD])
                 return QUALITY_POOR;
-            return QUALITY_BAD;
+            if (people_online < cfg.threshold[QUALITY_GREAT])
+                return QUALITY_GOOD;
+            return QUALITY_GREAT;
         }
 
         /**
@@ -150,7 +150,7 @@ package xvm.ping.PingServers
         public function createField(num:int):TextField
         {
             var tf:TextField = new TextField();
-            tf.name = "tfPing" + num;
+            tf.name = "tfOnline" + num;
             tf.x = cfg.x;
             tf.y = cfg.y;
             tf.width = 200;
@@ -174,10 +174,10 @@ package xvm.ping.PingServers
         private function createCss():String
         {
             var css:String = "";
-            css += createQualityCss(PingServersView.QUALITY_GREAT);
-            css += createQualityCss(PingServersView.QUALITY_GOOD)
-            css += createQualityCss(PingServersView.QUALITY_POOR);
-            css += createQualityCss(PingServersView.QUALITY_BAD);
+            css += createQualityCss(OnlineServersView.QUALITY_GREAT);
+            css += createQualityCss(OnlineServersView.QUALITY_GOOD)
+            css += createQualityCss(OnlineServersView.QUALITY_POOR);
+            css += createQualityCss(OnlineServersView.QUALITY_BAD);
 
             return css;
         }
@@ -190,7 +190,7 @@ package xvm.ping.PingServers
             var name:String = cfg.fontStyle.name;
             var color:Number = parseInt(cfg.fontStyle.color[quality], 16);
 
-            return WGUtils.createCSS(PingServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
+            return WGUtils.createCSS(OnlineServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
         }
     }
 }

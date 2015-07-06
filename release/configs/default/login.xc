@@ -37,7 +37,7 @@
       "delimiter": ": ",
       // Maximum number of column rows
       // Максимальное количество строк одной колонки
-      "maxRows": 4,
+      "maxRows": 3,
       // Gap between columns
       // Пространство между колонками
       "columnGap": 10,
@@ -87,6 +87,71 @@
         "blur": 4,
         "strength": 2
       }
+    },
+    "onlineServers": {
+      // true - Enable display online of servers
+      // true - показывать онлайн серверов
+      "enabled": false,
+      // Update interval, in ms
+      // Интервал обновления, в мс
+      "updateInterval": 10000,
+      // Axis field coordinates
+      // Положение поля по осям
+      "x": 5,
+      "y": 130,
+      // Transparency
+      // Прозрачность от 0 до 100
+      "alpha": 80,
+      // Server to online text delimiter
+      // Разделитель сервера от онлайна
+      "delimiter": ": ",
+      // Maximum number of column rows
+      // Максимальное количество строк одной колонки
+      "maxRows": 3,
+      // Gap between columns
+      // Пространство между колонками
+      "columnGap": 10,
+      // Leading between lines.
+      // Пространство между строками
+      "leading": 0,
+      // Text style
+      // Стиль текста
+      "fontStyle": {
+        // Font name
+        // Название шрифта
+        "name": "$TextFont",
+        "size": 12, // Размер
+        "bold": false,  // Жирный
+        "italic": false, // Курсив
+        // Different colors depending on people online
+        // Разные цвета в зависимости от количества игроков
+        "color": {
+          "great": "0x60ff00", // Отличный
+          "good": "0xF8F400",  // Хороший
+          "poor": "0xFE7903",  // Так себе
+          "bad": "0xFE0E00"    // Плохой
+        }
+      },
+      // Threshold values defining server online and thus shorter battle queue
+      // Пороговые значения, определяющие количество человек онлайн и следовательно меньшую очередь в бой
+      "threshold": {
+        "great": 30000,
+        "good": 10000,
+        "poor": 3000
+        //below this value the queue might be long
+        //ниже этого значения очередь может быть долгой
+      },
+      // Параметры тени
+      "shadow": {
+        "enabled": true,
+        "color": "0x000000",
+        "distance": 0,
+        "angle": 0,
+        "alpha": 70,
+        "blur": 4,
+        "strength": 2
+      }
     }
+
   }
 }

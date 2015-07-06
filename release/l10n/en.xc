@@ -14,8 +14,10 @@
     "Yes": "Yes",
     "No": "No",
 
-    // Ping
+    // Ping & Online
     "Initialization": "Initialization",
+    "Ping": "Ping",
+    "Online": "Online",
 
     // Win chance
     "Chance error": "Chance error",

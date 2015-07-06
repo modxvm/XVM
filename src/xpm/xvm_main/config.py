@@ -10,7 +10,7 @@ import simplejson
 import JSONxLoader
 
 from xfw import *
-
+import xfw.constants as xfw_constants
 from constants import *
 from logger import *
 import default_config
@@ -161,6 +161,7 @@ def _tuneup_config(config):
     config['__xvmVersion'] = XVM.XVM_VERSION
     config['__wotVersion'] = XVM.WOT_VERSION
     config['__xvmIntro'] = XVM.XVM_INTRO
+    config['__wgApiAvailable'] = GAME_REGION in xfw_constants.URLS.WG_API_SERVERS
 
     config['battle']['clanIconsFolder'] = utils.fixPath(config['battle']['clanIconsFolder'])
 
