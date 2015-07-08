@@ -81,7 +81,7 @@ package xvm.ping.PingServers
             var time:String = pingObj.time;
             var raw:String = cluster + cfg.delimiter + time;
             if (cluster == "###best_ping###") //will be first in sorting
-                raw = Locale.get("Ping") + ":";
+                raw = Locale.get("Ping") + cfg.delimiter + " ";
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span></textformat>";
         }
 

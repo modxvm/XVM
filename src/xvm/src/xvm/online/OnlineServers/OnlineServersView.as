@@ -81,7 +81,7 @@ package xvm.online.OnlineServers
             var time:String = onlineObj.time;
             var raw:String = cluster + cfg.delimiter + time;
             if (cluster == "###best_online###")  //will be first in sorting
-                raw = Locale.get("Online") + ":";
+                raw = Locale.get("Online") + cfg.delimiter + " ";
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span></textformat>";
         }
 
