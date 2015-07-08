@@ -30,8 +30,9 @@ import simplejson
 from xfw import *
 from xvm_main.python.logger import *
 
-import pinger
+#import pinger
 # import pinger_wg as pinger
+import pinger_wg_new as pinger
 
 #####################################################################
 # event handlers
