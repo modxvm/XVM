@@ -1,6 +1,9 @@
 ﻿XVM-6.1.3-dev:
   * adaptation to WoT 0.9.9
   * new feature: similar to servers ping, added servers online (login page and hangar)
+  * renamed config option: blockVehicleIfNoAmmo -> blockVehicleIfLowAmmo
+  * new options:
+      "hangar"/"lowAmmoPercentage" - Below this percentage ammo is low. (0 - 100)
 
 XVM-6.1.2.3:
   * update for WoT 0.9.8.1 #62

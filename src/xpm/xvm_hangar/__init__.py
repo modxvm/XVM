@@ -53,36 +53,36 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenIn
 
     return base(self, tankmenCount, placesCount, tankmenInBarracks, tankmanArr)
 
-# less then 20% ammo => vehicle not ready
+# low ammo => vehicle not ready
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     try:
-        if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfNoAmmo'):
+        if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
             return False
     except Exception as ex:
         err(traceback.format_exc())
     return base(self, *args, **kwargs)
 
-# less then 20% ammo => vehicle not ready
+# low ammo => vehicle not ready
 def Vehicle_isReadyToFight(base, self, *args, **kwargs):
     try:
-        if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfNoAmmo'):
+        if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
             return False
     except Exception as ex:
         err(traceback.format_exc())
     return base.fget(self, *args, **kwargs) # base is property
 
-# less then 20% ammo => vehicle not ready (disable red button)
+# low ammo => vehicle not ready (disable red button)
 def _PrebattleDispatcher_canPlayerDoAction(base, self, *args, **kwargs):
     try:
         from CurrentVehicle import g_currentVehicle
-        if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfNoAmmo'):
+        if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
             from gui.prb_control.settings import PREBATTLE_RESTRICTION
             return (False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
     except Exception as ex:
         err(traceback.format_exc())
     return base(self, *args, **kwargs)
 
-# less then 20% ammo => write on carousel's vehicle 'low ammo'
+# low ammo => write on carousel's vehicle 'low ammo'
 def i18n_makeString(base, key, *args, **kwargs):
     if key == '#menu:tankCarousel/vehicleStates/ammoNotFull': # originally returns empty string
         return l10n('lowAmmo')
@@ -98,6 +98,7 @@ def _RegisterEvents():
     from gui.shared.gui_items.Vehicle import Vehicle
     OverrideMethod(Vehicle, 'isReadyToPrebattle', Vehicle_isReadyToPrebattle)
     OverrideMethod(Vehicle, 'isReadyToFight', Vehicle_isReadyToFight)
+    Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
     
     from gui.prb_control.dispatcher import _PrebattleDispatcher
     OverrideMethod(_PrebattleDispatcher, 'canPlayerDoAction', _PrebattleDispatcher_canPlayerDoAction)
