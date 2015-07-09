@@ -11,6 +11,8 @@ package com.xvm.types.cfg
         public var updateInterval:Number; // msec
         public var x:Number;
         public var y:Number;
+        public var hAlign:String;
+        public var vAlign:String;
         public var alpha:Number;
         public var delimiter:String;
         public var maxRows:Number;

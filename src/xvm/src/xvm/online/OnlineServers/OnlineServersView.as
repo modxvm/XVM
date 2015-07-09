@@ -10,6 +10,7 @@ package xvm.online.OnlineServers
     import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
     import flash.text.*;
+    import flash.events.*;
     import scaleform.clik.core.*;
 
     public class OnlineServersView extends UIComponent
@@ -31,15 +32,64 @@ package xvm.online.OnlineServers
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );
             OnlineServers.addEventListener(update);
+            this.addEventListener(Event.RESIZE, updatePositions);
         }
 
         override protected function onDispose():void
         {
             OnlineServers.removeEventListener(update);
+            this.removeEventListener(Event.RESIZE, updatePositions);
             super.onDispose();
         }
 
         // -- Private
+
+        private function get_x_offset():int
+        {
+            switch (cfg.hAlign)
+            {
+                case "center":
+                    return (App.appWidth - this.actualWidth) / 2;
+                case "right":
+                    return App.appWidth - this.actualWidth;
+            }
+            return 0;
+        }
+
+        private function get_y_offset():int
+        {
+            switch (cfg.vAlign)
+            {
+                case "center":
+                    return (App.appHeight - this.actualHeight) / 2;
+                case "bottom":
+                    return App.appHeight - this.actualHeight;
+            }
+            return 0;
+        }
+
+        private function updatePositions():void
+        {
+            if (fields.length == 0)
+                return
+            for (var i:int = 1; i < fields.length; i++) // make full width
+            {
+                var currentField:TextField = fields[i];
+                var prevField:TextField = fields[i - 1];
+                currentField.x = prevField.x + prevField.width + cfg.columnGap;
+            }
+            // align using new width
+            var y_offset:int = get_y_offset();
+            fields[0].x = cfg.x + get_x_offset();
+            fields[0].y = cfg.y + y_offset;
+            for (i = 1; i < fields.length; i++)
+            {
+                currentField = fields[i];
+                prevField = fields[i - 1];
+                currentField.x = prevField.x + prevField.width + cfg.columnGap;
+                currentField.y = cfg.y + y_offset;
+            }
+        }
 
         private function update(e:ObjectEvent):void
         {
@@ -72,7 +122,7 @@ package xvm.online.OnlineServers
         {
             var tf:TextField = getReceiverField();
             tf.htmlText += row;
-            alignFields();
+            updatePositions();
         }
 
         private function makeStyledRow(onlineObj:Object):String
@@ -111,7 +161,6 @@ package xvm.online.OnlineServers
 
         /**
          * Align colums so they do not overlap each other.
-         */
         public function alignFields():void
         {
             for (var i:int = 1; i < fields.length; i++)
@@ -121,6 +170,7 @@ package xvm.online.OnlineServers
                 currentField.x = prevField.x + prevField.width + cfg.columnGap;
             }
         }
+         */
 
         // -- Private
 
@@ -151,8 +201,8 @@ package xvm.online.OnlineServers
         {
             var tf:TextField = new TextField();
             tf.name = "tfOnline" + num;
-            tf.x = cfg.x;
-            tf.y = cfg.y;
+            tf.x = cfg.x + get_x_offset();
+            tf.y = cfg.y + get_y_offset();
             tf.width = 200;
             tf.height = 200;
             tf.autoSize = TextFieldAutoSize.LEFT;

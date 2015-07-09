@@ -4,6 +4,7 @@
   * переименована опция конфига: "hangar"/"blockVehicleIfNoAmmo" -> "hangar"/"blockVehicleIfLowAmmo"
   * новые опции:
       "hangar"/"lowAmmoPercentage" - Ниже этого процента снарядов считается мало. (0 - 100)
+      "hAlign", "vAlign" - добавлены горизонтальное и вертикальное выравнивание для xvm_ping и xvm_online
 
 XVM-6.1.2.3:
   * обновление для WoT 0.9.8.1 #62

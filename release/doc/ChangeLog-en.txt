@@ -4,6 +4,7 @@
   * renamed config option: blockVehicleIfNoAmmo -> blockVehicleIfLowAmmo
   * new options:
       "hangar"/"lowAmmoPercentage" - Below this percentage ammo is low. (0 - 100)
+      "hAlign", "vAlign" - added horizontal and vertical alignments for xvm_ping and xvm_online
 
 XVM-6.1.2.3:
   * update for WoT 0.9.8.1 #62

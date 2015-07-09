@@ -56,6 +56,12 @@
       // Положение поля по осям
       "x": 3,
       "y": 51,
+      // Horizontal alignment of field at screen ("left", "center", "right").
+      // Горизонтальное выравнивание поля на экране ("left", "center", "right").
+      "hAlign": "left",
+      // Vertical alignment of field at screen ("top", "center", "bottom").
+      // Вертикальное выравнивание поля на экране ("top", "center", "bottom").
+      "vAlign": "top",
       // Transparency
       // Прозрачность от 0 до 100
       "alpha": 80,
@@ -127,8 +133,14 @@
       "updateInterval": 10000,
       // Axis field coordinates
       // Положение поля по осям
-      "x": 150,
-      "y": 90,
+      "x": -3,
+      "y": 51,
+      // Horizontal alignment of field at screen ("left", "center", "right").
+      // Горизонтальное выравнивание поля на экране ("left", "center", "right").
+      "hAlign": "right",
+      // Vertical alignment of field at screen ("top", "center", "bottom").
+      // Вертикальное выравнивание поля на экране ("top", "center", "bottom").
+      "vAlign": "top",
       // Transparency
       // Прозрачность от 0 до 100
       "alpha": 80,
