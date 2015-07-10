@@ -35,8 +35,9 @@
       // false - скрыть фильтр.
       "nation":   { "enabled": true },  // nation           / страна
       "type":     { "enabled": true },  // vehicle class    / тип техники
-      "level":    { "enabled": true },  // vehicle level    / уровень техники
       "favorite": { "enabled": true },  // favorite tanks   / основные танки
+      "fallout":  { "enabled": true },  // domination tanks / танки для "превосходства"
+      "level":    { "enabled": true },  // vehicle level    / уровень техники
       "prefs":    { "enabled": true }   // other filters    / другие фильтры
     },
     // Standard cell elements.

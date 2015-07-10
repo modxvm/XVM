@@ -112,6 +112,8 @@ package xvm.tcarousel_ui
                     vehicleFilters.tankFilter.selectedIndex = 0;
                 if (!cfg.filters.favorite.enabled)
                     vehicleFilters.checkBoxToMain.selected = false;
+                if (!cfg.filters.fallout.enabled)
+                    vehicleFilters.falloutCheckBox.selected = true;
                 if (!cfg.filters.level.enabled)
                     levelFilter.selectedItems = [];
                 if (!cfg.filters.prefs.enabled)
@@ -195,6 +197,7 @@ package xvm.tcarousel_ui
             }
         }
 
+        // TankCarousel
         private var _isMouseOver:Boolean = false;
         override protected function onRendererItemRollOver(param1:VehicleCarouselVO):void
         {
@@ -202,10 +205,21 @@ package xvm.tcarousel_ui
             super.onRendererItemRollOver(param1);
         }
 
+        // TankCarousel
         override protected function onItemRollOut():void
         {
             _isMouseOver = false;
             super.onItemRollOut();
+        }
+
+        // TankCarousel
+        private var _isFalloutEvent:Boolean = false;
+        override public function as_setIsEvent(param1:Boolean):void
+        {
+            _isFalloutEvent = param1;
+            super.as_setIsEvent(param1);
+            vehicleFilters.validateNow();
+            rearrangeFilters();
         }
 
         // Carousel
@@ -599,6 +613,8 @@ package xvm.tcarousel_ui
                 levelFilter.visible = cfg.filters.level.enabled;
                 prefFilter.visible = cfg.filters.prefs.enabled;
                 vehicleFilters.checkBoxToMain.visible = cfg.filters.favorite.enabled;
+                vehicleFilters.falloutCheckBox.visible = cfg.filters.fallout.enabled && _isFalloutEvent;
+                vehicleFilters.falloutIcon.visible = cfg.filters.fallout.enabled && _isFalloutEvent;
 
                 if (cfg.filters.nation.enabled)
                     visibleFilters.push(vehicleFilters.nationFilter);
@@ -610,6 +626,8 @@ package xvm.tcarousel_ui
                     visibleFilters.push(prefFilter);
                 if (cfg.filters.favorite.enabled)
                     visibleFilters.push(vehicleFilters.checkBoxToMain);
+                if (cfg.filters.fallout.enabled)
+                    visibleFilters.push(vehicleFilters.falloutCheckBox);
 
                 var w:int = 0;
                 var maxRows:int = Math.floor((height - 4) / 34);
@@ -628,6 +646,14 @@ package xvm.tcarousel_ui
 
                     visibleFilters[i].x = col * 60 + offsetX;
                     visibleFilters[i].y = row * 34 + 2 + offsetY;
+
+                    if (visibleFilters[i] == vehicleFilters.falloutCheckBox)
+                    {
+                        vehicleFilters.falloutIcon.x = vehicleFilters.falloutCheckBox.x;
+                        vehicleFilters.falloutIcon.y = vehicleFilters.falloutCheckBox.y;
+                        vehicleFilters.falloutCheckBox.x = vehicleFilters.falloutIcon.x + vehicleFilters.falloutIcon.width + 5;
+                    }
+
                     w = (col + 1) * 60 - 4;
                 }
 

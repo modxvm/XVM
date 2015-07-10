@@ -18,8 +18,9 @@
     "filters": {
       //"nation":   { "enabled": false },
       //"type":     { "enabled": false },
-      //"level":    { "enabled": false },
       //"favorite": { "enabled": false },
+      //"fallout":  { "enabled": false },
+      //"level":    { "enabled": false },
       //"prefs":    { "enabled": false },
       "__stub__": {}
     },
