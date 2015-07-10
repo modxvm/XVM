@@ -50,6 +50,9 @@
       // Leading between lines.
       // Пространство между строками
       "leading": 0,
+      // true - show title "Ping"
+      // true - показывать заголовок "Пинг"
+      "showTitle": true,
       // Text style
       // Стиль текста
       "fontStyle": {
@@ -126,6 +129,9 @@
       // Leading between lines.
       // Пространство между строками
       "leading": 0,
+      // true - show title "Online"
+      // true - показывать заголовок "Онлайн"
+      "showTitle": true,
       // Text style
       // Стиль текста
       "fontStyle": {

@@ -16,6 +16,7 @@ from xfw import *
 import xfw.constants as xfw_constants
 from xvm_main.python.logger import *
 from xvm_main.python.loadurl import loadUrl
+import xvm_main.python.config as config
 
 #############################
 
@@ -81,7 +82,9 @@ class _Get_online(object):
                 for host in response_data:
                     res[host['server']] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
-                res['###best_online###'] = str(best_online)  # will be first in sorting
+                from ConnectionManager import connectionManager
+                if (connectionManager.isConnected() and config.get('hangar/onlineServers/showTitle')) or (not connectionManager.isConnected() and config.get('login/onlineServers/showTitle')):
+                    res['###best_online###'] = str(best_online)  # will be first in sorting, key is replaced by localized "Online"
             with self.lock:
                 self.resp = res
 

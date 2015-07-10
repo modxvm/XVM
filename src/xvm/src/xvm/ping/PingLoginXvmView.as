@@ -55,6 +55,7 @@ package xvm.ping
         private function init():void
         {
             var cfg:CPingServers = Config.config.login.pingServers;
+            cfg.fontStyle.markCurrentServer = "none" // at login screen it's not relevant
             PingServers.initFeature(cfg.enabled, cfg.updateInterval);
             if (cfg.enabled)
                 pingControl = page.addChild(new PingServersView(cfg)) as PingServersView;

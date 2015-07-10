@@ -20,20 +20,28 @@ package xvm.ping.PingServers
         private static const QUALITY_POOR:String = "poor";
         private static const QUALITY_GOOD:String = "good";
         private static const QUALITY_GREAT:String = "great";
+        private static const CURRENT_SERVER:String = "current";
         private static const STYLE_NAME_PREFIX:String = "xvm_ping_";
+        private static const COMMAND_GETCURRENTSERVER:String = "xvm_online.getcurrentserver";
+        private static const COMMAND_AS_CURRENTSERVER:String = "xvm_online.as.currentserver";
 
         private var cfg:CPingServers;
         private var fields:Vector.<TextField>;
+        private var currentServer:String;
 
         public function PingServersView(cfg:CPingServers)
         {
             mouseEnabled = false;
             this.cfg = cfg;
+            this.currentServer = currentServer;
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );
+            updatePositions();
             PingServers.addEventListener(update);
             this.addEventListener(Event.RESIZE, updatePositions);
+            Xfw.addCommandListener(COMMAND_AS_CURRENTSERVER, currentServerCallback);
+            Xfw.cmd(COMMAND_GETCURRENTSERVER);
         }
 
         override protected function onDispose():void
@@ -44,6 +52,11 @@ package xvm.ping.PingServers
         }
 
         // -- Private
+
+        private function currentServerCallback(name:String):void
+        {
+            currentServer = name
+        }
 
         private function get_x_offset():int
         {
@@ -92,7 +105,7 @@ package xvm.ping.PingServers
             }
         }
 
-        public function update(e:ObjectEvent):void
+        private function update(e:ObjectEvent):void
         {
             try
             {
@@ -133,6 +146,8 @@ package xvm.ping.PingServers
             var raw:String = cluster + cfg.delimiter + time;
             if (cluster == "###best_ping###") //will be first in sorting
                 raw = Locale.get("Ping") + cfg.delimiter + " ";
+            if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
+                raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span></textformat>";
         }
 
@@ -229,6 +244,7 @@ package xvm.ping.PingServers
             css += createQualityCss(PingServersView.QUALITY_GOOD)
             css += createQualityCss(PingServersView.QUALITY_POOR);
             css += createQualityCss(PingServersView.QUALITY_BAD);
+            css += createCurrentServerCss()
 
             return css;
         }
@@ -242,6 +258,14 @@ package xvm.ping.PingServers
             var color:Number = parseInt(cfg.fontStyle.color[quality], 16);
 
             return WGUtils.createCSS(PingServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
+        }
+
+        private function createCurrentServerCss():String
+        {
+            return "." + STYLE_NAME_PREFIX + CURRENT_SERVER + " {" +
+                "font-weight:" + (cfg.fontStyle.markCurrentServer == "bold" ? "bold" : "normal") + ";" +
+                "font-style:" + (cfg.fontStyle.markCurrentServer == "italic" ? "italic" : "normal") + ";" +
+                "}";
         }
     }
 }

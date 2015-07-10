@@ -80,6 +80,9 @@
       // true - place at top of other windows, false - at bottom.
       // true - отображать поверх остальных окон, false - под.
       "topmost": true,
+      // true - show title "Ping"
+      // true - показывать заголовок "Пинг"
+      "showTitle": true,
       // Text style
       // Стиль текста
       "fontStyle": {
@@ -96,7 +99,10 @@
           "good":  "0xE5E4E1",  // Хороший
           "poor":  "0x96948F",  // Так себе
           "bad":   "0xD64D4D"   // Плохой
-        }
+        },
+        // Mark current server in the list, possible options: "none" (don't mark), "normal", "bold", "italic"
+        // Выделять текущий сервер в списке, доступные опции: "none" (не выделять), "normal", "bold", "italic"
+        "markCurrentServer": "bold"
       },
       // Threshold values defining response quality
       // Пороговые значения, определяющие качество отклика
@@ -125,7 +131,7 @@
       }
     },
     "onlineServers": {
-      // true - Enable display of online of servers
+      // true - Enable display online of servers
       // true - показывать онлайн серверов
       "enabled": false,
       // Update interval, in ms
@@ -159,6 +165,9 @@
       // true - place at top of other windows, false - at bottom.
       // true - отображать поверх остальных окон, false - под.
       "topmost": true,
+      // true - show title "Online"
+      // true - показывать заголовок "Онлайн"
+      "showTitle": true,
       // Text style
       // Стиль текста
       "fontStyle": {
@@ -175,8 +184,11 @@
           "good":  "0xF8F400",  // Хороший
           "poor":  "0xFE7903",  // Так себе
           "bad":   "0xFE0E00"   // Плохой
-        }
-      },
+        },
+        // Mark current server in the list, possible options: "none" (don't mark), "normal", "bold", "italic"
+        // Выделять текущий сервер в списке, доступные опции: "none" (не выделять), "normal", "bold", "italic"
+        "markCurrentServer": "bold"
+     },
       // Threshold values defining server online and thus shorter battle queue
       // Пороговые значения, определяющие количество человек онлайн и следовательно меньшую очередь в бой
       "threshold": {

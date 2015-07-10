@@ -18,6 +18,8 @@ XFW_MOD_INFO = {
 class XVM_ONLINE_COMMAND(object):
     ONLINE = "xvm_online.online"
     AS_ONLINEDATA = "xvm_online.as.onlinedata"
+    GETCURRENTSERVER = "xvm_online.getcurrentserver"
+    AS_CURRENTSERVER = "xvm_online.as.currentserver"
 
 #####################################################################
 # includes
@@ -58,15 +60,24 @@ def onXfwCommand(cmd, *args):
         if cmd == XVM_ONLINE_COMMAND.ONLINE:
             online.online()
             return (None, True)
+        if cmd == XVM_ONLINE_COMMAND.GETCURRENTSERVER:
+            from ConnectionManager import connectionManager
+            LobbyHeaderMeta_as_setServerS(None, connectionManager.serverUserNameShort)
+            return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)
     return (None, False)
+
+def LobbyHeaderMeta_as_setServerS(self, name, *args, **kwargs):
+    as_xfw_cmd(XVM_ONLINE_COMMAND.AS_CURRENTSERVER, name)
 
 # Delayed registration
 def _RegisterEvents():
     start()
     import game
     RegisterEvent(game, 'fini', fini)
+    from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
+    RegisterEvent(LobbyHeaderMeta, 'as_setServerS', LobbyHeaderMeta_as_setServerS)
 
 BigWorld.callback(0, _RegisterEvents)

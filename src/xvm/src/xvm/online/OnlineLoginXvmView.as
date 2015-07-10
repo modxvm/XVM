@@ -55,6 +55,7 @@ package xvm.online
         private function init():void
         {
             var cfg:COnlineServers = Config.config.login.onlineServers;
+            cfg.fontStyle.markCurrentServer = "none" // at login screen it's not relevant
             OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, cfg.updateInterval);
             if (cfg.enabled && Config.config.__wgApiAvailable)
                 onlineControl = page.addChild(new OnlineServersView(cfg)) as OnlineServersView;
