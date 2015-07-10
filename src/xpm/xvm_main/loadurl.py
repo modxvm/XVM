@@ -61,7 +61,7 @@ def _loadUrl(u, timeout, fingerprint, body):  # timeout in msec
         # log(u)
         if u.scheme.lower() == 'https':
             checker = tlslite.CheckerXvm(x509Fingerprint=fingerprint)
-            conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout / 1000, checker=checker)
+            conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout / 1000)#, checker=checker)
         else:
             conn = httplib.HTTPConnection(u.netloc, timeout=timeout / 1000)
         global _USER_AGENT
