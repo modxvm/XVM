@@ -13,6 +13,7 @@ package xvm.profile_ui.components
     import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.events.*;
     import net.wg.gui.components.controls.SortableScrollingList;
     import net.wg.gui.components.controls.NormalSortingBtnInfo;
@@ -101,7 +102,7 @@ package xvm.profile_ui.components
 
                 if (Config.networkServicesSettings.statAwards)
                 {
-                    Dossier.requestAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
+                    Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, playerId);
 
                     // override renderers
                     page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);

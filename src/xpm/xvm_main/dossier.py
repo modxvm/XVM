@@ -22,7 +22,7 @@ import simplejson
 
 from helpers.i18n import makeString
 from gui.Scaleform.locale.MENU import MENU
-from gui.Scaleform.locale.PROFILE import PROFILE
+from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
 
@@ -47,7 +47,7 @@ class _Dossier(object):
         self.__dataReceiver = None
 
     def requestDossier(self, args):
-        (self.battlesType, playerId, vehId) = args
+        (self._battlesType, playerId, vehId) = args
         if vehId == 0 or self.__isVehicleDossierCached(playerId, vehId):
             self.__requestedDataReceived(playerId, vehId)
         else:
@@ -55,7 +55,7 @@ class _Dossier(object):
 
     def __requestedDataReceived(self, playerId, vehId):
         # respond
-        res = self.getDossier((self.battlesType, playerId, vehId))
+        res = self.getDossier((self._battlesType, playerId, vehId))
         #log(res)
         as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, playerId, vehId, res)
 
@@ -63,7 +63,7 @@ class _Dossier(object):
     def getDossier(self, args):
         #log(str(args))
 
-        (self.battlesType, self.playerId, self.vehId) = args
+        (self._battlesType, self.playerId, self.vehId) = args
 
         if self.playerId == 0:
             self.playerId = None
@@ -122,23 +122,21 @@ class _Dossier(object):
         return dossier is not None
 
     def __getStatsBlock(self, dossier):
-        if self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL:
+        if self._battlesType == PROFILE_DROPDOWN_KEYS.ALL:
             return dossier.getRandomStats()
-        elif self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM:
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.TEAM:
             return dossier.getTeam7x7Stats()
-        elif self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL:
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.STATICTEAM:
+            return dossier.getRated7x7Stats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.HISTORICAL:
             return dossier.getHistoricalStats()
-        elif self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS:
-            return dossier._receiveFortDossier(accountDossier)
-        elif self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES:
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.FORTIFICATIONS_SORTIES:
             return dossier.getFortSortiesStats()
-        elif self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES:
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.FORTIFICATIONS_BATTLES:
             return dossier.getFortBattlesStats()
-        elif self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_COMPANY:
-            return dossier.getCompanyStats()
-        elif self.battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_CLAN:
-            return dossier.getClanStats()
-        raise ValueError('_Dossier: Unknown battle type: ' + self.battlesType)
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.CLAN:
+            return dossier.getGlobalMapStats()
+        raise ValueError('_Dossier: Unknown battle type: ' + self._battlesType)
 
 
     def __prepareCommonResult(self, dossier):

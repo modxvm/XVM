@@ -7,6 +7,7 @@ package xvm.techtree
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.techtree.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -38,7 +39,7 @@ package xvm.techtree
 
         private function init():void
         {
-            Dossier.requestAccountDossier(page.nationTree, page.nationTree.invalidateData, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+            Dossier.requestAccountDossier(page.nationTree, page.nationTree.invalidateData, PROFILE_DROPDOWN_KEYS.ALL);
 
             page.nationsBar.addEventListener(IndexEvent.INDEX_CHANGE, this.handleIndexChange);
             handleIndexChange();

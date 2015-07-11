@@ -9,6 +9,7 @@ package xvm.tcarousel
     import com.xvm.infrastructure.*;
     import com.xvm.types.dossier.*;
     //import com.xfw.utils.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.infrastructure.events.*;
@@ -81,7 +82,7 @@ package xvm.tcarousel
             if (Config.config.hangar.carousel.enabled != true)
                 return;
             Macros.RegisterVehiclesMacros();
-            Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+            Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
         }
 
         private function remove():void
@@ -95,7 +96,7 @@ package xvm.tcarousel
             if (dossier != null)
             {
                 for (var vehId:String in dossier.vehicles)
-                    Dossier.requestVehicleDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, parseInt(vehId));
+                    Dossier.requestVehicleDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, parseInt(vehId));
             }
             page.carousel.invalidateData();
         }
