@@ -55,7 +55,8 @@ package xvm.online
         private function init():void
         {
             var cfg:COnlineServers = Config.config.login.onlineServers;
-            cfg.fontStyle.markCurrentServer = "none" // at login screen it's not relevant
+            cfg.fontStyle.markCurrentServer = "none"; // at login screen it's not relevant
+            cfg.updateInterval = 60000; // currently data is updated once per minute on XVM server
             OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, cfg.updateInterval);
             if (cfg.enabled && Config.config.__wgApiAvailable)
                 onlineControl = page.addChild(new OnlineServersView(cfg)) as OnlineServersView;

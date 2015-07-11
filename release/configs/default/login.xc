@@ -101,9 +101,6 @@
       // true - Enable display online of servers
       // true - показывать онлайн серверов
       "enabled": false,
-      // Update interval, in ms
-      // Интервал обновления, в мс
-      "updateInterval": 10000,
       // Axis field coordinates
       // Положение поля по осям
       "x": -5,

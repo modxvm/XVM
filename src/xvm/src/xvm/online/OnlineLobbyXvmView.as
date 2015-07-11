@@ -55,6 +55,7 @@ package xvm.online
         private function init():void
         {
             var cfg:COnlineServers = Config.config.hangar.onlineServers;
+            cfg.updateInterval = 60000; // currently data is updated once per minute on XVM server
             OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, cfg.updateInterval);
             if (cfg.enabled && Config.config.__wgApiAvailable)
                 onlineControl = page.addChildAt(new OnlineServersView(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as OnlineServersView;
