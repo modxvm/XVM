@@ -8,28 +8,27 @@ def online():
 
 import traceback
 import threading
+from random import randint
 
 import BigWorld
 import ResMgr
 
 from xfw import *
-import xfw.constants as xfw_constants
+from xfw.constants import URLS
 from xvm_main.python.logger import *
+from xvm_main.python.constants import XVM
 from xvm_main.python.loadurl import loadUrl
 import xvm_main.python.config as config
 
 #############################
 
-"""
-NOTE: ICMP requires root privileges. Don't use it.
-"""
 class _Get_online(object):
 
     def __init__(self):
         self.lock = threading.RLock()
         self.thread = None
         self.resp = None
-        if GAME_REGION not in xfw_constants.URLS.WG_API_SERVERS:
+        if GAME_REGION not in URLS.WG_API_SERVERS:
             warn('xvm_online: no API available for this server')
             return
         self.hosts = []
@@ -71,8 +70,13 @@ class _Get_online(object):
     # Threaded
     def _getOnlineAsync(self):
         try:
-            (response, delay, error) = loadUrl(xfw_constants.URLS.WG_API_SERVERS[GAME_REGION] + '/wgn/servers/info/', body='application_id=demo&game=wot', showLog=False)
-            response_data = eval(response).get('data', {}).get('wot', {})
+            req = "onlineUsersCount/0"
+            server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
+            (response, delay, error) = loadUrl(server, req, showLog=False)
+            region = GAME_REGION.lower()
+            if 'CT' in URLS.WG_API_SERVERS: # CT is uncommented in xfw.constants to check on test server
+                region = 'ru'
+            response_data = eval(response).get(region, [])
             res = {}
             best_online = 0
             if error or type(response_data) is not list:
@@ -80,6 +84,8 @@ class _Get_online(object):
                     res[host] = 'Error'
             else:
                 for host in response_data:
+                    if host['server'].find('US') == 0: # API return "US west" instead of "NA west" => can't determine current server
+                        host['server'] = host['server'].replace('US ', 'NA ')
                     res[host['server']] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
                 from ConnectionManager import connectionManager
@@ -89,7 +95,7 @@ class _Get_online(object):
                 self.resp = res
 
         except Exception, ex:
-            err('_pingAsync() exception: ' + traceback.format_exc())
+            err('_getOnlineAsync() exception: ' + traceback.format_exc())
             with self.lock:
                 self.resp = {"Error": ex}
 

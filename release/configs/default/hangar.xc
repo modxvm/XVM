@@ -100,8 +100,8 @@
           "poor":  "0x96948F",  // Так себе
           "bad":   "0xD64D4D"   // Плохой
         },
-        // Mark current server in the list, possible options: "none" (don't mark), "normal", "bold", "italic"
-        // Выделять текущий сервер в списке, доступные опции: "none" (не выделять), "normal", "bold", "italic"
+        // Mark current server in the list, possible options: "none" (don't mark), "normal", "bold", "italic", "underline"
+        // Выделять текущий сервер в списке, доступные опции: "none" (не выделять), "normal", "bold", "italic", "underline"
         "markCurrentServer": "bold"
       },
       // Threshold values defining response quality
@@ -185,8 +185,8 @@
           "poor":  "0xFE7903",  // Так себе
           "bad":   "0xFE0E00"   // Плохой
         },
-        // Mark current server in the list, possible options: "none" (don't mark), "normal", "bold", "italic"
-        // Выделять текущий сервер в списке, доступные опции: "none" (не выделять), "normal", "bold", "italic"
+        // Mark current server in the list, possible options: "none" (don't mark), "normal", "bold", "italic", "underline"
+        // Выделять текущий сервер в списке, доступные опции: "none" (не выделять), "normal", "bold", "italic", "underline"
         "markCurrentServer": "bold"
      },
       // Threshold values defining server online and thus shorter battle queue

@@ -262,10 +262,15 @@ package xvm.online.OnlineServers
         
         private function createCurrentServerCss():String
         {
-            return "." + STYLE_NAME_PREFIX + CURRENT_SERVER + " {" +
-                "font-weight:" + (cfg.fontStyle.markCurrentServer == "bold" ? "bold" : "normal") + ";" +
-                "font-style:" + (cfg.fontStyle.markCurrentServer == "italic" ? "italic" : "normal") + ";" +
-                "}";
+            var css_string:String = "." + STYLE_NAME_PREFIX + CURRENT_SERVER + " {";
+            if(cfg.fontStyle.markCurrentServer == "bold" || cfg.fontStyle.markCurrentServer == "normal")
+                css_string += "font-weight: " + cfg.fontStyle.markCurrentServer + ";"
+            if(cfg.fontStyle.markCurrentServer == "italic" || cfg.fontStyle.markCurrentServer == "normal")
+                css_string += "font-style: " + cfg.fontStyle.markCurrentServer + ";"
+            if (cfg.fontStyle.markCurrentServer == "underline")
+                css_string += "text-decoration: underline;"
+            css_string += "}";
+            return css_string;
         }
     }
 }
