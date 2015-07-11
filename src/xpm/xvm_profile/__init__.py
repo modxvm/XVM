@@ -44,8 +44,11 @@ def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
             isHangar = False
             if hasattr(self, '_ProfileTechniquePage__isInHangarSelected'):
                 isHangar = self._ProfileTechniquePage__isInHangarSelected
-            self.flashObject.as_responseDossierXvm(self._battlesType,
-                self._getTechniqueListVehicles(targetData, isHangar))
+            self.flashObject.as_responseDossierXvm(
+                self._battlesType,
+                self._getTechniqueListVehicles(targetData, isHangar),
+                '',
+                self.getEmptyScreenLabel())
     else:
         base(self, targetData, accountDossier)
 
