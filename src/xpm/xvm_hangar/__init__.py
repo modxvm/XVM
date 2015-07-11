@@ -27,7 +27,7 @@ from xvm_main.python.xvm import l10n
 # event handlers
 
 #barracks: add nation flag and skills for tanksman
-def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenInBarracks, tankmanArr):
+def BarracksMeta_as_setTankmenS(base, self, tankmenCount, tankmenInSlots, placesCount, tankmenInBarracks, tankmanArr):
     try:
         import nations
         from gui.shared import g_itemsCache
@@ -51,7 +51,7 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, placesCount, tankmenIn
     except Exception as ex:
         err(traceback.format_exc())
 
-    return base(self, tankmenCount, placesCount, tankmenInBarracks, tankmanArr)
+    return base(self, tankmenCount, tankmenInSlots, placesCount, tankmenInBarracks, tankmanArr)
 
 # low ammo => vehicle not ready
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
