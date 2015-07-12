@@ -396,7 +396,9 @@ package xvm.tcarousel_ui
             try
             {
                 rearrangeFilters();
-                if (Config.config.hangar.carousel.alwaysShowFilters == true)
+                if (!Config.config.hangar.carousel.alwaysShowFilters)
+                    super.showHideFilters();
+                if (vehicleFilters.visible)
                 {
                     leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
                     this.vehicleFilters.visible = true;
@@ -409,10 +411,6 @@ package xvm.tcarousel_ui
                         dragHitArea.x = renderersMask.x;
                     }
                     updateVisibleSlotsCount();
-                }
-                else
-                {
-                    super.showHideFilters();
                 }
             }
             catch (ex:Error)
