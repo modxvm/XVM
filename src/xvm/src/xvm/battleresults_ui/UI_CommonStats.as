@@ -105,6 +105,9 @@ package xvm.battleresults_ui
                     if (Config.config.battleResults.showTotals)
                         initTotals();
 
+                    if (Config.config.battleResults.showCrewExperience)
+                        detailsMc.xpTitleLbl.width += 50;
+
                     updateValues();
                 }
             }
