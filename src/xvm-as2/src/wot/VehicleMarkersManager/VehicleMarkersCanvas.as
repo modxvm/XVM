@@ -2,6 +2,8 @@
  * Proxy class for vehicle marker canvas
  * Used only for config preloading in the begin of the battle
  */
+import com.greensock.OverwriteManager;
+import com.greensock.plugins.*;
 import com.xvm.*;
 import flash.external.*;
 import wot.VehicleMarkersManager.*;
@@ -38,6 +40,14 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
         // ScaleForm optimization
         _global.gfxExtensions = true;
         _global.noInvisibleAdvance = true;
+
+        // initialize TweenLite
+        OverwriteManager.init(OverwriteManager.AUTO);
+        TweenPlugin.activate([AutoAlphaPlugin, BevelFilterPlugin, BezierPlugin, BezierThroughPlugin, BlurFilterPlugin,
+            CacheAsBitmapPlugin, ColorMatrixFilterPlugin, ColorTransformPlugin, DropShadowFilterPlugin, EndArrayPlugin,
+            FrameBackwardPlugin, FrameForwardPlugin, FrameLabelPlugin, FramePlugin, GlowFilterPlugin,
+            HexColorsPlugin, QuaternionsPlugin, RemoveTintPlugin, RoundPropsPlugin, ScalePlugin, ScrollRectPlugin,
+            SetSizePlugin, ShortRotationPlugin, TintPlugin, TransformMatrixPlugin, VisiblePlugin, VolumePlugin]);
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, onConfigLoaded);
