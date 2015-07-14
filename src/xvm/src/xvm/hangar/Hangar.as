@@ -7,8 +7,7 @@ package xvm.hangar
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.types.cfg.CHangarServerInfo;
-    import com.xvm.types.cfg.CMinimapCirclesInternal;
+    import com.xvm.types.cfg.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;

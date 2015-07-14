@@ -10,9 +10,17 @@
     "pingServers": {
       //"y": 70,
       "enabled": true,
+      "showTitle": false,
       "updateInterval": 5000
     },
-
+    "onlineServers": {
+      "enabled": true,
+      //"x": -3,
+      //"y": 51,
+      "hAlign": "center",
+      //"topmost": true,
+      "showTitle": false
+    },
     "__stub__": null
   },
   "hotkeys": {
