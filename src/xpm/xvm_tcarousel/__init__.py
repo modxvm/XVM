@@ -64,9 +64,11 @@ def TankCarousel_showVehicles(base, self):
                 filterCriteria |= REQ_CRITERIA.VEHICLE.CLASSES([self.vehiclesFilter['tankType']])
             if self.vehiclesFilter['ready']:
                 filterCriteria |= REQ_CRITERIA.VEHICLE.FAVORITE
+            if not self.vehiclesFilter['isFalloutVehicle']:
+                filterCriteria |= ~REQ_CRITERIA.VEHICLE.EVENT_BATTLE
             items = g_itemsCache.items
             filteredVehs = items.getVehicles(filterCriteria)
-    
+            
             def sorting(v1, v2):
                 if v1.isFavorite and not v2.isFavorite: return -1
                 if not v1.isFavorite and v2.isFavorite: return 1
