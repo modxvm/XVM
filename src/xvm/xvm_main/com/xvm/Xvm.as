@@ -1,4 +1,4 @@
-/**
+﻿/**
  * XVM Entry Point
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */

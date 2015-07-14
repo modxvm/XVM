@@ -17,6 +17,12 @@ package xvm.battleloading_ui
             worker = new BattleLoadingItemRenderer(this);
         }
 
+        override protected function configUI():void
+        {
+            super.configUI();
+            x = 5; // fix bad align in 0.9.9
+        }
+
         override public function setData(data:Object):void
         {
             super.setData(data);

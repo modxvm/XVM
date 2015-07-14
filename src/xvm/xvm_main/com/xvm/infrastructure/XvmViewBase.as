@@ -1,4 +1,4 @@
-/**
+﻿/**
  * XVM mod base class
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */

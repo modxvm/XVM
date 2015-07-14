@@ -1,4 +1,4 @@
-/**
+﻿/**
  * XVM DAAPI commands (public)
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */

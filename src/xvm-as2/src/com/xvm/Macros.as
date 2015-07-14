@@ -40,14 +40,14 @@ class com.xvm.Macros
         return _instance.m_globals[key];
     }
 
-    public static function RegisterPlayerData(pname:String, data:Object, team:Number)
-    {
-        _instance._RegisterPlayerData(pname, data, team);
-    }
-
     public static function RegisterGlobalMacrosData(battleTier:Number, battleType:Number)
     {
         _instance._RegisterGlobalMacrosData(battleTier, battleType);
+    }
+
+    public static function RegisterPlayerData(pname:String, data:Object, team:Number)
+    {
+        _instance._RegisterPlayerData(pname, data, team);
     }
 
     public static function RegisterStatMacros(pname:String, stat:StatData)
@@ -67,7 +67,7 @@ class com.xvm.Macros
 
     public static var s_my_frags:Number = 0;
 
-    public static function UpdateMyFrags(frags:Number)
+    public static function UpdateMyFrags(frags:Number):Boolean
     {
         if (Macros.s_my_frags == frags)
             return false;

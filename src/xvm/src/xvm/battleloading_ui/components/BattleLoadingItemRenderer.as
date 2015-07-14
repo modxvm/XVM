@@ -13,6 +13,7 @@ package xvm.battleloading_ui.components
     import flash.events.*;
     import flash.geom.*;
     import flash.text.*;
+    import flash.utils.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.battleloading.*;
     import net.wg.gui.lobby.battleloading.vo.*;
@@ -28,11 +29,25 @@ package xvm.battleloading_ui.components
 
         private var _vehicleIconLoaded:Boolean = false;
 
+        // for debug
+        public function _debug():void
+        {
+            /*setInterval(function():void {
+                proxy.data.vehicleStatus = 3;
+                proxy.setData(proxy.data);
+            }, 1000);*/
+
+            //proxy.vehicleField.border = true;
+            //proxy.vehicleField.borderColor = 0xFFFF00;
+            //proxy.textField.border = true;
+            //proxy.textField.borderColor = 0x00FF00;
+        }
+
         public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer)
         {
             this.proxy = proxy;
 
-            //setInterval(function():void { proxy.setData(proxy.data) }, 1000); // DEBUG
+            _debug();
 
             proxy.iconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
 
@@ -56,7 +71,7 @@ package xvm.battleloading_ui.components
 
         public function setData(data:VehicleInfoVO):void
         {
-            //Logger.add("setData: " + (data == null ? "(null)" : data.playerName));
+            //Logger.add("setData: " + (data == null ? "(null)" : data.playerName) + " status=" + data.vehicleStatus);
             //Logger.addObject(data);
             try
             {
@@ -100,7 +115,6 @@ package xvm.battleloading_ui.components
             }
         }
 
-        private var _savedTextFieldColor:String = null;
         public function draw():void
         {
             try
@@ -126,16 +140,16 @@ package xvm.battleloading_ui.components
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
 
                 // Set Text Fields
-                if (_savedTextFieldColor == null)
-                    _savedTextFieldColor = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
+                var textFieldColorString:String = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
 
                 var nickFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == XfwConst.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftNick : Config.config.battleLoading.formatRightNick, formatOptions);
-                proxy.textField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + nickFieldText + "</font>";
+                Logger.add(nickFieldText);
+                proxy.textField.htmlText = "<font color='" + textFieldColorString + "'>" + nickFieldText + "</font>";
 
                 var vehicleFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == XfwConst.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftVehicle : Config.config.battleLoading.formatRightVehicle, formatOptions);
-                proxy.vehicleField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + vehicleFieldText + "</font>";
+                proxy.vehicleField.htmlText = "<font color='" + textFieldColorString + "'>" + vehicleFieldText + "</font>";
 
                 //Logger.add(vehicleFieldText);
                 //Logger.add(proxy.vehicleField.htmlText);

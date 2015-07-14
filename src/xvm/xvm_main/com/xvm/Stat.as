@@ -1,4 +1,4 @@
-/**
+﻿/**
  * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * XVM mod interface
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */

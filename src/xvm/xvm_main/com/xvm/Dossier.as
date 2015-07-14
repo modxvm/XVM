@@ -1,5 +1,5 @@
-/**
- * XFW
+﻿/**
+ * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm

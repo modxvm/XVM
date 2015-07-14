@@ -70,6 +70,16 @@ package com.xvm
             _instance._RegisterClockMacros();
         }
 
+        public static var s_my_frags:Number = 0;
+
+        public static function UpdateMyFrags(frags:Number):Boolean
+        {
+            if (Macros.s_my_frags == frags)
+                return false;
+            Macros.s_my_frags = frags;
+            return true;
+        }
+
         // PRIVATE
 
         private static const PART_NAME:int = 0;
@@ -266,8 +276,42 @@ package com.xvm
                 var type:String = typeof value;
                 if (type == "function" && (macroName != "alive" || options == null))
                     isStaticMacro = false;
+                /*
+                else if (vehId == 0 || Config.eventType != "normal")
+                {
+                    switch (macroName)
+                    {
+                        case "maxhp":
+                        case "veh-id":
+                        case "vehicle":
+                        case "vehiclename":
+                        case "vehicle-short":
+                        case "vtype":
+                        case "vtype-l":
+                        case "c:vtype":
+                        case "battletier-min":
+                        case "battletier-max":
+                        case "nation":
+                        case "level":
+                        case "rlevel":
+                            isStaticMacro = false;
+                            break;
+                    }
+                }
+                */
 
                 res += FormatMacro(macro, parts, value, vehId, options);
+            }
+
+            if (isStaticMacro)
+            {
+                switch (macroName)
+                {
+                    case "squad":
+                    case "squad-num":
+                        isStaticMacro = false;
+                        break;
+                }
             }
 
             return res;

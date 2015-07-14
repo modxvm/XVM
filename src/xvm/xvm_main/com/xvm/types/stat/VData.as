@@ -1,3 +1,7 @@
+﻿/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 package com.xvm.types.stat
 {
     import com.xvm.types.veh.VehicleData;
