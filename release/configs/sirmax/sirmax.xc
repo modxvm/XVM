@@ -9,6 +9,7 @@
 
     "pingServers": {
       //"y": 70,
+      "maxRows": 4,
       "enabled": true,
       "showTitle": false,
       "updateInterval": 5000

@@ -62,7 +62,6 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
 # Register events
 
 def _RegisterEvents():
-    log('_RegisterEvents')
     from account_helpers import BattleResultsCache
     OverrideMethod(BattleResultsCache.BattleResultsCache, 'get', BattleResultsCache_get)
 BigWorld.callback(0, _RegisterEvents)
