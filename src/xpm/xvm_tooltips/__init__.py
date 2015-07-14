@@ -339,7 +339,9 @@ def gold_pad(text):
     return "<font color='#FFC363'>%s</font>" % text
 
 def smart_round(value):
-    if value >= 10:
+    if value == 0:
+        return '?'
+    elif value >= 10:
         return '%g' % round(value)
     elif value >= 1:
         return '%g' % round(value, 1)
