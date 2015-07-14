@@ -14,6 +14,14 @@ def getVehicleInfoDataStr():
         _init()
     return _vehicleInfoDataStr
 
+def updateReserve(vehId, isReserved):
+    global _vehicleInfoData, _vehicleInfoDataStr
+    if _vehicleInfoDataStr is None:
+        _init()
+    else:
+        _vehicleInfoData[vehId]['isReserved'] = isReserved
+        _vehicleInfoDataStr = simplejson.dumps(_vehicleInfoData.values())
+
 # PRIVATE
 
 from pprint import pprint
@@ -61,11 +69,13 @@ _UNKNOWN_VEHICLE_DATA = {
     'tierLo': 0,
     'tierHi': 0,
     'shortName': 'unknown',
+    'isReserved': False,
 }
 
 def _init():
     res = [_UNKNOWN_VEHICLE_DATA]
     try:
+        import xvm_tcarousel.python.reserve as reserve
         for nation in nations.NAMES:
             nationID = nations.INDICES[nation]
             for (id, descr) in vehicles.g_list.getList(nationID).iteritems():
@@ -111,6 +121,8 @@ def _init():
                     data['wn8expDef'] = float(wn8data['expDef'])
                     data['wn8expFrag'] = float(wn8data['expFrag'])
 
+                # is reserved?
+                data['isReserved'] = reserve.is_reserved(data['vid'])
                 #log(data)
 
                 res.append(data)

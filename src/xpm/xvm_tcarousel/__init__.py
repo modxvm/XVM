@@ -19,10 +19,27 @@ import BigWorld
 
 from xfw import *
 from xvm_main.python.logger import *
+from xvm_main.python.constants import XVM_COMMAND
 import xvm_main.python.config as config
 from operator import attrgetter
 from debug_utils import LOG_DEBUG
 from xvm_main.python.vehinfo_tiers import getTiers
+import xvm_main.python.vehinfo as vehinfo
+from xvm_main.python.xvm import l10n
+import reserve
+from functools import partial
+import xvm_main.python.xvm as xvm
+
+#####################################################################
+# constants
+
+class VEHICLE(object):
+    CHECKRESERVE = 'confirmReserveVehicle'
+    UNCHECKRESERVE = 'uncheckReserveVehicle'
+
+#####################################################################
+# globals
+carousel_handle = None
 
 #####################################################################
 # event handlers
@@ -31,6 +48,8 @@ from xvm_main.python.vehinfo_tiers import getTiers
 def TankCarousel_showVehicles(base, self):
     if config.get('hangar/carousel/enabled'):
         try:
+            global carousel_handle
+            carousel_handle = self
             from gui.shared import g_itemsCache, REQ_CRITERIA
             from gui import GUI_NATIONS_ORDER_INDEX
             from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
@@ -97,11 +116,68 @@ def TankCarousel_showVehicles(base, self):
             err(traceback.format_exc())
     base(self)
 
+def VehicleContextMenuHandler__init__(base, self, cmProxy, ctx=None):
+    if config.get('hangar/carousel/enabled'):
+        try:
+            import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as vehicle
+            super(vehicle.VehicleContextMenuHandler, self).__init__(cmProxy, ctx, {
+                vehicle.VEHICLE.INFO: 'showVehicleInfo',
+                vehicle.VEHICLE.SELL: 'sellVehicle',
+                vehicle.VEHICLE.RESEARCH: 'toResearch',
+                vehicle.VEHICLE.CHECK: 'checkFavoriteVehicle',
+                vehicle.VEHICLE.UNCHECK: 'uncheckFavoriteVehicle',
+                vehicle.VEHICLE.STATS: 'showVehicleStats',
+                vehicle.VEHICLE.BUY: 'buyVehicle',
+                vehicle.VEHICLE.REMOVE: 'sellVehicle',
+                VEHICLE.CHECKRESERVE: VEHICLE.CHECKRESERVE,
+                VEHICLE.UNCHECKRESERVE: VEHICLE.UNCHECKRESERVE,
+            })
+        except Exception as ex:
+            err(traceback.format_exc())
+    else:
+        base(self, cmProxy, ctx=ctx)
+
+def VehicleContextMenuHandler_generateOptions(base, self):
+    result = base(self)
+    if config.get('hangar/carousel/enabled'):
+        try:
+            import xvm_tcarousel.python.reserve as reserve
+            if reserve.is_reserved(self.vehCD):
+                result.insert(-1, self._makeItem(VEHICLE.UNCHECKRESERVE, l10n('uncheck_reserve_menu')))
+            else:
+                result.insert(-1, self._makeItem(VEHICLE.CHECKRESERVE, l10n('check_reserve_menu')))
+        except Exception as ex:
+            err(traceback.format_exc())
+    return result
+
+def confirmReserveVehicle(self):
+    from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
+    from gui.DialogsInterface import showDialog
+    showDialog(SimpleDialogMeta(l10n('reserve_confirm_title'), l10n('reserve_confirm_message'), I18nConfirmDialogButtons()), partial(checkReserveVehicle, self.vehCD))
+
+def checkReserveVehicle(vehCD, result):
+    if result:
+        updateReserve(vehCD, True)
+
+def uncheckReserveVehicle(self):
+    updateReserve(self.vehCD, False)
+
+def updateReserve(vehCD, isReserved):
+    reserve.set_reserved(vehCD, isReserved)
+    vehinfo.updateReserve(vehCD, isReserved)
+    as_xfw_cmd(XVM_COMMAND.AS_UPDATE_RESERVE, vehinfo.getVehicleInfoDataStr())
+    carousel_handle.showVehicles()
+
 #####################################################################
 # Register events
 
 def _RegisterEvents():
     from gui.Scaleform.daapi.view.lobby.hangar.TankCarousel import TankCarousel
     OverrideMethod(TankCarousel, 'showVehicles', TankCarousel_showVehicles)
+    from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import VehicleContextMenuHandler
+    OverrideMethod(VehicleContextMenuHandler, '__init__', VehicleContextMenuHandler__init__)
+    OverrideMethod(VehicleContextMenuHandler, '_generateOptions', VehicleContextMenuHandler_generateOptions)
+    VehicleContextMenuHandler.confirmReserveVehicle = confirmReserveVehicle
+    VehicleContextMenuHandler.uncheckReserveVehicle = uncheckReserveVehicle
 
 BigWorld.callback(0, _RegisterEvents)

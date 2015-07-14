@@ -190,6 +190,11 @@
     "NoMaster": "Нет мастера",
     "CompleteCrew": "Полный экипаж",
     "NonDomination": "Убрать \"Превосходство\"",
+    "ReserveFilter": "Резерв",
+    "check_reserve_menu": "Отметить как «резерв»",
+    "uncheck_reserve_menu": "Снять отметку «резерв»",
+    "reserve_confirm_title": "Спрятать танк",
+    "reserve_confirm_message": "Вы уверены что хотите пометить танк как реверв? Он будет доступен через фильтры карусели.",
 
     // Profile
     "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nЭффективность по танку\nПодробная информация на <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",

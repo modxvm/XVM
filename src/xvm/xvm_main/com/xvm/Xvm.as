@@ -38,6 +38,7 @@ package com.xvm
             _instance = this;
             Xfw.addCommandListener(XvmCommandsInternal.AS_L10N, onL10n);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
+            Xfw.addCommandListener(XvmCommandsInternal.AS_UPDATE_RESERVE, onUpdateReserve);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_SVC_SETTINGS, onSetSvcSettings);
             Xfw.cmd(XvmCommandsInternal.REQUEST_CONFIG);
         }
@@ -56,6 +57,13 @@ package com.xvm
             Locale.setupLanguage(lang_str);
             VehicleInfo.setVehicleInfoData(vehInfo_str);
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
+            return null;
+        }
+
+        private function onUpdateReserve(vehInfo_str:String):Object
+        {
+            Logger.add("onUpdateReserve");
+            VehicleInfo.setVehicleInfoData(vehInfo_str);
             return null;
         }
 

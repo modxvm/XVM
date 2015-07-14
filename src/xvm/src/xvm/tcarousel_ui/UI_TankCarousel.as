@@ -699,6 +699,7 @@ package xvm.tcarousel_ui
                     var dossier:AccountDossier = Dossier.getAccountDossier();
                     if (dossier == null)
                         continue;
+
                     var vdossier:VehicleDossierCut = dossier.getVehicleDossierCut(vehId);
                     if (vdossier == null)
                         continue;
@@ -724,6 +725,9 @@ package xvm.tcarousel_ui
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && dataVO.doubleXPReceived < 0);
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_FULLCREW) >= 0 && dataVO.stat == VehicleState.CREW_NOT_FULL);
+                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) < 0 && vdata.isReserved == true);
+                    // next line will make xor filter: non_reserve <--> reserve, instead of non_reserve <--> non_reserve + reserve
+                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) >= 0 && vdata.isReserved == false);
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_DOMINATION) >= 0 && dataVO.groupIndicatorVisible);
 
                     var removePrem:Boolean = prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0;

@@ -17,6 +17,7 @@ package com.xvm.types.veh
         public var vclass:String = Values.EMPTY_STR;
         public var nation:String = Values.EMPTY_STR;
         public var premium:Boolean;
+        public var isReserved:Boolean;
 
         public var hpStock:int;
         public var hpTop:int;

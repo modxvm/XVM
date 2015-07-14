@@ -46,6 +46,7 @@ class XVM_COMMAND(object):
     AS_L10N = "xvm.as.l10n"
     AS_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"
     AS_SET_CONFIG = "xvm.as.set_config"
+    AS_UPDATE_RESERVE = "xvm.as.update_reserve"
     AS_STAT_BATTLE_DATA = "xvm.as.stat_battle_data"
     AS_STAT_BATTLE_RESULTS_DATA = "xvm.as.stat_battle_results_data"
     AS_STAT_USER_DATA = "xvm.as.stat_user_data"
