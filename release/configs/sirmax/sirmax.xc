@@ -8,9 +8,8 @@
     //"formatVehicle": "{{vehicle}}",
 
     "pingServers": {
-      //"y": 70,
-      "maxRows": 4,
       "enabled": true,
+      //"y": 70,
       "showTitle": false,
       "updateInterval": 5000
     },
@@ -18,7 +17,7 @@
       "enabled": true,
       //"x": -3,
       //"y": 51,
-      "hAlign": "center",
+      //"hAlign": "center",
       //"topmost": true,
       "showTitle": false
     },

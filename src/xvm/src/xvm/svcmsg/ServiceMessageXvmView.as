@@ -81,7 +81,20 @@ package xvm.svcmsg
 
         private function initLobby(v:LobbyPage):void
         {
-            v.notificationPopupViewer.xfw_popupClass =  getDefinitionByName("xvm.svcmsg_ui::UI_ServiceMessagePopUp") as Class;
+            SysUtils.waitFor("xvm_svcmsg_ui.swf loading", this,
+                // condition
+                function(waitForKey:String):Boolean
+                {
+                    //Logger.add("status=" + Xfw.get_ui_swf_status("xvm_svcmsg_ui.swf"))
+                    return Xfw.get_ui_swf_status("xvm_svcmsg_ui.swf") == XfwConst.SWF_ALREADY_LOADED;
+                },
+                // callback
+                function(waitForKey:String):void
+                {
+                    v.notificationPopupViewer.xfw_popupClass =  getDefinitionByName("xvm.svcmsg_ui::UI_ServiceMessagePopUp") as Class;
+                },
+                // onError, maxDepth, timeout
+                null, 10);
         }
 
         private function initNotificationList(v:NotificationListView):void
