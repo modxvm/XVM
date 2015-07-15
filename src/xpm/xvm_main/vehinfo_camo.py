@@ -12,7 +12,7 @@ def getCamoValues(veh_name, turret_is_top = True, gun = None):
 # PRIVATE
 
 # Data from: http://forum.worldoftanks.ru/index.php?/topic/1047590-
-# Updated 26.05.2015
+# Updated 15.07.2015
 # Big thanks to authors of data!
 
 # percentage of lowering vision: [ standing, moving, shooting, top turret modifier ]
@@ -72,6 +72,7 @@ _tanks_camo = {
     'ussr:IS':                                [  7.92 ,  3.99 , 1.51 , 1     ],
     'ussr:KV-5':                              [  3.08 ,  1.54 , 0.68 , 1     ],
     'ussr:Object252':                         [  6.96 ,  3.48 , 1.32 , 1     ],
+    'ussr:R113_Object_730':                   [  6.96 ,  3.48 , 1.32 , 1     ],
     'ussr:KV4':                               [  1.78 ,  0.89 , 0.37 , 0.433 ],
     'ussr:R19_IS-3':                          [  6.75 ,  3.37 , 1.21 , 0.97  ],
     'ussr:IS8':                               [  6.07 ,  3.04 , 1.09 , 0.951 ],
@@ -129,6 +130,7 @@ _tanks_camo = {
     'germany:VK1602':                         [ 16.59 , 16.59 , 3.48 , 1     ],
     'germany:VK2801':                         [ 14.25 , 14.25 , 2.98 , 1     ],
     'germany:Auf_Panther':                    [ 10.43 , 10.43 , 2.71 , 0.893 ],
+    'germany:G113_SP_I_C':                    [ 16.21 , 16.21 , 3.86 , 0.923 ],
     'germany:G103_RU_251':                    [ 17.39 , 17.39 , 4.14 , 1     ],
     # Medium
     'germany:S35_captured':                   [ 14.25 , 10.72 , 4.13 , 1     ],
@@ -162,7 +164,7 @@ _tanks_camo = {
     'germany:DW_II':                          [  7.52 ,  3.73 , 1.96 , 1.107 ],
     'germany:VK3001H':                        [  7.33 ,  3.67 , 1.91 , 0.932 ],
     'germany:G15_VK3601H':                    [  6.47 ,  3.21 , 1.54 , 0.866 ],
-    'germany:PzVI':                           [  6.55 ,  3.34 , 1.47 , 1.064 ],
+    'germany:PzVI':                           [  6.61 ,  3.34 , 1.49 , 1.064 ],
     'germany:PzVI_Tiger_P':                   [  6.67 ,  3.36 , 1.50 , 1     ],
     'germany:Lowe':                           [  3.82 ,  1.94 , 0.76 , 1     ],
     'germany:VK4502A':                        [  4.12 ,  2.06 , 0.86 , 0.904 ],
@@ -241,7 +243,7 @@ _tanks_camo = {
     'usa:T95_E2':                             [  9.52 ,  7.13 , 2.27 , 1     ],
     'usa:T69':                                [ 12.65 ,  9.52 , 3.01 , 1     ],
     'usa:A35_Pershing':                       [ 12.99 ,  9.71 , 2.92 , 1.008 ],
-    'usa:A63_M46_Patton':                     [ 13.34 , 10.03 , 2.64 , 1     ],
+    'usa:A63_M46_Patton':                     [ 10.46 ,  7.82 , 2.07 , 1     ],
     'usa:T54E1':                              [  9.86 ,  7.35 , 1.95 , 1     ],
     'usa:M60':                                [  6.95 ,  5.19 , 1.45 , 1     ],
     'usa:A84_M48A1':                          [  8.27 ,  6.21 , 1.73 , 1     ],
@@ -371,6 +373,7 @@ _tanks_camo = {
     'uk:GB08_Churchill_I':                    [  8.09 ,  4.05 , 2.00 , 1     ],
     'uk:GB63_TOG_II':                         [  5.13 ,  2.57 , 1.20 , 1     ],
     'uk:GB09_Churchill_VII':                  [  7.47 ,  3.71 , 1.84 , 1     ],
+    'uk:GB52_A45':                            [  6.41 ,  3.19 , 1.5  , 1     ],
     'uk:GB10_Black_Prince':                   [  7.07 ,  3.53 , 1.65 , 1     ],
     'uk:GB11_Caernarvon':                     [  5.02 ,  2.48 , 1.19 , 0.907 ],
     'uk:GB12_Conqueror':                      [  4.81 ,  2.41 , 0.91 , 0.981 ],
@@ -450,7 +453,9 @@ _tanks_camo = {
     'japan:J18_STA_2_3':                      [ 13.68 , 10.26 , 3.26 , 1     ],
     'japan:STA_1':                            [ 15.47 , 11.63 , 3.68 , 0.976 ],
     'japan:Type_61':                          [  9.21 ,  6.91 , 1.93 , 1.188 ],
-    'japan:ST_B1':                            [ 13.68 , 10.26 , 2.86 , 1     ]
+    'japan:ST_B1':                            [ 13.68 , 10.26 , 2.86 , 1     ],
+    # Heavy
+    'japan:J19_Tiger_I_Jpn':                  [  6.5  ,  3.25 , 1.55 , 1     ],
     }
 
 #  Coefficient of lowering camo at shot
@@ -1204,7 +1209,7 @@ _gun_camo_modifier = {
         ],
     '_90mm_Gun_T15E2M2':
         [
-            [ ['usa:A63_M46_Patton', 'usa:A35_Pershing'], 0.225 ]
+            [ ['usa:A63_M46_Patton', 'usa:A35_Pershing'], 0.238 ]
         ],
     '_90mm_Gun_T15E2':
         [
