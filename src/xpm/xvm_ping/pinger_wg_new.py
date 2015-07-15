@@ -11,6 +11,7 @@ def ping():
 
 import traceback
 import BigWorld
+import Settings
 from xfw import *
 from xvm_main.python.logger import *
 from . import XVM_PING_COMMAND
@@ -19,6 +20,7 @@ import xvm_main.python.config as config
 #############################
 # consts
 SMOOTHNESS = 4 # we will take minimal of results (WGPinger might return higher than actual results, but not less than actual)
+DUMMY_ADDRESS = 'localhost' # for distinguishing our requests
 
 #############################
 
@@ -34,26 +36,30 @@ class _Ping(object):
         try:
             from predefined_hosts import g_preDefinedHosts
             if not self.hooks_set:
-                RegisterEvent(g_preDefinedHosts, 'autoLoginQuery', self.autoLoginQuery_event, True)
                 BigWorld.WGPinger.setOnPingCallback(self.results_arrived)
                 self.hooks_set = True
             if not self.url_to_serverName:
+                g_preDefinedHosts.readScriptConfig(Settings.g_instance.scriptConfig)
                 self.url_to_serverName = {host.url:host.name if len(host.name) < 13 else host.shortName for host in g_preDefinedHosts.hosts()}
+                if self.url_to_serverName: # if url_to_serverName is empty, leave it empty
+                    self.url_to_serverName[DUMMY_ADDRESS] = DUMMY_ADDRESS
             BigWorld.WGPinger.ping(self.url_to_serverName.keys())
         except Exception as ex:
             err('ping_request() exception: ' + traceback.format_exc())
 
     def results_arrived(self, results):
         try:
-            if self.autoLoginQuery_performed:
+            results = dict(results)
+            if DUMMY_ADDRESS not in results: # not our callback
                 from predefined_hosts import g_preDefinedHosts
                 g_preDefinedHosts._PreDefinedHostList__onPingPerformed(results)
-                self.autoLoginQuery_performed = False
+            else:
+                del results[DUMMY_ADDRESS]
             if not len(results) or not len(self.url_to_serverName):
                 return
             ping_results = {}
             best_ping = 999
-            for url, ping in results:
+            for url, ping in results.iteritems():
                 server_name = self.url_to_serverName[url]
                 smoothed_ping = self.smooth_ping(server_name, ping)
                 if smoothed_ping <= 0:
@@ -68,9 +74,6 @@ class _Ping(object):
         except Exception as ex:
             err('results_arrived() exception: ' + traceback.format_exc())
             as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, {'Error': ex})
-
-    def autoLoginQuery_event(*args, **kwargs):
-        _ping.autoLoginQuery_performed = True
 
     def smooth_ping(self, server_name, new_value = 0):
         try:
