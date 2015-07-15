@@ -45,7 +45,7 @@ carousel_handle = None
 # event handlers
 
 # added sorting orders for tanks in carousel
-def TankCarousel_showVehicles(base, self):
+def TankCarouselMeta_as_showVehiclesS(base, self, compactDescrList):
     if config.get('hangar/carousel/enabled'):
         try:
             global carousel_handle
@@ -54,22 +54,11 @@ def TankCarousel_showVehicles(base, self):
             from gui import GUI_NATIONS_ORDER_INDEX
             from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
             myconfig = config.get('hangar/carousel')
-            filterCriteria = REQ_CRITERIA.INVENTORY
-            if self.vehiclesFilter['nation'] != -1:
-                if self.vehiclesFilter['nation'] == 100:
-                    filterCriteria |= REQ_CRITERIA.VEHICLE.IN_PREMIUM_IGR
-                else:
-                    filterCriteria |= REQ_CRITERIA.NATIONS([self.vehiclesFilter['nation']])
-            if self.vehiclesFilter['tankType'] != 'none':
-                filterCriteria |= REQ_CRITERIA.VEHICLE.CLASSES([self.vehiclesFilter['tankType']])
-            if self.vehiclesFilter['ready']:
-                filterCriteria |= REQ_CRITERIA.VEHICLE.FAVORITE
-            if not self.vehiclesFilter['isFalloutVehicle']:
-                filterCriteria |= ~REQ_CRITERIA.VEHICLE.EVENT_BATTLE
-            items = g_itemsCache.items
-            filteredVehs = items.getVehicles(filterCriteria)
+            filteredVehs = g_itemsCache.items.getVehicles(REQ_CRITERIA.IN_CD_LIST(compactDescrList))
             
             def sorting(v1, v2):
+                if v1.isEvent and not v2.isEvent: return -1
+                if not v1.isEvent and v2.isEvent: return 1
                 if v1.isFavorite and not v2.isFavorite: return -1
                 if not v1.isFavorite and v2.isFavorite: return 1
                 if 'sorting_criteria' in myconfig:
@@ -110,13 +99,11 @@ def TankCarousel_showVehicles(base, self):
                             if VEHICLE_TYPES_ORDER_INDICES[v1.type] < VEHICLE_TYPES_ORDER_INDICES[v2.type]: return -1
                 return v1.__cmp__(v2)
     
-            vehsCDs = map(attrgetter('intCD'), sorted(filteredVehs.itervalues(), sorting))
-            LOG_DEBUG('Showing carousel vehicles: ', vehsCDs)
-            self.as_showVehiclesS(vehsCDs)
-            return
+            compactDescrList = map(attrgetter('intCD'), sorted(filteredVehs.itervalues(), sorting))
+
         except Exception as ex:
             err(traceback.format_exc())
-    base(self)
+    base(self, compactDescrList)
 
 def VehicleContextMenuHandler__init__(base, self, cmProxy, ctx=None):
     if config.get('hangar/carousel/enabled'):
@@ -174,8 +161,8 @@ def updateReserve(vehCD, isReserved):
 # Register events
 
 def _RegisterEvents():
-    from gui.Scaleform.daapi.view.lobby.hangar.TankCarousel import TankCarousel
-    OverrideMethod(TankCarousel, 'showVehicles', TankCarousel_showVehicles)
+    from gui.Scaleform.daapi.view.meta.TankCarouselMeta import TankCarouselMeta
+    OverrideMethod(TankCarouselMeta, 'as_showVehiclesS', TankCarouselMeta_as_showVehiclesS)
     from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import VehicleContextMenuHandler
     OverrideMethod(VehicleContextMenuHandler, '__init__', VehicleContextMenuHandler__init__)
     OverrideMethod(VehicleContextMenuHandler, '_generateOptions', VehicleContextMenuHandler_generateOptions)
