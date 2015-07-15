@@ -144,7 +144,6 @@ package xvm.battleloading_ui.components
 
                 var nickFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == XfwConst.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftNick : Config.config.battleLoading.formatRightNick, formatOptions);
-                Logger.add(nickFieldText);
                 proxy.textField.htmlText = "<font color='" + textFieldColorString + "'>" + nickFieldText + "</font>";
 
                 var vehicleFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == XfwConst.TEAM_ALLY
