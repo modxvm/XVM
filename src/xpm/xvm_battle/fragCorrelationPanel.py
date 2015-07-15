@@ -12,13 +12,22 @@ import xvm_main.python.config as config
 def FragCorrelationPanel_updateScore(base, self):
     try:
         if config.get('fragCorrelation/showAliveNotFrags'):
-            from gui.battle_control import g_sessionProvider
-            playerTeam = g_sessionProvider.getArenaDP().getNumberOfTeam()
-            teamIndex = playerTeam - 1
-            enemyIndex = 1 - teamIndex
-            enemyTeam = enemyIndex + 1
-            team_left = len(self._FragCorrelationPanel__teamsShortLists[playerTeam]) - self._FragCorrelationPanel__teamsFrags[enemyIndex]
-            enemy_left = len(self._FragCorrelationPanel__teamsShortLists[enemyTeam]) - self._FragCorrelationPanel__teamsFrags[teamIndex]
+            if len(self._FragCorrelationPanel__teamsDeaths) and len(self._FragCorrelationPanel__teamsShortLists):
+                from gui.battle_control import g_sessionProvider
+                isTeamEnemy = g_sessionProvider.getArenaDP().isEnemyTeam
+                ally_frags, enemy_frags, ally_vehicles, enemy_vehicles  = (0, 0, 0, 0)
+                for teamIdx, vehs in self._FragCorrelationPanel__teamsShortLists.iteritems():
+                    if isTeamEnemy(teamIdx):
+                        enemy_vehicles += len(vehs)
+                    else:
+                        ally_vehicles += len(vehs)
+                for teamIdx, score in self._FragCorrelationPanel__teamsDeaths.iteritems():
+                    if isTeamEnemy(teamIdx):
+                        ally_frags += score
+                    else:
+                        enemy_frags += score
+            team_left = ally_vehicles - enemy_frags
+            enemy_left = enemy_vehicles - ally_frags
             self._FragCorrelationPanel__callFlash('updateFrags', [team_left, enemy_left])
             return
     except Exception, ex:
