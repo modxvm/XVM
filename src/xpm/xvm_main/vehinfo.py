@@ -37,6 +37,7 @@ from items import vehicles
 from logger import *
 import vehinfo_short
 from vehinfo_tiers import getTiers
+from gun_rotation_shared import calcPitchLimitsFromDesc
 import vehinfo_wn8
 
 _vehicleInfoData = None
@@ -158,7 +159,7 @@ def _getRanges(turret, gun, nation, vclass):
 
         if vclass == 'SPG' and shot['shell']['kind'] == 'HIGH_EXPLOSIVE':
             try:    # faster way
-                pitchLimit_rad = min(CONST_45_IN_RADIANS, -gun['pitchLimits']['basic'][0])
+                pitchLimit_rad = min(CONST_45_IN_RADIANS, -calcPitchLimitsFromDesc(0, gun['pitchLimits']))
             except Exception: # old way
                 gunsInfoPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml/shared/'
                 pitchLimit = ResMgr.openSection(gunsInfoPath + gun['name']).readInt('pitchLimits')
