@@ -7,5 +7,6 @@ package com.xvm.types.cfg
     public dynamic class CFragCorrelation extends Object
     {
         public var showAliveNotFrags:Boolean;
+        public var sortByType:Boolean;
     }
 }

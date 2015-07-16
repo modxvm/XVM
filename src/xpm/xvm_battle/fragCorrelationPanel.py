@@ -5,7 +5,7 @@ import BigWorld
 from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-
+from gui.shared.gui_items.Vehicle import VEHICLE_BATTLE_TYPES_ORDER_INDICES
 
 # show quantity of alive instead of dead in frags panel
 # original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
@@ -33,3 +33,21 @@ def FragCorrelationPanel_updateScore(base, self):
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
+
+def _markerComparator(base, x1, x2):
+    try:
+        if config.get('fragCorrelation/sortByType'):
+            INDEX_IS_ALIVE = 2
+            INDEX_VEHICLE_CLASS = 1
+            res = x2[INDEX_IS_ALIVE] - x1[INDEX_IS_ALIVE]
+            if res:
+                return res
+            x1Index = VEHICLE_BATTLE_TYPES_ORDER_INDICES.get(x1[INDEX_VEHICLE_CLASS], 100)
+            x2Index = VEHICLE_BATTLE_TYPES_ORDER_INDICES.get(x2[INDEX_VEHICLE_CLASS], 100)
+            res = x1Index - x2Index
+            if res:
+                return res
+            return 0
+    except Exception, ex:
+        err(traceback.format_exc())
+    return base(x1, x2)

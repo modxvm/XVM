@@ -9,6 +9,7 @@
       в hangar и login, для pingServers и onlineServers добавлены:
           "showTitle" - показывать заголовок к списку
           "markCurrentServer" - выделять текущий сервер в списке (недоступно на странице логина)
+      "battle"/"fragCorrelation"/"sortByType" - сортировать маркеры в панели фрагов по типу техники
 
 XVM-6.1.2.3:
   * обновление для WoT 0.9.8.1 #62

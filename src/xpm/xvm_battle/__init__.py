@@ -25,8 +25,9 @@ import xvm_main.python.config as config
 
 def _RegisterEvents():
     import fragCorrelationPanel
-    from gui.Scaleform.daapi.view.battle.score_panel import _FragCorrelationPanel
-    OverrideMethod(_FragCorrelationPanel, 'updateScore', fragCorrelationPanel.FragCorrelationPanel_updateScore)
+    import gui.Scaleform.daapi.view.battle.score_panel as score_panel
+    OverrideMethod(score_panel._FragCorrelationPanel, 'updateScore', fragCorrelationPanel.FragCorrelationPanel_updateScore)
+    OverrideMethod(score_panel, '_markerComparator', fragCorrelationPanel._markerComparator)
 
     import minimap
     from gui.Scaleform.Minimap import Minimap
