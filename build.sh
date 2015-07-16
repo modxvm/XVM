@@ -106,6 +106,7 @@ load_wotversion(){
 patch_as2(){
     pushd "$XVMBUILD_REPOSITORY_PATH"/src/xvm-as2/swf/ > /dev/null
     ./make-patched-swfs.sh    
+    ./make-patched-swfs-ffdec.sh    
     popd > /dev/null
 }
 
