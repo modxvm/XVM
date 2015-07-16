@@ -42,7 +42,11 @@ clean_repodir(){
     rm -rf src/xfw/src/actionscript/obj/*
     rm -rf src/xfw/src/actionscript/output/*
     rm -rf src/xvm-as2/include/
-    rm -rf src/xvm-as2/swf/*.swf
+    rm -rf src/xvm-as2/swf/battle.swf
+    rm -rf src/xvm-as2/swf/PlayersPanel.swf
+    rm -rf src/xvm-as2/swf/StatisticForm.swf
+    rm -rf src/xvm-as2/swf/TeamBasesPanel.swf
+    rm -rf src/xvm-as2/swf/VehicleMarkersManager.swf
     rm -rf src/xvm-as2/swf/temp/
     rm -rf ~output/
     rm -rf src/xfw/~output/
