@@ -83,7 +83,7 @@ detect_coreutils(){
 }
 
 detect_ffdec(){
-	# export XVMBUILD_FFDEC_FILEPATH to set your own ffec.jar location
+    # export XVMBUILD_FFDEC_FILEPATH to set your own ffec.jar location
     if [ "$XVMBUILD_FFDEC_FILEPATH" == "" ]; then
         declare -a arr
         arr=$(echo $PATH | tr -s ':' '\n')
