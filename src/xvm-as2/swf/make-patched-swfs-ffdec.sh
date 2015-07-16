@@ -4,8 +4,8 @@
 # XVM nightly build system
 
 PATCHES="
-Minimap
 "
+#Minimap
 
 currentdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$currentdir"
