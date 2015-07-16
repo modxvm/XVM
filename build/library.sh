@@ -89,7 +89,7 @@ detect_ffdec(){
         arr=$(echo $PATH | tr -s ':' '\n')
         for i in $arr; do
             if [ -f "$i/ffdec.jar" ]; then
-                export XVMBUILD_FDBUILD_FILEPATH="$i/ffdec.jar"
+                export XVMBUILD_FFDEC_FILEPATH="$i/ffdec.jar"
                 return 0
             fi
         done
