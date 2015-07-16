@@ -5,6 +5,7 @@
  * @author ilitvinov87
  */
 import com.xvm.*;
+import com.xvm.DataTypes.BattleStateData;
 import com.xvm.events.*;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
@@ -357,7 +358,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private function fixBattleState(data)
     {
         // fix battlestate
-        var obj = BattleState.getUserData(data.userName);
+        var obj:BattleStateData = BattleState.getUserData(data.userName);
         obj.frags = data.frags || NaN;
         //Logger.addObject(data);
         obj.ready = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0 && !Boolean(data.isOffline);

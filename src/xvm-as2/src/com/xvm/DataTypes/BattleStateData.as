@@ -12,8 +12,12 @@ class com.xvm.DataTypes.BattleStateData
     public var maxHealth:Number = NaN;
     public var marksOnGun:Number = NaN;
     public var spotted:String = null;
-
-    /*public function BattleStateData(playerName:String, playerId:Number, vehId:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String)
-    {
-    }*/
+    public var frags:Number = NaN;
+    public var ready:Boolean = false;
+    public var blowedUp:Boolean = false;
+    public var teamKiller:Boolean = false;
+    public var squad:Boolean = false;
+    public var selected:Boolean = false;
+    public var entityName:String = null;
+    public var position:Number = NaN;
 }
