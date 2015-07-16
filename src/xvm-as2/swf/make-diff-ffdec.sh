@@ -17,7 +17,7 @@ for swf in $patch_swfs; do
       echo ${swf}.swf
       java -jar ../../../build/bin/java/ffdec.jar -swf2xml orig/${swf}.swf orig/${swf}.xml
       java -jar ../../../build/bin/java/ffdec.jar -swf2xml ${swf}.swf ${swf}.xml
-      diff -u2 orig/${swf}.xml ${swf}.xml > ${swf}.xml.patch
+      diff -u2 -I"<matrix" -I"<bitmapMatrix" -I"<gradientMatrix" -I"<colorTransform" -I"<item type=\"MetadataTag\"" orig/${swf}.xml ${swf}.xml > ${swf}.xml.patch
       rm orig/${swf}.xml ${swf}.xml
     fi
 done
