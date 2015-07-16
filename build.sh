@@ -76,7 +76,7 @@ create_directories(){
 }
 
 extend_path(){
-    export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build/bin/msil/:"$XVMBUILD_ROOT_PATH"/build/bin/"$OS"_"$arch"/
+    export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build/bin/java/:"$XVMBUILD_ROOT_PATH"/build/bin/msil/:"$XVMBUILD_ROOT_PATH"/build/bin/"$OS"_"$arch"/
 }
 
 load_repositorystats(){
@@ -267,6 +267,7 @@ detect_arch
 extend_path
 
 detect_mono
+detect_ffdec
 detect_fdbuild
 detect_flex
 detect_mtasc

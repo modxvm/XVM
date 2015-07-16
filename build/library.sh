@@ -23,7 +23,7 @@ patch_as2_h(){
 
 patch_as2_ffdec_h(){
     java -jar "$XVMBUILD_FFDEC_FILEPATH" -swf2xml orig/$1.swf temp/$1.xml || exit 1
-    patch temp/$1.xml $1.xml.patch || exit 1
+    patch --binary temp/$1.xml $1.xml.patch || exit 1
     java -jar "$XVMBUILD_FFDEC_FILEPATH" -xml2swf temp/$1.xml $1.swf || exit 1
 }
 #
