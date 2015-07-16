@@ -20,6 +20,12 @@ patch_as2_h(){
     patch temp/$1.xml $1.xml.patch || exit 1
     swfmill xml2swf temp/$1.xml $1.swf || exit 1
 }
+
+patch_as2_ffdec_h(){
+    java -jar "$XVMBUILD_FFDEC_FILEPATH" -swf2xml orig/$1.swf temp/$1.xml || exit 1
+    patch temp/$1.xml $1.xml.patch || exit 1
+    java -jar "$XVMBUILD_FFDEC_FILEPATH" -xml2swf temp/$1.xml $1.swf || exit 1
+}
 #
 
 #Arch and OS detection
@@ -75,6 +81,26 @@ detect_coreutils(){
         exit 1
     fi
 }
+
+detect_ffdec(){
+	# export XVMBUILD_FFDEC_FILEPATH to set your own ffec.jar location
+    if [ "$XVMBUILD_FFDEC_FILEPATH" == "" ]; then
+        declare -a arr
+        arr=$(echo $PATH | tr -s ':' '\n')
+        for i in $arr; do
+            if [ -f "$i/ffdec.jar" ]; then
+                export XVMBUILD_FDBUILD_FILEPATH="$i/ffdec.jar"
+                return 0
+            fi
+        done
+    fi
+
+    if [ ! -f "$XVMBUILD_FFDEC_FILEPATH" ]; then
+        echo "!!! FFdec is not found"
+        exit 1
+    fi
+}
+
 detect_fdbuild(){
     # export XVMBUILD_FDBUILD_FILEPATH to set your own fdbuild.exe location
     if [ "$XVMBUILD_FDBUILD_FILEPATH" == "" ]; then
