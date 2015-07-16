@@ -301,8 +301,14 @@ def _RegisterEvents():
     RegisterEvent(ExchangeFreeToTankmanXpWindow, '_populate', ExchangeFreeToTankmanXpWindow_populate)
     RegisterEvent(ExchangeFreeToTankmanXpWindow, '_dispose', ExchangeFreeToTankmanXpWindow_dispose)
     
+    OverrideMethod(Research, 'invalidateFreeXP', Research_invalidateFreeXP)
+
     import gui.shared.tooltips as tooltips
     RegisterEvent(tooltips, 'getUnlockPrice', tooltips_getUnlockPrice, True)
-    OverrideMethod(Research, 'invalidateFreeXP', Research_invalidateFreeXP)
+    # "reimport"
+    import gui.shared.tooltips.module as tooltips_module
+    import gui.shared.tooltips.vehicle as tooltips_vehicle
+    tooltips_module.getUnlockPrice = tooltips.getUnlockPrice
+    tooltips_vehicle.getUnlockPrice = tooltips.getUnlockPrice
 
 BigWorld.callback(0, _RegisterEvents)

@@ -341,12 +341,11 @@ def gold_pad(text):
 def smart_round(value):
     if value == 0:
         return '?'
-    elif value >= 10:
+    if value >= 10:
         return '%g' % round(value)
-    elif value >= 1:
+    if value >= 1:
         return '%g' % round(value, 1)
-    else: # < 1
-        return '%g' % round(value, 2)
+    return '%g' % round(value, 2) # < 1
 
 # make dict: shells => compatible vehicles
 def relate_shells_vehicles():
@@ -354,9 +353,7 @@ def relate_shells_vehicles():
     try:
         shells_vehicles_compatibility = {}
         from gui.shared import g_itemsCache
-        vehicles = g_itemsCache.items.getVehicles()
-        for vehicle_id in vehicles:
-            vehicle = g_itemsCache.items.getItemByCD(vehicle_id)
+        for vehicle in g_itemsCache.items.getVehicles().values():
             if vehicle.name.find('_IGR') > 0 or vehicle.name.find('_training') > 0:
                 continue
             for turrets in vehicle.descriptor.type.turrets:
