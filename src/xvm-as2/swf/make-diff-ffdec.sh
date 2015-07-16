@@ -4,11 +4,7 @@
 # XVM nightly build system
 
 patch_swfs="
-    battle.swf
-    PlayersPanel.swf
-    StatisticForm.swf
-    TeamBasesPanel.swf
-    VehicleMarkersManager.swf
+    Minimap.swf
 "
 
 for swf in $patch_swfs; do
@@ -16,8 +12,11 @@ for swf in $patch_swfs; do
     if [ ! -f ${swf}.xml ]; then
       echo ${swf}.swf
       java -jar ../../../build/bin/java/ffdec.jar -swf2xml orig/${swf}.swf orig/${swf}.xml
+      java -jar ../../../build/bin/java/ffdec.jar -xml2swf orig/${swf}.xml orig/${swf}.swf.tmp
+      java -jar ../../../build/bin/java/ffdec.jar -swf2xml orig/${swf}.swf.tmp orig/${swf}.xml
       java -jar ../../../build/bin/java/ffdec.jar -swf2xml ${swf}.swf ${swf}.xml
-      diff -u2 -I"<matrix" -I"<bitmapMatrix" -I"<gradientMatrix" -I"<colorTransform" -I"<item type=\"MetadataTag\"" orig/${swf}.xml ${swf}.xml > ${swf}.xml.patch
-      rm orig/${swf}.xml ${swf}.xml
+      diff -u2 orig/${swf}.xml ${swf}.xml > ${swf}.xml.patch
+      # -I" numFillBits=\"1\"" -I" moveBits=\"1\"" -I" numLineBits=\"1\""
+      rm orig/${swf}.xml ${swf}.xml orig/${swf}.swf.tmp
     fi
 done

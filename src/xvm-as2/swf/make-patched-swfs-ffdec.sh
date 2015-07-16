@@ -3,6 +3,10 @@
 # XVM team (c) www.modxvm.com 2014-2015
 # XVM nightly build system
 
+PATCHES="
+Minimap
+"
+
 currentdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$currentdir"
 source ../../../build/library.sh
@@ -17,12 +21,11 @@ patch_as2(){
     echo "Patching AS2 files"
 
     mkdir -p temp
-    for proj in *.patch
-        do
-            proj="${proj%%.*}"
-            echo "Patching $proj"
-            patch_as2_ffdec_h $proj
-        done
+    for proj in $PATCHES; do
+        #proj="${proj%%.*}"
+        echo "Patching $proj"
+        patch_as2_ffdec_h $proj
+    done
     rm -r temp
 }
 
