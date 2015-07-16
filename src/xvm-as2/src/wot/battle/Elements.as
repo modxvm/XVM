@@ -30,7 +30,7 @@ class wot.battle.Elements
         //Logger.addObject(opt, 1, name);
         if (opt[CMD_LOG] != null)
         {
-            Logger.addObject(obj, name, opt[CMD_LOG]);
+            Logger.addObject(obj, opt[CMD_LOG], name);
             delete opt[CMD_LOG];
         }
 
