@@ -17,7 +17,12 @@ addons/xvm-stat-log/work/
 src/xpm/*/__version__.py
 
 src/xvm-as2/include/
-src/xvm-as2/swf/*.swf
+
+src/xvm-as2/swf/battle.swf
+src/xvm-as2/swf/PlayersPanel.swf
+src/xvm-as2/swf/StatisticForm.swf
+src/xvm-as2/swf/TeamBasesPanel.swf
+src/xvm-as2/swf/VehicleMarkersManager.swf
 
 src/xvm/obj/
 
