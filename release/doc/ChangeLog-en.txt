@@ -1,4 +1,4 @@
-﻿XVM-6.1.3-dev:
+﻿XVM-6.1.3:
   * adaptation to WoT 0.9.9
   * new feature: similar to servers ping, added servers online (login page and hangar)
   * new feature: mark tanks as "reserve", it will be hidden unless set in filters

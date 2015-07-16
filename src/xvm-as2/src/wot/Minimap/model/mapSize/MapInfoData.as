@@ -78,6 +78,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         $101_dday:              { size: 100 }, // Overlord
         $103_ruinberg_winter:   { size: 80 },  // Winter Ruinberg
         $109_battlecity_ny:     { size: 50 },  // Battle City
+        $111_paris:             { size: 100 },  // Monte-Rosa
         __end__: null
     }
 
