@@ -9,7 +9,7 @@ import wot.Minimap.model.externalProxy.*;
  */
 class wot.Minimap.view.Zoom
 {
-    /** Stores state for switcher */
+    // Stores state for switcher
     private static var currentState:Boolean = true;
 
     private static var DELAY_BEFORE_DEATH_LOG_FIX:Number = 10;
@@ -31,12 +31,14 @@ class wot.Minimap.view.Zoom
         GlobalEventDispatcher.removeEventListener(Defines.E_MM_ZOOM, this, onZoomKeyClick)
     }
 
+    /**
+     * Zoom while key is on hold
+     * or switch zoom when key is clicked
+     */
     public function onZoomKeyClick(e:Object):Void
     {
-        /**
-         * Zoom while key is on hold
-         * or switch zoom when key is clicked
-         */
+        if (!minimap.visible)
+            return;
         if (Config.config.hotkeys.minimapZoom.onHold)
         {
             holdBehaviour(e.isDown);
@@ -85,7 +87,7 @@ class wot.Minimap.view.Zoom
         }
         swapDepth();
 
-        /** Without timer fix is reverted immediately */
+        // Without timer fix is reverted immediately
         timer = _global.setInterval(this, "fixDeathLogPosition", DELAY_BEFORE_DEATH_LOG_FIX);
     }
 
