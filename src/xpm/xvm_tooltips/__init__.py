@@ -36,6 +36,17 @@ shells_vehicles_compatibility = {}
 carousel_tooltips_cache = {}
 
 #####################################################################
+# initialization/finalization
+
+def start():
+    from gui.shared import g_eventBus
+    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, tooltips_clear_cache)
+
+def fini():
+    from gui.shared import g_eventBus
+    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, tooltips_clear_cache)
+
+#####################################################################
 # event handlers
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
@@ -387,7 +398,7 @@ def ItemsRequester_invalidateItems_event(self, itemTypeID, uniqueIDs):
         err(traceback.format_exc())
         carousel_tooltips_cache = {}
 
-def ItemsRequester_clear_event(*args, **kwargs):
+def tooltips_clear_cache(*args, **kwargs):
     global carousel_tooltips_cache
     carousel_tooltips_cache = {}
 
@@ -395,6 +406,10 @@ def ItemsRequester_clear_event(*args, **kwargs):
 # Register events
 
 def _RegisterEvents():
+    start()
+    import game
+    RegisterEvent(game, 'fini', fini)
+
     from gui.shared.tooltips.vehicle import VehicleParamsField
     OverrideMethod(VehicleParamsField, '_getValue', VehicleParamsField_getValue)
     from gui.Scaleform.daapi.view.battle.ConsumablesPanel import ConsumablesPanel
@@ -405,6 +420,6 @@ def _RegisterEvents():
     OverrideMethod(ModuleInfoMeta, 'as_setModuleInfoS', ModuleInfoMeta_as_setModuleInfoS)
     from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
     RegisterEvent(ItemsRequester, '_invalidateItems', ItemsRequester_invalidateItems_event)
-    RegisterEvent(ItemsRequester, 'clear', ItemsRequester_clear_event)
+    RegisterEvent(ItemsRequester, 'clear', tooltips_clear_cache)
 
 BigWorld.callback(0, _RegisterEvents)
