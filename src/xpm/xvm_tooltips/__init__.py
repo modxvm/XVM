@@ -33,6 +33,7 @@ from gun_rotation_shared import calcPitchLimitsFromDesc
 #####################################################################
 # globals
 shells_vehicles_compatibility = {}
+carousel_tooltips_cache = {}
 
 #####################################################################
 # event handlers
@@ -40,9 +41,13 @@ shells_vehicles_compatibility = {}
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 def VehicleParamsField_getValue(base, self):
     try:
+        global carousel_tooltips_cache
+        vehicle = self._tooltip.item
+        cache_result = carousel_tooltips_cache.get(vehicle.intCD)
+        if cache_result:
+            return cache_result
         from gui.shared.utils import ItemsParameters, ParametersCache
         result = list()
-        vehicle = self._tooltip.item
         configuration = self._tooltip.context.getParamsConfiguration(vehicle)
         params = configuration.params
         crew = configuration.crew
@@ -292,6 +297,7 @@ def VehicleParamsField_getValue(base, self):
                  'current': len([ x for x in vehicle.descriptor.optionalDevices if x ]),
                  'total': len(vehicle.descriptor.optionalDevices)})
 
+        carousel_tooltips_cache[vehicle.intCD] = result
         return result
     except Exception as ex:
         err(traceback.format_exc())
@@ -370,6 +376,21 @@ def relate_shells_vehicles():
         err(traceback.format_exc())
         shells_vehicles_compatibility = {}
 
+def ItemsRequester_invalidateItems_event(self, itemTypeID, uniqueIDs):
+    global carousel_tooltips_cache
+    try:
+        from gui.shared.gui_items import GUI_ITEM_TYPE
+        if itemTypeID == GUI_ITEM_TYPE.VEHICLE:
+            for veh_id in uniqueIDs:
+                carousel_tooltips_cache[veh_id] = None
+    except Exception as ex:
+        err(traceback.format_exc())
+        carousel_tooltips_cache = {}
+
+def ItemsRequester_clear_event(*args, **kwargs):
+    global carousel_tooltips_cache
+    carousel_tooltips_cache = {}
+
 #####################################################################
 # Register events
 
@@ -382,5 +403,8 @@ def _RegisterEvents():
     OverrideMethod(ToolTip, 'onCreateTypedTooltip', ToolTip_onCreateTypedTooltip)
     from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
     OverrideMethod(ModuleInfoMeta, 'as_setModuleInfoS', ModuleInfoMeta_as_setModuleInfoS)
+    from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
+    RegisterEvent(ItemsRequester, '_invalidateItems', ItemsRequester_invalidateItems_event)
+    RegisterEvent(ItemsRequester, 'clear', ItemsRequester_clear_event)
 
 BigWorld.callback(0, _RegisterEvents)
