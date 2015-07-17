@@ -35,6 +35,7 @@ package xvm.battleresults.components
                 textField = new TextField();
                 textField.antiAliasType = AntiAliasType.ADVANCED;
                 textField.selectable = false;
+                textField.mouseEnabled = false;
                 textField.x = page.width - 405;
                 textField.y = 2;
                 textField.width = 400;
