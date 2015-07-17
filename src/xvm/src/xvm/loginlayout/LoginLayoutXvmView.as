@@ -8,6 +8,7 @@ package xvm.loginlayout
     import com.xvm.infrastructure.*;
     import net.wg.gui.events.*;
     import net.wg.gui.login.impl.*;
+    import net.wg.gui.login.impl.ev.*;
     import net.wg.gui.login.impl.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -26,23 +27,29 @@ package xvm.loginlayout
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            page.loginViewStack.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
+            page.loginViewStack.addEventListener(LoginViewStackEvent.VIEW_CHANGED, onViewChanged);
+            setupForm(page.loginViewStack.currentView as SimpleForm);
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            page.loginViewStack.removeEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
+            page.loginViewStack.removeEventListener(LoginViewStackEvent.VIEW_CHANGED, onViewChanged);
         }
 
         // PRIVATE
 
-        private function onViewChanged(e:ViewStackEvent):void
+        private function onViewChanged(e:LoginViewStackEvent):void
         {
-            var form:SimpleForm = e.view as SimpleForm;
-            if (form == null || form.login == null || form.pass == null)
-                return;
-            form.login.textField.restrict = "a-z A-Z 0-9 _ \\- @ .";
-            form.pass.textField.restrict = "a-z A-Z 0-9 _";
+            setupForm(e.view as SimpleForm);
+        }
+
+        private function setupForm(form:SimpleForm):void
+        {
+            if (form != null && form.login != null && form.pass != null)
+            {
+                form.login.textField.restrict = "a-z A-Z 0-9 _ \\- @ .";
+                form.pass.textField.restrict = "a-z A-Z 0-9 _";
+            }
         }
     }
 }
