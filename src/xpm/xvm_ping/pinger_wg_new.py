@@ -67,8 +67,8 @@ class _Ping(object):
                 else:
                     ping_results[server_name] = smoothed_ping
                     best_ping = min(best_ping, smoothed_ping)
-            from ConnectionManager import connectionManager
-            if (connectionManager.isConnected() and config.get('hangar/pingServers/showTitle')) or (not connectionManager.isConnected() and config.get('login/pingServers/showTitle')):
+            from gui.shared.utils.HangarSpace import g_hangarSpace
+            if (g_hangarSpace.spaceInited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.spaceInited and config.get('login/pingServers/showTitle')):
                 ping_results['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
             as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, ping_results)
         except Exception as ex:

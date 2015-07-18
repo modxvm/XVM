@@ -88,8 +88,8 @@ class _Get_online(object):
                         host['server'] = host['server'].replace('US ', 'NA ')
                     res[host['server']] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
-                from ConnectionManager import connectionManager
-                if (connectionManager.isConnected() and config.get('hangar/onlineServers/showTitle')) or (not connectionManager.isConnected() and config.get('login/onlineServers/showTitle')):
+                from gui.shared.utils.HangarSpace import g_hangarSpace
+                if (g_hangarSpace.spaceInited and config.get('hangar/onlineServers/showTitle')) or (not g_hangarSpace.spaceInited and config.get('login/onlineServers/showTitle')):
                     res['###best_online###'] = str(best_online)  # will be first in sorting, key is replaced by localized "Online"
             with self.lock:
                 self.resp = res
