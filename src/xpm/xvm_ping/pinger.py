@@ -106,7 +106,7 @@ class _Ping(object):
                 res[x['name']] = found.group(1)
                 best_ping = min(best_ping, int(found.group(1)))
             from gui.shared.utils.HangarSpace import g_hangarSpace
-            if (g_hangarSpace.spaceInited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.spaceInited and config.get('login/pingServers/showTitle')):
+            if (g_hangarSpace.inited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/pingServers/showTitle')):
                 res['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
 
             with self.lock:

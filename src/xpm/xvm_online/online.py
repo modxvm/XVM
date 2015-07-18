@@ -89,7 +89,7 @@ class _Get_online(object):
                     res[host['server']] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
                 from gui.shared.utils.HangarSpace import g_hangarSpace
-                if (g_hangarSpace.spaceInited and config.get('hangar/onlineServers/showTitle')) or (not g_hangarSpace.spaceInited and config.get('login/onlineServers/showTitle')):
+                if (g_hangarSpace.inited and config.get('hangar/onlineServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/onlineServers/showTitle')):
                     res['###best_online###'] = str(best_online)  # will be first in sorting, key is replaced by localized "Online"
             with self.lock:
                 self.resp = res
