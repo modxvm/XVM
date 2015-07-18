@@ -24,6 +24,7 @@ import ResMgr
 
 from xfw import *
 from xvm_main.python.logger import *
+import xvm_main.python.config as config
 
 #############################
 
@@ -104,7 +105,9 @@ class _Ping(object):
 
                 res[x['name']] = found.group(1)
                 best_ping = min(best_ping, int(found.group(1)))
-            res['###best_ping###'] = str(best_ping) # will be first in sorting
+            from gui.shared.utils.HangarSpace import g_hangarSpace
+            if (g_hangarSpace.spaceInited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.spaceInited and config.get('login/pingServers/showTitle')):
+                res['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
 
             with self.lock:
                 self.resp = res
