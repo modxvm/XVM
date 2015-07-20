@@ -22,8 +22,8 @@ package xvm.ping.PingServers
         private static const QUALITY_GREAT:String = "great";
         private static const CURRENT_SERVER:String = "current";
         private static const STYLE_NAME_PREFIX:String = "xvm_ping_";
-        private static const COMMAND_GETCURRENTSERVER:String = "xvm_online.getcurrentserver";
-        private static const COMMAND_AS_CURRENTSERVER:String = "xvm_online.as.currentserver";
+        private static const COMMAND_GETCURRENTSERVER:String = "xvm_ping.getcurrentserver";
+        private static const COMMAND_AS_CURRENTSERVER:String = "xvm_ping.as.currentserver";
 
         private var cfg:CPingServers;
         private var fields:Vector.<TextField>;
@@ -143,11 +143,28 @@ package xvm.ping.PingServers
         {
             var cluster:String = pingObj.cluster;
             var time:String = pingObj.time;
-            var raw:String = cluster + cfg.delimiter + time;
+            var raw:String;
             if (cluster == "###best_ping###") //will be first in sorting
+            {
                 raw = Locale.get("Ping") + cfg.delimiter + " ";
-            if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
-                raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
+                while (raw.length < cfg.minimalLength)
+                    raw += " "; // right pad the row
+            }
+            else
+            {
+                raw = time
+                if (cfg.showServerName || time == "...")
+                {
+                    while (cluster.length + cfg.delimiter.length + raw.length < cfg.minimalLength)
+                        raw = " " + raw; // left pad the value
+                    raw = cluster + cfg.delimiter + raw;
+                }
+                else
+                    while (raw.length < cfg.minimalLength)
+                        raw = " " + raw; // left pad the row
+                if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
+                    raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
+            }
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span></textformat>";
         }
 

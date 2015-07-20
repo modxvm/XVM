@@ -5,9 +5,11 @@
   * renamed config option: blockVehicleIfNoAmmo -> blockVehicleIfLowAmmo
   * new options:
       "hangar"/"lowAmmoPercentage" - Below this percentage ammo is low. (0 - 100)
-      "hAlign", "vAlign" - added horizontal and vertical alignments for xvm_ping and xvm_online
       in hangar and login, for pingServers and onlineServers added:
+          "hAlign", "vAlign" - horizontal and vertical alignments
           "showTitle" - show title of list
+          "showServerName" - show server names in list
+          "minimalLength" - expand each field to this amount of symbols (for example: "US East:     12345")
           "markCurrentServer" - mark current server in the list (not available at login screen)
       "battle"/"fragCorrelation"/"sortByType" - sort markers in frags panel by type
 

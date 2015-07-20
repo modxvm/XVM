@@ -20,6 +20,9 @@ package com.xvm.types.cfg
         public var leading:Number;
         public var topmost:Boolean;
         public var fontStyle:Object;
+        public var showTitle:Boolean;
+        public var showServerName:Boolean;
+        public var minimalLength:Number;
         //{
             //name: "$FieldFont",
             //size: 12,

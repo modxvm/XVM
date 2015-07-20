@@ -5,9 +5,11 @@
   * переименована опция конфига: "hangar"/"blockVehicleIfNoAmmo" -> "hangar"/"blockVehicleIfLowAmmo"
   * новые опции:
       "hangar"/"lowAmmoPercentage" - Ниже этого процента снарядов считается мало. (0 - 100)
-      "hAlign", "vAlign" - добавлены горизонтальное и вертикальное выравнивание для xvm_ping и xvm_online
       в hangar и login, для pingServers и onlineServers добавлены:
+          "hAlign", "vAlign" - горизонтальное и вертикальное выравнивание
           "showTitle" - показывать заголовок к списку
+          "showServerName" - показывать названия серверов в списке
+          "minimalLength" - расширить каждую ячейку до данного количества символов (к примеру: "RU1:     12345")
           "markCurrentServer" - выделять текущий сервер в списке (недоступно на странице логина)
       "battle"/"fragCorrelation"/"sortByType" - сортировать маркеры в панели фрагов по типу техники
 

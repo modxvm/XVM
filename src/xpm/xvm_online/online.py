@@ -73,6 +73,14 @@ class _Get_online(object):
             req = "onlineUsersCount/0"
             server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
             (response, delay, error) = loadUrl(server, req, showLog=False)
+            # typical response:
+            #{
+            #    "eu":  [{"players_online":4297,"server":"EU2"},{"players_online":8331,"server":"EU1"}],
+            #    "na":  [{"players_online":22740,"server":"NA EAST"},{"players_online":7431,"server":"NA WEST"}],
+            #    "asia":[{"players_online":6603,"server":"ASIA"}],
+            #    "kr":  [{"players_online":868,"server":"KR"}],
+            #    "ru":  [{"players_online":14845,"server":"RU8"},{"players_online":8597,"server":"RU2"},{"players_online":9847,"server":"RU1"},{"players_online":3422,"server":"RU3"},{"players_online":11508,"server":"RU6"},{"players_online":6795,"server":"RU5"},{"players_online":3354,"server":"RU4"}]
+            #}
             region = GAME_REGION.lower()
             if 'CT' in URLS.WG_API_SERVERS: # CT is uncommented in xfw.constants to check on test server
                 region = 'ru'
@@ -84,8 +92,8 @@ class _Get_online(object):
                     res[host] = 'Error'
             else:
                 for host in response_data:
-                    if host['server'].find('US') == 0: # API return "US west" instead of "NA west" => can't determine current server
-                        host['server'] = host['server'].replace('US ', 'NA ')
+                    if host['server'].find('NA ') == 0: # API return "NA EAST" instead of "US East" => can't determine current server
+                        host['server'] = 'US ' + host['server'][3:].capitalize()
                     res[host['server']] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
                 from gui.shared.utils.HangarSpace import g_hangarSpace

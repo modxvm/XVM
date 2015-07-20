@@ -64,16 +64,16 @@ def onXfwCommand(cmd, *args):
             pinger.ping()
             return (None, True)
         if cmd == XVM_PING_COMMAND.GETCURRENTSERVER:
-            from ConnectionManager import connectionManager
-            LobbyHeaderMeta_as_setServerS(None, connectionManager.serverUserNameShort)
+            getCurrentServer()
             return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)
     return (None, False)
 
-def LobbyHeaderMeta_as_setServerS(self, name, *args, **kwargs):
-    as_xfw_cmd(XVM_PING_COMMAND.AS_CURRENTSERVER, name)
+def getCurrentServer(*args, **kwargs):
+    from ConnectionManager import connectionManager
+    as_xfw_cmd(XVM_PING_COMMAND.AS_CURRENTSERVER, connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
 
 # WGPinger (WARNING: bugs with the multiple hosts)
 
@@ -102,7 +102,7 @@ def _RegisterEvents():
     RegisterEvent(game, 'fini', fini)
 
     from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
-    RegisterEvent(LobbyHeaderMeta, 'as_setServerS', LobbyHeaderMeta_as_setServerS)
+    RegisterEvent(LobbyHeaderMeta, 'as_setServerS', getCurrentServer)
 
     # enable for pinger_wg
     # from predefined_hosts import g_preDefinedHosts

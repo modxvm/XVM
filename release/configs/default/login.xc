@@ -53,6 +53,12 @@
       // true - show title "Ping"
       // true - показывать заголовок "Пинг"
       "showTitle": true,
+      // true - show server names in list
+      // true - показывать названия серверов в списке
+      "showServerName": true,
+      // expand each field to this amount of symbols (for example: "US East:     12345")
+      // расширить каждую ячейку до данного количества символов (к примеру: "RU1:     12345")
+      "minimalLength": 0,
       // Text style
       // Стиль текста
       "fontStyle": {
@@ -129,6 +135,12 @@
       // true - show title "Online"
       // true - показывать заголовок "Онлайн"
       "showTitle": true,
+      // true - show server names in list
+      // true - показывать названия серверов в списке
+      "showServerName": true,
+      // expand each field to this amount of symbols (for example: "US East:     12345")
+      // расширить каждую ячейку до данного количества символов (к примеру: "RU1:     12345")
+      "minimalLength": 0,
       // Text style
       // Стиль текста
       "fontStyle": {

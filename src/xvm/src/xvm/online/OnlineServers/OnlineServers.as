@@ -88,7 +88,7 @@ package xvm.online.OnlineServers
             for (var name:String in answer)
             {
                 var cluster:String = StringUtils.startsWith(name, "WOT ") ? name.substring(4) : name;
-                responseTimeList.push({ cluster: cluster, time: answer[name] });
+                responseTimeList.push({ cluster: cluster, people_online: answer[name] });
             }
             responseTimeList.sortOn(["cluster"]);
 

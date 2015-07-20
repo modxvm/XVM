@@ -36,7 +36,7 @@ package xvm.online.OnlineServers
             this.currentServer = currentServer;
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
-            f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );
+            f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), people_online: "..." } );
             updatePositions();
             OnlineServers.addEventListener(update);
             this.addEventListener(Event.RESIZE, updatePositions);
@@ -142,13 +142,33 @@ package xvm.online.OnlineServers
         private function makeStyledRow(onlineObj:Object):String
         {
             var cluster:String = onlineObj.cluster;
-            var time:String = onlineObj.time;
-            var raw:String = cluster + cfg.delimiter + time;
-            if (cluster == "###best_online###")  //will be first in sorting
+            var people_online:String = onlineObj.people_online;
+            var raw:String; 
+            if (cluster == "###best_online###") //will be first in sorting
+            {
                 raw = Locale.get("Online") + cfg.delimiter + " ";
-            if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
-                raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
-            return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span></textformat>";
+                while (raw.length < cfg.minimalLength)
+                    raw += " "; // right pad the row
+            }
+            else
+            {
+                if (people_online != "...")
+                    raw = String(Math.round(parseInt(people_online) / 1000)) + "k";
+                else
+                    raw = people_online
+                if (cfg.showServerName || people_online == "...")
+                {
+                    while (cluster.length + cfg.delimiter.length + raw.length < cfg.minimalLength)
+                        raw = " " + raw; // left pad the value
+                    raw = cluster + cfg.delimiter + raw;
+                }
+                else
+                    while (raw.length < cfg.minimalLength)
+                        raw = " " + raw; // left pad the row
+                if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
+                    raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
+            }
+            return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(people_online) + "'>" + raw + "</span></textformat>";
         }
 
         private function defineQuality(people_online_str:String):String
