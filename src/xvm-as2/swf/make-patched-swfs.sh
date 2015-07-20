@@ -5,6 +5,7 @@
 
 PATCHES="
 battle
+Minimap
 PlayersPanel
 StatisticForm
 TeamBasesPanel
