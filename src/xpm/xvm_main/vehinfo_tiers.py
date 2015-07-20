@@ -55,19 +55,19 @@ _special = {
     'uk:GB63_TOG_II':               [ 6, 7 ],
 
     # level 7
-    'germany:Panther_M10':          [ 7, 8 ],
+    'germany:G78_Panther_M10':      [ 7, 8 ],
     'ussr:T44_85':                  [ 7, 8 ],
     'ussr:T44_122':                 [ 7, 8 ],
-    'usa:T23E3':                    [ 7, 8 ],
+    'usa:A86_T23E3':                [ 7, 8 ],
     'germany:E-25':                 [ 7, 8 ],
     'uk:GB71_AT_15A':               [ 7, 8 ],
 
     # level 8
     'ussr:KV-5':                    [ 8, 9 ],
     'ussr:Object252':               [ 8, 9 ],
-    'france:FCM_50t':               [ 8, 9 ],
+    'france:F65_FCM_50t':           [ 8, 9 ],
     'usa:A80_T26_E4_SuperPershing': [ 8, 9 ],
-    'usa:M6A2E1':                   [ 8, 9 ],
+    'usa:A45_M6A2E1':               [ 8, 9 ],
     'china:Ch23_112':               [ 8, 9 ],
     'china:Ch14_T34_3':             [ 8, 9 ],
     'china:Ch01_Type59':            [ 8, 9 ],
