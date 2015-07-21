@@ -70,6 +70,7 @@ def onXfwCommand(cmd, *args):
 
 def getCurrentServer(*args, **kwargs):
     from ConnectionManager import connectionManager
+    debug('getCurrentServer: %s' %  connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
     as_xfw_cmd(XVM_ONLINE_COMMAND.AS_CURRENTSERVER, connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
 
 # Delayed registration

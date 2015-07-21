@@ -12,6 +12,7 @@ package xvm.ping.PingServers
     import flash.text.*;
     import flash.events.*;
     import scaleform.clik.core.*;
+    import org.idmedia.as3commons.util.*;
 
     public class PingServersView extends UIComponent
     {
@@ -55,7 +56,7 @@ package xvm.ping.PingServers
 
         private function currentServerCallback(name:String):void
         {
-            currentServer = name
+            currentServer = StringUtils.startsWith(name, "WOT ") ? name.substring(4) : name;
         }
 
         private function get_x_offset():int

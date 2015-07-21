@@ -12,6 +12,7 @@ package xvm.online.OnlineServers
     import flash.text.*;
     import flash.events.*;
     import scaleform.clik.core.*;
+    import org.idmedia.as3commons.util.*;
 
     public class OnlineServersView extends UIComponent
     {
@@ -55,7 +56,7 @@ package xvm.online.OnlineServers
 
         private function currentServerCallback(name:String):void
         {
-            currentServer = name
+            currentServer = StringUtils.startsWith(name, "WOT ") ? name.substring(4) : name;
         }
 
         private function get_x_offset():int
