@@ -8,6 +8,7 @@ def online():
 
 import traceback
 import threading
+import simplejson
 from random import randint
 
 import BigWorld
@@ -84,7 +85,7 @@ class _Get_online(object):
             region = GAME_REGION.lower()
             if 'CT' in URLS.WG_API_SERVERS: # CT is uncommented in xfw.constants to check on test server
                 region = 'ru'
-            response_data = eval(response).get(region, [])
+            response_data = None if response is None else simplejson.loads(response).get(region, [])
             res = {}
             best_online = 0
             if error or type(response_data) is not list:
@@ -94,7 +95,7 @@ class _Get_online(object):
                 for host in response_data:
                     if host['server'].find('NA ') == 0: # API return "NA EAST" instead of "US East" => can't determine current server
                         host['server'] = 'US ' + host['server'][3:].capitalize()
-                    res[host['server']] = host['players_online']
+                    res[str(host['server'])] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
                 from gui.shared.utils.HangarSpace import g_hangarSpace
                 if (g_hangarSpace.inited and config.get('hangar/onlineServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/onlineServers/showTitle')):
