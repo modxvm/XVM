@@ -172,6 +172,23 @@ build_xfw(){
     popd >/dev/null
 }
 
+calc_hash_for_xvm_integrity(){
+    echo ""
+    echo "Calculating hashes for xvm_integrity"
+    
+    pushd ~output > /dev/null
+    hash_file='res_mods/mods/packages/xvm_integrity/python/hash_table.py'
+    echo -e '""" Generated automatically by XVM builder """\nHASH_DATA = {' > $hash_file
+    for file in `find res_mods -name *.pyc -o -name *.swf`;
+        do
+            sha1sum $file | sed -r "s/(\S+)\s+\*(.+)/'\2': '\1',/" >> $hash_file
+        done
+    echo "}" >> $hash_file
+    "$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$hash_file')"
+    rm $hash_file
+    popd >/dev/null
+}
+
 copy_files(){
     # rename version-dependent folder
     mv "$XVMBUILD_REPOSITORY_PATH"/~output/~ver/ "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_WOT_VERSION"
@@ -263,7 +280,6 @@ deploy_xvm(){
 ##########################
 ####  BUILD PIPELINE  ####
 ##########################
-
 pushd "$XVMBUILD_ROOT_PATH" >/dev/null
 
 detect_os
@@ -279,6 +295,7 @@ detect_mtasc
 detect_swfmill
 detect_wget
 detect_zip
+detect_python
 
 load_repositorystats
 load_wotversion
@@ -295,6 +312,7 @@ build_as3
 
 clean_sha1
 copy_files
+calc_hash_for_xvm_integrity
 pack_xvm
 pack_xfw
 
