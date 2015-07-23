@@ -55,7 +55,7 @@ def fini():
     from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
     g_eventBus.removeListener(VIEW_ALIAS.LOBBY, checkIntegrity)
 
-def checkIntegrity():
+def checkIntegrity(*args, **kwargs):
     try:
         fini() # don't call the check again
         thread = threading.Thread(target=_checkIntegrityAsync)
@@ -65,14 +65,14 @@ def checkIntegrity():
     except Exception, ex:
         err('checkIntegrity() exception: ' + traceback.format_exc())
 
-def _checkResult():
+def _checkResult(*args, **kwargs):
     with lock:
         if integrity_result is None:
             BigWorld.callback(0.05, _checkResult)
             return
         log('xvm_integrity results: %s' % ('incorrect!\n\t' + '\n\t'.join(integrity_result) if integrity_result else 'correct!'))
 
-def _checkIntegrityAsync():
+def _checkIntegrityAsync(*args, **kwargs):
     try:
         global integrity_result
         from hash_table import HASH_DATA
