@@ -22,6 +22,28 @@ config_str = None
 lang_str = None
 lang_data = None
 
+DEFAULT_XVM_XC = '''/**  
+ * The boot configs file.
+ *
+ * Reference format: ${"path to config file":"."}
+ * // - comment out the line (will not be used)
+ *
+ * ---------------------------------------------------------------
+ * Fichier de lancement de la configuration XVM.
+ *
+ * Format à utiliser : ${"chemin vers fichier de config":"."}
+ * // - commente la ligne (elle ne sera pas utilisée)
+ *
+ * --------------------------------------------------------------- 
+ * Пример загрузочного файла конфигов.
+ *
+ * Формат ссылки: ${"путь к файлу конфига":"."}
+ * // - закомментировать строку (использоваться не будет)
+ */
+
+${"default/@xvm.xc":"."}
+'''
+
 def get(path, default=None):
     if _config is None or not path or path == '':
         return default
@@ -93,6 +115,10 @@ def _load_xvm_xc(filename, autoreload):
     try:
         config = deepcopy(default_config.DEFAULT_CONFIG)
         config['consts'] = _constsSection()
+        if not os.path.isfile(filename):
+            log('[WARNING] xvm.xc was not found, building new')
+            with open(filename, 'w') as f:
+                f.write(DEFAULT_XVM_XC)
         if os.path.isfile(filename):
             result = JSONxLoader.load(filename, _load_log)
             if result is not None:
