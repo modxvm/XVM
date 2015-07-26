@@ -34,7 +34,7 @@ make_dirs()
 {
   mkdir -p ../../~output/~ver/gui/flash/
   mkdir -p ../../~output/~ver/scripts
-  mkdir -p ../../~output/configs/
+  mkdir -p ../../~output/configs/xvm/
   mkdir -p ../../~output/mods/shared_resources/
   mkdir -p ../../~output/mods/xfw/actionscript/
   mkdir -p ../../~output/mods/xfw/python/
@@ -108,9 +108,9 @@ for fn in $(find . -type "f" -name "*.py"); do
   build $f mods/packages/$m
 done
 
-# generate default config from .xc files
+# generate default config from .xc files and xvm.xc.sample
 # TODO: review and refactor
-echo 'generate default_config.pyc'
+echo 'generate default_config.pyc and xvm.xc.sample'
 dc_fn=../../~output/mods/packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
 "$XVMBUILD_PYTHON_FILEPATH" -c "
@@ -126,6 +126,15 @@ print('DEFAULT_CONFIG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg, en, ru))
 [ ! -f ${dc_fn}c ] && cat "$dc_fn"
 rm -f "$dc_fn"
 [ ! -f ${dc_fn}c ] && exit
+
+xvm_xc_sample_fn=../../~output/configs/xvm/xvm.xc.sample
+rm -f $xvm_xc_sample_fn
+"$XVMBUILD_PYTHON_FILEPATH" -c "
+import sys
+sys.path.insert(0, '../../~output/mods/packages/xvm_main/python')
+from default_xvm_xc import DEFAULT_XVM_XC
+print DEFAULT_XVM_XC
+" > $xvm_xc_sample_fn
 
 popd >/dev/null
 
