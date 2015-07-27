@@ -66,11 +66,17 @@ class wot.StatisticForm.BattleStatItemRenderer
         if (m_iconLoaded)
             return;
         m_iconLoaded = true;
-
+        
+        var xLeftVeh: Number = (isNaN(Config.config.statisticForm.xPositionLeftVehicle)) ? 0 : Config.config.statisticForm.xPositionLeftVehicle;
+        var xRightVeh: Number = (isNaN(Config.config.statisticForm.xPositionRightVehicle)) ? 0 : Config.config.statisticForm.xPositionRightVehicle;
+        var xLeftVehIcon: Number = (isNaN(Config.config.statisticForm.xPositionLeftVehicleIcon)) ? 0 : Config.config.statisticForm.xPositionLeftVehicleIcon;
+        var xRightVehIcon: Number = (isNaN(Config.config.statisticForm.xPositionRightVehicleIcon)) ? 0 : Config.config.statisticForm.xPositionRightVehicleIcon;
+        
         wrapper.col3._width += 100;
         if (team == Defines.TEAM_ALLY)
         {
-            wrapper.col3._x -= 100;
+            wrapper.col3._x -= 100 + xLeftVeh;
+            wrapper.iconLoader._x -= xLeftVehIcon;
             //Logger.addObject(event.target);
         }
         if (!Config.config.battle.mirroredVehicleIcons)
@@ -78,9 +84,16 @@ class wot.StatisticForm.BattleStatItemRenderer
             if (team == Defines.TEAM_ENEMY)
             {
                 wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
-                wrapper.iconLoader._x -= 80 - 5; // FIXIT: where I can get image width?
-                wrapper.col3._x += 5;
+                wrapper.iconLoader._x -= 80 - 5 - xRightVehIcon;
+                wrapper.col3._x += 5 + xRightVeh;
             }
+        } else
+        {
+            if (team == Defines.TEAM_ENEMY)
+            {
+                wrapper.iconLoader._x -= xRightVehIcon;
+                wrapper.col3._x -= xRightVeh;
+            } 
         }
     }
 

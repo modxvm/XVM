@@ -62,11 +62,20 @@ package xvm.battleloading_ui.components
             TextFieldEx.setVerticalAlign(proxy.vehicleField, TextFieldAutoSize.CENTER);
             TextFieldEx.setVerticalAutoSize(proxy.vehicleField, TextFieldAutoSize.CENTER);
             proxy.vehicleField.condenseWhite = true;
-
+            
+            var xLeftVeh: Number = (isNaN(Config.config.battleLoading.xPositionLeftVehicle)) ? 0 : Config.config.battleLoading.xPositionLeftVehicle;
+            var xRightVeh: Number = (isNaN(Config.config.battleLoading.xPositionRightVehicle)) ? 0 : Config.config.battleLoading.xPositionRightVehicle;
+            
             proxy.vehicleField.width += 100;
             proxy.vehicleField.scaleX = 1;
             if (team == XfwConst.TEAM_ALLY)
-                proxy.vehicleField.x -= 103;
+            {
+                proxy.vehicleField.x -= 103 + xLeftVeh;
+            } else
+            {
+                proxy.vehicleField.x += xRightVeh;
+            }
+                
         }
 
         public function setData(data:VehicleInfoVO):void
@@ -182,14 +191,32 @@ package xvm.battleloading_ui.components
             _vehicleIconLoaded = true;
 
             // crop large icons to avoid invalid resizing of item
-            proxy.iconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
+            // proxy.iconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
+            
+            var xLeftVehIcon: Number = (isNaN(Config.config.battleLoading.xPositionLeftVehicleIcon)) ? 0 : Config.config.battleLoading.xPositionLeftVehicleIcon;
+            var xRightVehIcon: Number = (isNaN(Config.config.battleLoading.xPositionRightVehicleIcon)) ? 0 : Config.config.battleLoading.xPositionRightVehicleIcon;
 
             // disable icons mirroring (for alternative icons)
-            if (Config.config.battle.mirroredVehicleIcons == false && team == XfwConst.TEAM_ENEMY)
+            if (Config.config.battle.mirroredVehicleIcons == false)
             {
-                proxy.iconLoader.scaleX = -Math.abs(proxy.iconLoader.scaleX);
-                proxy.iconLoader.x = 4;
-                //Logger.add(proxy.iconLoader.width + "x" + proxy.iconLoader.height);
+                if (team == XfwConst.TEAM_ENEMY)
+                {
+                    proxy.iconLoader.scaleX = -Math.abs(proxy.iconLoader.scaleX);
+                    proxy.iconLoader.x -= 80 - 5 - xRightVehIcon;
+                    //Logger.add(proxy.iconLoader.width + "x" + proxy.iconLoader.height);
+                } else
+                {
+                    proxy.iconLoader.x -= xLeftVehIcon;
+                }
+            } else
+            {
+                if (team == XfwConst.TEAM_ALLY)
+                {
+                    proxy.iconLoader.x -= xLeftVehIcon;
+                } else
+                {
+                    proxy.iconLoader.x += xRightVehIcon;
+                }
             }
         }
 
