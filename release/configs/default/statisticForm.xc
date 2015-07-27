@@ -34,17 +34,17 @@
     // Display format for the right panel (macros allowed, see macros.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
     "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}",
-	// english.
-    // Положение по оси X поля "formatLeftVehicle".
+    // X position for "formatLeftVehicle" field
+    // Положение по оси X поля "formatLeftVehicle"
     "xPositionLeftVehicle": 0,
-	// english.
-    //Положение по оси X поля "formatRightVehicle".
+    // X position for "formatRightVehicle" field
+    // Положение по оси X поля "formatRightVehicle"
     "xPositionRightVehicle": 0,
-	// english.
-    // Положение по оси X иконок техники союзников.
+    // X position for allies vehicle icons
+    // Положение по оси X иконок техники союзников
     "xPositionLeftVehicleIcon": 0,
-	// english.
-    // Положение по оси X иконок техники противников.
+    // X position for enemies vehicle icons
+    // Положение по оси X иконок техники противников
     "xPositionRightVehicleIcon": 0
   }
 }

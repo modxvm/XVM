@@ -14,9 +14,9 @@ package com.xvm.types.cfg
         public var formatLeftVehicle:String;
         public var formatRightNick:String;
         public var formatRightVehicle:String;
-        public var xPositionLeftVehicle: Number;
-	    public var xPositionRightVehicle: Number;
-        public var xPositionLeftVehicleIcon: Number;
-        public var xPositionRightVehicleIcon: Number;
+        public var xPositionLeftVehicle:Number;
+        public var xPositionRightVehicle:Number;
+        public var xPositionLeftVehicleIcon:Number;
+        public var xPositionRightVehicleIcon:Number;
     }
 }
