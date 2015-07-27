@@ -127,14 +127,15 @@ print('DEFAULT_CONFIG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg, en, ru))
 rm -f "$dc_fn"
 [ ! -f ${dc_fn}c ] && exit
 
-xvm_xc_sample_fn=../../~output/configs/xvm/xvm.xc.sample
-rm -f $xvm_xc_sample_fn
-"$XVMBUILD_PYTHON_FILEPATH" -c "
-import sys
-sys.path.insert(0, '../../~output/mods/packages/xvm_main/python')
-from default_xvm_xc import DEFAULT_XVM_XC
-print DEFAULT_XVM_XC
-" > $xvm_xc_sample_fn
+xvm_xc_sample_src=../../release/configs/xvm.xc.sample
+xvm_xc_sample_trgt=../../~output/mods/packages/xvm_main/python/default_xvm_xc.py
+rm -f "${xvm_xc_sample_trgt}c"
+echo -e -n "''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''" > $xvm_xc_sample_trgt
+cat $xvm_xc_sample_src >> $xvm_xc_sample_trgt
+echo "'''" >> $xvm_xc_sample_trgt
+"$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$xvm_xc_sample_trgt')"
+[ ! -f ${xvm_xc_sample_trgt}c ] && exit
+rm -f "$xvm_xc_sample_trgt"
 
 popd >/dev/null
 
