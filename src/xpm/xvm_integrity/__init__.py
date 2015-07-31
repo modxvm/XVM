@@ -75,7 +75,12 @@ def _checkResult(*args, **kwargs):
 def _checkIntegrityAsync(*args, **kwargs):
     try:
         global integrity_result
-        from hash_table import HASH_DATA
+        try:
+            from hash_table import HASH_DATA
+        except:
+            with lock:
+                integrity_result = ['hash_table.pyc is missing/corrupt']
+            return
         result = []
         for path in check_xvm_dirs:
             for folder, _, files_arr in os.walk(path):
