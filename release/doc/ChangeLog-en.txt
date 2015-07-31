@@ -1,5 +1,7 @@
 ﻿XVM-6.1.3.1:
   * bug fixes and optimization
+  * new options:
+      "tooltips"/"tooltipsDelay" - delay in tooltips appearance
 
 XVM-6.1.3:
   * adaptation to WoT 0.9.9
