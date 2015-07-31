@@ -19,6 +19,7 @@ import traceback
 import BigWorld
 from math import degrees, pi
 from helpers import i18n
+from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.locale.MENU import MENU
 
 from xfw import *
@@ -61,7 +62,7 @@ def ToolTip_onCreateTypedTooltip(base, self, type, *args):
     # log('ToolTip_onCreateTypedTooltip')
 
     try:
-        if type == 'carouselVehicle' and config.get('hangar/carousel/suppressCarouselTooltips'):
+        if type == TOOLTIPS_CONSTANTS.CAROUSEL_VEHICLE and config.get('hangar/carousel/suppressCarouselTooltips'):
             return
     except Exception as ex:
         err(traceback.format_exc())
@@ -70,7 +71,7 @@ def ToolTip_onCreateTypedTooltip(base, self, type, *args):
 
 
 
-TOOLTIP_DELAY_INTERVAL = 0.5
+TOOLTIP_DELAY_INTERVAL = 0.75
 toolTipDelayIntervalId = None
 
 def _createTooltip(self, func):
