@@ -50,8 +50,63 @@ def fini():
 #####################################################################
 # event handlers
 
+# tooltip delay to resolve performance issue
+def ToolTip_onCreateComplexTooltip(base, self, tooltipId, stateType):
+    # log('ToolTip_onCreateComplexTooltip')
+    _createTooltip(self, lambda:_onCreateComplexTooltip_callback(base, self, tooltipId, stateType))
+
+# tooltip delay to resolve performance issue
+# suppress carousel tooltips
+def ToolTip_onCreateTypedTooltip(base, self, type, *args):
+    # log('ToolTip_onCreateTypedTooltip')
+
+    try:
+        if type == 'carouselVehicle' and config.get('hangar/carousel/suppressCarouselTooltips'):
+            return
+    except Exception as ex:
+        err(traceback.format_exc())
+
+    _createTooltip(self, lambda:_onCreateTypedTooltip_callback(base, self, type, *args))
+
+
+
+TOOLTIP_DELAY_INTERVAL = 0.5
+toolTipDelayIntervalId = None
+
+def _createTooltip(self, func):
+    try:
+        global TOOLTIP_DELAY_INTERVAL, toolTipDelayIntervalId
+        self.xvm_hide()
+        toolTipDelayIntervalId = BigWorld.callback(TOOLTIP_DELAY_INTERVAL, func)
+    except Exception as ex:
+        err(traceback.format_exc())
+
+def _onCreateTypedTooltip_callback(base, self, type, *args):
+    # log('ToolTip_onCreateTypedTooltip_callback')
+    global toolTipDelayIntervalId
+    toolTipDelayIntervalId = None
+    base(self, type, *args)
+
+def _onCreateComplexTooltip_callback(base, self, tooltipId, stateType):
+    # log('_onCreateComplexTooltip_callback')
+    global toolTipDelayIntervalId
+    toolTipDelayIntervalId = None
+    base(self, tooltipId, stateType)
+
+def _ToolTip_xvm_hide(self):
+    # log('_ToolTip_xvm_hide')
+    global toolTipDelayIntervalId
+    if toolTipDelayIntervalId is not None:
+        BigWorld.cancelCallback(toolTipDelayIntervalId)
+        toolTipDelayIntervalId = None
+
+
+#############################
+# carousel events
+
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 def VehicleParamsField_getValue(base, self):
+    # log('VehicleParamsField_getValue')
     try:
         global carousel_tooltips_cache
         vehicle = self._tooltip.item
@@ -315,6 +370,7 @@ def VehicleParamsField_getValue(base, self):
         err(traceback.format_exc())
         return base(self)
 
+
 # in battle, add tooltip for HE shells - explosion radius
 def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
     result = base(self, descriptor, piercingPower)
@@ -326,14 +382,6 @@ def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
         err(traceback.format_exc())
     return result
 
-# suppress carousel tooltips
-def ToolTip_onCreateTypedTooltip(base, self, type, *args):
-    try:
-        if type == 'carouselVehicle' and config.get('hangar/carousel/suppressCarouselTooltips'):
-            return
-    except Exception as ex:
-        err(traceback.format_exc())
-    base(self, type, *args)
 
 # show compatible vehicles for shells info window in warehouse and shop
 def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
@@ -347,14 +395,17 @@ def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
         err(traceback.format_exc())
     base(self, moduleInfo)
 
+
 #####################################################################
 # Utility functions
 
 def h1_pad(text):
     return '<h1>%s</h1>' % text
 
+
 def gold_pad(text):
     return "<font color='#FFC363'>%s</font>" % text
+
 
 def smart_round(value):
     if value == 0:
@@ -388,6 +439,7 @@ def relate_shells_vehicles():
         err(traceback.format_exc())
         shells_vehicles_compatibility = {}
 
+
 def ItemsRequester_invalidateItems_event(self, itemTypeID, uniqueIDs):
     global carousel_tooltips_cache
     try:
@@ -399,9 +451,11 @@ def ItemsRequester_invalidateItems_event(self, itemTypeID, uniqueIDs):
         err(traceback.format_exc())
         carousel_tooltips_cache = {}
 
+
 def tooltips_clear_cache(*args, **kwargs):
     global carousel_tooltips_cache
     carousel_tooltips_cache = {}
+
 
 #####################################################################
 # Register events
@@ -411,12 +465,15 @@ def _RegisterEvents():
     import game
     RegisterEvent(game, 'fini', fini)
 
+    from gui.Scaleform.framework.ToolTip import ToolTip
+    OverrideMethod(ToolTip, 'onCreateTypedTooltip', ToolTip_onCreateTypedTooltip)
+    OverrideMethod(ToolTip, 'onCreateComplexTooltip', ToolTip_onCreateComplexTooltip)
+    ToolTip.xvm_hide = _ToolTip_xvm_hide
+
     from gui.shared.tooltips.vehicle import VehicleParamsField
     OverrideMethod(VehicleParamsField, '_getValue', VehicleParamsField_getValue)
     from gui.Scaleform.daapi.view.battle.ConsumablesPanel import ConsumablesPanel
     OverrideMethod(ConsumablesPanel, '_ConsumablesPanel__makeShellTooltip', ConsumablesPanel__makeShellTooltip)
-    from gui.Scaleform.framework.ToolTip import ToolTip
-    OverrideMethod(ToolTip, 'onCreateTypedTooltip', ToolTip_onCreateTypedTooltip)
     from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
     OverrideMethod(ModuleInfoMeta, 'as_setModuleInfoS', ModuleInfoMeta_as_setModuleInfoS)
     from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
