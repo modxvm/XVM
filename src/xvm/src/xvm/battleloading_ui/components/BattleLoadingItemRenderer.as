@@ -203,9 +203,10 @@ package xvm.battleloading_ui.components
                 if (team == XfwConst.TEAM_ENEMY)
                 {
                     proxy.iconLoader.scaleX = -Math.abs(proxy.iconLoader.scaleX);
-                    proxy.iconLoader.x -= 80 - 5 - xRightVehIcon;
+                    proxy.iconLoader.x = 3 - xRightVehIcon;
                     //Logger.add(proxy.iconLoader.width + "x" + proxy.iconLoader.height);
-                } else
+                } 
+                else
                 {
                     proxy.iconLoader.x -= xLeftVehIcon;
                 }
