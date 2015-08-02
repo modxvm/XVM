@@ -9,5 +9,6 @@ package com.xvm.types.cfg
         public var enabled:Boolean;
         public var alpha:Number;
         public var rotation:Number;
+        public var shiftY:Number;
     }
 }

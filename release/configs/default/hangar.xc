@@ -235,7 +235,10 @@
       "alpha": 100,
       // Rotation in degrees [0..360].
       // Угол поворота в градусах [0..360].
-      "rotation": 0
+      "rotation": 0,
+      // Shift Y position
+      // Сдвиг по оси Y
+      "shiftY": 0
     },
     // Parameters for tank carousel
     // Параметры карусели танков
