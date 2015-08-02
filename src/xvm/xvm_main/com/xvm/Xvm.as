@@ -7,8 +7,9 @@ package com.xvm
     XvmLinks;
 
     import com.xfw.*;
+    import com.xvm.utils.*;
     import com.xvm.types.*;
-    import com.xvm.types.cfg.CConfig;
+    import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.events.*;
 
@@ -47,7 +48,7 @@ package com.xvm
 
         private function onL10n(value:String):String
         {
-            return Locale.get(value);
+            return Utils.fixImgTag(Locale.get(value));
         }
 
         private function onSetConfig(config_str:String, lang_str:String, vehInfo_str:String):Object
