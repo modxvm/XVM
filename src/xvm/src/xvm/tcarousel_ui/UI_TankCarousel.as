@@ -638,6 +638,11 @@ package xvm.tcarousel_ui
                         offsetX += 3;
                         offsetY += 3;
                     }
+                    else if (visibleFilters[i] == vehicleFilters.falloutCheckBox)
+                    {
+                        offsetX += 1;
+                        offsetY += 3;
+                    }
 
                     var col:int = Math.floor(i / maxRows);
                     var row:int = i % maxRows;
@@ -649,7 +654,8 @@ package xvm.tcarousel_ui
                     {
                         vehicleFilters.falloutIcon.x = vehicleFilters.falloutCheckBox.x;
                         vehicleFilters.falloutIcon.y = vehicleFilters.falloutCheckBox.y;
-                        vehicleFilters.falloutCheckBox.x = vehicleFilters.falloutIcon.x + vehicleFilters.falloutIcon.width + 5;
+                        vehicleFilters.falloutCheckBox.x = vehicleFilters.falloutIcon.x + vehicleFilters.falloutIcon.width + 6;
+                        vehicleFilters.falloutCheckBox.y = vehicleFilters.falloutIcon.y + 1;
                     }
 
                     w = (col + 1) * 60 - 4;
