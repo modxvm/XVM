@@ -92,6 +92,14 @@ def _XvmEditContactData(self):
     #log('_XvmEditContactData')
     as_xfw_cmd(COMMANDS.AS_EDIT_CONTACT_DATA, self.userName, self.databaseID)
 
+def ContactTooltipData_getDisplayableData(base, self, dbID, defaultName):
+    result = base(self, dbID, defaultName)
+    if contacts.isAvailable():
+        if result['xvm_contact_data']['nick']:
+            result['userProps']['userName'] = result['xvm_contact_data']['nick']
+        if result['xvm_contact_data']['comment']:
+            result['note'] = result['xvm_contact_data']['comment']
+    return result
 
 #####################################################################
 # Register events
@@ -110,5 +118,8 @@ def _RegisterEvents():
     OverrideMethod(PlayerContactsCMHandler, '_getHandlers', PlayerContactsCMHandler_getHandlers)
     OverrideMethod(PlayerContactsCMHandler, '_generateOptions', PlayerContactsCMHandler_generateOptions)
     PlayerContactsCMHandler._XvmEditContactData = _XvmEditContactData
+    
+    from gui.shared.tooltips.common import ContactTooltipData
+    OverrideMethod(ContactTooltipData, 'getDisplayableData', ContactTooltipData_getDisplayableData)
 
 BigWorld.callback(0, _RegisterEvents)

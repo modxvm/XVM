@@ -74,6 +74,7 @@ package xvm.contacts_ui
             }
         }
 
+/* using original tooltip form
         override protected function showTooltip():void
         {
             var currentContentItem:UIComponent = this.getCurrentContentItem();
@@ -94,6 +95,7 @@ package xvm.contacts_ui
             }
             super.showTooltip();
         }
+*/
 
         // PRIVATE
 
