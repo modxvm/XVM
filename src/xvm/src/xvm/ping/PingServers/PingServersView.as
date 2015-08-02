@@ -22,6 +22,7 @@ package xvm.ping.PingServers
         private static const QUALITY_GOOD:String = "good";
         private static const QUALITY_GREAT:String = "great";
         private static const CURRENT_SERVER:String = "current";
+        private static const SERVER_COLOR:String = "server"; // actually it's server + delimiter
         private static const STYLE_NAME_PREFIX:String = "xvm_ping_";
         private static const COMMAND_GETCURRENTSERVER:String = "xvm_ping.getcurrentserver";
         private static const COMMAND_AS_CURRENTSERVER:String = "xvm_ping.as.currentserver";
@@ -29,12 +30,14 @@ package xvm.ping.PingServers
         private var cfg:CPingServers;
         private var fields:Vector.<TextField>;
         private var currentServer:String;
+        private var serverColor:Number;
 
         public function PingServersView(cfg:CPingServers)
         {
             mouseEnabled = false;
             this.cfg = cfg;
             this.currentServer = currentServer;
+            this.serverColor = parseInt(cfg.fontStyle.serverColor, 16);
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );
@@ -150,6 +153,8 @@ package xvm.ping.PingServers
                 raw = Locale.get("Ping") + cfg.delimiter + " ";
                 while (raw.length < cfg.minimalLength)
                     raw += " "; // right pad the row
+                if (!isNaN(serverColor))
+                    raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + raw + "</span>";
             }
             else
             {
@@ -158,7 +163,10 @@ package xvm.ping.PingServers
                 {
                     while (cluster.length + cfg.delimiter.length + raw.length < cfg.minimalLength)
                         raw = " " + raw; // left pad the value
-                    raw = cluster + cfg.delimiter + raw;
+                    if (!isNaN(serverColor) && time != "...")
+                        raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + cluster + cfg.delimiter + "</span>" + raw;
+                    else
+                        raw = cluster + cfg.delimiter + raw;
                 }
                 else
                     while (raw.length < cfg.minimalLength)
@@ -263,6 +271,8 @@ package xvm.ping.PingServers
             css += createQualityCss(PingServersView.QUALITY_POOR);
             css += createQualityCss(PingServersView.QUALITY_BAD);
             css += createCurrentServerCss()
+            if (!isNaN(serverColor))
+                css += createServerColorCss();
 
             return css;
         }
@@ -289,6 +299,11 @@ package xvm.ping.PingServers
                 css_string += "text-decoration: underline;"
             css_string += "}";
             return css_string;
+        }
+
+        private function createServerColorCss():String
+        {
+            return "." + STYLE_NAME_PREFIX + SERVER_COLOR + " {color:" + XfwUtils.toHtmlColor(serverColor) + "};"
         }
     }
 }

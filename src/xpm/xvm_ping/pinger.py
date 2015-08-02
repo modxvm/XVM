@@ -80,13 +80,15 @@ class _Ping(object):
 
     def _pingAsync(self):
         try:
+            res = dict()
+            for host in self.hosts:
+                res[host['name']] = '--'
             if os.path.exists(LINUX_PING_PATH_IN_WINE):
                 (pattern, processes) = self._pingAsyncLinux()
             else:
                 (pattern, processes) = self._pingAsyncWindows()
 
             # Parse ping output
-            res = dict()
             best_ping = 999
             for x in self.hosts:
                 proc = processes[x['name']]
@@ -94,7 +96,6 @@ class _Ping(object):
                 out, er = proc.communicate()
                 errCode = proc.wait()
                 if errCode != 0:
-                    res[x['name']] = 'Error'
                     continue
 
                 found = re.search(pattern, out)
@@ -109,13 +110,10 @@ class _Ping(object):
             if (g_hangarSpace.inited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/pingServers/showTitle')):
                 res['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
 
-            with self.lock:
-                self.resp = res
-
         except Exception, ex:
             err('_pingAsync() exception: ' + traceback.format_exc())
-            with self.lock:
-                self.resp = {"Error": ex}
+        with self.lock:
+            self.resp = res
 
     def _pingAsyncWindows(self):
         args = 'ping -n 1 -w 1000 '

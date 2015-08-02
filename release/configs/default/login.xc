@@ -56,8 +56,8 @@
       // true - show server names in list
       // true - показывать названия серверов в списке
       "showServerName": true,
-      // expand each field to this amount of symbols (for example: "US East:     12345")
-      // расширить каждую ячейку до данного количества символов (к примеру: "RU1:     12345")
+      // expand each field to this amount of symbols (field example: "US East:     12345")
+      // расширить каждую ячейку до данного количества символов (пример ячейки: "RU1:     12345")
       "minimalLength": 0,
       // Text style
       // Стиль текста
@@ -75,7 +75,10 @@
           "good": "0xE5E4E1",  // Хороший
           "poor": "0x96948F",  // Так себе
           "bad": "0xD64D4D"    // Плохой
-        }
+        },
+        // Color for server name and delimiter (for example, "0x8080FF"). Empty string "" - use same color as online value
+        // Цвет для названия сервера и разделителя (например, "0x8080FF"). Пустая строка "" - использовать цвет значения онлайна
+        "serverColor": ""
       },
       // Threshold values defining response quality
       // Пороговые значения, определяющие качество отклика
@@ -138,8 +141,8 @@
       // true - show server names in list
       // true - показывать названия серверов в списке
       "showServerName": true,
-      // expand each field to this amount of symbols (for example: "US East:     12345")
-      // расширить каждую ячейку до данного количества символов (к примеру: "RU1:     12345")
+      // expand each field to this amount of symbols (field example: "US East:     12345")
+      // расширить каждую ячейку до данного количества символов (пример ячейки: "RU1:     12345")
       "minimalLength": 0,
       // Text style
       // Стиль текста
@@ -157,7 +160,10 @@
           "good": "0xF8F400",  // Хороший
           "poor": "0xFE7903",  // Так себе
           "bad": "0xFE0E00"    // Плохой
-        }
+        },
+        // Color for server name and delimiter (for example, "0x8080FF"). Empty string "" - use same color as online value
+        // Цвет для названия сервера и разделителя (например, "0x8080FF"). Пустая строка "" - использовать цвет значения онлайна
+        "serverColor": ""
       },
       // Threshold values defining server online and thus shorter battle queue
       // Пороговые значения, определяющие количество человек онлайн и следовательно меньшую очередь в бой

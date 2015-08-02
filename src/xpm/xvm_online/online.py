@@ -36,7 +36,10 @@ class _Get_online(object):
         loginSection = ResMgr.openSection('scripts_config.xml')['login']
         if loginSection is not None:
             for (name, subSec) in loginSection.items():
-                self.hosts.append(subSec.readStrings('name')[0])
+                host_name = subSec.readStrings('name')[0]
+                if host_name.find('WOT ') == 0:
+                    host_name = host_name[4:]
+                self.hosts.append(host_name)
 
 
     def get_online(self):
@@ -71,6 +74,9 @@ class _Get_online(object):
     # Threaded
     def _getOnlineAsync(self):
         try:
+            res = {}
+            for host in self.hosts:
+                res[host] = '--'
             req = "onlineUsersCount/0"
             server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
             (response, delay, error) = loadUrl(server, req, showLog=False)
@@ -86,26 +92,20 @@ class _Get_online(object):
             if 'CT' in URLS.WG_API_SERVERS: # CT is uncommented in xfw.constants to check on test server
                 region = 'ru'
             response_data = None if response is None else simplejson.loads(response).get(region, [])
-            res = {}
+
             best_online = 0
-            if error or type(response_data) is not list:
-                for host in self.hosts:
-                    res[host] = 'Error'
-            else:
+            if not error and type(response_data) is list:
                 for host in response_data:
-                    if host['server'].find('NA ') == 0: # API return "NA EAST" instead of "US East" => can't determine current server
+                    if host['server'].find('NA ') == 0: # API returns "NA EAST" instead of "US East" => can't determine current server
                         host['server'] = 'US ' + host['server'][3:].capitalize()
                     res[str(host['server'])] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
-                from gui.shared.utils.HangarSpace import g_hangarSpace
-                if (g_hangarSpace.inited and config.get('hangar/onlineServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/onlineServers/showTitle')):
-                    res['###best_online###'] = str(best_online)  # will be first in sorting, key is replaced by localized "Online"
-            with self.lock:
-                self.resp = res
-
+            from gui.shared.utils.HangarSpace import g_hangarSpace
+            if (g_hangarSpace.inited and config.get('hangar/onlineServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/onlineServers/showTitle')):
+                res['###best_online###'] = str(best_online)  # will be first in sorting, key is replaced by localized "Online"
         except Exception, ex:
             err('_getOnlineAsync() exception: ' + traceback.format_exc())
-            with self.lock:
-                self.resp = {"Error": ex}
+        with self.lock:
+            self.resp = res
 
 _get_online = _Get_online()

@@ -36,6 +36,7 @@ from gun_rotation_shared import calcPitchLimitsFromDesc
 # globals
 shells_vehicles_compatibility = {}
 carousel_tooltips_cache = {}
+toolTipDelayIntervalId = None
 
 #####################################################################
 # initialization/finalization
@@ -69,16 +70,13 @@ def ToolTip_onCreateTypedTooltip(base, self, type, *args):
 
     _createTooltip(self, lambda:_onCreateTypedTooltip_callback(base, self, type, *args))
 
-
-
-TOOLTIP_DELAY_INTERVAL = 0.75
-toolTipDelayIntervalId = None
-
+# adds delay for tooltip appearance
 def _createTooltip(self, func):
     try:
-        global TOOLTIP_DELAY_INTERVAL, toolTipDelayIntervalId
+        global toolTipDelayIntervalId
         self.xvm_hide()
-        toolTipDelayIntervalId = BigWorld.callback(TOOLTIP_DELAY_INTERVAL, func)
+        tooltipDelay = config.get('tooltips/tooltipsDelay', 0.4)
+        toolTipDelayIntervalId = BigWorld.callback(tooltipDelay, func)
     except Exception as ex:
         err(traceback.format_exc())
 

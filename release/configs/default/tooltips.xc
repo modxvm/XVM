@@ -10,6 +10,9 @@
     // true - Hide text at bottom of tooltip showing quantity of used eqipment, optional devices and crew.
     // true - Спрятать текст внизу подсказки показывающий количество используемого оборудования, доп. модулей и экипаж.
     "hideBottomText": true,
+    // delay in tooltips appearance: increase in case of freezes, default is 0.4 sec
+    // задержка отображения подсказок: увеличьте в случае фризов, по-умолчанию 0.4 сек
+    "tooltipsDelay": 0.4,
 
     "lightTank":    [
                     "maxHealth",
