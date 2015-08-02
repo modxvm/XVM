@@ -22,6 +22,7 @@ package xvm.online.OnlineServers
         private static const QUALITY_GOOD:String = "good";
         private static const QUALITY_GREAT:String = "great";
         private static const CURRENT_SERVER:String = "current";
+        private static const SERVER_COLOR:String = "server"; // actually it's server + delimiter
         private static const STYLE_NAME_PREFIX:String = "xvm_online_";
         private static const COMMAND_GETCURRENTSERVER:String = "xvm_online.getcurrentserver";
         private static const COMMAND_AS_CURRENTSERVER:String = "xvm_online.as.currentserver";
@@ -29,12 +30,14 @@ package xvm.online.OnlineServers
         private var cfg:COnlineServers;
         private var fields:Vector.<TextField>;
         private var currentServer:String;
+        private var serverColor:Number;
 
         public function OnlineServersView(cfg:COnlineServers)
         {
             mouseEnabled = false;
             this.cfg = cfg;
             this.currentServer = currentServer;
+            this.serverColor = parseInt(cfg.fontStyle.serverColor, 16);
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), people_online: "..." } );
@@ -150,18 +153,23 @@ package xvm.online.OnlineServers
                 raw = Locale.get("Online") + cfg.delimiter + " ";
                 while (raw.length < cfg.minimalLength)
                     raw += " "; // right pad the row
+                if (!isNaN(serverColor))
+                    raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + raw + "</span>";
             }
             else
             {
-                if (people_online != "...")
-                    raw = String(Math.round(parseInt(people_online) / 1000)) + "k";
+                if (isNaN(parseInt(people_online))) // not number
+                    raw = people_online;
                 else
-                    raw = people_online
+                    raw = String(Math.round(parseInt(people_online) / 1000)) + "k";
                 if (cfg.showServerName || people_online == "...")
                 {
                     while (cluster.length + cfg.delimiter.length + raw.length < cfg.minimalLength)
                         raw = " " + raw; // left pad the value
-                    raw = cluster + cfg.delimiter + raw;
+                    if (!isNaN(serverColor) && people_online != "...")
+                        raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + cluster + cfg.delimiter + "</span>" + raw;
+                    else
+                        raw = cluster + cfg.delimiter + raw;
                 }
                 else
                     while (raw.length < cfg.minimalLength)
@@ -262,10 +270,12 @@ package xvm.online.OnlineServers
         {
             var css:String = "";
             css += createQualityCss(OnlineServersView.QUALITY_GREAT);
-            css += createQualityCss(OnlineServersView.QUALITY_GOOD)
+            css += createQualityCss(OnlineServersView.QUALITY_GOOD);
             css += createQualityCss(OnlineServersView.QUALITY_POOR);
             css += createQualityCss(OnlineServersView.QUALITY_BAD);
-            css += createCurrentServerCss()
+            css += createCurrentServerCss();
+            if (!isNaN(serverColor))
+                css += createServerColorCss();
 
             return css;
         }
@@ -280,7 +290,7 @@ package xvm.online.OnlineServers
 
             return WGUtils.createCSS(OnlineServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
         }
-        
+
         private function createCurrentServerCss():String
         {
             var css_string:String = "." + STYLE_NAME_PREFIX + CURRENT_SERVER + " {";
@@ -292,6 +302,11 @@ package xvm.online.OnlineServers
                 css_string += "text-decoration: underline;"
             css_string += "}";
             return css_string;
+        }
+
+        private function createServerColorCss():String
+        {
+            return "." + STYLE_NAME_PREFIX + SERVER_COLOR + " {color:" + XfwUtils.toHtmlColor(serverColor) + "};"
         }
     }
 }
