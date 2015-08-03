@@ -95,8 +95,8 @@ def _XvmEditContactData(self):
 def ContactTooltipData_getDisplayableData(base, self, dbID, defaultName):
     result = base(self, dbID, defaultName)
     if contacts.isAvailable():
-        if result['xvm_contact_data']['nick']:
-            result['userProps']['userName'] = result['xvm_contact_data']['nick']
+        #if result['xvm_contact_data']['nick']: # commented for use original nick in tooltip
+        #    result['userProps']['userName'] = result['xvm_contact_data']['nick']
         if result['xvm_contact_data']['comment']:
             result['note'] = result['xvm_contact_data']['comment']
     return result
