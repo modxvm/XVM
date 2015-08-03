@@ -16,7 +16,7 @@ package xvm.squad
 
         private static const _views:Object =
         {
-            //TODO"prb_windows/squadWindow": SquadXvmView
+            "prb_windows/squadWindow": SquadXvmView
         }
 
         /* TODO
