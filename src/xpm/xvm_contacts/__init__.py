@@ -30,13 +30,12 @@ class VIEW(object):
 #####################################################################
 # includes
 
-import traceback
-
 import BigWorld
 
 from xfw import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
+from xvm_main.python.utils import fixImgTag
 
 import contacts
 
@@ -98,7 +97,7 @@ def ContactTooltipData_getDisplayableData(base, self, dbID, defaultName):
         #if result['xvm_contact_data']['nick']: # commented for use original nick in tooltip
         #    result['userProps']['userName'] = result['xvm_contact_data']['nick']
         if result['xvm_contact_data']['comment']:
-            result['note'] = result['xvm_contact_data']['comment']
+            result['note'] = "<font color='#%s'>%s</font>"  % (XFWCOLORS.UICOLOR_LABEL, fixImgTag(result['xvm_contact_data']['comment']))
     return result
 
 #####################################################################

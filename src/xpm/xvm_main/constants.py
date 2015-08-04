@@ -23,6 +23,10 @@ class XVM(object):
     LOCALE_AUTO_DETECTION = 'auto'
     REGION_AUTO_DETECTION = 'auto'
 
+class XVM_PATH(object):
+    XVM_IMG_RES_ROOT = "../mods/shared_resources/xvm/"
+    XVM_IMG_CFG_ROOT = "../configs/xvm/"
+
 class XVM_EVENT(object):
     CONFIG_LOADED = 'xvm.config_loaded'
     RELOAD_CONFIG = 'xvm.reload_config'
