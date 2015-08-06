@@ -86,9 +86,12 @@
       // true - show server names in list
       // true - показывать названия серверов в списке
       "showServerName": true,
-      // expand each field to this amount of symbols (field example: "US East:     12345")
-      // расширить каждую ячейку до данного количества символов (пример ячейки: "RU1:     12345")
+      // expand values to this amount of symbols. recommended to use monospace font if this option is set.
+      // расширить значения до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
       "minimalLength": 0,
+      // text to show in case of error
+      // текст показываемый в случае ошибки
+      "errorString": "--",
       // Text style
       // Стиль текста
       "fontStyle": {
@@ -177,9 +180,12 @@
       // true - show server names in list
       // true - показывать названия серверов в списке
       "showServerName": true,
-      // expand each field to this amount of symbols (field example: "US East:     12345")
-      // расширить каждую ячейку до данного количества символов (пример ячейки: "RU1:     12345")
+      // expand values to this amount of symbols. recommended to use monospace font if this option is set.
+      // расширить значения до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
       "minimalLength": 0,
+      // text to show in case of error
+      // текст показываемый в случае ошибки
+      "errorString": "--k",
       // Text style
       // Стиль текста
       "fontStyle": {

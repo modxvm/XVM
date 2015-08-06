@@ -74,9 +74,10 @@ class _Get_online(object):
     # Threaded
     def _getOnlineAsync(self):
         try:
+            from gui.shared.utils.HangarSpace import g_hangarSpace
             res = {}
             for host in self.hosts:
-                res[host] = '--'
+                res[host] = config.get('hangar/onlineServers/errorString', '--k') if g_hangarSpace.inited else config.get('login/onlineServers/errorString', '--k')
             req = "onlineUsersCount/0"
             server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
             (response, delay, error) = loadUrl(server, req, showLog=False)
@@ -100,7 +101,6 @@ class _Get_online(object):
                         host['server'] = 'US ' + host['server'][3:].capitalize()
                     res[str(host['server'])] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
-            from gui.shared.utils.HangarSpace import g_hangarSpace
             if (g_hangarSpace.inited and config.get('hangar/onlineServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/onlineServers/showTitle')):
                 res['###best_online###'] = str(best_online)  # will be first in sorting, key is replaced by localized "Online"
         except Exception, ex:

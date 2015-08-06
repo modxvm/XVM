@@ -147,36 +147,29 @@ package xvm.online.OnlineServers
         {
             var cluster:String = onlineObj.cluster;
             var people_online:String = onlineObj.people_online;
-            var raw:String; 
-            if (cluster == "###best_online###") //will be first in sorting
-            {
-                raw = Locale.get("Online") + cfg.delimiter + " ";
-                while (raw.length < cfg.minimalLength)
-                    raw += " "; // right pad the row
-                if (!isNaN(serverColor))
-                    raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + raw + "</span>";
-            }
+            var raw:String = "";
+            //deal with title and values
+            if (cluster == "###best_online###")
+                cluster = Locale.get("Online")
             else
             {
-                if (isNaN(parseInt(people_online))) // not number
+                if (isNaN(parseInt(people_online))) //not number
                     raw = people_online;
                 else
                     raw = String(Math.round(parseInt(people_online) / 1000)) + "k";
-                if (cfg.showServerName || people_online == "...")
-                {
-                    while (cluster.length + cfg.delimiter.length + raw.length < cfg.minimalLength)
-                        raw = " " + raw; // left pad the value
-                    if (!isNaN(serverColor) && people_online != "...")
-                        raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + cluster + cfg.delimiter + "</span>" + raw;
-                    else
-                        raw = cluster + cfg.delimiter + raw;
-                }
-                else
-                    while (raw.length < cfg.minimalLength)
-                        raw = " " + raw; // left pad the row
-                if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
-                    raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
+                if (people_online != "...")
+                    while (raw.length < cfg.minimalLength) //left pad the value for minimal length
+                        raw = " " + raw;
             }
+            //put everything together: server + delimiter + padded value
+            if (cfg.showServerName || people_online == "...")
+                if (!isNaN(serverColor) && people_online != "...")
+                    raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + cluster + cfg.delimiter + "</span>" + raw;
+                else
+                    raw = cluster + cfg.delimiter + raw;
+            //mark current server
+            if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
+                raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(people_online) + "'>" + raw + "</span></textformat>";
         }
 

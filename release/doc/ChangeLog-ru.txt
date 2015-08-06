@@ -1,12 +1,13 @@
 ﻿XVM-6.1.3.1:
   * исправление ошибок и оптимизация
-  * xvm_online: показывать "--" вместо "Error"
+  * xvm_online и xvm_ping : minimalLength теперь расширяет длину значения
   * xvm_squad: показывает мин. и макс. уровни боев взвода
   * xvm_contacts: всплывающие подсказки используют оригинальную форму
   * новые опции:
       "tooltips"/"tooltipsDelay" - задержка отображения подсказок
       в hangar и login, для pingServers и onlineServers добавлены:
            "serverColor" - цвет для названия сервера и разделителя
+           "errorString" - текст показываемый в случае ошибки
       "hangar"/"serverInfo"/"shiftY" - cдвиг по оси Y для информации о сервере
 
 XVM-6.1.3:

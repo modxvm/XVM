@@ -80,9 +80,10 @@ class _Ping(object):
 
     def _pingAsync(self):
         try:
+            from gui.shared.utils.HangarSpace import g_hangarSpace
             res = dict()
             for host in self.hosts:
-                res[host['name']] = '--'
+                res[host['name']] = config.get('hangar/pingServers/errorString', '--') if g_hangarSpace.inited else config.get('login/pingServers/errorString', '--')
             if os.path.exists(LINUX_PING_PATH_IN_WINE):
                 (pattern, processes) = self._pingAsyncLinux()
             else:
@@ -106,7 +107,6 @@ class _Ping(object):
 
                 res[x['name']] = found.group(1)
                 best_ping = min(best_ping, int(found.group(1)))
-            from gui.shared.utils.HangarSpace import g_hangarSpace
             if (g_hangarSpace.inited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/pingServers/showTitle')):
                 res['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
 
