@@ -13,6 +13,7 @@
     "Remove": "Remove",
     "Yes": "Yes",
     "No": "No",
+    "Not available short": "n/a",
 
     // Ping & Online
     "Initialization": "Initialization",

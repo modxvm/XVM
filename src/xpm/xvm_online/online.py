@@ -19,6 +19,7 @@ from xfw.constants import URLS
 from xvm_main.python.logger import *
 from xvm_main.python.constants import XVM
 from xvm_main.python.loadurl import loadUrl
+from xvm_main.python.xvm import l10n_macros_replace
 import xvm_main.python.config as config
 
 #############################
@@ -77,7 +78,7 @@ class _Get_online(object):
             from gui.shared.utils.HangarSpace import g_hangarSpace
             res = {}
             for host in self.hosts:
-                res[host] = config.get('hangar/onlineServers/errorString', '--k') if g_hangarSpace.inited else config.get('login/onlineServers/errorString', '--k')
+                res[host] = l10n_macros_replace(config.get('hangar/onlineServers/errorString', '--k') if g_hangarSpace.inited else config.get('login/onlineServers/errorString', '--k'))
             req = "onlineUsersCount/0"
             server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
             (response, delay, error) = loadUrl(server, req, showLog=False)

@@ -25,6 +25,7 @@ import ResMgr
 from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
+from xvm_main.python.xvm import l10n_macros_replace
 
 #############################
 
@@ -83,7 +84,7 @@ class _Ping(object):
             from gui.shared.utils.HangarSpace import g_hangarSpace
             res = dict()
             for host in self.hosts:
-                res[host['name']] = config.get('hangar/pingServers/errorString', '--') if g_hangarSpace.inited else config.get('login/pingServers/errorString', '--')
+                res[host['name']] = l10n_macros_replace(config.get('hangar/pingServers/errorString', '--') if g_hangarSpace.inited else config.get('login/pingServers/errorString', '--'))
             if os.path.exists(LINUX_PING_PATH_IN_WINE):
                 (pattern, processes) = self._pingAsyncLinux()
             else:

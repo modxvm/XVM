@@ -12,7 +12,6 @@ import BigWorld
 
 import config
 from logger import *
-from xvm_main.python.constants import XVM_PATH
 
 def touch(fname, times=None):
     with open(fname, 'a'):
@@ -118,7 +117,3 @@ def fixPath(path):
             path += '/'
     return path
 
-# Fix <img src='xvm://...'> to <img src='img://XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
-# Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
-def fixImgTag(path):
-    return path.replace('xvm://', 'img://' + XVM_PATH.XVM_IMG_RES_ROOT).replace('cfg://', 'img://' + XVM_PATH.XVM_IMG_CFG_ROOT)

@@ -29,7 +29,7 @@ from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.vehinfo_camo import getCamoValues
-from xvm_main.python.xvm import l10n
+from xvm_main.python.xvm import l10n, l10n_macros_replace
 from gun_rotation_shared import calcPitchLimitsFromDesc
 
 #####################################################################
@@ -296,12 +296,7 @@ def VehicleParamsField_getValue(base, self):
                 #custom text
                 if paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
-                    localizedMacroStart = customtext.find('{{l10n:')
-                    if localizedMacroStart >= 0: # localization macro found
-                        localizedMacroEnd = customtext.index('}}', localizedMacroStart)
-                        localizedMacroText = customtext[localizedMacroStart + 7:localizedMacroEnd]
-                        customtext = customtext[:localizedMacroStart] + l10n(localizedMacroText) + customtext[localizedMacroEnd + 2:]
-                    result[-1].append([h1_pad(customtext), ''])
+                    result[-1].append([h1_pad(l10n_macros_replace(customtext)), ''])
                     continue
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:
                     result[-1].append(self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams))

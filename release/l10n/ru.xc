@@ -13,6 +13,7 @@
     "Remove": "Удалить",
     "Yes": "Да",
     "No": "Нет",
+    "Not available short": "н/д",
 
     // Ping & Online
     "Initialization": "Инициализация",
