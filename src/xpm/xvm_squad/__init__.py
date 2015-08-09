@@ -71,13 +71,11 @@ def squad_update_tiers(self, *args, **kwargs):
         from gui.shared import g_itemsCache
         min_tier = 0
         max_tier = 0
-        for player in self.unitFunctional.getPlayers().values():
-            if player.isReady:
-                veh_id = player.unit.getVehicles().values()[0]['vehTypeCompDescr']
-                veh = g_itemsCache.items.getItemByCD(veh_id)
-                (veh_tier_low, veh_tier_high) = getTiers(veh.level, veh.type, veh.name)
-                min_tier = max(veh_tier_low, min_tier)
-                max_tier = max(veh_tier_high, max_tier)
+        for squad_vehicle in self.unitFunctional.getUnit()[1].getVehicles().values():
+            veh = g_itemsCache.items.getItemByCD(squad_vehicle['vehTypeCompDescr'])
+            (veh_tier_low, veh_tier_high) = getTiers(veh.level, veh.type, veh.name)
+            min_tier = max(veh_tier_low, min_tier)
+            max_tier = max(veh_tier_high, max_tier)
     
         text_tiers = ''
         if min_tier > 0:
