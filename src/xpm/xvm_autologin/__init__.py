@@ -22,10 +22,10 @@ import xvm_main.python.config as config
 
 firsttime = True
 
-def helpers_isShowStartupVideo(base):
+def IntroPage_showMovie(base, self, movie):
     if config.get('login/skipIntro'):
-        return False
-    return base()
+        self.stopVideo()
+    return base(self, movie)
 
 
 def LoginView_onSetOptions(self, optionsList, host):
@@ -43,10 +43,10 @@ def LoginView_as_setVersionS(base, self, version):
 #####################################################################
 # Register events
 
-import helpers
-OverrideMethod(helpers, 'isShowStartupVideo', helpers_isShowStartupVideo)
-
 def _RegisterEvents():
+    from gui.Scaleform.daapi.view.IntroPage import IntroPage
+    OverrideMethod(IntroPage, '_IntroPage__showMovie', IntroPage_showMovie)
+    
     from gui.Scaleform.daapi.view.login import LoginView
     RegisterEvent(LoginView, 'onSetOptions', LoginView_onSetOptions)
     OverrideMethod(LoginView, 'as_setVersionS', LoginView_as_setVersionS)
