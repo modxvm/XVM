@@ -19,7 +19,7 @@
       //"nation":   { "enabled": false },
       //"type":     { "enabled": false },
       //"favorite": { "enabled": false },
-      //"fallout":  { "enabled": false },
+      //"gameMode": { "enabled": false },
       //"level":    { "enabled": false },
       //"prefs":    { "enabled": false },
       "__stub__": {}

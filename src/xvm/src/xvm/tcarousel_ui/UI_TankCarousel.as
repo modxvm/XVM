@@ -40,6 +40,8 @@ package xvm.tcarousel_ui
         private var prefFilter:PrefMultiSelectionDropDown;
         private var lvlFilter:TileList;
 
+        private var carousel_height:Number;
+
         public function UI_TankCarousel()
         {
             //Logger.add("UI_TankCarousel()");
@@ -70,9 +72,9 @@ package xvm.tcarousel_ui
 
             slotImageWidth = int(162 * cfg.zoom);
             slotImageHeight = int(102 * cfg.zoom);
-            var h:int = (slotImageHeight + padding.vertical) * cfg.rows - padding.vertical;
-            height = h + 10;
-            leftArrow.height = rightArrow.height = renderersMask.height = dragHitArea.height = h;
+
+            carousel_height = (slotImageHeight + padding.vertical) * cfg.rows - padding.vertical;
+            height = carousel_height + 10;
 
             componentInspectorSetting = false;
         }
@@ -112,9 +114,8 @@ package xvm.tcarousel_ui
                     vehicleFilters.tankFilter.selectedIndex = 0;
                 if (!cfg.filters.favorite.enabled)
                     vehicleFilters.checkBoxToMain.selected = false;
-                // TODO:0.9.10
-                /*if (!cfg.filters.fallout.enabled)
-                    vehicleFilters.falloutCheckBox.selected = true;*/
+                if (!cfg.filters.gameMode.enabled)
+                    vehicleFilters.checkBoxToGameMode.selected = true;
                 if (!cfg.filters.level.enabled)
                     levelFilter.selectedItems = [];
                 if (!cfg.filters.prefs.enabled)
@@ -213,17 +214,6 @@ package xvm.tcarousel_ui
             super.onItemRollOut();
         }
 
-        // TankCarousel
-        // TODO:0.9.10
-        /*private var _isFalloutEvent:Boolean = false;
-        override public function as_setIsEvent(param1:Boolean):void
-        {
-            _isFalloutEvent = param1;
-            super.as_setIsEvent(param1);
-            vehicleFilters.validateNow();
-            rearrangeFilters();
-        }*/
-
         // Carousel
         override protected function updateArrowsState():void
         {
@@ -273,6 +263,8 @@ package xvm.tcarousel_ui
             //Logger.add("UI_TankCarousel.updateUIPosition()");
             try
             {
+                leftArrow.height = rightArrow.height = renderersMask.height = dragHitArea.height = carousel_height;
+
                 if (isInvalid(InvalidationType.RENDERERS))
                 {
                     //Logger.add("RENDERERS");
@@ -470,12 +462,14 @@ package xvm.tcarousel_ui
 
         private function repositionRenderers():void
         {
+            if (!_renderers)
+                return;
             //Logger.add("UI_TankCarousel.repositionRenderers()");
             var renderer:IListItemRenderer = null;
             var selectedIndex:Number = 0;
             _currentShowRendersCount = 0;
             var n:int = 0;
-            for (var i:Number = 0; i < this._renderers.length; ++i)
+            for (var i:Number = 0; i < _renderers.length; ++i)
             {
                 renderer = _renderers[i];
                 if ((renderer as DisplayObject).visible == false)
@@ -613,9 +607,8 @@ package xvm.tcarousel_ui
                 levelFilter.visible = cfg.filters.level.enabled;
                 prefFilter.visible = cfg.filters.prefs.enabled;
                 vehicleFilters.checkBoxToMain.visible = cfg.filters.favorite.enabled;
-                // TODO:0.9.10
-                /*vehicleFilters.falloutCheckBox.visible = cfg.filters.fallout.enabled && _isFalloutEvent;
-                vehicleFilters.falloutIcon.visible = cfg.filters.fallout.enabled && _isFalloutEvent;*/
+                vehicleFilters.checkBoxToGameMode.visible = cfg.filters.gameMode.enabled;
+                vehicleFilters.gameModeIcon.visible = cfg.filters.gameMode.enabled;
 
                 if (cfg.filters.nation.enabled)
                     visibleFilters.push(vehicleFilters.nationFilter);
@@ -627,9 +620,8 @@ package xvm.tcarousel_ui
                     visibleFilters.push(prefFilter);
                 if (cfg.filters.favorite.enabled)
                     visibleFilters.push(vehicleFilters.checkBoxToMain);
-                // TODO:0.9.10
-                /*if (cfg.filters.fallout.enabled)
-                    visibleFilters.push(vehicleFilters.falloutCheckBox);*/
+                if (cfg.filters.gameMode.enabled)
+                    visibleFilters.push(vehicleFilters.checkBoxToGameMode);
 
                 var w:int = 0;
                 var maxRows:int = Math.floor((height - 4) / 34);
@@ -642,12 +634,11 @@ package xvm.tcarousel_ui
                         offsetX += 3;
                         offsetY += 3;
                     }
-                    // TODO:0.9.10
-                    /*else if (visibleFilters[i] == vehicleFilters.falloutCheckBox)
+                    else if (visibleFilters[i] == vehicleFilters.checkBoxToGameMode)
                     {
-                        offsetX += 1;
+                        offsetX += 2;
                         offsetY += 3;
-                    }*/
+                    }
 
                     var col:int = Math.floor(i / maxRows);
                     var row:int = i % maxRows;
@@ -655,14 +646,13 @@ package xvm.tcarousel_ui
                     visibleFilters[i].x = col * 60 + offsetX;
                     visibleFilters[i].y = row * 34 + 2 + offsetY;
 
-                    // TODO:0.9.10
-                    /*if (visibleFilters[i] == vehicleFilters.falloutCheckBox)
+                    if (visibleFilters[i] == vehicleFilters.checkBoxToGameMode)
                     {
-                        vehicleFilters.falloutIcon.x = vehicleFilters.falloutCheckBox.x;
-                        vehicleFilters.falloutIcon.y = vehicleFilters.falloutCheckBox.y;
-                        vehicleFilters.falloutCheckBox.x = vehicleFilters.falloutIcon.x + vehicleFilters.falloutIcon.width + 6;
-                        vehicleFilters.falloutCheckBox.y = vehicleFilters.falloutIcon.y + 1;
-                    }*/
+                        vehicleFilters.gameModeIcon.x = vehicleFilters.checkBoxToGameMode.x;
+                        vehicleFilters.gameModeIcon.y = vehicleFilters.checkBoxToGameMode.y;
+                        vehicleFilters.checkBoxToGameMode.x = vehicleFilters.gameModeIcon.x + vehicleFilters.gameModeIcon.width + 3;
+                        vehicleFilters.checkBoxToGameMode.y = vehicleFilters.gameModeIcon.y + 1;
+                    }
 
                     w = (col + 1) * 60 - 4;
                 }
