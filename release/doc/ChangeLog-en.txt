@@ -1,4 +1,7 @@
-﻿XVM-6.1.3.1:
+﻿XVM-6.1.4-dev:
+  * adaptation to WoT 0.9.10
+
+XVM-6.1.3.1:
   * bug fixes and optimization
   * xvm_online and xvm_ping: minimalLength now expands the value length
   * xvm_squad: showing min and max battle tier for squad
