@@ -7,19 +7,17 @@ package xvm.squad
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    //import com.xvm.types.veh.*;
     import net.wg.gui.components.windows.*;
-    import net.wg.gui.prebattle.squad.*;
+    import net.wg.gui.prebattle.squads.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    //import scaleform.clik.interfaces.*;
 
     public class SquadXvmView extends XvmViewBase
     {
         private static const XVM_SQUAD_UPDATE_TIERS:String = 'xvm_squad.as_update_tiers';
         private static const XVM_SQUAD_WINDOW_POPULATED:String = 'xvm_squad.window_populated';
         private static const XVM_SQUAD_WINDOW_DISPOSED:String = 'xvm_squad.window_disposed';
-        
+
         public function SquadXvmView(view:IView)
         {
             super(view);
@@ -37,7 +35,7 @@ package xvm.squad
             Xfw.addCommandListener(XVM_SQUAD_UPDATE_TIERS, updateTiers);
             Xfw.cmd(XVM_SQUAD_WINDOW_POPULATED)
         }
-        
+
         public override function onBeforeDispose(e:LifeCycleEvent):void
         {
             Xfw.removeCommandListener(XVM_SQUAD_UPDATE_TIERS, updateTiers);

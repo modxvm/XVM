@@ -148,7 +148,8 @@ package xvm.battleresults_ui
 
         private function hideQuestLabel():void
         {
-            detailsMc.progressTF.visible = false;
+            // TODO:0.9.10
+            //detailsMc.progressTF.visible = false;
         }
 
         private function initTextFields():void

@@ -49,7 +49,7 @@ package xvm.battleloading_ui.components
 
             _debug();
 
-            proxy.iconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
+            proxy.vehicleIconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
 
             // Remove squad icon.
             if (Config.config.battleLoading.removeSquadIcon && proxy.squad != null)
@@ -106,9 +106,9 @@ package xvm.battleloading_ui.components
                 data.clanAbbrev = Macros.Format(data.playerName, "{{clannb}}");
 
                 // Alternative icon set
-                if (proxy.iconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)
+                if (proxy.vehicleIconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)
                 {
-                    proxy.iconLoader.sourceAlt = Defines.WG_CONTOUR_ICON_PATH + vdata.sysname + ".png";
+                    proxy.vehicleIconLoader.sourceAlt = Defines.WG_CONTOUR_ICON_PATH + vdata.sysname + ".png";
                     data.vehicleIcon = data.vehicleIcon.replace(Defines.WG_CONTOUR_ICON_PATH,
                         Defines.XVMRES_ROOT + ((team == XfwConst.TEAM_ALLY)
                         ? Config.config.iconset.battleLoadingAlly
@@ -116,7 +116,7 @@ package xvm.battleloading_ui.components
                 }
                 else
                 {
-                    data.vehicleIcon = proxy.iconLoader.source;
+                    data.vehicleIcon = proxy.vehicleIconLoader.source;
                 }
             }
             catch (ex:Error)
@@ -146,7 +146,7 @@ package xvm.battleloading_ui.components
 
                 var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Config.config.battleLoading.darkenNotReadyIcon || proxy.enabled) && formatOptions.alive;
 
-                proxy.iconLoader.transform.colorTransform =
+                proxy.vehicleIconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
 
                 // Set Text Fields
@@ -180,19 +180,19 @@ package xvm.battleloading_ui.components
         {
             //Logger.add("onVehicleIconLoadComplete: " + fullPlayerName);
             // resize icons to avoid invalid resizing of item
-            //if (proxy.iconLoader.width > 84 || proxy.iconLoader.height > 24)
-            /*if (proxy.iconLoader.height > 24)
+            //if (proxy.vehicleIconLoader.width > 84 || proxy.vehicleIconLoader.height > 24)
+            /*if (proxy.vehicleIconLoader.height > 24)
             {
-                //var c:Number = Math.min(84 / proxy.iconLoader.width, 24 / proxy.iconLoader.height);
-                var c:Number = 24 / proxy.iconLoader.height;
-                proxy.iconLoader.scaleX = c;
-                proxy.iconLoader.scaleY = c;
+                //var c:Number = Math.min(84 / proxy.vehicleIconLoader.width, 24 / proxy.vehicleIconLoader.height);
+                var c:Number = 24 / proxy.vehicleIconLoader.height;
+                proxy.vehicleIconLoader.scaleX = c;
+                proxy.vehicleIconLoader.scaleY = c;
             }*/
 
             _vehicleIconLoaded = true;
 
             // crop large icons to avoid invalid resizing of item
-            // proxy.iconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
+            // proxy.vehicleIconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
 
             var xLeftVehIcon:Number = (isNaN(Config.config.battleLoading.xPositionLeftVehicleIcon)) ? 0 : Config.config.battleLoading.xPositionLeftVehicleIcon;
             var xRightVehIcon:Number = (isNaN(Config.config.battleLoading.xPositionRightVehicleIcon)) ? 0 : Config.config.battleLoading.xPositionRightVehicleIcon;
@@ -202,24 +202,24 @@ package xvm.battleloading_ui.components
             {
                 if (team == XfwConst.TEAM_ENEMY)
                 {
-                    proxy.iconLoader.scaleX = -Math.abs(proxy.iconLoader.scaleX);
-                    proxy.iconLoader.x = 3 - xRightVehIcon;
-                    //Logger.add(proxy.iconLoader.width + "x" + proxy.iconLoader.height);
-                } 
+                    proxy.vehicleIconLoader.scaleX = -Math.abs(proxy.vehicleIconLoader.scaleX);
+                    proxy.vehicleIconLoader.x = 3 - xRightVehIcon;
+                    //Logger.add(proxy.vehicleIconLoader.width + "x" + proxy.vehicleIconLoader.height);
+                }
                 else
                 {
-                    proxy.iconLoader.x -= xLeftVehIcon;
+                    proxy.vehicleIconLoader.x -= xLeftVehIcon;
                 }
             }
             else
             {
                 if (team == XfwConst.TEAM_ALLY)
                 {
-                    proxy.iconLoader.x -= xLeftVehIcon;
+                    proxy.vehicleIconLoader.x -= xLeftVehIcon;
                 }
                 else
                 {
-                    proxy.iconLoader.x += xRightVehIcon;
+                    proxy.vehicleIconLoader.x += xRightVehIcon;
                 }
             }
         }
@@ -258,7 +258,7 @@ package xvm.battleloading_ui.components
             var cfg:CClanIcon = Config.config.battleLoading.clanIcon;
             if (!cfg.show)
                 return;
-            var icon:ClanIcon = new ClanIcon(cfg, proxy.iconLoader.x, proxy.iconLoader.y, team,
+            var icon:ClanIcon = new ClanIcon(cfg, proxy.vehicleIconLoader.x, proxy.vehicleIconLoader.y, team,
                 playerId,
                 name,
                 WGUtils.GetClanNameWithoutBrackets(fullPlayerName),

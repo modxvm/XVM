@@ -9,7 +9,6 @@ package xvm.profile_ui
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
     import flash.text.*;
-    import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
 
     public dynamic class UI_ProfileSortingButton extends ProfileSortingButton_UI

@@ -16,7 +16,7 @@ package xvm.profile_ui.components
     import net.wg.data.constants.generated.*;
     import net.wg.gui.events.*;
     import net.wg.gui.components.controls.SortableScrollingList;
-    import net.wg.gui.components.controls.NormalSortingBtnInfo;
+    import net.wg.gui.components.controls.NormalSortingBtnVO;
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
@@ -222,17 +222,18 @@ package xvm.profile_ui.components
         {
             if (Config.config.userInfo.showXTEColumn)
             {
-                var bi:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-                bi.buttonWidth = 50;
-                bi.sortOrder = 8;
-                bi.toolTip = "xvm_xte";
-                bi.iconId = "xvm_xte";
-                bi.defaultSortDirection = SortingInfo.DESCENDING_SORT;
-                bi.ascendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW;
-                bi.descendingIconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW;
-                bi.buttonHeight = 40;
-                bi.enabled = true;
-                bi.label = "xTE";
+                var bi:NormalSortingBtnVO = new NormalSortingBtnVO({
+                    id: "xvm_xte",
+                    label: "xTE",
+                    toolTip: "xvm_xte",
+                    buttonWidth: 50,
+                    sortOrder: 8,
+                    defaultSortDirection: SortingInfo.DESCENDING_SORT,
+                    ascendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW,
+                    descendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW,
+                    buttonHeight: 40,
+                    enabled: true
+                });
 
                 var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
                 dp[4].buttonWidth = 64; // BATTLES_COUNT,74
@@ -262,8 +263,8 @@ package xvm.profile_ui.components
             if (idx > bb.dataProvider.length - 1)
                 idx = 5;
             bb.selectedIndex = idx;
-            var bi:NormalSortingBtnInfo = bb.dataProvider[idx] as NormalSortingBtnInfo;
-            page.listComponent.techniqueList.sortByField(bi.iconId, Config.config.userInfo.sortColumn > 0);
+            var bi:NormalSortingBtnVO = bb.dataProvider[idx] as NormalSortingBtnVO;
+            page.listComponent.techniqueList.sortByField(bi.id, Config.config.userInfo.sortColumn > 0);
         }
 
         // stat

@@ -112,8 +112,9 @@ package xvm.tcarousel_ui
                     vehicleFilters.tankFilter.selectedIndex = 0;
                 if (!cfg.filters.favorite.enabled)
                     vehicleFilters.checkBoxToMain.selected = false;
-                if (!cfg.filters.fallout.enabled)
-                    vehicleFilters.falloutCheckBox.selected = true;
+                // TODO:0.9.10
+                /*if (!cfg.filters.fallout.enabled)
+                    vehicleFilters.falloutCheckBox.selected = true;*/
                 if (!cfg.filters.level.enabled)
                     levelFilter.selectedItems = [];
                 if (!cfg.filters.prefs.enabled)
@@ -213,14 +214,15 @@ package xvm.tcarousel_ui
         }
 
         // TankCarousel
-        private var _isFalloutEvent:Boolean = false;
+        // TODO:0.9.10
+        /*private var _isFalloutEvent:Boolean = false;
         override public function as_setIsEvent(param1:Boolean):void
         {
             _isFalloutEvent = param1;
             super.as_setIsEvent(param1);
             vehicleFilters.validateNow();
             rearrangeFilters();
-        }
+        }*/
 
         // Carousel
         override protected function updateArrowsState():void
@@ -611,8 +613,9 @@ package xvm.tcarousel_ui
                 levelFilter.visible = cfg.filters.level.enabled;
                 prefFilter.visible = cfg.filters.prefs.enabled;
                 vehicleFilters.checkBoxToMain.visible = cfg.filters.favorite.enabled;
-                vehicleFilters.falloutCheckBox.visible = cfg.filters.fallout.enabled && _isFalloutEvent;
-                vehicleFilters.falloutIcon.visible = cfg.filters.fallout.enabled && _isFalloutEvent;
+                // TODO:0.9.10
+                /*vehicleFilters.falloutCheckBox.visible = cfg.filters.fallout.enabled && _isFalloutEvent;
+                vehicleFilters.falloutIcon.visible = cfg.filters.fallout.enabled && _isFalloutEvent;*/
 
                 if (cfg.filters.nation.enabled)
                     visibleFilters.push(vehicleFilters.nationFilter);
@@ -624,8 +627,9 @@ package xvm.tcarousel_ui
                     visibleFilters.push(prefFilter);
                 if (cfg.filters.favorite.enabled)
                     visibleFilters.push(vehicleFilters.checkBoxToMain);
-                if (cfg.filters.fallout.enabled)
-                    visibleFilters.push(vehicleFilters.falloutCheckBox);
+                // TODO:0.9.10
+                /*if (cfg.filters.fallout.enabled)
+                    visibleFilters.push(vehicleFilters.falloutCheckBox);*/
 
                 var w:int = 0;
                 var maxRows:int = Math.floor((height - 4) / 34);
@@ -638,11 +642,12 @@ package xvm.tcarousel_ui
                         offsetX += 3;
                         offsetY += 3;
                     }
-                    else if (visibleFilters[i] == vehicleFilters.falloutCheckBox)
+                    // TODO:0.9.10
+                    /*else if (visibleFilters[i] == vehicleFilters.falloutCheckBox)
                     {
                         offsetX += 1;
                         offsetY += 3;
-                    }
+                    }*/
 
                     var col:int = Math.floor(i / maxRows);
                     var row:int = i % maxRows;
@@ -650,13 +655,14 @@ package xvm.tcarousel_ui
                     visibleFilters[i].x = col * 60 + offsetX;
                     visibleFilters[i].y = row * 34 + 2 + offsetY;
 
-                    if (visibleFilters[i] == vehicleFilters.falloutCheckBox)
+                    // TODO:0.9.10
+                    /*if (visibleFilters[i] == vehicleFilters.falloutCheckBox)
                     {
                         vehicleFilters.falloutIcon.x = vehicleFilters.falloutCheckBox.x;
                         vehicleFilters.falloutIcon.y = vehicleFilters.falloutCheckBox.y;
                         vehicleFilters.falloutCheckBox.x = vehicleFilters.falloutIcon.x + vehicleFilters.falloutIcon.width + 6;
                         vehicleFilters.falloutCheckBox.y = vehicleFilters.falloutIcon.y + 1;
-                    }
+                    }*/
 
                     w = (col + 1) * 60 - 4;
                 }
@@ -734,7 +740,7 @@ package xvm.tcarousel_ui
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) < 0 && vdata.isReserved == true);
                     // next line will make xor filter: non_reserve <--> reserve, instead of non_reserve <--> non_reserve + reserve
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) >= 0 && vdata.isReserved == false);
-                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_DOMINATION) >= 0 && dataVO.groupIndicatorVisible);
+                    // TODO:0.9.10 remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_DOMINATION) >= 0 && dataVO.groupIndicatorVisible);
 
                     var removePrem:Boolean = prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0;
                     var removeNorm:Boolean = prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0;

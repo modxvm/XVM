@@ -23,7 +23,7 @@ package xvm.profile_ui
             this._toolTipParams = value;
         }
 
-        override protected function showToolTip(param1:IToolTipParams):void
+        override protected function showToolTip():void
         {
             try
             {
@@ -41,7 +41,7 @@ package xvm.profile_ui
                 }
                 else
                 {
-                    super.showToolTip(param1);
+                    super.showToolTip();
                 }
             }
             catch (ex:Error)
