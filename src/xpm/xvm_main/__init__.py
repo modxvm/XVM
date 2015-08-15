@@ -119,9 +119,9 @@ def FlashBeforeDelete(self):
         g_xvm.deleteVmmSwf()
 
 
-#def Flash_call(base, self, methodName, args=None):
-#    # debug("> call: %s, %s" % (methodName, str(args)))
-#    base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
+def Flash_call(base, self, methodName, args=None):
+    debug("> call: %s, %s" % (methodName, str(args)))
+    base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
 
 
 # LOGIN

@@ -196,7 +196,7 @@ detect_patch(){
 
 detect_python(){
     if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then
-        export XVMBUILD_PYTHON_FILEPATH="/cygdrive/c/Python27/python.exe"
+        export XVMBUILD_PYTHON_FILEPATH="/c/Python27/python.exe"
         if [ ! -f $XVMBUILD_PYTHON_FILEPATH ]; then
             export XVMBUILD_PYTHON_FILEPATH="python2.7" # Installed by cygwin or *nix
         fi

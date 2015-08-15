@@ -29,13 +29,13 @@ def show_threads():
     for t in threading.enumerate():
         log('Thread: %s' % t.getName())
 
-def openWebBrowser(url, allowInternalBrowser=True):
+def openWebBrowser(url, useInternalBrowser=False):
     openBrowser = BigWorld.wg_openWebBrowser
-    if allowInternalBrowser:
-        from gui.WindowsManager import g_windowsManager
-        browser = g_windowsManager.window.browser
+    if useInternalBrowser:
+        from gui import game_control
+        browser = game_control.g_instance.browser
         if browser is not None:
-            openBrowser = browser.openBrowser
+            openBrowser = browser.load
     openBrowser(url)
 
 def getVehicleByName(name):
@@ -116,4 +116,3 @@ def fixPath(path):
         if path[-1] != '/':
             path += '/'
     return path
-
