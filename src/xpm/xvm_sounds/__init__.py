@@ -58,7 +58,7 @@ def _RegisterEvents():
     #log(FMOD.getSoundBanks())
 
     from gui.Scaleform.Battle import Battle
-    RegisterEvent(Battle, 'showSixthSenseIndicator', Battle_showSixthSenseIndicator)
+    RegisterEvent(Battle, '_showSixthSenseIndicator', Battle_showSixthSenseIndicator)
 
     #BigWorld.callback(10, _test)
 
