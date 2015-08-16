@@ -80,11 +80,11 @@ package xvm.tcarousel_ui
                     {
                         if (this.clanLockUI.visible && cfg.fields.clanLock.dy == 0 && c.dy == 0)
                         {
-                            statusText.y = Math.round(clanLockUI.y / scaleY + clanLockUI.textField.height * cfg.fields.clanLock.scale + 5);
+                            statusText.y = Math.round(orig_clanLockUI_y / scaleY + clanLockUI.textField.height * cfg.fields.clanLock.scale + 5);
                         }
                         else
                         {
-                            statusText.y = Math.round((_height / scaleY - statusText.textHeight) / 2 + c.dy);
+                            statusText.y = orig_statusText_y + c.dy;
                         }
                     }
                 }
@@ -126,10 +126,10 @@ package xvm.tcarousel_ui
                 });
 
                 setupStandardField(vehicleIcon.xp, cfg.fields.xp);
-                vehicleIcon.xp.x = w - vehicleIcon.xp.width - 2 + cfg.fields.xp.dx;
+                vehicleIcon.xp.x = w - vehicleIcon.xp.width + cfg.fields.xp.dx - 30 * cfg.zoom;
 
                 setupStandardField(vehicleIcon.multyXp, cfg.fields.multiXp);
-                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width - 2 + cfg.fields.multiXp.dx;
+                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width + cfg.fields.multiXp.dx - 30 * cfg.zoom;
 
                 setupTankNameField(cfg.fields.tankName, zoom);
 

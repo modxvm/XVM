@@ -79,9 +79,9 @@ def PlayerContactsCMHandler_getHandlers(base, self):
     return handlers
 
 
-def PlayerContactsCMHandler_generateOptions(base, self):
+def PlayerContactsCMHandler_generateOptions(base, self, ctx = None):
     #log('PlayerContactsCMHandler_generateOptions')
-    options = base(self)
+    options = base(self, ctx)
     options.append(self._makeItem(MENU.XVM_EDIT_CONTACT_DATA, l10n('Edit data'), optInitData={'enabled': contacts.isAvailable()}))
     return options
 

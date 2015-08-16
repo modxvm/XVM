@@ -30,7 +30,7 @@ pushd $(dirname $(realpath $(cygpath --unix $0))) >/dev/null
 [ "$SAMPLE_REPLAY" != "" ] && REPLAY=$(cygpath --windows $PWD/replays/$SAMPLE_REPLAY)
 
 pushd "$WOT_PATH" >/dev/null
-cmd /cstart WorldOfTanks.exe $REPLAY
+start "" WorldOfTanks.exe $REPLAY
 popd >/dev/null
 
 popd >/dev/null

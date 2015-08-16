@@ -88,10 +88,10 @@ def CrewContextMenuHandler__init__(base, self, cmProxy, ctx=None):
     })
     self._cmProxy = cmProxy
 
-def CrewContextMenuHandler_generateOptions(base, self):
+def CrewContextMenuHandler_generateOptions(base, self, ctx = None):
     # debug('CrewContextMenuHandler_generateOptions')
     if self._tankmanID:
-        return base(self) + [
+        return base(self, ctx) + [
             self._makeSeparator(),
             self._makeItem(CREW.DROP_ALL_CREW, l10n(CREW.DROP_ALL_CREW)),
         ]

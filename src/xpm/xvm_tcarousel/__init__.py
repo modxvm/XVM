@@ -136,8 +136,8 @@ def VehicleContextMenuHandler__init__(base, self, cmProxy, ctx=None):
     else:
         base(self, cmProxy, ctx=ctx)
 
-def VehicleContextMenuHandler_generateOptions(base, self):
-    result = base(self)
+def VehicleContextMenuHandler_generateOptions(base, self, ctx = None):
+    result = base(self, ctx)
     if config.get('hangar/carousel/enabled'):
         try:
             import xvm_tcarousel.python.reserve as reserve
