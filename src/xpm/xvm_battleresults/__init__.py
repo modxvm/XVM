@@ -152,8 +152,8 @@ def _BattleResultsWindow__getDamageInfo(base, self, iInfo, valsStr):
     return result
 
 # save xp
-def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, dailyXpFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor = False):
-    result = base(self, pData, aogasFactor, dailyXpFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor)
+def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor = False):
+    result = base(self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor)
     if not usePremFactor:
         self._xvm_data['xpTotal'].append(result)
     else:

@@ -38,7 +38,9 @@ class _Get_online(object):
         if loginSection is not None:
             for (name, subSec) in loginSection.items():
                 host_name = subSec.readStrings('name')[0]
-                if host_name.find('WOT ') == 0:
+                if len(host_name) >= 13:
+                    host_name = subSec.readStrings('short_name')[0]
+                elif host_name.find('WOT ') == 0:
                     host_name = host_name[4:]
                 self.hosts.append(host_name)
 
@@ -91,7 +93,7 @@ class _Get_online(object):
             #    "ru":  [{"players_online":14845,"server":"RU8"},{"players_online":8597,"server":"RU2"},{"players_online":9847,"server":"RU1"},{"players_online":3422,"server":"RU3"},{"players_online":11508,"server":"RU6"},{"players_online":6795,"server":"RU5"},{"players_online":3354,"server":"RU4"}]
             #}
             region = GAME_REGION.lower()
-            if 'CT' in URLS.WG_API_SERVERS: # CT is uncommented in xfw.constants to check on test server
+            if 'CT' in URLS.WG_API_SERVERS and region == 'ct': # CT is uncommented in xfw.constants to check on test server
                 region = 'ru'
             response_data = None if response is None else simplejson.loads(response).get(region, [])
 

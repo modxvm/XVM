@@ -43,8 +43,9 @@ class _Ping(object):
         loginSection = ResMgr.openSection('scripts_config.xml')['login']
         if loginSection is not None:
             for (name, subSec) in loginSection.items():
+                host_name = subSec.readStrings('name')[0]
                 self.hosts.append({
-                    'name': subSec.readStrings('name')[0],
+                    'name': host_name if len(host_name) < 13 else subSec.readStrings('short_name')[0],
                     'url': subSec.readStrings('url')[0]})
 
     def ping(self):
