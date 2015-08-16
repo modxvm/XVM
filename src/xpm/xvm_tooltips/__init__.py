@@ -135,9 +135,13 @@ def VehicleParamsField_getValue(base, self):
             if values and len(values):
                 params_list = values # overriding parameters
             else:
-                params_list = self.PARAMS.get(vehicle.type, 'default')               # old way
+                params_list = self.PARAMS.get(vehicle.type, 'default') # original parameters
             for paramName in params_list:
                 if paramName == 'turretArmor' and not vehicle.hasTurrets:
+                    continue
+                #inner name, for example - ussr:R100_SU122A
+                if paramName == 'innerName':
+                    result[-1].append([h1_pad(vehicle.name), ''])
                     continue
                 #maxHealth
                 if paramName == 'maxHealth':
