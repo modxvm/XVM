@@ -14,7 +14,6 @@ XFW_MOD_INFO = {
 
 #####################################################################
 
-import traceback
 import BigWorld
 
 from xfw import *
@@ -55,6 +54,7 @@ def TankCarouselMeta_as_showVehiclesS(base, self, compactDescrList):
             from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
             myconfig = config.get('hangar/carousel')
             filteredVehs = g_itemsCache.items.getVehicles(REQ_CRITERIA.IN_CD_LIST(compactDescrList))
+            vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
             
             def sorting(v1, v2):
                 if v1.isEvent and not v2.isEvent: return -1
@@ -68,6 +68,16 @@ def TankCarouselMeta_as_showVehiclesS(base, self, compactDescrList):
                             factor = -1
                         else:
                             factor = 1
+                        if sort_criterion == 'winRate':
+                            v1_stats = vehicles_stats.get(v1.intCD)
+                            v2_stats = vehicles_stats.get(v2.intCD)
+                            if v1_stats and not v2_stats: return factor
+                            if not v1_stats and v2_stats: return -factor
+                            if v1_stats and v2_stats:
+                                v1_winrate = float(v1_stats.wins) / v1_stats.battlesCount
+                                v2_winrate = float(v2_stats.wins) / v2_stats.battlesCount
+                                if v1_winrate > v2_winrate: return factor
+                                if v1_winrate < v2_winrate: return -factor
                         if sort_criterion == 'nation':
                             if 'nations_order' in myconfig and len(myconfig['nations_order']):
                                 custom_nations_order = myconfig['nations_order']
@@ -98,7 +108,7 @@ def TankCarouselMeta_as_showVehiclesS(base, self, compactDescrList):
                             if VEHICLE_TYPES_ORDER_INDICES[v1.type] > VEHICLE_TYPES_ORDER_INDICES[v2.type]: return 1
                             if VEHICLE_TYPES_ORDER_INDICES[v1.type] < VEHICLE_TYPES_ORDER_INDICES[v2.type]: return -1
                 return v1.__cmp__(v2)
-    
+
             compactDescrList = map(attrgetter('intCD'), sorted(filteredVehs.itervalues(), sorting))
 
         except Exception as ex:
