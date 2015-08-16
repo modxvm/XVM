@@ -199,8 +199,8 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 
 # add vid to players panel data
-def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, playerAccountID, inviteSendingProhibited, invitesReceivingProhibited):
-    res = base(self, index, playerFullName, vInfoVO, vStatsVO, viStatsVO, ctx, playerAccountID, inviteSendingProhibited, invitesReceivingProhibited)
+def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, *args):
+    res = base(self, index, playerFullName, vInfoVO, *args)
     res['vid'] = vInfoVO.vehicleType.compactDescr
     return res
 
