@@ -46,13 +46,11 @@ _SWFS = [_LOBBY_SWF, _BATTLE_SWF, _VMM_SWF]
 def start():
     debug('start')
 
+    from gui.app_loader import g_appLoader
+    g_appLoader.onGUISpaceChanged += g_xvm.onGUISpaceChanged
+
     from gui.shared import g_eventBus, events
-    from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-
-    g_eventBus.addListener(VIEW_ALIAS.LOGIN, g_xvm.onShowLogin)
-    g_eventBus.addListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_xvm.onXfwCommand)
-
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
@@ -68,13 +66,11 @@ def start():
 def fini():
     debug('fini')
 
+    from gui.app_loader import g_appLoader
+    g_appLoader.onGUISpaceChanged -= g_xvm.onGUISpaceChanged
+
     from gui.shared import g_eventBus
-    from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-
-    g_eventBus.removeListener(VIEW_ALIAS.LOGIN, g_xvm.onShowLogin)
-    g_eventBus.removeListener(VIEW_ALIAS.LOBBY, g_xvm.onShowLobby)
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_xvm.onXfwCommand)
-
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
@@ -95,9 +91,7 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
 
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
 
-    if self.swf == _LOBBY_SWF:
-        g_xvm.initLobbySwf(self)
-    elif self.swf == _BATTLE_SWF:
+    if self.swf == _BATTLE_SWF:
         g_xvm.initBattleSwf(self)
     elif self.swf == _VMM_SWF:
         g_xvm.initVmmSwf(self)
@@ -111,7 +105,7 @@ def FlashBeforeDelete(self):
 
     self.removeExternalCallback('xvm.cmd')
 
-    if self.swf == _LOBBY_SWF:
+    if self.swf == _LOBBY_SWF: # TODO: replace with AppLifeCycleEvent.DESTROYED event handler
         g_xvm.deleteLobbySwf()
     elif self.swf == _BATTLE_SWF:
         g_xvm.deleteBattleSwf()
@@ -159,24 +153,20 @@ def AmmunitionPanel_highlightParams(self, type):
 # BATTLE
 
 def onArenaCreated():
-    debug('> onArenaCreated')
     g_xvm.onArenaCreated()
 
 
 def onAvatarBecomePlayer():
-    debug('> onAvatarBecomePlayer')
     g_xvm.onAvatarBecomePlayer()
 
 
 # on current player enters world
 def PlayerAvatar_onEnterWorld(self, prereqs):
-    debug("> PlayerAvatar_onEnterWorld")
     g_xvm.onEnterWorld()
 
 
 # on current player leaves world
 def PlayerAvatar_onLeaveWorld(self):
-    debug("> PlayerAvatar_onLeaveWorld")
     g_xvm.onLeaveWorld()
 
 

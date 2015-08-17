@@ -81,22 +81,22 @@ class _Stat(object):
             return self.queue.pop(0) if self.queue else None
 
     def processQueue(self):
-        debug('processQueue')
+        #debug('processQueue')
         with self.lock:
             if self.thread is not None:
-                debug('already working')
+                #debug('already working')
                 return
-        debug('dequeue')
+        #debug('dequeue')
         self.req = self.dequeue()
         if self.req is None:
-            debug('no req')
+            #debug('no req')
             return
         self.resp = None
         self.thread = threading.Thread(target=self.req['func'])
         self.thread.daemon = False
         self.thread.start()
         # self.req['func']()
-        debug('start')
+        #debug('start')
         # self._checkResult()
         BigWorld.callback(0, self._checkResult)
 
@@ -113,11 +113,11 @@ class _Stat(object):
             except Exception:
                 err(traceback.format_exc())
             finally:
-                debug('done')
+                #debug('done')
                 if self.thread:
-                    debug('join')
+                    #debug('join')
                     self.thread.join()
-                    debug('thread deleted')
+                    #debug('thread deleted')
                     self.thread = None
                     # self.processQueue()
                     BigWorld.callback(0, self.processQueue)

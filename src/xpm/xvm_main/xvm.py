@@ -56,7 +56,6 @@ class Xvm(object):
 
     def __init__(self):
         self.currentPlayerId = None
-        self.lobbyFlashObject = None
         self.battleFlashObject = None
         self.vmmFlashObject = None
         self._invalidateTimerId = dict()
@@ -66,12 +65,13 @@ class Xvm(object):
     # CONFIG
 
     def onConfigLoaded(self, e=None):
-        #log('onConfigLoaded: {}'.format(e))
+        trace('onConfigLoaded')
         self.respondConfig()
         wgutils.reloadHangar()
 
 
     def respondConfig(self):
+        trace('respondConfig')
         as_xfw_cmd(XVM_COMMAND.AS_SET_CONFIG,
                    config.config_str,
                    config.lang_str,
@@ -80,7 +80,7 @@ class Xvm(object):
     # System Message
 
     def onSystemMessage(self, e=None, cnt=0):
-        #log('onSystemMessage')
+        #trace('onSystemMessage')
         is_svcmsg = 'swf_file_name' in xfw_mods_info.info.get('xvm_svcmsg', {})
         if cnt < 50 and is_svcmsg and not 'xvm_svcmsg_ui.swf' in xfw_mods_info.loaded_swfs:
             BigWorld.callback(0.1, lambda:self.onSystemMessage(e, cnt+1))
@@ -90,10 +90,28 @@ class Xvm(object):
         type = e.ctx.get('type', SystemMessages.SM_TYPE.Information)
         SystemMessages.pushMessage(msg, type)
 
+    # state handler
+
+    def onGUISpaceChanged(self, spaceID):
+        #trace('onGUISpaceChanged: {}'.format(spaceID))
+        from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
+        if spaceID == GUI_GLOBAL_SPACE_ID.LOGIN:
+            self.onStateLogin()
+        elif spaceID == GUI_GLOBAL_SPACE_ID.LOBBY:
+            self.onStateLobby()
+        elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE_LOADING:
+            self.onStateBattleLoading()
+        elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE_TUT_LOADING:
+            self.onStateBattleTutorialLoading()
+        elif spaceID == GUI_GLOBAL_SPACE_ID.FALLOUT_MULTI_TEAM_LOADING:
+            self.onStateFalloutMultiTeamLoading()
+        elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
+            self.onStateBattle()
 
     # LOGIN
 
-    def onShowLogin(self, e=None):
+    def onStateLogin(self):
+        trace('onStateLogin')
         if self.currentPlayerId is not None:
             self.currentPlayerId = None
             g_websock.send('id')
@@ -102,15 +120,17 @@ class Xvm(object):
 
     # LOBBY
 
-    def onShowLobby(self, e=None):
+    def onStateLobby(self):
+        trace('onStateLobby')
         playerId = getCurrentPlayerId()
         if playerId is not None and self.currentPlayerId != playerId:
             self.currentPlayerId = playerId
             token.checkVersion()
             token.initializeXvmToken()
             g_websock.send('id/%d' % playerId)
-        if self.lobbyFlashObject is not None:
-            self.lobbyFlashObject.loaderManager.onViewLoaded += self.onViewLoaded
+        lobby = getLobbyApp()
+        if lobby is not None:
+            lobby.loaderManager.onViewLoaded += self.onViewLoaded
 
         # TODO
         """
@@ -130,21 +150,18 @@ class Xvm(object):
         """
 
 
-    def initLobbySwf(self, flashObject):
-        self.lobbyFlashObject = flashObject
-
-
     def deleteLobbySwf(self):
+        trace('deleteLobbySwf')
         self.hangarDispose()
-        if self.lobbyFlashObject is not None:
-            if self.lobbyFlashObject.loaderManager is not None:
-                self.lobbyFlashObject.loaderManager.onViewLoaded -= self.onViewLoaded
-            self.lobbyFlashObject = None
+        lobby = getLobbyApp()
+        if lobby is not None and lobby.loaderManager is not None:
+            lobby.loaderManager.onViewLoaded -= self.onViewLoaded
 
 
     # HANGAR
 
     def hangarInit(self):
+        trace('hangarInit')
         from CurrentVehicle import g_currentVehicle
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
@@ -156,6 +173,7 @@ class Xvm(object):
 
 
     def hangarDispose(self):
+        trace('hangarDispose')
         from CurrentVehicle import g_currentVehicle
         g_currentVehicle.onChanged -= self.updateTankParams
 
@@ -163,7 +181,8 @@ class Xvm(object):
     def updateTankParams(self):
         try:
             minimap_circles.updateCurrentVehicle()
-            if self.lobbyFlashObject is not None:
+            lobby = getLobbyApp()
+            if lobby is not None:
                 data = simplejson.dumps(minimap_circles.getMinimapCirclesData())
                 as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE, data)
         except Exception, ex:
@@ -172,13 +191,35 @@ class Xvm(object):
 
     # PREBATTLE
 
+    def onStateBattleLoading(self):
+        trace('onStateBattleLoading')
+        pass
+
+
+    def onStateBattleTutorialLoading(self):
+        trace('onStateBattleTutorialLoading')
+        pass
+
+
+    def onStateFalloutMultiTeamLoading(self):
+        trace('onStateFalloutMultiTeamLoading')
+        pass
+
+
     def onArenaCreated(self):
+        trace('onArenaCreated')
         minimap_circles.updateCurrentVehicle()
 
 
     # BATTLE
 
+    def onStateBattle(self):
+        trace('onStateBattle')
+        pass
+
+
     def onAvatarBecomePlayer(self):
+        trace('onAvatarBecomePlayer')
         # check version if game restarted after crash or in replay
         if not token.versionChecked:
             token.checkVersion()
@@ -188,7 +229,7 @@ class Xvm(object):
 
 
     def initBattleSwf(self, flashObject):
-        # debug('> initBattleSwf()')
+        trace('initBattleSwf')
         try:
             self.battleFlashObject = flashObject
 
@@ -224,30 +265,32 @@ class Xvm(object):
 
 
     def deleteBattleSwf(self):
-        # debug('> deleteBattleSwf()')
+        trace('deleteBattleSwf')
         self.battleFlashObject = None
 
 
     def initVmmSwf(self, flashObject):
+        #trace('initVmmSwf')
         self.vmmFlashObject = flashObject
         self.sendConfig(self.vmmFlashObject)
 
 
     def deleteVmmSwf(self):
+        #trace('deleteVmmSwf')
         self.vmmFlashObject = None
 
 
     def invalidateAll(self):
-        #debug('invalidateAll')
+        #trace('invalidateAll')
         self._invalidateTargets.clear()
         for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
             self.invalidate(vID, INV.ALL)
 
 
     def sendConfig(self, flashObject):
+        #trace('sendConfig')
         if flashObject is None:
             return
-        # debug('sendConfig')
         try:
             movie = flashObject.movie
             if movie is not None:
@@ -269,7 +312,7 @@ class Xvm(object):
 
 
     def onEnterWorld(self):
-        # debug('onEnterWorld: ' + str(BigWorld.player().arena))
+        trace('onEnterWorld')
         try:
             arena = BigWorld.player().arena
             if arena:
@@ -281,7 +324,7 @@ class Xvm(object):
 
 
     def onLeaveWorld(self):
-        # debug('onLeaveWorld')
+        trace('onLeaveWorld')
         try:
             arena = BigWorld.player().arena
             if arena:
@@ -313,7 +356,7 @@ class Xvm(object):
 
 
     def invalidateCallback(self, vID):
-        #debug('invalidateCallback: {0}'.format(vID))
+        #trace('invalidateCallback: {0}'.format(vID))
         try:
             targets = self._invalidateTargets.get(vID, INV.NONE)
             if targets & INV.BATTLE_ALL:
@@ -327,7 +370,7 @@ class Xvm(object):
 
 
     def updateBattle(self, vID, targets):
-        #debug('updateBattle: {0} {1}'.format(targets, vID))
+        #trace('updateBattle: {0} {1}'.format(targets, vID))
 
         if self.battleFlashObject is None:
             return
@@ -359,7 +402,7 @@ class Xvm(object):
 
 
     def updateMarker(self, vID, targets):
-        #debug('updateMarker: {0} {1}'.format(targets, vID))
+        #trace('updateMarker: {0} {1}'.format(targets, vID))
 
         if self.vmmFlashObject is None:
             return
@@ -589,6 +632,7 @@ class Xvm(object):
 
 
     def onViewLoaded(self, e=None):
+        debug('> onViewLoaded: {}'.format('(None)' if not e else e.uniqueName))
         if e is None:
             return
         if e.uniqueName == 'hangar':
