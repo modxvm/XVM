@@ -207,9 +207,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     /**
      * called by Battle.pyc
      */
-    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
-        pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
-        hunt:Boolean, entityType:String, isFlagBearer:Boolean):Void
+    public static var INIT_ARGS_COUNT:Number = 16;
+    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
+        pName:String, pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String,
+        speaking:Boolean, hunt:Boolean, entityType:String, isFlagBearer:Boolean, squadIcon):Void
         /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number, squad:Number*/
     {
         // Invoked on new marker creation
@@ -225,8 +226,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_curHealth = curHealth;
         m_dead = m_curHealth <= 0;
 
-        var playerId = arguments[15];
-        var vid:Number = m_vid = arguments[16];
+        var playerId = arguments[INIT_ARGS_COUNT + 0];
+        var vid:Number = m_vid = arguments[INIT_ARGS_COUNT + 1];
 
         // for markers, hitlog and hpleft
         var wr = wrapper;

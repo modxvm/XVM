@@ -9,6 +9,7 @@
     var m_entityName:String;
     var m_markerLabel:String;
     var m_speaking:Boolean;
+    var m_squadIcon;
 
     var levelIcon:MovieClip;
     var iconLoader:net.wargaming.controls.UILoaderAlt;
@@ -22,6 +23,7 @@
     var healthBar:MovieClip;
     var bgShadow:MovieClip;
     var flagMC:MovieClip;
+    var squadIcon:MovieClip;
 
     static var ICON;
     static var LEVEL;
@@ -33,7 +35,7 @@
 
     function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
         pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
-        hunt:Boolean, entityType:String, isFlagBearer:Boolean):Void;
+        hunt:Boolean, entityType:String, isFlagBearer:Boolean, squadIcon):Void;
     function update():Void;
     function updateMarkerSettings():Void;
     function setSpeaking(value:Boolean):Void;

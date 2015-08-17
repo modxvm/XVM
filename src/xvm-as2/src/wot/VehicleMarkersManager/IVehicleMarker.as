@@ -4,13 +4,9 @@
 
 interface wot.VehicleMarkersManager.IVehicleMarker
 {
-    /**
-     * called by Battle.pyc
-     */
-
-    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
-        pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
-        hunt:Boolean, entityType:String, isFlagBearer:Boolean):Void;
+    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
+        pName:String, pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String,
+        speaking:Boolean, hunt:Boolean, entityType:String, isFlagBearer:Boolean, squadIcon):Void;
     function update():Void;
     function updateMarkerSettings():Void;
     function setSpeaking(value:Boolean):Void;

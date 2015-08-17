@@ -147,6 +147,14 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             wrapper.hitLbl.removeMovieClip();
             delete wrapper.hitLbl;
         }
+
+        if (wrapper.squadIcon)
+        {
+            wrapper.squadIcon.stop();
+            wrapper.squadIcon._visible = false;
+            wrapper.squadIcon.removeMovieClip();
+            delete wrapper.squadIcon;
+        }
     }
 
     /**
@@ -156,9 +164,9 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     /**
      * @see IVehicleMarker
      */
-    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
-        pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
-        hunt:Boolean, entityType:String, isFlagBearer:Boolean)
+    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
+        pName:String, pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String,
+        speaking:Boolean, hunt:Boolean, entityType:String, isFlagBearer:Boolean, squadIcon)
         /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number, squad:Number*/
     {
         Cmd.profMethodStart("Xvm.init()");
@@ -193,12 +201,12 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         m_isDead    = curHealth <= 0; // -1 for ammunition storage explosion
         m_curHealth = curHealth >= 0 ? curHealth : 0;
 
-        m_playerId = arguments[15];
-        m_vid = arguments[16];
-        m_marksOnGun = arguments[17];
-        m_isReady = (arguments[18] & 2) != 0; // 2 - IS_AVATAR_READY
-        m_frags = arguments[19];
-        m_squad = arguments[20];
+        m_playerId = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 0];
+        m_vid = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 1];
+        m_marksOnGun = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 2];
+        m_isReady = (arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 3] & 2) != 0; // 2 - IS_AVATAR_READY
+        m_frags = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 4];
+        m_squad = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 5];
 
         healthBarComponent.init();
         contourIconComponent.init(m_entityType);
