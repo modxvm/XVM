@@ -179,10 +179,10 @@ calc_hash_for_xvm_integrity(){
     pushd ~output > /dev/null
     hash_file='res_mods/mods/packages/xvm_integrity/python/hash_table.py'
     echo -e '""" Generated automatically by XVM builder """\nHASH_DATA = {' > $hash_file
-    for file in `find res_mods -name *.pyc -o -name *.swf`;
-        do
-            sha1sum $file | sed -r "s/(\S+)\s+\*?(.+)/'\2': '\1',/" >> $hash_file
-        done
+    find res_mods -name *.pyc -o -name *.swf -print0 | while read -d $'\0' file
+    do
+        sha1sum "$file" | sed -r "s/(\S+)\s+\*?(.+)/'\2': '\1',/" >> $hash_file
+    done
     echo "}" >> $hash_file
     "$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$hash_file')"
     rm $hash_file
@@ -288,6 +288,7 @@ detect_arch
 extend_path
 
 detect_mono
+detect_java
 detect_ffdec
 detect_fdbuild
 detect_flex
