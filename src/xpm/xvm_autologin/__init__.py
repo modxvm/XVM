@@ -13,12 +13,20 @@ XFW_MOD_INFO = {
 }
 
 #####################################################################
+# imports
 
 import traceback
+
 import BigWorld
+
 from xfw import *
+
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
+
+
+#####################################################################
+# handlers
 
 firsttime = True
 
@@ -41,14 +49,11 @@ def LoginView_as_setVersionS(base, self, version):
 
 
 #####################################################################
-# Register events
+# hooks
 
-def _RegisterEvents():
-    from gui.Scaleform.daapi.view.IntroPage import IntroPage
-    OverrideMethod(IntroPage, '_IntroPage__showMovie', IntroPage_showMovie)
-    
-    from gui.Scaleform.daapi.view.login import LoginView
-    RegisterEvent(LoginView, 'onSetOptions', LoginView_onSetOptions)
-    OverrideMethod(LoginView, 'as_setVersionS', LoginView_as_setVersionS)
+from gui.Scaleform.daapi.view.IntroPage import IntroPage
+OverrideMethod(IntroPage, '_IntroPage__showMovie', IntroPage_showMovie)
 
-BigWorld.callback(0, _RegisterEvents)
+from gui.Scaleform.daapi.view.login import LoginView
+RegisterEvent(LoginView, 'onSetOptions', LoginView_onSetOptions)
+OverrideMethod(LoginView, 'as_setVersionS', LoginView_as_setVersionS)

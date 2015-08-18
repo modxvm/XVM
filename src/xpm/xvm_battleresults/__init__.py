@@ -12,16 +12,23 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
+# imports
 
 import traceback
+
 import BigWorld
+from gui.shared import g_itemsCache
+
 from xfw import *
+
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
+
 #####################################################################
-# Events
+# handlers
 
 def init(self):
     if not hasattr(self, '_xvm_data'):
@@ -30,9 +37,9 @@ def init(self):
     self._xvm_data['xpPremTotal'] = []
     self._xvm_data['personalData'] = None
 
+
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
-        from gui.shared import g_itemsCache
         xdataList = {
             '__xvm': True, # XVM data marker
             'damageAssistedNames': self._xvm_data.get('damageAssistedNames', None),
@@ -126,9 +133,11 @@ def BattleResultsWindow_as_setDataS(base, self, data):
         err(traceback.format_exc())
     return base(self, data)
 
+
 # save personalCommonData: more info there
 def _BattleResultsWindow__populateAccounting_event(self, commonData, personalCommonData, personalData, playersData, personalDataOutput, isFallout):
     self._xvm_data['personalData'] = personalData
+
 
 # get string 'damageAssistedNames'
 def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
@@ -137,6 +146,7 @@ def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
         self._xvm_data['damageAssistedNames'] = result['damageAssistedNames']
     return result
 
+
 # get string 'armorNames'
 def _BattleResultsWindow__getArmorUsingInfo(base, self, iInfo, valsStr):
     result = base(self, iInfo, valsStr)
@@ -144,12 +154,14 @@ def _BattleResultsWindow__getArmorUsingInfo(base, self, iInfo, valsStr):
         self._xvm_data['armorNames'] = result['armorNames']
     return result
 
+
 # get string 'getDamageInfo'
 def _BattleResultsWindow__getDamageInfo(base, self, iInfo, valsStr):
     result = base(self, iInfo, valsStr)
     if 'damageDealtNames' in result:
         self._xvm_data['damageDealtNames'] = result['damageDealtNames']
     return result
+
 
 # save xp
 def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor = False):
@@ -160,6 +172,7 @@ def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, premX
         self._xvm_data['xpPremTotal'].append(result)
     return result
 
+
 # wait for loading xvm_battleresults_ui.swf
 def shared_events_showBattleResults(base, arenaUniqueID, dataProvider, cnt=0):
     is_swf = 'swf_file_name' in xfw_mods_info.info.get('xvm_battleresults', {})
@@ -168,8 +181,9 @@ def shared_events_showBattleResults(base, arenaUniqueID, dataProvider, cnt=0):
         return
     base(arenaUniqueID, dataProvider)
 
+
 #####################################################################
-# Utility
+# utility
 
 def calcDetails(personal_details_list, field):
     try:
@@ -182,6 +196,7 @@ def calcDetails(personal_details_list, field):
         err(traceback.format_exc())
         return 0
 
+
 def getTotalAssistCount(personal_details_list):
     try:
         n = 0
@@ -193,6 +208,7 @@ def getTotalAssistCount(personal_details_list):
         err(traceback.format_exc())
         return 0
 
+
 def getTotalRicochetsCount(personalCommonData):
     try:
         n = 0
@@ -203,20 +219,18 @@ def getTotalRicochetsCount(personalCommonData):
         err(traceback.format_exc())
         return 0
 
+
 #####################################################################
-# Register events
+# hooks
 
-def _RegisterEvents():
-    from gui.Scaleform.daapi.view.BattleResultsWindow import BattleResultsWindow
-    OverrideMethod(BattleResultsWindow, 'as_setDataS', BattleResultsWindow_as_setDataS)
-    RegisterEvent(BattleResultsWindow, '_populate', init, True)
-    RegisterEvent(BattleResultsWindow, '_BattleResultsWindow__populateAccounting', _BattleResultsWindow__populateAccounting_event)
-    OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getAssistInfo', _BattleResultsWindow__getAssistInfo)
-    OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getArmorUsingInfo', _BattleResultsWindow__getArmorUsingInfo)
-    OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getDamageInfo', _BattleResultsWindow__getDamageInfo)
-    OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__calculateTotalXp',  _BattleResultsWindow__calculateTotalXp)
+from gui.Scaleform.daapi.view.BattleResultsWindow import BattleResultsWindow
+OverrideMethod(BattleResultsWindow, 'as_setDataS', BattleResultsWindow_as_setDataS)
+RegisterEvent(BattleResultsWindow, '_populate', init, True)
+RegisterEvent(BattleResultsWindow, '_BattleResultsWindow__populateAccounting', _BattleResultsWindow__populateAccounting_event)
+OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getAssistInfo', _BattleResultsWindow__getAssistInfo)
+OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getArmorUsingInfo', _BattleResultsWindow__getArmorUsingInfo)
+OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__getDamageInfo', _BattleResultsWindow__getDamageInfo)
+OverrideMethod(BattleResultsWindow, '_BattleResultsWindow__calculateTotalXp',  _BattleResultsWindow__calculateTotalXp)
 
-    from gui.shared import event_dispatcher as shared_events
-    OverrideMethod(shared_events, '_showBattleResults', shared_events_showBattleResults)
-
-BigWorld.callback(0, _RegisterEvents)
+from gui.shared import event_dispatcher as shared_events
+OverrideMethod(shared_events, '_showBattleResults', shared_events_showBattleResults)
