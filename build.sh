@@ -288,6 +288,7 @@ detect_arch
 extend_path
 
 detect_mono
+detect_java
 detect_ffdec
 detect_fdbuild
 detect_flex

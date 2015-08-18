@@ -157,6 +157,13 @@ detect_flex(){
     fi
 }
 
+detect_java(){
+    if !(hash java 2>/dev/null); then
+        echo "!!! java is not found"
+        exit 1
+    fi
+}
+
 detect_mono(){
     # export XVMBUILD_MONO_FILENAME to use mono on windows
     if [ "$XVMBUILD_MONO_FILENAME" == "" ]; then 
