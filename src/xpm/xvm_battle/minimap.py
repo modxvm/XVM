@@ -46,16 +46,15 @@ def Minimap__callEntryFlash(base, self, id, methodName, args=None):
                 err(traceback.format_exc())
 
 
-def Minimap__addEntryLit(self, id, matrix, visible=True):
+def Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
     if config.get('minimap/enabled'):
-        from gui.battle_control import g_sessionProvider
-        battleCtx = g_sessionProvider.getCtx()
-        if battleCtx.isObserver(id) or matrix is None:
+        if vInfo.isObserver() or matrix is None:
             return
 
         try:
-            entry = self._Minimap__entrieLits[id]
-            arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+            vehicleID = vInfo.vehicleID
+            entry = self._Minimap__entrieLits[vehicleID]
+            arenaVehicle = BigWorld.player().arena.vehicles.get(vehicleID, None)
             self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm', [arenaVehicle['accountDBID'], True]))
         except Exception, ex:
             if IS_DEVELOPMENT:

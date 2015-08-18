@@ -196,10 +196,10 @@ def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, *
 
 
 # spotted status
-def _Minimap__addEntry(self, id, location, doMark):
-    # debug('> _Minimap__addEntry: {0}'.format(id))
-    vehstate.updateSpottedStatus(id, True)
-    g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
+def _Minimap__addEntry(self, vInfo, guiProps, location, doMark):
+    # debug('> _Minimap__addEntry: {0}'.format(vInfo.vehicleID))
+    vehstate.updateSpottedStatus(vInfo.vehicleID, True)
+    g_xvm.invalidate(vInfo.vehicleID, INV.BATTLE_SPOTTED)
 
 
 def _Minimap__delEntry(self, id, inCallback=False):
