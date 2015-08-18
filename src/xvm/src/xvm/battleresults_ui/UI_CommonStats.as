@@ -97,8 +97,7 @@ package xvm.battleresults_ui
 
                     if (Config.config.battleResults.showExtendedInfo)
                     {
-                        hideDetailBtn();
-                        hideQuestLabel();
+                        hideUselessButtons();
                         initTextFields();
                     }
 
@@ -106,7 +105,7 @@ package xvm.battleresults_ui
                         initTotals();
 
                     if (Config.config.battleResults.showCrewExperience)
-                        detailsMc.xpTitleLbl.width += 50;
+                        initCrewExperience();
 
                     updateValues();
                 }
@@ -141,15 +140,10 @@ package xvm.battleresults_ui
             lowerShadow.visible = false;
         }
 
-        private function hideDetailBtn():void
+        private function hideUselessButtons():void
         {
             detailsMc.detailedReportBtn.visible = false;
-        }
-
-        private function hideQuestLabel():void
-        {
-            // TODO:0.9.10
-            //detailsMc.progressTF.visible = false;
+            detailsMc.getPremBtn.visible = false;
         }
 
         private function initTextFields():void
@@ -203,6 +197,25 @@ package xvm.battleresults_ui
             {
                 Logger.err(ex);
             }
+        }
+
+        private static const CREW_EXP_OFFSET_X:int = 30;
+        private function initCrewExperience():void
+        {
+            if (detailsMc.xpTitleLbl)
+                detailsMc.xpTitleLbl.width += 50;
+            if (detailsMc.noPremTitleLbl)
+                detailsMc.noPremTitleLbl.x += CREW_EXP_OFFSET_X;
+            if (detailsMc.creditsLbl)
+                detailsMc.creditsLbl.x += CREW_EXP_OFFSET_X;
+            if (detailsMc.xpLbl)
+                detailsMc.xpLbl.x += CREW_EXP_OFFSET_X;
+            if (detailsMc.resLbl)
+                detailsMc.resLbl.x += CREW_EXP_OFFSET_X;
+            if (shotsCount)
+                shotsCount.x += CREW_EXP_OFFSET_X;
+            if (damageAssistedValue)
+                damageAssistedValue.x += CREW_EXP_OFFSET_X;
         }
 
         private function updateValues():void

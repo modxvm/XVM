@@ -52,6 +52,7 @@ def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
     else:
         base(self, targetData, accountDossier)
 
+
 def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
     res = base(self, targetData, addVehiclesThatInHangarOnly)
     if token.networkServicesSettings['statAwards']:
@@ -66,6 +67,7 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
                 err(traceback.format_exc())
     return res
 
+
 def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
     global _lastVehId
     _lastVehId = vehId
@@ -76,6 +78,7 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
         if self._isDAAPIInited():
             vDossier = dossier.getDossier((self._battlesType, playerId, vehId))
             self.flashObject.as_responseVehicleDossierXvm(vDossier)
+
 
 def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser):
     res = base(targetData, isCurrentuser)
@@ -110,49 +113,68 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser):
 
     return res
 
-def DAAPIModule_registerFlashComponent(base, self, component, alias, *args):
-    from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-    from gui.Scaleform.daapi.view.lobby.profile.ProfilePage import ProfilePage
-    if alias == VIEW_ALIAS.PROFILE_TAB_NAVIGATOR:
-        isProfilePage = isinstance(self, ProfilePage)
-        ctx = args[4] if isProfilePage else None
-        if ctx is not None and ctx.get('itemCD'):
-            selectedAlias = VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE
-        else:
-            startPage = config.get('userInfo/startPage')
-            if startPage == 2:
-                selectedAlias = VIEW_ALIAS.PROFILE_AWARDS
-            elif startPage == 3:
-                selectedAlias = VIEW_ALIAS.PROFILE_STATISTICS
-            elif startPage == 4:
-                if isProfilePage:
-                    selectedAlias = VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE
-                else:
-                    selectedAlias = VIEW_ALIAS.PROFILE_TECHNIQUE_WINDOW
-            else:
-                if isProfilePage:
-                    selectedAlias = VIEW_ALIAS.PROFILE_SUMMARY_PAGE
-                else:
-                    selectedAlias = VIEW_ALIAS.PROFILE_SUMMARY_WINDOW
-        args[3]['selectedAlias'] = selectedAlias
 
+def ProfileMeta_registerFlashComponent(base, self, component, alias, *args):
+    startPageAlias = _getStartPageAlias(self, alias, True)
+    if startPageAlias is not None:
+        args[3]['selectedAlias'] = startPageAlias
     base(self, component, alias, *args)
+
+
+def ProfileWindowMeta_registerFlashComponent(base, self, component, alias, *args):
+    startPageAlias = _getStartPageAlias(self, alias, False)
+    if startPageAlias is not None:
+        args[3]['selectedAlias'] = startPageAlias
+    base(self, component, alias, *args)
+
+
+#####################################################################
+# internal
+
+def _getStartPageAlias(self, alias, isProfilePage):
+    from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
+
+    if alias != VIEW_ALIAS.PROFILE_TAB_NAVIGATOR:
+        return None
+
+    if isProfilePage and self._ProfilePage__ctx.get('itemCD'):
+        return VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE
+
+    startPage = config.get('userInfo/startPage')
+    log('startPage={}'.format(startPage))
+    if startPage == 2:
+        return VIEW_ALIAS.PROFILE_AWARDS
+
+    if startPage == 3:
+        return VIEW_ALIAS.PROFILE_STATISTICS
+
+    if startPage == 4:
+        return VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE if isProfilePage else VIEW_ALIAS.PROFILE_TECHNIQUE_WINDOW
+
+    return VIEW_ALIAS.PROFILE_SUMMARY_PAGE if isProfilePage else VIEW_ALIAS.PROFILE_SUMMARY_WINDOW
+
 
 #####################################################################
 # Register events
 
 def _RegisterEvents():
+    from gui.Scaleform.daapi.view.meta.ProfileMeta import ProfileMeta
+    OverrideMethod(ProfileMeta, 'registerFlashComponent', ProfileMeta_registerFlashComponent)
+
+    from gui.Scaleform.daapi.view.meta.ProfileWindowMeta import ProfileWindowMeta
+    OverrideMethod(ProfileWindowMeta, 'registerFlashComponent', ProfileWindowMeta_registerFlashComponent)
+
     from gui.Scaleform.daapi.view.lobby.profile import ProfileTechnique
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniquePage
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
-    from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
-    OverrideMethod(ProfileTechniquePage, '_sendAccountData', ProfileTechnique_sendAccountData)
-    OverrideMethod(ProfileTechniqueWindow, '_sendAccountData', ProfileTechnique_sendAccountData)
     OverrideMethod(ProfileTechnique, '_getTechniqueListVehicles', ProfileTechnique_getTechniqueListVehicles)
     OverrideMethod(ProfileTechnique, '_receiveVehicleDossier', ProfileTechnique_receiveVehicleDossier)
-    OverrideStaticMethod(DetailedStatisticsUtils, 'getStatistics', DetailedStatisticsUtils_getStatistics)
 
-    from gui.Scaleform.framework.entities.DAAPIModule import DAAPIModule
-    OverrideMethod(DAAPIModule, 'registerFlashComponent', DAAPIModule_registerFlashComponent)
+    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniquePage
+    OverrideMethod(ProfileTechniquePage, '_sendAccountData', ProfileTechnique_sendAccountData)
+
+    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+    OverrideMethod(ProfileTechniqueWindow, '_sendAccountData', ProfileTechnique_sendAccountData)
+
+    from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
+    OverrideStaticMethod(DetailedStatisticsUtils, 'getStatistics', DetailedStatisticsUtils_getStatistics)
 
 BigWorld.callback(0, _RegisterEvents)
