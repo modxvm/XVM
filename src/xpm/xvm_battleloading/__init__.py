@@ -13,14 +13,22 @@ XFW_MOD_INFO = {
 }
 
 #####################################################################
+# imports
 
 import cgi
 import re
 import traceback
+
 import BigWorld
+
 from xfw import *
+
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
+
+
+#####################################################################
+# handlers
 
 def BattleLoading_as_setTipTitleS(base, self, title):
     title = cgi.escape('XVM v{}     {}'.format(config.get('__xvmVersion'), config.get('__xvmIntro')))
@@ -52,11 +60,8 @@ def getTipText(text, isError=False):
 
 
 #####################################################################
-# Register events
+# hooks
 
-def _RegisterEvents():
-    from gui.Scaleform.daapi.view.battle_loading import BattleLoading
-    OverrideMethod(BattleLoading, 'as_setTipTitleS', BattleLoading_as_setTipTitleS)
-    OverrideMethod(BattleLoading, 'as_setTipS', BattleLoading_as_setTipS)
-
-BigWorld.callback(0, _RegisterEvents)
+from gui.Scaleform.daapi.view.battle_loading import BattleLoading
+OverrideMethod(BattleLoading, 'as_setTipTitleS', BattleLoading_as_setTipTitleS)
+OverrideMethod(BattleLoading, 'as_setTipS', BattleLoading_as_setTipS)

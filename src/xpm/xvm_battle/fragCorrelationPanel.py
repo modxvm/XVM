@@ -1,11 +1,21 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
+#####################################################################
+# imports
+
 import traceback
+
 import BigWorld
+from gui.shared.gui_items.Vehicle import VEHICLE_BATTLE_TYPES_ORDER_INDICES
+
 from xfw import *
+
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-from gui.shared.gui_items.Vehicle import VEHICLE_BATTLE_TYPES_ORDER_INDICES
+
+
+#####################################################################
+# handlers
 
 # show quantity of alive instead of dead in frags panel
 # original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-

@@ -1,14 +1,21 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
+#####################################################################
+# imports
+
 import traceback
 
 import BigWorld
 from gui.Scaleform.Minimap import MODE_ARCADE, MODE_SNIPER, _isStrategic
 
 from xfw import *
+
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
+
+#####################################################################
+# handlers
 
 def Minimap_start(self):
     if config.get('minimap/enabled'):
