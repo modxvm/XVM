@@ -15,26 +15,5 @@ XFW_MOD_INFO = {
 #####################################################################
 # imports
 
-import traceback
-
-import BigWorld
-
-from xfw import *
-
-from xvm_main.python.logger import *
-import xvm_main.python.config as config
-
 import fragCorrelationPanel
 import minimap
-
-#####################################################################
-# hooks
-
-import gui.Scaleform.daapi.view.battle.score_panel as score_panel
-OverrideMethod(score_panel._FragCorrelationPanel, 'updateScore', fragCorrelationPanel.FragCorrelationPanel_updateScore)
-OverrideMethod(score_panel, '_markerComparator', fragCorrelationPanel._markerComparator)
-
-from gui.Scaleform.Minimap import Minimap
-RegisterEvent(Minimap, 'start', minimap.Minimap_start)
-OverrideMethod(Minimap, '_Minimap__callEntryFlash', minimap.Minimap__callEntryFlash)
-RegisterEvent(Minimap, '_Minimap__addEntryLit', minimap.Minimap__addEntryLit)

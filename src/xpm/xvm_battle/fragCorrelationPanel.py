@@ -7,6 +7,7 @@ import traceback
 
 import BigWorld
 from gui.shared.gui_items.Vehicle import VEHICLE_BATTLE_TYPES_ORDER_INDICES
+import gui.Scaleform.daapi.view.battle.score_panel as score_panel
 
 from xfw import *
 
@@ -19,6 +20,7 @@ import xvm_main.python.config as config
 
 # show quantity of alive instead of dead in frags panel
 # original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
+@overrideMethod(score_panel._FragCorrelationPanel, 'updateScore')
 def FragCorrelationPanel_updateScore(base, self):
     try:
         if config.get('fragCorrelation/showAliveNotFrags'):
@@ -44,6 +46,8 @@ def FragCorrelationPanel_updateScore(base, self):
         err(traceback.format_exc())
     base(self)
 
+
+@overrideMethod(score_panel, '_markerComparator')
 def _markerComparator(base, x1, x2):
     try:
         if config.get('fragCorrelation/sortByType'):

@@ -6,7 +6,7 @@
 import traceback
 
 import BigWorld
-from gui.Scaleform.Minimap import MODE_ARCADE, MODE_SNIPER, _isStrategic
+from gui.Scaleform.Minimap import Minimap, MODE_ARCADE, MODE_SNIPER, _isStrategic
 
 from xfw import *
 
@@ -17,6 +17,7 @@ import xvm_main.python.config as config
 #####################################################################
 # handlers
 
+@registerEvent(Minimap, 'start')
 def Minimap_start(self):
     if config.get('minimap/enabled'):
         try:
@@ -36,6 +37,7 @@ def Minimap_start(self):
                 err(traceback.format_exc())
 
 
+@overrideMethod(Minimap, '_Minimap__callEntryFlash')
 def Minimap__callEntryFlash(base, self, id, methodName, args=None):
     base(self, id, methodName, args)
 
@@ -53,6 +55,7 @@ def Minimap__callEntryFlash(base, self, id, methodName, args=None):
                 err(traceback.format_exc())
 
 
+@registerEvent(Minimap, '_Minimap__addEntryLit')
 def Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
     if config.get('minimap/enabled'):
         if vInfo.isObserver() or matrix is None:
