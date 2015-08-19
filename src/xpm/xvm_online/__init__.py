@@ -12,6 +12,7 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
 # constants
 
@@ -21,42 +22,46 @@ class XVM_ONLINE_COMMAND(object):
     GETCURRENTSERVER = "xvm_online.getcurrentserver"
     AS_CURRENTSERVER = "xvm_online.as.currentserver"
 
+
 #####################################################################
 # includes
 
 import traceback
 
 import BigWorld
+import game
+from ConnectionManager import connectionManager
+from gui.shared import g_eventBus
+from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
 
-import simplejson
 from xfw import *
+import simplejson
+
 from xvm_main.python.logger import *
+
 import online
 
-#####################################################################
-# event handlers
 
-# INIT
+#####################################################################
+# initialization/finalization
 
 def start():
-    from gui.shared import g_eventBus
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
+BigWorld.callback(0, start)
+
+
+@registerEvent(game, 'fini')
 def fini():
-    from gui.shared import g_eventBus
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
-# onXfwCommand
 
-_LOG_COMMANDS = (
-    #XVM_PING_COMMAND.PING,
-)
+#####################################################################
+# onXfwCommand
 
 # returns: (result, status)
 def onXfwCommand(cmd, *args):
     try:
-        if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
-            debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
         if cmd == XVM_ONLINE_COMMAND.ONLINE:
             online.online()
             return (None, True)
@@ -68,17 +73,11 @@ def onXfwCommand(cmd, *args):
         return (None, True)
     return (None, False)
 
+
+#####################################################################
+# handlers
+
+@registerEvent(LobbyHeaderMeta, 'as_setServerS')
 def getCurrentServer(*args, **kwargs):
-    from ConnectionManager import connectionManager
     debug('getCurrentServer: %s' %  connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
     as_xfw_cmd(XVM_ONLINE_COMMAND.AS_CURRENTSERVER, connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
-
-# Delayed registration
-def _RegisterEvents():
-    start()
-    import game
-    RegisterEvent(game, 'fini', fini)
-    from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
-    RegisterEvent(LobbyHeaderMeta, 'as_setServerS', getCurrentServer)
-
-BigWorld.callback(0, _RegisterEvents)

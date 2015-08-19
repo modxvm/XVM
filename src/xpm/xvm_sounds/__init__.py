@@ -12,22 +12,34 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
+# imports
 
 import traceback
 
 import BigWorld
 from gui.shared.SoundEffectsId import SoundEffectsId
 from gui.shared.utils.sound import Sound
+from gui.Scaleform.Battle import Battle
 
 from xfw import *
 
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 
-#####################################################################
-# event handlers
 
+#####################################################################
+# handlers
+
+#import FMOD
+#FMOD.loadEventProject('../mods/shared_resources/xvm/res/audio/xvm')
+#loadSuccessfully = FMOD.loadSoundBankIntoMemoryFromPath('../mods/shared_resources/xvm/res/audio/xvm.fsb')
+#log('ok: {}'.format(loadSuccessfully))
+#log(FMOD.getSoundBanks())
+
+
+@registerEvent(Battle, '_showSixthSenseIndicator')
 def Battle_showSixthSenseIndicator(self, isShow):
     try:
         vehId = BigWorld.entities[BigWorld.player().playerVehicleID].typeDescriptor.type.compactDescr
@@ -40,6 +52,7 @@ def Battle_showSixthSenseIndicator(self, isShow):
     except:
         err(traceback.format_exc())
 
+
 def _test():
     log('test')
     soundId = config.get('sounds/sixthSense')
@@ -47,19 +60,4 @@ def _test():
         Sound(soundId).play()
     BigWorld.callback(1, _test)
 
-#####################################################################
-# Register events
-
-def _RegisterEvents():
-    #import FMOD
-    #FMOD.loadEventProject('../mods/shared_resources/xvm/res/audio/xvm')
-    #loadSuccessfully = FMOD.loadSoundBankIntoMemoryFromPath('../mods/shared_resources/xvm/res/audio/xvm.fsb')
-    #log('ok: {}'.format(loadSuccessfully))
-    #log(FMOD.getSoundBanks())
-
-    from gui.Scaleform.Battle import Battle
-    RegisterEvent(Battle, '_showSixthSenseIndicator', Battle_showSixthSenseIndicator)
-
-    #BigWorld.callback(10, _test)
-
-BigWorld.callback(0, _RegisterEvents)
+#BigWorld.callback(10, _test)

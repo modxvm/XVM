@@ -3,100 +3,89 @@
 #############################
 # Command
 
-def ping(proxy):
-    _ping.ping(proxy)
-
-request_sent = False
+def ping():
+    _ping.ping_request()
 
 #############################
 # Private
 
 import traceback
-
 import BigWorld
-import ResMgr
+import Settings
+from xfw import *
+from xvm_main.python.logger import *
+from . import XVM_PING_COMMAND
+import xvm_main.python.config as config
 
-import simplejson
-from logger import *
-# from constants import *
+#############################
+# consts
+SMOOTHNESS = 4 # we will take minimal of results (WGPinger might return higher than actual results, but not less than actual)
+DUMMY_ADDRESS = 'localhost' # for distinguishing our requests
 
 #############################
 
-"""
-NOTE: Multiple BigWorld.WGPinger.ping() requests cannot be run simultaneously.
-"""
 class _Ping(object):
 
     def __init__(self):
-        self.listeners = []
-        self.preheat = 3
+        self.url_to_serverName = {}
+        self.hooks_set = False
+        self.ping_history = {}
+        self.autoLoginQuery_performed = False
 
-        self.hosts = list()
-        loginSection = ResMgr.openSection('scripts_config.xml')['login']
-        if loginSection is not None:
-            for (name, subSec) in loginSection.items():
-                self.hosts.append({
-                    'name': subSec.readStrings('name')[0],
-                    'url': subSec.readStrings('url')[0]})
-
-    def ping(self, proxy):
-        # debug("ping")
-        if proxy not in self.listeners:
-            self.listeners.append(proxy)
-
-        self._do_ping()
-
-    def _do_ping(self):
-        global request_sent
-        if request_sent:
-            BigWorld.callback(0, self._do_ping)
-            return
-
+    def ping_request(self):
         try:
-            # debug("ping: start")
-            request_sent = True
-            peripheries = map((lambda host: host['url']), self.hosts)
-            BigWorld.WGPinger.setOnPingCallback(self._onPingPerformed)
-            BigWorld.WGPinger.ping(peripheries)
-        except:
-            err('_do_ping() exception: ' + traceback.format_exc())
+            from predefined_hosts import g_preDefinedHosts
+            if not self.hooks_set:
+                BigWorld.WGPinger.setOnPingCallback(self.results_arrived)
+                self.hooks_set = True
+            if not self.url_to_serverName:
+                g_preDefinedHosts.readScriptConfig(Settings.g_instance.scriptConfig)
+                self.url_to_serverName = {host.url:host.name if len(host.name) < 13 else host.shortName for host in g_preDefinedHosts.hosts()}
+                if self.url_to_serverName: # if url_to_serverName is empty, leave it empty
+                    self.url_to_serverName[DUMMY_ADDRESS] = DUMMY_ADDRESS
+            BigWorld.WGPinger.ping(self.url_to_serverName.keys())
+        except Exception as ex:
+            err('ping_request() exception: ' + traceback.format_exc())
 
-    def _onPingPerformed(self, result):
-        # log("_onPingPerformed")
+    def results_arrived(self, results):
         try:
-            # debug("ping: end")
-            try:
-                BigWorld.WGPinger.clearOnPingCallback()
-            except:
-                err('BigWorld.WGPinger.clearOnPingCallback() exception: ' + traceback.format_exc())
-
-            global request_sent
-            request_sent = False
-
-            res = dict()
-            for url, value in result:
-                name = next(x['name'] for x in self.hosts if x['url'] == url)
-                res[name] = value if name is not None else '?'
-
-            if self.preheat > 0:
-                self.preheat -= 1
-                BigWorld.callback(0, self._do_ping)
+            results = dict(results)
+            if DUMMY_ADDRESS not in results: # not our callback
+                from predefined_hosts import g_preDefinedHosts
+                g_preDefinedHosts._PreDefinedHostList__onPingPerformed(results)
             else:
-                self._respond(res)
-                self.listeners = []
+                del results[DUMMY_ADDRESS]
+            if not len(results) or not len(self.url_to_serverName):
+                return
+            ping_results = {}
+            best_ping = 999
+            for url, ping in results.iteritems():
+                server_name = self.url_to_serverName[url]
+                smoothed_ping = self.smooth_ping(server_name, ping)
+                if smoothed_ping <= 0:
+                    ping_results[server_name] = 'Error'
+                else:
+                    ping_results[server_name] = smoothed_ping
+                    best_ping = min(best_ping, smoothed_ping)
+            from gui.shared.utils.HangarSpace import g_hangarSpace
+            if (g_hangarSpace.spaceInited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.spaceInited and config.get('login/pingServers/showTitle')):
+                ping_results['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
+            as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, ping_results)
+        except Exception as ex:
+            err('results_arrived() exception: ' + traceback.format_exc())
+            as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, {'Error': ex})
 
-        except Exception, ex:
-            err('_onPingPerformed() exception: ' + traceback.format_exc())
-            self._respond({"Error": ex})
-            self.listeners = []
-
-    def _respond(self, res):
+    def smooth_ping(self, server_name, new_value = 0):
         try:
-            strdata = simplejson.dumps(res)
-            for proxy in self.listeners:
-                if proxy and hasattr(proxy, 'component') and hasattr(proxy, 'movie') and proxy.movie:
-                    proxy.movie.invoke((AS2RESPOND.PINGDATA, [strdata]))
+            if server_name not in self.ping_history:
+                self.ping_history[server_name] = []
+            if new_value:
+                self.ping_history[server_name].append(new_value)
+                if len(self.ping_history[server_name]) > SMOOTHNESS:
+                    self.ping_history[server_name].pop(0)
+            return min(self.ping_history[server_name])
         except:
-            err('_respond() exception: ' + traceback.format_exc())
+            err('smooth_ping() exception: ' + traceback.format_exc())
+            return new_value
 
 _ping = _Ping()

@@ -12,16 +12,31 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
+# imports
 
 import traceback
+
 import BigWorld
 from gui.Scaleform.genConsts.QUEST_TASK_FILTERS_TYPES import QUEST_TASK_FILTERS_TYPES
+from gui.Scaleform.genConsts.QUESTS_ALIASES import QUESTS_ALIASES
+import gui.Scaleform.daapi.settings.config as config
+from gui.Scaleform.framework import ViewSettings
+from gui.Scaleform.daapi.view.lobby.server_events import QuestsCurrentTab, QuestsTileChainsView
+from gui.Scaleform.framework import ViewTypes
+from gui.Scaleform.framework import ScopeTemplates
+from gui.Scaleform.framework import g_entitiesFactories
+from gui.Scaleform.daapi.view.lobby.server_events.EventsWindow import EventsWindow
+from gui.Scaleform.daapi.view.lobby.server_events import QuestsTileChainsView
+from gui.Scaleform.daapi.view.lobby.server_events.QuestsTileChainsView import _QuestsFilter
 
 from xfw import *
+
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 import xvm_main.python.userprefs as userprefs
+
 
 #####################################################################
 # constants
@@ -29,16 +44,25 @@ import xvm_main.python.userprefs as userprefs
 class LINKAGES(object):
     UI_LINKAGE_COMMON_QUESTS = "xvm.quests_ui::UI_CommonQuestsView"
 
+
 class FILTERS(object):
     HIDE_WITH_HONORS = "hideWithHonors"
     STARTED = "started"
 
+
 #####################################################################
-# event handlers
+# handlers
 
+config.VIEWS_SETTINGS += (ViewSettings(LINKAGES.UI_LINKAGE_COMMON_QUESTS, QuestsCurrentTab, None,
+                                       ViewTypes.COMPONENT, None, ScopeTemplates.DEFAULT_SCOPE),)
+g_entitiesFactories.initSettings(config.VIEWS_SETTINGS)
+
+_QuestsFilter._FILTER_BY_STATE[FILTERS.HIDE_WITH_HONORS] = lambda q: not q.isFullCompleted(True)
+_QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress()
+
+
+@overrideMethod(EventsWindow, '_loadView')
 def EventsWindow_loadView(base, self, linkage, alias):
-    from gui.Scaleform.genConsts.QUESTS_ALIASES import QUESTS_ALIASES
-
     ui_required = False
     if linkage == QUESTS_ALIASES.COMMON_QUESTS_VIEW_LINKAGE:
         linkage = LINKAGES.UI_LINKAGE_COMMON_QUESTS
@@ -53,6 +77,7 @@ def EventsWindow_loadView(base, self, linkage, alias):
     base(self, linkage, alias)
 
 
+@overrideMethod(QuestsTileChainsView, 'as_setHeaderDataS')
 def QuestsTileChainsView_as_setHeaderDataS(base, self, data):
     if data:
         data['filters']['taskTypeFilterData'].insert(2, {'label': l10n('Hide with honors'),
@@ -62,6 +87,7 @@ def QuestsTileChainsView_as_setHeaderDataS(base, self, data):
     return base(self, data)
 
 
+@overrideMethod(QuestsTileChainsView, '_QuestsTileChainsView__getCurrentFilters')
 def QuestsTileChainsView__getCurrentFilters(base, self):
     if self._navInfo.potapov.filters is None:
         try:
@@ -72,6 +98,7 @@ def QuestsTileChainsView__getCurrentFilters(base, self):
     return base(self)
 
 
+@registerEvent(QuestsTileChainsView, '_QuestsTileChainsView__updateTileData')
 def QuestsTileChainsView__updateTileData(self, vehType, questState, selectItemID = -1):
     _SaveSettings(vehType=vehType, questState=questState)
 
@@ -114,32 +141,3 @@ def _SaveSettings(vehType=-1, questState=QUEST_TASK_FILTERS_TYPES.ALL):
         userprefs.set(_PREFS_NAME(), settings)
     except Exception:
         err(traceback.format_exc())
-
-#####################################################################
-# Register events
-
-def _RegisterEvents():
-    import gui.Scaleform.daapi.settings.config as config
-    from gui.Scaleform.framework import ViewSettings
-    from gui.Scaleform.daapi.view.lobby.server_events import QuestsCurrentTab, QuestsTileChainsView
-    from gui.Scaleform.framework import ViewTypes
-    from gui.Scaleform.framework import ScopeTemplates
-    from gui.Scaleform.framework import g_entitiesFactories
-
-    config.VIEWS_SETTINGS += (ViewSettings(LINKAGES.UI_LINKAGE_COMMON_QUESTS, QuestsCurrentTab, None,
-                                           ViewTypes.COMPONENT, None, ScopeTemplates.DEFAULT_SCOPE),)
-    g_entitiesFactories.initSettings(config.VIEWS_SETTINGS)
-
-    from gui.Scaleform.daapi.view.lobby.server_events.EventsWindow import EventsWindow
-    OverrideMethod(EventsWindow, '_loadView', EventsWindow_loadView)
-
-    from gui.Scaleform.daapi.view.lobby.server_events import QuestsTileChainsView
-    OverrideMethod(QuestsTileChainsView, 'as_setHeaderDataS', QuestsTileChainsView_as_setHeaderDataS)
-    OverrideMethod(QuestsTileChainsView, '_QuestsTileChainsView__getCurrentFilters', QuestsTileChainsView__getCurrentFilters)
-    RegisterEvent(QuestsTileChainsView, '_QuestsTileChainsView__updateTileData', QuestsTileChainsView__updateTileData)
-
-    from gui.Scaleform.daapi.view.lobby.server_events.QuestsTileChainsView import _QuestsFilter
-    _QuestsFilter._FILTER_BY_STATE[FILTERS.HIDE_WITH_HONORS] = lambda q: not q.isFullCompleted(True)
-    _QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress()
-
-BigWorld.callback(0, _RegisterEvents)

@@ -12,6 +12,7 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
 # constants
 
@@ -21,45 +22,48 @@ class XVM_PING_COMMAND(object):
     GETCURRENTSERVER = "xvm_ping.getcurrentserver"
     AS_CURRENTSERVER = "xvm_ping.as.currentserver"
 
+
 #####################################################################
 # includes
 
 import traceback
 
 import BigWorld
+import game
+from ConnectionManager import connectionManager
+from gui.shared import g_eventBus
+from predefined_hosts import g_preDefinedHosts
+from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
 
-import simplejson
 from xfw import *
+import simplejson
+
 from xvm_main.python.logger import *
 
 import pinger
-# import pinger_wg as pinger
-#import pinger_wg_new as pinger
+#import pinger_wg as pinger
+
 
 #####################################################################
-# event handlers
-
-# INIT
+# initialization/finalization
 
 def start():
-    from gui.shared import g_eventBus
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
+BigWorld.callback(0, start)
+
+
+@registerEvent(game, 'fini')
 def fini():
-    from gui.shared import g_eventBus
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
-# onXfwCommand
 
-_LOG_COMMANDS = (
-    #XVM_PING_COMMAND.PING,
-)
+#####################################################################
+# onXfwCommand
 
 # returns: (result, status)
 def onXfwCommand(cmd, *args):
     try:
-        if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
-            debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
         if cmd == XVM_PING_COMMAND.PING:
             pinger.ping()
             return (None, True)
@@ -71,12 +75,19 @@ def onXfwCommand(cmd, *args):
         return (None, True)
     return (None, False)
 
-def getCurrentServer(*args, **kwargs):
-    from ConnectionManager import connectionManager
+
+#####################################################################
+# handlers
+
+@registerEvent(LobbyHeaderMeta, 'as_setServerS')
+def LobbyHeaderMeta_as_setServerS(*args, **kwargs):
     as_xfw_cmd(XVM_PING_COMMAND.AS_CURRENTSERVER, connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
 
+
+#####################################################################
 # WGPinger (WARNING: bugs with the multiple hosts)
 
+#@overrideMethod(g_preDefinedHosts, 'autoLoginQuery')
 def PreDefinedHostList_autoLoginQuery(base, callback):
     # debug('> PreDefinedHostList_autoLoginQuery')
     import pinger_wg
@@ -88,24 +99,8 @@ def PreDefinedHostList_autoLoginQuery(base, callback):
         BigWorld.WGPinger.setOnPingCallback(PreDefinedHostList_onPingPerformed)
         base(callback)
 
+
 def PreDefinedHostList_onPingPerformed(result):
     # debug('login ping: end')
     pinger_wg.request_sent = False
-    from predefined_hosts import g_preDefinedHosts
     g_preDefinedHosts._PreDefinedHostList__onPingPerformed(result)
-
-# Delayed registration
-def _RegisterEvents():
-    start()
-
-    import game
-    RegisterEvent(game, 'fini', fini)
-
-    from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
-    RegisterEvent(LobbyHeaderMeta, 'as_setServerS', getCurrentServer)
-
-    # enable for pinger_wg
-    # from predefined_hosts import g_preDefinedHosts
-    # OverrideMethod(g_preDefinedHosts, 'autoLoginQuery', PreDefinedHostList_autoLoginQuery)
-
-BigWorld.callback(0, _RegisterEvents)

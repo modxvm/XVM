@@ -12,14 +12,24 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
+# imports 
 
 import traceback
 
 import BigWorld
 from gui.Scaleform.locale.PROFILE import PROFILE
+from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
+from gui.Scaleform.daapi.view.meta.ProfileMeta import ProfileMeta
+from gui.Scaleform.daapi.view.meta.ProfileWindowMeta import ProfileWindowMeta
+from gui.Scaleform.daapi.view.lobby.profile import ProfileTechnique
+from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniquePage
+from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
 
 from xfw import *
+
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 import xvm_main.python.constants as constants
@@ -29,13 +39,41 @@ import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 import xvm_main.python.vehinfo_xte as vehinfo_xte
 
+
 #####################################################################
-# event handlers
+# handlers
 
 _lastPlayerId = None
 _lastVehId = None
 
-def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
+
+@overrideMethod(ProfileMeta, 'registerFlashComponent')
+def ProfileMeta_registerFlashComponent(base, self, component, alias, *args):
+    startPageAlias = _getStartPageAlias(self, alias, True)
+    if startPageAlias is not None:
+        args[3]['selectedAlias'] = startPageAlias
+    base(self, component, alias, *args)
+
+
+@overrideMethod(ProfileWindowMeta, 'registerFlashComponent')
+def ProfileWindowMeta_registerFlashComponent(base, self, component, alias, *args):
+    startPageAlias = _getStartPageAlias(self, alias, False)
+    if startPageAlias is not None:
+        args[3]['selectedAlias'] = startPageAlias
+    base(self, component, alias, *args)
+
+
+@overrideMethod(ProfileTechniquePage, '_sendAccountData')
+def ProfileTechniquePage_sendAccountData(base, self, targetData, accountDossier):
+    _sendAccountData(base, self, targetData, accountDossier)
+
+
+@overrideMethod(ProfileTechniqueWindow, '_sendAccountData')
+def ProfileTechniqueWindow_sendAccountData(base, self, targetData, accountDossier):
+    _sendAccountData(base, self, targetData, accountDossier)
+
+
+def _sendAccountData(base, self, targetData, accountDossier):
     global _lastPlayerId
     _lastPlayerId = accountDossier.getPlayerDBID()
 
@@ -53,6 +91,7 @@ def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
         base(self, targetData, accountDossier)
 
 
+@overrideMethod(ProfileTechnique, '_getTechniqueListVehicles')
 def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
     res = base(self, targetData, addVehiclesThatInHangarOnly)
     if token.networkServicesSettings['statAwards']:
@@ -68,6 +107,7 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
     return res
 
 
+@overrideMethod(ProfileTechnique, '_receiveVehicleDossier')
 def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
     global _lastVehId
     _lastVehId = vehId
@@ -80,6 +120,7 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
             self.flashObject.as_responseVehicleDossierXvm(vDossier)
 
 
+@overrideStaticMethod(DetailedStatisticsUtils, 'getStatistics')
 def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser):
     res = base(targetData, isCurrentuser)
     global _lastVehId
@@ -114,26 +155,10 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser):
     return res
 
 
-def ProfileMeta_registerFlashComponent(base, self, component, alias, *args):
-    startPageAlias = _getStartPageAlias(self, alias, True)
-    if startPageAlias is not None:
-        args[3]['selectedAlias'] = startPageAlias
-    base(self, component, alias, *args)
-
-
-def ProfileWindowMeta_registerFlashComponent(base, self, component, alias, *args):
-    startPageAlias = _getStartPageAlias(self, alias, False)
-    if startPageAlias is not None:
-        args[3]['selectedAlias'] = startPageAlias
-    base(self, component, alias, *args)
-
-
 #####################################################################
 # internal
 
 def _getStartPageAlias(self, alias, isProfilePage):
-    from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-
     if alias != VIEW_ALIAS.PROFILE_TAB_NAVIGATOR:
         return None
 
@@ -152,29 +177,3 @@ def _getStartPageAlias(self, alias, isProfilePage):
         return VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE if isProfilePage else VIEW_ALIAS.PROFILE_TECHNIQUE_WINDOW
 
     return VIEW_ALIAS.PROFILE_SUMMARY_PAGE if isProfilePage else VIEW_ALIAS.PROFILE_SUMMARY_WINDOW
-
-
-#####################################################################
-# Register events
-
-def _RegisterEvents():
-    from gui.Scaleform.daapi.view.meta.ProfileMeta import ProfileMeta
-    OverrideMethod(ProfileMeta, 'registerFlashComponent', ProfileMeta_registerFlashComponent)
-
-    from gui.Scaleform.daapi.view.meta.ProfileWindowMeta import ProfileWindowMeta
-    OverrideMethod(ProfileWindowMeta, 'registerFlashComponent', ProfileWindowMeta_registerFlashComponent)
-
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechnique
-    OverrideMethod(ProfileTechnique, '_getTechniqueListVehicles', ProfileTechnique_getTechniqueListVehicles)
-    OverrideMethod(ProfileTechnique, '_receiveVehicleDossier', ProfileTechnique_receiveVehicleDossier)
-
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniquePage
-    OverrideMethod(ProfileTechniquePage, '_sendAccountData', ProfileTechnique_sendAccountData)
-
-    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
-    OverrideMethod(ProfileTechniqueWindow, '_sendAccountData', ProfileTechnique_sendAccountData)
-
-    from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
-    OverrideStaticMethod(DetailedStatisticsUtils, 'getStatistics', DetailedStatisticsUtils_getStatistics)
-
-BigWorld.callback(0, _RegisterEvents)

@@ -12,15 +12,22 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
+# imports
 
 import BigWorld
+import game
+from gui.shared import g_eventBus, g_itemsCache
+from gui.Scaleform.daapi.view.lobby.prb_windows.SquadView import SquadView
 
 from xfw import *
+
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 from xvm_main.python.vehinfo_tiers import getTiers
+
 
 #####################################################################
 # constants/globals
@@ -33,16 +40,20 @@ class COMMANDS(object):
 window_populated = False
 squad_window_handler = None
 
+
 #####################################################################
 # initialization/finalization
 
 def start():
-    from gui.shared import g_eventBus
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
+BigWorld.callback(0, start)
+
+
+@registerEvent(game, 'fini')
 def fini():
-    from gui.shared import g_eventBus
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+
 
 #####################################################################
 # onXfwCommand
@@ -59,8 +70,19 @@ def onXfwCommand(cmd, *args):
         return (None, True)
     return (None, False)
 
+
 #####################################################################
-# event handlers
+# handlers
+
+@registerEvent(SquadView, '__init__')
+def SquadView__init__(self, *args, **kwargs):
+    squad_update_tiers(self, *args, **kwargs)
+
+
+@registerEvent(SquadView, '_updateRallyData')
+def SquadView_updateRallyData(self, *args, **kwargs):
+    squad_update_tiers(self, *args, **kwargs)
+
 
 def squad_update_tiers(self, *args, **kwargs):
     try:
@@ -68,7 +90,6 @@ def squad_update_tiers(self, *args, **kwargs):
         squad_window_handler = self
         if not window_populated:
             return
-        from gui.shared import g_itemsCache
         min_tier = 0
         max_tier = 0
         for squad_vehicle in self.unitFunctional.getUnit()[1].getVehicles().values():
@@ -83,17 +104,3 @@ def squad_update_tiers(self, *args, **kwargs):
         as_xfw_cmd(COMMANDS.AS_UPDATE_TIERS, text_tiers)
     except Exception, ex:
         err(traceback.format_exc())
-
-#####################################################################
-# Register events
-
-def _RegisterEvents():
-    start()
-    import game
-    RegisterEvent(game, 'fini', fini)
-
-    from gui.Scaleform.daapi.view.lobby.prb_windows.SquadView import SquadView
-    RegisterEvent(SquadView, '__init__', squad_update_tiers)
-    RegisterEvent(SquadView, '_updateRallyData', squad_update_tiers)
-
-BigWorld.callback(0, _RegisterEvents)
