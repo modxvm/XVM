@@ -8,6 +8,7 @@ import traceback
 import BigWorld
 from gui.shared.gui_items.Vehicle import VEHICLE_BATTLE_TYPES_ORDER_INDICES
 import gui.Scaleform.daapi.view.battle.score_panel as score_panel
+from gui.battle_control import g_sessionProvider
 
 from xfw import *
 
@@ -25,7 +26,6 @@ def FragCorrelationPanel_updateScore(base, self):
     try:
         if config.get('fragCorrelation/showAliveNotFrags'):
             if len(self._FragCorrelationPanel__teamsDeaths) and len(self._FragCorrelationPanel__teamsShortLists):
-                from gui.battle_control import g_sessionProvider
                 isTeamEnemy = g_sessionProvider.getArenaDP().isEnemyTeam
                 ally_frags, enemy_frags, ally_vehicles, enemy_vehicles  = (0, 0, 0, 0)
                 for teamIdx, vehs in self._FragCorrelationPanel__teamsShortLists.iteritems():

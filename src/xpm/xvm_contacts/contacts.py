@@ -39,6 +39,7 @@ _CONTACTS_DATA_VERSION = '1.0'
 _SYSTEM_MESSAGE_TPL = '''<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png"
  vspace="-5">&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n%VALUE%</textformat>'''
 
+
 class _Contacts:
 
     def __init__(self):
@@ -46,6 +47,7 @@ class _Contacts:
         self.cached_token = None
         self.is_available = False
         self.contacts_disabled = False
+
 
     def initialize(self):
         try:
@@ -87,6 +89,7 @@ class _Contacts:
 
         #log(self.cached_data)
 
+
     def getXvmContactData(self, uid):
         nick = None
         comment = None
@@ -102,6 +105,7 @@ class _Contacts:
 
         return {'nick':nick,'comment':comment}
 
+    
     def setXvmContactData(self, uid, value):
         try:
             if self.cached_data is None or 'players' not in self.cached_data:
@@ -133,6 +137,7 @@ class _Contacts:
 
             return False
 
+    
     # PRIVATE
 
     def _doRequest(self, cmd, body=None):

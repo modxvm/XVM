@@ -13,24 +13,52 @@ XFW_MOD_INFO = {
 }
 
 #####################################################################
+# imports
 
 import traceback
 
 import BigWorld
+import game
+import helpers
+import nations
+from CurrentVehicle import g_currentVehicle
+from gui.shared import g_eventBus, g_itemsCache
+from gui.prb_control.settings import PREBATTLE_RESTRICTION
+from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
+from gui.shared.gui_items.Vehicle import Vehicle
+from gui.prb_control.dispatcher import _PrebattleDispatcher
 
 from xfw import *
+
 import xvm_main.python.config as config
+from xvm_main.python.constants import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 
+
 #####################################################################
-# event handlers
+# initialization/finalization
+
+# player entered, get player name + region as unique name
+def onConfigLoaded(self, e=None):
+    Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
+
+
+g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+
+@registerEvent(game, 'fini')
+def fini():
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+
+#####################################################################
+# handlers
 
 #barracks: add nation flag and skills for tanksman
+@overrideMethod(BarracksMeta, 'as_setTankmenS')
 def BarracksMeta_as_setTankmenS(base, self, tankmenCount, tankmenInSlots, placesCount, tankmenInBarracks, tankmanArr):
     try:
-        import nations
-        from gui.shared import g_itemsCache
         imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
         for tankman in tankmanArr:
             if 'role' not in tankman:
@@ -53,7 +81,9 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, tankmenInSlots, places
 
     return base(self, tankmenCount, tankmenInSlots, placesCount, tankmenInBarracks, tankmanArr)
 
+
 # low ammo => vehicle not ready
+@overrideMethod(Vehicle, 'isReadyToPrebattle')
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     try:
         if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
@@ -62,7 +92,9 @@ def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
         err(traceback.format_exc())
     return base(self, *args, **kwargs)
 
+
 # low ammo => vehicle not ready
+@overrideMethod(Vehicle, 'isReadyToFight')
 def Vehicle_isReadyToFight(base, self, *args, **kwargs):
     try:
         if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
@@ -71,39 +103,21 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
         err(traceback.format_exc())
     return base.fget(self, *args, **kwargs) # base is property
 
+
 # low ammo => vehicle not ready (disable red button)
+@overrideMethod(_PrebattleDispatcher, 'canPlayerDoAction')
 def _PrebattleDispatcher_canPlayerDoAction(base, self, *args, **kwargs):
     try:
-        from CurrentVehicle import g_currentVehicle
         if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
-            from gui.prb_control.settings import PREBATTLE_RESTRICTION
             return (False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
     except Exception as ex:
         err(traceback.format_exc())
     return base(self, *args, **kwargs)
 
+
 # low ammo => write on carousel's vehicle 'low ammo'
+@overrideMethod(helpers.i18n, 'makeString')
 def i18n_makeString(base, key, *args, **kwargs):
     if key == '#menu:tankCarousel/vehicleStates/ammoNotFull': # originally returns empty string
         return l10n('lowAmmo')
     return base(key, *args, **kwargs)
-
-#####################################################################
-# Register events
-
-def _RegisterEvents():
-    from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
-    OverrideMethod(BarracksMeta, 'as_setTankmenS', BarracksMeta_as_setTankmenS)
-
-    from gui.shared.gui_items.Vehicle import Vehicle
-    OverrideMethod(Vehicle, 'isReadyToPrebattle', Vehicle_isReadyToPrebattle)
-    OverrideMethod(Vehicle, 'isReadyToFight', Vehicle_isReadyToFight)
-    Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
-    
-    from gui.prb_control.dispatcher import _PrebattleDispatcher
-    OverrideMethod(_PrebattleDispatcher, 'canPlayerDoAction', _PrebattleDispatcher_canPlayerDoAction)
-    
-    from helpers import i18n
-    OverrideMethod(i18n, 'makeString', i18n_makeString)
-
-BigWorld.callback(0, _RegisterEvents)

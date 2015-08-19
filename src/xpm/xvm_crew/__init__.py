@@ -12,17 +12,29 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
+# imports
 
 import BigWorld
+import game
+from gui.shared import g_eventBus, g_itemsCache
+from CurrentVehicle import g_currentVehicle
+from gui.Scaleform.daapi.view.lobby.hangar import Crew
+from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import CrewContextMenuHandler
+from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import CREW as WG_CREW
+from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
+from gui.Scaleform.daapi.view.lobby.cyberSport.VehicleSelectorPopup import VehicleSelectorPopup
 
 from xfw import *
+
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 import xvm_main.python.userprefs as userprefs
 
 import wg_compat
+
 
 #####################################################################
 # constants
@@ -33,6 +45,7 @@ class CREW(object):
     PUT_BEST_CREW = 'PutBestCrew'
     PUT_CLASS_CREW = 'PutClassCrew'
     PUT_PREVIOUS_CREW = 'PutPreviousCrew'
+
 
 class COMMANDS(object):
     PUT_PREVIOUS_CREW = 'xvm_crew.put_previous_crew'
@@ -46,11 +59,13 @@ class COMMANDS(object):
 # initialization/finalization
 
 def start():
-    from gui.shared import g_eventBus
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
+BigWorld.callback(0, start)
+
+
+@registerEvent(game, 'fini')
 def fini():
-    from gui.shared import g_eventBus
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
 
@@ -61,7 +76,6 @@ def fini():
 def onXfwCommand(cmd, *args):
     try:
         if cmd == COMMANDS.PUT_PREVIOUS_CREW:
-            from CurrentVehicle import g_currentVehicle
             if g_currentVehicle.isInHangar() and not (g_currentVehicle.isCrewFull() or g_currentVehicle.isInBattle() or g_currentVehicle.isLocked()):
                 PutPreviousCrew(g_currentVehicle, False)
             return (None, True)
@@ -72,14 +86,14 @@ def onXfwCommand(cmd, *args):
 
 
 #####################################################################
-# event handlers
+# handlers
 
+@overrideMethod(CrewContextMenuHandler, '__init__')
 def CrewContextMenuHandler__init__(base, self, cmProxy, ctx=None):
     # debug('CrewContextMenuHandler__init__')
-    import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as crew
-    super(crew.CrewContextMenuHandler, self).__init__(cmProxy, ctx, {
-        crew.CREW.PERSONAL_CASE: 'showPersonalCase',
-        crew.CREW.UNLOAD: 'unloadTankman',
+    super(CrewContextMenuHandler, self).__init__(cmProxy, ctx, {
+        WG_CREW.PERSONAL_CASE: 'showPersonalCase',
+        WG_CREW.UNLOAD: 'unloadTankman',
         CREW.DROP_ALL_CREW: CREW.DROP_ALL_CREW,
         CREW.PUT_OWN_CREW: CREW.PUT_OWN_CREW,
         CREW.PUT_BEST_CREW: CREW.PUT_BEST_CREW,
@@ -88,6 +102,8 @@ def CrewContextMenuHandler__init__(base, self, cmProxy, ctx=None):
     })
     self._cmProxy = cmProxy
 
+
+@overrideMethod(CrewContextMenuHandler, '_generateOptions')
 def CrewContextMenuHandler_generateOptions(base, self, ctx = None):
     # debug('CrewContextMenuHandler_generateOptions')
     if self._tankmanID:
@@ -106,39 +122,22 @@ def CrewContextMenuHandler_generateOptions(base, self, ctx = None):
             self._makeItem(CREW.PUT_PREVIOUS_CREW, l10n(CREW.PUT_PREVIOUS_CREW)),
         ]
 
-#####################################################################
-# Menu item handlers
 
-def DropAllCrew(self):
-    from gui.Scaleform.daapi.view.lobby.hangar.Crew import Crew
-    Crew.unloadCrew()
-
-def PutOwnCrew(self):
-    as_xfw_cmd(COMMANDS.AS_PUT_OWN_CREW)
-
-def PutBestCrew(self):
-    as_xfw_cmd(COMMANDS.AS_PUT_BEST_CREW)
-
-def PutClassCrew(self):
-    as_xfw_cmd(COMMANDS.AS_PUT_CLASS_CREW)
-
-def PutPreviousCrew(self, print_message = True):
-    wg_compat.g_instance.processReturnCrew(print_message)
-
+@registerEvent(TmenXpPanel, '_onVehicleChange')
 def TmenXpPanel_onVehicleChange(self):
     #log('TmenXpPanel_onVehicleChange')
     if config.get('hangar/enableCrewAutoReturn'):
-        from CurrentVehicle import g_currentVehicle
         vehicle = g_currentVehicle.item
         vehId = g_currentVehicle.invID if vehicle is not None else 0
         isElite = vehicle.isElite if vehicle is not None else 0
         as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, vehId, isElite)
 
+
+@registerEvent(VehicleSelectorPopup, 'onSelectVehicles', True)
 def VehicleSelectorPopup_onSelectVehicles(self, items):
     try:
         if len(items) == 1:
             id = int(items[0])
-            from gui.shared import g_itemsCache
             vehicle = g_itemsCache.items.getItemByCD(id)
             if vehicle and vehicle.isInInventory and not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
                 if config.get('hangar/enableCrewAutoReturn') and userprefs.get('xvm_crew/auto_prev_crew/%s' % vehicle.invID, True):
@@ -146,28 +145,32 @@ def VehicleSelectorPopup_onSelectVehicles(self, items):
     except Exception, ex:
         err(traceback.format_exc())
 
+
 #####################################################################
-# Register events
+# Menu item handlers
 
-def _RegisterEvents():
-    start()
+def DropAllCrew(self):
+    Crew.unloadCrew()
 
-    import game
-    RegisterEvent(game, 'fini', fini)
 
-    from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import CrewContextMenuHandler
-    OverrideMethod(CrewContextMenuHandler, '__init__', CrewContextMenuHandler__init__)
-    OverrideMethod(CrewContextMenuHandler, '_generateOptions', CrewContextMenuHandler_generateOptions)
-    CrewContextMenuHandler.DropAllCrew = DropAllCrew
-    CrewContextMenuHandler.PutOwnCrew = PutOwnCrew
-    CrewContextMenuHandler.PutBestCrew = PutBestCrew
-    CrewContextMenuHandler.PutClassCrew = PutClassCrew
-    CrewContextMenuHandler.PutPreviousCrew = PutPreviousCrew
+def PutOwnCrew(self):
+    as_xfw_cmd(COMMANDS.AS_PUT_OWN_CREW)
 
-    from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
-    RegisterEvent(TmenXpPanel, '_onVehicleChange', TmenXpPanel_onVehicleChange)
 
-    from gui.Scaleform.daapi.view.lobby.cyberSport.VehicleSelectorPopup import VehicleSelectorPopup
-    RegisterEvent(VehicleSelectorPopup, 'onSelectVehicles', VehicleSelectorPopup_onSelectVehicles, True)
+def PutBestCrew(self):
+    as_xfw_cmd(COMMANDS.AS_PUT_BEST_CREW)
 
-BigWorld.callback(0, _RegisterEvents)
+
+def PutClassCrew(self):
+    as_xfw_cmd(COMMANDS.AS_PUT_CLASS_CREW)
+
+
+def PutPreviousCrew(self, print_message = True):
+    wg_compat.g_instance.processReturnCrew(print_message)
+
+
+CrewContextMenuHandler.DropAllCrew = DropAllCrew
+CrewContextMenuHandler.PutOwnCrew = PutOwnCrew
+CrewContextMenuHandler.PutBestCrew = PutBestCrew
+CrewContextMenuHandler.PutClassCrew = PutClassCrew
+CrewContextMenuHandler.PutPreviousCrew = PutPreviousCrew

@@ -12,32 +12,30 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
+# imports
 
 import BigWorld
+from Avatar import PlayerAvatar
 
 from xfw import *
+
 from xvm_main.python.logger import *
 
 import fps
 
+
 #####################################################################
-# event handlers
+# handlers
 
 # on map load (battle loading)
+@registerEvent(PlayerAvatar, 'onEnterWorld')
 def PlayerAvatar_onEnterWorld(self, *args):
     fps.start()
 
+
 # on map close
+@registerEvent(PlayerAvatar, 'onLeaveWorld')
 def PlayerAvatar_onLeaveWorld(self, *args):
     fps.stop()
-
-#####################################################################
-# Register events
-
-def _RegisterEvents():
-    from Avatar import PlayerAvatar
-    RegisterEvent(PlayerAvatar, 'onEnterWorld', PlayerAvatar_onEnterWorld)
-    RegisterEvent(PlayerAvatar, 'onLeaveWorld', PlayerAvatar_onLeaveWorld)
-
-BigWorld.callback(0, _RegisterEvents)

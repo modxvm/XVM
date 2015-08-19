@@ -13,6 +13,7 @@ def stop():
 import datetime
 
 import BigWorld
+from BattleReplay import g_replayCtrl
 
 from xfw import *
 from xvm_main.python.logger import *
@@ -23,7 +24,6 @@ class _Fps():
     intervalId = None
 
     def __init__(self):
-        from BattleReplay import g_replayCtrl
         self.replayCtrl = g_replayCtrl
         self.isReplay = g_replayCtrl.isPlaying
         self.values = None

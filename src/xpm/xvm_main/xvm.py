@@ -337,7 +337,7 @@ class Xvm(object):
         vehstate.cleanupBattleData()
 
 
-    def _onVehicleKilled(self, victimID, killerID, reason):
+    def _onVehicleKilled(self, victimID, *args):
         self.invalidate(victimID, INV.BATTLE_STATE | INV.MARKER_STATUS)
 
 

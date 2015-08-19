@@ -7,6 +7,8 @@ import traceback
 
 import BigWorld
 from gui.Scaleform.Minimap import Minimap, MODE_ARCADE, MODE_SNIPER, _isStrategic
+from gui.battle_control import g_sessionProvider
+from items.vehicles import VEHICLE_CLASS_TAGS
 
 from xfw import *
 
@@ -21,8 +23,6 @@ import xvm_main.python.config as config
 def Minimap_start(self):
     if config.get('minimap/enabled'):
         try:
-            from gui.battle_control import g_sessionProvider
-            from items.vehicles import VEHICLE_CLASS_TAGS
             if not g_sessionProvider.getCtx().isPlayerObserver():
                 player = BigWorld.player()
                 id = player.playerVehicleID

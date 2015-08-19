@@ -12,16 +12,30 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
+# imports
+
+import traceback
 
 import BigWorld
-import traceback
-from xfw import RegisterEvent, OverrideMethod, GAME_REGION
+import game
+from Account import PlayerAccount
+from CurrentVehicle import g_currentVehicle
+from gui.shared import g_eventBus, g_itemsCache, REQ_CRITERIA
+from gui.shared.gui_items import GUI_ITEM_TYPE
+from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
+from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
+
+from xfw import *
+
 import xvm_main.python.userprefs as userprefs
 import xvm_main.python.config as config
 from xvm_main.python.logger import err, debug
 from xvm_main.python.constants import *
+
 import wg_compat
+
 
 #####################################################################
 # globals
@@ -31,21 +45,24 @@ equip_settings = None
 player_name = None
 PREF_VERSION = '1.0'
 
+
 #####################################################################
 # initialization/finalization
 
 def start():
-    from gui.shared import g_eventBus
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, xvm_equip_init)
 
+BigWorld.callback(0, start)
+
+
+@registerEvent(game, 'fini')
 def fini():
-    from gui.shared import g_eventBus
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, xvm_equip_init)
 
-#####################################################################
-# event handlers
 
-# player entered, get player name + region as unique name
+#####################################################################
+# xvm_equip_init
+
 def xvm_equip_init(*args, **kwargs):
     try:
         global player_name, last_vehicles_id_arr, equip_settings
@@ -61,14 +78,23 @@ def xvm_equip_init(*args, **kwargs):
         err(traceback.format_exc())
         player_name = None
 
+
+#####################################################################
+# handlers
+
+# player entered, get player name + region as unique name
+@registerEvent(PlayerAccount, 'onBecomePlayer')
+def PlayerAccount_onBecomePlayer(*args, **kwargs):
+    xvm_equip_init(*args, **kwargs)
+
+
 # device is changed on vehicle, remember the setting
+@registerEvent(AmmunitionPanel, 'setVehicleModule')
 def AmmunitionPanel_setVehicleModule(self, newId, slotIdx, oldId, isRemove):
     try:
         if not player_name:
             return
         global equip_settings
-        from CurrentVehicle import g_currentVehicle
-        from gui.shared import g_itemsCache
         veh_name = g_currentVehicle.item.name
         settings_changed = False
         if isRemove and veh_name in equip_settings:
@@ -86,15 +112,14 @@ def AmmunitionPanel_setVehicleModule(self, newId, slotIdx, oldId, isRemove):
     except Exception, ex:
         err(traceback.format_exc())
 
+
 # vehicle switched, remove removable devices from previous and put on new one
+@registerEvent(TmenXpPanel, '_onVehicleChange')
 def TmenXpPanel_onVehicleChange(*args, **kwargs):
     try:
         if not player_name:
             return
         global last_vehicles_id_arr, equip_settings
-        from CurrentVehicle import g_currentVehicle
-        from gui.shared import g_itemsCache, REQ_CRITERIA
-        from gui.shared.gui_items import GUI_ITEM_TYPE
         if last_vehicles_id_arr and last_vehicles_id_arr[-1] == g_currentVehicle.item.intCD:
             return
         if not (last_vehicles_id_arr and equip_settings) and not get_settings():
@@ -139,6 +164,7 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
     except Exception, ex:
         err(traceback.format_exc())
 
+
 #####################################################################
 # utility functions
 
@@ -146,7 +172,6 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
 def get_settings():
     try:
         global last_vehicles_id_arr, equip_settings
-        from gui.shared import g_itemsCache, REQ_CRITERIA
         inventory_vehicles_dict = dict(g_itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY))
         last_vehicles_id_arr = inventory_vehicles_dict.keys()
         equip_settings = userprefs.get('auto_equip/%s' % player_name)
@@ -166,6 +191,7 @@ def get_settings():
         err(traceback.format_exc())
         return False
 
+
 # determine which removable devices installed on vehicle
 def installed_devices(vehicle):
     try:
@@ -179,27 +205,11 @@ def installed_devices(vehicle):
     except Exception, ex:
         err(traceback.format_exc())
 
+
 # save user prefs
 def save_settings():
     if player_name:
         userprefs.set('auto_equip/%s' % player_name, equip_settings)
-
-#####################################################################
-# Register events
-
-def _RegisterEvents():
-    start()
-    import game
-    RegisterEvent(game, 'fini', fini)
-
-    from Account import PlayerAccount
-    RegisterEvent(PlayerAccount, 'onBecomePlayer', xvm_equip_init)
-    from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
-    RegisterEvent(AmmunitionPanel, 'setVehicleModule', AmmunitionPanel_setVehicleModule)
-    from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
-    RegisterEvent(TmenXpPanel, '_onVehicleChange', TmenXpPanel_onVehicleChange)    
-
-BigWorld.callback(0, _RegisterEvents)
 
 
 # User preferences:

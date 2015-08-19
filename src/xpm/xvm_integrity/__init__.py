@@ -12,18 +12,28 @@ XFW_MOD_INFO = {
     # optional
 }
 
-#####################################################################
 
+#####################################################################
+# imports
+
+
+import os
+import threading
 import traceback
+
 import BigWorld
+import game
+from gui.shared import g_eventBus, events
+from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 
 from xfw import *
 from xfw.constants import PATH
+
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
-import threading
-import os
+
 from hashlib import sha1
+
 
 #####################################################################
 # globals
@@ -42,18 +52,23 @@ check_general_dirs = [
     PATH.GENERAL_MODS_DIR + '/scripts/client/gui/scaleform/locale',
     ]
 
+
 #####################################################################
-# event handlers
+# handlers
 
 def start():
-    from gui.shared import g_eventBus, events
-    from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
     g_eventBus.addListener(VIEW_ALIAS.LOBBY, checkIntegrity)
 
+BigWorld.callback(0, start)
+
+
+@registerEvent(game, 'fini')
 def fini():
-    from gui.shared import g_eventBus
-    from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
     g_eventBus.removeListener(VIEW_ALIAS.LOBBY, checkIntegrity)
+
+
+#####################################################################
+# handlers
 
 def checkIntegrity(*args, **kwargs):
     try:
@@ -65,12 +80,14 @@ def checkIntegrity(*args, **kwargs):
     except Exception, ex:
         err('checkIntegrity() exception: ' + traceback.format_exc())
 
+
 def _checkResult(*args, **kwargs):
     with lock:
         if integrity_result is None:
             BigWorld.callback(0.05, _checkResult)
             return
         log('xvm_integrity results: %s' % ('incorrect!\n\t' + '\n\t'.join(integrity_result) if integrity_result else 'correct!'))
+
 
 def _checkIntegrityAsync(*args, **kwargs):
     try:
@@ -113,13 +130,3 @@ def _checkIntegrityAsync(*args, **kwargs):
         err('_checkIntegrityAsync() exception: ' + traceback.format_exc())
         with lock:
             integrity_result = ['Error']
-
-#####################################################################
-# Register events
-
-def _RegisterEvents():
-    start()
-    import game
-    RegisterEvent(game, 'fini', fini)
-
-BigWorld.callback(0, _RegisterEvents)

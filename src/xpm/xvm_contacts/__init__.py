@@ -12,6 +12,7 @@ XFW_MOD_INFO = {
     # optional
 }
 
+
 #####################################################################
 # constants
 
@@ -31,36 +32,43 @@ class VIEW(object):
 # includes
 
 import BigWorld
+from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
+from gui.Scaleform.framework.entities.View import View
+from gui.shared.tooltips.common import ContactTooltipData
+from messenger.gui.Scaleform.view.ContactsListPopover import ContactsListPopover
+from messenger.gui.Scaleform.data.contacts_vo_converter import ContactConverter
+from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHandler
 
 from xfw import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 
 import contacts
+import view
+
 
 #####################################################################
-# event handlers
+# initialization
 
-# INIT
-
-def start():
-    import view
-    from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
-    from gui.Scaleform.framework.entities.View import View
-    g_entitiesFactories.addSettings(ViewSettings(
-        VIEW.XVM_EDIT_CONTACT_DATA_ALIAS,
-        view.XvmEditContactDataView,
-        None,
-        ViewTypes.COMPONENT,
-        None,
-        ScopeTemplates.DEFAULT_SCOPE))
+g_entitiesFactories.addSettings(ViewSettings(
+    VIEW.XVM_EDIT_CONTACT_DATA_ALIAS,
+    view.XvmEditContactDataView,
+    None,
+    ViewTypes.COMPONENT,
+    None,
+    ScopeTemplates.DEFAULT_SCOPE))
 
 
+#####################################################################
+# handlers
+
+@registerEvent(ContactsListPopover, '_populate')
 def ContactsListPopover_populate(self):
     #log('ContactsListPopover_populate')
     contacts.initialize()
 
 
+@overrideMethod(ContactConverter, 'makeVO')
 def ContactConverter_makeVO(base, self, contact, includeIcons = True):
     #log('ContactConverter_makeVO')
     res = base(self, contact, includeIcons)
@@ -70,8 +78,7 @@ def ContactConverter_makeVO(base, self, contact, includeIcons = True):
     return res
 
 
-# PlayerContactsCMHandler
-
+@overrideMethod(PlayerContactsCMHandler, '_getHandlers')
 def PlayerContactsCMHandler_getHandlers(base, self):
     #log('PlayerContactsCMHandler_getHandlers')
     handlers = base(self)
@@ -79,6 +86,7 @@ def PlayerContactsCMHandler_getHandlers(base, self):
     return handlers
 
 
+@overrideMethod(PlayerContactsCMHandler, '_generateOptions')
 def PlayerContactsCMHandler_generateOptions(base, self, ctx = None):
     #log('PlayerContactsCMHandler_generateOptions')
     options = base(self, ctx)
@@ -90,6 +98,10 @@ def _XvmEditContactData(self):
     #log('_XvmEditContactData')
     as_xfw_cmd(COMMANDS.AS_EDIT_CONTACT_DATA, self.userName, self.databaseID)
 
+PlayerContactsCMHandler._XvmEditContactData = _XvmEditContactData
+
+
+@overrideMethod(ContactTooltipData, 'getDisplayableData')
 def ContactTooltipData_getDisplayableData(base, self, dbID, defaultName):
     result = base(self, dbID, defaultName)
     if contacts.isAvailable():
@@ -98,26 +110,3 @@ def ContactTooltipData_getDisplayableData(base, self, dbID, defaultName):
         if result['xvm_contact_data']['comment']:
             result['note'] = "<font color='#%s'>%s</font>"  % (XFWCOLORS.UICOLOR_LABEL, l10n(result['xvm_contact_data']['comment']))
     return result
-
-#####################################################################
-# Register events
-
-# Delayed registration
-def _RegisterEvents():
-    start()
-
-    from messenger.gui.Scaleform.view.ContactsListPopover import ContactsListPopover
-    RegisterEvent(ContactsListPopover, '_populate', ContactsListPopover_populate)
-
-    from messenger.gui.Scaleform.data.contacts_vo_converter import ContactConverter
-    OverrideMethod(ContactConverter, 'makeVO', ContactConverter_makeVO)
-
-    from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHandler
-    OverrideMethod(PlayerContactsCMHandler, '_getHandlers', PlayerContactsCMHandler_getHandlers)
-    OverrideMethod(PlayerContactsCMHandler, '_generateOptions', PlayerContactsCMHandler_generateOptions)
-    PlayerContactsCMHandler._XvmEditContactData = _XvmEditContactData
-    
-    from gui.shared.tooltips.common import ContactTooltipData
-    OverrideMethod(ContactTooltipData, 'getDisplayableData', ContactTooltipData_getDisplayableData)
-
-BigWorld.callback(0, _RegisterEvents)

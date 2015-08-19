@@ -14,10 +14,12 @@ class XvmEditContactDataView(ContactEditNoteView):
         super(XvmEditContactDataView, self).__init__()
         self.userName = None
 
+
     def as_setUserPropsS(self, value):
         self.userName = value['userName']
         value.update({'xvm_contact_data': contacts.getXvmContactData(self._dbID)})
         super(XvmEditContactDataView, self).as_setUserPropsS(value)
+
 
     def onOk(self, value):
         if value.nick == self.userName:

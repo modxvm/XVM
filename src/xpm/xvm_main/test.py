@@ -5,7 +5,7 @@
 
 def onHangarInit():
     # debug
-    #runTest(('battleResults', '3910612112436026.dat'))
+    runTest(('battleResults', '3910612112436026.dat'))
     pass
 
 
