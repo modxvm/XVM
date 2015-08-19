@@ -20,6 +20,7 @@ import re
 import traceback
 
 import BigWorld
+from gui.Scaleform.daapi.view.battle_loading import BattleLoading
 
 from xfw import *
 
@@ -30,6 +31,7 @@ import xvm_main.python.config as config
 #####################################################################
 # handlers
 
+@overrideMethod(BattleLoading, 'as_setTipTitleS')
 def BattleLoading_as_setTipTitleS(base, self, title):
     title = cgi.escape('XVM v{}     {}'.format(config.get('__xvmVersion'), config.get('__xvmIntro')))
     stateInfo = config.get('__stateInfo')
@@ -41,6 +43,7 @@ def BattleLoading_as_setTipTitleS(base, self, title):
     return base(self, title)
 
 
+@overrideMethod(BattleLoading, 'as_setTipS')
 def BattleLoading_as_setTipS(base, self, val):
     stateInfo = config.get('__stateInfo')
     if 'error' in stateInfo and stateInfo['error']:
@@ -57,11 +60,3 @@ def getTipText(text, isError=False):
         text = re.sub(r'([^/\\]+\.xc)', r'<font color="#FF4040">\1</font>', text)
         text = '<textformat leading="0"><p align="left"><font size="12">{}</font></p></textformat>'.format(text)
     return text
-
-
-#####################################################################
-# hooks
-
-from gui.Scaleform.daapi.view.battle_loading import BattleLoading
-OverrideMethod(BattleLoading, 'as_setTipTitleS', BattleLoading_as_setTipTitleS)
-OverrideMethod(BattleLoading, 'as_setTipS', BattleLoading_as_setTipS)
