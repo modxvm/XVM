@@ -44,7 +44,7 @@ make_dirs()
 build_xfw()
 {
   pushd ../xfw/src/python/ >/dev/null
-  ./build.sh
+  ./build.sh || exit 1
   popd >/dev/null
 }
 
@@ -76,7 +76,7 @@ build()
     echo -e "$result"
   fi
 
-  [ ! -f $1c ] && exit
+  [ ! -f $1c ] && exit 1
   mkdir -p "$pyc_dir"
   cp $1c "$pyc_file"
   rm -f $1c

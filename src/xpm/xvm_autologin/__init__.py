@@ -18,6 +18,8 @@ XFW_MOD_INFO = {
 import traceback
 
 import BigWorld
+from gui.Scaleform.daapi.view.IntroPage import IntroPage
+from gui.Scaleform.daapi.view.login import LoginView
 
 from xfw import *
 
@@ -30,12 +32,14 @@ import xvm_main.python.config as config
 
 firsttime = True
 
+@overrideMethod(IntroPage, '_IntroPage__showMovie')
 def IntroPage_showMovie(base, self, movie):
     if config.get('login/skipIntro'):
         self.stopVideo()
     return base(self, movie)
 
 
+@registerEvent(LoginView, 'onSetOptions')
 def LoginView_onSetOptions(self, optionsList, host):
     global firsttime
     if firsttime:
@@ -44,16 +48,6 @@ def LoginView_onSetOptions(self, optionsList, host):
             BigWorld.callback(0, self.onDoAutoLogin)
 
 
+@overrideMethod(LoginView, 'as_setVersionS')
 def LoginView_as_setVersionS(base, self, version):
     base(self, '{} | XVM {} (WoT {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))
-
-
-#####################################################################
-# hooks
-
-from gui.Scaleform.daapi.view.IntroPage import IntroPage
-OverrideMethod(IntroPage, '_IntroPage__showMovie', IntroPage_showMovie)
-
-from gui.Scaleform.daapi.view.login import LoginView
-RegisterEvent(LoginView, 'onSetOptions', LoginView_onSetOptions)
-OverrideMethod(LoginView, 'as_setVersionS', LoginView_as_setVersionS)
