@@ -1,15 +1,21 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
-from xfw import *
-from logger import *
-
 # PUBLIC
 
 # returns tuple of camo values: standing, moving, shooting
 def getCamoValues(veh_name, turret_is_top = True, gun = None):
     return _getCamoValues(veh_name, turret_is_top, gun)
 
+
 # PRIVATE
+
+import nations
+from items import vehicles
+
+from xfw import *
+
+from logger import *
+
 
 # Data from: http://forum.worldoftanks.ru/index.php?/topic/1047590-
 # Updated 15.07.2015
@@ -1838,8 +1844,6 @@ def _testAllVehiclesCamo():
     verify_tanks = _tanks_camo.keys()
     debug(verify_tanks)
     verify_guns = _gun_camo_modifier.keys()
-    from items import vehicles
-    import nations
     for nationID in range(len(nations.NAMES)):
         for vehicle in vehicles.g_list.getList(nationID).values():
             veh_name = vehicle['name']

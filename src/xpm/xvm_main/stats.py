@@ -41,6 +41,7 @@ import imghdr
 import simplejson
 
 import BigWorld
+from gui.battle_control import g_sessionProvider
 from items.vehicles import VEHICLE_CLASS_TAGS
 
 from xfw import *
@@ -55,6 +56,7 @@ import utils
 import vehinfo
 import vehinfo_xte
 import xvm_scale
+
 
 #############################
 
@@ -609,7 +611,6 @@ class _Player(object):
             self.vId = 0
         self.team = vData['team']
         self.squadnum = 0
-        from gui.battle_control import g_sessionProvider
         arenaDP = g_sessionProvider.getCtx().getArenaDP()
         if arenaDP is not None:
             vInfo = arenaDP.getVehicleInfo(vID=vehId)

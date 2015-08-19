@@ -11,15 +11,18 @@ def getWN8ExpectedData(vehId):
 
 # PRIVATE
 
-__WN8_EXPECTED_DATA_URL = 'http://stat.modxvm.com/wn8.json'
-
 from pprint import pprint
 import traceback
+
+import BigWorld
 
 import simplejson
 
 from logger import *
 from loadurl import loadUrl
+
+
+__WN8_EXPECTED_DATA_URL = 'http://stat.modxvm.com/wn8.json'
 
 _wn8ExpectedData = None
 
@@ -47,9 +50,8 @@ def _load():
     return res
 
 
-import BigWorld
 def _init():
     global _wn8ExpectedData
     if _wn8ExpectedData is None:
         _wn8ExpectedData = _load()
-BigWorld.callback(1, _init)
+BigWorld.callback(0, _init)

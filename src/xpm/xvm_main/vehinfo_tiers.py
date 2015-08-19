@@ -5,7 +5,12 @@
 def getTiers(level, cls, key):
     return _getTiers(level, cls, key)
 
+
 # PRIVATE
+
+from logger import *
+from gui.shared import g_itemsCache, REQ_CRITERIA
+
 
 # Data from http://forum.worldoftanks.ru/index.php?/topic/41221-
 _special = {
@@ -91,8 +96,6 @@ def _getTiers(level, cls, key):
     return (level, level + 1 if level < 3 else 11 if level > 9 else level + 2)
 
 def _test_specials():
-    from logger import warn
-    from gui.shared import g_itemsCache, REQ_CRITERIA
     for veh_name in _special.keys():
         if not g_itemsCache.items.getVehicles(REQ_CRITERIA.VEHICLE.SPECIFIC_BY_NAME(veh_name)):
             warn('vehinfo_tiers: vehicle %s declared in _special does not exist!' % veh_name)

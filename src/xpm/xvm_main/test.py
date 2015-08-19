@@ -19,12 +19,19 @@ def runTest(args):
 
 
 #############################
-# Imports
+# imports
 
 import os
 import cPickle
 import traceback
+
 import BigWorld
+import AccountCommands
+from account_helpers import BattleResultsCache
+from gui.shared import event_dispatcher as shared_events
+
+from xfw import *
+
 from logger import *
 
 
@@ -32,10 +39,10 @@ from logger import *
 # BattleResults
 
 def _showBattleResults(arenaUniqueID):
-    from gui.shared import event_dispatcher as shared_events
     shared_events.showMyBattleResults(arenaUniqueID)
 
 
+@overrideMethod(BattleResultsCache.BattleResultsCache, 'get')
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
     fileHandler = None
     try:
@@ -47,8 +54,6 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
             version, battleResults = cPickle.load(fileHandler)
             if battleResults is not None:
                 if callback is not None:
-                    import AccountCommands
-                    from account_helpers import BattleResultsCache
                     callback(AccountCommands.RES_CACHE, BattleResultsCache.convertToFullForm(battleResults))
     except Exception, ex:
         err(traceback.format_exc())
@@ -56,12 +61,3 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
 
     if fileHandler is not None:
         fileHandler.close()
-
-
-#############################
-# Register events
-
-def _RegisterEvents():
-    from account_helpers import BattleResultsCache
-    OverrideMethod(BattleResultsCache.BattleResultsCache, 'get', BattleResultsCache_get)
-BigWorld.callback(0, _RegisterEvents)

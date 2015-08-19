@@ -8,11 +8,13 @@ def getVehicleInfoData(vehId):
         _init()
     return _vehicleInfoData.get(vehId, None)
 
+
 def getVehicleInfoDataStr():
     global _vehicleInfoDataStr
     if _vehicleInfoDataStr is None:
         _init()
     return _vehicleInfoDataStr
+
 
 def updateReserve(vehId, isReserved):
     global _vehicleInfoData, _vehicleInfoDataStr
@@ -21,6 +23,7 @@ def updateReserve(vehId, isReserved):
     else:
         _vehicleInfoData[vehId]['isReserved'] = isReserved
         _vehicleInfoDataStr = simplejson.dumps(_vehicleInfoData.values())
+
 
 # PRIVATE
 
@@ -39,6 +42,7 @@ import vehinfo_short
 from vehinfo_tiers import getTiers
 from gun_rotation_shared import calcPitchLimitsFromDesc
 import vehinfo_wn8
+
 
 _vehicleInfoData = None
 _vehicleInfoDataStr = None
@@ -73,10 +77,10 @@ _UNKNOWN_VEHICLE_DATA = {
     'isReserved': False,
 }
 
+
 def _init():
     res = [_UNKNOWN_VEHICLE_DATA]
     try:
-        import xvm_tcarousel.python.reserve as reserve
         for nation in nations.NAMES:
             nationID = nations.INDICES[nation]
             for (id, descr) in vehicles.g_list.getList(nationID).iteritems():
@@ -123,6 +127,7 @@ def _init():
                     data['wn8expFrag'] = float(wn8data['expFrag'])
 
                 # is reserved?
+                import xvm_tcarousel.python.reserve as reserve
                 data['isReserved'] = reserve.is_reserved(data['vid'])
                 #log(data)
 

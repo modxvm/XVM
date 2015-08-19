@@ -9,10 +9,14 @@ import collections
 import simplejson
 import JSONxLoader
 
+from gui.shared import g_eventBus, events
+
 from xfw import *
 import xfw.constants as xfw_constants
+
 from constants import *
 from logger import *
+from default_xvm_xc import DEFAULT_XVM_XC
 import default_config
 import configwatchdog
 import utils
@@ -82,7 +86,6 @@ def load(e):
     if get('autoReloadConfig', False) == True:
         configwatchdog.startConfigWatchdog()
 
-    from gui.shared import g_eventBus, events
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
 
 
@@ -95,7 +98,6 @@ def _load_xvm_xc(filename, autoreload):
         config['consts'] = _constsSection()
         if not os.path.isfile(filename):
             log('[WARNING] xvm.xc was not found, building new')
-            from default_xvm_xc import DEFAULT_XVM_XC
             with open(filename, 'w') as f:
                 f.write(DEFAULT_XVM_XC)
         if os.path.isfile(filename):

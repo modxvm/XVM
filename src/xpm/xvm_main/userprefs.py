@@ -3,9 +3,11 @@
 def get(key, default=None):
     return _userPrefs.get(key, default)
 
+
 # key must be valid file name
 def set(key, value):
     _userPrefs.set(key, value)
+
 
 # PRIVATE
 
@@ -16,6 +18,7 @@ import traceback
 import BigWorld
 
 from logger import *
+
 
 class _UserPrefs():
     def __init__(self):

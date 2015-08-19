@@ -5,22 +5,28 @@
 versionChecked = False
 isOnline = False
 
+
 def checkVersion():
     _checkVersion()
+
 
 def initializeXvmToken():
     _initializeXvmToken()
 
+
 def getXvmActiveTokenData():
     return _getXvmActiveTokenData()
 
+
 def getXvmMessageHeader():
     return _getXvmMessageHeader()
+
 
 def getToken():
     _getXvmActiveTokenData()
     global _token
     return _token
+
 
 def clearToken(value=None):
     global _token
@@ -28,9 +34,11 @@ def clearToken(value=None):
     global networkServicesSettings
     networkServicesSettings = _makeNetworkServicesSettings(None)
 
+
 def getClanInfo(clanAbbrev):
     global _clansInfo
     return _clansInfo.get(clanAbbrev, None) if _clansInfo else None
+
 
 # PRIVATE
 
@@ -45,6 +53,7 @@ import simplejson
 
 import BigWorld
 from gui import SystemMessages
+from gui.shared import g_eventBus, events
 
 from xfw import *
 
@@ -56,10 +65,12 @@ import userprefs
 import utils
 from websock import g_websock
 
+
 _clansInfo = None
 _verInfo = None
 _tdataPrev = None
 _token = None
+
 
 def _makeNetworkServicesSettings(tdata):
     svc = {} if tdata is None else tdata.get('services', {})
@@ -189,7 +200,6 @@ def _initializeXvmToken():
         msg += '</textformat>'
 
         if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
-            from gui.shared import g_eventBus, events
             g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg':msg,'type':type}))
 
     if tdata is not None:

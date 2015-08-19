@@ -7,8 +7,13 @@ import simplejson
 
 import BigWorld
 import GUI
+from CurrentVehicle import g_currentVehicle
+from messenger import MessengerEntry
 from gui import SystemMessages
-from gui.shared.utils import decorators
+from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
+from gui.battle_control import arena_info, g_sessionProvider
+from gui.battle_control.arena_info.settings import VEHICLE_STATUS
+from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 
 from xfw import *
 
@@ -27,6 +32,7 @@ from websock import g_websock
 import minimap_circles
 import test
 import wgutils
+
 
 _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
@@ -94,7 +100,6 @@ class Xvm(object):
 
     def onGUISpaceChanged(self, spaceID):
         #trace('onGUISpaceChanged: {}'.format(spaceID))
-        from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
         if spaceID == GUI_GLOBAL_SPACE_ID.LOGIN:
             self.onStateLogin()
         elif spaceID == GUI_GLOBAL_SPACE_ID.LOBBY:
@@ -162,7 +167,6 @@ class Xvm(object):
 
     def hangarInit(self):
         trace('hangarInit')
-        from CurrentVehicle import g_currentVehicle
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
 
@@ -174,7 +178,6 @@ class Xvm(object):
 
     def hangarDispose(self):
         trace('hangarDispose')
-        from CurrentVehicle import g_currentVehicle
         g_currentVehicle.onChanged -= self.updateTankParams
 
 
@@ -294,7 +297,6 @@ class Xvm(object):
         try:
             movie = flashObject.movie
             if movie is not None:
-                from gui.battle_control import arena_info
                 arena = BigWorld.player().arena
                 movie.invoke((AS2RESPOND.CONFIG, [
                     config.config_str,
@@ -421,7 +423,6 @@ class Xvm(object):
         if vehicle is None or not hasattr(vehicle, 'marker'):
             return
 
-        from gui.battle_control.arena_info.settings import VEHICLE_STATUS
         isAlive = arenaVehicle['isAlive']
         isAvatarReady = arenaVehicle['isAvatarReady']
         status = VEHICLE_STATUS.NOT_AVAILABLE
@@ -440,7 +441,6 @@ class Xvm(object):
 
         vInfo = utils.getVehicleInfo(vID)
         squadIndex = vInfo.squadIndex
-        from gui.battle_control import g_sessionProvider
         arenaDP = g_sessionProvider.getCtx().getArenaDP()
         squadIndex = vInfo.squadIndex
         if arenaDP.isSquadMan(vID):
@@ -533,7 +533,6 @@ class Xvm(object):
                 userprefs.set(args[0], args[1])
             elif cmd == AS2COMMAND.CAPTURE_BAR_GET_BASE_NUM:
                 n = int(args[0])
-                from gui.shared.utils.functions import getBattleSubTypeBaseNumder
                 res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3, n >> 2)
             else:
                 return
@@ -541,11 +540,6 @@ class Xvm(object):
                                 [id] + res if isinstance(res, list) else [id, res]))
         except Exception, ex:
             err(traceback.format_exc())
-
-
-    #def extendInvokeArgs(self, swf, methodName, args):
-    #    #debug('overrideMovieInvoke: %s %s %s' % (swf, methodName, str(args)))
-    #    return args
 
 
     def extendVehicleMarkerArgs(self, handle, function, args):
@@ -593,7 +587,6 @@ class Xvm(object):
 
     def checkKeyEventBattle(self, key, isDown):
         # do not handle keys when chat is active
-        from messenger import MessengerEntry
         if MessengerEntry.g_instance.gui.isFocused():
             return False
 

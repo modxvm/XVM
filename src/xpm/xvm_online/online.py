@@ -13,6 +13,7 @@ from random import randint
 
 import BigWorld
 import ResMgr
+from gui.shared.utils.HangarSpace import g_hangarSpace
 
 from xfw import *
 from xfw.constants import URLS
@@ -77,7 +78,6 @@ class _Get_online(object):
     # Threaded
     def _getOnlineAsync(self):
         try:
-            from gui.shared.utils.HangarSpace import g_hangarSpace
             res = {}
             for host in self.hosts:
                 res[host] = l10n_macros_replace(config.get('hangar/onlineServers/errorString', '--k') if g_hangarSpace.inited else config.get('login/onlineServers/errorString', '--k'))

@@ -10,12 +10,18 @@ def ping():
 # Private
 
 import traceback
+
 import BigWorld
 import Settings
+from predefined_hosts import g_preDefinedHosts
+from gui.shared.utils.HangarSpace import g_hangarSpace
+
 from xfw import *
+
 from xvm_main.python.logger import *
-from . import XVM_PING_COMMAND
 import xvm_main.python.config as config
+
+from . import XVM_PING_COMMAND
 
 #############################
 # consts
@@ -34,7 +40,6 @@ class _Ping(object):
 
     def ping_request(self):
         try:
-            from predefined_hosts import g_preDefinedHosts
             if not self.hooks_set:
                 BigWorld.WGPinger.setOnPingCallback(self.results_arrived)
                 self.hooks_set = True
@@ -51,7 +56,6 @@ class _Ping(object):
         try:
             results = dict(results)
             if DUMMY_ADDRESS not in results: # not our callback
-                from predefined_hosts import g_preDefinedHosts
                 g_preDefinedHosts._PreDefinedHostList__onPingPerformed(results)
             else:
                 del results[DUMMY_ADDRESS]
@@ -67,7 +71,6 @@ class _Ping(object):
                 else:
                     ping_results[server_name] = smoothed_ping
                     best_ping = min(best_ping, smoothed_ping)
-            from gui.shared.utils.HangarSpace import g_hangarSpace
             if (g_hangarSpace.spaceInited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.spaceInited and config.get('login/pingServers/showTitle')):
                 ping_results['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
             as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, ping_results)

@@ -19,6 +19,7 @@ from subprocess import Popen, PIPE, STARTUPINFO, STARTF_USESHOWWINDOW, SW_HIDE
 
 import BigWorld
 import ResMgr
+from gui.shared.utils.HangarSpace import g_hangarSpace
 
 # import simplejson
 
@@ -82,7 +83,6 @@ class _Ping(object):
 
     def _pingAsync(self):
         try:
-            from gui.shared.utils.HangarSpace import g_hangarSpace
             res = dict()
             for host in self.hosts:
                 res[host['name']] = l10n_macros_replace(config.get('hangar/pingServers/errorString', '--') if g_hangarSpace.inited else config.get('login/pingServers/errorString', '--'))

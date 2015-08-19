@@ -6,8 +6,10 @@
 def getDossier(args):
     return _dossier.getDossier(args)
 
+
 def requestDossier(args):
     _dossier.requestDossier(args)
+
 
 #############################
 # Private
@@ -17,27 +19,28 @@ import traceback
 from adisp import process
 
 import BigWorld
-
-import simplejson
-
 from helpers.i18n import makeString
-from gui.Scaleform.locale.MENU import MENU
-from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
+from gui.shared import g_itemsCache
+from gui.shared.gui_items import GUI_ITEM_TYPE
+from gui.Scaleform.locale.MENU import MENU
+from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
+from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
 
 from xfw import *
+import simplejson
 
 from constants import *
 from logger import *
 import vehinfo_xte
+
 
 #############################
 
 class _Dossier(object):
 
     def __init__(self, *args):
-        from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
         self.__dataReceiver = QueuedVehicleDossierReceiver()
         self.__dataReceiver.onDataReceived += self.__requestedDataReceived
 
@@ -68,7 +71,6 @@ class _Dossier(object):
         if self.playerId == 0:
             self.playerId = None
 
-        from gui.shared import g_itemsCache
         if self.vehId == 0:
             dossier = g_itemsCache.items.getAccountDossier(self.playerId)
             res = self.__prepareAccountResult(dossier)
@@ -111,9 +113,6 @@ class _Dossier(object):
 
     # check vehicle dossier already loaded and cached
     def __isVehicleDossierCached(self, playerId, vehId):
-        from gui.shared import g_itemsCache
-        from gui.shared.gui_items import GUI_ITEM_TYPE
-
         if playerId is None or playerId == 0:
             return True
 
@@ -234,6 +233,7 @@ class _Dossier(object):
         })
 
         return res
+
 
 _dossier = None
 

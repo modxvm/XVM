@@ -1,7 +1,9 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
 from xfw import *
+
 from logger import *
+
 
 # PUBLIC
 
@@ -12,12 +14,14 @@ def getShortName(key, level, vclass):
             log('Warning: no short vehicle name for "{}" level={} class={}'.format(key, level, vclass))
     return _data.get(key, None)
 
+
 def checkNames(vehs):
     if IS_DEVELOPMENT:
         global _data
         for key in _data:
             if not any(x['key'] == key for x in vehs):
                 log('Warning: short name for non-existent vehicle "{}"'.format(key))
+
 
 # PRIVATE
 

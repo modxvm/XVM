@@ -11,9 +11,11 @@ import locale
 import datetime
 
 from xfw import IS_DEVELOPMENT
+
 from constants import *
 from logger import *
 import utils
+
 
 _USER_AGENT = 'xvm'
 try:
@@ -104,7 +106,6 @@ def _loadUrl(u, timeout, fingerprint, body):  # timeout in msec
     except tlslite.TLSFingerprintError as ex:
         response = None
         err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
-        from pprint import pprint
         errStr = str(ex)
 
     except Exception as ex:

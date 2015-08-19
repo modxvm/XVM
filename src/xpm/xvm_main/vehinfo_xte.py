@@ -5,6 +5,7 @@
 import vehinfo
 from logger import *
 
+
 # PUBLIC
 
 def getReferenceValues(vehId):
@@ -12,6 +13,7 @@ def getReferenceValues(vehId):
     if xte is None or xte['td'] == xte['ad'] or xte['tf'] == xte['af']:
         return None
     return {'avgD': xte['ad'], 'avgF': xte['af'], 'topD': xte['td'], 'topF': xte['tf']}
+
 
 def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
     xte = _getXTEData(vehId)
@@ -55,10 +57,15 @@ import os
 import traceback
 import simplejson
 
+import BigWorld
+
 from xfw import *
+
 from logger import *
 
+
 _xteData = None
+
 
 def _getXTEData(vehId):
     global _xteData
@@ -71,8 +78,7 @@ def _load():
     return res if res is not None else {}
 
 
-import BigWorld
 def _init():
     global _xteData
     _xteData = _load()
-BigWorld.callback(1, _init)
+BigWorld.callback(0, _init)

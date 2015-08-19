@@ -9,56 +9,64 @@ import math
 from pprint import pprint
 
 import BigWorld
+import Vehicle
+from gui import game_control
+from gui.battle_control import g_sessionProvider
 
 import config
 from logger import *
+
 
 def touch(fname, times=None):
     with open(fname, 'a'):
         os.utime(fname, times)
 
+
 def rm(fname):
     if os.path.isfile(fname):
         os.remove(fname)
+
 
 def hide_guid(txt):
     return re.sub('([0-9A-Fa-f]{8}-)[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{8}([0-9A-Fa-f]{4})',
                   '\\1****-****-****-********\\2', txt)
 
+
 def show_threads():
     for t in threading.enumerate():
         log('Thread: %s' % t.getName())
 
+
 def openWebBrowser(url, useInternalBrowser=False):
     openBrowser = BigWorld.wg_openWebBrowser
     if useInternalBrowser:
-        from gui import game_control
         browser = game_control.g_instance.browser
         if browser is not None:
             openBrowser = browser.load
     openBrowser(url)
 
+
 def getVehicleByName(name):
-    import Vehicle
     for v in BigWorld.entities.values():
         if isinstance(v, Vehicle.Vehicle) and v.publicInfo['name'] == name:
             return v
     return None
 
+
 def getVehicleByHandle(handle):
-    import Vehicle
     for v in BigWorld.entities.values():
         if isinstance(v, Vehicle.Vehicle) and hasattr(v, 'marker') and v.marker == handle:
             return v
     return None
 
+
 def getVehicleInfo(vehId):
-    from gui.battle_control import g_sessionProvider
     return g_sessionProvider.getCtx().getArenaDP().getVehicleInfo(vehId)
 
+
 def getVehicleStats(vehId):
-    from gui.battle_control import g_sessionProvider
     return g_sessionProvider.getCtx().getArenaDP().getVehicleStats(vehId)
+
 
 # 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
 def compareVersions(v1, v2):
@@ -98,6 +106,7 @@ def compareVersions(v1, v2):
         return -2
     return 0
 
+
 def getDynamicColorValue(type, value, prefix='#'):
     if value is None or math.isnan(value):
         return ''
@@ -109,6 +118,7 @@ def getDynamicColorValue(type, value, prefix='#'):
     color = next((int(x['color'], 0) for x in cfg if value <= float(x['value'])), 0xFFFFFF)
 
     return "{0}{1:06x}".format(prefix, color)
+
 
 def fixPath(path):
     if path:

@@ -5,23 +5,31 @@
 def getVehicleStateData(vID):
     return _getVehicleStateData(vID)
 
+
 def updateSpottedStatus(vID, spotted):
     _updateSpottedStatus(vID, spotted)
+
 
 def getSpottedStatus(vID):
     global _spotted_cache
     return _spotted_cache.get(vID, 'neverSeen')
 
+
 def cleanupBattleData():
     global _spotted_cache
     _spotted_cache = {}
 
+
 # PRIVATE
 
 from pprint import pprint
+
 import BigWorld
+
 from xfw import *
+
 from logger import *
+
 
 def _getVehicleStateData(vID):
     # log(vars(vehicle))

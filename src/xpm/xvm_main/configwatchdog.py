@@ -19,7 +19,9 @@ def stopConfigWatchdog():
 
 import os
 import traceback
+
 import BigWorld
+from gui.shared import g_eventBus, events
 
 from constants import *
 from logger import *
@@ -44,7 +46,6 @@ class _ConfigWatchdog(object):
                 self.lastConfigDirState = x
 
                 # debug('reload config')
-                from gui.shared import g_eventBus, events
                 g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
                 
                 return

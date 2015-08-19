@@ -2,16 +2,20 @@ import websocket
 import tlslite
 import threading
 import traceback
+import ssl
 
 import BigWorld
 from gui import SystemMessages
 
 from xfw import *
+
 from constants import *
 from logger import *
 import utils
 
+
 _WEBSOCKETS_ENABLED = False
+
 
 class _WebSock(object):
 
@@ -56,7 +60,6 @@ class _WebSock(object):
         self._thread.start()
 
     def run(self):
-        import ssl
         sslopt = {
             'cert_reqs': ssl.CERT_NONE,
             'check_hostname': False,

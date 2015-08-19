@@ -3,11 +3,14 @@
 def get_url(url, callback):
     _fileCache.get_url(url, callback)
 
+
 def save(name, bytes):
     _fileCache.save(name, bytes)
 
+
 def fin():
     _fileCache.fin()
+
 
 # PRIVATE
 
@@ -19,6 +22,7 @@ import BigWorld
 from account_helpers import CustomFilesCache
 
 from logger import *
+
 
 class _FileCache():
     def __init__(self):

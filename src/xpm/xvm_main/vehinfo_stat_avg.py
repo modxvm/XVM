@@ -5,7 +5,7 @@
 def getAvgStat(key):
     return _data.get(key, {})
 
+
 # PRIVATE
 
-_data = {
-}
+_data = {}

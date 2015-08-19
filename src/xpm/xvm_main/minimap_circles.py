@@ -4,12 +4,6 @@
 @author Maxim Schedriviy <max(at)modxvm.com>
 """
 
-import math
-import BigWorld
-from adisp import async, process
-from xfw import *
-from logger import *
-
 def getMinimapCirclesData():
     return _g_minimap_circles.minimapCirclesData
 
@@ -27,6 +21,19 @@ def updateMinimapCirclesData(descr):
 
 
 # PRIVATE
+
+import math
+
+import BigWorld
+from adisp import async, process
+from CurrentVehicle import g_currentVehicle
+from gui.shared.utils.requesters import VehicleItemsRequester
+from gui.shared.utils.requesters.deprecated import Requester
+
+from xfw import *
+
+from logger import *
+
 
 class _MinimapCircles(object):
     def __init__(self):
@@ -59,7 +66,6 @@ class _MinimapCircles(object):
 
         self.clear()
 
-        from CurrentVehicle import g_currentVehicle
         # debug(g_currentVehicle)
         # debug(g_currentVehicle.item)
         self.item = g_currentVehicle.item
@@ -208,8 +214,6 @@ class _MinimapCircles(object):
 
     @process
     def _updateCrew(self):
-        from gui.shared.utils.requesters.deprecated import Requester
-
         self.crew = []
         self.is_full_crew = True
         barracks = yield Requester('tankman').getFromInventory()
@@ -249,7 +253,6 @@ class _MinimapCircles(object):
 
 
     def _isConsumableEquipped(self, consumable_names):
-        from gui.shared.utils.requesters import VehicleItemsRequester
         for item in self.item.eqsLayout:
             # debug(vars(item))
             if item is not None and item.descriptor.name in consumable_names:
