@@ -1,5 +1,5 @@
---- orig/StatisticForm.xml	2015-08-14 12:55:24.837985700 +0300
-+++ StatisticForm.xml	2015-08-14 12:55:25.281074300 +0300
+--- orig/StatisticForm.xml	2015-08-21 01:04:56.786860000 +0300
++++ StatisticForm.xml	2015-08-21 01:04:57.047697900 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -17,14 +17,14 @@
 +              <String value=" "/>
                <String value="&#10;"/>
                <String value="&#13;"/>
-@@ -117246,5 +117249,5 @@
+@@ -117544,5 +117547,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.BattleStatItemRenderer"/>
 +              <StackString value="wot.wrapper.StatisticForm.BattleStatItemRenderer"/>
              </items>
            </PushData>
-@@ -117272,5 +117275,5 @@
+@@ -117570,5 +117573,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.BattleStatItemRenderer"/>
