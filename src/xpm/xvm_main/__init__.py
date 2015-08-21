@@ -31,7 +31,7 @@ from Vehicle import Vehicle
 from gui.app_loader import g_appLoader
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
-from gui.battle_control.dyn_squad_functional import DynSquadArenaController
+from gui.battle_control.dyn_squad_functional import _DynSquadEntityController
 from gui.shared import g_eventBus, events
 from gui.Scaleform.Flash import Flash
 from gui.Scaleform.daapi.view.login import LoginView
@@ -261,8 +261,8 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
     
 
-@registerEvent(DynSquadArenaController, 'invalidateVehicleInfo')
-def DynSquadArenaController_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
+@registerEvent(_DynSquadEntityController, 'invalidateVehicleInfo')
+def _DynSquadEntityController_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
     #log(playerVehVO)
     if BigWorld.player().arena.guiType == 1: # ARENA_GUI_TYPE.RANDOM
         if flags & INVALIDATE_OP.PREBATTLE_CHANGED and playerVehVO.squadIndex > 0:
