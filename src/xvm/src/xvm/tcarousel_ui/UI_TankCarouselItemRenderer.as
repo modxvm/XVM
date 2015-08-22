@@ -18,6 +18,9 @@ package xvm.tcarousel_ui
 
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
+        private static const ITEM_WIDTH:int = 162;
+        private static const ITEM_HEIGHT:int = 102;
+
         private var cfg:CCarousel;
         private var extraFields:MovieClip;
         private var lastSelectedState:Boolean;
@@ -27,12 +30,12 @@ package xvm.tcarousel_ui
             //Logger.add("UI_TankCarouselItemRenderer()");
             super();
             cfg = Config.config.hangar.carousel;
-            createExtraFields();
         }
 
         override protected function configUI():void
         {
             super.configUI();
+            createExtraFields();
         }
 
         /* for tests
@@ -104,11 +107,12 @@ package xvm.tcarousel_ui
 
             try
             {
-                scrollRect = new Rectangle(0, 0, width, height);
+                scrollRect = new Rectangle(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT + 2);
+                //graphics.beginFill(0xFFFFFF, 0.3); graphics.drawRect(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT + 2); graphics.endFill();
 
                 var zoom:Number = cfg.zoom;
-                var w:int = width * zoom;
-                var h:int = height * zoom;
+                var w:int = int(ITEM_WIDTH * zoom);
+                var h:int = int(ITEM_HEIGHT * zoom);
 
                 extraFields = new MovieClip();
                 extraFields.scaleX = extraFields.scaleY = 1 / zoom;
@@ -126,10 +130,10 @@ package xvm.tcarousel_ui
                 });
 
                 setupStandardField(vehicleIcon.xp, cfg.fields.xp);
-                vehicleIcon.xp.x = w - vehicleIcon.xp.width + cfg.fields.xp.dx - 30 * cfg.zoom;
+                vehicleIcon.xp.x = w - vehicleIcon.xp.width + cfg.fields.xp.dx - 2;
 
                 setupStandardField(vehicleIcon.multyXp, cfg.fields.multiXp);
-                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width + cfg.fields.multiXp.dx - 30 * cfg.zoom;
+                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width + cfg.fields.multiXp.dx - 2;
 
                 setupTankNameField(cfg.fields.tankName, zoom);
 
