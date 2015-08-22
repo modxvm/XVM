@@ -136,7 +136,8 @@ def VehicleParamsField_getValue(base, self):
     try:
         global carousel_tooltips_cache
         vehicle = self._tooltip.item
-        cache_result = carousel_tooltips_cache.get(vehicle.intCD)
+        context_name = self._tooltip.context.getComponent()
+        cache_result = carousel_tooltips_cache.get(vehicle.intCD, {}).get(context_name)
         if cache_result:
             return cache_result
         result = list()
@@ -187,7 +188,7 @@ def VehicleParamsField_getValue(base, self):
                 if paramName == 'camo_coeff':
                     topTurret = veh_descr.type.turrets[0][-1]
                     camo_coeff_arr = getCamoValues(vehicle.name, turret['name'] == topTurret['name'], gun['name'])
-                    camo_coeff_str = '/'.join(map(smart_round, camo_coeff_arr))
+                    camo_coeff_str = '/'.join(map(camo_smart_round, camo_coeff_arr))
                     result[-1].append([h1_pad(l10n('camoCoeff') + ' <p>(%)</p>'), h1_pad(camo_coeff_str)])
                     continue
                 #radioRange
@@ -388,7 +389,9 @@ def VehicleParamsField_getValue(base, self):
                  'current': len([ x for x in vehicle.descriptor.optionalDevices if x ]),
                  'total': len(vehicle.descriptor.optionalDevices)})
 
-        carousel_tooltips_cache[vehicle.intCD] = result
+        if vehicle.intCD not in carousel_tooltips_cache:
+            carousel_tooltips_cache[vehicle.intCD] = {}
+        carousel_tooltips_cache[vehicle.intCD][context_name] = result
         return result
     except Exception as ex:
         err(traceback.format_exc())
@@ -433,7 +436,7 @@ def gold_pad(text):
     return "<font color='#FFC363'>%s</font>" % text
 
 
-def smart_round(value):
+def camo_smart_round(value):
     if value == 0:
         return '?'
     if value >= 10:
