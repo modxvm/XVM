@@ -474,7 +474,7 @@ def ItemsRequester_invalidateItems(self, itemTypeID, uniqueIDs):
     try:
         if itemTypeID == GUI_ITEM_TYPE.VEHICLE:
             for veh_id in uniqueIDs:
-                carousel_tooltips_cache[veh_id] = None
+                carousel_tooltips_cache[veh_id] = {}
     except Exception as ex:
         err(traceback.format_exc())
         carousel_tooltips_cache = {}
