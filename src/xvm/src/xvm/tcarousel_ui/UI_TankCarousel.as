@@ -73,8 +73,8 @@ package xvm.tcarousel_ui
             slotImageWidth = int(162 * cfg.zoom);
             slotImageHeight = int(102 * cfg.zoom);
 
-            carousel_height = (slotImageHeight + padding.vertical) * cfg.rows - padding.vertical;
-            height = carousel_height + 10;
+            carousel_height = (slotImageHeight + padding.vertical) * cfg.rows - padding.vertical + 3;
+            height = carousel_height + 8;
 
             componentInspectorSetting = false;
         }
