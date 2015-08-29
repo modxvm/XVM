@@ -39,7 +39,6 @@ from xvm_main.python.xvm import l10n
 #####################################################################
 # initialization/finalization
 
-# player entered, get player name + region as unique name
 def onConfigLoaded(self, e=None):
     Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
 
@@ -54,6 +53,19 @@ def fini():
 
 #####################################################################
 # handlers
+
+# original function in 9.10 does not take into account NOT_FULL_AMMO_MULTIPLIER
+@overrideMethod(Vehicle, 'isAmmoFull')
+def Vehicle_isAmmoFull(base, self):
+    try:
+        if not self.isEvent:
+            mult = self.NOT_FULL_AMMO_MULTIPLIER
+        else:
+            mult = 1.0
+        return sum((s.count for s in self.shells)) >= self.ammoMaxSize * mult
+    except Exception as ex:
+        err(traceback.format_exc())
+        return base(self)
 
 #barracks: add nation flag and skills for tanksman
 @overrideMethod(BarracksMeta, 'as_setTankmenS')

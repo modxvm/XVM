@@ -45,23 +45,3 @@ def FragCorrelationPanel_updateScore(base, self):
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
-
-
-@overrideMethod(score_panel, '_markerComparator')
-def _markerComparator(base, x1, x2):
-    try:
-        if config.get('fragCorrelation/sortByType'):
-            INDEX_IS_ALIVE = 2
-            INDEX_VEHICLE_CLASS = 1
-            res = x2[INDEX_IS_ALIVE] - x1[INDEX_IS_ALIVE]
-            if res:
-                return res
-            x1Index = VEHICLE_BATTLE_TYPES_ORDER_INDICES.get(x1[INDEX_VEHICLE_CLASS], 100)
-            x2Index = VEHICLE_BATTLE_TYPES_ORDER_INDICES.get(x2[INDEX_VEHICLE_CLASS], 100)
-            res = x1Index - x2Index
-            if res:
-                return res
-            return 0
-    except Exception, ex:
-        err(traceback.format_exc())
-    return base(x1, x2)
