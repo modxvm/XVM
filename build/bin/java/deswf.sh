@@ -7,8 +7,8 @@ exp=script
 #exp=all
 
 for i in *.swf; do
-  echo $i
-  $ffdec -config $cfg -format $fmt -export $exp ${i/.swf/} $i >$i.log 2>$i.err
+  if [ "$i" != "*.swf" ]; then
+    echo $i
+    $ffdec -config $cfg -format $fmt -export $exp ${i/.swf/} $i >$i.log 2>$i.err
+  fi
 done
-
-popd >/dev/null
