@@ -23,8 +23,8 @@ package xvm.battleresults_ui
         public var premCrewXP:int = 0;
         public var spotted:int = 0;
         public var critsCount:int = 0;
-        public var creditsNoPremTotalStr:String = null;
-        public var creditsPremTotalStr:String = null;
+        public var creditsNoPremTotalStr:String = "";
+        public var creditsPremTotalStr:String = "";
         public var armorCount:int = 0;
         public var damageBlockedByArmor:int = 0;
         public var ricochetsCount:int = 0;
