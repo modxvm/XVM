@@ -4,6 +4,7 @@
  */
 package xvm.battleresults_ui
 {
+    import net.wg.data.constants.*;
     import net.wg.data.daapi.base.*;
 
     public dynamic class XvmCommonStatsDataVO extends DAAPIDataClass
@@ -23,8 +24,8 @@ package xvm.battleresults_ui
         public var premCrewXP:int = 0;
         public var spotted:int = 0;
         public var critsCount:int = 0;
-        public var creditsNoPremTotalStr:String = "";
-        public var creditsPremTotalStr:String = "";
+        public var creditsNoPremTotalStr:String = Values.EMPTY_STR;
+        public var creditsPremTotalStr:String = Values.EMPTY_STR;
         public var armorCount:int = 0;
         public var damageBlockedByArmor:int = 0;
         public var ricochetsCount:int = 0;

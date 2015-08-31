@@ -4,14 +4,15 @@
  */
 package xvm.battleresults_ui
 {
+    import net.wg.data.constants.*;
     import net.wg.data.daapi.base.*;
 
     public dynamic class XvmCommonStatsDataListVO extends DAAPIDataClass
     {
         public var __xvm:Boolean = false; // XVM data marker
-        public var damageDealtNames:String = "";
-        public var damageAssistedNames:String = "";
-        public var armorNames:String = "";
+        public var damageDealtNames:String = Values.EMPTY_STR;
+        public var damageAssistedNames:String = Values.EMPTY_STR;
+        public var armorNames:String = Values.EMPTY_STR;
         public var data:Array = null;
 
         public function XvmCommonStatsDataListVO(data:Object)
