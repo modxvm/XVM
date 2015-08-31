@@ -12,11 +12,21 @@ package com.xvm.types.cfg
 
         public var clockFormat:String;      // Format: http://php.net/date
 
-        public var showBattleTier:Boolean;  // Show battle tier.
-        public var removeSquadIcon:Boolean; // Hide squad icon.
-        public var clanIcon:CClanIcon;      // Playes/clan icon parameters.
+        public var showBattleTier:Boolean;
+        public var removeSquadIcon:Boolean;
+        public var removeVehicleLevel:Boolean;
+        public var removeVehicleTypeIcon:Boolean;
+        public var squadIconOffsetXLeft:Number;
+        public var squadIconOffsetXRight:Number;
+        public var nameFieldOffsetXLeft:Number;
+        public var nameFieldOffsetXRight:Number;
+        public var vehicleFieldOffsetXLeft:Number;
+        public var vehicleFieldOffsetXRight:Number;
+        public var vehicleIconOffsetXLeft:Number;
+        public var vehicleIconOffsetXRight:Number;
+        public var clanIcon:CClanIcon;
         // Dispay formats.
-        public var darkenNotReadyIcon:Boolean;      // False - disable highlight of icons during battle start depends on ready state.
+        public var darkenNotReadyIcon:Boolean;
         public var formatLeftNick:String;
         public var formatLeftVehicle:String;
         public var formatRightNick:String;

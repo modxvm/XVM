@@ -7,6 +7,7 @@ package xvm.battleloading.components
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.utils.*;
+    import flash.text.*;
     import net.wg.gui.lobby.battleloading.*;
 
     public class WinChances
@@ -23,16 +24,16 @@ package xvm.battleloading.components
             Stat.loadBattleStat(this, onStatLoaded);
         }
 
-        private var originalBattleText:String = null;
+        private var winChanceTF:TextField = null;
         private function onStatLoaded():void
         {
-            if (originalBattleText == null)
+            if (winChanceTF == null)
             {
-                originalBattleText = page.form.battleText.text;
-                page.form.battleText.width += 100;
-                page.form.battleText.x -= 50;
-                page.form.battleText.height *= 2;
-                page.form.battleText.styleSheet = WGUtils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
+                winChanceTF = createWinChanceTextField(page.form.battleText);
+                page.form.addChild(winChanceTF);
+                winChanceTF.styleSheet = WGUtils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
+                winChanceTF.x = page.form.battleText.x;
+                winChanceTF.y = -35;
             }
 
             var playerNames:Vector.<String> = new Vector.<String>();
@@ -42,9 +43,26 @@ package xvm.battleloading.components
             var chanceText:String = Chance.GetChanceText(playerNames, Config.networkServicesSettings.chance, Config.config.battleLoading.showBattleTier);
             if (chanceText)
             {
-                chanceText = '<span class="chances">' + chanceText + '</span>';
-                page.form.battleText.htmlText = "<textformat leading='-3'>" + originalBattleText + "\n" + chanceText + "</textformat>";
+                winChanceTF.htmlText = '<span class="chances">' + chanceText + '</span>';
             }
+        }
+
+        private function createWinChanceTextField(tpl:TextField):TextField
+        {
+            var f:TextField = new TextField();
+            f.x = tpl.x;
+            f.y = tpl.y;
+            f.autoSize = TextFieldAutoSize.NONE;
+            f.width = tpl.width;
+            f.height = tpl.height;
+            f.antiAliasType = AntiAliasType.ADVANCED;
+            var tf:TextFormat = tpl.getTextFormat();
+            tf.color = 0xFFFFFF;
+            tf.align = TextFormatAlign.LEFT;
+            f.defaultTextFormat = tf;
+            f.selectable = false;
+            f.filters = tpl.filters;
+            return f;
         }
     }
 }

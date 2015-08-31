@@ -2,6 +2,17 @@
   * адаптация к WoT 0.9.10
   * добавлена сортировка карусели winRate
   * удалена устаревшая опция "fragCorrelation"/"sortByType"
+  * добавлены опции в секции battleLoading и statisticForm:
+    "removeVehicleLevel" - убрать отображение уровня танка
+    "removeVehicleTypeIcon" - убрать отображение типа танка. Пустое место будет использовано под форматируемое поле.
+    "squadIconOffsetXLeft" - cмещение по оси X значка взвода для союзников
+    "squadIconOffsetXRight" - cмещение по оси X значка взвода для противников
+    "nameFieldOffsetXLeft" - cмещение по оси X поля ника для союзников
+    "nameFieldOffsetXRight" - cмещение по оси X поля ника для противников
+    "vehicleFieldOffsetXLeft" - cмещение по оси X поля названия танка для союзников
+    "vehicleFieldOffsetXRight" - cмещение по оси X поля названия танка для противников
+    "vehicleIconOffsetXLeft" - смещение по оси X иконки танка для союзников
+    "vehicleIconOffsetXRight" - смещение по оси X иконки танка для противников
 
 XVM-6.1.3.1:
   * исправление ошибок и оптимизация

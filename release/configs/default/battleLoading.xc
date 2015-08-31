@@ -14,6 +14,36 @@
     // true - disable Platoon icons. This blank space can house, for example, clan logos.
     // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
     "removeSquadIcon": false,
+    // true - disable vehicle level indicator.
+    // true - убрать отображение уровня танка.
+    "removeVehicleLevel": false,
+    // true - disable vehicle type icon. This space will be used for formatted vehicle field.
+    // true - убрать отображение типа танка. Пустое место будет использовано под форматируемое поле.
+    "removeVehicleTypeIcon": false,
+    // X offset for allies squad icons
+    // Cмещение по оси X значка взвода для союзников
+    "squadIconOffsetXLeft": 0,
+    // X offset for enemies squad icons field
+    // Cмещение по оси X значка взвода для противников
+    "squadIconOffsetXRight": 0,
+    // X offset for allies player names field
+    // Cмещение по оси X поля ника для союзников
+    "nameFieldOffsetXLeft": 0,
+    // X offset for enemies player names field
+    // Cмещение по оси X поля ника для противников
+    "nameFieldOffsetXRight": 0,
+    // X offset for "formatLeftVehicle" field
+    // Cмещение по оси X поля названия танка для союзников
+    "vehicleFieldOffsetXLeft": 0,
+    // X offset for "formatRightVehicle" field
+    // Cмещение по оси X поля названия танка для противников
+    "vehicleFieldOffsetXRight": 0,
+    // X offset for allies vehicle icons
+    // Смещение по оси X иконки танка для союзников
+    "vehicleIconOffsetXLeft": 0,
+    // X offset for enemies vehicle icons
+    // Смещение по оси X иконки танка для противников
+    "vehicleIconOffsetXRight": 0,
     // Display options for Team/Clan logos.
     // Параметры отображения иконки игрока/клана.
     "clanIcon": {
@@ -56,18 +86,6 @@
     "formatLeftVehicle": "{{vehicle}}<font face='mono' size='{{xvm-stat?13|0}}'> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font></font>",
     // Display format for the right panel (macros allowed, see macros.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
-    "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}",
-    // X position for "formatLeftVehicle" field
-    // Положение по оси X поля "formatLeftVehicle"
-    "xPositionLeftVehicle": 0,
-    // X position for "formatRightVehicle" field
-    // Положение по оси X поля "formatRightVehicle"
-    "xPositionRightVehicle": 0,
-    // X position for allies vehicle icons
-    // Положение по оси X иконок техники союзников
-    "xPositionLeftVehicleIcon": 0,
-    // X position for enemies vehicle icons
-    // Положение по оси X иконок техники противников
-    "xPositionRightVehicleIcon": 0
+    "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}"
   }
 }

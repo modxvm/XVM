@@ -20,13 +20,11 @@ package xvm.battleloading_ui
         override protected function configUI():void
         {
             super.configUI();
-            x = 5; // fix bad align in 0.9.9
         }
 
         override public function setData(data:Object):void
         {
-            super.setData(data);
-            worker.setData(data as VehicleInfoVO);
+            super.setData(worker.fixData(data as VehicleInfoVO));
         }
 
         override protected function draw():void
