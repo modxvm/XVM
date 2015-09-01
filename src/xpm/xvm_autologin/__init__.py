@@ -35,7 +35,7 @@ firsttime = True
 @overrideMethod(IntroPage, '_IntroPage__showMovie')
 def IntroPage_showMovie(base, self, movie):
     if config.get('login/skipIntro'):
-        self.stopVideo()
+        BigWorld.callback(0, self.stopVideo)
     return base(self, movie)
 
 
