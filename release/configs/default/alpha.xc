@@ -63,41 +63,41 @@
     // Dynamic transparency by efficiency
     // Динамическая прозрачность по эффективности
     "eff": [
-      { "value": 610,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 865,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1165, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1515, "alpha": ${"alphaRating.good"     } },
-      { "value": 1835, "alpha": ${"alphaRating.very_good"} },
+      { "value": 615,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 870,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1175, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1525, "alpha": ${"alphaRating.good"     } },
+      { "value": 1850, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WN6 rating
     // Динамическая прозрачность по рейтингу WN6
     "wn6": [
-      { "value": 445,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 835,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1210, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1615, "alpha": ${"alphaRating.good"     } },
-      { "value": 1950, "alpha": ${"alphaRating.very_good"} },
+      { "value": 460,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 850,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1215, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1620, "alpha": ${"alphaRating.good"     } },
+      { "value": 1960, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WN8 rating
     // Динамическая прозрачность по рейтингу WN8
     "wn8": [
-      { "value": 360,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 825,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1385, "alpha": ${"alphaRating.normal"   } },
-      { "value": 2055, "alpha": ${"alphaRating.good"     } },
-      { "value": 2675, "alpha": ${"alphaRating.very_good"} },
+      { "value": 370,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 845,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1395, "alpha": ${"alphaRating.normal"   } },
+      { "value": 2070, "alpha": ${"alphaRating.good"     } },
+      { "value": 2715, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WG rating
     // Динамическая прозрачность по рейтингу WG
     "wgr": [
-      { "value": 2405,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 4250,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 6350,  "alpha": ${"alphaRating.normal"   } },
-      { "value": 8550,  "alpha": ${"alphaRating.good"     } },
-      { "value": 9960,  "alpha": ${"alphaRating.very_good"} },
+      { "value": 2495,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 4345,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 6425,  "alpha": ${"alphaRating.normal"   } },
+      { "value": 8625,  "alpha": ${"alphaRating.good"     } },
+      { "value": 10040, "alpha": ${"alphaRating.very_good"} },
       { "value": 99999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by win percent
@@ -105,7 +105,7 @@
     "winrate": [
       { "value": 46.5, "alpha": ${"alphaRating.very_bad" } },
       { "value": 48.5, "alpha": ${"alphaRating.bad"      } },
-      { "value": 51.5, "alpha": ${"alphaRating.normal"   } },
+      { "value": 52.5, "alpha": ${"alphaRating.normal"   } },
       { "value": 57.5, "alpha": ${"alphaRating.good"     } },
       { "value": 64.5, "alpha": ${"alphaRating.very_good"} },
       { "value": 101,  "alpha": ${"alphaRating.unique"   } }
