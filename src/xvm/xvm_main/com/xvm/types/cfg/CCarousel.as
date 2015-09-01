@@ -14,6 +14,7 @@ package com.xvm.types.cfg
         public var hideBuyTank:Boolean;
         public var hideBuySlot:Boolean;
         public var filters:Object;
+        public var filtersPadding:Object;
         public var fields:Object;
         public var extraFields:Array;
         public var nations_order:Array;

@@ -2,7 +2,7 @@
   * adaptation to WoT 0.9.10
   * add winRate sorting to carousel
   * removed obsoleted option "fragCorrelation"/"sortByType"
-  * added options in battleLoading and statisticForm sections:
+  * added options in "battleLoading" and "statisticForm" sections:
     "removeVehicleLevel" - disable vehicle level indicator.
     "removeVehicleTypeIcon" - disable vehicle type icon. This space will be used for vehicle field.
     "squadIconOffsetXLeft" - X offset for allies squad icons
@@ -13,6 +13,7 @@
     "vehicleFieldOffsetXRight" - X offset for enemies vehicle names field
     "vehicleIconOffsetXLeft" - X offset for allies vehicle icons
     "vehicleIconOffsetXRight" - X offset for enemies vehicle icons
+  * added section "carousel"/"filtersPadding" - spacing between filters cells.
 
 XVM-6.1.3.1:
   * bug fixes and optimization

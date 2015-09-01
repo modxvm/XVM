@@ -40,6 +40,12 @@
       "level":    { "enabled": true },  // vehicle level    / уровень техники
       "prefs":    { "enabled": true }   // other filters    / другие фильтры
     },
+    // Spacing between filters cells.
+    // Отступ между ячейками фильтров.
+    "filtersPadding": {
+        "horizontal": 11,   // по горизонтали
+        "vertical": 13      // по вертикали
+    },
     // Standard cell elements.
     // Стандартные элементы ячеек.
     "fields": {
