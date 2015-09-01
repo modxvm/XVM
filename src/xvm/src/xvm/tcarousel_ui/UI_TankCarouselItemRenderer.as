@@ -18,8 +18,9 @@ package xvm.tcarousel_ui
 
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
-        private static const ITEM_WIDTH:int = 162;
-        private static const ITEM_HEIGHT:int = 102;
+        public static const ITEM_WIDTH:int = 162;
+        public static const ITEM_HEIGHT:int = 102;
+        public static const ITEM_HEIGHT_MULTISELECTION:int = 125;
 
         private var cfg:CCarousel;
         private var extraFields:MovieClip;
@@ -37,14 +38,6 @@ package xvm.tcarousel_ui
             super.configUI();
             createExtraFields();
         }
-
-        /* for tests
-        override public function setDataVO(param1:VehicleCarouselVO):void
-        {
-            if (param1 != null && param1.compactDescr == 273)
-                param1.clanLock = (new Date()).valueOf() / 1000 + 100;
-            super.setDataVO(param1);
-        }*/
 
         override protected function draw():void
         {
@@ -107,15 +100,16 @@ package xvm.tcarousel_ui
 
             try
             {
-                scrollRect = new Rectangle(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT + 2);
-                //graphics.beginFill(0xFFFFFF, 0.3); graphics.drawRect(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT + 2); graphics.endFill();
-
                 var zoom:Number = cfg.zoom;
                 var w:int = int(ITEM_WIDTH * zoom);
                 var h:int = int(ITEM_HEIGHT * zoom);
 
+                scrollRect = new Rectangle(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT_MULTISELECTION * cfg.fields.activateButton.scale * zoom + 2);
+                //graphics.beginFill(0xFFFFFF, 0.3); graphics.drawRect(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT + 2); graphics.endFill();
+
                 extraFields = new MovieClip();
                 extraFields.scaleX = extraFields.scaleY = 1 / zoom;
+                extraFields.scrollRect = new Rectangle(-1, -1, w + 2, h + 2);
                 //extraFields.graphics.beginFill(0xFFFFFF, 0.3); extraFields.graphics.drawRect(0, 0, w, h); extraFields.graphics.endFill();
                 vehicleIcon.addChild(extraFields);
 
@@ -135,7 +129,9 @@ package xvm.tcarousel_ui
                 setupStandardField(vehicleIcon.multyXp, cfg.fields.multiXp);
                 vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width + cfg.fields.multiXp.dx - 2;
 
-                setupTankNameField(cfg.fields.tankName, zoom);
+                setupTankNameField(cfg.fields.tankName);
+
+                setupActivateButtons(cfg.fields.activateButton, zoom);
 
                 setupStatusTextField(cfg.fields.statusText);
                 setupClanLockField(cfg.fields.clanLock);
@@ -160,11 +156,8 @@ package xvm.tcarousel_ui
         }
 
         private var orig_vehicleIcon_tankNameField_y:Number = NaN;
-        private function setupTankNameField(cfg:Object, zoom:Number):void
+        private function setupTankNameField(cfg:Object):void
         {
-            var w:int = width * zoom;
-            var h:int = height * zoom;
-
             vehicleIcon.tankNameField.scaleX = vehicleIcon.tankNameField.scaleY =
                 vehicleIcon.tankNameBg.scaleX = vehicleIcon.tankNameBg.scaleY = cfg.scale;
             vehicleIcon.tankNameField.alpha = vehicleIcon.tankNameBg.alpha =
@@ -175,6 +168,20 @@ package xvm.tcarousel_ui
             vehicleIcon.tankNameField.y = orig_vehicleIcon_tankNameField_y + cfg.dy;
             vehicleIcon.tankNameBg.x = vehicleIcon.tankNameField.x + vehicleIcon.tankNameField.width - vehicleIcon.tankNameBg.width;
             vehicleIcon.tankNameBg.y = vehicleIcon.tankNameField.y + vehicleIcon.tankNameField.height - vehicleIcon.tankNameBg.height;
+        }
+
+        private var orig_activateButton_x:Number = NaN;
+        private var orig_activateButton_y:Number = NaN;
+        private function setupActivateButtons(cfg:Object, zoom:Number):void
+        {
+            activateButton.scaleX = activateButton.scaleY = deactivateButton.scaleX = deactivateButton.scaleY = cfg.scale;
+            activateButton.alpha = deactivateButton.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            if (isNaN(orig_statusText_x))
+                orig_activateButton_x = activateButton.x;
+            activateButton.x = deactivateButton.x = orig_activateButton_x + cfg.dx;
+            if (isNaN(orig_activateButton_y))
+                orig_activateButton_y = activateButton.y;
+            activateButton.y = deactivateButton.y = orig_activateButton_y + cfg.dy;
         }
 
         private var orig_statusText_x:Number = NaN;

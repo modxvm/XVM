@@ -31,7 +31,6 @@ package xvm.tcarousel_ui
         private static const SLOT_TYPE_EMPTY:int = 4;
         private static const FILTER_MARGIN:int = 5;
         private static const SETTINGS_CAROUSEL_FILTERS_KEY:String = "tcarousel.filters";
-        private static const MULTISELECTECTION_HEIGHT_GAP:int = 23;
 
         private var cfg:CCarousel;
 
@@ -148,10 +147,10 @@ package xvm.tcarousel_ui
 
             _isMultiselectionModeEnabled = param1;
 
-            slotImageWidth = int(162 * cfg.zoom);
-            slotImageHeight = int(102 * cfg.zoom);
+            slotImageWidth = int(UI_TankCarouselItemRenderer.ITEM_WIDTH * cfg.zoom);
+            slotImageHeight = int(UI_TankCarouselItemRenderer.ITEM_HEIGHT * cfg.zoom);
             if (_isMultiselectionModeEnabled)
-                slotImageHeight += MULTISELECTECTION_HEIGHT_GAP * cfg.rows;
+                slotImageHeight += (UI_TankCarouselItemRenderer.ITEM_HEIGHT_MULTISELECTION - UI_TankCarouselItemRenderer.ITEM_HEIGHT) * cfg.fields.activateButton.scale * cfg.zoom;
 
             _carousel_height = (slotImageHeight + padding.vertical) * cfg.rows - padding.vertical + 3;
 
@@ -293,8 +292,17 @@ package xvm.tcarousel_ui
                 super.updateUIPosition();
                 this.xfw_slotWidth = slotWidth;
 
-                if (this.bg)
-                    bg.height = height;
+                if (bg)
+                {
+                    if (!_isMultiselectionModeEnabled)
+                    {
+                        this.bg.height = height;
+                    }
+                    else
+                    {
+                        //this.bg.height = height;
+                    }
+                }
             }
             catch (ex:Error)
             {
@@ -713,7 +721,6 @@ package xvm.tcarousel_ui
                     remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) < 0 && vdata.isReserved == true);
                     // next line will make xor filter: non_reserve <--> reserve, instead of non_reserve <--> non_reserve + reserve
                     remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) >= 0 && vdata.isReserved == false);
-                    // TODO:0.9.10 remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_DOMINATION) >= 0 && dataVO.groupIndicatorVisible);
 
                     var removePrem:Boolean = _prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0;
                     var removeNorm:Boolean = _prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0;

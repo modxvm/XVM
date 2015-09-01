@@ -190,7 +190,6 @@
     "MultiXP": "Мультиопыт",
     "NoMaster": "Нет мастера",
     "CompleteCrew": "Полный экипаж",
-    "NonDomination": "Убрать \"Превосходство\"",
     "ReserveFilter": "Резерв",
     "check_reserve_menu": "Отметить как «резерв»",
     "uncheck_reserve_menu": "Снять отметку «резерв»",
