@@ -73,11 +73,14 @@ def onXfwCommand(cmd, *args):
         return (None, True)
     return (None, False)
 
+def getCurrentServer(*args, **kwargs):
+    as_xfw_cmd(XVM_ONLINE_COMMAND.AS_CURRENTSERVER, connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
+
 
 #####################################################################
 # handlers
 
 @registerEvent(LobbyHeaderMeta, 'as_setServerS')
-def getCurrentServer(*args, **kwargs):
-    debug('getCurrentServer: %s' %  connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
-    as_xfw_cmd(XVM_ONLINE_COMMAND.AS_CURRENTSERVER, connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
+def LobbyHeaderMeta_as_setServerS(*args, **kwargs):
+    getCurrentServer()
+

@@ -124,7 +124,7 @@ package xvm.contacts_ui
                 width: 16,
                 height: 16,
                 alpha: 0.5,
-                source: "../maps/icons/messenger/service_channel_icon.png",
+                source: "../maps/icons/library/pen.png",
                 visible: false
             })) as UILoaderAlt;
         }
