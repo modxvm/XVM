@@ -10,8 +10,6 @@
     // true - Disable Platoon icons.
     // true - убрать отображение иконки взвода.
     "removeSquadIcon": false,
-    // Display options for Team/Clan logos (see battleLoading.xc).
-    // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
     // true - disable vehicle level indicator.
     // true - убрать отображение уровня танка.
     "removeVehicleLevel": false,
@@ -42,8 +40,8 @@
     // X offset for enemies vehicle icons
     // Смещение по оси X иконки танка для противников
     "vehicleIconOffsetXRight": 0,
-    // Display options for Team/Clan logos.
-    // Параметры отображения иконки игрока/клана.
+    // Display options for Team/Clan logos (see battleLoading.xc).
+    // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
     "clanIcon": {
       "show": true,
       "x": 0,
