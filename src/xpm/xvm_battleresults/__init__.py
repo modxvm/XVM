@@ -33,6 +33,9 @@ import xvm_main.python.config as config
 
 # wait for loading xvm_battleresults_ui.swf
 @overrideMethod(event_dispatcher, '_showBattleResults')
+def event_dispatcher_showBattleResults_proxy(base, arenaUniqueID, dataProvider):
+    event_dispatcher_showBattleResults(base, arenaUniqueID, dataProvider)
+
 def event_dispatcher_showBattleResults(base, arenaUniqueID, dataProvider, cnt=0):
     is_swf = 'swf_file_name' in xfw_mods_info.info.get('xvm_battleresults', {})
     if cnt < 5 and is_swf and not 'xvm_battleresults_ui.swf' in xfw_mods_info.loaded_swfs:
