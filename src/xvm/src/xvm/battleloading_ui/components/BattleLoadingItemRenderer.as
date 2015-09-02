@@ -23,6 +23,7 @@ package xvm.battleloading_ui.components
     public class BattleLoadingItemRenderer
     {
         private static const VEHICLE_FIELD_WIDTH:int = 250;
+        private static const VEHICLE_TYPE_ICON_WIDTH:Number = 25;
         private static const MAXIMUM_VEHICLE_ICON_WIDTH:int = 80;
 
         private var proxy:PlayerItemRenderer;
@@ -55,14 +56,6 @@ package xvm.battleloading_ui.components
 
             proxy.vehicleIconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
 
-            // FIXIT
-            //TextFieldEx.setVerticalAlign(proxy.textField,  TextFieldAutoSize.CENTER);
-            //TextFieldEx.setVerticalAutoSize(proxy.textField, TextFieldAutoSize.CENTER);
-
-            TextFieldEx.setVerticalAlign(proxy.vehicleField, TextFieldAutoSize.CENTER);
-            TextFieldEx.setVerticalAutoSize(proxy.vehicleField, TextFieldAutoSize.CENTER);
-            proxy.vehicleField.condenseWhite = true;
-
             // Add stat loading handler
             Stat.loadBattleStat(this, onStatLoaded);
 
@@ -75,69 +68,25 @@ package xvm.battleloading_ui.components
             if (team == XfwConst.TEAM_ENEMY)
                 proxy.vehicleField.x -= Math.abs(dx);
 
-            // fix scaleX and increase width for vehicleField
-            proxy.vehicleField.scaleX = 1;
-            proxy.vehicleField.width = VEHICLE_FIELD_WIDTH;
-            if (team == XfwConst.TEAM_ALLY)
-                proxy.vehicleField.x = proxy.vehicleTypeIcon.x - 15 - VEHICLE_FIELD_WIDTH;
-
             // Setup controls
 
-            // vehicleTypeIcon
-            if (Config.config.battleLoading.removeVehicleTypeIcon)
-            {
-                if (team == XfwConst.TEAM_ALLY)
-                {
-                    dx = proxy.vehicleIconLoader.x - (proxy.vehicleField.x + proxy.vehicleField.width);
-                }
-                else
-                {
-                    var offset:int = 4;
-                    if (_vehicleIconLoaded && Config.config.battle.mirroredVehicleIcons == false && team == XfwConst.TEAM_ENEMY)
-                        offset = MAXIMUM_VEHICLE_ICON_WIDTH;
-                    dx = proxy.vehicleField.x - (proxy.vehicleIconLoader.x + offset);
-                    proxy.vehicleField.x -= dx;
-                }
-                proxy.vehicleField.width += dx;
-            }
+            // setup vehicle field
+            TextFieldEx.setVerticalAlign(proxy.vehicleField, TextFieldAutoSize.CENTER);
+            TextFieldEx.setVerticalAutoSize(proxy.vehicleField, TextFieldAutoSize.CENTER);
+            proxy.vehicleField.condenseWhite = true;
+            proxy.vehicleField.scaleX = 1;
+            proxy.vehicleField.width = VEHICLE_FIELD_WIDTH;
 
-            // squad
             if (team == XfwConst.TEAM_ALLY)
             {
                 proxy.squad.x += Config.config.battleLoading.squadIconOffsetXLeft;
-            }
-            else
-            {
-                proxy.squad.x -= Config.config.battleLoading.squadIconOffsetXRight;
-            }
-
-            // textField
-            if (team == XfwConst.TEAM_ALLY)
-            {
-                proxy.textField.x += Config.config.battleLoading.nameFieldOffsetXLeft;
-            }
-            else
-            {
-                proxy.textField.x -= Config.config.battleLoading.nameFieldOffsetXRight;
-            }
-
-            // vehicleField
-            if (team == XfwConst.TEAM_ALLY)
-            {
-                proxy.vehicleField.x += Config.config.battleLoading.vehicleFieldOffsetXLeft;
-            }
-            else
-            {
-                proxy.vehicleField.x -= Config.config.battleLoading.vehicleFieldOffsetXRight;
-            }
-
-            // vehicleIconLoader
-            if (team == XfwConst.TEAM_ALLY)
-            {
+                proxy.textField.x += Config.config.battleLoading.nameFieldOffsetXLeft - 10;
                 proxy.vehicleIconLoader.x += Config.config.battleLoading.vehicleIconOffsetXLeft;
             }
             else
             {
+                proxy.squad.x -= Config.config.battleLoading.squadIconOffsetXRight;
+                proxy.textField.x -= Config.config.battleLoading.nameFieldOffsetXRight - 10;
                 proxy.vehicleIconLoader.x -= Config.config.battleLoading.vehicleIconOffsetXRight;
             }
         }
@@ -206,14 +155,6 @@ package xvm.battleloading_ui.components
                     formatOptions.position = proxy.index + 1;
                     formatOptions.isTeamKiller = _model.isTeamKiller();
 
-                    // controls visibility
-                    if (Config.config.battleLoading.removeSquadIcon && proxy.squad != null)
-                        proxy.squad.visible = false;
-                    if (Config.config.battleLoading.removeVehicleLevel)
-                        proxy.vehicleLevelIcon.visible = false;
-                    if (Config.config.battleLoading.removeVehicleTypeIcon)
-                        proxy.vehicleTypeIcon.visible = false;
-
                     // ClanIcon
                     attachClanIconToPlayer();
 
@@ -221,6 +162,30 @@ package xvm.battleloading_ui.components
 
                     proxy.vehicleIconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
+
+                    // controls visibility
+                    if (Config.config.battleLoading.removeSquadIcon)
+                        proxy.squad.visible = false;
+                    if (Config.config.battleLoading.removeVehicleLevel)
+                        proxy.vehicleLevelIcon.visible = false;
+                    if (Config.config.battleLoading.removeVehicleTypeIcon)
+                        proxy.vehicleTypeIcon.visible = false;
+
+                    // vehicleField
+                    if (team == XfwConst.TEAM_ALLY)
+                    {
+                        proxy.vehicleField.x = proxy.vehicleIconLoader.x - VEHICLE_FIELD_WIDTH - 1;
+                        if (!Config.config.battleLoading.removeVehicleTypeIcon)
+                            proxy.vehicleField.x -= VEHICLE_TYPE_ICON_WIDTH + 2;
+                        proxy.vehicleField.x += Config.config.battleLoading.vehicleFieldOffsetXLeft;
+                    }
+                    else
+                    {
+                        proxy.vehicleField.x = proxy.vehicleIconLoader.x + (proxy.vehicleIconLoader.scaleX < 0 ? MAXIMUM_VEHICLE_ICON_WIDTH : 0) + 4;
+                        if (!Config.config.battleLoading.removeVehicleTypeIcon)
+                            proxy.vehicleField.x += VEHICLE_TYPE_ICON_WIDTH + 4;
+                        proxy.vehicleField.x -= Config.config.battleLoading.vehicleFieldOffsetXRight;
+                    }
 
                     // Set Text Fields
                     var textFieldColorString:String = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
@@ -251,6 +216,10 @@ package xvm.battleloading_ui.components
         {
             //Logger.add("onVehicleIconLoadComplete: " + _fullPlayerName);
 
+            if (_vehicleIconLoaded)
+                return;
+            _vehicleIconLoaded = true;
+
             // resize icons to avoid invalid resizing of item
             //if (proxy.vehicleIconLoader.width > 84 || proxy.vehicleIconLoader.height > 24)
             /*if (proxy.vehicleIconLoader.height > 24)
@@ -261,8 +230,6 @@ package xvm.battleloading_ui.components
                 proxy.vehicleIconLoader.scaleY = c;
             }*/
 
-            _vehicleIconLoaded = true;
-
             // crop large icons to avoid invalid resizing of item
             // proxy.vehicleIconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
 
@@ -272,8 +239,7 @@ package xvm.battleloading_ui.components
                 if (team == XfwConst.TEAM_ENEMY)
                 {
                     proxy.vehicleIconLoader.scaleX = -Math.abs(proxy.vehicleIconLoader.scaleX);
-                    proxy.vehicleIconLoader.x -= proxy.vehicleIconLoader.width;
-                    //Logger.add(proxy.vehicleIconLoader.width + "x" + proxy.vehicleIconLoader.height);
+                    proxy.vehicleIconLoader.x -= MAXIMUM_VEHICLE_ICON_WIDTH;
                 }
             }
         }

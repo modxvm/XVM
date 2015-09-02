@@ -191,8 +191,8 @@
   "iconset": {
     "battleLoadingAlly": "../../../../res/contour/Master_XH",
     "battleLoadingEnemy": "../../../../res/contour/Master_XH",
-    "battleLoadingAlly": "../../../../res/contour/block",
-    "battleLoadingEnemy": "../../../../res/contour/block",
+    //"battleLoadingAlly": "../../../../res/contour/block",
+    //"battleLoadingEnemy": "../../../../res/contour/block",
     "statisticFormAlly": "../../../../res/contour/Master_XH",
     "statisticFormEnemy": "../../../../res/contour/Master_XH",
     //"statisticFormAlly": "../../../../res/contour/block",

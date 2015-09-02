@@ -84,29 +84,13 @@ class wot.StatisticForm.BattleStatItemRenderer
         if (team == Defines.TEAM_ALLY)
         {
             wrapper.squad._x += Config.config.statisticForm.squadIconOffsetXLeft;
-        }
-        else
-        {
-            wrapper.squad._x -= Config.config.statisticForm.squadIconOffsetXRight;
-        }
-
-        // playerName
-        if (team == Defines.TEAM_ALLY)
-        {
             wrapper.playerName._x += Config.config.statisticForm.nameFieldOffsetXLeft;
-        }
-        else
-        {
-            wrapper.playerName._x -= Config.config.statisticForm.nameFieldOffsetXRight - 10 ;
-        }
-
-        // iconLoader
-        if (team == Defines.TEAM_ALLY)
-        {
             wrapper.iconLoader._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
         }
         else
         {
+            wrapper.squad._x -= Config.config.statisticForm.squadIconOffsetXRight;
+            wrapper.playerName._x -= Config.config.statisticForm.nameFieldOffsetXRight - 10;
             wrapper.iconLoader._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
         }
     }
@@ -219,6 +203,7 @@ class wot.StatisticForm.BattleStatItemRenderer
             return;
         m_iconLoaded = true;
 
+        // disable icons mirroring (for alternative icons)
         if (Config.config.battle.mirroredVehicleIcons == false)
         {
             if (team == Defines.TEAM_ENEMY)
