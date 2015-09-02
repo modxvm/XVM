@@ -30,11 +30,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
         PlayerListItemRendererCtor();
     }
 
-    function __getColorTransform()
+    function getColorTransform()
     {
         if (Config.eventType != "normal")
-            return base.__getColorTransform.apply(base, arguments);
-        return this.__getColorTransformImpl.apply(this, arguments);
+            return base.getColorTransform.apply(base, arguments);
+        return this.getColorTransformImpl.apply(this, arguments);
     }
 
     function setState()
@@ -108,9 +108,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     // IMPL
 
-    function __getColorTransformImpl(schemeName:String, force:Boolean)
+    function getColorTransformImpl(schemeName:String, force:Boolean)
     {
-        //Logger.add(m_name + " scheme=" + schemeName);
+        Logger.add(m_name + " scheme=" + schemeName);
 
         if (Config.config.battle.highlightVehicleIcon == false && !force)
         {
@@ -122,7 +122,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 schemeName = "normal_dead";
         }
 
-        return base.__getColorTransform(schemeName);
+        return base.getColorTransform(schemeName);
     }
 
     function setStateImpl()
@@ -771,7 +771,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 if (sn.vehicleSchemeName != format.__last_vehicleSchemeName)
                 {
                     format.__last_vehicleSchemeName = sn.vehicleSchemeName;
-                    (new Transform(f)).colorTransform = this.__getColorTransform(sn.vehicleSchemeName, true);
+                    (new Transform(f)).colorTransform = this.getColorTransform(sn.vehicleSchemeName, true);
                     //Logger.add(f.source + " " + sn.vehicleSchemeName);
                 }
             }

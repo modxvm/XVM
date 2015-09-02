@@ -34,7 +34,7 @@ intrinsic class net.wargaming.ingame.PlayerListItemRenderer extends UIComponent
     function set speaking(value);
     function get selected();
     function set selected(value);
-    function __getColorTransform(schemeName);
+    function getColorTransform(schemeName);
     function get isDynamicSquadActive();
     function set isDynamicSquadActive(val);
     function get isShowExtraModeActive();

@@ -7,7 +7,7 @@ class wot.wrapper.PlayersPanel.PlayerListItemRenderer extends net.wargaming.inga
         super();
 
         var OVERRIDE_FUNCTIONS:Array = [
-            "__getColorTransform",
+            "getColorTransform",
             "setState",
             "update",
             "updateSquadIcons"
