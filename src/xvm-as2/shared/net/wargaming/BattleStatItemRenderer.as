@@ -1,15 +1,21 @@
 ﻿intrinsic class net.wargaming.BattleStatItemRenderer extends net.wargaming.controls.TextFieldShort
 {
-  var playerName:TextField;
-  var col3:TextField;
-  var data:Object;
-  var iconLoader: net.wargaming.controls.UILoaderAlt;
-  var owner;
-  var squad;
+    static var IGR_ICON_OFFSET_LEFT;
+    static var IGR_ICON_OFFSET_RIGHT;
 
-  function get selected();
+    var playerName:TextField;
+    var col3:TextField;
+    var data:Object;
+    var iconLoader: net.wargaming.controls.UILoaderAlt;
+    var owner;
+    var squad;
+    var vehicleLevelIcon;
+    var vehicleTypeIcon;
+    var icoIGR;
 
-  function updateData();
-  function applyData();
-  function updateState();
+    function get selected();
+
+    function updateData();
+    function applyData();
+    function updateState();
 }

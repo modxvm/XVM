@@ -31,85 +31,96 @@ class wot.StatisticForm.BattleStatItemRenderer
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
-    private static var s_state:Number = 0;
+    private static var VEHICLE_FIELD_WIDTH:Number = 250;
+    private static var VEHICLE_TYPE_ICON_WIDTH:Number = 25;
+    private static var MAXIMUM_VEHICLE_ICON_WIDTH:Number = 80;
+
     private static var s_winChances:WinChances = null;
 
     var m_clanIcon: UILoaderAlt = null;
     var m_iconset: IconLoader = null;
     var m_iconLoaded: Boolean = false;
 
+    private var team:Number;
+
+    // for debug
+    public function _debug()
+    {
+        wrapper.playerName.border = true;
+        wrapper.playerName.borderColor = 0x00FF00;
+        wrapper.col3.border = true;
+        wrapper.col3.borderColor = 0xFFFF00;
+    }
+
+
     public function BattleStatItemRendererCtor()
     {
         Utils.TraceXvmModule("StatisticForm");
 
+        team = (wrapper._parent._parent._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+
+        //_debug();
+
+        // Create win chances field
         if (s_winChances == null)
             s_winChances = new WinChances();
 
+        // Add event handlers
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
+
+        // Setup controls
+
+        // setup vehicle field (named "col3")
         wrapper.col3.html = true;
+        wrapper.col3.condenseWhite = true;
         wrapper.col3._y = 0;
-        wrapper.col3._x += (team == Defines.TEAM_ALLY) ? 8 : -8;
+        wrapper.col3._xscale = wrapper.col3._yscale = 100;
+        wrapper.col3._width = VEHICLE_FIELD_WIDTH;
         wrapper.col3._height = wrapper._height;
         wrapper.col3.verticalAlign = "center";
         wrapper.col3.verticalAutoSize = true;
 
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, wrapper, updateData);
-    }
-
-    private function get team(): Number
-    {
-        return (wrapper._parent._parent._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
-    }
-
-    function completeLoad()
-    {
-        if (m_iconLoaded)
-            return;
-        m_iconLoaded = true;
-
-        var xLeftVeh:Number = (isNaN(Config.config.statisticForm.xPositionLeftVehicle)) ? 0 : Config.config.statisticForm.xPositionLeftVehicle;
-        var xRightVeh:Number = (isNaN(Config.config.statisticForm.xPositionRightVehicle)) ? 0 : Config.config.statisticForm.xPositionRightVehicle;
-        var xLeftVehIcon:Number = (isNaN(Config.config.statisticForm.xPositionLeftVehicleIcon)) ? 0 : Config.config.statisticForm.xPositionLeftVehicleIcon;
-        var xRightVehIcon:Number = (isNaN(Config.config.statisticForm.xPositionRightVehicleIcon)) ? 0 : Config.config.statisticForm.xPositionRightVehicleIcon;
-
-        wrapper.col3._width += 100;
+        // squad
         if (team == Defines.TEAM_ALLY)
         {
-            wrapper.col3._x -= 100 + xLeftVeh;
-            wrapper.iconLoader._x -= xLeftVehIcon;
-            //Logger.addObject(event.target);
-        }
-        if (!Config.config.battle.mirroredVehicleIcons)
-        {
-            if (team == Defines.TEAM_ENEMY)
-            {
-                wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
-                wrapper.iconLoader._x -= 80 - 5 - xRightVehIcon;
-                wrapper.col3._x += 5 + xRightVeh;
-            }
+            wrapper.squad._x += Config.config.statisticForm.squadIconOffsetXLeft;
         }
         else
         {
-            if (team == Defines.TEAM_ENEMY)
-            {
-                wrapper.iconLoader._x -= xRightVehIcon;
-                wrapper.col3._x -= xRightVeh;
-            }
+            wrapper.squad._x -= Config.config.statisticForm.squadIconOffsetXRight;
+        }
+
+        // playerName
+        if (team == Defines.TEAM_ALLY)
+        {
+            wrapper.playerName._x += Config.config.statisticForm.nameFieldOffsetXLeft;
+        }
+        else
+        {
+            wrapper.playerName._x -= Config.config.statisticForm.nameFieldOffsetXRight - 10 ;
+        }
+
+        // iconLoader
+        if (team == Defines.TEAM_ALLY)
+        {
+            wrapper.iconLoader._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
+        }
+        else
+        {
+            wrapper.iconLoader._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
         }
     }
 
-    public function onConfigLoaded(event)
+    private function onStatLoaded()
     {
-        if (s_state <= 0)
-            s_state = 1;
-        wrapper.col3.condenseWhite = false;
+        wrapper.col3.condenseWhite = true;
+        wrapper.updateData();
     }
 
     // override
     function updateDataImpl()
     {
         //Logger.add("updateData");
-
         if (!wrapper.data)
         {
             base.updateData();
@@ -134,7 +145,7 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         // Alternative icon set
         if (!m_iconset)
-            m_iconset = new IconLoader(this, completeLoad);
+            m_iconset = new IconLoader(this, onIconLoaded);
         m_iconset.init(wrapper.iconLoader,
             [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((team == Defines.TEAM_ALLY)
             ? Config.config.iconset.statisticFormAlly
@@ -146,13 +157,43 @@ class wot.StatisticForm.BattleStatItemRenderer
         // Player/clan icons
         attachClanIconToPlayer(wrapper.data);
 
-        if (Config.config.statisticForm.removeSquadIcon && wrapper.squad)
-            wrapper.squad._visible = false;
-
         base.updateData();
 
         wrapper.data.icon = saved_icon;
         wrapper.data.label = saved_label;
+
+        // hide controls
+        if (Config.config.statisticForm.removeSquadIcon)
+            wrapper.squad._visible = false;
+        if (Config.config.statisticForm.removeVehicleLevel)
+            wrapper.vehicleLevelIcon._visible = false;
+        if (Config.config.statisticForm.removeVehicleTypeIcon)
+            wrapper.vehicleTypeIcon._visible = false;
+
+        // vehicleField
+        if (team == Defines.TEAM_ALLY)
+        {
+            wrapper.col3._x = wrapper.iconLoader._x - VEHICLE_FIELD_WIDTH - 1;
+            if (!Config.config.statisticForm.removeVehicleTypeIcon)
+                wrapper.col3._x -= VEHICLE_TYPE_ICON_WIDTH;
+            wrapper.col3._x += Config.config.statisticForm.vehicleFieldOffsetXLeft;
+            if (wrapper.icoIGR._visible)
+            {
+                wrapper.icoIGR._x = wrapper.col3._x + wrapper.col3._width - wrapper.col3.textWidth - net.wargaming.BattleStatItemRenderer.IGR_ICON_OFFSET_LEFT;
+            }
+        }
+        else
+        {
+            wrapper.col3._x = wrapper.iconLoader._x + (wrapper.iconLoader._xscale < 0 ? MAXIMUM_VEHICLE_ICON_WIDTH : 0) + 1;
+            if (!Config.config.statisticForm.removeVehicleTypeIcon)
+                wrapper.col3._x += VEHICLE_TYPE_ICON_WIDTH + 4;
+            wrapper.col3._x -= Config.config.statisticForm.vehicleFieldOffsetXRight;
+            if (wrapper.icoIGR._visible)
+            {
+                wrapper.icoIGR._x = wrapper.col3._x;
+                wrapper.col3._x += wrapper.icoIGR._width + net.wargaming.BattleStatItemRenderer.IGR_ICON_OFFSET_RIGHT;
+            }
+        }
 
         // Set Text Fields
         var c:String = "#" + Strings.padLeft(wrapper.playerName.textColor.toString(16), 6, '0');
@@ -172,6 +213,22 @@ class wot.StatisticForm.BattleStatItemRenderer
         }
     }
 
+    function onIconLoaded()
+    {
+        if (m_iconLoaded)
+            return;
+        m_iconLoaded = true;
+
+        if (Config.config.battle.mirroredVehicleIcons == false)
+        {
+            if (team == Defines.TEAM_ENEMY)
+            {
+                wrapper.iconLoader._xscale = -Math.abs(wrapper.iconLoader._xscale);
+                wrapper.iconLoader._x -= MAXIMUM_VEHICLE_ICON_WIDTH;
+            }
+        }
+    }
+
     function attachClanIconToPlayer(data)
     {
         var cfg = Config.config.statisticForm.clanIcon;
@@ -188,7 +245,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         if (m_clanIcon == null)
         {
             var x = (!m_iconLoaded || Config.config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
-                ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80 - 5;
+                ? wrapper.iconLoader._x : wrapper.iconLoader._x + MAXIMUM_VEHICLE_ICON_WIDTH - 5;
             m_clanIcon = PlayerInfo.createIcon(wrapper._parent._parent._parent, "clanicon_" + data.uid,
                 cfg, x + wrapper._parent._parent._x + wrapper._parent._x + wrapper._x,
                 wrapper.iconLoader._y + wrapper._parent._parent._y + wrapper._parent._y + wrapper._y,
