@@ -1854,10 +1854,7 @@ _gun_camo_modifier = {
         ],
     '_75mm_Gun_Type5':
         [
-            [ ['japan:Chi_Nu', 'japan:Chi_Ri', 'japan:Chi_To'], 0.26 ]
-        ],
-    '_75mm_Gun_Type5':
-        [
+            [ ['japan:Chi_Nu', 'japan:Chi_Ri', 'japan:Chi_To'], 0.26 ],
             [ ['japan:J23_Mi_To'], 0.247 ]
         ],
     '_75mm_Gun_Type5_M1':
