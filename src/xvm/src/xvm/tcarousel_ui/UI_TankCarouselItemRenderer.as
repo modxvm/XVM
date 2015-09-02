@@ -104,8 +104,8 @@ package xvm.tcarousel_ui
                 var w:int = int(ITEM_WIDTH * zoom);
                 var h:int = int(ITEM_HEIGHT * zoom);
 
-                scrollRect = new Rectangle(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT_MULTISELECTION * cfg.fields.activateButton.scale * zoom + 2);
-                //graphics.beginFill(0xFFFFFF, 0.3); graphics.drawRect(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT + 2); graphics.endFill();
+                scrollRect = new Rectangle(-1, -1, ITEM_WIDTH + 2, activateButton.y + activateButton.height * cfg.fields.activateButton.scale + 4);
+                //graphics.beginFill(0xFFFFFF, 0.3); graphics.drawRect(scrollRect.x, scrollRect.y, scrollRect.width, scrollRect.height); graphics.endFill();
 
                 extraFields = new MovieClip();
                 extraFields.scaleX = extraFields.scaleY = 1 / zoom;
