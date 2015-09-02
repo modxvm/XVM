@@ -77,6 +77,8 @@ package xvm.battleloading_ui.components
             proxy.vehicleField.scaleX = 1;
             proxy.vehicleField.width = VEHICLE_FIELD_WIDTH;
 
+            proxy.textField.width += 50;
+
             if (team == XfwConst.TEAM_ALLY)
             {
                 proxy.squad.x += Config.config.battleLoading.squadIconOffsetXLeft;
@@ -86,7 +88,7 @@ package xvm.battleloading_ui.components
             else
             {
                 proxy.squad.x -= Config.config.battleLoading.squadIconOffsetXRight;
-                proxy.textField.x -= Config.config.battleLoading.nameFieldOffsetXRight - 10;
+                proxy.textField.x -= Config.config.battleLoading.nameFieldOffsetXRight - 10 + 50;
                 proxy.vehicleIconLoader.x -= Config.config.battleLoading.vehicleIconOffsetXRight;
             }
         }

@@ -80,7 +80,8 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.col3.verticalAlign = "center";
         wrapper.col3.verticalAutoSize = true;
 
-        // squad
+        wrapper.playerName._width += 50;
+
         if (team == Defines.TEAM_ALLY)
         {
             wrapper.squad._x += Config.config.statisticForm.squadIconOffsetXLeft;
@@ -90,7 +91,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         else
         {
             wrapper.squad._x -= Config.config.statisticForm.squadIconOffsetXRight;
-            wrapper.playerName._x -= Config.config.statisticForm.nameFieldOffsetXRight - 10;
+            wrapper.playerName._x -= Config.config.statisticForm.nameFieldOffsetXRight - 10 + 50;
             wrapper.iconLoader._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
         }
     }
