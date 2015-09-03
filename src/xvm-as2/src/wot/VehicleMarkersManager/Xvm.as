@@ -405,7 +405,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         XVMUpdateStyle();
     }
 
-    private function setMarkerStateXvm(targets:Number, vehicleStatus:Number, frags:Number, my_frags:Number, squad:Number)
+    public function setMarkerStateXvm(targets:Number, vehicleStatus:Number, frags:Number, my_frags:Number, squad:Number)
     {
         var needUpdate:Boolean = false;
 

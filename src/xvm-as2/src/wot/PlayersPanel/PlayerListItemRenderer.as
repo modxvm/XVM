@@ -111,8 +111,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function getColorTransformImpl(schemeName:String, force:Boolean)
     {
-        Logger.add(m_name + " scheme=" + schemeName);
-
         if (Config.config.battle.highlightVehicleIcon == false && !force)
         {
             if (schemeName == "selected" || schemeName == "squad")

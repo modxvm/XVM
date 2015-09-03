@@ -62,8 +62,6 @@ class Xvm(object):
 
     def __init__(self):
         self.currentPlayerId = None
-        self.battleFlashObject = None
-        self.vmmFlashObject = None
         self._invalidateTimerId = dict()
         self._invalidateTargets = dict()
 
@@ -234,8 +232,6 @@ class Xvm(object):
     def initBattleSwf(self, flashObject):
         trace('initBattleSwf')
         try:
-            self.battleFlashObject = flashObject
-
             # Save/restore arena data
             player = BigWorld.player()
 
@@ -262,25 +258,23 @@ class Xvm(object):
         except Exception, ex:
             err(traceback.format_exc())
 
-        self.sendConfig(self.battleFlashObject)
+        self.sendConfig(flashObject)
 
         BigWorld.callback(0, self.invalidateAll)
 
 
     def deleteBattleSwf(self):
         trace('deleteBattleSwf')
-        self.battleFlashObject = None
-
+        pass
 
     def initVmmSwf(self, flashObject):
         #trace('initVmmSwf')
-        self.vmmFlashObject = flashObject
-        self.sendConfig(self.vmmFlashObject)
+        self.sendConfig(flashObject)
 
 
     def deleteVmmSwf(self):
         #trace('deleteVmmSwf')
-        self.vmmFlashObject = None
+        pass
 
 
     def invalidateAll(self):
@@ -374,7 +368,8 @@ class Xvm(object):
     def updateBattle(self, vID, targets):
         #trace('updateBattle: {0} {1}'.format(targets, vID))
 
-        if self.battleFlashObject is None:
+        battle = getBattleApp()
+        if not battle:
             return
 
         player = BigWorld.player()
@@ -385,7 +380,7 @@ class Xvm(object):
         if state is None:
             return
 
-        movie = self.battleFlashObject.movie
+        movie = battle.movie
         if movie is None:
             return
 
@@ -406,8 +401,14 @@ class Xvm(object):
     def updateMarker(self, vID, targets):
         #trace('updateMarker: {0} {1}'.format(targets, vID))
 
-        if self.vmmFlashObject is None:
+        battle = getBattleApp()
+        if not battle:
             return
+
+        markersManager = battle.markersManager
+        if vID not in markersManager._MarkersManager__markers:
+            return
+        marker = markersManager._MarkersManager__markers[vID]
 
         player = BigWorld.player()
         arena = player.arena
@@ -417,10 +418,6 @@ class Xvm(object):
 
         stat = arena.statistics.get(vID, None)
         if stat is None:
-            return
-
-        vehicle = BigWorld.entity(vID)
-        if vehicle is None or not hasattr(vehicle, 'marker'):
             return
 
         isAlive = arenaVehicle['isAlive']
@@ -447,7 +444,7 @@ class Xvm(object):
             squadIndex += 10
 
         #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vID, status, frags, squadIndex))
-        self.vmmFlashObject.invokeMarker(vehicle.marker, 'setMarkerStateXvm', [targets, status, frags, my_frags, squadIndex])
+        markersManager.invokeMarker(marker.id, 'setMarkerStateXvm', [targets, status, frags, my_frags, squadIndex])
 
 
     # PRIVATE
@@ -575,9 +572,10 @@ class Xvm(object):
             if not isRepeated:
                 # debug("key=" + str(key) + ' ' + ('down' if isDown else 'up'))
                 # g_websock.send("%s/%i" % ('down' if isDown else 'up', key))
-                if self.battleFlashObject is not None:
+                battle = getBattleApp()
+                if battle:
                     if self.checkKeyEventBattle(key, isDown):
-                        movie = self.battleFlashObject.movie
+                        movie = battle.movie
                         if movie is not None:
                             movie.invoke((AS2RESPOND.KEY_EVENT, key, isDown))
         except Exception, ex:
