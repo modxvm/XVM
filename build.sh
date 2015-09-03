@@ -86,16 +86,16 @@ extend_path(){
 load_repositorystats(){
     #read xvm revision and hash
     pushd "$XVMBUILD_REPOSITORY_PATH"/ > /dev/null       
-        XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
-        XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
-        XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
+        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
+        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
+        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
     popd > /dev/null
 
     #read xfw revision and hash
     pushd "$XVMBUILD_REPOSITORY_PATH"/src/xfw/ > /dev/null
-        XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
-        XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
-        XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
+        export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
+        export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
+        export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
     popd > /dev/null
 }
 

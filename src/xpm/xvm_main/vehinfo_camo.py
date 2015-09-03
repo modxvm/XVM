@@ -18,7 +18,7 @@ from logger import *
 
 
 # Data from: http://forum.worldoftanks.ru/index.php?/topic/1047590-
-# Updated 15.07.2015
+# Updated 03.09.2015
 # Big thanks to authors of data!
 
 # percentage of lowering vision: [ standing, moving, shooting, top turret modifier ]
@@ -33,6 +33,7 @@ _tanks_camo = {
     'ussr:M3_Stuart_LL':                      [ 15.22 , 15.22 , 4.57 , 1     ],
     'ussr:T-127':                             [ 17.96 , 13.45 , 5.21 , 1     ],
     'ussr:BT-SV':                             [ 16.87 , 12.65 , 4.89 , 1     ],
+    'ussr:R105_BT_7A':                        [ 15.68 , 11.75 , 4.08 , 1     ],
     'ussr:BT-7':                              [ 16.53 , 16.53 , 4.96 , 1     ],
     'ussr:LTP':                               [ 20.18 , 15.16 , 5.85 , 1     ],
     'ussr:T-46':                              [ 16.12 , 12.08 , 4.45 , 0.972 ],
@@ -196,6 +197,7 @@ _tanks_camo = {
     'germany:JagdPanther':                    [ 13.11 ,  7.87 , 2.74 , 1     ],
     'germany:Sturer_Emil':                    [ 11.29 ,  6.78 , 1.73 , 1     ],
     'germany:JagdTiger_SdKfz_185':            [ 10.66 ,  6.38 , 2.40 , 1     ],
+    'germany:G112_KanonenJagdPanzer':         [ 23.60 , 14.14 , 5.62 , 1     ],
     'germany:JagdPantherII':                  [ 10.20 ,  6.10 , 1.65 , 1     ],
     'germany:Ferdinand':                      [ 10.89 ,  6.55 , 1.76 , 1     ],
     'germany:RhB_Waffentrager':               [ 22.51 , 13.51 , 3.44 , 1     ],
@@ -274,11 +276,11 @@ _tanks_camo = {
     'usa:M36_Slagger':                        [ 15.26 ,  9.16 , 3.63 , 0.878 ],
     'usa:M18_Hellcat':                        [ 20.97 , 12.58 , 5.24 , 0.994 ],
     'usa:A102_T28_concept':                   [ 14.76 ,  8.83 , 3.25 , 1     ],
+    'usa:A101_M56':                           [ 22.74 , 13.62 , 5.41 , 1     ],
     'usa:T25_AT':                             [ 19.61 , 11.74 , 4.10 , 1     ],
     'usa:T25_2':                              [ 15.13 ,  9.10 , 3.40 , 0.84  ],
     'usa:T28':                                [ 18.18 , 10.89 , 3.27 , 1     ],
     'usa:T28_Prototype':                      [ 12.60 ,  7.53 , 2.27 , 1     ],
-    'usa:A101_M56':                           [ 22.74 , 13.62 , 5.41 , 1     ],
     'usa:T95':                                [ 18.18 , 10.89 , 2.45 , 1     ],
     'usa:T30':                                [  9.18 ,  5.53 , 1.24 , 1     ],
     'usa:A83_T110E4':                         [  9.07 ,  5.42 , 1.22 , 1     ],
@@ -368,6 +370,7 @@ _tanks_camo = {
     'uk:GB17_Grant_I':                        [  9.52 ,  7.13 , 2.48 , 1     ],
     'uk:GB68_Matilda_Black_Prince':           [ 14.14 , 10.60 , 3.76 , 1     ],
     'uk:GB50_Sherman_III':                    [ 10.98 ,  8.23 , 2.85 , 0.963 ],
+    'uk:GB85_Cromwell_Berlin':                [ 14.42 , 10.83 , 3.56 , 1     ],
     'uk:GB21_Cromwell':                       [ 14.42 , 10.83 , 3.56 , 1     ],
     'uk:GB19_Sherman_Firefly':                [ 11.97 ,  8.95 , 2.80 , 1     ],
     'uk:GB22_Comet':                          [ 14.90 , 11.19 , 3.68 , 1.033 ],
@@ -450,6 +453,7 @@ _tanks_camo = {
     'japan:Ke_Ho':                            [ 19.21 , 19.21 , 5.11 , 1     ],
     # Medium
     'japan:Chi_Ni':                           [ 15.96 , 11.97 , 3.80 , 1     ],
+    'japan:J26_Type_89':                      [ 12.63 ,  9.49 , 3.01 , 1.003 ],
     'japan:Chi_Ha':                           [ 16.50 , 12.36 , 4.79 , 0.968 ],
     'japan:Chi_He':                           [ 15.37 , 11.56 , 4.00 , 0.943 ],
     'japan:Chi_Nu_Kai':                       [ 13.85 , 10.37 , 3.60 , 1     ],
@@ -461,7 +465,15 @@ _tanks_camo = {
     'japan:Type_61':                          [  9.21 ,  6.91 , 1.93 , 1.188 ],
     'japan:ST_B1':                            [ 13.68 , 10.26 , 2.86 , 1     ],
     # Heavy
+    'japan:J21_Type_91':                      [  6.33 ,  3.13 , 1.83 , 1     ],
+    'japan:J22_Type_95':                      [  5.64 ,  2.85 , 1.47 , 1     ],
+    'japan:J23_Mi_To':                        [  2.17 ,  1.09 , 0.48 , 1     ],
     'japan:J19_Tiger_I_Jpn':                  [  6.5  ,  3.25 , 1.55 , 1     ],
+    'japan:J24_Mi_To_130_tons':               [  0.23 ,  0.11 , 0.05 , 1     ],
+    'japan:J28_O_I_100':                      [  0.06 ,  0.06 , 0.01 , 1     ],
+    'japan:J27_O_I_120':                      [  0.4  ,  0.17 , 0.08 , 1     ],
+    'japan:J25_Type_4':                       [  0.17 ,  0.06 , 0.03 , 1     ],
+    'japan:J20_Type_2605':                    [  0.17 ,  0.11 , 0.03 , 1     ],
     }
 
 #  Coefficient of lowering camo at shot
@@ -1713,7 +1725,7 @@ _gun_camo_modifier = {
         ],
     '_57mm_Gun_Type_97':
         [
-            [ ['china:Ch08_Type97_Chi_Ha'], 0.280 ]
+            [ ['china:Ch08_Type97_Chi_Ha'], 0.28 ]
         ],
     '_57mm_55-57FG':
         [
@@ -1729,15 +1741,15 @@ _gun_camo_modifier = {
         ],
     '_85mm_S-53':
         [
-            [ ['china:Ch04_T34_1', 'china:Ch05_T34_2', 'china:Ch20_Type58'], 0.250 ]
+            [ ['china:Ch04_T34_1', 'china:Ch05_T34_2', 'china:Ch20_Type58'], 0.25 ]
         ],
     '_85mm_Tip_56-85JT':
         [
-            [ ['china:Ch04_T34_1', 'china:Ch05_T34_2', 'china:Ch16_WZ_131', 'china:Ch20_Type58'], 0.250 ]
+            [ ['china:Ch04_T34_1', 'china:Ch05_T34_2', 'china:Ch16_WZ_131', 'china:Ch20_Type58'], 0.25 ]
         ],
     '_85mm_Tip_62-85T':
         [
-            [ ['china:Ch16_WZ_131'], 0.250 ]
+            [ ['china:Ch16_WZ_131'], 0.25 ]
         ],
     '_85mm_Tip_64-85T':
         [
@@ -1749,11 +1761,11 @@ _gun_camo_modifier = {
         ],
     '_100mm_59-100T':
         [
-            [ ['china:Ch05_T34_2', 'china:Ch16_WZ_131', 'china:Ch17_WZ131_1_WZ132', 'china:Ch18_WZ-120'], 0.220 ]
+            [ ['china:Ch05_T34_2', 'china:Ch16_WZ_131', 'china:Ch17_WZ131_1_WZ132', 'china:Ch18_WZ-120'], 0.22 ]
         ],
     '_100mm_44-100JT':
         [
-            [ ['china:Ch04_T34_1', 'china:Ch05_T34_2', 'china:Ch10_IS2'], 0.220 ]
+            [ ['china:Ch04_T34_1', 'china:Ch05_T34_2', 'china:Ch10_IS2'], 0.22 ]
         ],
     '_100mm_60-100T':
         [
@@ -1765,15 +1777,15 @@ _gun_camo_modifier = {
         ],
     '_122-mm_37-122JT':
         [
-            [ ['china:Ch05_T34_2', 'china:Ch10_IS2', 'china:Ch11_110'], 0.200 ]
+            [ ['china:Ch05_T34_2', 'china:Ch10_IS2', 'china:Ch11_110'], 0.2 ]
         ],
     '_122-mm_D25-T':
         [
-            [ ['china:Ch10_IS2', 'china:Ch11_110', 'china:Ch12_111_1_2_3'], 0.190 ]
+            [ ['china:Ch10_IS2', 'china:Ch11_110', 'china:Ch12_111_1_2_3'], 0.19 ]
         ],
     '_122-mm_60-122T':
         [
-            [ ['china:Ch18_WZ-120'], 0.180 ]
+            [ ['china:Ch18_WZ-120'], 0.18 ]
         ],
     '_130mm_59-130T':
         [
@@ -1786,11 +1798,11 @@ _gun_camo_modifier = {
         ],
     '_37mm_Type_100':
         [
-            [ ['japan:Chi_Ha', 'japan:Ke_Ni'], 0.300 ]
+            [ ['japan:Chi_Ha', 'japan:Ke_Ni'], 0.3 ]
         ],
     '_37mm_Type1':
         [
-            [ ['japan:Chi_Ha', 'japan:Ke_Ni'], 0.300 ]
+            [ ['japan:Chi_Ha', 'japan:Ke_Ni'], 0.3 ]
         ],
     '_37mm_Type11':
         [
@@ -1810,8 +1822,90 @@ _gun_camo_modifier = {
         ],
     '_47mm_Gun_Type1':
         [
-            [ ['japan:Chi_Ha', 'japan:Chi_He', 'japan:Ke_Ho'], 0.290 ]
+            [ ['japan:Chi_Ha', 'japan:Chi_He', 'japan:Ke_Ho', 'japan:J21_Type_91'], 0.29 ]
         ],
+    '_57mm_Gun_Type97':
+        [
+            [ ['japan:Chi_Ha'], 0.28 ]
+        ],
+    '_57mm_Gun_Shin':
+        [
+            [ ['japan:Chi_He', 'japan:Chi_Nu', 'japan:Ke_Ho'], 0.266 ]
+        ],
+    '_57mm_Gun_Type97':
+        [
+            [ ['japan:Chi_Ni', 'japan:Ha_Go', 'japan:J26_Type_89'], 0.238 ]
+        ],
+    '_57mm_Gun_Type90':
+        [
+            [ ['japan:J26_Type_89'], 0.238 ]
+        ],
+    '_70mm_Gun_Type_94':
+        [
+            [ ['japan:J21_Type_91', 'japan:J22_Type_95'], 0.26 ]
+        ],
+    '_75mm_Gun_Type_99':
+        [
+            [ ['japan:Chi_He', 'japan:Chi_Nu', 'japan:J22_Type_95'], 0.26 ]
+        ],
+    '_75mm_Gun_Type3':
+        [
+            [ ['japan:Chi_Nu', 'japan:J23_Mi_To'], 0.26 ]
+        ],
+    '_75mm_Gun_Type5':
+        [
+            [ ['japan:Chi_Nu', 'japan:Chi_Ri', 'japan:Chi_To'], 0.26 ],
+            [ ['japan:J23_Mi_To'], 0.247 ]
+        ],
+    '_75mm_Gun_Type5_M1':
+        [
+            [ ['japan:Chi_Ri', 'japan:Chi_To'], 0.247 ]
+        ],
+    '_75mm_Gun_Type5_M1_auto':
+        [
+            [ ['japan:Chi_Ri'], 0.247 ]
+        ],
+    '_90mm_Gun_Type61':
+        [
+            [ ['japan:Type_61'], 0.238 ]
+        ],
+    '_105mm_Cannon_Type_14':
+        [
+            [ ['japan:J23_Mi_To'], 0.22 ]
+        ],
+    '_105mm_Cannon_Type92':
+        [
+            [ ['japan:J24_Mi_To_130_tons', 'japan:J28_O_I_100', 'japan:J27_O_I_120'], 0.209 ]
+        ],
+    '_105mm_Experimental_Tank_Gun':
+        [
+            [ ['japan:J28_O_I_100'], 0.209 ]
+        ],
+    '_105mm_Experimental_Tank_Gun_Kai':
+        [
+            [ ['japan:J27_O_I_120'], 0.209 ]
+        ],
+    '_105mm_Rifled_Gun':
+        [
+            [ ['japan:Type_61'], 0.209 ]
+        ],
+    '_120mm_Short_Barrel_Gun':
+        [
+            [ ['japan:J23_Mi_To'], 0.19 ]
+        ],
+    '_127mm_50_3rd_Year_Type':
+        [
+            [ ['japan:J25_Type_4'], 0.162 ]
+        ],
+    '_140mm_50_3rd_Year_Type':
+        [
+            [ ['japan:J25_Type_4'], 0.153 ]
+        ],
+    '_150mm_Howitzer_Type96':
+        [
+            [ ['japan:J24_Mi_To_130_tons', 'japan:J28_O_I_100', 'japan:J27_O_I_120'], 0.15 ]
+        ],
+    
     }
 
 # returns tuple of camo values: standing, moving, shooting
