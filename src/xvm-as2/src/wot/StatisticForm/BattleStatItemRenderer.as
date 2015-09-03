@@ -87,12 +87,16 @@ class wot.StatisticForm.BattleStatItemRenderer
             wrapper.squad._x += Config.config.statisticForm.squadIconOffsetXLeft;
             wrapper.playerName._x += Config.config.statisticForm.nameFieldOffsetXLeft;
             wrapper.iconLoader._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
+            wrapper.vehicleLevelIcon._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
+            wrapper.vehicleTypeIcon._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
         }
         else
         {
             wrapper.squad._x -= Config.config.statisticForm.squadIconOffsetXRight;
             wrapper.playerName._x -= Config.config.statisticForm.nameFieldOffsetXRight - 10 + 50;
             wrapper.iconLoader._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
+            wrapper.vehicleLevelIcon._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
+            wrapper.vehicleTypeIcon._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
         }
     }
 
@@ -211,6 +215,7 @@ class wot.StatisticForm.BattleStatItemRenderer
             {
                 wrapper.iconLoader._xscale = -Math.abs(wrapper.iconLoader._xscale);
                 wrapper.iconLoader._x -= MAXIMUM_VEHICLE_ICON_WIDTH;
+                wrapper.vehicleLevelIcon._x -= 40;
             }
         }
     }

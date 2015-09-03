@@ -64,9 +64,6 @@ package xvm.battleloading_ui.components
             proxy.vehicleIconLoader.x += dx;
             proxy.vehicleLevelIcon.x += dx;
             proxy.vehicleTypeIcon.x += dx;
-            proxy.vehicleField.width += Math.abs(dx);
-            if (team == XfwConst.TEAM_ENEMY)
-                proxy.vehicleField.x -= Math.abs(dx);
 
             // Setup controls
 
@@ -84,12 +81,16 @@ package xvm.battleloading_ui.components
                 proxy.squad.x += Config.config.battleLoading.squadIconOffsetXLeft;
                 proxy.textField.x += Config.config.battleLoading.nameFieldOffsetXLeft - 10;
                 proxy.vehicleIconLoader.x += Config.config.battleLoading.vehicleIconOffsetXLeft;
+                proxy.vehicleLevelIcon.x += Config.config.battleLoading.vehicleIconOffsetXLeft;
+                proxy.vehicleTypeIcon.x += Config.config.battleLoading.vehicleIconOffsetXLeft;
             }
             else
             {
                 proxy.squad.x -= Config.config.battleLoading.squadIconOffsetXRight;
                 proxy.textField.x -= Config.config.battleLoading.nameFieldOffsetXRight - 10 + 50;
                 proxy.vehicleIconLoader.x -= Config.config.battleLoading.vehicleIconOffsetXRight;
+                proxy.vehicleLevelIcon.x -= Config.config.battleLoading.vehicleIconOffsetXRight;
+                proxy.vehicleTypeIcon.x -= Config.config.battleLoading.vehicleIconOffsetXRight;
             }
         }
 
@@ -242,6 +243,7 @@ package xvm.battleloading_ui.components
                 {
                     proxy.vehicleIconLoader.scaleX = -Math.abs(proxy.vehicleIconLoader.scaleX);
                     proxy.vehicleIconLoader.x -= MAXIMUM_VEHICLE_ICON_WIDTH;
+                    proxy.vehicleLevelIcon.x -= 40;
                 }
             }
         }
