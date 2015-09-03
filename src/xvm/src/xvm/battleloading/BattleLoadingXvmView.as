@@ -17,9 +17,6 @@ package xvm.battleloading
 
     public class BattleLoadingXvmView extends XvmViewBase
     {
-        private static const _name:String = "xvm_battleloading";
-        private static const _ui_name:String = _name + "_ui.swf";
-
         public function BattleLoadingXvmView(view:IView)
         {
             super(view);
@@ -38,18 +35,7 @@ package xvm.battleloading
 
             logBriefConfigurationInfo();
 
-            App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
-
-            if (Xfw.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
-                waitInit();
-        }
-
-        override public function onBeforeDispose(e:LifeCycleEvent):void
-        {
-            if (!Config.networkServicesSettings.statCompany)
-                return;
-
-            App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
+            waitInit();
         }
 
         // PRIVATE
@@ -67,17 +53,9 @@ package xvm.battleloading
                 "                               statBattle=" + Config.networkServicesSettings.statBattle);
         }
 
-        private function onLibLoaded(e:LibraryLoaderEvent):void
-        {
-            if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
-            {
-                waitInit();
-            }
-        }
-
         private function waitInit():void
         {
-            if (!page.initialized)
+            if (!page.initialized || App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRenderer") == null)
             {
                 var $this:* = this;
                 setTimeout(function():void { $this.waitInit(); }, 1);

@@ -1,6 +1,6 @@
 ﻿/**
- * ...
- * @author sirmax2
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.xvm.*;
 import com.xvm.DataTypes.*;

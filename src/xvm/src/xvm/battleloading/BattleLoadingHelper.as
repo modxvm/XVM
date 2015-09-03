@@ -1,9 +1,9 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 package xvm.battleloading
 {
-	/**
-     * ...
-     * @author sirmax2
-     */
     public class BattleLoadingHelper
     {
         import net.wg.gui.components.controls.ReadOnlyScrollingList;
@@ -15,14 +15,8 @@ package xvm.battleloading
             var list2:ReadOnlyScrollingList = page.form.team2List;
             list1.validateNow();
             list2.validateNow();
-            list1.itemRendererName = "xvm.battleloading_ui::UI_LeftItemRenderer";
-            list2.itemRendererName = "xvm.battleloading_ui::UI_RightItemRenderer";
-            App.utils.scheduler.envokeInNextFrame(function():void
-            {
-                list1.itemRendererName = "xvm.battleloading_ui::UI_LeftItemRenderer";
-                list2.itemRendererName = "xvm.battleloading_ui::UI_RightItemRenderer";
-            });
+            list1.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRenderer");
+            list2.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_RightItemRenderer");
         }
     }
-
 }
