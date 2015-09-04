@@ -102,7 +102,7 @@ class wot.StatisticForm.BattleStatItemRenderer
 
     private function onStatLoaded()
     {
-        wrapper.col3.condenseWhite = true;
+        wrapper.col3.condenseWhite = false;
         wrapper.updateData();
     }
 
