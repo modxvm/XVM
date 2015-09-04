@@ -33,7 +33,7 @@ package xvm.battleloading.components
                 page.form.addChild(winChanceTF);
                 winChanceTF.styleSheet = WGUtils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
                 winChanceTF.x = page.form.battleText.x;
-                winChanceTF.y = -10;
+                winChanceTF.y = -36;
             }
 
             var playerNames:Vector.<String> = new Vector.<String>();
