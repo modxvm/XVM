@@ -11,6 +11,7 @@
     var squad;
     var vehicleLevelIcon;
     var vehicleTypeIcon;
+    var frags;
     var icoIGR;
 
     function get selected();

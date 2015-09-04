@@ -89,6 +89,7 @@ class wot.StatisticForm.BattleStatItemRenderer
             wrapper.iconLoader._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
             wrapper.vehicleLevelIcon._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
             wrapper.vehicleTypeIcon._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
+            wrapper.frags._x += Config.config.statisticForm.fragsOffsetXLeft;
         }
         else
         {
@@ -97,6 +98,7 @@ class wot.StatisticForm.BattleStatItemRenderer
             wrapper.iconLoader._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
             wrapper.vehicleLevelIcon._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
             wrapper.vehicleTypeIcon._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
+            wrapper.frags._x -= Config.config.statisticForm.fragsOffsetXRight;
         }
     }
 

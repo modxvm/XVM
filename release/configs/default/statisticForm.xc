@@ -40,6 +40,12 @@
     // X offset for enemies vehicle icons
     // Смещение по оси X иконки танка для противников
     "vehicleIconOffsetXRight": 0,
+    // X offset for allies frags
+    // Смещение по оси X фрагов для союзников
+    "fragsOffsetXLeft": 5,
+    // X offset for enemies frags
+    // Смещение по оси X фрагов для противников
+    "fragsOffsetXRight": 0,
     // Display options for Team/Clan logos (see battleLoading.xc).
     // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
     "clanIcon": {
