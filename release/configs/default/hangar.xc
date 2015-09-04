@@ -31,6 +31,12 @@
     // true - Return crew check box is selected by default
     // true - Включить галочку возврата экипажа по умолчанию
     "crewReturnByDefault": false,
+    // true - Show flags in barracks
+    // true - Показывать флаги в казарме
+    "barracksShowFlags": true,
+    // true - Show skills in barracks
+    // true - Показывать умения в казарме
+    "barracksShowSkills": false,
     // true - Enable removable equipment auto return (Camouflage net, Stereoscope, Toolbox)
     // true - Включить автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами)
     "enableEquipAutoReturn": false,

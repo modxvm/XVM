@@ -71,26 +71,31 @@ def Vehicle_isAmmoFull(base, self):
 @overrideMethod(BarracksMeta, 'as_setTankmenS')
 def BarracksMeta_as_setTankmenS(base, self, tankmenCount, tankmenInSlots, placesCount, tankmenInBarracks, tankmanArr):
     try:
-        imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
-        for tankman in tankmanArr:
-            if 'role' not in tankman:
-                continue
-            tankman['rank'] = tankman['role']
-            tankman['role'] = "<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankman['nationID']])
-            tankman_full_info = g_itemsCache.items.getTankman(tankman['tankmanID'])
-            skills_str = ''
-            for skill in tankman_full_info.skills:
-                skills_str += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
-            if len(tankman_full_info.skills):
-                skills_str += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
-            if tankman_full_info.hasNewSkill:
-                skills_str += "<img src='%s/skills/new_skill.png' vspace='-3'>x%s" % (imgPath, tankman_full_info.newSkillCount[0])
-            if not skills_str:
-                skills_str = l10n('noSkills')
-            tankman['role'] += ' ' + skills_str
+        show_flags = config.get('hangar/barracksShowFlags', True)
+        show_skills = config.get('hangar/barracksShowSkills', True)
+        if show_flags or show_skills:
+            imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
+            for tankman in tankmanArr:
+                if 'role' not in tankman:
+                    continue
+                tankman['rank'] = tankman['role']
+                tankman_role_arr = []
+                if show_flags:
+                    tankman_role_arr.append("<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankman['nationID']]))
+                if show_skills:
+                    tankman_role_arr.append('')
+                    tankman_full_info = g_itemsCache.items.getTankman(tankman['tankmanID'])
+                    for skill in tankman_full_info.skills:
+                        tankman_role_arr[-1] += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
+                    if len(tankman_full_info.skills):
+                        tankman_role_arr[-1] += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
+                    if tankman_full_info.hasNewSkill:
+                        tankman_role_arr[-1] += "<img src='%s/skills/new_skill.png' vspace='-3'>x%s" % (imgPath, tankman_full_info.newSkillCount[0])
+                    if not tankman_role_arr[-1]:
+                        tankman_role_arr[-1] = l10n('noSkills')
+                tankman['role'] = ' '.join(tankman_role_arr)
     except Exception as ex:
         err(traceback.format_exc())
-
     return base(self, tankmenCount, tankmenInSlots, placesCount, tankmenInBarracks, tankmanArr)
 
 
