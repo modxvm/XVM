@@ -63,7 +63,7 @@ package xvm.hangar.components
             //dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_radioRange", param: v_radioRange, selected: true } ));
 
             // draw
-            list.height = 28 * dp.length;
+            list.height = 22 * dp.length;
             dp.invalidate();
             list.validateNow();
 
