@@ -20,6 +20,7 @@ package xvm.battleloading_ui
         override protected function configUI():void
         {
             super.configUI();
+            worker.configUI();
         }
 
         override public function setData(data:Object):void

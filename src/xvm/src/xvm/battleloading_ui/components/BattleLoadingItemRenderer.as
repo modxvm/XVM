@@ -53,7 +53,10 @@ package xvm.battleloading_ui.components
             this.proxy = proxy;
 
             //_debug();
+        }
 
+        public function configUI():void
+        {
             proxy.vehicleIconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
 
             // Add stat loading handler
@@ -75,6 +78,8 @@ package xvm.battleloading_ui.components
             proxy.vehicleField.width = VEHICLE_FIELD_WIDTH;
 
             proxy.textField.width += 50;
+
+            proxy.vehicleIconLoader.autoSize = false;
 
             if (team == XfwConst.TEAM_ALLY)
             {
