@@ -80,6 +80,12 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.col3.verticalAlign = "center";
         wrapper.col3.verticalAutoSize = true;
 
+        wrapper.frags._y = 0;
+        wrapper.frags._xscale = wrapper.frags._yscale = 100;
+        wrapper.frags._height = wrapper._height;
+        wrapper.frags.verticalAlign = "center";
+        wrapper.frags.verticalAutoSize = true;
+
         wrapper.playerName._width += 50;
 
         if (team == Defines.TEAM_ALLY)
