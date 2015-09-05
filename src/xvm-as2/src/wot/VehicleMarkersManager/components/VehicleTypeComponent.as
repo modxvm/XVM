@@ -49,20 +49,10 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
 
         var frameName = getFrameName();
 
-        var icon = null;
-        if (proxy.marker.marker.iconHunt == null)
-        {
-            icon = proxy.marker.marker.icon;
-        }
-        else
-        {
-            proxy.marker.marker.icon._visible = !m_hunt;
-            proxy.marker.marker.iconHunt._visible = m_hunt;
-            icon = m_hunt ? proxy.marker.marker.iconHunt : proxy.marker.marker.icon;
-        }
+        var icon = getIcon();
         icon.gotoAndStop(frameName);
 
-        colorizeMarkerIcon(proxy.currentStateConfigRoot.vehicleIcon.color);
+        colorizeMarkerIcon(icon, proxy.currentStateConfigRoot.vehicleIcon.color);
     }
 
     public function setMarkerState(value)
@@ -83,7 +73,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
                     }
                     delete this.onEnterFrame;
                     this.gotoAndPlay("normal");
-                    me.colorizeMarkerIcon(me.proxy.currentStateConfigRoot.vehicleIcon.color);
+                    me.colorizeMarkerIcon(me.getIcon(), me.proxy.currentStateConfigRoot.vehicleIcon.color);
                     //this.gotoAndPlay("dead");
             }
         }
@@ -161,15 +151,33 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         proxy.marker._alpha = proxy.formatDynamicAlpha(cfg.alpha);
     }
 
-    private function colorizeMarkerIcon(color:String)
+    private function getIcon():MovieClip
+    {
+        var icon = null;
+        if (proxy.marker.marker.iconHunt == null)
+        {
+            icon = proxy.marker.marker.icon;
+        }
+        else
+        {
+            proxy.marker.marker.icon._visible = !m_hunt;
+            proxy.marker.marker.iconHunt._visible = m_hunt;
+            icon = m_hunt ? proxy.marker.marker.iconHunt : proxy.marker.marker.icon;
+        }
+        return icon;
+    }
+
+    private function colorizeMarkerIcon(icon:MovieClip, color:String)
     {
         if (proxy.isSpeaking)
-            return;
-
-        //Logger.add("colorize");
-
-        // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
-        GraphicsUtil.colorize(proxy.marker.marker.icon, proxy.formatDynamicColor(proxy.formatStaticColorText(color)),
-            proxy.isDead ? Config.config.consts.VM_COEFF_VMM_DEAD : Config.config.consts.VM_COEFF_VMM); // darker to improve appearance
+        {
+            icon.transform.colorTransform = new flash.geom.ColorTransform();
+        }
+        else
+        {
+            // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
+            GraphicsUtil.colorize(icon, proxy.formatDynamicColor(proxy.formatStaticColorText(color)),
+                proxy.isDead ? Config.config.consts.VM_COEFF_VMM_DEAD : Config.config.consts.VM_COEFF_VMM);
+        }
     }
 }
