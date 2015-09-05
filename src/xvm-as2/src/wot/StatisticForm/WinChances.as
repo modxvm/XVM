@@ -16,8 +16,9 @@ class wot.StatisticForm.WinChances
                 //Logger.addObject(_root); // debug
                 return;
             }
-            s_chanceField = Utils.duplicateTextField(_root.statsDialog, "battleText", _root.statsDialog.battleText, -45, "left");
+            s_chanceField = Utils.duplicateTextField(_root.statsDialog, "battleText", _root.statsDialog.battleText, -55, "center");
             s_chanceField._width += 300;
+            s_chanceField._x -= 433;
         }
 
         s_chanceText = "<span class='xvm_battleText'>" + (Chance.GetChanceText(

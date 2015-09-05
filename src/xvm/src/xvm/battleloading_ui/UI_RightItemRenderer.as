@@ -23,6 +23,12 @@ package xvm.battleloading_ui
             worker.configUI();
         }
 
+        override protected function onDispose():void
+        {
+            super.onDispose();
+            worker.onDispose();
+        }
+
         override public function setData(data:Object):void
         {
             super.setData(worker.fixData(data as VehicleInfoVO));

@@ -32,8 +32,8 @@ package xvm.battleloading.components
                 winChanceTF = createWinChanceTextField(page.form.battleText);
                 page.form.addChild(winChanceTF);
                 winChanceTF.styleSheet = WGUtils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
-                winChanceTF.x = page.form.battleText.x;
-                winChanceTF.y = -36;
+                winChanceTF.x = page.form.battleText.x - 283;
+                winChanceTF.y = -50;
             }
 
             var playerNames:Vector.<String> = new Vector.<String>();
@@ -58,7 +58,7 @@ package xvm.battleloading.components
             f.antiAliasType = AntiAliasType.ADVANCED;
             var tf:TextFormat = tpl.getTextFormat();
             tf.color = 0xFFFFFF;
-            tf.align = TextFormatAlign.LEFT;
+            tf.align = TextFormatAlign.CENTER;
             f.defaultTextFormat = tf;
             f.selectable = false;
             f.filters = tpl.filters;

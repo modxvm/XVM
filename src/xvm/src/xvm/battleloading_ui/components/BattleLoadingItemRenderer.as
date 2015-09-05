@@ -99,6 +99,11 @@ package xvm.battleloading_ui.components
             }
         }
 
+        public function onDispose():void
+        {
+            proxy.vehicleIconLoader.removeEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
+        }
+
         public function fixData(data:VehicleInfoVO):Object
         {
             if (data != null)
@@ -220,37 +225,35 @@ package xvm.battleloading_ui.components
             return (proxy is UI_LeftItemRenderer) ? XfwConst.TEAM_ALLY : XfwConst.TEAM_ENEMY;
         }
 
+        private var _vehicleIconX:int = 0;
+        private var _vehicleIconScaleX:Number = 0;
+        private var _vehicleLevelX:int = 0;
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void
         {
             //Logger.add("onVehicleIconLoadComplete: " + _fullPlayerName);
 
-            if (_vehicleIconLoaded)
-                return;
-            _vehicleIconLoaded = true;
-
-            // resize icons to avoid invalid resizing of item
-            //if (proxy.vehicleIconLoader.width > 84 || proxy.vehicleIconLoader.height > 24)
-            /*if (proxy.vehicleIconLoader.height > 24)
-            {
-                //var c:Number = Math.min(84 / proxy.vehicleIconLoader.width, 24 / proxy.vehicleIconLoader.height);
-                var c:Number = 24 / proxy.vehicleIconLoader.height;
-                proxy.vehicleIconLoader.scaleX = c;
-                proxy.vehicleIconLoader.scaleY = c;
-            }*/
-
-            // crop large icons to avoid invalid resizing of item
-            // proxy.vehicleIconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
-
             // disable icons mirroring (for alternative icons)
-            if (Config.config.battle.mirroredVehicleIcons == false)
+            if (!_vehicleIconLoaded)
             {
-                if (team == XfwConst.TEAM_ENEMY)
+                if (Config.config.battle.mirroredVehicleIcons == false && team == XfwConst.TEAM_ENEMY)
                 {
-                    proxy.vehicleIconLoader.scaleX = -Math.abs(proxy.vehicleIconLoader.scaleX);
-                    proxy.vehicleIconLoader.x -= MAXIMUM_VEHICLE_ICON_WIDTH;
-                    proxy.vehicleLevelIcon.x -= 40;
+                    _vehicleIconScaleX = -Math.abs(proxy.vehicleIconLoader.scaleX);
+                    _vehicleIconX = proxy.vehicleIconLoader.x - MAXIMUM_VEHICLE_ICON_WIDTH;
+                    _vehicleLevelX = proxy.vehicleLevelIcon.x - 40;
+                }
+                else
+                {
+                    _vehicleIconScaleX = proxy.vehicleIconLoader.scaleX;
+                    _vehicleIconX = proxy.vehicleIconLoader.x;
+                    _vehicleLevelX = proxy.vehicleLevelIcon.x;
                 }
             }
+
+            _vehicleIconLoaded = true;
+
+            proxy.vehicleIconLoader.scaleX = _vehicleIconScaleX;
+            proxy.vehicleIconLoader.x = _vehicleIconX;
+            proxy.vehicleLevelIcon.x = _vehicleLevelX;
         }
 
         private function onStatLoaded():void
