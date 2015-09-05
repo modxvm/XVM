@@ -5,7 +5,13 @@
 
 def onHangarInit():
     # debug
-    #runTest(('battleResults', '8961682632460258.dat'))
+    if IS_DEVELOPMENT:
+        import glob
+        files = glob.glob("[0-9]*.dat")
+        if files:
+            for fn in files:
+                log('[TEST]  battle result: {}'.format(fn))
+                runTest(('battleResults', fn))
     pass
 
 
