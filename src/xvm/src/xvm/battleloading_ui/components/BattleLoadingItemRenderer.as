@@ -274,8 +274,6 @@ package xvm.battleloading_ui.components
             if (_clanIconLoaded)
                 return;
 
-            _clanIconLoaded = true;
-
             var cfg:CClanIcon = Config.config.battleLoading.clanIcon;
             if (!cfg.show)
                 return;
@@ -285,6 +283,8 @@ package xvm.battleloading_ui.components
             var statData:StatData = Stat.getData(name);
             if (statData == null)
                 return;
+
+            _clanIconLoaded = true;
 
             var icon:ClanIcon = new ClanIcon(cfg, proxy.vehicleIconLoader.x, proxy.vehicleIconLoader.y, team,
                 _model.accountDBID,
