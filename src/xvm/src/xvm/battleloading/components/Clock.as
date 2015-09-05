@@ -32,9 +32,7 @@ package xvm.battleloading.components
             clock.width = f.width;
             clock.height = f.height;
             clock.antiAliasType = AntiAliasType.ADVANCED;
-            var tf:TextFormat = f.getTextFormat();
-            tf.color = 0xFFFFFF;
-            tf.align = TextFormatAlign.RIGHT;
+            var tf:TextFormat = new TextFormat("$TitleFont", 16, 0xFFFFFF, false, false, false, null, null, TextFormatAlign.RIGHT);
             clock.defaultTextFormat = tf;
             clock.selectable = false;
             clock.filters = f.filters;
