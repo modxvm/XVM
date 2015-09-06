@@ -104,12 +104,12 @@ package xvm.tcarousel_ui
                 var w:int = int(ITEM_WIDTH * zoom);
                 var h:int = int(ITEM_HEIGHT * zoom);
 
-                scrollRect = new Rectangle(-1, -1, ITEM_WIDTH + 2, activateButton.y + activateButton.height * cfg.fields.activateButton.scale + 4);
+                scrollRect = new Rectangle(0, 0, ITEM_WIDTH, activateButton.y + activateButton.height * cfg.fields.activateButton.scale + 2);
                 //graphics.beginFill(0xFFFFFF, 0.3); graphics.drawRect(scrollRect.x, scrollRect.y, scrollRect.width, scrollRect.height); graphics.endFill();
 
                 extraFields = new MovieClip();
                 extraFields.scaleX = extraFields.scaleY = 1 / zoom;
-                extraFields.scrollRect = new Rectangle(-1, -1, w + 2, h + 2);
+                extraFields.scrollRect = new Rectangle(0, 0, w, h);
                 //extraFields.graphics.beginFill(0xFFFFFF, 0.3); extraFields.graphics.drawRect(0, 0, w, h); extraFields.graphics.endFill();
                 vehicleIcon.addChild(extraFields);
 
