@@ -99,8 +99,9 @@ load_repositorystats(){
     popd > /dev/null
 }
 
-load_wotversion(){
+load_version(){
     export XVMBUILD_WOT_VERSION="$TARGET_VERSION"
+    export XVMBUILD_XVM_VERSION="$XVM_VERSION"
 }
 
 ##########################
@@ -271,6 +272,7 @@ deploy_xvm(){
     echo $XVMBUILD_XVM_REVISION > "$XVMBUILD_OUTPUT_PATH"/xvm_revision.txt
     echo $XVMBUILD_XVM_HASH > "$XVMBUILD_OUTPUT_PATH"/xvm_hash.txt
     echo $XVMBUILD_XVM_BRANCH > "$XVMBUILD_OUTPUT_PATH"/xvm_branch.txt
+    echo $XVMBUILD_XVM_VERSION > "$XVMBUILD_OUTPUT_PATH"/xvm_version.txt
     echo $XVMBUILD_XFW_REVISION > "$XVMBUILD_OUTPUT_PATH"/xfw_revision.txt
     echo $XVMBUILD_XFW_HASH > "$XVMBUILD_OUTPUT_PATH"/xfw_hash.txt
     echo $XVMBUILD_XFW_BRANCH > "$XVMBUILD_OUTPUT_PATH"/xfw_branch.txt
@@ -299,7 +301,7 @@ detect_zip
 detect_python
 
 load_repositorystats
-load_wotversion
+load_version
 
 clean_repodir
 clean_outputdir
