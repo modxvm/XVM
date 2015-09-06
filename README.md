@@ -13,7 +13,7 @@ If you can write code, [you can help us](https://confluence.atlassian.com/displa
 * [Manual: installation and configuration](http://www.modxvm.com/en/xvm-installation-and-settings/)
 * [FAQ: frequently asked questions and answers](http://www.modxvm.com/en/faq/)
 * [Nightly Builds](http://nightly.modxvm.com/) Don't use it if you are not experienced tester. Nightly Builds could be unstable or not work at all.
-* [Translation server](http://translation.by-reservation.com/)
+* [Translation server](http://translate.by-reservation.com/projects/xvm-client/)
 
 ### Official Support Forums
 
