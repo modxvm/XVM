@@ -137,7 +137,7 @@ package xvm.tcarousel_ui
 
                 setupTankNameField(cfg.fields.tankName);
 
-                setupActivateButtons(cfg.fields.activateButton, zoom);
+                setupActivateButtons(cfg.fields.activateButton);
 
                 setupStatusTextField(cfg.fields.statusText);
                 setupClanLockField(cfg.fields.clanLock);
@@ -168,7 +168,8 @@ package xvm.tcarousel_ui
                 vehicleIcon.tankNameBg.scaleX = vehicleIcon.tankNameBg.scaleY = cfg.scale;
             vehicleIcon.tankNameField.alpha = vehicleIcon.tankNameBg.alpha =
                 cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
-            vehicleIcon.tankNameField.x = (width - 4) * (1 - cfg.scale) + cfg.dx;
+            vehicleIcon.tankNameField.x = 2 + cfg.dx;
+            vehicleIcon.tankNameField.width = ITEM_WIDTH - 4;
             if (isNaN(orig_vehicleIcon_tankNameField_y))
                 orig_vehicleIcon_tankNameField_y = vehicleIcon.tankNameField.y;
             vehicleIcon.tankNameField.y = orig_vehicleIcon_tankNameField_y + cfg.dy;
@@ -178,7 +179,7 @@ package xvm.tcarousel_ui
 
         private var orig_activateButton_x:Number = NaN;
         private var orig_activateButton_y:Number = NaN;
-        private function setupActivateButtons(cfg:Object, zoom:Number):void
+        private function setupActivateButtons(cfg:Object):void
         {
             activateButton.scaleX = activateButton.scaleY = deactivateButton.scaleX = deactivateButton.scaleY = cfg.scale;
             activateButton.alpha = deactivateButton.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;

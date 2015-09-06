@@ -30,7 +30,7 @@
       "level":          { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "multiXp":        { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "xp":             { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "tankName":       { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      //"tankName":       { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "statusText":     { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "statusTextBuy":  { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "clanLock":       { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
@@ -76,15 +76,15 @@
           "shadow": ${ "def.textFieldShadow" }
         },
 
-        { "x": 158, "y": 77, "align": "right", "alpha": "{{v.premium?100|0}}",
-          "format": "<font size='15' color='#FEA659'>{{v.name}}</font>",
-          "shadow": { "color": "0xFC3700", "alpha": 1, "blur": 10, "strength": 2, "distance": 0, "angle": 0 }
-        },
+        //{ "x": 158, "y": 77, "align": "right", "alpha": "{{v.premium?100|0}}",
+        //  "format": "<font size='15' color='#FEA659'>{{v.name}}</font>",
+        //  "shadow": { "color": "0xFC3700", "alpha": 1, "blur": 10, "strength": 2, "distance": 0, "angle": 0 }
+        //},
 
-        { "x": 158, "y": 77, "align": "right", "alpha": "{{v.premium?0|100}}",
-          "format": "<font size='15' color='#C8C8B5'>{{v.name}}</font>",
-          "shadow": { "color": "0x73734C", "alpha": 0.8, "blur": 6, "strength": 2, "distance": 0, "angle": 0 }
-        },
+        //{ "x": 158, "y": 77, "align": "right", "alpha": "{{v.premium?0|100}}",
+        //  "format": "<font size='15' color='#C8C8B5'>{{v.name}}</font>",
+        //  "shadow": { "color": "0x73734C", "alpha": 0.8, "blur": 6, "strength": 2, "distance": 0, "angle": 0 }
+        //},
 
         { "x": -2, "y": -1, "h": 100, "w": "164", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
 
