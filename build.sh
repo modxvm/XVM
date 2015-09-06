@@ -27,7 +27,7 @@ fi
 
 # $XVMBUILD_L10N_URL
 if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
-    export XVMBUILD_L10N_URL="http://download.by-reservation.com/other/xvm/xvm_l10n_json.zip"
+    export XVMBUILD_L10N_URL="http://translate.by-reservation.com/download/xvm-client/xvm_l10n_json.zip"
 fi
 
 ##########################
@@ -204,7 +204,7 @@ copy_files(){
     cd temp
     wget --quiet --output-document=l10n.zip "$XVMBUILD_L10N_URL"
     unzip -o l10n.zip >/dev/null
-    rm l10n.zip en.xc ru.xc
+    rm l10n.zip ru.xc
     cd ..
     mv temp/* ./
     rm -rf temp/
