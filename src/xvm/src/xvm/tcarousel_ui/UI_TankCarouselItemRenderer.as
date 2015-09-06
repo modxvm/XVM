@@ -18,8 +18,8 @@ package xvm.tcarousel_ui
 
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
-        public static const ITEM_WIDTH:int = 162;
-        public static const ITEM_HEIGHT:int = 102;
+        public static const ITEM_WIDTH:int = 160;
+        public static const ITEM_HEIGHT:int = 100;
         public static const ITEM_HEIGHT_MULTISELECTION:int = 125;
 
         private var cfg:CCarousel;
@@ -93,6 +93,16 @@ package xvm.tcarousel_ui
 
         // PRIVATE
 
+        private function createMask(x:Number, y:Number, width:Number, height:Number):Shape
+        {
+            var mask:Shape = new Shape();
+            mask.graphics.beginFill(0xFFFFFF, 1);
+            mask.graphics.drawRect(x, y, width, height);
+            mask.graphics.endFill();
+            mask.visible = false;
+            return mask;
+        }
+
         private function createExtraFields():void
         {
             if (!vehicleIcon)
@@ -104,14 +114,10 @@ package xvm.tcarousel_ui
                 var w:int = int(ITEM_WIDTH * zoom);
                 var h:int = int(ITEM_HEIGHT * zoom);
 
-                scrollRect = new Rectangle(0, 0, ITEM_WIDTH, activateButton.y + activateButton.height * cfg.fields.activateButton.scale + 2);
-                //graphics.beginFill(0xFFFFFF, 0.3); graphics.drawRect(scrollRect.x, scrollRect.y, scrollRect.width, scrollRect.height); graphics.endFill();
-
                 extraFields = new MovieClip();
                 extraFields.scaleX = extraFields.scaleY = 1 / zoom;
-                extraFields.scrollRect = new Rectangle(0, 0, w, h);
-                //extraFields.graphics.beginFill(0xFFFFFF, 0.3); extraFields.graphics.drawRect(0, 0, w, h); extraFields.graphics.endFill();
                 vehicleIcon.addChild(extraFields);
+                vehicleIcon.mask = vehicleIcon.addChild(createMask(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT + 2));
 
                 setupStandardField(vehicleIcon.tankTypeMc, cfg.fields.tankType);
 
@@ -124,10 +130,10 @@ package xvm.tcarousel_ui
                 });
 
                 setupStandardField(vehicleIcon.xp, cfg.fields.xp);
-                vehicleIcon.xp.x = w - vehicleIcon.xp.width + cfg.fields.xp.dx - 2;
+                vehicleIcon.xp.x = w - vehicleIcon.xp.width + cfg.fields.xp.dx;
 
                 setupStandardField(vehicleIcon.multyXp, cfg.fields.multiXp);
-                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width + cfg.fields.multiXp.dx - 2;
+                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width + cfg.fields.multiXp.dx;
 
                 setupTankNameField(cfg.fields.tankName);
 
