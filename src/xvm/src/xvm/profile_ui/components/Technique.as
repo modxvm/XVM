@@ -109,7 +109,7 @@ package xvm.profile_ui.components
                     page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
 
                     // add event handlers
-                    page.stackComponent.buttonBar.addEventListener(IndexEvent.INDEX_CHANGE, initializeTechniqueStatisticTab);
+                    Linkages.TECHNIQUE_STATISTIC_TAB = getQualifiedClassName(UI_TechniqueStatisticTab);
 
                     // create filter controls
                     //filter = null;
@@ -162,20 +162,6 @@ package xvm.profile_ui.components
             //filter.addEventListener(Event.CHANGE, applyFilter);
             //page.addChild(filter);
         //}
-
-        // stackComponent
-
-        private function initializeTechniqueStatisticTab():void
-        {
-            //Logger.add("initializeTechniqueStatisticTab: " + playerName);
-            if (_disposed)
-                return;
-
-            page.stackComponent.buttonBar.removeEventListener(IndexEvent.INDEX_CHANGE, initializeTechniqueStatisticTab);
-
-            var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
-            data[0].linkage = getQualifiedClassName(UI_TechniqueStatisticTab);
-        }
 
         // listComponent
 
