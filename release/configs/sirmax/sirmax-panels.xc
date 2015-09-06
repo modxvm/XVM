@@ -1,4 +1,5 @@
 ﻿{
+  "startMode": "large",
   //"startMode": "{{battletype=regular?medium|{{battletype=clan?none}}}}",
   //"altMode": "{{battletype=regular?medium2|{{battletype=clan?short}}}}",
   "def": {
@@ -8,6 +9,7 @@
   "large": {
     //"enabled": false,
     "removeSquadIcon": true,
+    "vehicleLevelAlpha": 0,
     "nickFormatLeft": "        {{r_size=2?|{{r_size=4?   |    }}}}{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>{{r_size=2?|{{r_size=4?   |    }}}}       &nbsp;",
     "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
@@ -51,6 +53,7 @@
     //"enabled": false,
     "width": 80,
     //"removeSquadIcon": true,
+    "vehicleLevelAlpha": 0,
     "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     //"extraFieldsLeft": [
@@ -63,6 +66,7 @@
     //"enabled": false,
     "width": 80,
     //"removeSquadIcon": true,
+    "vehicleLevelAlpha": 0,
     "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "__stub__": null
@@ -70,6 +74,7 @@
   "short": {
     //"enabled": false,
     //"width": 80,
+    "vehicleLevelAlpha": 0,
     //"removeSquadIcon": true,
     "__stub__": null
   },

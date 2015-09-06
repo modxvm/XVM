@@ -127,9 +127,15 @@ class wot.PlayersPanel.PlayerListItemRenderer
     function setStateImpl()
     {
         var savedValue = wrapper.data.isPostmortemView;
+
         if (Macros.FormatGlobalBooleanValue(cfg.removeSelectedBackground))
             wrapper.data.isPostmortemView = false;
+
         base.setState();
+
+        if (wrapper.vehicleLevel != null)
+            wrapper.vehicleLevel._alpha *= panel.state == "none" ? 0 : cfg[panel.state].vehicleLevelAlpha / 100.0;
+
         wrapper.data.isPostmortemView = savedValue;
     }
 
