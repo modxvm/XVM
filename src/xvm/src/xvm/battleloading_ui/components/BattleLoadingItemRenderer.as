@@ -148,8 +148,6 @@ package xvm.battleloading_ui.components
 
         public function draw():void
         {
-            Logger.addObject(_model, 1, "_model");
-            Logger.addObject(proxy.textField.htmlText, 1, "proxy.textField.htmlText");
             try
             {
                 if (_model != null && proxy.initialized)
