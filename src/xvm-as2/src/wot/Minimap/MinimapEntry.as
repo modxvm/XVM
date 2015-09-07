@@ -233,15 +233,16 @@ class wot.Minimap.MinimapEntry
 
     private function setLabelToMimicEntryMoves():Void
     {
-        // TODO: refactor (persormance issue)
-        /*this.wrapper.onEnterFrame = function()
+        // TODO: refactor (performance issue)
+        wrapper.onEnterFrame = function()
         {
             // Seldom error workaround. Wreck sometimes is placed at map center.
             if (isNaN(this._x) || isNaN(this._y))
                 return;
 
-            this.xvm_worker.labelMc._x = this._x;
-            this.xvm_worker.labelMc._y = this._y;
-        };*/
+            var mc:MovieClip = this.xvm_worker.labelMc
+            mc._x = this._x;
+            mc._y = this._y;
+        };
     }
 }
