@@ -1,4 +1,7 @@
-﻿XVM-6.1.4:
+﻿XVM-6.1.4.1-dev:
+  * bug fixes and optimization
+
+XVM-6.1.4:
   * adaptation to WoT 0.9.10
   * add winRate sorting to carousel
   * removed obsoleted option "fragCorrelation"/"sortByType"

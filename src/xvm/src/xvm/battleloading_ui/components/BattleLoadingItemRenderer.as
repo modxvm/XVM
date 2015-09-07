@@ -30,8 +30,6 @@ package xvm.battleloading_ui.components
 
         private var _model:VehicleInfoVO;
 
-        private var _fullPlayerName:String = null;
-
         private var _vehicleIconLoaded:Boolean = false;
 
         // for debug
@@ -116,16 +114,10 @@ package xvm.battleloading_ui.components
                 {
                     _model = data;
 
-                    if (_fullPlayerName == null)
-                    {
-                        _fullPlayerName = App.utils.commons.getFullPlayerName(
-                            App.utils.commons.getUserProps(_model.playerName, _model.clanAbbrev, _model.region, _model.igrType));
-                    }
-
+                    var fullPlayerName:String = App.utils.commons.getFullPlayerName(
+                        App.utils.commons.getUserProps(_model.playerName, _model.clanAbbrev, _model.region, _model.igrType));
                     var vdata:VehicleData = VehicleInfo.getByIcon(_model.vehicleIcon);
-                    Macros.RegisterMinimalMacrosData(_model.accountDBID, _fullPlayerName, vdata.vid, team);
-                    _model.playerName = Macros.Format(_model.playerName, "{{name}}");
-                    _model.clanAbbrev = Macros.Format(_model.playerName, "{{clannb}}");
+                    Macros.RegisterMinimalMacrosData(_model.accountDBID, fullPlayerName, vdata.vid, team);
 
                     // Alternative icon set
                     if (!proxy.vehicleIconLoader.sourceAlt || proxy.vehicleIconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)
@@ -149,7 +141,6 @@ package xvm.battleloading_ui.components
             else
             {
                 _model = null;
-                _fullPlayerName = null;
             }
 
             return _model;
@@ -157,7 +148,8 @@ package xvm.battleloading_ui.components
 
         public function draw():void
         {
-            //Logger.addObject(_model, 1, "_model");
+            Logger.addObject(_model, 1, "_model");
+            Logger.addObject(proxy.textField.htmlText, 1, "proxy.textField.htmlText");
             try
             {
                 if (_model != null && proxy.initialized)
@@ -207,11 +199,11 @@ package xvm.battleloading_ui.components
                     // Set Text Fields
                     var textFieldColorString:String = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
 
-                    var nickFieldText:String = Macros.Format(WGUtils.GetPlayerName(_fullPlayerName), team == XfwConst.TEAM_ALLY
+                    var nickFieldText:String = Macros.Format(_model.playerName, team == XfwConst.TEAM_ALLY
                         ? Config.config.battleLoading.formatLeftNick : Config.config.battleLoading.formatRightNick, formatOptions);
                     proxy.textField.htmlText = "<font color='" + textFieldColorString + "'>" + nickFieldText + "</font>";
 
-                    var vehicleFieldText:String = Macros.Format(WGUtils.GetPlayerName(_fullPlayerName), team == XfwConst.TEAM_ALLY
+                    var vehicleFieldText:String = Macros.Format(_model.playerName, team == XfwConst.TEAM_ALLY
                         ? Config.config.battleLoading.formatLeftVehicle : Config.config.battleLoading.formatRightVehicle, formatOptions);
                     proxy.vehicleField.htmlText = "<font color='" + textFieldColorString + "'>" + vehicleFieldText + "</font>";
                 }
@@ -234,7 +226,7 @@ package xvm.battleloading_ui.components
         private var _vehicleLevelX:int = 0;
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void
         {
-            //Logger.add("onVehicleIconLoadComplete: " + _fullPlayerName);
+            //Logger.add("onVehicleIconLoadComplete: " + _model.playerName);
 
             // disable icons mirroring (for alternative icons)
             if (!_vehicleIconLoaded)
@@ -262,7 +254,7 @@ package xvm.battleloading_ui.components
 
         private function onStatLoaded():void
         {
-            //Logger.add("onStatLoaded: " + _fullPlayerName);
+            //Logger.add("onStatLoaded: " + _model.playerName);
             proxy.vehicleField.condenseWhite = false;
             if (_model != null && proxy.initialized)
                 proxy.invalidate();
@@ -278,9 +270,7 @@ package xvm.battleloading_ui.components
             if (!cfg.show)
                 return;
 
-            var name:String = WGUtils.GetPlayerName(_fullPlayerName);
-
-            var statData:StatData = Stat.getData(name);
+            var statData:StatData = Stat.getData(_model.playerName);
             if (statData == null)
                 return;
 
@@ -288,8 +278,8 @@ package xvm.battleloading_ui.components
 
             var icon:ClanIcon = new ClanIcon(cfg, proxy.vehicleIconLoader.x, proxy.vehicleIconLoader.y, team,
                 _model.accountDBID,
-                name,
-                WGUtils.GetClanNameWithoutBrackets(_fullPlayerName),
+                _model.playerName,
+                _model.clanAbbrev,
                 statData.emblem);
             icon.addEventListener(Event.COMPLETE, function():void
             {
