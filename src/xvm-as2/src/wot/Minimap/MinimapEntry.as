@@ -161,7 +161,7 @@ class wot.Minimap.MinimapEntry
     {
         base.onEnterFrameHandler();
 
-        if (wrapper._name != MinimapConstants.MAIN_PLAYER_ENTRY_NAME)
+        if (wrapper._name != "MinimapEntry0") // MinimapConstants.MAIN_PLAYER_ENTRY_NAME - resolved for performance
             return;
 
         labelMc._x = wrapper._x;
@@ -191,7 +191,10 @@ class wot.Minimap.MinimapEntry
     public function get attachments():MovieClip
     {
         if (wrapper["_xvm_attachments"] == null)
-            wrapper.createEmptyMovieClip("_xvm_attachments", wrapper.getNextHighestDepth());
+        {
+            var mc:MovieClip = wrapper.createEmptyMovieClip("_xvm_attachments", wrapper.getNextHighestDepth());
+            mc.cacheAsBitmap = true;
+        }
         return wrapper["_xvm_attachments"];
     }
 
@@ -230,7 +233,8 @@ class wot.Minimap.MinimapEntry
 
     private function setLabelToMimicEntryMoves():Void
     {
-        this.wrapper.onEnterFrame = function()
+        // TODO: refactor (persormance issue)
+        /*this.wrapper.onEnterFrame = function()
         {
             // Seldom error workaround. Wreck sometimes is placed at map center.
             if (isNaN(this._x) || isNaN(this._y))
@@ -238,6 +242,6 @@ class wot.Minimap.MinimapEntry
 
             this.xvm_worker.labelMc._x = this._x;
             this.xvm_worker.labelMc._y = this._y;
-        };
+        };*/
     }
 }
