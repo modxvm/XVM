@@ -10,10 +10,13 @@ def stop():
 
 # PRIVATE
 
+import os
 import datetime
+import traceback
 
 import BigWorld
 from BattleReplay import g_replayCtrl
+from debug_utils import *
 
 from xfw import *
 from xvm_main.python.logger import *
@@ -56,8 +59,9 @@ class _Fps():
             try:
                 if not os.path.isdir(self.outputDir):
                     os.makedirs(self.outputDir)
-            except:
-                LOG_ERROR('Failed to create directory for fps files')
+            except Exception:
+                traceback.print_exc()
+                LOG_ERROR('Failed to create directory for fps files: {}'.format(self.outputDir))
                 return
             fileName = '{0}/fps-{1}.csv'.format(self.outputDir, datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
             with open(fileName, 'w') as f:
