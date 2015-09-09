@@ -30,6 +30,8 @@ if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
     export XVMBUILD_L10N_URL="http://translate.by-reservation.com/download/xvm-client/xvm_l10n_json.zip"
 fi
 
+XVMBUILD_XVM_URL="http://nightly.modxvm.com/download"
+
 ##########################
 #### HELPER FUNCTIONS ####
 ##########################
@@ -279,6 +281,57 @@ deploy_xvm(){
     echo $XVMBUILD_WOT_VERSION > "$XVMBUILD_OUTPUT_PATH"/wot_version.txt
 }
 
+post_ipb(){
+#!/bin/bash
+
+if [ "$XVMBUILD_IPB_APIKEY" == "" ]; then
+  return 0
+fi
+
+downloadlink="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
+XVMBUILD_IPB_TEXT="Build $XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH) \n Download: http://nightly.modxvm.com/download/$XVMBUILD_XVM_BRANCH/$XVMBUILD_XVM_REVISION_$XVMBUILD_XVM_HASH_xvm.zip"
+
+XVMBUILD_IPB_REQURL="http://www.koreanrandom.com/forum/interface/board/index.php"
+XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+<methodCall>
+  <methodName>postReply</methodName>
+  <params>
+    <param>
+      <value>
+        <struct>
+          <member>
+            <name>api_module</name>
+            <value><string>ipb</string></value>
+          </member>
+          <member>
+            <name>api_key</name>
+            <value><string>$XVMBUILD_IPB_APIKEY</string></value>
+          </member>
+          <member>
+            <name>member_field</name>
+            <value><string>member_id</string></value></member>
+          <member>
+            <name>member_key</name>
+            <value><string>$XVMBUILD_IPB_USERID</string></value>
+          </member>
+          <member>
+            <name>topic_id</name>
+            <value><string>$XVMBUILD_IPB_TOPICID</string></value>
+          </member>
+          <member>
+            <name>post_content</name>
+            <value><string>$XVMBUILD_IPB_TEXT</string></value>
+          </member>
+        </struct>
+      </value>
+    </param>
+  </params>
+</methodCall>"
+
+curl -sS -H "Content-Type: text/xml" -H "User-Agent: IPS XML-RPC Client Library (\$Revision: 10721 $)\r\n" -X POST --data "$XVMBUILD_IPB_REQBODY" "$XVMBUILD_IPB_REQURL"
+
+}
+
 ##########################
 ####  BUILD PIPELINE  ####
 ##########################
@@ -322,5 +375,7 @@ pack_xfw
 deploy_xvm
 
 clean_repodir
+
+post_ipb
 
 popd >/dev/null
