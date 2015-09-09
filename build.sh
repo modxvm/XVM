@@ -91,6 +91,7 @@ load_repositorystats(){
         export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
         export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
         export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
+        export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
     popd > /dev/null
 
     #read xfw revision and hash
@@ -289,7 +290,7 @@ if [ "$XVMBUILD_IPB_APIKEY" == "" ]; then
 fi
 
 downloadlink="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
-XVMBUILD_IPB_TEXT="Build $XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH) \n Download: http://nightly.modxvm.com/download/$XVMBUILD_XVM_BRANCH/$XVMBUILD_XVM_REVISION_$XVMBUILD_XVM_HASH_xvm.zip"
+XVMBUILD_IPB_TEXT=$(printf "Build $XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH). \n Download .zip: $downloadlink \n Description: $XVMBUILD_XVM_COMMITMSG")
 
 XVMBUILD_IPB_REQURL="http://www.koreanrandom.com/forum/interface/board/index.php"
 XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
