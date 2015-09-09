@@ -92,7 +92,7 @@ load_repositorystats(){
         export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
         export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
         export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
-        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}") || exit 1
+        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
     popd > /dev/null
 
     #read xfw revision and hash
