@@ -293,7 +293,7 @@ fi
 downloadlinkzip="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
 downloadlinkexe="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
 
-XVMBUILD_IPB_TEXT=$(printf "Build: $XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH). \n $downloadlinkzip \n Author: $XVMBUILD_XVM_COMMITAUTHOR \n Description: $XVMBUILD_XVM_COMMITMSG")
+XVMBUILD_IPB_TEXT=$(printf "Build: [url=https://bitbucket.org/XVM/xvm/commits/$XVMBUILD_XVM_HASH]$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)[/url] \n Download: [url=$downloadlinkzip].zip archive[/url] | [url=$downloadlinkexe].exe installer[/url]  \n Author: $XVMBUILD_XVM_COMMITAUTHOR \n Description: $XVMBUILD_XVM_COMMITMSG")
 
 XVMBUILD_IPB_REQURL="http://www.koreanrandom.com/forum/interface/board/index.php"
 XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
