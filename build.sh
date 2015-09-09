@@ -92,6 +92,7 @@ load_repositorystats(){
         export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
         export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
         export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
+        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}") || exit 1
     popd > /dev/null
 
     #read xfw revision and hash
@@ -289,8 +290,10 @@ if [ "$XVMBUILD_IPB_APIKEY" == "" ]; then
   return 0
 fi
 
-downloadlink="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
-XVMBUILD_IPB_TEXT=$(printf "Build $XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH). \n Download .zip: $downloadlink \n Description: $XVMBUILD_XVM_COMMITMSG")
+downloadlinkzip="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
+downloadlinkexe="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
+
+XVMBUILD_IPB_TEXT=$(printf "Build: $XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH). \n [url=$downloadlinkzip]Download .zip[/url] | [url=$downloadlinkexe]Download .exe[/url] \n Author: $XVMBUILD_XVM_COMMITAUTHOR \n Description: $XVMBUILD_XVM_COMMITMSG")
 
 XVMBUILD_IPB_REQURL="http://www.koreanrandom.com/forum/interface/board/index.php"
 XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
