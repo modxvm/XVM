@@ -293,7 +293,7 @@ fi
 downloadlinkzip="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
 downloadlinkexe="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
 
-XVMBUILD_IPB_TEXT=$(printf "Build: $XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH). \n [url=$downloadlinkzip]Download .zip[/url] | [url=$downloadlinkexe]Download .exe[/url] \n Author: $XVMBUILD_XVM_COMMITAUTHOR \n Description: $XVMBUILD_XVM_COMMITMSG")
+XVMBUILD_IPB_TEXT=$(printf "Build: $XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH). \n $downloadlinkzip \n Author: $XVMBUILD_XVM_COMMITAUTHOR \n Description: $XVMBUILD_XVM_COMMITMSG")
 
 XVMBUILD_IPB_REQURL="http://www.koreanrandom.com/forum/interface/board/index.php"
 XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
@@ -331,6 +331,9 @@ XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
     </param>
   </params>
 </methodCall>"
+
+echo $XVMBUILD_IPB_REQTEXT
+echo $XVMBUILD_IPB_REQBODY
 
 curl -sS -H "Content-Type: text/xml" -H "User-Agent: IPS XML-RPC Client Library (\$Revision: 10721 $)\r\n" -X POST --data "$XVMBUILD_IPB_REQBODY" "$XVMBUILD_IPB_REQURL"
 
