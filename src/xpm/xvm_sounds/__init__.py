@@ -52,6 +52,14 @@ def Battle_showSixthSenseIndicator(self, isShow):
     except:
         err(traceback.format_exc())
 
+@registerEvent(Battle, '_setFireInVehicle')
+def Battle_setFireInVehicle(self, bool):
+    try:
+        soundId = config.get('sounds/fireAlert')
+        if soundId is not None and soundId != '':
+            Sound(soundId).play()
+    except:
+        err(traceback.format_exc())
 
 def _test():
     log('test')
