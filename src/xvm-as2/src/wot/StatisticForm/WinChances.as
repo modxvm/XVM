@@ -1,4 +1,5 @@
 import com.xvm.*;
+import flash.filters.DropShadowFilter;
 
 class wot.StatisticForm.WinChances
 {
