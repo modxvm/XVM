@@ -26,6 +26,7 @@ from helpers import i18n
 from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.tooltips.vehicle import VehicleParamsField
+from gui.shared.tooltips.module import ModuleParamsField
 from gui.shared.utils import ItemsParameters, ParametersCache
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
 from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
@@ -51,7 +52,7 @@ from xvm_main.python.xvm import l10n, l10n_macros_replace
 shells_vehicles_compatibility = {}
 carousel_tooltips_cache = {}
 toolTipDelayIntervalId = None
-
+weightTooHeavy = None  # will be localized red 'weight (kg)'
 
 #####################################################################
 # initialization/finalization
@@ -410,7 +411,6 @@ def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
         err(traceback.format_exc())
     return result
 
-
 # show compatible vehicles for shells info window in warehouse and shop
 @overrideMethod(ModuleInfoMeta, 'as_setModuleInfoS')
 def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
@@ -424,6 +424,38 @@ def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
         err(traceback.format_exc())
     base(self, moduleInfo)
 
+# add '#menu:moduleInfo/params/weightTooHeavy' (red 'weight (kg)')
+@overrideMethod(i18n, 'makeString')
+def makeString(base, key, *args, **kwargs):
+    if key == '#menu:moduleInfo/params/weightTooHeavy':
+        global weightTooHeavy
+        if weightTooHeavy is None:
+            weightTooHeavy = '<h>%s</h>' % red_pad(strip_html_tags(i18n.makeString('#menu:moduleInfo/params/weight'))) # localized red 'weight (kg)'
+        return weightTooHeavy
+    return base(key, *args, **kwargs)
+
+# paint 'weight (kg)' with red if module does not fit due to overweight
+@overrideMethod(ModuleParamsField, '_getValue')
+def ModuleParamsField_getValue(base, self, *args, **kwargs):
+    result = base(self, *args, **kwargs)
+    try:
+        try:
+            param_name = result[0][-1][0]
+        except:
+            param_name = 'wrong item'
+        if param_name == 'weight':
+            module = self._tooltip.item
+            configuration = self._tooltip.context.getStatusConfiguration(module)
+            vehicle = configuration.vehicle
+            slotIdx = configuration.slotIdx
+            if vehicle is not None:
+                isFit, reason = module.mayInstall(vehicle, slotIdx)
+                if not isFit and reason == 'too heavy':
+                    result[0][-1][0] = 'weightTooHeavy'
+    except Exception as ex:
+        err(traceback.format_exc())
+    return result
+
 
 #####################################################################
 # Utility functions
@@ -431,10 +463,11 @@ def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
 def h1_pad(text):
     return '<h1>%s</h1>' % text
 
-
 def gold_pad(text):
     return "<font color='#FFC363'>%s</font>" % text
 
+def red_pad(text):
+    return "<font color='#FF0000'>%s</font>" % text
 
 def camo_smart_round(value):
     if value == 0:
@@ -488,3 +521,4 @@ def ItemsRequester_clear(*args, **kwargs):
 def tooltips_clear_cache(*args, **kwargs):
     global carousel_tooltips_cache
     carousel_tooltips_cache = {}
+

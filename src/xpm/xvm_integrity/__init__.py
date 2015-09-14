@@ -23,8 +23,9 @@ import traceback
 
 import BigWorld
 import game
-from gui.shared import g_eventBus, events
+from gui.shared import g_eventBus
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
+from gui.shared import EVENT_BUS_SCOPE
 
 from xfw import *
 from xfw.constants import PATH
@@ -49,6 +50,7 @@ check_xvm_dirs = [
 check_general_dirs = [
     PATH.GENERAL_MODS_DIR + '/gui/flash',
     PATH.GENERAL_MODS_DIR + '/gui/scaleform',
+    PATH.GENERAL_MODS_DIR + '/scripts/client/gui/mods',
     PATH.GENERAL_MODS_DIR + '/scripts/client/gui/scaleform/locale',
     ]
 
@@ -57,22 +59,23 @@ check_general_dirs = [
 # handlers
 
 def start():
-    g_eventBus.addListener(VIEW_ALIAS.LOBBY, checkIntegrity)
+    g_eventBus.addListener(VIEW_ALIAS.LOBBY_HANGAR, checkIntegrity, EVENT_BUS_SCOPE.LOBBY)
 
 BigWorld.callback(0, start)
 
-
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(VIEW_ALIAS.LOBBY, checkIntegrity)
+    remove_listener()
 
+def remove_listener():
+    g_eventBus.removeListener(VIEW_ALIAS.LOBBY_HANGAR, checkIntegrity, EVENT_BUS_SCOPE.LOBBY)
 
 #####################################################################
 # handlers
 
 def checkIntegrity(*args, **kwargs):
     try:
-        fini() # don't call the check again
+        remove_listener() # don't call the check again
         thread = threading.Thread(target=_checkIntegrityAsync)
         thread.daemon = False
         thread.start()
