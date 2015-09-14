@@ -19,6 +19,7 @@ class wot.StatisticForm.WinChances
             s_chanceField = Utils.duplicateTextField(_root.statsDialog, "battleText", _root.statsDialog.battleText, -55, "center");
             s_chanceField._width += 300;
             s_chanceField._x -= 433;
+            s_chanceField.filters = [new DropShadowFilter(0, 0, 0x000000, 0.75, 2, 2, 2)];
         }
 
         s_chanceText = "<span class='xvm_battleText'>" + (Chance.GetChanceText(
