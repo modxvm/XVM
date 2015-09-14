@@ -1,8 +1,8 @@
 ﻿{
   //"useStandardMarkers": true,
   "def": {
-    "markersStat": "<b><font face='$TitleFont' color='#FFFFFF' size='8'>{{marksOnGun}} </font><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></font></b>",
-    "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb%d~h|-}}</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:t-winrate}}'>{{t-winrate%d~%|--}}</font></font></b>",
+    "markersStat": "<b><font face='$TitleFont' color='#FFFFFF' size='8'>{{marksOnGun}} </font><font face='Symbol' color='#CCCCCC' size='11'><font color='{{t-battles>9?{{c:xte|#666666}}|#666666}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></font></b>",
+    "markersStatAlt": "<font face='$TitleFont' color='#FFFFFF' size='8'>{{marksOnGun}} </font><b><font face='$FieldFont' size='12'><font color='{{t-battles>9?{{c:xte|#666666}}|#666666}}'>{{t-battles>9?{{xte|--}}|--}}</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font></font></b>",
 
     "damageMessageAlive": "{{dmg}}",
     "damageMessageAllyDead": "({{dmg}})",
