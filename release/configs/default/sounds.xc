@@ -5,6 +5,7 @@
 {
   "sounds": {
     "sixthSense": "/xvm/xvm/sixthsense",
-    "fireAlert": "/xvm/xvm/fireAlert"
+    "fireAlert": "/xvm/xvm/fireAlert",
+	"ammoBay": "/xvm/xvm/ammoBay"
   }
 }
