@@ -64,7 +64,7 @@ _QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress()
 @overrideMethod(EventsWindow, '_loadView')
 def EventsWindow_loadView(base, self, linkage, alias):
     ui_required = False
-    if linkage == QUESTS_ALIASES.COMMON_QUESTS_VIEW_LINKAGE:
+    if alias == QUESTS_ALIASES.COMMON_QUESTS_VIEW_ALIAS and linkage == QUESTS_ALIASES.COMMON_QUESTS_VIEW_LINKAGE:
         linkage = LINKAGES.UI_LINKAGE_COMMON_QUESTS
         alias = LINKAGES.UI_LINKAGE_COMMON_QUESTS
         ui_required = True
