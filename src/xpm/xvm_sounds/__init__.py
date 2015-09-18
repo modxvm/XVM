@@ -22,6 +22,7 @@ import BigWorld
 from gui.shared.SoundEffectsId import SoundEffectsId
 from gui.shared.utils.sound import Sound
 from gui.Scaleform.Battle import Battle
+from gui.Scaleform.daapi.view.battle.damage_panel import DamagePanel
 
 from xfw import *
 
@@ -58,6 +59,18 @@ def Battle_setFireInVehicle(self, bool):
         soundId = config.get('sounds/fireAlert')
         if soundId is not None and soundId != '':
             Sound(soundId).play()
+    except:
+        err(traceback.format_exc())
+
+
+@registerEvent(DamagePanel, '_updateDeviceState')
+def DamagePanel_updateDeviceState(self, value):
+    try:
+        module, state, _ = value
+        if module == 'ammoBay' and state == 'critical':
+            soundId = config.get('sounds/ammoBay')
+            if soundId is not None and soundId != '':
+                Sound(soundId).play()
     except:
         err(traceback.format_exc())
 
