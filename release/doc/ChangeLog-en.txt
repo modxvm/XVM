@@ -1,4 +1,6 @@
-﻿XVM-6.1.4.1:
+﻿XVM-6.1.4.2-dev:
+
+XVM-6.1.4.1:
   * bug fixes and optimization
   * new options:
       "sounds"/"fireAlert" - fire alarm sound
