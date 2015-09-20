@@ -1,7 +1,8 @@
-﻿XVM-6.1.4.1-dev:
+﻿XVM-6.1.4.1:
   * bug fixes and optimization
   * new options:
-      "sounds"/"ammoBay" - alarm after ammo bay is damaged
+      "sounds"/"fireAlert" - fire alarm sound
+      "sounds"/"ammoBay" - alarm sound after ammo bay is damaged
 
 XVM-6.1.4:
   * adaptation to WoT 0.9.10
