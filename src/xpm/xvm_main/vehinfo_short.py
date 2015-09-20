@@ -209,7 +209,7 @@ _data = {
     'ussr:T-70':                        'T70',
     'germany:Pz_II_AusfG':              'Pz2G',
     'germany:Pz38t':                    'Pz38t',
-    'germany:PzI_ausf_C':               'Pz2C',
+    'germany:PzI_ausf_C':               'Pz1C',
     'germany:PzIII_A':                  'Pz3A',
     'germany:Pz_IV_AusfA':              'Pz4A',
     'germany:T-15':                     'T-15',
