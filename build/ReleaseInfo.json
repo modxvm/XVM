@@ -1,37 +1,44 @@
 ﻿{
     "RU": {
-        "ver": "6.1.4.1",
+        "ver": "6.1.4.2",
         "wot": "0.9.10",
-        "message": "  * WoT 0.9.10\n  * добавлены новые возможности\n  * исправлены ошибки"
+        "message": "  * WoT 0.9.10\n  * обновление для минипатча WoT"
+        //"message": "  * WoT 0.9.10\n  * добавлены новые возможности\n  * исправлены ошибки"
     },
     "EU": {
-        "ver": "6.1.4.1",
+        "ver": "6.1.4.2",
         "wot": "0.9.10",
-        "message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
+        "message": "  * WoT 0.9.10\n  * update for WoT minipatch"
+        //"message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
     },
     "US": {
-        "ver": "6.1.4.1",
+        "ver": "6.1.4.2",
         "wot": "0.9.10",
-        "message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
+        "message": "  * WoT 0.9.10\n  * update for WoT minipatch"
+        //"message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
     },
     "ASIA": {
-        "ver": "6.1.4.1",
+        "ver": "6.1.4.2",
         "wot": "0.9.10",
-        "message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
+        "message": "  * WoT 0.9.10\n  * update for WoT minipatch"
+        //"message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
     },
     "KR": {
-        "ver": "6.1.4.1",
+        "ver": "6.1.4.2",
         "wot": "0.9.10",
-        "message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
+        "message": "  * WoT 0.9.10\n  * update for WoT minipatch"
+        //"message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
     },
     "CN": {
-        "ver": "6.1.4.1",
+        "ver": "6.1.4.2",
         "wot": "0.9.10",
-        "message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
+        "message": "  * WoT 0.9.10\n  * update for WoT minipatch"
+        //"message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
     },
     "CT":  {
-        "ver": "6.1.4.1",
+        "ver": "6.1.4.2",
         "wot": "0.9.10",
-        "message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
+        "message": "  * WoT 0.9.10\n  * update for WoT minipatch"
+        //"message": "  * WoT 0.9.10\n  * added new features\n  * bugs fixed"
     }
 }
