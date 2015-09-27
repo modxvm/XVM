@@ -71,18 +71,14 @@ def getVehicleStats(vehId):
 # 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
 def compareVersions(v1, v2):
     try:
-        v1 = v1.replace('-', '.')
-        v2 = v2.replace('-', '.')
-
-        aa = v1.split('.')
-        while len(aa) < 4:
+        aa = v1.replace('-', '.').split('.')
+        ba = v2.replace('-', '.').split('.')
+        while len(aa) < 4 or len(aa) < len(ba):
             aa.append('0')
-
-        ba = v2.split('.')
-        while len(ba) < 4:
+        while len(ba) < 4 or len(ba) < len(aa):
             ba.append('0')
-
-        for i in xrange(4):
+        #debug('{} <=> {}'.format(aa, ba))
+        for i in xrange(len(aa)):
             a = aa[i]
             b = ba[i]
             da = a.isdigit()
