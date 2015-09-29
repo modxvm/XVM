@@ -92,7 +92,10 @@ def squad_update_tiers(self, *args, **kwargs):
             return
         min_tier = 0
         max_tier = 0
-        for squad_vehicle in self.unitFunctional.getUnit()[1].getVehicles().values():
+        squad_unitFunctional = self.unitFunctional.getUnit()[1]
+        if not squad_unitFunctional:
+            return
+        for squad_vehicle in squad_unitFunctional.getVehicles().values():
             veh = g_itemsCache.items.getItemByCD(squad_vehicle['vehTypeCompDescr'])
             (veh_tier_low, veh_tier_high) = getTiers(veh.level, veh.type, veh.name)
             min_tier = max(veh_tier_low, min_tier)
