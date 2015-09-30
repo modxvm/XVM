@@ -79,8 +79,8 @@ def SquadView__init__(self, *args, **kwargs):
     squad_update_tiers(self, *args, **kwargs)
 
 
-@registerEvent(SquadView, '_updateRallyData')
-def SquadView_updateRallyData(self, *args, **kwargs):
+@registerEvent(SquadView, 'onUnitVehicleChanged')
+def SquadView_onUnitVehicleChanged(self, *args, **kwargs):
     squad_update_tiers(self, *args, **kwargs)
 
 
@@ -94,13 +94,14 @@ def squad_update_tiers(self, *args, **kwargs):
         max_tier = 0
         squad_unitFunctional = self.unitFunctional.getUnit()[1]
         if not squad_unitFunctional:
+            as_xfw_cmd(COMMANDS.AS_UPDATE_TIERS, '')
             return
         for squad_vehicle in squad_unitFunctional.getVehicles().values():
             veh = g_itemsCache.items.getItemByCD(squad_vehicle['vehTypeCompDescr'])
             (veh_tier_low, veh_tier_high) = getTiers(veh.level, veh.type, veh.name)
             min_tier = max(veh_tier_low, min_tier)
             max_tier = max(veh_tier_high, max_tier)
-    
+
         text_tiers = ''
         if min_tier > 0:
             text_tiers = ' - %s: %s..%s' % (l10n('Squad battle tiers'), min_tier, max_tier)
