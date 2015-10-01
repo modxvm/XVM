@@ -133,6 +133,9 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
         for device in g_itemsCache.items.getItems(GUI_ITEM_TYPE.OPTIONALDEVICE, REQ_CRITERIA.REMOVABLE).values():
             updated_inventoryCount[device.name] = device.inventoryCount
         devices_arr = []
+        for installed_device in vehicle.optDevices:
+            if installed_device and installed_device.isRemovable:
+                devices_arr.append(installed_device.name) # don't remove what is present on current vehicle
         for vehicle_id in last_vehicles_id_arr[:-1]:
             prev_vehicle = g_itemsCache.items.getItemByCD(vehicle_id)
             if not prev_vehicle or not prev_vehicle.isInInventory: # sold?
