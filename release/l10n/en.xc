@@ -138,6 +138,7 @@
 
     // Squad
     "Squad battle tiers": "Squad battle tiers",
+    "Squad tanks battle tiers difference": "Squad tanks battle tiers difference",
     "Vehicle": "Vehicle",
     "Battle tiers": "Battle tiers",
     "Type": "Type",
