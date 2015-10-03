@@ -1039,6 +1039,8 @@ package com.xvm
                         return "О, СТЛайт!";
                     if (pname == "Mixailos")
                         return "Михаил";
+                    if (pname == "seriych")
+                        return "Всем Счастья :)";
                     break;
 
                 case "CT":
@@ -1048,6 +1050,8 @@ package com.xvm
                         return "Fluttershy is best pony!";
                     if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU" || pname == "0x01_EU")
                         return "«sir Max» (XVM)";
+                    if (pname == "seriych")
+                        return "Be Happy :)";
                     break;
 
                 case "EU":
@@ -1055,6 +1059,8 @@ package com.xvm
                         return "Fluttershy is best pony!";
                     if (pname == "sirmax2" || pname == "0x01" || pname == "_SirMax_")
                         return "«sir Max» (XVM)";
+                    if (pname == "seriych")
+                        return "Be Happy :)";
                     break;
 
                 case "US":
