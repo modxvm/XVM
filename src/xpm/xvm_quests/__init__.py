@@ -58,7 +58,7 @@ config.VIEWS_SETTINGS += (ViewSettings(LINKAGES.UI_LINKAGE_COMMON_QUESTS, Quests
 g_entitiesFactories.initSettings(config.VIEWS_SETTINGS)
 
 _QuestsFilter._FILTER_BY_STATE[FILTERS.HIDE_WITH_HONORS] = lambda q: not q.isFullCompleted(True)
-_QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress()
+_QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress() or (q.isCompleted() and not q.isFullCompleted(True))
 
 
 @overrideMethod(EventsWindow, '_loadView')
