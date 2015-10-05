@@ -38,10 +38,10 @@ def event_dispatcher_showBattleResults_proxy(base, arenaUniqueID, dataProvider):
 
 def event_dispatcher_showBattleResults(base, arenaUniqueID, dataProvider, cnt=0):
     is_swf = 'swf_file_name' in xfw_mods_info.info.get('xvm_battleresults', {})
-    if cnt < 5 and is_swf and not 'xvm_battleresults_ui.swf' in xfw_mods_info.loaded_swfs:
+    if cnt < 2 or (cnt < 5 and is_swf and not 'xvm_battleresults_ui.swf' in xfw_mods_info.loaded_swfs):
         BigWorld.callback(0, lambda:event_dispatcher_showBattleResults(base, arenaUniqueID, dataProvider, cnt+1))
-        return
-    base(arenaUniqueID, dataProvider)
+    else:
+        base(arenaUniqueID, dataProvider)
 
 
 @registerEvent(BattleResultsWindow, '_populate', True)
