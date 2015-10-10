@@ -13,6 +13,7 @@ from gui import SystemMessages
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info, g_sessionProvider
 from gui.battle_control.arena_info.settings import VEHICLE_STATUS
+from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 
 from xfw import *
@@ -360,7 +361,7 @@ class Xvm(object):
             if targets & INV.MARKER_ALL:
                 self.updateMarker(vID, targets)
             if targets & INV.MINIMAP_ALL:
-                self.updateMinimap(vID, targets)
+                self.updateMinimapEntry(vID, targets)
         except Exception, ex:
             err(traceback.format_exc())
         self._invalidateTargets[vID] = INV.NONE
@@ -441,16 +442,16 @@ class Xvm(object):
         vInfo = utils.getVehicleInfo(vID)
         squadIndex = vInfo.squadIndex
         arenaDP = g_sessionProvider.getCtx().getArenaDP()
-        squadIndex = vInfo.squadIndex
         if arenaDP.isSquadMan(vID):
             squadIndex += 10
+            markersManager.invokeMarker(marker.id, 'setEntityName', [PLAYER_GUI_PROPS.squadman.name()])
 
         #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vID, status, frags, squadIndex))
         markersManager.invokeMarker(marker.id, 'setMarkerStateXvm', [targets, status, frags, my_frags, squadIndex])
 
 
-    def updateMinimap(self, vID, targets):
-        #trace('updateMinimap: {0} {1}'.format(targets, vID))
+    def updateMinimapEntry(self, vID, targets):
+        #trace('updateMinimapEntry: {0} {1}'.format(targets, vID))
 
         battle = getBattleApp()
         if not battle:
@@ -459,8 +460,11 @@ class Xvm(object):
         minimap = battle.minimap
 
         if targets & INV.MINIMAP_SQUAD:
-            #minimap.__callEntryFlash(vID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
-            minimap._Minimap__callEntryFlash(vID, 'update')
+            arenaDP = g_sessionProvider.getCtx().getArenaDP()
+            if arenaDP.isSquadMan(vID):
+                minimap._Minimap__callEntryFlash(vID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
+            else:
+                minimap._Minimap__callEntryFlash(vID, 'update')
 
 
     # PRIVATE
