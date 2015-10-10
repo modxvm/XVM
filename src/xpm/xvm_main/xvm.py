@@ -359,6 +359,8 @@ class Xvm(object):
                 self.updateBattle(vID, targets)
             if targets & INV.MARKER_ALL:
                 self.updateMarker(vID, targets)
+            if targets & INV.MINIMAP_ALL:
+                self.updateMinimap(vID, targets)
         except Exception, ex:
             err(traceback.format_exc())
         self._invalidateTargets[vID] = INV.NONE
@@ -445,6 +447,20 @@ class Xvm(object):
 
         #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vID, status, frags, squadIndex))
         markersManager.invokeMarker(marker.id, 'setMarkerStateXvm', [targets, status, frags, my_frags, squadIndex])
+
+
+    def updateMinimap(self, vID, targets):
+        #trace('updateMinimap: {0} {1}'.format(targets, vID))
+
+        battle = getBattleApp()
+        if not battle:
+            return
+
+        minimap = battle.minimap
+
+        if targets & INV.MINIMAP_SQUAD:
+            #minimap.__callEntryFlash(vID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
+            minimap._Minimap__callEntryFlash(vID, 'update')
 
 
     # PRIVATE

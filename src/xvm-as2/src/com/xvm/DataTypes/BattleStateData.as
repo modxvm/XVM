@@ -16,7 +16,7 @@ class com.xvm.DataTypes.BattleStateData
     public var ready:Boolean = false;
     public var blowedUp:Boolean = false;
     public var teamKiller:Boolean = false;
-    public var squad:Boolean = false;
+    public var squad:Number = 0;
     public var selected:Boolean = false;
     public var entityName:String = null;
     public var position:Number = NaN;

@@ -131,14 +131,6 @@ class wot.Minimap.MinimapEntry
 
         MarkerColor.setColor(wrapper);
 
-        /*TODO: remove or refactor
-        if (!_minimap_initialized && wrapper._name == "MimimapEntry1")
-        {
-            _minimap_initialized = true;
-            //Logger.addObject(wrapper, 2);
-            GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
-        }*/
-
         if (playerId)
         {
             GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, wrapper, playerId));
