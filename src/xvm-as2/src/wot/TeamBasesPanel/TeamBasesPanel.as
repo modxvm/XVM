@@ -37,7 +37,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
         Utils.TraceXvmModule("TeamBasesPanel");
     }
 
-    function addImpl(id, sortWeight, capColor, title, points, rate, baseNum)
+    function addImpl(id, sortWeight, colorFeature, title, points, rate)
     {
         if (CapConfig.enabled)
         {
@@ -48,7 +48,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
             * Passing original values make text properties original
             * at that first moment.
             */
-            base.add(id, sortWeight, capColor, null, null, null);
+            base.add(id, sortWeight, colorFeature, null, null, null);
 
             // Get capture base number text
             Cmd.captureBarGetBaseNum(this, onCaptureBarGetBaseNum, id);
@@ -57,7 +57,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
             * This array is defined at parent original WG class.
             * start() is XVMs method at worker CaptureBar class.
             */
-            wrapper.captureBars[wrapper.indexByID[id]].xvm_worker.start(points, capColor, rate, baseNumText);
+            wrapper.captureBars[wrapper.indexByID[id]].xvm_worker.start(points, colorFeature, rate, baseNumText);
         }
         else
         {

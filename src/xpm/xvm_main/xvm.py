@@ -530,7 +530,7 @@ class Xvm(object):
                 userprefs.set(args[0], args[1])
             elif cmd == AS2COMMAND.CAPTURE_BAR_GET_BASE_NUM:
                 n = int(args[0])
-                res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3, n >> 2)
+                res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
             else:
                 return
             proxy.movie.invoke(('xvm.respond',
