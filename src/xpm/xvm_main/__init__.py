@@ -29,6 +29,7 @@ from BattleReplay import g_replayCtrl
 from PlayerEvents import g_playerEvents
 from Vehicle import Vehicle
 from gui.app_loader import g_appLoader
+from gui.battle_control import arena_info
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.battle_control.dyn_squad_functional import _DynSquadEntityController
@@ -39,8 +40,6 @@ from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from gui.Scaleform.daapi.view.battle.markers import MarkersManager
 from gui.Scaleform.Minimap import Minimap
-#import account_helpers.CustomFilesCache as cache
-#from account_helpers.CustomFilesCache import CustomFilesCache, WorkerThread
 
 from xfw import *
 
@@ -259,18 +258,15 @@ def _Minimap__delEntry(self, id, inCallback=False):
 def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
-    
+
 
 @registerEvent(_DynSquadEntityController, 'invalidateVehicleInfo')
 def _DynSquadEntityController_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
-    #log(playerVehVO)
-    if BigWorld.player().arena.guiType == 1: # ARENA_GUI_TYPE.RANDOM
+    if arena_info.getArenaGuiType() == 1: # ARENA_GUI_TYPE.RANDOM
         if flags & INVALIDATE_OP.PREBATTLE_CHANGED and playerVehVO.squadIndex > 0:
-            isEnemy = playerVehVO.team != arenaDP.getNumberOfTeam()
-            for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(isEnemy)):
+            for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(playerVehVO.team)):
                 if vInfoVO.squadIndex > 0:
-                    g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD)
-
+                    g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD | INV.MINIMAP_SQUAD)
 
 #cache._MIN_LIFE_TIME = 15
 #cache._MAX_LIFE_TIME = 24
