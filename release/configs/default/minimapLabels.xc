@@ -90,7 +90,7 @@
       "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
       "css": "font-family:Arial; font-size:17px; color:{{c:system:minimap.colors.lost_dot}};",
       "format": "{{vehicle-class}}",
-      "alpha": 70,
+      "alpha": 70
     },
     {
       "$ref": { "path":"defaultItem" },
