@@ -110,7 +110,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             if (typeof(holderMc[i]) == "movieclip")
             {
                 var labelMc:MovieClip = holderMc[i];
-                Macros.RegisterMinimapMacros(labelMc[PLAYER_INFO_FIELD_NAME], getVehicleClassSymbol(labelMc[VEHICLE_CLASS_FIELD_NAME]));
                 invalidateList[i] = INVALIDATE_TYPE_FORCE;
             }
         }
@@ -177,8 +176,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         labelMc[STATUS_FIELD_NAME] = Player.PLAYER_REVEALED;
 
         //Logger.addObject(labelMc, 3);
-
-        Macros.RegisterMinimapMacros(playerInfo, getVehicleClassSymbol(vehicleClass));
 
         /**
          * Label stays at creation point some time before first move.
@@ -254,26 +251,5 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         }
 
         return status;
-    }
-
-    public static function getVehicleClassSymbol(vehicleClass:String):String
-    {
-        switch (vehicleClass)
-        {
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_LIGHT:
-                return MapConfig.lightSymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_MEDIUM:
-                return MapConfig.mediumSymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_HEAVY:
-                return MapConfig.heavySymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_TD:
-                return MapConfig.tdSymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_SPG:
-                return MapConfig.spgSymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_SUPER:
-                return MapConfig.superSymbol;
-            default:
-                return "";
-        }
     }
 }

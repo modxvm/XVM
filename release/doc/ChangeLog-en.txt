@@ -1,4 +1,7 @@
-﻿XVM-6.1.4.4-dev:
+﻿XVM-6.1.5-dev:
+  * Minimap label settings was completely reworked. See minimapLabels.xc file.
+  * "mapSize" config section moved to the root of the "minimap" and "minimapAlt" sections
+  * Increased congfig version to 6.1.0
   * Personal missions: added "Incomplete" filter (Started + Improve)
 
 XVM-6.1.4.3:

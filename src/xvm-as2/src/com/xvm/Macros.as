@@ -55,11 +55,6 @@ class com.xvm.Macros
         _instance._RegisterStatMacros(pname, stat);
     }
 
-    public static function RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)
-    {
-        _instance._RegisterMinimapMacros(player, vehicleClassSymbol);
-    }
-
     public static function RegisterMarkerData(pname:String, data:Object)
     {
         _instance._RegisterMarkerData(pname, data);
@@ -1107,19 +1102,6 @@ class com.xvm.Macros
         pdata["a:tfb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
         // {{a:tsb}}
         pdata["a:tsb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
-    }
-
-    private function _RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)
-    {
-        if (!player)
-            return;
-        var pname:String = player.userName;
-        if (!m_dict.hasOwnProperty(pname))
-            m_dict[pname] = { };
-        var pdata = m_dict[pname];
-
-        // {{vehicle-class}} - returns special symbol depending on class
-        pdata["vehicle-class"] = vehicleClassSymbol;
     }
 
     private function _RegisterMarkerData(pname:String, data:Object)

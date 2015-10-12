@@ -3,42 +3,58 @@
  * Надписи на миникарте. Поддерживают HTML.
  */
 {
+  // Textfield for map side size. 1000m, 700m, 600m.
+  // Поле размера стороны карты. Например, 1000м, 700м, 600м.
+  "mapSize": {
+    "enabled": true,
+    "format": "<b>{{cellsize}}0 m</b>",
+    "css": "font-size:10px; color:#FFCC66;",
+    "alpha": 80,
+    "offsetX": 0,
+    "offsetY": 0,
+    "shadow": { // Тень.
+      "enabled": true,
+      "color": "0x000000",
+      "distance": 0,
+      "angle": 0,
+      "alpha": 80,
+      "blur": 2,
+      "strength": 3
+    },
+    // Decrease sizes in case of map image weird shrinking while map resize.
+    // Increase sizes in case of field being partially cut off.
+    // -------------------------------------------------------------------------------------
+    // Уменьшайте размеры, если при изменении размера миникарты изображение карты сжимается.
+    // Увеличивайте размеры, если содержимое поля обрезается.
+    "width": 100,
+    "height": 30
+  }
+  // Textfields for tanks on minimap.
+  // Текстовые поля для танков на миникарте.
   "labels": {
-      // {{vehicle-class}} macro substitutions.
-      // Подстановки макроса {{vehicle-class}}.
-      "vehicleclassmacro": {
-        // LT / ЛT ♦.
-        "light": "\u2022",
-        // MT / СТ.
-        "medium": "\u2022",
-        // HT / ТТ.
-        "heavy": "\u2022",
-        // TD / ПТ ▼.
-        "td": "\u2022",
-        // Artillery / Арта. ■
-        "spg": "\u25AA",
-        // HeavyTank10 by gui_settings.xml.
-        // ТТ10 посредством gui_settings.xml.
-        "superh": "\u2022"
-        // Special symbols website / Сайт со спец символами:
-        // http://www.fileformat.info/info/unicode/char/25a0/index.htm
-        // Great symbolic font by Andrey_Hard for {{vehicle-class}}:
-        // Отличный символьный шрифт от Andrey_Hard для замены букв от {{vehicle-class}} макроса:
-        // http://goo.gl/d2KIj
-      },
-      // Textfields for tanks on minimap.
-      // Текстовые поля для танков на миникарте.
-      "units": {
+      "units": [
         // Textfields switch for revealed units.
         // Выключатель добавочных текстовых полей для видимых юнитов.
         "revealedEnabled": true,
         // Textfields switch for lost enemy units. Show last seen position.
         // Выключатель текстовых полей для пропавших врагов.
         "lostEnemyEnabled": true,
-        // Textfields antialias type.
-        // Тип сглаживания текстовых полей.
-        "antiAliasType": "advanced", // normal/advanced
-        // Формат поля.
+        // Text fields
+        // Текстовые поля.
+        "fields": [
+          {
+            "flags": "player|ally|squad|enemy|teamKiller|lost|dead"
+            "css": "...",
+            "format": "...",
+            "shadow": { ... },
+            "alpha": "...",
+            "pos": { ... }
+            // Textfields antialias type.
+            // Тип сглаживания текстовых полей.
+            "antiAliasType": "advanced", // normal/advanced
+          }
+        ],
+      "units": {
         "format": {
           // Союзник.
           "ally":           "<span class='mm_a'>{{vehicle}}</span>",
@@ -154,31 +170,5 @@
           "deadsquad": 50
         }
       },
-      // Textfield for map side size. 1000m, 700m, 600m.
-      // Поле размера стороны карты. Например, 1000м, 700м, 600м.
-      "mapSize": {
-        "enabled": true,
-        "format": "<b>{{cellsize}}0 m</b>",
-        "css": "font-size:10px; color:#FFCC66;",
-        "alpha": 80,
-        "offsetX": 0,
-        "offsetY": 0,
-        "shadow": { // Тень.
-          "enabled": true,
-          "color": "0x000000",
-          "distance": 0,
-          "angle": 0,
-          "alpha": 80,
-          "blur": 2,
-          "strength": 3
-        },
-        // Decrease sizes in case of map image weird shrinking while map resize.
-        // Increase sizes in case of field being partially cut off.
-        // -------------------------------------------------------------------------------------
-        // Уменьшайте размеры, если при изменении размера миникарты изображение карты сжимается.
-        // Увеличивайте размеры, если содержимое поля обрезается.
-        "width": 100,
-        "height": 30
-      }
     }
 }

@@ -61,7 +61,6 @@ Legend:
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ Flag for player selected in the personal cabinet or determined from the client language
 │ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ Global map clan rating, from 1 to 1000 (http://worldoftanks.eu/leaderboard/clans/)
 │ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
-│ S │ {{vehicle-class}}  │   │   │   │ X │   │   │   │ places special symbol depending on subject vehicle class
 │ S │ {{turret}}         │   │   │   │   │ X │   │   │ stock turret marker
 │ D │ {{dmg}}            │   │   │   │   │ X │ X │   │ damage health points / last hit value
 │ D │ {{dmg-ratio}}      │   │   │   │   │ X │   │   │ damage health ratio (without '%' sign)

@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMinimapLabelsMapSize extends Object
+    public dynamic class CMinimapMapSize extends Object
     {
         public var enabled:Boolean;
         public var format:String;
