@@ -219,6 +219,7 @@
     // Quests
     "Hide with honors": "Hide with honors",
     "Started": "Started",
+    "Incomplete": "Incomplete",
 
     // Config loading
     "XVM config reloaded": "XVM config reloaded",

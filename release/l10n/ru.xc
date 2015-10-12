@@ -219,6 +219,7 @@
     // Quests
     "Hide with honors": "Скрыть с отличием",
     "Started": "Выполняется",
+    "Incomplete": "Незавершенные",
 
     // Config loading
     "XVM config reloaded": "Конфиг XVM перезагружен",
