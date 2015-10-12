@@ -1,5 +1,5 @@
 {
-  "configVersion": "5.1.0",
+  "configVersion": "6.1.0",
   "autoReloadConfig": true,
   //"language": "pl",
   "def": {
