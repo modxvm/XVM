@@ -76,7 +76,7 @@ def _updateSpottedStatus(vID, spotted):
         return
 
     if spotted:
-        _spotted_cache[vID] = 'revealed'
+        _spotted_cache[vID] = 'spotted'
         return
 
     if vID in _spotted_cache:

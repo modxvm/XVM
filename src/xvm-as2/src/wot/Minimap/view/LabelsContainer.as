@@ -173,7 +173,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         labelMc[PLAYER_INFO_FIELD_NAME] = playerInfo;
         labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
         labelMc[VEHICLE_CLASS_FIELD_NAME] = vehicleClass;
-        labelMc[STATUS_FIELD_NAME] = Player.PLAYER_REVEALED;
+        labelMc[STATUS_FIELD_NAME] = Player.PLAYER_SPOTTED;
 
         //Logger.addObject(labelMc, 3);
 
@@ -221,7 +221,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
         if (IconsProxy.playerIds[playerId] != null)
         {
-            status = Player.PLAYER_REVEALED;
+            status = Player.PLAYER_SPOTTED;
         }
         else
         {
@@ -247,7 +247,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
              * Set below zero.
              * Later this will be recognized at MapConfig too.
              */
-            status *= Player.TEAM_KILLER_FLAG;
+            status |= Player.TEAM_KILLER_FLAG;
         }
 
         return status;

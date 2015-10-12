@@ -29,10 +29,11 @@
  */
 class wot.Minimap.dataTypes.Player
 {
-    public static var PLAYER_REVEALED:Number = 1;
-    public static var PLAYER_LOST:Number = 2;
-    public static var PLAYER_DEAD:Number = 3;
-    public static var TEAM_KILLER_FLAG:Number = -1; /** As multiplier */
+    public static var PLAYER_SPOTTED:Number =   0x01;
+    public static var PLAYER_LOST:Number =      0x02;
+    public static var PLAYER_DEAD:Number =      0x04;
+    public static var STATUS_MASK:Number =      0x0F;
+    public static var TEAM_KILLER_FLAG:Number = 0x10;
 
     public var uid:Number;
     public var vid:Number;

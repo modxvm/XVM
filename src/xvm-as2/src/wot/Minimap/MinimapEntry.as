@@ -111,7 +111,7 @@ class wot.Minimap.MinimapEntry
         //Logger.add("add:   " + playerId);
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_INITED, wrapper, playerId));
 
-        this.onEntryRevealed();
+        this.onEntrySpotted();
 
         this.wrapper["_xvm_removeMovieClip"] = this.wrapper.removeMovieClip;
         this.wrapper.removeMovieClip = function()
@@ -226,9 +226,9 @@ class wot.Minimap.MinimapEntry
 
     // -- Private
 
-    private function onEntryRevealed()
+    private function onEntrySpotted()
     {
-        if (!MapConfig.enabled || !MapConfig.revealedEnabled)
+        if (!MapConfig.enabled || MapConfig.labels.length == 0)
             return;
 
         this.labelMc = LabelsContainer.getLabel(playerId);

@@ -31,11 +31,11 @@
     "spotted": {
       "neverSeen": "",
       "lost": "<font face='xvm' size='23'>&#x70;</font>",
-      "revealed": "<font face='xvm' size='23'>&#x70;</font>",
+      "spotted": "<font face='xvm' size='23'>&#x70;</font>",
       "dead": "<font face='xvm' size='23' alpha='#80'>&#x76;</font>",
       "neverSeen_arty": "",
       "lost_arty": "<font face='xvm' size='23'>&#x70;</font>",
-      "revealed_arty": "<font face='xvm' size='23'>&#x70;</font>",
+      "spotted_arty": "<font face='xvm' size='23'>&#x70;</font>",
       "dead_arty": "<font face='xvm' size='23' alpha='#80'>&#x76;</font>"
     },
     // Text for {{xvm-user}} macro.
