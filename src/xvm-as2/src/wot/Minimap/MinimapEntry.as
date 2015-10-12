@@ -39,6 +39,11 @@ class wot.Minimap.MinimapEntry
         return this.init_xvmImpl.apply(this, arguments);
     }
 
+    function setEntryName()
+    {
+        return this.setEntryNameImpl.apply(this, arguments);
+    }
+
     function draw()
     {
         return this.drawImpl.apply(this, arguments);
@@ -118,6 +123,20 @@ class wot.Minimap.MinimapEntry
         }
 
         Cmd.profMethodEnd("MinimapEntry.init_xvm()");
+    }
+
+    function setEntryNameImpl(value:String)
+    {
+        var savedEntryName:String = wrapper.entryName;
+        if (savedEntryName == "player" || value == savedEntryName)
+            return;
+
+        base.setEntryName(value);
+
+        if (playerId)
+        {
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_NAME_UPDATED, wrapper, playerId));
+        }
     }
 
     function drawImpl()

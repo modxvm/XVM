@@ -8,6 +8,7 @@ class wot.wrapper.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
 
         var OVERRIDE_FUNCTIONS:Array = [
             "init_xvm",
+            "setEntryName",
             "draw",
             "onEnterFrameHandler"
         ];

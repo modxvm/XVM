@@ -16,7 +16,7 @@
     //"suppressCarouselTooltips": true,
     //"hideBuyTank": true,
     //"hideBuySlot": true,
-    "sorting_criteria": ["level", "type", "nation"],
+    "sorting_criteria": ["level", "nation", "type"],
     "filters": {
       //"nation":   { "enabled": false },
       //"type":     { "enabled": false },

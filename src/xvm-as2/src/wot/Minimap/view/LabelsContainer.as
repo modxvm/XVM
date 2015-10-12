@@ -60,6 +60,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onPlayerDeadEvent);
     }
@@ -74,8 +75,22 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         //Logger.add("e.value = " + e.value);
         //if (isNaN(e.value))
         //    Logger.addObject(e, 2, "onMinimapEvent: null value");
-        invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
+
+        if (!invalidateList[e.value])
+            invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
         invalidate();
+    }
+
+    private function onEntryNameUpdated(e:MinimapEvent)
+    {
+        var labelMc:MovieClip = _getLabel(Number(e.value));
+        var entryName:String = e.entry.entryName;
+        if (labelMc[ENTRY_NAME_FIELD_NAME] != entryName)
+        {
+            labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
+            invalidateList[e.value] = INVALIDATE_TYPE_FORCE;
+            invalidate();
+        }
     }
 
     private function onPlayerDeadEvent(e:Object)
@@ -83,7 +98,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         //Logger.add("(dead) e.value = " + e.value);
         //if (isNaN(e.value))
         //    Logger.addObject(e, 2, "onPlayerDeadEvent: null value");
-        invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
+        if (!invalidateList[e.value])
+            invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
         invalidate();
     }
 
@@ -116,7 +132,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
             //Logger.add(IconsProxy.entry(playerId).entryName + ": " + playerId + " " + force + " " + previousStatus + " " + actualStatus);
 
-            if (previousStatus != actualStatus || force)
+            if ((previousStatus != actualStatus) || force)
             {
                 labelMc[STATUS_FIELD_NAME] = actualStatus;
                 LabelViewBuilder.createTextField(labelMc);
