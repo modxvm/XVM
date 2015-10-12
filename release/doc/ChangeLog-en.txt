@@ -1,4 +1,6 @@
-﻿XVM-6.1.4.3:
+﻿XVM-6.1.4.4-dev:
+
+XVM-6.1.4.3:
   * fixed displaying of current base in the capture bar
   * fixed displaying of dynamic squads on the minimap and vehicle markers
 
