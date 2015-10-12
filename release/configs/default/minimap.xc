@@ -43,7 +43,7 @@
     },
     // Map size label
     // Поле размера карты
-    "mapSize": ${"minimapLabels.xc":"mapSize"},
+    "mapSize": ${"minimapMapSize.xc":"mapSize"},
     // Minimap labels.
     // Надписи на миникарте.
     "labels": ${"minimapLabels.xc":"labels"},
