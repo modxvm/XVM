@@ -48,6 +48,7 @@ class LINKAGES(object):
 class FILTERS(object):
     HIDE_WITH_HONORS = "hideWithHonors"
     STARTED = "started"
+    INCOMPLETE = "incomplete"
 
 
 #####################################################################
@@ -59,6 +60,7 @@ g_entitiesFactories.initSettings(config.VIEWS_SETTINGS)
 
 _QuestsFilter._FILTER_BY_STATE[FILTERS.HIDE_WITH_HONORS] = lambda q: not q.isFullCompleted(True)
 _QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress()
+_QuestsFilter._FILTER_BY_STATE[FILTERS.INCOMPLETE] = lambda q: q.isInProgress() or (q.isCompleted() and not q.isFullCompleted(True))
 
 
 @overrideMethod(EventsWindow, '_loadView')
@@ -84,6 +86,8 @@ def QuestsTileChainsView_as_setHeaderDataS(base, self, data):
                                                          'data': FILTERS.HIDE_WITH_HONORS})
         data['filters']['taskTypeFilterData'].insert(3, {'label': l10n('Started'),
                                                          'data': FILTERS.STARTED})
+        data['filters']['taskTypeFilterData'].insert(4, {'label': l10n('Incomplete'),
+                                                         'data': FILTERS.INCOMPLETE})
     return base(self, data)
 
 

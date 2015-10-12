@@ -20,6 +20,10 @@ import BigWorld
 import game
 from gui.shared import g_eventBus, g_itemsCache
 from gui.Scaleform.daapi.view.lobby.prb_windows.SquadView import SquadView
+from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
+from gui.prb_control.functional.action_handlers import SquadActionsHandler
+from gui.DialogsInterface import showDialog
+from functools import partial
 
 from xfw import *
 
@@ -39,6 +43,9 @@ class COMMANDS(object):
 
 window_populated = False
 squad_window_handler = None
+battle_tiers_difference = 0 # calculated from squad
+
+WARN_SQUAD_BATTLETIER_DIFFERENCE = 3 # warn at this difference and above
 
 
 #####################################################################
@@ -79,28 +86,47 @@ def SquadView__init__(self, *args, **kwargs):
     squad_update_tiers(self, *args, **kwargs)
 
 
-@registerEvent(SquadView, '_updateRallyData')
-def SquadView_updateRallyData(self, *args, **kwargs):
+@registerEvent(SquadView, 'onUnitVehicleChanged')
+def SquadView_onUnitVehicleChanged(self, *args, **kwargs):
     squad_update_tiers(self, *args, **kwargs)
 
 
 def squad_update_tiers(self, *args, **kwargs):
     try:
-        global squad_window_handler
+        global squad_window_handler, battle_tiers_difference
         squad_window_handler = self
         if not window_populated:
             return
         min_tier = 0
-        max_tier = 0
-        for squad_vehicle in self.unitFunctional.getUnit()[1].getVehicles().values():
+        max_tiers = []
+        squad_unitFunctional = self.unitFunctional.getUnit()[1]
+        if not squad_unitFunctional:
+            as_xfw_cmd(COMMANDS.AS_UPDATE_TIERS, '')
+            return
+        for squad_vehicle in squad_unitFunctional.getVehicles().values():
             veh = g_itemsCache.items.getItemByCD(squad_vehicle['vehTypeCompDescr'])
             (veh_tier_low, veh_tier_high) = getTiers(veh.level, veh.type, veh.name)
             min_tier = max(veh_tier_low, min_tier)
-            max_tier = max(veh_tier_high, max_tier)
-    
+            max_tiers.append(veh_tier_high)
+        
         text_tiers = ''
         if min_tier > 0:
+            max_tier = max(max_tiers)
+            battle_tiers_difference = max_tier - min(max_tiers)
             text_tiers = ' - %s: %s..%s' % (l10n('Squad battle tiers'), min_tier, max_tier)
         as_xfw_cmd(COMMANDS.AS_UPDATE_TIERS, text_tiers)
     except Exception, ex:
         err(traceback.format_exc())
+
+@overrideMethod(SquadActionsHandler, '_SquadActionsHandler__setCreatorReady')
+def setCreatorReady_confirm_battletier_diff(base, self, result):
+    if not result:
+        return
+    try:
+        if battle_tiers_difference >= WARN_SQUAD_BATTLETIER_DIFFERENCE:
+            showDialog(SimpleDialogMeta(l10n('Warning'), l10n('Squad tanks battle tiers difference') + ': %s.' % battle_tiers_difference, I18nConfirmDialogButtons()), partial(base, self))
+            return True
+    except Exception, ex:
+        err(traceback.format_exc())
+    base(self, True)
+

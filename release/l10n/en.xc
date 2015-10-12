@@ -138,6 +138,7 @@
 
     // Squad
     "Squad battle tiers": "Squad battle tiers",
+    "Squad tanks battle tiers difference": "Squad tanks battle tiers difference",
     "Vehicle": "Vehicle",
     "Battle tiers": "Battle tiers",
     "Type": "Type",
@@ -218,6 +219,7 @@
     // Quests
     "Hide with honors": "Hide with honors",
     "Started": "Started",
+    "Incomplete": "Incomplete",
 
     // Config loading
     "XVM config reloaded": "XVM config reloaded",

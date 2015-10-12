@@ -13,6 +13,7 @@ from gui import SystemMessages
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info, g_sessionProvider
 from gui.battle_control.arena_info.settings import VEHICLE_STATUS
+from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 
 from xfw import *
@@ -359,6 +360,8 @@ class Xvm(object):
                 self.updateBattle(vID, targets)
             if targets & INV.MARKER_ALL:
                 self.updateMarker(vID, targets)
+            if targets & INV.MINIMAP_ALL:
+                self.updateMinimapEntry(vID, targets)
         except Exception, ex:
             err(traceback.format_exc())
         self._invalidateTargets[vID] = INV.NONE
@@ -439,12 +442,29 @@ class Xvm(object):
         vInfo = utils.getVehicleInfo(vID)
         squadIndex = vInfo.squadIndex
         arenaDP = g_sessionProvider.getCtx().getArenaDP()
-        squadIndex = vInfo.squadIndex
         if arenaDP.isSquadMan(vID):
             squadIndex += 10
+            markersManager.invokeMarker(marker.id, 'setEntityName', [PLAYER_GUI_PROPS.squadman.name()])
 
         #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vID, status, frags, squadIndex))
         markersManager.invokeMarker(marker.id, 'setMarkerStateXvm', [targets, status, frags, my_frags, squadIndex])
+
+
+    def updateMinimapEntry(self, vID, targets):
+        #trace('updateMinimapEntry: {0} {1}'.format(targets, vID))
+
+        battle = getBattleApp()
+        if not battle:
+            return
+
+        minimap = battle.minimap
+
+        if targets & INV.MINIMAP_SQUAD:
+            arenaDP = g_sessionProvider.getCtx().getArenaDP()
+            if arenaDP.isSquadMan(vID):
+                minimap._Minimap__callEntryFlash(vID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
+            else:
+                minimap._Minimap__callEntryFlash(vID, 'update')
 
 
     # PRIVATE
@@ -530,7 +550,7 @@ class Xvm(object):
                 userprefs.set(args[0], args[1])
             elif cmd == AS2COMMAND.CAPTURE_BAR_GET_BASE_NUM:
                 n = int(args[0])
-                res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3, n >> 2)
+                res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
             else:
                 return
             proxy.movie.invoke(('xvm.respond',

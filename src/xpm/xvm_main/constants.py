@@ -1,7 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
 class XVM(object):
-    XVM_VERSION    = '6.1.4.2'
+    XVM_VERSION    = '6.1.5-dev'
     WOT_VERSION    = '0.9.10'
     CONFIG_VERSION = '6.0.0'
     XVM_INTRO      = 'www.modxvm.com'
@@ -75,19 +75,22 @@ class TEAM(object):
 
 # Invalidation targets
 class INV(object):
-    NONE                = 0x0000
+    NONE                = 0x00000000
 
-    BATTLE_STATE        = 0x0001
-    BATTLE_HP           = 0x0002
-    BATTLE_SPOTTED      = 0x0004
-    BATTLE_ALL          = 0x00FF
+    BATTLE_STATE        = 0x00000001
+    BATTLE_HP           = 0x00000002
+    BATTLE_SPOTTED      = 0x00000004
+    BATTLE_ALL          = 0x000000FF
 
-    MARKER_STATUS       = 0x0100
-    MARKER_FRAGS        = 0x0200
-    MARKER_SQUAD        = 0x0400
-    MARKER_ALL          = 0xFF00
+    MARKER_STATUS       = 0x00000100
+    MARKER_FRAGS        = 0x00000200
+    MARKER_SQUAD        = 0x00000400
+    MARKER_ALL          = 0x0000FF00
 
-    ALL                 = 0xFFFF
+    MINIMAP_SQUAD       = 0x00010000
+    MINIMAP_ALL         = 0x000F0000
+
+    ALL                 = 0xFFFFFFFF
 
 class DYNAMIC_VALUE_TYPE(object):
     X              = 'x'

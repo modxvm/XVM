@@ -138,6 +138,7 @@
 
     // Squad
     "Squad battle tiers": "Уровень боев взвода",
+    "Squad tanks battle tiers difference": "Разница уровней боев танков взвода",
     "Vehicle": "Танк",
     "Battle tiers": "Уровень боёв",
     "Type": "Тип",
@@ -218,6 +219,7 @@
     // Quests
     "Hide with honors": "Скрыть с отличием",
     "Started": "Выполняется",
+    "Incomplete": "Незавершенные",
 
     // Config loading
     "XVM config reloaded": "Конфиг XVM перезагружен",

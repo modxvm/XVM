@@ -1154,7 +1154,9 @@ class com.xvm.Macros
                     return "Михаил";
                 if (pname == "STL1te")
                     return "О, СТЛайт!";
-				if (pname == "XIebniDizele4ky" || pname == "Xlebni_Dizele4ky" || pname == "XlebniDizeIe4ku" || pname == "XlebniDize1e4ku" || pname == "XlebniDizele4ku_2013")
+                if (pname == "seriych")
+                    return "Всем Счастья :)";
+                if (pname == "XIebniDizele4ky" || pname == "Xlebni_Dizele4ky" || pname == "XlebniDizeIe4ku" || pname == "XlebniDize1e4ku" || pname == "XlebniDizele4ku_2013")
                     return "Alex Artobanana";
                 break;
 
@@ -1165,6 +1167,8 @@ class com.xvm.Macros
                     return "Fluttershy is best pony!";
                 if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU")
                     return "«sir Max» (XVM)";
+                if (pname == "seriych_RU")
+                    return "Be Happy :)";
                 break;
 
             case "EU":
@@ -1172,6 +1176,8 @@ class com.xvm.Macros
                     return "Fluttershy is best pony!";
                 if (pname == "sirmax2" || pname == "0x01" || pname == "_SirMax_")
                     return "«sir Max» (XVM)";
+                if (pname == "seriych")
+                    return "Be Happy :)";
                 break;
 
             case "US":

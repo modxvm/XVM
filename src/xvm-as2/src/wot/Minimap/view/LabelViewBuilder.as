@@ -68,10 +68,10 @@ class wot.Minimap.view.LabelViewBuilder
 
         var obj = { };
         var playerState = BattleState.getUserData(playerInfo.userName);
-        for (var i in playerState)
-            obj[i] = playerState[i];
         for (var i in playerInfo)
             obj[i] = playerInfo[i];
+        for (var i in playerState)
+            obj[i] = playerState[i];
         var text:String = Macros.Format(playerInfo.userName, format, obj);
         //Logger.add(playerInfo.userName + ": " + text);
         textField.htmlText = text;
