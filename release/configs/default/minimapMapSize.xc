@@ -5,8 +5,7 @@
 {
   "mapSize": {
     "enabled": true,
-    "format": "<b>{{cellsize}}0 m</b>",
-    "css": "font-size:10px; color:#FFCC66;",
+    "format": "<font size='10' color='#FFCC66'><b>{{cellsize}}0 m</b></font>",
     "alpha": 80,
     "offsetX": 0,
     "offsetY": 0,

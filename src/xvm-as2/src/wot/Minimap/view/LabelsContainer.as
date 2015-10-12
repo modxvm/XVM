@@ -1,5 +1,6 @@
 import com.xvm.*;
 import flash.geom.*;
+import flash.filters.*;
 import wot.Minimap.*;
 import wot.Minimap.dataTypes.*;
 import wot.Minimap.model.externalProxy.*;
@@ -17,7 +18,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     public static var STATUS_FIELD_NAME:String = "lastStatus";
     public static var PLAYER_INFO_FIELD_NAME:String = "playerInfo";
     public static var ENTRY_NAME_FIELD_NAME:String = "entryName";
-    public static var VEHICLE_CLASS_FIELD_NAME:String = "vehicleClass";
 
     public static function init():Void
     {
@@ -134,12 +134,12 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             if ((previousStatus != actualStatus) || force)
             {
                 labelMc[STATUS_FIELD_NAME] = actualStatus;
-                LabelViewBuilder.createTextField(labelMc);
+                this.createTextField(labelMc);
                 updateLabelDepth(labelMc);
             }
             else
             {
-                LabelViewBuilder.updateTextField(labelMc);
+                this.updateTextField(labelMc);
             }
         }
         invalidateList = { };
@@ -160,7 +160,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
         var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(playerId);
         var entryName = entry.entryName;
-        var vehicleClass = entry.vehicleClass;
 
         var depth:Number = getFreeDepth(ALIVE_DEPTH_START);
         var labelMc:MovieClip = holderMc.createEmptyMovieClip(playerId.toString(), depth);
@@ -172,7 +171,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         var playerInfo = PlayersPanelProxy.getPlayerInfo(playerId);
         labelMc[PLAYER_INFO_FIELD_NAME] = playerInfo;
         labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
-        labelMc[VEHICLE_CLASS_FIELD_NAME] = vehicleClass;
         labelMc[STATUS_FIELD_NAME] = Player.PLAYER_SPOTTED;
 
         //Logger.addObject(labelMc, 3);
@@ -185,7 +183,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         labelMc._x = OFFMAP_COORDINATE;
         labelMc._y = OFFMAP_COORDINATE;
 
-        LabelViewBuilder.createTextField(labelMc);
+        this.createTextField(labelMc);
     }
 
     private function updateLabelDepth(labelMc:MovieClip):Void
@@ -252,4 +250,146 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
         return status;
     }
+
+
+
+    public static var TEXT_FIELD_NAME:String = "textField";
+
+    private static var TF_DEPTH:Number = 100;
+
+    public function createTextField(label:MovieClip, cfg:Object):Void
+    {
+        this.removeTextField(label);
+
+        var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
+        var playerInfo:Player = label[LabelsContainer.PLAYER_INFO_FIELD_NAME];
+        var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
+
+        var offset:Point = unitLabelOffset(entryName, status);
+
+        var textField:TextField = label.createTextField(TEXT_FIELD_NAME, TF_DEPTH, offset.x, offset.y, 100, 40);
+        label[TEXT_FIELD_NAME] = textField;
+        textField.antiAliasType = Config.config.minimap.labels.units.antiAliasType;
+        textField.html = true;
+        textField.multiline = true;
+        textField.selectable = false;
+
+        var tf:TextFormat = new TextFormat("$FieldFont", 12, 0xFFFFFF, false, false, false, null, null, cfg.align);
+        textField.setNewTextFormat(tf);
+
+        if (unitShadowEnabled(entryName, status))
+        {
+            textField.filters = [unitShadow(entryName, status)];
+        }
+
+        textField._alpha = unitLabelAlpha(entryName, status);
+
+        updateTextField(label);
+    }
+
+    public function updateTextField(label:MovieClip):Void
+    {
+        var textField:TextField = label[TEXT_FIELD_NAME];
+        if (textField == null)
+            return;
+
+        var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
+        var playerInfo:Player = label[LabelsContainer.PLAYER_INFO_FIELD_NAME];
+        var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
+
+        var format:String = unitLabelFormat(entryName, status);
+
+        var obj = { };
+        var playerState = BattleState.getUserData(playerInfo.userName);
+        for (var i in playerInfo)
+            obj[i] = playerInfo[i];
+        for (var i in playerState)
+            obj[i] = playerState[i];
+        var text:String = Macros.Format(playerInfo.userName, format, obj);
+        //Logger.add(playerInfo.userName + ": " + text);
+        textField.htmlText = text;
+    }
+
+    public function removeTextField(label:MovieClip):Void
+    {
+        var textField:TextField = label[TEXT_FIELD_NAME];
+        if (textField == null)
+            return;
+        textField.removeTextField();
+        label[TEXT_FIELD_NAME] = null;
+    }
+
+    // PRIVATE
+
+    // TODO: REFACTOR AND REMOVE
+
+
+    /** Translate internal WG entryName and unit status(dead\tk) to minimap config file entry */
+    private function defineCfgProperty(wgEntryName:String, status:Number):String
+    {
+        /** Prefix: lost dead or alive */
+        var xvmPrefix:String;
+
+        if ((status & Player.STATUS_MASK) == Player.PLAYER_LOST)
+            xvmPrefix = "lost";
+        else if ((status & Player.STATUS_MASK) == Player.PLAYER_DEAD)
+            xvmPrefix = "dead";
+        else
+            xvmPrefix = "";
+
+        /** Postfix: ally, enemy, tk or squad */
+        var xvmPostfix:String;
+
+        if (wgEntryName == "squadman")
+            xvmPostfix = "squad"; /** Translate squad WG entry name to squad XVM entry name */
+        else
+            xvmPostfix = wgEntryName;
+
+        if ((status & Player.TEAM_KILLER_FLAG) && wgEntryName == "ally") /** <- Skip enemy and squad TK */
+            xvmPostfix = "teamkiller";
+
+        /** Result */
+        var xvmFullEntry:String;
+
+        if (wgEntryName == "player")
+            xvmFullEntry = "oneself";
+        else
+            xvmFullEntry = xvmPrefix + xvmPostfix;
+
+        if (xvmFullEntry == "lostenemy")
+            xvmFullEntry = "lost"; // Backwards config compatibility
+
+        return xvmFullEntry;
+    }
+
+    private function unitLabelOffset(entryName:String, status:Number)
+    {
+        var unitType:String = defineCfgProperty(entryName, status);
+        return new Point(Config.config.minimap.labels.units.offset[unitType].x, Config.config.minimap.labels.units.offset[unitType].y);
+    }
+
+    private function unitShadowEnabled(entryName:String, status:Number):Boolean
+    {
+        var unitType:String = defineCfgProperty(entryName, status);
+        return Config.config.minimap.labels.units.shadow[unitType].enabled;
+    }
+
+    private function unitShadow(entryName:String, status:Number):DropShadowFilter
+    {
+        var unitType:String = defineCfgProperty(entryName, status);
+        return Utils.extractShadowFilter(Config.config.minimap.labels.units.shadow[unitType]);
+    }
+
+    private function unitLabelAlpha(entryName:String, status:Number)
+    {
+        var unitType:String = defineCfgProperty(entryName, status);
+        return Config.config.minimap.labels.units.alpha[unitType];
+    }
+
+    private function unitLabelFormat(entryName:String, status:Number)
+    {
+        var unitType:String = defineCfgProperty(entryName, status);
+        return Config.config.minimap.labels.units.format[unitType];
+    }
+
 }

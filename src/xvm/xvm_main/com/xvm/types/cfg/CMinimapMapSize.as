@@ -8,7 +8,6 @@ package com.xvm.types.cfg
     {
         public var enabled:Boolean;
         public var format:String;
-        public var css:String;
         public var alpha:Number;
         public var offsetX:Number;
         public var offsetY:Number;

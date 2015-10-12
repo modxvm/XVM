@@ -21,11 +21,7 @@ class wot.Minimap.view.MapSizeLabel
         tf.multiline = true;
         tf.selectable = false;
 
-        var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(".mapsize{" + cfg.css + "}");
-        tf.styleSheet = style;
-
-        tf.htmlText = "<span class='mapsize'>" + defineLabelText(cfg.format) + "</span>";
+        tf.htmlText = defineLabelText(cfg.format);
 
         tf._alpha = cfg.alpha;
 
