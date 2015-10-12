@@ -50,8 +50,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             circleCfg.$radius = radius;
         }
 
-        var cfg = MapConfig.circles;
-        var ci = Config.minimapCirclesData;
+        var cfg:Object = Config.config.minimap.circles;
+        var ci:Object = Config.minimapCirclesData;
         //Logger.addObject(cfg, 2);
         //Logger.addObject(ci);
 
@@ -135,7 +135,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     {
         var cfg:Array = [];
 
-        var view:Array = MapConfig.circles.view;
+        var view:Array = Config.config.minimap.circles.view;
         var len:Number = view.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -153,7 +153,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         }
 
         /** Special vehicle type dependent circle configs */
-        var spec:Array = MapConfig.circles.special;
+        var spec:Array = Config.config.minimap.circles.special;
         len = spec.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -177,7 +177,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     {
         var cfg:Array = [];
 
-        var view:Array = MapConfig.circles.view;
+        var view:Array = Config.config.minimap.circles.view;
         var len:Number = view.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -281,10 +281,10 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     // http://forum.worldoftanks.ru/index.php?/topic/1047590-/
     private function onViewRangeChanged()
     {
-        var cfg = MapConfig.circles;
+        var cfg:Object = Config.config.minimap.circles;
 
         // Calculations
-        var ci = Config.minimapCirclesData;
+        var ci:Object = Config.minimapCirclesData;
 
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
         var bia:Number = ci.view_brothers_in_arms ? 5 : 0;

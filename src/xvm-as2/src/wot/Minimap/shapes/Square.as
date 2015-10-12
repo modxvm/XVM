@@ -20,7 +20,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
     public function Square()
     {
         // Disable square mod if user is artillery class
-        if (!MapConfig.artiEnabled && isArtillery())
+        if (!Config.config.minimap.square.artilleryEnabled && isArtillery())
             return;
 
         super();
@@ -52,9 +52,8 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function defineStyle():Void
     {
-        var config:Object = MapConfig.squareConfig;
-
-        squareClip.lineStyle(config.thickness, parseInt(config.color, 16), config.alpha, null, null, "none");
+        var cfg:Object = Config.config.minimap.square;
+        squareClip.lineStyle(cfg.thickness, parseInt(cfg.color, 16), cfg.alpha, null, null, "none");
     }
 
     private function drawLines():Void

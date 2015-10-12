@@ -47,6 +47,7 @@
     // Minimap labels.
     // Надписи на миникарте.
     "labels": ${"minimapLabels.xc":"labels"},
+    "colors": ${"minimapLabels.xc":"colors"},
     // Minimap circles.
     // Круги на миникарте.
     "circles": ${"minimapCircles.xc":"circles"},

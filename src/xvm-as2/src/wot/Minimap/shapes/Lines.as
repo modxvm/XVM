@@ -71,15 +71,15 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
         vehLines = selfAttachments.createEmptyMovieClip("vehLine" + depth, depth);
-        attachLines(vehLines, MapConfig.linesVehicle, 0);
+        attachLines(vehLines, Config.config.minimap.lines.vehicle, 0);
     }
 
     private function attachVehicleTraverseAngle():Void
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
         traverseAngle = selfAttachments.createEmptyMovieClip("traverseAngle" + depth, depth);
-        attachLines(traverseAngle, MapConfig.linesTraverseAngle, rightAngle);
-        attachLines(traverseAngle, MapConfig.linesTraverseAngle, -leftAngle);
+        attachLines(traverseAngle, Config.config.minimap.lines.traverseAngle, rightAngle);
+        attachLines(traverseAngle, Config.config.minimap.lines.traverseAngle, -leftAngle);
     }
 
     private function attachCameraLines():Void
@@ -92,7 +92,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
             camAttach = cameraEntry.xvm_worker.attachments;
             var depth:Number = camAttach.getNextHighestDepth();
             var cameraLine:MovieClip = camAttach.createEmptyMovieClip("cameraLine" + depth, 10000);
-            attachLines(cameraLine, MapConfig.linesCamera, 0);
+            attachLines(cameraLine, Config.config.minimap.lines.camera, 0);
         }
     }
 

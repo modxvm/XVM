@@ -12,9 +12,9 @@
     "offsetY": 0,
     "shadow": { // Тень.
       "enabled": true,
-      "color": "0x000000",
       "distance": 0,
       "angle": 0,
+      "color": "0x000000",
       "alpha": 80,
       "blur": 2,
       "strength": 3

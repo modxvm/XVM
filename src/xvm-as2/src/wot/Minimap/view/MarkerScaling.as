@@ -34,7 +34,7 @@ class wot.Minimap.view.MarkerScaling
         //Logger.add("scaleEntry: " + entry.entryName + " " + MapConfig.iconScale);
 
         if (isNaN(scaleFactor))
-            scaleFactor = 100 * MapConfig.iconScale;
+            scaleFactor = 100 * Config.config.minimap.iconScale;
 
         if (entry._currentframe == 5 || entry._currentframe == 6) // cursors
             return;
@@ -70,7 +70,7 @@ class wot.Minimap.view.MarkerScaling
     {
         //Logger.add("alternateVehicleScaling: " + MapConfig.iconScale);
 
-        var scaleFactor:Number = 100 * MapConfig.iconScale;
+        var scaleFactor:Number = 100 * Config.config.minimap.iconScale;
         var icons = MinimapProxy.wrapper.icons;
         for (var i in icons)
         {

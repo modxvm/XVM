@@ -54,7 +54,7 @@ class wot.Minimap.Minimap
     function scaleMarkersImpl(factor:Number)
     {
         //Logger.add("scaleMarkers");
-        if (MapConfig.enabled)
+        if (Config.config.minimap.enabled)
         {
             Features.scaleMarkers();
         }
@@ -90,12 +90,22 @@ class wot.Minimap.Minimap
 
     private function onConfigLoaded()
     {
-        if (MapConfig.enabled)
+        if (Config.config.minimap.enabled)
         {
             if (Config.config.minimapAlt.enabled)
                 GlobalEventDispatcher.addEventListener(Defines.E_MM_ALT_MODE, this, setAltMode);
             Features.init();
         }
+    }
+
+    private var _isAltMode:Boolean = false;
+    public function get isAltMode():Boolean
+    {
+        return _isAltMode;
+    }
+    public function set isAltMode(value:Boolean):Void
+    {
+        _isAltMode = value;
     }
 
     // Dynamic circles and alt mode
@@ -120,9 +130,9 @@ class wot.Minimap.Minimap
     {
         //Logger.add("setAltMode: " + e.isDown);
         if (Config.config.hotkeys.minimapAltMode.onHold)
-            MapConfig.isAltMode = e.isDown;
+            isAltMode = e.isDown;
         else if (e.isDown)
-            MapConfig.isAltMode = !MapConfig.isAltMode;
+            isAltMode = !isAltMode;
         else
             return;
 

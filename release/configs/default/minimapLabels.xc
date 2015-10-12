@@ -5,138 +5,128 @@
 {
   // Textfields for tanks on minimap.
   // Текстовые поля для танков на миникарте.
-  "labels": {
-      "units": [
-        // Text fields
-        // Текстовые поля.
-        "fields": [
-          {
-            "flags": "player|ally|squad|enemy|teamKiller|lost|dead"
-            "css": "...",
-            "format": "...",
-            "shadow": { ... },
-            "alpha": "...",
-            "pos": { ... }
-            // Textfields antialias type.
-            // Тип сглаживания текстовых полей.
-            "antiAliasType": "advanced", // normal/advanced
-          }
-        ],
-      "units": {
-        "format": {
-          // Союзник.
-          "ally":           "<span class='mm_a'>{{vehicle}}</span>",
-          // Тимкиллер.
-          "teamkiller":     "<span class='mm_t'>{{vehicle}}</span>",
-          // Враг.
-          "enemy":          "<span class='mm_e'>{{vehicle}}</span>",
-          // Взводный.
-          "squad":          "<textformat leading='-2'><span class='mm_s'><i>{{name%.5s}}</i>\n{{vehicle}}</span></textformat>",
-          // Own marker or spectated subject.
-          // Свой маркер и маркер приёмника камеры наблюдения в случае смерти.
-          "oneself":        "",
-          // Out of radio range ally
-          // Союзник, с которым потеряна связь
-          "lostally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_la'><i>{{vehicle}}</i></span>",
-          // Out of radio range teamkiller
-          // Тимкиллер, с которым потеряна связь
-          "lostteamkiller": "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
-          // Lost enemy units.
-          // Противник, пропавший из засвета
-          "lost":           "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_l'><i>{{vehicle}}</i></span>",
-          // Out of radio range squadman
-          // Взводный, с которым потеряна связь
-          "lostsquad":      "<textformat leading='-4'><span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ls'><i>{{name%.5s}}</i>\n   {{vehicle}}</span></textformat>",
-          // Мертвый союзник.
-          "deadally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'></span>",
-          // Мертвый тимкиллер.
-          "deadteamkiller": "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_dt'></span>",
-          // Мертвый противник.
-          "deadenemy":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_de'></span>",
-          // Мертвый взводный.
-          "deadsquad":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{name%.5s}}</i></span>"
-        },
-        // CSS style (fonts and colors option)
-        // CSS стиль (настройка шрифтов и цветов)
-        "css": {
-          "ally":            ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
-          "teamkiller":      ".mm_t{font-family:$FieldFont; font-size:8px; color:#A6F8FF;}",
-          "enemy":           ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
-          "squad":           ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFD099;}",
-          "oneself":         ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}",
-          "lostally":       ".mm_la{font-family:$FieldFont; font-size:8px; color:#C8FFA6;} .mm_dot{font-family:Arial; font-size:17px; color:#B4E595;}",
-          "lostteamkiller": ".mm_lt{font-family:$FieldFont; font-size:8px; color:#A6F8FF;} .mm_dot{font-family:Arial; font-size:17px; color:#00D2E5;}",
-          "lost":            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#E59995;}",
-          "lostsquad":      ".mm_ls{font-family:$FieldFont; font-size:8px; color:#FFD099;} .mm_dot{font-family:Arial; font-size:17px; color:#E5BB8A;}",
-          "deadally":       ".mm_da{font-family:$FieldFont; font-size:8px; color:#6E8C5B;} .mm_dot{font-family:Arial; font-size:17px; color:#004D00;}",
-          "deadteamkiller": ".mm_dt{font-family:$FieldFont; font-size:8px; color:#5B898C;} .mm_dot{font-family:Arial; font-size:17px; color:#043A40;}",
-          "deadenemy":      ".mm_de{font-family:$FieldFont; font-size:8px; color:#996763;} .mm_dot{font-family:Arial; font-size:17px; color:#4D0300;}",
-          "deadsquad":      ".mm_ds{font-family:$FieldFont; font-size:8px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
-        },
-        // Fields shadow.
-        // Тени полей.
-        // "distance"- дистанция тени относительно поля, "angle"- угол тени при дистанции > 0, "alpha"- прозрачность, "blur"- размытие, "strength'- сила.
-        "shadow": {
-          "ally":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "teamkiller":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "enemy":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "squad":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "oneself":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "lostally":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 6, "strength": 4 },
-          "lostteamkiller":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 6, "strength": 4 },
-          "lost":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 6, "strength": 4 },
-          "lostsquad":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 6, "strength": 4 },
-          "deadally":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 },
-          "deadteamkiller":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 },
-          "deadenemy":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 },
-          "deadsquad":
-           { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 }
-        },
-        // Field offset relative to current icon (except lost - relative to enemy last seen position).
-        // Смещение полей относительно текущей иконки (кроме lost и dead- относительно последних координат видимой позиции).
-        "offset": {
-          "ally":           {"x": 3, "y": -2},
-          "teamkiller":     {"x": 3, "y": -2},
-          "enemy":          {"x": 3, "y": -2},
-          "squad":          {"x": 3, "y": -3},
-          "oneself":        {"x": 0, "y": 0},
-          "lostally":       {"x": -5, "y": -11},
-          "lostteamkiller": {"x": -5, "y": -11},
-          "lost":           {"x": -5, "y": -11},
-          "lostsquad":      {"x": -5, "y": -11},
-          "deadally":       {"x": -5, "y": -11},
-          "deadteamkiller": {"x": -5, "y": -11},
-          "deadenemy":      {"x": -5, "y": -11},
-          "deadsquad":      {"x": -5, "y": -11}
-        },
-        // Прозрачность текстовых полей.
-        "alpha" : {
-          "ally": 100,
-          "teamkiller": 100,
-          "enemy": 100,
-          "squad": 100,
-          "oneself": 100,
-          "lostally": 70,
-          "lostteamkiller": 70,
-          "lost": 70,
-          "lostsquad": 70,
-          "deadally": 50,
-          "deadteamkiller": 50,
-          "deadenemy": 0,
-          "deadsquad": 50
-        }
-      }
+  // TODO: documentation
+  //  {
+  //    "flags": [ "player", "ally", "squad", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
+  //    "css": "...",
+  //    "format": "...",
+  //    "shadow": { ... },
+  //    "alpha": "...",
+  //    "position": { ... },
+  //    "antiAliasType": "advanced" // normal/advanced
+  //  }
+  "defaultItem": {
+    "flags": [ "player", "ally", "squad", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
+    "css": "font-family:$FieldFont; font-size:8px;",
+    "shadow": { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
+    "alpha": 100,
+    "pos": { "x": 0, "y": 0 },
+    "antiAliasType": "advanced"
+  },
+  "colors": {
+    "txt": {
+      "ally_alive":          "0xC8FFA6",
+      "ally_dead":           "0x6E8C5B",
+      "ally_blowedup":       "0x6E8C5B",
+      "squadman_alive":      "0xFFD099",
+      "squadman_dead":       "0x997C5C",
+      "squadman_blowedup":   "0x997C5C",
+      "teamKiller_alive":    "0xA6F8FF",
+      "teamKiller_dead":     "0x5B898C",
+      "teamKiller_blowedup": "0x5B898C",
+      "enemy_alive":         "0xFCA9A4",
+      "enemy_dead":          "0x996763",
+      "enemy_blowedup":      "0x996763"
+    },
+    "dot": {
+      "ally_alive":          "0xC8FFA6",
+      "ally_dead":           "0x004D00",
+      "ally_blowedup":       "0x004D00",
+      "squadman_alive":      "0xFFD099",
+      "squadman_dead":       "0x663800",
+      "squadman_blowedup":   "0x663800",
+      "teamKiller_alive":    "0xA6F8FF",
+      "teamKiller_dead":     "0x043A40",
+      "teamKiller_blowedup": "0x043A40",
+      "enemy_alive":         "0xFCA9A4",
+      "enemy_dead":          "0x4D0300",
+      "enemy_blowedup":      "0x4D0300"
+    },
+    "lost_dot": {
+      "ally_alive":          "0xB4E595",
+      "ally_dead":           "0x004D00",
+      "ally_blowedup":       "0x004D00",
+      "squadman_alive":      "0xE5BB8A",
+      "squadman_dead":       "0x663800",
+      "squadman_blowedup":   "0x663800",
+      "teamKiller_alive":    "0x00D2E5",
+      "teamKiller_dead":     "0x043A40",
+      "teamKiller_blowedup": "0x043A40",
+      "enemy_alive":         "0xE59995",
+      "enemy_dead":          "0x4D0300",
+      "enemy_blowedup":      "0x4D0300"
     }
+  },
+  "labels": [
+    // "spotted", "alive"
+    //   "ally", "enemy", "squad", "teamKiller"
+    {
+      "$ref": { "path":"defaultItem" },
+      "flags": [ "ally", "enemy", "squad", "teamKiller", "spotted", "alive" ],
+      "format": "<font color='{{c:system:minimap.colors.txt}}'>{{vehicle}}</font>",
+      "position": { "x": 3, "y": -2 }
+    },
+    //   "squad"
+    {
+      "$ref": { "path":"defaultItem" },
+      "flags": [ "squad", "spotted", "alive" ],
+      "format": "<i>{{name%.5s}}</i>",
+      "position": { "x": 3, "y": 8 }
+    },
+    // "lost", "alive"
+    //   "ally", "enemy", "squad", "teamKiller"
+    {
+      "$ref": { "path":"defaultItem" },
+      "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
+      "css": "font-family:Arial; font-size:17px; color:{{c:system:minimap.colors.lost_dot}};",
+      "format": "{{vehicle-class}}",
+      "alpha": 70,
+    },
+    {
+      "$ref": { "path":"defaultItem" },
+      "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
+      "format": "<i>{{vehicle}}</i>",
+      "alpha": 70,
+      "position": { "x": -5, "y": -11 }
+    },
+    //   "squad"
+    {
+      "$ref": { "path":"defaultItem" },
+      "flags": [ "squad", "lost", "alive" ],
+      "format": "<i>{{name%.5s}}</i>",
+      "alpha": 70,
+      "position": { "x": -5, "y": -3 }
+    },
+    // "dead"
+    //   "ally", "enemy", "squad", "teamKiller"
+    {
+      "$ref": { "path":"defaultItem" },
+      "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
+      "css": "font-family:Arial; font-size:17px; color:{{c:system:minimap.colors.dot}};",
+      "format": "{{vehicle-class}}",
+      "shadow": { "$ref": { "path":"defaultItem.shadow" }, "strength": 3 },
+      "alpha": 50,
+      "position": { "x": -5, "y": -11 }
+    },
+    //   "squad"
+    {
+      "$ref": { "path":"defaultItem" },
+      "flags": [ "squad", "dead" ],
+      "css": ".txt{font-family:$FieldFont; font-size:8px; color:#997C5C;} .dot{font-family:Arial; font-size:17px; color:#663800;}",
+      "format": "<font color='{{c:system:minimap.colors.txt}}'><i>{{name%.5s}}</i></font>",
+      "shadow": { "$ref": { "path":"defaultItem.shadow" }, "strength": 3 },
+      "alpha": 50,
+      "position": { "x": -5, "y": -3 }
+    }
+  ]
 }

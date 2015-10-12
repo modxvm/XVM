@@ -288,6 +288,12 @@ class com.xvm.Macros
                 }
             }
 
+            if (parts[PART_NAME] == "c:system" && parts[PART_NORM])
+            {
+                options._args = parts[PART_NORM];
+                parts[PART_NORM] = null;
+            }
+
             res += FormatMacro(macro, parts, value, vehId, options);
         }
 
@@ -855,7 +861,7 @@ class com.xvm.Macros
             // {{c:system}}
             pdata["c:system"] = function(o):String
             {
-                return "#" + Strings.padLeft(ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp).toString(16), 6, "0");
+                return "#" + Strings.padLeft(ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp, o._args).toString(16), 6, "0");
             }
 
             // hitlog

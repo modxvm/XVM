@@ -81,7 +81,7 @@ class wot.Minimap.view.Zoom
     private function zoomIn():Void
     {
         increaseSize();
-        if (MapConfig.zoomCentered)
+        if (Config.config.minimap.zoom.centered)
         {
             centerPosition();
         }
@@ -118,7 +118,7 @@ class wot.Minimap.view.Zoom
 
     private function increaseSize():Void
     {
-        var side:Number = Stage.height - MapConfig.zoomPixelsBack;
+        var side:Number = Stage.height - Config.config.minimap.zoom.pixelsBack;
         minimap.setSize(side, side);
         minimap.invalidateMarkers();
         minimap.validateNow();

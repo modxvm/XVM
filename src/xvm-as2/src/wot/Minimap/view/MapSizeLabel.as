@@ -13,25 +13,25 @@ class wot.Minimap.view.MapSizeLabel
 
     public function MapSizeLabel()
     {
-        var offset:Point = MapConfig.mapSizeLabelOffset;
+        var cfg:Object = Config.config.minimap.mapSize;
         tf = bg.createTextField(MAP_SIZE_TEXT_FIELD_NAME, bg.getNextHighestDepth(),
-            offset.x, offset.y, MapConfig.mapSizeLabelWidth, MapConfig.mapSizeLabelHeight);
+            cfg.offsetX, cfg.offsetY, cfg.width, cfg.height);
         tf.antiAliasType = "advanced";
         tf.html = true;
         tf.multiline = true;
         tf.selectable = false;
 
         var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(".mapsize{" + MapConfig.mapSizeLabelCss + "}");
+        style.parseCSS(".mapsize{" + cfg.css + "}");
         tf.styleSheet = style;
 
-        tf.htmlText = "<span class='mapsize'>" + defineLabelText(MapConfig.mapSizeLabelFormat) + "</span>";
+        tf.htmlText = "<span class='mapsize'>" + defineLabelText(cfg.format) + "</span>";
 
-        tf._alpha = MapConfig.mapSizeLabelAlpha;
+        tf._alpha = cfg.alpha;
 
-        if (MapConfig.mapSizeLabelShadowEnabled)
+        if (cfg.shadow.enabled)
         {
-            tf.filters = [MapConfig.mapSizeLabelShadow];
+            tf.filters = [ Utils.extractShadowFilter(cfg.shadow) ];
         }
     }
 

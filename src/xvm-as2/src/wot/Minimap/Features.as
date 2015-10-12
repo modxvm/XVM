@@ -53,7 +53,7 @@ class wot.Minimap.Features
 
     public function Features()
     {
-        if (!MapConfig.enabled)
+        if (!Config.config.minimap.enabled)
             return;
 
         markerScaling = new MarkerScaling();
@@ -138,7 +138,7 @@ class wot.Minimap.Features
      */
     private function setBGMapImageAlpha():Void
     {
-        MinimapProxy.wrapper.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
+        MinimapProxy.wrapper.backgrnd._alpha = Config.config.minimap.mapBackgroundImageAlpha;
     }
 
     /**
@@ -170,7 +170,8 @@ class wot.Minimap.Features
             delete mapSizeLabel;
             mapSizeLabel = null;
         }
-        if (MapConfig.mapSizeLabelEnabled)
+
+        if (Config.config.minimap.mapSize.enabled)
         {
             mapSizeLabel = new MapSizeLabel();
         }
@@ -190,7 +191,7 @@ class wot.Minimap.Features
     private function onCameraUpdated(e:MinimapEvent):Void
     {
         var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
-        if (MapConfig.hideCameraTriangle)
+        if (Config.config.minimap.hideCameraTriangle)
         {
             if (camera._currentframe != 2)
             {
@@ -208,7 +209,7 @@ class wot.Minimap.Features
 
         camera.vehicleNameTextFieldClassic._visible = false;
         camera.vehicleNameTextFieldAlt._visible = false;
-        camera._alpha = MapConfig.cameraAlpha;
+        camera._alpha = Config.config.minimap.cameraAlpha;
     }
 
     /**
@@ -219,7 +220,7 @@ class wot.Minimap.Features
     private function setPlayerIconAlpha():Void
     {
         var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.selfEntry;
-        selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
+        selfIcon.selfIcon._alpha = Config.config.minimap.selfIconAlpha;
     }
 
     /**
@@ -234,7 +235,8 @@ class wot.Minimap.Features
             delete circles;
             circles = null;
         }
-        if (MapConfig.circles.enabled)
+
+        if (Config.config.minimap.circles.enabled)
         {
             circles = new Circles();
         }
@@ -253,7 +255,8 @@ class wot.Minimap.Features
             delete lines;
             lines = null;
         }
-        if (MapConfig.linesEnabled)
+
+        if (Config.config.minimap.lines.enabled)
         {
             lines = new Lines();
         }
@@ -270,7 +273,8 @@ class wot.Minimap.Features
             delete square;
             square = null;
         }
-        if (MapConfig.squareEnabled)
+
+        if (Config.config.minimap.square.enabled)
         {
             square = new Square();
         }

@@ -2,7 +2,7 @@
  * ...
  * @author Maxim Schedriviy
  */
-import com.xvm.Config;
+import com.xvm.*;
 
 class com.xvm.ColorsManager
 {
@@ -40,8 +40,17 @@ class com.xvm.ColorsManager
     /**
      * Get system color value for current state
      */
-    public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):Number
+    public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean, configSectionPath:String):Number
     {
+        var section:Object;
+        if (!configSectionPath)
+        {
+            section = Config.config.colors.system;
+        }
+        else
+        {
+            section = Utils.getObjectValueByPath(Config.config, configSectionPath);
+        }
         var key: String = entityName + "_";
         key += isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead";
         //com.xvm.Logger.add("getSystemColor():" + key + " " + Config.config.colors.system[key]);
