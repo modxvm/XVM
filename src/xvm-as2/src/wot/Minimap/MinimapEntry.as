@@ -228,7 +228,7 @@ class wot.Minimap.MinimapEntry
 
     private function onEntrySpotted()
     {
-        if (!Config.config.minimap.enabled || !Config.config.minimap.labels.formats || Config.config.minimap.labels.formats.length == 0)
+        if (!Minimap.config.enabled || !Minimap.config.labels.enabled || !Minimap.config.labels.formats || Minimap.config.labels.formats.length == 0)
             return;
 
         this.labelMc = LabelsContainer.getLabel(playerId);

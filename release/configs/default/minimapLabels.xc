@@ -79,6 +79,7 @@
         "SPG": "&#x2D;"
       }
     },
+    "enabled": true,
     "formats": [
       // "spotted", "alive"
       //   "ally", "enemy", "squad", "teamKiller"

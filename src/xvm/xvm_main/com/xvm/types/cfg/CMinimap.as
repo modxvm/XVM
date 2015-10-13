@@ -20,6 +20,6 @@ package com.xvm.types.cfg
         public var circles:CMinimapCircles;
         public var lines:CMinimapLines;
         public var mapSize:CMinimapMapSize;
-        public var labels:Array;
+        public var labels:CMinimapLabels;
     }
 }

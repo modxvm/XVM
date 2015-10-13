@@ -1,6 +1,5 @@
-import com.xvm.Logger;
-import flash.external.ExternalInterface;
-import wot.Minimap.model.mapSize.MapInfoData;
+import com.xvm.*;
+import wot.Minimap.model.mapSize.*;
 
 /**
  * Defines real map side size in meters.
@@ -42,11 +41,9 @@ class wot.Minimap.model.mapSize.MapSizeModel
          * Map must be added in MapInfoData.
          */
         var mapText:String = _root.statsData.arenaData.mapText;
-        cellSide = MapInfoData.SizeByLocalizedMapName(mapText);
-        if (!ExternalInterface.available)
-            Logger.add("Minimap: Error - ExternalInterface not ready");
         Logger.add("Minimap: localized map name: " + mapText);
 
+        cellSide = MapInfoData.SizeByLocalizedMapName(mapText);
         if (!cellSide)
         {
             /** This can be seen only when map isn't set in MapInfoData */

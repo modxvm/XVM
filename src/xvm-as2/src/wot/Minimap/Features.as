@@ -53,7 +53,7 @@ class wot.Minimap.Features
 
     public function Features()
     {
-        if (!Config.config.minimap.enabled)
+        if (!Minimap.config.enabled)
             return;
 
         markerScaling = new MarkerScaling();
@@ -138,7 +138,7 @@ class wot.Minimap.Features
      */
     private function setBGMapImageAlpha():Void
     {
-        MinimapProxy.wrapper.backgrnd._alpha = Config.config.minimap.mapBackgroundImageAlpha;
+        MinimapProxy.wrapper.backgrnd._alpha = Minimap.config.mapBackgroundImageAlpha;
     }
 
     /**
@@ -171,7 +171,7 @@ class wot.Minimap.Features
             mapSizeLabel = null;
         }
 
-        if (Config.config.minimap.mapSize.enabled)
+        if (Minimap.config.mapSize.enabled)
         {
             mapSizeLabel = new MapSizeLabel();
         }
@@ -191,7 +191,7 @@ class wot.Minimap.Features
     private function onCameraUpdated(e:MinimapEvent):Void
     {
         var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
-        if (Config.config.minimap.hideCameraTriangle)
+        if (Minimap.config.hideCameraTriangle)
         {
             if (camera._currentframe != 2)
             {
@@ -209,7 +209,7 @@ class wot.Minimap.Features
 
         camera.vehicleNameTextFieldClassic._visible = false;
         camera.vehicleNameTextFieldAlt._visible = false;
-        camera._alpha = Config.config.minimap.cameraAlpha;
+        camera._alpha = Minimap.config.cameraAlpha;
     }
 
     /**
@@ -220,7 +220,7 @@ class wot.Minimap.Features
     private function setPlayerIconAlpha():Void
     {
         var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.selfEntry;
-        selfIcon.selfIcon._alpha = Config.config.minimap.selfIconAlpha;
+        selfIcon.selfIcon._alpha = Minimap.config.selfIconAlpha;
     }
 
     /**
@@ -236,7 +236,7 @@ class wot.Minimap.Features
             circles = null;
         }
 
-        if (Config.config.minimap.circles.enabled)
+        if (Minimap.config.circles.enabled)
         {
             circles = new Circles();
         }
@@ -256,7 +256,7 @@ class wot.Minimap.Features
             lines = null;
         }
 
-        if (Config.config.minimap.lines.enabled)
+        if (Minimap.config.lines.enabled)
         {
             lines = new Lines();
         }
@@ -274,7 +274,7 @@ class wot.Minimap.Features
             square = null;
         }
 
-        if (Config.config.minimap.square.enabled)
+        if (Minimap.config.square.enabled)
         {
             square = new Square();
         }

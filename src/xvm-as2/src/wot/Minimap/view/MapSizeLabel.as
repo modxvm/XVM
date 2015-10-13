@@ -1,7 +1,5 @@
 import com.xvm.*;
-import flash.geom.*;
 import wot.Minimap.*;
-import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.model.mapSize.*;
 
 class wot.Minimap.view.MapSizeLabel
@@ -13,7 +11,7 @@ class wot.Minimap.view.MapSizeLabel
 
     public function MapSizeLabel()
     {
-        var cfg:Object = Config.config.minimap.mapSize;
+        var cfg:Object = Minimap.config.mapSize;
         tf = bg.createTextField(MAP_SIZE_TEXT_FIELD_NAME, bg.getNextHighestDepth(),
             cfg.offsetX, cfg.offsetY, cfg.width, cfg.height);
         tf.antiAliasType = "advanced";

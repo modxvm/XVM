@@ -1,10 +1,8 @@
 import com.xvm.*;
 import com.xvm.DataTypes.*;
-import wot.Minimap.dataTypes.*;
-import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.Minimap;
 import wot.Minimap.dataTypes.cfg.*;
 import wot.Minimap.shapes.*;
-import wot.PlayersPanel.*;
 
 /**
  * Draws circles around player to indicate distances.
@@ -50,7 +48,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             circleCfg.$radius = radius;
         }
 
-        var cfg:Object = Config.config.minimap.circles;
+        var cfg:Object = Minimap.config.circles;
         var ci:Object = Config.minimapCirclesData;
         //Logger.addObject(cfg, 2);
         //Logger.addObject(ci);
@@ -135,7 +133,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     {
         var cfg:Array = [];
 
-        var view:Array = Config.config.minimap.circles.view;
+        var view:Array = Minimap.config.circles.view;
         var len:Number = view.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -153,7 +151,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         }
 
         /** Special vehicle type dependent circle configs */
-        var spec:Array = Config.config.minimap.circles.special;
+        var spec:Array = Minimap.config.circles.special;
         len = spec.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -177,7 +175,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     {
         var cfg:Array = [];
 
-        var view:Array = Config.config.minimap.circles.view;
+        var view:Array = Minimap.config.circles.view;
         var len:Number = view.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -281,7 +279,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     // http://forum.worldoftanks.ru/index.php?/topic/1047590-/
     private function onViewRangeChanged()
     {
-        var cfg:Object = Config.config.minimap.circles;
+        var cfg:Object = Minimap.config.circles;
 
         // Calculations
         var ci:Object = Config.minimapCirclesData;

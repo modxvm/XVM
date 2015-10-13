@@ -3,7 +3,6 @@ import com.xvm.DataTypes.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.shapes.*;
-import wot.PlayersPanel.*;
 
 class wot.Minimap.shapes.Square extends ShapeAttach
 {
@@ -20,7 +19,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
     public function Square()
     {
         // Disable square mod if user is artillery class
-        if (!Config.config.minimap.square.artilleryEnabled && isArtillery())
+        if (!Minimap.config.square.artilleryEnabled && isArtillery())
             return;
 
         super();
@@ -52,7 +51,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function defineStyle():Void
     {
-        var cfg:Object = Config.config.minimap.square;
+        var cfg:Object = Minimap.config.square;
         squareClip.lineStyle(cfg.thickness, parseInt(cfg.color, 16), cfg.alpha, null, null, "none");
     }
 

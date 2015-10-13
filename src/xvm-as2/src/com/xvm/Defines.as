@@ -118,17 +118,28 @@ class com.xvm.Defines
     public static var E_MODULE_REPAIRED = "module_repaired";
 
     // BattleTypes
-    public static var BATTLE_TYPE_UNKNOWN = 0;
-    public static var BATTLE_TYPE_REGULAR = 1;
-    public static var BATTLE_TYPE_TRAINING = 2;
-    public static var BATTLE_TYPE_COMPANY = 3;
-    public static var BATTLE_TYPE_TOURNAMENT = 4;
-    public static var BATTLE_TYPE_CLAN = 5;
-    public static var BATTLE_TYPE_TUTORIAL = 6;
-    public static var BATTLE_TYPE_CYBERSPORT = 7;
-    public static var BATTLE_TYPE_HISTORICAL = 8;
-    public static var BATTLE_TYPE_EVENT_BATTLES = 9;
-    public static var BATTLE_TYPE_SORTIE = 10;
-    public static var BATTLE_TYPE_FORT_BATTLE = 11;
-    public static var BATTLE_TYPE_RATED_CYBERSPORT = 12;
+    public static var BATTLE_TYPE_UNKNOWN:Number = 0;
+    public static var BATTLE_TYPE_REGULAR:Number = 1;
+    public static var BATTLE_TYPE_TRAINING:Number = 2;
+    public static var BATTLE_TYPE_COMPANY:Number = 3;
+    public static var BATTLE_TYPE_TOURNAMENT:Number = 4;
+    public static var BATTLE_TYPE_CLAN:Number = 5;
+    public static var BATTLE_TYPE_TUTORIAL:Number = 6;
+    public static var BATTLE_TYPE_CYBERSPORT:Number = 7;
+    public static var BATTLE_TYPE_HISTORICAL:Number = 8;
+    public static var BATTLE_TYPE_EVENT_BATTLES:Number = 9;
+    public static var BATTLE_TYPE_SORTIE:Number = 10;
+    public static var BATTLE_TYPE_FORT_BATTLE:Number = 11;
+    public static var BATTLE_TYPE_RATED_CYBERSPORT:Number = 12;
+
+    // alive/dead flags
+    public static var ALIVE_FLAG_ALIVE:Number = 0x01;
+    public static var ALIVE_FLAG_DEAD:Number  = 0x02;
+    public static var ALIVE_FLAG_ANY:Number   = 0x03;
+
+    // Spotted status flags
+    public static var SPOTTED_STATUS_NEVER_SEEN:Number = 0x01;
+    public static var SPOTTED_STATUS_SPOTTED:Number =    0x02;
+    public static var SPOTTED_STATUS_LOST:Number =       0x04;
+    public static var SPOTTED_STATUS_ANY:Number =        0x06;
 }
