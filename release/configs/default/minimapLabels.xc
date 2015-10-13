@@ -29,54 +29,54 @@
     "data": {
       "colors": {
         "txt": {
-          "ally_alive":          "0xC8FFA6",
-          "ally_dead":           "0x6E8C5B",
-          "ally_blowedup":       "0x6E8C5B",
-          "squadman_alive":      "0xFFD099",
-          "squadman_dead":       "0x997C5C",
-          "squadman_blowedup":   "0x997C5C",
-          "teamKiller_alive":    "0xA6F8FF",
-          "teamKiller_dead":     "0x5B898C",
-          "teamKiller_blowedup": "0x5B898C",
-          "enemy_alive":         "0xFCA9A4",
-          "enemy_dead":          "0x996763",
-          "enemy_blowedup":      "0x996763"
+          "ally_alive":          "#C8FFA6",
+          "ally_dead":           "#6E8C5B",
+          "ally_blowedup":       "#6E8C5B",
+          "squadman_alive":      "#FFD099",
+          "squadman_dead":       "#997C5C",
+          "squadman_blowedup":   "#997C5C",
+          "teamKiller_alive":    "#A6F8FF",
+          "teamKiller_dead":     "#5B898C",
+          "teamKiller_blowedup": "#5B898C",
+          "enemy_alive":         "#FCA9A4",
+          "enemy_dead":          "#996763",
+          "enemy_blowedup":      "#996763"
         },
         "dot": {
-          "ally_alive":          "0xC8FFA6",
-          "ally_dead":           "0x004D00",
-          "ally_blowedup":       "0x004D00",
-          "squadman_alive":      "0xFFD099",
-          "squadman_dead":       "0x663800",
-          "squadman_blowedup":   "0x663800",
-          "teamKiller_alive":    "0xA6F8FF",
-          "teamKiller_dead":     "0x043A40",
-          "teamKiller_blowedup": "0x043A40",
-          "enemy_alive":         "0xFCA9A4",
-          "enemy_dead":          "0x4D0300",
-          "enemy_blowedup":      "0x4D0300"
+          "ally_alive":          "#C8FFA6",
+          "ally_dead":           "#004D00",
+          "ally_blowedup":       "#004D00",
+          "squadman_alive":      "#FFD099",
+          "squadman_dead":       "#663800",
+          "squadman_blowedup":   "#663800",
+          "teamKiller_alive":    "#A6F8FF",
+          "teamKiller_dead":     "#043A40",
+          "teamKiller_blowedup": "#043A40",
+          "enemy_alive":         "#FCA9A4",
+          "enemy_dead":          "#4D0300",
+          "enemy_blowedup":      "#4D0300"
         },
         "lost_dot": {
-          "ally_alive":          "0xB4E595",
-          "ally_dead":           "0x004D00",
-          "ally_blowedup":       "0x004D00",
-          "squadman_alive":      "0xE5BB8A",
-          "squadman_dead":       "0x663800",
-          "squadman_blowedup":   "0x663800",
-          "teamKiller_alive":    "0x00D2E5",
-          "teamKiller_dead":     "0x043A40",
-          "teamKiller_blowedup": "0x043A40",
-          "enemy_alive":         "0xE59995",
-          "enemy_dead":          "0x4D0300",
-          "enemy_blowedup":      "0x4D0300"
+          "ally_alive":          "#B4E595",
+          "ally_dead":           "#004D00",
+          "ally_blowedup":       "#004D00",
+          "squadman_alive":      "#E5BB8A",
+          "squadman_dead":       "#663800",
+          "squadman_blowedup":   "#663800",
+          "teamKiller_alive":    "#00D2E5",
+          "teamKiller_dead":     "#043A40",
+          "teamKiller_blowedup": "#043A40",
+          "enemy_alive":         "#E59995",
+          "enemy_dead":          "#4D0300",
+          "enemy_blowedup":      "#4D0300"
         }
       },
       "vtype": {
-        "LT": "&#x3A;",
-        "MT": "&#x3B;",
-        "HT": "&#x3F;",
-        "TD": "&#x2E;",
-        "SPG": "&#x2D;"
+        "LT":  "<font face='xvm'>&#x3A;</font>",
+        "MT":  "<font face='xvm'>&#x3B;</font>",
+        "HT":  "<font face='xvm'>&#x3F;</font>",
+        "TD":  "<font face='xvm'>&#x2E;</font>",
+        "SPG": "<font face='xvm'>&#x2D;</font>"
       }
     },
     "enabled": true,
@@ -86,7 +86,7 @@
       {
         "$ref": { "path":"defaultItem" },
         "flags": [ "ally", "enemy", "squad", "teamKiller", "spotted", "alive" ],
-        "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'>{{vehicle}}</font>",
+        "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'>{{vehicle}}</font>",
         "x": 3,
         "y": -2
       },
@@ -94,7 +94,7 @@
       {
         "$ref": { "path":"defaultItem" },
         "flags": [ "squad", "spotted", "alive" ],
-        "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'><i>{{name%.5s}}</i></font>",
+        "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'><i>{{name%.5s}}</i></font>",
         "x": 3,
         "y": 8
       },
@@ -103,13 +103,13 @@
       {
         "$ref": { "path":"defaultItem" },
         "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
-        "format": "<font face='Arial' size='17' color='{{c:system:minimap.labels.data.colors.lost_dot}}'>{{.minimap.labels.data.vtype.{{vtype}}}}</font>",
+        "format": "<font face='Arial' size='17' color='{{.minimap.labels.data.colors.lost_dot.{{sys-color-key}}}}'>{{.minimap.labels.data.vtype.{{vtype-key}}}}</font>",
         "alpha": 70
       },
       {
         "$ref": { "path":"defaultItem" },
         "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
-        "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'><i>{{vehicle}}</i></font>",
+        "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'><i>{{vehicle}}</i></font>",
         "alpha": 70,
         "x": -5,
         "y": -11
@@ -118,7 +118,7 @@
       {
         "$ref": { "path":"defaultItem" },
         "flags": [ "squad", "lost", "alive" ],
-        "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'><i>{{name%.5s}}</i></font>",
+        "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'><i>{{name%.5s}}</i></font>",
         "alpha": 70,
         "x": -5,
         "y": -3
@@ -128,7 +128,7 @@
       {
         "$ref": { "path":"defaultItem" },
         "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
-        "format": "<font face='Arial' size='17' color='{{c:system:minimap.labels.data.colors.dot}}'>{{.minimap.labels.data.vtype.{{vtype}}}}</font>",
+        "format": "<font face='Arial' size='17' color='{{.minimap.labels.data.colors.dot.{{sys-color-key}}}}'>{{.minimap.labels.data.vtype.{{vtype-key}}}}</font>",
         "shadow": { "$ref": { "path":"defaultItem.shadow" }, "strength": 3 },
         "alpha": 50,
         "x": -5,
@@ -138,7 +138,7 @@
       {
         "$ref": { "path":"defaultItem" },
         "flags": [ "squad", "dead" ],
-        "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'><i>{{name%.5s}}</i></font>",
+        "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'><i>{{name%.5s}}</i></font>",
         "shadow": { "$ref": { "path":"defaultItem.shadow" }, "strength": 3 },
         "alpha": 50,
         "x": -5,

@@ -275,6 +275,7 @@ class com.xvm.Macros
                     case "vehicle":
                     case "vehiclename":
                     case "vehicle-short":
+                    case "vtype-key":
                     case "vtype":
                     case "vtype-l":
                     case "c:vtype":
@@ -286,12 +287,6 @@ class com.xvm.Macros
                         isStaticMacro = false;
                         break;
                 }
-            }
-
-            if (parts[PART_NAME] == "c:system" && parts[PART_NORM])
-            {
-                options._args = parts[PART_NORM];
-                parts[PART_NORM] = null;
             }
 
             res += FormatMacro(macro, parts, value, vehId, options);
@@ -746,12 +741,14 @@ class com.xvm.Macros
                     m_globals["maxhp"] = vdata.hpTop;
                 // {{veh-id}}
                 pdata["veh-id"] = vdata.vid;
-                // {{vehicle}}
+                // {{vehicle}} - Chaffee
                 pdata["vehicle"] = vdata.localizedName;
                 // {{vehiclename}} - usa-M24_Chaffee
                 pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
-                // {{vehicle-short}}
+                // {{vehicle-short}} - Chaff
                 pdata["vehicle-short"] = vdata.shortName;
+                // {{vtype-key}} - MT
+                pdata["vtype-key"] = vdata.vtype;
                 // {{vtype}}
                 pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
                 // {{vtype-l}} - Medium Tank
@@ -858,10 +855,16 @@ class com.xvm.Macros
             // {{c:dmg-kind}}
             pdata["c:dmg-kind"] = function(o):String { return o.damageType == null ? null : GraphicsUtil.GetDmgKindValue(o.damageType); }
 
+            // {{sys-color-key}}
+            pdata["sys-color-key"] = function(o):String
+            {
+                return ColorsManager.getSystemColorKey(o.entityName, o.dead, o.blowedUp);
+            }
+
             // {{c:system}}
             pdata["c:system"] = function(o):String
             {
-                return "#" + Strings.padLeft(ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp, false, o._args).toString(16), 6, "0");
+                return "#" + Strings.padLeft(ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp).toString(16), 6, "0");
             }
 
             // hitlog

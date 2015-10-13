@@ -135,7 +135,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
             var force:Boolean = invalidateList[playerIdStr] == INVALIDATE_TYPE_FORCE;
 
-            Logger.add(bs.playerName + " " + bs.entryName + ": " + prevSpottedStatus + " " + currSpottedStatus + " " + force);
+            //Logger.add("(draw) " + bs.playerName + ": " + bs.entryName + ": " + prevSpottedStatus + " " + currSpottedStatus + " " + force);
 
             if ((prevSpottedStatus != currSpottedStatus) || force)
             {
@@ -241,20 +241,20 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function updateTextFields(labelMc:MovieClip):Void
     {
-        var formats:Array = Minimap.config.labels.formats;
-        if (formats)
+        var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
+        for (var name in labelMc)
         {
-            var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
-            var len:Number = formats.length;
-            for (var i:Number = 0; i < formats.length; ++i)
+            if (labelMc[name] instanceof TextField)
             {
-                updateTextField(labelMc["tf" + i], bs);
+                updateTextField(labelMc[name], bs);
             }
         }
     }
 
     private function createTextField(labelMc:MovieClip, n:Number, cfg:LabelFieldCfg, bs:BattleStateData):Void
     {
+        //Logger.add(bs.entryName + " " + (bs.spottedStatus == Defines.SPOTTED_STATUS_SPOTTED) + " " + (!bs.dead) + " => [" + cfg.flags.join(", ") + "] = " + isAllowedState(cfg.flags, bs));
+
         if (!isAllowedState(cfg.flags, bs))
             return;
 
@@ -331,9 +331,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function updateTextField(textField:TextField, bs:BattleStateData):Void
     {
-        var cfg:LabelFieldCfg = textField.cfg;
-        var text:String = Macros.Format(bs.playerName, cfg.format, bs);
-        Logger.add(bs.playerName + ": " + text);
+        var text:String = Macros.Format(bs.playerName, textField.cfg.format, bs);
+        Logger.add(bs.playerName + ": " + text + " <= " + textField.cfg.format);
         textField.htmlText = text;
     }
 }

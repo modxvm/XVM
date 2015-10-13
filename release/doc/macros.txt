@@ -31,6 +31,7 @@ Legend:
 │ S │ {{vehicle-short}}  │   │ X │ X │ X │ X │ X │ X │ shortened vehicle name
 │ S │ {{vtype}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle type (text substitution from config)
 │ S │ {{vtype-l}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle class (text substitution from locale)
+│ S │ {{vtype-key}}      │ X │ X │ X │ X │ X │ X │ X │ vehicle type table key value
 │ S │ {{c:vtype}}        │ X │ X │ X │ X │ X │ X │ X │ color depending on vehicle type
 │ S │ {{battletier-min}} │ X │ X │ X │ X │ X │ X │ X │ minimal vehicle battle tier
 │ S │ {{battletier-max}} │ X │ X │ X │ X │ X │ X │ X │ maximal vehicle battle tier
@@ -55,8 +56,8 @@ Legend:
 │ D │ {{c:hp-ratio}}     │   │ X │ X │ X │ X │ X │ X │ color depending on current health ratio (only in vehicle markers)
 │ D │ {{a:hp}}           │   │ X │ X │ X │ X │ X │ X │ transparency depending on current health points (only in vehicle markers)
 │ D │ {{a:hp-ratio}}     │   │ X │ X │ X │ X │ X │ X │ transparency depending on current health ratio (only in vehicle markers)
+│ D │ {{sys-color-key}}  │   │ X │ X │ X │ X │   │   │ key value for system color table
 │ D │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
-│ D │ {{c:system:path}}  │   │ X │ X │ X │ X │   │   │ get system color value from the global config path
 │ D │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ Flag for player selected in the personal cabinet or determined from the client language

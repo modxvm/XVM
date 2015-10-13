@@ -38,27 +38,22 @@ class com.xvm.ColorsManager
     }
 
     /**
-     * Get system color value for current state
+     * Get system color key for current state
      */
-    public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean, configSectionPath:String):Number
+    public static function getSystemColorKey(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):String
     {
-        var section:Object;
-        if (!configSectionPath)
-        {
-            section = Config.config.colors.system;
-        }
-        else
-        {
-            section = Utils.getObjectValueByPath(Config.config, configSectionPath);
-        }
-        var key: String = entityName + "_";
-        key += isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead";
-        //com.xvm.Logger.add("getSystemColor():" + key + " " + Config.config.colors.system[key]);
-        return parseInt(Config.config.colors.system[key]);
+        return entityName + "_" + (isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead");
     }
 
-    public static function getDamageSystemColor(damageSource:String, damageDest:String, damageType:String,
-        isDead:Boolean, isBlowedUp:Boolean):Number
+    /**
+     * Get system color value for current state
+     */
+    public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):Number
+    {
+        return parseInt(Config.config.colors.system[getSystemColorKey(entityName, isDead, isBlowedUp, isBase)]);
+    }
+
+    public static function getDamageSystemColor(damageSource:String, damageDest:String, damageType:String, isDead:Boolean, isBlowedUp:Boolean):Number
     {
         switch (damageType)
         {
