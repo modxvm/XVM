@@ -231,7 +231,6 @@ class wot.Minimap.MinimapEntry
         if (!Minimap.config.enabled || !Minimap.config.labels.enabled || !Minimap.config.labels.formats || Minimap.config.labels.formats.length == 0)
             return;
 
-        this.labelMc = LabelsContainer.getLabel(playerId);
         if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
         {
             if (wrapper.orig_entryName == null)
@@ -239,7 +238,11 @@ class wot.Minimap.MinimapEntry
             wrapper.setEntryName(MinimapConstants.STATIC_ICON_CONTROL);
         }
 
-        setLabelToMimicEntryMoves();
+        if (playerId)
+        {
+            this.labelMc = LabelsContainer.getLabel(playerId);
+            setLabelToMimicEntryMoves();
+        }
     }
 
     private function setLabelToMimicEntryMoves():Void
@@ -251,9 +254,9 @@ class wot.Minimap.MinimapEntry
             if (isNaN(this._x) || isNaN(this._y))
                 return;
 
-            var mc:MovieClip = this.xvm_worker.labelMc
-            mc._x = this._x;
-            mc._y = this._y;
+            var labelMc:MovieClip = this.xvm_worker.labelMc;
+            labelMc._x = this._x;
+            labelMc._y = this._y;
         };
     }
 }
