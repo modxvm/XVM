@@ -4,6 +4,7 @@ import flash.geom.*;
 import flash.filters.*;
 import wot.Minimap.*;
 import wot.Minimap.dataTypes.*;
+import wot.Minimap.dataTypes.cfg.LabelFieldCfg;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.view.*;
 import wot.PlayersPanel.*;
@@ -116,7 +117,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         {
             var playerId:Number = Number(playerIdStr);
             var bs:BattleStateData = BattleState.getUserDataByPlayerId(playerId);
-            var labelMc:MovieClip = getLabel(playerId);
+            var labelMc:MovieClip = _getLabel(playerId);
 
             //Logger.add("LabelsContainer.getPresenceStatus()");
             var prevSpottedStatus = bs.spottedStatus;
@@ -210,63 +211,82 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         var depth:Number = start;
         while (holderMc.getInstanceAtDepth(depth))
         {
-            depth++
+            depth++;
         }
 
         return depth;
     }
 
-    public static var TEXT_FIELD_NAME:String = "textField";
-
-    private static var TF_DEPTH:Number = 100;
-
-    public function createTextFields(label:MovieClip):Void
+    public function createTextFields(labelMc:MovieClip):Void
     {
-        // TODO
-    }
+        this.removeTextFields(labelMc);
 
-    public function updateTextFields(label:MovieClip):Void
-    {
-        // TODO
-    }
-
-    public function createTextField(label:MovieClip, cfg:Object):Void
-    {
-        this.removeTextField(label);
-
-        /*
-        var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
-        var bs:BattleStateData = BattleState.getUserDataByPlayerId(label[LabelsContainer.PLAYER_ID_FIELD_NAME]);
-        var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
-
-        var offset:Point = unitLabelOffset(entryName, status);
-
-        var textField:TextField = label.createTextField(TEXT_FIELD_NAME, TF_DEPTH, offset.x, offset.y, 100, 40);
-        label[TEXT_FIELD_NAME] = textField;
-        textField.antiAliasType = Config.config.minimap.labels.units.antiAliasType;
-        textField.html = true;
-        textField.multiline = true;
-        textField.selectable = false;
-
-        var tf:TextFormat = new TextFormat("$FieldFont", 12, 0xFFFFFF, false, false, false, null, null, cfg.align);
-        textField.setNewTextFormat(tf);
-
-        if (unitShadowEnabled(entryName, status))
+        var fields:Array = Config.config.minimap.labels.fields;
+        if (fields)
         {
-            textField.filters = [unitShadow(entryName, status)];
+            var len:Number = fields.length;
+            for (var i:Number = 0; i < fields.length; ++i)
+            {
+                createTextField(labelMc, i, fields[i]);
+            }
         }
-
-        textField._alpha = unitLabelAlpha(entryName, status);
-
-        updateTextField(label);
-        */
     }
 
-    public function updateTextField(label:MovieClip):Void
+    public function removeTextFields(labelMc:MovieClip):Void
     {
-        var textField:TextField = label[TEXT_FIELD_NAME];
-        if (textField == null)
-            return;
+        for (var name in labelMc)
+        {
+            if (labelMc[name] instanceof TextField)
+            {
+                labelMc[name].removeTextField();
+                delete labelMc[name];
+            }
+        }
+    }
+
+    public function updateTextFields(labelMc:MovieClip):Void
+    {
+        var fields:Array = Config.config.minimap.labels.fields;
+        if (fields)
+        {
+            var len:Number = fields.length;
+            for (var i:Number = 0; i < fields.length; ++i)
+            {
+                updateTextField(labelMc["tf" + i], fields[i]);
+            }
+        }
+    }
+
+    public function createTextField(labelMc:MovieClip, n:Number, cfg:Object):Void
+    {
+        //var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
+        //var bs:BattleStateData = BattleState.getUserDataByPlayerId(label[LabelsContainer.PLAYER_ID_FIELD_NAME]);
+        //var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
+
+        //var offset:Point = unitLabelOffset(entryName, status);
+
+        //var textField:TextField = labelMc.createTextField("tf" + n, n, offset.x, offset.y, 100, 40);
+        //label[TEXT_FIELD_NAME] = textField;
+        //textField.antiAliasType = Config.config.minimap.labels.units.antiAliasType;
+        //textField.html = true;
+        //textField.multiline = true;
+        //textField.selectable = false;
+
+        //var tf:TextFormat = new TextFormat("$FieldFont", 12, 0xFFFFFF, false, false, false, null, null, cfg.align);
+        //textField.setNewTextFormat(tf);
+
+        //if (unitShadowEnabled(entryName, status))
+        //{
+            //textField.filters = [unitShadow(entryName, status)];
+        //}
+
+        //textField._alpha = unitLabelAlpha(entryName, status);
+
+        //updateTextField(textField, cfg);
+    }
+
+    public function updateTextField(textField:TextField, cfg:LabelFieldCfg):Void
+    {
         /*
         var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
         var bs:BattleStateData = BattleState.getUserDataByPlayerId(label[LabelsContainer.PLAYER_ID_FIELD_NAME]);
@@ -284,15 +304,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         //Logger.add(playerInfo.userName + ": " + text);
         textField.htmlText = text;
         */
-    }
-
-    public function removeTextField(label:MovieClip):Void
-    {
-        var textField:TextField = label[TEXT_FIELD_NAME];
-        if (textField == null)
-            return;
-        textField.removeTextField();
-        label[TEXT_FIELD_NAME] = null;
     }
 
     // PRIVATE

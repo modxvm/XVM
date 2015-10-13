@@ -18,7 +18,10 @@
     "flags": [ "player", "ally", "squad", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
     "shadow": { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
     "alpha": 100,
-    "pos": { "x": 0, "y": 0 },
+    "x": 0,
+    "y": 0,
+    "width": 100,
+    "height": 40,
     "align": "left",
     "antiAliasType": "advanced"
   },
@@ -83,14 +86,16 @@
         "$ref": { "path":"defaultItem" },
         "flags": [ "ally", "enemy", "squad", "teamKiller", "spotted", "alive" ],
         "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'>{{vehicle}}</font>",
-        "position": { "x": 3, "y": -2 }
+        "x": 3,
+        "y": -2
       },
       //   "squad"
       {
         "$ref": { "path":"defaultItem" },
         "flags": [ "squad", "spotted", "alive" ],
         "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'><i>{{name%.5s}}</i></font>",
-        "position": { "x": 3, "y": 8 }
+        "x": 3,
+        "y": 8
       },
       // "lost", "alive"
       //   "ally", "enemy", "squad", "teamKiller"
@@ -105,7 +110,8 @@
         "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
         "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'><i>{{vehicle}}</i></font>",
         "alpha": 70,
-        "position": { "x": -5, "y": -11 }
+        "x": -5,
+        "y": -11
       },
       //   "squad"
       {
@@ -113,7 +119,8 @@
         "flags": [ "squad", "lost", "alive" ],
         "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'><i>{{name%.5s}}</i></font>",
         "alpha": 70,
-        "position": { "x": -5, "y": -3 }
+        "x": -5,
+        "y": -3
       },
       // "dead"
       //   "ally", "enemy", "squad", "teamKiller"
@@ -123,7 +130,8 @@
         "format": "<font face='Arial' size='17' color='{{c:system:minimap.labels.data.colors.dot}}'>{{.minimap.labels.data.vtype.{{vtype}}}}</font>",
         "shadow": { "$ref": { "path":"defaultItem.shadow" }, "strength": 3 },
         "alpha": 50,
-        "position": { "x": -5, "y": -11 }
+        "x": -5,
+        "y": -11
       },
       //   "squad"
       {
@@ -132,7 +140,8 @@
         "format": "<font size='8' color='{{c:system:minimap.labels.data.colors.txt}}'><i>{{name%.5s}}</i></font>",
         "shadow": { "$ref": { "path":"defaultItem.shadow" }, "strength": 3 },
         "alpha": 50,
-        "position": { "x": -5, "y": -3 }
+        "x": -5,
+        "y": -3
       }
     ]
   }
