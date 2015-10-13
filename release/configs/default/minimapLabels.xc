@@ -7,7 +7,7 @@
   // Текстовые поля для танков на миникарте.
   // TODO: documentation
   //  {
-  //    "flags": [ "player", "ally", "squad", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
+  //    "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
   //    "format": "...",
   //    "shadow": { ... },
   //    "alpha": "...",
@@ -15,7 +15,7 @@
   //    "antiAliasType": "advanced" // normal/advanced
   //  }
   "defaultItem": {
-    "flags": [ "player", "ally", "squad", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
+    "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
     "shadow": { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
     "alpha": 100,
     "x": 0,
@@ -82,62 +82,62 @@
     "enabled": true,
     "formats": [
       // "spotted", "alive"
-      //   "ally", "enemy", "squad", "teamKiller"
+      //   "ally", "enemy", "squadman", "teamKiller"
       {
         "$ref": { "path":"defaultItem" },
-        "flags": [ "ally", "enemy", "squad", "teamKiller", "spotted", "alive" ],
+        "flags": [ "ally", "enemy", "squadman", "teamKiller", "spotted", "alive" ],
         "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'>{{vehicle}}</font>",
         "x": 3,
         "y": -2
       },
-      //   "squad"
+      //   "squadman"
       {
         "$ref": { "path":"defaultItem" },
-        "flags": [ "squad", "spotted", "alive" ],
+        "flags": [ "squadman", "spotted", "alive" ],
         "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'><i>{{name%.5s}}</i></font>",
         "x": 3,
         "y": 8
       },
       // "lost", "alive"
-      //   "ally", "enemy", "squad", "teamKiller"
+      //   "ally", "enemy", "squadman", "teamKiller"
       {
         "$ref": { "path":"defaultItem" },
-        "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
+        "flags": [ "ally", "enemy", "squadman", "teamKiller", "lost", "alive" ],
         "format": "<font face='Arial' size='17' color='{{.minimap.labels.data.colors.lost_dot.{{sys-color-key}}}}'>{{.minimap.labels.data.vtype.{{vtype-key}}}}</font>",
         "alpha": 70
       },
       {
         "$ref": { "path":"defaultItem" },
-        "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
+        "flags": [ "ally", "enemy", "squadman", "teamKiller", "lost", "alive" ],
         "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'><i>{{vehicle}}</i></font>",
         "alpha": 70,
         "x": -5,
         "y": -11
       },
-      //   "squad"
+      //   "squadman"
       {
         "$ref": { "path":"defaultItem" },
-        "flags": [ "squad", "lost", "alive" ],
+        "flags": [ "squadman", "lost", "alive" ],
         "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'><i>{{name%.5s}}</i></font>",
         "alpha": 70,
         "x": -5,
         "y": -3
       },
       // "dead"
-      //   "ally", "enemy", "squad", "teamKiller"
+      //   "ally", "enemy", "squadman", "teamKiller"
       {
         "$ref": { "path":"defaultItem" },
-        "flags": [ "ally", "enemy", "squad", "teamKiller", "lost", "alive" ],
+        "flags": [ "ally", "enemy", "squadman", "teamKiller", "dead" ],
         "format": "<font face='Arial' size='17' color='{{.minimap.labels.data.colors.dot.{{sys-color-key}}}}'>{{.minimap.labels.data.vtype.{{vtype-key}}}}</font>",
         "shadow": { "$ref": { "path":"defaultItem.shadow" }, "strength": 3 },
         "alpha": 50,
         "x": -5,
         "y": -11
       },
-      //   "squad"
+      //   "squadman"
       {
         "$ref": { "path":"defaultItem" },
-        "flags": [ "squad", "dead" ],
+        "flags": [ "squadman", "dead" ],
         "format": "<font size='8' color='{{.minimap.labels.data.colors.txt.{{sys-color-key}}}}'><i>{{name%.5s}}</i></font>",
         "shadow": { "$ref": { "path":"defaultItem.shadow" }, "strength": 3 },
         "alpha": 50,

@@ -76,16 +76,15 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     private function onEntryNameUpdated(e:MinimapEvent)
     {
         var labelMc:MovieClip = _getLabel(Number(e.value));
-        if (labelMc)
+        if (!labelMc[INITIALIZED_FIELD_NAME])
+            return;
+        var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
+        var entryName:String = e.entry.entryName;
+        if (bs.entryName != entryName)
         {
-            var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
-            var entryName:String = e.entry.entryName;
-            if (bs.entryName != entryName)
-            {
-                bs.entryName = entryName;
-                invalidateList[e.value] = INVALIDATE_TYPE_FORCE;
-                invalidate();
-            }
+            bs.entryName = entryName;
+            invalidateList[e.value] = INVALIDATE_TYPE_FORCE;
+            invalidate();
         }
     }
 
@@ -112,7 +111,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             var playerId:Number = Number(playerIdStr);
 
             var labelMc:MovieClip = _getLabel(playerId);
-
             if (!labelMc[INITIALIZED_FIELD_NAME])
             {
                 if (!initLabel(labelMc, playerId))
@@ -146,10 +144,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
                 createTextFields(labelMc);
                 updateLabelDepth(labelMc);
             }
-            else
-            {
-                updateTextFields(labelMc);
-            }
+            updateTextFields(labelMc);
         }
         invalidateList = newInvalidateList;
 
@@ -232,7 +227,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             var len:Number = formats.length;
             for (var i:Number = 0; i < formats.length; ++i)
             {
-                createTextField(labelMc, i, formats[i], bs);
+                createTextField(labelMc, formats[i], bs);
             }
         }
     }
@@ -261,9 +256,10 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         }
     }
 
-    private function createTextField(labelMc:MovieClip, n:Number, cfg:LabelFieldCfg, bs:BattleStateData):Void
+    private function createTextField(labelMc:MovieClip, cfg:LabelFieldCfg, bs:BattleStateData):Void
     {
-        //Logger.add(bs.entryName + " " + (bs.spottedStatus == Defines.SPOTTED_STATUS_SPOTTED) + " " + (!bs.dead) + " => [" + cfg.flags.join(", ") + "] = " + isAllowedState(cfg.flags, bs));
+        //if (bs.dead)
+        //    Logger.add(bs.entryName + " " + (bs.spottedStatus == Defines.SPOTTED_STATUS_SPOTTED) + " " + (!bs.dead) + " => [" + cfg.flags.join(", ") + "] = " + isAllowedState(cfg.flags, bs));
 
         if (!isAllowedState(cfg.flags, bs))
             return;
@@ -273,6 +269,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         var width:Number = isNaN(cfg.width) ? Macros.Format(bs.playerName, cfg.width, bs) : cfg.width;
         var height:Number = isNaN(cfg.height) ? Macros.Format(bs.playerName, cfg.height, bs) : cfg.height;
 
+        var n:Number = labelMc.getNextHighestDepth();
         var textField:TextField = labelMc.createTextField("tf" + n, n, x, y, width, height);
         textField.cfg = cfg;
         textField.antiAliasType = cfg.antiAliasType;
@@ -340,7 +337,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     private function updateTextField(textField:TextField, bs:BattleStateData):Void
     {
         var text:String = Macros.Format(bs.playerName, textField.cfg.format, bs);
-        Logger.add(bs.playerName + ": " + text + " <= " + textField.cfg.format);
+        //Logger.add(bs.playerName + ": " + text + " <= " + textField.cfg.format);
         textField.htmlText = text;
     }
 }
