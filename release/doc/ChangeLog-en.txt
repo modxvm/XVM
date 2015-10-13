@@ -3,7 +3,7 @@
   * "mapSize" config section moved to the root of the "minimap" and "minimapAlt" sections
   * "revealed" renamed to "spotted" everywhere
   * Added {{c:system:path}} macro - get system color value from the global config path
-  * Increased congfig version to 6.1.0
+  * Increased config version to 6.1.0
   * Personal missions: added "Incomplete" filter (Started + Improve)
 
 XVM-6.1.4.3:
