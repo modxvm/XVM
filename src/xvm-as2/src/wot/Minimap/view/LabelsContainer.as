@@ -1,4 +1,5 @@
 import com.xvm.*;
+import com.xvm.DataTypes.*;
 import flash.geom.*;
 import flash.filters.*;
 import wot.Minimap.*;
@@ -9,15 +10,11 @@ import wot.PlayersPanel.*;
 
 class wot.Minimap.view.LabelsContainer extends XvmComponent
 {
-    private static var _instance:LabelsContainer;
-
     /**
      * References to labelMc properties.
      * Cannot extend MovieClip class due to AS2 being crap language\framework\API.
      */
-    public static var STATUS_FIELD_NAME:String = "lastStatus";
-    public static var PLAYER_INFO_FIELD_NAME:String = "playerInfo";
-    public static var ENTRY_NAME_FIELD_NAME:String = "entryName";
+    public static var PLAYER_ID_FIELD_NAME:String = "playerId";
 
     public static function init():Void
     {
@@ -29,6 +26,16 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         //Logger.add("LabelsContainer.getLabel(" + playerId + ")");
         return instance._getLabel(playerId);
+    }
+
+    // INSTANCE
+
+    private static var _instance:LabelsContainer;
+    private static function get instance():LabelsContainer
+    {
+        if (!_instance)
+            _instance = new LabelsContainer();
+        return _instance;
     }
 
     // PRIVATE
@@ -46,23 +53,16 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private var invalidateList:Object = {};
 
-    private static function get instance():LabelsContainer
-    {
-        if (!_instance)
-            _instance = new LabelsContainer();
-        return _instance;
-    }
-
     private function LabelsContainer()
     {
         holderMc = IconsProxy.createEmptyMovieClip(CONTAINER_NAME, MinimapConstants.LABELS_ZINDEX);
 
-        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onPlayerDeadEvent);
+        GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefresh);
     }
 
     private function _init()
@@ -70,9 +70,11 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         // empty function required for instance creation
     }
 
-    private function onMinimapEvent(e:MinimapEvent)
+    // EVENT HANDLERS
+
+    private function onMinimapEvent(e:Object)
     {
-        //Logger.add("e.value = " + e.value);
+        //Logger.addObject(e);
         //if (isNaN(e.value))
         //    Logger.addObject(e, 2, "onMinimapEvent: null value");
 
@@ -83,33 +85,22 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function onEntryNameUpdated(e:MinimapEvent)
     {
-        var labelMc:MovieClip = _getLabel(Number(e.value));
+        var bs:BattleStateData = BattleState.getUserDataByPlayerId(Number(e.value));
         var entryName:String = e.entry.entryName;
-        if (labelMc[ENTRY_NAME_FIELD_NAME] != entryName)
+        if (bs.entryName != entryName)
         {
-            labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
+            bs.entryName = entryName;
             invalidateList[e.value] = INVALIDATE_TYPE_FORCE;
             invalidate();
         }
     }
 
-    private function onPlayerDeadEvent(e:Object)
-    {
-        //Logger.add("(dead) e.value = " + e.value);
-        //if (isNaN(e.value))
-        //    Logger.addObject(e, 2, "onPlayerDeadEvent: null value");
-        if (!invalidateList[e.value])
-            invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
-        invalidate();
-    }
-
-    private function onRefreshEvent(e:MinimapEvent)
+    private function onRefresh(e:MinimapEvent)
     {
         for (var i:String in holderMc)
         {
             if (typeof(holderMc[i]) == "movieclip")
             {
-                var labelMc:MovieClip = holderMc[i];
                 invalidateList[i] = INVALIDATE_TYPE_FORCE;
             }
         }
@@ -124,28 +115,41 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         for (var playerIdStr:String in invalidateList)
         {
             var playerId:Number = Number(playerIdStr);
-            var force:Boolean = invalidateList[playerIdStr] == INVALIDATE_TYPE_FORCE;
-            var labelMc:MovieClip = _getLabel(playerId);
-            var previousStatus:Number = labelMc[STATUS_FIELD_NAME];
-            var actualStatus:Number = getPresenceStatus(playerId);
+            var bs:BattleStateData = BattleState.getUserDataByPlayerId(playerId);
+            var labelMc:MovieClip = getLabel(playerId);
 
-            //Logger.add(IconsProxy.entry(playerId).entryName + ": " + playerId + " " + force + " " + previousStatus + " " + actualStatus);
-
-            if ((previousStatus != actualStatus) || force)
+            //Logger.add("LabelsContainer.getPresenceStatus()");
+            var prevSpottedStatus = bs.spottedStatus;
+            var currSpottedStatus:Number;
+            if (IconsProxy.playerIds[playerId] != null)
             {
-                labelMc[STATUS_FIELD_NAME] = actualStatus;
-                this.createTextField(labelMc);
+                currSpottedStatus = SpottedStatusType.SPOTTED;
+            }
+            else
+            {
+                currSpottedStatus = prevSpottedStatus == SpottedStatusType.SPOTTED ? SpottedStatusType.LOST : prevSpottedStatus;
+            }
+            var force:Boolean = invalidateList[playerIdStr] == INVALIDATE_TYPE_FORCE;
+
+            //Logger.add(bs.entryName + ": " + playerId + " " + prevSpottedStatus + " " + currSpottedStatus + " " + force);
+
+            if ((prevSpottedStatus != currSpottedStatus) || force)
+            {
+                bs.spottedStatus = currSpottedStatus;
+                createTextFields(labelMc);
                 updateLabelDepth(labelMc);
             }
             else
             {
-                this.updateTextField(labelMc);
+                this.updateTextFields(labelMc);
             }
         }
         invalidateList = { };
 
         Cmd.profMethodEnd("Minimap.Labels.draw()");
     }
+
+    // PRIVATE
 
     private function _getLabel(playerId:Number):MovieClip
     {
@@ -168,10 +172,10 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
          * References to labelMc properties.
          * Cannot extend MovieClip class due to AS2 being crap language\framework\API.
          */
-        var playerInfo = PlayersPanelProxy.getPlayerInfo(playerId);
-        labelMc[PLAYER_INFO_FIELD_NAME] = playerInfo;
-        labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
-        labelMc[STATUS_FIELD_NAME] = Player.PLAYER_SPOTTED;
+        labelMc[PLAYER_ID_FIELD_NAME] = playerId;
+        var bs:BattleStateData = BattleState.getUserDataByPlayerId(playerId);
+        bs.entryName = entryName;
+        bs.spottedStatus = SpottedStatusType.SPOTTED;
 
         //Logger.addObject(labelMc, 3);
 
@@ -183,17 +187,17 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         labelMc._x = OFFMAP_COORDINATE;
         labelMc._y = OFFMAP_COORDINATE;
 
-        this.createTextField(labelMc);
+        this.createTextFields(labelMc);
     }
 
     private function updateLabelDepth(labelMc:MovieClip):Void
     {
         //Logger.add("LabelsContainer.updateLabelDepth()");
-        var status:Number = labelMc[STATUS_FIELD_NAME];
+        var bs:BattleStateData = BattleState.getUserDataByPlayerId(labelMc[PLAYER_ID_FIELD_NAME]);
         var depth:Number;
-        if (Math.abs(status) == Player.PLAYER_DEAD)
+        if (bs.dead)
             depth = getFreeDepth(DEAD_DEPTH_START);
-        else if (Math.abs(status) == Player.PLAYER_LOST)
+        else if (bs.spottedStatus == SpottedStatusType.LOST)
             depth = getFreeDepth(LOST_DEPTH_START);
         else
             depth = getFreeDepth(ALIVE_DEPTH_START);
@@ -212,57 +216,27 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         return depth;
     }
 
-    private function getPresenceStatus(playerId:Number):Number
-    {
-        //Logger.add("LabelsContainer.getPresenceStatus()");
-        var status:Number;
-
-        if (IconsProxy.playerIds[playerId] != null)
-        {
-            status = Player.PLAYER_SPOTTED;
-        }
-        else
-        {
-            /**
-             * Guy is not present on minimap.
-             * He is either dead or lost.
-             * Uids that has never been seen are not passed to this method.
-             */
-            if (PlayersPanelProxy.isDead(playerId))
-            {
-                status = Player.PLAYER_DEAD;
-            }
-            else
-            {
-                status = Player.PLAYER_LOST;
-            }
-        }
-
-        var player:Player = PlayersPanelProxy.getPlayerInfo(playerId);
-        if (player.teamKiller)
-        {
-            /**
-             * Set below zero.
-             * Later this will be recognized at MapConfig too.
-             */
-            status |= Player.TEAM_KILLER_FLAG;
-        }
-
-        return status;
-    }
-
-
-
     public static var TEXT_FIELD_NAME:String = "textField";
 
     private static var TF_DEPTH:Number = 100;
+
+    public function createTextFields(label:MovieClip):Void
+    {
+        // TODO
+    }
+
+    public function updateTextFields(label:MovieClip):Void
+    {
+        // TODO
+    }
 
     public function createTextField(label:MovieClip, cfg:Object):Void
     {
         this.removeTextField(label);
 
+        /*
         var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
-        var playerInfo:Player = label[LabelsContainer.PLAYER_INFO_FIELD_NAME];
+        var bs:BattleStateData = BattleState.getUserDataByPlayerId(label[LabelsContainer.PLAYER_ID_FIELD_NAME]);
         var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
 
         var offset:Point = unitLabelOffset(entryName, status);
@@ -285,6 +259,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         textField._alpha = unitLabelAlpha(entryName, status);
 
         updateTextField(label);
+        */
     }
 
     public function updateTextField(label:MovieClip):Void
@@ -292,9 +267,9 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         var textField:TextField = label[TEXT_FIELD_NAME];
         if (textField == null)
             return;
-
+        /*
         var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
-        var playerInfo:Player = label[LabelsContainer.PLAYER_INFO_FIELD_NAME];
+        var bs:BattleStateData = BattleState.getUserDataByPlayerId(label[LabelsContainer.PLAYER_ID_FIELD_NAME]);
         var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
 
         var format:String = unitLabelFormat(entryName, status);
@@ -308,6 +283,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         var text:String = Macros.Format(playerInfo.userName, format, obj);
         //Logger.add(playerInfo.userName + ": " + text);
         textField.htmlText = text;
+        */
     }
 
     public function removeTextField(label:MovieClip):Void
@@ -323,11 +299,9 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     // TODO: REFACTOR AND REMOVE
 
-
-    /** Translate internal WG entryName and unit status(dead\tk) to minimap config file entry */
+    /*
     private function defineCfgProperty(wgEntryName:String, status:Number):String
     {
-        /** Prefix: lost dead or alive */
         var xvmPrefix:String;
 
         if ((status & Player.STATUS_MASK) == Player.PLAYER_LOST)
@@ -337,18 +311,16 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         else
             xvmPrefix = "";
 
-        /** Postfix: ally, enemy, tk or squad */
         var xvmPostfix:String;
 
         if (wgEntryName == "squadman")
-            xvmPostfix = "squad"; /** Translate squad WG entry name to squad XVM entry name */
+            xvmPostfix = "squad";
         else
             xvmPostfix = wgEntryName;
 
-        if ((status & Player.TEAM_KILLER_FLAG) && wgEntryName == "ally") /** <- Skip enemy and squad TK */
+        if ((status & Player.TEAM_KILLER_FLAG) && wgEntryName == "ally")
             xvmPostfix = "teamkiller";
 
-        /** Result */
         var xvmFullEntry:String;
 
         if (wgEntryName == "player")
@@ -390,6 +362,5 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         var unitType:String = defineCfgProperty(entryName, status);
         return Config.config.minimap.labels.units.format[unitType];
-    }
-
+    }*/
 }

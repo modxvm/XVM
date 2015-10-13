@@ -89,7 +89,8 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function isArtillery():Boolean
     {
-        var vdata:VehicleData = VehicleInfo.get(PlayersPanelProxy.self.vid);
+        var bs:BattleStateData = BattleState.getSelfUserData();
+        var vdata:VehicleData = VehicleInfo.get(bs.vehId);
         return vdata == null ? false : vdata.vclass == "SPG";
     }
 

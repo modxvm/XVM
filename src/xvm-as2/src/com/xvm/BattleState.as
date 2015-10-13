@@ -7,8 +7,8 @@ import com.xvm.DataTypes.BattleStateData;
 
 class com.xvm.BattleState
 {
-
     private static var _userData:Object = { };
+    private static var _playerIdToUserDataMap:Object = { };
     private static var _screenSize:Object = { };
     private static var _selfUserName:String = null;
 
@@ -17,6 +17,11 @@ class com.xvm.BattleState
         if (!_userData.hasOwnProperty(userName))
             _userData[userName] = { };
         return _userData[userName];
+    }
+
+    public static function getUserDataByPlayerId(playerId:Number):BattleStateData
+    {
+        return _playerIdToUserDataMap[playerId];
     }
 
     public static function getSelfUserData():BattleStateData
@@ -38,6 +43,9 @@ class com.xvm.BattleState
                 ud[i] = data[i];
             }
         }
+        var playerId:Number = ud.playerId;
+        if (playerId && !_playerIdToUserDataMap[playerId])
+            _playerIdToUserDataMap[playerId] = ud;
         return updated;
     }
 

@@ -1,5 +1,5 @@
 import com.xvm.*;
-import wot.Minimap.dataTypes.Player;
+import com.xvm.DataTypes.*;
 
 /**
  * PlayersPanelProxy class
@@ -37,63 +37,56 @@ import wot.Minimap.dataTypes.Player;
 
 class wot.PlayersPanel.PlayersPanelProxy
 {
-    public static function get leftPanel():net.wargaming.ingame.PlayersPanel
-    {
-        //Logger.add("PlayersPanelProxy.leftPanel()");
-        return net.wargaming.ingame.PlayersPanel(_root.leftPanel);
-    }
-
-    public static function get rightPanel():net.wargaming.ingame.PlayersPanel
-    {
-        //Logger.add("PlayersPanelProxy.rightPanel()");
-        return net.wargaming.ingame.PlayersPanel(_root.rightPanel);
-    }
-
-    public static function getPlayerInfo(uid:Number):Player
-    {
-        //Logger.add("PlayersPanelProxy.getPlayerInfo()");
-        return _getPlayerInfoFrom(_allyPlayers, uid) || _getPlayerInfoFrom(_enemyPlayers, uid);
-    }
-
+//    public static function get leftPanel():net.wargaming.ingame.PlayersPanel
+//    {
+//        //Logger.add("PlayersPanelProxy.leftPanel()");
+//        return net.wargaming.ingame.PlayersPanel(_root.leftPanel);
+//    }
+//
+//    public static function get rightPanel():net.wargaming.ingame.PlayersPanel
+//    {
+//        //Logger.add("PlayersPanelProxy.rightPanel()");
+//        return net.wargaming.ingame.PlayersPanel(_root.rightPanel);
+//    }
+//
     public static function isDead(playerId:Number):Boolean
     {
-        //Logger.add("PlayersPanelProxy.isDead()");
-        var player:Object = getPlayerInfo(playerId);
-        return (player.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
+        var bs:BattleStateData = BattleState.getUserDataByPlayerId(playerId);
+        return bs == null || bs.dead;
     }
 
-    public static function get self():Player
-    {
-        //Logger.add("PlayersPanelProxy.self()");
-        var myTeam:Array = _allyPlayers;
-        for (var i in myTeam)
-        {
-            var player:Player = myTeam[i];
-            if (player.himself == true)
-                return player;
-        }
-        return null;
-    }
+//    public static function get self():Player
+//    {
+//        //Logger.add("PlayersPanelProxy.self()");
+//        var myTeam:Array = _allyPlayers;
+//        for (var i in myTeam)
+//        {
+//            var player:Player = myTeam[i];
+//            if (player.himself == true)
+//                return player;
+//        }
+//        return null;
+//    }
 
     // -- Private
 
-    private static function _getPlayerInfoFrom(players:Array, uid:Number):Player
-    {
-        for (var i:Number = 0; i < players.length; i++)
-        {
-            if (players[i].uid == uid)
-                return players[i];
-        }
-        return null;
-    }
-
-    private static function get _allyPlayers():Array
-    {
-        return leftPanel.m_list._dataProvider;
-    }
-
-    private static function get _enemyPlayers():Array
-    {
-        return rightPanel.m_list._dataProvider;
-    }
+//    private static function _getPlayerInfoFrom(players:Array, uid:Number):Player
+//    {
+//        for (var i:Number = 0; i < players.length; i++)
+//        {
+//            if (players[i].uid == uid)
+//                return players[i];
+//        }
+//        return null;
+//    }
+//
+//    private static function get _allyPlayers():Array
+//    {
+//        return leftPanel.m_list._dataProvider;
+//    }
+//
+//    private static function get _enemyPlayers():Array
+//    {
+//        return rightPanel.m_list._dataProvider;
+//    }
 }
