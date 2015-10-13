@@ -216,7 +216,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         this.removeTextFields(labelMc);
 
         var formats:Array = Minimap.config.labels.formats;
-        Logger.addObject(formats, 3);
         if (formats)
         {
             var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];

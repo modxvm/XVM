@@ -861,7 +861,7 @@ class com.xvm.Macros
             // {{c:system}}
             pdata["c:system"] = function(o):String
             {
-                return "#" + Strings.padLeft(ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp, o._args).toString(16), 6, "0");
+                return "#" + Strings.padLeft(ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp, false, o._args).toString(16), 6, "0");
             }
 
             // hitlog
