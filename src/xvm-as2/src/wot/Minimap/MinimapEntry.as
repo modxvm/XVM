@@ -231,18 +231,18 @@ class wot.Minimap.MinimapEntry
         if (!Minimap.config.enabled || !Minimap.config.labels.enabled || !Minimap.config.labels.formats || Minimap.config.labels.formats.length == 0)
             return;
 
-        if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
+        /*if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
         {
             if (wrapper.orig_entryName == null)
                 wrapper.orig_entryName = wrapper.entryName;
             wrapper.setEntryName(MinimapConstants.STATIC_ICON_CONTROL);
-        }
+        }*/
 
-        if (playerId)
-        {
+        //if (playerId)
+        //{
             this.labelMc = LabelsContainer.getLabel(playerId);
             setLabelToMimicEntryMoves();
-        }
+        //}
     }
 
     private function setLabelToMimicEntryMoves():Void

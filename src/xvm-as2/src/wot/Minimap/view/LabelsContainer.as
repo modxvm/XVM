@@ -73,6 +73,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function onMinimapEvent(e:Object)
     {
+        //Logger.addObject(e);
         if (!invalidateList[e.value])
             invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
         invalidate();
@@ -120,7 +121,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             {
                 if (!initLabel(labelMc, playerId))
                 {
-                    newInvalidateList[playerIdStr] = invalidateList[playerIdStr];
+                    newInvalidateList[playerIdStr] = INVALIDATE_TYPE_FORCE;
                     invalidate();
                     continue;
                 }
@@ -175,8 +176,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function initLabel(labelMc:MovieClip, playerId:Number):Boolean
     {
-        var bs:BattleStateData = BattleState.getUserDataByPlayerId(playerId);
-        if (!bs)
+        var bs:BattleStateData = BattleState.get(playerId);
+        if (!bs || !bs.playerId)
             return false;
 
         //Logger.add("LabelsContainer.createLabel()");

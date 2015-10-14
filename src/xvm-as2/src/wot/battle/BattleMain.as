@@ -217,11 +217,11 @@ class wot.battle.BattleMain
                 data["spotted"] = spotted;
 
             //Logger.addObject(data);
-            var updated:Boolean = BattleState.updateUserData(playerName, data);
+            var updated:Boolean = BattleState.update(playerId, data);
             if (updated)
             {
                 //Logger.add("updated: " + playerName);
-                GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerName));
+                GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerId));
             }
         }
         catch (ex:Error)

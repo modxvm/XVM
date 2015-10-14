@@ -69,6 +69,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private var cfg:Object;
 
+    private var m_playerId:Number = 0;
     private var m_name:String = null;
     private var m_clan:String = null;
     private var m_vehicleState:Number = 0;
@@ -150,6 +151,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             var saved_icon:String;
             if (data == null)
             {
+                m_playerId = 0
                 m_name = null;
                 m_clan = null;
                 m_vehicleState = 0;
@@ -159,6 +161,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             }
             else
             {
+                m_playerId = data.uid;
                 m_name = data.userName;
                 m_clan = data.clanAbbrev;
                 m_vehicleState = data.vehicleState;
@@ -641,7 +644,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (mc == null)
             return;
 
-        var obj = BattleState.getUserData(m_name);
+        var obj = BattleState.get(m_playerId);
         var formats:Array = mc.formats;
         var len:Number = formats.length;
         for (var i:Number = 0; i < len; ++i)

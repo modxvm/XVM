@@ -6,11 +6,11 @@ import com.xvm.events.*;
 
 class com.xvm.events.EBattleStateChanged
 {
-    private var _playerName:String;
+    private var _playerId:Number;
 
-    public function EBattleStateChanged(playerName:String)
+    public function EBattleStateChanged(playerId:Number)
     {
-        _playerName = playerName;
+        _playerId = playerId;
     }
 
     public function get type():String
@@ -18,8 +18,8 @@ class com.xvm.events.EBattleStateChanged
         return Events.E_BATTLE_STATE_CHANGED;
     }
 
-    public function get playerName():String
+    public function get playerId():Number
     {
-        return _playerName;
+        return _playerId;
     }
 }

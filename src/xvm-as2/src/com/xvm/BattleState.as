@@ -8,33 +8,40 @@ import com.xvm.DataTypes.BattleStateData;
 class com.xvm.BattleState
 {
     private static var _userData:Object = { };
-    private static var _playerIdToUserDataMap:Object = { };
     private static var _screenSize:Object = { };
-    private static var _selfUserName:String = null;
+    private static var _selfPlayerId:Number = 0;
 
-    public static function getUserData(userName:String):BattleStateData
+    public static function get(playerId:Number):BattleStateData
     {
-        if (!_userData.hasOwnProperty(userName))
-            _userData[userName] = { };
-        return _userData[userName];
+        if (!_userData.hasOwnProperty(String(playerId)))
+        {
+            _userData[playerId] = { };
+        }
+        return _userData[playerId];
     }
 
-    public static function getUserDataByPlayerId(playerId:Number):BattleStateData
+    public static function getSelf():BattleStateData
     {
-        return _playerIdToUserDataMap[playerId];
-    }
-
-    public static function getSelfUserData():BattleStateData
-    {
-        if (_selfUserName == null)
+        if (_selfPlayerId == null)
             return null;
-        return getUserData(_selfUserName);
+        return get(_selfPlayerId);
     }
 
-    public static function updateUserData(userName:String, data:Object):Boolean
+    public static function getByPlayerName(playerName:String):BattleStateData
+    {
+        for (var i in _userData)
+        {
+            var data:BattleStateData = _userData[i];
+            if (data.playerName == playerName)
+                return data;
+        }
+        return null;
+    }
+
+    public static function update(playerId:Number, data:Object):Boolean
     {
         var updated:Boolean = false;
-        var ud:BattleStateData = getUserData(userName);
+        var ud:BattleStateData = get(playerId);
         for (var i in data)
         {
             if (ud[i] != data[i])
@@ -43,15 +50,12 @@ class com.xvm.BattleState
                 ud[i] = data[i];
             }
         }
-        var playerId:Number = ud.playerId;
-        if (playerId && !_playerIdToUserDataMap[playerId])
-            _playerIdToUserDataMap[playerId] = ud;
         return updated;
     }
 
-    public static function setSelfUserName(userName:String):Void
+    public static function setSelfPlayerId(playerId:Number):Void
     {
-        _selfUserName = userName;
+        _selfPlayerId = playerId;
     }
 
     public static function get screenSize():Object

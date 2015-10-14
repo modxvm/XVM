@@ -31,7 +31,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         moving_state = Defines.MOVING_STATE_STOPPED;
 
-        var bs:BattleStateData = BattleState.getSelfUserData();
+        var bs:BattleStateData = BattleState.getSelf();
         var vdata:VehicleData = VehicleInfo.get(bs.vehId);
 
         var vehicleType:String = vdata.key.split(":").join("-");

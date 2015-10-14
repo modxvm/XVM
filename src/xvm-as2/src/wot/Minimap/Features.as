@@ -88,10 +88,7 @@ class wot.Minimap.Features
 
     private function onBattleStateChanged(e:EBattleStateChanged)
     {
-        var pdata:BattleStateData = BattleState.getUserData(e.playerName);
-        if (pdata == null)
-            return;
-        var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(pdata.playerId);
+        var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(e.playerId);
         if (entry == null)
             return;
         entry.invalidate();

@@ -358,7 +358,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private function fixBattleState(data)
     {
         // fix battlestate
-        var obj:BattleStateData = BattleState.getUserData(data.userName);
+        var obj:BattleStateData = BattleState.get(data.uid);
         obj.frags = data.frags || NaN;
         //Logger.addObject(data);
         obj.ready = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0 && !Boolean(data.isOffline);
@@ -374,7 +374,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             obj.position = ++m_lastPosition;
 
         if (data.himself)
-            BattleState.setSelfUserName(data.userName);
+            BattleState.setSelfPlayerId(data.uid);
     }
 
     private function selectPlayer(event):Void
@@ -523,7 +523,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             return text;
 
         //Logger.add("before: " + text);
-        var obj:Object = BattleState.getUserData(data.userName);
+        var obj:Object = BattleState.get(data.uid);
         var fmt:String = Macros.Format(data.userName, format, obj);
         //Logger.add("after: " + fmt);
         return fmt;
