@@ -50,8 +50,8 @@
         "enemy_blowedup":      "#4D0300"
       }
     },
-    // Text for {{.minimap.labels_data.vtype.{{vtype-key}}}} macro
-    // Текст для макроса {{.minimap.labels_data.vtype.{{vtype-key}}}}
+    // Text for {{.minimap.labelsData.vtype.{{vtype-key}}}} macro
+    // Текст для макроса {{.minimap.labelsData.vtype.{{vtype-key}}}}
     "vtype": {
       // Text for light tanks / Текст для легких танков.
       "LT":  "<font face='xvm'>&#x3A;</font>",

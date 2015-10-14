@@ -11,7 +11,7 @@
     //
     // Minimap zooming.
     // Увеличение миникарты.
-    "minimapZoom":         { "enabled": false, "keyCode": 29, "onHold": true },
+    "minimapZoom":         { "enabled": true, "keyCode": 29, "onHold": true },
     // Alternative minimap mode.
     // Альтернативный режим миникарты.
     "minimapAltMode":      { "enabled": true, "keyCode": 29, "onHold": true },
