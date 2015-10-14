@@ -3,7 +3,9 @@
  * Общие данные для надписей на миникарте.
  */
 {
-  "labels_data": {
+  "labelsData": {
+    // Color sets
+    // Наборы цветов
     "colors": {
       "txt": {
         "ally_alive":          "#C8FFA6",
@@ -33,7 +35,7 @@
         "enemy_dead":          "#4D0300",
         "enemy_blowedup":      "#4D0300"
       },
-      "lost_dot": {
+      "lostDot": {
         "ally_alive":          "#B4E595",
         "ally_dead":           "#004D00",
         "ally_blowedup":       "#004D00",
@@ -48,12 +50,19 @@
         "enemy_blowedup":      "#4D0300"
       }
     },
+    // Text for {{.minimap.labels_data.vtype.{{vtype-key}}}} macro
+    // Текст для макроса {{.minimap.labels_data.vtype.{{vtype-key}}}}
     "vtype": {
+      // Text for light tanks / Текст для легких танков.
       "LT":  "<font face='xvm'>&#x3A;</font>",
+      // Text for medium tanks / Текст для средних танков.
       "MT":  "<font face='xvm'>&#x3B;</font>",
+      // Text for heavy tanks / Текст для тяжелых танков.
       "HT":  "<font face='xvm'>&#x3F;</font>",
-      "TD":  "<font face='xvm'>&#x2E;</font>",
-      "SPG": "<font face='xvm'>&#x2D;</font>"
+      // Text for arty / Текст для арты.
+      "SPG": "<font face='xvm'>&#x2D;</font>",
+      // Text for tank destroyers / Текст для ПТ.
+      "TD":  "<font face='xvm'>&#x2E;</font>"
     }
   }
 }

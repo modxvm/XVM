@@ -14,7 +14,7 @@
     "minimapZoom":         { "enabled": false, "keyCode": 29, "onHold": true },
     // Alternative minimap mode.
     // Альтернативный режим миникарты.
-    "minimapAltMode":      { "enabled": false, "keyCode": 29, "onHold": true },
+    "minimapAltMode":      { "enabled": true, "keyCode": 29, "onHold": true },
     // Alternative "ears" (players panels) mode.
     // Альтернативный режим "ушей" (панелей игроков).
     "playersPanelAltMode": { "enabled": false, "keyCode": 29, "onHold": true },

@@ -1,25 +1,27 @@
 ﻿{
   "my_items": {
     "txt_spotted_alive_mog": {
-      "$ref": { "file":"../default/minimapLabels.xc", "path":"defaultItem" },
+      "$ref": { "file":"../default/minimapLabelsTemplates.xc", "path":"def.defaultItem" },
       "flags": [ "player", "ally", "enemy", "squadman", "teamKiller", "alive" ],
-      "format": "<font face='$TitleFont' size='8' color='{{t-battles>19?{{c:r|#666666}}|#666666}}'>{{marksOnGun=-?*|{{marksOnGun|*}}}}</font>",
-      "x": -5,
-      "y": -2,
+      "format": "<font face='$TitleFont' size='6' color='{{t-battles>19?{{c:r|#666666}}|#666666}}'>{{marksOnGun|*}}</font>",
+      "x": 3,
+      "y": -6,
       "antiAliasType": "normal"
     }
   },
   "labels": {
     "formats": [
-      // vehicle merker
-      ${"../default/minimapLabels.xc":"items.vtype_lost_or_dead"},
       // txt
       ${"my_items.txt_spotted_alive_mog"},
-      ${"../default/minimapLabels.xc":"items.txt_spotted_alive"},
-      ${"../default/minimapLabels.xc":"items.txt_spotted_alive_squadman"},
-      ${"../default/minimapLabels.xc":"items.txt_lost_alive"},
-      ${"../default/minimapLabels.xc":"items.txt_lost_alive_squadman"},
-      ${"../default/minimapLabels.xc":"items.txt_dead_squadman"}
+
+      ${ "../default/minimapLabelsTemplates.xc":"def.nickSpotted" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.vehicleSpotted" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.nickLost" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.vehicleLost" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.vtypeLost" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.nickDead" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.vtypeDead" }
+
     ]
   }
 }
