@@ -489,48 +489,26 @@ class wot.PlayersPanel.PlayerListItemRenderer
         menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
     }
 
-    private function getFormattedNumberValue(format:Object, fieldName:String, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
-    {
-        var value = format[fieldName];
-        if (value == null)
-            return nullValue;
-        if (isNaN(value))
-        {
-            //Logger.add(value + " => " + Macros.Format(m_name, value, null));
-            var v = Macros.Format(m_name, value, null);
-            if (v == "XX")
-                v = 100;
-            if (isColorValue)
-                v = v.split("#").join("0x");
-            if (Macros.IsCached(m_name, value))
-                format[fieldName] = v;
-            value = v;
-        }
-        if (isNaN(value))
-            return emptyValue;
-        return Number(value);
-    }
-
     private function createExtraMovieClip(mc:MovieClip, format:Object, n:Number)
     {
         //Logger.addObject(format);
-        var x:Number = getFormattedNumberValue(format, "x", 0, 0);
-        var y:Number = getFormattedNumberValue(format, "y", 0, 0);
-        var w:Number = getFormattedNumberValue(format, "w", NaN, 0);
-        var h:Number = getFormattedNumberValue(format, "h", NaN, 0);
+        var x:Number = Macros.FormatNumber(m_name, format, "x", null, 0, 0);
+        var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
+        var w:Number = Macros.FormatNumber(m_name, format, "w", null, NaN, 0);
+        var h:Number = Macros.FormatNumber(m_name, format, "h", null, NaN, 0);
 
         var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
         img["data"] = {
             x: x, y: y, w: w, h: h,
             format: format,
             align: format.align != null ? format.align : (isLeftPanel ? "left" : "right"),
-            scaleX: getFormattedNumberValue(format, "scaleX", 1, 1) * 100,
-            scaleY: getFormattedNumberValue(format, "scaleY", 1, 1) * 100
+            scaleX: Macros.FormatNumber(m_name, format, "scaleX", null, 1, 1) * 100,
+            scaleY: Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100
         };
         //Logger.addObject(img["data"]);
 
-        img._alpha = getFormattedNumberValue(format, "alpha", 100, 100);
-        img._rotation = getFormattedNumberValue(format, "rotation", 0, 0);
+        img._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
+        img._rotation = Macros.FormatNumber(m_name, format, "rotation", null, 0, 0);
         img.autoSize = true;
         img.maintainAspectRatio = false;
         var me = this;
@@ -564,20 +542,20 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)
     {
         //Logger.addObject(format);
-        var x:Number = getFormattedNumberValue(format, "x", 0, 0);
-        var y:Number = getFormattedNumberValue(format, "y", 0, 0);
-        var w:Number = getFormattedNumberValue(format, "w", defW, 0);
-        var h:Number = getFormattedNumberValue(format, "h", defH, 0);
+        var x:Number = Macros.FormatNumber(m_name, format, "x", null, 0, 0);
+        var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
+        var w:Number = Macros.FormatNumber(m_name, format, "w", null, defW, 0);
+        var h:Number = Macros.FormatNumber(m_name, format, "h", null, defH, 0);
         var tf:TextField = mc.createTextField("f" + n, n, 0, 0, 0, 0);
         tf.data = {
             x: x, y: y, w: w, h: h,
             align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
         };
 
-        tf._xscale = getFormattedNumberValue(format, "scaleX", 1, 1) * 100;
-        tf._yscale = getFormattedNumberValue(format, "scaleY", 1, 1) * 100;
-        tf._alpha = getFormattedNumberValue(format, "alpha", 100, 100);
-        tf._rotation = getFormattedNumberValue(format, "rotation", 0, 0);
+        tf._xscale = Macros.FormatNumber(m_name, format, "scaleX", null, 1, 1) * 100;
+        tf._yscale = Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100;
+        tf._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
+        tf._rotation = Macros.FormatNumber(m_name, format, "rotation", null, 0, 0);
         tf.selectable = false;
         tf.html = true;
         tf.multiline = true;
@@ -588,9 +566,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
 
         tf.border = format.borderColor != null;
-        tf.borderColor = getFormattedNumberValue(format, "borderColor", 0xCCCCCC, 0xCCCCCC, true);
+        tf.borderColor = Macros.FormatNumber(m_name, format, "borderColor", null, 0xCCCCCC, 0xCCCCCC, true);
         tf.background = format.bgColor != null;
-        tf.backgroundColor = getFormattedNumberValue(format, "bgColor", 0x000000, 0x000000, true);
+        tf.backgroundColor = Macros.FormatNumber(m_name, format, "bgColor", null, 0x000000, 0x000000, true);
         if (tf.background && !tf.border)
         {
             format.borderColor = format.bgColor;

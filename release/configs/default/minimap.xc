@@ -13,6 +13,9 @@
     // Self icon transparency. White pointing arrow.
     // Прозрачность своей иконки. Белая стрелка.
     "selfIconAlpha": 75,
+    // Vehicle type icons transparency.
+    // Прозрачность иконок типа техники.
+    "iconAlpha": 100,
     // Hide camera direction green triangle (also hides WG camera direction line).
     // Спрятать зеленый треугольник направления камеры (также скрывает луч направления камеры WG).
     "hideCameraTriangle": false,

@@ -111,7 +111,6 @@ class wot.Minimap.Features
     private function applyFeatures():Void
     {
         setBGMapImageAlpha();
-        setPlayerIconAlpha();
 
         initializeZoomFeature();
 
@@ -210,17 +209,6 @@ class wot.Minimap.Features
         camera.vehicleNameTextFieldClassic._visible = false;
         camera.vehicleNameTextFieldAlt._visible = false;
         camera._alpha = Minimap.config.cameraAlpha;
-    }
-
-    /**
-     * Setup alpha for icon of player himself.
-     * Looks like white arrow.
-     * Does not affect attached shapes.
-     */
-    private function setPlayerIconAlpha():Void
-    {
-        var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.selfEntry;
-        selfIcon.selfIcon._alpha = Minimap.config.selfIconAlpha;
     }
 
     /**

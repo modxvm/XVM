@@ -15,6 +15,29 @@ class com.xvm.Macros
         return _instance._Format(pname, format, options);
     }
 
+    public static function FormatNumber(pname:String, cfg:Object, fieldName:String, obj:Object, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
+    {
+        var value = cfg[fieldName];
+        if (value == null)
+            return nullValue;
+        if (isNaN(value))
+        {
+            //Logger.add(value + " => " + Macros.Format(m_name, value, null));
+            var v = Macros.Format(pname, value, obj);
+            if (v == "XX")
+                v = 100;
+            if (isColorValue)
+                v = v.split("#").join("0x");
+            if (Macros.IsCached(pname, value))
+                cfg[fieldName] = v;
+            value = v;
+        }
+        if (isNaN(value))
+            return emptyValue;
+        return Number(value);
+    }
+
+
     public static function FormatGlobalNumberValue(value):Number
     {
         return _instance._FormatGlobalNumberValue(value);

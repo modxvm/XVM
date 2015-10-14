@@ -1,4 +1,5 @@
 import com.xvm.*;
+import com.xvm.DataTypes.*;
 import net.wargaming.ingame.MinimapEntry;
 import wot.Minimap.Minimap;
 import wot.Minimap.MinimapProxy;
@@ -47,6 +48,10 @@ class wot.Minimap.view.MarkerScaling
                 scaleFactor *= 2;
             // /FIXIT
             icon._xscale = icon._yscale = scaleFactor;
+
+            // Set icon alpha
+            icon._alpha = entry.selfIcon ? Minimap.config.selfIconAlpha : Minimap.config.iconAlpha;
+            icon._visible = icon._alpha > 0;
         }
     }
 

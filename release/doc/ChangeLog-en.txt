@@ -2,6 +2,7 @@
   * Minimap label settings was completely reworked. See minimapLabels.xc file.
   * "mapSize" config section moved to the root of the "minimap" and "minimapAlt" sections
   * "revealed" renamed to "spotted" everywhere
+  * Added option "minimap"/"iconAlpha" - vehicle type icons transparency on minimap
   * Added macros:
       {{vtype-key}}     - vehicle type table key value
       {{sys-color-key}} - key value for system color table

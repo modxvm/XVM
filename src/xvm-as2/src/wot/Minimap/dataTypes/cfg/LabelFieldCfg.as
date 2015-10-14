@@ -11,5 +11,8 @@ class wot.Minimap.dataTypes.cfg.LabelFieldCfg
     public var width;
     public var height;
     public var align:String;
+    public var valign:String;
     public var antiAliasType:String;
+    public var bgColor;
+    public var borderColor;
 }

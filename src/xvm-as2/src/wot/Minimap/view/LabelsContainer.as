@@ -1,14 +1,19 @@
+import flash.filters.*;
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import flash.filters.*;
 import wot.Minimap.*;
 import wot.Minimap.dataTypes.cfg.*;
 import wot.Minimap.model.externalProxy.*;
 
 class wot.Minimap.view.LabelsContainer extends XvmComponent
 {
-    public static var PLAYER_ID_FIELD_NAME:String = "__uid";
-    public static var INITIALIZED_FIELD_NAME:String = "__init";
-    public static var BATTLE_STATE_FIELD_NAME:String = "__bs";
+    private static var PLAYER_ID_FIELD_NAME:String = "__uid";
+    private static var INITIALIZED_FIELD_NAME:String = "__init";
+    private static var BATTLE_STATE_FIELD_NAME:String = "__bs";
+
+    private static var DEFAULT_TEXT_FIELD_WIDTH:Number = 100;
+    private static var DEFAULT_TEXT_FIELD_HEIGHT:Number = 40;
 
     public static function init():Void
     {
@@ -264,24 +269,63 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         if (!isAllowedState(cfg.flags, bs))
             return;
 
-        var x:Number = isNaN(cfg.x) ? Macros.Format(bs.playerName, cfg.x, bs) : cfg.x;
-        var y:Number = isNaN(cfg.y) ? Macros.Format(bs.playerName, cfg.y, bs) : cfg.y;
-        var width:Number = isNaN(cfg.width) ? Macros.Format(bs.playerName, cfg.width, bs) : cfg.width;
-        var height:Number = isNaN(cfg.height) ? Macros.Format(bs.playerName, cfg.height, bs) : cfg.height;
+        var playerName:String = bs.playerName;
+
+        var x:Number = Macros.FormatNumber(playerName, cfg, "x", bs, 0, 0);
+        var y:Number = Macros.FormatNumber(playerName, cfg, "y", bs, 0, 0);
+        var width:Number = Macros.FormatNumber(playerName, cfg, "width", bs, DEFAULT_TEXT_FIELD_WIDTH, 0);
+        var height:Number = Macros.FormatNumber(playerName, cfg, "height", bs, DEFAULT_TEXT_FIELD_HEIGHT, 0);
 
         var n:Number = labelMc.getNextHighestDepth();
         var textField:TextField = labelMc.createTextField("tf" + n, n, x, y, width, height);
         textField.cfg = cfg;
         textField.antiAliasType = cfg.antiAliasType;
         textField.html = true;
+        textField.wordWrap = false;
         textField.multiline = true;
         textField.selectable = false;
-        textField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0xFFFFFF, false, false, false, "", "", cfg.align));
-        if (cfg.shadow && cfg.shadow.enabled)
+        var align:String = cfg.align != null ? cfg.align : "left";
+        var valign:String = cfg.valign != null ? cfg.valign : "none";
+        textField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0xFFFFFF, false, false, false, "", "", align));
+        textField.autoSize = "none";
+        textField.verticalAlign = valign;
+        textField._alpha = Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100);
+
+        if (align == "right")
+            textField._x -= width;
+        else if (align == "center")
+            textField._x -= width / 2;
+        if (valign == "bottom")
+            textField._y -= height;
+        else if (align == "center")
+            textField._y -= height / 2;
+
+        textField.border = cfg.borderColor != null;
+        textField.borderColor = Macros.FormatNumber(playerName, cfg, "borderColor", bs, 0xCCCCCC, 0xCCCCCC, true);
+        textField.background = cfg.bgColor != null;
+        textField.backgroundColor = Macros.FormatNumber(playerName, cfg, "bgColor", bs, 0x000000, 0x000000, true);
+        if (textField.background && !textField.border)
         {
-            textField.filters = [ Utils.extractShadowFilter(cfg.shadow) ];
+            cfg.borderColor = cfg.bgColor;
+            textField.border = true;
+            textField.borderColor = textField.backgroundColor;
         }
-        textField._alpha = isNaN(cfg.alpha) ? Macros.Format(bs.playerName, cfg.alpha, bs) : cfg.alpha;
+
+        var shadow:Object = cfg.shadow;
+        if (shadow && shadow.alpha != 0 && shadow.strength != 0 && shadow.blur != 0)
+        {
+            var blur:Number = shadow.blur != null ? shadow.blur : 2;
+            textField.filters = [
+                new DropShadowFilter(
+                    shadow.distance != null ? shadow.distance : 0,
+                    shadow.angle != null ? shadow.angle : 0,
+                    shadow.color != null ? parseInt(shadow.color) : 0x000000,
+                    shadow.alpha != null ? shadow.alpha : 0.75,
+                    blur,
+                    blur,
+                    shadow.strength != null ? shadow.strength : 1)
+            ];
+        }
     }
 
     private function isAllowedState(flags:Array, bs:BattleStateData):Boolean
