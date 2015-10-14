@@ -40,8 +40,9 @@
     "vtypeSpotted": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "spotted", "alive" ],
-      "format": "<font size='15' color='{{.minimap.labelsData.colors.dot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
-      "align": "center"
+      "format": "<font size='13' color='{{.minimap.labelsData.colors.dot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
+      "align": "center",
+      "valign": "center"
     },
     // Название техники, видимый
     "vehicleSpotted": {
@@ -57,23 +58,23 @@
       "flags": [ "squadman", "spotted", "alive" ],
       "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
       "x": 2,
-      "y": 4
+      "y": -9
     },
     // Тип техники, пропавший
     "vtypeLost": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "lost", "alive" ],
-      "format": "<font size='15' color='{{.minimap.labelsData.colors.lostDot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
+      "format": "<font size='13' color='{{.minimap.labelsData.colors.lostDot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
       "align": "center",
       "valign": "center",
-      "alpha": 70
+      "alpha": 75
     },
     // Название техники, пропавший
     "vehicleLost": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "lost", "alive" ],
       "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{vehicle-short}}</i></font>",
-      "alpha": 70,
+      "alpha": 85,
       "x": 2,
       "y": -1
     },
@@ -82,9 +83,9 @@
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "squadman", "lost", "alive" ],
       "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
-      "alpha": 70,
+      "alpha": 85,
       "x": 2,
-      "y": 4
+      "y": -9
     },
     // Тип техники, мертвый
     "vtypeDead": {
@@ -94,7 +95,7 @@
       "shadow": { "$ref": { "path":"def.defaultItem.shadow" }, "strength": 3 },
       "align": "center",
       "valign": "center",
-      "alpha": 50
+      "alpha": 90
     },
     // Ник игрока, мертвый
     "nickDead": {
@@ -102,9 +103,8 @@
       "flags": [ "squadman", "dead" ],
       "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
       "shadow": { "$ref": { "path":"def.defaultItem.shadow" }, "strength": 3 },
-      "alpha": 50,
       "x": 2,
-      "y": -1
+      "y": -9
     }
   }
 }

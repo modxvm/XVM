@@ -44,14 +44,15 @@
     "formats": [
       //${ "minimapLabelsTemplates.xc":"def.vtypeSpotted" },
       ${ "minimapLabelsTemplates.xc":"def.vehicleSpotted" },
+      ${ "minimapLabelsTemplates.xc":"def.nickSpotted" },
       // Nick, spotted
       // Ник игрока, видимый
       {
         "$ref": { "path":"def.defaultItem" },
-        "flags": [ "ally", "squadman", "teamKiller", "spotted", "alive" ],
-        "format": "<font size='{{battletype?8|{{squad?8|0}}}}' color='{{ally?#BFBFBF|{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}}}'><i>{{name%.7s~..}}</i></font>",
-        "x": 3,
-        "y": 8
+        "flags": [ "ally", "teamKiller", "spotted", "alive" ],
+        "format": "<font size='{{battletype?8|0}}' color='{{tk?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|#BFBFBF}}'><i>{{name%.7s~..}}</i></font>",
+        "x": 2,
+        "y": -9
       },
       ${ "minimapLabelsTemplates.xc":"def.vtypeLost" },
       ${ "minimapLabelsTemplates.xc":"def.vehicleLost" },

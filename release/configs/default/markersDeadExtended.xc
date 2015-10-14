@@ -3,6 +3,9 @@
  * Настройки маркеров для трупов с Alt.
  */
 {
+// Definitions
+// Шаблоны
+"def": {
   // Floating damage values.
   // Всплывающий урон.
   "damageText": {
@@ -47,6 +50,59 @@
     // Text for ammo rack explosion (see description of macros in the macros.txt).
     // Текст при взрыве боеукладки (см. описание макросов в macros.txt).
     "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
+  },
+    // Text field with the name of the player.
+    // Текстовое поле с именем игрока.
+    "playerName": {
+      "name": "Player name",          // название текстового поля, ни на что не влияет
+      "visible": true,                // false - не отображать
+      "x": 0,                         // положение по оси X
+      "y": -34,                       // положение по оси Y
+      "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
+      "font": {                       // параметры шрифта
+        "name": "$FieldFont",         //   название
+        "size": 13,                   //   размер
+        "align": "center",            //   выравнивание текста (left, center, right)
+        "bold": false,                //   обычный (false) или жирный (true)
+        "italic": false               //   обычный (false) или курсив (true)
+      },
+      "shadow": {                     // параметры тени
+        "alpha": 100,                 //   прозрачность
+        "color": "0x000000",          //   цвет
+        "angle": 45,                  //   угол смещения
+        "distance": 0,                //   дистанция смещение
+        "size": 6,                    //   размер
+        "strength": 200               //   интенсивность
+      },
+      "format": "{{nick}}"            // формат текста. См. описание макросов в macros.txt
+    },
+    // Text field with the name of the tank.
+    // Текстовое поле с названием танка.
+    "tankName": {
+      "name": "Tank name",            // название текстового поля, ни на что не влияет
+      "visible": true,                // false - не отображать
+      "x": 0,                         // положение по оси X
+      "y": -20,                       // положение по оси Y
+      "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
+      "font": {                       // параметры шрифта
+        "name": "$FieldFont",         //   название
+        "size": 13,                   //   размер
+        "align": "center",            //   выравнивание текста (left, center, right)
+        "bold": false,                //   обычный (false) или жирный (true)
+        "italic": false               //   обычный (false) или курсив (true)
+      },
+      "shadow": {                     // параметры тени
+        "alpha": 100,                 //   прозрачность
+        "color": "0x000000",          //   цвет
+        "angle": 45,                  //   угол смещения
+        "distance": 0,                //   дистанция смещение
+        "size": 6,                    //   размер
+        "strength": 200               //   интенсивность
+      },
+      "format": "{{vehicle}}"         // формат текста. См. описание макросов в macros.txt
+    }
   },
   // Настройки для союзников.
   "ally": {
@@ -117,13 +173,13 @@
     // Floating damage values for ally, player, squadman.
     // Всплывающий урон для союзника, игрока, взводного.
     "damageText": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextPlayer": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextSquadman": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     // Vehicle contour icon.
     // Контурная иконка танка.
@@ -175,56 +231,8 @@
     // Block of text fields.
     // Блок текстовых полей.
     "textFields": [
-      // Имя игрока
-      {
-        "name": "Имя игрока",           // название текстового поля, ни на что не влияет
-        "visible": true,                // false - не отображать
-        "x": 0,                         // положение по оси X
-        "y": -34,                       // положение по оси Y
-        "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-        "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
-        "font": {                       // параметры шрифта
-          "name": "$FieldFont",         //   название
-          "size": 13,                   //   размер
-          "align": "center",            //   выравнивание текста (left, center, right)
-          "bold": false,                //   обычный (false) или жирный (true)
-          "italic": false               //   обычный (false) или курсив (true)
-        },
-        "shadow": {                     // параметры тени
-          "alpha": 100,                 //   прозрачность
-          "color": "0x000000",          //   цвет
-          "angle": 45,                  //   угол смещения
-          "distance": 0,                //   дистанция смещение
-          "size": 6,                    //   размер
-          "strength": 200               //   интенсивность
-        },
-        "format": "{{nick}}"            // формат текста. См. описание макросов в macros.txt
-      },
-      // Текстовое поле с названием танка
-      {
-        "name": "Название танка",       // название текстового поля, ни на что не влияет
-        "visible": true,                // false - не отображать
-        "x": 0,                         // положение по оси X
-        "y": -20,                       // положение по оси Y
-        "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-        "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
-        "font": {                       // параметры шрифта
-          "name": "$FieldFont",         //   название
-          "size": 13,                   //   размер
-          "align": "center",            //   выравнивание текста (left, center, right)
-          "bold": false,                //   обычный (false) или жирный (true)
-          "italic": false               //   обычный (false) или курсив (true)
-        },
-        "shadow": {                     // параметры тени
-          "alpha": 100,                 //   прозрачность
-          "color": "0x000000",          //   цвет
-          "angle": 45,                  //   угол смещения
-          "distance": 0,                //   дистанция смещение
-          "size": 6,                    //   размер
-          "strength": 200               //   интенсивность
-        },
-        "format": "{{vehicle}}"         // формат текста. См. описание макросов в macros.txt
-      }
+      ${ "def.tankName" },
+      ${ "def.playerName" }
     ]
   },
   // Настройки для противников.
@@ -277,13 +285,13 @@
     // Floating damage values for ally, player, squadman.
     // Всплывающий урон для союзника, игрока, взводного.
     "damageText": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextPlayer": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextSquadman": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     // Vehicle contour icon.
     // Контурная иконка танка.
@@ -324,58 +332,8 @@
     // Block of text fields.
     // Блок текстовых полей.
     "textFields": [
-      // Text field with the player name.
-      // Текстовое поле с именем игрока.
-      {
-        "name": "Player name",
-        "visible": true,
-        "x": 0,
-        "y": -34,
-        "alpha": 80,
-        "color": null,
-        "font": {
-          "name": "$FieldFont",
-          "size": 13,
-          "align": "center",
-          "bold": false,
-          "italic": false
-        },
-        "shadow": {
-          "alpha": 100,
-          "color": "0x000000",
-          "angle": 45,
-          "distance": 0,
-          "size": 6,
-          "strength": 200
-        },
-        "format": "{{nick}}"
-      },
-      // Text field with the name of the tank.
-      // Текстовое поле с названием танка.
-      {
-        "name": "Название танка",
-        "visible": true,
-        "x": 0,
-        "y": -20,
-        "alpha": 80,
-        "color": null,
-        "font": {
-          "name": "$FieldFont",
-          "size": 13,
-          "align": "center",
-          "bold": false,
-          "italic": false
-        },
-        "shadow": {
-          "alpha": 100,
-          "color": "0x000000",
-          "angle": 45,
-          "distance": 0,
-          "size": 6,
-          "strength": 200
-        },
-        "format": "{{vehicle}}"
-      }
+      ${ "def.tankName" },
+      ${ "def.playerName" }
     ]
   }
 }

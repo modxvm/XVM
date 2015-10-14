@@ -3,6 +3,9 @@
  * Настройки маркеров для трупов без Alt.
  */
 {
+// Definitions
+// Шаблоны
+"def": {
   // Floating damage values.
   // Всплывающий урон.
   "damageText": {
@@ -47,6 +50,7 @@
     // Text for ammo rack explosion (see description of macros in the macros.txt).
     // Текст при взрыве боеукладки (см. описание макросов в macros.txt).
     "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
+    }
   },
   // Настройки для союзников.
   "ally": {
@@ -117,13 +121,13 @@
     // Floating damage values for ally, player, squadman.
     // Всплывающий урон для союзника, игрока, взводного.
     "damageText": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextPlayer": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextSquadman": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     // Vehicle contour icon.
     // Контурная иконка танка.
@@ -226,13 +230,13 @@
     // Floating damage values for ally, player, squadman.
     // Всплывающий урон для союзника, игрока, взводного.
     "damageText": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextPlayer": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextSquadman": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     // Vehicle contour icon.
     // Контурная иконка танка.
