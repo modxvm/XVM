@@ -24,7 +24,7 @@
     "height": 40,
     "align": "left",
     "valign": "top",
-    "antiAliasType": "advanced",
+    "antiAliasType": "normal",
     "bgColor": null,
     "borderColor": null
   },
@@ -47,8 +47,8 @@
     // txt
     "txt_spotted_alive": {
       "$ref": { "path":"defaultItem" },
-      "flags": [ "ally", "enemy", "squadman", "teamKiller", "spotted", "alive" ],
-      "format": "<font size='8' color='{{.minimap.labels_data.colors.txt.{{sys-color-key}}}}'>{{vehicle}}</font>",
+      "flags": [ "ally", "enemy", "teamKiller", "spotted", "alive" ],
+      "format": "<font size='8' color='{{.minimap.labels_data.colors.txt.{{sys-color-key}}}}'>{{vehicle-short}}</font>",
       //"borderColor": "0x00FFFF",
       "x": 3,
       "y": -2
@@ -56,14 +56,14 @@
     "txt_spotted_alive_squadman": {
       "$ref": { "path":"defaultItem" },
       "flags": [ "squadman", "spotted", "alive" ],
-      "format": "<font size='8' color='{{.minimap.labels_data.colors.txt.{{sys-color-key}}}}'><i>{{name%.5s}}</i></font>",
+      "format": "<textformat leading='-5'><font size='8' color='{{.minimap.labels_data.colors.txt.{{sys-color-key}}}}'>{{vehicle-short}}</font>\n<font size='8' color='{{.minimap.labels_data.colors.txt.{{sys-color-key}}}}'><i>{{name%.5s}}</i></font></textformat>",
       "x": 3,
-      "y": 6
+      "y": -2
     },
     "txt_lost_alive": {
       "$ref": { "path":"defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "lost", "alive" ],
-      "format": "<font size='8' color='{{.minimap.labels_data.colors.txt.{{sys-color-key}}}}'><i>{{vehicle}}</i></font>",
+      "format": "<font size='8' color='{{.minimap.labels_data.colors.txt.{{sys-color-key}}}}'><i>{{vehicle-short}}</i></font>",
       "alpha": 70,
       "x": 3,
       "y": -2

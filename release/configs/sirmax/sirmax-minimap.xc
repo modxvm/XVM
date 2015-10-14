@@ -4,8 +4,8 @@
     "iconScale": 1.2,
     "hideCameraTriangle": true,
     "cameraAlpha": 90,
-    "selfIconAlpha": 70,
-    "iconAlpha": 0,
+    //"selfIconAlpha": 70,
+    //"iconAlpha": 0,
     //"showCameraLineAfterDeath": false,
     "minimapAimIcon": "cfg://sirmax/img/MinimapAim.png",
     "minimapAimIconScale": 200,
@@ -69,22 +69,6 @@
       ]
     },
     //"mapSize": { "enabled": false },
-    "labels": {
-//      "units": {
-//        "format": {
-//          "ally":           "<span class='mm_a'><font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-//          "squad":          "<span class='mm_s'><font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-//          "teamkiller":     "<span class='mm_t'><font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-//          "enemy":          "<span class='mm_e'><font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-//          "lostally":       "<span class='mm_la'>{{vehicle-class}}</span>",
-//          "lost":           "<span class='mm_l'>{{vehicle-class}}</span>",
-//          "deadally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'><i>{{nick%.5s}}</i></span>",
-//          "deadteamkiller": "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_dt'><i>{{nick%.5s}}</i></span>",
-//          "deadenemy":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_de'><i>{{nick%.5s}}</i></span>",
-//          "deadsquad":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{nick%.5s}}</i></span>"
-//        }
-//      },
-    },
     //"square" : { "enabled": false },
     "__stub__": null
   }
