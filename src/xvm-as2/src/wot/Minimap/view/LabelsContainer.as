@@ -75,12 +75,13 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         //Logger.addObject(e);
         if (!invalidateList[e.value])
-            invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
+            invalidateList[e.value] = e.type == Defines.E_PLAYER_DEAD ? INVALIDATE_TYPE_FORCE : INVALIDATE_TYPE_DEFAULT;
         invalidate();
     }
 
     private function onEntryNameUpdated(e:MinimapEvent)
     {
+        //Logger.addObject(e);
         var labelMc:MovieClip = _getLabel(Number(e.value));
         if (!labelMc[INITIALIZED_FIELD_NAME])
             return;
@@ -96,6 +97,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function onRefresh(e:MinimapEvent)
     {
+        //Logger.addObject(e);
         for (var i:String in holderMc)
         {
             if (typeof(holderMc[i]) == "movieclip")

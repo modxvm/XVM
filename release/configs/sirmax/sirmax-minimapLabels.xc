@@ -26,7 +26,6 @@
         "x": 0,
         "y": -2
       },
-      ${ "../default/minimapLabelsTemplates.xc":"def.vehicleLost" },
       ${ "../default/minimapLabelsTemplates.xc":"def.nickLost" },
       ${ "../default/minimapLabelsTemplates.xc":"def.vtypeDead" },
       ${ "../default/minimapLabelsTemplates.xc":"def.nickDead" }
