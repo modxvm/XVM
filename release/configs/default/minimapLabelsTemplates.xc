@@ -97,6 +97,15 @@
       "valign": "center",
       "alpha": 90
     },
+    // Название техники, мертвый
+    "vehicleDead": {
+      "$ref": { "path":"def.defaultItem" },
+      "flags": [ "squadman", "dead" ],
+      "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'>{{vehicle-short}}</font>",
+      "alpha": 85,
+      "x": 2,
+      "y": -1
+    },
     // Ник игрока, мертвый
     "nickDead": {
       "$ref": { "path":"def.defaultItem" },
