@@ -294,14 +294,9 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         textField.verticalAlign = valign;
         textField._alpha = Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100);
 
-        if (align == "right")
-            textField._x -= width;
-        else if (align == "center")
-            textField._x -= width / 2;
-        if (valign == "bottom")
-            textField._y -= height;
-        else if (align == "center")
-            textField._y -= height / 2;
+        cleanupFormat(textField, cfg);
+
+        alignField(textField);
 
         textField.border = cfg.borderColor != null;
         textField.borderColor = Macros.FormatNumber(playerName, cfg, "borderColor", bs, 0xCCCCCC, 0xCCCCCC, true);
@@ -381,10 +376,116 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         return stateOk && (bs.spottedStatus & spottedFlags != 0) && (aliveValue & aliveFlags != 0);
     }
 
+    // cleanup formats without macros to remove extra checks
+    private function cleanupFormat(field, cfg:LabelFieldCfg)
+    {
+        if (cfg.x != null && (typeof cfg.x != "string" || cfg.x.indexOf("{{") < 0))
+            delete cfg.x;
+        if (cfg.y != null && (typeof cfg.y != "string" || cfg.y.indexOf("{{") < 0))
+            delete cfg.y;
+        if (cfg.width != null && (typeof cfg.width != "string" || cfg.width.indexOf("{{") < 0))
+            delete cfg.width;
+        if (cfg.height != null && (typeof cfg.height != "string" || cfg.height.indexOf("{{") < 0))
+            delete cfg.height;
+        if (cfg.alpha != null && (typeof cfg.alpha != "string" || cfg.alpha.indexOf("{{") < 0))
+            delete cfg.alpha;
+        if (cfg.borderColor != null && (typeof cfg.borderColor != "string" || cfg.borderColor.indexOf("{{") < 0))
+            delete cfg.borderColor;
+        if (cfg.bgColor != null && (typeof cfg.bgColor != "string" || cfg.bgColor.indexOf("{{") < 0))
+            delete cfg.bgColor;
+    }
+
     private function updateTextField(textField:TextField, bs:BattleStateData):Void
     {
-        var text:String = Macros.Format(bs.playerName, textField.cfg.format, bs);
-        //Logger.add(bs.playerName + ": " + text + " <= " + textField.cfg.format);
-        textField.htmlText = text;
+        var value;
+        var needAlign:Boolean = false;
+        var cfg:LabelFieldCfg = textField.cfg;
+        var playerName:String = bs.playerName;
+
+        if (cfg.x != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "x", bs, 0, 0);
+            if (textField._x != value)
+            {
+                textField._x = value;
+                needAlign = true;
+            }
+        }
+
+        if (cfg.y != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "y", bs, 0, 0);
+            if (textField._y != value)
+            {
+                textField._y = value;
+                needAlign = true;
+            }
+        }
+
+        if (cfg.width != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "width", bs, 0, 0);
+            if (textField._width != value)
+            {
+                textField._width = value;
+                needAlign = true;
+            }
+        }
+
+        if (cfg.height != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "height", bs, 0, 0);
+            if (textField._height != value)
+            {
+                textField._height = value;
+                needAlign = true;
+            }
+        }
+
+        if (needAlign)
+            alignField(textField);
+
+        if (cfg.alpha != null)
+        {
+            Logger.add(playerName + ": " + cfg.alpha + "=" + Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100) + "  " + Macros.Format(playerName, "{{a:hp-ratio}}", bs));
+            value = Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100);
+            if (textField._alpha != value)
+                textField._alpha = value;
+        }
+
+        if (cfg.borderColor != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "borderColor", bs, 0, 0, true);
+            if (textField.borderColor != value)
+                textField.borderColor = value;
+        }
+
+        if (cfg.bgColor != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "bgColor", bs, 0, 0, true);
+            if (textField.backgroundColor != value)
+                textField.backgroundColor = value;
+        }
+
+        if (cfg.format != null)
+        {
+            value = Macros.Format(playerName, cfg.format, bs);
+            //Logger.add(playerName + ": " + value + " <= " + cfg.format);
+            textField.htmlText = value;
+        }
+    }
+
+    private function alignField(textField:TextField)
+    {
+        var align:String = textField.cfg.align;
+        var valign:String = textField.cfg.valign;
+        if (align == "right")
+            textField._x -= textField._width;
+        else if (align == "center")
+            textField._x -= textField._width / 2;
+        if (valign == "bottom")
+            textField._y -= textField._height;
+        else if (valign == "center")
+            textField._y -= textField._height / 2;
     }
 }

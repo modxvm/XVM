@@ -182,11 +182,11 @@
       { "value": 9999, "alpha": 0 }
     ],
     "hp_ratio": [
-      { "value": 1, "alpha": "#00" },
-      { "value": 10, "alpha": "#FF" },
-      { "value": 20, "alpha": "#BB" },
-      { "value": 50, "alpha": "#00" },
-      { "value": 101, "alpha": "#00" }
+      { "value": 1, "alpha": "00" },
+      { "value": 10, "alpha": "100" },
+      { "value": 20, "alpha": "75" },
+      { "value": 50, "alpha": "00" },
+      { "value": 101, "alpha": "00" }
     ]
   },
   "iconset": {
