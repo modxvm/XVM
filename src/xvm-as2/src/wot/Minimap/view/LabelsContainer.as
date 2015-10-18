@@ -264,13 +264,15 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         }
     }
 
-    private function createTextField(labelMc:MovieClip, cfg:LabelFieldCfg, bs:BattleStateData):Void
+    private function createTextField(labelMc:MovieClip, global_cfg:LabelFieldCfg, bs:BattleStateData):Void
     {
         //if (bs.dead)
         //    Logger.add(bs.entryName + " " + (bs.spottedStatus == Defines.SPOTTED_STATUS_SPOTTED) + " " + (!bs.dead) + " => [" + cfg.flags.join(", ") + "] = " + isAllowedState(cfg.flags, bs));
 
-        if (!isAllowedState(cfg.flags, bs))
+        if (!isAllowedState(global_cfg.flags, bs))
             return;
+
+        var cfg:LabelFieldCfg = new LabelFieldCfg(global_cfg);
 
         var playerName:String = bs.playerName;
 
@@ -293,10 +295,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         textField.autoSize = "none";
         textField.verticalAlign = valign;
         textField._alpha = Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100);
-
-        cleanupFormat(textField, cfg);
-
-        alignField(textField);
 
         textField.border = cfg.borderColor != null;
         textField.borderColor = Macros.FormatNumber(playerName, cfg, "borderColor", bs, 0xCCCCCC, 0xCCCCCC, true);
@@ -324,6 +322,9 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
                     shadow.strength != null ? shadow.strength : 1)
             ];
         }
+
+        cleanupFormat(textField, cfg);
+        alignField(textField);
     }
 
     private function isAllowedState(flags:Array, bs:BattleStateData):Boolean

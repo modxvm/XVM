@@ -7,4 +7,15 @@ class wot.Minimap.dataTypes.cfg.TextFieldShadowCfg
     public var alpha;
     public var blur;
     public var strength;
+
+    public function TextFieldShadowCfg(obj:TextFieldShadowCfg)
+    {
+        enabled = obj.enabled;
+        color = obj.color;
+        distance = obj.distance;
+        angle = obj.angle;
+        alpha = obj.alpha;
+        blur = obj.blur;
+        strength = obj.strength;
+    }
 }

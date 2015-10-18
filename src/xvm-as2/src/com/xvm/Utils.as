@@ -361,19 +361,55 @@ class com.xvm.Utils
                 return undefined;
             o = opi;
         }
-        return o == null ? null : Utils.clone(o);
+        return o == null ? null : Utils.deepCopy(o);
     }
 
     /**
-     * Deep copy
+     * Deep copy using json stringify+parse.
      */
-    public static function clone(obj:Object):Object
+    public static function jsonClone(obj:Object):Object
     {
-        /*var temp:ByteArray = new ByteArray();
-        temp.writeObject(obj);
-        temp.position = 0;
-        return temp.readObject();*/
         return JSONx.parse(JSONx.stringify(obj, "", true));
+    }
+
+    /**
+     * Deep copy recursively
+     * http://www.senocular.com/flash/actionscript/?file=ActionScript_2.0/deepObjectCopy.as
+     */
+    public static function deepCopy(obj:Object):Object
+    {
+        if (typeof obj != "object" || obj instanceof Button || obj instanceof TextField || obj instanceof MovieClip)
+            return obj;
+
+        var copy;
+
+        if (obj instanceof Boolean)
+            copy = new Boolean(Boolean.prototype.valueOf.call(obj));
+        else if (obj instanceof Number)
+            copy = new Number(Number.prototype.valueOf.call(obj));
+        else if (obj instanceof String)
+            copy = new String(String.prototype.valueOf.call(obj));
+        else if (obj.__constructor__)
+        {
+            if (typeof obj.clone == "function") {
+                copy = obj.clone();
+                if (copy.__proto__ == obj.__proto__)
+                    return copy;
+            }
+            copy = new obj.__constructor__();
+        }
+        else if (obj instanceof Array)
+            copy = [];
+        else
+            copy = {};
+
+        for (var p in obj)
+        {
+            if (obj.hasOwnProperty(p))
+                copy[p] = arguments.callee(obj[p]);
+        }
+
+        return copy;
     }
 
     public static function parseError(ex):String
