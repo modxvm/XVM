@@ -2,7 +2,7 @@
  * ...
  * @author Maxim Schedriviy
  */
-import com.xvm.Config;
+import com.xvm.*;
 
 class com.xvm.ColorsManager
 {
@@ -38,18 +38,22 @@ class com.xvm.ColorsManager
     }
 
     /**
+     * Get system color key for current state
+     */
+    public static function getSystemColorKey(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):String
+    {
+        return entityName + "_" + (isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead");
+    }
+
+    /**
      * Get system color value for current state
      */
     public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):Number
     {
-        var key: String = entityName + "_";
-        key += isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead";
-        //com.xvm.Logger.add("getSystemColor():" + key + " " + Config.config.colors.system[key]);
-        return parseInt(Config.config.colors.system[key]);
+        return parseInt(Config.config.colors.system[getSystemColorKey(entityName, isDead, isBlowedUp, isBase)]);
     }
 
-    public static function getDamageSystemColor(damageSource:String, damageDest:String, damageType:String,
-        isDead:Boolean, isBlowedUp:Boolean):Number
+    public static function getDamageSystemColor(damageSource:String, damageDest:String, damageType:String, isDead:Boolean, isBlowedUp:Boolean):Number
     {
         switch (damageType)
         {

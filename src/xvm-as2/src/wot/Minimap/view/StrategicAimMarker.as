@@ -2,7 +2,7 @@
  * @author sirmax
  */
 import com.xvm.*;
-import net.wargaming.controls.*;
+import net.wargaming.controls.UILoaderAlt;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
 
@@ -16,14 +16,14 @@ class wot.Minimap.view.StrategicAimMarker
 
     public function StrategicAimMarker(owner:MovieClip)
     {
-        var iconPath = Config.config.minimap.minimapAimIcon;
+        var iconPath = Minimap.config.minimapAimIcon;
         if (!iconPath || iconPath == "")
             return;
         iconPath = Utils.fixImgTagSrc(Macros.FormatGlobalStringValue(iconPath));
 
         holder = IconsProxy.createEmptyMovieClip(CONTAINER_NAME, MinimapConstants.STRATEGIC_AIM_ZINDEX);
         holder.hitTestDisable = true;
-        holder._xscale = holder._yscale = Config.config.minimap.minimapAimIconScale;
+        holder._xscale = holder._yscale = Minimap.config.minimapAimIconScale;
 
         icon = (UILoaderAlt)(holder.attachMovie("UILoaderAlt", "icon", 0));
 

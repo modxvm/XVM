@@ -13,6 +13,9 @@
     // Self icon transparency. White pointing arrow.
     // Прозрачность своей иконки. Белая стрелка.
     "selfIconAlpha": 75,
+    // Vehicle type icons transparency.
+    // Прозрачность иконок типа техники.
+    "iconAlpha": 100,
     // Hide camera direction green triangle (also hides WG camera direction line).
     // Спрятать зеленый треугольник направления камеры (также скрывает луч направления камеры WG).
     "hideCameraTriangle": false,
@@ -36,14 +39,18 @@
     "zoom": {
       // Number of pixels to get back from maximum size (screen height-minimap height).
       // Число пикселей для уменьшения миникарты от максимального размера (высота экрана-высота миникарты).
-      "pixelsBack": 160,
+      "pixelsBack": 449,
       // false - does not set zoomed minimap at display center.
       // false - не устанавливать увеличенную миникарту по центру экрана.
-      "centered": true
+      "centered": false
     },
+    // Map size label
+    // Поле размера карты
+    "mapSize": ${"minimapMapSize.xc":"mapSize"},
     // Minimap labels.
     // Надписи на миникарте.
     "labels": ${"minimapLabels.xc":"labels"},
+    "labelsData": ${"minimapLabelsData.xc":"labelsData"},
     // Minimap circles.
     // Круги на миникарте.
     "circles": ${"minimapCircles.xc":"circles"},

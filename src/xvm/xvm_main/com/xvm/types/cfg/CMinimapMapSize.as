@@ -4,11 +4,10 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMinimapLabelsMapSize extends Object
+    public dynamic class CMinimapMapSize extends Object
     {
         public var enabled:Boolean;
         public var format:String;
-        public var css:String;
         public var alpha:Number;
         public var offsetX:Number;
         public var offsetY:Number;

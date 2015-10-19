@@ -89,7 +89,7 @@ def _loadUrl(u, timeout, fingerprint, body):  # timeout in msec
             raise Exception('Encoding not supported: %s' % encoding)
 
         # log(response)
-        if resp.status not in [200, 202, 204]:  # 200 OK, 202 Accepted, 204 No Content
+        if resp.status not in [200, 202, 204, 401]:  # 200 OK, 202 Accepted, 204 No Content
             m = re.search(r'<body[^>]+?>\r?\n?(.+?)</body>', response, flags=re.S | re.I)
             if m:
                 response = m.group(1)

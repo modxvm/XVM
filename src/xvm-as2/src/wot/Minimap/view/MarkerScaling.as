@@ -1,7 +1,8 @@
 import com.xvm.*;
+import com.xvm.DataTypes.*;
 import net.wargaming.ingame.MinimapEntry;
+import wot.Minimap.Minimap;
 import wot.Minimap.MinimapProxy;
-import wot.Minimap.model.externalProxy.*;
 
 class wot.Minimap.view.MarkerScaling
 {
@@ -29,12 +30,12 @@ class wot.Minimap.view.MarkerScaling
      * @param entry
      * @param scaleFactor
      */
-    public function scaleEntry(entry:MinimapEntry, scaleFactor:Number):Void
+    public function scaleEntry(entry:net.wargaming.ingame.MinimapEntry, scaleFactor:Number):Void
     {
         //Logger.add("scaleEntry: " + entry.entryName + " " + MapConfig.iconScale);
 
         if (isNaN(scaleFactor))
-            scaleFactor = 100 * MapConfig.iconScale;
+            scaleFactor = 100 * Minimap.config.iconScale;
 
         if (entry._currentframe == 5 || entry._currentframe == 6) // cursors
             return;
@@ -47,6 +48,10 @@ class wot.Minimap.view.MarkerScaling
                 scaleFactor *= 2;
             // /FIXIT
             icon._xscale = icon._yscale = scaleFactor;
+
+            // Set icon alpha
+            icon._alpha = entry.selfIcon ? Minimap.config.selfIconAlpha : Minimap.config.iconAlpha;
+            icon._visible = icon._alpha > 0;
         }
     }
 
@@ -70,7 +75,7 @@ class wot.Minimap.view.MarkerScaling
     {
         //Logger.add("alternateVehicleScaling: " + MapConfig.iconScale);
 
-        var scaleFactor:Number = 100 * MapConfig.iconScale;
+        var scaleFactor:Number = 100 * Minimap.config.iconScale;
         var icons = MinimapProxy.wrapper.icons;
         for (var i in icons)
         {

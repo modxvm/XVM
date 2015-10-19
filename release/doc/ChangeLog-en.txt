@@ -1,4 +1,13 @@
-﻿XVM-6.1.4.4-dev:
+﻿XVM-6.1.5:
+  * Minimap label settings was completely reworked. See minimapLabels.xc file.
+  * "mapSize" config section moved to the root of the "minimap" and "minimapAlt" sections
+  * "revealed" renamed to "spotted" everywhere
+  * Added option "minimap"/"iconAlpha" - vehicle type icons transparency on minimap
+  * Added macros:
+      {{vtype-key}}     - vehicle type table key value
+      {{sys-color-key}} - key value for system color table
+    These macros can be useful in conjunction with {{.}} macro
+  * Increased config version to 6.1.0
   * Personal missions: added "Incomplete" filter (Started + Improve)
 
 XVM-6.1.4.3:

@@ -1,23 +1,19 @@
+import flash.filters.*;
 import com.xvm.*;
-import flash.geom.*;
+import com.xvm.DataTypes.*;
+import flash.filters.*;
 import wot.Minimap.*;
-import wot.Minimap.dataTypes.*;
+import wot.Minimap.dataTypes.cfg.*;
 import wot.Minimap.model.externalProxy.*;
-import wot.Minimap.view.*;
-import wot.PlayersPanel.*;
 
 class wot.Minimap.view.LabelsContainer extends XvmComponent
 {
-    private static var _instance:LabelsContainer;
+    private static var PLAYER_ID_FIELD_NAME:String = "__uid";
+    private static var INITIALIZED_FIELD_NAME:String = "__init";
+    private static var BATTLE_STATE_FIELD_NAME:String = "__bs";
 
-    /**
-     * References to labelMc properties.
-     * Cannot extend MovieClip class due to AS2 being crap language\framework\API.
-     */
-    public static var STATUS_FIELD_NAME:String = "lastStatus";
-    public static var PLAYER_INFO_FIELD_NAME:String = "playerInfo";
-    public static var ENTRY_NAME_FIELD_NAME:String = "entryName";
-    public static var VEHICLE_CLASS_FIELD_NAME:String = "vehicleClass";
+    private static var DEFAULT_TEXT_FIELD_WIDTH:Number = 100;
+    private static var DEFAULT_TEXT_FIELD_HEIGHT:Number = 40;
 
     public static function init():Void
     {
@@ -29,6 +25,16 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         //Logger.add("LabelsContainer.getLabel(" + playerId + ")");
         return instance._getLabel(playerId);
+    }
+
+    // INSTANCE
+
+    private static var _instance:LabelsContainer;
+    private static function get instance():LabelsContainer
+    {
+        if (!_instance)
+            _instance = new LabelsContainer();
+        return _instance;
     }
 
     // PRIVATE
@@ -46,23 +52,16 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private var invalidateList:Object = {};
 
-    private static function get instance():LabelsContainer
-    {
-        if (!_instance)
-            _instance = new LabelsContainer();
-        return _instance;
-    }
-
     private function LabelsContainer()
     {
         holderMc = IconsProxy.createEmptyMovieClip(CONTAINER_NAME, MinimapConstants.LABELS_ZINDEX);
 
-        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onPlayerDeadEvent);
+        GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefresh);
     }
 
     private function _init()
@@ -70,47 +69,39 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         // empty function required for instance creation
     }
 
-    private function onMinimapEvent(e:MinimapEvent)
-    {
-        //Logger.add("e.value = " + e.value);
-        //if (isNaN(e.value))
-        //    Logger.addObject(e, 2, "onMinimapEvent: null value");
+    // EVENT HANDLERS
 
+    private function onMinimapEvent(e:Object)
+    {
+        //Logger.addObject(e);
         if (!invalidateList[e.value])
-            invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
+            invalidateList[e.value] = e.type == Defines.E_PLAYER_DEAD ? INVALIDATE_TYPE_FORCE : INVALIDATE_TYPE_DEFAULT;
         invalidate();
     }
 
     private function onEntryNameUpdated(e:MinimapEvent)
     {
+        //Logger.addObject(e);
         var labelMc:MovieClip = _getLabel(Number(e.value));
+        if (!labelMc[INITIALIZED_FIELD_NAME])
+            return;
+        var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
         var entryName:String = e.entry.entryName;
-        if (labelMc[ENTRY_NAME_FIELD_NAME] != entryName)
+        if (bs.entryName != entryName)
         {
-            labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
+            bs.entryName = entryName;
             invalidateList[e.value] = INVALIDATE_TYPE_FORCE;
             invalidate();
         }
     }
 
-    private function onPlayerDeadEvent(e:Object)
+    private function onRefresh(e:MinimapEvent)
     {
-        //Logger.add("(dead) e.value = " + e.value);
-        //if (isNaN(e.value))
-        //    Logger.addObject(e, 2, "onPlayerDeadEvent: null value");
-        if (!invalidateList[e.value])
-            invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
-        invalidate();
-    }
-
-    private function onRefreshEvent(e:MinimapEvent)
-    {
+        //Logger.addObject(e);
         for (var i:String in holderMc)
         {
             if (typeof(holderMc[i]) == "movieclip")
             {
-                var labelMc:MovieClip = holderMc[i];
-                Macros.RegisterMinimapMacros(labelMc[PLAYER_INFO_FIELD_NAME], getVehicleClassSymbol(labelMc[VEHICLE_CLASS_FIELD_NAME]));
                 invalidateList[i] = INVALIDATE_TYPE_FORCE;
             }
         }
@@ -122,83 +113,99 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         Cmd.profMethodStart("Minimap.Labels.draw()");
 
+        var newInvalidateList = { };
         for (var playerIdStr:String in invalidateList)
         {
             var playerId:Number = Number(playerIdStr);
-            var force:Boolean = invalidateList[playerIdStr] == INVALIDATE_TYPE_FORCE;
+
             var labelMc:MovieClip = _getLabel(playerId);
-            var previousStatus:Number = labelMc[STATUS_FIELD_NAME];
-            var actualStatus:Number = getPresenceStatus(playerId);
-
-            //Logger.add(IconsProxy.entry(playerId).entryName + ": " + playerId + " " + force + " " + previousStatus + " " + actualStatus);
-
-            if ((previousStatus != actualStatus) || force)
+            if (!labelMc[INITIALIZED_FIELD_NAME])
             {
-                labelMc[STATUS_FIELD_NAME] = actualStatus;
-                LabelViewBuilder.createTextField(labelMc);
-                updateLabelDepth(labelMc);
+                if (!initLabel(labelMc, playerId))
+                {
+                    newInvalidateList[playerIdStr] = INVALIDATE_TYPE_FORCE;
+                    invalidate();
+                    continue;
+                }
+                labelMc[INITIALIZED_FIELD_NAME] = true;
+            }
+
+            var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
+            var prevSpottedStatus = bs.spottedStatus;
+            var currSpottedStatus:Number;
+            if (IconsProxy.playerIds[playerId] != null)
+            {
+                currSpottedStatus = Defines.SPOTTED_STATUS_SPOTTED;
             }
             else
             {
-                LabelViewBuilder.updateTextField(labelMc);
+                currSpottedStatus = prevSpottedStatus == Defines.SPOTTED_STATUS_SPOTTED ? Defines.SPOTTED_STATUS_LOST : prevSpottedStatus;
             }
+
+            var force:Boolean = invalidateList[playerIdStr] == INVALIDATE_TYPE_FORCE;
+
+            //Logger.add("(draw) " + bs.playerName + ": " + bs.entryName + ": " + prevSpottedStatus + " " + currSpottedStatus + " " + force);
+
+            if ((prevSpottedStatus != currSpottedStatus) || force)
+            {
+                bs.spottedStatus = currSpottedStatus;
+                createTextFields(labelMc);
+                updateLabelDepth(labelMc);
+            }
+            updateTextFields(labelMc);
         }
-        invalidateList = { };
+        invalidateList = newInvalidateList;
 
         Cmd.profMethodEnd("Minimap.Labels.draw()");
     }
 
+    // PRIVATE
+
     private function _getLabel(playerId:Number):MovieClip
     {
-        if (holderMc[playerId] == null)
+        if (!holderMc[playerId])
             createLabel(playerId);
         return holderMc[playerId];
     }
 
     private function createLabel(playerId:Number):Void
     {
-        //Logger.add("LabelsContainer.createLabel()");
-
-        var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(playerId);
-        var entryName = entry.entryName;
-        var vehicleClass = entry.vehicleClass;
-
         var depth:Number = getFreeDepth(ALIVE_DEPTH_START);
         var labelMc:MovieClip = holderMc.createEmptyMovieClip(playerId.toString(), depth);
+        labelMc[PLAYER_ID_FIELD_NAME] = playerId;
+        labelMc[INITIALIZED_FIELD_NAME] = false;
+    }
 
-        /**
-         * References to labelMc properties.
-         * Cannot extend MovieClip class due to AS2 being crap language\framework\API.
-         */
-        var playerInfo = PlayersPanelProxy.getPlayerInfo(playerId);
-        labelMc[PLAYER_INFO_FIELD_NAME] = playerInfo;
-        labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
-        labelMc[VEHICLE_CLASS_FIELD_NAME] = vehicleClass;
-        labelMc[STATUS_FIELD_NAME] = Player.PLAYER_REVEALED;
+    private function initLabel(labelMc:MovieClip, playerId:Number):Boolean
+    {
+        var bs:BattleStateData = BattleState.get(playerId);
+        if (!bs || !bs.playerId)
+            return false;
 
-        //Logger.addObject(labelMc, 3);
+        //Logger.add("LabelsContainer.createLabel()");
 
-        Macros.RegisterMinimapMacros(playerInfo, getVehicleClassSymbol(vehicleClass));
+        labelMc[BATTLE_STATE_FIELD_NAME] = bs;
+        bs.entryName = IconsProxy.entry(playerId).entryName;
+        bs.spottedStatus = Defines.SPOTTED_STATUS_SPOTTED;
 
-        /**
-         * Label stays at creation point some time before first move.
-         * It makes unpleasant label positioning at map center.
-         * Workaround.
-         */
+        // Workaround: Label stays at creation point some time before first move.
+        // It makes unpleasant label positioning at map center.
         labelMc._x = OFFMAP_COORDINATE;
         labelMc._y = OFFMAP_COORDINATE;
 
-        LabelViewBuilder.createTextField(labelMc);
+        createTextFields(labelMc);
+
+        return true;
     }
 
     private function updateLabelDepth(labelMc:MovieClip):Void
     {
         //Logger.add("LabelsContainer.updateLabelDepth()");
-        var status:Number = labelMc[STATUS_FIELD_NAME];
+        var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
         var depth:Number;
-        if (Math.abs(status) == Player.PLAYER_DEAD)
+        if (bs.dead)
             depth = getFreeDepth(DEAD_DEPTH_START);
-        else if (Math.abs(status) == Player.PLAYER_LOST)
+        else if (bs.spottedStatus == Defines.SPOTTED_STATUS_LOST)
             depth = getFreeDepth(LOST_DEPTH_START);
         else
             depth = getFreeDepth(ALIVE_DEPTH_START);
@@ -211,69 +218,275 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         var depth:Number = start;
         while (holderMc.getInstanceAtDepth(depth))
         {
-            depth++
+            depth++;
         }
 
         return depth;
     }
 
-    private function getPresenceStatus(playerId:Number):Number
+    private function createTextFields(labelMc:MovieClip):Void
     {
-        //Logger.add("LabelsContainer.getPresenceStatus()");
-        var status:Number;
+        this.removeTextFields(labelMc);
 
-        if (IconsProxy.playerIds[playerId] != null)
+        var formats:Array = Minimap.config.labels.formats;
+        if (formats)
         {
-            status = Player.PLAYER_REVEALED;
-        }
-        else
-        {
-            /**
-             * Guy is not present on minimap.
-             * He is either dead or lost.
-             * Uids that has never been seen are not passed to this method.
-             */
-            if (PlayersPanelProxy.isDead(playerId))
+            var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
+            var len:Number = formats.length;
+            for (var i:Number = 0; i < formats.length; ++i)
             {
-                status = Player.PLAYER_DEAD;
-            }
-            else
-            {
-                status = Player.PLAYER_LOST;
+                createTextField(labelMc, formats[i], bs);
             }
         }
-
-        var player:Player = PlayersPanelProxy.getPlayerInfo(playerId);
-        if (player.teamKiller)
-        {
-            /**
-             * Set below zero.
-             * Later this will be recognized at MapConfig too.
-             */
-            status *= Player.TEAM_KILLER_FLAG;
-        }
-
-        return status;
     }
 
-    public static function getVehicleClassSymbol(vehicleClass:String):String
+    private function removeTextFields(labelMc:MovieClip):Void
     {
-        switch (vehicleClass)
+        for (var name in labelMc)
         {
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_LIGHT:
-                return MapConfig.lightSymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_MEDIUM:
-                return MapConfig.mediumSymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_HEAVY:
-                return MapConfig.heavySymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_TD:
-                return MapConfig.tdSymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_SPG:
-                return MapConfig.spgSymbol;
-            case MinimapConstants.MINIMAP_ENTRY_VEH_CLASS_SUPER:
-                return MapConfig.superSymbol;
-            default:
-                return "";
+            if (labelMc[name] instanceof TextField)
+            {
+                labelMc[name].removeTextField();
+                delete labelMc[name];
+            }
         }
+    }
+
+    private function updateTextFields(labelMc:MovieClip):Void
+    {
+        var bs:BattleStateData = labelMc[BATTLE_STATE_FIELD_NAME];
+        for (var name in labelMc)
+        {
+            if (labelMc[name] instanceof TextField)
+            {
+                updateTextField(labelMc[name], bs);
+            }
+        }
+    }
+
+    private function createTextField(labelMc:MovieClip, global_cfg:LabelFieldCfg, bs:BattleStateData):Void
+    {
+        //if (bs.dead)
+        //    Logger.add(bs.entryName + " " + (bs.spottedStatus == Defines.SPOTTED_STATUS_SPOTTED) + " " + (!bs.dead) + " => [" + cfg.flags.join(", ") + "] = " + isAllowedState(cfg.flags, bs));
+
+        if (!isAllowedState(global_cfg.flags, bs))
+            return;
+
+        var cfg:LabelFieldCfg = new LabelFieldCfg(global_cfg);
+
+        var playerName:String = bs.playerName;
+
+        var x:Number = Macros.FormatNumber(playerName, cfg, "x", bs, 0, 0);
+        var y:Number = Macros.FormatNumber(playerName, cfg, "y", bs, 0, 0);
+        var width:Number = Macros.FormatNumber(playerName, cfg, "width", bs, DEFAULT_TEXT_FIELD_WIDTH, 0);
+        var height:Number = Macros.FormatNumber(playerName, cfg, "height", bs, DEFAULT_TEXT_FIELD_HEIGHT, 0);
+
+        var n:Number = labelMc.getNextHighestDepth();
+        var textField:TextField = labelMc.createTextField("tf" + n, n, x, y, width, height);
+        textField.cfg = cfg;
+        textField.antiAliasType = cfg.antiAliasType;
+        textField.html = true;
+        textField.wordWrap = false;
+        textField.multiline = true;
+        textField.selectable = false;
+        var align:String = cfg.align != null ? cfg.align : "left";
+        var valign:String = cfg.valign != null ? cfg.valign : "none";
+        textField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0xFFFFFF, false, false, false, "", "", align));
+        textField.autoSize = "none";
+        textField.verticalAlign = valign;
+        textField._alpha = Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100);
+
+        textField.border = cfg.borderColor != null;
+        textField.borderColor = Macros.FormatNumber(playerName, cfg, "borderColor", bs, 0xCCCCCC, 0xCCCCCC, true);
+        textField.background = cfg.bgColor != null;
+        textField.backgroundColor = Macros.FormatNumber(playerName, cfg, "bgColor", bs, 0x000000, 0x000000, true);
+        if (textField.background && !textField.border)
+        {
+            cfg.borderColor = cfg.bgColor;
+            textField.border = true;
+            textField.borderColor = textField.backgroundColor;
+        }
+
+        var shadow:Object = cfg.shadow;
+        if (shadow && shadow.alpha != 0 && shadow.strength != 0 && shadow.blur != 0)
+        {
+            var blur:Number = shadow.blur != null ? shadow.blur : 2;
+            textField.filters = [
+                new DropShadowFilter(
+                    shadow.distance != null ? shadow.distance : 0,
+                    shadow.angle != null ? shadow.angle : 0,
+                    shadow.color != null ? parseInt(shadow.color) : 0x000000,
+                    shadow.alpha != null ? shadow.alpha : 0.75,
+                    blur,
+                    blur,
+                    shadow.strength != null ? shadow.strength : 1)
+            ];
+        }
+
+        cleanupFormat(textField, cfg);
+        alignField(textField);
+    }
+
+    private function isAllowedState(flags:Array, bs:BattleStateData):Boolean
+    {
+        if (!flags)
+            return false;
+        var entryName:String = bs.entryName;
+        var stateOk:Boolean = false;
+        var spottedFlags:Number = 0;
+        var aliveFlags:Number = 0;
+        var len:Number = flags.length;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var flag:String = flags[i];
+
+            if (!stateOk)
+            {
+                if (entryName == flag)
+                {
+                    stateOk = true;
+                    continue;
+                }
+            }
+
+            switch (flag)
+            {
+                case "spotted":
+                    spottedFlags |= Defines.SPOTTED_STATUS_SPOTTED;
+                    break;
+                case "lost":
+                    spottedFlags |= Defines.SPOTTED_STATUS_LOST;
+                    break;
+                case "alive":
+                    aliveFlags |= Defines.ALIVE_FLAG_ALIVE;
+                    break;
+                case "dead":
+                    aliveFlags |= Defines.ALIVE_FLAG_DEAD;
+                    break;
+            }
+        }
+
+        if (!spottedFlags)
+            spottedFlags = Defines.SPOTTED_STATUS_ANY;
+
+        if (!aliveFlags)
+            aliveFlags = Defines.ALIVE_FLAG_ANY;
+
+        var aliveValue:Number = bs.dead ? Defines.ALIVE_FLAG_DEAD : Defines.ALIVE_FLAG_ALIVE;
+
+        return stateOk && (bs.spottedStatus & spottedFlags != 0) && (aliveValue & aliveFlags != 0);
+    }
+
+    // cleanup formats without macros to remove extra checks
+    private function cleanupFormat(field, cfg:LabelFieldCfg)
+    {
+        if (cfg.x != null && (typeof cfg.x != "string" || cfg.x.indexOf("{{") < 0))
+            delete cfg.x;
+        if (cfg.y != null && (typeof cfg.y != "string" || cfg.y.indexOf("{{") < 0))
+            delete cfg.y;
+        if (cfg.width != null && (typeof cfg.width != "string" || cfg.width.indexOf("{{") < 0))
+            delete cfg.width;
+        if (cfg.height != null && (typeof cfg.height != "string" || cfg.height.indexOf("{{") < 0))
+            delete cfg.height;
+        if (cfg.alpha != null && (typeof cfg.alpha != "string" || cfg.alpha.indexOf("{{") < 0))
+            delete cfg.alpha;
+        if (cfg.borderColor != null && (typeof cfg.borderColor != "string" || cfg.borderColor.indexOf("{{") < 0))
+            delete cfg.borderColor;
+        if (cfg.bgColor != null && (typeof cfg.bgColor != "string" || cfg.bgColor.indexOf("{{") < 0))
+            delete cfg.bgColor;
+    }
+
+    private function updateTextField(textField:TextField, bs:BattleStateData):Void
+    {
+        var value;
+        var needAlign:Boolean = false;
+        var cfg:LabelFieldCfg = textField.cfg;
+        var playerName:String = bs.playerName;
+
+        if (cfg.x != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "x", bs, 0, 0);
+            if (textField._x != value)
+            {
+                textField._x = value;
+                needAlign = true;
+            }
+        }
+
+        if (cfg.y != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "y", bs, 0, 0);
+            if (textField._y != value)
+            {
+                textField._y = value;
+                needAlign = true;
+            }
+        }
+
+        if (cfg.width != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "width", bs, 0, 0);
+            if (textField._width != value)
+            {
+                textField._width = value;
+                needAlign = true;
+            }
+        }
+
+        if (cfg.height != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "height", bs, 0, 0);
+            if (textField._height != value)
+            {
+                textField._height = value;
+                needAlign = true;
+            }
+        }
+
+        if (needAlign)
+            alignField(textField);
+
+        if (cfg.alpha != null)
+        {
+            Logger.add(playerName + ": " + cfg.alpha + "=" + Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100) + "  " + Macros.Format(playerName, "{{a:hp-ratio}}", bs));
+            value = Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100);
+            if (textField._alpha != value)
+                textField._alpha = value;
+        }
+
+        if (cfg.borderColor != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "borderColor", bs, 0, 0, true);
+            if (textField.borderColor != value)
+                textField.borderColor = value;
+        }
+
+        if (cfg.bgColor != null)
+        {
+            value = Macros.FormatNumber(playerName, cfg, "bgColor", bs, 0, 0, true);
+            if (textField.backgroundColor != value)
+                textField.backgroundColor = value;
+        }
+
+        if (cfg.format != null)
+        {
+            value = Macros.Format(playerName, cfg.format, bs);
+            //Logger.add(playerName + ": " + value + " <= " + cfg.format);
+            textField.htmlText = value;
+        }
+    }
+
+    private function alignField(textField:TextField)
+    {
+        var align:String = textField.cfg.align;
+        var valign:String = textField.cfg.valign;
+        if (align == "right")
+            textField._x -= textField._width;
+        else if (align == "center")
+            textField._x -= textField._width / 2;
+        if (valign == "bottom")
+            textField._y -= textField._height;
+        else if (valign == "center")
+            textField._y -= textField._height / 2;
     }
 }

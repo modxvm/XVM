@@ -15,10 +15,11 @@ package com.xvm.types.cfg
         public var iconScale:Number;
         public var minimapAimIcon:String;
         public var minimapAimIconScale:Number;
-        public var zoom: CMinimapZoom;
+        public var zoom:CMinimapZoom;
         public var square:CMinimapSquare;
-        public var circles: CMinimapCircles;
+        public var circles:CMinimapCircles;
         public var lines:CMinimapLines;
-        public var labels: CMinimapLabels;
+        public var mapSize:CMinimapMapSize;
+        public var labels:CMinimapLabels;
     }
 }

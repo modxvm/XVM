@@ -3,7 +3,6 @@ import com.xvm.DataTypes.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.shapes.*;
-import wot.PlayersPanel.*;
 
 class wot.Minimap.shapes.Square extends ShapeAttach
 {
@@ -20,7 +19,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
     public function Square()
     {
         // Disable square mod if user is artillery class
-        if (!MapConfig.artiEnabled && isArtillery())
+        if (!Minimap.config.square.artilleryEnabled && isArtillery())
             return;
 
         super();
@@ -52,9 +51,8 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function defineStyle():Void
     {
-        var config:Object = MapConfig.squareConfig;
-
-        squareClip.lineStyle(config.thickness, parseInt(config.color, 16), config.alpha, null, null, "none");
+        var cfg:Object = Minimap.config.square;
+        squareClip.lineStyle(cfg.thickness, parseInt(cfg.color, 16), cfg.alpha, null, null, "none");
     }
 
     private function drawLines():Void
@@ -90,7 +88,8 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function isArtillery():Boolean
     {
-        var vdata:VehicleData = VehicleInfo.get(PlayersPanelProxy.self.vid);
+        var bs:BattleStateData = BattleState.getSelf();
+        var vdata:VehicleData = VehicleInfo.get(bs.vehId);
         return vdata == null ? false : vdata.vclass == "SPG";
     }
 

@@ -111,7 +111,7 @@ class wot.Minimap.MinimapEntry
         //Logger.add("add:   " + playerId);
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_INITED, wrapper, playerId));
 
-        this.onEntryRevealed();
+        this.onEntrySpotted();
 
         this.wrapper["_xvm_removeMovieClip"] = this.wrapper.removeMovieClip;
         this.wrapper.removeMovieClip = function()
@@ -226,20 +226,23 @@ class wot.Minimap.MinimapEntry
 
     // -- Private
 
-    private function onEntryRevealed()
+    private function onEntrySpotted()
     {
-        if (!MapConfig.enabled || !MapConfig.revealedEnabled)
+        if (!Minimap.config.enabled || !Minimap.config.labels.enabled || !Minimap.config.labels.formats || Minimap.config.labels.formats.length == 0)
             return;
 
-        this.labelMc = LabelsContainer.getLabel(playerId);
-        if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
+        /*if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
         {
             if (wrapper.orig_entryName == null)
                 wrapper.orig_entryName = wrapper.entryName;
             wrapper.setEntryName(MinimapConstants.STATIC_ICON_CONTROL);
-        }
+        }*/
 
-        setLabelToMimicEntryMoves();
+        //if (playerId)
+        //{
+            this.labelMc = LabelsContainer.getLabel(playerId);
+            setLabelToMimicEntryMoves();
+        //}
     }
 
     private function setLabelToMimicEntryMoves():Void
@@ -251,9 +254,9 @@ class wot.Minimap.MinimapEntry
             if (isNaN(this._x) || isNaN(this._y))
                 return;
 
-            var mc:MovieClip = this.xvm_worker.labelMc
-            mc._x = this._x;
-            mc._y = this._y;
+            var labelMc:MovieClip = this.xvm_worker.labelMc;
+            labelMc._x = this._x;
+            labelMc._y = this._y;
         };
     }
 }

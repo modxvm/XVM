@@ -4,7 +4,8 @@
     "iconScale": 1.2,
     "hideCameraTriangle": true,
     "cameraAlpha": 90,
-    "selfIconAlpha": 75,
+    //"selfIconAlpha": 70,
+    //"iconAlpha": 0,
     //"showCameraLineAfterDeath": false,
     "minimapAimIcon": "cfg://sirmax/img/MinimapAim.png",
     "minimapAimIconScale": 200,
@@ -40,25 +41,14 @@
         { "enabled": true, "from": 50,  "to": 1463,  "inmeters": true, "thickness": 0.5,   "alpha": 65, "color": "0xFFFFFF"}
       ]
     },
-    "labels": {
-      "units": {
-        "format": {
-          "ally":       "<textformat leading='-15'><span class='mm_a'>{{vehicle-short}}\n<font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span></textformat>",
-          "teamkiller": "<textformat leading='-15'><span class='mm_t'>{{vehicle-short}}\n<font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span></textformat>",
-          "enemy":      "<textformat leading='-15'><span class='mm_e'>{{vehicle-short}}\n<font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span></textformat>"
-        },
-        "alpha" : {
-          //"deadenemy": 50
-        }
-      }
-    },
+    "labels": ${"sirmax-minimapLabels.xc":"labels"},
     "square" : { "enabled": true }
   },
   "minimapAlt": {
     "$ref": { "path": "minimap" },
-    "enabled": true,
+    "enabled": false,
     "mapBackgroundImageAlpha": 50,
-    "selfIconAlpha": 50,
+    //"selfIconAlpha": 50,
     "hideCameraTriangle": false,
     "cameraAlpha": 100,
     "iconScale": 2,
@@ -78,23 +68,7 @@
        { "enabled": true, "from": 50,  "to": 1463,  "inmeters": true, "thickness": 0.5,   "alpha": 65, "color": "0xFFFFFF"}
       ]
     },
-    "labels": {
-      "units": {
-        "format": {
-          "ally":           "<span class='mm_a'><font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-          "squad":          "<span class='mm_s'><font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-          "teamkiller":     "<span class='mm_t'><font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-          "enemy":          "<span class='mm_e'><font color='{{t-battles>9?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
-          "lostally":       "<span class='mm_la'>{{vehicle-class}}</span>",
-          "lost":           "<span class='mm_l'>{{vehicle-class}}</span>",
-          "deadally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'><i>{{nick%.5s}}</i></span>",
-          "deadteamkiller": "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_dt'><i>{{nick%.5s}}</i></span>",
-          "deadenemy":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_de'><i>{{nick%.5s}}</i></span>",
-          "deadsquad":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{nick%.5s}}</i></span>"
-        }
-      },
-      "mapSize": { "enabled": false }
-    },
+    //"mapSize": { "enabled": false },
     //"square" : { "enabled": false },
     "__stub__": null
   }

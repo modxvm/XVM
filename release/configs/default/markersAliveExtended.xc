@@ -3,6 +3,9 @@
  * Настройки маркеров для живых с Alt.
  */
 {
+// Definitions
+// Шаблоны
+"def": {
   // Floating damage values.
   // Всплывающий урон.
   "damageText": {
@@ -47,6 +50,87 @@
     // Text for ammo rack explosion (see description of macros in the macros.txt).
     // Текст при взрыве боеукладки (см. описание макросов в macros.txt).
     "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
+  },
+    // Text field with the name of the player.
+    // Текстовое поле с именем игрока.
+    "playerName": {
+      "name": "Player name",          // название текстового поля, ни на что не влияет
+      "visible": true,                // false - не отображать
+      "x": 0,                         // положение по оси X
+      "y": -36,                       // положение по оси Y
+      "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
+      // Параметры шрифта.
+      "font": {
+        "name": "$FieldFont",         //   название
+        "size": 13,                   //   размер
+        "align": "center",            //   выравнивание текста (left, center, right)
+        "bold": false,                //   обычный (false) или жирный (true)
+        "italic": false               //   обычный (false) или курсив (true)
+      },
+      // Параметры тени.
+      "shadow": {
+        "alpha": 100,                 //   прозрачность
+        "color": "0x000000",          //   цвет
+        "angle": 45,                  //   угол смещения
+        "distance": 0,                //   дистанция смещение
+        "size": 6,                    //   размер
+        "strength": 200               //   интенсивность
+      },
+      "format": "{{nick}}"            // формат текста. См. описание макросов в macros.txt
+    },
+    // Text field with the percentage of remaining health.
+    // Текстовое поле с процентом оставшегося здоровья.
+    "hpPercent": {
+      "name": "Percent of HP",
+      "visible": true,
+      "x": 0,
+      "y": -20,
+      "alpha": 100,
+      "color": "0xFCFCFC",
+      "font": {
+        "name": "$FieldFont",
+        "size": 11,
+        "align": "center",
+        "bold": true,
+        "italic": false
+      },
+      "shadow": {
+        "alpha": 100,
+        "color": "0x000000",
+        "angle": 45,
+        "distance": 0,
+        "size": 4,
+        "strength": 100
+      },
+      "format": "{{hp-ratio}}%"
+    },
+    // Text field with win ratio.
+    // Текстовое поле с процентом побед.
+    "winRate": {
+      "name": "Win Rate",
+      "visible": true,
+      "x": 0,
+      "y": -46,
+      "alpha": 100,
+      "color": "{{c:winrate}}",
+      "font": {
+        "name": "$FieldFont",
+        "size": 11,
+        "align": "center",
+        "bold": true,
+        "italic": false
+      },
+      "shadow": {
+        "alpha": 100,
+        "color": "0x000000",
+        "angle": 45,
+        "distance": 0,
+        "size": 6,
+        "strength": 200
+      },
+      "format": "{{winrate%2d~%}}"
+    }
   },
   // Настройки для союзников.
   "ally": {
@@ -117,13 +201,13 @@
     // Floating damage values for ally, player, squadman.
     // Всплывающий урон для союзника, игрока, взводного.
     "damageText": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextPlayer": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextSquadman": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     // Vehicle contour icon.
     // Контурная иконка танка.
@@ -175,86 +259,9 @@
     // Block of text fields.
     // Блок текстовых полей.
     "textFields": [
-      // Text field with the name of the player.
-      // Текстовое поле с именем игрока.
-      {
-        "name": "Player name",          // название текстового поля, ни на что не влияет
-        "visible": true,                // false - не отображать
-        "x": 0,                         // положение по оси X
-        "y": -36,                       // положение по оси Y
-        "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-        "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
-        // Параметры шрифта.
-        "font": {
-          "name": "$FieldFont",         //   название
-          "size": 13,                   //   размер
-          "align": "center",            //   выравнивание текста (left, center, right)
-          "bold": false,                //   обычный (false) или жирный (true)
-          "italic": false               //   обычный (false) или курсив (true)
-        },
-        // Параметры тени.
-        "shadow": {
-          "alpha": 100,                 //   прозрачность
-          "color": "0x000000",          //   цвет
-          "angle": 45,                  //   угол смещения
-          "distance": 0,                //   дистанция смещение
-          "size": 6,                    //   размер
-          "strength": 200               //   интенсивность
-        },
-        "format": "{{nick}}"            // формат текста. См. описание макросов в macros.txt
-      },
-      // Text field with the percentage of remaining health.
-      // Текстовое поле с процентом оставшегося здоровья.
-      {
-        "name": "Percent of HP",
-        "visible": true,
-        "x": 0,
-        "y": -20,
-        "alpha": 100,
-        "color": "0xFCFCFC",
-        "font": {
-          "name": "$FieldFont",
-          "size": 11,
-          "align": "center",
-          "bold": true,
-          "italic": false
-        },
-        "shadow": {
-          "alpha": 100,
-          "color": "0x000000",
-          "angle": 45,
-          "distance": 0,
-          "size": 4,
-          "strength": 100
-        },
-        "format": "{{hp-ratio}}%"
-      },
-      // Text field with win ratio.
-      // Текстовое поле с процентом побед.
-      {
-        "name": "Win Rate",
-        "visible": true,
-        "x": 0,
-        "y": -46,
-        "alpha": 100,
-        "color": "{{c:winrate}}",
-        "font": {
-          "name": "$FieldFont",
-          "size": 11,
-          "align": "center",
-          "bold": true,
-          "italic": false
-        },
-        "shadow": {
-          "alpha": 100,
-          "color": "0x000000",
-          "angle": 45,
-          "distance": 0,
-          "size": 6,
-          "strength": 200
-        },
-        "format": "{{winrate%2d~%}}"
-      }
+      ${ "def.playerName" },
+      ${ "def.hpPercent" },
+      ${ "def.winRate" }
     ]
   },
   // Настройки для противников.
@@ -307,13 +314,13 @@
     // Floating damage values for ally, player, squadman.
     // Всплывающий урон для союзника, игрока, взводного.
     "damageText": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextPlayer": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     "damageTextSquadman": {
-      "$ref": { "path":"damageText" }
+      "$ref": { "path":"def.damageText" }
     },
     // Vehicle contour icon.
     // Контурная иконка танка.
@@ -354,84 +361,9 @@
     // Block of text fields.
     // Блок текстовых полей.
     "textFields": [
-      // Text field with the name of the player.
-      // Текстовое поле с именем игрока.
-      {
-        "name": "Player name",
-        "visible": true,
-        "x": 0,
-        "y": -36,
-        "alpha": 100,
-        "color": null,
-        "font": {
-          "name": "$FieldFont",
-          "size": 13,
-          "align": "center",
-          "bold": false,
-          "italic": false
-        },
-        "shadow": {
-          "alpha": 100,
-          "color": "0x000000",
-          "angle": 45,
-          "distance": 0,
-          "size": 6,
-          "strength": 200
-        },
-        "format": "{{nick}}"
-      },
-      // Text field with the percentage of remaining health.
-      // Текстовое поле с процентом оставшегося здоровья.
-      {
-        "name": "Percent of HP",
-        "visible": true,
-        "x": 0,
-        "y": -20,
-        "alpha": 100,
-        "color": "0xFCFCFC",
-        "font": {
-          "name": "$FieldFont",
-          "size": 11,
-          "align": "center",
-          "bold": true,
-          "italic": false
-        },
-        "shadow": {
-          "alpha": 100,
-          "color": "0x000000",
-          "angle": 45,
-          "distance": 0,
-          "size": 4,
-          "strength": 100
-        },
-        "format": "{{hp-ratio}}%"
-      },
-      // Text field with win ratio.
-      // Текстовое поле с процентом побед.
-      {
-        "name": "Процент побед",
-        "visible": true,
-        "x": 0,
-        "y": -46,
-        "alpha": 100,
-        "color": "{{c:winrate}}",
-        "font": {
-          "name": "$FieldFont",
-          "size": 11,
-          "align": "center",
-          "bold": true,
-          "italic": false
-        },
-        "shadow": {
-          "alpha": 100,
-          "color": "0x000000",
-          "angle": 45,
-          "distance": 0,
-          "size": 6,
-          "strength": 200
-        },
-        "format": "{{winrate%2d~%}}"
-      }
+      ${ "def.playerName" },
+      ${ "def.hpPercent" },
+      ${ "def.winRate" }
     ]
   }
 }

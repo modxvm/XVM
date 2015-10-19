@@ -1,7 +1,5 @@
 import com.xvm.*;
-import flash.geom.*;
 import wot.Minimap.*;
-import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.model.mapSize.*;
 
 class wot.Minimap.view.MapSizeLabel
@@ -13,25 +11,21 @@ class wot.Minimap.view.MapSizeLabel
 
     public function MapSizeLabel()
     {
-        var offset:Point = MapConfig.mapSizeLabelOffset;
+        var cfg:Object = Minimap.config.mapSize;
         tf = bg.createTextField(MAP_SIZE_TEXT_FIELD_NAME, bg.getNextHighestDepth(),
-            offset.x, offset.y, MapConfig.mapSizeLabelWidth, MapConfig.mapSizeLabelHeight);
+            cfg.offsetX, cfg.offsetY, cfg.width, cfg.height);
         tf.antiAliasType = "advanced";
         tf.html = true;
         tf.multiline = true;
         tf.selectable = false;
 
-        var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(".mapsize{" + MapConfig.mapSizeLabelCss + "}");
-        tf.styleSheet = style;
+        tf.htmlText = defineLabelText(cfg.format);
 
-        tf.htmlText = "<span class='mapsize'>" + defineLabelText(MapConfig.mapSizeLabelFormat) + "</span>";
+        tf._alpha = cfg.alpha;
 
-        tf._alpha = MapConfig.mapSizeLabelAlpha;
-
-        if (MapConfig.mapSizeLabelShadowEnabled)
+        if (cfg.shadow.enabled)
         {
-            tf.filters = [MapConfig.mapSizeLabelShadow];
+            tf.filters = [ Utils.extractShadowFilter(cfg.shadow) ];
         }
     }
 

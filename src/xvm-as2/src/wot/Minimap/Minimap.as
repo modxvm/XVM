@@ -5,7 +5,6 @@
 
 import com.xvm.*;
 import wot.Minimap.*;
-import wot.Minimap.model.externalProxy.*;
 
 class wot.Minimap.Minimap
 {
@@ -42,6 +41,12 @@ class wot.Minimap.Minimap
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    private static var _isAltMode:Boolean = false;
+    public static function get config():Object
+    {
+        return _isAltMode ? Config.config.minimapAlt : Config.config.minimap;
+    }
+
     public function MinimapCtor()
     {
         Utils.TraceXvmModule("Minimap");
@@ -54,7 +59,7 @@ class wot.Minimap.Minimap
     function scaleMarkersImpl(factor:Number)
     {
         //Logger.add("scaleMarkers");
-        if (MapConfig.enabled)
+        if (Minimap.config.enabled)
         {
             Features.scaleMarkers();
         }
@@ -90,7 +95,7 @@ class wot.Minimap.Minimap
 
     private function onConfigLoaded()
     {
-        if (MapConfig.enabled)
+        if (Config.config.minimap.enabled)
         {
             if (Config.config.minimapAlt.enabled)
                 GlobalEventDispatcher.addEventListener(Defines.E_MM_ALT_MODE, this, setAltMode);
@@ -120,9 +125,9 @@ class wot.Minimap.Minimap
     {
         //Logger.add("setAltMode: " + e.isDown);
         if (Config.config.hotkeys.minimapAltMode.onHold)
-            MapConfig.isAltMode = e.isDown;
+            _isAltMode = e.isDown;
         else if (e.isDown)
-            MapConfig.isAltMode = !MapConfig.isAltMode;
+            _isAltMode = !_isAltMode;
         else
             return;
 

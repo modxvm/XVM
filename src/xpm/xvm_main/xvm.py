@@ -280,6 +280,10 @@ class Xvm(object):
 
     def invalidateAll(self):
         #trace('invalidateAll')
+        for (vID, timerId) in self._invalidateTimerId.iteritems():
+            if timerId is not None:
+                BigWorld.cancelCallback(timerId)
+        self._invalidateTimerId.clear()
         self._invalidateTargets.clear()
         for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
             self.invalidate(vID, INV.ALL)

@@ -4,7 +4,7 @@
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'><img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{t-battles>9?{{c:xte|#666666}}|#666666}}'>{{xte|--}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
+    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'><img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
 
     "pingServers": {
@@ -103,6 +103,7 @@
     //"enabled": false,
     //"allyColor": "0xFFFF00",
     //"enemyColor": "0x00FFFF",
+    //"ally": { "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>{0} {{extra}}</font>" },
     "__stub__": null
   },
   "battleLoading": {
@@ -181,11 +182,11 @@
       { "value": 9999, "alpha": 0 }
     ],
     "hp_ratio": [
-      { "value": 1, "alpha": "#00" },
-      { "value": 10, "alpha": "#FF" },
-      { "value": 20, "alpha": "#BB" },
-      { "value": 50, "alpha": "#00" },
-      { "value": 101, "alpha": "#00" }
+      { "value": 1, "alpha": "00" },
+      { "value": 10, "alpha": "100" },
+      { "value": 20, "alpha": "75" },
+      { "value": 50, "alpha": "00" },
+      { "value": 101, "alpha": "00" }
     ]
   },
   "iconset": {
@@ -208,7 +209,7 @@
   },
   "texts": {
     //"vtype": { "LT":  "ЛТ" },
-    "marksOnGun": { "_0": "-", "_1": "1", "_2": "2", "_3": "3" }
+    "marksOnGun": { "_0": "*", "_1": "1", "_2": "2", "_3": "3" }
   },
   "colors": {
     "system": {

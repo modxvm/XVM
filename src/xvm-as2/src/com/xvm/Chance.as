@@ -82,7 +82,7 @@ class com.xvm.Chance
         for (var pname in Stat.s_data)
         {
             var stat:StatData = Stat.s_data[pname].stat;
-            var battleStateData:BattleStateData = BattleState.getUserData(pname);
+            var battleStateData:BattleStateData = BattleState.get(stat._id);
             len += live && battleStateData.dead ? 0 : 1;
             var vdata:VehicleData = stat.v.data;
             if (!vdata)

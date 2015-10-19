@@ -71,15 +71,15 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
         vehLines = selfAttachments.createEmptyMovieClip("vehLine" + depth, depth);
-        attachLines(vehLines, MapConfig.linesVehicle, 0);
+        attachLines(vehLines, Minimap.config.lines.vehicle, 0);
     }
 
     private function attachVehicleTraverseAngle():Void
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
         traverseAngle = selfAttachments.createEmptyMovieClip("traverseAngle" + depth, depth);
-        attachLines(traverseAngle, MapConfig.linesTraverseAngle, rightAngle);
-        attachLines(traverseAngle, MapConfig.linesTraverseAngle, -leftAngle);
+        attachLines(traverseAngle, Minimap.config.lines.traverseAngle, rightAngle);
+        attachLines(traverseAngle, Minimap.config.lines.traverseAngle, -leftAngle);
     }
 
     private function attachCameraLines():Void
@@ -87,12 +87,12 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
         //Logger.add("attachCameraLines");
         var cameraEntry:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
         cameraEntry.xvm_worker.cameraExtendedToken = true;
-        if (!isSelfDead || Config.config.minimap.showCameraLineAfterDeath)
+        if (!isSelfDead || Minimap.config.showCameraLineAfterDeath)
         {
             camAttach = cameraEntry.xvm_worker.attachments;
             var depth:Number = camAttach.getNextHighestDepth();
             var cameraLine:MovieClip = camAttach.createEmptyMovieClip("cameraLine" + depth, 10000);
-            attachLines(cameraLine, MapConfig.linesCamera, 0);
+            attachLines(cameraLine, Minimap.config.lines.camera, 0);
         }
     }
 

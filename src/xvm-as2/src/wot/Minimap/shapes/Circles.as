@@ -1,10 +1,8 @@
 import com.xvm.*;
 import com.xvm.DataTypes.*;
-import wot.Minimap.dataTypes.*;
-import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.Minimap;
 import wot.Minimap.dataTypes.cfg.*;
 import wot.Minimap.shapes.*;
-import wot.PlayersPanel.*;
 
 /**
  * Draws circles around player to indicate distances.
@@ -33,8 +31,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         moving_state = Defines.MOVING_STATE_STOPPED;
 
-        var player:Player = PlayersPanelProxy.self;
-        var vdata:VehicleData = VehicleInfo.get(player.vid);
+        var bs:BattleStateData = BattleState.getSelf();
+        var vdata:VehicleData = VehicleInfo.get(bs.vehId);
 
         var vehicleType:String = vdata.key.split(":").join("-");
         staticCircles = defineStaticCirclesCfg(vehicleType);
@@ -50,8 +48,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             circleCfg.$radius = radius;
         }
 
-        var cfg = MapConfig.circles;
-        var ci = Config.minimapCirclesData;
+        var cfg:Object = Minimap.config.circles;
+        var ci:Object = Config.minimapCirclesData;
         //Logger.addObject(cfg, 2);
         //Logger.addObject(ci);
 
@@ -135,7 +133,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     {
         var cfg:Array = [];
 
-        var view:Array = MapConfig.circles.view;
+        var view:Array = Minimap.config.circles.view;
         var len:Number = view.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -153,7 +151,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         }
 
         /** Special vehicle type dependent circle configs */
-        var spec:Array = MapConfig.circles.special;
+        var spec:Array = Minimap.config.circles.special;
         len = spec.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -177,7 +175,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     {
         var cfg:Array = [];
 
-        var view:Array = MapConfig.circles.view;
+        var view:Array = Minimap.config.circles.view;
         var len:Number = view.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -281,10 +279,10 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     // http://forum.worldoftanks.ru/index.php?/topic/1047590-/
     private function onViewRangeChanged()
     {
-        var cfg = MapConfig.circles;
+        var cfg:Object = Minimap.config.circles;
 
         // Calculations
-        var ci = Config.minimapCirclesData;
+        var ci:Object = Config.minimapCirclesData;
 
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
         var bia:Number = ci.view_brothers_in_arms ? 5 : 0;

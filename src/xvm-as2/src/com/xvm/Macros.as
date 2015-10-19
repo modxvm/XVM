@@ -15,6 +15,29 @@ class com.xvm.Macros
         return _instance._Format(pname, format, options);
     }
 
+    public static function FormatNumber(pname:String, cfg:Object, fieldName:String, obj:Object, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
+    {
+        var value = cfg[fieldName];
+        if (value == null)
+            return nullValue;
+        if (isNaN(value))
+        {
+            //Logger.add(value + " => " + Macros.Format(m_name, value, null));
+            var v = Macros.Format(pname, value, obj);
+            if (v == "XX")
+                v = 100;
+            if (isColorValue)
+                v = v.split("#").join("0x");
+            if (Macros.IsCached(pname, value))
+                cfg[fieldName] = v;
+            value = v;
+        }
+        if (isNaN(value))
+            return emptyValue;
+        return Number(value);
+    }
+
+
     public static function FormatGlobalNumberValue(value):Number
     {
         return _instance._FormatGlobalNumberValue(value);
@@ -53,11 +76,6 @@ class com.xvm.Macros
     public static function RegisterStatMacros(pname:String, stat:StatData)
     {
         _instance._RegisterStatMacros(pname, stat);
-    }
-
-    public static function RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)
-    {
-        _instance._RegisterMinimapMacros(player, vehicleClassSymbol);
     }
 
     public static function RegisterMarkerData(pname:String, data:Object)
@@ -280,6 +298,7 @@ class com.xvm.Macros
                     case "vehicle":
                     case "vehiclename":
                     case "vehicle-short":
+                    case "vtype-key":
                     case "vtype":
                     case "vtype-l":
                     case "c:vtype":
@@ -745,12 +764,14 @@ class com.xvm.Macros
                     m_globals["maxhp"] = vdata.hpTop;
                 // {{veh-id}}
                 pdata["veh-id"] = vdata.vid;
-                // {{vehicle}}
+                // {{vehicle}} - Chaffee
                 pdata["vehicle"] = vdata.localizedName;
                 // {{vehiclename}} - usa-M24_Chaffee
                 pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
-                // {{vehicle-short}}
+                // {{vehicle-short}} - Chaff
                 pdata["vehicle-short"] = vdata.shortName;
+                // {{vtype-key}} - MT
+                pdata["vtype-key"] = vdata.vtype;
                 // {{vtype}}
                 pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
                 // {{vtype-l}} - Medium Tank
@@ -856,6 +877,12 @@ class com.xvm.Macros
             }
             // {{c:dmg-kind}}
             pdata["c:dmg-kind"] = function(o):String { return o.damageType == null ? null : GraphicsUtil.GetDmgKindValue(o.damageType); }
+
+            // {{sys-color-key}}
+            pdata["sys-color-key"] = function(o):String
+            {
+                return ColorsManager.getSystemColorKey(o.entityName, o.dead, o.blowedUp);
+            }
 
             // {{c:system}}
             pdata["c:system"] = function(o):String
@@ -1107,19 +1134,6 @@ class com.xvm.Macros
         pdata["a:tfb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
         // {{a:tsb}}
         pdata["a:tsb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
-    }
-
-    private function _RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)
-    {
-        if (!player)
-            return;
-        var pname:String = player.userName;
-        if (!m_dict.hasOwnProperty(pname))
-            m_dict[pname] = { };
-        var pdata = m_dict[pname];
-
-        // {{vehicle-class}} - returns special symbol depending on class
-        pdata["vehicle-class"] = vehicleClassSymbol;
     }
 
     private function _RegisterMarkerData(pname:String, data:Object)

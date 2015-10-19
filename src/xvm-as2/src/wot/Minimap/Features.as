@@ -53,7 +53,7 @@ class wot.Minimap.Features
 
     public function Features()
     {
-        if (!MapConfig.enabled)
+        if (!Minimap.config.enabled)
             return;
 
         markerScaling = new MarkerScaling();
@@ -88,10 +88,7 @@ class wot.Minimap.Features
 
     private function onBattleStateChanged(e:EBattleStateChanged)
     {
-        var pdata:BattleStateData = BattleState.getUserData(e.playerName);
-        if (pdata == null)
-            return;
-        var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(pdata.playerId);
+        var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(e.playerId);
         if (entry == null)
             return;
         entry.invalidate();
@@ -111,7 +108,6 @@ class wot.Minimap.Features
     private function applyFeatures():Void
     {
         setBGMapImageAlpha();
-        setPlayerIconAlpha();
 
         initializeZoomFeature();
 
@@ -138,7 +134,7 @@ class wot.Minimap.Features
      */
     private function setBGMapImageAlpha():Void
     {
-        MinimapProxy.wrapper.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
+        MinimapProxy.wrapper.backgrnd._alpha = Minimap.config.mapBackgroundImageAlpha;
     }
 
     /**
@@ -170,7 +166,8 @@ class wot.Minimap.Features
             delete mapSizeLabel;
             mapSizeLabel = null;
         }
-        if (MapConfig.mapSizeLabelEnabled)
+
+        if (Minimap.config.mapSize.enabled)
         {
             mapSizeLabel = new MapSizeLabel();
         }
@@ -190,7 +187,7 @@ class wot.Minimap.Features
     private function onCameraUpdated(e:MinimapEvent):Void
     {
         var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
-        if (MapConfig.hideCameraTriangle)
+        if (Minimap.config.hideCameraTriangle)
         {
             if (camera._currentframe != 2)
             {
@@ -208,18 +205,7 @@ class wot.Minimap.Features
 
         camera.vehicleNameTextFieldClassic._visible = false;
         camera.vehicleNameTextFieldAlt._visible = false;
-        camera._alpha = MapConfig.cameraAlpha;
-    }
-
-    /**
-     * Setup alpha for icon of player himself.
-     * Looks like white arrow.
-     * Does not affect attached shapes.
-     */
-    private function setPlayerIconAlpha():Void
-    {
-        var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.selfEntry;
-        selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
+        camera._alpha = Minimap.config.cameraAlpha;
     }
 
     /**
@@ -234,7 +220,8 @@ class wot.Minimap.Features
             delete circles;
             circles = null;
         }
-        if (MapConfig.circles.enabled)
+
+        if (Minimap.config.circles.enabled)
         {
             circles = new Circles();
         }
@@ -253,7 +240,8 @@ class wot.Minimap.Features
             delete lines;
             lines = null;
         }
-        if (MapConfig.linesEnabled)
+
+        if (Minimap.config.lines.enabled)
         {
             lines = new Lines();
         }
@@ -270,7 +258,8 @@ class wot.Minimap.Features
             delete square;
             square = null;
         }
-        if (MapConfig.squareEnabled)
+
+        if (Minimap.config.square.enabled)
         {
             square = new Square();
         }

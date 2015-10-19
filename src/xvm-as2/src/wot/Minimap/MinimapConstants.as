@@ -41,13 +41,6 @@
     public static var MINIMAP_ENTRY_NAME_SQUAD:String = "squadman";
     public static var MINIMAP_ENTRY_NAME_SELF:String = ""; // Type of player himself and ?
 
-    public static var MINIMAP_ENTRY_VEH_CLASS_LIGHT:String = "lightTank";
-    public static var MINIMAP_ENTRY_VEH_CLASS_MEDIUM:String = "mediumTank";
-    public static var MINIMAP_ENTRY_VEH_CLASS_HEAVY:String = "heavyTank";
-    public static var MINIMAP_ENTRY_VEH_CLASS_TD:String = "AT-SPG";
-    public static var MINIMAP_ENTRY_VEH_CLASS_SPG:String = "SPG";
-    public static var MINIMAP_ENTRY_VEH_CLASS_SUPER:String = "superheavyTank";
-
     public static var MAP_MIN_ZOOM_INDEX:Number = 0;
     public static var MAP_MAX_ZOOM_INDEX:Number = 25;
 }

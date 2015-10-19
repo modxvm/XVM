@@ -124,9 +124,9 @@ class wot.StatisticForm.BattleStatItemRenderer
             return;
         }
 
-        var name = Utils.GetPlayerName(wrapper.data.label);
-        var saved_icon = wrapper.data.icon;
-        var saved_label = wrapper.data.label;
+        var name:String = Utils.GetPlayerName(wrapper.data.label);
+        var saved_icon:String = wrapper.data.icon;
+        var saved_label:String = wrapper.data.label;
 
         // Add data for Win Chance calculation
         //Logger.addObject(wrapper.data);
@@ -195,7 +195,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         // Set Text Fields
         var c:String = "#" + Strings.padLeft(wrapper.playerName.textColor.toString(16), 6, '0');
 
-        var obj = BattleState.getUserData(name);
+        var obj = BattleState.getByPlayerName(name);
         var fmt:String = Macros.Format(name, (team == Defines.TEAM_ALLY) ? Config.config.statisticForm.formatLeftNick : Config.config.statisticForm.formatRightNick, obj);
         wrapper.playerName.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
 

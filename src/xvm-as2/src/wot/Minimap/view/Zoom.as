@@ -1,7 +1,5 @@
 import com.xvm.*;
-import net.wargaming.ingame.*;
-import wot.Minimap.MinimapProxy;
-import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.*;
 
 /**
  * Handles minimap windows zoom and center positioning
@@ -37,7 +35,7 @@ class wot.Minimap.view.Zoom
      */
     public function onZoomKeyClick(e:Object):Void
     {
-        if (!minimap.visible)
+        if (!MinimapProxy.wrapper.visible)
             return;
         if (Config.config.hotkeys.minimapZoom.onHold)
         {
@@ -81,7 +79,7 @@ class wot.Minimap.view.Zoom
     private function zoomIn():Void
     {
         increaseSize();
-        if (MapConfig.zoomCentered)
+        if (Minimap.config.zoom.centered)
         {
             centerPosition();
         }
@@ -100,35 +98,41 @@ class wot.Minimap.view.Zoom
 
     private function centerPosition():Void
     {
-        /** Position map bottom right corner at center */
-        minimap._x = Stage.width / 2;
-        minimap._y = Stage.height / 2;
+        var wrapper:MovieClip = MinimapProxy.wrapper;
 
-        /** Offset position taking map center into account */
-        minimap._x += minimap.width / 2;
-        minimap._y += minimap.height / 2;
+        // Position map bottom right corner at center
+        wrapper._x = Stage.width / 2;
+        wrapper._y = Stage.height / 2;
+
+        // Offset position taking map center into account
+        wrapper._x += wrapper.width / 2;
+        wrapper._y += wrapper.height / 2;
     }
 
     private function bottomRightPosition():Void
     {
-        /** Position map bottom right corner at bottom right of Stage */
-        minimap._x = Stage.width;
-        minimap._y = Stage.height;
+        var wrapper:MovieClip = MinimapProxy.wrapper;
+
+        // Position map bottom right corner at bottom right of Stage
+        wrapper._x = Stage.width;
+        wrapper._y = Stage.height;
     }
 
     private function increaseSize():Void
     {
-        var side:Number = Stage.height - MapConfig.zoomPixelsBack;
-        minimap.setSize(side, side);
-        minimap.invalidateMarkers();
-        minimap.validateNow();
+        var wrapper:MovieClip = MinimapProxy.wrapper;
+        var side:Number = Stage.height - Minimap.config.zoom.pixelsBack;
+        wrapper.setSize(side, side);
+        wrapper.invalidateMarkers();
+        wrapper.validateNow();
     }
 
     private function restoreSize():Void
     {
-        minimap.setupSize(minimap.m_sizeIndex, Stage.height);
-        minimap.invalidateMarkers();
-        minimap.validateNow();
+        var wrapper:MovieClip = MinimapProxy.wrapper;
+        wrapper.setupSize(wrapper.m_sizeIndex, Stage.height);
+        wrapper.invalidateMarkers();
+        wrapper.validateNow();
     }
 
     /**
@@ -138,7 +142,7 @@ class wot.Minimap.view.Zoom
      */
     private function swapDepth():Void
     {
-        minimap.swapDepths(battleStartTimerClip);
+        MinimapProxy.wrapper.swapDepths(battleStartTimerClip);
     }
 
     /**
@@ -152,11 +156,6 @@ class wot.Minimap.view.Zoom
     {
         _global.clearInterval(timer);
         _root.playerMessangersPanel._y = Stage.height;
-    }
-
-    private function get minimap():Minimap
-    {
-        return MinimapProxy.wrapper;
     }
 
     private function get battleStartTimerClip():MovieClip
