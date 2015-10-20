@@ -308,18 +308,18 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         }
 
         var shadow:Object = cfg.shadow;
-        if (shadow && shadow.alpha != 0 && shadow.strength != 0 && shadow.blur != 0)
+        if (shadow && shadow.alpha && shadow.strength && shadow.blur)
         {
-            var blur:Number = shadow.blur != null ? shadow.blur : 2;
+            var blur:Number = Macros.FormatNumber(playerName, shadow, "blur", bs, 2, 2);
             textField.filters = [
                 new DropShadowFilter(
-                    shadow.distance != null ? shadow.distance : 0,
-                    shadow.angle != null ? shadow.angle : 0,
-                    shadow.color != null ? parseInt(shadow.color) : 0x000000,
-                    shadow.alpha != null ? shadow.alpha : 0.75,
+                    Macros.FormatNumber(playerName, shadow, "distance", bs, 0, 0),
+                    Macros.FormatNumber(playerName, shadow, "angle", bs, 0, 0),
+                    Macros.FormatNumber(playerName, shadow, "color", bs, 0x000000, 0x000000, true),
+                    Macros.FormatNumber(playerName, shadow, "alpha", bs, 0.75, 0.75),
                     blur,
                     blur,
-                    shadow.strength != null ? shadow.strength : 1)
+                    Macros.FormatNumber(playerName, shadow, "strength", bs, 1, 1))
             ];
         }
 
