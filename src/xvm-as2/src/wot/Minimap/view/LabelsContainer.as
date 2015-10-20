@@ -316,7 +316,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
                     Macros.FormatNumber(playerName, shadow, "distance", bs, 0, 0),
                     Macros.FormatNumber(playerName, shadow, "angle", bs, 0, 0),
                     Macros.FormatNumber(playerName, shadow, "color", bs, 0x000000, 0x000000, true),
-                    Macros.FormatNumber(playerName, shadow, "alpha", bs, 0.75, 0.75),
+                    Macros.FormatNumber(playerName, shadow, "alpha", bs, 75, 75) / 100.0,
                     blur,
                     blur,
                     Macros.FormatNumber(playerName, shadow, "strength", bs, 1, 1))
