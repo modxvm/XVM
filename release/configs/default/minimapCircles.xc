@@ -32,6 +32,9 @@
             // Основные круги:
             { "enabled":  true, "distance": "blindarea", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0x3EB5F1" },
             { "enabled":  true, "distance": 445,         "scale": 1, "thickness":  1.1, "alpha": 45, "color": "0xFFCC66" },
+            // Circle of the maximum units appearance.
+            // Окружность границы максимальной отрисовки юнитов.
+            { "enabled": false, "distance": 564,         "scale": 1, "thickness":  0.7, "alpha": 40, "color": "0xFFFFFF" },
             // Additional circles:
             // Дополнительные круги:
             { "enabled": false, "distance": 50,          "scale": 1, "thickness": 0.75, "alpha": 60, "color": "0xFFFFFF" },
