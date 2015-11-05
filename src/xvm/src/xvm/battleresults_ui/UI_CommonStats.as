@@ -13,7 +13,7 @@ package xvm.battleresults_ui
     import flash.utils.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.lobby.battleResults.EfficiencyIconRenderer;
+    import net.wg.gui.lobby.battleResults.components.*;
     import net.wg.gui.lobby.battleResults.data.*;
     import scaleform.clik.events.*;
 
@@ -380,7 +380,7 @@ package xvm.battleresults_ui
                 if (tooltip == null)
                     return;
                 var data:Object = merge(tooltip, {
-                    isGarage: _data.common.isGarage,
+                    isGarage: _data.common.playerVehicles.length > 1,
                     type:kind,
                     disabled:icon == null ? false : icon.value <= 0
                 });

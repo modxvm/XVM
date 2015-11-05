@@ -181,14 +181,14 @@ package xvm.tcarousel_ui
         private var orig_activateButton_y:Number = NaN;
         private function setupActivateButtons(cfg:Object):void
         {
-            activateButton.scaleX = activateButton.scaleY = deactivateButton.scaleX = deactivateButton.scaleY = cfg.scale;
-            activateButton.alpha = deactivateButton.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            activateButton.scaleX = activateButton.scaleY/*TODO:0.9.12 = deactivateButton.scaleX = deactivateButton.scaleY*/ = cfg.scale;
+            activateButton.alpha/*TODO:0.9.12 = deactivateButton.alpha*/ = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             if (isNaN(orig_statusText_x))
                 orig_activateButton_x = activateButton.x;
-            activateButton.x = deactivateButton.x = orig_activateButton_x + cfg.dx;
+            activateButton.x/*TODO:0.9.12 = deactivateButton.x*/ = orig_activateButton_x + cfg.dx;
             if (isNaN(orig_activateButton_y))
                 orig_activateButton_y = activateButton.y;
-            activateButton.y = deactivateButton.y = orig_activateButton_y + cfg.dy;
+            activateButton.y/*TODO:0.9.12 = deactivateButton.y*/ = orig_activateButton_y + cfg.dy;
         }
 
         private var orig_statusText_x:Number = NaN;
