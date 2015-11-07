@@ -35,8 +35,7 @@ from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.battle_control.dyn_squad_functional import _DynSquadEntityController
 from gui.shared import g_eventBus, events
 from gui.Scaleform.Flash import Flash
-from gui.Scaleform.daapi.view.login import LoginView
-from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from gui.Scaleform.daapi.view.battle.markers import MarkersManager
 from gui.Scaleform.Minimap import Minimap
@@ -154,16 +153,6 @@ def onClientVersionDiffers():
     g_replayCtrl.scriptModalWindowsEnabled = savedValue
 
 g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
-
-
-# LOGIN
-
-@overrideMethod(LoginView, 'onSetOptions')
-def LoginView_onSetOptions(base, self, optionsList, host):
-    # log('LoginView_onSetOptions')
-    if config.get('login/saveLastServer'):
-        self.saveLastSelectedServer(host)
-    base(self, optionsList, host)
 
 
 # LOBBY

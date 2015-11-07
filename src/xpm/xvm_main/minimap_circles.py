@@ -27,8 +27,7 @@ import math
 import BigWorld
 from adisp import async, process
 from CurrentVehicle import g_currentVehicle
-from gui.shared.utils.requesters import VehicleItemsRequester
-from gui.shared.utils.requesters.deprecated import Requester
+from gui.shared.utils.requesters.deprecated import Requester # TODO: refactor
 
 from xfw import *
 

@@ -23,9 +23,9 @@ from gui.Scaleform.locale.PROFILE import PROFILE
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.meta.ProfileMeta import ProfileMeta
 from gui.Scaleform.daapi.view.meta.ProfileWindowMeta import ProfileWindowMeta
-from gui.Scaleform.daapi.view.lobby.profile import ProfileTechnique
-from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniquePage
-from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
+from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniquePage import ProfileTechniquePage
+from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
 
 from xfw import *

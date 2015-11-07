@@ -21,15 +21,13 @@ import traceback
 import BigWorld
 from gui.Scaleform.genConsts.QUEST_TASK_FILTERS_TYPES import QUEST_TASK_FILTERS_TYPES
 from gui.Scaleform.genConsts.QUESTS_ALIASES import QUESTS_ALIASES
-import gui.Scaleform.daapi.settings.config as config
 from gui.Scaleform.framework import ViewSettings
-from gui.Scaleform.daapi.view.lobby.server_events import QuestsCurrentTab, QuestsTileChainsView
 from gui.Scaleform.framework import ViewTypes
 from gui.Scaleform.framework import ScopeTemplates
 from gui.Scaleform.framework import g_entitiesFactories
 from gui.Scaleform.daapi.view.lobby.server_events.EventsWindow import EventsWindow
-from gui.Scaleform.daapi.view.lobby.server_events import QuestsTileChainsView
-from gui.Scaleform.daapi.view.lobby.server_events.QuestsTileChainsView import _QuestsFilter
+from gui.Scaleform.daapi.view.lobby.server_events.QuestsCurrentTab import QuestsCurrentTab
+from gui.Scaleform.daapi.view.lobby.server_events.QuestsTileChainsView import _QuestsTileChainsView, _QuestsFilter
 
 from xfw import *
 
@@ -54,9 +52,13 @@ class FILTERS(object):
 #####################################################################
 # handlers
 
-config.VIEWS_SETTINGS += (ViewSettings(LINKAGES.UI_LINKAGE_COMMON_QUESTS, QuestsCurrentTab, None,
-                                       ViewTypes.COMPONENT, None, ScopeTemplates.DEFAULT_SCOPE),)
-g_entitiesFactories.initSettings(config.VIEWS_SETTINGS)
+import gui.Scaleform.daapi.view.lobby.server_events as server_events
+
+@overrideStaticMethod(server_events, 'getViewSettings')
+def getViewSettings(base):
+    log('getViewSettings')
+    return base() + (ViewSettings(LINKAGES.UI_LINKAGE_COMMON_QUESTS, QuestsCurrentTab, None,
+        ViewTypes.COMPONENT, None, ScopeTemplates.DEFAULT_SCOPE),)
 
 _QuestsFilter._FILTER_BY_STATE[FILTERS.HIDE_WITH_HONORS] = lambda q: not q.isFullCompleted(True)
 _QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress()
@@ -79,8 +81,8 @@ def EventsWindow_loadView(base, self, linkage, alias):
     base(self, linkage, alias)
 
 
-@overrideMethod(QuestsTileChainsView, 'as_setHeaderDataS')
-def QuestsTileChainsView_as_setHeaderDataS(base, self, data):
+@overrideMethod(_QuestsTileChainsView, 'as_setHeaderDataS')
+def _QuestsTileChainsView_as_setHeaderDataS(base, self, data):
     if data:
         data['filters']['taskTypeFilterData'].insert(2, {'label': l10n('Hide with honors'),
                                                          'data': FILTERS.HIDE_WITH_HONORS})
@@ -91,8 +93,8 @@ def QuestsTileChainsView_as_setHeaderDataS(base, self, data):
     return base(self, data)
 
 
-@overrideMethod(QuestsTileChainsView, '_QuestsTileChainsView__getCurrentFilters')
-def QuestsTileChainsView__getCurrentFilters(base, self):
+@overrideMethod(_QuestsTileChainsView, '_QuestsTileChainsView__getCurrentFilters')
+def _QuestsTileChainsView__getCurrentFilters(base, self):
     if self._navInfo.potapov.filters is None:
         try:
             settings = _GetSettings()
@@ -102,8 +104,8 @@ def QuestsTileChainsView__getCurrentFilters(base, self):
     return base(self)
 
 
-@registerEvent(QuestsTileChainsView, '_QuestsTileChainsView__updateTileData')
-def QuestsTileChainsView__updateTileData(self, vehType, questState, selectItemID = -1):
+@registerEvent(_QuestsTileChainsView, '_QuestsTileChainsView__updateTileData')
+def _QuestsTileChainsView__updateTileData(self, vehType, questState, selectItemID = -1):
     _SaveSettings(vehType=vehType, questState=questState)
 
 
