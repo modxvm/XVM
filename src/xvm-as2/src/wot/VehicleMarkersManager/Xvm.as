@@ -208,6 +208,11 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         m_frags = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 4];
         m_squad = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 5];
 
+        if (wrapper.marker2 != null)
+        {
+            wrapper.marker2._visible = isFlagBearer;
+        }
+
         healthBarComponent.init();
         contourIconComponent.init(m_entityType);
         levelIconComponent.init();

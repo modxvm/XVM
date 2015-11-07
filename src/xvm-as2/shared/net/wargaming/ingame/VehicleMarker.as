@@ -24,6 +24,7 @@
     var bgShadow:MovieClip;
     var flagMC:MovieClip;
     var squadIcon:MovieClip;
+    var marker2:MovieClip;
 
     static var ICON;
     static var LEVEL;
