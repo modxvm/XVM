@@ -121,8 +121,8 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
 
 
 @overrideStaticMethod(DetailedStatisticsUtils, 'getStatistics')
-def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser):
-    res = base(targetData, isCurrentuser)
+def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layout):
+    res = base(targetData, isCurrentuser, layout)
     global _lastVehId
     if _lastVehId is not None and token.networkServicesSettings['statAwards']:
         try:
@@ -166,7 +166,7 @@ def _getStartPageAlias(self, alias, isProfilePage):
         return VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE
 
     startPage = config.get('userInfo/startPage')
-    log('startPage={}'.format(startPage))
+    #log('startPage={}'.format(startPage))
     if startPage == 2:
         return VIEW_ALIAS.PROFILE_AWARDS
 

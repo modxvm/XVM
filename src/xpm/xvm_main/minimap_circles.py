@@ -74,7 +74,8 @@ class _MinimapCircles(object):
         self.view_distance_vehicle = self.item.descriptor.turret['circularVisionRadius']
         #debug('  view_distance_vehicle: %.0f' % self.view_distance_vehicle)
 
-        self._updateCrew()
+        # TODO:0.9.12
+        #self._updateCrew()
         crewRoles_arr = self.item.descriptor.type.crewRoles # roles per position in vehicle
 
         # Search skills and Brothers In Arms
