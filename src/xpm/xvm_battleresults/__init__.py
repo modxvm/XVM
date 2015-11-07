@@ -152,7 +152,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 
 # save personalCommonData: more info there
 @registerEvent(BattleResultsWindow, '_BattleResultsWindow__populateAccounting')
-def _BattleResultsWindow__populateAccounting(self, commonData, personalCommonData, personalData, playersData, personalDataOutput, isFallout):
+def _BattleResultsWindow__populateAccounting(self, commonData, personalCommonData, personalData, *args):
     self._xvm_data['personalData'] = personalData
 
 
