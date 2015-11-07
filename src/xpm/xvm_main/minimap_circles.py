@@ -27,7 +27,7 @@ import math
 import BigWorld
 from adisp import async, process
 from CurrentVehicle import g_currentVehicle
-from gui.shared.utils.requesters.deprecated import Requester # TODO: refactor
+#from gui.shared.utils.requesters.deprecated import Requester # TODO:0.9.12
 
 from xfw import *
 
@@ -214,6 +214,8 @@ class _MinimapCircles(object):
 
     @process
     def _updateCrew(self):
+        # TODO:0.9.12
+        return
         self.crew = []
         self.is_full_crew = True
         barracks = yield Requester('tankman').getFromInventory()
