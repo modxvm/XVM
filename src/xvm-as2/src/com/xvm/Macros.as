@@ -37,7 +37,6 @@ class com.xvm.Macros
         return Number(value);
     }
 
-
     public static function FormatGlobalNumberValue(value):Number
     {
         return _instance._FormatGlobalNumberValue(value);
@@ -131,7 +130,7 @@ class com.xvm.Macros
         try
         {
             // Check cached value
-            var player_cache:Object = null;
+            var player_cache:Object;
             var cached_value;
             if (pname != null && pname != "" && options != null)
             {
@@ -158,11 +157,17 @@ class com.xvm.Macros
             // Split tags
             var formatArr:Array = format.split("{{");
 
-            var len:Number = formatArr.length;
             isStaticMacro = true;
-            var res:String = formatArr[0];
-            if (len > 1)
+            var res:String;
+            var len:Number = formatArr.length;
+            if (len <= 1)
             {
+                res = format;
+            }
+            else
+            {
+                res = formatArr[0];
+
                 for (var i:Number = 1; i < len; ++i)
                 {
                     var part:String = formatArr[i];
@@ -173,7 +178,7 @@ class com.xvm.Macros
                     }
                     else
                     {
-                        res += FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2);
+                        res += _FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2);
                     }
                 }
 
@@ -188,10 +193,6 @@ class com.xvm.Macros
                         isStaticMacro = isStatic && isStaticMacro;
                     }
                 }
-            }
-            else
-            {
-                res = format;
             }
 
 
@@ -228,7 +229,7 @@ class com.xvm.Macros
         return "";
     }
 
-    private function FormatPart(macro:String, pname:String, options:Object):String
+    private function _FormatPart(macro:String, pname:String, options:Object):String
     {
         // Process tag
         var pdata = pname == null ? m_globals : m_dict[pname];
@@ -237,7 +238,7 @@ class com.xvm.Macros
 
         var res:String = "";
 
-        var parts:Array = GetMacroParts(macro, pdata);
+        var parts:Array = _GetMacroParts(macro, pdata);
 
         var macroName:String = parts[PART_NAME];
         var norm:String = parts[PART_NORM];
@@ -250,7 +251,7 @@ class com.xvm.Macros
         var dotPos:Number = macroName.indexOf(".");
         if (dotPos == 0)
         {
-            value = SubstituteConfigPart(macroName.slice(1));
+            value = _SubstituteConfigPart(macroName.slice(1));
         }
         else
         {
@@ -316,7 +317,7 @@ class com.xvm.Macros
                 }
             }
 
-            res += FormatMacro(macro, parts, value, vehId, options);
+            res += _FormatMacro(macro, parts, value, vehId, options);
         }
 
         if (isStaticMacro)
@@ -334,13 +335,13 @@ class com.xvm.Macros
     }
 
     private var _macro_parts_cache:Object = {};
-    private function GetMacroParts(macro:String, pdata:Object):Array
+    private function _GetMacroParts(macro:String, pdata:Object):Array
     {
         var parts:Array = _macro_parts_cache[macro];
         if (parts)
             return parts;
 
-        //Logger.add("GetMacroParts: " + macro);
+        //Logger.add("_GetMacroParts: " + macro);
         //Logger.addObject(pdata);
 
         parts = [null,null,null,null,null,null,null,null];
@@ -414,12 +415,12 @@ class com.xvm.Macros
         else if (parts[PART_NAME] == "xr" && parts[PART_DEF] == "")
             parts[PART_DEF] = getRatingDefaultValue("xvm");
 
-        //Logger.add("[AS2][MACROS][GetMacroParts]: " + parts.join(", "));
+        //Logger.add("[AS2][MACROS][_GetMacroParts]: " + parts.join(", "));
         _macro_parts_cache[macro] = parts;
         return parts;
     }
 
-    private function SubstituteConfigPart(path:String):String
+    private function _SubstituteConfigPart(path:String):String
     {
         var res = Utils.getObjectValueByPath(Config.config, path);
         //Logger.addObject(res, 1, path);
@@ -431,7 +432,7 @@ class com.xvm.Macros
     }
 
     private var _format_macro_fmt_suf_cache:Object = {};
-    private function FormatMacro(macro:String, parts:Array, value, vehId:Number, options:Object):String
+    private function _FormatMacro(macro:String, parts:Array, value, vehId:Number, options:Object):String
     {
         var name:String = parts[PART_NAME];
         var norm:String = parts[PART_NORM];
@@ -1179,11 +1180,11 @@ class com.xvm.Macros
                 break;
 
             case "CT":
-                if (pname == "www_modxvm_com")
+                if (pname == "www_modxvm_com_RU")
                     return "www.modxvm.com";
                 if (pname == "M_r_A_RU" || pname == "M_r_A_EU")
                     return "Fluttershy is best pony!";
-                if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU")
+                if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU" || pname == "0x01_EU")
                     return "«sir Max» (XVM)";
                 if (pname == "seriych_RU")
                     return "Be Happy :)";

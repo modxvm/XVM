@@ -20,6 +20,28 @@ package com.xvm
             return _instance._Format(pname, format, options);
         }
 
+        public static function FormatNumber(pname:String, cfg:Object, fieldName:String, obj:MacrosFormatOptions, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
+        {
+            var value:* = cfg[fieldName];
+            if (value == null)
+                return nullValue;
+            if (isNaN(value))
+            {
+                //Logger.add(value + " => " + Macros.Format(m_name, value, null));
+                var v:* = Macros.Format(pname, value, obj);
+                if (v == "XX")
+                    v = 100;
+                if (isColorValue)
+                    v = v.split("#").join("0x");
+                if (Macros.IsCached(pname, value))
+                    cfg[fieldName] = v;
+                value = v;
+            }
+            if (isNaN(value))
+                return emptyValue;
+            return Number(value);
+        }
+
         public static function FormatGlobalNumberValue(value:*):Number
         {
             return _instance._FormatGlobalNumberValue(value);
@@ -119,7 +141,6 @@ package com.xvm
             {
                 // Check cached value
                 var player_cache:Object;
-                var dead_value:String;
                 var cached_value:*;
                 if (pname != null && pname != "" && options != null)
                 {
@@ -129,8 +150,8 @@ package com.xvm
                         m_macros_cache[pname] = { alive: { }, dead: { }};
                         player_cache = m_macros_cache[pname];
                     }
-                    dead_value = options.alive == true ? "alive" : "dead";
-                    cached_value = player_cache[dead_value][format];
+                    player_cache = player_cache[options.alive == true ? "alive" : "dead"];
+                    cached_value = player_cache[format];
                 }
                 else
                 {
@@ -146,11 +167,17 @@ package com.xvm
                 // Split tags
                 var formatArr:Array = format.split("{{");
 
-                var res:String = formatArr[0];
-                var len:int = formatArr.length;
                 isStaticMacro = true;
-                if (len > 1)
+                var res:String;
+                var len:int = formatArr.length;
+                if (len <= 1)
                 {
+                    res = format;
+                }
+                else
+                {
+                    res = formatArr[0];
+
                     for (var i:int = 1; i < len; ++i)
                     {
                         var part:String = formatArr[i];
@@ -161,20 +188,20 @@ package com.xvm
                         }
                         else
                         {
-                            res += FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2);
+                            res += _FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2);
                         }
                     }
-                }
 
-                if (res != format)
-                {
-                    var iMacroPos:int = res.indexOf("{{");
-                    if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
+                    if (res != format)
                     {
-                        //Logger.add("recursive: " + pname + " " + res);
-                        var isStatic:Boolean = isStaticMacro;
-                        res = _Format(pname, res, options);
-                        isStaticMacro = isStatic && isStaticMacro;
+                        var iMacroPos:int = res.indexOf("{{");
+                        if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
+                        {
+                            //Logger.add("recursive: " + pname + " " + res);
+                            var isStatic:Boolean = isStaticMacro;
+                            res = _Format(pname, res, options);
+                            isStaticMacro = isStatic && isStaticMacro;
+                        }
                     }
                 }
 
@@ -187,7 +214,7 @@ package com.xvm
                         if (options != null)
                         {
                             //Logger.add("add to cache: " + format + " => " + res);
-                            player_cache[dead_value][format] = res;
+                            player_cache[format] = res;
                         }
                     }
                     else
@@ -211,7 +238,7 @@ package com.xvm
             return "";
         }
 
-        private function FormatPart(macro:String, pname:String, options:MacrosFormatOptions):String
+        private function _FormatPart(macro:String, pname:String, options:MacrosFormatOptions):String
         {
             // Process tag
             var pdata:* = pname == null ? m_globals : m_dict[pname];
@@ -220,7 +247,7 @@ package com.xvm
 
             var res:String = "";
 
-            var parts:Array = GetMacroParts(macro, pdata);
+            var parts:Array = _GetMacroParts(macro, pdata);
 
             var macroName:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -233,7 +260,7 @@ package com.xvm
             var dotPos:int = macroName.indexOf(".");
             if (dotPos == 0)
             {
-                value = SubstituteConfigPart(macroName.slice(1));
+                value = _SubstituteConfigPart(macroName.slice(1));
             }
             else
             {
@@ -286,6 +313,7 @@ package com.xvm
                         case "vehicle":
                         case "vehiclename":
                         case "vehicle-short":
+                        case "vtype-key":
                         case "vtype":
                         case "vtype-l":
                         case "c:vtype":
@@ -300,7 +328,7 @@ package com.xvm
                 }
                 */
 
-                res += FormatMacro(macro, parts, value, vehId, options);
+                res += _FormatMacro(macro, parts, value, vehId, options);
             }
 
             if (isStaticMacro)
@@ -318,13 +346,13 @@ package com.xvm
         }
 
         private var _macro_parts_cache:Object = {};
-        private function GetMacroParts(macro:String, pdata:Object):Array
+        private function _GetMacroParts(macro:String, pdata:Object):Array
         {
             var parts:Array = _macro_parts_cache[macro];
             if (parts)
                 return parts;
 
-            //Logger.add("GetMacroParts: " + macro);
+            //Logger.add("_GetMacroParts: " + macro);
             //Logger.addObject(pdata);
 
             parts = [null,null,null,null,null,null,null,null];
@@ -398,12 +426,12 @@ package com.xvm
             else if (parts[PART_NAME] == "xr" && parts[PART_DEF] == "")
                 parts[PART_DEF] = getRatingDefaultValue("xvm");
 
-            //Logger.add("[AS3][MACROS][GetMacroParts]: " + parts.join(", "));
+            //Logger.add("[AS3][MACROS][_GetMacroParts]: " + parts.join(", "));
             _macro_parts_cache[macro] = parts;
             return parts;
         }
 
-        private function SubstituteConfigPart(path:String):String
+        private function _SubstituteConfigPart(path:String):String
         {
             var res:* = XfwUtils.getObjectValueByPath(Config.config, path);
             if (res == null)
@@ -414,7 +442,7 @@ package com.xvm
         }
 
         private var _format_macro_fmt_suf_cache:Object = {};
-        private function FormatMacro(macro:String, parts:Array, value:*, vehId:Number, options:Object):String
+        private function _FormatMacro(macro:String, parts:Array, value:*, vehId:Number, options:Object):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -734,15 +762,13 @@ package com.xvm
             pdata["vid"] = vid;
             // {{vehicle}} - T-34-85
             pdata["vehicle"] = vdata.localizedName;
-            // {{vehiclename}} - ussr-T-34-85
+            // {{vehiclename}} - usa-M24_Chaffee
             pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
-            // {{nation}}
-            pdata["nation"] = vdata.nation;
-            // {{level}}
-            pdata["level"] = vdata.level;
-            // {{rlevel}}
-            pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
-            // {{vtype}} - MT
+            // {{vehicle-short}} - Chaff
+            pdata["vehicle-short"] = vdata.shortName || vdata.localizedName;
+            // {{vtype-key}} - MT
+            pdata["vtype-key"] = vdata.vtype;
+            // {{vtype}}
             pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
             // {{vtype-l}} - Medium Tank
             pdata["vtype-l"] = Locale.get(vdata.vtype);
@@ -752,6 +778,12 @@ package com.xvm
             pdata["battletier-min"] = vdata.tierLo;
             // {{battletier-max}}
             pdata["battletier-max"] = vdata.tierHi;
+            // {{nation}}
+            pdata["nation"] = vdata.nation;
+            // {{level}}
+            pdata["level"] = vdata.level;
+            // {{rlevel}}
+            pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
             // {{hp-max}}
             pdata["hp-max"] = vdata.hpTop;
 
@@ -1035,12 +1067,14 @@ package com.xvm
                         return "Флаттершай - лучшая пони!";
                     if (pname == "sirmax2" || pname == "0x01" || pname == "_SirMax_")
                         return "«сэр Макс» (XVM)";
-                    if (pname == "STL1te")
-                        return "О, СТЛайт!";
                     if (pname == "Mixailos")
                         return "Михаил";
+                    if (pname == "STL1te")
+                        return "О, СТЛайт!";
                     if (pname == "seriych")
                         return "Всем Счастья :)";
+                    if (pname == "XIebniDizele4ky" || pname == "Xlebni_Dizele4ky" || pname == "XlebniDizeIe4ku" || pname == "XlebniDize1e4ku" || pname == "XlebniDizele4ku_2013")
+                        return "Alex Artobanana";
                     break;
 
                 case "CT":
@@ -1050,7 +1084,7 @@ package com.xvm
                         return "Fluttershy is best pony!";
                     if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU" || pname == "0x01_EU")
                         return "«sir Max» (XVM)";
-                    if (pname == "seriych")
+                    if (pname == "seriych_RU")
                         return "Be Happy :)";
                     break;
 
