@@ -27,7 +27,7 @@ import math
 import BigWorld
 from adisp import async, process
 from CurrentVehicle import g_currentVehicle
-#from gui.shared.utils.requesters.deprecated import Requester # TODO:0.9.12
+from gui.shared import g_itemsCache
 
 from xfw import *
 
@@ -41,7 +41,7 @@ class _MinimapCircles(object):
 
     def clear(self):
         self.minimapCirclesData = None
-        self.item = None
+        self.vehicleItem = None
         self.crew = []
         self.is_full_crew = False
         self.view_distance_vehicle = 0
@@ -67,16 +67,15 @@ class _MinimapCircles(object):
 
         # debug(g_currentVehicle)
         # debug(g_currentVehicle.item)
-        self.item = g_currentVehicle.item
-        if self.item is None:
+        self.vehicleItem = g_currentVehicle.item
+        if self.vehicleItem is None:
             return
 
-        self.view_distance_vehicle = self.item.descriptor.turret['circularVisionRadius']
+        self.view_distance_vehicle = self.vehicleItem.descriptor.turret['circularVisionRadius']
         #debug('  view_distance_vehicle: %.0f' % self.view_distance_vehicle)
 
-        # TODO:0.9.12
-        #self._updateCrew()
-        crewRoles_arr = self.item.descriptor.type.crewRoles # roles per position in vehicle
+        self._updateCrew()
+        crewRoles_arr = self.vehicleItem.descriptor.type.crewRoles # roles per position in vehicle
 
         # Search skills and Brothers In Arms
         self.brothers_in_arms = True
@@ -158,7 +157,7 @@ class _MinimapCircles(object):
             'ration_uk'])
         #debug('  consumable: %s' % str(self.consumable))
 
-        self.updateMinimapCirclesData(self.item.descriptor)
+        self.updateMinimapCirclesData(self.vehicleItem.descriptor)
 
 
     def updateMinimapCirclesData(self, descr):
@@ -212,21 +211,19 @@ class _MinimapCircles(object):
 
     # PRIVATE
 
-    @process
     def _updateCrew(self):
-        # TODO:0.9.12
-        return
         self.crew = []
         self.is_full_crew = True
-        barracks = yield Requester('tankman').getFromInventory()
-        for tankman in barracks:
-            for crewman in self.item.crew:
-                if crewman[1] is None:
+
+        tankmen = g_itemsCache.items.getTankmen()
+        for tankman in tankmen.itervalues():
+            for slotIdx, crewman in self.vehicleItem.crew:
+                if crewman is None:
                     self.is_full_crew = False
-                elif crewman[1].invID == tankman.inventoryId:
-                    (factor, addition) = tankman.descriptor.efficiencyOnVehicle(self.item.descriptor)
+                elif crewman.invID == tankman.invID:
+                    (factor, addition) = tankman.descriptor.efficiencyOnVehicle(self.vehicleItem.descriptor)
                     crew_member = {
-                        'position': crewman[0],
+                        'position': slotIdx,
                         'isFemale': tankman.descriptor.isFemale,
                         'level': tankman.roleLevel * factor,
                         'skill': {}
@@ -247,7 +244,7 @@ class _MinimapCircles(object):
 
 
     def _isOptionalEquipped(self, optional_name):
-        for item in self.item.descriptor.optionalDevices:
+        for item in self.vehicleItem.descriptor.optionalDevices:
             # debug(vars(item))
             if item is not None and optional_name in item.name:
                 return True
@@ -255,7 +252,7 @@ class _MinimapCircles(object):
 
 
     def _isConsumableEquipped(self, consumable_names):
-        for item in self.item.eqsLayout:
+        for item in self.vehicleItem.eqsLayout:
             # debug(vars(item))
             if item is not None and item.descriptor.name in consumable_names:
                 return True
