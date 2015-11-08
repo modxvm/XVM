@@ -39,17 +39,22 @@ def Minimap_start(self):
 
 @overrideMethod(Minimap, '_Minimap__callEntryFlash')
 def Minimap__callEntryFlash(base, self, id, methodName, args=None):
+    #log('id={} method={} args={}'.format(id, methodName, args))
+
+    # TODO: FIXIT: stub to fix 0.9.12 bug
+    if methodName == 'update' and not args:
+        args = [0]
+
     base(self, id, methodName, args)
 
-    if config.get('minimap/enabled'):
+    if self._Minimap__isStarted and config.get('minimap/enabled'):
         try:
-            if self._Minimap__isStarted:
-                if methodName == 'init':
-                    if len(args) != 5:
-                        base(self, id, 'init_xvm', [0])
-                    else:
-                        arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
-                        base(self, id, 'init_xvm', [arenaVehicle['accountDBID'], False])
+            if methodName == 'init':
+                if len(args) != 5:
+                    base(self, id, 'init_xvm', [0])
+                else:
+                    arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
+                    base(self, id, 'init_xvm', [arenaVehicle['accountDBID'], False])
         except Exception, ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
