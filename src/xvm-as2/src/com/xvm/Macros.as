@@ -158,10 +158,9 @@ class com.xvm.Macros
             // Split tags
             var formatArr:Array = format.split("{{");
 
-            var formatted:Array = [ formatArr[0] ];
             var len:Number = formatArr.length;
             isStaticMacro = true;
-            var res:String;
+            var res:String = formatArr[0];
             if (len > 1)
             {
                 for (var i:Number = 1; i < len; ++i)
@@ -170,15 +169,13 @@ class com.xvm.Macros
                     var idx:Number = part.indexOf("}}");
                     if (idx < 0)
                     {
-                        formatted.push("{{" + part);
+                        res += "{{" + part;
                     }
                     else
                     {
-                        formatted.push(FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2));
+                        res += FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2);
                     }
                 }
-
-                res = formatted.join("");
 
                 if (res != format)
                 {
