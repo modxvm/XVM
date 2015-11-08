@@ -19,6 +19,9 @@
         "horizontal": 10,   // по горизонтали
         "vertical": 2       // по вертикали
     },
+    // Scrolling speed (default - 20)
+    // Скорость прокрутки (по умолчанию - 20)
+    "scrollingSpeed": 20,
     // true - show filters even if all tanks fit on the screen.
     // true - показывать фильтры даже если все танки помещаются на экране.
     "alwaysShowFilters": false,

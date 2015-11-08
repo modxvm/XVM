@@ -10,6 +10,7 @@ package com.xvm.types.cfg
         public var zoom:Number;
         public var rows:Number;
         public var padding:Object;
+        public var scrollingSpeed:Number;
         public var alwaysShowFilters:Boolean;
         public var hideBuyTank:Boolean;
         public var hideBuySlot:Boolean;

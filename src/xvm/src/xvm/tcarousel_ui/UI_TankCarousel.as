@@ -68,6 +68,8 @@ package xvm.tcarousel_ui
                 left: cfg.padding.horizontal / 2
             };
 
+            xfw_scrollSpeed = isNaN(cfg.scrollingSpeed) || Number(cfg.scrollingSpeed) < 0 ? 20 : Number(cfg.scrollingSpeed) < 1 ? 1 : Number(cfg.scrollingSpeed);
+
             componentInspectorSetting = false;
         }
 

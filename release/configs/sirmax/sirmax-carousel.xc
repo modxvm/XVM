@@ -11,6 +11,7 @@
     //"zoom": 0.75,
     "rows": 2,
     "padding": { "horizontal": 5, "vertical": 5 },
+    //"scrollingSpeed": 30,
     "filtersPadding": { "horizontal": 11, "vertical": 10 },
     "alwaysShowFilters": true,
     //"suppressCarouselTooltips": true,
