@@ -239,7 +239,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
             //wrapper.m_list._visible = true; // _visible == false for "none" mode
             Cmd.profMethodStart("PlayersPanel.setData(): #0 - split");
-            var values:Array = vehiclesStrOrig.split("<br/>");
+            var vehiclesValues:Array = vehiclesStrOrig.split("<br/>");
             Cmd.profMethodEnd("PlayersPanel.setData(): #0 - split");
             Cmd.profMethodStart("PlayersPanel.setData(): #1 - prepare");
             var len = data.length;
@@ -249,27 +249,50 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             for (var i = 0; i < len; ++i)
             {
                 Cmd.profMethodStart("PlayersPanel.setData(): #1.0 - register macros");
-                var item = data[i];
-                var value = values[i];
+                var item:Object = data[i];
+                var uid:Number = item.uid;
+                var frags:Number = item.frags;
+                var vehicleState:Number = item.vehicleState;
+                var userName:String = item.userName;
 
-                fixBattleState(item);
+                // fix battlestate
+                var obj:BattleStateData = BattleState.get(uid);
+                obj.frags = frags || NaN;
+                //Logger.addObject(item);
+                obj.ready = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0 && !Boolean(item.isOffline);
+                obj.dead = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
+                if (obj.dead == true && (!isNaN(obj.curHealth) && obj.curHealth > 0))
+                    obj.curHealth = 0;
+                obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);
+                obj.teamKiller = item.teamKiller == true;
+                obj.squad = item.squad;
+                obj.entityName = wrapper.type != "left" ? "enemy" : obj.squad > 10 ? "squadman" : obj.teamKiller ? "teamKiller" : "ally";
+                obj.selected = item.isPostmortemView;
+                if (obj.position == null)
+                    obj.position = ++m_lastPosition;
 
                 //Logger.addObject(item);
+
+                // register macros
                 if (item.himself)
-                    Macros.UpdateMyFrags(item.frags);
-                Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+                {
+                    BattleState.setSelfPlayerId(uid);
+                    Macros.UpdateMyFrags(frags);
+                }
+                Macros.RegisterPlayerData(userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
                 Cmd.profMethodEnd("PlayersPanel.setData(): #1.0 - register macros");
 
-                var value_splitted:Array = value.split(item.vehicle);
+                // calculate values
+                var color:String = vehiclesValues[i].split("'")[1];
                 var cfg_state:Object = cfg[wrapper.state];
 //                Cmd.profMethodStart("PlayersPanel.setData(): #1.1 - format names");
-                namesArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_NICK, item, item.userName)));
+                namesArr.push("<font color='" + color + "'>" + getTextValue(cfg_state, Defines.FIELDTYPE_NICK, item, userName) + "</font>");
 //                Cmd.profMethodEnd("PlayersPanel.setData(): #1.1 - format names");
 //                Cmd.profMethodStart("PlayersPanel.setData(): #1.2 - format vehicle");
-                vehiclesArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_VEHICLE, item, item.vehicle)));
+                vehiclesArr.push("<font color='" + color + "'>" + getTextValue(cfg_state, Defines.FIELDTYPE_VEHICLE, item, item.vehicle) + "</font>");
 //                Cmd.profMethodEnd("PlayersPanel.setData(): #1.2 - format vehicle");
 //                Cmd.profMethodStart("PlayersPanel.setData(): #1.3 - format frags");
-                fragsArr.push(value_splitted.join(getTextValue(cfg_state, Defines.FIELDTYPE_FRAGS, item, item.frags)));
+                fragsArr.push("<font color='" + color + "'>" + getTextValue(cfg_state, Defines.FIELDTYPE_FRAGS, item, frags) + "</font>");
 //                Cmd.profMethodEnd("PlayersPanel.setData(): #1.3 - format frags");
             }
             Cmd.profMethodEnd("PlayersPanel.setData(): #1 - prepare");
@@ -340,8 +363,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                     if (!m_dead_noticed.hasOwnProperty(uid.toString()))
                     {
                         m_dead_noticed[uid] = true;
-                        //Logger.add("dead: " + item.uid);
-                        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYER_DEAD, value: item.uid } );
+                        //Logger.add("dead: " + uid);
+                        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYER_DEAD, value: uid } );
                     }
                 }
             }
@@ -353,28 +376,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         }
 
         Cmd.profMethodEnd("PlayersPanel.setData(): " + wrapper.type);
-    }
-
-    private function fixBattleState(data)
-    {
-        // fix battlestate
-        var obj:BattleStateData = BattleState.get(data.uid);
-        obj.frags = data.frags || NaN;
-        //Logger.addObject(data);
-        obj.ready = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0 && !Boolean(data.isOffline);
-        obj.dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
-        if (obj.dead == true && (!isNaN(obj.curHealth) && obj.curHealth > 0))
-            obj.curHealth = 0;
-        obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);
-        obj.teamKiller = data.teamKiller == true;
-        obj.squad = data.squad;
-        obj.entityName = wrapper.type != "left" ? "enemy" : obj.squad > 10 ? "squadman" : obj.teamKiller ? "teamKiller" : "ally";
-        obj.selected = data.isPostmortemView;
-        if (obj.position == null)
-            obj.position = ++m_lastPosition;
-
-        if (data.himself)
-            BattleState.setSelfPlayerId(data.uid);
     }
 
     private function selectPlayer(event):Void

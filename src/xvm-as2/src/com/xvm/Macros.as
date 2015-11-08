@@ -131,8 +131,7 @@ class com.xvm.Macros
         try
         {
             // Check cached value
-            var player_cache:Object;
-            var dead_value:String;
+            var player_cache:Object = null;
             var cached_value;
             if (pname != null && pname != "" && options != null)
             {
@@ -142,8 +141,8 @@ class com.xvm.Macros
                     m_macros_cache[pname] = { alive: { }, dead: { }};
                     player_cache = m_macros_cache[pname];
                 }
-                dead_value = options.dead == true ? "dead" : "alive";
-                cached_value = player_cache[dead_value][format];
+                player_cache = player_cache[options.dead == true ? "dead" : "alive"];
+                cached_value = player_cache[format];
             }
             else
             {
@@ -159,9 +158,10 @@ class com.xvm.Macros
             // Split tags
             var formatArr:Array = format.split("{{");
 
-            var res:String = formatArr[0];
+            var formatted:Array = [ formatArr[0] ];
             var len:Number = formatArr.length;
             isStaticMacro = true;
+            var res:String;
             if (len > 1)
             {
                 for (var i:Number = 1; i < len; ++i)
@@ -170,26 +170,33 @@ class com.xvm.Macros
                     var idx:Number = part.indexOf("}}");
                     if (idx < 0)
                     {
-                        res += "{{" + part;
+                        formatted.push("{{" + part);
                     }
                     else
                     {
-                        res += FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2);
+                        formatted.push(FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2));
+                    }
+                }
+
+                res = formatted.join("");
+
+                if (res != format)
+                {
+                    var iMacroPos:Number = res.indexOf("{{");
+                    if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
+                    {
+                        //Logger.add("recursive: " + pname + " " + res);
+                        var isStatic:Boolean = isStaticMacro;
+                        res = _Format(pname, res, options);
+                        isStaticMacro = isStatic && isStaticMacro;
                     }
                 }
             }
-
-            if (res != format)
+            else
             {
-                var iMacroPos:Number = res.indexOf("{{");
-                if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
-                {
-                    //Logger.add("recursive: " + pname + " " + res);
-                    var isStatic:Boolean = isStaticMacro;
-                    res = _Format(pname, res, options);
-                    isStaticMacro = isStatic && isStaticMacro;
-                }
+                res = format;
             }
+
 
             res = Utils.fixImgTag(res);
 
@@ -200,7 +207,7 @@ class com.xvm.Macros
                     if (options != null)
                     {
                         //Logger.add("add to cache: " + format + " => " + res);
-                        player_cache[dead_value][format] = res;
+                        player_cache[format] = res;
                     }
                 }
                 else
@@ -769,7 +776,7 @@ class com.xvm.Macros
                 // {{vehiclename}} - usa-M24_Chaffee
                 pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
                 // {{vehicle-short}} - Chaff
-                pdata["vehicle-short"] = vdata.shortName;
+                pdata["vehicle-short"] = vdata.shortName || vdata.localizedName;
                 // {{vtype-key}} - MT
                 pdata["vtype-key"] = vdata.vtype;
                 // {{vtype}}
