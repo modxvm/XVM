@@ -43,6 +43,8 @@ package xvm.tcarousel_ui
         private var _isMultiselectionModeEnabled:Boolean = false;
         private var _carousel_height:int;
 
+        private var _skipScrollToIndex:Boolean = false;
+
         public function UI_TankCarousel()
         {
             //Logger.add("UI_TankCarousel()");
@@ -482,6 +484,15 @@ package xvm.tcarousel_ui
 
         private var _currentShowRendersCount:int;
 
+        override protected function handleItemClick(e:ButtonEvent) : void
+        {
+            super.handleItemClick(e);
+            if ((e.currentTarget as TankCarouselItemRenderer).activateButton == e.target)
+            {
+                _skipScrollToIndex = true;
+            }
+        }
+
         private function repositionRenderers():void
         {
             if (!_renderers)
@@ -504,7 +515,12 @@ package xvm.tcarousel_ui
                     ++_currentShowRendersCount;
                 ++n;
             }
-            scrollToIndex(selectedIndex);
+
+            if (!_skipScrollToIndex)
+            {
+                scrollToIndex(selectedIndex);
+            }
+            _skipScrollToIndex = false;
         }
 
         private function repositionAdvancedSlots():void
