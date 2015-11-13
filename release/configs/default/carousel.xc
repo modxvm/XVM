@@ -19,6 +19,9 @@
         "horizontal": 10,   // по горизонтали
         "vertical": 2       // по вертикали
     },
+    // Background transparency (default - 60)
+    // Прозрачность подложки (по умолчанию - 60)
+    "backgroundAlpha": 60,
     // Scrolling speed (default - 20)
     // Скорость прокрутки (по умолчанию - 20)
     "scrollingSpeed": 20,

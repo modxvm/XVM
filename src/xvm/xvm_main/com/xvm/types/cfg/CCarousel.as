@@ -11,6 +11,7 @@ package com.xvm.types.cfg
         public var rows:Number;
         public var padding:Object;
         public var scrollingSpeed:Number;
+        public var backgroundAlpha:Number;
         public var alwaysShowFilters:Boolean;
         public var hideBuyTank:Boolean;
         public var hideBuySlot:Boolean;
