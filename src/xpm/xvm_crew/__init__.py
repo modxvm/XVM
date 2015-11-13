@@ -20,7 +20,7 @@ import BigWorld
 import game
 from gui.shared import g_eventBus, g_itemsCache
 from CurrentVehicle import g_currentVehicle
-from gui.Scaleform.daapi.view.lobby.hangar import Crew
+from gui.Scaleform.daapi.view.lobby.hangar.Crew import Crew
 from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import CrewContextMenuHandler
 from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import CREW as WG_CREW
 from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
