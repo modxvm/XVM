@@ -39,46 +39,19 @@ import xvm_main.python.userprefs as userprefs
 #####################################################################
 # constants
 
-class LINKAGES(object):
-    UI_LINKAGE_COMMON_QUESTS = "xvm.quests_ui::UI_CommonQuestsView"
-
-
 class FILTERS(object):
-    HIDE_WITH_HONORS = "hideWithHonors"
-    STARTED = "started"
-    INCOMPLETE = "incomplete"
+    HIDE_WITH_HONORS = 5
+    STARTED = 6
+    INCOMPLETE = 7
 
 
 #####################################################################
 # handlers
 
-import gui.Scaleform.daapi.view.lobby.server_events as server_events
-
-@overrideStaticMethod(server_events, 'getViewSettings')
-def getViewSettings(base):
-    log('getViewSettings')
-    return base() + (ViewSettings(LINKAGES.UI_LINKAGE_COMMON_QUESTS, QuestsCurrentTab, None,
-        ViewTypes.COMPONENT, None, ScopeTemplates.DEFAULT_SCOPE),)
-
-_QuestsFilter._FILTER_BY_STATE[FILTERS.HIDE_WITH_HONORS] = lambda q: not q.isFullCompleted(True)
-_QuestsFilter._FILTER_BY_STATE[FILTERS.STARTED] = lambda q: q.isInProgress()
-_QuestsFilter._FILTER_BY_STATE[FILTERS.INCOMPLETE] = lambda q: q.isInProgress() or (q.isCompleted() and not q.isFullCompleted(True))
-
-
-@overrideMethod(EventsWindow, '_loadView')
-def EventsWindow_loadView(base, self, linkage, alias):
-    ui_required = False
-    if alias == QUESTS_ALIASES.COMMON_QUESTS_VIEW_ALIAS and linkage == QUESTS_ALIASES.COMMON_QUESTS_VIEW_LINKAGE:
-        linkage = LINKAGES.UI_LINKAGE_COMMON_QUESTS
-        alias = LINKAGES.UI_LINKAGE_COMMON_QUESTS
-        ui_required = True
-
-    if ui_required:
-        if not 'xvm_quests_ui.swf' in xfw_mods_info.loaded_swfs:
-            BigWorld.callback(0, lambda:base(self, linkage, alias))
-            return
-
-    base(self, linkage, alias)
+_QuestsFilter._FILTER_BY_STATE.update({
+    FILTERS.HIDE_WITH_HONORS: lambda q: not q.isFullCompleted(True),
+    FILTERS.STARTED: lambda q: q.isInProgress(),
+    FILTERS.INCOMPLETE: lambda q: q.isInProgress() or (q.isCompleted() and not q.isFullCompleted(True))})
 
 
 @overrideMethod(_QuestsTileChainsView, 'as_setHeaderDataS')
@@ -95,7 +68,8 @@ def _QuestsTileChainsView_as_setHeaderDataS(base, self, data):
 
 @overrideMethod(_QuestsTileChainsView, '_QuestsTileChainsView__getCurrentFilters')
 def _QuestsTileChainsView__getCurrentFilters(base, self):
-    if self._navInfo.potapov.filters is None:
+
+    if self._navInfo.selectedPQ.filters is None:
         try:
             settings = _GetSettings()
             return (settings.get('vehType', -1), settings.get('questState', QUEST_TASK_FILTERS_TYPES.ALL))
@@ -106,7 +80,7 @@ def _QuestsTileChainsView__getCurrentFilters(base, self):
 
 @registerEvent(_QuestsTileChainsView, '_QuestsTileChainsView__updateTileData')
 def _QuestsTileChainsView__updateTileData(self, vehType, questState, selectItemID = -1):
-    _SaveSettings(vehType=vehType, questState=questState)
+    _SaveSettings(vehType, questState)
 
 
 # PRIVATE
@@ -137,7 +111,7 @@ def _GetSettings():
 
 
 def _SaveSettings(vehType=-1, questState=QUEST_TASK_FILTERS_TYPES.ALL):
-    #log("{} {} {}".format(vehType, questState))
+    #log("{} {}".format(vehType, questState))
     try:
         settings = {
             'ver':XFW_MOD_INFO['VERSION'],

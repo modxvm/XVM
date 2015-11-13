@@ -9,7 +9,7 @@
     //"showCameraLineAfterDeath": false,
     "minimapAimIcon": "cfg://sirmax/img/MinimapAim.png",
     "minimapAimIconScale": 200,
-    "zoom": { "centered": false },
+    "zoom": { "pixelsBack": 200, "centered": false },
     "circles": {
         "view": [
             { "enabled": true, "state": 1, "distance": 50, "scale": 1, "thickness": 0.5, "alpha": 70, "color": "0xFFFFFF" },
