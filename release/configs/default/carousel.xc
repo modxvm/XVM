@@ -84,7 +84,7 @@
       "clanLock":   { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Activate / deactivate button.
       // Кнопка активации / деактивации.
-      "activateButton": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
+      "activateButton": { "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
     },
     // Extra cell fields (see playersPanel.xc).
     // Дополнительные поля ячеек (см. playersPanel.xc).
