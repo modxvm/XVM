@@ -191,8 +191,12 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         m_entityName = entityName; // ally, enemy, squadman, teamKiller
         m_entityType = entityType; // ally, enemy
         m_maxHealth = maxHealth;
+
         m_isFlagbearer = isFlagBearer;
-        wrapper.flagMC._visible = m_isFlagbearer;
+        if (wrapper.marker2 != null)
+        {
+            wrapper.marker2._visible = isFlagBearer;
+        }
 
         m_vname = vType; // AMX50F155
         m_level = vLevel;
@@ -207,11 +211,6 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         m_isReady = (arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 3] & 2) != 0; // 2 - IS_AVATAR_READY
         m_frags = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 4];
         m_squad = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 5];
-
-        if (wrapper.marker2 != null)
-        {
-            wrapper.marker2._visible = isFlagBearer;
-        }
 
         healthBarComponent.init();
         contourIconComponent.init(m_entityType);
@@ -378,7 +377,10 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     public function updateFlagbearerState(isFlagbearer:Boolean)
     {
         m_isFlagbearer = isFlagbearer;
-        wrapper.flagMC._visible = m_isFlagbearer;
+        if (wrapper.marker2 != null)
+        {
+            wrapper.marker2._visible = m_isFlagbearer;
+        }
     }
 
     /**
