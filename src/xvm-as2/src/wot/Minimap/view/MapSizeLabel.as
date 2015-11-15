@@ -45,19 +45,13 @@ class wot.Minimap.view.MapSizeLabel
         var formatArr:Array = format.split(CELLSIZE_MACRO);
         if (formatArr.length > 1)
         {
-            format = formatArr.join(cellSize.toString());
+            format = formatArr.join(Math.round(Minimap.MapSize / 10).toString());
         }
-
         return format;
     }
 
     private function get bg():MovieClip
     {
         return MinimapProxy.wrapper.backgrnd;
-    }
-
-    private function get cellSize():Number
-    {
-        return MapSizeModel.instance.getCellSide();
     }
 }

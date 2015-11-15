@@ -35,7 +35,7 @@ class wot.Minimap.shapes.ShapeAttach
         var self:net.wargaming.ingame.MinimapEntry = IconsProxy.selfEntry;
         selfAttachments = self.xvm_worker.attachments;
 
-        var metersPerPoint:Number = MAP_SIZE_IN_POINTS / mapSizeInMeters;
+        var metersPerPoint:Number = MAP_SIZE_IN_POINTS / Minimap.MapSize;
         scaleFactor = metersPerPoint;
 
         /** Hide sphapes on players dead event (postmortem mod) */
@@ -54,11 +54,6 @@ class wot.Minimap.shapes.ShapeAttach
     }
 
     // -- Private
-
-    private function get mapSizeInMeters():Number
-    {
-        return MapSizeModel.instance.getFullSide();
-    }
 
     private function postmortemMod(event)
     {

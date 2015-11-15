@@ -41,6 +41,8 @@ class wot.Minimap.Minimap
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    public static var MapSize:Number = 0;
+
     private static var _isAltMode:Boolean = false;
     public static function get config():Object
     {

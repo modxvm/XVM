@@ -112,7 +112,7 @@ class wot.Minimap.Features
         initializeZoomFeature();
 
         // Features dependent on successful map size recognition
-        if (MapSizeModel.instance.getCellSide())
+        if (Minimap.MapSize > 0)
         {
             initializeMapSizeFeature();
             initializeSquareFeature();

@@ -30,7 +30,11 @@ def Minimap_start(self):
                 playerId = entryVehicle['accountDBID']
                 tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
                 vClass = tags.pop() if len(tags) > 0 else ''
-                BigWorld.callback(0, lambda:self._Minimap__callEntryFlash(id, 'init_xvm', [playerId, False, 'player', vClass]))
+                #log('Minimap_start')
+                self._Minimap__callEntryFlash(id, 'init_xvm',
+                    [playerId, False, 'player', vClass, _getMapSize()])
+                #BigWorld.callback(0, lambda:self._Minimap__callEntryFlash(id, 'init_xvm',
+                #    [playerId, False, 'player', vClass, _getMapSize()]))
 
         except Exception, ex:
             if IS_DEVELOPMENT:
@@ -74,3 +78,9 @@ def Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
         except Exception, ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
+
+# PRIVATE
+
+def _getMapSize():
+    (b, l), (t, r) = BigWorld.player().arena.arenaType.boundingBox
+    return t - b
