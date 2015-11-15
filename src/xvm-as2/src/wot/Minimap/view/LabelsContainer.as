@@ -448,7 +448,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
         if (cfg.alpha != null)
         {
-            Logger.add(playerName + ": " + cfg.alpha + "=" + Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100) + "  " + Macros.Format(playerName, "{{a:hp-ratio}}", bs));
+            //Logger.add(playerName + ": " + cfg.alpha + "=" + Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100) + "  " + Macros.Format(playerName, "{{a:hp-ratio}}", bs));
             value = Macros.FormatNumber(playerName, cfg, "alpha", bs, 100, 100);
             if (textField._alpha != value)
                 textField._alpha = value;
