@@ -30,6 +30,7 @@ class wot.battle.BattleMain
         TweenPlugin.activate([TintPlugin]);
 
         ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
+        ExternalInterface.addCallback(Cmd.RESPOND_BATTLE_STATE, instance, BattleMain.onBattleStateChanged);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, BattleMainConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
 
@@ -38,7 +39,6 @@ class wot.battle.BattleMain
         GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
 
         ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
-        ExternalInterface.addCallback(Cmd.RESPOND_BATTLE_STATE, instance, instance.onBattleStateChanged);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
 
         // TODO: dirty hack
@@ -164,6 +164,51 @@ class wot.battle.BattleMain
         }, 1000);
     }
 
+    private static function onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
+        team:Number, squad:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
+    {
+        try
+        {
+            //Logger.addObject(arguments);
+            var data:Object = { };
+            if (playerName != null)
+                data["playerName"] = playerName;
+            if (clanAbbrev != null)
+                data["clanAbbrev"] = clanAbbrev;
+            if (!isNaN(playerId))
+                data["playerId"] = playerId;
+            if (!isNaN(vehId))
+                data["vehId"] = vehId;
+            if (!isNaN(team))
+                data["team"] = team;
+            if (!isNaN(squad))
+                data["squad"] = squad;
+            data["dead"] = dead;
+            if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(curHealth))
+            {
+                data["curHealth"] = curHealth;
+            }
+            if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(maxHealth))
+                data["maxHealth"] = maxHealth;
+            if ((Config.config.battle.allowHpInPanelsAndMinimap || Config.config.battle.allowMarksOnGunInPanelsAndMinimap) && !isNaN(marksOnGun))
+                data["marksOnGun"] = marksOnGun;
+            if (Config.config.battle.allowSpottedStatus && spotted != null)
+                data["spotted"] = spotted;
+
+            //Logger.addObject(data);
+            var updated:Boolean = BattleState.update(playerId, data);
+            if (updated)
+            {
+                //Logger.add("updated: " + playerName);
+                GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerId));
+            }
+        }
+        catch (ex:Error)
+        {
+            Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
+        }
+    }
+
     private function fixMinimapSize():Void
     {
         /**
@@ -189,45 +234,6 @@ class wot.battle.BattleMain
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ALT_MODE, isDown: isDown } );
         if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
-    }
-
-    private function onBattleStateChanged(targets:Number, playerName:String, playerId:Number, vehId:Number,
-        dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
-    {
-        try
-        {
-            //Logger.addObject(arguments);
-            var data:Object = { };
-            if (playerName != null)
-                data["playerName"] = playerName;
-            if (!isNaN(playerId))
-                data["playerId"] = playerId;
-            if (!isNaN(vehId))
-                data["vehId"] = vehId;
-            data["dead"] = dead;
-            if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(curHealth))
-            {
-                data["curHealth"] = curHealth;
-            }
-            if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(maxHealth))
-                data["maxHealth"] = maxHealth;
-            if ((Config.config.battle.allowHpInPanelsAndMinimap || Config.config.battle.allowMarksOnGunInPanelsAndMinimap) && !isNaN(marksOnGun))
-                data["marksOnGun"] = marksOnGun;
-            if (Config.config.battle.allowSpottedStatus && spotted != null)
-                data["spotted"] = spotted;
-
-            //Logger.addObject(data);
-            var updated:Boolean = BattleState.update(playerId, data);
-            if (updated)
-            {
-                //Logger.add("updated: " + playerName);
-                GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerId));
-            }
-        }
-        catch (ex:Error)
-        {
-            Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
-        }
     }
 
     private var debugTextField:TextField = null;

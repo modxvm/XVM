@@ -22,14 +22,13 @@ def cleanupBattleData():
 
 # PRIVATE
 
-from pprint import pprint
-
 import BigWorld
 
 from xfw import *
 
+from constants import *
 from logger import *
-
+import utils
 
 def _getVehicleStateData(vID):
     # log(vars(vehicle))
@@ -47,10 +46,16 @@ def _getVehicleStateData(vID):
         global _spotted_cache
         _spotted_cache[vID] = 'dead'
 
+    player = BigWorld.player()
+    playerTeam = player.team if hasattr(player, 'team') else 0
+
     return {
         'playerName': arenaVehicle['name'],
+        'clanAbbrev': arenaVehicle['clanAbbrev'],
         'playerId': arenaVehicle['accountDBID'],
-        'vId': vID,
+        'vId': arenaVehicle['vehicleType'].type.compactDescr,
+        'team': TEAM.ALLY if arenaVehicle['team'] == playerTeam else TEAM.ENEMY,
+        'squad': utils.getVehicleInfo(vID).squadIndex,
         'dead': dead,
         'spotted': getSpottedStatus(vID),
         'curHealth': max(0, vehicle.health) if vehicle else None,

@@ -238,11 +238,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
                 uid: playerId,
                 vid: vid,
                 label: pName + (pClan == "" ? "" : "[" + pClan + "]"),
-                vehicle: vType,
-                icon: vIconSource,
                 squad: entityName == "squadman" ? 11 : 0,
-                level: vLevel,
-                vtype: Utils.vehicleClassToVehicleType(vClass),
                 maxHealth: maxHealth
             }, wr.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
         };

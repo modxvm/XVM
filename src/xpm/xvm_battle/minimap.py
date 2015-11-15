@@ -21,20 +21,23 @@ import xvm_main.python.config as config
 
 @registerEvent(Minimap, 'start')
 def Minimap_start(self):
+    #log('Minimap_start')
     if config.get('minimap/enabled'):
         try:
-            if not g_sessionProvider.getCtx().isPlayerObserver():
+            battleCtx = g_sessionProvider.getCtx()
+            if not battleCtx.isPlayerObserver():
                 player = BigWorld.player()
+                arena = player.arena
                 id = player.playerVehicleID
-                entryVehicle = player.arena.vehicles[id]
+                entryVehicle = arena.vehicles[id]
                 playerId = entryVehicle['accountDBID']
+                vId = entryVehicle['vehicleType'].type.compactDescr
                 tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
                 vClass = tags.pop() if len(tags) > 0 else ''
-                #log('Minimap_start')
+                entityName = str(battleCtx.getPlayerGuiProps(id, entryVehicle['team']))
+                #BigWorld.callback(0, lambda:
                 self._Minimap__callEntryFlash(id, 'init_xvm',
-                    [playerId, False, 'player', vClass, _getMapSize()])
-                #BigWorld.callback(0, lambda:self._Minimap__callEntryFlash(id, 'init_xvm',
-                #    [playerId, False, 'player', vClass, _getMapSize()]))
+                    [playerId, False, vId, entityName, 'player', vClass, _getMapSize()])
 
         except Exception, ex:
             if IS_DEVELOPMENT:
@@ -57,8 +60,10 @@ def Minimap__callEntryFlash(base, self, id, methodName, args=None):
                 if len(args) != 5:
                     base(self, id, 'init_xvm', [0])
                 else:
-                    arenaVehicle = BigWorld.player().arena.vehicles.get(id, None)
-                    base(self, id, 'init_xvm', [arenaVehicle['accountDBID'], False])
+                    entryVehicle = BigWorld.player().arena.vehicles[id]
+                    vId = entryVehicle['vehicleType'].type.compactDescr
+                    entityName = str(g_sessionProvider.getCtx().getPlayerGuiProps(id, entryVehicle['team']))
+                    base(self, id, 'init_xvm', [entryVehicle['accountDBID'], False, vId, entityName])
         except Exception, ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
@@ -71,10 +76,13 @@ def Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
             return
 
         try:
-            vehicleID = vInfo.vehicleID
-            entry = self._Minimap__entrieLits[vehicleID]
-            arenaVehicle = BigWorld.player().arena.vehicles.get(vehicleID, None)
-            self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm', [arenaVehicle['accountDBID'], True]))
+            vehId = vInfo.vehicleID
+            entry = self._Minimap__entrieLits[vehId]
+            entryVehicle = BigWorld.player().arena.vehicles[vehId]
+            vId = entryVehicle['vehicleType'].type.compactDescr
+            entityName = str(g_sessionProvider.getCtx().getPlayerGuiProps(id, entryVehicle['team']))
+            self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm',
+                [entryVehicle['accountDBID'], True, vId, entityName]))
         except Exception, ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())

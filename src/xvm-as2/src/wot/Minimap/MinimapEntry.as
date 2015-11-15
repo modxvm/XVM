@@ -14,6 +14,7 @@
  */
 
 import com.xvm.*;
+import com.xvm.DataTypes.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.view.*;
@@ -72,7 +73,7 @@ class wot.Minimap.MinimapEntry
         Utils.TraceXvmModule("Minimap");
     }
 
-    function init_xvmImpl(playerId:Number, isLit:Boolean, entryName:String, vClass:String, mapSize:Number)
+    function init_xvmImpl(playerId:Number, isLit:Boolean, vehId:Number, entityName:String, entryName:String, vClass:String, mapSize:Number)
     {
         //Logger.add("init_xvmImpl: id=" + playerId + " lit=" + isLit);
         Cmd.profMethodStart("MinimapEntry.init_xvm()");
@@ -86,6 +87,25 @@ class wot.Minimap.MinimapEntry
         }
 
         this.playerId = playerId;
+
+        if (Config.eventType != "normal")
+        {
+            var bs:BattleStateData = BattleState.get(playerId);
+            if (bs && bs.playerId)
+            {
+                bs.vehId = vehId;
+                bs.dead = false;
+                bs.entityName = entityName;
+                Macros.RegisterPlayerData(bs.playerName,
+                {
+                    uid: playerId,
+                    vid: bs.vehId,
+                    label: bs.playerName + (bs.clanAbbrev == "" ? "" : "[" + bs.clanAbbrev + "]"),
+                    squad: bs.squad,
+                    maxHealth: bs.maxHealth
+                }, bs.team);
+            }
+        }
 
         if (IconsProxy.playerIds[playerId])
         {

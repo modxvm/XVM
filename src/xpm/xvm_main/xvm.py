@@ -215,11 +215,6 @@ class Xvm(object):
 
     # BATTLE
 
-    def onStateBattle(self):
-        trace('onStateBattle')
-        pass
-
-
     def onAvatarBecomePlayer(self):
         trace('onAvatarBecomePlayer')
         # check version if game restarted after crash or in replay
@@ -261,12 +256,14 @@ class Xvm(object):
 
         self.sendConfig(flashObject)
 
-        BigWorld.callback(0, self.invalidateAll)
+        for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
+            self.doUpdateBattle(vID, INV.ALL, flashObject)
 
 
     def deleteBattleSwf(self):
         trace('deleteBattleSwf')
         pass
+
 
     def initVmmSwf(self, flashObject):
         #trace('initVmmSwf')
@@ -278,15 +275,8 @@ class Xvm(object):
         pass
 
 
-    def invalidateAll(self):
-        #trace('invalidateAll')
-        for (vID, timerId) in self._invalidateTimerId.iteritems():
-            if timerId is not None:
-                BigWorld.cancelCallback(timerId)
-        self._invalidateTimerId.clear()
-        self._invalidateTargets.clear()
-        for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
-            self.invalidate(vID, INV.ALL)
+    def onStateBattle(self):
+        trace('onStateBattle')
 
 
     def sendConfig(self, flashObject):
@@ -357,7 +347,7 @@ class Xvm(object):
 
 
     def invalidateCallback(self, vID):
-        #trace('invalidateCallback: {0}'.format(vID))
+        #trace('invalidateCallback: {} {}'.format(vID, self._invalidateTargets.get(vID, INV.NONE)))
         try:
             targets = self._invalidateTargets.get(vID, INV.NONE)
             if targets & INV.BATTLE_ALL:
@@ -383,6 +373,11 @@ class Xvm(object):
         if player is None or not hasattr(player, 'arena') or player.arena is None:
             return
 
+        self.doUpdateBattle(vID, targets, battle)
+
+
+    def doUpdateBattle(self, vID, targets, battle):
+
         state = vehstate.getVehicleStateData(vID)
         if state is None:
             return
@@ -391,17 +386,20 @@ class Xvm(object):
         if movie is None:
             return
 
-        #debug('updateBattle: {0} {1}'.format(vID, set(state.iteritems())))
+        #debug('doUpdateBattle: {0} {1}'.format(vID, set(state.iteritems())))
         movie.invoke((AS2RESPOND.BATTLE_STATE,
-                      targets,
-                      state['playerName'],
-                      state['playerId'],
-                      state['vId'],
-                      state['dead'],
-                      state['curHealth'],
-                      state['maxHealth'],
-                      state['marksOnGun'],
-                      state['spotted'],
+            targets,
+            state['playerName'],
+            state['clanAbbrev'],
+            state['playerId'],
+            state['vId'],
+            state['team'],
+            state['squad'],
+            state['dead'],
+            state['curHealth'],
+            state['maxHealth'],
+            state['marksOnGun'],
+            state['spotted'],
         ))
 
 

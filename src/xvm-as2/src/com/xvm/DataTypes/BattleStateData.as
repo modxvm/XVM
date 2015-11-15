@@ -9,6 +9,7 @@ class com.xvm.DataTypes.BattleStateData
 {
     public var playerId:Number = NaN;
     public var playerName:String = null;
+    public var clanAbbrev:String = null;
     public var vehId:Number = NaN;
     public var dead:Boolean = false;
     public var curHealth:Number = NaN;
@@ -24,4 +25,5 @@ class com.xvm.DataTypes.BattleStateData
     public var entityName:String = null;
     public var entryName:String = null;
     public var position:Number = NaN;
+    public var team:Number = -1;
 }
