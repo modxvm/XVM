@@ -131,7 +131,8 @@ package xvm.battleresults_ui
 
         private function compactQuests():void
         {
-            progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
+            if (progressReport)
+                progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
         }
 
         private function hideQuestsShadows():void
