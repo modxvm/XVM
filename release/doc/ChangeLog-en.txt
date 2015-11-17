@@ -1,4 +1,4 @@
-﻿XVM-6.1.6-dev:
+﻿XVM-6.1.6:
   * adaptation to WoT 0.9.12
   * added options:
       "carousel"/"scrollingSpeed" - carousel scrolling speed
