@@ -8,8 +8,7 @@ class XVM(object):
     API_VERSION = '3.0'
     SERVERS = ['https://stat.modxvm.com:443/{API}/{REQ}']
     FINGERPRINTS = [ # fingerprints for SSL certificates
-        '46169f8bd6f743733b23066f5cce2cd3d0392af8', # old
-        '918154b8f25c74c2bcdeaf767cda7badf7f8a5e1'] # new
+        '029ef75501dbd41b386990d7b6fb4e30b59540d1']
     TIMEOUT = 5000
     # WS_URL = 'ws://echo.websocket.org/'
     WS_URL = 'wss://echo.websocket.org/'
