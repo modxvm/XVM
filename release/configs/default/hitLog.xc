@@ -10,14 +10,14 @@
 
     // Show enemy HP left by Alt press
     // Destroyed enemies and enemies HP gets updated only when it markers become visible.
-    // Markers are visible only inside 1000m side square.
-    // Square with 1000 meters side is game engine restriction. Maximum marker show distance.
+    // Markers are visible only inside 564m circle.
+    // Circle with 564 meters radius is game engine restriction. Maximum marker show distance.
     // Particular enemy data will not be updated while you cant see this enemy marker or its wreck.
 
     // Показывать оставшееся HP врагов по нажатию Alt
     // Уничтоженные враги и вражеское HP обновляется только, когда маркеры становятся видимыми.
-    // Маркеры видимы только в квадрате со стороной в 1000м.
-    // Квадрат в 1000 метров это ограничение игрового движка. Максимальная дистанция отрисовки маркеров.
+    // Маркеры видимы только в круге радиусом 564м.
+    // Круг радиусом 564 метров - это ограничение игрового движка. Максимальная дистанция отрисовки маркеров.
     // Данные по конкретному врагу не могут быть обновлены пока не видно его маркер или обломки.
     "hpLeft": {
         // false - Disable.
