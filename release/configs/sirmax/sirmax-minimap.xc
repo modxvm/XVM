@@ -69,7 +69,6 @@
       ]
     },
     //"mapSize": { "enabled": false },
-    //"square" : { "enabled": false },
     "__stub__": null
   }
 }

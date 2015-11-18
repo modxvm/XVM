@@ -1,4 +1,7 @@
-﻿XVM-6.1.6:
+﻿XVM-6.1.6.1-dev:
+  * removed minimap square
+
+XVM-6.1.6:
   * adaptation to WoT 0.9.12
   * added options:
       "carousel"/"scrollingSpeed" - carousel scrolling speed

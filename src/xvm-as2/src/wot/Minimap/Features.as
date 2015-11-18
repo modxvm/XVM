@@ -23,7 +23,6 @@ class wot.Minimap.Features
      * Shows game related distances and direction.
      */
     private var circles:Circles;
-    private var square:Square;
     private var lines:Lines;
     private var strategicAimMarker:StrategicAimMarker;
 
@@ -115,7 +114,6 @@ class wot.Minimap.Features
         if (Minimap.MapSize > 0)
         {
             initializeMapSizeFeature();
-            initializeSquareFeature();
             initializeCirclesFeature();
             initializeLinesFeature();
         }
@@ -244,24 +242,6 @@ class wot.Minimap.Features
         if (Minimap.config.lines.enabled)
         {
             lines = new Lines();
-        }
-    }
-
-    /**
-     * Draw visible range square.
-     */
-    private function initializeSquareFeature():Void
-    {
-        if (square != null)
-        {
-            square.Dispose();
-            delete square;
-            square = null;
-        }
-
-        if (Minimap.config.square.enabled)
-        {
-            square = new Square();
         }
     }
 }

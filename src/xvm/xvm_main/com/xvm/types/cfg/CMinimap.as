@@ -16,7 +16,6 @@ package com.xvm.types.cfg
         public var minimapAimIcon:String;
         public var minimapAimIconScale:Number;
         public var zoom:CMinimapZoom;
-        public var square:CMinimapSquare;
         public var circles:CMinimapCircles;
         public var lines:CMinimapLines;
         public var mapSize:CMinimapMapSize;
