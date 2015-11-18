@@ -41,6 +41,7 @@ from gui.Scaleform.daapi.view.lobby.store.Shop import Shop
 from gui.Scaleform.daapi.view.lobby.recruitWindow.RecruitWindow import RecruitWindow
 from gui.Scaleform.daapi.view.lobby.PersonalCase import PersonalCase
 from gui.Scaleform.daapi.view.lobby.exchange.ExchangeFreeToTankmanXpWindow import ExchangeFreeToTankmanXpWindow
+from gui.Scaleform.daapi.view.lobby.customization_2_0.main_view import MainView
 
 from xfw import *
 
@@ -85,6 +86,7 @@ def onXfwCommand(cmd, *args):
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
             handlersInvalidate('_update()', Shop_handler)
             handlersInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
+            handlersInvalidate("_MainView__setBuyingPanelData()", MainView_handler)
             return (None, True)
         elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
@@ -129,6 +131,7 @@ Shop_handler = None
 RecruitWindow_handler = None
 PersonalCase_handlers = []
 ExchangeFreeToTankmanXpWindow_handlers = []
+MainView_handler = None
 
 
 #####################################################################
@@ -293,6 +296,15 @@ def ExchangeFreeToTankmanXpWindow_dispose(self, *args, **kwargs):
     else:
         err('ExchangeFreeToTankmanXpWindow window is disposed without being populated')
 
+@registerEvent(MainView, '_populate')
+def MainView_populate(self, *args, **kwargs):
+    global MainView_handler
+    MainView_handler = self
+
+@registerEvent(MainView, '_dispose')
+def MainView_dispose(self, *args, **kwargs):
+    global MainView_handler
+    MainView_handler = None
 
 # force getUnlockPrice to look at freeXP (which is affected by lock)
 @registerEvent(tooltips, 'getUnlockPrice', True)
