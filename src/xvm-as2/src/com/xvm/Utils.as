@@ -126,6 +126,12 @@ class com.xvm.Utils
             case 10: return 'sortie';
             case 11: return 'fort_battle';
             case 12: return 'rated_cybersport';
+            case 13: return 'global_map';
+            case 14: return 'tournament_regular';
+            case 15: return 'tournament_clan';
+            case 16: return 'rated_sandbox';
+            case 17: return 'sandbox';
+            case 18: return 'fallout';
             default: return 'unknown';
         }
     }

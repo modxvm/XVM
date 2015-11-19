@@ -118,6 +118,7 @@ class com.xvm.Defines
     public static var E_MODULE_REPAIRED = "module_repaired";
 
     // BattleTypes
+    // sync with constants.py: ARENA_BONUS_TYPE
     public static var BATTLE_TYPE_UNKNOWN:Number = 0;
     public static var BATTLE_TYPE_REGULAR:Number = 1;
     public static var BATTLE_TYPE_TRAINING:Number = 2;
@@ -126,11 +127,16 @@ class com.xvm.Defines
     public static var BATTLE_TYPE_CLAN:Number = 5;
     public static var BATTLE_TYPE_TUTORIAL:Number = 6;
     public static var BATTLE_TYPE_CYBERSPORT:Number = 7;
-    public static var BATTLE_TYPE_HISTORICAL:Number = 8;
     public static var BATTLE_TYPE_EVENT_BATTLES:Number = 9;
     public static var BATTLE_TYPE_SORTIE:Number = 10;
     public static var BATTLE_TYPE_FORT_BATTLE:Number = 11;
     public static var BATTLE_TYPE_RATED_CYBERSPORT:Number = 12;
+    public static var BATTLE_TYPE_GLOBAL_MAP:Number = 13;
+    public static var BATTLE_TYPE_TOURNAMENT_REGULAR:Number = 14;
+    public static var BATTLE_TYPE_TOURNAMENT_CLAN:Number = 15;
+    public static var BATTLE_TYPE_RATED_SANDBOX:Number = 16;
+    public static var BATTLE_TYPE_SANDBOX:Number = 17;
+    public static var BATTLE_TYPE_FALLOUT:Number = 18;
 
     // alive/dead flags
     public static var ALIVE_FLAG_ALIVE:Number = 0x01;
