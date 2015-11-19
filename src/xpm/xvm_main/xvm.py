@@ -286,13 +286,16 @@ class Xvm(object):
         try:
             movie = flashObject.movie
             if movie is not None:
-                arena = BigWorld.player().arena
+                player = BigWorld.player()
+                arena = player.arena
+                arenaVehicle = arena.vehicles.get(player.playerVehicleID)
                 movie.invoke((AS2RESPOND.CONFIG, [
                     config.config_str,
                     config.lang_str,
                     arena.extraData.get('battleLevel', 0),
                     arena.bonusType,
                     'fallout' if arena_info.isEventBattle() else 'normal',
+                    arenaVehicle['vehicleType'].type.compactDescr,
                     vehinfo.getVehicleInfoDataStr(),
                     simplejson.dumps(token.networkServicesSettings),
                     simplejson.dumps(minimap_circles.getMinimapCirclesData()),
@@ -305,11 +308,13 @@ class Xvm(object):
     def onEnterWorld(self):
         trace('onEnterWorld')
         try:
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleKilled += self._onVehicleKilled
-                arena.onAvatarReady += self._onAvatarReady
-                arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
+            player = BigWorld.player()
+            if player is not None and hasattr(player, 'arena'):
+                arena = BigWorld.player().arena
+                if arena:
+                    arena.onVehicleKilled += self._onVehicleKilled
+                    arena.onAvatarReady += self._onAvatarReady
+                    arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
         except Exception, ex:
             err(traceback.format_exc())
 
@@ -317,11 +322,13 @@ class Xvm(object):
     def onLeaveWorld(self):
         trace('onLeaveWorld')
         try:
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleKilled -= self._onVehicleKilled
-                arena.onAvatarReady -= self._onAvatarReady
-                arena.onVehicleStatisticsUpdate -= self._onVehicleStatisticsUpdate
+            player = BigWorld.player()
+            if player is not None and hasattr(player, 'arena'):
+                arena = BigWorld.player().arena
+                if arena:
+                    arena.onVehicleKilled -= self._onVehicleKilled
+                    arena.onAvatarReady -= self._onAvatarReady
+                    arena.onVehicleStatisticsUpdate -= self._onVehicleStatisticsUpdate
         except Exception, ex:
             err(traceback.format_exc())
 

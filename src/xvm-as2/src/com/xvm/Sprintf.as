@@ -38,8 +38,6 @@
     v1.0    Initial release.
 
 */
-import com.xvm.*;
-
 class com.xvm.Sprintf
 {
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-

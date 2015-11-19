@@ -1,7 +1,6 @@
 import com.xvm.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
-import wot.Minimap.model.mapSize.*;
 
 /**
  * Handles circles and lines scaling aspect.

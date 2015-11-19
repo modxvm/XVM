@@ -4,7 +4,6 @@
  */
 import com.xvm.*;
 import com.xvm.DataTypes.*;
-import wot.Minimap.dataTypes.*;
 
 class com.xvm.Macros
 {
@@ -663,7 +662,7 @@ class com.xvm.Macros
 
     // Macros registration
 
-    private function _RegisterGlobalMacrosData(battleTier:Number, battleType:Number)
+    private function _RegisterGlobalMacrosData()
     {
         // {{xvm-stat}}
         m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
@@ -671,25 +670,55 @@ class com.xvm.Macros
         // {{r_size}}
         m_globals["r_size"] = getRatingDefaultValue().length;
 
-        switch (battleType)
+        var battleLevel:Number;
+        switch (Config.battleType)
         {
             case Defines.BATTLE_TYPE_CYBERSPORT:
-                battleTier = 8;
+                battleLevel = 8;
                 break;
             case Defines.BATTLE_TYPE_REGULAR:
+                battleLevel = Config.battleLevel;
                 break;
             default:
-                battleTier = 10;
+                battleLevel = 10;
                 break;
         }
 
         // {{battletype}}
-        m_globals["battletype"] = Utils.getBattleTypeText(battleType);
+        m_globals["battletype"] = Utils.getBattleTypeText(Config.battleType);
         // {{battletier}}
-        m_globals["battletier"] = battleTier;
+        m_globals["battletier"] = battleLevel;
 
         // {{my-frags}}
         m_globals["my-frags"] = function(o:Object) { return isNaN(Macros.s_my_frags) || Macros.s_my_frags == 0 ? NaN : Macros.s_my_frags; }
+
+        var vdata:VehicleData = VehicleInfo.get(Config.myVehId);
+        // {{my-veh-id}}
+        m_globals["my-veh-id"] = vdata.vid;
+        // {{my-vehicle}} - Chaffee
+        m_globals["my-vehicle"] = vdata.localizedName;
+        // {{my-vehiclename}} - usa-M24_Chaffee
+        m_globals["my-vehiclename"] = VehicleInfo.getVIconName(vdata.key);
+        // {{my-vehicle-short}} - Chaff
+        m_globals["my-vehicle-short"] = vdata.shortName || vdata.localizedName;
+        // {{my-vtype-key}} - MT
+        m_globals["my-vtype-key"] = vdata.vtype;
+        // {{my-vtype}}
+        m_globals["my-vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
+        // {{my-vtype-l}} - Medium Tank
+        m_globals["my-vtype-l"] = Locale.get(vdata.vtype);
+        // {{c:my-vtype}}
+        m_globals["c:my-vtype"] = GraphicsUtil.GetVTypeColorValue(vdata.vid);
+        // {{my-battletier-min}}
+        m_globals["my-battletier-min"] = vdata.tierLo;
+        // {{my-battletier-max}}
+        m_globals["my-battletier-max"] = vdata.tierHi;
+        // {{my-nation}}
+        m_globals["my-nation"] = vdata.nation;
+        // {{my-level}}
+        m_globals["my-level"] = vdata.level;
+        // {{my-rlevel}}
+        m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
     }
 
     /**
@@ -782,7 +811,7 @@ class com.xvm.Macros
                 // {{vtype-l}} - Medium Tank
                 pdata["vtype-l"] = Locale.get(vdata.vtype);
                 // {{c:vtype}}
-                pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.vid);
+                pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(vdata.vid);
                 // {{battletier-min}}
                 pdata["battletier-min"] = vdata.tierLo;
                 // {{battletier-max}}

@@ -1,5 +1,10 @@
 ﻿XVM-6.1.6.1-dev:
   * удален квадрат на миникарте
+  * добавлены глобальные макросы:
+      {{my-veh-id}}, {{my-vehicle}}, {{my-vehiclename}}, {{my-vehicle-short}}, {{my-vtype}},
+      {{my-vtype-l}}, {{my-vtype-key}}, {{c:my-vtype}}, {{my-battletier-min}},
+      {{my-battletier-max}}, {{my-nation}}, {{my-level}}, {{my-rlevel}}
+  * разрешено использование глобальных макросов в кругах и линиях на миникарте
 
 XVM-6.1.6:
   * адаптация к WoT 0.9.12

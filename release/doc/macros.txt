@@ -31,7 +31,7 @@ Legend:
 │ S │ {{vehicle-short}}  │   │ X │ X │ X │ X │ X │ X │ shortened vehicle name
 │ S │ {{vtype}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle type (text substitution from config)
 │ S │ {{vtype-l}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle class (text substitution from locale)
-│ S │ {{vtype-key}}      │ X │ X │ X │ X │ X │ X │ X │ vehicle type table key value
+│ S │ {{vtype-key}}      │ X │ X │ X │ X │ X │ X │ X │ vehicle type table key value (LT, MT, HT, TD, SPG)
 │ S │ {{c:vtype}}        │ X │ X │ X │ X │ X │ X │ X │ color depending on vehicle type
 │ S │ {{battletier-min}} │ X │ X │ X │ X │ X │ X │ X │ minimal vehicle battle tier
 │ S │ {{battletier-max}} │ X │ X │ X │ X │ X │ X │ X │ maximal vehicle battle tier
@@ -78,18 +78,31 @@ Legend:
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────
 
   Global macros (does not depend on the player)
-┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────
-│S/D│ macro              │ BL│ PP│ SF│ MM│ VM│ HI│ HL│ Description
-├───┼────────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
-│ S │ {{xvm-stat}}       │ X │ X │ X │ X │ X │ X │ X │ value 'stat' is statistic is active, empty if not
-│ S │ {{r_size}}         │ X │ X │ X │ X │ X │ X │ X │ size of the {{r}} macro value (can be useful for fields formatting)
-│ S │ {{battletier}}     │ X │ X │ X │ X │ X │ X │ X │ current battle tier
-│ S │ {{battletype}}     │ X │ X │ X │ X │ X │ X │ X │ current battle type (values from texts/battletype section)
-│ S │ {{region}}         │ X │ X │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, ASIA, KR, CN, CT)
-│ S │ {{l10n:ID}}        │ X │ X │ X │ X │ X │ X │ X │ localizated text, see en.xc for id
-│ D │ {{my-frags}}       │   │ X │ X │ X │ X │ X │ X │ my frags
-│ S │ {{cellsize}}       │   │   │   │ X │   │   │   │ minimap cell side size
-└───┴────────────────────┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────
+┌───┬───────────────────────┬───┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────
+│S/D│ macro                 │ BL│ PP│ SF│ MM│ VM│ HI│ HL│ Description
+├───┼───────────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
+│ S │ {{xvm-stat}}          │ X │ X │ X │ X │ X │ X │ X │ value 'stat' is statistic is active, empty if not
+│ S │ {{r_size}}            │ X │ X │ X │ X │ X │ X │ X │ size of the {{r}} macro value (can be useful for fields formatting)
+│ S │ {{battletier}}        │ X │ X │ X │ X │ X │ X │ X │ current battle tier
+│ S │ {{battletype}}        │ X │ X │ X │ X │ X │ X │ X │ current battle type (values from texts/battletype section)
+│ S │ {{region}}            │ X │ X │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, ASIA, KR, CN, CT)
+│ S │ {{l10n:ID}}           │ X │ X │ X │ X │ X │ X │ X │ localizated text, see en.xc for id
+│ D │ {{my-frags}}          │   │ X │ X │ X │ X │ X │ X │ my frags
+│ S │ {{my-veh-id}}         │ X │ X │ X │ X │ X │ X │ X │ my vehicle id
+│ S │ {{my-vehicle}}        │ X │ X │ X │ X │ X │ X │ X │ my vehicle name
+│ S │ {{my-vehiclename}}    │ X │ X │ X │ X │ X │ X │ X │ my vehicle system name (usa-M24_Chaffee)
+│ S │ {{my-vehicle-short}}  │   │ X │ X │ X │ X │ X │ X │ my shortened vehicle name
+│ S │ {{my-vtype}}          │ X │ X │ X │ X │ X │ X │ X │ my vehicle type (text substitution from config)
+│ S │ {{my-vtype-l}}        │ X │ X │ X │ X │ X │ X │ X │ my vehicle class (text substitution from locale)
+│ S │ {{my-vtype-key}}      │ X │ X │ X │ X │ X │ X │ X │ my vehicle type table key value (LT, MT, HT, TD, SPG)
+│ S │ {{c:my-vtype}}        │ X │ X │ X │ X │ X │ X │ X │ my color depending on vehicle type
+│ S │ {{my-battletier-min}} │ X │ X │ X │ X │ X │ X │ X │ my minimal vehicle battle tier
+│ S │ {{my-battletier-max}} │ X │ X │ X │ X │ X │ X │ X │ my maximal vehicle battle tier
+│ S │ {{my-nation}}         │ X │ X │ X │ X │ X │ X │ X │ my vehicle nation
+│ S │ {{my-level}}          │ X │ X │ X │ X │ X │ X │ X │ my vehicle level (Arabic numerals)
+│ S │ {{my-rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ my vehicle level (Roman numerals)
+│ S │ {{cellsize}}          │   │   │   │ X │   │   │   │ minimap cell side size
+└───┴───────────────────────┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────
 
   Statistic macros
 ┌───┬────────────────────┬───┬───┬───┬───┬───┬────────────────────────────────────────────────────────
