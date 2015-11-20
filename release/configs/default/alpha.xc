@@ -83,11 +83,11 @@
     // Dynamic transparency by WN8 rating
     // Динамическая прозрачность по рейтингу WN8
     "wn8": [
-      { "value": 370,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 845,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1395, "alpha": ${"alphaRating.normal"   } },
-      { "value": 2070, "alpha": ${"alphaRating.good"     } },
-      { "value": 2715, "alpha": ${"alphaRating.very_good"} },
+      { "value": 380,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 860,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1420, "alpha": ${"alphaRating.normal"   } },
+      { "value": 2105, "alpha": ${"alphaRating.good"     } },
+      { "value": 2770, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WG rating
