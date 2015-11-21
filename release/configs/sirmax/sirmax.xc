@@ -94,7 +94,25 @@
     "allowMarksOnGunInPanelsAndMinimap": true,
     "clanIconsFolder": "clanicons",
     "sixthSenseIcon": "cfg://sirmax/img/SixthSense.png",
-    "elements": ${"elements"}
+    "elements": ${"elements"},
+    "camera": {
+      "arcade": {
+        "distRange": [2, 50],
+        "startDist": 30,
+        "scrollSensitivity": 2.5
+      },
+      "postmortem": {
+        "distRange": [2, 100],
+        "startDist": 50,
+        "scrollSensitivity": 2.5
+      },
+      "strategic": {
+        "distRange": [30, 250]
+      },
+      "sniper": {
+        "zooms": [2, 4, 8]//, 12, 16]
+      }
+    }
   },
   "fragCorrelation": {
     //"showAliveNotFrags": true

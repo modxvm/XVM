@@ -33,7 +33,10 @@
     "sixthSenseIcon": "xvm://res/SixthSense.png",
     // GUI elements settings (experts only)
     // Настройки графических элементов (только для экспертов!)
-    "elements": ${"elements.xc":"elements"}
+    "elements": ${"elements.xc":"elements"},
+    // Camera settings
+    // Настройки камеры
+    "camera": ${"camera.xc":"camera"}
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.

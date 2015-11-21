@@ -5,6 +5,7 @@
       {{my-vtype-l}}, {{my-vtype-key}}, {{c:my-vtype}}, {{my-battletier-min}},
       {{my-battletier-max}}, {{my-nation}}, {{my-level}}, {{my-rlevel}}
   * allow global macros usage in the minimap circles and lines
+  * added config section "battle"/"camera" for camera settings (zoom)
 
 XVM-6.1.6:
   * adaptation to WoT 0.9.12

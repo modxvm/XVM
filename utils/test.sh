@@ -8,7 +8,10 @@
 #SAMPLE_REPLAY=test2.wotreplay
 #SAMPLE_REPLAY=test3.wotreplay
 #SAMPLE_REPLAY=cw.wotreplay
+#SAMPLE_REPLAY=fallout.wotreplay
+#SAMPLE_REPLAY=domination.wotreplay
 #SAMPLE_REPLAY=tk.wotreplay
+#SAMPLE_REPLAY=arty.wotreplay
 
 #############################
 # INTERNAL

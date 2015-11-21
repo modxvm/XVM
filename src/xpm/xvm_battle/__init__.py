@@ -17,3 +17,4 @@ XFW_MOD_INFO = {
 
 import fragCorrelationPanel
 import minimap
+import camera
