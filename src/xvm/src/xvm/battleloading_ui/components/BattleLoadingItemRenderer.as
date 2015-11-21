@@ -32,6 +32,14 @@ package xvm.battleloading_ui.components
 
         private var _vehicleIconLoaded:Boolean = false;
 
+        private var squad_x:Number;
+        private var textField_x:Number;
+        private var textField_width:Number;
+        private var vehicleIconLoader_x:Number;
+        private var vehicleLevelIcon_x:Number;
+        private var vehicleTypeIcon_x:Number;
+
+
         // for debug
         public function _debug():void
         {
@@ -49,14 +57,7 @@ package xvm.battleloading_ui.components
         public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer)
         {
             this.proxy = proxy;
-
             //_debug();
-
-            proxy.textField.width += 100;
-            if (team == XfwConst.TEAM_ENEMY)
-            {
-                proxy.textField.x -= 100;
-            }
         }
 
         public function configUI():void
@@ -83,21 +84,22 @@ package xvm.battleloading_ui.components
 
             proxy.vehicleIconLoader.autoSize = false;
 
+            textField_width = proxy.textField.width + 100;
             if (team == XfwConst.TEAM_ALLY)
             {
-                proxy.squad.x += Config.config.battleLoading.squadIconOffsetXLeft;
-                proxy.textField.x += Config.config.battleLoading.nameFieldOffsetXLeft - 10;
-                proxy.vehicleIconLoader.x += Config.config.battleLoading.vehicleIconOffsetXLeft;
-                proxy.vehicleLevelIcon.x += Config.config.battleLoading.vehicleIconOffsetXLeft;
-                proxy.vehicleTypeIcon.x += Config.config.battleLoading.vehicleIconOffsetXLeft;
+                squad_x = proxy.squad.x + Config.config.battleLoading.squadIconOffsetXLeft;
+                textField_x = proxy.textField.x + Config.config.battleLoading.nameFieldOffsetXLeft - 10;
+                vehicleIconLoader_x = proxy.vehicleIconLoader.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
+                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
+                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
             }
             else
             {
-                proxy.squad.x -= Config.config.battleLoading.squadIconOffsetXRight;
-                proxy.textField.x -= Config.config.battleLoading.nameFieldOffsetXRight - 10;
-                proxy.vehicleIconLoader.x -= Config.config.battleLoading.vehicleIconOffsetXRight;
-                proxy.vehicleLevelIcon.x -= Config.config.battleLoading.vehicleIconOffsetXRight;
-                proxy.vehicleTypeIcon.x -= Config.config.battleLoading.vehicleIconOffsetXRight;
+                squad_x = proxy.squad.x - Config.config.battleLoading.squadIconOffsetXRight;
+                textField_x = proxy.textField.x - Config.config.battleLoading.nameFieldOffsetXRight + 10 - 100;
+                vehicleIconLoader_x = proxy.vehicleIconLoader.x - Config.config.battleLoading.vehicleIconOffsetXRight;
+                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x - Config.config.battleLoading.vehicleIconOffsetXRight;
+                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x - Config.config.battleLoading.vehicleIconOffsetXRight;
             }
         }
 
@@ -177,6 +179,14 @@ package xvm.battleloading_ui.components
                         proxy.vehicleLevelIcon.visible = false;
                     if (Config.config.battleLoading.removeVehicleTypeIcon)
                         proxy.vehicleTypeIcon.visible = false;
+
+                    // fields x positions
+                    proxy.squad.x = squad_x;
+                    proxy.textField.x = textField_x;
+                    proxy.textField.width = textField_width;
+                    proxy.vehicleIconLoader.x = vehicleIconLoader_x;
+                    proxy.vehicleLevelIcon.x = vehicleLevelIcon_x;
+                    proxy.vehicleTypeIcon.x = vehicleTypeIcon_x;
 
                     // vehicleField
                     if (team == XfwConst.TEAM_ALLY)
