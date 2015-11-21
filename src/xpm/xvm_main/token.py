@@ -43,7 +43,6 @@ def getClanInfo(clanAbbrev):
     if top:
         rank = int(top.get('rank', None))
         if rank:
-            log('rank: %i'%rank)
             global networkServicesSettings
             if networkServicesSettings:
                 if 0 < rank <= networkServicesSettings['topClansCount']:
