@@ -847,17 +847,20 @@ class com.xvm.Macros
             // {{marksOnGun}}
             pdata["marksOnGun"] = function(o):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun); }
 
-            var vdata:VehicleData = VehicleInfo.get(pdata["veh-id"]);
-            var isArty:Boolean = (vdata != null && vdata.vclass == "SPG");
-            // {{spotted}}
-            pdata["spotted"] = function(o):String { return Utils.getSpottedText(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
-            // {{c:spotted}}
-            pdata["c:spotted"] = function(o):String { return GraphicsUtil.GetSpottedColorValue(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
-            // {{a:spotted}}
-            pdata["a:spotted"] = function(o):Number { return GraphicsUtil.GetSpottedAlphaValue(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
+            if (Config.config.battle.allowSpottedStatus)
+            {
+                var vdata:VehicleData = VehicleInfo.get(pdata["veh-id"]);
+                var isArty:Boolean = (vdata != null && vdata.vclass == "SPG");
+                // {{spotted}}
+                pdata["spotted"] = function(o):String { return Utils.getSpottedText(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
+                // {{c:spotted}}
+                pdata["c:spotted"] = function(o):String { return GraphicsUtil.GetSpottedColorValue(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
+                // {{a:spotted}}
+                pdata["a:spotted"] = function(o):Number { return GraphicsUtil.GetSpottedAlphaValue(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
+            }
+
             // {{selected}}
             pdata["selected"] = function(o):String { return o.selected == true ? 'sel' : null; }
-
             // {{position}}
             pdata["position"] = function(o):String { return o.position <= 0 ? NaN : o.position; }
 
