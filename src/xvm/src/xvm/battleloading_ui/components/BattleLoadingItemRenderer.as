@@ -88,7 +88,7 @@ package xvm.battleloading_ui.components
             if (team == XfwConst.TEAM_ALLY)
             {
                 squad_x = proxy.squad.x + Config.config.battleLoading.squadIconOffsetXLeft;
-                textField_x = proxy.textField.x + Config.config.battleLoading.nameFieldOffsetXLeft - 10;
+                textField_x = proxy.textField.x + Config.config.battleLoading.nameFieldOffsetXLeft;
                 vehicleIconLoader_x = proxy.vehicleIconLoader.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
                 vehicleLevelIcon_x = proxy.vehicleLevelIcon.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
                 vehicleTypeIcon_x = proxy.vehicleTypeIcon.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
@@ -96,7 +96,7 @@ package xvm.battleloading_ui.components
             else
             {
                 squad_x = proxy.squad.x - Config.config.battleLoading.squadIconOffsetXRight;
-                textField_x = proxy.textField.x - Config.config.battleLoading.nameFieldOffsetXRight + 10 - 100;
+                textField_x = proxy.textField.x - Config.config.battleLoading.nameFieldOffsetXRight - 100;
                 vehicleIconLoader_x = proxy.vehicleIconLoader.x - Config.config.battleLoading.vehicleIconOffsetXRight;
                 vehicleLevelIcon_x = proxy.vehicleLevelIcon.x - Config.config.battleLoading.vehicleIconOffsetXRight;
                 vehicleTypeIcon_x = proxy.vehicleTypeIcon.x - Config.config.battleLoading.vehicleIconOffsetXRight;
