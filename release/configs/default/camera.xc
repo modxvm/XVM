@@ -1,4 +1,5 @@
-﻿/**
+﻿// TODO: description and comments
+/**
  * Camera settings
  * Настройки камеры
  */
@@ -19,7 +20,8 @@
       "distRange": [40, 100]
     },
     "sniper": {
-      "zooms": [2, 4, 8] // you can set more ranges: [ 2, 4, 8, 12, 16 ]
+      "zooms": [2, 4, 8], // you can set more ranges: [ 2, 4, 8, 12, 16 ]
+      "zoomExposure": [0.6, 0.5, 0.4] // length must be equal to the "zooms" value length
     }
   }
 }

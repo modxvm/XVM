@@ -22,7 +22,7 @@ import xvm_main.python.config as config
 
 @overrideMethod(ArcadeCamera, 'create')
 def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postmortemMode = False):
-    debug('_ArcadeCamera_create: {}'.format(postmortemMode))
+    #debug('_ArcadeCamera_create: {}'.format(postmortemMode))
 
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/%s' % ('arcade' if not postmortemMode else 'postmortem'))
@@ -32,17 +32,14 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
 
         value = c['distRange']
         if value is not None:
-            #log("{}: {} => {}".format('distRange', cfg['distRange'], MinMax(float(value[0]), float(value[1]))))
             cfg['distRange'] = MinMax(float(value[0]), float(value[1]))
 
         value = c['startDist']
         if value is not None:
-            #log("{}: {} => {}".format('startDist', cfg['startDist'], float(value)))
             cfg['startDist'] = float(value)
 
         value = c['scrollSensitivity']
         if value is not None:
-            #log("{}: {} => {}".format('scrollSensitivity', cfg['scrollSensitivity'], float(value) * ucfg['scrollSensitivity']))
             bcfg['scrollSensitivity'] = float(value)
             cfg['scrollSensitivity'] = float(value) * ucfg['scrollSensitivity']
 
@@ -51,31 +48,28 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
 
 @overrideMethod(SniperCamera, 'create')
 def _SniperCamera_create(base, self, onChangeControlMode = None):
-    debug('_SniperCamera_create')
+    #debug('_SniperCamera_create')
 
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/sniper')
+        dcfg = self._SniperCamera__dynamicCfg
         ucfg = self._SniperCamera__userCfg
         cfg = self._SniperCamera__cfg
 
         value = c['zooms']
         if value is not None:
-            log("{}: {} => {}".format('zooms', cfg['zooms'], [float(i) for i in value]))
             cfg['zooms'] = [float(i) for i in value]
 
-#        <accelerationSensitivity>0.2 0.4 0.2</accelerationSensitivity>
-#        <zoomExposure>0.6 0.5 0.4</zoomExposure>
-#      <aimingSystem>
-#        <T>0.5 0.5 0.4</T>
-#        <deviation>-0.0 0.0</deviation>
-#      </aimingSystem>
+        value = c['zoomExposure']
+        if value is not None:
+            dcfg['zoomExposure'] = [float(i) for i in value]
 
     base(self, onChangeControlMode)
 
 
 @overrideMethod(StrategicCamera, 'create')
 def _StrategicCamera_create(base, self, onChangeControlMode = None):
-    debug('_StrategicCamera_create')
+    #debug('_StrategicCamera_create')
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/strategic')
         bcfg = self._StrategicCamera__baseCfg
@@ -84,7 +78,6 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
 
         value = c['distRange']
         if value is not None:
-            log("{}: {} => {}".format('distRange', cfg['distRange'], [float(i) for i in value]))
             cfg['distRange'] = [float(i) for i in value]
             self._StrategicCamera__aimingSystem._StrategicAimingSystem__height = cfg['distRange'][0]
 
