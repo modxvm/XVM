@@ -47,6 +47,15 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
     base(self, pivotPos, onChangeControlMode, postmortemMode)
 
 
+@registerEvent(ArcadeCamera, 'enable')
+def _ArcadeCamera_enable(self, *args):
+    #debug('_ArcadeCamera_enable: {}'.format(postmortemMode))
+    if self._ArcadeCamera__postmortemMode:
+        camDist = self._ArcadeCamera__cfg.get('startDist', None)
+        if camDist:
+            self.setCameraDistance(camDist)
+
+
 @overrideMethod(SniperCamera, 'create')
 def _SniperCamera_create(base, self, onChangeControlMode = None):
     #debug('_SniperCamera_create')
