@@ -4,6 +4,7 @@
 # imports
 
 import traceback
+import math
 
 import BigWorld
 from Avatar import PlayerAvatar
@@ -26,9 +27,9 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
 
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/%s' % ('arcade' if not postmortemMode else 'postmortem'))
+        cfg = self._ArcadeCamera__cfg
         bcfg = self._ArcadeCamera__baseCfg
         ucfg = self._ArcadeCamera__userCfg
-        cfg = self._ArcadeCamera__cfg
 
         value = c['distRange']
         if value is not None:
@@ -52,17 +53,13 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
 
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/sniper')
-        dcfg = self._SniperCamera__dynamicCfg
-        ucfg = self._SniperCamera__userCfg
         cfg = self._SniperCamera__cfg
+        dcfg = self._SniperCamera__dynamicCfg
 
         value = c['zooms']
         if value is not None:
             cfg['zooms'] = [float(i) for i in value]
-
-        value = c['zoomExposure']
-        if value is not None:
-            dcfg['zoomExposure'] = [float(i) for i in value]
+            dcfg['zoomExposure'] = [ max(0, 0.7 - math.log(i, 2) * 0.1) for i in value]
 
     base(self, onChangeControlMode)
 
@@ -72,8 +69,6 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
     #debug('_StrategicCamera_create')
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/strategic')
-        bcfg = self._StrategicCamera__baseCfg
-        ucfg = self._StrategicCamera__userCfg
         cfg = self._StrategicCamera__cfg
 
         value = c['distRange']
