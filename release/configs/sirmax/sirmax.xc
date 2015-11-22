@@ -96,6 +96,7 @@
     "sixthSenseIcon": "cfg://sirmax/img/SixthSense.png",
     "elements": ${"elements"},
     "camera": {
+      "enabled": true,
       "arcade": {
         "distRange": [2, 50],
         "startDist": 30,
@@ -103,7 +104,7 @@
       },
       "postmortem": {
         "distRange": [2, 100],
-        "startDist": 50,
+        "startDist": 30,
         "scrollSensitivity": 2.5
       },
       "strategic": {

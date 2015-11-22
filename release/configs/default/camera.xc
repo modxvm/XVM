@@ -5,7 +5,7 @@
  */
 {
   "camera": {
-    "enabled": true,
+    "enabled": false,
     "arcade": {
       "distRange": [2, 25],
       "startDist": null, // null for default behavior
