@@ -229,35 +229,35 @@ package xvm.battleloading_ui.components
             return (proxy is UI_LeftItemRenderer) ? XfwConst.TEAM_ALLY : XfwConst.TEAM_ENEMY;
         }
 
-        private var _vehicleIconX:int = 0;
-        private var _vehicleIconScaleX:Number = 0;
-        private var _vehicleLevelX:int = 0;
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void
         {
             //Logger.add("onVehicleIconLoadComplete: " + _model.playerName);
 
-            // disable icons mirroring (for alternative icons)
-            if (!_vehicleIconLoaded)
+            try
             {
+                // disable icons mirroring (for alternative icons)
+                if (!_vehicleIconLoaded)
+                {
+                    if (Config.config.battle.mirroredVehicleIcons == false && team == XfwConst.TEAM_ENEMY)
+                    {
+                        vehicleIconLoader_x -= MAXIMUM_VEHICLE_ICON_WIDTH;
+                        vehicleLevelIcon_x -= 40;
+                    }
+                }
+
+                _vehicleIconLoaded = true;
+
                 if (Config.config.battle.mirroredVehicleIcons == false && team == XfwConst.TEAM_ENEMY)
                 {
-                    _vehicleIconScaleX = -Math.abs(proxy.vehicleIconLoader.scaleX);
-                    _vehicleIconX = proxy.vehicleIconLoader.x - MAXIMUM_VEHICLE_ICON_WIDTH;
-                    _vehicleLevelX = proxy.vehicleLevelIcon.x - 40;
-                }
-                else
-                {
-                    _vehicleIconScaleX = proxy.vehicleIconLoader.scaleX;
-                    _vehicleIconX = proxy.vehicleIconLoader.x;
-                    _vehicleLevelX = proxy.vehicleLevelIcon.x;
+                    proxy.vehicleIconLoader.scaleX = -Math.abs(proxy.vehicleIconLoader.scaleX);
+                    proxy.vehicleIconLoader.x = vehicleIconLoader_x;
+                    proxy.vehicleLevelIcon.x = vehicleLevelIcon_x;
                 }
             }
-
-            _vehicleIconLoaded = true;
-
-            proxy.vehicleIconLoader.scaleX = _vehicleIconScaleX;
-            proxy.vehicleIconLoader.x = _vehicleIconX;
-            proxy.vehicleLevelIcon.x = _vehicleLevelX;
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         private function onStatLoaded():void

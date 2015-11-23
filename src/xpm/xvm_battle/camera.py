@@ -48,7 +48,7 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
 
 
 @registerEvent(ArcadeCamera, 'enable')
-def _ArcadeCamera_enable(self, *args):
+def _ArcadeCamera_enable(self, *args, **kwargs):
     #debug('_ArcadeCamera_enable: {}'.format(postmortemMode))
     if self._ArcadeCamera__postmortemMode:
         camDist = self._ArcadeCamera__cfg.get('startDist', None)

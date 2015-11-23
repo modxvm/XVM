@@ -4,6 +4,7 @@
  */
 package xvm.battleloading_ui
 {
+    import com.xfw.*;
     import net.wg.gui.lobby.battleloading.vo.*;
     import xvm.battleloading_ui.components.*;
 
@@ -13,31 +14,66 @@ package xvm.battleloading_ui
 
         public function UI_RightItemRenderer()
         {
-            super();
-            worker = new BattleLoadingItemRenderer(this);
+            try
+            {
+                super();
+                worker = new BattleLoadingItemRenderer(this);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override protected function configUI():void
         {
-            super.configUI();
-            worker.configUI();
+            try
+            {
+                super.configUI();
+                worker.configUI();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override protected function onDispose():void
         {
-            super.onDispose();
-            worker.onDispose();
+            try
+            {
+                worker.onDispose();
+                super.onDispose();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function setData(data:Object):void
         {
-            super.setData(worker.fixData(data as VehicleInfoVO));
+            try
+            {
+                super.setData(worker.fixData(data as VehicleInfoVO));
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override protected function draw():void
         {
-            super.draw();
-            worker.draw();
+            try
+            {
+                super.draw();
+                worker.draw();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
     }
 }
