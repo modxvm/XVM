@@ -7,5 +7,8 @@ package com.xvm.types.cfg
     public dynamic class CSounds extends Object
     {
         public var sixthSense:String;
+        public var sixthSenseRudy:String;
+        public var fireAlert:String;
+        public var ammoBay:String;
     }
 }

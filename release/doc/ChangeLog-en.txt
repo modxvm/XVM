@@ -6,6 +6,7 @@
       {{my-battletier-max}}, {{my-nation}}, {{my-level}}, {{my-rlevel}}
   * allow global macros usage in the minimap circles and lines
   * added config section "battle"/"camera" for camera settings (zoom)
+  * new option "sounds"/"sixthSenseRudy" - sixth sense sound for Rudy
 
 XVM-6.1.6:
   * adaptation to WoT 0.9.12

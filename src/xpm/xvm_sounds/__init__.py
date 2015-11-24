@@ -45,11 +45,11 @@ def Battle_showSixthSenseIndicator(self, isShow):
     try:
         vehId = BigWorld.entities[BigWorld.player().playerVehicleID].typeDescriptor.type.compactDescr
         if vehId == 59393: # Rudy
-            SoundGroups.g_instance.playSound2D('/rudy/dog/dog')
+            soundId = config.get('sounds/sixthSenseRudy')
         else:
             soundId = config.get('sounds/sixthSense')
-            if soundId is not None and soundId != '':
-                SoundGroups.g_instance.playSound2D(soundId)
+        if soundId is not None and soundId != '':
+            SoundGroups.g_instance.playSound2D(soundId)
     except:
         err(traceback.format_exc())
 
@@ -76,7 +76,7 @@ def DamagePanel_updateDeviceState(self, value):
 
 def _test():
     log('test')
-    soundId = config.get('sounds/sixthSense')
+    soundId = config.get('sounds/sixthSenseRudy')
     if soundId is not None and soundId != '':
         SoundGroups.g_instance.playSound2D(soundId)
     BigWorld.callback(1, _test)
