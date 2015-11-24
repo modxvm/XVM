@@ -734,21 +734,27 @@ package xvm.tcarousel_ui
                     //Logger.addObject(dataVO);
 
                     var remove:Boolean = false;
-                    remove = _levelFilter.selectedItems.length > 0 && _levelFilter.selectedItems.indexOf(vdata.level) < 0;
-                    remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_ELITE) >= 0 && dataVO.elite == true);
-                    remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && dataVO.doubleXPReceived < 0);
-                    remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
-                    remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_FULLCREW) >= 0 && dataVO.stat == VehicleState.CREW_NOT_FULL);
-                    remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) < 0 && vdata.isReserved == true);
-                    // next line will make xor filter: non_reserve <--> reserve, instead of non_reserve <--> non_reserve + reserve
-                    remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) >= 0 && vdata.isReserved == false);
+                    if (cfg.filters.level.enabled)
+                        remove = _levelFilter.selectedItems.length > 0 && _levelFilter.selectedItems.indexOf(vdata.level) < 0;
 
-                    var removePrem:Boolean = _prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0;
-                    var removeNorm:Boolean = _prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0;
-                    if (removePrem != removeNorm)
+
+                    if (cfg.filters.prefs.enabled)
                     {
-                        remove = remove || removePrem && dataVO.premium == false;
-                        remove = remove || removeNorm && dataVO.premium == true;
+                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_ELITE) >= 0 && dataVO.elite == true);
+                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && dataVO.doubleXPReceived < 0);
+                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
+                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_FULLCREW) >= 0 && dataVO.stat == VehicleState.CREW_NOT_FULL);
+                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) < 0 && vdata.isReserved == true);
+                        // next line will make xor filter: non_reserve <--> reserve, instead of non_reserve <--> non_reserve + reserve
+                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) >= 0 && vdata.isReserved == false);
+
+                        var removePrem:Boolean = _prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0;
+                        var removeNorm:Boolean = _prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0;
+                        if (removePrem != removeNorm)
+                        {
+                            remove = remove || removePrem && dataVO.premium == false;
+                            remove = remove || removeNorm && dataVO.premium == true;
+                        }
                     }
 
                     if (remove)
