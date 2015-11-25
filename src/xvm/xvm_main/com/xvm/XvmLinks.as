@@ -24,12 +24,6 @@ VehicleInfo;
 XvmCommands;
 XvmGlobals;
 
-import com.xvm.controls.*;
-NationMultiSelectionDropDown;
-ClassMultiSelectionDropDown;
-LevelMultiSelectionDropDown;
-PrefMultiSelectionDropDown;
-
 import com.xvm.infrastructure.*;
 XvmModBase;
 XvmViewBase;

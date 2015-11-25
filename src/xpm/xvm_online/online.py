@@ -83,7 +83,7 @@ class _Get_online(object):
                 res[host] = l10n_macros_replace(config.get('hangar/onlineServers/errorString', '--k') if g_hangarSpace.inited else config.get('login/onlineServers/errorString', '--k'))
             req = "onlineUsersCount/0"
             server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
-            (response, delay, error) = loadUrl(server, req, showLog=False)
+            (response, delay, error) = loadUrl(server, req, showLog=False, api=XVM.API_VERSION_OLD)
             # typical response:
             #{
             #    "eu":  [{"players_online":4297,"server":"EU2"},{"players_online":8331,"server":"EU1"}],

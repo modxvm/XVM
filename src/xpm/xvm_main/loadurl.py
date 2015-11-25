@@ -25,8 +25,8 @@ except Exception, ex:
     pass
 
 # result: (response, duration)
-def loadUrl(url, req=None, body=None, showLog=True):
-    url = url.replace("{API}", XVM.API_VERSION)
+def loadUrl(url, req=None, body=None, showLog=True, api=XVM.API_VERSION):
+    url = url.replace("{API}", api)
     if req is not None:
         url = url.replace("{REQ}", req)
     u = urlparse(url)

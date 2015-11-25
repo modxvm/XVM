@@ -5,7 +5,8 @@ class XVM(object):
     WOT_VERSION    = '0.9.12'
     XVM_INTRO      = 'www.modxvm.com'
 
-    API_VERSION = '3.0'
+    API_VERSION = '4.0'
+    API_VERSION_OLD = '3.0'
     SERVERS = ['https://stat.modxvm.com:443/{API}/{REQ}']
     FINGERPRINTS = [ # fingerprints for SSL certificates
         '029ef75501dbd41b386990d7b6fb4e30b59540d1']

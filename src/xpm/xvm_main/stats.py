@@ -309,7 +309,7 @@ class _Stat(object):
                     else:
                         req = "nick/%s/%s/%s" % (tok, reg, value)
                     server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
-                    (response, duration, errStr) = loadUrl(server, req)
+                    (response, duration, errStr) = loadUrl(server, req, api=XVM.API_VERSION_OLD)
 
                     # log(response)
 
@@ -378,7 +378,7 @@ class _Stat(object):
                     return
 
                 server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
-                (response, duration, errStr) = loadUrl(server, updateRequest)
+                (response, duration, errStr) = loadUrl(server, updateRequest, api=XVM.API_VERSION_OLD)
 
                 if not response:
                     # err('Empty response or parsing error')

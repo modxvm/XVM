@@ -2,10 +2,10 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.controls
+package xvm.tcarousel_ui.controls
 {
-    import com.xfw.components.*;
     import com.xvm.*;
+    import com.xvm.components.*;
     import scaleform.clik.data.*;
 
     public class ClassMultiSelectionDropDown extends MultiSelectionDropDown

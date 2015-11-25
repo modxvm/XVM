@@ -2,10 +2,10 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.controls
+package vm.tcarousel_ui.controls
 {
-    import com.xfw.components.*;
     import com.xvm.*;
+    import com.xvm.components.*;
     import net.wg.utils.*;
     import scaleform.clik.data.*;
 

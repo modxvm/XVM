@@ -143,7 +143,7 @@ class _Contacts:
     def _doRequest(self, cmd, body=None):
         req = '{0}/{1}'.format(cmd, self.cached_token)
         server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
-        (response, duration, errStr) = loadUrl(server, req, body=body)
+        (response, duration, errStr) = loadUrl(server, req, body=body, api=XVM.API_VERSION_OLD)
 
         if errStr:
             raise Exception(errStr)

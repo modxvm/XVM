@@ -6,7 +6,6 @@ package xvm.tcarousel_ui
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.controls.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.veh.*;
@@ -22,6 +21,7 @@ package xvm.tcarousel_ui
     import scaleform.clik.constants.*;
     import scaleform.clik.events.*;
     import scaleform.clik.interfaces.*;
+    import xvm.tcarousel_ui.controls.*;
 
     public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
     {

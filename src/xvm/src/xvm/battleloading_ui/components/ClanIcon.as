@@ -5,7 +5,6 @@
 package xvm.battleloading_ui.components
 {
     import com.xfw.*;
-    import com.xfw.components.*;
     import com.xvm.*;
     import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
