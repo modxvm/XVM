@@ -5,7 +5,6 @@
 package xvm.squad_ui
 {
     import com.xfw.*;
-    import com.xvm.infrastructure.*;
     import flash.display.*;
 
     /**
