@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.limits.controls
+package xvm.limits_ui.controls
 {
     import com.xfw.*;
     import flash.display.*;

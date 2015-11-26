@@ -20,6 +20,8 @@ package xvm.company
         private static const _name:String = "xvm_company";
         private static const _ui_name:String = _name + "_ui.swf";
 
+        private var _initialized:Boolean = false;
+
         public function CompanyXvmView(view:IView)
         {
             super(view);
@@ -34,8 +36,12 @@ package xvm.company
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
 
-            if (Config.networkServicesSettings.statCompany != true)
+            _initialized = false;
+
+            if (!Config.networkServicesSettings.statCompany)
                 return;
+
+            _initialized = true;
 
             App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
 
@@ -45,7 +51,7 @@ package xvm.company
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            if (!Config.networkServicesSettings.statCompany)
+            if (!_initialized)
                 return;
 
             App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);

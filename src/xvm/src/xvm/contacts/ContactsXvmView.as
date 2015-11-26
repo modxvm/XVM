@@ -25,6 +25,8 @@ package xvm.contacts
         private static const _name:String = "xvm_contacts";
         private static const _ui_name:String = _name + "_ui.swf";
 
+        private var _initialized:Boolean = false;
+
         public function ContactsXvmView(view:IView)
         {
             super(view);
@@ -43,8 +45,12 @@ package xvm.contacts
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
+            _initialized = false;
+
             if (!Config.networkServicesSettings.comments)
                 return;
+
+            _initialized = true;
 
             App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
 
@@ -54,7 +60,7 @@ package xvm.contacts
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            if (!Config.networkServicesSettings.comments)
+            if (!_initialized)
                 return;
 
             App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
