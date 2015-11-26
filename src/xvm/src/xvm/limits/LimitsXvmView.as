@@ -22,10 +22,7 @@ package xvm.limits
 
         public function LimitsXvmView(view:IView)
         {
-            //Logger.add("LimitsXvmView");
             super(view);
-
-            Xfw.try_load_ui_swf(_name, _ui_name);
         }
 
         public function get page():LobbyPage
@@ -69,9 +66,6 @@ package xvm.limits
 
         private function init():void
         {
-            if (!Config.config.hangar.enableGoldLocker && !Config.config.hangar.enableFreeXpLocker)
-                return;
-
             var cls:Class = App.utils.classFactory.getClass("xvm.limits_ui::LimitsUIImpl");
             if (cls)
             {
@@ -88,6 +82,7 @@ package xvm.limits
             if (limits_ui != null)
             {
                 limits_ui.dispose();
+                limits_ui = null;
             }
         }
     }

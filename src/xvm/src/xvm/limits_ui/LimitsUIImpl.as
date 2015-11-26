@@ -35,7 +35,7 @@ package xvm.limits_ui
 
         public function LimitsUIImpl()
         {
-            Logger.add("LimitsUIImpl");
+            //Logger.add("LimitsUIImpl");
         }
 
         // ILimitsUI implementation

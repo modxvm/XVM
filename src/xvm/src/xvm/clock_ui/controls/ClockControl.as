@@ -2,7 +2,7 @@
  * XVM - clock control
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.clock
+package xvm.clock_ui.controls
 {
     import com.xfw.*;
     import com.xvm.*;
