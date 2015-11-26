@@ -2,17 +2,19 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.svcmsg_ui
+package xvm.contacts_ui
 {
     import com.xfw.*;
     import com.xvm.infrastructure.*;
+    import flash.display.*;
 
     /**
      *  This class is used to link UI classes into *_ui.swf
      */
-    public class ServiceMessageUIXvmMod extends XvmModBase
+    public class ContactsUI extends Sprite
     {
-        UI_ServiceMessageIR;
-        UI_ServiceMessagePopUp;
+        UI_ContactItem;
+        UI_ContactsTreeItemRenderer;
+        UI_EditContactDataView;
     }
 }

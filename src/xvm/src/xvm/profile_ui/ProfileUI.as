@@ -6,11 +6,12 @@ package xvm.profile_ui
 {
     import com.xfw.*;
     import com.xvm.infrastructure.*;
+    import flash.display.*;
 
     /**
      *  This class is used to link UI classes into *_ui.swf
      */
-    public class ProfileUIXvmMod extends XvmModBase
+    public class ProfileUI extends Sprite
     {
         UI_ProfileSortingButton;
         UI_ProfileTechniquePage;

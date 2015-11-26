@@ -2,17 +2,19 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package xvm.squad_ui
+package xvm.company_ui
 {
     import com.xfw.*;
     import com.xvm.infrastructure.*;
+    import flash.display.*;
 
     /**
      *  This class is used to link UI classes into *_ui.swf
      */
-    public class SquadUIXvmMod extends XvmModBase
+    public class CompanyUI extends Sprite
     {
-        // TODO
-        //UI_SquadItemRenderer;
+        UI_CompanyDropItemRenderer;
+        UI_CompanyListItemRenderer;
+        UI_TeamMemberRenderer;
     }
 }
