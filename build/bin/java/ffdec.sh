@@ -62,7 +62,11 @@ pushd "`dirname \"$PROGRAM\"`" > /dev/null
 search_jar_file || exit 1
 
 if [ ${JAR_FILE:0:1} != '/' ] ; then
-    JAR_FILE=`pwd`/$JAR_FILE
+    if [ "`uname -o`" = "Cygwin" ]; then
+        JAR_FILE=$(cygpath -w `pwd`)/$JAR_FILE
+    else
+        JAR_FILE=`pwd`/$JAR_FILE
+    fi
 fi
 
 popd > /dev/null

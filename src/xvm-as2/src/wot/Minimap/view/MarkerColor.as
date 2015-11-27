@@ -16,7 +16,7 @@ class wot.Minimap.view.MarkerColor
         if (wr_entryName == MinimapConstants.STATIC_ICON_CONTROL)
             return;
 
-        if (wrapper.m_type == "player" && wr_entryName == "postmortemCamera")
+        if ((wrapper.m_type == "player" || wrapper.m_type == "normalWithSector") && wr_entryName == "postmortemCamera")
             return;
 
         var color = null;

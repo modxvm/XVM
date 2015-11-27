@@ -121,10 +121,10 @@ class wot.Minimap.MinimapEntry
 
         IconsProxy.playerIds[playerId] = this;
 
-        if (entryName == 'player')
+        if (entryName == "player")
         {
             var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(playerId);
-            entry.entryName = entryName;
+            //Logger.add(entry.entryName);
             entry.vehicleClass = vClass;
             if (!isNaN(mapSize) && mapSize > 0)
             {
@@ -152,7 +152,7 @@ class wot.Minimap.MinimapEntry
     function setEntryNameImpl(value:String)
     {
         var savedEntryName:String = wrapper.entryName;
-        if (savedEntryName == "player" || value == savedEntryName)
+        if (savedEntryName == "player" || savedEntryName == "normalWithSector" || value == savedEntryName)
             return;
 
         base.setEntryName(value);
