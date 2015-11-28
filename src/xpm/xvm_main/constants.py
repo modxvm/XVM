@@ -11,8 +11,6 @@ class XVM(object):
     FINGERPRINTS = [ # fingerprints for SSL certificates
         '029ef75501dbd41b386990d7b6fb4e30b59540d1']
     TIMEOUT = 5000
-    # WS_URL = 'ws://echo.websocket.org/'
-    WS_URL = 'wss://echo.websocket.org/'
 
     CONFIG_DIR = 'res_mods/configs/xvm'
     CONFIG_FILE = CONFIG_DIR + '/xvm.xc'

@@ -49,7 +49,6 @@ import filecache
 from logger import *
 import utils
 import vehstate
-from websock import g_websock
 from xvm import g_xvm
 
 _LOBBY_SWF = 'lobby.swf'
@@ -71,10 +70,6 @@ def start():
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
 
-    g_websock.start()
-    g_websock.on_message += g_xvm.on_websock_message
-    g_websock.on_error += g_xvm.on_websock_error
-
     # reload config
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
 
@@ -91,10 +86,6 @@ def fini():
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
-
-    g_websock.on_message -= g_xvm.on_websock_message
-    g_websock.on_error -= g_xvm.on_websock_error
-    g_websock.stop()
 
     filecache.fin()
 

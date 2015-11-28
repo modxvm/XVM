@@ -29,7 +29,6 @@ import token
 import utils
 import userprefs
 import dossier
-from websock import g_websock
 import minimap_circles
 import test
 import wgutils
@@ -118,7 +117,6 @@ class Xvm(object):
         trace('onStateLogin')
         if self.currentPlayerId is not None:
             self.currentPlayerId = None
-            g_websock.send('id')
             token.clearToken()
 
 
@@ -131,7 +129,6 @@ class Xvm(object):
             self.currentPlayerId = playerId
             token.checkVersion()
             token.initializeXvmToken()
-            g_websock.send('id/%d' % playerId)
         lobby = getLobbyApp()
         if lobby is not None:
             lobby.loaderManager.onViewLoaded += self.onViewLoaded
@@ -600,7 +597,6 @@ class Xvm(object):
             isRepeated = event.isRepeatedEvent()
             if not isRepeated:
                 # debug("key=" + str(key) + ' ' + ('down' if isDown else 'up'))
-                # g_websock.send("%s/%i" % ('down' if isDown else 'up', key))
                 battle = getBattleApp()
                 if battle:
                     if self.checkKeyEventBattle(key, isDown):
@@ -627,28 +623,6 @@ class Xvm(object):
             return True
 
         return False
-
-
-    def on_websock_message(self, message):
-        try:
-            pass
-            # type = SystemMessages.SM_TYPE.Information
-            # msg += message
-            # msg += '</textformat>'
-            # SystemMessages.pushMessage(msg, type)
-        except Exception:
-            debug(traceback.format_exc())
-
-
-    def on_websock_error(self, error):
-        try:
-            type = SystemMessages.SM_TYPE.Error
-            msg = token.getXvmMessageHeader()
-            msg += 'WebSocket error: %s' % str(error)
-            msg += '</textformat>'
-            SystemMessages.pushMessage(msg, type)
-        except Exception:
-            pass
 
 
     def onViewLoaded(self, e=None):

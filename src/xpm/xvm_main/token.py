@@ -70,7 +70,6 @@ from logger import *
 from loadurl import loadUrl
 import userprefs
 import utils
-from websock import g_websock
 
 
 _clansInfo = None
@@ -257,11 +256,6 @@ def _getXvmMessageHeader():
         err(traceback.format_exc())
     msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config.get('__xvmVersion'), rev)
     msg += _getVersionText(config.get('__xvmVersion')) + '\n'
-    if g_websock.enabled and g_websock.connected:
-        msg += '{{l10n:websock/not_connected}}\n'
-        if g_websock.last_error:
-            msg += '<font size="12">%s</font>\n' % str(g_websock.last_error)
-        msg += '\n'
     return msg
 
 def _getVersionText(curVer):
