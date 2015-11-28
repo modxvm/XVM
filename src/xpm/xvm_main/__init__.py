@@ -8,7 +8,7 @@ XFW_MOD_INFO = {
     'VERSION':       '3.1.0',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.12'],
+    'GAME_VERSIONS': ['0.9.13'],
     # optional
 }
 
@@ -29,6 +29,7 @@ from BattleReplay import g_replayCtrl
 from PlayerEvents import g_playerEvents
 from Vehicle import Vehicle
 from gui.app_loader import g_appLoader
+from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
@@ -147,10 +148,12 @@ def Flash_call(base, self, methodName, args=None):
 
 
 def onClientVersionDiffers():
-    savedValue = g_replayCtrl.scriptModalWindowsEnabled
-    g_replayCtrl.scriptModalWindowsEnabled = savedValue and not config.get('login/confirmOldReplays')
-    g_replayCtrl.onClientVersionDiffers()
-    g_replayCtrl.scriptModalWindowsEnabled = savedValue
+    def nested():
+        savedValue = g_replayCtrl.scriptModalWindowsEnabled
+        g_replayCtrl.scriptModalWindowsEnabled = savedValue and not config.get('login/confirmOldReplays')
+        g_replayCtrl.onClientVersionDiffers()
+        g_replayCtrl.scriptModalWindowsEnabled = savedValue
+    BigWorld.callback(0, nested)
 
 g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
 
