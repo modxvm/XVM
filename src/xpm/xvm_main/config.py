@@ -236,7 +236,7 @@ networkServicesSettings = NetworkServicesSettings()
 class XvmServicesToken(object):
 
     def __init__(self, data={}):
-        trace('config.token.__init__')
+        #trace('config.token.__init__')
         #log(data)
         self._apply(data)
         self.errStr = None
@@ -244,7 +244,7 @@ class XvmServicesToken(object):
 
 
     def _apply(self, data):
-        trace('config.token._apply')
+        #trace('config.token._apply')
         if data is None:
             data = {}
         self.playerId = data.get('playerId', None)
@@ -268,7 +268,7 @@ class XvmServicesToken(object):
 
     @staticmethod
     def restore():
-        trace('config.token.restore')
+        #trace('config.token.restore')
         try:
             playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
             if playerId is None:
@@ -279,14 +279,14 @@ class XvmServicesToken(object):
 
 
     def save(self):
-        trace('config.token.save')
+        #trace('config.token.save')
         if self.playerId:
             userprefs.set('tokens.{0}'.format(self.playerId), self.__dict__)
             userprefs.set('tokens.lastPlayerId', self.playerId)
 
 
     def update(self, data={}, errStr=None):
-        trace('config.token._update')
+        #trace('config.token._update')
         #log(data)
         
         if data is None:
@@ -320,7 +320,7 @@ token = XvmServicesToken()
 
 class XvmVersionInfo(object):
     def __init__(self, data={}):
-        trace('config.verinfo.__init__')
+        #trace('config.verinfo.__init__')
         if data is None:
             data = {}
         info = data.get('info', {})

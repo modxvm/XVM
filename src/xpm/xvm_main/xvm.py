@@ -64,6 +64,7 @@ def l10n_macros_replace(text):
 class Xvm(object):
 
     def __init__(self):
+        self.xvmServicesInitialized = False
         self.currentPlayerId = None
         self._invalidateTimerId = dict()
         self._invalidateTargets = dict()
@@ -131,18 +132,7 @@ class Xvm(object):
             playerId = getCurrentPlayerId()
             if playerId is not None and self.currentPlayerId != playerId:
                 self.currentPlayerId = playerId
-                token.restore()
-                token.updateTokenFromApi()
-
-                if config.networkServicesSettings.servicesActive:
-                    data = xvmapi.getVersion()
-                    topclans.clear()
-                else:
-                    data = xvmapi.getVersionWithLimit()
-                    topclans.update(data)
-                config.verinfo = config.XvmVersionInfo(data)
-                
-                svcmsg.tokenUpdated()
+                self.initializeXvmServices()
 
             lobby = getLobbyApp()
             if lobby is not None:
@@ -209,9 +199,10 @@ class Xvm(object):
 
     def onStateBattleLoading(self):
         trace('onStateBattleLoading')
-        if isReplay():
-            token.restore()
-        pass
+
+        # check version if game restarted after crash or in replay
+        if not self.xvmServicesInitialized:
+            self.initializeXvmServices()
 
 
     def onStateBattleTutorialLoading(self):
@@ -233,10 +224,6 @@ class Xvm(object):
 
     def onAvatarBecomePlayer(self):
         trace('onAvatarBecomePlayer')
-        # check version if game restarted after crash or in replay
-        if not token.versionChecked:
-            token.checkVersion()
-            token.initializeXvmToken()
         if config.get('autoReloadConfig', False) == True:
             configwatchdog.startConfigWatchdog()
 
@@ -521,7 +508,6 @@ class Xvm(object):
                 return (None, True)
 
             if cmd == XVM_COMMAND.GET_SVC_SETTINGS:
-                token.getToken()
                 return (config.networkServicesSettings.__dict__, True)
 
             if cmd == XVM_COMMAND.LOAD_SETTINGS:
@@ -582,6 +568,23 @@ class Xvm(object):
                                 [id] + res if isinstance(res, list) else [id, res]))
         except Exception, ex:
             err(traceback.format_exc())
+
+
+    def initializeXvmServices(self):
+        self.xvmServicesInitialized = True
+
+        token.restore()
+        token.updateTokenFromApi()
+
+        if config.networkServicesSettings.servicesActive:
+            data = xvmapi.getVersion()
+            topclans.clear()
+        else:
+            data = xvmapi.getVersionWithLimit()
+            topclans.update(data)
+        config.verinfo = config.XvmVersionInfo(data)
+        
+        svcmsg.tokenUpdated()
 
 
     def extendVehicleMarkerArgs(self, handle, function, args):
