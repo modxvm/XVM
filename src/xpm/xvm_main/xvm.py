@@ -169,7 +169,7 @@ class Xvm(object):
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
 
-        as_xfw_cmd(XVM_COMMAND.AS_SET_SVC_SETTINGS, token.networkServicesSettings)
+        as_xfw_cmd(XVM_COMMAND.AS_SET_SVC_SETTINGS, config.networkServicesSettings.__dict__)
 
         if IS_DEVELOPMENT:
             test.onHangarInit()
@@ -297,7 +297,7 @@ class Xvm(object):
                     'fallout' if arena_info.isEventBattle() else 'normal',
                     arenaVehicle['vehicleType'].type.compactDescr,
                     vehinfo.getVehicleInfoDataStr(),
-                    simplejson.dumps(token.networkServicesSettings),
+                    simplejson.dumps(config.networkServicesSettings.__dict__),
                     simplejson.dumps(minimap_circles.getMinimapCirclesData()),
                     IS_DEVELOPMENT,
                 ]))
@@ -506,7 +506,7 @@ class Xvm(object):
 
             if cmd == XVM_COMMAND.GET_SVC_SETTINGS:
                 token.getToken()
-                return (token.networkServicesSettings, True)
+                return (config.networkServicesSettings.__dict__, True)
 
             if cmd == XVM_COMMAND.LOAD_SETTINGS:
                 default = None if len(args) < 2 else args[1]

@@ -34,7 +34,6 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 import xvm_main.python.constants as constants
 import xvm_main.python.dossier as dossier
-import xvm_main.python.token as token
 import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 import xvm_main.python.vehinfo_xte as vehinfo_xte
@@ -77,7 +76,7 @@ def _sendAccountData(base, self, targetData, accountDossier):
     global _lastPlayerId
     _lastPlayerId = accountDossier.getPlayerDBID()
 
-    if token.networkServicesSettings['statAwards']:
+    if config.networkServicesSettings.statAwards:
         if self._isDAAPIInited():
             isHangar = False
             if hasattr(self, '_ProfileTechniquePage__isInHangarSelected'):
@@ -94,7 +93,7 @@ def _sendAccountData(base, self, targetData, accountDossier):
 @overrideMethod(ProfileTechnique, '_getTechniqueListVehicles')
 def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
     res = base(self, targetData, addVehiclesThatInHangarOnly)
-    if token.networkServicesSettings['statAwards']:
+    if config.networkServicesSettings.statAwards:
         global _lastPlayerId
         for x in res:
             try:
@@ -114,7 +113,7 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
     base(self, vehId, playerId)
     _lastVehId = None
 
-    if token.networkServicesSettings['statAwards']:
+    if config.networkServicesSettings.statAwards:
         if self._isDAAPIInited():
             vDossier = dossier.getDossier((self._battlesType, playerId, vehId))
             self.flashObject.as_responseVehicleDossierXvm(vDossier)
@@ -124,7 +123,7 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
 def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layout):
     res = base(targetData, isCurrentuser, layout)
     global _lastVehId
-    if _lastVehId is not None and token.networkServicesSettings['statAwards']:
+    if _lastVehId is not None and config.networkServicesSettings.statAwards:
         try:
             battles = targetData.getBattlesCount()
             dmg = targetData.getDamageDealt()

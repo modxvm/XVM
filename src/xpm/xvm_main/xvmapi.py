@@ -3,28 +3,28 @@
 # PUBLIC
 
 def getToken():
-    _exec('GET', 'getToken/{token}/{id}')
+    _exec('getToken/{token}/{id}')
 
 def getVersion():
-    _exec('GET', 'getVersion/{token}/{id}')
+    _exec('getVersion/{token}/{id}')
 
 def getVersionWithLimit(limit=50):
-    _exec('GET', 'getVersionWithLimit/{token}/{id}/{limit}', params={'limit':limit})
+    _exec('getVersionWithLimit/{token}/{id}/{limit}', params={'limit':limit})
 
 def getStats(request):
-    _exec('GET', 'getStats/{token}/{request}', params={'request':request})
+    _exec('getStats/{token}/{request}', params={'request':request})
 
 def getStatsReplay(request):
-    _exec('GET', 'getStatsReplay/{token}/{request}', params={'request':request})
+    _exec('getStatsReplay/{token}/{request}', params={'request':request})
 
 def getStatsById(id):
-    _exec('GET', 'getStatsById/{token}/{id}', params={'id':id})
+    _exec('getStatsById/{token}/{id}', params={'id':id})
 
 def getStatsByNick(region, nick):
-    _exec('GET', 'getStatsByNick/{token}/{region}/{nick}', params={'region':region,'nick':nick})
+    _exec('getStatsByNick/{token}/{region}/{nick}', params={'region':region,'nick':nick})
 
 def getOnlineUsersCount():
-    _exec('GET', 'getOnlineUsersCount/{id}', showLog=False)
+    _exec('getOnlineUsersCount/{id}', showLog=False)
 
 
 # PRIVATE
@@ -38,7 +38,7 @@ from constants import *
 from logger import *
 from loadurl import loadUrl
 
-def _exec(method, req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
+def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
     url = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
     url = url.format(API=api, REQ=req)
     for k, v in params.iteritems():

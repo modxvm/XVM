@@ -31,6 +31,7 @@ from xfw import *
 from xvm_main.python.constants import *
 from xvm_main.python.loadurl import loadUrl
 from xvm_main.python.logger import *
+import xvm_main.python.config as config
 import xvm_main.python.token as token
 import xvm_main.python.utils as utils
 from xvm_main.python.xvm import l10n
@@ -53,7 +54,7 @@ class _Contacts:
         try:
             self.is_available = False
 
-            self.contacts_disabled = not token.networkServicesSettings['comments']
+            self.contacts_disabled = not config.networkServicesSettings.comments
             if self.contacts_disabled:
                 return
 

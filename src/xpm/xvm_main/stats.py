@@ -365,7 +365,7 @@ class _Stat(object):
 
         try:
             tdata = token.getXvmActiveTokenData()
-            if token.networkServicesSettings['statBattle']:
+            if config.networkServicesSettings.statBattle:
                 if tdata is None or 'token' not in tdata:
                     err('No valid token for XVM network services (id=%s)' % playerVehicleID)
                     return
@@ -565,7 +565,7 @@ class _Stat(object):
                 rank = int(pl.clanInfo.get('rank', -1))
                 url = pl.clanInfo.get('emblem', None)
                 # url = 'http://stat.modxvm.com:81'
-                if url and 0 <= rank <= token.networkServicesSettings['topClansCount']:
+                if url and 0 <= rank <= config.networkServicesSettings.topClansCount:
                     url = url.replace('{size}', '32x32')
                     tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
                     self._loadingClanIconsCount += 1

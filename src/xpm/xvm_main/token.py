@@ -31,8 +31,7 @@ def getToken():
 def clearToken(value=None):
     global _token
     _token = value
-    global networkServicesSettings
-    networkServicesSettings = _makeNetworkServicesSettings(None)
+    config.networkServicesSettings = config.NetworkServicesSettings()
 
 
 def getClanInfo(clanAbbrev):
@@ -43,10 +42,8 @@ def getClanInfo(clanAbbrev):
     if top:
         rank = int(top.get('rank', None))
         if rank:
-            global networkServicesSettings
-            if networkServicesSettings:
-                if 0 < rank <= networkServicesSettings['topClansCount']:
-                    return top
+            if 0 < rank <= config.networkServicesSettings.topClansCount:
+                return top
     return _clansInfo['persist'].get(clanAbbrev, None)
 
 
@@ -82,26 +79,6 @@ _tdataPrev = None
 _token = None
 
 
-def _makeNetworkServicesSettings(tdata):
-    svc = {} if tdata is None else tdata.get('services', {})
-    active = tdata is not None and tdata.get('token', None) is not None
-    return {
-        'servicesActive': active,
-        'statBattle': svc.get('statBattle', True) if active else False,
-        'statAwards': svc.get('statAwards', True) if active else False,
-        'statCompany': svc.get('statCompany', True) if active else False,
-        'comments': svc.get('comments', True) if active else False,
-        'chance': svc.get('chance', False) if active else False,
-        'chanceLive': svc.get('chanceLive', False) if active else False,
-        'chanceResults': svc.get('chanceResults', False) if active else False,
-        'scale': svc.get('scale', 'xvm'),
-        'rating': svc.get('rating', 'wgr'),
-        'topClansCount': svc.get('topClansCount', 50),
-        'flag': svc.get('flag', None),
-    }
-
-networkServicesSettings = _makeNetworkServicesSettings(None)
-
 def _getXvmActiveTokenData():
     #debug('_getXvmActiveTokenData')
     # use last player id for replays
@@ -116,8 +93,9 @@ def _getXvmActiveTokenData():
     if tdata is not None:
         global _token
         _token = tdata.get('token', '').encode('ascii')
-        global networkServicesSettings
-        networkServicesSettings = _makeNetworkServicesSettings(tdata)
+        svc = {} if tdata is None else tdata.get('services', {})
+        active = tdata is not None and tdata.get('token', None) is not None
+        config.networkServicesSettings = config.NetworkServicesSettings(svc, active)
     return tdata
 
 def _checkVersion():
@@ -223,8 +201,9 @@ def _initializeXvmToken():
         userprefs.set('tokens.{0}'.format(playerId), tdata)
         userprefs.set('tokens.lastPlayerId', playerId)
 
-        global networkServicesSettings
-        networkServicesSettings = _makeNetworkServicesSettings(tdata)
+        svc = {} if tdata is None else tdata.get('services', {})
+        active = tdata is not None and tdata.get('token', None) is not None
+        config.networkServicesSettings = config.NetworkServicesSettings(svc, active)
 
     global _token
     _token = '' if tdata is None else tdata.get('token', '').encode('ascii')

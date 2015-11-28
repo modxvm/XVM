@@ -207,3 +207,24 @@ def _constsSection():
         'VM_COEFF_MM_BASE': 0.8,    # minimap (base)
         'VM_COEFF_FC': 0.93         # frag correlation
     }
+
+
+# config.networkServicesSettings
+
+class NetworkServicesSettings(object):
+
+    def __init__(self, data={}, active=False):
+        self.servicesActive = active
+        self.statBattle = data.get('statBattle', True) if active else False
+        self.statAwards = data.get('statAwards', True) if active else False
+        self.statCompany = data.get('statCompany', True) if active else False
+        self.comments = data.get('comments', True) if active else False
+        self.chance = data.get('chance', False) if active else False
+        self.chanceLive = data.get('chanceLive', False) if active else False
+        self.chanceResults = data.get('chanceResults', False) if active else False
+        self.scale = data.get('scale', 'xvm')
+        self.rating = data.get('rating', 'wgr')
+        self.topClansCount = data.get('topClansCount', 50)
+        self.flag = data.get('flag', None)
+
+networkServicesSettings = NetworkServicesSettings()
