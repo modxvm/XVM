@@ -1,7 +1,9 @@
 ﻿XVM-6.2.0-dev:
   * adaptation to WoT 0.9.13
   * XVM API 4.0
-  * added option "battle"/"camera"/"noScroll" - disable switching to sniper mode by mouse wheel
+  * added options:
+      "battle"/"camera"/"noScroll" - disable switching to sniper mode by mouse wheel
+      "battle"/"camera"/"<mode>"/"dynamicCameraEnabled" - enable/disable dynamic camera
 
 XVM-6.1.6.1:
   * removed minimap square

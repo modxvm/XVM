@@ -21,7 +21,10 @@
       "startDist": null,
       // Чувствительность прокрутки (default = 5)
       // Scroll sensitivity (по умолчанию = 5)
-      "scrollSensitivity": 5
+      "scrollSensitivity": 5,
+      // Enable/disable dynamic camera
+      // Включить/выключить динамическую камеру
+      "dynamicCameraEnabled": true
     },
     // Postmortem mode
     // Режим после смерти
@@ -34,14 +37,20 @@
       "startDist": null,
       // Чувствительность прокрутки (default = 5)
       // Scroll sensitivity (по умолчанию = 5)
-      "scrollSensitivity": 5
+      "scrollSensitivity": 5,
+      // Enable/disable dynamic camera
+      // Включить/выключить динамическую камеру
+      "dynamicCameraEnabled": true
     },
     // Strategic mode (arty)
     // Стратегический режим (арта)
     "strategic": {
       // Camera distance range: [min, max], default - [40, 100]
       // Отдаление камеры: [мин, макс], по умолчанию - [40, 100]
-      "distRange": [40, 100]
+      "distRange": [40, 100],
+      // Enable/disable dynamic camera
+      // Включить/выключить динамическую камеру
+      "dynamicCameraEnabled": true
     },
     // Sniper mode
     // Снайперский режим
@@ -50,7 +59,10 @@
       // It is possible to use a greater number of values: [ 2, 4, 8, 16 ]
       // Список значений кратности для снайперского режима
       // Можно использовать большее количество значений: [ 2, 4, 8, 16 ]
-      "zooms": [2, 4, 8]
+      "zooms": [2, 4, 8],
+      // Enable/disable dynamic camera
+      // Включить/выключить динамическую камеру
+      "dynamicCameraEnabled": true
     }
   }
 }

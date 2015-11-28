@@ -5,6 +5,7 @@
 
 import traceback
 import math
+import Math
 
 import BigWorld
 from Avatar import PlayerAvatar
@@ -27,10 +28,15 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
     #debug('_ArcadeCamera_create: {}'.format(postmortemMode))
 
     if config.get('battle/camera/enabled'):
-        c = config.get('battle/camera/%s' % ('arcade' if not postmortemMode else 'postmortem'))
+        mode = 'arcade' if not postmortemMode else 'postmortem'
+        c = config.get('battle/camera/%s' % mode)
         cfg = self._ArcadeCamera__cfg
         bcfg = self._ArcadeCamera__baseCfg
         ucfg = self._ArcadeCamera__userCfg
+        dcfg = self._ArcadeCamera__dynamicCfg
+
+        if not c['dynamicCameraEnabled']:
+            _disableDynamicCamera(dcfg)
 
         value = c['distRange']
         if value is not None:
@@ -66,6 +72,9 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
         cfg = self._SniperCamera__cfg
         dcfg = self._SniperCamera__dynamicCfg
 
+        if not c['dynamicCameraEnabled']:
+            _disableDynamicCamera(dcfg)
+
         value = c['zooms']
         if value is not None:
             cfg['zooms'] = [float(i) for i in value]
@@ -80,6 +89,10 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/strategic')
         cfg = self._StrategicCamera__cfg
+        dcfg = self._StrategicCamera__dynamicCfg
+
+        if not c['dynamicCameraEnabled']:
+            _disableDynamicCamera(dcfg)
 
         value = c['distRange']
         if value is not None:
@@ -99,3 +112,18 @@ def onChangeControlModeByScroll(base, self):
 def onChangeControlModeByScroll(base, self, switchToClosestDist = True):
     if not config.get('battle/camera/noScroll'):
         base(self, switchToClosestDist)
+
+
+# PRIVATE
+
+def _disableDynamicCamera(dcfg):
+    for name, value in dcfg.iteritems():
+        if name in ['impulseSensitivities', 'noiseSensitivities', 'impulseLimits', 'noiseLimits']:
+            value = {}
+        elif isinstance(value, float):
+            value = 0.0
+        elif isinstance(value, Math.Vector3):
+            value = Math.Vector3(0.0, 0.0, 0.0)
+        else:
+            log('WARNING: unknown dynamic camera option type: {} {} = {}'.format(type(value), name, value))
+        dcfg[name] = value

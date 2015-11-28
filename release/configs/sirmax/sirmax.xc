@@ -101,18 +101,22 @@
       "arcade": {
         "distRange": [2, 50],
         "startDist": 30,
-        "scrollSensitivity": 2.5
+        "scrollSensitivity": 2.5,
+        "dynamicCameraEnabled": false
       },
       "postmortem": {
         "distRange": [2, 100],
         "startDist": 30,
-        "scrollSensitivity": 2.5
+        "scrollSensitivity": 2.5,
+        "dynamicCameraEnabled": false
       },
       "strategic": {
-        "distRange": [30, 250]
+        "distRange": [30, 250],
+        "dynamicCameraEnabled": false
       },
       "sniper": {
-        "zooms": [2, 4, 8, 16]
+        "zooms": [2, 4, 8, 16],
+        "dynamicCameraEnabled": false
       }
     }
   },
