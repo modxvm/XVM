@@ -230,6 +230,7 @@ class NetworkServicesSettings(object):
 
 networkServicesSettings = NetworkServicesSettings()
 
+
 # config.token
 
 class XvmServicesToken(object):
@@ -238,6 +239,8 @@ class XvmServicesToken(object):
         trace('config.token.__init__')
         log(data)
         self._apply(data)
+        self.errStr = None
+
 
     def _apply(self, data):
         trace('config.token._apply')
@@ -281,22 +284,42 @@ class XvmServicesToken(object):
             userprefs.set('tokens.lastPlayerId', self.playerId)
 
 
-    def update(self, data={}):
+    def update(self, data={}, errStr=None):
         trace('config.token._update')
         log(data)
         if data is None:
             return
         status = data.get('status', None)
         if not status:
+            self.status = None
+            self.errStr = errStr
             return
         if status == 'active':
             if 'token' not in data:
                 data['token'] = self.token
             self._apply(data)
-            self.save()
         else:
-            if self.token is not None:
-                self.token = None
-                self.save()
+            self.token = None
+            self.status = status
+            self.services = {}
+            global networkServicesSettings
+            networkServicesSettings = NetworkServicesSettings()
+
+        self.save()
 
 token = XvmServicesToken()
+
+
+# config.verinfo
+
+class XvmVersionInfo(object):
+    def __init__(self, data={}):
+        trace('config.verinfo.__init__')
+        if data is None:
+            data = {}
+        info = data.get('info', {})
+        self.message = info.get('message', None)
+        self.wot = info.get('wot', None)
+        self.ver = info.get('ver', None)
+
+verinfo = XvmVersionInfo()

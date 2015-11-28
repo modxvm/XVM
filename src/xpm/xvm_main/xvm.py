@@ -23,6 +23,7 @@ from logger import *
 import config
 import configwatchdog
 import stats
+import svcmsg
 import vehinfo
 import vehstate
 import token
@@ -31,7 +32,9 @@ import userprefs
 import dossier
 import minimap_circles
 import test
+import topclans
 import wgutils
+import xvmapi
 
 
 _LOG_COMMANDS = (
@@ -124,32 +127,45 @@ class Xvm(object):
 
     def onStateLobby(self):
         trace('onStateLobby')
-        playerId = getCurrentPlayerId()
-        if playerId is not None and self.currentPlayerId != playerId:
-            self.currentPlayerId = playerId
-            token.restore()
-            token.updateTokenFromApi()
-            #token.checkVersion()
-        lobby = getLobbyApp()
-        if lobby is not None:
-            lobby.loaderManager.onViewLoaded += self.onViewLoaded
+        try:
+            playerId = getCurrentPlayerId()
+            if playerId is not None and self.currentPlayerId != playerId:
+                self.currentPlayerId = playerId
+                token.restore()
+                token.updateTokenFromApi()
 
-        # TODO
-        """
-            var message:String = Locale.get("XVM config loaded");
-            var type:String = "Information";
-            if (Config.__stateInfo.warning != null)
-            {
-                message = Locale.get("Config file xvm.xc was not found, using the built-in config");
-                type = "Warning";
-            }
-            else if (Config.__stateInfo.error != null)
-            {
-                message = Locale.get("Error loading XVM config") + ":\n" + XfwUtils.encodeHtmlEntities(Config.__stateInfo.error);
-                type = "Error";
-            }
-            Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
-        """
+                if config.networkServicesSettings.servicesActive:
+                    data = xvmapi.getVersion()
+                    topclans.clear()
+                else:
+                    data = xvmapi.getVersionWithLimit()
+                    topclans.update(data)
+                config.verinfo = config.XvmVersionInfo(data)
+                
+                svcmsg.tokenUpdated()
+
+            lobby = getLobbyApp()
+            if lobby is not None:
+                lobby.loaderManager.onViewLoaded += self.onViewLoaded
+
+            # TODO
+            """
+                var message:String = Locale.get("XVM config loaded");
+                var type:String = "Information";
+                if (Config.__stateInfo.warning != null)
+                {
+                    message = Locale.get("Config file xvm.xc was not found, using the built-in config");
+                    type = "Warning";
+                }
+                else if (Config.__stateInfo.error != null)
+                {
+                    message = Locale.get("Error loading XVM config") + ":\n" + XfwUtils.encodeHtmlEntities(Config.__stateInfo.error);
+                    type = "Error";
+                }
+                Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
+            """
+        except Exception, ex:
+            err(traceback.format_exc())
 
 
     def deleteLobbySwf(self):

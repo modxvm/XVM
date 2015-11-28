@@ -16,7 +16,7 @@ def restore():
 def updateTokenFromApi():
     trace('token.updateTokenFromApi')
     try:
-        data = xvmapi.getToken()
+        (data, errStr) = xvmapi.getToken()
         log(utils.hide_guid(data))
 
         # response= """{"status":"inactive"}"""
@@ -25,7 +25,7 @@ def updateTokenFromApi():
         # response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken",
         # "start_at":1393608331657}"""
 
-        config.token.update(data)
+        config.token.update(data, errStr)
 
     except Exception, ex:
         err(traceback.format_exc())

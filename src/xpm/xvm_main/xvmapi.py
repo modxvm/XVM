@@ -3,28 +3,36 @@
 # PUBLIC
 
 def getToken():
-    return _exec('getToken/{token}/{id}')
+    (data, errStr) = _exec('getToken/{token}/{id}')
+    return (data, errStr)
 
 def getVersion():
-    return _exec('getVersion/{token}/{id}')
+    (data, errStr) = _exec('getVersion/{token}/{id}')
+    return data
 
 def getVersionWithLimit(limit=50):
-    return _exec('getVersionWithLimit/{token}/{id}/{limit}', params={'limit':limit})
+    (data, errStr) = _exec('getVersionWithLimit/{token}/{id}/{limit}', params={'limit':limit})
+    return data
 
 def getStats(request):
-    return _exec('getStats/{token}/{request}', params={'request':request})
+    (data, errStr) = _exec('getStats/{token}/{request}', params={'request':request})
+    return data
 
 def getStatsReplay(request):
-    return _exec('getStatsReplay/{token}/{request}', params={'request':request})
+    (data, errStr) = _exec('getStatsReplay/{token}/{request}', params={'request':request})
+    return data
 
 def getStatsById(id):
-    return _exec('getStatsById/{token}/{id}', params={'id':id})
+    (data, errStr) = _exec('getStatsById/{token}/{id}', params={'id':id})
+    return data
 
 def getStatsByNick(region, nick):
-    return _exec('getStatsByNick/{token}/{region}/{nick}', params={'region':region,'nick':nick})
+    (data, errStr) = _exec('getStatsByNick/{token}/{region}/{nick}', params={'region':region,'nick':nick})
+    return data
 
 def getOnlineUsersCount():
-    return _exec('getOnlineUsersCount/{id}', showLog=False)
+    (data, errStr) = _exec('getOnlineUsersCount/{id}', showLog=False)
+    return data
 
 
 # PRIVATE
@@ -58,4 +66,4 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
 
     (response, duration, errStr) = loadUrl(url, None, data)
 
-    return None if response is None else simplejson.loads(response)
+    return (None if response is None else simplejson.loads(response), errStr)
