@@ -1083,6 +1083,10 @@ _gun_camo_modifier = {
             [ ['uk:GB15_Stuart_I'], 0.300 ],
             [ ['uk:GB14_M2'], 0.255 ]
         ],
+    '_37mm_M-3_antitank_gun':
+        [
+            [ ['usa:A46_T3'], 0.255 ]
+        ],
     '_37mm_Gun_M1916':
         [
             [ ['usa:T1_Cunningham'], 0.255 ]
@@ -1099,7 +1103,10 @@ _gun_camo_modifier = {
         [
             [ ['usa:T1_Cunningham', 'usa:A24_T2_med'], 0.195 ]
         ],
-
+    'Ordnance_QF_2pdr_AT_Gun_Mk.X':
+        [
+            [ ['usa:A46_T3'], 0.255 ]
+        ],
     'QF_6_pounder_Mk_III':
         [
             [ ['usa:A23_M7_med', 'usa:T21'], 0.280 ],
@@ -1108,11 +1115,11 @@ _gun_camo_modifier = {
         ],
     '_57mm_Gun_M1_L50':
         [
-            [ ['usa:M8A1', 'usa:T40', 'usa:T67'], 0.266 ]
+            [ ['usa:A109_T56_GMC', 'usa:M8A1', 'usa:T40', 'usa:T67'], 0.266 ]
         ],
     '_75mm_Howitzer_M1A1':
         [
-            [ ['usa:T40'], 0.260 ],
+            [ ['usa:A46_T3', 'usa:T40'], 0.260 ],
         ],
     '_75mm_Howitzer_M3':
         [
@@ -1154,7 +1161,7 @@ _gun_camo_modifier = {
         ],
     '_75mm_AT_Gun_M7_L50':
         [
-            [ ['usa:A30_M10_Wolverine', 'usa:M18_Hellcat', 'usa:M8A1', 'usa:T67'], 0.260 ]
+            [ ['usa:A109_T56_GMC', 'usa:A30_M10_Wolverine', 'usa:M18_Hellcat', 'usa:M8A1', 'usa:T67'], 0.260 ]
         ],
     '_76mm_Gun_M1A1':
         [
@@ -1242,7 +1249,7 @@ _gun_camo_modifier = {
         ],
     '_105mm_Howitzer_M3':
         [
-            [ ['usa:M37', 'usa:M7_Priest'], 0.220 ]
+            [ ['usa:A27_T82', 'usa:M37', 'usa:M7_Priest'], 0.220 ]
         ],
     '_105mm_AT_Howitzer_M3':
         [
@@ -1254,7 +1261,7 @@ _gun_camo_modifier = {
         ],
     '_105mm_Howitzer_M4':
         [
-            [ ['usa:M37'], 0.220 ]
+            [ ['usa:A27_T82', 'usa:M37'], 0.220 ]
         ],
     '_105mm_SPH_M4_L23':
         [
