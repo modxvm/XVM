@@ -1,4 +1,8 @@
-﻿XVM-6.1.6.1:
+﻿XVM-6.2.0-dev:
+  * adaptation to WoT 0.9.13
+  * XVM API 4.0
+
+XVM-6.1.6.1:
   * removed minimap square
   * added global macros:
       {{my-veh-id}}, {{my-vehicle}}, {{my-vehiclename}}, {{my-vehicle-short}}, {{my-vtype}},
