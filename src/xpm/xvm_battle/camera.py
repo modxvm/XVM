@@ -8,6 +8,7 @@ import math
 
 import BigWorld
 from Avatar import PlayerAvatar
+from AvatarInputHandler.control_modes import ArcadeControlMode, SniperControlMode
 from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera, MinMax
 from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
 from AvatarInputHandler.DynamicCameras.StrategicCamera import StrategicCamera
@@ -86,3 +87,15 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
             self._StrategicCamera__aimingSystem._StrategicAimingSystem__height = cfg['distRange'][0]
 
     base(self, onChangeControlMode)
+
+
+@overrideMethod(ArcadeControlMode, 'onChangeControlModeByScroll')
+def onChangeControlModeByScroll(base, self):
+    if not config.get('battle/camera/noScroll'):
+        base(self)
+
+
+@overrideMethod(SniperControlMode, 'onChangeControlModeByScroll')
+def onChangeControlModeByScroll(base, self, switchToClosestDist = True):
+    if not config.get('battle/camera/noScroll'):
+        base(self, switchToClosestDist)

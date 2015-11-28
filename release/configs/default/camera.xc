@@ -7,6 +7,9 @@
     // Global camera settings switch
     // Глобальный переключатель настроек камеры
     "enabled": false,
+    // Disable switching to sniper mode by mouse wheel
+    // Не переключаться в снайперский режим колесом мыши
+    "noScroll": false,
     // Arcade mode
     // Аркадный режим
     "arcade": {
