@@ -117,7 +117,7 @@ class Xvm(object):
         trace('onStateLogin')
         if self.currentPlayerId is not None:
             self.currentPlayerId = None
-            token.clearToken()
+            token.clear()
 
 
     # LOBBY
@@ -127,8 +127,9 @@ class Xvm(object):
         playerId = getCurrentPlayerId()
         if playerId is not None and self.currentPlayerId != playerId:
             self.currentPlayerId = playerId
-            token.checkVersion()
-            token.initializeXvmToken()
+            token.restore()
+            token.updateTokenFromApi()
+            #token.checkVersion()
         lobby = getLobbyApp()
         if lobby is not None:
             lobby.loaderManager.onViewLoaded += self.onViewLoaded
@@ -192,6 +193,8 @@ class Xvm(object):
 
     def onStateBattleLoading(self):
         trace('onStateBattleLoading')
+        if isReplay():
+            token.restore()
         pass
 
 

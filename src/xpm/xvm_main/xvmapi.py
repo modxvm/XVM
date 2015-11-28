@@ -3,28 +3,28 @@
 # PUBLIC
 
 def getToken():
-    _exec('getToken/{token}/{id}')
+    return _exec('getToken/{token}/{id}')
 
 def getVersion():
-    _exec('getVersion/{token}/{id}')
+    return _exec('getVersion/{token}/{id}')
 
 def getVersionWithLimit(limit=50):
-    _exec('getVersionWithLimit/{token}/{id}/{limit}', params={'limit':limit})
+    return _exec('getVersionWithLimit/{token}/{id}/{limit}', params={'limit':limit})
 
 def getStats(request):
-    _exec('getStats/{token}/{request}', params={'request':request})
+    return _exec('getStats/{token}/{request}', params={'request':request})
 
 def getStatsReplay(request):
-    _exec('getStatsReplay/{token}/{request}', params={'request':request})
+    return _exec('getStatsReplay/{token}/{request}', params={'request':request})
 
 def getStatsById(id):
-    _exec('getStatsById/{token}/{id}', params={'id':id})
+    return _exec('getStatsById/{token}/{id}', params={'id':id})
 
 def getStatsByNick(region, nick):
-    _exec('getStatsByNick/{token}/{region}/{nick}', params={'region':region,'nick':nick})
+    return _exec('getStatsByNick/{token}/{region}/{nick}', params={'region':region,'nick':nick})
 
 def getOnlineUsersCount():
-    _exec('getOnlineUsersCount/{id}', showLog=False)
+    return _exec('getOnlineUsersCount/{id}', showLog=False)
 
 
 # PRIVATE
@@ -37,6 +37,8 @@ import simplejson
 from constants import *
 from logger import *
 from loadurl import loadUrl
+import config
+import userprefs
 
 def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
     url = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
@@ -48,7 +50,9 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
     if playerId is None:
         playerId = 0
 
-    token=None # TODO
+    token = config.token.token
+    if token is None:
+        token = ''
     
     url = url.format(id=playerId, token=token)
 

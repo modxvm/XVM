@@ -29,7 +29,7 @@ def rm(fname):
 
 def hide_guid(txt):
     return re.sub('([0-9A-Fa-f]{8}-)[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{8}([0-9A-Fa-f]{4})',
-                  '\\1****-****-****-********\\2', txt)
+                  '\\1****-****-****-********\\2', str(txt))
 
 
 def show_threads():

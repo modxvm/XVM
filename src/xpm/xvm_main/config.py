@@ -19,6 +19,7 @@ from logger import *
 from default_xvm_xc import DEFAULT_XVM_XC
 import default_config
 import configwatchdog
+import userprefs
 import utils
 
 _config = None
@@ -228,3 +229,74 @@ class NetworkServicesSettings(object):
         self.flag = data.get('flag', None)
 
 networkServicesSettings = NetworkServicesSettings()
+
+# config.token
+
+class XvmServicesToken(object):
+
+    def __init__(self, data={}):
+        trace('config.token.__init__')
+        log(data)
+        self._apply(data)
+
+    def _apply(self, data):
+        trace('config.token._apply')
+        if data is None:
+            data = {}
+        self.playerId = data.get('playerId', None)
+        if self.playerId is None:
+            self.playerId = data.get('_id', None)
+        self.expires_at = data.get('expires_at', None)
+        self.verChkCnt = data.get('verChkCnt', None)
+        self.cnt = data.get('cnt', None)
+        self.status = data.get('status', 'inactive')
+        self.issued = data.get('issued', None)
+        self.start_at = data.get('start_at', None)
+        self.services = data.get('services', {});
+        self.token = data.get('token', '').encode('ascii')
+        if self.token == '':
+            self.token = None
+
+        active = self.token is not None
+        global networkServicesSettings
+        networkServicesSettings = NetworkServicesSettings(self.services, active)
+
+
+    @staticmethod
+    def restore():
+        trace('config.token.restore')
+        try:
+            playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
+            if playerId is None:
+                return XvmServicesToken()
+            return XvmServicesToken(userprefs.get('tokens.{0}'.format(playerId)))
+        except Exception:
+            err(traceback.format_exc())
+
+
+    def save(self):
+        trace('config.token.save')
+        if self.playerId:
+            userprefs.set('tokens.{0}'.format(self.playerId), self.__dict__)
+            userprefs.set('tokens.lastPlayerId', self.playerId)
+
+
+    def update(self, data={}):
+        trace('config.token._update')
+        log(data)
+        if data is None:
+            return
+        status = data.get('status', None)
+        if not status:
+            return
+        if status == 'active':
+            if 'token' not in data:
+                data['token'] = self.token
+            self._apply(data)
+            self.save()
+        else:
+            if self.token is not None:
+                self.token = None
+                self.save()
+
+token = XvmServicesToken()
