@@ -237,9 +237,10 @@ class XvmServicesToken(object):
 
     def __init__(self, data={}):
         trace('config.token.__init__')
-        log(data)
+        #log(data)
         self._apply(data)
         self.errStr = None
+        self.online = False
 
 
     def _apply(self, data):
@@ -286,14 +287,19 @@ class XvmServicesToken(object):
 
     def update(self, data={}, errStr=None):
         trace('config.token._update')
-        log(data)
+        #log(data)
+        
         if data is None:
-            return
+            data = {}
+
         status = data.get('status', None)
         if not status:
             self.status = None
             self.errStr = errStr
+            self.online = False
             return
+
+        self.online = True
         if status == 'active':
             if 'token' not in data:
                 data['token'] = self.token

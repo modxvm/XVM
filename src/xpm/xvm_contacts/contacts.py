@@ -32,7 +32,6 @@ from xvm_main.python.constants import *
 from xvm_main.python.loadurl import loadUrl
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-import xvm_main.python.token as token
 import xvm_main.python.utils as utils
 from xvm_main.python.xvm import l10n
 
@@ -58,12 +57,10 @@ class _Contacts:
             if self.contacts_disabled:
                 return
 
-            if token.isOnline:
-                t = token.getToken()
+            if config.token.online:
+                t = config.token.token
                 if t is None:
                     raise Exception('[TOKEN_NOT_INITIALIZED] {0}'.format(l10n('Network services unavailable')))
-                if t == '':
-                    raise Exception('[NO_TOKEN] {0}'.format(l10n('Network services unavailable')))
 
                 if self.cached_data is None or self.cached_token != t:
                     self.cached_token = t
