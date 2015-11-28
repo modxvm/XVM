@@ -40,7 +40,8 @@
     "saveLastServer": true,
     "autologin": true,
     "confirmOldReplays": true,
-    "pingServers": ${"def.pingServers"}
+    "pingServers": ${"def.pingServers"},
+    "onlineServers": ${"def.onlineServers"}
   },
   "hangar": {
     "enableGoldLocker": true,

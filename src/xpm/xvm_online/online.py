@@ -6,6 +6,9 @@
 def online():
     _get_online.get_online()
 
+#############################
+# imports
+
 import traceback
 import threading
 import simplejson
@@ -19,9 +22,10 @@ from xfw import *
 from xfw.constants import URLS
 from xvm_main.python.logger import *
 from xvm_main.python.constants import XVM
-from xvm_main.python.loadurl import loadUrl
 from xvm_main.python.xvm import l10n_macros_replace
 import xvm_main.python.config as config
+import xvm_main.python.xvmapi as xvmapi
+
 
 #############################
 
@@ -81,9 +85,8 @@ class _Get_online(object):
             res = {}
             for host in self.hosts:
                 res[host] = l10n_macros_replace(config.get('hangar/onlineServers/errorString', '--k') if g_hangarSpace.inited else config.get('login/onlineServers/errorString', '--k'))
-            req = "onlineUsersCount/0"
-            server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
-            (response, delay, error) = loadUrl(server, req, showLog=False, api=XVM.API_VERSION_OLD)
+
+            data = xvmapi.getOnlineUsersCount()
             # typical response:
             #{
             #    "eu":  [{"players_online":4297,"server":"EU2"},{"players_online":8331,"server":"EU1"}],
@@ -92,14 +95,16 @@ class _Get_online(object):
             #    "kr":  [{"players_online":868,"server":"KR"}],
             #    "ru":  [{"players_online":14845,"server":"RU8"},{"players_online":8597,"server":"RU2"},{"players_online":9847,"server":"RU1"},{"players_online":3422,"server":"RU3"},{"players_online":11508,"server":"RU6"},{"players_online":6795,"server":"RU5"},{"players_online":3354,"server":"RU4"}]
             #}
-            region = GAME_REGION.lower()
-            if 'CT' in URLS.WG_API_SERVERS and region == 'ct': # CT is uncommented in xfw.constants to check on test server
-                region = 'ru'
-            response_data = None if response is None else simplejson.loads(response).get(region, [])
+
+            if data is not None:
+                region = GAME_REGION.lower()
+                if 'CT' in URLS.WG_API_SERVERS and region == 'ct': # CT is uncommented in xfw.constants to check on test server
+                    region = 'ru'
+                data = data.get(region, [])
 
             best_online = 0
-            if not error and type(response_data) is list:
-                for host in response_data:
+            if data is not None and type(data) is list:
+                for host in data:
                     if host['server'].find('NA ') == 0: # API returns "NA EAST" instead of "US East" => can't determine current server
                         host['server'] = 'US ' + host['server'][3:].capitalize()
                     res[str(host['server'])] = host['players_online']
