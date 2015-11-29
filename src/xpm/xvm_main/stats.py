@@ -52,6 +52,7 @@ import filecache
 from logger import *
 from loadurl import loadUrl
 import topclans
+import userprefs
 import utils
 import vehinfo
 import vehinfo_xte
@@ -391,9 +392,9 @@ class _Stat(object):
             return None
 
         if isReplay():
-            data = xvmapi.getStats(request)
-        else:
             data = xvmapi.getStatsReplay(request)
+        else:
+            data = xvmapi.getStats(request)
 
         if data is None:
             err('Stat request data is None')
@@ -407,8 +408,6 @@ class _Stat(object):
 
 
     def _load_data_offline(self, playerId):
-        if isReplay():
-            log('XVM network services inactive (id=%s)' % playerId)
         players = []
         for (vehId, pl) in self.players.iteritems():
             players.append(self._get_battle_stub(pl))
