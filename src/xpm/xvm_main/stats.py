@@ -51,6 +51,7 @@ from constants import *
 import filecache
 from logger import *
 from loadurl import loadUrl
+import topclans
 import utils
 import vehinfo
 import vehinfo_xte
@@ -599,7 +600,7 @@ class _Player(object):
         self.playerId = vData['accountDBID']
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
-        self.clanInfo = token.getClanInfo(self.clan)
+        self.clanInfo = topclans.getClanInfo(self.clan)
         self.vId = None
         if 'typeCompDescr' in vData:
             self.vId = vData['typeCompDescr']
