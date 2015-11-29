@@ -1,3 +1,7 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 import com.xvm.*;
 import flash.geom.*;
 import net.wargaming.ingame.*;

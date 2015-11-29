@@ -21,6 +21,14 @@ import xvm_main.python.config as config
 
 
 #####################################################################
+# constants
+
+# for AS2
+class _XVM_BATTLE_AS2RESPOND(object):
+    SNIPER_CAMERA = "xvm_battle.sniper"
+
+
+#####################################################################
 # handlers
 
 @overrideMethod(ArcadeCamera, 'create')
@@ -81,6 +89,30 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
             dcfg['zoomExposure'] = [ max(0, 0.7 - math.log(i, 2) * 0.1) for i in value]
 
     base(self, onChangeControlMode)
+
+
+@registerEvent(SniperCamera, 'enable')
+def _SniperCamera_enable(self, targetPos, saveZoom):
+    _sendSniperCameraFlash(True, self._SniperCamera__zoom)
+
+
+@registerEvent(SniperCamera, 'disable')
+def _SniperCamera_disable(self):
+    _sendSniperCameraFlash(False, self._SniperCamera__zoom)
+
+
+@registerEvent(SniperCamera, '_SniperCamera__applyZoom')
+def _SniperCamera__applyZoom(self, zoomFactor):
+    _sendSniperCameraFlash(True, zoomFactor)
+
+
+def _sendSniperCameraFlash(enable, zoom):
+    if config.get('battle/camera/sniper/zoomIndicator/enabled'):
+        battle = getBattleApp()
+        if battle:
+            movie = battle.movie
+            if movie is not None:
+                movie.invoke((_XVM_BATTLE_AS2RESPOND.SNIPER_CAMERA, enable, zoom))
 
 
 @overrideMethod(StrategicCamera, 'create')

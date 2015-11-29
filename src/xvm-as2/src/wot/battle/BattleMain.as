@@ -16,6 +16,8 @@ class wot.battle.BattleMain
 {
     static var instance: BattleMain;
     var sixthSenseIndicator:SixthSenseIndicator;
+    var clock:Clock;
+    var zoomIndicator:ZoomIndicator;
 
     static function main()
     {
@@ -39,7 +41,7 @@ class wot.battle.BattleMain
         GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
 
         ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
-        ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
+        ExternalInterface.addCallback(Cmd.RESPOND_SNIPER_CAMERA, instance, instance.onSniperCamera);
 
         // TODO: dirty hack
         _root.consumablesPanel.addOptionalDeviceSlot_xvm = _root.consumablesPanel.addOptionalDeviceSlot;
@@ -64,8 +66,14 @@ class wot.battle.BattleMain
         if (Config.config.playersPanel.removePanelsModeSwitcher)
             _root.switcher_mc._visible = false;
 
-        // Show Clocks
-        ShowClock(Config.config.battle.clockFormat);
+        // Clock
+        var clockFormat:String = Config.config.battle.clockFormat;
+        if (clockFormat && clockFormat != "")
+            instance.clock = new Clock();
+
+        // Zoom Indicator
+        if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
+            instance.zoomIndicator = new ZoomIndicator();
 
         // Setup Visual Elements
         Elements.SetupElements();
@@ -142,28 +150,6 @@ class wot.battle.BattleMain
 
     // PRIVATE
 
-    private static function ShowClock(format)
-    {
-        if (!format || format == "")
-            return;
-        var debugPanel = _root.debugPanel;
-        var lag = debugPanel.lag;
-        var fps = debugPanel.fps;
-        var clock: TextField = debugPanel.createTextField("clock", debugPanel.getNextHighestDepth(),
-            lag._x + lag._width, fps._y, 300, fps._height);
-        clock.selectable = false;
-        clock.antiAliasType = "advanced";
-        clock.html = true;
-        var tf: TextFormat = fps.getNewTextFormat();
-        clock.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_clock",
-            tf.color, tf.font, tf.size, "left", tf.bold, tf.italic));
-        clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5)];
-
-        _global.setInterval(function() {
-            clock.htmlText = Utils.fixImgTag("<span class='xvm_clock'>" + Strings.FormatDate(format, new Date()) + "</span>");
-        }, 1000);
-    }
-
     private static function onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
         team:Number, squad:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
     {
@@ -231,7 +217,7 @@ class wot.battle.BattleMain
     private function onKeyEvent(key:Number, isDown:Boolean):Void
     {
         //Logger.add("onKeyEvent: " + key + " " + isDown);
-        var cfg = Config.config.hotkeys
+        var cfg = Config.config.hotkeys;
         if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ZOOM, isDown: isDown } );
         if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
@@ -240,21 +226,9 @@ class wot.battle.BattleMain
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
     }
 
-    private var debugTextField:TextField = null;
-    function onDebugText(text)
+    private function onSniperCamera(enable:Boolean, zoom:Number):Void
     {
-        if (debugTextField == null)
-        {
-            debugTextField = _root.createTextField("debugTextField", _root.getNextHighestDepth(), 0, 0, 1024, 768);
-            debugTextField.html = true;
-            debugTextField.selectable = false;
-            debugTextField.multiline = true;
-            debugTextField.antiAliasType = "advanced";
-            debugTextField.styleSheet = Utils.createStyleSheet(Utils.createCSS("debugText",
-                0xDDDDDD, "$FieldFont", 12, "left", false, false));
-            var sh:flash.filters.DropShadowFilter = new flash.filters.DropShadowFilter(0, 0, 0, 100, 5, 5, 5);
-            debugTextField.filters = [ sh ];
-        }
-        debugTextField.htmlText = "<span class='debugText'>" + text + "</span>";
+        if (zoomIndicator)
+            zoomIndicator.update(enable, zoom);
     }
 }

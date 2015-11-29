@@ -66,6 +66,11 @@ class com.xvm.Macros
         _instance._RegisterGlobalMacrosData(battleTier, battleType);
     }
 
+    public static function RegisterZoomIndicatorData(zoom:Number)
+    {
+        _instance._RegisterZoomIndicatorData(zoom);
+    }
+
     public static function RegisterPlayerData(pname:String, data:Object, team:Number)
     {
         _instance._RegisterPlayerData(pname, data, team);
@@ -325,6 +330,7 @@ class com.xvm.Macros
             {
                 case "squad":
                 case "squad-num":
+                case "zoom":
                     isStaticMacro = false;
                     break;
             }
@@ -719,6 +725,12 @@ class com.xvm.Macros
         m_globals["my-level"] = vdata.level;
         // {{my-rlevel}}
         m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+    }
+
+    private function _RegisterZoomIndicatorData(zoom:Number)
+    {
+        // {{zoom}}
+        m_globals["zoom"] = zoom;
     }
 
     /**

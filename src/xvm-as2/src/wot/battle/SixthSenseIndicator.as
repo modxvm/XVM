@@ -1,5 +1,6 @@
 ﻿/**
- * @author sirmax
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.xvm.*;
 import com.greensock.*;
@@ -9,9 +10,9 @@ import net.wargaming.managers.*;
 
 class wot.battle.SixthSenseIndicator
 {
-    var sixthSenseIndicatorXvm:MovieClip;
-    var icon:UILoaderAlt;
-    var orig_gotoAndPlay:Function;
+    private var sixthSenseIndicatorXvm:MovieClip;
+    private var icon:UILoaderAlt;
+    private var orig_gotoAndPlay:Function;
 
     public function SixthSenseIndicator()
     {

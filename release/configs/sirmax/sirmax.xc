@@ -117,7 +117,23 @@
       },
       "sniper": {
         "zooms": [2, 4, 8, 16],
-        "dynamicCameraEnabled": false
+        "dynamicCameraEnabled": false,
+        "zoomIndicator": {
+          //"x": -100,
+          //"y": 0,
+          //"width": 100,
+          //"height": 40,
+          //"alpha": 100,
+          //"color": "0xFDF4CE",
+          //"align": "left",
+          //"valign": "center",
+          //"bgColor": null,
+          //"borderColor": "0xFFFF00",
+          //"shadow": { "distance": 0, "angle": 45, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 4 },
+          //"format": "<font face='$FieldFont' size='20'>frags:{{my-frags}} x{{zoom}}</font>",
+          "enabled": true,
+          "__stub__": null
+        }
       }
     }
   },

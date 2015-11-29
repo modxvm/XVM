@@ -1,12 +1,8 @@
 /**
- * ...
- * @author sirmax2
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.Logger;
-import com.xvm.MathEvaluator;
-import com.xvm.Strings;
+import com.xvm.*;
 
 class wot.battle.Elements
 {

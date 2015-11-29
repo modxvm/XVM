@@ -60,6 +60,47 @@
       // Список значений кратности для снайперского режима
       // Можно использовать большее количество значений: [ 2, 4, 8, 16 ]
       "zooms": [2, 4, 8],
+      // Zoom Indicator
+      // Global macros allowed in all fields
+      // Индикатор масштаба
+      // Можно использовать глобальные макросы во всех полях
+      "zoomIndicator": {
+        // Enable/disable
+        // Включить/выключить
+        "enabled": false,
+        // Field position relative to screen center
+        // Положение поля относительно центра экрана
+        "x": -220,
+        "y": 0,
+        // Field size
+        // Размер поля
+        "width": 100,
+        "height": 40,
+        // Opacity in percents (0..100)
+        // Прозрачность
+        "alpha": 100,
+        // Color
+        // Цвет
+        "color": "0xFDF4CE",
+        // Horizonatal text alignment (left, center, right)
+        // Горизонтальное выравнивание текста (left, center, right)
+        "align": "right",
+        // Vertical text alignment (top, center, bottom)
+        // Вертикальное выравнивание текста (top, center, bottom)
+        "valign": "center",
+        // Background color
+        // Цвет фона
+        "bgColor": null,
+        // Border color 
+        // Цвет рамки
+        "borderColor": null,
+        // Shadow settings
+        // Настройки тени
+        "shadow": { "distance": 0, "angle": 0, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 4 },
+        // Text format
+        // Формат текста
+        "format": "<font face='$FieldFont' size='16'>x{{zoom}}</font>"
+      },
       // Enable/disable dynamic camera
       // Включить/выключить динамическую камеру
       "dynamicCameraEnabled": true

@@ -1,3 +1,7 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 import flash.filters.*;
 import com.xvm.*;
 import com.xvm.DataTypes.*;

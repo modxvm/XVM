@@ -1,4 +1,7 @@
-﻿class wot.battle.BattleContextMenuHandler extends net.wargaming.ingame.BattleContextMenuHandler
+﻿/**
+ * XVM
+ */
+class wot.battle.BattleContextMenuHandler extends net.wargaming.ingame.BattleContextMenuHandler
 {
 }
 /*
