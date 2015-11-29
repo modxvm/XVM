@@ -359,39 +359,14 @@ class _Stat(object):
             return
 
         try:
+            playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
             if config.networkServicesSettings.statBattle:
-                token = config.token.token
-                if token is None:
-                    playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
-                    err('No valid token for XVM network services (id=%s)' % playerId)
-                    return
-
-                cmd = 'rplstat' if isReplay() else 'stat'
-                updateRequest = '%s/%s/%s' % (cmd, tdata['token'].encode('ascii'), ','.join(requestList))
-
-                if XVM.SERVERS is None or len(XVM.SERVERS) <= 0:
-                    err('Cannot read data: no suitable server was found.')
-                    return
-
-                server = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
-                (response, duration, errStr) = loadUrl(server, updateRequest, api=XVM.API_VERSION_OLD)
-
-                if not response:
-                    # err('Empty response or parsing error')
-                    return
-
-                data = simplejson.loads(response)
-                if 'players' not in data:
-                    err('Stat request failed: ' + str(response))
-                    return
-
+                data = self._load_data_online(playerId, ','.join(requestList))
             else:
-                if isReplay():
-                    log('XVM network services inactive (id=%s)' % playerVehicleID)
-                players = []
-                for (vehId, pl) in self.players.iteritems():
-                    players.append(self._get_battle_stub(pl))
-                data = {'players': players}
+                data = self._load_data_offline(playerId)
+
+            if data is None:
+                return
 
             for stat in data['players']:
                 # debug(simplejson.dumps(stat))
@@ -408,6 +383,37 @@ class _Stat(object):
             err(traceback.format_exc())
 
 
+    def _load_data_online(self, playerId, request):
+        token = config.token.token
+        if token is None:
+            err('No valid token for XVM network services (id=%s)' % playerId)
+            return None
+
+        if isReplay():
+            data = xvmapi.getStats(request)
+        else:
+            data = xvmapi.getStatsReplay(request)
+
+        if data is None:
+            err('Stat request data is None')
+            return None
+
+        if 'players' not in data:
+            err('Malformed stat result: {}'.format(data))
+            return None
+
+        return data
+
+
+    def _load_data_offline(self, playerId):
+        if isReplay():
+            log('XVM network services inactive (id=%s)' % playerId)
+        players = []
+        for (vehId, pl) in self.players.iteritems():
+            players.append(self._get_battle_stub(pl))
+        return {'players': players}
+
+        
     def _fix(self, stat, orig_name=None):
         self._fix_common(stat)
 
