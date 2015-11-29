@@ -316,6 +316,7 @@ class _Stat(object):
                         data = xvmapi.getStatsByNick(reg, value)
 
                     if data is not None:
+                        data = data[0]
                         self._fix_user(data, None if isId else orig_value)
                         if 'nm' in data and '_id' in data:
                             self.cacheUser[reg + "/" + data['nm']] = data
@@ -434,7 +435,7 @@ class _Stat(object):
                         stat['v']['id'] = pl.vId
                     break
 
-        self._fix_common2(stat, False)
+        self._fix_common2(stat, orig_name, False)
         self._addContactData(stat)
         # log(simplejson.dumps(stat))
         return stat
@@ -442,7 +443,7 @@ class _Stat(object):
 
     def _fix_user(self, stat, orig_name=None):
         self._fix_common(stat)
-        self._fix_common2(stat, True)
+        self._fix_common2(stat, orig_name, True)
         self._addContactData(stat)
         # log(simplejson.dumps(stat))
         return stat
@@ -461,7 +462,7 @@ class _Stat(object):
             stat['wgr'] = None
 
 
-    def _fix_common2(self, stat, multiVehicles):
+    def _fix_common2(self, stat, orig_name, multiVehicles):
         if orig_name is not None:
             stat['name'] = orig_name
         if 'b' in stat and 'w' in stat and stat['b'] > 0:
