@@ -51,7 +51,6 @@ from constants import *
 import filecache
 from logger import *
 from loadurl import loadUrl
-import token
 import utils
 import vehinfo
 import vehinfo_xte
@@ -364,8 +363,9 @@ class _Stat(object):
             return
 
         try:
-            tdata = token.getXvmActiveTokenData()
             if config.networkServicesSettings.statBattle:
+                token = config.token.token
+                if token is None:
                 if tdata is None or 'token' not in tdata:
                     err('No valid token for XVM network services (id=%s)' % playerVehicleID)
                     return

@@ -58,12 +58,12 @@ class _Contacts:
                 return
 
             if config.token.online:
-                t = config.token.token
-                if t is None:
+                token = config.token.token
+                if token is None:
                     raise Exception('[TOKEN_NOT_INITIALIZED] {0}'.format(l10n('Network services unavailable')))
 
-                if self.cached_data is None or self.cached_token != t:
-                    self.cached_token = t
+                if self.cached_data is None or self.cached_token != token:
+                    self.cached_token = token
                     json_data = self._doRequest('getComments')
                     data = {'ver':_CONTACTS_DATA_VERSION,'players':{}} if json_data is None else simplejson.loads(json_data)
                     if data['ver'] != _CONTACTS_DATA_VERSION:

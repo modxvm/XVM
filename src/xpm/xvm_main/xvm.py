@@ -26,7 +26,6 @@ import stats
 import svcmsg
 import vehinfo
 import vehstate
-import token
 import utils
 import userprefs
 import dossier
@@ -121,7 +120,7 @@ class Xvm(object):
         trace('onStateLogin')
         if self.currentPlayerId is not None:
             self.currentPlayerId = None
-            token.clear()
+            config.token = config.XvmServicesToken()
 
 
     # LOBBY
@@ -573,8 +572,8 @@ class Xvm(object):
     def initializeXvmServices(self):
         self.xvmServicesInitialized = True
 
-        token.restore()
-        token.updateTokenFromApi()
+        config.token = config.XvmServicesToken.restore()
+        config.token.updateTokenFromApi()
 
         if config.networkServicesSettings.servicesActive:
             data = xvmapi.getVersion()

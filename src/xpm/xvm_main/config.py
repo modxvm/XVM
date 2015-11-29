@@ -21,6 +21,7 @@ import default_config
 import configwatchdog
 import userprefs
 import utils
+import xvmapi
 
 _config = None
 config_str = None
@@ -283,6 +284,16 @@ class XvmServicesToken(object):
         if self.playerId:
             userprefs.set('tokens.{0}'.format(self.playerId), self.__dict__)
             userprefs.set('tokens.lastPlayerId', self.playerId)
+
+
+    def updateTokenFromApi(self):
+        #trace('config.token.updateTokenFromApi')
+        try:
+            (data, errStr) = xvmapi.getToken()
+            #log(utils.hide_guid(data))
+            self.update(data, errStr)
+        except Exception, ex:
+            err(traceback.format_exc())
 
 
     def update(self, data={}, errStr=None):
