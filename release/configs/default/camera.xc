@@ -79,9 +79,6 @@
         // Opacity in percents (0..100)
         // Прозрачность
         "alpha": 100,
-        // Color
-        // Цвет
-        "color": "0xFDF4CE",
         // Horizonatal text alignment (left, center, right)
         // Горизонтальное выравнивание текста (left, center, right)
         "align": "right",
@@ -99,7 +96,7 @@
         "shadow": { "distance": 0, "angle": 0, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 4 },
         // Text format
         // Формат текста
-        "format": "<font face='$FieldFont' size='16'>x{{zoom}}</font>"
+        "format": "<font face='$FieldFont' color='#FDF4CE' size='16'>x{{zoom}}</font>"
       },
       // Enable/disable dynamic camera
       // Включить/выключить динамическую камеру

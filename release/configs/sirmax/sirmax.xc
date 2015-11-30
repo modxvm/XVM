@@ -124,7 +124,6 @@
           //"width": 100,
           //"height": 40,
           //"alpha": 100,
-          //"color": "0xFDF4CE",
           //"align": "left",
           //"valign": "center",
           //"bgColor": null,
