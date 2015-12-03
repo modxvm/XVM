@@ -23,7 +23,6 @@ class wot.battle.ZoomIndicator extends XvmComponent
         {
             cfg = Config.config.battle.camera.sniper.zoomIndicator;
             zoomIndicator = createZoomIndicatorTextField();
-            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, onBattleStateChanged);
             GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
             update(false, 0);
         }
