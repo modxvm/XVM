@@ -9,6 +9,7 @@ import Math
 
 import BigWorld
 from Avatar import PlayerAvatar
+from AvatarInputHandler.aims import Aim
 from AvatarInputHandler.control_modes import ArcadeControlMode, SniperControlMode
 from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera, MinMax
 from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
@@ -18,14 +19,6 @@ from xfw import *
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-
-
-#####################################################################
-# constants
-
-# for AS2
-class _XVM_BATTLE_AS2RESPOND(object):
-    SNIPER_CAMERA = "xvm_battle.sniper"
 
 
 #####################################################################
@@ -82,6 +75,8 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
 
         if not c['dynamicCameraEnabled']:
             _disableDynamicCamera(dcfg)
+        else:
+            dcfg['aimMarkerDistance'] = 10.0
 
         value = c['zooms']
         if value is not None:
@@ -112,7 +107,24 @@ def _sendSniperCameraFlash(enable, zoom):
         if battle:
             movie = battle.movie
             if movie is not None:
-                movie.invoke((_XVM_BATTLE_AS2RESPOND.SNIPER_CAMERA, enable, zoom))
+                movie.xvm_onSniperCamera(enable, zoom)
+
+
+_prevOffsetX = None
+_prevOffsetY = None
+
+@registerEvent(Aim, 'onOffsetUpdate')
+def _Aim_onOffsetUpdate(self, screen, forced = False):
+    global _prevOffsetX
+    global _prevOffsetY
+    if forced or _prevOffsetX != self._posX or _prevOffsetY != self._posY:
+        _prevOffsetX = self._posX
+        _prevOffsetY = self._posY
+        battle = getBattleApp()
+        if battle:
+            movie = battle.movie
+            if movie is not None:
+                movie.xvm_onAimOffsetUpdate(_prevOffsetX, _prevOffsetY)
 
 
 @overrideMethod(StrategicCamera, 'create')

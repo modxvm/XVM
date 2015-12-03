@@ -7,10 +7,15 @@ import com.xvm.DataTypes.*;
 import com.xvm.events.*;
 import flash.filters.*;
 
-class wot.battle.ZoomIndicator
+class wot.battle.ZoomIndicator extends XvmComponent
 {
     private var cfg:Object;
     private var zoomIndicator:TextField;
+
+    private var x:Number;
+    private var y:Number;
+    private var offsetX:Number;
+    private var offsetY:Number;
 
     public function ZoomIndicator()
     {
@@ -40,6 +45,37 @@ class wot.battle.ZoomIndicator
         {
             zoomIndicator._visible = false;
         }
+    }
+
+    public function onOffsetUpdate(offsetX:Number, offsetY: Number):Void
+    {
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        invalidate();
+    }
+
+    public function draw():Void
+    {
+        var value;
+        var needAlign:Boolean = false;
+        var textField:TextField = zoomIndicator;
+
+        value = offsetX + x;
+        if (textField._x != value)
+        {
+            textField._x = value;
+            needAlign = true;
+        }
+
+        value = offsetY + y;
+        if (textField._y != value)
+        {
+            textField._y = value;
+            needAlign = true;
+        }
+
+        if (needAlign)
+            alignField(textField);
     }
 
     public function onBattleStateChanged()
@@ -120,19 +156,9 @@ class wot.battle.ZoomIndicator
         var value;
         var needAlign:Boolean = false;
 
-        value = BattleState.screenSize.width / 2 + Macros.FormatGlobalNumberValue(cfg.x);
-        if (textField._x != value)
-        {
-            textField._x = value;
-            needAlign = true;
-        }
-
-        value = BattleState.screenSize.height / 2 + Macros.FormatGlobalNumberValue(cfg.y);
-        if (textField._y != value)
-        {
-            textField._y = value;
-            needAlign = true;
-        }
+        x = Macros.FormatGlobalNumberValue(cfg.x);
+        y = Macros.FormatGlobalNumberValue(cfg.y);
+        invalidate();
 
         if (cfg.width != null)
         {
