@@ -14,10 +14,10 @@ import wot.battle.*;
 
 class wot.battle.BattleMain
 {
-    static var instance: BattleMain;
-    var sixthSenseIndicator:SixthSenseIndicator;
-    var clock:Clock;
-    var zoomIndicator:ZoomIndicator;
+    private static var _instance: BattleMain;
+    private var _sixthSenseIndicator:SixthSenseIndicator;
+    private var _clock:Clock;
+    private var _zoomIndicator:ZoomIndicator;
 
     static function main()
     {
@@ -31,35 +31,39 @@ class wot.battle.BattleMain
         OverwriteManager.init(OverwriteManager.AUTO);
         TweenPlugin.activate([TintPlugin]);
 
-        ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
-        ExternalInterface.addCallback(Cmd.RESPOND_BATTLE_STATE, instance, BattleMain.onBattleStateChanged);
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, BattleMainConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
-
-        instance = new BattleMain();
-        GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
-        GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
-
-        ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
-        ExternalInterface.addCallback(Cmd.RESPOND_SNIPER_CAMERA, instance, instance.onSniperCamera);
-
-        // TODO: dirty hack
-        _root.consumablesPanel.addOptionalDeviceSlot_xvm = _root.consumablesPanel.addOptionalDeviceSlot;
-        _root.consumablesPanel.addOptionalDeviceSlot = instance.addOptionalDeviceSlot;
-        _root.consumablesPanel.setCoolDownTime_xvm = _root.consumablesPanel.setCoolDownTime;
-        _root.consumablesPanel.setCoolDownTime = instance.setCoolDownTime;
-        _root.damagePanel.as_updateSpeed_xvm = _root.damagePanel.as_updateSpeed;
-        _root.damagePanel.as_updateSpeed = instance.damagePanel_updateSpeed;
-        _root.damagePanel.as_updateDeviceState_xvm = _root.damagePanel.as_updateDeviceState;
-        _root.damagePanel.as_updateDeviceState = instance.damagePanel_updateDeviceState;
+        _instance = new BattleMain();
     }
 
-    private static function BattleMainConfigLoaded()
+    public function BattleMain()
+    {
+        GameDelegate.addCallBack("Stage.Update", this, "onUpdateStage");
+        GameDelegate.addCallBack("battle.showPostmortemTips", this, "showPostmortemTips");
+
+        _root.xvm_onUpdateConfig = this.xvm_onUpdateConfig;
+        _root.xvm_onKeyEvent = this.xvm_onKeyEvent;
+        _root.xvm_onSniperCamera = this.xvm_onSniperCamera;
+        _root.xvm_onAimOffsetUpdate = this.xvm_onAimOffsetUpdate;
+        _root.xvm_onBattleStateChanged = this.xvm_onBattleStateChanged;
+
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, BattleMainConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
+
+        _root.consumablesPanel.addOptionalDeviceSlot_xvm = _root.consumablesPanel.addOptionalDeviceSlot;
+        _root.consumablesPanel.addOptionalDeviceSlot = this.addOptionalDeviceSlot;
+        _root.consumablesPanel.setCoolDownTime_xvm = _root.consumablesPanel.setCoolDownTime;
+        _root.consumablesPanel.setCoolDownTime = this.setCoolDownTime;
+        _root.damagePanel.as_updateSpeed_xvm = _root.damagePanel.as_updateSpeed;
+        _root.damagePanel.as_updateSpeed = this.damagePanel_updateSpeed;
+        _root.damagePanel.as_updateDeviceState_xvm = _root.damagePanel.as_updateDeviceState;
+        _root.damagePanel.as_updateDeviceState = this.damagePanel_updateDeviceState;
+    }
+
+    private function BattleMainConfigLoaded()
     {
         //Logger.add("BattleMainConfigLoaded()");
 
         // Initialize Sixth Sense Indicator
-        instance.sixthSenseIndicator = new SixthSenseIndicator();
+        this._sixthSenseIndicator = new SixthSenseIndicator();
 
         // TODO: remove (replace by setup elements)
         // Panels Mode Switcher
@@ -69,11 +73,11 @@ class wot.battle.BattleMain
         // Clock
         var clockFormat:String = Config.config.battle.clockFormat;
         if (clockFormat && clockFormat != "")
-            instance.clock = new Clock();
+            this._clock = new Clock();
 
         // Zoom Indicator
         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
-            instance.zoomIndicator = new ZoomIndicator();
+            this._zoomIndicator = new ZoomIndicator();
 
         // Setup Visual Elements
         Elements.SetupElements();
@@ -83,74 +87,39 @@ class wot.battle.BattleMain
         ExpertPanel.modify();
     }
 
-    function showPostmortemTips(movingUpTime, showTime, movingDownTime)
-    {
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_SELF_DEAD } );
 
-        //Logger.add("Battle::showPostmortemTips");
-        if (Config.config.battle.showPostmortemTips)
-            _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
+    // Python calls (context: this => _root)
+
+    public function xvm_onUpdateConfig():Void
+    {
+        Config.instance.GetConfigCallback.apply(Config.instance, arguments);
     }
 
-    function onUpdateStage(width, height, scale)
+    public function xvm_onKeyEvent(key:Number, isDown:Boolean):Void
     {
-        _root.onUpdateStage(width, height, scale);
-        Elements.width = width;
-        Elements.height = height;
-        Elements.scale = scale;
-        Elements.SetupElements();
-
-        fixMinimapSize();
-
-        BattleState.setScreenSize(width, height, scale);
-        //Logger.add("update stage: " + width + "," + height + "," + scale);
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height, scale: scale });
+        //Logger.add("onKeyEvent: " + key + " " + isDown);
+        var cfg = Config.config.hotkeys;
+        if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ZOOM, isDown: isDown } );
+        if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ALT_MODE, isDown: isDown } );
+        if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
     }
 
-    function addOptionalDeviceSlot(idx, timeRemaining, deviceIconPath, tooltipText)
+    public function xvm_onSniperCamera(enable:Boolean, zoom:Number):Void
     {
-        //Logger.add("addOptionalDeviceSlot: " + deviceIconPath);
-        _root.consumablesPanel.addOptionalDeviceSlot_xvm.apply(_root.consumablesPanel, arguments);
-        if (deviceIconPath.indexOf("/stereoscope.") > 0)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
+        if (BattleMain._instance._zoomIndicator)
+            BattleMain._instance._zoomIndicator.update(enable, zoom);
     }
 
-    function setCoolDownTime(idx, timeRemaining)
+    public function xvm_onAimOffsetUpdate(offsetX:Number, offsetY:Number):Void
     {
-        //Logger.add("setCoolDownTime: " + idx);
-        _root.consumablesPanel.setCoolDownTime_xvm.apply(_root.consumablesPanel, arguments);
-        var renderer = _root.consumablesPanel.getRendererBySlotIdx(idx);
-        if (renderer.iconPath.indexOf("/stereoscope.") > 0)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
+        if (BattleMain._instance._zoomIndicator)
+            BattleMain._instance._zoomIndicator.onOffsetUpdate(offsetX, offsetY);
     }
 
-    private var isMoving:Boolean = true;
-    function damagePanel_updateSpeed(speed)
-    {
-        //Logger.add("updateSpeed: " + speed);
-    	_root.damagePanel.as_updateSpeed_xvm.apply(_root.damagePanel, arguments);
-
-        var sp:Number = isMoving ? 1 : 0;
-        if ((speed == 0 && !isMoving) || (speed != 0 && isMoving))
-            return;
-        isMoving = speed != 0;
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MOVING_STATE_CHANGED, value: isMoving } );
-    }
-
-    function damagePanel_updateDeviceState(moduleName:String, state:String)
-    {
-        //Logger.add("updateDeviceState: " + moduleName + ", " + state);
-    	_root.damagePanel.as_updateDeviceState_xvm.apply(_root.damagePanel, arguments);
-
-        if (state == "destroyed")
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MODULE_DESTROYED, value: moduleName } );
-        else if (state == "repaired" || state == "normal")
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MODULE_REPAIRED, value: moduleName } );
-    }
-
-    // PRIVATE
-
-    private static function onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
+    public function xvm_onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
         team:Number, squad:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
     {
         try
@@ -199,6 +168,75 @@ class wot.battle.BattleMain
         }
     }
 
+    // callbacks
+
+    private function onUpdateStage(width, height, scale)
+    {
+        _root.onUpdateStage(width, height, scale);
+        Elements.width = width;
+        Elements.height = height;
+        Elements.scale = scale;
+        Elements.SetupElements();
+
+        fixMinimapSize();
+
+        BattleState.setScreenSize(width, height, scale);
+        //Logger.add("update stage: " + width + "," + height + "," + scale);
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height, scale: scale });
+    }
+
+    private function showPostmortemTips(movingUpTime, showTime, movingDownTime)
+    {
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_SELF_DEAD } );
+
+        //Logger.add("Battle::showPostmortemTips");
+        if (Config.config.battle.showPostmortemTips)
+            _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
+    }
+
+    // overrides
+
+    private function addOptionalDeviceSlot(idx, timeRemaining, deviceIconPath, tooltipText)
+    {
+        //Logger.add("addOptionalDeviceSlot: " + deviceIconPath);
+        _root.consumablesPanel.addOptionalDeviceSlot_xvm.apply(_root.consumablesPanel, arguments);
+        if (deviceIconPath.indexOf("/stereoscope.") > 0)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
+    }
+
+    private function setCoolDownTime(idx, timeRemaining)
+    {
+        //Logger.add("setCoolDownTime: " + idx);
+        _root.consumablesPanel.setCoolDownTime_xvm.apply(_root.consumablesPanel, arguments);
+        var renderer = _root.consumablesPanel.getRendererBySlotIdx(idx);
+        if (renderer.iconPath.indexOf("/stereoscope.") > 0)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
+    }
+
+    private var isMoving:Boolean = true;
+    private function damagePanel_updateSpeed(speed)
+    {
+        //Logger.add("updateSpeed: " + speed);
+    	_root.damagePanel.as_updateSpeed_xvm.apply(_root.damagePanel, arguments);
+
+        var sp:Number = isMoving ? 1 : 0;
+        if ((speed == 0 && !isMoving) || (speed != 0 && isMoving))
+            return;
+        isMoving = speed != 0;
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MOVING_STATE_CHANGED, value: isMoving } );
+    }
+
+    private function damagePanel_updateDeviceState(moduleName:String, state:String)
+    {
+        //Logger.add("updateDeviceState: " + moduleName + ", " + state);
+    	_root.damagePanel.as_updateDeviceState_xvm.apply(_root.damagePanel, arguments);
+
+        if (state == "destroyed")
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MODULE_DESTROYED, value: moduleName } );
+        else if (state == "repaired" || state == "normal")
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MODULE_REPAIRED, value: moduleName } );
+    }
+
     private function fixMinimapSize():Void
     {
         /**
@@ -212,23 +250,5 @@ class wot.battle.BattleMain
         {
             _root.minimap.sizeUp();
         }
-    }
-
-    private function onKeyEvent(key:Number, isDown:Boolean):Void
-    {
-        //Logger.add("onKeyEvent: " + key + " " + isDown);
-        var cfg = Config.config.hotkeys;
-        if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ZOOM, isDown: isDown } );
-        if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ALT_MODE, isDown: isDown } );
-        if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
-    }
-
-    private function onSniperCamera(enable:Boolean, zoom:Number):Void
-    {
-        if (zoomIndicator)
-            zoomIndicator.update(enable, zoom);
     }
 }

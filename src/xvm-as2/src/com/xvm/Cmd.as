@@ -14,11 +14,7 @@ class com.xvm.Cmd
     private static var COMMAND_PROF_METHOD_START:String = "prof_method_start";
     private static var COMMAND_PROF_METHOD_END:String = "prof_method_end";
 
-    public static var RESPOND_CONFIG:String = "xvm.config";
-    public static var RESPOND_KEY_EVENT:String = "xvm.keyevent";
     public static var RESPOND_BATTLE_STAT_DATA:String = "xvm.battle_stat_data";
-    public static var RESPOND_BATTLE_STATE:String = "xvm.battle_state";
-    public static var RESPOND_SNIPER_CAMERA:String = "xvm_battle.sniper";
 
     public static function log(str:String)
     {

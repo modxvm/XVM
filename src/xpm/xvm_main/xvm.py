@@ -291,7 +291,7 @@ class Xvm(object):
                 player = BigWorld.player()
                 arena = player.arena
                 arenaVehicle = arena.vehicles.get(player.playerVehicleID)
-                movie.invoke((AS2RESPOND.CONFIG, [
+                movie.xvm_onUpdateConfig(
                     config.config_str,
                     config.lang_str,
                     arena.extraData.get('battleLevel', 0),
@@ -301,8 +301,7 @@ class Xvm(object):
                     vehinfo.getVehicleInfoDataStr(),
                     simplejson.dumps(config.networkServicesSettings.__dict__),
                     simplejson.dumps(minimap_circles.getMinimapCirclesData()),
-                    IS_DEVELOPMENT,
-                ]))
+                    IS_DEVELOPMENT)
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 
@@ -396,7 +395,7 @@ class Xvm(object):
             return
 
         #debug('doUpdateBattle: {0} {1}'.format(vID, set(state.iteritems())))
-        movie.invoke((AS2RESPOND.BATTLE_STATE,
+        movie.xvm_onBattleStateChanged(
             targets,
             state['playerName'],
             state['clanAbbrev'],
@@ -409,7 +408,7 @@ class Xvm(object):
             state['maxHealth'],
             state['marksOnGun'],
             state['spotted'],
-        ))
+        )
 
 
     def updateMarker(self, vID, targets):
@@ -623,7 +622,7 @@ class Xvm(object):
                     if self.checkKeyEventBattle(key, isDown):
                         movie = battle.movie
                         if movie is not None:
-                            movie.invoke((AS2RESPOND.KEY_EVENT, key, isDown))
+                            movie.xvm_onKeyEvent(key, isDown)
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())
         return True

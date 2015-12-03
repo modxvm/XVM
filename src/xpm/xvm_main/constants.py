@@ -61,10 +61,7 @@ class AS2COMMAND(object):
     SAVE_SETTINGS = "save_settings"
 
 class AS2RESPOND(object):
-    BATTLE_STATE = "xvm.battle_state"
     BATTLE_STAT_DATA = "xvm.battle_stat_data"
-    CONFIG = "xvm.config"
-    KEY_EVENT = "xvm.keyevent"
 
 class TEAM(object):
     ALLY = 1
