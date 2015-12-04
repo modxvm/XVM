@@ -56,9 +56,9 @@
     // Снайперский режим
     "sniper": {
       // List of multiplicities for the sniper mode
-      // It is possible to use a greater number of values: [ 2, 4, 8, 16 ]
+      // Default: [ 2, 4, 8 ]. It's possible to use a greater number of values.
       // Список значений кратности для снайперского режима
-      // Можно использовать большее количество значений: [ 2, 4, 8, 16 ]
+      // По умолчанию: [ 2, 4, 8 ]. Можно использовать большее количество значений.
       "zooms": [2, 4, 8],
       // Zoom Indicator
       // Global macros allowed in all fields
@@ -67,11 +67,11 @@
       "zoomIndicator": {
         // Enable/disable
         // Включить/выключить
-        "enabled": false,
+        "enabled": true,
         // Field position relative to screen center
         // Положение поля относительно центра экрана
-        "x": -220,
-        "y": 0,
+        "x": 150,
+        "y": 30,
         // Field size
         // Размер поля
         "width": 100,
@@ -81,7 +81,7 @@
         "alpha": 100,
         // Horizonatal text alignment (left, center, right)
         // Горизонтальное выравнивание текста (left, center, right)
-        "align": "right",
+        "align": "left",
         // Vertical text alignment (top, center, bottom)
         // Вертикальное выравнивание текста (top, center, bottom)
         "valign": "center",
@@ -93,10 +93,10 @@
         "borderColor": null,
         // Shadow settings
         // Настройки тени
-        "shadow": { "distance": 0, "angle": 0, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 4 },
+        "shadow": { "distance": 0, "angle": 0, "color": "0x192E0E", "alpha": 100, "blur": 3, "strength": 7 },
         // Text format
         // Формат текста
-        "format": "<font face='$FieldFont' color='#FDF4CE' size='16'>x{{zoom}}</font>"
+        "format": "<font face='$TitleFont' color='#95CB29' size='16'>x{{zoom}}</font>"
       },
       // Enable/disable dynamic camera
       // Включить/выключить динамическую камеру
