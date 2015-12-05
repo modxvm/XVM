@@ -9,13 +9,6 @@ def getVehicleInfoData(vehId):
     return _vehicleInfoData.get(vehId, None)
 
 
-def getVehicleInfoDataStr():
-    global _vehicleInfoDataStr
-    if _vehicleInfoDataStr is None:
-        _init()
-    return _vehicleInfoDataStr
-
-
 def getVehicleInfoDataArray():
     global _vehicleInfoData
     if _vehicleInfoData is None:
@@ -24,12 +17,11 @@ def getVehicleInfoDataArray():
 
 
 def updateReserve(vehId, isReserved):
-    global _vehicleInfoData, _vehicleInfoDataStr
-    if _vehicleInfoDataStr is None:
+    global _vehicleInfoData
+    if _vehicleInfoData is None:
         _init()
     else:
         _vehicleInfoData[vehId]['isReserved'] = isReserved
-        _vehicleInfoDataStr = simplejson.dumps(_vehicleInfoData.values())
 
 
 # PRIVATE
@@ -52,7 +44,6 @@ import vehinfo_wn8
 
 
 _vehicleInfoData = None
-_vehicleInfoDataStr = None
 
 TURRET_TYPE_ONLY_ONE = 0
 TURRET_TYPE_TOP_GUN_POSSIBLE = 1
@@ -152,8 +143,6 @@ def _init():
     global _vehicleInfoData
     _vehicleInfoData = {x['vid']:x for x in res}
 
-    global _vehicleInfoDataStr
-    _vehicleInfoDataStr = simplejson.dumps(res)
 
 def _getRanges(turret, gun, nation, vclass):
     visionRadius = firingRadius = artyRadius = 0
@@ -184,6 +173,7 @@ def _getRanges(turret, gun, nation, vclass):
 
     return (visionRadius, firingRadius, artyRadius)
 
+
 def _getTurretType(item, nation):
     stock = item.turrets[0][0]
     top = item.turrets[0][-1]
@@ -209,6 +199,7 @@ def _getTurretType(item, nation):
 
     return TURRET_TYPE_NO_TOP_GUN
 
+
 def _getMaxGunPrice(nation, guns):
     maxPrice = 0
     for gun in guns:
@@ -216,6 +207,7 @@ def _getMaxGunPrice(nation, guns):
         if maxPrice < price:
             maxPrice = price
     return maxPrice
+
 
 def _getGunPrice(nation, gunName):
     xmlPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml'

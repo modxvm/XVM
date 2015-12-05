@@ -80,9 +80,9 @@ class Xvm(object):
     def respondConfig(self):
         trace('respondConfig')
         as_xfw_cmd(XVM_COMMAND.AS_SET_CONFIG,
-                   config.config_str,
-                   config.lang_str,
-                   vehinfo.getVehicleInfoDataStr())
+                   config.config_data,
+                   config.lang_data,
+                   vehinfo.getVehicleInfoDataArray())
 
     # System Message
 

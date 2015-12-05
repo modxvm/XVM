@@ -185,7 +185,7 @@ def uncheckReserveVehicle(self):
 def updateReserve(vehCD, isReserved):
     reserve.set_reserved(vehCD, isReserved)
     vehinfo.updateReserve(vehCD, isReserved)
-    as_xfw_cmd(XVM_COMMAND.AS_UPDATE_RESERVE, vehinfo.getVehicleInfoDataStr())
+    as_xfw_cmd(XVM_COMMAND.AS_UPDATE_RESERVE, vehinfo.getVehicleInfoDataArray())
     carousel_handle.showVehicles()
 
 

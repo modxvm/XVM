@@ -1,6 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
-__all__ = ['load', 'get', 'config_str', 'config_data', 'lang_str', 'lang_data']
+__all__ = ['load', 'get', 'config_data', 'lang_data']
 
 from copy import deepcopy
 import os
@@ -23,9 +23,7 @@ import userprefs
 import utils
 import xvmapi
 
-config_str = None
 config_data = None
-lang_str = None
 lang_data = None
 
 def get(path, default=None):
@@ -46,9 +44,7 @@ def get(path, default=None):
     return default
 
 def load(e):
-    global config_str
     global config_data
-    global lang_str
     global lang_data
 
     try:
@@ -57,9 +53,7 @@ def load(e):
 
         configwatchdog.stopConfigWatchdog()
 
-        config_str = None
         config_data = None
-        lang_str = None
         lang_data = None
 
         autoreload = get('autoReloadConfig', False)
@@ -79,9 +73,6 @@ def load(e):
             'detected' if regionDetected else 'config',
             get('language'),
             'detected' if languageDetected else 'config'))
-
-        config_str = simplejson.dumps(config_data)
-        lang_str = simplejson.dumps(lang_data)
 
     except Exception:
         err(traceback.format_exc())

@@ -11,9 +11,9 @@ package com.xvm
     {
         // PUBLIC
 
-        public static function setVehicleInfoData(vidata_str:String):void
+        public static function setVehicleInfoData(data_array:Array):void
         {
-            instance.onVehicleInfoData(vidata_str);
+            instance.onVehicleInfoData(data_array);
         }
 
         public static function get(vehId:int):VehicleData
@@ -80,13 +80,12 @@ package com.xvm
             this.vehiclesMapName = {};
         }
 
-        private function onVehicleInfoData(json_str:String):void
+        private function onVehicleInfoData(data_array:Array):void
         {
             this.clear();
             //Logger.add("onVehicleInfoData(): " + json_str);
             try
             {
-                var data_array:Object = JSONx.parse(json_str);
                 for each (var obj:Object in data_array)
                 {
                     var data:VehicleData = new VehicleData(obj);

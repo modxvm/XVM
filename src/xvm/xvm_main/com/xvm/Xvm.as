@@ -51,20 +51,23 @@ package com.xvm
             return Utils.fixImgTag(Locale.get(value));
         }
 
-        private function onSetConfig(config_str:String, lang_str:String, vehInfo_str:String):Object
+        private function onSetConfig(config_data:Object, lang_data:Object, vehInfo_data:Array):Object
         {
             //Logger.add("onSetConfig");
-            Config.config = ObjectConverter.convertData(JSONx.parse(config_str), CConfig);
-            Locale.setupLanguage(lang_str);
-            VehicleInfo.setVehicleInfoData(vehInfo_str);
+            //Logger.addObject(config_data, 5);
+            //Logger.addObject(lang_data, 3);
+            //Logger.addObject(vehInfo_data, 3);
+            Config.config = ObjectConverter.convertData(config_data, CConfig);
+            Locale.setupLanguage(lang_data);
+            VehicleInfo.setVehicleInfoData(vehInfo_data);
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
             return null;
         }
 
-        private function onUpdateReserve(vehInfo_str:String):Object
+        private function onUpdateReserve(vehInfo_data:Array):Object
         {
             Logger.add("onUpdateReserve");
-            VehicleInfo.setVehicleInfoData(vehInfo_str);
+            VehicleInfo.setVehicleInfoData(vehInfo_data);
             return null;
         }
 
