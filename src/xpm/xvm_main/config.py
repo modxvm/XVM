@@ -6,7 +6,6 @@ from copy import deepcopy
 import os
 import traceback
 import collections
-import simplejson
 import JSONxLoader
 
 from gui.shared import g_eventBus, events

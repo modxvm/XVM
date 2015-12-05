@@ -188,8 +188,7 @@ class Xvm(object):
             minimap_circles.updateCurrentVehicle()
             lobby = getLobbyApp()
             if lobby is not None:
-                data = simplejson.dumps(minimap_circles.getMinimapCirclesData())
-                as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE, data)
+                as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE, minimap_circles.getMinimapCirclesData())
         except Exception, ex:
             err(traceback.format_exc())
 

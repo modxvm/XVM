@@ -41,12 +41,10 @@ package xvm.hangar
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
         }
 
-        // TODO: try without serialization
-        private function onUpdateCurrentVehicle(json_str:String):Object
+        private function onUpdateCurrentVehicle(data:Object):Object
         {
             try
             {
-                var data:Object = JSONx.parse(json_str);
                 if (!Config.config.minimap.circles._internal)
                     Config.config.minimap.circles._internal = new CMinimapCirclesInternal();
                 for (var n:String in data)

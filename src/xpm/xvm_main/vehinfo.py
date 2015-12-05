@@ -30,8 +30,6 @@ from pprint import pprint
 from math import sin, radians
 import traceback
 
-import simplejson
-
 import ResMgr
 import nations
 from items import vehicles
