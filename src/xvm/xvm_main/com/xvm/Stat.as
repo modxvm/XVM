@@ -136,23 +136,22 @@ package com.xvm
             }
         }
 
-        private function battleLoaded(json_str:String):Object
+        private function battleLoaded(data:Object):Object
         {
             //Logger.add("TRACE: battleLoaded()");
 
             try
             {
-                var response:Object = JSONx.parse(json_str);
-                //Logger.addObject(response, 3, "response");
+                //Logger.addObject(data, 3);
 
                 // clear cache, because it is also used for current battle players list
                 statCache = new Dictionary();
 
-                if (response.players)
+                if (data.players)
                 {
-                    for (var name:String in response.players)
+                    for (var name:String in data.players)
                     {
-                        var sd:StatData = ObjectConverter.convertData(response.players[name], StatData);
+                        var sd:StatData = ObjectConverter.convertData(data.players[name], StatData);
                         calculateStatValues(sd);
                         stat[name] = sd;
                         // TODO
@@ -166,7 +165,7 @@ package com.xvm
             catch (ex:Error)
             {
                 Logger.err(ex);
-                Logger.add(json_str);
+                Logger.addObject(data);
                 throw ex;
             }
             finally
@@ -234,24 +233,23 @@ package com.xvm
                 Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE_RESULTS, arenaUniqueId);
         }
 
-        private function battleResultsLoaded(json_str:String):Object
+        private function battleResultsLoaded(data:Object):Object
         {
             //Logger.add("TRACE: battleResultsLoaded()");
             var arenaUniqueId:String = null;
             try
             {
-                var response:Object = JSONx.parse(json_str);
-                //Logger.addObject(response, 3, "response");
+                //Logger.addObject(data, 3);
 
-                arenaUniqueId = response.arenaUniqueId;
+                arenaUniqueId = data.arenaUniqueId;
 
-                battleResultsCache[arenaUniqueId] = response;
+                battleResultsCache[arenaUniqueId] = data;
 
-                if (response.players)
+                if (data.players)
                 {
-                    for (var name:String in response.players)
+                    for (var name:String in data.players)
                     {
-                        var sd:StatData = ObjectConverter.convertData(response.players[name], StatData);
+                        var sd:StatData = ObjectConverter.convertData(data.players[name], StatData);
                         calculateStatValues(sd);
                         statCache[name] = sd;
                         Macros.RegisterStatMacrosData(name);
@@ -261,7 +259,7 @@ package com.xvm
             catch (ex:Error)
             {
                 Logger.err(ex);
-                Logger.add(json_str);
+                Logger.addObject(data);
                 throw ex;
             }
             catch (ex:*)
@@ -338,7 +336,7 @@ package com.xvm
             }
         }
 
-        private function userLoaded(json_str:String):Object
+        private function userLoaded(data:Object):Object
         {
             //Logger.add("TRACE: userLoaded()");
             var name:String = null;
@@ -346,7 +344,7 @@ package com.xvm
             var key2:String = null;
             try
             {
-                var sd:StatData = ObjectConverter.convertData(JSONx.parse(json_str), StatData);
+                var sd:StatData = ObjectConverter.convertData(data, StatData);
                 calculateStatValues(sd);
                 name = sd.name || sd.nm;
                 //Logger.addObject(sd, "sd", 2);

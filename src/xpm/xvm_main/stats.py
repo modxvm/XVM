@@ -38,8 +38,6 @@ import threading
 import uuid
 import imghdr
 
-import simplejson
-
 import BigWorld
 from gui.battle_control import g_sessionProvider
 from items.vehicles import VEHICLE_CLASS_TAGS
@@ -135,8 +133,7 @@ class _Stat(object):
         debug("respond: " + self.req['cmd'])
         self.resp = unicode_to_ascii(self.resp)
         if not 'proxy' in self.req or self.req['proxy'] is None:
-            strdata = simplejson.dumps(self.resp)
-            as_xfw_cmd(self.req['cmd'], strdata)
+            as_xfw_cmd(self.req['cmd'], self.resp)
         elif self.req['proxy'].component and self.req['proxy'].movie:
             self.req['proxy'].movie.xvm_onUpdateStat(self.resp)
 
@@ -319,7 +316,6 @@ class _Stat(object):
                         data = xvmapi.getStatsByNick(reg, value)
 
                     if data is not None:
-                        data = data[0]
                         self._fix_user(data, None if isId else orig_value)
                         if 'nm' in data and '_id' in data:
                             self.cacheUser[reg + "/" + data['nm']] = data
@@ -372,7 +368,6 @@ class _Stat(object):
                 return
 
             for stat in data['players']:
-                # debug(simplejson.dumps(stat))
                 self._fix(stat)
                 # pprint(stat)
                 if 'nm' not in stat or not stat['nm']:
@@ -444,7 +439,6 @@ class _Stat(object):
 
         self._fix_common2(stat, orig_name, False)
         self._addContactData(stat)
-        # log(simplejson.dumps(stat))
         return stat
 
 
@@ -452,7 +446,6 @@ class _Stat(object):
         self._fix_common(stat)
         self._fix_common2(stat, orig_name, True)
         self._addContactData(stat)
-        # log(simplejson.dumps(stat))
         return stat
 
 
