@@ -25,6 +25,7 @@ class XVM_EVENT(object):
     RELOAD_CONFIG = 'xvm.reload_config'
     SYSTEM_MESSAGE = 'xvm.system_message'
 
+
 # DAAPI commands
 
 class XVM_COMMAND(object):
@@ -49,6 +50,7 @@ class XVM_COMMAND(object):
     AS_STAT_USER_DATA = "xvm.as.stat_user_data"
     AS_UPDATE_CURRENT_VEHICLE = "xvm.as.update_current_vehicle"
 
+
 # ExternalInterface commands
 
 class AS2COMMAND(object):
@@ -60,14 +62,16 @@ class AS2COMMAND(object):
     LOAD_SETTINGS = "load_settings"
     SAVE_SETTINGS = "save_settings"
 
-class AS2RESPOND(object):
-    BATTLE_STAT_DATA = "xvm.battle_stat_data"
+
+# Teams
 
 class TEAM(object):
     ALLY = 1
     ENEMY = 2
 
+
 # Invalidation targets
+
 class INV(object):
     NONE                = 0x00000000
 
@@ -85,6 +89,9 @@ class INV(object):
     MINIMAP_ALL         = 0x000F0000
 
     ALL                 = 0xFFFFFFFF
+
+
+# Dynamic values types
 
 class DYNAMIC_VALUE_TYPE(object):
     X              = 'x'

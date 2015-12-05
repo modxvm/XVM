@@ -40,6 +40,7 @@ class wot.battle.BattleMain
         GameDelegate.addCallBack("battle.showPostmortemTips", this, "showPostmortemTips");
 
         _root.xvm_onUpdateConfig = this.xvm_onUpdateConfig;
+        _root.xvm_onUpdateStat = this.xvm_onUpdateStat;
         _root.xvm_onKeyEvent = this.xvm_onKeyEvent;
         _root.xvm_onSniperCamera = this.xvm_onSniperCamera;
         _root.xvm_onAimOffsetUpdate = this.xvm_onAimOffsetUpdate;
@@ -93,6 +94,11 @@ class wot.battle.BattleMain
     public function xvm_onUpdateConfig():Void
     {
         Config.instance.GetConfigCallback.apply(Config.instance, arguments);
+    }
+
+    public function xvm_onUpdateStat():Void
+    {
+        StatLoader.instance.LoadStatDataCallback.apply(StatLoader.instance, arguments);
     }
 
     public function xvm_onKeyEvent(key:Number, isDown:Boolean):Void

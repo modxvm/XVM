@@ -27,19 +27,12 @@ class com.xvm.StatLoader
 
     private var _loading = false;
 
-    private function StatLoader()
-    {
-        ExternalInterface.addCallback(Cmd.RESPOND_BATTLE_STAT_DATA, this, LoadStatDataCallback);
-    }
-
-    private function LoadStatDataCallback(json_str)
+    public function LoadStatDataCallback(response:Object)
     {
         var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice. Why? How?
         try
         {
-            var response = JSONx.parse(json_str);
-            //Logger.addObject(response, 2, "response");
-
+            //Logger.addObject(response, 4);
             if (response.players)
             {
                 for (var nm in response.players)

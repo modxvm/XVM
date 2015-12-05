@@ -50,6 +50,7 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
             SetSizePlugin, ShortRotationPlugin, TintPlugin, TransformMatrixPlugin, VisiblePlugin, VolumePlugin]);
 
         _root.xvm_onUpdateConfig = this.xvm_onUpdateConfig;
+        _root.xvm_onUpdateStat = this.xvm_onUpdateStat;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, onConfigLoaded);
@@ -58,6 +59,11 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
     public function xvm_onUpdateConfig():Void
     {
         Config.instance.GetConfigCallback.apply(Config.instance, arguments);
+    }
+
+    public function xvm_onUpdateStat():Void
+    {
+        StatLoader.instance.LoadStatDataCallback.apply(StatLoader.instance, arguments);
     }
 
     private function setShowExInfoFlagImpl(flag)

@@ -55,7 +55,6 @@ def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
 
 import os
 import traceback
-import simplejson
 
 import BigWorld
 

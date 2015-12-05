@@ -6,7 +6,7 @@
 def getBattleStat(args, proxy=None):
     _stat.enqueue({
         'func': _stat.getBattleStat,
-        'cmd': XVM_COMMAND.AS_STAT_BATTLE_DATA if proxy is None else AS2RESPOND.BATTLE_STAT_DATA,
+        'cmd': XVM_COMMAND.AS_STAT_BATTLE_DATA,
         'args': args,
         'proxy': proxy})
     _stat.processQueue()
@@ -133,11 +133,12 @@ class _Stat(object):
 
     def _respond(self):
         debug("respond: " + self.req['cmd'])
-        strdata = simplejson.dumps(self.resp)
+        self.resp = unicode_to_ascii(self.resp)
         if not 'proxy' in self.req or self.req['proxy'] is None:
+            strdata = simplejson.dumps(self.resp)
             as_xfw_cmd(self.req['cmd'], strdata)
         elif self.req['proxy'].component and self.req['proxy'].movie:
-            self.req['proxy'].movie.invoke((self.req['cmd'], [strdata]))
+            self.req['proxy'].movie.xvm_onUpdateStat(self.resp)
 
 
     # Threaded
