@@ -83,14 +83,14 @@ class wot.Minimap.Minimap
 
     function drawImpl()
     {
-        Cmd.profMethodStart("Minimap.draw()");
+        //Cmd.profMethodStart("Minimap.draw()");
 
         var sizeIsInvalid:Boolean = wrapper.sizeIsInvalid;
         base.draw();
         if (sizeIsInvalid)
             GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
 
-        Cmd.profMethodEnd("Minimap.draw()");
+        //Cmd.profMethodEnd("Minimap.draw()");
     }
 
     // -- Private
