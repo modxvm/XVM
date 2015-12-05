@@ -27,7 +27,7 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, eventType:String, myVehId:Number, vehInfoData:String, networkServicesSettings:String, minimapCirclesData:String, IS_DEVELOPMENT:Boolean)
+    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, eventType:String, myVehId:Number, vehInfoData:Array, networkServicesSettings:String, minimapCirclesData:String, IS_DEVELOPMENT:Boolean)
     {
         //Logger.add("Config::GetConfigCallback()");
         try

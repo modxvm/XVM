@@ -16,6 +16,13 @@ def getVehicleInfoDataStr():
     return _vehicleInfoDataStr
 
 
+def getVehicleInfoDataArray():
+    global _vehicleInfoData
+    if _vehicleInfoData is None:
+        _init()
+    return _vehicleInfoData.values()
+
+
 def updateReserve(vehId, isReserved):
     global _vehicleInfoData, _vehicleInfoDataStr
     if _vehicleInfoDataStr is None:

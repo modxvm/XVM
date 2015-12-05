@@ -298,7 +298,7 @@ class Xvm(object):
                     arena.bonusType,
                     'fallout' if arena_info.isEventBattle() else 'normal',
                     arenaVehicle['vehicleType'].type.compactDescr,
-                    vehinfo.getVehicleInfoDataStr(),
+                    vehinfo.getVehicleInfoDataArray(),
                     simplejson.dumps(config.networkServicesSettings.__dict__),
                     simplejson.dumps(minimap_circles.getMinimapCirclesData()),
                     IS_DEVELOPMENT)

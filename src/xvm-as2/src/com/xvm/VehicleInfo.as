@@ -9,9 +9,9 @@ class com.xvm.VehicleInfo
 {
     // PUBLIC
 
-    public static function onVehicleInfoData(json_str:String)
+    public static function onVehicleInfoData(data_array:Array)
     {
-        instance._onVehicleInfoData(json_str);
+        instance._onVehicleInfoData(data_array);
     }
 
     public static function get(vid:Number):VehicleData
@@ -61,16 +61,16 @@ class com.xvm.VehicleInfo
         this.vehicles = {};
     }
 
-    private function _onVehicleInfoData(json_str:String)
+    private function _onVehicleInfoData(data_array:Array)
     {
-        //Logger.add("onVehicleInfoData(): " + json_str);
+        //Logger.add("onVehicleInfoData(): " + data_array.length);
         try
         {
             initialized = true;
-            var data_array:Object = JSONx.parse(json_str);
-            for (var n in data_array)
+            var len:Number = data_array.length;
+            for (var i:Number = 0; i < len; ++i)
             {
-                var obj:Object = data_array[n];
+                var obj:Object = data_array[i];
                 var data:VehicleData = new VehicleData(obj);
 
                 var preferredNames:Object = Config.config.vehicleNames[data.key.split(':').join('-')];
