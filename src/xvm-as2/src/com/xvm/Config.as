@@ -27,21 +27,22 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, battleLevel:Number, battleType:Number, eventType:String, myVehId:Number, vehInfoData:Array, networkServicesSettings:String, minimapCirclesData:String, IS_DEVELOPMENT:Boolean)
+    public function GetConfigCallback(config_data:Object, lang_data:Object, battleLevel:Number, battleType:Number, eventType:String,
+        myVehId:Number, vehInfoData:Array, networkServicesSettings:Object, minimapCirclesData:Object, IS_DEVELOPMENT:Boolean)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
         {
-            Config.config = JSONx.parse(config_data);
-            //Logger.addObject(Config.config);
+            Config.config = config_data;
+            //Logger.addObject(Config.config, 5);
             Config.battleLevel = battleLevel;
             Config.battleType = battleType;
             Config.eventType = eventType;
             Config.myVehId = myVehId;
-            Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
-            Config.minimapCirclesData = JSONx.parse(minimapCirclesData);
+            Config.networkServicesSettings = networkServicesSettings;
+            Config.minimapCirclesData = minimapCirclesData;
             Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
-            Locale.setupLanguage(lang_str);
+            Locale.setupLanguage(lang_data);
             VehicleInfo.onVehicleInfoData(vehInfoData);
             Macros.RegisterGlobalMacrosData();
             ApplyGlobalMacros();

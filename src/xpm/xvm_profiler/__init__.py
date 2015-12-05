@@ -119,5 +119,5 @@ def showPythonResult():
         s = StringIO.StringIO()
         sortby = 'cumulative'
         p = pstats.Stats(_pr, stream=s).sort_stats(sortby)
-        p.print_stats('(xfw|xvm)', 10)
+        p.print_stats('(xfw|xvm)', 15)
         log(s.getvalue())

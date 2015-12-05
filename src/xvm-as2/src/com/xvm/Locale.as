@@ -11,9 +11,9 @@ class com.xvm.Locale
     private static var MACRO_PREFIX:String = "l10n";
     private static var s_lang:Object = null;
 
-    public static function setupLanguage(lang_str:String):Void
+    public static function setupLanguage(lang_data:Object):Void
     {
-        s_lang = JSONx.parse(lang_str).locale;
+        s_lang = lang_data.locale;
         if (s_lang == null)
             Logger.add("Locale: \"locale\" section is not found in the file");
     }

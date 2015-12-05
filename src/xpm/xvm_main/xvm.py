@@ -292,15 +292,15 @@ class Xvm(object):
                 arena = player.arena
                 arenaVehicle = arena.vehicles.get(player.playerVehicleID)
                 movie.xvm_onUpdateConfig(
-                    config.config_str,
-                    config.lang_str,
+                    config.config_data,
+                    config.lang_data,
                     arena.extraData.get('battleLevel', 0),
                     arena.bonusType,
                     'fallout' if arena_info.isEventBattle() else 'normal',
                     arenaVehicle['vehicleType'].type.compactDescr,
                     vehinfo.getVehicleInfoDataArray(),
-                    simplejson.dumps(config.networkServicesSettings.__dict__),
-                    simplejson.dumps(minimap_circles.getMinimapCirclesData()),
+                    config.networkServicesSettings.__dict__,
+                    minimap_circles.getMinimapCirclesData(),
                     IS_DEVELOPMENT)
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
@@ -581,7 +581,7 @@ class Xvm(object):
             data = xvmapi.getVersionWithLimit()
             topclans.update(data)
         config.verinfo = config.XvmVersionInfo(data)
-        
+
         svcmsg.tokenUpdated()
 
 
