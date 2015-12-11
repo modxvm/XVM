@@ -10,6 +10,7 @@ import GUI
 from CurrentVehicle import g_currentVehicle
 from messenger import MessengerEntry
 from gui import SystemMessages
+from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info, g_sessionProvider
 from gui.battle_control.arena_info.settings import VEHICLE_STATUS
@@ -73,6 +74,12 @@ class Xvm(object):
 
     def onConfigLoaded(self, e=None):
         trace('onConfigLoaded')
+
+        # initialize XVM services if game restarted after crash or in replay
+        if not self.xvmServicesInitialized:
+            if g_appLoader.getSpaceID() not in [GUI_GLOBAL_SPACE_ID.INTRO_VIDEO, GUI_GLOBAL_SPACE_ID.LOGIN]:
+                self.initializeXvmServices()
+
         self.respondConfig()
         wgutils.reloadHangar()
 
@@ -197,8 +204,7 @@ class Xvm(object):
 
     def onStateBattleLoading(self):
         trace('onStateBattleLoading')
-
-        # check version if game restarted after crash or in replay
+        # initialize XVM services if game restarted after crash
         if not self.xvmServicesInitialized:
             self.initializeXvmServices()
 
