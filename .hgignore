@@ -18,6 +18,7 @@ addons/xvm-stat-log/work/
 src/xpm/*/__version__.py
 
 src/xvm/obj/
+src/xpm/.vscode/
 
 src/xvm-as2/include/
 src/xvm-as2/obj
