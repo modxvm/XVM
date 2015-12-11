@@ -4,6 +4,7 @@
   * added options:
       "battle"/"camera"/"noScroll" - disable switching to sniper mode by mouse wheel
       "battle"/"camera"/"<mode>"/"dynamicCameraEnabled" - enable/disable dynamic camera
+      "battle"/"minimapDeadSwitch" - switching between players on the minimap after death
 
 XVM-6.1.6.1:
   * removed minimap square

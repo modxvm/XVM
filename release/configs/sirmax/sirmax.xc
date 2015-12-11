@@ -96,6 +96,7 @@
     "clanIconsFolder": "clanicons",
     "sixthSenseIcon": "cfg://sirmax/img/SixthSense.png",
     "elements": ${"elements"},
+    "minimapDeadSwitch": true,
     "camera": {
       "enabled": true,
       "noScroll": true,
