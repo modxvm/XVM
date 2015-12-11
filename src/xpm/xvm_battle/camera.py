@@ -102,7 +102,7 @@ def _SniperCamera__applyZoom(self, zoomFactor):
 
 
 def _sendSniperCameraFlash(enable, zoom):
-    if config.get('battle/camera/sniper/zoomIndicator/enabled'):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zoomIndicator/enabled'):
         battle = getBattleApp()
         if battle:
             movie = battle.movie
