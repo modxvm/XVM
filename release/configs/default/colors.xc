@@ -19,7 +19,7 @@
       "normal":       "0xF8F400",   // normal     / средне
       "good":         "0x60FF00",   // good       / хорошо
       "very_good":    "0x02C9B3",   // very good  / очень хорошо
-      "unique":       "0xD149F3"    // unique     / уникально
+      "unique":       "0xD042F3"    // unique     / уникально
     },
     // Dynamic color by remaining health points.
     // Динамический цвет по оставшемуся запасу прочности.
