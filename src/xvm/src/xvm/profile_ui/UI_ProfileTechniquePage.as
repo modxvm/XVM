@@ -42,7 +42,7 @@ package xvm.profile_ui
             return _baseDisposed;
         }
 
-        public function as_responseDossierXvm(battlesType:String, currentData:Object, frameLabel:String, emptyScreenText:String):void
+        public function as_xvm_afterResponseDossier():void
         {
             if (_baseDisposed)
                 return;
@@ -50,7 +50,7 @@ package xvm.profile_ui
             try
             {
                 if (technique)
-                    technique.as_responseDossierXvm(battlesType, currentData, frameLabel, emptyScreenText);
+                    technique.as_xvm_afterResponseDossier();
             }
             catch (ex:Error)
             {

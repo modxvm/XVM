@@ -14,7 +14,7 @@ XFW_MOD_INFO = {
 
 
 #####################################################################
-# imports 
+# imports
 
 import traceback
 
@@ -27,6 +27,7 @@ from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechn
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniquePage import ProfileTechniquePage
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
+from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 
 from xfw import *
 
@@ -73,21 +74,21 @@ def ProfileTechniqueWindow_sendAccountData(base, self, targetData, accountDossie
 
 
 def _sendAccountData(base, self, targetData, accountDossier):
-    global _lastPlayerId
-    _lastPlayerId = accountDossier.getPlayerDBID()
+    try:
+        global _lastPlayerId
+        _lastPlayerId = accountDossier.getPlayerDBID()
 
-    if config.networkServicesSettings.statAwards:
-        if self._isDAAPIInited():
+        if config.networkServicesSettings.statAwards:
             isHangar = False
             if hasattr(self, '_ProfileTechniquePage__isInHangarSelected'):
                 isHangar = self._ProfileTechniquePage__isInHangarSelected
-            self.flashObject.as_responseDossierXvm(
-                self._battlesType,
-                self._getTechniqueListVehicles(targetData, isHangar),
-                '',
-                self.getEmptyScreenLabel())
-    else:
-        base(self, targetData, accountDossier)
+            self.as_setInitDataS(self._getInitData(self._battlesType == PROFILE_DROPDOWN_KEYS.FALLOUT))
+            self.as_responseDossierS(self._battlesType, self._getTechniqueListVehicles(targetData, isHangar), '', self.getEmptyScreenLabel())
+            self.flashObject.as_xvm_afterResponseDossier()
+        else:
+            base(self, targetData, accountDossier)
+    except:
+        err(traceback.format_exc())
 
 
 @overrideMethod(ProfileTechnique, '_getTechniqueListVehicles')
