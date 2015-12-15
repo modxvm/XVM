@@ -39,7 +39,7 @@
     "camera": ${"camera.xc":"camera"},
     // Switching between players on the minimap after death
     // Переключение между игроками по миникарте после смерти
-    "minimapDeadSwitch": false
+    "minimapDeadSwitch": true
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.
