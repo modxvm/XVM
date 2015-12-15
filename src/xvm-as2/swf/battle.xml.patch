@@ -1,5 +1,5 @@
---- orig/battle.xml	2015-11-05 18:58:49.871667300 +0200
-+++ battle.xml	2015-11-05 18:58:50.543577400 +0200
+--- orig/battle.xml	2015-12-15 19:23:24.136513500 +0200
++++ battle.xml	2015-12-15 19:23:24.832575900 +0200
 @@ -16,4 +16,7 @@
        </SetBackgroundColor>
        <ScriptLimits maxRecursionDepth="256" timeout="30"/>
@@ -8,7 +8,7 @@
 +      </ImportAssets2>
        <DefineBitsJPEG3 objectID="1" offset_to_alpha="2724">
          <data>
-@@ -172044,6 +172047,6 @@
+@@ -172072,6 +172075,6 @@
                <String value=" "/>
                <String value="\"/>
 -              <String value=""/>
@@ -17,7 +17,7 @@
 +              <String value=" "/>
                <String value="&#10;"/>
                <String value="&#13;"/>
-@@ -399476,5 +399479,5 @@
+@@ -399493,5 +399496,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.Minimap"/>
