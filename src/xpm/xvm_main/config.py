@@ -256,9 +256,12 @@ class XvmServicesToken(object):
         self.issued = data.get('issued', None)
         self.start_at = data.get('start_at', None)
         self.services = data.get('services', {});
-        self.token = data.get('token', '').encode('ascii')
-        if self.token == '':
-            self.token = None
+        self.token = data.get('token', '')
+        if self.token is not None:
+            if self.token == '':
+                self.token = None
+            else:
+                self.token = self.token.encode('ascii')
 
         active = self.token is not None
         global networkServicesSettings
