@@ -139,7 +139,7 @@ package xvm.tcarousel_ui.components
             img.width = 0;
             img.height = 0;
             alignField(img);
-            App.utils.scheduler.envokeInNextFrame(function():void { img.visible = true; } );
+            App.utils.scheduler.scheduleOnNextFrame(function():void { img.visible = true; } );
         }
 
         private static function createExtraTextField(owner:MovieClip, format:Object, n:Number, defW:Number, defH:Number):void

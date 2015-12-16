@@ -126,7 +126,7 @@ package xvm.tcarousel_ui
                 setupStandardField(vehicleIcon.tankTypeMc, cfg.fields.tankType);
 
                 vehicleIcon.levelMc.visible = false;
-                App.utils.scheduler.envokeInNextFrame(function():void {
+                App.utils.scheduler.scheduleOnNextFrame(function():void {
                     if (vehicleIcon == null)
                         return;
                     setupStandardField(vehicleIcon.levelMc, cfg.fields.level);

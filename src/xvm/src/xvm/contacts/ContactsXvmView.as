@@ -74,7 +74,7 @@ package xvm.contacts
             if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
             {
                 init();
-                App.utils.scheduler.envokeInNextFrame(function():void
+                App.utils.scheduler.scheduleOnNextFrame(function():void
                 {
                     page.treeComponent.list.invalidate();
                 });

@@ -76,7 +76,7 @@ package xvm.profile_ui
             return _baseDisposed;
         }
 
-        public function as_xvm_afterResponseDossier():void
+        public function as_xvm_sendAccountData():void
         {
             if (_baseDisposed)
                 return;
@@ -84,7 +84,7 @@ package xvm.profile_ui
             try
             {
                 if (technique)
-                    technique.as_xvm_afterResponseDossier();
+                    technique.as_xvm_sendAccountData();
             }
             catch (ex:Error)
             {

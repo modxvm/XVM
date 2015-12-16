@@ -54,7 +54,7 @@ package xvm.squad
         private function onMemberListItemUpdated():void
         {
             App.utils.scheduler.cancelTask(updateWindowProperties);
-            App.utils.scheduler.envokeInNextFrame(updateWindowProperties);
+            App.utils.scheduler.scheduleOnNextFrame(updateWindowProperties);
         }
 
         private function updateWindowProperties():void

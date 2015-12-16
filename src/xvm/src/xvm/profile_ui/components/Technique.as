@@ -28,6 +28,8 @@ package xvm.profile_ui.components
     {
         // CONSTANTS
 
+        private static const DEFAULT_SORTING_INVALID:String = "default_sorting_invalid";
+
         public static const EVENT_VEHICLE_DOSSIER_LOADED:String = "vehicle_dossier_loaded";
 
         // PROPERTIES
@@ -80,6 +82,7 @@ package xvm.profile_ui.components
         // PRIVATE FIELDS
 
         private var _disposed:Boolean = false;
+        private var _sortDone:Boolean = false;
         //protected var filter:FilterControl;
 
         // CTOR
@@ -116,9 +119,6 @@ package xvm.profile_ui.components
                     //if (Config.config.userInfo.showFilters)
                     //    createFilters();
                 }
-
-                // add event handlers
-                page.listComponent.sortableButtonBar.addEventListener(IndexEvent.INDEX_CHANGE, initializeListComponent);
             }
             catch (ex:Error)
             {
@@ -130,14 +130,33 @@ package xvm.profile_ui.components
         {
             _disposed = true;
             App.utils.scheduler.cancelTask(makeInitialSort);
+            App.utils.scheduler.cancelTask(makeSort);
         }
 
         // DAAPI
 
-        public function as_xvm_afterResponseDossier():void
+        public function as_xvm_sendAccountData():void
         {
             if (_disposed)
                 return;
+
+            //if (page.listComponent.techniqueList.dataProvider.length == 0)
+            //    return;
+
+            setupSortableButtonBar();
+
+            page.listComponent.xfw_cancelValidation(DEFAULT_SORTING_INVALID);
+
+            // Sort
+            if (!_sortDone)
+            {
+                App.utils.scheduler.scheduleOnNextFrame(makeInitialSort);
+            }
+            else
+            {
+                App.utils.scheduler.scheduleOnNextFrame(makeSort);
+            }
+
             initializeListComponentVehicles();
         }
 
@@ -163,31 +182,6 @@ package xvm.profile_ui.components
         //}
 
         // listComponent
-
-        private function initializeListComponent():void
-        {
-            //Logger.add("initializeListComponent: " + playerName);
-            try
-            {
-                page.listComponent.sortableButtonBar.removeEventListener(IndexEvent.INDEX_CHANGE, initializeListComponent);
-
-                if (Config.networkServicesSettings.statAwards)
-                {
-                    setupSortableButtonBar();
-                }
-
-                // Sort
-                App.utils.scheduler.envokeInNextFrame(makeInitialSort);
-
-                // Focus filter
-                //if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
-                //    filter.setFocus();
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
 
         private function initializeListComponentVehicles():void
         {
@@ -248,8 +242,21 @@ package xvm.profile_ui.components
             if (idx > bb.dataProvider.length - 1)
                 idx = 5;
             bb.selectedIndex = idx;
-            var bi:NormalSortingBtnVO = bb.dataProvider[idx] as NormalSortingBtnVO;
-            page.listComponent.techniqueList.sortByField(bi.id, Config.config.userInfo.sortColumn > 0);
+            var button:SortingButton = SortingButton(bb.getButtonAt(bb.selectedIndex));
+            button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
+            page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
+
+            _sortDone = true;
+        }
+
+        private function makeSort():void
+        {
+            var buttonBar:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
+            var button:SortingButton = SortingButton(buttonBar.getButtonAt(buttonBar.selectedIndex));
+            if (button.sortDirection != SortingInfo.WITHOUT_SORT)
+            {
+                page.listComponent.techniqueList.sortByField(button.id, button.sortDirection == SortingInfo.ASCENDING_SORT);
+            }
         }
 
         // stat

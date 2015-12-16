@@ -78,15 +78,9 @@ def _sendAccountData(base, self, targetData, accountDossier):
         global _lastPlayerId
         _lastPlayerId = accountDossier.getPlayerDBID()
 
+        base(self, targetData, accountDossier)
         if config.networkServicesSettings.statAwards:
-            isHangar = False
-            if hasattr(self, '_ProfileTechniquePage__isInHangarSelected'):
-                isHangar = self._ProfileTechniquePage__isInHangarSelected
-            self.as_setInitDataS(self._getInitData(self._battlesType == PROFILE_DROPDOWN_KEYS.FALLOUT))
-            self.as_responseDossierS(self._battlesType, self._getTechniqueListVehicles(targetData, isHangar), '', self.getEmptyScreenLabel())
-            self.flashObject.as_xvm_afterResponseDossier()
-        else:
-            base(self, targetData, accountDossier)
+            self.flashObject.as_xvm_sendAccountData()
     except:
         err(traceback.format_exc())
 
