@@ -15,9 +15,9 @@
     },
     "onlineServers": {
       "enabled": true,
-      //"x": -3,
-      //"y": 51,
-      //"hAlign": "center",
+      "x": 5,
+      "y": 80,
+      "hAlign": "left",
       //"topmost": true,
       "showTitle": false
     },

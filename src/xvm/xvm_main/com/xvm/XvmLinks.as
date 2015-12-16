@@ -22,7 +22,6 @@ Locale;
 Stat;
 VehicleInfo;
 XvmCommands;
-XvmGlobals;
 
 import com.xvm.infrastructure.*;
 XvmModBase;

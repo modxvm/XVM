@@ -494,6 +494,9 @@ class Xvm(object):
                 self.respondConfig()
                 return (None, True)
 
+            if cmd == XVM_COMMAND.GET_PLAYER_NAME:
+                return (BigWorld.player().name, True)
+
             if cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:

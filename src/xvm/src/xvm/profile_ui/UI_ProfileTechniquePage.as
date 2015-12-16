@@ -21,7 +21,7 @@ package xvm.profile_ui
         override protected function onPopulate():void
         {
             super.onPopulate();
-            technique = new TechniquePage(this, XvmGlobals[XvmGlobals.CURRENT_USER_NAME]);
+            technique = new TechniquePage(this, Xfw.cmd(XvmCommands.GET_PLAYER_NAME));
             addChild(technique);
         }
 

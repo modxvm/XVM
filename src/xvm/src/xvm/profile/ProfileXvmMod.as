@@ -16,15 +16,8 @@ package xvm.profile
 
         private static const _views:Object =
         {
-            "lobby": ProfileLobbyXvmView,
             "profile": ProfileXvmView,
             "profileWindow": ProfileXvmView
-        }
-
-        override public function entryPoint():void
-        {
-            //Logger.err(new Error());
-            super.entryPoint();
         }
 
         public override function get views():Object
