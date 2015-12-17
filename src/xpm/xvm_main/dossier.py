@@ -27,6 +27,7 @@ from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
+from gui.LobbyContext import g_lobbyContext
 
 from xfw import *
 
@@ -122,18 +123,27 @@ class _Dossier(object):
     def __getStatsBlock(self, dossier):
         if self._battlesType == PROFILE_DROPDOWN_KEYS.ALL:
             return dossier.getRandomStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.FALLOUT:
+            return dossier.getFalloutStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.HISTORICAL:
+            return dossier.getHistoricalStats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.TEAM:
             return dossier.getTeam7x7Stats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.STATICTEAM:
             return dossier.getRated7x7Stats()
-        elif self._battlesType == PROFILE_DROPDOWN_KEYS.HISTORICAL:
-            return dossier.getHistoricalStats()
-        elif self._battlesType == PROFILE_DROPDOWN_KEYS.FORTIFICATIONS_SORTIES:
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.FORTIFICATIONS:
             return dossier.getFortSortiesStats()
-        elif self._battlesType == PROFILE_DROPDOWN_KEYS.FORTIFICATIONS_BATTLES:
-            return dossier.getFortBattlesStats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.CLAN:
             return dossier.getGlobalMapStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.STATICTEAM_SEASON:
+            currentSeasonID = g_lobbyContext.getServerSettings().eSportCurrentSeason.getID()
+            return dossier.getSeasonRated7x7Stats(currentSeasonID)
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.FORTIFICATIONS_BATTLES:
+            return dossier.getFortBattlesStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.FORTIFICATIONS_SORTIES:
+            return dossier.getFortSortiesStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.COMPANY:
+            return dossier.getCompanyStats()
         raise ValueError('_Dossier: Unknown battle type: ' + self._battlesType)
 
 
@@ -156,9 +166,6 @@ class _Dossier(object):
             'damageReceived': stats.getDamageReceived(),
             'capture': stats.getCapturePoints(),
             'defence': stats.getDroppedCapturePoints(),
-
-            'xpBefore8_8': stats.getXpBefore8_8(),
-            'battlesBefore8_8': stats.getBattlesCountBefore8_8(),
 
             'originalXP': stats.getOriginalXP(),
             'damageAssistedTrack': stats.getDamageAssistedTrack(),

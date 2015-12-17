@@ -658,21 +658,6 @@ package xvm.profile_ui.components
                 XDL(1).value = formatHtmlText("--", Defines.UICOLOR_DISABLED);
                 XDL(1).labelTextField.textColor = Defines.UICOLOR_DISABLED;
             }
-
-            XDL(2).value = formatHtmlText(App.utils.locale.integer(data.battlesAfter8_8));
-            XDL(3).value = formatHtmlText(App.utils.locale.integer(data.avgXP_8_8))
-            XDL(4).value = formatHtmlText(App.utils.locale.integer(data.avgOriginalXP_8_8));
-            XDL(5).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgMileage_8_8 / 1000));
-            XDL(6).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgTreesCut_8_8));
-            XDL(7).value = formatHtmlText(App.utils.locale.integer(data.avgDamageAssistedTrack_8_8 + data.avgDamageAssistedRadio_8_8));
-            XDL(8).value = formatHtmlText(App.utils.locale.integer(data.avgDamageAssistedTrack_8_8));
-            XDL(9).value = formatHtmlText(App.utils.locale.integer(data.avgDamageAssistedRadio_8_8));
-            XDL(10).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgHe_hits_8_8));
-            XDL(11).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgHeHitsReceived_8_8));
-            XDL(12).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgPierced_8_8));
-            XDL(13).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgShotsReceived_8_8));
-            XDL(14).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgPiercedReceived_8_8));
-            XDL(15).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgNoDamageShotsReceived_8_8));
         }
         */
     }
