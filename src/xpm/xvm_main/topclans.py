@@ -22,6 +22,8 @@ def clear():
 
 
 def update(data={}):
+    if data is None:
+        data = {}
     clans = {
         'top': data.get('topClans', {}),
         'persist': data.get('persistClans', {})}
