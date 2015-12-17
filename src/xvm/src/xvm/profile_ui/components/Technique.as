@@ -22,6 +22,7 @@ package xvm.profile_ui.components
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.clik.data.*;
     import scaleform.clik.events.*;
+    import scaleform.clik.interfaces.IDataProvider;
     import xvm.profile_ui.*;
 
     public class Technique extends Sprite
@@ -82,6 +83,7 @@ package xvm.profile_ui.components
         // PRIVATE FIELDS
 
         private var _disposed:Boolean = false;
+        private var _selectedItemCD:Number = -1;
         private var _sortDone:Boolean = false;
         //protected var filter:FilterControl;
 
@@ -135,7 +137,7 @@ package xvm.profile_ui.components
 
         // DAAPI
 
-        public function as_xvm_sendAccountData():void
+        public function as_xvm_sendAccountData(itemCD:Number):void
         {
             if (_disposed)
                 return;
@@ -150,6 +152,7 @@ package xvm.profile_ui.components
             // Sort
             if (!_sortDone)
             {
+                _selectedItemCD = itemCD;
                 App.utils.scheduler.scheduleOnNextFrame(makeInitialSort);
             }
             else
@@ -245,6 +248,26 @@ package xvm.profile_ui.components
             var button:SortingButton = SortingButton(bb.getButtonAt(bb.selectedIndex));
             button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
             page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
+
+            page.listComponent.techniqueList.validateNow();
+
+            var dp:IDataProvider = page.listComponent.techniqueList.dataProvider;
+            if (dp.length > 0)
+            {
+                var pg:ProfileTechniquePage = page as ProfileTechniquePage;
+                if (pg != null)
+                {
+                    if (_selectedItemCD == -1)
+                        _selectedItemCD = dp[0].id;
+                    pg.as_setSelectedVehicleIntCD(_selectedItemCD);
+                }
+
+                var pw:ProfileTechniqueWindow = page as ProfileTechniqueWindow;
+                if (pw != null)
+                {
+                    pw.listComponent.techniqueList.setSelectedVehIntCD(dp[0].id);
+                }
+            }
 
             _sortDone = true;
         }

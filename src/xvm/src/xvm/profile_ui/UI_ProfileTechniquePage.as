@@ -42,7 +42,7 @@ package xvm.profile_ui
             return _baseDisposed;
         }
 
-        public function as_xvm_sendAccountData():void
+        public function as_xvm_sendAccountData(itemCD:Number):void
         {
             if (_baseDisposed)
                 return;
@@ -50,7 +50,7 @@ package xvm.profile_ui
             try
             {
                 if (technique)
-                    technique.as_xvm_sendAccountData();
+                    technique.as_xvm_sendAccountData(itemCD);
             }
             catch (ex:Error)
             {

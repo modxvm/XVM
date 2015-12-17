@@ -65,22 +65,23 @@ def ProfileWindowMeta_registerFlashComponent(base, self, component, alias, *args
 
 @overrideMethod(ProfileTechniquePage, '_sendAccountData')
 def ProfileTechniquePage_sendAccountData(base, self, targetData, accountDossier):
-    _sendAccountData(base, self, targetData, accountDossier)
+    _sendAccountData(base, self, targetData, accountDossier, True)
 
 
 @overrideMethod(ProfileTechniqueWindow, '_sendAccountData')
 def ProfileTechniqueWindow_sendAccountData(base, self, targetData, accountDossier):
-    _sendAccountData(base, self, targetData, accountDossier)
+    _sendAccountData(base, self, targetData, accountDossier, False)
 
 
-def _sendAccountData(base, self, targetData, accountDossier):
+def _sendAccountData(base, self, targetData, accountDossier, isProfilePage):
     try:
         global _lastPlayerId
         _lastPlayerId = accountDossier.getPlayerDBID()
 
         base(self, targetData, accountDossier)
         if config.networkServicesSettings.statAwards:
-            self.flashObject.as_xvm_sendAccountData()
+            intVehCD = int(self._selectedData.get('itemCD', -1)) if self._selectedData is not None else -1
+            self.flashObject.as_xvm_sendAccountData(intVehCD)
     except:
         err(traceback.format_exc())
 
