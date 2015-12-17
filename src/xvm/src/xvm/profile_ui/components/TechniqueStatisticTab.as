@@ -623,18 +623,18 @@ package xvm.profile_ui.components
             b2 = Math.max(0, b2 % 1 == 0 ? b2 : (int(b2) + 1));
 
             var info:String = (b2 > b1)
-                    ? color(App.utils.locale.integer(b1), XfwConst.UICOLOR_GOLD) + Locale.get(" to ") +
+                    ? color(App.utils.locale.integer(b1), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD)
-                    : color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get(" to ") +
+                    : color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD);
 
             if (Config.config.userInfo.showExtraDataInProfile || page is ProfileTechniquePage)
             {
                 // full
                 info += " / " + ((b2 > b1)
-                    ? color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get(" to ") +
+                    ? color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD)
-                    : color(App.utils.locale.integer(b1), XfwConst.UICOLOR_GOLD) + Locale.get(" to ") +
+                    : color(App.utils.locale.integer(b1), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD));
             }
 

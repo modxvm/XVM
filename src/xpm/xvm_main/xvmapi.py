@@ -49,21 +49,25 @@ import config
 import userprefs
 
 def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
-    url = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
-    url = url.format(API=api, REQ=req)
-    for k, v in params.iteritems():
-        url = url.replace('{'+k+'}', '' if v is None else str(v))
+    try:
+        url = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
+        url = url.format(API=api, REQ=req)
+        for k, v in params.iteritems():
+            url = url.replace('{'+k+'}', '' if v is None else str(v))
 
-    playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
-    if playerId is None:
-        playerId = 0
+        playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
+        if playerId is None:
+            playerId = 0
 
-    token = config.token.token
-    if token is None:
-        token = ''
-    
-    url = url.format(id=playerId, token=token)
+        token = config.token.token
+        if token is None:
+            token = ''
 
-    (response, duration, errStr) = loadUrl(url, None, data)
+        url = url.format(id=playerId, token=token)
 
-    return (None if response is None else simplejson.loads(response), errStr)
+        (response, duration, errStr) = loadUrl(url, None, data)
+
+        return (None if response is None else simplejson.loads(response), errStr)
+    except Exception as ex:
+        err(traceback.format_exc())
+        return None

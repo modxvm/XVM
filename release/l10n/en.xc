@@ -75,7 +75,7 @@
     "EFF": "EFF",
     "WGR": "WGR",
     "updated": "updated",
-    " to ": " to ",
+    "toWithSpaces": " to ",
     "avg": "avg",
     "top": "top",
     "draws": "draws",
