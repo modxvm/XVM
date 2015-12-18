@@ -58,5 +58,5 @@ def _getVersionText():
     ver = config.verinfo.ver
     cur = config.get('__xvmVersion')
     if ver is not None and utils.compareVersions(ver, cur) == 1:
-        return '{{l10n:ver/newVersion:%s:%s}}\n' % (ver, config.verinfo.msg)
+        return '{{l10n:ver/newVersion:%s:%s}}\n' % (ver, config.verinfo.message)
     return ''
