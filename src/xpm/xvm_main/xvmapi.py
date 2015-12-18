@@ -37,6 +37,7 @@ def getOnlineUsersCount():
 
 # PRIVATE
 
+import sys
 from random import randint
 
 from xfw import *
@@ -70,4 +71,4 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
         return (None if response is None else simplejson.loads(response), errStr)
     except Exception as ex:
         err(traceback.format_exc())
-        return None
+        return (None, sys.exc_info()[0])
