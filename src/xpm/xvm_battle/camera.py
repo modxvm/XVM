@@ -148,14 +148,16 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
 
 @overrideMethod(ArcadeControlMode, 'onChangeControlModeByScroll')
 def onChangeControlModeByScroll(base, self):
-    if not config.get('battle/camera/noScroll'):
-        base(self)
+    if config.get('battle/camera/enabled') and config.get('battle/camera/noScroll'):
+        return 
+    base(self)
 
 
 @overrideMethod(SniperControlMode, 'onChangeControlModeByScroll')
 def onChangeControlModeByScroll(base, self, switchToClosestDist = True):
-    if not config.get('battle/camera/noScroll'):
-        base(self, switchToClosestDist)
+    if config.get('battle/camera/enabled') and config.get('battle/camera/noScroll'):
+        return 
+    base(self, switchToClosestDist)
 
 
 # PRIVATE
