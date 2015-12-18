@@ -993,9 +993,9 @@ class com.xvm.Macros
         // {{flag}}
         pdata["flag"] = stat.flag;
         // {{clanrank}}
-        pdata["clanrank"] = isNaN(stat.clanInfoRank) ? null : stat.clanInfoRank == 0 ? "persist" : String(stat.clanInfoRank);
+        pdata["clanrank"] = isNaN(stat.rank) ? null : stat.rank == 0 ? "persist" : String(stat.rank);
         // {{topclan}}
-        pdata["topclan"] = Utils.getTopClanText(stat.clanInfoRank);
+        pdata["topclan"] = Utils.getTopClanText(stat.rank);
 
         // {{avglvl}}
         pdata["avglvl"] = stat.lvl;

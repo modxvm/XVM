@@ -22,15 +22,14 @@ class com.xvm.DataTypes.StatData
         public var wn8:Number = NaN;           // WN8 rating (int)
         public var wgr:Number = NaN;           // WG rating (int)
 
-        public var cid:Number = NaN;           // clanId
         public var emblem:String = null;       // url for clan icon
 
         public var v:VData = null;             // current vehicle stat data
         public var vehicles:Object = null;     // vehicles stat data, key - vId
 
         public var clan:String = null;         // clan name ("CLAN")
-        public var clanInfoId:Number = NaN;    // clan id
-        public var clanInfoRank:Number = NaN;  // clan rank (ELO)
+        public var cid:Number = NaN;           // clan id
+        public var rank:Number = NaN;          // clan rank (wGM)
         public var name:String = null;         // player name in current game ("sirmax2_RU" for Common Test)
         public var status:Number = NaN;        // XVM activation status
         public var flag:String = null;         // client flag

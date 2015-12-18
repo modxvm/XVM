@@ -136,10 +136,10 @@ class com.xvm.Utils
         }
     }
 
-    public static function getTopClanText(clanInfoRank:Number):String
+    public static function getTopClanText(rank:Number):String
     {
-        var value:String = isNaN(clanInfoRank) ? "regular" : clanInfoRank == 0 ? "persist" :
-            clanInfoRank <= Config.networkServicesSettings.topClansCount ? "top" : "regular";
+        var value:String = isNaN(rank) ? "regular" : rank == 0 ? "persist" :
+            rank <= Config.networkServicesSettings.topClansCount ? "top" : "regular";
 
         if (!Config.config.texts.topclan[value])
             return null;

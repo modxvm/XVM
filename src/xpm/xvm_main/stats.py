@@ -369,7 +369,7 @@ class _Stat(object):
 
             for stat in data['players']:
                 self._fix(stat)
-                # pprint(stat)
+                #log(stat)
                 if 'nm' not in stat or not stat['nm']:
                     continue
                 if 'b' not in stat or stat['b'] <= 0:
@@ -409,7 +409,7 @@ class _Stat(object):
             players.append(self._get_battle_stub(pl))
         return {'players': players}
 
-        
+
     def _fix(self, stat, orig_name=None):
         self._fix_common(stat)
 
@@ -422,8 +422,12 @@ class _Stat(object):
                 if pl.playerId == stat['_id']:
                     if pl.clan:
                         stat['clan'] = pl.clan
-                        stat['clanInfoId'] = pl.clanInfo.get('cid', None) if pl.clanInfo else None
-                        stat['clanInfoRank'] = pl.clanInfo.get('rank', None) if pl.clanInfo else None
+                        if 'cid' in stat and 'rank' in stat and 'emblem' in stat:
+                            pl.clanInfo = {'cid': stat['cid'], 'rank': stat['rank'], 'emblem': stat['emblem']}
+                            self._load_clanIcon(pl)
+                        else:
+                            stat['cid'] = pl.clanInfo.get('cid', None) if pl.clanInfo else None
+                            stat['rank'] = pl.clanInfo.get('rank', None) if pl.clanInfo else None
                     stat['name'] = pl.name
                     stat['team'] = TEAM.ALLY if team == pl.team else TEAM.ENEMY
                     stat['squadnum'] = pl.squadnum
@@ -431,7 +435,7 @@ class _Stat(object):
                         stat['alive'] = pl.alive
                     if hasattr(pl, 'ready'):
                         stat['ready'] = pl.ready
-                    if stat.get('emblem', '') == '' and hasattr(pl, 'emblem'):
+                    if hasattr(pl, 'emblem'):
                         stat['emblem'] = pl.emblem
                     if 'id' not in stat['v']:
                         stat['v']['id'] = pl.vId
@@ -570,7 +574,7 @@ class _Stat(object):
 
     def _load_clanIcons_callback(self, pl, tID, bytes):
         try:
-            debug(tID + " " + (str(len(bytes)) if bytes else '(none)'))
+            debug('{} {} {} {}'.format(pl.clan, tID, len(bytes) if bytes else '(none)', imghdr.what(None, bytes)))
             if bytes and imghdr.what(None, bytes) is not None:
                 # imgid = str(uuid.uuid4())
                 # BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?

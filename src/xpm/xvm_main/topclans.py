@@ -30,7 +30,7 @@ def update(data={}):
 
     # DEBUG
     #log(clans)
-    # clans['persist']['FOREX'] = {"rank":"0","cid":"38503","emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
+    # clans['persist']['FOREX'] = {"rank":0,"cid":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
     # /DEBUG
 
 _clansInfo = None
