@@ -1,4 +1,7 @@
-﻿XVM-6.2.0:
+﻿XVM-6.2.0.1-dev:
+  * bug fixes and optimization
+
+XVM-6.2.0:
   * adaptation to WoT 0.9.13
   * XVM API 4.0
   * added options:
