@@ -76,7 +76,7 @@ class Xvm(object):
         trace('onConfigLoaded')
 
         # initialize XVM services in replay
-        if not self.xvmServicesInitialized:
+        if isReplay():
             self.initializeXvmServices()
 
         self.respondConfig()
@@ -204,8 +204,7 @@ class Xvm(object):
     def onStateBattleLoading(self):
         trace('onStateBattleLoading')
         # initialize XVM services if game restarted after crash
-        if not self.xvmServicesInitialized:
-            self.initializeXvmServices()
+        self.initializeXvmServices()
 
 
     def onStateBattleTutorialLoading(self):
@@ -576,6 +575,9 @@ class Xvm(object):
 
 
     def initializeXvmServices(self):
+        if self.xvmServicesInitialized:
+            return
+
         playerId = utils.getPlayerId()
         if playerId is None:
             return
