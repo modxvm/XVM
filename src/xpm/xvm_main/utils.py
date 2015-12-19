@@ -13,8 +13,11 @@ import Vehicle
 from gui import game_control
 from gui.battle_control import g_sessionProvider
 
+from xfw import *
+
 import config
 from logger import *
+import userprefs
 
 
 def touch(fname, times=None):
@@ -122,3 +125,9 @@ def fixPath(path):
         if path[-1] != '/':
             path += '/'
     return path
+
+def getPlayerId():
+    playerId = getCurrentPlayerId() if not isReplay() else None
+    if playerId is None:
+        playerId = userprefs.get('tokens.lastPlayerId')
+    return playerId

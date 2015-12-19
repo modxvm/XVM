@@ -47,7 +47,7 @@ from constants import *
 from logger import *
 from loadurl import loadUrl
 import config
-import userprefs
+import utils
 
 def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
     try:
@@ -56,7 +56,7 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
         for k, v in params.iteritems():
             url = url.replace('{'+k+'}', '' if v is None else str(v))
 
-        playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
+        playerId = utils.getPlayerId()
         if playerId is None:
             playerId = 0
 

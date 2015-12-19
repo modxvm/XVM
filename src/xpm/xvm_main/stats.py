@@ -50,7 +50,6 @@ import filecache
 from logger import *
 from loadurl import loadUrl
 import topclans
-import userprefs
 import utils
 import vehinfo
 import vehinfo_xte
@@ -358,7 +357,7 @@ class _Stat(object):
             return
 
         try:
-            playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
+            playerId = utils.getPlayerId()
             if config.networkServicesSettings.statBattle:
                 data = self._load_data_online(playerId, ','.join(requestList))
             else:
@@ -574,13 +573,17 @@ class _Stat(object):
 
     def _load_clanIcons_callback(self, pl, tID, bytes):
         try:
-            debug('{} {} {} {}'.format(pl.clan, tID, len(bytes) if bytes else '(none)', imghdr.what(None, bytes)))
             if bytes and imghdr.what(None, bytes) is not None:
                 # imgid = str(uuid.uuid4())
                 # BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
                 imgid = 'icons/{0}.png'.format(pl.clan)
                 filecache.save(imgid, bytes)
                 pl.emblem = 'xvm://cache/{0}'.format(imgid)
+            debug('{} {} {} {}'.format(
+                pl.clan,
+                tID,
+                len(bytes) if bytes else '(none)',
+                imghdr.what(None, bytes) if bytes else ''))
         except Exception:
             err(traceback.format_exc())
         finally:

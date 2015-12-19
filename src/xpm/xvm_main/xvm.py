@@ -75,10 +75,9 @@ class Xvm(object):
     def onConfigLoaded(self, e=None):
         trace('onConfigLoaded')
 
-        # initialize XVM services if game restarted after crash or in replay
+        # initialize XVM services in replay
         if not self.xvmServicesInitialized:
-            if g_appLoader.getSpaceID() not in [GUI_GLOBAL_SPACE_ID.INTRO_VIDEO, GUI_GLOBAL_SPACE_ID.LOGIN]:
-                self.initializeXvmServices()
+            self.initializeXvmServices()
 
         self.respondConfig()
         wgutils.reloadHangar()
@@ -577,6 +576,10 @@ class Xvm(object):
 
 
     def initializeXvmServices(self):
+        playerId = utils.getPlayerId()
+        if playerId is None:
+            return
+
         self.xvmServicesInitialized = True
 
         config.token = config.XvmServicesToken.restore()

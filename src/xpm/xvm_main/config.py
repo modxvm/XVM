@@ -271,7 +271,7 @@ class XvmServicesToken(object):
     def restore():
         #trace('config.token.restore')
         try:
-            playerId = getCurrentPlayerId() if not isReplay() else userprefs.get('tokens.lastPlayerId')
+            playerId = utils.getPlayerId()
             if playerId is None:
                 return XvmServicesToken()
             return XvmServicesToken(userprefs.get('tokens.{0}'.format(playerId)))
