@@ -336,6 +336,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         if (!flags)
             return false;
         var entryName:String = bs.entryName;
+        if (entryName == "normal")
+            entryName = "player";
         var stateOk:Boolean = false;
         var spottedFlags:Number = 0;
         var aliveFlags:Number = 0;
