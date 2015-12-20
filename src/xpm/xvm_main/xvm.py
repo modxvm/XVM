@@ -137,6 +137,7 @@ class Xvm(object):
             playerId = getCurrentPlayerId()
             if playerId is not None and self.currentPlayerId != playerId:
                 self.currentPlayerId = playerId
+                self.xvmServicesInitialized = False
                 self.initializeXvmServices()
 
             lobby = getLobbyApp()
@@ -209,12 +210,14 @@ class Xvm(object):
 
     def onStateBattleTutorialLoading(self):
         trace('onStateBattleTutorialLoading')
-        pass
+        # initialize XVM services if game restarted after crash
+        self.initializeXvmServices()
 
 
     def onStateFalloutMultiTeamLoading(self):
         trace('onStateFalloutMultiTeamLoading')
-        pass
+        # initialize XVM services if game restarted after crash
+        self.initializeXvmServices()
 
 
     def onArenaCreated(self):
@@ -595,7 +598,8 @@ class Xvm(object):
             topclans.update(data)
         config.verinfo = config.XvmVersionInfo(data)
 
-        svcmsg.tokenUpdated()
+        if g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.LOBBY:
+            svcmsg.tokenUpdated()
 
 
     def extendVehicleMarkerArgs(self, handle, function, args):
