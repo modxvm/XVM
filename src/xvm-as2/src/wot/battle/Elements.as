@@ -47,7 +47,7 @@ class wot.battle.Elements
         for (var key in opt)
         {
             var value = opt[key];
-            if (value == CMD_LOG)
+            if (String(value) == CMD_LOG)
                 Logger.addObject(obj[key], 1, name + "." + key);
             else if (key == CMD_TEXT_FORMAT && obj instanceof TextField)
                 applyTextFormat(obj, value, name);
