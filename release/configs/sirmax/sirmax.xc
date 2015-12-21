@@ -10,6 +10,7 @@
     "pingServers": {
       "enabled": true,
       //"y": 70,
+      "ignoredServers": ["RU4", "RU8", "RU9"],
       "showTitle": false,
       "updateInterval": 5000
     },
@@ -18,6 +19,7 @@
       "x": 5,
       "y": 80,
       "hAlign": "left",
+      "ignoredServers": ["RU4", "RU8", "RU9"],
       //"topmost": true,
       "showTitle": false
     },
