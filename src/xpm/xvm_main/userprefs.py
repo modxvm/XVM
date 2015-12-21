@@ -17,6 +17,8 @@ import traceback
 
 import BigWorld
 
+from fs.osfs import OSFS
+from fs.zipfs import ZipFS
 from logger import *
 
 
@@ -32,39 +34,60 @@ class _UserPrefs():
             err(traceback.format_exc())
 
     def get(self, key, default):
-        fd = None
+        fs = None
         try:
-            fileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
-            if os.path.isfile(fileName):
-                fd = open(fileName, 'rb')
-                try:
-                    return cPickle.load(fd)
-                except Exception:
-                    os.remove(fileName)
-                    log('[WARNING] Broken file was removed: %s' % fileName)
-                    raise
+            fullFileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
+            dirName = os.path.dirname(fullFileName)
+            pkg = os.path.basename(dirName)
+            fileName = os.path.basename(fullFileName)
+            isZip = pkg.lower().endswith('.zip')
+            if os.path.exists(dirName):
+                if isZip:
+                    fs = ZipFS(dirName, mode='r', compression='stored')
+                else:
+                    fs = OSFS(dirName, create=True)
+                if fs.exists(fileName):
+                    try:
+                        #log(fileName)
+                        #log(cPickle.loads(fs.getcontents(fileName)))
+                        return cPickle.loads(fs.getcontents(fileName))
+                    except Exception:
+                        if isZip:
+                            log('[WARNING] Broken file: %s' % fullFileName)
+                        else:
+                            log('[WARNING] Remove broken file: %s' % fullFileName)
+                            fs.remove(fileName)
+                        raise
             return default
         except Exception:
             err(traceback.format_exc())
             return default
         finally:
-            if fd is not None:
-                fd.close()
+            if fs is not None:
+                fs.close()
 
     def set(self, key, value):
-        fd = None
+        fs = None
         try:
-            fileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
-            dirName = os.path.dirname(fileName)
-            if not os.path.exists(dirName):
-                os.makedirs(dirName)
-            fd = open(fileName, 'wb')
-            cPickle.dump(value, fd, -1)
-            os.fsync(fd)
+            fullFileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
+            dirName = os.path.dirname(fullFileName)
+            pkg = os.path.basename(dirName)
+            fileName = os.path.basename(fullFileName)
+            isZip = pkg.lower().endswith('.zip')
+            save = True
+            if isZip:
+                fs = ZipFS(dirName, mode='a', compression='stored')
+                if fs.exists(fileName):
+                    log('[WARNING] archive "{}" already contains file "{}". Do not save the new data.'.format(pkg, fileName))
+                    save = False
+            else:
+                fs = OSFS(dirName, create=True)
+            if save:
+                fs.setcontents(fileName, cPickle.dumps(value))
         except Exception:
             err(traceback.format_exc())
         finally:
-            if fd is not None:
-                fd.close()
+            if fs is not None:
+                fs.close()
 
 _userPrefs = _UserPrefs()

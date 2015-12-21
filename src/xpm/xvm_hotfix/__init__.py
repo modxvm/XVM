@@ -25,12 +25,6 @@ from xvm_main.python.logger import *
 
 
 #####################################################################
-# handlers
 
-# TODO: remove after swf preloading refactoring
-#@overrideMethod(ContainerManagerMeta, 'as_showS')
-def hide_exception(base, self, *args):
-    try:
-        base(self, *args)
-    except Exception, ex:
-        log('[XVM][hide_exception]: %s throwed exception: %s' % (base.__name__, ex.message))
+import update_arenas_data
+update_arenas_data.run()

@@ -54,7 +54,7 @@ def loadUrl(url, req=None, body=None, showLog=True, api=XVM.API_VERSION):
 
     return (response, duration, errStr)
 
-def _loadUrl(u, timeout, fingerprint, body):  # timeout in msec
+def _loadUrl(u, timeout, fingerprints, body):  # timeout in msec
     response = None
     compressedSize = None
     errStr = None
@@ -62,7 +62,7 @@ def _loadUrl(u, timeout, fingerprint, body):  # timeout in msec
     try:
         # log(u)
         if u.scheme.lower() == 'https':
-            checker = tlslite.CheckerXvm(x509Fingerprint=fingerprint)
+            checker = tlslite.CheckerXvm(x509Fingerprint=fingerprints) if fingerprints else None
             conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout / 1000, checker=checker)
         else:
             conn = httplib.HTTPConnection(u.netloc, timeout=timeout / 1000)

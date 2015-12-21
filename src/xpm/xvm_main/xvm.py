@@ -239,7 +239,7 @@ class Xvm(object):
             # Save/restore arena data
             player = BigWorld.player()
 
-            fileName = 'arenas_data/{0}'.format(player.arenaUniqueID)
+            fileName = 'arenas_data.zip/{0}'.format(player.arenaUniqueID)
 
             mcdata = minimap_circles.getMinimapCirclesData()
             vehId = player.vehicleTypeDescriptor.type.compactDescr

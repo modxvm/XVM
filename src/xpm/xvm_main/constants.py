@@ -9,7 +9,8 @@ class XVM(object):
     API_VERSION_OLD = '3.0'
     SERVERS = ['https://stat.modxvm.com:443/{API}/{REQ}']
     FINGERPRINTS = [ # fingerprints for SSL certificates
-        '029ef75501dbd41b386990d7b6fb4e30b59540d1']
+        #'029ef75501dbd41b386990d7b6fb4e30b59540d1'
+        ]
     TIMEOUT = 5000
 
     CONFIG_DIR = 'res_mods/configs/xvm'
