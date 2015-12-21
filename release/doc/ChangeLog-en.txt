@@ -1,5 +1,8 @@
 ﻿XVM-6.2.0.1-dev:
   * bug fixes and optimization
+  * added options:
+      "hangar"/"pingServers"/"ignoredServers" - list of ignored servers for ping in hangar
+      "hangar"/"onlineServers"/"ignoredServers" - list of ignored servers for online in hangar
 
 XVM-6.2.0:
   * adaptation to WoT 0.9.13

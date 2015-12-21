@@ -36,9 +36,9 @@ from predefined_hosts import g_preDefinedHosts
 from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
 
 from xfw import *
-import simplejson
 
 from xvm_main.python.logger import *
+from xvm_main.python.constants import *
 
 import pinger
 #import pinger_wg as pinger
@@ -49,6 +49,8 @@ import pinger
 
 def start():
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, pinger.update_config)
+    pinger.update_config()
 
 BigWorld.callback(0, start)
 
@@ -56,7 +58,7 @@ BigWorld.callback(0, start)
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
-
+    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, pinger.update_config)
 
 #####################################################################
 # onXfwCommand

@@ -6,6 +6,9 @@
 def online():
     _get_online.get_online()
 
+def update_config(*args, **kwargs):
+    _get_online.update_config()
+
 #############################
 # imports
 
@@ -32,25 +35,38 @@ import xvm_main.python.xvmapi as xvmapi
 class _Get_online(object):
 
     def __init__(self):
-        self.lock = threading.RLock()
-        self.thread = None
-        self.resp = None
         if GAME_REGION not in URLS.WG_API_SERVERS:
             warn('xvm_online: no API available for this server')
             return
-        self.hosts = []
-        loginSection = ResMgr.openSection('scripts_config.xml')['login']
-        if loginSection is not None:
-            for (name, subSec) in loginSection.items():
+        self.lock = threading.RLock()
+        self.thread = None
+        self.resp = None
+        self.done_config = False
+        self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
+
+    def update_config(self):
+        self.loginErrorString = l10n_macros_replace(config.get('login/onlineServers/errorString', '--k'))
+        self.hangarErrorString = l10n_macros_replace(config.get('hangar/onlineServers/errorString', '--k'))
+        self.loginShowTitle = config.get('login/onlineServers/showTitle')
+        self.hangarShowTitle = config.get('hangar/onlineServers/showTitle')
+        ignoredServers = config.get('hangar/onlineServers/ignoredServers', [])
+        self.loginHosts = []
+        self.hangarHosts = []
+        if self.loginSection is not None:
+            for (name, subSec) in self.loginSection.items():
                 host_name = subSec.readStrings('name')[0]
                 if len(host_name) >= 13:
                     host_name = subSec.readStrings('short_name')[0]
                 elif host_name.find('WOT ') == 0:
                     host_name = host_name[4:]
-                self.hosts.append(host_name)
-
+                self.loginHosts.append(host_name)
+                if host_name not in ignoredServers:
+                    self.hangarHosts.append(host_name)
+        self.done_config = True
 
     def get_online(self):
+        if not self.done_config:
+            return
         with self.lock:
             if self.thread is not None:
                 return
@@ -60,13 +76,13 @@ class _Get_online(object):
         self.thread.daemon = False
         self.thread.start()
         # timer for result check
-        BigWorld.callback(0.05, self._checkResult)
+        BigWorld.callback(1, self._checkResult)
 
     def _checkResult(self):
         with self.lock:
             # debug("checkResult: " + ("no" if self.resp is None else "yes"))
             if self.resp is None:
-                BigWorld.callback(0.05, self._checkResult)
+                BigWorld.callback(1, self._checkResult)
                 return
             try:
                 self._respond()
@@ -83,8 +99,9 @@ class _Get_online(object):
     def _getOnlineAsync(self):
         try:
             res = {}
-            for host in self.hosts:
-                res[host] = l10n_macros_replace(config.get('hangar/onlineServers/errorString', '--k') if g_hangarSpace.inited else config.get('login/onlineServers/errorString', '--k'))
+            hosts = self.hangarHosts if g_hangarSpace.inited else self.loginHosts
+            for host in hosts:
+                res[host] = self.hangarErrorString if g_hangarSpace.inited else self.loginErrorString
 
             data = xvmapi.getOnlineUsersCount()
             # typical response:
@@ -107,9 +124,11 @@ class _Get_online(object):
                 for host in data:
                     if host['server'].find('NA ') == 0: # API returns "NA EAST" instead of "US East" => can't determine current server
                         host['server'] = 'US ' + host['server'][3:].capitalize()
-                    res[str(host['server'])] = host['players_online']
+                    if host['server'] not in hosts:
+                        continue
+                    res[host['server']] = host['players_online']
                     best_online = max(best_online, int(host['players_online']))
-            if (g_hangarSpace.inited and config.get('hangar/onlineServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/onlineServers/showTitle')):
+            if (g_hangarSpace.inited and self.hangarShowTitle) or (not g_hangarSpace.inited and self.loginShowTitle):
                 res['###best_online###'] = str(best_online)  # will be first in sorting, key is replaced by localized "Online"
         except Exception, ex:
             err('_getOnlineAsync() exception: ' + traceback.format_exc())
