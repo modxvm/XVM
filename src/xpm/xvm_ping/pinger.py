@@ -6,6 +6,9 @@
 def ping():
     _ping.ping()
 
+def update_config(*args, **kwargs):
+    _ping.update_config()
+
 #############################
 # Private
 
@@ -39,17 +42,32 @@ class _Ping(object):
         self.lock = threading.RLock()
         self.thread = None
         self.resp = None
+        self.done_config = False
+        self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
 
-        self.hosts = list()
-        loginSection = ResMgr.openSection('scripts_config.xml')['login']
-        if loginSection is not None:
-            for (name, subSec) in loginSection.items():
+    def update_config(self):
+        self.loginErrorString = l10n_macros_replace(config.get('login/pingServers/errorString', '--'))
+        self.hangarErrorString = l10n_macros_replace(config.get('hangar/pingServers/errorString', '--'))
+        self.loginShowTitle = config.get('login/pingServers/showTitle')
+        self.hangarShowTitle = config.get('hangar/pingServers/showTitle')
+        ignoredServers = config.get('hangar/pingServers/ignoredServers', [])
+        self.loginHosts = []
+        self.hangarHosts = []
+        if self.loginSection is not None:
+            for (name, subSec) in self.loginSection.items():
                 host_name = subSec.readStrings('name')[0]
-                self.hosts.append({
-                    'name': host_name if len(host_name) < 13 else subSec.readStrings('short_name')[0],
-                    'url': subSec.readStrings('url')[0]})
+                if len(host_name) >= 13:
+                    host_name = subSec.readStrings('short_name')[0]
+                elif host_name.find('WOT ') == 0:
+                    host_name = host_name[4:]
+                self.loginHosts.append( {'name': host_name, 'url': subSec.readStrings('url')[0]} )
+                if host_name not in ignoredServers:
+                    self.hangarHosts.append( {'name': host_name, 'url': subSec.readStrings('url')[0]} )
+        self.done_config = True
 
     def ping(self):
+        if not self.done_config:
+            return
         with self.lock:
             if self.thread is not None:
                 return
@@ -84,8 +102,9 @@ class _Ping(object):
     def _pingAsync(self):
         try:
             res = dict()
-            for host in self.hosts:
-                res[host['name']] = l10n_macros_replace(config.get('hangar/pingServers/errorString', '--') if g_hangarSpace.inited else config.get('login/pingServers/errorString', '--'))
+            hosts = self.hangarHosts if g_hangarSpace.inited else self.loginHosts
+            for host in hosts:
+                res[host['name']] = self.hangarErrorString if g_hangarSpace.inited else self.loginErrorString
             if os.path.exists(LINUX_PING_PATH_IN_WINE):
                 (pattern, processes) = self._pingAsyncLinux()
             else:
@@ -93,7 +112,7 @@ class _Ping(object):
 
             # Parse ping output
             best_ping = 999
-            for x in self.hosts:
+            for x in hosts:
                 proc = processes[x['name']]
 
                 out, er = proc.communicate()
@@ -109,7 +128,7 @@ class _Ping(object):
 
                 res[x['name']] = found.group(1)
                 best_ping = min(best_ping, int(found.group(1)))
-            if (g_hangarSpace.inited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.inited and config.get('login/pingServers/showTitle')):
+            if (g_hangarSpace.inited and self.hangarShowTitle) or (not g_hangarSpace.inited and self.loginShowTitle):
                 res['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
 
         except Exception, ex:
@@ -125,7 +144,8 @@ class _Ping(object):
 
         # Ping all servers in parallel
         processes = dict()
-        for x in self.hosts:
+        hosts = self.hangarHosts if g_hangarSpace.inited else self.loginHosts
+        for x in hosts:
             processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, startupinfo=si)
 
         # pattern = '.*=.*=(\d+)[^\s].*=.*'   # original pattern, working with russian, not with others
@@ -139,7 +159,8 @@ class _Ping(object):
 
         # Ping all servers in parallel
         processes = dict()
-        for x in self.hosts:
+        hosts = self.hangarHosts if g_hangarSpace.inited else self.loginHosts
+        for x in hosts:
             processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, env=env, shell=True)
 
         # rtt min/avg/max/mdev = 20.457/20.457/20.457/0.000 ms

@@ -35,9 +35,9 @@ from gui.shared import g_eventBus
 from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
 
 from xfw import *
-import simplejson
 
 from xvm_main.python.logger import *
+from xvm_main.python.constants import *
 
 import online
 
@@ -47,6 +47,8 @@ import online
 
 def start():
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, online.update_config)
+    online.update_config()
 
 BigWorld.callback(0, start)
 
@@ -54,6 +56,7 @@ BigWorld.callback(0, start)
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, online.update_config)
 
 
 #####################################################################
