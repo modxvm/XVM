@@ -43,7 +43,7 @@ from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.vehinfo_camo import getCamoValues
-from xvm_main.python.xvm import l10n, l10n_macros_replace
+from xvm_main.python.xvm import l10n
 
 
 #####################################################################
@@ -328,7 +328,7 @@ def VehicleParamsField_getValue(base, self):
                 #custom text
                 if paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
-                    result[-1].append([h1_pad(l10n_macros_replace(customtext)), ''])
+                    result[-1].append([h1_pad(l10n(customtext)), ''])
                     continue
                 if paramName in vehicleCommonParams or paramName in vehicleRawParams:
                     result[-1].append(self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams))
