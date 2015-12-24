@@ -454,7 +454,7 @@ class Xvm(object):
 
         vInfo = utils.getVehicleInfo(vID)
         squadIndex = vInfo.squadIndex
-        arenaDP = g_sessionProvider.getCtx().getArenaDP()
+        arenaDP = g_sessionProvider.getArenaDP()
         if arenaDP.isSquadMan(vID):
             squadIndex += 10
             markersManager.invokeMarker(marker.id, 'setEntityName', [PLAYER_GUI_PROPS.squadman.name()])
@@ -473,7 +473,7 @@ class Xvm(object):
         minimap = battle.minimap
 
         if targets & INV.MINIMAP_SQUAD:
-            arenaDP = g_sessionProvider.getCtx().getArenaDP()
+            arenaDP = g_sessionProvider.getArenaDP()
             if arenaDP.isSquadMan(vID):
                 minimap._Minimap__callEntryFlash(vID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
             else:
@@ -608,13 +608,17 @@ class Xvm(object):
                     if hasattr(v, 'publicInfo'):
                         vInfo = utils.getVehicleInfo(v.id)
                         vStats = utils.getVehicleStats(v.id)
+                        squadIndex = vInfo.squadIndex
+                        arenaDP = g_sessionProvider.getArenaDP()
+                        if arenaDP.isSquadMan(v.id):
+                            squadIndex += 10
                         args.extend([
                             vInfo.player.accountDBID,
                             vInfo.vehicleType.compactDescr,
                             v.publicInfo.marksOnGun,
                             vInfo.vehicleStatus,
                             vStats.frags,
-                            vInfo.squadIndex,
+                            squadIndex,
                         ])
             elif function not in ['showExInfo']:
                 # debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))

@@ -65,11 +65,11 @@ def getVehicleByHandle(handle):
 
 
 def getVehicleInfo(vehId):
-    return g_sessionProvider.getCtx().getArenaDP().getVehicleInfo(vehId)
+    return g_sessionProvider.getArenaDP().getVehicleInfo(vehId)
 
 
 def getVehicleStats(vehId):
-    return g_sessionProvider.getCtx().getArenaDP().getVehicleStats(vehId)
+    return g_sessionProvider.getArenaDP().getVehicleStats(vehId)
 
 
 # 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error

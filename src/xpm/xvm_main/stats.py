@@ -612,7 +612,7 @@ class _Player(object):
             self.vId = 0
         self.team = vData['team']
         self.squadnum = 0
-        arenaDP = g_sessionProvider.getCtx().getArenaDP()
+        arenaDP = g_sessionProvider.getArenaDP()
         if arenaDP is not None:
             vInfo = arenaDP.getVehicleInfo(vID=vehId)
             self.squadnum = vInfo.squadIndex
