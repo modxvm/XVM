@@ -79,9 +79,8 @@ def _sendAccountData(base, self, targetData, accountDossier, isProfilePage):
         _lastPlayerId = accountDossier.getPlayerDBID()
 
         base(self, targetData, accountDossier)
-        if config.networkServicesSettings.statAwards:
-            intVehCD = int(self._selectedData.get('itemCD', -1)) if self._selectedData is not None else -1
-            self.flashObject.as_xvm_sendAccountData(intVehCD)
+        intVehCD = int(self._selectedData.get('itemCD', -1)) if self._selectedData is not None else -1
+        self.flashObject.as_xvm_sendAccountData(intVehCD)
     except:
         err(traceback.format_exc())
 

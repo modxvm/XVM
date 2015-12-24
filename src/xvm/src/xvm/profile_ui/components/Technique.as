@@ -145,7 +145,10 @@ package xvm.profile_ui.components
             //if (page.listComponent.techniqueList.dataProvider.length == 0)
             //    return;
 
-            setupSortableButtonBar();
+            if (Config.networkServicesSettings.statAwards)
+            {
+                setupSortableButtonBar();
+            }
 
             page.listComponent.xfw_cancelValidation(DEFAULT_SORTING_INVALID);
 
@@ -160,7 +163,10 @@ package xvm.profile_ui.components
                 App.utils.scheduler.scheduleOnNextFrame(makeSort);
             }
 
-            initializeListComponentVehicles();
+            if (Config.networkServicesSettings.statAwards)
+            {
+                initializeListComponentVehicles();
+            }
         }
 
         public function as_responseVehicleDossierXvm(data:VehicleDossier):void
