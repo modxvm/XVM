@@ -29,7 +29,7 @@ from gui.shared.utils.HangarSpace import g_hangarSpace
 from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-from xvm_main.python.xvm import l10n_macros_replace
+from xvm_main.python.xvm import l10n
 
 #############################
 
@@ -46,8 +46,8 @@ class _Ping(object):
         self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
 
     def update_config(self):
-        self.loginErrorString = l10n_macros_replace(config.get('login/pingServers/errorString', '--'))
-        self.hangarErrorString = l10n_macros_replace(config.get('hangar/pingServers/errorString', '--'))
+        self.loginErrorString = l10n(config.get('login/pingServers/errorString', '--'))
+        self.hangarErrorString = l10n(config.get('hangar/pingServers/errorString', '--'))
         self.loginShowTitle = config.get('login/pingServers/showTitle')
         self.hangarShowTitle = config.get('hangar/pingServers/showTitle')
         ignoredServers = config.get('hangar/pingServers/ignoredServers', [])

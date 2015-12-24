@@ -25,7 +25,7 @@ from xfw import *
 from xfw.constants import URLS
 from xvm_main.python.logger import *
 from xvm_main.python.constants import XVM
-from xvm_main.python.xvm import l10n_macros_replace
+from xvm_main.python.xvm import l10n
 import xvm_main.python.config as config
 import xvm_main.python.xvmapi as xvmapi
 
@@ -45,8 +45,8 @@ class _Get_online(object):
         self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
 
     def update_config(self):
-        self.loginErrorString = l10n_macros_replace(config.get('login/onlineServers/errorString', '--k'))
-        self.hangarErrorString = l10n_macros_replace(config.get('hangar/onlineServers/errorString', '--k'))
+        self.loginErrorString = l10n(config.get('login/onlineServers/errorString', '--k'))
+        self.hangarErrorString = l10n(config.get('hangar/onlineServers/errorString', '--k'))
         self.loginShowTitle = config.get('login/onlineServers/showTitle')
         self.hangarShowTitle = config.get('hangar/onlineServers/showTitle')
         ignoredServers = config.get('hangar/onlineServers/ignoredServers', [])

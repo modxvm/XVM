@@ -45,21 +45,18 @@ _LOG_COMMANDS = (
     AS2COMMAND.LOGSTAT,
 )
 
-# performs fixImgPath as well
-def l10n(value):
-    return as_xfw_cmd(XVM_COMMAND.AS_L10N, value)
-
-# example input: "{{l10n:text1}} blabla {{l10n:text2}}" output: "localized_text1 blabla localized_text2"
-def l10n_macros_replace(text):
+# performs translations and fixes image path
+def l10n(text):
     while True:
         localizedMacroStart = text.find('{{l10n:')
         if localizedMacroStart == -1:
-            return text
+            break
         localizedMacroEnd = text.find('}}', localizedMacroStart)
         if localizedMacroEnd == -1:
-            return text
+            break
         localizedMacroText = text[localizedMacroStart + 7:localizedMacroEnd]
-        text = text[:localizedMacroStart] + l10n(localizedMacroText) + text[localizedMacroEnd + 2:]
+        text = text[:localizedMacroStart] + config.lang_data.get('locale', {}).get(localizedMacroText, localizedMacroText) + text[localizedMacroEnd + 2:]
+    return utils.fixImgTag(config.lang_data.get('locale', {}).get(text, text))
 
 class Xvm(object):
 

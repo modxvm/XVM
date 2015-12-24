@@ -18,6 +18,7 @@ from xfw import *
 import config
 from logger import *
 import userprefs
+from xvm_main.python.constants import XVM_PATH
 
 
 def touch(fname, times=None):
@@ -131,3 +132,8 @@ def getPlayerId():
     if playerId is None:
         playerId = userprefs.get('tokens.lastPlayerId')
     return playerId
+
+# Fix <img src='xvm://...'> to <img src='img://XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
+# Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
+def fixImgTag(path):
+    return path.replace('xvm://', 'img://' + XVM_PATH.XVM_IMG_RES_ROOT).replace('cfg://', 'img://' + XVM_PATH.XVM_IMG_CFG_ROOT)
