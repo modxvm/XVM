@@ -191,7 +191,7 @@ def _tuneup_config(config):
 
     # Cleanup empty vehicle names
     config['vehicleNames'] = {k:v for k,v in config['vehicleNames'].iteritems() \
-        if v and v['short'] is not None and v['name'] is not None}
+        if v and (v['short'] is not None or v['name'] is not None)}
 
 
 def _constsSection():
