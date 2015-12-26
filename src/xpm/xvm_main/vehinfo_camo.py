@@ -18,7 +18,7 @@ from logger import *
 
 
 # Data from: http://forum.worldoftanks.ru/index.php?/topic/1047590-
-# Updated 18.12.2015
+# Updated 26.12.2015
 # Big thanks to authors of data!
 
 # percentage of lowering vision: [ standing, moving, shooting, top turret modifier ]
@@ -129,6 +129,7 @@ _tanks_camo = {
     'germany:G07_Pz35t':                      [ 15.16 , 11.40 , 3.87 , 1     ],
     'germany:T-15':                           [ 19.27 , 19.27 , 5.78 , 1     ],
     'germany:G36_PzII_J':                     [ 17.39 , 13.05 , 4.87 , 1     ],
+    'germany:G117_Toldi_III':                 [ 19.27 , 19.27 , 5.49 , 1     ],
     'germany:Pz38t':                          [ 17.99 , 13.51 , 5.22 , 1.035 ],
     'germany:PzIII_A':                        [ 18.01 , 18.01 , 5.22 , 1     ],
     'germany:G82_Pz_II_AusfG':                [ 18.62 , 18.62 , 3.91 , 1.005 ],
