@@ -412,9 +412,10 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         if (cfg.x != null)
         {
             value = Macros.FormatNumber(playerName, cfg, "x", bs, 0, 0);
-            if (textField._x != value)
+            if (textField.xvm_x != value)
             {
                 textField._x = value;
+                textField.xvm_x = value;
                 needAlign = true;
             }
         }
@@ -422,9 +423,10 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         if (cfg.y != null)
         {
             value = Macros.FormatNumber(playerName, cfg, "y", bs, 0, 0);
-            if (textField._y != value)
+            if (textField.xvm_y != value)
             {
                 textField._y = value;
+                textField.xvm_y = value;
                 needAlign = true;
             }
         }
@@ -487,12 +489,12 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         var align:String = textField.cfg.align;
         var valign:String = textField.cfg.valign;
         if (align == "right")
-            textField._x -= textField._width;
+            textField._x = textField.xvm_x - textField._width;
         else if (align == "center")
-            textField._x -= textField._width / 2;
+            textField._x = textField.xvm_x - textField._width / 2;
         if (valign == "bottom")
-            textField._y -= textField._height;
+            textField._y = textField.xvm_y - textField._height;
         else if (valign == "center")
-            textField._y -= textField._height / 2;
+            textField._y = textField.xvm_y - textField._height / 2;
     }
 }
