@@ -1,6 +1,5 @@
 import com.xvm.*;
 import wot.Minimap.*;
-import wot.Minimap.model.mapSize.*;
 
 class wot.Minimap.view.MapSizeLabel
 {

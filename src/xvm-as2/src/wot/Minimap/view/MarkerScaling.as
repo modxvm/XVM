@@ -1,6 +1,4 @@
 import com.xvm.*;
-import com.xvm.DataTypes.*;
-import net.wargaming.ingame.MinimapEntry;
 import wot.Minimap.Minimap;
 import wot.Minimap.MinimapProxy;
 

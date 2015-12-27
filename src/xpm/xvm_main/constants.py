@@ -84,6 +84,7 @@ class INV(object):
     BATTLE_STATE        = 0x00000001
     BATTLE_HP           = 0x00000002
     BATTLE_SPOTTED      = 0x00000004
+    BATTLE_SQUAD        = 0x00000008
     BATTLE_ALL          = 0x000000FF
 
     MARKER_STATUS       = 0x00000100

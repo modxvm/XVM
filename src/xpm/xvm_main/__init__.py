@@ -249,7 +249,7 @@ def _DynSquadEntityController_invalidateVehicleInfo(self, flags, playerVehVO, ar
         if flags & INVALIDATE_OP.PREBATTLE_CHANGED and playerVehVO.squadIndex > 0:
             for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(playerVehVO.team)):
                 if vInfoVO.squadIndex > 0:
-                    g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD | INV.MINIMAP_SQUAD)
+                    g_xvm.invalidate(vInfoVO.vehicleID, INV.BATTLE_SQUAD | INV.MARKER_SQUAD | INV.MINIMAP_SQUAD)
 
 #cache._MIN_LIFE_TIME = 15
 #cache._MAX_LIFE_TIME = 24

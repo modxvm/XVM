@@ -1,9 +1,7 @@
 import com.xvm.*;
-import com.xvm.DataTypes.*;
 import com.xvm.events.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
-import wot.Minimap.model.mapSize.*;
 import wot.Minimap.shapes.*;
 import wot.Minimap.view.*;
 
