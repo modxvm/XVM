@@ -23,6 +23,7 @@ def cleanupBattleData():
 # PRIVATE
 
 import BigWorld
+from gui.battle_control import g_sessionProvider
 
 from xfw import *
 
@@ -49,13 +50,18 @@ def _getVehicleStateData(vID):
     player = BigWorld.player()
     playerTeam = player.team if hasattr(player, 'team') else 0
 
+    arenaDP = g_sessionProvider.getArenaDP()
+    squadIndex = arenaDP.getVehicleInfo(vID).squadIndex
+    if arenaDP.isSquadMan(vID):
+        squadIndex += 10
+
     return {
         'playerName': arenaVehicle['name'],
         'clanAbbrev': arenaVehicle['clanAbbrev'],
         'playerId': arenaVehicle['accountDBID'],
         'vId': arenaVehicle['vehicleType'].type.compactDescr,
         'team': TEAM.ALLY if arenaVehicle['team'] == playerTeam else TEAM.ENEMY,
-        'squad': utils.getVehicleInfo(vID).squadIndex,
+        'squad': squadIndex,
         'dead': dead,
         'spotted': getSpottedStatus(vID),
         'curHealth': max(0, vehicle.health) if vehicle else None,
