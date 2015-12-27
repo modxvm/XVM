@@ -578,7 +578,7 @@ class _Stat(object):
                 # BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
                 imgid = 'icons/{0}.png'.format(pl.clan)
                 filecache.save(imgid, bytes)
-                pl.emblem = 'xvm://cache/{0}'.format(imgid)
+                pl.emblem = utils.fixImgTag('xvm://cache/{0}'.format(imgid))
             debug('{} {} {} {}'.format(
                 pl.clan,
                 tID,
