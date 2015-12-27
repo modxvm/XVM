@@ -474,7 +474,7 @@ class Xvm(object):
 
         if targets & INV.MINIMAP_SQUAD:
             arenaDP = g_sessionProvider.getArenaDP()
-            if arenaDP.isSquadMan(vID):
+            if vID != BigWorld.player().playerVehicleID and arenaDP.isSquadMan(vID):
                 minimap._Minimap__callEntryFlash(vID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
             else:
                 minimap._Minimap__callEntryFlash(vID, 'update')
