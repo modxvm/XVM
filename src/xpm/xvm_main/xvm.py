@@ -361,6 +361,8 @@ class Xvm(object):
         #trace('invalidateCallback: {} {}'.format(vID, self._invalidateTargets.get(vID, INV.NONE)))
         try:
             targets = self._invalidateTargets.get(vID, INV.NONE)
+            self._invalidateTargets[vID] = INV.NONE
+            self._invalidateTimerId[vID] = None
             if targets & INV.BATTLE_ALL:
                 self.updateBattle(vID, targets)
             if targets & INV.MARKER_ALL:
@@ -369,8 +371,6 @@ class Xvm(object):
                 self.updateMinimapEntry(vID, targets)
         except Exception, ex:
             err(traceback.format_exc())
-        self._invalidateTargets[vID] = INV.NONE
-        self._invalidateTimerId[vID] = None
 
 
     def updateBattle(self, vID, targets):
@@ -476,6 +476,7 @@ class Xvm(object):
             arenaDP = g_sessionProvider.getArenaDP()
             if vID != BigWorld.player().playerVehicleID and arenaDP.isSquadMan(vID):
                 minimap._Minimap__callEntryFlash(vID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
+                g_xvm.invalidate(vID, INV.BATTLE_SQUAD)
             else:
                 minimap._Minimap__callEntryFlash(vID, 'update')
 
