@@ -314,15 +314,15 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         var delta: Number = newHealth - m_curHealth;
         m_curHealth = m_isDead ? 0 : newHealth; // fixes "-1"
 
+        // markers.ally.alive.normal
+        var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
+        healthBarComponent.updateState(vehicleStateCfg);
+        healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta, flag, damageType);
+        var cfg = flag == Defines.FROM_PLAYER ? vehicleStateCfg.damageTextPlayer
+            : flag == Defines.FROM_SQUAD ? vehicleStateCfg.damageTextSquadman : vehicleStateCfg.damageText;
+        //Logger.addObject(cfg, 1, m_playerName);
         if (delta < 0) // Damage has been done
         {
-            // markers.ally.alive.normal
-            var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
-            healthBarComponent.updateState(vehicleStateCfg);
-            healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta, flag, damageType);
-            var cfg = flag == Defines.FROM_PLAYER ? vehicleStateCfg.damageTextPlayer
-                : flag == Defines.FROM_SQUAD ? vehicleStateCfg.damageTextSquadman : vehicleStateCfg.damageText;
-            //Logger.addObject(cfg, 1, m_playerName);
             damageTextComponent.showDamage(cfg, newHealth, -delta, flag, damageType);
         }
 
