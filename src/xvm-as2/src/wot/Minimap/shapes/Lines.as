@@ -11,13 +11,17 @@ import wot.Minimap.dataTypes.cfg.*;
 
 class wot.Minimap.shapes.Lines extends ShapeAttach
 {
-    private var camAttach:MovieClip = null;
-    private var vehLines:MovieClip = null;
-    private var traverseAngle:MovieClip = null;
+    private var camAttach:MovieClip;
+    private var vehLines:MovieClip;
+    private var traverseAngle:MovieClip;
 
     public function Lines()
     {
         super();
+
+        camAttach = null;
+        vehLines = null;
+        traverseAngle = null;
 
         attachCameraLines();
         attachVehicleDirectionLines();

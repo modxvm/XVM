@@ -7,7 +7,7 @@ class wot.Minimap.view.MapSizeLabel
     private static var MAP_SIZE_TEXT_FIELD_NAME = "mapSize";
     private static var CELLSIZE_MACRO:String = "{{cellsize}}";
 
-    private var tf:TextField = null;
+    private var tf:TextField;
 
     public function MapSizeLabel()
     {
