@@ -5,6 +5,7 @@ class wot.Minimap.MinimapEvent
     public static var ENTRY_NAME_UPDATED:String = "ENTRY_NAME_UPDATED";
     public static var CAMERA_UPDATED:String = "CAMERA_UPDATED";
     public static var ENTRY_LOST:String = "ENTRY_LOST";
+    public static var RESPAWNED:String = "RESPAWNED";
     public static var REFRESH:String = "REFRESH";
     public static var SET_STRATEGIC_POS:String = "SET_STRATEGIC_POS";
 

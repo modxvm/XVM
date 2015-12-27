@@ -13,23 +13,32 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness/angularity */
 
-    private var staticCircles:Array = [];
-    private var dynamicCircles:Array = [];
+    private var staticCircles:Array;
+    private var dynamicCircles:Array;
 
-    private var destroyedCrew:Object = {};
-    private var surveyingDeviceDestroyed:Boolean = false;
-    private var stereoscope_exists:Boolean = false;
-    private var stereoscope_enabled:Boolean = false;
+    private var destroyedCrew:Object;
+    private var surveyingDeviceDestroyed:Boolean;
+    private var stereoscope_exists:Boolean;
+    private var stereoscope_enabled:Boolean;
     private var moving_state:Number;
 
-    private var artilleryMc:MovieClip = null;
-    private var shellMc:MovieClip = null;
+    private var artilleryMc:MovieClip;
+    private var shellMc:MovieClip;
 
     public function Circles()
     {
         super();
 
+        staticCircles = [];
+        dynamicCircles = [];
+        destroyedCrew = {};
+        surveyingDeviceDestroyed = false;
+        stereoscope_exists = false;
+        stereoscope_enabled = false;
         moving_state = Defines.MOVING_STATE_STOPPED;
+
+        artilleryMc = null;
+        shellMc = null;
 
         var bs:BattleStateData = BattleState.getSelf();
         var vdata:VehicleData = VehicleInfo.get(bs.vehId);

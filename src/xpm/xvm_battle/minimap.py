@@ -7,6 +7,7 @@ import Math
 import traceback
 
 import BigWorld
+from Avatar import PlayerAvatar
 from AvatarInputHandler.control_modes import PostMortemControlMode
 from gui.Scaleform.Minimap import Minimap, MODE_ARCADE, MODE_SNIPER, _isStrategic
 from gui.battle_control import g_sessionProvider
@@ -25,25 +26,7 @@ import xvm_main.python.config as config
 def Minimap_start(self):
     #log('Minimap_start')
     if config.get('minimap/enabled'):
-        try:
-            battleCtx = g_sessionProvider.getCtx()
-            if not battleCtx.isPlayerObserver():
-                player = BigWorld.player()
-                arena = player.arena
-                id = player.playerVehicleID
-                entryVehicle = arena.vehicles[id]
-                playerId = entryVehicle['accountDBID']
-                vId = entryVehicle['vehicleType'].type.compactDescr
-                tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
-                vClass = tags.pop() if len(tags) > 0 else ''
-                entityName = str(battleCtx.getPlayerGuiProps(id, entryVehicle['team']))
-                #BigWorld.callback(0, lambda:
-                self._Minimap__callEntryFlash(id, 'init_xvm',
-                    [playerId, False, vId, entityName, 'player', vClass, _getMapSize()])
-
-        except Exception as ex:
-            if IS_DEVELOPMENT:
-                err(traceback.format_exc())
+        _init_player(self)
 
 
 @overrideMethod(Minimap, '_Minimap__callEntryFlash')
@@ -121,8 +104,36 @@ def PostMortemControlMode_onMinimapClicked(self, worldPos):
                 err(traceback.format_exc())
 
 
+# on map load (battle loading)
+@registerEvent(PlayerAvatar, 'updateVehicleHealth')
+def PlayerAvatar_updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, isRespawn):
+    #log('PlayerAvatar_updateVehicleHealth: {} {} {} {} {}'.format(vehicleID, health, deathReasonID, isCrewActive, isRespawn))
+    if config.get('minimap/enabled'):
+        if isRespawn and health > 0:
+            _init_player(getBattleApp().minimap, True)
+
+
 # PRIVATE
 
 def _getMapSize():
     (b, l), (t, r) = BigWorld.player().arena.arenaType.boundingBox
     return t - b
+
+def _init_player(minimap, isRespawn=False):
+    try:
+        battleCtx = g_sessionProvider.getCtx()
+        if not battleCtx.isPlayerObserver():
+            player = BigWorld.player()
+            arena = player.arena
+            id = player.playerVehicleID
+            entryVehicle = arena.vehicles[id]
+            playerId = entryVehicle['accountDBID']
+            vId = entryVehicle['vehicleType'].type.compactDescr
+            tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
+            vClass = tags.pop() if len(tags) > 0 else ''
+            entityName = str(battleCtx.getPlayerGuiProps(id, entryVehicle['team']))
+            minimap._Minimap__callEntryFlash(id, 'init_xvm',
+                [playerId, False, vId, entityName, 'player', vClass, _getMapSize(), isRespawn])
+    except Exception as ex:
+        if IS_DEVELOPMENT:
+            err(traceback.format_exc())

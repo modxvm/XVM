@@ -60,6 +60,7 @@ class wot.Minimap.Features
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onEntryUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onEntryUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.CAMERA_UPDATED, this, onCameraUpdated);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.RESPAWNED, this, onRespawn);
         GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
 
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onRefreshEvent);
@@ -172,6 +173,12 @@ class wot.Minimap.Features
     }
 
     // ENTRY
+
+    private function onRespawn(e:MinimapEvent):Void
+    {
+        //Logger.add("onRespawn");
+        applyFeatures();
+    }
 
     private function onEntryUpdated(e:MinimapEvent):Void
     {

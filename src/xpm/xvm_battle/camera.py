@@ -8,7 +8,6 @@ import math
 import Math
 
 import BigWorld
-from Avatar import PlayerAvatar
 from AvatarInputHandler.aims import Aim
 from AvatarInputHandler.control_modes import ArcadeControlMode, SniperControlMode
 from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera, MinMax
