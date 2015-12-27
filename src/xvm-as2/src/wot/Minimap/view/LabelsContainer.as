@@ -287,6 +287,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
         var n:Number = labelMc.getNextHighestDepth();
         var textField:TextField = labelMc.createTextField("tf" + n, n, x, y, width, height);
+        textField.xvm_x = x;
+        textField.xvm_y = y;
         textField.cfg = cfg;
         textField.antiAliasType = cfg.antiAliasType;
         textField.html = true;
