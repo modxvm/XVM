@@ -15,6 +15,7 @@ package com.xvm.types.cfg
         public var alwaysShowFilters:Boolean;
         public var hideBuyTank:Boolean;
         public var hideBuySlot:Boolean;
+        public var showUsedSlots:Boolean;
         public var filters:Object;
         public var filtersPadding:Object;
         public var fields:Object;

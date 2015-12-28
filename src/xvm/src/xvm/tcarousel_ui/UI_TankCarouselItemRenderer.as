@@ -22,6 +22,8 @@ package xvm.tcarousel_ui
         public static const ITEM_HEIGHT:int = 100;
         public static const ITEM_HEIGHT_MULTISELECTION:int = 125;
 
+        private static const COMMAND_XVM_CAROUSEL_GET_SLOTS_COUNT:String = 'xvm_carousel.get_slots_count';
+
         private var cfg:CCarousel;
         private var extraFields:MovieClip;
         private var lastSelectedState:Boolean;
@@ -82,6 +84,22 @@ package xvm.tcarousel_ui
                         {
                             statusText.y = orig_statusText_y + c.dy;
                         }
+                    }
+
+                    // Add used slots count
+                    if (dataVO.buyTank && Config.config.hangar.carousel.showUsedSlots)
+                    {
+                        if (emptyInfoTxt.height != 50)
+                        {
+                            emptyInfoTxt.height = 50;
+                        }
+                        if (emptyInfoTxt.defaultTextFormat.leading != -3)
+                        {
+                            var tf:TextFormat = emptyInfoTxt.defaultTextFormat;
+                            tf.leading = -3;
+                            emptyInfoTxt.defaultTextFormat = tf;
+                        }
+                        emptyInfoTxt.text += "\n" + Locale.get("Used slots") + ": " + (Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_SLOTS_COUNT) - dataVO.availableSlots);
                     }
 
                     // Setup activateButton

@@ -17,11 +17,12 @@ XFW_MOD_INFO = {
 # imports
 
 import BigWorld
+import game
 from debug_utils import LOG_DEBUG
 from functools import partial
 from operator import attrgetter
 from gui import GUI_NATIONS_ORDER_INDEX
-from gui.shared import g_itemsCache, REQ_CRITERIA
+from gui.shared import g_eventBus, g_itemsCache, REQ_CRITERIA
 from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
 from gui.DialogsInterface import showDialog
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
@@ -45,6 +46,9 @@ import reserve
 #####################################################################
 # constants
 
+class XVM_COMMAND(object):
+    GET_SLOTS_COUNT = 'xvm_carousel.get_slots_count'
+
 class VEHICLE(object):
     CHECKRESERVE = 'confirmReserveVehicle'
     UNCHECKRESERVE = 'uncheckReserveVehicle'
@@ -54,6 +58,34 @@ class VEHICLE(object):
 # globals
 
 carousel_handle = None
+
+
+#####################################################################
+# initialization/finalization
+
+def start():
+    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+
+BigWorld.callback(0, start)
+
+
+@registerEvent(game, 'fini')
+def fini():
+    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+
+
+#####################################################################
+# onXfwCommand
+
+# returns: (result, status)
+def onXfwCommand(cmd, *args):
+    try:
+        if cmd == XVM_COMMAND.GET_SLOTS_COUNT:
+            return (g_itemsCache.items.stats.vehicleSlots, True)
+    except Exception, ex:
+        err(traceback.format_exc())
+        return (None, True)
+    return (None, False)
 
 
 #####################################################################
