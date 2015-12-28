@@ -427,6 +427,7 @@ class _Stat(object):
                         else:
                             stat['cid'] = pl.clanInfo.get('cid', None) if pl.clanInfo else None
                             stat['rank'] = pl.clanInfo.get('rank', None) if pl.clanInfo else None
+                            stat['emblem'] = pl.clanInfo.get('emblem', None) if pl.clanInfo else None
                     stat['name'] = pl.name
                     stat['team'] = TEAM.ALLY if team == pl.team else TEAM.ENEMY
                     stat['squadnum'] = pl.squadnum
@@ -434,8 +435,8 @@ class _Stat(object):
                         stat['alive'] = pl.alive
                     if hasattr(pl, 'ready'):
                         stat['ready'] = pl.ready
-                    if hasattr(pl, 'emblem'):
-                        stat['emblem'] = pl.emblem
+                    if hasattr(pl, 'x_emblem'):
+                        stat['x_emblem'] = pl.x_emblem
                     if 'id' not in stat['v']:
                         stat['v']['id'] = pl.vId
                     break
@@ -578,7 +579,7 @@ class _Stat(object):
                 # BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
                 imgid = 'icons/{0}.png'.format(pl.clan)
                 filecache.save(imgid, bytes)
-                pl.emblem = utils.fixImgTag('xvm://cache/{0}'.format(imgid))
+                pl.x_emblem = utils.fixImgTag('xvm://cache/{0}'.format(imgid))
             debug('{} {} {} {}'.format(
                 pl.clan,
                 tID,
@@ -593,7 +594,7 @@ class _Stat(object):
 class _Player(object):
 
     __slots__ = ('vehId', 'playerId', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
-                 'vId', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'emblem')
+                 'vId', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'x_emblem')
 
     def __init__(self, vehId, vData):
         self.vehId = vehId

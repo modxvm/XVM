@@ -39,9 +39,9 @@ class wot.VehicleMarkersManager.components.ClanIconComponent
                 m_clanIcon = PlayerInfo.createIcon(mc, "clanicon", cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0));
 
             var statData:Object = Stat.s_data[proxy.playerName];
-            var emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.emblem;
+            var x_emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.x_emblem;
 
-            PlayerInfo.setSource(m_clanIcon, proxy.playerId, proxy.playerName, proxy.playerClan, emblem);
+            PlayerInfo.setSource(m_clanIcon, proxy.playerId, proxy.playerName, proxy.playerClan, x_emblem);
             draw(cfg);
         }
 

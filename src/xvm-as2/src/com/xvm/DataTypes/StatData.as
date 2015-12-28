@@ -22,7 +22,7 @@ class com.xvm.DataTypes.StatData
         public var wn8:Number = NaN;           // WN8 rating (int)
         public var wgr:Number = NaN;           // WG rating (int)
 
-        public var emblem:String = null;       // url for clan icon
+        public var x_emblem:String = null;     // local cache url for clan icon
 
         public var v:VData = null;             // current vehicle stat data
         public var vehicles:Object = null;     // vehicles stat data, key - vId

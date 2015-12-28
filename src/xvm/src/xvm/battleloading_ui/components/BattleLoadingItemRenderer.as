@@ -288,7 +288,7 @@ package xvm.battleloading_ui.components
                 _model.accountDBID,
                 _model.playerName,
                 _model.clanAbbrev,
-                statData.emblem);
+                statData.x_emblem);
             icon.addEventListener(Event.COMPLETE, function():void
             {
                 // don't add empty icons to the form

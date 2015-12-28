@@ -18,7 +18,7 @@ package xvm.battleloading_ui.components
         private var cfg:CClanIcon;
         private var nick:String;
 
-        public function ClanIcon(cfg:CClanIcon, dx:Number, dy:Number, team:Number, playerId:Number, nick:String, clan:String, emblem:String)
+        public function ClanIcon(cfg:CClanIcon, dx:Number, dy:Number, team:Number, playerId:Number, nick:String, clan:String, x_emblem:String)
         {
             super();
 
@@ -35,12 +35,12 @@ package xvm.battleloading_ui.components
             autoSize = false;
             visible = false;
 
-            setSource(playerId, nick, clan, emblem);
+            setSource(playerId, nick, clan, x_emblem);
         }
 
-        public function setSource(playerId:Number, nick:String, clan:String, emblem:String):void
+        public function setSource(playerId:Number, nick:String, clan:String, x_emblem:String):void
         {
-            // Load order: id -> nick -> emblem -> clan -> default clan -> default nick
+            // Load order: id -> nick -> x_emblem -> clan -> default clan -> default nick
             var paths:Vector.<String> = new Vector.<String>();
             var src:String = s_playersIconSources[nick];
             if (src != null)
@@ -60,10 +60,10 @@ package xvm.battleloading_ui.components
                 prefix += Config.config.region + "/";
                 paths.push(prefix + "nick/" + nick + ".png");
 
-                if (emblem != null)
+                if (x_emblem != null)
                 {
-                    //Logger.add('emblem: ' + Utils.fixImgTag(emblem));
-                    paths.push(Utils.fixImgTag(emblem));
+                    //Logger.add('x_emblem: ' + x_emblem);
+                    paths.push(x_emblem);
                 }
 
                 if (clan != null && clan != "")

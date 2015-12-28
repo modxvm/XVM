@@ -329,7 +329,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var statData:Object = Stat.s_data[m_name];
         if (statData == null)
             return;
-        var emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.emblem;
+        var x_emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.x_emblem;
 
         if (m_clanIcon == null)
         {
@@ -337,7 +337,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
             m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", clanIconCfg, x, wrapper.iconLoader._y, team);
         }
-        PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan, emblem);
+        PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan, x_emblem);
         m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
     }
 

@@ -580,7 +580,7 @@ class Xvm(object):
             return
 
         playerId = utils.getPlayerId()
-        if playerId is None:
+        if playerId is None and not isReplay():
             return
 
         self.xvmServicesInitialized = True

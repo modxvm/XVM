@@ -239,7 +239,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         var statData:Object = Stat.s_data[name];
         if (statData == null)
             return;
-        var emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.emblem;
+        var x_emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.x_emblem;
 
         if (m_clanIcon == null)
         {
@@ -250,7 +250,7 @@ class wot.StatisticForm.BattleStatItemRenderer
                 wrapper.iconLoader._y + wrapper._parent._parent._y + wrapper._parent._y + wrapper._y,
                 team);
         }
-        PlayerInfo.setSource(m_clanIcon, data.uid, name, data.clanAbbrev, emblem);
+        PlayerInfo.setSource(m_clanIcon, data.uid, name, data.clanAbbrev, x_emblem);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) != 0) ? 100 : 50;
     }
 }
