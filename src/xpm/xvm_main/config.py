@@ -279,10 +279,15 @@ class XvmServicesToken(object):
             err(traceback.format_exc())
 
 
-    def save(self):
-        #trace('config.token.save')
+    def saveToken(self):
+        #trace('config.token.saveToken')
         if self.playerId:
             userprefs.set('tokens.{0}'.format(self.playerId), self.__dict__)
+
+
+    def saveLastPlayerId(self):
+        #trace('config.token.saveLastPlayerId')
+        if self.playerId:
             userprefs.set('tokens.lastPlayerId', self.playerId)
 
 
@@ -322,7 +327,8 @@ class XvmServicesToken(object):
             global networkServicesSettings
             networkServicesSettings = NetworkServicesSettings()
 
-        self.save()
+        self.saveToken()
+        self.saveLastPlayerId()
 
 token = XvmServicesToken()
 

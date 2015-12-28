@@ -134,6 +134,8 @@ class Xvm(object):
             playerId = getCurrentPlayerId()
             if playerId is not None and self.currentPlayerId != playerId:
                 self.currentPlayerId = playerId
+                config.token = config.XvmServicesToken({'playerId':playerId})
+                config.token.saveLastPlayerId()
                 self.xvmServicesInitialized = False
                 self.initializeXvmServices()
 
