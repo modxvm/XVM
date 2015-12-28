@@ -1,6 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
 import config
+from logger import *
 
 # PUBLIC
 
@@ -16,6 +17,7 @@ def getClanInfo(clanAbbrev):
                 return top
     return _clansInfo['persist'].get(clanAbbrev, None)
 
+
 def clear():
     global _clansInfo
     _clansInfo = None
@@ -24,7 +26,8 @@ def clear():
 def update(data={}):
     if data is None:
         data = {}
-    clans = {
+    global _clansInfo
+    _clansInfo = {
         'top': data.get('topClans', {}),
         'persist': data.get('persistClans', {})}
 

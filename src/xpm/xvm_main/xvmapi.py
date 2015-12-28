@@ -68,7 +68,7 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
 
         (response, duration, errStr) = loadUrl(url, None, data)
 
-        return (None if response is None else simplejson.loads(response), errStr)
+        return (None if response is None else unicode_to_ascii(simplejson.loads(response)), errStr)
     except Exception as ex:
         err(traceback.format_exc())
         return (None, sys.exc_info()[0])

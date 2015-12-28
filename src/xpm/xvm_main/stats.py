@@ -421,7 +421,7 @@ class _Stat(object):
                 if pl.playerId == stat['_id']:
                     if pl.clan:
                         stat['clan'] = pl.clan
-                        if 'cid' in stat and 'rank' in stat and 'emblem' in stat:
+                        if stat.get('cid', None) is not None and stat.get('rank') is not None and stat.get('emblem') is not None:
                             pl.clanInfo = {'cid': stat['cid'], 'rank': stat['rank'], 'emblem': stat['emblem']}
                             self._load_clanIcon(pl)
                         else:
