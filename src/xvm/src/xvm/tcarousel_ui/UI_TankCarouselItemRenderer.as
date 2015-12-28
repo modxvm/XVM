@@ -89,17 +89,7 @@ package xvm.tcarousel_ui
                     // Add used slots count
                     if (dataVO.buyTank && Config.config.hangar.carousel.showUsedSlots)
                     {
-                        if (emptyInfoTxt.height != 50)
-                        {
-                            emptyInfoTxt.height = 50;
-                        }
-                        if (emptyInfoTxt.defaultTextFormat.leading != -3)
-                        {
-                            var tf:TextFormat = emptyInfoTxt.defaultTextFormat;
-                            tf.leading = -3;
-                            emptyInfoTxt.defaultTextFormat = tf;
-                        }
-                        emptyInfoTxt.text += "\n" + Locale.get("Used slots") + ": " + (Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_SLOTS_COUNT) - dataVO.availableSlots);
+                        emptyInfoTxt.text += " " + Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_SLOTS_COUNT);
                     }
 
                     // Setup activateButton

@@ -14,6 +14,7 @@
     "Yes": "Yes",
     "No": "No",
     "Not available short": "n/a",
+    "from": "from",
 
     // Ping & Online
     "Initialization": "Initialization",
@@ -200,7 +201,6 @@
     "uncheck_reserve_menu": "Uncheck Reserve label",
     "reserve_confirm_title": "Hide tank",
     "reserve_confirm_message": "Are you sure you want to mark the tank as reserve? It will be available via filters in carousel.",
-    "Used slots": "Used slots",
 
     // Comments
     "Network services unavailable": "Network services unavailable",
