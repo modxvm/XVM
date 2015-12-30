@@ -28,18 +28,18 @@
     // true - show filters even if all tanks fit on the screen.
     // true - показывать фильтры даже если все танки помещаются на экране.
     "alwaysShowFilters": false,
-    // true - hide cell "Buy tank".
-    // true - скрыть ячейку "Купить танк".
+    // true - hide cell "Buy vehicle".
+    // true - скрыть ячейку "Купить машину".
     "hideBuyTank": false,
     // true - hide cell "Buy slot".
     // true - скрыть ячейку "Купить слот".
     "hideBuySlot": false,
-    // true - show used slots count in the "Buy slot" cell.
-    // true - показывать количество использованных слотов в ячейке "Купить слот".
-    "showUsedSlots": true,
-    // true - show total slots count in the "Buy tank" cell.
-    // true - показывать общее количество слотов в ячейке "Купить танк".
+    // true - show total slots count in the "Buy vehicle" cell.
+    // true - показывать общее количество слотов в ячейке "Купить машину".
     "showTotalSlots": false,
+    // true - show used slots count in the "Buy slot" cell.
+    // true - показывать количество занятых слотов в ячейке "Купить слот".
+    "showUsedSlots": true,
     // Visibility filters.
     // Видимость фильтров.
     "filters": {
