@@ -18,7 +18,8 @@
     //"suppressCarouselTooltips": true,
     //"hideBuyTank": true,
     //"hideBuySlot": true,
-    "showUsedSlots": true,
+    //"showUsedSlots": true,
+    "showTotalSlots": true,
     "sorting_criteria": ["level", "nation", "type"],
     "filters": {
       //"nation":   { "enabled": false },

@@ -47,7 +47,8 @@ import reserve
 # constants
 
 class XVM_COMMAND(object):
-    GET_SLOTS_COUNT = 'xvm_carousel.get_slots_count'
+    GET_USED_SLOTS_COUNT = 'xvm_carousel.get_used_slots_count'
+    GET_TOTAL_SLOTS_COUNT = 'xvm_carousel.get_total_slots_count'
 
 class VEHICLE(object):
     CHECKRESERVE = 'confirmReserveVehicle'
@@ -80,7 +81,11 @@ def fini():
 # returns: (result, status)
 def onXfwCommand(cmd, *args):
     try:
-        if cmd == XVM_COMMAND.GET_SLOTS_COUNT:
+        if cmd == XVM_COMMAND.GET_USED_SLOTS_COUNT:
+            slots = g_itemsCache.items.stats.vehicleSlots
+            vehicles = len(g_itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY))
+            return (slots - vehicles, True)
+        if cmd == XVM_COMMAND.GET_TOTAL_SLOTS_COUNT:
             return (g_itemsCache.items.stats.vehicleSlots, True)
     except Exception, ex:
         err(traceback.format_exc())

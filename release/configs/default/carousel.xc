@@ -34,9 +34,12 @@
     // true - hide cell "Buy slot".
     // true - скрыть ячейку "Купить слот".
     "hideBuySlot": false,
-    // true - show used slots count in the "Buy tank" cell.
-    // true - показывать количество использованных слотов в ячейке "Купить танк".
-    "showUsedSlots": false,
+    // true - show used slots count in the "Buy slot" cell.
+    // true - показывать количество использованных слотов в ячейке "Купить слот".
+    "showUsedSlots": true,
+    // true - show total slots count in the "Buy tank" cell.
+    // true - показывать общее количество слотов в ячейке "Купить танк".
+    "showTotalSlots": false,
     // Visibility filters.
     // Видимость фильтров.
     "filters": {

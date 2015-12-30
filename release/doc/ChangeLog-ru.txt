@@ -3,7 +3,8 @@
   * добавлены опции:
       "hangar"/"pingServers"/"ignoredServers" - список игнорируемых серверов для пинга в ангаре
       "hangar"/"onlineServers"/"ignoredServers" - список игнорируемых серверов для онлайна в ангаре
-      "hangar"/"carousel"/"showUsedSlots" - показывать количество занятых слотов в ячейке "Купить танк"
+      "hangar"/"carousel"/"showUsedSlots" - показывать количество занятых слотов в ячейке "Купить слот"
+      "hangar"/"carousel"/"showTotalSlots" - показывать общее количество слотов в ячейке "Купить танк"
 
 XVM-6.2.0:
   * адаптация к WoT 0.9.13

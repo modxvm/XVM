@@ -3,7 +3,8 @@
   * added options:
       "hangar"/"pingServers"/"ignoredServers" - list of ignored servers for ping in hangar
       "hangar"/"onlineServers"/"ignoredServers" - list of ignored servers for online in hangar
-      "hangar"/"carousel"/"showUsedSlots" - show used slots count in the "Buy tank" cell
+      "hangar"/"carousel"/"showUsedSlots" - show used slots count in the "Buy slot" cell
+      "hangar"/"carousel"/"showTotalSlots" - show total slots count in the "Buy tank" cell
 
 XVM-6.2.0:
   * adaptation to WoT 0.9.13

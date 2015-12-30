@@ -22,7 +22,8 @@ package xvm.tcarousel_ui
         public static const ITEM_HEIGHT:int = 100;
         public static const ITEM_HEIGHT_MULTISELECTION:int = 125;
 
-        private static const COMMAND_XVM_CAROUSEL_GET_SLOTS_COUNT:String = 'xvm_carousel.get_slots_count';
+        private static const COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT:String = 'xvm_carousel.get_used_slots_count';
+        private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
 
         private var cfg:CCarousel;
         private var extraFields:MovieClip;
@@ -87,9 +88,14 @@ package xvm.tcarousel_ui
                     }
 
                     // Add used slots count
-                    if (dataVO.buyTank && Config.config.hangar.carousel.showUsedSlots)
+                    if (dataVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
                     {
-                        emptyInfoTxt.text += " " + Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_SLOTS_COUNT);
+                        this.emptyInfoTxt.visible = true;
+                        emptyInfoTxt.text = Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT);
+                    }
+                    if (dataVO.buyTank && Config.config.hangar.carousel.showTotalSlots)
+                    {
+                        emptyInfoTxt.text += " " + Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT);
                     }
 
                     // Setup activateButton
