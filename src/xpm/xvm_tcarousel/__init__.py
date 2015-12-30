@@ -82,9 +82,7 @@ def fini():
 def onXfwCommand(cmd, *args):
     try:
         if cmd == XVM_COMMAND.GET_USED_SLOTS_COUNT:
-            slots = g_itemsCache.items.stats.vehicleSlots
-            vehicles = len(g_itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY))
-            return (slots - vehicles, True)
+            return (len(g_itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY)), True)
         if cmd == XVM_COMMAND.GET_TOTAL_SLOTS_COUNT:
             return (g_itemsCache.items.stats.vehicleSlots, True)
     except Exception, ex:
