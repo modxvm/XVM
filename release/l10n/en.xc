@@ -144,6 +144,8 @@
     "Battle tiers": "Battle tiers",
     "Type": "Type",
     "Nation": "Nation",
+    
+    // Nation
     "ussr": "USSR",
     "germany": "Germany",
     "usa": "USA",
@@ -151,6 +153,9 @@
     "uk": "UK",
     "china": "China",
     "japan": "Japan",
+    "czech": "Сzech",
+    
+    // Vehicle type
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",
