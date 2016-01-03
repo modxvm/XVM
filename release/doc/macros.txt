@@ -101,7 +101,7 @@ Legend:
 │ S │ {{my-nation}}         │ X │ X │ X │ X │ X │ X │ X │ my vehicle nation
 │ S │ {{my-level}}          │ X │ X │ X │ X │ X │ X │ X │ my vehicle level (Arabic numerals)
 │ S │ {{my-rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ my vehicle level (Roman numerals)
-│ S │ {{cellsize}}          │   │   │   │ X │   │   │   │ minimap cell side size
+│ S │ {{cellsize}}          │   │ X │ X │ X │ X │ X │ X │ minimap cell side size
 └───┴───────────────────────┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────
 
   Statistic macros

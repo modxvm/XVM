@@ -10,6 +10,7 @@ class com.xvm.Config
     public static var config:Object = null;
     public static var battleLevel:Number = NaN;
     public static var battleType:Number = NaN;
+    public static var mapSize:Number = NaN;
     public static var eventType:String = null;
     public static var myVehId:Number = null;
     public static var networkServicesSettings:Object = null;
@@ -27,7 +28,7 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:Object, lang_data:Object, battleLevel:Number, battleType:Number, eventType:String,
+    public function GetConfigCallback(config_data:Object, lang_data:Object, battleLevel:Number, battleType:Number, eventType:String, mapSize:Number,
         myVehId:Number, vehInfoData:Array, networkServicesSettings:Object, minimapCirclesData:Object, IS_DEVELOPMENT:Boolean)
     {
         //Logger.add("Config::GetConfigCallback()");
@@ -37,6 +38,7 @@ class com.xvm.Config
             //Logger.addObject(Config.config, 5);
             Config.battleLevel = battleLevel;
             Config.battleType = battleType;
+            Config.mapSize = mapSize;
             Config.eventType = eventType;
             Config.myVehId = myVehId;
             Config.networkServicesSettings = networkServicesSettings;

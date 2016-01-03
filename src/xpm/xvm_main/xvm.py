@@ -302,6 +302,7 @@ class Xvm(object):
                     arena.extraData.get('battleLevel', 0),
                     arena.bonusType,
                     'fallout' if arena_info.isEventBattle() else 'normal',
+                    utils.getMapSize(),
                     arenaVehicle['vehicleType'].type.compactDescr,
                     vehinfo.getVehicleInfoDataArray(),
                     config.networkServicesSettings.__dict__,

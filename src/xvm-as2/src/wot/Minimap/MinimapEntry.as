@@ -73,7 +73,7 @@ class wot.Minimap.MinimapEntry
         Utils.TraceXvmModule("Minimap");
     }
 
-    function init_xvmImpl(playerId:Number, isLit:Boolean, vehId:Number, entityName:String, entryName:String, vClass:String, mapSize:Number, isRespawn:Boolean)
+    function init_xvmImpl(playerId:Number, isLit:Boolean, vehId:Number, entityName:String, entryName:String, vClass:String, isRespawn:Boolean)
     {
         //Logger.add("init_xvmImpl: id=" + playerId + " lit=" + isLit);
         Cmd.profMethodStart("MinimapEntry.init_xvm()");
@@ -126,10 +126,6 @@ class wot.Minimap.MinimapEntry
             var entry:net.wargaming.ingame.MinimapEntry = IconsProxy.entry(playerId);
             //Logger.add(entry.entryName);
             entry.vehicleClass = vClass;
-            if (!isNaN(mapSize) && mapSize > 0)
-            {
-                Minimap.MapSize = mapSize;
-            }
         }
 
         if (isRespawn)

@@ -127,11 +127,18 @@ def fixPath(path):
             path += '/'
     return path
 
+
 def getPlayerId():
     playerId = getCurrentPlayerId() if not isReplay() else None
     if playerId is None:
         playerId = userprefs.get('tokens.lastPlayerId')
     return playerId
+
+
+def getMapSize():
+    (b, l), (t, r) = BigWorld.player().arena.arenaType.boundingBox
+    return t - b
+
 
 # Fix <img src='xvm://...'> to <img src='img://XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
 # Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)

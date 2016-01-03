@@ -106,16 +106,10 @@ class wot.Minimap.Features
     private function applyFeatures():Void
     {
         setBGMapImageAlpha();
-
         initializeZoomFeature();
-
-        // Features dependent on successful map size recognition
-        if (Minimap.MapSize > 0)
-        {
-            initializeMapSizeFeature();
-            initializeCirclesFeature();
-            initializeLinesFeature();
-        }
+        initializeMapSizeFeature();
+        initializeCirclesFeature();
+        initializeLinesFeature();
     }
 
     // GLOBAL

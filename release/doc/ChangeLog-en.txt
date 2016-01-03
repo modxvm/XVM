@@ -1,4 +1,7 @@
-﻿XVM-6.2.0.1:
+﻿XVM-6.2.0.2-dev:
+  * macro {{cellside}} can be used in like other global macros
+
+XVM-6.2.0.1:
   * improvements and bug fixes
   * added options:
       "hangar"/"pingServers"/"ignoredServers" - list of ignored servers for ping in hangar

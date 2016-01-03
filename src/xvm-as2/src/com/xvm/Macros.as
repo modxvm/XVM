@@ -61,9 +61,9 @@ class com.xvm.Macros
         return _instance.m_globals[key];
     }
 
-    public static function RegisterGlobalMacrosData(battleTier:Number, battleType:Number)
+    public static function RegisterGlobalMacrosData()
     {
-        _instance._RegisterGlobalMacrosData(battleTier, battleType);
+        _instance._RegisterGlobalMacrosData();
     }
 
     public static function RegisterZoomIndicatorData(zoom:Number)
@@ -694,6 +694,9 @@ class com.xvm.Macros
         m_globals["battletype"] = Utils.getBattleTypeText(Config.battleType);
         // {{battletier}}
         m_globals["battletier"] = battleLevel;
+
+        // {{cellsize}}
+        m_globals["cellsize"] = Math.round(Config.mapSize / 10);
 
         // {{my-frags}}
         m_globals["my-frags"] = function(o:Object) { return isNaN(Macros.s_my_frags) || Macros.s_my_frags == 0 ? NaN : Macros.s_my_frags; }

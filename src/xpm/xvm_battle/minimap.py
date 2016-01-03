@@ -115,10 +115,6 @@ def PlayerAvatar_updateVehicleHealth(self, vehicleID, health, deathReasonID, isC
 
 # PRIVATE
 
-def _getMapSize():
-    (b, l), (t, r) = BigWorld.player().arena.arenaType.boundingBox
-    return t - b
-
 def _init_player(minimap, isRespawn=False):
     try:
         battleCtx = g_sessionProvider.getCtx()
@@ -133,7 +129,7 @@ def _init_player(minimap, isRespawn=False):
             vClass = tags.pop() if len(tags) > 0 else ''
             entityName = str(battleCtx.getPlayerGuiProps(id, entryVehicle['team']))
             minimap._Minimap__callEntryFlash(id, 'init_xvm',
-                [playerId, False, vId, entityName, 'player', vClass, _getMapSize(), isRespawn])
+                [playerId, False, vId, entityName, 'player', vClass, isRespawn])
     except Exception as ex:
         if IS_DEVELOPMENT:
             err(traceback.format_exc())

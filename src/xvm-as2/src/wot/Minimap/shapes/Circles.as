@@ -11,8 +11,6 @@ import wot.Minimap.shapes.*;
 
 class wot.Minimap.shapes.Circles extends ShapeAttach
 {
-    private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness/angularity */
-
     private var staticCircles:Array;
     private var dynamicCircles:Array;
 

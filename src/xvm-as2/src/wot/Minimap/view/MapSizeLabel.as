@@ -4,7 +4,6 @@ import wot.Minimap.*;
 class wot.Minimap.view.MapSizeLabel
 {
     private static var MAP_SIZE_TEXT_FIELD_NAME = "mapSize";
-    private static var CELLSIZE_MACRO:String = "{{cellsize}}";
 
     private var tf:TextField;
 
@@ -18,7 +17,7 @@ class wot.Minimap.view.MapSizeLabel
         tf.multiline = true;
         tf.selectable = false;
 
-        tf.htmlText = defineLabelText(cfg.format);
+        tf.htmlText = Macros.FormatGlobalStringValue(cfg.format);
 
         tf._alpha = cfg.alpha;
 
@@ -38,16 +37,6 @@ class wot.Minimap.view.MapSizeLabel
     }
 
     /** -- Private */
-
-    private function defineLabelText(format:String):String
-    {
-        var formatArr:Array = format.split(CELLSIZE_MACRO);
-        if (formatArr.length > 1)
-        {
-            format = formatArr.join(Math.round(Minimap.MapSize / 10).toString());
-        }
-        return format;
-    }
 
     private function get bg():MovieClip
     {
