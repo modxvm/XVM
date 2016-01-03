@@ -148,8 +148,9 @@ package xvm.online.OnlineServers
             var cluster:String = onlineObj.cluster;
             var people_online:String = onlineObj.people_online;
             var raw:String = "";
+            var isTitle:Boolean = (cluster == "###best_online###");
             //deal with title and values
-            if (cluster == "###best_online###")
+            if (isTitle)
                 cluster = Locale.get("Online")
             else
             {
@@ -162,7 +163,7 @@ package xvm.online.OnlineServers
                         raw = " " + raw;
             }
             //put everything together: server + delimiter + padded value
-            if (cfg.showServerName || people_online == "...")
+            if ((cfg.showServerName && !isTitle) || people_online == "..." || (cfg.showTitle && isTitle))
                 if (!isNaN(serverColor) && people_online != "...")
                     raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + cluster + cfg.delimiter + "</span>" + raw;
                 else

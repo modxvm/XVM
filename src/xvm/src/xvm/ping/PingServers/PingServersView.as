@@ -148,9 +148,10 @@ package xvm.ping.PingServers
             var cluster:String = pingObj.cluster;
             var time:String = pingObj.time;
             var raw:String = "";
+            var isTitle:Boolean = (cluster == "###best_ping###");
             //deal with title and values
-            if (cluster == "###best_ping###")
-                cluster = Locale.get("Ping")
+            if (isTitle)
+                cluster = Locale.get("Ping");
             else
             {
                 raw = time
@@ -159,7 +160,7 @@ package xvm.ping.PingServers
                         raw = " " + raw;
             }
             //put everything together: server + delimiter + padded value
-            if (cfg.showServerName || time == "...")
+            if ((cfg.showServerName && !isTitle) || time == "..." || (cfg.showTitle && isTitle))
                 if (!isNaN(serverColor) && time != "...")
                     raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + cluster + cfg.delimiter + "</span>" + raw;
                 else
