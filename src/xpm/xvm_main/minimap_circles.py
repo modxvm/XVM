@@ -146,15 +146,8 @@ class _MinimapCircles(object):
         self.rammer = self._isOptionalEquipped('Rammer')
         #debug('  rammer: %s' % str(self.rammer))
 
-        # Check for Consumable
-        self.consumable = self._isConsumableEquipped([
-            'chocolate',
-            'cocacola',
-            'hotCoffee',
-            'ration',
-            'ration_china',
-            'ration_japan',
-            'ration_uk'])
+        # Check for Consumable (cola, chocolate etc.)
+        self.consumable = self._isStimulatorEquipped()
         #debug('  consumable: %s' % str(self.consumable))
 
         self.updateMinimapCirclesData(self.vehicleItem.descriptor)
@@ -250,11 +243,19 @@ class _MinimapCircles(object):
                 return True
         return False
 
-
+    # deprecated
     def _isConsumableEquipped(self, consumable_names):
         for item in self.vehicleItem.eqsLayout:
             # debug(vars(item))
             if item is not None and item.descriptor.name in consumable_names:
+                return True
+        return False
+
+    # cola, chocolate etc.
+    def _isStimulatorEquipped(self):
+        for item in self.vehicleItem.eqsLayout:
+            # debug(vars(item))
+            if item is not None and item.isStimulator:
                 return True
         return False
 
