@@ -51,11 +51,11 @@ def load(e):
         filename = e.ctx.get('filename', XVM.CONFIG_FILE)
 
         configwatchdog.stopConfigWatchdog()
+        autoreload = get('autoReloadConfig', False)
 
         config_data = None
         lang_data = None
 
-        autoreload = get('autoReloadConfig', False)
         config_data = _load_xvm_xc(filename, autoreload)
 
         regionDetected = 'region' not in config_data or config_data['region'].lower() == XVM.REGION_AUTO_DETECTION
