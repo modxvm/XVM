@@ -1,5 +1,5 @@
---- orig/PlayersPanel.xml	2015-12-15 19:23:25.918685300 +0200
-+++ PlayersPanel.xml	2015-12-15 19:23:26.116709900 +0200
+--- orig/PlayersPanel.xml	2016-02-11 21:57:44.615222800 +0200
++++ PlayersPanel.xml	2016-02-11 21:57:44.784499200 +0200
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -15,7 +15,7 @@
 +              <String value="_xvm_disabled_htmlText"/>
                <String value="m_names"/>
                <String value="updatePositions"/>
-@@ -76055,6 +76058,6 @@
+@@ -76079,6 +76082,6 @@
                <String value=" "/>
                <String value="\"/>
 -              <String value=""/>
@@ -24,21 +24,21 @@
 +              <String value=" "/>
                <String value="&#10;"/>
                <String value="&#13;"/>
-@@ -86083,5 +86086,5 @@
+@@ -86309,5 +86312,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
 +              <StackString value="wot.wrapper.PlayersPanel.PlayerListItemRenderer"/>
              </items>
            </PushData>
-@@ -86109,5 +86112,5 @@
+@@ -86335,5 +86338,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
 +              <StackString value="wot.wrapper.PlayersPanel.PlayerListItemRenderer"/>
              </items>
            </PushData>
-@@ -86291,5 +86294,5 @@
+@@ -86517,5 +86520,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayersPanel"/>
