@@ -51,6 +51,8 @@ package xvm.company
             view.addChild(updateCheckBox);
             App.utils.scheduler.scheduleTask(function():void
             {
+                //TODO:0.9.14
+                /*
                 var dx:Number = updateCheckBox.x + updateCheckBox.width - view.filterTextField.x;
                 if (dx > 0)
                 {
@@ -68,7 +70,7 @@ package xvm.company
 
                     view.division.x += 30;
                     view.division.width -= 30;
-                }
+                }*/
             }, 100);
         }
     }

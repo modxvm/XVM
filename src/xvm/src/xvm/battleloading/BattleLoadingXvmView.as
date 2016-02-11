@@ -70,7 +70,7 @@ package xvm.battleloading
         {
             try
             {
-                BattleLoadingHelper.InitRenderers(page);
+                //TODO:0.9.14 BattleLoadingHelper.instance.InitRenderers(page);
 
                 // Components
                 new WinChances(page); // Winning chance info above players list.

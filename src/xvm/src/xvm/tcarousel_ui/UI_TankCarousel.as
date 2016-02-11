@@ -145,11 +145,13 @@ package xvm.tcarousel_ui
         }
 
         // TankCarousel
-        override public function as_setMultiselectionMode(param1:Boolean, param2:String, param3:Boolean, param4:Array):void
+        override public function as_setMultiselectionMode(param:Object):void
         {
             //Logger.addObject(arguments, 1, "as_setMultiselectionMode");
 
-            _isMultiselectionModeEnabled = param1;
+            var vo:MultiselectionInfoVO = new MultiselectionInfoVO(param);
+
+            _isMultiselectionModeEnabled = vo.multiSelectionIsEnabled;
 
             slotImageWidth = int(UI_TankCarouselItemRenderer.ITEM_WIDTH * cfg.zoom);
             slotImageHeight = int(UI_TankCarouselItemRenderer.ITEM_HEIGHT * cfg.zoom);
@@ -160,7 +162,7 @@ package xvm.tcarousel_ui
 
             height = _carousel_height + 8;
 
-            super.as_setMultiselectionMode(param1, param2, param3, param4);
+            super.as_setMultiselectionMode(param);
         }
 
         // TankCarousel
