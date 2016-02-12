@@ -182,16 +182,14 @@ def _BattleResultsWindow__getDamageInfo(base, self, iInfo, valsStr):
         self._xvm_data['damageDealtNames'] = result['damageDealtNames']
     return result
 
-#TODO:0.9.14
-## save xp
-#@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__calculateTotalXp')
-#def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor = False):
-#    result = base(self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor)
-#    if not usePremFactor:
-#        self._xvm_data['xpTotal'].append(result)
-#    else:
-#        self._xvm_data['xpPremTotal'].append(result)
-#    return result
+# save xp
+@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__buildPersonalDataSource')
+def _BattleResultsWindow__buildPersonalDataSource(base, self, personalData, playerAvatarData):
+    result = base(self, personalData, playerAvatarData)
+    for data in result:
+        self._xvm_data['xpTotal'].append(data[1]['xpWithoutPremTotal'])
+        self._xvm_data['xpPremTotal'].append(data[1]['xpWithPremTotal'])
+    return result
 
 
 #####################################################################
