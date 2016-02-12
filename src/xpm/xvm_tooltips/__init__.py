@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '3.1.0',
+    'VERSION':       '0.9.14',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.13'],
+    'GAME_VERSIONS': ['0.9.14'],
     # optional
 }
 
@@ -25,7 +25,7 @@ from gun_rotation_shared import calcPitchLimitsFromDesc
 from helpers import i18n
 from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.gui_items import GUI_ITEM_TYPE
-from gui.shared.tooltips.vehicle import VehicleParamsField
+#TODO:0.9.14 from gui.shared.tooltips.vehicle import VehicleParamsField
 from gui.shared.tooltips.module import ModuleParamsField
 from gui.shared.utils import ItemsParameters, ParametersCache
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
@@ -131,7 +131,7 @@ ToolTip.xvm_hide = _ToolTip_xvm_hide
 # carousel events
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
-@overrideMethod(VehicleParamsField, '_getValue')
+#TODO:0.9.14 @overrideMethod(VehicleParamsField, '_getValue')
 def VehicleParamsField_getValue(base, self):
     # log('VehicleParamsField_getValue')
     try:

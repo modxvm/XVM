@@ -52,16 +52,17 @@ class _Get_online(object):
         ignoredServers = config.get('hangar/onlineServers/ignoredServers', [])
         self.loginHosts = []
         self.hangarHosts = []
-        if self.loginSection is not None:
-            for (name, subSec) in self.loginSection.items():
-                host_name = subSec.readStrings('name')[0]
-                if len(host_name) >= 13:
-                    host_name = subSec.readStrings('short_name')[0]
-                elif host_name.find('WOT ') == 0:
-                    host_name = host_name[4:]
-                self.loginHosts.append(host_name)
-                if host_name not in ignoredServers:
-                    self.hangarHosts.append(host_name)
+        #TODO:0.9.14
+        #if self.loginSection is not None:
+        #    for (name, subSec) in self.loginSection.items():
+        #        host_name = subSec.readStrings('name')[0]
+        #        if len(host_name) >= 13:
+        #            host_name = subSec.readStrings('short_name')[0]
+        #        elif host_name.find('WOT ') == 0:
+        #            host_name = host_name[4:]
+        #        self.loginHosts.append(host_name)
+        #        if host_name not in ignoredServers:
+        #            self.hangarHosts.append(host_name)
         self.done_config = True
 
     def get_online(self):

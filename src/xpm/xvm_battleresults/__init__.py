@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '3.1.0',
+    'VERSION':       '0.9.14',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.13'],
+    'GAME_VERSIONS': ['0.9.14'],
     # optional
 }
 
@@ -182,16 +182,16 @@ def _BattleResultsWindow__getDamageInfo(base, self, iInfo, valsStr):
         self._xvm_data['damageDealtNames'] = result['damageDealtNames']
     return result
 
-
-# save xp
-@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__calculateTotalXp')
-def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor = False):
-    result = base(self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor)
-    if not usePremFactor:
-        self._xvm_data['xpTotal'].append(result)
-    else:
-        self._xvm_data['xpPremTotal'].append(result)
-    return result
+#TODO:0.9.14
+## save xp
+#@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__calculateTotalXp')
+#def _BattleResultsWindow__calculateTotalXp(base, self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor = False):
+#    result = base(self, pData, aogasFactor, premXpFactor, igrXpFactor, refSystemFactor, isPremium, baseXp, dailyXP, xpPenalty, baseOrderXp, baseBoosterXP, eventXP, hasViolation, usePremFactor)
+#    if not usePremFactor:
+#        self._xvm_data['xpTotal'].append(result)
+#    else:
+#        self._xvm_data['xpPremTotal'].append(result)
+#    return result
 
 
 #####################################################################
