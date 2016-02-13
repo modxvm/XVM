@@ -15,7 +15,7 @@ package xvm.profile_ui
         UI_ProfileSortingButton;
         UI_ProfileTechniquePage;
         UI_ProfileTechniqueWindow;
-        UI_TechnicsDashLineTextItemIRenderer;
+        UI_StatisticsDashLineTextItemIRenderer;
         UI_TechniqueRenderer;
         UI_TechniqueStatisticTab;
     }

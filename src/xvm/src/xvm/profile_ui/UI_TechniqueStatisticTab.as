@@ -43,8 +43,8 @@ package xvm.profile_ui
             worker.update(arg1 as ProfileVehicleDossierVO);
             super.update(arg1);
 
-            if (xfw_group.unitRendererLinkage != getQualifiedClassName(UI_TechnicsDashLineTextItemIRenderer))
-                xfw_group.unitRendererLinkage = getQualifiedClassName(UI_TechnicsDashLineTextItemIRenderer);
+            if (xfw_group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))
+                xfw_group.unitRendererLinkage = getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer);
         }
 
         // PUBLIC

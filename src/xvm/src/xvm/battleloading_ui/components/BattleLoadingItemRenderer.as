@@ -226,7 +226,7 @@ package xvm.battleloading_ui.components
 
         private function get team():int
         {
-            return (proxy is UI_LeftItemRenderer) ? XfwConst.TEAM_ALLY : XfwConst.TEAM_ENEMY;
+            return (proxy is UI_LeftItemRendererTable || proxy is UI_LeftItemRendererTips) ? XfwConst.TEAM_ALLY : XfwConst.TEAM_ENEMY;
         }
 
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void

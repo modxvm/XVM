@@ -8,13 +8,13 @@ package xvm.profile_ui
     import com.xvm.*;
     import net.wg.data.managers.*;
 
-    public dynamic class UI_TechnicsDashLineTextItemIRenderer extends TechnicsDashLineTextItemIRenderer_UI
+    public dynamic class UI_StatisticsDashLineTextItemIRenderer extends StatisticsDashLineTextItemIRenderer_UI
     {
         private var _toolTipParams:IToolTipParams;
 
-        public function UI_TechnicsDashLineTextItemIRenderer()
+        public function UI_StatisticsDashLineTextItemIRenderer()
         {
-            //Logger.add("UI_TechnicsDashLineTextItemIRenderer");
+            //Logger.add("UI_StatisticsDashLineTextItemIRenderer");
         }
 
         override public function set toolTipParams(value:IToolTipParams):void

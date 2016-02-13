@@ -8,11 +8,11 @@ package xvm.battleloading_ui
     import net.wg.gui.lobby.battleloading.vo.*;
     import xvm.battleloading_ui.components.*;
 
-    public dynamic class UI_LeftItemRenderer extends LeftItemRendererUI
+    public dynamic class UI_LeftItemRendererTips extends LeftItemRendererTipsUI
     {
         private var worker:BattleLoadingItemRenderer;
 
-        public function UI_LeftItemRenderer()
+        public function UI_LeftItemRendererTips()
         {
             try
             {

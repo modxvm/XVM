@@ -12,7 +12,9 @@ package xvm.battleloading_ui
      */
     public class BattleLoadingUI extends Sprite
     {
-        UI_LeftItemRenderer;
-        UI_RightItemRenderer;
+        UI_LeftItemRendererTable;
+        UI_LeftItemRendererTips;
+        UI_RightItemRendererTable;
+        UI_RightItemRendererTips;
     }
 }
