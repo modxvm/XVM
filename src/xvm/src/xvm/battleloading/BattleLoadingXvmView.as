@@ -9,7 +9,8 @@ package xvm.battleloading
     import com.xvm.infrastructure.*;
     import com.xvm.types.*;
     import flash.utils.*;
-    import net.wg.gui.lobby.battleloading.*;
+    import net.wg.gui.components.controls.ReadOnlyScrollingList;
+    import net.wg.gui.lobby.battleloading.BattleLoading;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import org.idmedia.as3commons.util.StringUtils;
@@ -55,7 +56,7 @@ package xvm.battleloading
 
         private function waitInit():void
         {
-            if (!page.initialized || App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRenderer") == null)
+            if (!page.initialized || App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRendererTable") == null)
             {
                 var $this:* = this;
                 setTimeout(function():void { $this.waitInit(); }, 1);
@@ -70,7 +71,7 @@ package xvm.battleloading
         {
             try
             {
-                //TODO:0.9.14 BattleLoadingHelper.instance.InitRenderers(page);
+                initRenderers();
 
                 // Components
                 new WinChances(page); // Winning chance info above players list.
@@ -79,6 +80,25 @@ package xvm.battleloading
             catch (ex:Error)
             {
                 Logger.err(ex);
+            }
+        }
+
+        private function initRenderers():void
+        {
+            var list1:ReadOnlyScrollingList = page.form.team1List;
+            var list2:ReadOnlyScrollingList = page.form.team2List;
+            list1.validateNow();
+            list2.validateNow();
+
+            if (list1.itemRenderer == LeftItemRendererTableUI)
+            {
+                list1.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRendererTable");
+                list2.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_RightItemRendererTable");
+            }
+            else if (list1.itemRenderer == LeftItemRendererTipsUI)
+            {
+                list1.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRendererTips");
+                list2.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_RightItemRendererTips");
             }
         }
     }
