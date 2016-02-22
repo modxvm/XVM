@@ -6,6 +6,7 @@ package xvm.online.OnlineServers
 {
     import com.xfw.*;
     import com.xfw.events.*;
+    import com.xvm.utils.*;
     import flash.events.*;
     import flash.utils.*;
     import org.idmedia.as3commons.util.*;
@@ -25,6 +26,7 @@ package xvm.online.OnlineServers
 
         private var onlineTimer:uint;
         private var onlineTimeouts:Array;
+        private var serversOrder:Array;
 
         public static function initFeature(enabled:Boolean, interval:Number = 0):void
         {
@@ -84,13 +86,13 @@ package xvm.online.OnlineServers
             if (!answer)
                 return null;
 
-            var responseTimeList:Array = [];
+            serversOrder = Utils.createServersOrderFromAnswer(answer);
+            var responseTimeList:Array = [serversOrder.length];
             for (var name:String in answer)
             {
                 var cluster:String = StringUtils.startsWith(name, "WOT ") ? name.substring(4) : name;
-                responseTimeList.push({ cluster: cluster, people_online: answer[name] });
+                responseTimeList[serversOrder.indexOf(name)] = { cluster: cluster, time: answer[name] };
             }
-            responseTimeList.sortOn(["cluster"]);
 
             dispatchEvent(new ObjectEvent(Event.COMPLETE, responseTimeList));
 

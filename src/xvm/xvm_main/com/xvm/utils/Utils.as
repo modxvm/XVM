@@ -8,6 +8,7 @@ package com.xvm.utils
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.filters.*;
+    import mx.utils.ObjectUtil;
 
     public class Utils
     {
@@ -124,6 +125,33 @@ package com.xvm.utils
                 case "AT-SPG": return "TD";
                 default: return vclass;
             }
+        }
+
+        // 'RU1', 'RU10', 'RU2' -> 'RU1', 'RU2', 'RU10'
+        public static function sortByServer(a:String, b:String):int
+        {
+            var name_and_number:RegExp = /^(\D+)(\d+)$/;
+            var result_a:Object = name_and_number.exec(a)
+            if (!result_a)
+                return ObjectUtil.stringCompare(a, b)
+            var result_b:Object = name_and_number.exec(b)
+            if (!result_b)
+                return ObjectUtil.stringCompare(a, b)
+            if (result_a[1] == result_b[1]) { // non-numeric part is same
+                var result_a_num:int = parseInt(result_a[2],10);
+                var result_b_num:int = parseInt(result_b[2],10);
+                return result_a_num == result_b_num ? 0 : result_a_num > result_b_num ? 1 : -1;
+            }
+            return result_a[1] > result_b[1] ? 1 : -1;
+        }
+        
+        public static function createServersOrderFromAnswer(answer:Object):Array
+        {
+            var serversOrder:Array = new Array();
+            for (var name:String in answer)
+                serversOrder.push(name);
+            serversOrder.sort(Utils.sortByServer);
+            return serversOrder
         }
     }
 }
