@@ -153,5 +153,17 @@ package com.xvm.utils
             serversOrder.sort(Utils.sortByServer);
             return serversOrder
         }
+
+        public static function serversOrderMatchesAnswer(answer:Object, serversOrder:Array):Boolean
+        {
+            for (var name:String in serversOrder)
+                if (! name in answer)
+                    return false
+            for (name in answer)
+                if (serversOrder.indexOf(name) == -1)
+                    return false
+            return true
+        }
+
     }
 }

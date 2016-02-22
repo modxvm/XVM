@@ -85,8 +85,9 @@ package xvm.online.OnlineServers
             //Logger.add("onlineCallback:" + arguments.toString());
             if (!answer)
                 return null;
+            if (!serversOrder || !Utils.serversOrderMatchesAnswer(answer, serversOrder))
+                serversOrder = Utils.createServersOrderFromAnswer(answer);
 
-            serversOrder = Utils.createServersOrderFromAnswer(answer);
             var responseTimeList:Array = [serversOrder.length];
             for (var name:String in answer)
             {
