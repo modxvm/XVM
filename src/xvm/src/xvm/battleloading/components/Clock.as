@@ -16,14 +16,18 @@ package xvm.battleloading.components
 
         public function Clock(page:BattleLoading)
         {
-            if (!page.form.helpTip.visible)
+            var form:BattleLoadingForm = page.form as BattleLoadingForm;
+            if (!form)
+                return;
+
+            if (!form.helpTip.visible)
                 return;
 
             var format:String = Config.config.battleLoading.clockFormat;
             if (!format || format == "")
                 return;
 
-            var f:TextField = page.form.helpTip;
+            var f:TextField = form.helpTip;
 
             clock = new TextField();
             clock.x = f.x;
@@ -36,7 +40,7 @@ package xvm.battleloading.components
             clock.defaultTextFormat = tf;
             clock.selectable = false;
             clock.filters = f.filters;
-            page.form.addChild(clock);
+            form.addChild(clock);
 
             update();
             setInterval(update, 1000);

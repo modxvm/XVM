@@ -29,10 +29,11 @@ package xvm.battleloading.components
         {
             if (winChanceTF == null)
             {
-                winChanceTF = createWinChanceTextField(page.form.battleText);
-                page.form.addChild(winChanceTF);
-                winChanceTF.styleSheet = WGUtils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
-                winChanceTF.x = page.form.battleText.x - 283;
+                var form:BaseLoadingForm = page.form as BaseLoadingForm;
+                winChanceTF = createWinChanceTextField(form.battleText);
+                form.addChild(winChanceTF);
+                winChanceTF.styleSheet = WGUtils.createTextStyleSheet("chances", form.battleText.defaultTextFormat);
+                winChanceTF.x = form.battleText.x - 283;
                 winChanceTF.y = -50;
             }
 

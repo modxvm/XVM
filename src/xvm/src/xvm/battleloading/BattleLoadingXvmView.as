@@ -11,6 +11,7 @@ package xvm.battleloading
     import flash.utils.*;
     import net.wg.gui.components.controls.ReadOnlyScrollingList;
     import net.wg.gui.lobby.battleloading.BattleLoading;
+    import net.wg.gui.lobby.battleloading.BattleLoadingForm;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import org.idmedia.as3commons.util.StringUtils;
@@ -85,8 +86,12 @@ package xvm.battleloading
 
         private function initRenderers():void
         {
-            var list1:ReadOnlyScrollingList = page.form.team1List;
-            var list2:ReadOnlyScrollingList = page.form.team2List;
+            var form:BattleLoadingForm = page.form as BattleLoadingForm;
+            if (!form)
+                return;
+
+            var list1:ReadOnlyScrollingList = form.team1List;
+            var list2:ReadOnlyScrollingList = form.team2List;
             list1.validateNow();
             list2.validateNow();
 
