@@ -24,6 +24,9 @@ import traceback
 
 import BigWorld
 import game
+from account_helpers.settings_core import settings_constants
+from account_helpers.settings_core.options import SettingsContainer
+from account_helpers.settings_core.SettingsCore import g_settingsCore
 from Avatar import PlayerAvatar
 from BattleReplay import g_replayCtrl
 from PlayerEvents import g_playerEvents
@@ -149,6 +152,40 @@ def onClientVersionDiffers():
 g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
 
 
+# TODO: disable controls in the Settings window
+@overrideMethod(g_settingsCore, 'getSetting')
+def __g_settingsCore_getSetting(base, name):
+    value = base(name)
+    if name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
+        if not config.get('minimap/enableStandardLinesSettings'):
+            value = False
+    elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
+        if not config.get('minimap/enableStandardLinesSettings'):
+            value = False
+    elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
+        if not config.get('minimap/enableStandardCirclesSettings'):
+            value = False
+    elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
+        if not config.get('minimap/enableStandardCirclesSettings'):
+            value = False
+    elif name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
+        if not config.get('minimap/enableStandardCirclesSettings'):
+            value = False
+
+    #debug('getSetting: {} = {}'.format(name, value))
+    return value
+
+
+# TODO: disable controls in the Settings window
+@overrideMethod(SettingsContainer, 'getSetting')
+def __SettingsContainer_getSetting(base, self, name):
+    value = base(self, name)
+    if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
+        if not config.get('minimap/enableStandardLabelsSettings'):
+            value._set(0)
+
+    return value
+
 # LOBBY
 
 @overrideMethod(ProfileTechniqueWindow, 'requestData')
@@ -250,6 +287,7 @@ def _DynSquadEntityController_invalidateVehicleInfo(self, flags, playerVehVO, ar
             for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(playerVehVO.team)):
                 if vInfoVO.squadIndex > 0:
                     g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD | INV.MINIMAP_SQUAD)
+
 
 #cache._MIN_LIFE_TIME = 15
 #cache._MAX_LIFE_TIME = 24

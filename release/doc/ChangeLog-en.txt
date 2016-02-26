@@ -1,6 +1,10 @@
 ﻿XVM-6.2.1-dev:
   * adaptation to WoT 0.9.14
   * macro {{cellsize}} can be used in like other global macros
+  * new options:
+    "minimap"/"enableStandardCirclesSettings" - enable/disable standard circles settings
+    "minimap"/"enableStandardLabelsSettings" - enable/disable standard labels settings
+    "minimap"/"enableStandardLinesSettings" - enable/disable standard lines settings
 
 XVM-6.2.0.1:
   * improvements and bug fixes
