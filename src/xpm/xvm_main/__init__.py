@@ -152,40 +152,6 @@ def onClientVersionDiffers():
 g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
 
 
-# TODO: disable controls in the Settings window
-@overrideMethod(g_settingsCore, 'getSetting')
-def __g_settingsCore_getSetting(base, name):
-    value = base(name)
-    if name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
-        if not config.get('minimap/enableStandardLinesSettings'):
-            value = False
-    elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
-        if not config.get('minimap/enableStandardLinesSettings'):
-            value = False
-    elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
-        if not config.get('minimap/enableStandardCirclesSettings'):
-            value = False
-    elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
-        if not config.get('minimap/enableStandardCirclesSettings'):
-            value = False
-    elif name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
-        if not config.get('minimap/enableStandardCirclesSettings'):
-            value = False
-
-    #debug('getSetting: {} = {}'.format(name, value))
-    return value
-
-
-# TODO: disable controls in the Settings window
-@overrideMethod(SettingsContainer, 'getSetting')
-def __SettingsContainer_getSetting(base, self, name):
-    value = base(self, name)
-    if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
-        if not config.get('minimap/enableStandardLabelsSettings'):
-            value._set(0)
-
-    return value
-
 # LOBBY
 
 @overrideMethod(ProfileTechniqueWindow, 'requestData')
@@ -272,6 +238,64 @@ def _Minimap__delEntry(self, id, inCallback=False):
     # debug('> _Minimap__delEntry: {0}'.format(id))
     vehstate.updateSpottedStatus(id, False)
     g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
+
+# Minimap settings
+in_setupMinimapSettings = False
+in_updateSettings = False
+
+@overrideMethod(Minimap, 'setupMinimapSettings')
+def _Minimap_setupMinimapSettings(base, self, diff = None):
+    global in_setupMinimapSettings
+    in_setupMinimapSettings = True
+    base(self, diff)
+    in_setupMinimapSettings = False
+
+
+@overrideMethod(Minimap, '_Minimap__updateSettings')
+def _Minimap__updateSettings(base, self):
+    global in_updateSettings
+    in_updateSettings = True
+    base(self)
+    in_updateSettings = False
+
+
+@overrideMethod(g_settingsCore, 'getSetting')
+def __g_settingsCore_getSetting(base, name):
+    value = base(name)
+    global in_setupMinimapSettings
+    global in_updateSettings
+    if in_setupMinimapSettings:
+        if name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
+            if not config.get('minimap/useStandardCircles'):
+                value = False
+        elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
+            if not config.get('minimap/useStandardCircles'):
+                value = False
+        elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
+            if not config.get('minimap/useStandardCircles'):
+                value = False
+        #debug('getSetting: {} = {}'.format(name, value))
+    elif in_updateSettings:
+        if name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
+            if not config.get('minimap/useStandardLines'):
+                value = False
+        elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
+            if not config.get('minimap/useStandardLines'):
+                value = False
+        #debug('getSetting: {} = {}'.format(name, value))
+    return value
+
+
+@overrideMethod(SettingsContainer, 'getSetting')
+def __SettingsContainer_getSetting(base, self, name):
+    value = base(self, name)
+    global in_updateSettings
+    if in_updateSettings:
+        if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
+            if not config.get('minimap/useStandardLabels'):
+                value._set(0)
+        #debug('getSetting: {} = {}'.format(name, value))
+    return value
 
 
 @overrideMethod(MarkersManager, 'invokeMarker')

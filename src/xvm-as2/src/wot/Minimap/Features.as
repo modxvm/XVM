@@ -184,7 +184,7 @@ class wot.Minimap.Features
     private function onCameraUpdated(e:MinimapEvent):Void
     {
         var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
-        if (Minimap.config.hideCameraTriangle)
+        if (Minimap.config.hideCameraTriangle && !Config.config.minimap.useStandardLines)
         {
             if (camera._currentframe != 2)
             {
@@ -218,7 +218,7 @@ class wot.Minimap.Features
             circles = null;
         }
 
-        if (Minimap.config.circles.enabled)
+        if (Minimap.config.circles.enabled && !Config.config.minimap.useStandardCircles)
         {
             circles = new Circles();
         }
@@ -238,7 +238,7 @@ class wot.Minimap.Features
             lines = null;
         }
 
-        if (Minimap.config.lines.enabled)
+        if (Minimap.config.lines.enabled && !Config.config.minimap.useStandardLines)
         {
             lines = new Lines();
         }

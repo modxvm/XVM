@@ -2,9 +2,9 @@
   * адаптация к WoT 0.9.14
   * макрос {{cellsize}} можно использовать так же, как и другие глобальные макросы
   * добавлены опции:
-    "minimap"/"enableStandardCirclesSettings" - включить/выключить стандартные настройки кругов
-    "minimap"/"enableStandardLabelsSettings" - включить/выключить стандартные настройки надписей
-    "minimap"/"enableStandardLinesSettings" - включить/выключить стандартные настройки линий
+    "minimap"/"useStandardCircles" - использовать стандартные круги
+    "minimap"/"useStandardLabels" - использовать стандартные надписи
+    "minimap"/"useStandardLines" - использовать стандартные линии
 
 XVM-6.2.0.1:
   * улучшения и исправление ошибок

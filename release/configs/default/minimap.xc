@@ -47,15 +47,15 @@
     // Map size label
     // Поле размера карты
     "mapSize": ${"minimapMapSize.xc":"mapSize"},
-    // Enable/disable standard circles settings
-    // Включить/выключить стандартные настройки кругов
-    "enableStandardCirclesSettings": true,
-    // Enable/disable standard labels settings
-    // Включить/выключить стандартные настройки надписей
-    "enableStandardLabelsSettings": true,
-    // Enable/disable standard lines settings
-    // Включить/выключить стандартные настройки линий
-    "enableStandardLinesSettings": true,
+    // Use standard circles
+    // Использовать стандартные круги
+    "useStandardCircles": false,
+    // Use standard labels
+    // Использовать стандартные надписи
+    "useStandardLabels": false,
+    // Use standard lines
+    // Использовать стандартные линии
+    "useStandardLines": false,
     // Minimap labels.
     // Надписи на миникарте.
     "labels": ${"minimapLabels.xc":"labels"},

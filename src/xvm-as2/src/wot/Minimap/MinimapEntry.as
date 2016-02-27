@@ -251,7 +251,7 @@ class wot.Minimap.MinimapEntry
 
     private function onEntrySpotted()
     {
-        if (!Minimap.config.enabled || !Minimap.config.labels.enabled || !Minimap.config.labels.formats || Minimap.config.labels.formats.length == 0)
+        if (!Minimap.config.enabled || Config.config.minimap.useStandardLabels || !Minimap.config.labels.enabled || !Minimap.config.labels.formats || Minimap.config.labels.formats.length == 0)
             return;
 
         /*if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
