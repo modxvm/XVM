@@ -264,7 +264,7 @@ def __g_settingsCore_getSetting(base, name):
     value = base(name)
     global in_setupMinimapSettings
     global in_updateSettings
-    if in_setupMinimapSettings:
+    if in_setupMinimapSettings or in_updateSettings:
         if name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
             if not config.get('minimap/useStandardCircles'):
                 value = False
@@ -274,9 +274,7 @@ def __g_settingsCore_getSetting(base, name):
         elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
             if not config.get('minimap/useStandardCircles'):
                 value = False
-        #debug('getSetting: {} = {}'.format(name, value))
-    elif in_updateSettings:
-        if name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
+        elif name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
             if not config.get('minimap/useStandardLines'):
                 value = False
         elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
@@ -289,8 +287,9 @@ def __g_settingsCore_getSetting(base, name):
 @overrideMethod(SettingsContainer, 'getSetting')
 def __SettingsContainer_getSetting(base, self, name):
     value = base(self, name)
+    global in_setupMinimapSettings
     global in_updateSettings
-    if in_updateSettings:
+    if in_setupMinimapSettings or in_updateSettings:
         if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
             if not config.get('minimap/useStandardLabels'):
                 value._set(0)
