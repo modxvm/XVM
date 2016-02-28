@@ -307,20 +307,25 @@ def MainView_dispose(self, *args, **kwargs):
     MainView_handler = None
 
 # force getUnlockPrice to look at freeXP (which is affected by lock)
-@registerEvent(tooltips, 'getUnlockPrice', True)
-def tooltips_getUnlockPrice(*args, **kwargs):
-    try:
-        # dirty create same names for use in original function
-        class g_itemsCache():
-            class items():
-                class stats():
-                    from gui.shared import g_itemsCache as g_itemsCache_orig
-                    actualFreeXP = g_itemsCache_orig.items.stats.freeXP
-                    unlocks = g_itemsCache_orig.items.stats.unlocks
-                    vehiclesXPs = g_itemsCache_orig.items.stats.vehiclesXPs
-        tooltips.g_itemsCache = g_itemsCache
-    except Exception, ex:
-        err(traceback.format_exc())
+# dirty create same names for use in original function
+class g_itemsCache_dummy:
+    class items:
+        class stats_dummy:
+            @property
+            def actualFreeXP(*args, **kwargs):
+                return g_itemsCache.items.stats.freeXP
+
+            @property
+            def unlocks(*args, **kwargs):
+                return g_itemsCache.items.stats.unlocks
+
+            @property
+            def vehiclesXPs(*args, **kwargs):
+                return g_itemsCache.items.stats.vehiclesXPs
+        stats = stats_dummy()
+
+tooltips.g_itemsCache = g_itemsCache_dummy
+
 
 # force invalidateFreeXP to look at freeXP (which is affected by lock)
 @overrideMethod(Research, 'invalidateFreeXP')
