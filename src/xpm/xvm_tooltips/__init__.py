@@ -17,17 +17,19 @@ XFW_MOD_INFO = {
 # imports
 
 import traceback
+import sys
 from math import degrees, pi
 
 import BigWorld
 import game
+import gui.shared.tooltips.vehicle as tooltips_vehicle
 from gun_rotation_shared import calcPitchLimitsFromDesc
 from helpers import i18n
+from gui import g_htmlTemplates
 from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.formatters import text_styles
 from gui.shared.tooltips import formatters
 from gui.shared.gui_items import GUI_ITEM_TYPE
-from gui.shared.tooltips.vehicle import VehicleInfoTooltipData, CommonStatsBlockConstructor, AdditionalStatsBlockConstructor
 from gui.shared.tooltips.module import ModuleParamsField
 from gui.shared.utils import ItemsParameters, ParametersCache
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
@@ -37,7 +39,6 @@ from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.Scaleform.framework.ToolTip import ToolTip
 from gui.Scaleform.daapi.view.battle.ConsumablesPanel import ConsumablesPanel
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
-from pprint import pprint
 from xfw import *
 
 import xvm_main.python.config as config
@@ -47,13 +48,17 @@ from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.vehinfo_camo import getCamoValues
 from xvm_main.python.xvm import l10n
-
+# import "private" copy of text_styles for patching
+orig_text_styles = sys.modules.pop('gui.shared.formatters.text_styles')
+import gui.shared.formatters.text_styles as patched_text_styles
+sys.modules['gui.shared.formatters.text_styles'] = orig_text_styles
 
 #####################################################################
 # globals
 
 shells_vehicles_compatibility = {}
 carousel_tooltips_cache = {}
+styles_templates = {}
 toolTipDelayIntervalId = None
 weightTooHeavy = None  # will be localized red 'weight (kg)'
 
@@ -62,6 +67,10 @@ weightTooHeavy = None  # will be localized red 'weight (kg)'
 
 def start():
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, tooltips_clear_cache)
+
+    # patching text_styles for our font/size
+    patched_text_styles._getStyle = text_styles_getStyle
+    tooltips_vehicle.text_styles = patched_text_styles
 
 BigWorld.callback(0, start)
 
@@ -133,13 +142,13 @@ ToolTip.xvm_hide = _ToolTip_xvm_hide
 #############################
 # carousel events
 
-@overrideMethod(VehicleInfoTooltipData, '_packBlocks')
+@overrideMethod(tooltips_vehicle.VehicleInfoTooltipData, '_packBlocks')
 def VehicleInfoTooltipData_packBlocks(base, self, *args, **kwargs):
     result = base(self, *args, **kwargs)
     result = [item for item in result if item.get('data', {}).get('blocksData')]
     return result
 
-@overrideMethod(AdditionalStatsBlockConstructor, 'construct')
+@overrideMethod(tooltips_vehicle.AdditionalStatsBlockConstructor, 'construct')
 def AdditionalStatsBlockConstructor_construct(base, self):
     if config.get('tooltips/hideBottomText'):
         lockBlock = self._makeLockBlock()
@@ -149,19 +158,28 @@ def AdditionalStatsBlockConstructor_construct(base, self):
     else:
         return base(self)
 
+# patched _getStyle to use out font/size
+def text_styles_getStyle(style, ctx = {}):
+    if style not in styles_templates:
+        styles_templates[style] = g_htmlTemplates['html_templates:lobby/textStyle'].format(style)
+        if "'14'" in styles_templates[style] and '$FieldFont' in styles_templates[style]:
+            styles_templates[style] = styles_templates[style].replace("size='14'", "size='%s'" % config.get('tooltips/fontSize', 14)).replace("face='$FieldFont'", "face='%s'" % config.get('tooltips/fontName', '$FieldFont'))
+    return styles_templates[style] % ctx
+
+
 def tooltip_add_param(self, result, param0, param1):
-    result.append(formatters.packTextParameterBlockData(name=formatters.text_styles.main(param0), value=formatters.text_styles.stats(param1), valueWidth=80, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
+    result.append(formatters.packTextParameterBlockData(name=patched_text_styles.main(param0), value=patched_text_styles.stats(param1), valueWidth=90, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
+
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
-@overrideMethod(CommonStatsBlockConstructor, 'construct')
+@overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
     try:
-        global carousel_tooltips_cache
         vehicle = self.vehicle
         cache_result = carousel_tooltips_cache.get(vehicle.intCD)
         if cache_result:
             return cache_result
-        result = [formatters.packTitleDescBlock(formatters.text_styles.middleTitle(i18n.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY)), padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding, bottom=8))]
+        result = [formatters.packTitleDescBlock(patched_text_styles.middleTitle(i18n.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY)), padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding, bottom=8))]
         params = self.configuration.params
         veh_descr = vehicle.descriptor
         gun = vehicle.gun.descriptor
@@ -438,7 +456,7 @@ def h1_pad(text):
     return '<h1>%s</h1>' % text
 
 def gold_pad(text):
-    return "<font color='#FFC363'>%s</font>" % text
+    return "<font color='%s'>%s</font>" % (config.get('tooltips/goldColor', '#FFC363'), text)
 
 def red_pad(text):
     return "<font color='#FF0000'>%s</font>" % text
@@ -477,14 +495,13 @@ def relate_shells_vehicles():
 
 @registerEvent(ItemsRequester, '_invalidateItems')
 def ItemsRequester_invalidateItems(self, itemTypeID, uniqueIDs):
-    global carousel_tooltips_cache
     try:
         if itemTypeID == GUI_ITEM_TYPE.VEHICLE:
             for veh_id in uniqueIDs:
                 carousel_tooltips_cache[veh_id] = {}
     except Exception as ex:
         err(traceback.format_exc())
-        carousel_tooltips_cache = {}
+        carousel_tooltips_cache.clear()
 
 
 @registerEvent(ItemsRequester, 'clear')
@@ -493,6 +510,6 @@ def ItemsRequester_clear(*args, **kwargs):
 
 
 def tooltips_clear_cache(*args, **kwargs):
-    global carousel_tooltips_cache
-    carousel_tooltips_cache = {}
+    carousel_tooltips_cache.clear()
+    styles_templates.clear()
 

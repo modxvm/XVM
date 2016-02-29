@@ -13,6 +13,15 @@
     // delay in tooltips appearance: increase in case of freezes, default is 0.4 sec
     // задержка отображения подсказок: увеличьте в случае фризов, по-умолчанию 0.4 сек
     "tooltipsDelay": 0.4,
+    // size of the font in vehicle tooltips
+    // размер шрифта во всплывающих подсказках к танкам
+    "fontSize": 12,
+    // name of the font in vehicle tooltips
+    // название шрифта во всплывающих подсказках к танкам
+    "fontName": "$TextFont",
+    // color for premium shells etc. in vehicle tooltips
+    // цвет премиумных снарядов и т.д. во всплывающих подсказках к танкам
+    "goldColor": "#FFC363",
 
     "lightTank":    [
                     "maxHealth",

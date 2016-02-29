@@ -5,6 +5,9 @@
     "minimap"/"useStandardCircles" - use standard circles
     "minimap"/"useStandardLabels" - use standard labels
     "minimap"/"useStandardLines" - use standard lines
+    "tooltips"/"fontSize" - size of the font in vehicle tooltips
+    "tooltips"/"fontName" - name of the font in vehicle tooltips
+    "tooltips"/"goldColor" - color for premium shells etc. in vehicle tooltips
 
 XVM-6.2.0.1:
   * improvements and bug fixes
