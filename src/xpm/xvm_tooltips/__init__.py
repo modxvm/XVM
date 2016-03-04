@@ -163,12 +163,12 @@ def text_styles_getStyle(style, ctx = {}):
     if style not in styles_templates:
         styles_templates[style] = g_htmlTemplates['html_templates:lobby/textStyle'].format(style)
         if "'14'" in styles_templates[style] and '$FieldFont' in styles_templates[style]:
-            styles_templates[style] = styles_templates[style].replace("size='14'", "size='%s'" % config.get('tooltips/fontSize', 14)).replace("face='$FieldFont'", "face='%s'" % config.get('tooltips/fontName', '$FieldFont'))
+            styles_templates[style] = styles_templates[style].replace("size='14'", "size='%s'" % config.get('tooltips/fontSize', 12)).replace("face='$FieldFont'", "face='%s'" % config.get('tooltips/fontName', '$TextFont'))
     return styles_templates[style] % ctx
 
 
 def tooltip_add_param(self, result, param0, param1):
-    result.append(formatters.packTextParameterBlockData(name=patched_text_styles.main(param0), value=patched_text_styles.stats(param1), valueWidth=90, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
+    result.append(formatters.packTextParameterBlockData(name=patched_text_styles.main(param0), value=patched_text_styles.stats(param1), valueWidth=100, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
 
 def tooltip_with_units(value, units):
     return '%s %s' % (value, patched_text_styles.standard(units))
@@ -184,6 +184,7 @@ def replace_p(text):
 @overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
     try:
+        self.leftPadding = 10
         vehicle = self.vehicle
         cache_result = carousel_tooltips_cache.get(vehicle.intCD)
         if cache_result:
@@ -325,8 +326,10 @@ def CommonStatsBlockConstructor_construct(base, self):
                     tooltip_add_param(self, result, self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)[0], speedLimits_str)
                 #turret rotation speed
                 elif paramName == 'turretRotationSpeed' or paramName == 'gunRotationSpeed':
+                    if not vehicle.hasTurrets:
+                        paramName = 'gunRotationSpeed'
                     turretRotationSpeed_str = str(int(degrees(veh_descr.turret['rotationSpeed'])))
-                    tooltip_add_param(self, result, tooltip_with_units(i18n.makeString('#menu:tank_params/gunRotationSpeed'), i18n.makeString('#menu:tank_params/gps')), turretRotationSpeed_str)
+                    tooltip_add_param(self, result, tooltip_with_units(i18n.makeString('#menu:tank_params/%s' % paramName).rstrip(), i18n.makeString('#menu:tank_params/gps')), turretRotationSpeed_str)
                 #terrain resistance
                 elif paramName == 'terrainResistance':
                     resistances_arr = []
