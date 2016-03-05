@@ -105,6 +105,10 @@
   // Параметры экрана загрузки боя.
   "battleLoading": ${"battleLoading.xc":"battleLoading"},
 
+  // Parameters for the alternative view of the Battle Loading screen.
+  // Параметры альтернативного представления экрана загрузки боя.
+  "battleLoadingTips": ${"battleLoadingTips.xc":"battleLoadingTips"},
+
   // Parameters of the Battle Statistics form.
   // Параметры окна статистики по клавише Tab.
   "statisticForm": ${"statisticForm.xc":"statisticForm"},

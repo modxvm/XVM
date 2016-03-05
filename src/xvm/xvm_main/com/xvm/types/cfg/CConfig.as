@@ -27,6 +27,7 @@ package com.xvm.types.cfg
         public var battleResults:CBattleResults;
         public var battle:CBattle;
         public var battleLoading:CBattleLoading;
+        public var battleLoadingTips:CBattleLoading;
         public var statisticForm:CStatisticForm;
         public var playersPanel:CPlayersPanel;
         public var expertPanel:CExpertPanel;

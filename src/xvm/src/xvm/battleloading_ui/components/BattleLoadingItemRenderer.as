@@ -22,11 +22,18 @@ package xvm.battleloading_ui.components
 
     public class BattleLoadingItemRenderer
     {
-        private static const VEHICLE_FIELD_WIDTH:int = 250;
+        public static const PROXY_TYPE_TABLE:String = "table";
+        public static const PROXY_TYPE_TIPS:String = "tips";
+
+        private static const NAME_FIELD_WIDTH_DELTA_TABLE:int = 100;
+        private static const NAME_FIELD_WIDTH_DELTA_TIPS:int = 40;
+        private static const VEHICLE_FIELD_WIDTH_TABLE:int = 250;
+        private static const VEHICLE_FIELD_WIDTH_TIPS:int = 100;
         private static const VEHICLE_TYPE_ICON_WIDTH:Number = 25;
         private static const MAXIMUM_VEHICLE_ICON_WIDTH:int = 80;
 
         private var proxy:PlayerItemRenderer;
+        private var proxyType:String;
 
         private var _model:VehicleInfoVO;
 
@@ -54,9 +61,10 @@ package xvm.battleloading_ui.components
             proxy.textField.borderColor = 0x00FF00;
         }
 
-        public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer)
+        public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer, proxyType:String)
         {
             this.proxy = proxy;
+            this.proxyType = proxyType;
             //_debug();
         }
 
@@ -80,26 +88,28 @@ package xvm.battleloading_ui.components
             TextFieldEx.setVerticalAutoSize(proxy.vehicleField, TextFieldAutoSize.CENTER);
             proxy.vehicleField.condenseWhite = true;
             proxy.vehicleField.scaleX = 1;
-            proxy.vehicleField.width = VEHICLE_FIELD_WIDTH;
+            proxy.vehicleField.width = getVehicleFieldWidth();
 
             proxy.vehicleIconLoader.autoSize = false;
 
-            textField_width = proxy.textField.width + 100;
+            var textFieldWidthDelta:int = (proxyType == PROXY_TYPE_TABLE) ? NAME_FIELD_WIDTH_DELTA_TABLE : NAME_FIELD_WIDTH_DELTA_TIPS;
+
+            textField_width = proxy.textField.width + textFieldWidthDelta;
             if (team == XfwConst.TEAM_ALLY)
             {
-                squad_x = proxy.squad.x + Config.config.battleLoading.squadIconOffsetXLeft;
-                textField_x = proxy.textField.x + Config.config.battleLoading.nameFieldOffsetXLeft;
-                vehicleIconLoader_x = proxy.vehicleIconLoader.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
-                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
-                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x + Config.config.battleLoading.vehicleIconOffsetXLeft;
+                squad_x = proxy.squad.x + cfg.squadIconOffsetXLeft;
+                textField_x = proxy.textField.x + cfg.nameFieldOffsetXLeft;
+                vehicleIconLoader_x = proxy.vehicleIconLoader.x + cfg.vehicleIconOffsetXLeft;
+                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x + cfg.vehicleIconOffsetXLeft;
+                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x + cfg.vehicleIconOffsetXLeft;
             }
             else
             {
-                squad_x = proxy.squad.x - Config.config.battleLoading.squadIconOffsetXRight;
-                textField_x = proxy.textField.x - Config.config.battleLoading.nameFieldOffsetXRight - 100;
-                vehicleIconLoader_x = proxy.vehicleIconLoader.x - Config.config.battleLoading.vehicleIconOffsetXRight;
-                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x - Config.config.battleLoading.vehicleIconOffsetXRight;
-                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x - Config.config.battleLoading.vehicleIconOffsetXRight;
+                squad_x = proxy.squad.x - cfg.squadIconOffsetXRight;
+                textField_x = proxy.textField.x - cfg.nameFieldOffsetXRight - textFieldWidthDelta;
+                vehicleIconLoader_x = proxy.vehicleIconLoader.x - cfg.vehicleIconOffsetXRight;
+                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x - cfg.vehicleIconOffsetXRight;
+                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x - cfg.vehicleIconOffsetXRight;
             }
         }
 
@@ -167,17 +177,17 @@ package xvm.battleloading_ui.components
                     // ClanIcon
                     attachClanIconToPlayer();
 
-                    var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Config.config.battleLoading.darkenNotReadyIcon || proxy.enabled) && formatOptions.alive;
+                    var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!cfg.darkenNotReadyIcon || proxy.enabled) && formatOptions.alive;
 
                     proxy.vehicleIconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
 
                     // controls visibility
-                    if (Config.config.battleLoading.removeSquadIcon)
+                    if (cfg.removeSquadIcon)
                         proxy.squad.visible = false;
-                    if (Config.config.battleLoading.removeVehicleLevel)
+                    if (cfg.removeVehicleLevel)
                         proxy.vehicleLevelIcon.visible = false;
-                    if (Config.config.battleLoading.removeVehicleTypeIcon)
+                    if (cfg.removeVehicleTypeIcon)
                         proxy.vehicleTypeIcon.visible = false;
 
                     // fields x positions
@@ -191,28 +201,61 @@ package xvm.battleloading_ui.components
                     // vehicleField
                     if (team == XfwConst.TEAM_ALLY)
                     {
-                        proxy.vehicleField.x = proxy.vehicleIconLoader.x - VEHICLE_FIELD_WIDTH - 1;
-                        if (!Config.config.battleLoading.removeVehicleTypeIcon)
-                            proxy.vehicleField.x -= VEHICLE_TYPE_ICON_WIDTH + 2;
-                        proxy.vehicleField.x += Config.config.battleLoading.vehicleFieldOffsetXLeft;
+                        proxy.vehicleField.x = proxy.vehicleIconLoader.x - getVehicleFieldWidth();
+                        if (cfg.removeVehicleTypeIcon)
+                        {
+                            if (proxyType == PROXY_TYPE_TIPS)
+                            {
+                                proxy.vehicleField.width = getVehicleFieldWidth() + VEHICLE_TYPE_ICON_WIDTH - 5;
+                                proxy.vehicleField.x += 5 - VEHICLE_TYPE_ICON_WIDTH;
+                            }
+                        }
+                        else
+                        {
+                            if (proxyType == PROXY_TYPE_TIPS)
+                            {
+                                proxy.vehicleField.x += 5 - VEHICLE_TYPE_ICON_WIDTH;
+                            }
+                            else
+                            {
+                                proxy.vehicleField.x += -2 - VEHICLE_TYPE_ICON_WIDTH;
+                            }
+                        }
+                        proxy.vehicleField.x += cfg.vehicleFieldOffsetXLeft;
                     }
                     else
                     {
-                        proxy.vehicleField.x = proxy.vehicleIconLoader.x + (proxy.vehicleIconLoader.scaleX < 0 ? MAXIMUM_VEHICLE_ICON_WIDTH : 0) + 4;
-                        if (!Config.config.battleLoading.removeVehicleTypeIcon)
-                            proxy.vehicleField.x += VEHICLE_TYPE_ICON_WIDTH + 4;
-                        proxy.vehicleField.x -= Config.config.battleLoading.vehicleFieldOffsetXRight;
+                        proxy.vehicleField.x = proxy.vehicleIconLoader.x + (proxy.vehicleIconLoader.scaleX < 0 ? MAXIMUM_VEHICLE_ICON_WIDTH : 0);
+                        if (cfg.removeVehicleTypeIcon)
+                        {
+                            if (proxyType == PROXY_TYPE_TIPS)
+                            {
+                                proxy.vehicleField.width = getVehicleFieldWidth() + VEHICLE_TYPE_ICON_WIDTH - 7;
+                            }
+                        }
+                        else
+                        {
+                            if (proxyType == PROXY_TYPE_TIPS)
+                            {
+                                proxy.vehicleField.x += VEHICLE_TYPE_ICON_WIDTH - 7;
+                            }
+                            else
+                            {
+                                proxy.vehicleField.x += VEHICLE_TYPE_ICON_WIDTH + 2;
+                            }
+                        }
+                        proxy.vehicleField.x -= cfg.vehicleFieldOffsetXRight;
                     }
 
                     // Set Text Fields
                     var textFieldColorString:String = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
 
                     var nickFieldText:String = Macros.Format(_model.playerName, team == XfwConst.TEAM_ALLY
-                        ? Config.config.battleLoading.formatLeftNick : Config.config.battleLoading.formatRightNick, formatOptions);
+                        ? cfg.formatLeftNick : cfg.formatRightNick, formatOptions);
                     proxy.textField.htmlText = "<font color='" + textFieldColorString + "'>" + nickFieldText + "</font>";
 
                     var vehicleFieldText:String = Macros.Format(_model.playerName, team == XfwConst.TEAM_ALLY
-                        ? Config.config.battleLoading.formatLeftVehicle : Config.config.battleLoading.formatRightVehicle, formatOptions);
+                        ? cfg.formatLeftVehicle : cfg.formatRightVehicle, formatOptions);
                     proxy.vehicleField.htmlText = "<font color='" + textFieldColorString + "'>" + vehicleFieldText + "</font>";
                 }
             }
@@ -227,6 +270,16 @@ package xvm.battleloading_ui.components
         private function get team():int
         {
             return (proxy is UI_LeftItemRendererTable || proxy is UI_LeftItemRendererTips) ? XfwConst.TEAM_ALLY : XfwConst.TEAM_ENEMY;
+        }
+
+        private function getVehicleFieldWidth():int
+        {
+            return proxyType == PROXY_TYPE_TABLE ? VEHICLE_FIELD_WIDTH_TABLE : VEHICLE_FIELD_WIDTH_TIPS;
+        }
+
+        private function get cfg():CBattleLoading
+        {
+            return proxyType == PROXY_TYPE_TABLE ? Config.config.battleLoading : Config.config.battleLoadingTips;
         }
 
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void
@@ -274,8 +327,7 @@ package xvm.battleloading_ui.components
             if (_clanIconLoaded)
                 return;
 
-            var cfg:CClanIcon = Config.config.battleLoading.clanIcon;
-            if (!cfg.show)
+            if (!cfg.clanIcon.show)
                 return;
 
             var statData:StatData = Stat.getData(_model.playerName);
@@ -284,7 +336,7 @@ package xvm.battleloading_ui.components
 
             _clanIconLoaded = true;
 
-            var icon:ClanIcon = new ClanIcon(cfg, proxy.vehicleIconLoader.x, proxy.vehicleIconLoader.y, team,
+            var icon:ClanIcon = new ClanIcon(cfg.clanIcon, proxy.vehicleIconLoader.x, proxy.vehicleIconLoader.y, team,
                 _model.accountDBID,
                 _model.playerName,
                 _model.clanAbbrev,

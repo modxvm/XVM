@@ -6,6 +6,7 @@ package xvm.battleloading.components
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.types.cfg.*;
     import com.xvm.utils.*;
     import flash.text.*;
     import net.wg.gui.lobby.battleloading.*;
@@ -13,16 +14,22 @@ package xvm.battleloading.components
     public class WinChances
     {
         private var page:BattleLoading;
+        private var cfg:CBattleLoading;
 
         public function WinChances(page:BattleLoading)
         {
-            if (Config.networkServicesSettings.chance == false && Config.config.battleLoading.showBattleTier == false)
-                return;
             this.page = page;
+
+            cfg = (page.form as BattleLoadingForm).formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+
+            if (Config.networkServicesSettings.chance == false && cfg.showBattleTier == false)
+                return;
 
             // Add stat loading handler
             Stat.loadBattleStat(this, onStatLoaded);
         }
+
+        // PRIVATE
 
         private var winChanceTF:TextField = null;
         private function onStatLoaded():void
@@ -41,7 +48,7 @@ package xvm.battleloading.components
             for (var name:String in Stat.stat)
                 playerNames.push(name);
 
-            var chanceText:String = Chance.GetChanceText(playerNames, Config.networkServicesSettings.chance, Config.config.battleLoading.showBattleTier);
+            var chanceText:String = Chance.GetChanceText(playerNames, Config.networkServicesSettings.chance, cfg.showBattleTier);
             if (chanceText)
             {
                 winChanceTF.htmlText = '<span class="chances">' + chanceText + '</span>';

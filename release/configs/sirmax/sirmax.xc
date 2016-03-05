@@ -169,6 +169,13 @@
     "formatLeftVehicle":  ${"def.formatVehicle"},
     "formatRightVehicle": ${"def.formatVehicle"}
   },
+  "battleLoadingTips": {
+    "showBattleTier": true,
+    //"removeSquadIcon": true,
+    "removeVehicleLevel": true,
+    "removeVehicleTypeIcon": true,
+    "clanIcon": { "show": true }
+  },
   "statisticForm": {
     "showBattleTier": true,
     //"removeSquadIcon": true,

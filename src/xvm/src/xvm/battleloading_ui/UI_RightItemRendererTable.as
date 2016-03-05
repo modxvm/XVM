@@ -17,7 +17,7 @@ package xvm.battleloading_ui
             try
             {
                 super();
-                worker = new BattleLoadingItemRenderer(this);
+                worker = new BattleLoadingItemRenderer(this, BattleLoadingItemRenderer.PROXY_TYPE_TABLE);
             }
             catch (ex:Error)
             {

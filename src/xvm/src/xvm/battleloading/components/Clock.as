@@ -6,6 +6,7 @@ package xvm.battleloading.components
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.types.cfg.*;
     import flash.text.*;
     import flash.utils.*;
     import net.wg.gui.lobby.battleloading.*;
@@ -13,6 +14,7 @@ package xvm.battleloading.components
     public class Clock
     {
         private var clock:TextField;
+        private var clockFormat:String;
 
         public function Clock(page:BattleLoading)
         {
@@ -23,8 +25,10 @@ package xvm.battleloading.components
             if (!form.helpTip.visible)
                 return;
 
-            var format:String = Config.config.battleLoading.clockFormat;
-            if (!format || format == "")
+            var cfg:CBattleLoading = (page.form as BattleLoadingForm).formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+
+            clockFormat = cfg.clockFormat;
+            if (!clockFormat || clockFormat == "")
                 return;
 
             var f:TextField = form.helpTip;
@@ -50,7 +54,7 @@ package xvm.battleloading.components
 
         private function update():void
         {
-            clock.text = XfwUtils.FormatDate(Config.config.battleLoading.clockFormat, new Date());
+            clock.text = XfwUtils.FormatDate(clockFormat, new Date());
         }
     }
 

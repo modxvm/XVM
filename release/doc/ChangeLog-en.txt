@@ -8,6 +8,7 @@
     "tooltips"/"fontSize" - size of the font in vehicle tooltips
     "tooltips"/"fontName" - name of the font in vehicle tooltips
     "tooltips"/"goldColor" - color for premium shells etc. in vehicle tooltips
+  * added new section "battleLoadingTips" for new battle loading screen views
 
 XVM-6.2.0.1:
   * improvements and bug fixes
