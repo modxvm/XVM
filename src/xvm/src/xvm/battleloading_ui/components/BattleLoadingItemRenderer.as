@@ -61,13 +61,13 @@ package xvm.battleloading_ui.components
             this.proxy = proxy;
             this.proxyType = proxyType;
 
-            if (cfg.nameFieldShowBorder)
+            if (Macros.FormatGlobalBooleanValue(cfg.nameFieldShowBorder))
             {
                 proxy.textField.border = true;
                 proxy.textField.borderColor = 0x00FF00;
             }
 
-            if (cfg.vehicleFieldShowBorder)
+            if (Macros.FormatGlobalBooleanValue(cfg.vehicleFieldShowBorder))
             {
                 proxy.vehicleField.border = true;
                 proxy.vehicleField.borderColor = 0xFFFF00;
@@ -105,19 +105,19 @@ package xvm.battleloading_ui.components
             textField_width = proxy.textField.width + textFieldWidthDelta;
             if (team == XfwConst.TEAM_ALLY)
             {
-                squad_x = proxy.squad.x + cfg.squadIconOffsetXLeft;
-                textField_x = proxy.textField.x + cfg.nameFieldOffsetXLeft;
-                vehicleIconLoader_x = proxy.vehicleIconLoader.x + cfg.vehicleIconOffsetXLeft;
-                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x + cfg.vehicleIconOffsetXLeft;
-                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x + cfg.vehicleIconOffsetXLeft;
+                squad_x = proxy.squad.x + Macros.FormatGlobalNumberValue(cfg.squadIconOffsetXLeft);
+                textField_x = proxy.textField.x + Macros.FormatGlobalNumberValue(cfg.nameFieldOffsetXLeft);
+                vehicleIconLoader_x = proxy.vehicleIconLoader.x + Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
+                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x + Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
+                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x + Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
             }
             else
             {
-                squad_x = proxy.squad.x - cfg.squadIconOffsetXRight;
-                textField_x = proxy.textField.x - cfg.nameFieldOffsetXRight - textFieldWidthDelta;
-                vehicleIconLoader_x = proxy.vehicleIconLoader.x - cfg.vehicleIconOffsetXRight;
-                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x - cfg.vehicleIconOffsetXRight;
-                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x - cfg.vehicleIconOffsetXRight;
+                squad_x = proxy.squad.x - Macros.FormatGlobalNumberValue(cfg.squadIconOffsetXRight);
+                textField_x = proxy.textField.x - Macros.FormatGlobalNumberValue(cfg.nameFieldOffsetXRight) - textFieldWidthDelta;
+                vehicleIconLoader_x = proxy.vehicleIconLoader.x - Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
+                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x - Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
+                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x - Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
             }
         }
 
@@ -185,17 +185,17 @@ package xvm.battleloading_ui.components
                     // ClanIcon
                     attachClanIconToPlayer();
 
-                    var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!cfg.darkenNotReadyIcon || proxy.enabled) && formatOptions.alive;
+                    var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Macros.FormatGlobalBooleanValue(cfg.darkenNotReadyIcon) || proxy.enabled) && formatOptions.alive;
 
                     proxy.vehicleIconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
 
                     // controls visibility
-                    if (cfg.removeSquadIcon)
+                    if (Macros.FormatGlobalBooleanValue(cfg.removeSquadIcon))
                         proxy.squad.visible = false;
-                    if (cfg.removeVehicleLevel)
+                    if (Macros.FormatGlobalBooleanValue(cfg.removeVehicleLevel))
                         proxy.vehicleLevelIcon.visible = false;
-                    if (cfg.removeVehicleTypeIcon)
+                    if (Macros.FormatGlobalBooleanValue(cfg.removeVehicleTypeIcon))
                         proxy.vehicleTypeIcon.visible = false;
 
                     // fields x positions
@@ -210,7 +210,7 @@ package xvm.battleloading_ui.components
                     if (team == XfwConst.TEAM_ALLY)
                     {
                         proxy.vehicleField.x = proxy.vehicleIconLoader.x - getVehicleFieldWidth();
-                        if (cfg.removeVehicleTypeIcon)
+                        if (Macros.FormatGlobalBooleanValue(cfg.removeVehicleTypeIcon))
                         {
                             if (proxyType == PROXY_TYPE_TIPS)
                             {
@@ -229,12 +229,12 @@ package xvm.battleloading_ui.components
                                 proxy.vehicleField.x += -2 - VEHICLE_TYPE_ICON_WIDTH;
                             }
                         }
-                        proxy.vehicleField.x += cfg.vehicleFieldOffsetXLeft;
+                        proxy.vehicleField.x += Macros.FormatGlobalNumberValue(cfg.vehicleFieldOffsetXLeft);
                     }
                     else
                     {
                         proxy.vehicleField.x = proxy.vehicleIconLoader.x + (proxy.vehicleIconLoader.scaleX < 0 ? MAXIMUM_VEHICLE_ICON_WIDTH : 0);
-                        if (cfg.removeVehicleTypeIcon)
+                        if (Macros.FormatGlobalBooleanValue(cfg.removeVehicleTypeIcon))
                         {
                             if (proxyType == PROXY_TYPE_TIPS)
                             {
@@ -252,7 +252,7 @@ package xvm.battleloading_ui.components
                                 proxy.vehicleField.x += VEHICLE_TYPE_ICON_WIDTH + 2;
                             }
                         }
-                        proxy.vehicleField.x -= cfg.vehicleFieldOffsetXRight;
+                        proxy.vehicleField.x -= Macros.FormatGlobalNumberValue(cfg.vehicleFieldOffsetXRight);
                     }
 
                     // Set Text Fields
@@ -285,11 +285,11 @@ package xvm.battleloading_ui.components
             var w:Number =  (proxyType == PROXY_TYPE_TABLE) ? NAME_FIELD_WIDTH_DELTA_TABLE : NAME_FIELD_WIDTH_DELTA_TIPS;
             if (team == XfwConst.TEAM_ALLY)
             {
-                w += cfg.nameFieldWidthDeltaLeft;
+                w += Macros.FormatGlobalNumberValue(cfg.nameFieldWidthDeltaLeft);
             }
             else
             {
-                w += cfg.nameFieldWidthDeltaRight;
+                w += Macros.FormatGlobalNumberValue(cfg.nameFieldWidthDeltaRight);
             }
             return w;
         }
@@ -299,11 +299,11 @@ package xvm.battleloading_ui.components
             var w:Number = (proxyType == PROXY_TYPE_TABLE) ? VEHICLE_FIELD_WIDTH_TABLE : VEHICLE_FIELD_WIDTH_TIPS;
             if (team == XfwConst.TEAM_ALLY)
             {
-                w += cfg.vehicleFieldWidthDeltaLeft;
+                w += Macros.FormatGlobalNumberValue(cfg.vehicleFieldWidthDeltaLeft);
             }
             else
             {
-                w += cfg.vehicleFieldWidthDeltaRight;
+                w += Macros.FormatGlobalNumberValue(cfg.vehicleFieldWidthDeltaRight);
             }
             return w;
         }
@@ -358,7 +358,7 @@ package xvm.battleloading_ui.components
             if (_clanIconLoaded)
                 return;
 
-            if (!cfg.clanIcon.show)
+            if (!Macros.FormatGlobalBooleanValue(cfg.clanIcon.show))
                 return;
 
             var statData:StatData = Stat.getData(_model.playerName);
