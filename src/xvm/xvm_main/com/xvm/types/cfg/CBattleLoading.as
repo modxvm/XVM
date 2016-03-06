@@ -18,10 +18,16 @@ package com.xvm.types.cfg
         public var removeVehicleTypeIcon:Boolean;
         public var squadIconOffsetXLeft:Number;
         public var squadIconOffsetXRight:Number;
+        public var nameFieldShowBorder:Boolean;
+        public var vehicleFieldShowBorder:Boolean;
         public var nameFieldOffsetXLeft:Number;
+        public var nameFieldWidthDeltaLeft:Number;
         public var nameFieldOffsetXRight:Number;
+        public var nameFieldWidthDeltaRight:Number;
         public var vehicleFieldOffsetXLeft:Number;
+        public var vehicleFieldWidthDeltaLeft:Number;
         public var vehicleFieldOffsetXRight:Number;
+        public var vehicleFieldWidthDeltaRight:Number;
         public var vehicleIconOffsetXLeft:Number;
         public var vehicleIconOffsetXRight:Number;
         public var clanIcon:CClanIcon;

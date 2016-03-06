@@ -54,17 +54,25 @@ package xvm.battleloading_ui.components
                 _model.vehicleStatus = 3;
                 proxy.setData(_model);
             }, 1000);
-
-            proxy.vehicleField.border = true;
-            proxy.vehicleField.borderColor = 0xFFFF00;
-            proxy.textField.border = true;
-            proxy.textField.borderColor = 0x00FF00;
         }
 
         public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer, proxyType:String)
         {
             this.proxy = proxy;
             this.proxyType = proxyType;
+
+            if (cfg.nameFieldShowBorder)
+            {
+                proxy.textField.border = true;
+                proxy.textField.borderColor = 0x00FF00;
+            }
+
+            if (cfg.vehicleFieldShowBorder)
+            {
+                proxy.vehicleField.border = true;
+                proxy.vehicleField.borderColor = 0xFFFF00;
+            }
+
             //_debug();
         }
 
@@ -92,7 +100,7 @@ package xvm.battleloading_ui.components
 
             proxy.vehicleIconLoader.autoSize = false;
 
-            var textFieldWidthDelta:int = (proxyType == PROXY_TYPE_TABLE) ? NAME_FIELD_WIDTH_DELTA_TABLE : NAME_FIELD_WIDTH_DELTA_TIPS;
+            var textFieldWidthDelta:int = getNameFieldWidthDelta();
 
             textField_width = proxy.textField.width + textFieldWidthDelta;
             if (team == XfwConst.TEAM_ALLY)
@@ -272,9 +280,32 @@ package xvm.battleloading_ui.components
             return (proxy is UI_LeftItemRendererTable || proxy is UI_LeftItemRendererTips) ? XfwConst.TEAM_ALLY : XfwConst.TEAM_ENEMY;
         }
 
+        private function getNameFieldWidthDelta():int
+        {
+            var w:Number =  (proxyType == PROXY_TYPE_TABLE) ? NAME_FIELD_WIDTH_DELTA_TABLE : NAME_FIELD_WIDTH_DELTA_TIPS;
+            if (team == XfwConst.TEAM_ALLY)
+            {
+                w += cfg.nameFieldWidthDeltaLeft;
+            }
+            else
+            {
+                w += cfg.nameFieldWidthDeltaRight;
+            }
+            return w;
+        }
+
         private function getVehicleFieldWidth():int
         {
-            return proxyType == PROXY_TYPE_TABLE ? VEHICLE_FIELD_WIDTH_TABLE : VEHICLE_FIELD_WIDTH_TIPS;
+            var w:Number = (proxyType == PROXY_TYPE_TABLE) ? VEHICLE_FIELD_WIDTH_TABLE : VEHICLE_FIELD_WIDTH_TIPS;
+            if (team == XfwConst.TEAM_ALLY)
+            {
+                w += cfg.vehicleFieldWidthDeltaLeft;
+            }
+            else
+            {
+                w += cfg.vehicleFieldWidthDeltaRight;
+            }
+            return w;
         }
 
         private function get cfg():CBattleLoading

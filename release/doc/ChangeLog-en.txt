@@ -1,14 +1,21 @@
 ﻿XVM-6.2.1-dev:
   * adaptation to WoT 0.9.14
   * macro {{cellsize}} can be used in like other global macros
-  * new options:
-    "minimap"/"useStandardCircles" - use standard circles
-    "minimap"/"useStandardLabels" - use standard labels
-    "minimap"/"useStandardLines" - use standard lines
-    "tooltips"/"fontSize" - size of the font in vehicle tooltips
-    "tooltips"/"fontName" - name of the font in vehicle tooltips
-    "tooltips"/"goldColor" - color for premium shells etc. in vehicle tooltips
+  * added new options:
+      "minimap"/"useStandardCircles" - use standard circles
+      "minimap"/"useStandardLabels" - use standard labels
+      "minimap"/"useStandardLines" - use standard lines
+      "tooltips"/"fontSize" - size of the font in vehicle tooltips
+      "tooltips"/"fontName" - name of the font in vehicle tooltips
+      "tooltips"/"goldColor" - color for premium shells etc. in vehicle tooltips
   * added new section "battleLoadingTips" for new battle loading screen views
+  * added new options in the "battleLoading" and "battleLoadingTips" sections:
+      "nameFieldShowBorder" - show border for name field (useful for config tuning)
+      "vehicleFieldShowBorder" - show border for vehicle field (useful for config tuning)
+      "nameFieldWidthDeltaLeft" - width delta for allies player names field
+      "nameFieldWidthDeltaRight" - width delta for enemies player names field
+      "vehicleFieldWidthDeltaLeft" - width delta for "formatLeftVehicle" field
+      "vehicleFieldWidthDeltaRight" - width delta for "formatRightVehicle" field
 
 XVM-6.2.0.1:
   * improvements and bug fixes
