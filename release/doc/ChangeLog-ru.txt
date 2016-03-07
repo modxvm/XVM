@@ -2,20 +2,24 @@
   * адаптация к WoT 0.9.14
   * макрос {{cellsize}} можно использовать так же, как и другие глобальные макросы
   * добавлены новые опции:
-    "minimap"/"useStandardCircles" - использовать стандартные круги
-    "minimap"/"useStandardLabels" - использовать стандартные надписи
-    "minimap"/"useStandardLines" - использовать стандартные линии
-    "tooltips"/"fontSize" - размер шрифта во всплывающих подсказках к танкам
-    "tooltips"/"fontName" - название шрифта во всплывающих подсказках к танкам
-    "tooltips"/"goldColor" - цвет премиумных снарядов и т.д. во всплывающих подсказках к танкам
+      "minimap"/"useStandardCircles" - использовать стандартные круги
+      "minimap"/"useStandardLabels" - использовать стандартные надписи
+      "minimap"/"useStandardLines" - использовать стандартные линии
+      "tooltips"/"fontSize" - размер шрифта во всплывающих подсказках к танкам
+      "tooltips"/"fontName" - название шрифта во всплывающих подсказках к танкам
+      "tooltips"/"goldColor" - цвет премиумных снарядов и т.д. во всплывающих подсказках к танкам
   * добавлена новая секция "battleLoadingTips" для новых видов экрана загрузки
-  * добавлены новые опции в секции "battleLoading" и "battleLoadingTips":
-    "nameFieldShowBorder" - показывать рамку для поля имени игрока (полезно для настройки конфига)
-    "vehicleFieldShowBorder" - показывать рамку для поля имени танка (полезно для настройки конфига)
-    "nameFieldWidthDeltaLeft" - изменение ширины поля ника для союзников
-    "nameFieldWidthDeltaRight" - изменение ширины поля ника для противников
-    "vehicleFieldWidthDeltaLeft" - изменение ширины поля "formatLeftVehicle"
-    "vehicleFieldWidthDeltaRight" - изменение ширины поля "formatRightVehicle"
+  * добавлены новые опции в секциях "battleLoading" и "battleLoadingTips":
+      "nameFieldShowBorder" - показывать рамку для поля имени игрока (полезно для настройки конфига)
+      "vehicleFieldShowBorder" - показывать рамку для поля имени танка (полезно для настройки конфига)
+      "nameFieldWidthDeltaLeft" - изменение ширины поля ника для союзников
+      "nameFieldWidthDeltaRight" - изменение ширины поля ника для противников
+      "vehicleFieldWidthDeltaLeft" - изменение ширины поля "formatLeftVehicle"
+      "vehicleFieldWidthDeltaRight" - изменение ширины поля "formatRightVehicle"
+  * добавлены новые опции в секции "statisticForm":
+      "nameFieldShowBorder" - показывать рамку для поля имени игрока (полезно для настройки конфига)
+      "vehicleFieldShowBorder" - показывать рамку для поля имени танка (полезно для настройки конфига)
+      "fragsFieldShowBorder" - показывать рамку для поля фрагов (полезно для настройки конфига)
   * удалена устаревшая опция:
       "userInfo"/"showExtraDataInProfile"
 

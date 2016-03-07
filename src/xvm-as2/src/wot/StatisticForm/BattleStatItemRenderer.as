@@ -43,23 +43,29 @@ class wot.StatisticForm.BattleStatItemRenderer
 
     private var team:Number;
 
-    // for debug
-    public function _debug()
-    {
-        wrapper.playerName.border = true;
-        wrapper.playerName.borderColor = 0x00FF00;
-        wrapper.col3.border = true;
-        wrapper.col3.borderColor = 0xFFFF00;
-    }
-
-
     public function BattleStatItemRendererCtor()
     {
         Utils.TraceXvmModule("StatisticForm");
 
         team = (wrapper._parent._parent._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
 
-        //_debug();
+        if (Macros.FormatGlobalBooleanValue(cfg.nameFieldShowBorder))
+        {
+            wrapper.playerName.border = true;
+            wrapper.playerName.borderColor = 0x00FF00;
+        }
+
+        if (Macros.FormatGlobalBooleanValue(cfg.vehicleFieldShowBorder))
+        {
+            wrapper.col3.border = true;
+            wrapper.col3.borderColor = 0xFFFF00;
+        }
+
+        if (Macros.FormatGlobalBooleanValue(cfg.fragsFieldShowBorder))
+        {
+            wrapper.frags.border = true;
+            wrapper.frags.borderColor = 0xFF0000;
+        }
 
         // Create win chances field
         if (s_winChances == null)
@@ -106,6 +112,11 @@ class wot.StatisticForm.BattleStatItemRenderer
             wrapper.vehicleTypeIcon._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
             wrapper.frags._x -= Config.config.statisticForm.fragsOffsetXRight;
         }
+    }
+
+    private function get cfg():Object
+    {
+        return Config.config.statisticForm;
     }
 
     private function onStatLoaded()
@@ -230,8 +241,7 @@ class wot.StatisticForm.BattleStatItemRenderer
 
     function attachClanIconToPlayer(data)
     {
-        var cfg = Config.config.statisticForm.clanIcon;
-        if (!cfg.show)
+        if (!cfg.clanIcon.show)
             return;
 
         var name:String = Utils.GetPlayerName(data.userName);
@@ -246,7 +256,7 @@ class wot.StatisticForm.BattleStatItemRenderer
             var x = (!m_iconLoaded || Config.config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + MAXIMUM_VEHICLE_ICON_WIDTH - 5;
             m_clanIcon = PlayerInfo.createIcon(wrapper._parent._parent._parent, "clanicon_" + data.uid,
-                cfg, x + wrapper._parent._parent._x + wrapper._parent._x + wrapper._x,
+                cfg.clanIcon, x + wrapper._parent._parent._x + wrapper._parent._x + wrapper._x,
                 wrapper.iconLoader._y + wrapper._parent._parent._y + wrapper._parent._y + wrapper._y,
                 team);
         }

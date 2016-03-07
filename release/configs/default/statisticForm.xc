@@ -16,6 +16,15 @@
     // true - disable vehicle type icon. This space will be used for formatted vehicle field.
     // true - убрать отображение типа танка. Пустое место будет использовано под форматируемое поле.
     "removeVehicleTypeIcon": false,
+    // Show border for name field (useful for config tuning)
+    // Показывать рамку для поля имени игрока (полезно для настройки конфига)
+    "nameFieldShowBorder": false,
+    // Show border for vehicle field (useful for config tuning)
+    // Показывать рамку для поля имени танка (полезно для настройки конфига)
+    "vehicleFieldShowBorder": false,
+    // Show border for frags field (useful for config tuning)
+    // Показывать рамку для поля фрагов (полезно для настройки конфига)
+    "fragsFieldShowBorder": false,
     // X offset for allies squad icons
     // Cмещение по оси X значка взвода для союзников
     "squadIconOffsetXLeft": 0,

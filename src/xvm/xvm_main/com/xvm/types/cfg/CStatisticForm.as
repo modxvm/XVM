@@ -10,6 +10,9 @@ package com.xvm.types.cfg
         public var removeSquadIcon:Boolean;
         public var removeVehicleLevel:Boolean;
         public var removeVehicleTypeIcon:Boolean;
+        public var nameFieldShowBorder:Boolean;
+        public var vehicleFieldShowBorder:Boolean;
+        public var fragsFieldShowBorder:Boolean;
         public var squadIconOffsetXLeft:Number;
         public var squadIconOffsetXRight:Number;
         public var nameFieldOffsetXLeft:Number;
