@@ -55,7 +55,7 @@ class wot.VehicleMarkersManager.log.LogLists
         /** Update Hitlog */
         if (flag == Defines.FROM_PLAYER)
         {
-            if (Config.eventType != "normal" || !UnitDestroyedAccounting.instance.diedSomeTimeAgo(playerName))
+            if (!Utils.isArenaGuiTypeWithPlayerPanels() || !UnitDestroyedAccounting.instance.diedSomeTimeAgo(playerName))
             {
                 hitLog.update(delta, curHealth, vehicleName, icon, playerName, level, damageType, vtype, vtypeColor, dead);
             }

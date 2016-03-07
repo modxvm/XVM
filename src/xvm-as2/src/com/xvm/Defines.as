@@ -117,6 +117,26 @@ class com.xvm.Defines
     public static var E_MODULE_DESTROYED = "module_destroyed";
     public static var E_MODULE_REPAIRED = "module_repaired";
 
+    // ArenaGuiTypes
+    // sync with constants.py: ARENA_GUI_TYPE
+    public static var ARENA_GUI_TYPE_UNKNOWN:Number = 0
+    public static var ARENA_GUI_TYPE_RANDOM:Number = 1
+    public static var ARENA_GUI_TYPE_TOURNAMENT:Number = 2
+    public static var ARENA_GUI_TYPE_COMPANY:Number = 3
+    public static var ARENA_GUI_TYPE_TUTORIAL:Number = 4
+    public static var ARENA_GUI_TYPE_CYBERSPORT:Number = 5
+    public static var ARENA_GUI_TYPE_FALLOUT:Number = 6
+    public static var ARENA_GUI_TYPE_EVENT_BATTLES:Number = 7
+    public static var ARENA_GUI_TYPE_SORTIE:Number = 8
+    public static var ARENA_GUI_TYPE_FORT_BATTLE:Number = 9
+    public static var ARENA_GUI_TYPE_RATED_CYBERSPORT:Number = 10
+    public static var ARENA_GUI_TYPE_RATED_SANDBOX:Number = 11
+    public static var ARENA_GUI_TYPE_SANDBOX:Number = 12
+    public static var ARENA_GUI_TYPE_FALLOUT_CLASSIC:Number = 13
+    public static var ARENA_GUI_TYPE_FALLOUT_MULTITEAM:Number = 14
+
+    public static var ARENA_GUI_TYPE_NO_PLAYER_PANELS:Array = [ ARENA_GUI_TYPE_FALLOUT_CLASSIC, ARENA_GUI_TYPE_FALLOUT_MULTITEAM ];
+
     // BattleTypes
     // sync with constants.py: ARENA_BONUS_TYPE
     public static var BATTLE_TYPE_UNKNOWN:Number = 0;

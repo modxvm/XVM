@@ -39,6 +39,27 @@ class com.xvm.Utils
         return defaultValue ? value != "false" : value == "true";
     }
 
+    private static var _lastArenaGuiType:Number = -1;
+    private static var _isArenaGuiTypeWithPlayerPanels:Boolean;
+    public static function isArenaGuiTypeWithPlayerPanels():Boolean
+    {
+        if (_lastArenaGuiType != Config.arenaGuiType)
+        {
+            _lastArenaGuiType = Config.arenaGuiType;
+            _isArenaGuiTypeWithPlayerPanels = true;
+            var len:Number = Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS.length;
+            for (var i:Number = 0; i < len; ++i)
+            {
+                if (Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS[i] == Config.arenaGuiType)
+                {
+                    _isArenaGuiTypeWithPlayerPanels = false;
+                    break;
+                }
+            }
+        }
+        return _isArenaGuiTypeWithPlayerPanels;
+    }
+
     ////////////////////
 
     public static function vehicleClassToVehicleType(vclass:String):String

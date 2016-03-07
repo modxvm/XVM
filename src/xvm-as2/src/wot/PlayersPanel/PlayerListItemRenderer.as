@@ -33,28 +33,28 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function getColorTransform()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.getColorTransform.apply(base, arguments);
         return this.getColorTransformImpl.apply(this, arguments);
     }
 
     function setState()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.setState.apply(base, arguments);
         return this.setStateImpl.apply(this, arguments);
     }
 
     function update()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.update.apply(base, arguments);
         return this.updateImpl.apply(this, arguments);
     }
 
     function updateSquadIcons()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.updateSquadIcons.apply(base, arguments);
         return this.updateSquadIconsImpl.apply(this, arguments);
     }
@@ -68,6 +68,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private static var TF_DEFAULT_HEIGHT = 25;
 
     private var cfg:Object;
+
+    private var _initialized:Boolean = false;
 
     private var m_playerId:Number = 0;
     private var m_name:String = null;
@@ -94,18 +96,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
         extraFieldsConfigured = false;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
-
-        if (isLeftPanel)
-        {
-            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
-            GlobalEventDispatcher.addEventListener(Defines.E_LEFT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsLeft);
-        }
-        else
-        {
-            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsRight);
-            GlobalEventDispatcher.addEventListener(Defines.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
-        }
     }
 
     // IMPL
@@ -259,11 +249,36 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     // misc
 
+    private function init()
+    {
+        if (_initialized)
+            return;
+
+        _initialized = true;
+
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
+            return;
+
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
+
+        if (isLeftPanel)
+        {
+            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
+            GlobalEventDispatcher.addEventListener(Defines.E_LEFT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsLeft);
+        }
+        else
+        {
+            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsRight);
+            GlobalEventDispatcher.addEventListener(Defines.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
+        }
+    }
+
     private function onConfigLoaded()
     {
-        //Logger.add(Config.eventType);
-        if (Config.eventType != "normal")
-            return;
+        //Logger.add(Config.arenaGuiType);
+
+        init();
+
         try
         {
             this.cfg = Config.config.playersPanel;
@@ -292,8 +307,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function onStatLoaded()
     {
-        if (Config.eventType != "normal")
-            return;
         update();
     }
 
@@ -824,9 +837,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
     var _savedX = 0;
     private function adjustExtraFieldsLeft(e)
     {
-        if (Config.eventType != "normal")
-            return;
-
         var state:String = e.state || panel.m_state;
         //Logger.add("adjustExtraFieldsLeft: " + state);
         var mc:MovieClip = extraFields[state];
@@ -865,9 +875,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function adjustExtraFieldsRight(e)
     {
-        if (Config.eventType != "normal")
-            return;
-
         var state:String = e.state || panel.m_state;
         //Logger.add("adjustExtraFieldsRight: " + state);
         var mc:MovieClip = extraFields[state];

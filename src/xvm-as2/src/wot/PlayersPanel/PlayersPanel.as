@@ -26,49 +26,49 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     function setData()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.setData.apply(base, arguments);
         return this.setDataImpl.apply(this, arguments);
     }
 
     function onRecreateDevice()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.onRecreateDevice.apply(base, arguments);
         return this.onRecreateDeviceImpl.apply(this, arguments);
     }
 
     function update()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.update.apply(base, arguments);
         return this.updateImpl.apply(this, arguments);
     }
 
     function updateAlphas()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.updateAlphas.apply(base, arguments);
         return this.updateAlphasImpl.apply(this, arguments);
     }
 
     function updatePositions()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.updatePositions.apply(base, arguments);
         // stub
     }
 
     function updateSquadIcons()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.updateSquadIcons.apply(base, arguments);
         // stub
     }
 
     function setIsShowExtraModeActive()
     {
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return base.setIsShowExtraModeActive.apply(base, arguments);
         return this.setIsShowExtraModeActiveImpl.apply(this, arguments);
     }
@@ -98,13 +98,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     {
         Utils.TraceXvmModule("PlayersPanel");
 
-        if (!DEFAULT_SQUAD_SIZE)
-            DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN * 2;
-
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
     }
 
     // PRIVATE
@@ -112,14 +106,33 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     // Centered _y value of text field
     private var centeredTextY:Number;
 
+    private var _initialized:Boolean = false;
+
     private var m_altMode:String = null;
     private var m_savedState:String = null;
     private var m_initialized = false;
 
+    private function init()
+    {
+        if (_initialized)
+            return;
+
+        _initialized = true;
+
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
+            return;
+
+        if (!DEFAULT_SQUAD_SIZE)
+            DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN * 2;
+
+        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, invalidate);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, invalidate);
+        GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
+    }
+
     private function onConfigLoaded()
     {
-        if (Config.eventType != "normal")
-            return;
+        init();
 
         cfg = Config.config.playersPanel;
         var startMode:String = String(cfg.startMode).toLowerCase();
@@ -211,8 +224,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private function draw()
     {
-        if (Config.eventType != "normal")
-            return;
         setDataInternal.apply(this, m_data_arguments);
     }
 

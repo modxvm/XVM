@@ -88,7 +88,7 @@ class wot.Minimap.MinimapEntry
 
         this.playerId = playerId;
 
-        if (Config.eventType != "normal")
+        if (!Utils.isArenaGuiTypeWithPlayerPanels())
         {
             var bs:BattleStateData = BattleState.get(playerId);
             if (bs && bs.playerId)
