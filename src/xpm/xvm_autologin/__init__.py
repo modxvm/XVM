@@ -49,6 +49,10 @@ def LoginView_as_setVersionS(base, self, version):
 def LoginView_populate(base, self):
     # log('LoginView_populate')
 
+    if isReplay():
+        base(self)
+        return
+
     if config.get('login/saveLastServer'):
         if self._servers.selectedServerIdx == 0:
             serverName = userprefs.get('autologin/server', 0)

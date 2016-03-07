@@ -73,9 +73,6 @@ def start():
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
 
-    # reload config
-    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
-
 BigWorld.callback(0, start)
 
 
@@ -141,13 +138,13 @@ def Flash_call(base, self, methodName, args=None):
     debug("> call: %s, %s" % (methodName, str(args)))
 
 
+# LOGIN
+
 def onClientVersionDiffers():
-    def nested():
-        savedValue = g_replayCtrl.scriptModalWindowsEnabled
-        g_replayCtrl.scriptModalWindowsEnabled = savedValue and not config.get('login/confirmOldReplays')
-        g_replayCtrl.onClientVersionDiffers()
-        g_replayCtrl.scriptModalWindowsEnabled = savedValue
-    BigWorld.callback(0, nested)
+    savedValue = g_replayCtrl.scriptModalWindowsEnabled
+    g_replayCtrl.scriptModalWindowsEnabled = savedValue and config.get('login/confirmOldReplays')
+    g_replayCtrl.onClientVersionDiffers()
+    g_replayCtrl.scriptModalWindowsEnabled = savedValue
 
 g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
 
@@ -171,12 +168,14 @@ def AmmunitionPanel_highlightParams(self, type):
 # PRE-BATTLE
 
 def onArenaCreated():
+    # debug('> onArenaCreated')
     g_xvm.onArenaCreated()
 
 g_playerEvents.onArenaCreated += onArenaCreated
 
 
 def onAvatarBecomePlayer():
+    # debug('> onAvatarBecomePlayer')
     g_xvm.onAvatarBecomePlayer()
 
 g_playerEvents.onAvatarBecomePlayer += onAvatarBecomePlayer
@@ -187,12 +186,14 @@ g_playerEvents.onAvatarBecomePlayer += onAvatarBecomePlayer
 # on current player enters world
 @registerEvent(PlayerAvatar, 'onEnterWorld')
 def PlayerAvatar_onEnterWorld(self, prereqs):
+    # debug('> PlayerAvatar_onEnterWorld')
     g_xvm.onEnterWorld()
 
 
 # on current player leaves world
 @registerEvent(PlayerAvatar, 'onLeaveWorld')
 def PlayerAvatar_onLeaveWorld(self):
+    # debug('> PlayerAvatar_onLeaveWorld')
     g_xvm.onLeaveWorld()
 
 
@@ -381,3 +382,6 @@ try:
         warn('Following XVM fonts installed: %s' % xvm_fonts_arr)
 except Exception, ex:
     err(traceback.format_exc())
+
+# load config
+config.load(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
