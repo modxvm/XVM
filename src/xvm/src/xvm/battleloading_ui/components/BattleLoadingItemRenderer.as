@@ -61,6 +61,8 @@ package xvm.battleloading_ui.components
             this.proxy = proxy;
             this.proxyType = proxyType;
 
+            Macros.RegisterGlobalMacrosData();
+
             if (Macros.FormatGlobalBooleanValue(cfg.nameFieldShowBorder))
             {
                 proxy.textField.border = true;
