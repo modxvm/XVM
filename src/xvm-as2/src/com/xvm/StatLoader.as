@@ -20,7 +20,7 @@ class com.xvm.StatLoader
             return;
         instance._loading = true;
         Stat.s_data = {};
-        Cmd.loadBattleStat(null);
+        Cmd.loadBattleStat();
     }
 
     // PRIVATE

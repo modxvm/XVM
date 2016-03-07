@@ -24,9 +24,9 @@ class com.xvm.Cmd
         _call(target, callback, [COMMAND_GET_SCREEN_SIZE]);
     }
 
-    public static function loadBattleStat(players:Array)
+    public static function loadBattleStat()
     {
-        _call(null, null, [COMMAND_LOAD_BATTLE_STAT, players]);
+        _call(null, null, [COMMAND_LOAD_BATTLE_STAT]);
     }
 
     public static function captureBarGetBaseNum(target:Object, callback:Function, id:Number)
