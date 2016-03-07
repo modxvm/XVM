@@ -40,11 +40,20 @@ package xvm.profile_ui
             if (_baseDisposed)
                 return;
 
-            worker.update(arg1 as ProfileVehicleDossierVO);
-            super.update(arg1);
+            try
+            {
+                worker.update(arg1 as ProfileVehicleDossierVO);
+                super.update(arg1);
 
-            if (xfw_group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))
-                xfw_group.unitRendererLinkage = getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer);
+                if (xfw_group && xfw_group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))
+                {
+                    xfw_group.unitRendererLinkage = getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         // PUBLIC
