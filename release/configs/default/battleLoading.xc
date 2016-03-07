@@ -21,10 +21,10 @@
     // true - убрать отображение типа танка. Пустое место будет использовано под форматируемое поле.
     "removeVehicleTypeIcon": false,
     // X offset for allies squad icons
-    // Cмещение по оси X значка взвода для союзников
+    // Cмещение по оси X значка взвода союзников
     "squadIconOffsetXLeft": 0,
     // X offset for enemies squad icons field
-    // Cмещение по оси X значка взвода для противников
+    // Cмещение по оси X значка взвода противников
     "squadIconOffsetXRight": 0,
     // Show border for name field (useful for config tuning)
     // Показывать рамку для поля имени игрока (полезно для настройки конфига)
@@ -33,34 +33,34 @@
     // Показывать рамку для поля имени танка (полезно для настройки конфига)
     "vehicleFieldShowBorder": false,
     // X offset for allies player names field
-    // Cмещение по оси X поля ника для союзников
-    "nameFieldOffsetXLeft": 0,
+    // Cмещение по оси X поля ника союзников
+    "nameFieldOffsetXLeft": -11,
     // Width delta for allies player names field
-    // Изменение ширины поля ника для союзников
+    // Изменение ширины поля ника союзников
     "nameFieldWidthDeltaLeft": 0,
     // X offset for enemies player names field
-    // Cмещение по оси X поля ника для противников
-    "nameFieldOffsetXRight": 0,
+    // Cмещение по оси X поля ника противников
+    "nameFieldOffsetXRight": -14,
     // Width delta for enemies player names field
-    // Изменение ширины поля ника для противников
+    // Изменение ширины поля ника противников
     "nameFieldWidthDeltaRight": 0,
-    // X offset for "formatLeftVehicle" field
-    // Cмещение по оси X поля "formatLeftVehicle"
+    // X offset for allies vehicle names field
+    // Cмещение по оси X поля названия танка союзников
     "vehicleFieldOffsetXLeft": 0,
-    // Width delta for "formatLeftVehicle" field
-    // Изменение ширины поля "formatLeftVehicle"
+    // Width delta for allies vehicle names field
+    // Изменение ширины поля названия танка союзников
     "vehicleFieldWidthDeltaLeft": 0,
-    // X offset for "formatRightVehicle" field
-    // Cмещение по оси X поля названия танка для противников
+    // X offset for enemies vehicle names field
+    // Cмещение по оси X поля названия танка противников
     "vehicleFieldOffsetXRight": 0,
-    // Width delta for "formatRightVehicle" field
-    // Изменение ширины поля "formatRightVehicle"
+    // Width delta for enemies vehicle names field
+    // Изменение ширины поля названия танка противников
     "vehicleFieldWidthDeltaRight": 0,
     // X offset for allies vehicle icons
-    // Смещение по оси X иконки танка для союзников
+    // Смещение по оси X иконки танка союзников
     "vehicleIconOffsetXLeft": 0,
     // X offset for enemies vehicle icons
-    // Смещение по оси X иконки танка для противников
+    // Смещение по оси X иконки танка противников
     "vehicleIconOffsetXRight": 0,
     // Display options for Team/Clan logos.
     // Параметры отображения иконки игрока/клана.
