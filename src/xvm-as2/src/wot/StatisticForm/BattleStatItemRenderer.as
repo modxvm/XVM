@@ -96,21 +96,21 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         if (team == Defines.TEAM_ALLY)
         {
-            wrapper.squad._x += Config.config.statisticForm.squadIconOffsetXLeft;
-            wrapper.playerName._x += Config.config.statisticForm.nameFieldOffsetXLeft;
-            wrapper.iconLoader._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
-            wrapper.vehicleLevelIcon._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
-            wrapper.vehicleTypeIcon._x += Config.config.statisticForm.vehicleIconOffsetXLeft;
-            wrapper.frags._x += Config.config.statisticForm.fragsOffsetXLeft;
+            wrapper.squad._x += Macros.FormatGlobalNumberValue(cfg.squadIconOffsetXLeft);
+            wrapper.playerName._x += Macros.FormatGlobalNumberValue(cfg.nameFieldOffsetXLeft);
+            wrapper.iconLoader._x += Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
+            wrapper.vehicleLevelIcon._x += Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
+            wrapper.vehicleTypeIcon._x += Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
+            wrapper.frags._x += Macros.FormatGlobalNumberValue(cfg.fragsOffsetXLeft);
         }
         else
         {
-            wrapper.squad._x -= Config.config.statisticForm.squadIconOffsetXRight;
-            wrapper.playerName._x -= Config.config.statisticForm.nameFieldOffsetXRight - 10 + 50;
-            wrapper.iconLoader._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
-            wrapper.vehicleLevelIcon._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
-            wrapper.vehicleTypeIcon._x -= Config.config.statisticForm.vehicleIconOffsetXRight;
-            wrapper.frags._x -= Config.config.statisticForm.fragsOffsetXRight;
+            wrapper.squad._x -= Macros.FormatGlobalNumberValue(cfg.squadIconOffsetXRight);
+            wrapper.playerName._x -= Macros.FormatGlobalNumberValue(cfg.nameFieldOffsetXRight) - 10 + 50;
+            wrapper.iconLoader._x -= Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
+            wrapper.vehicleLevelIcon._x -= Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
+            wrapper.vehicleTypeIcon._x -= Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
+            wrapper.frags._x -= Macros.FormatGlobalNumberValue(cfg.fragsOffsetXRight);
         }
     }
 
@@ -148,7 +148,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         }
 
         // Chance
-        if (Stat.s_loaded && (Config.networkServicesSettings.chance || Config.config.statisticForm.showBattleTier) && wrapper.selected == true)
+        if (Stat.s_loaded && (Config.networkServicesSettings.chance || Macros.FormatGlobalBooleanValue(cfg.showBattleTier)) && wrapper.selected == true)
             s_winChances.showWinChances();
 
         // Alternative icon set
@@ -171,20 +171,20 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.data.label = saved_label;
 
         // hide controls
-        if (Config.config.statisticForm.removeSquadIcon)
+        if (Macros.FormatGlobalBooleanValue(cfg.removeSquadIcon))
             wrapper.squad._visible = false;
-        if (Config.config.statisticForm.removeVehicleLevel)
+        if (Macros.FormatGlobalBooleanValue(cfg.removeVehicleLevel))
             wrapper.vehicleLevelIcon._visible = false;
-        if (Config.config.statisticForm.removeVehicleTypeIcon)
+        if (Macros.FormatGlobalBooleanValue(cfg.removeVehicleTypeIcon))
             wrapper.vehicleTypeIcon._visible = false;
 
         // vehicleField
         if (team == Defines.TEAM_ALLY)
         {
             wrapper.col3._x = wrapper.iconLoader._x - VEHICLE_FIELD_WIDTH - 1;
-            if (!Config.config.statisticForm.removeVehicleTypeIcon)
+            if (!Macros.FormatGlobalBooleanValue(cfg.removeVehicleTypeIcon))
                 wrapper.col3._x -= VEHICLE_TYPE_ICON_WIDTH;
-            wrapper.col3._x += Config.config.statisticForm.vehicleFieldOffsetXLeft;
+            wrapper.col3._x += Macros.FormatGlobalNumberValue(cfg.vehicleFieldOffsetXLeft);
             if (wrapper.icoIGR._visible)
             {
                 wrapper.icoIGR._x = wrapper.col3._x + wrapper.col3._width - wrapper.col3.textWidth - net.wargaming.BattleStatItemRenderer.IGR_ICON_OFFSET_LEFT;
@@ -193,9 +193,9 @@ class wot.StatisticForm.BattleStatItemRenderer
         else
         {
             wrapper.col3._x = wrapper.iconLoader._x + (wrapper.iconLoader._xscale < 0 ? MAXIMUM_VEHICLE_ICON_WIDTH : 0) + 1;
-            if (!Config.config.statisticForm.removeVehicleTypeIcon)
+            if (!Macros.FormatGlobalBooleanValue(cfg.removeVehicleTypeIcon))
                 wrapper.col3._x += VEHICLE_TYPE_ICON_WIDTH + 4;
-            wrapper.col3._x -= Config.config.statisticForm.vehicleFieldOffsetXRight;
+            wrapper.col3._x -= Macros.FormatGlobalNumberValue(cfg.vehicleFieldOffsetXRight);
             if (wrapper.icoIGR._visible)
             {
                 wrapper.icoIGR._x = wrapper.col3._x;
@@ -207,10 +207,10 @@ class wot.StatisticForm.BattleStatItemRenderer
         var c:String = "#" + Strings.padLeft(wrapper.playerName.textColor.toString(16), 6, '0');
 
         var obj = BattleState.getByPlayerName(name);
-        var fmt:String = Macros.Format(name, (team == Defines.TEAM_ALLY) ? Config.config.statisticForm.formatLeftNick : Config.config.statisticForm.formatRightNick, obj);
+        var fmt:String = Macros.Format(name, (team == Defines.TEAM_ALLY) ? cfg.formatLeftNick : cfg.formatRightNick, obj);
         wrapper.playerName.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
 
-        fmt = Macros.Format(name, (team == Defines.TEAM_ALLY) ? Config.config.statisticForm.formatLeftVehicle : Config.config.statisticForm.formatRightVehicle, obj);
+        fmt = Macros.Format(name, (team == Defines.TEAM_ALLY) ? cfg.formatLeftVehicle : cfg.formatRightVehicle, obj);
         wrapper.col3.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
 
         if (Config.config.battle.highlightVehicleIcon == false && (wrapper.selected || wrapper.data.squad > 10))
