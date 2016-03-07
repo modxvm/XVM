@@ -12,27 +12,27 @@ package com.xvm.types.cfg
 
         public var clockFormat:String;      // Format: http://php.net/date
 
-        public var showBattleTier:Boolean;
-        public var removeSquadIcon:Boolean;
-        public var removeVehicleLevel:Boolean;
-        public var removeVehicleTypeIcon:Boolean;
-        public var squadIconOffsetXLeft:Number;
-        public var squadIconOffsetXRight:Number;
-        public var nameFieldShowBorder:Boolean;
-        public var vehicleFieldShowBorder:Boolean;
-        public var nameFieldOffsetXLeft:Number;
-        public var nameFieldWidthDeltaLeft:Number;
-        public var nameFieldOffsetXRight:Number;
-        public var nameFieldWidthDeltaRight:Number;
-        public var vehicleFieldOffsetXLeft:Number;
-        public var vehicleFieldWidthDeltaLeft:Number;
-        public var vehicleFieldOffsetXRight:Number;
-        public var vehicleFieldWidthDeltaRight:Number;
-        public var vehicleIconOffsetXLeft:Number;
-        public var vehicleIconOffsetXRight:Number;
+        public var showBattleTier:*;
+        public var removeSquadIcon:*;
+        public var removeVehicleLevel:*;
+        public var removeVehicleTypeIcon:*;
+        public var squadIconOffsetXLeft:*;
+        public var squadIconOffsetXRight:*;
+        public var nameFieldShowBorder:*;
+        public var vehicleFieldShowBorder:*;
+        public var nameFieldOffsetXLeft:*;
+        public var nameFieldWidthDeltaLeft:*;
+        public var nameFieldOffsetXRight:*;
+        public var nameFieldWidthDeltaRight:*;
+        public var vehicleFieldOffsetXLeft:*;
+        public var vehicleFieldWidthDeltaLeft:*;
+        public var vehicleFieldOffsetXRight:*;
+        public var vehicleFieldWidthDeltaRight:*;
+        public var vehicleIconOffsetXLeft:*;
+        public var vehicleIconOffsetXRight:*;
         public var clanIcon:CClanIcon;
         // Dispay formats.
-        public var darkenNotReadyIcon:Boolean;
+        public var darkenNotReadyIcon:*;
         public var formatLeftNick:String;
         public var formatLeftVehicle:String;
         public var formatRightNick:String;

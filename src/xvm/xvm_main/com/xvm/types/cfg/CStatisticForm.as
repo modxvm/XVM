@@ -6,21 +6,21 @@ package com.xvm.types.cfg
 {
     public dynamic class CStatisticForm extends Object
     {
-        public var showBattleTier:Boolean;
-        public var removeSquadIcon:Boolean;
-        public var removeVehicleLevel:Boolean;
-        public var removeVehicleTypeIcon:Boolean;
-        public var nameFieldShowBorder:Boolean;
-        public var vehicleFieldShowBorder:Boolean;
-        public var fragsFieldShowBorder:Boolean;
-        public var squadIconOffsetXLeft:Number;
-        public var squadIconOffsetXRight:Number;
-        public var nameFieldOffsetXLeft:Number;
-        public var nameFieldOffsetXRight:Number;
-        public var vehicleFieldOffsetXLeft:Number;
-        public var vehicleFieldOffsetXRight:Number;
-        public var vehicleIconOffsetXLeft:Number;
-        public var vehicleIconOffsetXRight:Number;
+        public var showBattleTier:*;
+        public var removeSquadIcon:*;
+        public var removeVehicleLevel:*;
+        public var removeVehicleTypeIcon:*;
+        public var nameFieldShowBorder:*;
+        public var vehicleFieldShowBorder:*;
+        public var fragsFieldShowBorder:*;
+        public var squadIconOffsetXLeft:*;
+        public var squadIconOffsetXRight:*;
+        public var nameFieldOffsetXLeft:*;
+        public var nameFieldOffsetXRight:*;
+        public var vehicleFieldOffsetXLeft:*;
+        public var vehicleFieldOffsetXRight:*;
+        public var vehicleIconOffsetXLeft:*;
+        public var vehicleIconOffsetXRight:*;
         public var clanIcon:CClanIcon;
         // Dispay formats.
         public var formatLeftNick:String;

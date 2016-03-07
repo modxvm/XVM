@@ -17,19 +17,19 @@ class com.xvm.PlayerInfo extends MovieClip
             if (team == undefined)
                 team = Defines.TEAM_ALLY;
             holder = owner.createEmptyMovieClip(name, owner.getNextHighestDepth());
-            holder._x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
+            holder._x = dx + (team == Defines.TEAM_ALLY ? Macros.FormatGlobalNumberValue(cfg.x) : -Macros.FormatGlobalNumberValue(cfg.xr));
             if (team == Defines.TEAM_ENEMY)
-                holder._x -= cfg.w;
-            holder._y = dy + (team == Defines.TEAM_ALLY ? cfg.y : cfg.yr);
+                holder._x -= Macros.FormatGlobalNumberValue(cfg.w);
+            holder._y = dy + (team == Defines.TEAM_ALLY ? Macros.FormatGlobalNumberValue(cfg.y) : Macros.FormatGlobalNumberValue(cfg.yr));
         }
 
         var il = new IconLoader(instance, instance.completeLoadIcon);
 
         var icon: UILoaderAlt = (UILoaderAlt)(holder.attachMovie("UILoaderAlt", "icon", 0));
         icon._x = icon._y = 0;
-        icon._alpha = isFinite(cfg.alpha) ? cfg.alpha : 100;
+        icon._alpha = isFinite(Macros.FormatGlobalNumberValue(cfg.alpha)) ? Macros.FormatGlobalNumberValue(cfg.alpha) : 100;
         icon._visible = false;
-        icon["claninfo"] = { w: cfg.w, h: cfg.h };
+        icon["claninfo"] = { w: Macros.FormatGlobalNumberValue(cfg.w), h: Macros.FormatGlobalNumberValue(cfg.h) };
         icon["holder"] = holder;
         icon["iconloader"] = il;
 

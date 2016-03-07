@@ -22,8 +22,6 @@ package xvm.battleloading
 
         override public function entryPoint():void
         {
-            Macros.RegisterGlobalMacrosData();
-
             super.entryPoint();
             const _name:String = "xvm_battleloading";
             const _ui_name:String = _name + "_ui.swf";

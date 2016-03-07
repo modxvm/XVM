@@ -631,6 +631,7 @@ package com.xvm
         {
             if (!isNaN(value))
                 return value;
+            //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
             return parseFloat(_Format(null, value, new MacrosFormatOptions()));
         }
 
@@ -638,11 +639,13 @@ package com.xvm
         {
             if (typeof value == "boolean")
                 return value;
+            //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
             return String(_Format(null, value, new MacrosFormatOptions())).toLowerCase() == 'true';
         }
 
         private function _FormatGlobalStringValue(value:*):String
         {
+            //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
             return _Format(null, String(value), new MacrosFormatOptions());
         }
 
