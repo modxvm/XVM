@@ -715,8 +715,6 @@ package com.xvm
          */
         private function _RegisterMinimalMacrosData(playerId:Number, fullPlayerName:String, vid:int, team:Number):void
         {
-            RegisterGlobalMacrosData();
-
             if (fullPlayerName == null || fullPlayerName == "")
                 throw new Error("empty name");
 

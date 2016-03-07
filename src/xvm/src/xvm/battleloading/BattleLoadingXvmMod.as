@@ -5,6 +5,7 @@
 package xvm.battleloading
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
 
     public class BattleLoadingXvmMod extends XvmModBase
@@ -21,6 +22,8 @@ package xvm.battleloading
 
         override public function entryPoint():void
         {
+            Macros.RegisterGlobalMacrosData();
+
             super.entryPoint();
             const _name:String = "xvm_battleloading";
             const _ui_name:String = _name + "_ui.swf";
