@@ -86,7 +86,9 @@
       // Песочный PVE, >10 боев
       "sandbox": "",
       // Бой до последнего
-      "fallout": ""
+      "fallout_classic": "",
+      // ?
+      "fallout_multiteam": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}

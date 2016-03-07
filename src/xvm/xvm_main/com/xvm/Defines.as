@@ -134,7 +134,8 @@ package com.xvm
         public static var BATTLE_TYPE_TOURNAMENT_CLAN:Number = 15;
         public static var BATTLE_TYPE_RATED_SANDBOX:Number = 16;
         public static var BATTLE_TYPE_SANDBOX:Number = 17;
-        public static var BATTLE_TYPE_FALLOUT:Number = 18;
+        public static var BATTLE_TYPE_FALLOUT_CLASSIC:Number = 18;
+        public static var BATTLE_TYPE_FALLOUT_MULTITEAM:Number = 19;
 
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";

@@ -23,6 +23,7 @@ package com.xvm.types.cfg
         public var tournament_clan:String;
         public var rated_sandbox:String;
         public var sandbox:String;
-        public var fallout:String;
+        public var fallout_classic:String;
+        public var fallout_multiteam:String;
     }
 }

@@ -301,7 +301,7 @@ class Xvm(object):
                     config.lang_data,
                     arena.extraData.get('battleLevel', 0),
                     arena.bonusType,
-                    'fallout' if arena_info.isEventBattle() else 'normal',
+                    arena_info.getArenaGuiType(arena=arena),
                     utils.getMapSize(),
                     arenaVehicle['vehicleType'].type.compactDescr,
                     vehinfo.getVehicleInfoDataArray(),

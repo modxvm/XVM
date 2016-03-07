@@ -85,7 +85,8 @@ package com.xvm.utils
                 case 15: return 'tournament_clan';
                 case 16: return 'rated_sandbox';
                 case 17: return 'sandbox';
-                case 18: return 'fallout';
+                case 18: return 'fallout_classic';
+                case 19: return 'fallout_multiteam';
                 default: return 'unknown';
             }
         }
