@@ -73,6 +73,9 @@ def start():
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
 
+    # config already loaded, just send event to apply required code
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
+
 BigWorld.callback(0, start)
 
 
