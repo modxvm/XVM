@@ -130,9 +130,16 @@ package xvm.profile_ui.components
 
         public function dispose():void
         {
-            _disposed = true;
-            App.utils.scheduler.cancelTask(makeInitialSort);
-            App.utils.scheduler.cancelTask(makeSort);
+            try
+            {
+                _disposed = true;
+                App.utils.scheduler.cancelTask(makeInitialSort);
+                App.utils.scheduler.cancelTask(makeSort);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         // DAAPI
@@ -142,30 +149,37 @@ package xvm.profile_ui.components
             if (_disposed)
                 return;
 
-            //if (page.listComponent.techniqueList.dataProvider.length == 0)
-            //    return;
-
-            if (Config.networkServicesSettings.statAwards)
+            try
             {
-                setupSortableButtonBar();
+                //if (page.listComponent.techniqueList.dataProvider.length == 0)
+                //    return;
+
+                if (Config.networkServicesSettings.statAwards)
+                {
+                    setupSortableButtonBar();
+                }
+
+                page.listComponent.xfw_cancelValidation(DEFAULT_SORTING_INVALID);
+
+                // Sort
+                if (!_sortDone)
+                {
+                    _selectedItemCD = itemCD;
+                    App.utils.scheduler.scheduleOnNextFrame(makeInitialSort);
+                }
+                else
+                {
+                    App.utils.scheduler.scheduleOnNextFrame(makeSort);
+                }
+
+                if (Config.networkServicesSettings.statAwards)
+                {
+                    initializeListComponentVehicles();
+                }
             }
-
-            page.listComponent.xfw_cancelValidation(DEFAULT_SORTING_INVALID);
-
-            // Sort
-            if (!_sortDone)
+            catch (ex:Error)
             {
-                _selectedItemCD = itemCD;
-                App.utils.scheduler.scheduleOnNextFrame(makeInitialSort);
-            }
-            else
-            {
-                App.utils.scheduler.scheduleOnNextFrame(makeSort);
-            }
-
-            if (Config.networkServicesSettings.statAwards)
-            {
-                initializeListComponentVehicles();
+                Logger.err(ex);
             }
         }
 
@@ -173,9 +187,17 @@ package xvm.profile_ui.components
         {
             if (_disposed)
                 return;
-            //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
-            page.listComponent.techniqueList.invalidateData();
-            dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
+
+            try
+            {
+                //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
+                page.listComponent.techniqueList.invalidateData();
+                dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         // PRIVATE
@@ -208,31 +230,38 @@ package xvm.profile_ui.components
 
         private function setupSortableButtonBar():void
         {
-            if (Config.config.userInfo.showXTEColumn)
+            try
             {
-                var bi:NormalSortingBtnVO = new NormalSortingBtnVO({
-                    id: "xvm_xte",
-                    label: "xTE",
-                    toolTip: "xvm_xte",
-                    buttonWidth: 50,
-                    sortOrder: 8,
-                    defaultSortDirection: SortingInfo.DESCENDING_SORT,
-                    ascendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW,
-                    descendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW,
-                    buttonHeight: 40,
-                    enabled: true
-                });
+                if (Config.config.userInfo.showXTEColumn)
+                {
+                    var bi:NormalSortingBtnVO = new NormalSortingBtnVO({
+                        id: "xvm_xte",
+                        label: "xTE",
+                        toolTip: "xvm_xte",
+                        buttonWidth: 50,
+                        sortOrder: 8,
+                        defaultSortDirection: SortingInfo.DESCENDING_SORT,
+                        ascendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW,
+                        descendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW,
+                        buttonHeight: 40,
+                        enabled: true
+                    });
 
-                var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
-                dp[4].buttonWidth = 64; // BATTLES_COUNT,74
-                dp[5].buttonWidth = 64; // WINS_EFFICIENCY,74
-                dp[6].buttonWidth = 75; // AVG_EXPERIENCE,90
-                dp.push(dp[7]);
-                dp[7] = bi;             // xvm_xte
-                dp[8].buttonWidth = 68; // MARK_OF_MASTERY,83
+                    var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
+                    dp[4].buttonWidth = 64; // BATTLES_COUNT,74
+                    dp[5].buttonWidth = 64; // WINS_EFFICIENCY,74
+                    dp[6].buttonWidth = 75; // AVG_EXPERIENCE,90
+                    dp.push(dp[7]);
+                    dp[7] = bi;             // xvm_xte
+                    dp[8].buttonWidth = 68; // MARK_OF_MASTERY,83
 
-                page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
-                page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
+                    page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
+                    page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 
@@ -241,50 +270,66 @@ package xvm.profile_ui.components
         // TODO: save sort order to userprofile
         private function makeInitialSort():void
         {
-            var idx:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
-            var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-            if (Config.config.userInfo.showXTEColumn)
+            try
             {
-                if (bb.dataProvider.length > 8)
-                    idx = idx == 7 ? 8 : idx == 8 ? 7 : idx; // swap 8 and 9 positions (mastery and xTE columns)
-            }
-            if (idx > bb.dataProvider.length - 1)
-                idx = 5;
-            bb.selectedIndex = idx;
-            var button:SortingButton = SortingButton(bb.getButtonAt(bb.selectedIndex));
-            button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
-            page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
-
-            page.listComponent.techniqueList.validateNow();
-
-            var dp:IDataProvider = page.listComponent.techniqueList.dataProvider;
-            if (dp.length > 0)
-            {
-                var pg:ProfileTechniquePage = page as ProfileTechniquePage;
-                if (pg != null)
+                var idx:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
+                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
+                if (Config.config.userInfo.showXTEColumn)
                 {
-                    if (_selectedItemCD == -1)
-                        _selectedItemCD = dp[0].id;
-                    pg.as_setSelectedVehicleIntCD(_selectedItemCD);
+                    if (bb.dataProvider.length > 8)
+                        idx = idx == 7 ? 8 : idx == 8 ? 7 : idx; // swap 8 and 9 positions (mastery and xTE columns)
+                }
+                if (idx > bb.dataProvider.length - 1)
+                    idx = 5;
+                bb.selectedIndex = idx;
+                var button:SortingButton = SortingButton(bb.getButtonAt(bb.selectedIndex));
+                if (button == null)
+                    return;
+                button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
+                page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
+
+                page.listComponent.techniqueList.validateNow();
+
+                var dp:IDataProvider = page.listComponent.techniqueList.dataProvider;
+                if (dp.length > 0)
+                {
+                    var pg:ProfileTechniquePage = page as ProfileTechniquePage;
+                    if (pg != null)
+                    {
+                        if (_selectedItemCD == -1)
+                            _selectedItemCD = dp[0].id;
+                        pg.as_setSelectedVehicleIntCD(_selectedItemCD);
+                    }
+
+                    var pw:ProfileTechniqueWindow = page as ProfileTechniqueWindow;
+                    if (pw != null)
+                    {
+                        pw.listComponent.techniqueList.setSelectedVehIntCD(dp[0].id);
+                    }
                 }
 
-                var pw:ProfileTechniqueWindow = page as ProfileTechniqueWindow;
-                if (pw != null)
-                {
-                    pw.listComponent.techniqueList.setSelectedVehIntCD(dp[0].id);
-                }
+                _sortDone = true;
             }
-
-            _sortDone = true;
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         private function makeSort():void
         {
-            var buttonBar:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-            var button:SortingButton = SortingButton(buttonBar.getButtonAt(buttonBar.selectedIndex));
-            if (button.sortDirection != SortingInfo.WITHOUT_SORT)
+            try
             {
-                page.listComponent.techniqueList.sortByField(button.id, button.sortDirection == SortingInfo.ASCENDING_SORT);
+                var buttonBar:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
+                var button:SortingButton = SortingButton(buttonBar.getButtonAt(buttonBar.selectedIndex));
+                if (button.sortDirection != SortingInfo.WITHOUT_SORT)
+                {
+                    page.listComponent.techniqueList.sortByField(button.id, button.sortDirection == SortingInfo.ASCENDING_SORT);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 

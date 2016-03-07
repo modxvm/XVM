@@ -16,6 +16,8 @@
       "nameFieldWidthDeltaRight" - width delta for enemies player names field
       "vehicleFieldWidthDeltaLeft" - width delta for "formatLeftVehicle" field
       "vehicleFieldWidthDeltaRight" - width delta for "formatRightVehicle" field
+  * removed obsolete option:
+      "userInfo"/"showExtraDataInProfile"
 
 XVM-6.2.0.1:
   * improvements and bug fixes

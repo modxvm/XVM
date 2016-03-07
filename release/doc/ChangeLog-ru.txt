@@ -16,6 +16,8 @@
     "nameFieldWidthDeltaRight" - изменение ширины поля ника для противников
     "vehicleFieldWidthDeltaLeft" - изменение ширины поля "formatLeftVehicle"
     "vehicleFieldWidthDeltaRight" - изменение ширины поля "formatRightVehicle"
+  * удалена устаревшая опция:
+      "userInfo"/"showExtraDataInProfile"
 
 XVM-6.2.0.1:
   * улучшения и исправление ошибок
