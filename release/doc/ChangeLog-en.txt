@@ -16,6 +16,10 @@
       "nameFieldWidthDeltaRight" - width delta for enemies player names field
       "vehicleFieldWidthDeltaLeft" - width delta for "formatLeftVehicle" field
       "vehicleFieldWidthDeltaRight" - width delta for "formatRightVehicle" field
+  * added new options in the "statisticForm" section:
+      "nameFieldShowBorder" - show border for name field (useful for config tuning)
+      "vehicleFieldShowBorder" - show border for vehicle field (useful for config tuning)
+      "fragsFieldShowBorder" - show border for frags field (useful for config tuning)
   * removed obsolete option:
       "userInfo"/"showExtraDataInProfile"
 
