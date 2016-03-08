@@ -13,22 +13,22 @@
     "vehicleFieldShowBorder": false,
     // X offset for allies squad icons
     // Cмещение по оси X значка взвода союзников
-    "squadIconOffsetXLeft": -40,
+    "squadIconOffsetXLeft": -100,
     // X offset for enemies squad icons field
     // Cмещение по оси X значка взвода для противников
-    "squadIconOffsetXRight": -40,
+    "squadIconOffsetXRight": -100,
     // X offset for allies player names field
     // Cмещение по оси X поля ника союзников
-    "nameFieldOffsetXLeft": -40,
+    "nameFieldOffsetXLeft": -108,
     // Width delta for allies player names field
     // Изменение ширины поля ника союзников
-    "nameFieldWidthDeltaLeft": 0,
+    "nameFieldWidthDeltaLeft": 60,
     // X offset for enemies player names field
     // Cмещение по оси X поля ника противников
-    "nameFieldOffsetXRight": -40,
+    "nameFieldOffsetXRight": -103,
     // Width delta for enemies player names field
     // Изменение ширины поля ника противников
-    "nameFieldWidthDeltaRight": 0,
+    "nameFieldWidthDeltaRight": 60,
     // X offset for allies vehicle names field
     // Cмещение по оси X поля названия танка союзников
     "vehicleFieldOffsetXLeft": 0,
@@ -43,16 +43,10 @@
     "vehicleFieldWidthDeltaRight": 0,
     // X offset for allies vehicle icons
     // Смещение по оси X иконки танка союзников
-    "vehicleIconOffsetXLeft": 0,
+    "vehicleIconOffsetXLeft": -24,
     // X offset for enemies vehicle icons
     // Смещение по оси X иконки танка противников
-    "vehicleIconOffsetXRight": 0,
-    // Display format for the left panel (macros allowed, see macros.txt).
-    // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
-    "formatLeftNick": "<img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}}<font alpha='#A0'>{{clan}}</font>",
-    // Display format for the right panel (macros allowed, see macros.txt).
-    // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
-    "formatRightNick": "<font alpha='#A0'>{{clan}}</font>{{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> <img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'>",
+    "vehicleIconOffsetXRight": -18,
     // Display format for the left panel (macros allowed, see macros.txt).
     // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
     "formatLeftVehicle": "{{vehicle}}<font face='mono' size='{{xvm-stat?13|0}}'> <font color='{{c:r}}'>{{r}}</font></font>",
