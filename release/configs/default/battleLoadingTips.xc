@@ -22,25 +22,25 @@
     "nameFieldOffsetXLeft": -108,
     // Width delta for allies player names field
     // Изменение ширины поля ника союзников
-    "nameFieldWidthDeltaLeft": 60,
+    "nameFieldWidthDeltaLeft": 120,
     // X offset for enemies player names field
     // Cмещение по оси X поля ника противников
     "nameFieldOffsetXRight": -103,
     // Width delta for enemies player names field
     // Изменение ширины поля ника противников
-    "nameFieldWidthDeltaRight": 60,
+    "nameFieldWidthDeltaRight": 120,
     // X offset for allies vehicle names field
     // Cмещение по оси X поля названия танка союзников
     "vehicleFieldOffsetXLeft": 0,
     // Width delta for allies vehicle names field
     // Изменение ширины поля названия танка союзников
-    "vehicleFieldWidthDeltaLeft": 0,
+    "vehicleFieldWidthDeltaLeft": 130,
     // X offset for enemies vehicle names field
     // Cмещение по оси X поля названия танка противников
     "vehicleFieldOffsetXRight": 0,
     // Width delta for enemies vehicle names field
     // Изменение ширины поля названия танка противников
-    "vehicleFieldWidthDeltaRight": 0,
+    "vehicleFieldWidthDeltaRight": 130,
     // X offset for allies vehicle icons
     // Смещение по оси X иконки танка союзников
     "vehicleIconOffsetXLeft": -24,
