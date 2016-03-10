@@ -1,4 +1,4 @@
-﻿XVM-6.2.1-dev:
+﻿XVM-6.2.1:
   * adaptation to WoT 0.9.14
   * macro {{cellsize}} can be used in like other global macros
   * added new options:
