@@ -160,12 +160,20 @@ def AdditionalStatsBlockConstructor_construct(base, self):
 
 # patched _getStyle to use out font/size
 def text_styles_getStyle(style, ctx = {}):
-    if style not in styles_templates:
-        styles_templates[style] = g_htmlTemplates['html_templates:lobby/textStyle'].format(style)
-        if "'14'" in styles_templates[style] and '$FieldFont' in styles_templates[style]:
-            styles_templates[style] = styles_templates[style].replace("size='14'", "size='%s'" % config.get('tooltips/fontSize', 12)).replace("face='$FieldFont'", "face='%s'" % config.get('tooltips/fontName', '$TextFont'))
-    return styles_templates[style] % ctx
-
+    try:
+        if style not in styles_templates:
+            template = g_htmlTemplates['html_templates:lobby/textStyle'][style].source
+            template_string = template if type(template) is str else template['text']
+            if "'14'" in template_string and '$FieldFont' in template_string:
+                template_string = template_string.replace("size='14'", "size='%s'" % config.get('tooltips/fontSize', 12)).replace("face='$FieldFont'", "face='%s'" % config.get('tooltips/fontName', '$TextFont'))
+                styles_templates[style] = template_string if type(template) is str else {'text': template_string}
+        if type(styles_templates[style]) is str:
+            return styles_templates[style]
+        else:
+            return styles_templates[style]['text'] % ctx
+    except Exception as ex:
+        err(traceback.format_exc())
+        return orig_text_styles._getStyle(style, ctx)
 
 def tooltip_add_param(self, result, param0, param1):
     result.append(formatters.packTextParameterBlockData(name=patched_text_styles.main(param0), value=patched_text_styles.stats(param1), valueWidth=100, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
