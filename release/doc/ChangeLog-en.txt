@@ -22,6 +22,7 @@
       "fragsFieldShowBorder" - show border for frags field (useful for config tuning)
   * removed obsolete option:
       "userInfo"/"showExtraDataInProfile"
+  * ping/online: minimalLength is renamed to minimalValueLength, added minimalNameLength
 
 XVM-6.2.0.1:
   * improvements and bug fixes

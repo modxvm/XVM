@@ -155,10 +155,12 @@ package xvm.ping.PingServers
             else
             {
                 raw = time
-                if (time != "...")
-                    while (raw.length < cfg.minimalLength) //left pad the value for minimal length
+                if (raw != "...")
+                    while (raw.length < cfg.minimalValueLength) //left pad the value for minimal length
                         raw = " " + raw;
             }
+            while (cluster.length < cfg.minimalNameLength) //left pad the value for minimal length
+                cluster = cluster + " ";
             //put everything together: server + delimiter + padded value
             if ((cfg.showServerName && !isTitle) || time == "..." || (cfg.showTitle && isTitle))
                 if (!isNaN(serverColor) && time != "...")

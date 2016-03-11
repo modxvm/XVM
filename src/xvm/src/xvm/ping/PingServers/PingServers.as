@@ -79,23 +79,14 @@ package xvm.ping.PingServers
             Xfw.cmd(COMMAND_PING);
         }
 
-        private function pingCallback(answer:Object):Object
+        private function pingCallback(answer:Array):Object
         {
             //Logger.addObject(answer, 2);
             //Logger.add("pingCallback:" + arguments.toString());
             if (!answer)
                 return null;
-            if (!serversOrder || !Utils.serversOrderMatchesAnswer(answer, serversOrder))
-                serversOrder = Utils.createServersOrderFromAnswer(answer);
 
-            var responseTimeList:Array = [serversOrder.length];
-            for (var name:String in answer)
-            {
-                var cluster:String = StringUtils.startsWith(name, "WOT ") ? name.substring(4) : name;
-                responseTimeList[serversOrder.indexOf(name)] = { cluster: cluster, time: answer[name] };
-            }
-
-            dispatchEvent(new ObjectEvent(Event.COMPLETE, responseTimeList));
+            dispatchEvent(new ObjectEvent(Event.COMPLETE, answer));
 
             return null;
         }

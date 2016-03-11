@@ -158,10 +158,12 @@ package xvm.online.OnlineServers
                     raw = people_online;
                 else
                     raw = String(Math.round(parseInt(people_online) / 1000)) + "k";
-                if (people_online != "...")
-                    while (raw.length < cfg.minimalLength) //left pad the value for minimal length
+                if (raw != "...")
+                    while (raw.length < cfg.minimalValueLength) //left pad the value for minimal length
                         raw = " " + raw;
             }
+            while (cluster.length < cfg.minimalNameLength) //left pad the value for minimal length
+                cluster = cluster + " ";
             //put everything together: server + delimiter + padded value
             if ((cfg.showServerName && !isTitle) || people_online == "..." || (cfg.showTitle && isTitle))
                 if (!isNaN(serverColor) && people_online != "...")

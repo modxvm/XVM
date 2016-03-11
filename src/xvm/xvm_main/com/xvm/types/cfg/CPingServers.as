@@ -22,7 +22,8 @@ package com.xvm.types.cfg
         public var fontStyle:Object;
         public var showTitle:Boolean;
         public var showServerName:Boolean;
-        public var minimalLength:Number;
+        public var minimalNameLength:Number;
+        public var minimalValueLength:Number;
         //{
             //name: "$FieldFont",
             //size: 12,

@@ -14,8 +14,6 @@ def update_config(*args, **kwargs):
 
 import traceback
 import threading
-import simplejson
-from random import randint
 
 import BigWorld
 import ResMgr
@@ -43,27 +41,32 @@ class _Get_online(object):
         self.resp = None
         self.done_config = False
         self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
+        self.region = GAME_REGION.lower()
+        if 'CT' in URLS.WG_API_SERVERS and self.region == 'ct': # CT is uncommented in xfw.constants to check on test server
+            self.region = 'ru'
 
     def update_config(self):
         self.loginErrorString = l10n(config.get('login/onlineServers/errorString', '--k'))
         self.hangarErrorString = l10n(config.get('hangar/onlineServers/errorString', '--k'))
-        self.loginShowTitle = config.get('login/onlineServers/showTitle')
-        self.hangarShowTitle = config.get('hangar/onlineServers/showTitle')
+        self.loginShowTitle = config.get('login/onlineServers/showTitle', True)
+        self.hangarShowTitle = config.get('hangar/onlineServers/showTitle', True)
         ignoredServers = config.get('hangar/onlineServers/ignoredServers', [])
+
         self.loginHosts = []
         self.hangarHosts = []
-        #TODO:0.9.14
-        #if self.loginSection is not None:
-        #    for (name, subSec) in self.loginSection.items():
-        #        host_name = subSec.readStrings('name')[0]
-        #        if len(host_name) >= 13:
-        #            host_name = subSec.readStrings('short_name')[0]
-        #        elif host_name.find('WOT ') == 0:
-        #            host_name = host_name[4:]
-        #        self.loginHosts.append(host_name)
-        #        if host_name not in ignoredServers:
-        #            self.hangarHosts.append(host_name)
-        self.done_config = True
+        if self.loginSection is not None:
+            for (name, subSec) in self.loginSection.items():
+                host_name = subSec.readStrings('name')[0]
+                if len(host_name) >= 13:
+                    host_name = subSec.readStrings('short_name')[0]
+                elif host_name.startswith('WOT '):
+                    host_name = host_name[4:]
+                self.loginHosts.append(host_name)
+                if host_name not in ignoredServers:
+                    self.hangarHosts.append(host_name)
+            alphanumeric_sort(self.loginHosts)
+            alphanumeric_sort(self.hangarHosts)
+            self.done_config = True
 
     def get_online(self):
         if not self.done_config:
@@ -99,12 +102,9 @@ class _Get_online(object):
     # Threaded
     def _getOnlineAsync(self):
         try:
-            res = {}
-            hosts = self.hangarHosts if g_hangarSpace.inited else self.loginHosts
-            for host in hosts:
-                res[host] = self.hangarErrorString if g_hangarSpace.inited else self.loginErrorString
-
             data = xvmapi.getOnlineUsersCount()
+            if not data:
+                return
             # typical response:
             #{
             #    "eu":  [{"players_online":4297,"server":"EU2"},{"players_online":8331,"server":"EU1"}],
@@ -114,23 +114,22 @@ class _Get_online(object):
             #    "ru":  [{"players_online":14845,"server":"RU8"},{"players_online":8597,"server":"RU2"},{"players_online":9847,"server":"RU1"},{"players_online":3422,"server":"RU3"},{"players_online":11508,"server":"RU6"},{"players_online":6795,"server":"RU5"},{"players_online":3354,"server":"RU4"}]
             #}
 
-            if data is not None:
-                region = GAME_REGION.lower()
-                if 'CT' in URLS.WG_API_SERVERS and region == 'ct': # CT is uncommented in xfw.constants to check on test server
-                    region = 'ru'
-                data = data.get(region, [])
+            data_dict = {}
+            for data_host in data.get(self.region, []):
+                server = data_host['server']
+                if server.startswith('NA '): # API returns "NA EAST" instead of "US East" => can't determine current server
+                    server = 'US ' + server[3:].capitalize()
+                if self.region == 'ru' and server == '110':
+                    server = 'RU10'
+                data_dict[server] = data_host['players_online']
 
+            res = []
             best_online = 0
-            if data is not None and type(data) is list:
-                for host in data:
-                    if host['server'].find('NA ') == 0: # API returns "NA EAST" instead of "US East" => can't determine current server
-                        host['server'] = 'US ' + host['server'][3:].capitalize()
-                    if host['server'] not in hosts:
-                        continue
-                    res[host['server']] = host['players_online']
-                    best_online = max(best_online, int(host['players_online']))
+            for host in (self.hangarHosts if g_hangarSpace.inited else self.loginHosts):
+                best_online = max(best_online, int(data_dict.get(host, 0)))
+                res.append({'cluster': host, 'people_online': data_dict.get(host, self.hangarErrorString if g_hangarSpace.inited else self.loginErrorString)})
             if (g_hangarSpace.inited and self.hangarShowTitle) or (not g_hangarSpace.inited and self.loginShowTitle):
-                res['###best_online###'] = str(best_online)  # will be first in sorting, key is replaced by localized "Online"
+                res.insert(0, {'cluster': '###best_online###', 'people_online': best_online})  # will appear first, key is replaced by localized "Online"
         except Exception, ex:
             err('_getOnlineAsync() exception: ' + traceback.format_exc())
         with self.lock:

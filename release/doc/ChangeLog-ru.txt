@@ -22,6 +22,7 @@
       "fragsFieldShowBorder" - показывать рамку для поля фрагов (полезно для настройки конфига)
   * удалена устаревшая опция:
       "userInfo"/"showExtraDataInProfile"
+  * ping/online: minimalLength переименовано в minimalValueLength, добавлено minimalNameLength
 
 XVM-6.2.0.1:
   * улучшения и исправление ошибок
