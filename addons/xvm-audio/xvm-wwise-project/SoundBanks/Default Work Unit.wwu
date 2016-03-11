@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{A4AC5395-D8B4-42C5-BFD6-8AE495007A44}" SchemaVersion="70">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{A4AC5395-D8B4-42C5-BFD6-8AE495007A44}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="xvm" ID="{EBD93C0F-162B-4C39-A0FF-DBC4089BC045}">
+					<ObjectInclusionList>
+						<ObjectRef Name="ammoBay" ID="{E7A0552E-11EE-4B01-8FF4-5B3EDEF4BAFA}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="fireAlert" ID="{28064346-1F5E-4A1A-9BDF-F1D976772252}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="sixthSense" ID="{CD164467-95FE-492B-BA07-48AD52EC7268}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="ammoBay" ID="{DC59B173-D69B-4772-8257-F3834CCD4BB7}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="sixthSense" ID="{052F32BB-6AF4-48C4-A49D-542B27155ED8}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="fireAlert" ID="{D2853CE0-DF37-4875-B1DB-F0A23E6E2A7F}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

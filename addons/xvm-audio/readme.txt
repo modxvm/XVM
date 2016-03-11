@@ -1,5 +1,5 @@
-1. Install FMOD Designer 4.44.52
-   http://www.fmod.org/download/fmodex/tool/win/fmoddesigner44452win-installer.exe
-2. Open project xvm.fdp
+1. Install Wwise
+   https://www.audiokinetic.com/download/
+2. Open project xvm.wproj
 3. Build project
-4. Place xvm.fev and xvm.fsb to res/audio (NOT res_mods!!!)
+4. Place xvm.wproj to res_mods/audioww

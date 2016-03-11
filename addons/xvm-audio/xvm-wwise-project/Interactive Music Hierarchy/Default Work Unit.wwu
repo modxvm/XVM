@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{51478839-1769-40AF-A97A-57C9248A85D6}" SchemaVersion="70">
+	<InteractiveMusic>
+		<WorkUnit Name="Default Work Unit" ID="{51478839-1769-40AF-A97A-57C9248A85D6}" PersistMode="Standalone">
+			<ChildrenList>
+				<MusicSegment Name="ammoBay" ID="{DC59B173-D69B-4772-8257-F3834CCD4BB7}" ShortID="399744547">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3468BE5B-8D08-4AF2-A453-C0936654323F}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1C75B047-A097-4907-9640-ABA5750B28B1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicTrack Name="ammoBay" ID="{8FC7E3C3-D067-42FC-91A0-4F3416933968}" ShortID="330487603">
+							<ReferenceList>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1C75B047-A097-4907-9640-ABA5750B28B1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="ammoBay" ID="{1E4F8234-76BD-46B0-BF64-5A1F1707ED33}" ShortID="715622795">
+									<Language>SFX</Language>
+									<AudioFile>ammoBay.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<TransitionList>
+								<MusicTransition Name="Root" ID="{E070F9F1-21AE-458E-92EA-026197FF38CF}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</TransitionList>
+							<SequenceList>
+								<MusicTrackSequence Name="" ID="{43DD03FB-1643-422E-A7DB-156A2B3E033F}">
+									<ClipList>
+										<MusicClip Name="ammoBay" ID="{7D18AFC7-2CF8-471A-9B28-BA0CD072A66E}">
+											<PropertyList>
+												<Property Name="EndTrimOffset" Type="Real64" Value="1358.36734693878"/>
+												<Property Name="FadeInMode" Type="int16" Value="0"/>
+												<Property Name="FadeOutMode" Type="int16" Value="0"/>
+											</PropertyList>
+											<AudioSourceRef Name="ammoBay" ID="{1E4F8234-76BD-46B0-BF64-5A1F1707ED33}"/>
+										</MusicClip>
+									</ClipList>
+								</MusicTrackSequence>
+							</SequenceList>
+						</MusicTrack>
+					</ChildrenList>
+					<CueList>
+						<MusicCue Name="Entry Cue" ID="{98497A8D-6172-427A-9029-BE56A65CA253}"/>
+						<MusicCue Name="Exit Cue" ID="{285DF6A5-CDB5-426C-BED1-7A6AB56A24E4}">
+							<PropertyList>
+								<Property Name="CueType" Type="int16" Value="1"/>
+								<Property Name="TimeMs" Type="Real64" Value="1358.36734693878"/>
+							</PropertyList>
+						</MusicCue>
+					</CueList>
+				</MusicSegment>
+				<MusicSegment Name="fireAlert" ID="{28064346-1F5E-4A1A-9BDF-F1D976772252}" ShortID="277966566">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3468BE5B-8D08-4AF2-A453-C0936654323F}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1C75B047-A097-4907-9640-ABA5750B28B1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicTrack Name="fireAlert" ID="{5A182E9C-11A6-4CB0-9651-8D5B433D0E8C}" ShortID="857738328">
+							<ReferenceList>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1C75B047-A097-4907-9640-ABA5750B28B1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="fireAlert" ID="{36EE4861-1F8D-4097-B449-9F475E249CAD}" ShortID="328652508">
+									<Language>SFX</Language>
+									<AudioFile>fireAlert.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<TransitionList>
+								<MusicTransition Name="Root" ID="{62F9E9C5-A4F6-4DAB-8201-29ABF83CACAA}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</TransitionList>
+							<SequenceList>
+								<MusicTrackSequence Name="" ID="{97CD219A-7217-4478-95E3-F1921DA19D0C}">
+									<ClipList>
+										<MusicClip Name="fireAlert" ID="{EB4FCE05-9ADF-4578-9079-3F977499C861}">
+											<PropertyList>
+												<Property Name="EndTrimOffset" Type="Real64" Value="2015.78231292517"/>
+												<Property Name="FadeInMode" Type="int16" Value="0"/>
+												<Property Name="FadeOutMode" Type="int16" Value="0"/>
+											</PropertyList>
+											<AudioSourceRef Name="fireAlert" ID="{36EE4861-1F8D-4097-B449-9F475E249CAD}"/>
+										</MusicClip>
+									</ClipList>
+								</MusicTrackSequence>
+							</SequenceList>
+						</MusicTrack>
+					</ChildrenList>
+					<CueList>
+						<MusicCue Name="Entry Cue" ID="{475E7AA2-37C7-4B70-B789-F64D52C77DC7}"/>
+						<MusicCue Name="Exit Cue" ID="{D806FEF9-ECFE-42F1-A6DF-C2258D5CC021}">
+							<PropertyList>
+								<Property Name="CueType" Type="int16" Value="1"/>
+								<Property Name="TimeMs" Type="Real64" Value="2015.78231292517"/>
+							</PropertyList>
+						</MusicCue>
+					</CueList>
+				</MusicSegment>
+				<MusicSegment Name="sixthSense" ID="{052F32BB-6AF4-48C4-A49D-542B27155ED8}" ShortID="679642913">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3468BE5B-8D08-4AF2-A453-C0936654323F}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1C75B047-A097-4907-9640-ABA5750B28B1}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicTrack Name="sixthSense" ID="{9ED3CA1B-78EE-4EDB-B3F8-1F98EF2C7B21}" ShortID="830794845">
+							<ReferenceList>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1C75B047-A097-4907-9640-ABA5750B28B1}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="sixthSense" ID="{1B50491F-02C0-4837-B890-520AFAC22FDA}" ShortID="898398569">
+									<Language>SFX</Language>
+									<AudioFile>sixthSense.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<TransitionList>
+								<MusicTransition Name="Root" ID="{7B2CD4D5-EE0C-4236-9567-944FF63B9EA0}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</TransitionList>
+							<SequenceList>
+								<MusicTrackSequence Name="" ID="{2A70318E-65D9-497E-8622-D02718F47052}">
+									<ClipList>
+										<MusicClip Name="sixthSense" ID="{A1487593-C64A-4F9F-B102-2E7D64F4A837}">
+											<PropertyList>
+												<Property Name="EndTrimOffset" Type="Real64" Value="206.258503401361"/>
+												<Property Name="FadeInMode" Type="int16" Value="0"/>
+												<Property Name="FadeOutMode" Type="int16" Value="0"/>
+											</PropertyList>
+											<AudioSourceRef Name="sixthSense" ID="{1B50491F-02C0-4837-B890-520AFAC22FDA}"/>
+										</MusicClip>
+									</ClipList>
+								</MusicTrackSequence>
+							</SequenceList>
+						</MusicTrack>
+					</ChildrenList>
+					<CueList>
+						<MusicCue Name="Entry Cue" ID="{A7864CD0-6D0E-41B8-9B78-551560BC26F9}"/>
+						<MusicCue Name="Exit Cue" ID="{A7021CF7-F9AE-4FFC-B576-F126C1365BA7}">
+							<PropertyList>
+								<Property Name="CueType" Type="int16" Value="1"/>
+								<Property Name="TimeMs" Type="Real64" Value="1000"/>
+							</PropertyList>
+						</MusicCue>
+					</CueList>
+				</MusicSegment>
+			</ChildrenList>
+		</WorkUnit>
+	</InteractiveMusic>
+</WwiseDocument>
