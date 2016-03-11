@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" SchemaVersion="70">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="ammoBay" ID="{E7A0552E-11EE-4B01-8FF4-5B3EDEF4BAFA}">
+					<ChildrenList>
+						<Action Name="Play" ID="{7F747BAA-4C59-4643-B620-1D15F068FC09}" ShortID="976930227" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{65895781-47B3-4D19-B289-94C91F74F941}" Global="false">
+									<ObjectRef Name="ammoBay" ID="{DC59B173-D69B-4772-8257-F3834CCD4BB7}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="fireAlert" ID="{D2853CE0-DF37-4875-B1DB-F0A23E6E2A7F}">
+					<ChildrenList>
+						<Action Name="Play" ID="{9A87BFBF-2EA2-43EF-B9F3-EC1EB1E22B07}" ShortID="881009785" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{D9064360-50AB-455E-8C69-4D04E855FB67}" Global="false">
+									<ObjectRef Name="fireAlert" ID="{28064346-1F5E-4A1A-9BDF-F1D976772252}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="sixthSense" ID="{CD164467-95FE-492B-BA07-48AD52EC7268}">
+					<ChildrenList>
+						<Action Name="Play" ID="{4806629F-D5E9-40DC-875D-311CBB3C5BCF}" ShortID="364705964" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{03B75652-DE24-4008-A548-2B45BA861D5A}" Global="false">
+									<ObjectRef Name="sixthSense" ID="{052F32BB-6AF4-48C4-A49D-542B27155ED8}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
