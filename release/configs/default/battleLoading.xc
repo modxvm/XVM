@@ -27,10 +27,10 @@
     // Показывать рамку для поля имени танка (полезно для настройки конфига)
     "vehicleFieldShowBorder": false,
     // X offset for allies squad icons
-    // Смещение по оси X значка взвода для союзников
+    // Смещение по оси X значка взвода союзников
     "squadIconOffsetXLeft": 0,
     // X offset for enemies squad icons field
-    // Смещение по оси X значка взвода для противников
+    // Смещение по оси X значка взвода противников
     "squadIconOffsetXRight": 0,
     // X offset for allies player names field
     // Смещение по оси X поля ника союзников
