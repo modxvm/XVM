@@ -13,19 +13,19 @@
     "vehicleFieldShowBorder": false,
     // X offset for allies squad icons
     // Cмещение по оси X значка взвода союзников
-    "squadIconOffsetXLeft": -100,
+    "squadIconOffsetXLeft": -130,
     // X offset for enemies squad icons field
     // Cмещение по оси X значка взвода для противников
-    "squadIconOffsetXRight": -100,
+    "squadIconOffsetXRight": -130,
     // X offset for allies player names field
     // Cмещение по оси X поля ника союзников
-    "nameFieldOffsetXLeft": -108,
+    "nameFieldOffsetXLeft": -138,
     // Width delta for allies player names field
     // Изменение ширины поля ника союзников
     "nameFieldWidthDeltaLeft": 120,
     // X offset for enemies player names field
     // Cмещение по оси X поля ника противников
-    "nameFieldOffsetXRight": -103,
+    "nameFieldOffsetXRight": -133,
     // Width delta for enemies player names field
     // Изменение ширины поля ника противников
     "nameFieldWidthDeltaRight": 120,
