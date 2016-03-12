@@ -64,12 +64,12 @@ _special = {
     'ussr:T44_85':                     [ 7, 8 ],
     'ussr:T44_122':                    [ 7, 8 ],
     'usa:A86_T23E3':                   [ 7, 8 ],
-    'germany:E-25':                    [ 7, 8 ],
+    'germany:G48_E-25':                [ 7, 8 ],
     'uk:GB71_AT_15A':                  [ 7, 8 ],
 
     # level 8
     'ussr:R54_KV-5':                   [ 8, 9 ],
-    'ussr:Object252':                  [ 8, 9 ],
+    'ussr:R61_Object252':              [ 8, 9 ],
     'france:F65_FCM_50t':              [ 8, 9 ],
     'usa:A80_T26_E4_SuperPershing':    [ 8, 9 ],
     'usa:A45_M6A2E1':                  [ 8, 9 ],
