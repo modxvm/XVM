@@ -4,8 +4,6 @@
  */
 {
   "battleLoadingTips": {
-    "$ref": { "file": "battleLoading.xc", "path": "battleLoading" },
-
     // Format of clock on the Battle Loading Screen.
     // Формат часов на экране загрузки боя.
     // http://php.net/date
@@ -29,10 +27,10 @@
     // Показывать рамку для поля имени танка (полезно для настройки конфига)
     "vehicleFieldShowBorder": false,
     // X offset for allies squad icons
-    // Смещение по оси X значка взвода для союзников
+    // Смещение по оси X значка взвода союзников
     "squadIconOffsetXLeft": -130,
     // X offset for enemies squad icons field
-    // Смещение по оси X значка взвода для противников
+    // Смещение по оси X значка взвода противников
     "squadIconOffsetXRight": -130,
     // X offset for allies player names field
     // Смещение по оси X поля ника союзников
