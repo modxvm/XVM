@@ -6,6 +6,8 @@
  @author Maxim Schedriviy <max(at)modxvm.com>
 """
 
+import xvm_scale_data
+
 def XEFF(x):
     return 100 if x > 2250 else		\
         round(max(0, min(100,		\
@@ -53,3 +55,8 @@ def XWGR(x):
             - 0.000023362)		\
             + 0.059054)			\
             - 47.85)))
+
+def XvmScaleToSup(x):
+    if x is None:
+        return None
+    return xvm_scale_data.xvm2sup[max(0, min(100, x))]

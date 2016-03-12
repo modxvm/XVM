@@ -102,6 +102,7 @@
     "Average hits received": "В среднем получено попаданий",
     "Average penetrations received": "В среднем получено пробитий",
     "Average ricochets received": "В среднем получено рикошетов",
+    "better then": "лучше, чем",
 
     // Crew
     "PutOwnCrew": "Родной экипаж",

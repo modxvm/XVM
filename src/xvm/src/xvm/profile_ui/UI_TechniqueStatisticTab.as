@@ -44,7 +44,21 @@ package xvm.profile_ui
             {
                 worker.update(arg1 as ProfileVehicleDossierVO);
                 super.update(arg1);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
 
+        override protected function draw():void
+        {
+            if (_baseDisposed)
+                return;
+
+            try
+            {
+                super.draw();
                 if (xfw_group && xfw_group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))
                 {
                     xfw_group.unitRendererLinkage = getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer);

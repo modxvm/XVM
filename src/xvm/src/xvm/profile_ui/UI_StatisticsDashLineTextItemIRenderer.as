@@ -25,6 +25,7 @@ package xvm.profile_ui
 
         override protected function showToolTip():void
         {
+            //Logger.add("UI_StatisticsDashLineTextItemIRenderer.showToolTip(): " + tooltip);
             try
             {
                 if (tooltip == "xvm_xte")

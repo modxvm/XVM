@@ -38,6 +38,8 @@ import xvm_main.python.dossier as dossier
 import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 import xvm_main.python.vehinfo_xte as vehinfo_xte
+from xvm_main.python.xvm import l10n
+import xvm_main.python.xvm_scale as xvm_scale
 
 
 #####################################################################
@@ -132,12 +134,17 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
                 ref['currentD'] = float(dmg) / battles
                 ref['currentF'] = float(frg) / battles
                 xte = vehinfo_xte.calculateXTE(_lastVehId, float(dmg) / battles, float(frg) / battles)
+                ref['xte'] = xte
+                ref['sup'] = xvm_scale.XvmScaleToSup(xte)
                 if xte > 0:
                     color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, xte)
                     xteStr = 'XX' if xte == 100 else ('0' if xte < 10 else '') + str(xte)
-                    data = '<font color="{0}">{1}</font>'.format(color, xteStr)
+                    data = '<font color="#{}" size="12">({} {}%)</font> <font color="{}">{}</font>'.format(
+                        XFWCOLORS.UICOLOR_LABEL, l10n('better then'), xvm_scale.XvmScaleToSup(xte),
+                        color, xteStr)
                     #log("xte={} color={}".format(xteStr, color))
             del res[0]['data'][4]
+            #log(res[0]['data'][0])
             res[0]['data'].insert(0, {
                 'label': 'xTE',
                 'data': data,

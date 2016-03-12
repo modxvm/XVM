@@ -1,5 +1,6 @@
 ﻿XVM-6.2.1.1-dev:
   * improvements and bug fixes
+  * show %SUP for xTE in the profile window
 
 XVM-6.2.1:
   * adaptation to WoT 0.9.14
