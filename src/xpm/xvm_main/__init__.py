@@ -145,7 +145,7 @@ def Flash_call(base, self, methodName, args=None):
 
 def onClientVersionDiffers():
     savedValue = g_replayCtrl.scriptModalWindowsEnabled
-    g_replayCtrl.scriptModalWindowsEnabled = savedValue and config.get('login/confirmOldReplays')
+    g_replayCtrl.scriptModalWindowsEnabled = savedValue and not config.get('login/confirmOldReplays')
     g_replayCtrl.onClientVersionDiffers()
     g_replayCtrl.scriptModalWindowsEnabled = savedValue
 
