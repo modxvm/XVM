@@ -166,7 +166,7 @@ def text_styles_getStyle(style, ctx = {}):
             template_string = template if type(template) is str else template['text']
             if "'14'" in template_string and '$FieldFont' in template_string:
                 template_string = template_string.replace("size='14'", "size='%s'" % config.get('tooltips/fontSize', 12)).replace("face='$FieldFont'", "face='%s'" % config.get('tooltips/fontName', '$TextFont'))
-                styles_templates[style] = template_string if type(template) is str else {'text': template_string}
+            styles_templates[style] = template_string if type(template) is str else {'text': template_string}
         if type(styles_templates[style]) is str:
             return styles_templates[style]
         else:
