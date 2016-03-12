@@ -59,4 +59,4 @@ def XWGR(x):
 def XvmScaleToSup(x):
     if x is None:
         return None
-    return xvm_scale_data.xvm2sup[max(0, min(100, x))]
+    return xvm_scale_data.xvm2sup[max(0, min(100, x-1))]
