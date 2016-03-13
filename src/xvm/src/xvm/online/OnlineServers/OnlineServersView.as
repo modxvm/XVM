@@ -171,7 +171,7 @@ package xvm.online.OnlineServers
                 else
                     raw = cluster + cfg.delimiter + raw;
             //mark current server
-            if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
+            if (onlineObj.cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
                 raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(people_online) + "'>" + raw + "</span></textformat>";
         }

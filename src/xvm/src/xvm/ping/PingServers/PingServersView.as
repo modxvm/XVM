@@ -168,7 +168,7 @@ package xvm.ping.PingServers
                 else
                     raw = cluster + cfg.delimiter + raw;
             //mark current server
-            if (cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
+            if (pingObj.cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
                 raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span></textformat>";
         }
