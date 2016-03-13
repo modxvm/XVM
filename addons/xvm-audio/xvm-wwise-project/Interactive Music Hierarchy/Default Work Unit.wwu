@@ -39,14 +39,14 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BF591CD-EB37-4BF0-9F2C-077A75B221F8}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EF44DAC4-B402-4C7D-97E8-9537072A81BD}"/>
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{750414A0-F08C-43C2-82A0-2005CBC745CA}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
 						<MusicTrack Name="ammoBay" ID="{8FC7E3C3-D067-42FC-91A0-4F3416933968}" ShortID="330487603">
 							<ReferenceList>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EF44DAC4-B402-4C7D-97E8-9537072A81BD}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{750414A0-F08C-43C2-82A0-2005CBC745CA}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -125,14 +125,14 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BF591CD-EB37-4BF0-9F2C-077A75B221F8}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EF44DAC4-B402-4C7D-97E8-9537072A81BD}"/>
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{750414A0-F08C-43C2-82A0-2005CBC745CA}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
 						<MusicTrack Name="fireAlert" ID="{5A182E9C-11A6-4CB0-9651-8D5B433D0E8C}" ShortID="857738328">
 							<ReferenceList>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EF44DAC4-B402-4C7D-97E8-9537072A81BD}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{750414A0-F08C-43C2-82A0-2005CBC745CA}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -211,14 +211,14 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BF591CD-EB37-4BF0-9F2C-077A75B221F8}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EF44DAC4-B402-4C7D-97E8-9537072A81BD}"/>
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{750414A0-F08C-43C2-82A0-2005CBC745CA}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
 						<MusicTrack Name="sixthSense" ID="{9ED3CA1B-78EE-4EDB-B3F8-1F98EF2C7B21}" ShortID="830794845">
 							<ReferenceList>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EF44DAC4-B402-4C7D-97E8-9537072A81BD}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{750414A0-F08C-43C2-82A0-2005CBC745CA}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -257,6 +257,92 @@
 							<PropertyList>
 								<Property Name="CueType" Type="int16" Value="1"/>
 								<Property Name="TimeMs" Type="Real64" Value="1000"/>
+							</PropertyList>
+						</MusicCue>
+					</CueList>
+				</MusicSegment>
+				<MusicSegment Name="sixthSenseRudy" ID="{5FE525E6-06BF-433E-902C-20212D980C30}" ShortID="789292624">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<RTPCList>
+								<RTPC Name="" ID="{1416EB7C-0C91-4450-B70D-13905B9B5BED}" ShortID="871754588">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="RTPC_ext_menu_volume_voice_gui" ID="{133C3CF3-84D8-4D9C-8850-70AE79D45FBC}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{2F919EDC-0D34-4F00-A02E-96141BA3BD34}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+							</RTPCList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BF591CD-EB37-4BF0-9F2C-077A75B221F8}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{750414A0-F08C-43C2-82A0-2005CBC745CA}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicTrack Name="sixthSenseRudy" ID="{9B3D9A01-5BFA-4C33-9E70-535EA42CBFE1}" ShortID="322309563">
+							<ReferenceList>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{750414A0-F08C-43C2-82A0-2005CBC745CA}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="sixthSenseRudy" ID="{AE507D92-02DF-46C8-8E57-E949318C993C}" ShortID="671704212">
+									<Language>SFX</Language>
+									<AudioFile>sixthSenseRudy.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<TransitionList>
+								<MusicTransition Name="Root" ID="{7688BDC5-0C9F-4178-8C2B-9E7CDDF97664}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</TransitionList>
+							<SequenceList>
+								<MusicTrackSequence Name="" ID="{1B57E348-7847-4B45-AA7B-EF3DCD9EC671}">
+									<ClipList>
+										<MusicClip Name="sixthSenseRudy" ID="{D522F910-FAAF-49E8-BFB4-D91C969B0DE2}">
+											<PropertyList>
+												<Property Name="EndTrimOffset" Type="Real64" Value="1210.66666666667"/>
+												<Property Name="FadeInMode" Type="int16" Value="0"/>
+												<Property Name="FadeOutMode" Type="int16" Value="0"/>
+											</PropertyList>
+											<AudioSourceRef Name="sixthSenseRudy" ID="{AE507D92-02DF-46C8-8E57-E949318C993C}"/>
+										</MusicClip>
+									</ClipList>
+								</MusicTrackSequence>
+							</SequenceList>
+						</MusicTrack>
+					</ChildrenList>
+					<CueList>
+						<MusicCue Name="Entry Cue" ID="{63C9ADF9-DF9F-4D69-BD79-C246D25FF62B}"/>
+						<MusicCue Name="Exit Cue" ID="{BAAC54C9-6B3B-4534-8C3C-F9207B665C58}">
+							<PropertyList>
+								<Property Name="CueType" Type="int16" Value="1"/>
+								<Property Name="TimeMs" Type="Real64" Value="1210.66666666667"/>
 							</PropertyList>
 						</MusicCue>
 					</CueList>

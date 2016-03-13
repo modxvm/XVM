@@ -36,6 +36,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="sixthSenseRudy" ID="{C46FB176-DA9B-4431-A668-36D72F7644AB}">
+					<ChildrenList>
+						<Action Name="Play" ID="{4A5E9D32-B054-4963-B802-F9F31FAE0C7A}" ShortID="497257060" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{A47EA640-D45A-4DC8-9828-7DD46492C33B}" Global="false">
+									<ObjectRef Name="sixthSenseRudy" ID="{5FE525E6-06BF-433E-902C-20212D980C30}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

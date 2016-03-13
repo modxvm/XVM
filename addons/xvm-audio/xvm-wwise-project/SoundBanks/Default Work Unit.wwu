@@ -9,8 +9,10 @@
 						<ObjectRef Name="fireAlert" ID="{28064346-1F5E-4A1A-9BDF-F1D976772252}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSense" ID="{CD164467-95FE-492B-BA07-48AD52EC7268}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="ammoBay" ID="{DC59B173-D69B-4772-8257-F3834CCD4BB7}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="sixthSenseRudy" ID="{C46FB176-DA9B-4431-A668-36D72F7644AB}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSense" ID="{052F32BB-6AF4-48C4-A49D-542B27155ED8}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="fireAlert" ID="{D2853CE0-DF37-4875-B1DB-F0A23E6E2A7F}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="sixthSenseRudy" ID="{5FE525E6-06BF-433E-902C-20212D980C30}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

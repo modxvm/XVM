@@ -2,4 +2,4 @@
    https://www.audiokinetic.com/download/
 2. Open project xvm.wproj
 3. Build project
-4. Place xvm.wproj to res_mods/audioww
+4. Place xvm.bnk to res_mods/X.Y.Z/audioww
