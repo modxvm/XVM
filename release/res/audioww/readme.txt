@@ -1,3 +1,3 @@
-To use voice alerts, copy xvm.bnk file to res_mods/X.Y.Z/audioww
+п»їTo use voice alerts, copy xvm.bnk file to res_mods/X.Y.Z/audioww
 
-Я работы озвучки оповещений скопируйте файл xvm.bnk в папку res_mods/X.Y.Z/audioww
+Р”Р»СЏ СЂР°Р±РѕС‚С‹ РѕР·РІСѓС‡РєРё РѕРїРѕРІРµС‰РµРЅРёР№ СЃРєРѕРїРёСЂСѓР№С‚Рµ С„Р°Р№Р» xvm.bnk РІ РїР°РїРєСѓ res_mods/X.Y.Z/audioww
