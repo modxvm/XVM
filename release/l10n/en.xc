@@ -102,7 +102,7 @@
     "Average hits received": "Average hits received",
     "Average penetrations received": "Average penetrations received",
     "Average ricochets received": "Average ricochets received",
-    "better then": "better then",
+    "better than": "better than",
 
     // Crew
     "PutOwnCrew": "Put own crew",

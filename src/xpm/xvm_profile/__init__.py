@@ -140,7 +140,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
                     color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, xte)
                     xteStr = 'XX' if xte == 100 else ('0' if xte < 10 else '') + str(xte)
                     data = '<font color="#{}" size="12">({} {}%)</font>  <font color="{}">{}</font>'.format(
-                        XFWCOLORS.UICOLOR_LABEL, l10n('better then'), xvm_scale.XvmScaleToSup(xte),
+                        XFWCOLORS.UICOLOR_LABEL, l10n('better than'), xvm_scale.XvmScaleToSup(xte),
                         color, xteStr)
                     #log("xte={} color={}".format(xteStr, color))
             del res[0]['data'][4]
