@@ -47,6 +47,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="sixthSenseVoice" ID="{AD7211DF-2DC9-46EE-965C-223689AB2988}">
+					<ChildrenList>
+						<Action Name="Play" ID="{2865FA10-A7F7-446E-AE26-5C7CAF495CEF}" ShortID="379587031" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{7B77FE5F-E037-4978-8CFF-EAB77131B4ED}" Global="false">
+									<ObjectRef Name="sixthSenseVoice" ID="{0CBF7323-88C9-48AE-A641-9A6B77826955}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
