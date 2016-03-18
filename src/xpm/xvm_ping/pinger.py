@@ -124,7 +124,11 @@ class _Ping(object):
                 if not found:
                     res.append({'cluster': host, 'time': (self.hangarErrorString if g_hangarSpace.inited else self.loginErrorString)})
                     if errCode != 0:
-                        debug('Ping returned non-zero status.\nStdout: %s\nStderr: %s' % (out.replace('\n', '\\n'), er.replace('\n', '\\n')))
+                        debug('Ping has returned non-zero status.')
+                        if out:
+                            debug('Stdout: %s' % out.replace('\n', '\\n'))
+                        if er:
+                            debug('Stderr: %s' % er.replace('\n', '\\n'))
                     else:
                         debug('Ping regexp not found in %s' % out.replace('\n', '\\n'))
                     continue
