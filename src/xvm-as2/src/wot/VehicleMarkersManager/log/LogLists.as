@@ -24,11 +24,11 @@ class wot.VehicleMarkersManager.log.LogLists
 
     private function _initialize()
     {
-        if (cfg.visible)
+        if (Macros.FormatGlobalBooleanValue(cfg.visible))
         {
             hitLog = new HitLog(cfg);
         }
-        if (cfg.hpLeft.enabled)
+        if (Macros.FormatGlobalBooleanValue(cfg.hpLeft.enabled))
         {
             hpLeft = new HpLeft(cfg);	/** hpleft also has to respect direction, so cannot simply pass in cfg.hpleft */
         }
