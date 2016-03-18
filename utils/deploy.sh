@@ -3,7 +3,7 @@
 #############################
 # CONFIG
 
-XVM_DIRS="res/icons res/audio res/data"
+XVM_DIRS="res/icons res/data"
 XVM_FILES="l10n/en.xc l10n/ru.xc"
 
 #############################
@@ -73,6 +73,15 @@ copy_configs()
   fi
 }
 
+copy_xvm_audioww_dir()
+{
+  [ -d "../release/res/audioww" ] && {
+    echo "=> res/audioww"
+    mkdir -p "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
+    cp ../release/res/audioww/*.bnk "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
+  }
+}
+
 copy_xvm_dir()
 {
   [ -e "$SHARED_RESOURCES_PATH/$1" ] && rm -rf "$SHARED_RESOURCES_PATH/$1"
@@ -100,6 +109,7 @@ pushd $(dirname $(realpath $(cygpath --unix $0))) >/dev/null
 # load config
 . ../build/xvm-build.conf
 
+TARGET_VERSION_PATH=$WOT_PATH/res_mods/$TARGET_VERSION
 SHARED_RESOURCES_PATH=$WOT_PATH/res_mods/mods/shared_resources/xvm
 
 # check config
@@ -115,6 +125,8 @@ copy_xfw
 copy_output
 
 copy_configs
+
+copy_xvm_audioww_dir
 
 for n in $XVM_DIRS; do
   copy_xvm_dir $n

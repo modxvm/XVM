@@ -309,8 +309,24 @@
     "modMinVersion": "3.0.4"
   },
   "sounds": {
-    //"sixthSense": "/xvm/xvm/sixthsense"
-    "sixthSense": "/GUI/notifications_FX/task_part_complete"
+    "soundBanks": {
+      "hangar": "xvm.bnk;",
+      //"battle": "xvm.bnk;",
+      "__stub__": null
+    },
+    "events": {
+      //"sixthSense": "sixthsense",
+      //"sixthSenseRudy": "sixthSenseRudy",
+      //"fireAlert": "fireAlert",
+      //"ammoBay": "ammoBay",
+      "__stub__": null
+    },
+    "logSoundEvents": true,
+    "soundMapping": {
+      "carousel": "",
+      //"originalEventName": "newEventName"
+      "__stub__": null
+    }
   },
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }
