@@ -119,13 +119,14 @@ class _Ping(object):
 
                 out, er = proc.communicate()
                 errCode = proc.wait()
-                if errCode != 0:
-                    continue
-
                 found = re.search(pattern, out)
+
                 if not found:
                     res.append({'cluster': host, 'time': (self.hangarErrorString if g_hangarSpace.inited else self.loginErrorString)})
-                    debug('Ping regexp not found in %s' % out.replace('\n', '\\n'))
+                    if errCode != 0:
+                        debug('Ping returned non-zero status.\nStdout: %s\nStderr: %s' % (out.replace('\n', '\\n'), er.replace('\n', '\\n')))
+                    else:
+                        debug('Ping regexp not found in %s' % out.replace('\n', '\\n'))
                     continue
 
                 res.append({'cluster': host, 'time': found.group(1)})
