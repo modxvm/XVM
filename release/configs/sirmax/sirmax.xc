@@ -227,6 +227,9 @@
   "minimap": ${"sirmax-minimap.xc":"minimap"},
   "minimapAlt": ${"sirmax-minimap.xc":"minimapAlt"},
   "hitLog": {
+    "hpLeft": {
+      "enabled": "{{.battle.allowHpInPanelsAndMinimap=true?false|true}}"
+    },
     "visible": true,
     "x": 235,
     "y": -230,
@@ -321,10 +324,9 @@
       //"ammoBay": "ammoBay",
       "__stub__": null
     },
-    "logSoundEvents": true,
+    //"logSoundEvents": true,
     "soundMapping": {
-      "carousel": "",
-      //"originalEventName": "newEventName"
+      //"carousel": "",
       "__stub__": null
     }
   },

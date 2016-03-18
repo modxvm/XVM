@@ -10,6 +10,7 @@ class wot.VehicleMarkersManager.log.LogLists
     private var cfg:Object;
     private var hitLog:HitLog;
     private var hpLeft:HpLeft;
+    private var hpLeftEnabled:Boolean;
 
     private var altPressed:Boolean = false;
 
@@ -28,7 +29,8 @@ class wot.VehicleMarkersManager.log.LogLists
         {
             hitLog = new HitLog(cfg);
         }
-        if (Macros.FormatGlobalBooleanValue(cfg.hpLeft.enabled))
+        hpLeftEnabled = Macros.FormatGlobalBooleanValue(cfg.hpLeft.enabled);
+        if (hpLeftEnabled)
         {
             hpLeft = new HpLeft(cfg);	/** hpleft also has to respect direction, so cannot simply pass in cfg.hpleft */
         }
@@ -40,10 +42,20 @@ class wot.VehicleMarkersManager.log.LogLists
     public function onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth):Void
     {
         var player:Object = {
-            vClass: vClass, vIconSource: vIconSource, vType: vType, vLevel: vLevel,
-            pFullName: pFullName, pName: pName, pClan: pClan, pRegion: pRegion,
-            curHealth: curHealth, maxHealth: maxHealth };
-        hpLeft.onNewMarkerCreated(player);
+            vClass: vClass,
+            vIconSource: vIconSource,
+            vType: vType,
+            vLevel: vLevel,
+            pFullName: pFullName,
+            pName: pName,
+            pClan: pClan,
+            pRegion: pRegion,
+            curHealth: curHealth,
+            maxHealth: maxHealth
+        };
+
+        if (hpLeft)
+            hpLeft.onNewMarkerCreated(player);
 
         updateText();
     }
@@ -52,6 +64,9 @@ class wot.VehicleMarkersManager.log.LogLists
     public function onHpUpdate(flag:Number, delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean, curAbsoluteHealth:Number)
     {
+        if (!hitLog)
+            return;
+
         /** Update Hitlog */
         if (flag == Defines.FROM_PLAYER)
         {
@@ -62,7 +77,8 @@ class wot.VehicleMarkersManager.log.LogLists
         }
 
         /** Update HP log */
-        hpLeft.onHealthUpdate(playerName, curAbsoluteHealth);
+        if (hpLeft)
+            hpLeft.onHealthUpdate(playerName, curAbsoluteHealth);
 
         updateText();
     }
@@ -70,7 +86,10 @@ class wot.VehicleMarkersManager.log.LogLists
     /** Show prepared Hitlog or HP log text depending on cfg and Alt button */
     private function updateText():Void
     {
-        if (altPressed && cfg.hpLeft.enabled)
+        if (!hitLog)
+            return;
+
+        if (altPressed && hpLeftEnabled)
         {
             hitLog.setHpText(hpLeft.getText());
         }
