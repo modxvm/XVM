@@ -54,11 +54,12 @@
     // true - show total HP of teams
     // true - показывать общее ХП команд
     "enabled": false,
-    // true - color of HP, hex rgb
-    // true - цвет ХП, hex rgb
+    // Color of HP, hex rgb
+    // Цвет ХП, hex rgb
     "color": "FFFFFF",
-    // true - font of HP
-    // true - шрифт ХП
+    // Font of HP (used fonts from: res/packages/misk.pkg/system/fonts/)
+    // Шрифт ХП (используются шрифты из: res/packages/misk.pkg/system/fonts/)
+    // default_medium.font, default_smaller.font, default_small.font, hpmp_panel.font, system_large.font, system_medium.font, system_small.font, system_tiny.font, verdana_medium.font, verdana_small.font
     "font": "default_small.font",
     // Axis field coordinates
     // Положение поля по осям
