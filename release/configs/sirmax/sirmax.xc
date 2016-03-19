@@ -312,16 +312,12 @@
     "modMinVersion": "3.0.4"
   },
   "sounds": {
-    "events": {
-      //"sixthSense": "",
-      //"sixthSenseRudy": "",
-      //"fireAlert": "",
-      //"ammoBay": "",
-      "__stub__": null
-    },
     //"logSoundEvents": true,
     "soundMapping": {
       "sixthsense": "lightbulb",
+      //"sixthSenseRudy": "",
+      //"fireAlert": "",
+      //"ammoBay": "",
       //"carousel": "",
       "__stub__": null
     }

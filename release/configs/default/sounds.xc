@@ -13,22 +13,6 @@
       "hangar": "xvm.bnk;",
       "battle": "xvm.bnk;"
     },
-    // Sound events added by XVM
-    // Звуковые события, добавленные в XVM
-    "events": {
-      // Perk SixthSense
-      // Перк Шестое чувство
-      "sixthSense": "sixthsense",
-      // Perk SixthSense (On vehicle Т-34-85 Rudy)
-      // Перк Шестое чувство (На технике Т-34-85 Rudy)
-      "sixthSenseRudy": "sixthSenseRudy",
-      // Fire alert
-      // Пожар
-      "fireAlert": "fireAlert",
-      // Damage ammoBay
-      // Повреждение боеукладки
-      "ammoBay": "ammoBay"
-    },
     // Enable sound events logging in the xvm.log
     // Включить логгирование звуковых событий в xvm.log
     "logSoundEvents": false,
@@ -50,7 +34,23 @@
       "vo_fire_started": "",
       // Disable original ammo bay damaged event
       // Отключить оригинальный звук повреждения боеукладки
-      "vo_ammo_bay_damaged": ""
+      "vo_ammo_bay_damaged": "",
+      //
+      // Sound events added by XVM
+      // Звуковые события, добавленные в XVM
+      //
+      // Perk SixthSense
+      // Перк Шестое чувство
+      "xvm_sixthSense": "sixthsense",
+      // Perk SixthSense (On vehicle Т-34-85 Rudy)
+      // Перк Шестое чувство (На технике Т-34-85 Rudy)
+      "xvm_sixthSenseRudy": "sixthSenseRudy",
+      // Fire alert
+      // Пожар
+      "xvm_fireAlert": "fireAlert",
+      // Damage ammoBay
+      // Повреждение боеукладки
+      "xvm_ammoBay": "ammoBay"
     }
   }
 }

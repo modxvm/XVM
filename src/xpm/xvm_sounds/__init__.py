@@ -29,6 +29,15 @@ from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 
+#####################################################################
+# constants
+
+class XVM_SOUND_EVENT(object):
+    SIXTH_SENSE = "xvm_sixthSense"
+    SIXTH_SENSE_RUDY = "xvm_sixthSenseRudy"
+    FIRE_ALERT = "xvm_fireAlert"
+    AMMO_BAY = "xvm_ammoBay"
+
 
 #####################################################################
 # handlers
@@ -69,12 +78,9 @@ def SoundGroups_g_instance_checkAndReplace(base, event):
 def Battle_showSixthSenseIndicator(self, isShow):
     try:
         vehId = BigWorld.entities[BigWorld.player().playerVehicleID].typeDescriptor.type.compactDescr
-        if vehId == 59393: # Rudy
-            soundId = config.get('sounds/events/sixthSenseRudy')
-        else:
-            soundId = config.get('sounds/events/sixthSense')
-        if soundId is not None and soundId != '':
-            SoundGroups.g_instance.playSound2D(soundId)
+        # 59393 => Rudy
+        soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehId == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
+        SoundGroups.g_instance.playSound2D(soundId)
     except:
         err(traceback.format_exc())
 
@@ -82,9 +88,7 @@ def Battle_showSixthSenseIndicator(self, isShow):
 @registerEvent(Battle, '_setFireInVehicle')
 def Battle_setFireInVehicle(self, bool):
     try:
-        soundId = config.get('sounds/events/fireAlert')
-        if soundId is not None and soundId != '':
-            SoundGroups.g_instance.playSound2D(soundId)
+        SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.FIRE_ALERT)
     except:
         err(traceback.format_exc())
 
@@ -94,9 +98,7 @@ def DamagePanel_updateDeviceState(self, value):
     try:
         module, state, _ = value
         if module == 'ammoBay' and state == 'critical':
-            soundId = config.get('sounds/events/ammoBay')
-            if soundId is not None and soundId != '':
-                SoundGroups.g_instance.playSound2D(soundId)
+            SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.AMMO_BAY)
     except:
         err(traceback.format_exc())
 
@@ -105,9 +107,7 @@ def DamagePanel_updateDeviceState(self, value):
 
 def _test():
     log('test')
-    soundId = config.get('sounds/events/sixthSenseRudy')
-    if soundId is not None and soundId != '':
-        SoundGroups.g_instance.playSound2D(soundId)
+    SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.SIXTH_SENSE_RUDY)
     BigWorld.callback(3, _test)
 
 #BigWorld.callback(10, _test)
