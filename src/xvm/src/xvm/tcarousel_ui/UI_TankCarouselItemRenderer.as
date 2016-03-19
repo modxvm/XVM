@@ -40,6 +40,8 @@ package xvm.tcarousel_ui
         {
             super.configUI();
             createExtraFields();
+            //for (var i:int = 0; i < this.numChildren; ++i)
+            //    Logger.add(i + ": " + this.getChildAt(i).name + " -> " + this.getChildAt(i));
         }
 
         override protected function draw():void
@@ -132,10 +134,17 @@ package xvm.tcarousel_ui
                 var w:int = int(ITEM_WIDTH * zoom);
                 var h:int = int(ITEM_HEIGHT * zoom);
 
+                var extraFieldsHolder:MovieClip = new MovieClip();
+                extraFieldsHolder.x = vehicleIcon.x;
+                extraFieldsHolder.y = vehicleIcon.y;
+                extraFieldsHolder.mouseEnabled = false;
+                extraFieldsHolder.mouseChildren = false;
+                this.addChildAt(extraFieldsHolder, this.getChildIndex(this.statusText));
+
                 extraFields = new MovieClip();
                 extraFields.scaleX = extraFields.scaleY = 1 / zoom;
-                vehicleIcon.addChild(extraFields);
-                vehicleIcon.mask = vehicleIcon.addChild(createMask(-1, -1, ITEM_WIDTH + 2, ITEM_HEIGHT + 2));
+                extraFieldsHolder.addChild(extraFields);
+                extraFieldsHolder.mask = extraFieldsHolder.addChild(createMask(-1, -1, ITEM_WIDTH + 4, ITEM_HEIGHT + 4));
 
                 setupStandardField(vehicleIcon.tankTypeMc, cfg.fields.tankType);
 
