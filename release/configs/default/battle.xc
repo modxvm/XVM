@@ -48,6 +48,29 @@
     // true - показывать количество живых танков вместо убитых
     "showAliveNotFrags": false
   },
+  // Total HP of teams.
+  // Общее ХП команд.
+  "totalHP": {
+    // true - show total HP of teams
+    // true - показывать общее ХП команд
+    "enabled": true,
+    // true - color of HP, hex rgb
+    // true - цвет ХП, hex rgb
+    "color": "FFFFFF",
+    // true - font of HP
+    // true - шрифт ХП
+    "font": "default_small.font",
+    // Axis field coordinates
+    // Положение поля по осям
+    "x": 0,
+    "y": 36,
+    // Horizontal alignment of field at screen ("left", "center", "right").
+    // Горизонтальное выравнивание поля на экране ("left", "center", "right").
+    "hAlign": "center",
+    // Vertical alignment of field at screen ("top", "center", "bottom").
+    // Вертикальное выравнивание поля на экране ("top", "center", "bottom").
+    "vAlign": "top"
+  },
   // Ingame crits panel by "expert" skill.
   // Внутриигровая панель критов от навыка "эксперт".
   "expertPanel": {

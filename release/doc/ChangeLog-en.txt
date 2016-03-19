@@ -2,6 +2,7 @@
   * improvements and bug fixes
   * show %SUP for xTE in the profile window
   * section "sounds" completely refactored
+  * added section "battle"/"totalHP"
 
 XVM-6.2.1:
   * adaptation to WoT 0.9.14
