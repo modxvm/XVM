@@ -31,10 +31,10 @@
       "lightbulb": "",
       // Disable original fire sound event
       // Отключить оригинальный звук пожара
-      "vo_fire_started": "",
+      //"vo_fire_started": "",
       // Disable original ammo bay damaged event
       // Отключить оригинальный звук повреждения боеукладки
-      "vo_ammo_bay_damaged": "",
+      //"vo_ammo_bay_damaged": "",
       //
       // Sound events added by XVM
       // Звуковые события, добавленные в XVM
