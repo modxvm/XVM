@@ -199,7 +199,8 @@ copy_files(){
     mv "$XVMBUILD_REPOSITORY_PATH"/~output/~ver/ "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_WOT_VERSION"
 
     # cp non-binary files
-    cp -rf "$XVMBUILD_REPOSITORY_PATH"/release/audioww/*.bnk "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
+    mkdir -p "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
+    cp -f "$XVMBUILD_REPOSITORY_PATH"/release/audioww/*.bnk "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
     cp -rf "$XVMBUILD_REPOSITORY_PATH"/release/* "$XVMBUILD_REPOSITORY_PATH"/~output/mods/shared_resources/xvm/
     mv "$XVMBUILD_REPOSITORY_PATH"/~output/mods/shared_resources/xvm/configs/* "$XVMBUILD_REPOSITORY_PATH"/~output/configs/xvm
     rm -rf "$XVMBUILD_REPOSITORY_PATH"/~output/mods/shared_resources/xvm/configs/
