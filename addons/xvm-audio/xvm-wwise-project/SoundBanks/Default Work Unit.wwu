@@ -5,16 +5,23 @@
 			<ChildrenList>
 				<SoundBank Name="xvm" ID="{EBD93C0F-162B-4C39-A0FF-DBC4089BC045}">
 					<ObjectInclusionList>
-						<ObjectRef Name="sixthSenseVoice" ID="{0CBF7323-88C9-48AE-A641-9A6B77826955}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="ambient" ID="{23F68F04-8D9D-4AA8-A823-F7BAC960374A}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="voice_gui" ID="{1BB13A15-FAF8-4E34-887B-6167D468DD76}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="ammoBay" ID="{E7A0552E-11EE-4B01-8FF4-5B3EDEF4BAFA}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="fireAlert" ID="{28064346-1F5E-4A1A-9BDF-F1D976772252}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="emptyEvent" ID="{A9C56131-82C7-4427-B318-AED678FDC270}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="fireAlert" ID="{461D3541-DB2B-4696-8F49-5908B4A5308B}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSense" ID="{CD164467-95FE-492B-BA07-48AD52EC7268}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="ammoBay" ID="{DC59B173-D69B-4772-8257-F3834CCD4BB7}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="sixthSenseRudy" ID="{075A9170-999F-47CC-A6F6-4046E0C9093B}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSenseRudy" ID="{C46FB176-DA9B-4431-A668-36D72F7644AB}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="sixthSense" ID="{052F32BB-6AF4-48C4-A49D-542B27155ED8}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="sixthSense" ID="{B27A399A-6E45-413B-9D95-2FBEA5A074E6}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="ammoBay" ID="{91CC08A8-0DC7-40E6-8733-8BDCB649CF54}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="effects" ID="{521EB7B1-AFCE-4EC7-A0FE-B3B30CB53913}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="vehicles" ID="{5C5C26D5-E170-4C81-AB62-49DFC2A8714B}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="sixthSenseVoice" ID="{AC485CD7-0C36-46DB-9D89-89639212FA0D}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSenseVoice" ID="{AD7211DF-2DC9-46EE-965C-223689AB2988}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="music" ID="{C86C2CE0-DDC2-4EC0-A741-9FC63BE7BEE4}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="fireAlert" ID="{D2853CE0-DF37-4875-B1DB-F0A23E6E2A7F}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="sixthSenseRudy" ID="{5FE525E6-06BF-433E-902C-20212D980C30}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="master" ID="{F24F57F2-56DE-439C-BF0B-1697385CFD9F}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

@@ -8,7 +8,7 @@
 						<Action Name="Play" ID="{7F747BAA-4C59-4643-B620-1D15F068FC09}" ShortID="976930227" Type="Play" Scope="One" Global="false">
 							<ElementList>
 								<Element ID="{65895781-47B3-4D19-B289-94C91F74F941}" Global="false">
-									<ObjectRef Name="ammoBay" ID="{DC59B173-D69B-4772-8257-F3834CCD4BB7}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+									<ObjectRef Name="ammoBay" ID="{91CC08A8-0DC7-40E6-8733-8BDCB649CF54}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
 								</Element>
 							</ElementList>
 						</Action>
@@ -19,7 +19,7 @@
 						<Action Name="Play" ID="{9A87BFBF-2EA2-43EF-B9F3-EC1EB1E22B07}" ShortID="881009785" Type="Play" Scope="One" Global="false">
 							<ElementList>
 								<Element ID="{D9064360-50AB-455E-8C69-4D04E855FB67}" Global="false">
-									<ObjectRef Name="fireAlert" ID="{28064346-1F5E-4A1A-9BDF-F1D976772252}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+									<ObjectRef Name="fireAlert" ID="{461D3541-DB2B-4696-8F49-5908B4A5308B}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
 								</Element>
 							</ElementList>
 						</Action>
@@ -30,7 +30,7 @@
 						<Action Name="Play" ID="{4806629F-D5E9-40DC-875D-311CBB3C5BCF}" ShortID="364705964" Type="Play" Scope="One" Global="false">
 							<ElementList>
 								<Element ID="{03B75652-DE24-4008-A548-2B45BA861D5A}" Global="false">
-									<ObjectRef Name="sixthSense" ID="{052F32BB-6AF4-48C4-A49D-542B27155ED8}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+									<ObjectRef Name="sixthSense" ID="{B27A399A-6E45-413B-9D95-2FBEA5A074E6}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
 								</Element>
 							</ElementList>
 						</Action>
@@ -41,7 +41,7 @@
 						<Action Name="Play" ID="{4A5E9D32-B054-4963-B802-F9F31FAE0C7A}" ShortID="497257060" Type="Play" Scope="One" Global="false">
 							<ElementList>
 								<Element ID="{A47EA640-D45A-4DC8-9828-7DD46492C33B}" Global="false">
-									<ObjectRef Name="sixthSenseRudy" ID="{5FE525E6-06BF-433E-902C-20212D980C30}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+									<ObjectRef Name="sixthSenseRudy" ID="{075A9170-999F-47CC-A6F6-4046E0C9093B}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
 								</Element>
 							</ElementList>
 						</Action>
@@ -52,12 +52,13 @@
 						<Action Name="Play" ID="{2865FA10-A7F7-446E-AE26-5C7CAF495CEF}" ShortID="379587031" Type="Play" Scope="One" Global="false">
 							<ElementList>
 								<Element ID="{7B77FE5F-E037-4978-8CFF-EAB77131B4ED}" Global="false">
-									<ObjectRef Name="sixthSenseVoice" ID="{0CBF7323-88C9-48AE-A641-9A6B77826955}" WorkUnitID="{51478839-1769-40AF-A97A-57C9248A85D6}"/>
+									<ObjectRef Name="sixthSenseVoice" ID="{AC485CD7-0C36-46DB-9D89-89639212FA0D}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
 								</Element>
 							</ElementList>
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="emptyEvent" ID="{A9C56131-82C7-4427-B318-AED678FDC270}"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
