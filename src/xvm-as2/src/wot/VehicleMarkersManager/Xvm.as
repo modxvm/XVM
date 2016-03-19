@@ -164,9 +164,9 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     /**
      * @see IVehicleMarker
      */
-    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
-        pName:String, pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String,
-        speaking:Boolean, hunt:Boolean, entityType:String, isFlagBearer:Boolean, squadIcon)
+    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String, pName:String,
+        pClan:String, pRegion:String, curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean,
+        hunt:Boolean, entityType:String, isFlagBearer:Boolean, squadIconIdx:Number)
         /* added by XVM: playerId:Number, vid:Number, marksOnGun:Number, vehicleState:Number, frags:Number, squad:Number*/
     {
         Cmd.profMethodStart("Xvm.init()");

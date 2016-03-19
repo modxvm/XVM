@@ -162,7 +162,7 @@ class wot.battle.BattleMain
             {
                 //Logger.add("updated: " + playerName);
                 GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerId));
-                if (dead && Utils.isArenaGuiTypeWithPlayerPanels())
+                if (dead && !Utils.isArenaGuiTypeWithPlayerPanels())
                 {
                     GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYER_DEAD, value: playerId } );
                 }

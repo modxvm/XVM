@@ -10,6 +10,24 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     function init_xvm();
     /////////////////////////////////////////////////////////////////
 
+    var m_type:String;
+    var _vehicleName:String;
+    var entryName:String;
+    var vehicleClass:String;
+    var markLabel:String;
+    var isTeamKiller:Boolean;
+    var isDead:Boolean;
+    var isDeadPermanent:Boolean;
+    var isPostmortem:Boolean;
+    var isMarketLit:Boolean;
+    var playingTimeoutId;
+    var _needInitSector:Boolean;
+
+    static var showVehicleNames:Boolean;
+    static var ms_lastLitEntry:MovieClip;
+    static var isDebug:Boolean;
+    static var SQUAD_HANG:Number;
+
     var vehicleNameTextFieldClassic:TextField;
     var vehicleNameTextFieldAlt:TextField;
     var markMC:MovieClip;
@@ -30,23 +48,7 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     var _parentNormalScale:Number;
     var cameraWithDirection:MovieClip;
 
-    static var showVehicleNames:Boolean;
-    var m_type:String;
-    var _vehicleName:String;
-    var entryName:String;
-    var vehicleClass:String;
-    var markLabel:String;
-    var isTeamKiller:Boolean;
-    var isDead:Boolean;
-    var isDeadPermanent:Boolean;
-    var isPostmortem:Boolean;
-    var isMarketLit:Boolean;
-    static var ms_lastLitEntry:MovieClip;
-    var playingTimeoutId;
-    static var isDebug:Boolean;
-    var _needInitSector:Boolean;
-    static var SQUAD_HANG:Number;
-
+    function MinimapEntry();
     function configUI();
     function init(markerType, entryName, vehicleClass, markLabel, vehicleName);
     function showAction(markLabel);
@@ -55,9 +57,8 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     function update();
     function lightPlayer(visibility);
     function playPlayer();
-    static function unhighlightLastEntry();
-    function get colorsManager():net.wargaming.managers.ColorSchemeManager;
-    function get colorSchemeName():String;
+    function get colorsManager();
+    function get colorSchemeName();
     function getTextColorSchemeName();
     function setEntryName(value);
     function setVehicleClass(value);
@@ -80,16 +81,17 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     function onSectorLine2Loaded();
     function onCameraWithDirectionLoaded();
     function onCameraWithDirectionIOError();
-    function getMinimap():net.wargaming.ingame.Minimap;
+    function getMinimap();
     function onEnterFrameHandler();
     function sectorLineLoaded(sectorLine, deg, callback);
     function updateLinesScale(parentNormalScale);
     function checkForSectorLines();
     function initSectorContent();
     function updateVehicleName();
-    function get vehicleNameTextField():TextField;
-    function resumeAnimation()
-    function stopAnimation()
-    function initFlagPoint()
-    function initRepairPoint()
+    function get vehicleNameTextField();
+    function resumeAnimation();
+    function stopAnimation();
+    function initFlagPoint();
+    function initRepairPoint();
+    static function unhighlightLastEntry();
 }
