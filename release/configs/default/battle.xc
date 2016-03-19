@@ -53,7 +53,7 @@
   "totalHP": {
     // true - show total HP of teams
     // true - показывать общее ХП команд
-    "enabled": true,
+    "enabled": false,
     // true - color of HP, hex rgb
     // true - цвет ХП, hex rgb
     "color": "FFFFFF",
