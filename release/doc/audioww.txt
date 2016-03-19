@@ -1,0 +1,7 @@
+﻿List of sound events in the sound bank res_mods/X.Y.Z/audioww/xvm.bnk:
+  "emptyEvent" - empty event for silent sound
+  "sixthsense" - SixthSense perk
+  "sixthsenseVoice" - SixthSense perk with voice alert
+  "sixthSenseRudy" - SixthSense perk for vehicle Т-34-85 Rudy
+  "fireAlert" - fire alert
+  "ammoBay" - ammo bay damage alert

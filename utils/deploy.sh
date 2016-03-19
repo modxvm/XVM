@@ -75,10 +75,10 @@ copy_configs()
 
 copy_xvm_audioww_dir()
 {
-  [ -d "../release/res/audioww" ] && {
-    echo "=> res/audioww"
+  [ -d "../release/audioww" ] && {
+    echo "=> audioww"
     mkdir -p "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
-    cp ../release/res/audioww/*.bnk "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
+    cp ../release/audioww/*.bnk "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
   }
 }
 
