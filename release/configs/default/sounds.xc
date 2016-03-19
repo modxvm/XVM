@@ -10,7 +10,7 @@
     // Список дополнительных банков для загрузки из папки res_mods/X.Y.Z/audioww.
     // Несколько банков необходимо указывать через точку с запятой: "bank1.bnk; bank2.bnk;..."
     "soundBanks": {
-      "hangar": null,
+      "hangar": "xvm.bnk;",
       "battle": "xvm.bnk;"
     },
     // Sound events added by XVM
@@ -41,6 +41,16 @@
       // To disable sound event use empty string for value
       // Для отключения звукового события используйте пустую строку для значения
       //"originalEventName": ""
+      //
+      // Disable original sixth sense light bulb sound event
+      // Отключить оригинальный звук лампы шестого чувства
+      "lightbulb": "",
+      // Disable original fire sound event
+      // Отключить оригинальный звук пожара
+      "vo_fire_started": "",
+      // Disable original ammo bay damaged event
+      // Отключить оригинальный звук повреждения боеукладки
+      "vo_ammo_bay_damaged": ""
     }
   }
 }

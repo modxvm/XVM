@@ -312,20 +312,16 @@
     "modMinVersion": "3.0.4"
   },
   "sounds": {
-    "soundBanks": {
-      "hangar": "xvm.bnk;",
-      //"battle": "xvm.bnk;",
-      "__stub__": null
-    },
     "events": {
-      //"sixthSense": "sixthsense",
-      //"sixthSenseRudy": "sixthSenseRudy",
-      //"fireAlert": "fireAlert",
-      //"ammoBay": "ammoBay",
+      //"sixthSense": "",
+      //"sixthSenseRudy": "",
+      //"fireAlert": "",
+      //"ammoBay": "",
       "__stub__": null
     },
     //"logSoundEvents": true,
     "soundMapping": {
+      "sixthsense": "lightbulb",
       //"carousel": "",
       "__stub__": null
     }

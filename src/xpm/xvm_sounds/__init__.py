@@ -52,6 +52,8 @@ def SoundGroups_g_instance_checkAndReplace(base, event):
     mappedEvent = config.get('sounds/soundMapping/%s' % event)
     logSoundEvents = config.get('sounds/logSoundEvents')
     if mappedEvent is not None:
+        if mappedEvent == '':
+            mappedEvent = 'emptyEvent'
         if logSoundEvents:
             log('SOUND EVENT: %s => %s' % (event, mappedEvent))
         return mappedEvent
