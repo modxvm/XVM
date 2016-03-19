@@ -64,6 +64,8 @@ package xvm.tcarousel_ui
                 {
                     lastSelectedState = this.selected;
 
+                    extraFields.visible = !(dataVO.buySlot || dataVO.buyTank);
+
                     var id:Number = dataVO.compactDescr;
                     var dossier:AccountDossier = Dossier.getAccountDossier();
                     if (dossier != null)
