@@ -3,6 +3,7 @@
 
 TODO: List events in sound banks:
 
+"emptyEvent" - empty event for soundMapping option
 "sixthsense" - perk SixthSense
 "sixthsenseVoice" - perk SixthSense (voice alert)
 "sixthSenseRudy" - perk SixthSense (On vehicle Т-34-85 Rudy)
