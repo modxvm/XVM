@@ -49,7 +49,7 @@ def WWISE_WG_loadBanks(base, *args, **kwargs):
         lst = list(args)
         lst[0] += extraBanks
         args = tuple(lst)
-    debug('WWISE.WG_loadBanks: %s' % args[0])
+    log('WWISE.WG_loadBanks: %s' % args[0])
     base(*args, **kwargs)
 
 
