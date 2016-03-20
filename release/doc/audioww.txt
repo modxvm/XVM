@@ -5,3 +5,4 @@
   "sixthSenseRudy" - SixthSense perk for vehicle Т-34-85 Rudy
   "fireAlert" - fire alert
   "ammoBay" - ammo bay damage alert
+  "enemySighted" - enemy detection
