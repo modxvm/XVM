@@ -29,16 +29,16 @@
       // Disable original sixth sense light bulb sound event
       // Отключить оригинальный звук лампы шестого чувства
       "lightbulb": "",
+      // Disable original enemy detection event      
+      // Отключить оригинальный звук обнаружения противника
+      //"enemy_sighted_for_team": "",
+      //      
       // Disable original fire sound event
       // Отключить оригинальный звук пожара
       //"vo_fire_started": "",
       // Disable original ammo bay damaged event
       // Отключить оригинальный звук повреждения боеукладки
       //"vo_ammo_bay_damaged": "",
-      //
-      // Disable original enemy detection event
-      // Отключить оригинальный звук обнаружения противника
-      //"enemy_sighted_for_team": "",
       //
       // Sound events added by XVM
       // Звуковые события, добавленные в XVM
@@ -49,15 +49,15 @@
       // Perk SixthSense (On vehicle Т-34-85 Rudy)
       // Перк Шестое чувство (На технике Т-34-85 Rudy)
       "xvm_sixthSenseRudy": "sixthSenseRudy",
+      // Enemy detection (Use in together with disable original enemy detection event) 
+      // Обнаружение противника (Используйте вместе с отключением оригинального звука обнаружения противника)
+      //"xvm_enemySighted": "enemySighted",      
       // Fire alert
       // Пожар
       "xvm_fireAlert": "fireAlert",
       // Damage ammoBay
       // Повреждение боеукладки
-      "xvm_ammoBay": "ammoBay",
-      // Enemy detection (Use in together with disable original enemy detection event) 
-      // Обнаружение противника (Используйте вместе с отключением оригинального звука обнаружения противника)
-      "xvm_enemySighted": ""
+      "xvm_ammoBay": "ammoBay"
     }
   }
 }
