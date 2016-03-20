@@ -59,6 +59,17 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="emptyEvent" ID="{A9C56131-82C7-4427-B318-AED678FDC270}"/>
+				<Event Name="enemySighted" ID="{8E8DA620-C8E3-4F9C-BDF8-4C105E339EA9}">
+					<ChildrenList>
+						<Action Name="Play" ID="{EF464F31-0509-4125-9854-10B4FDB0C155}" ShortID="71058865" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{0D84B8F6-A7AD-48F6-A0EA-656DFB34849F}" Global="false">
+									<ObjectRef Name="enemySighted" ID="{91744A42-AA60-4019-AD34-3190006A12D3}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

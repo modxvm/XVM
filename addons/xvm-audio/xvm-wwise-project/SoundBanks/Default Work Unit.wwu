@@ -7,9 +7,11 @@
 					<ObjectInclusionList>
 						<ObjectRef Name="ambient" ID="{23F68F04-8D9D-4AA8-A823-F7BAC960374A}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="voice_gui" ID="{1BB13A15-FAF8-4E34-887B-6167D468DD76}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="enemySighted" ID="{8E8DA620-C8E3-4F9C-BDF8-4C105E339EA9}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="ammoBay" ID="{E7A0552E-11EE-4B01-8FF4-5B3EDEF4BAFA}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="emptyEvent" ID="{A9C56131-82C7-4427-B318-AED678FDC270}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="fireAlert" ID="{461D3541-DB2B-4696-8F49-5908B4A5308B}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="enemySighted" ID="{91744A42-AA60-4019-AD34-3190006A12D3}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSense" ID="{CD164467-95FE-492B-BA07-48AD52EC7268}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSenseRudy" ID="{075A9170-999F-47CC-A6F6-4046E0C9093B}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSenseRudy" ID="{C46FB176-DA9B-4431-A668-36D72F7644AB}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
