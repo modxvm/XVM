@@ -591,11 +591,11 @@ class Xvm(object):
         config.token = config.XvmServicesToken.restore()
         config.token.updateTokenFromApi()
 
-        if config.networkServicesSettings.servicesActive:
+        if config.networkServicesSettings.servicesActive and config.networkServicesSettings.statBattle:
             data = xvmapi.getVersion()
             topclans.clear()
         else:
-            data = xvmapi.getVersionWithLimit()
+            data = xvmapi.getVersionWithLimit(config.networkServicesSettings.topClansCount)
             topclans.update(data)
         config.verinfo = config.XvmVersionInfo(data)
 
