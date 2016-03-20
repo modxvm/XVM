@@ -47,7 +47,9 @@ def WWISE_WG_loadBanks(base, *args, **kwargs):
     extraBanks = config.get('sounds/soundBanks/%s' % ('hangar' if args[1] else 'battle'))
     if extraBanks:
         lst = list(args)
-        lst[0] += extraBanks
+        banks = (lst[0] + ';' + extraBanks).split(';')
+        banks = set([x.strip() for x in banks if x and x.strip()])
+        lst[0] = '; '.join(banks)
         args = tuple(lst)
     log('WWISE.WG_loadBanks: %s' % args[0])
     base(*args, **kwargs)
