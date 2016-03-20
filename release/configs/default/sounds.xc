@@ -36,6 +36,10 @@
       // Отключить оригинальный звук повреждения боеукладки
       //"vo_ammo_bay_damaged": "",
       //
+      // Disable original enemy detection event
+      // Отключить оригинальный звук обнаружения противника
+      //"enemy_sighted_for_team": "",
+      //
       // Sound events added by XVM
       // Звуковые события, добавленные в XVM
       //
@@ -50,7 +54,10 @@
       "xvm_fireAlert": "fireAlert",
       // Damage ammoBay
       // Повреждение боеукладки
-      "xvm_ammoBay": "ammoBay"
+      "xvm_ammoBay": "ammoBay",
+      // Enemy detection (Use in together with disable original enemy detection event) 
+      // Обнаружение противника (Используйте вместе с отключением оригинального звука обнаружения противника)
+      "xvm_enemySighted": ""
     }
   }
 }

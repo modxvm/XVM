@@ -23,6 +23,8 @@ import SoundGroups
 import WWISE
 from gui.Scaleform.Battle import Battle
 from gui.Scaleform.daapi.view.battle.damage_panel import DamagePanel
+from gui.Scaleform.Minimap import Minimap
+from gui.battle_control import g_sessionProvider
 
 from xfw import *
 
@@ -37,7 +39,7 @@ class XVM_SOUND_EVENT(object):
     SIXTH_SENSE_RUDY = "xvm_sixthSenseRudy"
     FIRE_ALERT = "xvm_fireAlert"
     AMMO_BAY = "xvm_ammoBay"
-
+    ENEMY_SIGHTED = "xvm_enemySighted"
 
 #####################################################################
 # handlers
@@ -103,6 +105,21 @@ def DamagePanel_updateDeviceState(self, value):
             SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.AMMO_BAY)
     except:
         err(traceback.format_exc())
+
+
+enemyList = {}
+
+@overrideMethod(Minimap, '_Minimap__addEntry')
+def Minimap_Minimap__addEntry(base, self, vInfo, guiProps, location, doMark):
+    try:
+        if vInfo.vehicleID not in enemyList and not guiProps.isFriend:
+            enemyList[vInfo.vehicleID] = True
+            if doMark and not g_sessionProvider.getCtx().isPlayerObserver():
+                SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.ENEMY_SIGHTED)
+    except:
+        err(traceback.format_exc())
+
+    return base(self, vInfo, guiProps, location, doMark)
 
 
 # TEST
