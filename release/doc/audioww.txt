@@ -6,4 +6,4 @@
   "fireAlert" - fire alert
   "ammoBay" - ammo bay damage alert
   "enemySighted" - enemy detection
-  "enemySighted" - enemy detection with voice alert
+  "enemySightedVoice" - enemy detection with voice alert
