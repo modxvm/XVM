@@ -23,6 +23,7 @@ import SoundGroups
 import WWISE
 from gui.Scaleform.Battle import Battle
 from gui.Scaleform.daapi.view.battle.damage_panel import DamagePanel
+from Avatar import PlayerAvatar
 from gui.Scaleform.Minimap import Minimap
 from gui.battle_control import g_sessionProvider
 
