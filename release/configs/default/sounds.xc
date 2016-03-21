@@ -5,6 +5,7 @@
  */
 {
   "sounds": {
+    "enabled": true,
     // List of extra banks to load from folder res_mods/X.Y.Z/audioww.
     // Use semicolon for multiple values: "bank1.bnk; bank2.bnk;..."
     // Список дополнительных банков для загрузки из папки res_mods/X.Y.Z/audioww.
@@ -51,6 +52,7 @@
       "xvm_sixthSenseRudy": "sixthSenseRudy",
       // Enemy detection (Use in together with disable original enemy detection event) 
       // Обнаружение противника (Используйте вместе с отключением оригинального звука обнаружения противника)
+      "xvm_enemySighted": "",      
       //"xvm_enemySighted": "enemySighted",      
       // Fire alert
       // Пожар

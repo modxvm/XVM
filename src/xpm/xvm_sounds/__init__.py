@@ -47,19 +47,23 @@ class XVM_SOUND_EVENT(object):
 
 @overrideMethod(WWISE, 'WG_loadBanks')
 def WWISE_WG_loadBanks(base, *args, **kwargs):
-    extraBanks = config.get('sounds/soundBanks/%s' % ('hangar' if args[1] else 'battle'))
-    if extraBanks:
-        lst = list(args)
-        banks = (lst[0] + ';' + extraBanks).split(';')
-        banks = set([x.strip() for x in banks if x and x.strip()])
-        lst[0] = '; '.join(banks)
-        args = tuple(lst)
-    log('WWISE.WG_loadBanks: %s' % args[0])
+    if config.get('sounds/enabled'):
+        extraBanks = config.get('sounds/soundBanks/%s' % ('hangar' if args[1] else 'battle'))
+        if extraBanks:
+            lst = list(args)
+            banks = (lst[0] + ';' + extraBanks).split(';')
+            banks = set([x.strip() for x in banks if x and x.strip()])
+            lst[0] = '; '.join(banks)
+            args = tuple(lst)
+        log('WWISE.WG_loadBanks: %s' % args[0])
     base(*args, **kwargs)
 
 
 @overrideMethod(SoundGroups.g_instance, 'checkAndReplace')
 def SoundGroups_g_instance_checkAndReplace(base, event):
+    if not config.get('sounds/enabled'):
+        return base(event)
+
     event = base(event)
     if not event:
         return event
@@ -82,10 +86,11 @@ def SoundGroups_g_instance_checkAndReplace(base, event):
 @registerEvent(Battle, '_showSixthSenseIndicator')
 def Battle_showSixthSenseIndicator(self, isShow):
     try:
-        vehId = BigWorld.entities[BigWorld.player().playerVehicleID].typeDescriptor.type.compactDescr
-        # 59393 => Rudy
-        soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehId == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
-        SoundGroups.g_instance.playSound2D(soundId)
+        if config.get('sounds/enabled'):
+            vehId = BigWorld.entities[BigWorld.player().playerVehicleID].typeDescriptor.type.compactDescr
+            # 59393 => Rudy
+            soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehId == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
+            SoundGroups.g_instance.playSound2D(soundId)
     except:
         err(traceback.format_exc())
 
@@ -93,7 +98,8 @@ def Battle_showSixthSenseIndicator(self, isShow):
 @registerEvent(Battle, '_setFireInVehicle')
 def Battle_setFireInVehicle(self, bool):
     try:
-        SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.FIRE_ALERT)
+        if config.get('sounds/enabled'):
+            SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.FIRE_ALERT)
     except:
         err(traceback.format_exc())
 
@@ -101,9 +107,10 @@ def Battle_setFireInVehicle(self, bool):
 @registerEvent(DamagePanel, '_updateDeviceState')
 def DamagePanel_updateDeviceState(self, value):
     try:
-        module, state, _ = value
-        if module == 'ammoBay' and state == 'critical':
-            SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.AMMO_BAY)
+        if config.get('sounds/enabled'):
+            module, state, _ = value
+            if module == 'ammoBay' and state == 'critical':
+                SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.AMMO_BAY)
     except:
         err(traceback.format_exc())
 
@@ -117,15 +124,15 @@ def PlayerAvatar_PlayerAvatar__destroyGUI(self):
 
 @overrideMethod(Minimap, '_Minimap__addEntry')
 def Minimap_Minimap__addEntry(base, self, vInfo, guiProps, location, doMark):
+    base(self, vInfo, guiProps, location, doMark)
     try:
-        if vInfo.vehicleID not in enemyList and not guiProps.isFriend:
-            enemyList[vInfo.vehicleID] = True
-            if doMark and not g_sessionProvider.getCtx().isPlayerObserver():
-                SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.ENEMY_SIGHTED)
+        if config.get('sounds/enabled'):
+            if vInfo.vehicleID not in enemyList and not guiProps.isFriend:
+                enemyList[vInfo.vehicleID] = True
+                if doMark and not g_sessionProvider.getCtx().isPlayerObserver():
+                    SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.ENEMY_SIGHTED)
     except:
         err(traceback.format_exc())
-
-    return base(self, vInfo, guiProps, location, doMark)
 
 
 # TEST

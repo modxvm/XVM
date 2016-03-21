@@ -312,12 +312,14 @@
     "modMinVersion": "3.0.4"
   },
   "sounds": {
+    //"enabled": false,
     //"logSoundEvents": true,
     "soundMapping": {
-      "sixthsense": "lightbulb",
-      //"sixthSenseRudy": "",
-      //"fireAlert": "",
-      //"ammoBay": "",
+      "xvm_sixthSense": "lightbulb",
+      //"xvm_sixthSenseRudy": "",
+      //"xvm_fireAlert": "",
+      //"xvm_ammoBay": "",
+      //"xvm_enemySighted": "enemySighted",      
       //"carousel": "",
       "__stub__": null
     }

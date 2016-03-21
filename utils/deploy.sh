@@ -78,7 +78,7 @@ copy_xvm_audioww_dir()
   [ -d "../release/audioww" ] && {
     echo "=> audioww"
     mkdir -p "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
-    cp ../release/audioww/*.bnk "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
+    cp -f ../release/audioww/*.bnk "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
   }
 }
 
