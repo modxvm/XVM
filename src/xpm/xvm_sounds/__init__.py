@@ -109,6 +109,11 @@ def DamagePanel_updateDeviceState(self, value):
 
 enemyList = {}
 
+@registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
+def PlayerAvatar_PlayerAvatar__destroyGUI(self):
+    enemyList.clear()
+
+
 @overrideMethod(Minimap, '_Minimap__addEntry')
 def Minimap_Minimap__addEntry(base, self, vInfo, guiProps, location, doMark):
     try:

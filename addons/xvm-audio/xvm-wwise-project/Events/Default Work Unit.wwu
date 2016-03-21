@@ -70,6 +70,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="enemySightedVoice" ID="{46AD0FF8-A1FD-453E-AAAF-DBC143473258}">
+					<ChildrenList>
+						<Action Name="Play" ID="{10239DA9-EFEA-4CD3-926A-BD213D0ACC33}" ShortID="913123773" Type="Play" Scope="One" Global="false">
+							<ElementList>
+								<Element ID="{70D70FAD-2618-4ADA-BA5F-685951033245}" Global="false">
+									<ObjectRef Name="enemySightedVoice" ID="{64C4D38F-7CFF-45C3-B8C7-EF608F3408B5}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+								</Element>
+							</ElementList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
