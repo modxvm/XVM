@@ -3,6 +3,7 @@
   * show %SUP for xTE in the profile window
   * section "sounds" completely refactored
   * added section "battle"/"totalHP"
+  * added option "enabled" in the minimap label settings with global macros support
 
 XVM-6.2.1:
   * adaptation to WoT 0.9.14

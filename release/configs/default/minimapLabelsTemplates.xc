@@ -15,6 +15,7 @@
   //    Если не указаны "lost" и "spotted", то используются оба - и "lost", и "spotted".
   //    Если не указаны "alive", "dead", то используются оба - и "alive", и "dead".
   //    "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
+  //    "enabled" - enable/disable field creation (global macros allowed)
   //    "format": "...",
   //    "shadow": { ... },
   //    "alpha": "...",
@@ -28,6 +29,7 @@
     // Fields default format
     // Формат поля по умолчанию
     "defaultItem": {
+      "enabled": true,
       "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
       "shadow": { "distance": 0, "angle": 45, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 4 },
       "alpha": 100,

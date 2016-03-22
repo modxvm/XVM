@@ -272,6 +272,9 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         //if (bs.dead)
         //    Logger.add(bs.entryName + " " + (bs.spottedStatus == Defines.SPOTTED_STATUS_SPOTTED) + " " + (!bs.dead) + " => [" + cfg.flags.join(", ") + "] = " + isAllowedState(cfg.flags, bs));
 
+        if (global_cfg.enabled != null && Macros.FormatGlobalBooleanValue(global_cfg.enabled) == false)
+            return;
+
         if (!isAllowedState(global_cfg.flags, bs))
             return;
 

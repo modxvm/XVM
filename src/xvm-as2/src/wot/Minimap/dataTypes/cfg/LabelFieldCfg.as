@@ -2,6 +2,7 @@ import wot.Minimap.dataTypes.cfg.TextFieldShadowCfg;
 
 class wot.Minimap.dataTypes.cfg.LabelFieldCfg
 {
+    public var enabled:Boolean;
     public var flags:Array;
     public var format:String;
     public var shadow:TextFieldShadowCfg;
@@ -18,6 +19,7 @@ class wot.Minimap.dataTypes.cfg.LabelFieldCfg
 
     public function LabelFieldCfg(obj:LabelFieldCfg)
     {
+        enabled = obj.enabled;
         flags = obj.flags;
         format = obj.format;
         shadow = new TextFieldShadowCfg(obj.shadow);
