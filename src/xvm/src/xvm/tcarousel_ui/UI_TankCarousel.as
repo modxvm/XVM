@@ -130,12 +130,13 @@ package xvm.tcarousel_ui
             //Logger.add("UI_TankCarousel.scrollToIndex(" + index + ")");
             try
             {
-                //Logger.add("scrollToIndex: " + index + " xfw_visibleSlots: " + xfw_visibleSlots);
+                //Logger.add("scrollToIndex: " + index + " xfw_visibleSlots: " + xfw_visibleSlots + " _totalRenderers=" +_totalRenderers);
                 if (!container || !_renderers)
                     return;
+                updateAdvancedSlots(false);
                 var n:uint = Math.floor(xfw_visibleSlots / cfg.rows / 2);
                 index = Math.floor(index / cfg.rows);
-                currentFirstRenderer = Math.max(0, index - n);
+                currentFirstRenderer = Math.max(0, int(index) - n);
                 goToFirstRenderer();
             }
             catch (ex:Error)
@@ -172,7 +173,7 @@ package xvm.tcarousel_ui
             try
             {
                 super.as_setParams(params);
-                repositionAdvancedSlots();
+                updateAdvancedSlots(true);
                 removeEmptySlots();
             }
             catch (ex:Error)
@@ -288,10 +289,12 @@ package xvm.tcarousel_ui
                     repositionRenderers();
                     //Logger.add("xfw_visibleSlots=" + xfw_visibleSlots + " _totalRenderers=" + _totalRenderers);
                 }
-
-                //Logger.add("updateUIPosition");
-                repositionAdvancedSlots();
-                removeEmptySlots();
+                else
+                {
+                    // TODO: is required?
+                    updateAdvancedSlots(true);
+                    removeEmptySlots();
+                }
 
                 var slotWidth:Number = this.slotWidth;
                 this.xfw_slotWidth = this.slotWidth / cfg.rows;
@@ -342,7 +345,7 @@ package xvm.tcarousel_ui
             try
             {
                 var v:uint = Math.min(Math.max(Math.ceil((_totalRenderers - xfw_visibleSlots) / cfg.rows), 0), value);
-                //Logger.add(" value=" + value + " currentFirstRenderer=" + v);
+                //Logger.add("UI_TankCarousel.currentFirstRenderer: _totalRenderers=" + _totalRenderers + " value=" + value + " currentFirstRenderer=" + v);
                 super.currentFirstRenderer = v;
             }
             catch (ex:Error)
@@ -521,6 +524,9 @@ package xvm.tcarousel_ui
                 ++n;
             }
 
+            updateAdvancedSlots(true);
+            removeEmptySlots();
+
             if (!_skipScrollToIndex)
             {
                 scrollToIndex(selectedIndex);
@@ -528,9 +534,9 @@ package xvm.tcarousel_ui
             _skipScrollToIndex = false;
         }
 
-        private function repositionAdvancedSlots():void
+        private function updateAdvancedSlots(reposition:Boolean):void
         {
-            //Logger.add("UI_TankCarousel.repositionAdvancedSlots()");
+            //Logger.add("UI_TankCarousel.updateAdvancedSlots()");
 
             var i:int;
             var renderer:UIComponent;
@@ -541,11 +547,14 @@ package xvm.tcarousel_ui
             if (i >= 0)
             {
                 renderer = getRendererAt(i) as UIComponent;
-                renderer.visible = Config.config.hangar.carousel.hideBuyTank != true;
+                renderer.visible = renderer.visible && Config.config.hangar.carousel.hideBuyTank != true;
                 if (renderer.visible)
                 {
-                    renderer.x = padding.horizontal + Math.floor(_totalRenderers / cfg.rows) * (slotImageWidth + padding.horizontal);
-                    renderer.y = (_totalRenderers % cfg.rows) * (slotImageHeight + padding.vertical);
+                    if (reposition)
+                    {
+                        renderer.x = padding.horizontal + Math.floor(_totalRenderers / cfg.rows) * (slotImageWidth + padding.horizontal);
+                        renderer.y = (_totalRenderers % cfg.rows) * (slotImageHeight + padding.vertical);
+                    }
                     ++_totalRenderers;
                 }
             }
@@ -554,11 +563,14 @@ package xvm.tcarousel_ui
             if (i >= 0)
             {
                 renderer = getRendererAt(i) as UIComponent;
-                renderer.visible = Config.config.hangar.carousel.hideBuySlot != true;
+                renderer.visible = renderer.visible && Config.config.hangar.carousel.hideBuySlot != true;
                 if (renderer.visible)
                 {
-                    renderer.x = padding.horizontal + Math.floor(_totalRenderers / cfg.rows) * (slotImageWidth + padding.horizontal);
-                    renderer.y = (_totalRenderers % cfg.rows) * (slotImageHeight + padding.vertical);
+                    if (reposition)
+                    {
+                        renderer.x = padding.horizontal + Math.floor(_totalRenderers / cfg.rows) * (slotImageWidth + padding.horizontal);
+                        renderer.y = (_totalRenderers % cfg.rows) * (slotImageHeight + padding.vertical);
+                    }
                     ++_totalRenderers;
                 }
             }
