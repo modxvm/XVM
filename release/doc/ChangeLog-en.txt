@@ -1,4 +1,4 @@
-﻿XVM-6.2.1.1-dev:
+﻿XVM-6.2.1.1:
   * improvements and bug fixes
   * show %SUP for xTE in the profile window
   * section "sounds" completely refactored
