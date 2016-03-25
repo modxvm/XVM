@@ -543,18 +543,23 @@ package xvm.tcarousel_ui
 
             _totalRenderers = _currentShowRendersCount;
 
+            var visible:Boolean;
             i = findSlotIndex(SLOT_TYPE_BUYTANK);
             if (i >= 0)
             {
                 renderer = getRendererAt(i) as UIComponent;
-                renderer.visible = renderer.visible && Config.config.hangar.carousel.hideBuyTank != true;
-                if (renderer.visible)
+                visible = renderer.visible && Config.config.hangar.carousel.hideBuyTank != true;
+                if (reposition)
                 {
-                    if (reposition)
+                    renderer.visible = visible;
+                    if (visible)
                     {
                         renderer.x = padding.horizontal + Math.floor(_totalRenderers / cfg.rows) * (slotImageWidth + padding.horizontal);
                         renderer.y = (_totalRenderers % cfg.rows) * (slotImageHeight + padding.vertical);
                     }
+                }
+                if (visible)
+                {
                     ++_totalRenderers;
                 }
             }
@@ -563,14 +568,18 @@ package xvm.tcarousel_ui
             if (i >= 0)
             {
                 renderer = getRendererAt(i) as UIComponent;
-                renderer.visible = renderer.visible && Config.config.hangar.carousel.hideBuySlot != true;
-                if (renderer.visible)
+                visible = renderer.visible && Config.config.hangar.carousel.hideBuySlot != true;
+                if (reposition)
                 {
-                    if (reposition)
+                    renderer.visible = visible;
+                    if (visible)
                     {
                         renderer.x = padding.horizontal + Math.floor(_totalRenderers / cfg.rows) * (slotImageWidth + padding.horizontal);
                         renderer.y = (_totalRenderers % cfg.rows) * (slotImageHeight + padding.vertical);
                     }
+                }
+                if (visible)
+                {
                     ++_totalRenderers;
                 }
             }
