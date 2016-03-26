@@ -158,8 +158,8 @@ def update_conf_hp(*args, **kwargs):
             hp_panel.horizontalAnchor = 'LEFT'
             hp_panel_shadow.horizontalAnchor = 'LEFT'
             
-        hp_panel.position = (x, y, 1)
-        hp_panel_shadow.position = (x + 1, y + 1, 1)
+        hp_panel.position = (x, y, 0.8)
+        hp_panel_shadow.position = (x + 1, y + 1, 0.9)
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -196,6 +196,8 @@ def onVehicleFeedbackReceived(eventID, vehicleID, value, *args, **kwargs):
     try:
         if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
             update_hp(vehicleID, value[0])
+        elif eventID == FEEDBACK_EVENT_ID.VEHICLE_DEAD:
+            update_hp(vehicleID, 0)
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -233,7 +235,7 @@ def update_hp(vID, hp, *args, **kwargs):
             color = color_gradient(hp_colors['neutral'], hp_colors['good'], ratio)
             sign = '>'
         else:
-            color = color_gradient(hp_colors['neutral'], hp_colors['good'], 1)
+            color = color_gradient(hp_colors['neutral'], hp_colors['neutral'], 1)
             sign = '='
         hp_panel.text = '\c%sFF;%s %s %s' % (color, teams_totalhp[0], sign, teams_totalhp[1])
         hp_panel_shadow.text = '\c000000FF;%s %s %s' % (teams_totalhp[0], sign, teams_totalhp[1])
