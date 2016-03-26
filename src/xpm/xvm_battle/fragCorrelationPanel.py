@@ -101,8 +101,8 @@ def destroy_hp(*args, **kwargs):
         hp_panel_shadow.visible = False
         GUI.delRoot(hp_panel)
         GUI.delRoot(hp_panel_shadow)
-        teams_vehicles = [{}, {}]
-        teams_totalhp = [0, 0]
+        teams_vehicles[:] = [{}, {}]
+        teams_totalhp[:] = [0, 0]
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -221,7 +221,7 @@ def update_hp(vID, hp, *args, **kwargs):
         else:
             team = 1
 
-        teams_vehicles[team][vID] = hp
+        teams_vehicles[team][vID] = max(hp, 0)
         teams_totalhp[team] = sum(teams_vehicles[team].values())
     
         if teams_totalhp[0] < teams_totalhp[1]:
