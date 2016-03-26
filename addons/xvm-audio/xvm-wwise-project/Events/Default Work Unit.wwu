@@ -8,7 +8,7 @@
 						<Action Name="Play" ID="{7F747BAA-4C59-4643-B620-1D15F068FC09}" ShortID="976930227" Type="Play" Scope="One" Global="false">
 							<ElementList>
 								<Element ID="{65895781-47B3-4D19-B289-94C91F74F941}" Global="false">
-									<ObjectRef Name="ammoBay" ID="{91CC08A8-0DC7-40E6-8733-8BDCB649CF54}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+									<ObjectRef Name="ammoBay" ID="{C9598BB5-1AE6-43C1-A000-133EF9111D27}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
 								</Element>
 							</ElementList>
 						</Action>
