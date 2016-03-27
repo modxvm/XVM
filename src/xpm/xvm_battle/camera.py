@@ -18,6 +18,7 @@ from xfw import *
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
+import xvm_main.python.utils as utils
 
 
 #####################################################################
@@ -85,8 +86,14 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
     base(self, onChangeControlMode)
 
 
-@registerEvent(SniperCamera, 'enable')
-def _SniperCamera_enable(self, targetPos, saveZoom):
+@overrideMethod(SniperCamera, 'enable')
+def _SniperCamera_enable(base, self, targetPos, saveZoom):
+    if config.get('battle/camera/enabled'):
+        zoom = config.get('battle/camera/sniper/startZoom')
+        if zoom is not None:
+            saveZoom = True
+            self._SniperCamera__cfg['zoom'] = utils.takeClosest(self._SniperCamera__cfg['zooms'], zoom)
+    base(self, targetPos, saveZoom)
     _sendSniperCameraFlash(True, self._SniperCamera__zoom)
 
 
@@ -148,14 +155,14 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
 @overrideMethod(ArcadeControlMode, 'onChangeControlModeByScroll')
 def onChangeControlModeByScroll(base, self):
     if config.get('battle/camera/enabled') and config.get('battle/camera/noScroll'):
-        return 
+        return
     base(self)
 
 
 @overrideMethod(SniperControlMode, 'onChangeControlModeByScroll')
 def onChangeControlModeByScroll(base, self, switchToClosestDist = True):
     if config.get('battle/camera/enabled') and config.get('battle/camera/noScroll'):
-        return 
+        return
     base(self, switchToClosestDist)
 
 

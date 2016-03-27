@@ -7,6 +7,7 @@ import traceback
 import threading
 import math
 from pprint import pprint
+from bisect import bisect_left
 
 import BigWorld
 import Vehicle
@@ -144,3 +145,22 @@ def getMapSize():
 # Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
 def fixImgTag(path):
     return path.replace('xvm://', 'img://' + XVM_PATH.XVM_IMG_RES_ROOT).replace('cfg://', 'img://' + XVM_PATH.XVM_IMG_CFG_ROOT)
+
+
+def takeClosest(myList, myNumber):
+    """
+    Assumes myList is sorted. Returns closest value to myNumber.
+
+    If two numbers are equally close, return the smallest number.
+    """
+    pos = bisect_left(myList, myNumber)
+    if pos == 0:
+        return myList[0]
+    if pos == len(myList):
+        return myList[-1]
+    before = myList[pos - 1]
+    after = myList[pos]
+    if after - myNumber < myNumber - before:
+       return after
+    else:
+       return before

@@ -60,6 +60,9 @@
       // Список значений кратности для снайперского режима
       // По умолчанию: [ 2, 4, 8 ]. Можно использовать большее количество значений.
       "zooms": [2, 4, 8],
+      // Start zoom value (null for default behavior - last used state)
+      // Начальное значение кратности (null для поведения по умолчанию - последнее используемое значение)
+      "startZoom": null,
       // Zoom Indicator
       // Global macros allowed in all fields
       // Индикатор масштаба

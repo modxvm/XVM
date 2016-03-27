@@ -119,6 +119,7 @@
       },
       "sniper": {
         "zooms": [2, 4, 8, 16],
+        //"startZoom": 4,
         "dynamicCameraEnabled": false,
         "zoomIndicator": {
           //"x": -100,

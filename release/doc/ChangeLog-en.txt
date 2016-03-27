@@ -1,4 +1,7 @@
-﻿XVM-6.2.1.1:
+﻿XVM-6.2.1.2-dev:
+  * added option "camera"/"startZoom" - start zoom value (null for default behavior - last used zoom)
+
+XVM-6.2.1.1:
   * improvements and bug fixes
   * show %SUP for xTE in the profile window
   * section "sounds" completely refactored
