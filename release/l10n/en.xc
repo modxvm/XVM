@@ -170,7 +170,7 @@
     // XVM 5.3.4 (4321)
     "ver/currentVersion": "XVM {0} ({1})",
     "ver/newVersion": "Update available:<tab/><a href='#XVM_SITE_DL#'><font color='#00FF00'>v{0}</font></a>\n{1}",
-    "websock/not_connected": "<font color='#FFFF00'>no connection to XVM server</font>",
+    "xvmsvc/not_connected": "<font color='#FFFF00'>no connection to XVM server</font>",
 
     // Token
     "token/services_unavailable": "Network services unavailable.&nbsp;&nbsp;<a href='#XVM_SITE_UNAVAILABLE#'><font size='11'>more info</font></a>",
