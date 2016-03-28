@@ -237,8 +237,8 @@ def update_hp(vID, hp, *args, **kwargs):
         else:
             color = color_gradient(hp_colors['neutral'], hp_colors['neutral'], 1)
             sign = '='
-        hp_panel.text = '\c%sFF;%s %s %s' % (color, teams_totalhp[0], sign, teams_totalhp[1])
-        hp_panel_shadow.text = '\c000000FF;%s %s %s' % (teams_totalhp[0], sign, teams_totalhp[1])
+        hp_panel.text = '\c%sFF;%6s %s %-6s' % (color, teams_totalhp[0], sign, teams_totalhp[1])
+        hp_panel_shadow.text = '\c000000FF;%6s %s %-6s' % (teams_totalhp[0], sign, teams_totalhp[1])
     except Exception, ex:
         err(traceback.format_exc())
 
