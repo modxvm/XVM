@@ -62,7 +62,7 @@ def _loadUrl(u, timeout, fingerprints, body):  # timeout in msec
     try:
         # log(u)
         if u.scheme.lower() == 'https':
-            checker = tlslite.CheckerXvm(x509Fingerprint=fingerprints) if fingerprints else None
+            checker = tlslite.CheckerXfw(x509Fingerprint=fingerprints) if fingerprints else None
             conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout / 1000, checker=checker)
         else:
             conn = httplib.HTTPConnection(u.netloc, timeout=timeout / 1000)
