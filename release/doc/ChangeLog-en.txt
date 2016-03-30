@@ -1,4 +1,5 @@
 ﻿XVM-6.2.1.2-dev:
+  * adaptation to WoT 0.9.14.1
   * added option "camera"/"startZoom" - start zoom value (null for default behavior - last used zoom)
 
 XVM-6.2.1.1:
