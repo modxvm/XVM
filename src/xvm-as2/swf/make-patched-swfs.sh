@@ -23,7 +23,7 @@ extend_path()
 
 patch_as2(){
     echo ""
-    echo "Patching AS2 files"
+    echo "Patching AS2 files (using swfmill)"
 
     mkdir -p temp
     for proj in $PATCHES; do

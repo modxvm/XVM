@@ -18,7 +18,7 @@ extend_path()
 
 patch_as2(){
     echo ""
-    echo "Patching AS2 files"
+    echo "Patching AS2 files (using ffdec)"
 
     mkdir -p temp
     for proj in $PATCHES; do
