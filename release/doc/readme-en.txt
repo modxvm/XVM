@@ -3,6 +3,7 @@
   2. Installation
   3. Update
   4. Additional information about config file
+  5. Making a personal configuration
 
 -----------------------------------------------------------
 1. COMMON INFORMATION
@@ -147,7 +148,7 @@
     "alpha": "{{a:hp}}" - transparency depending on current health
 
   Clan and players icons.
-    Global map rating is used to rate clans http://worldoftanks.eu/leaderboard/clans/ (eGM column).
+    Global map rating is used to rate clans http://worldoftanks.eu/leaderboard/clans/ (wGM column).
       Formula used for the rating: http://worldoftanks.ru/ru/content/cr_formulae/
       Principles of the Elo rating system: http://en.wikipedia.org/wiki/Elo_rating_system
     XVM server monitors the list of top clans and downloads it at client launch. If a player in top clan is encounter in a battle, that clan's icon is downloaded from the XVM server.
@@ -165,10 +166,6 @@
     \res_mods\mods\shared_resources\xvm\res\clanicons\[REGION]\nick\default.png (for default player)
   The following order is used for searching the icons:
     ID\<accountId>.png -> nick\<playerName>.png -> clan\<clan>.png -> clan\default.png -> nick\default.png
-  Archive with all clans can be downloaded separately:
-    http://www.modxvm.com/en/download-xvm/
-    Files: clanicons-full-RU-XXX.zip (RU), clanicons-full-EU-XXX.zip (EU), clanicons-full-NA-XXX.zip (NA),
-    clanicons-full-ASIA-XXX.zip (ASIA), clanicons-full-KR-XXX.zip (KR)
 
   6-th sense image.
   To change sixth sense indicator place an alternative PNG image named SixthSense.png to
@@ -183,3 +180,22 @@
   For example:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
+      
+-----------------------------------------------------------
+5. MAKING A PERSONAL CONFIGURATION
+-----------------------------------------------------------
+  
+  Personal configuration allows you to save individual settings and not lose them when you upgrade the mod or install custom configs
+
+    1. in the res_mods\configs\xvm create a new folder and name it appropriately
+    2. copy the contents of "default" folder in it
+    3. rename the file xvm.xc.sample to the xvm.xc
+    4. replace in the xvm.xc
+      ${"default/@xvm.xc":"."}
+    with
+      ${"your_folder_name/@xvm.xc":"."}
+    5. Personal configuration is created, you can start editing
+
+    Attention! File encoding must remain encoded in UTF8+BOM.
+    For editing use Notepad++. http://goo.gl/y6iet
+    In the case of Windows Notepad: Save as -> Encoding: utf.
