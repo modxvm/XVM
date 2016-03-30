@@ -47,7 +47,7 @@
     Инструкции по его настройке находятся внутри.
 
     Увидеть все возможные настройки можно в папке
-      \res_mods\configs\xvm\@Default\
+      \res_mods\configs\xvm\default\
 
     Внимание: 
     Для редактирования используйте Notepad++. http://goo.gl/y6iet
@@ -55,7 +55,7 @@
     НЕ используйте word, wordpad и подобные редакторы 
 
   3. Если XVM неправильно определяет язык клиента игры,
-    то в конфигурационном файле (по умолчанию \res_mods\configs\xvm\@default\@xvm.xc )
+    то в конфигурационном файле (по умолчанию \res_mods\configs\xvm\default\@xvm.xc )
     смените значение переменной "language" с "auto" на код языка.
     Код языка должен совпадать с именем файла в папке \res_mods\mods\shared_resources\xvm\l10n\ (например, "en").
 
@@ -76,12 +76,12 @@
 -----------------------------------------------------------
 
   Конфигурационные файлы мода:
-    \res_mods\configs\xvm\@Default\
+    \res_mods\configs\xvm\default\
   Можно скопировать готовый конфиг из папки \res_mods\configs\xvm\user configs\
 
   Все возможные параметры конфига можно посмотреть в конфиге с русскими комментариями,
   который находится в папке документации в архиве мода:
-    \res_mods\configs\xvm\@Default\
+    \res_mods\configs\xvm\default\
 
   Поддерживаемые теги HTML:
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
