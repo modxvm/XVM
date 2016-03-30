@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ffdec="$(dirname $(realpath $(cygpath --unix $0)))/ffdec.sh"
+ffdec="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/ffdec.sh"
 cfg=autoDeobfuscate=0,parallelSpeedUp=0
 fmt=script:as
 exp=script
