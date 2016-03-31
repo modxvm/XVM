@@ -345,15 +345,31 @@ package xvm.profile_ui.components
             {
                 for each (var data:Object in currentData)
                 {
-                    if (data == null || data.xvm_xte >= 0)
+                    if (data == null)
                         continue;
-                    data.xvm_xte_flag |= 0x01;
-                    var stat:StatData = Stat.getUserDataById(playerId);
-                    if (stat != null && stat.v != null)
+                    var stat:StatData;
+                    var vdata:Object;
+                    if (data.xvm_xte < 0)
                     {
-                        var vdata:Object = stat.v[data.id];
-                        if (vdata != null && !isNaN(vdata.xte) && vdata.xte > 0)
-                            data.xvm_xte = vdata.xte;
+                        data.xvm_xte_flag |= 0x01;
+                        stat = Stat.getUserDataById(playerId);
+                        if (stat != null && stat.v != null)
+                        {
+                            vdata = stat.v[data.id];
+                            if (vdata != null && !isNaN(vdata.xte) && vdata.xte > 0)
+                                data.xvm_xte = vdata.xte;
+                        }
+                    }
+                    if (data.xvm_xtdb < 0)
+                    {
+                        data.xvm_xtdb_flag |= 0x01;
+                        stat = Stat.getUserDataById(playerId);
+                        if (stat != null && stat.v != null)
+                        {
+                            vdata = stat.v[data.id];
+                            if (vdata != null && !isNaN(vdata.xtdb) && vdata.xtdb > 0)
+                                data.xvm_xtdb = vdata.xtdb;
+                        }
                     }
                 }
                 page.invalidate("ddInvalid");

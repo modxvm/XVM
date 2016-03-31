@@ -9,15 +9,15 @@ from logger import *
 # PUBLIC
 
 def getReferenceValues(vehId):
-    xte = _getXTEData(vehId)
-    if xte is None or xte['td'] == xte['ad'] or xte['tf'] == xte['af']:
+    data = _getData(vehId)
+    if data is None or data['td'] == data['ad'] or data['tf'] == data['af']:
         return None
-    return {'avgD': xte['ad'], 'avgF': xte['af'], 'topD': xte['td'], 'topF': xte['tf']}
+    return {'avgD': data['ad'], 'avgF': data['af'], 'topD': data['td'], 'topF': data['tf']}
 
 
 def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
-    xte = _getXTEData(vehId)
-    if xte is None or xte['td'] == xte['ad'] or xte['tf'] == xte['af']:
+    data = _getData(vehId)
+    if data is None or data['td'] == data['ad'] or data['tf'] == data['af']:
         vdata = vehinfo.getVehicleInfoData(vehId)
         if vdata is None:
             debug('NOTE: No vehicle info for vehicle id = {}'.format(vehId))
@@ -30,10 +30,10 @@ def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
     CF = 1.0
 
     # input
-    avgD = float(xte['ad'])
-    topD = float(xte['td'])
-    avgF = float(xte['af'])
-    topF = float(xte['tf'])
+    avgD = float(data['ad'])
+    topD = float(data['td'])
+    avgF = float(data['af'])
+    topF = float(data['tf'])
 
     # calculation
     dD = dmg_per_battle - avgD
@@ -48,7 +48,7 @@ def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
     # calculate XVM Scale
     if t < 1:
         return 0
-    return next((i for i,v in enumerate(xte['x']) if v > t), 100)
+    return next((i for i,v in enumerate(data['x']) if v > t), 100)
 
 
 # PRIVATE
@@ -63,14 +63,14 @@ from xfw import *
 from logger import *
 
 
-_xteData = None
+_data = None
 
 
-def _getXTEData(vehId):
-    global _xteData
-    if _xteData is None:
-        _xteData = _load()
-    return _xteData.get(str(vehId), None)
+def _getData(vehId):
+    global _data
+    if _data is None:
+        _data = _load()
+    return _data.get(str(vehId), None)
 
 def _load():
     res = load_config('res_mods/mods/shared_resources/xvm/res/data/xte.json')
@@ -78,6 +78,7 @@ def _load():
 
 
 def _init():
-    global _xteData
-    _xteData = _load()
+    global _data
+    _data = _load()
+
 BigWorld.callback(0, _init)

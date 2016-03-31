@@ -28,16 +28,25 @@ package xvm.profile_ui
             //Logger.add("UI_StatisticsDashLineTextItemIRenderer.showToolTip(): " + tooltip);
             try
             {
+                var params:Object;
+                var t:String;
                 if (tooltip == "xvm_xte")
                 {
-                    var params:Object = _toolTipParams != null ? _toolTipParams.body : null;
-                    var t:String = Sprintf.format("{{l10n:profile/xvm_xte_extended_tooltip:%s:%s:%s:%s:%s:%s}}",
-                        !params.currentD  ? "--" : App.utils.locale.integer(Math.round(params.currentD)),
-                        !params.currentF  ? "--" : App.utils.locale.float(params.currentF),
+                    params = _toolTipParams != null ? _toolTipParams.body : null;
+                    t = Sprintf.format("{{l10n:profile/xvm_xte_extended_tooltip:%s:%s:%s:%s:%s:%s}}",
+                        !params.currentD ? "--" : App.utils.locale.integer(Math.round(params.currentD)),
+                        !params.currentF ? "--" : App.utils.locale.float(params.currentF),
                         !params.avgD ? "--" : App.utils.locale.integer(Math.round(params.avgD)),
                         !params.avgF ? "--" : App.utils.locale.float(params.avgF),
                         !params.topD ? "--" : App.utils.locale.integer(Math.round(params.topD)),
                         !params.topF ? "--" : App.utils.locale.float(params.topF));
+                    App.toolTipMgr.show(Locale.get(t));
+                }
+                else if (tooltip == "xvm_xtdb")
+                {
+                    params = _toolTipParams != null ? _toolTipParams.body : null;
+                    t = Sprintf.format("{{l10n:profile/xvm_xtdb_extended_tooltip:%s}}",
+                        !params.currentD ? "--" : App.utils.locale.integer(Math.round(params.currentD)));
                     App.toolTipMgr.show(Locale.get(t));
                 }
                 else
