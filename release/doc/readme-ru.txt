@@ -3,6 +3,7 @@
   2. Установка
   3. Обновление
   4. Дополнительная информация по конфигурационному файлу
+  5. Создание персональной конфигурации
 
 -----------------------------------------------------------
 1. ОБЩАЯ ИНФОРМАЦИЯ
@@ -46,13 +47,15 @@
     Инструкции по его настройке находятся внутри.
 
     Увидеть все возможные настройки можно в папке
-      \res_mods\configs\xvm\@Default\
+      \res_mods\configs\xvm\default\
 
-    Внимание: если вы меняете конфиг вручную, используйте Блокнот (notepad),
-    НЕ используйте word, wordpad и подобные редакторы
+    Внимание: 
+    Для редактирования используйте Notepad++. http://goo.gl/y6iet
+    В случае блокнота Windows: Сохранить как -> Кодировка: UTF.
+    НЕ используйте word, wordpad и подобные редакторы 
 
   3. Если XVM неправильно определяет язык клиента игры,
-    то в конфигурационном файле (по умолчанию \res_mods\configs\xvm\@default\@xvm.xc )
+    то в конфигурационном файле (по умолчанию \res_mods\configs\xvm\default\@xvm.xc )
     смените значение переменной "language" с "auto" на код языка.
     Код языка должен совпадать с именем файла в папке \res_mods\mods\shared_resources\xvm\l10n\ (например, "en").
 
@@ -73,12 +76,12 @@
 -----------------------------------------------------------
 
   Конфигурационные файлы мода:
-    \res_mods\configs\xvm\@Default\
+    \res_mods\configs\xvm\default\
   Можно скопировать готовый конфиг из папки \res_mods\configs\xvm\user configs\
 
   Все возможные параметры конфига можно посмотреть в конфиге с русскими комментариями,
   который находится в папке документации в архиве мода:
-    \res_mods\configs\xvm\@Default\
+    \res_mods\configs\xvm\default\
 
   Поддерживаемые теги HTML:
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
@@ -149,7 +152,7 @@
     "alpha": "{{a:hp}}" - прозрачность в зависимости от количества здоровья
 
   Иконки кланов и игроков.
-    В качестве рейтинга кланов используется Эло-рейтинг клана на Глобальной карте http://worldoftanks.ru/leaderboard/clans/ (колонка eGM).
+    В качестве рейтинга кланов используется Эло-рейтинг клана на Глобальной карте http://worldoftanks.ru/leaderboard/clans/ (колонка wGM).
       Формула: http://worldoftanks.ru/ru/content/cr_formulae/
       Принцип рейтинга ЭЛО: https://ru.wikipedia.org/wiki/%D0%E5%E9%F2%E8%ED%E3_%DD%EB%EE
     Сервер XVM мониторит список топ-кланов и при запуске клиента этот список скачивается. При появлении топового клана в бою, с сервера XVM скачивается его иконка.
@@ -159,19 +162,14 @@
     Все иконки загружаются автоматически из подпапки с названием, соответствующем региону
     игры (RU, EU, US, и т.д. или из папки ID по id аккаунта игрока).
     Чтобы добавить иконку клана или игрока, просто скопируйте файл иконки в:
-      \res_mods\xvm\res\clanicons\[REGION]\clan\ (для клана)
-      \res_mods\xvm\res\clanicons\[REGION]\nick\ (для отдельного игрока)
-      \res_mods\xvm\res\clanicons\ID\ (для отдельного игрока по id)
+      \res_mods\mods\shared_resources\xvm\res\clanicons\[REGION]\clan\ (для клана)
+      \res_mods\mods\shared_resources\xvm\res\clanicons\[REGION]\nick\ (для отдельного игрока)
+      \res_mods\mods\shared_resources\xvm\res\clanicons\ID\ (для отдельного игрока по id)
     Так же можно сделать иконку по умолчанию для клана или игрока:
-      \res_mods\xvm\res\clanicons\[REGION]\clan\default.png (для клана по умолчанию)
-      \res_mods\xvm\res\clanicons\[REGION]\nick\default.png (для игрока по умолчанию)
+      \res_mods\mods\shared_resources\xvm\res\clanicons\[REGION]\clan\default.png (для клана по умолчанию)
+      \res_mods\mods\shared_resources\xvm\res\clanicons\[REGION]\nick\default.png (для игрока по умолчанию)
     Иконки ищутся в следующем порядке:
       ID/<accountId>.png -> nick/<playerName>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
-    По умолчанию в архив мода добавлены топ 150 кланов.
-    Полный архив со всеми кланами можно скачать отдельно:
-      http://www.modxvm.com/%d1%81%d0%ba%d0%b0%d1%87%d0%b0%d1%82%d1%8c-xvm/
-      Файлы: clanicons-full-RU-XXX.zip (RU), clanicons-full-EU-XXX.zip (EU), clanicons-full-NA-XXX.zip (NA),
-      clanicons-full-ASIA-XXX.zip (ASIA), clanicons-full-KR-XXX.zip (KR)
 
   Изображение 6-ого чувства.
     Для замены изображения индикатора 6-ого чувства поместите альтернативное изображение PNG формата в
@@ -186,3 +184,22 @@
     Например:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
+      
+-----------------------------------------------------------
+5. СОЗДАНИЕ ПЕРСОНАЛЬНОЙ КОНФИГУРАЦИИ
+-----------------------------------------------------------
+  
+  Персональная конфигурация позволяет сохранить индивидуальные настройки и не терять их при обновлении мода или установке пользовательских конфигов
+  
+    1. в папке res_mods\configs\xvm создайте новую папку и присвойте ей имя
+    2. скопируйте в созданную Вами папку содержимое из папки default
+    3. переименуйте xvm.xc.sample в xvm.xc
+    4. замените в xvm.xc
+      ${"default/@xvm.xc":"."}
+    на
+      ${"имя_вашей_папки/@xvm.xc":"."}
+    5. Персональный конфиг создан, можно приступать к редактированию
+
+   Внимание! Кодировка файлов должна оставаться UTF8+BOM. 
+   Для редактирования используйте Notepad++. http://goo.gl/y6iet
+   В случае блокнота Windows: Сохранить как -> Кодировка: UTF.

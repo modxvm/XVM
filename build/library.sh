@@ -4,7 +4,7 @@
 # XVM nightly build system functions library
 
 #constants
-PLAYERGLOBAL_VERSION="11.0"
+PLAYERGLOBAL_VERSIONS="11.0 11.1"
 
 #AS2/3 compilation and patching
 build_as2_h(){
@@ -132,15 +132,21 @@ detect_flex(){
         fi
     fi
 
-    # extend PATH
-    export PATH=$PATH:$FLEX_HOME/bin/
-
-    if !(hash "$FLEX_HOME/bin/mxmlc"); then
-        echo "!!! Apache Flex is not found"
+    #check if directory exists
+    if [ ! -d "$FLEX_HOME" ]; then
+        echo "!!! Apache Flex directory is not found"
         exit 1
     fi
 
+    # extend PATH and set XVMBUILD_COMPC_FILEPATH
+    export PATH=$PATH:$FLEX_HOME/bin/
     export XVMBUILD_COMPC_FILEPATH="$FLEX_HOME/bin/compc"
+   
+    #check if compc exists
+    if [ ! -f  "$XVMBUILD_COMPC_FILEPATH" ]; then
+        echo "!!! Apache Flex compc file is not found"
+        exit 1
+    fi
 
     # fallback PLAYERGLOBAL_HOME variable
     if [ "$PLAYERGLOBAL_HOME" == "" ]; then
@@ -148,13 +154,16 @@ detect_flex(){
     fi
 
     # download playerglobal if not found
-    if [ ! -f "$PLAYERGLOBAL_HOME/$PLAYERGLOBAL_VERSION/playerglobal.swc" ]; then
-        if ! detect_wget; then
-            exit 1
+    for playerglobalver in $PLAYERGLOBAL_VERSIONS
+    do
+        if [ ! -f "$PLAYERGLOBAL_HOME/$playerglobalver/playerglobal.swc" ]; then
+            if ! detect_wget; then
+                exit 1
+            fi
+            mkdir -p "$PLAYERGLOBAL_HOME/$playerglobalver/"
+            wget --quiet "https://github.com/nexussays/playerglobal/raw/master/$playerglobalver/playerglobal.swc" --output-document="$PLAYERGLOBAL_HOME/$playerglobalver/playerglobal.swc"
         fi
-        mkdir -p "$PLAYERGLOBAL_HOME/$PLAYERGLOBAL_VERSION/"
-        wget --quiet "https://github.com/nexussays/playerglobal/raw/master/$PLAYERGLOBAL_VERSION/playerglobal.swc" --output-document="$PLAYERGLOBAL_HOME/$PLAYERGLOBAL_VERSION/playerglobal.swc"
-    fi
+    done
 }
 
 detect_java(){
@@ -203,14 +212,26 @@ detect_patch(){
 
 detect_python(){
     if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then
-        export XVMBUILD_PYTHON_FILEPATH="/c/Python27/python.exe"
-        if [ ! -f $XVMBUILD_PYTHON_FILEPATH ]; then
-            export XVMBUILD_PYTHON_FILEPATH="python2.7" # Installed by cygwin or *nix
+        if hash "/c/Python27/python.exe" 2>/dev/null; then
+            export XVMBUILD_PYTHON_FILEPATH="/c/Python27/python.exe"  #Windows default path
+        fi
+        if hash "python" 2>/dev/null; then
+            export XVMBUILD_PYTHON_FILEPATH="python"                  #Default name of python executable
+        fi
+        if hash "python2.7" 2>/dev/null; then
+            export XVMBUILD_PYTHON_FILEPATH="python2.7"               #Installed by cygwin or *nix
         fi
     fi
 
-    if !(hash "$XVMBUILD_PYTHON_FILEPATH" 2>/dev/null); then
+    if !(hash "$XVMBUILD_PYTHON_FILEPATH" 2>/dev/null); then          #Check if file exists
         echo "!!! Python 2.7 is not found"
+        exit 1
+    fi
+
+    #Check python version
+    pythonver=$($XVMBUILD_PYTHON_FILEPATH --version 2>&1)
+    if [[ ${pythonver:7:3} != "2.7" ]]; then          
+        echo "!!! Python 2.7 is not found. Current version is: ${pythonver:7:3}"
         exit 1
     fi
 }
