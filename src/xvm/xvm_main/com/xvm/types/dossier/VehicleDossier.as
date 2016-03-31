@@ -14,6 +14,7 @@ package com.xvm.types.dossier
         }
 
         public var vehId:int;
+        public var xtdb:int;
         public var xte:int;
         public var earnedXP:Number;
         public var freeXP:Number;

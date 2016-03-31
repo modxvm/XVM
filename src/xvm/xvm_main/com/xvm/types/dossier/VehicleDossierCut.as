@@ -63,6 +63,11 @@ package com.xvm.types.dossier
                     c_hitsRatio = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HITSRATIO, hitsRatio, "#");
                     tdb = vdossier.avgDamageDealt;
                     c_tdb = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, "#");
+                    if (!isNaN(vdossier.xtdb) && vdossier.xtdb > 0)
+                    {
+                        xtdb = vdossier.xtdb == 100 ? "XX" : (vdossier.xtdb < 10 ? "0" : "") + vdossier.xtdb;
+                        c_xtdb = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xtdb, "#");
+                    }
                     tdv = vdossier.damageDealt / (battles * maxHP);
                     c_tdv = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, tdv, "#");
                     tfb = vdossier.avgFrags;
@@ -126,6 +131,8 @@ package com.xvm.types.dossier
         public var c_hitsRatio:String;
         public var tdb:Number;
         public var c_tdb:String;
+        public var xtdb:String;
+        public var c_xtdb:String;
         public var tdv:Number;
         public var c_tdv:String;
         public var tfb:Number;

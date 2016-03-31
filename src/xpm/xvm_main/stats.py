@@ -52,6 +52,7 @@ from loadurl import loadUrl
 import topclans
 import utils
 import vehinfo
+import vehinfo_xtdb
 import vehinfo_xte
 import xvm_scale
 import xvmapi
@@ -476,11 +477,13 @@ class _Stat(object):
                 for vehId, vdata in stat['v'].iteritems():
                     vdata['id'] = int(vehId)
                     self._calculateVehicleValues(stat, vdata)
+                    self._calculateXTDB(vdata)
                     self._calculateXTE(vdata)
             else:
                 vdata = stat['v']
                 if 'id' in vdata:
                     self._calculateVehicleValues(stat, vdata)
+                    self._calculateXTDB(vdata)
                     self._calculateXTE(vdata)
 
 
@@ -534,6 +537,14 @@ class _Stat(object):
             v['fb'] = float(v['frg']) / vb
         if 'spo' in v and v['spo'] > 0:
             v['sb'] = float(v['spo']) / vb
+
+
+    # calculate xTDB
+    def _calculateXTDB(self, v):
+        if 'db' not in v or v['db'] <= 0:
+            return
+        v['xtdb'] = vehinfo_xtdb.calculateXTDB(v['id'], float(v['db']))
+        #log(v['xtdb'])
 
 
     # calculate xTE

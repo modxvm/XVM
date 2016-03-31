@@ -602,6 +602,7 @@ class com.xvm.Macros
             case "xwn":
             case "xwn6":
             case "xeff":
+            case "xtdb":
                 if (name == "r" && Config.networkServicesSettings.scale != "xvm")
                     break;
                 if (value == 'XX')
@@ -1054,6 +1055,8 @@ class com.xvm.Macros
         pdata["t-hb"] = stat.v.b / 100.0;
         // {{tdb}}
         pdata["tdb"] = stat.v.db;
+        // {{xtdb}}
+        pdata["xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : stat.v.xtdb == 100 ? "XX" : (stat.v.xtdb < 10 ? "0" : "") + stat.v.xtdb;
         // {{tdv}}
         pdata["tdv"] = stat.v.dv;
         // {{tfb}}
@@ -1126,6 +1129,9 @@ class com.xvm.Macros
         // {{c:tdb}}
         pdata["c:tdb"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", false);
         pdata["c:tdb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", true);
+        // {{c:xtdb}}
+        pdata["c:xtdb"] =   isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xtdb, "#", false);
+        pdata["c:xtdb#d"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xtdb, "#", true);
         // {{c:tdv}}
         pdata["c:tdv"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", false);
         pdata["c:tdv#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", true);
@@ -1180,6 +1186,8 @@ class com.xvm.Macros
         pdata["a:t-battles"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
         // {{a:tdb}}
         pdata["a:tdb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
+        // {{a:xtdb}}
+        pdata["a:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xtdb);
         // {{a:tdv}}
         pdata["a:tdv"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv);
         // {{a:tfb}}

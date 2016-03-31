@@ -40,6 +40,8 @@ Legend:
 │ {{v.c_winrate}}            │ X │ . │ color for win rate
 │ {{v.tdb}}                  │ X │ . │ average damage - damage / battles
 │ {{v.c_tdb}}                │ X │ . │ dynamic color for this macro
+│ {{v.xtdb}}                 │ X │ . │ average damage in XVM Scale
+│ {{v.c_xtdb}}               │ X │ . │ dynamic color for this macro
 │ {{v.tdv}}                  │ X │ . │ average damage efficiency - damage / (battles * maxHP)
 │ {{v.c_tdv}}                │ X │ . │ dynamic color for this macro
 │ {{v.tfb}}                  │ X │ . │ average frags per battle

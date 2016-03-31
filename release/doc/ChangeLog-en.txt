@@ -1,5 +1,6 @@
 ﻿XVM-6.2.1.2-dev:
   * added option "camera"/"startZoom" - start zoom value (null for default behavior - last used zoom)
+  * added macros {{xtdb}}, {{c:xtdb}}, {{a:xtdb}}, {{v.xtdb}}, {{v.c_xtdb}} - average damage in XVM Scale
 
 XVM-6.2.1.1:
   * improvements and bug fixes

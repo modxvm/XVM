@@ -130,6 +130,7 @@ Legend:
 │ S │ {{t-kb}}           │ X │ X │ X │ X │ X │ number of kilo-battles for current vehicle
 │ S │ {{t-hb}}           │ X │ X │ X │ X │ X │ number of hecto-battles for current vehicle (hecto = 100)
 │ S │ {{tdb}}            │ X │ X │ X │ X │ X │ average damage for current tank - damage/battles
+│ S │ {{xtdb}}           │ X │ X │ X │ X │ X │ average damage for current tank in XVM Scale
 │ S │ {{tdv}}            │ X │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
 │ S │ {{tfb}}            │ X │ X │ X │ X │ X │ average frags per battle for current tank
 │ S │ {{tsb}}            │ X │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
@@ -149,10 +150,11 @@ Legend:
 │ S │ {{c:avglvl}}       │ X │ X │ X │ X │ X │ color depending on average level of tanks
 │ S │ {{c:t-winrate}}    │ X │ X │ X │ X │ X │ color depending on current vehicle win ratio
 │ S │ {{c:t-battles}}    │ X │ X │ X │ X │ X │ color depending on current vehicle battles
-│ S │ {{c:tdb}}          │ X │ X │ X │ X │ X │ dynamic colors for this macros
-│ S │ {{c:tdv}}          │ X │ X │ X │ X │ X │ dynamic colors for this macros
-│ S │ {{c:tfb}}          │ X │ X │ X │ X │ X │ dynamic colors for this macros
-│ S │ {{c:tsb}}          │ X │ X │ X │ X │ X │ dynamic colors for this macros
+│ S │ {{c:tdb}}          │ X │ X │ X │ X │ X │ dynamic colors for tdb
+│ S │ {{c:xtdb}}         │ X │ X │ X │ X │ X │ dynamic colors for xtdb
+│ S │ {{c:tdv}}          │ X │ X │ X │ X │ X │ dynamic colors for tdv
+│ S │ {{c:tfb}}          │ X │ X │ X │ X │ X │ dynamic colors for tfb
+│ S │ {{c:tsb}}          │ X │ X │ X │ X │ X │ dynamic colors for tsb
 └───┴────────────────────┴───┴───┴───┴───┴───┴────────────────────────────────────────────────────────
   * Any color macro you can change to transparency macro (e.g. {{a:tdb}}).
 

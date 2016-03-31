@@ -607,6 +607,7 @@ package com.xvm
                 case "xwn":
                 case "xwn6":
                 case "xeff":
+                case "xtdb":
                     if (name == "r" && Config.networkServicesSettings.scale != "xvm")
                         break;
                     if (value == 'XX')
@@ -899,6 +900,8 @@ package com.xvm
             pdata["t-hb"] = stat.v.b / 100.0;
             // {{tdb}}
             pdata["tdb"] = stat.v.db;
+            // {{xtdb}}
+            pdata["xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : stat.v.xtdb == 100 ? "XX" : (stat.v.xtdb < 10 ? "0" : "") + stat.v.xtdb;
             // {{tdv}}
             pdata["tdv"] = stat.v.dv;
             // {{tfb}}
@@ -950,6 +953,8 @@ package com.xvm
             pdata["c:t-battles"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#"); }
             // {{c:tdb}}
             pdata["c:tdb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#"); }
+            // {{c:xtdb}}
+            pdata["c:xtdb"] = function(o:MacrosFormatOptions):String { return isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xtdb, "#"); }
             // {{c:tdv}}
             pdata["c:tdv"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#"); }
             // {{c:tfb}}
@@ -1001,6 +1006,8 @@ package com.xvm
             pdata["a:t-battles"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
             // {{a:tdb}}
             pdata["a:tdb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
+            // {{a:xtdb}}
+            pdata["a:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? NaN : MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xtdb);
             // {{a:tdv}}
             pdata["a:tdv"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv);
             // {{a:tfb}}

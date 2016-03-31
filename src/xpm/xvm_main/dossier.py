@@ -33,6 +33,7 @@ from xfw import *
 
 from constants import *
 from logger import *
+import vehinfo_xtdb
 import vehinfo_xte
 
 
@@ -92,7 +93,8 @@ class _Dossier(object):
                 if data[1] not in unlocks:
                     xpToElite += data[0]
 
-            # xTE
+            # xTDB & xTE
+            xtdb = -1
             xte = -1
             if dossier is not None:
                 stats = self.__getStatsBlock(dossier)
@@ -100,11 +102,14 @@ class _Dossier(object):
                 dmg = stats.getDamageDealt()
                 frg = stats.getFragsCount()
                 if battles > 0 and dmg > 0 and frg > 0:
+                    xtdb = vehinfo_xtdb.calculateXTDB(vehId, float(dmg) / battles)
                     xte = vehinfo_xte.calculateXTE(vehId, float(dmg) / battles, float(frg) / battles)
+                if xtdb is None:
+                    xtdb = 0
                 if xte is None:
                     xte = 0
 
-            res = self.__prepareVehicleResult(dossier, xte, earnedXP, freeXP, xpToElite)
+            res = self.__prepareVehicleResult(dossier, xtdb, xte, earnedXP, freeXP, xpToElite)
 
         return res
 
@@ -221,7 +226,7 @@ class _Dossier(object):
 
         return res
 
-    def __prepareVehicleResult(self, dossier, xte, earnedXP, freeXP, xpToElite):
+    def __prepareVehicleResult(self, dossier, xtdb, xte, earnedXP, freeXP, xpToElite):
         res = {}
         if dossier is None:
             return res
@@ -230,6 +235,7 @@ class _Dossier(object):
 
         res.update({
             'vehId': int(self.vehId),
+            'xtdb': xtdb,
             'xte': xte,
             'earnedXP': earnedXP,
             'freeXP': freeXP,
