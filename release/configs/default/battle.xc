@@ -25,6 +25,12 @@
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
     "clockFormat": "H:N", // TODO: "H:i"
+    // true - enable displaying chances to win on battle interface window (only while service for showing chances to win is enabled at modxvm.com).
+    // true - включить оторажение шансов на победу в окне боевого интерфейса (только при включенном сервисе отображения шансов на победу на modxvm.com).
+    "ShowWinChancesOnBattleInterface": false,    
+    // true - disable displaying of dynamic chances to win in battle interface window (affects only while "ShowWinChancesOnBattleInterface" == true and services for displaying chances to win are enabled at modxvm.com).
+    // true - отключить отображение динамического шанса на победу в окне боевого интерфейса (влияет только если "ShowWinChancesOnBattleInterface" == true и включены сервисы отображения шанса на победу на modxvm.com).
+    "DisableLiveWinChancesOnBattleInterface": false,
     // Path to clan icons folder relative to res_mods/mods/shared_resources/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/mods/shared_resources/xvm/res.
     "clanIconsFolder": "clanicons/",
