@@ -1,4 +1,4 @@
-﻿XVM-6.2.1.2-dev:
+﻿XVM-6.2.1.2:
   * adaptation to WoT 0.9.14.1
   * added option "camera"/"startZoom" - start zoom value (null for default behavior - last used zoom)
   * added macros {{xtdb}}, {{c:xtdb}}, {{a:xtdb}}, {{v.xtdb}}, {{v.c_xtdb}} - average damage in XVM Scale
