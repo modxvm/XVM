@@ -25,12 +25,6 @@
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
     "clockFormat": "H:N", // TODO: "H:i"
-    // true - enable displaying chances to win on battle interface window (only while service for showing chances to win is enabled at modxvm.com).
-    // true - включить оторажение шансов на победу в окне боевого интерфейса (только при включенном сервисе отображения шансов на победу на modxvm.com).
-    "ShowWinChancesOnBattleInterface": false,    
-    // true - disable displaying of dynamic chances to win in battle interface window (affects only while "ShowWinChancesOnBattleInterface" == true and services for displaying chances to win are enabled at modxvm.com).
-    // true - отключить отображение динамического шанса на победу в окне боевого интерфейса (влияет только если "ShowWinChancesOnBattleInterface" == true и включены сервисы отображения шанса на победу на modxvm.com).
-    "DisableLiveWinChancesOnBattleInterface": false,
     // Path to clan icons folder relative to res_mods/mods/shared_resources/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/mods/shared_resources/xvm/res.
     "clanIconsFolder": "clanicons/",
@@ -45,7 +39,30 @@
     "camera": ${"camera.xc":"camera"},
     // Switching between players on the minimap after death
     // Переключение между игроками по миникарте после смерти
-    "minimapDeadSwitch": true
+    "minimapDeadSwitch": true,
+    // Шансы на победу в окне боевого интерфейса
+    // Win chances on battle interface window
+    "WinChancesOnBattleInterface": {
+    // true - displaying chances to win on battle interface window (only while service is enabled (chances to win at battle/at battle (live))  on modxvm.com).
+    // true - показывать шансы на победу в окне боевого интерфейса (только при включенном сервисе (шанс на победу в бою или шанс на победу в бою/в бою (динамический)) на modxvm.com).
+      "enabled": true,
+      // true - disable displaying of static chances to win in battle interface window (affects only while "enabled" == true and displaying of chances to win at battle is enabled on modxvm.com).
+      // true - отключить отображение статического шанса на победу в окне боевого интерфейса (влияет только если "enabled" == true и включено отображение шанса на победу в бою на modxvm.com).
+      "DisableStatic": false,    
+      // true - disable displaying of dynamic chances to win in battle interface window (affects only while "enabled" == true and displaying of chances to win at battle and chances to win at battle (live) is enabled on modxvm.com).
+      // true - отключить отображение динамического шанса на победу в окне боевого интерфейса (влияет только если "enabled" == true и включено отображение шанса на победу в бою и шанса на победу в бою (динамического) на modxvm.com).
+      "DisableLive": false,
+      // Axis field coordinates (only area of Debug Panel (near FPS)).
+      // Положение поля по осям (только область панели отладки (возле FPS)).
+      "x": 161,   
+      "y": -4.05,
+      // field width
+      // ширина поля
+      "width": 100,
+      // field height
+      // высота поля
+      "height": 39.6
+    }
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.

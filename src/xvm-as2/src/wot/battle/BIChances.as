@@ -9,26 +9,21 @@ class wot.battle.BIChances
     {      
         public static var _BIChances:Object = {};
         public var chances: TextField; 
-        public static var showed: Number = 0;
 
         public function BIChances()
             { 
                 var debugPanel:MovieClip = _root.debugPanel;
-                var lag:MovieClip = debugPanel.lag;
                 var fps:MovieClip = debugPanel.fps;
-                var clock:MovieClip = debugPanel.clock;
-                    BIChances._BIChances.__isShowChances = Config.networkServicesSettings.chance;
-                    BIChances._BIChances.__isShowLiveChances =  Config.networkServicesSettings.chanceLive;
+                	if (!Config.config.battle.WinChancesOnBattleInterface.DisableStatic)
+                		BIChances._BIChances.__isShowChances = true;
+                	else BIChances._BIChances.__isShowChances = false;
+                	if (Config.networkServicesSettings.chanceLive && !Config.config.battle.WinChancesOnBattleInterface.DisableLive)
+						BIChances._BIChances.__isShowLiveChances = true;
+					else BIChances._BIChances.__isShowLiveChances = false;
                     BIChances._BIChances.__formatStaticTextFirst = "<span class='chances'>";
                     BIChances._BIChances.__formatStaticTextSecond = "</span>";
                     BIChances._BIChances.__Count = 0;
-                    if ((Config.config.battle.DisableLiveWinChancesOnBattleInterface == false) && (BIChances._BIChances.__isShowLiveChances == true)) {
-                        BIChances._BIChances.__isShowLiveChancesOnBI = true;
-                    }
-                    else {
-                        BIChances._BIChances.__isShowLiveChancesOnBI = false;
-                    }
-                    chances = debugPanel.createTextField("chances", debugPanel.getNextHighestDepth(), clock._x + (lag._width * 2) + 5, fps._y, 100, clock._height);
+					chances = debugPanel.createTextField("chances", debugPanel.getNextHighestDepth(), Config.config.battle.WinChancesOnBattleInterface.x, Config.config.battle.WinChancesOnBattleInterface.y, Config.config.battle.WinChancesOnBattleInterface.width, Config.config.battle.WinChancesOnBattleInterface.height);
                     chances.selectable = false;
                     chances.antiAliasType = "advanced";
                     chances.html = true;
@@ -46,10 +41,7 @@ class wot.battle.BIChances
             if (BIChances._BIChances.__isShowLiveChances == undefined) {
                 return;
             }
-                var BIChancesText:String;
-                var isShowChances:Boolean = BIChances._BIChances.__isShowChances;
-                var isShowChancesLive: Boolean = BIChances._BIChances.__isShowLiveChancesOnBI; 
-                BIChancesText = Chance.GetChanceText(isShowChances, false,  isShowChancesLive);
+                var BIChancesText: String = Chance.GetChanceText(true, false,  BIChances._BIChances.__isShowLiveChances);
                 if (((BIChancesText != "") && (BIChances._BIChances.__isClearedInterval != "true")) || (BIChances._BIChances.__Count > 5)) {
                     clearInterval(_BIChances.__intervalID);
                     BIChances._BIChances.__isClearedInterval = "true";
@@ -58,19 +50,26 @@ class wot.battle.BIChances
                     BIChances._BIChances.__instance.chances.htmlText = Utils.fixImgTag(BIChances._BIChances.__formatStaticTextFirst + '' + BIChances._BIChances.__formatStaticTextSecond);
                 }
                 else {
-                    BIChances._BIChances.__instance.chances.htmlText = Utils.fixImgTag(formatChanceText(BIChancesText, isShowChancesLive));
+                    BIChances._BIChances.__instance.chances.htmlText = Utils.fixImgTag(formatChanceText(BIChancesText, BIChances._BIChances.__isShowChances, BIChances._BIChances.__isShowLiveChances));
                 }
         }
         
-        private static function formatChanceText(ChancesText: String, IsShowLiveChance: Boolean) {
-            var temp: Array = ChancesText.split('|', 2);
-            var tempA: Array = temp[0].split(':', 2);
-            if IsShowLiveChance == true {
-              var tempB: Array = temp[1].split(':', 2);
-                return BIChances._BIChances.__formatStaticTextFirst + tempA[1] + '/' + tempB[1] + BIChances._BIChances.__formatStaticTextSecond;
-            }
-            else {
-                return BIChances._BIChances.__formatStaticTextFirst + tempA[1] + BIChances._BIChances.__formatStaticTextSecond;
-            }
+        private static function formatChanceText(ChancesText: String, isShowChance, isShowLiveChance: Boolean) {
+           var temp: Array = ChancesText.split('|', 2);
+           var tempA: Array =	temp[0].split(':', 2);
+           		if (isShowChance && isShowLiveChance) {
+            		var tempB: Array = temp[1].split(':', 2);
+                		return BIChances._BIChances.__formatStaticTextFirst + tempA[1] + '/' + tempB[1] + BIChances._BIChances.__formatStaticTextSecond;
+           		}
+            	else { 
+            		if (isShowChance && !isShowLiveChance){
+            			return BIChances._BIChances.__formatStaticTextFirst + tempA[1] + BIChances._BIChances.__formatStaticTextSecond;
+            		}	
+            	 	else {
+            	 		var tempB: Array = temp[1].split(':', 2);
+            			return BIChances._BIChances.__formatStaticTextFirst + tempB[1] + BIChances._BIChances.__formatStaticTextSecond;
+            		}
+            	}
+            	
         }
-    }
+	}

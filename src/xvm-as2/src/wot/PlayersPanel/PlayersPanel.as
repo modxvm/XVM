@@ -8,7 +8,6 @@ import com.xvm.*;
 import com.xvm.DataTypes.BattleStateData;
 import com.xvm.events.*;
 import wot.battle.BIChances;
-import wot.battle.BattleMain;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {
