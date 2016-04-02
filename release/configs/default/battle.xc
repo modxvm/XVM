@@ -61,7 +61,28 @@
       "width": 100,
       // field height
       // высота поля
-      "height": 39.6
+      "height": 39.6,
+      // font settings
+      // настройки шрифта
+      "font": {
+        "color": "0xF4EFE8", 
+        "name": "$PartnerCondensed", 
+        "size": 15, 
+        "align": "left", 
+        "bold": false, 
+        "italic": false
+      },
+      // shadow settings
+      // настройки тени
+      "shadow": {
+        "distance": 1,
+        "angle": 90,
+        "color": "0x000000",
+        "alpha": 100, 
+        "blurX": 5,
+        "blurY": 5,
+        "strength": 1.5
+      } 
     }
   },
   // Frag counter panel at top side of battle windows interface.
