@@ -35,7 +35,7 @@ import test
 import topclans
 import wgutils
 import xvmapi
-
+import xmqp
 
 _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
@@ -99,6 +99,13 @@ class Xvm(object):
         msg = e.ctx.get('msg', '')
         type = e.ctx.get('type', SystemMessages.SM_TYPE.Information)
         SystemMessages.pushMessage(msg, type)
+
+    # XMQP Message
+
+    def onXmqpMessage(self, e=None):
+        #trace('onXmqpMessage')
+        body = e.ctx.get('body', '')
+        debug('onXmqpMessage: {}'.format(body))
 
     # state handler
 
@@ -322,13 +329,16 @@ class Xvm(object):
                     arena.onVehicleKilled += self._onVehicleKilled
                     arena.onAvatarReady += self._onAvatarReady
                     arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
-        except Exception, ex:
+            self.init_xmqp()
+        except Exception as ex:
             err(traceback.format_exc())
 
 
     def onLeaveWorld(self):
         trace('onLeaveWorld')
         try:
+            xmqp.stop()
+
             player = BigWorld.player()
             if player is not None and hasattr(player, 'arena'):
                 arena = BigWorld.player().arena
@@ -673,6 +683,21 @@ class Xvm(object):
             return
         if e.uniqueName == 'hangar':
             self.hangarInit()
+
+
+    def init_xmqp(self):
+        if not config.networkServicesSettings.servicesActive:
+            return
+
+        players = []
+        player = BigWorld.player()
+        player_team = player.team if hasattr(player, 'team') else 0
+        for (vehId, vData) in player.arena.vehicles.iteritems():
+            # ally team only
+            if vData['team'] == player_team:
+                players.append(vData['accountDBID'])
+        log(players)
+        #xmqp.start(xvmapi.getXmqpExchangeName(players))
 
 
 g_xvm = Xvm()

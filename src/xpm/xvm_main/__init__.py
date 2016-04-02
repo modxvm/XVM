@@ -72,6 +72,7 @@ def start():
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
+    g_eventBus.addListener(XVM_EVENT.XMQP_MESSAGE, g_xvm.onXmqpMessage)
 
     # config already loaded, just send event to apply required code
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
@@ -89,6 +90,7 @@ def fini():
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
+    g_eventBus.removeListener(XVM_EVENT.XMQP_MESSAGE, g_xvm.onXmqpMessage)
 
     filecache.fin()
 

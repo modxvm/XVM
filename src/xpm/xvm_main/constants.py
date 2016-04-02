@@ -11,6 +11,8 @@ class XVM(object):
     FINGERPRINTS = [ # fingerprints for SSL certificates
         #'029ef75501dbd41b386990d7b6fb4e30b59540d1'
         ]
+    XMQP_SERVER = 'amqp://xvm:xvm@xmqp.modxvm.com:5672/'
+    XMQP_CONTROLLER = 'http://xmqp.modxvm.com:4000/{REQ}'
     TIMEOUT = 5000
 
     CONFIG_DIR = 'res_mods/configs/xvm'
@@ -29,7 +31,7 @@ class XVM_EVENT(object):
     CONFIG_LOADED = 'xvm.config_loaded'
     RELOAD_CONFIG = 'xvm.reload_config'
     SYSTEM_MESSAGE = 'xvm.system_message'
-
+    XMQP_MESSAGE = 'xvm.xmqp_message'
 
 # DAAPI commands
 

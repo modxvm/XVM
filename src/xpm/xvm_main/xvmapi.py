@@ -34,6 +34,10 @@ def getOnlineUsersCount():
     (data, errStr) = _exec('getOnlineUsersCount/{id}', showLog=False)
     return data
 
+def getXmqpExchangeName(players):
+    (data, errStr) = _exec_xmqp('battle-channel?token={token}&{players[]}', params={'players':players})
+    return data
+
 
 # PRIVATE
 
