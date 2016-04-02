@@ -48,7 +48,6 @@ import config
 from constants import *
 import filecache
 from logger import *
-from loadurl import loadUrl
 import topclans
 import utils
 import vehinfo
