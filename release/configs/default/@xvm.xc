@@ -137,8 +137,8 @@
   // Миникарта.
   "minimap": ${"minimap.xc":"minimap"},
 
-  // Minimap.
-  // Миникарта.
+  // Minimap (alternative mode).
+  // Миникарта (альтернативный режим).
   "minimapAlt": ${"minimapAlt.xc":"minimap"},
 
   // Over-target markers.
