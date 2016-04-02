@@ -13,7 +13,6 @@ class wot.battle.BIChances
         public function BIChances()
             { 
                 var debugPanel:MovieClip = _root.debugPanel;
-                var fps:MovieClip = debugPanel.fps;
                 	if (!Config.config.battle.WinChancesOnBattleInterface.DisableStatic)
                 		BIChances._BIChances.__isShowChances = true;
                 	else BIChances._BIChances.__isShowChances = false;
@@ -27,10 +26,14 @@ class wot.battle.BIChances
                     chances.selectable = false;
                     chances.antiAliasType = "advanced";
                     chances.html = true;
-                    var tf: TextFormat = fps.getNewTextFormat();
                     chances.styleSheet = Utils.createStyleSheet(Utils.createCSS("chances",
-                    tf.color, tf.font, tf.size, "left", tf.bold, tf.italic));
-                    chances.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5)];
+                    	int(Config.config.battle.WinChancesOnBattleInterface.font.color), Config.config.battle.WinChancesOnBattleInterface.font.name, 
+                    	Config.config.battle.WinChancesOnBattleInterface.font.size, Config.config.battle.WinChancesOnBattleInterface.font.align, 
+                    	Config.config.battle.WinChancesOnBattleInterface.font.bold, Config.config.battle.WinChancesOnBattleInterface.font.italic));
+                    chances.filters = [new flash.filters.DropShadowFilter(Config.config.battle.WinChancesOnBattleInterface.shadow.distance, 
+                    	Config.config.battle.WinChancesOnBattleInterface.shadow.angle, int(Config.config.battle.WinChancesOnBattleInterface.shadow.color), 
+                    	Config.config.battle.WinChancesOnBattleInterface.shadow.alpha, Config.config.battle.WinChancesOnBattleInterface.shadow.blurX, 
+                    	Config.config.battle.WinChancesOnBattleInterface.shadow.blurY, Config.config.battle.WinChancesOnBattleInterface.shadow.strength)];
                     _BIChances.__intervalID = setInterval(function() {
                         BIChances._BIChances.__Count++;
                         BIChances.UpdateBIChances();
