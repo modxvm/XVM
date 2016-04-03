@@ -85,22 +85,16 @@ class wot.battle.BIChances
             switch (align) {  
                 case 'left':  
                     return 0;  
-                    Logger.add('0');  
                 case 'right' :  
                     return Stage.width - WidthOrHeight;    
-                    break; 
                 case 'center':  
                     return (Stage.width/2) - (WidthOrHeight/2);  
-                    break;  
                 case 'top':  
                     return 0;  
-                    break; 
                 case 'bottom':  
                     return Stage.height - WidthOrHeight;  
-                    break;
                 case 'middle':  
                     return (Stage.height/2) - (WidthOrHeight/2);  
-                    break;     
             }
         }
 	}
