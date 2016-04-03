@@ -52,16 +52,34 @@
       // true - disable displaying of dynamic chances to win in battle interface window (affects only while "enabled" == true and displaying of chances to win at battle and chances to win at battle (live) is enabled on modxvm.com).
       // true - отключить отображение динамического шанса на победу в окне боевого интерфейса (влияет только если "enabled" == true и включено отображение шанса на победу в бою и шанса на победу в бою (динамического) на modxvm.com).
       "DisableLive": false,
-      // Axis field coordinates (only area of Debug Panel (near FPS)).
-      // Положение поля по осям (только область панели отладки (возле FPS)).
-      "x": 161,   
-      "y": -4.05,
-      // field width
-      // ширина поля
-      "width": 100,
-      // field height
-      // высота поля
-      "height": 39.6,
+      // Axis field coordinates.
+      // Положение поля по осям.
+      "position": {
+        // horizontal ("halign") and vertical ("valign") align by screen resolution.
+        // allows only "left", "right", "center" values for horizontal alignment and "top", "bottom", "middle" for vertical.
+        // горизонтальное ("halign") и вертикальное ("valign") выравнивание по разрешению экрана.
+        // допускаются только значения "left", "right", "center" для горизонтального выравнивания и "top", "bottom", "middle" для вертикального. 
+        "halign": "left",
+        "valign": "top",
+        // coordinate modifiers for x,y axes 
+        // for halign = "left" use positive x-axis modifier
+        // for halign = "right" use negative x-axis modifier
+        // for valign = "top" use positive y-axis modifier
+        // for valign = "bottom" use negative y-axis modifier
+        // модификаторы координат для осей x,y
+        // для halign = "left" используйте положительные значения модификатора по x-оси
+        // для halign = "right" используйте отрицательные значения модификатора по x-оси
+        // для valign = "top" используйте положительные значения модификатора по y-оси
+        // для valign = "bottom" используйте отрицательные значения модификатора по y-оси
+        "x": 221,   
+        "y": 3,
+        // field width (for static%/live% 69 is default)
+        // ширина поля (для static%/live% 69 по умолчанию)
+        "width": 69,
+        // field height (for static%/live% 22 is default)
+        // высота поля (для static%/live% 22 по умолчанию)
+        "height": 22
+      },
       // font settings
       // настройки шрифта
       "font": {

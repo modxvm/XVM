@@ -12,7 +12,7 @@ class wot.battle.BIChances
 
         public function BIChances()
             { 
-                var debugPanel:MovieClip = _root.debugPanel;
+                var BIChancesField:MovieClip = _root;
                 	if (!Config.config.battle.WinChancesOnBattleInterface.DisableStatic)
                 		BIChances._BIChances.__isShowChances = true;
                 	else BIChances._BIChances.__isShowChances = false;
@@ -22,7 +22,11 @@ class wot.battle.BIChances
                     BIChances._BIChances.__formatStaticTextFirst = "<span class='chances'>";
                     BIChances._BIChances.__formatStaticTextSecond = "</span>";
                     BIChances._BIChances.__Count = 0;
-					chances = debugPanel.createTextField("chances", debugPanel.getNextHighestDepth(), Config.config.battle.WinChancesOnBattleInterface.x, Config.config.battle.WinChancesOnBattleInterface.y, Config.config.battle.WinChancesOnBattleInterface.width, Config.config.battle.WinChancesOnBattleInterface.height);
+					chances = BIChancesField.createTextField("chances", 
+                        BIChancesField.getNextHighestDepth(), 
+                        GetCoordinateXY(Config.config.battle.WinChancesOnBattleInterface.position.halign, Config.config.battle.WinChancesOnBattleInterface.position.width) + Config.config.battle.WinChancesOnBattleInterface.position.x,
+                        GetCoordinateXY(Config.config.battle.WinChancesOnBattleInterface.position.valign, Config.config.battle.WinChancesOnBattleInterface.position.height) + Config.config.battle.WinChancesOnBattleInterface.position.y,
+                        Config.config.battle.WinChancesOnBattleInterface.position.width, Config.config.battle.WinChancesOnBattleInterface.position.height);
                     chances.selectable = false;
                     chances.antiAliasType = "advanced";
                     chances.html = true;
@@ -74,5 +78,23 @@ class wot.battle.BIChances
             		}
             	}
             	
+        }
+
+        private static function GetCoordinateXY(align, WidthOrHeight: Number) {
+        //'align' allows only 'left', 'right', 'center' values for horizontal alignment and 'top', 'bottom', 'middle' for vertical
+            switch (align) {  
+                case 'left':  
+                    return 0;  
+                case 'right' :  
+                    return Stage.width - WidthOrHeight;    
+                case 'center':  
+                    return (Stage.width/2) - (WidthOrHeight/2);  
+                case 'top':  
+                    return 0;  
+                case 'bottom':  
+                    return Stage.height - WidthOrHeight;  
+                case 'middle':  
+                    return (Stage.height/2) - (WidthOrHeight/2);  
+            }
         }
 	}
