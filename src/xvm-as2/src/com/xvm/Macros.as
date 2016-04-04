@@ -970,7 +970,7 @@ class com.xvm.Macros
                     var v_xtdb: Number = v_array_xtdb[i];                    
                     if (o.global.total < v_xtdb)
                     {
-                        Logger.add("i: " + i + ", v_xtdb: " + v_xtdb);
+                        //Logger.add("i: " + i + ", v_xtdb: " + v_xtdb);
                         return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
                     }
                 }                
