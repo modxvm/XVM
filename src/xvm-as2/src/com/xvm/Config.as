@@ -16,6 +16,7 @@ class com.xvm.Config
     public static var networkServicesSettings:Object = null;
     public static var minimapCirclesData:Object = null;
     public static var IS_DEVELOPMENT:Boolean = false;
+    public static var v_array_xtdb:Array = [];
 
     // INTERNAL
 
@@ -29,7 +30,7 @@ class com.xvm.Config
     }
 
     public function GetConfigCallback(config_data:Object, lang_data:Object, battleLevel:Number, battleType:Number, arenaGuiType:Number, mapSize:Number,
-        myVehId:Number, vehInfoData:Array, networkServicesSettings:Object, minimapCirclesData:Object, IS_DEVELOPMENT:Boolean)
+        myVehId:Number, vehInfoData:Array, networkServicesSettings:Object, minimapCirclesData:Object, IS_DEVELOPMENT:Boolean, v_array_xtdb:Array)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
@@ -44,6 +45,7 @@ class com.xvm.Config
             Config.networkServicesSettings = networkServicesSettings;
             Config.minimapCirclesData = minimapCirclesData;
             Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
+            Config.v_array_xtdb = v_array_xtdb;            
             Locale.setupLanguage(lang_data);
             VehicleInfo.onVehicleInfoData(vehInfoData);
             Macros.RegisterGlobalMacrosData();

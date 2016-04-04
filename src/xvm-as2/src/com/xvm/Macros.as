@@ -958,6 +958,23 @@ class com.xvm.Macros
 
             // {{dmg-total}}
             pdata["dmg-total"] = function(o):Number { return o.global.total }
+            
+            // {{c:dmg-total}}
+            pdata["c:dmg-total"] = function(o):String 
+            {   
+                var v_array_xtdb = Config.v_array_xtdb;
+                var v_array_xtdb_len:Number = v_array_xtdb.length;
+                //Logger.add("v_array_xtdb_len: " + v_array_xtdb_len);
+                for (var i:Number = 0; i < v_array_xtdb_len; ++i)
+                {
+                    var v_xtdb: Number = v_array_xtdb[i];                    
+                    if (o.global.total < v_xtdb)
+                    {
+                        Logger.add("i: " + i + ", v_xtdb: " + v_xtdb);
+                        return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
+                    }
+                }                
+            }
 
             // {{dmg-avg}}
             pdata["dmg-avg"] = function(o):Number { return o.global.hits.length == 0 ? 0 : Math.round(o.global.total / o.global.hits.length); }

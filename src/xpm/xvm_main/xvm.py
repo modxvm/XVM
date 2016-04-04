@@ -35,6 +35,7 @@ import test
 import topclans
 import wgutils
 import xvmapi
+import vehinfo_xtdb
 
 
 _LOG_COMMANDS = (
@@ -307,7 +308,8 @@ class Xvm(object):
                     vehinfo.getVehicleInfoDataArray(),
                     config.networkServicesSettings.__dict__,
                     minimap_circles.getMinimapCirclesData(),
-                    IS_DEVELOPMENT)
+                    IS_DEVELOPMENT,
+                    vehinfo_xtdb.vehArrayXTDB(arenaVehicle['vehicleType'].type.compactDescr))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 
