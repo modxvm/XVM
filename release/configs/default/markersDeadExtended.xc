@@ -106,7 +106,7 @@
   },
   // Настройки для союзников.
   "ally": {
-// Type of vehicle icon (HT/MT/LT/TD/Arty).
+    // Type of vehicle icon (HT/MT/LT/TD/Arty).
     // Иконка типа танка (ТТ/СТ/ЛТ/ПТ/Арта).
     "vehicleIcon": {
       // false - disable / не отображать
