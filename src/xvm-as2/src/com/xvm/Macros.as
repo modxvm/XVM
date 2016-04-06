@@ -969,7 +969,7 @@ class com.xvm.Macros
                 {
                     for (var i:Number = this.curent_xtdb; i < v_array_xtdb_len; ++i)
                     {
-                        if ((o.global.total < Config.v_array_xtdb[i])||(i > (v_array_xtdb_len - 1)))
+                        if ((o.global.total < Config.v_array_xtdb[i])||(i == (v_array_xtdb_len - 1)))
                         {
                             this.curent_xtdb = i;
                             return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
@@ -978,7 +978,7 @@ class com.xvm.Macros
                 }    
                 else
                 {
-                    return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, v_array_xtdb_len, "#", false);
+                    return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, (v_array_xtdb_len - 1), "#", false);
                 }                  
             }
 
