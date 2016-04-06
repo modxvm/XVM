@@ -43,8 +43,8 @@
     // Шансы на победу в окне боевого интерфейса
     // Win chances on battle interface window
     "winChancesOnBattleInterface": {
-    // true - displaying chances to win on battle interface window (only while service is enabled (chances to win at battle/at battle (live))  on modxvm.com).
-    // true - показывать шансы на победу в окне боевого интерфейса (только при включенном сервисе (шанс на победу в бою или шанс на победу в бою/в бою (динамический)) на modxvm.com).
+      // true - displaying chances to win on battle interface window (only while service is enabled (chances to win at battle/at battle (live))  on modxvm.com).
+      // true - показывать шансы на победу в окне боевого интерфейса (только при включенном сервисе (шанс на победу в бою или шанс на победу в бою/в бою (динамический)) на modxvm.com).
       "enabled": true,
       // true - disable displaying of static chances to win in battle interface window (affects only while "enabled" == true and displaying of chances to win at battle is enabled on modxvm.com).
       // true - отключить отображение статического шанса на победу в окне боевого интерфейса (влияет только если "enabled" == true и включено отображение шанса на победу в бою на modxvm.com).
