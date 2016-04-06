@@ -21,8 +21,7 @@ def calculateXTDB(vehId, dmg_per_battle):
 def vehArrayXTDB(vehId):
     data = _getData(vehId)
     if data is None:
-        return -1
-
+        return []
     return data['x']
 
 

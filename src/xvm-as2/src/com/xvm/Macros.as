@@ -114,7 +114,9 @@ class com.xvm.Macros
     private var m_dict:Object = { }; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
     private var m_globals:Object = { };
     private var m_contacts:Object = { };
-
+    
+    private var curent_xtdb: Number = 0;
+    
     private var isStaticMacro:Boolean;
 
     /**
@@ -961,16 +963,13 @@ class com.xvm.Macros
             
             // {{c:dmg-total}}
             pdata["c:dmg-total"] = function(o):String 
-            {   
-                var v_array_xtdb = Config.v_array_xtdb;
-                var v_array_xtdb_len:Number = v_array_xtdb.length;
-                //Logger.add("v_array_xtdb_len: " + v_array_xtdb_len);
-                for (var i:Number = 0; i < v_array_xtdb_len; ++i)
+            { 
+                var v_array_xtdb_len:Number = Config.v_array_xtdb.length;
+                for (var i:Number = this.curent_xtdb; i < v_array_xtdb_len; ++i)
                 {
-                    var v_xtdb: Number = v_array_xtdb[i];                    
-                    if (o.global.total < v_xtdb)
+                    if (o.global.total < Config.v_array_xtdb[i])
                     {
-                        //Logger.add("i: " + i + ", v_xtdb: " + v_xtdb);
+                        this.curent_xtdb = i;
                         return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
                     }
                 }                
