@@ -965,7 +965,7 @@ class com.xvm.Macros
             pdata["c:dmg-total"] = function(o):String 
             { 
                 var v_array_xtdb_len:Number = Config.v_array_xtdb.length;
-                if (this.curent_xtdb < v_array_xtdb_len)
+                if (this.curent_xtdb < (v_array_xtdb_len - 1))
                 {
                     for (var i:Number = this.curent_xtdb; i < v_array_xtdb_len; ++i)
                     {
