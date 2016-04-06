@@ -965,14 +965,21 @@ class com.xvm.Macros
             pdata["c:dmg-total"] = function(o):String 
             { 
                 var v_array_xtdb_len:Number = Config.v_array_xtdb.length;
-                for (var i:Number = this.curent_xtdb; i < v_array_xtdb_len; ++i)
+                if (this.curent_xtdb < (v_array_xtdb_len - 1))
                 {
-                    if (o.global.total < Config.v_array_xtdb[i])
+                    for (var i:Number = this.curent_xtdb; i < v_array_xtdb_len; ++i)
                     {
-                        this.curent_xtdb = i;
-                        return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
-                    }
-                }                
+                        if ((o.global.total < Config.v_array_xtdb[i])||(i == (v_array_xtdb_len - 1)))
+                        {
+                            this.curent_xtdb = i;
+                            return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
+                        }
+                    }    
+                }    
+                else
+                {
+                    return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, (v_array_xtdb_len - 1), "#", false);
+                }                  
             }
 
             // {{dmg-avg}}
