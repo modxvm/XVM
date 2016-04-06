@@ -56,10 +56,12 @@ class wot.battle.BIChances
             clearInterval(_BIChances.__intervalID);
             BIChances._BIChances.__isClearedInterval = "true";
         }
-        if BIChancesText == "" {
+        if BIChancesText == ""
+        {
             BIChances._BIChances.__instance.chances.htmlText = Utils.fixImgTag(BIChances._BIChances.__formatStaticTextFirst + '' + BIChances._BIChances.__formatStaticTextSecond);
         }
-        else {
+        else
+        {
             BIChances._BIChances.__instance.chances.htmlText = Utils.fixImgTag(formatChanceText(BIChancesText, BIChances._BIChances.__isShowChances, BIChances._BIChances.__isShowLiveChances));
         }
     }
@@ -67,7 +69,7 @@ class wot.battle.BIChances
     private static function formatChanceText(ChancesText: String, isShowChance, isShowLiveChance: Boolean)
     {
         var temp: Array = ChancesText.split('|', 2);
-        var tempA: Array =	temp[0].split(':', 2);
+        var tempA: Array = temp[0].split(':', 2);
         if (isShowChance && isShowLiveChance)
         {
           var tempB: Array = temp[1].split(':', 2);
