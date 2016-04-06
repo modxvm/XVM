@@ -42,16 +42,16 @@
     "minimapDeadSwitch": true,
     // Шансы на победу в окне боевого интерфейса
     // Win chances on battle interface window
-    "WinChancesOnBattleInterface": {
+    "winChancesOnBattleInterface": {
     // true - displaying chances to win on battle interface window (only while service is enabled (chances to win at battle/at battle (live))  on modxvm.com).
     // true - показывать шансы на победу в окне боевого интерфейса (только при включенном сервисе (шанс на победу в бою или шанс на победу в бою/в бою (динамический)) на modxvm.com).
       "enabled": true,
       // true - disable displaying of static chances to win in battle interface window (affects only while "enabled" == true and displaying of chances to win at battle is enabled on modxvm.com).
       // true - отключить отображение статического шанса на победу в окне боевого интерфейса (влияет только если "enabled" == true и включено отображение шанса на победу в бою на modxvm.com).
-      "DisableStatic": false,    
+      "disableStatic": false,    
       // true - disable displaying of dynamic chances to win in battle interface window (affects only while "enabled" == true and displaying of chances to win at battle and chances to win at battle (live) is enabled on modxvm.com).
       // true - отключить отображение динамического шанса на победу в окне боевого интерфейса (влияет только если "enabled" == true и включено отображение шанса на победу в бою и шанса на победу в бою (динамического) на modxvm.com).
-      "DisableLive": false,
+      "disableLive": false,
       // Axis field coordinates.
       // Положение поля по осям.
       "position": {
@@ -71,11 +71,11 @@
         // для halign = "right" используйте отрицательные значения модификатора по x-оси
         // для valign = "top" используйте положительные значения модификатора по y-оси
         // для valign = "bottom" используйте отрицательные значения модификатора по y-оси
-        "x": 221,   
-        "y": 3,
-        // field width (for static%/live% 69 is default)
-        // ширина поля (для static%/live% 69 по умолчанию)
-        "width": 69,
+        "x": 222,   
+        "y": 2,
+        // field width (for static%/live% 75 is default)
+        // ширина поля (для static%/live% 75 по умолчанию)
+        "width": 75,
         // field height (for static%/live% 22 is default)
         // высота поля (для static%/live% 22 по умолчанию)
         "height": 22
@@ -84,7 +84,7 @@
       // настройки шрифта
       "font": {
         "color": "0xF4EFE8", 
-        "name": "$PartnerCondensed", 
+        "name": "$FieldFont", 
         "size": 15, 
         "align": "left", 
         "bold": false, 
