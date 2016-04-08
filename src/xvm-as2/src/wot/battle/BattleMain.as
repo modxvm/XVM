@@ -76,10 +76,6 @@ class wot.battle.BattleMain
         if (clockFormat && clockFormat != "")
             this._clock = new Clock();
 
-        // Win chances on battle interface window
-        if (Config.config.battle.winChancesOnBattleInterface.enabled && Config.networkServicesSettings.chance && (!Config.config.battle.winChancesOnBattleInterface.disableStatic || (Config.networkServicesSettings.chanceLive && !Config.config.battle.winChancesOnBattleInterface.disableLive)))
-           BIChances._BIChances.__instance = new BIChances();
-
         // Zoom Indicator
         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
             this._zoomIndicator = new ZoomIndicator();

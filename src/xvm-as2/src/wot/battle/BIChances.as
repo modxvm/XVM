@@ -3,7 +3,6 @@
  * @author Maxim Schedriviy <max(at)modxvm.com>, wotunion <http://www.koreanrandom.com/forum/user/27262-wotunion/>
  */
 import com.xvm.*;
-import wot.battle.BattleMain;
 
 class wot.battle.BIChances
 {      
@@ -107,5 +106,9 @@ class wot.battle.BIChances
             case 'middle':  
                 return (Stage.height/2) - (WidthOrHeight/2);  
         }
+    }
+    public static function init()  
+    {
+        BIChances._BIChances.__instance = new BIChances();
     }
 }

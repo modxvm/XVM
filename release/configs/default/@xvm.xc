@@ -175,5 +175,9 @@
 
   // Extra sounds settings
   // Настройки дополнительных звуков
-  "sounds": ${"sounds.xc":"sounds"}
+  "sounds": ${"sounds.xc":"sounds"},
+
+  // Battle interface text fields
+  // Текстовые поля боевого интерфейса
+  "battleLabelsList": ${"battleLabelsList.xc":"labels"}
 }
