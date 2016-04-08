@@ -298,18 +298,20 @@ class Xvm(object):
                 arena = player.arena
                 arenaVehicle = arena.vehicles.get(player.playerVehicleID)
                 movie.xvm_onUpdateConfig(
-                    config.config_data,
-                    config.lang_data,
-                    arena.extraData.get('battleLevel', 0),
-                    arena.bonusType,
-                    arena_info.getArenaGuiType(arena=arena),
-                    utils.getMapSize(),
-                    arenaVehicle['vehicleType'].type.compactDescr,
-                    vehinfo.getVehicleInfoDataArray(),
-                    config.networkServicesSettings.__dict__,
-                    minimap_circles.getMinimapCirclesData(),
-                    IS_DEVELOPMENT,
-                    vehinfo_xtdb.vehArrayXTDB(arenaVehicle['vehicleType'].type.compactDescr))
+                    config.config_data,                              # config_data
+                    config.lang_data,                                # lang_data
+                    arena.extraData.get('battleLevel', 0),           # battleLevel
+                    arena.bonusType,                                 # battleType
+                    arena_info.getArenaGuiType(arena=arena),         # arenaGuiType
+                    utils.getMapSize(),                              # mapSize
+                    arenaVehicle['name'],                            # myPlayerName
+                    arenaVehicle['vehicleType'].type.compactDescr,   # myVehId
+                    vehinfo.getVehicleInfoDataArray(),               # vehInfoData
+                    config.networkServicesSettings.__dict__,         # networkServicesSettings
+                    minimap_circles.getMinimapCirclesData(),         # minimapCirclesData
+                    IS_DEVELOPMENT,                                  # IS_DEVELOPMENT
+                    vehinfo_xtdb.vehArrayXTDB(arenaVehicle['vehicleType'].type.compactDescr)) # v_array_xtdb
+
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 
