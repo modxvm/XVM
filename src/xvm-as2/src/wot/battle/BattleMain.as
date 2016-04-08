@@ -14,9 +14,12 @@ import wot.battle.*;
 
 class wot.battle.BattleMain
 {
+    private static var HOLDER_DEPTH:Number = -16368; // behind the minimap
+
     private static var _instance: BattleMain;
     private var _sixthSenseIndicator:SixthSenseIndicator;
     private var _clock:Clock;
+    private var _holder:MovieClip;
     private var _zoomIndicator:ZoomIndicator;
 
     static function main()
@@ -80,9 +83,12 @@ class wot.battle.BattleMain
         if (Config.config.battle.WinChancesOnBattleInterface.enabled && Config.networkServicesSettings.chance && (!Config.config.battle.WinChancesOnBattleInterface.DisableStatic || (Config.networkServicesSettings.chanceLive && !Config.config.battle.WinChancesOnBattleInterface.DisableLive)))
            BIChances._BIChances.__instance = new BIChances();
 
+        // Holder
+        this._holder = _root.createEmptyMovieClip("xvm_holder", HOLDER_DEPTH);
+
         // Zoom Indicator
         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
-            this._zoomIndicator = new ZoomIndicator();
+            this._zoomIndicator = new ZoomIndicator(_holder);
 
         // Setup Visual Elements
         Elements.SetupElements();

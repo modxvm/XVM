@@ -9,9 +9,6 @@ import flash.filters.*;
 
 class wot.battle.ZoomIndicator extends XvmComponent
 {
-    private static var ROOT_DEPTH:Number = -16368; // behind the minimap
-
-
     private var cfg:Object;
     private var zoomIndicator:TextField;
 
@@ -20,12 +17,12 @@ class wot.battle.ZoomIndicator extends XvmComponent
     private var offsetX:Number;
     private var offsetY:Number;
 
-    public function ZoomIndicator()
+    public function ZoomIndicator(holder:MovieClip)
     {
         try
         {
             cfg = Config.config.battle.camera.sniper.zoomIndicator;
-            zoomIndicator = createZoomIndicatorTextField();
+            zoomIndicator = createZoomIndicatorTextField(holder);
             GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
             update(false, 0);
         }
@@ -88,11 +85,11 @@ class wot.battle.ZoomIndicator extends XvmComponent
 
     // PRIVATE
 
-    private function createZoomIndicatorTextField():TextField
+    private function createZoomIndicatorTextField(holder:MovieClip):TextField
     {
         var width:Number = Macros.FormatGlobalNumberValue(cfg.width);
         var height:Number = Macros.FormatGlobalNumberValue(cfg.height);
-        var textField:TextField = _root.createTextField("zoomIndicator", ROOT_DEPTH, 0, 0, width, height);
+        var textField:TextField = holder.createTextField("zoomIndicator", holder.getNextHighestDepth(), 0, 0, width, height);
         textField.antiAliasType = "advanced";
         textField.html = true;
         textField.wordWrap = false;
