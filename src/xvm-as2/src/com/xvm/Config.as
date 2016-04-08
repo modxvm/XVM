@@ -12,10 +12,12 @@ class com.xvm.Config
     public static var battleType:Number = NaN;
     public static var arenaGuiType:Number = NaN;
     public static var mapSize:Number = NaN;
-    public static var myVehId:Number = null;
+    public static var myPlayerName:String = null;
+    public static var myVehId:Number = NaN;
     public static var networkServicesSettings:Object = null;
     public static var minimapCirclesData:Object = null;
     public static var IS_DEVELOPMENT:Boolean = false;
+    public static var v_array_xtdb:Array = [];
 
     // INTERNAL
 
@@ -28,8 +30,11 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:Object, lang_data:Object, battleLevel:Number, battleType:Number, arenaGuiType:Number, mapSize:Number,
-        myVehId:Number, vehInfoData:Array, networkServicesSettings:Object, minimapCirclesData:Object, IS_DEVELOPMENT:Boolean)
+    public function GetConfigCallback(
+        config_data:Object, lang_data:Object, battleLevel:Number, battleType:Number, arenaGuiType:Number,
+        mapSize:Number, myPlayerName:String, myVehId:Number, vehInfoData:Array,
+        networkServicesSettings:Object, minimapCirclesData:Object, IS_DEVELOPMENT:Boolean,
+        v_array_xtdb:Array)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
@@ -40,10 +45,12 @@ class com.xvm.Config
             Config.battleType = battleType;
             Config.mapSize = mapSize;
             Config.arenaGuiType = arenaGuiType;
+            Config.myPlayerName = myPlayerName;
             Config.myVehId = myVehId;
             Config.networkServicesSettings = networkServicesSettings;
             Config.minimapCirclesData = minimapCirclesData;
             Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
+            Config.v_array_xtdb = v_array_xtdb;            
             Locale.setupLanguage(lang_data);
             VehicleInfo.onVehicleInfoData(vehInfoData);
             Macros.RegisterGlobalMacrosData();

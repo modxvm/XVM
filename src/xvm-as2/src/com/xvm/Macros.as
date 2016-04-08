@@ -114,7 +114,9 @@ class com.xvm.Macros
     private var m_dict:Object = { }; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
     private var m_globals:Object = { };
     private var m_contacts:Object = { };
-
+    
+    private var curent_xtdb: Number = 0;
+    
     private var isStaticMacro:Boolean;
 
     /**
@@ -958,6 +960,27 @@ class com.xvm.Macros
 
             // {{dmg-total}}
             pdata["dmg-total"] = function(o):Number { return o.global.total }
+            
+            // {{c:dmg-total}}
+            pdata["c:dmg-total"] = function(o):String 
+            { 
+                var v_array_xtdb_len:Number = Config.v_array_xtdb.length;
+                if (this.curent_xtdb < (v_array_xtdb_len - 1))
+                {
+                    for (var i:Number = this.curent_xtdb; i < v_array_xtdb_len; ++i)
+                    {
+                        if ((o.global.total < Config.v_array_xtdb[i])||(i == (v_array_xtdb_len - 1)))
+                        {
+                            this.curent_xtdb = i;
+                            return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
+                        }
+                    }    
+                }    
+                else
+                {
+                    return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, (v_array_xtdb_len - 1), "#", false);
+                }                  
+            }
 
             // {{dmg-avg}}
             pdata["dmg-avg"] = function(o):Number { return o.global.hits.length == 0 ? 0 : Math.round(o.global.total / o.global.hits.length); }
