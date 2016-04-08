@@ -16,7 +16,7 @@
           // Name of text field (User defined). Do not forget to attach this in battleLabelsList.xc
           //"demoItem": {
                 // Enable field switch: true or false. Do not forget to enable "battleLabels" in battle.xc // todo
-                //"enabled": true, // todo
+                //"enabled": true,
                 //"updateable": true, //todo
                 // Allowed: work in progress...
                 //"updateEvent": "", // todo
@@ -64,7 +64,7 @@
      // ...
      //
     "test": {
-                "enabled": true, // todo
+                "enabled": true,
                 //"updateable": true, //todo
                 //"updateEvent": "", // todo
                 "x": 0,
@@ -86,7 +86,7 @@
                 "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc "
     },
     "test2": {
-                "enabled": true, // todo
+                "enabled": true, 
                 //"updateable": true, //todo
                 //"updateEvent": "", // todo
                 "x": 0,

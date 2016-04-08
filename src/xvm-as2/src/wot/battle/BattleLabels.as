@@ -15,12 +15,9 @@ import wot.battle.BIChances;
         public function BattleLabels(InstanceIndex: Number) 
         {
             var BLCfg:Object = BattleLabels._BattleLabels.formats[InstanceIndex];
-            var BattleLabelsOnRootClip:MovieClip = _root;
-               
-            BattleLabels._BattleLabels.__formatStaticTextFirst = "<span class='class" + String(InstanceIndex) + "'>";
-            BattleLabels._BattleLabels.__formatStaticTextSecond = "</span>";
+            
             BattleLabels._BattleLabels.__IntervalCount[InstanceIndex] = 0;
-            f = BattleLabelsOnRootClip.createTextField("bl" + String(InstanceIndex), 
+            f = _root.createTextField("bl" + String(InstanceIndex), 
                 _root.getNextHighestDepth(),
                 HVAlign(BLCfg.align, BLCfg.width, false) + Macros.FormatGlobalNumberValue(BLCfg.x),
                 HVAlign(BLCfg.valign, BLCfg.height, true) + Macros.FormatGlobalNumberValue(BLCfg.y),
@@ -42,7 +39,7 @@ import wot.battle.BIChances;
             f.html = true;
             f.styleSheet = Utils.createStyleSheet(createCSSExtended("class" + String(InstanceIndex),
                 Macros.FormatGlobalNumberValue(int(BLCfg.currentFieldDefaultStyle.color)) != null ? Macros.FormatGlobalNumberValue(int(BLCfg.currentFieldDefaultStyle.color)) : int("0xFFFFFF"),
-                Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.name) != null ?  BLCfg.currentFieldDefaultStyle.name : "$PartnerCondensed", 
+                Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.name) != null ?  BLCfg.currentFieldDefaultStyle.name : "$FieldFont", 
                 Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.size) != null ? BLCfg.currentFieldDefaultStyle.size : 12,
                 BLCfg.currentFieldDefaultStyle.align != null ? BLCfg.currentFieldDefaultStyle.align : "left",
                 BLCfg.currentFieldDefaultStyle.bold != null ? BLCfg.currentFieldDefaultStyle.bold : false,
@@ -81,35 +78,35 @@ import wot.battle.BIChances;
             }
             if BattleLabelsHTML == "" 
             {
-            BattleLabels._BattleLabels.__instance[InstanceIndex].f.htmlText = BattleLabels._BattleLabels.__formatStaticTextFirst + '' + BattleLabels._BattleLabels.__formatStaticTextSecond;
+                BattleLabels._BattleLabels.__instance[InstanceIndex][0].f.htmlText = '';
             }
             else 
             {
-            BattleLabels._BattleLabels.__instance[InstanceIndex][0].f.htmlText = "<p class='class" + String(InstanceIndex) + "'>" + BattleLabelsHTML + "</p>";
+                BattleLabels._BattleLabels.__instance[InstanceIndex][0].f.htmlText = "<p class='class" + String(InstanceIndex) + "'>" + BattleLabelsHTML + "</p>";
             }
         }
 
-		public static function createTextFields() 
+        public static function createTextFields() 
         { 
-    		BattleLabels._BattleLabels.formats = new Array;
-    		BattleLabels._BattleLabels.__isClearedInterval = new Array;
-    		BattleLabels._BattleLabels.__intervalID = new Array;
+            BattleLabels._BattleLabels.formats = new Array;
+            BattleLabels._BattleLabels.__isClearedInterval = new Array;
+            BattleLabels._BattleLabels.__intervalID = new Array;
             BattleLabels._BattleLabels.__IntervalCount = new Array;
-    		var formats:Array = Config.config.battleLabelsList.formats;
-    		BattleLabels._BattleLabels.formats = formats;
+            var formats:Array = Config.config.battleLabelsList.formats;
+            BattleLabels._BattleLabels.formats = formats;
             if (formats) 
             {
-         		var l:Number = formats.length;
+                var l:Number = formats.length;
                 BattleLabels._BattleLabels.FieldsCount = l;
                 BattleLabels._BattleLabels.EnabledFieldsCount = 0;
                 BattleLabels._BattleLabels.UpdateableFieldsCount = 0;
-        		BattleLabels._BattleLabels.__instance = new Array([],[]);
+                BattleLabels._BattleLabels.__instance = new Array([],[]);
                 for (var i:Number = 0; i < l; ++i) 
                 {
                     if (formats[i].enabled) 
                     {
                         BattleLabels._BattleLabels.__instance[i][0]  = new BattleLabels(i);
-          				BattleLabels._BattleLabels.__instance[i][1]  = true;
+                        BattleLabels._BattleLabels.__instance[i][1]  = true;
                         if formats[i].updateEvent != "" 
                         {
                         BattleLabels._BattleLabels.__instance[i][2]  = formats[i].updateEvent;
@@ -119,7 +116,7 @@ import wot.battle.BIChances;
                     }
                 }
             }
-		}       	 
+        }            
 
         private static function HVAlign(align, WidthOrHeight: Number, isValign: Boolean) 
         {
@@ -144,7 +141,7 @@ import wot.battle.BIChances;
                     return (Stage.height/2) - (WidthOrHeight/2);  
             }
 
-		}
+        }
 
         public static function createCSSExtended(className:String, color:Number, fontName:String, fontSize:Number, align:String, bold:Boolean, italic:Boolean, display:String, leading:Number, marginLeft:Number, marginRight:Number):String
         {
