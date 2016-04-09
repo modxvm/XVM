@@ -50,7 +50,7 @@ class com.xvm.Config
             Config.networkServicesSettings = networkServicesSettings;
             Config.minimapCirclesData = minimapCirclesData;
             Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
-            Config.v_array_xtdb = v_array_xtdb;            
+            Config.v_array_xtdb = v_array_xtdb;
             Locale.setupLanguage(lang_data);
             VehicleInfo.onVehicleInfoData(vehInfoData);
             Macros.RegisterGlobalMacrosData();
