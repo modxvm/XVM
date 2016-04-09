@@ -17,7 +17,7 @@ import wot.battle.BIChances;
             var BLCfg:Object = BattleLabels._BattleLabels.formats[InstanceIndex];
             
             BattleLabels._BattleLabels.__IntervalCount[InstanceIndex] = 0;
-            f = _root.xvm_holder.createTextField("bl" + String(InstanceIndex), 
+            f = _root.xvm_holder.createTextField("bl" + InstanceIndex, 
                 _root.xvm_holder.getNextHighestDepth(),
                 HVAlign(BLCfg.align, BLCfg.width, false) + Macros.FormatGlobalNumberValue(BLCfg.x),
                 HVAlign(BLCfg.valign, BLCfg.height, true) + Macros.FormatGlobalNumberValue(BLCfg.y),
@@ -37,27 +37,51 @@ import wot.battle.BIChances;
             f.backgroundColor = Macros.FormatGlobalNumberValue(BLCfg.bgColor);
             f.autoSize = BLCfg.autoSize != null ? BLCfg.autoSize : "none";
             f.html = true;
-            var currentFieldDefaultStyleColor:Number = int(Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.color));
-            f.styleSheet = Utils.createStyleSheet(createCSSExtended("class" + String(InstanceIndex),
+
+            // style temp vars
+            var currentFieldDefaultStyleColor: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.color);
+            var currentFieldDefaultStyleName: String = Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.name);
+            var currentFieldDefaultStyleSize: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.size);
+            var currentFieldDefaultStyleAlign: String = Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.align);
+            var currentFieldDefaultStyleBold: Boolean = Macros.FormatGlobalBooleanValue(BLCfg.currentFieldDefaultStyle.bold);
+            var currentFieldDefaultStyleItalic: Boolean = Macros.FormatGlobalBooleanValue(BLCfg.currentFieldDefaultStyle.italic);
+            var currentFieldDefaultStyleDisplay: String = Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.display);
+            var currentFieldDefaultStyleLeading: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.leading);
+            var currentFieldDefaultStyleMarginLeft: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.marginLeft);
+            var currentFieldDefaultStyleMarginRight: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.marginRight);
+            // shadow temp vars
+            var shadowDistance: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.distance);
+            var shadowAngle: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.angle);
+            var shadowColor: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.color);
+            var shadowAlpha: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.alpha);
+            var shadowBlurX: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.blur);
+            var shadowBlurY: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.blur);
+            var shadowStrength: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.strength);
+
+
+
+            f.styleSheet = Utils.createStyleSheet(createCSSExtended("class" + InstanceIndex,
                 !isNaN(currentFieldDefaultStyleColor) ? currentFieldDefaultStyleColor : 0xFFFFFF,
-                Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.name) != null ?  BLCfg.currentFieldDefaultStyle.name : "$FieldFont", 
-                Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.size) != null ? BLCfg.currentFieldDefaultStyle.size : 12,
-                BLCfg.currentFieldDefaultStyle.align != null ? BLCfg.currentFieldDefaultStyle.align : "left",
-                BLCfg.currentFieldDefaultStyle.bold != null ? BLCfg.currentFieldDefaultStyle.bold : false,
-                BLCfg.currentFieldDefaultStyle.italic != null ? BLCfg.currentFieldDefaultStyle.italic : false,
-                BLCfg.currentFieldDefaultStyle.display != null ? BLCfg.currentFieldDefaultStyle.display : "block",
-                BLCfg.currentFieldDefaultStyle.leading != null ? BLCfg.currentFieldDefaultStyle.leading : 0,
-                BLCfg.currentFieldDefaultStyle.marginLeft != null ? BLCfg.currentFieldDefaultStyle.marginLeft : 0,
-                BLCfg.currentFieldDefaultStyle.marginRight != null ? BLCfg.currentFieldDefaultStyle.marginRight : 0));
-                f.filters = [new flash.filters.DropShadowFilter(
-                    BLCfg.shadow.distance != null ? BLCfg.shadow.distance : 0, 
-                    BLCfg.shadow.angle != null ? BLCfg.shadow.angle : 0, 
-                    int(BLCfg.shadow.color) != null ? int(BLCfg.shadow.color) : 0x000000, 
-                    BLCfg.shadow.alpha != null ? BLCfg.shadow.alpha : 0.75, 
-                    BLCfg.shadow.blur != null ? BLCfg.shadow.blur : 2, 
-                    BLCfg.shadow.blur != null ? BLCfg.shadow.blur : 2, 
-                    BLCfg.shadow.strength != null ? BLCfg.shadow.strength : 1)
-                ];
+                currentFieldDefaultStyleName != null ? currentFieldDefaultStyleName : "$FieldFont", 
+                !isNaN(currentFieldDefaultStyleSize) ? currentFieldDefaultStyleSize : 12,
+                currentFieldDefaultStyleAlign != null ? currentFieldDefaultStyleAlign : "left",
+                currentFieldDefaultStyleBold != null ? currentFieldDefaultStyleBold : false,
+                currentFieldDefaultStyleItalic != null ? currentFieldDefaultStyleItalic : false,
+                currentFieldDefaultStyleDisplay != null ? currentFieldDefaultStyleDisplay : "block",
+                !isNaN(currentFieldDefaultStyleLeading) ? currentFieldDefaultStyleLeading : 0,
+                !isNaN(currentFieldDefaultStyleMarginLeft) ? currentFieldDefaultStyleMarginLeft : 0,
+                !isNaN(currentFieldDefaultStyleMarginRight) ? currentFieldDefaultStyleMarginRight : 0)
+            );
+            
+            f.filters = [new flash.filters.DropShadowFilter(
+                !isNaN(shadowDistance) ? shadowDistance : 0, 
+                !isNaN(shadowAngle) ? shadowAngle : 0, 
+                !isNaN(shadowColor) ? shadowColor : 0x000000, 
+                !isNaN(shadowAlpha) ? shadowAlpha : 0.75, 
+                !isNaN(shadowBlurX) ? shadowBlurX : 2, 
+                !isNaN(shadowBlurY) ? shadowBlurY : 2, 
+                !isNaN(shadowStrength) ? shadowStrength : 1)
+            ];
                 BattleLabels._BattleLabels.__isCreated = true;
                 BattleLabels._BattleLabels.__intervalID[InstanceIndex] = setInterval(function() {
                 BattleLabels._BattleLabels.__IntervalCount++;
@@ -83,7 +107,7 @@ import wot.battle.BIChances;
             }
             else 
             {
-                BattleLabels._BattleLabels.__instance[InstanceIndex][0].f.htmlText = "<p class='class" + String(InstanceIndex) + "'>" + BattleLabelsHTML + "</p>";
+                BattleLabels._BattleLabels.__instance[InstanceIndex][0].f.htmlText = "<p class='class" + InstanceIndex + "'>" + BattleLabelsHTML + "</p>";
             }
         }
 
