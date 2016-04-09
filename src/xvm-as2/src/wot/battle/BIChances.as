@@ -11,7 +11,15 @@ class wot.battle.BIChances
 
     public function BIChances()
     { 
-        var BIChancesField:MovieClip = _root;
+
+
+  // _root['test'];
+        for (var i:Number = -16900; i < 16900; ++i) {
+            if _root.getInstanceAtDepth(i) != undefined
+            Logger.add(String(i) + ' ' + String(_root.getInstanceAtDepth(i)));
+        }
+
+        
         if (!Config.config.battle.winChancesOnBattleInterface.disableStatic)
             BIChances._BIChances.__isShowChances = true;
         else BIChances._BIChances.__isShowChances = false;
@@ -21,8 +29,8 @@ class wot.battle.BIChances
         BIChances._BIChances.__formatStaticTextFirst = "<span class='chances'>";
         BIChances._BIChances.__formatStaticTextSecond = "</span>";
         BIChances._BIChances.__Count = 0;
-        chances = BIChancesField.createTextField("chances", 
-            BIChancesField.getNextHighestDepth(), 
+        chances = _root.xvm_holder.createTextField("chances", 
+            _root.xvm_holder.getNextHighestDepth(), 
             GetCoordinateXY(Config.config.battle.winChancesOnBattleInterface.position.halign, Config.config.battle.winChancesOnBattleInterface.position.width) + Config.config.battle.winChancesOnBattleInterface.position.x,
             GetCoordinateXY(Config.config.battle.winChancesOnBattleInterface.position.valign, Config.config.battle.winChancesOnBattleInterface.position.height) + Config.config.battle.winChancesOnBattleInterface.position.y,
             Config.config.battle.winChancesOnBattleInterface.position.width, Config.config.battle.winChancesOnBattleInterface.position.height);

@@ -79,16 +79,15 @@ class wot.battle.BattleMain
         if (clockFormat && clockFormat != "")
             this._clock = new Clock();
 
-        // Win chances on battle interface window
-        if (Config.config.battle.winChancesOnBattleInterface.enabled && Config.networkServicesSettings.chance && (!Config.config.battle.winChancesOnBattleInterface.disableStatic || (Config.networkServicesSettings.chanceLive && !Config.config.battle.winChancesOnBattleInterface.disableLive)))
-           BIChances._BIChances.__instance = new BIChances();
-
         // Holder
         this._holder = _root.createEmptyMovieClip("xvm_holder", HOLDER_DEPTH);
 
         // Zoom Indicator
         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
             this._zoomIndicator = new ZoomIndicator(_holder);
+
+        // Battle labels and win chances on battle interface window
+        BattleLabels.init();
 
         // Setup Visual Elements
         Elements.SetupElements();

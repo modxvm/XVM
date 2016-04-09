@@ -17,8 +17,8 @@ import wot.battle.BIChances;
             var BLCfg:Object = BattleLabels._BattleLabels.formats[InstanceIndex];
             
             BattleLabels._BattleLabels.__IntervalCount[InstanceIndex] = 0;
-            f = _root.createTextField("bl" + String(InstanceIndex), 
-                _root.getNextHighestDepth(),
+            f = _root.xvm_holder.createTextField("bl" + String(InstanceIndex), 
+                _root.xvm_holder.getNextHighestDepth(),
                 HVAlign(BLCfg.align, BLCfg.width, false) + Macros.FormatGlobalNumberValue(BLCfg.x),
                 HVAlign(BLCfg.valign, BLCfg.height, true) + Macros.FormatGlobalNumberValue(BLCfg.y),
                 Macros.FormatGlobalNumberValue(BLCfg.width), 
@@ -37,8 +37,9 @@ import wot.battle.BIChances;
             f.backgroundColor = Macros.FormatGlobalNumberValue(BLCfg.bgColor);
             f.autoSize = BLCfg.autoSize != null ? BLCfg.autoSize : "none";
             f.html = true;
+            var currentFieldDefaultStyleColor:Number = int(Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.color));
             f.styleSheet = Utils.createStyleSheet(createCSSExtended("class" + String(InstanceIndex),
-                Macros.FormatGlobalNumberValue(int(BLCfg.currentFieldDefaultStyle.color)) != null ? Macros.FormatGlobalNumberValue(int(BLCfg.currentFieldDefaultStyle.color)) : int("0xFFFFFF"),
+                !isNaN(currentFieldDefaultStyleColor) ? currentFieldDefaultStyleColor : 0xFFFFFF,
                 Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.name) != null ?  BLCfg.currentFieldDefaultStyle.name : "$FieldFont", 
                 Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.size) != null ? BLCfg.currentFieldDefaultStyle.size : 12,
                 BLCfg.currentFieldDefaultStyle.align != null ? BLCfg.currentFieldDefaultStyle.align : "left",
@@ -168,5 +169,6 @@ import wot.battle.BIChances;
                 return;
             }
             createTextFields();
+            Logger.add("Init");
         }
     }
