@@ -114,9 +114,9 @@ class com.xvm.Macros
     private var m_dict:Object = { }; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
     private var m_globals:Object = { };
     private var m_contacts:Object = { };
-    
+
     private var curent_xtdb: Number = 0;
-    
+
     private var isStaticMacro:Boolean;
 
     /**
@@ -628,8 +628,8 @@ class com.xvm.Macros
     private function _FormatGlobalNumberValue(value):Number
     {
         if (!isNaN(value))
-            return value;
-        return parseFloat(_Format(null, value, {}));
+            return Number(value);
+        return Number(_Format(null, value, {}));
     }
 
     private function _FormatGlobalBooleanValue(value):Boolean
@@ -960,10 +960,10 @@ class com.xvm.Macros
 
             // {{dmg-total}}
             pdata["dmg-total"] = function(o):Number { return o.global.total }
-            
+
             // {{c:dmg-total}}
-            pdata["c:dmg-total"] = function(o):String 
-            { 
+            pdata["c:dmg-total"] = function(o):String
+            {
                 var v_array_xtdb_len:Number = Config.v_array_xtdb.length;
                 if (this.curent_xtdb < (v_array_xtdb_len - 1))
                 {
@@ -974,12 +974,12 @@ class com.xvm.Macros
                             this.curent_xtdb = i;
                             return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
                         }
-                    }    
-                }    
+                    }
+                }
                 else
                 {
                     return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, (v_array_xtdb_len - 1), "#", false);
-                }                  
+                }
             }
 
             // {{dmg-avg}}
