@@ -3,58 +3,58 @@
  * Настройки маркеров для трупов без Alt.
  */
 {
-// Definitions
-// Шаблоны
-"def": {
-  // Floating damage values.
-  // Всплывающий урон.
-  "damageText": {
-    // false - disable / не отображать.
-    "visible": true,
-    // Axis field coordinates
-    // Положение поля по осям
-    "x": 0,
-    "y": -67,
-    // Opacity (dynamic transparency allowed, see macros.txt).
-    // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-    "alpha": 100,
-    // Color (dynamic colors allowed, see macros.txt).
-    // Цвет (допускается использование динамического цвета, см. macros.txt)
-    "color": null,
-    // Параметры шрифта.
-    "font": {
-      "name": "$FieldFont",           // Font name      / Название
-      "size": 18,                     // Font size      / Размер
-      "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
-      "bold": false,                  // True - bold    / Жирный.
-      "italic": false                 // True - italic  / Курсив.
-    },
-    // Параметры тени.
-    "shadow": {
-      "alpha": 100,                   // Opacity          / Прозрачность.
-      "color": "0x000000",            //                    Цвет.
-      "angle": 45,                    // Offset angle     / Угол смещения.
-      "distance": 0,                  // Offset distance  / Дистанция смещения.
-      "size": 6,                      //                    Размер.
-      "strength": 200                 // Intensity        / Интенсивность.
-    },
-    // Rising speed of displayed damage (float up speed).
-    // Время отображения отлетающего урона.
-    "speed": 2,
-    // Maximum distance of target for which damage rises.
-    // Расстояние, на которое отлетает урон.
-    "maxRange": 40,
-    // Text for normal damage (see description of macros in the macros.txt).
-    // Текст при обычном уроне (см. описание макросов в macros.txt).
-    "damageMessage": "{{dmg}}",
-    // Text for ammo rack explosion (see description of macros in the macros.txt).
-    // Текст при взрыве боеукладки (см. описание макросов в macros.txt).
-    "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
+  // Definitions
+  // Шаблоны
+  "def": {
+    // Floating damage values.
+    // Всплывающий урон.
+    "damageText": {
+      // false - disable / не отображать.
+      "visible": true,
+      // Axis field coordinates
+      // Положение поля по осям
+      "x": 0,
+      "y": -67,
+      // Opacity (dynamic transparency allowed, see macros.txt).
+      // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "alpha": 100,
+      // Color (dynamic colors allowed, see macros.txt).
+      // Цвет (допускается использование динамического цвета, см. macros.txt)
+      "color": null,
+      // Параметры шрифта.
+      "font": {
+        "name": "$FieldFont",           // Font name      / Название
+        "size": 18,                     // Font size      / Размер
+        "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
+        "bold": false,                  // True - bold    / Жирный.
+        "italic": false                 // True - italic  / Курсив.
+      },
+      // Параметры тени.
+      "shadow": {
+        "alpha": 100,                   // Opacity          / Прозрачность.
+        "color": "0x000000",            //                    Цвет.
+        "angle": 45,                    // Offset angle     / Угол смещения.
+        "distance": 0,                  // Offset distance  / Дистанция смещения.
+        "size": 6,                      //                    Размер.
+        "strength": 200                 // Intensity        / Интенсивность.
+      },
+      // Rising speed of displayed damage (float up speed).
+      // Время отображения отлетающего урона.
+      "speed": 2,
+      // Maximum distance of target for which damage rises.
+      // Расстояние, на которое отлетает урон.
+      "maxRange": 40,
+      // Text for normal damage (see description of macros in the macros.txt).
+      // Текст при обычном уроне (см. описание макросов в macros.txt).
+      "damageMessage": "{{dmg}}",
+      // Text for ammo rack explosion (see description of macros in the macros.txt).
+      // Текст при взрыве боеукладки (см. описание макросов в macros.txt).
+      "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
     }
   },
   // Настройки для союзников.
   "ally": {
-// Type of vehicle icon (HT/MT/LT/TD/Arty).
+    // Type of vehicle icon (HT/MT/LT/TD/Arty).
     // Иконка типа танка (ТТ/СТ/ЛТ/ПТ/Арта).
     "vehicleIcon": {
       // false - disable / не отображать

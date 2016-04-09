@@ -137,8 +137,8 @@
   // Миникарта.
   "minimap": ${"minimap.xc":"minimap"},
 
-  // Minimap.
-  // Миникарта.
+  // Minimap (alternative mode).
+  // Миникарта (альтернативный режим).
   "minimapAlt": ${"minimapAlt.xc":"minimap"},
 
   // Over-target markers.
@@ -175,5 +175,9 @@
 
   // Extra sounds settings
   // Настройки дополнительных звуков
-  "sounds": ${"sounds.xc":"sounds"}
+  "sounds": ${"sounds.xc":"sounds"},
+
+  // Battle interface text fields
+  // Текстовые поля боевого интерфейса
+  "battleLabelsList": ${"battleLabelsList.xc":"labels"}
 }

@@ -16,8 +16,8 @@
     // Spacing between carousel cells.
     // Отступ между ячейками карусели.
     "padding": {
-        "horizontal": 10,   // по горизонтали
-        "vertical": 2       // по вертикали
+      "horizontal": 10,   // по горизонтали
+      "vertical": 2       // по вертикали
     },
     // Background transparency (default - 60)
     // Прозрачность подложки (по умолчанию - 60)
@@ -55,8 +55,8 @@
     // Spacing between filters cells.
     // Отступ между ячейками фильтров.
     "filtersPadding": {
-        "horizontal": 11,   // по горизонтали
-        "vertical": 13      // по вертикали
+      "horizontal": 11,   // по горизонтали
+      "vertical": 13      // по вертикали
     },
     // Standard cell elements.
     // Стандартные элементы ячеек.

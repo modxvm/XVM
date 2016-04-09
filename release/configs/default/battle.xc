@@ -22,6 +22,9 @@
     // true - enable {{marksOnGun}} macro in players panels and minimap. WARNING: performance expensive
     // true - включить макрос {{marksOnGun}} в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
     "allowMarksOnGunInPanelsAndMinimap": false,
+    // true - enable custom labels on battle interface window
+    // true - показывать пользовательские текстовые поля в окне боевого интерфейса
+    "allowLabelsOnBattleInterface": true,
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
     "clockFormat": "H:N", // TODO: "H:i"
@@ -42,26 +45,65 @@
     "minimapDeadSwitch": true,
     // Шансы на победу в окне боевого интерфейса
     // Win chances on battle interface window
-    "WinChancesOnBattleInterface": {
-    // true - displaying chances to win on battle interface window (only while service is enabled (chances to win at battle/at battle (live))  on modxvm.com).
-    // true - показывать шансы на победу в окне боевого интерфейса (только при включенном сервисе (шанс на победу в бою или шанс на победу в бою/в бою (динамический)) на modxvm.com).
+    "winChancesOnBattleInterface": {
+      // true - displaying chances to win on battle interface window (only while service is enabled (chances to win at battle/at battle (live))  on modxvm.com).
+      // true - показывать шансы на победу в окне боевого интерфейса (только при включенном сервисе (шанс на победу в бою или шанс на победу в бою/в бою (динамический)) на modxvm.com).
       "enabled": true,
       // true - disable displaying of static chances to win in battle interface window (affects only while "enabled" == true and displaying of chances to win at battle is enabled on modxvm.com).
       // true - отключить отображение статического шанса на победу в окне боевого интерфейса (влияет только если "enabled" == true и включено отображение шанса на победу в бою на modxvm.com).
-      "DisableStatic": false,    
+      "disableStatic": false,    
       // true - disable displaying of dynamic chances to win in battle interface window (affects only while "enabled" == true and displaying of chances to win at battle and chances to win at battle (live) is enabled on modxvm.com).
       // true - отключить отображение динамического шанса на победу в окне боевого интерфейса (влияет только если "enabled" == true и включено отображение шанса на победу в бою и шанса на победу в бою (динамического) на modxvm.com).
-      "DisableLive": false,
-      // Axis field coordinates (only area of Debug Panel (near FPS)).
-      // Положение поля по осям (только область панели отладки (возле FPS)).
-      "x": 161,   
-      "y": -4.05,
-      // field width
-      // ширина поля
-      "width": 100,
-      // field height
-      // высота поля
-      "height": 39.6
+      "disableLive": false,
+      // Axis field coordinates.
+      // Положение поля по осям.
+      "position": {
+        // horizontal ("halign") and vertical ("valign") align by screen resolution.
+        // allows only "left", "right", "center" values for horizontal alignment and "top", "bottom", "middle" for vertical.
+        // горизонтальное ("halign") и вертикальное ("valign") выравнивание по разрешению экрана.
+        // допускаются только значения "left", "right", "center" для горизонтального выравнивания и "top", "bottom", "middle" для вертикального. 
+        "halign": "left",
+        "valign": "top",
+        // coordinate modifiers for x,y axes 
+        // for halign = "left" use positive x-axis modifier
+        // for halign = "right" use negative x-axis modifier
+        // for valign = "top" use positive y-axis modifier
+        // for valign = "bottom" use negative y-axis modifier
+        // модификаторы координат для осей x,y
+        // для halign = "left" используйте положительные значения модификатора по x-оси
+        // для halign = "right" используйте отрицательные значения модификатора по x-оси
+        // для valign = "top" используйте положительные значения модификатора по y-оси
+        // для valign = "bottom" используйте отрицательные значения модификатора по y-оси
+        "x": 222,   
+        "y": 2,
+        // field width (for static%/live% 75 is default)
+        // ширина поля (для static%/live% 75 по умолчанию)
+        "width": 75,
+        // field height (for static%/live% 22 is default)
+        // высота поля (для static%/live% 22 по умолчанию)
+        "height": 22
+      },
+      // font settings
+      // настройки шрифта
+      "font": {
+        "color": "0xF4EFE8", 
+        "name": "$FieldFont", 
+        "size": 15, 
+        "align": "left", 
+        "bold": false, 
+        "italic": false
+      },
+      // shadow settings
+      // настройки тени
+      "shadow": {
+        "distance": 1,
+        "angle": 90,
+        "color": "0x000000",
+        "alpha": 100, 
+        "blurX": 5,
+        "blurY": 5,
+        "strength": 1.5
+      } 
     }
   },
   // Frag counter panel at top side of battle windows interface.

@@ -72,6 +72,7 @@ Legend:
 │ D │ {{dead}}           │   │   │   │   │   │ X │   │ tank's death marker
 │ D │ {{n}}              │   │   │   │   │   │ X │   │ total number of hits
 │ D │ {{dmg-total}}      │   │   │   │   │   │ X │   │ total sum of hits
+│ D │ {{c:dmg-total}}    │   │   │   │   │   │ X │   │ color depending on total sum of hits
 │ D │ {{dmg-avg}}        │   │   │   │   │   │ X │   │ average damage during the battle
 │ D │ {{n-player}}       │   │   │   │   │   │ X │   │ number of hits for each player
 │ D │ {{dmg-player}}     │   │   │   │   │   │ X │   │ sum of hits for each player

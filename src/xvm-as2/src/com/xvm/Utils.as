@@ -300,6 +300,27 @@ class com.xvm.Utils
     }
 
     /**
+     * Create Extended CSS
+     */
+    public static function createCSSExtended(className:String, color:Number, fontName:String,
+        fontSize:Number, align:String, bold:Boolean, italic:Boolean, display:String, leading:Number, 
+        marginLeft:Number, marginRight:Number):String
+    {
+            return "." + className + " {" +
+                "color:#" + Strings.padLeft(color.toString(16), 6, '0') + ";" +
+                "font-family:\"" + fontName + "\";" +
+                "font-size:" + fontSize + ";" +
+                "text-align:" + align + ";" +
+                "font-weight:" + (bold ? "bold" : "normal") + ";" +
+                "font-style:" + (italic ? "italic" : "normal") + ";" +
+                "display:" + (display ? "display" : "inline") + ";" +
+                "leading:" + leading + ";" +
+                "margin-left:" + marginLeft + ";" +
+                "margin-right:" + marginRight + ";" +
+                "}";
+    }
+
+    /**
      * Create CSS based on config
      */
     public static function createCSSFromConfig(config_font:Object, color:Number, className:String):String
@@ -336,6 +357,34 @@ class com.xvm.Utils
             source.blur,
             source.strength);
     }
+
+    /**
+     *   (Get relative to screen resolution x or y coordinates for using when applying horizontal or vertical align to object
+     */
+     public static function HVAlign(align, WidthOrHeight: Number, isValign: Boolean) 
+        {
+        //'align' allows only 'left', 'right', 'center' values for horizontal alignment and 'top', 'bottom', 'middle' or "center" for vertical
+            switch (align) {  
+                case 'left':  
+                    return 0;  
+                case 'right' :  
+                    return Stage.width - WidthOrHeight;    
+                case 'center': 
+                    if (!isValign){ 
+                      return (Stage.width/2) - (WidthOrHeight/2);  
+                    }
+                    else {
+                      return (Stage.height/2) - (WidthOrHeight/2);
+                    }
+                case 'top':  
+                    return 0;  
+                case 'bottom':  
+                    return Stage.height - WidthOrHeight;  
+                case 'middle':  
+                    return (Stage.height/2) - (WidthOrHeight/2);  
+            }
+
+        }
 
     ////////////////////
 

@@ -18,6 +18,12 @@ def calculateXTDB(vehId, dmg_per_battle):
         return 0
     return next((i for i,v in enumerate(data['x']) if v > dmg_per_battle), 100)
 
+def vehArrayXTDB(vehId):
+    data = _getData(vehId)
+    if data is None:
+        return []
+    return data['x']
+
 
 # PRIVATE
 
