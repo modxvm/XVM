@@ -97,7 +97,8 @@ import wot.battle.BIChances;
             ];
                 
                 BattleLabels._BattleLabels.__isCreated = true;
-                var BattleLabelsHTML: String = Macros.FormatGlobalStringValue(BattleLabels._BattleLabels.formats[InstanceIndex].formats);
+                //var BattleLabelsHTML: String = Macros.FormatGlobalStringValue(BattleLabels._BattleLabels.formats[InstanceIndex].formats);
+                var BattleLabelsHTML: String = Macros.Format(Config.myPlayerName, BattleLabels._BattleLabels.formats[InstanceIndex].formats);
                 f.htmlText = "<p class='class" + InstanceIndex + "'>" + BattleLabelsHTML + "</p>";
                 
                 //
