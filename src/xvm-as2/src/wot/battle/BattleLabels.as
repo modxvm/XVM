@@ -169,6 +169,5 @@ import wot.battle.BIChances;
                 return;
             }
             createTextFields();
-            Logger.add("Init");
         }
     }
