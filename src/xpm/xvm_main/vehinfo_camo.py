@@ -144,6 +144,7 @@ _tanks_camo = {
     'germany:G113_SP_I_C':                    [ 16.21 , 16.21 , 3.86 , 0.923 ],
     'germany:G103_RU_251':                    [ 17.39 , 17.39 , 4.14 , 1     ],
     #'germany:G120_M41_90':                    [  ],
+    #'germany-G120_M41_90_GrandFinal':         [  ],
     # Medium
     'germany:G34_S35_captured':               [ 14.25 , 10.72 , 4.13 , 1     ],
     'germany:G100_Gtraktor_Krupp':            [ 14.71 , 11.06 , 3.82 , 1     ],
