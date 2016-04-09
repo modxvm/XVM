@@ -333,7 +333,7 @@ class Xvm(object):
                     arena.onVehicleKilled += self._onVehicleKilled
                     arena.onAvatarReady += self._onAvatarReady
                     arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
-            self.init_xmqp()
+            self.xmqp_init()
         except Exception as ex:
             err(traceback.format_exc())
 
@@ -341,7 +341,7 @@ class Xvm(object):
     def onLeaveWorld(self):
         trace('onLeaveWorld')
         try:
-            xmqp.stop()
+            self.xmqp_stop()
 
             player = BigWorld.player()
             if player is not None and hasattr(player, 'arena'):
@@ -689,19 +689,23 @@ class Xvm(object):
             self.hangarInit()
 
 
-    def init_xmqp(self):
-        if not config.networkServicesSettings.servicesActive:
-            return
+    def xmqp_init(self):
+        if config.networkServicesSettings.servicesActive:
+            if isReplay() or XMQP_DEVELOPMENT:
+                token = config.token.token
+                if token is not None and token != '':
+                    players = []
+                    player = BigWorld.player()
+                    player_team = player.team if hasattr(player, 'team') else 0
+                    for (vehId, vData) in player.arena.vehicles.iteritems():
+                        # ally team only
+                        if vData['team'] == player_team:
+                            players.append(vData['accountDBID'])
+                    xmqp.start(players)
 
-        players = []
-        player = BigWorld.player()
-        player_team = player.team if hasattr(player, 'team') else 0
-        for (vehId, vData) in player.arena.vehicles.iteritems():
-            # ally team only
-            if vData['team'] == player_team:
-                players.append(vData['accountDBID'])
-        log(players)
-        #xmqp.start(xvmapi.getXmqpExchangeName(players))
+
+    def xmqp_stop(self):
+        xmqp.stop()
 
 
 g_xvm = Xvm()

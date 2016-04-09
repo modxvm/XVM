@@ -5,32 +5,45 @@ __all__ = ['start', 'stop']
 # PUBLIC
 
 import os
+import threading
 
 XMQP_ENABLED = os.environ.get('XMQP_ENABLED') == '1'
+XMQP_DEVELOPMENT = os.environ.get('XMQP_DEVELOPMENT') == '1'
 
-def start():
+_xmqp_thread = None
+
+def start(players):
     if XMQP_ENABLED:
-        _g_xmqp.start()
+        global _xmqp_thread
+        _xmqp_thread = threading.Thread(target=_g_xmqp.start, name='xmqp', args=([players]))
+        _xmqp_thread.setDaemon(True)
+        _xmqp_thread.start()
 
 def stop():
     if XMQP_ENABLED:
+        global _xmqp_thread
         _g_xmqp.stop()
+        #_g_xmqp.close_connection()
+        _xmqp_thread.join()
 
 
 # PRIVATE
 
 import pika
+import simplejson
+import uuid
 
 from gui.shared import g_eventBus, events
 
 from xfw import *
 
+import config
 from constants import *
 from logger import *
 
 
 class _XMQP(object):
-    """This is an example consumer that will handle unexpected interactions
+    """This is an xmqp consumer that will handle unexpected interactions
     with RabbitMQ such as channel and connection closures.
 
     If RabbitMQ closes the connection, it will reopen it. You should
@@ -42,13 +55,11 @@ class _XMQP(object):
     commands that were issued and that should surface in the output as well.
 
     """
-    EXCHANGE_TYPE = 'fanout'
+    LOBBY_QUEUE = 'com.xvm.lobby'
 
-    def __init__(self, amqp_url):
+    def __init__(self):
         """Create a new instance of the consumer class, passing in the AMQP
         URL used to connect to RabbitMQ.
-
-        :param str amqp_url: The AMQP url to connect with
 
         """
         self._connection = None
@@ -56,24 +67,29 @@ class _XMQP(object):
         self._active = False
         self._closing = False
         self._consumer_tag = None
-        self._url = amqp_url
         self._exchange_name = None
         self._queue_name = None
+        self._correlation_id = None
 
-    def start(self, exchange_name):
+    def is_active(self):
+        return self._active
+
+    def start(self, players):
         """Run the xmqp consumer by connecting to RabbitMQ and then
         starting the IOLoop to block and allow the SelectConnection to operate.
 
         :param str exchange_name: The name of exchange channel
 
         """
+
         if self.is_active():
             self.stop()
+
         debug('[XMQP] Running')
-        self._exchange_name = exchange_name
+        self._players = players
         self._connection = self.connect()
-        self._connection.ioloop.start()
         self._active = True
+        self._connection.ioloop.start()
 
     def stop(self):
         """Cleanly shutdown the connection to RabbitMQ by stopping the consumer
@@ -97,6 +113,8 @@ class _XMQP(object):
     def close_connection(self):
         """This method closes the connection to RabbitMQ."""
         debug('[XMQP] Closing connection')
+        self._active = False
+        self._closing = True
         self._connection.close()
 
     # INTERNAL
@@ -109,9 +127,11 @@ class _XMQP(object):
         :rtype: pika.SelectConnection
 
         """
-        return pika.SelectConnection(pika.URLParameters(self._url),
-                                     self.on_connection_open,
-                                     stop_ioloop_on_close=False)
+        credentials = pika.PlainCredentials('xvm', 'xvm')
+        return pika.SelectConnection(
+            pika.ConnectionParameters(host=XVM.XMQP_SERVER, virtual_host='xvm', credentials=credentials),
+            on_open_callback=self.on_connection_open,
+            stop_ioloop_on_close=False)
 
     def on_connection_open(self, unused_connection):
         """This method is called by pika once the connection to RabbitMQ has
@@ -144,12 +164,14 @@ class _XMQP(object):
 
         """
         self._channel = None
-        if self._closing:
-            self._connection.ioloop.stop()
-        else:
-            debug('[XMQP] Connection closed, reopening in 5 seconds: (%s) %s',
-                  reply_code, reply_text)
+        if not self._closing:
+            debug('[XMQP] Connection closed, reopening in 5 seconds: (%s) %s' % (reply_code, reply_text))
             self._connection.add_timeout(5, self.reconnect)
+        else:
+            try:
+                self._connection.ioloop.stop()
+            except Exception as ex:
+                pass
 
     def reconnect(self):
         """Will be invoked by the IOLoop timer if the connection is
@@ -188,16 +210,7 @@ class _XMQP(object):
         debug('[XMQP] Channel opened')
         self._channel = channel
         self.add_on_channel_close_callback()
-        #self.setup_exchange()
         self.setup_queue()
-
-    def add_on_channel_close_callback(self):
-        """This method tells pika to call the on_channel_closed method if
-        RabbitMQ unexpectedly closes the channel.
-
-        """
-        debug('[XMQP] Adding channel close callback')
-        self._channel.add_on_close_callback(self.on_channel_closed)
 
     def on_channel_closed(self, channel, reply_code, reply_text):
         """Invoked by pika when RabbitMQ unexpectedly closes the channel.
@@ -211,29 +224,8 @@ class _XMQP(object):
         :param str reply_text: The text reason the channel was closed
 
         """
-        debug('[XMQP] Channel %i was closed: (%s) %s', channel, reply_code, reply_text)
+        debug('[XMQP] Channel %i was closed: (%s) %s' % (channel, reply_code, reply_text))
         self._connection.close()
-
-    def setup_exchange(self):
-        """Setup the exchange on RabbitMQ by invoking the Exchange.Declare RPC
-        command. When it is complete, the on_exchange_declareok method will
-        be invoked by pika.
-
-        """
-        debug('[XMQP] Declaring exchange %s', self._exchange_name)
-        self._channel.exchange_declare(self.on_exchange_declareok,
-                                       self._exchange_name,
-                                       self.EXCHANGE_TYPE)
-
-    def on_exchange_declareok(self, unused_frame):
-        """Invoked by pika when RabbitMQ has finished the Exchange.Declare RPC
-        command.
-
-        :param pika.Frame.Method unused_frame: Exchange.DeclareOk response frame
-
-        """
-        debug('[XMQP] Exchange declared')
-        self.setup_queue()
 
     def setup_queue(self):
         """Setup the queue on RabbitMQ by invoking the Queue.Declare RPC
@@ -255,19 +247,9 @@ class _XMQP(object):
 
         """
         self._queue_name = method_frame.method.queue
-        debug('[XMQP] Binding %s to %s', self._exchange_name, self._queue_name)
-        self._channel.queue_bind(self.on_bindok, self._queue_name, self._exchange_name)
-
-    def on_bindok(self, unused_frame):
-        """Invoked by pika when the Queue.Bind method has completed. At this
-        point we will start consuming messages by calling start_consuming
-        which will invoke the needed RPC commands to start the process.
-
-        :param pika.frame.Method unused_frame: The Queue.BindOk response frame
-
-        """
-        debug('[XMQP] Queue bound')
+        debug('[XMQP] queue: %s' % (self._queue_name))
         self.start_consuming()
+        self.get_exchange_name()
 
     def start_consuming(self):
         """This method sets up the consumer by first calling
@@ -282,6 +264,73 @@ class _XMQP(object):
         debug('[XMQP] Issuing consumer related RPC commands')
         self.add_on_cancel_callback()
         self._consumer_tag = self._channel.basic_consume(self.on_message, self._queue_name)
+
+    def on_message(self, unused_channel, basic_deliver, properties, body):
+        """Invoked by pika when a message is delivered from RabbitMQ. The
+        channel is passed for your convenience. The basic_deliver object that
+        is passed in carries the exchange, delivery tag and a redelivered flag
+        for the message. The properties passed in is an instance of
+        BasicProperties with the message properties and the body is the
+        message that was sent.
+
+        :param pika.channel.Channel unused_channel: The channel object
+        :param pika.Spec.Basic.Deliver: basic_deliver method
+        :param pika.Spec.BasicProperties: properties
+        :param str|unicode body: The message body
+
+        """
+        debug('[XMQP] Received message # %s from %s: %s' % \
+            (basic_deliver.delivery_tag, properties.app_id, body))
+
+        if self._correlation_id == properties.correlation_id:
+            self._exchange_name = body
+        else:
+            g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_MESSAGE, {'body':body}))
+
+        self.acknowledge_message(basic_deliver.delivery_tag)
+
+        if self._correlation_id == properties.correlation_id:
+            self.bind_channel()
+
+    def get_exchange_name(self):
+        debug('[XMQP] Getting exchange name')
+        self._correlation_id = str(uuid.uuid4())
+        message = simplejson.dumps({
+            'type': XVM.XMQP_EXCHANGE_NAME_QUERY,
+            'token': config.token.token,
+            'players': self._players})
+        self._channel.basic_publish(
+            exchange='',
+            routing_key=self.LOBBY_QUEUE,
+            properties=pika.BasicProperties(
+                reply_to=self._queue_name,
+                correlation_id=self._correlation_id,
+            ),
+            body=message)
+
+    def bind_channel(self):
+        debug('[XMQP] Binding %s to %s' % (self._exchange_name, self._queue_name))
+        self._channel.queue_bind(self.on_bindok, self._queue_name, self._exchange_name)
+
+    def on_bindok(self, unused_frame):
+        """Invoked by pika when the Queue.Bind method has completed. At this
+        point we will start consuming messages by calling start_consuming
+        which will invoke the needed RPC commands to start the process.
+
+        :param pika.frame.Method unused_frame: The Queue.BindOk response frame
+
+        """
+        debug('[XMQP] Queue bound')
+
+    # service methods
+
+    def add_on_channel_close_callback(self):
+        """This method tells pika to call the on_channel_closed method if
+        RabbitMQ unexpectedly closes the channel.
+
+        """
+        debug('[XMQP] Adding channel close callback')
+        self._channel.add_on_close_callback(self.on_channel_closed)
 
     def add_on_cancel_callback(self):
         """Add a callback that will be invoked if RabbitMQ cancels the consumer
@@ -299,31 +348,10 @@ class _XMQP(object):
         :param pika.frame.Method method_frame: The Basic.Cancel frame
 
         """
-        debug('[XMQP] Consumer was cancelled remotely, shutting down: %r',
-                    method_frame)
+        debug('[XMQP] Consumer was cancelled remotely, shutting down: %r' % (method_frame))
         if self._channel:
             self._channel.close()
 
-    def on_message(self, unused_channel, basic_deliver, properties, body):
-        """Invoked by pika when a message is delivered from RabbitMQ. The
-        channel is passed for your convenience. The basic_deliver object that
-        is passed in carries the exchange, delivery tag and a redelivered flag
-        for the message. The properties passed in is an instance of
-        BasicProperties with the message properties and the body is the
-        message that was sent.
-
-        :param pika.channel.Channel unused_channel: The channel object
-        :param pika.Spec.Basic.Deliver: basic_deliver method
-        :param pika.Spec.BasicProperties: properties
-        :param str|unicode body: The message body
-
-        """
-        debug('[XMQP] Received message # %s from %s: %s',
-              basic_deliver.delivery_tag, properties.app_id, body)
-
-        g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_MESSAGE, {'body':body}))
-        
-        self.acknowledge_message(basic_deliver.delivery_tag)
 
     def acknowledge_message(self, delivery_tag):
         """Acknowledge the message delivery from RabbitMQ by sending a
@@ -332,7 +360,7 @@ class _XMQP(object):
         :param int delivery_tag: The delivery tag from the Basic.Deliver frame
 
         """
-        debug('[XMQP] Acknowledging message %s', delivery_tag)
+        debug('[XMQP] Acknowledging message %s' % (delivery_tag))
         self._channel.basic_ack(delivery_tag)
 
     def stop_consuming(self):
@@ -362,10 +390,8 @@ class _XMQP(object):
 
         """
         debug('[XMQP] Closing the channel')
-        self._channel.close()
-
-    def is_active(self):
-        return self._active
+        if self._channel is not None:
+            self._channel.close()
 
 
-_g_xmqp = _XMQP(XVM.XMQP_SERVER)
+_g_xmqp = _XMQP()

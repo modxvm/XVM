@@ -11,8 +11,8 @@ class XVM(object):
     FINGERPRINTS = [ # fingerprints for SSL certificates
         #'029ef75501dbd41b386990d7b6fb4e30b59540d1'
         ]
-    XMQP_SERVER = 'amqp://xvm:xvm@xmqp.modxvm.com:5672/'
-    XMQP_CONTROLLER = 'http://xmqp.modxvm.com:4000/{REQ}'
+    XMQP_SERVER = 'xmqp.modxvm.com'
+    XMQP_EXCHANGE_NAME_QUERY = 'query.battle.channel'
     TIMEOUT = 5000
 
     CONFIG_DIR = 'res_mods/configs/xvm'

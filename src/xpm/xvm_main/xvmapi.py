@@ -1,5 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
+from constants import *
+
 # PUBLIC
 
 def getToken():
@@ -34,10 +36,6 @@ def getOnlineUsersCount():
     (data, errStr) = _exec('getOnlineUsersCount/{id}', showLog=False)
     return data
 
-def getXmqpExchangeName(players):
-    (data, errStr) = _exec_xmqp('battle-channel?token={token}&{players[]}', params={'players':players})
-    return data
-
 
 # PRIVATE
 
@@ -47,7 +45,6 @@ from random import randint
 from xfw import *
 import simplejson
 
-from constants import *
 from logger import *
 from loadurl import loadUrl
 import config
