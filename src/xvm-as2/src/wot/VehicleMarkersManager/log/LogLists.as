@@ -1,7 +1,6 @@
 import com.xvm.*;
 import wot.VehicleMarkersManager.*;
 import wot.VehicleMarkersManager.log.*;
-import wot.battle.BattleLabels;
 
 /**
  * @author ilitvinov87@gmail.com
@@ -22,9 +21,6 @@ class wot.VehicleMarkersManager.log.LogLists
         // Delayed initialization
         var me = this;
         _global.setTimeout(function() { me._initialize(); }, 1);
-        // Battle labels and win chances on battle interface window
-        BattleLabels.init();
-
     }
 
     private function _initialize()

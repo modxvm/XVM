@@ -85,19 +85,24 @@ class wot.battle.BattleMain
         // Zoom Indicator
         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
             this._zoomIndicator = new ZoomIndicator(_holder);
-
-        // Battle labels and win chances on battle interface window
-        BattleLabels.init();
-
+        
         // Setup Visual Elements
         Elements.SetupElements();
 
         FragCorrelation.modify();
 
         ExpertPanel.modify();
+        
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, battleLabelsInit);
+
     }
 
-
+    private function battleLabelsInit(){
+        // Battle labels and win chances on battle interface window
+        // Logger.add("Initialize start")
+        BattleLabels.init();
+    }
+    
     // Python calls (context: this => _root)
 
     public function xvm_onUpdateConfig():Void

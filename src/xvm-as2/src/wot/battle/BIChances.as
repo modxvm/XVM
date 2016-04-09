@@ -45,11 +45,13 @@ class wot.battle.BIChances
             Config.config.battle.winChancesOnBattleInterface.shadow.angle, int(Config.config.battle.winChancesOnBattleInterface.shadow.color), 
             Config.config.battle.winChancesOnBattleInterface.shadow.alpha, Config.config.battle.winChancesOnBattleInterface.shadow.blurX, 
             Config.config.battle.winChancesOnBattleInterface.shadow.blurY, Config.config.battle.winChancesOnBattleInterface.shadow.strength)];
-        _BIChances.__intervalID = setInterval(function()
-        {
-            BIChances._BIChances.__Count++;
-            BIChances.UpdateBIChances();
-        }, 2000);
+       // _BIChances.__intervalID = setInterval(function()
+       // {
+         //   BIChances._BIChances.__Count++;
+            //BIChances.UpdateBIChances();
+            var _BIChancesText: String = Chance.GetChanceText(true, false,  BIChances._BIChances.__isShowLiveChances);
+            chances.htmlText = Utils.fixImgTag(formatChanceText(_BIChancesText, BIChances._BIChances.__isShowChances, BIChances._BIChances.__isShowLiveChances));
+       // }, 2000);
     }
     
     public static function UpdateBIChances()
@@ -59,10 +61,10 @@ class wot.battle.BIChances
             return;
         }
         var BIChancesText: String = Chance.GetChanceText(true, false,  BIChances._BIChances.__isShowLiveChances);
-        if (((BIChancesText != "") && (BIChances._BIChances.__isClearedInterval != "true")) || (BIChances._BIChances.__Count > 5)) {
-            clearInterval(_BIChances.__intervalID);
-            BIChances._BIChances.__isClearedInterval = "true";
-        }
+      //  if (((BIChancesText != "") && (BIChances._BIChances.__isClearedInterval != "true")) || (BIChances._BIChances.__Count > 5)) {
+      //      clearInterval(_BIChances.__intervalID);
+       //     BIChances._BIChances.__isClearedInterval = "true";
+      //  }
         if BIChancesText == ""
         {
             BIChances._BIChances.__instance.chances.htmlText = Utils.fixImgTag(BIChances._BIChances.__formatStaticTextFirst + '' + BIChances._BIChances.__formatStaticTextSecond);
