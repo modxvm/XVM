@@ -146,6 +146,7 @@
     "germany-G119_Panzer58":                {"name": null, "short": null},
     "germany-G119_Pz58_Mutz":               {"name": null, "short": null},
     "germany-G120_M41_90":                  {"name": null, "short": null},
+    "germany-G120_M41_90_GrandFinal":       {"name": null, "short": null},
     "germany-G121_Grille_15_L63":           {"name": null, "short": null},
     "germany-G13_VK3001H":                  {"name": null, "short": null},
     "germany-G15_VK3601H":                  {"name": null, "short": null},
