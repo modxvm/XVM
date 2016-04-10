@@ -98,8 +98,8 @@ class wot.battle.BattleMain
     }
 
     private function battleLabelsInit(){
-        // Battle labels and win chances on battle interface window
-        // Logger.add("Initialize start")
+        // Battle labels on battle interface window and delayed macros registration
+        Macros.RegisterGlobalMacrosDataDelayed("ON_STAT_LOADED");
         BattleLabels.init();
     }
     

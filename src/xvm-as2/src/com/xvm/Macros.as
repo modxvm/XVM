@@ -66,6 +66,11 @@ class com.xvm.Macros
         _instance._RegisterGlobalMacrosData();
     }
 
+    public static function RegisterGlobalMacrosDataDelayed(onEventName: String)
+    {
+        _instance._RegisterGlobalMacrosDataDelayed(onEventName);
+    }
+
     public static function RegisterZoomIndicatorData(zoom:Number)
     {
         _instance._RegisterZoomIndicatorData(zoom);
@@ -733,6 +738,17 @@ class com.xvm.Macros
         m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
     }
 
+    private function _RegisterGlobalMacrosDataDelayed(eventName: String)
+    {
+        switch (eventName)
+        {
+            case "ON_STAT_LOADED":
+                m_globals["winstatic"] = Macros.formatWinChancesText(true, false);
+                m_globals["winlive"] = function(o:Object) { return Macros.formatWinChancesText(false, true); }
+                break;
+        }
+    }
+
     private function _RegisterZoomIndicatorData(zoom:Number)
     {
         // {{zoom}}
@@ -1341,5 +1357,27 @@ class com.xvm.Macros
         if (!RATING_MATRIX.hasOwnProperty(name))
             name = (scale != null ? scale : "basic") + "_wgr";
         return name;
+    }
+
+    private static function formatWinChancesText(isShowChance, isShowLiveChance: Boolean): String
+    {
+        if (!Config.networkServicesSettings.chance)
+            return "disabled at modxvm.com";
+        if (!Config.networkServicesSettings.chanceLive && isShowLiveChance) 
+        {
+            return "disabled at modxvm.com";
+        }
+        var ChancesText: String = Chance.GetChanceText(true, false, true);
+        var temp: Array = ChancesText.split('|', 2);
+        var tempA: Array = temp[0].split(':', 2);
+        if (isShowChance)
+        {
+            return tempA[1];
+        }   
+        else if (isShowLiveChance)
+        {
+            var tempB: Array = temp[1].split(':', 2);
+            return tempB[1];
+        }
     }
 }
