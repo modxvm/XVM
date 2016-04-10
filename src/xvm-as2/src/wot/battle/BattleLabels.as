@@ -4,8 +4,6 @@
  */
 
 import com.xvm.*;
-import TextField.StyleSheet;
-import wot.battle.BIChances;
 
     class wot.battle.BattleLabels {
 
@@ -13,14 +11,11 @@ import wot.battle.BIChances;
         public var f: TextField;
      
         public function BattleLabels(InstanceIndex: Number) 
+        // assign properties to class instances
         {
             var BLCfg:Object = BattleLabels._BattleLabels.formats[InstanceIndex];
             
-            //
-            // for test purposes, please do not delete at this time /////////////////////////////////////////////////////////////////////////BattleLabels._BattleLabels.__IntervalCount[InstanceIndex] = 0;
-            //
-
-            // instance create TextField
+            // instance create TextField on holder "xvm_holder" at depth level: -16368 
             f = _root.xvm_holder.createTextField("bl" + InstanceIndex, 
                 _root.xvm_holder.getNextHighestDepth(),
                 Utils.HVAlign(BLCfg.align, BLCfg.width, false) + Macros.FormatGlobalNumberValue(BLCfg.x),
@@ -97,94 +92,57 @@ import wot.battle.BIChances;
             ];
                 
                 BattleLabels._BattleLabels.__isCreated = true;
-                //var BattleLabelsHTML: String = Macros.FormatGlobalStringValue(BattleLabels._BattleLabels.formats[InstanceIndex].formats);
-                var BattleLabelsHTML: String = Macros.Format(Config.myPlayerName, BattleLabels._BattleLabels.formats[InstanceIndex].formats);
+
+                // apply html text to text field
+                var BattleLabelsHTML: String = Macros.Format(Config.myPlayerName, BattleLabels._BattleLabels.formats[InstanceIndex].formats, {});
                 f.htmlText = "<p class='class" + InstanceIndex + "'>" + BattleLabelsHTML + "</p>";
-                
-                //
-                // for test purposes, please do not delete at this time /////////////////////////////////////////////////////////////////////////BattleLabels._BattleLabels.__intervalID[InstanceIndex] = setInterval(function() {// BattleLabels._BattleLabels.__IntervalCount++;//BattleLabels.UpdateBattleLabels(InstanceIndex);// }, 2000);
-                //
-                
         }
     
-        public static function UpdateBattleLabels(InstanceIndex: Number) 
+        public static function UpdateBattleLabels(eventName: String) 
+        // updates text fields on matching event
         {
             if (BattleLabels._BattleLabels.__isCreated == undefined) 
-            {
                 return;
-            }
-
-            //
-            // for test purposes, please do not delete at this time ///////////////////////////////////////////////////////////////////////
-            //
-            //var BattleLabelsHTML: String = Macros.FormatGlobalStringValue(BattleLabels._BattleLabels.formats[InstanceIndex].formats);
-            //if (((BattleLabelsHTML != "") && (BattleLabels._BattleLabels.__isClearedInterval[InstanceIndex] != "true")) || (BattleLabels._BattleLabels.__IntervalCount > 5)) 
-            //{
-            //    clearInterval(BattleLabels._BattleLabels.__intervalID[InstanceIndex]);
-            //    BattleLabels._BattleLabels.__isClearedInterval[InstanceIndex] = "true";
-            //    Logger.add("Cleared interval " + InstanceIndex);
-            //}
-            //if BattleLabelsHTML == "" 
-            //{
-            //    BattleLabels._BattleLabels.__instance[InstanceIndex][0].f.htmlText = '';
-            //}
-            //else 
-            //{
-            //    BattleLabels._BattleLabels.__instance[InstanceIndex][0].f.htmlText = "<p class='class" + InstanceIndex + "'>" + BattleLabelsHTML + "</p>";
-            //    Logger.add("HTML " + BattleLabels._BattleLabels.__instance[InstanceIndex][0].f.htmlText);
-            //}
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            for (var i:Number = 0; i < BattleLabels._BattleLabels.UpdateableFieldsCount; ++i) 
+                {
+                    if (BattleLabels._BattleLabels.formats[BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[i]].updateEvent == eventName)
+                    {
+                        BattleLabels._BattleLabels.__instance[BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[i]].f.htmlText  = "<p class='class" + BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[i] + "'>" + Macros.Format(Config.myPlayerName, BattleLabels._BattleLabels.formats[BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[i]].formats, {}) + "</p>";
+                    }
+                }
         }
 
-        public static function createTextFields() 
+        public static function createTextFields()
+        // create instances of all enabled text fields, logs instance indices of updateable text fields 
         { 
             BattleLabels._BattleLabels.formats = new Array([]);
-
-            //
-            // for test purposes, please do not delete at this time //////////////////////////////////////////////////////////////////////////
-            //
-            //BattleLabels._BattleLabels.__isClearedInterval = new Array([]);
-            //BattleLabels._BattleLabels.__intervalID = new Array([]);
-            //BattleLabels._BattleLabels.__IntervalCount = new Array([]);
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //
-
             var formats:Array = Config.config.battleLabelsList.formats;
             BattleLabels._BattleLabels.formats = formats;
             if (formats) 
             {
                 var l:Number = formats.length;
-                BattleLabels._BattleLabels.FieldsCount = l;
-                BattleLabels._BattleLabels.EnabledFieldsCount = 0;
                 BattleLabels._BattleLabels.UpdateableFieldsCount = 0;
-                BattleLabels._BattleLabels.__instance = new Array([],[]);
+                BattleLabels._BattleLabels.UpdateableTextFieldsIndexes = new Array([]);
+                BattleLabels._BattleLabels.__instance = new Array([]);
                 for (var i:Number = 0; i < l; ++i) 
                 {
                     if (formats[i].enabled) 
                     {
-                        BattleLabels._BattleLabels.__instance[i][0]  = new BattleLabels(i);
-                        BattleLabels._BattleLabels.__instance[i][1]  = true;
-                        if formats[i].updateEvent != "" 
+                        BattleLabels._BattleLabels.__instance[i]  = new BattleLabels(i);
+                        if (formats[i].updateEvent != null && formats[i].updateEvent != "")
                         {
-                        BattleLabels._BattleLabels.__instance[i][2]  = formats[i].updateEvent;
-                        BattleLabels._BattleLabels.UpdateableFieldsCount++;
+                            BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[BattleLabels._BattleLabels.UpdateableFieldsCount] = i;
+                            BattleLabels._BattleLabels.UpdateableFieldsCount++;
                         }
-                        BattleLabels._BattleLabels.EnabledFieldsCount++;
                     }
                 }
             }
         }            
 
-        
-
-        public static function init()  
+        public static function init() 
+        // init point, called from battleMain.as 
         {
-            if (Config.config.battle.winChancesOnBattleInterface.enabled && Config.networkServicesSettings.chance && (!Config.config.battle.winChancesOnBattleInterface.disableStatic || (Config.networkServicesSettings.chanceLive && !Config.config.battle.winChancesOnBattleInterface.disableLive)))
-                BIChances.init();
-            if (!Config.config.battle.allowLabelsOnBattleInterface) 
-            {
-                return;
-            }
-            createTextFields();
+            if (Config.config.battle.allowLabelsOnBattleInterface) 
+                createTextFields();
         }
     }

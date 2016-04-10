@@ -7,7 +7,7 @@
 import com.xvm.*;
 import com.xvm.DataTypes.BattleStateData;
 import com.xvm.events.*;
-import wot.battle.BIChances;
+import wot.battle.BattleLabels;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {
@@ -376,7 +376,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                     {
                         m_dead_noticed[uid] = true;
                         //Logger.add("dead: " + uid);
-                        BIChances.UpdateBIChances();
+                        BattleLabels.UpdateBattleLabels("ON_VECHICLE_DESTROYED");
                         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYER_DEAD, value: uid } );
                     }
                 }
