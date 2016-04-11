@@ -1362,10 +1362,10 @@ class com.xvm.Macros
     private static function formatWinChancesText(isShowChance, isShowLiveChance: Boolean): String
     {
         if (!Config.networkServicesSettings.chance)
-            return "disabled at modxvm.com";
+            return "";
         if (!Config.networkServicesSettings.chanceLive && isShowLiveChance) 
         {
-            return "disabled at modxvm.com";
+            return "";
         }
         var ChancesText: String = Chance.GetChanceText(true, false, true);
         var temp: Array = ChancesText.split('|', 2);
@@ -1379,5 +1379,9 @@ class com.xvm.Macros
             var tempB: Array = temp[1].split(':', 2);
             return tempB[1];
         }
+        else 
+        {
+            return "";
+        } 
     }
 }
