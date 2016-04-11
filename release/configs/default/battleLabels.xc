@@ -130,7 +130,7 @@
                 "borderColor": null, 
                 "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 25}, 
                 "currentFieldDefaultStyle": { "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "name": "$FieldFont", "size": 25, "align": "center", "bold": true, "italic": false, "display": "block", "leading": -1, "marginLeft": 2, "marginRight": 2},
-                "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc <br/> Chances to Win (Static/Live):&nbsp;{{winstatic}}&nbsp;/&nbsp;{{winlive}}"
+                "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc <br/> Chances to Win (Static/Live):&nbsp;{{chancesStatic}}&nbsp;/&nbsp;{{chancesLive}}"
         },
         "test2": {
                 "enabled": true, 

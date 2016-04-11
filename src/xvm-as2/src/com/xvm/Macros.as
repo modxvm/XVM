@@ -743,8 +743,8 @@ class com.xvm.Macros
         switch (eventName)
         {
             case "ON_STAT_LOADED":
-                m_globals["winstatic"] = Macros.formatWinChancesText(true, false);
-                m_globals["winlive"] = function(o:Object) { return Macros.formatWinChancesText(false, true); }
+                m_globals["chancesStatic"] = Macros.formatWinChancesText(true, false);
+                m_globals["chancesLive"] = function(o:Object) { return Macros.formatWinChancesText(false, true); }
                 break;
         }
     }
