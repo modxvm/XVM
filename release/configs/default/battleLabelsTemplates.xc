@@ -54,7 +54,7 @@
     // --------------------------------------------------------------------- //
     // "formats" - displayed text field data (HTML allowed, macros allowed)
     // --------------------------------------------------------------------- //
-    "winChances": {
+    "winChance": {
       "enabled": true,
       "updateEvent": "ON_VECHICLE_DESTROYED", 
       "x": 225,
