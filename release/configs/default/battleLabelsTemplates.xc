@@ -130,7 +130,7 @@
       "borderColor": null, 
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 0.8, "blur": 5, "strength": 1.5 }, 
       "currentFieldDefaultStyle": { "color": "0xF4EFE8", "name": "$FieldFont", "size": 15, "align": "left", "bold": false, "italic": false },
-      "formats": "{{chancesStatic}} / {{chancesLive}}"
+      "formats": "<font color='{{c:winChance}}'>{{chancesStatic}}</font> / <font color='{{c:winChance}}'>{{chancesLive}}</font>"
     },
     "test": {
       "enabled": true,
