@@ -4,113 +4,56 @@
  */
 {
   "def": {
-    // Accepted field settings
-    // Доступные настройки поля
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // --------------------------------------------------------------------- //
+    // Set of formats fields available for configuring:
+    // Набор форматов полей доступных для настройки:
+    // --------------------------------------------------------------------- //
+    // "enabled" - enable field switch: true or false
+    // "updateEvent" - event on which field updates, use with dynamic macros (to disable define null value; allowed events: "ON_VECHICLE_DESTROYED") 
+    // "x" - x position (macros allowed)
+    // "y" - y position (macros allowed)
+    // "width" - width (macros allowed)
+    // "height" - height (macros allowed)
+    // "alpha" - transparency in percents (0..100) (macros allowed)
+    // "rotation" - rotation in degrees (0..360) (macros allowed)
+    // "scaleX", "scaleY" - scaling (use negative values for mirroring)
+    // "autoSize" - controls automatic sizing and alignment of text fields, "none" (default), "left", "right", "center"
+    // "align" - horizontal alignment ("left", "center", "right")
+    // "valign" - vertical alignment ("top", "center", "bottom")
+    // "antiAliasType" - anti aliasing mode ("advanced" or "normal")
+    // "background" - background switch: true or false
+    // "bgColor" - if set, draw background with specified color (macros allowed)
+    // "border" - border switch: true or false
+    // "borderColor" - if set, draw border with specified color (macros allowed)
+    // "shadow": {
+    //   "distance" (in pixels)
+    //   "angle"    (0.0 .. 360.0)
+    //   "color"    "0xXXXXXX"
+    //   "alpha"    (0.0 .. 1.0)
+    //   "blur"     (0.0 .. 255.0)
+    //   "strength" (0.0 .. 255.0)
+    //  }
+    // --------------------------------------------------------------------- //
+    // Field default styles. It applies global style to html in "formats".
+    // Note, that defined font attributes in "formats" override those in "currentFieldDefaultStyle"
+    // Стандартный стиль поля. Применяет глобальный стиль HTML в "formats".
+    // Обратите внимание, что определенные атрибуты шрифта в "formats" переопределяют "currentFieldDefaultStyle"
+    // --------------------------------------------------------------------- //
+    // "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xFFFFFF", "size": 15, "align": "left", "bold": false, "italic": false, "display": "block", "leading": -5, "marginLeft": 2, "marginRight": 2 },
     //
-    // THIS FIELD ("demoItem") IS NOT CONNECTED IN battleLabels.xc; THIS FIELD ONLY SHOWS AVAILABLE SETTINGS FOR TEXT FIELD AND DO NOT AFFECT OTHER TEXT FIELDS
-    // MACROS ALLOWED, CAN BE SET TO UPDATE ON EVENT
-    //
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Name of text field (User defined). Do not forget to attach this in battleLabels.xc
-    //"demoItem": {
-      /////////////////////
-      // Enable field switch: true or false
-      /////////////////////
-      //
-      //"enabled": true,
-      //
-      /////////////////////
-      // Event on which field updates, use with dynamic macros
-      // To disable define null value
-      // Allowed events: "ON_VECHICLE_DESTROYED"
-      /////////////////////
-      //
-      //"updateEvent": "", 
-      //
-      /////////////////////
-      // positon on x, y axes relative to "align" and "valign"; width, height, alpha, rotation, 
-      // scaleX and scaleY of text field / (all MACROS ALLOWED)
-      /////////////////////
-      //
-      //"x": 0,
-      //"y": 0,
-      //"width": 100,
-      //"height": 40,
-      //"alpha": 50, 
-      //"rotation": "", 
-      //"scaleX": "", 
-      //"scaleY": "", 
-      // "none" (default), "left", "right", "center"
-      //"autoSize": "none",
-      //
-      /////////////////////
-      // horizontal ("align") and vertical ("valign") align by screen resolution.
-      // allows only "left", "right", "center" values for horizontal alignment and "top", "bottom", "middle", "center" for vertical.
-      // горизонтальное ("align") и вертикальное ("valign") выравнивание по разрешению экрана.
-      // допускаются только значения "left", "right", "center" для горизонтального выравнивания и "top", "bottom", "middle", "center" для вертикального. 
-      ///////////////////////
-      //
-      //"align": "left", 
-      //"valign": "top",
-      //
-      ///////////////////////
-      // Antialias type: "normal", "advanced"
-      ///////////////////////
-      //
-      //"antiAliasType": "advanced",
-      //
-      ///////////////////////
-      // Background switch: true or false
-      ///////////////////////
-      //
-      //"background": false,
-      //
-      ///////////////////// 
-      // Background color (MACROS ALLOWED)
-      ///////////////////////
-      //
-      //"bgColor": null,
-      //
-      ///////////////////////
-      // Border switch: true or false 
-      ///////////////////////
-      //
-      //"border": false,
-      //
-      ///////////////////////
-      // Border color (MACROS ALLOWED)
-      ///////////////////////
-      //
-      //"borderColor": null, 
-      //
-      ///////////////////////
-      // Shadow settings (defaults: 0, 0, 0x000000, 0.75, 2, 1) (MACROS ALLOWED)
-      /////////////////////
-      //
-      //"shadow": { "distance": 0, "angle": 0, "color": "0x000000", "alpha": 0.75, "blur": 2, "strength": 1}, 
-      //
-      /////////////////////
-      // Field default styles. It applies global style to html in "formats". Note, that defined font attributes in "formats" override those in "currentFieldDefaultStyle"
-      // defaults: "0xFFFFFF", $FieldFont, 12, "left", false, false, "block" (required for align to work), 0, 0, 0 / (MACROS ALLOWED))
-      // if blank values, defaults above used; if attribute also defined in "formats", attribute in "formats" used 
-      /////////////////////
-      //
-      //"currentFieldDefaultStyle": { "color": "0xFFFFFF", "name": "$FieldFont", "size": 15, "align": "left", "bold": true, "italic": true, "display": "block", "leading": -5, "marginLeft": 2, "marginRight": 2},
-      //
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // Displayed text field data (HTML ALLOWED, MACROS ALLOWED)
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      //
-      //"formats": ""
-      //
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //},
-    // User defined text fields
-    // ...
-    //
+    // "name": "$FieldFont",  // font name
+    // "color": "0xFFFFFF",   // font color
+    // "size": 15,            // font size
+    // "align": "left",       // text alignment (left, center, right)
+    // "bold": false,         // true - bold
+    // "italic": false,       // true - italic
+    // "display": "block",    // required for align to work
+    // "leading": -5,         // space between lines, similarly (<textformat leading='-5'>...</textformat>)
+    // "marginLeft": 2,       // indent left, similarly (<textformat lefMargin='2'>...</textformat>)
+    // "marginRight": 2       // indent left, similarly (<textformat rightMargin='2'>...</textformat>)
+    // --------------------------------------------------------------------- //
+    // "formats" - displayed text field data (HTML allowed, macros allowed)
+    // --------------------------------------------------------------------- //
     "winChances": {
       "enabled": true,
       "updateEvent": "ON_VECHICLE_DESTROYED", 
@@ -129,7 +72,7 @@
       "bgColor": null,
       "borderColor": null, 
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 0.8, "blur": 5, "strength": 1.5 }, 
-      "currentFieldDefaultStyle": { "color": "0xF4EFE8", "name": "$FieldFont", "size": 15, "align": "left", "bold": false, "italic": false },
+      "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xF4EFE8", "size": 15, "align": "left", "bold": false, "italic": false },
       "formats": "<font color='{{c:winChance}}'>{{chancesStatic}}</font> / <font color='{{c:winChance}}'>{{chancesLive}}</font>"
     },
     "test": {
@@ -150,7 +93,7 @@
       "bgColor": null,
       "borderColor": null, 
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 25}, 
-      "currentFieldDefaultStyle": { "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "name": "$FieldFont", "size": 25, "align": "center", "bold": true, "italic": false, "display": "block", "leading": -1, "marginLeft": 2, "marginRight": 2},
+      "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "italic": false, "display": "block", "leading": -1, "marginLeft": 2, "marginRight": 2},
       "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc"
     },
     "test2": {
@@ -171,7 +114,7 @@
       "bgColor": "0x000000",
       "borderColor": "0x101009",
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 0.8, "blur": 2, "strength": 8}, 
-      "currentFieldDefaultStyle": { "color": "0x60FF00", "name": "$FieldFont", "size": 15, "align": "left", "bold": false, "italic": false, "display": "block", "leading": -20, "marginLeft": 2, "marginRight": 2},
+      "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0x60FF00", "size": 15, "align": "left", "bold": false, "italic": false, "display": "block", "leading": -20, "marginLeft": 2, "marginRight": 2},
       "formats": "<font color='#FFFFFF'><p align='center'><b>Info text field (WN8:&nbsp;<font color='{{c:wn8}}'>{{wn8}}</font>)</b></p></font><br/>Battle tier:<font color='#ff1aff'>&nbsp;{{battletier}}</font><p align='right'>My vehicle:&nbsp;<font color='#ff1aff'>{{my-vehicle}}</font>&nbsp;(<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
     }
   }

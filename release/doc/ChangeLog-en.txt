@@ -1,5 +1,8 @@
 ﻿XVM-6.2.1.3-dev:
-  * added option "battle"/"winChancesOnBattleInterface" - win chances on battle interface window
+  * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
+  * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
+  * added macros {{chancesStatic}} - win chances at battle (static)
+  * added macros {{chancesLive}} - win chances at battle (live)
 
 XVM-6.2.1.2:
   * adaptation to WoT 0.9.14.1
