@@ -111,9 +111,30 @@
     // User defined text fields
     // ...
     //
-    "test": {
+    "winChances": {
       "enabled": true,
       "updateEvent": "ON_VECHICLE_DESTROYED", 
+      "x": 225,
+      "y": 2,
+      "width": 75,
+      "height": 22,
+      "alpha": 100, 
+      "rotation": "", 
+      "scaleX": "", 
+      "scaleY": "", 
+      "autoSize": "center",
+      "align": "left", 
+      "valign": "top",
+      "antiAliasType": "advanced",
+      "bgColor": null,
+      "borderColor": null, 
+      "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 0.8, "blur": 5, "strength": 1.5 }, 
+      "currentFieldDefaultStyle": { "color": "0xF4EFE8", "name": "$FieldFont", "size": 15, "align": "left", "bold": false, "italic": false },
+      "formats": "{{chancesStatic}} / {{chancesLive}}"
+    },
+    "test": {
+      "enabled": true,
+      "updateEvent": null, 
       "x": 0,
       "y": -170,
       "width": 200,
@@ -130,7 +151,7 @@
       "borderColor": null, 
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 25}, 
       "currentFieldDefaultStyle": { "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "name": "$FieldFont", "size": 25, "align": "center", "bold": true, "italic": false, "display": "block", "leading": -1, "marginLeft": 2, "marginRight": 2},
-      "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc <br/> Chances to Win (Static/Live):&nbsp;{{chancesStatic}}&nbsp;/&nbsp;{{chancesLive}}"
+      "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc"
     },
     "test2": {
       "enabled": true, 
