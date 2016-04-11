@@ -85,6 +85,10 @@
   // Общие параметры боевого интерфейса.
   "battle": ${"battle.xc":"battle"},
 
+  // Battle interface text fields
+  // Текстовые поля боевого интерфейса
+  "battleLabels": ${"battleLabels.xc":"labels"},
+
   // Frag counter panel.
   // Панель счёта в бою.
   "fragCorrelation": ${"battle.xc":"fragCorrelation"},
@@ -175,9 +179,5 @@
 
   // Extra sounds settings
   // Настройки дополнительных звуков
-  "sounds": ${"sounds.xc":"sounds"},
-
-  // Battle interface text fields
-  // Текстовые поля боевого интерфейса
-  "battleLabelsList": ${"battleLabelsList.xc":"labels"}
+  "sounds": ${"sounds.xc":"sounds"}
 }
