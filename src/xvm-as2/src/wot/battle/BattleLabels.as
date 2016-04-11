@@ -116,7 +116,7 @@ import com.xvm.*;
         // create instances of all enabled text fields, logs instance indices of updateable text fields 
         { 
             BattleLabels._BattleLabels.formats = new Array([]);
-            var formats:Array = Config.config.battleLabelsList.formats;
+            var formats:Array = Config.config.battleLabels.formats;
             BattleLabels._BattleLabels.formats = formats;
             if (formats) 
             {
