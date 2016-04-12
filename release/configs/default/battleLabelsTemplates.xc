@@ -41,10 +41,10 @@
      │ "rotation"                 │ rotation in degrees (0..360) (macros allowed)
      │                            │ поворот элемента, в градусах (доступно использование макросов)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "scaleX"                   │ scaling (use negative values for mirroring)
+     │ "scaleX"                   │ scaling axis X (use negative values for mirroring)
      │                            │ масштабирование по оси x (используйте отрицательные значения для зеркального отображения )
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "scaleY"                   │ scaling (use negative values for mirroring)
+     │ "scaleY"                   │ scaling axis Y (use negative values for mirroring)
      │                            │ масштабирование по оси y (используйте отрицательные значения для зеркального отображения )
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "autoSize"                 │ controls automatic sizing and alignment of text fields ("none" [default], "left", "right", "center")
