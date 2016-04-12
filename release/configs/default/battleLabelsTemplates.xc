@@ -10,6 +10,7 @@
     // --------------------------------------------------------------------- //
     // "enabled" - enable field switch: true or false
     // "updateEvent" - event on which field updates, use with dynamic macros (to disable define null value; allowed events: "ON_VECHICLE_DESTROYED") 
+    // "hotKey" - keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "formats", or hide; when defined, text field will not be shown until key is pressed, to disable define null value // IN DEVELOPMENT
     // "x" - x position (macros allowed)
     // "y" - y position (macros allowed)
     // "width" - width (macros allowed)
@@ -57,6 +58,7 @@
     "winChance": {
       "enabled": true,
       "updateEvent": "ON_VECHICLE_DESTROYED", 
+      "hotKey": null, // IN DEVELOPMENT
       "x": 225,
       "y": 2,
       "width": 75,
@@ -78,6 +80,7 @@
     "test": {
       "enabled": true,
       "updateEvent": null, 
+      "hotKey": null, // IN DEVELOPMENT
       "x": 0,
       "y": -170,
       "width": 200,
@@ -99,6 +102,7 @@
     "test2": {
       "enabled": true, 
       "updateEvent": null, 
+      "hotKey": null, // IN DEVELOPMENT
       "x": 0,
       "y": -70,
       "width": 310,
