@@ -10,7 +10,7 @@
     // Всплывающий урон.
     "damageText": {
       // false - disable / не отображать.
-     "visible": true,
+      "visible": true,
       // Axis field coordinates
       // Положение поля по осям
       "x": 0,
