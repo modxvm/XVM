@@ -99,7 +99,7 @@
      │                            │ Стандартный стиль поля. Применяет глобальный стиль HTML в "formats".
      │                            │ Обратите внимание, что определенные атрибуты шрифта в "formats" переопределяют "currentFieldDefaultStyle"
      │                            │
-     │                            │ "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xFFFFFF", "size": 15, "align": "left", "bold": false, "italic": false, "display": "block", "leading": -5, "marginLeft": 2, "marginRight": 2 },
+     │                            │ "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
      │----------------------------│--------------------------------------------------------------------------
      │ "name"                     │ font name
      │                            │ наименование шрифта
