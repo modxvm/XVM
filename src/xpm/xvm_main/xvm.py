@@ -661,13 +661,13 @@ class Xvm(object):
 
         c = config.get('hotkeys')
 
-        if (c['minimapZoom']['enabled'] is True and c['minimapZoom']['keyCode'] == key):
+        if c['minimapZoom']['enabled'] is True and c['minimapZoom']['keyCode'] == key:
             return True
-        if (c['minimapAltMode']['enabled'] is True and c['minimapAltMode']['keyCode'] == key):
+        if c['minimapAltMode']['enabled'] is True and c['minimapAltMode']['keyCode'] == key:
             return True
-        if (c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key):
+        if c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key:
             return True
-        if (c['battleLabelsHotKeys']['enabled'] is True:
+        if c['battleLabelsHotKeys']['enabled'] is True:
             return True
 
         return False
