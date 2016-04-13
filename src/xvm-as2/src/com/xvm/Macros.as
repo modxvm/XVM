@@ -634,7 +634,7 @@ class com.xvm.Macros
                     res = def;
                 break;
             case "py":
-                res = DAAPI.xvm_pythonMacro(norm);
+                res = DAAPI.py_xvm_pythonMacro(norm);
                 if (res == null)
                     res = def;
                 break;

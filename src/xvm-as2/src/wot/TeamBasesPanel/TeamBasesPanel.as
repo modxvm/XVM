@@ -53,7 +53,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
             base.add(id, sortWeight, colorFeature, null, null, null);
 
             // Get capture base number text
-            baseNumText = DAAPI.xvm_captureBarGetBaseNumText(id);
+            baseNumText = DAAPI.py_xvm_captureBarGetBaseNumText(id);
 
             /**
             * This array is defined at parent original WG class.

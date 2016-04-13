@@ -113,7 +113,7 @@ def _sendSniperCameraFlash(enable, zoom):
         if battle:
             movie = battle.movie
             if movie is not None:
-                movie.xvm_onSniperCamera(enable, zoom)
+                movie.as_xvm_onSniperCamera(enable, zoom)
 
 
 _prevOffsetX = None
@@ -130,7 +130,7 @@ def _Aim_onOffsetUpdate(self, screen, forced = False):
         if battle:
             movie = battle.movie
             if movie is not None:
-                movie.xvm_onAimOffsetUpdate(_prevOffsetX, _prevOffsetY)
+                movie.as_xvm_onAimOffsetUpdate(_prevOffsetX, _prevOffsetY)
 
 
 @overrideMethod(StrategicCamera, 'create')

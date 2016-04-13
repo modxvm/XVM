@@ -8,7 +8,7 @@ class com.xvm.Logger
     {
         try
         {
-            DAAPI.xvm_log("[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Strings.padLeft(String(counter++), 3, '0') + "] " + str);
+            DAAPI.py_xvm_log("[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Strings.padLeft(String(counter++), 3, '0') + "] " + str);
         }
         catch (e)
         {

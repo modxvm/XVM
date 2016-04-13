@@ -20,7 +20,7 @@ class com.xvm.StatLoader
             return;
         instance._loading = true;
         Stat.s_data = {};
-        DAAPI.xvm_loadBattleStat();
+        DAAPI.py_xvm_loadBattleStat();
     }
 
     // PRIVATE

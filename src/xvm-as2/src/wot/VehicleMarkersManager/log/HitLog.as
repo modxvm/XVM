@@ -162,7 +162,7 @@ class wot.VehicleMarkersManager.log.HitLog
     private function createControl()
     {
         //Logger.add("HitLog::createControl()");
-        var sz:Array = DAAPI.xvm_getScreenSize();
+        var sz:Array = DAAPI.py_xvm_getScreenSize();
         var x = this.x >= 0 ? this.x : sz[0] + this.x;
         var y = this.y >= 0 ? this.y : sz[1] + this.y;
 

@@ -300,7 +300,7 @@ class Xvm(object):
                 player = BigWorld.player()
                 arena = player.arena
                 arenaVehicle = arena.vehicles.get(player.playerVehicleID)
-                movie.xvm_onUpdateConfig(
+                movie.as_xvm_onUpdateConfig(
                     config.config_data,                              # config_data
                     config.lang_data,                                # lang_data
                     arena.extraData.get('battleLevel', 0),           # battleLevel
@@ -408,7 +408,7 @@ class Xvm(object):
             return
 
         #debug('doUpdateBattle: {0} {1}'.format(vID, set(state.iteritems())))
-        movie.xvm_onBattleStateChanged(
+        movie.as_xvm_onBattleStateChanged(
             targets,
             state['playerName'],
             state['clanAbbrev'],
@@ -626,7 +626,7 @@ class Xvm(object):
                     if self.checkKeyEventBattle(key, isDown):
                         movie = battle.movie
                         if movie is not None:
-                            movie.xvm_onKeyEvent(key, isDown)
+                            movie.as_xvm_onKeyEvent(key, isDown)
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())
         return True
