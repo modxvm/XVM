@@ -568,14 +568,8 @@ class Xvm(object):
             res = None
             if cmd == AS2COMMAND.LOAD_BATTLE_STAT:
                 stats.getBattleStat(args, proxy)
-            elif cmd == AS2COMMAND.LOAD_SETTINGS:
-                res = userprefs.get(args[0])
-            elif cmd == AS2COMMAND.SAVE_SETTINGS:
-                userprefs.set(args[0], args[1])
             else:
                 return
-            proxy.movie.invoke(('xvm.respond',
-                                [id] + res if isinstance(res, list) else [id, res]))
         except Exception, ex:
             err(traceback.format_exc())
 

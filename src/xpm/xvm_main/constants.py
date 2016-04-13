@@ -62,8 +62,6 @@ class XVM_COMMAND(object):
 
 class AS2COMMAND(object):
     LOAD_BATTLE_STAT = "load_battle_stat"
-    LOAD_SETTINGS = "load_settings"
-    SAVE_SETTINGS = "save_settings"
 
 
 # Teams

@@ -13,61 +13,30 @@ class com.xvm.Cmd
 
     public static function loadBattleStat()
     {
-        _call(null, null, [COMMAND_LOAD_BATTLE_STAT]);
+        _call([COMMAND_LOAD_BATTLE_STAT]);
     }
 
     public static function profMethodStart(name:String)
     {
         if (Config.IS_DEVELOPMENT)
-            _call(null, null, [COMMAND_PROF_METHOD_START, name]);
+            _call([COMMAND_PROF_METHOD_START, name]);
     }
 
     public static function profMethodEnd(name:String)
     {
         if (Config.IS_DEVELOPMENT)
-            _call(null, null, [COMMAND_PROF_METHOD_END, name]);
+            _call([COMMAND_PROF_METHOD_END, name]);
     }
 
     /////////////////////////////////////////////////////////////////
 
-    private static var _listeners:Object = {};
     private static var _counter:Number = 0;
 
-    private static var _xvm_sandbox_cmd_initialized:Boolean = false;
-    private static function _call(target:Object, callback:Function, args:Array)
+    private static function _call(args:Array)
     {
-        if (!_xvm_sandbox_cmd_initialized)
-        {
-            ExternalInterface.addCallback("xvm.respond", null, _callback);
-            setTimeout(function() {
-                Cmd._xvm_sandbox_cmd_initialized = true;
-                Cmd._call(target, callback, args);
-            }, 1);
-        }
-        else
-        {
-            //Logger.add(">>> Cmd.send: " + com.xvm.JSONx.stringify(arguments, "", true));
-            var id:String = Sandbox.GetCurrentSandboxPrefix() + String(++_counter);
-            if (callback != null)
-                _listeners[id] = {target:target, callback:callback};
-            args.unshift('xvm.cmd', id);
-            ExternalInterface.call.apply(null, args);
-        }
-    }
-
-    private static function _callback(id:String, data)
-    {
-        if (!_listeners.hasOwnProperty(id))
-            return;
-        try
-        {
-            var callback:Function = _listeners[id].callback;
-            if (callback != null)
-                callback.call(_listeners[id].target, data);
-        }
-        finally
-        {
-            delete _listeners[id];
-        }
+        //Logger.add(">>> Cmd.send: " + com.xvm.JSONx.stringify(arguments, "", true));
+        var id:String = Sandbox.GetCurrentSandboxPrefix() + String(++_counter);
+        args.unshift('xvm.cmd', id);
+        ExternalInterface.call.apply(null, args);
     }
 }
