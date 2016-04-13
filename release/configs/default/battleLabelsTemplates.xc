@@ -14,9 +14,9 @@
      │                            │ включить/отключить создание полей: true or false
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "updateEvent"              │ event on which field updates, use with dynamic macros; to disable define null value;
-     │                            │ allowed events: "ON_VECHICLE_DESTROYED", "ON_BATTLE_STATE_CHANGED"
+     │                            │ allowed events: "ON_VECHICLE_DESTROYED", "ON_BATTLE_STATE_CHANGED", ON_CURRENT_VECHICLE_DESTROYED, ON_MODULE_DESTROYED, ON_MODULE_REPAIRED 
      │                            │ событие по которому обновляется поле, используйте динамические макросы; для отключения используйте значение null;
-     │                            │ доступные события: "ON_VECHICLE_DESTROYED", "ON_BATTLE_STATE_CHANGED"
+     │                            │ доступные события: "ON_VECHICLE_DESTROYED", "ON_BATTLE_STATE_CHANGED", ON_CURRENT_VECHICLE_DESTROYED, ON_MODULE_DESTROYED, ON_MODULE_REPAIRED 
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "formats", or hide;
      │                            │ when defined, text field will not be shown until key is pressed, to disable define null value
@@ -141,9 +141,8 @@
     "winChance": {
       "enabled": true,
       "updateEvent": "ON_VECHICLE_DESTROYED",
-      "hotKey": null, // IN DEVELOPMENT
-      //"hotKeyCode": null, // IN DEVELOPMENT
-      //"onHold": false, // IN DEVELOPMENT
+      "hotKeyCode": null, 
+      "onHold": false, 
       "x": 225,
       "y": 2,
       "width": 75,
@@ -165,9 +164,8 @@
     "test": {
       "enabled": true,
       "updateEvent": null, 
-      "hotKey": null, // IN DEVELOPMENT
-      //"hotKeyCode": null, // IN DEVELOPMENT
-      //"onHold": false, // IN DEVELOPMENT
+      "hotKeyCode": null, 
+      "onHold": false, 
       "x": 0,
       "y": -170,
       "width": 200,
@@ -184,14 +182,13 @@
       "borderColor": null, 
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 25}, 
       "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "italic": false, "display": "block", "leading": -1, "marginLeft": 2, "marginRight": 2},
-      "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc"
+      "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc<br/> Press '<font color='#60FF00'>J</font>' hot-key to show info field"
     },
     "test2": {
       "enabled": true, 
       "updateEvent": null, 
-      "hotKey": null, // IN DEVELOPMENT
-      //"hotKeyCode": null, // IN DEVELOPMENT
-      //"onHold": false, // IN DEVELOPMENT
+      "hotKeyCode": 36, 
+      "onHold": false, 
       "x": 0,
       "y": -70,
       "width": 310,
