@@ -42,7 +42,7 @@ class wot.battle.BattleMain
         GameDelegate.addCallBack("Stage.Update", this, "onUpdateStage");
         GameDelegate.addCallBack("battle.showPostmortemTips", this, "showPostmortemTips");
 
-        _root.py_xvm_pythonMacro = null; // stub for DAAPI function binding
+        DAAPI.initialize();
 
         _root.xvm_onUpdateConfig = this.xvm_onUpdateConfig;
         _root.xvm_onUpdateStat = this.xvm_onUpdateStat;

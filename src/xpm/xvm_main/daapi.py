@@ -4,6 +4,8 @@ import traceback
 import importlib
 import ast
 
+import GUI
+
 from xfw import *
 
 from logger import *
@@ -12,7 +14,7 @@ from logger import *
 class _DAAPI(object):
 
     def py_xvm_pythonMacro(self, arg):
-        log('py_xvm_pythonMacro: {}'.format(arg))
+        #log('py_xvm_pythonMacro: {}'.format(arg))
         try:
             macro_args = arg.split('(', 1)
             if len(macro_args) < 2:
@@ -25,5 +27,8 @@ class _DAAPI(object):
         except Exception as ex:
             err(traceback.format_exc())
             return None
+
+    def py_xvm_getScreenSize(self):
+        return GUI.screenResolution()
 
 g_daapi = _DAAPI()

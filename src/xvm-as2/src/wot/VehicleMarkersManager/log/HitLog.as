@@ -162,13 +162,7 @@ class wot.VehicleMarkersManager.log.HitLog
     private function createControl()
     {
         //Logger.add("HitLog::createControl()");
-        Cmd.getScreenSize(this, createControl2);
-    }
-
-    private function createControl2(size)
-    {
-        //Logger.add("HitLog::createControl2()");
-        var sz = JSONx.parse(size);
+        var sz:Array = DAAPI.xvm_getScreenSize();
         var x = this.x >= 0 ? this.x : sz[0] + this.x;
         var y = this.y >= 0 ? this.y : sz[1] + this.y;
 

@@ -62,7 +62,6 @@ class XVM_COMMAND(object):
 
 class AS2COMMAND(object):
     CAPTURE_BAR_GET_BASE_NUM = "capture_bar_get_base_num"
-    GET_SCREEN_SIZE = "get_screen_size"
     LOG = "log"
     LOGSTAT = "logstat"
     LOAD_BATTLE_STAT = "load_battle_stat"

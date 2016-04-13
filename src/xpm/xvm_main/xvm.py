@@ -570,9 +570,6 @@ class Xvm(object):
             res = None
             if cmd == AS2COMMAND.LOG:
                 log(*args)
-            elif cmd == AS2COMMAND.GET_SCREEN_SIZE:
-                # return
-                res = simplejson.dumps(list(GUI.screenResolution()))
             elif cmd == AS2COMMAND.LOAD_BATTLE_STAT:
                 stats.getBattleStat(args, proxy)
             elif cmd == AS2COMMAND.LOAD_SETTINGS:

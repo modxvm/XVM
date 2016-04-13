@@ -49,7 +49,7 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
             HexColorsPlugin, QuaternionsPlugin, RemoveTintPlugin, RoundPropsPlugin, ScalePlugin, ScrollRectPlugin,
             SetSizePlugin, ShortRotationPlugin, TintPlugin, TransformMatrixPlugin, VisiblePlugin, VolumePlugin]);
 
-        _root.py_xvm_pythonMacro = null; // stub for DAAPI function binding
+        DAAPI.initialize();
 
         _root.xvm_onUpdateConfig = this.xvm_onUpdateConfig;
         _root.xvm_onUpdateStat = this.xvm_onUpdateStat;
