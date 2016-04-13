@@ -667,6 +667,8 @@ class Xvm(object):
             return True
         if (c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key):
             return True
+        if (c['battleLabelsHotKeys']['enabled'] is True:
+            return True
 
         return False
 
