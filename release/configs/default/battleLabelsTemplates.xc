@@ -13,15 +13,18 @@
      │ "enabled"                  │ enable/disable field creation: true or false
      │                            │ включить/отключить создание полей: true or false
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "updateEvent"              │ event on which field updates, use with dynamic macros
-     │                            │ to disable define null value; allowed events: "ON_VECHICLE_DESTROYED"
-     │                            │ событие по которому обновляется поле, используйте динамические макросы
-     │                            │ для отключения используйте значение null; доступные события: "ON_VECHICLE_DESTROYED"
+     │ "updateEvent"              │ event on which field updates, use with dynamic macros; to disable define null value;
+     │                            │ allowed events: "ON_VECHICLE_DESTROYED", "ON_BATTLE_STATE_CHANGED"
+     │                            │ событие по которому обновляется поле, используйте динамические макросы; для отключения используйте значение null;
+     │                            │ доступные события: "ON_VECHICLE_DESTROYED", "ON_BATTLE_STATE_CHANGED"
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "hotKey"                   │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "formats", or hide;
-     │                            │ when defined, text field will not be shown until key is pressed, to disable define null value // IN DEVELOPMENT
+     │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "formats", or hide;
+     │                            │ when defined, text field will not be shown until key is pressed, to disable define null value
      │                            │ горячие клавиши клавиатуры (список в hotkeys.xc), при нажатии - выводится текстовое поле и применяются параметры html в "formats", или скрывается поле;
-     │                            │ текстовое поле не будет отображаться, пока не будет нажата клавиша, для отключения используйте значение null // В РАЗРАБОТКЕ
+     │                            │ текстовое поле не будет отображаться, пока не будет нажата клавиша, для отключения используйте значение null
+     ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
+     │ "onHold"                   │ take action by key click; true - while key is remains pressed
+     │                            │ false - производит действие по разовому нажатию клавиши; true - по удержанию
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "x"                        │ x position (macros allowed)
      │                            │ положение по оси x (доступно использование макросов)
@@ -94,10 +97,10 @@
      │ "strength"                 │ strength shadow (0.0 .. 255.0)
      │                            │ интенсивность тени (0.0 .. 255.0)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "currentFieldDefaultStyle" │ Field default styles. It applies global style to html in "formats".
-     │                            │ Note, that defined font attributes in "formats" override those in "currentFieldDefaultStyle"
-     │                            │ Стандартный стиль поля. Применяет глобальный стиль HTML в "formats".
-     │                            │ Обратите внимание, что определенные атрибуты шрифта в "formats" переопределяют "currentFieldDefaultStyle"
+     │ "currentFieldDefaultStyle" │ it applies global style to html in "formats"; note, that defined font attributes in "formats" override those in "currentFieldDefaultStyle"
+     │                            │ применяет глобальный стиль HTML в "formats"; обратите внимание, что определенные атрибуты шрифта в "formats" переопределяют "currentFieldDefaultStyle"
+     │                            │ field default styles:
+     │                            │ стандартный стиль поля:
      │                            │
      │                            │ "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
      │----------------------------│--------------------------------------------------------------------------
@@ -137,8 +140,10 @@
     */
     "winChance": {
       "enabled": true,
-      "updateEvent": "ON_VECHICLE_DESTROYED", 
+      "updateEvent": "ON_VECHICLE_DESTROYED",
       "hotKey": null, // IN DEVELOPMENT
+      //"hotKeyCode": null, // IN DEVELOPMENT
+      //"onHold": false, // IN DEVELOPMENT
       "x": 225,
       "y": 2,
       "width": 75,
@@ -161,6 +166,8 @@
       "enabled": true,
       "updateEvent": null, 
       "hotKey": null, // IN DEVELOPMENT
+      //"hotKeyCode": null, // IN DEVELOPMENT
+      //"onHold": false, // IN DEVELOPMENT
       "x": 0,
       "y": -170,
       "width": 200,
@@ -183,6 +190,8 @@
       "enabled": true, 
       "updateEvent": null, 
       "hotKey": null, // IN DEVELOPMENT
+      //"hotKeyCode": null, // IN DEVELOPMENT
+      //"onHold": false, // IN DEVELOPMENT
       "x": 0,
       "y": -70,
       "width": 310,
