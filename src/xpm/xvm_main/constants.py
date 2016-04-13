@@ -58,12 +58,6 @@ class XVM_COMMAND(object):
     AS_UPDATE_CURRENT_VEHICLE = "xvm.as.update_current_vehicle"
 
 
-# ExternalInterface commands
-
-class AS2COMMAND(object):
-    LOAD_BATTLE_STAT = "load_battle_stat"
-
-
 # Teams
 
 class TEAM(object):

@@ -31,6 +31,7 @@ import utils
 import userprefs
 import dossier
 import minimap_circles
+import python_macro
 import test
 import topclans
 import wgutils
@@ -42,7 +43,6 @@ _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
     XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS,
     XVM_COMMAND.LOAD_STAT_USER,
-    AS2COMMAND.LOAD_BATTLE_STAT,
 )
 
 # performs translations and fixes image path
@@ -286,7 +286,7 @@ class Xvm(object):
     def initAS2DAAPI(self, flashObject):
         root = flashObject.getMember('_root')
         if root.script is None:
-            root.script = daapi.g_daapi
+            root.script = daapi.DAAPI(flashObject)
         else:
             err("TODO: flashObject.getMember('_root').script != None. flashObject=" % str(flashObject))
 
@@ -542,7 +542,7 @@ class Xvm(object):
                 return (None, True)
 
             if cmd == XVM_COMMAND.PYTHON_MACRO:
-                return (daapi.g_daapi.py_xvm_pythonMacro(args[0]), True)
+                return (python_macro.processPythonMacro(args[0]), True)
 
             if cmd == XVM_COMMAND.OPEN_URL:
                 if len(args[0]):
@@ -558,20 +558,6 @@ class Xvm(object):
             return (None, True)
 
         return (None, False)
-
-
-    def onXvmCommand(self, proxy, id, cmd, *args):
-        try:
-            # debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-            if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
-                debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-            res = None
-            if cmd == AS2COMMAND.LOAD_BATTLE_STAT:
-                stats.getBattleStat(args, proxy)
-            else:
-                return
-        except Exception, ex:
-            err(traceback.format_exc())
 
 
     def initializeXvmServices(self):

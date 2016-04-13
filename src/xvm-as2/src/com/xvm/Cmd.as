@@ -7,14 +7,8 @@ import flash.external.*;
 
 class com.xvm.Cmd
 {
-    private static var COMMAND_LOAD_BATTLE_STAT:String = "load_battle_stat";
     private static var COMMAND_PROF_METHOD_START:String = "prof_method_start";
     private static var COMMAND_PROF_METHOD_END:String = "prof_method_end";
-
-    public static function loadBattleStat()
-    {
-        _call([COMMAND_LOAD_BATTLE_STAT]);
-    }
 
     public static function profMethodStart(name:String)
     {
