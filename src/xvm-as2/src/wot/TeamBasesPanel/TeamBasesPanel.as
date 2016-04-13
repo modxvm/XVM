@@ -32,6 +32,8 @@ class wot.TeamBasesPanel.TeamBasesPanel
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    private var baseNumText:String = "";
+
     function TeamBasesPanelCtor()
     {
         Utils.TraceXvmModule("TeamBasesPanel");
@@ -51,7 +53,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
             base.add(id, sortWeight, colorFeature, null, null, null);
 
             // Get capture base number text
-            Cmd.captureBarGetBaseNum(this, onCaptureBarGetBaseNum, id);
+            baseNumText = DAAPI.xvm_captureBarGetBaseNumText(id);
 
             /**
             * This array is defined at parent original WG class.
@@ -66,8 +68,6 @@ class wot.TeamBasesPanel.TeamBasesPanel
     }
 
     // PRIVATE
-
-    private var baseNumText:String = "";
 
     function onCaptureBarGetBaseNum(num:String)
     {

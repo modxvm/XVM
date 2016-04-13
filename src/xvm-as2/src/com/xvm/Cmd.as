@@ -9,7 +9,6 @@ class com.xvm.Cmd
 {
     private static var COMMAND_LOG:String = "log";
     private static var COMMAND_LOAD_BATTLE_STAT:String = "load_battle_stat";
-    private static var COMMAND_CAPTURE_BAR_GET_BASE_NUM:String = "capture_bar_get_base_num";
     private static var COMMAND_PROF_METHOD_START:String = "prof_method_start";
     private static var COMMAND_PROF_METHOD_END:String = "prof_method_end";
 
@@ -21,11 +20,6 @@ class com.xvm.Cmd
     public static function loadBattleStat()
     {
         _call(null, null, [COMMAND_LOAD_BATTLE_STAT]);
-    }
-
-    public static function captureBarGetBaseNum(target:Object, callback:Function, id:Number)
-    {
-        _call(target, callback, [COMMAND_CAPTURE_BAR_GET_BASE_NUM, id]);
     }
 
     public static function profMethodStart(name:String)

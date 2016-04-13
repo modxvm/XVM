@@ -15,7 +15,6 @@ from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info, g_sessionProvider
 from gui.battle_control.arena_info.settings import VEHICLE_STATUS
 from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
-from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 
 from xfw import *
 
@@ -576,9 +575,6 @@ class Xvm(object):
                 res = userprefs.get(args[0])
             elif cmd == AS2COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
-            elif cmd == AS2COMMAND.CAPTURE_BAR_GET_BASE_NUM:
-                n = int(args[0])
-                res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
             else:
                 return
             proxy.movie.invoke(('xvm.respond',
@@ -672,7 +668,7 @@ class Xvm(object):
             return True
         if c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key:
             return True
-        if c['battleLabelsHotKeys']['enabled'] is True:
+        if c['battleLabelsHotKeys'] is True:
             return True
 
         return False

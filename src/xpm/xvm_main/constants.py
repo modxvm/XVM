@@ -61,7 +61,6 @@ class XVM_COMMAND(object):
 # ExternalInterface commands
 
 class AS2COMMAND(object):
-    CAPTURE_BAR_GET_BASE_NUM = "capture_bar_get_base_num"
     LOG = "log"
     LOGSTAT = "logstat"
     LOAD_BATTLE_STAT = "load_battle_stat"

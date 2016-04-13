@@ -4,7 +4,9 @@ import traceback
 import importlib
 import ast
 
+import BigWorld
 import GUI
+from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 
 from xfw import *
 
@@ -30,5 +32,9 @@ class _DAAPI(object):
 
     def py_xvm_getScreenSize(self):
         return GUI.screenResolution()
+
+    def py_xvm_captureBarGetBaseNumText(self, id):
+        n = int(id)
+        return getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
 
 g_daapi = _DAAPI()

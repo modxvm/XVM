@@ -13,6 +13,7 @@ class com.xvm.DAAPI extends MovieClip
         // create stubs for DAAPI function binding
         _root.py_xvm_pythonMacro = null;
         _root.py_xvm_getScreenSize = null;
+        _root.py_xvm_captureBarGetBaseNumText = null;
     }
 
     // DAAPI methods
@@ -25,5 +26,10 @@ class com.xvm.DAAPI extends MovieClip
     public static function xvm_getScreenSize()
     {
         return _root.py_xvm_getScreenSize();
+    }
+
+    public static function xvm_captureBarGetBaseNumText(id:Number):String
+    {
+        return _root.py_xvm_captureBarGetBaseNumText(id);
     }
 }
