@@ -23,6 +23,7 @@ from constants import *
 from logger import *
 import config
 import configwatchdog
+import daapi
 import stats
 import svcmsg
 import vehinfo
@@ -262,30 +263,34 @@ class Xvm(object):
         except Exception, ex:
             err(traceback.format_exc())
 
+        self.initAS2DAAPI(flashObject)
         self.sendConfig(flashObject)
 
         for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
             self.doUpdateBattle(vID, INV.ALL, flashObject)
 
-
     def deleteBattleSwf(self):
         trace('deleteBattleSwf')
         pass
 
-
     def initVmmSwf(self, flashObject):
         #trace('initVmmSwf')
+        self.initAS2DAAPI(flashObject)
         self.sendConfig(flashObject)
-
 
     def deleteVmmSwf(self):
         #trace('deleteVmmSwf')
         pass
 
-
     def onStateBattle(self):
         trace('onStateBattle')
 
+    def initAS2DAAPI(self, flashObject):
+        root = flashObject.getMember('_root')
+        if root.script is None:
+            root.script = daapi.g_daapi
+        else:
+            err("TODO: flashObject.getMember('_root').script != None. flashObject=" % str(flashObject))
 
     def sendConfig(self, flashObject):
         #trace('sendConfig')
@@ -538,6 +543,9 @@ class Xvm(object):
                 stats.getUserData(args)
                 return (None, True)
 
+            if cmd == XVM_COMMAND.PYTHON_MACRO:
+                return (daapi.g_daapi.py_xvm_pythonMacro(args[0]), True)
+
             if cmd == XVM_COMMAND.OPEN_URL:
                 if len(args[0]):
                     utils.openWebBrowser(args[0], False)
@@ -679,6 +687,5 @@ class Xvm(object):
             return
         if e.uniqueName == 'hangar':
             self.hangarInit()
-
 
 g_xvm = Xvm()

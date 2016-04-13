@@ -285,8 +285,14 @@ class com.xvm.Macros
         if (value === undefined)
         {
             //process l10n macro
-            if (macroName.indexOf("l10n") == 0)
+            if (macroName == "l10n")
+            {
                 res += prepareValue(NaN, macroName, norm, def, vehId);
+            }
+            else if (macroName == "py")
+            {
+                res += prepareValue(NaN, macroName, norm, def, vehId);
+            }
             else
             {
                 res += def;
@@ -624,6 +630,13 @@ class com.xvm.Macros
                 break;
             case "l10n":
                 res = Locale.get(norm);
+                if (res == null)
+                    res = def;
+                break;
+            case "py":
+                res = DAAPI.xvm_pythonMacro(norm);
+                if (res == null)
+                    res = def;
                 break;
         }
 
@@ -1363,7 +1376,7 @@ class com.xvm.Macros
     {
         if (!Config.networkServicesSettings.chance)
             return "";
-        if (!Config.networkServicesSettings.chanceLive && isShowLiveChance) 
+        if (!Config.networkServicesSettings.chanceLive && isShowLiveChance)
         {
             return "";
         }
@@ -1373,15 +1386,15 @@ class com.xvm.Macros
         if (isShowChance)
         {
             return tempA[1];
-        }   
+        }
         else if (isShowLiveChance)
         {
             var tempB: Array = temp[1].split(':', 2);
             return tempB[1];
         }
-        else 
+        else
         {
             return "";
-        } 
+        }
     }
 }

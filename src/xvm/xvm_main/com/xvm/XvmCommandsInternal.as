@@ -13,6 +13,7 @@ package com.xvm
         internal static const LOAD_STAT_BATTLE:String = "xvm.load_stat_battle";
         internal static const LOAD_STAT_BATTLE_RESULTS:String = "xvm.load_stat_battle_results";
         internal static const LOAD_STAT_USER:String = "xvm.load_stat_user";
+        internal static const PYTHON_MACRO:String = "xvm.python_macro";
 
         internal static const AS_DOSSIER:String = "xvm.as.dossier";
         internal static const AS_L10N:String = "xvm.as.l10n";

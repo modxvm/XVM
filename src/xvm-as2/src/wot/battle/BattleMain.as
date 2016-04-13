@@ -42,6 +42,8 @@ class wot.battle.BattleMain
         GameDelegate.addCallBack("Stage.Update", this, "onUpdateStage");
         GameDelegate.addCallBack("battle.showPostmortemTips", this, "showPostmortemTips");
 
+        _root.py_xvm_pythonMacro = null; // stub for DAAPI function binding
+
         _root.xvm_onUpdateConfig = this.xvm_onUpdateConfig;
         _root.xvm_onUpdateStat = this.xvm_onUpdateStat;
         _root.xvm_onKeyEvent = this.xvm_onKeyEvent;
@@ -85,14 +87,14 @@ class wot.battle.BattleMain
         // Zoom Indicator
         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
             this._zoomIndicator = new ZoomIndicator(_holder);
-        
+
         // Setup Visual Elements
         Elements.SetupElements();
 
         FragCorrelation.modify();
 
         ExpertPanel.modify();
-        
+
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, battleLabelsInit);
 
     }
@@ -102,7 +104,7 @@ class wot.battle.BattleMain
         Macros.RegisterGlobalMacrosDataDelayed("ON_STAT_LOADED");
         BattleLabels.init();
     }
-    
+
     // Python calls (context: this => _root)
 
     public function xvm_onUpdateConfig():Void

@@ -3,6 +3,10 @@
   * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
   * added macros {{chancesStatic}} - win chances at battle (static)
   * added macros {{chancesLive}} - win chances at battle (live)
+  * added new type of macro - dynamic macros calculated in the python:
+      {{py:full.path.to.static.func(arg,arg,...)}}
+    E. g. get %SUP for xTE:
+      {{py:xvm_main.python.xvm_scale.XvmScaleToSup({{xte}})|==}}
 
 XVM-6.2.1.2:
   * adaptation to WoT 0.9.14.1

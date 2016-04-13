@@ -77,6 +77,7 @@ Legend:
 │ D │ {{dmg-avg}}        │   │   │   │   │   │ X │   │   │ average damage during the battle
 │ D │ {{n-player}}       │   │   │   │   │   │ X │   │   │ number of hits for each player
 │ D │ {{dmg-player}}     │   │   │   │   │   │ X │   │   │ sum of hits for each player
+│ D │ {{py:f()}}         │ X │ X │ X │ X │ X │ X │ X │ X │ dynamic python function call
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────
 
   Global macros (does not depend on the player)

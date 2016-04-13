@@ -283,8 +283,14 @@ package com.xvm
             if (value === undefined)
             {
                 //process l10n macro
-                if (macroName.indexOf("l10n") == 0)
+                if (macroName == "l10n")
+                {
                     res += prepareValue(NaN, macroName, norm, def, vehId);
+                }
+                else if (macroName == "py")
+                {
+                    res += prepareValue(NaN, macroName, norm, def, vehId);
+                }
                 else
                 {
                     res += def;
@@ -622,6 +628,13 @@ package com.xvm
                     break;
                 case "l10n":
                     res = Locale.get(norm);
+                    if (res == null)
+                        res = def;
+                    break;
+                case "py":
+                    res = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, norm);
+                    if (res == null)
+                        res = def;
                     break;
             }
 
