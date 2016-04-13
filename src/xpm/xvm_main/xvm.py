@@ -43,7 +43,6 @@ _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS,
     XVM_COMMAND.LOAD_STAT_USER,
     AS2COMMAND.LOAD_BATTLE_STAT,
-    AS2COMMAND.LOGSTAT,
 )
 
 # performs translations and fixes image path
