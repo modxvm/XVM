@@ -4,17 +4,20 @@
  */
 
 import com.xvm.*;
+import wot.battle.BattleLabels;
+import com.xvm.events.*;
 
     class wot.battle.BattleLabels {
 
-        public static var _BattleLabels:Object = {};
+        public static var BoX:Object = {};
         public var f: TextField;
-     
-        public function BattleLabels(InstanceIndex: Number) 
+        
         // assign properties to class instances
+        public function BattleLabels(InstanceIndex: Number) 
+        
         {
-            var BLCfg:Object = BattleLabels._BattleLabels.formats[InstanceIndex];
-            
+            var BLCfg:Object = BattleLabels.BoX.formats[InstanceIndex];
+
             // instance create TextField on holder "xvm_holder" at depth level: -16368 
             f = _root.xvm_holder.createTextField("bl" + InstanceIndex, 
                 _root.xvm_holder.getNextHighestDepth(),
@@ -91,58 +94,184 @@ import com.xvm.*;
                 !isNaN(shadowStrength) ? shadowStrength : 1)
             ];
                 
-                BattleLabels._BattleLabels.__isCreated = true;
-
-                // apply html text to text field
-                var BattleLabelsHTML: String = Macros.Format(Config.myPlayerName, BattleLabels._BattleLabels.formats[InstanceIndex].formats, {});
-                f.htmlText = "<p class='class" + InstanceIndex + "'>" + BattleLabelsHTML + "</p>";
-        }
-    
-        public static function UpdateBattleLabels(eventName: String) 
-        // updates text fields on matching event
-        {
-            if (BattleLabels._BattleLabels.__isCreated == undefined) 
-                return;
-            for (var i:Number = 0; i < BattleLabels._BattleLabels.UpdateableFieldsCount; ++i) 
+                // set flag that indicates creation of even one class instance
+                BattleLabels.BoX.__isCreated = true;
+                // setting invisibilty for all text fields; it wil be modified in this for non hotKey-assigned fields
+                f._visible = false;
+                
+                if ((BattleLabels.BoX.formats[InstanceIndex].hotKeyCode == null) || (BattleLabels.BoX.formats[InstanceIndex].hotKeyCode == ""))
                 {
-                    if (BattleLabels._BattleLabels.formats[BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[i]].updateEvent == eventName)
+                    // Logger.add("Instance has no hotKey assigned, applying HTML");
+                    // apply html text to text field except field with hotKey assigned
+                    var BattleLabelsHTML: String = Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[InstanceIndex].formats, {});
+                    f.htmlText = "<p class='class" + InstanceIndex + "'>" + BattleLabelsHTML + "</p>";
+                    f._visible = true;
+                }
+        }
+        
+        // updates text fields on matching event, called on events dispatch !key event dispatch
+        // updates only fields which is visible, invisible fields updates only on click or one time on hold by hotKey i.e. does not updates in background 
+        private static function UpdateBattleLabels(eventName: String):Function 
+        {
+            return function(e:Object):Void 
+            {
+                if (BattleLabels.BoX.__isCreated == undefined) 
+                    return;
+                //Logger.add("Update on eventName " + eventName);    
+                for (var i:Number = 0; i < BattleLabels.BoX.UpdateableFieldsCount; ++i)
+                {
+                    if ((BattleLabels.BoX.formats[BattleLabels.BoX.UpdateableTextFieldsIndexes[i]].updateEvent == eventName) && 
+                        (BattleLabels.BoX.__instance[BattleLabels.BoX.UpdateableTextFieldsIndexes[i]].f._visible == true)) 
                     {
-                        BattleLabels._BattleLabels.__instance[BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[i]].f.htmlText  = "<p class='class" + BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[i] + "'>" + Macros.Format(Config.myPlayerName, BattleLabels._BattleLabels.formats[BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[i]].formats, {}) + "</p>";
+                        BattleLabels.doUpdateBattleLabels(BattleLabels.BoX.UpdateableTextFieldsIndexes[i]);
+                    }
+                }
+            };
+        }
+
+        // updates field with defined instance index
+        private static function doUpdateBattleLabels(instanceIndex: Number)
+        {
+            BattleLabels.BoX.__instance[instanceIndex].f.htmlText  = "<p class='class" + instanceIndex + "'>" + Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[instanceIndex].formats, {}) + "</p>";
+            //Logger.add(BattleLabels.BoX.__instance[instanceIndex].f.htmlText);
+        }
+
+        // control hot keyed fields, called from key event listener
+        private static function switchBattleLabels(e:Object):Void
+        {
+                //Logger.add("Key " + e.key);
+                if (BattleLabels.BoX.__isCreated == undefined) 
+                    return;
+                for (var i:Number = 0; i < BattleLabels.BoX.HotKeyedTextFieldIndexesCount; ++i)   
+                { 
+                    switch (BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].onHold)
+                    {
+                        // hold key
+                        case true:
+                            if ((BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].hotKeyCode == e.key) && (e.isDown == true)) 
+                            {
+                                // update field one time on hold button, prevent numerous updates while holding button
+                                if BattleLabels.BoX.HotKeyedTextFieldIndexesUpdateFlag[i] == false
+                                {
+                                    BattleLabels.doUpdateBattleLabels(BattleLabels.BoX.HotKeyedTextFieldIndexes[i]);
+                                    //Logger.add("Updating hotkeyed text field for instance " + BattleLabels.BoX.HotKeyedTextFieldIndexes[i]);
+                                    BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible = true;
+                                    BattleLabels.BoX.HotKeyedTextFieldIndexesUpdateFlag[i] = true;  
+                                }
+                            }    
+                            else if (BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].hotKeyCode == e.key)
+                            {
+                                BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible = false;
+                                BattleLabels.BoX.HotKeyedTextFieldIndexesUpdateFlag[i] = false;      
+                            }
+                            break;
+                        //click key    
+                        case false:
+                            if ((BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].hotKeyCode == e.key) && 
+                                (BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible == false) && (e.isDown))
+                            {
+                                BattleLabels.doUpdateBattleLabels(BattleLabels.BoX.HotKeyedTextFieldIndexes[i]);
+                                //Logger.add("Updating hotkeyed text field for instance " + BattleLabels.BoX.HotKeyedTextFieldIndexes[i]);
+                                BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible = true;
+                                BattleLabels.BoX.HotKeyedState[i] = !BattleLabels.BoX.HotKeyedState[i];
+                            }
+                            else if ((BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible == true) && (BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].hotKeyCode == e.key) && (e.isDown)) 
+                            {
+                                BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible = false;
+                                BattleLabels.BoX.HotKeyedState[i] = !BattleLabels.BoX.HotKeyedState[i];
+                            }
+                            break;
                     }
                 }
         }
-
-        public static function createTextFields()
+        
         // create instances of all enabled text fields, logs instance indices of updateable text fields 
+        private static function createTextFields()
         { 
-            BattleLabels._BattleLabels.formats = new Array([]);
+            BattleLabels.BoX.formats = new Array([]);
             var formats:Array = Config.config.battleLabels.formats;
-            BattleLabels._BattleLabels.formats = formats;
+            BattleLabels.BoX.formats = formats;
+            
             if (formats) 
             {
                 var l:Number = formats.length;
-                BattleLabels._BattleLabels.UpdateableFieldsCount = 0;
-                BattleLabels._BattleLabels.UpdateableTextFieldsIndexes = new Array([]);
-                BattleLabels._BattleLabels.__instance = new Array([]);
+                BattleLabels.BoX.EnabledFieldsCount = 0;
+                BattleLabels.BoX.UpdateableFieldsCount = 0;
+                BattleLabels.BoX.UpdateableTextFieldsIndexes = new Array([]);
+                BattleLabels.BoX.HotKeyedTextFieldIndexesCount = 0;
+                BattleLabels.BoX.HotKeyedTextFieldIndexes = new Array([]);
+                BattleLabels.BoX.IsHotKeyedTextFieldsFlag = false;
+                BattleLabels.BoX.HotKeyedTextFieldIndexesUpdateFlag = new Array([]);
+                BattleLabels.BoX.__instance = new Array([]);
+                var listenersCache = new Array([]);
+                
                 for (var i:Number = 0; i < l; ++i) 
                 {
                     if (formats[i].enabled) 
                     {
-                        BattleLabels._BattleLabels.__instance[i]  = new BattleLabels(i);
+                        BattleLabels.BoX.__instance[i]  = new BattleLabels(i);
+                        BattleLabels.BoX.EnabledFieldsCount++;
                         if (formats[i].updateEvent != null && formats[i].updateEvent != "")
                         {
-                            BattleLabels._BattleLabels.UpdateableTextFieldsIndexes[BattleLabels._BattleLabels.UpdateableFieldsCount] = i;
-                            BattleLabels._BattleLabels.UpdateableFieldsCount++;
+                            BattleLabels.BoX.UpdateableTextFieldsIndexes[BattleLabels.BoX.UpdateableFieldsCount] = i;
+                            if BattleLabels.BoX.__listenersCache[formats[i].updateEvent] == undefined 
+                            {
+                                BattleLabels.setListeners(formats[i].updateEvent);
+                                listenersCache[formats[i].updateEvent] = formats[i].updateEvent;
+                                //Logger.add("Set listeners cache for " + i + " " + listenersCache[formats[i].updateEvent]);
+                            }
+                            BattleLabels.BoX.UpdateableFieldsCount++;
+                        }
+                        if (formats[i].hotKeyCode != null && formats[i].hotKeyCode != "")
+                        {
+                            BattleLabels.BoX.HotKeyedTextFieldIndexes[BattleLabels.BoX.HotKeyedTextFieldIndexesCount] = i;
+                            BattleLabels.BoX.HotKeyedTextFieldIndexesUpdateFlag[BattleLabels.BoX.HotKeyedTextFieldIndexesCount] = false;
+                            BattleLabels.BoX.HotKeyedTextFieldIndexesCount++;
                         }
                     }
                 }
+                if (BattleLabels.BoX.HotKeyedTextFieldIndexesCount > 0)
+                {
+                    // create listener for battleLabels key events dispatcher
+                    GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_LABEL_KEY_MODE, BattleLabels.switchBattleLabels, BattleLabels.switchBattleLabels);
+                    // flag for battleLabels key events dispatcher
+                    BattleLabels.BoX.IsHotKeyedTextFieldsFlag = true; 
+                }
             }
-        }            
-
-        public static function init() 
+        } 
+        
+        // adding listeners to field events, only one listener can be created for each event
+        private static function setListeners(eventName: String)
+        {
+            switch (eventName)
+            {
+                case "ON_VECHICLE_DESTROYED":
+                    //Logger.add("Added listener: " + eventName);
+                    GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
+                    break;
+                case "ON_BATTLE_STATE_CHANGED":
+                    //Logger.add("Added listener: " + eventName);
+                    GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
+                    break;
+                case "ON_CURRENT_VECHICLE_DESTROYED":
+                    //Logger.add("Added listener: " + eventName);
+                    GlobalEventDispatcher.addEventListener(Defines.E_SELF_DEAD, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
+                    break;
+                case "ON_MODULE_DESTROYED":
+                    //Logger.add("Added listener: " + eventName);
+                    GlobalEventDispatcher.addEventListener(Defines.E_MODULE_DESTROYED, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
+                    break;
+                case "ON_MODULE_REPAIRED":
+                    //Logger.add("Added listener: " + eventName);
+                    GlobalEventDispatcher.addEventListener(Defines.E_MODULE_REPAIRED, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
+                    break;      
+            }
+        }           
+        
         // init point, called from battleMain.as 
+        public static function init() 
         {
             if (Config.config.battle.allowLabelsOnBattleInterface) 
-                createTextFields();
+               BattleLabels.createTextFields();
         }
     }
