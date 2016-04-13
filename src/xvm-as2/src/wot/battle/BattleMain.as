@@ -115,6 +115,8 @@ class wot.battle.BattleMain
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ALT_MODE, isDown: isDown } );
         if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
+        if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_LABEL_KEY_MODE, key: key, isDown: isDown } );
     }
 
     public function as_xvm_onSniperCamera(enable:Boolean, zoom:Number):Void
