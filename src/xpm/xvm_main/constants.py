@@ -61,7 +61,6 @@ class XVM_COMMAND(object):
 # ExternalInterface commands
 
 class AS2COMMAND(object):
-    LOG = "log"
     LOGSTAT = "logstat"
     LOAD_BATTLE_STAT = "load_battle_stat"
     LOAD_SETTINGS = "load_settings"

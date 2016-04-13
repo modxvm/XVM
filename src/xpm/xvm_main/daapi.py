@@ -15,6 +15,9 @@ from logger import *
 
 class _DAAPI(object):
 
+    def py_xvm_log(self, *args):
+        log(*args)
+
     def py_xvm_pythonMacro(self, arg):
         #log('py_xvm_pythonMacro: {}'.format(arg))
         try:

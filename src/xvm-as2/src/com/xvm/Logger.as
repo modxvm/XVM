@@ -1,7 +1,4 @@
-﻿import com.xvm.Cmd;
-import com.xvm.JSONx;
-import com.xvm.Sandbox;
-import com.xvm.Strings;
+﻿import com.xvm.*;
 
 class com.xvm.Logger
 {
@@ -11,7 +8,7 @@ class com.xvm.Logger
     {
         try
         {
-            Cmd.log("[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Strings.padLeft(String(counter++), 3, '0') + "] " + str);
+            DAAPI.xvm_log("[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Strings.padLeft(String(counter++), 3, '0') + "] " + str);
         }
         catch (e)
         {

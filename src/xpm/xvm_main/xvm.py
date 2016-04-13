@@ -567,9 +567,7 @@ class Xvm(object):
             if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
             res = None
-            if cmd == AS2COMMAND.LOG:
-                log(*args)
-            elif cmd == AS2COMMAND.LOAD_BATTLE_STAT:
+            if cmd == AS2COMMAND.LOAD_BATTLE_STAT:
                 stats.getBattleStat(args, proxy)
             elif cmd == AS2COMMAND.LOAD_SETTINGS:
                 res = userprefs.get(args[0])

@@ -11,12 +11,18 @@ class com.xvm.DAAPI extends MovieClip
     public static function initialize()
     {
         // create stubs for DAAPI function binding
+        _root.py_xvm_log = null;
         _root.py_xvm_pythonMacro = null;
         _root.py_xvm_getScreenSize = null;
         _root.py_xvm_captureBarGetBaseNumText = null;
     }
 
     // DAAPI methods
+
+    public static function xvm_log():Void
+    {
+        _root.py_xvm_log.apply(null, arguments);
+    }
 
     public static function xvm_pythonMacro(arg:String):String
     {
