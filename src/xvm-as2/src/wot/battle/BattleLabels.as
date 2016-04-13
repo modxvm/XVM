@@ -4,7 +4,6 @@
  */
 
 import com.xvm.*;
-import wot.battle.BattleLabels;
 import com.xvm.events.*;
 
     class wot.battle.BattleLabels {
@@ -14,7 +13,6 @@ import com.xvm.events.*;
         
         // assign properties to class instances
         public function BattleLabels(InstanceIndex: Number) 
-        
         {
             var BLCfg:Object = BattleLabels.BoX.formats[InstanceIndex];
 
@@ -173,12 +171,10 @@ import com.xvm.events.*;
                                 BattleLabels.doUpdateBattleLabels(BattleLabels.BoX.HotKeyedTextFieldIndexes[i]);
                                 //Logger.add("Updating hotkeyed text field for instance " + BattleLabels.BoX.HotKeyedTextFieldIndexes[i]);
                                 BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible = true;
-                                BattleLabels.BoX.HotKeyedState[i] = !BattleLabels.BoX.HotKeyedState[i];
                             }
                             else if ((BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible == true) && (BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].hotKeyCode == e.key) && (e.isDown)) 
                             {
                                 BattleLabels.BoX.__instance[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].f._visible = false;
-                                BattleLabels.BoX.HotKeyedState[i] = !BattleLabels.BoX.HotKeyedState[i];
                             }
                             break;
                     }
