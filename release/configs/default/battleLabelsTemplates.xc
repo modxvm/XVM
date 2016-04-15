@@ -134,7 +134,7 @@
      │ "marginRight"              │ indent left, similarly (<textformat rightMargin='2'>...</textformat>)
      │                            │ отступ справа, аналогично (<textformat rightMargin='2'>...</textformat>)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "format"                  │ displayed text field data (HTML allowed, macros allowed)
+     │ "format"                   │ displayed text field data (HTML allowed, macros allowed)
      │                            │ отображаемые данные в текстовых полях (доступно использование HTML и макросов)
      └────────────────────────────┴──────────────────────────────────────────────────────────────────────────
     */
