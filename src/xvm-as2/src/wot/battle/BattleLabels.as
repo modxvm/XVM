@@ -43,53 +43,35 @@ import com.xvm.events.*;
             f.html = true;
             //////////////////////////////////////////////////////////////////////////////////
             
-            // style temp vars
+            // style and shadow color temp vars
             //////////////////////////////////////////////////////////////////////////////////
             var currentFieldDefaultStyleColor: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.color);
-            var currentFieldDefaultStyleName: String = Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.name);
-            var currentFieldDefaultStyleSize: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.size);
-            var currentFieldDefaultStyleAlign: String = Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.align);
-            var currentFieldDefaultStyleBold: Boolean = Macros.FormatGlobalBooleanValue(BLCfg.currentFieldDefaultStyle.bold);
-            var currentFieldDefaultStyleItalic: Boolean = Macros.FormatGlobalBooleanValue(BLCfg.currentFieldDefaultStyle.italic);
-            var currentFieldDefaultStyleDisplay: String = Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.display);
-            var currentFieldDefaultStyleLeading: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.leading);
-            var currentFieldDefaultStyleMarginLeft: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.marginLeft);
-            var currentFieldDefaultStyleMarginRight: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.marginRight);
-            //////////////////////////////////////////////////////////////////////////////////
-            // shadow temp vars
-            //////////////////////////////////////////////////////////////////////////////////
-            var shadowDistance: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.distance);
-            var shadowAngle: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.angle);
             var shadowColor: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.color);
-            var shadowAlpha: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.alpha);
-            var shadowBlurX: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.blur);
-            var shadowBlurY: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.blur);
-            var shadowStrength: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.strength);
-            //////////////////////////////////////////////////////////////////////////////////
-
+           
             // instance property styleSheet / config: currentFieldDefaultStyle
             f.styleSheet = Utils.createStyleSheet(Utils.createCSSExtended("class" + InstanceIndex,
                 !isNaN(currentFieldDefaultStyleColor) ? currentFieldDefaultStyleColor : 0xFFFFFF,
-                currentFieldDefaultStyleName != null ? currentFieldDefaultStyleName : "$FieldFont", 
-                !isNaN(currentFieldDefaultStyleSize) ? currentFieldDefaultStyleSize : 12,
-                currentFieldDefaultStyleAlign != null ? currentFieldDefaultStyleAlign : "left",
-                currentFieldDefaultStyleBold != null ? currentFieldDefaultStyleBold : false,
-                currentFieldDefaultStyleItalic != null ? currentFieldDefaultStyleItalic : false,
-                currentFieldDefaultStyleDisplay != null ? currentFieldDefaultStyleDisplay : "block",
-                !isNaN(currentFieldDefaultStyleLeading) ? currentFieldDefaultStyleLeading : 0,
-                !isNaN(currentFieldDefaultStyleMarginLeft) ? currentFieldDefaultStyleMarginLeft : 0,
-                !isNaN(currentFieldDefaultStyleMarginRight) ? currentFieldDefaultStyleMarginRight : 0)
+                BLCfg.currentFieldDefaultStyle.name != null ? Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.name) : "$FieldFont", 
+                !isNaN(BLCfg.currentFieldDefaultStyle.size) ? Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.size) : 12,
+                BLCfg.currentFieldDefaultStyle.align != null ? Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.align) : "left",
+                BLCfg.currentFieldDefaultStyle.bold != null ? Macros.FormatGlobalBooleanValue(BLCfg.currentFieldDefaultStyle.bold) : false,
+                BLCfg.currentFieldDefaultStyle.italic != null ? Macros.FormatGlobalBooleanValue(BLCfg.currentFieldDefaultStyle.italic) : false,
+                BLCfg.currentFieldDefaultStyle.underline != null ? Macros.FormatGlobalBooleanValue(BLCfg.currentFieldDefaultStyle.underline) : false,
+                BLCfg.currentFieldDefaultStyle.display != null ? Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.display) : "block",
+                !isNaN(BLCfg.currentFieldDefaultStyle.leading) ? Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.leading) : 0,
+                !isNaN(BLCfg.currentFieldDefaultStyle.marginLeft) ? Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.marginLeft) : 0,
+                !isNaN(BLCfg.currentFieldDefaultStyle.marginRight) ? Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.marginRight) : 0)
             );
-           
+            
             // instance property filter / config: shadow 
             f.filters = [new flash.filters.DropShadowFilter(
-                !isNaN(shadowDistance) ? shadowDistance : 0, 
-                !isNaN(shadowAngle) ? shadowAngle : 0, 
+                !isNaN(BLCfg.shadow.distance) ? Macros.FormatGlobalNumberValue(BLCfg.shadow.distance) : 0, 
+                !isNaN(BLCfg.shadow.angle) ? Macros.FormatGlobalNumberValue(BLCfg.shadow.angle) : 0, 
                 !isNaN(shadowColor) ? shadowColor : 0x000000, 
-                !isNaN(shadowAlpha) ? shadowAlpha : 0.75, 
-                !isNaN(shadowBlurX) ? shadowBlurX : 2, 
-                !isNaN(shadowBlurY) ? shadowBlurY : 2, 
-                !isNaN(shadowStrength) ? shadowStrength : 1)
+                !isNaN(BLCfg.shadow.alpha) ? Macros.FormatGlobalNumberValue(BLCfg.shadow.alpha) * 0.01 : 0.75, 
+                !isNaN(BLCfg.shadow.blur) ? Macros.FormatGlobalNumberValue(BLCfg.shadow.blur) : 2, 
+                !isNaN(BLCfg.shadow.blur) ? Macros.FormatGlobalNumberValue(BLCfg.shadow.blur) : 2, 
+                !isNaN(BLCfg.shadow.strength) ? Macros.FormatGlobalNumberValue(BLCfg.shadow.strength) : 1)
             ];
                 
                 // set flag that indicates creation of even one class instance
