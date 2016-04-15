@@ -18,9 +18,9 @@
      │                            │ событие по которому обновляется поле, используйте динамические макросы; для отключения используйте значение null;
      │                            │ доступные события: "ON_VECHICLE_DESTROYED", "ON_BATTLE_STATE_CHANGED", ON_CURRENT_VECHICLE_DESTROYED, ON_MODULE_DESTROYED, ON_MODULE_REPAIRED 
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "formats", or hide;
+     │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
      │                            │ when defined, text field will not be shown until key is pressed, to disable define null value
-     │                            │ горячие клавиши клавиатуры (список в hotkeys.xc), при нажатии - выводится текстовое поле и применяются параметры html в "formats", или скрывается поле;
+     │                            │ горячие клавиши клавиатуры (список в hotkeys.xc), при нажатии - выводится текстовое поле и применяются параметры html в "format", или скрывается поле;
      │                            │ текстовое поле не будет отображаться, пока не будет нажата клавиша, для отключения используйте значение null
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "onHold"                   │ take action by key click; true - while key is remains pressed
@@ -97,8 +97,8 @@
      │ "strength"                 │ strength shadow (0.0 .. 255.0)
      │                            │ интенсивность тени (0.0 .. 255.0)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "currentFieldDefaultStyle" │ it applies global style to html in "formats"; note, that defined font attributes in "formats" override those in "currentFieldDefaultStyle"
-     │                            │ применяет глобальный стиль HTML в "formats"; обратите внимание, что определенные атрибуты шрифта в "formats" переопределяют "currentFieldDefaultStyle"
+     │ "currentFieldDefaultStyle" │ it applies global style to html in "format"; note, that defined font attributes in "format" override those in "currentFieldDefaultStyle"
+     │                            │ применяет глобальный стиль HTML в "format"; обратите внимание, что определенные атрибуты шрифта в "format" переопределяют "currentFieldDefaultStyle"
      │                            │ field default styles:
      │                            │ стандартный стиль поля:
      │                            │
@@ -134,7 +134,7 @@
      │ "marginRight"              │ indent left, similarly (<textformat rightMargin='2'>...</textformat>)
      │                            │ отступ справа, аналогично (<textformat rightMargin='2'>...</textformat>)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "formats"                  │ displayed text field data (HTML allowed, macros allowed)
+     │ "format"                  │ displayed text field data (HTML allowed, macros allowed)
      │                            │ отображаемые данные в текстовых полях (доступно использование HTML и макросов)
      └────────────────────────────┴──────────────────────────────────────────────────────────────────────────
     */
@@ -159,7 +159,7 @@
       "borderColor": null, 
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 0.8, "blur": 5, "strength": 1.5 }, 
       "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xF4EFE8", "size": 15, "align": "left", "bold": false, "italic": false },
-      "formats": "<font color='{{c:winChance}}'>{{chancesStatic}}</font> / <font color='{{c:winChance}}'>{{chancesLive}}</font>"
+      "format": "<font color='{{c:winChance}}'>{{chancesStatic}}</font> / <font color='{{c:winChance}}'>{{chancesLive}}</font>"
     },
     "test": {
       "enabled": true,
@@ -182,7 +182,7 @@
       "borderColor": null, 
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 25}, 
       "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "italic": false, "display": "block", "leading": -1, "marginLeft": 2, "marginRight": 2},
-      "formats": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc<br/> Press '<font color='#60FF00'>J</font>' hot-key to show info field"
+      "format": "This is a demo of XVM text fields on battle inteface. You may disable it in battle.xc<br/> Press '<font color='#60FF00'>J</font>' hot-key to show info field"
     },
     "test2": {
       "enabled": true, 
@@ -205,7 +205,7 @@
       "borderColor": "0x101009",
       "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 0.8, "blur": 2, "strength": 8}, 
       "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0x60FF00", "size": 15, "align": "left", "bold": false, "italic": false, "display": "block", "leading": -20, "marginLeft": 2, "marginRight": 2},
-      "formats": "<font color='#FFFFFF'><p align='center'><b>Info text field (WN8:&nbsp;<font color='{{c:wn8}}'>{{wn8}}</font>)</b></p></font><br/>Battle tier:<font color='#ff1aff'>&nbsp;{{battletier}}</font><p align='right'>My vehicle:&nbsp;<font color='#ff1aff'>{{my-vehicle}}</font>&nbsp;(<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
+      "format": "<font color='#FFFFFF'><p align='center'><b>Info text field (WN8:&nbsp;<font color='{{c:wn8}}'>{{wn8}}</font>)</b></p></font><br/>Battle tier:<font color='#ff1aff'>&nbsp;{{battletier}}</font><p align='right'>My vehicle:&nbsp;<font color='#ff1aff'>{{my-vehicle}}</font>&nbsp;(<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
     }
   }
 }
