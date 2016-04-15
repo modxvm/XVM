@@ -241,15 +241,15 @@ import com.xvm.events.*;
         {
             switch (eventName)
             {
-                case "ON_VECHICLE_DESTROYED":
-                    //Logger.add("Added listener: " + eventName);
-                    GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
-                    break;
                 case "ON_BATTLE_STATE_CHANGED":
                     //Logger.add("Added listener: " + eventName);
                     GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
                     break;
-                case "ON_CURRENT_VECHICLE_DESTROYED":
+                case "ON_VEHICLE_DESTROYED":
+                    //Logger.add("Added listener: " + eventName);
+                    GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
+                    break;
+                case "ON_CURRENT_VEHICLE_DESTROYED":
                     //Logger.add("Added listener: " + eventName);
                     GlobalEventDispatcher.addEventListener(Defines.E_SELF_DEAD, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
                     break;
