@@ -77,7 +77,7 @@
      │ "shadow"                   │ shadow settings, defaults:
      │                            │ настройки тени, значение по умолчанию: 
      │                            │
-     │                            │ "shadow": { "distance": 0, "angle": 0, "color": "0x000000", "alpha": 0.75, "blur": 2, "strength": 1 }
+     │                            │ "shadow": { "distance": 0, "angle": 0, "color": "0x000000", "alpha": 75, "blur": 2, "strength": 1 }
      │----------------------------│--------------------------------------------------------------------------
      │ "distance"                 │ distance shadow, in pixels
      │                            │ дистанция тени, в пикселях
@@ -88,8 +88,8 @@
      │ "color"                    │ color shadow ("0xXXXXXX")
      │                            │ цвет тени ("0xXXXXXX")
      │----------------------------│--------------------------------------------------------------------------
-     │ "alpha"                    │ alpha shadow (0.0 .. 1.0)
-     │                            │ прозрачность тени (0.0 .. 1.0)
+     │ "alpha"                    │ shadow alpha (0 .. 100)
+     │                            │ прозрачность тени (0 .. 100)
      │----------------------------│--------------------------------------------------------------------------
      │ "blur"                     │ blur shadow (0.0 .. 255.0)
      │                            │ эффект размывки тени (0.0 .. 255.0)
@@ -102,7 +102,7 @@
      │                            │ field default styles:
      │                            │ стандартный стиль поля:
      │                            │
-     │                            │ "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
+     │                            │ "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "underline": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
      │----------------------------│--------------------------------------------------------------------------
      │ "name"                     │ font name
      │                            │ наименование шрифта
@@ -122,8 +122,8 @@
      │ "italic"                   │ true - italic
      │                            │ true - курсив
      │----------------------------│--------------------------------------------------------------------------
-     │ "underline"                │ true - underline  // IN DEVELOPMENT
-     │                            │ true - подчеркивание // IN DEVELOPMENT
+     │ "underline"                │ true - underline
+     │                            │ true - подчеркивание
      │----------------------------│--------------------------------------------------------------------------
      │ "display"                  │ required for align to work
      │                            │ требуется для работы выравнивания
@@ -160,8 +160,8 @@
       "antiAliasType": "advanced",
       "bgColor": null,
       "borderColor": null, 
-      "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 0.8, "blur": 5, "strength": 1.5 }, 
-      "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xF4EFE8", "size": 15, "align": "left", "bold": false, "italic": false },
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 }, 
+      "currentFieldDefaultStyle": { "color": "0xF4EFE8", "size": 15 },
       "format": "<font color='{{c:winChance}}'>{{chancesStatic}}</font> / <font color='{{c:winChance}}'>{{chancesLive}}</font>"
     },
     "test": {
@@ -183,8 +183,8 @@
       "antiAliasType": "advanced",
       "bgColor": null,
       "borderColor": null, 
-      "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 25}, 
-      "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "italic": false, "display": "block", "leading": -1, "marginLeft": 2, "marginRight": 2},
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 2, "strength": 25}, 
+      "currentFieldDefaultStyle": { "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "leading": -1, "marginLeft": 2, "marginRight": 2 },
       "format": "This is a demo of XVM text fields on battle interface. You may disable it in battle.xc<br/> Press '<font color='#60FF00'>J</font>' hot-key to show info field"
     },
     "test2": {
@@ -206,8 +206,8 @@
       "antiAliasType": "advanced",
       "bgColor": "0x000000",
       "borderColor": "0x101009",
-      "shadow": { "distance": 1, "angle": 90, "color": "0x000000", "alpha": 0.8, "blur": 2, "strength": 8}, 
-      "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0x60FF00", "size": 15, "align": "left", "bold": false, "italic": false, "display": "block", "leading": -20, "marginLeft": 2, "marginRight": 2},
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 2, "strength": 8}, 
+      "currentFieldDefaultStyle": { "color": "0x60FF00", "size": 15, "leading": -20, "marginLeft": 2, "marginRight": 2},
       "format": "<font color='#FFFFFF'><p align='center'><b>Info text field (WN8:&nbsp;<font color='{{c:wn8}}'>{{wn8}}</font>)</b></p></font><br/>Battle tier:<font color='#ff1aff'>&nbsp;{{battletier}}</font><p align='right'>My vehicle:&nbsp;<font color='#ff1aff'>{{my-vehicle}}</font>&nbsp;(<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
     }
   }
