@@ -101,7 +101,7 @@ import com.xvm.events.*;
                 {
                     // Logger.add("Instance has no hotKey assigned, applying HTML");
                     // apply html text to text field except field with hotKey assigned
-                    var BattleLabelsHTML: String = Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[InstanceIndex].formats, {});
+                    var BattleLabelsHTML: String = Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[InstanceIndex].format, {});
                     f.htmlText = "<p class='class" + InstanceIndex + "'>" + BattleLabelsHTML + "</p>";
                     f._visible = true;
                 }
@@ -130,7 +130,7 @@ import com.xvm.events.*;
         // updates field with defined instance index
         private static function doUpdateBattleLabels(instanceIndex: Number)
         {
-            BattleLabels.BoX.__instance[instanceIndex].f.htmlText  = "<p class='class" + instanceIndex + "'>" + Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[instanceIndex].formats, {}) + "</p>";
+            BattleLabels.BoX.__instance[instanceIndex].f.htmlText  = "<p class='class" + instanceIndex + "'>" + Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[instanceIndex].format, {}) + "</p>";
             //Logger.add(BattleLabels.BoX.__instance[instanceIndex].f.htmlText);
         }
 
