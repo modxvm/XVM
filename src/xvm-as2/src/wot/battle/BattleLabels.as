@@ -12,44 +12,54 @@ import com.xvm.events.*;
         public var f: TextField;
         
         // assign properties to class instances
-        public function BattleLabels(InstanceIndex: Number) 
+        public function BattleLabels(instanceIndex: Number) 
         {
-            var BLCfg:Object = BattleLabels.BoX.formats[InstanceIndex];
+            var BLCfg:Object = BattleLabels.BoX.formats[instanceIndex];
+
+            // temp vars
+            //////////////////////////////////////////////////////////////////////////////////
+            var currentFieldDefaultStyleColor: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.color);
+            var shadowColor: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.color);
+
+            var BLCfg_align: String = BLCfg.align != null ? Macros.FormatGlobalStringValue(BLCfg.align) : "left";
+            var BLCfg_valign: String = BLCfg.valign != null ? Macros.FormatGlobalStringValue(BLCfg.valign) : "top";
+            var BLCfg_width: Number = !isNaN(BLCfg.width) ? Macros.FormatGlobalNumberValue(BLCfg.width) : 0;
+            var BLCfg_height: Number = !isNaN(BLCfg.height) ? Macros.FormatGlobalNumberValue(BLCfg.height) : 0;
+            var BLCfg_x: Number = !isNaN(BLCfg.x) ? Macros.FormatGlobalNumberValue(BLCfg.x) : 0;
+            var BLCfg_y: Number = !isNaN(BLCfg.y) ? Macros.FormatGlobalNumberValue(BLCfg.y) : 0;
+            var BLCfg_borderColor: Number = Macros.FormatGlobalNumberValue(BLCfg.borderColor);
+            var BLCfg_bgColor: Number = Macros.FormatGlobalNumberValue(BLCfg.bgColor);
+
 
             // instance create TextField on holder "xvm_holder" at depth level: -16368 
-            f = _root.xvm_holder.createTextField("bl" + InstanceIndex, 
+            f = _root.xvm_holder.createTextField("bl" + instanceIndex, 
                 _root.xvm_holder.getNextHighestDepth(),
-                Utils.HVAlign(BLCfg.align, BLCfg.width, false) + Macros.FormatGlobalNumberValue(BLCfg.x),
-                Utils.HVAlign(BLCfg.valign, BLCfg.height, true) + Macros.FormatGlobalNumberValue(BLCfg.y),
-                Macros.FormatGlobalNumberValue(BLCfg.width), 
-                Macros.FormatGlobalNumberValue(BLCfg.height)
+                Utils.HVAlign(BLCfg_align, BLCfg_width, false) + Macros.FormatGlobalNumberValue(BLCfg_x),
+                Utils.HVAlign(BLCfg_valign, BLCfg_height, true) + Macros.FormatGlobalNumberValue(BLCfg_y),
+                Macros.FormatGlobalNumberValue(BLCfg_width), 
+                Macros.FormatGlobalNumberValue(BLCfg_height)
             );
             
             // instance properties
             //////////////////////////////////////////////////////////////////////////////////
-            f._alpha = Macros.FormatGlobalNumberValue(BLCfg.alpha);
-            f._xscale = Macros.FormatGlobalNumberValue(BLCfg.scaleX);
-            f._yscale = Macros.FormatGlobalNumberValue(BLCfg.scaleY);
-            f._rotation = Macros.FormatGlobalNumberValue(BLCfg.rotation);
+            f._alpha = !isNaN(BLCfg.alpha) ? Macros.FormatGlobalNumberValue(BLCfg.alpha) : 100;
+            f._xscale = !isNaN(BLCfg.scaleX) ? Macros.FormatGlobalNumberValue(BLCfg.scaleX) : 100;
+            f._yscale = !isNaN(BLCfg.scaleY) ? Macros.FormatGlobalNumberValue(BLCfg.scaleY) : 100;
+            f._rotation = !isNaN(BLCfg.rotation) ? Macros.FormatGlobalNumberValue(BLCfg.rotation) : 0;
             f.selectable = false;
-            f.antiAliasType = BLCfg.antiAliasType != null ? BLCfg.antiAliasType : "advanced";
+            f.antiAliasType = BLCfg.antiAliasType != null ? Macros.FormatGlobalStringValue(BLCfg.antiAliasType) : "advanced";
             f.multiline = true;
             f.condenseWhite = true;
             f.border = BLCfg.borderColor != null;
-            f.borderColor = Macros.FormatGlobalNumberValue(BLCfg.borderColor);
+            f.borderColor = !isNaN(BLCfg_borderColor) ? BLCfg_borderColor : null;
             f.background = BLCfg.bgColor != null;
-            f.backgroundColor = Macros.FormatGlobalNumberValue(BLCfg.bgColor);
-            f.autoSize = BLCfg.autoSize != null ? BLCfg.autoSize : "none";
+            f.backgroundColor = !isNaN(BLCfg_bgColor) ? BLCfg_bgColor : null;
+            f.autoSize = BLCfg.autoSize != null ? Macros.FormatGlobalStringValue(BLCfg.autoSize) : "left";
             f.html = true;
             //////////////////////////////////////////////////////////////////////////////////
-            
-            // style and shadow color temp vars
-            //////////////////////////////////////////////////////////////////////////////////
-            var currentFieldDefaultStyleColor: Number = Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.color);
-            var shadowColor: Number = Macros.FormatGlobalNumberValue(BLCfg.shadow.color);
            
             // instance property styleSheet / config: currentFieldDefaultStyle
-            f.styleSheet = Utils.createStyleSheet(Utils.createCSSExtended("class" + InstanceIndex,
+            f.styleSheet = Utils.createStyleSheet(Utils.createCSSExtended("class" + instanceIndex,
                 !isNaN(currentFieldDefaultStyleColor) ? currentFieldDefaultStyleColor : 0xFFFFFF,
                 BLCfg.currentFieldDefaultStyle.name != null ? Macros.FormatGlobalStringValue(BLCfg.currentFieldDefaultStyle.name) : "$FieldFont", 
                 !isNaN(BLCfg.currentFieldDefaultStyle.size) ? Macros.FormatGlobalNumberValue(BLCfg.currentFieldDefaultStyle.size) : 12,
@@ -78,13 +88,12 @@ import com.xvm.events.*;
                 BattleLabels.BoX.__isCreated = true;
                 // setting invisibilty for all text fields; it wil be modified in this for non hotKey-assigned fields
                 f._visible = false;
-                
-                if ((BattleLabels.BoX.formats[InstanceIndex].hotKeyCode == null) || (BattleLabels.BoX.formats[InstanceIndex].hotKeyCode == ""))
+                if ((BattleLabels.BoX.formats[instanceIndex].hotKeyCode == null) || (BattleLabels.BoX.formats[instanceIndex].hotKeyCode == ""))
                 {
                     // Logger.add("Instance has no hotKey assigned, applying HTML");
                     // apply html text to text field except field with hotKey assigned
-                    var BattleLabelsHTML: String = Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[InstanceIndex].format, {});
-                    f.htmlText = "<p class='class" + InstanceIndex + "'>" + BattleLabelsHTML + "</p>";
+                    var BattleLabelsHTML: String = BattleLabels.BoX.formats[instanceIndex].format != null ? Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[instanceIndex].format, {}) : "";
+                    f.htmlText = "<p class='class" + instanceIndex + "'>" + BattleLabelsHTML + "</p>";
                     f._visible = true;
                 }
         }
@@ -112,7 +121,8 @@ import com.xvm.events.*;
         // updates field with defined instance index
         private static function doUpdateBattleLabels(instanceIndex: Number)
         {
-            BattleLabels.BoX.__instance[instanceIndex].f.htmlText  = "<p class='class" + instanceIndex + "'>" + Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[instanceIndex].format, {}) + "</p>";
+            var BattleLabelsHTML: String = BattleLabels.BoX.formats[instanceIndex].format != null ? Macros.Format(Config.myPlayerName, BattleLabels.BoX.formats[instanceIndex].format, {}) : "";
+            BattleLabels.BoX.__instance[instanceIndex].f.htmlText  = "<p class='class" + instanceIndex + "'>" + BattleLabelsHTML + "</p>";
             //Logger.add(BattleLabels.BoX.__instance[instanceIndex].f.htmlText);
         }
 
@@ -124,7 +134,7 @@ import com.xvm.events.*;
                     return;
                 for (var i:Number = 0; i < BattleLabels.BoX.HotKeyedTextFieldIndexesCount; ++i)   
                 { 
-                    switch (BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].onHold)
+                    switch BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].onHold != null ? (BattleLabels.BoX.formats[BattleLabels.BoX.HotKeyedTextFieldIndexes[i]].onHold) : false
                     {
                         // hold key
                         case true:
