@@ -70,6 +70,15 @@
       "x": 2,
       "y": -9
     },
+    // Nick teamkiller, visible
+    // Ник тимкиллера, видимый
+    "nickTeamkillerSpotted": {
+      "$ref": { "path":"def.defaultItem" },
+      "flags": [ "ally", "teamKiller", "spotted", "alive" ],
+      "format": "<font size='{{battletype?8|0}}' color='{{tk?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|#BFBFBF}}'><i>{{name%.7s~..}}</i></font>",
+      "x": 2,
+      "y": -9
+    },
     // Vehicle type, missing
     // Тип техники, пропавший
     "vtypeLost": {
