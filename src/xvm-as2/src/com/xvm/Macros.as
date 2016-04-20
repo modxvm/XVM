@@ -36,19 +36,19 @@ class com.xvm.Macros
         return Number(value);
     }
 
-    public static function FormatGlobalNumberValue(value):Number
+    public static function FormatGlobalNumberValue(value, defaultValue:Number):Number
     {
-        return _instance._FormatGlobalNumberValue(value);
+        return _instance._FormatGlobalNumberValue(value, defaultValue);
     }
 
-    public static function FormatGlobalBooleanValue(value):Boolean
+    public static function FormatGlobalBooleanValue(value, defaultValue:Boolean):Boolean
     {
-        return _instance._FormatGlobalBooleanValue(value);
+        return _instance._FormatGlobalBooleanValue(value, defaultValue);
     }
 
-    public static function FormatGlobalStringValue(value):String
+    public static function FormatGlobalStringValue(value, defaultValue:String):String
     {
-        return _instance._FormatGlobalStringValue(value);
+        return _instance._FormatGlobalStringValue(value, defaultValue);
     }
 
     public static function IsCached(pname:String, format:String, alive:Boolean):Boolean
@@ -643,23 +643,32 @@ class com.xvm.Macros
         return res;
     }
 
-    private function _FormatGlobalNumberValue(value):Number
+    private function _FormatGlobalNumberValue(value, defaultValue:Number):Number
     {
         if (!isNaN(value))
             return Number(value);
-        return Number(_Format(null, value, {}));
+        var res:Number = Number(_Format(null, value, {}));
+        if (isFinite(res))
+            return res;
+        return (defaultValue === undefined) ? NaN : defaultValue;
     }
 
-    private function _FormatGlobalBooleanValue(value):Boolean
+    private function _FormatGlobalBooleanValue(value, defaultValue:Boolean):Boolean
     {
         if (typeof value == "boolean")
             return value;
-        return String(_Format(null, value, {})).toLowerCase() == 'true';
+        var res:String = String(_Format(null, value, { } )).toLowerCase();
+        if (res == 'true')
+            return true;
+        if (res == 'false')
+            return false;
+        return (defaultValue === undefined) ? false : defaultValue;
     }
 
-    private function _FormatGlobalStringValue(value):String
+    private function _FormatGlobalStringValue(value, defaultValue:String):String
     {
-        return _Format(null, String(value), {});
+        var res:String = _Format(null, String(value), { } );
+        return res != null ? res : (defaultValue === undefined) ? null : defaultValue;
     }
 
     /**
