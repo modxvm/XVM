@@ -645,6 +645,8 @@ class com.xvm.Macros
 
     private function _FormatGlobalNumberValue(value, defaultValue:Number):Number
     {
+        if (value == null)
+            return (defaultValue === undefined) ? NaN : defaultValue;
         if (!isNaN(value))
             return Number(value);
         var res:Number = Number(_Format(null, value, {}));
@@ -655,6 +657,8 @@ class com.xvm.Macros
 
     private function _FormatGlobalBooleanValue(value, defaultValue:Boolean):Boolean
     {
+        if (value == null)
+            return (defaultValue === undefined) ? false : defaultValue;
         if (typeof value == "boolean")
             return value;
         var res:String = String(_Format(null, value, { } )).toLowerCase();
@@ -667,6 +671,8 @@ class com.xvm.Macros
 
     private function _FormatGlobalStringValue(value, defaultValue:String):String
     {
+        if (value == null)
+            return (defaultValue === undefined) ? null : defaultValue;
         var res:String = _Format(null, String(value), { } );
         return res != null ? res : (defaultValue === undefined) ? null : defaultValue;
     }
