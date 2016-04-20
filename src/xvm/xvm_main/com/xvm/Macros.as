@@ -643,6 +643,8 @@ package com.xvm
 
         private function _FormatGlobalNumberValue(value:*, defaultValue:Number):Number
         {
+            if (value == null)
+                return defaultValue;
             if (!isNaN(value))
                 return value;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
@@ -654,6 +656,8 @@ package com.xvm
 
         private function _FormatGlobalBooleanValue(value:*, defaultValue:Boolean):Boolean
         {
+            if (value == null)
+                return defaultValue;
             if (typeof value == "boolean")
                 return value;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
@@ -667,6 +671,8 @@ package com.xvm
 
         private function _FormatGlobalStringValue(value:*, defaultValue:String):String
         {
+            if (value == null)
+                return defaultValue;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
             var res:String = _Format(null, String(value), new MacrosFormatOptions());
             return res != null ? res : defaultValue;
