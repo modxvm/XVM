@@ -233,6 +233,10 @@ import com.xvm.events.*;
                     //Logger.add("Added listener: " + eventName);
                     GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
                     break;
+                case "ON_PLAYERS_HP_CHANGED":
+                    //Logger.add("Added listener: " + eventName);
+                    GlobalEventDispatcher.addEventListener(Defines.E_PLAYERS_HP_CHANGED, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
+                    break;           
                 case "ON_VEHICLE_DESTROYED":
                     //Logger.add("Added listener: " + eventName);
                     GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
@@ -248,7 +252,7 @@ import com.xvm.events.*;
                 case "ON_MODULE_REPAIRED":
                     //Logger.add("Added listener: " + eventName);
                     GlobalEventDispatcher.addEventListener(Defines.E_MODULE_REPAIRED, BattleLabels.UpdateBattleLabels(eventName), BattleLabels.UpdateBattleLabels(eventName));
-                    break;      
+                    break;     
             }
         }           
         

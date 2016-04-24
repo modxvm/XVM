@@ -117,6 +117,7 @@ class com.xvm.Defines
     public static var E_MODULE_DESTROYED = "module_destroyed";
     public static var E_MODULE_REPAIRED = "module_repaired";
     public static var E_BATTLE_LABEL_KEY_MODE = "battle_label_key_mode";
+    public static var E_PLAYERS_HP_CHANGED = "players_hp_changed";
 
     // ArenaGuiTypes
     // sync with constants.py: ARENA_GUI_TYPE

@@ -48,6 +48,7 @@ class wot.battle.BattleMain
         _root.as_xvm_onSniperCamera = this.as_xvm_onSniperCamera;
         _root.as_xvm_onAimOffsetUpdate = this.as_xvm_onAimOffsetUpdate;
         _root.as_xvm_onBattleStateChanged = this.as_xvm_onBattleStateChanged;
+        _root.as_xvm_onPlayersHpChanged = this.as_xvm_onPlayersHpChanged;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, BattleMainConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
@@ -178,6 +179,12 @@ class wot.battle.BattleMain
         {
             Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
         }
+    }
+
+    public function as_xvm_onPlayersHpChanged():Void
+    {
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYERS_HP_CHANGED } );
+        //Logger.add("HP update event dispatched");
     }
 
     // callbacks

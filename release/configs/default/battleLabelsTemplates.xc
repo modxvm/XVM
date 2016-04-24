@@ -14,9 +14,9 @@
      │                            │ включить/отключить создание полей: true or false (по-умолчанию: false)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "updateEvent"              │ event on which field updates, use with dynamic macros; to disable define null value or delete parameter;
-     │                            │ allowed events: "ON_BATTLE_STATE_CHANGED", "ON_VEHICLE_DESTROYED", "ON_CURRENT_VEHICLE_DESTROYED", "ON_MODULE_DESTROYED", "ON_MODULE_REPAIRED"
+     │                            │ allowed events: "ON_BATTLE_STATE_CHANGED", "ON_PLAYERS_HP_CHANGED", "ON_VEHICLE_DESTROYED", "ON_CURRENT_VEHICLE_DESTROYED", "ON_MODULE_DESTROYED", "ON_MODULE_REPAIRED"
      │                            │ событие по которому обновляется поле, используйте динамические макросы; для отключения используйте значение null или удалите параметр;
-     │                            │ доступные события: "ON_BATTLE_STATE_CHANGED", "ON_VEHICLE_DESTROYED", "ON_CURRENT_VEHICLE_DESTROYED", "ON_MODULE_DESTROYED", "ON_MODULE_REPAIRED"
+     │                            │ доступные события: "ON_BATTLE_STATE_CHANGED", "ON_PLAYERS_HP_CHANGED", "ON_VEHICLE_DESTROYED", "ON_CURRENT_VEHICLE_DESTROYED", "ON_MODULE_DESTROYED", "ON_MODULE_REPAIRED"
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
      │                            │ when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
