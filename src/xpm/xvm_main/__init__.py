@@ -53,6 +53,7 @@ from logger import *
 import utils
 import vehstate
 from xvm import g_xvm
+import xmqp_events
 
 _LOBBY_SWF = 'lobby.swf'
 _BATTLE_SWF = 'battle.swf'
@@ -72,7 +73,7 @@ def start():
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
-    g_eventBus.addListener(XVM_EVENT.XMQP_MESSAGE, g_xvm.onXmqpMessage)
+    g_eventBus.addListener(XVM_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
     # config already loaded, just send event to apply required code
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
@@ -90,7 +91,7 @@ def fini():
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
-    g_eventBus.removeListener(XVM_EVENT.XMQP_MESSAGE, g_xvm.onXmqpMessage)
+    g_eventBus.removeListener(XVM_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
     filecache.fin()
 

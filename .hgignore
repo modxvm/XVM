@@ -25,4 +25,6 @@ src/xvm-as2/obj
 src/xvm-as2/swf/*.swf
 
 utils/replays/*.wotreplay
+utils/xmqp_test/data/
+utils/xmqp_test/*.pyc
 output/*

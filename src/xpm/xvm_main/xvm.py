@@ -100,13 +100,6 @@ class Xvm(object):
         type = e.ctx.get('type', SystemMessages.SM_TYPE.Information)
         SystemMessages.pushMessage(msg, type)
 
-    # XMQP Message
-
-    def onXmqpMessage(self, e=None):
-        #trace('onXmqpMessage')
-        body = e.ctx.get('body', '')
-        debug('onXmqpMessage: {}'.format(body))
-
     # state handler
 
     def onGUISpaceChanged(self, spaceID):
@@ -669,8 +662,9 @@ class Xvm(object):
             self.hangarInit()
 
     def xmqp_init(self):
+        debug('xmqp_init')
         if config.networkServicesSettings.servicesActive:
-            if isReplay() or XMQP_DEVELOPMENT:
+            if not isReplay() or xmqp.XMQP_DEVELOPMENT:
                 token = config.token.token
                 if token is not None and token != '':
                     players = []
@@ -680,8 +674,11 @@ class Xvm(object):
                         # ally team only
                         if vData['team'] == player_team:
                             players.append(vData['accountDBID'])
+                    if xmqp.XMQP_DEVELOPMENT:
+                        currentPlayerId = utils.getPlayerId()
+                        if currentPlayerId not in players:
+                            players.append(currentPlayerId)
                     xmqp.start(players)
-
 
     def xmqp_stop(self):
         xmqp.stop()

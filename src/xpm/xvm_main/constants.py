@@ -13,6 +13,7 @@ class XVM(object):
         ]
     XMQP_SERVER = 'xmqp.modxvm.com'
     XMQP_EXCHANGE_NAME_QUERY = 'query.battle.channel'
+    XMQP_COMMAND_BATTLE_MESSAGE = 'command.battle.message'
     TIMEOUT = 5000
 
     CONFIG_DIR = 'res_mods/configs/xvm'
