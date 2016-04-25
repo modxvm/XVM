@@ -20,15 +20,15 @@
     // Круг радиусом 564 метров - это ограничение игрового движка. Максимальная дистанция отрисовки маркеров.
     // Данные по конкретному врагу не могут быть обновлены пока не видно его маркер или обломки.
     "hpLeft": {
-        // false - Disable.
-        // false - отключить.
-        "enabled": true,
-        // Header - Only localization macros are allowed, see macros.txt.
-        // Заголовок - допускаются только макросы перевода, см. macros.txt.
-        "header": "<font color='#FFFFFF'>{{l10n:hpLeftTitle}}</font>",
-        // Row in HP list (macros allowed, see macros.txt).
-        // Строка в списке попаданий (допускаются макроподстановки, см. macros.txt)
-        "format": "<textformat leading='-4' tabstops='[50,90,190]'><font color='{{c:hp-ratio}}'>     {{hp}}</font><tab><font color='#FFFFFF'>/ </font>{{hp-max}}<tab><font color='#FFFFFF'>|</font><font color='{{c:vtype}}'>{{vehicle}}</font><tab><font color='#FFFFFF'>|{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font></font></textformat>"
+      // false - Disable.
+      // false - отключить.
+      "enabled": true,
+      // Header - Only localization macros are allowed, see macros.txt.
+      // Заголовок - допускаются только макросы перевода, см. macros.txt.
+      "header": "<font color='#FFFFFF'>{{l10n:hpLeftTitle}}</font>",
+      // Row in HP list (macros allowed, see macros.txt).
+      // Строка в списке попаданий (допускаются макроподстановки, см. macros.txt)
+      "format": "<textformat leading='-4' tabstops='[50,90,190]'><font color='{{c:hp-ratio}}'>     {{hp}}</font><tab><font color='#FFFFFF'>/ </font>{{hp-max}}<tab><font color='#FFFFFF'>|</font><font color='{{c:vtype}}'>{{vehicle}}</font><tab><font color='#FFFFFF'>|{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font></font></textformat>"
     },
 
     // X position (negative values - bind to right side of screen).

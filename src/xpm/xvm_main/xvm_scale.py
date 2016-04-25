@@ -56,7 +56,7 @@ def XWGR(x):
             + 0.059054)			\
             - 47.85)))
 
-def XvmScaleToSup(x):
+def XvmScaleToSup(x=None):
     if x is None:
         return None
     return xvm_scale_data.xvm2sup[max(0, min(100, x-1))]

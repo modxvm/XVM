@@ -15,7 +15,6 @@ from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info, g_sessionProvider
 from gui.battle_control.arena_info.settings import VEHICLE_STATUS
 from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
-from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 
 from xfw import *
 
@@ -23,6 +22,7 @@ from constants import *
 from logger import *
 import config
 import configwatchdog
+import daapi
 import stats
 import svcmsg
 import vehinfo
@@ -31,6 +31,7 @@ import utils
 import userprefs
 import dossier
 import minimap_circles
+import python_macro
 import test
 import topclans
 import wgutils
@@ -42,8 +43,6 @@ _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
     XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS,
     XVM_COMMAND.LOAD_STAT_USER,
-    AS2COMMAND.LOAD_BATTLE_STAT,
-    AS2COMMAND.LOGSTAT,
 )
 
 # performs translations and fixes image path
@@ -269,30 +268,34 @@ class Xvm(object):
         except Exception, ex:
             err(traceback.format_exc())
 
+        self.initAS2DAAPI(flashObject)
         self.sendConfig(flashObject)
 
         for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
             self.doUpdateBattle(vID, INV.ALL, flashObject)
 
-
     def deleteBattleSwf(self):
         trace('deleteBattleSwf')
         pass
 
-
     def initVmmSwf(self, flashObject):
         #trace('initVmmSwf')
+        self.initAS2DAAPI(flashObject)
         self.sendConfig(flashObject)
-
 
     def deleteVmmSwf(self):
         #trace('deleteVmmSwf')
         pass
 
-
     def onStateBattle(self):
         trace('onStateBattle')
 
+    def initAS2DAAPI(self, flashObject):
+        root = flashObject.getMember('_root')
+        if root.script is None:
+            root.script = daapi.DAAPI(flashObject)
+        else:
+            err("TODO: flashObject.getMember('_root').script != None. flashObject=" % str(flashObject))
 
     def sendConfig(self, flashObject):
         #trace('sendConfig')
@@ -304,7 +307,7 @@ class Xvm(object):
                 player = BigWorld.player()
                 arena = player.arena
                 arenaVehicle = arena.vehicles.get(player.playerVehicleID)
-                movie.xvm_onUpdateConfig(
+                movie.as_xvm_onUpdateConfig(
                     config.config_data,                              # config_data
                     config.lang_data,                                # lang_data
                     arena.extraData.get('battleLevel', 0),           # battleLevel
@@ -415,7 +418,7 @@ class Xvm(object):
             return
 
         #debug('doUpdateBattle: {0} {1}'.format(vID, set(state.iteritems())))
-        movie.xvm_onBattleStateChanged(
+        movie.as_xvm_onBattleStateChanged(
             targets,
             state['playerName'],
             state['clanAbbrev'],
@@ -548,6 +551,9 @@ class Xvm(object):
                 stats.getUserData(args)
                 return (None, True)
 
+            if cmd == XVM_COMMAND.PYTHON_MACRO:
+                return (python_macro.processPythonMacro(args[0]), True)
+
             if cmd == XVM_COMMAND.OPEN_URL:
                 if len(args[0]):
                     utils.openWebBrowser(args[0], False)
@@ -562,34 +568,6 @@ class Xvm(object):
             return (None, True)
 
         return (None, False)
-
-
-    def onXvmCommand(self, proxy, id, cmd, *args):
-        try:
-            # debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-            if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
-                debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-            res = None
-            if cmd == AS2COMMAND.LOG:
-                log(*args)
-            elif cmd == AS2COMMAND.GET_SCREEN_SIZE:
-                # return
-                res = simplejson.dumps(list(GUI.screenResolution()))
-            elif cmd == AS2COMMAND.LOAD_BATTLE_STAT:
-                stats.getBattleStat(args, proxy)
-            elif cmd == AS2COMMAND.LOAD_SETTINGS:
-                res = userprefs.get(args[0])
-            elif cmd == AS2COMMAND.SAVE_SETTINGS:
-                userprefs.set(args[0], args[1])
-            elif cmd == AS2COMMAND.CAPTURE_BAR_GET_BASE_NUM:
-                n = int(args[0])
-                res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
-            else:
-                return
-            proxy.movie.invoke(('xvm.respond',
-                                [id] + res if isinstance(res, list) else [id, res]))
-        except Exception, ex:
-            err(traceback.format_exc())
 
 
     def initializeXvmServices(self):
@@ -658,7 +636,7 @@ class Xvm(object):
                     if self.checkKeyEventBattle(key, isDown):
                         movie = battle.movie
                         if movie is not None:
-                            movie.xvm_onKeyEvent(key, isDown)
+                            movie.as_xvm_onKeyEvent(key, isDown)
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())
         return True
@@ -671,11 +649,13 @@ class Xvm(object):
 
         c = config.get('hotkeys')
 
-        if (c['minimapZoom']['enabled'] is True and c['minimapZoom']['keyCode'] == key):
+        if c['minimapZoom']['enabled'] is True and c['minimapZoom']['keyCode'] == key:
             return True
-        if (c['minimapAltMode']['enabled'] is True and c['minimapAltMode']['keyCode'] == key):
+        if c['minimapAltMode']['enabled'] is True and c['minimapAltMode']['keyCode'] == key:
             return True
-        if (c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key):
+        if c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key:
+            return True
+        if c['battleLabelsHotKeys'] is True:
             return True
 
         return False
@@ -687,7 +667,6 @@ class Xvm(object):
             return
         if e.uniqueName == 'hangar':
             self.hangarInit()
-
 
     def xmqp_init(self):
         if config.networkServicesSettings.servicesActive:

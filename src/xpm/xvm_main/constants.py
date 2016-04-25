@@ -46,6 +46,7 @@ class XVM_COMMAND(object):
     LOAD_STAT_BATTLE = "xvm.load_stat_battle"
     LOAD_STAT_BATTLE_RESULTS = "xvm.load_stat_battle_results"
     LOAD_STAT_USER = "xvm.load_stat_user"
+    PYTHON_MACRO = "xvm.python_macro"
     OPEN_URL = "xvm.open_url"
     SAVE_SETTINGS = "xvm.save_settings"
     AS_DOSSIER = "xvm.as.dossier"
@@ -57,18 +58,6 @@ class XVM_COMMAND(object):
     AS_STAT_BATTLE_RESULTS_DATA = "xvm.as.stat_battle_results_data"
     AS_STAT_USER_DATA = "xvm.as.stat_user_data"
     AS_UPDATE_CURRENT_VEHICLE = "xvm.as.update_current_vehicle"
-
-
-# ExternalInterface commands
-
-class AS2COMMAND(object):
-    CAPTURE_BAR_GET_BASE_NUM = "capture_bar_get_base_num"
-    GET_SCREEN_SIZE = "get_screen_size"
-    LOG = "log"
-    LOGSTAT = "logstat"
-    LOAD_BATTLE_STAT = "load_battle_stat"
-    LOAD_SETTINGS = "load_settings"
-    SAVE_SETTINGS = "save_settings"
 
 
 # Teams

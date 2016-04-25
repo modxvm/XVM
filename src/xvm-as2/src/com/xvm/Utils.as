@@ -303,7 +303,7 @@ class com.xvm.Utils
      * Create Extended CSS
      */
     public static function createCSSExtended(className:String, color:Number, fontName:String,
-        fontSize:Number, align:String, bold:Boolean, italic:Boolean, display:String, leading:Number, 
+        fontSize:Number, align:String, bold:Boolean, italic:Boolean, underline:Boolean, display:String, leading:Number, 
         marginLeft:Number, marginRight:Number):String
     {
             return "." + className + " {" +
@@ -313,6 +313,7 @@ class com.xvm.Utils
                 "text-align:" + align + ";" +
                 "font-weight:" + (bold ? "bold" : "normal") + ";" +
                 "font-style:" + (italic ? "italic" : "normal") + ";" +
+                "text-decoration:" + (underline ? "underline" : "none") + ";" +
                 "display:" + (display ? "display" : "inline") + ";" +
                 "leading:" + leading + ";" +
                 "margin-left:" + marginLeft + ";" +

@@ -103,21 +103,24 @@ package xvm.battleloading_ui.components
             var textFieldWidthDelta:int = getNameFieldWidthDelta();
 
             textField_width = proxy.textField.width + textFieldWidthDelta;
+
             if (team == XfwConst.TEAM_ALLY)
             {
-                squad_x = proxy.squad.x + Macros.FormatGlobalNumberValue(cfg.squadIconOffsetXLeft);
-                textField_x = proxy.textField.x + Macros.FormatGlobalNumberValue(cfg.nameFieldOffsetXLeft);
-                vehicleIconLoader_x = proxy.vehicleIconLoader.x + Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
-                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x + Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
-                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x + Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft);
+                squad_x = proxy.squad.x + Macros.FormatGlobalNumberValue(cfg.squadIconOffsetXLeft, 0);
+                textField_x = proxy.textField.x + Macros.FormatGlobalNumberValue(cfg.nameFieldOffsetXLeft, 0);
+                var vehicleIconOffsetXLeft:Number = Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXLeft, 0);
+                vehicleIconLoader_x = proxy.vehicleIconLoader.x + vehicleIconOffsetXLeft;
+                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x + vehicleIconOffsetXLeft;
+                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x + vehicleIconOffsetXLeft;
             }
             else
             {
-                squad_x = proxy.squad.x - Macros.FormatGlobalNumberValue(cfg.squadIconOffsetXRight);
-                textField_x = proxy.textField.x - Macros.FormatGlobalNumberValue(cfg.nameFieldOffsetXRight) - textFieldWidthDelta;
-                vehicleIconLoader_x = proxy.vehicleIconLoader.x - Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
-                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x - Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
-                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x - Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight);
+                squad_x = proxy.squad.x - Macros.FormatGlobalNumberValue(cfg.squadIconOffsetXRight, 0);
+                textField_x = proxy.textField.x - Macros.FormatGlobalNumberValue(cfg.nameFieldOffsetXRight, 0) - textFieldWidthDelta;
+                var vehicleIconOffsetXRight:Number = Macros.FormatGlobalNumberValue(cfg.vehicleIconOffsetXRight, 0);
+                vehicleIconLoader_x = proxy.vehicleIconLoader.x - vehicleIconOffsetXRight;
+                vehicleLevelIcon_x = proxy.vehicleLevelIcon.x - vehicleIconOffsetXRight;
+                vehicleTypeIcon_x = proxy.vehicleTypeIcon.x - vehicleIconOffsetXRight;
             }
         }
 
@@ -229,7 +232,7 @@ package xvm.battleloading_ui.components
                                 proxy.vehicleField.x += -2 - VEHICLE_TYPE_ICON_WIDTH;
                             }
                         }
-                        proxy.vehicleField.x += Macros.FormatGlobalNumberValue(cfg.vehicleFieldOffsetXLeft);
+                        proxy.vehicleField.x += Macros.FormatGlobalNumberValue(cfg.vehicleFieldOffsetXLeft, 0);
                     }
                     else
                     {
@@ -252,7 +255,7 @@ package xvm.battleloading_ui.components
                                 proxy.vehicleField.x += VEHICLE_TYPE_ICON_WIDTH + 2;
                             }
                         }
-                        proxy.vehicleField.x -= Macros.FormatGlobalNumberValue(cfg.vehicleFieldOffsetXRight);
+                        proxy.vehicleField.x -= Macros.FormatGlobalNumberValue(cfg.vehicleFieldOffsetXRight, 0);
                     }
 
                     // Set Text Fields
@@ -285,11 +288,11 @@ package xvm.battleloading_ui.components
             var w:Number =  (proxyType == PROXY_TYPE_TABLE) ? NAME_FIELD_WIDTH_DELTA_TABLE : NAME_FIELD_WIDTH_DELTA_TIPS;
             if (team == XfwConst.TEAM_ALLY)
             {
-                w += Macros.FormatGlobalNumberValue(cfg.nameFieldWidthDeltaLeft);
+                w += Macros.FormatGlobalNumberValue(cfg.nameFieldWidthDeltaLeft, 0);
             }
             else
             {
-                w += Macros.FormatGlobalNumberValue(cfg.nameFieldWidthDeltaRight);
+                w += Macros.FormatGlobalNumberValue(cfg.nameFieldWidthDeltaRight, 0);
             }
             return w;
         }
@@ -299,11 +302,11 @@ package xvm.battleloading_ui.components
             var w:Number = (proxyType == PROXY_TYPE_TABLE) ? VEHICLE_FIELD_WIDTH_TABLE : VEHICLE_FIELD_WIDTH_TIPS;
             if (team == XfwConst.TEAM_ALLY)
             {
-                w += Macros.FormatGlobalNumberValue(cfg.vehicleFieldWidthDeltaLeft);
+                w += Macros.FormatGlobalNumberValue(cfg.vehicleFieldWidthDeltaLeft, 0);
             }
             else
             {
-                w += Macros.FormatGlobalNumberValue(cfg.vehicleFieldWidthDeltaRight);
+                w += Macros.FormatGlobalNumberValue(cfg.vehicleFieldWidthDeltaRight, 0);
             }
             return w;
         }

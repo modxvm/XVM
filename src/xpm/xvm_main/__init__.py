@@ -113,8 +113,6 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
 
     log("FlashInit: " + self.swf)
 
-    self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
-
     if self.swf == _BATTLE_SWF:
         g_xvm.initBattleSwf(self)
     elif self.swf == _VMM_SWF:
@@ -127,8 +125,6 @@ def FlashBeforeDelete(self):
         return
 
     log("FlashBeforeDelete: " + self.swf)
-
-    self.removeExternalCallback('xvm.cmd')
 
     if self.swf == _LOBBY_SWF: # TODO: replace with AppLifeCycleEvent.DESTROYED event handler
         g_xvm.deleteLobbySwf()

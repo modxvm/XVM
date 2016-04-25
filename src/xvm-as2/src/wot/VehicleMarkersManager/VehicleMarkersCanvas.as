@@ -49,21 +49,10 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
             HexColorsPlugin, QuaternionsPlugin, RemoveTintPlugin, RoundPropsPlugin, ScalePlugin, ScrollRectPlugin,
             SetSizePlugin, ShortRotationPlugin, TintPlugin, TransformMatrixPlugin, VisiblePlugin, VolumePlugin]);
 
-        _root.xvm_onUpdateConfig = this.xvm_onUpdateConfig;
-        _root.xvm_onUpdateStat = this.xvm_onUpdateStat;
+        DAAPI.initialize();
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, onConfigLoaded);
-    }
-
-    public function xvm_onUpdateConfig():Void
-    {
-        Config.instance.GetConfigCallback.apply(Config.instance, arguments);
-    }
-
-    public function xvm_onUpdateStat():Void
-    {
-        StatLoader.instance.LoadStatDataCallback.apply(StatLoader.instance, arguments);
     }
 
     private function setShowExInfoFlagImpl(flag)

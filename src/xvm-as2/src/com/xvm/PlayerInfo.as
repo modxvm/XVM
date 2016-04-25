@@ -27,7 +27,7 @@ class com.xvm.PlayerInfo extends MovieClip
 
         var icon: UILoaderAlt = (UILoaderAlt)(holder.attachMovie("UILoaderAlt", "icon", 0));
         icon._x = icon._y = 0;
-        icon._alpha = isFinite(Macros.FormatGlobalNumberValue(cfg.alpha)) ? Macros.FormatGlobalNumberValue(cfg.alpha) : 100;
+        icon._alpha = Macros.FormatGlobalNumberValue(cfg.alpha, 100);
         icon._visible = false;
         icon["claninfo"] = { w: Macros.FormatGlobalNumberValue(cfg.w), h: Macros.FormatGlobalNumberValue(cfg.h) };
         icon["holder"] = holder;

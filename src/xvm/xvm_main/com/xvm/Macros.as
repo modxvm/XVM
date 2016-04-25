@@ -42,19 +42,19 @@ package com.xvm
             return Number(value);
         }
 
-        public static function FormatGlobalNumberValue(value:*):Number
+        public static function FormatGlobalNumberValue(value:*, defaultValue:Number = NaN):Number
         {
-            return _instance._FormatGlobalNumberValue(value);
+            return _instance._FormatGlobalNumberValue(value, defaultValue);
         }
 
-        public static function FormatGlobalBooleanValue(value:*):Boolean
+        public static function FormatGlobalBooleanValue(value:*, defaultValue:Boolean = false):Boolean
         {
-            return _instance._FormatGlobalBooleanValue(value);
+            return _instance._FormatGlobalBooleanValue(value, defaultValue);
         }
 
-        public static function FormatGlobalStringValue(value:*):String
+        public static function FormatGlobalStringValue(value:*, defaultValue:String = null):String
         {
-            return _instance._FormatGlobalStringValue(value);
+            return _instance._FormatGlobalStringValue(value, defaultValue);
         }
 
         public static function IsCached(pname:String, format:String, alive:Boolean = false):Boolean
@@ -283,8 +283,14 @@ package com.xvm
             if (value === undefined)
             {
                 //process l10n macro
-                if (macroName.indexOf("l10n") == 0)
+                if (macroName == "l10n")
+                {
                     res += prepareValue(NaN, macroName, norm, def, vehId);
+                }
+                else if (macroName == "py")
+                {
+                    res += prepareValue(NaN, macroName, norm, def, vehId);
+                }
                 else
                 {
                     res += def;
@@ -622,32 +628,54 @@ package com.xvm
                     break;
                 case "l10n":
                     res = Locale.get(norm);
+                    if (res == null)
+                        res = def;
+                    break;
+                case "py":
+                    res = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, norm);
+                    if (res == null)
+                        res = def;
                     break;
             }
 
             return res;
         }
 
-        private function _FormatGlobalNumberValue(value:*):Number
+        private function _FormatGlobalNumberValue(value:*, defaultValue:Number):Number
         {
+            if (value == null)
+                return defaultValue;
             if (!isNaN(value))
                 return value;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
-            return parseFloat(_Format(null, value, new MacrosFormatOptions()));
+            var res:Number = Number(_Format(null, value, new MacrosFormatOptions()));
+            if (isFinite(res))
+                return res;
+            return defaultValue;
         }
 
-        private function _FormatGlobalBooleanValue(value:*):Boolean
+        private function _FormatGlobalBooleanValue(value:*, defaultValue:Boolean):Boolean
         {
+            if (value == null)
+                return defaultValue;
             if (typeof value == "boolean")
                 return value;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
-            return String(_Format(null, value, new MacrosFormatOptions())).toLowerCase() == 'true';
+            var res:String = String(_Format(null, value, new MacrosFormatOptions())).toLowerCase();
+            if (res == 'true')
+                return true;
+            if (res == 'false')
+                return false;
+            return defaultValue;
         }
 
-        private function _FormatGlobalStringValue(value:*):String
+        private function _FormatGlobalStringValue(value:*, defaultValue:String):String
         {
+            if (value == null)
+                return defaultValue;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosFormatOptions()));
-            return _Format(null, String(value), new MacrosFormatOptions());
+            var res:String = _Format(null, String(value), new MacrosFormatOptions());
+            return res != null ? res : defaultValue;
         }
 
         /**

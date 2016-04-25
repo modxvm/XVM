@@ -36,19 +36,19 @@ class com.xvm.Macros
         return Number(value);
     }
 
-    public static function FormatGlobalNumberValue(value):Number
+    public static function FormatGlobalNumberValue(value, defaultValue:Number):Number
     {
-        return _instance._FormatGlobalNumberValue(value);
+        return _instance._FormatGlobalNumberValue(value, defaultValue);
     }
 
-    public static function FormatGlobalBooleanValue(value):Boolean
+    public static function FormatGlobalBooleanValue(value, defaultValue:Boolean):Boolean
     {
-        return _instance._FormatGlobalBooleanValue(value);
+        return _instance._FormatGlobalBooleanValue(value, defaultValue);
     }
 
-    public static function FormatGlobalStringValue(value):String
+    public static function FormatGlobalStringValue(value, defaultValue:String):String
     {
-        return _instance._FormatGlobalStringValue(value);
+        return _instance._FormatGlobalStringValue(value, defaultValue);
     }
 
     public static function IsCached(pname:String, format:String, alive:Boolean):Boolean
@@ -64,6 +64,11 @@ class com.xvm.Macros
     public static function RegisterGlobalMacrosData()
     {
         _instance._RegisterGlobalMacrosData();
+    }
+
+    public static function RegisterGlobalMacrosDataDelayed(onEventName: String)
+    {
+        _instance._RegisterGlobalMacrosDataDelayed(onEventName);
     }
 
     public static function RegisterZoomIndicatorData(zoom:Number)
@@ -280,8 +285,14 @@ class com.xvm.Macros
         if (value === undefined)
         {
             //process l10n macro
-            if (macroName.indexOf("l10n") == 0)
+            if (macroName == "l10n")
+            {
                 res += prepareValue(NaN, macroName, norm, def, vehId);
+            }
+            else if (macroName == "py")
+            {
+                res += prepareValue(NaN, macroName, norm, def, vehId);
+            }
             else
             {
                 res += def;
@@ -619,29 +630,51 @@ class com.xvm.Macros
                 break;
             case "l10n":
                 res = Locale.get(norm);
+                if (res == null)
+                    res = def;
+                break;
+            case "py":
+                res = DAAPI.py_xvm_pythonMacro(norm);
+                if (res == null)
+                    res = def;
                 break;
         }
 
         return res;
     }
 
-    private function _FormatGlobalNumberValue(value):Number
+    private function _FormatGlobalNumberValue(value, defaultValue:Number):Number
     {
+        if (value == null)
+            return (defaultValue === undefined) ? NaN : defaultValue;
         if (!isNaN(value))
             return Number(value);
-        return Number(_Format(null, value, {}));
+        var res:Number = Number(_Format(null, value, {}));
+        if (isFinite(res))
+            return res;
+        return (defaultValue === undefined) ? NaN : defaultValue;
     }
 
-    private function _FormatGlobalBooleanValue(value):Boolean
+    private function _FormatGlobalBooleanValue(value, defaultValue:Boolean):Boolean
     {
+        if (value == null)
+            return (defaultValue === undefined) ? false : defaultValue;
         if (typeof value == "boolean")
             return value;
-        return String(_Format(null, value, {})).toLowerCase() == 'true';
+        var res:String = String(_Format(null, value, { } )).toLowerCase();
+        if (res == 'true')
+            return true;
+        if (res == 'false')
+            return false;
+        return (defaultValue === undefined) ? false : defaultValue;
     }
 
-    private function _FormatGlobalStringValue(value):String
+    private function _FormatGlobalStringValue(value, defaultValue:String):String
     {
-        return _Format(null, String(value), {});
+        if (value == null)
+            return (defaultValue === undefined) ? null : defaultValue;
+        var res:String = _Format(null, String(value), { } );
+        return res != null ? res : (defaultValue === undefined) ? null : defaultValue;
     }
 
     /**
@@ -731,6 +764,17 @@ class com.xvm.Macros
         m_globals["my-level"] = vdata.level;
         // {{my-rlevel}}
         m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+    }
+
+    private function _RegisterGlobalMacrosDataDelayed(eventName: String)
+    {
+        switch (eventName)
+        {
+            case "ON_STAT_LOADED":
+                m_globals["chancesStatic"] = Macros.formatWinChancesText(true, false);
+                m_globals["chancesLive"] = function(o:Object) { return Macros.formatWinChancesText(false, true); }
+                break;
+        }
     }
 
     private function _RegisterZoomIndicatorData(zoom:Number)
@@ -1341,5 +1385,31 @@ class com.xvm.Macros
         if (!RATING_MATRIX.hasOwnProperty(name))
             name = (scale != null ? scale : "basic") + "_wgr";
         return name;
+    }
+
+    private static function formatWinChancesText(isShowChance, isShowLiveChance: Boolean): String
+    {
+        if (!Config.networkServicesSettings.chance)
+            return "";
+        if (!Config.networkServicesSettings.chanceLive && isShowLiveChance)
+        {
+            return "";
+        }
+        var ChancesText: String = Chance.GetChanceText(true, false, true);
+        var temp: Array = ChancesText.split('|', 2);
+        var tempA: Array = temp[0].split(':', 2);
+        if (isShowChance)
+        {
+            return tempA[1];
+        }
+        else if (isShowLiveChance)
+        {
+            var tempB: Array = temp[1].split(':', 2);
+            return tempB[1];
+        }
+        else
+        {
+            return "";
+        }
     }
 }

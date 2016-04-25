@@ -134,7 +134,7 @@ class _Stat(object):
         if not 'proxy' in self.req or self.req['proxy'] is None:
             as_xfw_cmd(self.req['cmd'], self.resp)
         elif self.req['proxy'].component and self.req['proxy'].movie:
-            self.req['proxy'].movie.xvm_onUpdateStat(self.resp)
+            self.req['proxy'].movie.as_xvm_onUpdateStat(self.resp)
 
 
     # Threaded

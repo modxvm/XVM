@@ -42,12 +42,13 @@ class wot.battle.BattleMain
         GameDelegate.addCallBack("Stage.Update", this, "onUpdateStage");
         GameDelegate.addCallBack("battle.showPostmortemTips", this, "showPostmortemTips");
 
-        _root.xvm_onUpdateConfig = this.xvm_onUpdateConfig;
-        _root.xvm_onUpdateStat = this.xvm_onUpdateStat;
-        _root.xvm_onKeyEvent = this.xvm_onKeyEvent;
-        _root.xvm_onSniperCamera = this.xvm_onSniperCamera;
-        _root.xvm_onAimOffsetUpdate = this.xvm_onAimOffsetUpdate;
-        _root.xvm_onBattleStateChanged = this.xvm_onBattleStateChanged;
+        DAAPI.initialize();
+
+        _root.as_xvm_onKeyEvent = this.as_xvm_onKeyEvent;
+        _root.as_xvm_onSniperCamera = this.as_xvm_onSniperCamera;
+        _root.as_xvm_onAimOffsetUpdate = this.as_xvm_onAimOffsetUpdate;
+        _root.as_xvm_onBattleStateChanged = this.as_xvm_onBattleStateChanged;
+        _root.as_xvm_onPlayersHpChanged = this.as_xvm_onPlayersHpChanged;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, BattleMainConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
@@ -85,37 +86,27 @@ class wot.battle.BattleMain
         // Zoom Indicator
         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
             this._zoomIndicator = new ZoomIndicator(_holder);
-        
+
         // Setup Visual Elements
         Elements.SetupElements();
 
         FragCorrelation.modify();
 
         ExpertPanel.modify();
-        
+
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, battleLabelsInit);
 
     }
 
     private function battleLabelsInit(){
-        // Battle labels and win chances on battle interface window
-        // Logger.add("Initialize start")
+        // Battle labels on battle interface window and delayed macros registration
+        Macros.RegisterGlobalMacrosDataDelayed("ON_STAT_LOADED");
         BattleLabels.init();
     }
-    
+
     // Python calls (context: this => _root)
 
-    public function xvm_onUpdateConfig():Void
-    {
-        Config.instance.GetConfigCallback.apply(Config.instance, arguments);
-    }
-
-    public function xvm_onUpdateStat():Void
-    {
-        StatLoader.instance.LoadStatDataCallback.apply(StatLoader.instance, arguments);
-    }
-
-    public function xvm_onKeyEvent(key:Number, isDown:Boolean):Void
+    public function as_xvm_onKeyEvent(key:Number, isDown:Boolean):Void
     {
         //Logger.add("onKeyEvent: " + key + " " + isDown);
         var cfg = Config.config.hotkeys;
@@ -125,21 +116,23 @@ class wot.battle.BattleMain
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ALT_MODE, isDown: isDown } );
         if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
+        if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_LABEL_KEY_MODE, key: key, isDown: isDown } );
     }
 
-    public function xvm_onSniperCamera(enable:Boolean, zoom:Number):Void
+    public function as_xvm_onSniperCamera(enable:Boolean, zoom:Number):Void
     {
         if (BattleMain._instance._zoomIndicator)
             BattleMain._instance._zoomIndicator.update(enable, zoom);
     }
 
-    public function xvm_onAimOffsetUpdate(offsetX:Number, offsetY:Number):Void
+    public function as_xvm_onAimOffsetUpdate(offsetX:Number, offsetY:Number):Void
     {
         if (BattleMain._instance._zoomIndicator)
             BattleMain._instance._zoomIndicator.onOffsetUpdate(offsetX, offsetY);
     }
 
-    public function xvm_onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
+    public function as_xvm_onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
         team:Number, squad:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
     {
         try
@@ -186,6 +179,12 @@ class wot.battle.BattleMain
         {
             Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
         }
+    }
+
+    public function as_xvm_onPlayersHpChanged():Void
+    {
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYERS_HP_CHANGED } );
+        //Logger.add("HP update event dispatched");
     }
 
     // callbacks
