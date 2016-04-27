@@ -412,7 +412,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         XVMUpdateStyle();
     }
 
-    public function setMarkerStateXvm(targets:Number, vehicleStatus:Number, frags:Number, my_frags:Number, squad:Number)
+    public function as_xvm_setMarkerState(targets:Number, vehicleStatus:Number, frags:Number, my_frags:Number, squad:Number)
     {
         var needUpdate:Boolean = false;
 
@@ -423,7 +423,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
 
         if (m_frags != frags)
         {
-            //Logger.add('setMarkerStateXvm: ' + m_frags + " => " + frags + " " + m_playerName);
+            //Logger.add('as_xvm_setMarkerState: ' + m_frags + " => " + frags + " " + m_playerName);
             m_frags = frags;
             needUpdate = true;
         }
@@ -433,13 +433,18 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
 
         if (m_squad != squad)
         {
-            //Logger.add('setMarkerStateXvm: ' + m_squad + " => " + squad + " " + m_playerName);
+            //Logger.add('as_xvm_setMarkerState: ' + m_squad + " => " + squad + " " + m_playerName);
             m_squad = squad;
             needUpdate = true;
         }
 
         if (needUpdate)
             XVMUpdateStyle();
+    }
+
+    public function as_xvm_onXmqpEvent(data)
+    {
+        Logger.add("as_xvm_onXmqpEvent: " + m_playerName + " " + arguments);
     }
 
     private function XVMUpdateDynamicTextFields()

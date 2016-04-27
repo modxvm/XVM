@@ -7,6 +7,7 @@ class EVENTS(object):
 import traceback
 
 from gui.shared import g_eventBus, events
+from gui.battle_control import g_sessionProvider
 from gui.Scaleform.Battle import Battle
 
 from xfw import *
@@ -30,13 +31,34 @@ def onXmqpMessage(e):
 # sixth sense indicator
 
 @registerEvent(Battle, '_showSixthSenseIndicator')
-def Battle_showSixthSenseIndicator(self, isShow):
+def _Battle_showSixthSenseIndicator(self, isShow):
     xmqp.call({'event': EVENTS.SHOW_SIXTH_SENSE_INDICATOR})
 
-def onSixthSenseEvent(playerId, body):
-    debug('onSixthSenseEvent: {} {}'.format(playerId, body))
+def _onSixthSenseEvent(playerId, data):
+    #debug('onSixthSenseEvent: {} {}'.format(playerId, data))
+    _as_xmqp_event(playerId, data)
 
-_event_handlers[EVENTS.SHOW_SIXTH_SENSE_INDICATOR] = onSixthSenseEvent
+_event_handlers[EVENTS.SHOW_SIXTH_SENSE_INDICATOR] = _onSixthSenseEvent
 
 
 ###
+
+def _as_xmqp_event(playerId, data):
+
+    arenaDP = g_sessionProvider.getArenaDP()
+    vID = arenaDP.getVehIDByAccDBID(accDBID)
+    if not vID:
+        return
+
+    battle = getBattleApp()
+    if not battle:
+        return
+
+    movie = battle.movie
+    if movie is not None:
+        movie.as_xvm_onXmqpEvent(playerId, data)
+
+    markersManager = battle.markersManager
+    marker = markersManager._MarkersManager__markers.get(vID, None)
+    if marker is not None:
+        markersManager.invokeMarker(marker.id, 'as_xvm_onXmqpEvent', [data])

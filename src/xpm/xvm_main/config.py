@@ -204,7 +204,8 @@ def _constsSection():
         'VM_COEFF_VMM_DEAD': 0.50,  # vehicle markers manager (dead)
         'VM_COEFF_MM_PLAYER': 0.93, # minimap (player)
         'VM_COEFF_MM_BASE': 0.8,    # minimap (base)
-        'VM_COEFF_FC': 0.93         # frag correlation
+        'VM_COEFF_FC': 0.93,        # frag correlation
+        'X_SPOTTED_TIME': 9         # display time for {{x-spotted}} macro
     }
 
 

@@ -327,10 +327,16 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     // XVM
 
-    public function setMarkerStateXvm()
+    public function as_xvm_setMarkerState()
     {
-        //Logger.add("setMarkerStateXvm: " + arguments);
+        //Logger.add("as_xvm_setMarkerState: " + arguments);
         if (IsXvmMarker)
-            call("setMarkerStateXvm", arguments);
+            call("as_xvm_setMarkerState", arguments);
+    }
+
+    public function as_xvm_onXmqpEvent(data):Void
+    {
+        if (IsXvmMarker)
+            call("as_xvm_onXmqpEvent", arguments);
     }
 }
