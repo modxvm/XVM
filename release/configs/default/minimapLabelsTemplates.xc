@@ -70,14 +70,12 @@
       "x": 2,
       "y": -9
     },
-    // Nick teamkiller, visible
-    // Ник тимкиллера, видимый
-    "nickTeamkillerSpotted": {
-      "$ref": { "path":"def.defaultItem" },
+    // Player nickname, visible, company config
+    // Ник игрока, видимый, ротный конфиг
+    "nickSpottedCompany": {
+      "$ref": { "path": "def.nickSpotted" },
       "flags": [ "ally", "teamKiller", "spotted", "alive" ],
-      "format": "<font size='{{battletype?8|0}}' color='{{tk?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|#BFBFBF}}'><i>{{name%.7s~..}}</i></font>",
-      "x": 2,
-      "y": -9
+      "format": "<font size='{{battletype?8|0}}' color='{{tk?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|#BFBFBF}}'><i>{{name%.7s~..}}</i></font>"
     },
     // Vehicle type, missing
     // Тип техники, пропавший
