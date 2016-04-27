@@ -26,4 +26,6 @@ class com.xvm.DataTypes.BattleStateData
     public var entryName:String = null;
     public var position:Number = NaN;
     public var team:Number = -1;
+
+    public var x_spotted:Boolean = false;
 }

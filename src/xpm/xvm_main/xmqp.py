@@ -125,7 +125,7 @@ class _XMQP(object):
                 'message': simplejson.dumps(data),
                 'type': XVM.XMQP_COMMAND_BATTLE_MESSAGE,
                 'token': config.token.token})
-            debug('call: %s' % message)
+            #debug('call: %s' % message)
             self._channel.basic_publish(
                 exchange='',
                 routing_key=self.LOBBY_QUEUE,
@@ -153,8 +153,8 @@ class _XMQP(object):
         try:
             if body != 'ok':
                 debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
-            debug(basic_deliver)
-            debug(properties)
+            #debug(basic_deliver)
+            #debug(properties)
 
             if self._exchange_correlation_id == properties.correlation_id:
                 self._exchange_name = body

@@ -45,6 +45,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     public var m_showExInfo:Boolean;
     public var m_defaultIconSource:String;
     public var m_vid:Number;
+    public var m_x_spotted:Boolean;
 
     // Vehicle State
     public var vehicleState:VehicleState;
@@ -211,6 +212,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         m_isReady = (arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 3] & 2) != 0; // 2 - IS_AVATAR_READY
         m_frags = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 4];
         m_squad = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 5];
+        m_x_spotted = false;
 
         healthBarComponent.init();
         contourIconComponent.init(m_entityType);
@@ -442,9 +444,14 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             XVMUpdateStyle();
     }
 
-    public function as_xvm_onXmqpEvent(data)
+    public function as_xvm_onXmqpEvent(event:String, data:String)
     {
-        Logger.add("as_xvm_onXmqpEvent: " + m_playerName + " " + arguments);
+        switch (event)
+        {
+            case Defines.XMQP_SPOTTED:
+                onSpottedEvent();
+                break;
+        }
     }
 
     private function XVMUpdateDynamicTextFields()
@@ -711,7 +718,8 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             playerId:m_playerId,
             marksOnGun:m_marksOnGun,
             frags:m_frags,
-            squad:m_squad
+            squad:m_squad,
+            x_spotted:m_x_spotted
         };
         return Strings.trim(Macros.Format(m_playerName, format, obj));
     }
@@ -748,4 +756,35 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         var n = isFinite(format) ? Number(format) : 100;
         return (n <= 0) ? 0 : (n > 100) ? 100 : n;
     }
+
+    // xmqp events
+
+    private var _sixSenseIndicatorTimeoutId = null;
+
+    private function onSpottedEvent()
+    {
+        if (!m_x_spotted)
+        {
+            m_x_spotted = true;
+            XVMUpdateStyle();
+        }
+        if (_sixSenseIndicatorTimeoutId)
+        {
+            _global.clearTimeout(_sixSenseIndicatorTimeoutId);
+        }
+        var $this = this;
+        _sixSenseIndicatorTimeoutId =
+            _global.setTimeout(function() { $this.onSpottedEventDone(); }, Config.config.consts.X_SPOTTED_TIME * 1000);
+    }
+
+    private function onSpottedEventDone()
+    {
+        _sixSenseIndicatorTimeoutId = null;
+        if (m_x_spotted)
+        {
+            m_x_spotted = false;
+            XVMUpdateStyle();
+        }
+    }
+
 }

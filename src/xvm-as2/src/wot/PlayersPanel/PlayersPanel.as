@@ -165,7 +165,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         if (wrapper.state == "none")
         {
             var $this = this;
-            setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
+            _global.setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
             return;
         }
 

@@ -81,9 +81,9 @@ class com.xvm.Macros
         _instance._RegisterPlayerData(pname, data, team);
     }
 
-    public static function RegisterStatMacros(pname:String, stat:StatData)
+    public static function RegisterStatisticsMacros(pname:String, stat:StatData)
     {
-        _instance._RegisterStatMacros(pname, stat);
+        _instance._RegisterStatisticsMacros(pname, stat);
     }
 
     public static function RegisterMarkerData(pname:String, data:Object)
@@ -820,6 +820,11 @@ class com.xvm.Macros
             pdata["clannb"] = clanWithoutBrackets;
             // {{ally}}
             pdata["ally"] = team == Defines.TEAM_ALLY ? 'ally' : null;
+
+            // xmqp events macros
+
+            // {{x-spotted}}
+            pdata["x-spotted"] = function(o) { return o.x_spotted == true ? 'true' : null; }
         }
     }
 
@@ -1037,7 +1042,7 @@ class com.xvm.Macros
         }
     }
 
-    private function _RegisterStatMacros(pname:String, stat:StatData)
+    private function _RegisterStatisticsMacros(pname:String, stat:StatData)
     {
         //Logger.addObject(stat);
 

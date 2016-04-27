@@ -334,7 +334,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             call("as_xvm_setMarkerState", arguments);
     }
 
-    public function as_xvm_onXmqpEvent(data):Void
+    public function as_xvm_onXmqpEvent(event:String, data:String)
     {
         if (IsXvmMarker)
             call("as_xvm_onXmqpEvent", arguments);

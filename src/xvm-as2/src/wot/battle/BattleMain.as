@@ -182,15 +182,22 @@ class wot.battle.BattleMain
         }
     }
 
-    public function as_xvm_onPlayersHpChanged():Void
+    // ctx = _root
+    public function as_xvm_onPlayersHpChanged()
     {
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYERS_HP_CHANGED } );
         //Logger.add("HP update event dispatched");
     }
 
-    public function as_xvm_onXmqpEvent(playerId, data):Void
+    // ctx = _root
+    public function as_xvm_onXmqpEvent(playerId:Number, event:String, data:String)
     {
-        Logger.add("as_xvm_onXmqpEvent: " + arguments);
+        switch (event)
+        {
+            case Defines.XMQP_SPOTTED:
+                _instance.onSpottedEvent(playerId);
+                break;
+        }
     }
 
     // callbacks
@@ -274,6 +281,36 @@ class wot.battle.BattleMain
         if (!isMinimalSize)
         {
             _root.minimap.sizeUp();
+        }
+    }
+
+    // xmqp events
+
+    private var _sixSenseIndicatorTimeoutIds = {};
+
+    private function onSpottedEvent(playerId:Number)
+    {
+        var updated:Boolean = BattleState.update(playerId, { x_spotted: true } );
+        if (updated)
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_SPOTTED, value: playerId } );
+        }
+        if (_sixSenseIndicatorTimeoutIds[playerId])
+        {
+            _global.clearTimeout(_sixSenseIndicatorTimeoutIds[playerId]);
+        }
+        var $this = this;
+        _sixSenseIndicatorTimeoutIds[playerId] =
+            _global.setTimeout(function() { $this.onSpottedEventDone(playerId); }, Config.config.consts.X_SPOTTED_TIME * 1000);
+    }
+
+    private function onSpottedEventDone(playerId:Number)
+    {
+        delete _sixSenseIndicatorTimeoutIds[playerId];
+        var updated:Boolean = BattleState.update(playerId, { x_spotted: false } );
+        if (updated)
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_SPOTTED, value: playerId } );
         }
     }
 }

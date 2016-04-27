@@ -19,8 +19,8 @@ class wot.VehicleMarkersManager.log.LogLists
         this.cfg = cfg;
 
         // Delayed initialization
-        var me = this;
-        _global.setTimeout(function() { me._initialize(); }, 1);
+        var $this = this;
+        _global.setTimeout(function() { $this._initialize(); }, 1);
     }
 
     private function _initialize()
