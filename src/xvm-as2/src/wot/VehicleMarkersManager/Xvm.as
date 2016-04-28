@@ -763,6 +763,9 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             case Defines.XMQP_SPOTTED:
                 onSpottedEvent();
                 break;
+            default:
+                Logger.add("WARNING: unknown xmqp event: " + event);
+                break;
         }
     }
 

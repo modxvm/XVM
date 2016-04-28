@@ -286,6 +286,12 @@ class wot.battle.BattleMain
             case Defines.XMQP_SPOTTED:
                 _instance.onSpottedEvent(playerId);
                 break;
+            case Defines.XMQP_MINIMAP_CLICK:
+                GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_MINIMAP_CLICK, value: playerId, data: data } );
+                break;
+            default:
+                Logger.add("WARNING: unknown xmqp event: " + event);
+                break;
         }
     }
 

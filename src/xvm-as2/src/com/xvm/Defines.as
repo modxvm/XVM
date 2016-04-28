@@ -122,6 +122,8 @@ class com.xvm.Defines
     // XMQP_EVENTS
     public static var XMQP_HOLA = "xmqp_hola";
     public static var XMQP_SPOTTED = "xmqp_spotted";
+    public static var XMQP_MINIMAP_CLICK = "xmqp_minimap_click";
+
 
     // ArenaGuiTypes
     // sync with constants.py: ARENA_GUI_TYPE

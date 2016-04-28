@@ -5,6 +5,11 @@ class EVENTS(object):
     XMQP_SPOTTED = 'xmqp_spotted'
     XMQP_MINIMAP_CLICK = 'xmqp_minimap_click'
 
+class TARGETS(object):
+    NONE   = 0x00
+    BATTLE = 0x01
+    VMM    = 0x02
+    ALL    = 0xFF
 
 import traceback
 import simplejson
@@ -92,15 +97,15 @@ def _Minimap_onMapClicked(self, _, x, y, bHighlightCellNVehicleSpecific = True):
                 'color': 0x00FF00}) # TODO: configure color in the personal cabinet
 
 def _onMinimapClick(playerId, data):
-    debug('_onMinimapClick: {} {}'.format(playerId, data))
-    _as_xmqp_event(playerId, data)
+    #debug('_onMinimapClick: {} {}'.format(playerId, data))
+    _as_xmqp_event(playerId, data, targets=TARGETS.BATTLE)
 
 _event_handlers[EVENTS.XMQP_MINIMAP_CLICK] = _onMinimapClick
 
 
 ###
 
-def _as_xmqp_event(playerId, data):
+def _as_xmqp_event(playerId, data, targets=TARGETS.ALL):
 
     if xmqp.XMQP_DEVELOPMENT:
         if playerId == utils.getPlayerId():
@@ -117,21 +122,20 @@ def _as_xmqp_event(playerId, data):
 
     event = data['event']
     del data['event']
-    if not data:
-        data = None
-    else:
-        data = unicode_to_ascii(data)
+    data = None if not data else unicode_to_ascii(data)
 
-    movie = battle.movie
-    if movie is not None:
-        movie.as_xvm_onXmqpEvent(playerId, event, data)
+    if targets & TARGETS.BATTLE:
+        movie = battle.movie
+        if movie is not None:
+            movie.as_xvm_onXmqpEvent(playerId, event, data)
 
-    markersManager = battle.markersManager
-    marker = markersManager._MarkersManager__markers.get(vID, None)
-    if marker is None:
-        if not xmqp.XMQP_DEVELOPMENT:
-            return
-        marker = markersManager._MarkersManager__markers.itervalues().next()
-    if marker is not None:
-        jdata = None if data is None else simplejson.dumps(data)
-        markersManager.invokeMarker(marker.id, 'as_xvm_onXmqpEvent', [event, jdata])
+    if targets & TARGETS.VMM:
+        markersManager = battle.markersManager
+        marker = markersManager._MarkersManager__markers.get(vID, None)
+        if marker is None:
+            if not xmqp.XMQP_DEVELOPMENT:
+                return
+            marker = markersManager._MarkersManager__markers.itervalues().next()
+        if marker is not None:
+            jdata = None if data is None else simplejson.dumps(data)
+            markersManager.invokeMarker(marker.id, 'as_xvm_onXmqpEvent', [event, jdata])
