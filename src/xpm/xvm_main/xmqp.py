@@ -7,28 +7,38 @@ __all__ = ['start', 'stop', 'call']
 import os
 import threading
 
-XMQP_ENABLED = os.environ.get('XMQP_ENABLED') == '1'
+from pika import exceptions as pika_exceptions
+
 XMQP_DEVELOPMENT = os.environ.get('XMQP_DEVELOPMENT') == '1'
 
 _xmqp_thread = None
 
+def is_active():
+    global _xmqp_thread
+    if _xmqp_thread:
+        return _g_xmqp.is_active()
+    return False
+
 def start(players):
-    if XMQP_ENABLED:
-        global _xmqp_thread
-        _xmqp_thread = threading.Thread(target=_g_xmqp.start, name='xmqp', args=([players]))
-        _xmqp_thread.setDaemon(True)
-        _xmqp_thread.start()
+    global _xmqp_thread
+    _xmqp_thread = threading.Thread(target=_g_xmqp.start, name='xmqp', args=([players]))
+    _xmqp_thread.setDaemon(True)
+    _xmqp_thread.start()
 
 def stop():
-    if XMQP_ENABLED:
-        global _xmqp_thread
-        _g_xmqp.stop()
+    global _xmqp_thread
+    if _xmqp_thread:
+        try:
+            _g_xmqp.stop()
+        except pika_exceptions.ConnectionClosed as ex:
+            pass
         #_g_xmqp.close_connection()
-        if _xmqp_thread:
-            _xmqp_thread.join()
+        _xmqp_thread.join()
+        _xmqp_thread = None
 
 def call(message):
-    if XMQP_ENABLED:
+    global _xmqp_thread
+    if _xmqp_thread:
         _g_xmqp.call(message)
 
 
@@ -362,6 +372,8 @@ class _XMQP(object):
 
         """
         debug('[XMQP] Queue bound')
+        g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_CONNECTED))
+
 
     # service methods
 

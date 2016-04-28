@@ -1,7 +1,9 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
 class EVENTS(object):
+    XMQP_HOLA = 'xmqp_hola'
     XMQP_SPOTTED = 'xmqp_spotted'
+    XMQP_MINIMAP_CLICK = 'xmqp_minimap_click'
 
 
 import traceback
@@ -10,12 +12,16 @@ import simplejson
 from gui.shared import g_eventBus, events
 from gui.battle_control import g_sessionProvider
 from gui.Scaleform.Battle import Battle
+from gui.Scaleform.Minimap import Minimap
 
 from xfw import *
 
 from logger import *
 import utils
 import xmqp
+
+def onXmqpConnected(e):
+    send_xmqp_hola()
 
 _event_handlers = {}
 def onXmqpMessage(e):
@@ -30,17 +36,60 @@ def onXmqpMessage(e):
         err(traceback.format_exc())
 
 
+# hola
+
+_players_xmqp_status = {}
+
+def send_xmqp_hola():
+    global _players_xmqp_status
+    _players_xmqp_status = {getCurrentPlayerId():True}
+    if xmqp.is_active():
+        xmqp.call({'event': EVENTS.XMQP_HOLA})
+
+def _onXmqpHola(playerId, data):
+    if xmqp.XMQP_DEVELOPMENT:
+        if playerId == utils.getPlayerId():
+            playerId = getCurrentPlayerId()
+    #debug('_onXmqpHola: {} {}'.format(playerId, data))
+    if playerId not in _players_xmqp_status:
+        _players_xmqp_status[playerId] = True
+        xmqp.call({'event': EVENTS.XMQP_HOLA})
+
+_event_handlers[EVENTS.XMQP_HOLA] = _onXmqpHola
+
+
 # sixth sense indicator
 
 @registerEvent(Battle, '_showSixthSenseIndicator')
 def _Battle_showSixthSenseIndicator(self, isShow):
-    xmqp.call({'event': EVENTS.XMQP_SPOTTED})
+    if xmqp.is_active():
+        xmqp.call({'event': EVENTS.XMQP_SPOTTED})
 
 def _onSixthSenseEvent(playerId, data):
-    #debug('onSixthSenseEvent: {} {}'.format(playerId, data))
+    #debug('_onSixthSenseEvent: {} {}'.format(playerId, data))
     _as_xmqp_event(playerId, data)
 
 _event_handlers[EVENTS.XMQP_SPOTTED] = _onSixthSenseEvent
+
+
+# minimap click
+
+@overrideMethod(Minimap, '_onMapClicked')
+def _Minimap_onMapClicked(base, self, _, x, y, bHighlightCellNVehicleSpecific = True):
+    #debug('_Minimap_onMapClicked')
+    if xmqp.is_active():
+        if bHighlightCellNVehicleSpecific:
+            xmqp.call({
+                'event': EVENTS.XMQP_MINIMAP_CLICK,
+                'x': x,
+                'y': y,
+                'color': 0x00FF00}) # TODO: configure color in the personal cabinet
+
+def _onMinimapClick(playerId, data):
+    debug('_onMinimapClick: {} {}'.format(playerId, data))
+    _as_xmqp_event(playerId, data)
+
+_event_handlers[EVENTS.XMQP_MINIMAP_CLICK] = _onMinimapClick
 
 
 ###

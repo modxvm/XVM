@@ -32,6 +32,7 @@ class XVM_EVENT(object):
     CONFIG_LOADED = 'xvm.config_loaded'
     RELOAD_CONFIG = 'xvm.reload_config'
     SYSTEM_MESSAGE = 'xvm.system_message'
+    XMQP_CONNECTED = 'xvm.xmqp_connected'
     XMQP_MESSAGE = 'xvm.xmqp_message'
 
 # DAAPI commands
