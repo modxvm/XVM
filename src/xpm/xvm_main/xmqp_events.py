@@ -22,6 +22,7 @@ from gui.Scaleform.Minimap import Minimap
 from xfw import *
 
 from logger import *
+import config
 import utils
 import xmqp
 
@@ -94,7 +95,7 @@ def _Minimap_onMapClicked(self, _, x, y, bHighlightCellNVehicleSpecific = True):
                 'event': EVENTS.XMQP_MINIMAP_CLICK,
                 'x': x,
                 'y': y,
-                'color': 0x00FF00}) # TODO: configure color in the personal cabinet
+                'color': config.networkServicesSettings.x_minimap_clicks_color})
 
 def _onMinimapClick(playerId, data):
     #debug('_onMinimapClick: {} {}'.format(playerId, data))
