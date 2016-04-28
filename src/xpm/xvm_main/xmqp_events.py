@@ -21,7 +21,12 @@ import utils
 import xmqp
 
 def onXmqpConnected(e):
-    send_xmqp_hola()
+    _send_xmqp_hola()
+
+def onStateBattle():
+    global _players_xmqp_status
+    for playerId in _players_xmqp_status.iterkeys():
+        _as_xmqp_event(playerId, {'event': EVENTS.XMQP_HOLA})
 
 _event_handlers = {}
 def onXmqpMessage(e):
@@ -40,7 +45,7 @@ def onXmqpMessage(e):
 
 _players_xmqp_status = {}
 
-def send_xmqp_hola():
+def _send_xmqp_hola():
     global _players_xmqp_status
     _players_xmqp_status = {getCurrentPlayerId():True}
     if xmqp.is_active():
@@ -54,6 +59,7 @@ def _onXmqpHola(playerId, data):
     if playerId not in _players_xmqp_status:
         _players_xmqp_status[playerId] = True
         xmqp.call({'event': EVENTS.XMQP_HOLA})
+        _as_xmqp_event(playerId, data)
 
 _event_handlers[EVENTS.XMQP_HOLA] = _onXmqpHola
 

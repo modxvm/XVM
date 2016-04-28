@@ -823,6 +823,8 @@ class com.xvm.Macros
 
             // xmqp events macros
 
+            // {{x-enabled}}
+            pdata["x-enabled"] = function(o) { return o.x_enabled == true ? 'true' : null; }
             // {{x-spotted}}
             pdata["x-spotted"] = function(o) { return o.x_spotted == true ? 'true' : null; }
         }

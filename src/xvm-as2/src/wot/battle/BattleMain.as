@@ -189,17 +189,6 @@ class wot.battle.BattleMain
         //Logger.add("HP update event dispatched");
     }
 
-    // ctx = _root
-    public function as_xvm_onXmqpEvent(playerId:Number, event:String, data:String)
-    {
-        switch (event)
-        {
-            case Defines.XMQP_SPOTTED:
-                _instance.onSpottedEvent(playerId);
-                break;
-        }
-    }
-
     // callbacks
 
     private function onUpdateStage(width, height, scale)
@@ -285,6 +274,33 @@ class wot.battle.BattleMain
     }
 
     // xmqp events
+
+    // ctx = _root
+    public function as_xvm_onXmqpEvent(playerId:Number, event:String, data:String)
+    {
+        switch (event)
+        {
+            case Defines.XMQP_HOLA:
+                _instance.onHolaEvent(playerId);
+                break;
+            case Defines.XMQP_SPOTTED:
+                _instance.onSpottedEvent(playerId);
+                break;
+        }
+    }
+
+    // {{x-enabled}}
+
+    private function onHolaEvent(playerId:Number)
+    {
+        var updated:Boolean = BattleState.update(playerId, { x_enabled: true } );
+        if (updated)
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_HOLA, value: playerId } );
+        }
+    }
+
+    // {{x-spotted}}
 
     private var _sixSenseIndicatorTimeoutIds = {};
 

@@ -45,6 +45,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     public var m_showExInfo:Boolean;
     public var m_defaultIconSource:String;
     public var m_vid:Number;
+    public var m_x_enabled:Boolean;
     public var m_x_spotted:Boolean;
 
     // Vehicle State
@@ -212,6 +213,8 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         m_isReady = (arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 3] & 2) != 0; // 2 - IS_AVATAR_READY
         m_frags = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 4];
         m_squad = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 5];
+
+        m_x_enabled = false;
         m_x_spotted = false;
 
         healthBarComponent.init();
@@ -442,16 +445,6 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
 
         if (needUpdate)
             XVMUpdateStyle();
-    }
-
-    public function as_xvm_onXmqpEvent(event:String, data:String)
-    {
-        switch (event)
-        {
-            case Defines.XMQP_SPOTTED:
-                onSpottedEvent();
-                break;
-        }
     }
 
     private function XVMUpdateDynamicTextFields()
@@ -719,6 +712,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             marksOnGun:m_marksOnGun,
             frags:m_frags,
             squad:m_squad,
+            x_enabled:m_x_enabled,
             x_spotted:m_x_spotted
         };
         return Strings.trim(Macros.Format(m_playerName, format, obj));
@@ -758,6 +752,32 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     }
 
     // xmqp events
+
+    public function as_xvm_onXmqpEvent(event:String, data:String)
+    {
+        switch (event)
+        {
+            case Defines.XMQP_HOLA:
+                onHolaEvent();
+                break;
+            case Defines.XMQP_SPOTTED:
+                onSpottedEvent();
+                break;
+        }
+    }
+
+    // {{x-enabled}}
+
+    private function onHolaEvent()
+    {
+        if (!m_x_enabled)
+        {
+            m_x_enabled = true;
+            XVMUpdateStyle();
+        }
+    }
+
+    // {{x-spotted}}
 
     private var _sixSenseIndicatorTimeoutId = null;
 

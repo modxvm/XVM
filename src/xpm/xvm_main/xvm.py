@@ -38,6 +38,7 @@ import wgutils
 import xvmapi
 import vehinfo_xtdb
 import xmqp
+import xmqp_events
 
 _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
@@ -282,6 +283,7 @@ class Xvm(object):
 
     def onStateBattle(self):
         trace('onStateBattle')
+        xmqp_events.onStateBattle()
 
     def initAS2DAAPI(self, flashObject):
         root = flashObject.getMember('_root')

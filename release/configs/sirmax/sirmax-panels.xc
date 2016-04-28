@@ -30,6 +30,7 @@
       { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "valign": "center", "h": 21, "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
       { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
       { "x": -75, "y": 5, "bindToIcon": true, "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png" },
+      { "x": 6,  "y": 1, "align": "center", "bindToIcon": true, "alpha": "{{x-enabled?70|0}}", "format": "<font color='#FFFFFF' face='xvm' size='23'>&#x70;</font>", "shadow": {} },
       {}
     ],
     "extraFieldsRight": [

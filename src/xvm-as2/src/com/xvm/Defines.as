@@ -120,6 +120,7 @@ class com.xvm.Defines
     public static var E_PLAYERS_HP_CHANGED = "players_hp_changed";
 
     // XMQP_EVENTS
+    public static var XMQP_HOLA = "xmqp_hola";
     public static var XMQP_SPOTTED = "xmqp_spotted";
 
     // ArenaGuiTypes

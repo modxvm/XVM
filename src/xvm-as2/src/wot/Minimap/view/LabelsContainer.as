@@ -63,6 +63,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Defines.XMQP_HOLA, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(Defines.XMQP_SPOTTED, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefresh);
