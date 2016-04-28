@@ -74,8 +74,8 @@ _event_handlers[EVENTS.XMQP_SPOTTED] = _onSixthSenseEvent
 
 # minimap click
 
-@overrideMethod(Minimap, '_onMapClicked')
-def _Minimap_onMapClicked(base, self, _, x, y, bHighlightCellNVehicleSpecific = True):
+@registerEvent(Minimap, '_onMapClicked')
+def _Minimap_onMapClicked(self, _, x, y, bHighlightCellNVehicleSpecific = True):
     #debug('_Minimap_onMapClicked')
     if xmqp.is_active():
         if bHighlightCellNVehicleSpecific:
