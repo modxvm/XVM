@@ -54,7 +54,7 @@ package xvm.battleresults.components
                 if (sd == null)
                     continue;
                 sd.team = XfwConst.TEAM_ENEMY;
-                for each (var pl:Object in page.data.team1)
+                for each (var pl:Object in page.xfw_data.team1)
                 {
                     if (pl.userName == sd.name)
                     {

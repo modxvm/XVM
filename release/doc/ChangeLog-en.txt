@@ -1,4 +1,5 @@
-﻿XVM-6.2.1.3-dev:
+﻿XVM-6.3.0-dev:
+  * adaptation to WoT 0.9.15
   * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
   * added option "hotkeys"/"battleLabelsHotKeys" - use hotkeys in custom labels on battle interface window
   * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
