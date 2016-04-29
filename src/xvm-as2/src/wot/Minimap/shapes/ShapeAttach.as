@@ -43,7 +43,7 @@ class wot.Minimap.shapes.ShapeAttach
         if (isSelfDead)
         {
             var $this = this;
-            setTimeout(function() { $this.postmortemMod(null); }, 1);
+            _global.setTimeout(function() { $this.postmortemMod(null); }, 1);
         }
     }
 

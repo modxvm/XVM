@@ -1,5 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
+from constants import *
+
 # PUBLIC
 
 def getToken():
@@ -43,7 +45,6 @@ from random import randint
 from xfw import *
 import simplejson
 
-from constants import *
 from logger import *
 from loadurl import loadUrl
 import config

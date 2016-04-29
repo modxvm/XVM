@@ -96,6 +96,8 @@ package xvm.tcarousel_ui
             {
                 super.configUI();
 
+                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.configUI()");
+                /*
                 //return; // temporary disabled
 
                 createFilters();
@@ -118,6 +120,7 @@ package xvm.tcarousel_ui
                 if (!cfg.filters.prefs.enabled)
                     _prefFilter.selectedItems = [];
                 onFilterChanged();
+                */
             }
             catch (ex:Error)
             {
@@ -314,6 +317,8 @@ package xvm.tcarousel_ui
                 this.xfw_slotWidth = slotWidth;
 
                 multiselectionBg.visible = false;
+                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.updateUIPosition()");
+                /*
                 bg1.visible = true;
                 bg1.mouseEnabled = bg1.mouseChildren = false;
                 bg1.x = -100;
@@ -327,6 +332,7 @@ package xvm.tcarousel_ui
                     bg1.graphics.drawRect(0, -64, width + 200, 54);
                 }
                 bg1.graphics.endFill();
+                */
             }
             catch (ex:Error)
             {
@@ -666,6 +672,8 @@ package xvm.tcarousel_ui
                 if (_levelFilter == null)
                     return;
 
+                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.rearrangeFilters()");
+                /*
                 var visibleFilters:Vector.<UIComponent> = new Vector.<UIComponent>();
                 vehicleFilters.nationFilter.visible = cfg.filters.nation.enabled;
                 vehicleFilters.tankFilter.visible = cfg.filters.type.enabled;
@@ -726,6 +734,7 @@ package xvm.tcarousel_ui
                 }
 
                 vehicleFilters.width = w;
+                */
             }
             catch (ex:Error)
             {
@@ -741,7 +750,10 @@ package xvm.tcarousel_ui
             {
                 Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY,
                     JSONx.stringify({ levels:_levelFilter.selectedItems, prefs:_prefFilter.selectedItems }, "", true));
+                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.setFilters()");
+                /*
                 onFilterChanged();
+                */
             }
             catch (ex:Error)
             {
