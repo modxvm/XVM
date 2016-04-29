@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.14.1',
+    'VERSION':       '0.9.15',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.14.1'],
+    'GAME_VERSIONS': ['0.9.15'],
     # optional
 }
 
@@ -22,8 +22,9 @@ import BigWorld
 import game
 from Account import PlayerAccount
 from CurrentVehicle import g_currentVehicle
-from gui.shared import g_eventBus, g_itemsCache, REQ_CRITERIA
+from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.gui_items import GUI_ITEM_TYPE
+from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
 

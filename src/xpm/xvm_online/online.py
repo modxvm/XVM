@@ -33,6 +33,7 @@ import xvm_main.python.xvmapi as xvmapi
 class _Get_online(object):
 
     def __init__(self):
+        self.loginSection = None
         if GAME_REGION not in URLS.WG_API_SERVERS:
             warn('xvm_online: no API available for this server')
             return

@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.14.1',
+    'VERSION':       '0.9.15',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.14.1'],
+    'GAME_VERSIONS': ['0.9.15'],
     # optional
 }
 
@@ -34,14 +34,15 @@ from gui.shared.gui_items.Vehicle import Vehicle
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.TechTree import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.Research import Research
-from gui.Scaleform.daapi.view.lobby.customization.VehicleCustomization import VehicleCustomization
+# TODO: 0.9.15
+#from gui.Scaleform.daapi.view.lobby.customization.VehicleCustomization import VehicleCustomization
 from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
 from gui.Scaleform.daapi.view.lobby.PremiumWindow import PremiumWindow
 from gui.Scaleform.daapi.view.lobby.store.Shop import Shop
 from gui.Scaleform.daapi.view.lobby.recruitWindow.RecruitWindow import RecruitWindow
 from gui.Scaleform.daapi.view.lobby.PersonalCase import PersonalCase
 from gui.Scaleform.daapi.view.lobby.exchange.ExchangeFreeToTankmanXpWindow import ExchangeFreeToTankmanXpWindow
-from gui.Scaleform.daapi.view.lobby.customization_2_0.main_view import MainView
+from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView
 
 from xfw import *
 
@@ -81,7 +82,8 @@ def onXfwCommand(cmd, *args):
             global gold_enable
             gold_enable = not args[0]
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
-            handlersInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler)
+            # TODO: 0.9.15
+            #handlersInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler)
             handlersInvalidate('_PremiumWindow__onUpdateHandler()', PremiumWindow_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
             handlersInvalidate('_update()', Shop_handler)
@@ -206,17 +208,17 @@ def Research_dispose(self, *args, **kwargs):
     global Research_handler
     Research_handler = None
 
-
-@registerEvent(VehicleCustomization, '_populate')
-def VehicleCustomization_populate(self, *args, **kwargs):
-    global VehicleCustomization_handler
-    VehicleCustomization_handler = self
-
-
-@registerEvent(VehicleCustomization, '_dispose')
-def VehicleCustomization_dispose(self, *args, **kwargs):
-    global VehicleCustomization_handler
-    VehicleCustomization_handler = None
+# TODO: 0.9.15
+#@registerEvent(VehicleCustomization, '_populate')
+#def VehicleCustomization_populate(self, *args, **kwargs):
+#    global VehicleCustomization_handler
+#    VehicleCustomization_handler = self
+#
+#
+#@registerEvent(VehicleCustomization, '_dispose')
+#def VehicleCustomization_dispose(self, *args, **kwargs):
+#    global VehicleCustomization_handler
+#    VehicleCustomization_handler = None
 
 
 @registerEvent(TechnicalMaintenance, '_populate')

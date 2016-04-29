@@ -103,8 +103,8 @@ class Xvm(object):
 
     # state handler
 
-    def onGUISpaceChanged(self, spaceID):
-        #trace('onGUISpaceChanged: {}'.format(spaceID))
+    def onGUISpaceEntered(self, spaceID):
+        #trace('onGUISpaceEntered: {}'.format(spaceID))
         if spaceID == GUI_GLOBAL_SPACE_ID.LOGIN:
             self.onStateLogin()
         elif spaceID == GUI_GLOBAL_SPACE_ID.LOBBY:

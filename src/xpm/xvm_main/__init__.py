@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.14.1',
+    'VERSION':       '0.9.15',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.14.1'],
+    'GAME_VERSIONS': ['0.9.15'],
     # optional
 }
 
@@ -36,7 +36,7 @@ from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
-from gui.battle_control.dyn_squad_functional import _DynSquadEntityController
+from gui.battle_control.dyn_squad_functional import DynSquadFunctional
 from gui.shared import g_eventBus, events
 from gui.Scaleform.Flash import Flash
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
@@ -67,7 +67,7 @@ _SWFS = [_LOBBY_SWF, _BATTLE_SWF, _VMM_SWF]
 def start():
     debug('start')
 
-    g_appLoader.onGUISpaceChanged += g_xvm.onGUISpaceChanged
+    g_appLoader.onGUISpaceEntered += g_xvm.onGUISpaceEntered
 
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_xvm.onXfwCommand)
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, config.load)
@@ -86,7 +86,7 @@ BigWorld.callback(0, start)
 def fini():
     debug('fini')
 
-    g_appLoader.onGUISpaceChanged -= g_xvm.onGUISpaceChanged
+    g_appLoader.onGUISpaceEntered -= g_xvm.onGUISpaceEntered
 
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_xvm.onXfwCommand)
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
@@ -162,11 +162,12 @@ def ProfileTechniqueWindow_RequestData(base, self, data):
 #    else:
 #        self.as_responseVehicleDossierS({})
 
-# stereoscope
-@registerEvent(AmmunitionPanel, 'highlightParams')
-def AmmunitionPanel_highlightParams(self, type):
-    # debug('> AmmunitionPanel_highlightParams')
-    g_xvm.updateTankParams()
+# TODO: 0.9.15: remove?
+## stereoscope
+#@registerEvent(AmmunitionPanel, 'highlightParams')
+#def AmmunitionPanel_highlightParams(self, type):
+#    # debug('> AmmunitionPanel_highlightParams')
+#    g_xvm.updateTankParams()
 
 
 # PRE-BATTLE
@@ -308,8 +309,8 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
 
-@registerEvent(_DynSquadEntityController, 'invalidateVehicleInfo')
-def _DynSquadEntityController_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
+@registerEvent(DynSquadFunctional, 'invalidateVehicleInfo')
+def _DynSquadFunctional_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
     if arena_info.getArenaGuiType() == 1: # ARENA_GUI_TYPE.RANDOM
         if flags & INVALIDATE_OP.PREBATTLE_CHANGED and playerVehVO.squadIndex > 0:
             for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(playerVehVO.team)):

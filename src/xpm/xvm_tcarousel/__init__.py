@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.14.1',
+    'VERSION':       '0.9.15',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.14.1'],
+    'GAME_VERSIONS': ['0.9.15'],
     # optional
 }
 
@@ -22,8 +22,9 @@ from debug_utils import LOG_DEBUG
 from functools import partial
 from operator import attrgetter
 from gui import GUI_NATIONS_ORDER_INDEX
-from gui.shared import g_eventBus, g_itemsCache, REQ_CRITERIA
+from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
+from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.DialogsInterface import showDialog
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
