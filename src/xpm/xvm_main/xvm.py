@@ -37,7 +37,8 @@ import topclans
 import wgutils
 import xvmapi
 import vehinfo_xtdb
-
+import xmqp
+import xmqp_events
 
 _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
@@ -102,8 +103,8 @@ class Xvm(object):
 
     # state handler
 
-    def onGUISpaceChanged(self, spaceID):
-        #trace('onGUISpaceChanged: {}'.format(spaceID))
+    def onGUISpaceEntered(self, spaceID):
+        #trace('onGUISpaceEntered: {}'.format(spaceID))
         if spaceID == GUI_GLOBAL_SPACE_ID.LOGIN:
             self.onStateLogin()
         elif spaceID == GUI_GLOBAL_SPACE_ID.LOBBY:
@@ -282,6 +283,7 @@ class Xvm(object):
 
     def onStateBattle(self):
         trace('onStateBattle')
+        xmqp_events.onStateBattle()
 
     def initAS2DAAPI(self, flashObject):
         root = flashObject.getMember('_root')
@@ -329,13 +331,16 @@ class Xvm(object):
                     arena.onVehicleKilled += self._onVehicleKilled
                     arena.onAvatarReady += self._onAvatarReady
                     arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
-        except Exception, ex:
+            self.xmqp_init()
+        except Exception as ex:
             err(traceback.format_exc())
 
 
     def onLeaveWorld(self):
         trace('onLeaveWorld')
         try:
+            self.xmqp_stop()
+
             player = BigWorld.player()
             if player is not None and hasattr(player, 'arena'):
                 arena = BigWorld.player().arena
@@ -470,7 +475,7 @@ class Xvm(object):
             markersManager.invokeMarker(marker.id, 'setEntityName', [PLAYER_GUI_PROPS.squadman.name()])
 
         #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vID, status, frags, squadIndex))
-        markersManager.invokeMarker(marker.id, 'setMarkerStateXvm', [targets, status, frags, my_frags, squadIndex])
+        markersManager.invokeMarker(marker.id, 'as_xvm_setMarkerState', [targets, status, frags, my_frags, squadIndex])
 
 
     def updateMinimapEntry(self, vID, targets):
@@ -657,5 +662,28 @@ class Xvm(object):
             return
         if e.uniqueName == 'hangar':
             self.hangarInit()
+
+    def xmqp_init(self):
+        #debug('xmqp_init')
+        if config.networkServicesSettings.servicesActive:
+            if not isReplay() or xmqp.XMQP_DEVELOPMENT:
+                token = config.token.token
+                if token is not None and token != '':
+                    players = []
+                    player = BigWorld.player()
+                    player_team = player.team if hasattr(player, 'team') else 0
+                    for (vehId, vData) in player.arena.vehicles.iteritems():
+                        # ally team only
+                        if vData['team'] == player_team:
+                            players.append(vData['accountDBID'])
+                    if xmqp.XMQP_DEVELOPMENT:
+                        currentPlayerId = utils.getPlayerId()
+                        if currentPlayerId not in players:
+                            players.append(currentPlayerId)
+                    xmqp.start(players)
+
+    def xmqp_stop(self):
+        xmqp.stop()
+
 
 g_xvm = Xvm()

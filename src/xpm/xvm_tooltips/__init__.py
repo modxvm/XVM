@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.14.1',
+    'VERSION':       '0.9.15',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.14.1'],
+    'GAME_VERSIONS': ['0.9.15'],
     # optional
 }
 
@@ -30,8 +30,10 @@ from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.formatters import text_styles
 from gui.shared.tooltips import formatters
 from gui.shared.gui_items import GUI_ITEM_TYPE
-from gui.shared.tooltips.module import ModuleParamsField
-from gui.shared.utils import ItemsParameters, ParametersCache
+# TODO:0.9.15
+#from gui.shared.tooltips.module import ModuleParamsField
+# TODO:0.9.15
+#from gui.shared.utils import ItemsParameters, ParametersCache
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
 from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
@@ -189,7 +191,8 @@ def replace_p(text):
     return text.replace('<p>', p_replacement).replace('</p>', '</font>').replace('<h>', '').replace('</h>', '')
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
-@overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
+# TODO:0.9.15
+#@overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
     try:
         self.leftPadding = 10
@@ -445,27 +448,28 @@ def makeString(base, key, *args, **kwargs):
         return weightTooHeavy
     return base(key, *args, **kwargs)
 
-# paint 'weight (kg)' with red if module does not fit due to overweight
-@overrideMethod(ModuleParamsField, '_getValue')
-def ModuleParamsField_getValue(base, self, *args, **kwargs):
-    result = base(self, *args, **kwargs)
-    try:
-        try:
-            param_name = result[0][-1][0]
-        except:
-            param_name = 'wrong item'
-        if param_name == 'weight':
-            module = self._tooltip.item
-            configuration = self._tooltip.context.getStatusConfiguration(module)
-            vehicle = configuration.vehicle
-            slotIdx = configuration.slotIdx
-            if vehicle is not None:
-                isFit, reason = module.mayInstall(vehicle, slotIdx)
-                if not isFit and reason == 'too heavy':
-                    result[0][-1][0] = 'weightTooHeavy'
-    except Exception as ex:
-        err(traceback.format_exc())
-    return result
+# TODO:0.9.15
+## paint 'weight (kg)' with red if module does not fit due to overweight
+#@overrideMethod(ModuleParamsField, '_getValue')
+#def ModuleParamsField_getValue(base, self, *args, **kwargs):
+#    result = base(self, *args, **kwargs)
+#    try:
+#        try:
+#            param_name = result[0][-1][0]
+#        except:
+#            param_name = 'wrong item'
+#        if param_name == 'weight':
+#            module = self._tooltip.item
+#            configuration = self._tooltip.context.getStatusConfiguration(module)
+#            vehicle = configuration.vehicle
+#            slotIdx = configuration.slotIdx
+#            if vehicle is not None:
+#                isFit, reason = module.mayInstall(vehicle, slotIdx)
+#                if not isFit and reason == 'too heavy':
+#                    result[0][-1][0] = 'weightTooHeavy'
+#    except Exception as ex:
+#        err(traceback.format_exc())
+#    return result
 
 
 #####################################################################

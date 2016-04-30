@@ -31,31 +31,32 @@ _tanks_camo = {
     'ussr:BT-2':                              [ 14.95 , 11.23 , 3.81 , 1.005 ],
     'ussr:T-26':                              [ 13.81 , 10.37 , 3.52 , 0.989 ],
     'ussr:M3_Stuart_LL':                      [ 15.22 , 15.22 , 4.57 , 1     ],
-    'ussr:T-127':                             [ 17.96 , 13.45 , 5.21 , 1     ],
+    'ussr:R56_T-127':                         [ 17.96 , 13.45 , 5.21 , 1     ],
     'ussr:BT-SV':                             [ 16.87 , 12.65 , 4.89 , 1     ],
     'ussr:R105_BT_7A':                        [ 15.68 , 11.75 , 4.08 , 1     ],
-    'ussr:BT-7':                              [ 16.53 , 16.53 , 4.96 , 1     ],
+    'ussr:R03_BT-7':                          [ 16.53 , 16.53 , 4.96 , 1     ],
     'ussr:R86_LTP':                           [ 20.18 , 15.16 , 5.85 , 1     ],
-    'ussr:T-46':                              [ 16.12 , 12.08 , 4.45 , 0.972 ],
+    'ussr:R22_T-46':                          [ 16.12 , 12.08 , 4.45 , 0.972 ],
     'ussr:T-70':                              [ 17.61 , 13.18 , 4.86 , 0.936 ],
     'ussr:Valentine_LL':                      [ 17.95 , 17.95 , 5.21 , 1     ],
     'ussr:R12_A-20':                          [ 16.06 , 16.06 , 4.43 , 1.006 ],
-    'ussr:T80':                               [ 18.30 , 18.30 , 5.05 , 1     ],
+    'ussr:R44_T80':                           [ 18.30 , 18.30 , 5.05 , 1     ],
     'ussr:T-50':                              [ 17.73 , 17.73 , 4.89 , 1     ],
     'ussr:MT25':                              [ 14.73 , 14.73 , 3.92 , 0.916 ],
     'ussr:R107_LTB':                          [ 15.39 , 15.39 , 3.66 , 1     ],
     'ussr:R109_T54S':                         [ 15.96 , 15.96 , 3.51 , 1     ],
+    #'ussr:R125_T_45':                         [ ],
     # Medium
     'ussr:A-32':                              [ 15.96 , 11.97 , 4.15 , 1     ],
     'ussr:R118_T28_F30':                      [ 12.43 ,  9.35 , 3.11 , 1     ],
     'ussr:R06_T-28':                          [ 11.63 ,  8.72 , 3.09 , 1     ],
     'ussr:Matilda_II_LL':                     [ 15.11 , 11.34 , 3.93 , 1     ],
     'ussr:R04_T-34':                          [ 14.45 , 10.83 , 3.84 , 0.88  ],
+    'ussr:R07_T-34-85':                       [ 13.97 , 10.49 , 3.32 , 1     ],    
     'ussr:R108_T34_85M':                      [ 14.08 , 10.55 , 3.52 , 1     ],
     'ussr:R117_T34_85_Rudy':                  [ 13.97 , 10.49 , 3.49 , 1     ],
-    'ussr:T-34-85':                           [ 13.97 , 10.49 , 3.32 , 1     ],
     'ussr:A43':                               [ 12.14 ,  9.13 , 3.23 , 0.766 ],
-    'ussr:T-43':                              [ 14.71 , 11.07 , 3.50 , 0.981 ],
+    'ussr:R23_T-43':                          [ 14.71 , 11.07 , 3.50 , 0.981 ],
     'ussr:KV-13':                             [ 15.21 , 11.41 , 3.62 , 1.026 ],
     'ussr:A44':                               [ 12.54 ,  9.41 , 2.76 , 1     ],
     'ussr:T-44':                              [ 16.03 , 12.05 , 3.35 , 0.983 ],
@@ -65,7 +66,7 @@ _tanks_camo = {
     'ussr:R104_Object_430_II':                [ 16.59 , 12.42 , 2.56 , 0.977 ],
     'ussr:Object_907':                        [ 17.21 , 12.94 , 3.41 , 1     ],
     'ussr:Object_140':                        [ 16.15 , 12.09 , 3.20 , 1     ],
-    'ussr:Object_430':                        [ 17.84 , 13.39 , 3.53 , 1     ],
+    'ussr:R96_Object_430':                    [ 17.84 , 13.39 , 3.53 , 1     ],
     'ussr:R87_T62A':                          [ 15.28 , 11.46 , 3.02 , 1     ],
     # Heavy
     'ussr:R38_KV-220_action':                 [  7.13 ,  3.59 , 1.85 , 1     ],
@@ -83,6 +84,7 @@ _tanks_camo = {
     'ussr:R113_Object_730':                   [  6.96 ,  3.48 , 1.32 , 1     ],
     #'ussr:R123_Kirovets_1':                   [ ],
     #'ussr:R127_T44_100_P':                    [ ],
+    #'ussr-R128_KV4_Kreslavskiy':              [ ],
     'ussr:KV4':                               [  1.78 ,  0.89 , 0.37 , 0.433 ],
     'ussr:R19_IS-3':                          [  6.75 ,  3.37 , 1.21 , 0.97  ],
     'ussr:R81_IS8':                           [  6.07 ,  3.04 , 1.09 , 0.951 ],
@@ -94,7 +96,7 @@ _tanks_camo = {
     'ussr:AT-1':                              [ 21.21 , 12.71 , 5.05 , 1     ],
     'ussr:SU76I':                             [ 20.63 , 12.38 , 7.51 , 1     ],
     'ussr:R24_SU-76':                         [ 22.51 , 13.51 , 6.30 , 1     ],
-    'ussr:GAZ-74b':                           [ 22.63 , 13.57 , 5.39 , 1     ],
+    'ussr:R25_GAZ-74b':                       [ 22.63 , 13.57 , 5.39 , 1     ],
     'ussr:SU_85I':                            [ 20.41 , 12.26 , 7.14 , 1     ],
     'ussr:R02_SU-85':                         [ 22.29 , 13.39 , 5.30 , 1     ],
     'ussr:SU100Y':                            [  6.67 ,  3.99 , 1.53 , 1     ],
@@ -106,7 +108,8 @@ _tanks_camo = {
     'ussr:SU100M1':                           [ 20.18 , 12.09 , 4.22 , 1     ],
     'ussr:ISU-152':                           [ 15.05 ,  9.06 , 2.03 , 1     ],
     'ussr:SU-101':                            [ 20.29 , 12.20 , 3.12 , 1     ],
-    'ussr:SU122_54':                          [ 21.77 , 13.05 , 3.92 , 1     ],
+    #'ussr-R126_Object_730_5':                  [],
+    'ussr:R75_SU122_54':                      [ 21.77 , 13.05 , 3.92 , 1     ],
     'ussr:R53_Object_704':                    [ 17.61 , 10.55 , 2.38 , 1     ],
     'ussr:Object263':                         [ 14.14 ,  8.49 , 2.16 , 1     ],
     'ussr:Object268':                         [ 16.36 ,  9.80 , 2.34 , 1     ],
@@ -132,7 +135,7 @@ _tanks_camo = {
     'germany:T-15':                           [ 19.27 , 19.27 , 5.78 , 1     ],
     'germany:G36_PzII_J':                     [ 17.39 , 13.05 , 4.87 , 1     ],
     'germany:G117_Toldi_III':                 [ 19.27 , 19.27 , 5.49 , 1     ],
-    'germany:Pz38t':                          [ 17.99 , 13.51 , 5.22 , 1.035 ],
+    'germany:G08_Pz38t':                      [ 17.99 , 13.51 , 5.22 , 1.035 ],
     'germany:PzIII_A':                        [ 18.01 , 18.01 , 5.22 , 1     ],
     'germany:G82_Pz_II_AusfG':                [ 18.62 , 18.62 , 3.91 , 1.005 ],
     'germany:PzI_ausf_C':                     [ 19.03 , 19.03 , 5.33 , 1.037 ],
@@ -159,7 +162,7 @@ _tanks_camo = {
     'germany:PzV_PzIV':                       [ 10.55 ,  7.92 , 2.61 , 1     ],
     'germany:PzIV_schmalturm':                [ 12.94 ,  9.75 , 3.20 , 1     ],
     'germany:VK3002DB_V1':                    [ 13.77 , 10.34 , 3.22 , 0.94  ],
-    'germany:VK3001P':                        [ 10.49 ,  7.85 , 2.50 , 1.102 ],
+    'germany:G27_VK3001P':                    [ 10.49 ,  7.85 , 2.50 , 1.102 ],
     'germany:VK3002M':                        [  9.58 ,  7.17 , 2.24 , 0.983 ],
     'germany:G78_Panther_M10':                [  9.23 ,  6.90 , 2.28 , 1     ],
     'germany:VK3002DB':                       [ 12.64 ,  9.49 , 3.01 , 0.92  ],
@@ -194,7 +197,7 @@ _tanks_camo = {
     'germany:G39_Marder_III':                 [ 19.27 , 11.57 , 4.76 , 1     ],
     'germany:G101_StuG_III':                  [ 23.14 , 13.91 , 4.84 , 1     ],
     'germany:G104_Stug_IV':                   [ 20.86 , 12.54 , 5.15 , 1     ],
-    'germany:StuG_40_AusfG':                  [ 21.89 , 13.11 , 5.41 , 1     ],
+    'germany:G05_StuG_40_AusfG':              [ 21.89 , 13.11 , 5.41 , 1     ],
     'germany:Pz_Sfl_IVc':                     [ 12.79 ,  7.66 , 3.04 , 1.034 ],
     'germany:DickerMax':                      [ 16.87 , 10.09 , 5.01 , 1     ],
     'germany:G17_JagdPzIV':                   [ 23.77 , 14.25 , 5.94 , 1     ],
@@ -226,7 +229,7 @@ _tanks_camo = {
     'germany:G_E':                            [  1.60 ,  0.80 , 0.14 , 1     ],
 # USA
     # Light
-    'usa:T1_Cunningham':                      [ 12.76 ,  9.59 , 2.86 , 0.995 ],
+    'usa:A01_T1_Cunningham':                  [ 12.76 ,  9.59 , 2.86 , 0.995 ],
     'usa:T2_lt':                              [ 14.99 , 11.29 , 3.36 , 1     ],
     'usa:T1_E6':                              [ 14.25 , 10.72 , 2.78 , 1     ],
     'usa:T7_Combat_Car':                      [ 13.51 , 10.09 , 3.22 , 1     ],
@@ -239,6 +242,7 @@ _tanks_camo = {
     'usa:T21':                                [ 15.28 , 15.28 , 3.77 , 1     ],
     'usa:A94_T37':                            [ 13.67 , 13.67 , 3.20 , 0.952 ],
     'usa:A103_T71E1':                         [ 14.08 , 14.08 , 3.29 , 1     ],
+    #'usa:A112_T71E2':                         [ ],
     'usa:M41_Bulldog':                        [ 14.25 , 14.25 , 3.33 , 1     ],
     'usa:T49':                                [ 15.27 , 15.27 , 2.29 , 1.218 ],
     # Medium
@@ -261,7 +265,7 @@ _tanks_camo = {
     'usa:A35_Pershing':                       [ 12.99 ,  9.71 , 2.92 , 1.008 ],
     'usa:A63_M46_Patton':                     [ 10.46 ,  7.82 , 2.07 , 1     ],
     'usa:A89_T54E1':                          [  9.86 ,  7.35 , 1.95 , 1     ],
-    'usa:M60':                                [  6.95 ,  5.19 , 1.45 , 1     ],
+    'usa:A92_M60':                            [  6.95 ,  5.19 , 1.45 , 1     ],
     'usa:A84_M48A1':                          [  8.27 ,  6.21 , 1.73 , 1     ],
     # Heavy
     'usa:T14':                                [  7.75 ,  3.88 , 2.02 , 1     ],
@@ -279,7 +283,7 @@ _tanks_camo = {
     'usa:A109_T56_GMC':                       [ 18.93 , 11.34 , 4.92 , 1     ],
     'usa:A29_T40':                            [ 20.98 , 12.60 , 5.45 , 1     ],
     'usa:M8A1':                               [ 21.49 , 12.89 , 5.72 , 0.979 ],
-    'usa:T67':                                [ 20.63 , 12.36 , 5.36 , 0.885 ],
+    'usa:A58_T67':                            [ 20.63 , 12.36 , 5.36 , 0.885 ],
     'usa:A30_M10_Wolverine':                  [ 17.79 , 10.66 , 4.39 , 1     ],
     'usa:M36_Slagger':                        [ 15.26 ,  9.16 , 3.63 , 0.878 ],
     'usa:M18_Hellcat':                        [ 20.97 , 12.58 , 5.24 , 0.994 ],
@@ -319,7 +323,7 @@ _tanks_camo = {
     'france:F15_AMX_12t':                     [ 17.96 , 17.96 , 4.20 , 1     ],
     'france:AMX_13_75':                       [ 17.67 , 17.67 , 4.14 , 1     ],
     'france:F69_AMX13_57_100_GrandFinal':     [ 18.75 , 18.75 , 4.99 , 1     ],
-    'france:AMX_13_90':                       [ 17.67 , 17.67 , 4.21 , 1     ],
+    'france:F17_AMX_13_90':                   [ 17.67 , 17.67 , 4.21 , 1     ],
     # Medium
     'france:D2':                              [ 12.64 ,  9.49 , 3.67 , 0.92  ],
     'france:F44_Somua_S35':                   [ 14.9  , 11.2  , 4.32 , 1.013 ],
@@ -471,8 +475,8 @@ _tanks_camo = {
     'japan:J15_Chi_Ni':                       [ 15.96 , 11.97 , 3.80 , 1     ],
     'japan:J26_Type_89':                      [ 12.63 ,  9.49 , 3.01 , 1.003 ],
     'japan:J07_Chi_Ha':                       [ 16.50 , 12.36 , 4.79 , 0.968 ],
-    'japan:Chi_He':                           [ 15.37 , 11.56 , 4.00 , 0.943 ],
-    'japan:Chi_Nu_Kai':                       [ 13.85 , 10.37 , 3.60 , 1     ],
+    'japan:J09_Chi_He':                       [ 15.37 , 11.56 , 4.00 , 0.943 ],
+    'japan:J12_Chi_Nu_Kai':                   [ 13.85 , 10.37 , 3.60 , 1     ],
     'japan:J08_Chi_Nu':                       [ 13.98 , 10.48 , 3.63 , 0.973 ],
     'japan:Chi_To':                           [ 12.57 ,  9.44 , 3.10 , 1.016 ],
     'japan:Chi_Ri':                           [  9.95 ,  7.46 , 2.46 , 0.839 ],
@@ -520,7 +524,7 @@ _gun_camo_modifier = {
         ],
     '_23mm_VJA':
         [
-            [ ['ussr:BT-7'], 0.280 ],
+            [ ['ussr:R03_BT-7'], 0.280 ],
             [ ['ussr:BT-2', 'ussr:R11_MS-1', 'ussr:T-26'], 0.238 ]
         ],
     '_23mm_PT-23TB':
@@ -529,7 +533,7 @@ _gun_camo_modifier = {
         ],
     '_37mm_ZiS-19':
         [
-            [ ['ussr:R12_A-20', 'ussr:BT-7', 'ussr:T-46', 'ussr:T-70'], 0.300 ],
+            [ ['ussr:R12_A-20', 'ussr:R03_BT-7', 'ussr:R22_T-46', 'ussr:T-70'], 0.300 ],
             [ ['ussr:BT-2', 'ussr:T-26', 'ussr:T-60'], 0.255 ]
         ],
     '_37mm_ZiS-19_S':
@@ -546,22 +550,22 @@ _gun_camo_modifier = {
         ],
     '_37mm_automatic_SH-37':
         [
-            [ ['ussr:R12_A-20', 'ussr:MT25', 'ussr:T-46', 'ussr:T-50', 'ussr:T80'], 0.225 ]
+            [ ['ussr:R12_A-20', 'ussr:MT25', 'ussr:R22_T-46', 'ussr:T-50', 'ussr:R44_T80'], 0.225 ]
         ],
     '_45mm_20K':
         [
-            [ ['ussr:R12_A-20', 'ussr:BT-7', 'ussr:MT25', 'ussr:T-46', 'ussr:T-50', 'ussr:T-70', 'ussr:T80'], 0.290 ],
+            [ ['ussr:R12_A-20', 'ussr:R03_BT-7', 'ussr:MT25', 'ussr:R22_T-46', 'ussr:T-50', 'ussr:T-70', 'ussr:R44_T80'], 0.290 ],
             [ ['ussr:BT-2', 'ussr:T-26'], 0.247 ],
             [ ['china:Ch08_Type97_Chi_Ha'], 0.290 ],
             [ ['china:Ch07_Vickers_MkE_Type_BT26'], 0.247 ]
         ],
     '_45mm_VT-42':
         [
-            [ ['ussr:R12_A-20', 'ussr:T-46', 'ussr:T-50', 'ussr:T-70', 'ussr:T80'], 0.276 ]
+            [ ['ussr:R12_A-20', 'ussr:R22_T-46', 'ussr:T-50', 'ussr:T-70', 'ussr:R44_T80'], 0.276 ]
         ],
     '_45mm_VT-43':
         [
-            [ ['ussr:MT25', 'ussr:T-50', 'ussr:T80'], 0.276 ]
+            [ ['ussr:MT25', 'ussr:T-50', 'ussr:R44_T80'], 0.276 ]
         ],
     '_45mm_mod_1932':
         [
@@ -573,7 +577,7 @@ _gun_camo_modifier = {
         ],
     '_57mm_ZiS-2':
         [
-            [ ['ussr:GAZ-74b', 'ussr:R24_SU-76'], 0.280 ]
+            [ ['ussr:R25_GAZ-74b', 'ussr:R24_SU-76'], 0.280 ]
         ],
     '_57mm_ZiS-8':
         [
@@ -594,7 +598,7 @@ _gun_camo_modifier = {
         ],
     '_76mm_L-10':
         [
-            [ ['ussr:R06_T-28', 'ussr:T-46'], 0.260 ]
+            [ ['ussr:R06_T-28', 'ussr:R22_T-46'], 0.260 ]
         ],
     '_76mm_L-11':
         [
@@ -639,7 +643,7 @@ _gun_camo_modifier = {
         ],
     '_76mm_ZiS-3_mod_42':
         [
-            [ ['ussr:GAZ-74b', 'ussr:R24_SU-76'], 0.247 ]
+            [ ['ussr:R25_GAZ-74b', 'ussr:R24_SU-76'], 0.247 ]
         ],
     '_76mm_L-10_S':
         [
@@ -647,7 +651,7 @@ _gun_camo_modifier = {
         ],
     '_85mm_D-5S-85A':
         [
-            [ ['ussr:GAZ-74b'], 0.250 ]
+            [ ['ussr:R25_GAZ-74b'], 0.250 ]
         ],
     '_85mm_D-5S':
         [
@@ -655,7 +659,7 @@ _gun_camo_modifier = {
         ],
     '_85mm_ZiS_S-53':
         [
-            [ ['ussr:T-43', 'ussr:T-44', 'ussr:R107_LTB'], 0.250 ]
+            [ ['ussr:R23_T-43', 'ussr:T-44', 'ussr:R107_LTB'], 0.250 ]
         ],
     '_85mm_D-5T':
         [
@@ -671,7 +675,7 @@ _gun_camo_modifier = {
         ],
     '_85mm_D5T-85BM':
         [
-            [ ['ussr:R01_IS', 'ussr:KV-13', 'ussr:T-43', 'ussr:T-44', 'ussr:R107_LTB'], 0.238 ]
+            [ ['ussr:R01_IS', 'ussr:KV-13', 'ussr:R23_T-43', 'ussr:T-44', 'ussr:R107_LTB'], 0.238 ]
         ],
     '_85mm_D10_85':
         [
@@ -683,7 +687,7 @@ _gun_camo_modifier = {
         ],
     '_85mm_LB-2S':
         [
-            [ ['ussr:GAZ-74b'], 0.238 ]
+            [ ['ussr:R25_GAZ-74b'], 0.238 ]
         ],
     '_100mm_D10T':
         [
@@ -728,7 +732,7 @@ _gun_camo_modifier = {
         ],
     '_100mm_D54S':
         [
-            [ ['ussr:SU-101', 'ussr:SU122_54'], 0.154 ]
+            [ ['ussr:SU-101', 'ussr:R75_SU122_54'], 0.154 ]
         ],
     '_107mm_ZiS-6':
         [
@@ -740,7 +744,7 @@ _gun_camo_modifier = {
         ],
     '_122mm_M62-T2S':
         [
-            [ ['ussr:SU122_54'], 0.180 ]
+            [ ['ussr:R75_SU122_54'], 0.180 ]
         ],
     '_122mm_cannon_mod_1930':
         [
@@ -764,7 +768,7 @@ _gun_camo_modifier = {
         ],
     '_122mm_cannon_U-11':
         [
-            [ ['ussr:KV-13', 'ussr:R80_KV1', 'ussr:KV2', 'ussr:T-43', 'ussr:T150'], 0.200 ]
+            [ ['ussr:KV-13', 'ussr:R80_KV1', 'ussr:KV2', 'ussr:R23_T-43', 'ussr:T150'], 0.200 ]
         ],
     '_122mm_S-41':
         [
@@ -772,7 +776,7 @@ _gun_camo_modifier = {
         ],
     '_122-mm_D-49':
         [
-            [ ['ussr:SU122_54'], 0.190 ]
+            [ ['ussr:R75_SU122_54'], 0.190 ]
         ],
     '_122mm_D-25-44':
         [
@@ -859,7 +863,7 @@ _gun_camo_modifier = {
     '_20mm_Flak_38_L112':
         [
             [ ['germany:G52_Pz38_NA', 'germany:PzIII_AusfJ', 'germany:PzIII_A', 'germany:G25_PzII_Luchs', 'germany:PzI_ausf_C', 'germany:G82_Pz_II_AusfG', 'germany:G26_VK1602'], 0.266 ],
-            [ ['germany:G07_Pz35t', 'germany:Pz38t', 'germany:G06_PzII'], 0.224 ]
+            [ ['germany:G07_Pz35t', 'germany:G08_Pz38t', 'germany:G06_PzII'], 0.224 ]
         ],
     '_20mm_Breda':
         [
@@ -876,7 +880,7 @@ _gun_camo_modifier = {
     '_37mm_KwK_38t_L47':
         [
             [ ['germany:G52_Pz38_NA'], 0.300 ],
-            [ ['germany:G07_Pz35t', 'germany:Pz38t'], 0.255 ]
+            [ ['germany:G07_Pz35t', 'germany:G08_Pz38t'], 0.255 ]
         ],
     '_37mm_KwK_L46':
         [
@@ -890,7 +894,7 @@ _gun_camo_modifier = {
         ],
     '_47mm_PaK_38t_L43':
         [
-            [ ['germany:Pz38t', 'germany:G52_Pz38_NA'], 0.290 ]
+            [ ['germany:G08_Pz38t', 'germany:G52_Pz38_NA'], 0.290 ]
         ],
     '_50mm_KwK_38_L42':
         [
@@ -920,11 +924,11 @@ _gun_camo_modifier = {
     '_75mm_PaK_39_L48':
         [
             [ ['germany:Hetzer'], 0.260 ],
-            [ ['germany:G17_JagdPzIV', 'germany:G101_StuG_III', 'germany:StuG_40_AusfG'], 0.247 ]
+            [ ['germany:G17_JagdPzIV', 'germany:G101_StuG_III', 'germany:G05_StuG_40_AusfG'], 0.247 ]
         ],
     '_75mm_KwK_40_L48':
         [
-            [ ['germany:Auf_Panther', 'germany:PzIII_IV', 'germany:Pz_IV_AusfH', 'germany:VK2801', 'germany:G13_VK3001H', 'germany:VK3001P', 'germany:VK3002DB', 'germany:VK3002DB_V1', 'germany:VK3002M'], 0.247 ]
+            [ ['germany:Auf_Panther', 'germany:PzIII_IV', 'germany:Pz_IV_AusfH', 'germany:VK2801', 'germany:G13_VK3001H', 'germany:G27_VK3001P', 'germany:VK3002DB', 'germany:VK3002DB_V1', 'germany:VK3002M'], 0.247 ]
         ],
     '_75mm_KwK_40_L43':
         [
@@ -932,7 +936,7 @@ _gun_camo_modifier = {
         ],
     '_75mm_StuK_40_L43':
         [
-            [ ['germany:Hetzer', 'germany:G101_StuG_III', 'germany:StuG_40_AusfG'], 0.247 ]
+            [ ['germany:Hetzer', 'germany:G101_StuG_III', 'germany:G05_StuG_40_AusfG'], 0.247 ]
         ],
     '_75mm_PaK_40_2':
         [
@@ -944,7 +948,7 @@ _gun_camo_modifier = {
         ],
     '_75mm_StuK42_L70':
         [
-            [ ['germany:G17_JagdPzIV', 'germany:G40_Nashorn', 'germany:StuG_40_AusfG'], 0.247 ],
+            [ ['germany:G17_JagdPzIV', 'germany:G40_Nashorn', 'germany:G05_StuG_40_AusfG'], 0.247 ],
             [ ['germany:JagdPanther'], 0.234 ]
         ],
     '_75mm_KwK45_L100':
@@ -953,7 +957,7 @@ _gun_camo_modifier = {
         ],
     '_75mm_KwK_L70':
         [
-            [ ['germany:E-50', 'germany:Panther_II', 'germany:PzVI', 'germany:PzVI_Tiger_P', 'germany:G13_VK3001H', 'germany:VK3001P', 'germany:VK3002DB', 'germany:VK3002DB_V1', 'germany:VK3002M', 'germany:G15_VK3601H'], 0.234 ]
+            [ ['germany:E-50', 'germany:Panther_II', 'germany:PzVI', 'germany:PzVI_Tiger_P', 'germany:G13_VK3001H', 'germany:G27_VK3001P', 'germany:VK3002DB', 'germany:VK3002DB_V1', 'germany:VK3002M', 'germany:G15_VK3601H'], 0.234 ]
         ],
     '_76mm_PaK_36r':
         [
@@ -970,7 +974,7 @@ _gun_camo_modifier = {
         ],
     '_88mm_KwK_36_L56':
         [
-            [ ['germany:Indien_Panzer', 'germany:PzVI', 'germany:PzVI_Tiger_P', 'germany:VK3001P', 'germany:VK3002DB', 'germany:G15_VK3601H', 'germany:VK4502A'], 0.238 ]
+            [ ['germany:Indien_Panzer', 'germany:PzVI', 'germany:PzVI_Tiger_P', 'germany:G27_VK3001P', 'germany:VK3002DB', 'germany:G15_VK3601H', 'germany:VK4502A'], 0.238 ]
         ],
     '_88mm_Flak_41_L74':
         [
@@ -1024,11 +1028,11 @@ _gun_camo_modifier = {
         ],
     '_105mm_StuH42_L28Pz':
         [
-            [ ['germany:Auf_Panther', 'germany:Panther_II', 'germany:Pz_IV_AusfH', 'germany:PzVI', 'germany:PzVI_Tiger_P', 'germany:VK2801', 'germany:G13_VK3001H', 'germany:VK3001P', 'germany:VK3002DB', 'germany:G15_VK3601H'], 0.209 ]
+            [ ['germany:Auf_Panther', 'germany:Panther_II', 'germany:Pz_IV_AusfH', 'germany:PzVI', 'germany:PzVI_Tiger_P', 'germany:VK2801', 'germany:G13_VK3001H', 'germany:G27_VK3001P', 'germany:VK3002DB', 'germany:G15_VK3601H'], 0.209 ]
         ],
     '_105mm_StuH42_L28':
         [
-            [ ['germany:Hetzer', 'germany:G17_JagdPzIV', 'germany:G101_StuG_III', 'germany:StuG_40_AusfG'], 0.209 ]
+            [ ['germany:Hetzer', 'germany:G17_JagdPzIV', 'germany:G101_StuG_III', 'germany:G05_StuG_40_AusfG'], 0.209 ]
         ],
     '_105mm_KwK46_L68':
         [
@@ -1088,7 +1092,7 @@ _gun_camo_modifier = {
     '_20mm_Hispano_Suiza_Birgikt_gun':
         [
             [ ['usa:A03_M3_Stuart'], 0.266 ],
-            [ ['usa:A02_M2_lt', 'usa:T1_Cunningham', 'usa:A24_T2_med'], 0.224 ]
+            [ ['usa:A02_M2_lt', 'usa:A01_T1_Cunningham', 'usa:A24_T2_med'], 0.224 ]
         ],
     '_37mm_M-6_L53':
         [
@@ -1109,7 +1113,7 @@ _gun_camo_modifier = {
         ],
     '_37mm_Gun_M1916':
         [
-            [ ['usa:T1_Cunningham'], 0.255 ]
+            [ ['usa:A01_T1_Cunningham'], 0.255 ]
         ],
     '_37mm_T16':
         [
@@ -1117,11 +1121,11 @@ _gun_camo_modifier = {
         ],
     '_37mm_semiautomatic_gun_M1924':
         [
-            [ ['usa:T1_Cunningham', 'usa:A24_T2_med'], 0.195 ]
+            [ ['usa:A01_T1_Cunningham', 'usa:A24_T2_med'], 0.195 ]
         ],
     '_37mm_Browning_semiautomatic_gun':
         [
-            [ ['usa:T1_Cunningham', 'usa:A24_T2_med'], 0.195 ]
+            [ ['usa:A01_T1_Cunningham', 'usa:A24_T2_med'], 0.195 ]
         ],
     'Ordnance_QF_2pdr_AT_Gun_Mk.X':
         [
@@ -1135,7 +1139,7 @@ _gun_camo_modifier = {
         ],
     '_57mm_Gun_M1_L50':
         [
-            [ ['usa:A109_T56_GMC', 'usa:M8A1', 'usa:A29_T40', 'usa:T67'], 0.266 ]
+            [ ['usa:A109_T56_GMC', 'usa:M8A1', 'usa:A29_T40', 'usa:A58_T67'], 0.266 ]
         ],
     '_75mm_Howitzer_M1A1':
         [
@@ -1181,7 +1185,7 @@ _gun_camo_modifier = {
         ],
     '_75mm_AT_Gun_M7_L50':
         [
-            [ ['usa:A109_T56_GMC', 'usa:A30_M10_Wolverine', 'usa:M18_Hellcat', 'usa:M8A1', 'usa:T67'], 0.260 ]
+            [ ['usa:A109_T56_GMC', 'usa:A30_M10_Wolverine', 'usa:M18_Hellcat', 'usa:M8A1', 'usa:A58_T67'], 0.260 ]
         ],
     '_76mm_Gun_M1A1':
         [
@@ -1191,7 +1195,7 @@ _gun_camo_modifier = {
         ],
     '_76mm_AT_Gun_M1A1':
         [
-            [ ['usa:A30_M10_Wolverine', 'usa:M18_Hellcat', 'usa:A29_T40', 'usa:T67'], 0.260 ]
+            [ ['usa:A30_M10_Wolverine', 'usa:M18_Hellcat', 'usa:A29_T40', 'usa:A58_T67'], 0.260 ]
         ],
     '_76mm_Gun_M1A2':
         [
@@ -1852,7 +1856,7 @@ _gun_camo_modifier = {
         ],
     '_47mm_Gun_Type1':
         [
-            [ ['japan:J07_Chi_Ha', 'japan:Chi_He', 'japan:J06_Ke_Ho', 'japan:J21_Type_91'], 0.29 ]
+            [ ['japan:J07_Chi_Ha', 'japan:J09_Chi_He', 'japan:J06_Ke_Ho', 'japan:J21_Type_91'], 0.29 ]
         ],
     '_57mm_Gun_Type97':
         [
@@ -1860,7 +1864,7 @@ _gun_camo_modifier = {
         ],
     '_57mm_Gun_Shin':
         [
-            [ ['japan:Chi_He', 'japan:J08_Chi_Nu', 'japan:J06_Ke_Ho'], 0.266 ]
+            [ ['japan:J09_Chi_He', 'japan:J08_Chi_Nu', 'japan:J06_Ke_Ho'], 0.266 ]
         ],
     '_57mm_Gun_Type97':
         [
@@ -1876,7 +1880,7 @@ _gun_camo_modifier = {
         ],
     '_75mm_Gun_Type_99':
         [
-            [ ['japan:Chi_He', 'japan:J08_Chi_Nu', 'japan:J22_Type_95'], 0.26 ]
+            [ ['japan:J09_Chi_He', 'japan:J08_Chi_Nu', 'japan:J22_Type_95'], 0.26 ]
         ],
     '_75mm_Gun_Type3':
         [

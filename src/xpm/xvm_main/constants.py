@@ -1,8 +1,8 @@
 """ XVM (c) www.modxvm.com 2013-2015 """
 
 class XVM(object):
-    XVM_VERSION    = '6.2.1.3-dev'
-    WOT_VERSION    = '0.9.14.1'
+    XVM_VERSION    = '6.3.0-dev'
+    WOT_VERSION    = '0.9.15'
     XVM_INTRO      = 'www.modxvm.com'
 
     API_VERSION = '4.0'
@@ -11,6 +11,9 @@ class XVM(object):
     FINGERPRINTS = [ # fingerprints for SSL certificates
         #'029ef75501dbd41b386990d7b6fb4e30b59540d1'
         ]
+    XMQP_SERVER = 'xmqp.modxvm.com'
+    XMQP_EXCHANGE_NAME_QUERY = 'query.battle.channel'
+    XMQP_COMMAND_BATTLE_MESSAGE = 'command.battle.message'
     TIMEOUT = 5000
 
     CONFIG_DIR = 'res_mods/configs/xvm'
@@ -29,7 +32,8 @@ class XVM_EVENT(object):
     CONFIG_LOADED = 'xvm.config_loaded'
     RELOAD_CONFIG = 'xvm.reload_config'
     SYSTEM_MESSAGE = 'xvm.system_message'
-
+    XMQP_CONNECTED = 'xvm.xmqp_connected'
+    XMQP_MESSAGE = 'xvm.xmqp_message'
 
 # DAAPI commands
 

@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.14.1',
+    'VERSION':       '0.9.15',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.14.1'],
+    'GAME_VERSIONS': ['0.9.15'],
     # optional
 }
 
@@ -58,27 +58,27 @@ def WWISE_WG_loadBanks(base, *args, **kwargs):
         log('WWISE.WG_loadBanks: %s' % args[0])
     base(*args, **kwargs)
 
-
-@overrideMethod(SoundGroups.g_instance, 'checkAndReplace')
-def SoundGroups_g_instance_checkAndReplace(base, event):
-    if not config.get('sounds/enabled'):
-        return base(event)
-
-    event = base(event)
-    if not event:
-        return event
-    mappedEvent = config.get('sounds/soundMapping/%s' % event)
-    logSoundEvents = config.get('sounds/logSoundEvents')
-    if mappedEvent is not None:
-        if mappedEvent == '':
-            mappedEvent = 'emptyEvent'
-        if logSoundEvents:
-            log('SOUND EVENT: %s => %s' % (event, mappedEvent))
-        return mappedEvent
-    else:
-        if logSoundEvents:
-            log('SOUND EVENT: %s' % event)
-        return event
+# TODO:0.9.15
+#@overrideMethod(SoundGroups.g_instance, 'checkAndReplace')
+#def SoundGroups_g_instance_checkAndReplace(base, event):
+#    if not config.get('sounds/enabled'):
+#        return base(event)
+#
+#    event = base(event)
+#    if not event:
+#        return event
+#    mappedEvent = config.get('sounds/soundMapping/%s' % event)
+#    logSoundEvents = config.get('sounds/logSoundEvents')
+#    if mappedEvent is not None:
+#        if mappedEvent == '':
+#            mappedEvent = 'emptyEvent'
+#        if logSoundEvents:
+#            log('SOUND EVENT: %s => %s' % (event, mappedEvent))
+#        return mappedEvent
+#    else:
+#        if logSoundEvents:
+#            log('SOUND EVENT: %s' % event)
+#        return event
 
 
 # new sound events dispatchers

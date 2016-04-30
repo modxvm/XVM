@@ -9,7 +9,8 @@ def getTiers(level, cls, key):
 # PRIVATE
 
 from logger import *
-from gui.shared import g_itemsCache, REQ_CRITERIA
+from gui.shared import g_itemsCache
+from gui.shared.utils.requesters import REQ_CRITERIA
 
 
 # Data from http://forum.worldoftanks.ru/index.php?/topic/41221-

@@ -8,25 +8,28 @@ package xvm.hangar.components
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import com.xvm.utils.*;
-    import net.wg.gui.components.controls.WgScrollingList;
+    import net.wg.gui.components.controls.ScrollingListEx;
     import net.wg.gui.lobby.hangar.*;
-    import net.wg.gui.lobby.hangar.data.*;
+    import net.wg.gui.lobby.hangar.interfaces.*;
     import scaleform.clik.data.*;
 
     public class VehicleParams
     {
-        public static function updateVehicleParams(params:Params):void
+        public static function updateVehicleParams(params:IVehicleParameters):void
         {
             //Logger.add("updateVehicleParams");
             //Logger.addObject(Config.config.minimap.circles._internal);
 
+            Logger.add("TODO:0.9.15: xvm.hangar.components.VehicleParams.updateVehicleParams()");
+            // TODO:0.9.15
+            /*
             if (params == null)
                 return;
 
             if (!Config.config.minimap.circles._internal.is_full_crew)
                 return;
 
-            var list:WgScrollingList = params.list;
+            var list:ScrollingListEx = params.paramsList;
             var dp:DataProvider = list.dataProvider as DataProvider;
             //Logger.addObject(dp, 2);
             var len:Number = dp.length;
@@ -97,6 +100,7 @@ package xvm.hangar.components
                 //Logger.add(param.tfField.htmlText);
                 param.tfField.htmlText = param.tfField.htmlText.split(" </FONT><FONT ").join(l_radioRange + " </FONT><FONT ");
             }
+            */
         }
 
         private static function getIndex(dp:DataProvider, textId:String):Number

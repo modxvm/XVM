@@ -48,7 +48,7 @@ class com.xvm.StatLoader
                     Stat.s_data[nm].stat = stat;
                     Stat.s_data[nm].loadstate = (Stat.s_data[nm].vehicleKey == "UNKNOWN")
                         ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
-                    Macros.RegisterStatMacros(nm, stat);
+                    Macros.RegisterStatisticsMacros(nm, stat);
                     //Logger.addObject(Stat.s_data[nm], 2, "s_data[" + nm + "]");
                 }
             }
