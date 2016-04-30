@@ -309,24 +309,9 @@ package xvm.tcarousel_ui
                 this.xfw_slotWidth = this.slotWidth / cfg.rows;
                 super.updateUIPosition();
                 this.xfw_slotWidth = slotWidth;
+                renderersMask.width = rightArrow.x - xfw_defContainerPos - rightArrow.width;
 
                 multiselectionBg.visible = false;
-                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.updateUIPosition()");
-                /*
-                bg1.visible = true;
-                bg1.mouseEnabled = bg1.mouseChildren = false;
-                bg1.x = -100;
-                bg1.y = 0;
-                bg1.scaleX = 1;
-                bg1.graphics.clear();
-                bg1.graphics.beginFill(0x000000, cfg.backgroundAlpha / 100.0);
-                bg1.graphics.drawRect(0, 0, width + 200, height);
-                if (_isMultiselectionModeEnabled)
-                {
-                    bg1.graphics.drawRect(0, -64, width + 200, 54);
-                }
-                bg1.graphics.endFill();
-                */
             }
             catch (ex:Error)
             {
