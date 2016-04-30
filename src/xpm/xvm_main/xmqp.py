@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2015 """
+""" XVM (c) www.modxvm.com 2013-2016 """
 
 __all__ = ['start', 'stop', 'call']
 

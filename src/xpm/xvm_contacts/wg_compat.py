@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2015 """
+""" XVM (c) www.modxvm.com 2013-2016 """
 
 from account_helpers.settings_core.SettingsCore import g_settingsCore
 from account_helpers.AccountSettings import AccountSettings, CONTACTS
