@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2015 """
+""" XVM (c) www.modxvm.com 2013-2016 """
 
 class XVM(object):
     XVM_VERSION    = '6.3.0-dev'

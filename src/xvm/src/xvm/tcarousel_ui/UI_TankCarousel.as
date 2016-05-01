@@ -1,4 +1,5 @@
 /**
+/**
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
@@ -36,9 +37,7 @@ package xvm.tcarousel_ui
 
         private var _vehiclesVOManager:VehicleCarouselVOManager = null;
 
-        private var _levelFilter:LevelMultiSelectionDropDown;
         private var _prefFilter:PrefMultiSelectionDropDown;
-        private var _lvlFilter:TileList;
 
         private var _isMultiselectionModeEnabled:Boolean = false;
         private var _carousel_height:int;
@@ -96,31 +95,26 @@ package xvm.tcarousel_ui
             {
                 super.configUI();
 
-                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.configUI()");
-                /*
-                //return; // temporary disabled
+                this.vehicleFiltersOld.visible = false; // TODO: delete when vehicleFiltersOld will be removed
 
                 createFilters();
                 var filter:Object = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
                 if (filter != null)
                 {
-                    _levelFilter.selectedItems = filter.levels;
                     _prefFilter.selectedItems = filter.prefs;
                 }
-                if (!cfg.filters.nation.enabled)
-                    vehicleFilters.nationFilter.selectedIndex = 0;
-                if (!cfg.filters.type.enabled)
-                    vehicleFilters.tankFilter.selectedIndex = 0;
+                //TODO:0.9.15
+                //if (!cfg.filters.params.enabled)
+                //    vehicleFilters.paramsFilter.selectedIndex = 0;
+                if (!cfg.filters.bonus.enabled)
+                    vehicleFilters.bonusFilter.selected = false;
                 if (!cfg.filters.favorite.enabled)
-                    vehicleFilters.checkBoxToMain.selected = false;
+                    vehicleFilters.favoriteFilter.selected = false;
                 if (!cfg.filters.gameMode.enabled)
-                    vehicleFilters.checkBoxToGameMode.selected = true;
-                if (!cfg.filters.level.enabled)
-                    _levelFilter.selectedItems = [];
+                    vehicleFilters.gameModeFilter.selected = true;
                 if (!cfg.filters.prefs.enabled)
                     _prefFilter.selectedItems = [];
-                onFilterChanged();
-                */
+                call_setVehiclesFilter();
             }
             catch (ex:Error)
             {
@@ -315,24 +309,9 @@ package xvm.tcarousel_ui
                 this.xfw_slotWidth = this.slotWidth / cfg.rows;
                 super.updateUIPosition();
                 this.xfw_slotWidth = slotWidth;
+                renderersMask.width = rightArrow.x - xfw_defContainerPos - rightArrow.width;
 
                 multiselectionBg.visible = false;
-                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.updateUIPosition()");
-                /*
-                bg1.visible = true;
-                bg1.mouseEnabled = bg1.mouseChildren = false;
-                bg1.x = -100;
-                bg1.y = 0;
-                bg1.scaleX = 1;
-                bg1.graphics.clear();
-                bg1.graphics.beginFill(0x000000, cfg.backgroundAlpha / 100.0);
-                bg1.graphics.drawRect(0, 0, width + 200, height);
-                if (_isMultiselectionModeEnabled)
-                {
-                    bg1.graphics.drawRect(0, -64, width + 200, 54);
-                }
-                bg1.graphics.endFill();
-                */
             }
             catch (ex:Error)
             {
@@ -650,10 +629,8 @@ package xvm.tcarousel_ui
 
             try
             {
-                _levelFilter = vehicleFilters.addChild(new LevelMultiSelectionDropDown()) as LevelMultiSelectionDropDown;
-                _levelFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
-
                 _prefFilter = vehicleFilters.addChild(new PrefMultiSelectionDropDown()) as PrefMultiSelectionDropDown;
+                _prefFilter.width = 58;
                 _prefFilter.menuWidth = 200;
                 _prefFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
             }
@@ -669,72 +646,44 @@ package xvm.tcarousel_ui
 
             try
             {
-                if (_levelFilter == null)
+                if (_prefFilter == null)
                     return;
 
-                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.rearrangeFilters()");
-                /*
-                var visibleFilters:Vector.<UIComponent> = new Vector.<UIComponent>();
-                vehicleFilters.nationFilter.visible = cfg.filters.nation.enabled;
-                vehicleFilters.tankFilter.visible = cfg.filters.type.enabled;
-                _levelFilter.visible = cfg.filters.level.enabled;
+                vehicleFilters.paramsFilter.visible = cfg.filters.params.enabled;
+                vehicleFilters.bonusFilter.visible = cfg.filters.bonus.enabled;
+                vehicleFilters.favoriteFilter.visible = cfg.filters.favorite.enabled;
+                vehicleFilters.gameModeFilter.visible = cfg.filters.gameMode.enabled && _isMultiselectionModeEnabled;
                 _prefFilter.visible = cfg.filters.prefs.enabled;
-                vehicleFilters.checkBoxToMain.visible = cfg.filters.favorite.enabled;
-                vehicleFilters.checkBoxToGameMode.visible = vehicleFilters.gameModeIcon.visible = cfg.filters.gameMode.enabled && _isMultiselectionModeEnabled;
 
-                if (cfg.filters.nation.enabled)
-                    visibleFilters.push(vehicleFilters.nationFilter);
-                if (cfg.filters.type.enabled)
-                    visibleFilters.push(vehicleFilters.tankFilter);
-                if (cfg.filters.level.enabled)
-                    visibleFilters.push(_levelFilter);
+                var visibleFilters:Vector.<UIComponent> = new Vector.<UIComponent>();
+                if (cfg.filters.params.enabled)
+                    visibleFilters.push(vehicleFilters.paramsFilter);
+                if (cfg.filters.bonus.enabled)
+                    visibleFilters.push(vehicleFilters.bonusFilter);
+                if (cfg.filters.favorite.enabled)
+                    visibleFilters.push(vehicleFilters.favoriteFilter);
+                if (cfg.filters.gameMode.enabled && _isMultiselectionModeEnabled)
+                    visibleFilters.push(vehicleFilters.gameModeFilter);
                 if (cfg.filters.prefs.enabled)
                     visibleFilters.push(_prefFilter);
-                if (cfg.filters.favorite.enabled)
-                    visibleFilters.push(vehicleFilters.checkBoxToMain);
-                if (cfg.filters.gameMode.enabled && _isMultiselectionModeEnabled)
-                    visibleFilters.push(vehicleFilters.checkBoxToGameMode);
-
-                var w:int = 0;
 
                 var rowWidth:int = cfg.filtersPadding.horizontal + 49;
-                var columnHeight:int = cfg.filtersPadding.vertical + 21;
+                var columnHeight:int = cfg.filtersPadding.vertical + 20;
 
                 var maxRows:int = Math.floor((height - 4) / columnHeight);
                 for (var i:int = 0; i < visibleFilters.length; ++i)
                 {
                     var offsetX:Number = 0;
                     var offsetY:Number = 0;
-                    if (visibleFilters[i] == vehicleFilters.checkBoxToMain)
-                    {
-                        offsetX += 3;
-                        offsetY += 3;
-                    }
-                    else if (visibleFilters[i] == vehicleFilters.checkBoxToGameMode)
-                    {
-                        offsetX += 2;
-                        offsetY += 3;
-                    }
 
                     var col:int = Math.floor(i / maxRows);
                     var row:int = i % maxRows;
 
                     visibleFilters[i].x = col * rowWidth + offsetX;
                     visibleFilters[i].y = row * columnHeight + 2 + offsetY;
-
-                    if (visibleFilters[i] == vehicleFilters.checkBoxToGameMode)
-                    {
-                        vehicleFilters.gameModeIcon.x = vehicleFilters.checkBoxToGameMode.x;
-                        vehicleFilters.gameModeIcon.y = vehicleFilters.checkBoxToGameMode.y;
-                        vehicleFilters.checkBoxToGameMode.x = vehicleFilters.gameModeIcon.x + vehicleFilters.gameModeIcon.width + 3;
-                        vehicleFilters.checkBoxToGameMode.y = vehicleFilters.gameModeIcon.y + 1;
-                    }
-
-                    w = (col + 1) * rowWidth - 4;
                 }
 
-                vehicleFilters.width = w;
-                */
+                vehicleFilters.width = (Math.floor((visibleFilters.length - 1) / maxRows) + 1) * rowWidth - 4;
             }
             catch (ex:Error)
             {
@@ -749,16 +698,18 @@ package xvm.tcarousel_ui
             try
             {
                 Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY,
-                    JSONx.stringify({ levels:_levelFilter.selectedItems, prefs:_prefFilter.selectedItems }, "", true));
-                Logger.add("TODO:0.9.15: xvm.tcarousel_ui.UI_TankCarousel.setFilters()");
-                /*
-                onFilterChanged();
-                */
+                    JSONx.stringify({ prefs:_prefFilter.selectedItems }, "", true));
+                call_setVehiclesFilter();
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
+        }
+
+        private function call_setVehiclesFilter():void
+        {
+            setVehiclesFilter(vehicleFilters.bonusFilter.selected, vehicleFilters.favoriteFilter.selected, vehicleFilters.gameModeFilter.selected);
         }
 
         private function applyXvmFilters(vehIds:Array):Array
@@ -767,7 +718,7 @@ package xvm.tcarousel_ui
 
             try
             {
-                if (_levelFilter == null)
+                if (_prefFilter == null)
                     return vehIds;
 
                 for (var i:int = vehIds.length - 1; i >= 0; --i)
@@ -802,10 +753,6 @@ package xvm.tcarousel_ui
                     //Logger.addObject(dataVO);
 
                     var remove:Boolean = false;
-                    if (cfg.filters.level.enabled)
-                        remove = _levelFilter.selectedItems.length > 0 && _levelFilter.selectedItems.indexOf(vdata.level) < 0;
-
-
                     if (cfg.filters.prefs.enabled)
                     {
                         remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_ELITE) >= 0 && dataVO.elite == true);
