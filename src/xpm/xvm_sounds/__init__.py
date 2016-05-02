@@ -46,39 +46,57 @@ class XVM_SOUND_EVENT(object):
 # handlers
 
 @overrideMethod(WWISE, 'WG_loadBanks')
-def WWISE_WG_loadBanks(base, *args, **kwargs):
+def _WWISE_WG_loadBanks(base, xmlPath, banks, isHangar, *args, **kwargs):
     if config.get('sounds/enabled'):
-        extraBanks = config.get('sounds/soundBanks/%s' % ('hangar' if args[1] else 'battle'))
+        extraBanks = config.get('sounds/soundBanks/%s' % ('hangar' if isHangar else 'battle'))
         if extraBanks:
-            lst = list(args)
-            banks = (lst[0] + ';' + extraBanks).split(';')
-            banks = set([x.strip() for x in banks if x and x.strip()])
-            lst[0] = '; '.join(banks)
-            args = tuple(lst)
-        log('WWISE.WG_loadBanks: %s' % args[0])
-    base(*args, **kwargs)
+            banks_list = (banks + ';' + extraBanks).split(';')
+            banks_list = set([x.strip() for x in banks_list if x and x.strip()])
+            banks = '; '.join(banks_list)
+        log('WWISE.WG_loadBanks: %s' % banks)
+    base(xmlPath, banks, isHangar, *args, **kwargs)
 
-# TODO:0.9.15
-#@overrideMethod(SoundGroups.g_instance, 'checkAndReplace')
-#def SoundGroups_g_instance_checkAndReplace(base, event):
-#    if not config.get('sounds/enabled'):
-#        return base(event)
-#
-#    event = base(event)
-#    if not event:
-#        return event
-#    mappedEvent = config.get('sounds/soundMapping/%s' % event)
-#    logSoundEvents = config.get('sounds/logSoundEvents')
-#    if mappedEvent is not None:
-#        if mappedEvent == '':
-#            mappedEvent = 'emptyEvent'
-#        if logSoundEvents:
-#            log('SOUND EVENT: %s => %s' % (event, mappedEvent))
-#        return mappedEvent
-#    else:
-#        if logSoundEvents:
-#            log('SOUND EVENT: %s' % event)
-#        return event
+@overrideMethod(WWISE, 'WW_eventGlobal')
+def _WWISE_WW_eventGlobal(base, event):
+    return base(_checkAndReplace(event))
+
+@overrideMethod(WWISE, 'WW_eventGlobalPos')
+def _WWISE_WW_eventGlobalPos(base, event, pos):
+    return base(_checkAndReplace(event), pos)
+
+@overrideMethod(WWISE, 'WW_getSoundObject')
+def _WWISE_WW_getSoundObject(base, event, matrix, local):
+    return base(_checkAndReplace(event), matrix, local)
+
+@overrideMethod(WWISE, 'WW_getSound')
+def _WWISE_WW_getSound(base, eventName, objectName, matrix, local):
+    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), matrix, local)
+
+@overrideMethod(WWISE, 'WW_getSoundCallback')
+def _WWISE_WW_getSoundCallback(base, eventName, objectName, matrix, callback):
+    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), matrix, callback)
+
+@overrideMethod(WWISE, 'WW_getSoundPos')
+def _WWISE_WW_getSoundPos(base, eventName, objectName, position):
+    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), position)
+
+def _checkAndReplace(event):
+    if not config.get('sounds/enabled'):
+        return event
+    if not event:
+        return event
+    mappedEvent = config.get('sounds/soundMapping/%s' % event)
+    logSoundEvents = config.get('sounds/logSoundEvents')
+    if mappedEvent is not None:
+        if mappedEvent == '':
+            mappedEvent = 'emptyEvent'
+        if logSoundEvents:
+            log('SOUND EVENT: %s => %s' % (event, mappedEvent))
+        return mappedEvent
+    else:
+        if logSoundEvents:
+            log('SOUND EVENT: %s' % event)
+        return event
 
 
 # new sound events dispatchers
