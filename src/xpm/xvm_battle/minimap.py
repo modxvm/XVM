@@ -33,7 +33,6 @@ def Minimap_start(self):
 def Minimap__callEntryFlash(base, self, id, methodName, args=None):
     #log('id={} method={} args={}'.format(id, methodName, args))
 
-    # TODO: FIXIT: stub to fix 0.9.12 bug
     if methodName == 'update' and not args:
         args = [0]
 

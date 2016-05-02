@@ -140,22 +140,6 @@ class Xvm(object):
             if lobby is not None:
                 lobby.loaderManager.onViewLoaded += self.onViewLoaded
 
-            # TODO
-            """
-                var message:String = Locale.get("XVM config loaded");
-                var type:String = "Information";
-                if (Config.__stateInfo.warning != null)
-                {
-                    message = Locale.get("Config file xvm.xc was not found, using the built-in config");
-                    type = "Warning";
-                }
-                else if (Config.__stateInfo.error != null)
-                {
-                    message = Locale.get("Error loading XVM config") + ":\n" + XfwUtils.encodeHtmlEntities(Config.__stateInfo.error);
-                    type = "Error";
-                }
-                Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
-            """
         except Exception, ex:
             err(traceback.format_exc())
 
@@ -274,7 +258,7 @@ class Xvm(object):
         if root.script is None:
             root.script = daapi.DAAPI(flashObject)
         else:
-            err("TODO: flashObject.getMember('_root').script != None. flashObject=" % str(flashObject))
+            err("WARNING: flashObject.getMember('_root').script != None. flashObject=" % str(flashObject))
 
     def sendConfig(self, flashObject):
         #trace('sendConfig')
