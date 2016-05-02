@@ -12,8 +12,12 @@
   * new xmqp feature for echanging data between players:
     new macros:
       {{x-enabled}} - player have xmqp service enabled
+      {{x-fire}} - fire in vehicle
+      {{x-overturn}} - vehicle is overturned
+      {{x-drown}} - vehicle is drowning
       {{x-spotted}} - "I'm spotted" feature
     accurate minimap cell clicks
+  * added option "battle"/"allowXqmpMacrosInPanels" - enable {{x-*}} macros ability in players panels
 
 XVM-6.2.1.2:
   * adaptation to WoT 0.9.14.1

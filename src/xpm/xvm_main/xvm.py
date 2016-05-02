@@ -111,10 +111,6 @@ class Xvm(object):
             self.onStateLobby()
         elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE_LOADING:
             self.onStateBattleLoading()
-        elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE_TUT_LOADING:
-            self.onStateBattleTutorialLoading()
-        elif spaceID == GUI_GLOBAL_SPACE_ID.FALLOUT_MULTI_TEAM_LOADING:
-            self.onStateFalloutMultiTeamLoading()
         elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
             self.onStateBattle()
 
@@ -204,18 +200,6 @@ class Xvm(object):
 
     def onStateBattleLoading(self):
         trace('onStateBattleLoading')
-        # initialize XVM services if game restarted after crash
-        self.initializeXvmServices()
-
-
-    def onStateBattleTutorialLoading(self):
-        trace('onStateBattleTutorialLoading')
-        # initialize XVM services if game restarted after crash
-        self.initializeXvmServices()
-
-
-    def onStateFalloutMultiTeamLoading(self):
-        trace('onStateFalloutMultiTeamLoading')
         # initialize XVM services if game restarted after crash
         self.initializeXvmServices()
 

@@ -51,8 +51,8 @@ class wot.battle.BattleMain
         _root.as_xvm_onPlayersHpChanged = this.as_xvm_onPlayersHpChanged;
         _root.as_xvm_onXmqpEvent = this.as_xvm_onXmqpEvent;
 
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, BattleMainConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
+        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, BattleMainConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, StatLoader.LoadData);
 
         _root.consumablesPanel.addOptionalDeviceSlot_xvm = _root.consumablesPanel.addOptionalDeviceSlot;
         _root.consumablesPanel.addOptionalDeviceSlot = this.addOptionalDeviceSlot;
@@ -95,7 +95,7 @@ class wot.battle.BattleMain
 
         ExpertPanel.modify();
 
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, battleLabelsInit);
+        GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, battleLabelsInit);
 
     }
 
@@ -112,13 +112,13 @@ class wot.battle.BattleMain
         //Logger.add("onKeyEvent: " + key + " " + isDown);
         var cfg = Config.config.hotkeys;
         if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ZOOM, isDown: isDown } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_MM_ZOOM, isDown: isDown } );
         if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ALT_MODE, isDown: isDown } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_MM_ALT_MODE, isDown: isDown } );
         if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_PP_ALT_MODE, isDown: isDown } );
         if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_LABEL_KEY_MODE, key: key, isDown: isDown } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_BATTLE_LABEL_KEY_MODE, key: key, isDown: isDown } );
     }
 
     public function as_xvm_onSniperCamera(enable:Boolean, zoom:Number):Void
@@ -172,7 +172,7 @@ class wot.battle.BattleMain
                 GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerId));
                 if (dead && !Utils.isArenaGuiTypeWithPlayerPanels())
                 {
-                    GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYER_DEAD, value: playerId } );
+                    GlobalEventDispatcher.dispatchEvent( { type: Events.E_PLAYER_DEAD, value: playerId } );
                 }
             }
         }
@@ -185,7 +185,7 @@ class wot.battle.BattleMain
     // ctx = _root
     public function as_xvm_onPlayersHpChanged()
     {
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYERS_HP_CHANGED } );
+        GlobalEventDispatcher.dispatchEvent( { type: Events.E_PLAYERS_HP_CHANGED } );
         //Logger.add("HP update event dispatched");
     }
 
@@ -203,12 +203,12 @@ class wot.battle.BattleMain
 
         BattleState.setScreenSize(width, height, scale);
         //Logger.add("update stage: " + width + "," + height + "," + scale);
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height, scale: scale });
+        GlobalEventDispatcher.dispatchEvent( { type: Events.E_UPDATE_STAGE, width: width, height: height, scale: scale });
     }
 
     private function showPostmortemTips(movingUpTime, showTime, movingDownTime)
     {
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_SELF_DEAD } );
+        GlobalEventDispatcher.dispatchEvent( { type: Events.E_SELF_DEAD } );
 
         //Logger.add("Battle::showPostmortemTips");
         if (Config.config.battle.showPostmortemTips)
@@ -222,7 +222,7 @@ class wot.battle.BattleMain
         //Logger.add("addOptionalDeviceSlot: " + deviceIconPath);
         _root.consumablesPanel.addOptionalDeviceSlot_xvm.apply(_root.consumablesPanel, arguments);
         if (deviceIconPath.indexOf("/stereoscope.") > 0)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
     }
 
     private function setCoolDownTime(idx, timeRemaining)
@@ -231,7 +231,7 @@ class wot.battle.BattleMain
         _root.consumablesPanel.setCoolDownTime_xvm.apply(_root.consumablesPanel, arguments);
         var renderer = _root.consumablesPanel.getRendererBySlotIdx(idx);
         if (renderer.iconPath.indexOf("/stereoscope.") > 0)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
     }
 
     private var isMoving:Boolean = true;
@@ -244,7 +244,7 @@ class wot.battle.BattleMain
         if ((speed == 0 && !isMoving) || (speed != 0 && isMoving))
             return;
         isMoving = speed != 0;
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MOVING_STATE_CHANGED, value: isMoving } );
+        GlobalEventDispatcher.dispatchEvent( { type: Events.E_MOVING_STATE_CHANGED, value: isMoving } );
     }
 
     private function damagePanel_updateDeviceState(moduleName:String, state:String)
@@ -253,9 +253,9 @@ class wot.battle.BattleMain
     	_root.damagePanel.as_updateDeviceState_xvm.apply(_root.damagePanel, arguments);
 
         if (state == "destroyed")
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MODULE_DESTROYED, value: moduleName } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_MODULE_DESTROYED, value: moduleName } );
         else if (state == "repaired" || state == "normal")
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MODULE_REPAIRED, value: moduleName } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_MODULE_REPAIRED, value: moduleName } );
     }
 
     private function fixMinimapSize():Void
@@ -276,18 +276,24 @@ class wot.battle.BattleMain
     // xmqp events
 
     // ctx = _root
-    public function as_xvm_onXmqpEvent(playerId:Number, event:String, data:String)
+    public function as_xvm_onXmqpEvent(playerId:Number, event:String, data:Object)
     {
         switch (event)
         {
-            case Defines.XMQP_HOLA:
+            case Events.XMQP_HOLA:
                 _instance.onHolaEvent(playerId);
                 break;
-            case Defines.XMQP_SPOTTED:
+            case Events.XMQP_FIRE:
+                _instance.onFireEvent(playerId, data);
+                break;
+            case Events.XMQP_VEHICLE_TIMER:
+                _instance.onVehicleTimerEvent(playerId, data);
+                break;
+            case Events.XMQP_SPOTTED:
                 _instance.onSpottedEvent(playerId);
                 break;
-            case Defines.XMQP_MINIMAP_CLICK:
-                GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_MINIMAP_CLICK, value: playerId, data: data } );
+            case Events.XMQP_MINIMAP_CLICK:
+                GlobalEventDispatcher.dispatchEvent( { type: Events.XMQP_MINIMAP_CLICK, value: playerId, data: data } );
                 break;
             default:
                 Logger.add("WARNING: unknown xmqp event: " + event);
@@ -302,7 +308,44 @@ class wot.battle.BattleMain
         var updated:Boolean = BattleState.update(playerId, { x_enabled: true } );
         if (updated)
         {
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_HOLA, value: playerId } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.XMQP_HOLA, value: playerId } );
+        }
+    }
+
+    // {{x-fire}}
+
+    private function onFireEvent(playerId:Number, data:Object)
+    {
+        var updated:Boolean = BattleState.update(playerId, { x_fire: data.enable } );
+        if (updated)
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: Events.XMQP_FIRE, value: playerId } );
+        }
+    }
+
+    // {{x-drown}}
+    // {{x-overturn}}
+
+    private function onVehicleTimerEvent(playerId:Number, data:Object)
+    {
+        var updated:Boolean = false;
+        switch (data.code)
+        {
+            case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
+                updated = BattleState.update(playerId, { x_overturn: data.enable } );
+                break;
+
+            case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
+                updated = BattleState.update(playerId, { x_drown: data.enable } );
+                break;
+
+            default:
+                Logger.add("WARNING: unknown vehicle timer code: " + data.code);
+        }
+
+        if (updated)
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: Events.XMQP_VEHICLE_TIMER, value: playerId } );
         }
     }
 
@@ -315,7 +358,7 @@ class wot.battle.BattleMain
         var updated:Boolean = BattleState.update(playerId, { x_spotted: true } );
         if (updated)
         {
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_SPOTTED, value: playerId } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.XMQP_SPOTTED, value: playerId } );
         }
         if (_sixSenseIndicatorTimeoutIds[playerId])
         {
@@ -332,7 +375,7 @@ class wot.battle.BattleMain
         var updated:Boolean = BattleState.update(playerId, { x_spotted: false } );
         if (updated)
         {
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_SPOTTED, value: playerId } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.XMQP_SPOTTED, value: playerId } );
         }
     }
 }
