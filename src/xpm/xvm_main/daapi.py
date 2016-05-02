@@ -30,4 +30,4 @@ class DAAPI(object):
 
     def py_xvm_pythonMacro(self, arg):
         #log('py_xvm_pythonMacro: {}'.format(arg))
-        return python_macro.processPythonMacro(arg)
+        return python_macro.process_python_macro(arg)

@@ -3,8 +3,11 @@
 import traceback
 import ast
 import sys
+import os
+import glob
 
 from xfw import *
+from constants import *
 from logger import *
 
 
@@ -102,9 +105,22 @@ def execute(code, context):
         raise ExecutionException("{} at line {}: {}".format(error_name, line_number, message))
 
 
+def initialize():
+    global _container
+    _container = {}
+    files = glob.iglob(os.path.join(XVM.PY_MACRO_DIR, "*.py"))
+    if files:
+        for file_name in files:
+            load_macros_lib(file_name)
+
+
 def load_macros_lib(file_name):
-    code = load(file_name)
-    execute(code, {'xvm': XvmNamespace})
+    try:
+        code = load(file_name)
+        execute(code, {'xvm': XvmNamespace})
+    except Exception as ex:
+        err(traceback.format_exc())
+        return None
 
 
 def get_function(function):
@@ -116,15 +132,16 @@ def get_function(function):
     except ValueError:
         raise ValueError('Function syntax error')
     args = ast.literal_eval(args_string)
+    if not isinstance(args, tuple):
+        args = (args,)
     result = _container.get(namespace, {}).get(func_name)
     if not result:
         raise NotImplementedError('Function {}.{} not implemented'.format(namespace, func_name))
     return lambda: result(*args)
 
 
-
-def processPythonMacro(arg):
-    #log('processPythonMacro: {}'.format(arg))
+def process_python_macro(arg):
+    #log('process_python_macro: {}'.format(arg))
     try:
         func = get_function(arg)
         return func()

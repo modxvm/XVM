@@ -73,6 +73,8 @@ class Xvm(object):
     def onConfigLoaded(self, e=None):
         trace('onConfigLoaded')
 
+        python_macro.initialize()
+
         # initialize XVM services in replay
         if isReplay():
             self.initializeXvmServices()
@@ -515,7 +517,7 @@ class Xvm(object):
                 return (None, True)
 
             if cmd == XVM_COMMAND.PYTHON_MACRO:
-                return (python_macro.processPythonMacro(args[0]), True)
+                return (python_macro.process_python_macro(args[0]), True)
 
             if cmd == XVM_COMMAND.OPEN_URL:
                 if len(args[0]):

@@ -6,9 +6,17 @@
   * added macros {{chancesStatic}} - win chances at battle (static)
   * added macros {{chancesLive}} - win chances at battle (live)
   * added new type of macro - dynamic macros calculated in the python:
-      {{py:full.path.to.static.func(arg,arg,...)}}
+    python functions are loaded from res_mods/configs/py_macro/*.py with decorator @xvm.export(a, b)
     E. g. get %SUP for xTE:
-      {{py:xvm_main.python.xvm_scale.XvmScaleToSup({{xte}})|==}}
+      {{py:xvm.xvm2sup('{{xte}}')|==}}
+    res_mods/configs/py_macro/xvm.py:
+        xvm2sup = [...]
+        @xvm.export('xvm', 'xvm2sup')
+        def XvmScaleToSup(x=None):
+            if x is None or x == '':
+                return None
+            x = 100 if x == 'XX' else int(x)
+            return xvm2sup[max(0, min(100, x-1))]
   * new xmqp feature for echanging data between players:
     new macros:
       {{x-enabled}} - player have xmqp service enabled
