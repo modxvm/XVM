@@ -172,6 +172,8 @@ def _disableDynamicCamera(dcfg):
     for name, value in dcfg.iteritems():
         if name in ['impulseSensitivities', 'noiseSensitivities', 'impulseLimits', 'noiseLimits']:
             value = {}
+        elif name in ['zoomExposure']:
+            pass
         elif isinstance(value, float):
             value = 0.0
         elif isinstance(value, Math.Vector3):

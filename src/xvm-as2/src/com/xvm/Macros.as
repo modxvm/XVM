@@ -825,6 +825,12 @@ class com.xvm.Macros
 
             // {{x-enabled}}
             pdata["x-enabled"] = function(o) { return o.x_enabled == true ? 'true' : null; }
+            // {{x-fire}}
+            pdata["x-fire"] = function(o) { return o.x_fire == true ? 'true' : null; }
+            // {{x-overturned}}
+            pdata["x-overturned"] = function(o) { return o.x_overturned == true ? 'true' : null; }
+            // {{x-drowning}}
+            pdata["x-drowning"] = function(o) { return o.x_drowning == true ? 'true' : null; }
             // {{x-spotted}}
             pdata["x-spotted"] = function(o) { return o.x_spotted == true ? 'true' : null; }
         }

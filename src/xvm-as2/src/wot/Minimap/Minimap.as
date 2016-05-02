@@ -4,6 +4,7 @@
  */
 
 import com.xvm.*;
+import com.xvm.events.*;
 import wot.Minimap.*;
 
 class wot.Minimap.Minimap
@@ -51,10 +52,10 @@ class wot.Minimap.Minimap
     {
         Utils.TraceXvmModule("Minimap");
 
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
-        GlobalEventDispatcher.addEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
-        GlobalEventDispatcher.addEventListener(Defines.XMQP_MINIMAP_CLICK, this, onXmqpMinimapClickEvent);
+        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Events.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
+        GlobalEventDispatcher.addEventListener(Events.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_MINIMAP_CLICK, this, onXmqpMinimapClickEvent);
     }
 
     function scaleMarkersImpl(factor:Number)
@@ -87,7 +88,7 @@ class wot.Minimap.Minimap
         var sizeIsInvalid:Boolean = wrapper.sizeIsInvalid;
         base.draw();
         if (sizeIsInvalid)
-            GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.MM_REFRESH } );
 
         //Cmd.profMethodEnd("Minimap.draw()");
     }
@@ -99,7 +100,7 @@ class wot.Minimap.Minimap
         if (Config.config.minimap.enabled)
         {
             if (Config.config.minimapAlt.enabled)
-                GlobalEventDispatcher.addEventListener(Defines.E_MM_ALT_MODE, this, setAltMode);
+                GlobalEventDispatcher.addEventListener(Events.E_MM_ALT_MODE, this, setAltMode);
             Features.init();
         }
     }
@@ -132,16 +133,16 @@ class wot.Minimap.Minimap
         else
             return;
 
-        GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
+        GlobalEventDispatcher.dispatchEvent( { type: Events.MM_REFRESH } );
 
         if (stereoscope_exists)
         {
             var en:Boolean = stereoscope_enabled;
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: true } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_STEREOSCOPE_TOGGLED, value: true } );
             if (en == false)
-                GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: false } );
+                GlobalEventDispatcher.dispatchEvent( { type: Events.E_STEREOSCOPE_TOGGLED, value: false } );
         }
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MOVING_STATE_CHANGED, value: is_moving } );
+        GlobalEventDispatcher.dispatchEvent( { type: Events.E_MOVING_STATE_CHANGED, value: is_moving } );
     }
 
     private function onXmqpMinimapClickEvent(e:Object)

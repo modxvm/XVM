@@ -1,5 +1,6 @@
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import com.xvm.events.*;
 import wot.Minimap.Minimap;
 import wot.Minimap.dataTypes.cfg.*;
 import wot.Minimap.shapes.*;
@@ -60,16 +61,16 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         //Logger.addObject(cfg, 2);
         //Logger.addObject(ci);
 
-        GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
+        GlobalEventDispatcher.addEventListener(Events.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
 
         stereoscope_exists = stereoscope_enabled = ci.view_stereoscope == true;
 
         if (dynamicCircles.length > 0)
         {
             onViewRangeChanged();
-            GlobalEventDispatcher.addEventListener(Defines.E_MODULE_DESTROYED, this, onModuleDestroyed);
-            GlobalEventDispatcher.addEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
-            GlobalEventDispatcher.addEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
+            GlobalEventDispatcher.addEventListener(Events.E_MODULE_DESTROYED, this, onModuleDestroyed);
+            GlobalEventDispatcher.addEventListener(Events.E_MODULE_REPAIRED, this, onModuleRepaired);
+            GlobalEventDispatcher.addEventListener(Events.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
         }
 
         if (cfg.artillery.enabled)
@@ -90,10 +91,10 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     public function Dispose():Void
     {
-        GlobalEventDispatcher.removeEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
-        GlobalEventDispatcher.removeEventListener(Defines.E_MODULE_DESTROYED, this, onModuleDestroyed);
-        GlobalEventDispatcher.removeEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
-        GlobalEventDispatcher.removeEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
+        GlobalEventDispatcher.removeEventListener(Events.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
+        GlobalEventDispatcher.removeEventListener(Events.E_MODULE_DESTROYED, this, onModuleDestroyed);
+        GlobalEventDispatcher.removeEventListener(Events.E_MODULE_REPAIRED, this, onModuleRepaired);
+        GlobalEventDispatcher.removeEventListener(Events.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
 
         var len:Number = staticCircles.length;
         for (var i:Number = 0; i < len; ++i)

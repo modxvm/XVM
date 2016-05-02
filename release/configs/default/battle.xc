@@ -25,6 +25,9 @@
     // true - enable custom labels on battle interface window
     // true - показывать пользовательские текстовые поля в окне боевого интерфейса
     "allowLabelsOnBattleInterface": true,
+    // true - enable {{x-*}} macros ability in players panels. WARNING: performance expensive
+    // true - включить возможность {{x-*}} макросов в ушах. ВНИМАНИЕ: может понизить производительность
+    "allowXqmpMacrosInPanels": true,
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
     "clockFormat": "H:N", // TODO: "H:i"

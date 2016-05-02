@@ -1,6 +1,7 @@
 import flash.external.*;
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import com.xvm.events.*;
 
 class com.xvm.StatLoader
 {
@@ -66,7 +67,7 @@ class com.xvm.StatLoader
             Stat.s_loaded = true;
             _loading = false;
             //Logger.add("Stat Loaded");
-            GlobalEventDispatcher.dispatchEvent({type: Defines.E_STAT_LOADED});
+            GlobalEventDispatcher.dispatchEvent({type: Events.E_STAT_LOADED});
         }
     }
 

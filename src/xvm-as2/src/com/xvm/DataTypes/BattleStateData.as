@@ -28,5 +28,8 @@ class com.xvm.DataTypes.BattleStateData
     public var team:Number = -1;
 
     public var x_enabled:Boolean = false;
+    public var x_fire:Boolean = false;
+    public var x_overturned:Boolean = false;
+    public var x_drowning:Boolean = false;
     public var x_spotted:Boolean = false;
 }

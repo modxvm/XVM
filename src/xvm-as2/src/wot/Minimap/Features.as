@@ -55,16 +55,16 @@ class wot.Minimap.Features
 
         markerScaling = new MarkerScaling();
 
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onEntryUpdated);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onEntryUpdated);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.CAMERA_UPDATED, this, onCameraUpdated);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.RESPAWNED, this, onRespawn);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_INITED, this, onEntryUpdated);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_UPDATED, this, onEntryUpdated);
+        GlobalEventDispatcher.addEventListener(Events.MM_CAMERA_UPDATED, this, onCameraUpdated);
+        GlobalEventDispatcher.addEventListener(Events.MM_RESPAWNED, this, onRespawn);
+        GlobalEventDispatcher.addEventListener(Events.MM_REFRESH, this, onRefreshEvent);
 
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onRefreshEvent);
+        GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, onRefreshEvent);
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
 
-        GlobalEventDispatcher.addEventListener(MinimapEvent.SET_STRATEGIC_POS, this, onSetStrategicPos);
+        GlobalEventDispatcher.addEventListener(Events.MM_SET_STRATEGIC_POS, this, onSetStrategicPos);
 
         LabelsContainer.init();
     }
@@ -74,7 +74,7 @@ class wot.Minimap.Features
         // empty function required for instance creation
     }
 
-    private function onRefreshEvent(e:MinimapEvent)
+    private function onRefreshEvent(e:EMinimapEvent)
     {
         applyFeatures();
         _scaleMarkers();
@@ -92,7 +92,7 @@ class wot.Minimap.Features
         entry.invalidate();
     }
 
-    private function onSetStrategicPos(e:MinimapEvent)
+    private function onSetStrategicPos(e:EMinimapEvent)
     {
         if (strategicAimMarker == null)
         {
@@ -166,13 +166,13 @@ class wot.Minimap.Features
 
     // ENTRY
 
-    private function onRespawn(e:MinimapEvent):Void
+    private function onRespawn(e:EMinimapEvent):Void
     {
         //Logger.add("onRespawn");
         applyFeatures();
     }
 
-    private function onEntryUpdated(e:MinimapEvent):Void
+    private function onEntryUpdated(e:EMinimapEvent):Void
     {
         markerScaling.scaleEntry(e.entry);
     }
@@ -181,7 +181,7 @@ class wot.Minimap.Features
      * Setup alpha for camera of player himself.
      * Looks like green highlighted corner.
      */
-    private function onCameraUpdated(e:MinimapEvent):Void
+    private function onCameraUpdated(e:EMinimapEvent):Void
     {
         var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
         if (Minimap.config.hideCameraTriangle && !Config.config.minimap.useStandardLines)

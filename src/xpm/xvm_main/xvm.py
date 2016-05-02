@@ -73,6 +73,8 @@ class Xvm(object):
     def onConfigLoaded(self, e=None):
         trace('onConfigLoaded')
 
+        python_macro.initialize()
+
         # initialize XVM services in replay
         if isReplay():
             self.initializeXvmServices()
@@ -111,10 +113,6 @@ class Xvm(object):
             self.onStateLobby()
         elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE_LOADING:
             self.onStateBattleLoading()
-        elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE_TUT_LOADING:
-            self.onStateBattleTutorialLoading()
-        elif spaceID == GUI_GLOBAL_SPACE_ID.FALLOUT_MULTI_TEAM_LOADING:
-            self.onStateFalloutMultiTeamLoading()
         elif spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
             self.onStateBattle()
 
@@ -144,22 +142,6 @@ class Xvm(object):
             if lobby is not None:
                 lobby.loaderManager.onViewLoaded += self.onViewLoaded
 
-            # TODO
-            """
-                var message:String = Locale.get("XVM config loaded");
-                var type:String = "Information";
-                if (Config.__stateInfo.warning != null)
-                {
-                    message = Locale.get("Config file xvm.xc was not found, using the built-in config");
-                    type = "Warning";
-                }
-                else if (Config.__stateInfo.error != null)
-                {
-                    message = Locale.get("Error loading XVM config") + ":\n" + XfwUtils.encodeHtmlEntities(Config.__stateInfo.error);
-                    type = "Error";
-                }
-                Xfw.cmd(XfwConst.XFW_COMMAND_SYSMESSAGE, message, type);
-            """
         except Exception, ex:
             err(traceback.format_exc())
 
@@ -204,18 +186,6 @@ class Xvm(object):
 
     def onStateBattleLoading(self):
         trace('onStateBattleLoading')
-        # initialize XVM services if game restarted after crash
-        self.initializeXvmServices()
-
-
-    def onStateBattleTutorialLoading(self):
-        trace('onStateBattleTutorialLoading')
-        # initialize XVM services if game restarted after crash
-        self.initializeXvmServices()
-
-
-    def onStateFalloutMultiTeamLoading(self):
-        trace('onStateFalloutMultiTeamLoading')
         # initialize XVM services if game restarted after crash
         self.initializeXvmServices()
 
@@ -290,7 +260,7 @@ class Xvm(object):
         if root.script is None:
             root.script = daapi.DAAPI(flashObject)
         else:
-            err("TODO: flashObject.getMember('_root').script != None. flashObject=" % str(flashObject))
+            err("WARNING: flashObject.getMember('_root').script != None. flashObject=" % str(flashObject))
 
     def sendConfig(self, flashObject):
         #trace('sendConfig')
@@ -547,7 +517,7 @@ class Xvm(object):
                 return (None, True)
 
             if cmd == XVM_COMMAND.PYTHON_MACRO:
-                return (python_macro.processPythonMacro(args[0]), True)
+                return (python_macro.process_python_macro(args[0]), True)
 
             if cmd == XVM_COMMAND.OPEN_URL:
                 if len(args[0]):

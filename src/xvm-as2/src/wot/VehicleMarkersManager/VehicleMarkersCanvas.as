@@ -5,6 +5,7 @@
 import com.greensock.OverwriteManager;
 import com.greensock.plugins.*;
 import com.xvm.*;
+import com.xvm.events.*;
 import flash.external.*;
 import wot.VehicleMarkersManager.*;
 
@@ -51,8 +52,8 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
 
         DAAPI.initialize();
 
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, StatLoader.LoadData);
+        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, onConfigLoaded);
     }
 
     private function setShowExInfoFlagImpl(flag)

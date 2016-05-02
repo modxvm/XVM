@@ -3,6 +3,7 @@
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.xvm.*;
+import com.xvm.events.*;
 
 class com.xvm.Config
 {
@@ -57,7 +58,7 @@ class com.xvm.Config
             ApplyGlobalMacros();
 
             Logger.add("Config: Loaded");
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );
+            GlobalEventDispatcher.dispatchEvent( { type: Events.E_CONFIG_LOADED } );
         }
         catch (ex)
         {

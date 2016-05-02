@@ -4,6 +4,7 @@
  */
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import com.xvm.events.*;
 import flash.filters.*;
 import wot.Minimap.*;
 import wot.Minimap.dataTypes.cfg.*;
@@ -59,14 +60,16 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         holderMc = IconsProxy.createEmptyMovieClip(CONTAINER_NAME, MinimapConstants.LABELS_ZINDEX);
 
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_INITED, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Defines.XMQP_HOLA, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Defines.XMQP_SPOTTED, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefresh);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_INITED, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_UPDATED, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_LOST, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.E_PLAYER_DEAD, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_HOLA, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_FIRE, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
+        GlobalEventDispatcher.addEventListener(Events.MM_REFRESH, this, onRefresh);
     }
 
     private function _init()
@@ -83,7 +86,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         {
             switch (e.type)
             {
-                case Defines.E_PLAYER_DEAD:
+                case Events.E_PLAYER_DEAD:
                     invalidateList[e.value] = INVALIDATE_TYPE_RECREATE;
                     break;
                 default:
@@ -94,7 +97,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         invalidate();
     }
 
-    private function onEntryNameUpdated(e:MinimapEvent)
+    private function onEntryNameUpdated(e:EMinimapEvent)
     {
         //Logger.addObject(e);
         var labelMc:MovieClip = _getLabel(Number(e.value));
@@ -110,7 +113,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         }
     }
 
-    private function onRefresh(e:MinimapEvent)
+    private function onRefresh(e:EMinimapEvent)
     {
         //Logger.addObject(e);
         for (var i:String in holderMc)
