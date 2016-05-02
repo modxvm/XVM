@@ -21,8 +21,8 @@
     new macros:
       {{x-enabled}} - player have xmqp service enabled
       {{x-fire}} - fire in vehicle
-      {{x-overturn}} - vehicle is overturned
-      {{x-drown}} - vehicle is drowning
+      {{x-overturned}} - vehicle is overturned
+      {{x-drowning}} - vehicle is drowning
       {{x-spotted}} - "I'm spotted" feature
     accurate minimap cell clicks
   * added option "battle"/"allowXqmpMacrosInPanels" - enable {{x-*}} macros ability in players panels

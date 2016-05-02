@@ -323,8 +323,8 @@ class wot.battle.BattleMain
         }
     }
 
-    // {{x-drown}}
-    // {{x-overturn}}
+    // {{x-overturned}}
+    // {{x-drowning}}
 
     private function onVehicleTimerEvent(playerId:Number, data:Object)
     {
@@ -332,11 +332,11 @@ class wot.battle.BattleMain
         switch (data.code)
         {
             case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
-                updated = BattleState.update(playerId, { x_overturn: data.enable } );
+                updated = BattleState.update(playerId, { x_overturned: data.enable } );
                 break;
 
             case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
-                updated = BattleState.update(playerId, { x_drown: data.enable } );
+                updated = BattleState.update(playerId, { x_drowning: data.enable } );
                 break;
 
             default:

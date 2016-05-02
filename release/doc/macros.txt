@@ -169,8 +169,8 @@ Legend:
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────
 │ D │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ xmqp services enabled
 │ D │ {{x-fire}}         │   │   │   │ X │ X │   │ fire in vehicle
-│ D │ {{x-overturn}}     │   │   │   │ X │ X │   │ vehicle is overturned
-│ D │ {{x-drown}}        │   │   │   │ X │ X │   │ vehicle is drowning
+│ D │ {{x-overturned}}   │   │   │   │ X │ X │   │ vehicle is overturned
+│ D │ {{x-drowning}}     │   │   │   │ X │ X │   │ vehicle is drowning
 │ D │ {{x-spotted}}      │   │   │   │ X │ X │   │ "I'm spotted"
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴────────────────────────────────────────────────────
 

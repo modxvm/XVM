@@ -48,8 +48,8 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     public var m_vid:Number;
     public var m_x_enabled:Boolean;
     public var m_x_fire:Boolean;
-    public var m_x_overturn:Boolean;
-    public var m_x_drown:Boolean;
+    public var m_x_overturned:Boolean;
+    public var m_x_drowning:Boolean;
     public var m_x_spotted:Boolean;
 
     // Vehicle State
@@ -220,8 +220,8 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
 
         m_x_enabled = false;
         m_x_fire = false;
-        m_x_overturn = false;
-        m_x_drown = false;
+        m_x_overturned = false;
+        m_x_drowning = false;
         m_x_spotted = false;
 
         healthBarComponent.init();
@@ -721,8 +721,8 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             squad:m_squad,
             x_enabled:m_x_enabled,
             x_fire:m_x_fire,
-            x_overturn:m_x_overturn,
-            x_drown:m_x_drown,
+            x_overturned:m_x_overturned,
+            x_drowning:m_x_drowning,
             x_spotted:m_x_spotted
         };
         return Strings.trim(Macros.Format(m_playerName, format, obj));
@@ -807,25 +807,25 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         }
     }
 
-    // {{x-drown}}
-    // {{x-overturn}}
+    // {{x-overturned}}
+    // {{x-drowning}}
 
     private function onVehicleTimerEvent(data:Object)
     {
         switch (data.code)
         {
             case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
-                if (m_x_overturn != data.enable)
+                if (m_x_overturned != data.enable)
                 {
-                    m_x_overturn = data.enable;
+                    m_x_overturned = data.enable;
                     XVMUpdateStyle();
                 }
                 break;
 
             case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
-                if (m_x_drown != data.enable)
+                if (m_x_drowning != data.enable)
                 {
-                    m_x_drown = data.enable;
+                    m_x_drowning = data.enable;
                     XVMUpdateStyle();
                 }
                 break;

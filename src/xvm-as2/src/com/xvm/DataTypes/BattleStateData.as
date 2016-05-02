@@ -29,7 +29,7 @@ class com.xvm.DataTypes.BattleStateData
 
     public var x_enabled:Boolean = false;
     public var x_fire:Boolean = false;
-    public var x_overturn:Boolean = false;
-    public var x_drown:Boolean = false;
+    public var x_overturned:Boolean = false;
+    public var x_drowning:Boolean = false;
     public var x_spotted:Boolean = false;
 }

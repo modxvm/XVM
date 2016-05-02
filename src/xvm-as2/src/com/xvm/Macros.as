@@ -827,10 +827,10 @@ class com.xvm.Macros
             pdata["x-enabled"] = function(o) { return o.x_enabled == true ? 'true' : null; }
             // {{x-fire}}
             pdata["x-fire"] = function(o) { return o.x_fire == true ? 'true' : null; }
-            // {{x-overturn}}
-            pdata["x-overturn"] = function(o) { return o.x_overturn == true ? 'true' : null; }
-            // {{x-drown}}
-            pdata["x-drown"] = function(o) { return o.x_drown == true ? 'true' : null; }
+            // {{x-overturned}}
+            pdata["x-overturned"] = function(o) { return o.x_overturned == true ? 'true' : null; }
+            // {{x-drowning}}
+            pdata["x-drowning"] = function(o) { return o.x_drowning == true ? 'true' : null; }
             // {{x-spotted}}
             pdata["x-spotted"] = function(o) { return o.x_spotted == true ? 'true' : null; }
         }
