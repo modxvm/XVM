@@ -15,7 +15,7 @@
   [NEW FUNCTIONS]    
   * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
   * added option "hotkeys"/"battleLabelsHotKeys" - use hotkeys in custom labels on battle interface window
-  * added option "battle"/"allowXqmpMacrosInPanels" - enable {{x-*}} macros ability in players panels
+  * added option "battle"/"allowXmqpMacrosInPanels" - enable {{x-*}} macros ability in players panels
 
   [MACROS]  
   * added macros {{chancesStatic}} - win chances at battle (static)

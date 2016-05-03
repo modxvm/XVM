@@ -27,7 +27,7 @@
     "allowLabelsOnBattleInterface": true,
     // true - enable {{x-*}} macros ability in players panels. WARNING: performance expensive
     // true - включить возможность {{x-*}} макросов в ушах. ВНИМАНИЕ: может понизить производительность
-    "allowXqmpMacrosInPanels": true,
+    "allowXmqpMacrosInPanels": true,
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
     "clockFormat": "H:N", // TODO: "H:i"
