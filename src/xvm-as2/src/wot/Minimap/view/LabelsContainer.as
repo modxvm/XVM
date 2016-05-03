@@ -60,14 +60,14 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         holderMc = IconsProxy.createEmptyMovieClip(CONTAINER_NAME, MinimapConstants.LABELS_ZINDEX);
 
-        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_INITED, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_UPDATED, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_LOST, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Events.E_PLAYER_DEAD, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Events.XMQP_HOLA, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Events.XMQP_FIRE, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, onMinimapEvent);
-        GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_INITED, this, onRecreateMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.E_PLAYER_DEAD, this, onRecreateMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_UPDATED, this, onDefaultMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_LOST, this, onDefaultMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_HOLA, this, onDefaultMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_FIRE, this, onDefaultMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, onDefaultMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, onDefaultMinimapEvent);
         GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
         GlobalEventDispatcher.addEventListener(Events.MM_REFRESH, this, onRefresh);
     }
@@ -79,21 +79,20 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     // EVENT HANDLERS
 
-    private function onMinimapEvent(e:Object)
+    private function onDefaultMinimapEvent(e:Object)
     {
         //Logger.addObject(e);
         if (!invalidateList[e.value])
         {
-            switch (e.type)
-            {
-                case Events.E_PLAYER_DEAD:
-                    invalidateList[e.value] = INVALIDATE_TYPE_RECREATE;
-                    break;
-                default:
-                    invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
-                    break;
-            }
+            invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
         }
+        invalidate();
+    }
+
+    private function onRecreateMinimapEvent(e:Object)
+    {
+        //Logger.addObject(e);
+        invalidateList[e.value] = INVALIDATE_TYPE_RECREATE;
         invalidate();
     }
 
@@ -135,6 +134,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         for (var playerIdStr:String in invalidateList)
         {
             var playerId:Number = Number(playerIdStr);
+
+            //Logger.add("draw: " + invalidateList[playerIdStr] + " " + playerId);
 
             var labelMc:MovieClip = _getLabel(playerId);
             if (!labelMc[INITIALIZED_FIELD_NAME])
@@ -181,6 +182,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function _getLabel(playerId:Number):MovieClip
     {
+        //Logger.add('_getLabel: ' + playerId);
         if (!holderMc[playerId])
             createLabel(playerId);
         return holderMc[playerId];
@@ -188,6 +190,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private function createLabel(playerId:Number):Void
     {
+        //Logger.add('createLabel: ' + playerId);
         var depth:Number = getFreeDepth(ALIVE_DEPTH_START);
         var labelMc:MovieClip = holderMc.createEmptyMovieClip(playerId.toString(), depth);
         labelMc[PLAYER_ID_FIELD_NAME] = playerId;
@@ -200,7 +203,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         if (!bs || !bs.playerId)
             return false;
 
-        //Logger.add("LabelsContainer.createLabel()");
+        //Logger.add("LabelsContainer.initLabel()");
 
         labelMc[BATTLE_STATE_FIELD_NAME] = bs;
         bs.entryName = IconsProxy.entry(playerId).entryName;
