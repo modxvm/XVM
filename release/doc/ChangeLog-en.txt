@@ -1,8 +1,23 @@
 ﻿XVM-6.3.0-dev:
   * adaptation to WoT 0.9.15
+  
+  [MAJOR UPDATES]
+  * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
+  * new xmqp feature for echanging data between players:
+    new macros:
+      {{x-enabled}} - player have xmqp service enabled
+      {{x-fire}} - fire in vehicle
+      {{x-overturned}} - vehicle is overturned
+      {{x-drowning}} - vehicle is drowning
+      {{x-spotted}} - "I'm spotted" feature
+    accurate minimap cell clicks  
+
+  [NEW FUNCTIONS]    
   * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
   * added option "hotkeys"/"battleLabelsHotKeys" - use hotkeys in custom labels on battle interface window
-  * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
+  * added option "battle"/"allowXqmpMacrosInPanels" - enable {{x-*}} macros ability in players panels
+
+  [MACROS]  
   * added macros {{chancesStatic}} - win chances at battle (static)
   * added macros {{chancesLive}} - win chances at battle (live)
   * added new type of macro - dynamic macros calculated in the python:
@@ -17,15 +32,6 @@
                 return None
             x = 100 if x == 'XX' else int(x)
             return xvm2sup[max(0, min(100, x-1))]
-  * new xmqp feature for echanging data between players:
-    new macros:
-      {{x-enabled}} - player have xmqp service enabled
-      {{x-fire}} - fire in vehicle
-      {{x-overturned}} - vehicle is overturned
-      {{x-drowning}} - vehicle is drowning
-      {{x-spotted}} - "I'm spotted" feature
-    accurate minimap cell clicks
-  * added option "battle"/"allowXqmpMacrosInPanels" - enable {{x-*}} macros ability in players panels
 
 XVM-6.2.1.2:
   * adaptation to WoT 0.9.14.1
