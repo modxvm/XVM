@@ -78,6 +78,8 @@ class _XMQP(object):
         URL used to connect to RabbitMQ.
 
         """
+        self._connecting = False
+        self._connected = False
         self._connection = None
         self._channel = None
         self._active = False
@@ -126,6 +128,8 @@ class _XMQP(object):
             self.stop_consuming()
             self._connection.ioloop.start()
             debug('[XMQP] Stopped')
+        self._connecting = False
+        self._connected = False
 
     def call(self, data):
         if self.is_active():
@@ -174,13 +178,6 @@ class _XMQP(object):
         except Exception as ex:
             err(traceback.format_exc())
 
-    def close_connection(self):
-        """This method closes the connection to RabbitMQ."""
-        debug('[XMQP] Closing connection')
-        self._active = False
-        self._closing = True
-        self._connection.close()
-
     def connect(self):
         """This method connects to RabbitMQ, returning the connection handle.
         When the connection is established, the on_connection_open method
@@ -189,7 +186,14 @@ class _XMQP(object):
         :rtype: pika.SelectConnection
 
         """
+        if self._connecting or self._connected:
+            debug('[XMQP] Already connecting to RabbitMQ')
+            return
+
         debug('[XMQP] Connecting')
+
+        self._connecting = True
+
         credentials = pika.PlainCredentials('xvm', 'xvm')
         return pika.SelectConnection(
             pika.ConnectionParameters(host=XVM.XMQP_SERVER, virtual_host='xvm', credentials=credentials),
@@ -205,6 +209,8 @@ class _XMQP(object):
 
         """
         debug('[XMQP] Connection opened')
+        self._connecting = False
+        self._connected = True
         self.add_on_connection_close_callback()
         self.open_channel()
 
@@ -226,6 +232,7 @@ class _XMQP(object):
         :param str reply_text: The server provided reply_text if given
 
         """
+        self._connected = False
         self._channel = None
         if not self._closing:
             debug('[XMQP] Connection closed, reopening in 5 seconds: (%s) %s' % (reply_code, reply_text))
@@ -261,6 +268,14 @@ class _XMQP(object):
             debug('[XMQP] Reconnecting 5')
 
         debug('[XMQP] Reconnecting done')
+
+    def close_connection(self):
+        """This method closes the connection to RabbitMQ."""
+        debug('[XMQP] Closing connection')
+        self._active = False
+        self._closing = True
+        self._connection.close()
+        self._connected = False
 
     def open_channel(self):
         """Open a new channel with RabbitMQ by issuing the Channel.Open RPC
