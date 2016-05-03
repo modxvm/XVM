@@ -85,7 +85,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private var m_data_arguments:Array;
     private var m_data:Object;
-    private var m_dead_noticed:Object = { };
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
@@ -128,7 +127,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.XMQP_HOLA, this, invalidate);
-        if (Config.config.battle.allowXqmpMacrosInPanels)
+        if (Config.config.battle.allowXmqpMacrosInPanels)
         {
             GlobalEventDispatcher.addEventListener(Events.XMQP_FIRE, this, invalidate);
             GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, invalidate);
@@ -371,21 +370,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             if (needAdjustSize)
                 XVMAdjustPanelSize();
 
-            // notice about dead players
-            if (dead_players_count != deadCountPrev)
-            {
-                for (var i = len - dead_players_count; i < len; ++i)
-                {
-                    var item = data[i];
-                    var uid:Number = item.uid;
-                    if (!m_dead_noticed.hasOwnProperty(uid.toString()))
-                    {
-                        m_dead_noticed[uid] = true;
-                        //Logger.add("dead: " + uid);
-                        GlobalEventDispatcher.dispatchEvent( { type: Events.E_PLAYER_DEAD, value: uid } );
-                    }
-                }
-            }
             //Cmd.profMethodEnd("PlayersPanel.setData(): #4");
         }
         catch (ex:Error)

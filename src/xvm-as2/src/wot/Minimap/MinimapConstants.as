@@ -13,7 +13,8 @@
      *    'self': 1001,
      *    CAMERA_STRATEGIC: 1002,
      *    'cell': 1003,
-     *    CAMERA_VIDEO: 1004}
+     *    CAMERA_VIDEO: 1004,
+     *    'ViewRangeEntry': 1010}
      */
 
     public static var MAX_DEAD_ZINDEX:Number = 349;

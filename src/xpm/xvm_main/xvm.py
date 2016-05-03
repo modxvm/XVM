@@ -373,30 +373,24 @@ class Xvm(object):
 
 
     def doUpdateBattle(self, vID, targets, battle):
-
         state = vehstate.getVehicleStateData(vID)
-        if state is None:
-            return
-
-        movie = battle.movie
-        if movie is None:
-            return
-
-        #debug('doUpdateBattle: {0} {1}'.format(vID, set(state.iteritems())))
-        movie.as_xvm_onBattleStateChanged(
-            targets,
-            state['playerName'],
-            state['clanAbbrev'],
-            state['playerId'],
-            state['vId'],
-            state['team'],
-            state['squad'],
-            state['dead'],
-            state['curHealth'],
-            state['maxHealth'],
-            state['marksOnGun'],
-            state['spotted'],
-        )
+        if state is not None:
+            movie = battle.movie
+            if movie is not None:
+                #debug('doUpdateBattle: {0} {1}'.format(vID, set(state.iteritems())))
+                movie.as_xvm_onBattleStateChanged(
+                    targets,
+                    state['playerName'],
+                    state['clanAbbrev'],
+                    state['playerId'],
+                    state['vId'],
+                    state['team'],
+                    state['squad'],
+                    state['dead'],
+                    state['curHealth'],
+                    state['maxHealth'],
+                    state['marksOnGun'],
+                    state['spotted'])
 
 
     def updateMarker(self, vID, targets):

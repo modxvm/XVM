@@ -11,8 +11,8 @@
     // Список дополнительных банков для загрузки из папки res_mods/X.Y.Z/audioww.
     // Несколько банков необходимо указывать через точку с запятой: "bank1.bnk; bank2.bnk;..."
     "soundBanks": {
-      "hangar": "xvm.bnk;",
-      "battle": "xvm.bnk;"
+      "hangar": "xvm.bnk",
+      "battle": "xvm.bnk"
     },
     // Enable sound events logging in the xvm.log
     // Включить логгирование звуковых событий в xvm.log
