@@ -1,6 +1,6 @@
 ﻿/**
- * Minimap labels.
- * Надписи на миникарте.
+ * Minimap labels (alternative mode).
+ * Надписи на миникарте (альтернативный режим).
  */
 {
   // Textfields for units on minimap.
