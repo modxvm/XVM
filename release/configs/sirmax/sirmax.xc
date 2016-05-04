@@ -100,7 +100,6 @@
     "minimapDeadSwitch": true,
     "camera": {
       "enabled": true,
-      "noScroll": true,
       "arcade": {
         "distRange": [2, 50],
         "startDist": 30,

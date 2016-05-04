@@ -79,11 +79,19 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
             dcfg['aimMarkerDistance'] = 10.0
 
         value = c['zooms']
-        if value is not None:
+        if value:
+            cfg['increasedZoom'] = True
             cfg['zooms'] = [float(i) for i in value]
             dcfg['zoomExposure'] = [ max(0, 0.7 - math.log(i, 2) * 0.1) for i in value]
 
     base(self, onChangeControlMode)
+
+
+@overrideMethod(SniperCamera, '_SniperCamera__onSettingsChanged')
+def _SniperCamera__onSettingsChanged(base, self, diff):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zooms'):
+        diff['increasedZoom'] = True
+    base(self, diff)
 
 
 @overrideMethod(SniperCamera, 'enable')
@@ -114,6 +122,14 @@ def _sendSniperCameraFlash(enable, zoom):
             movie = battle.movie
             if movie is not None:
                 movie.as_xvm_onSniperCamera(enable, zoom)
+
+
+@overrideMethod(Aim, 'applySettings')
+def _Aim_applySettings(base, self):
+    if self._Aim__aimSettings is not None:
+        if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zoomIndicator/enabled'):
+             self._Aim__aimSettings['zoomIndicator'] = 0
+    base(self)
 
 
 _prevOffsetX = None
@@ -150,20 +166,6 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
             self._StrategicCamera__aimingSystem._StrategicAimingSystem__height = cfg['distRange'][0]
 
     base(self, onChangeControlMode)
-
-
-@overrideMethod(ArcadeControlMode, 'onChangeControlModeByScroll')
-def onChangeControlModeByScroll(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/noScroll'):
-        return
-    base(self)
-
-
-@overrideMethod(SniperControlMode, 'onChangeControlModeByScroll')
-def onChangeControlModeByScroll(base, self, switchToClosestDist = True):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/noScroll'):
-        return
-    base(self, switchToClosestDist)
 
 
 # PRIVATE

@@ -7,9 +7,6 @@
     // false - disable camera settings.
     // false - отключить настройки камеры.
     "enabled": false,
-    // true - disable switching to sniper mode by mouse wheel
-    // true - не переключаться в снайперский режим колесом мыши
-    "noScroll": false,
     // Arcade mode
     // Аркадный режим
     "arcade": {
