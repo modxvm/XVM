@@ -161,20 +161,6 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
     base(self, onChangeControlMode)
 
 
-@overrideMethod(ArcadeControlMode, 'onChangeControlModeByScroll')
-def onChangeControlModeByScroll(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/noScroll'):
-        return
-    base(self)
-
-
-@overrideMethod(SniperControlMode, 'onChangeControlModeByScroll')
-def onChangeControlModeByScroll(base, self, switchToClosestDist = True):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/noScroll'):
-        return
-    base(self, switchToClosestDist)
-
-
 # PRIVATE
 
 def _disableDynamicCamera(dcfg):
