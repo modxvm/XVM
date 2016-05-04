@@ -17,6 +17,7 @@
   * added option "hotkeys"/"battleLabelsHotKeys" - use hotkeys in custom labels on battle interface window
   * added option "battle"/"allowXmqpMacrosInPanels" - enable {{x-*}} macros ability in players panels
   * removed option "camera"/"noScroll" - implemented in client
+  * removed option "login"/"skipIntro" - implemented in client
 
   [MACROS]  
   * added macros {{chancesStatic}} - win chances at battle (static)

@@ -33,13 +33,6 @@ import xvm_main.python.userprefs as userprefs
 
 firsttime = True
 
-@overrideMethod(IntroPage, '_IntroPage__showMovie')
-def IntroPage_showMovie(base, self, movie):
-    if config.get('login/skipIntro'):
-        BigWorld.callback(0, self.stopVideo)
-    return base(self, movie)
-
-
 @overrideMethod(LoginView, 'as_setVersionS')
 def LoginView_as_setVersionS(base, self, version):
     base(self, '{} | XVM {} (WoT {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))

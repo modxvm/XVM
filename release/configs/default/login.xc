@@ -4,9 +4,6 @@
  */
 {
   "login": {
-    // Skip intro movie
-    // Пропустить вступительное видео
-    "skipIntro": true,
     // Save last server
     // Сохранять последний сервер
     "saveLastServer": false,
