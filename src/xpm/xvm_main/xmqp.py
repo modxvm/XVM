@@ -195,9 +195,25 @@ class _XMQP(object):
         self._connecting = True
 
         credentials = pika.PlainCredentials('xvm', 'xvm')
+        params = pika.ConnectionParameters(
+            host=XVM.XMQP_SERVER,
+            #port=XVM.XMQP_SERVER_PORT,
+            virtual_host='xvm',
+            credentials=credentials,
+            #channel_max=None,
+            #frame_max=None,
+            #heartbeat_interval=None,
+            #ssl=None,
+            #ssl_options=None,
+            connection_attempts=3,
+            retry_delay=3,
+            socket_timeout=1)
+            #locale=None,
+            #backpressure_detection=None)
         return pika.SelectConnection(
-            pika.ConnectionParameters(host=XVM.XMQP_SERVER, virtual_host='xvm', credentials=credentials),
+            params,
             on_open_callback=self.on_connection_open,
+            on_open_error_callback=self.on_open_connection_error,
             stop_ioloop_on_close=False)
 
     def on_connection_open(self, unused_connection):
@@ -213,6 +229,11 @@ class _XMQP(object):
         self._connected = True
         self.add_on_connection_close_callback()
         self.open_channel()
+
+    def on_open_connection_error(self, unused_connection, error_message=None):
+        self._connecting = False
+        err('[XMQP] %s' % repr(pika_exceptions.AMQPConnectionError(error_message or 
+            self._connection.params.connection_attempts)))
 
     def add_on_connection_close_callback(self):
         """This method adds an on close callback that will be invoked by pika
