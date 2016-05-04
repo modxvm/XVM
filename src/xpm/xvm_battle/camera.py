@@ -116,6 +116,15 @@ def _sendSniperCameraFlash(enable, zoom):
                 movie.as_xvm_onSniperCamera(enable, zoom)
 
 
+@overrideMethod(Aim, 'applySettings')
+def _Aim_applySettings(base, self):
+    if self._Aim__aimSettings is not None:
+        log(self._Aim__aimSettings['zoomIndicator'])
+        if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zoomIndicator/enabled'):
+             self._Aim__aimSettings['zoomIndicator'] = 0
+    base(self)
+
+
 _prevOffsetX = None
 _prevOffsetY = None
 
