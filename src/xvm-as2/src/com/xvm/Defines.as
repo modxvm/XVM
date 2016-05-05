@@ -119,6 +119,12 @@ class com.xvm.Defines
     public static var E_BATTLE_LABEL_KEY_MODE = "battle_label_key_mode";
     public static var E_PLAYERS_HP_CHANGED = "players_hp_changed";
 
+    // XMQP_EVENTS
+    public static var XMQP_HOLA = "xmqp_hola";
+    public static var XMQP_SPOTTED = "xmqp_spotted";
+    public static var XMQP_MINIMAP_CLICK = "xmqp_minimap_click";
+
+
     // ArenaGuiTypes
     // sync with constants.py: ARENA_GUI_TYPE
     public static var ARENA_GUI_TYPE_UNKNOWN:Number = 0

@@ -49,7 +49,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     private static var ALIVE_DEPTH_START:Number = 300;
 
     private static var INVALIDATE_TYPE_DEFAULT:Number = 1;
-    private static var INVALIDATE_TYPE_FORCE:Number = 2;
+    private static var INVALIDATE_TYPE_RECREATE:Number = 2;
 
     private var holderMc:MovieClip;
 
@@ -63,6 +63,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_UPDATED, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Defines.XMQP_HOLA, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Defines.XMQP_SPOTTED, this, onMinimapEvent);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
         GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefresh);
     }
@@ -78,7 +80,17 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     {
         //Logger.addObject(e);
         if (!invalidateList[e.value])
-            invalidateList[e.value] = e.type == Defines.E_PLAYER_DEAD ? INVALIDATE_TYPE_FORCE : INVALIDATE_TYPE_DEFAULT;
+        {
+            switch (e.type)
+            {
+                case Defines.E_PLAYER_DEAD:
+                    invalidateList[e.value] = INVALIDATE_TYPE_RECREATE;
+                    break;
+                default:
+                    invalidateList[e.value] = INVALIDATE_TYPE_DEFAULT;
+                    break;
+            }
+        }
         invalidate();
     }
 
@@ -93,7 +105,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         if (bs.entryName != entryName)
         {
             bs.entryName = entryName;
-            invalidateList[e.value] = INVALIDATE_TYPE_FORCE;
+            invalidateList[e.value] = INVALIDATE_TYPE_RECREATE;
             invalidate();
         }
     }
@@ -105,7 +117,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         {
             if (typeof(holderMc[i]) == "movieclip")
             {
-                invalidateList[i] = INVALIDATE_TYPE_FORCE;
+                invalidateList[i] = INVALIDATE_TYPE_RECREATE;
             }
         }
         invalidate();
@@ -126,7 +138,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             {
                 if (!initLabel(labelMc, playerId))
                 {
-                    newInvalidateList[playerIdStr] = INVALIDATE_TYPE_FORCE;
+                    newInvalidateList[playerIdStr] = INVALIDATE_TYPE_RECREATE;
                     invalidate();
                     continue;
                 }
@@ -145,11 +157,11 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
                 currSpottedStatus = prevSpottedStatus == Defines.SPOTTED_STATUS_SPOTTED ? Defines.SPOTTED_STATUS_LOST : prevSpottedStatus;
             }
 
-            var force:Boolean = invalidateList[playerIdStr] == INVALIDATE_TYPE_FORCE;
+            var recreate:Boolean = invalidateList[playerIdStr] == INVALIDATE_TYPE_RECREATE;
 
-            //Logger.add("(draw) " + bs.playerName + ": " + bs.entryName + ": " + prevSpottedStatus + " " + currSpottedStatus + " " + force);
+            //Logger.add("(draw) " + bs.playerName + ": " + bs.entryName + ": " + prevSpottedStatus + " " + currSpottedStatus + " " + recreate);
 
-            if ((prevSpottedStatus != currSpottedStatus) || force)
+            if ((prevSpottedStatus != currSpottedStatus) || recreate)
             {
                 bs.spottedStatus = currSpottedStatus;
                 createTextFields(labelMc);

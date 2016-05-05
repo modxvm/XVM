@@ -12,7 +12,7 @@ class wot.battle.FragCorrelation
     {
         if (mc == null || mc.alliedMarkers.dataProvider == null)
         {
-            setTimeout(FragCorrelation.modify, 1);
+            _global.setTimeout(FragCorrelation.modify, 1);
         }
         else
         {

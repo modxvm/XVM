@@ -8,6 +8,11 @@
       {{py:full.path.to.static.func(arg,arg,...)}}
     E. g. get %SUP for xTE:
       {{py:xvm_main.python.xvm_scale.XvmScaleToSup({{xte}})|==}}
+  * new xmqp feature for echanging data between players:
+    new macros:
+      {{x-enabled}} - player have xmqp service enabled
+      {{x-spotted}} - "I'm spotted" feature
+    accurate minimap cell clicks
 
 XVM-6.2.1.2:
   * adaptation to WoT 0.9.14.1

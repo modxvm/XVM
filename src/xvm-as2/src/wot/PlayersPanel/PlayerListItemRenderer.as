@@ -552,7 +552,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         img._yscale = data.scaleY;
         alignField(img);
 
-        setTimeout(function() { img.visible = true; }, 1);
+        _global.setTimeout(function() { img.visible = true; }, 1);
     }
 
     private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)

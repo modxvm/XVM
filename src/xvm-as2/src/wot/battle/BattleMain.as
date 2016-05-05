@@ -49,6 +49,7 @@ class wot.battle.BattleMain
         _root.as_xvm_onAimOffsetUpdate = this.as_xvm_onAimOffsetUpdate;
         _root.as_xvm_onBattleStateChanged = this.as_xvm_onBattleStateChanged;
         _root.as_xvm_onPlayersHpChanged = this.as_xvm_onPlayersHpChanged;
+        _root.as_xvm_onXmqpEvent = this.as_xvm_onXmqpEvent;
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, BattleMainConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
@@ -181,7 +182,8 @@ class wot.battle.BattleMain
         }
     }
 
-    public function as_xvm_onPlayersHpChanged():Void
+    // ctx = _root
+    public function as_xvm_onPlayersHpChanged()
     {
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYERS_HP_CHANGED } );
         //Logger.add("HP update event dispatched");
@@ -268,6 +270,69 @@ class wot.battle.BattleMain
         if (!isMinimalSize)
         {
             _root.minimap.sizeUp();
+        }
+    }
+
+    // xmqp events
+
+    // ctx = _root
+    public function as_xvm_onXmqpEvent(playerId:Number, event:String, data:String)
+    {
+        switch (event)
+        {
+            case Defines.XMQP_HOLA:
+                _instance.onHolaEvent(playerId);
+                break;
+            case Defines.XMQP_SPOTTED:
+                _instance.onSpottedEvent(playerId);
+                break;
+            case Defines.XMQP_MINIMAP_CLICK:
+                GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_MINIMAP_CLICK, value: playerId, data: data } );
+                break;
+            default:
+                Logger.add("WARNING: unknown xmqp event: " + event);
+                break;
+        }
+    }
+
+    // {{x-enabled}}
+
+    private function onHolaEvent(playerId:Number)
+    {
+        var updated:Boolean = BattleState.update(playerId, { x_enabled: true } );
+        if (updated)
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_HOLA, value: playerId } );
+        }
+    }
+
+    // {{x-spotted}}
+
+    private var _sixSenseIndicatorTimeoutIds = {};
+
+    private function onSpottedEvent(playerId:Number)
+    {
+        var updated:Boolean = BattleState.update(playerId, { x_spotted: true } );
+        if (updated)
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_SPOTTED, value: playerId } );
+        }
+        if (_sixSenseIndicatorTimeoutIds[playerId])
+        {
+            _global.clearTimeout(_sixSenseIndicatorTimeoutIds[playerId]);
+        }
+        var $this = this;
+        _sixSenseIndicatorTimeoutIds[playerId] =
+            _global.setTimeout(function() { $this.onSpottedEventDone(playerId); }, Config.config.consts.X_SPOTTED_TIME * 1000);
+    }
+
+    private function onSpottedEventDone(playerId:Number)
+    {
+        delete _sixSenseIndicatorTimeoutIds[playerId];
+        var updated:Boolean = BattleState.update(playerId, { x_spotted: false } );
+        if (updated)
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.XMQP_SPOTTED, value: playerId } );
         }
     }
 }

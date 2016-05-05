@@ -54,6 +54,7 @@ class wot.Minimap.Minimap
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
         GlobalEventDispatcher.addEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
+        GlobalEventDispatcher.addEventListener(Defines.XMQP_MINIMAP_CLICK, this, onXmqpMinimapClickEvent);
     }
 
     function scaleMarkersImpl(factor:Number)
@@ -141,5 +142,14 @@ class wot.Minimap.Minimap
                 GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: false } );
         }
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MOVING_STATE_CHANGED, value: is_moving } );
+    }
+
+    private function onXmqpMinimapClickEvent(e:Object)
+    {
+        //Logger.addObject(e, 3, "onXmqpMinimapClickEvent");
+        var canvas:MovieClip = wrapper.mapHit;
+        canvas.lineStyle(3, e.data.color, 80);
+        canvas.moveTo(e.data.x, e.data.y);
+        canvas.lineTo(e.data.x + 0.1, e.data.y + 0.1);
     }
 }

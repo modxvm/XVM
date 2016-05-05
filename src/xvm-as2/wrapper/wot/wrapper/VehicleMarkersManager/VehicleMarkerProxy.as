@@ -29,7 +29,8 @@ class wot.wrapper.VehicleMarkersManager.VehicleMarkerProxy extends net.wargaming
             "gotoAndStop",
 
             // XVM
-            "setMarkerStateXvm"
+            "as_xvm_setMarkerState",
+            "as_xvm_onXmqpEvent"
         ];
         Wrapper.override(this, new wot.VehicleMarkersManager.VehicleMarkerProxy(this, super), OVERRIDE_FUNCTIONS);
     }

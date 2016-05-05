@@ -127,6 +127,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, invalidate);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, invalidate);
+        GlobalEventDispatcher.addEventListener(Defines.XMQP_HOLA, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
     }
 
@@ -165,7 +166,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         if (wrapper.state == "none")
         {
             var $this = this;
-            setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
+            _global.setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
             return;
         }
 
