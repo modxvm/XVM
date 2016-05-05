@@ -1,7 +1,6 @@
 ﻿/**
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-
 import com.xvm.events.*;
 
 class com.xvm.events.EBattleStateChanged

@@ -3,6 +3,7 @@
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 import com.xvm.*;
+import com.xvm.events.*;
 import com.greensock.*;
 import com.greensock.easing.*;
 import net.wargaming.controls.*;
@@ -39,7 +40,7 @@ class wot.battle.SixthSenseIndicator
         icon.source = il.currentIcon;
         icon.onLoadInit = function(mc:MovieClip) { $this.icon_onLoadInit(mc); }
 
-        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, onUpdateStage);
+        GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, onUpdateStage);
     }
 
     function icon_onLoadInit(mc:MovieClip)

@@ -2,6 +2,7 @@
  * Main XVM class, implements workflow logic.
  */
 import com.xvm.*;
+import com.xvm.events.*;
 import flash.filters.*
 import wot.VehicleMarkersManager.components.*;
 import wot.VehicleMarkersManager.components.damage.*;
@@ -46,6 +47,9 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     public var m_defaultIconSource:String;
     public var m_vid:Number;
     public var m_x_enabled:Boolean;
+    public var m_x_fire:Boolean;
+    public var m_x_overturned:Boolean;
+    public var m_x_drowning:Boolean;
     public var m_x_spotted:Boolean;
 
     // Vehicle State
@@ -215,6 +219,9 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         m_squad = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 5];
 
         m_x_enabled = false;
+        m_x_fire = false;
+        m_x_overturned = false;
+        m_x_drowning = false;
         m_x_spotted = false;
 
         healthBarComponent.init();
@@ -242,7 +249,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         // Load stat
         if (!Stat.s_loaded)
         {
-            GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
+            GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, onStatLoaded);
         }
 
         Cmd.profMethodEnd("Xvm.init()");
@@ -410,7 +417,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     private function onStatLoaded(event)
     {
         //trace("Xvm::onStatLoaded()");
-        GlobalEventDispatcher.removeEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
+        GlobalEventDispatcher.removeEventListener(Events.E_STAT_LOADED, this, onStatLoaded);
 
         initializeTextFields();
         vehicleTypeComponent.setVehicleClass();
@@ -713,6 +720,9 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             frags:m_frags,
             squad:m_squad,
             x_enabled:m_x_enabled,
+            x_fire:m_x_fire,
+            x_overturned:m_x_overturned,
+            x_drowning:m_x_drowning,
             x_spotted:m_x_spotted
         };
         return Strings.trim(Macros.Format(m_playerName, format, obj));
@@ -757,10 +767,16 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     {
         switch (event)
         {
-            case Defines.XMQP_HOLA:
+            case Events.XMQP_HOLA:
                 onHolaEvent();
                 break;
-            case Defines.XMQP_SPOTTED:
+            case Events.XMQP_FIRE:
+                onFireEvent(JSONx.parse(data));
+                break;
+            case Events.XMQP_VEHICLE_TIMER:
+                onVehicleTimerEvent(JSONx.parse(data));
+                break;
+            case Events.XMQP_SPOTTED:
                 onSpottedEvent();
                 break;
             default:
@@ -777,6 +793,45 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         {
             m_x_enabled = true;
             XVMUpdateStyle();
+        }
+    }
+
+    // {{x-fire}}
+
+    private function onFireEvent(data:Object)
+    {
+        if (m_x_fire != data.enable)
+        {
+            m_x_fire = data.enable;
+            XVMUpdateStyle();
+        }
+    }
+
+    // {{x-overturned}}
+    // {{x-drowning}}
+
+    private function onVehicleTimerEvent(data:Object)
+    {
+        switch (data.code)
+        {
+            case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
+                if (m_x_overturned != data.enable)
+                {
+                    m_x_overturned = data.enable;
+                    XVMUpdateStyle();
+                }
+                break;
+
+            case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
+                if (m_x_drowning != data.enable)
+                {
+                    m_x_drowning = data.enable;
+                    XVMUpdateStyle();
+                }
+                break;
+
+            default:
+                Logger.add("WARNING: unknown vehicle timer code: " + data.code);
         }
     }
 

@@ -4,6 +4,7 @@
  */
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import com.xvm.events.*;
 import flash.filters.*;
 import flash.geom.*;
 import gfx.core.*;
@@ -95,7 +96,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         extraFields = null;
         extraFieldsConfigured = false;
 
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
     }
 
     // IMPL
@@ -259,17 +260,17 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (!Utils.isArenaGuiTypeWithPlayerPanels())
             return;
 
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
+        GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, onStatLoaded);
 
         if (isLeftPanel)
         {
-            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
-            GlobalEventDispatcher.addEventListener(Defines.E_LEFT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsLeft);
+            GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
+            GlobalEventDispatcher.addEventListener(Events.E_LEFT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsLeft);
         }
         else
         {
-            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsRight);
-            GlobalEventDispatcher.addEventListener(Defines.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
+            GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, adjustExtraFieldsRight);
+            GlobalEventDispatcher.addEventListener(Events.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
         }
     }
 

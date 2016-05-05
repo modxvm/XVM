@@ -15,6 +15,7 @@
 
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import com.xvm.events.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.view.*;
@@ -60,6 +61,7 @@ class wot.Minimap.MinimapEntry
 
     private static var _minimap_initialized:Boolean = false;
 
+    private var _entry_initialized:Boolean = false;
     public var playerId:Number;
 
     // Used only for camera entry to define if entry is processed with Lines class
@@ -79,6 +81,8 @@ class wot.Minimap.MinimapEntry
         Cmd.profMethodStart("MinimapEntry.init_xvm()");
 
         MarkerColor.setColor(wrapper);
+
+        _entry_initialized = true;
 
         if (playerId <= 0)
         {
@@ -110,7 +114,7 @@ class wot.Minimap.MinimapEntry
         if (IconsProxy.playerIds[playerId])
         {
             delete IconsProxy.playerIds[playerId];
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, wrapper, playerId));
+            GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_ENTRY_LOST, wrapper, playerId));
         }
 
         if (isLit)
@@ -129,10 +133,10 @@ class wot.Minimap.MinimapEntry
         }
 
         if (isRespawn)
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.RESPAWNED, wrapper, playerId));
+            GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_RESPAWNED, wrapper, playerId));
 
         //Logger.add("add:   " + playerId);
-        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_INITED, wrapper, playerId));
+        GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_ENTRY_INITED, wrapper, playerId));
 
         this.onEntrySpotted();
 
@@ -141,7 +145,7 @@ class wot.Minimap.MinimapEntry
         {
             //Logger.add("remove: " + playerId);
             delete IconsProxy.playerIds[playerId];
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, this, playerId));
+            GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_ENTRY_LOST, this, playerId));
             this["_xvm_removeMovieClip"]()
         }
 
@@ -158,7 +162,7 @@ class wot.Minimap.MinimapEntry
 
         if (playerId)
         {
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_NAME_UPDATED, wrapper, playerId));
+            GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_ENTRY_NAME_UPDATED, wrapper, playerId));
         }
     }
 
@@ -167,22 +171,25 @@ class wot.Minimap.MinimapEntry
         Cmd.profMethodStart("MinimapEntry.draw()");
 
         //Logger.add('draw: playerId=' + playerId + " _name=" + wrapper._name + " entryName=" + wrapper.entryName + " m_type=" + wrapper.m_type +
-        //    " markLabel=" + wrapper.markLabel + " vehicleClass=" + wrapper.vehicleClass);
+        //    " markLabel=" + wrapper.markLabel + " vehicleClass=" + wrapper.vehicleClass + " _entry_initialized=" + _entry_initialized);
 
         base.draw();
+
+        if (!_entry_initialized)
+            return;
 
         MarkerColor.setColor(wrapper);
 
         if (playerId)
         {
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_UPDATED, wrapper, playerId));
+            GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_ENTRY_UPDATED, wrapper, playerId));
         }
         else
         {
             var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry;
             if (camera != null && camera == wrapper)
             {
-                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.CAMERA_UPDATED, wrapper));
+                GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_CAMERA_UPDATED, wrapper));
             }
         }
 
@@ -195,6 +202,8 @@ class wot.Minimap.MinimapEntry
     {
         base.onEnterFrameHandler();
 
+        setLabelToMimicEntryMoves();
+
         if (wrapper._name != "MinimapEntry0") // MinimapConstants.MAIN_PLAYER_ENTRY_NAME - resolved for performance
             return;
 
@@ -205,14 +214,14 @@ class wot.Minimap.MinimapEntry
         if (camera != null)
         {
             lastCameraModeIsStrategic = true;
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.SET_STRATEGIC_POS, camera));
+            GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_SET_STRATEGIC_POS, camera));
         }
         else
         {
             if (lastCameraModeIsStrategic)
             {
                 lastCameraModeIsStrategic = false;
-                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.SET_STRATEGIC_POS, null));
+                GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_SET_STRATEGIC_POS, null));
             }
         }
     }
@@ -254,23 +263,14 @@ class wot.Minimap.MinimapEntry
         if (!Minimap.config.enabled || Config.config.minimap.useStandardLabels || !Minimap.config.labels.enabled || !Minimap.config.labels.formats || Minimap.config.labels.formats.length == 0)
             return;
 
-        /*if (wrapper.entryName == MinimapConstants.STATIC_ICON_BASE)
-        {
-            if (wrapper.orig_entryName == null)
-                wrapper.orig_entryName = wrapper.entryName;
-            wrapper.setEntryName(MinimapConstants.STATIC_ICON_CONTROL);
-        }*/
-
-        //if (playerId)
-        //{
-            this.labelMc = LabelsContainer.getLabel(playerId);
-            setLabelToMimicEntryMoves();
-        //}
+        setLabelToMimicEntryMoves();
     }
 
     private function setLabelToMimicEntryMoves():Void
     {
         // TODO: refactor (performance issue)
+        if (playerId)
+            this.labelMc = LabelsContainer.getLabel(playerId);
         wrapper.onEnterFrame = function()
         {
             // Seldom error workaround. Wreck sometimes is placed at map center.

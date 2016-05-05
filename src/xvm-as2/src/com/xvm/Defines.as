@@ -101,30 +101,6 @@ class com.xvm.Defines
     public static var MOVING_STATE_MOVING = 0x02;
     public static var MOVING_STATE_ALL = MOVING_STATE_STOPPED | MOVING_STATE_MOVING;
 
-    // Events
-    public static var E_CONFIG_LOADED = "config_loaded";
-    public static var E_STAT_LOADED = "stat_loaded";
-    public static var E_PP_ALT_MODE = "pp_alt_mode";
-    public static var E_MM_ALT_MODE = "mm_alt_mode";
-    public static var E_MM_ZOOM = "mm_zoom";
-    public static var E_STEREOSCOPE_TOGGLED = "stereoscope_toggled";
-    public static var E_PLAYER_DEAD = "player_dead";
-    public static var E_SELF_DEAD = "self_dead";
-    public static var E_UPDATE_STAGE = "update_stage";
-    public static var E_LEFT_PANEL_SIZE_ADJUSTED = "left_panel_size_adjusted";
-    public static var E_RIGHT_PANEL_SIZE_ADJUSTED = "right_panel_size_adjusted";
-    public static var E_MOVING_STATE_CHANGED = "moving_state_changed";
-    public static var E_MODULE_DESTROYED = "module_destroyed";
-    public static var E_MODULE_REPAIRED = "module_repaired";
-    public static var E_BATTLE_LABEL_KEY_MODE = "battle_label_key_mode";
-    public static var E_PLAYERS_HP_CHANGED = "players_hp_changed";
-
-    // XMQP_EVENTS
-    public static var XMQP_HOLA = "xmqp_hola";
-    public static var XMQP_SPOTTED = "xmqp_spotted";
-    public static var XMQP_MINIMAP_CLICK = "xmqp_minimap_click";
-
-
     // ArenaGuiTypes
     // sync with constants.py: ARENA_GUI_TYPE
     public static var ARENA_GUI_TYPE_UNKNOWN:Number = 0
@@ -177,4 +153,12 @@ class com.xvm.Defines
     public static var SPOTTED_STATUS_SPOTTED:Number =    0x02;
     public static var SPOTTED_STATUS_LOST:Number =       0x04;
     public static var SPOTTED_STATUS_ANY:Number =        0x06;
+
+    // VEHICLE_MISC_STATUS
+    public static var VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:Number = 3;
+    public static var VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:Number = 4;
+
+    // VEHICLE_MISC_STATUS warning levels
+    public static var VEHICLE_MISC_STATUS_WARNING_LEVEL_WARNING:String = 'warning';
+    public static var VEHICLE_MISC_STATUS_WARNING_LEVEL_CRITICAL:String = 'critical';
 }

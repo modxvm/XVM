@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2015 """
+""" XVM (c) www.modxvm.com 2013-2016 """
 
 __all__ = ['start', 'stop', 'call']
 
@@ -78,6 +78,8 @@ class _XMQP(object):
         URL used to connect to RabbitMQ.
 
         """
+        self._connecting = False
+        self._connected = False
         self._connection = None
         self._channel = None
         self._active = False
@@ -126,16 +128,17 @@ class _XMQP(object):
             self.stop_consuming()
             self._connection.ioloop.start()
             debug('[XMQP] Stopped')
+        self._connecting = False
+        self._connected = False
 
     def call(self, data):
         if self.is_active():
-            #debug('[XMQP] Call')
             self._correlation_id = str(uuid.uuid4())
             message = simplejson.dumps({
                 'message': simplejson.dumps(data),
                 'type': XVM.XMQP_COMMAND_BATTLE_MESSAGE,
                 'token': config.token.token})
-            #debug('call: %s' % message)
+            #debug('[XMQP] call: %s' % message)
             self._channel.basic_publish(
                 exchange='',
                 routing_key=self.LOBBY_QUEUE,
@@ -163,27 +166,17 @@ class _XMQP(object):
         try:
             if body != 'ok':
                 debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
-            #debug(basic_deliver)
-            #debug(properties)
-
             if self._exchange_correlation_id == properties.correlation_id:
                 self._exchange_name = body
             elif basic_deliver.exchange:
+                #debug('[XMQP] recv: {} {}'.format(properties.headers.get('userId', None), body))
                 g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_MESSAGE, {
                     'playerId': properties.headers.get('userId', None),
                     'body':simplejson.loads(body)}))
-
             if self._exchange_correlation_id == properties.correlation_id:
                 self.bind_channel()
         except Exception as ex:
             err(traceback.format_exc())
-
-    def close_connection(self):
-        """This method closes the connection to RabbitMQ."""
-        debug('[XMQP] Closing connection')
-        self._active = False
-        self._closing = True
-        self._connection.close()
 
     def connect(self):
         """This method connects to RabbitMQ, returning the connection handle.
@@ -193,11 +186,34 @@ class _XMQP(object):
         :rtype: pika.SelectConnection
 
         """
+        if self._connecting or self._connected:
+            debug('[XMQP] Already connecting to RabbitMQ')
+            return
+
         debug('[XMQP] Connecting')
+
+        self._connecting = True
+
         credentials = pika.PlainCredentials('xvm', 'xvm')
+        params = pika.ConnectionParameters(
+            host=XVM.XMQP_SERVER,
+            #port=XVM.XMQP_SERVER_PORT,
+            virtual_host='xvm',
+            credentials=credentials,
+            #channel_max=None,
+            #frame_max=None,
+            #heartbeat_interval=None,
+            #ssl=None,
+            #ssl_options=None,
+            connection_attempts=3,
+            retry_delay=3,
+            socket_timeout=1)
+            #locale=None,
+            #backpressure_detection=None)
         return pika.SelectConnection(
-            pika.ConnectionParameters(host=XVM.XMQP_SERVER, virtual_host='xvm', credentials=credentials),
+            params,
             on_open_callback=self.on_connection_open,
+            on_open_error_callback=self.on_open_connection_error,
             stop_ioloop_on_close=False)
 
     def on_connection_open(self, unused_connection):
@@ -209,8 +225,15 @@ class _XMQP(object):
 
         """
         debug('[XMQP] Connection opened')
+        self._connecting = False
+        self._connected = True
         self.add_on_connection_close_callback()
         self.open_channel()
+
+    def on_open_connection_error(self, unused_connection, error_message=None):
+        self._connecting = False
+        err('[XMQP] %s' % repr(pika_exceptions.AMQPConnectionError(error_message or 
+            self._connection.params.connection_attempts)))
 
     def add_on_connection_close_callback(self):
         """This method adds an on close callback that will be invoked by pika
@@ -230,6 +253,7 @@ class _XMQP(object):
         :param str reply_text: The server provided reply_text if given
 
         """
+        self._connected = False
         self._channel = None
         if not self._closing:
             debug('[XMQP] Connection closed, reopening in 5 seconds: (%s) %s' % (reply_code, reply_text))
@@ -265,6 +289,14 @@ class _XMQP(object):
             debug('[XMQP] Reconnecting 5')
 
         debug('[XMQP] Reconnecting done')
+
+    def close_connection(self):
+        """This method closes the connection to RabbitMQ."""
+        debug('[XMQP] Closing connection')
+        self._active = False
+        self._closing = True
+        self._connection.close()
+        self._connected = False
 
     def open_channel(self):
         """Open a new channel with RabbitMQ by issuing the Channel.Open RPC

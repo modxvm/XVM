@@ -1,4 +1,5 @@
 import com.xvm.*;
+import com.xvm.events.*;
 import wot.Minimap.*;
 
 /**
@@ -21,12 +22,12 @@ class wot.Minimap.view.Zoom
 
     public function Zoom()
     {
-        GlobalEventDispatcher.addEventListener(Defines.E_MM_ZOOM, this, onZoomKeyClick)
+        GlobalEventDispatcher.addEventListener(Events.E_MM_ZOOM, this, onZoomKeyClick)
     }
 
     public function Dispose()
     {
-        GlobalEventDispatcher.removeEventListener(Defines.E_MM_ZOOM, this, onZoomKeyClick)
+        GlobalEventDispatcher.removeEventListener(Events.E_MM_ZOOM, this, onZoomKeyClick)
     }
 
     /**

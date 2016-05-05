@@ -4,6 +4,7 @@
  */
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import com.xvm.events.*;
 import net.wargaming.controls.*;
 import net.wargaming.ingame.*;
 import wot.StatisticForm.*;
@@ -72,7 +73,7 @@ class wot.StatisticForm.BattleStatItemRenderer
             s_winChances = new WinChances();
 
         // Add event handlers
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
+        GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, onStatLoaded);
 
         // Setup controls
 

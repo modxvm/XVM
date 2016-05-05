@@ -1,4 +1,5 @@
 import com.xvm.*;
+import com.xvm.events.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
 
@@ -38,7 +39,7 @@ class wot.Minimap.shapes.ShapeAttach
         scaleFactor = metersPerPoint;
 
         /** Hide sphapes on players dead event (postmortem mod) */
-        GlobalEventDispatcher.addEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
+        GlobalEventDispatcher.addEventListener(Events.E_SELF_DEAD, this, postmortemMod);
 
         if (isSelfDead)
         {
@@ -49,7 +50,7 @@ class wot.Minimap.shapes.ShapeAttach
 
     public function Dispose()
     {
-        GlobalEventDispatcher.removeEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
+        GlobalEventDispatcher.removeEventListener(Events.E_SELF_DEAD, this, postmortemMod);
     }
 
     // -- Private

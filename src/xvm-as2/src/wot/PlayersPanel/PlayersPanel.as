@@ -5,7 +5,7 @@
  * @author ilitvinov87
  */
 import com.xvm.*;
-import com.xvm.DataTypes.BattleStateData;
+import com.xvm.DataTypes.*;
 import com.xvm.events.*;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
@@ -85,7 +85,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private var m_data_arguments:Array;
     private var m_data:Object;
-    private var m_dead_noticed:Object = { };
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
@@ -98,7 +97,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     {
         Utils.TraceXvmModule("PlayersPanel");
 
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
     }
 
     // PRIVATE
@@ -125,9 +124,15 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         if (!DEFAULT_SQUAD_SIZE)
             DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN * 2;
 
-        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Defines.XMQP_HOLA, this, invalidate);
+        GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, invalidate);
+        GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, invalidate);
+        GlobalEventDispatcher.addEventListener(Events.XMQP_HOLA, this, invalidate);
+        if (Config.config.battle.allowXmqpMacrosInPanels)
+        {
+            GlobalEventDispatcher.addEventListener(Events.XMQP_FIRE, this, invalidate);
+            GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, invalidate);
+            GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, invalidate);
+        }
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
     }
 
@@ -147,7 +152,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
             m_altMode = null;
         if (m_altMode != null)
-            GlobalEventDispatcher.addEventListener(Defines.E_PP_ALT_MODE, this, setAltMode);
+            GlobalEventDispatcher.addEventListener(Events.E_PP_ALT_MODE, this, setAltMode);
 
         _root.switcher_mc.noneBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
         _root.switcher_mc.shortBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;
@@ -365,21 +370,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             if (needAdjustSize)
                 XVMAdjustPanelSize();
 
-            // notice about dead players
-            if (dead_players_count != deadCountPrev)
-            {
-                for (var i = len - dead_players_count; i < len; ++i)
-                {
-                    var item = data[i];
-                    var uid:Number = item.uid;
-                    if (!m_dead_noticed.hasOwnProperty(uid.toString()))
-                    {
-                        m_dead_noticed[uid] = true;
-                        //Logger.add("dead: " + uid);
-                        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYER_DEAD, value: uid } );
-                    }
-                }
-            }
             //Cmd.profMethodEnd("PlayersPanel.setData(): #4");
         }
         catch (ex:Error)
@@ -593,7 +583,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                         : wrapper.players_bg._width - x - DEFAULT_SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN;
                     wrapper.m_list.updateSquadIconPosition();
                     GlobalEventDispatcher.dispatchEvent({
-                        type: isLeftPanel ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
+                        type: isLeftPanel ? Events.E_LEFT_PANEL_SIZE_ADJUSTED : Events.E_RIGHT_PANEL_SIZE_ADJUSTED,
                         state: wrapper.state
                     });
                 }
@@ -706,7 +696,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         if (changed)
         {
             GlobalEventDispatcher.dispatchEvent({
-                type: isLeftPanel ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
+                type: isLeftPanel ? Events.E_LEFT_PANEL_SIZE_ADJUSTED : Events.E_RIGHT_PANEL_SIZE_ADJUSTED,
                 state: wrapper.state
             });
         }
