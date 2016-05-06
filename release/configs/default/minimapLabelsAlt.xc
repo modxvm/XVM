@@ -1,6 +1,6 @@
 ﻿/**
- * Minimap labels.
- * Надписи на миникарте.
+ * Minimap labels (alternative mode).
+ * Надписи на миникарте (альтернативный режим).
  */
 {
   // Textfields for units on minimap.
@@ -26,7 +26,7 @@
       //${ "minimapLabelsTemplates.xc":"def.vtypeSpotted" },
       ${ "minimapLabelsTemplates.xc":"def.vehicleSpotted" },
       ${ "minimapLabelsTemplates.xc":"def.nickSpotted" },
-      ${ "minimapLabelsTemplates.xc":"def.nickTeamkillerSpotted" },
+      ${ "minimapLabelsTemplates.xc":"def.nickSpottedCompany" },
       ${ "minimapLabelsTemplates.xc":"def.vtypeLost" },
       ${ "minimapLabelsTemplates.xc":"def.vehicleLost" },
       ${ "minimapLabelsTemplates.xc":"def.nickLost" },
