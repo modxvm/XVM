@@ -28,6 +28,7 @@ XVM-6.2.2:
   * new xmqp feature for echanging data between players (experimental):
     new macros:
       {{x-enabled}} - player have xmqp service enabled
+      {{x-sense-on}} - player have "sixth sense" perk
       {{x-fire}} - fire in vehicle
       {{x-overturned}} - vehicle is overturned
       {{x-drowning}} - vehicle is drowning
