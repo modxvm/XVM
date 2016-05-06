@@ -168,11 +168,11 @@ Legend:
 │S/D│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────
 │ D │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ xmqp services enabled
-│ D │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ player have "sixth sense" perk
+│ D │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ player studied "sixth sense" perk
+│ D │ {{x-spotted}}      │   │   │   │ X │ X │   │ player vehicle is spotted
 │ D │ {{x-fire}}         │   │   │   │ X │ X │   │ fire in vehicle
-│ D │ {{x-overturned}}   │   │   │   │ X │ X │   │ vehicle is overturned
-│ D │ {{x-drowning}}     │   │   │   │ X │ X │   │ vehicle is drowning
-│ D │ {{x-spotted}}      │   │   │   │ X │ X │   │ "I'm spotted"
+│ D │ {{x-overturned}}   │   │   │   │ X │ X │   │ player vehicle is overturned
+│ D │ {{x-drowning}}     │   │   │   │ X │ X │   │ player vehicle is drowning
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴────────────────────────────────────────────────────
 
   Capture bar macros
