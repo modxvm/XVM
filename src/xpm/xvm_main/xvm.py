@@ -48,6 +48,17 @@ _LOG_COMMANDS = (
 
 # performs translations and fixes image path
 def l10n(text):
+
+    if text is None:
+        return None
+
+    lang_data = config.lang_data.get('locale', {})
+
+    if text in lang_data:
+        text = lang_data[text]
+        if text is None:
+            return None
+
     while True:
         localizedMacroStart = text.find('{{l10n:')
         if localizedMacroStart == -1:
@@ -55,9 +66,24 @@ def l10n(text):
         localizedMacroEnd = text.find('}}', localizedMacroStart)
         if localizedMacroEnd == -1:
             break
-        localizedMacroText = text[localizedMacroStart + 7:localizedMacroEnd]
-        text = text[:localizedMacroStart] + config.lang_data.get('locale', {}).get(localizedMacroText, localizedMacroText) + text[localizedMacroEnd + 2:]
-    return utils.fixImgTag(config.lang_data.get('locale', {}).get(text, text))
+
+        macro = text[localizedMacroStart + 7:localizedMacroEnd]
+
+        parts = macro.split(':')
+        macro = lang_data.get(parts[0], parts[0])
+        parts = parts[1:]
+        if len(parts) > 0:
+            try:
+                macro = macro.format(*parts)
+            except Exception as ex:
+                err('macro:  {}'.format(macro))
+                err('params: {}'.format(parts)) 
+                err(traceback.format_exc())
+
+        text = text[:localizedMacroStart] + macro + text[localizedMacroEnd + 2:]
+        #log(text)
+
+    return utils.fixImgTag(lang_data.get(text, text))
 
 class Xvm(object):
 
@@ -92,11 +118,6 @@ class Xvm(object):
 
     def onSystemMessage(self, e=None, cnt=0):
         #trace('onSystemMessage')
-        is_svcmsg = 'swf_file_name' in xfw_mods_info.info.get('xvm_svcmsg', {})
-        if cnt < 50 and is_svcmsg and not 'xvm_svcmsg_ui.swf' in xfw_mods_info.loaded_swfs:
-            BigWorld.callback(0.1, lambda:self.onSystemMessage(e, cnt+1))
-            return
-
         msg = e.ctx.get('msg', '')
         type = e.ctx.get('type', SystemMessages.SM_TYPE.Information)
         SystemMessages.pushMessage(msg, type)
@@ -548,11 +569,6 @@ class Xvm(object):
 
             if cmd == XVM_COMMAND.PYTHON_MACRO:
                 return (python_macro.processPythonMacro(args[0]), True)
-
-            if cmd == XVM_COMMAND.OPEN_URL:
-                if len(args[0]):
-                    utils.openWebBrowser(args[0], False)
-                return (None, True)
 
             if cmd == XVM_COMMAND.SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])

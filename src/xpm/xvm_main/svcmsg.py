@@ -5,9 +5,14 @@ import time
 from gui import SystemMessages
 from gui.shared import g_eventBus, events
 
+from xfw import *
+
 from constants import *
 import config
+from logger import *
 import utils
+from xvm import l10n
+
 
 def tokenUpdated():
     type = SystemMessages.SM_TYPE.Warning
@@ -37,6 +42,26 @@ def tokenUpdated():
 
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg':msg,'type':type}))
 
+
+def fixData(value):
+    if value and 'message' in value and 'message' in value['message']:
+        message = l10n(value['message']['message'])
+        if GAME_REGION == "RU":
+            message = message \
+              .replace('#XVM_SITE#',             'event:http://www.modxvm.com/#wot-main') \
+              .replace('#XVM_SITE_DL#',		 'event:http://www.modxvm.com/%d1%81%d0%ba%d0%b0%d1%87%d0%b0%d1%82%d1%8c-xvm/#wot-main') \
+              .replace('#XVM_SITE_UNAVAILABLE#', 'event:http://www.modxvm.com/%D1%81%D0%B5%D1%82%D0%B5%D0%B2%D1%8B%D0%B5-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B-%D0%BD%D0%B5%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D1%8B/#wot-main') \
+              .replace('#XVM_SITE_INACTIVE#',	 'event:http://www.modxvm.com/%D1%81%D0%B5%D1%82%D0%B5%D0%B2%D1%8B%D0%B5-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B-xvm/#wot-main') \
+              .replace('#XVM_SITE_BLOCKED#',	 'event:http://www.modxvm.com/%D1%81%D1%82%D0%B0%D1%82%D1%83%D1%81-%D0%B7%D0%B0%D0%B1%D0%BB%D0%BE%D0%BA%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD/#wot-main')
+        else:
+            message = message  \
+              .replace('#XVM_SITE#',             'event:http://www.modxvm.com/en/#wot-main') \
+              .replace('#XVM_SITE_DL#',          'event:http://www.modxvm.com/en/download-xvm/#wot-main') \
+              .replace('#XVM_SITE_UNAVAILABLE#', 'event:http://www.modxvm.com/en/network-services-unavailable/#wot-main') \
+              .replace('#XVM_SITE_INACTIVE#',    'event:http://www.modxvm.com/en/network-services-xvm/#wot-main') \
+              .replace('#XVM_SITE_BLOCKED#',     'event:http://www.modxvm.com/en/status-blocked/#wot-main')
+        value['message']['message'] = message
+    return value
 
 # PRIVATE
 

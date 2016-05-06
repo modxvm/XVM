@@ -19,6 +19,7 @@ XFW_MOD_INFO = {
 from pprint import pprint
 from glob import glob
 import os
+import re
 import time
 import traceback
 
@@ -31,6 +32,9 @@ from Avatar import PlayerAvatar
 from BattleReplay import g_replayCtrl
 from PlayerEvents import g_playerEvents
 from Vehicle import Vehicle
+from notification.actions_handlers import NotificationsActionsHandlers
+from notification.decorators import MessageDecorator
+from notification.settings import NOTIFICATION_TYPE
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info
@@ -50,6 +54,7 @@ from constants import *
 import config
 import filecache
 from logger import *
+import svcmsg
 import utils
 import vehstate
 from xvm import g_xvm
@@ -142,6 +147,19 @@ def Flash_call(base, self, methodName, args=None):
     debug("> call: %s, %s" % (methodName, str(args)))
 
 
+@overrideMethod(MessageDecorator, 'getListVO')
+def _NotificationDecorator_getListVO(base, self):
+    return svcmsg.fixData(base(self))
+
+
+@overrideMethod(NotificationsActionsHandlers, 'handleAction')
+def _NotificationsActionsHandlers_handleAction(base, self, model, typeID, entityID, actionName):
+    if typeID == NOTIFICATION_TYPE.MESSAGE and re.match('https?://', actionName, re.I):
+        BigWorld.wg_openWebBrowser(actionName)
+    else:
+        base(self, model, typeID, entityID, actionName)
+
+
 # LOGIN
 
 def onClientVersionDiffers():
@@ -159,8 +177,7 @@ g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVe
 def ProfileTechniqueWindow_RequestData(base, self, data):
     if data.vehicleId:
         base(self, data)
-#    else:
-#        self.as_responseVehicleDossierS({})
+
 
 # stereoscope
 @registerEvent(AmmunitionPanel, 'highlightParams')
