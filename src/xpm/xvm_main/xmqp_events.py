@@ -28,16 +28,19 @@ from xfw import *
 
 from logger import *
 import config
+import minimap_circles
 import utils
 import xmqp
 
 def onXmqpConnected(e):
+    global _players_xmqp_status
+    _players_xmqp_status = {}
     _send_xmqp_hola()
 
 def onStateBattle():
     global _players_xmqp_status
-    for playerId in _players_xmqp_status.iterkeys():
-        _as_xmqp_event(playerId, {'event': EVENTS.XMQP_HOLA})
+    for playerId, data in _players_xmqp_status.iteritems():
+        _as_xmqp_event(playerId, data)
 
 def onXmqpMessage(e):
     try:
@@ -97,10 +100,18 @@ def _as_xmqp_event(playerId, data, targets=TARGETS.ALL):
 _players_xmqp_status = {}
 
 def _send_xmqp_hola():
-    global _players_xmqp_status
-    _players_xmqp_status = {getCurrentPlayerId():True}
+    mcdata = minimap_circles.getMinimapCirclesData()
+    if mcdata is None:
+        mcdata = {}
+    data = {'event': EVENTS.XMQP_HOLA,
+            'sixthSense': mcdata.get('commander_sixthSense', None)}
     if xmqp.is_active():
-        xmqp.call({'event': EVENTS.XMQP_HOLA})
+        xmqp.call(data)
+
+    global _players_xmqp_status
+    currentPlayerId = getCurrentPlayerId()
+    if currentPlayerId not in _players_xmqp_status:
+        _players_xmqp_status[currentPlayerId] = data
 
 def _onXmqpHola(playerId, data):
     if xmqp.XMQP_DEVELOPMENT:
@@ -108,8 +119,8 @@ def _onXmqpHola(playerId, data):
             playerId = getCurrentPlayerId()
     #debug('_onXmqpHola: {} {}'.format(playerId, data))
     if playerId not in _players_xmqp_status:
-        _players_xmqp_status[playerId] = True
-        xmqp.call({'event': EVENTS.XMQP_HOLA})
+        _players_xmqp_status[playerId] = data
+        _send_xmqp_hola()
         _as_xmqp_event(playerId, data)
 
 _event_handlers[EVENTS.XMQP_HOLA] = _onXmqpHola

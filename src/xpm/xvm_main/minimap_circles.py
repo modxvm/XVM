@@ -54,6 +54,7 @@ class _MinimapCircles(object):
         self.coated_optics = False
         self.rammer = False
         self.consumable = False
+        self.commander_sixthSense = False
         self.commander_eagleEye = 0.0
         self.radioman_finder = 0.0
         self.radioman_inventor = 0.0
@@ -92,6 +93,7 @@ class _MinimapCircles(object):
 
             if 'commander' in crewRoles_arr[position]:
                 self.base_commander_skill = data['level']
+                self.commander_sixthSense = 'commander_sixthSense' in skills
                 if 'commander_eagleEye' in skills and self.commander_eagleEye < skills['commander_eagleEye']:
                     self.commander_eagleEye = skills['commander_eagleEye']
 
@@ -125,6 +127,7 @@ class _MinimapCircles(object):
         #debug('  base_commander_skill: %.0f' % self.base_commander_skill)
         #debug('  base_radioman_skill: %.0f' % self.base_radioman_skill)
         #debug('  base_loaders_skill: %.0f' % self.base_loaders_skill)
+        #debug('  commander_sixthSense: %d' % self.commander_sixthSense)
         #debug('  commander_eagleEye: %d' % self.commander_eagleEye)
         #debug('  radioman_finder: %d' % self.radioman_finder)
         #debug('  camouflage: %s' % str(self.camouflage))
@@ -199,6 +202,7 @@ class _MinimapCircles(object):
             'shell_range': shell_range,
             'base_gun_reload_time': descr.gun['reloadTime'],
             'base_radio_distance': descr.radio['distance'],
+            'commander_sixthSense': self.commander_sixthSense,
         }
 
 
