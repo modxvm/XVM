@@ -106,7 +106,7 @@
       "format": "<font size='{{battletype?13|{{squad?13|0}}}}'>{{name}}</font>"  // формат текста. См. описание макросов в macros.txt
     },
     // Text field with the remaining / maximum health.
-    // Текстовое поле с оставшимся / максимальным здоровьем
+    // Текстовое поле с оставшимся / максимальным здоровьем.
     "tankHp": {
       "name": "Tank HP",
       "visible": true,
@@ -130,6 +130,32 @@
         "strength": 100
       },
       "format": "{{hp}} / {{hp-max}}"
+    },
+    // Text field with the XMQP event.
+    // Текстовое поле с событием XMQP.
+    "xmqpEvent": {
+      "name": "xmqp event",           //  название текстового поля, ни на что не влияет
+      "visible": true,                //  false - не отображать
+      "x": -50,                       //  положение по оси X
+      "y": -24,                       //  положение по оси Y
+      "alpha": "{{x-overturned?100|{{x-spotted?100|50}}}}",  //  прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "color": "{{x-overturned?0xFFBB00|{{x-spotted?0xFFBB00|0xFFFFFF}}}}",  //  цвет (допускается использование динамического цвета, см. macros.txt)
+      "font": {                       //  параметры шрифта
+        "name": "xvm",                //  название
+        "size": 23,                   //  размер
+        "align": "center",            //  выравнивание текста (left, center, right)
+        "bold": false,                //  обычный (false) или жирный (true)
+        "italic": false               //  обычный (false) или курсив (true)
+      },
+      "shadow": {                     //  параметры тени
+        "alpha": 100,                 //  прозрачность
+        "color": "0x000000",          //  цвет
+        "angle": 45,                  //  угол смещения
+        "distance": 0,                //  дистанция смещение
+        "size": 4,                    //  размер
+        "strength": 100               //  интенсивность
+      },
+      "format": "{{x-overturned?&#x112;|{{x-spotted?&#x70;|{{x-enabled?{{x-sense-on?&#x70;}}}}}}}}"  //  формат текста. См. описание макросов в macros.txt
     }
   },
   // Настройки для союзников.
@@ -261,7 +287,8 @@
     "textFields": [
       ${ "def.tankName" },
       ${ "def.playerName" },
-      ${ "def.tankHp" }
+      ${ "def.tankHp" },
+      ${ "def.xmqpEvent" }
     ]
   },
   // Настройки для противников.
