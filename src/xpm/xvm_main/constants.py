@@ -50,7 +50,6 @@ class XVM_COMMAND(object):
     LOAD_STAT_BATTLE_RESULTS = "xvm.load_stat_battle_results"
     LOAD_STAT_USER = "xvm.load_stat_user"
     PYTHON_MACRO = "xvm.python_macro"
-    OPEN_URL = "xvm.open_url"
     SAVE_SETTINGS = "xvm.save_settings"
     AS_DOSSIER = "xvm.as.dossier"
     AS_L10N = "xvm.as.l10n"
