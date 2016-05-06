@@ -2,25 +2,6 @@
   * adaptation to WoT 0.9.15
   
   [MAJOR UPDATES]
-  * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
-  * new xmqp feature for echanging data between players:
-    new macros:
-      {{x-enabled}} - player have xmqp service enabled
-      {{x-fire}} - fire in vehicle
-      {{x-overturned}} - vehicle is overturned
-      {{x-drowning}} - vehicle is drowning
-      {{x-spotted}} - "I'm spotted" feature
-    accurate minimap cell clicks  
-
-  [NEW FUNCTIONS]    
-  * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
-  * added option "hotkeys"/"battleLabelsHotKeys" - use hotkeys in custom labels on battle interface window
-  * added option "battle"/"allowXmqpMacrosInPanels" - enable {{x-*}} macros ability in players panels
-  * removed option "camera"/"noScroll" - implemented in client
-
-  [MACROS]  
-  * added macros {{chancesStatic}} - win chances at battle (static)
-  * added macros {{chancesLive}} - win chances at battle (live)
   * added new type of macro - dynamic macros calculated in the python:
     python functions are loaded from res_mods/configs/py_macro/*.py with decorator @xvm.export(a, b)
     E. g. get %SUP for xTE:
@@ -33,6 +14,34 @@
                 return None
             x = 100 if x == 'XX' else int(x)
             return xvm2sup[max(0, min(100, x-1))]
+
+  [CONFIG]    
+  * removed option "camera"/"noScroll" - implemented in client
+  * removed option "login"/"skipIntro" - implemented in client
+
+  [XMQP]
+  * accurate minimap cell clicks  
+
+XVM-6.2.2:
+  [MAJOR UPDATES]
+  * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
+  * new xmqp feature for echanging data between players (experimental):
+    new macros:
+      {{x-enabled}} - player have xmqp service enabled
+      {{x-sense-on}} - player studied "sixth sense" perk
+      {{x-spotted}} - player vehicle is spotted      
+      {{x-fire}} - fire in vehicle
+      {{x-overturned}} - player vehicle is overturned
+      {{x-drowning}} - player vehicle is drowning
+
+  [CONFIG]    
+  * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
+  * added option "hotkeys"/"battleLabelsHotKeys" - use hotkeys in custom labels on battle interface window
+  * added option "battle"/"allowXmqpMacrosInPanels" - enable {{x-*}} macros ability in players panels
+
+  [MACROS]  
+  * added macros {{chancesStatic}} - win chances at battle (static)
+  * added macros {{chancesLive}} - win chances at battle (live)
 
 XVM-6.2.1.2:
   * adaptation to WoT 0.9.14.1

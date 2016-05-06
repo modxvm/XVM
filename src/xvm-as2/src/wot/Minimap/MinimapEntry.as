@@ -61,7 +61,6 @@ class wot.Minimap.MinimapEntry
 
     private static var _minimap_initialized:Boolean = false;
 
-    private var _entry_initialized:Boolean = false;
     public var playerId:Number;
 
     // Used only for camera entry to define if entry is processed with Lines class
@@ -81,8 +80,6 @@ class wot.Minimap.MinimapEntry
         Cmd.profMethodStart("MinimapEntry.init_xvm()");
 
         MarkerColor.setColor(wrapper);
-
-        _entry_initialized = true;
 
         if (playerId <= 0)
         {
@@ -171,12 +168,9 @@ class wot.Minimap.MinimapEntry
         Cmd.profMethodStart("MinimapEntry.draw()");
 
         //Logger.add('draw: playerId=' + playerId + " _name=" + wrapper._name + " entryName=" + wrapper.entryName + " m_type=" + wrapper.m_type +
-        //    " markLabel=" + wrapper.markLabel + " vehicleClass=" + wrapper.vehicleClass + " _entry_initialized=" + _entry_initialized);
+        //    " markLabel=" + wrapper.markLabel + " vehicleClass=" + wrapper.vehicleClass);
 
         base.draw();
-
-        if (!_entry_initialized)
-            return;
 
         MarkerColor.setColor(wrapper);
 

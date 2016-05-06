@@ -281,7 +281,7 @@ class wot.battle.BattleMain
         switch (event)
         {
             case Events.XMQP_HOLA:
-                _instance.onHolaEvent(playerId);
+                _instance.onHolaEvent(playerId, data);
                 break;
             case Events.XMQP_FIRE:
                 _instance.onFireEvent(playerId, data);
@@ -302,10 +302,14 @@ class wot.battle.BattleMain
     }
 
     // {{x-enabled}}
+    // {{x-sense-on}}
 
-    private function onHolaEvent(playerId:Number)
+    private function onHolaEvent(playerId:Number, data:Object)
     {
-        var updated:Boolean = BattleState.update(playerId, { x_enabled: true } );
+        var updated:Boolean = BattleState.update(playerId, {
+            x_enabled: true,
+            x_sense_on: Boolean(data.sixthSense)
+        });
         if (updated)
         {
             GlobalEventDispatcher.dispatchEvent( { type: Events.XMQP_HOLA, value: playerId } );

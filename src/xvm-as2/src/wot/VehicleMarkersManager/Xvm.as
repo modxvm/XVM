@@ -47,6 +47,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     public var m_defaultIconSource:String;
     public var m_vid:Number;
     public var m_x_enabled:Boolean;
+    public var m_x_sense_on:Boolean;
     public var m_x_fire:Boolean;
     public var m_x_overturned:Boolean;
     public var m_x_drowning:Boolean;
@@ -763,18 +764,19 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
 
     // xmqp events
 
-    public function as_xvm_onXmqpEvent(event:String, data:String)
+    public function as_xvm_onXmqpEvent(event:String, data_str:String)
     {
+        var data:Object = data_str ? JSONx.parse(data_str) : null;
         switch (event)
         {
             case Events.XMQP_HOLA:
-                onHolaEvent();
+                onHolaEvent(data);
                 break;
             case Events.XMQP_FIRE:
-                onFireEvent(JSONx.parse(data));
+                onFireEvent(data);
                 break;
             case Events.XMQP_VEHICLE_TIMER:
-                onVehicleTimerEvent(JSONx.parse(data));
+                onVehicleTimerEvent(data);
                 break;
             case Events.XMQP_SPOTTED:
                 onSpottedEvent();
@@ -786,12 +788,25 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     }
 
     // {{x-enabled}}
+    // {{x-sense-on}}
 
-    private function onHolaEvent()
+    private function onHolaEvent(data:Object)
     {
+        var needUpdate:Boolean = false;
         if (!m_x_enabled)
         {
             m_x_enabled = true;
+            needUpdate = true;
+        }
+
+        if (m_x_sense_on != Boolean(data.sixthSense))
+        {
+            m_x_sense_on = Boolean(data.sixthSense);
+            needUpdate = true;
+        }
+
+        if (needUpdate)
+        {
             XVMUpdateStyle();
         }
     }

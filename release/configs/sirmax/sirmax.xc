@@ -38,7 +38,6 @@
     ${"sirmax-snippet-test.xc":"."}
   ],
   "login": {
-    //"skipIntro": false,
     "saveLastServer": true,
     "autologin": true,
     "confirmOldReplays": true,
