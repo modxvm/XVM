@@ -4,11 +4,11 @@
   * new xmqp feature for echanging data between players (experimental):
     new macros:
       {{x-enabled}} - player have xmqp service enabled
-      {{x-sense-on}} - player have "sixth sense" perk
+      {{x-sense-on}} - player studied "sixth sense" perk
+      {{x-spotted}} - player vehicle is spotted      
       {{x-fire}} - fire in vehicle
-      {{x-overturned}} - vehicle is overturned
-      {{x-drowning}} - vehicle is drowning
-      {{x-spotted}} - "I'm spotted" feature
+      {{x-overturned}} - player vehicle is overturned
+      {{x-drowning}} - player vehicle is drowning
 
   [CONFIG]    
   * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
