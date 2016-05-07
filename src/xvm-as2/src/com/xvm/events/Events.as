@@ -5,22 +5,22 @@
 class com.xvm.events.Events
 {
     // XVM EVENTS
-    public static var E_CONFIG_LOADED = "config_loaded";
-    public static var E_STAT_LOADED = "stat_loaded";
-    public static var E_PP_ALT_MODE = "pp_alt_mode";
-    public static var E_MM_ALT_MODE = "mm_alt_mode";
-    public static var E_MM_ZOOM = "mm_zoom";
-    public static var E_STEREOSCOPE_TOGGLED = "stereoscope_toggled";
-    public static var E_PLAYER_DEAD = "player_dead";
-    public static var E_SELF_DEAD = "self_dead";
-    public static var E_UPDATE_STAGE = "update_stage";
-    public static var E_LEFT_PANEL_SIZE_ADJUSTED = "left_panel_size_adjusted";
-    public static var E_RIGHT_PANEL_SIZE_ADJUSTED = "right_panel_size_adjusted";
-    public static var E_MOVING_STATE_CHANGED = "moving_state_changed";
-    public static var E_MODULE_DESTROYED = "module_destroyed";
-    public static var E_MODULE_REPAIRED = "module_repaired";
-    public static var E_BATTLE_LABEL_KEY_MODE = "battle_label_key_mode";
-    public static var E_PLAYERS_HP_CHANGED = "players_hp_changed";
+    public static var E_CONFIG_LOADED:String = "config_loaded";
+    public static var E_STAT_LOADED:String = "stat_loaded";
+    public static var E_PP_ALT_MODE:String = "pp_alt_mode";
+    public static var E_MM_ALT_MODE:String = "mm_alt_mode";
+    public static var E_MM_ZOOM:String = "mm_zoom";
+    public static var E_STEREOSCOPE_TOGGLED:String = "stereoscope_toggled";
+    public static var E_PLAYER_DEAD:String = "player_dead";
+    public static var E_SELF_DEAD:String = "self_dead";
+    public static var E_UPDATE_STAGE:String = "update_stage";
+    public static var E_LEFT_PANEL_SIZE_ADJUSTED:String = "left_panel_size_adjusted";
+    public static var E_RIGHT_PANEL_SIZE_ADJUSTED:String = "right_panel_size_adjusted";
+    public static var E_MOVING_STATE_CHANGED:String = "moving_state_changed";
+    public static var E_MODULE_DESTROYED:String = "module_destroyed";
+    public static var E_MODULE_REPAIRED:String = "module_repaired";
+    public static var E_BATTLE_LABEL_KEY_MODE:String = "battle_label_key_mode";
+    public static var E_PLAYERS_HP_CHANGED:String = "players_hp_changed";
     public static var E_BATTLE_STATE_CHANGED:String = "battle_state_changed";
 
     // XMQP EVENTS
