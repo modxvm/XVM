@@ -101,7 +101,8 @@ package xvm.tcarousel_ui
                 var filter:Object = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
                 if (filter != null)
                 {
-                    _prefFilter.selectedItems = filter.prefs;
+                    if (filter.prefs && filter.prefs is Array)
+                        _prefFilter.selectedItems = filter.prefs;
                 }
                 //TODO:0.9.15
                 //if (!cfg.filters.params.enabled)
