@@ -102,8 +102,10 @@ package xvm.tcarousel_ui
                 var filter:Object = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
                 if (filter != null)
                 {
-                    _levelFilter.selectedItems = filter.levels;
-                    _prefFilter.selectedItems = filter.prefs;
+                    if (filter.levels && filter.levels is Array)
+                        _levelFilter.selectedItems = filter.levels;
+                    if (filter.prefs && filter.prefs is Array)
+                        _prefFilter.selectedItems = filter.prefs;
                 }
                 if (!cfg.filters.nation.enabled)
                     vehicleFilters.nationFilter.selectedIndex = 0;
