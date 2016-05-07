@@ -25,7 +25,7 @@
 XVM-6.2.2:
   [MAJOR UPDATES]
   * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
-  * new xmqp feature for echanging data between players (experimental):
+  * new xmqp feature for exchanging data between players (experimental):
     new macros:
       {{x-enabled}} - player have xmqp service enabled
       {{x-sense-on}} - player studied "sixth sense" perk
