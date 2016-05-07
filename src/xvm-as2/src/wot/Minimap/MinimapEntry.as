@@ -67,7 +67,6 @@ class wot.Minimap.MinimapEntry
     public var cameraExtendedToken:Boolean;
 
     private var labelMc:MovieClip;
-    private var lastCameraModeIsStrategic:Boolean = false;
 
     function MinimapEntryCtor()
     {
@@ -195,29 +194,12 @@ class wot.Minimap.MinimapEntry
     function onEnterFrameHandlerImpl()
     {
         base.onEnterFrameHandler();
-
         setLabelToMimicEntryMoves();
-
-        if (wrapper._name != "MinimapEntry0") // MinimapConstants.MAIN_PLAYER_ENTRY_NAME - resolved for performance
-            return;
-
-        labelMc._x = wrapper._x;
-        labelMc._y = wrapper._y;
-
-        var camera = IconsProxy.cameraStrategicEntry;
-        if (camera != null)
-        {
-            lastCameraModeIsStrategic = true;
-            GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_SET_STRATEGIC_POS, camera));
-        }
-        else
-        {
-            if (lastCameraModeIsStrategic)
-            {
-                lastCameraModeIsStrategic = false;
-                GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_SET_STRATEGIC_POS, null));
-            }
-        }
+        // TODO: remove if not needed
+        //if (wrapper._name != "MinimapEntry0") // MinimapConstants.MAIN_PLAYER_ENTRY_NAME - resolved for performance
+        //    return;
+        //labelMc._x = wrapper._x;
+        //labelMc._y = wrapper._y;
     }
 
     // INTERNAL
@@ -260,6 +242,8 @@ class wot.Minimap.MinimapEntry
         setLabelToMimicEntryMoves();
     }
 
+    private static var lastCameraModeIsStrategic:Boolean = false;
+
     private function setLabelToMimicEntryMoves():Void
     {
         // TODO: refactor (performance issue)
@@ -274,6 +258,24 @@ class wot.Minimap.MinimapEntry
             var labelMc:MovieClip = this.xvm_worker.labelMc;
             labelMc._x = this._x;
             labelMc._y = this._y;
+
+            if (this._name != "MinimapEntry0") // MinimapConstants.MAIN_PLAYER_ENTRY_NAME - resolved for performance
+                return;
+
+            var camera = IconsProxy.cameraStrategicEntry;
+            if (camera != null)
+            {
+                MinimapEntry.lastCameraModeIsStrategic = true;
+                GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_SET_STRATEGIC_POS, camera));
+            }
+            else
+            {
+                if (MinimapEntry.lastCameraModeIsStrategic)
+                {
+                    MinimapEntry.lastCameraModeIsStrategic = false;
+                    GlobalEventDispatcher.dispatchEvent(new EMinimapEvent(Events.MM_SET_STRATEGIC_POS, null));
+                }
+            }
         };
     }
 }

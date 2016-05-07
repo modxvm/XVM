@@ -9,7 +9,7 @@ import traceback
 import BigWorld
 from Avatar import PlayerAvatar
 from AvatarInputHandler.control_modes import PostMortemControlMode
-from gui.Scaleform.Minimap import Minimap, MODE_ARCADE, MODE_SNIPER, _isStrategic
+from gui.Scaleform.Minimap import Minimap
 from gui.battle_control import g_sessionProvider
 from items.vehicles import VEHICLE_CLASS_TAGS
 
@@ -23,14 +23,14 @@ import xvm_main.python.config as config
 # handlers
 
 @registerEvent(Minimap, 'start')
-def Minimap_start(self):
+def _Minimap_start(self):
     #log('Minimap_start')
     if config.get('minimap/enabled'):
         _init_player(self)
 
 
 @overrideMethod(Minimap, '_Minimap__callEntryFlash')
-def Minimap__callEntryFlash(base, self, id, methodName, args=None):
+def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     #log('id={} method={} args={}'.format(id, methodName, args))
 
     if methodName == 'update' and not args:
@@ -54,7 +54,7 @@ def Minimap__callEntryFlash(base, self, id, methodName, args=None):
 
 
 @registerEvent(Minimap, '_Minimap__addEntryLit')
-def Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
+def _Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
     if config.get('minimap/enabled'):
         if vInfo.isObserver() or matrix is None:
             return
@@ -71,9 +71,10 @@ def Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
 
+
 # Minimap dead switch
 @registerEvent(PostMortemControlMode, 'onMinimapClicked')
-def PostMortemControlMode_onMinimapClicked(self, worldPos):
+def _PostMortemControlMode_onMinimapClicked(self, worldPos):
     if config.get('battle/minimapDeadSwitch'):
         try:
             battle = getBattleApp()
@@ -105,7 +106,7 @@ def PostMortemControlMode_onMinimapClicked(self, worldPos):
 
 # on map load (battle loading)
 @registerEvent(PlayerAvatar, 'updateVehicleHealth')
-def PlayerAvatar_updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, isRespawn):
+def _PlayerAvatar_updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, isRespawn):
     #log('PlayerAvatar_updateVehicleHealth: {} {} {} {} {}'.format(vehicleID, health, deathReasonID, isCrewActive, isRespawn))
     if config.get('minimap/enabled'):
         if isRespawn and health > 0:
