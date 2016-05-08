@@ -88,6 +88,7 @@ class _XMQP(object):
         self._queue_name = None
         self._correlation_id = None
         self._exchange_correlation_id = None
+        self._reconnect_attempts = 0
 
     @property
     def is_consuming(self):
@@ -116,13 +117,13 @@ class _XMQP(object):
             debug('[XMQP] Stopping')
             if self.is_consuming:
                 self.stop_consuming()
-                self.start_ioloop()
+                self._connection.ioloop.start()
             if self._channel and self._channel.is_open:
                 self.close_channel()
-                self.start_ioloop()
+                #self._connection.ioloop.start()
             if self._connection and self._connection.is_open:
                 self.close_connection()
-                self.start_ioloop()
+                #self._connection.ioloop.start()
             self._connection.ioloop.stop()
             debug('[XMQP] Stopped')
         #except pika_exceptions.ConnectionClosed as ex:
@@ -162,6 +163,8 @@ class _XMQP(object):
         :param str|unicode body: The message body
 
         """
+        if self._closing:
+            return
         try:
             if body != 'ok':
                 debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
@@ -201,14 +204,17 @@ class _XMQP(object):
             credentials=credentials,
             #channel_max=None,
             #frame_max=None,
-            #heartbeat_interval=None,
+            #heartbeat=None,
             #ssl=None,
             #ssl_options=None,
             connection_attempts=3,
             retry_delay=3,
-            socket_timeout=1)
+            socket_timeout=1,
             #locale=None,
-            #backpressure_detection=None)
+            #backpressure_detection=None,
+            blocked_connection_timeout=5)
+            #client_properties=_DEFAULT)
+
         return pika.SelectConnection(
             params,
             on_open_error_callback=self.on_open_connection_error,
@@ -242,8 +248,12 @@ class _XMQP(object):
         :param str reply_text: The server provided reply_text if given
 
         """
+        self._consuming = False
         self._channel = None
         if self._closing:
+            self._connection.ioloop.stop()
+        elif self._reconnect_attempts >= 3:
+            debug('[XMQP] Connection closed, maximum reopen attempts reached')
             self._connection.ioloop.stop()
         else:
             debug('[XMQP] Connection closed, reopening in 5 seconds: (%s) %s' % (reply_code, reply_text))
@@ -260,6 +270,7 @@ class _XMQP(object):
         self._connection.ioloop.stop()
 
         if not self._closing:
+            self._reconnect_attempts += 1
             self._connection = self.connect()
             self.start_ioloop()
 
@@ -281,6 +292,8 @@ class _XMQP(object):
         :param pika.channel.Channel channel: The channel object
 
         """
+        if self._closing:
+            return
         debug('[XMQP] Channel opened')
         self._channel = channel
         self.add_on_channel_close_callback()
@@ -305,6 +318,8 @@ class _XMQP(object):
         :param pika.frame.Method method_frame: The Queue.DeclareOk frame
 
         """
+        if self._closing:
+            return
         self._queue_name = method_frame.method.queue
         debug('[XMQP] queue: %s' % (self._queue_name))
         self.start_consuming()
@@ -355,6 +370,7 @@ class _XMQP(object):
 
         """
         debug('[XMQP] Queue bound')
+        self._reconnect_attempts = 0
         g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_CONNECTED))
 
 
