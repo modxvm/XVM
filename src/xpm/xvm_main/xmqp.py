@@ -11,35 +11,36 @@ from pika import exceptions as pika_exceptions
 
 XMQP_DEVELOPMENT = os.environ.get('XMQP_DEVELOPMENT') == '1'
 
+_xmqp = None
 _xmqp_thread = None
 
 def is_active():
-    global _xmqp_thread
-    if _xmqp_thread:
-        return _g_xmqp.is_active()
-    return False
+    global _xmqp_thread, _xmqp
+    return _xmqp_thread and _xmqp.is_consuming
 
 def start(players):
-    global _xmqp_thread
-    _xmqp_thread = threading.Thread(target=_g_xmqp.start, name='xmqp', args=([players]))
+    global _xmqp_thread, _xmqp
+    if _xmqp:
+        stop()
+    _xmqp = _XMQP(players)
+    _xmqp_thread = threading.Thread(target=_xmqp.start, name='xmqp')
     _xmqp_thread.setDaemon(True)
     _xmqp_thread.start()
+    debug('[XMQP] Thread started')
 
 def stop():
-    global _xmqp_thread
+    global _xmqp_thread, _xmqp
     if _xmqp_thread:
-        try:
-            _g_xmqp.stop()
-        except pika_exceptions.ConnectionClosed as ex:
-            pass
-        #_g_xmqp.close_connection()
+        _xmqp.stop()
         _xmqp_thread.join()
         _xmqp_thread = None
+        debug('[XMQP] Thread stopped')
+    _xmqp = None
 
 def call(message):
-    global _xmqp_thread
-    if _xmqp_thread:
-        _g_xmqp.call(message)
+    global _xmqp
+    if _xmqp:
+        _xmqp.call(message)
 
 
 # PRIVATE
@@ -57,7 +58,6 @@ import config
 from constants import *
 from logger import *
 
-
 class _XMQP(object):
     """This is an xmqp consumer that will handle unexpected interactions
     with RabbitMQ such as channel and connection closures.
@@ -73,42 +73,33 @@ class _XMQP(object):
     """
     LOBBY_QUEUE = 'com.xvm.lobby'
 
-    def __init__(self):
+    def __init__(self, players):
         """Create a new instance of the consumer class, passing in the AMQP
         URL used to connect to RabbitMQ.
 
         """
-        self._connecting = False
-        self._connected = False
+        self._players = players
+        self._consuming = False
+        self._closing = False
         self._connection = None
         self._channel = None
-        self._active = False
-        self._closing = False
         self._consumer_tag = None
         self._exchange_name = None
         self._queue_name = None
         self._correlation_id = None
         self._exchange_correlation_id = None
 
-    def is_active(self):
-        return self._active
+    @property
+    def is_consuming(self):
+        return self._consuming
 
-    def start(self, players):
+    def start(self):
         """Run the xmqp consumer by connecting to RabbitMQ and then
         starting the IOLoop to block and allow the SelectConnection to operate.
-
-        :param str exchange_name: The name of exchange channel
-
         """
-
-        if self.is_active():
-            self.stop()
-
-        debug('[XMQP] Running')
-        self._players = players
+        debug('[XMQP] Starting')
         self._connection = self.connect()
-        self._active = True
-        self._connection.ioloop.start()
+        self.start_ioloop()
 
     def stop(self):
         """Cleanly shutdown the connection to RabbitMQ by stopping the consumer
@@ -121,18 +112,26 @@ class _XMQP(object):
         the IOLoop will be buffered but not processed.
 
         """
-        if self.is_active():
+        try:
             debug('[XMQP] Stopping')
-            self._active = False
-            self._closing = True
-            self.stop_consuming()
-            self._connection.ioloop.start()
+            if self.is_consuming:
+                self.stop_consuming()
+                self.start_ioloop()
+            if self._channel and self._channel.is_open:
+                self.close_channel()
+                self.start_ioloop()
+            if self._connection and self._connection.is_open:
+                self.close_connection()
+                self.start_ioloop()
+            self._connection.ioloop.stop()
             debug('[XMQP] Stopped')
-        self._connecting = False
-        self._connected = False
+        #except pika_exceptions.ConnectionClosed as ex:
+        #    pass
+        except Exception as ex:
+            err(traceback.format_exc())
 
     def call(self, data):
-        if self.is_active():
+        if self.is_consuming:
             self._correlation_id = str(uuid.uuid4())
             message = simplejson.dumps({
                 'message': simplejson.dumps(data),
@@ -178,6 +177,12 @@ class _XMQP(object):
         except Exception as ex:
             err(traceback.format_exc())
 
+    def start_ioloop(self):
+        try:
+            self._connection.ioloop.start()
+        except Exception as ex:
+            err(traceback.format_exc())
+
     def connect(self):
         """This method connects to RabbitMQ, returning the connection handle.
         When the connection is established, the on_connection_open method
@@ -186,13 +191,7 @@ class _XMQP(object):
         :rtype: pika.SelectConnection
 
         """
-        if self._connecting or self._connected:
-            debug('[XMQP] Already connecting to RabbitMQ')
-            return
-
         debug('[XMQP] Connecting')
-
-        self._connecting = True
 
         credentials = pika.PlainCredentials('xvm', 'xvm')
         params = pika.ConnectionParameters(
@@ -212,9 +211,14 @@ class _XMQP(object):
             #backpressure_detection=None)
         return pika.SelectConnection(
             params,
-            on_open_callback=self.on_connection_open,
             on_open_error_callback=self.on_open_connection_error,
+            on_open_callback=self.on_connection_open,
             stop_ioloop_on_close=False)
+
+    def on_open_connection_error(self, unused_connection, error_message=None):
+        err('[XMQP] on_open_connection_error %s' % repr(pika_exceptions.AMQPConnectionError(error_message or
+            self._connection.params.connection_attempts)))
+        self._connection.ioloop.stop()
 
     def on_connection_open(self, unused_connection):
         """This method is called by pika once the connection to RabbitMQ has
@@ -225,23 +229,8 @@ class _XMQP(object):
 
         """
         debug('[XMQP] Connection opened')
-        self._connecting = False
-        self._connected = True
         self.add_on_connection_close_callback()
         self.open_channel()
-
-    def on_open_connection_error(self, unused_connection, error_message=None):
-        self._connecting = False
-        err('[XMQP] %s' % repr(pika_exceptions.AMQPConnectionError(error_message or 
-            self._connection.params.connection_attempts)))
-
-    def add_on_connection_close_callback(self):
-        """This method adds an on close callback that will be invoked by pika
-        when RabbitMQ closes the connection to the publisher unexpectedly.
-
-        """
-        debug('[XMQP] Adding connection close callback')
-        self._connection.add_on_close_callback(self.on_connection_closed)
 
     def on_connection_closed(self, connection, reply_code, reply_text):
         """This method is invoked by pika when the connection to RabbitMQ is
@@ -253,16 +242,12 @@ class _XMQP(object):
         :param str reply_text: The server provided reply_text if given
 
         """
-        self._connected = False
         self._channel = None
-        if not self._closing:
+        if self._closing:
+            self._connection.ioloop.stop()
+        else:
             debug('[XMQP] Connection closed, reopening in 5 seconds: (%s) %s' % (reply_code, reply_text))
             self._connection.add_timeout(5, self.reconnect)
-        else:
-            try:
-                self._connection.ioloop.stop()
-            except Exception as ex:
-                pass
 
     def reconnect(self):
         """Will be invoked by the IOLoop timer if the connection is
@@ -274,29 +259,9 @@ class _XMQP(object):
         # This is the old connection IOLoop instance, stop its ioloop
         self._connection.ioloop.stop()
 
-        debug('[XMQP] Reconnecting 2')
-
         if not self._closing:
-
-            debug('[XMQP] Reconnecting 3')
-            # Create a new connection
             self._connection = self.connect()
-
-            debug('[XMQP] Reconnecting 4')
-            # There is now a new connection, needs a new ioloop to run
-            self._connection.ioloop.start()
-
-            debug('[XMQP] Reconnecting 5')
-
-        debug('[XMQP] Reconnecting done')
-
-    def close_connection(self):
-        """This method closes the connection to RabbitMQ."""
-        debug('[XMQP] Closing connection')
-        self._active = False
-        self._closing = True
-        self._connection.close()
-        self._connected = False
+            self.start_ioloop()
 
     def open_channel(self):
         """Open a new channel with RabbitMQ by issuing the Channel.Open RPC
@@ -320,21 +285,6 @@ class _XMQP(object):
         self._channel = channel
         self.add_on_channel_close_callback()
         self.setup_queue()
-
-    def on_channel_closed(self, channel, reply_code, reply_text):
-        """Invoked by pika when RabbitMQ unexpectedly closes the channel.
-        Channels are usually closed if you attempt to do something that
-        violates the protocol, such as re-declare an exchange or queue with
-        different parameters. In this case, we'll close the connection
-        to shutdown the object.
-
-        :param pika.channel.Channel: The closed channel
-        :param int reply_code: The numeric reason the channel was closed
-        :param str reply_text: The text reason the channel was closed
-
-        """
-        debug('[XMQP] Channel %i was closed: (%s) %s' % (channel, reply_code, reply_text))
-        self._connection.close()
 
     def setup_queue(self):
         """Setup the queue on RabbitMQ by invoking the Queue.Declare RPC
@@ -371,6 +321,7 @@ class _XMQP(object):
 
         """
         debug('[XMQP] Issuing consumer related RPC commands')
+        self._consuming = True
         self.add_on_cancel_callback()
         self._consumer_tag = self._channel.basic_consume(self.on_message, self._queue_name, no_ack=True)
 
@@ -409,6 +360,14 @@ class _XMQP(object):
 
     # service methods
 
+    def add_on_connection_close_callback(self):
+        """This method adds an on close callback that will be invoked by pika
+        when RabbitMQ closes the connection to the publisher unexpectedly.
+
+        """
+        debug('[XMQP] Adding connection close callback')
+        self._connection.add_on_close_callback(self.on_connection_closed)
+
     def add_on_channel_close_callback(self):
         """This method tells pika to call the on_channel_closed method if
         RabbitMQ unexpectedly closes the channel.
@@ -416,6 +375,21 @@ class _XMQP(object):
         """
         debug('[XMQP] Adding channel close callback')
         self._channel.add_on_close_callback(self.on_channel_closed)
+
+    def on_channel_closed(self, channel, reply_code, reply_text):
+        """Invoked by pika when RabbitMQ unexpectedly closes the channel.
+        Channels are usually closed if you attempt to do something that
+        violates the protocol, such as re-declare an exchange or queue with
+        different parameters. In this case, we'll close the connection
+        to shutdown the object.
+
+        :param pika.channel.Channel: The closed channel
+        :param int reply_code: The numeric reason the channel was closed
+        :param str reply_text: The text reason the channel was closed
+
+        """
+        debug('[XMQP] Channel %i was closed: (%s) %s' % (channel, reply_code, reply_text))
+        self._connection.close()
 
     def add_on_cancel_callback(self):
         """Add a callback that will be invoked if RabbitMQ cancels the consumer
@@ -442,6 +416,8 @@ class _XMQP(object):
         Basic.Cancel RPC command.
 
         """
+        self._consuming = False
+        self._closing = True
         if self._channel:
             debug('[XMQP] Sending a Basic.Cancel RPC command to RabbitMQ')
             self._channel.basic_cancel(self.on_cancelok, self._consumer_tag)
@@ -464,8 +440,14 @@ class _XMQP(object):
 
         """
         debug('[XMQP] Closing the channel')
+        self._consuming = False
+        self._closing = True
         if self._channel is not None:
             self._channel.close()
 
-
-_g_xmqp = _XMQP()
+    def close_connection(self):
+        """This method closes the connection to RabbitMQ."""
+        debug('[XMQP] Closing connection')
+        self._consuming = False
+        self._closing = True
+        self._connection.close()
