@@ -277,7 +277,10 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 obj.frags = frags || NaN;
                 //Logger.addObject(item);
                 obj.ready = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0 && !Boolean(item.isOffline);
-                obj.dead = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
+                ///////////////////////////////////////////////////////////////////////////////////////////////
+                // This comment for "obj.dead" is a temp fix for correct BattleState update from BattleMain.as
+                // obj.dead = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
+                ///////////////////////////////////////////////////////////////////////////////////////////////
                 if (obj.dead == true && (!isNaN(obj.curHealth) && obj.curHealth > 0))
                     obj.curHealth = 0;
                 obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);
