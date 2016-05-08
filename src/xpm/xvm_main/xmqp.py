@@ -115,6 +115,7 @@ class _XMQP(object):
         """
         try:
             debug('[XMQP] Stopping')
+            self._connection.ioloop.stop()
             if self.is_consuming:
                 self.stop_consuming()
                 self._connection.ioloop.start()
@@ -126,8 +127,8 @@ class _XMQP(object):
                 #self._connection.ioloop.start()
             self._connection.ioloop.stop()
             debug('[XMQP] Stopped')
-        #except pika_exceptions.ConnectionClosed as ex:
-        #    pass
+        except (pika_exceptions.ChannelClosed, pika_exceptions.ConnectionClosed):
+            debug(traceback.format_exc())
         except Exception as ex:
             err(traceback.format_exc())
 
