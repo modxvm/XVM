@@ -1,4 +1,6 @@
-﻿XVM-6.2.2.1:
+﻿XVM-6.2.2.2-dev:
+
+XVM-6.2.2.1:
   * fixed a client crash during exit from the battle
 
 XVM-6.2.2:
