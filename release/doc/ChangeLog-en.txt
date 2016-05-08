@@ -1,21 +1,24 @@
-﻿XVM-6.2.2:
+﻿XVM-6.2.2.1:
+  * fixed a client crash during exit from the battle
+
+XVM-6.2.2:
   [MAJOR UPDATES]
   * added new sections "battleLabels", "battleLabelsTemplates" for custom labels on battle interface window
   * new xmqp feature for exchanging data between players (experimental):
     new macros:
       {{x-enabled}} - player have xmqp service enabled
       {{x-sense-on}} - player studied "sixth sense" perk
-      {{x-spotted}} - player vehicle is spotted      
+      {{x-spotted}} - player vehicle is spotted
       {{x-fire}} - fire in vehicle
       {{x-overturned}} - player vehicle is overturned
       {{x-drowning}} - player vehicle is drowning
 
-  [CONFIG]    
+  [CONFIG]
   * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
   * added option "hotkeys"/"battleLabelsHotKeys" - use hotkeys in custom labels on battle interface window
   * added option "battle"/"allowXmqpMacrosInPanels" - enable {{x-*}} macros ability in players panels
 
-  [MACROS]  
+  [MACROS]
   * added macros {{chancesStatic}} - win chances at battle (static)
   * added macros {{chancesLive}} - win chances at battle (live)
 
