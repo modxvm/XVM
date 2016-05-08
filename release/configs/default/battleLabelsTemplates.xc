@@ -136,16 +136,16 @@
      └────────────────────────────┴──────────────────────────────────────────────────────────────────────────
     */
     "winChance": {
-      "enabled": true,
+      "enabled": false,
       "updateEvent": "ON_VEHICLE_DESTROYED",
-      "x": 225,
+      "x": 230,
       "y": 2,
-      "width": 75,
-      "height": 22,
-      "autoSize": "center",
+      "width": 50,
+      "height": 20,
+      "autoSize": "left",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
       "currentFieldDefaultStyle": { "color": "0xF4EFE8", "size": 15 },
-      "format": "{{chancesStatic}}&nbsp;/&nbsp;{{chancesLive}}"
+      "format": "{{xvm-stat?{{l10n:Chance to win}}: {{chancesStatic}}{{chancesStatic?&nbsp;/&nbsp;|}}{{chancesLive}}}}"
     },
     "test": {
       "enabled": false,
