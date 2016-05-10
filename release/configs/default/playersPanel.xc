@@ -30,7 +30,7 @@
   },
   // XMQP service activation indicator definition.
   // Шаблон индикатора активации сервиса XMQP.
-  "xmqpService": { "x": 1, "y": 1, "w": 5, "h": 22, "bgColor": "{{alive?{{x-enabled?0xFFBB00|0x595959}}|0x595959}}", "borderColor": "0x000000", "alpha": "{{x-enabled?{{alive?100|50}}|0}}" },
+  "xmqpService": { "x": 1, "y": 1, "w": 5, "h": 22, "bgColor": "{{alive?{{x-enabled?0xFFBB00|0x595959}}|0x595959}}", "borderColor": "0x000000", "alpha": "{{alive?100|50}}" },
   // Parameters of the Players Panels ("ears").
   // Параметры панелей игроков ("ушей").
   "playersPanel": {
