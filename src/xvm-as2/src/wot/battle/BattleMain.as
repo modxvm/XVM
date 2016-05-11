@@ -306,6 +306,7 @@ class wot.battle.BattleMain
 
     private function onHolaEvent(playerId:Number, data:Object)
     {
+        Logger.add("[XMQP] onHolaEvent: " + playerId + " " + JSONx.stringify(data));
         var updated:Boolean = BattleState.update(playerId, {
             x_enabled: true,
             x_sense_on: Boolean(data.sixthSense)
