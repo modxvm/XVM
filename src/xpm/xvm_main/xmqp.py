@@ -168,7 +168,8 @@ class _XMQP(object):
             return
         try:
             if body != 'ok':
-                debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
+                debug('[XMQP] Received message #%s: %s headers=%s' % \
+                    (basic_deliver.delivery_tag, body, str(properties.headers)))
             if self._exchange_correlation_id == properties.correlation_id:
                 self._exchange_name = body
             elif basic_deliver.exchange:
