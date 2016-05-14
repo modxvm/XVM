@@ -131,13 +131,13 @@
       },
       "format": "{{hp}} / {{hp-max}}"
     },
-    // Text field with the XMQP event.
-    // Текстовое поле с событием XMQP.
+    // Text field with the XMQP event marker.
+    // Текстовое поле с маркером события XMQP.
     "xmqpEvent": {
       "name": "xmqp event",           //  название текстового поля, ни на что не влияет
       "visible": true,                //  false - не отображать
       "x": 0,                         //  положение по оси X
-      "y": "{{battletype?-70|{{squad?-70|-55}}}}",  //  положение по оси Y
+      "y": "{{battletype?-71|{{squad?-71|-56}}}}",  //  положение по оси Y
       "alpha": "{{x-overturned?100|{{x-spotted?100|50}}}}",  //  прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       "color": "{{x-overturned?0xFFBB00|{{x-spotted?0xFFBB00|0xFFFFFF}}}}",  //  цвет (допускается использование динамического цвета, см. macros.txt)
       "font": {                       //  параметры шрифта
@@ -152,10 +152,26 @@
         "color": "0x000000",          //  цвет
         "angle": 45,                  //  угол смещения
         "distance": 0,                //  дистанция смещение
-        "size": 4,                    //  размер
-        "strength": 100               //  интенсивность
+        "size": 1,                    //  размер
+        "strength": 150               //  интенсивность
       },
       "format": "{{x-overturned?&#x112;|{{x-spotted?&#x70;|{{x-enabled?{{x-sense-on?&#x70;}}}}}}}}"  //  формат текста. См. описание макросов в macros.txt
+    },
+    // Text field with the highlight of the XMQP event marker if spotted.
+    // Текстовое поле с подсветкой маркера события XMQP при засвете.
+    "xmqpEventHighlight": {
+      "$ref": { "path":"def.xmqpEvent" },
+      "name": "xmqp event highlight", //  название текстового поля, ни на что не влияет
+      "alpha": "{{x-spotted?100|0}}", //  прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "shadow": {                     //  параметры тени
+        "alpha": 80,                  //  прозрачность
+        "color": "0xFFBB00",          //  цвет
+        "angle": 45,                  //  угол смещения
+        "distance": 0,                //  дистанция смещение
+        "size": 6,                    //  размер
+        "strength": 200               //  интенсивность
+      },
+      "format": "<font alpha='#00'>{{x-overturned?&#x112;|{{x-spotted?&#x70;}}}}</font>"  //  формат текста. См. описание макросов в macros.txt
     }
   },
   // Настройки для союзников.
@@ -288,6 +304,7 @@
       ${ "def.tankName" },
       ${ "def.playerName" },
       ${ "def.tankHp" },
+      ${ "def.xmqpEventHighlight" },
       ${ "def.xmqpEvent" }
     ]
   },
