@@ -155,7 +155,7 @@
         "size": 1,                    //  размер
         "strength": 150               //  интенсивность
       },
-      "format": "{{x-overturned?&#x112;|{{x-spotted?&#x70;|{{x-enabled?{{x-sense-on?&#x70;}}}}}}}}"  //  формат текста. См. описание макросов в macros.txt
+      "format": "{{x-overturned?&#x112;|{{x-spotted?&#x70;|{{x-sense-on?&#x70;}}}}}}"  //  формат текста. См. описание макросов в macros.txt
     },
     // Text field with the highlight of the XMQP event marker if spotted.
     // Текстовое поле с подсветкой маркера события XMQP при засвете.
