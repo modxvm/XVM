@@ -165,6 +165,10 @@
     "germany-G25_PzII_Luchs":               {"name": null, "short": null},
     "germany-G26_VK1602":                   {"name": null, "short": null},
     "germany-G27_VK3001P":                  {"name": null, "short": null},
+    // TODO:0.9.15
+    "germany-G32_PzV_PzIV_CN":              {"name": null, "short": null},
+    "germany-G32_PzV_PzIV_ausf_Alfa_CN":    {"name": null, "short": null},
+    //
     "germany-G34_S35_captured":             {"name": null, "short": null},
     "germany-G36_PzII_J":                   {"name": null, "short": null},
     "germany-G39_Marder_III":               {"name": null, "short": null},
@@ -215,8 +219,10 @@
     "germany-PzIV_schmalturm":              {"name": null, "short": null},
     "germany-PzV":                          {"name": null, "short": null},
     "germany-PzV_IGR":                      {"name": null, "short": null},
+    // TODO:0.9.15
     "germany-PzV_PzIV":                     {"name": null, "short": null},
     "germany-PzV_PzIV_ausf_Alfa":           {"name": null, "short": null},
+    //
     "germany-PzV_training":                 {"name": null, "short": null},
     "germany-PzVI":                         {"name": null, "short": null},
     "germany-PzVI_IGR":                     {"name": null, "short": null},
