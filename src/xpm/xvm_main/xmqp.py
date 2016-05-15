@@ -139,7 +139,7 @@ class _XMQP(object):
                 'message': simplejson.dumps(data),
                 'type': XVM.XMQP_COMMAND_BATTLE_MESSAGE,
                 'token': config.token.token})
-            #debug('[XMQP] call: %s' % message)
+            #debug('[XMQP] call: %s' % utils.hide_guid(message))
             self._channel.basic_publish(
                 exchange='',
                 routing_key=self.LOBBY_QUEUE,
@@ -349,7 +349,7 @@ class _XMQP(object):
             'type': XVM.XMQP_EXCHANGE_NAME_QUERY,
             'token': config.token.token,
             'players': self._players})
-        debug(message)
+        #debug(utils.hide_guid(message))
         self._channel.basic_publish(
             exchange='',
             routing_key=self.LOBBY_QUEUE,
