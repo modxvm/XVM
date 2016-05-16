@@ -227,6 +227,7 @@ class NetworkServicesSettings(object):
         self.rating = data.get('rating', 'wgr')
         self.topClansCount = data.get('topClansCount', 50)
         self.flag = data.get('flag', None)
+        self.xmqp = data.get('xmqp', True) if active else False
         # TODO: configure color in the personal cabinet
         self.x_minimap_clicks_color = int(str(get('consts/X_MINIMAP_COLOR', 0x00FF00)), 0)
 

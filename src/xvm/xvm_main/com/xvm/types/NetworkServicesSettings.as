@@ -22,6 +22,7 @@ package com.xvm.types
         public var rating:String = Values.EMPTY_STR;
         public var topClansCount:Number;
         public var flag:String = Values.EMPTY_STR;
+        public var xmqp:Boolean;
         public var x_minimap_clicks_color:Number;
 
         public function NetworkServicesSettings(data:Object)

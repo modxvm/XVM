@@ -823,18 +823,30 @@ class com.xvm.Macros
 
             // xmqp events macros
 
-            // {{x-enabled}}
-            pdata["x-enabled"] = function(o) { return o.x_enabled == true ? 'true' : null; }
-            // {{x-sense-on}}
-            pdata["x-sense-on"] = function(o) { return o.x_sense_on == true ? 'true' : null; }
-            // {{x-fire}}
-            pdata["x-fire"] = function(o) { return o.x_fire == true ? 'true' : null; }
-            // {{x-overturned}}
-            pdata["x-overturned"] = function(o) { return o.x_overturned == true ? 'true' : null; }
-            // {{x-drowning}}
-            pdata["x-drowning"] = function(o) { return o.x_drowning == true ? 'true' : null; }
-            // {{x-spotted}}
-            pdata["x-spotted"] = function(o) { return o.x_spotted == true ? 'true' : null; }
+            if (Config.networkServicesSettings.xmqp)
+            {
+                // {{x-enabled}}
+                pdata["x-enabled"] = function(o) { return o.x_enabled == true ? 'true' : null; }
+                // {{x-sense-on}}
+                pdata["x-sense-on"] = function(o) { return o.x_sense_on == true ? 'true' : null; }
+                // {{x-fire}}
+                pdata["x-fire"] = function(o) { return o.x_fire == true ? 'true' : null; }
+                // {{x-overturned}}
+                pdata["x-overturned"] = function(o) { return o.x_overturned == true ? 'true' : null; }
+                // {{x-drowning}}
+                pdata["x-drowning"] = function(o) { return o.x_drowning == true ? 'true' : null; }
+                // {{x-spotted}}
+                pdata["x-spotted"] = function(o) { return o.x_spotted == true ? 'true' : null; }
+            }
+            else
+            {
+                pdata["x-enabled"] = null;
+                pdata["x-sense-on"] = null;
+                pdata["x-fire"] = null;
+                pdata["x-overturned"] = null;
+                pdata["x-drowning"] = null;
+                pdata["x-spotted"] = null;
+            }
         }
     }
 

@@ -54,6 +54,7 @@ package xvm.battleloading
                 "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +
                 "                               useStandardMarkers=" + Config.config.markers.useStandardMarkers + "\n" +
                 "                               servicesActive=" + Config.networkServicesSettings.servicesActive + "\n" +
+                "                               xmqp=" + Config.networkServicesSettings.xmqp + "\n" +
                 "                               statBattle=" + Config.networkServicesSettings.statBattle);
         }
 
