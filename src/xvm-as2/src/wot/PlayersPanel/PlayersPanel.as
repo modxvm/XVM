@@ -130,10 +130,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Events.XMQP_FIRE, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, invalidate);
-        if (Config.config.battle.allowXmqpMacrosInPanels)
-        {
-            // TODO: heavy xmqp events here
-        }
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
     }
 
