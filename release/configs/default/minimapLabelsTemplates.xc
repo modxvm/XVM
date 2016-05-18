@@ -89,7 +89,6 @@
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "squadman", "teamKiller", "spotted", "alive" ],
       "format": "<font face='xvm' size='8' color='#FFBB00'>{{x-spotted?&#x70;&nbsp;}}{{x-overturned?&#x112;}}</font>",
-      "alpha": 100,
       "x": 3,
       "y": -7
     },
