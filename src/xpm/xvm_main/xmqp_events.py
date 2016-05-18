@@ -74,6 +74,14 @@ def _as_xmqp_event(playerId, data, targets=TARGETS.ALL):
     if not battle:
         return
 
+    if not data:
+        warn('[XMQP] no data')
+        return
+
+    if 'event' not in data:
+        warn('[XMQP] no event in data: %s' % str(data))
+        return
+
     event = data['event']
     del data['event']
     data = None if not data else unicode_to_ascii(data)
