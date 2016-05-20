@@ -142,9 +142,6 @@
   },
   "captureBar": {
     //"enabled": false,
-    //"allyColor": "0xFFFF00",
-    //"enemyColor": "0x00FFFF",
-    //"ally": { "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>{0} {{extra}}</font>" },
     "__stub__": null
   },
   "battleLoading": {

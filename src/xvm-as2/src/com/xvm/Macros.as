@@ -764,6 +764,25 @@ class com.xvm.Macros
         m_globals["my-level"] = vdata.level;
         // {{my-rlevel}}
         m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+
+
+        // Capture bar
+
+        // {{cap.points}}
+        // {{cap.tanks}}
+        // {{cap.time}}
+        // {{cap.time-sec}}
+        m_globals["cap"] = function(o:Object)
+        {
+            switch (o.__subname)
+            {
+                case "points": return isNaN(o.points) ? NaN : o.points;
+                case "tanks": return isNaN(o.vehiclesCount) ? NaN : o.vehiclesCount;
+                case "time":  return o.timeLeft;
+                case "time-sec": return isNaN(o.timeLeftSec) ? NaN : o.timeLeftSec;
+            }
+            return null;
+        }
     }
 
     private function _RegisterGlobalMacrosDataDelayed(eventName: String)

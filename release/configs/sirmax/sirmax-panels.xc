@@ -25,12 +25,13 @@
       //{ "w": 1, "h": 23, "bgColor": "0xFFFFFF" },
       //{ "x": 100, "scaleX": 1, "src": "img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png" },
 
-      { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
+      //{ "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
+      ${"../default/playersPanel.xc":"xmqpServiceMarker"},
+      { "x": 6,  "y": 1, "align": "center", "bindToIcon": true, "alpha": "{{x-enabled?{{x-sense-on?70|30}}|0}}", "format": "<font color='#FFFFFF' face='xvm' size='23'>&#x70;</font>", "shadow": {} },
       { "x": "{{r_size=2?13|{{r_size=4?16|19}}}}", "y": 0, "valign": "center", "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font>", "shadow": {} },
       { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "valign": "center", "h": 21, "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
       { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
       { "x": -75, "y": 5, "bindToIcon": true, "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png" },
-      { "x": 6,  "y": 1, "align": "center", "bindToIcon": true, "alpha": "{{x-enabled?{{x-sense-on?70|30}}|0}}", "format": "<font color='#FFFFFF' face='xvm' size='23'>&#x70;</font>", "shadow": {} },
       {}
     ],
     "extraFieldsRight": [

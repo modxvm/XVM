@@ -278,6 +278,7 @@ class wot.battle.BattleMain
     // ctx = _root
     public function as_xvm_onXmqpEvent(playerId:Number, event:String, data:Object)
     {
+        //Logger.add(event + " " + playerId + " " + JSONx.stringify(data));
         switch (event)
         {
             case Events.XMQP_HOLA:
@@ -294,6 +295,9 @@ class wot.battle.BattleMain
                 break;
             case Events.XMQP_MINIMAP_CLICK:
                 GlobalEventDispatcher.dispatchEvent( { type: Events.XMQP_MINIMAP_CLICK, value: playerId, data: data } );
+                break;
+            case Events.XMQP_DEATH_ZONE_TIMER:
+                // TODO
                 break;
             default:
                 Logger.add("WARNING: unknown xmqp event: " + event);
@@ -341,6 +345,11 @@ class wot.battle.BattleMain
 
             case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
                 updated = BattleState.update(playerId, { x_drowning: data.enable } );
+                break;
+
+            case Defines.VEHICLE_MISC_STATUS_ALL:
+                updated = BattleState.update(playerId, { x_overturned: data.enable } );
+                updated = BattleState.update(playerId, { x_drowning: data.enable } ) || updated;
                 break;
 
             default:

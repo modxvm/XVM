@@ -1,36 +1,11 @@
 /**
+ * Capture progress bar
+ *
  * @author ilitvinov
  */
 import com.xvm.*;
 import flash.filters.*;
-import wot.TeamBasesPanel.CapBarModel.*;
-import wot.TeamBasesPanel.*;
-
-/**
- * Capture progress bar
- *
- * Extra features implemented:
- * ) Time left to capture point
- * ) Number of capturing tanks
- * ) Style customization
- *
- * Features are based on
- * time passed and number of captured points between updates.
- *
- * possible todo:
- * ) Separate capture line for each capturer. Hard.
- */
-
-/**
- * Cap block.
- *
- * updateProgress is also called when capture is blocked at Encounter battle type.
- * Situation occurs when opposing tanks both stand on shared cap point.
- * Сapture bar freezes and blinks white. Cap points already captured remain.
- * captureInterrupt() function at original TeamBasesPanel class
- * is called twice in a seconds while block continues.
- * updateProgress() is also called twice a second.
- */
+import flash.geom.Rectangle;
 
 class wot.TeamBasesPanel.CaptureBar
 {
@@ -48,9 +23,9 @@ class wot.TeamBasesPanel.CaptureBar
         CaptureBarCtor();
     }
 
-    function updateProgress()
+    function updateCaptureData()
     {
-        return this.updateProgressImpl.apply(this, arguments);
+        return this.updateCaptureDataImpl.apply(this, arguments);
     }
 
     function updateTitle()
@@ -66,40 +41,26 @@ class wot.TeamBasesPanel.CaptureBar
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
-    private var m_capSpeed:CapSpeed; // calculates capture speed
-    private var m_oneTankSpeed:OneTankSpeed; // define cap min cap speed based on map type
-    private var m_macro:Macro;       // defines user presentable html text
-    private var m_capColor:String;
+    private var cfg:Object;
     private var m_captured:Boolean;
-    private var m_rate:Number;
-    private var m_baseNumText:String;
+    private var m_baseNumText:String = "";
 
-    /** Ugly hack to allow one tick earlier speed calculation */
-    private var m_startPoints:Number
-
-   /**
-    * CaptureBar() constructor is called once per battle.
-    * Not once per capture bar creation on stage.
-    * See this.start()
-    */
     public function CaptureBarCtor()
     {
-        Utils.TraceXvmModule("TeamBasesPanel");
+        //Logger.add("CaptureBar");
 
-        m_oneTankSpeed = new OneTankSpeed();
-        m_captured = false;
+        cfg = Config.config.captureBar[type];
 
         // Colorize capture bar
-        var color = wrapper.m_colorFeature == "green" ? CapConfig.allyColor : CapConfig.enemyColor;
+        var color = cfg.color;
 
         //Logger.add("c: " + color);
 
-        if (color != null && isNaN(color))
+        if (color != null && !isNaN(color))
             color = parseInt(color);
 
         if (color == null || isNaN(color))
         {
-            var type = wrapper.m_colorFeature == "green" ? "ally" : "enemy";
             color = Config.config.markers.useStandardMarkers
                 ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
                 : ColorsManager.getSystemColor(type, false);
@@ -107,180 +68,124 @@ class wot.TeamBasesPanel.CaptureBar
 
         GraphicsUtil.colorize(wrapper.m_bgMC, color, 1);
         GraphicsUtil.colorize(wrapper.captureProgress.m_barMC, color, 1);
-    }
 
-   /**
-    * Cant be inserted to constructor easily.
-    * Cant be passed as argument externally easily.
-    * Thus called straight by extended TeamBasesPanel class.
-    */
-    public function start(startPoints:Number, capColor:String, rate:Number, baseNumText:String):Void
-    {
-        //Logger.addObject(wrapper, 2);
-
-        /** Ugly hack to allow one tick earlier speed calculation */
-        m_startPoints = startPoints;
-
-       /** colorFeature respects color blind */
-        m_capColor = capColor;
-
-        m_rate = rate;
-        m_baseNumText = baseNumText;
-
-       /**
-        * autoSize extends field vertically
-        * so lower font parts are not being cut
-        * when font size does not fit field height.
-        */
-        wrapper.m_titleTF.autoSize = "center";
-        wrapper.m_timerTF.autoSize = "center";
-
-        wrapper.m_titleTF.selectable = false;
-        wrapper.m_timerTF.selectable = false;
-
-       /**
-        * Adjust distance from primary upper field so
-        * no overlapping occurs when font size is high.
-        */
-        wrapper.m_titleTF._y -= CapConfig.primaryTitleOffset;
-
-        /** Calculates capture speed */
-        m_capSpeed = new CapSpeed();
-
-        /** Substitutes macro text like {{speed}} with corresponding value to present at user interface */
-        m_macro = new Macro(startPoints, m_capColor, m_baseNumText);
-
-       /**
-        * At this moment TeamBasesPanel called "add" method.
-        * Shadow style and new macro should be defined already.
-        * If not, than original WG data will be displayed to user before first update tick.
-        */
-        wrapper.m_titleTF.filters = [getShadowFilter(capColor)];
-        wrapper.m_timerTF.filters = [getShadowFilter(capColor)];
-        wrapper.m_titleTF.htmlText = m_macro.getPrimaryText();
-        wrapper.m_timerTF.htmlText = m_macro.getSecondaryText();
-    }
-
-   /**
-    * Called by TeamBasesPanel original WG class
-    */
-    public function updateProgressImpl(newPointsVal:Number):Void
-    {
-        if (!CapConfig.enabled)
+        if (Config.config.captureBar.enabled)
         {
-            base.updateProgress(newPointsVal);
-            return;
+            //wrapper.scrollRect = new Rectangle(20, 10, 100, 30);
+
+            wrapper.m_titleTF._x -= 100;
+            wrapper.m_titleTF._width += 200;
+            setupTextField(wrapper.m_titleTF, "title");
+
+            setupTextField(wrapper.m_playersTF, "players");
+
+            setupTextField(wrapper.m_timerTF, "timer");
+
+            wrapper.m_pointsTF._x -= 175;
+            wrapper.m_pointsTF._width += 350;
+            setupTextField(wrapper.m_pointsTF, "points");
         }
-
-        if (m_captured)
-            return;
-
-        m_capSpeed.calculate(newPointsVal, wrapper.m_points || m_startPoints);
-
-        base.updateProgress(newPointsVal); // modifies m_point;
-
-        //prepare text strings
-        m_macro.update(isSituationNormal, capSecondsLeft, timeLeftMinSec, capturersNum, newPointsVal, m_capSpeed.getSpeed());
-
-        wrapper.m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
-        wrapper.m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
     }
 
-    /**
-     * OVERRIDE
-     * Called from TeamBasesPanel.setCaptured, when point becomes fully captured (3-5 seconds after 100 percent).
-     * @param value
-     */
-    function updateTitleImpl(value)
-    {
-        if (!CapConfig.enabled)
-        {
-            base.updateTitle(value);
-            return;
-        }
-
-        m_captured = true;
-
-        wrapper.m_titleTF.htmlText = m_macro.getCaptureDoneText();
-        wrapper.m_timerTF.htmlText = "";
-    }
-
-    /**
-     * OVERRIDE
-     */
+    // override
     function configUIImpl()
     {
+        //Logger.add("CaptureBar.configUI");
+
         base.configUI();
-        updateProgressImpl(wrapper.m_points);
+
+        if (Config.config.captureBar.enabled)
+        {
+            m_baseNumText = DAAPI.py_xvm_captureBarGetBaseNumText(wrapper.id);
+            updateTextFields();
+        }
     }
 
-    // -- Private
-
-    private function getShadowFilter():DropShadowFilter
+    // override
+    public function updateCaptureDataImpl()
     {
-        var alpha = CapConfig.shadowAlpha(m_capColor);
-        if (!alpha)
-            return null;
-        var blur = CapConfig.shadowBlur(m_capColor);
-        if (!blur)
-            return null;
-        var strength = CapConfig.shadowStrength(m_capColor);
-        if (!strength)
-            return null;
-        return new DropShadowFilter(
-                0, // distance
-                0, // angle
-                CapConfig.shadowColor(m_capColor),
-                // DropShadowFilter accepts alpha be from 0 to 1.
-                // 90 at default config.
-                alpha / 100,
-                blur,
-                blur,
-                strength);
+        //Logger.add("CaptureBar.updateCaptureData: " + arguments);
+
+        base.updateCaptureData.apply(base, arguments);
+
+        if (Config.config.captureBar.enabled)
+        {
+            updateTextFields();
+        }
     }
 
-   /**
-    * Check if situation is complicated with extremal conditions.
-    * Extremal values should not be presented to user.
-    */
-    private function get isSituationNormal():Boolean
+    // override
+    function updateTitleImpl()
     {
-        return (m_capSpeed.getSpeed() > 0 && capturersNum > 0);
+        //Logger.add("CaptureBar.updateTitle: " + arguments);
+
+        base.updateTitle.apply(base, arguments);
+
+        if (Config.config.captureBar.enabled)
+        {
+            m_captured = true;
+            updateTextFields();
+        }
     }
 
-    private function get capturersNum():Number
+    // PRIVATE
+
+    private function get type():String
     {
-        var caps:Number = Math.round(m_capSpeed.getSpeed() / m_oneTankSpeed.getSpeed());
-
-       /**
-        * Maximum capturers number at standart battle type is 3.
-        * Calculating more than 3 caps at encounter battle type is too complicated.
-        */
-        if (caps > 3)
-            caps = 3;
-
-        return caps;
+        return wrapper.m_colorFeature == "green" ? "ally" : "enemy";
     }
 
-    /**
-     * Time format
-     * 125 -> 2:05
-     */
-    private function get timeLeftMinSec():String
+    private function setupTextField(tf:TextField, name:String):Void
     {
-        var min:Number=Math.floor((capSecondsLeft%3600)/60);
-        var sec:Number=Math.floor((capSecondsLeft%3600)%60);
-        return min.toString() + ":" +
-        (sec < 10 ? "0" + sec.toString() : sec.toString());
+        var c = cfg[name];
+        //tf.border = true; tf.borderColor = 0xFF0000;
+        tf.selectable = false;
+        tf._x += Macros.FormatGlobalNumberValue(c.x);
+        tf._y += Macros.FormatGlobalNumberValue(c.y);
+        tf.filters = [new DropShadowFilter(
+            0, // distance
+            0, // angle
+            Macros.FormatGlobalNumberValue(c.shadow.color),
+            Macros.FormatGlobalNumberValue(c.shadow.alpha) / 100.0,
+            Macros.FormatGlobalNumberValue(c.shadow.blur),
+            Macros.FormatGlobalNumberValue(c.shadow.blur),
+            Macros.FormatGlobalNumberValue(c.shadow.strength))];
     }
 
-    private function get capSecondsLeft():Number
+    private function updateTextFields():Void
     {
-        return Math.round(capPointsLeft / m_capSpeed.getSpeed());
-    }
+        var o = {
+            points: wrapper.m_points,
+            vehiclesCount: wrapper.m_vehiclesCount,
+            timeLeft: wrapper.m_timeLeft,
+            timeLeftSec: Utils.timeStrToSec(wrapper.m_timeLeft)
+        };
 
-    private function get capPointsLeft():Number
-    {
-        return 100 - wrapper.m_points;
+        var value:String;
+        var name = m_captured ? "done" : "format";
+
+        value = Macros.Format(null, cfg.title[name], o);
+        value = Strings.substitute(value, [ m_baseNumText ]);
+        wrapper.m_titleTF.htmlText = value;
+
+        value = Macros.Format(null, cfg.players[name], o);
+        value = Strings.substitute(value, [ m_baseNumText ]);
+        if (value == "")
+        {
+            // TODO: hide icon
+        }
+        wrapper.m_playersTF.htmlText = value;
+
+        value = Macros.Format(null, cfg.timer[name], o);
+        value = Strings.substitute(value, [ m_baseNumText ]);
+        if (value == "")
+        {
+            // TODO: hide icon
+        }
+        wrapper.m_timerTF.htmlText = value;
+
+        value = Macros.Format(null, cfg.points[name], o);
+        value = Strings.substitute(value, [ m_baseNumText ]);
+        wrapper.m_pointsTF.htmlText = value;
     }
 }

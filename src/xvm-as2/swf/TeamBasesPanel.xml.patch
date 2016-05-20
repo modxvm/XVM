@@ -47,13 +47,6 @@
 +          <data>eNrt2TENwDAMBEAUUThEpRCpyLsXTSG4SyZDeN1wFF5v/6yqCRBiNBdAkNXcAEF28wCE+Y5X5gPhPc79DiT/4+wwQPKu+gO/5L3C</data>
          </data>
        </DefineBitsLossless2>
-@@ -19971,5 +19974,5 @@
-           <PushData>
-             <items>
--              <StackString value="net.wargaming.ingame.TeamBasesPanel"/>
-+              <StackString value="wot.wrapper.TeamBasesPanel.TeamBasesPanel"/>
-             </items>
-           </PushData>
 @@ -19997,5 +20000,5 @@
            <PushData>
              <items>

@@ -7,9 +7,9 @@ class wot.wrapper.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.Capture
         super();
 
         var OVERRIDE_FUNCTIONS:Array = [
-            "updateProgress",
-            "updateTitle",
-            "configUI"
+            "configUI",
+            "updateCaptureData",
+            "updateTitle"
         ];
         Wrapper.override(this, new wot.TeamBasesPanel.CaptureBar(this, super), OVERRIDE_FUNCTIONS);
     }

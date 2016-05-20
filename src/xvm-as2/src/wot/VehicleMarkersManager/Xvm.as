@@ -766,6 +766,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
 
     public function as_xvm_onXmqpEvent(event:String, data_str:String)
     {
+        //Logger.add(event + " " + m_playerId + " " + data_str);
         var data:Object = data_str ? JSONx.parse(data_str) : null;
         switch (event)
         {
@@ -780,6 +781,9 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
                 break;
             case Events.XMQP_SPOTTED:
                 onSpottedEvent();
+                break;
+            case Events.XMQP_DEATH_ZONE_TIMER:
+                // TODO
                 break;
             default:
                 Logger.add("WARNING: unknown xmqp event: " + event);
@@ -827,13 +831,14 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
 
     private function onVehicleTimerEvent(data:Object)
     {
+        var updated:Boolean = false;
         switch (data.code)
         {
             case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
                 if (m_x_overturned != data.enable)
                 {
                     m_x_overturned = data.enable;
-                    XVMUpdateStyle();
+                    updated = true;
                 }
                 break;
 
@@ -841,13 +846,29 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
                 if (m_x_drowning != data.enable)
                 {
                     m_x_drowning = data.enable;
-                    XVMUpdateStyle();
+                    updated = true;
+                }
+                break;
+
+            case Defines.VEHICLE_MISC_STATUS_ALL:
+                if (m_x_drowning != data.enable)
+                {
+                    m_x_drowning = data.enable;
+                    updated = true;
+                }
+                if (m_x_overturned != data.enable)
+                {
+                    m_x_overturned = data.enable;
+                    updated = true;
                 }
                 break;
 
             default:
                 Logger.add("WARNING: unknown vehicle timer code: " + data.code);
         }
+
+        if (updated)
+            XVMUpdateStyle();
     }
 
     // {{x-spotted}}

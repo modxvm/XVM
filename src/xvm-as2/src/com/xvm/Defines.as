@@ -155,6 +155,7 @@ class com.xvm.Defines
     public static var SPOTTED_STATUS_ANY:Number =        0x06;
 
     // VEHICLE_MISC_STATUS
+    public static var VEHICLE_MISC_STATUS_ALL:String = "ALL";
     public static var VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:Number = 3;
     public static var VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:Number = 4;
 

@@ -28,7 +28,8 @@
       },
       ${ "../default/minimapLabelsTemplates.xc":"def.nickLost" },
       ${ "../default/minimapLabelsTemplates.xc":"def.vtypeDead" },
-      ${ "../default/minimapLabelsTemplates.xc":"def.nickDead" }
+      ${ "../default/minimapLabelsTemplates.xc":"def.nickDead" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.xmqpEvent" }
     ]
   }
 }

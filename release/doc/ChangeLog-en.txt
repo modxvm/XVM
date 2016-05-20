@@ -14,6 +14,8 @@
                 return None
             x = 100 if x == 'XX' else int(x)
             return xvm2sup[max(0, min(100, x-1))]
+  * config section "captureBar" completely reworked, without backward compatibility
+  * capture bar macros names was changed, formatting possibilities added
 
   [CONFIG]    
   * removed option "camera"/"noScroll" - implemented in client

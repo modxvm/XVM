@@ -303,7 +303,7 @@ class com.xvm.Utils
      * Create Extended CSS
      */
     public static function createCSSExtended(className:String, color:Number, fontName:String,
-        fontSize:Number, align:String, bold:Boolean, italic:Boolean, underline:Boolean, display:String, leading:Number, 
+        fontSize:Number, align:String, bold:Boolean, italic:Boolean, underline:Boolean, display:String, leading:Number,
         marginLeft:Number, marginRight:Number):String
     {
             return "." + className + " {" +
@@ -362,27 +362,27 @@ class com.xvm.Utils
     /**
      *   (Get relative to screen resolution x or y coordinates for using when applying horizontal or vertical align to object
      */
-     public static function HVAlign(align, WidthOrHeight: Number, isValign: Boolean) 
+     public static function HVAlign(align, WidthOrHeight: Number, isValign: Boolean)
         {
         //'align' allows only 'left', 'right', 'center' values for horizontal alignment and 'top', 'bottom', 'middle' or "center" for vertical
-            switch (align) {  
-                case 'left':  
-                    return 0;  
-                case 'right' :  
-                    return Stage.width - WidthOrHeight;    
-                case 'center': 
-                    if (!isValign){ 
-                      return (Stage.width/2) - (WidthOrHeight/2);  
+            switch (align) {
+                case 'left':
+                    return 0;
+                case 'right' :
+                    return Stage.width - WidthOrHeight;
+                case 'center':
+                    if (!isValign){
+                      return (Stage.width/2) - (WidthOrHeight/2);
                     }
                     else {
                       return (Stage.height/2) - (WidthOrHeight/2);
                     }
-                case 'top':  
-                    return 0;  
-                case 'bottom':  
-                    return Stage.height - WidthOrHeight;  
-                case 'middle':  
-                    return (Stage.height/2) - (WidthOrHeight/2);  
+                case 'top':
+                    return 0;
+                case 'bottom':
+                    return Stage.height - WidthOrHeight;
+                case 'middle':
+                    return (Stage.height/2) - (WidthOrHeight/2);
             }
 
         }
@@ -508,5 +508,17 @@ class com.xvm.Utils
 
         return "[" + ex.at + "] " + Strings.trim(ex.name) + ": " + Strings.trim(ex.message) + "\n  " +
             head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
+    }
+
+    public static function timeStrToSec(str:String):Number
+    {
+        var p = str.split(':');
+        var s = 0;
+        var m = 1;
+        while (p.length > 0) {
+            s += m * parseInt(p.pop(), 10);
+            m *= 60;
+        }
+        return s;
     }
 }
