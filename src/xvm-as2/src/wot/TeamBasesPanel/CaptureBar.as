@@ -113,8 +113,8 @@ class wot.TeamBasesPanel.CaptureBar
 
         if (!Config.config.captureBar.enabled)
         {
-            wrapper.m_playersTF.htmlText = "<font face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
-            wrapper.m_timerTF.htmlText = "<font face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
+            wrapper.m_playersTF.htmlText = "<font size='15' face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
+            wrapper.m_timerTF.htmlText = "<font size='15' face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
         }
         else
         {
@@ -132,8 +132,8 @@ class wot.TeamBasesPanel.CaptureBar
 
         if (!Config.config.captureBar.enabled)
         {
-            wrapper.m_playersTF.htmlText = "<font face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
-            wrapper.m_timerTF.htmlText = "<font face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
+            wrapper.m_playersTF.htmlText = "<font size='15' face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
+            wrapper.m_timerTF.htmlText = "<font size='15' face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
         }
         else
         {
