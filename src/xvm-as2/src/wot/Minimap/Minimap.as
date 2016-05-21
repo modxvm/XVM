@@ -150,13 +150,13 @@ class wot.Minimap.Minimap
     {
         //Logger.addObject(e, 3, "onXmqpMinimapClickEvent");
         var color:Number;
-        if (Macros.FormatGlobalBooleanValue(Config.config.xmqp.useRatingForMinimapClicksColor, true))
+        if (!Config.config.xmqp.minimapClicksColor || Config.config.xmqp.minimapClicksColor == "")
         {
-            color = Number(Macros.FormatByPlayerId(e.value, "{{c:xr}}").split("#").join("0x")) || 0xFFFFFF;
+            color = e.data.color;
         }
         else
         {
-            color = e.data.color;
+            color = Number(Macros.FormatByPlayerId(e.value, Config.config.xmqp.minimapClicksColor).split("#").join("0x")) || e.data.color;
         }
 
         var mc:MovieClip = wrapper.mapHit.createEmptyMovieClip(null, wrapper.mapHit.getNextHighestDepth());

@@ -10,8 +10,8 @@
     // Display time for minimap clicks (sec)
     // Время отображения кликов по миникарте (сек)
     "minimapClicksTime": 5,
-    // Minimap clicks colored by user statistics ({{c:xr}} macro value)
-    // Клики по миникарте покрашены в цвет рейтинга пользователя (значение макроса {{c:xr}})
-    "useRatingForMinimapClicksColor": true
+    // Color for minimap clicks (null for user colors)
+    // Цвет для кликов по миникарте (null для пользовательских цветов)
+    "minimapClicksColor": "{{c:xr}}"
   }
 }

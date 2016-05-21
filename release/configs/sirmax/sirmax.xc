@@ -335,6 +335,10 @@
       "__stub__": null
     }
   },
+  "xmqp": {
+    //"minimapClicksColor": null,
+    "minimapClicksTime": 7
+  },
   "consts": {
       "VM_COEFF_VMM_DEAD": 0.75
   }
