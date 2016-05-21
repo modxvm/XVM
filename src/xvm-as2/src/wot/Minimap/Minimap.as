@@ -4,6 +4,7 @@
  */
 
 import com.xvm.*;
+import com.xvm.DataTypes.*;
 import com.xvm.events.*;
 import wot.Minimap.*;
 
@@ -148,9 +149,21 @@ class wot.Minimap.Minimap
     private function onXmqpMinimapClickEvent(e:Object)
     {
         //Logger.addObject(e, 3, "onXmqpMinimapClickEvent");
-        var canvas:MovieClip = wrapper.mapHit;
-        canvas.lineStyle(3, e.data.color, 80);
+        var color:Number;
+        if (Macros.FormatGlobalBooleanValue(Config.config.xmqp.useRatingForMinimapClicksColor, true))
+        {
+            color = Number("0x" + Macros.FormatByPlayerId(e.value, "{{c:xr}}"));
+        }
+        else
+        {
+            color = e.data.color;
+        }
+
+        var mc:MovieClip = wrapper.mapHit.createEmptyMovieClip(null, wrapper.mapHit.getNextHighestDepth());
+        var canvas:MovieClip = mc;
+        canvas.lineStyle(3, color, 80);
         canvas.moveTo(e.data.x, e.data.y);
         canvas.lineTo(e.data.x + 0.1, e.data.y + 0.1);
+        _global.setTimeout(function() { mc.removeMovieClip() }, Config.config.xmqp.minimapClicksTime * 1000);
     }
 }

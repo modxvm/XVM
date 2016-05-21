@@ -888,7 +888,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         }
         var $this = this;
         _sixSenseIndicatorTimeoutId =
-            _global.setTimeout(function() { $this.onSpottedEventDone(); }, Config.config.consts.X_SPOTTED_TIME * 1000);
+            _global.setTimeout(function() { $this.onSpottedEventDone(); }, Config.config.xmqp.spottedTime * 1000);
     }
 
     private function onSpottedEventDone()

@@ -204,9 +204,7 @@ def _constsSection():
         'VM_COEFF_VMM_DEAD': 0.50,  # vehicle markers manager (dead)
         'VM_COEFF_MM_PLAYER': 0.93, # minimap (player)
         'VM_COEFF_MM_BASE': 0.8,    # minimap (base)
-        'VM_COEFF_FC': 0.93,        # frag correlation
-        'X_SPOTTED_TIME': 9,        # display time for {{x-spotted}} macro
-        'X_MINIMAP_COLOR': 0x00FF00 # color for minimap clicks
+        'VM_COEFF_FC': 0.93         # frag correlation
     }
 
 
@@ -229,7 +227,7 @@ class NetworkServicesSettings(object):
         self.flag = data.get('flag', None)
         self.xmqp = data.get('xmqp', True) if active else False
         # TODO: configure color in the personal cabinet
-        self.x_minimap_clicks_color = int(str(get('consts/X_MINIMAP_COLOR', 0x00FF00)), 0)
+        self.x_minimap_clicks_color = int(str(data.get('minimap_click_color', 0x00FF00)), 0)
 
 networkServicesSettings = NetworkServicesSettings()
 

@@ -379,7 +379,7 @@ class wot.battle.BattleMain
         }
         var $this = this;
         _sixSenseIndicatorTimeoutIds[playerId] =
-            _global.setTimeout(function() { $this.onSpottedEventDone(playerId); }, Config.config.consts.X_SPOTTED_TIME * 1000);
+            _global.setTimeout(function() { $this.onSpottedEventDone(playerId); }, Config.config.xmqp.spottedTime * 1000);
     }
 
     private function onSpottedEventDone(playerId:Number)

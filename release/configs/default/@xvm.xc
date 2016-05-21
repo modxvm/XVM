@@ -179,5 +179,9 @@
 
   // Extra sounds settings
   // Настройки дополнительных звуков
-  "sounds": ${"sounds.xc":"sounds"}
+  "sounds": ${"sounds.xc":"sounds"},
+
+  // XMQP services settings
+  // Настройки сервисов XMQP
+  "xmqp": ${"xmqp.xc":"xmqp"}
 }

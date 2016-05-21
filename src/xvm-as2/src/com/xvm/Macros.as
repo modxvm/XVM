@@ -14,6 +14,11 @@ class com.xvm.Macros
         return _instance._Format(pname, format, options);
     }
 
+    public static function FormatByPlayerId(playerId:Number, format:String, options:Object):String
+    {
+        return _instance._Format(_instance.m_playerId_to_pname[playerId], format, options);
+    }
+
     public static function FormatNumber(pname:String, cfg:Object, fieldName:String, obj:Object, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
     {
         var value = cfg[fieldName];
@@ -117,6 +122,7 @@ class com.xvm.Macros
     private var m_macros_cache:Object = { };
     private var m_macros_cache_global:Object = { };
     private var m_dict:Object = { }; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+    private var m_playerId_to_pname:Object = { };
     private var m_globals:Object = { };
     private var m_contacts:Object = { };
 
@@ -818,6 +824,7 @@ class com.xvm.Macros
 
         if (!pdata.hasOwnProperty("name"))
         {
+            m_playerId_to_pname[playerId] = pname;
             var name:String = getCustomPlayerName(pname, playerId);
             var clanIdx:Number = name.indexOf("[");
             if (clanIdx > 0)
