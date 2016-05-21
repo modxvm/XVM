@@ -34,7 +34,7 @@ from gui.shared.gui_items.Vehicle import Vehicle
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.TechTree import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.Research import Research
-# TODO: 0.9.15
+# TODO:0.9.15
 #from gui.Scaleform.daapi.view.lobby.customization.VehicleCustomization import VehicleCustomization
 from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
 from gui.Scaleform.daapi.view.lobby.PremiumWindow import PremiumWindow
@@ -82,7 +82,7 @@ def onXfwCommand(cmd, *args):
             global gold_enable
             gold_enable = not args[0]
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
-            # TODO: 0.9.15
+            # TODO:0.9.15
             #handlersInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler)
             handlersInvalidate('_PremiumWindow__onUpdateHandler()', PremiumWindow_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
@@ -208,7 +208,7 @@ def Research_dispose(self, *args, **kwargs):
     global Research_handler
     Research_handler = None
 
-# TODO: 0.9.15
+# TODO:0.9.15
 #@registerEvent(VehicleCustomization, '_populate')
 #def VehicleCustomization_populate(self, *args, **kwargs):
 #    global VehicleCustomization_handler

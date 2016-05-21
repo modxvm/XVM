@@ -44,6 +44,7 @@ def onStateBattle():
 
 def onXmqpMessage(e):
     try:
+        #debug('onXmqpMessage: ' + str(e.ctx))
         body = e.ctx.get('body', '')
         event_type = body['event']
         global _event_handlers

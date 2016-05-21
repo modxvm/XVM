@@ -179,7 +179,7 @@ def ProfileTechniqueWindow_RequestData(base, self, data):
         base(self, data)
 
 
-# TODO: 0.9.15: remove?
+# TODO:0.9.15: remove?
 ## stereoscope
 #@registerEvent(AmmunitionPanel, 'highlightParams')
 #def AmmunitionPanel_highlightParams(self, type):
