@@ -47,6 +47,18 @@
 +          <data>eNrt2TENwDAMBEAUUThEpRCpyLsXTSG4SyZDeN1wFF5v/6yqCRBiNBdAkNXcAEF28wCE+Y5X5gPhPc79DiT/4+wwQPKu+gO/5L3C</data>
          </data>
        </DefineBitsLossless2>
+@@ -737,11 +740,6 @@
+               </Glow>
+             </filters>
+           </PlaceObject3>
+-          <PlaceObject2 replace="0" depth="11" objectID="25">
+-            <transform>
+-              <Transform transX="0" transY="0"/>
+-            </transform>
+-          </PlaceObject2>
+           <ShowFrame/>
+           <End/>
+         </tags>
 @@ -19997,5 +20000,5 @@
            <PushData>
              <items>

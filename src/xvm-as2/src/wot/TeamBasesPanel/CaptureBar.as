@@ -73,16 +73,28 @@ class wot.TeamBasesPanel.CaptureBar
         {
             //wrapper.scrollRect = new Rectangle(20, 10, 100, 30);
 
-            wrapper.m_titleTF._x -= 100;
-            wrapper.m_titleTF._width += 200;
+            // align: center
+            wrapper.m_titleTF._x -= 300;
+            wrapper.m_titleTF._width += 600;
+            wrapper.m_titleTF._height = 600;
             setupTextField(wrapper.m_titleTF, "title");
 
+            // align: right
+            wrapper.m_playersTF._x -= 200;
+            wrapper.m_playersTF._width += 200;
+            wrapper.m_playersTF._height = 600;
             setupTextField(wrapper.m_playersTF, "players");
 
+            // align: left
+            wrapper.m_timerTF._x -= 20;
+            wrapper.m_timerTF._width += 200;
+            wrapper.m_timerTF._height = 600;
             setupTextField(wrapper.m_timerTF, "timer");
 
-            wrapper.m_pointsTF._x -= 175;
-            wrapper.m_pointsTF._width += 350;
+            // align: center
+            wrapper.m_pointsTF._x -= 300;
+            wrapper.m_pointsTF._width += 600;
+            wrapper.m_pointsTF._height = 600;
             setupTextField(wrapper.m_pointsTF, "points");
         }
     }

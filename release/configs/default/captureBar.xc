@@ -49,8 +49,8 @@
       "players": {
         "x": 0,
         "y": -1,
-        "format": "<b><font color='#FFCC66'>{{cap.tanks}}</font></b>",
-        "done": "<b><font color='#FFCC66'>{{cap.tanks}}</font></b>",
+        "format": "<font color='#FFCC66'><font size='20' face='xvm'>&#x113;</font>  <b>{{cap.tanks}}</b></font>",
+        "done": "<font color='#FFCC66'><font size='20' face='xvm'>&#x113;</font>  <b>{{cap.tanks}}</b></font>",
         "shadow": {
           "color": "0x000000",
           "alpha": 50,
@@ -63,8 +63,8 @@
       "timer": {
         "x": 0,
         "y": -1,
-        "format": "<b><font color='#FFCC66'>{{cap.time}}</font></b>",
-        "done": "<b><font color='#FFCC66'>{{cap.time}}</font></b>",
+        "format": "<font color='#FFCC66'><font size='15' face='xvm'>&#x114;</font>  <b>{{cap.time}}</b></font>",
+        "done": "<font color='#FFCC66'><font size='15' face='xvm'>&#x114;</font>  <b>{{cap.time}}</b></font>",
         "shadow": {
           "color": "0x000000",
           "alpha": 50,

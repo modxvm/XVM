@@ -142,6 +142,20 @@
   },
   "captureBar": {
     //"enabled": false,
+    "enemy": {
+      "title": {
+        //"format": "<font size='15' color='#FFFFFF'>{{l10n:allyBaseCapture}}</font>"
+      },
+      "players": {
+        //"format": "<font color='#FFCC66'><font size='15' face='xvm'>&#x113;</font>  <b>{{cap.tanks}}</b></font>"
+      },
+      "timer": {
+        //"format": "<font color='#FFCC66'><font size='15' face='xvm'>&#x114;</font>  <b>{{cap.time}}</b></font>"
+      },
+      "points": {
+        //"format": "<font size='15' color='#FFFFFF'>{{cap.points}}</font>"
+      }
+    },
     "__stub__": null
   },
   "battleLoading": {
@@ -315,7 +329,7 @@
       //"xvm_sixthSenseRudy": "",
       //"xvm_fireAlert": "",
       //"xvm_ammoBay": "",
-      //"xvm_enemySighted": "enemySighted",      
+      //"xvm_enemySighted": "enemySighted",
       //"carousel": "",
       "__stub__": null
     }
