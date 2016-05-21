@@ -152,7 +152,7 @@ class wot.Minimap.Minimap
         var color:Number;
         if (Macros.FormatGlobalBooleanValue(Config.config.xmqp.useRatingForMinimapClicksColor, true))
         {
-            color = Number("0x" + Macros.FormatByPlayerId(e.value, "{{c:xr}}"));
+            color = Number(Macros.FormatByPlayerId(e.value, "{{c:xr}}").split("#").join("0x")) || 0xFFFFFF;
         }
         else
         {
