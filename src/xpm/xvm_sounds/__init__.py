@@ -87,4 +87,5 @@ import sixthSense
 import fireAlert
 import ammoBay
 import enemySighted
+import battleEnd
 import test
