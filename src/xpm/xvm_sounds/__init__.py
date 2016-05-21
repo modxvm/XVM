@@ -17,30 +17,12 @@ XFW_MOD_INFO = {
 # imports
 
 import traceback
-
-import BigWorld
-import SoundGroups
 import WWISE
-from gui.Scaleform.Battle import Battle
-from gui.Scaleform.daapi.view.battle.damage_panel import DamagePanel
-from Avatar import PlayerAvatar
-from gui.Scaleform.Minimap import Minimap
-from gui.battle_control import g_sessionProvider
 
 from xfw import *
 
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
-
-#####################################################################
-# constants
-
-class XVM_SOUND_EVENT(object):
-    SIXTH_SENSE = "xvm_sixthSense"
-    SIXTH_SENSE_RUDY = "xvm_sixthSenseRudy"
-    FIRE_ALERT = "xvm_fireAlert"
-    AMMO_BAY = "xvm_ammoBay"
-    ENEMY_SIGHTED = "xvm_enemySighted"
 
 #####################################################################
 # handlers
@@ -98,66 +80,11 @@ def _checkAndReplace(event):
             log('SOUND EVENT: %s' % event)
         return event
 
+#####################################################################
+# imports new sound events dispatchers
 
-# new sound events dispatchers
-
-@registerEvent(Battle, '_showSixthSenseIndicator')
-def Battle_showSixthSenseIndicator(self, isShow):
-    try:
-        if config.get('sounds/enabled'):
-            vehId = BigWorld.entities[BigWorld.player().playerVehicleID].typeDescriptor.type.compactDescr
-            # 59393 => Rudy
-            soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehId == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
-            SoundGroups.g_instance.playSound2D(soundId)
-    except:
-        err(traceback.format_exc())
-
-
-@registerEvent(Battle, '_setFireInVehicle')
-def Battle_setFireInVehicle(self, bool):
-    try:
-        if config.get('sounds/enabled'):
-            SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.FIRE_ALERT)
-    except:
-        err(traceback.format_exc())
-
-
-@registerEvent(DamagePanel, '_updateDeviceState')
-def DamagePanel_updateDeviceState(self, value):
-    try:
-        if config.get('sounds/enabled'):
-            module, state, _ = value
-            if module == 'ammoBay' and state == 'critical':
-                SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.AMMO_BAY)
-    except:
-        err(traceback.format_exc())
-
-
-enemyList = {}
-
-@registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
-def PlayerAvatar_PlayerAvatar__destroyGUI(self):
-    enemyList.clear()
-
-
-@overrideMethod(Minimap, '_Minimap__addEntry')
-def Minimap_Minimap__addEntry(base, self, vInfo, guiProps, location, doMark):
-    base(self, vInfo, guiProps, location, doMark)
-    try:
-        if config.get('sounds/enabled'):
-            if vInfo.vehicleID not in enemyList and not guiProps.isFriend:
-                enemyList[vInfo.vehicleID] = True
-                if doMark and not g_sessionProvider.getCtx().isPlayerObserver():
-                    SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.ENEMY_SIGHTED)
-    except:
-        err(traceback.format_exc())
-
-
-# TEST
-
-def _test():
-    log('test')
-    SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.SIXTH_SENSE_RUDY)
-    BigWorld.callback(3, _test)
-
-#BigWorld.callback(10, _test)
+import sixthSense
+import fireAlert
+import ammoBay
+import enemySighted
+import test
