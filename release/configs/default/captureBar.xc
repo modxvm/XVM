@@ -7,6 +7,9 @@
     // false - Disable
     // false - Отключить
     "enabled": true,
+    // Change the distance between capture bars
+    // Изменение расстояния между полосами захвата
+    "distanceOffset": 0,
     // Enemies capturing ally base
     // Противник захватывает базу союзников
     "enemy": {

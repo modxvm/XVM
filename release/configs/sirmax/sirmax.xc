@@ -142,6 +142,7 @@
   },
   "captureBar": {
     //"enabled": false,
+    //"distanceOffset": -20,
     "enemy": {
       "title": {
         //"format": "<font size='15' color='#FFFFFF'>{{l10n:allyBaseCapture}}</font>"

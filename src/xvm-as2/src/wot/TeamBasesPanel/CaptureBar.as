@@ -100,7 +100,7 @@ class wot.TeamBasesPanel.CaptureBar
     }
 
     // override
-    function configUIImpl()
+    public function configUIImpl()
     {
         //Logger.add("CaptureBar.configUI");
 
@@ -127,7 +127,7 @@ class wot.TeamBasesPanel.CaptureBar
     }
 
     // override
-    function updateTitleImpl()
+    public function updateTitleImpl()
     {
         //Logger.add("CaptureBar.updateTitle: " + arguments);
 
@@ -152,16 +152,16 @@ class wot.TeamBasesPanel.CaptureBar
         var c = cfg[name];
         //tf.border = true; tf.borderColor = 0xFF0000;
         tf.selectable = false;
-        tf._x += Macros.FormatGlobalNumberValue(c.x);
-        tf._y += Macros.FormatGlobalNumberValue(c.y);
+        tf._x += Macros.FormatGlobalNumberValue(c.x, 0);
+        tf._y += Macros.FormatGlobalNumberValue(c.y, 0);
         tf.filters = [new DropShadowFilter(
             0, // distance
             0, // angle
-            Macros.FormatGlobalNumberValue(c.shadow.color),
-            Macros.FormatGlobalNumberValue(c.shadow.alpha) / 100.0,
-            Macros.FormatGlobalNumberValue(c.shadow.blur),
-            Macros.FormatGlobalNumberValue(c.shadow.blur),
-            Macros.FormatGlobalNumberValue(c.shadow.strength))];
+            Macros.FormatGlobalNumberValue(c.shadow.color, 0x000000),
+            Macros.FormatGlobalNumberValue(c.shadow.alpha, 100) / 100.0,
+            Macros.FormatGlobalNumberValue(c.shadow.blur, 1),
+            Macros.FormatGlobalNumberValue(c.shadow.blur, 1),
+            Macros.FormatGlobalNumberValue(c.shadow.strength, 1))];
     }
 
     private function updateTextFields():Void
