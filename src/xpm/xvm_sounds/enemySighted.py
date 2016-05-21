@@ -39,6 +39,7 @@ def Minimap_Minimap__addEntry(base, self, vInfo, guiProps, location, doMark):
     base(self, vInfo, guiProps, location, doMark)
     try:
         if config.get('sounds/enabled'):
+            global enemyList
             if vInfo.vehicleID not in enemyList and not guiProps.isFriend:
                 enemyList[vInfo.vehicleID] = True
                 if doMark and not g_sessionProvider.getCtx().isPlayerObserver():
