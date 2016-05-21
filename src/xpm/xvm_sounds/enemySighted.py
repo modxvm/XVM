@@ -30,6 +30,7 @@ enemyList = {}
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def PlayerAvatar_PlayerAvatar__destroyGUI(self):
+    global enemyList
     enemyList.clear()
 
 

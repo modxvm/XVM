@@ -81,6 +81,76 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Folder Name="battleEnd" ID="{E4EFB704-696D-4B24-97ED-E9A437629261}" ShortID="377675383">
+					<ChildrenList>
+						<Event Name="battleEnd_5_min" ID="{70B611D5-46F6-4BB3-B028-19339E36292A}">
+							<ChildrenList>
+								<Action Name="Play" ID="{33C502A5-BCD6-4A1D-BF41-0EEB94C12F31}" ShortID="131488772" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{34A4C737-7B0B-42AB-B16F-23AD82CD605F}" Global="false">
+											<ObjectRef Name="battleEnd_5_min" ID="{CB03723E-79CA-4C7E-AC07-938F19041742}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="battleEnd_3_min" ID="{8E5AE7CC-3567-47AC-84F3-6E657640EF18}">
+							<ChildrenList>
+								<Action Name="Play" ID="{B20ACD09-5506-41F9-BBE3-5AB81A85A5EE}" ShortID="711069474" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{DE32BC15-6A23-4F30-A89F-88BDD0879804}" Global="false">
+											<ObjectRef Name="battleEnd_3_min" ID="{8F77048F-3D16-4A50-AAA9-861D4A6E4AFC}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="battleEnd_2_min" ID="{BB5BB0FE-6710-4891-B6A7-796B1C07FC97}">
+							<ChildrenList>
+								<Action Name="Play" ID="{30E9ABF2-3AE3-4F47-A969-C435397D8A01}" ShortID="71299820" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{54826421-1134-4182-B33D-F2C348FF8EB4}" Global="false">
+											<ObjectRef Name="battleEnd_2_min" ID="{AD2F82BD-5DA4-4270-A90D-CBFA4512708B}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="battleEnd_1_min" ID="{EF66C9FA-B340-446B-99D0-2A47DA386641}">
+							<ChildrenList>
+								<Action Name="Play" ID="{00B4272D-DA27-4243-AFA9-6911B48E0251}" ShortID="97343828" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{074DA593-8C9C-4A78-A4ED-AC85B66A294E}" Global="false">
+											<ObjectRef Name="battleEnd_1_min" ID="{71E5C29C-10A3-4443-B72A-086CB7D6B82F}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="battleEnd_5_sec" ID="{7170DA41-CE65-43A0-B83A-0BB0204A5665}">
+							<ChildrenList>
+								<Action Name="Play" ID="{97BBC734-1512-4236-84BB-B9A6798F531B}" ShortID="156702051" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{D0C45046-A15D-4897-ABF5-D8838E8408B6}" Global="false">
+											<ObjectRef Name="battleEnd_5_sec" ID="{4692910A-33EE-45A7-BF88-1CD7653CB631}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="battleEnd_30_sec" ID="{A5C8CB53-5E1B-4463-A7A6-0A2EFA9A8586}">
+							<ChildrenList>
+								<Action Name="Play" ID="{C51454AB-1A73-4073-B94D-D538F626627D}" ShortID="994215534" Type="Play" Scope="One" Global="false">
+									<ElementList>
+										<Element ID="{160EA826-43A9-4FE6-B9F1-D176D7237897}" Global="false">
+											<ObjectRef Name="battleEnd_30_sec" ID="{C96655BB-0F19-4DC0-BDE4-DBE75BA2E3C4}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Element>
+									</ElementList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
