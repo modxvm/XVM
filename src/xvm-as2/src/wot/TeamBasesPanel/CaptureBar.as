@@ -69,10 +69,15 @@ class wot.TeamBasesPanel.CaptureBar
         GraphicsUtil.colorize(wrapper.m_bgMC, color, 1);
         GraphicsUtil.colorize(wrapper.captureProgress.m_barMC, color, 1);
 
-        if (Config.config.captureBar.enabled)
+        if (!Config.config.captureBar.enabled)
         {
-            //wrapper.scrollRect = new Rectangle(20, 10, 100, 30);
-
+            wrapper.m_playersTF._x -= 50;
+            wrapper.m_playersTF._width += 50;
+            wrapper.m_timerTF._x -= 20;
+            wrapper.m_timerTF._width += 50;
+        }
+        else
+        {
             // align: center
             wrapper.m_titleTF._x -= 300;
             wrapper.m_titleTF._width += 600;
@@ -106,7 +111,12 @@ class wot.TeamBasesPanel.CaptureBar
 
         base.configUI();
 
-        if (Config.config.captureBar.enabled)
+        if (!Config.config.captureBar.enabled)
+        {
+            wrapper.m_playersTF.htmlText = "<font face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
+            wrapper.m_timerTF.htmlText = "<font face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
+        }
+        else
         {
             m_baseNumText = DAAPI.py_xvm_captureBarGetBaseNumText(wrapper.id);
             updateTextFields();
@@ -114,13 +124,18 @@ class wot.TeamBasesPanel.CaptureBar
     }
 
     // override
-    public function updateCaptureDataImpl()
+    public function updateCaptureDataImpl(points, rate, timeLeft, vehiclesCount)
     {
         //Logger.add("CaptureBar.updateCaptureData: " + arguments);
 
-        base.updateCaptureData.apply(base, arguments);
+        base.updateCaptureData(points, rate, timeLeft, vehiclesCount);
 
-        if (Config.config.captureBar.enabled)
+        if (!Config.config.captureBar.enabled)
+        {
+            wrapper.m_playersTF.htmlText = "<font face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
+            wrapper.m_timerTF.htmlText = "<font face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
+        }
+        else
         {
             updateTextFields();
         }
