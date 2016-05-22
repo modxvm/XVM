@@ -422,6 +422,17 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             delete cfg.borderColor;
         if (cfg.bgColor != null && (typeof cfg.bgColor != "string" || cfg.bgColor.indexOf("{{") < 0))
             delete cfg.bgColor;
+
+        var shadow:Object = cfg.shadow;
+        if (shadow &&
+            shadow.distance != null && (typeof shadow.distance != "string" || shadow.distance.indexOf("{{") < 0) &&
+            shadow.angle != null && (typeof shadow.angle != "string" || shadow.angle.indexOf("{{") < 0) &&
+            shadow.color != null && (typeof shadow.color != "string" || shadow.color.indexOf("{{") < 0) &&
+            shadow.alpha != null && (typeof shadow.alpha != "string" || shadow.alpha.indexOf("{{") < 0) &&
+            shadow.blur != null && (typeof shadow.blur != "string" || shadow.blur.indexOf("{{") < 0) &&
+            shadow.strength != null && (typeof shadow.strength != "string" || shadow.strength.indexOf("{{") < 0)
+        )
+            delete cfg.shadow;
     }
 
     private function updateTextField(textField:TextField, bs:BattleStateData):Void
@@ -504,6 +515,24 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
             //Logger.add(playerName + ": " + value + " <= " + cfg.format);
             textField.htmlText = value;
         }
+
+        if (cfg.shadow != null)
+        {
+            Logger.add("shadow");
+            var shadow:Object = cfg.shadow;
+            var blur:Number = Macros.FormatNumber(playerName, shadow, "blur", bs, 2, 2);
+            textField.filters = [
+                new DropShadowFilter(
+                    Macros.FormatNumber(playerName, shadow, "distance", bs, 0, 0),
+                    Macros.FormatNumber(playerName, shadow, "angle", bs, 0, 0),
+                    Macros.FormatNumber(playerName, shadow, "color", bs, 0x000000, 0x000000, true),
+                    Macros.FormatNumber(playerName, shadow, "alpha", bs, 75, 75) / 100.0,
+                    blur,
+                    blur,
+                    Macros.FormatNumber(playerName, shadow, "strength", bs, 1, 1))
+            ];
+        }
+
     }
 
     private function alignField(textField:TextField)
