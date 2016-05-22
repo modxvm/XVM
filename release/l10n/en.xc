@@ -50,8 +50,6 @@
     "enemyBaseCaptured": "Base{0} captured by allies!",
     "allyBaseCapture": "Base{0} capture by enemies!",
     "allyBaseCaptured": "Base{0} captured by enemies!",
-    "Timeleft": "Timeleft",
-    "Capturers": "Capturers",
 
     // BattleResults
     "Hit percent": "Hit percent",
@@ -205,7 +203,6 @@
     "ReserveFilter": "Reserve",
     "check_reserve_menu": "Set as reserve",
     "uncheck_reserve_menu": "Uncheck Reserve label",
-    "reserve_confirm_title": "Hide tank",
     "reserve_confirm_message": "Are you sure you want to mark the tank as reserve? It will be available via filters in carousel.",
     "Used slots": "Used slots",
 

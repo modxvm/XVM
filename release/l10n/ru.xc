@@ -50,8 +50,6 @@
     "enemyBaseCaptured": "База{0} захвачена союзниками!",
     "allyBaseCapture": "Захват базы{0} врагами!",
     "allyBaseCaptured": "База{0} захвачена врагами!",
-    "Timeleft": "Осталось",
-    "Capturers": "Захватчиков",
 
     // BattleResults
     "Hit percent": "Процент попаданий",
@@ -201,7 +199,6 @@
     "ReserveFilter": "Резерв",
     "check_reserve_menu": "Отметить как «резерв»",
     "uncheck_reserve_menu": "Снять отметку «резерв»",
-    "reserve_confirm_title": "Спрятать танк",
     "reserve_confirm_message": "Вы уверены что хотите пометить танк как резерв? Он будет доступен через фильтры карусели.",
     "Used slots": "Занято слотов",
 
