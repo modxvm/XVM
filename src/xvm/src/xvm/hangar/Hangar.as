@@ -8,6 +8,7 @@ package xvm.hangar
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
+    import net.wg.gui.events.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -69,11 +70,19 @@ package xvm.hangar
         private function initServerInfo():void
         {
             var cfg:CHangarServerInfo = Config.config.hangar.serverInfo;
-            page.serverInfo.y += cfg.shiftY;
-            page.serverInfoBg.y += cfg.shiftY;
-            page.serverInfo.visible = page.serverInfoBg.visible = cfg.enabled;
-            page.serverInfo.alpha = page.serverInfoBg.alpha = cfg.alpha / 100.0;
-            page.serverInfo.rotation = page.serverInfoBg.rotation = cfg.rotation;
+            if (!cfg.enabled)
+            {
+                page.serverInfo.alpha = page.serverInfoBg.alpha = 0;
+                page.serverInfo.mouseEnabled = page.serverInfoBg.mouseEnabled = false;
+                page.serverInfo.mouseChildren = page.serverInfoBg.mouseChildren = false;
+            }
+            else
+            {
+                page.serverInfo.y += cfg.shiftY;
+                page.serverInfoBg.y += cfg.shiftY;
+                page.serverInfo.alpha = page.serverInfoBg.alpha = cfg.alpha / 100.0;
+                page.serverInfo.rotation = page.serverInfoBg.rotation = cfg.rotation;
+            }
         }
     }
 }
