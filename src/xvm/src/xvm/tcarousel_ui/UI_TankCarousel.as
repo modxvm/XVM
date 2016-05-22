@@ -104,9 +104,8 @@ package xvm.tcarousel_ui
                     if (filter.prefs && filter.prefs is Array)
                         _prefFilter.selectedItems = filter.prefs;
                 }
-                //TODO:0.9.15
-                //if (!cfg.filters.params.enabled)
-                //    vehicleFilters.paramsFilter.selectedIndex = 0;
+                if (!cfg.filters.params.enabled)
+                    resetFiltersS();
                 if (!cfg.filters.bonus.enabled)
                     vehicleFilters.bonusFilter.selected = false;
                 if (!cfg.filters.favorite.enabled)
@@ -313,6 +312,20 @@ package xvm.tcarousel_ui
                 renderersMask.width = rightArrow.x - xfw_defContainerPos - rightArrow.width;
 
                 multiselectionBg.visible = false;
+
+                defaultBg.visible = true;
+                defaultBg.mouseEnabled = defaultBg.mouseChildren = false;
+                defaultBg.x = -100;
+                defaultBg.y = 0;
+                defaultBg.scaleX = 1;
+                defaultBg.graphics.clear();
+                defaultBg.graphics.beginFill(0x000000, cfg.backgroundAlpha / 100.0);
+                defaultBg.graphics.drawRect(0, 0, width + 200, height);
+                if (_isMultiselectionModeEnabled)
+                {
+                    defaultBg.graphics.drawRect(0, -64, width + 200, 54);
+                }
+                defaultBg.graphics.endFill();
             }
             catch (ex:Error)
             {
