@@ -9,6 +9,7 @@ from xfw import *
 from logger import *
 import stats
 import python_macro
+import xmqp_events
 
 class DAAPI(object):
 
@@ -31,3 +32,7 @@ class DAAPI(object):
     def py_xvm_pythonMacro(self, arg):
         #log('py_xvm_pythonMacro: {}'.format(arg))
         return python_macro.process_python_macro(arg)
+
+    def py_xvm_minimapClick(self, path):
+        #log('py_xvm_minimapClick: {}'.format(path))
+        return xmqp_events.send_minimap_click(path)

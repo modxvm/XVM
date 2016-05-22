@@ -44,10 +44,14 @@ class wot.Minimap.Minimap
     /////////////////////////////////////////////////////////////////
 
     private static var _isAltMode:Boolean = false;
+
     public static function get config():Object
     {
         return _isAltMode ? Config.config.minimapAlt : Config.config.minimap;
     }
+
+    private var minimap_path:Array;
+    private var minimap_path_mc:MovieClip;
 
     public function MinimapCtor()
     {
@@ -57,6 +61,8 @@ class wot.Minimap.Minimap
         GlobalEventDispatcher.addEventListener(Events.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
         GlobalEventDispatcher.addEventListener(Events.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
         GlobalEventDispatcher.addEventListener(Events.XMQP_MINIMAP_CLICK, this, onXmqpMinimapClickEvent);
+
+        Mouse.addListener(this);
     }
 
     function scaleMarkersImpl(factor:Number)
@@ -146,6 +152,59 @@ class wot.Minimap.Minimap
         GlobalEventDispatcher.dispatchEvent( { type: Events.E_MOVING_STATE_CHANGED, value: is_moving } );
     }
 
+    private function onMouseDown(button:Number, target, mouseIdx:Number, x:Number, y:Number, dblClick:Boolean)
+    {
+        if (target == wrapper.mapHit && !dblClick && button == Mouse.LEFT && _root.g_cursorVisible)
+        {
+
+            //Logger.addObject(arguments, 1, "onMouseDown");
+            x = int(wrapper.mapHit._xmouse);
+            y = int(wrapper.mapHit._ymouse);
+            minimap_path = [[x, y]];
+            if (minimap_path_mc != null)
+                minimap_path_mc.removeMovieClip();
+            minimap_path_mc = wrapper.mapHit.createEmptyMovieClip("xmqp_mc_path", wrapper.mapHit.getNextHighestDepth());
+            minimap_path_mc.lineStyle(1, Config.networkServicesSettings.x_minimap_clicks_color, 30);
+            minimap_path_mc.moveTo(x, y);
+            minimap_path_mc.lineTo(x + 0.1, y + 0.1);
+        }
+    }
+
+    private function onMouseMove(mouseIdx:Number, x:Number, y:Number)
+    {
+        if (minimap_path != null && minimap_path.length < 20 && y != undefined)
+        {
+            //Logger.addObject(arguments, 1, "onMouseMove");
+            if (wrapper.mapHit.hitTest(_root._xmouse, _root._ymouse))
+            {
+                x = int(wrapper.mapHit._xmouse);
+                y = int(wrapper.mapHit._ymouse);
+
+                var lastpos:Array = minimap_path[minimap_path.length - 1];
+                var distance:Number = Math.sqrt(Math.pow(lastpos[0] - x, 2) + Math.pow(lastpos[1] - y, 2));
+                if (distance > 20)
+                {
+                    minimap_path.push([x, y]);
+                    minimap_path_mc.lineTo(x, y);
+                }
+            }
+        }
+    }
+
+    private function onMouseUp(button:Number, target, mouseIdx:Number, x:Number, y:Number)
+    {
+        if (minimap_path != null)
+        {
+            if (button == Mouse.LEFT)
+            {
+                //Logger.addObject(arguments, 1, "onMouseUp");
+                DAAPI.py_xvm_minimapClick(minimap_path);
+                minimap_path = null;
+                minimap_path_mc.removeMovieClip();
+            }
+        }
+    }
+
     private function onXmqpMinimapClickEvent(e:Object)
     {
         //Logger.addObject(e, 3, "onXmqpMinimapClickEvent");
@@ -159,11 +218,44 @@ class wot.Minimap.Minimap
             color = Number(Macros.FormatByPlayerId(e.value, Config.config.xmqp.minimapClicksColor).split("#").join("0x")) || e.data.color;
         }
 
-        var mc:MovieClip = wrapper.mapHit.createEmptyMovieClip(null, wrapper.mapHit.getNextHighestDepth());
-        var canvas:MovieClip = mc;
-        canvas.lineStyle(3, color, 80);
-        canvas.moveTo(e.data.x, e.data.y);
-        canvas.lineTo(e.data.x + 0.1, e.data.y + 0.1);
+        var depth:Number = wrapper.mapHit.getNextHighestDepth();
+        var mc:MovieClip = wrapper.mapHit.createEmptyMovieClip("xmqp_mc_" + depth, depth);
         _global.setTimeout(function() { mc.removeMovieClip() }, Config.config.xmqp.minimapClicksTime * 1000);
+
+        if (e.data.path != undefined)
+        {
+            var len:Number = e.data.path.length;
+            if (len > 0)
+            {
+                var pos:Array;
+
+                mc.lineStyle(3, color, 80);
+
+                if (len > 1)
+                {
+                    pos = e.data.path[len - 1];
+                    mc.moveTo(pos[0], pos[1]);
+                    mc.lineTo(pos[0] + 0.1, pos[1] + 0.1);
+                }
+
+                pos = e.data.path[0];
+                mc.moveTo(pos[0], pos[1]);
+                mc.lineTo(pos[0] + 0.1, pos[1] + 0.1);
+
+                mc.lineStyle(1, color, 80);
+                for (var i:Number = 1; i < len; ++i)
+                {
+                    mc.lineTo(e.data.path[i][0], e.data.path[i][1]);
+                }
+            }
+        }
+
+        // TODO: legacy code, remove after WoT 0.9.15 release.
+        if (e.data.x != undefined && e.data.y != undefined)
+        {
+            mc.lineStyle(3, color, 80);
+            mc.moveTo(e.data.x, e.data.y);
+            mc.lineTo(e.data.x + 0.1, e.data.y + 0.1);
+        }
     }
 }

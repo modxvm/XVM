@@ -16,6 +16,7 @@ class com.xvm.DAAPI extends MovieClip
         _root.py_xvm_captureBarGetBaseNumText = null;
         _root.py_xvm_loadBattleStat = null;
         _root.py_xvm_pythonMacro = null;
+        _root.py_xvm_minimapClick = null;
 
         // Python->AS2 DAAPI function binding
         _root.as_xvm_onUpdateConfig = DAAPI.as_xvm_onUpdateConfig;
@@ -47,6 +48,11 @@ class com.xvm.DAAPI extends MovieClip
     public static function py_xvm_pythonMacro(arg:String):String
     {
         return _root.py_xvm_pythonMacro(arg);
+    }
+
+    public static function py_xvm_minimapClick(path:Array):Void
+    {
+        _root.py_xvm_minimapClick(path);
     }
 
     // Python->AS2 DAAPI methods

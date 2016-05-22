@@ -214,16 +214,15 @@ _event_handlers[EVENTS.XMQP_SPOTTED] = _as_xmqp_event
 
 # minimap click
 
-@registerEvent(Minimap, '_onMapClicked')
-def _Minimap_onMapClicked(self, _, x, y, bHighlightCellNVehicleSpecific = True):
-    #debug('_Minimap_onMapClicked')
+def send_minimap_click(path):
+    #debug('send_minimap_click: [...]')
     if xmqp.is_active():
-        if bHighlightCellNVehicleSpecific:
-            xmqp.call({
-                'event': EVENTS.XMQP_MINIMAP_CLICK,
-                'x': x,
-                'y': y,
-                'color': config.networkServicesSettings.x_minimap_clicks_color})
+        path = [[int(x), int(y)] for x,y in path]
+        #debug('send_minimap_click: {}'.format(path))
+        xmqp.call({
+            'event': EVENTS.XMQP_MINIMAP_CLICK,
+            'path': path,
+            'color': config.networkServicesSettings.x_minimap_clicks_color})
 
 _event_handlers[EVENTS.XMQP_MINIMAP_CLICK] = lambda id, data: \
     _as_xmqp_event(id, data, targets=TARGETS.BATTLE)
