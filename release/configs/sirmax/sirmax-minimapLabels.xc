@@ -15,6 +15,7 @@
       {
         "$ref": { "file":"../default/minimapLabelsTemplates.xc", "path":"def.vehicleSpotted" },
         "format": "<font face='$TitleFont' size='6' color='{{t-battles>19?{{c:r|#666666}}|#666666}}'><b>{{marksOnGun|*}}</b></font><font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'>{{vehicle-short}}</font>",
+        //"shadow": { "color": "{{c:hp-ratio}}", "alpha": 80, "blur": 2, "strength": 4 },
         "x": 0,
         "y": -2
       },
