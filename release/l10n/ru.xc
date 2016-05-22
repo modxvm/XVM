@@ -199,6 +199,7 @@
     "ReserveFilter": "Резерв",
     "check_reserve_menu": "Отметить как «резерв»",
     "uncheck_reserve_menu": "Снять отметку «резерв»",
+    "reserve_confirm_title": "Спрятать танк",
     "reserve_confirm_message": "Вы уверены что хотите пометить танк как резерв? Он будет доступен через фильтры карусели.",
     "Used slots": "Занято слотов",
 
