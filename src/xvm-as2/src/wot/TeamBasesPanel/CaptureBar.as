@@ -85,13 +85,13 @@ class wot.TeamBasesPanel.CaptureBar
             setupTextField(wrapper.m_titleTF, "title");
 
             // align: right
-            wrapper.m_playersTF._x -= 200;
+            wrapper.m_playersTF._x -= 200 - 271;
             wrapper.m_playersTF._width += 200;
             wrapper.m_playersTF._height = 600;
             setupTextField(wrapper.m_playersTF, "players");
 
             // align: left
-            wrapper.m_timerTF._x -= 20;
+            wrapper.m_timerTF._x -= 20 + 265;
             wrapper.m_timerTF._width += 200;
             wrapper.m_timerTF._height = 600;
             setupTextField(wrapper.m_timerTF, "timer");
@@ -205,7 +205,7 @@ class wot.TeamBasesPanel.CaptureBar
         {
             // TODO: hide icon
         }
-        wrapper.m_playersTF.htmlText = value;
+        wrapper.m_timerTF.htmlText = value;
 
         value = Macros.Format(null, cfg.timer[name], o);
         value = Strings.substitute(value, [ m_baseNumText ]);
@@ -213,7 +213,7 @@ class wot.TeamBasesPanel.CaptureBar
         {
             // TODO: hide icon
         }
-        wrapper.m_timerTF.htmlText = value;
+        wrapper.m_playersTF.htmlText = value;
 
         value = Macros.Format(null, cfg.points[name], o);
         value = Strings.substitute(value, [ m_baseNumText ]);
