@@ -143,6 +143,7 @@
   "captureBar": {
     //"enabled": false,
     //"distanceOffset": -20,
+    //"hideProgressBar": true,
     "enemy": {
       "title": {
         //"format": "<font size='15' color='#FFFFFF'>{{l10n:allyBaseCapture}}</font>"

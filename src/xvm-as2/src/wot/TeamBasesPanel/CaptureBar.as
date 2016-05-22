@@ -118,6 +118,10 @@ class wot.TeamBasesPanel.CaptureBar
         }
         else
         {
+            var showProgressBar:Boolean = !Macros.FormatGlobalBooleanValue(Config.config.captureBar.hideProgressBar, false)
+            wrapper.m_bgMC._visible = showProgressBar;
+            wrapper.barColors._visible = showProgressBar;
+
             m_baseNumText = DAAPI.py_xvm_captureBarGetBaseNumText(wrapper.id);
             updateTextFields();
         }
