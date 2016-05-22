@@ -518,7 +518,7 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
         if (cfg.shadow != null)
         {
-            Logger.add("shadow");
+            //Logger.add("shadow");
             var shadow:Object = cfg.shadow;
             var blur:Number = Macros.FormatNumber(playerName, shadow, "blur", bs, 2, 2);
             textField.filters = [
