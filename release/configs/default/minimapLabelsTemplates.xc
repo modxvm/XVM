@@ -84,7 +84,7 @@
       "format": "<font size='{{battletype?8|{{squad?8|0}}}}' color='{{squad?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|{{tk?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|#BFBFBF}}}}'><i>{{name%.7s~..}}</i></font>"
     },
     // XMQP event marker.
-    // Маркером события XMQP.
+    // Маркер события XMQP.
     "xmqpEvent": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "squadman", "teamKiller", "spotted", "alive" ],
