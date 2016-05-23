@@ -143,7 +143,7 @@
       "x": 2,
       "y": -1
     },
-    // Vehicle type, dead
+    // Player nickname, dead
     // Ник игрока, мертвый
     "nickDead": {
       "$ref": { "path":"def.defaultItem" },
