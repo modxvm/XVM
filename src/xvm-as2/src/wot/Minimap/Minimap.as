@@ -217,6 +217,8 @@ class wot.Minimap.Minimap
             color = Number(Macros.FormatByPlayerId(e.value, Config.config.xmqp.minimapClicksColor).split("#").join("0x")) || e.data.color;
         }
 
+        var alpha:Number = 80;
+
         var depth:Number = wrapper.mapHit.getNextHighestDepth();
         var mc:MovieClip = wrapper.mapHit.createEmptyMovieClip("xmqp_mc_" + depth, depth);
         _global.setTimeout(function() { mc.removeMovieClip() }, Config.config.xmqp.minimapClicksTime * 1000);
@@ -226,25 +228,33 @@ class wot.Minimap.Minimap
             var len:Number = e.data.path.length;
             if (len > 0)
             {
-                var pos:Array;
+                mc.lineStyle(3, color, alpha);
+                var pos:Array = e.data.path[0];
+                var x:Number = pos[0];
+                var y:Number = pos[1];
+                mc.moveTo(x, y);
+                mc.lineTo(x + 0.1, y + 0.1);
 
-                mc.lineStyle(3, color, 80);
+                mc.lineStyle(1, color, alpha);
+                for (var i:Number = 1; i < len; ++i)
+                {
+                    pos = e.data.path[i];
+                    mc.lineTo(pos[0], pos[1]);
+                }
 
                 if (len > 1)
                 {
-                    pos = e.data.path[len - 1];
-                    mc.moveTo(pos[0], pos[1]);
-                    mc.lineTo(pos[0] + 0.1, pos[1] + 0.1);
-                }
-
-                pos = e.data.path[0];
-                mc.moveTo(pos[0], pos[1]);
-                mc.lineTo(pos[0] + 0.1, pos[1] + 0.1);
-
-                mc.lineStyle(1, color, 80);
-                for (var i:Number = 1; i < len; ++i)
-                {
-                    mc.lineTo(e.data.path[i][0], e.data.path[i][1]);
+                    // draw arrow head
+                    x = pos[0];
+                    y = pos[1];
+                    var prevPos:Array = e.data.path[len - 2];
+                    var angle:Number = Math.atan2(y - prevPos[1], x - prevPos[0]) * 180 / Math.PI;
+                    mc.beginFill(color, alpha);
+                    mc.moveTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
+                    mc.lineTo(x + (1 * Math.cos((angle) * Math.PI / 180)), y + (1 * Math.sin((angle) * Math.PI / 180)));
+                    mc.lineTo(x - (5 * Math.cos((angle + 15) * Math.PI / 180)), y - (5 * Math.sin((angle + 15) * Math.PI / 180)));
+                    mc.lineTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
+                    mc.endFill();
                 }
             }
         }
