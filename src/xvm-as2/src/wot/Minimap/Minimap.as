@@ -154,9 +154,8 @@ class wot.Minimap.Minimap
 
     private function onMouseDown(button:Number, target, mouseIdx:Number, x:Number, y:Number, dblClick:Boolean)
     {
-        if (target == wrapper.mapHit && !dblClick && button == Mouse.LEFT && _root.g_cursorVisible)
+        if (target == wrapper.mapHit && !dblClick && button == Mouse.LEFT && _root.g_cursorVisible && Config.networkServicesSettings.xmqp)
         {
-
             //Logger.addObject(arguments, 1, "onMouseDown");
             x = int(wrapper.mapHit._xmouse);
             y = int(wrapper.mapHit._ymouse);
