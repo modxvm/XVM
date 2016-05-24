@@ -249,13 +249,5 @@ class wot.Minimap.Minimap
                 }
             }
         }
-
-        // TODO: legacy code, remove after WoT 0.9.15 release.
-        if (e.data.x != undefined && e.data.y != undefined)
-        {
-            mc.lineStyle(3, color, 80);
-            mc.moveTo(e.data.x, e.data.y);
-            mc.lineTo(e.data.x + 0.1, e.data.y + 0.1);
-        }
     }
 }
