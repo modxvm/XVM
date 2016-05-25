@@ -96,6 +96,7 @@ package xvm.tcarousel_ui
                 super.configUI();
 
                 this.vehicleFiltersOld.visible = false; // TODO: delete when vehicleFiltersOld will be removed
+                vehicleFilters.validateNow();
 
                 createFilters();
                 var filter:Object = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
