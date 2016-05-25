@@ -31,6 +31,7 @@ class ExecutionException(Exception):
 # noinspection PyMethodMayBeStatic
 class IllegalChecker(ast.NodeVisitor):
     illegal_functions = ('__import__', 'eval', 'execfile')
+    illegal_import = ('os', 'sys', 'import_lib')
 
     def __init__(self):
         super(IllegalChecker, self).__init__()
@@ -40,12 +41,17 @@ class IllegalChecker(ast.NodeVisitor):
         self.errors += 'Illegal statement "exec {}"'.format(node.body.id),
 
     def visit_Import(self, node):
-        names = ', '.join(map(lambda alias: alias.name, node.names))
-        self.errors += 'Illegal statement "import {}"'.format(names),
+        names = map(lambda alias: alias.name, node.names)
+        illegals = set(names).intersection(self.illegal_import)
+        if illegals:
+            names = ', '.join(names)
+            self.errors += 'Illegal statement "import {}"'.format(names),
 
     def visit_ImportFrom(self, node):
-        names = ', '.join(map(lambda alias: alias.name, node.names))
-        self.errors += 'Illegal statement "from {} import {}"'.format(node.module, names),
+        if node.module in self.illegal_import:
+            names = map(lambda alias: alias.name, node.names)
+            names = ', '.join(names)
+            self.errors += 'Illegal statement "from {} import {}"'.format(node.module, names),
 
     def visit_Name(self, node):
         if node.id in self.illegal_functions:
@@ -56,6 +62,7 @@ class IllegalChecker(ast.NodeVisitor):
             return
         if node.func.id in self.illegal_functions:
             self.errors += 'Illegal function call "{}"'.format(node.func.id),
+
 
 
 class XvmNamespace(object):
