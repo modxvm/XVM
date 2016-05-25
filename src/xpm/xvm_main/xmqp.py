@@ -71,7 +71,7 @@ class _XMQP(object):
     commands that were issued and that should surface in the output as well.
 
     """
-    LOBBY_QUEUE = 'com.xvm.lobby'
+    LOBBY_QUEUE = 'com.xvm.xmqp.%s.lobby' % XVM.XMQP_API_VERSION
 
     def __init__(self, players):
         """Create a new instance of the consumer class, passing in the AMQP

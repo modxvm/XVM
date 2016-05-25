@@ -12,6 +12,7 @@ class XVM(object):
         #'029ef75501dbd41b386990d7b6fb4e30b59540d1'
         ]
     XMQP_SERVER = 'xmqp.modxvm.com'
+    XMQP_API_VERSION = '1v0'
     XMQP_EXCHANGE_NAME_QUERY = 'query.battle.channel'
     XMQP_COMMAND_BATTLE_MESSAGE = 'command.battle.message'
     TIMEOUT = 5000

@@ -181,7 +181,7 @@ class wot.Minimap.Minimap
 
                 var lastpos:Array = minimap_path[minimap_path.length - 1];
                 var distance:Number = Math.sqrt(Math.pow(lastpos[0] - x, 2) + Math.pow(lastpos[1] - y, 2));
-                if (distance > 20)
+                if (distance > 10)
                 {
                     minimap_path.push([x, y]);
                     minimap_path_mc.lineTo(x, y);

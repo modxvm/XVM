@@ -2,7 +2,7 @@ import pika
 import uuid
 
 credentials = pika.PlainCredentials('xvm', 'xvm')
-lobby_queue = 'com.xvm.lobby'
+lobby_queue = 'com.xvm.xmqp.1v0.lobby'
 
 
 class AmqpClient(object):
