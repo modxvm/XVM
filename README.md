@@ -32,9 +32,14 @@ Also you can change the interface language to English for your convenience:
 
 Main section for english-speaking users.
 
+* [Testing](
+http://www.koreanrandom.com/forum/forum/75-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-testing/)
+
+Section for bug reports and other information related to testing.
+
 * [Development](http://www.koreanrandom.com/forum/forum/56-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-development/)
 
-Discussions about the functionality that is in development at the moment.
+Discussions about the functionality in development at the moment.
 
 * [Suggestions](http://www.koreanrandom.com/forum/forum/49-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-suggestions/)
 
