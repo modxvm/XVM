@@ -26,7 +26,7 @@ _special = {
     'ussr:R86_LTP':                      [ 3, 4 ],
     'ussr:BT-SV':                        [ 3, 4 ],
     'germany:G36_PzII_J':                [ 3, 4 ],
-    'ussr:T-127':                        [ 3, 4 ],
+    'ussr:R56_T-127':                    [ 3, 4 ],
     'japan:Ke_Ni_B':                     [ 3, 4 ],
     'ussr:SU76I':                        [ 3, 4 ],
 
