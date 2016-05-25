@@ -137,6 +137,8 @@ def get_function(function):
     except ValueError:
         raise ValueError('Function syntax error')
     args = ast.literal_eval(args_string)
+    if not isinstance(args, tuple):
+-        args = (args,)
     result = _container.get(func_name)
     if not result:
         raise NotImplementedError('Function {} not implemented'.format(func_name))
