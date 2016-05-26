@@ -196,11 +196,17 @@ def onArenaCreated():
 g_playerEvents.onArenaCreated += onArenaCreated
 
 
-def onAvatarBecomePlayer():
-    # debug('> onAvatarBecomePlayer')
-    g_xvm.onAvatarBecomePlayer()
+@overrideMethod(PlayerAvatar, 'onBecomePlayer')
+def PlayerAvatar_onBecomePlayer(base, self):
+    # debug('> onBecomePlayer')
+    base(self)
+    g_xvm.onBecomePlayer()
 
-g_playerEvents.onAvatarBecomePlayer += onAvatarBecomePlayer
+@overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
+def PlayerAvatar_onBecomeNonPlayer(base, self):
+    # debug('> onBecomeNonPlayer')
+    g_xvm.onBecomeNonPlayer()
+    base(self)
 
 
 # BATTLE

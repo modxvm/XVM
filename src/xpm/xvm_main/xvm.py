@@ -77,7 +77,7 @@ def l10n(text):
                 macro = macro.format(*parts)
             except Exception as ex:
                 err('macro:  {}'.format(macro))
-                err('params: {}'.format(parts)) 
+                err('params: {}'.format(parts))
                 err(traceback.format_exc())
 
         text = text[:localizedMacroStart] + macro + text[localizedMacroEnd + 2:]
@@ -216,13 +216,45 @@ class Xvm(object):
         minimap_circles.updateCurrentVehicle()
 
 
+    # PRE-BATTLE
+
+    def onBecomePlayer(self):
+        trace('onBecomePlayer')
+        try:
+            player = BigWorld.player()
+            if player is not None and hasattr(player, 'arena'):
+                arena = BigWorld.player().arena
+                if arena:
+                    arena.onVehicleKilled += self._onVehicleKilled
+                    arena.onAvatarReady += self._onAvatarReady
+                    arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
+
+            self.xmqp_init()
+
+            if config.get('autoReloadConfig', False) == True:
+                configwatchdog.startConfigWatchdog()
+        except Exception, ex:
+            err(traceback.format_exc())
+
+    def onBecomeNonPlayer(self):
+        trace('onBecomeNonPlayer')
+        try:
+            self.xmqp_stop()
+
+            player = BigWorld.player()
+            if player is not None and hasattr(player, 'arena'):
+                arena = BigWorld.player().arena
+                if arena:
+                    arena.onVehicleKilled -= self._onVehicleKilled
+                    arena.onAvatarReady -= self._onAvatarReady
+                    arena.onVehicleStatisticsUpdate -= self._onVehicleStatisticsUpdate
+        except Exception, ex:
+            err(traceback.format_exc())
+
+        vehstate.cleanupBattleData()
+
+
     # BATTLE
-
-    def onAvatarBecomePlayer(self):
-        trace('onAvatarBecomePlayer')
-        if config.get('autoReloadConfig', False) == True:
-            configwatchdog.startConfigWatchdog()
-
 
     def initBattleSwf(self, flashObject):
         trace('initBattleSwf')
@@ -314,35 +346,10 @@ class Xvm(object):
 
     def onEnterWorld(self):
         trace('onEnterWorld')
-        try:
-            player = BigWorld.player()
-            if player is not None and hasattr(player, 'arena'):
-                arena = BigWorld.player().arena
-                if arena:
-                    arena.onVehicleKilled += self._onVehicleKilled
-                    arena.onAvatarReady += self._onAvatarReady
-                    arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
-            self.xmqp_init()
-        except Exception as ex:
-            err(traceback.format_exc())
 
 
     def onLeaveWorld(self):
         trace('onLeaveWorld')
-        try:
-            self.xmqp_stop()
-
-            player = BigWorld.player()
-            if player is not None and hasattr(player, 'arena'):
-                arena = BigWorld.player().arena
-                if arena:
-                    arena.onVehicleKilled -= self._onVehicleKilled
-                    arena.onAvatarReady -= self._onAvatarReady
-                    arena.onVehicleStatisticsUpdate -= self._onVehicleStatisticsUpdate
-        except Exception, ex:
-            err(traceback.format_exc())
-
-        vehstate.cleanupBattleData()
 
 
     def _onVehicleKilled(self, victimID, *args):
