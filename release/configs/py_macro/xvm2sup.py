@@ -1,6 +1,6 @@
 import xvm_main.python.xvm_scale_data as xvm_scale_data
 
-@xvm.export('xvm', 'xvm2sup')
+@xvm.export('xvm.xvm2sup')
 def XvmScaleToSup(x=None):
     if x is None or x == '':
         return None
