@@ -67,14 +67,12 @@ class IllegalChecker(ast.NodeVisitor):
 
 class XvmNamespace(object):
     @staticmethod
-    def export(namespace, function_name):
+    def export(function_name):
         def decorator(func):
-            _container.setdefault(namespace, {})
-            f = _container.get(namespace).get(function_name)
+            f = _container.get(function_name)
             if f:
-                log('!!! Override {}.{}'.format(namespace, function_name))
-
-            _container[namespace][function_name] = func
+                log('[PY_MACRO] Override {}'.format(function_name))
+            _container[function_name] = func
             return func
         return decorator
 
@@ -134,16 +132,16 @@ def get_function(function):
     try:
         left_bracket_pos = function.index('(')
         right_bracket_pos = function.index(')')
-        namespace, func_name = function[0:left_bracket_pos].split('.', 2)
+        func_name = function[0:left_bracket_pos]
         args_string = function[left_bracket_pos: right_bracket_pos + 1]
     except ValueError:
         raise ValueError('Function syntax error')
     args = ast.literal_eval(args_string)
     if not isinstance(args, tuple):
-        args = (args,)
-    result = _container.get(namespace, {}).get(func_name)
+-        args = (args,)
+    result = _container.get(func_name)
     if not result:
-        raise NotImplementedError('Function {}.{} not implemented'.format(namespace, func_name))
+        raise NotImplementedError('Function {} not implemented'.format(func_name))
     return lambda: result(*args)
 
 
