@@ -1,5 +1,8 @@
 ﻿XVM-6.3.0.1-dev:
   * bug fixes
+  * changed export definition for the python macros functions:
+    was: @xvm.export('xvm', 'xvm2sup')
+    now: @xvm.export('xvm.xvm2sup')
 
 XVM-6.3.0:
   * adaptation to WoT 0.9.15
