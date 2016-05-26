@@ -220,6 +220,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         m_squad = arguments[VehicleMarkerProxy.INIT_ARGS_COUNT + 5];
 
         m_x_enabled = false;
+        m_x_sense_on = false;
         m_x_fire = false;
         m_x_overturned = false;
         m_x_drowning = false;
@@ -721,6 +722,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             frags:m_frags,
             squad:m_squad,
             x_enabled:m_x_enabled,
+            x_sense_on: m_x_sense_on,
             x_fire:m_x_fire,
             x_overturned:m_x_overturned,
             x_drowning:m_x_drowning,
