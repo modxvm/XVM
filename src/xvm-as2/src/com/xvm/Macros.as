@@ -641,6 +641,8 @@ class com.xvm.Macros
                 break;
             case "py":
                 res = DAAPI.py_xvm_pythonMacro(norm);
+                isStaticMacro = res[1];
+                res = res[0];
                 if (res == null)
                     res = def;
                 break;

@@ -633,6 +633,8 @@ package com.xvm
                     break;
                 case "py":
                     res = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, norm);
+                    isStaticMacro = res[1];
+                    res = res[0];
                     if (res == null)
                         res = def;
                     break;

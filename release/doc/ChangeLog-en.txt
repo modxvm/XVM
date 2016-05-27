@@ -1,13 +1,15 @@
 ﻿XVM-6.3.0.1-dev:
   * bug fixes
-  * changed export definition for the python macros functions:
-    was: @xvm.export('xvm', 'xvm2sup')
-    now: @xvm.export('xvm.xvm2sup')
+  * py_macro: changed export definition:
+      was: @xvm.export('xvm', 'xvm2sup')
+      now: @xvm.export('xvm.xvm2sup')
+  * py_macro: add 'deterministic' argument to export definition to mark function as
+      deterministic or not (default: deterministic=True)
   * fixed "useStandardLabels" option
   * removed options:
-       "minimap"/"circles"/"enabled" - duplicates "minimap"/"useStandardCircles"
-       "minimap"/"lines"/"enabled"   - duplicates "minimap"/"useStandardLabels"
-       "minimap"/"labels"/"enabled"  - duplicates "minimap"/"useStandardLines"
+      "minimap"/"circles"/"enabled" - duplicates "minimap"/"useStandardCircles"
+      "minimap"/"lines"/"enabled"   - duplicates "minimap"/"useStandardLabels"
+      "minimap"/"labels"/"enabled"  - duplicates "minimap"/"useStandardLines"
 
 XVM-6.3.0:
   * adaptation to WoT 0.9.15

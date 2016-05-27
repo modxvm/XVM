@@ -67,12 +67,12 @@ class IllegalChecker(ast.NodeVisitor):
 
 class XvmNamespace(object):
     @staticmethod
-    def export(function_name):
+    def export(function_name, deterministic=True):
         def decorator(func):
             f = _container.get(function_name)
             if f:
                 log('[PY_MACRO] Override {}'.format(function_name))
-            _container[function_name] = func
+            _container[function_name] = (func, deterministic)
             return func
         return decorator
 
@@ -135,21 +135,21 @@ def get_function(function):
         func_name = function[0:left_bracket_pos]
         args_string = function[left_bracket_pos: right_bracket_pos + 1]
     except ValueError:
-        raise ValueError('Function syntax error')
+        raise ValueError('Function syntax error: {}'.format(function))
     args = ast.literal_eval(args_string)
     if not isinstance(args, tuple):
         args = (args,)
-    result = _container.get(func_name)
-    if not result:
+    (func, deterministic) = _container.get(func_name)
+    if not func:
         raise NotImplementedError('Function {} not implemented'.format(func_name))
-    return lambda: result(*args)
+    return (lambda: func(*args), deterministic)
 
 
 def process_python_macro(arg):
     #log('process_python_macro: {}'.format(arg))
     try:
-        func = get_function(arg)
-        return func()
+        (func, deterministic) = get_function(arg)
+        return (func(), deterministic)
     except Exception as ex:
         err(traceback.format_exc())
-        return None
+        return (None, True)
