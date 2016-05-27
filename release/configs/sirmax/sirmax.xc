@@ -140,6 +140,9 @@
   "fragCorrelation": {
     //"showAliveNotFrags": true
   },
+  "totalHP": {
+    "enabled": true
+  },
   "captureBar": {
     //"enabled": false,
     //"distanceOffset": -20,

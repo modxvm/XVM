@@ -38,6 +38,7 @@ package xvm.profile_ui.components
             {
                 var pg:ProfileTechniquePage = page as ProfileTechniquePage;
                 pg.checkBoxExistence.selected = Config.config.userInfo.inHangarFilterEnabled;
+                pg.setIsInHangarSelectedS(pg.checkBoxExistence.selected);
             }
         }
     }
