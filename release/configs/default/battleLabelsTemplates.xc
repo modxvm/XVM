@@ -147,6 +147,19 @@
       "currentFieldDefaultStyle": { "color": "0xF4EFE8", "size": 15 },
       "format": "{{xvm-stat?{{l10n:Chance to win}}: {{chancesStatic}}{{chancesStatic?&nbsp;/&nbsp;|}}{{chancesLive}}}}"
     },
+    "totalHP": {
+      "enabled": false,
+      "updateEvent": "ON_PLAYERS_HP_CHANGED",
+      "x": 0,
+      "y": 30,
+      "width": 200,
+      "height": 40,
+      "autoSize": "center",
+      "align": "center",
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
+      "currentFieldDefaultStyle": { "color": "0xF4EFE8", "size": 18 },
+      "format": "{{py:xvm.total_hp.text()}}"
+    },
     "test": {
       "enabled": true,
       "y": -170,

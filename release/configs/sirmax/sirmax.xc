@@ -140,9 +140,6 @@
   "fragCorrelation": {
     //"showAliveNotFrags": true
   },
-  "totalHP": {
-    "enabled": true
-  },
   "captureBar": {
     //"enabled": false,
     //"distanceOffset": -20,
@@ -343,6 +340,7 @@
     //"minimapClicksColor": null,
     "minimapClicksTime": 7
   },
+  "battleLabels": ${"sirmax-battleLabels.xc":"."},
   "consts": {
       "VM_COEFF_VMM_DEAD": 0.75
   }

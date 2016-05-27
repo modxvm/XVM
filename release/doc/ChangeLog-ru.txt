@@ -10,6 +10,14 @@
       "minimap"/"circles"/"enabled" - дублирует "minimap"/"useStandardCircles"
       "minimap"/"lines"/"enabled"   - дублирует "minimap"/"useStandardLabels"
       "minimap"/"labels"/"enabled"  - дублирует "minimap"/"useStandardLines"
+  * индикатор общего HP команд реализован с помощью battleLabels и py_macro
+    удалены устаревшие опции:
+      "battle"/"totalHP"/"enabled"
+      "battle"/"totalHP"/"font"
+      "battle"/"totalHP"/"x"
+      "battle"/"totalHP"/"y"
+      "battle"/"totalHP"/"hAlign"
+      "battle"/"totalHP"/"vAlign"
 
 XVM-6.3.0:
   * адаптация к WoT 0.9.15
