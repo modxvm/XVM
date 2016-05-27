@@ -147,6 +147,7 @@ class _XMQP(object):
                     reply_to=self._queue_name,
                     correlation_id=self._correlation_id),
                 body=message)
+            debug('[XMQP] basic_publish done')
 
     # INTERNAL
 
@@ -357,6 +358,7 @@ class _XMQP(object):
                 correlation_id=self._exchange_correlation_id,
             ),
             body=message)
+        debug('[XMQP] basic_publish done')
 
     def bind_channel(self):
         debug('[XMQP] Binding %s to %s' % (self._exchange_name, self._queue_name))

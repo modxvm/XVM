@@ -652,7 +652,9 @@ class Xvm(object):
 
     def xmqp_init(self):
         #debug('xmqp_init')
-        if config.networkServicesSettings.xmqp:
+        if isReplay() and xmqp.XMQP_DEVELOPMENT:
+            config.token = config.XvmServicesToken.restore()
+        if config.networkServicesSettings.xmqp or (isReplay() and xmqp.XMQP_DEVELOPMENT):
             if not isReplay() or xmqp.XMQP_DEVELOPMENT:
                 token = config.token.token
                 if token is not None and token != '':
