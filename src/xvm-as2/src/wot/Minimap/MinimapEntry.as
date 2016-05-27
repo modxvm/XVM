@@ -236,9 +236,6 @@ class wot.Minimap.MinimapEntry
 
     private function onEntrySpotted()
     {
-        if (!Minimap.config.enabled || Config.config.minimap.useStandardLabels || !Minimap.config.labels.enabled || !Minimap.config.labels.formats || Minimap.config.labels.formats.length == 0)
-            return;
-
         setLabelToMimicEntryMoves();
     }
 
@@ -246,9 +243,18 @@ class wot.Minimap.MinimapEntry
 
     private function setLabelToMimicEntryMoves():Void
     {
+        if (!Minimap.config.enabled)
+            return;
+
         // TODO: refactor (performance issue)
         if (playerId)
-            this.labelMc = LabelsContainer.getLabel(playerId);
+        {
+            if (!Config.config.minimap.useStandardLabels && Minimap.config.labels.formats && Minimap.config.labels.formats.length > 0)
+            {
+                this.labelMc = LabelsContainer.getLabel(playerId);
+            }
+        }
+
         wrapper.onEnterFrame = function()
         {
             // Seldom error workaround. Wreck sometimes is placed at map center.
@@ -256,8 +262,11 @@ class wot.Minimap.MinimapEntry
                 return;
 
             var labelMc:MovieClip = this.xvm_worker.labelMc;
-            labelMc._x = this._x;
-            labelMc._y = this._y;
+            if (labelMc)
+            {
+                labelMc._x = this._x;
+                labelMc._y = this._y;
+            }
 
             if (this._name != "MinimapEntry0") // MinimapConstants.MAIN_PLAYER_ENTRY_NAME - resolved for performance
                 return;

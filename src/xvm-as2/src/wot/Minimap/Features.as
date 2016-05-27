@@ -66,7 +66,10 @@ class wot.Minimap.Features
 
         GlobalEventDispatcher.addEventListener(Events.MM_SET_STRATEGIC_POS, this, onSetStrategicPos);
 
-        LabelsContainer.init();
+        if (!Config.config.minimap.useStandardLabels && Minimap.config.labels.formats && Minimap.config.labels.formats.length > 0)
+        {
+            LabelsContainer.init();
+        }
     }
 
     private function _init()
@@ -218,7 +221,7 @@ class wot.Minimap.Features
             circles = null;
         }
 
-        if (Minimap.config.circles.enabled && !Config.config.minimap.useStandardCircles)
+        if (!Config.config.minimap.useStandardCircles)
         {
             circles = new Circles();
         }
@@ -238,7 +241,7 @@ class wot.Minimap.Features
             lines = null;
         }
 
-        if (Minimap.config.lines.enabled && !Config.config.minimap.useStandardLines)
+        if (!Config.config.minimap.useStandardLines)
         {
             lines = new Lines();
         }

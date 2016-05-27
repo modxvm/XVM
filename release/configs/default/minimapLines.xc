@@ -23,7 +23,6 @@
     "traverseAngle": { "enabled": true, "inmeters": true, "color": "0xCCCCCC" }
   },
   "lines": {
-       "enabled": true,
        // Distance between farthest corners at 1km map is somewhat more than 1400 meters.
        // Sections can contain any number of lines.
        // To set a point try setting line with length of one and large thickness.

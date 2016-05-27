@@ -3,7 +3,12 @@
   * изменено определение экспорта функций для python макросов:
     было:  @xvm.export('xvm', 'xvm2sup')
     стало: @xvm.export('xvm.xvm2sup')
-  
+  * исправлена опция "useStandardLabels"
+  * удалены опции:
+       "minimap"/"circles"/"enabled" - дублирует "minimap"/"useStandardCircles"
+       "minimap"/"lines"/"enabled"   - дублирует "minimap"/"useStandardLabels"
+       "minimap"/"labels"/"enabled"  - дублирует "minimap"/"useStandardLines"
+
 XVM-6.3.0:
   * адаптация к WoT 0.9.15
 
@@ -39,7 +44,7 @@ XVM-6.2.2:
     новые макросы:
       {{x-enabled}} - у игрока активирован сервис xmqp
       {{x-sense-on}} - у игрока изучен перк "шестое чувство"
-      {{x-spotted}} - танк игрока обнаружен      
+      {{x-spotted}} - танк игрока обнаружен
       {{x-fire}} - пожар в танке
       {{x-overturned}} - танк игрока перевернут
       {{x-drowning}} - танк игрока тонет

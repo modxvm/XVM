@@ -56,8 +56,10 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
 
     private var invalidateList:Object = {};
 
-    private function LabelsContainer()
+    private function _init()
     {
+        //Logger.add("LabelsContainer.init()");
+
         holderMc = IconsProxy.createEmptyMovieClip(CONTAINER_NAME, MinimapConstants.LABELS_ZINDEX);
 
         GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_INITED, this, onRecreateMinimapEvent);
@@ -70,11 +72,6 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, onDefaultMinimapEvent);
         GlobalEventDispatcher.addEventListener(Events.MM_ENTRY_NAME_UPDATED, this, onEntryNameUpdated);
         GlobalEventDispatcher.addEventListener(Events.MM_REFRESH, this, onRefresh);
-    }
-
-    private function _init()
-    {
-        // empty function required for instance creation
     }
 
     // EVENT HANDLERS
@@ -183,6 +180,8 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
     private function _getLabel(playerId:Number):MovieClip
     {
         //Logger.add('_getLabel: ' + playerId);
+        if (!holderMc)
+            _init();
         if (!holderMc[playerId])
             createLabel(playerId);
         return holderMc[playerId];

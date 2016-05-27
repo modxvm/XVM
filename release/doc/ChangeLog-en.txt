@@ -3,10 +3,15 @@
   * changed export definition for the python macros functions:
     was: @xvm.export('xvm', 'xvm2sup')
     now: @xvm.export('xvm.xvm2sup')
+  * fixed "useStandardLabels" option
+  * removed options:
+       "minimap"/"circles"/"enabled" - duplicates "minimap"/"useStandardCircles"
+       "minimap"/"lines"/"enabled"   - duplicates "minimap"/"useStandardLabels"
+       "minimap"/"labels"/"enabled"  - duplicates "minimap"/"useStandardLines"
 
 XVM-6.3.0:
   * adaptation to WoT 0.9.15
-  
+
   [MAJOR UPDATES]
   * added new type of macro - dynamic macros calculated in the python:
     python functions are loaded from res_mods/configs/py_macro/*.py with decorator @xvm.export(a, b)
@@ -23,14 +28,14 @@ XVM-6.3.0:
   * config section "captureBar" completely reworked, without backward compatibility
   * capture bar macros names was changed, formatting possibilities added
 
-  [CONFIG]    
+  [CONFIG]
   * removed option "camera"/"noScroll" - implemented in client
   * removed option "login"/"skipIntro" - implemented in client
   * new options "sounds"/"xvm_battleEnd_*" - sound notifications informing about the imminent end of the battle
   * new config file "xmqp.xc" for XMQP services settings
 
   [XMQP]
-  * accurate minimap cell clicks  
+  * accurate minimap cell clicks
 
 XVM-6.2.2:
   [MAJOR UPDATES]
@@ -39,16 +44,16 @@ XVM-6.2.2:
     new macros:
       {{x-enabled}} - player have xmqp service enabled
       {{x-sense-on}} - player studied "sixth sense" perk
-      {{x-spotted}} - player vehicle is spotted      
+      {{x-spotted}} - player vehicle is spotted
       {{x-fire}} - fire in vehicle
       {{x-overturned}} - player vehicle is overturned
       {{x-drowning}} - player vehicle is drowning
 
-  [CONFIG]    
+  [CONFIG]
   * added option "battle"/"allowLabelsOnBattleInterface" - enable custom labels on battle interface window
   * added option "hotkeys"/"battleLabelsHotKeys" - use hotkeys in custom labels on battle interface window
 
-  [MACROS]  
+  [MACROS]
   * added macros {{chancesStatic}} - win chances at battle (static)
   * added macros {{chancesLive}} - win chances at battle (live)
 

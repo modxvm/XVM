@@ -11,7 +11,7 @@
     "minimapAimIconScale": 200,
     "zoom": { "pixelsBack": 150, "centered": true },
     //"useStandardCircles": true,
-    //"useStandardLabels": true,
+    "useStandardLabels": true,
     //"useStandardLines": true,
     "circles": {
         "view": [

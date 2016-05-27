@@ -19,7 +19,6 @@
   //    "antiAliasType": "normal" // normal/advanced
   //  }
   "labels": {
-    "enabled": true,
     // Format set
     // Набор форматов
     "formats": [
