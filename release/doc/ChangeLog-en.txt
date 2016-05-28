@@ -1,18 +1,25 @@
 ﻿XVM-6.3.0.1-dev:
   * bug fixes
+  * total hp indicator implemented using battleLabels and py_macro
   * py_macro: changed export definition:
       was: @xvm.export('xvm', 'xvm2sup')
       now: @xvm.export('xvm.xvm2sup')
   * py_macro: add 'deterministic' argument to export definition to mark function as
       deterministic or not (default: deterministic=True)
+
+  [FIXES]
   * fixed "useStandardLabels" option
+
+  [CONFIG]
   * removed options:
       "minimap"/"circles"/"enabled" - duplicates "minimap"/"useStandardCircles"
       "minimap"/"lines"/"enabled"   - duplicates "minimap"/"useStandardLabels"
       "minimap"/"labels"/"enabled"  - duplicates "minimap"/"useStandardLines"
-  * total hp indicator implemented using battleLabels and py_macro
-    removed obsolete options:
+  * moved color settings option for total hp indicator:
+      "battle"/"totalHP"/"colors" > "colors"/"totalHP"      
+  * removed obsolete options:
       "battle"/"totalHP"/"enabled"
+      "battle"/"totalHP"/"colors"      
       "battle"/"totalHP"/"font"
       "battle"/"totalHP"/"x"
       "battle"/"totalHP"/"y"

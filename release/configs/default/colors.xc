@@ -374,6 +374,13 @@
       { "value": 74.5,  "color": ${"def.colorRating.good"     } },
       { "value": 78.5,  "color": ${"def.colorRating.very_good"} },
       { "value": 101,   "color": ${"def.colorRating.unique"   } }
-    ]
+    ],
+    // Color of HP per ratio ally/enemy team, hex rgb
+    // Цвет ХП в зависимости от отношения хп союзной и вражеской команд, hex rgb
+    "totalHP": {
+      "bad":     "FF0000",
+      "neutral": "FFFFFF",
+      "good":    "00FF00"
+    }
   }
 }

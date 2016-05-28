@@ -1,18 +1,25 @@
 ﻿XVM-6.3.0.1-dev:
   * исправление ошибок
+  * индикатор общего HP команд реализован с помощью battleLabels и py_macro
   * py_macro: изменено определение экспорта функций:
       было:  @xvm.export('xvm', 'xvm2sup')
       стало: @xvm.export('xvm.xvm2sup')
   * py_macro: в определение экспорта добавлен аргумент 'deterministic', помечающий функцию
       как детерминированную, или нет (по умолчанию deterministic=True)
+
+  [ИСПРАВЛЕНИЯ]
   * исправлена опция "useStandardLabels"
+
+  [КОНФИГ]
   * удалены опции:
       "minimap"/"circles"/"enabled" - дублирует "minimap"/"useStandardCircles"
       "minimap"/"lines"/"enabled"   - дублирует "minimap"/"useStandardLabels"
       "minimap"/"labels"/"enabled"  - дублирует "minimap"/"useStandardLines"
-  * индикатор общего HP команд реализован с помощью battleLabels и py_macro
-    удалены устаревшие опции:
+  * перемещена опция настройки цвета для индикатора общего HP команд:
+      "battle"/"totalHP"/"colors" > "colors"/"totalHP"
+  * удалены устаревшие опции:
       "battle"/"totalHP"/"enabled"
+      "battle"/"totalHP"/"colors"      
       "battle"/"totalHP"/"font"
       "battle"/"totalHP"/"x"
       "battle"/"totalHP"/"y"

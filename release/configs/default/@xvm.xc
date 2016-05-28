@@ -93,10 +93,6 @@
   // Панель счёта в бою.
   "fragCorrelation": ${"battle.xc":"fragCorrelation"},
 
-  // Total HP of teams.
-  // Общее ХП команд.
-  "totalHP": ${"battle.xc":"totalHP"},
-
   // Ingame crits panel by "expert" skill.
   // Внутриигровая панель критов от навыка "эксперт".
   "expertPanel": ${"battle.xc":"expertPanel"},

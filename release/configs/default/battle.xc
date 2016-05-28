@@ -51,17 +51,6 @@
     // true - показывать количество живых танков вместо убитых
     "showAliveNotFrags": false
   },
-  // Total HP of teams.
-  // Общее ХП команд.
-  "totalHP": {
-    // Color of HP per ratio ally/enemy team, hex rgb
-    // Цвет ХП в зависимости от отношения хп союзной и вражеской команд, hex rgb
-    "colors": {
-        "bad":     "FF0000",
-        "neutral": "FFFFFF",
-        "good":    "00FF00"
-    }
-  },
   // Ingame crits panel by "expert" skill.
   // Внутриигровая панель критов от навыка "эксперт".
   "expertPanel": {

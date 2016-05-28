@@ -100,7 +100,7 @@ def destroy_hp(*args, **kwargs):
 def update_conf_hp(*args, **kwargs):
     try:
         hp_colors.update({'bad': 'FF0000', 'neutral': 'FFFFFF', 'good': '00FF00'})
-        hp_colors.update(config.get('totalHP/colors', {}))
+        hp_colors.update(config.get('colors/totalHP', {}))
         for type, color in hp_colors.iteritems():
             color = color[-6:]
             hp_colors[type] = {'red': int(color[0:2], 16), 'green' : int(color[2:4], 16), 'blue': int(color[4:6], 16)}
