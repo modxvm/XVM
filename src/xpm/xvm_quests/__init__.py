@@ -20,13 +20,6 @@ import traceback
 
 import BigWorld
 from gui.Scaleform.genConsts.QUEST_TASK_FILTERS_TYPES import QUEST_TASK_FILTERS_TYPES
-from gui.Scaleform.genConsts.QUESTS_ALIASES import QUESTS_ALIASES
-from gui.Scaleform.framework import ViewSettings
-from gui.Scaleform.framework import ViewTypes
-from gui.Scaleform.framework import ScopeTemplates
-from gui.Scaleform.framework import g_entitiesFactories
-from gui.Scaleform.daapi.view.lobby.server_events.EventsWindow import EventsWindow
-from gui.Scaleform.daapi.view.lobby.server_events.QuestsCurrentTab import QuestsCurrentTab
 from gui.Scaleform.daapi.view.lobby.server_events.QuestsTileChainsView import _QuestsTileChainsView, _QuestsFilter
 
 from xfw import *
