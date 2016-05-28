@@ -26,7 +26,7 @@ package xvm.tcarousel
 
             const _name:String = "xvm_tcarousel";
             const _ui_name:String = _name + "_ui.swf";
-            const _preloads:Array = [ "TankCarousel.swf" ];
+            const _preloads:Array = [ "TankCarousel.swf", "filtersPopoverView.swf" ];
             Xfw.try_load_ui_swf(_name, _ui_name, _preloads);
         }
 

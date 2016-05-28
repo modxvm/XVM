@@ -26,10 +26,10 @@ from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
 from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.DialogsInterface import showDialog
-import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
+from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
 from gui.Scaleform.daapi.view.meta.TankCarouselMeta import TankCarouselMeta
-from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import VehicleContextMenuHandler
+import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 
 from xfw import *
 
@@ -41,8 +41,8 @@ import xvm_main.python.vehinfo as vehinfo
 from xvm_main.python.xvm import l10n
 import xvm_main.python.xvm as xvm
 
+import filter_popover
 import reserve
-
 
 #####################################################################
 # constants
@@ -75,6 +75,11 @@ BigWorld.callback(0, start)
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
+overrideView(
+    filter_popover.XvmTankCarouselFilterPopover,
+    VIEW_ALIAS.TANK_CAROUSEL_FILTER_POPOVER,
+    '../../../../res_mods/mods/packages/xvm_tcarousel/actionscript/xvm_tcarousel_filtersPopover_view.swf')
+
 
 #####################################################################
 # onXfwCommand
@@ -105,7 +110,7 @@ def TankCarouselMeta_as_showVehiclesS(base, self, compactDescrList):
             myconfig = config.get('hangar/carousel')
             filteredVehs = g_itemsCache.items.getVehicles(REQ_CRITERIA.IN_CD_LIST(compactDescrList))
             vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
-            
+
             def sorting(v1, v2):
                 if v1.isEvent and not v2.isEvent: return -1
                 if not v1.isEvent and v2.isEvent: return 1
@@ -166,7 +171,7 @@ def TankCarouselMeta_as_showVehiclesS(base, self, compactDescrList):
     base(self, compactDescrList)
 
 
-@overrideMethod(VehicleContextMenuHandler, '__init__')
+@overrideMethod(hangar_cm_handlers.VehicleContextMenuHandler, '__init__')
 def VehicleContextMenuHandler__init__(base, self, cmProxy, ctx=None):
     if config.get('hangar/carousel/enabled'):
         try:
@@ -188,7 +193,7 @@ def VehicleContextMenuHandler__init__(base, self, cmProxy, ctx=None):
         base(self, cmProxy, ctx=ctx)
 
 
-@overrideMethod(VehicleContextMenuHandler, '_generateOptions')
+@overrideMethod(hangar_cm_handlers.VehicleContextMenuHandler, '_generateOptions')
 def VehicleContextMenuHandler_generateOptions(base, self, ctx = None):
     result = base(self, ctx)
     if config.get('hangar/carousel/enabled'):
@@ -225,5 +230,5 @@ def updateReserve(vehCD, isReserved):
     carousel_handle.showVehicles()
 
 
-VehicleContextMenuHandler.confirmReserveVehicle = confirmReserveVehicle
-VehicleContextMenuHandler.uncheckReserveVehicle = uncheckReserveVehicle
+hangar_cm_handlers.VehicleContextMenuHandler.confirmReserveVehicle = confirmReserveVehicle
+hangar_cm_handlers.VehicleContextMenuHandler.uncheckReserveVehicle = uncheckReserveVehicle
