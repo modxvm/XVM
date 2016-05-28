@@ -37,9 +37,9 @@ _special = {
     'france:AMX40':                      [ 4, 6 ],
     'uk:GB04_Valentine':                 [ 4, 6 ],
     'uk:GB60_Covenanter':                [ 4, 6 ],
-    'ussr:A-20':                         [ 4, 6 ],
-    'ussr:T80':                          [ 4, 6 ],
-    'japan:Ke_Ho':                       [ 4, 6 ],
+    'ussr:R12_A-20':                     [ 4, 6 ],
+    'ussr:R44_T80':                      [ 4, 6 ],
+    'japan:J06_Ke_Ho':                   [ 4, 6 ],
 
     # level 5
     'germany:PzIV_Hydro':                [ 5, 6 ],
