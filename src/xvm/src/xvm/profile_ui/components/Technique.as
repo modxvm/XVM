@@ -84,7 +84,7 @@ package xvm.profile_ui.components
 
         private var _disposed:Boolean = false;
         private var _selectedItemCD:Number = -1;
-        private var _sortDone:Boolean = false;
+        private var _initialSortDone:Boolean = false;
         //protected var filter:FilterControl;
 
         // CTOR
@@ -162,7 +162,7 @@ package xvm.profile_ui.components
                 page.listComponent.xfw_cancelValidation(DEFAULT_SORTING_INVALID);
 
                 // Sort
-                if (!_sortDone)
+                if (!_initialSortDone)
                 {
                     _selectedItemCD = itemCD;
                     App.utils.scheduler.scheduleOnNextFrame(makeInitialSort);
@@ -308,7 +308,9 @@ package xvm.profile_ui.components
                     }
                 }
 
-                _sortDone = true;
+                page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
+
+                _initialSortDone = true;
             }
             catch (ex:Error)
             {
