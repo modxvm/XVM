@@ -51,6 +51,9 @@ import config
 import utils
 
 def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
+    url = None
+    response = None
+    errStr = None
     try:
         url = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
         url = url.format(API=api, REQ=req)
@@ -72,4 +75,7 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
         return (None if response is None else unicode_to_ascii(simplejson.loads(response)), errStr)
     except Exception as ex:
         err(traceback.format_exc())
+        err('url = {}'.format(utils.hide_guid(url)))
+        err('response = {}'.format(utils.hide_guid(response)))
+        err('errStr = {}'.format(utils.hide_guid(errStr)))
         return (None, sys.exc_info()[0])
