@@ -190,7 +190,7 @@
     "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nАвтоматически вернуть экипаж, который в предыдущем\nбою был на данной машине",
 
     // Carousel
-    "Normal": "Обычный",
+    "Normal": "Обычная",
     "NonElite": "Не элитная",
     "CompleteCrew": "Полный экипаж",
     "NoMaster": "Нет мастера",
