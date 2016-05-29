@@ -22,7 +22,6 @@ package xvm.tcarousel_ui
     import scaleform.clik.constants.*;
     import scaleform.clik.events.*;
     import scaleform.clik.interfaces.*;
-    import xvm.tcarousel_ui.controls.*;
 
     public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
     {
@@ -30,14 +29,8 @@ package xvm.tcarousel_ui
         private static const SLOT_TYPE_BUYTANK:int = 2;
         private static const SLOT_TYPE_BUYSLOT:int = 3;
         private static const SLOT_TYPE_EMPTY:int = 4;
-        private static const FILTER_MARGIN:int = 5;
-        private static const SETTINGS_CAROUSEL_FILTERS_KEY:String = "tcarousel.filters";
 
         private var cfg:CCarousel;
-
-        private var _vehiclesVOManager:VehicleCarouselVOManager = null;
-
-        private var _prefFilter:PrefMultiSelectionDropDown;
 
         private var _isMultiselectionModeEnabled:Boolean = false;
         private var _carousel_height:int;
@@ -75,19 +68,6 @@ package xvm.tcarousel_ui
             componentInspectorSetting = false;
         }
 
-        override protected function onDispose():void
-        {
-            //Logger.add("UI_TankCarousel.onDispose()");
-
-            if (this._vehiclesVOManager != null)
-            {
-                this._vehiclesVOManager.clear();
-                this._vehiclesVOManager = null;
-            }
-
-            super.onDispose();
-        }
-
         override protected function configUI():void
         {
             //Logger.add("UI_TankCarousel.configUI()");
@@ -98,13 +78,6 @@ package xvm.tcarousel_ui
                 this.vehicleFiltersOld.visible = false; // TODO: delete when vehicleFiltersOld will be removed
                 vehicleFilters.validateNow();
 
-                createFilters();
-                var filter:Object = JSONx.parse(Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY, null));
-                if (filter != null)
-                {
-                    if (filter.prefs && filter.prefs is Array)
-                        _prefFilter.selectedItems = filter.prefs;
-                }
                 if (!cfg.filters.params.enabled)
                     resetFiltersS();
                 if (!cfg.filters.bonus.enabled)
@@ -113,8 +86,6 @@ package xvm.tcarousel_ui
                     vehicleFilters.favoriteFilter.selected = false;
                 if (!cfg.filters.gameMode.enabled)
                     vehicleFilters.gameModeFilter.selected = true;
-                if (!cfg.filters.prefs.enabled)
-                    _prefFilter.selectedItems = [];
                 call_setVehiclesFilter();
             }
             catch (ex:Error)
@@ -190,56 +161,6 @@ package xvm.tcarousel_ui
             {
                 _in_as_setParams = false;
             }
-        }
-
-        // TankCarousel
-        override public function as_updateVehicles(data:Object, initial:Boolean):void
-        {
-            //Logger.add("UI_TankCarousel.as_updateVehicles(...)");
-            try
-            {
-                //Logger.addObject(data);
-                if (!this._vehiclesVOManager)
-                    this._vehiclesVOManager = new VehicleCarouselVOManager();
-                if (initial)
-                    this._vehiclesVOManager.setData(data);
-                else
-                    this._vehiclesVOManager.updateData(data);
-                super.as_updateVehicles(data, initial);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        // TankCarousel
-        override public function as_showVehicles(vehIds:Array):void
-        {
-            //Logger.add("UI_TankCarousel.as_showVehicles(...)");
-            try
-            {
-                super.as_showVehicles(applyXvmFilters(vehIds));
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        // TankCarousel
-        private var _isMouseOver:Boolean = false;
-        override protected function onRendererItemRollOver(param1:VehicleCarouselVO):void
-        {
-            _isMouseOver = true;
-            super.onRendererItemRollOver(param1);
-        }
-
-        // TankCarousel
-        override protected function onItemRollOut():void
-        {
-            _isMouseOver = false;
-            super.onItemRollOut();
         }
 
         // Carousel
@@ -638,37 +559,16 @@ package xvm.tcarousel_ui
 
         // FILTERS
 
-        private function createFilters():void
-        {
-            //Logger.add("UI_TankCarousel.createFilters()");
-
-            try
-            {
-                _prefFilter = vehicleFilters.addChild(new PrefMultiSelectionDropDown()) as PrefMultiSelectionDropDown;
-                _prefFilter.width = 58;
-                _prefFilter.menuWidth = 200;
-                _prefFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
         private function rearrangeFilters():void
         {
             //Logger.add("UI_TankCarousel.rearrangeFilters()");
 
             try
             {
-                if (_prefFilter == null)
-                    return;
-
                 vehicleFilters.paramsFilter.visible = cfg.filters.params.enabled;
                 vehicleFilters.bonusFilter.visible = cfg.filters.bonus.enabled;
                 vehicleFilters.favoriteFilter.visible = cfg.filters.favorite.enabled;
                 vehicleFilters.gameModeFilter.visible = cfg.filters.gameMode.enabled && _isMultiselectionModeEnabled;
-                _prefFilter.visible = cfg.filters.prefs.enabled;
 
                 var visibleFilters:Vector.<UIComponent> = new Vector.<UIComponent>();
                 if (cfg.filters.params.enabled)
@@ -679,8 +579,6 @@ package xvm.tcarousel_ui
                     visibleFilters.push(vehicleFilters.favoriteFilter);
                 if (cfg.filters.gameMode.enabled && _isMultiselectionModeEnabled)
                     visibleFilters.push(vehicleFilters.gameModeFilter);
-                if (cfg.filters.prefs.enabled)
-                    visibleFilters.push(_prefFilter);
 
                 var rowWidth:int = cfg.filtersPadding.horizontal + 49;
                 var columnHeight:int = cfg.filtersPadding.vertical + 20;
@@ -688,14 +586,10 @@ package xvm.tcarousel_ui
                 var maxRows:int = Math.floor((height - 4) / columnHeight);
                 for (var i:int = 0; i < visibleFilters.length; ++i)
                 {
-                    var offsetX:Number = 0;
-                    var offsetY:Number = 0;
-
                     var col:int = Math.floor(i / maxRows);
                     var row:int = i % maxRows;
-
-                    visibleFilters[i].x = col * rowWidth + offsetX;
-                    visibleFilters[i].y = row * columnHeight + 2 + offsetY;
+                    visibleFilters[i].x = col * rowWidth;
+                    visibleFilters[i].y = row * columnHeight + 2;
                 }
 
                 vehicleFilters.width = (Math.floor((visibleFilters.length - 1) / maxRows) + 1) * rowWidth - 4;
@@ -706,98 +600,9 @@ package xvm.tcarousel_ui
             }
         }
 
-        private function setFilters(e:ListEvent):void
-        {
-            //Logger.add("UI_TankCarousel.setFilters()");
-
-            try
-            {
-                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_CAROUSEL_FILTERS_KEY,
-                    JSONx.stringify({ prefs:_prefFilter.selectedItems }, "", true));
-                call_setVehiclesFilter();
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
         private function call_setVehiclesFilter():void
         {
             setVehiclesFilter(vehicleFilters.bonusFilter.selected, vehicleFilters.favoriteFilter.selected, vehicleFilters.gameModeFilter.selected);
-        }
-
-        private function applyXvmFilters(vehIds:Array):Array
-        {
-            //Logger.add("UI_TankCarousel.applyXvmFilters(...)");
-
-            try
-            {
-                if (_prefFilter == null)
-                    return vehIds;
-
-                for (var i:int = vehIds.length - 1; i >= 0; --i)
-                {
-                    var vehId:int = vehIds[i];
-
-                    var vdata:VehicleData = VehicleInfo.get(vehId);
-                    if (vdata == null)
-                        continue;
-
-                    var dossier:AccountDossier = Dossier.getAccountDossier();
-                    if (dossier == null)
-                        continue;
-
-                    var vdossier:VehicleDossierCut = dossier.getVehicleDossierCut(vehId);
-                    if (vdossier == null)
-                        continue;
-
-                    var dataVO:VehicleCarouselVO = null;
-                    for (var j:int = 0; j < _vehiclesVOManager.getVehiclesLen(); ++j)
-                    {
-                        var vo:VehicleCarouselVO = _vehiclesVOManager.getVOByNum(j);
-                        if (vo != null && vo.compactDescr == vehId)
-                        {
-                            dataVO = vo;
-                            break;
-                        }
-                    }
-                    if (dataVO == null)
-                        continue;
-
-                    //Logger.addObject(dataVO);
-
-                    var remove:Boolean = false;
-                    if (cfg.filters.prefs.enabled)
-                    {
-                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_ELITE) >= 0 && dataVO.elite == true);
-                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && dataVO.doubleXPReceived < 0);
-                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
-                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_FULLCREW) >= 0 && dataVO.stat == VehicleState.CREW_NOT_FULL);
-                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) < 0 && vdata.isReserved == true);
-                        // next line will make xor filter: non_reserve <--> reserve, instead of non_reserve <--> non_reserve + reserve
-                        remove = remove || (_prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_RESERVE) >= 0 && vdata.isReserved == false);
-
-                        var removePrem:Boolean = _prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0;
-                        var removeNorm:Boolean = _prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0;
-                        if (removePrem != removeNorm)
-                        {
-                            remove = remove || removePrem && dataVO.premium == false;
-                            remove = remove || removeNorm && dataVO.premium == true;
-                        }
-                    }
-
-                    if (remove)
-                        vehIds.splice(i, 1);
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-
-            //Logger.add("< " + vehIds.length);
-            return vehIds;
         }
     }
 }

@@ -16,11 +16,5 @@ package xvm.tcarousel_filtersPopover_view
             //Logger.add("UI_FiltersPopoverView");
             super();
         }
-
-        override protected function setInitData(param1:FilterCarouseInitVO):void
-        {
-            //Logger.add("UI_FiltersPopoverView.setInitData");
-            super.setInitData(param1);
-        }
     }
 }

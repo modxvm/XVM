@@ -6,6 +6,7 @@
       now: @xvm.export('xvm.xvm2sup')
   * py_macro: add 'deterministic' argument to export definition to mark function as
       deterministic or not (default: deterministic=True)
+  * carousel filters reworked
 
   [FIXES]
   * fixed "useStandardLabels" option
@@ -17,14 +18,7 @@
       "minimap"/"labels"/"enabled"  - duplicates "minimap"/"useStandardLines"
   * moved color settings option for total hp indicator:
       "battle"/"totalHP"/"colors" > "colors"/"totalHP"      
-  * removed obsolete options:
-      "battle"/"totalHP"/"enabled"
-      "battle"/"totalHP"/"colors"      
-      "battle"/"totalHP"/"font"
-      "battle"/"totalHP"/"x"
-      "battle"/"totalHP"/"y"
-      "battle"/"totalHP"/"hAlign"
-      "battle"/"totalHP"/"vAlign"
+  * removed obsolete config section "battle"/"totalHP"
 
 XVM-6.3.0:
   * adaptation to WoT 0.9.15
