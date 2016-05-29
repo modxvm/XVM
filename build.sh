@@ -65,6 +65,8 @@ clean_sha1()
     pushd "$XVMBUILD_REPOSITORY_PATH" > /dev/null
     rm -rf ~output/sha1/
     rm -rf src/xfw/~output/sha1/
+    rm -rf ~output/cmp/
+    rm -rf src/xfw/~output/cmp/
     popd > /dev/null 
 }
 
