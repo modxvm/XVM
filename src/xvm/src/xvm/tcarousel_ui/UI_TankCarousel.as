@@ -84,8 +84,6 @@ package xvm.tcarousel_ui
                     vehicleFilters.bonusFilter.selected = false;
                 if (!cfg.filters.favorite.enabled)
                     vehicleFilters.favoriteFilter.selected = false;
-                if (!cfg.filters.gameMode.enabled)
-                    vehicleFilters.gameModeFilter.selected = true;
                 call_setVehiclesFilter();
             }
             catch (ex:Error)
@@ -568,7 +566,6 @@ package xvm.tcarousel_ui
                 vehicleFilters.paramsFilter.visible = cfg.filters.params.enabled;
                 vehicleFilters.bonusFilter.visible = cfg.filters.bonus.enabled;
                 vehicleFilters.favoriteFilter.visible = cfg.filters.favorite.enabled;
-                vehicleFilters.gameModeFilter.visible = cfg.filters.gameMode.enabled && _isMultiselectionModeEnabled;
 
                 var visibleFilters:Vector.<UIComponent> = new Vector.<UIComponent>();
                 if (cfg.filters.params.enabled)
@@ -577,8 +574,6 @@ package xvm.tcarousel_ui
                     visibleFilters.push(vehicleFilters.bonusFilter);
                 if (cfg.filters.favorite.enabled)
                     visibleFilters.push(vehicleFilters.favoriteFilter);
-                if (cfg.filters.gameMode.enabled && _isMultiselectionModeEnabled)
-                    visibleFilters.push(vehicleFilters.gameModeFilter);
 
                 var rowWidth:int = cfg.filtersPadding.horizontal + 49;
                 var columnHeight:int = cfg.filtersPadding.vertical + 20;

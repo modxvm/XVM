@@ -25,7 +25,6 @@
       //"params":   { "enabled": false },
       //"bonus":    { "enabled": false },
       //"favorite": { "enabled": false },
-      //"gameMode": { "enabled": false },
       "__stub__": {}
     },
     "fields": {
