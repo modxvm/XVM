@@ -97,12 +97,12 @@
       "spotted_arty":   "0xFFBB00",
       "dead_arty":      "0xFFFFFF"
     },
-    // Color of HP per ratio ally/enemy team, hex rgb
-    // Цвет ХП в зависимости от отношения хп союзной и вражеской команд, hex rgb
+    // HP color depending on the ratio of ally and enemy teams hp.
+    // Цвет ХП в зависимости от отношения хп союзной и вражеской команд.
     "totalHP": {
-      "bad":     "FF0000",
-      "neutral": "FFFFFF",
-      "good":    "00FF00"
+      "bad":     "0xFF0000",
+      "neutral": "0xFFFFFF",
+      "good":    "0x00FF00"
     },
     // Color settings for damage.
     // Настройки цвета для урона.
