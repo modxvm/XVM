@@ -53,7 +53,8 @@ class _Contacts:
         try:
             self.is_available = False
 
-            self.contacts_disabled = not config.networkServicesSettings.comments
+            if not self.contacts_disabled:
+                self.contacts_disabled = not config.networkServicesSettings.comments
             if self.contacts_disabled:
                 return
 
