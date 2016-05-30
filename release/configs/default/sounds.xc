@@ -51,11 +51,11 @@
       // Sound events added by XVM
       // Звуковые события, добавленные в XVM
       //
-      // Perk SixthSense
+      // Sixth sense skill
       // Перк Шестое чувство
-      "xvm_sixthSense": "sixthsense",
-      // Perk SixthSense (On vehicle Т-34-85 Rudy)
-      // Перк Шестое чувство (На технике Т-34-85 Rudy)
+      "xvm_sixthSense": "sixthSense",
+      // Sixth sense skill for Т-34-85 Rudy
+      // Перк Шестое чувство для Т-34-85 Rudy
       "xvm_sixthSenseRudy": "sixthSenseRudy",
       // Enemy detection (Use in together with disable original enemy detection event) 
       // Обнаружение противника (Используйте вместе с отключением оригинального звука обнаружения противника)
