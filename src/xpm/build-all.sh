@@ -58,7 +58,7 @@ build()
   pyc_dir="../../~output/$2/python/$d"
   pyc_file="../../~output/$2/python/${f}c"
   cmp_dir="../../~output/cmp/$2/python/$d"
-  cmp_file="../../~output/cmp/$2/python/$f"
+  cmp_file="../../~output/cmp/$2/python/$f.tmp"
 
   if [ -f "$pyc_file" ] && [ -f "$cmp_file" ] && cmp "$1" "$cmp_file" >/dev/null 2>&1; then
     return 0
