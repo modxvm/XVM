@@ -1,4 +1,6 @@
-﻿XVM-6.3.1:
+﻿XVM-6.3.1.1-dev:
+
+XVM-6.3.1:
   * bug fixes
   * total hp indicator implemented using battleLabels and py_macro
   * py_macro: changed export definition:
