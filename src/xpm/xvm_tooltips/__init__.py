@@ -35,6 +35,9 @@ from gui.shared.gui_items import GUI_ITEM_TYPE
 # TODO:0.9.15
 #from gui.shared.utils import ItemsParameters, ParametersCache
 from gui.Scaleform.locale.MENU import MENU
+from gui.shared.items_parameters.formatters import measureUnitsForParameter
+from gui.shared.items_parameters.params_helper import getParameters as getParameters_helper
+from gui.shared.items_parameters.params_helper import idealCrewComparator as idealCrewComparator_helper
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
 from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
