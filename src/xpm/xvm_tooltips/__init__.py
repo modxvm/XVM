@@ -34,6 +34,7 @@ from gui.shared.gui_items import GUI_ITEM_TYPE
 #from gui.shared.tooltips.module import ModuleParamsField
 # TODO:0.9.15
 #from gui.shared.utils import ItemsParameters, ParametersCache
+from gui.Scaleform.locale.MENU import MENU
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
 from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
@@ -183,6 +184,9 @@ def tooltip_add_param(self, result, param0, param1):
 def tooltip_with_units(value, units):
     return '%s %s' % (value, patched_text_styles.standard(units))
 
+def getParameterValue(paramName):
+    return text_styles.main(i18n.makeString(MENU.tank_params(paramName))) + text_styles.standard(measureUnitsForParameter(paramName))
+    
 # replace <h>text1 <p>text2</p></h> with: text1 text_styles.standard(text2)
 def replace_p(text):
     global p_replacement
@@ -191,8 +195,7 @@ def replace_p(text):
     return text.replace('<p>', p_replacement).replace('</p>', '</font>').replace('<h>', '').replace('</h>', '')
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
-# TODO:0.9.15
-#@overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
+@overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
     try:
         self.leftPadding = 10
@@ -205,8 +208,8 @@ def CommonStatsBlockConstructor_construct(base, self):
         veh_descr = vehicle.descriptor
         gun = vehicle.gun.descriptor
         turret = vehicle.turret.descriptor
-        vehicleCommonParams = dict(ItemsParameters.g_instance.getParameters(veh_descr))
-        vehicleRawParams = dict(ParametersCache.g_instance.getParameters(veh_descr))
+        comparator = idealCrewComparator_helper(vehicle)
+        vehicleCommonParams = dict(getParameters_helper(vehicle)) 
         veh_type_inconfig = vehicle.type.replace('AT-SPG', 'TD')
         clipGunInfoShown = False
         premium_shells = {}
@@ -220,6 +223,8 @@ def CommonStatsBlockConstructor_construct(base, self):
             else:
                 params_list = self.PARAMS.get(vehicle.type, 'default') # original parameters
             for paramName in params_list:
+                if paramName in vehicleCommonParams:
+                    paramInfo = comparator.getExtendedData(paramName)
                 if paramName == 'turretArmor' and not vehicle.hasTurrets:
                     continue
                 #maxHealth
@@ -250,7 +255,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                     explosionRadius_str = '%g' % round(explosionRadiusMin, 2)
                     if explosionRadiusMin != explosionRadiusMax:
                         explosionRadius_str += '/%s' % gold_pad('%g' % round(explosionRadiusMax, 2))
-                    tooltip_add_param(self, result, self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)[0], explosionRadius_str)
+                    tooltip_add_param(self, result, getParameterValue(paramName), explosionRadius_str)
                 #shellSpeedSummary
                 elif paramName == 'shellSpeedSummary':
                     shellSpeedSummary_arr = []
@@ -334,7 +339,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName == 'speedLimits':
                     (speedLimitForward, speedLimitReverse) = veh_descr.physics['speedLimits']
                     speedLimits_str = str(int(speedLimitForward * 3.6)) + '/' + str(int(speedLimitReverse * 3.6))
-                    tooltip_add_param(self, result, self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)[0], speedLimits_str)
+                    tooltip_add_param(self, result, getParameterValue(paramName), speedLimits_str)
                 #turret rotation speed
                 elif paramName == 'turretRotationSpeed' or paramName == 'gunRotationSpeed':
                     if not vehicle.hasTurrets:
@@ -352,9 +357,8 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
                     tooltip_add_param(self, result, l10n(customtext), '')
-                elif paramName in vehicleCommonParams or paramName in vehicleRawParams:
-                    param0, param1 = self._getParameterValue(paramName, vehicleCommonParams, vehicleRawParams)
-                    tooltip_add_param(self, result, param0, param1)
+                elif paramName in paramInfo.name:
+                    tooltip_add_param(self, result, getParameterValue(paramName), paramInfo.value)
                 #radioRange
                 elif paramName == 'radioRange':
                     radioRange_str = '%s' % int(vehicle.radio.descriptor['distance'])
