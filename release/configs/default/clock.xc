@@ -33,7 +33,7 @@
     "textAlign": "right",
     // vertical alignment of text in field ("top", "center", "bottom").
     // Вертикальное выравнивание текста внутри поля ("top", "center", "bottom").
-    "textVAlign": "center",
+    "textVAlign": "bottom",
     // Transparency in percents [0..100].
     // Прозрачность в процентах [0..100].
     "alpha": 100,
@@ -72,7 +72,7 @@
     //
     // Clock format.
     // Формат часов.
-    "format": "<textformat tabstops='[80]' leading='-39'><font face='$FieldFont'><font size='15'>{{D%02d}} {{MM}} {{Y}}</font><tab><font size='36'>{{h%02d}}:{{m%02d}}</font>\n<textformat rightMargin='87'>{{WW}}</font></textformat></font></textformat>",
+    "format": "<font face='$FieldFont'><textformat leading='-38'><font size='36'>{{h%02d}}:{{m%02d}}</font><br></textformat><textformat rightMargin='85' leading='-1'>{{WW}}<br><font size='15'>{{D%02d}} {{MM}} {{Y}}</font></textformat></font>",
     // Shadow.
     // Тень.
     "shadow": {
