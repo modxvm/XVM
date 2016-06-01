@@ -187,7 +187,7 @@ def text_styles_getStyle(style, ctx = {}):
         return orig_text_styles._getStyle(style, ctx)
 
 def tooltip_add_param(self, result, param0, param1):
-    result.append(formatters.packTextParameterBlockData(name=patched_text_styles.main(param0), value=patched_text_styles.stats(param1), valueWidth=100, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
+    result.append(formatters.packTextParameterBlockData(name=patched_text_styles.main(param0), value=patched_text_styles.stats(param1), valueWidth=82, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
 
 def tooltip_with_units(value, units):
     return '%s %s' % (value, patched_text_styles.standard(units))
@@ -376,6 +376,9 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
                     tooltip_add_param(self, result, l10n(customtext), '')
+                elif paramName in ['hullArmor', 'turretArmor']:
+                    value = '/'.join((str(int(x)) for x in paramInfo.value))
+                    tooltip_add_param(self, result, getParameterValue(paramName), value)
                 elif paramName in paramInfo.name:
                     tooltip_add_param(self, result, getParameterValue(paramName), paramInfo.value)
         if vehicle.isInInventory:
