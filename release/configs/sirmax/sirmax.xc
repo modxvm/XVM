@@ -55,7 +55,6 @@
     //"enableCrewAutoReturn": false,
     //"crewReturnByDefault": true,
     "enableEquipAutoReturn": true,
-    "showShootRangeTooltip": true,
     "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },

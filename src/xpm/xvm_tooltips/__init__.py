@@ -32,8 +32,6 @@ from gui.shared.tooltips import formatters
 from gui.shared.gui_items import GUI_ITEM_TYPE
 # TODO:0.9.15
 #from gui.shared.tooltips.module import ModuleParamsField
-# TODO:0.9.15
-#from gui.shared.utils import ItemsParameters, ParametersCache
 from gui.Scaleform.locale.MENU import MENU
 from gui.shared.items_parameters.formatters import measureUnitsForParameter
 from gui.shared.items_parameters.params_helper import getParameters as getParameters_helper
@@ -153,6 +151,13 @@ def VehicleInfoTooltipData_packBlocks(base, self, *args, **kwargs):
     result = base(self, *args, **kwargs)
     result = [item for item in result if item.get('data', {}).get('blocksData')]
     return result
+
+@overrideMethod(tooltips_vehicle.SimplifiedStatsBlockConstructor, 'construct')
+def SimplifiedStatsBlockConstructor_construct(base, self):
+    if config.get('tooltips/hideSimplifiedVehParams'):
+        return []
+    else:
+        return base(self)
 
 @overrideMethod(tooltips_vehicle.AdditionalStatsBlockConstructor, 'construct')
 def AdditionalStatsBlockConstructor_construct(base, self):
@@ -356,12 +361,6 @@ def CommonStatsBlockConstructor_construct(base, self):
                         resistances_arr.append('%g' % round(key, 2))
                     terrainResistance_str = '/'.join(resistances_arr)
                     tooltip_add_param(self, result, l10n('terrainResistance'), terrainResistance_str)
-                #custom text
-                elif paramName.startswith('TEXT:'):
-                    customtext = paramName[5:]
-                    tooltip_add_param(self, result, l10n(customtext), '')
-                elif paramName in paramInfo.name:
-                    tooltip_add_param(self, result, getParameterValue(paramName), paramInfo.value)
                 #radioRange
                 elif paramName == 'radioRange':
                     radioRange_str = '%s' % int(vehicle.radio.descriptor['distance'])
@@ -373,6 +372,12 @@ def CommonStatsBlockConstructor_construct(base, self):
                 #inner name, for example - ussr:R100_SU122A
                 elif paramName == 'innerName':
                     tooltip_add_param(self, result, vehicle.name, '')
+                #custom text
+                elif paramName.startswith('TEXT:'):
+                    customtext = paramName[5:]
+                    tooltip_add_param(self, result, l10n(customtext), '')
+                elif paramName in paramInfo.name:
+                    tooltip_add_param(self, result, getParameterValue(paramName), paramInfo.value)
         if vehicle.isInInventory:
             # optional devices icons, must be in the end
             if 'optDevicesIcons' in params_list:

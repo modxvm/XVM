@@ -7,6 +7,9 @@
     // true - Combine icons of equipment and optional devices into one row.
     // true - Объединить значки оборудования и доп.модулей в одну строку.
     "combineIcons": true,
+    // true - Hide simplified vehicle parameters
+    // true - Спрятать упрощенные ТТХ
+    "hideSimplifiedVehParams": true,
     // true - Hide text at bottom of tooltip showing quantity of used eqipment, optional devices and crew.
     // true - Спрятать текст внизу подсказки показывающий количество используемого оборудования, доп. модулей и экипаж.
     "hideBottomText": true,
