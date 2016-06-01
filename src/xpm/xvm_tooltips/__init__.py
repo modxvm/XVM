@@ -33,6 +33,7 @@ from gui.shared.gui_items import GUI_ITEM_TYPE
 # TODO:0.9.15
 #from gui.shared.tooltips.module import ModuleParamsField
 from gui.Scaleform.locale.MENU import MENU
+from gui.shared.items_parameters import formatters as param_formatter
 from gui.shared.items_parameters.formatters import measureUnitsForParameter
 from gui.shared.items_parameters.params_helper import getParameters as getParameters_helper
 from gui.shared.items_parameters.params_helper import idealCrewComparator as idealCrewComparator_helper
@@ -49,7 +50,6 @@ from xvm_main.python.constants import *
 from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
-from xvm_main.python.vehinfo_camo import getCamoValues
 from xvm_main.python.xvm import l10n
 # import "private" copy of text_styles for patching
 orig_text_styles = sys.modules.pop('gui.shared.formatters.text_styles')
@@ -194,6 +194,15 @@ def tooltip_with_units(value, units):
 
 def getParameterValue(paramName):
     return text_styles.main(i18n.makeString(MENU.tank_params(paramName))) + text_styles.standard(measureUnitsForParameter(paramName))
+
+def formatNumber(value):
+    if value > 99:
+        value = round(value)
+    elif value > 9:
+        value = round(value, 1)
+    else:
+        value = round(value, 2)
+    return str(BigWorld.wg_getNiceNumberFormat(value))
     
 # replace <h>text1 <p>text2</p></h> with: text1 text_styles.standard(text2)
 def replace_p(text):
@@ -242,12 +251,6 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName == 'battleTiers':
                     (minTier, maxTier) = getTiers(vehicle.level, vehicle.type, vehicle.name)
                     tooltip_add_param(self, result, l10n('Battle tiers'), '%s..%s' % (minTier, maxTier))
-                #camo coeffitients
-                elif paramName == 'camo_coeff':
-                    topTurret = veh_descr.type.turrets[0][-1]
-                    camo_coeff_arr = getCamoValues(vehicle.name, turret['name'] == topTurret['name'], gun['name'])
-                    camo_coeff_str = '/'.join(map(camo_smart_round, camo_coeff_arr))
-                    tooltip_add_param(self, result, tooltip_with_units(l10n('camoCoeff'), '(%)'), camo_coeff_str)
                 #explosionRadius
                 elif paramName == 'explosionRadius':
                     explosionRadiusMin = 999
@@ -260,9 +263,9 @@ def CommonStatsBlockConstructor_construct(base, self):
                                 explosionRadiusMax = shot['shell']['explosionRadius']
                     if explosionRadiusMax == 0: # no HE
                         continue
-                    explosionRadius_str = '%g' % round(explosionRadiusMin, 2)
+                    explosionRadius_str = formatNumber(explosionRadiusMin)
                     if explosionRadiusMin != explosionRadiusMax:
-                        explosionRadius_str += '/%s' % gold_pad('%g' % round(explosionRadiusMax, 2))
+                        explosionRadius_str += '/%s' % gold_pad(formatNumber(explosionRadiusMax))
                     tooltip_add_param(self, result, getParameterValue(paramName), explosionRadius_str)
                 #shellSpeedSummary
                 elif paramName == 'shellSpeedSummary':
@@ -276,13 +279,13 @@ def CommonStatsBlockConstructor_construct(base, self):
                     tooltip_add_param(self, result, tooltip_with_units(l10n('shellSpeed'), l10n('(m/sec)')), shellSpeedSummary_str)
                 #piercingPowerAvg
                 elif paramName == 'piercingPowerAvg':
-                    piercingPowerAvg = '%g' % veh_descr.shot['piercingPower'][0]
+                    piercingPowerAvg = formatNumber(veh_descr.shot['piercingPower'][0])
                     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/avgPiercingPower')), piercingPowerAvg)
                 #piercingPowerAvgSummary
                 elif paramName == 'piercingPowerAvgSummary':
                     piercingPowerAvgSummary_arr = []
                     for shot in gun['shots']:
-                        piercingPower_str = '%g' % shot['piercingPower'][0]
+                        piercingPower_str = formatNumber(shot['piercingPower'][0])
                         if premium_shells[shot['shell']['compactDescr']]:
                             piercingPower_str = gold_pad(piercingPower_str)
                         piercingPowerAvgSummary_arr.append(piercingPower_str)
@@ -292,7 +295,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName == 'damageAvgSummary':
                     damageAvgSummary_arr = []
                     for shot in gun['shots']:
-                        damageAvg_str = '%g' % shot['shell']['damage'][0]
+                        damageAvg_str = formatNumber(shot['shell']['damage'][0])
                         if premium_shells[shot['shell']['compactDescr']]:
                             damageAvg_str = gold_pad(damageAvg_str)
                         damageAvgSummary_arr.append(damageAvg_str)
@@ -304,15 +307,15 @@ def CommonStatsBlockConstructor_construct(base, self):
                         continue
                     (shellsCount, shellReloadingTime) = gun['clip']
                     reloadMagazineTime = gun['reloadTime']
-                    shellReloadingTime_str = '%g' % round(shellReloadingTime, 2)
-                    reloadMagazineTime_str = '%g' % round(reloadMagazineTime, 2)
+                    shellReloadingTime_str = formatNumber(shellReloadingTime)
+                    reloadMagazineTime_str = formatNumber(reloadMagazineTime)
                     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/shellsCount')), shellsCount)
                     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/shellReloadingTime')), shellReloadingTime_str)
                     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/reloadMagazineTime')), reloadMagazineTime_str)
                     clipGunInfoShown = True
                 #rate of fire
                 elif paramName == 'rateOfFire' and not vehicle.gun.isClipGun():
-                    rateOfFire_str = '%g' % round(60 / gun['reloadTime'], 2)
+                    rateOfFire_str = formatNumber(60 / gun['reloadTime'])
                     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/reloadTime')), rateOfFire_str)
                 # gun traverse limits
                 elif paramName == 'traverseLimits' and gun['turretYawLimits']:
@@ -358,7 +361,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName == 'terrainResistance':
                     resistances_arr = []
                     for key in veh_descr.chassis['terrainResistance']:
-                        resistances_arr.append('%g' % round(key, 2))
+                        resistances_arr.append(formatNumber(key))
                     terrainResistance_str = '/'.join(resistances_arr)
                     tooltip_add_param(self, result, l10n('terrainResistance'), terrainResistance_str)
                 #radioRange
@@ -367,7 +370,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/radioDistance')), radioRange_str)
                 #gravity
                 elif paramName == 'gravity':
-                    gravity_str = '%g' % round(veh_descr.shot['gravity'], 2)
+                    gravity_str = formatNumber(veh_descr.shot['gravity'])
                     tooltip_add_param(self, result, l10n('gravity'), gravity_str)
                 #inner name, for example - ussr:R100_SU122A
                 elif paramName == 'innerName':
@@ -376,11 +379,9 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
                     tooltip_add_param(self, result, l10n(customtext), '')
-                elif paramName in ['hullArmor', 'turretArmor']:
-                    value = '/'.join((str(int(x)) for x in paramInfo.value))
-                    tooltip_add_param(self, result, getParameterValue(paramName), value)
                 elif paramName in paramInfo.name:
-                    tooltip_add_param(self, result, getParameterValue(paramName), paramInfo.value)
+                    valueStr = str(param_formatter.baseFormatParameter(paramName, paramInfo.value))
+                    tooltip_add_param(self, result, getParameterValue(paramName), valueStr)
         if vehicle.isInInventory:
             # optional devices icons, must be in the end
             if 'optDevicesIcons' in params_list:
@@ -435,7 +436,7 @@ def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
     try:
         if 'explosionRadius' in descriptor:
             key_str = i18n.makeString('#menu:tank_params/explosionRadius')
-            result = result.replace('{/BODY}', '\n%s: %g{/BODY}' % (key_str, round(descriptor['explosionRadius'], 2)))
+            result = result.replace('{/BODY}', '\n%s: %s{/BODY}' % (key_str, formatNumber(descriptor['explosionRadius'])))
     except Exception as ex:
         err(traceback.format_exc())
     return result
@@ -498,15 +499,6 @@ def gold_pad(text):
 
 def red_pad(text):
     return "<font color='#FF0000'>%s</font>" % text
-
-def camo_smart_round(value):
-    if value == 0:
-        return '?'
-    if value >= 10:
-        return '%g' % round(value)
-    if value >= 1:
-        return '%g' % round(value, 1)
-    return '%g' % round(value, 2) # < 1
 
 # make dict: shells => compatible vehicles
 def relate_shells_vehicles():

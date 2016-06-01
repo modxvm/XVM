@@ -29,7 +29,8 @@
     "lightTank":    [
                     "maxHealth",
                     "circularVisionRadius",
-                    "camo_coeff",
+                    "invisibilityStillFactor",
+                    "invisibilityMovingFactor",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                     "turretArmor",
                     "hullArmor",
@@ -54,7 +55,8 @@
     "mediumTank":   [
                     "maxHealth",
                     "circularVisionRadius",
-                    "camo_coeff",
+                    "invisibilityStillFactor",
+                    "invisibilityMovingFactor",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                     "turretArmor",
                     "hullArmor",
@@ -79,6 +81,8 @@
     "heavyTank":    [
                     "maxHealth",
                     "circularVisionRadius",
+                    "invisibilityStillFactor",
+                    "invisibilityMovingFactor",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                     "turretArmor",
                     "hullArmor",
@@ -102,7 +106,8 @@
     "TD":           [
                     "maxHealth",
                     "circularVisionRadius",
-                    "camo_coeff",
+                    "invisibilityStillFactor",
+                    "invisibilityMovingFactor",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:armor}}</b></font>",
                     "turretArmor",
                     "hullArmor",
@@ -126,7 +131,8 @@
     "SPG":          [
                     "maxHealth",
                     "circularVisionRadius",
-                    "camo_coeff",
+                    "invisibilityStillFactor",
+                    "invisibilityMovingFactor",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:firepower}}</b></font>",
                     "shootingRadius",
                     "damageAvgSummary",
@@ -184,15 +190,7 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "rateOfFire",                           - Скорострельность оружия (в барабанах заменяется их специфичными) \ Rate of Fire (for clip guns will be shown their specific)
 "battleTiers",                          - Уровни боев танка \ Battle tiers of vehicle
 "maxHealth",                            - ХП танка \ HP of vehicle
+"invisibilityStillFactor"               - Незаметность неподвижной машины (%) \ Concealment of Stationary Vehicle (%)
+"invisibilityMovingFactor"              - Незаметность машины в движении (%) \ Concealment of Moving Vehicle (%)
 "TEXT:customtext",                      - Показывать произвольный текст (с поддержкой HTML и макросом {{l10n:text}}) \ Show custom text (with HTML support and macro {{l10n:text}})
-"camo_coeff",                           - Коэффициенты маскировки (неподвижно/в движении/при выстреле) \ Camo coefficients (standing still/moving/shooting)
-...
-
-
-
-Camo data taken from following source, special thanks to authors!
-Показатели маскировки взяты из следущего источника, особая благодарность авторам!
-http://forum.worldoftanks.ru/index.php?/topic/1047590-
-
-
 */

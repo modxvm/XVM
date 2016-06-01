@@ -1,5 +1,11 @@
 ﻿XVM-6.3.1.1-dev:
   * добавлена опция "tooltips"/"hideSimplifiedVehParams" - спрятать упрощенные ТТХ
+  * tooltips:
+      добавлены параметры:
+        "invisibilityStillFactor" - Незаметность неподвижной машины (%)
+        "invisibilityMovingFactor" - Незаметность машины в движении (%)
+      удален параметр:
+        "camo_coeff"
 
 XVM-6.3.1:
   * исправление ошибок

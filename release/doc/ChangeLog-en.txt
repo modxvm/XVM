@@ -1,5 +1,12 @@
 ﻿XVM-6.3.1.1-dev:
   * added option "tooltips"/"hideSimplifiedVehParams" - hide simplified vehicle parameters
+  * tooltips:
+      added parameters:
+        "invisibilityStillFactor" - Concealment of Stationary Vehicle (%)
+        "invisibilityMovingFactor" - Concealment of Moving Vehicle (%)
+      removed parameter:
+        "camo_coeff"
+
 
 XVM-6.3.1:
   * bug fixes
