@@ -51,10 +51,6 @@ from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
-# import "private" copy of text_styles for patching
-orig_text_styles = sys.modules.pop('gui.shared.formatters.text_styles')
-import gui.shared.formatters.text_styles as patched_text_styles
-sys.modules['gui.shared.formatters.text_styles'] = orig_text_styles
 
 #####################################################################
 # globals
@@ -71,10 +67,6 @@ p_replacement = None # will be something like <font size... color...>
 
 def start():
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, tooltips_clear_cache)
-
-    # patching text_styles for our font/size
-    patched_text_styles._getStyle = text_styles_getStyle
-    tooltips_vehicle.text_styles = patched_text_styles
 
 BigWorld.callback(0, start)
 
@@ -169,28 +161,35 @@ def AdditionalStatsBlockConstructor_construct(base, self):
     else:
         return base(self)
 
-# patched _getStyle to use out font/size
-def text_styles_getStyle(style, ctx = {}):
+@overrideMethod(text_styles, "_getStyle")
+def text_styles_getStyle(base, style, ctx = None):
+    if ctx is None:
+        ctx = {}
     try:
         if style not in styles_templates:
             template = g_htmlTemplates['html_templates:lobby/textStyle'][style].source
             template_string = template if type(template) is str else template['text']
-            if "'14'" in template_string and '$FieldFont' in template_string:
-                template_string = template_string.replace("size='14'", "size='%s'" % config.get('tooltips/fontSize', 12)).replace("face='$FieldFont'", "face='%s'" % config.get('tooltips/fontName', '$TextFont'))
+            if "size='14'" in template_string and "face='$FieldFont'" in template_string:
+                template_string = template_string \
+                    .replace("size='14'", "size='%s'" % config.get('tooltips/fontSize', 14)) \
+                    .replace("face='$FieldFont'", "face='%s'" % config.get('tooltips/fontName', '$FieldFont'))
             styles_templates[style] = template_string if type(template) is str else {'text': template_string}
         if type(styles_templates[style]) is str:
             return styles_templates[style]
         else:
-            return styles_templates[style]['text'] % ctx
+            if ctx:
+                return styles_templates[style]['text'] % ctx
+            else:
+                return base(style, ctx)
     except Exception as ex:
         err(traceback.format_exc())
-        return orig_text_styles._getStyle(style, ctx)
+        return base(style, ctx)
 
 def tooltip_add_param(self, result, param0, param1):
-    result.append(formatters.packTextParameterBlockData(name=patched_text_styles.main(param0), value=patched_text_styles.stats(param1), valueWidth=82, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
+    result.append(formatters.packTextParameterBlockData(name=text_styles.main(param0), value=text_styles.stats(param1), valueWidth=82, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
 
 def tooltip_with_units(value, units):
-    return '%s %s' % (value, patched_text_styles.standard(units))
+    return '%s %s' % (value, text_styles.standard(units))
 
 def getParameterValue(paramName):
     return text_styles.main(i18n.makeString(MENU.tank_params(paramName))) + text_styles.standard(measureUnitsForParameter(paramName))
@@ -203,12 +202,12 @@ def formatNumber(value):
     else:
         value = round(value, 2)
     return str(BigWorld.wg_getNiceNumberFormat(value))
-    
+
 # replace <h>text1 <p>text2</p></h> with: text1 text_styles.standard(text2)
 def replace_p(text):
     global p_replacement
     if not p_replacement:
-        p_replacement = patched_text_styles.standard('').split('>', 1)[0] + '>'
+        p_replacement = text_styles.standard('').split('>', 1)[0] + '>'
     return text.replace('<p>', p_replacement).replace('</p>', '</font>').replace('<h>', '').replace('</h>', '')
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
@@ -220,13 +219,13 @@ def CommonStatsBlockConstructor_construct(base, self):
         cache_result = carousel_tooltips_cache.get(vehicle.intCD)
         if cache_result:
             return cache_result
-        result = [formatters.packTitleDescBlock(patched_text_styles.middleTitle(i18n.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY)), padding=formatters.packPadding(left=35, right=self.rightPadding, bottom=8))]
+        result = [formatters.packTitleDescBlock(text_styles.middleTitle(i18n.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY)), padding=formatters.packPadding(left=35, right=self.rightPadding, bottom=8))]
         params = self.configuration.params
         veh_descr = vehicle.descriptor
         gun = vehicle.gun.descriptor
         turret = vehicle.turret.descriptor
         comparator = idealCrewComparator_helper(vehicle)
-        vehicleCommonParams = dict(getParameters_helper(vehicle)) 
+        vehicleCommonParams = dict(getParameters_helper(vehicle))
         veh_type_inconfig = vehicle.type.replace('AT-SPG', 'TD')
         clipGunInfoShown = False
         premium_shells = {}
@@ -542,4 +541,3 @@ def ItemsRequester_clear(*args, **kwargs):
 def tooltips_clear_cache(*args, **kwargs):
     carousel_tooltips_cache.clear()
     styles_templates.clear()
-
