@@ -1,4 +1,5 @@
-﻿XVM-6.3.1.1-dev:
+﻿XVM-6.3.1.1:
+  * update for WoT 0.9.15 #30 micropatch
   * added option "tooltips"/"hideSimplifiedVehParams" - hide simplified vehicle parameters
   * tooltips:
       added parameters:
@@ -6,7 +7,6 @@
         "invisibilityMovingFactor" - Concealment of Moving Vehicle (%)
       removed parameter:
         "camo_coeff"
-
 
 XVM-6.3.1:
   * bug fixes
