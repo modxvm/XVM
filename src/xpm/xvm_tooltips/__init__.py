@@ -419,8 +419,8 @@ def CommonStatsBlockConstructor_construct(base, self):
                 crewRolesIcons_arr.append('<img src="%s/%s.png" height="16" width="16">' % (imgPath, tankman_role[0]))
             crewRolesIcons_str = ''.join(crewRolesIcons_arr)
             tooltip_add_param(self, result, crewRolesIcons_str, '')
-        if len(result) > 35: # limitation
-            result = result[:35]
+        if len(result) > 29: # limitation
+            result = result[:29]
         carousel_tooltips_cache[vehicle.intCD] = result
         return result
     except Exception as ex:
