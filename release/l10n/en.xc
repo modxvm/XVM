@@ -126,7 +126,6 @@
     "terrainResistance": "Terrain resistance",
     "gravity": "Gravity",
     "shellSpeed": "Shell speed",
-    "camoCoeff": "Camo coefficients",
     "general": "General",
     "armor": "Armor",
     "firepower": "Firepower",
