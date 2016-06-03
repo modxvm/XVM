@@ -138,7 +138,7 @@
       "visible": true,
       "x": -35,
       "y": -21,
-      "alpha": 100,
+      "alpha": "{{xvm-stat?100|0}}",
       "color": "{{c:r}}",
       "font": {
         "name": "xvm",
@@ -148,7 +148,7 @@
         "italic": false
       },
       "shadow": {
-        "alpha": "{{xvm-stat?100|0}}",
+        "alpha": 100,
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
