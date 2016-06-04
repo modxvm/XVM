@@ -137,12 +137,12 @@
       "name": "Rating",
       "visible": true,
       "x": -35,
-      "y": -21,
+      "y": -20,
       "alpha": "{{xvm-stat?100|0}}",
       "color": "{{c:r}}",
       "font": {
         "name": "xvm",
-        "size": 17,
+        "size": 16,
         "align": "right",
         "bold": false,
         "italic": false
