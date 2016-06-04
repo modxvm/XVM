@@ -139,7 +139,7 @@
       "x": -35,
       "y": -20,
       "alpha": "{{xvm-stat?100|0}}",
-      "color": "{{c:r}}",
+      "color": "{{c:r|#DBDBDB}}",
       "font": {
         "name": "xvm",
         "size": 16,
