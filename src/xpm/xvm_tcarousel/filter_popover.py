@@ -7,6 +7,7 @@ from account_helpers.AccountSettings import DEFAULT_VALUES, KEY_FILTERS, CAROUSE
 from account_helpers.settings_core.ServerSettingsManager import ServerSettingsManager
 from gui.shared import g_itemsCache
 from gui.shared.gui_items.dossier.achievements import MarkOfMasteryAchievement
+from gui.shared.utils.functions import makeTooltip
 from gui.shared.utils.requesters.ItemsRequester import REQ_CRITERIA
 import gui.Scaleform.daapi.view.lobby.hangar.filter_popover as filter_popover
 from gui.Scaleform.daapi.view.lobby.hangar.filter_popover import FilterPopover, _SECTIONS, _SECTIONS_MAP
@@ -88,12 +89,12 @@ def _filter_popover_getInitialVO(base, filters, hasRentedVehicles):
     data = base(filters, hasRentedVehicles)
 
     premium = data['specialTypeLeft'][0]
-    normal = {'label': l10n('Normal'), 'tooltip': None, 'selected': filters[PREFS.NORMAL]}
+    normal = {'label': l10n('Normal'), 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
     elite = data['specialTypeRight'][0]
-    non_elite = {'label': l10n('NonElite'), 'tooltip': None, 'selected': filters[PREFS.NON_ELITE]}
-    complete_crew = {'label': l10n('CompleteCrew'), 'tooltip': None, 'selected': filters[PREFS.FULL_CREW]}
-    no_master = {'label': l10n('NoMaster'), 'tooltip': None, 'selected': filters[PREFS.NO_MASTER]}
-    reserve = {'label': l10n('ReserveFilter'), 'tooltip': None, 'selected': filters[PREFS.RESERVE]}
+    non_elite = {'label': l10n('NonElite'), 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
+    complete_crew = {'label': l10n('CompleteCrew'), 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
+    no_master = {'label': l10n('NoMaster'), 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
+    reserve = {'label': l10n('ReserveFilter'), 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
 
     data['specialTypeLeft'] = [premium, elite, complete_crew, reserve]
     data['specialTypeRight'] = [normal, non_elite, no_master]
