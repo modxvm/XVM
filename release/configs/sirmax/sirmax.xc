@@ -339,6 +339,9 @@
     //"minimapClicksColor": null,
     "minimapClicksTime": 7
   },
+  "tooltips": {
+    //"hideSimplifiedVehParams": false
+  },
   "battleLabels": ${"sirmax-battleLabels.xc":"."},
   "consts": {
       "VM_COEFF_VMM_DEAD": 0.75

@@ -219,7 +219,9 @@ def CommonStatsBlockConstructor_construct(base, self):
         cache_result = carousel_tooltips_cache.get(vehicle.intCD)
         if cache_result:
             return cache_result
-        result = [formatters.packTitleDescBlock(text_styles.middleTitle(i18n.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY)), padding=formatters.packPadding(left=35, right=self.rightPadding, bottom=8))]
+        result = []
+        if not config.get('tooltips/hideSimplifiedVehParams'):
+            result.append(formatters.packTitleDescBlock(text_styles.middleTitle(i18n.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY)), padding=formatters.packPadding(left=0, right=self.rightPadding, bottom=8)))
         params = self.configuration.params
         veh_descr = vehicle.descriptor
         gun = vehicle.gun.descriptor
