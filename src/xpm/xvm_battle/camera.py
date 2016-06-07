@@ -100,7 +100,10 @@ def _SniperCamera_enable(base, self, targetPos, saveZoom):
         zoom = config.get('battle/camera/sniper/startZoom')
         if zoom is not None:
             saveZoom = True
-            self._SniperCamera__cfg['zoom'] = utils.takeClosest(self._SniperCamera__cfg['zooms'], zoom)
+        else:
+            zoom = self._SniperCamera__cfg['zoom']
+        self._SniperCamera__cfg['zoom'] = utils.takeClosest(self._SniperCamera__cfg['zooms'], zoom)
+
     base(self, targetPos, saveZoom)
     _sendSniperCameraFlash(True, self._SniperCamera__zoom)
 
