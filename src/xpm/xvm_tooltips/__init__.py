@@ -186,7 +186,7 @@ def text_styles_getStyle(base, style, ctx = None):
         return base(style, ctx)
 
 def tooltip_add_param(self, result, param0, param1):
-    result.append(formatters.packTextParameterBlockData(name=text_styles.main(param0), value=text_styles.stats(param1), valueWidth=102, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
+    result.append(formatters.packTextParameterBlockData(name=text_styles.main(param0), value=text_styles.stats(param1), valueWidth=107, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
 
 def tooltip_with_units(value, units):
     return '%s %s' % (value, text_styles.standard(units))
@@ -214,7 +214,7 @@ def replace_p(text):
 @overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
     try:
-        self.leftPadding = -10
+        self.leftPadding = -15
         vehicle = self.vehicle
         cache_result = carousel_tooltips_cache.get(vehicle.intCD)
         if cache_result:
@@ -247,7 +247,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                     continue
                 #maxHealth
                 elif paramName == 'maxHealth':
-                    tooltip_add_param(self, result, i18n.makeString('#menu:vehicleInfo/params/maxHealth'), veh_descr.maxHealth)
+                    tooltip_add_param(self, result, i18n.makeString('#menu:vehicleInfo/params/maxHealth'), formatNumber(veh_descr.maxHealth))
                 #battle tiers
                 elif paramName == 'battleTiers':
                     (minTier, maxTier) = getTiers(vehicle.level, vehicle.type, vehicle.name)
