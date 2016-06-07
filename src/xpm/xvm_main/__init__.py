@@ -291,38 +291,40 @@ def _Minimap__updateSettings(base, self):
 @overrideMethod(g_settingsCore, 'getSetting')
 def __g_settingsCore_getSetting(base, name):
     value = base(name)
-    global in_setupMinimapSettings
-    global in_updateSettings
-    if in_setupMinimapSettings or in_updateSettings:
-        if name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
-            if not config.get('minimap/useStandardCircles'):
-                value = False
-        elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
-            if not config.get('minimap/useStandardCircles'):
-                value = False
-        elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
-            if not config.get('minimap/useStandardCircles'):
-                value = False
-        elif name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
-            if not config.get('minimap/useStandardLines'):
-                value = False
-        elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
-            if not config.get('minimap/useStandardLines'):
-                value = False
-        #debug('getSetting: {} = {}'.format(name, value))
+    if config.get('minimap/enabled'):
+        global in_setupMinimapSettings
+        global in_updateSettings
+        if in_setupMinimapSettings or in_updateSettings:
+            if name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
+                if not config.get('minimap/useStandardLines'):
+                    value = False
+            elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
+                if not config.get('minimap/useStandardLines'):
+                    value = False
+            #debug('getSetting: {} = {}'.format(name, value))
     return value
 
 
 @overrideMethod(SettingsContainer, 'getSetting')
 def __SettingsContainer_getSetting(base, self, name):
     value = base(self, name)
-    global in_setupMinimapSettings
-    global in_updateSettings
-    if in_setupMinimapSettings or in_updateSettings:
-        if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
-            if not config.get('minimap/useStandardLabels'):
-                value._set(0)
-        #debug('getSetting: {} = {}'.format(name, value))
+    if config.get('minimap/enabled'):
+        global in_setupMinimapSettings
+        global in_updateSettings
+        if in_setupMinimapSettings or in_updateSettings:
+            if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
+                if not config.get('minimap/useStandardLabels'):
+                    value._set(0)
+            #debug('getSetting: {} = {}'.format(name, value))
     return value
 
 
