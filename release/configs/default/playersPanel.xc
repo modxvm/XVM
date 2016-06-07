@@ -130,7 +130,7 @@
           //     "distance" (in pixels)
           //     "angle"    (0.0 .. 360.0)
           //     "color"    "0xXXXXXX"
-          //     "alpha"    (0.0 .. 1.0)
+          //     "alpha"    (0.0 .. 100.0)
           //     "blur"     (0.0 .. 255.0)
           //     "strength" (0.0 .. 255.0)
           //    }

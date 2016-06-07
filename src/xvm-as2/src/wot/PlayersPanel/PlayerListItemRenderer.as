@@ -601,7 +601,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                     format.shadow.distance != null ? format.shadow.distance : 0,
                     format.shadow.angle != null ? format.shadow.angle : 0,
                     format.shadow.color != null ? parseInt(format.shadow.color) : 0x000000,
-                    format.shadow.alpha != null ? format.shadow.alpha : 0.75,
+                    format.shadow.alpha != null ? format.shadow.alpha / 100.0 : 0.75,
                     blur,
                     blur,
                     format.shadow.strength != null ? format.shadow.strength : 1)

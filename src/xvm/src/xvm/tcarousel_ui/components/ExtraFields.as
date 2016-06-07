@@ -195,7 +195,7 @@ package xvm.tcarousel_ui.components
                             format.shadow.distance != null ? format.shadow.distance : 0,
                             format.shadow.angle != null ? format.shadow.angle : 45,
                             format.shadow.color != null ? parseInt(format.shadow.color) : 0x000000,
-                            format.shadow.alpha != null ? format.shadow.alpha : 1,
+                            format.shadow.alpha != null ? format.shadow.alpha / 100.0 : 1,
                             format.shadow.blur != null ? format.shadow.blur : 4,
                             format.shadow.blur != null ? format.shadow.blur : 4,
                             format.shadow.strength != null ? format.shadow.strength : 1)
@@ -337,7 +337,7 @@ package xvm.tcarousel_ui.components
                         format.shadow.distance != null ? parseFloat(Macros.Format(null, format.shadow.distance, options)) : 0,
                         format.shadow.angle != null ? parseFloat(Macros.Format(null, format.shadow.angle, options)) : 45,
                         format.shadow.color != null ? parseInt(Macros.Format(null, format.shadow.color, options)) : 0x000000,
-                        format.shadow.alpha != null ? parseFloat(Macros.Format(null, format.shadow.alpha, options)) : 1,
+                        format.shadow.alpha != null ? parseFloat(Macros.Format(null, format.shadow.alpha, options)) / 100.0 : 1,
                         format.shadow.blur != null ? parseFloat(Macros.Format(null, format.shadow.blur, options)) : 4,
                         format.shadow.blur != null ? parseFloat(Macros.Format(null, format.shadow.blur, options)) : 4,
                         format.shadow.strength != null ? parseFloat(Macros.Format(null, format.shadow.strength, options)) : 1)
