@@ -186,7 +186,7 @@ def text_styles_getStyle(base, style, ctx = None):
         return base(style, ctx)
 
 def tooltip_add_param(self, result, param0, param1):
-    result.append(formatters.packTextParameterBlockData(name=text_styles.main(param0), value=text_styles.stats(param1), valueWidth=82, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
+    result.append(formatters.packTextParameterBlockData(name=text_styles.main(param0), value=text_styles.stats(param1), valueWidth=102, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
 
 def tooltip_with_units(value, units):
     return '%s %s' % (value, text_styles.standard(units))
@@ -214,7 +214,7 @@ def replace_p(text):
 @overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
     try:
-        self.leftPadding = 10
+        self.leftPadding = -10
         vehicle = self.vehicle
         cache_result = carousel_tooltips_cache.get(vehicle.intCD)
         if cache_result:
