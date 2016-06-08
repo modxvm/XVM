@@ -31,10 +31,10 @@ patch_as2_ffdec_h(){
 
 #Arch and OS detection
 detect_arch(){
-    if [ "$(uname -m)" == "x86_64" ]; then
-        export arch=amd64
-    elif [ "$(uname -m)" == "i686" ]; then
+    if [ "$(uname -m)" == "i686" ] || [ "$OS" == "Windows" ]; then
         export arch=i686
+    elif [ "$(uname -m)" == "x86_64" ]; then
+        export arch=amd64
     else
         echo "!!! Only i686 and amd64 architectures are supported"
         exit 1
@@ -44,8 +44,10 @@ detect_arch(){
 detect_os(){
     if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
         export OS=Linux
-    elif [ "$(expr substr $(uname -s) 1 4)" == "MSYS"   ] ||
-         [ "$(expr substr $(uname -s) 1 5)" == "MINGW"  ] ||
+    elif [ "$(expr substr $(uname -s) 1 7)" == "MSYS_NT" ]; then
+        export OS=Windows
+        export OS_Version=$(expr substr $(uname -s) 9 4)
+    elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ] ||
          [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
         export OS=Windows
     else
