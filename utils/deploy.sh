@@ -27,6 +27,7 @@ check_config()
 
 clear()
 {
+  rm -rf "$WOT_PATH/res_mods/configs/xvm/py_macro/xvm" || err "make_dirs"
   rm -rf "$WOT_PATH/res_mods/mods/packages" || err "clear"
   rm -rf "$WOT_PATH/res_mods/mods/xfw" || err "clear"
   rm -f "$WOT_PATH/res_mods/$TARGET_VERSION/gui/flash/lobby.swf" || err "clear"
