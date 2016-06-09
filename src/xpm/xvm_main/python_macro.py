@@ -154,5 +154,5 @@ def process_python_macro(arg):
         (func, deterministic) = get_function(arg)
         return (func(), deterministic)
     except Exception as ex:
-        err(traceback.format_exc())
+        err(traceback.format_exc() + "arg='{}'".format(arg))
         return (None, True)

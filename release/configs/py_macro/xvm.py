@@ -3,23 +3,23 @@
 from xvm import total_hp
 
 @xvm.export('xvm.total_hp.ally', deterministic=False)
-def ally():
+def total_hp_ally():
     return total_hp.ally()
 
 @xvm.export('xvm.total_hp.enemy', deterministic=False)
-def enemy():
+def total_hp_enemy():
     return total_hp.enemy()
 
 @xvm.export('xvm.total_hp.color', deterministic=False)
-def color():
+def total_hp_color():
     return total_hp.color()
 
 @xvm.export('xvm.total_hp.sign', deterministic=False)
-def sign():
+def total_hp_sign():
     return total_hp.sign()
 
 @xvm.export('xvm.total_hp.text', deterministic=False)
-def text():
+def total_hp_text():
     return total_hp.text()
 
 
@@ -28,5 +28,5 @@ def text():
 from xvm import xvm2sup
 
 @xvm.export('xvm.xvm2sup')
-def xvm2sup(x=None):
+def xvm2sup_xvm2sup(x=None):
     return xvm2sup.xvm2sup(x)
