@@ -11,6 +11,7 @@ from Avatar import PlayerAvatar
 from gui import g_guiResetters
 from gui.shared import g_eventBus
 from gui.Scaleform.daapi.view.battle import score_panel
+from gui.Scaleform.Battle import Battle
 from gui.Scaleform.daapi.view.battle.markers import MarkersManager
 from gui.battle_control import g_sessionProvider
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
@@ -37,6 +38,12 @@ def fini():
 
 #####################################################################
 # globals
+
+ally_frags = 0
+enemy_frags = 0
+ally_vehicles = 0
+enemy_vehicles = 0
+
 teams_vehicles = [{}, {}]
 teams_totalhp = [0, 0]
 hp_colors = {}
@@ -48,28 +55,39 @@ total_hp_sign = None
 # handlers
 
 # show quantity of alive instead of dead in frags panel
-# original idea/code by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
+# original idea by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
+
+@registerEvent(Battle, 'beforeDelete')
+def beforeDelete(self):
+    ally_frags = 0
+    enemy_frags = 0
+    ally_vehicles = 0
+    enemy_vehicles = 0
+
 @overrideMethod(score_panel._FragCorrelationPanel, 'updateScore')
 def FragCorrelationPanel_updateScore(base, self):
     try:
+        global ally_frags, enemy_frags, ally_vehicles, enemy_vehicles
+        if len(self._FragCorrelationPanel__teamsDeaths) and len(self._FragCorrelationPanel__teamsShortLists):
+            isTeamEnemy = g_sessionProvider.getArenaDP().isEnemyTeam
+            ally_frags, enemy_frags, ally_vehicles, enemy_vehicles  = (0, 0, 0, 0)
+            for teamIdx, vehs in self._FragCorrelationPanel__teamsShortLists.iteritems():
+                if isTeamEnemy(teamIdx):
+                    enemy_vehicles += len(vehs)
+                else:
+                    ally_vehicles += len(vehs)
+            for teamIdx, score in self._FragCorrelationPanel__teamsDeaths.iteritems():
+                if isTeamEnemy(teamIdx):
+                    ally_frags += score
+                else:
+                    enemy_frags += score
         if config.get('fragCorrelation/showAliveNotFrags'):
-            if len(self._FragCorrelationPanel__teamsDeaths) and len(self._FragCorrelationPanel__teamsShortLists):
-                isTeamEnemy = g_sessionProvider.getArenaDP().isEnemyTeam
-                ally_frags, enemy_frags, ally_vehicles, enemy_vehicles  = (0, 0, 0, 0)
-                for teamIdx, vehs in self._FragCorrelationPanel__teamsShortLists.iteritems():
-                    if isTeamEnemy(teamIdx):
-                        enemy_vehicles += len(vehs)
-                    else:
-                        ally_vehicles += len(vehs)
-                for teamIdx, score in self._FragCorrelationPanel__teamsDeaths.iteritems():
-                    if isTeamEnemy(teamIdx):
-                        ally_frags += score
-                    else:
-                        enemy_frags += score
             team_left = ally_vehicles - enemy_frags
             enemy_left = enemy_vehicles - ally_frags
             self._FragCorrelationPanel__callFlash('updateFrags', [team_left, enemy_left])
-            return
+        else:
+            self._FragCorrelationPanel__callFlash('updateFrags', [ally_frags, enemy_frags])
+        return
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
