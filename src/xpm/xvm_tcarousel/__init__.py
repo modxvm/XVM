@@ -41,7 +41,7 @@ import xvm_main.python.vehinfo as vehinfo
 from xvm_main.python.xvm import l10n
 import xvm_main.python.xvm as xvm
 
-import filter_popover
+#import filter_popover
 import reserve
 
 #####################################################################
@@ -75,10 +75,11 @@ BigWorld.callback(0, start)
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
-overrideView(
-    filter_popover.XvmTankCarouselFilterPopover,
-    VIEW_ALIAS.TANK_CAROUSEL_FILTER_POPOVER,
-    '../../../../res_mods/mods/packages/xvm_tcarousel/actionscript/xvm_tcarousel_filtersPopover_view.swf')
+#FIXME: TODO: Fix our version and turn it on back
+#overrideView(
+#    filter_popover.XvmTankCarouselFilterPopover,
+#    VIEW_ALIAS.TANK_CAROUSEL_FILTER_POPOVER,
+#    '../../../../res_mods/mods/packages/xvm_tcarousel/actionscript/xvm_tcarousel_filtersPopover_view.swf')
 
 
 #####################################################################
