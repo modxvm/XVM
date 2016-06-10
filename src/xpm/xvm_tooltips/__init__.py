@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15',
+    'VERSION':       '0.9.15.0.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15'],
+    'GAME_VERSIONS': ['0.9.15.0.1'],
     # optional
 }
 
@@ -30,7 +30,7 @@ from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.formatters import text_styles
 from gui.shared.tooltips import formatters
 from gui.shared.gui_items import GUI_ITEM_TYPE
-# TODO:0.9.15
+# TODO:0.9.15.0.1
 #from gui.shared.tooltips.module import ModuleParamsField
 from gui.Scaleform.locale.MENU import MENU
 from gui.shared.items_parameters import formatters as param_formatter
@@ -465,7 +465,7 @@ def makeString(base, key, *args, **kwargs):
         return weightTooHeavy
     return base(key, *args, **kwargs)
 
-# TODO:0.9.15
+# TODO:0.9.15.0.1
 ## paint 'weight (kg)' with red if module does not fit due to overweight
 #@overrideMethod(ModuleParamsField, '_getValue')
 #def ModuleParamsField_getValue(base, self, *args, **kwargs):

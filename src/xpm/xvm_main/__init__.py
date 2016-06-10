@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15',
+    'VERSION':       '0.9.15.0.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15'],
+    'GAME_VERSIONS': ['0.9.15.0.1'],
     # optional
 }
 
@@ -179,7 +179,7 @@ def ProfileTechniqueWindow_RequestData(base, self, data):
         base(self, data)
 
 
-# TODO:0.9.15: remove?
+# TODO:0.9.15.0.1: remove?
 ## stereoscope
 #@registerEvent(AmmunitionPanel, 'highlightParams')
 #def AmmunitionPanel_highlightParams(self, type):
