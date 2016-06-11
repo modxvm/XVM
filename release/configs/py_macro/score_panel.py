@@ -18,8 +18,8 @@ def enemy_vehicles():
 
 @xvm.export('score_panel.ally_frags_inverse', deterministic=False)    
 def ally_frags_inverse():
-    return ally_vehicles() - ally_frags()
+    return ally_vehicles() - enemy_frags()
 
 @xvm.export('score_panel.enemy_frags_inverse', deterministic=False)
 def enemy_frags_inverse():
-    return enemy_vehicles() - enemy_frags()
+    return enemy_vehicles() - ally_frags()

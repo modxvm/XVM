@@ -55,7 +55,8 @@ total_hp_sign = None
 # handlers
 
 # show quantity of alive instead of dead in frags panel
-# original idea by yaotzinv: http://forum.worldoftanks.ru/index.php?/topic/1339762-
+# last update: 11.06.2016
+# night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>
 
 @registerEvent(Battle, 'beforeDelete')
 def beforeDelete(self):
@@ -64,30 +65,29 @@ def beforeDelete(self):
     ally_vehicles = 0
     enemy_vehicles = 0
 
-@overrideMethod(score_panel._FragCorrelationPanel, 'updateScore')
-def FragCorrelationPanel_updateScore(base, self):
+@overrideMethod(score_panel._FragCorrelationPanel, '_calcScore')
+def FragCorrelationPanel_calcScore(base, self):
     try:
         global ally_frags, enemy_frags, ally_vehicles, enemy_vehicles
         if len(self._FragCorrelationPanel__teamsDeaths) and len(self._FragCorrelationPanel__teamsShortLists):
-            isTeamEnemy = g_sessionProvider.getArenaDP().isEnemyTeam
-            ally_frags, enemy_frags, ally_vehicles, enemy_vehicles  = (0, 0, 0, 0)
+            ally, enemy, ally_frags, enemy_frags, ally_vehicles, enemy_vehicles  = (0, 0, 0, 0, 0, 0)
             for teamIdx, vehs in self._FragCorrelationPanel__teamsShortLists.iteritems():
-                if isTeamEnemy(teamIdx):
+                if g_sessionProvider.getArenaDP().isEnemyTeam(teamIdx):
                     enemy_vehicles += len(vehs)
                 else:
                     ally_vehicles += len(vehs)
             for teamIdx, score in self._FragCorrelationPanel__teamsDeaths.iteritems():
-                if isTeamEnemy(teamIdx):
+                if g_sessionProvider.getArenaDP().isEnemyTeam(teamIdx):
                     ally_frags += score
                 else:
                     enemy_frags += score
         if config.get('fragCorrelation/showAliveNotFrags'):
-            team_left = ally_vehicles - enemy_frags
-            enemy_left = enemy_vehicles - ally_frags
-            self._FragCorrelationPanel__callFlash('updateFrags', [team_left, enemy_left])
+            ally = ally_vehicles - enemy_frags
+            enemy = enemy_vehicles - ally_frags
         else:
-            self._FragCorrelationPanel__callFlash('updateFrags', [ally_frags, enemy_frags])
-        return
+            ally = ally_frags
+            enemy = enemy_frags
+        return (ally, enemy)
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
