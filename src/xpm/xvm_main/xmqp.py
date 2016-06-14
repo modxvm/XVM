@@ -57,6 +57,8 @@ from xfw import *
 import config
 from constants import *
 from logger import *
+import utils
+
 
 class _XMQP(object):
     """This is an xmqp consumer that will handle unexpected interactions
