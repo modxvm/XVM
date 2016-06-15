@@ -45,13 +45,13 @@ def onStateBattle():
 def onXmqpMessage(e):
     try:
         #debug('onXmqpMessage: ' + str(e.ctx))
-        body = e.ctx.get('body', '')
-        event_type = body['event']
+        data = e.ctx.get('data', '')
+        event_type = data['event']
         global _event_handlers
         if event_type in _event_handlers:
-            _event_handlers[event_type](e.ctx.get('playerId', ''), body)
+            _event_handlers[event_type](e.ctx.get('playerId', ''), data)
         else:
-            debug('unknown XMQP message: {}'.format(body))
+            debug('unknown XMQP message: {}'.format(data))
     except Exception as ex:
         err(traceback.format_exc())
 
@@ -127,10 +127,10 @@ def _onXmqpHola(playerId, data):
         if playerId == utils.getPlayerId():
             playerId = getCurrentPlayerId()
     #debug('_onXmqpHola: {} {}'.format(playerId, data))
-    if playerId not in _players_xmqp_status:
-        _players_xmqp_status[playerId] = data
-        _send_xmqp_hola()
-        _as_xmqp_event(playerId, data)
+    #if playerId not in _players_xmqp_status:
+    #    _players_xmqp_status[playerId] = data
+    #    _send_xmqp_hola()
+    #    _as_xmqp_event(playerId, data)
 
 _event_handlers[EVENTS.XMQP_HOLA] = _onXmqpHola
 

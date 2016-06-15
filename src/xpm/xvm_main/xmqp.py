@@ -73,7 +73,6 @@ class _XMQP(object):
     commands that were issued and that should surface in the output as well.
 
     """
-    LOBBY_QUEUE = 'com.xvm.xmqp.%s.lobby' % XVM.XMQP_API_VERSION
 
     def __init__(self, players):
         """Create a new instance of the consumer class, passing in the AMQP
@@ -88,7 +87,7 @@ class _XMQP(object):
         self._consumer_tag = None
         self._exchange_name = None
         self._queue_name = None
-        self._correlation_id = None
+        #self._correlation_id = None
         self._exchange_correlation_id = None
         self._reconnect_attempts = 0
 
@@ -136,18 +135,15 @@ class _XMQP(object):
 
     def call(self, data):
         if self.is_consuming:
-            self._correlation_id = str(uuid.uuid4())
-            message = simplejson.dumps({
-                'message': simplejson.dumps(data),
-                'type': XVM.XMQP_COMMAND_BATTLE_MESSAGE,
-                'token': config.token.token})
+            #self._correlation_id = str(uuid.uuid4())
+            message = simplejson.dumps({'playerId': utils.getPlayerId(), 'data': data})
             debug('[XMQP] call: %s' % utils.hide_guid(message))
             self._channel.basic_publish(
-                exchange='',
-                routing_key=self.LOBBY_QUEUE,
-                properties=pika.BasicProperties(
-                    reply_to=self._queue_name,
-                    correlation_id=self._correlation_id),
+                exchange=self._exchange_name,
+                routing_key='',
+                #properties=pika.BasicProperties(
+                #    reply_to=self._queue_name,
+                #    correlation_id=self._correlation_id),
                 body=message)
             debug('[XMQP] basic_publish done')
 
@@ -170,17 +166,20 @@ class _XMQP(object):
         if self._closing:
             return
         try:
-            if body != 'ok':
-                debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
+            debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
+            #debug(basic_deliver)
+            #if body != 'ok':
+            #    debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
             if self._exchange_correlation_id == properties.correlation_id:
-                self._exchange_name = body
-            elif basic_deliver.exchange:
-                #debug('[XMQP] recv: {} {}'.format(properties.headers.get('userId', None), body))
-                g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_MESSAGE, {
-                    'playerId': properties.headers.get('userId', None),
-                    'body':simplejson.loads(body)}))
-            if self._exchange_correlation_id == properties.correlation_id:
+                response = simplejson.loads(body)
+                self._exchange_name = response['exchange']
+                #TODO: read players and params
                 self.bind_channel()
+            else:
+            #elif basic_deliver.exchange:
+                #debug('[XMQP] recv: {} {}'.format(properties.headers.get('userId', None), body))
+                response = simplejson.loads(body)
+                g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_MESSAGE, response))
         except Exception as ex:
             err(traceback.format_exc())
 
@@ -348,13 +347,12 @@ class _XMQP(object):
         debug('[XMQP] Getting exchange name')
         self._exchange_correlation_id = str(uuid.uuid4())
         message = simplejson.dumps({
-            'type': XVM.XMQP_EXCHANGE_NAME_QUERY,
             'token': config.token.token,
             'players': self._players})
         #debug(utils.hide_guid(message))
         self._channel.basic_publish(
-            exchange='',
-            routing_key=self.LOBBY_QUEUE,
+            exchange=XVM.XMQP_LOBBY_EXCHANGE,
+            routing_key=XVM.XMQP_LOBBY_ROUTING_KEY,
             properties=pika.BasicProperties(
                 reply_to=self._queue_name,
                 correlation_id=self._exchange_correlation_id,
