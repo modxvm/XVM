@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #############################
 # CONFIG
@@ -104,8 +104,8 @@ copy_xvm_file()
 }
 
 # MAIN
-
-pushd $(dirname $(realpath $(cygpath --unix $0))) >/dev/null
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+pushd "$CURRENT_DIR" >/dev/null
 
 # load config
 . ../build/xvm-build.conf
