@@ -172,9 +172,13 @@ class _XMQP(object):
             #    debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
             if self._exchange_correlation_id == properties.correlation_id:
                 response = simplejson.loads(body)
-                self._exchange_name = response['exchange']
-                #TODO: read players and params
-                self.bind_channel()
+                if 'exchange' in response:
+                    self._exchange_name = response['exchange']
+                    #TODO: read players and params
+                    self.bind_channel()
+                else:
+                    log("[XMQP] ERROR: response='{}'".format(body))
+                    self.stop()
             else:
             #elif basic_deliver.exchange:
                 #debug('[XMQP] recv: {} {}'.format(properties.headers.get('userId', None), body))
