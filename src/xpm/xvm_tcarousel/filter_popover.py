@@ -12,7 +12,8 @@ from gui.shared.utils.functions import makeTooltip
 from gui.shared.utils.requesters.ItemsRequester import REQ_CRITERIA
 import gui.Scaleform.daapi.view.lobby.hangar.filter_popover as filter_popover
 from gui.Scaleform.daapi.view.lobby.hangar.filter_popover import FilterPopover, _SECTIONS, _SECTIONS_MAP
-from gui.Scaleform.daapi.view.lobby.hangar.tank_carousel_filter import CarouselFilter
+# TODO:0.9.15.1
+#from gui.Scaleform.daapi.view.lobby.hangar.tank_carousel_filter import CarouselFilter
 
 from xfw import *
 
@@ -110,7 +111,8 @@ def _filter_popover_getInitialVO(base, filters, hasRentedVehicles):
         return base(filters, hasRentedVehicles)
 
 # Apply XVM filters
-@overrideMethod(CarouselFilter, 'getCriteria')
+# TODO:0.9.15.1
+#@overrideMethod(CarouselFilter, 'getCriteria')
 def _CarouselFilter_getCriteria(base, self):
     premium = self._filters['premium']
     elite = self._filters['elite']

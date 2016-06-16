@@ -10,9 +10,9 @@ import game
 from Avatar import PlayerAvatar
 from gui import g_guiResetters
 from gui.shared import g_eventBus
-from gui.Scaleform.daapi.view.battle import score_panel
+from gui.Scaleform.daapi.view.battle.legacy import score_panel
 from gui.Scaleform.Battle import Battle
-from gui.Scaleform.daapi.view.battle.markers import MarkersManager
+from gui.Scaleform.daapi.view.battle.legacy.markers import MarkersManager
 from gui.battle_control import g_sessionProvider
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 
@@ -65,7 +65,8 @@ def beforeDelete(self):
     ally_vehicles = 0
     enemy_vehicles = 0
 
-@overrideMethod(score_panel._FragCorrelationPanel, '_calcScore')
+# TODO:0.9.15.1
+#@overrideMethod(score_panel._FragCorrelationPanel, '_calcScore')
 def FragCorrelationPanel_calcScore(base, self):
     try:
         global ally_frags, enemy_frags, ally_vehicles, enemy_vehicles

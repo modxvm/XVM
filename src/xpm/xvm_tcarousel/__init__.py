@@ -101,7 +101,8 @@ def onXfwCommand(cmd, *args):
 # handlers
 
 # added sorting orders for tanks in carousel
-@overrideMethod(TankCarouselMeta, 'as_showVehiclesS')
+# TODO:0.9.15.1
+#@overrideMethod(TankCarouselMeta, 'as_showVehiclesS')
 def TankCarouselMeta_as_showVehiclesS(base, self, compactDescrList):
     if config.get('hangar/carousel/enabled'):
         try:

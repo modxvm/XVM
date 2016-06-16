@@ -58,10 +58,11 @@ class _Ping(object):
         if self.loginSection is not None:
             for (name, subSec) in self.loginSection.items():
                 host_name = subSec.readStrings('name')[0]
-                if len(host_name) >= 13:
-                    host_name = subSec.readStrings('short_name')[0]
-                elif host_name.startswith('WOT '):
-                    host_name = host_name[4:]
+                if 'Supertest' not in host_name:
+                    if len(host_name) >= 13:
+                        host_name = subSec.readStrings('short_name')[0]
+                    elif host_name.startswith('WOT '):
+                        host_name = host_name[4:]
                 self.hosts_urls[host_name] = subSec.readStrings('url')[0]
                 self.loginHosts.append(host_name)
                 if host_name not in ignoredServers:

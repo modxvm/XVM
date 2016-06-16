@@ -90,7 +90,8 @@ def PlayerAccount_onBecomePlayer(*args, **kwargs):
 
 
 # device is changed on vehicle, remember the setting
-@registerEvent(AmmunitionPanel, 'setVehicleModule')
+# TODO:0.9.15.1
+#@registerEvent(AmmunitionPanel, 'setVehicleModule')
 def AmmunitionPanel_setVehicleModule(self, newId, slotIdx, oldId, isRemove):
     try:
         if not player_name:

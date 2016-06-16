@@ -35,7 +35,7 @@ import BigWorld
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
 from gui.shared.tooltips.common import ContactTooltipData
-from messenger.gui.Scaleform.view.ContactsListPopover import ContactsListPopover
+from messenger.gui.Scaleform.view.lobby.ContactsListPopover import ContactsListPopover
 from messenger.gui.Scaleform.data.contacts_vo_converter import ContactConverter
 from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHandler
 

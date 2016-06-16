@@ -8,7 +8,8 @@ import math
 import Math
 
 import BigWorld
-from AvatarInputHandler.aims import Aim
+# TODO:0.9.15.1
+#from AvatarInputHandler.aims import Aim
 from AvatarInputHandler.control_modes import ArcadeControlMode, SniperControlMode
 from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera, MinMax
 from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
@@ -126,8 +127,8 @@ def _sendSniperCameraFlash(enable, zoom):
             if movie is not None:
                 movie.as_xvm_onSniperCamera(enable, zoom)
 
-
-@overrideMethod(Aim, 'applySettings')
+# TODO:0.9.15.1
+#@overrideMethod(Aim, 'applySettings')
 def _Aim_applySettings(base, self):
     if self._Aim__aimSettings is not None:
         if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zoomIndicator/enabled'):
@@ -138,7 +139,8 @@ def _Aim_applySettings(base, self):
 _prevOffsetX = None
 _prevOffsetY = None
 
-@registerEvent(Aim, 'onOffsetUpdate')
+# TODO:0.9.15.1
+#@registerEvent(Aim, 'onOffsetUpdate')
 def _Aim_onOffsetUpdate(self, screen, forced = False):
     global _prevOffsetX
     global _prevOffsetY
