@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.0.1',
+    'VERSION':       '0.9.15.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.0.1'],
+    'GAME_VERSIONS': ['0.9.15.1'],
     # optional
 }
 
@@ -40,12 +40,12 @@ from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
-from gui.battle_control.dyn_squad_functional import DynSquadFunctional
+from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
 from gui.shared import g_eventBus, events
 from gui.Scaleform.Flash import Flash
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
-from gui.Scaleform.daapi.view.battle.markers import MarkersManager
+from gui.Scaleform.daapi.view.battle.legacy.markers import MarkersManager
 from gui.Scaleform.Minimap import Minimap
 
 from xfw import *
@@ -334,13 +334,14 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
 
-@registerEvent(DynSquadFunctional, 'invalidateVehicleInfo')
-def _DynSquadFunctional_invalidateVehicleInfo(self, flags, playerVehVO, arenaDP):
+@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
+def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
     if arena_info.getArenaGuiType() == 1: # ARENA_GUI_TYPE.RANDOM
-        if flags & INVALIDATE_OP.PREBATTLE_CHANGED and playerVehVO.squadIndex > 0:
-            for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(playerVehVO.team)):
-                if vInfoVO.squadIndex > 0:
-                    g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD | INV.MINIMAP_SQUAD)
+        for flags, vo in updated:
+            if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
+                for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(vo.team)):
+                    if vInfoVO.squadIndex > 0:
+                        g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD | INV.MINIMAP_SQUAD)
 
 
 #cache._MIN_LIFE_TIME = 15
