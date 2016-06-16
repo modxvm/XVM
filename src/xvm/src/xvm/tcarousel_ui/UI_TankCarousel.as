@@ -1,5 +1,4 @@
 /**
-/**
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
@@ -17,7 +16,6 @@ package xvm.tcarousel_ui
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
-    import net.wg.gui.lobby.hangar.tcarousel.helper.*;
     import scaleform.clik.core.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.events.*;
@@ -25,6 +23,8 @@ package xvm.tcarousel_ui
 
     public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
     {
+        // TODO:0.9.15.1
+        /*
         private static const SLOT_TYPE_TANK:int = 1;
         private static const SLOT_TYPE_BUYTANK:int = 2;
         private static const SLOT_TYPE_BUYSLOT:int = 3;
@@ -598,6 +598,6 @@ package xvm.tcarousel_ui
         private function call_setVehiclesFilter():void
         {
             setVehiclesFilter(vehicleFilters.bonusFilter.selected, vehicleFilters.favoriteFilter.selected, vehicleFilters.gameModeFilter.selected);
-        }
+        }*/
     }
 }

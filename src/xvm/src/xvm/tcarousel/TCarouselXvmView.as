@@ -64,12 +64,15 @@ package xvm.tcarousel
                 if (isNaN(Config.config.hangar.carousel.rows) || Config.config.hangar.carousel.rows <= 0)
                     Config.config.hangar.carousel.rows = 1;
 
+                // TODO:0.9.15.1
+                /*
                 var index:int = page.getChildIndex(page.carousel);
                 page.removeChildAt(index);
                 //page.carousel.dispose(); // TODO: exception
                 var carousel:TankCarousel = App.utils.classFactory.getComponent("xvm.tcarousel_ui::UI_TankCarousel", TankCarousel);
                 page.carousel = carousel;
                 page.addChildAt(carousel, index);
+                */
             }
             catch (ex:Error)
             {
@@ -98,7 +101,8 @@ package xvm.tcarousel
                 for (var vehId:String in dossier.vehicles)
                     Dossier.requestVehicleDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, parseInt(vehId));
             }
-            page.carousel.invalidateData();
+            // TODO:0.9.15.1
+            //page.carousel.invalidateData();
         }
     }
 }

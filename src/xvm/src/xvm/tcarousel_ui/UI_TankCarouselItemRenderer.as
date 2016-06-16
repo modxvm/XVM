@@ -18,6 +18,8 @@ package xvm.tcarousel_ui
 
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
+        // TODO:0.9.15.1
+        /*
         public static const ITEM_WIDTH:int = 160;
         public static const ITEM_HEIGHT:int = 100;
         public static const ITEM_HEIGHT_MULTISELECTION:int = 125;
@@ -245,6 +247,6 @@ package xvm.tcarousel_ui
             if (isNaN(orig_clanLockUI_y))
                 orig_clanLockUI_y = clanLockUI.y;
             clanLockUI.y = orig_clanLockUI_y + cfg.dy;
-        }
+        }*/
     }
 }

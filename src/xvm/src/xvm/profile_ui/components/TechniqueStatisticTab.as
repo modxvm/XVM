@@ -72,6 +72,8 @@ package xvm.profile_ui.components
                 if (!raw_data)
                     return;
 
+                // TODO:0.9.15.1
+                /*
                 var vehId:int = page.listComponent.selectedItem.id;
 
                 //Logger.add("vehId: " + vehId)
@@ -84,7 +86,7 @@ package xvm.profile_ui.components
                 {
                     lastBattleTimeTF.htmlText = "";
                     updateVehicleData(vehId);
-                }
+                }*/
             }
             catch (ex:Error)
             {

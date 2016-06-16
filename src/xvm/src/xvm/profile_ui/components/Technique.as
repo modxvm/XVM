@@ -304,7 +304,8 @@ package xvm.profile_ui.components
                     var pw:ProfileTechniqueWindow = page as ProfileTechniqueWindow;
                     if (pw != null)
                     {
-                        pw.listComponent.techniqueList.setSelectedVehIntCD(dp[0].id);
+                        // TODO:0.9.15.1
+                        //pw.listComponent.techniqueList.setSelectedVehIntCD(dp[0].id);
                     }
                 }
 
