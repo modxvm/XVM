@@ -1,4 +1,7 @@
-﻿XVM-6.3.2:
+﻿XVM-6.4.0-dev:
+  * adaptation to WoT 0.9.15.1
+
+XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch
   * changed "shadow"/"alpha" parameter values range from 0..1 to 0..100 in the carousel
     and players panel extra fields
