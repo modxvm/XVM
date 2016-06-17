@@ -13,7 +13,7 @@ package com.xvm
     import flash.display.*;
     import flash.events.*;
 
-    public class Xvm extends Sprite //AbstractView
+    public class Xvm extends Sprite
     {
         public static function addEventListener(type:String, listener:Function):void
         {
