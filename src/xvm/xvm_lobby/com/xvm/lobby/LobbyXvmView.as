@@ -50,7 +50,7 @@ package com.xvm.lobby
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            Logger.addObject(e, 1, "onBeforeDispose");
+            //Logger.addObject(e, 1, "onBeforeDispose");
 
             //if (!_initialized)
             //    return;

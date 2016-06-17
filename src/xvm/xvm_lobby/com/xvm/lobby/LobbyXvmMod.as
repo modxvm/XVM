@@ -16,7 +16,7 @@ package com.xvm.lobby
 
         private static const _views:Object =
         {
-            "lobby": LobbyXvmView
+            "lobby": [ LobbyXvmView ]
         }
 
         public override function get views():Object
