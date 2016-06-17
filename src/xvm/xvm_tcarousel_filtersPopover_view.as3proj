@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_tcarousel\actionscript\xvm_tcarousel_filtersPopover_view.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_tcarousel\as_lobby\xvm_tcarousel_filtersPopover_view.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />
@@ -56,7 +56,7 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\xfw\~output\swc\wg.swc" />
+    <element path="..\xfw\~output\swc\wg_lobby.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
     <element path="..\..\~output\swc\xvm_main.swc" />
   </externalLibraryPaths>

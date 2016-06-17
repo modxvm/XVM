@@ -12,7 +12,7 @@ package xvm.tcarousel_ui
      */
     public class TCarouselUI extends Sprite
     {
-        UI_TankCarousel;
-        UI_TankCarouselItemRenderer;
+        //UI_TankCarousel;
+        //UI_TankCarouselItemRenderer;
     }
 }

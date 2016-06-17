@@ -16,7 +16,7 @@ class="com.xvm.Xvm"
     -framework="$FLEX_HOME/frameworks" \
     -source-path xvm_main \
     -external-library-path+="$frswc" \
-    -external-library-path+=../xfw/~output/swc/wg.swc \
+    -external-library-path+=../xfw/~output/swc/wg_lobby.swc \
     -external-library-path+=../xfw/~output/swc/xfw.swc \
     -output ../../~output/swc/xvm_main.swc \
     -include-classes $class

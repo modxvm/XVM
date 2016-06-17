@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_svcmsg\actionscript\xvm_svcmsg.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_svcmsg\as_lobby\xvm_svcmsg.swf" />
     <movie fps="30" />
     <movie width="1" />
     <movie height="1" />
@@ -56,7 +56,7 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\xfw\~output\swc\wg.swc" />
+    <element path="..\xfw\~output\swc\wg_lobby.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
     <element path="..\..\~output\swc\xvm_main.swc" />
   </externalLibraryPaths>
