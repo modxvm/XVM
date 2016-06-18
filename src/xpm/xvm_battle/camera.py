@@ -25,7 +25,8 @@ import xvm_main.python.utils as utils
 #####################################################################
 # handlers
 
-@overrideMethod(ArcadeCamera, 'create')
+# TODO:0.9.15.1
+#@overrideMethod(ArcadeCamera, 'create')
 def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postmortemMode = False):
     #debug('_ArcadeCamera_create: {}'.format(postmortemMode))
 
@@ -56,7 +57,8 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
     base(self, pivotPos, onChangeControlMode, postmortemMode)
 
 
-@registerEvent(ArcadeCamera, 'enable')
+# TODO:0.9.15.1
+#@registerEvent(ArcadeCamera, 'enable')
 def _ArcadeCamera_enable(self, *args, **kwargs):
     #debug('_ArcadeCamera_enable: {}'.format(postmortemMode))
     if self._ArcadeCamera__postmortemMode:
@@ -65,7 +67,8 @@ def _ArcadeCamera_enable(self, *args, **kwargs):
             self.setCameraDistance(camDist)
 
 
-@overrideMethod(SniperCamera, 'create')
+# TODO:0.9.15.1
+#@overrideMethod(SniperCamera, 'create')
 def _SniperCamera_create(base, self, onChangeControlMode = None):
     #debug('_SniperCamera_create')
 
@@ -88,14 +91,16 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
     base(self, onChangeControlMode)
 
 
-@overrideMethod(SniperCamera, '_SniperCamera__onSettingsChanged')
+# TODO:0.9.15.1
+#@overrideMethod(SniperCamera, '_SniperCamera__onSettingsChanged')
 def _SniperCamera__onSettingsChanged(base, self, diff):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zooms'):
         diff['increasedZoom'] = True
     base(self, diff)
 
 
-@overrideMethod(SniperCamera, 'enable')
+# TODO:0.9.15.1
+#@overrideMethod(SniperCamera, 'enable')
 def _SniperCamera_enable(base, self, targetPos, saveZoom):
     if config.get('battle/camera/enabled'):
         zoom = config.get('battle/camera/sniper/startZoom')
@@ -109,12 +114,14 @@ def _SniperCamera_enable(base, self, targetPos, saveZoom):
     _sendSniperCameraFlash(True, self._SniperCamera__zoom)
 
 
-@registerEvent(SniperCamera, 'disable')
+# TODO:0.9.15.1
+#@registerEvent(SniperCamera, 'disable')
 def _SniperCamera_disable(self):
     _sendSniperCameraFlash(False, self._SniperCamera__zoom)
 
 
-@registerEvent(SniperCamera, '_SniperCamera__applyZoom')
+# TODO:0.9.15.1
+#@registerEvent(SniperCamera, '_SniperCamera__applyZoom')
 def _SniperCamera__applyZoom(self, zoomFactor):
     _sendSniperCameraFlash(True, zoomFactor)
 
@@ -154,7 +161,8 @@ def _Aim_onOffsetUpdate(self, screen, forced = False):
                 movie.as_xvm_onAimOffsetUpdate(_prevOffsetX, _prevOffsetY)
 
 
-@overrideMethod(StrategicCamera, 'create')
+# TODO:0.9.15.1
+#@overrideMethod(StrategicCamera, 'create')
 def _StrategicCamera_create(base, self, onChangeControlMode = None):
     #debug('_StrategicCamera_create')
     if config.get('battle/camera/enabled'):

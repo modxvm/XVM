@@ -108,12 +108,14 @@ def fini():
 
 # GLOBAL
 
-@registerEvent(game, 'handleKeyEvent')
+# TODO:0.9.15.1
+#@registerEvent(game, 'handleKeyEvent')
 def game_handleKeyEvent(event):
     g_xvm.onKeyEvent(event)
 
 
-@registerEvent(Flash, '__init__')
+# TODO:0.9.15.1
+#@registerEvent(Flash, '__init__')
 def FlashInit(self, swf, className='Flash', args=None, path=None):
     self.swf = swf
     if self.swf not in _SWFS:
@@ -127,7 +129,8 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
         g_xvm.initVmmSwf(self)
 
 
-@registerEvent(Flash, 'beforeDelete')
+# TODO:0.9.15.1
+#@registerEvent(Flash, 'beforeDelete')
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
         return
@@ -212,42 +215,48 @@ def PlayerAvatar_onBecomeNonPlayer(base, self):
 # BATTLE
 
 # on current player enters world
-@registerEvent(PlayerAvatar, 'onEnterWorld')
+# TODO:0.9.15.1
+#@registerEvent(PlayerAvatar, 'onEnterWorld')
 def PlayerAvatar_onEnterWorld(self, prereqs):
     # debug('> PlayerAvatar_onEnterWorld')
     g_xvm.onEnterWorld()
 
 
 # on current player leaves world
-@registerEvent(PlayerAvatar, 'onLeaveWorld')
+# TODO:0.9.15.1
+#@registerEvent(PlayerAvatar, 'onLeaveWorld')
 def PlayerAvatar_onLeaveWorld(self):
     # debug('> PlayerAvatar_onLeaveWorld')
     g_xvm.onLeaveWorld()
 
 
 # on any player marker appear
-@registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
+# TODO:0.9.15.1
+#@registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     # debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
     g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
 
 
 # on any player marker lost
-@registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
+# TODO:0.9.15.1
+#@registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
     # debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
     g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
 
 
 # on any vehicle hit received
-@registerEvent(Vehicle, 'onHealthChanged')
+# TODO:0.9.15.1
+#@registerEvent(Vehicle, 'onHealthChanged')
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
 
 # add vid to players panel data
-@overrideMethod(BattleArenaController, '_makeHash')
+# TODO:0.9.15.1
+#@overrideMethod(BattleArenaController, '_makeHash')
 def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, *args):
     res = base(self, index, playerFullName, vInfoVO, *args)
     res['vid'] = vInfoVO.vehicleType.compactDescr
@@ -255,14 +264,16 @@ def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, *
 
 
 # spotted status
-@registerEvent(Minimap, '_Minimap__addEntry')
+# TODO:0.9.15.1
+#@registerEvent(Minimap, '_Minimap__addEntry')
 def _Minimap__addEntry(self, vInfo, guiProps, location, doMark):
     # debug('> _Minimap__addEntry: {0}'.format(vInfo.vehicleID))
     vehstate.updateSpottedStatus(vInfo.vehicleID, True)
     g_xvm.invalidate(vInfo.vehicleID, INV.BATTLE_SPOTTED)
 
 
-@registerEvent(Minimap, '_Minimap__delEntry')
+# TODO:0.9.15.1
+#@registerEvent(Minimap, '_Minimap__delEntry')
 def _Minimap__delEntry(self, id, inCallback=False):
     # debug('> _Minimap__delEntry: {0}'.format(id))
     vehstate.updateSpottedStatus(id, False)
@@ -272,7 +283,8 @@ def _Minimap__delEntry(self, id, inCallback=False):
 in_setupMinimapSettings = False
 in_updateSettings = False
 
-@overrideMethod(Minimap, 'setupMinimapSettings')
+# TODO:0.9.15.1
+#@overrideMethod(Minimap, 'setupMinimapSettings')
 def _Minimap_setupMinimapSettings(base, self, diff = None):
     global in_setupMinimapSettings
     in_setupMinimapSettings = True
@@ -280,7 +292,8 @@ def _Minimap_setupMinimapSettings(base, self, diff = None):
     in_setupMinimapSettings = False
 
 
-@overrideMethod(Minimap, '_Minimap__updateSettings')
+# TODO:0.9.15.1
+#@overrideMethod(Minimap, '_Minimap__updateSettings')
 def _Minimap__updateSettings(base, self):
     global in_updateSettings
     in_updateSettings = True
@@ -288,7 +301,8 @@ def _Minimap__updateSettings(base, self):
     in_updateSettings = False
 
 
-@overrideMethod(g_settingsCore, 'getSetting')
+# TODO:0.9.15.1
+#@overrideMethod(g_settingsCore, 'getSetting')
 def __g_settingsCore_getSetting(base, name):
     value = base(name)
     if config.get('minimap/enabled'):
@@ -314,7 +328,8 @@ def __g_settingsCore_getSetting(base, name):
     return value
 
 
-@overrideMethod(SettingsContainer, 'getSetting')
+# TODO:0.9.15.1
+#@overrideMethod(SettingsContainer, 'getSetting')
 def __SettingsContainer_getSetting(base, self, name):
     value = base(self, name)
     if config.get('minimap/enabled'):
@@ -328,13 +343,15 @@ def __SettingsContainer_getSetting(base, self, name):
     return value
 
 
-@overrideMethod(MarkersManager, 'invokeMarker')
+# TODO:0.9.15.1
+#@overrideMethod(MarkersManager, 'invokeMarker')
 def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
 
-@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
+# TODO:0.9.15.1
+#@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
 def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
     if arena_info.getArenaGuiType() == 1: # ARENA_GUI_TYPE.RANDOM
         for flags, vo in updated:

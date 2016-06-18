@@ -225,11 +225,14 @@ class Xvm(object):
             if player is not None and hasattr(player, 'arena'):
                 arena = BigWorld.player().arena
                 if arena:
-                    arena.onVehicleKilled += self._onVehicleKilled
-                    arena.onAvatarReady += self._onAvatarReady
-                    arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
+                    # TODO:0.9.15.1
+                    #arena.onVehicleKilled += self._onVehicleKilled
+                    #arena.onAvatarReady += self._onAvatarReady
+                    #arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
+                    pass
 
-            self.xmqp_init()
+            # TODO:0.9.15.1
+            #self.xmqp_init()
 
             if config.get('autoReloadConfig', False) == True:
                 configwatchdog.startConfigWatchdog()
@@ -239,15 +242,18 @@ class Xvm(object):
     def onBecomeNonPlayer(self):
         trace('onBecomeNonPlayer')
         try:
-            self.xmqp_stop()
+            # TODO:0.9.15.1
+            #self.xmqp_stop()
 
             player = BigWorld.player()
             if player is not None and hasattr(player, 'arena'):
                 arena = BigWorld.player().arena
                 if arena:
-                    arena.onVehicleKilled -= self._onVehicleKilled
-                    arena.onAvatarReady -= self._onAvatarReady
-                    arena.onVehicleStatisticsUpdate -= self._onVehicleStatisticsUpdate
+                    # TODO:0.9.15.1
+                    #arena.onVehicleKilled -= self._onVehicleKilled
+                    #arena.onAvatarReady -= self._onAvatarReady
+                    #arena.onVehicleStatisticsUpdate -= self._onVehicleStatisticsUpdate
+                    pass
         except Exception, ex:
             err(traceback.format_exc())
 

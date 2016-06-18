@@ -25,7 +25,6 @@ package com.xvm.battle
             super.entryPoint();
             //Logger.addObject(stage);
             //Logger.addObject(root);
-            //classicBattlePage
         }
 
         public override function get views():Object

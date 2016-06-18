@@ -30,9 +30,11 @@ def start():
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, update_conf_hp)
     update_conf_hp()
 
-BigWorld.callback(0, start)
+# TODO:0.9.15.1
+#BigWorld.callback(0, start)
 
-@registerEvent(game, 'fini')
+# TODO:0.9.15.1
+#@registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, update_conf_hp)
 
@@ -58,7 +60,8 @@ total_hp_sign = None
 # last update: 11.06.2016
 # night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>
 
-@registerEvent(Battle, 'beforeDelete')
+# TODO:0.9.15.1
+#@registerEvent(Battle, 'beforeDelete')
 def beforeDelete(self):
     ally_frags = 0
     enemy_frags = 0
@@ -94,7 +97,8 @@ def FragCorrelationPanel_calcScore(base, self):
     base(self)
 
 
-@registerEvent(score_panel._FragCorrelationPanel, 'populate')
+# TODO:0.9.15.1
+#@registerEvent(score_panel._FragCorrelationPanel, 'populate')
 def populate_hp(*args, **kwargs):
     try:
         feedback = g_sessionProvider.getFeedback()
@@ -104,7 +108,8 @@ def populate_hp(*args, **kwargs):
     except Exception, ex:
         err(traceback.format_exc())
 
-@registerEvent(score_panel._FragCorrelationPanel, 'destroy')
+# TODO:0.9.15.1
+#@registerEvent(score_panel._FragCorrelationPanel, 'destroy')
 def destroy_hp(*args, **kwargs):
     try:
         feedback = g_sessionProvider.getFeedback()
@@ -126,21 +131,24 @@ def update_conf_hp(*args, **kwargs):
     except Exception, ex:
         err(traceback.format_exc())
 
-@registerEvent(xvm_class, '_onVehicleKilled')
+# TODO:0.9.15.1
+#@registerEvent(xvm_class, '_onVehicleKilled')
 def xvm_onVehicleKilled(self, vID, *args, **kwargs):
     try:
         update_hp(vID, 0)
     except Exception, ex:
         err(traceback.format_exc())
 
-@registerEvent(PlayerAvatar, 'updateVehicleHealth')
+# TODO:0.9.15.1
+#@registerEvent(PlayerAvatar, 'updateVehicleHealth')
 def setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
     try:
         update_hp(vehicleID, health)
     except Exception, ex:
         err(traceback.format_exc())
 
-@registerEvent(xvm_class, 'initBattleSwf')
+# TODO:0.9.15.1
+#@registerEvent(xvm_class, 'initBattleSwf')
 def initBattleSwf(self, *args, **kwargs):
     try:
         for vID, vData in BigWorld.player().arena.vehicles.iteritems():
@@ -148,7 +156,8 @@ def initBattleSwf(self, *args, **kwargs):
     except Exception, ex:
         err(traceback.format_exc())
 
-@registerEvent(MarkersManager, 'addVehicleMarker')
+# TODO:0.9.15.1
+#@registerEvent(MarkersManager, 'addVehicleMarker')
 def addVehicleMarker(self, vProxy, *args, **kwargs):
     try:
         update_hp(vProxy.id, vProxy.health)

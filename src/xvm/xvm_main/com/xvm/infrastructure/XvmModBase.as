@@ -14,27 +14,35 @@ package com.xvm.infrastructure
     {
         override protected function processView(view:IView, populated:Boolean):Vector.<IXfwView>
         {
-            var mods:Vector.<IXfwView> = super.processView(view, populated);
-            if (mods != null)
+            try
             {
-                for (var i:int = 0; i < mods.length; ++i)
+                var mods:Vector.<IXfwView> = super.processView(view, populated);
+                if (mods != null)
                 {
-                    try
+                    for (var i:int = 0; i < mods.length; ++i)
                     {
-                        var xmod:IXvmView = mods[i] as IXvmView;
-                        if (xmod != null)
+                        try
                         {
-                            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED,
-                                function(e:Event):void { XfwUtils.safeCall(xmod, xmod.onConfigLoaded, [e]); });
+                            var xmod:IXvmView = mods[i] as IXvmView;
+                            if (xmod != null)
+                            {
+                                Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED,
+                                    function(e:Event):void { XfwUtils.safeCall(xmod, xmod.onConfigLoaded, [e]); });
+                            }
+                        }
+                        catch (ex:Error)
+                        {
+                            Logger.err(ex);
                         }
                     }
-                    catch (ex:Error)
-                    {
-                        Logger.err(ex);
-                    }
                 }
+                return mods;
             }
-            return mods;
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            return null;
         }
     }
 }

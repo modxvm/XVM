@@ -22,14 +22,16 @@ import xvm_main.python.config as config
 #####################################################################
 # handlers
 
-@registerEvent(Minimap, 'start')
+# TODO:0.9.15.1
+#@registerEvent(Minimap, 'start')
 def _Minimap_start(self):
     #log('Minimap_start')
     if config.get('minimap/enabled'):
         _init_player(self)
 
 
-@overrideMethod(Minimap, '_Minimap__callEntryFlash')
+# TODO:0.9.15.1
+#@overrideMethod(Minimap, '_Minimap__callEntryFlash')
 def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
     #log('id={} method={} args={}'.format(id, methodName, args))
 
@@ -53,7 +55,8 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
                 err(traceback.format_exc())
 
 
-@registerEvent(Minimap, '_Minimap__addEntryLit')
+# TODO:0.9.15.1
+#@registerEvent(Minimap, '_Minimap__addEntryLit')
 def _Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
     if config.get('minimap/enabled'):
         if vInfo.isObserver() or matrix is None:
@@ -73,7 +76,8 @@ def _Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
 
 
 # Minimap dead switch
-@registerEvent(PostMortemControlMode, 'onMinimapClicked')
+# TODO:0.9.15.1
+#@registerEvent(PostMortemControlMode, 'onMinimapClicked')
 def _PostMortemControlMode_onMinimapClicked(self, worldPos):
     if config.get('battle/minimapDeadSwitch'):
         try:
@@ -105,7 +109,8 @@ def _PostMortemControlMode_onMinimapClicked(self, worldPos):
 
 
 # on map load (battle loading)
-@registerEvent(PlayerAvatar, 'updateVehicleHealth')
+# TODO:0.9.15.1
+#@registerEvent(PlayerAvatar, 'updateVehicleHealth')
 def _PlayerAvatar_updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, isRespawn):
     #log('PlayerAvatar_updateVehicleHealth: {} {} {} {} {}'.format(vehicleID, health, deathReasonID, isCrewActive, isRespawn))
     if config.get('minimap/enabled'):
