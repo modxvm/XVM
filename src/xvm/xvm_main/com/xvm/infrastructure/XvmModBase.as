@@ -23,11 +23,11 @@ package com.xvm.infrastructure
                     {
                         try
                         {
-                            var xmod:IXvmView = mods[i] as IXvmView;
-                            if (xmod != null)
+                            var mod:IXvmView = mods[i] as IXvmView;
+                            if (mod != null)
                             {
                                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED,
-                                    function(e:Event):void { XfwUtils.safeCall(xmod, xmod.onConfigLoaded, [e]); });
+                                    function(e:Event):void { XfwUtils.safeCall(mod, mod.onConfigLoaded, [e]); });
                             }
                         }
                         catch (ex:Error)

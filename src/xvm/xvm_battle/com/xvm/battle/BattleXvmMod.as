@@ -7,6 +7,7 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.BattleXvmView;
+    import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
 
     public class BattleXvmMod extends XvmModBase
     {
@@ -17,7 +18,7 @@ package com.xvm.battle
 
         private static const _views:Object =
         {
-            "classicBattlePage": [ BattleXvmView ]
+            "classicBattlePage": [ BattleXvmView, TeamBasesPanelXvmView ]
         }
 
         override public function entryPoint():void
