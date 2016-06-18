@@ -143,14 +143,14 @@ build_as3(){
     top=( "_xvm_main.as3proj" "xvm_lobby.as3proj" "xvm_battle.as3proj" )
     for proj in "${top[@]}"; do
         echo "Building $proj"
-        #build_as3_h "$proj"
+        build_as3_h "$proj"
     done
     for proj in *.as3proj; do
         exists=0
         for e in "${top[@]}"; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
         if [ $exists -eq 0 ]; then
             echo "Building $proj"
-            #build_as3_h "$proj"
+            build_as3_h "$proj"
         fi
     done
 
