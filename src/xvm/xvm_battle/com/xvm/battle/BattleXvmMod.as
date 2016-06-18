@@ -19,6 +19,7 @@ package com.xvm.battle
             super.entryPoint();
             //Logger.addObject(stage);
             //Logger.addObject(root);
+            //classicBattlePage
         }
     }
 }

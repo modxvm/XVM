@@ -6,13 +6,13 @@ package xvm.limits_ui
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.lobby.limits.ILimitsUI;
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.events.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
     import net.wg.infrastructure.interfaces.entity.*;
-    import xvm.limits.ILimitsUI;
     import xvm.limits_ui.controls.*;
 
     public class LimitsUIImpl implements ILimitsUI
