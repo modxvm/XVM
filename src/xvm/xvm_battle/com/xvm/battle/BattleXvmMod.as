@@ -6,6 +6,7 @@ package com.xvm.battle
 {
     import com.xfw.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.battle.BattleXvmView;
 
     public class BattleXvmMod extends XvmModBase
     {
@@ -14,12 +15,22 @@ package com.xvm.battle
             return "[XVM:BATTLE]";
         }
 
+        private static const _views:Object =
+        {
+            "classicBattlePage": [ BattleXvmView ]
+        }
+
         override public function entryPoint():void
         {
             super.entryPoint();
             //Logger.addObject(stage);
             //Logger.addObject(root);
             //classicBattlePage
+        }
+
+        public override function get views():Object
+        {
+            return _views;
         }
     }
 }
