@@ -116,6 +116,15 @@ package com.xvm.battle.teamBasesPanel
             pointsTextField.x -= 300;
             pointsTextField.width += 600;
             pointsTextField.height = 600;
+
+            // hack to hide useless icons
+            y -= 1000;
+            textField.y += 1000;
+            tfVehiclesCount.y += 1000;
+            tfTimeLeft.y += 1000;
+            pointsTextField.y += 1000;
+            bg.y += 1000;
+            progressBar.y += 1000;
         }
 
         private function setupCaptureBarColor():void
@@ -162,7 +171,7 @@ package com.xvm.battle.teamBasesPanel
         {
             var showProgressBar:Boolean = !Macros.FormatGlobalBooleanValue(Config.config.captureBar.hideProgressBar, false);
             bg.visible = showProgressBar;
-            //???barColors._visible = showProgressBar;
+            progressBar.visible = showProgressBar;
         }
 
         private function updateTextFields():void

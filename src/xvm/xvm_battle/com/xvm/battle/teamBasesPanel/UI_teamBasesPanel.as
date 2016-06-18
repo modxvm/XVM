@@ -15,6 +15,7 @@ package com.xvm.battle.teamBasesPanel
         private var DEFAULT_RENDERER_LENGTH:Number = xfw_RENDERER_HEIGHT;
         private var DEFAULT_CAPTURE_BAR_LINKAGE:String = Linkages.CAPTURE_BAR_LINKAGE;
         private var XVM_CAPTURE_BAR_LINKAGE:String = getQualifiedClassName(UI_TeamCaptureBar);
+        private var DEFAULT_Y:Number;
 
         public function UI_teamBasesPanel()
         {
@@ -26,6 +27,7 @@ package com.xvm.battle.teamBasesPanel
         override protected function configUI():void
         {
             super.configUI();
+            DEFAULT_Y = y;
             onConfigLoaded(null);
         }
 
@@ -51,11 +53,14 @@ package com.xvm.battle.teamBasesPanel
                 {
                     Linkages.CAPTURE_BAR_LINKAGE = XVM_CAPTURE_BAR_LINKAGE;
                     xfw_RENDERER_HEIGHT = Macros.FormatGlobalNumberValue(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH;
+                    // hack to hide useless icons
+                    y = DEFAULT_Y - 1000;
                 }
                 else
                 {
                     Linkages.CAPTURE_BAR_LINKAGE = DEFAULT_CAPTURE_BAR_LINKAGE;
                     xfw_RENDERER_HEIGHT = DEFAULT_RENDERER_LENGTH;
+                    y = DEFAULT_Y;
                 }
                 xfw_updatePositions();
             }
