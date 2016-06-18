@@ -140,16 +140,19 @@ build_as3(){
 
     pushd "$XVMBUILD_REPOSITORY_PATH"/src/xvm/ > /dev/null
 
-    for proj in _*.as3proj;
-        do
+    top=( "_xvm_main.as3proj" "xvm_lobby.as3proj" "xvm_battle.as3proj" )
+    for proj in "${top[@]}"; do
+        echo "Building $proj"
+        #build_as3_h "$proj"
+    done
+    for proj in *.as3proj; do
+        exists=0
+        for e in "${top[@]}"; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
+        if [ $exists -eq 0 ]; then
             echo "Building $proj"
-            build_as3_h "$proj"
-        done
-    for proj in xvm_*.as3proj;
-        do
-            echo "Building $proj"
-            build_as3_h "$proj"
-        done
+            #build_as3_h "$proj"
+        fi
+    done
 
     popd > /dev/null
 }
