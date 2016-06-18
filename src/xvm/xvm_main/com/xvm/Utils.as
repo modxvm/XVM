@@ -2,7 +2,7 @@
  * XVM Utils
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.utils
+package com.xvm
 {
     import com.xfw.*;
     import com.xvm.*;
@@ -145,7 +145,7 @@ package com.xvm.utils
             }
             return result_a[1] > result_b[1] ? 1 : -1;
         }
-        
+
         public static function createServersOrderFromAnswer(answer:Object):Array
         {
             var serversOrder:Array = new Array();
@@ -166,5 +166,56 @@ package com.xvm.utils
             return true
         }
 
+        public static function timeStrToSec(str:String):Number
+        {
+            var p:Array = str.split(':');
+            var s:int = 0;
+            var m:int = 1;
+            while (p.length > 0) {
+                s += m * parseInt(p.pop(), 10);
+                m *= 60;
+            }
+            return s;
+        }
+
+        private static var _lastArenaGuiType:Number = -1;
+        private static var _isArenaGuiTypeWithPlayerPanels:Boolean;
+        public static function isArenaGuiTypeWithPlayerPanels():Boolean
+        {
+            var arenaGuiType:Number = Xfw.cmd(XvmCommandsInternal.GET_ARENA_GUI_TYPE);
+            if (_lastArenaGuiType != arenaGuiType)
+            {
+                _lastArenaGuiType = arenaGuiType;
+                _isArenaGuiTypeWithPlayerPanels = true;
+                var len:Number = Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS.length;
+                for (var i:Number = 0; i < len; ++i)
+                {
+                    if (Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS[i] == arenaGuiType)
+                    {
+                        _isArenaGuiTypeWithPlayerPanels = false;
+                        break;
+                    }
+                }
+            }
+            return _isArenaGuiTypeWithPlayerPanels;
+        }
+
+        public static function getSpottedText(value:String, isArty:Boolean):String
+        {
+            if (value == null)
+                return null;
+
+            if (isArty)
+                value += "_arty";
+
+            if (!Config.config.texts.spotted[value])
+                return null;
+
+            var v:String = Config.config.texts.spotted[value];
+            if (v.indexOf("{{l10n:") >= 0)
+                v = Locale.get(v);
+
+            return v;
+        }
     }
 }

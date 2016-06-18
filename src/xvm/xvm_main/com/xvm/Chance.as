@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.utils
+package com.xvm
 {
     import com.xfw.*;
     import com.xvm.*;

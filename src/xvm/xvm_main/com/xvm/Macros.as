@@ -8,7 +8,6 @@ package com.xvm
     import com.xvm.types.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
-    import com.xvm.utils.*;
     import org.idmedia.as3commons.util.*;
 
     public class Macros
@@ -18,6 +17,11 @@ package com.xvm
         public static function Format(pname:String, format:String, options:MacrosFormatOptions = null):String
         {
             return _instance._Format(pname, format, options);
+        }
+
+        public static function FormatByPlayerId(playerId:Number, format:String, options:MacrosFormatOptions = null):String
+        {
+            return _instance._Format(_instance.m_playerId_to_pname[playerId], format, options);
         }
 
         public static function FormatNumber(pname:String, cfg:Object, fieldName:String, obj:MacrosFormatOptions, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
@@ -72,14 +76,38 @@ package com.xvm
             _instance._RegisterGlobalMacrosData();
         }
 
+        // battle
+
+        public static function RegisterGlobalMacrosDataDelayed(onEventName:String):void
+        {
+            _instance._RegisterGlobalMacrosDataDelayed(onEventName);
+        }
+
+        public static function RegisterZoomIndicatorData(zoom:Number):void
+        {
+            _instance._RegisterZoomIndicatorData(zoom);
+        }
+
+        public static function RegisterPlayerData(pname:String, data:Object, team:Number):void
+        {
+            _instance._RegisterPlayerData(pname, data, team);
+        }
+
+        public static function RegisterMarkerData(pname:String, data:Object):void
+        {
+            _instance._RegisterMarkerData(pname, data);
+        }
+
+        // lobby
+
         public static function RegisterMinimalMacrosData(playerId:Number, fullPlayerName:String, vid:int, team:Number):void
         {
             _instance._RegisterMinimalMacrosData(playerId, fullPlayerName, vid, team);
         }
 
-        public static function RegisterStatMacrosData(pname:String):void
+        public static function RegisterStatisticsMacros(pname:String):void
         {
-            _instance._RegisterStatMacrosData(pname);
+            _instance._RegisterStatisticsMacros(pname);
         }
 
         public static function RegisterVehiclesMacros():void
@@ -91,6 +119,8 @@ package com.xvm
         {
             _instance._RegisterClockMacros();
         }
+
+        //
 
         public static var s_my_frags:Number = 0;
 
@@ -118,8 +148,11 @@ package com.xvm
         private var m_macros_cache:Object = { };
         private var m_macros_cache_global:Object = { };
         private var m_dict:Object = { }; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+        private var m_playerId_to_pname:Object = { };
         private var m_globals:Object = { };
         private var m_contacts:Object = { };
+
+        private var curent_xtdb:Number = 0;
 
         private var isStaticMacro:Boolean;
 
@@ -309,8 +342,7 @@ package com.xvm
                 var type:String = typeof value;
                 if (type == "function" && (macroName != "alive" || options == null))
                     isStaticMacro = false;
-                /*
-                else if (vehId == 0 || Config.eventType != "normal")
+                else if (vehId == 0 || !Utils.isArenaGuiTypeWithPlayerPanels())
                 {
                     switch (macroName)
                     {
@@ -332,7 +364,6 @@ package com.xvm
                             break;
                     }
                 }
-                */
 
                 res += _FormatMacro(macro, parts, value, vehId, options);
             }
@@ -343,6 +374,7 @@ package com.xvm
                 {
                     case "squad":
                     case "squad-num":
+                    case "zoom":
                         isStaticMacro = false;
                         break;
                 }
@@ -365,11 +397,11 @@ package com.xvm
 
             // split parts: name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]
             var macroArr:Array = macro.split("");
-            var len:Number = macroArr.length;
+            var len:int = macroArr.length;
             var part:String = "";
-            var section:Number = 0;
-            var nextSection:Number = section;
-            for (var i:Number = 0; i < len; ++i)
+            var section:int = 0;
+            var nextSection:int = section;
+            for (var i:int = 0; i < len; ++i)
             {
                 var ch:String = macroArr[i];
                 switch (ch)
@@ -448,7 +480,7 @@ package com.xvm
         }
 
         private var _format_macro_fmt_suf_cache:Object = {};
-        private function _FormatMacro(macro:String, parts:Array, value:*, vehId:Number, options:Object):String
+        private function _FormatMacro(macro:String, parts:Array, value:*, vehId:Number, options:MacrosFormatOptions):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -715,10 +747,7 @@ package com.xvm
                 m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
                 // {{r_size}}
                 m_globals["r_size"] = getRatingDefaultValue().length;
-            }
 
-            if (m_globals["battletier"] === undefined)
-            {
                 var battleTier:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_LEVEL) || NaN;
                 var battleType:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
 
@@ -738,7 +767,77 @@ package com.xvm
                 m_globals["battletype"] = Utils.getBattleTypeText(battleType);
                 // {{battletier}}
                 m_globals["battletier"] = battleTier;
+
+                // {{cellsize}}
+                m_globals["cellsize"] = Math.round(Xfw.cmd(XvmCommandsInternal.GET_MAP_SIZE) / 10);
+
+                // {{my-frags}}
+                m_globals["my-frags"] = function(o:MacrosFormatOptions):Number { return isNaN(Macros.s_my_frags) || Macros.s_my_frags == 0 ? NaN : Macros.s_my_frags; }
+
+                var vdata:VehicleData = VehicleInfo.get(Xfw.cmd(XvmCommandsInternal.GET_MY_VEH_ID));
+                // {{my-veh-id}}
+                m_globals["my-veh-id"] = vdata.vid;
+                // {{my-vehicle}} - Chaffee
+                m_globals["my-vehicle"] = vdata.localizedName;
+                // {{my-vehiclename}} - usa-M24_Chaffee
+                m_globals["my-vehiclename"] = VehicleInfo.getVIconName(vdata.key);
+                // {{my-vehicle-short}} - Chaff
+                m_globals["my-vehicle-short"] = vdata.shortName || vdata.localizedName;
+                // {{my-vtype-key}} - MT
+                m_globals["my-vtype-key"] = vdata.vtype;
+                // {{my-vtype}}
+                m_globals["my-vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
+                // {{my-vtype-l}} - Medium Tank
+                m_globals["my-vtype-l"] = Locale.get(vdata.vtype);
+                // {{c:my-vtype}}
+                m_globals["c:my-vtype"] = MacrosUtils.GetVTypeColorValue(vdata.vid);
+                // {{my-battletier-min}}
+                m_globals["my-battletier-min"] = vdata.tierLo;
+                // {{my-battletier-max}}
+                m_globals["my-battletier-max"] = vdata.tierHi;
+                // {{my-nation}}
+                m_globals["my-nation"] = vdata.nation;
+                // {{my-level}}
+                m_globals["my-level"] = vdata.level;
+                // {{my-rlevel}}
+                m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+
+                // Capture bar
+
+                // {{cap.points}}
+                // {{cap.tanks}}
+                // {{cap.time}}
+                // {{cap.time-sec}}
+                m_globals["cap"] = function(o:MacrosFormatOptions):*
+                {
+                    switch (o.__subname)
+                    {
+                        case "points": return isNaN(o.points) ? NaN : o.points;
+                        case "tanks": return isNaN(o.vehiclesCount) ? NaN : o.vehiclesCount;
+                        case "time":  return o.timeLeft;
+                        case "time-sec": return isNaN(o.timeLeftSec) ? NaN : o.timeLeftSec;
+                    }
+                    return null;
+                }
+
             }
+        }
+
+        private function _RegisterGlobalMacrosDataDelayed(eventName:String):void
+        {
+            switch (eventName)
+            {
+                case "ON_STAT_LOADED":
+                    m_globals["chancesStatic"] = Macros.formatWinChancesText(true, false);
+                    m_globals["chancesLive"] = function(o:MacrosFormatOptions):String { return Macros.formatWinChancesText(false, true); }
+                    break;
+            }
+        }
+
+        private function _RegisterZoomIndicatorData(zoom:Number):void
+        {
+            // {{zoom}}
+            m_globals["zoom"] = zoom;
         }
 
         /**
@@ -746,6 +845,7 @@ package com.xvm
          * @param playerId player id
          * @param fullPlayerName full player name with extra tags (clan, region, etc)
          * @param vid vehicle id
+         * @param team player's team
          */
         private function _RegisterMinimalMacrosData(playerId:Number, fullPlayerName:String, vid:int, team:Number):void
         {
@@ -754,18 +854,14 @@ package com.xvm
 
             var pname:String = WGUtils.GetPlayerName(fullPlayerName);
 
-            // check if already registered
-            if (m_dict.hasOwnProperty(pname))
-            {
-                if (m_dict[pname]["vid"] == vid)
-                    return;
-            }
-            else
-            {
+            if (!m_dict.hasOwnProperty(pname))
                 m_dict[pname] = new Object();
-            }
 
             var pdata:Object = m_dict[pname];
+            if (pdata.hasOwnProperty("name"))
+                return; // already registered
+
+            m_playerId_to_pname[playerId] = pname;
 
             var name:String = getCustomPlayerName(pname, playerId);
             var clanIdx:int = name.indexOf("[");
@@ -788,11 +884,40 @@ package com.xvm
             // {{ally}}
             pdata["ally"] = team == XfwConst.TEAM_ALLY ? 'ally' : null;
 
+            // xmqp events macros
+
+            if (Config.networkServicesSettings.xmqp)
+            {
+                // {{x-enabled}}
+                pdata["x-enabled"] = function(o:*):String { return o.x_enabled == true ? 'true' : null; }
+                // {{x-sense-on}}
+                pdata["x-sense-on"] = function(o:*):String { return o.x_sense_on == true ? 'true' : null; }
+                // {{x-fire}}
+                pdata["x-fire"] = function(o:*):String { return o.x_fire == true ? 'true' : null; }
+                // {{x-overturned}}
+                pdata["x-overturned"] = function(o:*):String { return o.x_overturned == true ? 'true' : null; }
+                // {{x-drowning}}
+                pdata["x-drowning"] = function(o:*):String { return o.x_drowning == true ? 'true' : null; }
+                // {{x-spotted}}
+                pdata["x-spotted"] = function(o:*):String { return o.x_spotted == true ? 'true' : null; }
+            }
+            else
+            {
+                pdata["x-enabled"] = null;
+                pdata["x-sense-on"] = null;
+                pdata["x-fire"] = null;
+                pdata["x-overturned"] = null;
+                pdata["x-drowning"] = null;
+                pdata["x-spotted"] = null;
+            }
+
             // Next macro unique for vehicle
             var vdata:VehicleData = VehicleInfo.get(vid);
-            // Internal use
-            pdata["vid"] = vid;
-            // {{vehicle}} - T-34-85
+            if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
+                m_globals["maxhp"] = vdata.hpTop;
+            // {{veh-id}}
+            pdata["veh-id"] = vid;
+            // {{vehicle}} - Chaffee
             pdata["vehicle"] = vdata.localizedName;
             // {{vehiclename}} - usa-M24_Chaffee
             pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
@@ -823,16 +948,14 @@ package com.xvm
 
             if (!pdata.hasOwnProperty("alive"))
             {
-                // {{alive}}
-                pdata["alive"] = function(o:MacrosFormatOptions):String { return o.alive ? 'alive' : null; }
                 // {{ready}}
                 pdata["ready"] = function(o:MacrosFormatOptions):String { return o.ready ? 'ready' : null; }
+                // {{alive}}
+                pdata["alive"] = function(o:MacrosFormatOptions):String { return o.alive ? 'alive' : null; }
                 // {{selected}}
                 pdata["selected"] = function(o:MacrosFormatOptions):String { return o.selected ? 'sel' : null; }
                 // {{player}}
                 pdata["player"] = function(o:MacrosFormatOptions):String { return o.isCurrentPlayer ? 'pl' : null; }
-                // {{squad}}
-                pdata["squad"] = function(o:MacrosFormatOptions):String { return o.isCurrentSquad ? 'sq' : null; }
                 // {{tk}}
                 pdata["tk"] = function(o:MacrosFormatOptions):String { return o.isTeamKiller ? 'tk' : null; }
                 // {{squad}}
@@ -844,24 +967,172 @@ package com.xvm
             }
         }
 
+        private function _RegisterPlayerData(pname:String, data:Object, team:Number):void
+        {
+            if (!data)
+                return;
+            if (!m_dict.hasOwnProperty(pname))
+                m_dict[pname] = new Object();
+            var pdata:Object = m_dict[pname];
+
+            //Logger.addObject(data);
+
+            // Static macros
+
+            // player name
+            var fullPlayerName:String = data.label;
+            var idx:Number = fullPlayerName.indexOf("[");
+            if (idx < 0 && data.clanAbbrev != null && data.clanAbbrev != "")
+                fullPlayerName += "[" + data.clanAbbrev + "]";
+            _RegisterMinimalMacrosData(data.uid, fullPlayerName, data.vid, team);
+
+            // Dynamic macros
+
+            if (!pdata.hasOwnProperty("frags"))
+            {
+                // {{frags}}
+                pdata["frags"] = function(o:MacrosFormatOptions):Number { return isNaN(o.frags) || o.frags == 0 ? NaN : o.frags; }
+                // {{marksOnGun}}
+                pdata["marksOnGun"] = function(o:MacrosFormatOptions):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun); }
+
+                if (Config.config.battle.allowSpottedStatus)
+                {
+                    var vdata:VehicleData = VehicleInfo.get(pdata["veh-id"]);
+                    var isArty:Boolean = (vdata != null && vdata.vclass == "SPG");
+                    // {{spotted}}
+                    pdata["spotted"] = function(o:MacrosFormatOptions):String { return Utils.getSpottedText(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
+                    // {{c:spotted}}
+                    pdata["c:spotted"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetSpottedColorValue(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
+                    // {{a:spotted}}
+                    pdata["a:spotted"] = function(o:MacrosFormatOptions):Number { return MacrosUtils.GetSpottedAlphaValue(o.dead ? "dead" : o.spotted == null ? "neverSeen" : o.spotted, isArty); }
+                }
+
+                // hp
+
+                // {{hp}}
+                pdata["hp"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : o.curHealth; }
+                // {{hp-max}}
+                var getMaxHealth:Function = function(o:MacrosFormatOptions):Number { return isNaN(o.maxHealth) ? data.maxHealth : o.maxHealth; };
+                pdata["hp-max"] = getMaxHealth;
+                // {{hp-ratio}}
+                pdata["hp-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : Math.round(o.curHealth / getMaxHealth(o) * 100); }
+                // {{c:hp}}
+                pdata["c:hp"] = function(o:MacrosFormatOptions):String { return (isNaN(o.curHealth) && !o.dead) ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth || 0); }
+                // {{c:hp-ratio}}
+                pdata["c:hp-ratio"] = function(o:MacrosFormatOptions):String { return (isNaN(o.curHealth) && !o.dead) ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO,
+                    isNaN(o.curHealth) ? 0 : o.curHealth / getMaxHealth(o) * 100); }
+                // {{a:hp}}
+                pdata["a:hp"] = function(o:MacrosFormatOptions):Number { return (isNaN(o.curHealth) && !o.dead) ? NaN : MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth || 0); }
+                // {{a:hp-ratio}}
+                pdata["a:hp-ratio"] = function(o:MacrosFormatOptions):Number { return (isNaN(o.curHealth) && !o.dead) ? NaN : MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
+                    isNaN(o.curHealth) ? 0 : o.curHealth / getMaxHealth(o) * 100); }
+
+                // dmg
+
+                // {{dmg}}
+                pdata["dmg"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : o.delta; }
+                // {{dmg-ratio}}
+                pdata["dmg-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / getMaxHealth(o) * 100); }
+                // {{dmg-kind}}
+                pdata["dmg-kind"] = function(o:MacrosFormatOptions):String { return o.damageType == null ? null : Locale.get(o.damageType); }
+                // {{c:dmg}}
+                pdata["c:dmg"] = function(o:MacrosFormatOptions):String
+                {
+                    //Logger.addObject(o);
+                    //Logger.addObject(data);
+                    if (isNaN(o.delta))
+                        return null;
+                    switch (o.damageType)
+                    {
+                        case "world_collision":
+                        case "death_zone":
+                        case "drowning":
+                            return MacrosUtils.GetDmgKindValue(o.damageType);
+                        default:
+                            return MacrosUtils.GetDmgSrcColorValue(
+                                MacrosUtils.damageFlagToDamageSource(o.damageFlag),
+                                o.teamKiller ? ((team == XfwConst.TEAM_ALLY ? "ally" : "enemy") + "tk") : o.entityName,
+                                o.dead, o.blowedUp);
+                    }
+                }
+                // {{c:dmg-kind}}
+                pdata["c:dmg-kind"] = function(o:MacrosFormatOptions):String { return o.damageType == null ? null : MacrosUtils.GetDmgKindValue(o.damageType); }
+
+                // {{sys-color-key}}
+                pdata["sys-color-key"] = function(o:MacrosFormatOptions):String
+                {
+                    return MacrosUtils.getSystemColorKey(o.entityName, o.dead, o.blowedUp);
+                }
+
+                // {{c:system}}
+                pdata["c:system"] = function(o:MacrosFormatOptions):String
+                {
+                    return "#" + StringUtils.leftPad(MacrosUtils.getSystemColor(o.entityName, o.dead, o.blowedUp).toString(16), 6, "0");
+                }
+
+                // hitlog
+
+                // {{dead}}
+                pdata["dead"] = function(o:MacrosFormatOptions):String
+                {
+                    return o.curHealth < 0
+                        ? Config.config.hitLog.blowupMarker
+                        : (o.curHealth == 0 || o.dead) ? Config.config.hitLog.deadMarker : null;
+                }
+
+                // {{n}}
+                pdata["n"] = function(o:MacrosFormatOptions):Number { return o.global.hits.length }
+
+                // {{dmg-total}}
+                pdata["dmg-total"] = function(o:MacrosFormatOptions):Number { return o.global.total }
+
+                // {{c:dmg-total}}
+                pdata["c:dmg-total"] = function(o:MacrosFormatOptions):String
+                {
+                    var xtdb_data:Array = Xfw.cmd(XvmCommandsInternal.GET_XTDB_DATA);
+                    var xtdb_data_len:Number = xtdb_data.length;
+                    if (this.curent_xtdb < (xtdb_data_len - 1))
+                    {
+                        for (var i:Number = this.curent_xtdb; i < xtdb_data_len; ++i)
+                        {
+                            if ((o.global.total < xtdb_data[i])||(i == (xtdb_data_len - 1)))
+                            {
+                                this.curent_xtdb = i;
+                                return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, i, "#", false);
+                            }
+                        }
+                    }
+                    return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, (xtdb_data_len - 1), "#", false);
+                }
+
+                // {{dmg-avg}}
+                pdata["dmg-avg"] = function(o:MacrosFormatOptions):Number { return o.global.hits.length == 0 ? 0 : Math.round(o.global.total / o.global.hits.length); }
+
+                // {{n-player}}
+                pdata["n-player"] = function(o:MacrosFormatOptions):Number { return o.hits.length };
+
+                // {{dmg-player}}
+                pdata["dmg-player"] = function(o:MacrosFormatOptions):Number { return o.total };
+            }
+        }
+
         /**
          * Register stat macros values for player
          * @param pname player name without extra tags (clan, region, etc)
          */
-        private function _RegisterStatMacrosData(pname:String):void
+        private function _RegisterStatisticsMacros(pname:String):void
         {
             var stat:StatData = Stat.getData(pname);
             if (stat == null)
                 return;
 
+            var pdata:Object = m_dict[pname];
+
             // Register contacts data
             delete m_macros_cache[pname];
-            if (m_dict.hasOwnProperty(pname) && m_dict[pname].hasOwnProperty("vid"))
-                delete m_dict[pname]["vid"];
+            delete pdata["name"];
             m_contacts[String(stat._id)] = stat.xvm_contact_data;
             RegisterMinimalMacrosData(stat._id, stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id, stat.team);
-
-            var pdata:Object = m_dict[pname];
 
             if (Config.networkServicesSettings.servicesActive != true)
                 return;
@@ -941,56 +1212,56 @@ package com.xvm
 
             // Dynamic colors
             // {{c:xte}}
-            pdata["c:xte"] = function(o:MacrosFormatOptions):String { return isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#"); }
+            pdata["c:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#");
             // {{c:xeff}}
-            pdata["c:xeff"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#"); }
+            pdata["c:xeff"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#");
             // {{c:xwn6}}
-            pdata["c:xwn6"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#"); }
+            pdata["c:xwn6"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#");
             // {{c:xwn8}}
-            pdata["c:xwn8"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#"); }
+            pdata["c:xwn8"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#");
             // {{c:xwn}}
             pdata["c:xwn"] = pdata["c:xwn8"]
             // {{c:xwgr}}
-            pdata["c:xwgr"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#"); }
+            pdata["c:xwgr"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#");
             // {{c:eff}}
-            pdata["c:eff"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#"); }
+            pdata["c:eff"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#");
             // {{c:wn6}}
-            pdata["c:wn6"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#"); }
+            pdata["c:wn6"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#");
             // {{c:wn8}}
-            pdata["c:wn8"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#"); }
+            pdata["c:wn8"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#");
             // {{c:wn}}
             pdata["c:wn"] = pdata["c:wn8"];
             // {{c:wgr}}
-            pdata["c:wgr"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#"); }
+            pdata["c:wgr"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#");
             // {{c:r}}
             pdata["c:r"] = getRating(pdata, "c:", "", null);
             // {{c:xr}}
             pdata["c:xr"] = getRating(pdata, "c:", "", "xvm");
 
             // {{c:winrate}}
-            pdata["c:winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#"); }
+            pdata["c:winrate"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#");
             // {{c:rating}} (obsolete)
             pdata["c:rating"] = pdata["c:winrate"]
             // {{c:kb}}
-            pdata["c:kb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000.0, "#"); }
+            pdata["c:kb"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000.0, "#");
             // {{c:avglvl}}
-            pdata["c:avglvl"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#"); }
+            pdata["c:avglvl"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#");
             // {{c:t-winrate}}
-            pdata["c:t-winrate"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.v.winrate, "#"); }
+            pdata["c:t-winrate"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.v.winrate, "#");
             // {{c:t-rating}} (obsolete)
             pdata["c:t-rating"] = pdata["c:t-winrate"];
             // {{c:t-battles}}
-            pdata["c:t-battles"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#"); }
+            pdata["c:t-battles"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#");
             // {{c:tdb}}
-            pdata["c:tdb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#"); }
+            pdata["c:tdb"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#");
             // {{c:xtdb}}
-            pdata["c:xtdb"] = function(o:MacrosFormatOptions):String { return isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xtdb, "#"); }
+            pdata["c:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xtdb, "#");
             // {{c:tdv}}
-            pdata["c:tdv"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#"); }
+            pdata["c:tdv"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#");
             // {{c:tfb}}
-            pdata["c:tfb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#"); }
+            pdata["c:tfb"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#");
             // {{c:tsb}}
-            pdata["c:tsb"] = function(o:MacrosFormatOptions):String { return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#"); }
+            pdata["c:tsb"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#");
 
             // Alpha
             // {{a:xte}}
@@ -1044,6 +1315,20 @@ package com.xvm
             pdata["a:tfb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
             // {{a:tsb}}
             pdata["a:tsb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
+        }
+
+        private function _RegisterMarkerData(pname:String, data:Object):void
+        {
+            //Logger.addObject(data);
+
+            if (!data)
+                return;
+            if (!m_dict.hasOwnProperty(pname))
+                m_dict[pname] = new Object();
+            var pdata:Object = m_dict[pname];
+
+            // {{turret}}
+            pdata["turret"] = data.turret || "";
         }
 
         private function _RegisterVehiclesMacros():void
@@ -1199,6 +1484,35 @@ package com.xvm
             if (!RATING_MATRIX.hasOwnProperty(name))
                 name = (scale != null ? scale : "basic") + "_wgr";
             return name;
+        }
+
+        private static function formatWinChancesText(isShowChance:Boolean, isShowLiveChance:Boolean):String
+        {
+            if (!Config.networkServicesSettings.chance)
+                return "";
+            if (!Config.networkServicesSettings.chanceLive && isShowLiveChance)
+            {
+                return "";
+            }
+            var playerNames:Vector.<String> = new Vector.<String>();
+            for (var name:String in Stat.stat)
+                playerNames.push(name);
+            var ChancesText:String = Chance.GetChanceText(playerNames, true, false, true);
+            var temp: Array = ChancesText.split('|', 2);
+            var tempA: Array = temp[0].split(':', 2);
+            if (isShowChance)
+            {
+                return tempA[1];
+            }
+            else if (isShowLiveChance)
+            {
+                var tempB: Array = temp[1].split(':', 2);
+                return tempB[1];
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }

@@ -9,56 +9,56 @@ class com.xvm.Utils
 {
     private static var TRACE_XVM_MODULES = true;
 
-    public static function toInt(value:Object, defaultValue:Number):Number
-    {
-        if (!defaultValue)
-            defaultValue = NaN;
-        if (!value)
-            return defaultValue;
-        var n:Number = parseInt(value.toString());
-        return isNaN(n) ? defaultValue : n;
-    }
-
-    public static function toFloat(value:Object, defaultValue:Number):Number
-    {
-        if (!defaultValue)
-            defaultValue = NaN;
-        if (!value)
-            return defaultValue;
-        var n:Number = parseFloat(value.toString());
-        return isNaN(n) ? defaultValue : n;
-    }
-
-    public static function toBool(value:Object, defaultValue:Boolean):Boolean
-    {
-        if ((typeof value) == "boolean")
-            return Boolean(value);
-        if (!value)
-            return defaultValue;
-        value = String(value).toLowerCase();
-        return defaultValue ? value != "false" : value == "true";
-    }
-
-    private static var _lastArenaGuiType:Number = -1;
-    private static var _isArenaGuiTypeWithPlayerPanels:Boolean;
-    public static function isArenaGuiTypeWithPlayerPanels():Boolean
-    {
-        if (_lastArenaGuiType != Config.arenaGuiType)
-        {
-            _lastArenaGuiType = Config.arenaGuiType;
-            _isArenaGuiTypeWithPlayerPanels = true;
-            var len:Number = Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS.length;
-            for (var i:Number = 0; i < len; ++i)
-            {
-                if (Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS[i] == Config.arenaGuiType)
-                {
-                    _isArenaGuiTypeWithPlayerPanels = false;
-                    break;
-                }
-            }
-        }
-        return _isArenaGuiTypeWithPlayerPanels;
-    }
+// AS3:DONE     public static function toInt(value:Object, defaultValue:Number):Number
+// AS3:DONE     {
+// AS3:DONE         if (!defaultValue)
+// AS3:DONE             defaultValue = NaN;
+// AS3:DONE         if (!value)
+// AS3:DONE             return defaultValue;
+// AS3:DONE         var n:Number = parseInt(value.toString());
+// AS3:DONE         return isNaN(n) ? defaultValue : n;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     public static function toFloat(value:Object, defaultValue:Number):Number
+// AS3:DONE     {
+// AS3:DONE         if (!defaultValue)
+// AS3:DONE             defaultValue = NaN;
+// AS3:DONE         if (!value)
+// AS3:DONE             return defaultValue;
+// AS3:DONE         var n:Number = parseFloat(value.toString());
+// AS3:DONE         return isNaN(n) ? defaultValue : n;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     public static function toBool(value:Object, defaultValue:Boolean):Boolean
+// AS3:DONE     {
+// AS3:DONE         if ((typeof value) == "boolean")
+// AS3:DONE             return Boolean(value);
+// AS3:DONE         if (!value)
+// AS3:DONE             return defaultValue;
+// AS3:DONE         value = String(value).toLowerCase();
+// AS3:DONE         return defaultValue ? value != "false" : value == "true";
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private static var _lastArenaGuiType:Number = -1;
+// AS3:DONE     private static var _isArenaGuiTypeWithPlayerPanels:Boolean;
+// AS3:DONE     public static function isArenaGuiTypeWithPlayerPanels():Boolean
+// AS3:DONE     {
+// AS3:DONE         if (_lastArenaGuiType != Config.arenaGuiType)
+// AS3:DONE         {
+// AS3:DONE             _lastArenaGuiType = Config.arenaGuiType;
+// AS3:DONE             _isArenaGuiTypeWithPlayerPanels = true;
+// AS3:DONE             var len:Number = Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS.length;
+// AS3:DONE             for (var i:Number = 0; i < len; ++i)
+// AS3:DONE             {
+// AS3:DONE                 if (Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS[i] == Config.arenaGuiType)
+// AS3:DONE                 {
+// AS3:DONE                     _isArenaGuiTypeWithPlayerPanels = false;
+// AS3:DONE                     break;
+// AS3:DONE                 }
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE         return _isArenaGuiTypeWithPlayerPanels;
+// AS3:DONE     }
 
     ////////////////////
 
@@ -85,23 +85,23 @@ class com.xvm.Utils
         return v;
     }
 
-    public static function getSpottedText(value:String, isArty:Boolean):String
-    {
-        if (value == null)
-            return null;
-
-        if (isArty)
-            value += "_arty";
-
-        if (!Config.config.texts.spotted[value])
-            return null;
-
-        var v:String = Config.config.texts.spotted[value];
-        if (v.indexOf("{{l10n:") >= 0)
-            v = Locale.get(v);
-
-        return v;
-    }
+// AS3:DONE     public static function getSpottedText(value:String, isArty:Boolean):String
+// AS3:DONE     {
+// AS3:DONE         if (value == null)
+// AS3:DONE             return null;
+// AS3:DONE 
+// AS3:DONE         if (isArty)
+// AS3:DONE             value += "_arty";
+// AS3:DONE 
+// AS3:DONE         if (!Config.config.texts.spotted[value])
+// AS3:DONE             return null;
+// AS3:DONE 
+// AS3:DONE         var v:String = Config.config.texts.spotted[value];
+// AS3:DONE         if (v.indexOf("{{l10n:") >= 0)
+// AS3:DONE             v = Locale.get(v);
+// AS3:DONE 
+// AS3:DONE         return v;
+// AS3:DONE     }
 
     public static function getXvmUserText(status:Number):String
     {
@@ -510,15 +510,15 @@ class com.xvm.Utils
             head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
     }
 
-    public static function timeStrToSec(str:String):Number
-    {
-        var p = str.split(':');
-        var s = 0;
-        var m = 1;
-        while (p.length > 0) {
-            s += m * parseInt(p.pop(), 10);
-            m *= 60;
-        }
-        return s;
-    }
+// AS3:DONE     public static function timeStrToSec(str:String):Number
+// AS3:DONE     {
+// AS3:DONE         var p = str.split(':');
+// AS3:DONE         var s = 0;
+// AS3:DONE         var m = 1;
+// AS3:DONE         while (p.length > 0) {
+// AS3:DONE             s += m * parseInt(p.pop(), 10);
+// AS3:DONE             m *= 60;
+// AS3:DONE         }
+// AS3:DONE         return s;
+// AS3:DONE     }
 }

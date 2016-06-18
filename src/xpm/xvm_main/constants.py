@@ -43,8 +43,12 @@ class XVM_EVENT(object):
 class XVM_COMMAND(object):
     REQUEST_CONFIG = "xvm.request_config"
     GET_PLAYER_NAME = "xvm.get_player_name"
+    GET_ARENA_GUI_TYPE = "xvm.get_arena_gui_type"
     GET_BATTLE_LEVEL = "xvm.get_battle_level"
     GET_BATTLE_TYPE = "xvm.get_battle_type"
+    GET_MAP_SIZE = "xvm.get_map_size"
+    GET_MY_VEH_ID = "xvm.get_my_veh_id"
+    GET_XTDB_DATA = "xvm.get_xtdb_data"
     REQUEST_DOSSIER = "xvm.request_dossier"
     GET_SVC_SETTINGS = "xvm.get_svc_settings"
     LOAD_SETTINGS = "xvm.load_settings"

@@ -7,7 +7,6 @@ package com.xvm.lobby.ping.PingServers
     import com.xfw.*;
     import com.xfw.events.*;
     import com.xvm.*;
-    import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
     import flash.text.*;
     import flash.events.*;

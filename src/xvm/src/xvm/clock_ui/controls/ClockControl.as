@@ -7,7 +7,6 @@ package xvm.clock_ui.controls
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.utils.*;
     import flash.display.*;
     import flash.utils.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes

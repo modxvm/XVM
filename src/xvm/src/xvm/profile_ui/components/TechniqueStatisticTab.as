@@ -9,7 +9,6 @@ package xvm.profile_ui.components
     import com.xvm.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
-    import com.xvm.utils.*;
     import flash.display.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.components.*;

@@ -15,9 +15,7 @@ XFW_MOD_INFO = {
 #####################################################################
 # imports
 
-from xfw import *
-from xvm_main.python.logger import *
-
+import xfw_cmd
 import fragCorrelationPanel
 import minimap
 import camera

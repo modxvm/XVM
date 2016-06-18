@@ -7,7 +7,6 @@ package xvm.profile_ui
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.veh.*;
-    import com.xvm.utils.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
 

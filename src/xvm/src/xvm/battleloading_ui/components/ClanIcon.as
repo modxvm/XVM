@@ -6,7 +6,6 @@ package xvm.battleloading_ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;

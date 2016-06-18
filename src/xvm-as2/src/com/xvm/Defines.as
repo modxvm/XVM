@@ -101,25 +101,25 @@ class com.xvm.Defines
     public static var MOVING_STATE_MOVING = 0x02;
     public static var MOVING_STATE_ALL = MOVING_STATE_STOPPED | MOVING_STATE_MOVING;
 
-    // ArenaGuiTypes
-    // sync with constants.py: ARENA_GUI_TYPE
-    public static var ARENA_GUI_TYPE_UNKNOWN:Number = 0
-    public static var ARENA_GUI_TYPE_RANDOM:Number = 1
-    public static var ARENA_GUI_TYPE_TOURNAMENT:Number = 2
-    public static var ARENA_GUI_TYPE_COMPANY:Number = 3
-    public static var ARENA_GUI_TYPE_TUTORIAL:Number = 4
-    public static var ARENA_GUI_TYPE_CYBERSPORT:Number = 5
-    public static var ARENA_GUI_TYPE_FALLOUT:Number = 6
-    public static var ARENA_GUI_TYPE_EVENT_BATTLES:Number = 7
-    public static var ARENA_GUI_TYPE_SORTIE:Number = 8
-    public static var ARENA_GUI_TYPE_FORT_BATTLE:Number = 9
-    public static var ARENA_GUI_TYPE_RATED_CYBERSPORT:Number = 10
-    public static var ARENA_GUI_TYPE_RATED_SANDBOX:Number = 11
-    public static var ARENA_GUI_TYPE_SANDBOX:Number = 12
-    public static var ARENA_GUI_TYPE_FALLOUT_CLASSIC:Number = 13
-    public static var ARENA_GUI_TYPE_FALLOUT_MULTITEAM:Number = 14
-
-    public static var ARENA_GUI_TYPE_NO_PLAYER_PANELS:Array = [ ARENA_GUI_TYPE_FALLOUT_CLASSIC, ARENA_GUI_TYPE_FALLOUT_MULTITEAM ];
+// AS3:DONE     // ArenaGuiTypes
+// AS3:DONE     // sync with constants.py: ARENA_GUI_TYPE
+// AS3:DONE     public static var ARENA_GUI_TYPE_UNKNOWN:Number = 0
+// AS3:DONE     public static var ARENA_GUI_TYPE_RANDOM:Number = 1
+// AS3:DONE     public static var ARENA_GUI_TYPE_TOURNAMENT:Number = 2
+// AS3:DONE     public static var ARENA_GUI_TYPE_COMPANY:Number = 3
+// AS3:DONE     public static var ARENA_GUI_TYPE_TUTORIAL:Number = 4
+// AS3:DONE     public static var ARENA_GUI_TYPE_CYBERSPORT:Number = 5
+// AS3:DONE     public static var ARENA_GUI_TYPE_FALLOUT:Number = 6
+// AS3:DONE     public static var ARENA_GUI_TYPE_EVENT_BATTLES:Number = 7
+// AS3:DONE     public static var ARENA_GUI_TYPE_SORTIE:Number = 8
+// AS3:DONE     public static var ARENA_GUI_TYPE_FORT_BATTLE:Number = 9
+// AS3:DONE     public static var ARENA_GUI_TYPE_RATED_CYBERSPORT:Number = 10
+// AS3:DONE     public static var ARENA_GUI_TYPE_RATED_SANDBOX:Number = 11
+// AS3:DONE     public static var ARENA_GUI_TYPE_SANDBOX:Number = 12
+// AS3:DONE     public static var ARENA_GUI_TYPE_FALLOUT_CLASSIC:Number = 13
+// AS3:DONE     public static var ARENA_GUI_TYPE_FALLOUT_MULTITEAM:Number = 14
+// AS3:DONE 
+// AS3:DONE     public static var ARENA_GUI_TYPE_NO_PLAYER_PANELS:Array = [ ARENA_GUI_TYPE_FALLOUT_CLASSIC, ARENA_GUI_TYPE_FALLOUT_MULTITEAM ];
 
     // BattleTypes
     // sync with constants.py: ARENA_BONUS_TYPE

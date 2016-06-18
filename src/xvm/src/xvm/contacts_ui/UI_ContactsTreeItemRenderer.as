@@ -6,7 +6,6 @@ package xvm.contacts_ui
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.utils.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes

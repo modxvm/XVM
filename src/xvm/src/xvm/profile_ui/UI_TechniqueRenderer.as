@@ -9,7 +9,6 @@ package xvm.profile_ui
     import com.xvm.types.dossier.VehicleDossier;
     import com.xvm.types.stat.StatData;
     import com.xvm.types.veh.*;
-    import com.xvm.utils.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;

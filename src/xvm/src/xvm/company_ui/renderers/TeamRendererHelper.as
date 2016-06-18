@@ -7,7 +7,6 @@ package xvm.company_ui.renderers
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.stat.*;
-    import com.xvm.utils.*;
 
     /**
      * Helper class for shared functions used in the players lists renderers in the hangar

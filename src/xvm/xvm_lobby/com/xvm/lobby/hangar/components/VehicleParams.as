@@ -7,7 +7,6 @@ package com.xvm.lobby.hangar.components
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.utils.*;
     import net.wg.gui.components.controls.ScrollingListEx;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.interfaces.*;

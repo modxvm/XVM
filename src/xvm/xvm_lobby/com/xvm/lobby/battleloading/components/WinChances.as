@@ -7,7 +7,6 @@ package com.xvm.lobby.battleloading.components
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.utils.*;
     import flash.text.*;
     import net.wg.gui.lobby.battleloading.*;
 

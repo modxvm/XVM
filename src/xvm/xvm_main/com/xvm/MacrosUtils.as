@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.utils
+package com.xvm
 {
     import com.xfw.*;
     import com.xvm.*;
@@ -193,6 +193,77 @@ package com.xvm.utils
                 default:
                     return "unknown";
             }
+        }
+
+        public static function GetVTypeColorValue(vehId:Number):String
+        {
+            try
+            {
+                var vdata:VehicleData = VehicleInfo.get(vehId);
+                var vtype:String = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
+                if (!vtype || !Config.config.colors.vtype[vtype])
+                    return "";
+                return "#" + StringUtils.leftPad(XfwUtils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
+            }
+            catch (ex:Error)
+            {
+                return null;
+            }
+            return null;
+        }
+
+        public static function GetSpottedColorValue(value:String, isArty:Boolean):String
+        {
+            try
+            {
+                if (!value)
+                    return "";
+                if (isArty)
+                    value += "_arty";
+                if (!Config.config.colors.spotted[value])
+                    return "";
+                return "#" + StringUtils.leftPad(XfwUtils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
+            }
+            catch (ex:Error)
+            {
+                return null;
+            }
+            return null;
+        }
+
+        public static function GetSpottedAlphaValue(value:String, isArty:Boolean):Number
+        {
+            try
+            {
+                if (!value)
+                    return NaN;
+                if (isArty)
+                    value += "_arty";
+                if (Config.config.alpha.spotted[value] == null)
+                    return NaN;
+                return Config.config.alpha.spotted[value];
+            }
+            catch (ex:Error)
+            {
+                return NaN;
+            }
+            return NaN;
+        }
+
+        /**
+         * Get system color key for current state
+         */
+        public static function getSystemColorKey(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean = false):String
+        {
+            return entityName + "_" + (isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead");
+        }
+
+        /**
+         * Get system color value for current state
+         */
+        public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean = false):Number
+        {
+            return parseInt(Config.config.colors.system[getSystemColorKey(entityName, isDead, isBlowedUp, isBase)]);
         }
     }
 }

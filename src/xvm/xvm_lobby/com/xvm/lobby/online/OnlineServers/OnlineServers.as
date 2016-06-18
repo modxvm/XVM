@@ -6,7 +6,6 @@ package com.xvm.lobby.online.OnlineServers
 {
     import com.xfw.*;
     import com.xfw.events.*;
-    import com.xvm.utils.*;
     import flash.events.*;
     import flash.utils.*;
     import org.idmedia.as3commons.util.*;

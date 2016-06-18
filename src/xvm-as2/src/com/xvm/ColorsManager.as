@@ -37,21 +37,21 @@ class com.xvm.ColorsManager
         return "purple";
     }
 
-    /**
-     * Get system color key for current state
-     */
-    public static function getSystemColorKey(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):String
-    {
-        return entityName + "_" + (isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead");
-    }
-
-    /**
-     * Get system color value for current state
-     */
-    public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):Number
-    {
-        return parseInt(Config.config.colors.system[getSystemColorKey(entityName, isDead, isBlowedUp, isBase)]);
-    }
+// AS3:DONE     /**
+// AS3:DONE      * Get system color key for current state
+// AS3:DONE      */
+// AS3:DONE     public static function getSystemColorKey(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):String
+// AS3:DONE     {
+// AS3:DONE         return entityName + "_" + (isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead");
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     /**
+// AS3:DONE      * Get system color value for current state
+// AS3:DONE      */
+// AS3:DONE     public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean):Number
+// AS3:DONE     {
+// AS3:DONE         return parseInt(Config.config.colors.system[getSystemColorKey(entityName, isDead, isBlowedUp, isBase)]);
+// AS3:DONE     }
 
     public static function getDamageSystemColor(damageSource:String, damageDest:String, damageType:String, isDead:Boolean, isBlowedUp:Boolean):Number
     {

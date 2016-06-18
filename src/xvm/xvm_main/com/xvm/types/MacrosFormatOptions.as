@@ -2,7 +2,7 @@
 {
     import com.xvm.types.dossier.VehicleDossierCut;
 
-    public class MacrosFormatOptions
+    public dynamic class MacrosFormatOptions
     {
         public var skip:Object = null;
 

@@ -6,12 +6,9 @@ package com.xvm
 {
     import com.xfw.*;
     import com.xfw.events.*;
-    //import com.xvm.io.*;
-    import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
     import flash.events.*;
-    //import flash.external.*;
     import flash.utils.*;
 
     public class Stat extends EventDispatcher
@@ -157,7 +154,7 @@ package com.xvm
                         // TODO
                         //StatData.s_data[nm].loadstate = (StatData.s_data[nm].vehicleKey == "UNKNOWN")
                         //    ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
-                        Macros.RegisterStatMacrosData(name);
+                        Macros.RegisterStatisticsMacros(name);
                         //Logger.addObject(stat[name], 3, "stat[" + name + "]");
                     }
                 }
@@ -252,7 +249,7 @@ package com.xvm
                         var sd:StatData = ObjectConverter.convertData(data.players[name], StatData);
                         calculateStatValues(sd);
                         statCache[name] = sd;
-                        Macros.RegisterStatMacrosData(name);
+                        Macros.RegisterStatisticsMacros(name);
                     }
                 }
             }

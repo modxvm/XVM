@@ -124,84 +124,84 @@ class com.xvm.GraphicsUtil
         return max;
     }
 
-    public static function GetVTypeColorValue(vehId:Number):String
-    {
-        try
-        {
-            var vdata:VehicleData = VehicleInfo.get(vehId);
-            var vtype = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
-            if (!vtype || !Config.config.colors.vtype[vtype])
-                return "";
-            return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
-        }
-        catch (ex:Error)
-        {
-            return null;
-        }
-        return null;
-    }
-
-    public static function GetSpottedColorValue(value:String, isArty:Boolean):String
-    {
-        try
-        {
-            if (!value)
-                return "";
-            if (isArty)
-                value += "_arty";
-            if (!Config.config.colors.spotted[value])
-                return "";
-            return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
-        }
-        catch (ex:Error)
-        {
-            return null;
-        }
-        return null;
-    }
-
-    public static function GetSpottedAlphaValue(value:String, isArty:Boolean):Number
-    {
-        try
-        {
-            if (!value)
-                return NaN;
-            if (isArty)
-                value += "_arty";
-            if (Config.config.alpha.spotted[value] == null)
-                return NaN;
-            return Config.config.alpha.spotted[value];
-        }
-        catch (ex:Error)
-        {
-            return NaN;
-        }
-        return NaN;
-    }
-
-    public static function GetDmgSrcValue(damageSource:String, damageDest:String, isDead:Boolean, isBlowedUp:Boolean, prefix:String):String
-    {
-        if (!prefix)
-            prefix = "#";
-
-        try
-        {
-            if (!damageSource || !damageDest)
-                return null;
-            var key:String = damageSource + "_" + damageDest + "_";
-            key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
-            var value = Config.config.colors.damage[key];
-            if (!value)
-                return "";
-            //Logger.add(key + " => " + value);
-            return prefix + Strings.padLeft(Utils.toInt(value, 0xFFFFFE).toString(16), 6, "0");
-        }
-        catch (ex:Error)
-        {
-            return null;
-        }
-        return null;
-    }
+// AS3:DONE     public static function GetVTypeColorValue(vehId:Number):String
+// AS3:DONE     {
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             var vdata:VehicleData = VehicleInfo.get(vehId);
+// AS3:DONE             var vtype = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
+// AS3:DONE             if (!vtype || !Config.config.colors.vtype[vtype])
+// AS3:DONE                 return "";
+// AS3:DONE             return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
+// AS3:DONE         }
+// AS3:DONE         catch (ex:Error)
+// AS3:DONE         {
+// AS3:DONE             return null;
+// AS3:DONE         }
+// AS3:DONE         return null;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     public static function GetSpottedColorValue(value:String, isArty:Boolean):String
+// AS3:DONE     {
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             if (!value)
+// AS3:DONE                 return "";
+// AS3:DONE             if (isArty)
+// AS3:DONE                 value += "_arty";
+// AS3:DONE             if (!Config.config.colors.spotted[value])
+// AS3:DONE                 return "";
+// AS3:DONE             return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
+// AS3:DONE         }
+// AS3:DONE         catch (ex:Error)
+// AS3:DONE         {
+// AS3:DONE             return null;
+// AS3:DONE         }
+// AS3:DONE         return null;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     public static function GetSpottedAlphaValue(value:String, isArty:Boolean):Number
+// AS3:DONE     {
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             if (!value)
+// AS3:DONE                 return NaN;
+// AS3:DONE             if (isArty)
+// AS3:DONE                 value += "_arty";
+// AS3:DONE             if (Config.config.alpha.spotted[value] == null)
+// AS3:DONE                 return NaN;
+// AS3:DONE             return Config.config.alpha.spotted[value];
+// AS3:DONE         }
+// AS3:DONE         catch (ex:Error)
+// AS3:DONE         {
+// AS3:DONE             return NaN;
+// AS3:DONE         }
+// AS3:DONE         return NaN;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     public static function GetDmgSrcValue(damageSource:String, damageDest:String, isDead:Boolean, isBlowedUp:Boolean, prefix:String):String
+// AS3:DONE     {
+// AS3:DONE         if (!prefix)
+// AS3:DONE             prefix = "#";
+// AS3:DONE 
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             if (!damageSource || !damageDest)
+// AS3:DONE                 return null;
+// AS3:DONE             var key:String = damageSource + "_" + damageDest + "_";
+// AS3:DONE             key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
+// AS3:DONE             var value = Config.config.colors.damage[key];
+// AS3:DONE             if (!value)
+// AS3:DONE                 return "";
+// AS3:DONE             //Logger.add(key + " => " + value);
+// AS3:DONE             return prefix + Strings.padLeft(Utils.toInt(value, 0xFFFFFE).toString(16), 6, "0");
+// AS3:DONE         }
+// AS3:DONE         catch (ex:Error)
+// AS3:DONE         {
+// AS3:DONE             return null;
+// AS3:DONE         }
+// AS3:DONE         return null;
+// AS3:DONE     }
 
     public static function GetDmgKindValue(dmg_kind: String, prefix: String): String
     {

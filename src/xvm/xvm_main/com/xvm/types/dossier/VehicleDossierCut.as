@@ -6,8 +6,8 @@ package com.xvm.types.dossier
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.MacrosUtils;
     import com.xvm.types.veh.*;
-    import com.xvm.utils.*;
     import net.wg.data.daapi.base.*;
 
     public class VehicleDossierCut extends DAAPIDataClass

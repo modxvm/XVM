@@ -7,7 +7,6 @@ package com.xvm.lobby.battleresults.components
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.stat.*;
-    import com.xvm.utils.*;
     import flash.text.*;
     import net.wg.gui.lobby.battleResults.*;
 

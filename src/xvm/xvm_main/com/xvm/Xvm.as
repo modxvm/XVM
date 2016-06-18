@@ -7,7 +7,6 @@ package com.xvm
     XvmLinks;
 
     import com.xfw.*;
-    import com.xvm.utils.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;

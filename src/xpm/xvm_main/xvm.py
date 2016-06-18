@@ -512,6 +512,28 @@ class Xvm(object):
             if cmd == XVM_COMMAND.GET_PLAYER_NAME:
                 return (BigWorld.player().name, True)
 
+            if cmd == XVM_COMMAND.GET_ARENA_GUI_TYPE:
+                if hasattr(arena_info, 'getArenaGuiType'):
+                    arena = getattr(BigWorld.player(), 'arena', None)
+                    if arena is not None:
+                        return (arena_info.getArenaGuiType(arena=arena), True)
+                return (None, True)
+
+            if cmd == XVM_COMMAND.GET_MAP_SIZE:
+                return (utils.getMapSize(), True)
+
+            if cmd == XVM_COMMAND.GET_MY_VEH_ID:
+                player = BigWorld.player()
+                arenaVehicle = player.arena.vehicles.get(player.playerVehicleID)
+                res = arenaVehicle['vehicleType'].type.compactDescr
+                return (res, True)
+
+            if cmd == XVM_COMMAND.GET_XTDB_DATA:
+                player = BigWorld.player()
+                arenaVehicle = player.arena.vehicles.get(player.playerVehicleID)
+                res = vehinfo_xtdb.vehArrayXTDB(arenaVehicle['vehicleType'].type.compactDescr)
+                return (res, True)
+
             if cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 if arena is not None:

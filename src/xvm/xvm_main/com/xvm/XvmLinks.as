@@ -16,20 +16,18 @@ internal class XvmLinks
  */
 
 import com.xvm.*;
+Chance;
 Config;
 Dossier;
 Locale;
 Stat;
 VehicleInfo;
 XvmCommands;
+Utils;
 
 import com.xvm.infrastructure.*;
 XvmModBase;
 XvmViewBase;
-
-import com.xvm.utils.*;
-Chance;
-Utils;
 
 }
 
