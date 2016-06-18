@@ -28,7 +28,7 @@ package com.xvm.battle.teamBasesPanel
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             super.onAfterPopulate(e);
-            App.utils.scheduler.scheduleOnNextFrame(init);
+            init();
         }
 
         // PRIVATE
