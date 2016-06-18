@@ -372,8 +372,8 @@ clean_repodir
 clean_outputdir
 create_directories
 
-patch_as2
-build_as2
+#patch_as2
+#build_as2
 build_xpm
 build_xfw
 build_as3
