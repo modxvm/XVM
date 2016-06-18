@@ -5,6 +5,7 @@
 package com.xvm.battle
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.BattleXvmView;
     import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
@@ -26,6 +27,8 @@ package com.xvm.battle
             super.entryPoint();
             //Logger.addObject(stage);
             //Logger.addObject(root);
+
+            Macros.RegisterGlobalMacrosData();
         }
 
         public override function get views():Object

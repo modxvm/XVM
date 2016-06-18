@@ -37,6 +37,7 @@ package com.xvm.battle.teamBasesPanel
 
         override public function setData(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:String, param7:String):void
         {
+            cfg = null;
             super.setData.apply(this, arguments);
             onConfigLoaded(null);
         }
@@ -44,6 +45,8 @@ package com.xvm.battle.teamBasesPanel
         override public function updateCaptureData(points:Number, param2:Boolean, param3:Boolean, param4:Number, timeLeft:String, vehiclesCount:String):void
         {
             super.updateCaptureData.apply(this, arguments);
+            if (!cfg)
+                return;
             m_points = points;
             m_timeLeft = timeLeft;
             m_vehiclesCount = vehiclesCount;
@@ -61,7 +64,9 @@ package com.xvm.battle.teamBasesPanel
         override public function updateTitle(param1:String):void
         {
             super.updateTitle(param1);
-            //m_captured = true;
+            if (!cfg)
+                return;
+            m_captured = true;
             updateTextFields();
         }
 
@@ -169,7 +174,7 @@ package com.xvm.battle.teamBasesPanel
             o.points = m_points;
             o.vehiclesCount = m_vehiclesCount;
             o.timeLeft = m_timeLeft;
-            o.timeLeftSec = Utils.timeStrToSec(m_timeLeft);
+            o.timeLeftSec = m_timeLeft ? Utils.timeStrToSec(m_timeLeft) : -1;
 
             var value:String;
             var name:String = m_captured ? "done" : "format";
