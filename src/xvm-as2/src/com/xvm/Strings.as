@@ -59,27 +59,4 @@ class com.xvm.Strings
         }
         return str;
     }
-
-// AS3:DONE     /**
-// AS3:DONE      *  from  mx.utils.StringUtil;
-// AS3:DONE      *
-// AS3:DONE      *  Substitutes "{n}" tokens within the specified string
-// AS3:DONE      *  with the respective arguments passed in.
-// AS3:DONE      *
-// AS3:DONE      *  @example
-// AS3:DONE      *
-// AS3:DONE      *  var str:String = "here is some info '{0}' and {1}";
-// AS3:DONE      *  trace(StringUtil.substitute(str, 15.4, true));
-// AS3:DONE      */
-// AS3:DONE     public static function substitute(str:String, args:Array):String
-// AS3:DONE     {
-// AS3:DONE         if (str == null)
-// AS3:DONE             return '';
-// AS3:DONE 
-// AS3:DONE         var len = args.length;
-// AS3:DONE         for (var i = 0; i < len; i++)
-// AS3:DONE             str = str.split("{" + i + "}").join(args[i]);
-// AS3:DONE 
-// AS3:DONE         return str;
-// AS3:DONE     }
 }

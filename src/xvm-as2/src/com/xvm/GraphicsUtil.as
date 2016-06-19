@@ -110,109 +110,15 @@ class com.xvm.GraphicsUtil
         return { r: (hex & 0xff0000) >> 16, g: (hex & 0x00ff00) >> 8, b: hex & 0x0000ff };
     }
 
-    public static function brightness(hex:Number):Number
+    public static function GetVTypeColorValue(vehId:Number):String
     {
-        var max:Number = 0;
-        var rgb:Object = hexToRgb(hex);
-        if(rgb.r > max)
-            max = rgb.r;
-        if(rgb.g > max)
-            max = rgb.g;
-        if(rgb.b > max)
-            max = rgb.b;
-        max /= 255;
-        return max;
-    }
-
-// AS3:DONE     public static function GetVTypeColorValue(vehId:Number):String
-// AS3:DONE     {
-// AS3:DONE         try
-// AS3:DONE         {
-// AS3:DONE             var vdata:VehicleData = VehicleInfo.get(vehId);
-// AS3:DONE             var vtype = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
-// AS3:DONE             if (!vtype || !Config.config.colors.vtype[vtype])
-// AS3:DONE                 return "";
-// AS3:DONE             return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
-// AS3:DONE         }
-// AS3:DONE         catch (ex:Error)
-// AS3:DONE         {
-// AS3:DONE             return null;
-// AS3:DONE         }
-// AS3:DONE         return null;
-// AS3:DONE     }
-// AS3:DONE 
-// AS3:DONE     public static function GetSpottedColorValue(value:String, isArty:Boolean):String
-// AS3:DONE     {
-// AS3:DONE         try
-// AS3:DONE         {
-// AS3:DONE             if (!value)
-// AS3:DONE                 return "";
-// AS3:DONE             if (isArty)
-// AS3:DONE                 value += "_arty";
-// AS3:DONE             if (!Config.config.colors.spotted[value])
-// AS3:DONE                 return "";
-// AS3:DONE             return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
-// AS3:DONE         }
-// AS3:DONE         catch (ex:Error)
-// AS3:DONE         {
-// AS3:DONE             return null;
-// AS3:DONE         }
-// AS3:DONE         return null;
-// AS3:DONE     }
-// AS3:DONE 
-// AS3:DONE     public static function GetSpottedAlphaValue(value:String, isArty:Boolean):Number
-// AS3:DONE     {
-// AS3:DONE         try
-// AS3:DONE         {
-// AS3:DONE             if (!value)
-// AS3:DONE                 return NaN;
-// AS3:DONE             if (isArty)
-// AS3:DONE                 value += "_arty";
-// AS3:DONE             if (Config.config.alpha.spotted[value] == null)
-// AS3:DONE                 return NaN;
-// AS3:DONE             return Config.config.alpha.spotted[value];
-// AS3:DONE         }
-// AS3:DONE         catch (ex:Error)
-// AS3:DONE         {
-// AS3:DONE             return NaN;
-// AS3:DONE         }
-// AS3:DONE         return NaN;
-// AS3:DONE     }
-// AS3:DONE 
-// AS3:DONE     public static function GetDmgSrcValue(damageSource:String, damageDest:String, isDead:Boolean, isBlowedUp:Boolean, prefix:String):String
-// AS3:DONE     {
-// AS3:DONE         if (!prefix)
-// AS3:DONE             prefix = "#";
-// AS3:DONE 
-// AS3:DONE         try
-// AS3:DONE         {
-// AS3:DONE             if (!damageSource || !damageDest)
-// AS3:DONE                 return null;
-// AS3:DONE             var key:String = damageSource + "_" + damageDest + "_";
-// AS3:DONE             key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
-// AS3:DONE             var value = Config.config.colors.damage[key];
-// AS3:DONE             if (!value)
-// AS3:DONE                 return "";
-// AS3:DONE             //Logger.add(key + " => " + value);
-// AS3:DONE             return prefix + Strings.padLeft(Utils.toInt(value, 0xFFFFFE).toString(16), 6, "0");
-// AS3:DONE         }
-// AS3:DONE         catch (ex:Error)
-// AS3:DONE         {
-// AS3:DONE             return null;
-// AS3:DONE         }
-// AS3:DONE         return null;
-// AS3:DONE     }
-
-    public static function GetDmgKindValue(dmg_kind: String, prefix: String): String
-    {
-        if (!prefix)
-            prefix = "#";
-
         try
         {
-            if (!dmg_kind || !Config.config.colors.dmg_kind[dmg_kind])
-                return null;
-            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16), 6, "0");
+            var vdata:VehicleData = VehicleInfo.get(vehId);
+            var vtype = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
+            if (!vtype || !Config.config.colors.vtype[vtype])
+                return "";
+            return "#" + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -271,46 +177,6 @@ class com.xvm.GraphicsUtil
         }
 
         return null;
-    }
-
-    public static function GetDynamicAlphaValue(type: Number, value: Number): Number
-    {
-        if (value == null || isNaN(value))
-            return NaN;
-
-        var cfg_root:Object = Config.config.alpha;
-        var cfg: Array;
-        switch (type)
-        {
-            case Defines.DYNAMIC_ALPHA_HP:              cfg = cfg_root.hp; break;
-            case Defines.DYNAMIC_ALPHA_HP_RATIO:        cfg = cfg_root.hp_ratio; break;
-            case Defines.DYNAMIC_ALPHA_EFF:             cfg = cfg_root.eff; break;
-            case Defines.DYNAMIC_ALPHA_WN6:             cfg = cfg_root.wn6; break;
-            case Defines.DYNAMIC_ALPHA_WN8:             cfg = cfg_root.wn8; break;
-            case Defines.DYNAMIC_ALPHA_WGR:             cfg = cfg_root.wgr; break;
-            case Defines.DYNAMIC_ALPHA_X:               cfg = cfg_root.x; break;
-            case Defines.DYNAMIC_ALPHA_WINRATE:         cfg = cfg_root.winrate; break;
-            case Defines.DYNAMIC_ALPHA_KB:              cfg = cfg_root.kb; break;
-            case Defines.DYNAMIC_ALPHA_AVGLVL:          cfg = cfg_root.avglvl; break;
-            case Defines.DYNAMIC_ALPHA_TBATTLES:        cfg = cfg_root.t_battles; break;
-            case Defines.DYNAMIC_ALPHA_TDB:             cfg = cfg_root.tdb; break;
-            case Defines.DYNAMIC_ALPHA_TDV:             cfg = cfg_root.tdv; break;
-            case Defines.DYNAMIC_ALPHA_TFB:             cfg = cfg_root.tfb; break;
-            case Defines.DYNAMIC_ALPHA_TSB:             cfg = cfg_root.tsb; break;
-          default:
-              return NaN;
-        }
-
-        var cfg_len:Number = cfg.length;
-        for (var i:Number = 0; i < cfg_len; ++i)
-        {
-            var avalue: Number = cfg[i].value;
-            var alpha: Number = cfg[i].alpha;
-            if (value < avalue)
-                return alpha;
-        }
-
-        return NaN;
     }
 
     public static function fillRect(target:MovieClip, x:Number, y:Number,
