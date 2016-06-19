@@ -71,10 +71,10 @@ class wot.battle.BattleMain
         // Initialize Sixth Sense Indicator
         this._sixthSenseIndicator = new SixthSenseIndicator();
 
-        // TODO: remove (replace by setup elements)
-        // Panels Mode Switcher
-        if (Config.config.playersPanel.removePanelsModeSwitcher)
-            _root.switcher_mc._visible = false;
+// AS3:DONE         // TODO: remove (replace by setup elements)
+// AS3:DONE         // Panels Mode Switcher
+// AS3:DONE         if (Config.config.playersPanel.removePanelsModeSwitcher)
+// AS3:DONE             _root.switcher_mc._visible = false;
 
         // Clock
         var clockFormat:String = Config.config.battle.clockFormat;

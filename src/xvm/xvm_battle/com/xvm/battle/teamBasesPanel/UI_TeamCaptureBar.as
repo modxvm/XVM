@@ -155,21 +155,21 @@ package com.xvm.battle.teamBasesPanel
             var c:CCaptureBarTextField = cfg[name];
             //tf.border = true; tf.borderColor = 0xFF0000;
             tf.selectable = false;
-            tf.x += Macros.FormatGlobalNumberValue(c.x, 0);
-            tf.y += Macros.FormatGlobalNumberValue(c.y, 0);
+            tf.x += Macros.GlobalNumber(c.x, 0);
+            tf.y += Macros.GlobalNumber(c.y, 0);
             tf.filters = [new DropShadowFilter(
                 0, // distance
                 0, // angle
-                Macros.FormatGlobalNumberValue(c.shadow.color, 0x000000),
-                Macros.FormatGlobalNumberValue(c.shadow.alpha, 100) / 100.0,
-                Macros.FormatGlobalNumberValue(c.shadow.blur, 1),
-                Macros.FormatGlobalNumberValue(c.shadow.blur, 1),
-                Macros.FormatGlobalNumberValue(c.shadow.strength, 1))];
+                Macros.GlobalNumber(c.shadow.color, 0x000000),
+                Macros.GlobalNumber(c.shadow.alpha, 100) / 100.0,
+                Macros.GlobalNumber(c.shadow.blur, 1),
+                Macros.GlobalNumber(c.shadow.blur, 1),
+                Macros.GlobalNumber(c.shadow.strength, 1))];
         }
 
         private function setupProgressBar():void
         {
-            var showProgressBar:Boolean = !Macros.FormatGlobalBooleanValue(Config.config.captureBar.hideProgressBar, false);
+            var showProgressBar:Boolean = !Macros.GlobalBoolean(Config.config.captureBar.hideProgressBar, false);
             bg.visible = showProgressBar;
             progressBar.visible = showProgressBar;
         }

@@ -27,9 +27,6 @@ package com.xvm.battle
         override public function entryPoint():void
         {
             super.entryPoint();
-            //Logger.addObject(stage);
-            //Logger.addObject(root);
-
             Macros.RegisterGlobalMacrosData();
         }
 

@@ -24,12 +24,12 @@ package xvm.battleloading_ui.components
             this.cfg = cfg;
             this.nick = nick;
 
-            x = dx + (team == XfwConst.TEAM_ALLY ? Macros.FormatGlobalNumberValue(cfg.x, 0) : -Macros.FormatGlobalNumberValue(cfg.xr, 0));
+            x = dx + (team == XfwConst.TEAM_ALLY ? Macros.GlobalNumber(cfg.x, 0) : -Macros.GlobalNumber(cfg.xr, 0));
             if (team == XfwConst.TEAM_ENEMY)
-                x -= Macros.FormatGlobalNumberValue(cfg.w, 0);
-            y = dy + (team == XfwConst.TEAM_ALLY ? Macros.FormatGlobalNumberValue(cfg.y, 0) : Macros.FormatGlobalNumberValue(cfg.yr, 0));
+                x -= Macros.GlobalNumber(cfg.w, 0);
+            y = dy + (team == XfwConst.TEAM_ALLY ? Macros.GlobalNumber(cfg.y, 0) : Macros.GlobalNumber(cfg.yr, 0));
 
-            alpha = Macros.FormatGlobalNumberValue(cfg.alpha, 100);
+            alpha = Macros.GlobalNumber(cfg.alpha, 100);
 
             autoSize = false;
             visible = false;
@@ -84,8 +84,8 @@ package xvm.battleloading_ui.components
                 if (!s_playersIconSources.hasOwnProperty(nick))
                     s_playersIconSources[nick] = source;
 
-                width = Macros.FormatGlobalNumberValue(cfg.w, 0);
-                height = Macros.FormatGlobalNumberValue(cfg.h, 0);
+                width = Macros.GlobalNumber(cfg.w, 0);
+                height = Macros.GlobalNumber(cfg.h, 0);
 
                 visible = true;
             }

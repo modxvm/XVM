@@ -12,10 +12,10 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {
 // AS3:DONE     /////////////////////////////////////////////////////////////////
 // AS3:DONE     // wrapped methods
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private var wrapper:net.wargaming.ingame.PlayersPanel;
 // AS3:DONE     private var base:net.wargaming.ingame.PlayersPanel;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     public function PlayersPanel(wrapper:net.wargaming.ingame.PlayersPanel, base:net.wargaming.ingame.PlayersPanel)
 // AS3:DONE     {
 // AS3:DONE         this.wrapper = wrapper;
@@ -23,56 +23,56 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 // AS3:DONE         wrapper.xvm_worker = this;
 // AS3:DONE         PlayersPanelCtor();
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function setData()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.setData.apply(base, arguments);
 // AS3:DONE         return this.setDataImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function onRecreateDevice()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.onRecreateDevice.apply(base, arguments);
 // AS3:DONE         return this.onRecreateDeviceImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function update()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.update.apply(base, arguments);
 // AS3:DONE         return this.updateImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function updateAlphas()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.updateAlphas.apply(base, arguments);
 // AS3:DONE         return this.updateAlphasImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function updatePositions()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.updatePositions.apply(base, arguments);
 // AS3:DONE         // stub
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function updateSquadIcons()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.updateSquadIcons.apply(base, arguments);
 // AS3:DONE         // stub
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function setIsShowExtraModeActive()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.setIsShowExtraModeActive.apply(base, arguments);
 // AS3:DONE         return this.setIsShowExtraModeActiveImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     // wrapped methods
 // AS3:DONE     /////////////////////////////////////////////////////////////////
 
@@ -92,21 +92,21 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private var m_lastPosition:Number = 0;
 
 // AS3:DONE     private var cfg:Object;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     public function PlayersPanelCtor()
 // AS3:DONE     {
 // AS3:DONE         Utils.TraceXvmModule("PlayersPanel");
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     // PRIVATE
-
-    // Centered _y value of text field
-    private var centeredTextY:Number;
-
+// AS3:DONE
+// AS3:DONE     // Centered _y value of text field
+// AS3:DONE     private var centeredTextY:Number;
+// AS3:DONE
 // AS3:DONE     private var _initialized:Boolean = false;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private var m_altMode:String = null;
 // AS3:DONE     private var m_savedState:String = null;
 // AS3:DONE     private var m_initialized = false;
@@ -115,9 +115,9 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     {
 // AS3:DONE         if (_initialized)
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         _initialized = true;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return;
 
@@ -136,21 +136,21 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 // AS3:DONE     private function onConfigLoaded()
 // AS3:DONE     {
 // AS3:DONE         init();
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         cfg = Config.config.playersPanel;
 // AS3:DONE         var startMode:String = String(cfg.startMode).toLowerCase();
 // AS3:DONE         if (net.wargaming.ingame.PlayersPanel.STATES[startMode] == null)
 // AS3:DONE             startMode = net.wargaming.ingame.PlayersPanel.STATES.large.name;
 // AS3:DONE         cfg[startMode].enabled = true;
 // AS3:DONE         setStartMode(startMode, wrapper);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         m_savedState = null;
 // AS3:DONE         m_altMode = String(cfg.altMode).toLowerCase();
 // AS3:DONE         if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
 // AS3:DONE             m_altMode = null;
 // AS3:DONE         if (m_altMode != null)
 // AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_PP_ALT_MODE, this, setAltMode);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         _root.switcher_mc.noneBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
 // AS3:DONE         _root.switcher_mc.shortBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;
 // AS3:DONE         _root.switcher_mc.mediumBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.medium.name].enabled;
@@ -162,46 +162,46 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 // AS3:DONE         _root.switcher_mc.mediumBtn2._alpha = _root.switcher_mc.mediumBtn2.enabled ? 100 : 50;
 // AS3:DONE         _root.switcher_mc.largeBtn._alpha = _root.switcher_mc.largeBtn.enabled ? 100 : 50;
 // AS3:DONE     }
-
-    private function setStartMode(mode:String, wrapper:net.wargaming.ingame.PlayersPanel)
-    {
+// AS3:DONE
+// AS3:DONE     private function setStartMode(mode:String, wrapper:net.wargaming.ingame.PlayersPanel)
+// AS3:DONE     {
 // AS3:DONE         if (wrapper.state == "none")
 // AS3:DONE         {
 // AS3:DONE             var $this = this;
 // AS3:DONE             _global.setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
 // AS3:DONE             return;
 // AS3:DONE         }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         m_initialized = true;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         wrapper.state = mode;
 // AS3:DONE         updateSwitcherButton();
-
-        // initialize
-
-        centeredTextY = wrapper.m_names._y - 5;
-
-        // for incomplete team - cannot set to "center"
-        wrapper.m_names.verticalAlign = "top";
-        wrapper.m_vehicles.verticalAlign = "top";
-        wrapper.m_frags.verticalAlign = "top";
-    }
-
+// AS3:DONE
+// AS3:DONE         // initialize
+// AS3:DONE
+// AS3:DONE         centeredTextY = wrapper.m_names._y - 5;
+// AS3:DONE
+// AS3:DONE         // for incomplete team - cannot set to "center"
+// AS3:DONE         wrapper.m_names.verticalAlign = "top";
+// AS3:DONE         wrapper.m_vehicles.verticalAlign = "top";
+// AS3:DONE         wrapper.m_frags.verticalAlign = "top";
+// AS3:DONE     }
+// AS3:DONE
 // AS3:DONE     private var isAltMode:Boolean = false;
 // AS3:DONE     private function setAltMode(e:Object)
 // AS3:DONE     {
 // AS3:DONE         //Logger.add("setAltMode: " + e.isDown + " " + m_altMode + " " + wrapper.state);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (m_altMode == null)
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (Config.config.hotkeys.playersPanelAltMode.onHold)
 // AS3:DONE             isAltMode = e.isDown;
 // AS3:DONE         else if (e.isDown)
 // AS3:DONE             isAltMode = !isAltMode;
 // AS3:DONE         else
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (isAltMode)
 // AS3:DONE         {
 // AS3:DONE             if (m_savedState == null)
@@ -214,7 +214,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 // AS3:DONE                 wrapper.state = m_savedState;
 // AS3:DONE             m_savedState = null;
 // AS3:DONE         }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         updateSwitcherButton();
 // AS3:DONE     }
 
@@ -429,17 +429,17 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         base.update();
     }
 
-    private function updateAlphasImpl()
-    {
-        if (wrapper.m_names.condenseWhite)
-            wrapper.m_names.condenseWhite = false;
-        if (wrapper.m_vehicles.condenseWhite)
-            wrapper.m_vehicles.condenseWhite = false;
-        if (wrapper.m_frags.wordWrap)
-            wrapper.m_frags.wordWrap = false;
-        wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
-        wrapper.m_list._alpha = 100;
-    }
+// AS3:DONE     private function updateAlphasImpl()
+// AS3:DONE     {
+// AS3:DONE         if (wrapper.m_names.condenseWhite)
+// AS3:DONE             wrapper.m_names.condenseWhite = false;
+// AS3:DONE         if (wrapper.m_vehicles.condenseWhite)
+// AS3:DONE             wrapper.m_vehicles.condenseWhite = false;
+// AS3:DONE         if (wrapper.m_frags.wordWrap)
+// AS3:DONE             wrapper.m_frags.wordWrap = false;
+// AS3:DONE         wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
+// AS3:DONE         wrapper.m_list._alpha = 100;
+// AS3:DONE     }
 
     private function setIsShowExtraModeActiveImpl(val)
     {

@@ -9,6 +9,7 @@ package com.xvm.battle
     import com.xfw.events.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
+    import flash.events.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
@@ -33,12 +34,24 @@ package com.xvm.battle
             //Logger.add("onAfterPopulate: " + view.as_alias);
             super.onAfterPopulate(e);
 
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
 
-            //App.utils.scheduler.scheduleOnNextFrame(function():void{
-            Xfw.cmd(XVM_BATTLE_COMMAND_BATTLE_CTRL_SET_VEHICLE_DATA);
-            page.updateStage(App.appWidth, App.appHeight);
-            //});
+            onConfigLoaded(null);
+        }
+
+        public override function onConfigLoaded(e:Event):void
+        {
+            Logger.add("BattleXvmView.onConfigLoaded()");
+            try
+            {
+                Xfw.cmd(XVM_BATTLE_COMMAND_BATTLE_CTRL_SET_VEHICLE_DATA);
+                page.updateStage(App.appWidth, App.appHeight);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         // PRIVATE

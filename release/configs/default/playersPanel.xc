@@ -38,6 +38,9 @@
   // Parameters of the Players Panels ("ears").
   // Параметры панелей игроков ("ушей").
   "playersPanel": {
+    // false - Disable.
+    // false - отключить.
+    "enabled": true,
     // Opacity percentage of the panels. 0 - transparent, 100 - opaque.
     // Прозрачность в процентах ушей. 0 - прозрачные, 100 - не прозрачные.
     "alpha": 60,

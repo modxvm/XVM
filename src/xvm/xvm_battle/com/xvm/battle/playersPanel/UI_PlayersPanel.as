@@ -8,11 +8,13 @@ package com.xvm.battle.playersPanel
     import com.xvm.*;
     import com.xfw.events.*;
     import com.xvm.battle.*;
+    import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.generated.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.*;
+    import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
 
     public dynamic class UI_PlayersPanel extends PlayersPanelUI
     {
@@ -24,7 +26,12 @@ package com.xvm.battle.playersPanel
             large: PLAYERS_PANEL_STATE.FULL
         }
 
-        private var cfg:Object;
+        private var DEFAULT_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = PlayersPanelListLeft.LINKAGE;
+        private var XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = getQualifiedClassName(UI_PlayersPanelListItemLeft);
+        private var DEFAULT_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE:String = PlayersPanelListRight.LINKAGE;
+        private var XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE:String = getQualifiedClassName(UI_PlayersPanelListItemRight);
+
+        private var cfg:CPlayersPanel;
 
         private var m_altMode:int = PLAYERS_PANEL_STATE.NONE;
         private var m_isAltMode:Boolean = false;
@@ -34,6 +41,8 @@ package com.xvm.battle.playersPanel
         {
             Logger.add("UI_PlayersPanel()");
             super();
+            PlayersPanelListLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
+            PlayersPanelListRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
         }
 
@@ -75,7 +84,15 @@ package com.xvm.battle.playersPanel
             try
             {
                 cfg = Config.config.playersPanel;
-                initPanelModes();
+                if (Macros.GlobalBoolean(cfg.enabled, true))
+                {
+                    initPanelModes();
+                    panelSwitch.visible = !Macros.GlobalBoolean(cfg.removePanelsModeSwitcher, false);
+                }
+                else
+                {
+                    panelSwitch.visible = true;
+                }
             }
             catch (ex:Error)
             {
@@ -86,8 +103,7 @@ package com.xvm.battle.playersPanel
 
         private function initPanelModes():void
         {
-            var startMode:String = Macros.FormatGlobalStringValue(cfg.startMode).toLowerCase();
-            Logger.add(cfg.startMode + " => " + startMode);
+            var startMode:String = Macros.GlobalString(cfg.startMode, "").toLowerCase();
             if (PLAYERS_PANEL_STATE_MAP[startMode] == null)
                 startMode = "large";
             cfg[startMode].enabled = true;
@@ -95,18 +111,17 @@ package com.xvm.battle.playersPanel
 
             m_savedState = PLAYERS_PANEL_STATE.NONE;
 
-            var altMode:String = Macros.FormatGlobalStringValue(cfg.altMode).toLowerCase();
-            Logger.add("altMode=" + altMode + " < " + cfg.altMode);
+            var altMode:String = Macros.GlobalString(cfg.altMode, "").toLowerCase();
             m_altMode = (PLAYERS_PANEL_STATE_MAP[altMode] == null) ? PLAYERS_PANEL_STATE.NONE : PLAYERS_PANEL_STATE_MAP[altMode];
-            Logger.add("m_altMode=" + m_altMode);
+            Xvm.removeEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
             if (m_altMode != PLAYERS_PANEL_STATE.NONE)
                 Xvm.addEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
 
-            panelSwitch.hidenBt.enabled = Macros.FormatGlobalBooleanValue(cfg["none"].enabled, true);
-            panelSwitch.shortBt.enabled = Macros.FormatGlobalBooleanValue(cfg["short"].enabled, true);
-            panelSwitch.mediumBt.enabled = Macros.FormatGlobalBooleanValue(cfg["medium"].enabled, true);
-            panelSwitch.longBt.enabled = Macros.FormatGlobalBooleanValue(cfg["medium2"].enabled, true);
-            panelSwitch.fullBt.enabled = Macros.FormatGlobalBooleanValue(cfg["large"].enabled, true);
+            panelSwitch.hidenBt.enabled = Macros.GlobalBoolean(cfg.none.enabled, true);
+            panelSwitch.shortBt.enabled = Macros.GlobalBoolean(cfg.short.enabled, true);
+            panelSwitch.mediumBt.enabled = Macros.GlobalBoolean(cfg.medium.enabled, true);
+            panelSwitch.longBt.enabled = Macros.GlobalBoolean(cfg.medium2.enabled, true);
+            panelSwitch.fullBt.enabled = Macros.GlobalBoolean(cfg.large.enabled, true);
 
             panelSwitch.hidenBt.alpha = panelSwitch.hidenBt.enabled ? 1 : .5;
             panelSwitch.shortBt.alpha = panelSwitch.shortBt.enabled ? 1 : .5;

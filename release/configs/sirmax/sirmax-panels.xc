@@ -1,7 +1,7 @@
 ﻿{
   "startMode": "large",
   //"startMode": "{{battletype=regular?medium|{{battletype=rated_sandbox?short|medium2}}}}",
-  "altMode": "{{battletype=regular?large|{{battletype=clan?medium|short}}}}",
+  //"altMode": "{{battletype=regular?large|{{battletype=clan?medium|short}}}}",
   "def": {
     "c1": "0x13C313",
     "c2": "0xFF0F0F"

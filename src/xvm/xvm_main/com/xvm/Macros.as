@@ -46,19 +46,19 @@ package com.xvm
             return Number(value);
         }
 
-        public static function FormatGlobalNumberValue(value:*, defaultValue:Number = NaN):Number
+        public static function GlobalNumber(value:*, defaultValue:Number = NaN):Number
         {
-            return _instance._FormatGlobalNumberValue(value, defaultValue);
+            return _instance._GlobalNumber(value, defaultValue);
         }
 
-        public static function FormatGlobalBooleanValue(value:*, defaultValue:Boolean = false):Boolean
+        public static function GlobalBoolean(value:*, defaultValue:Boolean = false):Boolean
         {
-            return _instance._FormatGlobalBooleanValue(value, defaultValue);
+            return _instance._GlobalBoolean(value, defaultValue);
         }
 
-        public static function FormatGlobalStringValue(value:*, defaultValue:String = null):String
+        public static function GlobalString(value:*, defaultValue:String = null):String
         {
-            return _instance._FormatGlobalStringValue(value, defaultValue);
+            return _instance._GlobalString(value, defaultValue);
         }
 
         public static function IsCached(pname:String, format:String, alive:Boolean = false):Boolean
@@ -675,7 +675,7 @@ package com.xvm
             return res;
         }
 
-        private function _FormatGlobalNumberValue(value:*, defaultValue:Number):Number
+        private function _GlobalNumber(value:*, defaultValue:Number):Number
         {
             if (value == null)
                 return defaultValue;
@@ -688,7 +688,7 @@ package com.xvm
             return defaultValue;
         }
 
-        private function _FormatGlobalBooleanValue(value:*, defaultValue:Boolean):Boolean
+        private function _GlobalBoolean(value:*, defaultValue:Boolean):Boolean
         {
             if (value == null)
                 return defaultValue;
@@ -703,7 +703,7 @@ package com.xvm
             return defaultValue;
         }
 
-        private function _FormatGlobalStringValue(value:*, defaultValue:String):String
+        private function _GlobalString(value:*, defaultValue:String):String
         {
             if (value == null)
                 return defaultValue;
