@@ -75,10 +75,11 @@ BigWorld.callback(0, start)
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
-overrideView(
-    filter_popover.XvmTankCarouselFilterPopover,
-    VIEW_ALIAS.TANK_CAROUSEL_FILTER_POPOVER,
-    '../../../../res_mods/mods/packages/xvm_tcarousel/actionscript/xvm_tcarousel_filtersPopover_view.swf')
+# TODO: broken
+#overrideView(
+#    filter_popover.XvmTankCarouselFilterPopover,
+#    VIEW_ALIAS.TANK_CAROUSEL_FILTER_POPOVER,
+#    '../../../../res_mods/mods/packages/xvm_tcarousel/actionscript/xvm_tcarousel_filtersPopover_view.swf')
 
 
 #####################################################################

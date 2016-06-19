@@ -6,7 +6,9 @@ package com.xvm.battle
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.types.cfg.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
@@ -30,6 +32,9 @@ package com.xvm.battle
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
             super.onAfterPopulate(e);
+
+            Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+
             //App.utils.scheduler.scheduleOnNextFrame(function():void{
             Xfw.cmd(XVM_BATTLE_COMMAND_BATTLE_CTRL_SET_VEHICLE_DATA);
             page.updateStage(App.appWidth, App.appHeight);
@@ -38,5 +43,20 @@ package com.xvm.battle
 
         // PRIVATE
 
+        private function onKeyEvent(key:Number, isDown:Boolean):Object
+        {
+            var cfg:CHotkeys = Config.config.hotkeys;
+            if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
+                Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ZOOM, { isDown: isDown }));
+            if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
+                Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ALT_MODE, { isDown: isDown } ));
+            if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
+                Xvm.dispatchEvent(new ObjectEvent(BattleEvents.PLAYERS_PANEL_ALT_MODE, { isDown: isDown } ));
+            // TODO
+            //if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
+            //    Xvm.dispatchEvent(new ObjectEvent(BattleEvents.BATTLE_LABEL_KEY_MODE, { isDown: isDown }));
+
+            return null;
+        }
     }
 }

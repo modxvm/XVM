@@ -57,6 +57,7 @@ class XVM_COMMAND(object):
     LOAD_STAT_USER = "xvm.load_stat_user"
     PYTHON_MACRO = "xvm.python_macro"
     SAVE_SETTINGS = "xvm.save_settings"
+    AS_ON_KEY_EVENT = "xvm.as.on_key_event"
     AS_DOSSIER = "xvm.as.dossier"
     AS_L10N = "xvm.as.l10n"
     AS_SET_SVC_SETTINGS = "xvm.as.set_svc_settings"

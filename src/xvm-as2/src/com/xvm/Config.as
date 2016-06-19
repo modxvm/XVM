@@ -70,13 +70,13 @@ class com.xvm.Config
     {
         // playersPanel
         var cfg = Config.config.playersPanel;
-        cfg.startMode = Macros.FormatGlobalStringValue(cfg.startMode);
-        cfg.altMode = Macros.FormatGlobalStringValue(cfg.altMode);
-        cfg.short.enabled = Macros.FormatGlobalBooleanValue(cfg.short.enabled);
-        cfg.medium.enabled = Macros.FormatGlobalBooleanValue(cfg.medium.enabled);
-        cfg.medium2.enabled = Macros.FormatGlobalBooleanValue(cfg.medium2.enabled);
-        cfg.large.enabled = Macros.FormatGlobalBooleanValue(cfg.large.enabled);
-        cfg.none.enabled = Macros.FormatGlobalBooleanValue(cfg.none.enabled);
+// AS3:DONE         cfg.startMode = Macros.FormatGlobalStringValue(cfg.startMode);
+// AS3:DONE         cfg.altMode = Macros.FormatGlobalStringValue(cfg.altMode);
+// AS3:DONE         cfg.short.enabled = Macros.FormatGlobalBooleanValue(cfg.short.enabled);
+// AS3:DONE         cfg.medium.enabled = Macros.FormatGlobalBooleanValue(cfg.medium.enabled);
+// AS3:DONE         cfg.medium2.enabled = Macros.FormatGlobalBooleanValue(cfg.medium2.enabled);
+// AS3:DONE         cfg.large.enabled = Macros.FormatGlobalBooleanValue(cfg.large.enabled);
+// AS3:DONE         cfg.none.enabled = Macros.FormatGlobalBooleanValue(cfg.none.enabled);
         cfg.none.leftPanel.x = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.x);
         cfg.none.leftPanel.y = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.y);
         cfg.none.leftPanel.width = Macros.FormatGlobalNumberValue(cfg.none.leftPanel.width);

@@ -11,6 +11,7 @@ package com.xvm
         public static const LOAD_SETTINGS:String = "xvm.load_settings";
         public static const SAVE_SETTINGS:String = "xvm.save_settings";
 
+        public static const AS_ON_KEY_EVENT:String = "xvm.as.on_key_event";
         public static const AS_UPDATE_CURRENT_VEHICLE:String = "xvm.as.update_current_vehicle";
     }
 }

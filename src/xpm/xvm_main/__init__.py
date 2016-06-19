@@ -112,8 +112,7 @@ def fini():
 
 # GLOBAL
 
-# TODO:0.9.15.1
-#@registerEvent(game, 'handleKeyEvent')
+@registerEvent(game, 'handleKeyEvent')
 def game_handleKeyEvent(event):
     g_xvm.onKeyEvent(event)
 
@@ -319,7 +318,7 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
 # TODO:0.9.15.1
 #@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
 def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
-    if arena_info.getArenaGuiType() == 1: # ARENA_GUI_TYPE.RANDOM
+    if arena_info.getArenaGuiType() == 1: # constants.ARENA_GUI_TYPE.RANDOM
         for flags, vo in updated:
             if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
                 for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(vo.team)):

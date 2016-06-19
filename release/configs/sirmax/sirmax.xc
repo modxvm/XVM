@@ -26,9 +26,9 @@
     "__stub__": null
   },
   "hotkeys": {
-    //"minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
-    //"minimapAltMode": { "enabled": true, "keyCode": 29, "onHold": true },
-    "playersPanelAltMode": { "enabled": true, "keyCode": 56 }, // LAlt
+    "minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
+    "minimapAltMode": { "enabled": true, "keyCode": 29, "onHold": true },
+    "playersPanelAltMode": { "enabled": true, "keyCode": 56, "onHold": false }, // LAlt
     //"markersAltMode":      { "enabled": false, "onHold": false },
     "__stub__": {}
   },
@@ -293,7 +293,10 @@
   },
   "texts": {
     //"vtype": { "LT":  "ЛТ" },
-    "marksOnGun": { "_0": "*", "_1": "1", "_2": "2", "_3": "3" }
+    "marksOnGun": { "_0": "*", "_1": "1", "_2": "2", "_3": "3" },
+    "battletype": {
+      "rated_sandbox": "rated_sandbox"
+    }
   },
   "colors": {
     "system": {

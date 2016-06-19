@@ -22,6 +22,7 @@ package com.xvm.types.cfg
         public var definition:CDefinition;
         public var login:CLogin;
         public var hangar:CHangar;
+        public var hotkeys:CHotkeys;
         public var userInfo:CUserInfo;
         public var squad:CSquad;
         public var battleResults:CBattleResults;

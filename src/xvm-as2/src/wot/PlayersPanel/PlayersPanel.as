@@ -10,71 +10,71 @@ import com.xvm.events.*;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {
-    /////////////////////////////////////////////////////////////////
-    // wrapped methods
-
-    private var wrapper:net.wargaming.ingame.PlayersPanel;
-    private var base:net.wargaming.ingame.PlayersPanel;
-
-    public function PlayersPanel(wrapper:net.wargaming.ingame.PlayersPanel, base:net.wargaming.ingame.PlayersPanel)
-    {
-        this.wrapper = wrapper;
-        this.base = base;
-        wrapper.xvm_worker = this;
-        PlayersPanelCtor();
-    }
-
-    function setData()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.setData.apply(base, arguments);
-        return this.setDataImpl.apply(this, arguments);
-    }
-
-    function onRecreateDevice()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.onRecreateDevice.apply(base, arguments);
-        return this.onRecreateDeviceImpl.apply(this, arguments);
-    }
-
-    function update()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.update.apply(base, arguments);
-        return this.updateImpl.apply(this, arguments);
-    }
-
-    function updateAlphas()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.updateAlphas.apply(base, arguments);
-        return this.updateAlphasImpl.apply(this, arguments);
-    }
-
-    function updatePositions()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.updatePositions.apply(base, arguments);
-        // stub
-    }
-
-    function updateSquadIcons()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.updateSquadIcons.apply(base, arguments);
-        // stub
-    }
-
-    function setIsShowExtraModeActive()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.setIsShowExtraModeActive.apply(base, arguments);
-        return this.setIsShowExtraModeActiveImpl.apply(this, arguments);
-    }
-
-    // wrapped methods
-    /////////////////////////////////////////////////////////////////
+// AS3:DONE     /////////////////////////////////////////////////////////////////
+// AS3:DONE     // wrapped methods
+// AS3:DONE 
+// AS3:DONE     private var wrapper:net.wargaming.ingame.PlayersPanel;
+// AS3:DONE     private var base:net.wargaming.ingame.PlayersPanel;
+// AS3:DONE 
+// AS3:DONE     public function PlayersPanel(wrapper:net.wargaming.ingame.PlayersPanel, base:net.wargaming.ingame.PlayersPanel)
+// AS3:DONE     {
+// AS3:DONE         this.wrapper = wrapper;
+// AS3:DONE         this.base = base;
+// AS3:DONE         wrapper.xvm_worker = this;
+// AS3:DONE         PlayersPanelCtor();
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function setData()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.setData.apply(base, arguments);
+// AS3:DONE         return this.setDataImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function onRecreateDevice()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.onRecreateDevice.apply(base, arguments);
+// AS3:DONE         return this.onRecreateDeviceImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function update()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.update.apply(base, arguments);
+// AS3:DONE         return this.updateImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function updateAlphas()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.updateAlphas.apply(base, arguments);
+// AS3:DONE         return this.updateAlphasImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function updatePositions()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.updatePositions.apply(base, arguments);
+// AS3:DONE         // stub
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function updateSquadIcons()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.updateSquadIcons.apply(base, arguments);
+// AS3:DONE         // stub
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function setIsShowExtraModeActive()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.setIsShowExtraModeActive.apply(base, arguments);
+// AS3:DONE         return this.setIsShowExtraModeActiveImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     // wrapped methods
+// AS3:DONE     /////////////////////////////////////////////////////////////////
 
     public static var DEFAULT_SQUAD_SIZE:Number;
 
@@ -91,35 +91,35 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private var m_lastPosition:Number = 0;
 
-    private var cfg:Object;
-
-    public function PlayersPanelCtor()
-    {
-        Utils.TraceXvmModule("PlayersPanel");
-
-        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
-    }
-
-    // PRIVATE
+// AS3:DONE     private var cfg:Object;
+// AS3:DONE 
+// AS3:DONE     public function PlayersPanelCtor()
+// AS3:DONE     {
+// AS3:DONE         Utils.TraceXvmModule("PlayersPanel");
+// AS3:DONE 
+// AS3:DONE         GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     // PRIVATE
 
     // Centered _y value of text field
     private var centeredTextY:Number;
 
-    private var _initialized:Boolean = false;
-
-    private var m_altMode:String = null;
-    private var m_savedState:String = null;
-    private var m_initialized = false;
+// AS3:DONE     private var _initialized:Boolean = false;
+// AS3:DONE 
+// AS3:DONE     private var m_altMode:String = null;
+// AS3:DONE     private var m_savedState:String = null;
+// AS3:DONE     private var m_initialized = false;
 
     private function init()
     {
-        if (_initialized)
-            return;
-
-        _initialized = true;
-
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return;
+// AS3:DONE         if (_initialized)
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         _initialized = true;
+// AS3:DONE 
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return;
 
         if (!DEFAULT_SQUAD_SIZE)
             DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN * 2;
@@ -133,49 +133,49 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
     }
 
-    private function onConfigLoaded()
-    {
-        init();
-
-        cfg = Config.config.playersPanel;
-        var startMode:String = String(cfg.startMode).toLowerCase();
-        if (net.wargaming.ingame.PlayersPanel.STATES[startMode] == null)
-            startMode = net.wargaming.ingame.PlayersPanel.STATES.large.name;
-        cfg[startMode].enabled = true;
-        setStartMode(startMode, wrapper);
-
-        m_savedState = null;
-        m_altMode = String(cfg.altMode).toLowerCase();
-        if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
-            m_altMode = null;
-        if (m_altMode != null)
-            GlobalEventDispatcher.addEventListener(Events.E_PP_ALT_MODE, this, setAltMode);
-
-        _root.switcher_mc.noneBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
-        _root.switcher_mc.shortBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;
-        _root.switcher_mc.mediumBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.medium.name].enabled;
-        _root.switcher_mc.mediumBtn2.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.medium2.name].enabled;
-        _root.switcher_mc.largeBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.large.name].enabled;
-        _root.switcher_mc.noneBtn._alpha = _root.switcher_mc.noneBtn.enabled ? 100 : 50;
-        _root.switcher_mc.shortBtn._alpha = _root.switcher_mc.shortBtn.enabled ? 100 : 50;
-        _root.switcher_mc.mediumBtn._alpha = _root.switcher_mc.mediumBtn.enabled ? 100 : 50;
-        _root.switcher_mc.mediumBtn2._alpha = _root.switcher_mc.mediumBtn2.enabled ? 100 : 50;
-        _root.switcher_mc.largeBtn._alpha = _root.switcher_mc.largeBtn.enabled ? 100 : 50;
-    }
+// AS3:DONE     private function onConfigLoaded()
+// AS3:DONE     {
+// AS3:DONE         init();
+// AS3:DONE 
+// AS3:DONE         cfg = Config.config.playersPanel;
+// AS3:DONE         var startMode:String = String(cfg.startMode).toLowerCase();
+// AS3:DONE         if (net.wargaming.ingame.PlayersPanel.STATES[startMode] == null)
+// AS3:DONE             startMode = net.wargaming.ingame.PlayersPanel.STATES.large.name;
+// AS3:DONE         cfg[startMode].enabled = true;
+// AS3:DONE         setStartMode(startMode, wrapper);
+// AS3:DONE 
+// AS3:DONE         m_savedState = null;
+// AS3:DONE         m_altMode = String(cfg.altMode).toLowerCase();
+// AS3:DONE         if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
+// AS3:DONE             m_altMode = null;
+// AS3:DONE         if (m_altMode != null)
+// AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_PP_ALT_MODE, this, setAltMode);
+// AS3:DONE 
+// AS3:DONE         _root.switcher_mc.noneBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
+// AS3:DONE         _root.switcher_mc.shortBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;
+// AS3:DONE         _root.switcher_mc.mediumBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.medium.name].enabled;
+// AS3:DONE         _root.switcher_mc.mediumBtn2.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.medium2.name].enabled;
+// AS3:DONE         _root.switcher_mc.largeBtn.enabled = cfg[net.wargaming.ingame.PlayersPanel.STATES.large.name].enabled;
+// AS3:DONE         _root.switcher_mc.noneBtn._alpha = _root.switcher_mc.noneBtn.enabled ? 100 : 50;
+// AS3:DONE         _root.switcher_mc.shortBtn._alpha = _root.switcher_mc.shortBtn.enabled ? 100 : 50;
+// AS3:DONE         _root.switcher_mc.mediumBtn._alpha = _root.switcher_mc.mediumBtn.enabled ? 100 : 50;
+// AS3:DONE         _root.switcher_mc.mediumBtn2._alpha = _root.switcher_mc.mediumBtn2.enabled ? 100 : 50;
+// AS3:DONE         _root.switcher_mc.largeBtn._alpha = _root.switcher_mc.largeBtn.enabled ? 100 : 50;
+// AS3:DONE     }
 
     private function setStartMode(mode:String, wrapper:net.wargaming.ingame.PlayersPanel)
     {
-        if (wrapper.state == "none")
-        {
-            var $this = this;
-            _global.setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
-            return;
-        }
-
-        m_initialized = true;
-
-        wrapper.state = mode;
-        updateSwitcherButton();
+// AS3:DONE         if (wrapper.state == "none")
+// AS3:DONE         {
+// AS3:DONE             var $this = this;
+// AS3:DONE             _global.setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
+// AS3:DONE             return;
+// AS3:DONE         }
+// AS3:DONE 
+// AS3:DONE         m_initialized = true;
+// AS3:DONE 
+// AS3:DONE         wrapper.state = mode;
+// AS3:DONE         updateSwitcherButton();
 
         // initialize
 
@@ -187,36 +187,36 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         wrapper.m_frags.verticalAlign = "top";
     }
 
-    private var isAltMode:Boolean = false;
-    private function setAltMode(e:Object)
-    {
-        //Logger.add("setAltMode: " + e.isDown + " " + m_altMode + " " + wrapper.state);
-
-        if (m_altMode == null)
-            return;
-
-        if (Config.config.hotkeys.playersPanelAltMode.onHold)
-            isAltMode = e.isDown;
-        else if (e.isDown)
-            isAltMode = !isAltMode;
-        else
-            return;
-
-        if (isAltMode)
-        {
-            if (m_savedState == null)
-                m_savedState = wrapper.state;
-            wrapper.state = m_altMode;
-        }
-        else
-        {
-            if (m_savedState != null)
-                wrapper.state = m_savedState;
-            m_savedState = null;
-        }
-
-        updateSwitcherButton();
-    }
+// AS3:DONE     private var isAltMode:Boolean = false;
+// AS3:DONE     private function setAltMode(e:Object)
+// AS3:DONE     {
+// AS3:DONE         //Logger.add("setAltMode: " + e.isDown + " " + m_altMode + " " + wrapper.state);
+// AS3:DONE 
+// AS3:DONE         if (m_altMode == null)
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         if (Config.config.hotkeys.playersPanelAltMode.onHold)
+// AS3:DONE             isAltMode = e.isDown;
+// AS3:DONE         else if (e.isDown)
+// AS3:DONE             isAltMode = !isAltMode;
+// AS3:DONE         else
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         if (isAltMode)
+// AS3:DONE         {
+// AS3:DONE             if (m_savedState == null)
+// AS3:DONE                 m_savedState = wrapper.state;
+// AS3:DONE             wrapper.state = m_altMode;
+// AS3:DONE         }
+// AS3:DONE         else
+// AS3:DONE         {
+// AS3:DONE             if (m_savedState != null)
+// AS3:DONE                 wrapper.state = m_savedState;
+// AS3:DONE             m_savedState = null;
+// AS3:DONE         }
+// AS3:DONE 
+// AS3:DONE         updateSwitcherButton();
+// AS3:DONE     }
 
     private function setDataImpl()
     {
@@ -402,7 +402,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private function updateImpl()
     {
         //Logger.add("up: " + wrapper.state);
-        if (m_initialized && m_savedState == null && Config.config.playersPanel[wrapper.state].enabled == false)
+        if (m_savedState == null && Config.config.playersPanel[wrapper.state].enabled == false)
         {
             switch (wrapper.state)
             {
@@ -422,7 +422,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                     wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.none.name;
                     break;
             }
-            updateSwitcherButton();
+// AS3:DONE             updateSwitcherButton();
             return;
         }
 
@@ -449,30 +449,30 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     // PRIVATE
 
-    private function updateSwitcherButton()
-    {
-        var btn:Object;
-        switch (wrapper.state)
-        {
-            case net.wargaming.ingame.PlayersPanel.STATES.none.name:
-                btn = _root.switcher_mc.noneBtn;
-                break;
-            case net.wargaming.ingame.PlayersPanel.STATES.short.name:
-                btn = _root.switcher_mc.shortBtn;
-                break;
-            case net.wargaming.ingame.PlayersPanel.STATES.medium.name:
-                btn = _root.switcher_mc.mediumBtn;
-                break;
-            case net.wargaming.ingame.PlayersPanel.STATES.medium2.name:
-                btn = _root.switcher_mc.mediumBtn2;
-                break;
-            case net.wargaming.ingame.PlayersPanel.STATES.large.name:
-                btn = _root.switcher_mc.largeBtn;
-                break;
-        }
-        //currentType = value;
-        btn.selected = true;
-    }
+// AS3:DONE     private function updateSwitcherButton()
+// AS3:DONE     {
+// AS3:DONE         var btn:Object;
+// AS3:DONE         switch (wrapper.state)
+// AS3:DONE         {
+// AS3:DONE             case net.wargaming.ingame.PlayersPanel.STATES.none.name:
+// AS3:DONE                 btn = _root.switcher_mc.noneBtn;
+// AS3:DONE                 break;
+// AS3:DONE             case net.wargaming.ingame.PlayersPanel.STATES.short.name:
+// AS3:DONE                 btn = _root.switcher_mc.shortBtn;
+// AS3:DONE                 break;
+// AS3:DONE             case net.wargaming.ingame.PlayersPanel.STATES.medium.name:
+// AS3:DONE                 btn = _root.switcher_mc.mediumBtn;
+// AS3:DONE                 break;
+// AS3:DONE             case net.wargaming.ingame.PlayersPanel.STATES.medium2.name:
+// AS3:DONE                 btn = _root.switcher_mc.mediumBtn2;
+// AS3:DONE                 break;
+// AS3:DONE             case net.wargaming.ingame.PlayersPanel.STATES.large.name:
+// AS3:DONE                 btn = _root.switcher_mc.largeBtn;
+// AS3:DONE                 break;
+// AS3:DONE         }
+// AS3:DONE         //currentType = value;
+// AS3:DONE         btn.selected = true;
+// AS3:DONE     }
 
     private function onBattleStateChanged(e:EBattleStateChanged)
     {

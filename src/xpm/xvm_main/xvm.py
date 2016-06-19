@@ -617,9 +617,7 @@ class Xvm(object):
                 battle = getBattleApp()
                 if battle:
                     if self.checkKeyEventBattle(key, isDown):
-                        movie = battle.movie
-                        if movie is not None:
-                            movie.as_xvm_onKeyEvent(key, isDown)
+                        as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, key, isDown)
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())
         return True

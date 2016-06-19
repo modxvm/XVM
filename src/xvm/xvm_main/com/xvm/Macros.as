@@ -342,7 +342,7 @@ package com.xvm
                 var type:String = typeof value;
                 if (type == "function" && (macroName != "alive" || options == null))
                     isStaticMacro = false;
-                else if (vehId == 0 || !Utils.isArenaGuiTypeWithPlayerPanels())
+                else if (vehId == 0)
                 {
                     switch (macroName)
                     {

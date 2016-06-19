@@ -178,28 +178,6 @@ package com.xvm
             return s;
         }
 
-        private static var _lastArenaGuiType:Number = -1;
-        private static var _isArenaGuiTypeWithPlayerPanels:Boolean;
-        public static function isArenaGuiTypeWithPlayerPanels():Boolean
-        {
-            var arenaGuiType:Number = Xfw.cmd(XvmCommandsInternal.GET_ARENA_GUI_TYPE);
-            if (_lastArenaGuiType != arenaGuiType)
-            {
-                _lastArenaGuiType = arenaGuiType;
-                _isArenaGuiTypeWithPlayerPanels = true;
-                var len:Number = Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS.length;
-                for (var i:Number = 0; i < len; ++i)
-                {
-                    if (Defines.ARENA_GUI_TYPE_NO_PLAYER_PANELS[i] == arenaGuiType)
-                    {
-                        _isArenaGuiTypeWithPlayerPanels = false;
-                        break;
-                    }
-                }
-            }
-            return _isArenaGuiTypeWithPlayerPanels;
-        }
-
         public static function getSpottedText(value:String, isArty:Boolean):String
         {
             if (value == null)

@@ -20,6 +20,7 @@ package com.xvm.battle
 
         private static const _views:Object =
         {
+            // BattleXvmView should be loaded last
             "classicBattlePage": [ PlayersPanelXvmView, TeamBasesPanelXvmView, BattleXvmView ]
         }
 
