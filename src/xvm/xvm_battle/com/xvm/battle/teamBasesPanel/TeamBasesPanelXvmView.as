@@ -36,12 +36,13 @@ package com.xvm.battle.teamBasesPanel
         private function init():void
         {
             //page.unregisterComponent(BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            var idx:int = page.getChildIndex(page.teamBasesPanelUI);
             page.removeChild(page.teamBasesPanelUI);
-            var tbp:UI_teamBasesPanel = new UI_teamBasesPanel();
-            tbp.x = page.teamBasesPanelUI.x;
-            tbp.y = page.teamBasesPanelUI.y;
-            page.teamBasesPanelUI = tbp;
-            page.addChild(page.teamBasesPanelUI);
+            var component:UI_teamBasesPanel = new UI_teamBasesPanel();
+            component.x = page.teamBasesPanelUI.x;
+            component.y = page.teamBasesPanelUI.y;
+            page.teamBasesPanelUI = component;
+            page.addChildAt(page.teamBasesPanelUI, idx);
             page.xfw_registerComponent(page.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
         }
     }

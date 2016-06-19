@@ -310,10 +310,8 @@ _data = {
     'germany:G15_VK3601H':                  '3601h',
     'germany:G17_JagdPzIV':                 'Jpz4',
     'germany:G27_VK3001P':                  '3001p',
-    # TODO:0.9.15
     'germany:G32_PzV_PzIV_CN':              'Pz5·4',
     'germany:G32_PzV_PzIV_ausf_Alfa_CN':    'Pz5·4a',
-    #    
     'germany:G40_Nashorn':                  'Nash',
     'germany:PzIV_schmalturm':              'Pz4s',
     'germany:VK2801':                       'vk2801',
@@ -384,10 +382,8 @@ _data = {
     'germany:PzIII_IV':                     'Pz3·4',
     'germany:PzIV':                         'Pz4',
     'germany:PzIV_Hydro':                   'Pz4hy',
-    # TODO:0.9.15
     'germany:PzV_PzIV':                     'Pz5·4',
     'germany:PzV_PzIV_ausf_Alfa':           'Pz5·4a',
-    #
     'japan:J08_Chi_Nu':                     'ChiNu',
     'japan:J12_Chi_Nu_Kai':                 'ChiNuK',
     'japan:J23_Mi_To':                      'O·Iex',

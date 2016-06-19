@@ -2,7 +2,7 @@
 
 import os
 import traceback
-
+import weakref
 import simplejson
 
 import BigWorld
@@ -11,10 +11,11 @@ from CurrentVehicle import g_currentVehicle
 from messenger import MessengerEntry
 from gui import SystemMessages
 from gui.app_loader import g_appLoader
-from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
+from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
 from gui.battle_control import arena_info, g_sessionProvider
 from gui.battle_control.arena_info.settings import VEHICLE_STATUS
 from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
+from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 
 from xfw import *
 
@@ -90,9 +91,9 @@ class Xvm(object):
     def __init__(self):
         self.xvmServicesInitialized = False
         self.currentPlayerId = None
+        self.battle_page = None
         self._invalidateTimerId = dict()
         self._invalidateTargets = dict()
-
 
     # CONFIG
 
@@ -125,6 +126,22 @@ class Xvm(object):
         SystemMessages.pushMessage(msg, type)
 
     # state handler
+
+    def onAppInitialized(self, event):
+        trace('onAppInitialized: {}'.format(event.ns))
+        app = g_appLoader.getApp(event.ns)
+        if app is not None and app.loaderManager is not None:
+            app.loaderManager.onViewLoaded += self.onViewLoaded
+
+    def onAppDestroyed(self, event):
+        trace('onAppDestroyed: {}'.format(event.ns))
+        if event.ns == APP_NAME_SPACE.SF_LOBBY:
+            self.hangarDispose()
+        elif event.ns == APP_NAME_SPACE.SF_BATTLE:
+            self.battle_page = None
+        app = g_appLoader.getApp(event.ns)
+        if app is not None and app.loaderManager is not None:
+            app.loaderManager.onViewLoaded -= self.onViewLoaded
 
     def onGUISpaceEntered(self, spaceID):
         #trace('onGUISpaceEntered: {}'.format(spaceID))
@@ -159,20 +176,8 @@ class Xvm(object):
                 self.xvmServicesInitialized = False
                 self.initializeXvmServices()
 
-            lobby = getLobbyApp()
-            if lobby is not None:
-                lobby.loaderManager.onViewLoaded += self.onViewLoaded
-
         except Exception, ex:
             err(traceback.format_exc())
-
-
-    def deleteLobbySwf(self):
-        trace('deleteLobbySwf')
-        self.hangarDispose()
-        lobby = getLobbyApp()
-        if lobby is not None and lobby.loaderManager is not None:
-            lobby.loaderManager.onViewLoaded -= self.onViewLoaded
 
 
     # HANGAR
@@ -264,32 +269,6 @@ class Xvm(object):
 
     def initBattleSwf(self, flashObject):
         trace('initBattleSwf')
-        try:
-            # Save/restore arena data
-            player = BigWorld.player()
-
-            fileName = 'arenas_data.zip/{0}'.format(player.arenaUniqueID)
-
-            mcdata = minimap_circles.getMinimapCirclesData()
-            vehId = player.vehicleTypeDescriptor.type.compactDescr
-            if vehId and mcdata is not None and vehId == mcdata.get('vehId', None):
-                # Normal battle start. Update data and save to userprefs cache
-                userprefs.set(fileName, {
-                    'ver': '1.0',
-                    'minimap_circles': minimap_circles.getMinimapCirclesData(),
-                })
-            else:
-                # Replay, training or restarted battle after crash. Try to restore data.
-                arena_data = userprefs.get(fileName)
-                if arena_data is None:
-                    # Set default vehicle data if it is not available.in the cache.
-                    minimap_circles.updateMinimapCirclesData(player.vehicleTypeDescriptor)
-                else:
-                    # Apply restored data.
-                    minimap_circles.setMinimapCirclesData(arena_data['minimap_circles'])
-
-        except Exception, ex:
-            err(traceback.format_exc())
 
         self.initAS2DAAPI(flashObject)
         self.sendConfig(flashObject)
@@ -297,22 +276,21 @@ class Xvm(object):
         for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
             self.doUpdateBattle(vID, INV.ALL, flashObject)
 
-    def deleteBattleSwf(self):
-        trace('deleteBattleSwf')
-        pass
-
     def initVmmSwf(self, flashObject):
         #trace('initVmmSwf')
         self.initAS2DAAPI(flashObject)
         self.sendConfig(flashObject)
 
-    def deleteVmmSwf(self):
-        #trace('deleteVmmSwf')
-        pass
-
     def onStateBattle(self):
         trace('onStateBattle')
         xmqp_events.onStateBattle()
+
+    def onEnterWorld(self):
+        trace('onEnterWorld')
+        minimap_circles.save_or_restore()
+
+    def onLeaveWorld(self):
+        trace('onLeaveWorld')
 
     def initAS2DAAPI(self, flashObject):
         root = flashObject.getMember('_root')
@@ -348,14 +326,6 @@ class Xvm(object):
 
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
-
-
-    def onEnterWorld(self):
-        trace('onEnterWorld')
-
-
-    def onLeaveWorld(self):
-        trace('onLeaveWorld')
 
 
     def _onVehicleKilled(self, victimID, *args):
@@ -674,11 +644,13 @@ class Xvm(object):
         return False
 
 
-    def onViewLoaded(self, e=None):
-        debug('> onViewLoaded: {}'.format('(None)' if not e else e.uniqueName))
-        if e is None:
+    def onViewLoaded(self, view=None):
+        debug('> onViewLoaded: {}'.format('(None)' if not view else view.uniqueName))
+        if not view:
             return
-        if e.uniqueName == 'hangar':
+        if view.uniqueName == VIEW_ALIAS.CLASSIC_BATTLE_PAGE:
+            self.battle_page = weakref.proxy(view)
+        elif view.uniqueName == VIEW_ALIAS.LOBBY_HANGAR:
             self.hangarInit()
 
     def xmqp_init(self):

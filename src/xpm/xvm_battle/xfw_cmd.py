@@ -5,6 +5,7 @@
 
 class XVM_BATTLE_COMMAND(object):
     CAPTURE_BAR_GET_BASE_NUM_TEXT = "xvm_battle.captureBarGetBaseNumText"
+    BATTLE_CTRL_SET_VEHICLE_DATA = "xvm_battle.battleCtrlSetVehicleData"
 
 
 #####################################################################
@@ -16,9 +17,11 @@ import BigWorld
 import game
 from gui.shared import g_eventBus
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
+from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 
 from xfw import *
 from xvm_main.python.logger import *
+from xvm_main.python.xvm import g_xvm
 
 
 #####################################################################
@@ -45,9 +48,13 @@ def onXfwCommand(cmd, *args):
             n = int(args[0])
             res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
             return (res, True)
+        elif cmd == XVM_BATTLE_COMMAND.BATTLE_CTRL_SET_VEHICLE_DATA:
+            if g_xvm.battle_page:
+                ctrl = g_xvm.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
+                if ctrl:
+                    ctrl.invalidateArenaInfo()
+            return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)
     return (None, False)
-
-

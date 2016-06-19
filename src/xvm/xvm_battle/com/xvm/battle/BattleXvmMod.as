@@ -8,6 +8,7 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.BattleXvmView;
+    import com.xvm.battle.playersPanel.PlayersPanelXvmView;
     import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
 
     public class BattleXvmMod extends XvmModBase
@@ -19,7 +20,7 @@ package com.xvm.battle
 
         private static const _views:Object =
         {
-            "classicBattlePage": [ BattleXvmView, TeamBasesPanelXvmView ]
+            "classicBattlePage": [ PlayersPanelXvmView, TeamBasesPanelXvmView, BattleXvmView ]
         }
 
         override public function entryPoint():void

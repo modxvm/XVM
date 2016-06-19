@@ -43,10 +43,8 @@ _special = {
 
     # level 5
     'germany:PzIV_Hydro':                [ 5, 6 ],
-    # TODO:0.9.15
     'germany:PzV_PzIV':                  [ 5, 6 ],
     'germany:PzV_PzIV_ausf_Alfa':        [ 5, 6 ],
-    #
     'germany:G104_Stug_IV':              [ 5, 6 ],
     'ussr:Churchill_LL':                 [ 5, 6 ],
     'ussr:SU_85I':                       [ 5, 6 ],
@@ -60,10 +58,8 @@ _special = {
     'uk:GB20_Crusader':                  [ 5, 7 ],
 
     # level 6
-    # TODO:0.9.15
     'germany:G32_PzV_PzIV_CN':           [ 6, 7 ],
     'germany:G32_PzV_PzIV_ausf_Alfa_CN': [ 6, 7 ],
-    #
     'uk:GB63_TOG_II':                    [ 6, 7 ],
 
     # level 7

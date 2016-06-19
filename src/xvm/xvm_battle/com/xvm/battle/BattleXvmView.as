@@ -14,6 +14,8 @@ package com.xvm.battle
 
     public class BattleXvmView extends XvmViewBase
     {
+        private static const XVM_BATTLE_COMMAND_BATTLE_CTRL_SET_VEHICLE_DATA:String = "xvm_battle.battleCtrlSetVehicleData";
+
         public function BattleXvmView(view:IView)
         {
             super(view);
@@ -28,6 +30,10 @@ package com.xvm.battle
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
             super.onAfterPopulate(e);
+            //App.utils.scheduler.scheduleOnNextFrame(function():void{
+            Xfw.cmd(XVM_BATTLE_COMMAND_BATTLE_CTRL_SET_VEHICLE_DATA);
+            page.updateStage(App.appWidth, App.appHeight);
+            //});
         }
 
         // PRIVATE

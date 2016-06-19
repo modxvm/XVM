@@ -78,6 +78,8 @@ def start():
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
+    g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, g_xvm.onAppInitialized)
+    g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, g_xvm.onAppDestroyed)
     g_eventBus.addListener(XVM_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
     g_eventBus.addListener(XVM_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
@@ -97,6 +99,8 @@ def fini():
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
+    g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, g_xvm.onAppInitialized)
+    g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, g_xvm.onAppDestroyed)
     g_eventBus.removeListener(XVM_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
     g_eventBus.removeListener(XVM_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
@@ -127,27 +131,6 @@ def FlashInit(self, swf, className='Flash', args=None, path=None):
         g_xvm.initBattleSwf(self)
     elif self.swf == _VMM_SWF:
         g_xvm.initVmmSwf(self)
-
-
-# TODO:0.9.15.1
-#@registerEvent(Flash, 'beforeDelete')
-def FlashBeforeDelete(self):
-    if self.swf not in _SWFS:
-        return
-
-    log("FlashBeforeDelete: " + self.swf)
-
-    if self.swf == _LOBBY_SWF: # TODO: replace with AppLifeCycleEvent.DESTROYED event handler
-        g_xvm.deleteLobbySwf()
-    elif self.swf == _BATTLE_SWF:
-        g_xvm.deleteBattleSwf()
-    elif self.swf == _VMM_SWF:
-        g_xvm.deleteVmmSwf()
-
-
-#@overrideMethod(Flash, 'call')
-def Flash_call(base, self, methodName, args=None):
-    debug("> call: %s, %s" % (methodName, str(args)))
 
 
 @overrideMethod(MessageDecorator, 'getListVO')
@@ -182,14 +165,6 @@ def ProfileTechniqueWindow_RequestData(base, self, data):
         base(self, data)
 
 
-# TODO:0.9.15.0.1: remove?
-## stereoscope
-#@registerEvent(AmmunitionPanel, 'highlightParams')
-#def AmmunitionPanel_highlightParams(self, type):
-#    # debug('> AmmunitionPanel_highlightParams')
-#    g_xvm.updateTankParams()
-
-
 # PRE-BATTLE
 
 def onArenaCreated():
@@ -215,20 +190,16 @@ def PlayerAvatar_onBecomeNonPlayer(base, self):
 # BATTLE
 
 # on current player enters world
-# TODO:0.9.15.1
-#@registerEvent(PlayerAvatar, 'onEnterWorld')
+@registerEvent(PlayerAvatar, 'onEnterWorld')
 def PlayerAvatar_onEnterWorld(self, prereqs):
     # debug('> PlayerAvatar_onEnterWorld')
     g_xvm.onEnterWorld()
 
-
 # on current player leaves world
-# TODO:0.9.15.1
-#@registerEvent(PlayerAvatar, 'onLeaveWorld')
+@registerEvent(PlayerAvatar, 'onLeaveWorld')
 def PlayerAvatar_onLeaveWorld(self):
     # debug('> PlayerAvatar_onLeaveWorld')
     g_xvm.onLeaveWorld()
-
 
 # on any player marker appear
 # TODO:0.9.15.1
@@ -237,7 +208,6 @@ def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     # debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
     g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
 
-
 # on any player marker lost
 # TODO:0.9.15.1
 #@registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
@@ -245,14 +215,12 @@ def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
     # debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
     g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
 
-
 # on any vehicle hit received
 # TODO:0.9.15.1
 #@registerEvent(Vehicle, 'onHealthChanged')
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.invalidate(self.id, INV.BATTLE_HP)
-
 
 # add vid to players panel data
 # TODO:0.9.15.1
@@ -262,7 +230,6 @@ def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, *
     res['vid'] = vInfoVO.vehicleType.compactDescr
     return res
 
-
 # spotted status
 # TODO:0.9.15.1
 #@registerEvent(Minimap, '_Minimap__addEntry')
@@ -270,7 +237,6 @@ def _Minimap__addEntry(self, vInfo, guiProps, location, doMark):
     # debug('> _Minimap__addEntry: {0}'.format(vInfo.vehicleID))
     vehstate.updateSpottedStatus(vInfo.vehicleID, True)
     g_xvm.invalidate(vInfo.vehicleID, INV.BATTLE_SPOTTED)
-
 
 # TODO:0.9.15.1
 #@registerEvent(Minimap, '_Minimap__delEntry')

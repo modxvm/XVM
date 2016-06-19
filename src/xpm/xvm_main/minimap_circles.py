@@ -20,9 +20,13 @@ def updateMinimapCirclesData(descr):
     _g_minimap_circles.updateMinimapCirclesData(descr)
 
 
+def save_or_restore():
+    _g_minimap_circles.save_or_restore()
+
 # PRIVATE
 
 import math
+import traceback
 
 import BigWorld
 from adisp import async, process
@@ -30,8 +34,8 @@ from CurrentVehicle import g_currentVehicle
 from gui.shared import g_itemsCache
 
 from xfw import *
-
 from logger import *
+import userprefs
 
 
 class _MinimapCircles(object):
@@ -204,6 +208,31 @@ class _MinimapCircles(object):
             'base_radio_distance': descr.radio['distance'],
             'commander_sixthSense': self.commander_sixthSense,
         }
+
+    def save_or_restore(self):
+        try:
+            # Save/restore arena data
+            player = BigWorld.player()
+            fileName = 'arenas_data.zip/{0}'.format(player.arenaUniqueID)
+            vehId = player.vehicleTypeDescriptor.type.compactDescr
+            if vehId and self.minimapCirclesData and vehId == self.minimapCirclesData.get('vehId', None):
+                # Normal battle start. Update data and save to userprefs cache
+                userprefs.set(fileName, {
+                    'ver': '1.0',
+                    'minimap_circles': self.minimapCirclesData,
+                })
+            else:
+                # Replay, training or restarted battle after crash. Try to restore data.
+                arena_data = userprefs.get(fileName)
+                if arena_data is None:
+                    # Set default vehicle data if it is not available.in the cache.
+                    self.updateMinimapCirclesData(player.vehicleTypeDescriptor)
+                else:
+                    # Apply restored data.
+                    self.setMinimapCirclesData(arena_data['minimap_circles'])
+
+        except Exception, ex:
+            err(traceback.format_exc())
 
 
     # PRIVATE
