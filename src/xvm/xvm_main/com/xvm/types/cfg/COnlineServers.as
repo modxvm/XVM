@@ -4,44 +4,27 @@
  */
 package com.xvm.types.cfg
 {
-    // Show online to the servers
     public dynamic class COnlineServers extends Object
     {
-        public var enabled:Boolean;
-        public var updateInterval:Number; // msec
-        public var x:Number;
-        public var y:Number;
+        public var enabled:*;
+        public var x:*;
+        public var y:*;
         public var hAlign:String;
         public var vAlign:String;
-        public var alpha:Number;
+        public var alpha:*;
         public var delimiter:String;
-        public var maxRows:Number;
-        public var columnGap:Number;
-        public var leading:Number;
-        public var topmost:Boolean;
-        public var fontStyle:Object;
-        public var showTitle:Boolean;
-        public var showServerName:Boolean;
-        public var minimalNameLength:Number;
-        public var minimalValueLength:Number;
-        //{
-            //name: "$FieldFont",
-            //size: 12,
-            //bold: false,
-            //italic: false,
-            //color: {
-                //great: "0xFFCC66",
-                //good: "0xE5E4E1",
-                //poor: "0x96948F",
-                //bad: "0xD64D4D"
-            //}
-        //},
-            public var threshold:Object;
-        //    {
-            //great: 35,
-            //good: 60,
-            //poor: 100
-        //},
+        public var maxRows:*;
+        public var columnGap:*;
+        public var leading:*;
+        public var topmost:*;
+        public var showTitle:*;
+        public var showServerName:*;
+        public var minimalNameLength:*;
+        public var minimalValueLength:*;
+        public var errorString:String;
+        public var ignoredServers:Array;
+        public var fontStyle:CPingServersFontStyle;
+        public var threshold:CPingServersThreshold;
         public var shadow:CShadow;
     }
 }

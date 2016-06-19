@@ -157,14 +157,7 @@ package com.xvm.battle.teamBasesPanel
             tf.selectable = false;
             tf.x += Macros.GlobalNumber(c.x, 0);
             tf.y += Macros.GlobalNumber(c.y, 0);
-            tf.filters = [new DropShadowFilter(
-                0, // distance
-                0, // angle
-                Macros.GlobalNumber(c.shadow.color, 0x000000),
-                Macros.GlobalNumber(c.shadow.alpha, 100) / 100.0,
-                Macros.GlobalNumber(c.shadow.blur, 1),
-                Macros.GlobalNumber(c.shadow.blur, 1),
-                Macros.GlobalNumber(c.shadow.strength, 1))];
+            tf.filters = Utils.createShadowFiltersFromConfig(c.shadow);
         }
 
         private function setupProgressBar():void

@@ -35,7 +35,7 @@
         "color": "0x000000",            //                    Цвет.
         "angle": 45,                    // Offset angle     / Угол смещения.
         "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "size": 6,                      //                    Размер.
+        "blur": 6,                      //                    Размер.
         "strength": 200                 // Intensity        / Интенсивность.
       },
       // Rising speed of displayed damage (float up speed).
@@ -72,7 +72,7 @@
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
-        "size": 6,
+        "blur": 6,
         "strength": 200
       },
       "format": "{{vehicle}}{{turret}}"
@@ -100,7 +100,7 @@
         "color": "0x000000",          //   цвет
         "angle": 45,                  //   угол смещения
         "distance": 0,                //   дистанция смещение
-        "size": 6,                    //   размер
+        "blur": 6,                    //   размер
         "strength": 200               //   интенсивность
       },
       "format": "<font size='{{battletype?13|{{squad?13|0}}}}'>{{name}}</font>"  // формат текста. См. описание макросов в macros.txt
@@ -126,7 +126,7 @@
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
-        "size": 4,
+        "blur": 4,
         "strength": 100
       },
       "format": "{{hp}}"
@@ -152,7 +152,7 @@
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
-        "size": 1,
+        "blur": 1,
         "strength": 100
       },
       "format": "&#x115;"
@@ -178,7 +178,7 @@
         "color": "0x000000",          //  цвет
         "angle": 45,                  //  угол смещения
         "distance": 0,                //  дистанция смещение
-        "size": 4,                    //  размер
+        "blur": 4,                    //  размер
         "strength": 100               //  интенсивность
       },
       "format": "<font color='{{x-spotted?#FFBB00|#FFFFFF}}' alpha='{{x-spotted?#FF|#80}}'>{{x-spotted?&#x70;|{{x-sense-on?&#x70;}}}}</font> {{x-overturned?&#x112;}}"  //  формат текста. См. описание макросов в macros.txt
@@ -219,7 +219,7 @@
         "color": "0x000000",            //                    Цвет.
         "angle": 45,                    // Offset angle     / Угол смещения.
         "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "size": 6,                      //                    Размер.
+        "blur": 6,                      //                    Размер.
         "strength": 200                 // Intensity        / Интенсивность.
       }
     },
@@ -337,7 +337,7 @@
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
-        "size": 6,
+        "blur": 6,
         "strength": 200
       }
     },

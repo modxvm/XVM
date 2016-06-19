@@ -1,5 +1,5 @@
 /**
- * XVM Config - "captureBar" section
+ * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.types.cfg
@@ -10,6 +10,6 @@ package com.xvm.types.cfg
         public var y:*;
         public var format:*;
         public var done:*;
-        public var shadow:CCaptureBarTextFieldShadow;
+        public var shadow:CShadow;
     }
 }

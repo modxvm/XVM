@@ -63,8 +63,7 @@ package xvm.clock_ui.controls
             if (cfg.bgImage != null)
                 createBackgroundImage(cfg.bgImage);
             textField.rotation = cfg.rotation;
-            if (cfg.shadow.enabled)
-                textField.filters = [ Utils.createShadowFilterFromConfig(cfg.shadow) ];
+            textField.filters = Utils.createShadowFiltersFromConfig(cfg.shadow);
 
             invalidate();
 

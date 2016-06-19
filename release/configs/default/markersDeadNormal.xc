@@ -35,7 +35,7 @@
         "color": "0x000000",            //                    Цвет.
         "angle": 45,                    // Offset angle     / Угол смещения.
         "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "size": 6,                      //                    Размер.
+        "blur": 6,                      //                    Размер.
         "strength": 200                 // Intensity        / Интенсивность.
       },
       // Rising speed of displayed damage (float up speed).
@@ -87,7 +87,7 @@
         "color": "0x000000",            //                    Цвет.
         "angle": 45,                    // Offset angle     / Угол смещения.
         "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "size": 6,                      //                    Размер.
+        "blur": 6,                      //                    Размер.
         "strength": 200                 // Intensity        / Интенсивность.
       }
     },
@@ -199,7 +199,7 @@
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
-        "size": 6,
+        "blur": 6,
         "strength": 200
       }
     },

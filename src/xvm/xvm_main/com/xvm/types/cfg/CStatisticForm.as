@@ -1,5 +1,5 @@
 /**
- * XVM Config - "statisticForm" section
+ * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.types.cfg
@@ -21,8 +21,9 @@ package com.xvm.types.cfg
         public var vehicleFieldOffsetXRight:*;
         public var vehicleIconOffsetXLeft:*;
         public var vehicleIconOffsetXRight:*;
+        public var fragsOffsetXLeft:*;
+        public var fragsOffsetXRight:*;
         public var clanIcon:CClanIcon;
-        // Dispay formats.
         public var formatLeftNick:String;
         public var formatLeftVehicle:String;
         public var formatRightNick:String;

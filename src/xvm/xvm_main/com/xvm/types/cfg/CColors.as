@@ -1,5 +1,5 @@
 /**
- * XVM Config - "colors" section
+ * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.types.cfg
@@ -7,10 +7,11 @@ package com.xvm.types.cfg
     public dynamic class CColors extends Object
     {
         public var system:Object;
-        public var damage:Object;
         public var dmg_kind:Object;
         public var vtype:Object;
         public var spotted:Object;
+        public var totalHP:Object;
+        public var damage:Object;
         public var hp:Array;
         public var hp_ratio:Array;
         public var x:Array;
@@ -18,10 +19,10 @@ package com.xvm.types.cfg
         public var wn6:Array;
         public var wn8:Array;
         public var wgr:Array;
+        public var winChance:Array;
         public var winrate:Array;
-        public var e:Array;
-        public var avglvl:Array;
         public var kb:Array;
+        public var avglvl:Array;
         public var t_battles:Array;
         public var tdb:Array;
         public var tdv:Array;

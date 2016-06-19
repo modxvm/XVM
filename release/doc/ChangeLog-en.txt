@@ -1,5 +1,8 @@
 ﻿XVM-6.4.0-dev:
   * adaptation to WoT 0.9.15.1
+  * markers and hitlog: shadow parameter "size" renamed to "blur"
+    now all shadow sections have standard parameters:
+      "enabled", "distance", "angle", "color", "alpha", "blur", "strength"
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch
@@ -35,7 +38,7 @@ XVM-6.3.1:
       "minimap"/"lines"/"enabled"   - duplicates "minimap"/"useStandardLabels"
       "minimap"/"labels"/"enabled"  - duplicates "minimap"/"useStandardLines"
   * moved color settings option for total hp indicator:
-      "battle"/"totalHP"/"colors" > "colors"/"totalHP"      
+      "battle"/"totalHP"/"colors" > "colors"/"totalHP"
   * removed obsolete config section "battle"/"totalHP"
 
 XVM-6.3.0:

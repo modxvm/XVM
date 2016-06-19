@@ -1,14 +1,14 @@
 /**
- * XVM Config - "minimap" section
+ * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.types.cfg
 {
     public dynamic class CMinimapCirclesRange extends Object
     {
-        public var enabled:Boolean;
-        public var alpha:Number;
-        public var color:String;
-        public var thickness:Number;
+        public var enabled:*;
+        public var alpha:*;
+        public var color:*;
+        public var thickness:*;
     }
 }

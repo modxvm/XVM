@@ -4,10 +4,10 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CSquad extends Object
+    public dynamic class CExportFps extends Object
     {
         public var enabled:*;
-        public var showClan:*;
-        public var formatInfoField:String;
+        public var interval:*;
+        public var outputDir:*;
     }
 }

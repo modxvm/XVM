@@ -1,22 +1,26 @@
 /**
- * XVM Config - "hangar" section
+ * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.types.cfg
 {
     public dynamic class CHangar extends Object
     {
-        public var xwnInCompany:Boolean;
-        public var enableGoldLocker:Boolean;
-        public var enableFreeXpLocker:Boolean;
-        public var defaultBoughtForCredits:Boolean;
-        public var hidePricesInTechTree:Boolean;
-        public var masteryMarkInTechTree:Boolean;
-        public var allowExchangeXPInTechTree:Boolean;
-        public var enableCrewAutoReturn:Boolean;
-        public var crewReturnByDefault:Boolean;
-        public var enableEquipAutoReturn:Boolean;
-        public var widgetsEnabled:Boolean;
+        public var xwnInCompany:*;
+        public var enableGoldLocker:*;
+        public var enableFreeXpLocker:*;
+        public var defaultBoughtForCredits:*;
+        public var hidePricesInTechTree:*;
+        public var masteryMarkInTechTree:*;
+        public var allowExchangeXPInTechTree:*;
+        public var enableCrewAutoReturn:*;
+        public var crewReturnByDefault:*;
+        public var barracksShowFlags:*;
+        public var barracksShowSkills:*;
+        public var enableEquipAutoReturn:*;
+        public var blockVehicleIfLowAmmo:*;
+        public var lowAmmoPercentage:*;
+        public var widgetsEnabled:*;
         public var pingServers:CPingServers;
         public var onlineServers:COnlineServers;
         public var serverInfo:CHangarServerInfo;

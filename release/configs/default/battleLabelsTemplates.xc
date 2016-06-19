@@ -71,7 +71,7 @@
      │ "shadow"                   │ shadow settings, defaults:
      │                            │ настройки тени, значение по умолчанию: 
      │                            │
-     │                            │ "shadow": { "distance": 0, "angle": 0, "color": "0x000000", "alpha": 75, "blur": 2, "strength": 1 }
+     │                            │ "shadow": { "enabled": true, "distance": 0, "angle": 0, "color": "0x000000", "alpha": 75, "blur": 2, "strength": 1 }
      │----------------------------│--------------------------------------------------------------------------
      │ "distance"                 │ distance shadow, in pixels (default: 0)
      │                            │ дистанция тени, в пикселях (по-умолчанию: 0)

@@ -1,15 +1,15 @@
 /**
- * XVM Config - "texts" section
+ * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.types.cfg
 {
     public dynamic class CTextsVType extends Object
     {
-        public var LT:String;        // Text for light tanks
-        public var MT:String;        // Text for medium tanks
-        public var HT:String;        // Text for heavy tanks
-        public var SPG:String;       // Text for arty
-        public var TD:String;        // Text for tank destroyers
+        public var LT:String;
+        public var MT:String;
+        public var HT:String;
+        public var SPG:String;
+        public var TD:String;
     }
 }

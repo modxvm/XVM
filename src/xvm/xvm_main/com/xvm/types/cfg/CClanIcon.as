@@ -4,7 +4,6 @@
  */
 package com.xvm.types.cfg
 {
-    // Playes/clan icon parameters.
     public dynamic class CClanIcon extends Object
     {
         public var show:*;

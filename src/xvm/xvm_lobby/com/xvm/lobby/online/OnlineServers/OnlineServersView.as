@@ -253,8 +253,7 @@ package com.xvm.lobby.online.OnlineServers
             tf.styleSheet = WGUtils.createStyleSheet(createCss());
             tf.alpha = cfg.alpha / 100.0;
             tf.htmlText =  "";
-            if (cfg.shadow.enabled)
-                tf.filters = [ Utils.createShadowFilterFromConfig(cfg.shadow) ];
+            tf.filters = Utils.createShadowFiltersFromConfig(cfg.shadow);
             addChild(tf);
             return tf;
         }

@@ -333,6 +333,7 @@ package xvm.tcarousel_ui.components
             if (format.shadow != null && tf != null)
             {
                 tf.filters = [
+TODO: use Utils.createShadowFiltersFromConfig
                     new DropShadowFilter(
                         format.shadow.distance != null ? parseFloat(Macros.Format(null, format.shadow.distance, options)) : 0,
                         format.shadow.angle != null ? parseFloat(Macros.Format(null, format.shadow.angle, options)) : 45,

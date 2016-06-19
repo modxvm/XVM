@@ -1,25 +1,18 @@
 /**
- * XVM Config - "minimap" section
+ * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.types.cfg
 {
     public dynamic class CMinimapMapSize extends Object
     {
-        public var enabled:Boolean;
+        public var enabled:*;
         public var format:String;
-        public var alpha:Number;
-        public var offsetX:Number;
-        public var offsetY:Number;
-        public var shadow:Object;
-            //"enabled": true,
-            //"color": "0x000000",
-            //"distance": 0,
-            //"angle": 0,
-            //"alpha": 80,
-            //"blur": 2,
-            //"strength": 3
-        public var width:Number;
-        public var height:Number;
+        public var alpha:*;
+        public var offsetX:*;
+        public var offsetY:*;
+        public var shadow:CShadow;
+        public var width:*;
+        public var height:*;
     }
 }

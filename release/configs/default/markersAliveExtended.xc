@@ -35,7 +35,7 @@
         "color": "0x000000",            //                    Цвет.
         "angle": 45,                    // Offset angle     / Угол смещения.
         "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "size": 6,                      //                    Размер.
+        "blur": 6,                      //                    Размер.
         "strength": 200                 // Intensity        / Интенсивность.
       },
       // Rising speed of displayed damage (float up speed).
@@ -74,7 +74,7 @@
         "color": "0x000000",          //   цвет
         "angle": 45,                  //   угол смещения
         "distance": 0,                //   дистанция смещение
-        "size": 6,                    //   размер
+        "blur": 6,                    //   размер
         "strength": 200               //   интенсивность
       },
       "format": "{{nick}}"            // формат текста. См. описание макросов в macros.txt
@@ -100,7 +100,7 @@
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
-        "size": 4,
+        "blur": 4,
         "strength": 100
       },
       "format": "{{hp-ratio}}% / {{hp-max}}"
@@ -126,7 +126,7 @@
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
-        "size": 6,
+        "blur": 6,
         "strength": 200
       },
       "format": "{{r}}"
@@ -167,7 +167,7 @@
         "color": "0x000000",            //                    Цвет.
         "angle": 45,                    // Offset angle     / Угол смещения.
         "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "size": 6,                      //                    Размер.
+        "blur": 6,                      //                    Размер.
         "strength": 200                 // Intensity        / Интенсивность.
       }
     },
@@ -283,7 +283,7 @@
         "color": "0x000000",
         "angle": 45,
         "distance": 0,
-        "size": 6,
+        "blur": 6,
         "strength": 200
       }
     },

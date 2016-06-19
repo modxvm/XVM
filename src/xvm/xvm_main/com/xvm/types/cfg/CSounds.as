@@ -1,14 +1,16 @@
 /**
- * XVM Config - "sounds" section
+ * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.types.cfg
 {
+    import flash.utils.Dictionary;
+
     public dynamic class CSounds extends Object
     {
-        public var sixthSense:String;
-        public var sixthSenseRudy:String;
-        public var fireAlert:String;
-        public var ammoBay:String;
+        public var enabled:*;
+        public var soundBanks:CSoundsBanks;
+        public var logSoundEvents:*;
+        public var soundMapping:Dictionary;
     }
 }

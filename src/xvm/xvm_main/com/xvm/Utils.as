@@ -13,17 +13,17 @@ package com.xvm
     public class Utils
     {
         // Create DropShadowFilter from config section
-        public static function createShadowFilterFromConfig(cfg:CShadow):DropShadowFilter
+        public static function createShadowFiltersFromConfig(cfg:CShadow):Array
         {
-            // NOTE: quality arg is not working with Scaleform 4.2 AS3
-            return cfg.enabled == false ? null : new DropShadowFilter(
-                cfg.distance, // distance
-                cfg.angle, // angle
-                parseInt(cfg.color, 16),
-                cfg.alpha / 100.0,
-                cfg.blur,
-                cfg.blur,
-                cfg.strength);
+            Logger.addObject(cfg);
+            return !Macros.GlobalBoolean(cfg.enabled, true) ? null : [new DropShadowFilter(
+                Macros.GlobalNumber(cfg.distance, 0),
+                Macros.GlobalNumber(cfg.angle, 0),
+                Macros.GlobalNumber(cfg.color, 0),
+                Macros.GlobalNumber(cfg.alpha, 70) / 100.0,
+                Macros.GlobalNumber(cfg.blur, 4),
+                Macros.GlobalNumber(cfg.blur, 4),
+                Macros.GlobalNumber(cfg.strength, 2))];
         }
 
         public static function getMarksOnGunText(value:Number):String

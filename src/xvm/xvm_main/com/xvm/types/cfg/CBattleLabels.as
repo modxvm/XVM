@@ -4,7 +4,8 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CAlpha extends Object
+    public dynamic class CBattleLabels extends Object
     {
+        public var formats:Array;
     }
 }
