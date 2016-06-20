@@ -20,7 +20,7 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_VEHICLELEVEL_ALPHA:Number;
 
         private var pcfg:CPlayersPanel;
-        private var enabled:Boolean;
+        private var xvm_enabled:Boolean;
         private var ui:PlayersPanelListItem;
 
         public function PlayersPanelListItemProxy(ui:PlayersPanelListItem)
@@ -84,9 +84,9 @@ package com.xvm.battle.playersPanel
             {
                 //Logger.add("PlayersPanelListItemProxy.onConfigLoaded()");
                 pcfg = Config.config.playersPanel;
-                enabled = Macros.GlobalBoolean(pcfg.enabled, true);
+                xvm_enabled = Macros.GlobalBoolean(pcfg.enabled, true);
 
-                if (enabled)
+                if (xvm_enabled)
                 {
                     var alpha:Number = Macros.GlobalNumber(pcfg.alpha, 60) / 100.0;
                     ui.bg.alpha = alpha;

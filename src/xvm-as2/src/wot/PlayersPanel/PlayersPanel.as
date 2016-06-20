@@ -217,18 +217,18 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 // AS3:DONE
 // AS3:DONE         updateSwitcherButton();
 // AS3:DONE     }
-
-    private function setDataImpl()
-    {
-        m_data_arguments = arguments;
-        validateNow();
-        //invalidate(10);
-    }
-
-    private function draw()
-    {
-        setDataInternal.apply(this, m_data_arguments);
-    }
+// AS3:DONE 
+// AS3:DONE     private function setDataImpl()
+// AS3:DONE     {
+// AS3:DONE         m_data_arguments = arguments;
+// AS3:DONE         validateNow();
+// AS3:DONE         //invalidate(10);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function draw()
+// AS3:DONE     {
+// AS3:DONE         setDataInternal.apply(this, m_data_arguments);
+// AS3:DONE     }
 
     var prevState:String = null;
     var prevNamesStr:String = null;
@@ -391,44 +391,44 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         gfx.io.GameDelegate.call("Battle.selectPlayer", [m_data[pos].vehId]);
     }
 
-    private function onRecreateDeviceImpl(width, height)
-    {
-        //Logger.add("PlayersPanel.onRecreateDevice()");
-        base.onRecreateDevice(width, height);
-
-        wrapper.update();
-    }
-
-    private function updateImpl()
-    {
-        //Logger.add("up: " + wrapper.state);
-        if (m_savedState == null && Config.config.playersPanel[wrapper.state].enabled == false)
-        {
-            switch (wrapper.state)
-            {
-                case net.wargaming.ingame.PlayersPanel.STATES.none.name:
-                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.short.name;
-                    break;
-                case net.wargaming.ingame.PlayersPanel.STATES.short.name:
-                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.medium.name;
-                    break;
-                case net.wargaming.ingame.PlayersPanel.STATES.medium.name:
-                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.medium2.name;
-                    break;
-                case net.wargaming.ingame.PlayersPanel.STATES.medium2.name:
-                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.large.name;
-                    break;
-                case net.wargaming.ingame.PlayersPanel.STATES.large.name:
-                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.none.name;
-                    break;
-            }
+// AS3:DONE     private function onRecreateDeviceImpl(width, height)
+// AS3:DONE     {
+// AS3:DONE         //Logger.add("PlayersPanel.onRecreateDevice()");
+// AS3:DONE         base.onRecreateDevice(width, height);
+// AS3:DONE 
+// AS3:DONE         wrapper.update();
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function updateImpl()
+// AS3:DONE     {
+// AS3:DONE         //Logger.add("up: " + wrapper.state);
+// AS3:DONE         if (m_savedState == null && Config.config.playersPanel[wrapper.state].enabled == false)
+// AS3:DONE         {
+// AS3:DONE             switch (wrapper.state)
+// AS3:DONE             {
+// AS3:DONE                 case net.wargaming.ingame.PlayersPanel.STATES.none.name:
+// AS3:DONE                     wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.short.name;
+// AS3:DONE                     break;
+// AS3:DONE                 case net.wargaming.ingame.PlayersPanel.STATES.short.name:
+// AS3:DONE                     wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.medium.name;
+// AS3:DONE                     break;
+// AS3:DONE                 case net.wargaming.ingame.PlayersPanel.STATES.medium.name:
+// AS3:DONE                     wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.medium2.name;
+// AS3:DONE                     break;
+// AS3:DONE                 case net.wargaming.ingame.PlayersPanel.STATES.medium2.name:
+// AS3:DONE                     wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.large.name;
+// AS3:DONE                     break;
+// AS3:DONE                 case net.wargaming.ingame.PlayersPanel.STATES.large.name:
+// AS3:DONE                     wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.none.name;
+// AS3:DONE                     break;
+// AS3:DONE             }
 // AS3:DONE             updateSwitcherButton();
-            return;
-        }
-
-        base.update();
-    }
-
+// AS3:DONE             return;
+// AS3:DONE         }
+// AS3:DONE 
+// AS3:DONE         base.update();
+// AS3:DONE     }
+// AS3:DONE 
 // AS3:DONE     private function updateAlphasImpl()
 // AS3:DONE     {
 // AS3:DONE         if (wrapper.m_names.condenseWhite)

@@ -18,6 +18,7 @@ package com.xvm.battle.playersPanel
 
     public dynamic class UI_PlayersPanel extends PlayersPanelUI
     {
+        private static const PLAYERS_PANEL_STATE_NAMES:Array = [ "none", "short", "medium", "medium2", "large" ];
         private static const PLAYERS_PANEL_STATE_MAP:Object = {
             none: PLAYERS_PANEL_STATE.HIDEN,
             short: PLAYERS_PANEL_STATE.SHORT,
@@ -32,6 +33,7 @@ package com.xvm.battle.playersPanel
         private var XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE:String = getQualifiedClassName(UI_PlayersPanelListItemRight);
 
         private var cfg:CPlayersPanel;
+        private var xvm_enabled:Boolean;
 
         private var m_altMode:int = PLAYERS_PANEL_STATE.NONE;
         private var m_isAltMode:Boolean = false;
@@ -53,18 +55,33 @@ package com.xvm.battle.playersPanel
             onConfigLoaded(null);
         }
 
+        override public function as_setPanelMode(state:int):void
+        {
+            //Logger.add("UI_PlayersPanel.as_setPanelMode(): " + param1);
+
+            if (xvm_enabled)
+            {
+                // skip disabled modes
+                if (state != PLAYERS_PANEL_STATE.NONE && m_savedState == PLAYERS_PANEL_STATE.NONE)
+                {
+                    if (!Macros.GlobalBoolean(cfg[PLAYERS_PANEL_STATE_NAMES[state]].enabled, true))
+                    {
+                        xfw_requestState((state + 1) % PLAYERS_PANEL_STATE_NAMES.length);
+                        return;
+                    }
+                }
+            }
+
+            super.as_setPanelMode(state);
+        }
+
         //override public function as_setIsIntaractive(param1:Boolean):void
         //{
             ////Logger.add("UI_PlayersPanel.as_setIsIntaractive(): " + param1);
             //super.as_setIsIntaractive(param1);
         //}
 //
-        //override public function as_setPanelMode(param1:int):void
-        //{
-            ////Logger.add("UI_PlayersPanel.as_setPanelMode(): " + param1);
-            //super.as_setPanelMode(param1);
-        //}
-//
+
         //override public function setVehiclesData(param1:IDAAPIDataClass):void
         //{
             ////Logger.add("UI_PlayersPanel.setVehiclesData(): " + param1);
@@ -84,8 +101,11 @@ package com.xvm.battle.playersPanel
             try
             {
                 Xvm.removeEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
+
                 cfg = Config.config.playersPanel;
-                if (Macros.GlobalBoolean(cfg.enabled, true))
+                xvm_enabled = Macros.GlobalBoolean(cfg.enabled, true);
+
+                if (xvm_enabled)
                 {
                     initPanelModes();
                     panelSwitch.visible = !Macros.GlobalBoolean(cfg.removePanelsModeSwitcher, false);
