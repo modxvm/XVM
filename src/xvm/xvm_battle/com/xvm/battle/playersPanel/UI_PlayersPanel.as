@@ -39,7 +39,7 @@ package com.xvm.battle.playersPanel
 
         public function UI_PlayersPanel()
         {
-            Logger.add("UI_PlayersPanel()");
+            //Logger.add("UI_PlayersPanel()");
             super();
             PlayersPanelListLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
             PlayersPanelListRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
@@ -83,6 +83,7 @@ package com.xvm.battle.playersPanel
         {
             try
             {
+                Xvm.removeEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
                 cfg = Config.config.playersPanel;
                 if (Macros.GlobalBoolean(cfg.enabled, true))
                 {
@@ -113,7 +114,6 @@ package com.xvm.battle.playersPanel
 
             var altMode:String = Macros.GlobalString(cfg.altMode, "").toLowerCase();
             m_altMode = (PLAYERS_PANEL_STATE_MAP[altMode] == null) ? PLAYERS_PANEL_STATE.NONE : PLAYERS_PANEL_STATE_MAP[altMode];
-            Xvm.removeEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
             if (m_altMode != PLAYERS_PANEL_STATE.NONE)
                 Xvm.addEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
 

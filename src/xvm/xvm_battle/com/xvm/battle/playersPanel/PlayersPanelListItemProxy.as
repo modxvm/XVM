@@ -10,7 +10,7 @@ package com.xvm.battle.playersPanel
     import flash.events.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
 
-    public dynamic class XvmPlayersPanelListItem
+    public dynamic class PlayersPanelListItemProxy
     {
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
@@ -20,7 +20,7 @@ package com.xvm.battle.playersPanel
         private var enabled:Boolean;
         private var owner:PlayersPanelListItem;
 
-        public function XvmPlayersPanelListItem(owner:PlayersPanelListItem)
+        public function PlayersPanelListItemProxy(owner:PlayersPanelListItem)
         {
             this.owner = owner;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);

@@ -42,7 +42,7 @@ package com.xvm.battle
 
         public override function onConfigLoaded(e:Event):void
         {
-            Logger.add("BattleXvmView.onConfigLoaded()");
+            //Logger.add("BattleXvmView.onConfigLoaded()");
             try
             {
                 Xfw.cmd(XVM_BATTLE_COMMAND_BATTLE_CTRL_SET_VEHICLE_DATA);

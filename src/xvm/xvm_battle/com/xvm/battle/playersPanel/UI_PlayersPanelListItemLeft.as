@@ -9,12 +9,12 @@ package com.xvm.battle.playersPanel
 
     public dynamic class UI_PlayersPanelListItemLeft extends PlayersPanelListItemLeftUI
     {
-        private var proxy:XvmPlayersPanelListItem;
+        private var proxy:PlayersPanelListItemProxy;
 
         public function UI_PlayersPanelListItemLeft()
         {
             super();
-            proxy = new XvmPlayersPanelListItem(this);
+            proxy = new PlayersPanelListItemProxy(this);
         }
 
         override protected function configUI():void
