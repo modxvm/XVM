@@ -190,9 +190,9 @@
       // Настройки тени
       "shadow": {
         "enabled": true,
-        "color": "0x000000",
         "distance": 0,
         "angle": 0,
+        "color": "0x000000",
         "alpha": 70,
         "blur": 4,
         "strength": 2
