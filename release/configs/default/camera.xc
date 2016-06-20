@@ -93,7 +93,17 @@
         "borderColor": null,
         // Shadow settings
         // Настройки тени
-        "shadow": { "enabled": true, "distance": 0, "angle": 0, "color": "0x192E0E", "alpha": 100, "blur": 3, "strength": 7 },
+        "shadow": {
+          // false - no shadow
+          // false - без тени
+          "enabled": true,
+          "distance": 0,             // (in pixels)     / offset distance / дистанция смещения
+          "angle": 0,                // (0.0 .. 360.0)  / offset angle    / угол смещения
+          "color": "0x192E0E",       // "0xXXXXXX"      / color           / цвет
+          "alpha": 100,              // (0 .. 100)      / opacity         / прозрачность
+          "blur": 3,                 // (0.0 .. 255.0)  / blur            / размытие
+          "strength": 7              // (0.0 .. 255.0)  / intensity       / интенсивность
+        },
         // Text format
         // Формат текста
         "format": "<font face='$TitleFont' color='#95CB29' size='16'>x{{zoom}}</font>"

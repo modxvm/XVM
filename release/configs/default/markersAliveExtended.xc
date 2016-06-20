@@ -31,12 +31,12 @@
       },
       // Параметры тени.
       "shadow": {
-        "alpha": 100,                   // Opacity          / Прозрачность.
-        "color": "0x000000",            //                    Цвет.
-        "angle": 45,                    // Offset angle     / Угол смещения.
-        "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "blur": 6,                      //                    Размер.
-        "strength": 200                 // Intensity        / Интенсивность.
+        "distance": 0,                  // (in pixels)     / offset distance / дистанция смещения
+        "angle": 45,                    // (0.0 .. 360.0)  / offset angle    / угол смещения
+        "color": "0x000000",            // "0xXXXXXX"      / color           / цвет
+        "alpha": 100,                   // (0 .. 100)      / opacity         / прозрачность
+        "blur": 6,                      // (0.0 .. 255.0)  / blur            / размытие
+        "strength": 200                 //                 / intensity       / интенсивность
       },
       // Rising speed of displayed damage (float up speed).
       // Время отображения отлетающего урона.
@@ -70,14 +70,14 @@
       },
       // Параметры тени.
       "shadow": {
-        "alpha": 100,                 //   прозрачность
-        "color": "0x000000",          //   цвет
+        "distance": 0,                //   дистанция смещения
         "angle": 45,                  //   угол смещения
-        "distance": 0,                //   дистанция смещение
-        "blur": 6,                    //   размер
+        "color": "0x000000",          //   цвет
+        "alpha": 100,                 //   прозрачность
+        "blur": 6,                    //   размытие
         "strength": 200               //   интенсивность
       },
-      "format": "{{nick}}"            // формат текста. См. описание макросов в macros.txt
+      "format": "{{nick}}"            //   формат текста. См. описание макросов в macros.txt
     },
     // Text field with the percentage of remaining health.
     // Текстовое поле с процентом оставшегося здоровья.
@@ -96,10 +96,10 @@
         "italic": false
       },
       "shadow": {
-        "alpha": 100,
-        "color": "0x000000",
-        "angle": 45,
         "distance": 0,
+        "angle": 45,
+        "color": "0x000000",
+        "alpha": 100,
         "blur": 4,
         "strength": 100
       },
@@ -122,10 +122,10 @@
         "italic": false
       },
       "shadow": {
-        "alpha": 100,
-        "color": "0x000000",
-        "angle": 45,
         "distance": 0,
+        "angle": 45,
+        "color": "0x000000",
+        "alpha": 100,
         "blur": 6,
         "strength": 200
       },
@@ -163,12 +163,12 @@
       "scaleY": 16,
       // Параметры тени.
       "shadow": {
-        "alpha": 100,                   // Opacity          / Прозрачность.
-        "color": "0x000000",            //                    Цвет.
-        "angle": 45,                    // Offset angle     / Угол смещения.
-        "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "blur": 6,                      //                    Размер.
-        "strength": 200                 // Intensity        / Интенсивность.
+        "distance": 0,                  //   дистанция смещения
+        "angle": 45,                    //   угол смещения
+        "color": "0x000000",            //   цвет
+        "alpha": 100,                   //   прозрачность
+        "blur": 6,                      //   размытие
+        "strength": 200                 //   интенсивность
       }
     },
     // Индикатор здоровья.
