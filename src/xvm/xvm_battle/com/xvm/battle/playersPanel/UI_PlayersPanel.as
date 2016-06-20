@@ -18,8 +18,8 @@ package com.xvm.battle.playersPanel
 
     public dynamic class UI_PlayersPanel extends PlayersPanelUI
     {
-        private static const PLAYERS_PANEL_STATE_NAMES:Array = [ "none", "short", "medium", "medium2", "large" ];
-        private static const PLAYERS_PANEL_STATE_MAP:Object = {
+        public static const PLAYERS_PANEL_STATE_NAMES:Array = [ "none", "short", "medium", "medium2", "large" ];
+        public static const PLAYERS_PANEL_STATE_MAP:Object = {
             none: PLAYERS_PANEL_STATE.HIDEN,
             short: PLAYERS_PANEL_STATE.SHORT,
             medium: PLAYERS_PANEL_STATE.MEDIUM,

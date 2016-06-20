@@ -995,7 +995,7 @@ package com.xvm
                 // {{marksOnGun}}
                 pdata["marksOnGun"] = function(o:MacrosFormatOptions):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun); }
 
-                if (Config.config.battle.allowSpottedStatus)
+                if (Macros.GlobalBoolean(Config.config.battle.allowSpottedStatus, true))
                 {
                     var vdata:VehicleData = VehicleInfo.get(pdata["veh-id"]);
                     var isArty:Boolean = (vdata != null && vdata.vclass == "SPG");
