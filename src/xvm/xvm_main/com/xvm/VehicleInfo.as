@@ -6,6 +6,7 @@ package com.xvm
 {
     import com.xfw.*;
     import com.xvm.types.veh.*;
+    import com.xvm.vo.VOVehicleData;
 
     public class VehicleInfo
     {
@@ -16,17 +17,17 @@ package com.xvm
             instance.onVehicleInfoData(data_array);
         }
 
-        public static function get(vehId:int):VehicleData
+        public static function get(vehId:int):VOVehicleData
         {
             return instance._get(vehId);
         }
 
-        public static function getByIcon(icon:String):VehicleData
+        public static function getByIcon(icon:String):VOVehicleData
         {
             return instance._getByIcon(icon);
         }
 
-        public static function getByLocalizedShortName(localizedShortName:String):VehicleData
+        public static function getByLocalizedShortName(localizedShortName:String):VOVehicleData
         {
             return instance._getByLocalizedShortName(localizedShortName);
         }
@@ -88,7 +89,7 @@ package com.xvm
             {
                 for each (var obj:Object in data_array)
                 {
-                    var data:VehicleData = new VehicleData(obj);
+                    var data:VOVehicleData = new VOVehicleData(obj);
                     var preferredNames:Object = Config.config.vehicleNames[data.key.split(':').join('-')];
                     if (preferredNames != null)
                     {
@@ -109,12 +110,12 @@ package com.xvm
             }
         }
 
-        private function _get(vehId:int):VehicleData
+        private function _get(vehId:int):VOVehicleData
         {
             return vehicles[vehId];
         }
 
-        private function _getByIcon(icon:String):VehicleData
+        private function _getByIcon(icon:String):VOVehicleData
         {
             // icon: "ussr-IS-3"
             //   or  "../maps/icons/vehicle/contour/ussr-IS-3.png"
@@ -129,7 +130,7 @@ package com.xvm
             return vehicles[vehiclesMapKey[icon]];
         }
 
-        private function _getByLocalizedShortName(localizedShortName:String):VehicleData
+        private function _getByLocalizedShortName(localizedShortName:String):VOVehicleData
         {
             // localizedShortName: "ИС-3"
             return vehicles[vehiclesMapName[localizedShortName]];

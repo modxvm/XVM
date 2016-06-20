@@ -6,6 +6,7 @@ package com.xvm.battle.teamBasesPanel
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
@@ -172,28 +173,29 @@ package com.xvm.battle.teamBasesPanel
             if (!cfg)
                 return;
 
-            var o:MacrosFormatOptions = new MacrosFormatOptions();
-            o.points = m_points;
-            o.vehiclesCount = m_vehiclesCount;
-            o.timeLeft = m_timeLeft;
-            o.timeLeftSec = m_timeLeft ? Utils.timeStrToSec(m_timeLeft) : -1;
+            BattleState.vehiclesDataVO.captureBarData.update({
+                points: m_points,
+                vehiclesCount: m_vehiclesCount,
+                timeLeft: m_timeLeft,
+                timeLeftSec: m_timeLeft ? Utils.timeStrToSec(m_timeLeft) : -1
+            });
 
             var value:String;
             var name:String = m_captured ? "done" : "format";
 
-            value = Macros.Format(null, cfg.title[name], o);
+            value = Macros.Format(null, cfg.title[name]);
             value = StringUtil.substitute(value, m_baseNumText);
             textField.htmlText = value;
 
-            value = Macros.Format(null, cfg.players[name], o);
+            value = Macros.Format(null, cfg.players[name]);
             value = StringUtil.substitute(value, m_baseNumText);
             tfTimeLeft.htmlText = value;
 
-            value = Macros.Format(null, cfg.timer[name], o);
+            value = Macros.Format(null, cfg.timer[name]);
             value = StringUtil.substitute(value, m_baseNumText);
             tfVehiclesCount.htmlText = value;
 
-            value = Macros.Format(null, cfg.points[name], o);
+            value = Macros.Format(null, cfg.points[name]);
             value = StringUtil.substitute(value, m_baseNumText);
             pointsTextField.htmlText = value;
         }

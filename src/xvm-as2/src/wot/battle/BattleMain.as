@@ -161,7 +161,7 @@ class wot.battle.BattleMain
                 data["maxHealth"] = maxHealth;
             if ((Config.config.battle.allowHpInPanelsAndMinimap || Config.config.battle.allowMarksOnGunInPanelsAndMinimap) && !isNaN(marksOnGun))
                 data["marksOnGun"] = marksOnGun;
-            if (Config.config.battle.allowSpottedStatus && spotted != null)
+            if (spotted != null)
                 data["spotted"] = spotted;
 
             //Logger.addObject(data);

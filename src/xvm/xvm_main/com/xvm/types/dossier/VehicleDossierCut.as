@@ -8,6 +8,7 @@ package com.xvm.types.dossier
     import com.xvm.*;
     import com.xvm.MacrosUtils;
     import com.xvm.types.veh.*;
+    import com.xvm.vo.VOVehicleData;
     import net.wg.data.daapi.base.*;
 
     public class VehicleDossierCut extends DAAPIDataClass
@@ -26,7 +27,7 @@ package com.xvm.types.dossier
         public function update():void
         {
             // Vehicle Data
-            var vdata:VehicleData = VehicleInfo.get(vehId);
+            var vdata:VOVehicleData = VehicleInfo.get(vehId);
             if (vdata != null)
             {
                 fullname = vdata.localizedFullName;

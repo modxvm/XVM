@@ -8,7 +8,6 @@ ${"sirmax/sirmax.xc":"."}
 //  "markers": { "useStandardMarkers": true },
   "hitLog": { "visible": false },
   "battle": {
-    "allowSpottedStatus": false,
     "allowHpInPanelsAndMinimap": false,
     "allowMarksOnGunInPanelsAndMinimap": false,
     "elements": []

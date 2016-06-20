@@ -15,7 +15,6 @@ package com.xvm
         // Create DropShadowFilter from config section
         public static function createShadowFiltersFromConfig(cfg:CShadow):Array
         {
-            Logger.addObject(cfg);
             return !Macros.GlobalBoolean(cfg.enabled, true) ? null : [new DropShadowFilter(
                 Macros.GlobalNumber(cfg.distance, 0),
                 Macros.GlobalNumber(cfg.angle, 0),

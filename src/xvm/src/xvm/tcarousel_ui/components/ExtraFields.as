@@ -81,7 +81,7 @@ package xvm.tcarousel_ui.components
                 var field:DisplayObject = owner.getChildByName("f" + i);
                 if (field != null)
                 {
-                    var opt:MacrosFormatOptions = new MacrosFormatOptions();
+                    var opt:MacrosOptions = new MacrosOptions();
                     opt.vdata = vdata;
                     _internal_update(field, formats[i], opt);
                 }
@@ -282,7 +282,7 @@ package xvm.tcarousel_ui.components
             }
         }
 
-        private static function _internal_update(f:DisplayObject, format:Object, options:MacrosFormatOptions):void
+        private static function _internal_update(f:DisplayObject, format:Object, options:MacrosOptions):void
         {
             var tf:TextField = f as TextField;
             var img:UILoaderAlt = f as UILoaderAlt;

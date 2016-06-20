@@ -8,6 +8,7 @@ package com.xvm
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.veh.*;
+    import com.xvm.vo.VOVehicleData;
     import org.idmedia.as3commons.util.*;
 
     public class MacrosUtils
@@ -97,13 +98,13 @@ package com.xvm
                 var avalue:Number = cfg[i].value;
                 var alpha:Number = cfg[i].alpha;
                 if (value < avalue)
-                    return alpha;
+                    return alpha / 100.0;
             }
 
             return NaN;
         }
 
-        public static function GetVClassColorValue(vdata:VehicleData, prefix:String = '#', darker:Boolean = false):String
+        public static function GetVClassColorValue(vdata:VOVehicleData, prefix:String = '#', darker:Boolean = false):String
         {
             try
             {
@@ -199,7 +200,7 @@ package com.xvm
         {
             try
             {
-                var vdata:VehicleData = VehicleInfo.get(vehId);
+                var vdata:VOVehicleData = VehicleInfo.get(vehId);
                 var vtype:String = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
                 if (!vtype || !Config.config.colors.vtype[vtype])
                     return "";
@@ -241,7 +242,7 @@ package com.xvm
                     value += "_arty";
                 if (Config.config.alpha.spotted[value] == null)
                     return NaN;
-                return Config.config.alpha.spotted[value];
+                return Config.config.alpha.spotted[value] / 100.0;
             }
             catch (ex:Error)
             {

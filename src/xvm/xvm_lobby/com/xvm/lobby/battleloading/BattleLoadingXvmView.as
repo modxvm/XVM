@@ -35,8 +35,6 @@ package com.xvm.lobby.battleloading
 
             Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
 
-            Macros.RegisterGlobalMacrosData();
-
             logBriefConfigurationInfo();
 
             waitInit();

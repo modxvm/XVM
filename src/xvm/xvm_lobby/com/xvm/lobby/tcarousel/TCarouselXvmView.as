@@ -84,7 +84,6 @@ package com.xvm.lobby.tcarousel
         {
             if (Config.config.hangar.carousel.enabled != true)
                 return;
-            Macros.RegisterVehiclesMacros();
             Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
         }
 

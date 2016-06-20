@@ -8,6 +8,8 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.BattleXvmView;
+    import com.xvm.battle.fragCorrelationBar.FragCorrelationBarXvmView;
+    import com.xvm.battle.fullStats.FullStatsXvmView;
     import com.xvm.battle.playersPanel.PlayersPanelXvmView;
     import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
 
@@ -20,14 +22,21 @@ package com.xvm.battle
 
         private static const _views:Object =
         {
-            // BattleXvmView should be loaded last
-            "classicBattlePage": [ PlayersPanelXvmView, TeamBasesPanelXvmView, BattleXvmView ]
+
+            "classicBattlePage": [
+                FragCorrelationBarXvmView,      // FragCorrelationBarXvmView should be loaded first (implements battle state update methods)
+                FullStatsXvmView,
+                PlayersPanelXvmView,
+                TeamBasesPanelXvmView,
+                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
+            ]
         }
 
         override public function entryPoint():void
         {
             super.entryPoint();
             Macros.RegisterGlobalMacrosData();
+            Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
         }
 
         public override function get views():Object

@@ -4,7 +4,7 @@
  */
 package com.xvm.types.stat
 {
-    import com.xvm.types.veh.VehicleData;
+    import com.xvm.vo.VOVehicleData;
 
     public dynamic class VData
     {
@@ -27,6 +27,6 @@ package com.xvm.types.stat
         public var xtdb:Number = NaN;    // xTDB (int, 1-100)
         public var xte:Number = NaN;     // xTE tank eff (int, 1-100)
 
-        public var data:VehicleData = null;
+        public var data:VOVehicleData = null;
     }
 }

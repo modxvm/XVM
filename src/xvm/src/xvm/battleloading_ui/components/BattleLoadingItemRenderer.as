@@ -6,12 +6,11 @@ package xvm.battleloading_ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.types.*;
-    import com.xvm.types.cfg.*;
+    import com.xvm.vo.*;
+    import com.xvm.lobby.vo.*;
     import com.xvm.types.stat.*;
-    import com.xvm.types.veh.*;
+    import com.xvm.types.cfg.*;
     import flash.events.*;
-    import flash.geom.*;
     import flash.text.*;
     import flash.utils.*;
     import net.wg.gui.events.*;
@@ -139,8 +138,8 @@ package xvm.battleloading_ui.components
 
                     var fullPlayerName:String = App.utils.commons.getFullPlayerName(
                         App.utils.commons.getUserProps(_model.playerName, _model.clanAbbrev, _model.region, _model.igrType));
-                    var vdata:VehicleData = VehicleInfo.getByIcon(_model.vehicleIcon);
-                    Macros.RegisterMinimalMacrosData(_model.accountDBID, fullPlayerName, vdata.vid, team);
+                    var vdata:VOVehicleData = VehicleInfo.getByIcon(_model.vehicleIcon);
+                    Macros.RegisterMinimalMacrosData(_model.accountDBID, fullPlayerName, vdata.vid, team == XfwConst.TEAM_ALLY);
 
                     // Alternative icon set
                     if (!proxy.vehicleIconLoader.sourceAlt || proxy.vehicleIconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)
@@ -175,20 +174,19 @@ package xvm.battleloading_ui.components
             {
                 if (_model != null && proxy.initialized)
                 {
-                    var formatOptions:MacrosFormatOptions = new MacrosFormatOptions();
-                    formatOptions.alive = _model.isAlive();
-                    formatOptions.ready = _model.isReady();
-                    formatOptions.selected = _model.isCurrentPlayer;
-                    formatOptions.isCurrentPlayer = _model.isCurrentPlayer;
-                    formatOptions.isCurrentSquad = _model.isCurrentSquad;
-                    formatOptions.squadIndex = _model.squadIndex;
-                    formatOptions.position = proxy.index + 1;
-                    formatOptions.isTeamKiller = _model.isTeamKiller();
+                    var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
+                    options.vehicleStatus = _model.vehicleStatus;
+                    options.playerStatus = _model.playerStatus;
+                    options._isSelected = _model.isCurrentPlayer;
+                    options._isCurrentPlayer = _model.isCurrentPlayer;
+                    options._isSquadPersonal = _model.isCurrentSquad;
+                    options._squadIndex = _model.squadIndex;
+                    options._position = proxy.index + 1;
 
                     // ClanIcon
                     attachClanIconToPlayer();
 
-                    var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Macros.GlobalBoolean(cfg.darkenNotReadyIcon) || proxy.enabled) && formatOptions.alive;
+                    var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Macros.GlobalBoolean(cfg.darkenNotReadyIcon) || proxy.enabled) && options.isAlive;
 
                     proxy.vehicleIconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
@@ -262,11 +260,11 @@ package xvm.battleloading_ui.components
                     var textFieldColorString:String = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
 
                     var nickFieldText:String = Macros.Format(_model.playerName, team == XfwConst.TEAM_ALLY
-                        ? cfg.formatLeftNick : cfg.formatRightNick, formatOptions);
+                        ? cfg.formatLeftNick : cfg.formatRightNick, options);
                     proxy.textField.htmlText = "<font color='" + textFieldColorString + "'>" + nickFieldText + "</font>";
 
                     var vehicleFieldText:String = Macros.Format(_model.playerName, team == XfwConst.TEAM_ALLY
-                        ? cfg.formatLeftVehicle : cfg.formatRightVehicle, formatOptions);
+                        ? cfg.formatLeftVehicle : cfg.formatRightVehicle, options);
                     proxy.vehicleField.htmlText = "<font color='" + textFieldColorString + "'>" + vehicleFieldText + "</font>";
                 }
             }

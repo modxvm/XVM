@@ -7,7 +7,6 @@ package com.xvm.battle.playersPanel
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.teamBasesPanel.UI_teamBasesPanel;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;

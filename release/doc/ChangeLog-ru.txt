@@ -1,5 +1,6 @@
 ﻿XVM-6.4.0-dev:
   * адаптация к WoT 0.9.15.1
+  * полная переделка боевых модов (миграция AS2->AS3)
   * маркеры и хитлог: параметр тени "size" переименован в "blur"
     теперь все настройки тени имеют стандарные параметры:
       "enabled", "distance", "angle", "color", "alpha", "blur", "strength"
@@ -8,6 +9,8 @@
       "playersPanel"/"medium"/"formatRight" => "playersPanel"/"medium"/"nickFormatRight"
       "playersPanel"/"medium2"/"formatLeft" => "playersPanel"/"medium2"/"vehicleFormatLeft"
       "playersPanel"/"medium2"/"formatRight" => "playersPanel"/"medium2"/"vehicleFormatRight"
+  * удалены параметры:
+      "battle"/"allowSpottedStatus" - больше не требуется
 
 XVM-6.3.2:
   * обновление для микропатча WoT 0.9.15.0.1

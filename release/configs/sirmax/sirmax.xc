@@ -89,7 +89,6 @@
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
     "highlightVehicleIcon": false,
-    //"allowSpottedStatus": false,
     "allowHpInPanelsAndMinimap": true,
     "allowMarksOnGunInPanelsAndMinimap": true,
     "clanIconsFolder": "clanicons",

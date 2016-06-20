@@ -28,6 +28,8 @@ package com.xvm.lobby
     import com.xvm.lobby.techtree.ResearchXvmView;
     import com.xvm.lobby.techtree.TechTreeXvmView;
 
+    import com.xvm.lobby.vo.VOLobbyMacrosOptions; VOLobbyMacrosOptions;
+
     public class LobbyXvmMod extends XvmModBase
     {
         public override function get logPrefix():String
@@ -74,6 +76,10 @@ package com.xvm.lobby
             // mod: ping
             // init pinger as earlier as possible
             PingServers.initFeature(Config.config.login.pingServers.enabled || Config.config.hangar.pingServers.enabled);
+
+            Macros.RegisterGlobalMacrosData();
+            Macros.RegisterVehiclesMacros(LobbyMacros.RegisterVehiclesMacros);
+            Macros.RegisterClockMacros(LobbyMacros.RegisterClockMacros);
         }
 
         public override function get views():Object

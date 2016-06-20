@@ -8,6 +8,7 @@ package com.xvm
     import com.xvm.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
+    import com.xvm.vo.VOVehicleData;
 
     public class Chance
     {
@@ -197,7 +198,7 @@ package com.xvm
                 var stat:StatData = Stat.getData(pname);
                 if (stat == null)
                     continue;
-                var vdata:VehicleData = stat.v.data;
+                var vdata:VOVehicleData = stat.v.data;
                 // skip unknown tanks (Fog of War mode) and observer
                 if (vdata == null || vdata.key == "ussr:Observer")
                     continue;
@@ -296,7 +297,7 @@ package com.xvm
             {
                 var pname:String = playerNames[i];
                 var stat:StatData = Stat.getData(pname);
-                var vdata:VehicleData = stat.v.data;
+                var vdata:VOVehicleData = stat.v.data;
                 if (vdata == null || vdata.key == "ussr:Observer")
                     continue;
                 vis.push( {

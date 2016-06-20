@@ -2,20 +2,17 @@
  * XFW
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.types.veh
+package com.xvm.vo
 {
-    import net.wg.data.daapi.base.*;
-    import net.wg.data.constants.*;
-
-    //public dynamic class VehicleData extends DAAPIDataClass
-    public class VehicleData extends DAAPIDataClass
+    //public dynamic class VehicleData extends BaseVO
+    public class VOVehicleData extends VOBase
     {
         public var vid:int;
-        public var key:String = Values.EMPTY_STR;
+        public var key:String;
 
         public var level:int;
-        public var vclass:String = Values.EMPTY_STR;
-        public var nation:String = Values.EMPTY_STR;
+        public var vclass:String;
+        public var nation:String;
         public var premium:Boolean;
         public var isReserved:Boolean;
 
@@ -28,9 +25,9 @@ package com.xvm.types.veh
         public var tierLo:int;
         public var tierHi:int;
 
-        public var localizedName:String = Values.EMPTY_STR; // can be overrided by user
-        public var localizedShortName:String = Values.EMPTY_STR;
-        public var localizedFullName:String = Values.EMPTY_STR;
+        public var localizedName:String; // can be overrided by user
+        public var localizedShortName:String;
+        public var localizedFullName:String;
 
         public var turret:int;
 
@@ -49,12 +46,7 @@ package com.xvm.types.veh
 
         // additional
 
-        public var shortName:String = Values.EMPTY_STR;
-
-        public function VehicleData(data:Object)
-        {
-            super(data);
-        }
+        public var shortName:String;
 
         // PROPERTIES
 
@@ -66,6 +58,11 @@ package com.xvm.types.veh
         public function get sysname():String
         {
             return key.replace(':', '-');
+        }
+
+        public function VOVehicleData(data:Object = null)
+        {
+            super(data);
         }
 
         // PRIVATE

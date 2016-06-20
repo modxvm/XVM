@@ -7,7 +7,6 @@ package xvm.battleresults_ui
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.types.veh.*;
     import flash.events.*;
     import flash.text.*;
     import flash.utils.*;

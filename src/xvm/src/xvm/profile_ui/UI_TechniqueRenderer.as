@@ -7,8 +7,7 @@ package xvm.profile_ui
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.dossier.VehicleDossier;
-    import com.xvm.types.stat.StatData;
-    import com.xvm.types.veh.*;
+    import com.xvm.vo.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;
@@ -88,7 +87,7 @@ package xvm.profile_ui
                 vehicleTF.textColor = XfwConst.UICOLOR_VALUE;
                 if (!isSummary)
                 {
-                    var vdata:VehicleData = VehicleInfo.get(data.id);
+                    var vdata:VOVehicleData = VehicleInfo.get(data.id);
                     if (vdata != null && vdata.premium == 1)
                         vehicleTF.textColor = XfwConst.UICOLOR_GOLD;
                 }

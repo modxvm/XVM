@@ -8,6 +8,7 @@ package com.xvm
     {
         public static const GET_PLAYER_NAME:String = "xvm.get_player_name";
         public static const GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
+        public static const GET_XTDB_DATA:String = "xvm.get_xtdb_data";
         public static const LOAD_SETTINGS:String = "xvm.load_settings";
         public static const SAVE_SETTINGS:String = "xvm.save_settings";
 

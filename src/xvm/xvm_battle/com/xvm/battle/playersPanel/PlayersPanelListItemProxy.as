@@ -6,7 +6,8 @@ package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.types.MacrosFormatOptions;
+    import com.xvm.battle.*;
+//    import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
@@ -86,9 +87,8 @@ package com.xvm.battle.playersPanel
         {
             if (mcfg != null && _userProps != null)
             {
-                var opt:MacrosFormatOptions = new MacrosFormatOptions(); // TODO: BattleState.get(data.uid);
-                var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, opt);
-                Logger.add(txt);
+                var txt:String = Macros.Format(_userProps..userName, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, BattleState.getByPlayerName(_userProps.userName));
+                Logger.add("updatePlayerName: " + txt);
                 ui.playerNameCutTF.htmlText = txt;
                 ui.playerNameFullTF.htmlText = txt;
             }
@@ -98,8 +98,7 @@ package com.xvm.battle.playersPanel
         {
             if (mcfg != null && _userProps != null)
             {
-                var opt:MacrosFormatOptions = new MacrosFormatOptions(); // TODO: BattleState.get(data.uid);
-                var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, opt);
+                var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, BattleState.getByPlayerName(_userProps.userName));
                 ui.vehicleTF.htmlText = txt;
             }
         }
@@ -108,8 +107,7 @@ package com.xvm.battle.playersPanel
         {
             if (mcfg != null && _userProps != null)
             {
-                var opt:MacrosFormatOptions = new MacrosFormatOptions(); // TODO: BattleState.get(data.uid);
-                var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, opt);
+                var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, BattleState.getByPlayerName(_userProps.userName));
                 ui.fragsTF.htmlText = txt;
             }
         }

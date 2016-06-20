@@ -28,7 +28,6 @@ package xvm.clock_ui.controls
         public function ClockControl(cfg:CHangarClock)
         {
             this.cfg = cfg;
-            Macros.RegisterClockMacros();
         }
 
         override protected function configUI():void

@@ -1,5 +1,6 @@
 ﻿XVM-6.4.0-dev:
   * adaptation to WoT 0.9.15.1
+  * complete refactoring of battle mods (AS2->AS3 migration)
   * markers and hitlog: shadow parameter "size" renamed to "blur"
     now all shadow sections have standard parameters:
       "enabled", "distance", "angle", "color", "alpha", "blur", "strength"
@@ -8,6 +9,8 @@
       "playersPanel"/"medium"/"formatRight" => "playersPanel"/"medium"/"nickFormatRight"
       "playersPanel"/"medium2"/"formatLeft" => "playersPanel"/"medium2"/"vehicleFormatLeft"
       "playersPanel"/"medium2"/"formatRight" => "playersPanel"/"medium2"/"vehicleFormatRight"
+  * removed parameters:
+      "battle"/"allowSpottedStatus" - not required
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

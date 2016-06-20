@@ -9,7 +9,6 @@ package com.xvm.types.cfg
         public var mirroredVehicleIcons:*;
         public var showPostmortemTips:*;
         public var highlightVehicleIcon:*;
-        public var allowSpottedStatus:*;
         public var allowHpInPanelsAndMinimap:*;
         public var allowMarksOnGunInPanelsAndMinimap:*;
         public var allowLabelsOnBattleInterface:*;
