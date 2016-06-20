@@ -15,9 +15,9 @@ package com.xvm.types.cfg
         public var altMode:String;
         public var clanIcon:CClanIcon;
         public var none:CPlayersPanelNoneMode;
-        public var short:CPlayersPanelShortMode;
-        public var medium:CPlayersPanelMediumMode;
-        public var medium2:CPlayersPanelMediumMode;
-        public var large:CPlayersPanelLargeMode;
+        public var short:CPlayersPanelMode;
+        public var medium:CPlayersPanelMode;
+        public var medium2:CPlayersPanelMode;
+        public var large:CPlayersPanelMode;
     }
 }

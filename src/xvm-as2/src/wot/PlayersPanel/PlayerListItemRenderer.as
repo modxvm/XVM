@@ -125,8 +125,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         base.setState();
 
-        if (wrapper.vehicleLevel != null)
-            wrapper.vehicleLevel._alpha *= panel.state == "none" ? 0 : cfg[panel.state].vehicleLevelAlpha / 100.0;
+// AS3:DONE         if (wrapper.vehicleLevel != null)
+// AS3:DONE             wrapper.vehicleLevel._alpha *= panel.state == "none" ? 0 : cfg[panel.state].vehicleLevelAlpha / 100.0;
 
         wrapper.data.isPostmortemView = savedValue;
     }
@@ -188,7 +188,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
             base.update();
 
-            wrapper.iconLoader.content._alpha = cfg.iconAlpha;
+// AS3:DONE             wrapper.iconLoader.content._alpha = cfg.iconAlpha;
 
             if (data != null)
                 data.icon = saved_icon;

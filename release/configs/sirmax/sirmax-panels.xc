@@ -1,4 +1,5 @@
 ﻿{
+  //"enabled": false,
   "startMode": "large",
   //"startMode": "{{battletype=regular?medium|{{battletype=rated_sandbox?short|medium2}}}}",
   //"altMode": "{{battletype=regular?large|{{battletype=clan?medium|short}}}}",

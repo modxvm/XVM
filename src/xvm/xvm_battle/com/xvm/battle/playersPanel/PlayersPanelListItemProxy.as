@@ -8,26 +8,31 @@ package com.xvm.battle.playersPanel
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
 
-    public dynamic class PlayersPanelListItemProxy
+    public class PlayersPanelListItemProxy
     {
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
         private var DEFAULT_DEADBG_ALPHA:Number;
+        private var DEFAULT_VEHICLEICON_ALPHA:Number;
+        private var DEFAULT_VEHICLELEVEL_ALPHA:Number;
 
-        private var cfg:CPlayersPanel;
+        private var pcfg:CPlayersPanel;
         private var enabled:Boolean;
-        private var owner:PlayersPanelListItem;
+        private var ui:PlayersPanelListItem;
 
-        public function PlayersPanelListItemProxy(owner:PlayersPanelListItem)
+        public function PlayersPanelListItemProxy(ui:PlayersPanelListItem)
         {
-            this.owner = owner;
+            this.ui = ui;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
 
-            DEFAULT_BG_ALPHA = owner.bg.alpha;
-            DEFAULT_SELFBG_ALPHA = owner.selfBg.alpha;
-            DEFAULT_DEADBG_ALPHA = owner.deadBg.alpha;
+            DEFAULT_BG_ALPHA = ui.bg.alpha;
+            DEFAULT_SELFBG_ALPHA = ui.selfBg.alpha;
+            DEFAULT_DEADBG_ALPHA = ui.deadBg.alpha;
+            DEFAULT_VEHICLEICON_ALPHA = ui.vehicleIcon.alpha;
+            DEFAULT_VEHICLELEVEL_ALPHA = ui.vehicleLevel.alpha;
 
             // TODO: is required?
             //if (wrapper.m_names.condenseWhite)
@@ -44,27 +49,62 @@ package com.xvm.battle.playersPanel
             onConfigLoaded(null);
         }
 
+        public function dispose():void
+        {
+            // empty
+        }
+
+        public function applyState():void
+        {
+            switch (ui.xfw_state)
+            {
+                case PLAYERS_PANEL_STATE.FULL:
+                    applyStateDefault(pcfg.large);
+                    break;
+                case PLAYERS_PANEL_STATE.LONG:
+                    applyStateDefault(pcfg.medium2);
+                    break;
+                case PLAYERS_PANEL_STATE.MEDIUM:
+                    applyStateDefault(pcfg.medium);
+                    break;
+                case PLAYERS_PANEL_STATE.SHORT:
+                    applyStateDefault(pcfg.short);
+                    break;
+                case PLAYERS_PANEL_STATE.HIDEN:
+                    applyStateNone(pcfg.none);
+                    break;
+            }
+        }
+
         // PRIVATE
 
         private function onConfigLoaded(e:Event):Object
         {
             try
             {
-                cfg = Config.config.playersPanel;
-                enabled = Macros.GlobalBoolean(cfg.enabled, true);
+                //Logger.add("PlayersPanelListItemProxy.onConfigLoaded()");
+                pcfg = Config.config.playersPanel;
+                enabled = Macros.GlobalBoolean(pcfg.enabled, true);
 
                 if (enabled)
                 {
-                    var alpha:Number = Macros.GlobalNumber(cfg.alpha, 60) / 100.0;
-                    owner.bg.alpha = alpha;
-                    owner.selfBg.alpha = alpha;
-                    owner.deadBg.alpha = alpha;
+                    var alpha:Number = Macros.GlobalNumber(pcfg.alpha, 60) / 100.0;
+                    ui.bg.alpha = alpha;
+                    ui.selfBg.alpha = alpha;
+                    ui.deadBg.alpha = alpha;
+
+                    ui.vehicleIcon.alpha = Macros.GlobalNumber(pcfg.iconAlpha, 100) / 100.0;
+
+                    applyState();
                 }
                 else
                 {
-                    owner.bg.alpha = DEFAULT_BG_ALPHA;
-                    owner.selfBg.alpha = DEFAULT_SELFBG_ALPHA;
-                    owner.deadBg.alpha = DEFAULT_DEADBG_ALPHA;
+                    ui.bg.alpha = DEFAULT_BG_ALPHA;
+                    ui.selfBg.alpha = DEFAULT_SELFBG_ALPHA;
+                    ui.deadBg.alpha = DEFAULT_DEADBG_ALPHA;
+
+                    ui.vehicleIcon.alpha = DEFAULT_VEHICLEICON_ALPHA;
+                    ui.vehicleLevel.alpha = DEFAULT_VEHICLELEVEL_ALPHA;
                 }
             }
             catch (ex:Error)
@@ -72,6 +112,16 @@ package com.xvm.battle.playersPanel
                 Logger.err(ex);
             }
             return null;
+        }
+
+        public function applyStateDefault(cfg:CPlayersPanelMode):void
+        {
+            ui.vehicleLevel.alpha = Macros.GlobalNumber(cfg.vehicleLevelAlpha, 100) / 100.0;
+        }
+
+        public function applyStateNone(cfg:CPlayersPanelNoneMode):void
+        {
+
         }
     }
 }

@@ -6,6 +6,7 @@ package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
     import com.xvm.*;
+    import net.wg.data.constants.*;
 
     public dynamic class UI_PlayersPanelListItemLeft extends PlayersPanelListItemLeftUI
     {
@@ -21,6 +22,21 @@ package com.xvm.battle.playersPanel
         {
             super.configUI();
             proxy.configUI();
+        }
+
+        override protected function onDispose():void
+        {
+            proxy.dispose();
+            super.onDispose();
+        }
+
+        override protected function draw():void
+        {
+            super.draw();
+            if (isInvalid(InvalidationType.STATE))
+            {
+                proxy.applyState();
+            }
         }
     }
 }
