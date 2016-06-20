@@ -13,6 +13,8 @@ package com.xvm.battle.playersPanel
 
     public class PlayersPanelListItemProxy
     {
+        public var xvm_enabled:Boolean;
+
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
         private var DEFAULT_DEADBG_ALPHA:Number;
@@ -20,8 +22,11 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_VEHICLELEVEL_ALPHA:Number;
 
         private var pcfg:CPlayersPanel;
-        private var xvm_enabled:Boolean;
         private var ui:PlayersPanelListItem;
+
+        private var _isSelected:Boolean = false;
+
+        private var opt_removeSelectedBackground:Boolean;
 
         public function PlayersPanelListItemProxy(ui:PlayersPanelListItem)
         {
@@ -53,6 +58,17 @@ package com.xvm.battle.playersPanel
         {
             // empty
         }
+
+        public function setIsSelected(isSelected:Boolean):void
+        {
+            _isSelected = isSelected;
+        }
+
+        public function onDrawSelected():void
+        {
+            ui.selfBg.visible = _isSelected && !opt_removeSelectedBackground;
+        }
+
 
         public function applyState():void
         {
@@ -88,14 +104,14 @@ package com.xvm.battle.playersPanel
 
                 if (xvm_enabled)
                 {
-                    var alpha:Number = Macros.GlobalNumber(pcfg.alpha, 60) / 100.0;
+                    var alpha:Number = Macros.GlobalNumber(pcfg.alpha, 80) / 100.0;
                     ui.bg.alpha = alpha;
                     ui.selfBg.alpha = alpha;
                     ui.deadBg.alpha = alpha;
 
                     ui.vehicleIcon.alpha = Macros.GlobalNumber(pcfg.iconAlpha, 100) / 100.0;
 
-                    applyState();
+                    opt_removeSelectedBackground = Macros.GlobalBoolean(pcfg.removeSelectedBackground, false);
                 }
                 else
                 {
@@ -106,6 +122,8 @@ package com.xvm.battle.playersPanel
                     ui.vehicleIcon.alpha = DEFAULT_VEHICLEICON_ALPHA;
                     ui.vehicleLevel.alpha = DEFAULT_VEHICLELEVEL_ALPHA;
                 }
+
+                ui.invalidate();
             }
             catch (ex:Error)
             {

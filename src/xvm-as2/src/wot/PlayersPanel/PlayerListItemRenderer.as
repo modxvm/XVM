@@ -116,20 +116,20 @@ class wot.PlayersPanel.PlayerListItemRenderer
         return base.getColorTransform(schemeName);
     }
 
-    function setStateImpl()
-    {
-        var savedValue = wrapper.data.isPostmortemView;
-
-        if (Macros.FormatGlobalBooleanValue(cfg.removeSelectedBackground))
-            wrapper.data.isPostmortemView = false;
-
-        base.setState();
-
+// AS3:DONE     function setStateImpl()
+// AS3:DONE     {
+// AS3:DONE         var savedValue = wrapper.data.isPostmortemView;
+// AS3:DONE 
+// AS3:DONE         if (Macros.FormatGlobalBooleanValue(cfg.removeSelectedBackground))
+// AS3:DONE             wrapper.data.isPostmortemView = false;
+// AS3:DONE 
+// AS3:DONE         base.setState();
+// AS3:DONE 
 // AS3:DONE         if (wrapper.vehicleLevel != null)
 // AS3:DONE             wrapper.vehicleLevel._alpha *= panel.state == "none" ? 0 : cfg[panel.state].vehicleLevelAlpha / 100.0;
-
-        wrapper.data.isPostmortemView = savedValue;
-    }
+// AS3:DONE 
+// AS3:DONE         wrapper.data.isPostmortemView = savedValue;
+// AS3:DONE     }
 
     function updateImpl()
     {
