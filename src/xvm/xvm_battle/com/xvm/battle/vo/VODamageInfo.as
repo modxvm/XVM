@@ -2,7 +2,7 @@
 {
     import com.xvm.vo.*;
 
-    public dynamic class VODamageInfo extends VOBase
+    public class VODamageInfo extends VOBase
     {
         // XVM
         public var damageDelta : Number = NaN;

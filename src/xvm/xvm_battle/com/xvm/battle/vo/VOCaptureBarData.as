@@ -2,7 +2,7 @@
 {
     import com.xvm.vo.*;
 
-    public dynamic class VOCaptureBarData extends VOBase
+    public class VOCaptureBarData extends VOBase
     {
         // XVM
         public var points : Number = NaN;

@@ -13,6 +13,7 @@
         function get isSquadPersonal():Boolean;
         function get squadIndex():Number;
         function get position():Number;
+        function get vehID():int;
         function get vehicleData():VOVehicleData;
 
         // internal use

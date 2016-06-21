@@ -81,6 +81,7 @@
     <hidden path="obj" />
     <hidden path="xvm_main" />
     <hidden path="xvm_battle" />
+    <hidden path="src" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

@@ -35,7 +35,7 @@
                 var xtdb_data_len:Number = _xtdb_data.length;
                 while (_curent_xtdb < xtdb_data_len - 1)
                 {
-                    if (BattleState.vehiclesDataVO.hitlogTotalDamage < _xtdb_data[_curent_xtdb])
+                    if (BattleState.playersDataVO.hitlogTotalDamage < _xtdb_data[_curent_xtdb])
                         break;
                     ++_curent_xtdb;
                 }

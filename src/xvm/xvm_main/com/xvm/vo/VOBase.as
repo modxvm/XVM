@@ -3,7 +3,7 @@
     import com.xfw.*;
     import com.xvm.*;
 
-    public dynamic class VOBase extends Object
+    public class VOBase extends Object
     {
         public function VOBase(data:Object = null)
         {

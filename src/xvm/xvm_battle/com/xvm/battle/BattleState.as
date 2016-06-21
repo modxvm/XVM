@@ -15,12 +15,12 @@
     {
         public static function get(vehicleID:Number):VOPlayerState
         {
-            return instance._vehiclesDataVO.get(vehicleID);
+            return instance._playersDataVO.get(vehicleID);
         }
 
         public static function getByPlayerName(playerName:String):VOPlayerState
         {
-            return instance._vehiclesDataVO.getByPlayerName(playerName);
+            return instance._playersDataVO.getByPlayerName(playerName);
         }
 
         public static function get arenaInfoVO():VOArenaInfo
@@ -28,9 +28,9 @@
             return instance._arenaInfoVO;
         }
 
-        public static function get vehiclesDataVO():VOPlayersData
+        public static function get playersDataVO():VOPlayersData
         {
-            return instance._vehiclesDataVO;
+            return instance._playersDataVO;
         }
 
         // instance
@@ -45,7 +45,7 @@
         }
 
         private var _arenaInfoVO:VOArenaInfo = null;
-        private var _vehiclesDataVO:VOPlayersData = null;
+        private var _playersDataVO:VOPlayersData = null;
 
         // .ctor should be private for Singleton
         function BattleState()
@@ -122,7 +122,7 @@
             //Logger.addObject(data, 1, "setVehiclesData");
             try
             {
-                _vehiclesDataVO = new VOPlayersData(data);
+                _playersDataVO = new VOPlayersData(data);
                 Macros.RegisterPlayersData(BattleMacros.RegisterPlayersData);
             }
             catch (ex:Error)
@@ -257,15 +257,15 @@
                 var vehicleStatsVO:DAAPIVehiclesStatsVO = DAAPIVehiclesStatsVO(data);
                 if (vehicleStatsVO.leftFrags)
                 {
-                    _vehiclesDataVO.updateVehicleFrags(vehicleStatsVO.leftFrags, true);
+                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.leftFrags, true);
                 }
                 if (vehicleStatsVO.rightFrags)
                 {
-                    _vehiclesDataVO.updateVehicleFrags(vehicleStatsVO.rightFrags, false);
+                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.rightFrags, false);
                 }
                 if (vehicleStatsVO.totalStats)
                 {
-                    _vehiclesDataVO.updateTotalStats(vehicleStatsVO.totalStats);
+                    _playersDataVO.updateTotalStats(vehicleStatsVO.totalStats);
                 }
             }
             catch (ex:Error)
@@ -280,26 +280,26 @@
             {
                 var vehicleStatusVO:DAAPIVehicleStatusVO = DAAPIVehicleStatusVO(data);
 
-                _vehiclesDataVO.updateVehicleInfo(vehicleStatusVO.vehicleID, { vehicleStatus: vehicleStatusVO.status });
+                _playersDataVO.updatePlayerState(vehicleStatusVO.vehicleID, { vehicleStatus: vehicleStatusVO.status });
 
                 if (vehicleStatusVO.isEnemy)
                 {
                     if (vehicleStatusVO.rightCorrelationIDs)
-                        _vehiclesDataVO.rightCorrelationIDs = vehicleStatusVO.rightCorrelationIDs;
+                        _playersDataVO.rightCorrelationIDs = vehicleStatusVO.rightCorrelationIDs;
                     if (vehicleStatusVO.rightVehiclesIDs)
-                        _vehiclesDataVO.rightVehiclesIDs = vehicleStatusVO.rightVehiclesIDs;
+                        _playersDataVO.rightVehiclesIDs = vehicleStatusVO.rightVehiclesIDs;
                 }
                 else
                 {
                     if (vehicleStatusVO.leftCorrelationIDs)
-                        _vehiclesDataVO.leftCorrelationIDs = vehicleStatusVO.leftCorrelationIDs;
+                        _playersDataVO.leftCorrelationIDs = vehicleStatusVO.leftCorrelationIDs;
                     if (vehicleStatusVO.leftVehiclesIDs)
-                        _vehiclesDataVO.leftVehiclesIDs = vehicleStatusVO.leftVehiclesIDs;
+                        _playersDataVO.leftVehiclesIDs = vehicleStatusVO.leftVehiclesIDs;
                 }
 
                 if (vehicleStatusVO.totalStats)
                 {
-                    _vehiclesDataVO.updateTotalStats(vehicleStatusVO.totalStats);
+                    _playersDataVO.updateTotalStats(vehicleStatusVO.totalStats);
                 }
             }
             catch (ex:Error)

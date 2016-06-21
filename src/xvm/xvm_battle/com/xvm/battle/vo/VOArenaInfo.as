@@ -4,7 +4,7 @@
     import net.wg.data.VO.daapi.*;
     import net.wg.infrastructure.interfaces.*;
 
-    public dynamic class VOArenaInfo extends VOBase
+    public class VOArenaInfo extends VOBase
     {
         public var allyTeamName : String;
         public var battleTypeFrameLabel : String;

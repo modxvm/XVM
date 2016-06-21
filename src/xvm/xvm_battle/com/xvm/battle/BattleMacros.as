@@ -19,9 +19,9 @@ package com.xvm.battle
 
         internal static function RegisterPlayersData(m_dict:Object):void
         {
-            for each (var vehicleInfo:VOPlayerState in BattleState.vehiclesDataVO.vehicleInfos)
+            for each (var playerState:VOPlayerState in BattleState.playersDataVO.playerStates)
             {
-                _RegisterPlayerData(m_dict, vehicleInfo);
+                _RegisterPlayerData(m_dict, playerState);
             }
         }
 
@@ -35,14 +35,14 @@ package com.xvm.battle
             // {{cap.tanks}}
             // {{cap.time}}
             // {{cap.time-sec}}
-            m_globals["cap"] = function(o:VOPlayerState):*
+            m_globals["cap"] = function(o:IVOMacrosOptions):*
             {
                 switch (o.getSubname())
                 {
-                    case "points": return isNaN(BattleState.vehiclesDataVO.capo.points) ? NaN : o.points;
-                    case "tanks": return isNaN(o.vehiclesCount) ? NaN : o.vehiclesCount;
-                    case "time":  return o.timeLeft;
-                    case "time-sec": return isNaN(o.timeLeftSec) ? NaN : o.timeLeftSec;
+                    case "points": return Number(BattleState.playersDataVO.captureBarData.points);
+                    case "tanks": return Number(BattleState.playersDataVO.captureBarData.vehiclesCount);
+                    case "time":  return BattleState.playersDataVO.captureBarData.timeLeft;
+                    case "time-sec": return Number(BattleState.playersDataVO.captureBarData.timeLeftSec);
                 }
                 return null;
             }
@@ -52,17 +52,40 @@ package com.xvm.battle
             if (Config.networkServicesSettings.xmqp)
             {
                 // {{x-enabled}}
-                m_globals["x-enabled"] = function(o:VOPlayerState):String { return o.x_enabled == true ? 'true' : null; }
+                m_globals["x-enabled"] = function(o:VOPlayerState):String
+                {
+                    return o.xmqpData.x_enabled == true ? 'true' : null;
+                }
+
                 // {{x-sense-on}}
-                m_globals["x-sense-on"] = function(o:VOPlayerState):String { return o.x_sense_on == true ? 'true' : null; }
+                m_globals["x-sense-on"] = function(o:VOPlayerState):String
+                {
+                    return o.xmqpData.x_sense_on == true ? 'true' : null;
+                }
+
                 // {{x-fire}}
-                m_globals["x-fire"] = function(o:VOPlayerState):String { return o.x_fire == true ? 'true' : null; }
+                m_globals["x-fire"] = function(o:VOPlayerState):String
+                {
+                    return o.xmqpData.x_fire == true ? 'true' : null;
+                }
+
                 // {{x-overturned}}
-                m_globals["x-overturned"] = function(o:VOPlayerState):String { return o.x_overturned == true ? 'true' : null; }
+                m_globals["x-overturned"] = function(o:VOPlayerState):String
+                {
+                    return o.xmqpData.x_overturned == true ? 'true' : null;
+                }
+
                 // {{x-drowning}}
-                m_globals["x-drowning"] = function(o:VOPlayerState):String { return o.x_drowning == true ? 'true' : null; }
+                m_globals["x-drowning"] = function(o:VOPlayerState):String
+                {
+                    return o.xmqpData.x_drowning == true ? 'true' : null;
+                }
+
                 // {{x-spotted}}
-                m_globals["x-spotted"] = function(o:VOPlayerState):String { return o.x_spotted == true ? 'true' : null; }
+                m_globals["x-spotted"] = function(o:VOPlayerState):String
+                {
+                    return o.xmqpData.x_spotted == true ? 'true' : null;
+                }
             }
             else
             {
@@ -75,14 +98,13 @@ package com.xvm.battle
             }
         }
 
-        private static function _RegisterPlayerData(m_dict:Object, vehicleInfo:VOPlayerState):void
+        private static function _RegisterPlayerData(m_dict:Object, playerState:VOPlayerState):void
         {
-            if (!m_dict.hasOwnProperty(vehicleInfo.playerName))
-                m_dict[vehicleInfo.playerName] = {};
-            var pdata:Object = m_dict[vehicleInfo.playerName];
+            if (!m_dict.hasOwnProperty(playerState.playerName))
+                m_dict[playerState.playerName] = {};
+            var pdata:Object = m_dict[playerState.playerName];
 
-            Logger.addObject(vehicleInfo);
-            Macros.RegisterMinimalMacrosData(vehicleInfo.accountDBID, vehicleInfo.playerFullName, vehicleInfo.vehicleID, vehicleInfo.isPlayerTeam);
+            Macros.RegisterMinimalMacrosData(playerState.accountDBID, playerState.playerFullName, playerState.vehID, playerState.isPlayerTeam);
 
             // stats
 
@@ -100,7 +122,7 @@ package com.xvm.battle
 
             // spotted
 
-            var vdata:VOVehicleData = VehicleInfo.get(vehicleInfo.vehicleID);
+            var vdata:VOVehicleData = playerState.vehicleData;
             var isArty:Boolean = (vdata != null && vdata.vclass == "SPG");
 
             // {{spotted}}
@@ -123,8 +145,15 @@ package com.xvm.battle
 
             // hp
 
-            var getMaxHealthFunc:Function = function(o:VOPlayerState):Number { return isNaN(o.maxHealth) ? vdata.hpTop : o.maxHealth; }
-            var getHpRatioFunc:Function = function(o:VOPlayerState):Number { return o.getCurrentHealth() / getMaxHealthFunc(o) * 100; }
+            var getMaxHealthFunc:Function = function(o:VOPlayerState):Number
+            {
+                return isNaN(o.maxHealth) ? vdata.hpTop : o.maxHealth;
+            }
+
+            var getHpRatioFunc:Function = function(o:VOPlayerState):Number
+            {
+                return o.getCurrentHealth() / getMaxHealthFunc(o) * 100;
+            }
 
             // {{hp}}
             pdata["hp"] = function(o:VOPlayerState):Number
@@ -199,7 +228,7 @@ package com.xvm.battle
                     default:
                         return MacrosUtils.GetDmgSrcColorValue(
                             MacrosUtils.damageFlagToDamageSource(o.damageInfo.damageFlag),
-                            o.isTeamKiller ? ((vehicleInfo.isPlayerTeam ? "ally" : "enemy") + "tk") : o.entityName,
+                            o.isTeamKiller ? ((playerState.isPlayerTeam ? "ally" : "enemy") + "tk") : o.entityName,
                             o.isDead,
                             o.isBlown);
                 }
@@ -234,13 +263,13 @@ package com.xvm.battle
             // {{n}}
             pdata["n"] = function(o:VOPlayerState):Number
             {
-                return BattleState.vehiclesDataVO.hitlogTotalHits;
+                return BattleState.playersDataVO.hitlogTotalHits;
             }
 
             // {{dmg-total}}
             pdata["dmg-total"] = function(o:VOPlayerState):Number
             {
-                return BattleState.vehiclesDataVO.hitlogTotalDamage;
+                return BattleState.playersDataVO.hitlogTotalDamage;
             }
 
             // {{c:dmg-total}}
@@ -252,7 +281,7 @@ package com.xvm.battle
             // {{dmg-avg}}
             pdata["dmg-avg"] = function(o:VOPlayerState):Number
             {
-                return BattleState.vehiclesDataVO.hitlogTotalHits == 0 ? NaN : Math.round(BattleState.vehiclesDataVO.hitlogTotalDamage / BattleState.vehiclesDataVO.hitlogTotalHits);
+                return BattleState.playersDataVO.hitlogTotalHits == 0 ? NaN : Math.round(BattleState.playersDataVO.hitlogTotalDamage / BattleState.playersDataVO.hitlogTotalHits);
             }
 
             // {{n-player}}

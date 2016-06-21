@@ -59,6 +59,11 @@
             throw new IllegalOperationError("abstract method called");
         }
 
+        public function get vehID():int
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
         public function get vehicleData():VOVehicleData
         {
             throw new IllegalOperationError("abstract method called");

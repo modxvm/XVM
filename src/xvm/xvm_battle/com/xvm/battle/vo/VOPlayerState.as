@@ -1,54 +1,58 @@
 ﻿package com.xvm.battle.vo
 {
+    import com.xvm.*;
     import com.xvm.vo.*;
     import flash.errors.*;
     import net.wg.data.constants.*;
     import net.wg.data.VO.daapi.*;
     import net.wg.infrastructure.interfaces.*;
 
-    public dynamic class VOPlayerState extends VOMacrosOptions
+    public class VOPlayerState extends VOMacrosOptions
     {
         // DAAPIVehicleInfoVO
-        public var accountDBID : Number;
-        public var clanAbbrev : String;
-        public var invitationStatus : uint;
-        public var isObserver : Boolean;
-        public var isPlayerTeam : Boolean;
-        public var isSpeaking : Boolean;
-        public var isVehiclePremiumIgr : Boolean;
-        public var playerFullName : String;
-        public var playerName : String;
-        public var playerStatus : uint;
-        public var prebattleID : Number;
-        public var region : String;
-        private var _squadIndex : uint;
-        public var teamColor : String;
-        public var userTags : Array;
-        public var vehicleAction : uint;
-        public var vehicleGuiName : String;
-        public var vehicleIcon : String;
-        public var vehicleIconName : String;
-        public var vehicleID : Number;
-        public var vehicleLevel : int;
-        public var vehicleName : String;
-        public var vehicleStatus : uint;
-        public var vehicleType : String;
+        public var accountDBID:Number;
+        public var clanAbbrev:String;
+        public var invitationStatus:uint;
+        public var isObserver:Boolean;
+        public var isPlayerTeam:Boolean;
+        public var isSpeaking:Boolean;
+        public var isVehiclePremiumIgr:Boolean;
+        public var playerFullName:String;
+        public var playerName:String;
+        public var playerStatus:uint;
+        public var prebattleID:Number;
+        public var region:String;
+        private var _squadIndex:uint;
+        public var teamColor:String;
+        public var userTags:Array;
+        public var vehicleAction:uint;
+        public var vehicleGuiName:String;
+        public var vehicleIcon:String;
+        public var vehicleIconName:String;
+        public var vehicleArenaID:Number;
+        public var vehicleLevel:int;
+        public var vehicleName:String;
+        public var vehicleStatus:uint;
+        public var vehicleType:String;
 
         // DAAPIVehicleStatsVO
-        public var frags : int = 0;
+        public var frags:int = 0;
 
         // XVM
-        public var marksOnGun : Number = NaN;       // TODO: set & update
-        public var spottedStatus : String = null;   // TODO: set & update
-        public var curHealth : Number = NaN;        // TODO: set & update
-        public var maxHealth : Number = NaN;        // TODO: set & update
-        public var entityName : String = null;      // TODO: set & update
+        public var marksOnGun:Number = NaN;       // TODO: set & update
+        public var spottedStatus:String = null;   // TODO: set & update
+        public var curHealth:Number = NaN;        // TODO: set & update
+        public var maxHealth:Number = NaN;        // TODO: set & update
+        public var entityName:String = null;      // TODO: set & update
 
-        public var damageInfo : VODamageInfo;       // TODO: set & update
+        public var damageInfo:VODamageInfo;       // TODO: set & update
+        public var xmqpData:VOXmqpData;           // TODO: set & update
 
-        public var hitlogCount : int = 0;           // TODO: set & update
-        public var hitlogDamage : int = 0;          // TODO: set & update
+        public var hitlogCount:int = 0;           // TODO: set & update
+        public var hitlogDamage:int = 0;          // TODO: set & update
 
+        private var _position:Number = NaN;
+        private var _vehID:int;
         private var _vehicleData:VOVehicleData;
 
         // IMacrosOptionsVO implementation
@@ -105,7 +109,32 @@
 
         override public function get isCurrentPlayer():Boolean
         {
-            throw new IllegalOperationError("abstract method called");
+            return UserTags.isCurrentPlayer(userTags);
+        }
+
+        public function get isBusy():Boolean
+        {
+            return UserTags.isBusy(userTags);
+        }
+
+        public function get isChatBan():Boolean
+        {
+            return UserTags.isChatBan(userTags);
+        }
+
+        public function get isFriend():Boolean
+        {
+            return UserTags.isFriend(userTags);
+        }
+
+        public function get isIgnored():Boolean
+        {
+            return UserTags.isIgnored(userTags);
+        }
+
+        public function get isMuted():Boolean
+        {
+            return UserTags.isMuted(userTags);
         }
 
         override public function get squadIndex():Number
@@ -115,7 +144,17 @@
 
         override public function get position():Number
         {
-            throw new IllegalOperationError("abstract method called");
+            return _position;
+        }
+
+        public function set position(value:Number):void
+        {
+            _position = value;
+        }
+
+        override public function get vehID():int
+        {
+            return _vehID;
         }
 
         override public function get vehicleData():VOVehicleData
@@ -165,11 +204,18 @@
             vehicleGuiName = d.vehicleGuiName;
             vehicleIcon = d.vehicleIcon;
             vehicleIconName = d.vehicleIconName;
-            vehicleID = d.vehicleID;
+            vehicleArenaID = d.vehicleID;
             vehicleLevel = d.vehicleLevel;
             vehicleName = d.vehicleName;
             vehicleStatus = d.vehicleStatus;
             vehicleType = d.vehicleType;
+
+            // TODO: refactor
+            _vehicleData = VehicleInfo.getByLocalizedShortName(vehicleName);
+            if (_vehicleData)
+            {
+                _vehID = _vehicleData.vid;
+            }
         }
     }
 }
