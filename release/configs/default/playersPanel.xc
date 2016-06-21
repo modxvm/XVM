@@ -207,10 +207,10 @@
       "vehicleLevelAlpha": 100,
       // Display format for the left panel (macros allowed, see macros.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
-      "formatLeft": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
+      "nickFormatLeft": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
       // Display format for the right panel (macros allowed, see macros.txt).
       // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
-      "formatRight": "<font alpha='#A0'>{{clan}}</font> <font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font>",
+      "nickFformatRight": "<font alpha='#A0'>{{clan}}</font> <font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font>",
       // Display format for frags (macros allowed, see macros.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
@@ -248,10 +248,10 @@
       "vehicleLevelAlpha": 100,
       // Display format for the left panel (macros allowed, see macros.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
-      "formatLeft": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
+      "vehicleFormatLeft": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
       // Display format for the right panel (macros allowed, see macros.txt).
       // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
-      "formatRight": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
       // Display format for frags (macros allowed, see macros.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
