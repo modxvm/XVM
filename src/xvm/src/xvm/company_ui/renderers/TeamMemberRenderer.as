@@ -38,6 +38,8 @@ package xvm.company_ui.renderers
                 effField.height = proxy.vehicleLevelField.height;
                 effField.htmlText = "";
                 proxy.addChild(effField);
+
+                Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
             }
             catch (ex:Error)
             {
@@ -57,7 +59,7 @@ package xvm.company_ui.renderers
             var pname:String = WGUtils.GetPlayerName(data.fullName);
             App.utils.scheduler.scheduleTask(function():void
             {
-                Stat.loadUserData(this, onStatLoaded, pname, false);
+                Stat.loadUserData(pname);
             }, 10);
         }
 

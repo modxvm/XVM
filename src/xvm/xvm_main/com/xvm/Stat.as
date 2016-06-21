@@ -26,19 +26,19 @@ package com.xvm
             return _instance;
         }
 
-        public static function get loaded():Boolean
+        public static function get battleStatLoaded():Boolean
         {
-            return instance.loaded;
+            return instance.battleStatLoaded;
         }
 
-        public static function get stat():Dictionary
+        public static function get battleStat():Dictionary
         {
-            return instance.statCache;
+            return instance.battleCache;
         }
 
-        public static function getData(name:String):StatData
+        public static function getBattleResultsStat(arenaUniqueId:String):Dictionary
         {
-            return stat.hasOwnProperty(name) ? stat[name] : null;
+            return instance.battleResultsCache[arenaUniqueId];
         }
 
         public static function isUserDataCachedByName(name:String):Boolean
@@ -59,105 +59,62 @@ package com.xvm
             return instance.userCache.hasOwnProperty(key) ? instance.userCache[key] : null;
         }
 
-        public static function loadBattleStat(target:Object, callback:Function, force:Boolean = false):void
+        public static function clearBattleStat():void
         {
-            instance.loadBattleStat(target, callback, force);
+            instance.battleCache = new Dictionary();
         }
 
-        public static function loadBattleResultsStat(target:Object, callback:Function, arenaUniqueId:String):void
+        public static function loadBattleStat():void
         {
-            instance.loadBattleResultsStat(target, callback, arenaUniqueId);
+            instance.loadBattleStat();
         }
 
-        public static function loadUserData(target:Object, callback:Function, value:String, isId:Boolean):void
+        public static function loadBattleResultsStat(arenaUniqueId:String):void
         {
-            instance.loadUserData(target, callback, value, isId);
+            instance.loadBattleResultsStat(arenaUniqueId);
+        }
+
+        public static function loadUserData(value:String):void
+        {
+            instance.loadUserData(value);
         }
 
         // PRIVATE
 
-        private var statCache:Dictionary;
+        private var battleStatLoading:Boolean;
+        private var battleStatLoaded:Boolean;
+        private var battleCache:Dictionary;
         private var battleResultsCache:Dictionary;
         private var userCache:Dictionary;
-        private var loading:Boolean;
-        private var loaded:Boolean;
-        private var listenersBattle:Vector.<Object>;
-        private var listenersBattleResults:Dictionary;
-        private var listenersUser:Dictionary;
 
         function Stat()
         {
-            statCache = new Dictionary();
+            battleStatLoading = false;
+            battleStatLoaded = false;
+            battleCache = new Dictionary();
             battleResultsCache = new Dictionary();
             userCache = new Dictionary();
-            loading = false;
-            loaded = false;
-            listenersBattle = new Vector.<Object>();
-            listenersBattleResults = new Dictionary();
-            listenersUser = new Dictionary();
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_BATTLE_DATA, battleLoaded);
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_BATTLE_RESULTS_DATA, battleResultsLoaded);
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_USER_DATA, userLoaded);
         }
 
-        private function loadBattleStat(target:Object, callback:Function, force:Boolean):void
+        private function loadBattleStat():void
         {
-            //Logger.add("TRACE: loadBattleStat(): target=" + String(target));
-            try
-            {
-                if (force)
-                {
-                    loaded = false;
-                    // TODO: what if loading?
-                }
-
-                if (loaded)
-                {
-                    if (callback != null)
-                        callback.call(target);
-                    return;
-                }
-
-                if (callback != null)
-                    listenersBattle.push( { target:target, callback:callback } );
-                if (loading)
-                    return;
-                loading = true;
-
-                Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-                throw ex;
-            }
+            //Logger.add("TRACE: loadBattleStat()");
+            if (!battleStatLoading)
+                return;
+            battleStatLoading = true;
+            Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE);
         }
 
         private function battleLoaded(data:Object):Object
         {
             //Logger.add("TRACE: battleLoaded()");
-
             try
             {
                 //Logger.addObject(data, 3);
-
-                // clear cache, because it is also used for current battle players list
-                statCache = new Dictionary();
-
-                if (data.players)
-                {
-                    for (var name:String in data.players)
-                    {
-                        var sd:StatData = ObjectConverter.convertData(data.players[name], StatData);
-                        calculateStatValues(sd);
-                        stat[name] = sd;
-                        // TODO
-                        //StatData.s_data[nm].loadstate = (StatData.s_data[nm].vehicleKey == "UNKNOWN")
-                        //    ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
-                        Macros.RegisterStatisticsMacros(name);
-                        //Logger.addObject(stat[name], 3, "stat[" + name + "]");
-                    }
-                }
+                parseResult(data, battleCache);
             }
             catch (ex:Error)
             {
@@ -167,67 +124,26 @@ package com.xvm
             }
             finally
             {
-                loaded = true;
-                loading = false;
+                battleStatLoaded = true;
+                battleStatLoading = false;
                 //Logger.add("Stat Loaded");
-
-                for each (var l:Object in listenersBattle)
-                {
-                    try
-                    {
-                        l.callback.call(l.target);
-                    }
-                    catch (ex:Error)
-                    {
-                        Logger.err(ex);
-                    }
-                    catch (ex:*)
-                    {
-                        Logger.addObject(ex, 1, "exception");
-                    }
-                }
-                listenersBattle = new Vector.<Object>();
-
                 dispatchEvent(new Event(COMPLETE_BATTLE));
             }
-
             //Logger.add("TRACE: battleLoaded(): end");
-
             return null;
         }
 
-        private function loadBattleResultsStat(target:Object, callback:Function, arenaUniqueId:String):void
+        private function loadBattleResultsStat(arenaUniqueId:String):void
         {
-            //Logger.add("TRACE: loadBattleResultsStat(): target=" + String(target));
+            //Logger.add("TRACE: loadBattleResultsStat()");
             if (arenaUniqueId == null || arenaUniqueId == "" || arenaUniqueId == "0")
             {
-                callback.call(target, null);
-                return;
+                dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueId));
             }
-            var inProgress:Boolean = false;
-            if (callback != null)
+            else
             {
-                if (battleResultsCache.hasOwnProperty(arenaUniqueId))
-                {
-                    callback.call(target, battleResultsCache[arenaUniqueId]);
-                    return;
-                }
-                if (!listenersBattleResults.hasOwnProperty(arenaUniqueId))
-                    listenersBattleResults[arenaUniqueId] = new Vector.<Object>();
-                else
-                {
-                    for each (var l:Object in listenersBattleResults[arenaUniqueId])
-                    {
-                        if (l.target == target && l.callback == callback)
-                            return;
-                    }
-                    inProgress = true;
-                }
-                listenersBattleResults[arenaUniqueId].push({ target:target, callback:callback });
-            }
-
-            if (!inProgress)
                 Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE_RESULTS, arenaUniqueId);
+            }
         }
 
         private function battleResultsLoaded(data:Object):Object
@@ -237,21 +153,9 @@ package com.xvm
             try
             {
                 //Logger.addObject(data, 3);
-
                 arenaUniqueId = data.arenaUniqueId;
-
-                battleResultsCache[arenaUniqueId] = data;
-
-                if (data.players)
-                {
-                    for (var name:String in data.players)
-                    {
-                        var sd:StatData = ObjectConverter.convertData(data.players[name], StatData);
-                        calculateStatValues(sd);
-                        statCache[name] = sd;
-                        Macros.RegisterStatisticsMacros(name);
-                    }
-                }
+                battleResultsCache[arenaUniqueId] = new Dictionary();
+                parseResult(data, battleResultsCache[arenaUniqueId]);
             }
             catch (ex:Error)
             {
@@ -265,66 +169,37 @@ package com.xvm
             }
             finally
             {
-                if (arenaUniqueId == null)
-                    return null;
-                try
-                {
-                    if (listenersBattleResults.hasOwnProperty(arenaUniqueId))
-                    {
-                        var l:Vector.<Object> = listenersBattleResults[arenaUniqueId];
-                        for (var i:Number = 0; i < l.length; ++i)
-                        {
-                            var o:Object = l[i];
-                            o.callback.call(o.target, battleResultsCache[arenaUniqueId]);
-                        }
-                        delete listenersBattleResults[arenaUniqueId];
-                    }
-                }
-                catch (ex:Error)
-                {
-                    Logger.err(ex);
-                }
                 dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueId));
             }
-
             return null;
         }
 
-        private function loadUserData(target:Object, callback:Function, value:String, isId:Boolean):void
+        private function parseResult(data:Object, cache:Dictionary):void
         {
-            //Logger.add("TRACE: loadUserData(): target=" + String(target));
+            if (data.players)
+            {
+                for (var name:String in data.players)
+                {
+                    var sd:StatData = ObjectConverter.convertData(data.players[name], StatData);
+                    calculateStatValues(sd);
+                    cache[name] = sd;
+                    Macros.RegisterStatisticsMacros(name, sd);
+                    //Logger.addObject(sd, 3, "stat[" + name + "]");
+                }
+            }
+        }
+
+        private function loadUserData(value:String):void
+        {
+            //Logger.add("TRACE: loadUserData()");
             try
             {
                 if (value == null || value == "")
                 {
-                    callback.call(target, null);
+                    dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, null));
                     return;
                 }
-                var inProgress:Boolean = false;
-                if (callback != null)
-                {
-                    var key:String = (isId ? "ID" : Config.config.region) + "/" + value;
-                    if (userCache.hasOwnProperty(key))
-                    {
-                        callback.call(target, userCache[key]);
-                        return;
-                    }
-                    if (!listenersUser.hasOwnProperty(key))
-                        listenersUser[key] = new Vector.<Object>();
-                    else
-                    {
-                        for each (var l:Object in listenersUser[key])
-                        {
-                            if (l.target == target && l.callback == callback)
-                                return;
-                        }
-                        inProgress = true;
-                    }
-                    listenersUser[key].push({ target:target, callback:callback });
-                }
-
-                if (!inProgress)
-                    Xfw.cmd(XvmCommandsInternal.LOAD_STAT_USER, value, isId);
+                Xfw.cmd(XvmCommandsInternal.LOAD_STAT_USER, value);
             }
             catch (ex:Error)
             {
@@ -337,19 +212,18 @@ package com.xvm
         {
             //Logger.add("TRACE: userLoaded()");
             var name:String = null;
-            var key1:String = null;
-            var key2:String = null;
+            var keyName:String = null;
+            var keyId:String = null;
             try
             {
                 var sd:StatData = ObjectConverter.convertData(data, StatData);
                 calculateStatValues(sd);
                 name = sd.name || sd.nm;
-                //Logger.addObject(sd, "sd", 2);
-                key1 = Config.config.region + "/" + name;
-                userCache[key1] = sd;
-                key2 = "ID/" + sd._id;
-                userCache[key2] = sd;
-                //Logger.add(key1 + ", " + key2);
+                //Logger.addObject(sd, 2);
+                keyName = Config.config.region + "/" + name;
+                userCache[keyName] = sd;
+                keyId = "ID/" + sd._id;
+                userCache[keyId] = sd;
             }
             catch (ex:Error)
             {
@@ -358,35 +232,9 @@ package com.xvm
             }
             finally
             {
-                processUserListener(key1);
-                processUserListener(key2);
                 dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, name));
             }
-
             return null;
-        }
-
-        private function processUserListener(key:String):void
-        {
-            if (key == null)
-                return;
-            try
-            {
-                if (listenersUser.hasOwnProperty(key))
-                {
-                    var l:Vector.<Object> = listenersUser[key];
-                    for (var i:Number = 0; i < l.length; ++i)
-                    {
-                        var o:Object = l[i];
-                        o.callback.call(o.target);
-                    }
-                    delete listenersUser[key];
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
         }
 
         // TODO: remove

@@ -16,8 +16,6 @@ package com.xvm.battle.teamBasesPanel
 
     public dynamic class UI_TeamCaptureBar extends TeamCaptureBarUI
     {
-        private static const XVM_BATTLE_COMMAND_CAPTURE_BAR_GET_BASE_NUM_TEXT:String = "xvm_battle.captureBarGetBaseNumText";
-
         private var cfg:CCaptureBarTeam;
         private var m_captured:Boolean;
         private var m_baseNumText:String = "";
@@ -38,37 +36,58 @@ package com.xvm.battle.teamBasesPanel
 
         override public function setData(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:String, param7:String):void
         {
-            cfg = null;
-            super.setData.apply(this, arguments);
-            onConfigLoaded(null);
+            try
+            {
+                cfg = null;
+                super.setData.apply(this, arguments);
+                onConfigLoaded(null);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function updateCaptureData(points:Number, param2:Boolean, param3:Boolean, param4:Number, timeLeft:String, vehiclesCount:String):void
         {
-            super.updateCaptureData.apply(this, arguments);
-            if (!cfg)
-                return;
-            m_points = points;
-            m_timeLeft = timeLeft;
-            m_vehiclesCount = vehiclesCount;
-            // TODO: convert from AS2
-            /*
-            if (!Config.config.captureBar.enabled)
+            try
             {
-                wrapper.m_playersTF.htmlText = "<font size='15' face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
-                wrapper.m_timerTF.htmlText = "<font size='15' face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
+                super.updateCaptureData.apply(this, arguments);
+                if (!cfg)
+                    return;
+                m_points = points;
+                m_timeLeft = timeLeft;
+                m_vehiclesCount = vehiclesCount;
+                // TODO: convert from AS2
+                /*
+                if (!Config.config.captureBar.enabled)
+                {
+                    wrapper.m_playersTF.htmlText = "<font size='15' face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
+                    wrapper.m_timerTF.htmlText = "<font size='15' face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
+                }
+                */
+                updateTextFields();
             }
-            */
-            updateTextFields();
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function updateTitle(param1:String):void
         {
-            super.updateTitle(param1);
-            if (!cfg)
-                return;
-            m_captured = true;
-            updateTextFields();
+            try
+            {
+                super.updateTitle(param1);
+                if (!cfg)
+                    return;
+                m_captured = true;
+                updateTextFields();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         // PRIVATE
@@ -89,7 +108,7 @@ package com.xvm.battle.teamBasesPanel
                 setupTextField(tfTimeLeft, "players");
                 setupTextField(pointsTextField, "points");
                 setupProgressBar();
-                m_baseNumText = Xfw.cmd(XVM_BATTLE_COMMAND_CAPTURE_BAR_GET_BASE_NUM_TEXT, id);
+                m_baseNumText = Xfw.cmd(BattleCommands.CAPTURE_BAR_GET_BASE_NUM_TEXT, id);
                 updateTextFields();
             }
             catch (ex:Error)

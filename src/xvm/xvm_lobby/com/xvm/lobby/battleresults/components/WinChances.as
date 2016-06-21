@@ -6,8 +6,10 @@ package com.xvm.lobby.battleresults.components
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
     import com.xvm.types.stat.*;
     import flash.text.*;
+    import flash.utils.Dictionary;
     import net.wg.gui.lobby.battleResults.*;
 
     public class WinChances
@@ -16,6 +18,8 @@ package com.xvm.lobby.battleresults.components
 
         private var textField:TextField = null;
 
+        private var arenaUniqueID:String = null;
+
         public function WinChances(page:BattleResults)
         {
             if (Config.networkServicesSettings.chanceResults == false && Config.config.battleResults.showBattleTier == false)
@@ -23,11 +27,17 @@ package com.xvm.lobby.battleresults.components
             this.page = page;
 
             // Add stat loading handler
-            Stat.loadBattleResultsStat(this, onStatLoaded, page.as_name.replace("battleResults_", ""));
+            // Load battle stat
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLERESULTS, onStatLoaded)
+            arenaUniqueID = page.as_name.replace("battleResults_", "");
+            Stat.loadBattleResultsStat(arenaUniqueID);
         }
 
-        private function onStatLoaded(response:Object):void
+        private function onStatLoaded(e:ObjectEvent):void
         {
+            if (e.result != arenaUniqueID)
+                return;
+
             //Logger.add("onStatLoaded()");
             if (textField == null)
             {
@@ -46,10 +56,11 @@ package com.xvm.lobby.battleresults.components
             // fix stat data
             //Logger.addObject(page.data, 3);
             var playerNames:Vector.<String> = new Vector.<String>();
-            for (var name:String in response.players)
+            var stats:Dictionary = Stat.getBattleResultsStat(arenaUniqueID);
+            for (var name:String in stats)
             {
                 playerNames.push(name);
-                var sd:StatData = Stat.getData(name);
+                var sd:StatData = stats[name];
                 if (sd == null)
                     continue;
                 sd.team = XfwConst.TEAM_ENEMY;
@@ -63,7 +74,8 @@ package com.xvm.lobby.battleresults.components
                 }
             }
 
-            var chanceText:String = Chance.GetChanceText(playerNames, Config.networkServicesSettings.chanceResults, Config.config.battleResults.showBattleTier);
+            var chanceText:String = Chance.GetChanceText(playerNames, stats,
+                Config.networkServicesSettings.chanceResults, Config.config.battleResults.showBattleTier);
             if (chanceText)
             {
                 chanceText = "<p class='txt' align='right'>" + chanceText + '</p>';

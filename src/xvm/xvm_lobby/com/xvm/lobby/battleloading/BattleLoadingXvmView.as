@@ -37,6 +37,9 @@ package com.xvm.lobby.battleloading
 
             logBriefConfigurationInfo();
 
+            Stat.clearBattleStat();
+            Stat.loadBattleStat();
+
             waitInit();
         }
 

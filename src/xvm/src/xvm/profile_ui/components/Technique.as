@@ -22,7 +22,7 @@ package xvm.profile_ui.components
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.clik.data.*;
     import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.IDataProvider;
+    import scaleform.clik.interfaces.*;
     import xvm.profile_ui.*;
 
     public class Technique extends Sprite
@@ -107,6 +107,8 @@ package xvm.profile_ui.components
 
                 if (Config.networkServicesSettings.statAwards)
                 {
+                    Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
+
                     Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, playerId);
 
                     // override renderers
@@ -220,7 +222,7 @@ package xvm.profile_ui.components
             try
             {
                 // Load stat
-                Stat.loadUserData(this, onStatLoaded, playerName, false);
+                Stat.loadUserData(playerName);
             }
             catch (ex:Error)
             {
@@ -286,6 +288,7 @@ package xvm.profile_ui.components
                 if (button == null)
                     return;
                 button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
+                button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
                 page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
 
                 page.listComponent.techniqueList.validateNow();
@@ -338,10 +341,14 @@ package xvm.profile_ui.components
 
         // stat
 
-        private function onStatLoaded():void
+        private function onStatLoaded(e:ObjectEvent):void
         {
             //Logger.add("onStatLoaded: " + playerName);
+
             if (_disposed)
+                return;
+
+            if (e.result != playerName)
                 return;
 
             try

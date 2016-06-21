@@ -5,10 +5,9 @@
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.types.*;
     import com.xvm.types.stat.*;
-    import com.xvm.types.veh.*;
     import com.xvm.vo.*;
+    import flash.utils.*;
     import org.idmedia.as3commons.util.*;
 
     public class Macros
@@ -126,9 +125,9 @@ package com.xvm
 
         // todo
 
-        public static function RegisterStatisticsMacros(pname:String):void
+        public static function RegisterStatisticsMacros(pname:String, stat:StatData):void
         {
-            _instance._RegisterStatisticsMacros(pname);
+            _instance._RegisterStatisticsMacros(pname, stat);
         }
 
         //
@@ -938,9 +937,8 @@ package com.xvm
          * Register stat macros values
          * @param pname player name without extra tags (clan, region, etc)
          */
-        private function _RegisterStatisticsMacros(pname:String):void
+        private function _RegisterStatisticsMacros(pname:String, stat:StatData):void
         {
-            var stat:StatData = Stat.getData(pname);
             if (stat == null)
                 return;
 
@@ -1263,7 +1261,7 @@ package com.xvm
             return name;
         }
 
-        private static function formatWinChancesText(isShowChance:Boolean, isShowLiveChance:Boolean):String
+        private static function formatWinChancesText(stats:Dictionary, isShowChance:Boolean, isShowLiveChance:Boolean):String
         {
             if (!Config.networkServicesSettings.chance)
                 return "";
@@ -1272,9 +1270,9 @@ package com.xvm
                 return "";
             }
             var playerNames:Vector.<String> = new Vector.<String>();
-            for (var name:String in Stat.stat)
+            for (var name:String in stats)
                 playerNames.push(name);
-            var ChancesText:String = Chance.GetChanceText(playerNames, true, false, true);
+            var ChancesText:String = Chance.GetChanceText(playerNames, stats, true, false, true);
             var temp: Array = ChancesText.split('|', 2);
             var tempA: Array = temp[0].split(':', 2);
             if (isShowChance)

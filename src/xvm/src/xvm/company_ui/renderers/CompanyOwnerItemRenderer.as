@@ -100,7 +100,7 @@ package xvm.company_ui.renderers
             else
             {
                 if (updateCheckBox.selected)
-                    Stat.loadUserData(null, null, playerName, false);
+                    Stat.loadUserData(playerName);
             }
         }
 

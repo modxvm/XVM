@@ -6,8 +6,9 @@ package com.xvm.battle
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.BattleXvmView;
+    import com.xvm.battle.*;
     import com.xvm.battle.fragCorrelationBar.FragCorrelationBarXvmView;
     import com.xvm.battle.fullStats.FullStatsXvmView;
     import com.xvm.battle.playersPanel.PlayersPanelXvmView;
@@ -37,7 +38,16 @@ package com.xvm.battle
             super.entryPoint();
             Macros.RegisterGlobalMacrosData();
             Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
+            Stat.clearBattleStat();
+            Stat.loadBattleStat();
         }
+
+        private function onStatLoaded(e:ObjectEvent):void
+        {
+            Logger.addObject("onStatLoaded: " + e, 2);
+        }
+
 
         public override function get views():Object
         {

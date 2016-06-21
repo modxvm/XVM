@@ -9,6 +9,7 @@ package com.xvm
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
     import com.xvm.vo.VOVehicleData;
+    import flash.utils.Dictionary;
 
     public class Chance
     {
@@ -24,14 +25,15 @@ package com.xvm
             return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
         }
 
-        public static function GetChanceText(playerNames:Vector.<String>, showChance:Boolean, showBattleTier:Boolean, showLive:Boolean = false):String
+        public static function GetChanceText(playerNames:Vector.<String>, stats:Dictionary,
+            showChance:Boolean, showBattleTier:Boolean, showLive:Boolean = false):String
         {
             var teamsCount:Object = null;
             Logger.add("========== begin chance calculation ===========");
             try
             {
                 Logger.add("playerNames: " + playerNames.join(", "));
-                teamsCount = CalculateTeamPlayersCount(playerNames);
+                teamsCount = CalculateTeamPlayersCount(playerNames, stats);
                 Logger.add("teamsCount=" + teamsCount.ally + "/" + teamsCount.enemy);
                 // non empty teams required
                 if (teamsCount.ally == 0 || teamsCount.enemy == 0)
@@ -41,11 +43,11 @@ package com.xvm
 
                 Chance.battleTier = Macros.getGlobalValue("battletier");
                 if (isNaN(Chance.battleTier))
-                    Chance.battleTier = GuessBattleTier(playerNames);
+                    Chance.battleTier = GuessBattleTier(playerNames, stats);
                 Logger.add("battleTier=" + Chance.battleTier);
 
-                chanceG = GetChance(playerNames, ChanceFuncG);
-                chanceT = GetChance(playerNames, ChanceFuncT);
+                chanceG = GetChance(playerNames, stats, ChanceFuncG);
+                chanceT = GetChance(playerNames, stats, ChanceFuncT);
 
                 var text:String = "";
 
@@ -84,7 +86,7 @@ package com.xvm
 
         // PRIVATE
 
-        private static function GetChance(playerNames:Vector.<String>, chanceFunc:Function):Object
+        private static function GetChance(playerNames:Vector.<String>, stats:Dictionary, chanceFunc:Function):Object
         {
             var Ka:Number = 0;
             var Ke:Number = 0;
@@ -92,7 +94,7 @@ package com.xvm
             for (var i:int = 0; i < len; ++i)
             {
                 var pname:String = playerNames[i];
-                var stat:StatData = Stat.getData(pname);
+                var stat:StatData = stats[pname];
                 if (stat.v.data == null) {
                     //if (stat.icon == "ussr-Observer" || stat.icon == "noImage")
                     //    continue;
@@ -188,14 +190,14 @@ package com.xvm
         }
 
         // return: { ally: Number, enemy: Number }
-        private static function CalculateTeamPlayersCount(playerNames:Vector.<String>):Object
+        private static function CalculateTeamPlayersCount(playerNames:Vector.<String>, stats:Dictionary):Object
         {
             var nally:Number = 0;
             var nenemy:Number = 0;
             for (var i:int = 0; i < playerNames.length; ++i )
             {
                 var pname:String = playerNames[i];
-                var stat:StatData = Stat.getData(pname);
+                var stat:StatData = stats[pname];
                 if (stat == null)
                     continue;
                 var vdata:VOVehicleData = stat.v.data;
@@ -289,14 +291,14 @@ package com.xvm
             return htmlText;
         }
 
-        private static function GuessBattleTier(playerNames:Vector.<String>):Number
+        private static function GuessBattleTier(playerNames:Vector.<String>, stats:Dictionary):Number
         {
             // 1. Collect all vehicles info
             var vis:Array = [];
             for (var i:int = 0; i < playerNames.length; ++i )
             {
                 var pname:String = playerNames[i];
-                var stat:StatData = Stat.getData(pname);
+                var stat:StatData = stats[pname];
                 var vdata:VOVehicleData = stat.v.data;
                 if (vdata == null || vdata.key == "ussr:Observer")
                     continue;

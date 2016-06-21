@@ -6,6 +6,7 @@ package xvm.company_ui.renderers
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
     import com.xvm.types.stat.*;
     import flash.events.*;
     import flash.text.*;
@@ -34,6 +35,8 @@ package xvm.company_ui.renderers
                 effField.height = proxy.textField.height;
                 effField.htmlText = "";
                 proxy.addChild(effField);
+
+                Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
             }
             catch (ex:Error)
             {
@@ -53,7 +56,7 @@ package xvm.company_ui.renderers
             var pname:String = WGUtils.GetPlayerName(data.label);
             App.utils.scheduler.scheduleTask(function():void
             {
-                Stat.loadUserData(this, onStatLoaded, pname, false);
+                Stat.loadUserData(pname);
             }, 10);
         }
 
@@ -85,7 +88,7 @@ package xvm.company_ui.renderers
 
         // PRIVATE
 
-        private function onStatLoaded():void
+        private function onStatLoaded(e:ObjectEvent):void
         {
             effField.htmlText = (proxy.data == null || !proxy.data.label) ? "--"
                 : "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(proxy.data.label) + "</span>";

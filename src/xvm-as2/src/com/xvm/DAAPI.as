@@ -11,10 +11,6 @@ class com.xvm.DAAPI extends MovieClip
     public static function initialize()
     {
         // create stubs for AS2->Python DAAPI function binding
-        _root.py_xvm_log = null;
-        _root.py_xvm_getScreenSize = null;
-        _root.py_xvm_captureBarGetBaseNumText = null;
-        _root.py_xvm_loadBattleStat = null;
         _root.py_xvm_pythonMacro = null;
         _root.py_xvm_minimapClick = null;
 
@@ -24,26 +20,6 @@ class com.xvm.DAAPI extends MovieClip
     }
 
     // AS2->Python DAAPI methods
-
-    public static function py_xvm_log():Void
-    {
-        _root.py_xvm_log.apply(null, arguments);
-    }
-
-    public static function py_xvm_getScreenSize()
-    {
-        return _root.py_xvm_getScreenSize();
-    }
-
-    public static function py_xvm_captureBarGetBaseNumText(id:Number):String
-    {
-        return _root.py_xvm_captureBarGetBaseNumText(id);
-    }
-
-    public static function py_xvm_loadBattleStat():Void
-    {
-        _root.py_xvm_loadBattleStat();
-    }
 
     public static function py_xvm_pythonMacro(arg:String):String
     {

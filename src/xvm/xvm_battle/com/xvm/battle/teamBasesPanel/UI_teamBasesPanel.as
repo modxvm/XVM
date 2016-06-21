@@ -26,16 +26,11 @@ package com.xvm.battle.teamBasesPanel
 
         override protected function configUI():void
         {
-            super.configUI();
-            DEFAULT_Y = y;
-            onConfigLoaded(null);
-        }
-
-        override public function as_add(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:String, param7:String):void
-        {
             try
             {
-                super.as_add(param1, param2, param3, param4, param5, param6, param7);
+                super.configUI();
+                DEFAULT_Y = y;
+                onConfigLoaded(null);
             }
             catch (ex:Error)
             {

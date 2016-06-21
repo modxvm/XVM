@@ -54,6 +54,16 @@ def onXfwCommand(cmd, *args):
                 if ctrl:
                     ctrl.invalidateArenaInfo()
             return (None, True)
+    def py_xvm_loadBattleStat(self):
+        stats.getBattleStat(None, self.flashObject)
+
+    def py_xvm_pythonMacro(self, arg):
+        #log('py_xvm_pythonMacro: {}'.format(arg))
+        return python_macro.process_python_macro(arg)
+
+    def py_xvm_minimapClick(self, path):
+        #log('py_xvm_minimapClick: {}'.format(path))
+        return xmqp_events.send_minimap_click(path)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)

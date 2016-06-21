@@ -6,6 +6,7 @@ package xvm.battleloading_ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
     import com.xvm.vo.*;
     import com.xvm.lobby.vo.*;
     import com.xvm.types.stat.*;
@@ -79,8 +80,12 @@ package xvm.battleloading_ui.components
         {
             proxy.vehicleIconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
 
-            // Add stat loading handler
-            Stat.loadBattleStat(this, onStatLoaded);
+            // Load battle stat
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
+            if (Stat.battleStatLoaded)
+            {
+                onStatLoaded(null);
+            }
 
             // fix bad align in 0.9.9, 0.9.10
             var dx:int = team == XfwConst.TEAM_ALLY ? 23 : -20;
@@ -345,7 +350,7 @@ package xvm.battleloading_ui.components
             }
         }
 
-        private function onStatLoaded():void
+        private function onStatLoaded(e:ObjectEvent):void
         {
             //Logger.add("onStatLoaded: " + _model.playerName);
             proxy.vehicleField.condenseWhite = false;
@@ -362,7 +367,7 @@ package xvm.battleloading_ui.components
             if (!Macros.GlobalBoolean(cfg.clanIcon.show))
                 return;
 
-            var statData:StatData = Stat.getData(_model.playerName);
+            var statData:StatData = Stat.battleStat[_model.playerName];
             if (statData == null)
                 return;
 
