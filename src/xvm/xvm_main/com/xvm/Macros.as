@@ -788,7 +788,7 @@ package com.xvm
             var vdata:VOVehicleData = VehicleInfo.get(Xfw.cmd(XvmCommandsInternal.GET_MY_VEH_ID));
 
             // {{my-veh-id}}
-            m_globals["my-veh-id"] = vdata.vid;
+            m_globals["my-veh-id"] = vdata.vehId;
             // {{my-vehicle}} - Chaffee
             m_globals["my-vehicle"] = vdata.localizedName;
             // {{my-vehiclename}} - usa-M24_Chaffee
@@ -802,7 +802,7 @@ package com.xvm
             // {{my-vtype-l}} - Medium Tank
             m_globals["my-vtype-l"] = Locale.get(vdata.vtype);
             // {{c:my-vtype}}
-            m_globals["c:my-vtype"] = MacrosUtils.GetVTypeColorValue(vdata.vid);
+            m_globals["c:my-vtype"] = MacrosUtils.GetVTypeColorValue(vdata.vehId);
             // {{my-battletier-min}}
             m_globals["my-battletier-min"] = vdata.tierLo;
             // {{my-battletier-max}}
@@ -1198,6 +1198,11 @@ package com.xvm
                 case "US":
                     if (pname == "sirmax" || pname == "0x01" || pname == "_SirMax_")
                         return "«sir Max» (XVM)";
+                    break;
+
+                case "ST":
+                    if (pname == "xvm_1")
+                        return "«xvm»";
                     break;
             }
 

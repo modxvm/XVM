@@ -7,7 +7,6 @@ package com.xvm
     import com.xfw.*;
     import com.xfw.events.*;
     import com.xvm.types.stat.*;
-    import com.xvm.types.veh.*;
     import flash.events.*;
     import flash.utils.*;
 
@@ -111,10 +110,11 @@ package com.xvm
         private function battleLoaded(data:Object):Object
         {
             //Logger.add("TRACE: battleLoaded()");
+            var updatedPlayers:Array = [];
             try
             {
                 //Logger.addObject(data, 3);
-                parseResult(data, battleCache);
+                updatedPlayers = parseResult(data, battleCache);
             }
             catch (ex:Error)
             {
@@ -127,7 +127,7 @@ package com.xvm
                 battleStatLoaded = true;
                 battleStatLoading = false;
                 //Logger.add("Stat Loaded");
-                dispatchEvent(new Event(COMPLETE_BATTLE));
+                dispatchEvent(new ObjectEvent(COMPLETE_BATTLE, updatedPlayers));
             }
             //Logger.add("TRACE: battleLoaded(): end");
             return null;
@@ -174,19 +174,22 @@ package com.xvm
             return null;
         }
 
-        private function parseResult(data:Object, cache:Dictionary):void
+        private function parseResult(data:Object, cache:Dictionary):Array
         {
+            var updatedPlayers:Array = [];
             if (data.players)
             {
                 for (var name:String in data.players)
                 {
                     var sd:StatData = ObjectConverter.convertData(data.players[name], StatData);
+                    updatedPlayers.push(name);
                     calculateStatValues(sd);
                     cache[name] = sd;
                     Macros.RegisterStatisticsMacros(name, sd);
                     //Logger.addObject(sd, 3, "stat[" + name + "]");
                 }
             }
+            return updatedPlayers;
         }
 
         private function loadUserData(value:String):void

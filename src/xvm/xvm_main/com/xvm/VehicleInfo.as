@@ -5,7 +5,6 @@
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.types.veh.*;
     import com.xvm.vo.VOVehicleData;
 
     public class VehicleInfo
@@ -99,9 +98,9 @@ package com.xvm
                             data.shortName = preferredNames['short'];
                     }
                     //Logger.addObject(data);
-                    vehicles[data.vid] = data;
-                    vehiclesMapKey[data.key] = data.vid; // for getByIcon()
-                    vehiclesMapName[data.localizedShortName] = data.vid; // for getByLocalizedShortName()
+                    vehicles[data.vehId] = data;
+                    vehiclesMapKey[data.key] = data.vehId; // for getByIcon()
+                    vehiclesMapName[data.localizedShortName] = data.vehId; // for getByLocalizedShortName()
                 }
             }
             catch (ex:Error)

@@ -23,7 +23,7 @@ class wot.Minimap.view.MapSizeLabel
 
         if (cfg.shadow.enabled)
         {
-            tf.filters = [ Utils.extractShadowFilter(cfg.shadow) ];
+            tf.filters = [ Utils.createShadowFiltersFromConfig(cfg.shadow) ];
         }
     }
 

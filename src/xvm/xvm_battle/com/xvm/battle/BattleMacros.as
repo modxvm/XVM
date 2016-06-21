@@ -6,6 +6,7 @@ package com.xvm.battle
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.types.*;
     import com.xvm.battle.vo.*;
     import com.xvm.vo.*;
     import org.idmedia.as3commons.util.*;
@@ -123,7 +124,7 @@ package com.xvm.battle
             // spotted
 
             var vdata:VOVehicleData = playerState.vehicleData;
-            var isArty:Boolean = (vdata != null && vdata.vclass == "SPG");
+            var isArty:Boolean = (vdata != null && vdata.vclass == VehicleType.SPG);
 
             // {{spotted}}
             pdata["spotted"] = function(o:VOPlayerState):String
@@ -249,7 +250,7 @@ package com.xvm.battle
             // {{c:system}}
             pdata["c:system"] = function(o:VOPlayerState):String
             {
-                return "#" + StringUtils.leftPad(MacrosUtils.getSystemColor(o.entityName, o.isDead, o.isBlown).toString(16), 6, "0");
+                return XfwUtils.toHtmlColor(MacrosUtils.getSystemColor(o.entityName, o.isDead, o.isBlown));
             }
 
             // hitlog

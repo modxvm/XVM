@@ -75,6 +75,12 @@ package com.xvm.battle.playersPanel
             super.as_setPanelMode(state);
         }
 
+        override public function setPersonalStatus(param1:uint):void
+        {
+            Logger.addObject("setPersonalStatus: " + param1);
+            super.setPersonalStatus(param1);
+        }
+
         //override public function as_setIsIntaractive(param1:Boolean):void
         //{
             ////Logger.add("UI_PlayersPanel.as_setIsIntaractive(): " + param1);

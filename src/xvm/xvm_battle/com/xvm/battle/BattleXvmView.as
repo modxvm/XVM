@@ -42,7 +42,7 @@ package com.xvm.battle
             onConfigLoaded(null);
         }
 
-        private function onStatLoaded(e:Event):void
+        private function onStatLoaded(e:ObjectEvent):void
         {
             //Logger.add("onStatLoaded");
             onConfigLoaded(null);

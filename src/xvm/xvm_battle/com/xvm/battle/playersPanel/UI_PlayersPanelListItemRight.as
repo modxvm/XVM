@@ -1,4 +1,5 @@
 /**
+on/**
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
@@ -18,6 +19,7 @@ package com.xvm.battle.playersPanel
         {
             super();
             proxy = new PlayersPanelListItemProxy(this, false);
+            addChild(proxy);
         }
 
         override protected function configUI():void
@@ -25,7 +27,7 @@ package com.xvm.battle.playersPanel
             try
             {
                 super.configUI();
-                proxy.configUI();
+                proxy.onProxyConfigUI();
             }
             catch (ex:Error)
             {
@@ -37,7 +39,7 @@ package com.xvm.battle.playersPanel
         {
             try
             {
-                proxy.dispose();
+                proxy.onProxyDispose();
                 super.onDispose();
             }
             catch (ex:Error)
@@ -64,9 +66,10 @@ package com.xvm.battle.playersPanel
             try
             {
                 super.setPlayerNameProps(userProps);
+                proxy.setPlayerNameProps(userProps);
                 if (proxy.xvm_enabled)
                 {
-                    proxy.setPlayerNameProps(userProps);
+                    proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_USER_PROPS);
                 }
             }
             catch (ex:Error)
@@ -84,15 +87,15 @@ package com.xvm.battle.playersPanel
                 {
                     if (isInvalid(PlayersPanelInvalidationType.VEHILCE_NAME))
                     {
-                        proxy.updateVehicleName();
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_VEHICLE_NAME);
                     }
                     if (isInvalid(PlayersPanelInvalidationType.FRAGS))
                     {
-                        proxy.updateFrags();
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_FRAGS);
                     }
                     if (isInvalid(PlayersPanelInvalidationType.SELECTED))
                     {
-                        proxy.onDrawSelected();
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_SELECTED);
                     }
                     if (isInvalid(InvalidationType.STATE))
                     {

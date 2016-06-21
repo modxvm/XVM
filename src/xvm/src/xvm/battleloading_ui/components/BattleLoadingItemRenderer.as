@@ -144,7 +144,7 @@ package xvm.battleloading_ui.components
                     var fullPlayerName:String = App.utils.commons.getFullPlayerName(
                         App.utils.commons.getUserProps(_model.playerName, _model.clanAbbrev, _model.region, _model.igrType));
                     var vdata:VOVehicleData = VehicleInfo.getByIcon(_model.vehicleIcon);
-                    Macros.RegisterMinimalMacrosData(_model.accountDBID, fullPlayerName, vdata.vid, team == XfwConst.TEAM_ALLY);
+                    Macros.RegisterMinimalMacrosData(_model.accountDBID, fullPlayerName, vdata.vehId, team == XfwConst.TEAM_ALLY);
 
                     // Alternative icon set
                     if (!proxy.vehicleIconLoader.sourceAlt || proxy.vehicleIconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)

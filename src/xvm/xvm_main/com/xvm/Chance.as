@@ -7,7 +7,6 @@ package com.xvm
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.stat.*;
-    import com.xvm.types.veh.*;
     import com.xvm.vo.VOVehicleData;
     import flash.utils.Dictionary;
 
@@ -19,6 +18,18 @@ package com.xvm
         private static var chanceT:Object;
 
         //public static var lastChances:Object = null;
+
+        // TODO: is required?
+        /*
+        public static function ShowChance(tf:TextField, showLive:Boolean):String
+        {
+            var text = GetChanceText(showLive);
+            if (text == null)
+                return tf.text;
+            tf.htmlText = (tf.text == "" ? "" : tf.text + " | ") + text;
+            return tf.htmlText;
+        }
+        */
 
         public static function ChanceError(text:String):String
         {
@@ -60,11 +71,11 @@ package com.xvm
                 {
                     text = Locale.get("Chance to win") + ": " + FormatChangeText("", chanceT);
                     //text = Locale.get("Team strength") + ": " + FormatChangeText("", chanceT);
-                    /*if (showLive)
+                    if (showLive)
                     {
-                        var chanceLiveT:Object = GetChance(playerNames, ChanceFuncLiveT, true);
+                        var chanceLiveT:Object = GetChance(playerNames, stats, ChanceFuncLiveT, true);
                         text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chanceLiveT);
-                    }*/
+                    }
                 }
 
                 if (showBattleTier && Chance.battleTier != 0)
@@ -86,17 +97,19 @@ package com.xvm
 
         // PRIVATE
 
-        private static function GetChance(playerNames:Vector.<String>, stats:Dictionary, chanceFunc:Function):Object
+        private static function GetChance(playerNames:Vector.<String>, stats:Dictionary, chanceFunc:Function, live:Boolean = false):Object
         {
             var Ka:Number = 0;
             var Ke:Number = 0;
             var len:int = playerNames.length;
+            var count:int = 0;
             for (var i:int = 0; i < len; ++i)
             {
                 var pname:String = playerNames[i];
                 var stat:StatData = stats[pname];
+                count += live && stat.alive ? 1 : 0;
                 if (stat.v.data == null) {
-                    //if (stat.icon == "ussr-Observer" || stat.icon == "noImage")
+                                    //if (stat.icon == "ussr-Observer" || stat.icon == "noImage")
                     //    continue;
                     return { error: "[1] No data for: " + stat.v.id };
                 }
@@ -110,7 +123,7 @@ package com.xvm
             Ka /= maxTeamsCount;
             Ke /= maxTeamsCount;
 
-            var result:Object = PrepareChanceResults(Ka, Ke, len);
+            var result:Object = PrepareChanceResults(Ka, Ke, count);
             Logger.add("Ka=" + Ka.toFixed(2) + " Ke=" + Ke.toFixed(2) + " raw=" + result.raw + " percent=" + result.percent);
             return result;
         }
@@ -144,6 +157,13 @@ package com.xvm
 
             // 5
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
+        }
+
+        private static function ChanceFuncLiveG(stat:StatData):Number
+        {
+            if (!stat.alive)
+                return 0;
+            return ChanceFuncG(stat);
         }
 
         private static function ChanceFuncT(stat:StatData):Number
@@ -187,6 +207,13 @@ package com.xvm
 
             // 5
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
+        }
+
+        private static function ChanceFuncLiveT(stat:StatData):Number
+        {
+            if (!stat.alive)
+                return 0;
+            return ChanceFuncT(stat);
         }
 
         // return: { ally: Number, enemy: Number }

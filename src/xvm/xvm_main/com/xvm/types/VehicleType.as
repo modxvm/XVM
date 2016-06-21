@@ -2,7 +2,7 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.types.veh
+package com.xvm.types
 {
     public class VehicleType
     {

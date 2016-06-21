@@ -7,8 +7,7 @@ package com.xvm
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.types.veh.*;
-    import com.xvm.vo.VOVehicleData;
+    import com.xvm.vo.*;
     import org.idmedia.as3commons.util.*;
 
     public class MacrosUtils
@@ -62,7 +61,7 @@ package com.xvm
 
             if (darker)
                 color = GraphicsUtil.darkenColor(color, 50);
-            return prefix + StringUtils.leftPad(color.toString(16), 6, "0");
+            return XfwUtils.toHtmlColor(color, prefix);
         }
 
         public static function GetDynamicAlphaValue(type:Number, value:Number):Number
@@ -117,7 +116,7 @@ package com.xvm
                 var value:int = XfwUtils.toInt(Config.config.colors.vtype[vtype], -1);
                 if (value < 0)
                     return null;
-                return prefix + StringUtils.leftPad(value.toString(16), 6, "0");
+                return XfwUtils.toHtmlColor(value, prefix);
             }
             catch (ex:Error)
             {
@@ -139,7 +138,7 @@ package com.xvm
                 var value:int = XfwUtils.toInt(Config.config.colors.damage[key], -1);
                 if (value < 0)
                     return null;
-                return prefix + StringUtils.leftPad(value.toString(16), 6, "0");
+                return XfwUtils.toHtmlColor(value, prefix);
             }
             catch (ex:Error)
             {
@@ -157,7 +156,7 @@ package com.xvm
                 var value:int = XfwUtils.toInt(Config.config.colors.dmg_kind[dmg_kind], -1);
                 if (value < 0)
                     return null;
-                return prefix + StringUtils.leftPad(value.toString(16), 6, "0");
+                return XfwUtils.toHtmlColor(value, prefix);
             }
             catch (ex:Error)
             {
@@ -204,7 +203,7 @@ package com.xvm
                 var vtype:String = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
                 if (!vtype || !Config.config.colors.vtype[vtype])
                     return "";
-                return "#" + StringUtils.leftPad(XfwUtils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
+                return XfwUtils.toHtmlColor(XfwUtils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE));
             }
             catch (ex:Error)
             {
@@ -223,7 +222,7 @@ package com.xvm
                     value += "_arty";
                 if (!Config.config.colors.spotted[value])
                     return "";
-                return "#" + StringUtils.leftPad(XfwUtils.toInt(Config.config.colors.spotted[value], 0xFFFFFE).toString(16), 6, "0");
+                return XfwUtils.toHtmlColor(XfwUtils.toInt(Config.config.colors.spotted[value], 0xFFFFFE));
             }
             catch (ex:Error)
             {

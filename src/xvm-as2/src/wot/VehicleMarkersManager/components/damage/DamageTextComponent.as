@@ -63,7 +63,6 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         tf.htmlText = "<textformat leading='-2'><p class='xvm_damageText'>" + text + "</p></textformat>";
         //com.xvm.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
         //com.xvm.Logger.add(tf.htmlText);
-        //com.xvm.Logger.add(Utils.createCSSFromConfig(cfg.font, color, "xvm_damageText"));
 
         var dummy = new DamageTextAnimation(cfg, tf); // defines and starts
     }
@@ -86,6 +85,18 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
         tf.html = true;
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig(cfg.font, color, "xvm_damageText"));
+    /*
+    public static function createCSSFromConfig(config_font:Object, color:Number, className:String):String
+    {
+        return createCSS(className,
+            color,
+            config_font && config_font.name ? config_font.name : "$FieldFont",
+            config_font && config_font.size ? config_font.size : 13,
+            config_font && config_font.align ? config_font.align : "center",
+            config_font && config_font.bold ? true : false,
+            config_font && config_font.italic ? true : false);
+    }
+    */
 
         tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance, cfg.shadow.angle, shadowColor,
             cfg.shadow.alpha, cfg.shadow.size, cfg.shadow.strength) ];

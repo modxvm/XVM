@@ -148,7 +148,7 @@ package com.xvm.lobby.widgets
             {
                 var values:Array = lines[i].split(";");
                 var period = int(values[0]);
-                var vi = VehicleInfo.getInfo2ByVid(int(values[1]));
+                var vi = VehicleInfo.getInfo2ByVehId(int(values[1]));
                 Logger.add(lines[i]);
             }
             return "";

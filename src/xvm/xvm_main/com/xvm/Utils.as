@@ -9,6 +9,7 @@ package com.xvm
     import com.xvm.types.cfg.*;
     import flash.filters.*;
     import mx.utils.ObjectUtil;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class Utils
     {
@@ -114,17 +115,14 @@ package com.xvm
             return str;
         }
 
-        public static function vehicleClassToVehicleType(vclass:String):String
+        // Fix 'img://...' to '../...'> (res_mods/x.x.x/gui/maps/icons)
+        // Fix 'xvm://...' to '../../XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
+        // Fix 'cfg://...' to '../../XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
+        public static function fixImgTagSrc(str:String):String
         {
-            switch (vclass)
-            {
-                case "lightTank": return "LT";
-                case "mediumTank": return "MT";
-                case "heavyTank": return "HT";
-                case "SPG": return "SPG";
-                case "AT-SPG": return "TD";
-                default: return vclass;
-            }
+            if (StringUtils.startsWith(str.toLowerCase(), "img://gui/maps/icons/"))
+                return "../" + str.slice(10);
+            return "../../" + Utils.fixImgTag(str).split("img://").join("");
         }
 
         // 'RU1', 'RU10', 'RU2' -> 'RU1', 'RU2', 'RU10'
@@ -194,5 +192,68 @@ package com.xvm
 
             return v;
         }
+
+        // Get relative to screen resolution x or y coordinates for using when applying horizontal or vertical align to object
+        public static function HVAlign(align:String, value:Number, isVAlign:Boolean):Number
+        {
+            // 'align' allows only 'left', 'right', 'center' values for horizontal alignment and 'top', 'bottom', 'middle' or "center" for vertical
+            switch (align)
+            {
+                case 'left':
+                    return 0;
+                case 'right' :
+                    return App.appWidth - value;
+                case 'center':
+                    if (!isVAlign)
+                    {
+                      return (App.appWidth / 2) - (value / 2);
+                    }
+                    else
+                    {
+                      return (App.appHeight / 2) - (value / 2);
+                    }
+                case 'top':
+                    return 0;
+                case 'bottom':
+                    return App.appHeight - value;
+                case 'middle':
+                    return (App.appHeight / 2) - (value / 2);
+            }
+            return value;
+        }
+
+        /*
+        public static function getChildrenOf(target:MovieClip, recursive:Boolean):Array
+        {
+            var result:Array = [];
+            for (var i in target)
+            {
+                if (target[i] instanceof MovieClip)
+                {
+                    result.push(target[i]);
+
+                    // Concatenate children of clips at this level,recurse
+                    if (recursive)
+                        result = result.concat(getChildrenOf(target[i],true));
+                }
+            }
+            return result;
+        }
+
+        public static function removeChildren(mc:MovieClip, match:Function):Void
+        {
+            var children:Array = getChildrenOf(mc, false);
+            var len:Number = children.length;
+            for (var i:Number = 0; i < len; ++i)
+            {
+                var child:MovieClip = MovieClip(children[i]);
+                if (child == null)
+                    continue;
+                if (match != null && !match(child))
+                    continue
+                child.removeMovieClip();
+            }
+        }
+        */
     }
 }

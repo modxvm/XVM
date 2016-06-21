@@ -81,7 +81,7 @@ package xvm.squad_ui.components
             {
                 if (vehicleTierField == null)
                     createVehicleTierField();
-                Macros.RegisterMinimalMacrosData(proxy.data.dbID, proxy.data.fullName, vdata.vid);
+                Macros.RegisterMinimalMacrosData(proxy.data.dbID, proxy.data.fullName, vdata.vehId);
                 vehicleTierField.htmlText = "<p class='xvm_vehicleTier' align='right'>" +
                     Macros.Format(proxy.data.userName, Config.config.squad.formatInfoField) + "</p>";
             }

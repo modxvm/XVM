@@ -18,56 +18,93 @@ package com.xvm.battle.playersPanel
         {
             super();
             proxy = new PlayersPanelListItemProxy(this, true);
+            addChild(proxy);
         }
 
         override protected function configUI():void
         {
-            super.configUI();
-            proxy.configUI();
+            try
+            {
+                super.configUI();
+                proxy.onProxyConfigUI();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override protected function onDispose():void
         {
-            proxy.dispose();
-            super.onDispose();
+            try
+            {
+                proxy.onProxyDispose();
+                super.onDispose();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function setIsSelected(isSelected:Boolean):void
         {
-            super.setIsSelected(isSelected);
-            proxy.setIsSelected(isSelected);
+            try
+            {
+                super.setIsSelected(isSelected);
+                proxy.setIsSelected(isSelected);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function setPlayerNameProps(userProps:IUserProps):void
         {
-            super.setPlayerNameProps(userProps);
-            if (proxy.xvm_enabled)
+            try
             {
+                super.setPlayerNameProps(userProps);
                 proxy.setPlayerNameProps(userProps);
+                if (proxy.xvm_enabled)
+                {
+                    proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_USER_PROPS);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 
         override protected function draw():void
         {
-            super.draw();
-            if (proxy.xvm_enabled)
+            try
             {
-                if (isInvalid(PlayersPanelInvalidationType.VEHILCE_NAME))
+                super.draw();
+                if (proxy.xvm_enabled)
                 {
-                    proxy.updateVehicleName();
+                    if (isInvalid(PlayersPanelInvalidationType.VEHILCE_NAME))
+                    {
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_VEHICLE_NAME);
+                    }
+                    if (isInvalid(PlayersPanelInvalidationType.FRAGS))
+                    {
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_FRAGS);
+                    }
+                    if (isInvalid(PlayersPanelInvalidationType.SELECTED))
+                    {
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_SELECTED);
+                    }
+                    if (isInvalid(InvalidationType.STATE))
+                    {
+                        proxy.applyState();
+                    }
                 }
-                if (isInvalid(PlayersPanelInvalidationType.FRAGS))
-                {
-                    proxy.updateFrags();
-                }
-                if (isInvalid(PlayersPanelInvalidationType.SELECTED))
-                {
-                    proxy.onDrawSelected();
-                }
-                if (isInvalid(InvalidationType.STATE))
-                {
-                    proxy.applyState();
-                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
     }

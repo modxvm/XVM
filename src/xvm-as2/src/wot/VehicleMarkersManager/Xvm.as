@@ -571,6 +571,18 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
             textField.html = true;
             textField.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig(cfg.font,
                 formatDynamicColor(cfg_color_format_static, m_curHealth), "xvm_markerText"));
+    /*
+    public static function createCSSFromConfig(config_font:Object, color:Number, className:String):String
+    {
+        return createCSS(className,
+            color,
+            config_font && config_font.name ? config_font.name : "$FieldFont",
+            config_font && config_font.size ? config_font.size : 13,
+            config_font && config_font.align ? config_font.align : "center",
+            config_font && config_font.bold ? true : false,
+            config_font && config_font.italic ? true : false);
+    }
+    */
 
 //            Logger.add(XvmHelper.createCSS(cfg.font, formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
 

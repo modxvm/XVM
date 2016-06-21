@@ -161,7 +161,7 @@ class wot.StatisticForm.BattleStatItemRenderer
             : Config.config.iconset.statisticFormEnemy)), wrapper.data.icon ]);
 
         wrapper.data.icon = m_iconset.currentIcon;
-        wrapper.data.label = Cache.Get("SF." + name, function() { return Macros.Format(name, "{{name}}") });
+        wrapper.data.label = Macros.Format(name, "{{name}}");
 
         // Player/clan icons
         attachClanIconToPlayer(wrapper.data);

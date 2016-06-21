@@ -1,7 +1,9 @@
 ﻿package com.xvm.battle.vo
 {
     import com.xvm.*;
+    import com.xfw.events.*;
     import com.xvm.vo.*;
+    import com.xvm.types.stat.*;
     import flash.errors.*;
     import net.wg.data.constants.*;
     import net.wg.data.VO.daapi.*;
@@ -32,7 +34,7 @@
         public var vehicleArenaID:Number;
         public var vehicleLevel:int;
         public var vehicleName:String;
-        public var vehicleStatus:uint;
+        private var _vehicleStatus:uint;
         public var vehicleType:String;
 
         // DAAPIVehicleStatsVO
@@ -43,7 +45,8 @@
         public var spottedStatus:String = null;   // TODO: set & update
         public var curHealth:Number = NaN;        // TODO: set & update
         public var maxHealth:Number = NaN;        // TODO: set & update
-        public var entityName:String = null;      // TODO: set & update
+        public var entityName:String = null;      // TODO: set & update, is required?
+        public var entryName:String = null;       // TODO: set & update, is required?
 
         public var damageInfo:VODamageInfo;       // TODO: set & update
         public var xmqpData:VOXmqpData;           // TODO: set & update
@@ -162,6 +165,18 @@
             return _vehicleData;
         }
 
+        public function get vehicleStatus():uint
+        {
+            return _vehicleStatus;
+        }
+
+        public function set vehicleStatus(value:uint):void
+        {
+            _vehicleStatus = value;
+            updateStatData();
+        }
+
+
         // helpers
 
         public function getSpottedStatus():String
@@ -207,14 +222,42 @@
             vehicleArenaID = d.vehicleID;
             vehicleLevel = d.vehicleLevel;
             vehicleName = d.vehicleName;
-            vehicleStatus = d.vehicleStatus;
             vehicleType = d.vehicleType;
+
+            vehicleStatus = d.vehicleStatus;
 
             // TODO: refactor
             _vehicleData = VehicleInfo.getByLocalizedShortName(vehicleName);
             if (_vehicleData)
             {
-                _vehID = _vehicleData.vid;
+                _vehID = _vehicleData.vehId;
+            }
+
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
+        }
+
+        private function onStatLoaded(e:ObjectEvent):void
+        {
+            if (e.result)
+            {
+                var len:int = e.result.length;
+                for (var i:int = 0; i < len; ++i)
+                {
+                    if (e.result[i] == playerName)
+                    {
+                        updateStatData();
+                        break;
+                    }
+                }
+            }
+        }
+
+        private function updateStatData():void
+        {
+            var sd:StatData = Stat.battleStat[playerName];
+            if (sd)
+            {
+                sd.alive = isAlive;
             }
         }
     }

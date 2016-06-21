@@ -30,9 +30,10 @@ package com.xvm.types.stat
         public var wgr:Number = NaN;           // WG rating (int)
 
         public var emblem:String = null;       // url for clan icon
+        public var x_emblem:String = null;     // local cache url for clan icon
 
         public var v:VData = null;             // current vehicle stat data
-        public var vehicles:Dictionary = null; // vehicles stat data, key - vId
+        public var vehicles:Dictionary = null; // vehicles stat data, key - vehId
 
         public var clan:String = null;         // clan name ("CLAN")
         public var cid:Number = NaN;           // clan id
@@ -49,17 +50,11 @@ package com.xvm.types.stat
 
         public var xvm_contact_data:Object = null;
 
-        public var rnd:CommonStatData = null;
-        public var cw:CommonStatData = null;
-        public var cmp:CommonStatData = null;
-
         public var winrate:Number = NaN;       // global win rate (int)
+        public var xte:Number = NaN;           // xTE (int)
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
         public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
         public var xwgr:Number = NaN;          // WG rating in XVM Scale (int)
-
-        // internal
-        public var __v:Number = NaN;
     }
 }

@@ -4,10 +4,11 @@
  */
 package com.xvm.vo
 {
-    //public dynamic class VehicleData extends BaseVO
+    import com.xvm.types.*;
+
     public class VOVehicleData extends VOBase
     {
-        public var vid:int;
+        public var vehId:int;
         public var key:String;
 
         public var level:int;
@@ -73,11 +74,11 @@ package com.xvm.vo
         {
             switch (vclass)
             {
-                case "lightTank": return "LT";
-                case "mediumTank": return "MT";
-                case "heavyTank": return "HT";
-                case "AT-SPG": return "TD";
-                case "SPG": return "SPG";
+                case VehicleClass.lightTank: return VehicleType.LT;
+                case VehicleClass.mediumTank: return VehicleType.MT;
+                case VehicleClass.heavyTank: return VehicleType.HT;
+                case VehicleClass.AT_SPG: return VehicleType.TD;
+                case VehicleClass.SPG: return VehicleType.SPG;
                 default: return "";
             }
         }
