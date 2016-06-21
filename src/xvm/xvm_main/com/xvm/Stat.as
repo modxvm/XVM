@@ -102,7 +102,7 @@ package com.xvm
         private function loadBattleStat():void
         {
             //Logger.add("TRACE: loadBattleStat()");
-            if (!battleStatLoading)
+            if (battleStatLoading)
                 return;
             battleStatLoading = true;
             Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE);

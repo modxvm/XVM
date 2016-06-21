@@ -23,7 +23,6 @@ from constants import *
 from logger import *
 import config
 import configwatchdog
-import daapi
 import stats
 import svcmsg
 import vehinfo
@@ -270,16 +269,12 @@ class Xvm(object):
     def initBattleSwf(self, flashObject):
         trace('initBattleSwf')
 
-        self.initAS2DAAPI(flashObject)
-        self.sendConfig(flashObject)
-
         for (vID, vData) in BigWorld.player().arena.vehicles.iteritems():
             self.doUpdateBattle(vID, INV.ALL, flashObject)
 
     def initVmmSwf(self, flashObject):
         #trace('initVmmSwf')
-        self.initAS2DAAPI(flashObject)
-        self.sendConfig(flashObject)
+        pass
 
     def onStateBattle(self):
         trace('onStateBattle')
@@ -291,13 +286,6 @@ class Xvm(object):
 
     def onLeaveWorld(self):
         trace('onLeaveWorld')
-
-    def initAS2DAAPI(self, flashObject):
-        root = flashObject.getMember('_root')
-        if root.script is None:
-            root.script = daapi.DAAPI(flashObject)
-        else:
-            err("WARNING: flashObject.getMember('_root').script != None. flashObject=" % str(flashObject))
 
     def sendConfig(self, flashObject):
         #trace('sendConfig')
@@ -527,6 +515,10 @@ class Xvm(object):
                 default = None if len(args) < 2 else args[1]
                 return (userprefs.get(args[0], default), True)
 
+            if cmd == XVM_COMMAND.SAVE_SETTINGS:
+                userprefs.set(args[0], args[1])
+                return (None, True)
+
             if cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
                 stats.getBattleStat(args)
                 return (None, True)
@@ -542,9 +534,9 @@ class Xvm(object):
             if cmd == XVM_COMMAND.PYTHON_MACRO:
                 return (python_macro.process_python_macro(args[0]), True)
 
-            if cmd == XVM_COMMAND.SAVE_SETTINGS:
-                userprefs.set(args[0], args[1])
-                return (None, True)
+            if cmd == XVM_COMMAND.MINIMAP_CLICK:
+                return (xmqp_events.send_minimap_click(args[0]), True)
+
 
         except Exception, ex:
             err(traceback.format_exc())

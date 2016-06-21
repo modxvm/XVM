@@ -38,7 +38,7 @@ class XVM_EVENT(object):
     XMQP_CONNECTED = 'xvm.xmqp_connected'
     XMQP_MESSAGE = 'xvm.xmqp_message'
 
-# DAAPI commands
+# PY<->AS3 commands
 
 class XVM_COMMAND(object):
     REQUEST_CONFIG = "xvm.request_config"
@@ -57,6 +57,7 @@ class XVM_COMMAND(object):
     LOAD_STAT_USER = "xvm.load_stat_user"
     PYTHON_MACRO = "xvm.python_macro"
     SAVE_SETTINGS = "xvm.save_settings"
+    MINIMAP_CLICK = "xvm.minimap_click"
     AS_ON_KEY_EVENT = "xvm.as.on_key_event"
     AS_DOSSIER = "xvm.as.dossier"
     AS_L10N = "xvm.as.l10n"

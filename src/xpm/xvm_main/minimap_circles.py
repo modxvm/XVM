@@ -54,7 +54,6 @@ class _MinimapCircles(object):
         self.camouflage = []
 
     def setMinimapCirclesData(self, value):
-        log(value)
         self.minimapCirclesData = value
 
     def updateCurrentVehicle(self):

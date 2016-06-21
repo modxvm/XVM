@@ -3,12 +3,11 @@
 #############################
 # Command
 
-def getBattleStat(args, proxy=None):
+def getBattleStat(args):
     _stat.enqueue({
         'func': _stat.getBattleStat,
         'cmd': XVM_COMMAND.AS_STAT_BATTLE_DATA,
-        'args': args,
-        'proxy': proxy})
+        'args': args})
     _stat.processQueue()
 
 def getBattleResultsStat(args):
@@ -131,10 +130,7 @@ class _Stat(object):
     def _respond(self):
         debug("respond: " + self.req['cmd'])
         self.resp = unicode_to_ascii(self.resp)
-        if not 'proxy' in self.req or self.req['proxy'] is None:
-            as_xfw_cmd(self.req['cmd'], self.resp)
-        elif self.req['proxy'].component and self.req['proxy'].movie:
-            self.req['proxy'].movie.as_xvm_onUpdateStat(self.resp)
+        as_xfw_cmd(self.req['cmd'], self.resp)
 
 
     # Threaded

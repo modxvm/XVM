@@ -37,6 +37,14 @@ package com.xvm.battle
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
 
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
+
+            onConfigLoaded(null);
+        }
+
+        private function onStatLoaded(e:Event):void
+        {
+            //Logger.add("onStatLoaded");
             onConfigLoaded(null);
         }
 

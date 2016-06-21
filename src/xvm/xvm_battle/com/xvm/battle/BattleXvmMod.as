@@ -23,7 +23,6 @@ package com.xvm.battle
 
         private static const _views:Object =
         {
-
             "classicBattlePage": [
                 FragCorrelationBarXvmView,      // FragCorrelationBarXvmView should be loaded first (implements battle state update methods)
                 FullStatsXvmView,
@@ -38,16 +37,9 @@ package com.xvm.battle
             super.entryPoint();
             Macros.RegisterGlobalMacrosData();
             Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
-            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
             Stat.clearBattleStat();
             Stat.loadBattleStat();
         }
-
-        private function onStatLoaded(e:ObjectEvent):void
-        {
-            Logger.addObject("onStatLoaded: " + e, 2);
-        }
-
 
         public override function get views():Object
         {
