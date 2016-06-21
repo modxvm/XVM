@@ -38,7 +38,7 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
         ucfg = self._ArcadeCamera__userCfg
         dcfg = self._ArcadeCamera__dynamicCfg
 
-        if not c['dynamicCameraEnabled']:
+        if not c['shotRecoilEffect']:
             _disableDynamicCamera(dcfg)
 
         value = c['distRange']
@@ -77,7 +77,7 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
         cfg = self._SniperCamera__cfg
         dcfg = self._SniperCamera__dynamicCfg
 
-        if not c['dynamicCameraEnabled']:
+        if not c['shotRecoilEffect']:
             _disableDynamicCamera(dcfg)
         else:
             dcfg['aimMarkerDistance'] = 10.0
@@ -170,7 +170,7 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
         cfg = self._StrategicCamera__cfg
         dcfg = self._StrategicCamera__dynamicCfg
 
-        if not c['dynamicCameraEnabled']:
+        if not c['shotRecoilEffect']:
             _disableDynamicCamera(dcfg)
 
         value = c['distRange']

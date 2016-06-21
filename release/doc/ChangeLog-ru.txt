@@ -9,6 +9,10 @@
       "playersPanel"/"medium"/"formatRight" => "playersPanel"/"medium"/"nickFormatRight"
       "playersPanel"/"medium2"/"formatLeft" => "playersPanel"/"medium2"/"vehicleFormatLeft"
       "playersPanel"/"medium2"/"formatRight" => "playersPanel"/"medium2"/"vehicleFormatRight"
+      "camera"/"arcade"/"dynamicCameraEnabled" => "camera"/"arcade"/"shotRecoilEffect"
+      "camera"/"postmortem"/"dynamicCameraEnabled" => "camera"/"postmortem"/"shotRecoilEffect"
+      "camera"/"strategic"/"dynamicCameraEnabled" => "camera"/"strategic"/"shotRecoilEffect"
+      "camera"/"sniper"/"dynamicCameraEnabled" => "camera"/"sniper"/"shotRecoilEffect"
   * удалены параметры:
       "battle"/"allowSpottedStatus" - больше не требуется
 

@@ -41,7 +41,7 @@
         "color": "0x000000",            // "0xXXXXXX"      / color           / цвет
         "alpha": 100,                   // (0 .. 100)      / opacity         / прозрачность
         "blur": 6,                      // (0.0 .. 255.0)  / blur            / размытие
-        "strength": 200                 //                 / intensity       / интенсивность
+        "strength": 200                 // (0.0 .. 255.0)  / intensity       / интенсивность
       },
       // Rising speed of displayed damage (float up speed).
       // Время отображения отлетающего урона.
