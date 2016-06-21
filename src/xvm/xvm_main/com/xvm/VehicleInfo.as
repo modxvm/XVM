@@ -16,9 +16,9 @@ package com.xvm
             instance.onVehicleInfoData(data_array);
         }
 
-        public static function get(vehId:int):VOVehicleData
+        public static function get(vehCD:int):VOVehicleData
         {
-            return instance._get(vehId);
+            return instance._get(vehCD);
         }
 
         public static function getByIcon(icon:String):VOVehicleData
@@ -98,9 +98,9 @@ package com.xvm
                             data.shortName = preferredNames['short'];
                     }
                     //Logger.addObject(data);
-                    vehicles[data.vehId] = data;
-                    vehiclesMapKey[data.key] = data.vehId; // for getByIcon()
-                    vehiclesMapName[data.localizedShortName] = data.vehId; // for getByLocalizedShortName()
+                    vehicles[data.vehCD] = data;
+                    vehiclesMapKey[data.key] = data.vehCD; // for getByIcon()
+                    vehiclesMapName[data.localizedShortName] = data.vehCD; // for getByLocalizedShortName()
                 }
             }
             catch (ex:Error)
@@ -109,9 +109,9 @@ package com.xvm
             }
         }
 
-        private function _get(vehId:int):VOVehicleData
+        private function _get(vehCD:int):VOVehicleData
         {
-            return vehicles[vehId];
+            return vehicles[vehCD];
         }
 
         private function _getByIcon(icon:String):VOVehicleData

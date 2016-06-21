@@ -201,7 +201,6 @@ class wot.battle.BattleMain
 
         fixMinimapSize();
 
-        BattleState.setScreenSize(width, height, scale);
         //Logger.add("update stage: " + width + "," + height + "," + scale);
         GlobalEventDispatcher.dispatchEvent( { type: Events.E_UPDATE_STAGE, width: width, height: height, scale: scale });
     }

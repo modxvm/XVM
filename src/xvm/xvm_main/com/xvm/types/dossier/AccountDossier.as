@@ -17,21 +17,21 @@ package com.xvm.types.dossier
 
             super(data);
 
-            if (data.maxXPVehId)
-                _maxXPVehicleName = VehicleInfo.get(maxXPVehId).localizedFullName;
-            if (data.maxFragsVehId)
-                _maxFragsVehicleName = VehicleInfo.get(maxFragsVehId).localizedFullName;
-            if (data.maxDamageVehId)
-                _maxDamageVehicleName = VehicleInfo.get(maxDamageVehId).localizedFullName;
+            if (data.maxXPVehCD)
+                _maxXPVehicleName = VehicleInfo.get(maxXPVehCD).localizedFullName;
+            if (data.maxFragsVehCD)
+                _maxFragsVehicleName = VehicleInfo.get(maxFragsVehCD).localizedFullName;
+            if (data.maxDamageVehCD)
+                _maxDamageVehicleName = VehicleInfo.get(maxDamageVehCD).localizedFullName;
 
             vehicles = {};
-            for (var vehId:String in vehiclesData)
-                vehicles[vehId] = new VehicleDossierCut(parseInt(vehId), vehiclesData[vehId]);
+            for (var vehCD:String in vehiclesData)
+                vehicles[vehCD] = new VehicleDossierCut(parseInt(vehCD), vehiclesData[vehCD]);
         }
 
-        public var maxXPVehId:int;
-        public var maxFragsVehId:int;
-        public var maxDamageVehId:int;
+        public var maxXPVehCD:int;
+        public var maxFragsVehCD:int;
+        public var maxDamageVehCD:int;
 
         public var creationTime:uint;
         public var lastBattleTime:uint;
@@ -58,11 +58,11 @@ package com.xvm.types.dossier
             return _maxDamageVehicleName;
         }
 
-        public function getVehicleDossierCut(vehId:int):VehicleDossierCut
+        public function getVehicleDossierCut(vehCD:int):VehicleDossierCut
         {
-            if (!vehicles.hasOwnProperty(vehId))
-                vehicles[vehId] = new VehicleDossierCut(vehId, { } );
-            return vehicles[vehId];
+            if (!vehicles.hasOwnProperty(vehCD))
+                vehicles[vehCD] = new VehicleDossierCut(vehCD, { } );
+            return vehicles[vehCD];
         }
     }
 }

@@ -14,7 +14,7 @@
         public var _squadIndex:Number;
         public var _position:Number;
 
-        private var _vehID:int;
+        private var _vehCD:int;
         private var _vehicleData:VOVehicleData;
 
         // IMacrosOptionsVO implementation
@@ -64,9 +64,9 @@
             return _position;
         }
 
-        override public function get vehID():int
+        override public function get vehCD():int
         {
-            return _vehID;
+            return _vehCD;
         }
 
         override public function get vehicleData():VOVehicleData

@@ -67,8 +67,8 @@ def _as_xmqp_event(playerId, data, targets=TARGETS.ALL):
             playerId = getCurrentPlayerId()
 
     arenaDP = g_sessionProvider.getArenaDP()
-    vID = arenaDP.getVehIDByAccDBID(playerId)
-    if not vID:
+    vehicleID = arenaDP.getVehIDByAccDBID(playerId)
+    if not vehicleID:
         return
 
     battle = getBattleApp()
@@ -94,7 +94,7 @@ def _as_xmqp_event(playerId, data, targets=TARGETS.ALL):
 
     if targets & TARGETS.VMM:
         markersManager = battle.markersManager
-        marker = markersManager._MarkersManager__markers.get(vID, None)
+        marker = markersManager._MarkersManager__markers.get(vehicleID, None)
         if marker is None:
             if not xmqp.XMQP_DEVELOPMENT:
                 return

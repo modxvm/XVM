@@ -137,7 +137,7 @@ def _applyXvmFilter(item, filters, vehicles_stats):
 
     vdata = vehinfo.getVehicleInfoData(item.intCD)
     if vdata is None:
-        warn('Cannot find VehicleInfoData for vehId={}'.format(item.intCD))
+        warn('Cannot find VehicleInfoData for vehCD={}'.format(item.intCD))
         return True
 
     remove = False

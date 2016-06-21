@@ -13,6 +13,8 @@ package com.xvm
         private static var s_config:CConfig = null;
         private static var s_networkServicesSettings:NetworkServicesSettings = new NetworkServicesSettings({});
 
+        public static var IS_DEVELOPMENT:Boolean = false;
+
         public static function get config():CConfig
         {
             return s_config;

@@ -187,14 +187,14 @@ class _Stat(object):
         # update players
         self._loadingClanIconsCount = 0
         vehicles = BigWorld.player().arena.vehicles
-        for (vehId, vData) in vehicles.iteritems():
-            if vehId not in self.players:
-                pl = _Player(vehId, vData)
+        for (vehicleID, vData) in vehicles.iteritems():
+            if vehicleID not in self.players:
+                pl = _Player(vehicleID, vData)
                 self._load_clanIcon(pl)
-                # cleanup same player with different vehId (bug?)
+                # cleanup same player with different vehicleID (bug?)
                 self.players = {k:v for k,v in self.players.iteritems() if v.playerId != pl.playerId}
-                self.players[vehId] = pl
-            self.players[vehId].update(vData)
+                self.players[vehicleID] = pl
+            self.players[vehicleID].update(vData)
 
         # sleepCounter = 0
         while self._loadingClanIconsCount > 0:
@@ -206,12 +206,12 @@ class _Stat(object):
             #    log('WARNING: icons loading too long')
             #    break;
 
-        plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
-        self._load_stat(plVehId)
+        playerVehicleID = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
+        self._load_stat(playerVehicleID)
 
         players = {}
-        for (vehId, pl) in self.players.iteritems():
-            cacheKey = "%d=%d" % (pl.playerId, pl.vId)
+        for (vehicleID, pl) in self.players.iteritems():
+            cacheKey = "%d=%d" % (pl.playerId, pl.vehCD)
             if cacheKey not in self.cacheBattle:
                 cacheKey2 = "%d" % pl.playerId
                 if cacheKey2 not in self.cacheBattle:
@@ -243,22 +243,22 @@ class _Stat(object):
             self.players = {}
 
             # update players
-            for (vehId, vehData) in value['vehicles'].iteritems():
-                accountDBID = vehData[0]['accountDBID']
+            for (vehicleID, vData) in value['vehicles'].iteritems():
+                accountDBID = vData[0]['accountDBID']
                 plData = value['players'][accountDBID]
                 vData = {
                     'accountDBID': accountDBID,
                     'name': plData['name'],
                     'clanAbbrev': plData['clanAbbrev'],
-                    'typeCompDescr': vehData[0]['typeCompDescr'],
-                    'team': vehData[0]['team']}
-                self.players[vehId] = _Player(vehId, vData)
+                    'typeCompDescr': vData[0]['typeCompDescr'],
+                    'team': vData[0]['team']}
+                self.players[vehicleID] = _Player(vehicleID, vData)
 
             self._load_stat(0)
 
             players = {}
-            for (vehId, pl) in self.players.iteritems():
-                cacheKey = "%d=%d" % (pl.playerId, pl.vId)
+            for (vehicleID, pl) in self.players.iteritems():
+                cacheKey = "%d=%d" % (pl.playerId, pl.vehCD)
                 if cacheKey not in self.cacheBattle:
                     cacheKey2 = "%d" % pl.playerId
                     if cacheKey2 not in self.cacheBattle:
@@ -320,7 +320,7 @@ class _Stat(object):
         s = {
             '_id': pl.playerId,
             'nm': pl.name,
-            'v': {'id': pl.vId},
+            'v': {'id': pl.vehCD},
         }
         return self._fix(s)
 
@@ -330,16 +330,16 @@ class _Stat(object):
 
         replay = isReplay()
         all_cached = True
-        for (vehId, pl) in self.players.iteritems():
-            cacheKey = "%d=%d" % (pl.playerId, pl.vId)
+        for (vehicleID, pl) in self.players.iteritems():
+            cacheKey = "%d=%d" % (pl.playerId, pl.vehCD)
 
             if cacheKey not in self.cacheBattle:
                 all_cached = False
 
             requestList.append("%d=%d%s" % (
                 pl.playerId,
-                pl.vId,
-                '=1' if not replay and pl.vehId == playerVehicleID else ''))
+                pl.vehCD,
+                '=1' if not replay and pl.vehicleID == playerVehicleID else ''))
 
         if all_cached or not requestList:
             return
@@ -392,7 +392,7 @@ class _Stat(object):
 
     def _load_data_offline(self, playerId):
         players = []
-        for (vehId, pl) in self.players.iteritems():
+        for (vehicleID, pl) in self.players.iteritems():
             players.append(self._get_battle_stub(pl))
         return {'players': players}
 
@@ -405,7 +405,7 @@ class _Stat(object):
 
         if self.players is not None:
             # TODO: optimize
-            for (vehId, pl) in self.players.iteritems():
+            for (vehicleID, pl) in self.players.iteritems():
                 if pl.playerId == stat['_id']:
                     if pl.clan:
                         stat['clan'] = pl.clan
@@ -426,7 +426,7 @@ class _Stat(object):
                     if hasattr(pl, 'x_emblem'):
                         stat['x_emblem'] = pl.x_emblem
                     if 'id' not in stat['v']:
-                        stat['v']['id'] = pl.vId
+                        stat['v']['id'] = pl.vehCD
                     break
 
         self._fix_common2(stat, orig_name, False)
@@ -461,17 +461,17 @@ class _Stat(object):
             self._calculateGWR(stat)
             self._calculateXvmScale(stat)
             if multiVehicles:
-                for vehId, vdata in stat['v'].iteritems():
-                    vdata['id'] = int(vehId)
-                    self._calculateVehicleValues(stat, vdata)
-                    self._calculateXTDB(vdata)
-                    self._calculateXTE(vdata)
+                for vehicleID, vData in stat['v'].iteritems():
+                    vData['id'] = int(vehicleID)
+                    self._calculateVehicleValues(stat, vData)
+                    self._calculateXTDB(vData)
+                    self._calculateXTE(vData)
             else:
-                vdata = stat['v']
-                if 'id' in vdata:
-                    self._calculateVehicleValues(stat, vdata)
-                    self._calculateXTDB(vdata)
-                    self._calculateXTE(vdata)
+                vData = stat['v']
+                if 'id' in vData:
+                    self._calculateVehicleValues(stat, vData)
+                    self._calculateXTDB(vData)
+                    self._calculateXTE(vData)
 
 
     # Global Win Rate (GWR)
@@ -493,8 +493,8 @@ class _Stat(object):
 
     # calculate Vehicle values
     def _calculateVehicleValues(self, stat, v):
-        vehId = v['id']
-        vData = vehinfo.getVehicleInfoData(vehId)
+        vehicleID = v['id']
+        vData = vehinfo.getVehicleInfoData(vehicleID)
         if vData is None:
             return
         #log(vData['key'])
@@ -591,29 +591,29 @@ class _Stat(object):
 
 class _Player(object):
 
-    __slots__ = ('vehId', 'playerId', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
-                 'vId', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'x_emblem')
+    __slots__ = ('vehicleID', 'playerId', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
+                 'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'x_emblem')
 
-    def __init__(self, vehId, vData):
-        self.vehId = vehId
+    def __init__(self, vehicleID, vData):
+        self.vehicleID = vehicleID
         self.playerId = vData['accountDBID']
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
         self.clanInfo = topclans.getClanInfo(self.clan)
-        self.vId = None
+        self.vehCD = None
         if 'typeCompDescr' in vData:
-            self.vId = vData['typeCompDescr']
+            self.vehCD = vData['typeCompDescr']
         elif 'vehicleType' in vData:
             vtype = vData['vehicleType']
             if hasattr(vtype, 'type'):
-                self.vId = vData['vehicleType'].type.compactDescr
-        if self.vId is None:
-            self.vId = 0
+                self.vehCD = vData['vehicleType'].type.compactDescr
+        if self.vehCD is None:
+            self.vehCD = 0
         self.team = vData['team']
         self.squadnum = 0
         arenaDP = g_sessionProvider.getArenaDP()
         if arenaDP is not None:
-            vInfo = arenaDP.getVehicleInfo(vID=vehId)
+            vInfo = arenaDP.getVehicleInfo(vID=vehicleID)
             self.squadnum = vInfo.squadIndex
             # if self.squadnum > 0:
             #    log("team=%d, squad=%d %s" % (self.team, self.squadnum, self.name))
@@ -622,7 +622,7 @@ class _Player(object):
     def update(self, vData):
         vtype = vData['vehicleType']
         if hasattr(vtype, 'type'):
-            self.vId = vtype.type.compactDescr
+            self.vehCD = vtype.type.compactDescr
             self.vLevel = vtype.type.level
             self.vIcon = vtype.type.name.replace(':', '-')
             # self.vn = vtype.type.name

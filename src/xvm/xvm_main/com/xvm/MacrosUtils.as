@@ -195,11 +195,11 @@ package com.xvm
             }
         }
 
-        public static function GetVTypeColorValue(vehId:Number):String
+        public static function GetVTypeColorValue(vehCD:Number):String
         {
             try
             {
-                var vdata:VOVehicleData = VehicleInfo.get(vehId);
+                var vdata:VOVehicleData = VehicleInfo.get(vehCD);
                 var vtype:String = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
                 if (!vtype || !Config.config.colors.vtype[vtype])
                     return "";

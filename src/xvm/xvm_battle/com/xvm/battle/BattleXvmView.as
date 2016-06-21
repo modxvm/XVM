@@ -17,8 +17,6 @@ package com.xvm.battle
 
     public class BattleXvmView extends XvmViewBase
     {
-        private static const XVM_BATTLE_COMMAND_BATTLE_CTRL_SET_VEHICLE_DATA:String = "xvm_battle.battleCtrlSetVehicleData";
-
         public function BattleXvmView(view:IView)
         {
             super(view);
@@ -39,6 +37,8 @@ package com.xvm.battle
 
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
 
+            BattleGlobalData.initialize();
+
             onConfigLoaded(null);
         }
 
@@ -53,7 +53,7 @@ package com.xvm.battle
             //Logger.add("BattleXvmView.onConfigLoaded()");
             try
             {
-                Xfw.cmd(XVM_BATTLE_COMMAND_BATTLE_CTRL_SET_VEHICLE_DATA);
+                Xfw.cmd(BattleCommands.BATTLE_CTRL_SET_VEHICLE_DATA);
                 page.updateStage(App.appWidth, App.appHeight);
             }
             catch (ex:Error)

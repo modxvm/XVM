@@ -39,7 +39,6 @@ package com.xvm
             Xfw.addCommandListener(XvmCommandsInternal.AS_L10N, onL10n);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
             Xfw.addCommandListener(XvmCommandsInternal.AS_UPDATE_RESERVE, onUpdateReserve);
-            Xfw.addCommandListener(XvmCommandsInternal.AS_SET_SVC_SETTINGS, onSetSvcSettings);
             Xfw.cmd(XvmCommandsInternal.REQUEST_CONFIG);
         }
 
@@ -50,7 +49,8 @@ package com.xvm
             return Utils.fixImgTag(Locale.get(value));
         }
 
-        private function onSetConfig(config_data:Object, lang_data:Object, vehInfo_data:Array):Object
+        private function onSetConfig(config_data:Object, lang_data:Object, vehInfo_data:Array,
+            networkServicesSettings:Object, IS_DEVELOPMENT:Boolean):Object
         {
             //Logger.add("onSetConfig");
             //Logger.addObject(config_data, 5);
@@ -59,6 +59,8 @@ package com.xvm
             Config.config = ObjectConverter.convertData(config_data, CConfig);
             Locale.setupLanguage(lang_data);
             VehicleInfo.setVehicleInfoData(vehInfo_data);
+            Config.networkServicesSettings = new NetworkServicesSettings(networkServicesSettings);
+            Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
             return null;
         }
@@ -67,12 +69,6 @@ package com.xvm
         {
             Logger.add("onUpdateReserve");
             VehicleInfo.setVehicleInfoData(vehInfo_data);
-            return null;
-        }
-
-        private function onSetSvcSettings(nss:Object):Object
-        {
-            Config.networkServicesSettings = new NetworkServicesSettings(nss);
             return null;
         }
     }

@@ -73,18 +73,18 @@ package xvm.profile_ui.components
 
                 // TODO:0.9.15.1
                 /*
-                var vehId:int = page.listComponent.selectedItem.id;
+                var vehCD:int = page.listComponent.selectedItem.id;
 
-                //Logger.add("vehId: " + vehId)
+                //Logger.add("vehCD: " + vehCD)
 
-                if (vehId == 0)
+                if (vehCD == 0)
                 {
                     updateSummaryData();
                 }
                 else
                 {
                     lastBattleTimeTF.htmlText = "";
-                    updateVehicleData(vehId);
+                    updateVehicleData(vehCD);
                 }*/
             }
             catch (ex:Error)
@@ -241,7 +241,7 @@ package xvm.profile_ui.components
             updateGlobalRatings(data);
         }
 
-        private function updateVehicleData(vehId:Number):void
+        private function updateVehicleData(vehCD:Number):void
         {
         }
 

@@ -676,7 +676,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             {
                 value += isLeftPanel
                     ? panel.m_list._x + panel.m_list.width
-                    : BattleState.screenSize.width - panel._x - panel.m_list._x + panel.m_list.width;
+                    : App.appWidth - panel._x - panel.m_list._x + panel.m_list.width;
             }
             if (f.data.x != value)
             {
@@ -889,11 +889,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
             switch (extraFieldsLayout)
             {
                 case "horizontal":
-                    mc._x = BattleState.screenSize.width - cfg.x - mc.idx * cfg.width;
+                    mc._x = App.appWidth - cfg.x - mc.idx * cfg.width;
                     mc._y = cfg.y;
                     break;
                 default:
-                    mc._x = BattleState.screenSize.width - cfg.x;
+                    mc._x = App.appWidth - cfg.x;
                     mc._y = cfg.y + mc.idx * cfg.height;
                     break;
             }
@@ -904,12 +904,12 @@ class wot.PlayersPanel.PlayerListItemRenderer
             mc._x = panel.m_list.width - panel.m_list._x;
             mc._y = 0;
         }
-        //Logger.add(BattleState.screenSize.width + " " + panel.m_list.width + " " + panel.m_list._x);
+        //Logger.add(App.appWidth + " " + panel.m_list.width + " " + panel.m_list._x);
 
-        if (_savedScreenWidth != BattleState.screenSize.width || _savedX != panel.m_list._x)
+        if (_savedScreenWidth != App.appWidth || _savedX != panel.m_list._x)
         {
             //Logger.add('updateExtraFields');
-            _savedScreenWidth = BattleState.screenSize.width;
+            _savedScreenWidth = App.appWidth;
             _savedX = panel.m_list._x;
             updateExtraFields();
         }

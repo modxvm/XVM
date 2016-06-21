@@ -133,9 +133,9 @@ def update_conf_hp(*args, **kwargs):
 
 # TODO:0.9.15.1
 #@registerEvent(xvm_class, '_onVehicleKilled')
-def xvm_onVehicleKilled(self, vID, *args, **kwargs):
+def xvm_onVehicleKilled(self, vehicleID, *args, **kwargs):
     try:
-        update_hp(vID, 0)
+        update_hp(vehicleID, 0)
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -151,8 +151,8 @@ def setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
 #@registerEvent(xvm_class, 'initBattleSwf')
 def initBattleSwf(self, *args, **kwargs):
     try:
-        for vID, vData in BigWorld.player().arena.vehicles.iteritems():
-            update_hp(vID, vData['vehicleType'].maxHealth)
+        for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
+            update_hp(vehicleID, vData['vehicleType'].maxHealth)
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -185,16 +185,16 @@ def color_gradient(color1, color2, ratio):
         err(traceback.format_exc())
         return 'FFFFFF'
 
-def update_hp(vID, hp, *args, **kwargs):
+def update_hp(vehicleID, hp, *args, **kwargs):
     try:
-        if BigWorld.player().team == BigWorld.player().arena.vehicles[vID]['team']:
+        if BigWorld.player().team == BigWorld.player().arena.vehicles[vehicleID]['team']:
             team = 0
         else:
             team = 1
 
         global teams_vehicles, teams_totalhp, total_hp_color, total_hp_sign
 
-        teams_vehicles[team][vID] = max(hp, 0)
+        teams_vehicles[team][vehicleID] = max(hp, 0)
         teams_totalhp[team] = sum(teams_vehicles[team].values())
     
         if teams_totalhp[0] < teams_totalhp[1]:

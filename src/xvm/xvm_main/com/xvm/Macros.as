@@ -83,9 +83,9 @@ package com.xvm
             callback(_instance.m_globals);
         }
 
-        public static function RegisterMinimalMacrosData(accountDBID:Number, playerFullName:String, vehicleID:Number, isPlayerTeam:Boolean):void
+        public static function RegisterMinimalMacrosData(accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
         {
-            _instance._RegisterMinimalMacrosData(accountDBID, playerFullName, vehicleID, isPlayerTeam);
+            _instance._RegisterMinimalMacrosData(accountDBID, playerFullName, vehCD, isPlayerTeam);
         }
 
         // battle
@@ -296,7 +296,7 @@ package com.xvm
             var norm:String = parts[PART_NORM];
             var def:String = parts[PART_DEF];
 
-            var vehId:Number = pdata["veh-id"];
+            var vehCD:Number = pdata["veh-id"];
 
             var value:*;
 
@@ -328,11 +328,11 @@ package com.xvm
                 //process l10n macro
                 if (macroName == "l10n")
                 {
-                    res += prepareValue(NaN, macroName, norm, def, vehId);
+                    res += prepareValue(NaN, macroName, norm, def, vehCD);
                 }
                 else if (macroName == "py")
                 {
-                    res += prepareValue(NaN, macroName, norm, def, vehId);
+                    res += prepareValue(NaN, macroName, norm, def, vehCD);
                 }
                 else
                 {
@@ -344,7 +344,7 @@ package com.xvm
             else if (value == null)
             {
                 //Logger.add(macroName + " " + norm + " " + def + "  " + format);
-                res += prepareValue(NaN, macroName, norm, def, vehId);
+                res += prepareValue(NaN, macroName, norm, def, vehCD);
             }
             else
             {
@@ -352,7 +352,7 @@ package com.xvm
                 var type:String = typeof value;
                 if (type == "function" && (macroName != "alive" || options == null))
                     isStaticMacro = false;
-                else if (vehId == 0)
+                else if (vehCD == 0)
                 {
                     switch (macroName)
                     {
@@ -375,7 +375,7 @@ package com.xvm
                     }
                 }
 
-                res += _FormatMacro(macro, parts, value, vehId, options);
+                res += _FormatMacro(macro, parts, value, vehCD, options);
             }
 
             if (isStaticMacro)
@@ -490,7 +490,7 @@ package com.xvm
         }
 
         private var _format_macro_fmt_suf_cache:Object = {};
-        private function _FormatMacro(macro:String, parts:Array, value:*, vehId:Number, options:IVOMacrosOptions):String
+        private function _FormatMacro(macro:String, parts:Array, value:*, vehCD:Number, options:IVOMacrosOptions):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -508,7 +508,7 @@ package com.xvm
             //Logger.add("type:" + type + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
             if (type == "number" && isNaN(value))
-                return prepareValue(NaN, name, norm, def, vehId);
+                return prepareValue(NaN, name, norm, def, vehCD);
 
             var res:String = value;
             if (type == "function")
@@ -517,10 +517,10 @@ package com.xvm
                     return "{{" + macro + "}}";
                 value = value(options);
                 if (value == null)
-                    return prepareValue(NaN, name, norm, def, vehId);
+                    return prepareValue(NaN, name, norm, def, vehCD);
                 type = typeof value;
                 if (type == "number" && isNaN(value))
-                    return prepareValue(NaN, name, norm, def, vehId);
+                    return prepareValue(NaN, name, norm, def, vehCD);
                 res = value;
             }
 
@@ -550,14 +550,14 @@ package com.xvm
                         break;
                 }
                 if (!matched)
-                    return prepareValue(NaN, name, norm, def, vehId);
+                    return prepareValue(NaN, name, norm, def, vehCD);
             }
 
             if (rep != null)
                 return rep;
 
             if (norm != null)
-                res = prepareValue(value, name, norm, def, vehId);
+                res = prepareValue(value, name, norm, def, vehCD);
 
             if (fmt == null && suf == null)
                 return res;
@@ -610,7 +610,7 @@ package com.xvm
         }
 
         private var _prepare_value_cache:Object = {};
-        private function prepareValue(value:*, name:String, norm:String, def:String, vehId:Number):String
+        private function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number):String
         {
             if (norm == null)
                 return def;
@@ -622,13 +622,13 @@ package com.xvm
                 case "hp-max":
                     if (Config.config.battle.allowHpInPanelsAndMinimap == false)
                         break;
-                    var key:String = name + "," + norm + "," + value + "," + vehId;
+                    var key:String = name + "," + norm + "," + value + "," + vehCD;
                     res = _prepare_value_cache[key];
                     if (res)
                         return res;
                     if (isNaN(value))
                     {
-                        var vdata:VOVehicleData = VehicleInfo.get(vehId);
+                        var vdata:VOVehicleData = VehicleInfo.get(vehCD);
                         if (vdata == null)
                             break;
                         value = vdata.hpTop;
@@ -785,10 +785,10 @@ package com.xvm
                 return isNaN(Macros.s_my_frags) || Macros.s_my_frags == 0 ? NaN : Macros.s_my_frags;
             }
 
-            var vdata:VOVehicleData = VehicleInfo.get(Xfw.cmd(XvmCommandsInternal.GET_MY_VEH_ID));
+            var vdata:VOVehicleData = VehicleInfo.get(Xfw.cmd(XvmCommandsInternal.GET_MY_VEHCD));
 
             // {{my-veh-id}}
-            m_globals["my-veh-id"] = vdata.vehId;
+            m_globals["my-veh-id"] = vdata.vehCD;
             // {{my-vehicle}} - Chaffee
             m_globals["my-vehicle"] = vdata.localizedName;
             // {{my-vehiclename}} - usa-M24_Chaffee
@@ -802,7 +802,7 @@ package com.xvm
             // {{my-vtype-l}} - Medium Tank
             m_globals["my-vtype-l"] = Locale.get(vdata.vtype);
             // {{c:my-vtype}}
-            m_globals["c:my-vtype"] = MacrosUtils.GetVTypeColorValue(vdata.vehId);
+            m_globals["c:my-vtype"] = MacrosUtils.GetVTypeColorValue(vdata.vehCD);
             // {{my-battletier-min}}
             m_globals["my-battletier-min"] = vdata.tierLo;
             // {{my-battletier-max}}
@@ -840,10 +840,10 @@ package com.xvm
          * Register minimal macros values for player
          * @param playerId player id
          * @param playerFullName full player name with extra tags (clan, region, etc)
-         * @param vehicleID vehicle id
+         * @param vehCD vehicle compactDescr
          * @param isPlayerTeam is player team
          */
-        private function _RegisterMinimalMacrosData(accountDBID:Number, playerFullName:String, vehicleID:int, isPlayerTeam:Boolean):void
+        private function _RegisterMinimalMacrosData(accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
         {
             if (playerFullName == null || playerFullName == "")
                 throw new Error("empty name");
@@ -881,11 +881,11 @@ package com.xvm
             pdata["ally"] = isPlayerTeam ? 'ally' : null;
 
             // Next macro unique for vehicle
-            var vdata:VOVehicleData = VehicleInfo.get(vehicleID);
+            var vdata:VOVehicleData = VehicleInfo.get(vehCD);
             if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
                 m_globals["maxhp"] = vdata.hpTop;
             // {{veh-id}}
-            pdata["veh-id"] = vehicleID;
+            pdata["veh-id"] = vehCD;
             // {{vehicle}} - Chaffee
             pdata["vehicle"] = vdata.localizedName;
             // {{vehiclename}} - usa-M24_Chaffee

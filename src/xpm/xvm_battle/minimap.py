@@ -47,9 +47,8 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
                     base(self, id, 'init_xvm', [0])
                 else:
                     entryVehicle = BigWorld.player().arena.vehicles[id]
-                    vId = entryVehicle['vehicleType'].type.compactDescr
                     entityName = str(g_sessionProvider.getCtx().getPlayerGuiProps(id, entryVehicle['team']))
-                    base(self, id, 'init_xvm', [entryVehicle['accountDBID'], False, vId, entityName])
+                    base(self, id, 'init_xvm', [entryVehicle['accountDBID'], False, getVehCD(id), entityName])
         except Exception as ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
@@ -63,13 +62,12 @@ def _Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
             return
 
         try:
-            vehId = vInfo.vehicleID
-            entry = self._Minimap__entrieLits[vehId]
-            entryVehicle = BigWorld.player().arena.vehicles[vehId]
-            vId = entryVehicle['vehicleType'].type.compactDescr
+            vehicleID = vInfo.vehicleID
+            entry = self._Minimap__entrieLits[vehicleID]
+            entryVehicle = BigWorld.player().arena.vehicles[vehicleID]
             entityName = str(g_sessionProvider.getCtx().getPlayerGuiProps(id, entryVehicle['team']))
             self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm',
-                [entryVehicle['accountDBID'], True, vId, entityName]))
+                [entryVehicle['accountDBID'], True, getVehCD(vehicleID), entityName]))
         except Exception as ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
@@ -90,19 +88,19 @@ def _PostMortemControlMode_onMinimapClicked(self, worldPos):
 
             player = BigWorld.player()
             minDistance = None
-            toId = None
-            for vehId, entry in battle.minimap._Minimap__entries.iteritems():
-                vData = player.arena.vehicles[vehId]
+            toID = None
+            for vehicleID, entry in battle.minimap._Minimap__entries.iteritems():
+                vData = player.arena.vehicles[vehicleID]
                 if player.team != vData['team'] or not vData['isAlive']:
                     continue
                 pos = Math.Matrix(entry['matrix']).translation
                 distance = Math.Vector3(worldPos - pos).length
                 if minDistance is None or minDistance > distance:
                     minDistance = distance
-                    toId = vehId
-            if toId is not None:
-                BigWorld.player().positionControl.bindToVehicle(vehicleID=toId)
-                self._PostMortemControlMode__switchViewpoint(False, toId)
+                    toID = vehicleID
+            if toID is not None:
+                BigWorld.player().positionControl.bindToVehicle(vehicleID=toID)
+                self._PostMortemControlMode__switchViewpoint(False, toID)
         except Exception as ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
@@ -126,15 +124,15 @@ def _init_player(minimap, isRespawn=False):
         if not battleCtx.isPlayerObserver():
             player = BigWorld.player()
             arena = player.arena
-            id = player.playerVehicleID
-            entryVehicle = arena.vehicles[id]
+            vehicleID = player.playerVehicleID
+            entryVehicle = arena.vehicles[vehicleID]
             playerId = entryVehicle['accountDBID']
-            vId = entryVehicle['vehicleType'].type.compactDescr
+            vehCD = getVehCD(vehicleID)
             tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
             vClass = tags.pop() if len(tags) > 0 else ''
-            entityName = str(battleCtx.getPlayerGuiProps(id, entryVehicle['team']))
-            minimap._Minimap__callEntryFlash(id, 'init_xvm',
-                [playerId, False, vId, entityName, 'player', vClass, isRespawn])
+            entityName = str(battleCtx.getPlayerGuiProps(vehicleID, entryVehicle['team']))
+            minimap._Minimap__callEntryFlash(vehicleID, 'init_xvm',
+                [playerId, False, vehCD, entityName, 'player', vClass, isRespawn])
     except Exception as ex:
         if IS_DEVELOPMENT:
             err(traceback.format_exc())

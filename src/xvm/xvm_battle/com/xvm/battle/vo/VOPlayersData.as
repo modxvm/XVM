@@ -3,7 +3,6 @@
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.vo.*;
-    import flash.events.VideoEvent;
     import flash.utils.Dictionary;
     import net.wg.data.VO.daapi.*;
     import net.wg.infrastructure.interfaces.*;
@@ -48,24 +47,24 @@
         public var captureBarData:VOCaptureBarData = new VOCaptureBarData();
 
         // private
-        private var playerNameToVehicleArenaIDMap:Dictionary;
+        private var playerNameToVehicleIDMap:Dictionary;
 
         public function VOPlayersData(data:IDAAPIDataClass)
         {
             var d:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(data);
 
             playerStates = new Dictionary();
-            playerNameToVehicleArenaIDMap = new Dictionary();
+            playerNameToVehicleIDMap = new Dictionary();
             var value:DAAPIVehicleInfoVO;
             for each (value in d.leftVehicleInfos)
             {
                 playerStates[value.vehicleID] = new VOPlayerState(value, false);
-                playerNameToVehicleArenaIDMap[value.playerName] = value.vehicleID;
+                playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
             for each (value in d.rightVehicleInfos)
             {
                 playerStates[value.vehicleID] = new VOPlayerState(value, true);
-                playerNameToVehicleArenaIDMap[value.playerName] = value.vehicleID;
+                playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
 
             leftCorrelationIDs = d.leftCorrelationIDs;
@@ -75,19 +74,19 @@
             rightVehiclesIDs = d.rightVehiclesIDs;
         }
 
-        public function get(vehicleArenaID:Number):VOPlayerState
+        public function get(vehicleID:Number):VOPlayerState
         {
-            return isNaN(vehicleArenaID) ? null : playerStates[vehicleArenaID];
+            return isNaN(vehicleID) ? null : playerStates[vehicleID];
         }
 
         public function getByPlayerName(playerName:String):VOPlayerState
         {
-            return playerName ? get(playerNameToVehicleArenaIDMap[playerName]) : null;
+            return playerName ? get(playerNameToVehicleIDMap[playerName]) : null;
         }
 
-        public function updatePlayerState(vehicleArenaID:Number, data:Object):void
+        public function updatePlayerState(vehicleID:Number, data:Object):void
         {
-            var playerState:VOPlayerState = get(vehicleArenaID);
+            var playerState:VOPlayerState = get(vehicleID);
             if (playerState)
             {
                 playerState.update(data);

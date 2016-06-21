@@ -37,7 +37,6 @@ from notification.decorators import MessageDecorator
 from notification.settings import NOTIFICATION_TYPE
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
-from gui.battle_control import arena_info
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
@@ -221,12 +220,12 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
-# add vid to players panel data
+# add vehCD to players panel data
 # TODO:0.9.15.1
 #@overrideMethod(BattleArenaController, '_makeHash')
 def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, *args):
     res = base(self, index, playerFullName, vInfoVO, *args)
-    res['vid'] = vInfoVO.vehicleType.compactDescr
+    res['vehCD'] = vInfoVO.vehicleType.compactDescr
     return res
 
 # spotted status
@@ -318,7 +317,7 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
 # TODO:0.9.15.1
 #@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
 def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
-    if arena_info.getArenaGuiType() == 1: # constants.ARENA_GUI_TYPE.RANDOM
+    if BigWorld.player().arena.guiType == 1: # constants.ARENA_GUI_TYPE.RANDOM
         for flags, vo in updated:
             if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
                 for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(vo.team)):

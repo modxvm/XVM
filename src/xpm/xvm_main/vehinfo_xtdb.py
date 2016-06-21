@@ -8,8 +8,8 @@ from logger import *
 
 # PUBLIC
 
-def calculateXTDB(vehId, dmg_per_battle):
-    data = _getData(vehId)
+def calculateXTDB(vehCD, dmg_per_battle):
+    data = _getData(vehCD)
     if data is None:
         return -1
 
@@ -18,8 +18,8 @@ def calculateXTDB(vehId, dmg_per_battle):
         return 0
     return next((i for i,v in enumerate(data['x']) if v > dmg_per_battle), 100)
 
-def vehArrayXTDB(vehId):
-    data = _getData(vehId)
+def vehArrayXTDB(vehCD):
+    data = _getData(vehCD)
     if data is None:
         return []
     return data['x']
@@ -39,11 +39,11 @@ from logger import *
 
 _data = None
 
-def _getData(vehId):
+def _getData(vehCD):
     global _data
     if _data is None:
         _data = _load()
-    return _data.get(str(vehId), None)
+    return _data.get(str(vehCD), None)
 
 
 def _load():

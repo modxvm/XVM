@@ -47,7 +47,7 @@ import xvm_main.python.xvm_scale as xvm_scale
 # handlers
 
 _lastPlayerId = None
-_lastVehId = None
+_lastVehCD = None
 
 
 @overrideMethod(ProfileMeta, 'registerFlashComponent')
@@ -95,8 +95,8 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
         global _lastPlayerId
         for x in res:
             try:
-                vehId = x['id']
-                vDossier = dossier.getDossier((self._battlesType, _lastPlayerId, vehId))
+                vehCD = x['id']
+                vDossier = dossier.getDossier((self._battlesType, _lastPlayerId, vehCD))
                 x['xvm_xte'] = int(vDossier['xte']) if vDossier is not None else -1
                 x['xvm_xte_flag'] = 0
             except:
@@ -105,23 +105,23 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
 
 
 @overrideMethod(ProfileTechnique, '_receiveVehicleDossier')
-def ProfileTechnique_receiveVehicleDossier(base, self, vehId, playerId):
-    global _lastVehId
-    _lastVehId = vehId
-    base(self, vehId, playerId)
-    _lastVehId = None
+def ProfileTechnique_receiveVehicleDossier(base, self, vehCD, playerId):
+    global _lastVehCD
+    _lastVehCD = vehCD
+    base(self, vehCD, playerId)
+    _lastVehCD = None
 
     if config.networkServicesSettings.statAwards:
         if self._isDAAPIInited():
-            vDossier = dossier.getDossier((self._battlesType, playerId, vehId))
+            vDossier = dossier.getDossier((self._battlesType, playerId, vehCD))
             self.flashObject.as_responseVehicleDossierXvm(vDossier)
 
 
 @overrideStaticMethod(DetailedStatisticsUtils, 'getStatistics')
 def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layout):
     res = base(targetData, isCurrentuser, layout)
-    global _lastVehId
-    if _lastVehId is not None and config.networkServicesSettings.statAwards:
+    global _lastVehCD
+    if _lastVehCD is not None and config.networkServicesSettings.statAwards:
         try:
             battles = targetData.getBattlesCount()
             dmg = targetData.getDamageDealt()
@@ -136,7 +136,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
             #    del res[1]['data'][4]
 
             # xTE
-            ref = vehinfo_xte.getReferenceValues(_lastVehId)
+            ref = vehinfo_xte.getReferenceValues(_lastVehCD)
             if ref is None:
                 ref = {}
             data = -1
@@ -144,7 +144,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
             if battles > 0 and dmg > 0 and frg > 0:
                 ref['currentD'] = float(dmg) / battles
                 ref['currentF'] = float(frg) / battles
-                x = vehinfo_xte.calculateXTE(_lastVehId, float(dmg) / battles, float(frg) / battles)
+                x = vehinfo_xte.calculateXTE(_lastVehCD, float(dmg) / battles, float(frg) / battles)
                 ref['xte'] = x
                 ref['xte_sup'] = xvm_scale.XvmScaleToSup(x)
                 if x > 0:
@@ -162,7 +162,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
             # xTDB
             item = res[1]['data'][2]
             if battles > 0 and dmg > 0:
-                x = vehinfo_xtdb.calculateXTDB(_lastVehId, float(dmg) / battles)
+                x = vehinfo_xtdb.calculateXTDB(_lastVehCD, float(dmg) / battles)
                 sup = xvm_scale.XvmScaleToSup(x)
                 if x > 0:
                     color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, x)

@@ -59,7 +59,7 @@
             throw new IllegalOperationError("abstract method called");
         }
 
-        public function get vehID():int
+        public function get vehCD():int
         {
             throw new IllegalOperationError("abstract method called");
         }

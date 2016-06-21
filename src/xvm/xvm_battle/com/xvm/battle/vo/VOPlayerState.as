@@ -1,6 +1,7 @@
 ﻿package com.xvm.battle.vo
 {
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xfw.events.*;
     import com.xvm.vo.*;
     import com.xvm.types.stat.*;
@@ -31,7 +32,7 @@
         public var vehicleGuiName:String;
         public var vehicleIcon:String;
         public var vehicleIconName:String;
-        public var vehicleArenaID:Number;
+        public var vehicleID:Number;
         public var vehicleLevel:int;
         public var vehicleName:String;
         private var _vehicleStatus:uint;
@@ -55,7 +56,7 @@
         public var hitlogDamage:int = 0;          // TODO: set & update
 
         private var _position:Number = NaN;
-        private var _vehID:int;
+        private var _vehCD:int;
         private var _vehicleData:VOVehicleData;
 
         // IMacrosOptionsVO implementation
@@ -112,7 +113,7 @@
 
         override public function get isCurrentPlayer():Boolean
         {
-            return UserTags.isCurrentPlayer(userTags);
+            return BattleGlobalData.playerVehicleID == vehicleID;
         }
 
         public function get isBusy():Boolean
@@ -155,9 +156,9 @@
             _position = value;
         }
 
-        override public function get vehID():int
+        override public function get vehCD():int
         {
-            return _vehID;
+            return _vehCD;
         }
 
         override public function get vehicleData():VOVehicleData
@@ -219,7 +220,7 @@
             vehicleGuiName = d.vehicleGuiName;
             vehicleIcon = d.vehicleIcon;
             vehicleIconName = d.vehicleIconName;
-            vehicleArenaID = d.vehicleID;
+            vehicleID = d.vehicleID;
             vehicleLevel = d.vehicleLevel;
             vehicleName = d.vehicleName;
             vehicleType = d.vehicleType;
@@ -230,7 +231,7 @@
             _vehicleData = VehicleInfo.getByLocalizedShortName(vehicleName);
             if (_vehicleData)
             {
-                _vehID = _vehicleData.vehId;
+                _vehCD = _vehicleData.vehCD;
             }
 
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);

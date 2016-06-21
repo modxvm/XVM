@@ -8,7 +8,6 @@ import com.xvm.DataTypes.BattleStateData;
 class com.xvm.BattleState
 {
     private static var _userData:Object = { };
-    private static var _screenSize:Object = { };
     private static var _selfPlayerId:Number = 0;
 
     public static function get(playerId:Number):BattleStateData
@@ -56,17 +55,5 @@ class com.xvm.BattleState
     public static function setSelfPlayerId(playerId:Number):Void
     {
         _selfPlayerId = playerId;
-    }
-
-    public static function get screenSize():Object
-    {
-        return _screenSize;
-    }
-
-    public static function setScreenSize(width:Number, height:Number, scale:Number):Void
-    {
-        _screenSize.width = width;
-        _screenSize.height = height;
-        _screenSize.scale = scale;
     }
 }

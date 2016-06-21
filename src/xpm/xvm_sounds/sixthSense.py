@@ -26,9 +26,9 @@ class XVM_SOUND_EVENT(object):
 def Battle_showSixthSenseIndicator(self, isShow):
     try:
         if config.get('sounds/enabled'):
-            vehId = BigWorld.entities[BigWorld.player().playerVehicleID].typeDescriptor.type.compactDescr
+            vehCD = getVehCD(BigWorld.player().playerVehicleID)
             # 59393 => Rudy
-            soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehId == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
+            soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehCD == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
             SoundGroups.g_instance.playSound2D(soundId)
     except:
         err(traceback.format_exc())

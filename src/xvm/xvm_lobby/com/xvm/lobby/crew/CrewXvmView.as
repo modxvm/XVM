@@ -25,8 +25,8 @@ package com.xvm.lobby.crew
         private static const L10N_ENABLE_PREV_CREW_TOOLTIP:String = "lobby/crew/enable_prev_crew_tooltip";
 
         private var enablePrevCrewCheckBox:CheckBox;
-        private var prevVehId:Number;
-        private var currentVehId:Number;
+        private var prevInvID:Number;
+        private var currentInvID:Number;
         private var savedValue:Boolean = false;
         private var xpToTmenCheckbox_y:Number;
 
@@ -101,20 +101,20 @@ package com.xvm.lobby.crew
                 setTimeout(function():void { App.toolTipMgr.show(e.target.toolTip); }, 1);
         }
 
-        private function onVehicleChanged(vehId:Number, isElite:Boolean):Object
+        private function onVehicleChanged(invID:Number, isElite:Boolean):Object
         {
-            //Logger.add('onVehicleChanged: ' + vehId);
+            //Logger.add('onVehicleChanged: ' + invID);
 
-            currentVehId = vehId;
+            currentInvID = invID;
 
-            enablePrevCrewCheckBox.enabled = enablePrevCrewCheckBox.visible = vehId > 0;
+            enablePrevCrewCheckBox.enabled = enablePrevCrewCheckBox.visible = invID > 0;
             if (!enablePrevCrewCheckBox.enabled)
             {
                 page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y;
                 return null;
             }
 
-            savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, Config.config.hangar.crewReturnByDefault);
+            savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentInvID, Config.config.hangar.crewReturnByDefault);
             enablePrevCrewCheckBox.selected = savedValue;
 
             page.tmenXpPanel.validateNow();
@@ -123,9 +123,9 @@ package com.xvm.lobby.crew
             page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y - 10;
             enablePrevCrewCheckBox.y = xpToTmenCheckbox_y + (isElite ? 7 : 0);
 
-            if (prevVehId != currentVehId)
+            if (prevInvID != currentInvID)
             {
-                prevVehId = currentVehId;
+                prevInvID = currentInvID;
                 tryPutPrevCrew();
             }
 
@@ -136,7 +136,7 @@ package com.xvm.lobby.crew
         {
             if (enablePrevCrewCheckBox.enabled && enablePrevCrewCheckBox.selected != savedValue)
             {
-                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentVehId, enablePrevCrewCheckBox.selected);
+                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentInvID, enablePrevCrewCheckBox.selected);
                 savedValue = enablePrevCrewCheckBox.selected;
                 tryPutPrevCrew();
             }

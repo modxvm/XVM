@@ -11,7 +11,7 @@ package com.xvm
         internal static const GET_BATTLE_LEVEL:String = "xvm.get_battle_level";
         internal static const GET_BATTLE_TYPE:String = "xvm.get_battle_type";
         internal static const GET_MAP_SIZE:String = "xvm.get_map_size";
-        internal static const GET_MY_VEH_ID:String = "xvm.get_my_veh_id";
+        internal static const GET_MY_VEHCD:String = "xvm.get_my_vehcd";
         internal static const REQUEST_DOSSIER:String = "xvm.request_dossier";
         internal static const LOAD_STAT_BATTLE:String = "xvm.load_stat_battle";
         internal static const LOAD_STAT_BATTLE_RESULTS:String = "xvm.load_stat_battle_results";
@@ -22,7 +22,6 @@ package com.xvm
         internal static const AS_L10N:String = "xvm.as.l10n";
         internal static const AS_SET_CONFIG:String = "xvm.as.set_config";
         internal static const AS_UPDATE_RESERVE:String = "xvm.as.update_reserve";
-        internal static const AS_SET_SVC_SETTINGS:String = "xvm.as.set_svc_settings";
         internal static const AS_STAT_BATTLE_DATA:String = "xvm.as.stat_battle_data";
         internal static const AS_STAT_BATTLE_RESULTS_DATA:String = "xvm.as.stat_battle_results_data";
         internal static const AS_STAT_USER_DATA:String = "xvm.as.stat_user_data";

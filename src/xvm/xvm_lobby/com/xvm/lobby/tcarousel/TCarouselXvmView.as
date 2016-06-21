@@ -97,8 +97,8 @@ package com.xvm.lobby.tcarousel
             //Logger.addObject(dossier);
             if (dossier != null)
             {
-                for (var vehId:String in dossier.vehicles)
-                    Dossier.requestVehicleDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, parseInt(vehId));
+                for (var vehCD:String in dossier.vehicles)
+                    Dossier.requestVehicleDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, parseInt(vehCD));
             }
             // TODO:0.9.15.1
             //page.carousel.invalidateData();

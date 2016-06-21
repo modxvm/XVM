@@ -16,9 +16,9 @@ package com.xvm
             loadDossierInternal(target, callback, battleType, playerId, 0);
         }
 
-        public static function requestVehicleDossier(target:Object, callback:Function, battleType:String, vehId:Number, playerId:Number = 0):void
+        public static function requestVehicleDossier(target:Object, callback:Function, battleType:String, vehCD:Number, playerId:Number = 0):void
         {
-            loadDossierInternal(target, callback, battleType, playerId, vehId);
+            loadDossierInternal(target, callback, battleType, playerId, vehCD);
         }
 
         public static function getAccountDossier(playerId:int = 0):AccountDossier
@@ -26,9 +26,9 @@ package com.xvm
             return getDossier(playerId, 0);
         }
 
-        public static function getVehicleDossier(vehId:int, playerId:int = 0):VehicleDossier
+        public static function getVehicleDossier(vehCD:int, playerId:int = 0):VehicleDossier
         {
-            return getDossier(playerId, vehId);
+            return getDossier(playerId, vehCD);
         }
 
         public static function setVehicleDossier(vdossier:VehicleDossier):void
@@ -43,7 +43,7 @@ package com.xvm
         private static var _requests:Object = {};
         private static var _cache:Object = {};
 
-        private static function loadDossierInternal(target:Object, callback:Function, battleType:String, playerId:int, vehId:int):void
+        private static function loadDossierInternal(target:Object, callback:Function, battleType:String, playerId:int, vehCD:int):void
         {
             if (!_initialized)
             {
@@ -51,34 +51,34 @@ package com.xvm
                 Xfw.addCommandListener(XvmCommandsInternal.AS_DOSSIER, dossierLoaded);
             }
 
-            var key:String = playerId + "," + vehId;
+            var key:String = playerId + "," + vehCD;
             //Logger.add("loadDossier: " + key);
             if (_requests[key] == null)
                 _requests[key] = [];
             if (callback != null)
                 _requests[key].push( { target: target, callback: callback } );
-            Xfw.cmd(XvmCommandsInternal.REQUEST_DOSSIER, battleType, playerId, vehId);
+            Xfw.cmd(XvmCommandsInternal.REQUEST_DOSSIER, battleType, playerId, vehCD);
         }
 
-        private static function dossierLoaded(playerId:int, vehId:int, data:Object):Object
+        private static function dossierLoaded(playerId:int, vehCD:int, data:Object):Object
         {
             try
             {
-                var key:String = playerId + "," + vehId;
+                var key:String = playerId + "," + vehCD;
                 //Logger.addObject(data, 3, key);
 
-                var dossier:* = (vehId == 0)
+                var dossier:* = (vehCD == 0)
                     ? new AccountDossier(data)
                     : new VehicleDossier(data);
 
                 _cache[key] = dossier;
 
-                if (vehId != 0)
+                if (vehCD != 0)
                 {
                     var adossier:AccountDossier = getAccountDossier(playerId);
                     if (adossier != null)
                     {
-                        var vehicle:VehicleDossierCut = adossier.vehicles[vehId];
+                        var vehicle:VehicleDossierCut = adossier.vehicles[vehCD];
                         if (vehicle != null)
                             vehicle.update();
                     }
@@ -101,14 +101,14 @@ package com.xvm
             return null;
         }
 
-        private static function getDossier(playerId:int, vehId:int):*
+        private static function getDossier(playerId:int, vehCD:int):*
         {
-            return _cache[playerId + "," + vehId];
+            return _cache[playerId + "," + vehCD];
         }
 
         private static function _setVehicleDossier(vdossier:VehicleDossier):*
         {
-            _cache[vdossier.playerId + "," + vdossier.vehId] = vdossier;
+            _cache[vdossier.playerId + "," + vdossier.vehCD] = vdossier;
         }
     }
 }

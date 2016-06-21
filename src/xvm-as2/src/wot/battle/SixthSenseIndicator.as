@@ -62,7 +62,7 @@ class wot.battle.SixthSenseIndicator
     private function onUpdateStage(e)
     {
         if (icon.content._width != undefined)
-            sixthSenseIndicatorXvm._x = BattleState.screenSize.width / 2 - icon.content._width / 2;
+            sixthSenseIndicatorXvm._x = App.appWidth / 2 - icon.content._width / 2;
     }
 
     private function gotoAndPlayXvm(frame)

@@ -8,7 +8,7 @@ package com.xvm.vo
 
     public class VOVehicleData extends VOBase
     {
-        public var vehId:int;
+        public var vehCD:int;
         public var key:String;
 
         public var level:int;

@@ -105,7 +105,7 @@ package com.xvm.battle
                 m_dict[playerState.playerName] = {};
             var pdata:Object = m_dict[playerState.playerName];
 
-            Macros.RegisterMinimalMacrosData(playerState.accountDBID, playerState.playerFullName, playerState.vehID, playerState.isPlayerTeam);
+            Macros.RegisterMinimalMacrosData(playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isPlayerTeam);
 
             // stats
 

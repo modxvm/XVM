@@ -13,7 +13,7 @@ package com.xvm.types.dossier
             super(data);
         }
 
-        public var vehId:int;
+        public var vehCD:int;
         public var xtdb:int;
         public var xte:int;
         public var earnedXP:Number;

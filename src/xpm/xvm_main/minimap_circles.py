@@ -176,7 +176,7 @@ class _MinimapCircles(object):
 
         # Set values
         self.minimapCirclesData = {
-            'vehId': descr.type.compactDescr,
+            'vehCD': descr.type.compactDescr,
             'is_full_crew': self.is_full_crew,
             'base_commander_skill': self.base_commander_skill,
             'base_radioman_skill': self.base_radioman_skill,
@@ -204,11 +204,11 @@ class _MinimapCircles(object):
             # Save/restore arena data
             player = BigWorld.player()
             fileName = 'arenas_data.zip/{0}'.format(player.arenaUniqueID)
-            vehId = player.vehicleTypeDescriptor.type.compactDescr
-            if vehId and self.minimapCirclesData and vehId == self.minimapCirclesData.get('vehId', None):
+            vehCD = player.vehicleTypeDescriptor.type.compactDescr
+            if vehCD and self.minimapCirclesData and vehCD == self.minimapCirclesData.get('vehCD', None):
                 # Normal battle start. Update data and save to userprefs cache
                 userprefs.set(fileName, {
-                    'ver': '1.0',
+                    'ver': '1.1',
                     'minimap_circles': self.minimapCirclesData,
                 })
             else:

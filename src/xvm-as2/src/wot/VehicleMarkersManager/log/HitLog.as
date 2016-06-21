@@ -162,9 +162,8 @@ class wot.VehicleMarkersManager.log.HitLog
     private function createControl()
     {
         //Logger.add("HitLog::createControl()");
-        var sz:Array = DAAPI.py_xvm_getScreenSize();
-        var x = this.x >= 0 ? this.x : sz[0] + this.x;
-        var y = this.y >= 0 ? this.y : sz[1] + this.y;
+        var x = this.x >= 0 ? this.x : App.appWidth + this.x;
+        var y = this.y >= 0 ? this.y : App.appHeight + this.y;
 
         textField = _root.createTextField("xvmHitLog", _root.getNextHighestDepth(), x, y, w, h);
         //textField.border = true;

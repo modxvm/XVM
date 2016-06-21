@@ -11,11 +11,11 @@ package com.xvm.types.dossier
 
     public class VehicleDossierCut extends DAAPIDataClass
     {
-        public function VehicleDossierCut(vehId:int, data:Object)
+        public function VehicleDossierCut(vehCD:int, data:Object)
         {
             super(data);
 
-            this.vehId  = vehId;
+            this.vehCD  = vehCD;
 
             this.xp /= battles;
 
@@ -25,7 +25,7 @@ package com.xvm.types.dossier
         public function update():void
         {
             // Vehicle Data
-            var vdata:VOVehicleData = VehicleInfo.get(vehId);
+            var vdata:VOVehicleData = VehicleInfo.get(vehCD);
             if (vdata != null)
             {
                 fullname = vdata.localizedFullName;
@@ -55,7 +55,7 @@ package com.xvm.types.dossier
                 winrate = wins / battles * 100;
                 c_winrate = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, winrate, "#");
 
-                var vdossier:VehicleDossier = Dossier.getVehicleDossier(vehId);
+                var vdossier:VehicleDossier = Dossier.getVehicleDossier(vehCD);
                 if (vdossier != null)
                 {
                     hitsRatio = vdossier.hitsRatio * 100;
@@ -97,7 +97,7 @@ package com.xvm.types.dossier
             }
         }
 
-        public var vehId:int;
+        public var vehCD:int;
         public var battles:Number = NaN;
         public var kb:Number = NaN;
         public var hb:Number = NaN;

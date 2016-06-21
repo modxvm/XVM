@@ -33,7 +33,7 @@ package com.xvm.types.stat
         public var x_emblem:String = null;     // local cache url for clan icon
 
         public var v:VData = null;             // current vehicle stat data
-        public var vehicles:Dictionary = null; // vehicles stat data, key - vehId
+        public var vehicles:Dictionary = null; // vehicles stat data, key - vehCD
 
         public var clan:String = null;         // clan name ("CLAN")
         public var cid:Number = NaN;           // clan id

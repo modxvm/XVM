@@ -2,11 +2,11 @@
 
 # PUBLIC
 
-def getVehicleInfoData(vehId):
+def getVehicleInfoData(vehCD):
     global _vehicleInfoData
     if _vehicleInfoData is None:
         _init()
-    return _vehicleInfoData.get(vehId, None)
+    return _vehicleInfoData.get(vehCD, None)
 
 
 def getVehicleInfoDataArray():
@@ -16,12 +16,12 @@ def getVehicleInfoDataArray():
     return _vehicleInfoData.values()
 
 
-def updateReserve(vehId, isReserved):
+def updateReserve(vehCD, isReserved):
     global _vehicleInfoData
     if _vehicleInfoData is None:
         _init()
     else:
-        _vehicleInfoData[vehId]['isReserved'] = isReserved
+        _vehicleInfoData[vehCD]['isReserved'] = isReserved
 
 
 # PRIVATE
@@ -52,7 +52,7 @@ CONST_45_IN_RADIANS = radians(45)
 _VEHICLE_TYPE_XML_PATH = 'scripts/item_defs/vehicles/'
 
 _UNKNOWN_VEHICLE_DATA = {
-    'vid': 0,
+    'vehCD': 0,
     'key': 'unknown',
     'nation': '',
     'level': 0,
@@ -88,7 +88,7 @@ def _init():
                 # log('%i	%i	%s' % (descr['level'], descr['compactDescr'], descr['name']))
 
                 data = dict()
-                data['vid'] = descr['compactDescr']
+                data['vehCD'] = descr['compactDescr']
                 data['key'] = descr['name']
                 data['nation'] = nation
                 data['level'] = descr['level']
@@ -114,7 +114,7 @@ def _init():
 
                 data['shortName'] = vehinfo_short.getShortName(data['key'], data['level'], data['vclass'])
 
-                wn8data = vehinfo_wn8.getWN8ExpectedData(data['vid'])
+                wn8data = vehinfo_wn8.getWN8ExpectedData(data['vehCD'])
                 if wn8data is not None:
                     data['wn8expDamage'] = float(wn8data['expDamage'])
                     data['wn8expSpot'] = float(wn8data['expSpot'])
@@ -124,7 +124,7 @@ def _init():
 
                 # is reserved?
                 import xvm_tcarousel.python.reserve as reserve
-                data['isReserved'] = reserve.is_reserved(data['vid'])
+                data['isReserved'] = reserve.is_reserved(data['vehCD'])
                 #log(data)
 
                 res.append(data)
@@ -139,7 +139,7 @@ def _init():
     # pprint(res[0])
     # pprint(res)
     global _vehicleInfoData
-    _vehicleInfoData = {x['vid']:x for x in res}
+    _vehicleInfoData = {x['vehCD']:x for x in res}
 
 
 def _getRanges(turret, gun, nation, vclass):

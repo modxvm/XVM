@@ -128,17 +128,17 @@ def TmenXpPanel_onVehicleChange(self):
     #log('TmenXpPanel_onVehicleChange')
     if config.get('hangar/enableCrewAutoReturn'):
         vehicle = g_currentVehicle.item
-        vehId = g_currentVehicle.invID if vehicle is not None else 0
+        invID = g_currentVehicle.invID if vehicle is not None else 0
         isElite = vehicle.isElite if vehicle is not None else 0
-        as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, vehId, isElite)
+        as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, invID, isElite)
 
 
 @registerEvent(VehicleSelectorPopup, 'onSelectVehicles', True)
 def VehicleSelectorPopup_onSelectVehicles(self, items):
     try:
         if len(items) == 1:
-            id = int(items[0])
-            vehicle = g_itemsCache.items.getItemByCD(id)
+            cd = int(items[0])
+            vehicle = g_itemsCache.items.getItemByCD(cd)
             if vehicle and vehicle.isInInventory and not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
                 if config.get('hangar/enableCrewAutoReturn') and userprefs.get('xvm_crew/auto_prev_crew/%s' % vehicle.invID, True):
                     wg_compat.g_instance.processReturnCrewForVehicleSelectorPopup(vehicle)
