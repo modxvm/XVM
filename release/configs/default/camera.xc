@@ -19,9 +19,9 @@
       // Чувствительность прокрутки (default = 5)
       // Scroll sensitivity (по умолчанию = 5)
       "scrollSensitivity": 5,
-      // false - disable dynamic camera
-      // false - выключить динамическую камеру
-      "dynamicCameraEnabled": true
+      // false - disable the shot recoil effect (for the enabled dynamic camera option)
+      // false - выключить эффект отдачи от выстрела (для включенной опции динамической камеры)
+      "shotRecoilEffect": true
     },
     // Postmortem mode
     // Режим после смерти
@@ -35,9 +35,9 @@
       // Чувствительность прокрутки (default = 5)
       // Scroll sensitivity (по умолчанию = 5)
       "scrollSensitivity": 5,
-      // false - disable dynamic camera
-      // false - выключить динамическую камеру
-      "dynamicCameraEnabled": true
+      // false - disable the shot recoil effect (for the enabled dynamic camera option)
+      // false - выключить эффект отдачи от выстрела (для включенной опции динамической камеры)
+      "shotRecoilEffect": true
     },
     // Strategic mode (arty)
     // Стратегический режим (арта)
@@ -45,9 +45,9 @@
       // Camera distance range: [min, max], default - [40, 100]
       // Отдаление камеры: [мин, макс], по умолчанию - [40, 100]
       "distRange": [40, 100],
-      // false - disable dynamic camera
-      // false - выключить динамическую камеру
-      "dynamicCameraEnabled": true
+      // false - disable the shot recoil effect (for the enabled dynamic camera option)
+      // false - выключить эффект отдачи от выстрела (для включенной опции динамической камеры)
+      "shotRecoilEffect": true
     },
     // Sniper mode
     // Снайперский режим
@@ -108,9 +108,9 @@
         // Формат текста
         "format": "<font face='$TitleFont' color='#95CB29' size='16'>x{{zoom}}</font>"
       },
-      // false - disable dynamic camera
-      // false - выключить динамическую камеру
-      "dynamicCameraEnabled": true
+      // false - disable the shot recoil effect (for the enabled dynamic camera option)
+      // false - выключить эффект отдачи от выстрела (для включенной опции динамической камеры)
+      "shotRecoilEffect": true
     }
   }
 }
