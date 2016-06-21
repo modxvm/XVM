@@ -91,8 +91,8 @@
         // Border color
         // Цвет рамки
         "borderColor": null,
-        // Shadow settings
-        // Настройки тени
+        // Shadow options
+        // Параметры тени
         "shadow": {
           // false - no shadow
           // false - без тени

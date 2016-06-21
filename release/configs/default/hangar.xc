@@ -143,8 +143,8 @@
         // Values above define bad response
         // Значения более считаются плохим откликом
       },
-      // Shadow settings
-      // Настройки тени
+      // Shadow options
+      // Параметры тени
       "shadow": {
         // false - no shadow
         // false - без тени
@@ -240,8 +240,8 @@
         //below this value the queue might be long
         //ниже этого значения очередь может быть долгой
       },
-      // Shadow settings
-      // Настройки тени
+      // Shadow options
+      // Параметры тени
       "shadow": {
         "enabled": true,
         "distance": 0,
