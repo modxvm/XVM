@@ -133,35 +133,27 @@
 
         public function setVehicleStats(data:IDAAPIDataClass):void
         {
-            Logger.addObject(data, 1, "setVehicleStats");
+            //Logger.addObject(data, 1, "setVehicleStats");
             try
             {
+                var vehicleStatsVO:DAAPIVehiclesStatsVO = DAAPIVehiclesStatsVO(data);
+                if (vehicleStatsVO.leftFrags)
+                {
+                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.leftFrags, true);
+                }
+                if (vehicleStatsVO.rightFrags)
+                {
+                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.rightFrags, false);
+                }
+                if (vehicleStatsVO.totalStats)
+                {
+                    _playersDataVO.updateTotalStats(vehicleStatsVO.totalStats);
+                }
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
-            /*
-            if(_loc2_.totalStats)
-            {
-                this.updateFrags(_loc2_.totalStats.leftScope,_loc2_.totalStats.rightScope);
-            this._allyTeamFragsStr = param1.toString();
-            this._enemyTeamFragsStr = param2.toString();
-            if(param1 == param2)
-            {
-                this._currentTeamSeparatorState = this.FRAG_EQUAL;
-            }
-            else if(param1 > param2)
-            {
-                this._currentTeamSeparatorState = this.FRAG_WIN;
-            }
-            else
-            {
-                this._currentTeamSeparatorState = this.FRAG_LOSE;
-            }
-            invalidate(INVALID_FRAGS);
-            }
-            */
         }
 
         public function updateInvitationsStatuses(data:IDAAPIDataClass) : void
@@ -252,26 +244,7 @@
         public function updateVehiclesStats(data:IDAAPIDataClass):void
         {
             //Logger.addObject(data, 1, "updateVehiclesStats");
-            try
-            {
-                var vehicleStatsVO:DAAPIVehiclesStatsVO = DAAPIVehiclesStatsVO(data);
-                if (vehicleStatsVO.leftFrags)
-                {
-                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.leftFrags, true);
-                }
-                if (vehicleStatsVO.rightFrags)
-                {
-                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.rightFrags, false);
-                }
-                if (vehicleStatsVO.totalStats)
-                {
-                    _playersDataVO.updateTotalStats(vehicleStatsVO.totalStats);
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            setVehicleStats(data);
         }
 
         public function updateVehicleStatus(data:IDAAPIDataClass):void

@@ -7,18 +7,8 @@
 def getMinimapCirclesData():
     return _g_minimap_circles.minimapCirclesData
 
-
-def setMinimapCirclesData(value):
-    _g_minimap_circles.minimapCirclesData = value
-
-
 def updateCurrentVehicle():
     _g_minimap_circles.updateCurrentVehicle()
-
-
-def updateMinimapCirclesData(descr):
-    _g_minimap_circles.updateMinimapCirclesData(descr)
-
 
 def save_or_restore():
     _g_minimap_circles.save_or_restore()
@@ -42,7 +32,6 @@ class _MinimapCircles(object):
     def __init__(self):
         self.clear()
 
-
     def clear(self):
         self.minimapCirclesData = None
         self.vehicleItem = None
@@ -64,6 +53,9 @@ class _MinimapCircles(object):
         self.radioman_inventor = 0.0
         self.camouflage = []
 
+    def setMinimapCirclesData(self, value):
+        log(value)
+        self.minimapCirclesData = value
 
     def updateCurrentVehicle(self):
         # debug('updateCurrentVehicle')
@@ -158,7 +150,6 @@ class _MinimapCircles(object):
         #debug('  consumable: %s' % str(self.consumable))
 
         self.updateMinimapCirclesData(self.vehicleItem.descriptor)
-
 
     def updateMinimapCirclesData(self, descr):
         # debug(vars(descr))
@@ -268,7 +259,6 @@ class _MinimapCircles(object):
                     # debug(tankman.descriptor.role + " " + str(crew_member['level']))
                     self.crew.append({'name': tankman.descriptor.role, 'data': crew_member})
 
-
     def _isOptionalEquipped(self, optional_name):
         for item in self.vehicleItem.descriptor.optionalDevices:
             # debug(vars(item))
@@ -291,6 +281,5 @@ class _MinimapCircles(object):
             if item is not None and item.isStimulator:
                 return True
         return False
-
 
 _g_minimap_circles = _MinimapCircles()
