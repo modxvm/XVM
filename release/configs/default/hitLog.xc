@@ -71,6 +71,9 @@
     // Shadow options.
     // Параметры тени.
     "shadow": {
+      // false - no shadow
+      // false - без тени
+      "enabled": true,
       "distance": 0,             // (in pixels)     / offset distance / дистанция смещения
       "angle": 45,               // (0.0 .. 360.0)  / offset angle    / угол смещения
       "color": "0x000000",       // "0xXXXXXX"      / color           / цвет

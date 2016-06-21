@@ -21,6 +21,7 @@
       // Color (dynamic colors allowed, see macros.txt).
       // Цвет (допускается использование динамического цвета, см. macros.txt)
       "color": null,
+      // Font options.
       // Параметры шрифта.
       "font": {
         "name": "$FieldFont",           // Font name      / Название
@@ -29,8 +30,10 @@
         "bold": false,                  // True - bold    / Жирный.
         "italic": false                 // True - italic  / Курсив.
       },
-      // Параметры тени.
       "shadow": {
+        // false - no shadow
+        // false - без тени
+        "enabled": true,
         "distance": 0,                  // (in pixels)     / offset distance / дистанция смещения
         "angle": 45,                    // (0.0 .. 360.0)  / offset angle    / угол смещения
         "color": "0x000000",            // "0xXXXXXX"      / color           / цвет
@@ -60,6 +63,7 @@
       "y": -34,                       // положение по оси Y
       "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
+      // Font options.
       // Параметры шрифта.
       "font": {
         "name": "$FieldFont",         //   название
@@ -68,8 +72,12 @@
         "bold": false,                //   обычный (false) или жирный (true)
         "italic": false               //   обычный (false) или курсив (true)
       },
+      // Shadow options.
       // Параметры тени.
       "shadow": {
+        // false - no shadow
+        // false - без тени
+        "enabled": true,
         "distance": 0,                //   дистанция смещения
         "angle": 45,                  //   угол смещения
         "color": "0x000000",          //   цвет
@@ -96,6 +104,7 @@
         "italic": false               //   обычный (false) или курсив (true)
       },
       "shadow": {                     // параметры тени
+        "enabled": true,              //   false - без тени
         "distance": 0,                //   дистанция смещения
         "angle": 45,                  //   угол смещения
         "color": "0x000000",          //   цвет
@@ -135,8 +144,12 @@
       // Offset along the Y axis (?)
       // Смещение по оси Y (?)
       "scaleY": 16,
+      // Shadow options.
       // Параметры тени.
       "shadow": {
+        // false - no shadow
+        // false - без тени
+        "enabled": true,
         "distance": 0,                  //   дистанция смещения
         "angle": 45,                    //   угол смещения
         "color": "0x000000",            //   цвет
@@ -252,6 +265,7 @@
       "scaleX": 0,
       "scaleY": 16,
       "shadow": {
+        "enabled": true,
         "distance": 0,
         "angle": 45,
         "color": "0x000000",

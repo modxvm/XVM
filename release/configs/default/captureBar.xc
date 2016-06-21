@@ -34,9 +34,14 @@
         // Full capture text format
         // Формат текста при полном захвате
         "done": "<font size='15' color='#FFCC66'>{{l10n:allyBaseCaptured}}</font>",
-        // Fields shadow
-        // Тень полей
+        // Shadow options
+        // Параметры тени
         "shadow": {
+          // false - no shadow
+          // false - без тени
+          "enabled": true,
+          "distance": 0,             // (in pixels)     / offset distance / дистанция смещения
+          "angle": 0,                // (0.0 .. 360.0)  / offset angle    / угол смещения
           "color": "0x000000",       // "0xXXXXXX"      / color           / цвет
           "alpha": 75,               // (0 .. 100)      / opacity         / прозрачность
           "blur": 5,                 // (0.0 .. 255.0)  / blur            / размытие
