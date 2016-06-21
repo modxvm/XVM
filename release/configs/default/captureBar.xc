@@ -37,17 +37,10 @@
         // Fields shadow
         // Тень полей
         "shadow": {
-          // Цвет.
-          "color": "0x000000",
-          // Opacity 0-100
-          // Прозрачность 0-100
-          "alpha": 75,
-          // Blur 0-255;
-          // Размытие 0-255;
-          "blur": 5,
-          // Intensity 0-255;
-          // Интенсивность 0-255;
-          "strength": 2
+          "color": "0x000000",       // "0xXXXXXX"      / color           / цвет
+          "alpha": 75,               // (0 .. 100)      / opacity         / прозрачность
+          "blur": 5,                 // (0.0 .. 255.0)  / blur            / размытие
+          "strength": 2              // (0.0 .. 255.0)  / intensity       / интенсивность
         }
       },
       // Vehicles count textfield (upper-left)

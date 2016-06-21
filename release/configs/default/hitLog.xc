@@ -71,22 +71,12 @@
     // Shadow options.
     // Параметры тени.
     "shadow": {
-      // Opacity.
-      // Прозрачность.
-      "alpha": 100,
-      // Цвет.
-      "color": "0x000000",
-      // Offset angle.
-      // Угол смещения.
-      "angle": 45,
-      // Offset distance.
-      // Дистанция смещения.
-      "distance": 0,
-      // Размер.
-      "blur": 5,
-      // Intensity.
-      // Интенсивность.
-      "strength": 150
+      "distance": 0,             // (in pixels)     / offset distance / дистанция смещения
+      "angle": 45,               // (0.0 .. 360.0)  / offset angle    / угол смещения
+      "color": "0x000000",       // "0xXXXXXX"      / color           / цвет
+      "alpha": 100,              // (0 .. 100)      / opacity         / прозрачность
+      "blur": 5,                 // (0.0 .. 255.0)  / blur            / размытие
+      "strength": 150            // (0.0 .. 255.0)  / intensity       / интенсивность
     }
   }
 }

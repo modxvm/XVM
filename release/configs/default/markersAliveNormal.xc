@@ -31,12 +31,12 @@
       },
       // Параметры тени.
       "shadow": {
-        "alpha": 100,                   // Opacity          / Прозрачность.
-        "color": "0x000000",            //                    Цвет.
-        "angle": 45,                    // Offset angle     / Угол смещения.
-        "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "blur": 6,                      //                    Размер.
-        "strength": 200                 // Intensity        / Интенсивность.
+        "distance": 0,                  // (in pixels)     / offset distance / дистанция смещения
+        "angle": 45,                    // (0.0 .. 360.0)  / offset angle    / угол смещения
+        "color": "0x000000",            // "0xXXXXXX"      / color           / цвет
+        "alpha": 100,                   // (0 .. 100)      / opacity         / прозрачность
+        "blur": 6,                      // (0.0 .. 255.0)  / blur            / размытие
+        "strength": 200                 //                 / intensity       / интенсивность
       },
       // Rising speed of displayed damage (float up speed).
       // Время отображения отлетающего урона.
@@ -68,10 +68,10 @@
         "italic": false
       },
       "shadow": {
-        "alpha": 100,
-        "color": "0x000000",
-        "angle": 45,
         "distance": 0,
+        "angle": 45,
+        "color": "0x000000",
+        "alpha": 100,
         "blur": 6,
         "strength": 200
       },
@@ -96,11 +96,11 @@
       },
       // Параметры тени.
       "shadow": {
-        "alpha": 100,                 //   прозрачность
-        "color": "0x000000",          //   цвет
+        "distance": 0,                //   дистанция смещения
         "angle": 45,                  //   угол смещения
-        "distance": 0,                //   дистанция смещение
-        "blur": 6,                    //   размер
+        "color": "0x000000",          //   цвет
+        "alpha": 100,                 //   прозрачность
+        "blur": 6,                    //   размытие
         "strength": 200               //   интенсивность
       },
       "format": "<font size='{{battletype?13|{{squad?13|0}}}}'>{{name}}</font>"  // формат текста. См. описание макросов в macros.txt
@@ -122,10 +122,10 @@
         "italic": false
       },
       "shadow": {
-        "alpha": 100,
-        "color": "0x000000",
-        "angle": 45,
         "distance": 0,
+        "angle": 45,
+        "color": "0x000000",
+        "alpha": 100,
         "blur": 4,
         "strength": 100
       },
@@ -148,10 +148,10 @@
         "italic": false
       },
       "shadow": {
-        "alpha": 100,
-        "color": "0x000000",
-        "angle": 45,
         "distance": 0,
+        "angle": 45,
+        "color": "0x000000",
+        "alpha": 100,
         "blur": 1,
         "strength": 100
       },
@@ -166,19 +166,21 @@
       "y": "{{battletype?-71|{{squad?-71|-56}}}}",  //  положение по оси Y
       "alpha": 100,                   //  прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       "color": "0xFFBB00",            //  цвет (допускается использование динамического цвета, см. macros.txt)
-      "font": {                       //  параметры шрифта
+      // Параметры шрифта.
+      "font": {
         "name": "xvm",                //  название
         "size": 23,                   //  размер
         "align": "center",            //  выравнивание текста (left, center, right)
         "bold": false,                //  обычный (false) или жирный (true)
         "italic": false               //  обычный (false) или курсив (true)
       },
-      "shadow": {                     //  параметры тени
-        "alpha": 100,                 //  прозрачность
-        "color": "0x000000",          //  цвет
+      // Параметры тени.
+      "shadow": {
+        "distance": 0,                //  дистанция смещения
         "angle": 45,                  //  угол смещения
-        "distance": 0,                //  дистанция смещение
-        "blur": 4,                    //  размер
+        "color": "0x000000",          //  цвет
+        "alpha": 100,                 //  прозрачность
+        "blur": 4,                    //  размытие
         "strength": 100               //  интенсивность
       },
       "format": "<font color='{{x-spotted?#FFBB00|#FFFFFF}}' alpha='{{x-spotted?#FF|#80}}'>{{x-spotted?&#x70;|{{x-sense-on?&#x70;}}}}</font> {{x-overturned?&#x112;}}"  //  формат текста. См. описание макросов в macros.txt
@@ -215,12 +217,12 @@
       "scaleY": 16,
       // Параметры тени.
       "shadow": {
-        "alpha": 100,                   // Opacity          / Прозрачность.
-        "color": "0x000000",            //                    Цвет.
-        "angle": 45,                    // Offset angle     / Угол смещения.
-        "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "blur": 6,                      //                    Размер.
-        "strength": 200                 // Intensity        / Интенсивность.
+        "distance": 0,                  //   дистанция смещения
+        "angle": 45,                    //   угол смещения
+        "color": "0x000000",            //   цвет
+        "alpha": 100,                   //   прозрачность
+        "blur": 6,                      //   размытие
+        "strength": 200                 //   интенсивность
       }
     },
     // Индикатор здоровья.
@@ -333,10 +335,10 @@
       "scaleX": 0,
       "scaleY": 16,
       "shadow": {
-        "alpha": 100,
-        "color": "0x000000",
-        "angle": 45,
         "distance": 0,
+        "angle": 45,
+        "color": "0x000000",
+        "alpha": 100,
         "blur": 6,
         "strength": 200
       }
