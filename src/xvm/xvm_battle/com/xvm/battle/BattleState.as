@@ -169,8 +169,7 @@
 
         public function setVehiclesData(data:IDAAPIDataClass):void
         {
-            Logger.add("setVehiclesData");
-            //Logger.addObject(data, 1, "setVehiclesData");
+            //Logger.add("setVehiclesData");
             try
             {
                 _playersDataVO = new VOPlayersData(data);

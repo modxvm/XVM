@@ -1,67 +1,67 @@
-﻿/**
- * XVM
- * @author Maxim Schedriviy <max(at)modxvm.com>
- */
-import com.xvm.*;
-import com.xvm.DataTypes.*;
-import com.xvm.events.*;
-import flash.filters.*;
-import flash.geom.*;
-import gfx.core.*;
-import gfx.controls.*;
-import net.wargaming.*;
-import net.wargaming.controls.*;
-import net.wargaming.managers.*;
-import net.wargaming.ingame.*;
-import wot.Minimap.*;
-import wot.PlayersPanel.*;
-
-class wot.PlayersPanel.PlayerListItemRenderer
-{
-    /////////////////////////////////////////////////////////////////
-    // wrapped methods
-
-    public var wrapper:net.wargaming.ingame.PlayerListItemRenderer;
-    private var base:net.wargaming.ingame.PlayerListItemRenderer;
-
-    public function PlayerListItemRenderer(wrapper:net.wargaming.ingame.PlayerListItemRenderer, base:net.wargaming.ingame.PlayerListItemRenderer)
-    {
-        this.wrapper = wrapper;
-        this.base = base;
-        wrapper.xvm_worker = this;
-        PlayerListItemRendererCtor();
-    }
-
-    function getColorTransform()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.getColorTransform.apply(base, arguments);
-        return this.getColorTransformImpl.apply(this, arguments);
-    }
-
-    function setState()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.setState.apply(base, arguments);
-        return this.setStateImpl.apply(this, arguments);
-    }
-
-    function update()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.update.apply(base, arguments);
-        return this.updateImpl.apply(this, arguments);
-    }
-
-    function updateSquadIcons()
-    {
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return base.updateSquadIcons.apply(base, arguments);
-        return this.updateSquadIconsImpl.apply(this, arguments);
-    }
-
-    // wrapped methods
-    /////////////////////////////////////////////////////////////////
+﻿// AS3:DONE /**
+// AS3:DONE  * XVM
+// AS3:DONE  * @author Maxim Schedriviy <max(at)modxvm.com>
+// AS3:DONE  */
+// AS3:DONE import com.xvm.*;
+// AS3:DONE import com.xvm.DataTypes.*;
+// AS3:DONE import com.xvm.events.*;
+// AS3:DONE import flash.filters.*;
+// AS3:DONE import flash.geom.*;
+// AS3:DONE import gfx.core.*;
+// AS3:DONE import gfx.controls.*;
+// AS3:DONE import net.wargaming.*;
+// AS3:DONE import net.wargaming.controls.*;
+// AS3:DONE import net.wargaming.managers.*;
+// AS3:DONE import net.wargaming.ingame.*;
+// AS3:DONE import wot.Minimap.*;
+// AS3:DONE import wot.PlayersPanel.*;
+// AS3:DONE 
+// AS3:DONE class wot.PlayersPanel.PlayerListItemRenderer
+// AS3:DONE {
+// AS3:DONE     /////////////////////////////////////////////////////////////////
+// AS3:DONE     // wrapped methods
+// AS3:DONE 
+// AS3:DONE     public var wrapper:net.wargaming.ingame.PlayerListItemRenderer;
+// AS3:DONE     private var base:net.wargaming.ingame.PlayerListItemRenderer;
+// AS3:DONE 
+// AS3:DONE     public function PlayerListItemRenderer(wrapper:net.wargaming.ingame.PlayerListItemRenderer, base:net.wargaming.ingame.PlayerListItemRenderer)
+// AS3:DONE     {
+// AS3:DONE         this.wrapper = wrapper;
+// AS3:DONE         this.base = base;
+// AS3:DONE         wrapper.xvm_worker = this;
+// AS3:DONE         PlayerListItemRendererCtor();
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function getColorTransform()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.getColorTransform.apply(base, arguments);
+// AS3:DONE         return this.getColorTransformImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function setState()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.setState.apply(base, arguments);
+// AS3:DONE         return this.setStateImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function update()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.update.apply(base, arguments);
+// AS3:DONE         return this.updateImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     function updateSquadIcons()
+// AS3:DONE     {
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return base.updateSquadIcons.apply(base, arguments);
+// AS3:DONE         return this.updateSquadIconsImpl.apply(this, arguments);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     // wrapped methods
+// AS3:DONE     /////////////////////////////////////////////////////////////////
 
     public static var MENU_MC_NAME = "menu_mc";
 
@@ -86,21 +86,21 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private var extraFieldsLayout:String;
     private var extraFieldsConfigured:Boolean;
 
-    public function PlayerListItemRendererCtor()
-    {
-        Utils.TraceXvmModule("PlayersPanel");
-
-        if (wrapper._name == "renderer99")
-            return;
-
-        extraFields = null;
-        extraFieldsConfigured = false;
-
-        GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
-    }
-
-    // IMPL
-
+// AS3:DONE     public function PlayerListItemRendererCtor()
+// AS3:DONE     {
+// AS3:DONE         Utils.TraceXvmModule("PlayersPanel");
+// AS3:DONE 
+// AS3:DONE         if (wrapper._name == "renderer99")
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         extraFields = null;
+// AS3:DONE         extraFieldsConfigured = false;
+// AS3:DONE 
+// AS3:DONE         GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     // IMPL
+// AS3:DONE 
     function getColorTransformImpl(schemeName:String, force:Boolean)
     {
         if (Config.config.battle.highlightVehicleIcon == false && !force)

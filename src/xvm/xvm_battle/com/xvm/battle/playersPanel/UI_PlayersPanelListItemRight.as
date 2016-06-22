@@ -22,45 +22,6 @@ package com.xvm.battle.playersPanel
             addChild(proxy);
         }
 
-        override protected function configUI():void
-        {
-            try
-            {
-                super.configUI();
-                proxy.onProxyConfigUI();
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        override protected function onDispose():void
-        {
-            try
-            {
-                proxy.onProxyDispose();
-                super.onDispose();
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        override public function setIsSelected(isSelected:Boolean):void
-        {
-            try
-            {
-                super.setIsSelected(isSelected);
-                proxy.setIsSelected(isSelected);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
         override public function setPlayerNameProps(userProps:IUserProps):void
         {
             try
@@ -85,17 +46,9 @@ package com.xvm.battle.playersPanel
                 super.draw();
                 if (proxy.xvm_enabled)
                 {
-                    if (isInvalid(PlayersPanelInvalidationType.VEHILCE_NAME))
+                    if (isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
                     {
-                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_VEHICLE_NAME);
-                    }
-                    if (isInvalid(PlayersPanelInvalidationType.FRAGS))
-                    {
-                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_FRAGS);
-                    }
-                    if (isInvalid(PlayersPanelInvalidationType.SELECTED))
-                    {
-                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_SELECTED);
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_UPDATE_COLORS);
                     }
                     if (isInvalid(InvalidationType.STATE))
                     {

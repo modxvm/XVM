@@ -75,31 +75,6 @@ package com.xvm.battle.playersPanel
             super.as_setPanelMode(state);
         }
 
-        override public function setPersonalStatus(param1:uint):void
-        {
-            Logger.addObject("setPersonalStatus: " + param1);
-            super.setPersonalStatus(param1);
-        }
-
-        //override public function as_setIsIntaractive(param1:Boolean):void
-        //{
-            ////Logger.add("UI_PlayersPanel.as_setIsIntaractive(): " + param1);
-            //super.as_setIsIntaractive(param1);
-        //}
-//
-
-        //override public function setVehiclesData(param1:IDAAPIDataClass):void
-        //{
-            ////Logger.add("UI_PlayersPanel.setVehiclesData(): " + param1);
-            //super.setVehiclesData(param1);
-        //}
-//
-        //override public function setArenaInfo(param1:IDAAPIDataClass):void
-        //{
-            ////Logger.add("UI_PlayersPanel.setArenaInfo(): " + param1);
-            //super.setArenaInfo(param1);
-        //}
-//
         // PRIVATE
 
         private function onConfigLoaded(e:Event):Object

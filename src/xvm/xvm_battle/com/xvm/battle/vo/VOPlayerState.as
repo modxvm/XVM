@@ -1,5 +1,6 @@
 ﻿package com.xvm.battle.vo
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xfw.events.*;
@@ -93,7 +94,8 @@
 
         override public function get isSelected():Boolean
         {
-            return PlayerStatus.isSelected(playerStatus);
+            //return PlayerStatus.isSelected(playerStatus); // not works?
+            return isCurrentPlayer && isAlive;
         }
 
         public function get isSquadMan():Boolean
