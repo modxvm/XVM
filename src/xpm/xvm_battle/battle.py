@@ -62,7 +62,7 @@ class SPOTTED_STATUS(object):
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, _g_battle.onXfwCommand)
     g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, _g_battle.onAppInitialized)
     g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, _g_battle.onAppDestroyed)
 
@@ -70,7 +70,7 @@ BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, _g_battle.onXfwCommand)
     g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, _g_battle.onAppInitialized)
     g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, _g_battle.onAppDestroyed)
 
@@ -82,6 +82,7 @@ def fini():
 
 @overrideMethod(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(base, self):
+    base(self)
     try:
         player = BigWorld.player()
         if player is not None and hasattr(player, 'arena'):
