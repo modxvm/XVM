@@ -277,7 +277,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 // AS3:DONE                 obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);
 // AS3:DONE                 obj.teamKiller = item.teamKiller == true;
 // AS3:DONE                 obj.squad = item.squad;
-                obj.entityName = wrapper.type != "left" ? "enemy" : obj.squad > 10 ? "squadman" : obj.teamKiller ? "teamKiller" : "ally";
+// AS3:DONE                 obj.entityName = wrapper.type != "left" ? "enemy" : obj.squad > 10 ? "squadman" : obj.teamKiller ? "teamKiller" : "ally";
                 obj.selected = item.isPostmortemView;
                 if (obj.position == null)
                     obj.position = ++m_lastPosition;

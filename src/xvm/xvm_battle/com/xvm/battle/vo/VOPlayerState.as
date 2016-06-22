@@ -71,6 +71,11 @@
             return VehicleStatus.isReady(vehicleStatus);
         }
 
+        public function get isOffline():Boolean
+        {
+            return !isReady;
+        }
+
         override public function get isNotAvailable():Boolean
         {
             return VehicleStatus.isNotAvailable(vehicleStatus);

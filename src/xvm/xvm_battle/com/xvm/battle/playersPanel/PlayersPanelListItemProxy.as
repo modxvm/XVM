@@ -8,10 +8,13 @@ package com.xvm.battle.playersPanel
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
+    import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
+    import flash.text.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
+    import net.wg.gui.battle.views.stats.constants.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.core.*;
 
@@ -117,11 +120,12 @@ package com.xvm.battle.playersPanel
             if (isInvalid(INVALIDATE_UPDATE_COLORS))
             {
                 updateVehicleIcon();
-                updateVehicleLevel();
+                updateStandardFields();
             }
             if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_VEHICLE_NAME, INVALIDATE_FRAGS, INVALIDATE_SELECTED, INVALIDATE_PANEL_STATE))
             {
-                update();
+                updateStandardFields();
+                updateExtraFields();
             }
         }
 
@@ -178,7 +182,7 @@ package com.xvm.battle.playersPanel
 
         // update
 
-        private function update():void
+        private function updateStandardFields():void
         {
             //Logger.add("update: " + ui.xfw_state);
 
@@ -219,24 +223,27 @@ package com.xvm.battle.playersPanel
 
         private function updatePlayerName():void
         {
-            var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, BattleState.getByPlayerName(_userProps.userName));
-            //Logger.add("updatePlayerName: " + txt);
-            ui.playerNameCutTF.htmlText = txt;
-            ui.playerNameFullTF.htmlText = txt;
+            updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight);
+            ui.playerNameCutTF.htmlText = ui.playerNameFullTF.htmlText
         }
 
         private function updateVehicleName():void
         {
-            var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, BattleState.getByPlayerName(_userProps.userName));
-            //Logger.add("updateVehicleName: " + txt);
-            ui.vehicleTF.htmlText = txt;
+            updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight);
         }
 
         private function updateFrags():void
         {
-            var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, BattleState.getByPlayerName(_userProps.userName));
-            //Logger.add("updateFrags: " + (isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight) + " => " + txt);
-            ui.fragsTF.htmlText = txt;
+            updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight);
+        }
+
+        private function updateStandardTextField(tf:TextField, format:String):void
+        {
+            var ps:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
+            var txt:String = Macros.Format(_userProps.userName, format, ps);
+            var schemeName:String = PlayerStatusSchemeName.getSchemeNameForPlayer(ps.isCurrentPlayer, ps.isSquadPersonal, ps.isTeamKiller, ps.isDead, ps.isOffline);
+            var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
+            tf.htmlText = "<font color='" + XfwUtils.toHtmlColor(colorScheme.rgb) + "'>" + txt + "</font>";
         }
 
         private function updateExtraFields():void
