@@ -33,8 +33,8 @@ import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_han
 
 from xfw import *
 
+from xvm_main.python.consts import XVM_COMMAND
 from xvm_main.python.logger import *
-from xvm_main.python.constants import XVM_COMMAND
 import xvm_main.python.config as config
 from xvm_main.python.vehinfo_tiers import getTiers
 import xvm_main.python.vehinfo as vehinfo

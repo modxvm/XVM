@@ -18,7 +18,7 @@ from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 
 from xfw import *
 
-from xvm_main.python.constants import *
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import Xvm as xvm_class
 from xvm_main.python import config

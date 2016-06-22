@@ -33,6 +33,48 @@
             return instance._playersDataVO;
         }
 
+        private var _captureBarData:VOCaptureBarData = new VOCaptureBarData();
+
+        public static function get captureBarDataVO():VOCaptureBarData
+        {
+            return instance._captureBarDataVO;
+        }
+
+        public static function set captureBarDataVO(value:VOCaptureBarData):void
+        {
+            instance._captureBarDataVO = value;
+        }
+
+        public static function get playerFrags():int
+        {
+            return instance._playerFrags;
+        }
+
+        public static function set playerFrags(value:int):void
+        {
+            instance._playerFrags = value;
+        }
+
+        public static function get hitlogTotalHits():int
+        {
+            return instance._hitlogTotalHits;
+        }
+
+        public static function set hitlogTotalHits(value:int):void
+        {
+            instance._hitlogTotalHits = value;
+        }
+
+        public static function get hitlogTotalDamage():int
+        {
+            return instance._hitlogTotalDamage;
+        }
+
+        public static function set hitlogTotalDamage(value:int):void
+        {
+            instance._hitlogTotalDamage = value;
+        }
+
         // instance
         instance; // static .ctor
         private static var _instance:BattleState = null;
@@ -47,11 +89,16 @@
 
         private var _arenaInfoVO:VOArenaInfo = null;
         private var _playersDataVO:VOPlayersData = null;
+        private var _captureBarDataVO:VOCaptureBarData = new VOCaptureBarData();
+        private var _playerFrags:int = 0;
+        private var _hitlogTotalHits:int = 0;       // TODO: set & update
+        private var _hitlogTotalDamage:int = 0;     // TODO: set & update
 
         // .ctor should be private for Singleton
         function BattleState()
         {
             Xfw.addCommandListener(BattleCommands.AS_UPDATE_PLAYER_STATE, onUpdatePlayerState);
+            Xfw.addCommandListener(BattleCommands.AS_UPDATE_HITLOG_DATA, onUpdateHitlogData);
         }
 
         // IBattleComponentDataController implementation
@@ -143,11 +190,11 @@
                 var vehicleStatsVO:DAAPIVehiclesStatsVO = DAAPIVehiclesStatsVO(data);
                 if (vehicleStatsVO.leftFrags)
                 {
-                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.leftFrags, true);
+                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.leftFrags);
                 }
                 if (vehicleStatsVO.rightFrags)
                 {
-                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.rightFrags, false);
+                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.rightFrags);
                 }
                 if (vehicleStatsVO.totalStats)
                 {
@@ -289,7 +336,7 @@
 
         private function onUpdatePlayerState(vehicleID:Number, data:Object):Object
         {
-            Logger.addObject(arguments);
+            //Logger.addObject(arguments, 2);
             try
             {
                 var playerState:VOPlayerState = get(vehicleID);
@@ -302,6 +349,16 @@
             {
                 Logger.err(ex);
             }
+            return null;
+        }
+
+        private function onUpdateHitlogData(vehicleID:Number, attackReasonID:Number, newHealth:Number):Object
+        {
+            Logger.add("onUpdateHitlogData: " + [vehicleID, attackReasonID, newHealth]);
+
+            hitlogTotalHits++;
+            //hitlogTotalDamage += TODO
+
             return null;
         }
     }

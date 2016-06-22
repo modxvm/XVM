@@ -1,25 +1,19 @@
 """ XVM (c) www.modxvm.com 2013-2016 """
 
-import os
 import traceback
-import weakref
 import simplejson
 
 import BigWorld
-import GUI
 from CurrentVehicle import g_currentVehicle
 from messenger import MessengerEntry
 from gui import SystemMessages
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
-from gui.battle_control import g_sessionProvider
-from gui.battle_control.arena_info.settings import VEHICLE_STATUS
-from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 
 from xfw import *
 
-from constants import *
+from consts import *
 from logger import *
 import config
 import configwatchdog
@@ -337,34 +331,6 @@ class Xvm(object):
 
         if g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.LOBBY:
             svcmsg.tokenUpdated()
-
-    def extendVehicleMarkerArgs(self, handle, function, args):
-        try:
-            if function == 'init':
-                if len(args) > 5:
-                    #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
-                    v = utils.getVehicleByName(args[5])
-                    if hasattr(v, 'publicInfo'):
-                        vInfo = utils.getVehicleInfo(v.id)
-                        vStats = utils.getVehicleStats(v.id)
-                        squadIndex = vInfo.squadIndex
-                        arenaDP = g_sessionProvider.getArenaDP()
-                        if arenaDP.isSquadMan(v.id):
-                            squadIndex += 10
-                        args.extend([
-                            vInfo.player.accountDBID,
-                            vInfo.vehicleType.compactDescr,
-                            v.publicInfo.marksOnGun,
-                            vInfo.vehicleStatus,
-                            vStats.frags,
-                            squadIndex,
-                        ])
-            elif function not in ['showExInfo']:
-                # debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))
-                pass
-        except Exception, ex:
-            err('extendVehicleMarkerArgs(): ' + traceback.format_exc())
-        return args
 
     def onKeyEvent(self, event):
         try:

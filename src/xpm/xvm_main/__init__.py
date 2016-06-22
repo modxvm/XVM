@@ -46,10 +46,10 @@ from gui.Scaleform.Minimap import Minimap
 
 from xfw import *
 
-from constants import *
+from consts import *
+from logger import *
 import config
 import filecache
-from logger import *
 import svcmsg
 import utils
 from xvm import g_xvm
@@ -232,12 +232,6 @@ def __SettingsContainer_getSetting(base, self, name):
             #debug('getSetting: {} = {}'.format(name, value))
     return value
 
-
-# TODO:0.9.15.1
-#@overrideMethod(MarkersManager, 'invokeMarker')
-def MarkersManager_invokeMarker(base, self, handle, function, args=None):
-    # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
-    base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
 
 

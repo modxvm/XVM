@@ -44,7 +44,7 @@ from items.vehicles import VEHICLE_CLASS_TAGS
 from xfw import *
 
 import config
-from constants import *
+from consts import *
 import filecache
 from logger import *
 import topclans

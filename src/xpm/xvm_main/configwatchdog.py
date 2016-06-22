@@ -23,7 +23,7 @@ import traceback
 import BigWorld
 from gui.shared import g_eventBus, events
 
-from constants import *
+from consts import *
 from logger import *
 
 class _ConfigWatchdog(object):

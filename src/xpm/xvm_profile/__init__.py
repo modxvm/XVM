@@ -32,8 +32,8 @@ from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from xfw import *
 
 from xvm_main.python.logger import *
+import xvm_main.python.consts as consts
 import xvm_main.python.config as config
-import xvm_main.python.constants as constants
 import xvm_main.python.dossier as dossier
 import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
@@ -148,7 +148,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
                 ref['xte'] = x
                 ref['xte_sup'] = xvm_scale.XvmScaleToSup(x)
                 if x > 0:
-                    color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, x)
+                    color = utils.getDynamicColorValue(consts.DYNAMIC_VALUE_TYPE.X, x)
                     xStr = 'XX' if x == 100 else ('0' if x < 10 else '') + str(x)
                     data = '<font color="#{}" size="12">({} {}%)</font>  <font color="{}">{}</font>'.format(
                         XFWCOLORS.UICOLOR_LABEL, l10n('better than'), ref['xte_sup'], color, xStr)
@@ -165,7 +165,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
                 x = vehinfo_xtdb.calculateXTDB(_lastVehCD, float(dmg) / battles)
                 sup = xvm_scale.XvmScaleToSup(x)
                 if x > 0:
-                    color = utils.getDynamicColorValue(constants.DYNAMIC_VALUE_TYPE.X, x)
+                    color = utils.getDynamicColorValue(consts.DYNAMIC_VALUE_TYPE.X, x)
                     item['data'] = '<font color="#{}" size="12">({} {}%)</font>  <font color="{}">{}</font>'.format(
                         XFWCOLORS.UICOLOR_LABEL, l10n('better than'), sup, color, item['data'])
 

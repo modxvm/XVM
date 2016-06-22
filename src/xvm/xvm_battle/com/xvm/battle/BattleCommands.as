@@ -9,5 +9,6 @@
 
         public static const AS_RESPONSE_BATTLE_GLOBAL_DATA:String = "xvm.as.response_battle_global_data";
         public static const AS_UPDATE_PLAYER_STATE:String = "xvm.as.update_player_state";
+        public static const AS_UPDATE_HITLOG_DATA:String = "xvm.as.update_hitlog_data";
     }
 }

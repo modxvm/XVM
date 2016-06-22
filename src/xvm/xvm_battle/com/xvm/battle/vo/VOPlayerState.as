@@ -4,6 +4,7 @@
     import com.xvm.battle.*;
     import com.xfw.events.*;
     import com.xvm.vo.*;
+    import com.xvm.battle.events.PlayerStateChangedEvent;
     import com.xvm.types.stat.*;
     import flash.errors.*;
     import net.wg.data.constants.*;
@@ -157,7 +158,7 @@
             if (_position != value)
             {
                 _position = value;
-                Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+                dispatchPlayerStateChangedEvent();
             }
         }
 
@@ -182,7 +183,7 @@
             {
                 _vehicleStatus = value;
                 updateStatData();
-                Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+                dispatchPlayerStateChangedEvent();
             }
         }
 
@@ -197,8 +198,8 @@
             {
                 _frags = frags;
                 if (isCurrentPlayer)
-                    BattleGlobalData.playerFrags = frags;
-                Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+                    BattleState.playerFrags = frags;
+                dispatchPlayerStateChangedEvent();
             }
         }
 
@@ -219,7 +220,7 @@
             return curHealth < 0;
         }
 
-        override public function VOPlayerState(data:IDAAPIDataClass, isEnemy:Boolean)
+        public function VOPlayerState(data:IDAAPIDataClass, isEnemy:Boolean)
         {
             var d:DAAPIVehicleInfoVO = DAAPIVehicleInfoVO(data);
             accountDBID = d.accountDBID;
@@ -260,7 +261,12 @@
 
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
 
-            Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+            dispatchPlayerStateChangedEvent();
+        }
+
+        private function dispatchPlayerStateChangedEvent():void
+        {
+            Xvm.dispatchEvent(new PlayerStateChangedEvent(vehicleID, accountDBID, playerName));
         }
 
         override public function update(data:Object):Boolean
@@ -268,7 +274,7 @@
             var updated:Boolean = super.update(data);
             if (updated)
             {
-                Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+                dispatchPlayerStateChangedEvent();
             }
             return updated;
         }

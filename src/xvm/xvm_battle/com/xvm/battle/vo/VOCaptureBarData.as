@@ -4,10 +4,9 @@
 
     public class VOCaptureBarData extends VOBase
     {
-        // XVM
-        public var points : Number = NaN;
-        public var vehiclesCount : String = null;
-        public var timeLeft : Number = NaN;
-        public var timeLeftSec : Boolean = false;
+        public var points:Number = NaN;
+        public var vehiclesCount:Number = NaN;
+        public var timeLeft:String = null;
+        public var timeLeftSec:Number = NaN;
     }
 }

@@ -55,7 +55,7 @@ from gui.shared import g_eventBus, events
 from xfw import *
 
 import config
-from constants import *
+from consts import *
 from logger import *
 import utils
 

@@ -40,10 +40,10 @@ package com.xvm.battle
             {
                 switch (o.getSubname())
                 {
-                    case "points": return Number(BattleState.playersDataVO.captureBarData.points);
-                    case "tanks": return Number(BattleState.playersDataVO.captureBarData.vehiclesCount);
-                    case "time":  return BattleState.playersDataVO.captureBarData.timeLeft;
-                    case "time-sec": return Number(BattleState.playersDataVO.captureBarData.timeLeftSec);
+                    case "points": return Number(BattleState.captureBarDataVO.points);
+                    case "tanks": return Number(BattleState.captureBarDataVO.vehiclesCount);
+                    case "time":  return BattleState.captureBarDataVO.timeLeft;
+                    case "time-sec": return Number(BattleState.captureBarDataVO.timeLeftSec);
                 }
                 return null;
             }
@@ -51,7 +51,7 @@ package com.xvm.battle
             // {{my-frags}}
             m_globals["my-frags"] = function(o:IVOMacrosOptions):Number
             {
-                return BattleGlobalData.playerFrags == 0 ? NaN : BattleGlobalData.playerFrags;
+                return BattleState.playerFrags == 0 ? NaN : BattleState.playerFrags;
             }
 
             // xmqp events macros
@@ -118,7 +118,7 @@ package com.xvm.battle
             // {{frags}}
             pdata["frags"] = function(o:VOPlayerState):Number
             {
-                return isNaN(o.frags) || o.frags == 0 ? NaN : o.frags;
+                return o.frags == 0 ? NaN : o.frags;
             }
 
             // {{marksOnGun}}
@@ -270,13 +270,13 @@ package com.xvm.battle
             // {{n}}
             pdata["n"] = function(o:VOPlayerState):Number
             {
-                return BattleState.playersDataVO.hitlogTotalHits;
+                return BattleState.hitlogTotalHits;
             }
 
             // {{dmg-total}}
             pdata["dmg-total"] = function(o:VOPlayerState):Number
             {
-                return BattleState.playersDataVO.hitlogTotalDamage;
+                return BattleState.hitlogTotalDamage;
             }
 
             // {{c:dmg-total}}
@@ -288,7 +288,7 @@ package com.xvm.battle
             // {{dmg-avg}}
             pdata["dmg-avg"] = function(o:VOPlayerState):Number
             {
-                return BattleState.playersDataVO.hitlogTotalHits == 0 ? NaN : Math.round(BattleState.playersDataVO.hitlogTotalDamage / BattleState.playersDataVO.hitlogTotalHits);
+                return BattleState.hitlogTotalHits == 0 ? NaN : Math.round(BattleState.hitlogTotalDamage / BattleState.hitlogTotalHits);
             }
 
             // {{n-player}}

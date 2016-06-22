@@ -37,8 +37,8 @@ from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
 
 from xfw import *
 
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
-from xvm_main.python.constants import *
 
 import pinger
 #import pinger_wg as pinger

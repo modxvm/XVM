@@ -7,6 +7,7 @@ package com.xvm.battle.playersPanel
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
@@ -16,11 +17,12 @@ package com.xvm.battle.playersPanel
 
     public class PlayersPanelListItemProxy extends UIComponent
     {
+        public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
         public static var INVALIDATE_USER_PROPS:String = "USER_PROPS";
         public static var INVALIDATE_VEHICLE_NAME:String = "VEHICLE_NAME";
         public static var INVALIDATE_FRAGS:String = "FRAGS";
         public static var INVALIDATE_SELECTED:String = "SELECTED";
-        public static var INVALIDATE_STATE:String = "STATE";
+        public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
 
         public var xvm_enabled:Boolean;
 
@@ -48,6 +50,7 @@ package com.xvm.battle.playersPanel
             this.ui = ui;
             this.isLeftPanel = isLeftPanel;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.addEventListener(PlayerStateChangedEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
             onConfigLoaded(null);
 
             DEFAULT_BG_ALPHA = ui.bg.alpha;
@@ -98,7 +101,7 @@ package com.xvm.battle.playersPanel
                     mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
                     break;
             }
-            invalidate(INVALIDATE_STATE);
+            invalidate(INVALIDATE_PANEL_STATE);
         }
 
         // UIComponent
@@ -108,6 +111,7 @@ package com.xvm.battle.playersPanel
             super.draw();
 
             //if (isInvalid(INVALIDATE_SELECTED))
+            //if (isInvalid(INVALIDATE_PLAYER_STATE))
             update();
         }
 
@@ -154,6 +158,14 @@ package com.xvm.battle.playersPanel
             return null;
         }
 
+        private function onPlayerStateChanged(e:PlayerStateChangedEvent):void
+        {
+            if (_userProps != null && e.playerName == _userProps.userName)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
+        }
+
         // update
 
         private function update():void
@@ -190,8 +202,7 @@ package com.xvm.battle.playersPanel
             if (mcfg != null && _userProps != null)
             {
                 var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, BattleState.getByPlayerName(_userProps.userName));
-                Logger.add("updatePlayerName: " + txt);
-                Logger.add(_userProps.userName + "|" + (isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight) + " | " + (BattleState.getByPlayerName(_userProps.userName)));
+                //Logger.add("updatePlayerName: " + txt);
                 ui.playerNameCutTF.htmlText = txt;
                 ui.playerNameFullTF.htmlText = txt;
             }
@@ -202,7 +213,7 @@ package com.xvm.battle.playersPanel
             if (mcfg != null && _userProps != null)
             {
                 var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, BattleState.getByPlayerName(_userProps.userName));
-                Logger.add("updateVehicleName: " + txt);
+                //Logger.add("updateVehicleName: " + txt);
                 ui.vehicleTF.htmlText = txt;
             }
         }
@@ -212,7 +223,7 @@ package com.xvm.battle.playersPanel
             if (mcfg != null && _userProps != null)
             {
                 var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, BattleState.getByPlayerName(_userProps.userName));
-                Logger.add("updateFrags: " + txt);
+                //Logger.add("updateFrags: " + (isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight) + " => " + txt);
                 ui.fragsTF.htmlText = txt;
             }
         }

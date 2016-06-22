@@ -1,6 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2016 """
 
-from constants import *
+from consts import *
 
 # PUBLIC
 

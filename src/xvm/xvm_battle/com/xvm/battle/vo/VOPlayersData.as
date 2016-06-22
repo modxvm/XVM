@@ -41,11 +41,6 @@
         public var leftScope:int = 0;
         public var rightScope:int = 0;
 
-        // XVM
-        public var hitlogTotalHits:int = 0;       // TODO: set & update
-        public var hitlogTotalDamage:int = 0;     // TODO: set & update
-        public var captureBarData:VOCaptureBarData = new VOCaptureBarData();
-
         // private
         private var playerNameToVehicleIDMap:Dictionary;
 
@@ -93,7 +88,7 @@
             }
         }
 
-        public function updateVehicleFrags(data:Vector.<DAAPIVehicleStatsVO>, isLeft:Boolean):void
+        public function updateVehicleFrags(data:Vector.<DAAPIVehicleStatsVO>):void
         {
             for each (var vehicleStats:DAAPIVehicleStatsVO in data)
             {

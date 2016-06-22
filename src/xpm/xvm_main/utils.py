@@ -17,9 +17,9 @@ from gui.battle_control import g_sessionProvider
 from xfw import *
 
 import config
+from consts import XVM_PATH
 from logger import *
 import userprefs
-from xvm_main.python.constants import XVM_PATH
 
 
 def touch(fname, times=None):

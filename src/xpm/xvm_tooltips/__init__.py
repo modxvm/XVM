@@ -46,7 +46,7 @@ from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from xfw import *
 
 import xvm_main.python.config as config
-from xvm_main.python.constants import *
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers

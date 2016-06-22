@@ -13,7 +13,7 @@ from gui.shared import g_eventBus, events
 from xfw import *
 import xfw.constants as xfw_constants
 
-from constants import *
+from consts import *
 from logger import *
 from default_xvm_xc import DEFAULT_XVM_XC
 import default_config

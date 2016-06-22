@@ -4,6 +4,7 @@
 # imports
 
 import traceback
+import weakref
 
 import BigWorld
 import game
@@ -40,7 +41,7 @@ class INV(object):
     NONE                = 0x00000000
     VEHICLE_STATUS      = 0x00000001 # ready, alive, not_available, stop_respawn
     PLAYER_STATUS       = 0x00000002 # isActionDisabled, isSelected, isSquadMan, isSquadPersonal, isTeamKiller, isVoipDisabled
-    SQUAD_INDEX		= 0x00000008
+    SQUAD_INDEX         = 0x00000008
     CUR_HEALTH          = 0x00000010
     MAX_HEALTH          = 0x00000020
     MARKS_ON_GUN        = 0x00000040
@@ -134,7 +135,7 @@ def _PlayerAvatar_onLeaveWorld(self):
 @registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
 def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     # debug("> _PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
-    _g_battle.updatePlayerState(vehicleID, INV.ALL)
+    _g_battle.updatePlayerState(vehicle.id, INV.ALL)
 
 # on any player marker lost
 @registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
@@ -146,7 +147,9 @@ def _PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
 @registerEvent(Vehicle, 'onHealthChanged')
 def _Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> _Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    _g_battle.updatePlayerState(vehicleID, INV.CUR_HEALTH)
+    _g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
+    if attackerID == BigWorld.player().playerVehicleID:
+        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_HITLOG_DATA, self.id, attackReasonID, newHealth)
 
 # on vehicle info updated
 @registerEvent(BattleArenaController, 'updateVehiclesInfo')
@@ -192,11 +195,11 @@ class Battle(object):
     def onStartBattle(self):
         self._spotted_cache = {}
 
-    def getSpottedStatus(vehicleID):
+    def getSpottedStatus(self, vehicleID):
         return self._spotted_cache.get(vehicleID, SPOTTED_STATUS.NEVER_SEEN)
 
     def onVehicleKilled(self, victimID, *args):
-        self._spotted_cache[vehicleID] = SPOTTED_STATUS.DEAD
+        self._spotted_cache[victimID] = SPOTTED_STATUS.DEAD
         self.updatePlayerState(victimID, INV.VEHICLE_STATUS | INV.CUR_HEALTH | INV.SPOTTED_STATUS)
 
     def onAvatarReady(self, vehicleID):
@@ -215,32 +218,32 @@ class Battle(object):
 
     def updatePlayerState(self, vehicleID, targets):
         try:
-            if targets & (ALL_VINFO | ALL_VSTATS):
+            if targets & (INV.ALL_VINFO | INV.ALL_VSTATS):
                 arenaDP = g_sessionProvider.getArenaDP()
-                if targets & ALL_VINFO:
+                if targets & INV.ALL_VINFO:
                     vInfoVO = arenaDP.getVehicleInfo(vehicleID)
-                if targets & ALL_VSTATS:
+                if targets & INV.ALL_VSTATS:
                     vStatsVO = arenaDP.getVehicleStats(vehicleID)
 
-            if targets & ALL_ENTITY:
+            if targets & INV.ALL_ENTITY:
                 entity = BigWorld.entity(vehicleID)
 
             data = {}
             if targets & INV.VEHICLE_STATUS:
                 data['vehicleStatus'] = vInfoVO.vehicleStatus
-            elif targets & INV.PLAYER_STATUS:
+            if targets & INV.PLAYER_STATUS:
                 data['playerStatus'] = vInfoVO.playerStatus
-            elif targets & INV.SQUAD_INDEX:
+            if targets & INV.SQUAD_INDEX:
                 data['squadIndex'] = vInfoVO.squadIndex
-            elif targets & INV.CUR_HEALTH:
+            if targets & INV.CUR_HEALTH:
                 data['curHealth'] = max(0, entity.health) if entity else None
-            elif targets & INV.MAX_HEALTH:
+            if targets & INV.MAX_HEALTH:
                 data['maxHealth'] = entity.typeDescriptor.maxHealth if entity else None
-            elif targets & INV.MARKS_ON_GUN:
+            if targets & INV.MARKS_ON_GUN:
                 data['marksOnGun'] = entity.publicInfo.marksOnGun if entity else None
-            elif targets & INV.SPOTTED_STATUS:
-                data['spottedStatus'] = getSpottedStatus(vehicleID)
-            elif targets & INV.FRAGS:
+            if targets & INV.SPOTTED_STATUS:
+                data['spottedStatus'] = self.getSpottedStatus(vehicleID)
+            if targets & INV.FRAGS:
                 data['frags'] = vStatsVO.frags
             as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
         except Exception, ex:
@@ -260,15 +263,15 @@ class Battle(object):
                 arenaVehicle = arena.vehicles.get(vehicleID)
                 vehCD = getVehCD(vehicleID)
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA,
-                    vehicleID,					# playerVehicleID
-                    arenaVehicle['name'],			# playerName
-                    vehCD,					# playerVehCD
-                    arena.extraData.get('battleLevel', 0),	# battleLevel
-                    arena.bonusType,				# battleType
-                    arena.guiType,				# arenaGuiType
-                    utils.getMapSize(),				# mapSize
-                    minimap_circles.getMinimapCirclesData(),	# minimapCirclesData
-                    vehinfo_xtdb.vehArrayXTDB(vehCD))		# xtdb_data
+                    vehicleID,                                  # playerVehicleID
+                    arenaVehicle['name'],                       # playerName
+                    vehCD,                                      # playerVehCD
+                    arena.extraData.get('battleLevel', 0),      # battleLevel
+                    arena.bonusType,                            # battleType
+                    arena.guiType,                              # arenaGuiType
+                    utils.getMapSize(),                         # mapSize
+                    minimap_circles.getMinimapCirclesData(),    # minimapCirclesData
+                    vehinfo_xtdb.vehArrayXTDB(vehCD))           # xtdb_data
                 return (None, True)
 
             elif cmd == XVM_BATTLE_COMMAND.BATTLE_CTRL_SET_VEHICLE_DATA:
@@ -298,13 +301,6 @@ class Battle(object):
 
 _g_battle = Battle()
 
-#        public var entityName:String = null;
-#        public var entryName:String = null;
-#        public var damageInfo:VODamageInfo;
-#        public var xmqpData:VOXmqpData;
-#        public var hitlogCount:int = 0;
-#        public var hitlogDamage:int = 0;
-#
 #    def updateMarker(self, vehicleID, targets):
 #        #trace('updateMarker: {0} {1}'.format(targets, vehicleID))
 #
@@ -369,3 +365,38 @@ _g_battle = Battle()
 #                g_xvm.invalidate(vehicleID, INV.BATTLE_SQUAD)
 #            else:
 #                minimap._Minimap__callEntryFlash(vehicleID, 'update')
+
+## TODO:0.9.15.1
+##@overrideMethod(MarkersManager, 'invokeMarker')
+#def MarkersManager_invokeMarker(base, self, handle, function, args=None):
+#    # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
+#    base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
+#
+#    def extendVehicleMarkerArgs(self, handle, function, args):
+#        try:
+#            if function == 'init':
+#                if len(args) > 5:
+#                    #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
+#                    v = utils.getVehicleByName(args[5])
+#                    if hasattr(v, 'publicInfo'):
+#                        vInfo = utils.getVehicleInfo(v.id)
+#                        vStats = utils.getVehicleStats(v.id)
+#                        squadIndex = vInfo.squadIndex
+#                        arenaDP = g_sessionProvider.getArenaDP()
+#                        if arenaDP.isSquadMan(v.id):
+#                            squadIndex += 10
+#                        args.extend([
+#                            vInfo.player.accountDBID,
+#                            vInfo.vehicleType.compactDescr,
+#                            v.publicInfo.marksOnGun,
+#                            vInfo.vehicleStatus,
+#                            vStats.frags,
+#                            squadIndex,
+#                        ])
+#            elif function not in ['showExInfo']:
+#                # debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))
+#                pass
+#        except Exception, ex:
+#            err('extendVehicleMarkerArgs(): ' + traceback.format_exc())
+#        return args
+#

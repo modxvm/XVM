@@ -33,7 +33,7 @@ from xfw import *
 import xvm_main.python.userprefs as userprefs
 import xvm_main.python.config as config
 from xvm_main.python.logger import err, debug
-from xvm_main.python.constants import *
+from xvm_main.python.consts import *
 
 import wg_compat
 

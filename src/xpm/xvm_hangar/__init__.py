@@ -31,7 +31,7 @@ from gui.prb_control.dispatcher import _PrebattleDispatcher
 from xfw import *
 
 import xvm_main.python.config as config
-from xvm_main.python.constants import *
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 

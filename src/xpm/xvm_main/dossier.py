@@ -31,7 +31,7 @@ from gui.LobbyContext import g_lobbyContext
 
 from xfw import *
 
-from constants import *
+from consts import *
 from logger import *
 import vehinfo_xtdb
 import vehinfo_xte

@@ -26,16 +26,6 @@
             return instance.getCurentXtdb();
         }
 
-        public static function get playerFrags():int
-        {
-            return instance._playerFrags;
-        }
-
-        public static function set playerFrags(value:int):void
-        {
-            instance._playerFrags = value;
-        }
-
         // instance
         instance; // static .ctor
         private static var _instance:BattleGlobalData = null;
@@ -57,8 +47,6 @@
         private var _mapSize:Number;
         private var _minimapCirclesData:VOMinimapCirclesData;
         private var _xtdb_data:Array;
-
-        private var _playerFrags:int = 0;
 
         // .ctor should be private for Singleton
         function BattleGlobalData()
@@ -91,7 +79,7 @@
                 var xtdb_data_len:Number = _xtdb_data.length;
                 while (_curent_xtdb < xtdb_data_len - 1)
                 {
-                    if (BattleState.playersDataVO.hitlogTotalDamage < _xtdb_data[_curent_xtdb])
+                    if (BattleState.hitlogTotalDamage < _xtdb_data[_curent_xtdb])
                         break;
                     ++_curent_xtdb;
                 }

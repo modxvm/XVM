@@ -6,6 +6,5 @@
         public static const MINIMAP_ALT_MODE:String = "MINIMAP_ALT_MODE";
         public static const PLAYERS_PANEL_ALT_MODE:String = "PLAYERS_PANEL_ALT_MODE";
         public static const BATTLE_LABEL_KEY_MODE:String = "BATTLE_LABEL_KEY_MODE";
-        public static const PLAYER_STATE_CHANGED:String = "PLAYER_STATE_CHANGED";
     }
 }

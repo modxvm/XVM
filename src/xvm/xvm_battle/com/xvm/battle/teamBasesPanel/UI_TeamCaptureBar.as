@@ -192,7 +192,7 @@ package com.xvm.battle.teamBasesPanel
             if (!cfg)
                 return;
 
-            BattleState.playersDataVO.captureBarData.update({
+            BattleState.captureBarDataVO.update({
                 points: m_points,
                 vehiclesCount: m_vehiclesCount,
                 timeLeft: m_timeLeft,
