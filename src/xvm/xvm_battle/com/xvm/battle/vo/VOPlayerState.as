@@ -94,8 +94,7 @@
 
         override public function get isSelected():Boolean
         {
-            //return PlayerStatus.isSelected(playerStatus); // not works?
-            return isCurrentPlayer && isAlive;
+            return PlayerStatus.isSelected(playerStatus);
         }
 
         public function get isSquadMan():Boolean

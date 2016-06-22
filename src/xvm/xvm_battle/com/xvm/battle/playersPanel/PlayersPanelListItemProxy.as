@@ -4,6 +4,7 @@
  */
 package com.xvm.battle.playersPanel
 {
+    import net.wg.data.constants.*;
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
@@ -101,7 +102,8 @@ package com.xvm.battle.playersPanel
             }
             if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_PANEL_STATE))
             {
-                updateStandardFields();
+                if (!isInvalid(INVALIDATE_UPDATE_COLORS))
+                    updateStandardFields();
                 updateExtraFields();
             }
             if (isInvalid(INVALIDATE_UPDATE_PANEL_SIZE))

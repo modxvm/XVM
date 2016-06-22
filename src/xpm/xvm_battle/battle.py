@@ -40,14 +40,14 @@ from commands import *
 class INV(object):
     NONE                = 0x00000000
     VEHICLE_STATUS      = 0x00000001 # ready, alive, not_available, stop_respawn
-    PLAYER_STATUS       = 0x00000002 # isActionDisabled, isSelected, isSquadMan, isSquadPersonal, isTeamKiller, isVoipDisabled
+    #PLAYER_STATUS       = 0x00000002 # isActionDisabled, isSelected, isSquadMan, isSquadPersonal, isTeamKiller, isVoipDisabled
     SQUAD_INDEX         = 0x00000008
     CUR_HEALTH          = 0x00000010
     MAX_HEALTH          = 0x00000020
     MARKS_ON_GUN        = 0x00000040
     SPOTTED_STATUS      = 0x00000080
     FRAGS               = 0x00000100
-    ALL_VINFO           = PLAYER_STATUS | VEHICLE_STATUS | SQUAD_INDEX | FRAGS
+    ALL_VINFO           = VEHICLE_STATUS | SQUAD_INDEX | FRAGS # | PLAYER_STATUS
     ALL_VSTATS          = FRAGS
     ALL_ENTITY          = CUR_HEALTH | MAX_HEALTH | MARKS_ON_GUN
     ALL                 = 0xFFFFFFFF
@@ -162,7 +162,7 @@ def _BattleArenaController_updateVehiclesInfo(self, updated, arenaDP):
                 if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
                     for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(vo.team)):
                         if vInfoVO.squadIndex > 0:
-                            _g_battle.updatePlayerState(vehicleID, INV.PLAYER_STATUS | INV.SQUAD_INDEX)
+                            _g_battle.updatePlayerState(vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -231,8 +231,9 @@ class Battle(object):
             data = {}
             if targets & INV.VEHICLE_STATUS:
                 data['vehicleStatus'] = vInfoVO.vehicleStatus
-            if targets & INV.PLAYER_STATUS:
-                data['playerStatus'] = vInfoVO.playerStatus
+            # why vInfoVO.playerStatus = 0?
+            #if targets & INV.PLAYER_STATUS:
+            #    data['playerStatus'] = vInfoVO.playerStatus
             if targets & INV.SQUAD_INDEX:
                 data['squadIndex'] = vInfoVO.squadIndex
             if targets & INV.CUR_HEALTH:
