@@ -96,6 +96,10 @@ package com.xvm.battle.playersPanel
                     {
                         proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_SELECTED);
                     }
+                    if (isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
+                    {
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_UPDATE_COLORS);
+                    }
                     if (isInvalid(InvalidationType.STATE))
                     {
                         proxy.applyState();

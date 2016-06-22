@@ -194,11 +194,11 @@
 
         public function set frags(value:int):void
         {
-            if (_frags != frags)
+            if (_frags != value)
             {
-                _frags = frags;
+                _frags = value;
                 if (isCurrentPlayer)
-                    BattleState.playerFrags = frags;
+                    BattleState.playerFrags = value;
                 dispatchPlayerStateChangedEvent();
             }
         }

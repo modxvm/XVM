@@ -23,6 +23,7 @@ package com.xvm.battle.playersPanel
         public static var INVALIDATE_FRAGS:String = "FRAGS";
         public static var INVALIDATE_SELECTED:String = "SELECTED";
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
+        public static var INVALIDATE_UPDATE_COLORS:String = "INVALIDATE_UPDATE_COLORS";
 
         public var xvm_enabled:Boolean;
 
@@ -110,9 +111,18 @@ package com.xvm.battle.playersPanel
         {
             super.draw();
 
-            //if (isInvalid(INVALIDATE_SELECTED))
-            //if (isInvalid(INVALIDATE_PLAYER_STATE))
-            update();
+            if (mcfg == null || _userProps == null)
+                return;
+
+            if (isInvalid(INVALIDATE_UPDATE_COLORS))
+            {
+                updateVehicleIcon();
+                updateVehicleLevel();
+            }
+            if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_VEHICLE_NAME, INVALIDATE_FRAGS, INVALIDATE_SELECTED, INVALIDATE_PANEL_STATE))
+            {
+                update();
+            }
         }
 
         // PRIVATE
@@ -135,7 +145,7 @@ package com.xvm.battle.playersPanel
                     ui.selfBg.alpha = alpha;
                     ui.deadBg.alpha = alpha;
 
-                    ui.vehicleIcon.alpha = Macros.GlobalNumber(pcfg.iconAlpha, 100) / 100.0;
+                    updateVehicleIcon();
 
                     opt_removeSelectedBackground = Macros.GlobalBoolean(pcfg.removeSelectedBackground, false);
                 }
@@ -194,38 +204,39 @@ package com.xvm.battle.playersPanel
             updateFrags();
             updateExtraFields();
             ui.selfBg.visible = _isSelected && !opt_removeSelectedBackground;
+            updateVehicleLevel();
+        }
+
+        private function updateVehicleIcon():void
+        {
+            ui.vehicleIcon.alpha = Macros.GlobalNumber(pcfg.iconAlpha, 100) / 100.0;
+        }
+
+        private function updateVehicleLevel():void
+        {
             ui.vehicleLevel.alpha = Macros.GlobalNumber(mcfg.vehicleLevelAlpha, 100) / 100.0;
         }
 
         private function updatePlayerName():void
         {
-            if (mcfg != null && _userProps != null)
-            {
-                var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, BattleState.getByPlayerName(_userProps.userName));
-                //Logger.add("updatePlayerName: " + txt);
-                ui.playerNameCutTF.htmlText = txt;
-                ui.playerNameFullTF.htmlText = txt;
-            }
+            var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, BattleState.getByPlayerName(_userProps.userName));
+            //Logger.add("updatePlayerName: " + txt);
+            ui.playerNameCutTF.htmlText = txt;
+            ui.playerNameFullTF.htmlText = txt;
         }
 
         private function updateVehicleName():void
         {
-            if (mcfg != null && _userProps != null)
-            {
-                var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, BattleState.getByPlayerName(_userProps.userName));
-                //Logger.add("updateVehicleName: " + txt);
-                ui.vehicleTF.htmlText = txt;
-            }
+            var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, BattleState.getByPlayerName(_userProps.userName));
+            //Logger.add("updateVehicleName: " + txt);
+            ui.vehicleTF.htmlText = txt;
         }
 
         private function updateFrags():void
         {
-            if (mcfg != null && _userProps != null)
-            {
-                var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, BattleState.getByPlayerName(_userProps.userName));
-                //Logger.add("updateFrags: " + (isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight) + " => " + txt);
-                ui.fragsTF.htmlText = txt;
-            }
+            var txt:String = Macros.Format(_userProps.userName, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, BattleState.getByPlayerName(_userProps.userName));
+            //Logger.add("updateFrags: " + (isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight) + " => " + txt);
+            ui.fragsTF.htmlText = txt;
         }
 
         private function updateExtraFields():void
