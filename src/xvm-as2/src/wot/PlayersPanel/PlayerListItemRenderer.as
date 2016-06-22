@@ -101,21 +101,21 @@
 // AS3:DONE 
 // AS3:DONE     // IMPL
 // AS3:DONE 
-    function getColorTransformImpl(schemeName:String, force:Boolean)
-    {
-        if (Config.config.battle.highlightVehicleIcon == false && !force)
-        {
-            if (schemeName == "selected" || schemeName == "squad")
-                schemeName = "normal";
-            else if (schemeName == "selected_offline" || schemeName == "squad_offline")
-                schemeName = "normal_offline";
-            else if (schemeName == "selected_dead" || schemeName == "squad_dead")
-                schemeName = "normal_dead";
-        }
-
-        return base.getColorTransform(schemeName);
-    }
-
+// AS3:DONE     function getColorTransformImpl(schemeName:String, force:Boolean)
+// AS3:DONE     {
+// AS3:DONE         if (Config.config.battle.highlightVehicleIcon == false && !force)
+// AS3:DONE         {
+// AS3:DONE             if (schemeName == "selected" || schemeName == "squad")
+// AS3:DONE                 schemeName = "normal";
+// AS3:DONE             else if (schemeName == "selected_offline" || schemeName == "squad_offline")
+// AS3:DONE                 schemeName = "normal_offline";
+// AS3:DONE             else if (schemeName == "selected_dead" || schemeName == "squad_dead")
+// AS3:DONE                 schemeName = "normal_dead";
+// AS3:DONE         }
+// AS3:DONE 
+// AS3:DONE         return base.getColorTransform(schemeName);
+// AS3:DONE     }
+// AS3:DONE 
 // AS3:DONE     function setStateImpl()
 // AS3:DONE     {
 // AS3:DONE         var savedValue = wrapper.data.isPostmortemView;

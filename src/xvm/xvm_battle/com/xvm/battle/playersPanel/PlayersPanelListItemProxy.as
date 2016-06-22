@@ -4,7 +4,6 @@
  */
 package com.xvm.battle.playersPanel
 {
-    import net.wg.data.constants.*;
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
@@ -32,8 +31,6 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
         private var DEFAULT_DEADBG_ALPHA:Number;
-        private var DEFAULT_VEHICLEICON_ALPHA:Number;
-        private var DEFAULT_VEHICLELEVEL_ALPHA:Number;
 
         private var pcfg:CPlayersPanel;
         private var mcfg:CPlayersPanelMode;
@@ -61,8 +58,6 @@ package com.xvm.battle.playersPanel
             DEFAULT_BG_ALPHA = ui.bg.alpha;
             DEFAULT_SELFBG_ALPHA = ui.selfBg.alpha;
             DEFAULT_DEADBG_ALPHA = ui.deadBg.alpha;
-            DEFAULT_VEHICLEICON_ALPHA = ui.vehicleIcon.alpha;
-            DEFAULT_VEHICLELEVEL_ALPHA = ui.vehicleLevel.alpha;
         }
 
         public function setPlayerNameProps(userProps:IUserProps):void
@@ -89,26 +84,33 @@ package com.xvm.battle.playersPanel
 
         override protected function draw():void
         {
-            super.draw();
-
-            if (mcfg == null || _userProps == null)
-                return;
-
-            if (isInvalid(INVALIDATE_UPDATE_COLORS))
+            try
             {
-                updateVehicleIcon();
-                _standardTextFieldsTexts = { };
-                updateStandardFields();
-            }
-            if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_PANEL_STATE))
-            {
-                if (!isInvalid(INVALIDATE_UPDATE_COLORS))
+                super.draw();
+
+                if (mcfg == null || _userProps == null)
+                    return;
+
+                if (isInvalid(INVALIDATE_UPDATE_COLORS))
+                {
+                    updateVehicleIcon();
+                    _standardTextFieldsTexts = { };
                     updateStandardFields();
-                updateExtraFields();
+                }
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_PANEL_STATE))
+                {
+                    if (!isInvalid(INVALIDATE_UPDATE_COLORS))
+                        updateStandardFields();
+                    updateExtraFields();
+                }
+                if (isInvalid(INVALIDATE_UPDATE_PANEL_SIZE))
+                {
+                    updatePanelSize();
+                }
             }
-            if (isInvalid(INVALIDATE_UPDATE_PANEL_SIZE))
+            catch (ex:Error)
             {
-                updatePanelSize();
+                Logger.err(ex);
             }
         }
 
@@ -132,8 +134,6 @@ package com.xvm.battle.playersPanel
                     ui.selfBg.alpha = alpha;
                     ui.deadBg.alpha = alpha;
 
-                    updateVehicleIcon();
-
                     opt_removeSelectedBackground = Macros.GlobalBoolean(pcfg.removeSelectedBackground, false);
                     opt_vehicleIconAlpha = Macros.GlobalNumber(pcfg.iconAlpha, 100) / 100.0;
                 }
@@ -142,9 +142,6 @@ package com.xvm.battle.playersPanel
                     ui.bg.alpha = DEFAULT_BG_ALPHA;
                     ui.selfBg.alpha = DEFAULT_SELFBG_ALPHA;
                     ui.deadBg.alpha = DEFAULT_DEADBG_ALPHA;
-
-                    ui.vehicleIcon.alpha = DEFAULT_VEHICLEICON_ALPHA;
-                    ui.vehicleLevel.alpha = DEFAULT_VEHICLELEVEL_ALPHA;
                 }
 
                 ui.invalidate();
@@ -165,6 +162,18 @@ package com.xvm.battle.playersPanel
         }
 
         // update
+
+        private function updateVehicleIcon():void
+        {
+            var playerState:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
+            var isCurrentPlayer:Boolean = playerState.isCurrentPlayer && Config.config.battle.highlightVehicleIcon;
+            var isSquadPersonal:Boolean = playerState.isSquadPersonal && Config.config.battle.highlightVehicleIcon;
+            var isTeamKiller:Boolean = playerState.isTeamKiller && Config.config.battle.highlightVehicleIcon;
+            var schemeName:String = PlayerStatusSchemeName.getSchemeNameForVehicle(isCurrentPlayer, isSquadPersonal, isTeamKiller, playerState.isDead, playerState.isOffline);
+            var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
+            ui.vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
+            ui.vehicleIcon.alpha *= opt_vehicleIconAlpha;
+        }
 
         private function updateStandardFields():void
         {
@@ -192,18 +201,16 @@ package com.xvm.battle.playersPanel
                     break;
             }
             updateFrags(playerState);
-            updateVehicleLevel();
+            updateVehicleLevel(playerState);
             updateSelfBg(playerState);
         }
 
-        private function updateVehicleIcon():void
+        private function updateVehicleLevel(playerState:VOPlayerState):void
         {
-            ui.vehicleIcon.alpha = opt_vehicleIconAlpha;
-        }
-
-        private function updateVehicleLevel():void
-        {
-            ui.vehicleLevel.alpha = Macros.GlobalNumber(mcfg.vehicleLevelAlpha, 100) / 100.0;
+            var schemeName:String = PlayerStatusSchemeName.getSchemeForVehicleLevel(playerState.isDead);
+            var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
+            ui.vehicleLevel.transform.colorTransform = colorScheme.colorTransform;
+            ui.vehicleLevel.alpha *= Macros.GlobalNumber(mcfg.vehicleLevelAlpha, 100) / 100.0;
         }
 
         private function updateSelfBg(playerState:VOPlayerState):void

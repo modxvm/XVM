@@ -231,7 +231,7 @@ class Battle(object):
             data = {}
             if targets & INV.VEHICLE_STATUS:
                 data['vehicleStatus'] = vInfoVO.vehicleStatus
-            # why vInfoVO.playerStatus = 0?
+            # why vInfoVO.playerStatus == 0?
             #if targets & INV.PLAYER_STATUS:
             #    data['playerStatus'] = vInfoVO.playerStatus
             if targets & INV.SQUAD_INDEX:
