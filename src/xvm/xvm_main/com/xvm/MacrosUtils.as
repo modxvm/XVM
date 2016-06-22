@@ -5,19 +5,17 @@
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
-    import org.idmedia.as3commons.util.*;
 
     public class MacrosUtils
     {
-        public static function GetDynamicColorValueInt(type:Number, value:Number, darker:Boolean = false):int
+        public static function getDynamicColorValueInt(type:Number, value:Number, darker:Boolean = false):int
         {
-            return parseInt(GetDynamicColorValue(type, value, "0x", darker));
+            return parseInt(getDynamicColorValue(type, value, "0x", darker));
         }
 
-        public static function GetDynamicColorValue(type:Number, value:Number, prefix:String = '#', darker:Boolean = false):String
+        public static function getDynamicColorValue(type:Number, value:Number, prefix:String = '#', darker:Boolean = false):String
         {
             if (isNaN(value))
                 return null;
@@ -64,7 +62,7 @@ package com.xvm
             return XfwUtils.toHtmlColor(color, prefix);
         }
 
-        public static function GetDynamicAlphaValue(type:Number, value:Number):Number
+        public static function getDynamicAlphaValue(type:Number, value:Number):Number
         {
             if (isNaN(value))
                 return NaN;
@@ -103,167 +101,27 @@ package com.xvm
             return NaN;
         }
 
-        public static function GetVClassColorValue(vdata:VOVehicleData, prefix:String = '#', darker:Boolean = false):String
+        public static function getVClassColorValue(vdata:VOVehicleData, prefix:String = '#', darker:Boolean = false):String
         {
-            try
-            {
-                if (vdata == null)
-                    return null;
-                var usePremium:Boolean = Config.config.colors.vtype.usePremiumColor == true;
-                var vtype:String = (usePremium && vdata.premium == 1) ? "premium" : vdata.vtype;
-                if (!vtype || !Config.config.colors.vtype.hasOwnProperty(vtype))
-                    return null;
-                var value:int = XfwUtils.toInt(Config.config.colors.vtype[vtype], -1);
-                if (value < 0)
-                    return null;
-                return XfwUtils.toHtmlColor(value, prefix);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            return null;
-        }
-
-        public static function GetDmgSrcColorValue(damageSource:String, damageDest:String, isDead:Boolean, isBlowedUp:Boolean, prefix:String = '#'):String
-        {
-            try
-            {
-                if (damageSource == null || damageDest == null)
-                    return null;
-                var key:String = damageSource + "_" + damageDest + "_";
-                key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
-                if (Config.config.colors.damage[key] == null)
-                    return null;
-                var value:int = XfwUtils.toInt(Config.config.colors.damage[key], -1);
-                if (value < 0)
-                    return null;
-                return XfwUtils.toHtmlColor(value, prefix);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            return null;
-        }
-
-        public static function GetDmgKindValue(dmg_kind:String, prefix:String = '#'):String
-        {
-            try
-            {
-                if (dmg_kind == null || !Config.config.colors.dmg_kind[dmg_kind])
-                    return null;
-                var value:int = XfwUtils.toInt(Config.config.colors.dmg_kind[dmg_kind], -1);
-                if (value < 0)
-                    return null;
-                return XfwUtils.toHtmlColor(value, prefix);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            return null;
-        }
-
-        /**
-         * Get system color value for current state
-         */
-        public static function GetSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean):Number
-        {
-            var key:String = entityName + "_";
-            key += !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead";
-            //com.xvm.Logger.add("getSystemColor():" + key + " " + Config.s_config.colors.system[key]);
-            return parseInt(Config.config.colors.system[key]);
-        }
-
-        //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
-        public static function damageFlagToDamageSource(damageFlag:Number):String
-        {
-            switch (damageFlag)
-            {
-                case Defines.FROM_ALLY:
-                    return "ally";
-                case Defines.FROM_ENEMY:
-                    return "enemy";
-                case Defines.FROM_PLAYER:
-                    return "player";
-                case Defines.FROM_SQUAD:
-                    return "squadman";
-                case Defines.FROM_UNKNOWN:
-                default:
-                    return "unknown";
-            }
-        }
-
-        public static function GetVTypeColorValue(vehCD:Number):String
-        {
-            try
-            {
-                var vdata:VOVehicleData = VehicleInfo.get(vehCD);
-                var vtype:String = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
-                if (!vtype || !Config.config.colors.vtype[vtype])
-                    return "";
-                return XfwUtils.toHtmlColor(XfwUtils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE));
-            }
-            catch (ex:Error)
-            {
+            if (vdata == null)
                 return null;
-            }
-            return null;
-        }
-
-        public static function GetSpottedColorValue(value:String, isArty:Boolean):String
-        {
-            try
-            {
-                if (!value)
-                    return "";
-                if (isArty)
-                    value += "_arty";
-                if (!Config.config.colors.spotted[value])
-                    return "";
-                return XfwUtils.toHtmlColor(XfwUtils.toInt(Config.config.colors.spotted[value], 0xFFFFFE));
-            }
-            catch (ex:Error)
-            {
+            var usePremium:Boolean = Config.config.colors.vtype.usePremiumColor == true;
+            var vtype:String = (usePremium && vdata.premium == 1) ? "premium" : vdata.vtype;
+            if (!vtype || !Config.config.colors.vtype.hasOwnProperty(vtype))
                 return null;
-            }
-            return null;
+            var value:int = XfwUtils.toInt(Config.config.colors.vtype[vtype], -1);
+            if (value < 0)
+                return null;
+            return XfwUtils.toHtmlColor(value, prefix);
         }
 
-        public static function GetSpottedAlphaValue(value:String, isArty:Boolean):Number
+        public static function getVTypeColorValue(vehCD:Number):String
         {
-            try
-            {
-                if (!value)
-                    return NaN;
-                if (isArty)
-                    value += "_arty";
-                if (Config.config.alpha.spotted[value] == null)
-                    return NaN;
-                return Config.config.alpha.spotted[value] / 100.0;
-            }
-            catch (ex:Error)
-            {
-                return NaN;
-            }
-            return NaN;
-        }
-
-        /**
-         * Get system color key for current state
-         */
-        public static function getSystemColorKey(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean = false):String
-        {
-            return entityName + "_" + (isBase ? "base" : !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead");
-        }
-
-        /**
-         * Get system color value for current state
-         */
-        public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isBase:Boolean = false):Number
-        {
-            return parseInt(Config.config.colors.system[getSystemColorKey(entityName, isDead, isBlowedUp, isBase)]);
+            var vdata:VOVehicleData = VehicleInfo.get(vehCD);
+            var vtype:String = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
+            if (!vtype || !Config.config.colors.vtype[vtype])
+                return "";
+            return XfwUtils.toHtmlColor(XfwUtils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE));
         }
     }
 }

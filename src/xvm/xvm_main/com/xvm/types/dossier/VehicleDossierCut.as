@@ -33,7 +33,7 @@ package com.xvm.types.dossier
                 sysname = vdata.key.replace(":", "-");
                 shortname = vdata.shortName;
                 type = VehicleInfo.getVTypeText(vdata.vtype);
-                c_type = MacrosUtils.GetVClassColorValue(vdata);
+                c_type = MacrosUtils.getVClassColorValue(vdata);
                 level = vdata.level;
                 rlevel = Defines.ROMAN_LEVEL[vdata.level - 1];
                 nation = vdata.nation;
@@ -51,38 +51,38 @@ package com.xvm.types.dossier
             {
                 kb = battles / 1000.0;
                 hb = battles / 100.0;
-                c_battles = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, battles, "#");
+                c_battles = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, battles, "#");
                 winrate = wins / battles * 100;
-                c_winrate = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, winrate, "#");
+                c_winrate = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, winrate, "#");
 
                 var vdossier:VehicleDossier = Dossier.getVehicleDossier(vehCD);
                 if (vdossier != null)
                 {
                     hitsRatio = vdossier.hitsRatio * 100;
-                    c_hitsRatio = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HITSRATIO, hitsRatio, "#");
+                    c_hitsRatio = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HITSRATIO, hitsRatio, "#");
                     tdb = vdossier.avgDamageDealt;
-                    c_tdb = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, "#");
+                    c_tdb = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, "#");
                     if (!isNaN(vdossier.xtdb) && vdossier.xtdb > 0)
                     {
                         xtdb = vdossier.xtdb == 100 ? "XX" : (vdossier.xtdb < 10 ? "0" : "") + vdossier.xtdb;
-                        c_xtdb = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xtdb, "#");
+                        c_xtdb = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xtdb, "#");
                     }
                     tdv = vdossier.damageDealt / (battles * maxHP);
-                    c_tdv = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, tdv, "#");
+                    c_tdv = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, tdv, "#");
                     tfb = vdossier.avgFrags;
-                    c_tfb = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, tfb, "#");
+                    c_tfb = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, tfb, "#");
                     tsb = vdossier.avgSpotted;
-                    c_tsb = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, tsb, "#");
+                    c_tsb = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, tsb, "#");
                     if (wn8expd > 0)
                     {
                         wn8effd = tdb / wn8expd;
-                        c_wn8effd = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8EFFD, wn8effd, "#");
+                        c_wn8effd = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN8EFFD, wn8effd, "#");
                     }
 
                     if (!isNaN(vdossier.xte) && vdossier.xte > 0)
                     {
                         xte = vdossier.xte == 100 ? "XX" : (vdossier.xte < 10 ? "0" : "") + vdossier.xte;
-                        c_xte = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, "#");
+                        c_xte = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, "#");
                     }
 
                     earnedXP = isNaN(vdossier.earnedXP) || vdossier.earnedXP == 0 ? NaN : vdossier.earnedXP;
@@ -92,7 +92,7 @@ package com.xvm.types.dossier
                     xpToEliteLeft = xpToElite - earnedXPint <= 0 ? NaN : xpToElite - earnedXPint;
                     marksOnGun = isNaN(vdossier.marksOnGun) || level < 5 ? null : Utils.getMarksOnGunText(vdossier.marksOnGun);
                     damageRating = level < 5 ? NaN : vdossier.damageRating;
-                    c_damageRating = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, "#");
+                    c_damageRating = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, "#");
                 }
             }
         }

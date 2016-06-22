@@ -51,7 +51,7 @@ package com.xvm.battle.playersPanel
             this.ui = ui;
             this.isLeftPanel = isLeftPanel;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xvm.addEventListener(PlayerStateChangedEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            Xvm.addEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
             onConfigLoaded(null);
 
             DEFAULT_BG_ALPHA = ui.bg.alpha;
@@ -168,7 +168,7 @@ package com.xvm.battle.playersPanel
             return null;
         }
 
-        private function onPlayerStateChanged(e:PlayerStateChangedEvent):void
+        private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
             if (_userProps != null && e.playerName == _userProps.userName)
             {

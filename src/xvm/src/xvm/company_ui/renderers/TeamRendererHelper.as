@@ -22,13 +22,13 @@ package xvm.company_ui.renderers
             if (Config.config.hangar.xwnInCompany == true)
             {
                 return isNaN(stat.wn8) ? "--" :
-                    "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8) + "'>" +
+                    "<font color='" + MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8) + "'>" +
                     (stat.xwn8 >= 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8.toString()) + "</font>";
             }
             else
             {
                 return isNaN(stat.e) ? "--" :
-                    "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" +
+                    "<font color='" + MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" +
                     (stat.xeff >= 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff.toString()) + "</font>";
             }
         }
@@ -49,24 +49,24 @@ package xvm.company_ui.renderers
             s += "<br>";
             // line 2
             s += "WN8: " + (!stat.wn8 ? "--" :
-                "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8) + "'>" +
+                "<font color='" + MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8) + "'>" +
                 (stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8) + "</font>") + " ";
             s += "(" + (!stat.wn8 ? "-" :
-                "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8) + "'>" +
+                "<font color='" + MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8) + "'>" +
                 App.utils.locale.integer(stat.wn8) + "</font>") + ") ";
             s += Locale.get("EFF") + ": " + (!stat.e ? "--" :
-                "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" +
+                "<font color='" + MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" +
                 (stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff) + "</font>") + " ";
             s += "(" + (!stat.e ? "-" :
-                "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e) + "'>" +
+                "<font color='" + MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e) + "'>" +
                 App.utils.locale.integer(stat.e) + "</font>") + ")";
             s += "<br>";
             // line 3
             s += Locale.get("Fights") + ": " + (!stat.b ? "-" :
-                "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000) + "'>" +
+                "<font color='" + MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000) + "'>" +
                 App.utils.locale.integer(stat.b) + "</font>") + " ";
             s += Locale.get("Wins") + ": " + (!stat.winrate ? "-" :
-                "<font color='" + MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate) + "'>" +
+                "<font color='" + MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate) + "'>" +
                 Math.round(stat.winrate) + "%</font>") + " ";
             s += "<br>";
             // line 4
@@ -118,16 +118,16 @@ package xvm.company_ui.renderers
                     //Logger.addObject(stat);
 
                     var effd = td / tb / data.hp || 0;
-                    var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.te);
+                    var e_color = GraphicsUtil.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.te);
                     var s2 = "";
                     s2 += "E: " + (!stat.xte ? "-" :
                         "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.xte + "</font>)") + "  ";
                     s2 += Locale.get("Eff damage") + ": " + (!effd ? "-" :
-                        "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, effd) + "'>" + Sprintf.format("%.2f", effd) + "</font>") + " ";
+                        "<font color='" + GraphicsUtil.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, effd) + "'>" + Sprintf.format("%.2f", effd) + "</font>") + " ";
                     s2 += "(<font color='#ffc133'>" + (data.avgE ? Sprintf.format("%.2f", data.avgE) : "-") + "</font>" +
                         " / <font color='#ffc133'>" + (data.topE ? Sprintf.format("%.2f", data.topE) : "-") + "</font>)  ";
                     s2 += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
-                        "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font>") + " ";
+                        "<font color='" + GraphicsUtil.getDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font>") + " ";
                     s2 += "(<font color='#ffc133'>" + (data.avgS ? Sprintf.format("%.2f", data.avgS) : "-") + "</font>" +
                         " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>)  ";
                     m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s2 + "</span>";

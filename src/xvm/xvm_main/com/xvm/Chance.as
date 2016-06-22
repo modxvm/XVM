@@ -318,7 +318,7 @@ package com.xvm
                 htmlText += "-";
             else
             {
-                var color:Number = GraphicsUtil.brightenColor(MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
+                var color:Number = GraphicsUtil.brightenColor(MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
                 var s:String = "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
 
                 /*var n:int = 5;

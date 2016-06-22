@@ -95,7 +95,7 @@ package xvm.profile_ui
                 if (Config.networkServicesSettings.statAwards)
                 {
                     winsTF.htmlText = "<p align='center'><font color='" +
-                        MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, data.winsEfficiency) + "'>" +
+                        MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, data.winsEfficiency) + "'>" +
                         data.winsEfficiencyStr +
                         "</font></p>";
                 }
@@ -134,7 +134,7 @@ package xvm.profile_ui
                         if (isStat)
                             value = "<font alpha='#50'>(</font>" + value + "<font alpha='#50'>)</font>";
                         xteTF.htmlText = Sprintf.format("<p align='center'><font face='$FieldFont' size='15' color='%s'>%s</font></p>",
-                            MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xte), value);
+                            MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, xte), value);
                     }
                 }
             }

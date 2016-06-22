@@ -107,19 +107,19 @@ class wot.battle.BattleMain
 
     // Python calls (context: this => _root)
 
-    public function as_xvm_onKeyEvent(key:Number, isDown:Boolean):Void
-    {
-        //Logger.add("onKeyEvent: " + key + " " + isDown);
-        var cfg = Config.config.hotkeys;
-        if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Events.E_MM_ZOOM, isDown: isDown } );
-        if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Events.E_MM_ALT_MODE, isDown: isDown } );
-        if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
-            GlobalEventDispatcher.dispatchEvent( { type: Events.E_PP_ALT_MODE, isDown: isDown } );
-        if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
-            GlobalEventDispatcher.dispatchEvent( { type: Events.E_BATTLE_LABEL_KEY_MODE, key: key, isDown: isDown } );
-    }
+// AS3:DONE     public function as_xvm_onKeyEvent(key:Number, isDown:Boolean):Void
+// AS3:DONE     {
+// AS3:DONE         //Logger.add("onKeyEvent: " + key + " " + isDown);
+// AS3:DONE         var cfg = Config.config.hotkeys;
+// AS3:DONE         if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
+// AS3:DONE             GlobalEventDispatcher.dispatchEvent( { type: Events.E_MM_ZOOM, isDown: isDown } );
+// AS3:DONE         if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
+// AS3:DONE             GlobalEventDispatcher.dispatchEvent( { type: Events.E_MM_ALT_MODE, isDown: isDown } );
+// AS3:DONE         if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
+// AS3:DONE             GlobalEventDispatcher.dispatchEvent( { type: Events.E_PP_ALT_MODE, isDown: isDown } );
+// AS3:DONE         if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
+// AS3:DONE             GlobalEventDispatcher.dispatchEvent( { type: Events.E_BATTLE_LABEL_KEY_MODE, key: key, isDown: isDown } );
+// AS3:DONE     }
 
     public function as_xvm_onSniperCamera(enable:Boolean, zoom:Number):Void
     {
@@ -133,61 +133,61 @@ class wot.battle.BattleMain
             BattleMain._instance._zoomIndicator.onOffsetUpdate(offsetX, offsetY);
     }
 
-    public function as_xvm_onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
-        team:Number, squad:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
-    {
-        try
-        {
-            //Logger.addObject(arguments);
-            var data:Object = { };
-            if (playerName != null)
-                data["playerName"] = playerName;
-            if (clanAbbrev != null)
-                data["clanAbbrev"] = clanAbbrev;
-            if (!isNaN(playerId))
-                data["playerId"] = playerId;
-            if (!isNaN(vehId))
-                data["vehId"] = vehId;
-            if (!isNaN(team))
-                data["team"] = team;
-            if (!isNaN(squad))
-                data["squad"] = squad;
-            data["dead"] = dead;
-            if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(curHealth))
-            {
-                data["curHealth"] = curHealth;
-            }
-            if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(maxHealth))
-                data["maxHealth"] = maxHealth;
-            if ((Config.config.battle.allowHpInPanelsAndMinimap || Config.config.battle.allowMarksOnGunInPanelsAndMinimap) && !isNaN(marksOnGun))
-                data["marksOnGun"] = marksOnGun;
-            if (spotted != null)
-                data["spotted"] = spotted;
-
-            //Logger.addObject(data);
-            var updated:Boolean = BattleState.update(playerId, data);
-            if (updated)
-            {
-                //Logger.add("updated: " + playerName);
-                GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerId));
-                if (dead)
-                {
-                    GlobalEventDispatcher.dispatchEvent( { type: Events.E_PLAYER_DEAD, value: playerId } );
-                }
-            }
-        }
-        catch (ex:Error)
-        {
-            Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
-        }
-    }
-
-    // ctx = _root
-    public function as_xvm_onPlayersHpChanged()
-    {
-        GlobalEventDispatcher.dispatchEvent( { type: Events.E_PLAYERS_HP_CHANGED } );
-        //Logger.add("HP update event dispatched");
-    }
+// AS3:DONE     public function as_xvm_onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
+// AS3:DONE         team:Number, squad:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
+// AS3:DONE     {
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             //Logger.addObject(arguments);
+// AS3:DONE             var data:Object = { };
+// AS3:DONE             if (playerName != null)
+// AS3:DONE                 data["playerName"] = playerName;
+// AS3:DONE             if (clanAbbrev != null)
+// AS3:DONE                 data["clanAbbrev"] = clanAbbrev;
+// AS3:DONE             if (!isNaN(playerId))
+// AS3:DONE                 data["playerId"] = playerId;
+// AS3:DONE             if (!isNaN(vehId))
+// AS3:DONE                 data["vehId"] = vehId;
+// AS3:DONE             if (!isNaN(team))
+// AS3:DONE                 data["team"] = team;
+// AS3:DONE             if (!isNaN(squad))
+// AS3:DONE                 data["squad"] = squad;
+// AS3:DONE             data["dead"] = dead;
+// AS3:DONE             if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(curHealth))
+// AS3:DONE             {
+// AS3:DONE                 data["curHealth"] = curHealth;
+// AS3:DONE             }
+// AS3:DONE             if (Config.config.battle.allowHpInPanelsAndMinimap && !isNaN(maxHealth))
+// AS3:DONE                 data["maxHealth"] = maxHealth;
+// AS3:DONE             if ((Config.config.battle.allowHpInPanelsAndMinimap || Config.config.battle.allowMarksOnGunInPanelsAndMinimap) && !isNaN(marksOnGun))
+// AS3:DONE                 data["marksOnGun"] = marksOnGun;
+// AS3:DONE             if (spotted != null)
+// AS3:DONE                 data["spotted"] = spotted;
+// AS3:DONE 
+// AS3:DONE             //Logger.addObject(data);
+// AS3:DONE             var updated:Boolean = BattleState.update(playerId, data);
+// AS3:DONE             if (updated)
+// AS3:DONE             {
+// AS3:DONE                 //Logger.add("updated: " + playerName);
+// AS3:DONE                 GlobalEventDispatcher.dispatchEvent(new EBattleStateChanged(playerId));
+// AS3:DONE                 if (dead)
+// AS3:DONE                 {
+// AS3:DONE                     GlobalEventDispatcher.dispatchEvent( { type: Events.E_PLAYER_DEAD, value: playerId } );
+// AS3:DONE                 }
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE         catch (ex:Error)
+// AS3:DONE         {
+// AS3:DONE             Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
+// AS3:DONE         }
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     // ctx = _root
+// AS3:DONE     public function as_xvm_onPlayersHpChanged()
+// AS3:DONE     {
+// AS3:DONE         GlobalEventDispatcher.dispatchEvent( { type: Events.E_PLAYERS_HP_CHANGED } );
+// AS3:DONE         //Logger.add("HP update event dispatched");
+// AS3:DONE     }
 
     // callbacks
 

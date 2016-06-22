@@ -141,13 +141,13 @@ package com.xvm.battle
             // {{c:spotted}}
             pdata["c:spotted"] = function(o:VOPlayerState):String
             {
-                return MacrosUtils.GetSpottedColorValue(o.getSpottedStatus(), isArty);
+                return getSpottedColorValue(o.getSpottedStatus(), isArty);
             }
 
             // {{a:spotted}}
             pdata["a:spotted"] = function(o:VOPlayerState):Number
             {
-                return MacrosUtils.GetSpottedAlphaValue(o.getSpottedStatus(), isArty);
+                return getSpottedAlphaValue(o.getSpottedStatus(), isArty);
             }
 
             // hp
@@ -180,25 +180,25 @@ package com.xvm.battle
             // {{c:hp}}
             pdata["c:hp"] = function(o:VOPlayerState):String
             {
-                return isNaN(o.getCurrentHealth()) ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.getCurrentHealth());
+                return isNaN(o.getCurrentHealth()) ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.getCurrentHealth());
             }
 
             // {{c:hp-ratio}}
             pdata["c:hp-ratio"] = function(o:VOPlayerState):String
             {
-                return isNaN(o.getCurrentHealth()) ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, getHpRatioFunc(o));
+                return isNaN(o.getCurrentHealth()) ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, getHpRatioFunc(o));
             }
 
             // {{a:hp}}
             pdata["a:hp"] = function(o:VOPlayerState):Number
             {
-                return isNaN(o.getCurrentHealth()) ? NaN : MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.getCurrentHealth());
+                return isNaN(o.getCurrentHealth()) ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.getCurrentHealth());
             }
 
             // {{a:hp-ratio}}
             pdata["a:hp-ratio"] = function(o:VOPlayerState):Number
             {
-                return isNaN(o.getCurrentHealth()) ? NaN : MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, getHpRatioFunc(o));
+                return isNaN(o.getCurrentHealth()) ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, getHpRatioFunc(o));
             }
 
             // dmg
@@ -231,32 +231,28 @@ package com.xvm.battle
                     case "world_collision":
                     case "death_zone":
                     case "drowning":
-                        return MacrosUtils.GetDmgKindValue(o.damageInfo.damageType);
+                        return getDmgKindValue(o.damageInfo.damageType);
                     default:
-                        return MacrosUtils.GetDmgSrcColorValue(
-                            MacrosUtils.damageFlagToDamageSource(o.damageInfo.damageFlag),
-                            o.isTeamKiller ? ((playerState.isPlayerTeam ? "ally" : "enemy") + "tk") : o.entityName,
-                            o.isDead,
-                            o.isBlown);
+                        return getDmgSrcColorValue(damageFlagToDamageSource(o.damageInfo.damageFlag), o);
                 }
             }
 
             // {{c:dmg-kind}}
             pdata["c:dmg-kind"] = function(o:VOPlayerState):String
             {
-                return o.damageInfo.damageType == null ? null : MacrosUtils.GetDmgKindValue(o.damageInfo.damageType);
+                return o.damageInfo.damageType == null ? null : getDmgKindValue(o.damageInfo.damageType);
             }
 
             // {{sys-color-key}}
             pdata["sys-color-key"] = function(o:VOPlayerState):String
             {
-                return MacrosUtils.getSystemColorKey(o.entityName, o.isDead, o.isBlown);
+                return getSystemColorKey(o);
             }
 
             // {{c:system}}
             pdata["c:system"] = function(o:VOPlayerState):String
             {
-                return XfwUtils.toHtmlColor(MacrosUtils.getSystemColor(o.entityName, o.isDead, o.isBlown));
+                return XfwUtils.toHtmlColor(getSystemColor(o));
             }
 
             // hitlog
@@ -282,7 +278,7 @@ package com.xvm.battle
             // {{c:dmg-total}}
             pdata["c:dmg-total"] = function(o:VOPlayerState):String
             {
-                return MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, "#", false);
+                return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, "#", false);
             }
 
             // {{dmg-avg}}
@@ -340,5 +336,109 @@ package com.xvm.battle
             pdata["turret"] = data.turret || "";
         }
         */
+
+        // helpers
+
+        /**
+         * Get system color key for current state
+         */
+        private static function getSystemColorKey(o:VOPlayerState):String
+        {
+            return getEntityName(o) + "_" + (/*isBase ? "base" :*/ o.isAlive ? "alive" : o.isBlown ? "blowedup" : "dead");
+        }
+
+        /**
+         * Get system color value for current state
+         */
+        private static function getSystemColor(o:VOPlayerState):Number
+        {
+            return parseInt(Config.config.colors.system[getSystemColorKey(o/*, isBase*/)]);
+        }
+
+        private static function getDmgSrcColorValue(damageSource:String, o:VOPlayerState, prefix:String = '#'):String
+        {
+            if (damageSource == null)
+                return null;
+            var dest:String = o.isTeamKiller ? (o.isPlayerTeam ? "ally" : "enemy") + "tk" : getEntityName(o);
+            var key:String = damageSource + "_" + dest + "_" + (o.isAlive ? "hit" : o.isBlown ? "blowup" : "kill");
+            if (Config.config.colors.damage[key] == null)
+                return null;
+            var value:int = XfwUtils.toInt(Config.config.colors.damage[key], -1);
+            if (value < 0)
+                return null;
+            return XfwUtils.toHtmlColor(value, prefix);
+        }
+
+        private static function getDmgKindValue(dmg_kind:String, prefix:String = '#'):String
+        {
+            if (dmg_kind == null || !Config.config.colors.dmg_kind[dmg_kind])
+                return null;
+            var value:int = XfwUtils.toInt(Config.config.colors.dmg_kind[dmg_kind], -1);
+            if (value < 0)
+                return null;
+            return XfwUtils.toHtmlColor(value, prefix);
+        }
+
+        //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
+        private static function damageFlagToDamageSource(damageFlag:Number):String
+        {
+            switch (damageFlag)
+            {
+                case Defines.FROM_ALLY:
+                    return "ally";
+                case Defines.FROM_ENEMY:
+                    return "enemy";
+                case Defines.FROM_PLAYER:
+                    return "player";
+                case Defines.FROM_SQUAD:
+                    return "squadman";
+                case Defines.FROM_UNKNOWN:
+                default:
+                    return "unknown";
+            }
+        }
+
+        private static function getSpottedColorValue(value:String, isArty:Boolean):String
+        {
+            try
+            {
+                if (!value)
+                    return "";
+                if (isArty)
+                    value += "_arty";
+                if (!Config.config.colors.spotted[value])
+                    return "";
+                return XfwUtils.toHtmlColor(XfwUtils.toInt(Config.config.colors.spotted[value], 0xFFFFFE));
+            }
+            catch (ex:Error)
+            {
+                return null;
+            }
+            return null;
+        }
+
+        private static function getSpottedAlphaValue(value:String, isArty:Boolean):Number
+        {
+            try
+            {
+                if (!value)
+                    return NaN;
+                if (isArty)
+                    value += "_arty";
+                if (Config.config.alpha.spotted[value] == null)
+                    return NaN;
+                return Config.config.alpha.spotted[value] / 100.0;
+            }
+            catch (ex:Error)
+            {
+                return NaN;
+            }
+            return NaN;
+        }
+
+        private static function getEntityName(o:VOPlayerState):String
+        {
+            return !o.isPlayerTeam ? "enemy" : o.isSquadMan ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
+        }
     }
 }

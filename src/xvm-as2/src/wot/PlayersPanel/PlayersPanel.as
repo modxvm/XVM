@@ -229,60 +229,54 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 // AS3:DONE     {
 // AS3:DONE         setDataInternal.apply(this, m_data_arguments);
 // AS3:DONE     }
-
-    var prevState:String = null;
-    var prevNamesStr:String = null;
-    var prevVehiclesStr:String = null;
-    var prevFragsStr:String = null;
+// AS3:DONE 
+// AS3:DONE     var prevState:String = null;
+// AS3:DONE     var prevNamesStr:String = null;
+// AS3:DONE     var prevVehiclesStr:String = null;
+// AS3:DONE     var prevFragsStr:String = null;
     private function setDataInternal(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
-        //Logger.add("PlayersPanel.setData(): " + wrapper.state + " " + wrapper.type);
-        //Logger.addObject(data, 3);
-        //Logger.addObject(wrapper.m_list, 3);
-        //Logger.add(vehiclesStrOrig);
-        //Logger.add(namesStr);
-
-        try
-        {
-            m_data = data;
-
-            if (data == null)
-                return;
-
-            Cmd.profMethodStart("PlayersPanel.setData(): " + wrapper.type);
-
-            //wrapper.m_list._visible = true; // _visible == false for "none" mode
-            //Cmd.profMethodStart("PlayersPanel.setData(): #0 - split");
-            var vehiclesValues:Array = vehiclesStrOrig.split("<br/>");
-            //Cmd.profMethodEnd("PlayersPanel.setData(): #0 - split");
-            //Cmd.profMethodStart("PlayersPanel.setData(): #1 - prepare");
-            var len = data.length;
-            var namesArr:Array = [];
-            var vehiclesArr:Array = [];
-            var fragsArr:Array = [];
-            for (var i = 0; i < len; ++i)
-            {
-                //Cmd.profMethodStart("PlayersPanel.setData(): #1.0 - register macros");
-                var item:Object = data[i];
-                var uid:Number = item.uid;
-                var frags:Number = item.frags;
-                var vehicleState:Number = item.vehicleState;
-                var userName:String = item.userName;
-
-                // fix battlestate
-                var obj:BattleStateData = BattleState.get(uid);
-                obj.frags = frags || NaN;
-                //Logger.addObject(item);
-                obj.ready = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0 && !Boolean(item.isOffline);
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-                // This comment for "obj.dead" is a temp fix for correct BattleState update from BattleMain.as
-                // obj.dead = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-                if (obj.dead == true && (!isNaN(obj.curHealth) && obj.curHealth > 0))
-                    obj.curHealth = 0;
-                obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);
-                obj.teamKiller = item.teamKiller == true;
-                obj.squad = item.squad;
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             m_data = data;
+// AS3:DONE 
+// AS3:DONE             if (data == null)
+// AS3:DONE                 return;
+// AS3:DONE 
+// AS3:DONE             Cmd.profMethodStart("PlayersPanel.setData(): " + wrapper.type);
+// AS3:DONE 
+// AS3:DONE             //wrapper.m_list._visible = true; // _visible == false for "none" mode
+// AS3:DONE             //Cmd.profMethodStart("PlayersPanel.setData(): #0 - split");
+// AS3:DONE             var vehiclesValues:Array = vehiclesStrOrig.split("<br/>");
+// AS3:DONE             //Cmd.profMethodEnd("PlayersPanel.setData(): #0 - split");
+// AS3:DONE             //Cmd.profMethodStart("PlayersPanel.setData(): #1 - prepare");
+// AS3:DONE             var len = data.length;
+// AS3:DONE             var namesArr:Array = [];
+// AS3:DONE             var vehiclesArr:Array = [];
+// AS3:DONE             var fragsArr:Array = [];
+// AS3:DONE             for (var i = 0; i < len; ++i)
+// AS3:DONE             {
+// AS3:DONE                 //Cmd.profMethodStart("PlayersPanel.setData(): #1.0 - register macros");
+// AS3:DONE                 var item:Object = data[i];
+// AS3:DONE                 var uid:Number = item.uid;
+// AS3:DONE                 var frags:Number = item.frags;
+// AS3:DONE                 var vehicleState:Number = item.vehicleState;
+// AS3:DONE                 var userName:String = item.userName;
+// AS3:DONE 
+// AS3:DONE                 // fix battlestate
+// AS3:DONE                 var obj:BattleStateData = BattleState.get(uid);
+// AS3:DONE                 obj.frags = frags || NaN;
+// AS3:DONE                 //Logger.addObject(item);
+// AS3:DONE                 obj.ready = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0 && !Boolean(item.isOffline);
+// AS3:DONE                 ///////////////////////////////////////////////////////////////////////////////////////////////
+// AS3:DONE                 // This comment for "obj.dead" is a temp fix for correct BattleState update from BattleMain.as
+// AS3:DONE                 // obj.dead = (vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
+// AS3:DONE                 ///////////////////////////////////////////////////////////////////////////////////////////////
+// AS3:DONE                 if (obj.dead == true && (!isNaN(obj.curHealth) && obj.curHealth > 0))
+// AS3:DONE                     obj.curHealth = 0;
+// AS3:DONE                 obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);
+// AS3:DONE                 obj.teamKiller = item.teamKiller == true;
+// AS3:DONE                 obj.squad = item.squad;
                 obj.entityName = wrapper.type != "left" ? "enemy" : obj.squad > 10 ? "squadman" : obj.teamKiller ? "teamKiller" : "ally";
                 obj.selected = item.isPostmortemView;
                 if (obj.position == null)

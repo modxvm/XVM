@@ -781,7 +781,7 @@ package com.xvm
             // {{my-vtype-l}} - Medium Tank
             m_globals["my-vtype-l"] = Locale.get(vdata.vtype);
             // {{c:my-vtype}}
-            m_globals["c:my-vtype"] = MacrosUtils.GetVTypeColorValue(vdata.vehCD);
+            m_globals["c:my-vtype"] = MacrosUtils.getVTypeColorValue(vdata.vehCD);
             // {{my-battletier-min}}
             m_globals["my-battletier-min"] = vdata.tierLo;
             // {{my-battletier-max}}
@@ -857,7 +857,7 @@ package com.xvm
             // {{vtype-l}} - Medium Tank
             pdata["vtype-l"] = Locale.get(vdata.vtype);
             // {{c:vtype}}
-            pdata["c:vtype"] = MacrosUtils.GetVClassColorValue(vdata);
+            pdata["c:vtype"] = MacrosUtils.getVClassColorValue(vdata);
             // {{battletier-min}}
             pdata["battletier-min"] = vdata.tierLo;
             // {{battletier-max}}
@@ -986,109 +986,109 @@ package com.xvm
 
             // Dynamic colors
             // {{c:xte}}
-            pdata["c:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#");
+            pdata["c:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#");
             // {{c:xeff}}
-            pdata["c:xeff"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#");
+            pdata["c:xeff"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#");
             // {{c:xwn6}}
-            pdata["c:xwn6"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#");
+            pdata["c:xwn6"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#");
             // {{c:xwn8}}
-            pdata["c:xwn8"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#");
+            pdata["c:xwn8"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#");
             // {{c:xwn}}
             pdata["c:xwn"] = pdata["c:xwn8"]
             // {{c:xwgr}}
-            pdata["c:xwgr"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#");
+            pdata["c:xwgr"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#");
             // {{c:eff}}
-            pdata["c:eff"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#");
+            pdata["c:eff"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#");
             // {{c:wn6}}
-            pdata["c:wn6"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#");
+            pdata["c:wn6"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#");
             // {{c:wn8}}
-            pdata["c:wn8"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#");
+            pdata["c:wn8"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#");
             // {{c:wn}}
             pdata["c:wn"] = pdata["c:wn8"];
             // {{c:wgr}}
-            pdata["c:wgr"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#");
+            pdata["c:wgr"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#");
             // {{c:r}}
             pdata["c:r"] = _getRating(pdata, "c:", "", null);
             // {{c:xr}}
             pdata["c:xr"] = _getRating(pdata, "c:", "", "xvm");
 
             // {{c:winrate}}
-            pdata["c:winrate"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#");
+            pdata["c:winrate"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#");
             // {{c:rating}} (obsolete)
             pdata["c:rating"] = pdata["c:winrate"]
             // {{c:kb}}
-            pdata["c:kb"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000.0, "#");
+            pdata["c:kb"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000.0, "#");
             // {{c:avglvl}}
-            pdata["c:avglvl"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#");
+            pdata["c:avglvl"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#");
             // {{c:t-winrate}}
-            pdata["c:t-winrate"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.v.winrate, "#");
+            pdata["c:t-winrate"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.v.winrate, "#");
             // {{c:t-rating}} (obsolete)
             pdata["c:t-rating"] = pdata["c:t-winrate"];
             // {{c:t-battles}}
-            pdata["c:t-battles"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#");
+            pdata["c:t-battles"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#");
             // {{c:tdb}}
-            pdata["c:tdb"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#");
+            pdata["c:tdb"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#");
             // {{c:xtdb}}
-            pdata["c:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xtdb, "#");
+            pdata["c:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xtdb, "#");
             // {{c:tdv}}
-            pdata["c:tdv"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#");
+            pdata["c:tdv"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#");
             // {{c:tfb}}
-            pdata["c:tfb"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#");
+            pdata["c:tfb"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#");
             // {{c:tsb}}
-            pdata["c:tsb"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#");
+            pdata["c:tsb"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#");
 
             // Alpha
             // {{a:xte}}
-            pdata["a:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? NaN : MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
+            pdata["a:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
             // {{a:xeff}}
-            pdata["a:xeff"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
+            pdata["a:xeff"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
             // {{a:xwn6}}
-            pdata["a:xwn6"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
+            pdata["a:xwn6"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
             // {{a:xwn8}}
-            pdata["a:xwn8"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
+            pdata["a:xwn8"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
             // {{a:xwn}}
             pdata["a:xwn"] = pdata["a:xwn8"];
             // {{a:xwgr}}
-            pdata["a:xwgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
+            pdata["a:xwgr"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
             // {{a:eff}}
-            pdata["a:eff"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
+            pdata["a:eff"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
             // {{a:wn6}}
-            pdata["a:wn6"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
+            pdata["a:wn6"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
             // {{a:wn8}}
-            pdata["a:wn8"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
+            pdata["a:wn8"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
             // {{a:wn}}
             pdata["a:wn"] = pdata["a:wn8"];
             // {{a:wgr}}
-            pdata["a:wgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
+            pdata["a:wgr"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
             // {{a:r}}
             pdata["a:r"] = _getRating(pdata, "a:", "", null);
             // {{a:xr}}
             pdata["a:xr"] = _getRating(pdata, "a:", "", "xvm");
 
             // {{a:winrate}}
-            pdata["a:winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
+            pdata["a:winrate"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
             // {{a:rating}} (obsolete)
             pdata["a:rating"] = pdata["a:winrate"];
             // {{a:kb}}
-            pdata["a:kb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.b / 1000);
+            pdata["a:kb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.b / 1000);
             // {{a:avglvl}}
-            pdata["a:avglvl"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
+            pdata["a:avglvl"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
             // {{a:t-winrate}}
-            pdata["a:t-winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.v.winrate);
+            pdata["a:t-winrate"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.v.winrate);
             // {{a:t-rating}} (obsolete)
             pdata["a:t-rating"] = pdata["a:t-winrate"];
             // {{a:t-battles}}
-            pdata["a:t-battles"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
+            pdata["a:t-battles"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
             // {{a:tdb}}
-            pdata["a:tdb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
+            pdata["a:tdb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
             // {{a:xtdb}}
-            pdata["a:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? NaN : MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xtdb);
+            pdata["a:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xtdb);
             // {{a:tdv}}
-            pdata["a:tdv"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv);
+            pdata["a:tdv"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv);
             // {{a:tfb}}
-            pdata["a:tfb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
+            pdata["a:tfb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
             // {{a:tsb}}
-            pdata["a:tsb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
+            pdata["a:tsb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
         }
 
         /**

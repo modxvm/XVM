@@ -6,17 +6,18 @@ package com.xvm.battle.events
 {
     import flash.events.*;
 
-    public class PlayerStateChangedEvent extends Event
+    public class PlayerStateEvent extends Event
     {
         public static const PLAYER_STATE_CHANGED:String = "PLAYER_STATE_CHANGED";
+        public static const PLAYER_DEAD:String = "PLAYER_DEAD";
 
         public var vehicleID:Number;
         public var accountDBID:Number;
         public var playerName:String;
 
-        public function PlayerStateChangedEvent(vehicleID:Number, accountDBID:Number, playerName:String, bubbles:Boolean=false, cancelable:Boolean=false)
+        public function PlayerStateEvent(type:String, vehicleID:Number, accountDBID:Number, playerName:String, bubbles:Boolean=false, cancelable:Boolean=false)
         {
-            super(PLAYER_STATE_CHANGED, bubbles, cancelable);
+            super(type, bubbles, cancelable);
             this.vehicleID = vehicleID;
             this.accountDBID = accountDBID;
             this.playerName = playerName;
@@ -24,7 +25,7 @@ package com.xvm.battle.events
 
         public override function clone():Event
         {
-            return new PlayerStateChangedEvent(vehicleID, accountDBID, playerName, bubbles, cancelable);
+            return new PlayerStateEvent(type, vehicleID, accountDBID, playerName, bubbles, cancelable);
         }
     }
 

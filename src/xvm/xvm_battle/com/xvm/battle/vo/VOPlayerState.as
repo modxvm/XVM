@@ -4,7 +4,7 @@
     import com.xvm.battle.*;
     import com.xfw.events.*;
     import com.xvm.vo.*;
-    import com.xvm.battle.events.PlayerStateChangedEvent;
+    import com.xvm.battle.events.*;
     import com.xvm.types.stat.*;
     import flash.errors.*;
     import net.wg.data.constants.*;
@@ -24,7 +24,7 @@
         public var isVehiclePremiumIgr:Boolean;
         public var playerFullName:String;
         public var playerName:String;
-        public var playerStatus:uint;
+        public var _playerStatus:uint;
         public var prebattleID:Number;
         public var region:String;
         private var _squadIndex:uint;
@@ -48,8 +48,6 @@
         public var spottedStatus:String = null;   // TODO: set & update
         public var curHealth:Number = NaN;        // TODO: set & update
         public var maxHealth:Number = NaN;        // TODO: set & update
-        public var entityName:String = null;      // TODO: set & update, is required?
-        public var entryName:String = null;       // TODO: set & update, is required?
 
         public var damageInfo:VODamageInfo;       // TODO: set & update
         public var xmqpData:VOXmqpData;           // TODO: set & update
@@ -181,9 +179,27 @@
         {
             if (_vehicleStatus != value)
             {
+                var alive:Boolean = isAlive;
                 _vehicleStatus = value;
                 updateStatData();
                 dispatchPlayerStateChangedEvent();
+                if (alive && isDead)
+                {
+                    Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.PLAYER_DEAD, vehicleID, accountDBID, playerName));
+                }
+            }
+        }
+
+        public function get playerStatus():uint
+        {
+            return _playerStatus;
+        }
+
+        public function set playerStatus(value:uint):void
+        {
+            if (_playerStatus != value)
+            {
+                _playerStatus = value;
             }
         }
 
@@ -266,7 +282,7 @@
 
         private function dispatchPlayerStateChangedEvent():void
         {
-            Xvm.dispatchEvent(new PlayerStateChangedEvent(vehicleID, accountDBID, playerName));
+            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.PLAYER_STATE_CHANGED, vehicleID, accountDBID, playerName));
         }
 
         override public function update(data:Object):Boolean

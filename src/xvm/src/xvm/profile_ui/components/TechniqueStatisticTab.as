@@ -204,20 +204,20 @@ package xvm.profile_ui.components
                 s += size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 13) + "\n";
 
                 s += Locale.get("WN8") + ": " + (!data.stat.wn8 ? "-- (-)" :
-                    color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8)) + " (" +
-                    color(App.utils.locale.integer(data.stat.wn8), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN8, data.stat.wn8)) + ")") + " ";
+                    color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8)) + " (" +
+                    color(App.utils.locale.integer(data.stat.wn8), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN8, data.stat.wn8)) + ")") + " ";
                 s += Locale.get("EFF") + ": " + (!data.stat.e ? "-- (-)" :
-                    color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
-                    color(App.utils.locale.integer(data.stat.e), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";
+                    color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
+                    color(App.utils.locale.integer(data.stat.e), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";
 
                 s += Locale.get("Avg level") + ": " + (!data.stat.lvl ? "-" :
-                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
+                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
 
                 // TODO: temporary solution
                 if (tech.playerId == 0)
                 {
                     var adata:AccountDossier = tech.accountDossier;
-                    var ratingColor:int = MacrosUtils.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));
+                    var ratingColor:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));
                     s += "<font size='8'>\n</font>" +
                         size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
                         formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL);
