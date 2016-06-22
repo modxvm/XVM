@@ -75,28 +75,6 @@ class TEAM(object):
     ENEMY = 2
 
 
-# Invalidation targets
-
-class INV(object):
-    NONE                = 0x00000000
-
-    BATTLE_STATE        = 0x00000001
-    BATTLE_HP           = 0x00000002
-    BATTLE_SPOTTED      = 0x00000004
-    BATTLE_SQUAD        = 0x00000008
-    BATTLE_ALL          = 0x000000FF
-
-    MARKER_STATUS       = 0x00000100
-    MARKER_FRAGS        = 0x00000200
-    MARKER_SQUAD        = 0x00000400
-    MARKER_ALL          = 0x0000FF00
-
-    MINIMAP_SQUAD       = 0x00010000
-    MINIMAP_ALL         = 0x000F0000
-
-    ALL                 = 0xFFFFFFFF
-
-
 # Dynamic values types
 
 class DYNAMIC_VALUE_TYPE(object):

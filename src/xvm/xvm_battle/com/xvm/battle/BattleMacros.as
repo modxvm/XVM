@@ -48,6 +48,12 @@ package com.xvm.battle
                 return null;
             }
 
+            // {{my-frags}}
+            m_globals["my-frags"] = function(o:IVOMacrosOptions):Number
+            {
+                return BattleGlobalData.playerFrags == 0 ? NaN : BattleGlobalData.playerFrags;
+            }
+
             // xmqp events macros
 
             if (Config.networkServicesSettings.xmqp)
@@ -297,5 +303,42 @@ package com.xvm.battle
                 return o.hitlogDamage;
             }
         }
+
+        /*
+        private function _RegisterGlobalMacrosDataDelayed(eventName:String):void
+        {
+            switch (eventName)
+            {
+                case "ON_STAT_LOADED":
+                    m_globals["chancesStatic"] = Macros.formatWinChancesText(true, false);
+                    m_globals["chancesLive"] = function(o:MacrosOptions):String { return Macros.formatWinChancesText(false, true); }
+                    break;
+            }
+        }
+        */
+
+        /*
+        private function _RegisterZoomIndicatorData(zoom:Number):void
+        {
+            // {{zoom}}
+            m_globals["zoom"] = zoom;
+        }
+        */
+
+        /*
+        private function _RegisterMarkerData(pname:String, data:Object):void
+        {
+            //Logger.addObject(data);
+
+            if (!data)
+                return;
+            if (!m_dict.hasOwnProperty(pname))
+                m_dict[pname] = new Object();
+            var pdata:Object = m_dict[pname];
+
+            // {{turret}}
+            pdata["turret"] = data.turret || "";
+        }
+        */
     }
 }

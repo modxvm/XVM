@@ -9,7 +9,7 @@
     import flash.utils.*;
     import net.wg.data.VO.daapi.*;
     import net.wg.infrastructure.interfaces.*;
-	import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.*;
+    import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.*;
 
     public class BattleState implements IBattleComponentDataController
     {
@@ -34,6 +34,7 @@
         }
 
         // instance
+        instance; // static .ctor
         private static var _instance:BattleState = null;
         public static function get instance():BattleState
         {
@@ -50,7 +51,10 @@
         // .ctor should be private for Singleton
         function BattleState()
         {
+            Xfw.addCommandListener(BattleCommands.AS_UPDATE_PLAYER_STATE, onUpdatePlayerState);
         }
+
+        // IBattleComponentDataController implementation
 
         public function addVehiclesInfo(data:IDAAPIDataClass):void
         {
@@ -279,6 +283,26 @@
             {
                 Logger.err(ex);
             }
+        }
+
+        // XVM calls
+
+        private function onUpdatePlayerState(vehicleID:Number, data:Object):Object
+        {
+            Logger.addObject(arguments);
+            try
+            {
+                var playerState:VOPlayerState = get(vehicleID);
+                if (playerState)
+                {
+                    playerState.update(data);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            return null;
         }
     }
 }

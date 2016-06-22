@@ -8,6 +8,7 @@ package com.xvm
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.filters.*;
+    import flash.utils.*;
     import mx.utils.ObjectUtil;
     import org.idmedia.as3commons.util.StringUtils;
 

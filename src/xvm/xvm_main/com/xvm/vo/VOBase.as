@@ -11,12 +11,18 @@
                 update(data);
         }
 
-        public function update(data:Object):void
+        public function update(data:Object):Boolean
         {
+            var updated:Boolean = false;
             for (var key:String in data)
             {
-                this[key] = data[key];
+                if (this[key] != data[key])
+                {
+                    updated = true;
+                    this[key] = data[key];
+                }
             }
+            return updated;
         }
 
         protected function copyVector(src:*, dst:*, dstClass:Class):void

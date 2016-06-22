@@ -88,6 +88,11 @@ package com.xvm
             _instance._RegisterMinimalMacrosData(accountDBID, playerFullName, vehCD, isPlayerTeam);
         }
 
+        public static function RegisterStatisticsMacros(pname:String, stat:StatData):void
+        {
+            _instance._RegisterStatisticsMacros(pname, stat);
+        }
+
         // battle
 
         public static function RegisterPlayersData(callback:Function):void
@@ -120,26 +125,6 @@ package com.xvm
         public static function RegisterClockMacros(callback:Function):void
         {
             callback(_instance.m_globals);
-        }
-
-
-        // todo
-
-        public static function RegisterStatisticsMacros(pname:String, stat:StatData):void
-        {
-            _instance._RegisterStatisticsMacros(pname, stat);
-        }
-
-        //
-
-        public static var s_my_frags:Number = 0;
-
-        public static function UpdateMyFrags(frags:Number):Boolean
-        {
-            if (Macros.s_my_frags == frags)
-                return false;
-            Macros.s_my_frags = frags;
-            return true;
         }
 
         // PRIVATE
@@ -470,9 +455,9 @@ package com.xvm
                 parts[PART_DEF] = "";
 
             if (parts[PART_NAME] == "r" && parts[PART_DEF] == "")
-                parts[PART_DEF] = getRatingDefaultValue();
+                parts[PART_DEF] = _getRatingDefaultValue();
             else if (parts[PART_NAME] == "xr" && parts[PART_DEF] == "")
-                parts[PART_DEF] = getRatingDefaultValue("xvm");
+                parts[PART_DEF] = _getRatingDefaultValue("xvm");
 
             //Logger.add("[AS3][MACROS][_GetMacroParts]: " + parts.join(", "));
             _macro_parts_cache[macro] = parts;
@@ -754,7 +739,7 @@ package com.xvm
             // {{xvm-stat}}
             m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
             // {{r_size}}
-            m_globals["r_size"] = getRatingDefaultValue().length;
+            m_globals["r_size"] = _getRatingDefaultValue().length;
 
             var battleTier:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_LEVEL) || NaN;
             var battleType:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
@@ -778,12 +763,6 @@ package com.xvm
 
             // {{cellsize}}
             m_globals["cellsize"] = Math.round(Xfw.cmd(XvmCommandsInternal.GET_MAP_SIZE) / 10);
-
-            // {{my-frags}}
-            m_globals["my-frags"] = function(o:IVOMacrosOptions):Number
-            {
-                return isNaN(Macros.s_my_frags) || Macros.s_my_frags == 0 ? NaN : Macros.s_my_frags;
-            }
 
             var vdata:VOVehicleData = VehicleInfo.get(Xfw.cmd(XvmCommandsInternal.GET_MY_VEHCD));
 
@@ -814,27 +793,6 @@ package com.xvm
             // {{my-rlevel}}
             m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
         }
-
-        /*
-        private function _RegisterGlobalMacrosDataDelayed(eventName:String):void
-        {
-            switch (eventName)
-            {
-                case "ON_STAT_LOADED":
-                    m_globals["chancesStatic"] = Macros.formatWinChancesText(true, false);
-                    m_globals["chancesLive"] = function(o:MacrosOptions):String { return Macros.formatWinChancesText(false, true); }
-                    break;
-            }
-        }
-        */
-
-        /*
-        private function _RegisterZoomIndicatorData(zoom:Number):void
-        {
-            // {{zoom}}
-            m_globals["zoom"] = zoom;
-        }
-        */
 
         /**
          * Register minimal macros values for player
@@ -988,9 +946,9 @@ package com.xvm
             // {{wgr}}
             pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
             // {{r}}
-            pdata["r"] = getRating(pdata, "", "", null);
+            pdata["r"] = _getRating(pdata, "", "", null);
             // {{xr}}
-            pdata["xr"] = getRating(pdata, "", "", "xvm");
+            pdata["xr"] = _getRating(pdata, "", "", "xvm");
 
             // {{winrate}}
             pdata["winrate"] = stat.winrate;
@@ -1050,9 +1008,9 @@ package com.xvm
             // {{c:wgr}}
             pdata["c:wgr"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#");
             // {{c:r}}
-            pdata["c:r"] = getRating(pdata, "c:", "", null);
+            pdata["c:r"] = _getRating(pdata, "c:", "", null);
             // {{c:xr}}
-            pdata["c:xr"] = getRating(pdata, "c:", "", "xvm");
+            pdata["c:xr"] = _getRating(pdata, "c:", "", "xvm");
 
             // {{c:winrate}}
             pdata["c:winrate"] = MacrosUtils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#");
@@ -1103,9 +1061,9 @@ package com.xvm
             // {{a:wgr}}
             pdata["a:wgr"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
             // {{a:r}}
-            pdata["a:r"] = getRating(pdata, "a:", "", null);
+            pdata["a:r"] = _getRating(pdata, "a:", "", null);
             // {{a:xr}}
-            pdata["a:xr"] = getRating(pdata, "a:", "", "xvm");
+            pdata["a:xr"] = _getRating(pdata, "a:", "", "xvm");
 
             // {{a:winrate}}
             pdata["a:winrate"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
@@ -1132,22 +1090,6 @@ package com.xvm
             // {{a:tsb}}
             pdata["a:tsb"] = MacrosUtils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
         }
-
-        /*
-        private function _RegisterMarkerData(pname:String, data:Object):void
-        {
-            //Logger.addObject(data);
-
-            if (!data)
-                return;
-            if (!m_dict.hasOwnProperty(pname))
-                m_dict[pname] = new Object();
-            var pdata:Object = m_dict[pname];
-
-            // {{turret}}
-            pdata["turret"] = data.turret || "";
-        }
-        */
 
         /**
          * Change nicks for XVM developers.
@@ -1238,20 +1180,20 @@ package com.xvm
         /**
          * Returns rating according settings in the personal cabinet
          */
-        private static function getRating(pdata:Object, prefix:String, suffix:String, scale:String):*
+        private static function _getRating(pdata:Object, prefix:String, suffix:String, scale:String):*
         {
             var name:String = _getRatingName(scale);
             var value:* = pdata[prefix + RATING_MATRIX[name].name + suffix];
             if (prefix != "" || value == null)
                 return value;
-            value = StringUtils.leftPad(String(value), getRatingDefaultValue(scale).length, " ");
+            value = StringUtils.leftPad(String(value), _getRatingDefaultValue(scale).length, " ");
             return value;
         }
 
         /**
          * Returns default value for rating according settings in the personal cabinet
          */
-        private static function getRatingDefaultValue(scale:String = null):String
+        private static function _getRatingDefaultValue(scale:String = null):String
         {
             var name:String = _getRatingName(scale);
             return RATING_MATRIX[name].def;
@@ -1264,35 +1206,6 @@ package com.xvm
             if (!RATING_MATRIX.hasOwnProperty(name))
                 name = (scale != null ? scale : "basic") + "_wgr";
             return name;
-        }
-
-        private static function formatWinChancesText(stats:Dictionary, isShowChance:Boolean, isShowLiveChance:Boolean):String
-        {
-            if (!Config.networkServicesSettings.chance)
-                return "";
-            if (!Config.networkServicesSettings.chanceLive && isShowLiveChance)
-            {
-                return "";
-            }
-            var playerNames:Vector.<String> = new Vector.<String>();
-            for (var name:String in stats)
-                playerNames.push(name);
-            var ChancesText:String = Chance.GetChanceText(playerNames, stats, true, false, true);
-            var temp: Array = ChancesText.split('|', 2);
-            var tempA: Array = temp[0].split(':', 2);
-            if (isShowChance)
-            {
-                return tempA[1];
-            }
-            else if (isShowLiveChance)
-            {
-                var tempB: Array = temp[1].split(':', 2);
-                return tempB[1];
-            }
-            else
-            {
-                return "";
-            }
         }
     }
 }

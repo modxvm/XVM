@@ -37,8 +37,6 @@ package com.xvm.battle
 
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
 
-            BattleGlobalData.initialize();
-
             onConfigLoaded(null);
         }
 

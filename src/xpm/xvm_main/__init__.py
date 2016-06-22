@@ -31,7 +31,6 @@ from account_helpers.settings_core.SettingsCore import g_settingsCore
 from Avatar import PlayerAvatar
 from BattleReplay import g_replayCtrl
 from PlayerEvents import g_playerEvents
-from Vehicle import Vehicle
 from notification.actions_handlers import NotificationsActionsHandlers
 from notification.decorators import MessageDecorator
 from notification.settings import NOTIFICATION_TYPE
@@ -39,9 +38,7 @@ from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
-from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
 from gui.shared import g_eventBus, events
-from gui.Scaleform.Flash import Flash
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from gui.Scaleform.daapi.view.battle.legacy.markers import MarkersManager
@@ -55,14 +52,8 @@ import filecache
 from logger import *
 import svcmsg
 import utils
-import vehstate
 from xvm import g_xvm
 import xmqp_events
-
-_LOBBY_SWF = 'lobby.swf'
-_BATTLE_SWF = 'battle.swf'
-_VMM_SWF = 'VehicleMarkersManager.swf'
-_SWFS = [_LOBBY_SWF, _BATTLE_SWF, _VMM_SWF]
 
 
 #####################################################################
@@ -115,26 +106,9 @@ def fini():
 def game_handleKeyEvent(event):
     g_xvm.onKeyEvent(event)
 
-
-# TODO:0.9.15.1
-#@registerEvent(Flash, '__init__')
-def FlashInit(self, swf, className='Flash', args=None, path=None):
-    self.swf = swf
-    if self.swf not in _SWFS:
-        return
-
-    log("FlashInit: " + self.swf)
-
-    if self.swf == _BATTLE_SWF:
-        g_xvm.initBattleSwf(self)
-    elif self.swf == _VMM_SWF:
-        g_xvm.initVmmSwf(self)
-
-
 @overrideMethod(MessageDecorator, 'getListVO')
 def _NotificationDecorator_getListVO(base, self):
     return svcmsg.fixData(base(self))
-
 
 @overrideMethod(NotificationsActionsHandlers, 'handleAction')
 def _NotificationsActionsHandlers_handleAction(base, self, model, typeID, entityID, actionName):
@@ -173,52 +147,19 @@ g_playerEvents.onArenaCreated += onArenaCreated
 
 
 @overrideMethod(PlayerAvatar, 'onBecomePlayer')
-def PlayerAvatar_onBecomePlayer(base, self):
+def _PlayerAvatar_onBecomePlayer(base, self):
     # debug('> onBecomePlayer')
     base(self)
     g_xvm.onBecomePlayer()
 
 @overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
-def PlayerAvatar_onBecomeNonPlayer(base, self):
+def _PlayerAvatar_onBecomeNonPlayer(base, self):
     # debug('> onBecomeNonPlayer')
     g_xvm.onBecomeNonPlayer()
     base(self)
 
 
 # BATTLE
-
-# on current player enters world
-@registerEvent(PlayerAvatar, 'onEnterWorld')
-def PlayerAvatar_onEnterWorld(self, prereqs):
-    # debug('> PlayerAvatar_onEnterWorld')
-    g_xvm.onEnterWorld()
-
-# on current player leaves world
-@registerEvent(PlayerAvatar, 'onLeaveWorld')
-def PlayerAvatar_onLeaveWorld(self):
-    # debug('> PlayerAvatar_onLeaveWorld')
-    g_xvm.onLeaveWorld()
-
-# on any player marker appear
-# TODO:0.9.15.1
-#@registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
-def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
-    # debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
-    g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
-
-# on any player marker lost
-# TODO:0.9.15.1
-#@registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
-def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
-    # debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
-    g_xvm.invalidate(vehicle.id, INV.BATTLE_STATE)
-
-# on any vehicle hit received
-# TODO:0.9.15.1
-#@registerEvent(Vehicle, 'onHealthChanged')
-def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    # debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_xvm.invalidate(self.id, INV.BATTLE_HP)
 
 # add vehCD to players panel data
 # TODO:0.9.15.1
@@ -227,21 +168,6 @@ def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, *
     res = base(self, index, playerFullName, vInfoVO, *args)
     res['vehCD'] = vInfoVO.vehicleType.compactDescr
     return res
-
-# spotted status
-# TODO:0.9.15.1
-#@registerEvent(Minimap, '_Minimap__addEntry')
-def _Minimap__addEntry(self, vInfo, guiProps, location, doMark):
-    # debug('> _Minimap__addEntry: {0}'.format(vInfo.vehicleID))
-    vehstate.updateSpottedStatus(vInfo.vehicleID, True)
-    g_xvm.invalidate(vInfo.vehicleID, INV.BATTLE_SPOTTED)
-
-# TODO:0.9.15.1
-#@registerEvent(Minimap, '_Minimap__delEntry')
-def _Minimap__delEntry(self, id, inCallback=False):
-    # debug('> _Minimap__delEntry: {0}'.format(id))
-    vehstate.updateSpottedStatus(id, False)
-    g_xvm.invalidate(id, INV.BATTLE_SPOTTED)
 
 # Minimap settings
 in_setupMinimapSettings = False
@@ -313,16 +239,6 @@ def MarkersManager_invokeMarker(base, self, handle, function, args=None):
     # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
     base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
-
-# TODO:0.9.15.1
-#@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
-def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
-    if BigWorld.player().arena.guiType == 1: # constants.ARENA_GUI_TYPE.RANDOM
-        for flags, vo in updated:
-            if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
-                for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(vo.team)):
-                    if vInfoVO.squadIndex > 0:
-                        g_xvm.invalidate(vInfoVO.vehicleID, INV.MARKER_SQUAD | INV.MINIMAP_SQUAD)
 
 
 #cache._MIN_LIFE_TIME = 15

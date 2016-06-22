@@ -12,6 +12,7 @@
 
     public class VOPlayerState extends VOMacrosOptions
     {
+        // TODO: change to properties
         // DAAPIVehicleInfoVO
         public var accountDBID:Number;
         public var clanAbbrev:String;
@@ -39,7 +40,7 @@
         public var vehicleType:String;
 
         // DAAPIVehicleStatsVO
-        public var frags:int = 0;
+        private var _frags:int = 0;
 
         // XVM
         public var marksOnGun:Number = NaN;       // TODO: set & update
@@ -153,7 +154,11 @@
 
         public function set position(value:Number):void
         {
-            _position = value;
+            if (_position != value)
+            {
+                _position = value;
+                Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+            }
         }
 
         override public function get vehCD():int
@@ -173,10 +178,29 @@
 
         public function set vehicleStatus(value:uint):void
         {
-            _vehicleStatus = value;
-            updateStatData();
+            if (_vehicleStatus != value)
+            {
+                _vehicleStatus = value;
+                updateStatData();
+                Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+            }
         }
 
+        public function get frags():int
+        {
+            return _frags;
+        }
+
+        public function set frags(value:int):void
+        {
+            if (_frags != frags)
+            {
+                _frags = frags;
+                if (isCurrentPlayer)
+                    BattleGlobalData.playerFrags = frags;
+                Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+            }
+        }
 
         // helpers
 
@@ -235,6 +259,18 @@
             }
 
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
+
+            Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+        }
+
+        override public function update(data:Object):Boolean
+        {
+            var updated:Boolean = super.update(data);
+            if (updated)
+            {
+                Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYER_STATE_CHANGED, vehicleID));
+            }
+            return updated;
         }
 
         private function onStatLoaded(e:ObjectEvent):void

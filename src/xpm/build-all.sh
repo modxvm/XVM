@@ -113,7 +113,6 @@ done
 #echo "$(($(date +%s%N)-$st))"
 
 # generate default config from .xc files and xvm.xc.sample
-# TODO: review and refactor
 echo 'generate default_config.pyc and xvm.xc.sample'
 dc_fn=../../~output/mods/packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"

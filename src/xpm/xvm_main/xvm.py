@@ -26,7 +26,6 @@ import configwatchdog
 import stats
 import svcmsg
 import vehinfo
-import vehstate
 import utils
 import userprefs
 import dossier
@@ -90,9 +89,6 @@ class Xvm(object):
     def __init__(self):
         self.xvmServicesInitialized = False
         self.currentPlayerId = None
-        self.battle_page = None
-        self._invalidateTimerId = dict()
-        self._invalidateTargets = dict()
 
     # CONFIG
 
@@ -138,8 +134,6 @@ class Xvm(object):
         trace('onAppDestroyed: {}'.format(event.ns))
         if event.ns == APP_NAME_SPACE.SF_LOBBY:
             self.hangarDispose()
-        elif event.ns == APP_NAME_SPACE.SF_BATTLE:
-            self.battle_page = None
         app = g_appLoader.getApp(event.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded -= self.onViewLoaded
@@ -191,11 +185,9 @@ class Xvm(object):
         if IS_DEVELOPMENT:
             test.onHangarInit()
 
-
     def hangarDispose(self):
         trace('hangarDispose')
         g_currentVehicle.onChanged -= self.updateTankParams
-
 
     def updateTankParams(self):
         try:
@@ -214,7 +206,6 @@ class Xvm(object):
         # initialize XVM services if game restarted after crash
         self.initializeXvmServices()
 
-
     def onArenaCreated(self):
         trace('onArenaCreated')
         minimap_circles.updateCurrentVehicle()
@@ -225,19 +216,7 @@ class Xvm(object):
     def onBecomePlayer(self):
         trace('onBecomePlayer')
         try:
-            player = BigWorld.player()
-            if player is not None and hasattr(player, 'arena'):
-                arena = BigWorld.player().arena
-                if arena:
-                    # TODO:0.9.15.1
-                    #arena.onVehicleKilled += self._onVehicleKilled
-                    #arena.onAvatarReady += self._onAvatarReady
-                    #arena.onVehicleStatisticsUpdate += self._onVehicleStatisticsUpdate
-                    pass
-
-            # TODO:0.9.15.1
-            #self.xmqp_init()
-
+            self.xmqp_init()
             if config.get('autoReloadConfig', False) == True:
                 configwatchdog.startConfigWatchdog()
         except Exception, ex:
@@ -246,186 +225,17 @@ class Xvm(object):
     def onBecomeNonPlayer(self):
         trace('onBecomeNonPlayer')
         try:
-            # TODO:0.9.15.1
-            #self.xmqp_stop()
-
-            player = BigWorld.player()
-            if player is not None and hasattr(player, 'arena'):
-                arena = BigWorld.player().arena
-                if arena:
-                    # TODO:0.9.15.1
-                    #arena.onVehicleKilled -= self._onVehicleKilled
-                    #arena.onAvatarReady -= self._onAvatarReady
-                    #arena.onVehicleStatisticsUpdate -= self._onVehicleStatisticsUpdate
-                    pass
+            self.xmqp_stop()
         except Exception, ex:
             err(traceback.format_exc())
-
-        vehstate.cleanupBattleData()
 
 
     # BATTLE
 
-    def initBattleSwf(self, flashObject):
-        trace('initBattleSwf')
-
-        for (vehicleID, vData) in BigWorld.player().arena.vehicles.iteritems():
-            self.doUpdateBattle(vehicleID, INV.ALL, flashObject)
-
-    def initVmmSwf(self, flashObject):
-        #trace('initVmmSwf')
-        pass
-
     def onStateBattle(self):
         trace('onStateBattle')
         xmqp_events.onStateBattle()
-
-    def onEnterWorld(self):
-        trace('onEnterWorld')
         minimap_circles.save_or_restore()
-
-    def onLeaveWorld(self):
-        trace('onLeaveWorld')
-
-
-    def _onVehicleKilled(self, victimID, *args):
-        self.invalidate(victimID, INV.BATTLE_STATE | INV.MARKER_STATUS)
-
-
-    def _onAvatarReady(self, vehicleID):
-        self.invalidate(vehicleID, INV.MARKER_STATUS)
-
-
-    def _onVehicleStatisticsUpdate(self, vehicleID):
-        self.invalidate(vehicleID, INV.MARKER_FRAGS)
-
-
-    def invalidate(self, vehicleID, inv):
-        self._invalidateTargets[vehicleID] = self._invalidateTargets.get(vehicleID, INV.NONE) | inv
-        if self._invalidateTimerId.get(vehicleID, None) is None:
-            self._invalidateTimerId[vehicleID] = BigWorld.callback(0.3, lambda: self.invalidateCallback(vehicleID))
-
-
-    def invalidateCallback(self, vehicleID):
-        #trace('invalidateCallback: {} {}'.format(vehicleID, self._invalidateTargets.get(vehicleID, INV.NONE)))
-        try:
-            targets = self._invalidateTargets.get(vehicleID, INV.NONE)
-            self._invalidateTargets[vehicleID] = INV.NONE
-            self._invalidateTimerId[vehicleID] = None
-            if targets & INV.BATTLE_ALL:
-                self.updateBattle(vehicleID, targets)
-            if targets & INV.MARKER_ALL:
-                self.updateMarker(vehicleID, targets)
-            if targets & INV.MINIMAP_ALL:
-                self.updateMinimapEntry(vehicleID, targets)
-        except Exception, ex:
-            err(traceback.format_exc())
-
-
-    def updateBattle(self, vehicleID, targets):
-        #trace('updateBattle: {0} {1}'.format(targets, vehicleID))
-
-        battle = getBattleApp()
-        if not battle:
-            return
-
-        player = BigWorld.player()
-        if player is None or not hasattr(player, 'arena') or player.arena is None:
-            return
-
-        self.doUpdateBattle(vehicleID, targets, battle)
-
-
-    def doUpdateBattle(self, vehicleID, targets, battle):
-        try:
-            state = vehstate.getVehicleStateData(vehicleID)
-            if state is not None:
-                movie = battle.movie
-                if movie is not None:
-                    #debug('doUpdateBattle: {0} {1}'.format(vehicleID, set(state.iteritems())))
-                    movie.as_xvm_onBattleStateChanged(
-                        targets,
-                        state['playerName'],
-                        state['clanAbbrev'],
-                        state['playerId'],
-                        state['vehCD'],
-                        state['team'],
-                        state['squad'],
-                        state['dead'],
-                        state['curHealth'],
-                        state['maxHealth'],
-                        state['marksOnGun'],
-                        state['spotted'])
-        except Exception, ex:
-            err(traceback.format_exc())
-
-
-    def updateMarker(self, vehicleID, targets):
-        #trace('updateMarker: {0} {1}'.format(targets, vehicleID))
-
-        battle = getBattleApp()
-        if not battle:
-            return
-
-        markersManager = battle.markersManager
-        if vehicleID not in markersManager._MarkersManager__markers:
-            return
-        marker = markersManager._MarkersManager__markers[vehicleID]
-
-        player = BigWorld.player()
-        arena = player.arena
-        arenaVehicle = arena.vehicles.get(vehicleID, None)
-        if arenaVehicle is None:
-            return
-
-        stat = arena.statistics.get(vehicleID, None)
-        if stat is None:
-            return
-
-        isAlive = arenaVehicle['isAlive']
-        isAvatarReady = arenaVehicle['isAvatarReady']
-        status = VEHICLE_STATUS.NOT_AVAILABLE
-        if isAlive is not None and isAvatarReady is not None:
-            if isAlive:
-                status |= VEHICLE_STATUS.IS_ALIVE
-            if isAvatarReady:
-                status |= VEHICLE_STATUS.IS_READY
-
-        frags = stat['frags']
-
-        my_frags = 0
-        stat = arena.statistics.get(player.playerVehicleID, None)
-        if stat is not None:
-            my_frags = stat['frags']
-
-        vInfo = utils.getVehicleInfo(vehicleID)
-        squadIndex = vInfo.squadIndex
-        arenaDP = g_sessionProvider.getArenaDP()
-        if arenaDP.isSquadMan(vehicleID):
-            squadIndex += 10
-            markersManager.invokeMarker(marker.id, 'setEntityName', [PLAYER_GUI_PROPS.squadman.name()])
-
-        #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vehicleID, status, frags, squadIndex))
-        markersManager.invokeMarker(marker.id, 'as_xvm_setMarkerState', [targets, status, frags, my_frags, squadIndex])
-
-
-    def updateMinimapEntry(self, vehicleID, targets):
-        #trace('updateMinimapEntry: {0} {1}'.format(targets, vehicleID))
-
-        battle = getBattleApp()
-        if not battle:
-            return
-
-        minimap = battle.minimap
-
-        if targets & INV.MINIMAP_SQUAD:
-            arenaDP = g_sessionProvider.getArenaDP()
-            if vehicleID != BigWorld.player().playerVehicleID and arenaDP.isSquadMan(vehicleID):
-                minimap._Minimap__callEntryFlash(vehicleID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
-                g_xvm.invalidate(vehicleID, INV.BATTLE_SQUAD)
-            else:
-                minimap._Minimap__callEntryFlash(vehicleID, 'update')
-
 
     # PRIVATE
 
@@ -504,7 +314,6 @@ class Xvm(object):
 
         return (None, False)
 
-
     def initializeXvmServices(self):
         if self.xvmServicesInitialized:
             return
@@ -528,7 +337,6 @@ class Xvm(object):
 
         if g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.LOBBY:
             svcmsg.tokenUpdated()
-
 
     def extendVehicleMarkerArgs(self, handle, function, args):
         try:
@@ -558,7 +366,6 @@ class Xvm(object):
             err('extendVehicleMarkerArgs(): ' + traceback.format_exc())
         return args
 
-
     def onKeyEvent(self, event):
         try:
             key = event.key
@@ -573,7 +380,6 @@ class Xvm(object):
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())
         return True
-
 
     def checkKeyEventBattle(self, key, isDown):
         # do not handle keys when chat is active
@@ -593,14 +399,11 @@ class Xvm(object):
 
         return False
 
-
     def onViewLoaded(self, view=None):
         debug('> onViewLoaded: {}'.format('(None)' if not view else view.uniqueName))
         if not view:
             return
-        if view.uniqueName == VIEW_ALIAS.CLASSIC_BATTLE_PAGE:
-            self.battle_page = weakref.proxy(view)
-        elif view.uniqueName == VIEW_ALIAS.LOBBY_HANGAR:
+        if view.uniqueName == VIEW_ALIAS.LOBBY_HANGAR:
             self.hangarInit()
 
     def xmqp_init(self):
@@ -626,6 +429,5 @@ class Xvm(object):
 
     def xmqp_stop(self):
         xmqp.stop()
-
 
 g_xvm = Xvm()

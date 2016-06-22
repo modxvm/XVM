@@ -8,5 +8,6 @@
         public static const MINIMAP_CLICK:String = "xvm.minimap_click";
 
         public static const AS_RESPONSE_BATTLE_GLOBAL_DATA:String = "xvm.as.response_battle_global_data";
+        public static const AS_UPDATE_PLAYER_STATE:String = "xvm.as.update_player_state";
     }
 }

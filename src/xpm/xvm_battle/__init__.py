@@ -15,7 +15,7 @@ XFW_MOD_INFO = {
 #####################################################################
 # imports
 
-import xfw_cmd
+import battle
 import fragCorrelationPanel
 import minimap
 import camera
