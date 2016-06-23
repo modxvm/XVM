@@ -224,23 +224,13 @@ package com.xvm.battle
             // {{c:dmg}}
             pdata["c:dmg"] = function(o:VOPlayerState):String
             {
-                if (isNaN(o.damageInfo.damageDelta))
-                    return null;
-                switch (o.damageInfo.damageType)
-                {
-                    case "world_collision":
-                    case "death_zone":
-                    case "drowning":
-                        return getDmgKindValue(o.damageInfo.damageType);
-                    default:
-                        return getDmgSrcColorValue(damageFlagToDamageSource(o.damageInfo.damageFlag), o);
-                }
+                return XfwUtils.toHtmlColor(getDamageSystemColor(o));
             }
 
             // {{c:dmg-kind}}
             pdata["c:dmg-kind"] = function(o:VOPlayerState):String
             {
-                return o.damageInfo.damageType == null ? null : getDmgKindValue(o.damageInfo.damageType);
+                return o.damageInfo.damageType == null ? null : XfwUtils.toHtmlColor(getDmgKindValue(o.damageInfo.damageType));
             }
 
             // {{sys-color-key}}
@@ -355,28 +345,42 @@ package com.xvm.battle
             return parseInt(Config.config.colors.system[getSystemColorKey(o/*, isBase*/)]);
         }
 
-        private static function getDmgSrcColorValue(damageSource:String, o:VOPlayerState, prefix:String = '#'):String
+        public static function getDamageSystemColor(o:VOPlayerState):Number
         {
-            if (damageSource == null)
-                return null;
-            var dest:String = o.isTeamKiller ? (o.isPlayerTeam ? "ally" : "enemy") + "tk" : getEntityName(o);
-            var key:String = damageSource + "_" + dest + "_" + (o.isAlive ? "hit" : o.isBlown ? "blowup" : "kill");
-            if (Config.config.colors.damage[key] == null)
-                return null;
-            var value:int = XfwUtils.toInt(Config.config.colors.damage[key], -1);
-            if (value < 0)
-                return null;
-            return XfwUtils.toHtmlColor(value, prefix);
+            if (isNaN(o.damageInfo.damageDelta))
+                return NaN;
+            switch (o.damageInfo.damageType)
+            {
+                case "world_collision":
+                case "death_zone":
+                case "drowning":
+                    return getDmgKindValue(o.damageInfo.damageType);
+                default:
+                    return getDmgSrcColorValue(o);
+            }
         }
 
-        private static function getDmgKindValue(dmg_kind:String, prefix:String = '#'):String
+        private static function getDmgSrcColorValue(o:VOPlayerState):Number
+        {
+            var damageSource:String = damageFlagToDamageSource(o.damageInfo.damageFlag);
+            var damageDest:String = o.isTeamKiller ? (o.isPlayerTeam ? "ally" : "enemy") + "tk" : getEntityName(o);
+            var key:String = damageSource + "_" + damageDest + "_" + (o.isAlive ? "hit" : o.isBlown ? "blowup" : "kill");
+            if (Config.config.colors.damage[key] == null)
+                return NaN;
+            var value:int = XfwUtils.toInt(Config.config.colors.damage[key], -1);
+            if (value < 0)
+                return NaN;
+            return value;
+        }
+
+        private static function getDmgKindValue(dmg_kind:String):Number
         {
             if (dmg_kind == null || !Config.config.colors.dmg_kind[dmg_kind])
-                return null;
+                return NaN;
             var value:int = XfwUtils.toInt(Config.config.colors.dmg_kind[dmg_kind], -1);
             if (value < 0)
-                return null;
-            return XfwUtils.toHtmlColor(value, prefix);
+                return NaN;
+            return value;
         }
 
         //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
@@ -440,5 +444,38 @@ package com.xvm.battle
         {
             return !o.isPlayerTeam ? "enemy" : o.isSquadMan ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
         }
+
+        /**
+         * Return vehicle marker frame name for current state
+         *
+         * VehicleMarkerAlly should contain 4 named frames:
+         *   - green - normal ally
+         *   - gold - squad mate
+         *   - blue - teamkiller
+         * VehicleMarkerEnemy should contain 2 named frames:
+         *   - red - normal enemy
+         * @param	entityName EntityName
+         * @param	isColorBlindMode CB mode flag
+         * @return	name of marker frame
+         */
+        /*
+        public static function getMarkerColorAlias(entityName):String
+        {
+            //if (m_entityName != "ally" && m_entityName != "enemy" && m_entityName != "squadman" && m_entityName != "teamKiller")
+            //  Logger.add("m_entityName=" + m_entityName);
+            if (entityName == "ally")
+                return "green";
+            if (entityName == "squadman")
+                return "gold";
+            if (entityName == "teamKiller")
+                return "blue";
+            if (entityName == "enemy")
+                return "red";
+
+            // if not found (node is not implemented), return inverted enemy color (for debug only)
+            // TODO: throw error may be better?
+            return "purple";
+        }
+        */
     }
 }
