@@ -26,6 +26,9 @@
       //{ "w": 1, "h": 23, "bgColor": "0xFFFFFF" },
       //{ "x": 100, "scaleX": 1, "src": "img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png" },
 
+      //{ "x": 3, "src": "cfg://sirmax/img/x.swfD:\work\wot-xvm\release\configs\sirmax\img\marksOnGun\x.png " },
+      { "x": 3, "src": "cfg://sirmax/img/marksOnGun/x.png " },
+
       //{ "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
       ${"../default/playersPanel.xc":"xmqpServiceMarker"},
       { "x": 6,  "y": 1, "align": "center", "bindToIcon": true, "alpha": "{{x-enabled?{{x-sense-on?70|30}}|0}}", "format": "<font color='#FFFFFF' face='xvm' size='23'>&#x70;</font>", "shadow": {} },

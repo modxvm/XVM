@@ -65,8 +65,8 @@
 
     public static var MENU_MC_NAME = "menu_mc";
 
-    private static var TF_DEFAULT_WIDTH = 300;
-    private static var TF_DEFAULT_HEIGHT = 25;
+// AS3:DONE     private static var TF_DEFAULT_WIDTH = 300;
+// AS3:DONE     private static var TF_DEFAULT_HEIGHT = 25;
 
     private var cfg:Object;
 
@@ -273,38 +273,38 @@
 // AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
 // AS3:DONE         }
 // AS3:DONE     }
-
-    private function onConfigLoaded()
-    {
-        //Logger.add(Config.arenaGuiType);
-
-        init();
-
-        try
-        {
-            this.cfg = Config.config.playersPanel;
-
-            //Logger.add("onConfigLoaded: " + m_name);
-            if (extraFields == null)
-            {
-                extraFields = {
-                    none:    createFieldsHolderForNoneState(),
-                    short:   createExtraFieldsHolder("short"),
-                    medium:  createExtraFieldsHolder("medium"),
-                    medium2: createExtraFieldsHolder("medium2"),
-                    large:   createExtraFieldsHolder("large")
-                };
-            }
-
-            extraFieldsConfigured = false;
-            if (m_name)
-                configureExtraFields();
-        }
-        catch (ex:Error)
-        {
-            Logger.add(ex.toString());
-        }
-    }
+// AS3:DONE 
+// AS3:DONE     private function onConfigLoaded()
+// AS3:DONE     {
+// AS3:DONE         //Logger.add(Config.arenaGuiType);
+// AS3:DONE 
+// AS3:DONE         init();
+// AS3:DONE 
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             this.cfg = Config.config.playersPanel;
+// AS3:DONE 
+// AS3:DONE             //Logger.add("onConfigLoaded: " + m_name);
+// AS3:DONE             if (extraFields == null)
+// AS3:DONE             {
+// AS3:DONE                 extraFields = {
+// AS3:DONE                     none:    createFieldsHolderForNoneState(),
+// AS3:DONE                     short:   createExtraFieldsHolder("short"),
+// AS3:DONE                     medium:  createExtraFieldsHolder("medium"),
+// AS3:DONE                     medium2: createExtraFieldsHolder("medium2"),
+// AS3:DONE                     large:   createExtraFieldsHolder("large")
+// AS3:DONE                 };
+// AS3:DONE             }
+// AS3:DONE 
+// AS3:DONE             extraFieldsConfigured = false;
+// AS3:DONE             if (m_name)
+// AS3:DONE                 configureExtraFields();
+// AS3:DONE         }
+// AS3:DONE         catch (ex:Error)
+// AS3:DONE         {
+// AS3:DONE             Logger.add(ex.toString());
+// AS3:DONE         }
+// AS3:DONE     }
 // AS3:DONE 
 // AS3:DONE     private function onStatLoaded()
 // AS3:DONE     {
@@ -355,187 +355,187 @@
         m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
     }
 
-    // Extra fields
-
-    private function createFieldsHolderForNoneState():MovieClip
-    {
-        extraFieldsLayout = cfg.none.layout;
-        var cfg_xf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
-
-        var mc:MovieClip = _internal_createExtraFieldsHolder(extraPanelsHolder, "none", cfg_xf.formats, cfg_xf);
-        mc._visible = false;
-
-        return mc;
-    }
-
-    private function createExtraFieldsHolder(state:String):MovieClip
-    {
-        var formats:Array = cfg[state]["extraFields" + (isLeftPanel ? "Left" : "Right")];
-        return _internal_createExtraFieldsHolder(wrapper, state, formats, null);
-    }
-
-    private function _internal_createExtraFieldsHolder(owner:MovieClip, state:String, formats:Array, cfg:Object):MovieClip
-    {
-        var idx = parseInt(wrapper._name.split("renderer").join(""));
-        var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + team + "_" + state + "_" + idx, owner.getNextHighestDepth());
-        mc._visible = false;
-        mc.idx = idx;
-        mc.orig_formats = formats;
-        mc.cfg = cfg;
-        return mc;
-    }
-
-    private function configureExtraFields()
-    {
-        try
-        {
-            //Logger.add("configureExtraFields: " + m_name);
-
-            if (extraFields == null)
-            {
-                Logger.add("WARNING: extraFields == null");
-                return;
-            }
-
-            if (extraFieldsConfigured)
-                return;
-
-            extraFieldsConfigured = true;
-
-            // remove old text fields
-            Utils.removeChildren(extraFields.none);
-            Utils.removeChildren(extraFields.short);
-            Utils.removeChildren(extraFields.medium);
-            Utils.removeChildren(extraFields.medium2);
-            Utils.removeChildren(extraFields.large);
-
-            var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
-            _internal_createExtraFields("none", cf.width, cf.height);
-            _internal_createExtraFields("short", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
-            _internal_createExtraFields("medium", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
-            _internal_createExtraFields("medium2", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
-            _internal_createExtraFields("large", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
-        }
-        catch (ex:Error)
-        {
-            Logger.add(ex.message);
-            return null;
-        }
-    }
-
-    private function _internal_createExtraFields(state:String, width:Number, height:Number)
-    {
-        //Logger.add("_internal_createExtraFields: " + state);
-        var mc:MovieClip = extraFields[state];
-        if (mc == null)
-            return;
-
-        var formats:Array = mc.orig_formats;
-        if (formats == null || formats.length <= 0)
-            return;
-
-        mc.formats = [];
-        var n:Number = 0;
-        var len:Number = formats.length;
-        for (var i:Number = 0; i < len; ++i)
-        {
-            var format = formats[i];
-
-            if (format == null)
-                continue;
-
-            if (typeof format == "string")
-            {
-                format = { format: format };
-                formats[i] = format;
-            }
-
-            if (typeof format != "object")
-                continue;
-
-            var isEmpty:Boolean = true;
-            for (var nm in format)
-            {
-                isEmpty = false;
-                break;
-            }
-            if (isEmpty)
-                continue;
-
-            if (format.enabled != null)
-            {
-                var enabled:Boolean = Macros.FormatGlobalBooleanValue(format.enabled);
-                if (enabled == false)
-                    continue;
-            }
-
-            // make a copy of format, because it will be changed
-            var fmt:Object = { };
-            for (var nm in format)
-                fmt[nm] = format[nm];
-            mc.formats.push(fmt);
-
-            if (fmt.src != null)
-            {
-                createExtraMovieClip(mc, fmt, n);
-            }
-            else
-            {
-                createExtraTextField(mc, fmt, n, width, height);
-            }
-            n++;
-        }
-
-        if (state == "none")
-            _internal_createMenuForNoneState(mc);
-    }
-
-    private function _internal_createMenuForNoneState(mc:MovieClip)
-    {
-        var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
-        if (cf.formats == null || cf.formats.length <= 0)
-            return;
-        var menu_mc:UIComponent = UIComponent.createInstance(mc, "HiddenButton", MENU_MC_NAME, mc.getNextHighestDepth(), {
-            _x: isLeftPanel ? 0 : -cf.width,
-            width: cf.width,
-            height: cf.height,
-            panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
-            owner: this } );
-        menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
-        menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
-        menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
-    }
-
-    private function createExtraMovieClip(mc:MovieClip, format:Object, n:Number)
-    {
-        //Logger.addObject(format);
-        var x:Number = Macros.FormatNumber(m_name, format, "x", null, 0, 0);
-        var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
-        var w:Number = Macros.FormatNumber(m_name, format, "w", null, NaN, 0);
-        var h:Number = Macros.FormatNumber(m_name, format, "h", null, NaN, 0);
-
-        var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
-        img["data"] = {
-            x: x, y: y, w: w, h: h,
-            format: format,
-            align: format.align != null ? format.align : (isLeftPanel ? "left" : "right"),
-            scaleX: Macros.FormatNumber(m_name, format, "scaleX", null, 1, 1) * 100,
-            scaleY: Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100
-        };
-        //Logger.addObject(img["data"]);
-
-        img._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
-        img._rotation = Macros.FormatNumber(m_name, format, "rotation", null, 0, 0);
-        img.autoSize = true;
-        img.maintainAspectRatio = false;
-        var me = this;
-        img.visible = false;
-        img.onLoadInit = function() { me.onExtraMovieClipLoadInit(img); }
-
-        cleanupFormat(img, format);
-
-        return img;
-    }
+// AS3:DONE     // Extra fields
+// AS3:DONE 
+// AS3:DONE     private function createFieldsHolderForNoneState():MovieClip
+// AS3:DONE     {
+// AS3:DONE         extraFieldsLayout = cfg.none.layout;
+// AS3:DONE         var cfg_xf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+// AS3:DONE 
+// AS3:DONE         var mc:MovieClip = _internal_createExtraFieldsHolder(extraPanelsHolder, "none", cfg_xf.formats, cfg_xf);
+// AS3:DONE         mc._visible = false;
+// AS3:DONE 
+// AS3:DONE         return mc;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function createExtraFieldsHolder(state:String):MovieClip
+// AS3:DONE     {
+// AS3:DONE         var formats:Array = cfg[state]["extraFields" + (isLeftPanel ? "Left" : "Right")];
+// AS3:DONE         return _internal_createExtraFieldsHolder(wrapper, state, formats, null);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function _internal_createExtraFieldsHolder(owner:MovieClip, state:String, formats:Array, cfg:Object):MovieClip
+// AS3:DONE     {
+// AS3:DONE         var idx = parseInt(wrapper._name.split("renderer").join(""));
+// AS3:DONE         var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + team + "_" + state + "_" + idx, owner.getNextHighestDepth());
+// AS3:DONE         mc._visible = false;
+// AS3:DONE         mc.idx = idx;
+// AS3:DONE         mc.orig_formats = formats;
+// AS3:DONE         mc.cfg = cfg;
+// AS3:DONE         return mc;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function configureExtraFields()
+// AS3:DONE     {
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             //Logger.add("configureExtraFields: " + m_name);
+// AS3:DONE 
+// AS3:DONE             if (extraFields == null)
+// AS3:DONE             {
+// AS3:DONE                 Logger.add("WARNING: extraFields == null");
+// AS3:DONE                 return;
+// AS3:DONE             }
+// AS3:DONE 
+// AS3:DONE             if (extraFieldsConfigured)
+// AS3:DONE                 return;
+// AS3:DONE 
+// AS3:DONE             extraFieldsConfigured = true;
+// AS3:DONE 
+// AS3:DONE             // remove old text fields
+// AS3:DONE             Utils.removeChildren(extraFields.none);
+// AS3:DONE             Utils.removeChildren(extraFields.short);
+// AS3:DONE             Utils.removeChildren(extraFields.medium);
+// AS3:DONE             Utils.removeChildren(extraFields.medium2);
+// AS3:DONE             Utils.removeChildren(extraFields.large);
+// AS3:DONE 
+// AS3:DONE             var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+// AS3:DONE             _internal_createExtraFields("none", cf.width, cf.height);
+// AS3:DONE             _internal_createExtraFields("short", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
+// AS3:DONE             _internal_createExtraFields("medium", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
+// AS3:DONE             _internal_createExtraFields("medium2", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
+// AS3:DONE             _internal_createExtraFields("large", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
+// AS3:DONE         }
+// AS3:DONE         catch (ex:Error)
+// AS3:DONE         {
+// AS3:DONE             Logger.add(ex.message);
+// AS3:DONE             return null;
+// AS3:DONE         }
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function _internal_createExtraFields(state:String, width:Number, height:Number)
+// AS3:DONE     {
+// AS3:DONE         //Logger.add("_internal_createExtraFields: " + state);
+// AS3:DONE         var mc:MovieClip = extraFields[state];
+// AS3:DONE         if (mc == null)
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         var formats:Array = mc.orig_formats;
+// AS3:DONE         if (formats == null || formats.length <= 0)
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         mc.formats = [];
+// AS3:DONE         var n:Number = 0;
+// AS3:DONE         var len:Number = formats.length;
+// AS3:DONE         for (var i:Number = 0; i < len; ++i)
+// AS3:DONE         {
+// AS3:DONE             var format = formats[i];
+// AS3:DONE 
+// AS3:DONE             if (format == null)
+// AS3:DONE                 continue;
+// AS3:DONE 
+// AS3:DONE             if (typeof format == "string")
+// AS3:DONE             {
+// AS3:DONE                 format = { format: format };
+// AS3:DONE                 formats[i] = format;
+// AS3:DONE             }
+// AS3:DONE 
+// AS3:DONE             if (typeof format != "object")
+// AS3:DONE                 continue;
+// AS3:DONE 
+// AS3:DONE             var isEmpty:Boolean = true;
+// AS3:DONE             for (var nm in format)
+// AS3:DONE             {
+// AS3:DONE                 isEmpty = false;
+// AS3:DONE                 break;
+// AS3:DONE             }
+// AS3:DONE             if (isEmpty)
+// AS3:DONE                 continue;
+// AS3:DONE 
+// AS3:DONE             if (format.enabled != null)
+// AS3:DONE             {
+// AS3:DONE                 var enabled:Boolean = Macros.FormatGlobalBooleanValue(format.enabled);
+// AS3:DONE                 if (enabled == false)
+// AS3:DONE                     continue;
+// AS3:DONE             }
+// AS3:DONE 
+// AS3:DONE             // make a copy of format, because it will be changed
+// AS3:DONE             var fmt:Object = { };
+// AS3:DONE             for (var nm in format)
+// AS3:DONE                 fmt[nm] = format[nm];
+// AS3:DONE             mc.formats.push(fmt);
+// AS3:DONE 
+// AS3:DONE             if (fmt.src != null)
+// AS3:DONE             {
+// AS3:DONE                 createExtraMovieClip(mc, fmt, n);
+// AS3:DONE             }
+// AS3:DONE             else
+// AS3:DONE             {
+// AS3:DONE                 createExtraTextField(mc, fmt, n, width, height);
+// AS3:DONE             }
+// AS3:DONE             n++;
+// AS3:DONE         }
+// AS3:DONE 
+// AS3:DONE         if (state == "none")
+// AS3:DONE             _internal_createMenuForNoneState(mc);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function _internal_createMenuForNoneState(mc:MovieClip)
+// AS3:DONE     {
+// AS3:DONE         var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+// AS3:DONE         if (cf.formats == null || cf.formats.length <= 0)
+// AS3:DONE             return;
+// AS3:DONE         var menu_mc:UIComponent = UIComponent.createInstance(mc, "HiddenButton", MENU_MC_NAME, mc.getNextHighestDepth(), {
+// AS3:DONE             _x: isLeftPanel ? 0 : -cf.width,
+// AS3:DONE             width: cf.width,
+// AS3:DONE             height: cf.height,
+// AS3:DONE             panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
+// AS3:DONE             owner: this } );
+// AS3:DONE         menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
+// AS3:DONE         menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
+// AS3:DONE         menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function createExtraMovieClip(mc:MovieClip, format:Object, n:Number)
+// AS3:DONE     {
+// AS3:DONE         //Logger.addObject(format);
+// AS3:DONE         var x:Number = Macros.FormatNumber(m_name, format, "x", null, 0, 0);
+// AS3:DONE         var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
+// AS3:DONE         var w:Number = Macros.FormatNumber(m_name, format, "w", null, NaN, 0);
+// AS3:DONE         var h:Number = Macros.FormatNumber(m_name, format, "h", null, NaN, 0);
+// AS3:DONE 
+// AS3:DONE         var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
+// AS3:DONE         img["data"] = {
+// AS3:DONE             x: x, y: y, w: w, h: h,
+// AS3:DONE             format: format,
+// AS3:DONE             align: format.align != null ? format.align : (isLeftPanel ? "left" : "right"),
+// AS3:DONE             scaleX: Macros.FormatNumber(m_name, format, "scaleX", null, 1, 1) * 100,
+// AS3:DONE             scaleY: Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100
+// AS3:DONE         };
+// AS3:DONE         //Logger.addObject(img["data"]);
+// AS3:DONE 
+// AS3:DONE         img._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
+// AS3:DONE         img._rotation = Macros.FormatNumber(m_name, format, "rotation", null, 0, 0);
+// AS3:DONE         img.autoSize = true;
+// AS3:DONE         img.maintainAspectRatio = false;
+// AS3:DONE         var me = this;
+// AS3:DONE         img.visible = false;
+// AS3:DONE         img.onLoadInit = function() { me.onExtraMovieClipLoadInit(img); }
+// AS3:DONE 
+// AS3:DONE         cleanupFormat(img, format);
+// AS3:DONE 
+// AS3:DONE         return img;
+// AS3:DONE     }
 
     private function onExtraMovieClipLoadInit(img:UILoaderAlt)
     {
@@ -558,62 +558,62 @@
 
     private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)
     {
-        //Logger.addObject(format);
-        var x:Number = Macros.FormatNumber(m_name, format, "x", null, 0, 0);
-        var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
-        var w:Number = Macros.FormatNumber(m_name, format, "w", null, defW, 0);
-        var h:Number = Macros.FormatNumber(m_name, format, "h", null, defH, 0);
-        var tf:TextField = mc.createTextField("f" + n, n, 0, 0, 0, 0);
-        tf.data = {
-            x: x, y: y, w: w, h: h,
-            align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
-        };
-
-        tf._xscale = Macros.FormatNumber(m_name, format, "scaleX", null, 1, 1) * 100;
-        tf._yscale = Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100;
-        tf._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
-        tf._rotation = Macros.FormatNumber(m_name, format, "rotation", null, 0, 0);
-        tf.selectable = false;
-        tf.html = true;
-        tf.multiline = true;
-        tf.wordWrap = false;
-        tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : "advanced";
-        tf.autoSize = "none";
-        tf.verticalAlign = format.valign != null ? format.valign : "none";
-        tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
-
-        tf.border = format.borderColor != null;
-        tf.borderColor = Macros.FormatNumber(m_name, format, "borderColor", null, 0xCCCCCC, 0xCCCCCC, true);
-        tf.background = format.bgColor != null;
-        tf.backgroundColor = Macros.FormatNumber(m_name, format, "bgColor", null, 0x000000, 0x000000, true);
-        if (tf.background && !tf.border)
-        {
-            format.borderColor = format.bgColor;
-            tf.border = true;
-            tf.borderColor = tf.backgroundColor;
-        }
-
-        if (format.shadow && format.shadow.alpha != 0 && format.shadow.strength != 0 && format.shadow.blur != 0)
-        {
-            var blur = format.shadow.blur != null ? format.shadow.blur : 2;
-            tf.filters = [
-                new DropShadowFilter(
-                    format.shadow.distance != null ? format.shadow.distance : 0,
-                    format.shadow.angle != null ? format.shadow.angle : 0,
-                    format.shadow.color != null ? parseInt(format.shadow.color) : 0x000000,
-                    format.shadow.alpha != null ? format.shadow.alpha / 100.0 : 0.75,
-                    blur,
-                    blur,
-                    format.shadow.strength != null ? format.shadow.strength : 1)
-            ];
-        }
-
-        cleanupFormat(tf, format);
-
-        alignField(tf);
-
-        return tf;
-    }
+// AS3:DONE         //Logger.addObject(format);
+// AS3:DONE         var x:Number = Macros.FormatNumber(m_name, format, "x", null, 0, 0);
+// AS3:DONE         var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
+// AS3:DONE         var w:Number = Macros.FormatNumber(m_name, format, "w", null, defW, 0);
+// AS3:DONE         var h:Number = Macros.FormatNumber(m_name, format, "h", null, defH, 0);
+// AS3:DONE         var tf:TextField = mc.createTextField("f" + n, n, 0, 0, 0, 0);
+// AS3:DONE         tf.data = {
+// AS3:DONE             x: x, y: y, w: w, h: h,
+// AS3:DONE             align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
+// AS3:DONE         };
+// AS3:DONE 
+// AS3:DONE         tf._xscale = Macros.FormatNumber(m_name, format, "scaleX", null, 1, 1) * 100;
+// AS3:DONE         tf._yscale = Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100;
+// AS3:DONE         tf._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
+// AS3:DONE         tf._rotation = Macros.FormatNumber(m_name, format, "rotation", null, 0, 0);
+// AS3:DONE         tf.selectable = false;
+// AS3:DONE         tf.html = true;
+// AS3:DONE         tf.multiline = true;
+// AS3:DONE         tf.wordWrap = false;
+// AS3:DONE         tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : "advanced";
+// AS3:DONE         tf.autoSize = "none";
+// AS3:DONE         tf.verticalAlign = format.valign != null ? format.valign : "none";
+// AS3:DONE         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
+// AS3:DONE 
+// AS3:DONE         tf.border = format.borderColor != null;
+// AS3:DONE         tf.borderColor = Macros.FormatNumber(m_name, format, "borderColor", null, 0xCCCCCC, 0xCCCCCC, true);
+// AS3:DONE         tf.background = format.bgColor != null;
+// AS3:DONE         tf.backgroundColor = Macros.FormatNumber(m_name, format, "bgColor", null, 0x000000, 0x000000, true);
+// AS3:DONE         if (tf.background && !tf.border)
+// AS3:DONE         {
+// AS3:DONE             format.borderColor = format.bgColor;
+// AS3:DONE             tf.border = true;
+// AS3:DONE             tf.borderColor = tf.backgroundColor;
+// AS3:DONE         }
+// AS3:DONE 
+// AS3:DONE         if (format.shadow && format.shadow.alpha != 0 && format.shadow.strength != 0 && format.shadow.blur != 0)
+// AS3:DONE         {
+// AS3:DONE             var blur = format.shadow.blur != null ? format.shadow.blur : 2;
+// AS3:DONE             tf.filters = [
+// AS3:DONE                 new DropShadowFilter(
+// AS3:DONE                     format.shadow.distance != null ? format.shadow.distance : 0,
+// AS3:DONE                     format.shadow.angle != null ? format.shadow.angle : 0,
+// AS3:DONE                     format.shadow.color != null ? parseInt(format.shadow.color) : 0x000000,
+// AS3:DONE                     format.shadow.alpha != null ? format.shadow.alpha / 100.0 : 0.75,
+// AS3:DONE                     blur,
+// AS3:DONE                     blur,
+// AS3:DONE                     format.shadow.strength != null ? format.shadow.strength : 1)
+// AS3:DONE             ];
+// AS3:DONE         }
+// AS3:DONE 
+// AS3:DONE         cleanupFormat(tf, format);
+// AS3:DONE 
+// AS3:DONE         alignField(tf);
+// AS3:DONE 
+// AS3:DONE         return tf;
+// AS3:DONE     }
 
     // cleanup formats without macros to remove extra checks
     private function cleanupFormat(field, format:Object)

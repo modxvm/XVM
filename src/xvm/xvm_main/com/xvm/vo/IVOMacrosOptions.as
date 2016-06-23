@@ -2,6 +2,7 @@
 {
     public interface IVOMacrosOptions
     {
+        function get playerName():String;
         function get isAlive():Boolean;
         function get isReady():Boolean;
         function get isNotAvailable():Boolean;

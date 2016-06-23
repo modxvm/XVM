@@ -19,12 +19,14 @@ import com.xvm.*;
 Chance;
 Config;
 Dossier;
-ExtraFields;
 Locale;
 Stat;
 VehicleInfo;
 XvmCommands;
 Utils;
+
+import com.xvm.extraFields.*;
+ExtraFields;
 
 import com.xvm.infrastructure.*;
 XvmModBase;

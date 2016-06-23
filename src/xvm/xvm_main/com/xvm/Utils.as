@@ -25,7 +25,11 @@ package com.xvm
                 Macros.GlobalNumber(cfg.alpha, 70, options) / 100.0,
                 Macros.GlobalNumber(cfg.blur, 4, options),
                 Macros.GlobalNumber(cfg.blur, 4, options),
-                Macros.GlobalNumber(cfg.strength, 2, options))];
+                Macros.GlobalNumber(cfg.strength, 2, options),
+                Macros.GlobalNumber(cfg.quality, 3, options),
+                Macros.GlobalBoolean(cfg.inner, false, options),
+                Macros.GlobalBoolean(cfg.knockout, false, options),
+                Macros.GlobalBoolean(cfg.hideObject, false, options))];
         }
 
         public static function getMarksOnGunText(value:Number):String

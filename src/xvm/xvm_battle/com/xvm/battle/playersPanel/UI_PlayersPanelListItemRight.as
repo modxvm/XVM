@@ -22,6 +22,20 @@ package com.xvm.battle.playersPanel
             addChild(proxy);
         }
 
+        override protected function onDispose():void
+        {
+            try
+            {
+                proxy.dispose();
+                proxy = null;
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            super.onDispose();
+        }
+
         override public function setPlayerNameProps(userProps:IUserProps):void
         {
             try

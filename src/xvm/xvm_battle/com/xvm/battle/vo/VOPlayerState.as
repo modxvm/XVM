@@ -24,7 +24,7 @@
         public var isSpeaking:Boolean;
         public var isVehiclePremiumIgr:Boolean;
         public var playerFullName:String;
-        public var playerName:String;
+        public var _playerName:String;
         public var _playerStatus:uint;
         public var prebattleID:Number;
         public var region:String;
@@ -61,6 +61,16 @@
         private var _vehicleData:VOVehicleData;
 
         // IMacrosOptionsVO implementation
+
+        override public function get playerName():String
+        {
+            return _playerName;
+        }
+
+        public function set playerName(value:String):void
+        {
+            _playerName = value;
+        }
 
         override public function get isAlive():Boolean
         {

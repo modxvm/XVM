@@ -7,6 +7,7 @@
 package com.xvm
 {
     import com.xfw.*;
+    import mx.utils.*;
 
     public class Locale
     {
@@ -61,7 +62,7 @@ package com.xvm
                 stringParts.shift();
                 macro = Locale.get(macro);
                 if (stringParts.length > 0)
-                    macro = XfwUtils.substitute(macro, stringParts);
+                    macro = StringUtil.substitute.apply(macro, stringParts);
                 res += macro;
 
                 // write rest of text after macro, without }}

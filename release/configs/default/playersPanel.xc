@@ -31,7 +31,7 @@
   // XMQP service marker definition.
   // Шаблон маркера сервиса XMQP.
   "xmqpServiceMarker": {
-    "x": 6, "y": 1, "align": "center", "bindToIcon": true, 
+    "x": 6, "y": 1, "align": "center", "bindToIcon": true,
     "format": "<font face='xvm' size='23' color='{{alive?{{x-spotted?#FFBB00|{{x-sense-on?#D9D9D9|#BFBFBF}}}}|#FFFFFF}}' alpha='{{alive?#FF|#80}}'>{{alive?{{x-spotted?&#x70;|{{x-sense-on?&#x70;|{{x-enabled?&#x7A;}}}}}}|&#x76;}}</font>",
     "shadow": {}
   },
@@ -136,7 +136,11 @@
           //     "alpha"    (0.0 .. 100.0)
           //     "blur"     (0.0 .. 255.0)
           //     "strength" (0.0 .. 255.0)
-          //    }
+          //     quality
+          //     inner
+          //     knockout
+          //     hideObject
+          //   }
           //
           // fields available for MovieClip format only:
           //     "highlight" - highlight icon depending on the player state, default false

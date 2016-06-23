@@ -6,17 +6,22 @@ package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.extraFields.*;
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.text.*;
+    import flash.display.*;
+    import flash.utils.*;
+    import flash.geom.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
     import net.wg.gui.battle.views.stats.constants.*;
     import net.wg.infrastructure.interfaces.*;
+    import net.wg.infrastructure.interfaces.entity.*;
     import scaleform.clik.core.*;
 
     public class PlayersPanelListItemProxy extends UIComponent
@@ -48,6 +53,12 @@ package com.xvm.battle.playersPanel
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
 
+        private var extraFieldsHidden:ExtraFields = null;
+        private var extraFieldsShort:ExtraFields = null;
+        private var extraFieldsMedium:ExtraFields = null;
+        private var extraFieldsLong:ExtraFields = null;
+        private var extraFieldsFull:ExtraFields = null;
+
         public function PlayersPanelListItemProxy(ui:PlayersPanelListItem, isLeftPanel:Boolean)
         {
             visible = false;
@@ -63,6 +74,15 @@ package com.xvm.battle.playersPanel
             DEFAULT_DEADBG_ALPHA = ui.deadBg.alpha;
             DEFAULT_VEHICLE_ICON_X = ui.vehicleIcon.x;
             DEFAULT_VEHICLE_LEVEL_X = ui.vehicleLevel.x;
+        }
+
+        override protected function onDispose():void
+        {
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.removeEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            disposeExtraFields();
+            _userProps = null;
+            super.onDispose();
         }
 
         public function setPlayerNameProps(userProps:IUserProps):void
@@ -93,6 +113,16 @@ package com.xvm.battle.playersPanel
                     mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
                     break;
             }
+            if (extraFieldsHidden)
+                extraFieldsHidden.visible = false;
+            if (extraFieldsHidden)
+                extraFieldsShort.visible = false;
+            if (extraFieldsHidden)
+                extraFieldsMedium.visible = false;
+            if (extraFieldsHidden)
+                extraFieldsLong.visible = false;
+            if (extraFieldsHidden)
+                extraFieldsFull.visible = false;
             invalidate(INVALIDATE_PANEL_STATE);
         }
 
@@ -149,6 +179,8 @@ package com.xvm.battle.playersPanel
                     ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X;
                 }
 
+                disposeExtraFields();
+
                 xvm_enabled = Macros.GlobalBoolean(pcfg.enabled, true);
                 //Logger.add("xvm_enabled = " + xvm_enabled);
                 if (xvm_enabled)
@@ -160,6 +192,8 @@ package com.xvm.battle.playersPanel
 
                     opt_removeSelectedBackground = Macros.GlobalBoolean(pcfg.removeSelectedBackground, false);
                     opt_vehicleIconAlpha = Macros.GlobalNumber(pcfg.iconAlpha, 100) / 100.0;
+
+                    createExtraFields();
                 }
                 else
                 {
@@ -298,17 +332,113 @@ package com.xvm.battle.playersPanel
 
         }
 
-        // update extra fields
+        // extra fields
+
+        private function createExtraFields():void
+        {
+            var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
+
+            var cfg:CPlayersPanelNoneModeExtraField = isLeftPanel ? ncfg.extraFields.leftPanel : ncfg.extraFields.rightPanel;
+            var size:Rectangle = new Rectangle(cfg.x, cfg.y, cfg.width, cfg.height);
+            extraFieldsHidden = new ExtraFields(cfg.formats, defaultAlign, size, Macros.GlobalString(ncfg.layout, "vertical"));
+            addChild(extraFieldsHidden);
+            //_internal_createMenuForNoneState(mc);
+
+            var formats:Array = isLeftPanel ? pcfg.short.extraFieldsLeft : pcfg.short.extraFieldsRight;
+            extraFieldsShort = new ExtraFields(formats, defaultAlign);
+            addChild(extraFieldsShort);
+
+            formats = isLeftPanel ? pcfg.medium.extraFieldsLeft : pcfg.medium.extraFieldsRight;
+            extraFieldsMedium = new ExtraFields(formats, defaultAlign);
+            addChild(extraFieldsMedium);
+
+            formats = isLeftPanel ? pcfg.medium2.extraFieldsLeft : pcfg.medium2.extraFieldsRight;
+            extraFieldsLong = new ExtraFields(formats, defaultAlign);
+            addChild(extraFieldsLong);
+
+            formats = isLeftPanel ? pcfg.large.extraFieldsLeft : pcfg.large.extraFieldsRight;
+            extraFieldsFull = new ExtraFields(formats, defaultAlign);
+            addChild(extraFieldsFull);
+        }
+
+        private function disposeExtraFields():void
+        {
+            if (extraFieldsHidden)
+            {
+                extraFieldsHidden.dispose();
+                extraFieldsHidden = null;
+            }
+            if (extraFieldsShort)
+            {
+                extraFieldsShort.dispose();
+                extraFieldsShort = null;
+            }
+            if (extraFieldsMedium)
+            {
+                extraFieldsMedium.dispose();
+                extraFieldsMedium = null;
+            }
+            if (extraFieldsLong)
+            {
+                extraFieldsLong.dispose();
+                extraFieldsLong = null;
+            }
+            if (extraFieldsFull)
+            {
+                extraFieldsFull.dispose();
+                extraFieldsFull = null;
+            }
+        }
 
         private function updateExtraFields():void
         {
             var playerState:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
+
+            switch (ui.xfw_state)
+            {
+                case PLAYERS_PANEL_STATE.HIDEN:
+                    extraFieldsHidden.visible = true;
+                    extraFieldsHidden.update(playerState);
+                case PLAYERS_PANEL_STATE.SHORT:
+                    extraFieldsShort.visible = true;
+                    extraFieldsShort.update(playerState);
+                    break;
+                case PLAYERS_PANEL_STATE.MEDIUM:
+                    extraFieldsMedium.visible = true;
+                    extraFieldsMedium.update(playerState);
+                    break;
+                case PLAYERS_PANEL_STATE.LONG:
+                    extraFieldsLong.visible = true;
+                    extraFieldsLong.update(playerState);
+                    break;
+                case PLAYERS_PANEL_STATE.FULL:
+                    extraFieldsFull.visible = true;
+                    extraFieldsFull.update(playerState);
+                    break;
+            }
         }
     }
 }
 
 
 /* TODO
+
+    private function _internal_createMenuForNoneState(mc:MovieClip)
+    {
+        var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+        if (cf.formats == null || cf.formats.length <= 0)
+            return;
+        var menu_mc:UIComponent = UIComponent.createInstance(mc, "HiddenButton", MENU_MC_NAME, mc.getNextHighestDepth(), {
+            _x: isLeftPanel ? 0 : -cf.width,
+            width: cf.width,
+            height: cf.height,
+            panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
+            owner: this } );
+        menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
+        menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
+        menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
+    }
+
 
     public static var DEFAULT_SQUAD_SIZE:Number;
 

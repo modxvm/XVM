@@ -69,7 +69,7 @@
      │                            │ окрашивает границу в заданный цвет, если установлен (доступно использование макросов) (по-умолчанию: null)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "shadow"                   │ shadow settings, defaults:
-     │                            │ настройки тени, значение по умолчанию: 
+     │                            │ настройки тени, значение по умолчанию:
      │                            │
      │                            │ "shadow": { "enabled": true, "distance": 0, "angle": 0, "color": "0x000000", "alpha": 75, "blur": 2, "strength": 1 }
      │----------------------------│--------------------------------------------------------------------------
@@ -90,6 +90,7 @@
      │----------------------------│--------------------------------------------------------------------------
      │ "strength"                 │ strength shadow (0.0 .. 255.0) (default: 1)
      │                            │ интенсивность тени (0.0 .. 255.0) (по-умолчанию: 1)
+quality, inner, knockout, hideObject
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "currentFieldDefaultStyle" │ it applies global style to HTML in "format"; note, that defined font attributes in "format" override those in "currentFieldDefaultStyle"
      │                            │ применяет глобальный стиль HTML в "format"; обратите внимание, что определенные атрибуты шрифта в "format" переопределяют "currentFieldDefaultStyle"
@@ -119,7 +120,7 @@
      │ "underline"                │ true - underline (default: false)
      │                            │ true - подчеркивание (по-умолчанию: false)
      │----------------------------│--------------------------------------------------------------------------
-     │ "display"                  │ defines how element must be showed (inline, block [default], none) 
+     │ "display"                  │ defines how element must be showed (inline, block [default], none)
      │                            │ указывает как именно элемент должен быть показан (inline, block [по-умолчанию], none)
      │----------------------------│--------------------------------------------------------------------------
      │ "leading"                  │ space between lines, similarly (<textformat leading='-XX'>...</textformat>) (default: 0)
@@ -165,9 +166,9 @@
       "y": -170,
       "width": 200,
       "height": 50,
-      "alpha": 70, 
+      "alpha": 70,
       "autoSize": "center",
-      "align": "center", 
+      "align": "center",
       "valign": "bottom",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 25},
       "currentFieldDefaultStyle": { "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "leading": -1, "marginLeft": 2, "marginRight": 2 },
@@ -179,9 +180,9 @@
       "y": -70,
       "width": 310,
       "height": 50,
-      "alpha": 70, 
+      "alpha": 70,
       "autoSize": "none",
-      "align": "center", 
+      "align": "center",
       "valign": "bottom",
       "bgColor": "0x000000",
       "borderColor": "0x101009",
