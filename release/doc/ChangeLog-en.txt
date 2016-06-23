@@ -15,6 +15,13 @@
       "camera"/"sniper"/"dynamicCameraEnabled" => "camera"/"sniper"/"shotRecoilEffect"
   * removed parameters:
       "battle"/"allowSpottedStatus" - not required
+  * renamed parameters in the "iconset" section and changed value from folder to atlas name:
+      "playersPanelAlly" => "playersPanelLeftAtlas"
+      "playersPanelEnemy" => "playersPanelRightAtlas"
+      "statisticFormAlly" => "fullStatsLeftAtlas"
+      "statisticFormEnemy" => "fullStatsRightAtlas"
+      "vehicleMarkerAlly" => "vehicleMarkerLeftAtlas"
+      "vehicleMarkerEnemy" => "vehicleMarkerRightAtlas"
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

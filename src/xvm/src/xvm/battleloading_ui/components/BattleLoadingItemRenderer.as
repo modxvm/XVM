@@ -152,8 +152,8 @@ package xvm.battleloading_ui.components
                         proxy.vehicleIconLoader.sourceAlt = Defines.WG_CONTOUR_ICON_PATH + vdata.sysname + ".png";
                         _model.vehicleIcon = _model.vehicleIcon.replace(Defines.WG_CONTOUR_ICON_PATH,
                             Defines.XVMRES_ROOT + ((team == XfwConst.TEAM_ALLY)
-                            ? Config.config.iconset.battleLoadingAlly
-                            : Config.config.iconset.battleLoadingEnemy));
+                            ? Macros.GlobalString(Config.config.iconset.battleLoadingAlly)
+                            : Macros.GlobalString(Config.config.iconset.battleLoadingEnemy)));
                     }
                     else
                     {

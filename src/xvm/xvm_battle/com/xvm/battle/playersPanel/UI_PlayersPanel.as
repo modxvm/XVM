@@ -11,6 +11,7 @@ package com.xvm.battle.playersPanel
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;
+    import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.*;
@@ -26,6 +27,9 @@ package com.xvm.battle.playersPanel
             medium2: PLAYERS_PANEL_STATE.LONG,
             large: PLAYERS_PANEL_STATE.FULL
         }
+
+        public static var playersPanelLeftAtlas:String = AtlasConstants.BATTLE_ATLAS;
+        public static var playersPanelRightAtlas:String = AtlasConstants.BATTLE_ATLAS;
 
         private var DEFAULT_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = PlayersPanelListLeft.LINKAGE;
         private var XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = getQualifiedClassName(UI_PlayersPanelListItemLeft);
@@ -89,6 +93,7 @@ package com.xvm.battle.playersPanel
                 if (xvm_enabled)
                 {
                     initPanelModes();
+                    registerVehicleIconAtlases();
                     panelSwitch.visible = !Macros.GlobalBoolean(cfg.removePanelsModeSwitcher, false);
                 }
                 else
@@ -129,6 +134,39 @@ package com.xvm.battle.playersPanel
             panelSwitch.mediumBt.alpha = panelSwitch.mediumBt.enabled ? 1 : .5;
             panelSwitch.longBt.alpha = panelSwitch.longBt.enabled ? 1 : .5;
             panelSwitch.fullBt.alpha = panelSwitch.fullBt.enabled ? 1 : .5;
+        }
+
+        private function registerVehicleIconAtlases():void
+        {
+            var newAtlas:String;
+            try
+            {
+                newAtlas = Macros.GlobalString(Config.config.iconset.playersPanelLeftAtlas);
+                if (playersPanelLeftAtlas != newAtlas)
+                {
+                    App.atlasMgr.registerAtlas(newAtlas);
+                    playersPanelLeftAtlas = newAtlas;
+                }
+            }
+            catch (ex:Error)
+            {
+                playersPanelLeftAtlas = AtlasConstants.BATTLE_ATLAS;
+                Logger.err(ex);
+            }
+            try
+            {
+                newAtlas = Macros.GlobalString(Config.config.iconset.playersPanelRightAtlas);
+                if (playersPanelRightAtlas != newAtlas)
+                {
+                    App.atlasMgr.registerAtlas(newAtlas);
+                    playersPanelRightAtlas = newAtlas;
+                }
+            }
+            catch (ex:Error)
+            {
+                playersPanelRightAtlas = AtlasConstants.BATTLE_ATLAS;
+                Logger.err(ex);
+            }
         }
 
         private function setAltMode(e:ObjectEvent):void

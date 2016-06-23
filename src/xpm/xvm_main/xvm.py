@@ -210,7 +210,7 @@ class Xvm(object):
     def onBecomePlayer(self):
         trace('onBecomePlayer')
         try:
-            self.xmqp_init()
+            #self.xmqp_init()
             if config.get('autoReloadConfig', False) == True:
                 configwatchdog.startConfigWatchdog()
         except Exception, ex:
@@ -219,7 +219,8 @@ class Xvm(object):
     def onBecomeNonPlayer(self):
         trace('onBecomeNonPlayer')
         try:
-            self.xmqp_stop()
+            #self.xmqp_stop()
+            pass
         except Exception, ex:
             err(traceback.format_exc())
 

@@ -169,12 +169,6 @@ def _tuneup_config(config):
 
     config['iconset']['battleLoadingAlly']  = utils.fixPath(config['iconset']['battleLoadingAlly'])
     config['iconset']['battleLoadingEnemy'] = utils.fixPath(config['iconset']['battleLoadingEnemy'])
-    config['iconset']['playersPanelAlly']   = utils.fixPath(config['iconset']['playersPanelAlly'])
-    config['iconset']['playersPanelEnemy']  = utils.fixPath(config['iconset']['playersPanelEnemy'])
-    config['iconset']['statisticFormAlly']  = utils.fixPath(config['iconset']['statisticFormAlly'])
-    config['iconset']['statisticFormEnemy'] = utils.fixPath(config['iconset']['statisticFormEnemy'])
-    config['iconset']['vehicleMarkerAlly']  = utils.fixPath(config['iconset']['vehicleMarkerAlly'])
-    config['iconset']['vehicleMarkerEnemy'] = utils.fixPath(config['iconset']['vehicleMarkerEnemy'])
 
     if config['battleLoading']['clanIcon']['xr'] is None:
         config['battleLoading']['clanIcon']['xr'] = config['battleLoading']['clanIcon']['x']

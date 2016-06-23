@@ -38,6 +38,19 @@ package com.xvm.battle.playersPanel
             }
         }
 
+        override public function setVehicleIcon(vehicleImage:String):void
+        {
+            try
+            {
+                //super.setVehicleIcon(vehicleImage);
+                proxy.setVehicleIcon(vehicleImage);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
         override protected function draw():void
         {
             try

@@ -8,11 +8,11 @@ package com.xvm.types.cfg
     {
         public var battleLoadingAlly:String;
         public var battleLoadingEnemy:String;
-        public var statisticFormAlly:String;
-        public var statisticFormEnemy:String;
-        public var playersPanelAlly:String;
-        public var playersPanelEnemy:String;
-        public var vehicleMarkerAlly:String;
-        public var vehicleMarkerEnemy:String;
+        public var playersPanelLeftAtlas:String;
+        public var playersPanelRightAtlas:String;
+        public var fullStatsLeftAtlas:String;
+        public var fullStatsRightAtlas:String;
+        public var vehicleMarkerLeftAtlas:String;
+        public var vehicleMarkerRightAtlas:String;
     }
 }

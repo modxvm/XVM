@@ -12,6 +12,7 @@ package com.xvm.battle.playersPanel
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.text.*;
+    import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
     import net.wg.gui.battle.views.stats.constants.*;
@@ -63,6 +64,17 @@ package com.xvm.battle.playersPanel
         public function setPlayerNameProps(userProps:IUserProps):void
         {
             _userProps = userProps;
+        }
+
+        public function setVehicleIcon(vehicleImage:String):void
+        {
+            if (mcfg == null)
+                return;
+            App.atlasMgr.drawGraphics(
+                isLeftPanel ? UI_PlayersPanel.playersPanelLeftAtlas : UI_PlayersPanel.playersPanelRightAtlas,
+                BattleAtlasItem.getVehicleIconName(vehicleImage),
+                ui.vehicleIcon.graphics,
+                BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
         }
 
         public function applyState():void
