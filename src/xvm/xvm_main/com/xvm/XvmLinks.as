@@ -19,6 +19,7 @@ import com.xvm.*;
 Chance;
 Config;
 Dossier;
+ExtraFields;
 Locale;
 Stat;
 VehicleInfo;

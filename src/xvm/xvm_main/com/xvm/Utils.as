@@ -7,6 +7,7 @@ package com.xvm
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.vo.*;
     import flash.filters.*;
     import flash.utils.*;
     import mx.utils.ObjectUtil;
@@ -15,16 +16,16 @@ package com.xvm
     public class Utils
     {
         // Create DropShadowFilter from config section
-        public static function createShadowFiltersFromConfig(cfg:CShadow):Array
+        public static function createShadowFiltersFromConfig(cfg:CShadow, options:IVOMacrosOptions = null):Array
         {
-            return !Macros.GlobalBoolean(cfg.enabled, true) ? null : [new DropShadowFilter(
-                Macros.GlobalNumber(cfg.distance, 0),
-                Macros.GlobalNumber(cfg.angle, 0),
-                Macros.GlobalNumber(cfg.color, 0),
-                Macros.GlobalNumber(cfg.alpha, 70) / 100.0,
-                Macros.GlobalNumber(cfg.blur, 4),
-                Macros.GlobalNumber(cfg.blur, 4),
-                Macros.GlobalNumber(cfg.strength, 2))];
+            return !Macros.GlobalBoolean(cfg.enabled, true, options) ? null : [new DropShadowFilter(
+                Macros.GlobalNumber(cfg.distance, 0, options),
+                Macros.GlobalNumber(cfg.angle, 0, options),
+                Macros.GlobalNumber(cfg.color, 0, options),
+                Macros.GlobalNumber(cfg.alpha, 70, options) / 100.0,
+                Macros.GlobalNumber(cfg.blur, 4, options),
+                Macros.GlobalNumber(cfg.blur, 4, options),
+                Macros.GlobalNumber(cfg.strength, 2, options))];
         }
 
         public static function getMarksOnGunText(value:Number):String

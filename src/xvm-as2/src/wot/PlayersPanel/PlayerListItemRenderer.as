@@ -130,46 +130,46 @@
 // AS3:DONE 
 // AS3:DONE         wrapper.data.isPostmortemView = savedValue;
 // AS3:DONE     }
-
-    function updateImpl()
-    {
-        try
-        {
-            var data:Object = wrapper.data;
-            //Logger.add("update: " + (data ? data.userName : "(null)"))
-            //Logger.addObject(data);
-
-            var saved_icon:String;
-            if (data == null)
-            {
-                m_playerId = 0
-                m_name = null;
-                m_clan = null;
-                m_vehicleState = 0;
-                m_dead = true;
-                if (extraFields != null)
-                    extraFields.none._visible = false;
-            }
-            else
-            {
-                m_playerId = data.uid;
-                m_name = data.userName;
-                m_clan = data.clanAbbrev;
-                m_vehicleState = data.vehicleState;
-                m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
-
-                saved_icon = data.icon;
-
-                // Alternative icon set
-                if (!m_iconset)
-                    m_iconset = new IconLoader(this, completeLoad);
-                m_iconset.init(wrapper.iconLoader,
-                    [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT +
-                    (isLeftPanel
-                        ? Config.config.iconset.playersPanelAlly
-                        : Config.config.iconset.playersPanelEnemy)),
-                    saved_icon ]);
-                data.icon = m_iconset.currentIcon;
+// AS3:DONE 
+// AS3:DONE     function updateImpl()
+// AS3:DONE     {
+// AS3:DONE         try
+// AS3:DONE         {
+// AS3:DONE             var data:Object = wrapper.data;
+// AS3:DONE             //Logger.add("update: " + (data ? data.userName : "(null)"))
+// AS3:DONE             //Logger.addObject(data);
+// AS3:DONE 
+// AS3:DONE             var saved_icon:String;
+// AS3:DONE             if (data == null)
+// AS3:DONE             {
+// AS3:DONE                 m_playerId = 0
+// AS3:DONE                 m_name = null;
+// AS3:DONE                 m_clan = null;
+// AS3:DONE                 m_vehicleState = 0;
+// AS3:DONE                 m_dead = true;
+// AS3:DONE                 if (extraFields != null)
+// AS3:DONE                     extraFields.none._visible = false;
+// AS3:DONE             }
+// AS3:DONE             else
+// AS3:DONE             {
+// AS3:DONE                 m_playerId = data.uid;
+// AS3:DONE                 m_name = data.userName;
+// AS3:DONE                 m_clan = data.clanAbbrev;
+// AS3:DONE                 m_vehicleState = data.vehicleState;
+// AS3:DONE                 m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
+// AS3:DONE 
+// AS3:DONE                 saved_icon = data.icon;
+// AS3:DONE 
+// AS3:DONE                 // Alternative icon set
+// AS3:DONE                 if (!m_iconset)
+// AS3:DONE                     m_iconset = new IconLoader(this, completeLoad);
+// AS3:DONE                 m_iconset.init(wrapper.iconLoader,
+// AS3:DONE                     [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT +
+// AS3:DONE                     (isLeftPanel
+// AS3:DONE                         ? Config.config.iconset.playersPanelAlly
+// AS3:DONE                         : Config.config.iconset.playersPanelEnemy)),
+// AS3:DONE                     saved_icon ]);
+// AS3:DONE                 data.icon = m_iconset.currentIcon;
 
                 // Player/clan icons
                 attachClanIconToPlayer();
@@ -224,18 +224,18 @@
         return _team;
     }
 
-    private function get isLeftPanel():Boolean
-    {
-        return team == Defines.TEAM_ALLY;
-    }
-
-    private var _panel:net.wargaming.ingame.PlayersPanel = null;
-    private function get panel():net.wargaming.ingame.PlayersPanel
-    {
-        if (_panel == null)
-            _panel = net.wargaming.ingame.PlayersPanel(wrapper._parent._parent._parent);
-        return _panel;
-    }
+// AS3:DONE     private function get isLeftPanel():Boolean
+// AS3:DONE     {
+// AS3:DONE         return team == Defines.TEAM_ALLY;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private var _panel:net.wargaming.ingame.PlayersPanel = null;
+// AS3:DONE     private function get panel():net.wargaming.ingame.PlayersPanel
+// AS3:DONE     {
+// AS3:DONE         if (_panel == null)
+// AS3:DONE             _panel = net.wargaming.ingame.PlayersPanel(wrapper._parent._parent._parent);
+// AS3:DONE         return _panel;
+// AS3:DONE     }
 
     private static function get extraPanelsHolder():MovieClip
     {
@@ -250,29 +250,29 @@
 
     // misc
 
-    private function init()
-    {
-        if (_initialized)
-            return;
-
-        _initialized = true;
-
-        if (!Utils.isArenaGuiTypeWithPlayerPanels())
-            return;
-
-        GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, onStatLoaded);
-
-        if (isLeftPanel)
-        {
-            GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
-            GlobalEventDispatcher.addEventListener(Events.E_LEFT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsLeft);
-        }
-        else
-        {
-            GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, adjustExtraFieldsRight);
-            GlobalEventDispatcher.addEventListener(Events.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
-        }
-    }
+// AS3:DONE     private function init()
+// AS3:DONE     {
+// AS3:DONE         if (_initialized)
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         _initialized = true;
+// AS3:DONE 
+// AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, onStatLoaded);
+// AS3:DONE 
+// AS3:DONE         if (isLeftPanel)
+// AS3:DONE         {
+// AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
+// AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_LEFT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsLeft);
+// AS3:DONE         }
+// AS3:DONE         else
+// AS3:DONE         {
+// AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, adjustExtraFieldsRight);
+// AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
+// AS3:DONE         }
+// AS3:DONE     }
 
     private function onConfigLoaded()
     {
@@ -305,34 +305,34 @@
             Logger.add(ex.toString());
         }
     }
-
-    private function onStatLoaded()
-    {
-        update();
-    }
-
-    private function completeLoad()
-    {
-        if (m_iconLoaded)
-            return;
-        m_iconLoaded = true;
-
-        mirrorEnemyIcons();
-
-        wrapper.iconLoader._visible = true;
-    }
-
-    private function mirrorEnemyIcons():Void
-    {
-        if (!Config.config.battle.mirroredVehicleIcons && !isLeftPanel)
-        {
-            wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
-            wrapper.iconLoader._x -= 80;
-            wrapper.vehicleLevel._x = wrapper.iconLoader._x + 15;
-
-            updateExtraFields();
-        }
-    }
+// AS3:DONE 
+// AS3:DONE     private function onStatLoaded()
+// AS3:DONE     {
+// AS3:DONE         update();
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function completeLoad()
+// AS3:DONE     {
+// AS3:DONE         if (m_iconLoaded)
+// AS3:DONE             return;
+// AS3:DONE         m_iconLoaded = true;
+// AS3:DONE 
+// AS3:DONE         mirrorEnemyIcons();
+// AS3:DONE 
+// AS3:DONE         wrapper.iconLoader._visible = true;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function mirrorEnemyIcons():Void
+// AS3:DONE     {
+// AS3:DONE         if (!Config.config.battle.mirroredVehicleIcons && !isLeftPanel)
+// AS3:DONE         {
+// AS3:DONE             wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
+// AS3:DONE             wrapper.iconLoader._x -= 80;
+// AS3:DONE             wrapper.vehicleLevel._x = wrapper.iconLoader._x + 15;
+// AS3:DONE 
+// AS3:DONE             updateExtraFields();
+// AS3:DONE         }
+// AS3:DONE     }
 
     private function attachClanIconToPlayer():Void
     {

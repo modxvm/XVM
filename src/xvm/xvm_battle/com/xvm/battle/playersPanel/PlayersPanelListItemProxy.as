@@ -32,6 +32,8 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
         private var DEFAULT_DEADBG_ALPHA:Number;
+        private var DEFAULT_VEHICLE_ICON_X:Number;
+        private var DEFAULT_VEHICLE_LEVEL_X:Number;
 
         private var pcfg:CPlayersPanel;
         private var mcfg:CPlayersPanelMode;
@@ -59,6 +61,8 @@ package com.xvm.battle.playersPanel
             DEFAULT_BG_ALPHA = ui.bg.alpha;
             DEFAULT_SELFBG_ALPHA = ui.selfBg.alpha;
             DEFAULT_DEADBG_ALPHA = ui.deadBg.alpha;
+            DEFAULT_VEHICLE_ICON_X = ui.vehicleIcon.x;
+            DEFAULT_VEHICLE_LEVEL_X = ui.vehicleLevel.x;
         }
 
         public function setPlayerNameProps(userProps:IUserProps):void
@@ -73,6 +77,7 @@ package com.xvm.battle.playersPanel
             var atlas:String = isLeftPanel ? UI_PlayersPanel.playersPanelLeftAtlas : UI_PlayersPanel.playersPanelRightAtlas;
             if (!App.atlasMgr.isAtlasInitialized(atlas))
                 atlas = AtlasConstants.BATTLE_ATLAS;
+            setupMirroredVehicleIcon();
             App.atlasMgr.drawGraphics(atlas, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
         }
 
@@ -135,9 +140,17 @@ package com.xvm.battle.playersPanel
                 pcfg = Config.config.playersPanel;
                 mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
                 ncfg = pcfg.none;
+
+                // revert mirrored icon
+                if (!isLeftPanel)
+                {
+                    ui.vehicleIcon.scaleX = 1;
+                    ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X;
+                    ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X;
+                }
+
                 xvm_enabled = Macros.GlobalBoolean(pcfg.enabled, true);
                 //Logger.add("xvm_enabled = " + xvm_enabled);
-
                 if (xvm_enabled)
                 {
                     var alpha:Number = Macros.GlobalNumber(pcfg.alpha, 80) / 100.0;
@@ -162,6 +175,16 @@ package com.xvm.battle.playersPanel
                 Logger.err(ex);
             }
             return null;
+        }
+
+        private function setupMirroredVehicleIcon():void
+        {
+            if (!isLeftPanel && !Macros.GlobalBoolean(Config.config.battle.mirroredVehicleIcons))
+            {
+                ui.vehicleIcon.scaleX = -1;
+                ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - 80;
+                ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X - 35;
+            }
         }
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void

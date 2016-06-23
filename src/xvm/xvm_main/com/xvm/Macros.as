@@ -46,19 +46,19 @@ package com.xvm
             return Number(value);
         }
 
-        public static function GlobalNumber(value:*, defaultValue:Number = NaN):Number
+        public static function GlobalNumber(value:*, defaultValue:Number = NaN, options:IVOMacrosOptions = null):Number
         {
-            return _instance._GlobalNumber(value, defaultValue);
+            return _instance._GlobalNumber(value, defaultValue, options);
         }
 
-        public static function GlobalBoolean(value:*, defaultValue:Boolean = false):Boolean
+        public static function GlobalBoolean(value:*, defaultValue:Boolean = false, options:IVOMacrosOptions = null):Boolean
         {
-            return _instance._GlobalBoolean(value, defaultValue);
+            return _instance._GlobalBoolean(value, defaultValue, options);
         }
 
-        public static function GlobalString(value:*, defaultValue:String = null):String
+        public static function GlobalString(value:*, defaultValue:String = null, options:IVOMacrosOptions = null):String
         {
-            return _instance._GlobalString(value, defaultValue);
+            return _instance._GlobalString(value, defaultValue, options);
         }
 
         public static function IsCached(pname:String, format:String, alive:Boolean = false):Boolean
@@ -670,27 +670,27 @@ package com.xvm
             return res;
         }
 
-        private function _GlobalNumber(value:*, defaultValue:Number):Number
+        private function _GlobalNumber(value:*, defaultValue:Number, options:IVOMacrosOptions):Number
         {
             if (value == null)
                 return defaultValue;
             if (!isNaN(value))
                 return value;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:Number = Number(_Format(null, value, new VOMacrosOptions()));
+            var res:Number = Number(_Format(null, value, options || new VOMacrosOptions()));
             if (isFinite(res))
                 return res;
             return defaultValue;
         }
 
-        private function _GlobalBoolean(value:*, defaultValue:Boolean):Boolean
+        private function _GlobalBoolean(value:*, defaultValue:Boolean, options:IVOMacrosOptions):Boolean
         {
             if (value == null)
                 return defaultValue;
             if (typeof value == "boolean")
                 return value;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:String = String(_Format(null, value, new VOMacrosOptions())).toLowerCase();
+            var res:String = String(_Format(null, value, options || new VOMacrosOptions())).toLowerCase();
             if (res == 'true')
                 return true;
             if (res == 'false')
@@ -698,12 +698,12 @@ package com.xvm
             return defaultValue;
         }
 
-        private function _GlobalString(value:*, defaultValue:String):String
+        private function _GlobalString(value:*, defaultValue:String, options:IVOMacrosOptions):String
         {
             if (value == null)
                 return defaultValue;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:String = _Format(null, String(value), new VOMacrosOptions());
+            var res:String = _Format(null, String(value), options || new VOMacrosOptions());
             return res != null ? res : defaultValue;
         }
 

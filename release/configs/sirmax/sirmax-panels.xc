@@ -77,7 +77,7 @@
   "short": {
     //"enabled": false,
     //"width": 80,
-    "vehicleLevelAlpha": 0,
+    "vehicleLevelAlpha": 70,
     //"removeSquadIcon": true,
     "__stub__": null
   },
