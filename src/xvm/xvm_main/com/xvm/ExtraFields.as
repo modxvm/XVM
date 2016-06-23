@@ -8,7 +8,6 @@ package com.xvm
     import com.xvm.*;
     import com.xvm.types.*;
     import com.xvm.types.dossier.*;
-    import com.xvm.utils.*;
     import com.xvm.vo.*;
     import flash.display.*;
     import flash.filters.*;
