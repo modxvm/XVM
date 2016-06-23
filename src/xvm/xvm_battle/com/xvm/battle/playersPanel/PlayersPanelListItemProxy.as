@@ -70,11 +70,10 @@ package com.xvm.battle.playersPanel
         {
             if (mcfg == null)
                 return;
-            App.atlasMgr.drawGraphics(
-                isLeftPanel ? UI_PlayersPanel.playersPanelLeftAtlas : UI_PlayersPanel.playersPanelRightAtlas,
-                BattleAtlasItem.getVehicleIconName(vehicleImage),
-                ui.vehicleIcon.graphics,
-                BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+            var atlas:String = isLeftPanel ? UI_PlayersPanel.playersPanelLeftAtlas : UI_PlayersPanel.playersPanelRightAtlas;
+            if (!App.atlasMgr.isAtlasInitialized(atlas))
+                atlas = AtlasConstants.BATTLE_ATLAS;
+            App.atlasMgr.drawGraphics(atlas, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
         }
 
         public function applyState():void
