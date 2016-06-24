@@ -10,7 +10,7 @@
     public class TextExtraField extends TextField implements IExtraField
     {
         //public static const DEFAULT_TEXT_FIELD_WIDTH:Number = 300;
-        //public static const DEFAULT_TEXT_FIELD_WIDTH_HEIGHT:Number = 25;
+        //public static const DEFAULT_TEXT_FIELD_HEIGHT:Number = 25;
 
         private var cfg:CExtraField;
         private var isLeftPanel:Boolean;
@@ -37,6 +37,9 @@
             multiline = true;
             wordWrap = false;
             autoSize = TextFieldAutoSize.NONE;
+
+            //width = DEFAULT_TEXT_FIELD_WIDTH;
+            //height = DEFAULT_TEXT_FIELD_HEIGHT;
 
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             cfg.align = Macros.FormatStringGlobal(cfg.align, defaultAlign);
@@ -297,7 +300,7 @@
             if (cfg.width != null)
             {
                 value = Macros.FormatNumber(cfg.width, options);
-                if (isNaN(value) && _widthValue != value)
+                if (!isNaN(value) && _widthValue != value)
                 {
                     _widthValue = value;
                     needAlign = true;
@@ -306,7 +309,7 @@
             if (cfg.height != null)
             {
                 value = Macros.FormatNumber(cfg.height, options);
-                if (isNaN(value) && _heightValue != value)
+                if (!isNaN(value) && _heightValue != value)
                 {
                     _heightValue = value;
                     needAlign = true;
