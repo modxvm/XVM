@@ -27,7 +27,14 @@ package com.xvm.battle.playersPanel
 
     public class PlayersPanelListItemProxy extends UIComponent
     {
-        private static const STD_VEHICLE_ICON_WIDTH:Number = 80;
+        // from PlayersPanelListItem.as
+        private static const ICONS_AREA_WIDTH:Number = 63;
+        private static const SQUAD_ITEMS_AREA_WIDTH:Number = 25;
+        private static const WIDTH:Number = 339;
+        private static const PLAYER_NAME_MARGIN:Number = 8;
+        private static const VEHICLE_TF_RIGHT_X:int = -WIDTH + ICONS_AREA_WIDTH;
+        private static const VEHICLE_TF_LEFT_X:int = WIDTH - ICONS_AREA_WIDTH;
+
         private static const STD_VEHICLE_LEVEL_MIRRORING_SHIFT:Number = 35;
 
         public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
@@ -145,17 +152,18 @@ package com.xvm.battle.playersPanel
                 {
                     updateVehicleIcon();
                     _standardTextFieldsTexts = { };
-                    updateStandardFields();
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_PANEL_STATE))
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_COLORS))
                 {
-                    if (!isInvalid(INVALIDATE_UPDATE_COLORS))
-                        updateStandardFields();
-                    updateExtraFields();
+                    updateStandardFields();
                 }
                 if (isInvalid(INVALIDATE_UPDATE_PANEL_SIZE))
                 {
                     updatePanelSize();
+                }
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_PANEL_SIZE))
+                {
+                    updateExtraFields();
                 }
             }
             catch (ex:Error)
@@ -220,7 +228,7 @@ package com.xvm.battle.playersPanel
             if (!isLeftPanel && !Macros.GlobalBoolean(Config.config.battle.mirroredVehicleIcons))
             {
                 ui.vehicleIcon.scaleX = -1;
-                ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - STD_VEHICLE_ICON_WIDTH;
+                ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - ICONS_AREA_WIDTH;
                 ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X - STD_VEHICLE_LEVEL_MIRRORING_SHIFT;
             }
         }
@@ -329,7 +337,8 @@ package com.xvm.battle.playersPanel
 
         private function updatePanelSize():void
         {
-
+            x = -ui.x;
+            updateExtraFields();
         }
 
         // update none mode
@@ -423,19 +432,19 @@ package com.xvm.battle.playersPanel
                     extraFieldsHidden.update(playerState);
                 case PLAYERS_PANEL_STATE.SHORT:
                     extraFieldsShort.visible = true;
-                    extraFieldsShort.update(playerState, ui.vehicleIcon.x + STD_VEHICLE_ICON_WIDTH);
+                    extraFieldsShort.update(playerState, ui.vehicleIcon.x + ICONS_AREA_WIDTH - x);
                     break;
                 case PLAYERS_PANEL_STATE.MEDIUM:
                     extraFieldsMedium.visible = true;
-                    extraFieldsMedium.update(playerState, ui.vehicleIcon.x + STD_VEHICLE_ICON_WIDTH);
+                    extraFieldsMedium.update(playerState, ui.vehicleIcon.x + ICONS_AREA_WIDTH - x);
                     break;
                 case PLAYERS_PANEL_STATE.LONG:
                     extraFieldsLong.visible = true;
-                    extraFieldsLong.update(playerState, ui.vehicleIcon.x + STD_VEHICLE_ICON_WIDTH);
+                    extraFieldsLong.update(playerState, ui.vehicleIcon.x + ICONS_AREA_WIDTH - x);
                     break;
                 case PLAYERS_PANEL_STATE.FULL:
                     extraFieldsFull.visible = true;
-                    extraFieldsFull.update(playerState, ui.vehicleIcon.x + STD_VEHICLE_ICON_WIDTH + isLeftPanel ? 0 : STD_VEHICLE_ICON_WIDTH);
+                    extraFieldsFull.update(playerState, ui.vehicleIcon.x + ICONS_AREA_WIDTH - x);
                     break;
             }
         }
