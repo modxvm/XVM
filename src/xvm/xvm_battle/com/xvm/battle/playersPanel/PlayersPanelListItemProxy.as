@@ -38,10 +38,9 @@ package com.xvm.battle.playersPanel
         private static const STD_VEHICLE_LEVEL_MIRRORING_SHIFT:Number = 35;
 
         public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
-        public static var INVALIDATE_USER_PROPS:String = "USER_PROPS";
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
         public static var INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
-        public static var INVALIDATE_UPDATE_PANEL_SIZE:String = "UPDATE_PANEL_SIZE";
+        public static var INVALIDATE_UPDATE_POSITIONS:String = "UPDATE_POSITIONS";
 
         public var xvm_enabled:Boolean;
 
@@ -59,6 +58,7 @@ package com.xvm.battle.playersPanel
 
         private var _userProps:IUserProps = null;
 
+        private var _savedXValue:Object = {};
         private var _standardTextFieldsTexts:Object = {};
 
         private var opt_removeSelectedBackground:Boolean;
@@ -148,21 +148,22 @@ package com.xvm.battle.playersPanel
                 if (mcfg == null || _userProps == null)
                     return;
 
+                if (isInvalid(INVALIDATE_UPDATE_POSITIONS))
+                {
+                    _savedXValue = ui.x;
+                }
                 if (isInvalid(INVALIDATE_UPDATE_COLORS))
                 {
                     updateVehicleIcon();
                     _standardTextFieldsTexts = { };
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_COLORS))
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_COLORS))
                 {
                     updateStandardFields();
                 }
-                if (isInvalid(INVALIDATE_UPDATE_PANEL_SIZE))
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE))
                 {
                     updatePanelSize();
-                }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_USER_PROPS, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_PANEL_SIZE))
-                {
                     updateExtraFields();
                 }
             }
@@ -322,6 +323,8 @@ package com.xvm.battle.playersPanel
 
         private function updateStandardTextField(tf:TextField, format:String, playerState:VOPlayerState):Boolean
         {
+            if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
+
             var txt:String = Macros.Format(_userProps.userName, format, playerState);
             if (_standardTextFieldsTexts[tf.name] == txt)
                 return false;
@@ -329,7 +332,6 @@ package com.xvm.battle.playersPanel
             var schemeName:String = getSchemeNameForPlayer(playerState);
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             tf.htmlText = "<font color='" + XfwUtils.toHtmlColor(colorScheme.rgb) + "'>" + txt + "</font>";
-            invalidate(INVALIDATE_UPDATE_PANEL_SIZE);
             return true;
         }
 
@@ -337,6 +339,10 @@ package com.xvm.battle.playersPanel
 
         private function updatePanelSize():void
         {
+            if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN && mcfg.removeSquadIcon)
+            {
+                ui.x = _savedXValue + isLeftPanel ? -SQUAD_ITEMS_AREA_WIDTH : SQUAD_ITEMS_AREA_WIDTH;
+            }
             x = -ui.x;
             updateExtraFields();
         }

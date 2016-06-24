@@ -307,7 +307,7 @@ package com.xvm.battle
         private function _RegisterZoomIndicatorData(zoom:Number):void
         {
             // {{zoom}}
-            m_globals["zoom"] = zoom;
+            m_globals["zoom"] = function(o:MacrosOptions):void { return zoom; }
         }
         */
 

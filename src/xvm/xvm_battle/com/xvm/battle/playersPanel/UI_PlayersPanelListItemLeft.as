@@ -43,7 +43,7 @@ package com.xvm.battle.playersPanel
                 proxy.setPlayerNameProps(userProps);
                 if (proxy.xvm_enabled)
                 {
-                    proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_USER_PROPS);
+                    proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PLAYER_STATE);
                 }
             }
             catch (ex:Error)
@@ -72,6 +72,10 @@ package com.xvm.battle.playersPanel
                 super.draw();
                 if (proxy.xvm_enabled)
                 {
+                    if (isInvalid(PlayersPanelInvalidationType.PLAYER_NAME_FULL_WIDTH))
+                    {
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
+                    }
                     if (isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
                     {
                         proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_UPDATE_COLORS);
@@ -80,6 +84,7 @@ package com.xvm.battle.playersPanel
                     {
                         proxy.applyState();
                     }
+                    proxy.validateNow();
                 }
             }
             catch (ex:Error)

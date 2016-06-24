@@ -249,7 +249,6 @@
                     x -= width;
                 else if (cfg.align == TextFormatAlign.CENTER)
                     x -= width / 2;
-                Logger.add(options.playerName + " " + x + " " + y + " " + width + " " + height + " " + cfg.bindToIcon + " " + bindToIconOffset + " " + source + "<=" + cfg.src);
             }
         }
     }

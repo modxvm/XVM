@@ -183,8 +183,8 @@
 // AS3:DONE                 }
 // AS3:DONE             }
 // AS3:DONE 
-            if (wrapper.squadIcon != null)
-                wrapper.squadIcon._visible = (panel.state != "none" && !cfg[panel.state].removeSquadIcon);
+// AS3:DONE             if (wrapper.squadIcon != null)
+// AS3:DONE                 wrapper.squadIcon._visible = (panel.state != "none" && !cfg[panel.state].removeSquadIcon);
 // AS3:DONE 
 // AS3:DONE             base.update();
 // AS3:DONE 

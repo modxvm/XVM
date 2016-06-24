@@ -16,12 +16,12 @@ package com.xvm
 
         public static function Format(pname:String, format:*, options:IVOMacrosOptions = null):*
         {
-            return _instance._Format(pname, format, options);
+            return _instance._Format(pname, format, options, {});
         }
 
         public static function FormatByAccountDBID(accountDBID:Number, format:*, options:IVOMacrosOptions = null):*
         {
-            return _instance._Format(_instance.m_accountDBID_to_pname[accountDBID], format, options);
+            return Format(_instance.m_accountDBID_to_pname[accountDBID], format, options);
         }
 
         public static function FormatNumber(pname:String, format:*, options:IVOMacrosOptions, nullValue:Number = NaN, emptyValue:Number = NaN, isColorValue:Boolean = false):Number
@@ -152,8 +152,6 @@ package com.xvm
 
         private var curent_xtdb:Number = 0;
 
-        private var isStaticMacro:Boolean;
-
         /**
          * Format string with macros substitutions
          *   {{name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]}}
@@ -162,9 +160,11 @@ package com.xvm
          * @param options data for dynamic values
          * @return Formatted string
          */
-        private function _Format(pname:String, format:*, options:IVOMacrosOptions):*
+        private function _Format(pname:String, format:*, options:IVOMacrosOptions, __out:Object):*
         {
             //Logger.add("format:" + format + " player:" + pname);
+
+            __out.isStaticMacro = true;
 
             if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format))
                 return format;
@@ -202,7 +202,7 @@ package com.xvm
                 // Split tags
                 var formatArr:Array = format.split("{{");
 
-                isStaticMacro = true;
+                var isStaticMacro:Boolean = true;
                 var res:String;
                 var len:int = formatArr.length;
                 if (len <= 1)
@@ -223,7 +223,9 @@ package com.xvm
                         }
                         else
                         {
-                            res += _FormatPart(part.slice(0, idx), pname, options) + part.slice(idx + 2);
+                            var _FormatPart_out:Object = { };
+                            res += _FormatPart(part.slice(0, idx), pname, options, _FormatPart_out) + part.slice(idx + 2);
+                            isStaticMacro = isStaticMacro && _FormatPart_out.isStaticMacro;
                         }
                     }
 
@@ -233,9 +235,9 @@ package com.xvm
                         if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
                         {
                             //Logger.add("recursive: " + pname + " " + res);
-                            var isStatic:Boolean = isStaticMacro;
-                            res = _Format(pname, res, options);
-                            isStaticMacro = isStatic && isStaticMacro;
+                            var _Format_out:Object = { };
+                            res = _Format(pname, res, options, _Format_out);
+                            isStaticMacro = isStaticMacro && _Format_out.isStaticMacro;
                         }
                     }
                 }
@@ -257,8 +259,11 @@ package com.xvm
                         m_macros_cache_global[format] = res;
                     }
                 }
-                //else
-                //    Logger.add(pname + "> " + format);
+                else
+                {
+                    //Logger.add("[D] " + pname + "> " + format);
+                    __out.isStaticMacro = false;
+                }
 
                 //Logger.add(pname + "> " + format);
                 //Logger.add(pname + "= " + res);
@@ -273,7 +278,7 @@ package com.xvm
             return "";
         }
 
-        private function _FormatPart(macro:String, pname:String, options:IVOMacrosOptions):String
+        private function _FormatPart(macro:String, pname:String, options:IVOMacrosOptions, __out:Object):String
         {
             // Process tag
             var pdata:* = pname == null ? m_globals : m_dict[pname];
@@ -320,35 +325,34 @@ package com.xvm
                 //process l10n macro
                 if (macroName == "l10n")
                 {
-                    res += prepareValue(NaN, macroName, norm, def, vehCD);
+                    res += prepareValue(NaN, macroName, norm, def, vehCD, __out);
                 }
                 else if (macroName == "py")
                 {
-                    res += prepareValue(NaN, macroName, norm, def, vehCD);
+                    res += prepareValue(NaN, macroName, norm, def, vehCD, __out);
                 }
                 else
                 {
                     res += def;
                     if (dotPos != 0)
-                        isStaticMacro = false;
+                        __out.isStaticMacro = false;
                 }
             }
             else if (value == null)
             {
                 //Logger.add(macroName + " " + norm + " " + def + "  " + format);
-                res += prepareValue(NaN, macroName, norm, def, vehCD);
+                res += prepareValue(NaN, macroName, norm, def, vehCD, __out);
             }
             else
             {
                 // is static macro
                 var type:String = typeof value;
-                if (type == "function" && options == null)
-                    isStaticMacro = false;
+                if (type == "function")
+                    __out.isStaticMacro = false;
                 else if (vehCD == 0)
                 {
                     switch (macroName)
                     {
-                        case "maxhp":
                         case "veh-id":
                         case "vehicle":
                         case "vehiclename":
@@ -362,24 +366,12 @@ package com.xvm
                         case "nation":
                         case "level":
                         case "rlevel":
-                            isStaticMacro = false;
+                            __out.isStaticMacro = false;
                             break;
                     }
                 }
 
-                res += _FormatMacro(macro, parts, value, vehCD, options);
-            }
-
-            if (isStaticMacro)
-            {
-                switch (macroName)
-                {
-                    case "squad":
-                    case "squad-num":
-                    case "zoom":
-                        isStaticMacro = false;
-                        break;
-                }
+                res += _FormatMacro(macro, parts, value, vehCD, options, __out);
             }
 
             return res;
@@ -482,7 +474,7 @@ package com.xvm
         }
 
         private var _format_macro_fmt_suf_cache:Object = {};
-        private function _FormatMacro(macro:String, parts:Array, value:*, vehCD:Number, options:IVOMacrosOptions):String
+        private function _FormatMacro(macro:String, parts:Array, value:*, vehCD:Number, options:IVOMacrosOptions, __out:Object):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -500,7 +492,7 @@ package com.xvm
             //Logger.add("type:" + type + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
             if (type == "number" && isNaN(value))
-                return prepareValue(NaN, name, norm, def, vehCD);
+                return prepareValue(NaN, name, norm, def, vehCD, __out);
 
             var res:String = value;
             if (type == "function")
@@ -509,10 +501,10 @@ package com.xvm
                     return "{{" + macro + "}}";
                 value = value(options);
                 if (value == null)
-                    return prepareValue(NaN, name, norm, def, vehCD);
+                    return prepareValue(NaN, name, norm, def, vehCD, __out);
                 type = typeof value;
                 if (type == "number" && isNaN(value))
-                    return prepareValue(NaN, name, norm, def, vehCD);
+                    return prepareValue(NaN, name, norm, def, vehCD, __out);
                 res = value;
             }
 
@@ -542,14 +534,14 @@ package com.xvm
                         break;
                 }
                 if (!matched)
-                    return prepareValue(NaN, name, norm, def, vehCD);
+                    return prepareValue(NaN, name, norm, def, vehCD, __out);
             }
 
             if (rep != null)
                 return rep;
 
             if (norm != null)
-                res = prepareValue(value, name, norm, def, vehCD);
+                res = prepareValue(value, name, norm, def, vehCD, __out);
 
             if (fmt == null && suf == null)
                 return res;
@@ -602,7 +594,7 @@ package com.xvm
         }
 
         private var _prepare_value_cache:Object = {};
-        private function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number):String
+        private function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number, __out:Object):String
         {
             if (norm == null)
                 return def;
@@ -667,7 +659,7 @@ package com.xvm
                     break;
                 case "py":
                     res = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, norm);
-                    isStaticMacro = res[1];
+                    __out.isStaticMacro = res[1];
                     res = res[0];
                     if (res == null)
                         res = def;
@@ -684,7 +676,7 @@ package com.xvm
             if (!isNaN(value))
                 return value;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:Number = Number(_Format(null, value, options || new VOMacrosOptions()));
+            var res:Number = Number(_Format(null, value, options || new VOMacrosOptions(), {}));
             if (isFinite(res))
                 return res;
             return defaultValue;
@@ -697,7 +689,7 @@ package com.xvm
             if (typeof value == "boolean")
                 return value;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:String = String(_Format(null, value, options || new VOMacrosOptions())).toLowerCase();
+            var res:String = String(_Format(null, value, options || new VOMacrosOptions(), {})).toLowerCase();
             if (res == 'true')
                 return true;
             if (res == 'false')
@@ -710,7 +702,7 @@ package com.xvm
             if (value == null)
                 return defaultValue;
             //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:String = _Format(null, String(value), options || new VOMacrosOptions());
+            var res:String = _Format(null, String(value), options || new VOMacrosOptions(), {});
             return res != null ? res : defaultValue;
         }
 
@@ -718,7 +710,6 @@ package com.xvm
          * Is macros value cached
          * @param pname player name without extra tags (clan, region, etc)
          * @param format string template
-         * @param options data for dynamic values
          * @return true if macros value is cached else false
          */
         private function _IsCached(pname:String, format:*):Boolean
