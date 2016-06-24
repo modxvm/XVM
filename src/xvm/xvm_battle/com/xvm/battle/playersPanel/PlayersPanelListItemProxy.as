@@ -194,17 +194,17 @@ package com.xvm.battle.playersPanel
 
                 disposeExtraFields();
 
-                xvm_enabled = Macros.GlobalBoolean(pcfg.enabled, true);
+                xvm_enabled = Macros.FormatBooleanGlobal(pcfg.enabled, true);
                 //Logger.add("xvm_enabled = " + xvm_enabled);
                 if (xvm_enabled)
                 {
-                    var alpha:Number = Macros.GlobalNumber(pcfg.alpha, 80) / 100.0;
+                    var alpha:Number = Macros.FormatNumberGlobal(pcfg.alpha, 80) / 100.0;
                     ui.bg.alpha = alpha;
                     ui.selfBg.alpha = alpha;
                     ui.deadBg.alpha = alpha;
 
-                    opt_removeSelectedBackground = Macros.GlobalBoolean(pcfg.removeSelectedBackground, false);
-                    opt_vehicleIconAlpha = Macros.GlobalNumber(pcfg.iconAlpha, 100) / 100.0;
+                    opt_removeSelectedBackground = Macros.FormatBooleanGlobal(pcfg.removeSelectedBackground, false);
+                    opt_vehicleIconAlpha = Macros.FormatNumberGlobal(pcfg.iconAlpha, 100) / 100.0;
 
                     createExtraFields();
                 }
@@ -226,7 +226,7 @@ package com.xvm.battle.playersPanel
 
         private function setupMirroredVehicleIcon():void
         {
-            if (!isLeftPanel && !Macros.GlobalBoolean(Config.config.battle.mirroredVehicleIcons))
+            if (!isLeftPanel && !Macros.FormatBooleanGlobal(Config.config.battle.mirroredVehicleIcons, false))
             {
                 ui.vehicleIcon.scaleX = -1;
                 ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - ICONS_AREA_WIDTH;
@@ -295,7 +295,7 @@ package com.xvm.battle.playersPanel
             var schemeName:String = PlayerStatusSchemeName.getSchemeForVehicleLevel(playerState.isDead);
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             ui.vehicleLevel.transform.colorTransform = colorScheme.colorTransform;
-            ui.vehicleLevel.alpha *= Macros.GlobalNumber(mcfg.vehicleLevelAlpha, 100) / 100.0;
+            ui.vehicleLevel.alpha *= Macros.FormatNumber(mcfg.vehicleLevelAlpha, playerState, 100) / 100.0;
         }
 
         private function updateSelfBg(playerState:VOPlayerState):void
@@ -325,7 +325,7 @@ package com.xvm.battle.playersPanel
         {
             if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
 
-            var txt:String = Macros.Format(_userProps.userName, format, playerState);
+            var txt:String = Macros.Format(format, playerState);
             if (_standardTextFieldsTexts[tf.name] == txt)
                 return false;
             _standardTextFieldsTexts[tf.name] = txt;
@@ -360,7 +360,7 @@ package com.xvm.battle.playersPanel
         {
             var cfg:CPlayersPanelNoneModeExtraField = isLeftPanel ? ncfg.extraFields.leftPanel : ncfg.extraFields.rightPanel;
             var size:Rectangle = new Rectangle(cfg.x, cfg.y, cfg.width, cfg.height);
-            extraFieldsHidden = new ExtraFields(cfg.formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, size, Macros.GlobalString(ncfg.layout, "vertical"));
+            extraFieldsHidden = new ExtraFields(cfg.formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, size, Macros..FormatStringGlobal(ncfg.layout, "vertical"));
             addChild(extraFieldsHidden);
             //_internal_createMenuForNoneState(mc);
 

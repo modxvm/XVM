@@ -62,7 +62,7 @@ package com.xvm.extraFields
                     format = ObjectConverter.convertData(format, CExtraField);
                 }
 
-                if (Macros.GlobalBoolean(format.enabled, true))
+                if (Macros.FormatBooleanGlobal(format.enabled, true))
                 {
                     addChild(format.src != null
                         ? new ImageExtraField(format, isLeftPanel, getSchemeNameForImage)

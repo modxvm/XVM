@@ -18,18 +18,18 @@ package com.xvm
         // Create DropShadowFilter from config section
         public static function createShadowFiltersFromConfig(cfg:CShadow, options:IVOMacrosOptions = null):Array
         {
-            return !Macros.GlobalBoolean(cfg.enabled, true, options) ? null : [new DropShadowFilter(
-                Macros.GlobalNumber(cfg.distance, 0, options),
-                Macros.GlobalNumber(cfg.angle, 0, options),
-                Macros.GlobalNumber(cfg.color, 0, options),
-                Macros.GlobalNumber(cfg.alpha, 70, options) / 100.0,
-                Macros.GlobalNumber(cfg.blur, 4, options),
-                Macros.GlobalNumber(cfg.blur, 4, options),
-                Macros.GlobalNumber(cfg.strength, 2, options),
-                Macros.GlobalNumber(cfg.quality, 3, options),
-                Macros.GlobalBoolean(cfg.inner, false, options),
-                Macros.GlobalBoolean(cfg.knockout, false, options),
-                Macros.GlobalBoolean(cfg.hideObject, false, options))];
+            return !Macros.FormatBoolean(cfg.enabled, options, true) ? null : [new DropShadowFilter(
+                Macros.FormatNumber(cfg.distance, options, 0),
+                Macros.FormatNumber(cfg.angle, options, 0),
+                Macros.FormatNumber(cfg.color, options, 0),
+                Macros.FormatNumber(cfg.alpha, options, 70) / 100.0,
+                Macros.FormatNumber(cfg.blur, options, 4),
+                Macros.FormatNumber(cfg.blur, options, 4),
+                Macros.FormatNumber(cfg.strength, options, 2),
+                Macros.FormatNumber(cfg.quality, options, 3),
+                Macros.FormatBoolean(cfg.inner, options, false),
+                Macros.FormatBoolean(cfg.knockout, options, false),
+                Macros.FormatBoolean(cfg.hideObject, options, false))];
         }
 
         public static function getMarksOnGunText(value:Number):String

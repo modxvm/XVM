@@ -175,14 +175,14 @@ package com.xvm.battle.teamBasesPanel
             var c:CCaptureBarTextField = cfg[name];
             //tf.border = true; tf.borderColor = 0xFF0000;
             tf.selectable = false;
-            tf.x += Macros.GlobalNumber(c.x, 0);
-            tf.y += Macros.GlobalNumber(c.y, 0);
+            tf.x += Macros.FormatNumberGlobal(c.x, 0);
+            tf.y += Macros.FormatNumberGlobal(c.y, 0);
             tf.filters = Utils.createShadowFiltersFromConfig(c.shadow);
         }
 
         private function setupProgressBar():void
         {
-            var showProgressBar:Boolean = !Macros.GlobalBoolean(Config.config.captureBar.hideProgressBar, false);
+            var showProgressBar:Boolean = !Macros.FormatBooleanGlobal(Config.config.captureBar.hideProgressBar, false);
             bg.visible = showProgressBar;
             progressBar.visible = showProgressBar;
         }

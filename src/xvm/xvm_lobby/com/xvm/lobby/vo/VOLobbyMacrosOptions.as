@@ -6,8 +6,8 @@
 
     public class VOLobbyMacrosOptions extends VOMacrosOptions
     {
-        public var _vehicleID:Number;
-        public var _playerName:String;
+        private var _vehicleID:Number;
+        private var _playerName:String;
         public var vehicleStatus:uint;
         public var playerStatus:uint;
         public var _isSelected:Boolean;
@@ -26,9 +26,19 @@
             return _vehicleID;
         }
 
+        public function set vehicleID(value:Number):void
+        {
+            _vehicleID = value;
+        }
+
         override public function get playerName():String
         {
             return _playerName;
+        }
+
+        public function set playerName(value:String):void
+        {
+            _playerName = value;
         }
 
         override public function get isAlive():Boolean

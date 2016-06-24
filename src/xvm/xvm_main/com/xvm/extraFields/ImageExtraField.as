@@ -30,80 +30,80 @@
             this.getColorSchemeName = getColorSchemeName;
 
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
-            cfg.align = Macros.GlobalString(cfg.align, defaultAlign);
-            cfg.bindToIcon = Macros.GlobalBoolean(cfg.bindToIcon, false);
+            cfg.align = Macros.FormatStringGlobal(cfg.align, defaultAlign);
+            cfg.bindToIcon = Macros.FormatBooleanGlobal(cfg.bindToIcon, false);
         }
 
         private function setup(options:IVOMacrosOptions):void
         {
             var value:*;
 
-            value = Macros.FormatNumber(options.playerName, cfg.x, options, 0, 0);
-            if (Macros.IsCached(options.playerName, cfg.x))
+            value = Macros.FormatNumber(cfg.x, options, 0);
+            if (Macros.IsCached(cfg.x, options))
             {
                 _xValue = value;
                 cfg.x = null;
             }
 
-            value = Macros.FormatNumber(options.playerName, cfg.y, options, 0, 0);
-            if (Macros.IsCached(options.playerName, cfg.y))
+            value = Macros.FormatNumber(cfg.y, options, 0);
+            if (Macros.IsCached(cfg.y, options))
             {
                 _yValue = value;
                 cfg.y = null;
             }
 
-            value = Macros.FormatNumber(options.playerName, cfg.width, options);
-            if (Macros.IsCached(options.playerName, cfg.width))
+            value = Macros.FormatNumber(cfg.width, options);
+            if (Macros.IsCached(cfg.width, options))
             {
                 if (!isNaN(value))
                     _widthValue = value;
                 cfg.width = null;
             }
 
-            value = Macros.FormatNumber(options.playerName, cfg.height, options);
-            if (Macros.IsCached(options.playerName, cfg.height))
+            value = Macros.FormatNumber(cfg.height, options);
+            if (Macros.IsCached(cfg.height, options))
             {
                 if (!isNaN(value))
                     _heightValue = value;
                 cfg.height = null;
             }
 
-            value = Macros.FormatNumber(options.playerName, cfg.alpha, options, 100, 100);
-            if (Macros.IsCached(options.playerName, cfg.alpha))
+            value = Macros.FormatNumber(cfg.alpha, options, 100);
+            if (Macros.IsCached(cfg.alpha, options))
             {
                 alpha = value / 100.0;
                 cfg.alpha = null;
             }
 
-            value = Macros.FormatNumber(options.playerName, cfg.rotation, options, 0, 0);
-            if (Macros.IsCached(options.playerName, cfg.rotation))
+            value = Macros.FormatNumber(cfg.rotation, options, 0);
+            if (Macros.IsCached(cfg.rotation, options))
             {
                 rotation = value;
                 cfg.rotation = null;
             }
 
-            value = Macros.FormatNumber(options.playerName, cfg.scaleX, options, 1, 1);
-            if (Macros.IsCached(options.playerName, cfg.scaleX))
+            value = Macros.FormatNumber(cfg.scaleX, options, 1);
+            if (Macros.IsCached(cfg.scaleX, options))
             {
                 scaleX = value;
                 cfg.scaleX = null;
             }
 
-            value = Macros.FormatNumber(options.playerName, cfg.scaleY, options, 1, 1);
-            if (Macros.IsCached(options.playerName, cfg.scaleY))
+            value = Macros.FormatNumber(cfg.scaleY, options, 1);
+            if (Macros.IsCached(cfg.scaleY, options))
             {
                 scaleY = value;
                 cfg.scaleY = null;
             }
 
-            value = XfwUtils.toBool(Macros.Format(options.playerName, cfg.highlight, options), false);
-            if (Macros.IsCached(options.playerName, cfg.highlights))
+            value = Macros.FormatBoolean(cfg.highlight, options, false);
+            if (Macros.IsCached(cfg.highlights, options))
             {
                 cfg.highlight = value;
             }
 
-            value = Macros.Format(options.playerName, cfg.src, options) || "";
-            if (Macros.IsCached(options.playerName, cfg.src))
+            value = Macros.Format(cfg.src, options) || "";
+            if (Macros.IsCached(cfg.src, options))
             {
                 cfg.src = value;
             }
@@ -122,7 +122,7 @@
 
             if (cfg.x != null)
             {
-                value = Macros.FormatNumber(options.playerName, cfg.x, options, 0, 0);
+                value = Macros.FormatNumber(cfg.x, options, 0);
                 if (_xValue != value)
                 {
                     _xValue = value;
@@ -131,7 +131,7 @@
             }
             if (cfg.y != null)
             {
-                value = Macros.FormatNumber(options.playerName, cfg.y, options, 0, 0);
+                value = Macros.FormatNumber(cfg.y, options, 0);
                 if (_yValue != value)
                 {
                     _yValue = value;
@@ -140,7 +140,7 @@
             }
             if (cfg.width != null)
             {
-                value = Macros.FormatNumber(options.playerName, cfg.width, options);
+                value = Macros.FormatNumber(cfg.width, options);
                 if (isNaN(value) && _widthValue != value)
                 {
                     _widthValue = value;
@@ -149,7 +149,7 @@
             }
             if (cfg.height != null)
             {
-                value = Macros.FormatNumber(options.playerName, cfg.height, options);
+                value = Macros.FormatNumber(cfg.height, options);
                 if (isNaN(value) && _heightValue != value)
                 {
                     _heightValue = value;
@@ -158,7 +158,7 @@
             }
             if (cfg.alpha != null)
             {
-                value = Macros.FormatNumber(options.playerName, cfg.alpha, options, 100, 100) / 100.0;
+                value = Macros.FormatNumber(cfg.alpha, options, 100) / 100.0;
                 if (alpha != value)
                 {
                     alpha = value;
@@ -166,7 +166,7 @@
             }
             if (cfg.rotation != null)
             {
-                value = Macros.FormatNumber(options.playerName, cfg.rotation, options, 0, 0);
+                value = Macros.FormatNumber(cfg.rotation, options, 0);
                 if (rotation != value)
                 {
                     rotation = value;
@@ -174,7 +174,7 @@
             }
             if (cfg.scaleX != null)
             {
-                value = Macros.FormatNumber(options.playerName, cfg.scaleX, options, 1, 1);
+                value = Macros.FormatNumber(cfg.scaleX, options, 1);
                 if (scaleX != value)
                 {
                     scaleX = value;
@@ -182,7 +182,7 @@
             }
             if (cfg.scaleY != null)
             {
-                value = Macros.FormatNumber(options.playerName, cfg.scaleY, options, 1, 1);
+                value = Macros.FormatNumber(cfg.scaleY, options, 1);
                 if (scaleY != value)
                 {
                     scaleY = value;
@@ -190,14 +190,14 @@
             }
             if (cfg.src != null)
             {
-                if (Macros.IsCached(options.playerName, cfg.src))
+                if (Macros.IsCached(cfg.src, options))
                 {
                     value = cfg.src;
                 }
                 else
                 {
-                    value = Macros.Format(options.playerName, cfg.src, options) || "";
-                    if (Macros.IsCached(options.playerName, cfg.src))
+                    value = Macros.Format(cfg.src, options) || "";
+                    if (Macros.IsCached(cfg.src, options))
                     {
                         cfg.src = value;
                     }
@@ -211,7 +211,7 @@
 
                 if (cfg.highlight)
                 {
-                    var highlight:Boolean = cfg.highlight is Boolean ? cfg.highlight : XfwUtils.toBool(Macros.Format(options.playerName, cfg.highlight, options), false);
+                    var highlight:Boolean = cfg.highlight is Boolean ? cfg.highlight : XfwUtils.toBool(Macros.Format(cfg.highlight, options), false);
                     value = highlight ? getColorSchemeName(options) : null;
                     if (_colorSchemeNameValue != value)
                     {

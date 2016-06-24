@@ -68,7 +68,7 @@ package com.xvm.battle.playersPanel
                 // skip disabled modes
                 if (state != PLAYERS_PANEL_STATE.NONE && m_savedState == PLAYERS_PANEL_STATE.NONE)
                 {
-                    if (!Macros.GlobalBoolean(cfg[PLAYERS_PANEL_STATE_NAMES[state]].enabled, true))
+                    if (!Macros.FormatBooleanGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].enabled, true))
                     {
                         xfw_requestState((state + 1) % PLAYERS_PANEL_STATE_NAMES.length);
                         return;
@@ -88,13 +88,13 @@ package com.xvm.battle.playersPanel
                 Xvm.removeEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
 
                 cfg = Config.config.playersPanel;
-                xvm_enabled = Macros.GlobalBoolean(cfg.enabled, true);
+                xvm_enabled = Macros.FormatBooleanGlobal(cfg.enabled, true);
 
                 if (xvm_enabled)
                 {
                     initPanelModes();
                     registerVehicleIconAtlases();
-                    panelSwitch.visible = !Macros.GlobalBoolean(cfg.removePanelsModeSwitcher, false);
+                    panelSwitch.visible = !Macros.FormatBooleanGlobal(cfg.removePanelsModeSwitcher, false);
                 }
                 else
                 {
@@ -110,7 +110,7 @@ package com.xvm.battle.playersPanel
 
         private function initPanelModes():void
         {
-            var startMode:String = Macros.GlobalString(cfg.startMode, "").toLowerCase();
+            var startMode:String = Macros.FormatStringGlobal(cfg.startMode, "").toLowerCase();
             if (PLAYERS_PANEL_STATE_MAP[startMode] == null)
                 startMode = "large";
             cfg[startMode].enabled = true;
@@ -118,16 +118,16 @@ package com.xvm.battle.playersPanel
 
             m_savedState = PLAYERS_PANEL_STATE.NONE;
 
-            var altMode:String = Macros.GlobalString(cfg.altMode, "").toLowerCase();
+            var altMode:String = Macros.FormatStringGlobal(cfg.altMode, "").toLowerCase();
             m_altMode = (PLAYERS_PANEL_STATE_MAP[altMode] == null) ? PLAYERS_PANEL_STATE.NONE : PLAYERS_PANEL_STATE_MAP[altMode];
             if (m_altMode != PLAYERS_PANEL_STATE.NONE)
                 Xvm.addEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
 
-            panelSwitch.hidenBt.enabled = Macros.GlobalBoolean(cfg.none.enabled, true);
-            panelSwitch.shortBt.enabled = Macros.GlobalBoolean(cfg.short.enabled, true);
-            panelSwitch.mediumBt.enabled = Macros.GlobalBoolean(cfg.medium.enabled, true);
-            panelSwitch.longBt.enabled = Macros.GlobalBoolean(cfg.medium2.enabled, true);
-            panelSwitch.fullBt.enabled = Macros.GlobalBoolean(cfg.large.enabled, true);
+            panelSwitch.hidenBt.enabled = Macros.FormatBooleanGlobal(cfg.none.enabled, true);
+            panelSwitch.shortBt.enabled = Macros.FormatBooleanGlobal(cfg.short.enabled, true);
+            panelSwitch.mediumBt.enabled = Macros.FormatBooleanGlobal(cfg.medium.enabled, true);
+            panelSwitch.longBt.enabled = Macros.FormatBooleanGlobal(cfg.medium2.enabled, true);
+            panelSwitch.fullBt.enabled = Macros.FormatBooleanGlobal(cfg.large.enabled, true);
 
             panelSwitch.hidenBt.alpha = panelSwitch.hidenBt.enabled ? 1 : .5;
             panelSwitch.shortBt.alpha = panelSwitch.shortBt.enabled ? 1 : .5;
@@ -141,7 +141,7 @@ package com.xvm.battle.playersPanel
             var newAtlas:String;
             try
             {
-                newAtlas = Macros.GlobalString(Config.config.iconset.playersPanelLeftAtlas);
+                newAtlas = Macros.FormatStringGlobal(Config.config.iconset.playersPanelLeftAtlas);
                 if (playersPanelLeftAtlas != newAtlas)
                 {
                     App.atlasMgr.registerAtlas(newAtlas);
@@ -155,7 +155,7 @@ package com.xvm.battle.playersPanel
             }
             try
             {
-                newAtlas = Macros.GlobalString(Config.config.iconset.playersPanelRightAtlas);
+                newAtlas = Macros.FormatStringGlobal(Config.config.iconset.playersPanelRightAtlas);
                 if (playersPanelRightAtlas != newAtlas)
                 {
                     App.atlasMgr.registerAtlas(newAtlas);

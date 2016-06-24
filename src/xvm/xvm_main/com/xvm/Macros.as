@@ -14,25 +14,62 @@ package com.xvm
     {
         // PUBLIC STATIC
 
-        public static function Format(pname:String, format:*, options:IVOMacrosOptions = null):*
+        /**
+         * Format any type value with macros substitutions, in the player context
+         *   {{name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]}}
+         * @param format template
+         * @param options macros options data
+         * @return Formatted string
+         */
+        public static function Format(format:*, options:IVOMacrosOptions):*
         {
-            return _instance._Format(pname, format, options, {});
+            return _Format(format, options, {});
         }
 
-        public static function FormatByAccountDBID(accountDBID:Number, format:*, options:IVOMacrosOptions = null):*
+        /**
+         * Format any type value with macros substitutions to string, in the player context
+         * @param format template
+         * @param options macros options data
+         * @param defaultValue default value
+         * @return Formatted string
+         */
+        public static function FormatString(format:*, options:IVOMacrosOptions, defaultValue:String = ""):String
         {
-            return Format(_instance.m_accountDBID_to_pname[accountDBID], format, options);
+            if (format == null)
+                return defaultValue;
+            var res:String = _Format(format, options, {});
+            //Logger.addObject(format + " => " + res);
+            return res != null ? res : defaultValue;
         }
 
-        public static function FormatNumber(pname:String, format:*, options:IVOMacrosOptions, nullValue:Number = NaN, emptyValue:Number = NaN, isColorValue:Boolean = false):Number
+        /**
+         * Format any type value with macros substitutions to string, out of the player context
+         * @param format template
+         * @param defaultValue default value
+         * @return Formatted string
+         */
+        public static function FormatStringGlobal(format:*, defaultValue:String = ""):String
+        {
+            return FormatString(format, null, defaultValue);
+        }
+
+        /**
+         * Format any type value value with macros substitutions to number, in the player context
+         * @param format template
+         * @param options macros options data
+         * @param defaultValue default value
+         * @param isColorValue color value expected
+         * @return Formatted number value
+         */
+        public static function FormatNumber(format:*, options:IVOMacrosOptions, defaultValue:Number = NaN, isColorValue:Boolean = false):Number
         {
             var value:* = format;
             if (value == null)
-                return nullValue;
+                return defaultValue;
             if (isNaN(value))
             {
-                //Logger.add(value + " => " + Macros.Format(pname, value, options));
-                var v:* = Macros.Format(pname, value, options);
+                var v:* = Macros.Format(value, options);
+                //Logger.add(format + " => " + v);
                 if (v == "XX")
                     v = 100;
                 if (isColorValue)
@@ -40,94 +77,143 @@ package com.xvm
                 value = v;
             }
             if (isNaN(value))
-                return emptyValue;
+                return defaultValue;
             return Number(value);
         }
 
-        public static function GlobalNumber(value:*, defaultValue:Number = NaN, options:IVOMacrosOptions = null):Number
+        /**
+         * Format any type value value with macros substitutions to number, out of the player context
+         * @param format template
+         * @param options macros options data
+         * @param defaultValue default value
+         * @param isColorValue color value expected
+         * @return Formatted number value
+         */
+        public static function FormatNumberGlobal(format:*, defaultValue:Number = NaN, isColorValue:Boolean = false):Number
         {
-            return _instance._GlobalNumber(value, defaultValue, options);
+            return FormatNumber(format, null, defaultValue, isColorValue);
         }
 
-        public static function GlobalBoolean(value:*, defaultValue:Boolean = false, options:IVOMacrosOptions = null):Boolean
+        /**
+         * Format value with macros substitutions to boolean value in the player context
+         * @param format template
+         * @param options macros options data
+         * @param defaultValue default value
+         * @return Formatted boolean value
+         */
+        public static function FormatBoolean(format:*, options:IVOMacrosOptions, defaultValue:Boolean = false):Boolean
         {
-            return _instance._GlobalBoolean(value, defaultValue, options);
+            if (format == null)
+                return defaultValue;
+            if (typeof format == "boolean")
+                return format;
+            var res:String = String(_Format(format, options, {})).toLowerCase();
+            //Logger.addObject(format + " => " + res);
+            if (res == 'true')
+                return true;
+            if (res == 'false')
+                return false;
+            return defaultValue;
         }
 
-        public static function GlobalString(value:*, defaultValue:String = null, options:IVOMacrosOptions = null):String
+        /**
+         * Format value with macros substitutions to boolean value out of the player context
+         * @param format template
+         * @param defaultValue default value
+         * @return Formatted boolean value
+         */
+        public static function FormatBooleanGlobal(format:*, defaultValue:Boolean = false):Boolean
         {
-            return _instance._GlobalString(value, defaultValue, options);
+            return FormatBoolean(format, null, defaultValue);
         }
 
-        public static function IsCached(pname:String, format:*):Boolean
+        /**
+         * Is macros value cached
+         * @param format template
+         * @param options macros options data
+         * @return true if macros value is cached else false
+         */
+        public static function IsCached(format:*, options:IVOMacrosOptions):Boolean
         {
-            return _instance._IsCached(pname, format);
+            return _IsCached(format, options);
         }
 
         public static function getGlobalValue(key:String):*
         {
-            return _instance.m_globals[key];
+            return m_globals[key];
         }
 
         // common
 
         public static function RegisterXvmServicesMacrosData():void
         {
-            _instance._RegisterXvmServicesMacrosData();
+            _RegisterXvmServicesMacrosData();
         }
 
         public static function RegisterGlobalMacrosData():void
         {
-            _instance._RegisterGlobalMacrosData();
+            _RegisterGlobalMacrosData();
         }
 
+        /**
+         * Register stat macros values
+         * @param pname player name without extra tags (clan, region, etc)
+         */
         public static function RegisterStatisticsMacros(pname:String, stat:StatData):void
         {
-            _instance._RegisterStatisticsMacros(pname, stat);
+            _RegisterStatisticsMacros(pname, stat);
         }
 
         // battle
 
         public static function RegisterBattleGlobalMacrosData(callback:Function):void
         {
-            callback(_instance.m_globals);
+            callback(m_globals);
         }
 
+        /**
+         * Register minimal macros values for player
+         * @param vehicleID vehicle id
+         * @param accountDBID player id
+         * @param playerFullName full player name with extra tags (clan, region, etc)
+         * @param vehCD vehicle compactDescr
+         * @param isPlayerTeam is player team
+         */
         public static function RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
         {
-            _instance._RegisterMinimalMacrosData(vehicleID, accountDBID, playerFullName, vehCD, isPlayerTeam);
+            _RegisterMinimalMacrosData(vehicleID, accountDBID, playerFullName, vehCD, isPlayerTeam);
         }
 
         public static function RegisterPlayersData(callback:Function):void
         {
-            callback(_instance.m_dict);
+            callback(m_dict);
         }
 
         /*public static function RegisterGlobalMacrosDataDelayed(onEventName:String):void
         {
-            _instance._RegisterGlobalMacrosDataDelayed(onEventName);
+            _RegisterGlobalMacrosDataDelayed(onEventName);
         }*/
 
         /*public static function RegisterZoomIndicatorData(zoom:Number):void
         {
-            _instance._RegisterZoomIndicatorData(zoom);
+            _RegisterZoomIndicatorData(zoom);
         }*/
 
         /*public static function RegisterMarkerData(pname:String, data:Object):void
         {
-            _instance._RegisterMarkerData(pname, data);
+            _RegisterMarkerData(pname, data);
         }*/
 
         // lobby
 
         public static function RegisterVehiclesMacros(callback:Function):void
         {
-            callback(_instance.m_globals);
+            callback(m_globals);
         }
 
         public static function RegisterClockMacros(callback:Function):void
         {
-            callback(_instance.m_globals);
+            callback(m_globals);
         }
 
         // PRIVATE
@@ -141,28 +227,18 @@ package com.xvm
         private static const PART_REP:int = 6;
         private static const PART_DEF:int = 7;
 
-        private static var _instance:Macros = new Macros();
+        private static var m_macros_cache:Object = { };
+        private static var m_macros_cache_global:Object = { };
+        private static var m_dict:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+        private static var m_accountDBID_to_playerName:Object = { };
+        private static var m_globals:Object = { };
+        private static var m_contacts:Object = { };
 
-        private var m_macros_cache:Object = { };
-        private var m_macros_cache_global:Object = { };
-        private var m_dict:Object = { }; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
-        private var m_accountDBID_to_pname:Object = { };
-        private var m_globals:Object = { };
-        private var m_contacts:Object = { };
+        private static var curent_xtdb:Number = 0;
 
-        private var curent_xtdb:Number = 0;
-
-        /**
-         * Format string with macros substitutions
-         *   {{name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]}}
-         * @param pname player name without extra tags (clan, region, etc)
-         * @param format string template
-         * @param options data for dynamic values
-         * @return Formatted string
-         */
-        private function _Format(pname:String, format:*, options:IVOMacrosOptions, __out:Object):*
+        private static function _Format(format:*, options:IVOMacrosOptions, __out:Object):*
         {
-            //Logger.add("format:" + format + " player:" + pname);
+            //Logger.add("format:" + format + " player:" + (options ? options.playerName : null));
 
             __out.isStaticMacro = true;
 
@@ -175,16 +251,18 @@ package com.xvm
 
             try
             {
+                var playerName:String = options ? options.playerName : null;
+
                 // Check cached value
                 var player_cache:Object;
                 var cached_value:*;
-                if (pname != null && pname != "" && options != null)
+                if (playerName != null && playerName != "")
                 {
-                    player_cache = m_macros_cache[pname];
+                    player_cache = m_macros_cache[playerName];
                     if (player_cache == null)
                     {
-                        m_macros_cache[pname] = { };
-                        player_cache = m_macros_cache[pname];
+                        m_macros_cache[playerName] = { };
+                        player_cache = m_macros_cache[playerName];
                     }
                     cached_value = player_cache[format];
                 }
@@ -224,7 +302,7 @@ package com.xvm
                         else
                         {
                             var _FormatPart_out:Object = { };
-                            res += _FormatPart(part.slice(0, idx), pname, options, _FormatPart_out) + part.slice(idx + 2);
+                            res += _FormatPart(part.slice(0, idx), options, _FormatPart_out) + part.slice(idx + 2);
                             isStaticMacro = isStaticMacro && _FormatPart_out.isStaticMacro;
                         }
                     }
@@ -234,9 +312,9 @@ package com.xvm
                         var iMacroPos:int = res.indexOf("{{");
                         if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
                         {
-                            //Logger.add("recursive: " + pname + " " + res);
+                            //Logger.add("recursive: " + playerName + " " + res);
                             var _Format_out:Object = { };
-                            res = _Format(pname, res, options, _Format_out);
+                            res = _Format(res, options, _Format_out);
                             isStaticMacro = isStaticMacro && _Format_out.isStaticMacro;
                         }
                     }
@@ -246,13 +324,10 @@ package com.xvm
 
                 if (isStaticMacro)
                 {
-                    if (pname != null && pname != "")
+                    if (playerName != null && playerName != "")
                     {
-                        if (options != null)
-                        {
-                            //Logger.add("add to cache: " + format + " => " + res);
-                            player_cache[format] = res;
-                        }
+                        //Logger.add("add to cache: " + format + " => " + res);
+                        player_cache[format] = res;
                     }
                     else
                     {
@@ -261,12 +336,12 @@ package com.xvm
                 }
                 else
                 {
-                    //Logger.add("[D] " + pname + "> " + format);
+                    //Logger.add("[D] " + playerName + "> " + format);
                     __out.isStaticMacro = false;
                 }
 
-                //Logger.add(pname + "> " + format);
-                //Logger.add(pname + "= " + res);
+                //Logger.add(playerName + "> " + format);
+                //Logger.add(playerName + "= " + res);
 
                 return res;
             }
@@ -275,13 +350,14 @@ package com.xvm
                 Logger.err(ex);
             }
 
-            return "";
+            return null;
         }
 
-        private function _FormatPart(macro:String, pname:String, options:IVOMacrosOptions, __out:Object):String
+        private static function _FormatPart(macro:String, options:IVOMacrosOptions, __out:Object):String
         {
             // Process tag
-            var pdata:* = pname == null ? m_globals : m_dict[pname];
+            var playerName:String = options ? options.playerName : null;
+            var pdata:* = (playerName == null || playerName == "") ? m_globals : m_dict[playerName];
             if (pdata == null)
                 return "";
 
@@ -377,8 +453,8 @@ package com.xvm
             return res;
         }
 
-        private var _macro_parts_cache:Object = {};
-        private function _GetMacroParts(macro:String, pdata:Object):Array
+        private static var _macro_parts_cache:Object = {};
+        private static function _GetMacroParts(macro:String, pdata:Object):Array
         {
             var parts:Array = _macro_parts_cache[macro];
             if (parts)
@@ -463,7 +539,7 @@ package com.xvm
             return parts;
         }
 
-        private function _SubstituteConfigPart(path:String):String
+        private static function _SubstituteConfigPart(path:String):String
         {
             var res:* = XfwUtils.getObjectValueByPath(Config.config, path);
             if (res == null)
@@ -473,8 +549,8 @@ package com.xvm
             return String(res);
         }
 
-        private var _format_macro_fmt_suf_cache:Object = {};
-        private function _FormatMacro(macro:String, parts:Array, value:*, vehCD:Number, options:IVOMacrosOptions, __out:Object):String
+        private static var _format_macro_fmt_suf_cache:Object = {};
+        private static function _FormatMacro(macro:String, parts:Array, value:*, vehCD:Number, options:IVOMacrosOptions, __out:Object):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -593,8 +669,8 @@ package com.xvm
             return res;
         }
 
-        private var _prepare_value_cache:Object = {};
-        private function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number, __out:Object):String
+        private static var _prepare_value_cache:Object = {};
+        private static function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number, __out:Object):String
         {
             if (norm == null)
                 return def;
@@ -669,50 +745,7 @@ package com.xvm
             return res;
         }
 
-        private function _GlobalNumber(value:*, defaultValue:Number, options:IVOMacrosOptions):Number
-        {
-            if (value == null)
-                return defaultValue;
-            if (!isNaN(value))
-                return value;
-            //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:Number = Number(_Format(null, value, options || new VOMacrosOptions(), {}));
-            if (isFinite(res))
-                return res;
-            return defaultValue;
-        }
-
-        private function _GlobalBoolean(value:*, defaultValue:Boolean, options:IVOMacrosOptions):Boolean
-        {
-            if (value == null)
-                return defaultValue;
-            if (typeof value == "boolean")
-                return value;
-            //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:String = String(_Format(null, value, options || new VOMacrosOptions(), {})).toLowerCase();
-            if (res == 'true')
-                return true;
-            if (res == 'false')
-                return false;
-            return defaultValue;
-        }
-
-        private function _GlobalString(value:*, defaultValue:String, options:IVOMacrosOptions):String
-        {
-            if (value == null)
-                return defaultValue;
-            //Logger.addObject(value + " => " + _Format(null, value, new MacrosOptions()));
-            var res:String = _Format(null, String(value), options || new VOMacrosOptions(), {});
-            return res != null ? res : defaultValue;
-        }
-
-        /**
-         * Is macros value cached
-         * @param pname player name without extra tags (clan, region, etc)
-         * @param format string template
-         * @return true if macros value is cached else false
-         */
-        private function _IsCached(pname:String, format:*):Boolean
+        private static function _IsCached(format:*, options:IVOMacrosOptions):Boolean
         {
             if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format))
                 return true;
@@ -721,19 +754,22 @@ package com.xvm
             if (format == "" || format.indexOf("{{") == -1)
                 return true;
 
-            if (pname == null || pname == "")
-                return true;
+            var playerName:String = options ? options.playerName : null;
 
-            var player_cache:Object = m_macros_cache[pname];
-            if (player_cache == null)
-                return false;
-
-            return player_cache[format] !== undefined;
+            // Check cached value
+            if (playerName != null && playerName != "")
+            {
+                var player_cache:Object = m_macros_cache[playerName];
+                if (player_cache == null)
+                    return false;
+                return player_cache[format] !== undefined;
+            }
+            return m_macros_cache_global[format] !== undefined;
         }
 
         // Macros registration
 
-        private function _RegisterXvmServicesMacrosData():void
+        private static function _RegisterXvmServicesMacrosData():void
         {
             // {{xvm-stat}}
             m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
@@ -741,7 +777,7 @@ package com.xvm
             m_globals["r_size"] = _getRatingDefaultValue().length;
         }
 
-        private function _RegisterGlobalMacrosData():void
+        private static function _RegisterGlobalMacrosData():void
         {
             var battleTier:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_LEVEL) || NaN;
             var battleType:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
@@ -796,30 +832,23 @@ package com.xvm
             m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
         }
 
-        /**
-         * Register minimal macros values for player
-         * @param accountDBID player id
-         * @param playerFullName full player name with extra tags (clan, region, etc)
-         * @param vehCD vehicle compactDescr
-         * @param isPlayerTeam is player team
-         */
-        private function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
+        private static function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
         {
             if (playerFullName == null || playerFullName == "")
                 throw new Error("empty name");
 
-            var pname:String = WGUtils.GetPlayerName(playerFullName);
+            var playerName:String = WGUtils.GetPlayerName(playerFullName);
 
-            if (!m_dict.hasOwnProperty(pname))
-                m_dict[pname] = new Object();
+            if (!m_dict.hasOwnProperty(playerName))
+                m_dict[playerName] = new Object();
 
-            var pdata:Object = m_dict[pname];
+            var pdata:Object = m_dict[playerName];
             if (pdata.hasOwnProperty("name"))
                 return; // already registered
 
-            m_accountDBID_to_pname[accountDBID] = pname;
+            m_accountDBID_to_playerName[accountDBID] = playerName;
 
-            var name:String = getCustomPlayerName(pname, accountDBID);
+            var name:String = getCustomPlayerName(playerName, accountDBID);
             var clanIdx:int = name.indexOf("[");
             if (clanIdx > 0)
             {
@@ -895,11 +924,7 @@ package com.xvm
             pdata["position"] = function(o:IVOMacrosOptions):Number { return o.position <= 0 ? NaN : o.position; }
         }
 
-        /**
-         * Register stat macros values
-         * @param pname player name without extra tags (clan, region, etc)
-         */
-        private function _RegisterStatisticsMacros(pname:String, stat:StatData):void
+        private static function _RegisterStatisticsMacros(pname:String, stat:StatData):void
         {
             if (stat == null)
                 return;
@@ -1097,72 +1122,72 @@ package com.xvm
 
         /**
          * Change nicks for XVM developers.
-         * @param pname player name
+         * @param playerName player name
          * @return personal name
          */
-        private function getCustomPlayerName(pname:String, uid:Number):String
+        private static function getCustomPlayerName(playerName:String, accountDBID:Number):String
         {
             switch (Config.config.region)
             {
                 case "RU":
-                    if (pname == "www_modxvm_com")
+                    if (playerName == "www_modxvm_com")
                         return "www.modxvm.com";
-                    if (pname == "M_r_A")
+                    if (playerName == "M_r_A")
                         return "Флаттершай - лучшая пони!";
-                    if (pname == "sirmax2" || pname == "0x01" || pname == "_SirMax_")
+                    if (playerName == "sirmax2" || playerName == "0x01" || playerName == "_SirMax_")
                         return "«сэр Макс» (XVM)";
-                    if (pname == "Mixailos")
+                    if (playerName == "Mixailos")
                         return "Михаил";
-                    if (pname == "STL1te")
+                    if (playerName == "STL1te")
                         return "О, СТЛайт!";
-                    if (pname == "seriych")
+                    if (playerName == "seriych")
                         return "Всем Счастья :)";
-                    if (pname == "XIebniDizele4ky" || pname == "Xlebni_Dizele4ky" || pname == "XlebniDizeIe4ku" || pname == "XlebniDize1e4ku" || pname == "XlebniDizele4ku_2013")
+                    if (playerName == "XIebniDizele4ky" || playerName == "Xlebni_Dizele4ky" || playerName == "XlebniDizeIe4ku" || playerName == "XlebniDize1e4ku" || playerName == "XlebniDizele4ku_2013")
                         return "Alex Artobanana";
                     break;
 
                 case "CT":
-                    if (pname == "www_modxvm_com_RU")
+                    if (playerName == "www_modxvm_com_RU")
                         return "www.modxvm.com";
-                    if (pname == "M_r_A_RU" || pname == "M_r_A_EU")
+                    if (playerName == "M_r_A_RU" || playerName == "M_r_A_EU")
                         return "Fluttershy is best pony!";
-                    if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU" || pname == "0x01_EU")
+                    if (playerName == "sirmax2_RU" || playerName == "sirmax2_EU" || playerName == "sirmax_NA" || playerName == "0x01_RU" || playerName == "0x01_EU")
                         return "«sir Max» (XVM)";
-                    if (pname == "seriych_RU")
+                    if (playerName == "seriych_RU")
                         return "Be Happy :)";
                     break;
 
                 case "EU":
-                    if (pname == "M_r_A")
+                    if (playerName == "M_r_A")
                         return "Fluttershy is best pony!";
-                    if (pname == "sirmax2" || pname == "0x01" || pname == "_SirMax_")
+                    if (playerName == "sirmax2" || playerName == "0x01" || playerName == "_SirMax_")
                         return "«sir Max» (XVM)";
-                    if (pname == "seriych")
+                    if (playerName == "seriych")
                         return "Be Happy :)";
                     break;
 
                 case "US":
-                    if (pname == "sirmax" || pname == "0x01" || pname == "_SirMax_")
+                    if (playerName == "sirmax" || playerName == "0x01" || playerName == "_SirMax_")
                         return "«sir Max» (XVM)";
                     break;
 
                 case "ST":
-                    if (pname == "xvm_1")
+                    if (playerName == "xvm_1")
                         return "«xvm»";
                     break;
             }
 
-            if (m_contacts != null && !isNaN(uid) && uid > 0)
+            if (m_contacts != null && !isNaN(accountDBID) && accountDBID > 0)
             {
-                var cdata:Object = m_contacts[String(uid)];
+                var cdata:Object = m_contacts[String(accountDBID)];
                 if (cdata != null)
                 {
                     if (cdata.nick != null && cdata.nick != "")
-                        pname = cdata.nick;
+                        playerName = cdata.nick;
                 }
             }
 
-            return pname;
+            return playerName;
         }
 
         // rating

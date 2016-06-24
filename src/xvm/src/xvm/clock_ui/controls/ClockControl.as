@@ -150,7 +150,7 @@ package xvm.clock_ui.controls
                 if (prevTime != time)
                 {
                     prevTime = time;
-                    data = Macros.Format(null, cfg.format.split("{{").join("{{_clock."));
+                    data = Macros.FormatStringGlobal(cfg.format.split("{{").join("{{_clock."));
                     invalidateData();
                 }
             }

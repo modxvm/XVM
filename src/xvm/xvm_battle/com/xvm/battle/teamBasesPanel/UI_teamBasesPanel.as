@@ -44,10 +44,10 @@ package com.xvm.battle.teamBasesPanel
         {
             try
             {
-                if (Macros.GlobalBoolean(Config.config.captureBar.enabled, true))
+                if (Macros.FormatBooleanGlobal(Config.config.captureBar.enabled, true))
                 {
                     Linkages.CAPTURE_BAR_LINKAGE = XVM_CAPTURE_BAR_LINKAGE;
-                    xfw_RENDERER_HEIGHT = Macros.GlobalNumber(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH;
+                    xfw_RENDERER_HEIGHT = Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH;
                     // hack to hide useless icons
                     y = DEFAULT_Y - 1000;
                 }
