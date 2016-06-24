@@ -24,6 +24,11 @@
             throw new IllegalOperationError("abstract method called");
         }
 
+        public function get isOffline():Boolean
+        {
+            return !isReady;
+        }
+
         public function get isNotAvailable():Boolean
         {
             throw new IllegalOperationError("abstract method called");

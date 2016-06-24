@@ -14,31 +14,29 @@ package com.xvm
     {
         // PUBLIC STATIC
 
-        public static function Format(pname:String, format:String, options:IVOMacrosOptions = null):String
+        public static function Format(pname:String, format:*, options:IVOMacrosOptions = null):*
         {
             return _instance._Format(pname, format, options);
         }
 
-        public static function FormatByPlayerId(playerId:Number, format:String, options:IVOMacrosOptions = null):String
+        public static function FormatByPlayerId(playerId:Number, format:*, options:IVOMacrosOptions = null):*
         {
             return _instance._Format(_instance.m_playerId_to_pname[playerId], format, options);
         }
 
-        public static function FormatNumber(pname:String, cfg:Object, fieldName:String, options:IVOMacrosOptions, nullValue:Number, emptyValue:Number, isColorValue:Boolean):Number
+        public static function FormatNumber(pname:String, format:*, options:IVOMacrosOptions, nullValue:Number = NaN, emptyValue:Number = NaN, isColorValue:Boolean = false):Number
         {
-            var value:* = cfg[fieldName];
+            var value:* = format;
             if (value == null)
                 return nullValue;
             if (isNaN(value))
             {
-                //Logger.add(value + " => " + Macros.Format(m_name, value, null));
+                //Logger.add(value + " => " + Macros.Format(pname, value, options));
                 var v:* = Macros.Format(pname, value, options);
                 if (v == "XX")
                     v = 100;
                 if (isColorValue)
                     v = v.split("#").join("0x");
-                if (Macros.IsCached(pname, value))
-                    cfg[fieldName] = v;
                 value = v;
             }
             if (isNaN(value))
@@ -61,9 +59,9 @@ package com.xvm
             return _instance._GlobalString(value, defaultValue, options);
         }
 
-        public static function IsCached(pname:String, format:String, alive:Boolean = false):Boolean
+        public static function IsCached(pname:String, format:*):Boolean
         {
-            return _instance._IsCached(pname, format, alive);
+            return _instance._IsCached(pname, format);
         }
 
         public static function getGlobalValue(key:String):*
@@ -159,11 +157,16 @@ package com.xvm
          * @param options data for dynamic values
          * @return Formatted string
          */
-        private function _Format(pname:String, format:String, options:IVOMacrosOptions):String
+        private function _Format(pname:String, format:*, options:IVOMacrosOptions):*
         {
             //Logger.add("format:" + format + " player:" + pname);
-            if (format == null || format == "")
-                return "";
+
+            if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format))
+                return format;
+
+            format = String(format);
+            if (format == "")
+                return format;
 
             try
             {
@@ -175,10 +178,9 @@ package com.xvm
                     player_cache = m_macros_cache[pname];
                     if (player_cache == null)
                     {
-                        m_macros_cache[pname] = { alive: { }, dead: { }};
+                        m_macros_cache[pname] = { };
                         player_cache = m_macros_cache[pname];
                     }
-                    player_cache = player_cache[options.isAlive == true ? "alive" : "dead"];
                     cached_value = player_cache[format];
                 }
                 else
@@ -335,7 +337,7 @@ package com.xvm
             {
                 // is static macro
                 var type:String = typeof value;
-                if (type == "function" && (macroName != "alive" || options == null))
+                if (type == "function" && options == null)
                     isStaticMacro = false;
                 else if (vehCD == 0)
                 {
@@ -714,17 +716,21 @@ package com.xvm
          * @param options data for dynamic values
          * @return true if macros value is cached else false
          */
-        private function _IsCached(pname:String, format:String, alive:Boolean):Boolean
+        private function _IsCached(pname:String, format:*):Boolean
         {
-            if (format == null || format == "")
-                return false;
+            if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format))
+                return true;
+
+            format = String(format);
+            if (format == "" || format.indexOf("{{") == -1)
+                return true;
 
             if (pname != null && pname != "")
             {
                 var player_cache:Object = m_macros_cache[pname];
                 if (player_cache == null)
                     return false;
-                return player_cache[alive ? "alive" : "dead"][format] !== undefined;
+                return player_cache[format] !== undefined;
             }
             else
             {

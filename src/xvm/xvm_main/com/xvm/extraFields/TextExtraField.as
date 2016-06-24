@@ -12,13 +12,21 @@
         public static const DEFAULT_TEXT_FIELD_WIDTH:Number = 300;
         public static const DEFAULT_TEXT_FIELD_WIDTH_HEIGHT:Number = 25;
 
-        private var format:CExtraField;
+        private var cfg:CExtraField;
+        private var isLeftPanel:Boolean;
+        private var getColorSchemeName:Function;
 
-        public function TextExtraField(format:CExtraField, defaultAlign:String)
+        private var _initialized:Boolean = false;
+
+        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean, getColorSchemeName:Function)
         {
             super();
 
-            this.format = format.clone();
+            this.cfg = format.clone();
+            this.isLeftPanel = isLeftPanel;
+            this.getColorSchemeName = getColorSchemeName;
+
+            var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
 
             //Logger.addObject(format);
 

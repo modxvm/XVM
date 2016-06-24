@@ -11,6 +11,7 @@ package com.xvm.battle.playersPanel
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.vo.IVOMacrosOptions;
     import flash.events.*;
     import flash.text.*;
     import flash.display.*;
@@ -61,8 +62,6 @@ package com.xvm.battle.playersPanel
 
         public function PlayersPanelListItemProxy(ui:PlayersPanelListItem, isLeftPanel:Boolean)
         {
-            visible = false;
-
             this.ui = ui;
             this.isLeftPanel = isLeftPanel;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
@@ -233,11 +232,7 @@ package com.xvm.battle.playersPanel
 
         private function updateVehicleIcon():void
         {
-            var playerState:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
-            var isCurrentPlayer:Boolean = playerState.isCurrentPlayer && Config.config.battle.highlightVehicleIcon;
-            var isSquadPersonal:Boolean = playerState.isSquadPersonal && Config.config.battle.highlightVehicleIcon;
-            var isTeamKiller:Boolean = playerState.isTeamKiller && Config.config.battle.highlightVehicleIcon;
-            var schemeName:String = PlayerStatusSchemeName.getSchemeNameForVehicle(isCurrentPlayer, isSquadPersonal, isTeamKiller, playerState.isDead, playerState.isOffline);
+            var schemeName:String = getSchemeNameForVehicle();
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             ui.vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
             ui.vehicleIcon.alpha *= opt_vehicleIconAlpha;
@@ -310,8 +305,7 @@ package com.xvm.battle.playersPanel
             if (_standardTextFieldsTexts[tf.name] == txt)
                 return false;
             _standardTextFieldsTexts[tf.name] = txt;
-            var schemeName:String = PlayerStatusSchemeName.getSchemeNameForPlayer(
-                playerState.isCurrentPlayer, playerState.isSquadPersonal, playerState.isTeamKiller, playerState.isDead, playerState.isOffline);
+            var schemeName:String = getSchemeNameForPlayer(playerState);
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             tf.htmlText = "<font color='" + XfwUtils.toHtmlColor(colorScheme.rgb) + "'>" + txt + "</font>";
             invalidate(INVALIDATE_UPDATE_PANEL_SIZE);
@@ -336,28 +330,26 @@ package com.xvm.battle.playersPanel
 
         private function createExtraFields():void
         {
-            var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
-
             var cfg:CPlayersPanelNoneModeExtraField = isLeftPanel ? ncfg.extraFields.leftPanel : ncfg.extraFields.rightPanel;
             var size:Rectangle = new Rectangle(cfg.x, cfg.y, cfg.width, cfg.height);
-            extraFieldsHidden = new ExtraFields(cfg.formats, defaultAlign, size, Macros.GlobalString(ncfg.layout, "vertical"));
+            extraFieldsHidden = new ExtraFields(cfg.formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, size, Macros.GlobalString(ncfg.layout, "vertical"));
             addChild(extraFieldsHidden);
             //_internal_createMenuForNoneState(mc);
 
             var formats:Array = isLeftPanel ? pcfg.short.extraFieldsLeft : pcfg.short.extraFieldsRight;
-            extraFieldsShort = new ExtraFields(formats, defaultAlign);
+            extraFieldsShort = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
             addChild(extraFieldsShort);
 
             formats = isLeftPanel ? pcfg.medium.extraFieldsLeft : pcfg.medium.extraFieldsRight;
-            extraFieldsMedium = new ExtraFields(formats, defaultAlign);
+            extraFieldsMedium = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
             addChild(extraFieldsMedium);
 
             formats = isLeftPanel ? pcfg.medium2.extraFieldsLeft : pcfg.medium2.extraFieldsRight;
-            extraFieldsLong = new ExtraFields(formats, defaultAlign);
+            extraFieldsLong = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
             addChild(extraFieldsLong);
 
             formats = isLeftPanel ? pcfg.large.extraFieldsLeft : pcfg.large.extraFieldsRight;
-            extraFieldsFull = new ExtraFields(formats, defaultAlign);
+            extraFieldsFull = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
             addChild(extraFieldsFull);
         }
 
@@ -388,6 +380,23 @@ package com.xvm.battle.playersPanel
                 extraFieldsFull.dispose();
                 extraFieldsFull = null;
             }
+        }
+
+        private function getSchemeNameForVehicle(playerState:IVOMacrosOptions = null):String
+        {
+            if (!playerState)
+                playerState = BattleState.getByPlayerName(_userProps.userName);
+            var isCurrentPlayer:Boolean = playerState.isCurrentPlayer && Config.config.battle.highlightVehicleIcon;
+            var isSquadPersonal:Boolean = playerState.isSquadPersonal && Config.config.battle.highlightVehicleIcon;
+            var isTeamKiller:Boolean = playerState.isTeamKiller && Config.config.battle.highlightVehicleIcon;
+            return PlayerStatusSchemeName.getSchemeNameForVehicle(isCurrentPlayer, isSquadPersonal, isTeamKiller, playerState.isDead, playerState.isOffline);
+        }
+
+        private function getSchemeNameForPlayer(playerState:IVOMacrosOptions = null):String
+        {
+            if (!playerState)
+                playerState = BattleState.getByPlayerName(_userProps.userName);
+            return PlayerStatusSchemeName.getSchemeNameForPlayer(playerState.isCurrentPlayer, playerState.isSquadPersonal, playerState.isTeamKiller, playerState.isDead, playerState.isOffline);
         }
 
         private function updateExtraFields():void

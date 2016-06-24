@@ -536,28 +536,28 @@
 // AS3:DONE 
 // AS3:DONE         return img;
 // AS3:DONE     }
-
-    private function onExtraMovieClipLoadInit(img:UILoaderAlt)
-    {
-        //Logger.add("onExtraMovieClipLoadInit: " + m_name + " " + img.source);
-
-        var data = img["data"];
-        //Logger.addObject(data, 2, m_name);
-
-        img.visible = false;
-        img._x = 0;
-        img._y = 0;
-        img.width = 0;
-        img.height = 0;
-        img._xscale = data.scaleX;
-        img._yscale = data.scaleY;
-        alignField(img);
-
-        _global.setTimeout(function() { img.visible = true; }, 1);
-    }
-
-    private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)
-    {
+// AS3:DONE 
+// AS3:DONE     private function onExtraMovieClipLoadInit(img:UILoaderAlt)
+// AS3:DONE     {
+// AS3:DONE         //Logger.add("onExtraMovieClipLoadInit: " + m_name + " " + img.source);
+// AS3:DONE 
+// AS3:DONE         var data = img["data"];
+// AS3:DONE         //Logger.addObject(data, 2, m_name);
+// AS3:DONE 
+// AS3:DONE         img.visible = false;
+// AS3:DONE         img._x = 0;
+// AS3:DONE         img._y = 0;
+// AS3:DONE         img.width = 0;
+// AS3:DONE         img.height = 0;
+// AS3:DONE         img._xscale = data.scaleX;
+// AS3:DONE         img._yscale = data.scaleY;
+// AS3:DONE         alignField(img);
+// AS3:DONE 
+// AS3:DONE         _global.setTimeout(function() { img.visible = true; }, 1);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)
+// AS3:DONE     {
 // AS3:DONE         //Logger.addObject(format);
 // AS3:DONE         var x:Number = Macros.FormatNumber(m_name, format, "x", null, 0, 0);
 // AS3:DONE         var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
@@ -614,118 +614,118 @@
 // AS3:DONE 
 // AS3:DONE         return tf;
 // AS3:DONE     }
-
-    // cleanup formats without macros to remove extra checks
-    private function cleanupFormat(field, format:Object)
-    {
-        if (format.x != null && (typeof format.x != "string" || format.x.indexOf("{{") < 0) && !format.bindToIcon)
-            delete format.x;
-        if (format.y != null && (typeof format.y != "string" || format.y.indexOf("{{") < 0))
-            delete format.y;
-        if (format.w != null && (typeof format.w != "string" || format.w.indexOf("{{") < 0))
-            delete format.w;
-        if (format.h != null && (typeof format.h != "string" || format.h.indexOf("{{") < 0))
-            delete format.h;
-        if (format.scaleX != null && (typeof format.scaleX != "string" || format.scaleX.indexOf("{{") < 0))
-            delete format.scaleX;
-        if (format.scaleY != null && (typeof format.scaleY != "string" || format.scaleY.indexOf("{{") < 0))
-            delete format.scaleY;
-        if (format.alpha != null && (typeof format.alpha != "string" || format.alpha.indexOf("{{") < 0))
-            delete format.alpha;
-        if (format.rotation != null && (typeof format.rotation != "string" || format.rotation.indexOf("{{") < 0))
-            delete format.rotation;
+// AS3:DONE 
+// AS3:DONE     // cleanup formats without macros to remove extra checks
+// AS3:DONE     private function cleanupFormat(field, format:Object)
+// AS3:DONE     {
+// AS3:DONE         if (format.x != null && (typeof format.x != "string" || format.x.indexOf("{{") < 0) && !format.bindToIcon)
+// AS3:DONE             delete format.x;
+// AS3:DONE         if (format.y != null && (typeof format.y != "string" || format.y.indexOf("{{") < 0))
+// AS3:DONE             delete format.y;
+// AS3:DONE         if (format.w != null && (typeof format.w != "string" || format.w.indexOf("{{") < 0))
+// AS3:DONE             delete format.w;
+// AS3:DONE         if (format.h != null && (typeof format.h != "string" || format.h.indexOf("{{") < 0))
+// AS3:DONE             delete format.h;
+// AS3:DONE         if (format.scaleX != null && (typeof format.scaleX != "string" || format.scaleX.indexOf("{{") < 0))
+// AS3:DONE             delete format.scaleX;
+// AS3:DONE         if (format.scaleY != null && (typeof format.scaleY != "string" || format.scaleY.indexOf("{{") < 0))
+// AS3:DONE             delete format.scaleY;
+// AS3:DONE         if (format.alpha != null && (typeof format.alpha != "string" || format.alpha.indexOf("{{") < 0))
+// AS3:DONE             delete format.alpha;
+// AS3:DONE         if (format.rotation != null && (typeof format.rotation != "string" || format.rotation.indexOf("{{") < 0))
+// AS3:DONE             delete format.rotation;
         if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
             delete format.borderColor;
         if (format.bgColor != null && (typeof format.bgColor != "string" || format.bgColor.indexOf("{{") < 0))
             delete format.bgColor;
     }
-
-    private function updateExtraFields():Void
-    {
-        //Logger.add("updateExtraFields");
-        if (extraFields == null)
-            return;
-
-        var state:String = panel.state;
-
-        if (extraFields.none != null)    extraFields.none._visible = state == "none" && wrapper.data != null;
-        if (extraFields.short != null)   extraFields.short._visible = state == "short";
-        if (extraFields.medium != null)  extraFields.medium._visible = state == "medium";
-        if (extraFields.medium2 != null) extraFields.medium2._visible = state == "medium2";
-        if (extraFields.large != null)   extraFields.large._visible = state == "large";
-
-        var mc:MovieClip = extraFields[state];
-        if (mc == null)
-            return;
-
-        var obj = BattleState.get(m_playerId);
-        var formats:Array = mc.formats;
-        var len:Number = formats.length;
-        for (var i:Number = 0; i < len; ++i)
-            _internal_update(mc["f" + i], formats[i], obj);
-    }
-
-    private function _internal_update(f, format, obj)
-    {
-        var value;
-        var needAlign:Boolean = false;
-        if (format.x != null)
-        {
-            value = !isNaN(format.x) ? format.x : (parseFloat(Macros.Format(m_name, format.x, obj)) || 0);
-            if (format.bindToIcon)
-            {
-                value += isLeftPanel
-                    ? panel.m_list._x + panel.m_list.width
-                    : App.appWidth - panel._x - panel.m_list._x + panel.m_list.width;
-            }
-            if (f.data.x != value)
-            {
-                f.data.x = value;
-                //Logger.add("x=" + value);
-                needAlign = true;
-            }
-        }
-        if (format.y != null)
-        {
-            value = parseFloat(Macros.Format(m_name, format.y, obj)) || 0;
-            if (f.data.y != value)
-            {
-                f.data.y = value;
-                //Logger.add("y=" + value);
-                needAlign = true;
-            }
-        }
-        if (format.w != null)
-        {
-            value = parseFloat(Macros.Format(m_name, format.w, obj)) || 0;
-            if (f.data.w != value)
-            {
-                f.data.w = value;
-                //Logger.add("w=" + value);
-                needAlign = true;
-            }
-        }
-        if (format.h != null)
-        {
-            value = parseFloat(Macros.Format(m_name, format.h, obj)) || 0;
-            if (f.data.h != value)
-            {
-                f.data.h = value;
-                //Logger.add("h=" + value);
-                needAlign = true;
-            }
-        }
-        if (format.alpha != null)
-        {
-            var alpha = parseFloat(Macros.Format(m_name, format.alpha, obj));
-            f._alpha = isNaN(alpha) ? 100 : alpha;
-        }
-        if (format.rotation != null)
-            f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj)) || 0;
-        if (format.scaleX != null)
-            f._xscale = parseFloat(Macros.Format(m_name, format.scaleX, obj)) * 100 || 100;
-        if (format.scaleY != null)
-            f._yscale = parseFloat(Macros.Format(m_name, format.scaleY, obj)) * 100 || 100;
+// AS3:DONE 
+// AS3:DONE     private function updateExtraFields():Void
+// AS3:DONE     {
+// AS3:DONE         //Logger.add("updateExtraFields");
+// AS3:DONE         if (extraFields == null)
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         var state:String = panel.state;
+// AS3:DONE 
+// AS3:DONE         if (extraFields.none != null)    extraFields.none._visible = state == "none" && wrapper.data != null;
+// AS3:DONE         if (extraFields.short != null)   extraFields.short._visible = state == "short";
+// AS3:DONE         if (extraFields.medium != null)  extraFields.medium._visible = state == "medium";
+// AS3:DONE         if (extraFields.medium2 != null) extraFields.medium2._visible = state == "medium2";
+// AS3:DONE         if (extraFields.large != null)   extraFields.large._visible = state == "large";
+// AS3:DONE 
+// AS3:DONE         var mc:MovieClip = extraFields[state];
+// AS3:DONE         if (mc == null)
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         var obj = BattleState.get(m_playerId);
+// AS3:DONE         var formats:Array = mc.formats;
+// AS3:DONE         var len:Number = formats.length;
+// AS3:DONE         for (var i:Number = 0; i < len; ++i)
+// AS3:DONE             _internal_update(mc["f" + i], formats[i], obj);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function _internal_update(f, format, obj)
+// AS3:DONE     {
+// AS3:DONE         var value;
+// AS3:DONE         var needAlign:Boolean = false;
+// AS3:DONE         if (format.x != null)
+// AS3:DONE         {
+// AS3:DONE             value = !isNaN(format.x) ? format.x : (parseFloat(Macros.Format(m_name, format.x, obj)) || 0);
+// AS3:DONE             if (format.bindToIcon)
+// AS3:DONE             {
+// AS3:DONE                 value += isLeftPanel
+// AS3:DONE                     ? panel.m_list._x + panel.m_list.width
+// AS3:DONE                     : App.appWidth - panel._x - panel.m_list._x + panel.m_list.width;
+// AS3:DONE             }
+// AS3:DONE             if (f.data.x != value)
+// AS3:DONE             {
+// AS3:DONE                 f.data.x = value;
+// AS3:DONE                 //Logger.add("x=" + value);
+// AS3:DONE                 needAlign = true;
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE         if (format.y != null)
+// AS3:DONE         {
+// AS3:DONE             value = parseFloat(Macros.Format(m_name, format.y, obj)) || 0;
+// AS3:DONE             if (f.data.y != value)
+// AS3:DONE             {
+// AS3:DONE                 f.data.y = value;
+// AS3:DONE                 //Logger.add("y=" + value);
+// AS3:DONE                 needAlign = true;
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE         if (format.w != null)
+// AS3:DONE         {
+// AS3:DONE             value = parseFloat(Macros.Format(m_name, format.w, obj)) || 0;
+// AS3:DONE             if (f.data.w != value)
+// AS3:DONE             {
+// AS3:DONE                 f.data.w = value;
+// AS3:DONE                 //Logger.add("w=" + value);
+// AS3:DONE                 needAlign = true;
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE         if (format.h != null)
+// AS3:DONE         {
+// AS3:DONE             value = parseFloat(Macros.Format(m_name, format.h, obj)) || 0;
+// AS3:DONE             if (f.data.h != value)
+// AS3:DONE             {
+// AS3:DONE                 f.data.h = value;
+// AS3:DONE                 //Logger.add("h=" + value);
+// AS3:DONE                 needAlign = true;
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE         if (format.alpha != null)
+// AS3:DONE         {
+// AS3:DONE             var alpha = parseFloat(Macros.Format(m_name, format.alpha, obj));
+// AS3:DONE             f._alpha = isNaN(alpha) ? 100 : alpha;
+// AS3:DONE         }
+// AS3:DONE         if (format.rotation != null)
+// AS3:DONE             f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj)) || 0;
+// AS3:DONE         if (format.scaleX != null)
+// AS3:DONE             f._xscale = parseFloat(Macros.Format(m_name, format.scaleX, obj)) * 100 || 100;
+// AS3:DONE         if (format.scaleY != null)
+// AS3:DONE             f._yscale = parseFloat(Macros.Format(m_name, format.scaleY, obj)) * 100 || 100;
         if (format.borderColor != null)
             f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj).split("#").join("0x")) || 0;
         if (format.bgColor != null)

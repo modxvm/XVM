@@ -4,10 +4,11 @@
     {
         function get playerName():String;
         function get isAlive():Boolean;
+        function get isDead():Boolean;
         function get isReady():Boolean;
+        function get isOffline():Boolean;
         function get isNotAvailable():Boolean;
         function get isStopRespawn():Boolean;
-        function get isDead():Boolean;
         function get isSelected():Boolean;
         function get isCurrentPlayer():Boolean;
         function get isTeamKiller():Boolean;

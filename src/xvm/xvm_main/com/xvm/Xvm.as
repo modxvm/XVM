@@ -12,6 +12,7 @@ package com.xvm
     import com.xvm.wg.*;
     import flash.display.*;
     import flash.events.*;
+    import net.wg.infrastructure.managers.IImageManager;
 
     public class Xvm extends Sprite
     {
@@ -30,14 +31,14 @@ package com.xvm
             _instance.dispatchEvent(e);
         }
 
-        private static var _imageManagerWG:IImageManagerWG = null;
-        public static function get imageManagerWG():IImageManagerWG
+        private static var _imageManager:IImageManager = null;
+        public static function get imageManager():IImageManager
         {
-            if (!_imageManagerWG)
+            if (!_imageManager)
             {
-                _imageManagerWG = new ImageManagerWG();
+                _imageManager = App.imageMgr || new ImageManagerWG();
             }
-            return _imageManagerWG;
+            return _imageManager;
         }
 
 

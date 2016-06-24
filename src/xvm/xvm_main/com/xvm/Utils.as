@@ -121,12 +121,12 @@ package com.xvm
             return str;
         }
 
-        // Fix 'img://...' to '../...'> (res_mods/x.x.x/gui/maps/icons)
-        // Fix 'xvm://...' to '../../XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
-        // Fix 'cfg://...' to '../../XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
+        // Fix 'img://gui/abc' to '../abc'> (res_mods/x.x.x)
+        // Fix 'xvm://...' to '../../XVM_IMG_RES_ROOT/abc'> (res_mods/mods/shared_resources/xvm/res)
+        // Fix 'cfg://...' to '../../XVM_IMG_CFG_ROOT/abc'> (res_mods/configs/xvm)
         public static function fixImgTagSrc(str:String):String
         {
-            if (StringUtils.startsWith(str.toLowerCase(), "img://gui/maps/icons/"))
+            if (StringUtils.startsWith(str.toLowerCase(), "img://gui/"))
                 return "../" + str.slice(10);
             return "../../" + Utils.fixImgTag(str).split("img://").join("");
         }
@@ -227,39 +227,5 @@ package com.xvm
             }
             return value;
         }
-
-        /*
-        public static function getChildrenOf(target:MovieClip, recursive:Boolean):Array
-        {
-            var result:Array = [];
-            for (var i in target)
-            {
-                if (target[i] instanceof MovieClip)
-                {
-                    result.push(target[i]);
-
-                    // Concatenate children of clips at this level,recurse
-                    if (recursive)
-                        result = result.concat(getChildrenOf(target[i],true));
-                }
-            }
-            return result;
-        }
-
-        public static function removeChildren(mc:MovieClip, match:Function):Void
-        {
-            var children:Array = getChildrenOf(mc, false);
-            var len:Number = children.length;
-            for (var i:Number = 0; i < len; ++i)
-            {
-                var child:MovieClip = MovieClip(children[i]);
-                if (child == null)
-                    continue;
-                if (match != null && !match(child))
-                    continue
-                child.removeMovieClip();
-            }
-        }
-        */
     }
 }

@@ -4,11 +4,16 @@ package com.xvm.wg
     import flash.events.*;
     import flash.utils.*;
     import net.wg.infrastructure.events.LoaderEvent;
+    import net.wg.infrastructure.interfaces.IImageData;
+    import net.wg.infrastructure.managers.IImageManager;
     import net.wg.infrastructure.managers.ILoaderManager;
     import org.idmedia.as3commons.util.StringUtils;
 
-    public class ImageManagerWG extends EventDispatcher implements IImageManagerWG
+    public class ImageManagerWG extends EventDispatcher implements IImageManager
     {
+        private static const MAX_CACHE_SIZE:int = 4096 * 1024;
+        private static const MIN_CACHE_SIZE:int = 1024 * 1024;
+
         private var _cache:Dictionary = null;
 
         private var _queue:Vector.<ImageData> = null;
@@ -28,7 +33,7 @@ package com.xvm.wg
             super();
             this._cache = new Dictionary();
             this._queue = new Vector.<ImageData>();
-            as_setImageCacheSettings(4096 * 1024, 1024 * 1024);
+            as_setImageCacheSettings(MAX_CACHE_SIZE, MIN_CACHE_SIZE);
         }
 
         public function as_loadImages(param1:Array) : void
@@ -111,7 +116,7 @@ package com.xvm.wg
             this._cache = null;
         }
 
-        public function getImageData(param1:String) : IImageDataWG
+        public function getImageData(param1:String) : IImageData
         {
             var _loc2_:ImageData = null;
             if(StringUtils.isEmpty(param1))
@@ -310,14 +315,15 @@ class WeakRef extends Object implements IDisposable
     }
 }
 
-import com.xvm.wg.IImageDataWG;
 import flash.display.*;
 import flash.events.*;
 import flash.net.*;
 import flash.system.*;
+import net.wg.infrastructure.interfaces.IImage;
+import net.wg.infrastructure.interfaces.IImageData;
 import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-class ImageData extends EventDispatcher implements IDisposable, IImageDataWG
+class ImageData extends EventDispatcher implements IDisposable, IImageData
 {
 
     private static const BYTE_PER_PIXEL:int = 4;
@@ -408,7 +414,7 @@ class ImageData extends EventDispatcher implements IDisposable, IImageDataWG
         return this._ready;
     }
 
-    public function showTo(param1:com.xvm.wg.IImageWG) : void
+    public function showTo(param1:IImage) : void
     {
         param1.bitmapData = this._weakBitmapData.target;
     }

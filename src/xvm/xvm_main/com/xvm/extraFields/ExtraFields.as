@@ -25,7 +25,7 @@ package com.xvm.extraFields
         private var _size:Rectangle;
         private var _layout:String;
 
-        public function ExtraFields(formats:Array, defaultAlign:String, size:Rectangle = null, layout:String = null):void
+        public function ExtraFields(formats:Array, isLeftPanel:Boolean, getSchemeNameForText:Function, getSchemeNameForImage:Function, size:Rectangle = null, layout:String = null):void
         {
             visible = false;
             _size = size;
@@ -64,7 +64,9 @@ package com.xvm.extraFields
 
                 if (Macros.GlobalBoolean(format.enabled, true))
                 {
-                    addChild(format.src != null ? new ImageExtraField(format) : new TextExtraField(format, defaultAlign));
+                    addChild(format.src != null
+                        ? new ImageExtraField(format, isLeftPanel, getSchemeNameForImage)
+                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText));
                 }
             }
         }

@@ -8,11 +8,11 @@ package com.xvm.types.cfg
 
     public dynamic class CExtraField implements ICloneable
     {
-        public var enabled:*
+        public var enabled:*;
         public var x:*;
         public var y:*;
-        public var w:*;
-        public var h:*;
+        public var width:*;
+        public var height:*;
         public var alpha:*;
         public var rotation:*;
         public var scaleX:*;
@@ -28,14 +28,24 @@ package com.xvm.types.cfg
         public var shadow:CShadow;
         public var highlight:*;
 
+        // legacy configs
+        public function set w(value:*):void
+        {
+            width = value;
+        }
+        public function set h(value:*):void
+        {
+            height = value;
+        }
+
         public function clone():*
         {
             var cloned:CExtraField = new CExtraField();
             cloned.enabled = enabled;
             cloned.x = x;
             cloned.y = y;
-            cloned.w = w;
-            cloned.h = h;
+            cloned.width = width;
+            cloned.height = height;
             cloned.alpha = alpha;
             cloned.rotation = rotation;
             cloned.scaleX = scaleX;

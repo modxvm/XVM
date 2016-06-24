@@ -5,192 +5,231 @@
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import com.xvm.wg.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.net.*;
-    import flash.system.*;
+    import flash.text.*;
 
     public class ImageExtraField extends ImageWG implements IExtraField
     {
-        private static const ERROR_URL:String = "../maps/icons/vehicle/noImage.png";
+        private var cfg:CExtraField;
+        private var isLeftPanel:Boolean;
+        private var getColorSchemeName:Function;
 
-        private var format:CExtraField;
-        private var loader:Loader;
-        private var _source:String = "";
+        private var _initialized:Boolean = false;
 
-        public function ImageExtraField(format:CExtraField)
+        private var _xValue:Number = 0;
+        private var _yValue:Number = 0;
+        private var _widthValue:Number = NaN;
+        private var _heightValue:Number = NaN;
+        private var _colorSchemeNameValue:String = null;
+
+        public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean, getColorSchemeName:Function)
         {
             super();
 
-            this.format = format.clone();
+            this.cfg = format.clone();
+            this.isLeftPanel = isLeftPanel;
+            this.getColorSchemeName = getColorSchemeName;
 
-            //var x:Number = !isNaN(format.x) ? format.x : 0;
-            //var y:Number = !isNaN(format.y) ? format.y : 0;
-            //var w:Number = !isNaN(format.w) ? format.w : NaN;
-            //var h:Number = format.h != null && !isNaN(format.h) ? format.h : NaN;
-
-            //var img:UILoaderAlt = owner.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt)) as UILoaderAlt;
-            //img.name = "f" + n;
-            //img["data"] = {
-            //    x: x, y: y, w: w, h: h,
-            //    format: format,
-            //    align: format.align != null ? format.align : "left"
-            //};
-            //Logger.addObject(img["data"]);
-
-            //img.alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha / 100.0 : 1;
-            //img.rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
-
-            //autoSize = true;
-            //maintainAspectRatio = false;
-
-            //addEventListener(UILoaderEvent.COMPLETE, onExtraMovieClipLoadComplete);
-
-            //cleanupFormat(img, format);
+            var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
+            cfg.align = Macros.GlobalString(cfg.align, defaultAlign);
+            cfg.bindToIcon = Macros.GlobalBoolean(cfg.bindToIcon, false);
         }
 
-        /*public function set source(url:String):void
+        private function setup(options:IVOMacrosOptions):void
         {
-            Logger.add(url);
-            if (url == null || url == "" || url == this._source)
-                return;
-            this._source = url;
-            var request:URLRequest = new URLRequest(url);
-            var context:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
-            if (this.loader)
+            var value:*;
+
+            value = Macros.FormatNumber(options.playerName, cfg.x, options, 0, 0);
+            if (Macros.IsCached(options.playerName, cfg.x))
             {
-                this.loader.unloadAndStop(true);
+                x = value;
+                if (!cfg.bindToIcon)
+                    cfg.x = null;
             }
-            this.loader = new Loader();
-            this.loader.contentLoaderInfo.addEventListener(Event.COMPLETE, completeHandler);
-            this.loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
-            this.loader.load(request, context);
-            addChild(loader);
-        }
 
-        private function completeHandler(e:Event):void
-        {
-            //graphics.clear();
-            //var matrix:Matrix = new Matrix(1,0,0,1,-this._cutRect.x,-this._cutRect.y);
-            //graphics.beginBitmapFill(Bitmap(this.loader.content));// .bitmapData, matrix, false);
-            //graphics.moveTo(0,0);
-            //graphics.lineTo(this._cutRect.width,0);
-            //graphics.lineTo(this._cutRect.width,this._cutRect.height);
-            //graphics.lineTo(0,this._cutRect.height);
-            //graphics.lineTo(0,0);
-            //graphics.endFill();
-            //addChild(loader.content);
-            //visible = true;
-            loader.x = 10;
-            loader.y = 10;
-            loader.visible = true;
-            visible = true;
-            loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, completeHandler);
-            loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onIOError);
-            //loader = null;
-        }
-
-        private function onIOError(param1:IOErrorEvent) : void
-        {
-            this.loader.unloadAndStop(true);
-            this.source = ERROR_URL;
-        }
-
-        public function dispose() : void
-        {
-            this._source = null;
-            if (this.loader)
+            value = Macros.FormatNumber(options.playerName, cfg.y, options, 0, 0);
+            if (Macros.IsCached(options.playerName, cfg.y))
             {
-                this.loader.unloadAndStop(true);
+                y = value;
+                cfg.y = null;
             }
-        }*/
 
-        //private static function onExtraMovieClipLoadComplete(e:UILoaderEvent):void
-        //{
-            //Logger.add("onExtraMovieClipLoadComplete");
-            //Logger.addObject(e);
+            value = Macros.FormatNumber(options.playerName, cfg.width, options);
+            if (Macros.IsCached(options.playerName, cfg.width))
+            {
+                if (!isNaN(value))
+                    width = value;
+                cfg.width = null;
+            }
 
-            //var loader:Loader = getChildAt(1) as Loader;
+            value = Macros.FormatNumber(options.playerName, cfg.height, options);
+            if (Macros.IsCached(options.playerName, cfg.height))
+            {
+                if (!isNaN(value))
+                    height = value;
+                cfg.height = null;
+            }
 
-            //this.loader
+            value = Macros.FormatNumber(options.playerName, cfg.alpha, options, 100, 100);
+            if (Macros.IsCached(options.playerName, cfg.alpha))
+            {
+                alpha = value / 100.0;
+                cfg.alpha = null;
+            }
 
-            //var data:Object = img["data"];
-            //if (isNaN(data.w) && data.format.w == null)
-            //    data.w = loader.contentLoaderInfo.content.width;
-            //if (isNaN(data.h) && data.format.h == null)
-            //    data.h = loader.contentLoaderInfo.content.height;
-            //Logger.addObject(data, 2);
+            value = Macros.FormatNumber(options.playerName, cfg.rotation, options, 0, 0);
+            if (Macros.IsCached(options.playerName, cfg.rotation))
+            {
+                rotation = value;
+                cfg.rotation = null;
+            }
 
-            //img.visible = false;
-            //img.x = 0;
-            //img.y = 0;
-            //img.width = 0;
-            //img.height = 0;
-            //alignField(img);
-            //App.utils.scheduler.scheduleOnNextFrame(function():void { img.visible = true; } );
-        //}
+            value = Macros.FormatNumber(options.playerName, cfg.scaleX, options, 1, 1);
+            if (Macros.IsCached(options.playerName, cfg.scaleX))
+            {
+                scaleX = value;
+                cfg.scaleX = null;
+            }
+
+            value = Macros.FormatNumber(options.playerName, cfg.scaleY, options, 1, 1);
+            if (Macros.IsCached(options.playerName, cfg.scaleY))
+            {
+                scaleY = value;
+                cfg.scaleY = null;
+            }
+
+            value = Macros.Format(options.playerName, cfg.src, options);
+            if (Macros.IsCached(options.playerName, cfg.src))
+            {
+                cfg.src = value;
+            }
+
+            value = XfwUtils.toBool(Macros.Format(options.playerName, cfg.highlight, options), false);
+            if (Macros.IsCached(options.playerName, cfg.highlights))
+            {
+                cfg.highlight = value;
+            }
+        }
 
         public function update(options:IVOMacrosOptions):void
         {
-            /*var img:UILoaderAlt = f as UILoaderAlt;
+            if (!_initialized)
+            {
+                _initialized = true;
+                setup(options);
+            }
 
+            var value:*;
             var needAlign:Boolean = false;
-            var data:Object = (f.parent as MovieClip).data[f.name];
 
-            if (format.x != null)
+            if (cfg.x != null)
             {
-                if (format.bindToIcon)
+                value = Macros.FormatNumber(options.playerName, cfg.x, options, 0, 0);
+                if (cfg.bindToIcon)
                 {
-                    value += isLeftPanel
-                        ? panel.m_list._x + panel.m_list.width
-                        : App.appWidth - panel._x - panel.m_list._x + panel.m_list.width;
+                    // TODO
+                    //value += isLeftPanel
+                    //    ? panel.m_list._x + panel.m_list.width
+                    //    : App.appWidth - panel._x - panel.m_list._x + panel.m_list.width;
                 }
-                data.x = parseFloat(Macros.Format(null, format.x, options)) || 0;
-                needAlign = true;
-            }
-            if (format.y != null)
-            {
-                data.y = parseFloat(Macros.Format(null, format.y, options)) || 0;
-                needAlign = true;
-            }
-            if (format.w != null)
-            {
-                data.w = parseFloat(Macros.Format(null, format.w, options)) || 0;
-                needAlign = true;
-            }
-            if (format.h != null)
-            {
-                data.h = parseFloat(Macros.Format(null, format.h, options)) || 0;
-                needAlign = true;
-            }
-            if (format.alpha != null)
-            {
-                var alpha:Number = parseFloat(Macros.Format(null, format.alpha, options));
-                f.alpha = isNaN(alpha) ? 1 : alpha / 100.0;
-            }
-            if (format.rotation != null)
-                f.rotation = parseFloat(Macros.Format(null, format.rotation, options)) || 0;
-
-            if (format.src != null && img != null)
-            {
-                var src:String = "../../" + Macros.Format(null, format.src, options).replace("img://", "");
-                if (img.source != src)
+                if (_xValue != value)
                 {
-                    //Logger.add(img.source + " => " + src);
-                    img.visible = true;
-                    img.source = src;
+                    _xValue = value;
+                    needAlign = true;
+                }
+            }
+            if (cfg.y != null)
+            {
+                value = Macros.FormatNumber(options.playerName, cfg.y, options, 0, 0);
+                if (_yValue != value)
+                {
+                    _yValue = value;
+                    needAlign = true;
+                }
+            }
+            if (cfg.width != null)
+            {
+                value = Macros.FormatNumber(options.playerName, cfg.width, options);
+                if (isNaN(value) && _widthValue != value)
+                {
+                    _widthValue = value;
+                    needAlign = true;
+                }
+            }
+            if (cfg.height != null)
+            {
+                value = Macros.FormatNumber(options.playerName, cfg.height, options);
+                if (isNaN(value) && _heightValue != value)
+                {
+                    _heightValue = value;
+                    needAlign = true;
+                }
+            }
+            if (cfg.alpha != null)
+            {
+                value = Macros.FormatNumber(options.playerName, cfg.alpha, options, 100, 100) / 100.0;
+                if (alpha != value)
+                {
+                    alpha = value;
+                }
+            }
+            if (cfg.rotation != null)
+            {
+                value = Macros.FormatNumber(options.playerName, cfg.rotation, options, 0, 0);
+                if (rotation != value)
+                {
+                    rotation = value;
+                }
+            }
+            if (cfg.scaleX != null)
+            {
+                value = Macros.FormatNumber(options.playerName, cfg.scaleX, options, 1, 1);
+                if (scaleX != value)
+                {
+                    scaleX = value;
+                }
+            }
+            if (cfg.scaleY != null)
+            {
+                value = Macros.FormatNumber(options.playerName, cfg.scaleY, options, 1, 1);
+                if (scaleY != value)
+                {
+                    scaleY = value;
+                }
+            }
+            if (cfg.src != null)
+            {
+                value = Utils.fixImgTagSrc(Macros.Format(options.playerName, cfg.src, options));
+                if (source != value)
+                {
+                    source = value;
+                }
+
+                if (cfg.highlight)
+                {
+                    var highlight:Boolean = cfg.highlight is Boolean ? cfg.highlight : XfwUtils.toBool(Macros.Format(options.playerName, cfg.highlight, options), false);
+                    value = highlight ? getColorSchemeName(options) : null;
+                    if (_colorSchemeNameValue != value)
+                    {
+                        _colorSchemeNameValue = value;
+                        this.transform.colorTransform = App.colorSchemeMgr.getScheme(value).colorTransform;
+                    }
                 }
             }
 
             if (needAlign)
-                alignField(f);*/
-            x = 300;
-            source = "../../" + Macros.Format(options.playerName, format.src, options).replace("img://", "");
-            Logger.add("../../" + Macros.Format(options.playerName, format.src, options).replace("img://", ""));
+            {
+                alignField();
+            }
         }
 
         public function alignField():void
         {
+            x = _xValue;
+            y = _yValue;
+            if (!isNaN(_widthValue))
+                width = _widthValue;
+            if (!isNaN(_heightValue))
+                height = _heightValue
             /*var img:UILoaderAlt = field as UILoaderAlt;
 
             var data:Object = img["data"];

@@ -4,24 +4,27 @@ package com.xvm.wg
     import flash.display.*;
     import flash.events.*;
     import net.wg.data.constants.Values;
+    import net.wg.infrastructure.interfaces.IImage;
+    import net.wg.infrastructure.interfaces.IImageData;
+    import net.wg.infrastructure.managers.IImageManager;
 
-    public class ImageWG extends Sprite implements IImageWG
+    public class ImageWG extends Sprite implements IImage
     {
 
         private var _bitmap:Bitmap = null;
 
-        private var _imgData:IImageDataWG = null;
+        private var _imgData:IImageData = null;
 
         private var _source:String = "";
 
         private var _repeatLoadOnError:Boolean = false;
 
-        private var _mgr:IImageManagerWG = null;
+        private var _mgr:IImageManager = null;
 
         public function ImageWG()
         {
             super();
-            this._mgr = Xvm.imageManagerWG;
+            this._mgr = Xvm.imageManager;
             this._bitmap = new Bitmap();
             addChild(this._bitmap);
         }
@@ -46,7 +49,7 @@ package com.xvm.wg
             }
         }
 
-        private function setImgData(param1:IImageDataWG) : void
+        private function setImgData(param1:IImageData) : void
         {
             this._imgData = param1;
             if(this._imgData.ready)
@@ -69,6 +72,11 @@ package com.xvm.wg
         {
             this._imgData.removeEventListener(Event.COMPLETE,this.onImgDataCompleteHandler);
             this._imgData.removeEventListener(IOErrorEvent.IO_ERROR,this.onImgDataIOErrorHandler);
+        }
+
+        public function get source() : String
+        {
+            return this._source;
         }
 
         public function set source(param1:String) : void

@@ -40,10 +40,10 @@
       "__stub__": {}
     },
     "extraFields": [
-        { "x": 140, "y": 15, "w": 50, "h": 40, "align": "right", "format": "{{v.xpToElite?{{v.earnedXP%'d|0}} {{v.xpToEliteLeft<1000?<font color='#88FF88' size='20'><b>|<font color='#CCCCCC' size='12'>}}({{v.xpToEliteLeft%'d}})</font>}}", "shadow": {} },
+        { "x": 140, "y": 15, "width": 50, "height": 40, "align": "right", "format": "{{v.xpToElite?{{v.earnedXP%'d|0}} {{v.xpToEliteLeft<1000?<font color='#88FF88' size='20'><b>|<font color='#CCCCCC' size='12'>}}({{v.xpToEliteLeft%'d}})</font>}}", "shadow": {} },
         { "x": 140, "y": 17, "src": "img://gui/maps/icons/library/XpIcon.png" },
 
-        { "x": 135, "y": 57, "w": 25, "h": 25, "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png" },
+        { "x": 135, "y": 57, "width": 25, "height": 25, "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png" },
 
         { "x": 140, "y": 40, "src": "cfg://sirmax/img/marksOnGun/{{v.marksOnGun|empty}}.png" },
         { "x": 147, "y": "{{v.marksOnGun?38|37}}", "align": "center",
@@ -60,19 +60,19 @@
           "shadow": ${ "def.textFieldShadow" }
         },
 
-        { "x": 0, "y": 15, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/wins40x32.png" },
+        { "x": 0, "y": 15, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/wins40x32.png" },
         { "x": 21, "y": 15,
           "format": "<b><font size='12' color='{{v.c_winrate}}'>{{v.winrate%2d~%}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }
         },
 
-        { "x": 0, "y": 33, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/avgDamage40x32.png" },
+        { "x": 0, "y": 33, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/avgDamage40x32.png" },
         { "x": 21, "y": 35,
           "format": "<b><font size='12' color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }
         },
 
-        { "x": 0, "y": 51, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/techRatio40x32.png" },
+        { "x": 0, "y": 51, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/techRatio40x32.png" },
         { "x": 21, "y": 53,
           "format": "<b><font face='mono' size='12' color='{{v.battles>9?{{v.c_xte|#666666}}|#666666}}'>{{v.xte|--}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }
@@ -88,9 +88,9 @@
         //  "shadow": { "color": "0x73734C", "alpha": 0.8, "blur": 6, "strength": 2, "distance": 0, "angle": 0 }
         //},
 
-        //{ "x": -1, "y": -1, "w": 164, "h": 104, "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
+        //{ "x": -1, "y": -1, "width": 164, "height": 104, "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
 
-        { "x": -1, "y": -1, "h": 104, "w": "164", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
+        { "x": -1, "y": -1, "height": 104, "width": "164", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
 
         {}
     ]
