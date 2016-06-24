@@ -247,7 +247,7 @@
             return curHealth < 0;
         }
 
-        public function VOPlayerState(data:IDAAPIDataClass, isEnemy:Boolean)
+        public function VOPlayerState(data:IDAAPIDataClass)
         {
             var d:DAAPIVehicleInfoVO = DAAPIVehicleInfoVO(data);
             accountDBID = d.accountDBID;

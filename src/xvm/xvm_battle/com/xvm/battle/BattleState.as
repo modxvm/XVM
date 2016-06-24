@@ -128,7 +128,6 @@
 
         public function setArenaInfo(data:IDAAPIDataClass):void
         {
-            //Logger.addObject(data, 1, "setArenaInfo");
             try
             {
                 _arenaInfoVO = new VOArenaInfo(data);
@@ -169,7 +168,6 @@
 
         public function setVehiclesData(data:IDAAPIDataClass):void
         {
-            //Logger.add("setVehiclesData");
             try
             {
                 _playersDataVO = new VOPlayersData(data);
@@ -183,7 +181,6 @@
 
         public function setVehicleStats(data:IDAAPIDataClass):void
         {
-            //Logger.addObject(data, 1, "setVehicleStats");
             try
             {
                 var vehicleStatsVO:DAAPIVehiclesStatsVO = DAAPIVehiclesStatsVO(data);
@@ -241,19 +238,15 @@
 
         public function updatePlayerStatus(data:IDAAPIDataClass):void
         {
-            Logger.addObject(data, 1, "updatePlayerStatus");
             try
             {
+                var d:DAAPIPlayerStatusVO = DAAPIPlayerStatusVO(data);
+                _playersDataVO.updatePlayerState(d.vehicleID, { playerStatus: d.status });
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
-            //var _loc1_:uint = this._vehicleData.playerStatus;
-            //this._listItem.setSquad(PlayerStatus.isSquadPersonal(_loc1_),this._vehicleData.squadIndex);
-            //this._listItem.setIsTeamKiller(PlayerStatus.isTeamKiller(_loc1_));
-            //this._listItem.setSquadNoSound(PlayerStatus.isVoipDisabled(_loc1_));
-            //this._listItem.setIsSelected(PlayerStatus.isSelected(_loc1_));
         }
 
         public function updateUserTags(data:IDAAPIDataClass):void
@@ -270,30 +263,30 @@
 
         public function updateVehiclesInfo(data:IDAAPIDataClass):void
         {
-            Logger.addObject(data, 1, "updateVehiclesInfo");
             try
             {
+                var vehiclesDataVO:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(data);
+                if (vehiclesDataVO.leftCorrelationIDs)
+                    _playersDataVO.leftCorrelationIDs = vehiclesDataVO.leftCorrelationIDs;
+                if (vehiclesDataVO.rightCorrelationIDs)
+                    _playersDataVO.rightCorrelationIDs = vehiclesDataVO.rightCorrelationIDs;
+                if (vehiclesDataVO.leftVehiclesIDs)
+                    _playersDataVO.leftVehiclesIDs = vehiclesDataVO.leftVehiclesIDs;
+                if (vehiclesDataVO.rightVehiclesIDs)
+                    _playersDataVO.rightVehiclesIDs = vehiclesDataVO.rightVehiclesIDs;
+                if (vehiclesDataVO.leftVehicleInfos)
+                    _playersDataVO.updateVehicleInfos(vehiclesDataVO.leftVehicleInfos);
+                if (vehiclesDataVO.rightVehicleInfos)
+                    _playersDataVO.updateVehicleInfos(vehiclesDataVO.rightVehicleInfos);
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
-            /*
-            var _loc2_:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(param1);
-            if(_loc2_.leftVehicleInfos)
-            {
-                this._allyVehicleMarkersList.updateVehiclesInfo(_loc2_.leftVehicleInfos,_loc2_.leftCorrelationIDs);
-            }
-            if(_loc2_.rightVehicleInfos)
-            {
-                this._enemyVehicleMarkersList.updateVehiclesInfo(_loc2_.rightVehicleInfos,_loc2_.rightCorrelationIDs);
-            }
-            */
         }
 
         public function updateVehiclesStats(data:IDAAPIDataClass):void
         {
-            //Logger.addObject(data, 1, "updateVehiclesStats");
             setVehicleStats(data);
         }
 
@@ -302,28 +295,17 @@
             try
             {
                 var vehicleStatusVO:DAAPIVehicleStatusVO = DAAPIVehicleStatusVO(data);
-
                 _playersDataVO.updatePlayerState(vehicleStatusVO.vehicleID, { vehicleStatus: vehicleStatusVO.status });
-
-                if (vehicleStatusVO.isEnemy)
-                {
-                    if (vehicleStatusVO.rightCorrelationIDs)
-                        _playersDataVO.rightCorrelationIDs = vehicleStatusVO.rightCorrelationIDs;
-                    if (vehicleStatusVO.rightVehiclesIDs)
-                        _playersDataVO.rightVehiclesIDs = vehicleStatusVO.rightVehiclesIDs;
-                }
-                else
-                {
-                    if (vehicleStatusVO.leftCorrelationIDs)
-                        _playersDataVO.leftCorrelationIDs = vehicleStatusVO.leftCorrelationIDs;
-                    if (vehicleStatusVO.leftVehiclesIDs)
-                        _playersDataVO.leftVehiclesIDs = vehicleStatusVO.leftVehiclesIDs;
-                }
-
+                if (vehicleStatusVO.rightCorrelationIDs)
+                    _playersDataVO.rightCorrelationIDs = vehicleStatusVO.rightCorrelationIDs;
+                if (vehicleStatusVO.rightVehiclesIDs)
+                    _playersDataVO.rightVehiclesIDs = vehicleStatusVO.rightVehiclesIDs;
+                if (vehicleStatusVO.leftCorrelationIDs)
+                    _playersDataVO.leftCorrelationIDs = vehicleStatusVO.leftCorrelationIDs;
+                if (vehicleStatusVO.leftVehiclesIDs)
+                    _playersDataVO.leftVehiclesIDs = vehicleStatusVO.leftVehiclesIDs;
                 if (vehicleStatusVO.totalStats)
-                {
                     _playersDataVO.updateTotalStats(vehicleStatusVO.totalStats);
-                }
             }
             catch (ex:Error)
             {
@@ -335,7 +317,6 @@
 
         private function onUpdatePlayerState(vehicleID:Number, data:Object):Object
         {
-            //Logger.addObject(arguments, 2);
             try
             {
                 var playerState:VOPlayerState = get(vehicleID);

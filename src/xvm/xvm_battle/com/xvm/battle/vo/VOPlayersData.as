@@ -53,12 +53,12 @@
             var value:DAAPIVehicleInfoVO;
             for each (value in d.leftVehicleInfos)
             {
-                playerStates[value.vehicleID] = new VOPlayerState(value, false);
+                playerStates[value.vehicleID] = new VOPlayerState(value);
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
             for each (value in d.rightVehicleInfos)
             {
-                playerStates[value.vehicleID] = new VOPlayerState(value, true);
+                playerStates[value.vehicleID] = new VOPlayerState(value);
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
 
@@ -85,6 +85,22 @@
             if (playerState)
             {
                 playerState.update(data);
+            }
+        }
+
+        public function updateVehicleInfos(data:Vector.<DAAPIVehicleInfoVO>):void
+        {
+            for each (var value:DAAPIVehicleInfoVO in data)
+            {
+                if (!playerStates.hasOwnProperty(value.vehicleID))
+                {
+                    playerStates[value.vehicleID] = new VOPlayerState(value);
+                    playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                }
+                else
+                {
+                    (playerStates[value.vehicleID] as VOPlayerState).update(value);
+                }
             }
         }
 
