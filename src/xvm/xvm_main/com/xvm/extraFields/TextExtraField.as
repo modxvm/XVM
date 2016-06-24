@@ -9,14 +9,20 @@
 
     public class TextExtraField extends TextField implements IExtraField
     {
-        public static const DEFAULT_TEXT_FIELD_WIDTH:Number = 300;
-        public static const DEFAULT_TEXT_FIELD_WIDTH_HEIGHT:Number = 25;
+        //public static const DEFAULT_TEXT_FIELD_WIDTH:Number = 300;
+        //public static const DEFAULT_TEXT_FIELD_WIDTH_HEIGHT:Number = 25;
 
         private var cfg:CExtraField;
         private var isLeftPanel:Boolean;
         private var getColorSchemeName:Function;
 
         private var _initialized:Boolean = false;
+
+        private var _xValue:Number = 0;
+        private var _yValue:Number = 0;
+        private var _widthValue:Number = NaN;
+        private var _heightValue:Number = NaN;
+        private var _colorSchemeNameValue:String = null;
 
         public function TextExtraField(format:CExtraField, isLeftPanel:Boolean, getColorSchemeName:Function)
         {
@@ -27,66 +33,16 @@
             this.getColorSchemeName = getColorSchemeName;
 
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
-
-            //Logger.addObject(format);
-
-            //var x:Number = Macros.FormatNumber(m_name, format, "x", null, 0, 0);
-            //var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
-            //var w:Number = Macros.FormatNumber(m_name, format, "w", null, defW, 0);
-            //var h:Number = Macros.FormatNumber(m_name, format, "h", null, defH, 0);
-
-            //scaleX = Macros.FormatNumber(m_name, format, "scaleX", null, 1, 1) * 100;
-            //tf._yscale = Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100;
-            //tf._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
-            //tf._rotation = Macros.FormatNumber(m_name, format, "rotation", null, 0, 0);
+            cfg.align = Macros.GlobalString(cfg.align, defaultAlign);
+            cfg.bindToIcon = Macros.GlobalBoolean(cfg.bindToIcon, false);
 
             selectable = false;
             multiline = true;
             wordWrap = false;
-            //antiAliasType = Macros.GlobalString(format.antiAliasType, AntiAliasType.ADVANCED);
             autoSize = TextFieldAutoSize.NONE;
-            //align = Macros.GlobalString(format.align, defaultAlign);
-            TextFieldEx.setVerticalAlign(this, Macros.GlobalString(format.valign, TextFieldEx.VALIGN_NONE));
-            styleSheet = WGUtils.createStyleSheet(WGUtils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center"));
-
-            //tf.borderColor = Macros.FormatNumber(m_name, format, "borderColor", null, 0xCCCCCC, 0xCCCCCC, true);
-            //tf.background = format.bgColor != null;
-            //tf.backgroundColor = Macros.FormatNumber(m_name, format, "bgColor", null, 0x000000, 0x000000, true);
-            //if (tf.background && !tf.border)
-            //{
-            //    format.borderColor = format.bgColor;
-            //    tf.border = true;
-            //    tf.borderColor = tf.backgroundColor;
-            //}
-
-            //if (format.shadow != null)
-            //{
-            //    var macrosExists:Boolean =
-            //        format.shadow.distance != null && String(format.shadow.distance).indexOf("{{") >= 0 ||
-            //        format.shadow.angle != null && String(format.shadow.angle).indexOf("{{") >= 0 ||
-            //        format.shadow.color != null && String(format.shadow.color).indexOf("{{") >= 0 ||
-            //        format.shadow.alpha != null && String(format.shadow.alpha).indexOf("{{") >= 0 ||
-            //        format.shadow.blur != null && String(format.shadow.blur).indexOf("{{") >= 0 ||
-            //        format.shadow.strength != null && String(format.shadow.strength).indexOf("{{") >= 0;
-            //    if (!macrosExists)
-            //    {
-            //        tf.filters = [
-            //            new DropShadowFilter(
-            //                format.shadow.distance != null ? format.shadow.distance : 0,
-            //                format.shadow.angle != null ? format.shadow.angle : 45,
-            //                format.shadow.color != null ? parseInt(format.shadow.color) : 0x000000,
-            //                format.shadow.alpha != null ? format.shadow.alpha / 100.0 : 1,
-            //                format.shadow.blur != null ? format.shadow.blur : 4,
-            //                format.shadow.blur != null ? format.shadow.blur : 4,
-            //                format.shadow.strength != null ? format.shadow.strength : 1)
-            //        ];
-            //        delete format.shadow;
-            //    }
-            //}
-
-            //cleanupFormat(tf, format);
-
-            //alignField(tf);
+            antiAliasType = Macros.GlobalString(cfg.antiAliasType, AntiAliasType.ADVANCED);
+            TextFieldEx.setVerticalAlign(this, Macros.GlobalString(cfg.valign, TextFieldEx.VALIGN_NONE));
+            styleSheet = WGUtils.createStyleSheet(WGUtils.createCSS("TextExtraField", 0xFFFFFF, "$FieldFont", 14, "center"));
         }
 
         public final function dispose():void
@@ -94,7 +50,7 @@
 
         }
 
-        public function update(options:IVOMacrosOptions):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = NaN):void
         {
             /*var needAlign:Boolean = false;
             var data:Object = (f.parent as MovieClip).data[f.name];
@@ -141,7 +97,7 @@
             {
                 var txt:String = Macros.Format(null, format.format, options);
                 //Logger.add(txt);
-                tf.htmlText = "<span class='extraField'>" + txt + "</span>";
+                tf.htmlText = "<span class='TextExtraField'>" + txt + "</span>";
                 needAlign = true;
             }
 
@@ -149,6 +105,41 @@
             {
                 tf.filters = Utils.createShadowFiltersFromConfig(format.shadow, options);
             }
+
+            //tf.borderColor = Macros.FormatNumber(m_name, format, "borderColor", null, 0xCCCCCC, 0xCCCCCC, true);
+            //tf.background = format.bgColor != null;
+            //tf.backgroundColor = Macros.FormatNumber(m_name, format, "bgColor", null, 0x000000, 0x000000, true);
+            //if (tf.background && !tf.border)
+            //{
+            //    format.borderColor = format.bgColor;
+            //    tf.border = true;
+            //    tf.borderColor = tf.backgroundColor;
+            //}
+
+            //if (format.shadow != null)
+            //{
+            //    var macrosExists:Boolean =
+            //        format.shadow.distance != null && String(format.shadow.distance).indexOf("{{") >= 0 ||
+            //        format.shadow.angle != null && String(format.shadow.angle).indexOf("{{") >= 0 ||
+            //        format.shadow.color != null && String(format.shadow.color).indexOf("{{") >= 0 ||
+            //        format.shadow.alpha != null && String(format.shadow.alpha).indexOf("{{") >= 0 ||
+            //        format.shadow.blur != null && String(format.shadow.blur).indexOf("{{") >= 0 ||
+            //        format.shadow.strength != null && String(format.shadow.strength).indexOf("{{") >= 0;
+            //    if (!macrosExists)
+            //    {
+            //        tf.filters = [
+            //            new DropShadowFilter(
+            //                format.shadow.distance != null ? format.shadow.distance : 0,
+            //                format.shadow.angle != null ? format.shadow.angle : 45,
+            //                format.shadow.color != null ? parseInt(format.shadow.color) : 0x000000,
+            //                format.shadow.alpha != null ? format.shadow.alpha / 100.0 : 1,
+            //                format.shadow.blur != null ? format.shadow.blur : 4,
+            //                format.shadow.blur != null ? format.shadow.blur : 4,
+            //                format.shadow.strength != null ? format.shadow.strength : 1)
+            //        ];
+            //        delete format.shadow;
+            //    }
+            //}
 
             if (needAlign)
                 alignField(f);*/

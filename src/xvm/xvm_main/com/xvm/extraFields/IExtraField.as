@@ -5,7 +5,6 @@
 
     public interface IExtraField extends IDisposable
     {
-        function alignField():void;
-        function update(options:IVOMacrosOptions):void;
+        function update(options:IVOMacrosOptions, bindToIconOffset:Number = NaN):void;
     }
 }

@@ -22,6 +22,9 @@
       "statisticFormEnemy" => "fullStatsRightAtlas"
       "vehicleMarkerAlly" => "vehicleMarkerLeftAtlas"
       "vehicleMarkerEnemy" => "vehicleMarkerRightAtlas"
+  * added macro {{clanicon}} with clan embled image path value
+  * removed "clanIcon" section in the "battleLoading", "statisticForm" and "playersPanel" sections
+    and in the markers
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

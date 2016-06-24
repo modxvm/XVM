@@ -10,9 +10,9 @@ package xvm.profile_ui.components
 
     public class TechniqueWindow extends Technique
     {
-        public function TechniqueWindow(window:ProfileTechniqueWindow, playerName:String, playerId:int):void
+        public function TechniqueWindow(window:ProfileTechniqueWindow, playerName:String, accountDBID:int):void
         {
-            super(window, playerName, playerId);
+            super(window, playerName, accountDBID);
         }
 
 //        override protected function createFilters():void

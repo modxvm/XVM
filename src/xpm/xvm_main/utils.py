@@ -129,11 +129,11 @@ def fixPath(path):
     return path
 
 
-def getPlayerId():
-    playerId = getCurrentPlayerId() if not isReplay() else None
-    if playerId is None:
-        playerId = userprefs.get('tokens.lastPlayerId')
-    return playerId
+def getAccountDBID():
+    accountDBID = getCurrentAccountDBID() if not isReplay() else None
+    if accountDBID is None:
+        accountDBID = userprefs.get('tokens/lastAccountDBID')
+    return accountDBID
 
 
 def getMapSize():

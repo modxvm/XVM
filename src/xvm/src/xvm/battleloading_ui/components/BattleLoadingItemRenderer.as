@@ -144,7 +144,7 @@ package xvm.battleloading_ui.components
                     var fullPlayerName:String = App.utils.commons.getFullPlayerName(
                         App.utils.commons.getUserProps(_model.playerName, _model.clanAbbrev, _model.region, _model.igrType));
                     var vdata:VOVehicleData = VehicleInfo.getByIcon(_model.vehicleIcon);
-                    Macros.RegisterMinimalMacrosData(_model.accountDBID, fullPlayerName, vdata.vehCD, team == XfwConst.TEAM_ALLY);
+                    Macros.RegisterMinimalMacrosData(_model.vehicleID, _model.accountDBID, fullPlayerName, vdata.vehCD, team == XfwConst.TEAM_ALLY);
 
                     // Alternative icon set
                     if (!proxy.vehicleIconLoader.sourceAlt || proxy.vehicleIconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)
@@ -163,6 +163,7 @@ package xvm.battleloading_ui.components
                 catch (ex:Error)
                 {
                     Logger.err(ex);
+                    Logger.addObject(_model);
                 }
             }
             else
@@ -187,9 +188,6 @@ package xvm.battleloading_ui.components
                     options._isSquadPersonal = _model.isCurrentSquad;
                     options._squadIndex = _model.squadIndex;
                     options._position = proxy.index + 1;
-
-                    // ClanIcon
-                    attachClanIconToPlayer();
 
                     var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Macros.GlobalBoolean(cfg.darkenNotReadyIcon) || proxy.enabled) && options.isAlive;
 
@@ -357,72 +355,5 @@ package xvm.battleloading_ui.components
             if (_model != null && proxy.initialized)
                 proxy.invalidate();
         }
-
-        private var _clanIconLoaded:Boolean = false;
-        private function attachClanIconToPlayer():void
-        {
-            if (_clanIconLoaded)
-                return;
-
-            if (!Macros.GlobalBoolean(cfg.clanIcon.show))
-                return;
-
-            var statData:StatData = Stat.battleStat[_model.playerName];
-            if (statData == null)
-                return;
-
-            _clanIconLoaded = true;
-
-            var icon:ClanIcon = new ClanIcon(cfg.clanIcon, proxy.vehicleIconLoader.x, proxy.vehicleIconLoader.y, team,
-                _model.accountDBID,
-                _model.playerName,
-                _model.clanAbbrev,
-                statData.x_emblem);
-            icon.addEventListener(Event.COMPLETE, function():void
-            {
-                // don't add empty icons to the form
-                if (icon.source == "")
-                    return;
-
-                // unpredictable effects appear when added to the renderer item because of scaleXY.
-                // add to the main form, that is not scaled, and adjust XY values.
-                proxy.parent.parent.parent.addChild(icon);
-                var offset:int = 0;
-                if (_vehicleIconLoaded && Config.config.battle.mirroredVehicleIcons == false && team == XfwConst.TEAM_ENEMY)
-                    offset = MAXIMUM_VEHICLE_ICON_WIDTH;
-                icon.x += proxy.parent.parent.x + proxy.parent.x + proxy.x + offset;
-                icon.y += proxy.parent.parent.y + proxy.parent.y + proxy.y;
-            });
-        }
     }
-
 }
-
-/*
-_model: { // net.wg.gui.lobby.battleloading.vo::VehicleInfoVO
-  "isFallout": false,
-  "vLevel": 10,
-  "teamColor": "red",
-  "vehicleType": "SPG",
-  "points": 0,
-  "isPlayerTeam": false,
-  "isCurrentSquad": false,
-  "isCurrentPlayer": false,
-  "region": null,
-  "clanAbbrev": "OTMK",
-  "igrType": 0,
-  "playerName": "Chaoticpie_US",
-  "vehicleGuiName": "ConquerorGC",
-  "vehicleName": "ConquerorGC",
-  "vehicleIcon": "../maps/icons/vehicle/contour/uk-GB31_Conqueror_Gun.png",
-  "vehicleAction": 0,
-  "squadIndex": 0,
-  "playerStatus": 0,
-  "vehicleStatus": 3,
-  "prebattleID": 0,
-  "vehicleID": 4633566,
-  "isSpeaking": false,
-  "isMuted": false,
-  "accountDBID": 1011569697
-}
-*/

@@ -6,6 +6,7 @@
 
     public class VOLobbyMacrosOptions extends VOMacrosOptions
     {
+        public var _vehicleID:Number;
         public var _playerName:String;
         public var vehicleStatus:uint;
         public var playerStatus:uint;
@@ -19,6 +20,11 @@
         private var _vehicleData:VOVehicleData;
 
         // IMacrosOptionsVO implementation
+
+        override public function get vehicleID():Number
+        {
+            return _vehicleID;
+        }
 
         override public function get playerName():String
         {

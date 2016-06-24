@@ -39,8 +39,8 @@ def onXmqpConnected(e):
 
 def onStateBattle():
     global _players_xmqp_status
-    for playerId, data in _players_xmqp_status.iteritems():
-        _as_xmqp_event(playerId, data)
+    for accountDBID, data in _players_xmqp_status.iteritems():
+        _as_xmqp_event(accountDBID, data)
 
 def onXmqpMessage(e):
     try:
@@ -49,7 +49,7 @@ def onXmqpMessage(e):
         event_type = data['event']
         global _event_handlers
         if event_type in _event_handlers:
-            _event_handlers[event_type](e.ctx.get('playerId', ''), data)
+            _event_handlers[event_type](e.ctx.get('accountDBID', ''), data)
         else:
             debug('unknown XMQP message: {}'.format(data))
     except Exception as ex:
@@ -60,14 +60,14 @@ def onXmqpMessage(e):
 
 _event_handlers = {}
 
-def _as_xmqp_event(playerId, data, targets=TARGETS.ALL):
+def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 
     if xmqp.XMQP_DEVELOPMENT:
-        if playerId == utils.getPlayerId():
-            playerId = getCurrentPlayerId()
+        if accountDBID == utils.getAccountDBID():
+            accountDBID = getCurrentAccountDBID()
 
     arenaDP = g_sessionProvider.getArenaDP()
-    vehicleID = arenaDP.getVehIDByAccDBID(playerId)
+    vehicleID = arenaDP.getVehIDByAccDBID(accountDBID)
     if not vehicleID:
         return
 
@@ -90,7 +90,7 @@ def _as_xmqp_event(playerId, data, targets=TARGETS.ALL):
     if targets & TARGETS.BATTLE:
         movie = battle.movie
         if movie is not None:
-            movie.as_xvm_onXmqpEvent(playerId, event, data)
+            movie.as_xvm_onXmqpEvent(accountDBID, event, data)
 
     if targets & TARGETS.VMM:
         markersManager = battle.markersManager
@@ -118,19 +118,19 @@ def _send_xmqp_hola():
         xmqp.call(data)
 
     global _players_xmqp_status
-    currentPlayerId = getCurrentPlayerId()
-    if currentPlayerId not in _players_xmqp_status:
-        _players_xmqp_status[currentPlayerId] = data
+    accountDBID = getCurrentAccountDBID()
+    if accountDBID not in _players_xmqp_status:
+        _players_xmqp_status[accountDBID] = data
 
-def _onXmqpHola(playerId, data):
+def _onXmqpHola(accountDBID, data):
     if xmqp.XMQP_DEVELOPMENT:
-        if playerId == utils.getPlayerId():
-            playerId = getCurrentPlayerId()
-    #debug('_onXmqpHola: {} {}'.format(playerId, data))
-    #if playerId not in _players_xmqp_status:
-    #    _players_xmqp_status[playerId] = data
+        if accountDBID == utils.getAccountDBID():
+            accountDBID = getCurrentAccountDBID()
+    #debug('_onXmqpHola: {} {}'.format(accountDBID, data))
+    #if accountDBID not in _players_xmqp_status:
+    #    _players_xmqp_status[accountDBID] = data
     #    _send_xmqp_hola()
-    #    _as_xmqp_event(playerId, data)
+    #    _as_xmqp_event(accountDBID, data)
 
 _event_handlers[EVENTS.XMQP_HOLA] = _onXmqpHola
 

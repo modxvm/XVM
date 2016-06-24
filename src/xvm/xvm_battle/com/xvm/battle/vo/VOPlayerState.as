@@ -35,7 +35,7 @@
         public var vehicleGuiName:String;
         public var vehicleIcon:String;
         public var vehicleIconName:String;
-        public var vehicleID:Number;
+        public var _vehicleID:Number;
         public var vehicleLevel:int;
         public var vehicleName:String;
         private var _vehicleStatus:uint;
@@ -61,6 +61,16 @@
         private var _vehicleData:VOVehicleData;
 
         // IMacrosOptionsVO implementation
+
+        override public function get vehicleID():Number
+        {
+            return _vehicleID;
+        }
+
+        public function set vehicleID(value:Number):void
+        {
+            _vehicleID = value;
+        }
 
         override public function get playerName():String
         {
@@ -155,6 +165,15 @@
         override public function get squadIndex():Number
         {
             return _squadIndex;
+        }
+
+        public function set squadIndex(value:Number):void
+        {
+            if (_squadIndex != value)
+            {
+                _squadIndex = value;
+                dispatchPlayerStateChangedEvent();
+            }
         }
 
         override public function get position():Number

@@ -71,14 +71,14 @@ package com.xvm.extraFields
             }
         }
 
-        public function update(options:IVOMacrosOptions):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = NaN):void
         {
             for (var i:int = 0; i < this.numChildren; ++i)
             {
                 var child:IExtraField = this.getChildAt(i) as IExtraField;
                 if (child)
                 {
-                    child.update(options);
+                    child.update(options, bindToIconOffset);
                 }
             }
         }

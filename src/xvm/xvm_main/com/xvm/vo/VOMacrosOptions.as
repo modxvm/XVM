@@ -4,6 +4,11 @@
 
     public class VOMacrosOptions extends VOBase implements IVOMacrosOptions
     {
+        public function get vehicleID():Number
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
         public function get playerName():String
         {
             throw new IllegalOperationError("abstract method called");

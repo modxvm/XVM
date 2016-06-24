@@ -244,18 +244,6 @@
       // Интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
       "amount": 0
     },
-    // Player or clan icon.
-    // Иконка игрока или клана.
-    "clanIcon": {
-      "visible": false,  // false - disable        / не отображать.
-      "x": 0,            // Position on the X axis / Положение по оси X.
-      "y": -67,          // Position on the Y axis / Положение по оси Y.
-      "w": 16,           // Width                  / Ширина.
-      "h": 16,           // Height                 / Высота.
-      // Opacity (dynamic transparency allowed, see macros.txt).
-      // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-      "alpha": 100
-    },
     // Vehicle tier.
     // Уровень танка.
     "levelIcon": {
@@ -348,16 +336,6 @@
       "alpha": 100,
       "color": null,
       "amount": 0
-    },
-    // Player or clan icon.
-    // Иконка игрока или клана.
-    "clanIcon": {
-      "visible": false,
-      "x": 0,
-      "y": -67,
-      "w": 16,
-      "h": 16,
-      "alpha": 100
     },
     // Vehicle tier.
     // Уровень танка.

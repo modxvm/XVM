@@ -11,24 +11,24 @@ package com.xvm
     {
         // PUBLIC STATIC
 
-        public static function requestAccountDossier(target:Object, callback:Function, battleType:String, playerId:Number = 0):void
+        public static function requestAccountDossier(target:Object, callback:Function, battleType:String, accountDBID:Number = 0):void
         {
-            loadDossierInternal(target, callback, battleType, playerId, 0);
+            loadDossierInternal(target, callback, battleType, accountDBID, 0);
         }
 
-        public static function requestVehicleDossier(target:Object, callback:Function, battleType:String, vehCD:Number, playerId:Number = 0):void
+        public static function requestVehicleDossier(target:Object, callback:Function, battleType:String, vehCD:Number, accountDBID:Number = 0):void
         {
-            loadDossierInternal(target, callback, battleType, playerId, vehCD);
+            loadDossierInternal(target, callback, battleType, accountDBID, vehCD);
         }
 
-        public static function getAccountDossier(playerId:int = 0):AccountDossier
+        public static function getAccountDossier(accountDBID:int = 0):AccountDossier
         {
-            return getDossier(playerId, 0);
+            return getDossier(accountDBID, 0);
         }
 
-        public static function getVehicleDossier(vehCD:int, playerId:int = 0):VehicleDossier
+        public static function getVehicleDossier(vehCD:int, accountDBID:int = 0):VehicleDossier
         {
-            return getDossier(playerId, vehCD);
+            return getDossier(accountDBID, vehCD);
         }
 
         public static function setVehicleDossier(vdossier:VehicleDossier):void
@@ -43,7 +43,7 @@ package com.xvm
         private static var _requests:Object = {};
         private static var _cache:Object = {};
 
-        private static function loadDossierInternal(target:Object, callback:Function, battleType:String, playerId:int, vehCD:int):void
+        private static function loadDossierInternal(target:Object, callback:Function, battleType:String, accountDBID:int, vehCD:int):void
         {
             if (!_initialized)
             {
@@ -51,20 +51,20 @@ package com.xvm
                 Xfw.addCommandListener(XvmCommandsInternal.AS_DOSSIER, dossierLoaded);
             }
 
-            var key:String = playerId + "," + vehCD;
+            var key:String = accountDBID + "," + vehCD;
             //Logger.add("loadDossier: " + key);
             if (_requests[key] == null)
                 _requests[key] = [];
             if (callback != null)
                 _requests[key].push( { target: target, callback: callback } );
-            Xfw.cmd(XvmCommandsInternal.REQUEST_DOSSIER, battleType, playerId, vehCD);
+            Xfw.cmd(XvmCommandsInternal.REQUEST_DOSSIER, battleType, accountDBID, vehCD);
         }
 
-        private static function dossierLoaded(playerId:int, vehCD:int, data:Object):Object
+        private static function dossierLoaded(accountDBID:int, vehCD:int, data:Object):Object
         {
             try
             {
-                var key:String = playerId + "," + vehCD;
+                var key:String = accountDBID + "," + vehCD;
                 //Logger.addObject(data, 3, key);
 
                 var dossier:* = (vehCD == 0)
@@ -75,7 +75,7 @@ package com.xvm
 
                 if (vehCD != 0)
                 {
-                    var adossier:AccountDossier = getAccountDossier(playerId);
+                    var adossier:AccountDossier = getAccountDossier(accountDBID);
                     if (adossier != null)
                     {
                         var vehicle:VehicleDossierCut = adossier.vehicles[vehCD];
@@ -101,14 +101,14 @@ package com.xvm
             return null;
         }
 
-        private static function getDossier(playerId:int, vehCD:int):*
+        private static function getDossier(accountDBID:int, vehCD:int):*
         {
-            return _cache[playerId + "," + vehCD];
+            return _cache[accountDBID + "," + vehCD];
         }
 
         private static function _setVehicleDossier(vdossier:VehicleDossier):*
         {
-            _cache[vdossier.playerId + "," + vdossier.vehCD] = vdossier;
+            _cache[vdossier.accountDBID + "," + vdossier.vehCD] = vdossier;
         }
     }
 }

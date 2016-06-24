@@ -82,7 +82,7 @@ class Xvm(object):
 
     def __init__(self):
         self.xvmServicesInitialized = False
-        self.currentPlayerId = None
+        self.currentAccountDBID = None
 
     # CONFIG
 
@@ -147,8 +147,8 @@ class Xvm(object):
 
     def onStateLogin(self):
         trace('onStateLogin')
-        if self.currentPlayerId is not None:
-            self.currentPlayerId = None
+        if self.currentAccountDBID is not None:
+            self.currentAccountDBID = None
             config.token = config.XvmServicesToken()
 
 
@@ -157,11 +157,11 @@ class Xvm(object):
     def onStateLobby(self):
         trace('onStateLobby')
         try:
-            playerId = getCurrentPlayerId()
-            if playerId is not None and self.currentPlayerId != playerId:
-                self.currentPlayerId = playerId
-                config.token = config.XvmServicesToken({'playerId':playerId})
-                config.token.saveLastPlayerId()
+            accountDBID = getCurrentAccountDBID()
+            if accountDBID is not None and self.currentAccountDBID != accountDBID:
+                self.currentAccountDBID = accountDBID
+                config.token = config.XvmServicesToken({'accountDBID':accountDBID})
+                config.token.saveLastAccountDBID()
                 self.xvmServicesInitialized = False
                 self.initializeXvmServices()
 
@@ -280,6 +280,9 @@ class Xvm(object):
             if cmd == XVM_COMMAND.GET_MAP_SIZE:
                 return (utils.getMapSize(), True)
 
+            if cmd == XVM_COMMAND.GET_CLAN_ICON:
+                return (stats.getClanIcon(args[0]), True)
+
             if cmd == XVM_COMMAND.GET_MY_VEHCD:
                 return (getVehCD(BigWorld.player().playerVehicleID), True)
 
@@ -313,8 +316,8 @@ class Xvm(object):
         if self.xvmServicesInitialized:
             return
 
-        playerId = utils.getPlayerId()
-        if playerId is None and not isReplay():
+        accountDBID = utils.getAccountDBID()
+        if accountDBID is None and not isReplay():
             return
 
         self.xvmServicesInitialized = True
@@ -389,9 +392,9 @@ class Xvm(object):
                         if vData['team'] == player_team:
                             players.append(vData['accountDBID'])
                     if xmqp.XMQP_DEVELOPMENT:
-                        currentPlayerId = utils.getPlayerId()
-                        if currentPlayerId not in players:
-                            players.append(currentPlayerId)
+                        accountDBID = utils.getAccountDBID()
+                        if accountDBID not in players:
+                            players.append(accountDBID)
                     xmqp.start(players)
 
     def xmqp_stop(self):

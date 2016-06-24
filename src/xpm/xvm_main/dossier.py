@@ -51,35 +51,35 @@ class _Dossier(object):
         self.__dataReceiver = None
 
     def requestDossier(self, args):
-        (self._battlesType, playerId, vehCD) = args
-        if vehCD == 0 or self.__isVehicleDossierCached(playerId, vehCD):
-            self.__requestedDataReceived(playerId, vehCD)
+        (self._battlesType, accountDBID, vehCD) = args
+        if vehCD == 0 or self.__isVehicleDossierCached(accountDBID, vehCD):
+            self.__requestedDataReceived(accountDBID, vehCD)
         else:
-            self.__dataReceiver.invoke(playerId, vehCD)
+            self.__dataReceiver.invoke(accountDBID, vehCD)
 
-    def __requestedDataReceived(self, playerId, vehCD):
+    def __requestedDataReceived(self, accountDBID, vehCD):
         # respond
-        res = self.getDossier((self._battlesType, playerId, vehCD))
+        res = self.getDossier((self._battlesType, accountDBID, vehCD))
         #log(res)
-        as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, playerId, vehCD, res)
+        as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, accountDBID, vehCD, res)
 
 
     def getDossier(self, args):
         #log(str(args))
 
-        (self._battlesType, self.playerId, self.vehCD) = args
+        (self._battlesType, self.accountDBID, self.vehCD) = args
 
-        if self.playerId == 0:
-            self.playerId = None
+        if self.accountDBID == 0:
+            self.accountDBID = None
 
         if self.vehCD == 0:
-            dossier = g_itemsCache.items.getAccountDossier(self.playerId)
+            dossier = g_itemsCache.items.getAccountDossier(self.accountDBID)
             res = self.__prepareAccountResult(dossier)
         else:
             vehCD = int(self.vehCD)
-            if not self.__isVehicleDossierCached(self.playerId, vehCD):
+            if not self.__isVehicleDossierCached(self.accountDBID, vehCD):
                 return None
-            dossier = g_itemsCache.items.getVehicleDossier(vehCD, self.playerId)
+            dossier = g_itemsCache.items.getVehicleDossier(vehCD, self.accountDBID)
             xpVehs = g_itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehCD, 0)
             freeXP = g_itemsCache.items.stats.actualFreeXP
@@ -117,12 +117,12 @@ class _Dossier(object):
     # PRIVATE
 
     # check vehicle dossier already loaded and cached
-    def __isVehicleDossierCached(self, playerId, vehCD):
-        if playerId is None or playerId == 0:
+    def __isVehicleDossierCached(self, accountDBID, vehCD):
+        if accountDBID is None or accountDBID == 0:
             return True
 
         container = g_itemsCache.items._ItemsRequester__itemsCache[GUI_ITEM_TYPE.VEHICLE_DOSSIER]
-        dossier = container.get((playerId, vehCD))
+        dossier = container.get((accountDBID, vehCD))
         return dossier is not None
 
     def __getStatsBlock(self, dossier):
@@ -156,7 +156,7 @@ class _Dossier(object):
         stats = self.__getStatsBlock(dossier)
         glob = dossier.getGlobalStats()
         return {
-            'playerId': 0 if self.playerId is None else int(self.playerId),
+            'accountDBID': 0 if self.accountDBID is None else int(self.accountDBID),
 
             'battles': stats.getBattlesCount(),
             'wins': stats.getWinsCount(),

@@ -8,6 +8,8 @@ package com.xvm.types.stat
 
     public dynamic class StatData
     {
+        public var vehicleID:Number = NaN;
+
         // received
         public var _id:Number = NaN;           // player account id (long int)
         public var st:String = null;           // status ("ok")

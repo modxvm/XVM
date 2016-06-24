@@ -22,6 +22,8 @@
       "statisticFormEnemy" => "fullStatsRightAtlas"
       "vehicleMarkerAlly" => "vehicleMarkerLeftAtlas"
       "vehicleMarkerEnemy" => "vehicleMarkerRightAtlas"
+  * добавлен макрос {{clanicon}} со значением пути эмблемы клана
+  * удалена опция "clanIcon" в секциях "battleLoading", "statisticForm", "playersPanel" и в маркерах
 
 XVM-6.3.2:
   * обновление для микропатча WoT 0.9.15.0.1

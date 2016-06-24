@@ -42,9 +42,9 @@ package xvm.profile_ui
             var playerName:String = WGUtils.GetPlayerName((profileWindow.window as Window).title);
 
             // get player id from the view name.
-            var playerId:int = parseInt(profileWindow.as_name.replace("profileWindow_", ""));
+            var accountDBID:int = parseInt(profileWindow.as_name.replace("profileWindow_", ""));
 
-            technique = new TechniqueWindow(this, playerName, playerId)
+            technique = new TechniqueWindow(this, playerName, accountDBID)
             addChild(technique);
         }
 

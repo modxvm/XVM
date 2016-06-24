@@ -106,7 +106,7 @@ package xvm.profile_ui
                     var isStat:Boolean = false;
                     if (data.xvm_xte_flag & 0x01 != 0)
                     {
-                        var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.playerId);
+                        var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.accountDBID);
                         if (vdossier != null)
                         {
                             xte = data.xvm_xte = vdossier.xte;

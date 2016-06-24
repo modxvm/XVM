@@ -19,9 +19,9 @@ package com.xvm
             return _instance._Format(pname, format, options);
         }
 
-        public static function FormatByPlayerId(playerId:Number, format:*, options:IVOMacrosOptions = null):*
+        public static function FormatByAccountDBID(accountDBID:Number, format:*, options:IVOMacrosOptions = null):*
         {
-            return _instance._Format(_instance.m_playerId_to_pname[playerId], format, options);
+            return _instance._Format(_instance.m_accountDBID_to_pname[accountDBID], format, options);
         }
 
         public static function FormatNumber(pname:String, format:*, options:IVOMacrosOptions, nullValue:Number = NaN, emptyValue:Number = NaN, isColorValue:Boolean = false):Number
@@ -93,9 +93,9 @@ package com.xvm
             callback(_instance.m_globals);
         }
 
-        public static function RegisterMinimalMacrosData(accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
+        public static function RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
         {
-            _instance._RegisterMinimalMacrosData(accountDBID, playerFullName, vehCD, isPlayerTeam);
+            _instance._RegisterMinimalMacrosData(vehicleID, accountDBID, playerFullName, vehCD, isPlayerTeam);
         }
 
         public static function RegisterPlayersData(callback:Function):void
@@ -146,7 +146,7 @@ package com.xvm
         private var m_macros_cache:Object = { };
         private var m_macros_cache_global:Object = { };
         private var m_dict:Object = { }; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
-        private var m_playerId_to_pname:Object = { };
+        private var m_accountDBID_to_pname:Object = { };
         private var m_globals:Object = { };
         private var m_contacts:Object = { };
 
@@ -730,17 +730,14 @@ package com.xvm
             if (format == "" || format.indexOf("{{") == -1)
                 return true;
 
-            if (pname != null && pname != "")
-            {
-                var player_cache:Object = m_macros_cache[pname];
-                if (player_cache == null)
-                    return false;
-                return player_cache[format] !== undefined;
-            }
-            else
-            {
-                return m_macros_cache_global[format] !== undefined;
-            }
+            if (pname == null || pname == "")
+                return true;
+
+            var player_cache:Object = m_macros_cache[pname];
+            if (player_cache == null)
+                return false;
+
+            return player_cache[format] !== undefined;
         }
 
         // Macros registration
@@ -810,12 +807,12 @@ package com.xvm
 
         /**
          * Register minimal macros values for player
-         * @param playerId player id
+         * @param accountDBID player id
          * @param playerFullName full player name with extra tags (clan, region, etc)
          * @param vehCD vehicle compactDescr
          * @param isPlayerTeam is player team
          */
-        private function _RegisterMinimalMacrosData(accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
+        private function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
         {
             if (playerFullName == null || playerFullName == "")
                 throw new Error("empty name");
@@ -829,7 +826,7 @@ package com.xvm
             if (pdata.hasOwnProperty("name"))
                 return; // already registered
 
-            m_playerId_to_pname[accountDBID] = pname;
+            m_accountDBID_to_pname[accountDBID] = pname;
 
             var name:String = getCustomPlayerName(pname, accountDBID);
             var clanIdx:int = name.indexOf("[");
@@ -851,6 +848,8 @@ package com.xvm
             pdata["clannb"] = clanWithoutBrackets;
             // {{ally}}
             pdata["ally"] = isPlayerTeam ? 'ally' : null;
+            // {{clanicon}}
+            pdata["clanicon"] = Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
 
             // Next macro unique for vehicle
             var vdata:VOVehicleData = VehicleInfo.get(vehCD);
@@ -920,7 +919,7 @@ package com.xvm
             delete m_macros_cache[pname];
             delete pdata["name"];
             m_contacts[String(stat._id)] = stat.xvm_contact_data;
-            RegisterMinimalMacrosData(stat._id, stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id, stat.team == XfwConst.TEAM_ALLY);
+            RegisterMinimalMacrosData(stat.vehicleID, stat._id, stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id, stat.team == XfwConst.TEAM_ALLY);
 
             if (Config.networkServicesSettings.servicesActive != true)
                 return;

@@ -62,34 +62,6 @@
     // X offset for enemies vehicle icons
     // Смещение по оси X иконки танка противников
     "vehicleIconOffsetXRight": 0,
-    // Display options for Team/Clan logos.
-    // Параметры отображения иконки игрока/клана.
-    "clanIcon": {
-      // false - Disable Team/Clan logos in Battle Loading Screen.
-      // false - не отображать иконки игрока/клана в окне загрузки боя.
-      "show": true,
-      // Position on the X axis, relative to the vehicle icon.
-      // Положение по оси X относительно иконки танка.
-      "x": 0,
-      // Position on the Y axis, relative to the vehicle icon.
-      // Положение по оси Y относительно иконки танка.
-      "y": 6,
-      // Position on the X axis for right side (positive values run to the *inside* of the table).
-      // Положение по оси X для правых ушей (положительные значения поместят иконку *внутрь* панели).
-      "xr": 0,
-      // Position on the Y axis for right side.
-      // Положение по оси Y для правых ушей.
-      "yr": 6,
-      // Width of the Team/Clan logo.
-      // Ширина иконки игрока/клана.
-      "w": 16,
-      // Height of the Team/Clan logo.
-      // Высота иконки игрока/клана.
-      "h": 16,
-      // Transparency of the Team/Clan logo.
-      // Прозрачность иконки игрока/клана.
-      "alpha": 90
-    },
     // false - disable highlight of icons during battle start depends on ready state.
     // false - отключить затемнение иконки не загрузившегося игрока.
     "darkenNotReadyIcon": true,
@@ -104,6 +76,17 @@
     "formatLeftVehicle": "{{vehicle}}<font face='mono' size='{{xvm-stat?13|0}}'> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font></font>",
     // Display format for the right panel (macros allowed, see macros.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
-    "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}"
+    "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}",
+    // TODO
+    // Extra fields. Fields are placed one above the other.
+    // Дополнительные поля. Поля располагаются друг над другом.
+    // Set of formats for left panel (extended format supported, see above)
+    // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
+    "extraFieldsLeft": [
+    ],
+    // Set of formats for right panel (extended format supported, see above)
+    // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
+    "extraFieldsRight": [
+    ]
   }
 }

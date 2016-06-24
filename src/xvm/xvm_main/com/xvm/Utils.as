@@ -112,20 +112,24 @@ package com.xvm
             return v;
         }
 
-        // Fix <img src='xvm://...'> to <img src='img://XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
-        // Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
+        // Fix <img src='xvm://*'> to <img src='img://XVM_IMG_RES_ROOT/*'> (res_mods/mods/shared_resources/xvm/res)
+        // Fix <img src='cfg://*'> to <img src='img://XVM_IMG_CFG_ROOT/*'> (res_mods/configs/xvm)
         public static function fixImgTag(str:String):String
         {
+            if (str == null || str == "")
+                return null;
             str = str.split("xvm://").join("img://" + Defines.XVM_IMG_RES_ROOT);
             str = str.split("cfg://").join("img://" + Defines.XVM_IMG_CFG_ROOT);
             return str;
         }
 
-        // Fix 'img://gui/abc' to '../abc'> (res_mods/x.x.x)
-        // Fix 'xvm://...' to '../../XVM_IMG_RES_ROOT/abc'> (res_mods/mods/shared_resources/xvm/res)
-        // Fix 'cfg://...' to '../../XVM_IMG_CFG_ROOT/abc'> (res_mods/configs/xvm)
+        // Fix 'img://gui/*' to '../*'> (res_mods/x.x.x)
+        // Fix 'xvm://*' to '../../XVM_IMG_RES_ROOT/*'> (res_mods/mods/shared_resources/xvm/res)
+        // Fix 'cfg://*' to '../../XVM_IMG_CFG_ROOT/*'> (res_mods/configs/xvm)
         public static function fixImgTagSrc(str:String):String
         {
+            if (str == null || str == "")
+                return null;
             if (StringUtils.startsWith(str.toLowerCase(), "img://gui/"))
                 return "../" + str.slice(10);
             return "../../" + Utils.fixImgTag(str).split("img://").join("");

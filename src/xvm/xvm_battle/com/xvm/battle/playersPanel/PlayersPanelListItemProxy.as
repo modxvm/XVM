@@ -27,6 +27,9 @@ package com.xvm.battle.playersPanel
 
     public class PlayersPanelListItemProxy extends UIComponent
     {
+        private static const STD_VEHICLE_ICON_WIDTH:Number = 80;
+        private static const STD_VEHICLE_LEVEL_MIRRORING_SHIFT:Number = 35;
+
         public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
         public static var INVALIDATE_USER_PROPS:String = "USER_PROPS";
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
@@ -66,6 +69,7 @@ package com.xvm.battle.playersPanel
             this.isLeftPanel = isLeftPanel;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.addEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             onConfigLoaded(null);
 
             DEFAULT_BG_ALPHA = ui.bg.alpha;
@@ -79,6 +83,7 @@ package com.xvm.battle.playersPanel
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.removeEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             disposeExtraFields();
             _userProps = null;
             super.onDispose();
@@ -215,14 +220,22 @@ package com.xvm.battle.playersPanel
             if (!isLeftPanel && !Macros.GlobalBoolean(Config.config.battle.mirroredVehicleIcons))
             {
                 ui.vehicleIcon.scaleX = -1;
-                ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - 80;
-                ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X - 35;
+                ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - STD_VEHICLE_ICON_WIDTH;
+                ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X - STD_VEHICLE_LEVEL_MIRRORING_SHIFT;
             }
         }
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
             if (_userProps != null && e.playerName == _userProps.userName)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
+        }
+
+        private function onClanIconLoaded(vehicleID:Number, playerName:String):void
+        {
+            if (_userProps != null && playerName == _userProps.userName)
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }
@@ -410,19 +423,19 @@ package com.xvm.battle.playersPanel
                     extraFieldsHidden.update(playerState);
                 case PLAYERS_PANEL_STATE.SHORT:
                     extraFieldsShort.visible = true;
-                    extraFieldsShort.update(playerState);
+                    extraFieldsShort.update(playerState, ui.vehicleIcon.x + STD_VEHICLE_ICON_WIDTH);
                     break;
                 case PLAYERS_PANEL_STATE.MEDIUM:
                     extraFieldsMedium.visible = true;
-                    extraFieldsMedium.update(playerState);
+                    extraFieldsMedium.update(playerState, ui.vehicleIcon.x + STD_VEHICLE_ICON_WIDTH);
                     break;
                 case PLAYERS_PANEL_STATE.LONG:
                     extraFieldsLong.visible = true;
-                    extraFieldsLong.update(playerState);
+                    extraFieldsLong.update(playerState, ui.vehicleIcon.x + STD_VEHICLE_ICON_WIDTH);
                     break;
                 case PLAYERS_PANEL_STATE.FULL:
                     extraFieldsFull.visible = true;
-                    extraFieldsFull.update(playerState);
+                    extraFieldsFull.update(playerState, ui.vehicleIcon.x + STD_VEHICLE_ICON_WIDTH + isLeftPanel ? 0 : STD_VEHICLE_ICON_WIDTH);
                     break;
             }
         }

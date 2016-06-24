@@ -2,6 +2,7 @@
 {
     public interface IVOMacrosOptions
     {
+        function get vehicleID():Number;
         function get playerName():String;
         function get isAlive():Boolean;
         function get isDead():Boolean;

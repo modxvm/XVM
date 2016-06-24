@@ -14,7 +14,7 @@ package com.xvm.types.dossier
             super(data);
         }
 
-        public var playerId:int;
+        public var accountDBID:int;
 
         // Total
         public var battles:int;

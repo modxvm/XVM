@@ -41,15 +41,14 @@
             value = Macros.FormatNumber(options.playerName, cfg.x, options, 0, 0);
             if (Macros.IsCached(options.playerName, cfg.x))
             {
-                x = value;
-                if (!cfg.bindToIcon)
-                    cfg.x = null;
+                _xValue = value;
+                cfg.x = null;
             }
 
             value = Macros.FormatNumber(options.playerName, cfg.y, options, 0, 0);
             if (Macros.IsCached(options.playerName, cfg.y))
             {
-                y = value;
+                _yValue = value;
                 cfg.y = null;
             }
 
@@ -57,7 +56,7 @@
             if (Macros.IsCached(options.playerName, cfg.width))
             {
                 if (!isNaN(value))
-                    width = value;
+                    _widthValue = value;
                 cfg.width = null;
             }
 
@@ -65,7 +64,7 @@
             if (Macros.IsCached(options.playerName, cfg.height))
             {
                 if (!isNaN(value))
-                    height = value;
+                    _heightValue = value;
                 cfg.height = null;
             }
 
@@ -97,7 +96,7 @@
                 cfg.scaleY = null;
             }
 
-            value = Macros.Format(options.playerName, cfg.src, options);
+            value = Macros.Format(options.playerName, cfg.src, options) || "";
             if (Macros.IsCached(options.playerName, cfg.src))
             {
                 cfg.src = value;
@@ -110,7 +109,7 @@
             }
         }
 
-        public function update(options:IVOMacrosOptions):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = NaN):void
         {
             if (!_initialized)
             {
@@ -124,13 +123,6 @@
             if (cfg.x != null)
             {
                 value = Macros.FormatNumber(options.playerName, cfg.x, options, 0, 0);
-                if (cfg.bindToIcon)
-                {
-                    // TODO
-                    //value += isLeftPanel
-                    //    ? panel.m_list._x + panel.m_list.width
-                    //    : App.appWidth - panel._x - panel.m_list._x + panel.m_list.width;
-                }
                 if (_xValue != value)
                 {
                     _xValue = value;
@@ -198,9 +190,22 @@
             }
             if (cfg.src != null)
             {
-                value = Utils.fixImgTagSrc(Macros.Format(options.playerName, cfg.src, options));
+                if (Macros.IsCached(options.playerName, cfg.src))
+                {
+                    value = cfg.src;
+                }
+                else
+                {
+                    value = Macros.Format(options.playerName, cfg.src, options) || "";
+                    if (Macros.IsCached(options.playerName, cfg.src))
+                    {
+                        cfg.src = value;
+                    }
+                }
+                value = Utils.fixImgTagSrc(value);
                 if (source != value)
                 {
+                    //Logger.add(source + " => " + value);
                     source = value;
                 }
 
@@ -215,53 +220,37 @@
                     }
                 }
             }
+            if (cfg.bindToIcon && !isNaN(bindToIconOffset))
+            {
+                value = isLeftPanel ? (_xValue + bindToIconOffset) : (_xValue + bindToIconOffset);
+                if (x != value)
+                {
+                    needAlign = true;
+                }
+                else
+                {
+                    bindToIconOffset = 0;
+                }
+            }
+            else
+            {
+                bindToIconOffset = 0;
+            }
 
             if (needAlign)
             {
-                alignField();
+                x = isLeftPanel ? (_xValue + bindToIconOffset) : (_xValue + bindToIconOffset);
+                y = _yValue;
+                if (!isNaN(_widthValue))
+                    width = _widthValue;
+                if (!isNaN(_heightValue))
+                    height = _heightValue;
+                if (cfg.align == TextFormatAlign.RIGHT)
+                    x -= width;
+                else if (cfg.align == TextFormatAlign.CENTER)
+                    x -= width / 2;
+                Logger.add(options.playerName + " " + x + " " + y + " " + width + " " + height + " " + cfg.bindToIcon + " " + bindToIconOffset + " " + source + "<=" + cfg.src);
             }
         }
-
-        public function alignField():void
-        {
-            x = _xValue;
-            y = _yValue;
-            if (!isNaN(_widthValue))
-                width = _widthValue;
-            if (!isNaN(_heightValue))
-                height = _heightValue
-            /*var img:UILoaderAlt = field as UILoaderAlt;
-
-            var data:Object = img["data"];
-            //Logger.addObject(data);
-
-            var x:Number = data.x;
-            var y:Number = data.y;
-            var w:Number = data.w;
-            var h:Number = data.h;
-
-            if (data.align == "right")
-                x -= w;
-            else if (data.align == "center")
-                x -= w / 2;
-
-            //Logger.add("x:" + x + " y:" + y + " w:" + w + " h:" + h + " align:" + data.align);
-
-            if (img != null)
-            {
-                if (img.x != x)
-                    img.x = x;
-                if (img.y != y)
-                    img.y = y;
-                if (img.width != w || img.height != h)
-                {
-                    //Logger.add(img.width + "->" + w + " " + x + " " + y);
-                    img.width = w;
-                    img.height = h;
-                }
-            }*/
-        }
-
-
     }
 }

@@ -15,15 +15,15 @@
 // AS3:DONE import net.wargaming.ingame.*;
 // AS3:DONE import wot.Minimap.*;
 // AS3:DONE import wot.PlayersPanel.*;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE class wot.PlayersPanel.PlayerListItemRenderer
 // AS3:DONE {
 // AS3:DONE     /////////////////////////////////////////////////////////////////
 // AS3:DONE     // wrapped methods
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     public var wrapper:net.wargaming.ingame.PlayerListItemRenderer;
 // AS3:DONE     private var base:net.wargaming.ingame.PlayerListItemRenderer;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     public function PlayerListItemRenderer(wrapper:net.wargaming.ingame.PlayerListItemRenderer, base:net.wargaming.ingame.PlayerListItemRenderer)
 // AS3:DONE     {
 // AS3:DONE         this.wrapper = wrapper;
@@ -31,35 +31,35 @@
 // AS3:DONE         wrapper.xvm_worker = this;
 // AS3:DONE         PlayerListItemRendererCtor();
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function getColorTransform()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.getColorTransform.apply(base, arguments);
 // AS3:DONE         return this.getColorTransformImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function setState()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.setState.apply(base, arguments);
 // AS3:DONE         return this.setStateImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function update()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.update.apply(base, arguments);
 // AS3:DONE         return this.updateImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function updateSquadIcons()
 // AS3:DONE     {
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return base.updateSquadIcons.apply(base, arguments);
 // AS3:DONE         return this.updateSquadIconsImpl.apply(this, arguments);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     // wrapped methods
 // AS3:DONE     /////////////////////////////////////////////////////////////////
 
@@ -89,18 +89,18 @@
 // AS3:DONE     public function PlayerListItemRendererCtor()
 // AS3:DONE     {
 // AS3:DONE         Utils.TraceXvmModule("PlayersPanel");
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (wrapper._name == "renderer99")
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         extraFields = null;
 // AS3:DONE         extraFieldsConfigured = false;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, onConfigLoaded);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     // IMPL
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function getColorTransformImpl(schemeName:String, force:Boolean)
 // AS3:DONE     {
 // AS3:DONE         if (Config.config.battle.highlightVehicleIcon == false && !force)
@@ -112,25 +112,25 @@
 // AS3:DONE             else if (schemeName == "selected_dead" || schemeName == "squad_dead")
 // AS3:DONE                 schemeName = "normal_dead";
 // AS3:DONE         }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         return base.getColorTransform(schemeName);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function setStateImpl()
 // AS3:DONE     {
 // AS3:DONE         var savedValue = wrapper.data.isPostmortemView;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (Macros.FormatGlobalBooleanValue(cfg.removeSelectedBackground))
 // AS3:DONE             wrapper.data.isPostmortemView = false;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         base.setState();
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (wrapper.vehicleLevel != null)
 // AS3:DONE             wrapper.vehicleLevel._alpha *= panel.state == "none" ? 0 : cfg[panel.state].vehicleLevelAlpha / 100.0;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         wrapper.data.isPostmortemView = savedValue;
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     function updateImpl()
 // AS3:DONE     {
 // AS3:DONE         try
@@ -138,7 +138,7 @@
 // AS3:DONE             var data:Object = wrapper.data;
 // AS3:DONE             //Logger.add("update: " + (data ? data.userName : "(null)"))
 // AS3:DONE             //Logger.addObject(data);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             var saved_icon:String;
 // AS3:DONE             if (data == null)
 // AS3:DONE             {
@@ -157,9 +157,9 @@
 // AS3:DONE                 m_clan = data.clanAbbrev;
 // AS3:DONE                 m_vehicleState = data.vehicleState;
 // AS3:DONE                 m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE                 saved_icon = data.icon;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE                 // Alternative icon set
 // AS3:DONE                 if (!m_iconset)
 // AS3:DONE                     m_iconset = new IconLoader(this, completeLoad);
@@ -170,35 +170,35 @@
 // AS3:DONE                         : Config.config.iconset.playersPanelEnemy)),
 // AS3:DONE                     saved_icon ]);
 // AS3:DONE                 data.icon = m_iconset.currentIcon;
-
-                // Player/clan icons
-                attachClanIconToPlayer();
-
-                // Extra fields
-                if (Stat.s_loaded)
-                {
-                    if (!extraFieldsConfigured)
-                        configureExtraFields();
-                    updateExtraFields();
-                }
-            }
-
+// AS3:DONE 
+// AS3:DONE                 // Player/clan icons
+// AS3:DONE                 attachClanIconToPlayer();
+// AS3:DONE 
+// AS3:DONE                 // Extra fields
+// AS3:DONE                 if (Stat.s_loaded)
+// AS3:DONE                 {
+// AS3:DONE                     if (!extraFieldsConfigured)
+// AS3:DONE                         configureExtraFields();
+// AS3:DONE                     updateExtraFields();
+// AS3:DONE                 }
+// AS3:DONE             }
+// AS3:DONE 
             if (wrapper.squadIcon != null)
                 wrapper.squadIcon._visible = (panel.state != "none" && !cfg[panel.state].removeSquadIcon);
-
-            base.update();
-
+// AS3:DONE 
+// AS3:DONE             base.update();
+// AS3:DONE 
 // AS3:DONE             wrapper.iconLoader.content._alpha = cfg.iconAlpha;
-
-            if (data != null)
-                data.icon = saved_icon;
-        }
-        catch (ex:Error)
-        {
-            Logger.addObject(ex.toString());
-        }
-    }
-
+// AS3:DONE 
+// AS3:DONE             if (data != null)
+// AS3:DONE                 data.icon = saved_icon;
+// AS3:DONE         }
+// AS3:DONE         catch (ex:Error)
+// AS3:DONE         {
+// AS3:DONE             Logger.addObject(ex.toString());
+// AS3:DONE         }
+// AS3:DONE     }
+// AS3:DONE 
     private function updateSquadIconsImpl(squadPositionX, dynamicIcoPotionX)
     {
         //Logger.add(squadPositionX + " " + dynamicIcoPotionX);
@@ -211,24 +211,24 @@
         wrapper.inviteDisabled._x = dynamicIcoPotionX;
     }
 
-    // PRIVATE
-
-    // properties
-
-    private var _team:Number = 0;
-
-    private function get team():Number
-    {
-        if (_team == 0)
-            _team = wrapper._parent._parent._itemRenderer == "LeftItemRendererIcon" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
-        return _team;
-    }
-
+// AS3:DONE     // PRIVATE
+// AS3:DONE 
+// AS3:DONE     // properties
+// AS3:DONE 
+// AS3:DONE     private var _team:Number = 0;
+// AS3:DONE 
+// AS3:DONE     private function get team():Number
+// AS3:DONE     {
+// AS3:DONE         if (_team == 0)
+// AS3:DONE             _team = wrapper._parent._parent._itemRenderer == "LeftItemRendererIcon" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+// AS3:DONE         return _team;
+// AS3:DONE     }
+// AS3:DONE 
 // AS3:DONE     private function get isLeftPanel():Boolean
 // AS3:DONE     {
 // AS3:DONE         return team == Defines.TEAM_ALLY;
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private var _panel:net.wargaming.ingame.PlayersPanel = null;
 // AS3:DONE     private function get panel():net.wargaming.ingame.PlayersPanel
 // AS3:DONE     {
@@ -254,14 +254,14 @@
 // AS3:DONE     {
 // AS3:DONE         if (_initialized)
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         _initialized = true;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (!Utils.isArenaGuiTypeWithPlayerPanels())
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, onStatLoaded);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (isLeftPanel)
 // AS3:DONE         {
 // AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
@@ -273,17 +273,17 @@
 // AS3:DONE             GlobalEventDispatcher.addEventListener(Events.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
 // AS3:DONE         }
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function onConfigLoaded()
 // AS3:DONE     {
 // AS3:DONE         //Logger.add(Config.arenaGuiType);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         init();
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         try
 // AS3:DONE         {
 // AS3:DONE             this.cfg = Config.config.playersPanel;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             //Logger.add("onConfigLoaded: " + m_name);
 // AS3:DONE             if (extraFields == null)
 // AS3:DONE             {
@@ -295,7 +295,7 @@
 // AS3:DONE                     large:   createExtraFieldsHolder("large")
 // AS3:DONE                 };
 // AS3:DONE             }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             extraFieldsConfigured = false;
 // AS3:DONE             if (m_name)
 // AS3:DONE                 configureExtraFields();
@@ -305,23 +305,23 @@
 // AS3:DONE             Logger.add(ex.toString());
 // AS3:DONE         }
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function onStatLoaded()
 // AS3:DONE     {
 // AS3:DONE         update();
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function completeLoad()
 // AS3:DONE     {
 // AS3:DONE         if (m_iconLoaded)
 // AS3:DONE             return;
 // AS3:DONE         m_iconLoaded = true;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         mirrorEnemyIcons();
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         wrapper.iconLoader._visible = true;
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function mirrorEnemyIcons():Void
 // AS3:DONE     {
 // AS3:DONE         if (!Config.config.battle.mirroredVehicleIcons && !isLeftPanel)
@@ -329,51 +329,51 @@
 // AS3:DONE             wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
 // AS3:DONE             wrapper.iconLoader._x -= 80;
 // AS3:DONE             wrapper.vehicleLevel._x = wrapper.iconLoader._x + 15;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             updateExtraFields();
 // AS3:DONE         }
 // AS3:DONE     }
-
-    private function attachClanIconToPlayer():Void
-    {
-        var clanIconCfg:Object = cfg.clanIcon;
-        if (!clanIconCfg.show)
-            return;
-
-        var statData:Object = Stat.s_data[m_name];
-        if (statData == null)
-            return;
-        var x_emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.x_emblem;
-
-        if (m_clanIcon == null)
-        {
-            var x = (!m_iconLoaded || Config.config.battle.mirroredVehicleIcons || isLeftPanel)
-                ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
-            m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", clanIconCfg, x, wrapper.iconLoader._y, team);
-        }
-        PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan, x_emblem);
-        m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
-    }
-
-// AS3:DONE     // Extra fields
 // AS3:DONE 
+// AS3:DONE     private function attachClanIconToPlayer():Void
+// AS3:DONE     {
+// AS3:DONE         var clanIconCfg:Object = cfg.clanIcon;
+// AS3:DONE         if (!clanIconCfg.show)
+// AS3:DONE             return;
+// AS3:DONE 
+// AS3:DONE         var statData:Object = Stat.s_data[m_name];
+// AS3:DONE         if (statData == null)
+// AS3:DONE             return;
+// AS3:DONE         var x_emblem:String = (statData == null && statData.stat != null) ? null : statData.stat.x_emblem;
+// AS3:DONE 
+// AS3:DONE         if (m_clanIcon == null)
+// AS3:DONE         {
+// AS3:DONE             var x = (!m_iconLoaded || Config.config.battle.mirroredVehicleIcons || isLeftPanel)
+// AS3:DONE                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
+// AS3:DONE             m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", clanIconCfg, x, wrapper.iconLoader._y, team);
+// AS3:DONE         }
+// AS3:DONE         PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan, x_emblem);
+// AS3:DONE         m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     // Extra fields
+// AS3:DONE
 // AS3:DONE     private function createFieldsHolderForNoneState():MovieClip
 // AS3:DONE     {
 // AS3:DONE         extraFieldsLayout = cfg.none.layout;
 // AS3:DONE         var cfg_xf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         var mc:MovieClip = _internal_createExtraFieldsHolder(extraPanelsHolder, "none", cfg_xf.formats, cfg_xf);
 // AS3:DONE         mc._visible = false;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         return mc;
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function createExtraFieldsHolder(state:String):MovieClip
 // AS3:DONE     {
 // AS3:DONE         var formats:Array = cfg[state]["extraFields" + (isLeftPanel ? "Left" : "Right")];
 // AS3:DONE         return _internal_createExtraFieldsHolder(wrapper, state, formats, null);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function _internal_createExtraFieldsHolder(owner:MovieClip, state:String, formats:Array, cfg:Object):MovieClip
 // AS3:DONE     {
 // AS3:DONE         var idx = parseInt(wrapper._name.split("renderer").join(""));
@@ -384,31 +384,31 @@
 // AS3:DONE         mc.cfg = cfg;
 // AS3:DONE         return mc;
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function configureExtraFields()
 // AS3:DONE     {
 // AS3:DONE         try
 // AS3:DONE         {
 // AS3:DONE             //Logger.add("configureExtraFields: " + m_name);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             if (extraFields == null)
 // AS3:DONE             {
 // AS3:DONE                 Logger.add("WARNING: extraFields == null");
 // AS3:DONE                 return;
 // AS3:DONE             }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             if (extraFieldsConfigured)
 // AS3:DONE                 return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             extraFieldsConfigured = true;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             // remove old text fields
 // AS3:DONE             Utils.removeChildren(extraFields.none);
 // AS3:DONE             Utils.removeChildren(extraFields.short);
 // AS3:DONE             Utils.removeChildren(extraFields.medium);
 // AS3:DONE             Utils.removeChildren(extraFields.medium2);
 // AS3:DONE             Utils.removeChildren(extraFields.large);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
 // AS3:DONE             _internal_createExtraFields("none", cf.width, cf.height);
 // AS3:DONE             _internal_createExtraFields("short", TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT);
@@ -422,37 +422,37 @@
 // AS3:DONE             return null;
 // AS3:DONE         }
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function _internal_createExtraFields(state:String, width:Number, height:Number)
 // AS3:DONE     {
 // AS3:DONE         //Logger.add("_internal_createExtraFields: " + state);
 // AS3:DONE         var mc:MovieClip = extraFields[state];
 // AS3:DONE         if (mc == null)
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         var formats:Array = mc.orig_formats;
 // AS3:DONE         if (formats == null || formats.length <= 0)
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         mc.formats = [];
 // AS3:DONE         var n:Number = 0;
 // AS3:DONE         var len:Number = formats.length;
 // AS3:DONE         for (var i:Number = 0; i < len; ++i)
 // AS3:DONE         {
 // AS3:DONE             var format = formats[i];
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             if (format == null)
 // AS3:DONE                 continue;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             if (typeof format == "string")
 // AS3:DONE             {
 // AS3:DONE                 format = { format: format };
 // AS3:DONE                 formats[i] = format;
 // AS3:DONE             }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             if (typeof format != "object")
 // AS3:DONE                 continue;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             var isEmpty:Boolean = true;
 // AS3:DONE             for (var nm in format)
 // AS3:DONE             {
@@ -461,20 +461,20 @@
 // AS3:DONE             }
 // AS3:DONE             if (isEmpty)
 // AS3:DONE                 continue;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             if (format.enabled != null)
 // AS3:DONE             {
 // AS3:DONE                 var enabled:Boolean = Macros.FormatGlobalBooleanValue(format.enabled);
 // AS3:DONE                 if (enabled == false)
 // AS3:DONE                     continue;
 // AS3:DONE             }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             // make a copy of format, because it will be changed
 // AS3:DONE             var fmt:Object = { };
 // AS3:DONE             for (var nm in format)
 // AS3:DONE                 fmt[nm] = format[nm];
 // AS3:DONE             mc.formats.push(fmt);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             if (fmt.src != null)
 // AS3:DONE             {
 // AS3:DONE                 createExtraMovieClip(mc, fmt, n);
@@ -485,11 +485,11 @@
 // AS3:DONE             }
 // AS3:DONE             n++;
 // AS3:DONE         }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (state == "none")
 // AS3:DONE             _internal_createMenuForNoneState(mc);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function _internal_createMenuForNoneState(mc:MovieClip)
 // AS3:DONE     {
 // AS3:DONE         var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
@@ -505,7 +505,7 @@
 // AS3:DONE         menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
 // AS3:DONE         menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function createExtraMovieClip(mc:MovieClip, format:Object, n:Number)
 // AS3:DONE     {
 // AS3:DONE         //Logger.addObject(format);
@@ -513,7 +513,7 @@
 // AS3:DONE         var y:Number = Macros.FormatNumber(m_name, format, "y", null, 0, 0);
 // AS3:DONE         var w:Number = Macros.FormatNumber(m_name, format, "w", null, NaN, 0);
 // AS3:DONE         var h:Number = Macros.FormatNumber(m_name, format, "h", null, NaN, 0);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
 // AS3:DONE         img["data"] = {
 // AS3:DONE             x: x, y: y, w: w, h: h,
@@ -523,7 +523,7 @@
 // AS3:DONE             scaleY: Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100
 // AS3:DONE         };
 // AS3:DONE         //Logger.addObject(img["data"]);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         img._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
 // AS3:DONE         img._rotation = Macros.FormatNumber(m_name, format, "rotation", null, 0, 0);
 // AS3:DONE         img.autoSize = true;
@@ -531,19 +531,19 @@
 // AS3:DONE         var me = this;
 // AS3:DONE         img.visible = false;
 // AS3:DONE         img.onLoadInit = function() { me.onExtraMovieClipLoadInit(img); }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         cleanupFormat(img, format);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         return img;
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function onExtraMovieClipLoadInit(img:UILoaderAlt)
 // AS3:DONE     {
 // AS3:DONE         //Logger.add("onExtraMovieClipLoadInit: " + m_name + " " + img.source);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         var data = img["data"];
 // AS3:DONE         //Logger.addObject(data, 2, m_name);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         img.visible = false;
 // AS3:DONE         img._x = 0;
 // AS3:DONE         img._y = 0;
@@ -552,10 +552,10 @@
 // AS3:DONE         img._xscale = data.scaleX;
 // AS3:DONE         img._yscale = data.scaleY;
 // AS3:DONE         alignField(img);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         _global.setTimeout(function() { img.visible = true; }, 1);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)
 // AS3:DONE     {
 // AS3:DONE         //Logger.addObject(format);
@@ -568,7 +568,7 @@
 // AS3:DONE             x: x, y: y, w: w, h: h,
 // AS3:DONE             align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
 // AS3:DONE         };
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         tf._xscale = Macros.FormatNumber(m_name, format, "scaleX", null, 1, 1) * 100;
 // AS3:DONE         tf._yscale = Macros.FormatNumber(m_name, format, "scaleY", null, 1, 1) * 100;
 // AS3:DONE         tf._alpha = Macros.FormatNumber(m_name, format, "alpha", null, 100, 100);
@@ -581,7 +581,7 @@
 // AS3:DONE         tf.autoSize = "none";
 // AS3:DONE         tf.verticalAlign = format.valign != null ? format.valign : "none";
 // AS3:DONE         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         tf.border = format.borderColor != null;
 // AS3:DONE         tf.borderColor = Macros.FormatNumber(m_name, format, "borderColor", null, 0xCCCCCC, 0xCCCCCC, true);
 // AS3:DONE         tf.background = format.bgColor != null;
@@ -592,7 +592,7 @@
 // AS3:DONE             tf.border = true;
 // AS3:DONE             tf.borderColor = tf.backgroundColor;
 // AS3:DONE         }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (format.shadow && format.shadow.alpha != 0 && format.shadow.strength != 0 && format.shadow.blur != 0)
 // AS3:DONE         {
 // AS3:DONE             var blur = format.shadow.blur != null ? format.shadow.blur : 2;
@@ -607,14 +607,14 @@
 // AS3:DONE                     format.shadow.strength != null ? format.shadow.strength : 1)
 // AS3:DONE             ];
 // AS3:DONE         }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         cleanupFormat(tf, format);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         alignField(tf);
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         return tf;
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     // cleanup formats without macros to remove extra checks
 // AS3:DONE     private function cleanupFormat(field, format:Object)
 // AS3:DONE     {
@@ -634,37 +634,37 @@
 // AS3:DONE             delete format.alpha;
 // AS3:DONE         if (format.rotation != null && (typeof format.rotation != "string" || format.rotation.indexOf("{{") < 0))
 // AS3:DONE             delete format.rotation;
-        if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
-            delete format.borderColor;
-        if (format.bgColor != null && (typeof format.bgColor != "string" || format.bgColor.indexOf("{{") < 0))
-            delete format.bgColor;
-    }
-// AS3:DONE 
+// AS3:DONE         if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
+// AS3:DONE             delete format.borderColor;
+// AS3:DONE         if (format.bgColor != null && (typeof format.bgColor != "string" || format.bgColor.indexOf("{{") < 0))
+// AS3:DONE             delete format.bgColor;
+// AS3:DONE     }
+// AS3:DONE
 // AS3:DONE     private function updateExtraFields():Void
 // AS3:DONE     {
 // AS3:DONE         //Logger.add("updateExtraFields");
 // AS3:DONE         if (extraFields == null)
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         var state:String = panel.state;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         if (extraFields.none != null)    extraFields.none._visible = state == "none" && wrapper.data != null;
 // AS3:DONE         if (extraFields.short != null)   extraFields.short._visible = state == "short";
 // AS3:DONE         if (extraFields.medium != null)  extraFields.medium._visible = state == "medium";
 // AS3:DONE         if (extraFields.medium2 != null) extraFields.medium2._visible = state == "medium2";
 // AS3:DONE         if (extraFields.large != null)   extraFields.large._visible = state == "large";
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         var mc:MovieClip = extraFields[state];
 // AS3:DONE         if (mc == null)
 // AS3:DONE             return;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE         var obj = BattleState.get(m_playerId);
 // AS3:DONE         var formats:Array = mc.formats;
 // AS3:DONE         var len:Number = formats.length;
 // AS3:DONE         for (var i:Number = 0; i < len; ++i)
 // AS3:DONE             _internal_update(mc["f" + i], formats[i], obj);
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE     private function _internal_update(f, format, obj)
 // AS3:DONE     {
 // AS3:DONE         var value;
@@ -726,113 +726,113 @@
 // AS3:DONE             f._xscale = parseFloat(Macros.Format(m_name, format.scaleX, obj)) * 100 || 100;
 // AS3:DONE         if (format.scaleY != null)
 // AS3:DONE             f._yscale = parseFloat(Macros.Format(m_name, format.scaleY, obj)) * 100 || 100;
-        if (format.borderColor != null)
-            f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj).split("#").join("0x")) || 0;
-        if (format.bgColor != null)
-            f.backgroundColor = parseInt(Macros.Format(m_name, format.bgColor, obj).split("#").join("0x")) || 0;
-
-        if (format.format != null)
-        {
-            value = Macros.Format(m_name, format.format, obj);
-            if (f.formattedValue != value)
-            {
-                f.formattedValue = value;
-                f.htmlText = "<span class='extraField'>" + value + "</span>";
-                //Logger.add("txt=" + value);
-                needAlign = true;
-            }
-        }
-
-        if (format.src != null)
-        {
-            //var dead = (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
-            //Logger.add(dead + " " + obj.dead + " " + m_name);
-            var src:String = Utils.fixImgTagSrc(Macros.Format(m_name, format.src, obj));
-            if (f.source != src)
-            {
-                //Logger.add(m_name + " " + f.source + " => " + src);
-                f._visible = false;
-                f.source = src;
-            }
-
-            var highlight = format.highlight;
-            if (highlight != null && highlight != false)
-            {
-                if (typeof(format.highlight) == 'string')
-                    highlight = Utils.toBool(Macros.Format(m_name, format.highlight, obj).toLowerCase(), false);
-                var sn = PlayerStatus.getStatusColorSchemeNames(
-                    (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.NOT_AVAILABLE) != 0,
-                    true,
-                    highlight != true ? false : wrapper.selected,
-                    highlight != true ? false : wrapper.data.squad,
-                    highlight != true ? false : wrapper.data.teamKiller,
-                    highlight != true ? false : wrapper.data.VIP,
-                    !obj.ready);
-                if (sn.vehicleSchemeName != format.__last_vehicleSchemeName)
-                {
-                    format.__last_vehicleSchemeName = sn.vehicleSchemeName;
-                    (new Transform(f)).colorTransform = this.getColorTransform(sn.vehicleSchemeName, true);
-                    //Logger.add(f.source + " " + sn.vehicleSchemeName);
-                }
-            }
-        }
-
-        if (needAlign)
-            alignField(f);
-    }
-
-    private function alignField(field)
-    {
-        //Logger.add("alignField");
-        var tf:TextField = TextField(field);
-        var img:UILoaderAlt = UILoaderAlt(field);
-
-        var data:Object = field["data"];
-        //Logger.addObject(data);
-
-        var x:Number = isLeftPanel ? data.x : -data.x;
-        var y:Number = data.y;
-        var w:Number = isNaN(data.w) ? img.content._width : data.w;
-        var h:Number = isNaN(data.h) ? img.content._height : data.h;
-
-        if (tf != null)
-        {
-            if (tf.textWidth > 0)
-                w = tf.textWidth + 4; // 2 * 2-pixel gutter
-        }
-
-        if (data.align == "right")
-            x -= w;
-        else if (data.align == "center")
-            x -= w / 2;
-
-        //Logger.add("x:" + x + " y:" + y + " w:" + w + " h:" + h + " align:" + data.align + " textWidth:" + tf.textWidth);
-
-        if (tf != null)
-        {
-            if (tf._x != x)
-                tf._x = x;
-            if (tf._y != y)
-                tf._y = y;
-            if (tf._width != w)
-                tf._width = w;
-            if (tf._height != h)
-                tf._height = h;
-        }
-        else
-        {
-            if (img._x != x)
-                img._x = x;
-            if (img._y != y)
-                img._y = y;
-            if (img.width != w || img.height != h)
-            {
-                //Logger.add(img.width + "->" + w + " " + x + " " + y + " " + m_name + " " + wrapper._name);
-                img.setSize(w, h);
-                img.validateNow();
-            }
-        }
-    }
+// AS3:DONE         if (format.borderColor != null)
+// AS3:DONE             f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj).split("#").join("0x")) || 0;
+// AS3:DONE         if (format.bgColor != null)
+// AS3:DONE             f.backgroundColor = parseInt(Macros.Format(m_name, format.bgColor, obj).split("#").join("0x")) || 0;
+// AS3:DONE 
+// AS3:DONE         if (format.format != null)
+// AS3:DONE         {
+// AS3:DONE             value = Macros.Format(m_name, format.format, obj);
+// AS3:DONE             if (f.formattedValue != value)
+// AS3:DONE             {
+// AS3:DONE                 f.formattedValue = value;
+// AS3:DONE                 f.htmlText = "<span class='extraField'>" + value + "</span>";
+// AS3:DONE                 //Logger.add("txt=" + value);
+// AS3:DONE                 needAlign = true;
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE 
+// AS3:DONE         if (format.src != null)
+// AS3:DONE         {
+// AS3:DONE             //var dead = (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
+// AS3:DONE             //Logger.add(dead + " " + obj.dead + " " + m_name);
+// AS3:DONE             var src:String = Utils.fixImgTagSrc(Macros.Format(m_name, format.src, obj));
+// AS3:DONE             if (f.source != src)
+// AS3:DONE             {
+// AS3:DONE                 //Logger.add(m_name + " " + f.source + " => " + src);
+// AS3:DONE                 f._visible = false;
+// AS3:DONE                 f.source = src;
+// AS3:DONE             }
+// AS3:DONE
+// AS3:DONE             var highlight = format.highlight;
+// AS3:DONE             if (highlight != null && highlight != false)
+// AS3:DONE             {
+// AS3:DONE                 if (typeof(format.highlight) == 'string')
+// AS3:DONE                     highlight = Utils.toBool(Macros.Format(m_name, format.highlight, obj).toLowerCase(), false);
+// AS3:DONE                 var sn = PlayerStatus.getStatusColorSchemeNames(
+// AS3:DONE                     (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.NOT_AVAILABLE) != 0,
+// AS3:DONE                     true,
+// AS3:DONE                     highlight != true ? false : wrapper.selected,
+// AS3:DONE                     highlight != true ? false : wrapper.data.squad,
+// AS3:DONE                     highlight != true ? false : wrapper.data.teamKiller,
+// AS3:DONE                     highlight != true ? false : wrapper.data.VIP,
+// AS3:DONE                     !obj.ready);
+// AS3:DONE                 if (sn.vehicleSchemeName != format.__last_vehicleSchemeName)
+// AS3:DONE                 {
+// AS3:DONE                     format.__last_vehicleSchemeName = sn.vehicleSchemeName;
+// AS3:DONE                     (new Transform(f)).colorTransform = this.getColorTransform(sn.vehicleSchemeName, true);
+// AS3:DONE                     //Logger.add(f.source + " " + sn.vehicleSchemeName);
+// AS3:DONE                 }
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE
+// AS3:DONE         if (needAlign)
+// AS3:DONE             alignField(f);
+// AS3:DONE     }
+// AS3:DONE
+// AS3:DONE     private function alignField(field)
+// AS3:DONE     {
+// AS3:DONE         //Logger.add("alignField");
+// AS3:DONE         var tf:TextField = TextField(field);
+// AS3:DONE         var img:UILoaderAlt = UILoaderAlt(field);
+// AS3:DONE
+// AS3:DONE         var data:Object = field["data"];
+// AS3:DONE         //Logger.addObject(data);
+// AS3:DONE
+// AS3:DONE         var x:Number = isLeftPanel ? data.x : -data.x;
+// AS3:DONE         var y:Number = data.y;
+// AS3:DONE         var w:Number = isNaN(data.w) ? img.content._width : data.w;
+// AS3:DONE         var h:Number = isNaN(data.h) ? img.content._height : data.h;
+// AS3:DONE
+// AS3:DONE         if (tf != null)
+// AS3:DONE         {
+// AS3:DONE             if (tf.textWidth > 0)
+// AS3:DONE                 w = tf.textWidth + 4; // 2 * 2-pixel gutter
+// AS3:DONE         }
+// AS3:DONE
+// AS3:DONE         if (data.align == "right")
+// AS3:DONE             x -= w;
+// AS3:DONE         else if (data.align == "center")
+// AS3:DONE             x -= w / 2;
+// AS3:DONE
+// AS3:DONE         //Logger.add("x:" + x + " y:" + y + " w:" + w + " h:" + h + " align:" + data.align + " textWidth:" + tf.textWidth);
+// AS3:DONE 
+// AS3:DONE         if (tf != null)
+// AS3:DONE         {
+// AS3:DONE             if (tf._x != x)
+// AS3:DONE                 tf._x = x;
+// AS3:DONE             if (tf._y != y)
+// AS3:DONE                 tf._y = y;
+// AS3:DONE             if (tf._width != w)
+// AS3:DONE                 tf._width = w;
+// AS3:DONE             if (tf._height != h)
+// AS3:DONE                 tf._height = h;
+// AS3:DONE         }
+// AS3:DONE        else
+// AS3:DONE         {
+// AS3:DONE             if (img._x != x)
+// AS3:DONE                 img._x = x;
+// AS3:DONE             if (img._y != y)
+// AS3:DONE                 img._y = y;
+// AS3:DONE             if (img.width != w || img.height != h)
+// AS3:DONE             {
+// AS3:DONE                 //Logger.add(img.width + "->" + w + " " + x + " " + y + " " + m_name + " " + wrapper._name);
+// AS3:DONE                 img.setSize(w, h);
+// AS3:DONE                 img.validateNow();
+// AS3:DONE             }
+// AS3:DONE         }
+// AS3:DONE     }
 
     var _savedScreenWidth = 0;
     var _savedX = 0;
@@ -969,34 +969,3 @@
         }
     }
 }
-/*
-data = {
-  "igrLabel": "",
-  "uid": 1758821,
-  "position": 10,
-  "denunciations": 10,
-  "userName": "_V_E_T_E_R_A_N_",
-  "icon": "../maps/icons/vehicle/contour/ussr-Object_261.png",
-  "teamKiller": false,
-  "speaking": false,
-  "vehicleState": 3,
-  "VIP": false,
-  "vipKilled": 0,
-  "roster": 0,
-  "frags": 0,
-  "igrType": 0,
-  "vehAction": 0,
-  "vehicle": "Об. 261",
-  "team": 2,
-  "squad": 0,
-  "himself": false,
-  "level": 0,
-  "vehId": 23084543,
-  "isEnabledInRoaming": true,
-  "muted": false,
-  "isPostmortemView": false,
-  "clanAbbrev": "S-HA",
-  "isIGR": false,
-  "label": "_V_E_T_E_R_A_N_[S-HA]"
-}
-*/

@@ -214,7 +214,7 @@ package xvm.profile_ui.components
                     color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
 
                 // TODO: temporary solution
-                if (tech.playerId == 0)
+                if (tech.accountDBID == 0)
                 {
                     var adata:AccountDossier = tech.accountDossier;
                     var ratingColor:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));

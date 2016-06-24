@@ -165,24 +165,6 @@ def _tuneup_config(config):
     config['__xvmIntro'] = XVM.XVM_INTRO
     config['__wgApiAvailable'] = GAME_REGION in xfw_constants.URLS.WG_API_SERVERS
 
-    config['battle']['clanIconsFolder'] = utils.fixPath(config['battle']['clanIconsFolder'])
-
-    config['iconset']['battleLoadingAlly']  = utils.fixPath(config['iconset']['battleLoadingAlly'])
-    config['iconset']['battleLoadingEnemy'] = utils.fixPath(config['iconset']['battleLoadingEnemy'])
-
-    if config['battleLoading']['clanIcon']['xr'] is None:
-        config['battleLoading']['clanIcon']['xr'] = config['battleLoading']['clanIcon']['x']
-    if config['battleLoading']['clanIcon']['yr'] is None:
-        config['battleLoading']['clanIcon']['yr'] = config['battleLoading']['clanIcon']['y']
-    if config['statisticForm']['clanIcon']['xr'] is None:
-        config['statisticForm']['clanIcon']['xr'] = config['statisticForm']['clanIcon']['x']
-    if config['statisticForm']['clanIcon']['yr'] is None:
-        config['statisticForm']['clanIcon']['yr'] = config['statisticForm']['clanIcon']['y']
-    if config['playersPanel']['clanIcon']['xr'] is None:
-        config['playersPanel']['clanIcon']['xr'] = config['playersPanel']['clanIcon']['x']
-    if config['playersPanel']['clanIcon']['yr'] is None:
-        config['playersPanel']['clanIcon']['yr'] = config['playersPanel']['clanIcon']['y']
-
     # Cleanup empty vehicle names
     config['vehicleNames'] = {k:v for k,v in config['vehicleNames'].iteritems() \
         if v and (v['short'] is not None or v['name'] is not None)}
@@ -242,9 +224,7 @@ class XvmServicesToken(object):
         #trace('config.token._apply')
         if data is None:
             data = {}
-        self.playerId = data.get('playerId', None)
-        if self.playerId is None:
-            self.playerId = data.get('_id', None)
+        self.accountDBID = data.get('accountDBID', None)
         self.expires_at = data.get('expires_at', None)
         self.verChkCnt = data.get('verChkCnt', None)
         self.cnt = data.get('cnt', None)
@@ -268,24 +248,24 @@ class XvmServicesToken(object):
     def restore():
         #trace('config.token.restore')
         try:
-            playerId = utils.getPlayerId()
-            if playerId is None:
+            accountDBID = utils.getAccountDBID()
+            if accountDBID is None:
                 return XvmServicesToken()
-            return XvmServicesToken(userprefs.get('tokens.{0}'.format(playerId)))
+            return XvmServicesToken(userprefs.get('tokens/{0}'.format(accountDBID)))
         except Exception:
             err(traceback.format_exc())
 
 
     def saveToken(self):
         #trace('config.token.saveToken')
-        if self.playerId:
-            userprefs.set('tokens.{0}'.format(self.playerId), self.__dict__)
+        if self.accountDBID:
+            userprefs.set('tokens/{0}'.format(self.accountDBID), self.__dict__)
 
 
-    def saveLastPlayerId(self):
-        #trace('config.token.saveLastPlayerId')
-        if self.playerId:
-            userprefs.set('tokens.lastPlayerId', self.playerId)
+    def saveLastAccountDBID(self):
+        #trace('config.token.saveLastAccountDBID')
+        if self.accountDBID:
+            userprefs.set('tokens/lastAccountDBID', self.accountDBID)
 
 
     def updateTokenFromApi(self):
@@ -325,7 +305,7 @@ class XvmServicesToken(object):
             networkServicesSettings = NetworkServicesSettings()
 
         self.saveToken()
-        self.saveLastPlayerId()
+        self.saveLastAccountDBID()
 
 token = XvmServicesToken()
 

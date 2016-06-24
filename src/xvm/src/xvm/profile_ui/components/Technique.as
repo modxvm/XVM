@@ -47,15 +47,15 @@ package xvm.profile_ui.components
             return _playerName;
         }
 
-        private var _playerId:int;
-        public function get playerId():int
+        private var _accountDBID:int;
+        public function get accountDBID():int
         {
-            return _playerId;
+            return _accountDBID;
         }
 
         public function get accountDossier():AccountDossier
         {
-            return Dossier.getAccountDossier(playerId);
+            return Dossier.getAccountDossier(accountDBID);
         }
 
         public function get currentData():Object
@@ -89,14 +89,14 @@ package xvm.profile_ui.components
 
         // CTOR
 
-        public function Technique(page:ProfileTechnique, playerName:String, playerId:int):void
+        public function Technique(page:ProfileTechnique, playerName:String, accountDBID:int):void
         {
             try
             {
                 this.name = "xvm_extension";
                 this._page = page;
                 this._playerName = playerName;
-                this._playerId = playerId;
+                this._accountDBID = accountDBID;
 
                 // Change row height: 34 -> 32
                 page.listComponent.techniqueList.rowHeight = 32;
@@ -109,7 +109,7 @@ package xvm.profile_ui.components
                 {
                     Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
 
-                    Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, playerId);
+                    Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, accountDBID);
 
                     // override renderers
                     page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
@@ -362,7 +362,7 @@ package xvm.profile_ui.components
                     if (data.xvm_xte < 0)
                     {
                         data.xvm_xte_flag |= 0x01;
-                        stat = Stat.getUserDataById(playerId);
+                        stat = Stat.getUserDataById(accountDBID);
                         if (stat != null && stat.v != null)
                         {
                             vdata = stat.v[data.id];
@@ -373,7 +373,7 @@ package xvm.profile_ui.components
                     if (data.xvm_xtdb < 0)
                     {
                         data.xvm_xtdb_flag |= 0x01;
-                        stat = Stat.getUserDataById(playerId);
+                        stat = Stat.getUserDataById(accountDBID);
                         if (stat != null && stat.v != null)
                         {
                             vdata = stat.v[data.id];

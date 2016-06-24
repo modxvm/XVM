@@ -59,18 +59,6 @@
     // Alternative panels mode. Possible values: null, "none", "short", "medium", "medium2", "large".
     // Альтернативный режим ушей. Возможные значения: null, "none", "short", "medium", "medium2", "large".
     "altMode": null,
-    // Display options for Team/Clan logos (see battleLoading.xc).
-    // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
-    "clanIcon": {
-      "show": true,
-      "x": 0,
-      "y": 6,
-      "xr": 0,
-      "yr": 6,
-      "w": 16,
-      "h": 16,
-      "alpha": 90
-    },
     // Options for the "none" panels - empty panels.
     // Режим ушей "none" - пустые уши.
     "none": {
@@ -178,8 +166,8 @@
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
-      // Extra fields. Each field have size 350x25. Fields are placed one above the other.
-      // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
+      // Extra fields. Fields are placed one above the other.
+      // Дополнительные поля. Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [

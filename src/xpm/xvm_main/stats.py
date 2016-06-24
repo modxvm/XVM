@@ -24,10 +24,14 @@ def getUserData(args):
         'args': args})
     _stat.processQueue()
 
+def getClanIcon(vehicleID):
+    return _stat.getClanIcon(vehicleID)
+
 
 #############################
 # Private
 
+import os
 from pprint import pprint
 import datetime
 import traceback
@@ -72,16 +76,43 @@ class _Stat(object):
         self.cacheBattle = {}
         self.cacheUser = {}
 
-
     def enqueue(self, req):
         with self.lock:
             self.queue.append(req)
-
 
     def dequeue(self):
         with self.lock:
             return self.queue.pop(0) if self.queue else None
 
+    def getClanIcon(self, vehicleID):
+        # Load order: id -> nick -> srv -> clan -> default clan -> default nick
+        pl = self.players.get(vehicleID, None)
+        if not pl:
+            return None
+
+        # Return cached path
+        if hasattr(pl, 'clanicon'):
+            return pl.clanicon
+
+        def paths_gen():
+            # Search icons
+            prefix = 'res_mods/mods/shared_resources/xvm/res/{}'.format(
+                utils.fixPath(config.get('battle/clanIconsFolder')))
+            yield '{}ID/{}.png'.format(prefix, pl.accountDBID)
+            yield '{}{}/nick/{}.png'.format(prefix, GAME_REGION, pl.name)
+            if hasattr(pl, 'x_emblem'):
+                yield pl.x_emblem
+            if pl.clan:
+                yield '{}{}/clan/{}.png'.format(prefix, GAME_REGION, pl.clan)
+                yield '{}{}/clan/default.png'.format(prefix, GAME_REGION)
+            yield '{}{}/nick/default.png'.format(prefix, GAME_REGION)
+
+        for fn in paths_gen():
+            if os.path.isfile(fn):
+                pl.clanicon = utils.fixImgTag('xvm://' + fn[len('res_mods/mods/shared_resources/xvm/'):])
+                return pl.clanicon
+        pl.clanicon = None
+        return pl.clanicon
 
     def processQueue(self):
         #debug('processQueue')
@@ -102,7 +133,6 @@ class _Stat(object):
         #debug('start')
         # self._checkResult()
         BigWorld.callback(0, self._checkResult)
-
 
     def _checkResult(self):
         with self.lock:
@@ -125,7 +155,6 @@ class _Stat(object):
                     self.thread = None
                     # self.processQueue()
                     BigWorld.callback(0, self.processQueue)
-
 
     def _respond(self):
         debug("respond: " + self.req['cmd'])
@@ -153,7 +182,6 @@ class _Stat(object):
             if not self.resp:
                 self.resp = {}
 
-
     def getBattleResultsStat(self):
         try:
             player = BigWorld.player()
@@ -166,7 +194,6 @@ class _Stat(object):
             if not self.resp:
                 self.resp = {}
 
-
     def getUserData(self):
         try:
             self._get_user()
@@ -176,7 +203,6 @@ class _Stat(object):
         with self.lock:
             if not self.resp:
                 self.resp = {}
-
 
     def _get_battle(self):
         player = BigWorld.player()
@@ -192,7 +218,7 @@ class _Stat(object):
                 pl = _Player(vehicleID, vData)
                 self._load_clanIcon(pl)
                 # cleanup same player with different vehicleID (bug?)
-                self.players = {k:v for k,v in self.players.iteritems() if v.playerId != pl.playerId}
+                self.players = {k:v for k,v in self.players.iteritems() if v.accountDBID != pl.accountDBID}
                 self.players[vehicleID] = pl
             self.players[vehicleID].update(vData)
 
@@ -211,9 +237,9 @@ class _Stat(object):
 
         players = {}
         for (vehicleID, pl) in self.players.iteritems():
-            cacheKey = "%d=%d" % (pl.playerId, pl.vehCD)
+            cacheKey = "%d=%d" % (pl.accountDBID, pl.vehCD)
             if cacheKey not in self.cacheBattle:
-                cacheKey2 = "%d" % pl.playerId
+                cacheKey2 = "%d" % pl.accountDBID
                 if cacheKey2 not in self.cacheBattle:
                     self.cacheBattle[cacheKey] = self._get_battle_stub(pl)
             stat = self.cacheBattle[cacheKey]
@@ -224,12 +250,10 @@ class _Stat(object):
         with self.lock:
             self.resp = {'players': players}
 
-
     def _get_battleresults(self):
         (arenaUniqueId,) = self.req['args']
         player = BigWorld.player()
         player.battleResultsCache.get(int(arenaUniqueId), self._battleResultsCallback)
-
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
@@ -258,9 +282,9 @@ class _Stat(object):
 
             players = {}
             for (vehicleID, pl) in self.players.iteritems():
-                cacheKey = "%d=%d" % (pl.playerId, pl.vehCD)
+                cacheKey = "%d=%d" % (pl.accountDBID, pl.vehCD)
                 if cacheKey not in self.cacheBattle:
-                    cacheKey2 = "%d" % pl.playerId
+                    cacheKey2 = "%d" % pl.accountDBID
                     if cacheKey2 not in self.cacheBattle:
                         self.cacheBattle[cacheKey] = self._get_battle_stub(pl)
                 stat = self.cacheBattle[cacheKey]
@@ -279,7 +303,6 @@ class _Stat(object):
             print('=================================')
             with self.lock:
                 self.resp = {}
-
 
     def _get_user(self):
         (value,) = self.req['args']
@@ -315,15 +338,14 @@ class _Stat(object):
         with self.lock:
             self.resp = self.cacheUser.get(cacheKey, {})
 
-
     def _get_battle_stub(self, pl):
         s = {
-            '_id': pl.playerId,
+            'vehicleID': pl.vehicleID,
+            '_id': pl.accountDBID,
             'nm': pl.name,
             'v': {'id': pl.vehCD},
         }
         return self._fix(s)
-
 
     def _load_stat(self, playerVehicleID):
         requestList = []
@@ -331,13 +353,13 @@ class _Stat(object):
         replay = isReplay()
         all_cached = True
         for (vehicleID, pl) in self.players.iteritems():
-            cacheKey = "%d=%d" % (pl.playerId, pl.vehCD)
+            cacheKey = "%d=%d" % (pl.accountDBID, pl.vehCD)
 
             if cacheKey not in self.cacheBattle:
                 all_cached = False
 
             requestList.append("%d=%d%s" % (
-                pl.playerId,
+                pl.accountDBID,
                 pl.vehCD,
                 '=1' if not replay and pl.vehicleID == playerVehicleID else ''))
 
@@ -345,11 +367,11 @@ class _Stat(object):
             return
 
         try:
-            playerId = utils.getPlayerId()
+            accountDBID = utils.getAccountDBID()
             if config.networkServicesSettings.statBattle:
-                data = self._load_data_online(playerId, ','.join(requestList))
+                data = self._load_data_online(accountDBID, ','.join(requestList))
             else:
-                data = self._load_data_offline(playerId)
+                data = self._load_data_offline(accountDBID)
 
             if data is None:
                 return
@@ -367,11 +389,10 @@ class _Stat(object):
         except Exception:
             err(traceback.format_exc())
 
-
-    def _load_data_online(self, playerId, request):
+    def _load_data_online(self, accountDBID, request):
         token = config.token.token
         if token is None:
-            err('No valid token for XVM network services (id=%s)' % playerId)
+            err('No valid token for XVM network services (id=%s)' % accountDBID)
             return None
 
         if isReplay():
@@ -389,13 +410,11 @@ class _Stat(object):
 
         return data
 
-
-    def _load_data_offline(self, playerId):
+    def _load_data_offline(self, accountDBID):
         players = []
         for (vehicleID, pl) in self.players.iteritems():
             players.append(self._get_battle_stub(pl))
         return {'players': players}
-
 
     def _fix(self, stat, orig_name=None):
         self._fix_common(stat)
@@ -406,7 +425,8 @@ class _Stat(object):
         if self.players is not None:
             # TODO: optimize
             for (vehicleID, pl) in self.players.iteritems():
-                if pl.playerId == stat['_id']:
+                if pl.accountDBID == stat['_id']:
+                    stat['vehicleID'] = pl.vehicleID
                     if pl.clan:
                         stat['clan'] = pl.clan
                         if stat.get('cid', None) is not None and stat.get('rank') is not None and stat.get('emblem') is not None:
@@ -423,8 +443,6 @@ class _Stat(object):
                         stat['alive'] = pl.alive
                     if hasattr(pl, 'ready'):
                         stat['ready'] = pl.ready
-                    if hasattr(pl, 'x_emblem'):
-                        stat['x_emblem'] = pl.x_emblem
                     if 'id' not in stat['v']:
                         stat['v']['id'] = pl.vehCD
                     break
@@ -433,13 +451,11 @@ class _Stat(object):
         self._addContactData(stat)
         return stat
 
-
     def _fix_user(self, stat, orig_name=None):
         self._fix_common(stat)
         self._fix_common2(stat, orig_name, True)
         self._addContactData(stat)
         return stat
-
 
     def _fix_common(self, stat):
         if 'v' not in stat:
@@ -452,7 +468,6 @@ class _Stat(object):
             stat['wn8'] = None
         if stat.get('wgr', 0) <= 0:
             stat['wgr'] = None
-
 
     def _fix_common2(self, stat, orig_name, multiVehicles):
         if orig_name is not None:
@@ -478,7 +493,6 @@ class _Stat(object):
     def _calculateGWR(self, stat):
         stat['winrate'] = float(stat['w']) / float(stat['b']) * 100.0
 
-
     # XVM Scale
     def _calculateXvmScale(self, stat):
         if 'e' in stat and stat['e'] > 0:
@@ -489,7 +503,6 @@ class _Stat(object):
             stat['xwn8'] = xvm_scale.XWN8(stat['wn8'])
         if 'wgr' in stat and stat['wgr'] > 0:
             stat['xwgr'] = xvm_scale.XWGR(stat['wgr'])
-
 
     # calculate Vehicle values
     def _calculateVehicleValues(self, stat, v):
@@ -525,14 +538,12 @@ class _Stat(object):
         if 'spo' in v and v['spo'] > 0:
             v['sb'] = float(v['spo']) / vb
 
-
     # calculate xTDB
     def _calculateXTDB(self, v):
         if 'db' not in v or v['db'] <= 0:
             return
         v['xtdb'] = vehinfo_xtdb.calculateXTDB(v['id'], float(v['db']))
         #log(v['xtdb'])
-
 
     # calculate xTE
     def _calculateXTE(self, v):
@@ -553,7 +564,6 @@ class _Stat(object):
             #err(traceback.format_exc())
             pass
 
-
     def _load_clanIcon(self, pl):
         try:
             if pl.clanInfo:
@@ -569,7 +579,6 @@ class _Stat(object):
         except Exception:
             err(traceback.format_exc())
 
-
     def _load_clanIcons_callback(self, pl, tID, bytes):
         try:
             if bytes and imghdr.what(None, bytes) is not None:
@@ -577,7 +586,10 @@ class _Stat(object):
                 # BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
                 imgid = 'icons/{0}.png'.format(pl.clan)
                 filecache.save(imgid, bytes)
-                pl.x_emblem = utils.fixImgTag('xvm://cache/{0}'.format(imgid))
+                pl.x_emblem = 'res_mods/mods/shared_resources/xvm/cache/%s' % imgid
+                if hasattr(pl, 'clanicon'):
+                    del pl.clanicon
+                as_xfw_cmd(XVM_COMMAND.AS_ON_CLAN_ICON_LOADED, pl.vehicleID, pl.name)
             debug('{} {} {} {}'.format(
                 pl.clan,
                 tID,
@@ -591,12 +603,13 @@ class _Stat(object):
 
 class _Player(object):
 
-    __slots__ = ('vehicleID', 'playerId', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
-                 'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'x_emblem')
+    __slots__ = ('vehicleID', 'accountDBID', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
+                 'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready',
+                 'x_emblem', 'clanicon')
 
     def __init__(self, vehicleID, vData):
         self.vehicleID = vehicleID
-        self.playerId = vData['accountDBID']
+        self.accountDBID = vData['accountDBID']
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
         self.clanInfo = topclans.getClanInfo(self.clan)
@@ -617,7 +630,6 @@ class _Player(object):
             self.squadnum = vInfo.squadIndex
             # if self.squadnum > 0:
             #    log("team=%d, squad=%d %s" % (self.team, self.squadnum, self.name))
-
 
     def update(self, vData):
         vtype = vData['vehicleType']

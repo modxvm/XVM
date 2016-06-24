@@ -46,6 +46,7 @@ class XVM_COMMAND(object):
     GET_BATTLE_LEVEL = "xvm.get_battle_level"
     GET_BATTLE_TYPE = "xvm.get_battle_type"
     GET_MAP_SIZE = "xvm.get_map_size"
+    GET_CLAN_ICON = "xvm.get_clan_icon"
     GET_MY_VEHCD = "xvm.get_my_vehcd"
     GET_XTDB_DATA = "xvm.get_xtdb_data"
     REQUEST_DOSSIER = "xvm.request_dossier"
@@ -66,6 +67,7 @@ class XVM_COMMAND(object):
     AS_STAT_BATTLE_RESULTS_DATA = "xvm.as.stat_battle_results_data"
     AS_STAT_USER_DATA = "xvm.as.stat_user_data"
     AS_UPDATE_CURRENT_VEHICLE = "xvm.as.update_current_vehicle"
+    AS_ON_CLAN_ICON_LOADED = "xvm.as.on_clan_icon_loaded"
 
 
 # Teams
