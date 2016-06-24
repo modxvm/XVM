@@ -96,16 +96,16 @@
                 cfg.scaleY = null;
             }
 
-            value = Macros.Format(options.playerName, cfg.src, options) || "";
-            if (Macros.IsCached(options.playerName, cfg.src))
-            {
-                cfg.src = value;
-            }
-
             value = XfwUtils.toBool(Macros.Format(options.playerName, cfg.highlight, options), false);
             if (Macros.IsCached(options.playerName, cfg.highlights))
             {
                 cfg.highlight = value;
+            }
+
+            value = Macros.Format(options.playerName, cfg.src, options) || "";
+            if (Macros.IsCached(options.playerName, cfg.src))
+            {
+                cfg.src = value;
             }
         }
 
@@ -239,7 +239,7 @@
 
             if (needAlign)
             {
-                x = isLeftPanel ? (_xValue + bindToIconOffset) : (_xValue + bindToIconOffset);
+                x = isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
                 y = _yValue;
                 if (!isNaN(_widthValue))
                     width = _widthValue;

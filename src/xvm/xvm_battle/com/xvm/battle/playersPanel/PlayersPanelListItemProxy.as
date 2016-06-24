@@ -430,7 +430,7 @@ package com.xvm.battle.playersPanel
         private function updateExtraFields():void
         {
             var playerState:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
-
+            var bindToIconOffset:Number = ui.vehicleIcon.x - x + (isLeftPanel ? ICONS_AREA_WIDTH : 0);
             switch (ui.xfw_state)
             {
                 case PLAYERS_PANEL_STATE.HIDEN:
@@ -438,19 +438,19 @@ package com.xvm.battle.playersPanel
                     extraFieldsHidden.update(playerState);
                 case PLAYERS_PANEL_STATE.SHORT:
                     extraFieldsShort.visible = true;
-                    extraFieldsShort.update(playerState, ui.vehicleIcon.x + ICONS_AREA_WIDTH - x);
+                    extraFieldsShort.update(playerState, bindToIconOffset);
                     break;
                 case PLAYERS_PANEL_STATE.MEDIUM:
                     extraFieldsMedium.visible = true;
-                    extraFieldsMedium.update(playerState, ui.vehicleIcon.x + ICONS_AREA_WIDTH - x);
+                    extraFieldsMedium.update(playerState, bindToIconOffset);
                     break;
                 case PLAYERS_PANEL_STATE.LONG:
                     extraFieldsLong.visible = true;
-                    extraFieldsLong.update(playerState, ui.vehicleIcon.x + ICONS_AREA_WIDTH - x);
+                    extraFieldsLong.update(playerState, bindToIconOffset);
                     break;
                 case PLAYERS_PANEL_STATE.FULL:
                     extraFieldsFull.visible = true;
-                    extraFieldsFull.update(playerState, ui.vehicleIcon.x + ICONS_AREA_WIDTH - x);
+                    extraFieldsFull.update(playerState, bindToIconOffset);
                     break;
             }
         }
