@@ -152,6 +152,7 @@
     "china": "China",
     "japan": "Japan",
     "czech": "Сzech",
+    "swedish": "Swedish",
     
     // Vehicle type
     "HT": "HT",
