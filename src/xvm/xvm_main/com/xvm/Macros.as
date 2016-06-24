@@ -71,10 +71,22 @@ package com.xvm
 
         // common
 
+        public static function RegisterXvmServicesMacrosData():void
+        {
+            _instance._RegisterXvmServicesMacrosData();
+        }
+
         public static function RegisterGlobalMacrosData():void
         {
             _instance._RegisterGlobalMacrosData();
         }
+
+        public static function RegisterStatisticsMacros(pname:String, stat:StatData):void
+        {
+            _instance._RegisterStatisticsMacros(pname, stat);
+        }
+
+        // battle
 
         public static function RegisterBattleGlobalMacrosData(callback:Function):void
         {
@@ -85,13 +97,6 @@ package com.xvm
         {
             _instance._RegisterMinimalMacrosData(accountDBID, playerFullName, vehCD, isPlayerTeam);
         }
-
-        public static function RegisterStatisticsMacros(pname:String, stat:StatData):void
-        {
-            _instance._RegisterStatisticsMacros(pname, stat);
-        }
-
-        // battle
 
         public static function RegisterPlayersData(callback:Function):void
         {
@@ -740,13 +745,16 @@ package com.xvm
 
         // Macros registration
 
-        private function _RegisterGlobalMacrosData():void
+        private function _RegisterXvmServicesMacrosData():void
         {
             // {{xvm-stat}}
             m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
             // {{r_size}}
             m_globals["r_size"] = _getRatingDefaultValue().length;
+        }
 
+        private function _RegisterGlobalMacrosData():void
+        {
             var battleTier:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_LEVEL) || NaN;
             var battleType:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
 

@@ -37,6 +37,8 @@ package com.xvm.lobby.battleloading
 
             logBriefConfigurationInfo();
 
+            Macros.RegisterGlobalMacrosData();
+
             Stat.clearBattleStat();
             Stat.loadBattleStat();
 

@@ -77,7 +77,7 @@ package com.xvm.lobby
             // init pinger as earlier as possible
             PingServers.initFeature(Config.config.login.pingServers.enabled || Config.config.hangar.pingServers.enabled);
 
-            Macros.RegisterGlobalMacrosData();
+            Macros.RegisterXvmServicesMacrosData();
             Macros.RegisterVehiclesMacros(LobbyMacros.RegisterVehiclesMacros);
             Macros.RegisterClockMacros(LobbyMacros.RegisterClockMacros);
         }
