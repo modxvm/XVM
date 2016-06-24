@@ -704,4 +704,151 @@ package com.xvm.battle.playersPanel
 
         //Logger.add(field.htmlText);
     }
+
+    private static function get extraPanelsHolder():MovieClip
+    {
+        if (_root["extraPanels"] == null)
+        {
+            var depth:Number = -16377; // the only one free depth for panels
+            _root["extraPanels"] = _root.createEmptyMovieClip("extraPanels", depth);
+            createMouseHandler(_root["extraPanels"]);
+        }
+        return _root["extraPanels"];
+    }
+
+    var _savedScreenWidth = 0;
+    var _savedX = 0;
+    private function adjustExtraFieldsLeft(e)
+    {
+        var state:String = e.state || panel.m_state;
+        //Logger.add("adjustExtraFieldsLeft: " + state);
+        var mc:MovieClip = extraFields[state];
+        if (mc == null)
+            return;
+
+        var cfg:Object = mc.cfg;
+        if (cfg != null)
+        {
+            // none state
+            switch (extraFieldsLayout)
+            {
+                case "horizontal":
+                    mc._x = cfg.x + mc.idx * cfg.width;
+                    mc._y = cfg.y;
+                    break;
+                default:
+                    mc._x = cfg.x;
+                    mc._y = cfg.y + mc.idx * cfg.height;
+                    break;
+            }
+        }
+        else
+        {
+            // other states
+            mc._x = -panel.m_list._x;
+            mc._y = 0;
+        }
+
+        if (_savedX != panel.m_list._x)
+        {
+            _savedX = panel.m_list._x;
+            updateExtraFields();
+        }
+    }
+
+    private function adjustExtraFieldsRight(e)
+    {
+        var state:String = e.state || panel.m_state;
+        //Logger.add("adjustExtraFieldsRight: " + state);
+        var mc:MovieClip = extraFields[state];
+        if (mc == null)
+            return;
+
+        var cfg:Object = mc.cfg;
+        if (cfg != null)
+        {
+            // none state
+            switch (extraFieldsLayout)
+            {
+                case "horizontal":
+                    mc._x = App.appWidth - cfg.x - mc.idx * cfg.width;
+                    mc._y = cfg.y;
+                    break;
+                default:
+                    mc._x = App.appWidth - cfg.x;
+                    mc._y = cfg.y + mc.idx * cfg.height;
+                    break;
+            }
+        }
+        else
+        {
+            // other states
+            mc._x = panel.m_list.width - panel.m_list._x;
+            mc._y = 0;
+        }
+        //Logger.add(App.appWidth + " " + panel.m_list.width + " " + panel.m_list._x);
+
+        if (_savedScreenWidth != App.appWidth || _savedX != panel.m_list._x)
+        {
+            //Logger.add('updateExtraFields');
+            _savedScreenWidth = App.appWidth;
+            _savedX = panel.m_list._x;
+            updateExtraFields();
+        }
+    }
+
+    private static function createMouseHandler(extraPanels:MovieClip):Void
+    {
+        var mouseHandler:Object = new Object();
+        Mouse.addListener(mouseHandler);
+        mouseHandler.onMouseDown = function(button, target)
+        {
+            //Logger.add(target + " " + button);
+            if (_root["leftPanel"].state != net.wargaming.ingame.PlayersPanel.STATES.none.name)
+                return;
+
+            if (!_root.g_cursorVisible)
+                return;
+
+            var t = null;
+            for (var n in extraPanels)
+            {
+                var a:MovieClip = extraPanels[n];
+                if (a == null)
+                    continue;
+                var b:MovieClip = a[PlayerListItemRenderer.MENU_MC_NAME];
+                if (b == null)
+                    continue;
+                if (b.hitTest(_root._xmouse, _root._ymouse, true))
+                {
+                    t = b;
+                    break;
+                }
+            }
+            if (t == null)
+                return;
+
+            var data = t.owner.wrapper.data;
+            if (data == null)
+                return;
+
+            if (button == Mouse.RIGHT)
+            {
+                var xmlKeyConverter = new net.wargaming.managers.XMLKeyConverter();
+                net.wargaming.ingame.MinimapEntry.unhighlightLastEntry();
+                var ignored = net.wargaming.messenger.MessengerUtils.isIgnored(data);
+                net.wargaming.ingame.BattleContextMenuHandler.showMenu(extraPanels, data, [
+                    [ { id: net.wargaming.messenger.MessengerUtils.isFriend(data) ? "removeFromFriends" : "addToFriends", disabled: !data.isEnabledInRoaming } ],
+                    [ ignored ? "removeFromIgnored" : "addToIgnored" ],
+                    t.panel.getDenunciationsSubmenu(xmlKeyConverter, data.denunciations, data.squad),
+                    [ !ignored && _global.wg_isShowVoiceChat ? (net.wargaming.messenger.MessengerUtils.isMuted(data) ? "unsetMuted" : "setMuted") : null ]
+                    ]);
+            }
+            else if (!net.wargaming.ingame.BattleContextMenuHandler.hitTestToCurrentMenu())
+            {
+                gfx.io.GameDelegate.call("Battle.selectPlayer", [data.vehId]);
+            }
+        }
+    }
+
 */
