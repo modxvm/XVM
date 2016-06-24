@@ -323,7 +323,7 @@ package com.xvm.battle.playersPanel
 
         private function updateStandardTextField(tf:TextField, format:String, playerState:VOPlayerState):Boolean
         {
-            if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
+            //if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
 
             var txt:String = Macros.Format(format, playerState);
             if (_standardTextFieldsTexts[tf.name] == txt)

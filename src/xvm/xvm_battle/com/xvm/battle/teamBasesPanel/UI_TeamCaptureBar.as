@@ -202,19 +202,19 @@ package com.xvm.battle.teamBasesPanel
             var value:String;
             var name:String = m_captured ? "done" : "format";
 
-            value = Macros.Format(null, cfg.title[name]);
+            value = Macros.FormatStringGlobal(cfg.title[name]);
             value = StringUtil.substitute(value, m_baseNumText);
             textField.htmlText = value;
 
-            value = Macros.Format(null, cfg.players[name]);
+            value = Macros.FormatStringGlobal(cfg.players[name]);
             value = StringUtil.substitute(value, m_baseNumText);
             tfTimeLeft.htmlText = value;
 
-            value = Macros.Format(null, cfg.timer[name]);
+            value = Macros.FormatStringGlobal(cfg.timer[name]);
             value = StringUtil.substitute(value, m_baseNumText);
             tfVehiclesCount.htmlText = value;
 
-            value = Macros.Format(null, cfg.points[name]);
+            value = Macros.FormatStringGlobal(cfg.points[name]);
             value = StringUtil.substitute(value, m_baseNumText);
             pointsTextField.htmlText = value;
         }

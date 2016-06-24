@@ -61,37 +61,37 @@ package com.xvm.battle
                 // {{x-enabled}}
                 m_globals["x-enabled"] = function(o:VOPlayerState):String
                 {
-                    return o.xmqpData.x_enabled == true ? 'true' : null;
+                    return o.xmqpData && o.xmqpData.x_enabled == true ? 'true' : null;
                 }
 
                 // {{x-sense-on}}
                 m_globals["x-sense-on"] = function(o:VOPlayerState):String
                 {
-                    return o.xmqpData.x_sense_on == true ? 'true' : null;
+                    return o.xmqpData && o.xmqpData.x_sense_on == true ? 'true' : null;
                 }
 
                 // {{x-fire}}
                 m_globals["x-fire"] = function(o:VOPlayerState):String
                 {
-                    return o.xmqpData.x_fire == true ? 'true' : null;
+                    return o.xmqpData && o.xmqpData.x_fire == true ? 'true' : null;
                 }
 
                 // {{x-overturned}}
                 m_globals["x-overturned"] = function(o:VOPlayerState):String
                 {
-                    return o.xmqpData.x_overturned == true ? 'true' : null;
+                    return o.xmqpData && o.xmqpData.x_overturned == true ? 'true' : null;
                 }
 
                 // {{x-drowning}}
                 m_globals["x-drowning"] = function(o:VOPlayerState):String
                 {
-                    return o.xmqpData.x_drowning == true ? 'true' : null;
+                    return o.xmqpData && o.xmqpData.x_drowning == true ? 'true' : null;
                 }
 
                 // {{x-spotted}}
                 m_globals["x-spotted"] = function(o:VOPlayerState):String
                 {
-                    return o.xmqpData.x_spotted == true ? 'true' : null;
+                    return o.xmqpData && o.xmqpData.x_spotted == true ? 'true' : null;
                 }
             }
             else

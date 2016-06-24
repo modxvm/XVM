@@ -218,6 +218,15 @@ package com.xvm
 
         // PRIVATE
 
+        private static const ALL_STAT_MACROS_NAMES:Array = [
+            "xvm-user", "flag", "clanrank", "topclan", "region", "avglvl", "xte", "xeff", "xwn6", "xwn8", "xwn", "xwgr", "eff", "wn6", "wn8", "wn", "wgr",
+            "r", "xr", "winrate", "rating", "battles", "wins", "kb", "t-winrate", "t-rating", "t-battles", "t-wins", "t-kb", "t-hb", "tdb", "xtdb", "tdv",
+            "tfb", "tsb", "c:xte", "c:xeff", "c:xwn6", "c:xwn8", "c:xwn", "c:xwgr", "c:eff", "c:wn6", "c:wn8", "c:wn", "c:wgr", "c:r", "c:xr", "c:winrate",
+            "c:rating", "c:kb", "c:avglvl", "c:t-winrate", "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
+            "a:xwn6", "a:xwn8", "a:xwn", "a:xwgr", "a:eff", "a:wn6", "a:wn8", "a:wn", "a:wgr", "a:r", "a:xr", "a:winrate", "a:rating", "a:kb", "a:avglvl",
+            "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb", "a:xtdb", "a:tdv", "a:tfb", "a:tsb"
+        ]
+
         private static const PART_NAME:int = 0;
         private static const PART_NORM:int = 1;
         private static const PART_FMT:int = 2;
@@ -922,6 +931,14 @@ package com.xvm
             pdata["squad-num"] = function(o:IVOMacrosOptions):Number { return o.squadIndex <= 0 ? NaN : o.squadIndex; }
             // {{position}}
             pdata["position"] = function(o:IVOMacrosOptions):Number { return o.position <= 0 ? NaN : o.position; }
+
+            // Create stubs for statistics macros
+            var __stub__:Function = function(o:IVOMacrosOptions):String { return null; }
+            for each (var macro:String in ALL_STAT_MACROS_NAMES)
+            {
+                pdata[macro] = __stub__;
+            }
+
         }
 
         private static function _RegisterStatisticsMacros(pname:String, stat:StatData):void

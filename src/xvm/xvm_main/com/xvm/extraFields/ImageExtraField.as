@@ -188,6 +188,22 @@
                     scaleY = value;
                 }
             }
+            if (cfg.bindToIcon && !isNaN(bindToIconOffset))
+            {
+                value = isLeftPanel ? (_xValue + bindToIconOffset) : (_xValue + bindToIconOffset);
+                if (x != value)
+                {
+                    needAlign = true;
+                }
+                else
+                {
+                    bindToIconOffset = 0;
+                }
+            }
+            else
+            {
+                bindToIconOffset = 0;
+            }
             if (cfg.src != null)
             {
                 if (Macros.IsCached(cfg.src, options))
@@ -219,22 +235,6 @@
                         this.transform.colorTransform = App.colorSchemeMgr.getScheme(value).colorTransform;
                     }
                 }
-            }
-            if (cfg.bindToIcon && !isNaN(bindToIconOffset))
-            {
-                value = isLeftPanel ? (_xValue + bindToIconOffset) : (_xValue + bindToIconOffset);
-                if (x != value)
-                {
-                    needAlign = true;
-                }
-                else
-                {
-                    bindToIconOffset = 0;
-                }
-            }
-            else
-            {
-                bindToIconOffset = 0;
             }
 
             if (needAlign)
