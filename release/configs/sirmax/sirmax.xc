@@ -89,8 +89,6 @@
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
     "highlightVehicleIcon": false,
-    "allowHpInPanelsAndMinimap": true,
-    "allowMarksOnGunInPanelsAndMinimap": true,
     "clanIconsFolder": "clanicons",
     "sixthSenseIcon": "cfg://sirmax/img/SixthSense.png",
     "elements": ${"elements"},
@@ -238,7 +236,7 @@
   "minimapAlt": ${"sirmax-minimap.xc":"minimapAlt"},
   "hitLog": {
     "hpLeft": {
-      "enabled": "{{.battle.allowHpInPanelsAndMinimap=true?false|true}}"
+      "enabled": "false"
     },
     "visible": true,
     "x": 235,

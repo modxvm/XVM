@@ -33,17 +33,18 @@
             this.isLeftPanel = isLeftPanel;
             this.getColorSchemeName = getColorSchemeName;
 
-            var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
-            cfg.align = Macros.FormatStringGlobal(cfg.align, defaultAlign);
-            cfg.bindToIcon = Macros.FormatBooleanGlobal(cfg.bindToIcon, false);
-
             selectable = false;
             multiline = true;
             wordWrap = false;
             autoSize = TextFieldAutoSize.NONE;
+
+            var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
+            cfg.align = Macros.FormatStringGlobal(cfg.align, defaultAlign);
+            cfg.bindToIcon = Macros.FormatBooleanGlobal(cfg.bindToIcon, false);
             antiAliasType = Macros.FormatStringGlobal(cfg.antiAliasType, AntiAliasType.ADVANCED);
             TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_NONE));
-            styleSheet = WGUtils.createStyleSheet(WGUtils.createCSS("TextExtraField", 0xFFFFFF, "$FieldFont", 14, "center"));
+            TextFieldEx.setNoTranslate(this, true);
+            defaultTextFormat = new TextFormat("$UniversCondC", 14, 0xFFFFFF, null, null, null, null, null, "center");
         }
 
         public final function dispose():void
@@ -396,7 +397,7 @@
                 {
                     //Logger.add(_textValue + " => " + value);
                     _textValue = value;
-                    htmlText = "<span class='TextExtraField'>" + _textValue + "</span>";
+                    htmlText = _textValue;
                 }
                 needAlign = true;
             }

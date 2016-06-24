@@ -166,7 +166,8 @@ package xvm.tcarousel_ui.components
             tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : AntiAliasType.ADVANCED;
             tf.autoSize = TextFieldAutoSize.NONE;
             TextFieldEx.setVerticalAlign(tf, format.valign != null ? format.valign : TextFieldEx.VALIGN_NONE);
-            tf.styleSheet = WGUtils.createStyleSheet(WGUtils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
+            //tf.styleSheet = WGUtils.createStyleSheet(WGUtils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
+            tf.defaultTextFormat = new TextFormat("$UniversCondC", 14, 0xFFFFFF, null, null, null, null, null, "center");
 
             tf.border = format.borderColor != null;
             tf.borderColor = format.borderColor != null && !isNaN(format.borderColor) ? format.borderColor : 0xCCCCCC;
@@ -326,7 +327,8 @@ package xvm.tcarousel_ui.components
             {
                 var txt:String = Macros.Format(null, format.format, options);
                 //Logger.add(txt);
-                tf.htmlText = "<span class='extraField'>" + txt + "</span>";
+                //tf.htmlText = "<span class='extraField'>" + txt + "</span>";
+                tf.htmlText = txt;
                 needAlign = true;
             }
 

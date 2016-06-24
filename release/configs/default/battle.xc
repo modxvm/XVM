@@ -13,12 +13,6 @@
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
-    // true - enable {{hp*}} macros ability in players panels and minimap. WARNING: performance expensive
-    // true - включить возможность {{hp*}} макросов в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
-    "allowHpInPanelsAndMinimap": false,
-    // true - enable {{marksOnGun}} macro in players panels and minimap. WARNING: performance expensive
-    // true - включить макрос {{marksOnGun}} в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
-    "allowMarksOnGunInPanelsAndMinimap": false,
     // true - enable custom labels on battle interface window
     // true - показывать пользовательские текстовые поля в окне боевого интерфейса
     "allowLabelsOnBattleInterface": true,

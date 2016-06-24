@@ -689,8 +689,6 @@ package com.xvm
             {
                 case "hp":
                 case "hp-max":
-                    if (Config.config.battle.allowHpInPanelsAndMinimap == false)
-                        break;
                     var key:String = name + "," + norm + "," + value + "," + vehCD;
                     res = _prepare_value_cache[key];
                     if (res)
@@ -711,8 +709,6 @@ package com.xvm
                     //Logger.add(key + " => " + res);
                     break;
                 case "hp-ratio":
-                    if (Config.config.battle.allowHpInPanelsAndMinimap == false)
-                        break;
                     if (isNaN(value))
                         value = 100;
                     res = Math.round(parseInt(norm) * value / 100).toString();

@@ -13,8 +13,10 @@
       "camera"/"postmortem"/"dynamicCameraEnabled" => "camera"/"postmortem"/"shotRecoilEffect"
       "camera"/"strategic"/"dynamicCameraEnabled" => "camera"/"strategic"/"shotRecoilEffect"
       "camera"/"sniper"/"dynamicCameraEnabled" => "camera"/"sniper"/"shotRecoilEffect"
-  * удалены параметры:
-      "battle"/"allowSpottedStatus" - больше не требуется
+  * удалены параметры (больше не требуются):
+      "battle"/"allowSpottedStatus"
+      "battle"/"allowHpInPanelsAndMinimap"
+      "battle"/"allowMarksOnGunInPanelsAndMinimap"
   * переименованы параметры в секции "iconset" и изменено значение с каталога на название атласа:
       "playersPanelAlly" => "playersPanelLeftAtlas"
       "playersPanelEnemy" => "playersPanelRightAtlas"
