@@ -942,16 +942,18 @@ package com.xvm
             if (stat == null)
                 return;
 
-            var pdata:Object = m_dict[pname];
-
             // Register contacts data
-            delete m_macros_cache[pname];
-            delete pdata["name"];
             m_contacts[String(stat._id)] = stat.xvm_contact_data;
-            RegisterMinimalMacrosData(stat.vehicleID, stat._id, stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id, stat.team == XfwConst.TEAM_ALLY);
 
             if (Config.networkServicesSettings.servicesActive != true)
                 return;
+
+            var pdata:Object = m_dict[pname];
+            if (!pdata)
+            {
+                RegisterMinimalMacrosData(stat.vehicleID, stat._id, pname + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id, stat.team == XfwConst.TEAM_ALLY);
+                pdata = m_dict[pname];
+            }
 
             // {{xvm-user}}
             pdata["xvm-user"] = Utils.getXvmUserText(stat.status);

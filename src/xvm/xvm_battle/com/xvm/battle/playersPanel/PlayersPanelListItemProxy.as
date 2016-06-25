@@ -73,6 +73,8 @@ package com.xvm.battle.playersPanel
         public function PlayersPanelListItemProxy(ui:PlayersPanelListItem, isLeftPanel:Boolean)
         {
             this.ui = ui;
+            mouseEnabled = false;
+            mouseChildren = false;
             this.isLeftPanel = isLeftPanel;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.addEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
