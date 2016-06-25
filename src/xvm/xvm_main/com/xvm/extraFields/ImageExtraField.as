@@ -190,14 +190,10 @@
             }
             if (cfg.bindToIcon && !isNaN(bindToIconOffset))
             {
-                value = isLeftPanel ? (_xValue + bindToIconOffset) : (_xValue + bindToIconOffset);
+                value = isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
                 if (x != value)
                 {
                     needAlign = true;
-                }
-                else
-                {
-                    bindToIconOffset = 0;
                 }
             }
             else
