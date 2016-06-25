@@ -270,14 +270,16 @@
 
         public function update(options:IVOMacrosOptions, bindToIconOffset:Number = NaN):void
         {
+            var needAlign:Boolean = false;
+
             if (!_initialized)
             {
                 _initialized = true;
                 setup(options);
+                needAlign = true;
             }
 
             var value:*;
-            var needAlign:Boolean = false;
 
             if (cfg.x != null)
             {
@@ -430,6 +432,8 @@
                 else if (cfg.align == TextFormatAlign.CENTER)
                     x -= width / 2;
             }
+
+            //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }
         }
     }
 }
