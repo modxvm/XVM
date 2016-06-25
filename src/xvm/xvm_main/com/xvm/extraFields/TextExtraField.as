@@ -367,7 +367,6 @@
             }
             if (cfg.bindToIcon && !isNaN(bindToIconOffset))
             {
-                border = true; borderColor = 0xFF0000;
                 value = isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
                 if (x != value)
                 {
