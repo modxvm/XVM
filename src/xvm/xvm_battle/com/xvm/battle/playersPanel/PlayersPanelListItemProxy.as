@@ -6,12 +6,13 @@ package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
     import com.xvm.extraFields.*;
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.vo.IVOMacrosOptions;
+    import com.xvm.vo.*;
     import flash.events.*;
     import flash.text.*;
     import flash.display.*;
@@ -41,6 +42,11 @@ package com.xvm.battle.playersPanel
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
         public static var INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
         public static var INVALIDATE_UPDATE_POSITIONS:String = "UPDATE_POSITIONS";
+
+        private static var MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED:String = "MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED";
+
+        private static var s_maxPlayerNameTextWidthLeft:Number = 0;
+        private static var s_maxPlayerNameTextWidthRight:Number = 0;
 
         public var xvm_enabled:Boolean;
 
@@ -83,6 +89,7 @@ package com.xvm.battle.playersPanel
             this.isLeftPanel = isLeftPanel;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.addEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            Xvm.addEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             onConfigLoaded(null);
 
@@ -100,6 +107,7 @@ package com.xvm.battle.playersPanel
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.removeEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            Xvm.removeEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             disposeExtraFields();
             _userProps = null;
@@ -121,6 +129,32 @@ package com.xvm.battle.playersPanel
                 atlas = AtlasConstants.BATTLE_ATLAS;
             setupMirroredVehicleIcon();
             App.atlasMgr.drawGraphics(atlas, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+        }
+
+        // XVM events handlers
+
+        private function onPlayerStateChanged(e:PlayerStateEvent):void
+        {
+            if (xvm_enabled && _userProps != null && e.playerName == _userProps.userName)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
+        }
+
+        private function onClanIconLoaded(vehicleID:Number, playerName:String):void
+        {
+            if (xvm_enabled && _userProps != null && playerName == _userProps.userName)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
+        }
+
+        private function onMaxPlayerNameTextWidthChanged(e:BooleanEvent):void
+        {
+            if (xvm_enabled && _userProps != null && e.value == isLeftPanel)
+            {
+                invalidate(INVALIDATE_UPDATE_POSITIONS);
+            }
         }
 
         // UIComponent
@@ -163,24 +197,6 @@ package com.xvm.battle.playersPanel
             catch (ex:Error)
             {
                 Logger.err(ex);
-            }
-        }
-
-        // XVM events handlers
-
-        private function onPlayerStateChanged(e:PlayerStateEvent):void
-        {
-            if (xvm_enabled && _userProps != null && e.playerName == _userProps.userName)
-            {
-                invalidate(INVALIDATE_PLAYER_STATE);
-            }
-        }
-
-        private function onClanIconLoaded(vehicleID:Number, playerName:String):void
-        {
-            if (xvm_enabled && _userProps != null && playerName == _userProps.userName)
-            {
-                invalidate(INVALIDATE_PLAYER_STATE);
             }
         }
 
@@ -317,7 +333,6 @@ package com.xvm.battle.playersPanel
             //Logger.add("update: " + ui.xfw_state);
             if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
             {
-                Logger.addObject(currentPlayerState);
                 if (ui.fragsTF.visible)
                 {
                     updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight);
@@ -446,18 +461,36 @@ package com.xvm.battle.playersPanel
                     }
                     break;
                 case ui.playerNameFullTF:
-                    w = Macros.FormatNumber(mcfg.nickMinWidth, currentPlayerState, 0);
-                    if (ui.playerNameFullTF.width < w)
+                    var maxPlayerNameTextWidth:Number;
+                    if (isLeftPanel)
+                    {
+                        if (s_maxPlayerNameTextWidthLeft < ui.playerNameFullTF.textWidth + 4)
+                        {
+                            s_maxPlayerNameTextWidthLeft = ui.playerNameFullTF.textWidth + 4;
+                            Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, true));
+                        }
+                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthLeft;
+                    }
+                    else
+                    {
+                        if (s_maxPlayerNameTextWidthRight < ui.playerNameFullTF.textWidth + 4)
+                        {
+                            s_maxPlayerNameTextWidthRight = ui.playerNameFullTF.textWidth + 4;
+                            Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, false));
+                        }
+                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthRight;
+                    }
+                    w = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
+                    if (ui.playerNameFullTF.width > w)
                     {
                         ui.playerNameFullTF.width = w;
                     }
                     else
                     {
-                        w = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
-                        if (ui.playerNameFullTF.width > w)
+                        w = Math.min(w, Math.max(maxPlayerNameTextWidth, Macros.FormatNumber(mcfg.nickMinWidth, currentPlayerState, 0)));
+                        if (ui.playerNameFullTF.width != w)
                         {
                             ui.playerNameFullTF.width = w;
-                            //App.utils.commons.truncateTextFieldText(ui.playerNameFullTF, ui.playerNameFullTF.htmlText);
                         }
                     }
                     break;

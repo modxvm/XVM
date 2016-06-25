@@ -11,8 +11,8 @@
     //"enabled": false,
     "removeSquadIcon": true,
     "vehicleLevelAlpha": 0,
-    "nickFormatLeft": "        {{r_size=2?|{{r_size=4?   |    }}}}{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>{{r_size=2?|{{r_size=4?   |    }}}}       &nbsp;",
+    "nickFormatLeft": "        {{r_size=2?|{{r_size=4?   |    }}}}{{name%.18s~..}}<font alpha='#A0'>{{clan}}</font>",
+    "nickFormatRight": "{{name%.18s~..}}<font alpha='#A0'>{{clan}}</font>{{r_size=2?|{{r_size=4?   |    }}}}       &nbsp;",
     "vehicleFormatLeft": "{{hp|---}} / {{hp-max}}",
     "vehicleFormatRight": "{{hp|---}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:winrate}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
@@ -29,14 +29,14 @@
       //{ "x": 0, "src": "cfg://sirmax/img/MinimapAim.png" },
       //{ "x": 0, "bindToIcon": true, "src": "cfg://sirmax/img/MinimapAim.png" },
 
-      //{ "y": 2, "width": 3, "height": 21, "valign": "center", "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
-      //{ "x": "{{r_size=2?13|{{r_size=4?16|19}}}}", "y": 2, "valign": "center", "height": 21, "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font>", "shadow": {} },
-      //{ "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "valign": "center", "height": 21, "width": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
-      //{ "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "valign": "center", "height": 21, "width": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
+      { "y": 2, "width": 3, "height": 21, "valign": "center", "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
+      { "x": "{{r_size=2?13|{{r_size=4?16|19}}}}", "y": 2, "valign": "center", "height": 21, "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font>", "shadow": {} },
+      { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "valign": "center", "height": 21, "width": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
+      { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "valign": "center", "height": 21, "width": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
 
-      //${"../default/playersPanel.xc":"clanIcon"},
-      //{ "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "enabled": true },
-      //${"../default/playersPanel.xc":"xmqpServiceMarker"},
+      ${"../default/playersPanel.xc":"clanIcon"},
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "enabled": true },
+      ${"../default/playersPanel.xc":"xmqpServiceMarker"},
       {}
     ],
     "extraFieldsRight": [
@@ -47,18 +47,18 @@
       //{ "x": 0, "src": "cfg://sirmax/img/MinimapAim.png" },
       //{ "x": 0, "bindToIcon": true, "src": "cfg://sirmax/img/MinimapAim.png" },
 
-      //{ "width": 3,  "y": 2, "valign": "center", "height": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
-      //{ "x": "{{r_size=2?13|{{r_size=4?20|21}}}}", "y": 2, "valign": "center", "height": 21, "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font> </font>", "shadow": {} },
-      //{ "x": "{{r_size=2?23|{{r_size=4?33|38}}}}", "y": 2, "valign": "center", "height": 21, "width": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
-      //{ "x": "{{r_size=2?23|{{r_size=4?33|38}}}}", "y": 2, "valign": "center", "height": 21, "width": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
+      { "width": 3,  "y": 2, "valign": "center", "height": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
+      { "x": "{{r_size=2?13|{{r_size=4?20|21}}}}", "y": 2, "valign": "center", "height": 21, "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font> </font>", "shadow": {} },
+      { "x": "{{r_size=2?23|{{r_size=4?33|38}}}}", "y": 2, "valign": "center", "height": 21, "width": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
+      { "x": "{{r_size=2?23|{{r_size=4?33|38}}}}", "y": 2, "valign": "center", "height": 21, "width": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
 
-      //${"../default/playersPanel.xc":"clanIcon"},
-      //{ "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "enabled": true },
-      //${"../default/playersPanel.xc":"xmqpServiceMarker"},
+      ${"../default/playersPanel.xc":"clanIcon"},
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "enabled": true },
+      ${"../default/playersPanel.xc":"xmqpServiceMarker"},
       {}
     ],
     "nickMinWidth": 120,
-    "nickMaxWidth": 200,
+    "nickMaxWidth": 180,
     "standardFields": [ "nick", "vehicle", "frags" ]
   },
   "medium": {
