@@ -73,6 +73,8 @@ package com.xvm.battle.playersPanel
         private var extraFieldsLong:ExtraFields = null;
         private var extraFieldsFull:ExtraFields = null;
 
+        private var currentPlayerState:VOPlayerState;
+
         public function PlayersPanelListItemProxy(ui:PlayersPanelListItem, isLeftPanel:Boolean)
         {
             this.ui = ui;
@@ -107,6 +109,7 @@ package com.xvm.battle.playersPanel
         public function setPlayerNameProps(userProps:IUserProps):void
         {
             _userProps = userProps;
+            currentPlayerState = BattleState.getByPlayerName(_userProps.userName);
         }
 
         public function setVehicleIcon(vehicleImage:String):void
@@ -131,6 +134,10 @@ package com.xvm.battle.playersPanel
                 if (mcfg == null || _userProps == null)
                     return;
 
+                if (isInvalid(INVALIDATE_PLAYER_STATE))
+                {
+                    currentPlayerState = BattleState.getByPlayerName(_userProps.userName);
+                }
                 if (isInvalid(INVALIDATE_UPDATE_COLORS))
                 {
                     updateVehicleIcon();
@@ -310,44 +317,43 @@ package com.xvm.battle.playersPanel
             //Logger.add("update: " + ui.xfw_state);
             if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
             {
-                var playerState:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
-
+                Logger.addObject(currentPlayerState);
                 if (ui.fragsTF.visible)
                 {
-                    updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, playerState);
+                    updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight);
                 }
                 if (ui.playerNameFullTF.visible)
                 {
-                    updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, playerState);
+                    updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight);
                 }
                 if (ui.vehicleTF.visible)
                 {
-                    updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, playerState);
+                    updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight);
                 }
-                updateVehicleLevel(playerState);
+                updateVehicleLevel();
             }
         }
 
-        private function updateStandardTextField(tf:TextField, format:String, playerState:VOPlayerState):void
+        private function updateStandardTextField(tf:TextField, format:String):void
         {
             //if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
 
-            var txt:String = Macros.Format(format, playerState);
+            var txt:String = Macros.Format(format, currentPlayerState);
             if (_standardTextFieldsTexts[tf.name] == txt)
                 return;
             _standardTextFieldsTexts[tf.name] = txt;
-            var schemeName:String = getSchemeNameForPlayer(playerState);
+            var schemeName:String = getSchemeNameForPlayer();
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             tf.htmlText = "<font color='" + XfwUtils.toHtmlColor(colorScheme.rgb) + "'>" + txt + "</font>";
             invalidate(INVALIDATE_UPDATE_POSITIONS);
         }
 
-        private function updateVehicleLevel(playerState:VOPlayerState):void
+        private function updateVehicleLevel():void
         {
-            var schemeName:String = PlayerStatusSchemeName.getSchemeForVehicleLevel(playerState.isDead);
+            var schemeName:String = PlayerStatusSchemeName.getSchemeForVehicleLevel(currentPlayerState.isDead);
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             ui.vehicleLevel.transform.colorTransform = colorScheme.colorTransform;
-            ui.vehicleLevel.alpha *= Macros.FormatNumber(mcfg.vehicleLevelAlpha, playerState, 100) / 100.0;
+            ui.vehicleLevel.alpha *= Macros.FormatNumber(mcfg.vehicleLevelAlpha, currentPlayerState, 100) / 100.0;
         }
 
         // update positions
@@ -380,6 +386,7 @@ package com.xvm.battle.playersPanel
                 field = getFieldByConfigName(mcfg.standardFields[i]);
                 if (field)
                 {
+                    updateFieldWidth(field);
                     if (field.x != lastX - field.width)
                     {
                         field.x = lastX - field.width;
@@ -400,6 +407,7 @@ package com.xvm.battle.playersPanel
                 field = getFieldByConfigName(mcfg.standardFields[i]);
                 if (field)
                 {
+                    updateFieldWidth(field);
                     if (field.x != lastX)
                     {
                         field.x = lastX;
@@ -425,11 +433,42 @@ package com.xvm.battle.playersPanel
             return null;
         }
 
-        // update none mode
-
-        private function updateNoneMode(playerState:VOPlayerState):void
+        private function updateFieldWidth(field:TextField):void
         {
-
+            var w:Number;
+            switch (field)
+            {
+                case ui.fragsTF:
+                    w = Macros.FormatNumber(mcfg.fragsWidth, currentPlayerState, 0);
+                    if (ui.fragsTF.width != w)
+                    {
+                        ui.fragsTF.width = w;
+                    }
+                    break;
+                case ui.playerNameFullTF:
+                    w = Macros.FormatNumber(mcfg.nickMinWidth, currentPlayerState, 0);
+                    if (ui.playerNameFullTF.width < w)
+                    {
+                        ui.playerNameFullTF.width = w;
+                    }
+                    else
+                    {
+                        w = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
+                        if (ui.playerNameFullTF.width > w)
+                        {
+                            ui.playerNameFullTF.width = w;
+                            //App.utils.commons.truncateTextFieldText(ui.playerNameFullTF, ui.playerNameFullTF.htmlText);
+                        }
+                    }
+                    break;
+                case ui.vehicleTF:
+                    w = Macros.FormatNumber(mcfg.vehicleWidth, currentPlayerState, 0);
+                    if (ui.vehicleTF.width != w)
+                    {
+                        ui.vehicleTF.width = w;
+                    }
+                    break;
+            }
         }
 
         // extra fields
@@ -488,47 +527,49 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        private function getSchemeNameForVehicle(playerState:IVOMacrosOptions = null):String
+        private function getSchemeNameForVehicle():String
         {
-            if (!playerState)
-                playerState = BattleState.getByPlayerName(_userProps.userName);
-            var isCurrentPlayer:Boolean = playerState.isCurrentPlayer && Config.config.battle.highlightVehicleIcon;
-            var isSquadPersonal:Boolean = playerState.isSquadPersonal && Config.config.battle.highlightVehicleIcon;
-            var isTeamKiller:Boolean = playerState.isTeamKiller && Config.config.battle.highlightVehicleIcon;
-            return PlayerStatusSchemeName.getSchemeNameForVehicle(isCurrentPlayer, isSquadPersonal, isTeamKiller, playerState.isDead, playerState.isOffline);
+            return PlayerStatusSchemeName.getSchemeNameForVehicle(
+                currentPlayerState.isCurrentPlayer && Config.config.battle.highlightVehicleIcon,
+                currentPlayerState.isSquadPersonal && Config.config.battle.highlightVehicleIcon,
+                currentPlayerState.isTeamKiller && Config.config.battle.highlightVehicleIcon,
+                currentPlayerState.isDead,
+                currentPlayerState.isOffline);
         }
 
-        private function getSchemeNameForPlayer(playerState:IVOMacrosOptions = null):String
+        private function getSchemeNameForPlayer():String
         {
-            if (!playerState)
-                playerState = BattleState.getByPlayerName(_userProps.userName);
-            return PlayerStatusSchemeName.getSchemeNameForPlayer(playerState.isCurrentPlayer, playerState.isSquadPersonal, playerState.isTeamKiller, playerState.isDead, playerState.isOffline);
+            return PlayerStatusSchemeName.getSchemeNameForPlayer(
+                currentPlayerState.isCurrentPlayer,
+                currentPlayerState.isSquadPersonal,
+                currentPlayerState.isTeamKiller,
+                currentPlayerState.isDead,
+                currentPlayerState.isOffline);
         }
 
         private function updateExtraFields():void
         {
-            var playerState:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
             var bindToIconOffset:Number = ui.vehicleIcon.x - x + (isLeftPanel ? ICONS_AREA_WIDTH : 0);
             switch (ui.xfw_state)
             {
                 case PLAYERS_PANEL_STATE.HIDEN:
                     extraFieldsHidden.visible = true;
-                    extraFieldsHidden.update(playerState);
+                    extraFieldsHidden.update(currentPlayerState);
                 case PLAYERS_PANEL_STATE.SHORT:
                     extraFieldsShort.visible = true;
-                    extraFieldsShort.update(playerState, bindToIconOffset);
+                    extraFieldsShort.update(currentPlayerState, bindToIconOffset);
                     break;
                 case PLAYERS_PANEL_STATE.MEDIUM:
                     extraFieldsMedium.visible = true;
-                    extraFieldsMedium.update(playerState, bindToIconOffset);
+                    extraFieldsMedium.update(currentPlayerState, bindToIconOffset);
                     break;
                 case PLAYERS_PANEL_STATE.LONG:
                     extraFieldsLong.visible = true;
-                    extraFieldsLong.update(playerState, bindToIconOffset);
+                    extraFieldsLong.update(currentPlayerState, bindToIconOffset);
                     break;
                 case PLAYERS_PANEL_STATE.FULL:
                     extraFieldsFull.visible = true;
-                    extraFieldsFull.update(playerState, bindToIconOffset);
+                    extraFieldsFull.update(currentPlayerState, bindToIconOffset);
                     break;
             }
         }
@@ -554,27 +595,6 @@ package com.xvm.battle.playersPanel
         menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
     }
 
-
-    public static var DEFAULT_SQUAD_SIZE:Number;
-
-    private var DEFAULT_WIDTH:Number = 33;
-    private var DEFAULT_NAMES_WIDTH_LARGE:Number = 263;
-    private var DEFAULT_NAMES_WIDTH_MEDIUM:Number = 79;
-    private var DEFAULT_VEHICLES_WIDTH:Number = 98;
-
-    private var m_data_arguments:Array;
-    private var m_data:Object;
-
-    private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
-    private var m_postmortemIndex:Number = 0;
-
-    private var m_lastPosition:Number = 0;
-
-    ...
-
-        if (!DEFAULT_SQUAD_SIZE)
-            DEFAULT_SQUAD_SIZE = net.wargaming.ingame.PlayersPanel.SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN * 2;
-
         GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.XMQP_HOLA, this, invalidate);
@@ -582,206 +602,6 @@ package com.xvm.battle.playersPanel
         GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
-
-    ...
-
-    private function XVMAdjustPanelSize()
-    {
-        //Logger.add("PlayersPanel.XVMAdjustPanelSize()");
-
-        //wrapper.m_frags.border = true;
-        //wrapper.m_frags.borderColor = 0xFF0000;
-        //wrapper.m_names.border = true;
-        //wrapper.m_names.borderColor = 0x00FF00;
-        //wrapper.m_vehicles.border = true;
-        //wrapper.m_vehicles.borderColor = 0x0000FF;
-
-        var namesWidth:Number = DEFAULT_NAMES_WIDTH_MEDIUM;
-        var vehiclesWidth:Number = DEFAULT_VEHICLES_WIDTH;
-        var widthDelta:Number = 0;
-
-        var isLeftPanel:Boolean = wrapper.type == "left";
-        var w:Number = Macros.FormatGlobalNumberValue(cfg[wrapper.state].width);
-        var x:Number;
-
-        switch (wrapper.state)
-        {
-            case "short":
-                widthDelta = -w;
-                break;
-            case "medium":
-                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), w);
-                widthDelta = DEFAULT_NAMES_WIDTH_MEDIUM - namesWidth - DEFAULT_WIDTH;
-                break;
-            case "medium2":
-                vehiclesWidth = w;
-                widthDelta = DEFAULT_VEHICLES_WIDTH - vehiclesWidth - DEFAULT_WIDTH;
-                break;
-            case "large":
-                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), w);
-                vehiclesWidth = XVMGetMaximumFieldWidth(wrapper.m_vehicles);
-                //Logger.add("w: " + vehiclesWidth + " " + wrapper.m_vehicles.htmlText);
-                widthDelta = DEFAULT_NAMES_WIDTH_LARGE - namesWidth + DEFAULT_VEHICLES_WIDTH - vehiclesWidth;
-                break;
-            default:
-                x = isLeftPanel
-                    ? net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x
-                    : wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x;
-                if (wrapper.m_list._x != x || wrapper.players_bg._x != x)
-                {
-                    wrapper.players_bg._x = x;
-                    wrapper.m_list._x = x;
-                    var sqx:Number = isLeftPanel
-                        ? -x + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN
-                        : wrapper.players_bg._width - x - DEFAULT_SQUAD_SIZE + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN;
-                    wrapper.m_list.updateSquadIconPosition();
-                    GlobalEventDispatcher.dispatchEvent({
-                        type: isLeftPanel ? Events.E_LEFT_PANEL_SIZE_ADJUSTED : Events.E_RIGHT_PANEL_SIZE_ADJUSTED,
-                        state: wrapper.state
-                    });
-                }
-                return;
-        }
-
-        var squadSize:Number = cfg[wrapper.state].removeSquadIcon ? 0 : DEFAULT_SQUAD_SIZE;
-        widthDelta += DEFAULT_SQUAD_SIZE - squadSize;
-
-        var changed:Boolean = false;
-
-        if (wrapper.m_names._visible && wrapper.m_names._width != namesWidth)
-        {
-            changed = true;
-            wrapper.m_names._width = namesWidth;
-        }
-
-        if (wrapper.m_vehicles._visible && wrapper.m_vehicles._width != vehiclesWidth)
-        {
-            changed = true;
-            wrapper.m_vehicles._width = vehiclesWidth;
-        }
-
-        if (isLeftPanel)
-        {
-            x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x - widthDelta;
-            if (wrapper.players_bg._x != x)
-            {
-                changed = true;
-                wrapper.players_bg._x = x;
-                wrapper.m_list._x = x;
-                wrapper.m_list.updateSquadIconPosition(-x + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN);
-            }
-
-            x = squadSize;
-
-            if (wrapper.m_names._visible)
-            {
-                if (wrapper.m_names._x != x)
-                {
-                    changed = true;
-                    wrapper.m_names._x = x;
-                }
-                x += wrapper.m_names._width;
-            }
-
-            if (wrapper.m_frags._visible)
-            {
-                if (wrapper.m_frags._x != x)
-                {
-                    changed = true;
-                    wrapper.m_frags._x = x;
-                }
-                x += wrapper.m_frags._width;
-            }
-
-            if (wrapper.m_vehicles._visible)
-            {
-                if (wrapper.m_vehicles._x != x)
-                {
-                    changed = true;
-                    wrapper.m_vehicles._x = x;
-                }
-            }
-        }
-        else
-        {
-            x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x + widthDelta;
-            if (wrapper.players_bg._x != x)
-            {
-                changed = true;
-                wrapper.players_bg._x = x;
-                wrapper.m_list._x = x;
-                wrapper.m_list.updateSquadIconPosition(wrapper.players_bg._width - x - squadSize + net.wargaming.ingame.PlayersPanel.SQUAD_ICO_MARGIN);
-            }
-
-            x = wrapper.players_bg._width - squadSize;
-
-            if (wrapper.m_names._visible)
-            {
-                x -= wrapper.m_names._width;
-                if (wrapper.m_names._x != x)
-                {
-                    changed = true;
-                    wrapper.m_names._x = x;
-                }
-            }
-
-            if (wrapper.m_frags._visible)
-            {
-                x -= wrapper.m_frags._width;
-                if (wrapper.m_frags._x != x)
-                {
-                    changed = true;
-                    wrapper.m_frags._x = x;
-                }
-            }
-
-            if (wrapper.m_vehicles._visible)
-            {
-                x -= wrapper.m_vehicles._width;
-                if (wrapper.m_vehicles._x != x)
-                {
-                    changed = true;
-                    wrapper.m_vehicles._x = x;
-                }
-            }
-        }
-
-        if (changed)
-        {
-            GlobalEventDispatcher.dispatchEvent({
-                type: isLeftPanel ? Events.E_LEFT_PANEL_SIZE_ADJUSTED : Events.E_RIGHT_PANEL_SIZE_ADJUSTED,
-                state: wrapper.state
-            });
-        }
-    }
-
-    private function XVMGetMaximumFieldWidth(field:TextField)
-    {
-        var max_width = 0;
-        var len:Number = field.numLines;
-        for (var i = 0; i < len; ++i)
-        {
-            var w:Number = field.getLineMetrics(i).width;
-            if (w > max_width)
-                max_width = w;
-        }
-        return Math.round(max_width) + 4; // 4 is the size of gutters
-    }
-
-    // set leading and centering on cell, because of align=top
-    private function AdjustLeading(field:TextField)
-    {
-        if (!field._visible)
-            return;
-
-        var leading:Number = Math.round(33.95 - (field.textHeight + 9) / field.numLines);
-        if (leading != 9)
-            field.htmlText = field.htmlText.split('LEADING="9"').join('LEADING="' + leading + '"');
-
-        field._y = centeredTextY + leading / 2.0;
-
-        //Logger.add(field.htmlText);
-    }
 
     private static function get extraPanelsHolder():MovieClip
     {
