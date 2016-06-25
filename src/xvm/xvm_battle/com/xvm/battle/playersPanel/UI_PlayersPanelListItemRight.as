@@ -52,12 +52,57 @@ package com.xvm.battle.playersPanel
             }
         }
 
+        override public function setPlayerNameFullWidth(param1:Number):void
+        {
+            if (!proxy.xvm_enabled)
+            {
+                super.setPlayerNameFullWidth(param1);
+            }
+            else
+            {
+                // set static value to send only one event
+                super.setPlayerNameFullWidth(200);
+            }
+        }
+
+        override public function setVehicleName(param1:String):void
+        {
+            if (!proxy.xvm_enabled)
+            {
+                super.setVehicleName(param1);
+            }
+            else
+            {
+                // set static value to send only one event
+                super.setVehicleName("");
+            }
+        }
+
+        override public function setFrags(param1:int):void
+        {
+            if (!proxy.xvm_enabled)
+            {
+                super.setFrags(param1);
+            }
+            else
+            {
+                // set static value to send only one event
+                super.setFrags(0);
+            }
+        }
+
         override public function setVehicleIcon(vehicleImage:String):void
         {
             try
             {
-                //super.setVehicleIcon(vehicleImage);
-                proxy.setVehicleIcon(vehicleImage);
+                if (!proxy.xvm_enabled)
+                {
+                    super.setVehicleIcon(vehicleImage);
+                }
+                else
+                {
+                    proxy.setVehicleIcon(vehicleImage);
+                }
             }
             catch (ex:Error)
             {
@@ -72,17 +117,13 @@ package com.xvm.battle.playersPanel
                 super.draw();
                 if (proxy.xvm_enabled)
                 {
-                    if (isInvalid(PlayersPanelInvalidationType.PLAYER_NAME_FULL_WIDTH))
-                    {
-                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
-                    }
                     if (isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
                     {
                         proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_UPDATE_COLORS);
                     }
                     if (isInvalid(InvalidationType.STATE))
                     {
-                        proxy.applyState();
+                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
                     }
                     proxy.validateNow();
                 }

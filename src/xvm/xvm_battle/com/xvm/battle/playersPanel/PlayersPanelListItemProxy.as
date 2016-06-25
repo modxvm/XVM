@@ -39,7 +39,6 @@ package com.xvm.battle.playersPanel
 
         public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
-        public static var INVALIDATE_UPDATE_POSITIONS:String = "UPDATE_POSITIONS";
         public static var INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
 
         public var xvm_enabled:Boolean;
@@ -139,11 +138,11 @@ package com.xvm.battle.playersPanel
                 {
                     applyState();
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_UPDATE_POSITIONS, INVALIDATE_UPDATE_COLORS))
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_UPDATE_COLORS))
                 {
                     updateStandardFields();
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_UPDATE_POSITIONS))
+                if (isInvalid(INVALIDATE_PLAYER_STATE))
                 {
                     updatePositions();
                     updateExtraFields();
@@ -152,6 +151,24 @@ package com.xvm.battle.playersPanel
             catch (ex:Error)
             {
                 Logger.err(ex);
+            }
+        }
+
+        // XVM events handlers
+
+        private function onPlayerStateChanged(e:PlayerStateEvent):void
+        {
+            if (xvm_enabled && _userProps != null && e.playerName == _userProps.userName)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
+        }
+
+        private function onClanIconLoaded(vehicleID:Number, playerName:String):void
+        {
+            if (xvm_enabled && _userProps != null && playerName == _userProps.userName)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
             }
         }
 
@@ -200,7 +217,7 @@ package com.xvm.battle.playersPanel
                     ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
                 }
 
-                ui.invalidate();
+                ui.invalidateState();
             }
             catch (ex:Error)
             {
@@ -219,22 +236,6 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        private function onPlayerStateChanged(e:PlayerStateEvent):void
-        {
-            if (_userProps != null && e.playerName == _userProps.userName)
-            {
-                invalidate(INVALIDATE_PLAYER_STATE);
-            }
-        }
-
-        private function onClanIconLoaded(vehicleID:Number, playerName:String):void
-        {
-            if (_userProps != null && playerName == _userProps.userName)
-            {
-                invalidate(INVALIDATE_PLAYER_STATE);
-            }
-        }
-
         public function applyState():void
         {
             //Logger.add("applyState: " + ui.xfw_state);
@@ -248,6 +249,7 @@ package com.xvm.battle.playersPanel
                     break;
                 case PLAYERS_PANEL_STATE.HIDEN:
                     ui.visible = true;
+                    ui.x = isLeftPanel ? -WIDTH : WIDTH;
                     break;
             }
             if (extraFieldsHidden)
@@ -260,7 +262,7 @@ package com.xvm.battle.playersPanel
                 extraFieldsLong.visible = false;
             if (extraFieldsHidden)
                 extraFieldsFull.visible = false;
-            invalidate(INVALIDATE_UPDATE_POSITIONS, INVALIDATE_PLAYER_STATE);
+            invalidate(INVALIDATE_PLAYER_STATE);
         }
 
         // update
