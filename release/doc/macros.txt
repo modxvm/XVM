@@ -62,6 +62,7 @@ Legend:
 │ D │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │   │ number of squad (1,2,...), empty if not in squad
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ X │ Flag for player selected in the personal cabinet or determined from the client language
+│ S │ {{clanicon}}       │ X │ X │ X │   │ X │   │   │   │ macro with clan embled image path value
 │ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │   │ Global map clan rating, from 1 to 1000 (http://worldoftanks.eu/leaderboard/clans/)
 │ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
 │ S │ {{turret}}         │   │   │   │   │ X │   │   │   │ stock turret marker
