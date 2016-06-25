@@ -36,7 +36,7 @@
       { "x": 25, "y": 2, "height": 24, "width": "{{hp-max:230}}", "bgColor": 0, "alpha": "{{alive?50|0}}" },
       { "x": 25, "y": 2, "height": 24, "width": "{{hp:230}}", "bgColor": ${"def.c1"}, "alpha": 60 },
       { "x": 0, "width": 3, "y": 2, "height": 24, "bgColor": ${"def.c1"}, "alpha": "{{alive?80|0}}" },
-      { "x": 14, "height": 28, ""align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 14, "height": 28, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 31, "height": 28, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 275, "height": 28, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 300, "src": "cfg://../../res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
