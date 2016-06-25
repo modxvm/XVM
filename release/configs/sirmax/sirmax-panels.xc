@@ -57,11 +57,15 @@
       ${"../default/playersPanel.xc":"xmqpServiceMarker"},
       {}
     ],
-    "width": 120
+    "nickMinWidth": 120,
+    "nickMaxWidth": 200,
+    "standardFields": [ "nick", "vehicle", "frags" ]
   },
   "medium": {
     //"enabled": false,
-    "width": 80,
+    "nickMinWidth": 80,
+    "nickMaxWidth": 80,
+    //"standardFields": [ "nick", "vehicle", "frags" ]
     //"removeSquadIcon": true,
     "vehicleLevelAlpha": 0,
     "nickFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
@@ -73,8 +77,9 @@
     "__stub__": null
   },
   "medium2": {
-    "enabled": false,
-    "width": 80,
+    //"enabled": false,
+    "vehicleWidth": 80,
+    //"standardFields": [ "nick", "vehicle", "frags" ]
     //"removeSquadIcon": true,
     "vehicleLevelAlpha": 0,
     "vehicleFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
@@ -83,13 +88,15 @@
   },
   "short": {
     //"enabled": false,
-    //"width": 80,
+    "fragsWidth": 20,
+    //"standardFields": [ "nick", "vehicle", "frags" ]
     "vehicleLevelAlpha": 70,
     //"removeSquadIcon": true,
     "__stub__": null
   },
   "none": {
     //"enabled": false,
+    "expandOnMouse": false,
     //"layout": "horizontal",
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },

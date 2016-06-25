@@ -79,6 +79,9 @@
     "none": {
       // false - disable (отключить)
       "enabled": true,
+      // Switch to "large" mode when mouse cursor in the 230px area from the edge of the screen
+      // Переключить в режим "large" если курсор мыши в области 230px от края экрана
+      "expandOnMouse": true,
       // Layout ("vertical" or "horizontal")
       // Размещение ("vertical" - вертикально, или "horizontal" - горизонтально)
       "layout": "vertical",
@@ -168,19 +171,44 @@
     "short": {
       // false - disable (отключить)
       "enabled": true,
-      // Minimum width of the column, 0-250. Default is 0.
-      // Минимальная ширина поля, 0-250. По умолчанию: 0.
-      "width": 0,
+      // Displayed standard fields in this mode and their order.
+      // Available names: "frags", "vehicle", "nick".
+      // Отображаемые стандартные поля в данном режиме, и их порядок.
+      // Допустимые названия: "frags", "vehicle", "nick".
+      "standardFields": [ "frags" ],
+      // Switch to "large" mode when mouse cursor in the 230px area from the edge of the screen
+      // Переключить в режим "large" если курсор мыши в области 230px от края экрана
+      "expandOnMouse": true,
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
       // transparency of vehicle level
       // прозрачность уровня танка
       "vehicleLevelAlpha": 100,
+      // Width of the frags column, 0-250. Default is 24.
+      // Ширина поля фрагов, 0-250. По умолчанию: 24.
+      "fragsWidth": 24,
       // Display format for frags (macros allowed, see macros.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
+      // Minimum width of the player's name column, 0-250. Default is 46.
+      // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 46.
+      "nickMinWidth": 46,
+      // Maximum width of the player's name column, 0-250. Default is 200.
+      // Максимальная ширина поля имени игрока, 0-250. По умолчанию: 200.
+      "nickMaxWidth": 200,
+      // Display format for player nickname (macros allowed, see macros.txt).
+      // Формат отображения имени игрока (допускаются макроподстановки, см. macros.txt).
+      "nickFormatLeft": "<font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font>",
+      // Width of the vehicle name column, 0-250. Default is 72.
+      // Ширина поля названия танка, 0-250. По умолчанию: 72.
+      "vehicleWidth": 72,
+      // Display format for vehicle name (macros allowed, see macros.txt).
+      // Формат отображения названия танка (допускаются макроподстановки, см. macros.txt).
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}",
       // Extra fields. Each field have default size 350x25.
       // Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер по умолчанию 350x25.
@@ -209,25 +237,44 @@
     "medium": {
       // false - disable (отключить)
       "enabled": true,
-      // Minimum width of the player's name column, 0-250. Default is 46.
-      // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 46.
-      "width": 46,
+      // Displayed standard fields in this mode and their order.
+      // Available names: "frags", "vehicle", "nick".
+      // Отображаемые стандартные поля в данном режиме, и их порядок.
+      // Допустимые названия: "frags", "vehicle", "nick".
+      "standardFields": [ "frags", "nick" ],
+      // Switch to "large" mode when mouse cursor in the 230px area from the edge of the screen
+      // Переключить в режим "large" если курсор мыши в области 230px от края экрана
+      "expandOnMouse": true,
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
       // transparency of vehicle level
       // прозрачность уровня танка
       "vehicleLevelAlpha": 100,
-      // Display format for the left panel (macros allowed, see macros.txt).
-      // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
-      "nickFormatLeft": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font> <font alpha='#A0'>{{clan}}</font>",
-      // Display format for the right panel (macros allowed, see macros.txt).
-      // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
-      "nickFformatRight": "<font alpha='#A0'>{{clan}}</font> <font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{name%.12s~..}}</font>",
+      // Width of the frags column, 0-250. Default is 24.
+      // Ширина поля фрагов, 0-250. По умолчанию: 24.
+      "fragsWidth": 24,
       // Display format for frags (macros allowed, see macros.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
+      // Minimum width of the player's name column, 0-250. Default is 46.
+      // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 46.
+      "nickMinWidth": 46,
+      // Maximum width of the player's name column, 0-250. Default is 200.
+      // Максимальная ширина поля имени игрока, 0-250. По умолчанию: 200.
+      "nickMaxWidth": 200,
+      // Display format for player nickname (macros allowed, see macros.txt).
+      // Формат отображения имени игрока (допускаются макроподстановки, см. macros.txt).
+      "nickFormatLeft": "<font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font>",
+      // Width of the vehicle name column, 0-250. Default is 72.
+      // Ширина поля названия танка, 0-250. По умолчанию: 72.
+      "vehicleWidth": 72,
+      // Display format for vehicle name (macros allowed, see macros.txt).
+      // Формат отображения названия танка (допускаются макроподстановки, см. macros.txt).
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)
@@ -254,25 +301,44 @@
     "medium2": {
       // false - disable (отключить)
       "enabled": true,
-      // Maximum width of the vehicle name column, 0-250. Default is 65.
-      // Максимальная ширина поля названия танка, 0-250. По умолчанию: 65.
-      "width": 65,
+      // Displayed standard fields in this mode and their order.
+      // Available names: "frags", "vehicle", "nick".
+      // Отображаемые стандартные поля в данном режиме, и их порядок.
+      // Допустимые названия: "frags", "vehicle", "nick".
+      "standardFields": [ "frags", "vehicle" ],
+      // Switch to "large" mode when mouse cursor in the 230px area from the edge of the screen
+      // Переключить в режим "large" если курсор мыши в области 230px от края экрана
+      "expandOnMouse": true,
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
       // transparency of vehicle level
       // прозрачность уровня танка
       "vehicleLevelAlpha": 100,
-      // Display format for the left panel (macros allowed, see macros.txt).
-      // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
-      "vehicleFormatLeft": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
-      // Display format for the right panel (macros allowed, see macros.txt).
-      // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
-      "vehicleFormatRight": "<font color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
+      // Width of the frags column, 0-250. Default is 24.
+      // Ширина поля фрагов, 0-250. По умолчанию: 24.
+      "fragsWidth": 24,
       // Display format for frags (macros allowed, see macros.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
+      // Minimum width of the player's name column, 0-250. Default is 46.
+      // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 46.
+      "nickMinWidth": 46,
+      // Maximum width of the player's name column, 0-250. Default is 200.
+      // Максимальная ширина поля имени игрока, 0-250. По умолчанию: 200.
+      "nickMaxWidth": 200,
+      // Display format for player nickname (macros allowed, see macros.txt).
+      // Формат отображения имени игрока (допускаются макроподстановки, см. macros.txt).
+      "nickFormatLeft": "<font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font>",
+      // Width of the vehicle name column, 0-250. Default is 72.
+      // Ширина поля названия танка, 0-250. По умолчанию: 72.
+      "vehicleWidth": 72,
+      // Display format for vehicle name (macros allowed, see macros.txt).
+      // Формат отображения названия танка (допускаются макроподстановки, см. macros.txt).
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)
@@ -299,27 +365,41 @@
     "large": {
       // false - disable (отключить)
       "enabled": true,
-      // Minimum width of the player's name column, 0-250. Default is 170.
-      // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 170.
-      "width": 100,
+      // Displayed standard fields in this mode and their order.
+      // Available names: "frags", "vehicle", "nick".
+      // Отображаемые стандартные поля в данном режиме, и их порядок.
+      // Допустимые названия: "frags", "vehicle", "nick".
+      "standardFields": [ "frags", "nick", "vehicle" ],
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
       // transparency of vehicle level
       // прозрачность уровня танка
       "vehicleLevelAlpha": 100,
-      // Display format for player nickname (macros allowed, see macros.txt).
-      // Формат отображения имени игрока (допускаются макроподстановки, см. macros.txt).
-      "nickFormatLeft": "<font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
-      "nickFormatRight": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font>",
-      // Display format for vehicle name (macros allowed, see macros.txt).
-      // Формат отображения названия танка (допускаются макроподстановки, см. macros.txt).
-      "vehicleFormatLeft": "{{vehicle}}",
-      "vehicleFormatRight": "{{vehicle}}",
+      // Width of the frags column, 0-250. Default is 24.
+      // Ширина поля фрагов, 0-250. По умолчанию: 24.
+      "fragsWidth": 24,
       // Display format for frags (macros allowed, see macros.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
+      // Minimum width of the player's name column, 0-250. Default is 46.
+      // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 46.
+      "nickMinWidth": 46,
+      // Maximum width of the player's name column, 0-250. Default is 200.
+      // Максимальная ширина поля имени игрока, 0-250. По умолчанию: 200.
+      "nickMaxWidth": 200,
+      // Display format for player nickname (macros allowed, see macros.txt).
+      // Формат отображения имени игрока (допускаются макроподстановки, см. macros.txt).
+      "nickFormatLeft": "<font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <font face='mono' size='{{xvm-stat?13|0}}' color='{{c:r}}' alpha='{{alive?#FF|#80}}'>{{r}}</font>",
+      // Width of the vehicle name column, 0-250. Default is 72.
+      // Ширина поля названия танка, 0-250. По умолчанию: 72.
+      "vehicleWidth": 72,
+      // Display format for vehicle name (macros allowed, see macros.txt).
+      // Формат отображения названия танка (допускаются макроподстановки, см. macros.txt).
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)

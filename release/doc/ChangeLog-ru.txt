@@ -26,6 +26,19 @@
       "vehicleMarkerEnemy" => "vehicleMarkerRightAtlas"
   * добавлен макрос {{clanicon}} со значением пути эмблемы клана
   * удалена опция "clanIcon" в секциях "battleLoading", "statisticForm", "playersPanel" и в маркерах
+  * добавлены опции во все режимы в секции "playersPanel":
+      "standardFields" - отображаемые стандартные поля в данном режиме, и их порядок.
+                         допустимые названия: "frags", "vehicle", "nick".
+      "fragsWidth" - ширина поля фрагов
+      "vehicleWidth" - ширина поля названия танка
+      "nickMinWidth" - минимальная ширина поля имени игрока
+      "nickMaxWidth" - максимальная ширина поля имени игрока
+      "expandOnMouse" - переключить в режим "large" если курсор мыши в области 230px от края экрана
+  * удалены опции в секции "playersPanel":
+     "short"/"width"
+     "medium"/"width"
+     "medium2"/"width"
+     "large"/"width"
 
 XVM-6.3.2:
   * обновление для микропатча WoT 0.9.15.0.1

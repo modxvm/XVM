@@ -39,8 +39,8 @@ package com.xvm.battle.playersPanel
 
         public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
-        public static var INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
         public static var INVALIDATE_UPDATE_POSITIONS:String = "UPDATE_POSITIONS";
+        public static var INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
 
         public var xvm_enabled:Boolean;
 
@@ -49,6 +49,9 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_DEADBG_ALPHA:Number;
         private var DEFAULT_VEHICLE_ICON_X:Number;
         private var DEFAULT_VEHICLE_LEVEL_X:Number;
+        private var DEFAULT_FRAGS_WIDTH:Number;
+        private var DEFAULT_VEHICLE_WIDTH:Number;
+        private var DEFAULT_PLAYERNAMECUT_WIDTH:Number;
 
         private var pcfg:CPlayersPanel;
         private var mcfg:CPlayersPanelMode;
@@ -58,7 +61,6 @@ package com.xvm.battle.playersPanel
 
         private var _userProps:IUserProps = null;
 
-        private var _savedXValue:Object = {};
         private var _standardTextFieldsTexts:Object = {};
 
         private var opt_removeSelectedBackground:Boolean;
@@ -86,6 +88,9 @@ package com.xvm.battle.playersPanel
             DEFAULT_DEADBG_ALPHA = ui.deadBg.alpha;
             DEFAULT_VEHICLE_ICON_X = ui.vehicleIcon.x;
             DEFAULT_VEHICLE_LEVEL_X = ui.vehicleLevel.x;
+            DEFAULT_FRAGS_WIDTH = ui.fragsTF.width;
+            DEFAULT_VEHICLE_WIDTH = ui.vehicleTF.width;
+            DEFAULT_PLAYERNAMECUT_WIDTH = ui.playerNameCutTF.width;
         }
 
         override protected function onDispose():void
@@ -114,31 +119,6 @@ package com.xvm.battle.playersPanel
             App.atlasMgr.drawGraphics(atlas, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
         }
 
-        public function applyState():void
-        {
-            //Logger.add("applyState: " + ui.xfw_state);
-            switch (ui.xfw_state)
-            {
-                case PLAYERS_PANEL_STATE.FULL:
-                case PLAYERS_PANEL_STATE.LONG:
-                case PLAYERS_PANEL_STATE.MEDIUM:
-                case PLAYERS_PANEL_STATE.SHORT:
-                    mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
-                    break;
-            }
-            if (extraFieldsHidden)
-                extraFieldsHidden.visible = false;
-            if (extraFieldsHidden)
-                extraFieldsShort.visible = false;
-            if (extraFieldsHidden)
-                extraFieldsMedium.visible = false;
-            if (extraFieldsHidden)
-                extraFieldsLong.visible = false;
-            if (extraFieldsHidden)
-                extraFieldsFull.visible = false;
-            invalidate(INVALIDATE_PANEL_STATE);
-        }
-
         // UIComponent
 
         override protected function draw():void
@@ -150,22 +130,22 @@ package com.xvm.battle.playersPanel
                 if (mcfg == null || _userProps == null)
                     return;
 
-                if (isInvalid(INVALIDATE_UPDATE_POSITIONS))
-                {
-                    _savedXValue = ui.x;
-                }
                 if (isInvalid(INVALIDATE_UPDATE_COLORS))
                 {
                     updateVehicleIcon();
                     _standardTextFieldsTexts = { };
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_COLORS))
+                if (isInvalid(INVALIDATE_PANEL_STATE))
+                {
+                    applyState();
+                }
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_UPDATE_POSITIONS, INVALIDATE_UPDATE_COLORS))
                 {
                     updateStandardFields();
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE))
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_UPDATE_POSITIONS))
                 {
-                    updatePanelSize();
+                    updatePositions();
                     updateExtraFields();
                 }
             }
@@ -200,13 +180,13 @@ package com.xvm.battle.playersPanel
                 //Logger.add("xvm_enabled = " + xvm_enabled);
                 if (xvm_enabled)
                 {
-                    var alpha:Number = Macros.FormatNumberGlobal(pcfg.alpha, 80) / 100.0;
-                    ui.bg.alpha = alpha;
-                    ui.selfBg.alpha = alpha;
-                    ui.deadBg.alpha = alpha;
-
                     opt_removeSelectedBackground = Macros.FormatBooleanGlobal(pcfg.removeSelectedBackground, false);
                     opt_vehicleIconAlpha = Macros.FormatNumberGlobal(pcfg.iconAlpha, 100) / 100.0;
+
+                    var alpha:Number = Macros.FormatNumberGlobal(pcfg.alpha, 80) / 100.0;
+                    ui.bg.alpha = alpha;
+                    ui.selfBg.alpha = opt_removeSelectedBackground ? 0 : alpha;
+                    ui.deadBg.alpha = alpha;
 
                     createExtraFields();
                 }
@@ -215,6 +195,9 @@ package com.xvm.battle.playersPanel
                     ui.bg.alpha = DEFAULT_BG_ALPHA;
                     ui.selfBg.alpha = DEFAULT_SELFBG_ALPHA;
                     ui.deadBg.alpha = DEFAULT_DEADBG_ALPHA;
+                    ui.fragsTF.width = DEFAULT_FRAGS_WIDTH;
+                    ui.vehicleIcon.width = DEFAULT_VEHICLE_WIDTH;
+                    ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
                 }
 
                 ui.invalidate();
@@ -250,6 +233,34 @@ package com.xvm.battle.playersPanel
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }
+        }
+
+        public function applyState():void
+        {
+            //Logger.add("applyState: " + ui.xfw_state);
+            switch (ui.xfw_state)
+            {
+                case PLAYERS_PANEL_STATE.FULL:
+                case PLAYERS_PANEL_STATE.LONG:
+                case PLAYERS_PANEL_STATE.MEDIUM:
+                case PLAYERS_PANEL_STATE.SHORT:
+                    mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
+                    break;
+                case PLAYERS_PANEL_STATE.HIDEN:
+                    ui.visible = true;
+                    break;
+            }
+            if (extraFieldsHidden)
+                extraFieldsHidden.visible = false;
+            if (extraFieldsHidden)
+                extraFieldsShort.visible = false;
+            if (extraFieldsHidden)
+                extraFieldsMedium.visible = false;
+            if (extraFieldsHidden)
+                extraFieldsLong.visible = false;
+            if (extraFieldsHidden)
+                extraFieldsFull.visible = false;
+            invalidate(INVALIDATE_UPDATE_POSITIONS, INVALIDATE_PLAYER_STATE);
         }
 
         // update
@@ -289,7 +300,6 @@ package com.xvm.battle.playersPanel
             }
             updateFrags(playerState);
             updateVehicleLevel(playerState);
-            updateSelfBg(playerState);
         }
 
         private function updateVehicleLevel(playerState:VOPlayerState):void
@@ -298,11 +308,6 @@ package com.xvm.battle.playersPanel
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             ui.vehicleLevel.transform.colorTransform = colorScheme.colorTransform;
             ui.vehicleLevel.alpha *= Macros.FormatNumber(mcfg.vehicleLevelAlpha, playerState, 100) / 100.0;
-        }
-
-        private function updateSelfBg(playerState:VOPlayerState):void
-        {
-            ui.selfBg.visible = playerState.isSelected && !opt_removeSelectedBackground;
         }
 
         private function updatePlayerName(playerState:VOPlayerState):void
@@ -337,13 +342,13 @@ package com.xvm.battle.playersPanel
             return true;
         }
 
-        // update panel size
+        // update positions
 
-        private function updatePanelSize():void
+        private function updatePositions():void
         {
             if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN && mcfg.removeSquadIcon)
             {
-                ui.x = _savedXValue + isLeftPanel ? -SQUAD_ITEMS_AREA_WIDTH : SQUAD_ITEMS_AREA_WIDTH;
+                //ui.x = _savedXValue + isLeftPanel ? -SQUAD_ITEMS_AREA_WIDTH : SQUAD_ITEMS_AREA_WIDTH;
             }
             x = -ui.x;
             updateExtraFields();
