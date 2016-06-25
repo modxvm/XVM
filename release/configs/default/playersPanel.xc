@@ -28,6 +28,21 @@
     // настройки тени (см. ниже).
     "shadow": {}
   },
+  // Clan icon definition.
+  // Шаблон иконки клана.
+  "clanIcon": {
+    "enabled": true,
+    "x": -16, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90, "bindToIcon": true,
+    "src": "{{clanicon}}"
+    //"format": "<img src='{{clanicon}}' width='16' height='16'>"
+  },
+  // Is XVM user marker definition.
+  // Шаблон маркера пользователя XVM.
+  "xvmUserMarker": {
+    "enabled": false,
+    "x": -70, "y": 5, "bindToIcon": true,
+    "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png"
+  },
   // XMQP service marker definition.
   // Шаблон маркера сервиса XMQP.
   "xmqpServiceMarker": {
@@ -166,11 +181,15 @@
       // Формат отображения фрагов (допускаются макроподстановки, см. macros.txt).
       "fragsFormatLeft": "{{frags}}",
       "fragsFormatRight": "{{frags}}",
-      // Extra fields. Fields are placed one above the other.
-      // Дополнительные поля. Поля располагаются друг над другом.
+      // Extra fields. Each field have default size 350x25.
+      // Fields are placed one above the other.
+      // Дополнительные поля. Каждое поле имеет размер по умолчанию 350x25.
+      // Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
+        ${"clanIcon"},
+        ${"xvmUserMarker"},
         // XMQP service marker (see above).
         // Маркер сервиса XMQP (см. выше).
         ${"xmqpServiceMarker"}
@@ -178,6 +197,8 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
+        ${"clanIcon"},
+        ${"xvmUserMarker"},
         // enemy spotted status marker (see above).
         // маркер статуса засвета противника (см. выше).
         ${"enemySpottedMarker"}
@@ -212,6 +233,8 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
+        ${"clanIcon"},
+        ${"xvmUserMarker"},
         // XMQP service marker (see above).
         // Маркер сервиса XMQP (см. выше).
         ${"xmqpServiceMarker"}
@@ -219,6 +242,8 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
+        ${"clanIcon"},
+        ${"xvmUserMarker"},
         // enemy spotted status marker (see above).
         // маркер статуса засвета противника (см. выше).
         ${"enemySpottedMarker"}
@@ -253,6 +278,8 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
+        ${"clanIcon"},
+        ${"xvmUserMarker"},
         // XMQP service marker (see above).
         // Маркер сервиса XMQP (см. выше).
         ${"xmqpServiceMarker"}
@@ -260,6 +287,8 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
+        ${"clanIcon"},
+        ${"xvmUserMarker"},
         // enemy spotted status marker (see above).
         // маркер статуса засвета противника (см. выше).
         ${"enemySpottedMarker"}
@@ -296,6 +325,8 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
+        ${"clanIcon"},
+        ${"xvmUserMarker"},
         // XMQP service marker (see above).
         // Маркер сервиса XMQP (см. выше).
         ${"xmqpServiceMarker"}
@@ -303,6 +334,8 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
+        ${"clanIcon"},
+        ${"xvmUserMarker"},
         // enemy spotted status marker (see above).
         // маркер статуса засвета противника (см. выше).
         ${"enemySpottedMarker"}

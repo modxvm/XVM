@@ -9,8 +9,8 @@
 
     public class TextExtraField extends TextField implements IExtraField
     {
-        //public static const DEFAULT_TEXT_FIELD_WIDTH:Number = 300;
-        //public static const DEFAULT_TEXT_FIELD_HEIGHT:Number = 25;
+        public static const DEFAULT_TEXT_FIELD_WIDTH:Number = 300;
+        public static const DEFAULT_TEXT_FIELD_HEIGHT:Number = 25;
 
         private var cfg:CExtraField;
         private var isLeftPanel:Boolean;
@@ -38,8 +38,8 @@
             wordWrap = false;
             autoSize = TextFieldAutoSize.NONE;
 
-            //width = DEFAULT_TEXT_FIELD_WIDTH;
-            //height = DEFAULT_TEXT_FIELD_HEIGHT;
+            width = DEFAULT_TEXT_FIELD_WIDTH;
+            height = DEFAULT_TEXT_FIELD_HEIGHT;
 
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             cfg.align = Macros.FormatStringGlobal(cfg.align, defaultAlign);
@@ -397,8 +397,18 @@
                     //Logger.add(_textValue + " => " + value);
                     _textValue = value;
                     htmlText = _textValue;
+                    needAlign = true;
                 }
-                needAlign = true;
+                if (cfg.highlight)
+                {
+                    var highlight:Boolean = cfg.highlight is Boolean ? cfg.highlight : XfwUtils.toBool(Macros.Format(cfg.highlight, options), false);
+                    value = highlight ? getColorSchemeName(options) : null;
+                    if (_colorSchemeNameValue != value)
+                    {
+                        _colorSchemeNameValue = value;
+                        textColor = App.colorSchemeMgr.getScheme(value).rgb;
+                    }
+                }
             }
             if (cfg.shadow != null)
             {

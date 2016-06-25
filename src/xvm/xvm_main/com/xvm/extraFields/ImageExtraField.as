@@ -220,7 +220,6 @@
                     //Logger.add(source + " => " + value);
                     source = value;
                 }
-
                 if (cfg.highlight)
                 {
                     var highlight:Boolean = cfg.highlight is Boolean ? cfg.highlight : XfwUtils.toBool(Macros.Format(cfg.highlight, options), false);
