@@ -24,12 +24,14 @@ package com.xvm.extraFields
     {
         private var _size:Rectangle;
         private var _layout:String;
+        private var _isLeftPanel:Boolean;
 
         public function ExtraFields(formats:Array, isLeftPanel:Boolean, getSchemeNameForText:Function, getSchemeNameForImage:Function, size:Rectangle = null, layout:String = null):void
         {
             visible = false;
             _size = size;
             _layout = layout;
+            _isLeftPanel = isLeftPanel;
 
             var len:int = formats.length;
             for (var i:int = 0; i < len; ++i)
@@ -71,7 +73,7 @@ package com.xvm.extraFields
             }
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = NaN):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0):void
         {
             for (var i:int = 0; i < this.numChildren; ++i)
             {
@@ -79,6 +81,20 @@ package com.xvm.extraFields
                 if (child)
                 {
                     child.update(options, bindToIconOffset);
+                    if (_size)
+                    {
+                        if (_layout == "horizontal")
+                        {
+                            var vx:Number = _size.x + (options.position - 1) * _size.width;
+                            x = _isLeftPanel ? vx : App.appWidth - vx;
+                            y = _size.y;
+                        }
+                        else
+                        {
+                            x = _isLeftPanel ? _size.x : App.appWidth - _size.x;
+                            y = _size.y + (options.position - 1) * _size.height;
+                        }
+                    }
                 }
             }
         }

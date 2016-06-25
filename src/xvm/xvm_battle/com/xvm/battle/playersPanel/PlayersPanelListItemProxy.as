@@ -208,7 +208,7 @@ package com.xvm.battle.playersPanel
             {
                 //Logger.add("PlayersPanelListItemProxy.onConfigLoaded()");
                 pcfg = Config.config.playersPanel;
-                mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
+                mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN ? PLAYERS_PANEL_STATE.LONG : ui.xfw_state]];
                 ncfg = pcfg.none;
 
                 // revert mirrored icon
@@ -301,19 +301,19 @@ package com.xvm.battle.playersPanel
                     }
                     break;
                 case PLAYERS_PANEL_STATE.HIDEN:
-                    ui.visible = true;
-                    ui.x = isLeftPanel ? -WIDTH : WIDTH;
+                    ui.visible = false;
+                    //ui.x = isLeftPanel ? -WIDTH : WIDTH;
                     break;
             }
             if (extraFieldsHidden)
                 extraFieldsHidden.visible = false;
-            if (extraFieldsHidden)
+            if (extraFieldsShort)
                 extraFieldsShort.visible = false;
-            if (extraFieldsHidden)
+            if (extraFieldsMedium)
                 extraFieldsMedium.visible = false;
-            if (extraFieldsHidden)
+            if (extraFieldsLong)
                 extraFieldsLong.visible = false;
-            if (extraFieldsHidden)
+            if (extraFieldsFull)
                 extraFieldsFull.visible = false;
             invalidate(INVALIDATE_UPDATE_POSITIONS);
         }
@@ -509,10 +509,15 @@ package com.xvm.battle.playersPanel
         private function createExtraFields():void
         {
             var cfg:CPlayersPanelNoneModeExtraField = isLeftPanel ? ncfg.extraFields.leftPanel : ncfg.extraFields.rightPanel;
-            var size:Rectangle = new Rectangle(cfg.x, cfg.y, cfg.width, cfg.height);
-            extraFieldsHidden = new ExtraFields(cfg.formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, size, Macros..FormatStringGlobal(ncfg.layout, "vertical"));
-            addChild(extraFieldsHidden);
+            var size:Rectangle = new Rectangle(
+                Macros.FormatNumberGlobal(cfg.x, 0),
+                Macros.FormatNumberGlobal(cfg.y, 65),
+                Macros.FormatNumberGlobal(cfg.width, 380),
+                Macros.FormatNumberGlobal(cfg.height, 28));
+            extraFieldsHidden = new ExtraFields(cfg.formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, size, Macros.FormatStringGlobal(ncfg.layout, "vertical").toLowerCase());
+            BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmView.battlePage.getChildIndex(BattleXvmView.battlePage.playersPanel));
             //_internal_createMenuForNoneState(mc);
+            //createMouseHandler(_root["extraPanels"]);
 
             var formats:Array = isLeftPanel ? pcfg.short.extraFieldsLeft : pcfg.short.extraFieldsRight;
             extraFieldsShort = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
@@ -635,98 +640,6 @@ package com.xvm.battle.playersPanel
         GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
-
-    private static function get extraPanelsHolder():MovieClip
-    {
-        if (_root["extraPanels"] == null)
-        {
-            var depth:Number = -16377; // the only one free depth for panels
-            _root["extraPanels"] = _root.createEmptyMovieClip("extraPanels", depth);
-            createMouseHandler(_root["extraPanels"]);
-        }
-        return _root["extraPanels"];
-    }
-
-    var _savedScreenWidth = 0;
-    var _savedX = 0;
-    private function adjustExtraFieldsLeft(e)
-    {
-        var state:String = e.state || panel.m_state;
-        //Logger.add("adjustExtraFieldsLeft: " + state);
-        var mc:MovieClip = extraFields[state];
-        if (mc == null)
-            return;
-
-        var cfg:Object = mc.cfg;
-        if (cfg != null)
-        {
-            // none state
-            switch (extraFieldsLayout)
-            {
-                case "horizontal":
-                    mc._x = cfg.x + mc.idx * cfg.width;
-                    mc._y = cfg.y;
-                    break;
-                default:
-                    mc._x = cfg.x;
-                    mc._y = cfg.y + mc.idx * cfg.height;
-                    break;
-            }
-        }
-        else
-        {
-            // other states
-            mc._x = -panel.m_list._x;
-            mc._y = 0;
-        }
-
-        if (_savedX != panel.m_list._x)
-        {
-            _savedX = panel.m_list._x;
-            updateExtraFields();
-        }
-    }
-
-    private function adjustExtraFieldsRight(e)
-    {
-        var state:String = e.state || panel.m_state;
-        //Logger.add("adjustExtraFieldsRight: " + state);
-        var mc:MovieClip = extraFields[state];
-        if (mc == null)
-            return;
-
-        var cfg:Object = mc.cfg;
-        if (cfg != null)
-        {
-            // none state
-            switch (extraFieldsLayout)
-            {
-                case "horizontal":
-                    mc._x = App.appWidth - cfg.x - mc.idx * cfg.width;
-                    mc._y = cfg.y;
-                    break;
-                default:
-                    mc._x = App.appWidth - cfg.x;
-                    mc._y = cfg.y + mc.idx * cfg.height;
-                    break;
-            }
-        }
-        else
-        {
-            // other states
-            mc._x = panel.m_list.width - panel.m_list._x;
-            mc._y = 0;
-        }
-        //Logger.add(App.appWidth + " " + panel.m_list.width + " " + panel.m_list._x);
-
-        if (_savedScreenWidth != App.appWidth || _savedX != panel.m_list._x)
-        {
-            //Logger.add('updateExtraFields');
-            _savedScreenWidth = App.appWidth;
-            _savedX = panel.m_list._x;
-            updateExtraFields();
-        }
-    }
 
     private static function createMouseHandler(extraPanels:MovieClip):Void
     {

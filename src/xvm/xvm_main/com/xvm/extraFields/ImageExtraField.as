@@ -6,6 +6,7 @@
     import com.xvm.vo.*;
     import com.xvm.wg.*;
     import flash.text.*;
+    import flash.events.*;
 
     public class ImageExtraField extends ImageWG implements IExtraField
     {
@@ -17,6 +18,7 @@
 
         private var _xValue:Number = 0;
         private var _yValue:Number = 0;
+        private var _bindToIconOffset:Number = 0;
         private var _widthValue:Number = NaN;
         private var _heightValue:Number = NaN;
         private var _colorSchemeNameValue:String = null;
@@ -32,6 +34,12 @@
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             cfg.align = Macros.FormatStringGlobal(cfg.align, defaultAlign);
             cfg.bindToIcon = Macros.FormatBooleanGlobal(cfg.bindToIcon, false);
+        }
+
+        override protected function onImgDataCompleteHandler(param1:Event):void
+        {
+            super.onImgDataCompleteHandler(param1);
+            align();
         }
 
         private function setup(options:IVOMacrosOptions):void
@@ -109,16 +117,18 @@
             }
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = NaN):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0):void
         {
+            var needAlign:Boolean = false;
+
             if (!_initialized)
             {
                 _initialized = true;
                 setup(options);
+                needAlign = true;
             }
 
             var value:*;
-            var needAlign:Boolean = false;
 
             if (cfg.x != null)
             {
@@ -200,6 +210,7 @@
             {
                 bindToIconOffset = 0;
             }
+            _bindToIconOffset = bindToIconOffset;
             if (cfg.src != null)
             {
                 if (Macros.IsCached(cfg.src, options))
@@ -234,17 +245,22 @@
 
             if (needAlign)
             {
-                x = isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
-                y = _yValue;
-                if (!isNaN(_widthValue))
-                    width = _widthValue;
-                if (!isNaN(_heightValue))
-                    height = _heightValue;
-                if (cfg.align == TextFormatAlign.RIGHT)
-                    x -= width;
-                else if (cfg.align == TextFormatAlign.CENTER)
-                    x -= width / 2;
+                align();
             }
+        }
+
+        private function align():void
+        {
+            x = isLeftPanel ? (_xValue + _bindToIconOffset) : (-_xValue + _bindToIconOffset);
+            y = _yValue;
+            if (!isNaN(_widthValue))
+                width = _widthValue;
+            if (!isNaN(_heightValue))
+                height = _heightValue;
+            if (cfg.align == TextFormatAlign.RIGHT)
+                x -= width;
+            else if (cfg.align == TextFormatAlign.CENTER)
+                x -= width / 2;
         }
     }
 }

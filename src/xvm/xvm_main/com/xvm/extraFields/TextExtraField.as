@@ -268,7 +268,7 @@
             return isDynamicShadow;
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = NaN):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0):void
         {
             var needAlign:Boolean = false;
 

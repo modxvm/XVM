@@ -14,12 +14,21 @@ package com.xvm.battle
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.*;
+    import scaleform.clik.utils.*;
 
     public class BattleXvmView extends XvmViewBase
     {
+        private static var _battlePageRef:WeakReference;
+
+        public static function get battlePage():BattlePage
+        {
+            return _battlePageRef.value as BattlePage;
+        }
+
         public function BattleXvmView(view:IView)
         {
             super(view);
+            _battlePageRef = new WeakReference(page);
         }
 
         public function get page():BattlePage

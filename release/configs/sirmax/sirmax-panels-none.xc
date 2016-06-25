@@ -6,7 +6,7 @@
   },
   "leftPanel": {
     "x": 0,
-    "y": 65,
+    "y": 30,
     "width": 380,
     "height": 28,
     "formats": [
@@ -36,16 +36,19 @@
       { "x": 25, "y": 2, "height": 24, "width": "{{hp-max:230}}", "bgColor": 0, "alpha": "{{alive?50|0}}" },
       { "x": 25, "y": 2, "height": 24, "width": "{{hp:230}}", "bgColor": ${"def.c1"}, "alpha": 60 },
       { "x": 0, "width": 3, "y": 2, "height": 24, "bgColor": ${"def.c1"}, "alpha": "{{alive?80|0}}" },
-      { "x": 14, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 31, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 275, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 14, "height": 28, ""align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 31, "height": 28, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 275, "height": 28, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 300, "src": "cfg://../../res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"clanIcon" }, "x": 349 },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "x": 295, "enabled": true },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"xmqpServiceMarker" }, "x": 371 },
       {}
     ]
   },
   "rightPanel": {
     "x": 0,
-    "y": 65,
+    "y": 30,
     "width": 380,
     "height": 28,
     "formats": [
@@ -62,16 +65,18 @@
 
       //{ "x": 350, "y": 5, "height": 13, "width": 146, "src": "cfg://sirmax/img/hp-bg.png" },
       //{ "x": 350, "y": 5, "height": 14, "width": "{{hp-ratio:150}}", "src": "cfg://sirmax/img/hp-enemy-{{alive}}.png" },
-     
+
       { "src": "cfg://sirmax/img/panel-bg-r-{{alive|dead}}.png" },
       { "x": 25, "y": 2, "height": 24, "width": "{{hp-max:230}}", "bgColor": 0, "alpha": "{{alive?50|0}}" },
       { "x": 25, "y": 2, "height": 24, "width": "{{hp:230}}", "bgColor": ${"def.c2"}, "alpha": 60 },
       { "x": 0, "width": 3, "y": 2, "height": 24, "bgColor": ${"def.c2"}, "alpha": "{{alive?80|0}}" },
-      { "x": 14, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 31, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 275, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 14, "height": 28, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 31, "height": 28, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 275, "height": 28, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 300, "src": "cfg://../../res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
-      { "x": 390, "y": 1, "align": "center", "alpha": "{{a:spotted}}", "format": "<font color='{{c:spotted}}'>{{spotted}}</font>", "shadow": {} },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"clanIcon" }, "x": 354 },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "x": 300, "enabled": true },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"enemySpottedMarker" }, "x": 376 },
       {}
     ]
   }

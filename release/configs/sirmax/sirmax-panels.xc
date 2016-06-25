@@ -55,7 +55,8 @@
       ${"../default/playersPanel.xc":"clanIcon"},
       { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "enabled": true },
       ${"../default/playersPanel.xc":"xmqpServiceMarker"},
-      {}
+      ${"../default/playersPanel.xc":"enemySpottedMarker"},
+     {}
     ],
     "nickMinWidth": 120,
     "nickMaxWidth": 180,
@@ -70,10 +71,10 @@
     "vehicleLevelAlpha": 0,
     "nickFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     "nickFormatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
-    "extraFieldsLeft": [
-    ],
-    "extraFieldsRight": [
-    ],
+    //"extraFieldsLeft": [
+    //],
+    //"extraFieldsRight": [
+    //],
     "__stub__": null
   },
   "medium2": {
@@ -84,10 +85,10 @@
     "vehicleLevelAlpha": 0,
     "vehicleFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "vehicleFormatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
-    "extraFieldsLeft": [
-    ],
-    "extraFieldsRight": [
-    ],
+    //"extraFieldsLeft": [
+    //],
+    //"extraFieldsRight": [
+    //],
     "__stub__": null
   },
   "short": {
@@ -96,10 +97,10 @@
     //"standardFields": [ "nick", "vehicle", "frags" ]
     "vehicleLevelAlpha": 70,
     //"removeSquadIcon": true,
-    "extraFieldsLeft": [
-    ],
-    "extraFieldsRight": [
-    ],
+    //"extraFieldsLeft": [
+    //],
+    //"extraFieldsRight": [
+    //],
     "__stub__": null
   },
   "none": {

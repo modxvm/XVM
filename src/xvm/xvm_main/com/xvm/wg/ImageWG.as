@@ -109,18 +109,10 @@ package com.xvm.wg
             this._repeatLoadOnError = param1;
         }
 
-        private function onImgDataCompleteHandler(param1:Event) : void
+        protected function onImgDataCompleteHandler(param1:Event) : void
         {
             this.removeImgDataListeners();
             this._imgData.showTo(this);
-            if (!isNaN(_width))
-            {
-                width = _width;
-            }
-            if (!isNaN(_height))
-            {
-                height = _height;
-            }
         }
 
         private function onImgDataIOErrorHandler(param1:IOErrorEvent) : void
@@ -130,32 +122,6 @@ package com.xvm.wg
             {
                 this.setImgData(this._mgr.getImageData(this._source));
             }
-        }
-
-        private var _width:Number = NaN;
-
-        override public function get width():Number
-        {
-            return isNaN(_width) ? super.width : _width;
-        }
-
-        override public function set width(value:Number):void
-        {
-            _width = value;
-            super.width = value;
-        }
-
-        private var _height:Number = NaN;
-
-        override public function get height():Number
-        {
-            return isNaN(_height) ? super.height : _height;
-        }
-
-        override public function set height(value:Number):void
-        {
-            _height = value;
-            super.height = value;
         }
     }
 }
