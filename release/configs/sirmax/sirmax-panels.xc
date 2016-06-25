@@ -96,7 +96,7 @@
   },
   "none": {
     //"enabled": false,
-    "expandOnMouse": false,
+    "expandAreaWidth": 40,
     //"layout": "horizontal",
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },

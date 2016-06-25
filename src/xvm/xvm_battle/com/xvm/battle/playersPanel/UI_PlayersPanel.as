@@ -19,6 +19,9 @@ package com.xvm.battle.playersPanel
 
     public dynamic class UI_PlayersPanel extends PlayersPanelUI
     {
+        // from PlayersPanel.as
+        private static const EXPAND_AREA_WIDTH:Number = 230;
+
         public static const PLAYERS_PANEL_STATE_NAMES:Array = [ "none", "short", "medium", "medium2", "large" ];
         public static const PLAYERS_PANEL_STATE_MAP:Object = {
             none: PLAYERS_PANEL_STATE.HIDEN,
@@ -77,6 +80,17 @@ package com.xvm.battle.playersPanel
             }
 
             super.as_setPanelMode(state);
+
+            var expandAreaWidth:Number = Macros.FormatNumberGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].expandAreaWidth, EXPAND_AREA_WIDTH);
+            xfw_expandRectLeft.width = expandAreaWidth;
+            xfw_expandRectRight.width = expandAreaWidth;
+            xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
+        }
+
+        override public function updateStageSize(param1:Number, param2:Number):void
+        {
+            super.updateStageSize(param1, param2);
+            xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
         }
 
         // PRIVATE

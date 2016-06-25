@@ -79,9 +79,9 @@
     "none": {
       // false - disable (отключить)
       "enabled": true,
-      // Switch to "large" mode when mouse cursor in the 230px area from the edge of the screen
-      // Переключить в режим "large" если курсор мыши в области 230px от края экрана
-      "expandOnMouse": true,
+      // Width of area for switching to "large" mode on mouse over
+      // Ширина области переключения в режим "large" при наведении мыши
+      "expandAreaWidth": 230,
       // Layout ("vertical" or "horizontal")
       // Размещение ("vertical" - вертикально, или "horizontal" - горизонтально)
       "layout": "vertical",
@@ -176,9 +176,9 @@
       // Отображаемые стандартные поля в данном режиме, и их порядок.
       // Допустимые названия: "frags", "vehicle", "nick".
       "standardFields": [ "frags" ],
-      // Switch to "large" mode when mouse cursor in the 230px area from the edge of the screen
-      // Переключить в режим "large" если курсор мыши в области 230px от края экрана
-      "expandOnMouse": true,
+      // Width of area for switching to "large" mode on mouse over
+      // Ширина области переключения в режим "large" при наведении мыши
+      "expandAreaWidth": 230,
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
@@ -242,9 +242,9 @@
       // Отображаемые стандартные поля в данном режиме, и их порядок.
       // Допустимые названия: "frags", "vehicle", "nick".
       "standardFields": [ "frags", "nick" ],
-      // Switch to "large" mode when mouse cursor in the 230px area from the edge of the screen
-      // Переключить в режим "large" если курсор мыши в области 230px от края экрана
-      "expandOnMouse": true,
+      // Width of area for switching to "large" mode on mouse over
+      // Ширина области переключения в режим "large" при наведении мыши
+      "expandAreaWidth": 230,
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
@@ -306,9 +306,9 @@
       // Отображаемые стандартные поля в данном режиме, и их порядок.
       // Допустимые названия: "frags", "vehicle", "nick".
       "standardFields": [ "frags", "vehicle" ],
-      // Switch to "large" mode when mouse cursor in the 230px area from the edge of the screen
-      // Переключить в режим "large" если курсор мыши в области 230px от края экрана
-      "expandOnMouse": true,
+      // Width of area for switching to "large" mode on mouse over
+      // Ширина области переключения в режим "large" при наведении мыши
+      "expandAreaWidth": 230,
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,

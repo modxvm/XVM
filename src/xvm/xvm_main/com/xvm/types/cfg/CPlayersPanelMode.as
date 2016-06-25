@@ -8,7 +8,7 @@ package com.xvm.types.cfg
     {
         public var enabled:*;
         public var standardFields:Array;
-        public var expandOnMouse:*;
+        public var expandAreaWidth:*;
         public var removeSquadIcon:*;
         public var vehicleLevelAlpha:*;
         public var fragsWidth:*;

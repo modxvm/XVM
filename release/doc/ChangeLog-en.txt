@@ -34,7 +34,7 @@
       "vehicleWidth" - width of the vehicle name column
       "nickMinWidth" - minimum width of the player's name column
       "nickMaxWidth" - maximum width of the player's name column
-      "expandOnMouse" - switch to "large" mode when mouse cursor in the 230px area from the screen edge
+      "expandAreaWidth" - width of area for switching to "large" mode on mouse over
   * removed options in the "playersPanel" section:
      "short"/"width"
      "medium"/"width"
