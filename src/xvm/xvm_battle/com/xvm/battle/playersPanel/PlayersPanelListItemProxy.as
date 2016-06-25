@@ -40,6 +40,7 @@ package com.xvm.battle.playersPanel
         public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
         public static var INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
+        public static var INVALIDATE_UPDATE_POSITIONS:String = "UPDATE_POSITIONS";
 
         public var xvm_enabled:Boolean;
 
@@ -64,6 +65,7 @@ package com.xvm.battle.playersPanel
 
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
+        private var mopt_removeSquadIcon:Boolean;
 
         private var extraFieldsHidden:ExtraFields = null;
         private var extraFieldsShort:ExtraFields = null;
@@ -138,13 +140,16 @@ package com.xvm.battle.playersPanel
                 {
                     applyState();
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_UPDATE_COLORS))
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_COLORS))
                 {
                     updateStandardFields();
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE))
+                if (isInvalid(INVALIDATE_UPDATE_POSITIONS))
                 {
                     updatePositions();
+                }
+                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_POSITIONS))
+                {
                     updateExtraFields();
                 }
             }
@@ -205,6 +210,8 @@ package com.xvm.battle.playersPanel
                     ui.selfBg.alpha = opt_removeSelectedBackground ? 0 : alpha;
                     ui.deadBg.alpha = alpha;
 
+                    mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+
                     createExtraFields();
                 }
                 else
@@ -246,6 +253,29 @@ package com.xvm.battle.playersPanel
                 case PLAYERS_PANEL_STATE.MEDIUM:
                 case PLAYERS_PANEL_STATE.SHORT:
                     mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
+                    mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+                    ui.fragsTF.visible = false;
+                    ui.vehicleTF.visible = false;
+                    ui.playerNameCutTF.visible = false;
+                    ui.playerNameFullTF.visible = false;
+                    if (mcfg.standardFields)
+                    {
+                        for (var i:int = 0; i < mcfg.standardFields.length; ++i)
+                        {
+                            switch (mcfg.standardFields[i].toLowerCase())
+                            {
+                                case "frags":
+                                    ui.fragsTF.visible = true;
+                                    break;
+                                case "nick":
+                                    ui.playerNameFullTF.visible = true;
+                                    break;
+                                case "vehicle":
+                                    ui.vehicleTF.visible = true;
+                                    break;
+                            }
+                        }
+                    }
                     break;
                 case PLAYERS_PANEL_STATE.HIDEN:
                     ui.visible = true;
@@ -262,7 +292,7 @@ package com.xvm.battle.playersPanel
                 extraFieldsLong.visible = false;
             if (extraFieldsHidden)
                 extraFieldsFull.visible = false;
-            invalidate(INVALIDATE_PLAYER_STATE);
+            invalidate(INVALIDATE_UPDATE_POSITIONS);
         }
 
         // update
@@ -278,30 +308,38 @@ package com.xvm.battle.playersPanel
         private function updateStandardFields():void
         {
             //Logger.add("update: " + ui.xfw_state);
-
-            var playerState:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
-
-            if (ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN)
+            if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
             {
-                updateNoneMode(playerState);
+                var playerState:VOPlayerState = BattleState.getByPlayerName(_userProps.userName);
+
+                if (ui.fragsTF.visible)
+                {
+                    updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, playerState);
+                }
+                if (ui.playerNameFullTF.visible)
+                {
+                    updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, playerState);
+                }
+                if (ui.vehicleTF.visible)
+                {
+                    updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, playerState);
+                }
+                updateVehicleLevel(playerState);
+            }
+        }
+
+        private function updateStandardTextField(tf:TextField, format:String, playerState:VOPlayerState):void
+        {
+            //if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
+
+            var txt:String = Macros.Format(format, playerState);
+            if (_standardTextFieldsTexts[tf.name] == txt)
                 return;
-            }
-
-            switch (ui.xfw_state)
-            {
-                case PLAYERS_PANEL_STATE.FULL:
-                    updatePlayerName(playerState);
-                    updateVehicleName(playerState);
-                    break;
-                case PLAYERS_PANEL_STATE.LONG:
-                    updateVehicleName(playerState);
-                    break;
-                case PLAYERS_PANEL_STATE.MEDIUM:
-                    updatePlayerName(playerState);
-                    break;
-            }
-            updateFrags(playerState);
-            updateVehicleLevel(playerState);
+            _standardTextFieldsTexts[tf.name] = txt;
+            var schemeName:String = getSchemeNameForPlayer(playerState);
+            var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
+            tf.htmlText = "<font color='" + XfwUtils.toHtmlColor(colorScheme.rgb) + "'>" + txt + "</font>";
+            invalidate(INVALIDATE_UPDATE_POSITIONS);
         }
 
         private function updateVehicleLevel(playerState:VOPlayerState):void
@@ -312,48 +350,79 @@ package com.xvm.battle.playersPanel
             ui.vehicleLevel.alpha *= Macros.FormatNumber(mcfg.vehicleLevelAlpha, playerState, 100) / 100.0;
         }
 
-        private function updatePlayerName(playerState:VOPlayerState):void
-        {
-            if (updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, playerState))
-            {
-                ui.playerNameCutTF.htmlText = ui.playerNameFullTF.htmlText;
-            }
-        }
-
-        private function updateVehicleName(playerState:VOPlayerState):void
-        {
-            updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, playerState);
-        }
-
-        private function updateFrags(playerState:VOPlayerState):void
-        {
-            updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, playerState);
-        }
-
-        private function updateStandardTextField(tf:TextField, format:String, playerState:VOPlayerState):Boolean
-        {
-            //if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
-
-            var txt:String = Macros.Format(format, playerState);
-            if (_standardTextFieldsTexts[tf.name] == txt)
-                return false;
-            _standardTextFieldsTexts[tf.name] = txt;
-            var schemeName:String = getSchemeNameForPlayer(playerState);
-            var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
-            tf.htmlText = "<font color='" + XfwUtils.toHtmlColor(colorScheme.rgb) + "'>" + txt + "</font>";
-            return true;
-        }
-
         // update positions
 
         private function updatePositions():void
         {
-            if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN && mcfg.removeSquadIcon)
+            if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
             {
-                //ui.x = _savedXValue + isLeftPanel ? -SQUAD_ITEMS_AREA_WIDTH : SQUAD_ITEMS_AREA_WIDTH;
+                if (mcfg.standardFields)
+                {
+                    if (isLeftPanel)
+                    {
+                        updatePositionsLeft();
+                    }
+                    else
+                    {
+                        updatePositionsRight();
+                    }
+                }
             }
-            x = -ui.x;
-            updateExtraFields();
+            this.x = -ui.x;
+        }
+
+        private function updatePositionsLeft():void
+        {
+            var field:TextField;
+            var lastX:Number = VEHICLE_TF_LEFT_X;
+            for (var i:int = mcfg.standardFields.length - 1; i >= 0; --i)
+            {
+                field = getFieldByConfigName(mcfg.standardFields[i]);
+                if (field)
+                {
+                    if (field.x != lastX - field.width)
+                    {
+                        field.x = lastX - field.width;
+                    }
+                    lastX = field.x;
+                }
+            }
+            ui.x = -(lastX - (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
+            ui.dynamicSquad.x = -ui.x - (mopt_removeSquadIcon ? SQUAD_ITEMS_AREA_WIDTH : 0);
+        }
+
+        private function updatePositionsRight():void
+        {
+            var field:TextField;
+            var lastX:Number = VEHICLE_TF_RIGHT_X;
+            for (var i:int = mcfg.standardFields.length - 1; i >= 0; --i)
+            {
+                field = getFieldByConfigName(mcfg.standardFields[i]);
+                if (field)
+                {
+                    if (field.x != lastX)
+                    {
+                        field.x = lastX;
+                    }
+                    lastX += field.width;
+                }
+            }
+            ui.x = -(lastX + (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
+            ui.dynamicSquad.x = -ui.x + (mopt_removeSquadIcon ? SQUAD_ITEMS_AREA_WIDTH : 0);
+        }
+
+        private function getFieldByConfigName(fieldName:String):TextField
+        {
+            switch (fieldName.toLowerCase())
+            {
+                case "frags":
+                    return ui.fragsTF;
+                case "nick":
+                    return ui.playerNameFullTF;
+                case "vehicle":
+                    return  ui.vehicleTF;
+            }
+            return null;
         }
 
         // update none mode
