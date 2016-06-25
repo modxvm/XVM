@@ -56,7 +56,7 @@
       { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "enabled": true },
       ${"../default/playersPanel.xc":"xmqpServiceMarker"},
       ${"../default/playersPanel.xc":"enemySpottedMarker"},
-     {}
+      {}
     ],
     "nickMinWidth": 120,
     "nickMaxWidth": 180,

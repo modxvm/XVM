@@ -431,7 +431,7 @@ package com.xvm.battle
                     value += "_arty";
                 if (Config.config.alpha.spotted[value] == null)
                     return NaN;
-                return Config.config.alpha.spotted[value] / 100.0;
+                return Config.config.alpha.spotted[value];
             }
             catch (ex:Error)
             {
