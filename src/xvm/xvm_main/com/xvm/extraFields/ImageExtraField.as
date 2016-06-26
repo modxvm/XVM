@@ -36,6 +36,11 @@
             cfg.bindToIcon = Macros.FormatBooleanGlobal(cfg.bindToIcon, false);
         }
 
+        public final function dispose():void
+        {
+            cfg = null;
+        }
+
         override protected function onImgDataCompleteHandler(param1:Event):void
         {
             super.onImgDataCompleteHandler(param1);

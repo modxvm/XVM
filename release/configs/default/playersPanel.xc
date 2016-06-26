@@ -1,6 +1,52 @@
 ﻿/**
  * Parameters of the Players Panels ("ears").
  * Параметры панелей игроков ("ушей").
+ *
+ * Extra field parameters:
+ *
+ * types of formats available for extended format:
+ *   - MovieClip (for loading image)
+ *   - TextField (for writing text and creating rectangles)
+ * if "src" field is present, MovieClip format will be used
+ * if "src" field is absent, TextField format will be used
+ *
+ * fields available for extended format:
+ *   "src" - resource path ("xvm://res/contour/{{vehiclename}}.png")
+ *   "format" - text format (macros allowed)
+ *
+ * fields available for both MovieClip and TextField formats:
+ *   "enabled" - enable/disable field creation (global macros allowed)
+ *   "x" - x position (macros allowed)
+ *   "y" - y position (macros allowed)
+ *   "width" - width (macros allowed)
+ *   "height" - height (macros allowed)
+ *   "bindToIcon" - if enabled, x position is binded to vehicle icon (default false)
+ *   "alpha" - transparency in percents (0..100) (macros allowed)
+ *   "rotation" - rotation in degrees (0..360) (macros allowed)
+ *   "align" - horizontal alignment ("left", "center", "right")
+ *      for left panel default value is "left"
+ *      for right panel default value is "right"
+ *   "scaleX", "scaleY" - scaling (use negative values for mirroring)
+ *
+ * fields available for TextField format only:
+ *   "valign" - vertical alignment ("top", "center", "bottom")
+ *      default value is "top"
+ *   "borderColor" - if set, draw border with specified color (macros allowed)
+ *   "bgColor" - if set, draw background with specified color (macros allowed)
+ *   "antiAliasType" - anti aliasing mode ("advanced" or "normal")
+ *   "shadow": {
+ *     "distance" (in pixels)
+ *     "angle"    (0.0 .. 360.0)
+ *     "color"    "0xXXXXXX"
+ *     "alpha"    (0.0 .. 100.0)
+ *     "blur"     (0.0 .. 255.0)
+ *     "strength" (0.0 .. 255.0)
+ *     quality
+ *     inner
+ *     knockout
+ *     hideObject
+ *   }
+ *
  */
 {
   // Enemy spotted status marker definition.
@@ -104,49 +150,6 @@
           //   { "x": 20, "y": 10, "borderColor": "0xFFFFFF", "format": "{{nick}}" },
           //   { "x": 200, "src": "xvm://res/contour/{{vehiclename}}.png" }
           // ]
-          //
-          // types of formats available for extended format:
-          //   - MovieClip (for loading image)
-          //   - TextField (for writing text and creating rectangles)
-          // if "src" field is present, MovieClip format will be used
-          // if "src" field is absent, TextField format will be used
-          //
-          // fields available for extended format:
-          //   "src" - resource path ("xvm://res/contour/{{vehiclename}}.png")
-          //   "format" - text format (macros allowed)
-          //
-          // fields available for both MovieClip and TextField formats:
-          //   "enabled" - enable/disable field creation (global macros allowed)
-          //   "x" - x position (macros allowed)
-          //   "y" - y position (macros allowed)
-          //   "width" - width (macros allowed)
-          //   "height" - height (macros allowed)
-          //   "bindToIcon" - if enabled, x position is binded to vehicle icon (default false)
-          //   "alpha" - transparency in percents (0..100) (macros allowed)
-          //   "rotation" - rotation in degrees (0..360) (macros allowed)
-          //   "align" - horizontal alignment ("left", "center", "right")
-          //      for left panel default value is "left"
-          //      for right panel default value is "right"
-          //   "scaleX", "scaleY" - scaling (use negative values for mirroring)
-          //
-          // fields available for TextField format only:
-          //   "valign" - vertical alignment ("top", "center", "bottom")
-          //      default value is "top"
-          //   "borderColor" - if set, draw border with specified color (macros allowed)
-          //   "bgColor" - if set, draw background with specified color (macros allowed)
-          //   "antiAliasType" - anti aliasing mode ("advanced" or "normal")
-          //   "shadow": {
-          //     "distance" (in pixels)
-          //     "angle"    (0.0 .. 360.0)
-          //     "color"    "0xXXXXXX"
-          //     "alpha"    (0.0 .. 100.0)
-          //     "blur"     (0.0 .. 255.0)
-          //     "strength" (0.0 .. 255.0)
-          //     quality
-          //     inner
-          //     knockout
-          //     hideObject
-          //   }
           //
           // fields available for MovieClip format only:
           //     "highlight" - highlight icon depending on the player state, default false

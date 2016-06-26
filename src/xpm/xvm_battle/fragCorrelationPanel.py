@@ -70,9 +70,9 @@ def _PlayerAvatar_onBecomePlayer(base, self):
             arena = BigWorld.player().arena
             if arena:
                 arena.onVehicleKilled += onVehicleKilled
-            ctrl = g_sessionProvider.shared.feedback
-            if ctrl:
-                ctrl.onVehicleFeedbackReceived += onVehicleFeedbackReceived
+        ctrl = g_sessionProvider.shared.feedback
+        if ctrl:
+            ctrl.onVehicleFeedbackReceived += onVehicleFeedbackReceived
         g_guiResetters.add(update_conf_hp)
     except Exception, ex:
         err(traceback.format_exc())
@@ -85,9 +85,9 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
             arena = BigWorld.player().arena
             if arena:
                 arena.onVehicleKilled -= onVehicleKilled
-            ctrl = g_sessionProvider.shared.feedback
-            if ctrl:
-                ctrl.onVehicleFeedbackReceived -= onVehicleFeedbackReceived
+        ctrl = g_sessionProvider.shared.feedback
+        if ctrl:
+            ctrl.onVehicleFeedbackReceived -= onVehicleFeedbackReceived
         g_guiResetters.discard(update_conf_hp)
         teams_vehicles[:] = [{}, {}]
         teams_totalhp[:] = [0, 0]

@@ -91,11 +91,11 @@ def _PlayerAvatar_onBecomePlayer(base, self):
                 arena.onVehicleKilled += _g_battle.onVehicleKilled
                 arena.onAvatarReady += _g_battle.onAvatarReady
                 arena.onVehicleStatisticsUpdate += _g_battle.onVehicleStatisticsUpdate
-            ctrl = g_sessionProvider.shared.feedback
-            if ctrl:
-                ctrl.onMinimapVehicleAdded += _g_battle.onMinimapVehicleAdded
-                ctrl.onMinimapVehicleRemoved += _g_battle.onMinimapVehicleRemoved
-                ctrl.onVehicleFeedbackReceived += _g_battle.onVehicleFeedbackReceived
+        ctrl = g_sessionProvider.shared.feedback
+        if ctrl:
+            ctrl.onMinimapVehicleAdded += _g_battle.onMinimapVehicleAdded
+            ctrl.onMinimapVehicleRemoved += _g_battle.onMinimapVehicleRemoved
+            ctrl.onVehicleFeedbackReceived += _g_battle.onVehicleFeedbackReceived
         _g_battle.onStartBattle()
     except Exception, ex:
         err(traceback.format_exc())
@@ -110,11 +110,11 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
                 arena.onVehicleKilled -= _g_battle.onVehicleKilled
                 arena.onAvatarReady -= _g_battle.onAvatarReady
                 arena.onVehicleStatisticsUpdate -= _g_battle.onVehicleStatisticsUpdate
-            ctrl = g_sessionProvider.shared.feedback
-            if ctrl:
-                ctrl.onMinimapVehicleAdded -= _g_battle.onMinimapVehicleAdded
-                ctrl.onMinimapVehicleRemoved -= _g_battle.onMinimapVehicleRemoved
-                ctrl.onVehicleFeedbackReceived -= _g_battle.onVehicleFeedbackReceived
+        ctrl = g_sessionProvider.shared.feedback
+        if ctrl:
+            ctrl.onMinimapVehicleAdded -= _g_battle.onMinimapVehicleAdded
+            ctrl.onMinimapVehicleRemoved -= _g_battle.onMinimapVehicleRemoved
+            ctrl.onVehicleFeedbackReceived -= _g_battle.onVehicleFeedbackReceived
     except Exception, ex:
         err(traceback.format_exc())
     base(self)

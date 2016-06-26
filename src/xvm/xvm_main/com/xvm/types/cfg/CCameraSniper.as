@@ -10,7 +10,7 @@ package com.xvm.types.cfg
     {
         public var zooms:Array;
         public var startZoom:*;
-        public var zoomIndicator:CCameraZoomIndicator;
+        public var zoomIndicator:CExtraField;
         public var dynamicCameraEnabled:*;
 
         public function clone():*

@@ -8,6 +8,8 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xfw.events.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.battle.battleLabels.BattleLabels;
+    import com.xvm.battle.zoomIndicator.ZoomIndicator;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.infrastructure.events.*;
@@ -25,6 +27,11 @@ package com.xvm.battle
             return _battlePageRef.value as BattlePage;
         }
 
+        private var _battleLabels:BattleLabels;
+        private var _zoomIndicator:ZoomIndicator;
+        //private var _sixthSenseIndicator:SixthSenseIndicator;
+        //private var _battleClock:BattleClock;
+
         public function BattleXvmView(view:IView)
         {
             super(view);
@@ -40,13 +47,49 @@ package com.xvm.battle
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
             super.onAfterPopulate(e);
+            try
+            {
+                Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+                Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
 
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+                Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
 
-            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
+                onConfigLoaded(null);
 
-            onConfigLoaded(null);
+                var behindMinimapIndex:int = battlePage.getChildIndex(battlePage.minimap) - 1;
+                _battleLabels = new BattleLabels();
+                battlePage.addChildAt(_battleLabels, behindMinimapIndex);
+                _zoomIndicator = new ZoomIndicator();
+                battlePage.addChildAt(_zoomIndicator, behindMinimapIndex);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            try
+            {
+                Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+                Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+                if (_battleLabels)
+                {
+                    _battleLabels.dispose();
+                    _battleLabels = null;
+                }
+                if (_zoomIndicator)
+                {
+                    _zoomIndicator.dispose();
+                    _zoomIndicator = null;
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            super.onBeforeDispose(e);
         }
 
         private function onStatLoaded(e:ObjectEvent):void
@@ -80,10 +123,6 @@ package com.xvm.battle
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ALT_MODE, { isDown: isDown } ));
             if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.PLAYERS_PANEL_ALT_MODE, { isDown: isDown } ));
-            // TODO
-            //if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
-            //    Xvm.dispatchEvent(new ObjectEvent(BattleEvents.BATTLE_LABEL_KEY_MODE, { isDown: isDown }));
-
             return null;
         }
     }

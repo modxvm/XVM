@@ -34,11 +34,18 @@ package com.xvm.battle
 
         override public function entryPoint():void
         {
-            super.entryPoint();
-            Macros.RegisterGlobalMacrosData();
-            Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
-            Stat.clearBattleStat();
-            Stat.loadBattleStat();
+            try
+            {
+                super.entryPoint();
+                Macros.RegisterGlobalMacrosData();
+                Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
+                Stat.clearBattleStat();
+                Stat.loadBattleStat();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         public override function get views():Object

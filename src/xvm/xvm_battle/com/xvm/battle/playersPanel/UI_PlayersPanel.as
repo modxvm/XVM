@@ -71,26 +71,35 @@ package com.xvm.battle.playersPanel
         override public function as_setPanelMode(state:int):void
         {
             //Logger.add("UI_PlayersPanel.as_setPanelMode(): " + param1);
-
-            if (xvm_enabled)
+            try
             {
-                // skip disabled modes
-                if (state != PLAYERS_PANEL_STATE.NONE && m_savedState == PLAYERS_PANEL_STATE.NONE)
+                if (!cfg)
+                    return;
+
+                if (xvm_enabled)
                 {
-                    if (!Macros.FormatBooleanGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].enabled, true))
+                    // skip disabled modes
+                    if (state != PLAYERS_PANEL_STATE.NONE && m_savedState == PLAYERS_PANEL_STATE.NONE)
                     {
-                        xfw_requestState((state + 1) % PLAYERS_PANEL_STATE_NAMES.length);
-                        return;
+                        if (!Macros.FormatBooleanGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].enabled, true))
+                        {
+                            xfw_requestState((state + 1) % PLAYERS_PANEL_STATE_NAMES.length);
+                            return;
+                        }
                     }
                 }
+
+                super.as_setPanelMode(state);
+
+                var expandAreaWidth:Number = Macros.FormatNumberGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].expandAreaWidth, EXPAND_AREA_WIDTH);
+                xfw_expandRectLeft.width = expandAreaWidth;
+                xfw_expandRectRight.width = expandAreaWidth;
+                xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
             }
-
-            super.as_setPanelMode(state);
-
-            var expandAreaWidth:Number = Macros.FormatNumberGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].expandAreaWidth, EXPAND_AREA_WIDTH);
-            xfw_expandRectLeft.width = expandAreaWidth;
-            xfw_expandRectRight.width = expandAreaWidth;
-            xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function updateStageSize(param1:Number, param2:Number):void

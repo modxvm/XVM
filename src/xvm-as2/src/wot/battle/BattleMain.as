@@ -14,41 +14,14 @@ import wot.battle.*;
 
 class wot.battle.BattleMain
 {
-    private static var HOLDER_DEPTH:Number = -16368; // behind the minimap
-
-    private static var _instance: BattleMain;
-    private var _sixthSenseIndicator:SixthSenseIndicator;
-    private var _clock:Clock;
-    private var _holder:MovieClip;
-    private var _zoomIndicator:ZoomIndicator;
-
-    static function main()
-    {
-        Utils.TraceXvmModule("Battle");
-
-        // ScaleForm optimization
-        _global.gfxExtensions = true;
-        _global.noInvisibleAdvance = true;
-
-        // initialize TweenLite
-        OverwriteManager.init(OverwriteManager.AUTO);
-        TweenPlugin.activate([TintPlugin]);
-
-        _instance = new BattleMain();
-    }
-
     public function BattleMain()
     {
-        GameDelegate.addCallBack("Stage.Update", this, "onUpdateStage");
         GameDelegate.addCallBack("battle.showPostmortemTips", this, "showPostmortemTips");
 
-        DAAPI.initialize();
-
-        _root.as_xvm_onKeyEvent = this.as_xvm_onKeyEvent;
-        _root.as_xvm_onSniperCamera = this.as_xvm_onSniperCamera;
-        _root.as_xvm_onAimOffsetUpdate = this.as_xvm_onAimOffsetUpdate;
-        _root.as_xvm_onBattleStateChanged = this.as_xvm_onBattleStateChanged;
-        _root.as_xvm_onPlayersHpChanged = this.as_xvm_onPlayersHpChanged;
+// AS3:DONE         _root.as_xvm_onKeyEvent = this.as_xvm_onKeyEvent;
+// AS3:DONE         _root.as_xvm_onSniperCamera = this.as_xvm_onSniperCamera;
+// AS3:DONE         _root.as_xvm_onAimOffsetUpdate = this.as_xvm_onAimOffsetUpdate;
+// AS3:DONE         _root.as_xvm_onBattleStateChanged = this.as_xvm_onBattleStateChanged;
         _root.as_xvm_onXmqpEvent = this.as_xvm_onXmqpEvent;
 
         GlobalEventDispatcher.addEventListener(Events.E_CONFIG_LOADED, this, BattleMainConfigLoaded);
@@ -81,12 +54,9 @@ class wot.battle.BattleMain
         if (clockFormat && clockFormat != "")
             this._clock = new Clock();
 
-        // Holder
-        this._holder = _root.createEmptyMovieClip("xvm_holder", HOLDER_DEPTH);
-
-        // Zoom Indicator
-        if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
-            this._zoomIndicator = new ZoomIndicator(_holder);
+// AS3:DONE         // Zoom Indicator
+// AS3:DONE         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
+// AS3:DONE             this._zoomIndicator = new ZoomIndicator(_holder);
 
         // Setup Visual Elements
         Elements.SetupElements();
@@ -95,18 +65,18 @@ class wot.battle.BattleMain
 
         ExpertPanel.modify();
 
-        GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, battleLabelsInit);
-
-    }
-
-    private function battleLabelsInit(){
-        // Battle labels on battle interface window and delayed macros registration
-        Macros.RegisterGlobalMacrosDataDelayed("ON_STAT_LOADED");
-        BattleLabels.init();
-    }
-
-    // Python calls (context: this => _root)
-
+// AS3:DONE         GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, battleLabelsInit);
+// AS3:DONE 
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     private function battleLabelsInit(){
+// AS3:DONE         // Battle labels on battle interface window and delayed macros registration
+// AS3:DONE         Macros.RegisterGlobalMacrosDataDelayed("ON_STAT_LOADED");
+// AS3:DONE         BattleLabels.init();
+// AS3:DONE     }
+// AS3:DONE
+// AS3:DONE     // Python calls (context: this => _root)
+// AS3:DONE
 // AS3:DONE     public function as_xvm_onKeyEvent(key:Number, isDown:Boolean):Void
 // AS3:DONE     {
 // AS3:DONE         //Logger.add("onKeyEvent: " + key + " " + isDown);
@@ -117,22 +87,22 @@ class wot.battle.BattleMain
 // AS3:DONE             GlobalEventDispatcher.dispatchEvent( { type: Events.E_MM_ALT_MODE, isDown: isDown } );
 // AS3:DONE         if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
 // AS3:DONE             GlobalEventDispatcher.dispatchEvent( { type: Events.E_PP_ALT_MODE, isDown: isDown } );
-// AS3:DONE         if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
-// AS3:DONE             GlobalEventDispatcher.dispatchEvent( { type: Events.E_BATTLE_LABEL_KEY_MODE, key: key, isDown: isDown } );
+// AS3:DONE          if ((BattleLabels.BoX.IsHotKeyedTextFieldsFlag) && (cfg.battleLabelsHotKeys))
+// AS3:DONE              GlobalEventDispatcher.dispatchEvent( { type: Events.E_BATTLE_LABEL_KEY_MODE, key: key, isDown: isDown } );
 // AS3:DONE     }
-
-    public function as_xvm_onSniperCamera(enable:Boolean, zoom:Number):Void
-    {
-        if (BattleMain._instance._zoomIndicator)
-            BattleMain._instance._zoomIndicator.update(enable, zoom);
-    }
-
-    public function as_xvm_onAimOffsetUpdate(offsetX:Number, offsetY:Number):Void
-    {
-        if (BattleMain._instance._zoomIndicator)
-            BattleMain._instance._zoomIndicator.onOffsetUpdate(offsetX, offsetY);
-    }
-
+// AS3:DONE 
+// AS3:DONE     public function as_xvm_onSniperCamera(enable:Boolean, zoom:Number):Void
+// AS3:DONE     {
+// AS3:DONE         if (BattleMain._instance._zoomIndicator)
+// AS3:DONE             BattleMain._instance._zoomIndicator.update(enable, zoom);
+// AS3:DONE     }
+// AS3:DONE 
+// AS3:DONE     public function as_xvm_onAimOffsetUpdate(offsetX:Number, offsetY:Number):Void
+// AS3:DONE     {
+// AS3:DONE         if (BattleMain._instance._zoomIndicator)
+// AS3:DONE             BattleMain._instance._zoomIndicator.onOffsetUpdate(offsetX, offsetY);
+// AS3:DONE     }
+// AS3:DONE 
 // AS3:DONE     public function as_xvm_onBattleStateChanged(targets:Number, playerName:String, clanAbbrev:String, playerId:Number, vehId:Number,
 // AS3:DONE         team:Number, squad:Number, dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number, spotted:String):Void
 // AS3:DONE     {
@@ -163,7 +133,7 @@ class wot.battle.BattleMain
 // AS3:DONE                 data["marksOnGun"] = marksOnGun;
 // AS3:DONE             if (spotted != null)
 // AS3:DONE                 data["spotted"] = spotted;
-// AS3:DONE 
+// AS3:DONE
 // AS3:DONE             //Logger.addObject(data);
 // AS3:DONE             var updated:Boolean = BattleState.update(playerId, data);
 // AS3:DONE             if (updated)
@@ -181,7 +151,8 @@ class wot.battle.BattleMain
 // AS3:DONE             Logger.add("onBattleStateChanged: [" + ex.name + "] " + ex.message);
 // AS3:DONE         }
 // AS3:DONE     }
-// AS3:DONE 
+// AS3:DONE
+// AS3:DONE => AS_TEAMS_HP_CHANGED
 // AS3:DONE     // ctx = _root
 // AS3:DONE     public function as_xvm_onPlayersHpChanged()
 // AS3:DONE     {

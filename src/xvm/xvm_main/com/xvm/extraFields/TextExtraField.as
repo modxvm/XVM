@@ -25,7 +25,7 @@
         private var _textValue:String = null;
         private var _colorSchemeNameValue:String = null;
 
-        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean, getColorSchemeName:Function)
+        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null)
         {
             super();
 
@@ -52,7 +52,7 @@
 
         public final function dispose():void
         {
-
+            cfg = null;
         }
 
         private function setup(options:IVOMacrosOptions):void
@@ -128,7 +128,7 @@
             {
                 if (!isNaN(value))
                 {
-                    border = !isNaN(value);
+                    border = true;
                     borderColor = value;
                 }
                 cfg.borderColor = null;
@@ -139,7 +139,7 @@
             {
                 if (!isNaN(value))
                 {
-                    background = !isNaN(value);
+                    background = true;
                     backgroundColor = value;
                 }
                 cfg.bgColor = null;
@@ -155,6 +155,7 @@
             {
                 if (!setupShadow(cfg.shadow, options))
                 {
+
                     cfg.shadow = null;
                 }
             }
@@ -203,7 +204,7 @@
                 isDynamicShadow = true;
             }
 
-            value = Macros.FormatNumber(cfg.alpha, options, 70) / 100.0;
+            value = Macros.FormatNumber(cfg.alpha, options, 70);
             if (Macros.IsCached(cfg.alpha, options))
             {
                 cfg.alpha = value;
@@ -264,6 +265,8 @@
             {
                 cfg.hideObject = value;
             }
+
+            filters = Utils.createShadowFiltersFromConfig(cfg, options);
 
             return isDynamicShadow;
         }

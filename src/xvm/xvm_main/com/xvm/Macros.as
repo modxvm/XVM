@@ -133,7 +133,7 @@ package com.xvm
          * @param options macros options data
          * @return true if macros value is cached else false
          */
-        public static function IsCached(format:*, options:IVOMacrosOptions):Boolean
+        public static function IsCached(format:*, options:IVOMacrosOptions = null):Boolean
         {
             return _IsCached(format, options);
         }
@@ -289,7 +289,6 @@ package com.xvm
                 // Split tags
                 var formatArr:Array = format.split("{{");
 
-                var isStaticMacro:Boolean = true;
                 var res:String;
                 var len:int = formatArr.length;
                 if (len <= 1)
@@ -312,7 +311,7 @@ package com.xvm
                         {
                             var _FormatPart_out:Object = { };
                             res += _FormatPart(part.slice(0, idx), options, _FormatPart_out) + part.slice(idx + 2);
-                            isStaticMacro = isStaticMacro && _FormatPart_out.isStaticMacro;
+                            __out.isStaticMacro = __out.isStaticMacro && _FormatPart_out.isStaticMacro;
                         }
                     }
 
@@ -324,14 +323,14 @@ package com.xvm
                             //Logger.add("recursive: " + playerName + " " + res);
                             var _Format_out:Object = { };
                             res = _Format(res, options, _Format_out);
-                            isStaticMacro = isStaticMacro && _Format_out.isStaticMacro;
+                            __out.isStaticMacro = __out.isStaticMacro && _Format_out.isStaticMacro;
                         }
                     }
                 }
 
                 res = Utils.fixImgTag(res);
 
-                if (isStaticMacro)
+                if (__out.isStaticMacro)
                 {
                     if (playerName != null && playerName != "")
                     {
@@ -340,13 +339,13 @@ package com.xvm
                     }
                     else
                     {
+                        //Logger.add("add to global cache: " + format + " => " + res);
                         m_macros_cache_global[format] = res;
                     }
                 }
                 else
                 {
-                    //Logger.add("[D] " + playerName + "> " + format);
-                    __out.isStaticMacro = false;
+                    //Logger.add("dynamic " + playerName + "> " + format);
                 }
 
                 //Logger.add(playerName + "> " + format);
@@ -431,8 +430,7 @@ package com.xvm
             else
             {
                 // is static macro
-                var type:String = typeof value;
-                if (type == "function")
+                if (value is Function)
                     __out.isStaticMacro = false;
                 else if (vehCD == 0)
                 {
@@ -573,22 +571,18 @@ package com.xvm
             // substitute
             //Logger.add("name:" + name + " norm:" + norm + " fmt:" + fmt + " suf:" + suf + " rep:" + rep + " def:" + def);
 
-            var type:String = typeof value;
-            //Logger.add("type:" + type + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
+            //Logger.add("type:" + (typeof value) + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
-            if (type == "number" && isNaN(value))
+            if (typeof value == "number" && isNaN(value))
                 return prepareValue(NaN, name, norm, def, vehCD, __out);
 
             var res:String = value;
-            if (type == "function")
+            if (value is Function)
             {
-                if (options == null)
-                    return "{{" + macro + "}}";
                 value = value(options);
                 if (value == null)
                     return prepareValue(NaN, name, norm, def, vehCD, __out);
-                type = typeof value;
-                if (type == "number" && isNaN(value))
+                if (typeof value == "number" && isNaN(value))
                     return prepareValue(NaN, name, norm, def, vehCD, __out);
                 res = value;
             }
@@ -644,7 +638,7 @@ package com.xvm
 
             if (suf != null)
             {
-                if (type == "string")
+                if (value is String)
                 {
                     if (res.length - suf.length > 0)
                     {

@@ -59,6 +59,16 @@ package com.xvm.battle
             instance._playerFrags = value;
         }
 
+        public static function get currentAimZoom():int
+        {
+            return instance._currentAimZoom;
+        }
+
+        public static function set currentAimZoom(value:int):void
+        {
+            instance._currentAimZoom = value;
+        }
+
         public static function get hitlogTotalHits():int
         {
             return instance._hitlogTotalHits;
@@ -95,6 +105,7 @@ package com.xvm.battle
         private var _playersDataVO:VOPlayersData = null;
         private var _captureBarDataVO:VOCaptureBarData = new VOCaptureBarData();
         private var _playerFrags:int = 0;
+        private var _currentAimZoom:int = 0;
         private var _hitlogTotalHits:int = 0;       // TODO: set & update
         private var _hitlogTotalDamage:int = 0;     // TODO: set & update
 

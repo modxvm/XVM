@@ -60,9 +60,9 @@
       // Start zoom value (null for default behavior - last used state)
       // Начальное значение кратности (null для поведения по умолчанию - последнее использовавшееся значение)
       "startZoom": null,
-      // Zoom Indicator
+      // Zoom Indicator (see playersPanel.xc for parameters description)
       // Global macros allowed in all fields
-      // Индикатор масштаба
+      // Индикатор масштаба (см. playersPanel.xc для описания параметров)
       // Можно использовать глобальные макросы во всех полях
       "zoomIndicator": {
         // false - disable.
@@ -79,6 +79,9 @@
         // Opacity in percents (0..100)
         // Прозрачность
         "alpha": 100,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1,
         // Horizonatal text alignment (left, center, right)
         // Горизонтальное выравнивание текста (left, center, right)
         "align": "left",
@@ -91,6 +94,10 @@
         // Border color
         // Цвет рамки
         "borderColor": null,
+        "antiAliasType": "advanced",
+        // Text format
+        // Формат текста
+        "format": "<font face='$TitleFont' color='#95CB29' size='16'>x{{zoom}}</font>",
         // Shadow options
         // Параметры тени
         "shadow": {
@@ -102,11 +109,8 @@
           "color": "0x192E0E",       // "0xXXXXXX"      / color           / цвет
           "alpha": 100,              // (0 .. 100)      / opacity         / прозрачность
           "blur": 3,                 // (0.0 .. 255.0)  / blur            / размытие
-          "strength": 7              // (0.0 .. 255.0)  / intensity       / интенсивность
-        },
-        // Text format
-        // Формат текста
-        "format": "<font face='$TitleFont' color='#95CB29' size='16'>x{{zoom}}</font>"
+          "strength": 2              // (0.0 .. 255.0)  / intensity       / интенсивность
+        }
       },
       // false - disable the shot recoil effect (for the enabled dynamic camera option)
       // false - выключить эффект отдачи от выстрела (для включенной опции динамической камеры)

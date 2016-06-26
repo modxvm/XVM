@@ -40,6 +40,7 @@
      "medium"/"width"
      "medium2"/"width"
      "large"/"width"
+  * camera zoom indicator implemented as extra field with all its options
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

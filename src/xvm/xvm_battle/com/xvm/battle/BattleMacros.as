@@ -54,6 +54,12 @@ package com.xvm.battle
                 return BattleState.playerFrags == 0 ? NaN : BattleState.playerFrags;
             }
 
+            // {{zoom}}
+            m_globals["zoom"] = function(o:IVOMacrosOptions):int
+            {
+                return BattleState.currentAimZoom;
+            }
+
             // xmqp events macros
 
             if (Config.networkServicesSettings.xmqp)
@@ -300,14 +306,6 @@ package com.xvm.battle
                     m_globals["chancesLive"] = function(o:MacrosOptions):String { return Macros.formatWinChancesText(false, true); }
                     break;
             }
-        }
-        */
-
-        /*
-        private function _RegisterZoomIndicatorData(zoom:Number):void
-        {
-            // {{zoom}}
-            m_globals["zoom"] = function(o:MacrosOptions):void { return zoom; }
         }
         */
 
