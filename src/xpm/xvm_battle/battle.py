@@ -16,6 +16,7 @@ from gui.app_loader.settings import APP_NAME_SPACE
 from gui.shared import g_eventBus, events
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 from gui.battle_control import g_sessionProvider
+from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
@@ -26,8 +27,6 @@ import xvm_main.python.minimap_circles as minimap_circles
 import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo_xtdb as vehinfo_xtdb
 import xvm_main.python.xmqp_events as xmqp_events
-
-from commands import *
 
 from commands import *
 
@@ -96,6 +95,7 @@ def _PlayerAvatar_onBecomePlayer(base, self):
             if ctrl:
                 ctrl.onMinimapVehicleAdded += _g_battle.onMinimapVehicleAdded
                 ctrl.onMinimapVehicleRemoved += _g_battle.onMinimapVehicleRemoved
+                ctrl.onVehicleFeedbackReceived += _g_battle.onVehicleFeedbackReceived
         _g_battle.onStartBattle()
     except Exception, ex:
         err(traceback.format_exc())
@@ -114,6 +114,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
             if ctrl:
                 ctrl.onMinimapVehicleAdded -= _g_battle.onMinimapVehicleAdded
                 ctrl.onMinimapVehicleRemoved -= _g_battle.onMinimapVehicleRemoved
+                ctrl.onVehicleFeedbackReceived -= _g_battle.onVehicleFeedbackReceived
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
@@ -142,6 +143,10 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 def _PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
     # debug("> _PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
     pass
+
+@registerEvent(PlayerAvatar, 'updateVehicleHealth')
+def _PlayerAvatar_setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
+    _g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
 
 # on any vehicle hit received
 @registerEvent(Vehicle, 'onHealthChanged')
@@ -216,6 +221,10 @@ class Battle(object):
         self._spotted_cache[vehicleID] = SPOTTED_STATUS.LOST
         self.updatePlayerState(vehicleID, INV.SPOTTED_STATUS)
 
+    def onVehicleFeedbackReceived(self, eventID, vehicleID, value):
+        if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
+          self.updatePlayerState(vehicleID, INV.CUR_HEALTH)
+
     def updatePlayerState(self, vehicleID, targets):
         try:
             if targets & (INV.ALL_VINFO | INV.ALL_VSTATS):
@@ -237,11 +246,14 @@ class Battle(object):
             if targets & INV.SQUAD_INDEX:
                 data['squadIndex'] = vInfoVO.squadIndex
             if targets & INV.CUR_HEALTH:
-                data['curHealth'] = max(0, entity.health) if entity else None
+                if entity and hasattr(entity, 'health'):
+                    data['curHealth'] = entity.health
             if targets & INV.MAX_HEALTH:
-                data['maxHealth'] = entity.typeDescriptor.maxHealth if entity else None
+                if entity and hasattr(entity, 'typeDescriptor'):
+                    data['maxHealth'] = entity.typeDescriptor.maxHealth
             if targets & INV.MARKS_ON_GUN:
-                data['marksOnGun'] = entity.publicInfo.marksOnGun if entity else None
+                if entity and hasattr(entity, 'publicInfo'):
+                    data['marksOnGun'] = entity.publicInfo.marksOnGun
             if targets & INV.SPOTTED_STATUS:
                 data['spottedStatus'] = self.getSpottedStatus(vehicleID)
             if targets & INV.FRAGS:

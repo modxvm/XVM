@@ -11,4 +11,4 @@ class XVM_BATTLE_COMMAND(object):
 
     AS_RESPONSE_BATTLE_GLOBAL_DATA = "xvm.as.response_battle_global_data"
     AS_UPDATE_PLAYER_STATE = "xvm.as.update_player_state"
-    AS_UPDATE_HITLOG_DATA = "xvm.as.update_hitlog_data"
+    AS_TEAMS_HP_CHANGED = "xvm.as.teams_hp_changed"

@@ -62,6 +62,12 @@ package com.xvm.battle.playersPanel
             onConfigLoaded(null);
         }
 
+        override protected function onDispose():void
+        {
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            super.onDispose();
+        }
+
         override public function as_setPanelMode(state:int):void
         {
             //Logger.add("UI_PlayersPanel.as_setPanelMode(): " + param1);
