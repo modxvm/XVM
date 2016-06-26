@@ -8,6 +8,7 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xfw.events.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.battle.battleClock.BattleClock;
     import com.xvm.battle.battleLabels.BattleLabels;
     import com.xvm.battle.zoomIndicator.ZoomIndicator;
     import com.xvm.types.cfg.*;
@@ -29,8 +30,8 @@ package com.xvm.battle
 
         private var _battleLabels:BattleLabels;
         private var _zoomIndicator:ZoomIndicator;
+        private var _battleClock:BattleClock;
         //private var _sixthSenseIndicator:SixthSenseIndicator;
-        //private var _battleClock:BattleClock;
 
         public function BattleXvmView(view:IView)
         {
@@ -57,10 +58,16 @@ package com.xvm.battle
                 onConfigLoaded(null);
 
                 var behindMinimapIndex:int = battlePage.getChildIndex(battlePage.minimap) - 1;
+
                 _battleLabels = new BattleLabels();
                 battlePage.addChildAt(_battleLabels, behindMinimapIndex);
+
                 _zoomIndicator = new ZoomIndicator();
                 battlePage.addChildAt(_zoomIndicator, behindMinimapIndex);
+
+                if (Config.config.battle.clockFormat && Config.config.battle.clockFormat != "")
+                    _battleClock = new BattleClock();
+                battlePage.debugPanel.addChild(_battleClock);
             }
             catch (ex:Error)
             {
@@ -83,6 +90,11 @@ package com.xvm.battle
                 {
                     _zoomIndicator.dispose();
                     _zoomIndicator = null;
+                }
+                if (_battleClock)
+                {
+                    _battleClock.dispose();
+                    _battleClock = null;
                 }
             }
             catch (ex:Error)

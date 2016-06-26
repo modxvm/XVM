@@ -48,12 +48,12 @@ class wot.battle.BattleMain
 // AS3:DONE         // Panels Mode Switcher
 // AS3:DONE         if (Config.config.playersPanel.removePanelsModeSwitcher)
 // AS3:DONE             _root.switcher_mc._visible = false;
-
-        // Clock
-        var clockFormat:String = Config.config.battle.clockFormat;
-        if (clockFormat && clockFormat != "")
-            this._clock = new Clock();
-
+// AS3:DONE 
+// AS3:DONE         // Clock
+// AS3:DONE         var clockFormat:String = Config.config.battle.clockFormat;
+// AS3:DONE         if (clockFormat && clockFormat != "")
+// AS3:DONE             this._clock = new Clock();
+// AS3:DONE 
 // AS3:DONE         // Zoom Indicator
 // AS3:DONE         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
 // AS3:DONE             this._zoomIndicator = new ZoomIndicator(_holder);

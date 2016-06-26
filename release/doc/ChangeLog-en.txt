@@ -41,6 +41,7 @@
      "medium2"/"width"
      "large"/"width"
   * camera zoom indicator implemented as extra field with all its options
+  * clock are using php formatting (http://php.net/date)
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch
