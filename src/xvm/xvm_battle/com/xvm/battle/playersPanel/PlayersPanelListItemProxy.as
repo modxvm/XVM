@@ -22,8 +22,11 @@ package com.xvm.battle.playersPanel
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
     import net.wg.gui.battle.views.stats.constants.*;
+    import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.interfaces.*;
+    import net.wg.infrastructure.events.AtlasEvent;
     import net.wg.infrastructure.interfaces.entity.*;
+    import net.wg.infrastructure.managers.impl.*;
     import scaleform.clik.core.*;
 
     public class PlayersPanelListItemProxy extends UIComponent
@@ -80,6 +83,7 @@ package com.xvm.battle.playersPanel
         private var extraFieldsFull:ExtraFields = null;
 
         private var currentPlayerState:VOPlayerState;
+        private var _vehicleImage:String;
 
         public function PlayersPanelListItemProxy(ui:PlayersPanelListItem, isLeftPanel:Boolean)
         {
@@ -122,13 +126,26 @@ package com.xvm.battle.playersPanel
 
         public function setVehicleIcon(vehicleImage:String):void
         {
+            if (_vehicleImage != vehicleImage)
+            {
+                _vehicleImage = vehicleImage;
+            }
             if (mcfg == null)
                 return;
-            var atlas:String = isLeftPanel ? UI_PlayersPanel.playersPanelLeftAtlas : UI_PlayersPanel.playersPanelRightAtlas;
-            if (!App.atlasMgr.isAtlasInitialized(atlas))
-                atlas = AtlasConstants.BATTLE_ATLAS;
+            var atlasName:String = isLeftPanel ? UI_PlayersPanel.playersPanelLeftAtlas : UI_PlayersPanel.playersPanelRightAtlas;
+            if (!App.atlasMgr.isAtlasInitialized(atlasName))
+            {
+                var atlas:Atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(atlasName) as Atlas;
+                if (atlas)
+                {
+                    atlas.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler);
+                    atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler)
+                }
+                atlasName = AtlasConstants.BATTLE_ATLAS;
+            }
             setupMirroredVehicleIcon();
-            App.atlasMgr.drawGraphics(atlas, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+            ui.vehicleIcon.graphics.clear();
+            App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
         }
 
         // XVM events handlers
@@ -254,6 +271,14 @@ package com.xvm.battle.playersPanel
                 Logger.err(ex);
             }
             return null;
+        }
+
+        private function onAtlasInitializedHandler(e:AtlasEvent):void
+        {
+            Logger.add("4");
+            Logger.addObject(e, 1, "onAtlasInitializedHandler");
+            e.currentTarget.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler);
+            setVehicleIcon(_vehicleImage);
         }
 
         private function setupMirroredVehicleIcon():void

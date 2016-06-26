@@ -71,7 +71,7 @@ package com.xvm.battle.elements
 
         private function apply(obj:*, opt:*, name:String):void
         {
-            Logger.add(name);
+            //Logger.add(name);
             //Logger.addObject(opt, 1, name);
             if (opt[CMD_LOG])
             {
