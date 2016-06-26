@@ -4,9 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    import net.wg.data.daapi.base.DAAPIDataClass;
+    import com.xfw.*;
 
-    public dynamic class CConfig extends Object
+    public dynamic class CConfig extends Object implements ICloneable
     {
         // internal
         public var __stateInfo:Object;
@@ -49,5 +49,10 @@ package com.xvm.types.cfg
         public var sounds:CSounds;
         public var xmqp:CXmqp;
         public var consts:Object; // internal
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

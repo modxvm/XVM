@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CColors extends Object
+    import com.xfw.*;
+
+    public dynamic class CColors extends Object implements ICloneable
     {
         public var system:Object;
         public var dmg_kind:Object;
@@ -31,5 +33,10 @@ package com.xvm.types.cfg
         public var wn8effd:Array;
         public var damageRating:Array;
         public var hitsRatio:Array;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

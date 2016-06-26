@@ -4,12 +4,19 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CCaptureBar extends Object
+    import com.xfw.*;
+
+    public dynamic class CCaptureBar extends Object implements ICloneable
     {
         public var enabled:*;
         public var distanceOffset:*;
         public var hideProgressBar:*;
         public var enemy:CCaptureBarTeam;
         public var ally:CCaptureBarTeam;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

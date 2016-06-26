@@ -6,7 +6,7 @@ package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CExtraField implements ICloneable
+    public dynamic class CExtraField extends Object implements ICloneable
     {
         public var enabled:*;
         public var x:*;

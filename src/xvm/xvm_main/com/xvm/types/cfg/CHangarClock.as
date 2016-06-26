@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CHangarClock extends Object
+    import com.xfw.*;
+
+    public dynamic class CHangarClock extends Object implements ICloneable
     {
         public var enabled:*;
         public var x:*;
@@ -24,5 +26,10 @@ package com.xvm.types.cfg
         public var antiAliasType:String;
         public var format:String;
         public var shadow:CShadow;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

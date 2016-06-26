@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CPlayersPanelMode extends Object
+    import com.xfw.*;
+
+    public dynamic class CPlayersPanelMode extends Object implements ICloneable
     {
         public var enabled:*;
         public var standardFields:Array;
@@ -23,5 +25,10 @@ package com.xvm.types.cfg
         public var vehicleFormatRight:String;
         public var extraFieldsLeft:Array;
         public var extraFieldsRight:Array;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

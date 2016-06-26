@@ -4,9 +4,16 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CCameraStrategic extends Object
+    import com.xfw.*;
+
+    public dynamic class CCameraStrategic extends Object implements ICloneable
     {
         public var distRange:Array;
         public var dynamicCameraEnabled:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

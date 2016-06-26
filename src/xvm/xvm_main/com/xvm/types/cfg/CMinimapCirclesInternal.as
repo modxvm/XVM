@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMinimapCirclesInternal extends Object
+    import com.xfw.*;
+
+    public dynamic class CMinimapCirclesInternal extends Object implements ICloneable
     {
         public var is_full_crew:Boolean;
         public var base_commander_skill:Number;
@@ -25,5 +27,10 @@ package com.xvm.types.cfg
         public var shell_range:Number;
         public var base_gun_reload_time:Number;
         public var base_radio_distance:Number;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

@@ -4,8 +4,15 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMinimapLabels extends Object
+    import com.xfw.*;
+
+    public dynamic class CMinimapLabels extends Object implements ICloneable
     {
-       public var formats:Array;
+        public var formats:Array;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CTextsBattleType extends Object
+    import com.xfw.*;
+
+    public dynamic class CTextsBattleType extends Object implements ICloneable
     {
         public var unknown:String;
         public var regular:String;
@@ -25,5 +27,10 @@ package com.xvm.types.cfg
         public var sandbox:String;
         public var fallout_classic:String;
         public var fallout_multiteam:String;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

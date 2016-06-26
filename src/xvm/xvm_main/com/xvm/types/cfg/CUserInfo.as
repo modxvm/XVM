@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CUserInfo extends Object
+    import com.xfw.*;
+
+    public dynamic class CUserInfo extends Object implements ICloneable
     {
         public var startPage:*;
         public var sortColumn:*;
@@ -14,5 +16,10 @@ package com.xvm.types.cfg
         public var showFilters:*;
         public var filterFocused:*;
         public var defaultFilterValue:String;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CCarousel extends Object
+    import com.xfw.*;
+
+    public dynamic class CCarousel extends Object implements ICloneable
     {
         public var enabled:*;
         public var zoom:*;
@@ -25,5 +27,10 @@ package com.xvm.types.cfg
         public var types_order:Array;
         public var sorting_criteria:Array;
         public var suppressCarouselTooltips:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

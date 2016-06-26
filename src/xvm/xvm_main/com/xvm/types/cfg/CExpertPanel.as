@@ -4,9 +4,16 @@
  */
 package com.xvm.types.cfg
 {
-    public class CExpertPanel extends Object
+    import com.xfw.*;
+
+    public dynamic class CExpertPanel extends Object implements ICloneable
     {
         public var delay:*;
         public var scale:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

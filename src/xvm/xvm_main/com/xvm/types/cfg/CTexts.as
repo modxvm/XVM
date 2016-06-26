@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CTexts extends Object
+    import com.xfw.*;
+
+    public dynamic class CTexts extends Object implements ICloneable
     {
         public var vtype:CTextsVType;
         public var marksOnGun:CTextsMarksOnGun;
@@ -12,5 +14,10 @@ package com.xvm.types.cfg
         public var xvmuser:CTextsXvmUser;
         public var battletype:CTextsBattleType;
         public var topclan:CTextsTopClan;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CBattleLoading extends Object
+    import com.xfw.*;
+
+    public dynamic class CBattleLoading extends Object implements ICloneable
     {
         public var clockFormat:String;
         public var showBattleTier:*;
@@ -33,5 +35,10 @@ package com.xvm.types.cfg
         public var formatRightVehicle:String;
         public var extraFieldsLeft:Array;
         public var extraFieldsRight:Array;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

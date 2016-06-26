@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMinimapMapSize extends Object
+    import com.xfw.*;
+
+    public dynamic class CMinimapMapSize extends Object implements ICloneable
     {
         public var enabled:*;
         public var format:String;
@@ -14,5 +16,10 @@ package com.xvm.types.cfg
         public var shadow:CShadow;
         public var width:*;
         public var height:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

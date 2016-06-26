@@ -4,9 +4,16 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMinimapZoom extends Object
+    import com.xfw.*;
+
+    public dynamic class CMinimapZoom extends Object implements ICloneable
     {
         public var pixelsBack:*;
         public var centered:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

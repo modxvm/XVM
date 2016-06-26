@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CBattle extends Object
+    import com.xfw.*;
+
+    public dynamic class CBattle extends Object implements ICloneable
     {
         public var mirroredVehicleIcons:*;
         public var showPostmortemTips:*;
@@ -16,5 +18,10 @@ package com.xvm.types.cfg
         public var elements:Array;
         public var camera:CCamera;
         public var minimapDeadSwitch:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

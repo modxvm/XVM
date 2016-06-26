@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CStatisticForm extends Object
+    import com.xfw.*;
+
+    public dynamic class CStatisticForm extends Object implements ICloneable
     {
         public var showBattleTier:*;
         public var removeSquadIcon:*;
@@ -30,5 +32,10 @@ package com.xvm.types.cfg
         public var formatRightVehicle:String;
         public var extraFieldsLeft:Array;
         public var extraFieldsRight:Array;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

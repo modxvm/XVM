@@ -4,8 +4,15 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMarkers extends Object
+    import com.xfw.*;
+
+    public dynamic class CMarkers extends Object implements ICloneable
     {
         public var useStandardMarkers:Boolean;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

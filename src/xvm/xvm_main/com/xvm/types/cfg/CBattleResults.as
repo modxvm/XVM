@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CBattleResults extends Object
+    import com.xfw.*;
+
+    public dynamic class CBattleResults extends Object implements ICloneable
     {
         public var startPage:*;
         public var showTotalExperience:*;
@@ -13,5 +15,10 @@ package com.xvm.types.cfg
         public var showExtendedInfo:*;
         public var showTotals:*;
         public var showBattleTier:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

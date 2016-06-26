@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMinimap extends Object
+    import com.xfw.*;
+
+    public dynamic class CMinimap extends Object implements ICloneable
     {
         public var enabled:*;
         public var mapBackgroundImageAlpha:*;
@@ -25,5 +27,10 @@ package com.xvm.types.cfg
         public var labelsData:*;
         public var circles:CMinimapCircles;
         public var lines:CMinimapLines;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

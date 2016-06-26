@@ -4,10 +4,17 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CXmqp extends Object
+    import com.xfw.*;
+
+    public dynamic class CXmqp extends Object implements ICloneable
     {
         public var spottedTime:*;
         public var minimapClicksTime:*;
         public var minimapClicksColor:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

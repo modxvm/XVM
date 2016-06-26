@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CMinimapCirclesViewRange extends Object
+    import com.xfw.*;
+
+    public dynamic class CMinimapCirclesViewRange extends Object implements ICloneable
     {
         public var enabled:*;
         public var distance:*;
@@ -12,5 +14,10 @@ package com.xvm.types.cfg
         public var thickness:*;
         public var alpha:*;
         public var color:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

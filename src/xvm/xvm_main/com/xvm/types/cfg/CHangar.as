@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CHangar extends Object
+    import com.xfw.*;
+
+    public dynamic class CHangar extends Object implements ICloneable
     {
         public var xwnInCompany:*;
         public var enableGoldLocker:*;
@@ -26,5 +28,10 @@ package com.xvm.types.cfg
         public var serverInfo:CHangarServerInfo;
         public var carousel:CCarousel;
         public var clock:CHangarClock;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

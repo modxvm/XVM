@@ -4,12 +4,19 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CPlayersPanelNoneModeExtraField extends Object
+    import com.xfw.*;
+
+    public dynamic class CPlayersPanelNoneModeExtraField extends Object implements ICloneable
     {
         public var x:*;
         public var y:*;
         public var width:*;
         public var height:*;
         public var formats:Array;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

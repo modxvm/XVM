@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CPingServers extends Object
+    import com.xfw.*;
+
+    public dynamic class CPingServers extends Object implements ICloneable
     {
         public var enabled:*;
         public var updateInterval:*;
@@ -27,5 +29,10 @@ package com.xvm.types.cfg
         public var fontStyle:CPingServersFontStyle;
         public var threshold:CPingServersThreshold;
         public var shadow:CShadow;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

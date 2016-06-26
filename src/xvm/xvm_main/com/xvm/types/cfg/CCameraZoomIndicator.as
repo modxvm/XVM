@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CCameraZoomIndicator extends Object
+    import com.xfw.*;
+
+    public dynamic class CCameraZoomIndicator extends Object implements ICloneable
     {
         public var enabled:*;
         public var x:*;
@@ -16,7 +18,25 @@ package com.xvm.types.cfg
         public var valign:String;
         public var bgColor:*;
         public var borderColor:*;
-        public var shadow:CShadow;
         public var format:String;
+        public var shadow:CShadow;
+
+        public function clone():*
+        {
+            var cloned:CCameraZoomIndicator = new CCameraZoomIndicator();
+            cloned.enabled = enabled;
+            cloned.x = x;
+            cloned.y = y;
+            cloned.width = width;
+            cloned.height = height;
+            cloned.alpha = alpha;
+            cloned.align = align;
+            cloned.valign = valign;
+            cloned.bgColor = bgColor;
+            cloned.borderColor = borderColor;
+            cloned.format = format;
+            cloned.shadow = shadow ? shadow.clone() : null;
+            return cloned;
+        }
     }
 }

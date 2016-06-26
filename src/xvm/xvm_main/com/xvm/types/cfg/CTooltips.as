@@ -3,7 +3,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CTooltips extends Object
+    import com.xfw.*;
+
+    public dynamic class CTooltips extends Object implements ICloneable
     {
         public var combineIcons:*;
         public var hideSimplifiedVehParams:*;
@@ -17,5 +19,10 @@ package com.xvm.types.cfg
         public var heavyTank:Array;
         public var TD:Array;
         public var SPG:Array;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

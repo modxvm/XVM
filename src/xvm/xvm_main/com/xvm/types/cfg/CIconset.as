@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CIconset extends Object
+    import com.xfw.*;
+
+    public dynamic class CIconset extends Object implements ICloneable
     {
         public var battleLoadingAlly:String;
         public var battleLoadingEnemy:String;
@@ -14,5 +16,10 @@ package com.xvm.types.cfg
         public var fullStatsRightAtlas:String;
         public var vehicleMarkerLeftAtlas:String;
         public var vehicleMarkerRightAtlas:String;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }

@@ -4,7 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CClanIcon extends Object
+    import com.xfw.*;
+
+    public dynamic class CClanIcon extends Object implements ICloneable
     {
         public var show:*;
         public var x:*;
@@ -14,5 +16,10 @@ package com.xvm.types.cfg
         public var h:*;
         public var w:*;
         public var alpha:*;
+
+        public function clone():*
+        {
+            throw new Error("clone() method is not implemented");
+        }
     }
 }
