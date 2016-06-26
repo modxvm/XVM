@@ -2,6 +2,20 @@
  * GUI elements settings (experts only)
  * Настройки графических элементов (только для экспертов!)
  * http://www.koreanrandom.com/forum/topic/1761-
+ *
+ * TODO: doc
+ *
+ * commands:
+ *   "$log": 1,  // команда $log используется для вывода значений в лог, число - уровень вложенности
+ *   "$delay": 1,
+ *   "$interval": 1,
+ *   "$textFormat": {   // подстановка для формата текста
+ *     //"$log": 1,             // тоже можно логгировать
+ *     "size": 30,              // размер шрифта
+ *     "font": "$TitleFont",    // шрифт пожирнее
+ *     "align": "center"        // выравнивание
+ *   }
+ *
  */
 {
   // Minimap coordinates font

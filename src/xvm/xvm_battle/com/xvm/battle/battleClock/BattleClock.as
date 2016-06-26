@@ -7,16 +7,39 @@ package com.xvm.battle.battleClock
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import flash.events.*;
     import flash.filters.*;
     import flash.text.*;
     import flash.utils.*;
     import net.wg.gui.battle.views.debugPanel.DebugPanel;
+    import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-    public class BattleClock extends TextField
+    public class BattleClock extends TextField implements IDisposable
     {
         private var format:String;
+        private var timer:Timer = null;
 
         public function BattleClock()
+        {
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            onConfigLoaded(null);
+        }
+
+        public function dispose():void
+        {
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            stop();
+        }
+
+        // event handlers
+
+        private function onConfigLoaded(e:Event):void
+        {
+            stop();
+            setup();
+        }
+
+        private function setup():void
         {
             format = Config.config.battle.clockFormat;
             mouseEnabled = false;
@@ -30,17 +53,21 @@ package com.xvm.battle.battleClock
             defaultTextFormat = textFormat;
             filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 1, 3) ];
 
-            App.utils.scheduler.scheduleRepeatableTask(tick, 1000, int.MAX_VALUE);
+            timer = new Timer(1000, 0);
+            timer.addEventListener(TimerEvent.TIMER, onTimer);
+            timer.start();
         }
 
-        public function dispose():void
+        private function stop():void
         {
-            App.utils.scheduler.cancelTask(tick);
+            if (timer != null)
+            {
+                timer.stop();
+                timer = null;
+            }
         }
 
-        // event handlers
-
-        private function tick():void
+        private function onTimer(e:Event):void
         {
             htmlText = XfwUtils.FormatDate(format, new Date());
         }

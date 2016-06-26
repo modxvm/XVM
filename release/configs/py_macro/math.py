@@ -22,3 +22,11 @@ def math_div(a, b):
 @xvm.export('math.pow')
 def math_pow(a, n):
     return a ** n
+
+# Random numbers
+
+import random
+
+@xvm.export('random.randint', deterministic=False)
+def random_randint(a=0, b=1):
+    return random.randint(a, b)

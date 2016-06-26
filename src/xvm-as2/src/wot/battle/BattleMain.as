@@ -57,9 +57,9 @@ class wot.battle.BattleMain
 // AS3:DONE         // Zoom Indicator
 // AS3:DONE         if (Macros.FormatGlobalBooleanValue(Config.config.battle.camera.sniper.zoomIndicator.enabled))
 // AS3:DONE             this._zoomIndicator = new ZoomIndicator(_holder);
-
-        // Setup Visual Elements
-        Elements.SetupElements();
+// AS3:DONE 
+// AS3:DONE         // Setup Visual Elements
+// AS3:DONE         Elements.SetupElements();
 
         FragCorrelation.modify();
 
@@ -164,16 +164,16 @@ class wot.battle.BattleMain
 
     private function onUpdateStage(width, height, scale)
     {
-        _root.onUpdateStage(width, height, scale);
-        Elements.width = width;
-        Elements.height = height;
-        Elements.scale = scale;
-        Elements.SetupElements();
+// AS3:DONE         _root.onUpdateStage(width, height, scale);
+// AS3:DONE         Elements.width = width;
+// AS3:DONE         Elements.height = height;
+// AS3:DONE         Elements.scale = scale;
+// AS3:DONE         Elements.SetupElements();
 
         fixMinimapSize();
 
-        //Logger.add("update stage: " + width + "," + height + "," + scale);
-        GlobalEventDispatcher.dispatchEvent( { type: Events.E_UPDATE_STAGE, width: width, height: height, scale: scale });
+// AS3:DONE         //Logger.add("update stage: " + width + "," + height + "," + scale);
+// AS3:DONE         GlobalEventDispatcher.dispatchEvent( { type: Events.E_UPDATE_STAGE, width: width, height: height, scale: scale });
     }
 
     private function showPostmortemTips(movingUpTime, showTime, movingDownTime)

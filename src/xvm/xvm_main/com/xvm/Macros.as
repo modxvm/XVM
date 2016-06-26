@@ -733,9 +733,9 @@ package com.xvm
                         res = def;
                     break;
                 case "py":
-                    res = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, norm);
-                    __out.isStaticMacro = res[1];
-                    res = res[0];
+                    var py_result:Array = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, norm);
+                    __out.isStaticMacro = py_result[1];
+                    res = py_result[0];
                     if (res == null)
                         res = def;
                     break;
