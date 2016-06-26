@@ -28,7 +28,7 @@ def checkNames(vehs):
 _data = {
     # Last update: 25.06.2016
     "china:Ch01_Type59":                     'Typ59',
-    "china:Ch01_Type59_Gold":                'Typ59',
+    "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
     "china:Ch03_WZ-111":                     '111',
     "china:Ch04_T34_1":                      't34·1',

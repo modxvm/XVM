@@ -25,7 +25,7 @@
       "vehicleMarkerAlly" => "vehicleMarkerLeftAtlas"
       "vehicleMarkerEnemy" => "vehicleMarkerRightAtlas"
   * added macro {{clanicon}} with clan embled image path value
-  * removed "clanIcon" section in the "battleLoading", "statisticForm" and "playersPanel" sections
+  * removed "clanIcon" section in the "battleLoading", "battleLoadingTips", "statisticForm" and "playersPanel" sections
     and in the markers
   * added options in all modes in the "playersPanel" section:
       "standardFields" - displayed standard fields in this mode and their order.
