@@ -1,4 +1,8 @@
-﻿package com.xvm.battle
+﻿/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
+package com.xvm.battle
 {
     public class BattleEvents
     {

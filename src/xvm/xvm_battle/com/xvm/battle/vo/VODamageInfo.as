@@ -1,4 +1,8 @@
-﻿package com.xvm.battle.vo
+﻿/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
+package com.xvm.battle.vo
 {
     import com.xvm.vo.*;
 
