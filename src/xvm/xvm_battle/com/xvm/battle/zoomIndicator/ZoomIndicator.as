@@ -60,7 +60,7 @@ package com.xvm.battle.zoomIndicator
                         removeChild(indicator);
                     indicator = new TextExtraField(cfg);
                     addChild(indicator);
-                    invalidateState();
+                    invalidate(InvalidationType.STATE);
                 }
             }
             catch (ex:Error)
