@@ -78,9 +78,19 @@
             return _isSelected;
         }
 
+        public function set isSelected(value:Boolean):void
+        {
+            _isSelected = value;
+        }
+
         override public function get isSquadPersonal():Boolean
         {
             return _isSquadPersonal;
+        }
+
+        public function set isSquadPersonal(value:Boolean):void
+        {
+            _isSquadPersonal = value;
         }
 
         override public function get isTeamKiller():Boolean
@@ -93,14 +103,29 @@
             return _isCurrentPlayer;
         }
 
+        public function set isCurrentPlayer(value:Boolean):void
+        {
+            _isCurrentPlayer = value;
+        }
+
         override public function get squadIndex():Number
         {
             return _squadIndex;
         }
 
+        public function set squadIndex(value:Number):void
+        {
+            _squadIndex = value;
+        }
+
         override public function get position():Number
         {
             return _position;
+        }
+
+        public function set position(value:Number):void
+        {
+            _position = value;
         }
 
         override public function get vehCD():int

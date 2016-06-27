@@ -185,11 +185,11 @@ package xvm.battleloading_ui.components
                     options.playerName = _model.playerName;
                     options.vehicleStatus = _model.vehicleStatus;
                     options.playerStatus = _model.playerStatus;
-                    options._isSelected = _model.isCurrentPlayer;
-                    options._isCurrentPlayer = _model.isCurrentPlayer;
-                    options._isSquadPersonal = _model.isCurrentSquad;
-                    options._squadIndex = _model.squadIndex;
-                    options._position = proxy.index + 1;
+                    options.isSelected = _model.isCurrentPlayer;
+                    options.isCurrentPlayer = _model.isCurrentPlayer;
+                    options.isSquadPersonal = _model.isCurrentSquad;
+                    options.squadIndex = _model.squadIndex;
+                    options.position = proxy.index + 1;
 
                     var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Macros.FormatBooleanGlobal(cfg.darkenNotReadyIcon) || proxy.enabled) && options.isAlive;
 
