@@ -11,15 +11,14 @@
     //"zoom": 0.75,
     "rows": 2,
     "padding": { "horizontal": 5, "vertical": 5 },
-    //"scrollingSpeed": 30,
     "backgroundAlpha": 30,
-    "filtersPadding": { "horizontal": 11, "vertical": 10 },
+    //"scrollingSpeed": 30,
     "alwaysShowFilters": true,
     //"suppressCarouselTooltips": true,
     //"hideBuyTank": true,
     //"hideBuySlot": true,
-    //"showUsedSlots": true,
     "showTotalSlots": true,
+    //"showUsedSlots": true,
     "sorting_criteria": ["level", "nation", "type"],
     "filters": {
       //"params":   { "enabled": false },
@@ -27,6 +26,11 @@
       //"favorite": { "enabled": false },
       "__stub__": {}
     },
+    //"filtersPadding": { "horizontal": 5, "vertical": 5 },
+    //"nations_order": [],
+    //"types_order":   ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
+    //"sorting_criteria": ["nation", "type", "level"],
+    //"suppressCarouselTooltips": false
     "fields": {
       "tankType":       { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "level":          { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },

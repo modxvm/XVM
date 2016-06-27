@@ -14,8 +14,8 @@ package com.xvm.types.cfg
         public var playersPanelRightAtlas:String;
         public var fullStatsLeftAtlas:String;
         public var fullStatsRightAtlas:String;
-        public var vehicleMarkerLeftAtlas:String;
-        public var vehicleMarkerRightAtlas:String;
+        public var vehicleMarkerAllyAtlas:String;
+        public var vehicleMarkerEnemyAtlas:String;
 
         public function clone():*
         {

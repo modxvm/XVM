@@ -276,10 +276,10 @@
     "battleLoadingEnemy": "../../../../res/contour/Master_XH",
     "playersPanelLeftAtlas": "../../../../res/atlases/playersPanelLeftAtlas",
     "playersPanelRightAtlas": "../../../../res/atlases/playersPanelRightAtlas",
-    "fullStatsLeftAtlas": "battleAtlas",
-    "fullStatsRightAtlas": "battleAtlas",
-    "vehicleMarkerLeftAtlas": "vehicleMarkerAtlas",
-    "vehicleMarkerRightAtlas": "vehicleMarkerAtlas"
+    "fullStatsLeftAtlas": "../../../../res/atlases/battleAtlasLeft",
+    "fullStatsRightAtlas": ../../../../res/atlases/battleAtlasRight",
+    "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAllyAtlas",
+    "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerEnemyAtlas"
   },
   "vehicleNames": {
     "ussr-T-34": { "name": "т-34.", "short": "т-34" },

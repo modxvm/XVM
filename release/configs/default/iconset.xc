@@ -18,7 +18,7 @@
     "fullStatsRightAtlas": "battleAtlas",
     // Folder containing the icon set for the Over-target markers.
     // Набор иконок для маркеров над танками.
-    "vehicleMarkerLeftAtlas": "vehicleMarkerAtlas",
-    "vehicleMarkerRightAtlas": "vehicleMarkerAtlas"
+    "vehicleMarkerAllyAtlas": "vehicleMarkerAtlas",
+    "vehicleMarkerEnemyAtlas": "vehicleMarkerAtlas"
   }
 }

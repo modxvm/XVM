@@ -22,8 +22,8 @@
       "playersPanelEnemy" => "playersPanelRightAtlas"
       "statisticFormAlly" => "fullStatsLeftAtlas"
       "statisticFormEnemy" => "fullStatsRightAtlas"
-      "vehicleMarkerAlly" => "vehicleMarkerLeftAtlas"
-      "vehicleMarkerEnemy" => "vehicleMarkerRightAtlas"
+      "vehicleMarkerAlly" => "vehicleMarkerAllyAtlas"
+      "vehicleMarkerEnemy" => "vehicleMarkerEnemyAtlas"
   * добавлен макрос {{clanicon}} со значением пути эмблемы клана
   * удалена опция "clanIcon" в секциях "battleLoading", "battleLoadingTips", "statisticForm", "playersPanel" и в маркерах
   * добавлены опции во все режимы в секции "playersPanel":
