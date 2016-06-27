@@ -14,6 +14,16 @@
             throw new IllegalOperationError("abstract method called");
         }
 
+        public function get isAlly():Boolean
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
+        public function get isEnemy():Boolean
+        {
+            return !isAlly;
+        }
+
         public function get isAlive():Boolean
         {
             throw new IllegalOperationError("abstract method called");

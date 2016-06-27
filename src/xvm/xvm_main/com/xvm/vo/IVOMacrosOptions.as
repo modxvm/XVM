@@ -4,6 +4,8 @@
     {
         function get vehicleID():Number;
         function get playerName():String;
+        function get isAlly():Boolean;
+        function get isEnemy():Boolean;
         function get isAlive():Boolean;
         function get isDead():Boolean;
         function get isReady():Boolean;

@@ -8,6 +8,7 @@
     {
         private var _vehicleID:Number;
         private var _playerName:String;
+        private var _isAlly:Boolean;
         public var vehicleStatus:uint;
         public var playerStatus:uint;
         public var _isSelected:Boolean;
@@ -39,6 +40,16 @@
         public function set playerName(value:String):void
         {
             _playerName = value;
+        }
+
+        override public function get isAlly():Boolean
+        {
+            return _isAlly;
+        }
+
+        public function set isAlly(value:Boolean):void
+        {
+            _isAlly = value;
         }
 
         override public function get isAlive():Boolean

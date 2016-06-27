@@ -16,34 +16,56 @@ package com.xvm.battle.vo
         public var playerStates:Dictionary;
 
         // DAAPIVehiclesDataVO
-        public var leftCorrelationIDs:Vector.<Number>;
-        public var rightCorrelationIDs:Vector.<Number>;
-
+        private var _leftCorrelationIDs:Vector.<Number>;
+        private var _rightCorrelationIDs:Vector.<Number>;
         private var _leftVehiclesIDs:Vector.<Number>;
-        public function get leftVehiclesIDs():Vector.<Number>
-        {
-            return _leftVehiclesIDs;
-        }
-        public function set leftVehiclesIDs(value:Vector.<Number>):void
-        {
-            _leftVehiclesIDs = value;
-            updateVehiclesPositions(value);
-        }
-
         private var _rightVehiclesIDs:Vector.<Number>;
-        public function get rightVehiclesIDs():Vector.<Number>
-        {
-            return _rightVehiclesIDs;
-        }
-        public function set rightVehiclesIDs(value:Vector.<Number>):void
-        {
-            _rightVehiclesIDs = value;
-            updateVehiclesPositions(value);
-        }
 
         // DAAPITotalStatsVO
         public var leftScope:int = 0;
         public var rightScope:int = 0;
+
+        public function get leftCorrelationIDs():Vector.<Number>
+        {
+            return _leftCorrelationIDs;
+        }
+
+        public function set leftCorrelationIDs(value:Vector.<Number>):void
+        {
+            _leftCorrelationIDs = value.concat(); // clone vector
+        }
+
+        public function get rightCorrelationIDs():Vector.<Number>
+        {
+            return _rightCorrelationIDs;
+        }
+
+        public function set rightCorrelationIDs(value:Vector.<Number>):void
+        {
+            _rightCorrelationIDs = value.concat(); // clone vector
+        }
+
+        public function get leftVehiclesIDs():Vector.<Number>
+        {
+            return _leftVehiclesIDs;
+        }
+
+        public function set leftVehiclesIDs(value:Vector.<Number>):void
+        {
+            _leftVehiclesIDs = value.concat(); // clone vector
+            updateVehiclesPositionsAndTeam(value, true);
+        }
+
+        public function get rightVehiclesIDs():Vector.<Number>
+        {
+            return _rightVehiclesIDs;
+        }
+
+        public function set rightVehiclesIDs(value:Vector.<Number>):void
+        {
+            _rightVehiclesIDs = value.concat(); // clone vector
+            updateVehiclesPositionsAndTeam(value, false);
+        }
 
         // private
         private var playerNameToVehicleIDMap:Dictionary;
@@ -68,7 +90,6 @@ package com.xvm.battle.vo
 
             leftCorrelationIDs = d.leftCorrelationIDs;
             rightCorrelationIDs = d.rightCorrelationIDs;
-
             leftVehiclesIDs = d.leftVehiclesIDs;
             rightVehiclesIDs = d.rightVehiclesIDs;
         }
@@ -128,7 +149,7 @@ package com.xvm.battle.vo
 
         // PRIVATE
 
-        private function updateVehiclesPositions(ids:Vector.<Number>):void
+        private function updateVehiclesPositionsAndTeam(ids:Vector.<Number>, isAlly:Boolean):void
         {
             var playerState:VOPlayerState;
             var len:int = ids.length;
@@ -137,6 +158,7 @@ package com.xvm.battle.vo
                 playerState = get(ids[i]);
                 if (playerState)
                 {
+                    playerState.isAlly = true;
                     playerState.position = i + 1;
                 }
             }

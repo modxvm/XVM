@@ -24,12 +24,11 @@ package com.xvm.battle.vo
         public var clanAbbrev:String;
         public var invitationStatus:uint;
         public var isObserver:Boolean;
-        public var isPlayerTeam:Boolean;
         public var isSpeaking:Boolean;
         public var isVehiclePremiumIgr:Boolean;
         public var playerFullName:String;
-        public var _playerName:String;
-        public var _playerStatus:uint;
+        private var _playerName:String;
+        private var _playerStatus:uint;
         public var prebattleID:Number;
         public var region:String;
         private var _squadIndex:uint;
@@ -44,6 +43,7 @@ package com.xvm.battle.vo
         public var vehicleName:String;
         private var _vehicleStatus:uint;
         public var vehicleType:String;
+        private var _isAlly:Boolean;
 
         // DAAPIVehicleStatsVO
         private var _frags:int = 0;
@@ -84,6 +84,16 @@ package com.xvm.battle.vo
         public function set playerName(value:String):void
         {
             _playerName = value;
+        }
+
+        override public function get isAlly():Boolean
+        {
+            return _isAlly;
+        }
+
+        public function set isAlly(value:Boolean):void
+        {
+            _isAlly = value;
         }
 
         override public function get isAlive():Boolean
@@ -277,7 +287,6 @@ package com.xvm.battle.vo
             clanAbbrev = d.clanAbbrev;
             invitationStatus = d.invitationStatus;
             isObserver = d.isObserver;
-            isPlayerTeam = d.isPlayerTeam;
             isSpeaking = d.isSpeaking;
             isVehiclePremiumIgr = d.isVehiclePremiumIgr;
             playerFullName = d.playerFullName;

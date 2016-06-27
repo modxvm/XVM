@@ -117,7 +117,7 @@ package com.xvm.battle
                 m_dict[playerState.playerName] = {};
             var pdata:Object = m_dict[playerState.playerName];
 
-            Macros.RegisterMinimalMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isPlayerTeam);
+            Macros.RegisterMinimalMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isAlly);
 
             // stats
 
@@ -361,7 +361,7 @@ package com.xvm.battle
         private static function getDmgSrcColorValue(o:VOPlayerState):Number
         {
             var damageSource:String = damageFlagToDamageSource(o.damageInfo.damageFlag);
-            var damageDest:String = o.isTeamKiller ? (o.isPlayerTeam ? "ally" : "enemy") + "tk" : getEntityName(o);
+            var damageDest:String = o.isTeamKiller ? (o.isAlly ? "ally" : "enemy") + "tk" : getEntityName(o);
             var key:String = damageSource + "_" + damageDest + "_" + (o.isAlive ? "hit" : o.isBlown ? "blowup" : "kill");
             if (Config.config.colors.damage[key] == null)
                 return NaN;
@@ -440,7 +440,7 @@ package com.xvm.battle
 
         private static function getEntityName(o:VOPlayerState):String
         {
-            return !o.isPlayerTeam ? "enemy" : o.isSquadMan ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
+            return !o.isAlly ? "enemy" : o.isSquadMan ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
         }
 
         /**

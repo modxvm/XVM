@@ -177,11 +177,11 @@ package com.xvm
          * @param accountDBID player id
          * @param playerFullName full player name with extra tags (clan, region, etc)
          * @param vehCD vehicle compactDescr
-         * @param isPlayerTeam is player team
+         * @param isAlly is player team
          */
-        public static function RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
+        public static function RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isAlly:Boolean):void
         {
-            _RegisterMinimalMacrosData(vehicleID, accountDBID, playerFullName, vehCD, isPlayerTeam);
+            _RegisterMinimalMacrosData(vehicleID, accountDBID, playerFullName, vehCD, isAlly);
         }
 
         public static function RegisterPlayersData(callback:Function):void
@@ -831,7 +831,7 @@ package com.xvm
             m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
         }
 
-        private static function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isPlayerTeam:Boolean):void
+        private static function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isAlly:Boolean):void
         {
             if (playerFullName == null || playerFullName == "")
                 throw new Error("empty name");
@@ -866,7 +866,7 @@ package com.xvm
             // {{clannb}}
             pdata["clannb"] = clanWithoutBrackets;
             // {{ally}}
-            pdata["ally"] = isPlayerTeam ? 'ally' : null;
+            pdata["ally"] = isAlly ? 'ally' : null;
             // {{clanicon}}
             pdata["clanicon"] = Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
 
