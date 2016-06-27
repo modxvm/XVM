@@ -33,12 +33,10 @@ package xvm.tankcarousel_ui
             super.configUI();
             try
             {
-                // set mouse wheel
-                scrollList.scrollConfig.mouseWheelScrollPercent = Macros.FormatNumberGlobal(cfg.scrollingSpeed, 1);
-                scrollList.scrollConfig = scrollList.scrollConfig; // reinitialize
-
-                // horizontal padding
-                scrollList.gap = Macros.FormatNumberGlobal(cfg.padding.horizontal, scrollList.gap);
+                setupMouseWheelScrollingSpeed();
+                setupPadding();
+                setupBackgroundAlpha();
+                setupFilters();
             }
             catch (ex:Error)
             {
@@ -64,6 +62,45 @@ package xvm.tankcarousel_ui
                     Dossier.requestVehicleDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, parseInt(vehCD));
             }
             invalidateData();
+        }
+
+        // config: "scrollingSpeed"
+        private function setupMouseWheelScrollingSpeed():void
+        {
+            scrollList.scrollConfig.mouseWheelScrollPercent = Macros.FormatNumberGlobal(cfg.scrollingSpeed, 1);
+            scrollList.scrollConfig = scrollList.scrollConfig; // reinitialize
+        }
+
+        // config: "padding"
+        private function setupPadding():void
+        {
+            var horizontalPadding:Number = Macros.FormatNumberGlobal(cfg.padding.horizontal, scrollList.gap);
+            scrollList.gap = horizontalPadding;
+
+            // TODO: cfg.padding.vertical
+        }
+
+        // config: "backgroundAlpha"
+        private function setupBackgroundAlpha():void
+        {
+            // background alpha
+            background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, background.alpha) / 100.0;
+        }
+
+        // config: "filters"
+        private function setupFilters():void
+        {
+            // TODO: broken, is required?
+            /*
+            vehicleFilters.validateNow();
+            if (!cfg.filters.params.enabled)
+                resetFiltersS();
+            if (!cfg.filters.bonus.enabled)
+                vehicleFilters.bonusFilter.selected = false;
+            if (!cfg.filters.favorite.enabled)
+                vehicleFilters.favoriteFilter.selected = false;
+            call_setVehiclesFilter();
+            */
         }
     }
 }

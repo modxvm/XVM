@@ -19,8 +19,8 @@ from gui.Scaleform.framework.managers.containers import POP_UP_CRITERIA
 from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
-#from gui.Scaleform.daapi.view.meta.TankCarouselMeta import TankCarouselMeta
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
+from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, _SUPPLY_ITEMS
 
 from xfw import *
 
@@ -172,6 +172,17 @@ def _VehicleContextMenuHandler_generateOptions(base, self, ctx = None):
     except Exception as ex:
         err(traceback.format_exc())
     return result
+
+@overrideMethod(CarouselDataProvider, '_CarouselDataProvider__getSupplyIndices')
+def _CarouselDataProvider__getSupplyIndices(base, self):
+    supplyIndices = base(self)
+    if config.get('hangar/carousel/hideBuySlot'):
+        supplyIndices.pop(_SUPPLY_ITEMS.BUY_SLOT)
+        self._supplyItems = [x for x in self._supplyItems if not x.get('buySlot', False)]
+    if config.get('hangar/carousel/hideBuyTank') and self._emptySlotsCount:
+        supplyIndices.pop(_SUPPLY_ITEMS.BUY_TANK)
+        self._supplyItems = [x for x in self._supplyItems if not x.get('buyTank', False)]
+    return supplyIndices
 
 
 #####################################################################
