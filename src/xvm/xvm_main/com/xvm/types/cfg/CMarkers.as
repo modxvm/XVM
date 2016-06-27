@@ -8,7 +8,7 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkers extends Object implements ICloneable
     {
-        public var useStandardMarkers:Boolean;
+        public var enabled:*;
 
         public function clone():*
         {

@@ -55,6 +55,7 @@
   * clock are using php formatting (http://php.net/date)
   * global macros, including {{py:f()}}, can be used in the "battle"/"elements" section
   * changed "carousel"/"scrollingSpeed" value, now it is multiplier for default scrolling rate
+  * option "markers"/"useStandardMarkers" renamed to "markers"/"enabled"
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

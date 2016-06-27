@@ -55,7 +55,7 @@ package com.xvm.lobby.battleloading
                 "                               gameRegion=" + Config.config.region + "\n" +
                 "                               configVersion=" + Config.config.configVersion + "\n" +
                 "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +
-                "                               useStandardMarkers=" + Config.config.markers.useStandardMarkers + "\n" +
+                "                               markers.enabled=" + Config.config.markers.enabled + "\n" +
                 "                               servicesActive=" + Config.networkServicesSettings.servicesActive + "\n" +
                 "                               xmqp=" + Config.networkServicesSettings.xmqp + "\n" +
                 "                               statBattle=" + Config.networkServicesSettings.statBattle);

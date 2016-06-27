@@ -79,7 +79,7 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
             var marker:net.wargaming.ingame.VehicleMarker = _root.vehicleMarkersCanvas[i];
             if (marker != null)
             {
-                if (Config.config.markers.useStandardMarkers == true)
+                if (!Config.config.markers.enabled)
                     marker.marker.marker.icon["_xvm_colorized"] = false;
                 marker.m_markerLabel = "";
                 marker.updateMarkerLabel();

@@ -87,10 +87,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      */
     private function initializeSubject():Void
     {
-        //trace("initializeSubject() standard=" + Config.config.markers.useStandardMarkers + " " + m_playerName);
+        //trace("initializeSubject() standard=" + !Config.config.markers.enabled + " " + m_playerName);
 
         // Create marker class depending on config setting
-        if (Config.config.markers.useStandardMarkers == true)
+        if (!Config.config.markers.enabled)
             createStandardMarker();
         else
             createXvmMarker();
@@ -196,12 +196,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     private function get IsStandardMarker()
     {
-        return subject != null && Config.config.markers.useStandardMarkers == true;
+        return subject != null && !Config.config.markers.enabled;
     }
 
     private function get IsXvmMarker()
     {
-        return subject != null && Config.config.markers.useStandardMarkers != true;
+        return subject != null && Config.config.markers.enabled;
     }
 
     /**

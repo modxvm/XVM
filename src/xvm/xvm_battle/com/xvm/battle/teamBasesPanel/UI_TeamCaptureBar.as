@@ -160,7 +160,7 @@ package com.xvm.battle.teamBasesPanel
 
             if (color == null || isNaN(color))
             {
-                color = Config.config.markers.useStandardMarkers
+                color = !Config.config.markers.enabled
                     ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
                     : ColorsManager.getSystemColor(type, false);
             }
