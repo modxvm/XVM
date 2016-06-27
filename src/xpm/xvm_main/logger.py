@@ -21,4 +21,4 @@ def debug(s):
 
 def trace(s):
     if IS_DEVELOPMENT:
-        log(s, '[TRACE] >>> ')
+        log(s, '[TRACE] >> ')

@@ -24,7 +24,6 @@ package com.xvm.lobby
     import com.xvm.lobby.ping.PingServers.PingServers;
     import com.xvm.lobby.profile.ProfileXvmView;
     import com.xvm.lobby.squad.SquadXvmView;
-    import com.xvm.lobby.tcarousel.TCarouselXvmView;
     import com.xvm.lobby.techtree.ResearchXvmView;
     import com.xvm.lobby.techtree.TechTreeXvmView;
 
@@ -41,7 +40,7 @@ package com.xvm.lobby
         {
             "login": [ LoginLayoutXvmView, OnlineLoginXvmView, PingLoginXvmView/*, WidgetsXvmView*/ ],
             "lobby": [ ClockXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView/*, WidgetsXvmView*/ ],
-            "hangar": [ CrewXvmView, HangarXvmView, TCarouselXvmView ],
+            "hangar": [ CrewXvmView, HangarXvmView ],
             "battleLoading": [ BattleLoadingXvmView ],
             "battleResults": [ BattleResultsXvmView ],
             "prb_windows/companyWindow": [ CompanyXvmView ],
@@ -63,8 +62,8 @@ package com.xvm.lobby
             // mod: battleresults
             Xfw.try_load_ui_swf("xvm_lobby", "xvm_battleresults_ui.swf", [ "battleResults.swf" ]);
 
-            // mod: tcarousel
-            Xfw.try_load_ui_swf("xvm_lobby", "xvm_tcarousel_ui.swf", [ "TankCarousel.swf", "filtersPopoverView.swf" ]);
+            // mod: tankcarousel
+            Xfw.try_load_ui_swf("xvm_lobby", "xvm_tankcarousel_ui.swf", [ "TankCarousel.swf" ]);
 
             // mod: techtree
             Xfw.try_load_ui_swf("xvm_lobby", "xvm_techtree_ui.swf", [ "nodesLib.swf" ]);

@@ -21,7 +21,7 @@ import xvm_main.python.userprefs as userprefs
 class _Reserve(object):
 
     def __init__(self):
-        self.reserve_cache = userprefs.get('tcarousel.reserve', [])
+        self.reserve_cache = userprefs.get('tankcarousel/reserve', [])
 
     def _is_reserved(self, veh_id):
         return veh_id in self.reserve_cache
@@ -31,11 +31,11 @@ class _Reserve(object):
             if to_reserve:
                 if veh_id not in self.reserve_cache:
                     self.reserve_cache.append(veh_id)
-                    userprefs.set('tcarousel.reserve', self.reserve_cache)
+                    userprefs.set('tcarousel/reserve', self.reserve_cache)
             else:
                 if veh_id in self.reserve_cache:
                     self.reserve_cache.remove(veh_id)
-                    userprefs.set('tcarousel.reserve', self.reserve_cache)
+                    userprefs.set('tcarousel/reserve', self.reserve_cache)
         except Exception as ex:
             err('_set_reserved() exception: ' + traceback.format_exc())
 

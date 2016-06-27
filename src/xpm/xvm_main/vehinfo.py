@@ -123,7 +123,7 @@ def _init():
                     data['wn8expFrag'] = float(wn8data['expFrag'])
 
                 # is reserved?
-                import xvm_tcarousel.python.reserve as reserve
+                import xvm_tankcarousel.python.reserve as reserve
                 data['isReserved'] = reserve.is_reserved(data['vehCD'])
                 #log(data)
 

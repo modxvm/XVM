@@ -55,6 +55,20 @@
       "horizontal": 11,   // по горизонтали
       "vertical": 13      // по вертикали
     },
+    // Order of nations.
+    // Порядок наций.
+    //"nations_order": ["ussr", "germany", "usa", "france", "uk", "china", "japan", "czech"],
+    "nations_order": [],
+    // Order of types of vehicles.
+    // Порядок классов техники.
+    "types_order":   ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
+    // Tank sorting criteria, available options: (minus = reverse order)
+    // Критерии сортировки танков, доступные значения: (минус = в обратном порядке)
+    // "nation", "type", "level", "maxBattleTier", "premium", "winRate", "-level", "-maxBattleTier", "-premium", "-winRate"
+    "sorting_criteria": ["nation", "type", "level"],
+    // Suppress the tooltips for tanks in carousel
+    // Убрать подсказки к танкам в карусели
+    "suppressCarouselTooltips": false,
     // Standard cell elements.
     // Стандартные элементы ячеек.
     "fields": {
@@ -98,20 +112,6 @@
       // Sign of mastery.
       // Знак мастерства.
       { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" }
-    ],
-    // Order of nations.
-    // Порядок наций.
-    //"nations_order": ["ussr", "germany", "usa", "france", "uk", "china", "japan", "czech"],
-    "nations_order": [],
-    // Order of types of vehicles.
-    // Порядок классов техники.
-    "types_order":   ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
-    // Tank sorting criteria, available options: (minus = reverse order)
-    // Критерии сортировки танков, доступные значения: (минус = в обратном порядке)
-    // "nation", "type", "level", "maxBattleTier", "premium", "winRate", "-level", "-maxBattleTier", "-premium", "-winRate"
-    "sorting_criteria": ["nation", "type", "level"],
-    // Suppress the tooltips for tanks in carousel
-    // Убрать подсказки к танкам в карусели
-    "suppressCarouselTooltips": false
+    ]
   }
 }

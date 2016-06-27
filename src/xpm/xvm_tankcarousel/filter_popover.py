@@ -1,27 +1,33 @@
 ﻿""" XVM (c) www.modxvm.com 2013-2016 """
 
+#####################################################################
+# imports
+
 import itertools
 import simplejson
 
 from account_helpers.AccountSettings import DEFAULT_VALUES, KEY_FILTERS, CAROUSEL_FILTER_2, FALLOUT_CAROUSEL_FILTER_2
 from account_helpers.settings_core.ServerSettingsManager import ServerSettingsManager
-from gui.server_events import g_eventsCache
 from gui.shared import g_itemsCache
 from gui.shared.gui_items.dossier.achievements import MarkOfMasteryAchievement
 from gui.shared.utils.functions import makeTooltip
 from gui.shared.utils.requesters.ItemsRequester import REQ_CRITERIA
-import gui.Scaleform.daapi.view.lobby.hangar.filter_popover as filter_popover
+from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
+from gui.Scaleform.daapi.view.lobby.hangar import filter_popover
 from gui.Scaleform.daapi.view.lobby.hangar.filter_popover import FilterPopover, _SECTIONS, _SECTIONS_MAP
-# TODO:0.9.15.1
-#from gui.Scaleform.daapi.view.lobby.hangar.tank_carousel_filter import CarouselFilter
+from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_filter import BasicCriteriesGroup
 
 from xfw import *
 
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
+import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
 import xvm_main.python.vehinfo as vehinfo
 
+
+#####################################################################
+# constants
 
 class PREFS(object):
     # standard
@@ -37,14 +43,34 @@ class PREFS(object):
     NO_MASTER = 'noMaster'
     XVM_KEYS = (FULL_CREW, RESERVE, NORMAL, NON_ELITE, NO_MASTER)
 
-USERPREFS_CAROUSEL_FILTERS_KEY = "tcarousel.filters"
+USERPREFS_CAROUSEL_FILTERS_KEY = "tankcarousel/filters"
 
+
+#####################################################################
+# initialization/finalization
 
 # Update original settings
 
 DEFAULT_VALUES[KEY_FILTERS][CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
 DEFAULT_VALUES[KEY_FILTERS][FALLOUT_CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
 
+is_event = PREFS.EVENT in _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT]
+is_igr = PREFS.IGR in _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT]
+
+_SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT] = (PREFS.PREMIUM, PREFS.ELITE, PREFS.FULL_CREW, PREFS.RESERVE,)
+_SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT] = (PREFS.NORMAL, PREFS.NON_ELITE, PREFS.NO_MASTER,)
+
+if is_event:
+    _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT] += (PREFS.EVENT,)
+
+if is_igr:
+    _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT] += (PREFS.IGR,)
+
+filter_popover._POPOVER_FILERS = set(itertools.chain.from_iterable(_SECTIONS_MAP.values()))
+
+
+#####################################################################
+# handlers
 
 @overrideMethod(ServerSettingsManager, 'getSection')
 def _ServerSettingsManager_getSection(base, self, section, defaults = None):
@@ -75,11 +101,9 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
 #   [event]
 @overrideMethod(filter_popover, '_getInitialVO')
 def _filter_popover_getInitialVO(base, filters, hasRentedVehicles):
+    data = base(filters, hasRentedVehicles)
+    #debug(data)
     try:
-        data = base(filters, hasRentedVehicles)
-
-        #debug(data)
-
         premium = data['specialTypeLeft'][0]
         normal = {'label': l10n('Normal'), 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
         elite = data['specialTypeRight'][0]
@@ -91,7 +115,7 @@ def _filter_popover_getInitialVO(base, filters, hasRentedVehicles):
         is_event = PREFS.EVENT in _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT]
         if is_event:
             event = data['specialTypeLeft'][1]
-        
+
         is_igr = PREFS.IGR in _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT]
         if is_igr:
             igr = data['specialTypeRight'][1]
@@ -111,22 +135,16 @@ def _filter_popover_getInitialVO(base, filters, hasRentedVehicles):
         return base(filters, hasRentedVehicles)
 
 # Apply XVM filters
-# TODO:0.9.15.1
-#@overrideMethod(CarouselFilter, 'getCriteria')
-def _CarouselFilter_getCriteria(base, self):
-    premium = self._filters['premium']
-    elite = self._filters['elite']
-    self._filters['premium'] = False
-    self._filters['elite'] = False
-    criteria = base(self)
-    self._filters['premium'] = premium
-    self._filters['elite'] = elite
+@overrideMethod(BasicCriteriesGroup, 'update')
+def _BasicCriteriesGroup_update(base, self, filters):
+    (premium, elite) = (filters[PREFS.PREMIUM], filters[PREFS.ELITE])
+    (filters[PREFS.PREMIUM], filters[PREFS.ELITE]) = (False, False)
+    base(self, filters)
+    (filters[PREFS.PREMIUM], filters[PREFS.ELITE]) = (premium, elite)
     vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles()
-    criteria |= REQ_CRITERIA.CUSTOM(lambda x: _applyXvmFilter(x, self._filters, vehicles_stats))
-    return criteria
+    self._criteria |= REQ_CRITERIA.CUSTOM(lambda x: _applyXvmFilter(x, filters, vehicles_stats))
 
 def _applyXvmFilter(item, filters, vehicles_stats):
-
     premium = filters[PREFS.PREMIUM]
     normal = filters[PREFS.NORMAL]
     elite = filters[PREFS.ELITE]
@@ -163,23 +181,11 @@ def _applyXvmFilter(item, filters, vehicles_stats):
 
     return not remove
 
+
 # View class
 class XvmTankCarouselFilterPopover(FilterPopover):
     def __init__(self, ctx = None):
         #log('XvmTankCarouselFilterPopover')
         super(XvmTankCarouselFilterPopover, self).__init__(ctx)
 
-        is_event = PREFS.EVENT in _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT]
-        is_igr = PREFS.IGR in _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT]
-
-        _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT] = (PREFS.PREMIUM, PREFS.ELITE, PREFS.FULL_CREW, PREFS.RESERVE,)
-        _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT] = (PREFS.NORMAL, PREFS.NON_ELITE, PREFS.NO_MASTER,)
-        
-        if is_event:
-            _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT] += (PREFS.EVENT,)
-        
-        if is_igr:
-            _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT] += (PREFS.IGR,)
-
-        self._FilterPopover__popoverFilers = set(itertools.chain.from_iterable(_SECTIONS_MAP.values()))
-        return
+overrideView(XvmTankCarouselFilterPopover, VIEW_ALIAS.TANK_CAROUSEL_FILTER_POPOVER, 'filtersPopoverView.swf')

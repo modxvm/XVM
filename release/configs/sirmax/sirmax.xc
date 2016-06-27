@@ -277,7 +277,7 @@
     "playersPanelLeftAtlas": "../../../../res/atlases/playersPanelLeftAtlas",
     "playersPanelRightAtlas": "../../../../res/atlases/playersPanelRightAtlas",
     "fullStatsLeftAtlas": "../../../../res/atlases/battleAtlasLeft",
-    "fullStatsRightAtlas": ../../../../res/atlases/battleAtlasRight",
+    "fullStatsRightAtlas": "../../../../res/atlases/battleAtlasRight",
     "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAllyAtlas",
     "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerEnemyAtlas"
   },

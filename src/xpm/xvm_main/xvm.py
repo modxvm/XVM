@@ -370,7 +370,7 @@ class Xvm(object):
         return False
 
     def onViewLoaded(self, view=None):
-        debug('> onViewLoaded: {}'.format('(None)' if not view else view.uniqueName))
+        trace('onViewLoaded: {}'.format('(None)' if not view else view.uniqueName))
         if not view:
             return
         if view.uniqueName == VIEW_ALIAS.LOBBY_HANGAR:
