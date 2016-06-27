@@ -116,6 +116,73 @@ def _PlayerAvatar_updateVehicleHealth(self, vehicleID, health, deathReasonID, is
             _init_player(getBattleApp().minimap, True)
 
 
+# Minimap settings
+in_setupMinimapSettings = False
+in_updateSettings = False
+
+# TODO:0.9.15.1
+#@overrideMethod(Minimap, 'setupMinimapSettings')
+def _Minimap_setupMinimapSettings(base, self, diff = None):
+    global in_setupMinimapSettings
+    in_setupMinimapSettings = True
+    base(self, diff)
+    in_setupMinimapSettings = False
+
+
+# TODO:0.9.15.1
+#@overrideMethod(Minimap, '_Minimap__updateSettings')
+def _Minimap__updateSettings(base, self):
+    global in_updateSettings
+    in_updateSettings = True
+    base(self)
+    in_updateSettings = False
+
+
+# TODO:0.9.15.1
+#@overrideMethod(g_settingsCore, 'getSetting')
+def __g_settingsCore_getSetting(base, name):
+    value = base(name)
+    if config.get('minimap/enabled'):
+        global in_setupMinimapSettings
+        global in_updateSettings
+        if in_setupMinimapSettings or in_updateSettings:
+            if name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
+                if not config.get('minimap/useStandardLines'):
+                    value = False
+            elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
+                if not config.get('minimap/useStandardLines'):
+                    value = False
+            #debug('getSetting: {} = {}'.format(name, value))
+    return value
+
+
+# TODO:0.9.15.1
+#@overrideMethod(SettingsContainer, 'getSetting')
+def __SettingsContainer_getSetting(base, self, name):
+    value = base(self, name)
+    if config.get('minimap/enabled'):
+        global in_setupMinimapSettings
+        global in_updateSettings
+        if in_setupMinimapSettings or in_updateSettings:
+            if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
+                if not config.get('minimap/useStandardLabels'):
+                    value._set(0)
+            #debug('getSetting: {} = {}'.format(name, value))
+    return value
+
+
+
+
+
 # PRIVATE
 
 def _init_player(minimap, isRespawn=False):
@@ -136,3 +203,4 @@ def _init_player(minimap, isRespawn=False):
     except Exception as ex:
         if IS_DEVELOPMENT:
             err(traceback.format_exc())
+

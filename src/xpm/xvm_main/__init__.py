@@ -78,7 +78,6 @@ def start():
 
 BigWorld.callback(0, start)
 
-
 @registerEvent(game, 'fini')
 def fini():
     debug('fini')
@@ -145,7 +144,6 @@ def onArenaCreated():
 
 g_playerEvents.onArenaCreated += onArenaCreated
 
-
 @overrideMethod(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(base, self):
     # debug('> onBecomePlayer')
@@ -157,139 +155,6 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
     # debug('> onBecomeNonPlayer')
     g_xvm.onBecomeNonPlayer()
     base(self)
-
-
-# BATTLE
-
-# add vehCD to players panel data
-# TODO:0.9.15.1
-#@overrideMethod(BattleArenaController, '_makeHash')
-def BattleArenaController_makeHash(base, self, index, playerFullName, vInfoVO, *args):
-    res = base(self, index, playerFullName, vInfoVO, *args)
-    res['vehCD'] = vInfoVO.vehicleType.compactDescr
-    return res
-
-# Minimap settings
-in_setupMinimapSettings = False
-in_updateSettings = False
-
-# TODO:0.9.15.1
-#@overrideMethod(Minimap, 'setupMinimapSettings')
-def _Minimap_setupMinimapSettings(base, self, diff = None):
-    global in_setupMinimapSettings
-    in_setupMinimapSettings = True
-    base(self, diff)
-    in_setupMinimapSettings = False
-
-
-# TODO:0.9.15.1
-#@overrideMethod(Minimap, '_Minimap__updateSettings')
-def _Minimap__updateSettings(base, self):
-    global in_updateSettings
-    in_updateSettings = True
-    base(self)
-    in_updateSettings = False
-
-
-# TODO:0.9.15.1
-#@overrideMethod(g_settingsCore, 'getSetting')
-def __g_settingsCore_getSetting(base, name):
-    value = base(name)
-    if config.get('minimap/enabled'):
-        global in_setupMinimapSettings
-        global in_updateSettings
-        if in_setupMinimapSettings or in_updateSettings:
-            if name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
-                if not config.get('minimap/useStandardCircles'):
-                    value = False
-            elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
-                if not config.get('minimap/useStandardCircles'):
-                    value = False
-            elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
-                if not config.get('minimap/useStandardCircles'):
-                    value = False
-            elif name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
-                if not config.get('minimap/useStandardLines'):
-                    value = False
-            elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
-                if not config.get('minimap/useStandardLines'):
-                    value = False
-            #debug('getSetting: {} = {}'.format(name, value))
-    return value
-
-
-# TODO:0.9.15.1
-#@overrideMethod(SettingsContainer, 'getSetting')
-def __SettingsContainer_getSetting(base, self, name):
-    value = base(self, name)
-    if config.get('minimap/enabled'):
-        global in_setupMinimapSettings
-        global in_updateSettings
-        if in_setupMinimapSettings or in_updateSettings:
-            if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
-                if not config.get('minimap/useStandardLabels'):
-                    value._set(0)
-            #debug('getSetting: {} = {}'.format(name, value))
-    return value
-
-
-
-
-#cache._MIN_LIFE_TIME = 15
-#cache._MAX_LIFE_TIME = 24
-#
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__get')
-#def _CustomFilesCache__get(base, self, url, showImmediately, checkedInCache):
-#    debug('_CustomFilesCache__get')
-#    base(self, url, showImmediately, checkedInCache)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__readLocalFile')
-#def _CustomFilesCache__readLocalFile(base, self, url, showImmediately):
-#    debug('_CustomFilesCache__readLocalFile')
-#    base(self, url, showImmediately)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile')
-#def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately, file, d1, d2):
-#    debug('_CustomFilesCache__onReadLocalFile')
-#    base(self, url, showImmediately, file, d1, d2)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__checkFile')
-#def _CustomFilesCache__checkFile(base, self, url, showImmediately):
-#    debug('_CustomFilesCache__checkFile')
-#    base(self, url, showImmediately)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__onCheckFile')
-#def _CustomFilesCache__onCheckFile(base, self, url, showImmediately, res, d1, d2):
-#    debug('_CustomFilesCache__onCheckFile')
-#    base(self, url, showImmediately, res, d1, d2)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__readRemoteFile')
-#def _CustomFilesCache__readRemoteFile(base, self, url, modified_time, showImmediately):
-#    debug('_CustomFilesCache__readRemoteFile')
-#    base(self, url, modified_time, showImmediately)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadRemoteFile')
-#def _CustomFilesCache__onReadRemoteFile(base, self, url, showImmediately, file, last_modified, expires):
-#    debug('_CustomFilesCache__onReadRemoteFile')
-#    base(self, url, showImmediately, file, last_modified, expires)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__prepareCache')
-#def _CustomFilesCache__prepareCache(base, self):
-#    debug('_CustomFilesCache__prepareCache')
-#    base(self)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__writeCache')
-#def _CustomFilesCache__writeCache(base, self, name, packet):
-#    debug('_CustomFilesCache__writeCache')
-#    base(self, name, packet)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__onWriteCache')
-#def _CustomFilesCache__onWriteCache(base, self, name, d1, d2, d3):
-#    debug('_CustomFilesCache__onWriteCache')
-#    base(self, name, d1, d2, d3)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__postTask')
-#def _CustomFilesCache__postTask(base, self, url, file, invokeAndReleaseCallbacks):
-#    debug('_CustomFilesCache__postTask')
-#    base(self, url, file, invokeAndReleaseCallbacks)
-#@overrideMethod(CustomFilesCache, '_CustomFilesCache__onPostTask')
-#def _CustomFilesCache__onPostTask(base, self, url, invokeAndReleaseCallbacks, file):
-#    debug('_CustomFilesCache__onPostTask')
-#    base(self, url, invokeAndReleaseCallbacks, file)
-#@overrideMethod(WorkerThread, '_WorkerThread__run_download')
-#def _WorkerThread__run_download(base, self, url, modified_time, callback, **params):
-#    debug('_WorkerThread__run_download')
-#    base(self, url, modified_time, callback, **params)
 
 
 #####################################################################
