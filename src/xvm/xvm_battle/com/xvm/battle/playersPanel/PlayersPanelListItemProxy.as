@@ -32,14 +32,14 @@ package com.xvm.battle.playersPanel
     public class PlayersPanelListItemProxy extends UIComponent
     {
         // from PlayersPanelListItem.as
-        private static const ICONS_AREA_WIDTH:Number = 63;
-        private static const SQUAD_ITEMS_AREA_WIDTH:Number = 25;
-        private static const WIDTH:Number = 339;
-        private static const PLAYER_NAME_MARGIN:Number = 8;
-        private static const VEHICLE_TF_RIGHT_X:int = -WIDTH + ICONS_AREA_WIDTH;
+        private static const ICONS_AREA_WIDTH:int = 63;
+        private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
+        private static const WIDTH:int = 339;
+        private static const PLAYER_NAME_MARGIN:int = 8;
         private static const VEHICLE_TF_LEFT_X:int = WIDTH - ICONS_AREA_WIDTH;
+        private static const VEHICLE_TF_RIGHT_X:int = -WIDTH + ICONS_AREA_WIDTH;
 
-        private static const STD_VEHICLE_LEVEL_MIRRORING_SHIFT:Number = 35;
+        private static const STD_VEHICLE_LEVEL_MIRRORING_SHIFT:int = 35;
 
         public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
@@ -62,6 +62,7 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_VEHICLE_WIDTH:Number;
         private var DEFAULT_PLAYERNAMECUT_WIDTH:Number;
 
+        private var bcfg:CBattle;
         private var pcfg:CPlayersPanel;
         private var mcfg:CPlayersPanelMode;
         private var ncfg:CPlayersPanelNoneMode;
@@ -72,6 +73,7 @@ package com.xvm.battle.playersPanel
 
         private var _standardTextFieldsTexts:Object = {};
 
+        private var opt_mirroredVehicleIcons:Boolean;
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
         private var mopt_removeSquadIcon:Boolean;
@@ -143,9 +145,12 @@ package com.xvm.battle.playersPanel
                 }
                 atlasName = AtlasConstants.BATTLE_ATLAS;
             }
-            setupMirroredVehicleIcon();
             ui.vehicleIcon.graphics.clear();
             App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+            if (xvm_enabled && _userProps != null)
+            {
+                invalidate(INVALIDATE_UPDATE_POSITIONS);
+            }
         }
 
         // XVM events handlers
@@ -224,17 +229,15 @@ package com.xvm.battle.playersPanel
             try
             {
                 //Logger.add("PlayersPanelListItemProxy.onConfigLoaded()");
+                bcfg = Config.config.battle;
                 pcfg = Config.config.playersPanel;
                 mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN ? PLAYERS_PANEL_STATE.LONG : ui.xfw_state]];
                 ncfg = pcfg.none;
 
-                // revert mirrored icon
-                if (!isLeftPanel)
-                {
-                    ui.vehicleIcon.scaleX = 1;
-                    ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X;
-                    ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X;
-                }
+                // revert mirrored icon and X offset
+                ui.vehicleIcon.scaleX = 1;
+                ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X;
+                ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X;
 
                 disposeExtraFields();
 
@@ -242,6 +245,7 @@ package com.xvm.battle.playersPanel
                 //Logger.add("xvm_enabled = " + xvm_enabled);
                 if (xvm_enabled)
                 {
+                    opt_mirroredVehicleIcons = Macros.FormatBooleanGlobal(bcfg.mirroredVehicleIcons, false)
                     opt_removeSelectedBackground = Macros.FormatBooleanGlobal(pcfg.removeSelectedBackground, false);
                     opt_vehicleIconAlpha = Macros.FormatNumberGlobal(pcfg.iconAlpha, 100) / 100.0;
 
@@ -275,20 +279,8 @@ package com.xvm.battle.playersPanel
 
         private function onAtlasInitializedHandler(e:AtlasEvent):void
         {
-            Logger.add("4");
-            Logger.addObject(e, 1, "onAtlasInitializedHandler");
             e.currentTarget.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler);
             setVehicleIcon(_vehicleImage);
-        }
-
-        private function setupMirroredVehicleIcon():void
-        {
-            if (!isLeftPanel && !Macros.FormatBooleanGlobal(Config.config.battle.mirroredVehicleIcons, false))
-            {
-                ui.vehicleIcon.scaleX = -1;
-                ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - ICONS_AREA_WIDTH;
-                ui.vehicleLevel.x = DEFAULT_VEHICLE_LEVEL_X - STD_VEHICLE_LEVEL_MIRRORING_SHIFT;
-            }
         }
 
         public function applyState():void
@@ -406,10 +398,12 @@ package com.xvm.battle.playersPanel
                 {
                     if (isLeftPanel)
                     {
+                        updateVehicleIconPositionLeft();
                         updatePositionsLeft();
                     }
                     else
                     {
+                        updateVehicleIconPositionRight();
                         updatePositionsRight();
                     }
                 }
@@ -417,24 +411,62 @@ package com.xvm.battle.playersPanel
             this.x = -ui.x;
         }
 
+        private function updateVehicleIconPositionLeft():void
+        {
+            var vehicleIconX:Number = DEFAULT_VEHICLE_ICON_X + getFieldOffsetXLeft(ui.vehicleIcon);
+            var vehicleLevelX:Number = DEFAULT_VEHICLE_LEVEL_X + getFieldOffsetXLeft(ui.vehicleLevel);
+            if (ui.vehicleIcon.x != vehicleIconX)
+            {
+                ui.vehicleIcon.x = vehicleIconX;
+            }
+            if (ui.vehicleLevel.x != vehicleLevelX)
+            {
+                ui.vehicleLevel.x = vehicleLevelX;
+            }
+        }
+
+        private function updateVehicleIconPositionRight():void
+        {
+            var vehicleIconX:Number = DEFAULT_VEHICLE_ICON_X - getFieldOffsetXRight(ui.vehicleIcon);
+            var vehicleLevelX:Number = DEFAULT_VEHICLE_LEVEL_X - getFieldOffsetXRight(ui.vehicleLevel);
+            if (!opt_mirroredVehicleIcons)
+            {
+                ui.vehicleIcon.scaleX = -1;
+                vehicleIconX -= ICONS_AREA_WIDTH;
+                vehicleLevelX -= STD_VEHICLE_LEVEL_MIRRORING_SHIFT;
+            }
+            if (ui.vehicleIcon.x != vehicleIconX)
+            {
+                ui.vehicleIcon.x = vehicleIconX;
+            }
+            if (ui.vehicleLevel.x != vehicleLevelX)
+            {
+                ui.vehicleLevel.x = vehicleLevelX;
+            }
+        }
+
         private function updatePositionsLeft():void
         {
             var field:TextField;
             var lastX:Number = VEHICLE_TF_LEFT_X;
+            var newX:Number;
             for (var i:int = mcfg.standardFields.length - 1; i >= 0; --i)
             {
                 field = getFieldByConfigName(mcfg.standardFields[i]);
                 if (field)
                 {
                     updateFieldWidth(field);
-                    if (field.x != lastX - field.width)
+                    lastX -= field.width;
+                    newX = lastX + getFieldOffsetXLeft(field);
+                    //Logger.add(field.name + " lastX:" + lastX + " newX:" + newX + " x:" + field.x + " offset:" + getFieldOffsetXLeft(field));
+                    if (field.x != newX)
                     {
-                        field.x = lastX - field.width;
+                        field.x = newX;
                     }
-                    lastX = field.x;
                 }
             }
             ui.x = -(lastX - (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
+            //Logger.add("ui.x=" + ui.x);
             ui.dynamicSquad.x = -ui.x - (mopt_removeSquadIcon ? SQUAD_ITEMS_AREA_WIDTH : 0);
         }
 
@@ -442,15 +474,17 @@ package com.xvm.battle.playersPanel
         {
             var field:TextField;
             var lastX:Number = VEHICLE_TF_RIGHT_X;
+            var newX:Number;
             for (var i:int = mcfg.standardFields.length - 1; i >= 0; --i)
             {
                 field = getFieldByConfigName(mcfg.standardFields[i]);
+                newX = lastX - getFieldOffsetXRight(field);
                 if (field)
                 {
                     updateFieldWidth(field);
-                    if (field.x != lastX)
+                    if (field.x != newX)
                     {
-                        field.x = lastX;
+                        field.x = newX;
                     }
                     lastX += field.width;
                 }
@@ -529,6 +563,42 @@ package com.xvm.battle.playersPanel
             }
         }
 
+        private function getFieldOffsetXLeft(field:*):int
+        {
+            switch (field)
+            {
+                case ui.vehicleIcon:
+                    return Macros.FormatNumber(mcfg.vehicleIconXOffsetLeft, currentPlayerState, 0);
+                case ui.vehicleLevel:
+                    return Macros.FormatNumber(mcfg.vehicleLevelXOffsetLeft, currentPlayerState, 0);
+                case ui.fragsTF:
+                    return Macros.FormatNumber(mcfg.fragsXOffsetLeft, currentPlayerState, 0);
+                case ui.playerNameFullTF:
+                    return Macros.FormatNumber(mcfg.nickXOffsetLeft, currentPlayerState, 0);
+                case ui.vehicleTF:
+                    return Macros.FormatNumber(mcfg.vehicleXOffsetLeft, currentPlayerState, 0);
+            }
+            return 0;
+        }
+
+        private function getFieldOffsetXRight(field:*):int
+        {
+            switch (field)
+            {
+                case ui.vehicleIcon:
+                    return Macros.FormatNumber(mcfg.vehicleIconXOffsetRight, currentPlayerState, 0);
+                case ui.vehicleLevel:
+                    return Macros.FormatNumber(mcfg.vehicleLevelXOffsetRight, currentPlayerState, 0);
+                case ui.fragsTF:
+                    return Macros.FormatNumber(mcfg.fragsXOffsetRight, currentPlayerState, 0);
+                case ui.playerNameFullTF:
+                    return Macros.FormatNumber(mcfg.nickXOffsetRight, currentPlayerState, 0);
+                case ui.vehicleTF:
+                    return Macros.FormatNumber(mcfg.vehicleXOffsetRight, currentPlayerState, 0);
+            }
+            return 0;
+        }
+
         // extra fields
 
         private function createExtraFields():void
@@ -593,9 +663,9 @@ package com.xvm.battle.playersPanel
         private function getSchemeNameForVehicle():String
         {
             return PlayerStatusSchemeName.getSchemeNameForVehicle(
-                currentPlayerState.isCurrentPlayer && Config.config.battle.highlightVehicleIcon,
-                currentPlayerState.isSquadPersonal && Config.config.battle.highlightVehicleIcon,
-                currentPlayerState.isTeamKiller && Config.config.battle.highlightVehicleIcon,
+                currentPlayerState.isCurrentPlayer && bcfg.highlightVehicleIcon,
+                currentPlayerState.isSquadPersonal && bcfg.highlightVehicleIcon,
+                currentPlayerState.isTeamKiller && bcfg.highlightVehicleIcon,
                 currentPlayerState.isDead,
                 currentPlayerState.isOffline);
         }

@@ -35,6 +35,16 @@
       "nickMinWidth" - minimum width of the player's name column
       "nickMaxWidth" - maximum width of the player's name column
       "expandAreaWidth" - width of area for switching to "large" mode on mouse over
+      "vehicleIconXOffsetLeft" - offset of X value for vehicle icon for left side
+      "vehicleIconXOffsetRight" - offset of X value for vehicle icon for right side
+      "vehicleLevelXOffsetLeft" - offset of X value for vehicle level for left side
+      "vehicleLevelXOffsetRight" - offset of X value for vehicle level for right side
+      "fragsXOffsetLeft" - offset of X value for frags column for left side
+      "fragsXOffsetRight" - offset of X value for frags column for right side
+      "nickXOffsetLeft" - offset of X value for player name column for left side
+      "nickXOffsetRight" - offset of X value for player name column for right side
+      "vehicleXOffsetLeft" - offset of X value for vehicle name column for left side
+      "vehicleXOffsetRight" - offset of X value for vehicle name column for right side
   * removed options in the "playersPanel" section:
      "short"/"width"
      "medium"/"width"
