@@ -92,9 +92,9 @@
         //  "shadow": { "color": "0x73734C", "alpha": 0.8, "blur": 6, "strength": 2, "distance": 0, "angle": 0 }
         //},
 
-        //{ "x": -1, "y": -1, "width": 164, "height": 104, "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
+        { "x": 0, "y": 0, "width": "160", "height": 100, "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
 
-        { "x": -1, "y": -1, "height": 104, "width": "164", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
+        //{ "x": 0, "y": 0, "width": 160, "height": 100, "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
 
         {}
     ]

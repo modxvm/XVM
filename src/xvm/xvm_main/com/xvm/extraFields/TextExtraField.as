@@ -5,6 +5,7 @@
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.text.*;
+    import flash.geom.*;
     import scaleform.gfx.*;
 
     public class TextExtraField extends TextField implements IExtraField
@@ -13,8 +14,9 @@
         public static const DEFAULT_TEXT_FIELD_HEIGHT:Number = 25;
 
         private var cfg:CExtraField;
-        private var isLeftPanel:Boolean;
-        private var getColorSchemeName:Function;
+        private var _isLeftPanel:Boolean;
+        private var _getColorSchemeName:Function;
+        private var _bounds:Rectangle;
 
         private var _initialized:Boolean = false;
 
@@ -25,21 +27,23 @@
         private var _textValue:String = null;
         private var _colorSchemeNameValue:String = null;
 
-        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null)
+        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null)
         {
             super();
 
             this.cfg = format.clone();
-            this.isLeftPanel = isLeftPanel;
-            this.getColorSchemeName = getColorSchemeName;
+            this._isLeftPanel = isLeftPanel;
+            this._getColorSchemeName = getColorSchemeName;
+            this._bounds = bounds;
 
+            mouseEnabled = false;
             selectable = false;
             multiline = true;
             wordWrap = false;
             autoSize = TextFieldAutoSize.NONE;
 
-            width = DEFAULT_TEXT_FIELD_WIDTH;
-            height = DEFAULT_TEXT_FIELD_HEIGHT;
+            width = _bounds == null ? DEFAULT_TEXT_FIELD_WIDTH : _bounds.width;
+            height = _bounds == null ? DEFAULT_TEXT_FIELD_HEIGHT : _bounds.height;
 
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             cfg.align = Macros.FormatStringGlobal(cfg.align, defaultAlign);
@@ -372,7 +376,7 @@
             }
             if (cfg.bindToIcon && !isNaN(bindToIconOffset))
             {
-                value = isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
+                value = _isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
                 if (x != value)
                 {
                     needAlign = true;
@@ -404,10 +408,10 @@
                     htmlText = _textValue;
                     needAlign = true;
                 }
-                if (cfg.highlight)
+                if (cfg.highlight && _getColorSchemeName != null)
                 {
                     var highlight:Boolean = cfg.highlight is Boolean ? cfg.highlight : XfwUtils.toBool(Macros.Format(cfg.highlight, options), false);
-                    value = highlight ? getColorSchemeName(options) : null;
+                    value = highlight ? _getColorSchemeName(options) : null;
                     if (_colorSchemeNameValue != value)
                     {
                         _colorSchemeNameValue = value;
@@ -422,7 +426,7 @@
 
             if (needAlign)
             {
-                x = isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
+                x = _isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
                 y = _yValue;
                 if (!isNaN(_widthValue))
                     width = _widthValue;

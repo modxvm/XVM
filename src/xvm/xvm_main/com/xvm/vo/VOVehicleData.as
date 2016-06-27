@@ -5,6 +5,7 @@
 package com.xvm.vo
 {
     import com.xvm.types.*;
+    import com.xvm.types.dossier.*;
 
     public class VOVehicleData extends VOBase
     {
@@ -48,6 +49,10 @@ package com.xvm.vo
         // additional
 
         public var shortName:String;
+
+        // TODO: refactor
+        public var __vehicleDossierCut:VehicleDossierCut;
+
 
         // PROPERTIES
 

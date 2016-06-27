@@ -70,10 +70,13 @@ package com.xvm
             {
                 var v:* = Macros.Format(value, options);
                 //Logger.add(format + " => " + v);
-                if (v == "XX")
-                    v = 100;
-                if (isColorValue)
-                    v = v.split("#").join("0x");
+                if (v != null)
+                {
+                    if (v == "XX")
+                        v = 100;
+                    if (isColorValue)
+                        v = v.split("#").join("0x");
+                }
                 value = v;
             }
             if (isNaN(value))

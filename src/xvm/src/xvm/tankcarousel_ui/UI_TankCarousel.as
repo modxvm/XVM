@@ -10,7 +10,6 @@ package xvm.tankcarousel_ui
     import com.xvm.types.cfg.*;
     import flash.utils.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
 
     public dynamic class UI_TankCarousel extends TankCarouselUI
     {

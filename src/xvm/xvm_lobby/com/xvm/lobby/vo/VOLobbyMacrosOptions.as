@@ -1,5 +1,6 @@
 ﻿package com.xvm.lobby.vo
 {
+    import com.xvm.*;
     import com.xvm.vo.*;
     import flash.errors.*;
     import net.wg.gui.lobby.battleloading.constants.*;
@@ -11,11 +12,11 @@
         private var _isAlly:Boolean;
         public var vehicleStatus:uint;
         public var playerStatus:uint;
-        public var _isSelected:Boolean;
-        public var _isCurrentPlayer:Boolean;
-        public var _isSquadPersonal:Boolean;
-        public var _squadIndex:Number;
-        public var _position:Number;
+        private var _isSelected:Boolean;
+        private var _isCurrentPlayer:Boolean;
+        private var _isSquadPersonal:Boolean;
+        private var _squadIndex:Number;
+        private var _position:Number;
 
         private var _vehCD:int;
         private var _vehicleData:VOVehicleData;
@@ -67,6 +68,11 @@
             return (vehicleStatus & VehicleStatus.NOT_AVAILABLE) != 0;
         }
 
+        override public function get isStopRespawn():Boolean
+        {
+            return false;
+        }
+
         override public function get isSelected():Boolean
         {
             return _isSelected;
@@ -102,9 +108,27 @@
             return _vehCD;
         }
 
+        public function set vehCD(value:int):void
+        {
+            _vehCD = value;
+            if (vehicleData == null || _vehicleData.vehCD != _vehCD)
+            {
+                vehicleData = VehicleInfo.get(_vehCD);
+            }
+        }
+
         override public function get vehicleData():VOVehicleData
         {
             return _vehicleData;
+        }
+
+        public function set vehicleData(value:VOVehicleData):void
+        {
+            _vehicleData = value;
+            if (vehCD != _vehicleData.vehCD)
+            {
+                vehCD = _vehicleData.vehCD;
+            }
         }
     }
 }

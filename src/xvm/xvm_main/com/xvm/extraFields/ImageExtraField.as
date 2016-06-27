@@ -23,9 +23,12 @@
         private var _heightValue:Number = NaN;
         private var _colorSchemeNameValue:String = null;
 
-        public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean, getColorSchemeName:Function)
+        public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null)
         {
             super();
+
+            mouseEnabled = false;
+            mouseChildren = false;
 
             this.cfg = format.clone();
             this.isLeftPanel = isLeftPanel;
@@ -237,7 +240,7 @@
                     //Logger.add(source + " => " + value);
                     source = value;
                 }
-                if (cfg.highlight)
+                if (cfg.highlight && getColorSchemeName != null)
                 {
                     var highlight:Boolean = cfg.highlight is Boolean ? cfg.highlight : XfwUtils.toBool(Macros.Format(cfg.highlight, options), false);
                     value = highlight ? getColorSchemeName(options) : null;

@@ -59,6 +59,7 @@
     <element path="..\xfw\~output\swc\wg_lobby.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
     <element path="..\..\~output\swc\xvm_main.swc" />
+    <element path="..\..\~output\swc\xvm_lobby.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

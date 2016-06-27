@@ -22,14 +22,16 @@ package com.xvm.extraFields
 
     public class ExtraFields extends UIComponent
     {
-        private var _size:Rectangle;
+        private var _bounds:Rectangle;
         private var _layout:String;
         private var _isLeftPanel:Boolean;
 
-        public function ExtraFields(formats:Array, isLeftPanel:Boolean, getSchemeNameForText:Function, getSchemeNameForImage:Function, size:Rectangle = null, layout:String = null):void
+        public function ExtraFields(formats:Array, isLeftPanel:Boolean = true, getSchemeNameForText:Function = null, getSchemeNameForImage:Function = null, bounds:Rectangle = null, layout:String = null):void
         {
-            visible = false;
-            _size = size;
+            mouseEnabled = false;
+            mouseChildren = false;
+
+            _bounds = bounds;
             _layout = layout;
             _isLeftPanel = isLeftPanel;
 
@@ -68,9 +70,14 @@ package com.xvm.extraFields
                 {
                     addChild(format.src != null
                         ? new ImageExtraField(format, isLeftPanel, getSchemeNameForImage)
-                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText));
+                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds));
                 }
             }
+        }
+
+        override protected function configUI():void
+        {
+            super.configUI();
         }
 
         public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0):void
@@ -81,18 +88,18 @@ package com.xvm.extraFields
                 if (child)
                 {
                     child.update(options, bindToIconOffset);
-                    if (_size)
+                    if (_bounds && _layout)
                     {
                         if (_layout == "horizontal")
                         {
-                            var vx:Number = _size.x + (options.position - 1) * _size.width;
+                            var vx:Number = _bounds.x + (options.position - 1) * _bounds.width;
                             x = _isLeftPanel ? vx : App.appWidth - vx;
-                            y = _size.y;
+                            y = _bounds.y;
                         }
                         else
                         {
-                            x = _isLeftPanel ? _size.x : App.appWidth - _size.x;
-                            y = _size.y + (options.position - 1) * _size.height;
+                            x = _isLeftPanel ? _bounds.x : App.appWidth - _bounds.x;
+                            y = _bounds.y + (options.position - 1) * _bounds.height;
                         }
                     }
                 }

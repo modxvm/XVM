@@ -14,7 +14,7 @@ package com.xvm.lobby
             m_globals["v"] = function(o:IVOMacrosOptions):* {
                 if (o == null || o.getSubname() == null || o.vehicleData == null)
                     return null;
-                return o.vehicleData[o.getSubname()];
+                return o.vehicleData.__vehicleDossierCut[o.getSubname()]; // TODO: refactor, remove VehicleDossierCut class
             }
         }
 
