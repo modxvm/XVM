@@ -17,6 +17,7 @@
       "battle"/"allowSpottedStatus"
       "battle"/"allowHpInPanelsAndMinimap"
       "battle"/"allowMarksOnGunInPanelsAndMinimap"
+      "carousel"/"alwaysShowFilters"
   * переименованы параметры в секции "iconset" и изменено значение с каталога на название атласа:
       "playersPanelAlly" => "playersPanelLeftAtlas"
       "playersPanelEnemy" => "playersPanelRightAtlas"
@@ -52,6 +53,7 @@
   * индикатор зума камеры реализован как дополнительное поле со всеми его опциями
   * в часах используется php форматирование (http://php.net/date)
   * в секции "battle"/"elements" можно использовать глобальные макросы, включая {{py:f()}})
+  * изменено значение "carousel"/"scrollingSpeed", теперь это множительн значения по умолчанию
 
 XVM-6.3.2:
   * обновление для микропатча WoT 0.9.15.0.1

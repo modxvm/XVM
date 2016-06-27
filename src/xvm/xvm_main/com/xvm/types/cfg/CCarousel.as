@@ -14,7 +14,6 @@ package com.xvm.types.cfg
         public var padding:Object; // TODO
         public var backgroundAlpha:*;
         public var scrollingSpeed:*;
-        public var alwaysShowFilters:Boolean;
         public var hideBuyTank:Boolean;
         public var hideBuySlot:Boolean;
         public var showTotalSlots:Boolean;

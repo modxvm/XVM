@@ -31,6 +31,16 @@ package xvm.tankcarousel_ui
         override protected function configUI():void
         {
             super.configUI();
+            try
+            {
+                // set mouse wheel
+                scrollList.scrollConfig.mouseWheelScrollPercent = Macros.FormatNumberGlobal(cfg.scrollingSpeed, 1);
+                scrollList.scrollConfig = scrollList.scrollConfig; // reinitialize
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         // PRIVATE

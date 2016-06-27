@@ -22,12 +22,9 @@
     // Background transparency (default - 60)
     // Прозрачность подложки (по умолчанию - 60)
     "backgroundAlpha": 60,
-    // Scrolling speed (default - 20)
-    // Скорость прокрутки (по умолчанию - 20)
-    "scrollingSpeed": 20,
-    // true - show filters even if all tanks fit on the screen.
-    // true - показывать фильтры даже если все танки помещаются на экране.
-    "alwaysShowFilters": false,
+    // Mouse wheel scrolling speed multiplier (default - 1)
+    // Множитель скорости прокрутки колесом мыши (по умолчанию - 1)
+    "scrollingSpeed": 1,
     // true - hide cell "Buy vehicle".
     // true - скрыть ячейку "Купить машину".
     "hideBuyTank": false,
