@@ -11,7 +11,7 @@ package com.xvm.types.cfg
         public var enabled:*;
         public var zoom:*;
         public var rows:*;
-        public var padding:Object; // TODO
+        public var padding:CPadding;
         public var backgroundAlpha:*;
         public var scrollingSpeed:*;
         public var hideBuyTank:Boolean;

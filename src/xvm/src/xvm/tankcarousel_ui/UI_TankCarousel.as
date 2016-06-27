@@ -36,6 +36,9 @@ package xvm.tankcarousel_ui
                 // set mouse wheel
                 scrollList.scrollConfig.mouseWheelScrollPercent = Macros.FormatNumberGlobal(cfg.scrollingSpeed, 1);
                 scrollList.scrollConfig = scrollList.scrollConfig; // reinitialize
+
+                // horizontal padding
+                scrollList.gap = Macros.FormatNumberGlobal(cfg.padding.horizontal, scrollList.gap);
             }
             catch (ex:Error)
             {
