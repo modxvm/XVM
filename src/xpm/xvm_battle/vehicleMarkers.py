@@ -107,7 +107,8 @@ class VehicleMarkers(object):
         if self.managerRef:
             manager = self.managerRef()
             if manager:
-                manager.as_xvm_cmdS('test')
+                manager.as_xvm_cmdS('test', config.config_data, config.lang_data)
+                #manager.as_xvm_cmdS('test', 1, 2, 3, 4)
                 #manager.as_xvm_cmd('xvm_as_cmd', [
                 #    XVM_COMMAND.AS_SET_CONFIG,
                 #    config.config_data,

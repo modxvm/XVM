@@ -9,6 +9,7 @@ package xvm.vehiclemarkers_ui
     import flash.external.*;
 
     XvmVehicleMarker;
+    Xfw;
 
     /**
      *  This class is used to link UI classes into *_ui.swf
@@ -17,13 +18,20 @@ package xvm.vehiclemarkers_ui
     {
         public function XvmVehicleMarkersMod():void
         {
-            visible = false;
+            super();
+            Xfw.registerCommandProvider(xvm_cmd);
+            Xfw.addCommandListener('test', onTest);
         }
 
-        public function as_xvm_cmd(...rest):*
+        public function xvm_cmd(... rest):*
         {
-            ExternalInterface.call("xvm.cmd", "xfw.log", "as_xvm_cmd: " + rest);
-            return null;
+            rest.unshift("xvm.cmd");
+            return ExternalInterface.call.apply(null, rest);
+        }
+
+        public function onTest():void
+        {
+            Logger.addObject(arguments, 4);
         }
     }
 }

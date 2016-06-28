@@ -13,7 +13,7 @@ package xvm.vehiclemarkers_ui
 
         public function test():void
         {
-            ExternalInterface.call("xvm.cmd", "xfw.log", "test invoked: " + arguments);
+
         }
     }
 }
