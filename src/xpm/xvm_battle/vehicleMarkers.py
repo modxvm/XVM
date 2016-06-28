@@ -47,16 +47,19 @@ def _MarkersManager__init__(base, self, parentUI):
     _g_markers.init(self)
 
 @overrideMethod(MarkersManager, 'beforeDelete')
-def _MarkersManager_beforeDelete(self):
+def _MarkersManager_beforeDelete(base, self):
     _g_markers.destroy()
 
 @overrideMethod(MarkersManager, 'createMarker')
 def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
     if _g_markers.active:
         symbol = 'xvm.vehiclemarkers_ui::XvmVehicleMarker'
-    #symbol = 'xvm.vehiclemarkers_ui::XvmVehicleMarker'
     #debug('createMarker: ' + str(symbol))
-    return base(self, mProv, symbol, active)
+    handle = base(self, mProv, symbol, active)
+    if _g_markers.active:
+        self.invokeMarker(handle, 'test', ['text sample'])
+    return handle
+
 
 #####################################################################
 # VehicleMarkers
@@ -76,7 +79,7 @@ class VehicleMarkers(object):
         manager.addExternalCallback('xvm.cmd', self.onVMCommand)
 
     def destroy(self):
-        managerRef = None
+        self.managerRef = None
 
     #####################################################################
     # onVMCommand
@@ -98,15 +101,16 @@ class VehicleMarkers(object):
 
     def respondConfig(self):
         if self.managerRef:
-            obj = self.managerRef()
-            if obj:
-                obj.call('xvm_as_cmd', [
-                    XVM_COMMAND.AS_SET_CONFIG,
-                    config.config_data,
-                    config.lang_data,
-                    vehinfo.getVehicleInfoDataArray(),
-                    config.networkServicesSettings.__dict__,
-                    IS_DEVELOPMENT])
+            manager = self.managerRef()
+            if manager:
+                #manager.as_xvm_cmd('xvm_as_cmd', [
+                #    XVM_COMMAND.AS_SET_CONFIG,
+                #    config.config_data,
+                #    config.lang_data,
+                #    vehinfo.getVehicleInfoDataArray(),
+                #    config.networkServicesSettings.__dict__,
+                #    IS_DEVELOPMENT])
+                pass
 
 _g_markers = VehicleMarkers()
 

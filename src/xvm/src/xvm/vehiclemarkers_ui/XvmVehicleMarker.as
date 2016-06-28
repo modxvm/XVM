@@ -8,9 +8,12 @@ package xvm.vehiclemarkers_ui
     {
         public function XvmVehicleMarker()
         {
-            //Logger.add(getQualifiedClassName(this));
-            Logger.add("create xvm marker");
             super();
+        }
+
+        public function test():void
+        {
+            ExternalInterface.call("xvm.cmd", "xfw.log", "test invoked: " + arguments);
         }
     }
 }
