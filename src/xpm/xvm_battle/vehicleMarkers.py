@@ -60,6 +60,10 @@ def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
         self.invokeMarker(handle, 'test', ['text sample'])
     return handle
 
+def as_xvm_cmdS(self, *args):
+    if self._isDAAPIInited():
+        return self.flashObject.as_xvm_cmd(*args)
+MarkersManager.as_xvm_cmdS = as_xvm_cmdS
 
 #####################################################################
 # VehicleMarkers
@@ -103,6 +107,7 @@ class VehicleMarkers(object):
         if self.managerRef:
             manager = self.managerRef()
             if manager:
+                manager.as_xvm_cmdS('test')
                 #manager.as_xvm_cmd('xvm_as_cmd', [
                 #    XVM_COMMAND.AS_SET_CONFIG,
                 #    config.config_data,

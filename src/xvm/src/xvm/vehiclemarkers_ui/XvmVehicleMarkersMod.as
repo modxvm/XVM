@@ -6,6 +6,7 @@ package xvm.vehiclemarkers_ui
 {
     import com.xfw.*;
     import flash.display.*;
+    import flash.external.*;
 
     XvmVehicleMarker;
 
@@ -17,6 +18,12 @@ package xvm.vehiclemarkers_ui
         public function XvmVehicleMarkersMod():void
         {
             visible = false;
+        }
+
+        public function as_xvm_cmd(...rest):*
+        {
+            ExternalInterface.call("xvm.cmd", "xfw.log", "as_xvm_cmd: " + rest);
+            return null;
         }
     }
 }
