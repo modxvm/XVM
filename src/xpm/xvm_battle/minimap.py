@@ -204,3 +204,19 @@ def _init_player(minimap, isRespawn=False):
         if IS_DEVELOPMENT:
             err(traceback.format_exc())
 
+#    def updateMinimapEntry(self, vehicleID, targets):
+#        #trace('updateMinimapEntry: {0} {1}'.format(targets, vehicleID))
+#
+#        battle = getBattleApp()
+#        if not battle:
+#            return
+#
+#        minimap = battle.minimap
+#
+#        if targets & INV.MINIMAP_SQUAD:
+#            arenaDP = g_sessionProvider.getArenaDP()
+#            if vehicleID != BigWorld.player().playerVehicleID and arenaDP.isSquadMan(vehicleID):
+#                minimap._Minimap__callEntryFlash(vehicleID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
+#                g_xvm.invalidate(vehicleID, INV.BATTLE_SQUAD)
+#            else:
+#                minimap._Minimap__callEntryFlash(vehicleID, 'update')
