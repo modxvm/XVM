@@ -56,8 +56,6 @@ def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
         symbol = 'xvm.vehiclemarkers_ui::XvmVehicleMarker'
     #debug('createMarker: ' + str(symbol))
     handle = base(self, mProv, symbol, active)
-    if _g_markers.active:
-        self.invokeMarker(handle, 'test', ['text sample'])
     return handle
 
 def as_xvm_cmdS(self, *args):
@@ -107,16 +105,13 @@ class VehicleMarkers(object):
         if self.managerRef:
             manager = self.managerRef()
             if manager:
-                manager.as_xvm_cmdS('test', config.config_data, config.lang_data)
-                #manager.as_xvm_cmdS('test', 1, 2, 3, 4)
-                #manager.as_xvm_cmd('xvm_as_cmd', [
-                #    XVM_COMMAND.AS_SET_CONFIG,
-                #    config.config_data,
-                #    config.lang_data,
-                #    vehinfo.getVehicleInfoDataArray(),
-                #    config.networkServicesSettings.__dict__,
-                #    IS_DEVELOPMENT])
-                pass
+                manager.as_xvm_cmdS(
+                    XVM_COMMAND.AS_SET_CONFIG,
+                    config.config_data,
+                    config.lang_data,
+                    vehinfo.getVehicleInfoDataArray(),
+                    config.networkServicesSettings.__dict__,
+                    IS_DEVELOPMENT)
 
 _g_markers = VehicleMarkers()
 
