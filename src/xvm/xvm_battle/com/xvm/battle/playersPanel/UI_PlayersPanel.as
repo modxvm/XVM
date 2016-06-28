@@ -57,7 +57,6 @@ package com.xvm.battle.playersPanel
 
         override protected function configUI():void
         {
-            //Logger.add("UI_PlayersPanel.configUI()");
             super.configUI();
             onConfigLoaded(null);
         }

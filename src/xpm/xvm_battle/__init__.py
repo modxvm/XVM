@@ -19,3 +19,4 @@ import battle
 import fragCorrelationPanel
 import minimap
 import camera
+import vehicleMarkers

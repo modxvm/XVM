@@ -6,17 +6,80 @@
 import traceback
 
 import BigWorld
+import game
+from gui.shared import g_eventBus
+#from gui.battle_control import g_sessionProvider
+from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
 
 from xfw import *
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
+import xvm_main.python.config as config
 
 from commands import *
 
 
 #####################################################################
+# initialization/finalization
+
+def onConfigLoaded(self, e=None):
+    _g_markers.enabled = config.get('markers/enabled', True)
+
+g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+@registerEvent(game, 'fini')
+def fini():
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+
+#####################################################################
 # handlers
 
-# BATTLE
+# VMM
+
+@overrideMethod(MarkersManager, '__init__')
+def __init__(base, self, parentUI):
+    base(self, parentUI)
+    self.addExternalCallback('xvm.cmd', _g_markers.onVMCommand)
+
+@overrideMethod(MarkersManager, 'createMarker')
+def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
+    if _g_markers.active:
+        symbol = 'xvm.vehiclemarkers_ui::XvmVehicleMarker'
+    #symbol = 'xvm.vehiclemarkers_ui::XvmVehicleMarker'
+    debug('createMarker: ' + str(symbol))
+    return base(self, mProv, symbol, active)
+
+#####################################################################
+# VehicleMarkers
+
+class VehicleMarkers(object):
+
+    enabled = True
+    initialized = False
+
+    @property
+    def active(self):
+        return self.enabled and self.initialized
+
+    #####################################################################
+    # onVMCommand
+
+    # returns: (result, status)
+    def onVMCommand(self, cmd, *args):
+        try:
+            if cmd == XVM_VM_COMMAND.LOG:
+                log(*args)
+            elif cmd == XVM_VM_COMMAND.INITIALIZE:
+                self.initialized = True
+                log('[VM] initialized')
+            else:
+                warn('Unknown command: {}'.format(cmd))
+        except Exception, ex:
+            err(traceback.format_exc())
+        return None
+
+_g_markers = VehicleMarkers()
 
 ## TODO:0.9.15.1
 ##@overrideMethod(MarkersManager, 'invokeMarker')
