@@ -32,7 +32,7 @@ package xvm.company_ui.renderers
                 effField = new TextField();
                 var tf:TextFormat = proxy.vehicleLevelField.defaultTextFormat;
                 tf.align = TextFormatAlign.RIGHT;
-                effField.styleSheet = WGUtils.createTextStyleSheet("eff", tf);
+                effField.styleSheet = XfwUtils.createTextStyleSheet("eff", tf);
                 effField.x = proxy.width - 15;
                 effField.y = proxy.vehicleLevelField.y;
                 effField.width = 20;
@@ -57,7 +57,7 @@ package xvm.company_ui.renderers
             if (data == null || !data.fullName)
                 return;
 
-            var pname:String = WGUtils.GetPlayerName(data.fullName);
+            var pname:String = XfwUtils.GetPlayerName(data.fullName);
             App.utils.scheduler.scheduleTask(function():void
             {
                 Stat.loadUserData(pname);
@@ -75,7 +75,7 @@ package xvm.company_ui.renderers
             {
                 if (proxy.data == null || !proxy.data.fullName)
                     return;
-                var pname:String = WGUtils.GetPlayerName(proxy.data.fullName);
+                var pname:String = XfwUtils.GetPlayerName(proxy.data.fullName);
                 var sd:StatData = Stat.getUserDataByName(pname);
                 if (sd == null)
                     return;

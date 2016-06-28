@@ -28,7 +28,7 @@ package xvm.company_ui.renderers
                 this.proxy = proxy;
 
                 effField = new TextField();
-                effField.styleSheet = WGUtils.createTextStyleSheet("eff", proxy.pCountField.defaultTextFormat);
+                effField.styleSheet = XfwUtils.createTextStyleSheet("eff", proxy.pCountField.defaultTextFormat);
                 effField.x = proxy.pCountField.x - 15;
                 effField.y = proxy.pCountField.y;
                 effField.width = 20;
@@ -94,7 +94,7 @@ package xvm.company_ui.renderers
 
         private function onUpdateClick(e:Event = null):void
         {
-            playerName = WGUtils.GetPlayerName(proxy.data.creatorName);
+            playerName = XfwUtils.GetPlayerName(proxy.data.creatorName);
             if (Stat.isUserDataCachedByName(playerName))
                 setEffFieldText();
             else

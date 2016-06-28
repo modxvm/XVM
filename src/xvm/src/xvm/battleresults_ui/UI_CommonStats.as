@@ -343,7 +343,7 @@ package xvm.battleresults_ui
             newTf.height = detailsMc.xpTitleLbl.height;
             newTf.alpha = 1;
 
-            newTf.styleSheet = WGUtils.createTextStyleSheet(CSS_FIELD_CLASS, detailsMc.xpTitleLbl.defaultTextFormat);
+            newTf.styleSheet = XfwUtils.createTextStyleSheet(CSS_FIELD_CLASS, detailsMc.xpTitleLbl.defaultTextFormat);
             newTf.selectable = false;
 
             var y_space:Number = detailsMc.xpTitleLbl.height;

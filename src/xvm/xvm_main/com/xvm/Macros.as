@@ -839,7 +839,7 @@ package com.xvm
             if (playerFullName == null || playerFullName == "")
                 throw new Error("empty name");
 
-            var playerName:String = WGUtils.GetPlayerName(playerFullName);
+            var playerName:String = XfwUtils.GetPlayerName(playerFullName);
 
             if (!m_dict.hasOwnProperty(playerName))
                 m_dict[playerName] = new Object();
@@ -857,8 +857,8 @@ package com.xvm
                 playerFullName = name;
                 name = StringUtils.trim(name.slice(0, clanIdx));
             }
-            var clanWithoutBrackets:String = WGUtils.GetClanNameWithoutBrackets(playerFullName);
-            var clanWithBrackets:String = WGUtils.GetClanNameWithBrackets(playerFullName);
+            var clanWithoutBrackets:String = XfwUtils.GetClanNameWithoutBrackets(playerFullName);
+            var clanWithBrackets:String = XfwUtils.GetClanNameWithBrackets(playerFullName);
 
             // {{nick}}
             pdata["nick"] = name + (clanWithBrackets || "");

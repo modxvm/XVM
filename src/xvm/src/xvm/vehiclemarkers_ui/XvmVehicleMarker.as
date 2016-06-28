@@ -1,7 +1,6 @@
 package xvm.vehiclemarkers_ui
 {
     import com.xfw.*;
-    import com.xvm.*;
     import flash.utils.*;
     import flash.external.*;
 
@@ -10,7 +9,7 @@ package xvm.vehiclemarkers_ui
         public function XvmVehicleMarker()
         {
             //Logger.add(getQualifiedClassName(this));
-            ExternalInterface.call("xvm.cmd", "log", "create xvm marker");
+            Logger.add("create xvm marker");
             super();
         }
     }

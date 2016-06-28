@@ -15,7 +15,7 @@ package xvm.company_ui.renderers
     {
         public static function formatXVMStatText(playerName:String):String
         {
-            var pname:String = WGUtils.GetPlayerName(playerName);
+            var pname:String = XfwUtils.GetPlayerName(playerName);
             var stat:StatData = Stat.getUserDataByName(pname);
             if (stat == null)
                 return "";
@@ -35,7 +35,7 @@ package xvm.company_ui.renderers
 
         public static function getToolTipData(fullPlayerName:String, data:Object):String
         {
-            var pname:String = WGUtils.GetPlayerName(fullPlayerName);
+            var pname:String = XfwUtils.GetPlayerName(fullPlayerName);
             var stat:StatData = Stat.getUserDataByName(pname);
             if (stat == null)
                 return null;
@@ -45,7 +45,7 @@ package xvm.company_ui.renderers
             var s:String = "";
 
             // line 1
-            s += pname + "<font color='#CCCCCC'>" + (WGUtils.GetClanNameWithBrackets(fullPlayerName) || "") + "</font>";
+            s += pname + "<font color='#CCCCCC'>" + (XfwUtils.GetClanNameWithBrackets(fullPlayerName) || "") + "</font>";
             s += "<br>";
             // line 2
             s += "WN8: " + (!stat.wn8 ? "--" :

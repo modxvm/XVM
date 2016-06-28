@@ -17,6 +17,7 @@ class="com.xvm.Xvm"
     -source-path xvm_main \
     -external-library-path+="$frswc" \
     -external-library-path+=../xfw/~output/swc/wg_lobby.swc \
+    -external-library-path+=../xfw/~output/swc/xfw_shared.swc \
     -external-library-path+=../xfw/~output/swc/xfw.swc \
     -output ../../~output/swc/xvm_main.swc \
     -include-classes $class

@@ -43,7 +43,7 @@ package com.xvm.lobby.battleloading.components
                 var form:BaseLoadingForm = page.form as BaseLoadingForm;
                 winChanceTF = createWinChanceTextField(form.battleText);
                 form.addChild(winChanceTF);
-                winChanceTF.styleSheet = WGUtils.createTextStyleSheet("chances", form.battleText.defaultTextFormat);
+                winChanceTF.styleSheet = XfwUtils.createTextStyleSheet("chances", form.battleText.defaultTextFormat);
                 winChanceTF.x = form.battleText.x - 283;
                 winChanceTF.y = -50;
             }

@@ -47,7 +47,7 @@ def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
     if _g_markers.active:
         symbol = 'xvm.vehiclemarkers_ui::XvmVehicleMarker'
     #symbol = 'xvm.vehiclemarkers_ui::XvmVehicleMarker'
-    debug('createMarker: ' + str(symbol))
+    #debug('createMarker: ' + str(symbol))
     return base(self, mProv, symbol, active)
 
 #####################################################################
@@ -70,7 +70,7 @@ class VehicleMarkers(object):
         try:
             if cmd == XVM_VM_COMMAND.LOG:
                 log(*args)
-            elif cmd == XVM_VM_COMMAND.INITIALIZE:
+            elif cmd == XVM_VM_COMMAND.INITIALIZED:
                 self.initialized = True
                 log('[VM] initialized')
             else:

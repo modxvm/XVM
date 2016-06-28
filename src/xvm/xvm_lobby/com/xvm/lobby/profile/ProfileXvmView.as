@@ -24,7 +24,7 @@ package com.xvm.lobby.profile
             //Logger.add("ProfileXvmView");
             super(view);
 
-            Xfw.try_load_ui_swf(_name, _ui_name);
+            XfwView.try_load_ui_swf(_name, _ui_name);
         }
 
         public function get tabNavigator():ProfileTabNavigator

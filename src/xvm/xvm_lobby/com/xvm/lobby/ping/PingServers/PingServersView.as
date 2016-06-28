@@ -247,7 +247,7 @@ package com.xvm.lobby.ping.PingServers
             tf.wordWrap = false;
             tf.selectable = false;
             tf.mouseEnabled = false;
-            tf.styleSheet = WGUtils.createStyleSheet(createCss());
+            tf.styleSheet = XfwUtils.createStyleSheet(createCss());
             tf.alpha = cfg.alpha / 100.0;
             tf.htmlText =  "";
             tf.filters = Utils.createShadowFiltersFromConfig(cfg.shadow);
@@ -279,7 +279,7 @@ package com.xvm.lobby.ping.PingServers
             var name:String = cfg.fontStyle.name;
             var color:Number = parseInt(cfg.fontStyle.color[quality], 16);
 
-            return WGUtils.createCSS(PingServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
+            return XfwUtils.createCSS(PingServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
         }
 
         private function createCurrentServerCss():String

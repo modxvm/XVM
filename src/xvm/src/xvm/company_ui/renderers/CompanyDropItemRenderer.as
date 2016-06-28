@@ -28,7 +28,7 @@ package xvm.company_ui.renderers
                 proxy.numberField.width = 15;
                 proxy.textField.x = 15;
                 effField = new TextField();
-                effField.styleSheet = WGUtils.createTextStyleSheet("eff", proxy.textField.defaultTextFormat);
+                effField.styleSheet = XfwUtils.createTextStyleSheet("eff", proxy.textField.defaultTextFormat);
                 effField.x = 20 + proxy.textField.width;
                 effField.y = proxy.textField.y;
                 effField.width = 20;
@@ -53,7 +53,7 @@ package xvm.company_ui.renderers
             if (data == null || !data.label)
                 return;
 
-            var pname:String = WGUtils.GetPlayerName(data.label);
+            var pname:String = XfwUtils.GetPlayerName(data.label);
             App.utils.scheduler.scheduleTask(function():void
             {
                 Stat.loadUserData(pname);
@@ -66,7 +66,7 @@ package xvm.company_ui.renderers
             {
                 if (proxy.data == null || !proxy.data.label)
                     return;
-                var pname:String = WGUtils.GetPlayerName(proxy.data.label);
+                var pname:String = XfwUtils.GetPlayerName(proxy.data.label);
                 var sd:StatData = Stat.getUserDataByName(pname);
                 if (sd == null)
                     return;

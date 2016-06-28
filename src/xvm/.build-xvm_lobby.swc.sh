@@ -17,6 +17,7 @@ class="com.xvm.lobby.LobbyXvmMod"
     -source-path xvm_lobby \
     -external-library-path+="$frswc" \
     -external-library-path+=../xfw/~output/swc/wg_lobby.swc \
+    -external-library-path+=../xfw/~output/swc/xfw_shared.swc \
     -external-library-path+=../xfw/~output/swc/xfw.swc \
     -external-library-path+=../../~output/swc/xvm_main.swc \
     -output ../../~output/swc/xvm_lobby.swc \

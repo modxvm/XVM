@@ -17,5 +17,5 @@ class XVM_BATTLE_COMMAND(object):
 
 class XVM_VM_COMMAND(object):
     # Flash -> Python
-    INITIALIZE = "init"
-    LOG = "log"
+    LOG = "xfw.log"
+    INITIALIZED = "initialized"

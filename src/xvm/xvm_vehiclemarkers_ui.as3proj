@@ -52,13 +52,11 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="..\xfw\~output\swc\xfw.swc" />
-    <element path="..\..\~output\swc\xvm_main.swc" />
+    <element path="..\xfw\~output\swc\xfw_shared.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\xfw\~output\swc\wg_battle.swc" />
-    <element path="..\..\~output\swc\xvm_battle.swc" />
+    <element path="..\xfw\~output\swc\wg_vm.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

@@ -39,7 +39,7 @@ package xvm.profile_ui
             }
 
             // get player name from window title
-            var playerName:String = WGUtils.GetPlayerName((profileWindow.window as Window).title);
+            var playerName:String = XfwUtils.GetPlayerName((profileWindow.window as Window).title);
 
             // get player id from the view name.
             var accountDBID:int = parseInt(profileWindow.as_name.replace("profileWindow_", ""));
