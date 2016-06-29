@@ -37,6 +37,7 @@ package com.xvm.battle
             try
             {
                 super.entryPoint();
+                Logger.counterPrefix = "B";
                 Macros.RegisterGlobalMacrosData();
                 Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
                 Stat.clearBattleStat();

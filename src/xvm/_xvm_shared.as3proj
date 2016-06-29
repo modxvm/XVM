@@ -56,8 +56,8 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\xfw\~output\swc\wg_shared.swc" />
     <element path="..\xfw\~output\swc\xfw_shared.swc" />
+    <element path="..\xfw\~output\swc\wg_shared.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

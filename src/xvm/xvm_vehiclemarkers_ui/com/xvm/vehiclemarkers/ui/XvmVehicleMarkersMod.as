@@ -5,6 +5,7 @@
 package com.xvm.vehiclemarkers.ui
 {
     import com.xfw.*;
+    import com.xvm.*;
     import flash.display.*;
     import flash.external.*;
 
@@ -13,12 +14,13 @@ package com.xvm.vehiclemarkers.ui
     /**
      * This class is used as wrapper for Flash->Python communication.
      */
-    public class XvmVehicleMarkersMod extends Sprite
+    public class XvmVehicleMarkersMod extends Xvm
     {
         public function XvmVehicleMarkersMod():void
         {
-            super();
             Xfw.registerCommandProvider(xvm_cmd);
+            Logger.counterPrefix = "V";
+            super();
         }
 
         private function xvm_cmd(... rest):*

@@ -94,7 +94,9 @@ class VehicleMarkers(object):
             elif cmd == XVM_VM_COMMAND.INITIALIZED:
                 self.initialized = True
                 log('[VM] initialized')
+            elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()
+                return (None, True)
             else:
                 warn('Unknown command: {}'.format(cmd))
         except Exception, ex:

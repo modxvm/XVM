@@ -14,5 +14,5 @@ XFW_MOD_INFO = {
 
 from xfw import IS_DEVELOPMENT
 
-if IS_DEVELOPMENT:
-    import profiler
+#if IS_DEVELOPMENT:
+#    import profiler

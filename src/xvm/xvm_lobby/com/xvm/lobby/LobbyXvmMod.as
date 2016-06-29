@@ -56,6 +56,8 @@ package com.xvm.lobby
         {
             super.entryPoint();
 
+            Logger.counterPrefix = "L";
+
             // loading ui mods
             XfwView.try_load_ui_swf("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf" ]);
             XfwView.try_load_ui_swf("xvm_lobby", "xvm_lobbybattleloading_ui.swf", [ "battleloading.swf" ]);
