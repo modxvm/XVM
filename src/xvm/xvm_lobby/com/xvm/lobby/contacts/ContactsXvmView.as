@@ -22,9 +22,6 @@ package com.xvm.lobby.contacts
 
         private static const XVM_EDIT_CONTACT_DATA_ALIAS:String = 'XvmEditContactDataView';
 
-        private static const _name:String = "xvm_lobby";
-        private static const _ui_name:String = "xvm_contacts_ui.swf";
-
         private var _initialized:Boolean = false;
 
         public function ContactsXvmView(view:IView)
@@ -54,7 +51,7 @@ package com.xvm.lobby.contacts
 
             App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
 
-            if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
+            //if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
                 init();
         }
 
@@ -71,7 +68,7 @@ package com.xvm.lobby.contacts
 
         private function onLibLoaded(e:LibraryLoaderEvent):void
         {
-            if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+            //if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
             {
                 init();
                 App.utils.scheduler.scheduleOnNextFrame(function():void
@@ -83,15 +80,15 @@ package com.xvm.lobby.contacts
 
         private function init():void
         {
-            page.treeComponent.list.itemRendererName =  "xvm.contacts_ui::UI_ContactsTreeItemRenderer";
+            page.treeComponent.list.itemRendererName =  "com.xvm.lobby.ui.contacts::UI_ContactsTreeItemRenderer";
             Xfw.addCommandListener(CMD_XVM_CONTACTS_AS_EDIT_CONTACT_DATA, editContactData);
-            page.xfw_linkageUtils.addEntity(XVM_EDIT_CONTACT_DATA_ALIAS, "xvm.contacts_ui::UI_EditContactDataView");
+            page.xfw_linkageUtils.addEntity(XVM_EDIT_CONTACT_DATA_ALIAS, "com.xvm.lobby.ui.contacts::UI_EditContactDataView");
         }
 
         private function editContactData(name:String, dbID:Number):Object
         {
             var data:ContactListMainInfo = new ContactListMainInfo(name, dbID);
-            IUpdatable(page.viewStack.show("xvm.contacts_ui::UI_EditContactDataView")).update(data);
+            IUpdatable(page.viewStack.show("com.xvm.lobby.ui.contacts::UI_EditContactDataView")).update(data);
             return null;
         }
     }

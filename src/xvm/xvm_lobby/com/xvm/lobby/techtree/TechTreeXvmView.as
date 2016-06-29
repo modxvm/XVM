@@ -43,7 +43,7 @@ package com.xvm.lobby.techtree
         private function handleIndexChange(e:IndexEvent = null) : void
         {
             page.nationTree.dataProvider.displaySettings.fromObject( {
-                nodeRendererName:"xvm.techtree_ui::UI_NationTreeNodeSkinned",
+                nodeRendererName:"com.xvm.lobby.ui.techtree::UI_NationTreeNodeSkinned",
                 isLevelDisplayed:page.nationTree.dataProvider.displaySettings.isLevelDisplayed
             }, null);
             page.nationTree.invalidateData();

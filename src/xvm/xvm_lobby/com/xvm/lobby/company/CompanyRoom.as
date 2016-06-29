@@ -35,8 +35,8 @@ package com.xvm.lobby.company
             if (Config.networkServicesSettings.statCompany != true)
                 return;
 
-            view.assignedList.itemRendererName = "xvm.company_ui::UI_TeamMemberRenderer";
-            view.unassignedList.itemRendererName = "xvm.company_ui::UI_TeamMemberRenderer";
+            view.assignedList.itemRendererName = "com.xvm.lobby.ui.company::UI_TeamMemberRenderer";
+            view.unassignedList.itemRendererName = "com.xvm.lobby.ui.company::UI_TeamMemberRenderer";
         }
     }
 }

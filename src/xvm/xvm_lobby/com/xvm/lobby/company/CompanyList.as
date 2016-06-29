@@ -40,7 +40,7 @@ package com.xvm.lobby.company
             if (Config.networkServicesSettings.statCompany != true)
                 return;
 
-            view.cmpList.itemRendererName = "xvm.company_ui::UI_CompanyListItemRenderer";
+            view.cmpList.itemRendererName = "com.xvm.lobby.ui.company::UI_CompanyListItemRenderer";
 
             updateCheckBox = App.utils.classFactory.getComponent("CheckBox", CheckBox);
             updateCheckBox.name = "updateStatCheckBox";

@@ -16,15 +16,10 @@ package com.xvm.lobby.profile
 
     public class ProfileXvmView extends XvmViewBase
     {
-        private static const _name:String = "xvm_lobby";
-        private static const _ui_name:String = "xvm_profile_ui.swf";
-
         public function ProfileXvmView(view:IView)
         {
             //Logger.add("ProfileXvmView");
             super(view);
-
-            XfwView.try_load_ui_swf(_name, _ui_name);
         }
 
         public function get tabNavigator():ProfileTabNavigator
@@ -40,8 +35,8 @@ package com.xvm.lobby.profile
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
-            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "xvm.profile_ui::UI_ProfileTechniquePage");
-            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "xvm.profile_ui::UI_ProfileTechniqueWindow");
+            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "com.xvm.lobby.ui.profile::UI_ProfileTechniquePage");
+            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "com.xvm.lobby.ui.profile::UI_ProfileTechniqueWindow");
         }
     }
 }

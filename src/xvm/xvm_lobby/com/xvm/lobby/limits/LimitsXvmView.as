@@ -14,9 +14,6 @@ package com.xvm.lobby.limits
 
     public class LimitsXvmView extends XvmViewBase
     {
-        private static const _name:String = "xvm_lobby";
-        private static const _ui_name:String = "xvm_limits_ui.swf";
-
         private var _initialized:Boolean = false;
         private var limits_ui:ILimitsUI = null;
 
@@ -41,7 +38,7 @@ package com.xvm.lobby.limits
 
             App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
 
-            if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
+            //if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
                 init();
         }
 
@@ -58,7 +55,7 @@ package com.xvm.lobby.limits
 
         private function onLibLoaded(e:LibraryLoaderEvent):void
         {
-            if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+            //if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
             {
                 init();
             }
@@ -66,7 +63,7 @@ package com.xvm.lobby.limits
 
         private function init():void
         {
-            var cls:Class = App.utils.classFactory.getClass("xvm.limits_ui::LimitsUIImpl");
+            var cls:Class = App.utils.classFactory.getClass("com.xvm.lobby.ui.limits::LimitsUIImpl");
             if (cls)
             {
                 limits_ui = new cls() as ILimitsUI;

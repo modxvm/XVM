@@ -53,7 +53,7 @@ def _MarkersManager_beforeDelete(base, self):
 @overrideMethod(MarkersManager, 'createMarker')
 def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
     if _g_markers.active:
-        symbol = 'xvm.vehiclemarkers_ui::XvmVehicleMarker'
+        symbol = 'com.xvm.vehiclemarkers.ui::XvmVehicleMarker'
     #debug('createMarker: ' + str(symbol))
     handle = base(self, mProv, symbol, active)
     return handle

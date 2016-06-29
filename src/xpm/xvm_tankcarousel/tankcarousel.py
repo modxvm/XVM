@@ -58,8 +58,8 @@ BigWorld.callback(0, start)
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
-HANGAR_ALIASES.TANK_CAROUSEL_UI = 'xvm.tankcarousel_ui::UI_TankCarousel'
-HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI = 'xvm.tankcarousel_ui::UI_FalloutTankCarousel'
+HANGAR_ALIASES.TANK_CAROUSEL_UI = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
+HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI = 'com.xvm.lobby.ui.tankcarousel::UI_FalloutTankCarousel'
 
 
 #####################################################################

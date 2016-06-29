@@ -17,9 +17,6 @@ package com.xvm.lobby.company
 
     public class CompanyXvmView extends XvmViewBase
     {
-        private static const _name:String = "xvm_lobby";
-        private static const _ui_name:String = "xvm_company_ui.swf";
-
         private var _initialized:Boolean = false;
 
         public function CompanyXvmView(view:IView)
@@ -45,7 +42,7 @@ package com.xvm.lobby.company
 
             App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
 
-            if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
+            //if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
                 init();
         }
 
@@ -61,7 +58,7 @@ package com.xvm.lobby.company
 
         private function onLibLoaded(e:LibraryLoaderEvent):void
         {
-            if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+            //if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
             {
                 init();
                 setView(page.stack.currentView as IViewStackContent);

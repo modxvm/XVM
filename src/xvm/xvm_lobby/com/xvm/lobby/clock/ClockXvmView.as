@@ -15,9 +15,6 @@ package com.xvm.lobby.clock
 
     public class ClockXvmView extends XvmViewBase
     {
-        private static const _name:String = "xvm_lobby";
-        private static const _ui_name:String = "xvm_clock_ui.swf";
-
         private var _initialized:Boolean = false;
         private var clock_ui:IClockUI = null;
 
@@ -40,9 +37,7 @@ package com.xvm.lobby.clock
 
             _initialized = true;
 
-            App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
-
-            if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
+            //if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
                 init();
         }
 
@@ -68,7 +63,7 @@ package com.xvm.lobby.clock
 
         private function onLibLoaded(e:LibraryLoaderEvent):void
         {
-            if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+            //if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
             {
                 init();
             }
@@ -76,7 +71,7 @@ package com.xvm.lobby.clock
 
         private function init():void
         {
-            var cls:Class = App.utils.classFactory.getClass("xvm.clock_ui::ClockUIImpl");
+            var cls:Class = App.utils.classFactory.getClass("com.xvm.lobby.ui.clock::ClockUIImpl");
             if (cls)
             {
                 clock_ui = new cls() as IClockUI;

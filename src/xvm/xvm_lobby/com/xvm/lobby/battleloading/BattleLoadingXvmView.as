@@ -63,7 +63,7 @@ package com.xvm.lobby.battleloading
 
         private function waitInit():void
         {
-            if (!page.initialized || App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRendererTable") == null)
+            if (!page.initialized || App.utils.classFactory.getClass("com.xvm.lobby.ui.battleloading::UI_LeftItemRendererTable") == null)
             {
                 var $this:* = this;
                 setTimeout(function():void { $this.waitInit(); }, 1);
@@ -103,13 +103,13 @@ package com.xvm.lobby.battleloading
 
             if (list1.itemRenderer == LeftItemRendererTableUI)
             {
-                list1.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRendererTable");
-                list2.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_RightItemRendererTable");
+                list1.itemRenderer = App.utils.classFactory.getClass("com.xvm.lobby.ui.battleloading::UI_LeftItemRendererTable");
+                list2.itemRenderer = App.utils.classFactory.getClass("com.xvm.lobby.ui.battleloading::UI_RightItemRendererTable");
             }
             else if (list1.itemRenderer == LeftItemRendererTipsUI)
             {
-                list1.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_LeftItemRendererTips");
-                list2.itemRenderer = App.utils.classFactory.getClass("xvm.battleloading_ui::UI_RightItemRendererTips");
+                list1.itemRenderer = App.utils.classFactory.getClass("com.xvm.lobby.ui.battleloading::UI_LeftItemRendererTips");
+                list2.itemRenderer = App.utils.classFactory.getClass("com.xvm.lobby.ui.battleloading::UI_RightItemRendererTips");
             }
         }
     }

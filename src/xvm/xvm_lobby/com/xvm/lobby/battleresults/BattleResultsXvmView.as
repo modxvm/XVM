@@ -17,7 +17,7 @@ package com.xvm.lobby.battleresults
 
     public class BattleResultsXvmView extends XvmViewBase
     {
-        private static const UI_COMMON_STATS:String = "xvm.battleresults_ui::UI_CommonStats";
+        private static const UI_COMMON_STATS:String = "com.xvm.lobby.ui.battleresults::UI_CommonStats";
 
         public function BattleResultsXvmView(view:IView)
         {

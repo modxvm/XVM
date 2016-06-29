@@ -56,17 +56,13 @@ package com.xvm.lobby
         {
             super.entryPoint();
 
-            // mod: battleloading
-            XfwView.try_load_ui_swf("xvm_lobby", "xvm_battleloading_ui.swf", [ "battleloading.swf" ]);
-
-            // mod: battleresults
-            XfwView.try_load_ui_swf("xvm_lobby", "xvm_battleresults_ui.swf", [ "battleResults.swf" ]);
-
-            // mod: tankcarousel
-            XfwView.try_load_ui_swf("xvm_lobby", "xvm_tankcarousel_ui.swf", [ "TankCarousel.swf" ]);
-
-            // mod: techtree
-            XfwView.try_load_ui_swf("xvm_lobby", "xvm_techtree_ui.swf", [ "nodesLib.swf" ]);
+            // loading ui mods
+            XfwView.try_load_ui_swf("xvm_lobby", "xvm_lobby_ui.swf", [
+                "battleResults.swf",
+                "battleloading.swf",
+                "TankCarousel.swf",
+                "nodesLib.swf"
+            ]);
 
             // mod: online
             // init as earlier as possible
