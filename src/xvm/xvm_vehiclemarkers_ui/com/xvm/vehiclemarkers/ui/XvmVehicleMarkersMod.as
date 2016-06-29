@@ -10,6 +10,7 @@ package com.xvm.vehiclemarkers.ui
     import flash.display.*;
     import flash.external.*;
     import flash.events.*;
+    import flash.utils.Timer;
 
     XvmVehicleMarker;
 
@@ -22,7 +23,7 @@ package com.xvm.vehiclemarkers.ui
         {
             Xfw.registerCommandProvider(xvm_cmd);
             Logger.counterPrefix = "V";
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             super();
         }
 
@@ -33,7 +34,6 @@ package com.xvm.vehiclemarkers.ui
         }
 
         private var _initialized:Boolean = false;
-
 
         private function onConfigLoaded(e:Event):void
         {

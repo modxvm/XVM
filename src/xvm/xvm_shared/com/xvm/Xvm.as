@@ -45,7 +45,7 @@ package com.xvm
     {
         public static function addEventListener(type:String, listener:Function):void
         {
-            _instance.addEventListener(type, listener);
+            _instance.addEventListener(type, listener, false, 0, true);
         }
 
         public static function removeEventListener(type:String, listener:Function):void
