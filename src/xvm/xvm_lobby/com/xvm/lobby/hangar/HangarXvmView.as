@@ -31,6 +31,9 @@ package com.xvm.lobby.hangar
             //Logger.add("onAfterPopulate: " + view.as_alias);
             //Logger.addObject(page);
 
+            // loading hangar ui mods
+            //XfwView.try_load_ui_swf("xvm_lobby", "xvm_lobbyhangar_ui.swf");
+
             initVehicleParams();
             initServerInfo();
         }

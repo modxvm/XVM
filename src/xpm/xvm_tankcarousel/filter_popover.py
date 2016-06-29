@@ -180,12 +180,3 @@ def _applyXvmFilter(item, filters, vehicles_stats):
     remove |= filters[PREFS.RESERVE] and not vdata['isReserved']
 
     return not remove
-
-
-# View class
-class XvmTankCarouselFilterPopover(FilterPopover):
-    def __init__(self, ctx = None):
-        #log('XvmTankCarouselFilterPopover')
-        super(XvmTankCarouselFilterPopover, self).__init__(ctx)
-
-overrideView(XvmTankCarouselFilterPopover, VIEW_ALIAS.TANK_CAROUSEL_FILTER_POPOVER, 'filtersPopoverView.swf')

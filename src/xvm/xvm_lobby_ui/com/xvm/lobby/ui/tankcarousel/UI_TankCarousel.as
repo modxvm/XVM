@@ -14,6 +14,7 @@ package com.xvm.lobby.ui.tankcarousel
     public dynamic class UI_TankCarousel extends TankCarouselUI
     {
         private var cfg:CCarousel;
+        private var _enabled:Boolean = false;
 
         public function UI_TankCarousel()
         {
@@ -22,7 +23,8 @@ package com.xvm.lobby.ui.tankcarousel
 
             this.cfg = Config.config.hangar.carousel;
 
-            if (Macros.FormatBooleanGlobal(Config.config.hangar.carousel.enabled, true))
+            _enabled = Macros.FormatBooleanGlobal(Config.config.hangar.carousel.enabled, true);
+            if (_enabled)
             {
                 init();
             }
@@ -31,16 +33,19 @@ package com.xvm.lobby.ui.tankcarousel
         override protected function configUI():void
         {
             super.configUI();
-            try
+            if (_enabled)
             {
-                setupMouseWheelScrollingSpeed();
-                setupPadding();
-                setupBackgroundAlpha();
-                setupFilters();
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
+                try
+                {
+                    setupMouseWheelScrollingSpeed();
+                    setupPadding();
+                    setupBackgroundAlpha();
+                    setupFilters();
+                }
+                catch (ex:Error)
+                {
+                    Logger.err(ex);
+                }
             }
         }
 

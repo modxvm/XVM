@@ -4,14 +4,24 @@
  */
 package com.xvm
 {
-    XvmLinks;
-
     import com.xfw.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.events.*;
-    import net.wg.infrastructure.managers.IImageManager;
+    import net.wg.infrastructure.managers.*;
+
+    /**
+     *  Link additional classes into xfw.swc
+     */
+    Chance;
+    Config;
+    Dossier;
+    Locale;
+    Stat;
+    VehicleInfo;
+    XvmCommands;
+    Utils;
 
     public class Xvm extends Sprite
     {

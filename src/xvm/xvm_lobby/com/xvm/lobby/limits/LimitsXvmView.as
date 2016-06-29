@@ -7,14 +7,13 @@ package com.xvm.lobby.limits
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import flash.events.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import org.idmedia.as3commons.util.StringUtils;
 
     public class LimitsXvmView extends XvmViewBase
     {
-        private var _initialized:Boolean = false;
         private var limits_ui:ILimitsUI = null;
 
         public function LimitsXvmView(view:IView)
@@ -29,37 +28,24 @@ package com.xvm.lobby.limits
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            _initialized = false;
-
-            if (!Config.config.hangar.enableGoldLocker && !Config.config.hangar.enableFreeXpLocker)
-                return;
-
-            _initialized = true;
-
-            App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
-
-            //if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
-                init();
+            onConfigLoaded(null);
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            if (!_initialized)
-                return;
-
-            App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
             dispose();
         }
 
-        // PRIVATE
-
-        private function onLibLoaded(e:LibraryLoaderEvent):void
+        override public function onConfigLoaded(e:Event):void
         {
-            //if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+            dispose();
+            if (Config.config.hangar.enableGoldLocker || Config.config.hangar.enableFreeXpLocker)
             {
                 init();
             }
         }
+
+        // PRIVATE
 
         private function init():void
         {

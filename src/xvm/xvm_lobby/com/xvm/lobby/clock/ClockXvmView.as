@@ -11,11 +11,9 @@ package com.xvm.lobby.clock
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import org.idmedia.as3commons.util.StringUtils;
 
     public class ClockXvmView extends XvmViewBase
     {
-        private var _initialized:Boolean = false;
         private var clock_ui:IClockUI = null;
 
         public function ClockXvmView(view:IView)
@@ -30,44 +28,24 @@ package com.xvm.lobby.clock
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            _initialized = false;
-
-            if (!Config.config.hangar.clock.enabled)
-                return;
-
-            _initialized = true;
-
-            //if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
-                init();
+            onConfigLoaded(null);
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            if (!_initialized)
-                return;
-
-            App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
             dispose();
         }
 
         override public function onConfigLoaded(e:Event):void
         {
-            if (clock_ui != null)
+            dispose();
+            if (Config.config.hangar.clock.enabled)
             {
-                dispose();
                 init();
             }
         }
 
         // PRIVATE
-
-        private function onLibLoaded(e:LibraryLoaderEvent):void
-        {
-            //if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
-            {
-                init();
-            }
-        }
 
         private function init():void
         {

@@ -6,6 +6,7 @@ package com.xvm
     import com.xvm.extraFields.*;
     import com.xvm.infrastructure.*;
     import com.xvm.wg.*;
+    import flash.display.*;
 
     // extraFields
     IExtraField;
@@ -22,7 +23,7 @@ package com.xvm
     ImageManagerWG;
     ImageWG;
 
-    public class XvmMain
+    public class XvmMain extends Xvm
     {
         // stub
     }
