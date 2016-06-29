@@ -25,13 +25,6 @@ VehicleInfo;
 XvmCommands;
 Utils;
 
-import com.xvm.extraFields.*;
-ExtraFields;
-
-import com.xvm.infrastructure.*;
-XvmModBase;
-XvmViewBase;
-
 }
 
 }

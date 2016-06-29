@@ -9,7 +9,6 @@ package com.xvm
     import com.xfw.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.wg.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.infrastructure.managers.IImageManager;
@@ -30,17 +29,6 @@ package com.xvm
         {
             _instance.dispatchEvent(e);
         }
-
-        private static var _imageManager:IImageManager = null;
-        public static function get imageManager():IImageManager
-        {
-            if (!_imageManager)
-            {
-                _imageManager = App.imageMgr || new ImageManagerWG();
-            }
-            return _imageManager;
-        }
-
 
         // initialization
 

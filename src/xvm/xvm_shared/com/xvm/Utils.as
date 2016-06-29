@@ -10,8 +10,7 @@ package com.xvm
     import com.xvm.vo.*;
     import flash.filters.*;
     import flash.utils.*;
-    import mx.utils.ObjectUtil;
-    import org.idmedia.as3commons.util.StringUtils;
+    import mx.utils.*;
 
     public class Utils
     {
@@ -130,7 +129,7 @@ package com.xvm
         {
             if (str == null || str == "")
                 return null;
-            if (StringUtils.startsWith(str.toLowerCase(), "img://gui/"))
+            if (XfwUtils.startsWith(str.toLowerCase(), "img://gui/"))
                 return "../" + str.slice(10);
             return "../../" + Utils.fixImgTag(str).split("img://").join("");
         }

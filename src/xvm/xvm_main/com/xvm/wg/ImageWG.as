@@ -1,7 +1,7 @@
 package com.xvm.wg
 {
     import com.xfw.*;
-    import com.xvm.*;
+    import com.xvm.wg.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.data.constants.Values;
@@ -25,7 +25,7 @@ package com.xvm.wg
         public function ImageWG()
         {
             super();
-            this._mgr = Xvm.imageManager;
+            this._mgr = ImageManagerWG.imageManager;
             this._bitmap = new Bitmap();
             addChild(this._bitmap);
         }

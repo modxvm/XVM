@@ -11,6 +11,18 @@ package com.xvm.wg
 
     public class ImageManagerWG extends EventDispatcher implements IImageManager
     {
+        private static var _imageManager:IImageManager = null;
+        public static function get imageManager():IImageManager
+        {
+            if (!_imageManager)
+            {
+                _imageManager = App.imageMgr || new ImageManagerWG();
+            }
+            return _imageManager;
+        }
+
+        ///
+
         private static const MAX_CACHE_SIZE:int = 4096 * 1024;
         private static const MIN_CACHE_SIZE:int = 1024 * 1024;
 

@@ -8,7 +8,7 @@ package com.xvm
     import com.xvm.types.stat.*;
     import com.xvm.vo.*;
     import flash.utils.*;
-    import org.idmedia.as3commons.util.*;
+    import mx.utils.*;
 
     public class Macros
     {
@@ -855,7 +855,7 @@ package com.xvm
             if (clanIdx > 0)
             {
                 playerFullName = name;
-                name = StringUtils.trim(name.slice(0, clanIdx));
+                name = StringUtil.trim(name.slice(0, clanIdx));
             }
             var clanWithoutBrackets:String = XfwUtils.GetClanNameWithoutBrackets(playerFullName);
             var clanWithBrackets:String = XfwUtils.GetClanNameWithBrackets(playerFullName);
@@ -1227,7 +1227,7 @@ package com.xvm
             var value:* = pdata[prefix + RATING_MATRIX[name].name + suffix];
             if (prefix != "" || value == null)
                 return value;
-            value = StringUtils.leftPad(String(value), _getRatingDefaultValue(scale).length, " ");
+            value = XfwUtils.leftPad(String(value), _getRatingDefaultValue(scale).length, " ");
             return value;
         }
 

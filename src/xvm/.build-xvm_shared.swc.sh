@@ -11,14 +11,12 @@ detect_flex
 
 #xfw.swc
 frswc="$FLEX_HOME/frameworks/libs/framework.swc"
-class="com.xvm.XvmMain"
+class="com.xvm.Xvm"
 "$XVMBUILD_COMPC_FILEPATH" \
     -framework="$FLEX_HOME/frameworks" \
-    -source-path xvm_main \
+    -source-path xvm_shared \
     -external-library-path+="$frswc" \
-    -external-library-path+=../xfw/~output/swc/wg_lobby.swc \
+    -external-library-path+=../xfw/~output/swc/wg_shared.swc \
     -external-library-path+=../xfw/~output/swc/xfw_shared.swc \
-    -external-library-path+=../xfw/~output/swc/xfw.swc \
-    -library-path+=../../~output/swc/xvm_shared.swc \
-    -output ../../~output/swc/xvm_main.swc \
+    -output ../../~output/swc/xvm_shared.swc \
     -include-classes $class
