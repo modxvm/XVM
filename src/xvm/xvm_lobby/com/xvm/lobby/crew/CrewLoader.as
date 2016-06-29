@@ -35,6 +35,12 @@ package com.xvm.lobby.crew
             page.crew.addEventListener(MouseEvent.CLICK, instance.handleMouseRelease, false, 0, true);
         }
 
+        public static function dispose(page:Hangar):void
+        {
+            instance.dispose();
+            page.crew.removeEventListener(MouseEvent.CLICK, instance.handleMouseRelease);
+        }
+
         // PRIVATE
 
         private var page:Hangar;
@@ -45,6 +51,14 @@ package com.xvm.lobby.crew
             Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_OWN_CREW, PutOwnCrew);
             Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_BEST_CREW, PutBestCrew);
             Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_CLASS_CREW, PutClassCrew);
+        }
+
+        public function dispose():void
+        {
+            page = null;
+            Xfw.removeCommandListener(COMMAND_XVM_CREW_PUT_OWN_CREW, PutOwnCrew);
+            Xfw.removeCommandListener(COMMAND_XVM_CREW_PUT_BEST_CREW, PutBestCrew);
+            Xfw.removeCommandListener(COMMAND_XVM_CREW_PUT_CLASS_CREW, PutClassCrew);
         }
 
         private function handleMouseRelease(e:MouseEvent):void

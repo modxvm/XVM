@@ -6,6 +6,7 @@ package com.xvm.lobby.ui
     import com.xvm.lobby.ui.battleresults.*;
     import com.xvm.lobby.ui.clock.*;
     import com.xvm.lobby.ui.limits.*;
+    import com.xvm.lobby.ui.squad.*;
     import com.xvm.lobby.ui.tankcarousel.*;
     import com.xvm.lobby.ui.techtree.*;
     import flash.display.*;
@@ -21,6 +22,10 @@ package com.xvm.lobby.ui
 
     // limits
     LimitsUIImpl;
+
+    // squad
+    // TODO
+    //UI_SquadItemRenderer;
 
     // tankcarousel
     UI_FalloutTankCarousel;

@@ -33,13 +33,13 @@ package com.xvm.lobby.squad
             //page.squadView.memberList.itemRenderer = UI_SquadItemRenderer;
             //page.memberList.addEventListener(Defines.E_ITEM_UPDATED, onMemberListItemUpdated);
             Xfw.addCommandListener(XVM_SQUAD_UPDATE_TIERS, updateTiers);
-            Xfw.cmd(XVM_SQUAD_WINDOW_POPULATED)
+            Xfw.cmd(XVM_SQUAD_WINDOW_POPULATED);
         }
 
         public override function onBeforeDispose(e:LifeCycleEvent):void
         {
             Xfw.removeCommandListener(XVM_SQUAD_UPDATE_TIERS, updateTiers);
-            Xfw.cmd(XVM_SQUAD_WINDOW_DISPOSED)
+            Xfw.cmd(XVM_SQUAD_WINDOW_DISPOSED);
         }
 
         // PRIVATE

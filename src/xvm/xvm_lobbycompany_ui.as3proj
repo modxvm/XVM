@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_lobby\as_lobby\xvm_lobbyhangar_ui.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_lobby\as_lobby\xvm_lobbycompany_ui.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />
@@ -15,7 +15,7 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="xvm_lobbyhangar_ui" />
+    <class path="xvm_lobbycompany_ui" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -75,7 +75,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="xvm_lobbyhangar_ui\com\xvm\lobby\ui\LobbyHangarUIMod.as" />
+    <compile path="xvm_lobbycompany_ui\com\xvm\lobby\ui\LobbyCompanyUIMod.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

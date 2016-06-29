@@ -19,10 +19,9 @@ package com.xvm.lobby.contacts
     public class ContactsXvmView extends XvmViewBase
     {
         private static const CMD_XVM_CONTACTS_AS_EDIT_CONTACT_DATA:String = "xvm_contacts.as_edit_contact_data";
-
         private static const XVM_EDIT_CONTACT_DATA_ALIAS:String = 'XvmEditContactDataView';
 
-        private var _initialized:Boolean = false;
+        private static const _swf_name:String = "xvm_lobbycontacts_ui.swf";
 
         public function ContactsXvmView(view:IView)
         {
@@ -34,32 +33,19 @@ package com.xvm.lobby.contacts
             return super.view as ContactsListPopover;
         }
 
-        override public function onBeforePopulate(e:LifeCycleEvent):void
-        {
-            //page.borderLip.y += 100;
-            //page.treeComponent.setListTopBound(50);
-        }
-
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            _initialized = false;
+            if (Config.networkServicesSettings.comments)
+            {
+                App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
 
-            if (!Config.networkServicesSettings.comments)
-                return;
-
-            _initialized = true;
-
-            App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
-
-            //if (XfwView.try_load_ui_swf(_name, _ui_name) != XfwConst.SWF_START_LOADING)
-                init();
+                if (XfwView.try_load_ui_swf("xvm_lobby", "xvm_lobbycontacts_ui.swf") != XfwConst.SWF_START_LOADING)
+                    init();
+            }
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            if (!_initialized)
-                return;
-
             App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
             Xfw.removeCommandListener(CMD_XVM_CONTACTS_AS_EDIT_CONTACT_DATA, editContactData);
         }
@@ -68,7 +54,7 @@ package com.xvm.lobby.contacts
 
         private function onLibLoaded(e:LibraryLoaderEvent):void
         {
-            //if (StringUtils.endsWith(e.url.toLowerCase(), _ui_name))
+            if (StringUtils.endsWith(e.url.toLowerCase(), _swf_name))
             {
                 init();
                 App.utils.scheduler.scheduleOnNextFrame(function():void

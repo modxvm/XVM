@@ -52,11 +52,12 @@ package com.xvm.lobby.crew
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            init();
+            CrewLoader.init(page);
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            CrewLoader.dispose(page);
             if (enablePrevCrewCheckBox != null)
             {
                 Xfw.removeCommandListener(COMMAND_XVM_CREW_AS_VEHICLE_CHANGED, onVehicleChanged);
@@ -66,11 +67,6 @@ package com.xvm.lobby.crew
         }
 
         // PRIVATE
-
-        private function init():void
-        {
-            CrewLoader.init(page);
-        }
 
         // Tankmen XP Panel
 
