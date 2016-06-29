@@ -6,8 +6,10 @@ package com.xvm.vehiclemarkers.ui
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import flash.display.*;
     import flash.external.*;
+    import flash.events.*;
 
     XvmVehicleMarker;
 
@@ -20,6 +22,7 @@ package com.xvm.vehiclemarkers.ui
         {
             Xfw.registerCommandProvider(xvm_cmd);
             Logger.counterPrefix = "V";
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             super();
         }
 
@@ -27,6 +30,33 @@ package com.xvm.vehiclemarkers.ui
         {
             rest.unshift("xvm.cmd");
             return ExternalInterface.call.apply(null, rest);
+        }
+
+        private var _initialized:Boolean = false;
+
+
+        private function onConfigLoaded(e:Event):void
+        {
+            try
+            {
+                if (!_initialized)
+                {
+                    _initialized = true;
+                    initialize();
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
+        private function initialize():void
+        {
+            Macros.RegisterGlobalMacrosData();
+            Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
+            Stat.clearBattleStat();
+            Stat.loadBattleStat();
         }
     }
 }

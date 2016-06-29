@@ -7,9 +7,7 @@ package com.xvm.battle.vo
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.vo.*;
-    import flash.utils.Dictionary;
-    import net.wg.data.VO.daapi.*;
-    import net.wg.infrastructure.interfaces.*;
+    import flash.utils.*;
 
     public class VOPlayersData extends VOBase
     {
@@ -70,28 +68,26 @@ package com.xvm.battle.vo
         // private
         private var playerNameToVehicleIDMap:Dictionary;
 
-        public function VOPlayersData(data:IDAAPIDataClass)
+        public function VOPlayersData(data:Object)
         {
-            var d:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(data);
-
             playerStates = new Dictionary();
             playerNameToVehicleIDMap = new Dictionary();
-            var value:DAAPIVehicleInfoVO;
-            for each (value in d.leftVehicleInfos)
+            var value:Object;
+            for each (value in data.leftVehicleInfos)
             {
                 playerStates[value.vehicleID] = new VOPlayerState(value);
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
-            for each (value in d.rightVehicleInfos)
+            for each (value in data.rightVehicleInfos)
             {
                 playerStates[value.vehicleID] = new VOPlayerState(value);
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
 
-            leftCorrelationIDs = d.leftCorrelationIDs;
-            rightCorrelationIDs = d.rightCorrelationIDs;
-            leftVehiclesIDs = d.leftVehiclesIDs;
-            rightVehiclesIDs = d.rightVehiclesIDs;
+            leftCorrelationIDs = data.leftCorrelationIDs;
+            rightCorrelationIDs = data.rightCorrelationIDs;
+            leftVehiclesIDs = data.leftVehiclesIDs;
+            rightVehiclesIDs = data.rightVehiclesIDs;
         }
 
         public function get(vehicleID:Number):VOPlayerState
@@ -113,9 +109,9 @@ package com.xvm.battle.vo
             }
         }
 
-        public function updateVehicleInfos(data:Vector.<DAAPIVehicleInfoVO>):void
+        public function updateVehicleInfos(data:*):void
         {
-            for each (var value:DAAPIVehicleInfoVO in data)
+            for each (var value:Object in data)
             {
                 if (!playerStates.hasOwnProperty(value.vehicleID))
                 {
@@ -129,9 +125,9 @@ package com.xvm.battle.vo
             }
         }
 
-        public function updateVehicleFrags(data:Vector.<DAAPIVehicleStatsVO>):void
+        public function updateVehicleFrags(data:*):void
         {
-            for each (var vehicleStats:DAAPIVehicleStatsVO in data)
+            for each (var vehicleStats:Object in data)
             {
                 var playerState:VOPlayerState = get(vehicleStats.vehicleID);
                 if (playerState)
@@ -141,7 +137,7 @@ package com.xvm.battle.vo
             }
         }
 
-        public function updateTotalStats(data:DAAPITotalStatsVO):void
+        public function updateTotalStats(data:Object):void
         {
             leftScope = data.leftScope;
             rightScope = data.rightScope;

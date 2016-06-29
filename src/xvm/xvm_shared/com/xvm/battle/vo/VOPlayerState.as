@@ -7,14 +7,12 @@ package com.xvm.battle.vo
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.wg.*;
     import com.xfw.events.*;
     import com.xvm.vo.*;
     import com.xvm.battle.events.*;
     import com.xvm.types.stat.*;
     import flash.errors.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.VO.daapi.*;
-    import net.wg.infrastructure.interfaces.*;
 
     public class VOPlayerState extends VOMacrosOptions
     {
@@ -280,36 +278,35 @@ package com.xvm.battle.vo
             return curHealth < 0;
         }
 
-        public function VOPlayerState(data:IDAAPIDataClass)
+        public function VOPlayerState(data:Object)
         {
-            var d:DAAPIVehicleInfoVO = DAAPIVehicleInfoVO(data);
-            accountDBID = d.accountDBID;
-            clanAbbrev = d.clanAbbrev;
-            invitationStatus = d.invitationStatus;
-            isObserver = d.isObserver;
-            isSpeaking = d.isSpeaking;
-            isVehiclePremiumIgr = d.isVehiclePremiumIgr;
-            playerFullName = d.playerFullName;
-            playerName = d.playerName;
-            playerStatus = d.playerStatus;
-            prebattleID = d.prebattleID;
-            region = d.region;
-            _squadIndex = d.squadIndex;
-            teamColor = d.teamColor;
-            if (d.userTags)
+            accountDBID = data.accountDBID;
+            clanAbbrev = data.clanAbbrev;
+            invitationStatus = data.invitationStatus;
+            isObserver = data.isObserver;
+            isSpeaking = data.isSpeaking;
+            isVehiclePremiumIgr = data.isVehiclePremiumIgr;
+            playerFullName = data.playerFullName;
+            playerName = data.playerName;
+            playerStatus = data.playerStatus;
+            prebattleID = data.prebattleID;
+            region = data.region;
+            _squadIndex = data.squadIndex;
+            teamColor = data.teamColor;
+            if (data.userTags)
             {
-                userTags = d.userTags.concat();
+                userTags = data.userTags.concat();
             }
-            vehicleAction = d.vehicleAction;
-            vehicleGuiName = d.vehicleGuiName;
-            vehicleIcon = d.vehicleIcon;
-            vehicleIconName = d.vehicleIconName;
-            vehicleID = d.vehicleID;
-            vehicleLevel = d.vehicleLevel;
-            vehicleName = d.vehicleName;
-            vehicleType = d.vehicleType;
+            vehicleAction = data.vehicleAction;
+            vehicleGuiName = data.vehicleGuiName;
+            vehicleIcon = data.vehicleIcon;
+            vehicleIconName = data.vehicleIconName;
+            vehicleID = data.vehicleID;
+            vehicleLevel = data.vehicleLevel;
+            vehicleName = data.vehicleName;
+            vehicleType = data.vehicleType;
 
-            vehicleStatus = d.vehicleStatus;
+            vehicleStatus = data.vehicleStatus;
 
             // TODO: refactor
             _vehicleData = VehicleInfo.getByLocalizedShortName(vehicleName);

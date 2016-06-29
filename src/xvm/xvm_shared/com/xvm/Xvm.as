@@ -5,6 +5,9 @@
 package com.xvm
 {
     import com.xfw.*;
+    import com.xvm.battle.*;
+    import com.xvm.battle.events.*;
+    import com.xvm.battle.vo.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
@@ -22,6 +25,21 @@ package com.xvm
     VehicleInfo;
     XvmCommands;
     Utils;
+
+    // Battle
+    BattleCommands;
+    BattleEvents;
+    BattleGlobalData;
+    BattleMacros;
+    BattleState;
+    PlayerStateEvent;
+    VOArenaInfo;
+    VOCaptureBarData;
+    VODamageInfo;
+    VOMinimapCirclesData;
+    VOPlayersData;
+    VOPlayerState;
+    VOXmqpData;
 
     public class Xvm extends Sprite
     {

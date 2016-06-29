@@ -9,16 +9,15 @@ package com.xvm.battle
     import com.xvm.types.*;
     import com.xvm.battle.vo.*;
     import com.xvm.vo.*;
-    import org.idmedia.as3commons.util.*;
 
-    internal class BattleMacros
+    public class BattleMacros
     {
-        internal static function RegisterGlobalMacrosData(m_globals:Object):void
+        public static function RegisterGlobalMacrosData(m_globals:Object):void
         {
             _RegisterGlobalMacrosData(m_globals);
         }
 
-        internal static function RegisterPlayersData(m_dict:Object):void
+        public static function RegisterPlayersData(m_dict:Object):void
         {
             for each (var playerState:VOPlayerState in BattleState.playersDataVO.playerStates)
             {

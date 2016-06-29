@@ -11,11 +11,8 @@ package com.xvm.battle
     import com.xvm.battle.vo.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.data.VO.daapi.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.*;
 
-    public class BattleState implements IBattleComponentDataController
+    public class BattleState // implements IBattleComponentDataController
     {
         public static function get(vehicleID:Number):VOPlayerState
         {
@@ -118,7 +115,7 @@ package com.xvm.battle
 
         // IBattleComponentDataController implementation
 
-        public function addVehiclesInfo(data:IDAAPIDataClass):void
+        public function addVehiclesInfo(data:Object):void
         {
             Logger.addObject(data, 1, "addVehiclesInfo");
             try
@@ -141,7 +138,7 @@ package com.xvm.battle
             */
         }
 
-        public function setArenaInfo(data:IDAAPIDataClass):void
+        public function setArenaInfo(data:Object):void
         {
             try
             {
@@ -169,7 +166,7 @@ package com.xvm.battle
             */
         }
 
-        public function setUserTags(data:IDAAPIDataClass):void
+        public function setUserTags(data:Object):void
         {
             Logger.addObject(data, 1, "setUserTags");
             try
@@ -181,7 +178,7 @@ package com.xvm.battle
             }
         }
 
-        public function setVehiclesData(data:IDAAPIDataClass):void
+        public function setVehiclesData(data:Object):void
         {
             try
             {
@@ -194,22 +191,21 @@ package com.xvm.battle
             }
         }
 
-        public function setVehicleStats(data:IDAAPIDataClass):void
+        public function setVehicleStats(data:Object):void
         {
             try
             {
-                var vehicleStatsVO:DAAPIVehiclesStatsVO = DAAPIVehiclesStatsVO(data);
-                if (vehicleStatsVO.leftFrags)
+                if (data.leftFrags)
                 {
-                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.leftFrags);
+                    _playersDataVO.updateVehicleFrags(data.leftFrags);
                 }
-                if (vehicleStatsVO.rightFrags)
+                if (data.rightFrags)
                 {
-                    _playersDataVO.updateVehicleFrags(vehicleStatsVO.rightFrags);
+                    _playersDataVO.updateVehicleFrags(data.rightFrags);
                 }
-                if (vehicleStatsVO.totalStats)
+                if (data.totalStats)
                 {
-                    _playersDataVO.updateTotalStats(vehicleStatsVO.totalStats);
+                    _playersDataVO.updateTotalStats(data.totalStats);
                 }
             }
             catch (ex:Error)
@@ -218,7 +214,7 @@ package com.xvm.battle
             }
         }
 
-        public function updateInvitationsStatuses(data:IDAAPIDataClass) : void
+        public function updateInvitationsStatuses(data:Object) : void
         {
             Logger.addObject(data, 1, "updateInvitationsStatuses");
             try
@@ -251,12 +247,11 @@ package com.xvm.battle
             */
         }
 
-        public function updatePlayerStatus(data:IDAAPIDataClass):void
+        public function updatePlayerStatus(data:Object):void
         {
             try
             {
-                var d:DAAPIPlayerStatusVO = DAAPIPlayerStatusVO(data);
-                _playersDataVO.updatePlayerState(d.vehicleID, { playerStatus: d.status });
+                _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status });
             }
             catch (ex:Error)
             {
@@ -264,7 +259,7 @@ package com.xvm.battle
             }
         }
 
-        public function updateUserTags(data:IDAAPIDataClass):void
+        public function updateUserTags(data:Object):void
         {
             Logger.addObject(data, 1, "updateUserTags");
             try
@@ -276,23 +271,22 @@ package com.xvm.battle
             }
         }
 
-        public function updateVehiclesInfo(data:IDAAPIDataClass):void
+        public function updateVehiclesInfo(data:Object):void
         {
             try
             {
-                var vehiclesDataVO:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(data);
-                if (vehiclesDataVO.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = vehiclesDataVO.leftCorrelationIDs;
-                if (vehiclesDataVO.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = vehiclesDataVO.rightCorrelationIDs;
-                if (vehiclesDataVO.leftVehiclesIDs)
-                    _playersDataVO.leftVehiclesIDs = vehiclesDataVO.leftVehiclesIDs;
-                if (vehiclesDataVO.rightVehiclesIDs)
-                    _playersDataVO.rightVehiclesIDs = vehiclesDataVO.rightVehiclesIDs;
-                if (vehiclesDataVO.leftVehicleInfos)
-                    _playersDataVO.updateVehicleInfos(vehiclesDataVO.leftVehicleInfos);
-                if (vehiclesDataVO.rightVehicleInfos)
-                    _playersDataVO.updateVehicleInfos(vehiclesDataVO.rightVehicleInfos);
+                if (data.leftCorrelationIDs)
+                    _playersDataVO.leftCorrelationIDs = data.leftCorrelationIDs;
+                if (data.rightCorrelationIDs)
+                    _playersDataVO.rightCorrelationIDs = data.rightCorrelationIDs;
+                if (data.leftVehiclesIDs)
+                    _playersDataVO.leftVehiclesIDs = data.leftVehiclesIDs;
+                if (data.rightVehiclesIDs)
+                    _playersDataVO.rightVehiclesIDs = data.rightVehiclesIDs;
+                if (data.leftVehicleInfos)
+                    _playersDataVO.updateVehicleInfos(data.leftVehicleInfos);
+                if (data.rightVehicleInfos)
+                    _playersDataVO.updateVehicleInfos(data.rightVehicleInfos);
             }
             catch (ex:Error)
             {
@@ -300,27 +294,26 @@ package com.xvm.battle
             }
         }
 
-        public function updateVehiclesStats(data:IDAAPIDataClass):void
+        public function updateVehiclesStats(data:Object):void
         {
             setVehicleStats(data);
         }
 
-        public function updateVehicleStatus(data:IDAAPIDataClass):void
+        public function updateVehicleStatus(data:Object):void
         {
             try
             {
-                var vehicleStatusVO:DAAPIVehicleStatusVO = DAAPIVehicleStatusVO(data);
-                _playersDataVO.updatePlayerState(vehicleStatusVO.vehicleID, { vehicleStatus: vehicleStatusVO.status });
-                if (vehicleStatusVO.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = vehicleStatusVO.rightCorrelationIDs;
-                if (vehicleStatusVO.rightVehiclesIDs)
-                    _playersDataVO.rightVehiclesIDs = vehicleStatusVO.rightVehiclesIDs;
-                if (vehicleStatusVO.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = vehicleStatusVO.leftCorrelationIDs;
-                if (vehicleStatusVO.leftVehiclesIDs)
-                    _playersDataVO.leftVehiclesIDs = vehicleStatusVO.leftVehiclesIDs;
-                if (vehicleStatusVO.totalStats)
-                    _playersDataVO.updateTotalStats(vehicleStatusVO.totalStats);
+                _playersDataVO.updatePlayerState(data.vehicleID, { vehicleStatus: data.status });
+                if (data.rightCorrelationIDs)
+                    _playersDataVO.rightCorrelationIDs = data.rightCorrelationIDs;
+                if (data.rightVehiclesIDs)
+                    _playersDataVO.rightVehiclesIDs = data.rightVehiclesIDs;
+                if (data.leftCorrelationIDs)
+                    _playersDataVO.leftCorrelationIDs = data.leftCorrelationIDs;
+                if (data.leftVehiclesIDs)
+                    _playersDataVO.leftVehiclesIDs = data.leftVehiclesIDs;
+                if (data.totalStats)
+                    _playersDataVO.updateTotalStats(data.totalStats);
             }
             catch (ex:Error)
             {
