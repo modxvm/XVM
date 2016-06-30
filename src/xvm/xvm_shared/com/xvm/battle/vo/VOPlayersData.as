@@ -154,7 +154,7 @@ package com.xvm.battle.vo
                 playerState = get(ids[i]);
                 if (playerState)
                 {
-                    playerState.isAlly = true;
+                    playerState.isAlly = isAlly;
                     playerState.position = i + 1;
                 }
             }
