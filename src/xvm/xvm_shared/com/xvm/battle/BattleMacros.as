@@ -328,7 +328,7 @@ package com.xvm.battle
 
         public static function getDamageSystemColor(o:VOPlayerState):Number
         {
-            if (isNaN(o.damageInfo.damageDelta))
+            if (!o.damageInfo || isNaN(o.damageInfo.damageDelta))
                 return NaN;
             switch (o.damageInfo.damageType)
             {
@@ -423,7 +423,7 @@ package com.xvm.battle
 
         private static function getEntityName(o:VOPlayerState):String
         {
-            return !o.isAlly ? "enemy" : o.isSquadMan ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
+            return !o.isAlly ? "enemy" : o.isSquadPersonal ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
         }
 
         /**

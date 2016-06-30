@@ -63,16 +63,14 @@ package com.xvm.vehiclemarkers.ui
             {
                 this.playerName = pName;
                 var playerState:VOPlayerState = BattleState.getByPlayerName(playerName);
-                if (playerState == null)
+                if (playerState != null)
                 {
-                    //Logger.add("[VM] WARNING: setVehicleInfo(): no player state for player " + playerName);
-                    return;
+                    vehicleID = playerState.vehicleID;
+                    this.maxHealth = maxHealth;
+                    playerState.maxHealth = maxHealth;
+                    Macros.RegisterVehicleMarkerData(this.RegisterVehicleMarkerData);
+                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.INIT, playerState, exInfo));
                 }
-                vehicleID = playerState.vehicleID;
-                this.maxHealth = maxHealth;
-                playerState.maxHealth = maxHealth;
-                Macros.RegisterVehicleMarkerData(this.RegisterVehicleMarkerData);
-                dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.INIT, playerState, exInfo));
             }
             catch (ex:Error)
             {
@@ -83,33 +81,62 @@ package com.xvm.vehiclemarkers.ui
         override protected function draw():void
         {
             super.draw();
-            if (isInvalid(InvalidationType.DATA))
+            try
             {
-                dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, BattleState.get(vehicleID), exInfo));
+                if (isInvalid(InvalidationType.DATA))
+                {
+                    var playerState:VOPlayerState = BattleState.get(vehicleID);
+                    if (playerState != null)
+                    {
+                        dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
+                    }
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 
         override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
         {
-            var playerState:VOPlayerState = BattleState.get(vehicleID);
-            if (playerState == null)
+            try
             {
-                return;
+                var playerState:VOPlayerState = BattleState.get(vehicleID);
+                if (playerState != null)
+                {
+                    playerState.update({
+                        damageInfo: new VODamageInfo({
+                            damageDelta: playerState.curHealth - Math.max(newHealth, 0),
+                            damageType: damageType,
+                            damageFlag: damageFlag
+                        }),
+                        curHealth: newHealth
+                    });
+                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATEHEALTH, playerState, exInfo));
+                }
             }
-            playerState.update( {
-                damageInfo: {
-                    damageDelta: playerState.curHealth - Math.max(newHealth, 0),
-                    damageType: damageType,
-                    damageFlag: damageFlag
-                },
-                curHealth: newHealth
-            });
-            dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATEHEALTH, playerState, exInfo));
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function setHealth(curHealth:int):void
         {
-            BattleState.get(vehicleID).update( { curHealth: curHealth } );
+            try
+            {
+                var playerState:VOPlayerState = BattleState.get(vehicleID);
+                if (playerState != null)
+                {
+                    playerState.update( { damageInfo:null, curHealth: curHealth } );
+                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function set markerSettings(value:Object):void
@@ -153,6 +180,14 @@ package com.xvm.vehiclemarkers.ui
             damageTextComponent = null;
         }
 
+        private function onPlayerStateChanged(e:PlayerStateEvent):void
+        {
+            if (e.playerName == playerName)
+            {
+                invalidate(InvalidationType.DATA);
+            }
+        }
+
         private function RegisterVehicleMarkerData(m_dict:Object):void
         {
             if (!m_dict.hasOwnProperty(playerName))
@@ -161,14 +196,6 @@ package com.xvm.vehiclemarkers.ui
 
             // {{turret}}
             pdata["turret"] = getTurretData();
-        }
-
-        private function onPlayerStateChanged(e:PlayerStateEvent):void
-        {
-            if (e.playerName == playerName)
-            {
-                invalidate(InvalidationType.DATA);
-            }
         }
 
         private function getTurretData():String
