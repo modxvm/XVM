@@ -73,21 +73,20 @@ package com.xvm.battle.vo
             playerStates = new Dictionary();
             playerNameToVehicleIDMap = new Dictionary();
             var value:Object;
-            for each (value in data.leftVehicleInfos)
+            for each (value in data.leftVehicleInfos || data.leftItems)
             {
                 playerStates[value.vehicleID] = new VOPlayerState(value);
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
-            for each (value in data.rightVehicleInfos)
+            for each (value in data.rightVehicleInfos || data.rightItems)
             {
                 playerStates[value.vehicleID] = new VOPlayerState(value);
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
-
-            leftCorrelationIDs = new Vector.<Number>(data.leftCorrelationIDs);
-            rightCorrelationIDs = new Vector.<Number>(data.rightCorrelationIDs);
-            leftVehiclesIDs = new Vector.<Number>(data.leftVehiclesIDs);
-            rightVehiclesIDs = new Vector.<Number>(data.rightVehiclesIDs);
+            leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
+            rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
+            leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
+            rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
         }
 
         public function get(vehicleID:Number):VOPlayerState

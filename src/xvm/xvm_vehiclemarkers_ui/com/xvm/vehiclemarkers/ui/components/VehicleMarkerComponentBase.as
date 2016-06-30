@@ -17,8 +17,8 @@ package com.xvm.vehiclemarkers.ui.components
         public function VehicleMarkerComponentBase(marker:XvmVehicleMarker)
         {
             this.marker = marker;
-            marker.addEventListener(Event.INIT, init);
-            marker.addEventListener(Event.CHANGE, draw);
+            marker.addEventListener(XvmVehicleMarkerEvent.INIT, init);
+            marker.addEventListener(XvmVehicleMarkerEvent.UPDATE, update);
         }
 
         public function dispose():void
@@ -26,12 +26,12 @@ package com.xvm.vehiclemarkers.ui.components
             //
         }
 
-        protected function init():void
+        protected function init(e:XvmVehicleMarkerEvent):void
         {
-
+            update(e);
         }
 
-        protected function draw():void
+        protected function update(e:XvmVehicleMarkerEvent):void
         {
 
         }

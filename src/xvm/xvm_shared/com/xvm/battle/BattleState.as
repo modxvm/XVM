@@ -16,12 +16,12 @@ package com.xvm.battle
     {
         public static function get(vehicleID:Number):VOPlayerState
         {
-            return instance._playersDataVO.get(vehicleID);
+            return instance._playersDataVO ? instance._playersDataVO.get(vehicleID) : null;
         }
 
         public static function getByPlayerName(playerName:String):VOPlayerState
         {
-            return instance._playersDataVO.getByPlayerName(playerName);
+            return instance._playersDataVO ? instance._playersDataVO.getByPlayerName(playerName) : null;
         }
 
         public static function get arenaInfoVO():VOArenaInfo
@@ -261,13 +261,13 @@ package com.xvm.battle
             try
             {
                 if (data.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = new Vector.<Number>(data.leftCorrelationIDs);
+                    _playersDataVO.leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
                 if (data.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = new Vector.<Number>(data.rightCorrelationIDs);
-                if (data.leftVehiclesIDs)
-                    _playersDataVO.leftVehiclesIDs = new Vector.<Number>(data.leftVehiclesIDs);
-                if (data.rightVehiclesIDs)
-                    _playersDataVO.rightVehiclesIDs = new Vector.<Number>(data.rightVehiclesIDs);
+                    _playersDataVO.rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
+                if (data.leftVehiclesIDs || data.leftItemsIDs)
+                    _playersDataVO.leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
+                if (data.rightVehiclesIDs || data.rightItemsIDs)
+                    _playersDataVO.rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
                 if (data.leftVehicleInfos)
                     _playersDataVO.updateVehicleInfos(data.leftVehicleInfos);
                 if (data.rightVehicleInfos)
@@ -310,13 +310,13 @@ package com.xvm.battle
             {
                 _playersDataVO.updatePlayerState(data.vehicleID, { vehicleStatus: data.status });
                 if (data.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = new Vector.<Number>(data.rightCorrelationIDs);
-                if (data.rightVehiclesIDs)
-                    _playersDataVO.rightVehiclesIDs = new Vector.<Number>(data.rightVehiclesIDs);
+                    _playersDataVO.rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
+                if (data.rightVehiclesIDs || data.rightItemsIDs)
+                    _playersDataVO.rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
                 if (data.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = new Vector.<Number>(data.leftCorrelationIDs);
-                if (data.leftVehiclesIDs)
-                    _playersDataVO.leftVehiclesIDs = new Vector.<Number>(data.leftVehiclesIDs);
+                    _playersDataVO.leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
+                if (data.leftVehiclesIDs || data.leftItemsIDs)
+                    _playersDataVO.leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
                 if (data.totalStats)
                     _playersDataVO.updateTotalStats(data.totalStats);
             }

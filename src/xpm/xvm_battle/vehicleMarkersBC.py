@@ -8,6 +8,7 @@ import traceback
 from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
 
 from xfw import *
+from xvm_main.python.logger import *
 
 from vehicleMarkers import g_markers
 
@@ -35,8 +36,8 @@ class BC(object):
 
 @registerEvent(BattleStatisticsDataController, 'as_setVehiclesDataS')
 def as_setVehiclesDataS(self, data):
-    log(self.__class__)
     g_markers.call(BC.setVehiclesData, data)
+    g_markers.recreateMarkers()
 
 @registerEvent(BattleStatisticsDataController, 'as_updatePlayerStatusS')
 def as_updatePlayerStatusS(self, data):

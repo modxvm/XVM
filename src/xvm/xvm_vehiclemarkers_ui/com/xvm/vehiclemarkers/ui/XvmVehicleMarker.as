@@ -20,7 +20,9 @@ package com.xvm.vehiclemarkers.ui
 
     public dynamic class XvmVehicleMarker extends VehicleMarker
     {
+        public var vehicleID:Number = NaN;
         private var playerName:String = null;
+        private var maxHealth:int = 0;
 
         private var actionMarkerComponent:ActionMarkerComponent;
         private var contourIconComponent:ContourIconComponent;
@@ -57,14 +59,25 @@ package com.xvm.vehiclemarkers.ui
             maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int):void
         {
             super.setVehicleInfo.apply(this, arguments);
-            this.playerName = pName;
-            var playerState:VOPlayerState = BattleState.getByPlayerName(playerName);
-            if (playerState != null)
+            try
             {
+                this.playerName = pName;
+                var playerState:VOPlayerState = BattleState.getByPlayerName(playerName);
+                if (playerState == null)
+                {
+                    //Logger.add("[VM] WARNING: setVehicleInfo(): no player state for player " + playerName);
+                    return;
+                }
+                vehicleID = playerState.vehicleID;
+                this.maxHealth = maxHealth;
                 playerState.maxHealth = maxHealth;
                 Macros.RegisterVehicleMarkerData(this.RegisterVehicleMarkerData);
+                dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.INIT, playerState, exInfo));
             }
-            dispatchEvent(new Event(Event.INIT));
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override protected function draw():void
@@ -72,8 +85,31 @@ package com.xvm.vehiclemarkers.ui
             super.draw();
             if (isInvalid(InvalidationType.DATA))
             {
-                dispatchEvent(new Event(Event.CHANGE));
+                dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, BattleState.get(vehicleID), exInfo));
             }
+        }
+
+        override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
+        {
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
+            if (playerState == null)
+            {
+                return;
+            }
+            playerState.update( {
+                damageInfo: {
+                    damageDelta: playerState.curHealth - Math.max(newHealth, 0),
+                    damageType: damageType,
+                    damageFlag: damageFlag
+                },
+                curHealth: newHealth
+            });
+            dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATEHEALTH, playerState, exInfo));
+        }
+
+        override public function setHealth(curHealth:int):void
+        {
+            BattleState.get(vehicleID).update( { curHealth: curHealth } );
         }
 
         override public function set markerSettings(value:Object):void
@@ -90,31 +126,31 @@ package com.xvm.vehiclemarkers.ui
 
         private function createComponents():void
         {
-            actionMarkerComponent = new ActionMarkerComponent(this);
-            contourIconComponent = new ContourIconComponent(this);
-            damageTextComponent = new DamageTextComponent(this);
-            healthBarComponent = new HealthBarComponent(this);
-            levelIconComponent = new LevelIconComponent(this);
-            textFieldsComponent = new TextFieldsComponent(this);
             vehicleIconComponent = new VehicleIconComponent(this);
+            contourIconComponent = new ContourIconComponent(this);
+            levelIconComponent = new LevelIconComponent(this);
+            actionMarkerComponent = new ActionMarkerComponent(this);
+            healthBarComponent = new HealthBarComponent(this);
+            textFieldsComponent = new TextFieldsComponent(this);
+            damageTextComponent = new DamageTextComponent(this);
         }
 
         private function deleteComponents():void
         {
-            actionMarkerComponent.dispose();
-            actionMarkerComponent = null;
-            contourIconComponent.dispose();
-            contourIconComponent = null;
-            damageTextComponent.dispose();
-            damageTextComponent = null;
-            healthBarComponent.dispose();
-            healthBarComponent = null;
-            levelIconComponent.dispose();
-            levelIconComponent = null;
-            textFieldsComponent.dispose();
-            textFieldsComponent = null;
             vehicleIconComponent.dispose();
             vehicleIconComponent = null;
+            contourIconComponent.dispose();
+            contourIconComponent = null;
+            levelIconComponent.dispose();
+            levelIconComponent = null;
+            actionMarkerComponent.dispose();
+            actionMarkerComponent = null;
+            healthBarComponent.dispose();
+            healthBarComponent = null;
+            textFieldsComponent.dispose();
+            textFieldsComponent = null;
+            damageTextComponent.dispose();
+            damageTextComponent = null;
         }
 
         private function RegisterVehicleMarkerData(m_dict:Object):void

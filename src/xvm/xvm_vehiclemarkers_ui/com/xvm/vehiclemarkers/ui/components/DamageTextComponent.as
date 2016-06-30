@@ -13,6 +13,7 @@ package com.xvm.vehiclemarkers.ui.components
         public function DamageTextComponent(marker:XvmVehicleMarker)
         {
             super(marker);
+            marker.addEventListener(XvmVehicleMarkerEvent.UPDATEHEALTH, showDamage);
         }
 
         //private var damage:MovieClip;
@@ -22,18 +23,20 @@ package com.xvm.vehiclemarkers.ui.components
             //damage = proxy.createHolder();
         //}
 //
-        ///**
-         //* Show floating damage indicator
-         //* @param	cfg damageText config section for current state
-         //* @param	newHealth value of new health
-         //* @param	delta absolute damage
-         //* @param	flag  damage source: 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
-         //* @param	damageType damage kind: "shot", "fire", "ramming", "world_collision", "death_zone", "drowning"
-         //*/
-        //public function showDamage(cfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:String)
-        //{
+        /**
+         * Show floating damage indicator
+         * @param	cfg damageText config section for current state
+         * @param	newHealth value of new health
+         * @param	delta absolute damage
+         * @param	flag  damage source: 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
+         * @param	damageType damage kind: "shot", "fire", "ramming", "world_collision", "death_zone", "drowning"
+         */
+        public function showDamage(e:XvmVehicleMarkerEvent):void
+        {
+
             //if (!cfg.visible)
                 //return;
+        }
 //
             //var text:String = defineText(cfg, newHealth, delta, flag, damageType);
 //

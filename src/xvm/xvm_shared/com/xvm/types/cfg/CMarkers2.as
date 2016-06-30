@@ -6,11 +6,10 @@ package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CMarkers extends Object implements ICloneable
+    public dynamic class CMarkers2 extends Object implements ICloneable
     {
-        public var enabled:*;
-        public var ally:CMarkers2;
-        public var enemy:CMarkers2;
+        public var alive:CMarkers3;
+        public var dead:CMarkers3;
 
         public function clone():*
         {

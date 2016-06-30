@@ -133,8 +133,8 @@ class VehicleMarkers(object):
                 return arena.bonusType if arena else None
             elif cmd == XVM_COMMAND.GET_MAP_SIZE:
                 return utils.getMapSize()
-            #elif cmd == XVM_COMMAND.GET_CLAN_ICON:
-            #    return (stats.getClanIcon(args[0]), True)
+            elif cmd == XVM_COMMAND.GET_CLAN_ICON:
+                return stats.getClanIcon(args[0])
             elif cmd == XVM_COMMAND.GET_MY_VEHCD:
                 return getVehCD(BigWorld.player().playerVehicleID)
             elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:

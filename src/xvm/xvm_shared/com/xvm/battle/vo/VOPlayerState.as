@@ -42,6 +42,7 @@ package com.xvm.battle.vo
         private var _vehicleStatus:uint;
         public var vehicleType:String;
         private var _isAlly:Boolean;
+        private var _isBlown:Boolean;
 
         // DAAPIVehicleStatsVO
         private var _frags:int = 0;
@@ -49,8 +50,8 @@ package com.xvm.battle.vo
         // XVM
         public var marksOnGun:Number = NaN;       // TODO: set & update
         public var spottedStatus:String = null;   // TODO: set & update
-        public var curHealth:Number = NaN;        // TODO: set & update
-        public var maxHealth:Number = NaN;        // TODO: set & update
+        public var _curHealth:Number = NaN;       // TODO: set & update
+        public var _maxHealth:Number = NaN;       // TODO: set & update
 
         public var damageInfo:VODamageInfo;       // TODO: set & update
         public var xmqpData:VOXmqpData;           // TODO: set & update
@@ -275,7 +276,45 @@ package com.xvm.battle.vo
 
         public function get isBlown():Boolean
         {
-            return curHealth < 0;
+            return _isBlown;
+        }
+
+        public function set isBlown(value:Boolean):void
+        {
+            _isBlown = value;
+        }
+
+        public function get curHealth():Number
+        {
+            return _curHealth;
+        }
+
+        public function set curHealth(value:Number):void
+        {
+            if (value < 0)
+            {
+                isBlown = true;
+                value = 0;
+            }
+            if (_curHealth != value)
+            {
+                _curHealth = value;
+                dispatchPlayerStateChangedEvent();
+            }
+        }
+
+        public function get maxHealth():Number
+        {
+            return _maxHealth;
+        }
+
+        public function set maxHealth(value:Number):void
+        {
+            if (_maxHealth != value)
+            {
+                _maxHealth = value;
+                dispatchPlayerStateChangedEvent();
+            }
         }
 
         public function VOPlayerState(data:Object = null)
