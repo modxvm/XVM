@@ -350,9 +350,6 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
     {
         //trace("Xvm::updateState(" + newState + ", " + isImmediate + "): " + vehicleState.getCurrentState());
 
-//        if (!initialized)
-//            ErrorHandler.setText("updateState: !initialized");
-
         m_isDead = newState == "dead";
 
         XVMUpdateStyle();
@@ -485,7 +482,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMUpdateDynamicTextFields():" + String(e));
+            Logger.err(e);
         }
     }
 
@@ -536,7 +533,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: initializeTextFields():" + String(e));
+            Logger.err(e);
         }
         //Logger.add(((new Date()).getTime() - start).toString() + " ms");
     }
@@ -628,7 +625,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: createTextField():" + String(e));
+            Logger.err(e);
         }
 
         return null;
@@ -682,7 +679,7 @@ class wot.VehicleMarkersManager.Xvm implements wot.VehicleMarkersManager.IVehicl
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMUpdateStyle():" + String(e));
+            Logger.err(e);
         }
 
         Cmd.profMethodEnd("Xvm.XVMUpdateStyle()");

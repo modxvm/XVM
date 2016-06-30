@@ -58,6 +58,17 @@ def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
     handle = base(self, mProv, symbol, active)
     return handle
 
+_exInfo = False
+@overrideMethod(MarkersManager, 'as_setShowExInfoFlagS')
+def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
+    if config.get('hotkeys/markersAltMode/enabled'):
+        global _exInfo
+        if config.get('hotkeys/markersAltMode/onHold'):
+            _exInfo = flag
+        elif flag:
+            _exInfo = not _exInfo
+        base(self, _exInfo)
+
 def as_xvm_cmdS(self, *args):
     if self._isDAAPIInited():
         return self.flashObject.as_xvm_cmd(*args)

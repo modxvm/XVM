@@ -101,7 +101,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
             proxy.setMarkerLabel(m_markerLabel);
 
         if (m_vehicleClass == null)
-            ErrorHandler.setText("INTERNAL ERROR: m_vehicleClass == null");
+            Logger.add("INTERNAL ERROR: m_vehicleClass == null");
 
         if (m_markerState != null)
         {

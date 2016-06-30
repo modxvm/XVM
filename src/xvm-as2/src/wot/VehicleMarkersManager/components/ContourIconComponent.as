@@ -2,7 +2,6 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GraphicsUtil;
 import com.xvm.IconLoader;
-import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.components.ContourIconProxy;
 
 class wot.VehicleMarkersManager.components.ContourIconComponent
@@ -37,7 +36,7 @@ class wot.VehicleMarkersManager.components.ContourIconComponent
 
                 if (!this.proxy.initialized)
                 {
-                    ErrorHandler.setText("INTERNAL ERROR: setupContourIconLoader(): proxy.iconLoader not initialized");
+                    Logger.add("INTERNAL ERROR: setupContourIconLoader(): proxy.iconLoader not initialized");
                     return;
                 }
 
@@ -112,7 +111,7 @@ class wot.VehicleMarkersManager.components.ContourIconComponent
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: updateContourIcon():" + String(e));
+            Logger.err(e);
         }
     }
 }

@@ -13,32 +13,24 @@ package com.xvm.vehiclemarkers.ui
     {
         public function XvmVehicleMarker()
         {
+            Logger.add(getQualifiedClassName(this));
             super();
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+        }
+
+        override protected function configUI():void
+        {
+            super.configUI();
+            //marker.m_markerLabel = "";
+            //marker.updateMarkerLabel();
+            //marker.update();
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             super.onDispose();
         }
 
         // PRIVATE
-
-        private function onConfigLoaded():void
-        {
-            try
-            {
-                Logger.addObject(arguments);
-                //marker.m_markerLabel = "";
-                //marker.updateMarkerLabel();
-                //marker.update();
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
 
     }
 }
