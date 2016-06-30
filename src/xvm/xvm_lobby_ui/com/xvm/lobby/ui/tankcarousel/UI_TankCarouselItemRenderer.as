@@ -123,28 +123,93 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
+        // price:IconText = null;
+        // infoText:TextField = null;
+        // additionalText:TextField = null;
+        // clanLock:ClanLockUI = null;
+        // actionPrice:ActionPrice = null;
+        // slot:TankCarouselRendererSlot = null;
         private function setupStandardFields():void
         {
-                //setupStandardField(vehicleIcon.tankTypeMc, cfg.fields.tankType);
+                var zoom:Number = cfg.zoom;
+                var w:int = int(ITEM_WIDTH * zoom);
+                var h:int = int(ITEM_HEIGHT * zoom);
 
-                //vehicleIcon.levelMc.visible = false;
-                //App.utils.scheduler.scheduleOnNextFrame(function():void {
-                    //if (vehicleIcon == null)
-                        //return;
-                    //setupStandardField(vehicleIcon.levelMc, cfg.fields.level);
-                    //vehicleIcon.levelMc.visible = true;
-                //});
+                setupStandardField(slot.tankIcon.tankTypeMc, cfg.fields.tankType);
 
-                //setupStandardField(vehicleIcon.xp, cfg.fields.xp);
-                //vehicleIcon.xp.x = w - vehicleIcon.xp.width + cfg.fields.xp.dx;
+                slot.tankIcon.levelMc.visible = false;
+                App.utils.scheduler.scheduleOnNextFrame(function():void {
+                    if (slot.tankIcon == null)
+                        return;
+                    setupStandardField(slot.tankIcon.levelMc, cfg.fields.level);
+                    slot.tankIcon.levelMc.visible = true;
+                });
 
-                //setupStandardField(vehicleIcon.multyXp, cfg.fields.multiXp);
-                //vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width + cfg.fields.multiXp.dx;
+                setupStandardField(slot.tankIcon.xp, cfg.fields.xp);
+                slot.tankIcon.xp.x = w - slot.tankIcon.xp.width + cfg.fields.xp.dx;
 
-                //setupTankNameField(cfg.fields.tankName);
+                setupStandardField(slot.tankIcon.multyXp, cfg.fields.multiXp);
+                slot.tankIcon.multyXp.x = w - slot.tankIcon.multyXp.width + cfg.fields.multiXp.dx;
 
-                //setupStatusTextField(cfg.fields.statusText);
-                //setupClanLockField(cfg.fields.clanLock);
+                setupTankNameField(cfg.fields.tankName);
+
+                setupInfoTextField(cfg.fields.statusText);
+                setupClanLockField(cfg.fields.clanLock);
+        }
+
+        private function setupStandardField(mc:MovieClip, cfg:Object):void
+        {
+            slot.tankIcon.removeChild(mc);
+            _extraFields.addChild(mc);
+
+            mc.scaleX = mc.scaleY = cfg.scale;
+            mc.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            mc.x += cfg.dx;
+            mc.y += cfg.dy;
+        }
+
+        private var orig_tankIcon_tankNameField_y:Number = NaN;
+        private function setupTankNameField(cfg:Object):void
+        {
+            slot.tankIcon.tankNameField.scaleX = slot.tankIcon.tankNameField.scaleY =
+                slot.tankIcon.tankNameBg.scaleX = slot.tankIcon.tankNameBg.scaleY = cfg.scale;
+            slot.tankIcon.tankNameField.alpha = slot.tankIcon.tankNameBg.alpha =
+                cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            slot.tankIcon.tankNameField.x = 2 + cfg.dx;
+            slot.tankIcon.tankNameField.width = ITEM_WIDTH - 4;
+            if (isNaN(orig_tankIcon_tankNameField_y))
+                orig_tankIcon_tankNameField_y = slot.tankIcon.tankNameField.y;
+            slot.tankIcon.tankNameField.y = orig_tankIcon_tankNameField_y + cfg.dy;
+            slot.tankIcon.tankNameBg.x = slot.tankIcon.tankNameField.x + slot.tankIcon.tankNameField.width - slot.tankIcon.tankNameBg.width;
+            slot.tankIcon.tankNameBg.y = slot.tankIcon.tankNameField.y + slot.tankIcon.tankNameField.height - slot.tankIcon.tankNameBg.height;
+        }
+
+        private var orig_infoText_x:Number = NaN;
+        private var orig_infoText_y:Number = NaN;
+        private function setupInfoTextField(cfg:Object):void
+        {
+            infoText.scaleX = infoText.scaleY = cfg.scale;
+            infoText.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            if (isNaN(orig_infoText_x))
+                orig_infoText_x = infoText.x;
+            infoText.x = orig_infoText_x + cfg.dx;
+            if (isNaN(orig_infoText_y))
+                orig_infoText_y = infoText.y;
+            infoText.y = orig_infoText_y + cfg.dy;
+        }
+
+        private var orig_clanLock_x:Number = NaN;
+        private var orig_clanLock_y:Number = NaN;
+        private function setupClanLockField(cfg:Object):void
+        {
+            clanLock.scaleX = clanLock.scaleY = cfg.scale;
+            clanLock.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            if (isNaN(orig_clanLock_x))
+                orig_clanLock_x = clanLock.x;
+            clanLock.x = orig_clanLock_x + cfg.dx;
+            if (isNaN(orig_clanLock_y))
+                orig_clanLock_y = clanLock.y;
+            clanLock.y = orig_clanLock_y + cfg.dy;
         }
 
         private function createMask(x:Number, y:Number, width:Number, height:Number):Shape
