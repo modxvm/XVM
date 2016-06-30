@@ -192,20 +192,10 @@ package com.xvm
             callback(m_dict);
         }
 
-        /*public static function RegisterGlobalMacrosDataDelayed(onEventName:String):void
+        public static function RegisterVehicleMarkerData(callback:Function):void
         {
-            _RegisterGlobalMacrosDataDelayed(onEventName);
-        }*/
-
-        /*public static function RegisterZoomIndicatorData(zoom:Number):void
-        {
-            _RegisterZoomIndicatorData(zoom);
-        }*/
-
-        /*public static function RegisterMarkerData(pname:String, data:Object):void
-        {
-            _RegisterMarkerData(pname, data);
-        }*/
+            callback(m_dict);
+        }
 
         // lobby
 

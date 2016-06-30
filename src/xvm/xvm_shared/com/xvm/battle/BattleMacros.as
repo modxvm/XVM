@@ -308,22 +308,6 @@ package com.xvm.battle
         }
         */
 
-        /*
-        private function _RegisterMarkerData(pname:String, data:Object):void
-        {
-            //Logger.addObject(data);
-
-            if (!data)
-                return;
-            if (!m_dict.hasOwnProperty(pname))
-                m_dict[pname] = new Object();
-            var pdata:Object = m_dict[pname];
-
-            // {{turret}}
-            pdata["turret"] = data.turret || "";
-        }
-        */
-
         // helpers
 
         /**

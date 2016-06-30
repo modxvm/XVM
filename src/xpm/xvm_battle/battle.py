@@ -62,17 +62,17 @@ class SPOTTED_STATUS(object):
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, _g_battle.onXfwCommand)
-    g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, _g_battle.onAppInitialized)
-    g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, _g_battle.onAppDestroyed)
+    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
+    g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
+    g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
 
 BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, _g_battle.onXfwCommand)
-    g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, _g_battle.onAppInitialized)
-    g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, _g_battle.onAppDestroyed)
+    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
+    g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
+    g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
 
 
 #####################################################################
@@ -88,15 +88,15 @@ def _PlayerAvatar_onBecomePlayer(base, self):
         if player is not None and hasattr(player, 'arena'):
             arena = BigWorld.player().arena
             if arena:
-                arena.onVehicleKilled += _g_battle.onVehicleKilled
-                arena.onAvatarReady += _g_battle.onAvatarReady
-                arena.onVehicleStatisticsUpdate += _g_battle.onVehicleStatisticsUpdate
+                arena.onVehicleKilled += g_battle.onVehicleKilled
+                arena.onAvatarReady += g_battle.onAvatarReady
+                arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
-            ctrl.onMinimapVehicleAdded += _g_battle.onMinimapVehicleAdded
-            ctrl.onMinimapVehicleRemoved += _g_battle.onMinimapVehicleRemoved
-            ctrl.onVehicleFeedbackReceived += _g_battle.onVehicleFeedbackReceived
-        _g_battle.onStartBattle()
+            ctrl.onMinimapVehicleAdded += g_battle.onMinimapVehicleAdded
+            ctrl.onMinimapVehicleRemoved += g_battle.onMinimapVehicleRemoved
+            ctrl.onVehicleFeedbackReceived += g_battle.onVehicleFeedbackReceived
+        g_battle.onStartBattle()
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -107,14 +107,14 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
         if player is not None and hasattr(player, 'arena'):
             arena = BigWorld.player().arena
             if arena:
-                arena.onVehicleKilled -= _g_battle.onVehicleKilled
-                arena.onAvatarReady -= _g_battle.onAvatarReady
-                arena.onVehicleStatisticsUpdate -= _g_battle.onVehicleStatisticsUpdate
+                arena.onVehicleKilled -= g_battle.onVehicleKilled
+                arena.onAvatarReady -= g_battle.onAvatarReady
+                arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
-            ctrl.onMinimapVehicleAdded -= _g_battle.onMinimapVehicleAdded
-            ctrl.onMinimapVehicleRemoved -= _g_battle.onMinimapVehicleRemoved
-            ctrl.onVehicleFeedbackReceived -= _g_battle.onVehicleFeedbackReceived
+            ctrl.onMinimapVehicleAdded -= g_battle.onMinimapVehicleAdded
+            ctrl.onMinimapVehicleRemoved -= g_battle.onMinimapVehicleRemoved
+            ctrl.onVehicleFeedbackReceived -= g_battle.onVehicleFeedbackReceived
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
@@ -136,7 +136,7 @@ def _PlayerAvatar_onLeaveWorld(self):
 @registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
 def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     # debug("> _PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
-    _g_battle.updatePlayerState(vehicle.id, INV.ALL)
+    g_battle.updatePlayerState(vehicle.id, INV.ALL)
 
 # on any player marker lost
 @registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
@@ -146,13 +146,13 @@ def _PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
 
 @registerEvent(PlayerAvatar, 'updateVehicleHealth')
 def _PlayerAvatar_setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
-    _g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
+    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
 
 # on any vehicle hit received
 @registerEvent(Vehicle, 'onHealthChanged')
 def _Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     # debug("> _Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    _g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
+    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
     if attackerID == BigWorld.player().playerVehicleID:
         as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_HITLOG_DATA, self.id, attackReasonID, newHealth)
 
@@ -167,7 +167,7 @@ def _BattleArenaController_updateVehiclesInfo(self, updated, arenaDP):
                 if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
                     for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(vo.team)):
                         if vInfoVO.squadIndex > 0:
-                            _g_battle.updatePlayerState(vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
+                            g_battle.updatePlayerState(vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -262,6 +262,16 @@ class Battle(object):
         except Exception, ex:
             err(traceback.format_exc())
 
+    def invalidateArenaInfo(self):
+        #debug('battle: invalidateArenaInfo')
+        if self.battle_page:
+            ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
+            if ctrl:
+                ctrl.invalidateArenaInfo()
+            # update vehicles data
+            for (vehicleID, vData) in BigWorld.player().arena.vehicles.iteritems():
+                self.updatePlayerState(vehicleID, INV.ALL)
+
 
     #####################################################################
     # onXfwCommand
@@ -288,14 +298,7 @@ class Battle(object):
                 return (None, True)
 
             elif cmd == XVM_BATTLE_COMMAND.BATTLE_CTRL_SET_VEHICLE_DATA:
-                if self.battle_page:
-                    ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
-                    if ctrl:
-                        ctrl.invalidateArenaInfo()
-                    # update vehicles data
-                    for (vehicleID, vData) in BigWorld.player().arena.vehicles.iteritems():
-                        self.updatePlayerState(vehicleID, INV.ALL)
-
+                self.invalidateArenaInfo()
                 return (None, True)
 
             elif cmd == XVM_BATTLE_COMMAND.CAPTURE_BAR_GET_BASE_NUM_TEXT:
@@ -312,4 +315,4 @@ class Battle(object):
 
         return (None, False)
 
-_g_battle = Battle()
+g_battle = Battle()

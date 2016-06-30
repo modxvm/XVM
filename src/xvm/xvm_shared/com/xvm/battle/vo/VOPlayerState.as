@@ -36,7 +36,7 @@ package com.xvm.battle.vo
         public var vehicleGuiName:String;
         public var vehicleIcon:String;
         public var vehicleIconName:String;
-        public var _vehicleID:Number;
+        private var _vehicleID:Number;
         public var vehicleLevel:int;
         public var vehicleName:String;
         private var _vehicleStatus:uint;
@@ -278,8 +278,10 @@ package com.xvm.battle.vo
             return curHealth < 0;
         }
 
-        public function VOPlayerState(data:Object)
+        public function VOPlayerState(data:Object = null)
         {
+            if (!data)
+                return;
             accountDBID = data.accountDBID;
             clanAbbrev = data.clanAbbrev;
             invitationStatus = data.invitationStatus;

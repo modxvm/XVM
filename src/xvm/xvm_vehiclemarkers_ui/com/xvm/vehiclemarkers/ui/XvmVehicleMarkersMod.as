@@ -24,6 +24,19 @@ package com.xvm.vehiclemarkers.ui
             Logger.counterPrefix = "V";
             Xfw.cmd(XvmCommands.INITIALIZED);
             addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xfw.addCommandListener("BC_addVehiclesInfo", BattleState.instance.addVehiclesInfo);
+            Xfw.addCommandListener("BC_setVehicleStats", BattleState.instance.setVehicleStats);
+            Xfw.addCommandListener("BC_setVehiclesData", BattleState.instance.setVehiclesData);
+            Xfw.addCommandListener("BC_updateVehicleStatus", BattleState.instance.updateVehicleStatus);
+            Xfw.addCommandListener("BC_updateVehiclesInfo", BattleState.instance.updateVehiclesInfo);
+            Xfw.addCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
+            Xfw.addCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);
+            Xfw.addCommandListener("BC_updateInvitationsStatuses", BattleState.instance.updateInvitationsStatuses);
+            Xfw.addCommandListener("BC_updatePlayerStatus", BattleState.instance.updatePlayerStatus);
+            Xfw.addCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
+            Xfw.addCommandListener("BC_updateVehiclesStats", BattleState.instance.updateVehiclesStats);
+            Xfw.addCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
+            Xfw.addCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
             super();
         }
 

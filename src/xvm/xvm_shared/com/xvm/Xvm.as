@@ -8,6 +8,7 @@ package com.xvm
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
+    import com.xvm.extraFields.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
@@ -25,6 +26,7 @@ package com.xvm
     VehicleInfo;
     XvmCommands;
     Utils;
+    TextExtraField;
 
     // Battle
     BattleCommands;

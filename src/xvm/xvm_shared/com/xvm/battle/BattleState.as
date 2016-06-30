@@ -180,6 +180,7 @@ package com.xvm.battle
 
         public function setVehiclesData(data:Object):void
         {
+            //Logger.addObject(data, 1, "setVehiclesData");
             try
             {
                 _playersDataVO = new VOPlayersData(data);
@@ -193,25 +194,7 @@ package com.xvm.battle
 
         public function setVehicleStats(data:Object):void
         {
-            try
-            {
-                if (data.leftFrags)
-                {
-                    _playersDataVO.updateVehicleFrags(data.leftFrags);
-                }
-                if (data.rightFrags)
-                {
-                    _playersDataVO.updateVehicleFrags(data.rightFrags);
-                }
-                if (data.totalStats)
-                {
-                    _playersDataVO.updateTotalStats(data.totalStats);
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            Logger.addObject(data, 1, "setVehicleStats");
         }
 
         public function updateInvitationsStatuses(data:Object) : void
@@ -249,6 +232,7 @@ package com.xvm.battle
 
         public function updatePlayerStatus(data:Object):void
         {
+            //Logger.addObject(data, 1, "updatePlayerStatus");
             try
             {
                 _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status });
@@ -273,16 +257,17 @@ package com.xvm.battle
 
         public function updateVehiclesInfo(data:Object):void
         {
+            //Logger.addObject(data, 1, "updateVehiclesInfo");
             try
             {
                 if (data.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = data.leftCorrelationIDs;
+                    _playersDataVO.leftCorrelationIDs = new Vector.<Number>(data.leftCorrelationIDs);
                 if (data.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = data.rightCorrelationIDs;
+                    _playersDataVO.rightCorrelationIDs = new Vector.<Number>(data.rightCorrelationIDs);
                 if (data.leftVehiclesIDs)
-                    _playersDataVO.leftVehiclesIDs = data.leftVehiclesIDs;
+                    _playersDataVO.leftVehiclesIDs = new Vector.<Number>(data.leftVehiclesIDs);
                 if (data.rightVehiclesIDs)
-                    _playersDataVO.rightVehiclesIDs = data.rightVehiclesIDs;
+                    _playersDataVO.rightVehiclesIDs = new Vector.<Number>(data.rightVehiclesIDs);
                 if (data.leftVehicleInfos)
                     _playersDataVO.updateVehicleInfos(data.leftVehicleInfos);
                 if (data.rightVehicleInfos)
@@ -296,22 +281,42 @@ package com.xvm.battle
 
         public function updateVehiclesStats(data:Object):void
         {
-            setVehicleStats(data);
+            //Logger.addObject(data, 1, "updateVehiclesStats");
+            try
+            {
+                if (data.leftFrags)
+                {
+                    _playersDataVO.updateVehicleFrags(data.leftFrags);
+                }
+                if (data.rightFrags)
+                {
+                    _playersDataVO.updateVehicleFrags(data.rightFrags);
+                }
+                if (data.totalStats)
+                {
+                    _playersDataVO.updateTotalStats(data.totalStats);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         public function updateVehicleStatus(data:Object):void
         {
+            //Logger.addObject(data, 1, "updateVehicleStatus");
             try
             {
                 _playersDataVO.updatePlayerState(data.vehicleID, { vehicleStatus: data.status });
                 if (data.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = data.rightCorrelationIDs;
+                    _playersDataVO.rightCorrelationIDs = new Vector.<Number>(data.rightCorrelationIDs);
                 if (data.rightVehiclesIDs)
-                    _playersDataVO.rightVehiclesIDs = data.rightVehiclesIDs;
+                    _playersDataVO.rightVehiclesIDs = new Vector.<Number>(data.rightVehiclesIDs);
                 if (data.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = data.leftCorrelationIDs;
+                    _playersDataVO.leftCorrelationIDs = new Vector.<Number>(data.leftCorrelationIDs);
                 if (data.leftVehiclesIDs)
-                    _playersDataVO.leftVehiclesIDs = data.leftVehiclesIDs;
+                    _playersDataVO.leftVehiclesIDs = new Vector.<Number>(data.leftVehiclesIDs);
                 if (data.totalStats)
                     _playersDataVO.updateTotalStats(data.totalStats);
             }

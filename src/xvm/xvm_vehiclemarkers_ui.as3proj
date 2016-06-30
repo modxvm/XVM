@@ -54,6 +54,7 @@
   <libraryPaths>
     <element path="..\xfw\~output\swc\xfw_shared.swc" />
     <element path="..\..\~output\swc\xvm_shared.swc" />
+    <element path="swc\greensock.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

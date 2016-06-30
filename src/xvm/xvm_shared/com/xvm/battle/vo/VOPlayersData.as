@@ -84,10 +84,10 @@ package com.xvm.battle.vo
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
             }
 
-            leftCorrelationIDs = data.leftCorrelationIDs;
-            rightCorrelationIDs = data.rightCorrelationIDs;
-            leftVehiclesIDs = data.leftVehiclesIDs;
-            rightVehiclesIDs = data.rightVehiclesIDs;
+            leftCorrelationIDs = new Vector.<Number>(data.leftCorrelationIDs);
+            rightCorrelationIDs = new Vector.<Number>(data.rightCorrelationIDs);
+            leftVehiclesIDs = new Vector.<Number>(data.leftVehiclesIDs);
+            rightVehiclesIDs = new Vector.<Number>(data.rightVehiclesIDs);
         }
 
         public function get(vehicleID:Number):VOPlayerState

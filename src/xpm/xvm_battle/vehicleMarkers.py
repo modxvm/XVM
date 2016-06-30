@@ -22,14 +22,14 @@ import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 
 from commands import *
-
+from battle import g_battle
 
 #####################################################################
 # initialization/finalization
 
 def onConfigLoaded(self, e=None):
-    _g_markers.enabled = config.get('markers/enabled', True)
-    _g_markers.respondConfig()
+    g_markers.enabled = config.get('markers/enabled', True)
+    g_markers.respondConfig()
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
@@ -46,15 +46,15 @@ def fini():
 @overrideMethod(MarkersManager, '__init__')
 def _MarkersManager__init__(base, self, parentUI):
     base(self, parentUI)
-    _g_markers.init(self)
+    g_markers.init(self)
 
 @overrideMethod(MarkersManager, 'beforeDelete')
 def _MarkersManager_beforeDelete(base, self):
-    _g_markers.destroy()
+    g_markers.destroy()
 
 @overrideMethod(MarkersManager, 'createMarker')
 def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
-    if _g_markers.active:
+    if g_markers.active:
         symbol = 'com.xvm.vehiclemarkers.ui::XvmVehicleMarker'
     #debug('createMarker: ' + str(symbol))
     handle = base(self, mProv, symbol, active)
@@ -145,11 +145,18 @@ class VehicleMarkers(object):
             err(traceback.format_exc())
         return None
 
-    def respondConfig(self):
+    def call(self, *args):
         try:
             if self.manager and self.initialized:
-                if self.active:
-                    self.manager.as_xvm_cmdS(
+                self.manager.as_xvm_cmdS(*args)
+        except Exception, ex:
+            err(traceback.format_exc())
+
+    def respondConfig(self):
+        try:
+            if self.initialized:
+                if self.enabled:
+                    self.call(
                         XVM_COMMAND.AS_SET_CONFIG,
                         config.config_data,
                         config.lang_data,
@@ -157,7 +164,7 @@ class VehicleMarkers(object):
                         config.networkServicesSettings.__dict__,
                         IS_DEVELOPMENT)
                 else:
-                    self.manager.as_xvm_cmdS(
+                    self.call(
                         XVM_COMMAND.AS_SET_CONFIG,
                         {'markers':{'enabled':False}},
                         {'locale':{}},
@@ -180,7 +187,7 @@ class VehicleMarkers(object):
         except Exception, ex:
             err(traceback.format_exc())
 
-_g_markers = VehicleMarkers()
+g_markers = VehicleMarkers()
 
 ## TODO:0.9.15.1
 ##@overrideMethod(MarkersManager, 'invokeMarker')
