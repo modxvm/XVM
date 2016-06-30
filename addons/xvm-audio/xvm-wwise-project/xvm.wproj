@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="Project" SchemaVersion="70">
 	<ProjectInfo>
-		<Project Name="xvm" ID="{FFEBB765-9548-4DF3-BD96-9104DBF21019}">
+		<Project Name="wwise_project" ID="{FFEBB765-9548-4DF3-BD96-9104DBF21019}">
 			<Platforms>
 				<Platform Name="Windows" ReferencePlatform="Windows" ID="{669252ED-7E98-477F-AA28-8A0328562A21}"/>
 			</Platforms>
@@ -8956,6 +8956,11 @@
 						<Property Name="Level" Type="Real32">
 							<ValueList>
 								<Value>0</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Reverb" Type="bool">
+							<ValueList>
+								<Value>True</Value>
 							</ValueList>
 						</Property>
 						<Property Name="Reverb_alpha" Type="Real32">

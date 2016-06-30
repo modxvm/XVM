@@ -53,34 +53,34 @@
       //
       // Sixth sense perk
       // Перк Шестое чувство
-      "xvm_sixthSense": "sixthSense",
+      "xvm_sixthSense": "xvm_sixthSense",
       // Sixth sense perk for Т-34-85 Rudy
       // Перк Шестое чувство для Т-34-85 Rudy
-      "xvm_sixthSenseRudy": "sixthSenseRudy",
+      "xvm_sixthSenseRudy": "xvm_sixthSenseRudy",
       // Enemy detection (Use in together with disable original enemy detection event) 
       // Обнаружение противника (Используйте вместе с отключением оригинального звука обнаружения противника)
       "xvm_enemySighted": "",      
-      //"xvm_enemySighted": "enemySighted",      
+      //"xvm_enemySighted": "xvm_enemySighted",      
       // Fire alert
       // Пожар
-      "xvm_fireAlert": "fireAlert",
+      "xvm_fireAlert": "xvm_fireAlert",
       // Damage ammoBay
       // Повреждение боеукладки
-      "xvm_ammoBay": "ammoBay",
+      "xvm_ammoBay": "xvm_ammoBay",
       // Notifications informing about the imminent end of the battle (Use in together with disable original event)
       // Оповещения сообщающие о скором завершении боя (Используйте вместе с отключением оригинального звука)
       "xvm_battleEnd_5_min": "",
-      //"xvm_battleEnd_5_min": "battleEnd_5_min",
+      //"xvm_battleEnd_5_min": "xvm_battleEnd_5_min",
       "xvm_battleEnd_3_min": "",
-      //"xvm_battleEnd_3_min": "battleEnd_3_min",
+      //"xvm_battleEnd_3_min": "xvm_battleEnd_3_min",
       "xvm_battleEnd_2_min": "",
-      //"xvm_battleEnd_2_min": "battleEnd_2_min",
+      //"xvm_battleEnd_2_min": "xvm_battleEnd_2_min",
       "xvm_battleEnd_1_min": "",
-      //"xvm_battleEnd_1_min": "battleEnd_1_min",
+      //"xvm_battleEnd_1_min": "xvm_battleEnd_1_min",
       "xvm_battleEnd_30_sec": "",
-      //"xvm_battleEnd_30_sec": "battleEnd_30_sec",
+      //"xvm_battleEnd_30_sec": "xvm_battleEnd_30_sec",
       "xvm_battleEnd_5_sec": ""
-      //"xvm_battleEnd_5_sec": "battleEnd_5_sec"
+      //"xvm_battleEnd_5_sec": "xvm_battleEnd_5_sec"
     }
   }
 }
