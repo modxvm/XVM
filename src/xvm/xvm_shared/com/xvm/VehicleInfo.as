@@ -83,6 +83,8 @@ package com.xvm
         private function onVehicleInfoData(data_array:Array):void
         {
             this.clear();
+            if (data_array == null)
+                return;
             //Logger.add("onVehicleInfoData(): " + json_str);
             try
             {

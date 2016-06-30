@@ -10,7 +10,6 @@ package com.xvm.vehiclemarkers.ui
     import flash.display.*;
     import flash.external.*;
     import flash.events.*;
-    import flash.utils.Timer;
 
     XvmVehicleMarker;
 
@@ -23,6 +22,7 @@ package com.xvm.vehiclemarkers.ui
         {
             Xfw.registerCommandProvider(xvm_cmd);
             Logger.counterPrefix = "V";
+            Xfw.cmd(XvmCommands.INITIALIZED);
             addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             super();
         }
@@ -39,7 +39,8 @@ package com.xvm.vehiclemarkers.ui
         {
             try
             {
-                if (!_initialized)
+                //Logger.add("onConfigLoaded: enabled=" + Config.config.markers.enabled);
+                if (!_initialized && Config.config.markers.enabled)
                 {
                     _initialized = true;
                     initialize();

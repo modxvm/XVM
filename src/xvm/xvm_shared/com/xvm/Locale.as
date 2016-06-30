@@ -16,7 +16,7 @@ package com.xvm
 
         public static function setupLanguage(lang_data:Object):void
         {
-            s_lang = lang_data.locale;
+            s_lang = lang_data ? lang_data.locale : null;
             if (s_lang == null)
                 Logger.add("Locale: \"locale\" section is not found in the file");
         }

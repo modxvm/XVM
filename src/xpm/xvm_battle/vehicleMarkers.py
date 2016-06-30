@@ -9,13 +9,16 @@ import weakref
 import BigWorld
 import game
 from gui.shared import g_eventBus
-#from gui.battle_control import g_sessionProvider
+from gui.battle_control import g_sessionProvider
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
 
 from xfw import *
 from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
+import xvm_main.python.python_macro as python_macro
+import xvm_main.python.stats as stats
+import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 
 from commands import *
@@ -26,8 +29,7 @@ from commands import *
 
 def onConfigLoaded(self, e=None):
     _g_markers.enabled = config.get('markers/enabled', True)
-    if _g_markers.enabled:
-        _g_markers.respondConfig()
+    _g_markers.respondConfig()
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
@@ -68,6 +70,8 @@ def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
         elif flag:
             _exInfo = not _exInfo
         base(self, _exInfo)
+    else:
+        base(self, _exInfo)
 
 def as_xvm_cmdS(self, *args):
     if self._isDAAPIInited():
@@ -87,6 +91,14 @@ class VehicleMarkers(object):
     def active(self):
         return self.enabled and self.initialized
 
+    @property
+    def manager(self):
+        return self.managerRef() if self.managerRef else None
+
+    @property
+    def plugins(self):
+        return self.manager._MarkersManager__plugins if self.manager else None
+
     def init(self, manager):
         self.managerRef = weakref.ref(manager)
         manager.addExternalCallback('xvm.cmd', self.onVMCommand)
@@ -104,10 +116,29 @@ class VehicleMarkers(object):
                 log(*args)
             elif cmd == XVM_VM_COMMAND.INITIALIZED:
                 self.initialized = True
-                log('[VM] initialized')
+                log('[VM]    initialized')
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()
-                return (None, True)
+            elif cmd == XVM_COMMAND.PYTHON_MACRO:
+                return python_macro.process_python_macro(args[0])
+            #elif cmd == XVM_COMMAND.GET_PLAYER_NAME:
+            #    return (BigWorld.player().name, True)
+            #elif cmd == XVM_COMMAND.GET_SVC_SETTINGS:
+            #    return (config.networkServicesSettings.__dict__, True)
+            elif cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
+                arena = getattr(BigWorld.player(), 'arena', None)
+                return arena.extraData.get('battleLevel', 0) if arena else None
+            elif cmd == XVM_COMMAND.GET_BATTLE_TYPE:
+                arena = getattr(BigWorld.player(), 'arena', None)
+                return arena.bonusType if arena else None
+            elif cmd == XVM_COMMAND.GET_MAP_SIZE:
+                return utils.getMapSize()
+            #elif cmd == XVM_COMMAND.GET_CLAN_ICON:
+            #    return (stats.getClanIcon(args[0]), True)
+            elif cmd == XVM_COMMAND.GET_MY_VEHCD:
+                return getVehCD(BigWorld.player().playerVehicleID)
+            elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
+                stats.getBattleStat(args)
             else:
                 warn('Unknown command: {}'.format(cmd))
         except Exception, ex:
@@ -115,16 +146,39 @@ class VehicleMarkers(object):
         return None
 
     def respondConfig(self):
-        if self.managerRef:
-            manager = self.managerRef()
-            if manager:
-                manager.as_xvm_cmdS(
-                    XVM_COMMAND.AS_SET_CONFIG,
-                    config.config_data,
-                    config.lang_data,
-                    vehinfo.getVehicleInfoDataArray(),
-                    config.networkServicesSettings.__dict__,
-                    IS_DEVELOPMENT)
+        try:
+            if self.manager and self.initialized:
+                if self.active:
+                    self.manager.as_xvm_cmdS(
+                        XVM_COMMAND.AS_SET_CONFIG,
+                        config.config_data,
+                        config.lang_data,
+                        vehinfo.getVehicleInfoDataArray(),
+                        config.networkServicesSettings.__dict__,
+                        IS_DEVELOPMENT)
+                else:
+                    self.manager.as_xvm_cmdS(
+                        XVM_COMMAND.AS_SET_CONFIG,
+                        {'markers':{'enabled':False}},
+                        {'locale':{}},
+                        None,
+                        None,
+                        IS_DEVELOPMENT)
+                self.recreateMarkers()
+        except Exception, ex:
+            err(traceback.format_exc())
+
+    def recreateMarkers(self):
+        try:
+            if self.plugins:
+                plugin = self.plugins.getPlugin('vehicles')
+                if plugin:
+                    arenaDP = g_sessionProvider.getArenaDP()
+                    for vInfo in arenaDP.getVehiclesInfoIterator():
+                        plugin._destroyVehicleMarker(vInfo.vehicleID)
+                        plugin.addVehicleInfo(vInfo, arenaDP)
+        except Exception, ex:
+            err(traceback.format_exc())
 
 _g_markers = VehicleMarkers()
 

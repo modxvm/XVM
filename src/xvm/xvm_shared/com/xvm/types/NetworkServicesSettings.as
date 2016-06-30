@@ -27,7 +27,10 @@ package com.xvm.types
 
         public function NetworkServicesSettings(data:Object)
         {
-            super(data);
+            if (data != null)
+            {
+                super(data);
+            }
         }
     }
 }
