@@ -19,6 +19,8 @@
         private var _xValue:Number = 0;
         private var _yValue:Number = 0;
         private var _bindToIconOffset:Number = 0;
+        private var _offsetX:Number = 0;
+        private var _offsetY:Number = 0;
         private var _widthValue:Number = NaN;
         private var _heightValue:Number = NaN;
         private var _colorSchemeNameValue:String = null;
@@ -126,7 +128,7 @@
             }
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
         {
             var needAlign:Boolean = false;
 
@@ -220,6 +222,8 @@
                 bindToIconOffset = 0;
             }
             _bindToIconOffset = bindToIconOffset;
+            _offsetX = offsetX;
+            _offsetY = offsetY;
             if (cfg.src != null)
             {
                 if (Macros.IsCached(cfg.src, options))
@@ -260,8 +264,8 @@
 
         private function align():void
         {
-            x = isLeftPanel ? (_xValue + _bindToIconOffset) : (-_xValue + _bindToIconOffset);
-            y = _yValue;
+            x = isLeftPanel ? (_xValue + _bindToIconOffset + _offsetX) : (-_xValue + _bindToIconOffset + _offsetX);
+            y = _yValue + _offsetY;
             if (!isNaN(_widthValue))
                 width = _widthValue;
             if (!isNaN(_heightValue))

@@ -13,7 +13,7 @@ package com.xvm.types.cfg
         public var y:*;
         public var alpha:*;
         public var color:*;
-        public var font:*;
+        public var textFormat:CTextFormat;
         public var shadow:CShadow;
         public var speed:*;
         public var maxRange:*;

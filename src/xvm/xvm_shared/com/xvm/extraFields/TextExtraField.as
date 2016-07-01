@@ -27,7 +27,7 @@
         private var _textValue:String = null;
         private var _colorSchemeNameValue:String = null;
 
-        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null)
+        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null, defaultAlign:String = null)
         {
             super();
 
@@ -45,8 +45,10 @@
             width = _bounds == null ? DEFAULT_TEXT_FIELD_WIDTH : _bounds.width;
             height = _bounds == null ? DEFAULT_TEXT_FIELD_HEIGHT : _bounds.height;
 
-            var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
-            cfg.align = Macros.FormatStringGlobal(cfg.align, defaultAlign);
+            if (defaultAlign == null)
+                defaultAlign = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
+            var align:String = cfg.align != null ? cfg.align : cfg.textFormat != null ? cfg.textFormat.align : null;
+            cfg.align = Macros.FormatStringGlobal(align, defaultAlign);
             cfg.bindToIcon = Macros.FormatBooleanGlobal(cfg.bindToIcon, false);
             antiAliasType = Macros.FormatStringGlobal(cfg.antiAliasType, AntiAliasType.ADVANCED);
             TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_NONE));
@@ -157,7 +159,7 @@
 
             if (cfg.textFormat != null)
             {
-                if (!setupTextFormat(cfg.font, options))
+                if (!setupTextFormat(cfg.textFormat, options))
                 {
                     cfg.textFormat = null;
                 }
@@ -206,6 +208,8 @@
                 isDynamic = true;
             }
 
+            if (cfg.color == null)
+                cfg.color = "{{c:system}}";
             value = Macros.FormatNumber(cfg.color, options, Number(Utils.DEFAULT_TEXT_FORMAT.color), true);
             if (Macros.IsCached(cfg.color, options))
             {
@@ -411,7 +415,7 @@
             return isDynamic;
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
         {
             var needAlign:Boolean = false;
 
@@ -555,6 +559,10 @@
                     }
                 }
             }
+            if (cfg.textFormat != null)
+            {
+                defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, options);
+            }
             if (cfg.shadow != null)
             {
                 filters = Utils.createShadowFiltersFromConfig(cfg.shadow, options);
@@ -562,8 +570,8 @@
 
             if (needAlign)
             {
-                x = _isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
-                y = _yValue;
+                x = _isLeftPanel ? (_xValue + bindToIconOffset + offsetX) : (-_xValue + bindToIconOffset + offsetX);
+                y = _yValue + offsetY;
                 if (!isNaN(_widthValue))
                     width = _widthValue;
                 if (!isNaN(_heightValue))

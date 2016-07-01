@@ -24,7 +24,8 @@ package com.xvm.extraFields
         private var _layout:String;
         private var _isLeftPanel:Boolean;
 
-        public function ExtraFields(formats:Array, isLeftPanel:Boolean = true, getSchemeNameForText:Function = null, getSchemeNameForImage:Function = null, bounds:Rectangle = null, layout:String = null):void
+        public function ExtraFields(formats:Array, isLeftPanel:Boolean = true, getSchemeNameForText:Function = null, getSchemeNameForImage:Function = null,
+            bounds:Rectangle = null, layout:String = null, defaultAlign:String = null):void
         {
             mouseEnabled = false;
             mouseChildren = false;
@@ -68,7 +69,7 @@ package com.xvm.extraFields
                 {
                     addChild(format.src != null
                         ? new (App.utils.classFactory.getClass("com.xvm.extraFields::ImageExtraField"))(format, isLeftPanel, getSchemeNameForImage) // TODO: make ImageExtraField shared
-                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds));
+                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds, defaultAlign));
                 }
             }
         }
@@ -78,14 +79,14 @@ package com.xvm.extraFields
             super.configUI();
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
         {
             for (var i:int = 0; i < this.numChildren; ++i)
             {
                 var child:IExtraField = this.getChildAt(i) as IExtraField;
                 if (child)
                 {
-                    child.update(options, bindToIconOffset);
+                    child.update(options, bindToIconOffset, offsetX, offsetY);
                     if (_bounds && _layout)
                     {
                         if (_layout == "horizontal")

@@ -59,6 +59,7 @@ package com.xvm.types.cfg
             cloned.bindToIcon = bindToIcon;
             cloned.src = src;
             cloned.format = format;
+            cloned.textFormat = textFormat ? textFormat.clone() : null;
             cloned.shadow = shadow ? shadow.clone() : null;
             cloned.highlight = highlight;
             return cloned;

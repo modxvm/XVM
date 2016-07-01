@@ -58,15 +58,21 @@ package com.xvm.vehiclemarkers.ui.components
                 {
                     var playerState:VOPlayerState = e.playerState;
 
+                    if (cfg.border.color == null)
+                        cfg.border.color = "{{c:system}}";
                     border.graphics.clear();
                     border.graphics.beginFill(
-                        Macros.FormatNumber(cfg.border.color || "{{c:system}}", playerState, 0, true),
+                        Macros.FormatNumber(cfg.border.color, playerState, 0, true),
                         Macros.FormatNumber(cfg.border.alpha, playerState, 100) / 100.0);
                     border.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
                     border.graphics.endFill();
 
-                    var color:Number = Macros.FormatNumber(cfg.color || "{{c:system}}", playerState, 0, true);
-                    var lcolor:Number = Macros.FormatNumber(cfg.lcolor || "{{c:system}}", playerState, color, true);
+                    if (cfg.color == null)
+                        cfg.color = "{{c:system}}";
+                    if (cfg.lcolor == null)
+                        cfg.lcolor = "{{c:system}}";
+                    var color:Number = Macros.FormatNumber(cfg.color, playerState, 0, true);
+                    var lcolor:Number = Macros.FormatNumber(cfg.lcolor, playerState, color, true);
                     var healthRatio:Number = playerState.curHealth / playerState.maxHealth;
                     if (isNaN(healthRatio))
                         healthRatio = 1;
@@ -113,7 +119,9 @@ package com.xvm.vehiclemarkers.ui.components
                     TweenLite.killTweensOf(damage);
                     damage.x = cfg.border.size + cfg.width * (playerState.curHealth / playerState.maxHealth) - 1;
                     damage.scaleX += playerState.damageInfo.damageDelta / playerState.maxHealth;
-                    var color:Number = Macros.FormatNumber(cfg.damage.color || "{{c:system}}", playerState, 0, true);
+                    if (cfg.damage.color == null)
+                        cfg.damage.color = "{{c:system}}";
+                    var color:Number = Macros.FormatNumber(cfg.damage.color, playerState, 0, true);
                     GraphicsUtil.setColorTransform(damage, color);
                     damage.alpha = Macros.FormatNumber(cfg.damage.alpha, playerState) / 100.0;
                     TweenLite.to(damage, cfg.damage.fade, { scaleX: 0, ease: Cubic.easeIn } );

@@ -16,6 +16,7 @@ package com.xvm.vehiclemarkers.ui
     import net.wg.gui.battle.components.constants.*;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersConstants; // * - name conflict
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager; // * - name conflict
+    import net.wg.gui.battle.views.vehicleMarkers.events.*;
     import net.wg.gui.battle.views.vehicleMarkers.VO.*;
 
     public dynamic class XvmVehicleMarker extends VehicleMarker
@@ -44,6 +45,7 @@ package com.xvm.vehiclemarkers.ui
         override protected function configUI():void
         {
             super.configUI();
+            VehicleMarkersManager.getInstance().addEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             // TODO: removeStandardFields();
         }
 
@@ -51,6 +53,7 @@ package com.xvm.vehiclemarkers.ui
         {
             super.onDispose();
             Xvm.removeEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            VehicleMarkersManager.getInstance().removeEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             deleteComponents();
         }
 
@@ -147,6 +150,22 @@ package com.xvm.vehiclemarkers.ui
         override public function layoutParts(param1:Vector.<Boolean>):void
         {
             // stub
+        }
+
+        private function onShowExInfoHandler(param1:VehicleMarkersManagerEvent):void
+        {
+            try
+            {
+                var playerState:VOPlayerState = BattleState.get(vehicleID);
+                if (playerState != null)
+                {
+                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         // PRIVATE

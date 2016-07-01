@@ -12,6 +12,7 @@ package com.xvm.vehiclemarkers.ui.components
     import com.xvm.vehiclemarkers.ui.*;
     import flash.display.*;
     import flash.geom.*;
+    import flash.text.*;
 
     public class TextFieldsComponent extends VehicleMarkerComponentBase
     {
@@ -32,7 +33,7 @@ package com.xvm.vehiclemarkers.ui.components
             for each (var state:String in XvmVehicleMarkerState.getAllStates(isAlly))
             {
                 var cfg:CMarkers4 = XvmVehicleMarkerState.getConfig(state);
-                var extraFields:ExtraFields = new ExtraFields(cfg.textFields, true, getColorSchemeName, null, new Rectangle(0, 0, 140, 100));
+                var extraFields:ExtraFields = new ExtraFields(cfg.textFields, true, getColorSchemeName, null, new Rectangle(0, 0, 140, 100), null, TextFormatAlign.CENTER);
                 extraFieldsHolders[state] = extraFields;
                 marker.addChild(extraFields);
             }
@@ -71,7 +72,7 @@ package com.xvm.vehiclemarkers.ui.components
                     else
                     {
                         extraFields.visible = true;
-                        extraFields.update(playerState);
+                        extraFields.update(playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
                     }
                 }
             }
