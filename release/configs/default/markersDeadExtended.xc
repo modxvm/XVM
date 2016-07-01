@@ -18,14 +18,14 @@
       // Opacity (dynamic transparency allowed, see macros.txt).
       // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       "alpha": 100,
-      // Color (dynamic colors allowed, see macros.txt).
-      // Цвет (допускается использование динамического цвета, см. macros.txt)
-      "color": null,
       // Font options.
       // Параметры шрифта.
       "textFormat": {
         "font": "$UniversCondC",        // Font name      / Название
         "size": 18,                     // Font size      / Размер
+        // Color (dynamic colors allowed, see macros.txt).
+        // Цвет (допускается использование динамического цвета, см. macros.txt)
+        "color": null,
         "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
         "bold": false,                  // True - bold    / Жирный.
         "italic": false                 // True - italic  / Курсив.
@@ -62,12 +62,12 @@
       "x": 0,                         // положение по оси X
       "y": -34,                       // положение по оси Y
       "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-      "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
       // Font options.
       // Параметры шрифта.
       "textFormat": {
         "font": "$UniversCondC",      //   название
         "size": 13,                   //   размер
+        "color": null,                //   цвет (допускается использование динамического цвета, см. macros.txt)
         "align": "center",            //   выравнивание текста (left, center, right)
         "bold": false,                //   обычный (false) или жирный (true)
         "italic": false               //   обычный (false) или курсив (true)
@@ -95,10 +95,10 @@
       "x": 0,                         // положение по оси X
       "y": -20,                       // положение по оси Y
       "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-      "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
       "textFormat": {                 // параметры шрифта
         "font": "$UniversCondC",      //   название
         "size": 13,                   //   размер
+        "color": null,                //   цвет (допускается использование динамического цвета, см. macros.txt)
         "align": "center",            //   выравнивание текста (left, center, right)
         "bold": false,                //   обычный (false) или жирный (true)
         "italic": false               //   обычный (false) или курсив (true)
@@ -132,9 +132,6 @@
       // Opacity.
       // Прозрачность.
       "alpha": 100,
-      // Color (currently not in use).
-      // Цвет (в данный момент не используется).
-      "color": null,
       // Maximum scale (default is 100).
       // Максимальный масштаб (по умолчанию 100).
       "maxScale": 100,
@@ -248,7 +245,6 @@
       "x": 0,
       "y": -16,
       "alpha": 100,
-      "color": null,
       "maxScale": 100,
       "scaleX": 0,
       "scaleY": 16,

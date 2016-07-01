@@ -18,14 +18,14 @@
       // Opacity (dynamic transparency allowed, see macros.txt).
       // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       "alpha": 100,
-      // Color (dynamic colors allowed, see macros.txt).
-      // Цвет (допускается использование динамического цвета, см. macros.txt)
-      "color": null,
       // Font options.
       // Параметры шрифта.
       "textFormat": {
         "font": "$UniversCondC",        // Font name      / Название
         "size": 18,                     // Font size      / Размер
+        // Color (dynamic colors allowed, see macros.txt).
+        // Цвет (допускается использование динамического цвета, см. macros.txt)
+        "color": null,
         "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
         "bold": false,                  // True - bold    / Жирный.
         "italic": false                 // True - italic  / Курсив.
@@ -74,9 +74,6 @@
       // Opacity.
       // Прозрачность.
       "alpha": 100,
-      // Color (currently not in use).
-      // Цвет (в данный момент не используется).
-      "color": null,
       // Maximum scale (default is 100).
       // Максимальный масштаб (по умолчанию 100).
       "maxScale": 100,
@@ -187,7 +184,6 @@
       "x": 0,
       "y": -16,
       "alpha": 100,
-      "color": null,
       "maxScale": 100,
       "scaleX": 0,
       "scaleY": 16,
