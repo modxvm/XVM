@@ -56,14 +56,14 @@
             "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -26,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'>{{vehicle}}{{turret}}</font>"
           },
           {
             "enabled": true,
             "name": "Rating marks",
             "x": 0, "y": -35,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "textFormat": { "name": "Symbol" },
             "format": ${"def.markersStat"}
           },
@@ -71,7 +71,7 @@
             "enabled": true,
             "name": "Dynamic HP",
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
           }
         ]
@@ -115,21 +115,21 @@
             "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -26,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'>{{nick}}</font>"
           },
           {
             "enabled": true,
             "name": "HP",
             "x": 0, "y": -38, "color": "0xD9FFB3",
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11'><b>{{hp}} / {{hp-max}}</b></font>"
           },
           {
             "enabled": true,
             "name": "Tank Rating",
             "x": 0, "y": -52, "alpha": 75,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": ${"def.markersStatAlt"}
           }
         ]
@@ -172,14 +172,14 @@
             "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -18, "alpha": 80,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'><font color='#7BEC37'>{{vehicle}}</font></font>"
           },
           {
             "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -32, "alpha": 80,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'><font color='#B2EE37'>{{nick}}</font></font>"
           }
         ]
@@ -223,14 +223,14 @@
             "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -26,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'>{{vehicle}}{{turret}}</font>"
           },
           {
             "enabled": true,
             "name": "Rating marks",
             "x": 0, "y": -35,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "textFormat": { "name": "Symbol" },
             "format": ${"def.markersStat"}
           },
@@ -238,7 +238,7 @@
             "enabled": true,
             "name": "HP",
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
           }
         ]
@@ -282,21 +282,21 @@
             "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -26,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'>{{nick}}</font>"
           },
           {
             "enabled": true,
             "name": "HP",
             "x": 0, "y": -38,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11' color='{{c:hp-ratio}}'><b>{{hp}} / {{hp-max}}</b></font>"
           },
           {
             "enabled": true,
             "name": "Tank Rating",
             "x": 0, "y": -52, "alpha": 75,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": ${"def.markersStatAlt"}
           }
         ]
@@ -339,14 +339,14 @@
             "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -18, "alpha": 80,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'><font color='#EC3737'>{{vehicle}}</font></font>"
           },
           {
             "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -32, "alpha": 80,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'><font color='#FF6E0C'>{{nick}}</font></font>"
           }
         ]
