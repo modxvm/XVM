@@ -40,8 +40,8 @@
         "angle": 45,                    // (0.0 .. 360.0)  / offset angle    / угол смещения
         "color": "0x000000",            // "0xXXXXXX"      / color           / цвет
         "alpha": 100,                   // (0 .. 100)      / opacity         / прозрачность
-        "blur": 6,                      // (0.0 .. 255.0)  / blur            / размытие
-        "strength": 200                 // (0.0 .. 255.0)  / intensity       / интенсивность
+        "blur": 3,                      // (0.0 .. 255.0)  / blur            / размытие
+        "strength": 1                   // (0.0 .. 255.0)  / intensity       / интенсивность
       },
       // Rising speed of displayed damage (float up speed).
       // Время отображения отлетающего урона.
@@ -85,7 +85,7 @@
         "color": "0x000000",          //   цвет
         "alpha": 100,                 //   прозрачность
         "blur": 6,                    //   размытие
-        "strength": 200               //   интенсивность
+        "strength": 2                 //   интенсивность
       },
       "format": "{{nick}}"            //   формат текста. См. описание макросов в macros.txt
     },
@@ -112,7 +112,7 @@
         "color": "0x000000",
         "alpha": 100,
         "blur": 4,
-        "strength": 100
+        "strength": 1
       },
       "format": "{{hp-ratio}}% / {{hp-max}}"
     },
@@ -139,7 +139,7 @@
         "color": "0x000000",
         "alpha": 100,
         "blur": 6,
-        "strength": 200
+        "strength": 2
       },
       "format": "{{r}}"
     }
@@ -184,7 +184,7 @@
         "color": "0x000000",            //   цвет
         "alpha": 100,                   //   прозрачность
         "blur": 6,                      //   размытие
-        "strength": 200                 //   интенсивность
+        "strength": 2                   //   интенсивность
       }
     },
     // Индикатор здоровья.
@@ -289,7 +289,7 @@
         "angle": 45,
         "distance": 0,
         "blur": 6,
-        "strength": 200
+        "strength": 2
       }
     },
     // Индикатор здоровья.

@@ -8,14 +8,14 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkers4 extends Object implements ICloneable
     {
-        public var vehicleIcon:*;
+        public var vehicleIcon:CMarkersVehicleIcon;
         public var healthBar:CMarkersHealthBar;
-        public var damageText:*;
-        public var damageTextPlayer:*;
-        public var damageTextSquadman:*;
-        public var contourIcon:*;
-        public var levelIcon:*;
-        public var actionMarker:*;
+        public var damageText:CMarkersDamageText;
+        public var damageTextPlayer:CMarkersDamageText;
+        public var damageTextSquadman:CMarkersDamageText;
+        public var contourIcon:CMarkersContourIcon;
+        public var levelIcon:CMarkersLevelIcon;
+        public var actionMarker:CMarkersActionMarker;
         public var textFields:Array;
 
         public function clone():*

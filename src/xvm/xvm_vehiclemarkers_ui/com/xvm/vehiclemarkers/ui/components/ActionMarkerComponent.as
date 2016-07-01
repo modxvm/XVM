@@ -6,6 +6,7 @@ package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.types.cfg.*;
     import com.xvm.vehiclemarkers.ui.*;
 
     public class ActionMarkerComponent extends VehicleMarkerComponentBase
@@ -15,27 +16,24 @@ package com.xvm.vehiclemarkers.ui.components
             super(marker);
         }
 
-        //public function updateState(state_cfg:Object)
-        //{
-            //var cfg = state_cfg.actionMarker;
-//
-            //var visible = cfg.visible;
-//
-            //if (visible)
-                //draw(cfg);
-//
-            //proxy.actionMarker._visible = visible;
-        //}
-//
-        //public function showActionMarker(actionState)
-        //{
-            //proxy.actionMarker.showAction(actionState);
-        //}
-//
-        //private function draw(cfg:Object)
-        //{
-            //proxy.actionMarker._x = cfg.x;
-            //proxy.actionMarker._y = cfg.y;
-        //}
+        override protected function update(e:XvmVehicleMarkerEvent):void
+        {
+            try
+            {
+                super.update(e);
+                var cfg:CMarkersActionMarker = e.cfg.actionMarker;
+                marker.actionMarker.visible = Macros.FormatBoolean(cfg.visible, e.playerState, true);
+                if (marker.actionMarker.visible)
+                {
+                    marker.actionMarker.x = Macros.FormatNumber(cfg.x, e.playerState);
+                    marker.actionMarker.y = Macros.FormatNumber(cfg.y, e.playerState);
+                    marker.actionMarker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
     }
 }

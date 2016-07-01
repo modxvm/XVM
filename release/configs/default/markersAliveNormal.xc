@@ -40,8 +40,8 @@
         "angle": 45,                    // (0.0 .. 360.0)  / offset angle    / угол смещения
         "color": "0x000000",            // "0xXXXXXX"      / color           / цвет
         "alpha": 100,                   // (0 .. 100)      / opacity         / прозрачность
-        "blur": 6,                      // (0.0 .. 255.0)  / blur            / размытие
-        "strength": 200                 // (0.0 .. 255.0)  / intensity       / интенсивность
+        "blur": 3,                      // (0.0 .. 255.0)  / blur            / размытие
+        "strength": 1                   // (0.0 .. 255.0)  / intensity       / интенсивность
       },
       // Rising speed of displayed damage (float up speed).
       // Время отображения отлетающего урона.
@@ -79,7 +79,7 @@
         "color": "0x000000",
         "alpha": 100,
         "blur": 6,
-        "strength": 200
+        "strength": 2
       },
       "format": "{{vehicle}}{{turret}}"
     },
@@ -112,7 +112,7 @@
         "color": "0x000000",          //   цвет
         "alpha": 100,                 //   прозрачность
         "blur": 6,                    //   размытие
-        "strength": 200               //   интенсивность
+        "strength": 2                 //   интенсивность
       },
       "format": "<font size='{{battletype?13|{{squad?13|0}}}}'>{{name}}</font>"  // формат текста. См. описание макросов в macros.txt
     },
@@ -139,7 +139,7 @@
         "color": "0x000000",
         "alpha": 100,
         "blur": 4,
-        "strength": 100
+        "strength": 1
       },
       "format": "{{hp}}"
     },
@@ -166,7 +166,7 @@
         "color": "0x000000",
         "alpha": 100,
         "blur": 1,
-        "strength": 100
+        "strength": 1
       },
       "format": "&#x115;"
     },
@@ -198,7 +198,7 @@
         "color": "0x000000",          //  цвет
         "alpha": 100,                 //  прозрачность
         "blur": 4,                    //  размытие
-        "strength": 100               //  интенсивность
+        "strength": 1                 //  интенсивность
       },
       "format": "<font color='{{x-spotted?#FFBB00|#FFFFFF}}' alpha='{{x-spotted?#FF|#80}}'>{{x-spotted?&#x70;|{{x-sense-on?&#x70;}}}}</font> {{x-overturned?&#x112;}}"  //  формат текста. См. описание макросов в macros.txt
     }
@@ -243,7 +243,7 @@
         "color": "0x000000",            //   цвет
         "alpha": 100,                   //   прозрачность
         "blur": 6,                      //   размытие
-        "strength": 200                 //   интенсивность
+        "strength": 2                   //   интенсивность
       }
     },
     // Индикатор здоровья.
@@ -350,7 +350,7 @@
         "color": "0x000000",
         "alpha": 100,
         "blur": 6,
-        "strength": 200
+        "strength": 2
       }
     },
     // Индикатор здоровья.
