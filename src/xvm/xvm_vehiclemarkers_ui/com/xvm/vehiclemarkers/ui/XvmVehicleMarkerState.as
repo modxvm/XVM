@@ -11,8 +11,8 @@ package com.xvm.vehiclemarkers.ui
 
     public class XvmVehicleMarkerState
     {
-        public static var allAlly:Array = ["ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"];
-        public static var allEnemy:Array = ["enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"];
+        public static const ALLY_STATES:Array = ["ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"];
+        public static const ENEMY_STATES:Array = ["enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"];
 
         public static function getCurrentState(playerState:VOPlayerState, exInfo:Boolean):String
         {
@@ -24,28 +24,40 @@ package com.xvm.vehiclemarkers.ui
 
         public static function getCurrentConfig(playerState:VOPlayerState, exInfo:Boolean):CMarkers4
         {
-            var result:CMarkers = Config.config.markers;
-            var result2:CMarkers2 = playerState.isAlly ? result.ally : result.enemy;
-            var result3:CMarkers3 = playerState.isAlive ? result.alive : result.dead;
-            var result4:CMarkers4 = exInfo ? result.extended : result.normal;
+            var result1:CMarkers = Config.config.markers;
+            var result2:CMarkers2 = playerState.isAlly ? result1.ally : result1.enemy;
+            var result3:CMarkers3 = playerState.isAlive ? result2.alive : result2.dead;
+            var result4:CMarkers4 = exInfo ? result3.extended : result3.normal;
             return result4;
         }
 
         public static function getConfig(stateString:String):CMarkers4
         {
-            var path:Array = stateString.split("/");
-            if (path.length != 3)
-                return null;
-            var result:CMarkers = Config.config.markers;
-            var result2:CMarkers2 = path[0] == "ally" ? result.ally : result.enemy;
-            var result3:CMarkers3 = path[1] == "alive" ? result.alive : result.dead;
-            var result4:CMarkers4 = path[2] == "normal" ? result.normal : result.extended;
-            return result4;
+            switch (stateString)
+            {
+                case "ally/alive/normal":
+                    return Config.config.markers.ally.alive.normal;
+                case "ally/alive/extended":
+                    return Config.config.markers.ally.alive.extended;
+                case "ally/dead/normal":
+                    return Config.config.markers.ally.dead.normal;
+                case "ally/dead/extended":
+                    return Config.config.markers.ally.dead.extended;
+                case "enemy/alive/normal":
+                    return Config.config.markers.enemy.alive.normal;
+                case "enemy/alive/extended":
+                    return Config.config.markers.enemy.alive.extended;
+                case "enemy/dead/normal":
+                    return Config.config.markers.enemy.dead.normal;
+                case "enemy/dead/extended":
+                    return Config.config.markers.enemy.dead.extended;
+            }
+            return null;
         }
 
         public static function getAllStates(isAlly:Boolean):Array
         {
-            return isAlly ? allAlly : allEnemy;
+            return isAlly ? ALLY_STATES : ENEMY_STATES;
         }
     }
 }

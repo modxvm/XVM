@@ -51,7 +51,7 @@
             antiAliasType = Macros.FormatStringGlobal(cfg.antiAliasType, AntiAliasType.ADVANCED);
             TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_NONE));
             TextFieldEx.setNoTranslate(this, true);
-            defaultTextFormat = new TextFormat("$UniversCondC", 14, 0xFFFFFF, null, null, null, null, null, "center");
+            defaultTextFormat = Utils.DEFAULT_TEXT_FORMAT;
         }
 
         public final function dispose():void
@@ -155,6 +155,14 @@
                 cfg.format = value;
             }
 
+            if (cfg.textFormat != null)
+            {
+                if (!setupTextFormat(cfg.font, options))
+                {
+                    cfg.textFormat = null;
+                }
+            }
+
             if (cfg.shadow != null)
             {
                 if (!setupShadow(cfg.shadow, options))
@@ -165,10 +173,138 @@
             }
         }
 
+        private function setupTextFormat(cfg:CTextFormat, options:IVOMacrosOptions):Boolean
+        {
+            var value:*;
+            var isDynamic:Boolean = false;
+
+            value = Macros.FormatBoolean(cfg.enabled, options, true);
+            if (Macros.IsCached(cfg.enabled, options))
+            {
+                cfg.enabled = value;
+                if (!value)
+                    return false;
+            }
+
+            value = Macros.FormatString(cfg.font, options, Utils.DEFAULT_TEXT_FORMAT.font);
+            if (Macros.IsCached(cfg.font, options))
+            {
+                cfg.font = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatNumber(cfg.size, options, Number(Utils.DEFAULT_TEXT_FORMAT.size));
+            if (Macros.IsCached(cfg.size, options))
+            {
+                cfg.size = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatNumber(cfg.color, options, Number(Utils.DEFAULT_TEXT_FORMAT.color), true);
+            if (Macros.IsCached(cfg.color, options))
+            {
+                cfg.color = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatBoolean(cfg.bold, options, Boolean(Utils.DEFAULT_TEXT_FORMAT.bold));
+            if (Macros.IsCached(cfg.bold, options))
+            {
+                cfg.bold = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatBoolean(cfg.italic, options, Boolean(Utils.DEFAULT_TEXT_FORMAT.italic));
+            if (Macros.IsCached(cfg.italic, options))
+            {
+                cfg.italic = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatBoolean(cfg.underline, options, Boolean(Utils.DEFAULT_TEXT_FORMAT.underline));
+            if (Macros.IsCached(cfg.underline, options))
+            {
+                cfg.underline = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatString(cfg.align, options, Utils.DEFAULT_TEXT_FORMAT.align);
+            if (Macros.IsCached(cfg.align, options))
+            {
+                cfg.align = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatNumber(cfg.leftMargin, options, Number(Utils.DEFAULT_TEXT_FORMAT.leftMargin));
+            if (Macros.IsCached(cfg.leftMargin, options))
+            {
+                cfg.leftMargin = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatNumber(cfg.rightMargin, options, Number(Utils.DEFAULT_TEXT_FORMAT.rightMargin));
+            if (Macros.IsCached(cfg.rightMargin, options))
+            {
+                cfg.rightMargin = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatNumber(cfg.indent, options, Number(Utils.DEFAULT_TEXT_FORMAT.indent));
+            if (Macros.IsCached(cfg.indent, options))
+            {
+                cfg.indent = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            value = Macros.FormatNumber(cfg.leading, options, Number(Utils.DEFAULT_TEXT_FORMAT.leading));
+            if (Macros.IsCached(cfg.leading, options))
+            {
+                cfg.leading = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
+            defaultTextFormat = Utils.createTextFormatFromConfig(cfg, options);
+
+            return isDynamic;
+        }
+
         private function setupShadow(cfg:CShadow, options:IVOMacrosOptions):Boolean
         {
             var value:*;
-            var isDynamicShadow:Boolean = false;
+            var isDynamic:Boolean = false;
 
             value = Macros.FormatBoolean(cfg.enabled, options, true);
             if (Macros.IsCached(cfg.enabled, options))
@@ -185,7 +321,7 @@
             }
             else
             {
-                isDynamicShadow = true;
+                isDynamic = true;
             }
 
             value = Macros.FormatNumber(cfg.angle, options, 0);
@@ -195,17 +331,17 @@
             }
             else
             {
-                isDynamicShadow = true;
+                isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.color, options, 0);
+            value = Macros.FormatNumber(cfg.color, options, 0, true);
             if (Macros.IsCached(cfg.color, options))
             {
                 cfg.color = value;
             }
             else
             {
-                isDynamicShadow = true;
+                isDynamic = true;
             }
 
             value = Macros.FormatNumber(cfg.alpha, options, 70);
@@ -215,7 +351,7 @@
             }
             else
             {
-                isDynamicShadow = true;
+                isDynamic = true;
             }
 
             value = Macros.FormatNumber(cfg.blur, options, 4);
@@ -225,7 +361,7 @@
             }
             else
             {
-                isDynamicShadow = true;
+                isDynamic = true;
             }
 
             value = Macros.FormatNumber(cfg.strength, options, 2);
@@ -235,7 +371,7 @@
             }
             else
             {
-                isDynamicShadow = true;
+                isDynamic = true;
             }
 
             value = Macros.FormatNumber(cfg.quality, options, 3);
@@ -245,7 +381,7 @@
             }
             else
             {
-                isDynamicShadow = true;
+                isDynamic = true;
             }
 
             value = Macros.FormatBoolean(cfg.inner, options, false);
@@ -255,7 +391,7 @@
             }
             else
             {
-                isDynamicShadow = true;
+                isDynamic = true;
             }
 
             value = Macros.FormatBoolean(cfg.knockout, options, false);
@@ -272,7 +408,7 @@
 
             filters = Utils.createShadowFiltersFromConfig(cfg, options);
 
-            return isDynamicShadow;
+            return isDynamic;
         }
 
         public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0):void

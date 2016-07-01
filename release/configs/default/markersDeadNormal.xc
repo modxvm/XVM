@@ -23,8 +23,8 @@
       "color": null,
       // Font options.
       // Параметры шрифта.
-      "font": {
-        "name": "$FieldFont",           // Font name      / Название
+      "textFormat": {
+        "font": "$UniversCondC",        // Font name      / Название
         "size": 18,                     // Font size      / Размер
         "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
         "bold": false,                  // True - bold    / Жирный.

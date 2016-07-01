@@ -25,6 +25,7 @@ package com.xvm.types.cfg
         public var bindToIcon:*;
         public var src:String;
         public var format:String;
+        public var textFormat:CTextFormat;
         public var shadow:CShadow;
         public var highlight:*;
 

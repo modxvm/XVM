@@ -34,17 +34,36 @@
  *   "borderColor" - if set, draw border with specified color (macros allowed)
  *   "bgColor" - if set, draw background with specified color (macros allowed)
  *   "antiAliasType" - anti aliasing mode ("advanced" or "normal")
+ *
+ *   http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
+ *   "textFormat": {
+ *     "font"
+ *     "size"
+ *     "color"
+ *     "bold"
+ *     "italic"
+ *     "underline"
+ *     "align"
+ *     "leftMargin"
+ *     "rightMargin"
+ *     "indent"
+ *     "leading"
+ *     "tabStops"
+ *   }
+ *
+ *   http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filters/DropShadowFilter.html
  *   "shadow": {
+ *     "enabled"
  *     "distance" (in pixels)
  *     "angle"    (0.0 .. 360.0)
  *     "color"    "0xXXXXXX"
  *     "alpha"    (0.0 .. 100.0)
  *     "blur"     (0.0 .. 255.0)
  *     "strength" (0.0 .. 255.0)
- *     quality
- *     inner
- *     knockout
- *     hideObject
+ *     "quality"
+ *     "inner"
+ *     "knockout"
+ *     "hideObject"
  *   }
  *
  */

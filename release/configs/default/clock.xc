@@ -72,7 +72,7 @@
     //
     // Clock format.
     // Формат часов.
-    "format": "<font face='$FieldFont'><textformat leading='-38'><font size='36'>{{h%02d}}:{{m%02d}}</font><br></textformat><textformat rightMargin='85' leading='-1'>{{WW}}<br><font size='15'>{{D%02d}} {{MM}} {{Y}}</font></textformat></font>",
+    "format": "<font face='$UniversCondC'><textformat leading='-38'><font size='36'>{{h%02d}}:{{m%02d}}</font><br></textformat><textformat rightMargin='85' leading='-1'>{{WW}}<br><font size='15'>{{D%02d}} {{MM}} {{Y}}</font></textformat></font>",
     // Shadow options.
     // Параметры тени.
     "shadow": {

@@ -16,11 +16,17 @@ package com.xvm.vehiclemarkers.ui
         public static const UPDATEHEALTH:String = "EVENT_UPDATEHEALTH";
 
         private var _playerState:VOPlayerState;
+        private var _exInfo:Boolean;
         private var _cfg:CMarkers4;
 
         public function get playerState():VOPlayerState
         {
             return _playerState;
+        }
+
+        public function get exInfo():Boolean
+        {
+            return _exInfo;
         }
 
         public function get cfg():CMarkers4
@@ -32,10 +38,8 @@ package com.xvm.vehiclemarkers.ui
         {
             super(type);
             _playerState = playerState;
-            var c1:CMarkers = Config.config.markers;
-            var c2:CMarkers2 = playerState.isAlly ? c1.ally : c1.enemy;
-            var c3:CMarkers3 = playerState.isAlive ? c2.alive : c2.dead;
-            _cfg = exInfo ? c3.extended : c3.normal;
+            _exInfo = exInfo;
+            _cfg = XvmVehicleMarkerState.getCurrentConfig(playerState, exInfo);
         }
     }
 }

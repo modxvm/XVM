@@ -23,8 +23,8 @@
       "color": null,
       // Font options.
       // Параметры шрифта.
-      "font": {
-        "name": "$FieldFont",           // Font name      / Название
+      "textFormat": {
+        "font": "$UniversCondC",        // Font name      / Название
         "size": 18,                     // Font size      / Размер
         "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
         "bold": false,                  // True - bold    / Жирный.
@@ -65,8 +65,8 @@
       "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
       // Font options.
       // Параметры шрифта.
-      "font": {
-        "name": "$FieldFont",         //   название
+      "textFormat": {
+        "font": "$UniversCondC",      //   название
         "size": 13,                   //   размер
         "align": "center",            //   выравнивание текста (left, center, right)
         "bold": false,                //   обычный (false) или жирный (true)
@@ -96,8 +96,8 @@
       "y": -20,                       // положение по оси Y
       "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
-      "font": {                       // параметры шрифта
-        "name": "$FieldFont",         //   название
+      "textFormat": {                 // параметры шрифта
+        "font": "$UniversCondC",      //   название
         "size": 13,                   //   размер
         "align": "center",            //   выравнивание текста (left, center, right)
         "bold": false,                //   обычный (false) или жирный (true)

@@ -97,10 +97,10 @@ quality, inner, knockout, hideObject
      │                            │ field default styles, defaults:
      │                            │ стандартный стиль поля, значение по умолчанию:
      │                            │
-     │                            │ "currentFieldDefaultStyle": { "name": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "underline": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
+     │                            │ "currentFieldDefaultStyle": { "name": "$UniversCondC", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "underline": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
      │----------------------------│--------------------------------------------------------------------------
-     │ "name"                     │ font name (default: "$FieldFont")
-     │                            │ наименование шрифта (по-умолчанию: "$FieldFont")
+     │ "name"                     │ font name (default: "$UniversCondC")
+     │                            │ наименование шрифта (по-умолчанию: "$UniversCondC")
      │----------------------------│--------------------------------------------------------------------------
      │ "color"                    │ font color ("0xXXXXXX") (default: "0xFFFFFF")
      │                            │ цвет шрифта ("0xXXXXXX") (по-умолчанию: "0xFFFFFF")

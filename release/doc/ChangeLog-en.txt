@@ -56,6 +56,7 @@
   * global macros, including {{py:f()}}, can be used in the "battle"/"elements" section
   * changed "carousel"/"scrollingSpeed" value, now it is multiplier for default scrolling rate
   * option "markers"/"useStandardMarkers" renamed to "markers"/"enabled"
+  * config format of the text fields in markers are changed to common extraFields config format
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

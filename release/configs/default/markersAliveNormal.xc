@@ -23,8 +23,8 @@
       "color": null,
       // Font options.
       // Параметры шрифта.
-      "font": {
-        "name": "$FieldFont",           // Font name      / Название
+      "textFormat": {
+        "font": "$UniversCondC",        // Font name      / Название
         "size": 18,                     // Font size      / Размер
         "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
         "bold": false,                  // True - bold    / Жирный.
@@ -65,8 +65,8 @@
       "y": -36,
       "alpha": 100,
       "color": null,
-      "font": {
-        "name": "$FieldFont",
+      "textFormat": {
+        "font": "$UniversCondC",
         "size": 13,
         "align": "center",
         "bold": false,
@@ -94,8 +94,8 @@
       "color": null,                  // цвет (допускается использование динамического цвета, см. macros.txt)
       // Font options.
       // Параметры шрифта.
-      "font": {
-        "name": "$FieldFont",         //   название
+      "textFormat": {
+        "font": "$UniversCondC",      //   название
         "size": 13,                   //   размер
         "align": "center",            //   выравнивание текста (left, center, right)
         "bold": false,                //   обычный (false) или жирный (true)
@@ -125,8 +125,8 @@
       "y": -20,
       "alpha": 100,
       "color": "0xD9D9D9",
-      "font": {
-        "name": "$FieldFont",
+      "textFormat": {
+        "font": "$UniversCondC",
         "size": 11,
         "align": "center",
         "bold": true,
@@ -152,8 +152,8 @@
       "y": -20,
       "alpha": "{{xvm-stat?100|0}}",
       "color": "{{c:r|#999999}}",
-      "font": {
-        "name": "xvm",
+      "textFormat": {
+        "font": "xvm",
         "size": 16,
         "align": "right",
         "bold": false,
@@ -181,8 +181,8 @@
       "color": "0xFFBB00",            //  цвет (допускается использование динамического цвета, см. macros.txt)
       // Font options.
       // Параметры шрифта.
-      "font": {
-        "name": "xvm",                //  название
+      "textFormat": {
+        "font": "xvm",                //  название
         "size": 23,                   //  размер
         "align": "center",            //  выравнивание текста (left, center, right)
         "bold": false,                //  обычный (false) или жирный (true)

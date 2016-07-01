@@ -2,7 +2,7 @@
   //"enabled": false,
   "def": {
     "markersStat": "<b><font face='$TitleFont' size='8' color='{{t-battles>19?#FFFFFF|#666666}}'>{{marksOnGun|*}}</font> <font face='Symbol' color='#CCCCCC' size='11'><font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></font></b>",
-    "markersStatAlt": "<b><font face='$TitleFont' size='8' color='{{t-battles>19?#FFFFFF|#666666}}'>{{marksOnGun|*}}</font> <font face='$FieldFont' size='12'><font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}({{py:xvm.xvm2sup({{xte}})|--}})</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font></font></b>",
+    "markersStatAlt": "<b><font face='$TitleFont' size='8' color='{{t-battles>19?#FFFFFF|#666666}}'>{{marksOnGun|*}}</font> <font face='$UniversCondC' size='12'><font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}({{py:xvm.xvm2sup({{xte}})|--}})</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font></font></b>",
 
     "damageMessageAlive": "{{dmg}}",
     "damageMessageAllyDead": "({{dmg}})",
@@ -58,14 +58,14 @@
             "name": "Vehicle Name",
             "x": 0, "y": -26,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'>{{vehicle}}{{turret}}</font>"
+            "format": "<font face='$UniversCondC' size='13'>{{vehicle}}{{turret}}</font>"
           },
           {
             "visible": true,
             "name": "Rating marks",
             "x": 0, "y": -35,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-            "font": { "name": "Symbol" },
+            "textFormat": { "name": "Symbol" },
             "format": ${"def.markersStat"}
           },
           {
@@ -73,7 +73,7 @@
             "name": "Dynamic HP",
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
+            "format": "<font face='$UniversCondC' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
           }
         ]
       },
@@ -117,14 +117,14 @@
             "name": "Player Name",
             "x": 0, "y": -26,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'>{{nick}}</font>"
+            "format": "<font face='$UniversCondC' size='13'>{{nick}}</font>"
           },
           {
             "visible": true,
             "name": "HP",
             "x": 0, "y": -38, "color": "0xD9FFB3",
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='11'><b>{{hp}} / {{hp-max}}</b></font>"
+            "format": "<font face='$UniversCondC' size='11'><b>{{hp}} / {{hp-max}}</b></font>"
           },
           {
             "visible": true,
@@ -174,14 +174,14 @@
             "name": "Vehicle Name",
             "x": 0, "y": -18, "alpha": 80,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'><font color='#7BEC37'>{{vehicle}}</font></font>"
+            "format": "<font face='$UniversCondC' size='13'><font color='#7BEC37'>{{vehicle}}</font></font>"
           },
           {
             "visible": true,
             "name": "Player Name",
             "x": 0, "y": -32, "alpha": 80,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'><font color='#B2EE37'>{{nick}}</font></font>"
+            "format": "<font face='$UniversCondC' size='13'><font color='#B2EE37'>{{nick}}</font></font>"
           }
         ]
       }
@@ -225,14 +225,14 @@
             "name": "Vehicle Name",
             "x": 0, "y": -26,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'>{{vehicle}}{{turret}}</font>"
+            "format": "<font face='$UniversCondC' size='13'>{{vehicle}}{{turret}}</font>"
           },
           {
             "visible": true,
             "name": "Rating marks",
             "x": 0, "y": -35,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-            "font": { "name": "Symbol" },
+            "textFormat": { "name": "Symbol" },
             "format": ${"def.markersStat"}
           },
           {
@@ -240,7 +240,7 @@
             "name": "HP",
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
+            "format": "<font face='$UniversCondC' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
           }
         ]
       },
@@ -284,14 +284,14 @@
             "name": "Player Name",
             "x": 0, "y": -26,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'>{{nick}}</font>"
+            "format": "<font face='$UniversCondC' size='13'>{{nick}}</font>"
           },
           {
             "visible": true,
             "name": "HP",
             "x": 0, "y": -38,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='11' color='{{c:hp-ratio}}'><b>{{hp}} / {{hp-max}}</b></font>"
+            "format": "<font face='$UniversCondC' size='11' color='{{c:hp-ratio}}'><b>{{hp}} / {{hp-max}}</b></font>"
           },
           {
             "visible": true,
@@ -341,14 +341,14 @@
             "name": "Vehicle Name",
             "x": 0, "y": -18, "alpha": 80,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'><font color='#EC3737'>{{vehicle}}</font></font>"
+            "format": "<font face='$UniversCondC' size='13'><font color='#EC3737'>{{vehicle}}</font></font>"
           },
           {
             "visible": true,
             "name": "Player Name",
             "x": 0, "y": -32, "alpha": 80,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'><font color='#FF6E0C'>{{nick}}</font></font>"
+            "format": "<font face='$UniversCondC' size='13'><font color='#FF6E0C'>{{nick}}</font></font>"
           }
         ]
       }

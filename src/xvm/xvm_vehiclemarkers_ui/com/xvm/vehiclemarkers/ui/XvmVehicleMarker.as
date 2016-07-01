@@ -153,31 +153,45 @@ package com.xvm.vehiclemarkers.ui
 
         private function createComponents():void
         {
-            vehicleIconComponent = new VehicleIconComponent(this);
-            contourIconComponent = new ContourIconComponent(this);
-            levelIconComponent = new LevelIconComponent(this);
-            actionMarkerComponent = new ActionMarkerComponent(this);
-            healthBarComponent = new HealthBarComponent(this);
-            textFieldsComponent = new TextFieldsComponent(this);
-            damageTextComponent = new DamageTextComponent(this);
+            try
+            {
+                vehicleIconComponent = new VehicleIconComponent(this);
+                contourIconComponent = new ContourIconComponent(this);
+                levelIconComponent = new LevelIconComponent(this);
+                actionMarkerComponent = new ActionMarkerComponent(this);
+                healthBarComponent = new HealthBarComponent(this);
+                textFieldsComponent = new TextFieldsComponent(this);
+                damageTextComponent = new DamageTextComponent(this);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         private function deleteComponents():void
         {
-            vehicleIconComponent.dispose();
-            vehicleIconComponent = null;
-            contourIconComponent.dispose();
-            contourIconComponent = null;
-            levelIconComponent.dispose();
-            levelIconComponent = null;
-            actionMarkerComponent.dispose();
-            actionMarkerComponent = null;
-            healthBarComponent.dispose();
-            healthBarComponent = null;
-            textFieldsComponent.dispose();
-            textFieldsComponent = null;
-            damageTextComponent.dispose();
-            damageTextComponent = null;
+            try
+            {
+                vehicleIconComponent.dispose();
+                vehicleIconComponent = null;
+                contourIconComponent.dispose();
+                contourIconComponent = null;
+                levelIconComponent.dispose();
+                levelIconComponent = null;
+                actionMarkerComponent.dispose();
+                actionMarkerComponent = null;
+                healthBarComponent.dispose();
+                healthBarComponent = null;
+                textFieldsComponent.dispose();
+                textFieldsComponent = null;
+                damageTextComponent.dispose();
+                damageTextComponent = null;
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void

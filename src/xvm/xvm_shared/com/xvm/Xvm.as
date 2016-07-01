@@ -21,12 +21,12 @@ package com.xvm
     Chance;
     Config;
     Dossier;
+    ExtraFields;
     Locale;
     Stat;
     VehicleInfo;
     XvmCommands;
     Utils;
-    TextExtraField;
 
     // Battle
     BattleCommands;

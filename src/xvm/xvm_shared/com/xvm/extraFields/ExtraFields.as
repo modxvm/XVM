@@ -15,8 +15,6 @@ package com.xvm.extraFields
     import flash.text.*;
     import flash.geom.*;
     import flash.utils.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
     import scaleform.gfx.*;
     import scaleform.clik.core.*;
 
@@ -66,10 +64,10 @@ package com.xvm.extraFields
                     format = ObjectConverter.convertData(format, CExtraField);
                 }
 
-                if (Macros.FormatBooleanGlobal(format.enabled, true))
+                if (Macros.FormatBooleanGlobal(format.enabled, true) || (format.visible != null && Macros.FormatBooleanGlobal(format.visible, true)))
                 {
                     addChild(format.src != null
-                        ? new ImageExtraField(format, isLeftPanel, getSchemeNameForImage)
+                        ? new (App.utils.classFactory.getClass("com.xvm.extraFields::ImageExtraField"))(format, isLeftPanel, getSchemeNameForImage) // TODO: make ImageExtraField shared
                         : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds));
                 }
             }

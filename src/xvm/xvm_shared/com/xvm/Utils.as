@@ -10,17 +10,47 @@ package com.xvm
     import com.xvm.vo.*;
     import flash.filters.*;
     import flash.utils.*;
+    import flash.text.*;
     import mx.utils.*;
 
     public class Utils
     {
+        public static const DEFAULT_TEXT_FORMAT:TextFormat = new TextFormat("$UniversCondC", 14, 0xFFFFFF, null, null, null, null, null, "center");
+
+        // Create TextFormat from config section
+        // http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
+        public static function createTextFormatFromConfig(cfg:CTextFormat, options:IVOMacrosOptions = null):TextFormat
+        {
+            if (!Macros.FormatBoolean(cfg.enabled, options, true))
+            {
+                return DEFAULT_TEXT_FORMAT;
+            }
+
+            var textFormat:TextFormat = new TextFormat(
+                Macros.FormatString(cfg.font, options, DEFAULT_TEXT_FORMAT.font),
+                Macros.FormatNumber(cfg.size, options, Number(DEFAULT_TEXT_FORMAT.size)),
+                Macros.FormatNumber(cfg.color, options, Number(DEFAULT_TEXT_FORMAT.color), true),
+                Macros.FormatBoolean(cfg.bold, options, Boolean(DEFAULT_TEXT_FORMAT.bold)),
+                Macros.FormatBoolean(cfg.italic, options, Boolean(DEFAULT_TEXT_FORMAT.italic)),
+                Macros.FormatBoolean(cfg.underline, options, Boolean(DEFAULT_TEXT_FORMAT.underline)),
+                "", "", // url, target
+                Macros.FormatString(cfg.align, options, DEFAULT_TEXT_FORMAT.align),
+                Macros.FormatNumber(cfg.leftMargin, options, Number(DEFAULT_TEXT_FORMAT.leftMargin)),
+                Macros.FormatNumber(cfg.rightMargin, options, Number(DEFAULT_TEXT_FORMAT.rightMargin)),
+                Macros.FormatNumber(cfg.indent, options, Number(DEFAULT_TEXT_FORMAT.indent)),
+                Macros.FormatNumber(cfg.leading, options, Number(DEFAULT_TEXT_FORMAT.leading)));
+            textFormat.tabStops = cfg.tabStops;
+            return textFormat;
+        }
+
         // Create DropShadowFilter from config section
+        // http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filters/DropShadowFilter.html
         public static function createShadowFiltersFromConfig(cfg:CShadow, options:IVOMacrosOptions = null):Array
         {
             return !Macros.FormatBoolean(cfg.enabled, options, true) ? null : [new DropShadowFilter(
                 Macros.FormatNumber(cfg.distance, options, 0),
                 Macros.FormatNumber(cfg.angle, options, 0),
-                Macros.FormatNumber(cfg.color, options, 0),
+                Macros.FormatNumber(cfg.color, options, 0, true),
                 Macros.FormatNumber(cfg.alpha, options, 70) / 100.0,
                 Macros.FormatNumber(cfg.blur, options, 4),
                 Macros.FormatNumber(cfg.blur, options, 4),
