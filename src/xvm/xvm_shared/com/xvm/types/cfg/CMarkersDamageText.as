@@ -8,7 +8,7 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkersDamageText extends Object implements ICloneable
     {
-        public var visible:*;
+        public var enabled:*;
         public var x:*;
         public var y:*;
         public var alpha:*;

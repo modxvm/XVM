@@ -23,13 +23,12 @@
   "ally": {
     "alive": {
       "normal": {
-        //"clanIcon": { "visible": true, "x": 0, "y": -67 },
         "vehicleIcon": {
           "maxScale": 100,
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "visible": false,
+          "enabled": false,
           "x": 0,
           "y": -65,
           "alpha": 100,
@@ -37,7 +36,7 @@
           "amount": 30
         },
         "healthBar": {
-          "visible": true,
+          "enabled": true,
           "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
           "border": { "color": "0x000000", "alpha": 50, "size": 1 },
           "fill": { "alpha": 80 },
@@ -54,14 +53,14 @@
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -26,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
             "format": "<font face='$UniversCondC' size='13'>{{vehicle}}{{turret}}</font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Rating marks",
             "x": 0, "y": -35,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
@@ -69,7 +68,7 @@
             "format": ${"def.markersStat"}
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Dynamic HP",
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
@@ -83,7 +82,7 @@
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "visible": false,
+          "enabled": false,
           "x": 0,
           "y": -65,
           "alpha": 100,
@@ -91,7 +90,7 @@
           "amount": 50
         },
         "healthBar": {
-          "visible": true,
+          "enabled": true,
           "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
           "border": { "color": "0x000000", "alpha": 50, "size": 1 },
           "fill": { "alpha": 80 },
@@ -107,27 +106,27 @@
           "y": -55
         },
         "clanIcon": {
-          "visible": true,
+          "enabled": true,
           "x": 0,
           "y": -67
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -26,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
             "format": "<font face='$UniversCondC' size='13'>{{nick}}</font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "HP",
             "x": 0, "y": -38, "color": "0xD9FFB3",
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
             "format": "<font face='$UniversCondC' size='11'><b>{{hp}} / {{hp-max}}</b></font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Tank Rating",
             "x": 0, "y": -52, "alpha": 75,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
@@ -170,14 +169,14 @@
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -18, "alpha": 80,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
             "format": "<font face='$UniversCondC' size='13'><font color='#7BEC37'>{{vehicle}}</font></font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -32, "alpha": 80,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
@@ -195,7 +194,7 @@
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "visible": false,
+          "enabled": false,
           "x": 0,
           "y": -65,
           "alpha": 100,
@@ -203,7 +202,7 @@
           "amount": 50
         },
         "healthBar": {
-          "visible": true,
+          "enabled": true,
           "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
           "border": { "color": "0x000000", "alpha": 50, "size": 1 },
           "fill": { "alpha": 80 },
@@ -221,14 +220,14 @@
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -26,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
             "format": "<font face='$UniversCondC' size='13'>{{vehicle}}{{turret}}</font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Rating marks",
             "x": 0, "y": -35,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
@@ -236,7 +235,7 @@
             "format": ${"def.markersStat"}
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "HP",
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
@@ -250,7 +249,7 @@
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "visible": false,
+          "enabled": false,
           "x": 0,
           "y": -65,
           "alpha": 100,
@@ -258,7 +257,7 @@
           "amount": 50
         },
         "healthBar": {
-          "visible": true,
+          "enabled": true,
           "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
           "border": { "color": "0x000000", "alpha": 50, "size": 1 },
           "fill": { "alpha": 80 },
@@ -274,27 +273,27 @@
           "y": -55
         },
         "clanIcon": {
-          "visible": true,
+          "enabled": true,
           "x": 0,
           "y": -67
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -26,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
             "format": "<font face='$UniversCondC' size='13'>{{nick}}</font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "HP",
             "x": 0, "y": -38,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
             "format": "<font face='$UniversCondC' size='11' color='{{c:hp-ratio}}'><b>{{hp}} / {{hp-max}}</b></font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Tank Rating",
             "x": 0, "y": -52, "alpha": 75,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
@@ -337,14 +336,14 @@
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -18, "alpha": 80,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
             "format": "<font face='$UniversCondC' size='13'><font color='#EC3737'>{{vehicle}}</font></font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -32, "alpha": 80,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },

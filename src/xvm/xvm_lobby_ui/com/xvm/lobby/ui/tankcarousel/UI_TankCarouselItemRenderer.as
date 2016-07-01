@@ -163,7 +163,7 @@ package com.xvm.lobby.ui.tankcarousel
             _extraFields.addChild(mc);
 
             mc.scaleX = mc.scaleY = cfg.scale;
-            mc.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            mc.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             mc.x += cfg.dx;
             mc.y += cfg.dy;
         }
@@ -174,7 +174,7 @@ package com.xvm.lobby.ui.tankcarousel
             slot.tankIcon.tankNameField.scaleX = slot.tankIcon.tankNameField.scaleY =
                 slot.tankIcon.tankNameBg.scaleX = slot.tankIcon.tankNameBg.scaleY = cfg.scale;
             slot.tankIcon.tankNameField.alpha = slot.tankIcon.tankNameBg.alpha =
-                cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+                cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             slot.tankIcon.tankNameField.x = 2 + cfg.dx;
             slot.tankIcon.tankNameField.width = ITEM_WIDTH - 4;
             if (isNaN(orig_tankIcon_tankNameField_y))
@@ -189,7 +189,7 @@ package com.xvm.lobby.ui.tankcarousel
         private function setupInfoTextField(cfg:Object):void
         {
             infoText.scaleX = infoText.scaleY = cfg.scale;
-            infoText.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            infoText.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             if (isNaN(orig_infoText_x))
                 orig_infoText_x = infoText.x;
             infoText.x = orig_infoText_x + cfg.dx;
@@ -203,7 +203,7 @@ package com.xvm.lobby.ui.tankcarousel
         private function setupClanLockField(cfg:Object):void
         {
             clanLock.scaleX = clanLock.scaleY = cfg.scale;
-            clanLock.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            clanLock.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             if (isNaN(orig_clanLock_x))
                 orig_clanLock_x = clanLock.x;
             clanLock.x = orig_clanLock_x + cfg.dx;

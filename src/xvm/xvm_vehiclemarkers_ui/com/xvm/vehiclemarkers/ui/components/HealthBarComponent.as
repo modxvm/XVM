@@ -53,7 +53,7 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersHealthBar = e.cfg.healthBar;
-                healthBar.visible = Macros.FormatBoolean(cfg.visible, e.playerState, true);
+                healthBar.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
                 if (healthBar.visible)
                 {
                     var playerState:VOPlayerState = e.playerState;

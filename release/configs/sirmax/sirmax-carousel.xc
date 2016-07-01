@@ -31,14 +31,14 @@
     //"sorting_criteria": ["nation", "type", "level"],
     //"suppressCarouselTooltips": false
     "fields": {
-      "tankType":       { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "level":          { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "multiXp":        { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "xp":             { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      //"tankName":       { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "statusText":     { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "statusTextBuy":  { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "clanLock":       { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "tankType":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "level":          { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "multiXp":        { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "xp":             { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      //"tankName":       { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "statusText":     { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "statusTextBuy":  { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "clanLock":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "activateButton": { "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "__stub__": {}
     },

@@ -6,7 +6,7 @@
   "hitLog": {
     // false - Disable.
     // false - отключить.
-    "visible": true,
+    "enabled": true,
 
     // Show enemy HP left by Alt press
     // Destroyed enemies and enemies HP gets updated only when it markers become visible.

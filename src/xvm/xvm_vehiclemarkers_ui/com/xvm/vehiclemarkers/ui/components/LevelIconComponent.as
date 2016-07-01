@@ -22,7 +22,7 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersLevelIcon = e.cfg.levelIcon;
-                marker.levelIcon.visible = Macros.FormatBoolean(cfg.visible, e.playerState, true);
+                marker.levelIcon.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
                 if (marker.levelIcon.visible)
                 {
                     marker.levelIcon.x = Macros.FormatNumber(cfg.x, e.playerState);

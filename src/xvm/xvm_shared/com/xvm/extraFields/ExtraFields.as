@@ -64,7 +64,7 @@ package com.xvm.extraFields
                     format = ObjectConverter.convertData(format, CExtraField);
                 }
 
-                if (Macros.FormatBooleanGlobal(format.enabled, true) || (format.visible != null && Macros.FormatBooleanGlobal(format.visible, true)))
+                if (Macros.FormatBooleanGlobal(format.enabled, true))
                 {
                     addChild(format.src != null
                         ? new (App.utils.classFactory.getClass("com.xvm.extraFields::ImageExtraField"))(format, isLeftPanel, getSchemeNameForImage) // TODO: make ImageExtraField shared

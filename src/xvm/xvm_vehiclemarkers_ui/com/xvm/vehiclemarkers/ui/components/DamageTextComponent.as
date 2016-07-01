@@ -48,7 +48,7 @@ package com.xvm.vehiclemarkers.ui.components
                 var playerState:VOPlayerState = e.playerState;
                 var damageFlag:Number = playerState.damageInfo.damageFlag;
                 var cfg:CMarkersDamageText = damageFlag == Defines.FROM_PLAYER ? e.cfg.damageTextPlayer : damageFlag == Defines.FROM_SQUAD ? e.cfg.damageTextSquadman : e.cfg.damageText;
-                damage.visible = Macros.FormatBoolean(cfg.visible, e.playerState, true);
+                damage.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
                 if (damage.visible)
                 {
                     var text:String = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);

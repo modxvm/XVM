@@ -102,7 +102,7 @@ package com.xvm.vehiclemarkers.ui.components
                     //GraphicsUtil.setColor(proxy.iconLoader, tintColor, tintAmount);
                 //}
 //
-                //var visible = cfg.visible;
+                //var visible = cfg.enabled;
                 //if (visible)
                 //{
                     //proxy.iconLoader._x = cfg.x - (proxy.iconLoader.content._width / 2.0);

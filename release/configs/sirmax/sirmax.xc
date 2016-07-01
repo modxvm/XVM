@@ -239,7 +239,7 @@
     "hpLeft": {
       "enabled": "false"
     },
-    "visible": true,
+    "enabled": true,
     "x": 235,
     "y": -230,
     "w": 500,

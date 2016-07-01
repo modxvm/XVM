@@ -10,7 +10,7 @@
     // Всплывающий урон.
     "damageText": {
       // false - disable / не отображать.
-      "visible": true,
+      "enabled": true,
       // Axis field coordinates
       // Положение поля по осям
       "x": 0,
@@ -58,7 +58,7 @@
     // Текстовое поле с именем игрока.
     "playerName": {
       "name": "Player name",          // название текстового поля, ни на что не влияет
-      "visible": true,                // false - не отображать
+      "enabled": true,                // false - не отображать
       "x": 0,                         // положение по оси X
       "y": -34,                       // положение по оси Y
       "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
@@ -91,7 +91,7 @@
     // Текстовое поле с названием танка.
     "tankName": {
       "name": "Tank name",            // название текстового поля, ни на что не влияет
-      "visible": true,                // false - не отображать
+      "enabled": true,                // false - не отображать
       "x": 0,                         // положение по оси X
       "y": -20,                       // положение по оси Y
       "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
@@ -121,9 +121,9 @@
     // Иконка типа танка (ТТ/СТ/ЛТ/ПТ/Арта).
     "vehicleIcon": {
       // false - disable / не отображать
-      "visible": true,
-      // true - show speaker even if visible=false
-      // true - показывать спикер, даже если visible=false
+      "enabled": true,
+      // true - show speaker even if enabled=false
+      // true - показывать спикер, даже если enabled=false
       "showSpeaker": false,
       // Axis field coordinates
       // Положение поля по осям
@@ -160,7 +160,7 @@
     },
     // Индикатор здоровья.
     "healthBar": {
-      "visible": false,                 //   false - не отображать
+      "enabled": false,                 //   false - не отображать
       "x": -41,                         //   положение по оси X
       "y": -33,                         //   положение по оси Y
       "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. macros.txt)
@@ -200,7 +200,7 @@
     // Контурная иконка танка.
     "contourIcon": {
       // false - disable / не отображать.
-      "visible": false,
+      "enabled": false,
       // Axis field coordinates.
       // Положение поля по осям.
       "x": 6,
@@ -218,7 +218,7 @@
     // Vehicle tier.
     // Уровень танка.
     "levelIcon": {
-      "visible": false,  // false - disable        / не отображать.
+      "enabled": false,  // false - disable        / не отображать.
       "x": 0,            // Position on the X axis / Положение по оси X.
       "y": -21,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
@@ -226,7 +226,7 @@
     // Markers "Help!" and "Attack!".
     // Маркеры "Нужна помощь" и "Атакую".
     "actionMarker": {
-      "visible": true,   // false - disable        / не отображать.
+      "enabled": true,   // false - disable        / не отображать.
       "x": 0,            // Position on the X axis / Положение по оси X.
       "y": -67,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
@@ -243,7 +243,7 @@
     // Type of vehicle icon (HT/MT/LT/TD/Arty).
     // Иконка типа танка (ТТ/СТ/ЛТ/ПТ/Арта).
     "vehicleIcon": {
-      "visible": true,
+      "enabled": true,
       "showSpeaker": false,
       "x": 0,
       "y": -16,
@@ -264,7 +264,7 @@
     },
     // Индикатор здоровья.
     "healthBar": {
-      "visible": false,
+      "enabled": false,
       "x": -41,
       "y": -33,
       "alpha": 100,
@@ -300,7 +300,7 @@
     // Vehicle contour icon.
     // Контурная иконка танка.
     "contourIcon": {
-      "visible": false,
+      "enabled": false,
       "x": 6,
       "y": -65,
       "alpha": 100,
@@ -310,7 +310,7 @@
     // Vehicle tier.
     // Уровень танка.
     "levelIcon": {
-      "visible": false,
+      "enabled": false,
       "x": 0,
       "y": -21,
       "alpha": 100
@@ -318,7 +318,7 @@
     // Markers "Help!" and "Attack!".
     // Маркеры "Нужна помощь" и "Атакую".
     "actionMarker": {
-      "visible": true,
+      "enabled": true,
       "x": 0,
       "y": -67,
       "alpha": 100

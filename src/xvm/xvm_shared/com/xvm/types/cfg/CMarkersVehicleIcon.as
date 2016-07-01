@@ -8,7 +8,7 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkersVehicleIcon extends Object implements ICloneable
     {
-        public var visible:*;
+        public var enabled:*;
         public var showSpeaker:*;
         public var x:*;
         public var y:*;

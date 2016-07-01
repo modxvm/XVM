@@ -121,7 +121,7 @@ package com.xvm.vehiclemarkers.ui.components
         //{
             //var cfg = state_cfg.vehicleIcon;
 //
-            //var visible = cfg.visible || (proxy.isSpeaking && cfg.showSpeaker);
+            //var visible = cfg.enabled || (proxy.isSpeaking && cfg.showSpeaker);
 //
             //if (visible)
                 //draw(cfg);

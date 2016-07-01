@@ -69,7 +69,7 @@
     // Standard cell elements.
     // Стандартные элементы ячеек.
     "fields": {
-      // "visible"  - the visibility of the element / видимость элемента
+      // "enabled"  - the visibility of the element / видимость элемента
       // "dx"       - horizontal shift              / смещение по горизонтали
       // "dy"       - vertical shift                / смещение по вертикали
       // "alpha"    - transparency                  / прозрачность
@@ -77,28 +77,28 @@
       //
       // Vehicle class icon.
       // Иконка типа техники.
-      "tankType": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "tankType": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Vehicle level.
       // Уровень техники
-      "level":    { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "level":    { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // todo: english description
       // Иконка не сбитого кратного опыта за первую победу в день.
-      "multiXp":  { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "multiXp":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // todo: english description
       // Иконка не сбитого опыта за первую победу в день.
-      "xp":       { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "xp":       { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Vehicle name.
       // Название танка.
-      "tankName": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "tankName": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Status text (Crew incomplete, Repairs required)
       // Статусный текст (Неполный экипаж, Требуется ремонт).
-      "statusText": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "statusText": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Status text for "Buy vehicle" and "Buy slot" slots.
       // Статусный текст для слотов "Купить машину" и "Купить слот".
-      "statusTextBuy": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "statusTextBuy": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Clan lock timer
       // Таймер блокировки танка
-      "clanLock":   { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "clanLock":   { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Activate / deactivate button.
       // Кнопка активации / деактивации.
       "activateButton": { "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }

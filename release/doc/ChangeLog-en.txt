@@ -57,6 +57,7 @@
   * changed "carousel"/"scrollingSpeed" value, now it is multiplier for default scrolling rate
   * option "markers"/"useStandardMarkers" renamed to "markers"/"enabled"
   * config format of the text fields in markers are changed to common extraFields config format
+  * option "visible" everywhere changed to "enabled" for unification
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch
