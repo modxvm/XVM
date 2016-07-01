@@ -52,9 +52,6 @@ package com.xvm.vehiclemarkers.ui.components
                 if (damage.visible)
                 {
                     var text:String = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);
-                    if (cfg.color == null)
-                        cfg.color = "{{c:dmg}}";
-                    var color:Number = Macros.FormatNumber(cfg.color, playerState, 0, true);
                     var alpha:Number = Macros.FormatNumber(cfg.alpha, playerState, 1) / 100.0;
 
                     // create text field
@@ -72,9 +69,9 @@ package com.xvm.vehiclemarkers.ui.components
                     textField.multiline = true;
                     textField.wordWrap = false;
                     textField.alpha = alpha;
+                    if (cfg.textFormat != null && cfg.textFormat.color == null)
+                        cfg.textFormat.color = "{{c:dmg}}";
                     textField.defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, playerState);
-                    if (cfg.shadow.color == null)
-                        cfg.shadow.color = "{{c:dmg}}";
                     textField.filters = Utils.createShadowFiltersFromConfig(cfg.shadow, playerState);
                     textField.x -= (textField.width / 2.0);
                     textField.htmlText = "<textformat leading='-2'>" + text + "</textformat>";
