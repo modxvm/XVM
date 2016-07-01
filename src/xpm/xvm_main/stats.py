@@ -3,10 +3,11 @@
 #############################
 # Command
 
-def getBattleStat(args):
+def getBattleStat(args, respondFunc):
     _stat.enqueue({
         'func': _stat.getBattleStat,
         'cmd': XVM_COMMAND.AS_STAT_BATTLE_DATA,
+        'respondFunc': respondFunc,
         'args': args})
     _stat.processQueue()
 
@@ -159,7 +160,8 @@ class _Stat(object):
     def _respond(self):
         debug("respond: " + self.req['cmd'])
         self.resp = unicode_to_ascii(self.resp)
-        as_xfw_cmd(self.req['cmd'], self.resp)
+        func = self.req.get('respondFunc', as_xfw_cmd)
+        func(self.req['cmd'], self.resp)
 
 
     # Threaded

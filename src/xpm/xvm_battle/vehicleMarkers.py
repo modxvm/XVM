@@ -138,7 +138,7 @@ class VehicleMarkers(object):
             elif cmd == XVM_COMMAND.GET_MY_VEHCD:
                 return getVehCD(BigWorld.player().playerVehicleID)
             elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
-                stats.getBattleStat(args)
+                stats.getBattleStat(args, self.call)
             else:
                 warn('Unknown command: {}'.format(cmd))
         except Exception, ex:
