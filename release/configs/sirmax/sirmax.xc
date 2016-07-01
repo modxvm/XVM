@@ -64,7 +64,7 @@
     "clock": {
       //"x": 100,
       //"y": 5,
-      //"format": "<font face='$UniversCondC'><font size='26'> {{H}}:{{m%02d}} {{AM?a.m.|p.m.}}</font></font>"
+      //"format": "<font face='$FieldFont'><font size='26'> {{H}}:{{m%02d}} {{AM?a.m.|p.m.}}</font></font>"
     },
     "serverInfo": {
       //"enabled": false,
@@ -127,7 +127,7 @@
           //"bgColor": null,
           //"borderColor": "0xFFFF00",
           //"shadow": { "distance": 0, "angle": 45, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 4 },
-          //"format": "<font face='$UniversCondC' size='20'>frags:{{my-frags}} x{{zoom}}</font>",
+          //"format": "<font face='$FieldFont' size='20'>frags:{{my-frags}} x{{zoom}}</font>",
           "enabled": true,
           "__stub__": null
         }
@@ -256,7 +256,7 @@
     "formatHeader":  "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font></textformat>",
     "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
   },
-  //"markers": ${"sirmax-markers.xc":"."},
+  "markers": ${"sirmax-markers.xc":"."},
   "alpha": {
     "hp": [
       { "value": 350,  "alpha": 100 },

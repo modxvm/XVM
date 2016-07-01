@@ -21,7 +21,7 @@
       // Font options.
       // Параметры шрифта.
       "textFormat": {
-        "font": "$UniversCondC",        // Font name      / Название
+        "font": "$FieldFont",           // Font name      / Название
         "size": 18,                     // Font size      / Размер
         // Color (dynamic colors allowed, see macros.txt).
         // Цвет (допускается использование динамического цвета, см. macros.txt)
@@ -67,7 +67,7 @@
       // Font options.
       // Параметры шрифта.
       "textFormat": {
-        "font": "$UniversCondC",      //   название
+        "font": "$FieldFont",         //   название
         "size": 13,                   //   размер
         "color": null,                //   цвет (допускается использование динамического цвета, см. macros.txt)
         "align": "center",            //   выравнивание текста (left, center, right)
@@ -98,7 +98,7 @@
       "y": -20,
       "alpha": 100,
       "textFormat": {
-        "font": "$UniversCondC",
+        "font": "$FieldFont",
         "size": 11,
         "color": "0xD9D9D9",
         "align": "center",
@@ -125,7 +125,7 @@
       "y": -48,
       "alpha": 100,
       "textFormat": {
-        "font": "$UniversCondC",
+        "font": "$FieldFont",
         "size": 12,
         "color": "{{c:r}}",
         "align": "center",

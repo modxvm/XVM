@@ -109,7 +109,7 @@
       "fontStyle": {
         // Font name
         // Название шрифта
-        "name": "$UniversCondC",
+        "name": "$FieldFont",
         "size": 12,         // Размер
         "bold": false,      // Жирный
         "italic": false,    // Курсив
@@ -212,7 +212,7 @@
       "fontStyle": {
         // Font name
         // Название шрифта
-        "name": "$UniversCondC",
+        "name": "$FieldFont",
         "size": 12,         // Размер
         "bold": false,      // Жирный
         "italic": false,    // Курсив

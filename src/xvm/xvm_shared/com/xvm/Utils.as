@@ -15,7 +15,7 @@ package com.xvm
 
     public class Utils
     {
-        public static const DEFAULT_TEXT_FORMAT:TextFormat = new TextFormat("$UniversCondC", 14, 0xFFFFFF, null, null, null, null, null, "center");
+        public static const DEFAULT_TEXT_FORMAT:TextFormat = new TextFormat("$FieldFont", 14, 0xFFFFFF, null, null, null, null, null, "center");
 
         // Create TextFormat from config section
         // http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
