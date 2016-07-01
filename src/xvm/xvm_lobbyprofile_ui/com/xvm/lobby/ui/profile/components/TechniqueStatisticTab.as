@@ -145,7 +145,7 @@ package com.xvm.lobby.ui.profile.components
             tf.y = y;
             tf.width = width;
             tf.height = height;
-            tf.styleSheet = XfwUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", fontSize, XfwConst.UICOLOR_LABEL));
+            tf.styleSheet = XfwUtils.createTextStyleSheet("txt", new TextFormat("$UniversCondC", fontSize, XfwConst.UICOLOR_LABEL));
             return tf;
         }
 

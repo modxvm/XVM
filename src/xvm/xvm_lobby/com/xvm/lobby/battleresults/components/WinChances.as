@@ -49,7 +49,7 @@ package com.xvm.lobby.battleresults.components
                 textField.y = 2;
                 textField.width = 400;
                 textField.height = 30;
-                textField.styleSheet = XfwUtils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, XfwConst.UICOLOR_LABEL));
+                textField.styleSheet = XfwUtils.createTextStyleSheet("txt", new TextFormat("$UniversCondC", 16, XfwConst.UICOLOR_LABEL));
                 page.addChild(textField);
             }
 
