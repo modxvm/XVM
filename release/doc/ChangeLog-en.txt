@@ -1,3 +1,7 @@
+XVM-6.3.2.1:
+  * fix for 6th sense sound
+  * fix for tank carousel filters
+
 ﻿XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch
   * changed "shadow"/"alpha" parameter values range from 0..1 to 0..100 in the carousel
