@@ -371,8 +371,11 @@ detect_python
 load_repositorystats
 load_version
 
-clean_repodir
-clean_outputdir
+if [[ "$XFW_DEVELOPMENT" == "" ]]; then
+  clean_repodir
+  clean_outputdir
+fi
+
 create_directories
 
 #patch_as2
@@ -389,7 +392,9 @@ pack_xfw
 
 deploy_xvm
 
-clean_repodir
+if [[ "$XFW_DEVELOPMENT" == "" ]]; then
+  clean_repodir
+fi
 
 post_ipb
 
