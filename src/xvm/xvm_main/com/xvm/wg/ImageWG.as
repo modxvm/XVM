@@ -1,7 +1,5 @@
 package com.xvm.wg
 {
-    import com.xfw.*;
-    import com.xvm.wg.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.data.constants.Values;
@@ -22,6 +20,10 @@ package com.xvm.wg
 
         private var _mgr:IImageManager = null;
 
+        public var successCallback : Function;
+
+        public var errorCallback : Function;
+
         public function ImageWG()
         {
             super();
@@ -30,11 +32,17 @@ package com.xvm.wg
             addChild(this._bitmap);
         }
 
-        public function dispose() : void
+        final public function dispose() : void
         {
+            onDispose();
+        }
+
+        protected function onDispose() : void {
             this.removeImgData();
             removeChild(this._bitmap);
             this._bitmap = null;
+            successCallback = null;
+            errorCallback = null;
         }
 
         private function removeImgData() : void
@@ -55,7 +63,7 @@ package com.xvm.wg
             this._imgData = param1;
             if(this._imgData.ready)
             {
-                this._imgData.showTo(this);
+                imageDataReady();
             }
             else
             {
@@ -112,16 +120,28 @@ package com.xvm.wg
         protected function onImgDataCompleteHandler(param1:Event) : void
         {
             this.removeImgDataListeners();
-            this._imgData.showTo(this);
+            imageDataReady();
         }
 
         private function onImgDataIOErrorHandler(param1:IOErrorEvent) : void
         {
+            if(errorCallback != null) {
+                errorCallback();
+            }
             this.removeImgDataListeners();
             if(this._repeatLoadOnError)
             {
                 this.setImgData(this._mgr.getImageData(this._source));
             }
         }
+
+        private function imageDataReady() : void {
+            this._imgData.showTo(this);
+            if(successCallback != null) {
+                successCallback();
+            }
+        }
+
+
     }
 }
