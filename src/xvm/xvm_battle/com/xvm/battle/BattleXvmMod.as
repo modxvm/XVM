@@ -13,6 +13,7 @@ package com.xvm.battle
     import com.xvm.battle.fullStats.FullStatsXvmView;
 	import com.xvm.battle.minimap.MinimapXvmView;
     import com.xvm.battle.playersPanel.PlayersPanelXvmView;
+	import com.xvm.battle.sixthSense.SixthSenseXvmView;
     import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
 
     public class BattleXvmMod extends XvmModBase
@@ -30,6 +31,7 @@ package com.xvm.battle
                 PlayersPanelXvmView,
                 TeamBasesPanelXvmView,
 				MinimapXvmView,
+				SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
         }
