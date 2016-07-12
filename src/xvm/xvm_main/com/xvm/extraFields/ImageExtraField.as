@@ -41,9 +41,9 @@
             cfg.bindToIcon = Macros.FormatBooleanGlobal(cfg.bindToIcon, false);
         }
 
-        override public function dispose():void
+        override protected function onDispose():void
         {
-            super.dispose();
+            super.onDispose();
             cfg = null;
         }
 
