@@ -37,10 +37,10 @@ package com.xvm.battle.vo
         public var vehicleIcon:String;
         public var vehicleIconName:String;
         private var _vehicleID:Number;
-        public var vehicleLevel:int;
-        public var vehicleName:String;
+        //public var vehicleLevel:int;
+        //public var vehicleName:String;
         private var _vehicleStatus:uint;
-        public var vehicleType:String;
+        //public var vehicleType:String;
         private var _isAlly:Boolean;
         private var _isBlown:Boolean;
 
@@ -343,14 +343,14 @@ package com.xvm.battle.vo
             vehicleIcon = data.vehicleIcon;
             vehicleIconName = data.vehicleIconName;
             vehicleID = data.vehicleID;
-            vehicleLevel = data.vehicleLevel;
-            vehicleName = data.vehicleName;
-            vehicleType = data.vehicleType;
+            //vehicleLevel = data.vehicleLevel;
+            //vehicleName = data.vehicleName;
+            //vehicleType = data.vehicleType;
 
             vehicleStatus = data.vehicleStatus;
 
             // TODO: refactor
-            _vehicleData = VehicleInfo.getByLocalizedShortName(vehicleName);
+            _vehicleData = VehicleInfo.getByLocalizedShortName(data.vehicleName);
             if (_vehicleData)
             {
                 _vehCD = _vehicleData.vehCD;

@@ -129,7 +129,7 @@ package com.xvm.battle
             // {{marksOnGun}}
             pdata["marksOnGun"] = function(o:VOPlayerState):String
             {
-                return isNaN(o.marksOnGun) || o.vehicleLevel < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun);
+                return isNaN(o.marksOnGun) || o.vehicleData.level < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun);
             }
 
             // spotted
