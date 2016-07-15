@@ -13,17 +13,6 @@ package com.xvm.vehiclemarkers.ui.components
 
     public class VehicleTypeIconComponent extends VehicleMarkerComponentBase
     {
-        // Fix markers centering
-        private static const MARKER_CENTER_OFFSET_X:Number = -9.5;
-        private static const MARKER_CENTER_OFFSET_Y:Object = {
-            "LT": -23.5,
-            "MT": -24.5,
-            "HT": -29.5,
-            "TD": -20.5,
-            "SPG": -20.5,
-            "dynamic": -22.5
-        }
-
         private var showSpeaker:Boolean = false;
 
         public function VehicleTypeIconComponent(marker:XvmVehicleMarker)
@@ -55,8 +44,8 @@ package com.xvm.vehiclemarkers.ui.components
                     var offsetY:Number = Macros.FormatNumber(cfg.offsetY, e.playerState);
                     var maxScale:Number = Macros.FormatNumber(cfg.maxScale, e.playerState) / 100.0;
 
-                    var x:Number = (offsetX + MARKER_CENTER_OFFSET_X) * maxScale;
-                    var y:Number = (offsetY + MARKER_CENTER_OFFSET_Y[e.playerState.vehicleData.vtype]) * maxScale;
+                    var x:Number = offsetX * maxScale;
+                    var y:Number = offsetY * maxScale;
                     marker.marker.vehicleTypeIcon.x = x;
                     marker.marker.vehicleTypeIcon.y = y;
                     marker.marker.vehicleTypeIcon.scaleX = marker.marker.vehicleTypeIcon.scaleY = maxScale;

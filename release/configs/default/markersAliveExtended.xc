@@ -169,7 +169,7 @@
       "offsetX": 0,
       // Offset along the Y axis (?)
       // Смещение по оси Y (?)
-      "offsetY": 16
+      "offsetY": 0
     },
     // Индикатор здоровья.
     "healthBar": {
@@ -264,7 +264,7 @@
       "alpha": 100,
       "maxScale": 100,
       "offsetX": 0,
-      "offsetY": 16
+      "offsetY": 0
     },
     // Индикатор здоровья.
     "healthBar": {
