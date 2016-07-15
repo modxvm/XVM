@@ -6,28 +6,10 @@
 #constants
 PLAYERGLOBAL_VERSIONS="11.0 11.1"
 
-#AS2/3 compilation and patching
-build_as2_h(){
-    $XVMBUILD_MONO_FILENAME "$XVMBUILD_FDBUILD_FILEPATH" -notrace $1 > /dev/null || exit 1
-}
-
+# AS3 compilation
 build_as3_h(){
     $XVMBUILD_MONO_FILENAME "$XVMBUILD_FDBUILD_FILEPATH" -notrace -compiler:"$FLEX_HOME" -cp:"" "$1" > /dev/null || exit 1
 }
-
-patch_as2_h(){
-    swfmill swf2xml orig/$1.swf temp/$1.xml || exit 1
-    patch temp/$1.xml $1.xml.patch || exit 1
-    swfmill xml2swf temp/$1.xml $1.swf || exit 1
-}
-
-patch_as2_ffdec_h(){
-    java -jar "$XVMBUILD_FFDEC_FILEPATH" -swf2xml orig/$1.swf temp/$1.xml || exit 1
-    sed -i 's/^M$//' temp/$1.xml
-    patch --binary temp/$1.xml $1.xml.patch || exit 1
-    java -jar "$XVMBUILD_FFDEC_FILEPATH" -xml2swf temp/$1.xml $1.swf || exit 1
-}
-#
 
 #Arch and OS detection
 detect_arch(){
@@ -87,7 +69,7 @@ detect_coreutils(){
 
 detect_ffdec(){
     # export XVMBUILD_FFDEC_FILEPATH to set your own ffec.jar location
-    if [ "$XVMBUILD_FFDEC_FILEPATH" == "" ]; then
+    if [ ! -f "$XVMBUILD_FFDEC_FILEPATH" ]; then
         declare -a arr
         arr=$(echo $PATH | tr -s ':' '\n')
         for i in $arr; do
@@ -106,7 +88,7 @@ detect_ffdec(){
 
 detect_fdbuild(){
     # export XVMBUILD_FDBUILD_FILEPATH to set your own fdbuild.exe location
-    if [ "$XVMBUILD_FDBUILD_FILEPATH" == "" ]; then
+    if [ ! -f "$XVMBUILD_FDBUILD_FILEPATH" ]; then
         declare -a arr
         arr=$(echo $PATH | tr -s ':' '\n')
         for i in $arr; do
@@ -234,13 +216,6 @@ detect_python(){
     pythonver=$($XVMBUILD_PYTHON_FILEPATH --version 2>&1)
     if [[ ${pythonver:7:3} != "2.7" ]]; then          
         echo "!!! Python 2.7 is not found. Current version is: ${pythonver:7:3}"
-        exit 1
-    fi
-}
-
-detect_swfmill(){
-    if !(hash swfmill 2>/dev/null); then
-        echo "!!! swfmill is not found"
         exit 1
     fi
 }

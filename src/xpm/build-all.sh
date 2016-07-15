@@ -3,7 +3,7 @@
 #############################
 # CONFIG
 
-RUN_TEST=1
+XPM_RUN_TEST=${XPM_RUN_TEST:=1}
 
 #############################
 # INTERNAL
@@ -143,6 +143,6 @@ rm -f "$xvm_xc_sample_trgt"
 popd >/dev/null
 
 # run test
-if [ "$OS" = "Windows_NT" -a "$XFW_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
+if [ "$OS" = "Windows_NT" -a "$XFW_DEVELOPMENT" = "1" -a "$XPM_RUN_TEST" = "1" ]; then
   sh "$(dirname $(realpath $(cygpath --unix $0)))/../../utils/test.sh"
 fi

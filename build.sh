@@ -43,13 +43,6 @@ clean_repodir(){
     rm -rf src/xfw/src/actionscript/lib/*
     rm -rf src/xfw/src/actionscript/obj/*
     rm -rf src/xfw/src/actionscript/output/*
-    rm -rf src/xvm-as2/include/
-    rm -rf src/xvm-as2/swf/battle.swf
-    rm -rf src/xvm-as2/swf/PlayersPanel.swf
-    rm -rf src/xvm-as2/swf/StatisticForm.swf
-    rm -rf src/xvm-as2/swf/TeamBasesPanel.swf
-    rm -rf src/xvm-as2/swf/VehicleMarkersManager.swf
-    rm -rf src/xvm-as2/swf/temp/
     rm -rf ~output/
     rm -rf src/xfw/~output/
 
@@ -67,7 +60,7 @@ clean_sha1()
     rm -rf src/xfw/~output/sha1/
     rm -rf ~output/cmp/
     rm -rf src/xfw/~output/cmp/
-    popd > /dev/null 
+    popd > /dev/null
 }
 
 create_directories(){
@@ -79,7 +72,6 @@ create_directories(){
     mkdir -p ~output/mods/xfw/actionscript
     mkdir -p ~output/mods/xfw/python
     mkdir -p ~output/mods/shared_resources/xvm/
-    mkdir -p src/xvm-as2/swf/temp/
     popd > /dev/null
 }
 
@@ -89,7 +81,7 @@ extend_path(){
 
 load_repositorystats(){
     #read xvm revision and hash
-    pushd "$XVMBUILD_REPOSITORY_PATH"/ > /dev/null       
+    pushd "$XVMBUILD_REPOSITORY_PATH"/ > /dev/null
         export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
         export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
         export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
@@ -114,26 +106,6 @@ load_version(){
 ####  BUILD FUNCTIONS ####
 ##########################
 
-patch_as2(){
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xvm-as2/swf/ > /dev/null
-    ./make-patched-swfs.sh    
-    ./make-patched-swfs-ffdec.sh    
-    popd > /dev/null
-}
-
-build_as2(){
-    echo ""
-    echo "Building AS2 files"
-
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xvm-as2/ > /dev/null
-    for proj in *.as2proj;
-        do
-            echo "Building $proj"
-            build_as2_h "$proj"
-        done
-    popd > /dev/null
-}
-
 build_as3(){
     echo ""
     echo "Building AS3 files"
@@ -143,27 +115,18 @@ build_as3(){
     top=( "_xvm_shared.as3proj" "_xvm_main.as3proj" "xvm_lobby.as3proj" "xvm_battle.as3proj" )
     for proj in "${top[@]}"; do
         echo "Building $proj"
-        build_as3_h "$proj"
+        build_as3_h "$proj" || exit $?
     done
     for proj in *.as3proj; do
         exists=0
         for e in "${top[@]}"; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
         if [ $exists -eq 0 ]; then
             echo "Building $proj"
-            build_as3_h "$proj"
+            build_as3_h "$proj" || exit $?
         fi
     done
 
     popd > /dev/null
-}
-
-build_xpm(){
-    echo ""
-    echo "Building XPM"
-
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xpm/ >/dev/null
-    ./build-all.sh
-    popd >/dev/null
 }
 
 build_xfw(){
@@ -171,7 +134,7 @@ build_xfw(){
     echo "Building XFW"
 
     pushd "$XVMBUILD_REPOSITORY_PATH"/src/xfw/ >/dev/null
-    ./build.sh
+    ./build.sh || exit $?
     popd >/dev/null
 
     pushd "$XVMBUILD_REPOSITORY_PATH" >/dev/null
@@ -182,10 +145,21 @@ build_xfw(){
     popd >/dev/null
 }
 
+build_xpm(){
+    echo ""
+    echo "Building XPM"
+
+    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xpm/ >/dev/null
+    export XPM_RUN_TEST=0
+    ./build-all.sh || exit $?
+    unset XPM_RUN_TEST
+    popd >/dev/null
+}
+
 calc_hash_for_xvm_integrity(){
     echo ""
     echo "Calculating hashes for xvm_integrity"
-    
+
     pushd ~output > /dev/null
     hash_file='res_mods/mods/packages/xvm_integrity/python/hash_table.py'
     echo -e '""" Generated automatically by XVM builder """\nHASH_DATA = {' > $hash_file
@@ -224,7 +198,7 @@ copy_files(){
     popd >/dev/null
 
     # move all in res_mods
-    
+
     pushd "$XVMBUILD_REPOSITORY_PATH"/ > /dev/null
     mkdir -p res_mods/
     mv ~output/* res_mods/
@@ -248,8 +222,8 @@ pack_xfw(){
     echo "$XVMBUILD_XFW_REVISION" >> "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
     echo "$XVMBUILD_XFW_HASH" >> "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
     echo "$XVMBUILD_XFW_BRANCH" >> "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
-    
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/ > /dev/null 
+
+    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/ > /dev/null
     zip -9 -r -q "$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip ./
     rm "$XVMBUILD_XFW_REVISION"
     popd > /dev/null
@@ -263,9 +237,9 @@ pack_xvm(){
     echo "$XVMBUILD_XVM_HASH" >> "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_XVM_REVISION"
     echo "$XVMBUILD_XVM_BRANCH" >> "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_XVM_REVISION"
 
-    pushd "$XVMBUILD_REPOSITORY_PATH"/~output/ > /dev/null 
+    pushd "$XVMBUILD_REPOSITORY_PATH"/~output/ > /dev/null
     zip -9 -r -q "$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip ./
-    popd > /dev/null   
+    popd > /dev/null
 }
 
 deploy_xvm(){
@@ -363,7 +337,6 @@ detect_ffdec
 detect_fdbuild
 detect_flex
 detect_mtasc
-detect_swfmill
 detect_wget
 detect_zip
 detect_python
@@ -378,24 +351,19 @@ fi
 
 create_directories
 
-#patch_as2
-#build_as2
-build_xpm
 build_xfw
+build_xpm
 build_as3
 
-clean_sha1
-copy_files
-calc_hash_for_xvm_integrity
-pack_xvm
-pack_xfw
-
-deploy_xvm
-
 if [[ "$XFW_DEVELOPMENT" == "" ]]; then
+  clean_sha1
+  copy_files
+  calc_hash_for_xvm_integrity
+  pack_xvm
+  pack_xfw
+  deploy_xvm
   clean_repodir
+  post_ipb
 fi
-
-post_ipb
 
 popd >/dev/null
