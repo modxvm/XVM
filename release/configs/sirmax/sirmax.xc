@@ -123,7 +123,6 @@
           //"height": 40,
           //"alpha": 100,
           //"align": "left",
-          //"valign": "center",
           //"bgColor": null,
           //"borderColor": "0xFFFF00",
           //"shadow": { "distance": 0, "angle": 45, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 4 },
