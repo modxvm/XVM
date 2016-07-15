@@ -19,7 +19,7 @@ package com.xvm.vehiclemarkers.ui.components
         public function HealthBarComponent(marker:XvmVehicleMarker)
         {
             super(marker);
-            marker.addEventListener(XvmVehicleMarkerEvent.UPDATEHEALTH, showDamage);
+            marker.addEventListener(XvmVehicleMarkerEvent.UPDATE_HEALTH, showDamage);
         }
 
         private var healthBar:Sprite;

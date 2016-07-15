@@ -34,154 +34,105 @@ package com.xvm.vehiclemarkers.ui.components
             //m_markerState = null;
         }
 
-        //public function init(vehicleClass, hunt)
+        //private var m_contourIconLoaded:Boolean;
+        //private var m_iconset: IconLoader;
+        //public var onEnterFrame:Function;
+
+//        public function init()
         //{
-            //m_vehicleClass = vehicleClass;
-            //m_hunt = hunt;
+            //onEnterFrame = null;
 //
-            //updateMarkerLabel();
-        //}
+            //m_contourIconLoaded = false;
 //
-        //private function getFrameName()
-        //{
-            //return (proxy.isSpeaking && !proxy.isDead) ? "dynamic" : m_vehicleClass;
-        //}
-//
-        //public function setVehicleClass()
-        //{
-            ////Logger.add("setVehicleClass: " + m_vehicleClass);
-//
-            //var frameName = getFrameName();
-//
-            //var icon = getIcon();
-            //icon.gotoAndStop(frameName);
-//
-            //colorizeMarkerIcon(icon, proxy.currentStateConfigRoot.vehicleIcon.color);
-        //}
-//
-        //public function setMarkerState(value)
-        //{
-            //m_markerState = value;
-            //var state = /*m_markerState == "immediate_dead" ? "dead" :*/ m_markerState;
-            //proxy.marker.gotoAndPlay(state);
-            //if (state != "normal")
+            //if (proxy.initialized)
             //{
-                //var frame = -1;
-                //var me = this;
-                //proxy.marker.onEnterFrame = function()
+                //setupContourIconComponent(team);
+            //}
+            //else
+            //{
+                //// if loader is not initialized, wait one frame
+                //onEnterFrame = function()
                 //{
-                        //if (frame != this._currentframe)
-                        //{
-                            //frame = this._currentframe;
-                            //return;
-                        //}
-                        //delete this.onEnterFrame;
-                        //this.gotoAndPlay("normal");
-                        //me.colorizeMarkerIcon(me.getIcon(), me.proxy.currentStateConfigRoot.vehicleIcon.color);
-                        ////this.gotoAndPlay("dead");
+                    //delete this.onEnterFrame;
+//
+                    //if (!this.proxy.initialized)
+                    //{
+                        //Logger.add("INTERNAL ERROR: setupContourIconLoader(): proxy.iconLoader not initialized");
+                        //return;
+                    //}
+//
+                    //this.setupContourIconComponent(team);
                 //}
             //}
-//
-            //if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking
-                //this.setVehicleClass();
         //}
 //
-        //public function setMarkerLabel()
+        ///**
+         //* @see .ctor
+         //*/
+        //function setupContourIconComponent(team:String)
         //{
-            ////Logger.add("setMarkerLabel: " + m_markerLabel + " " + m_markerState);
-            //m_markerLabel = null;
-            //updateMarkerLabel(true);
+            //// Alternative icon set
+            //if (!m_iconset)
+            //{
+                //m_iconset = new IconLoader(this, completeLoadContourIcon);
+                //m_iconset.init(proxy.iconLoader,
+                    //[ proxy.source.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((team == "ally")
+                    //? Config.config.iconset.vehicleMarkerAlly
+                    //: Config.config.iconset.vehicleMarkerEnemy)), proxy.source ]);
+            //}
+//
+            //proxy.iconLoader.source = m_iconset.currentIcon;
         //}
 //
-        //public function updateMarkerLabel(skipSetMarkerLabel:Boolean)
+        ///**
+         //* Callback function called when contour icon is loaded
+         //*/
+        //function completeLoadContourIcon()
         //{
-            ////Logger.add("updateMarkerLabel: " + m_markerLabel + " <=> " + ColorsManager.getMarkerColorAlias(proxy.entityName));
-            //var aliasColor = ColorsManager.getMarkerColorAlias(proxy.entityName);
-            //if (m_markerLabel == aliasColor)
+            //proxy.iconLoader._visible = false;
+            //onEnterFrame = function()
+            //{
+                //delete this.onEnterFrame;
+                //this.m_contourIconLoaded = true;
+                //this.updateState(this.proxy.currentStateConfigRoot);
+            //}
+        //}
+//
+        ///**
+         //* Update contour icon state
+         //* @param	state_cfg Current state config section
+         //* @see	completeLoadContourIcon
+         //* @see	XVMUpdateStyle
+         //*/
+        //function updateState(state_cfg:Object)
+        //{
+            //if (!m_contourIconLoaded)
                 //return;
 //
-            //m_markerLabel = aliasColor;
-            //if (!skipSetMarkerLabel)
-                //proxy.setMarkerLabel(m_markerLabel);
-//
-            //if (m_vehicleClass == null)
-                //Logger.add("INTERNAL ERROR: m_vehicleClass == null");
-//
-            //if (m_markerState != null)
+            //try
             //{
-                //if (proxy.isDead)
-                    //m_markerState = "immediate_dead";
-                //setMarkerState(m_markerState);
+                //var cfg = state_cfg.contourIcon;
+//
+                //if (cfg.amount >= 0)
+                //{
+                    //// TODO: Check performance, not necessary to execute every marker update
+                    //var tintColor: Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color));
+                    //var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
+                    //GraphicsUtil.setColor(proxy.iconLoader, tintColor, tintAmount);
+                //}
+//
+                //var visible = cfg.enabled;
+                //if (visible)
+                //{
+                    //proxy.iconLoader._x = cfg.x - (proxy.iconLoader.content._width / 2.0);
+                    //proxy.iconLoader._y = cfg.y - (proxy.iconLoader.content._height / 2.0);
+                    //proxy.iconLoader._alpha = proxy.formatDynamicAlpha(cfg.alpha);
+                //}
+                //proxy.iconLoader._visible = visible;
             //}
-//
-            //this.setVehicleClass();
-        //}
-//
-        //public function updateState(state_cfg:Object)
-        //{
-            //var cfg = state_cfg.vehicleIcon;
-//
-            //var visible = cfg.enabled || (proxy.isSpeaking && cfg.showSpeaker);
-//
-            //if (visible)
-                //draw(cfg);
-//
-            //proxy.marker._visible = visible;
-        //}
-//
-        //// PRIVATE FUNCTIONS
-//
-        //private function draw(cfg:Object)
-        //{
-            //var x = (cfg.scaleX + MARKER_CENTER_OFFSET_X) * cfg.maxScale / 100;
-            //var y = (cfg.scaleY + MARKER_CENTER_OFFSET_Y["$" + getFrameName().split("-").join("_")]) * cfg.maxScale / 100;
-//
-            //// WARNING: do not touch proxy.marker.marker - marker animation will be broken
-//
-            //for (var childName in proxy.marker.marker)
+            //catch (e)
             //{
-                //var obj = proxy.marker.marker[childName];
-                //if (typeof obj != "movieclip")
-                    //continue;
-//
-                //var icon:MovieClip = obj;
-                //icon._x = x;
-                //icon._y = y;
-                //icon._xscale = icon._yscale = cfg.maxScale;
-            //}
-//
-            //proxy.marker._x = cfg.x;
-            //proxy.marker._y = cfg.y;
-            //proxy.marker._alpha = proxy.formatDynamicAlpha(cfg.alpha);
-        //}
-//
-        //private function getIcon():MovieClip
-        //{
-            //var icon = null;
-            //if (proxy.marker.marker.iconHunt == null)
-            //{
-                //icon = proxy.marker.marker.icon;
-            //}
-            //else
-            //{
-                //proxy.marker.marker.icon._visible = !m_hunt;
-                //proxy.marker.marker.iconHunt._visible = m_hunt;
-                //icon = m_hunt ? proxy.marker.marker.iconHunt : proxy.marker.marker.icon;
-            //}
-            //return icon;
-        //}
-//
-        //private function colorizeMarkerIcon(icon:MovieClip, color:String)
-        //{
-            //if (proxy.isSpeaking)
-            //{
-                //icon.transform.colorTransform = new flash.geom.ColorTransform();
-            //}
-            //else
-            //{
-                //// filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
-                //GraphicsUtil.colorize(icon, proxy.formatDynamicColor(proxy.formatStaticColorText(color)),
-                    //proxy.isDead ? Config.config.consts.VM_COEFF_VMM_DEAD : Config.config.consts.VM_COEFF_VMM);
+                //Logger.err(e);
             //}
         //}
     }

@@ -17,7 +17,7 @@ package com.xvm.vehiclemarkers.ui.components
         public function DamageTextComponent(marker:XvmVehicleMarker)
         {
             super(marker);
-            marker.addEventListener(XvmVehicleMarkerEvent.UPDATEHEALTH, showDamage);
+            marker.addEventListener(XvmVehicleMarkerEvent.UPDATE_HEALTH, showDamage);
         }
 
         private var damage:MovieClip;

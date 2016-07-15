@@ -31,7 +31,7 @@ package com.xvm.vehiclemarkers.ui
         private var healthBarComponent:HealthBarComponent;
         private var levelIconComponent:LevelIconComponent;
         private var textFieldsComponent:TextFieldsComponent;
-        private var vehicleIconComponent:VehicleIconComponent;
+        private var vehicleTypeIconComponent:VehicleTypeIconComponent;
 
         public function XvmVehicleMarker()
         {
@@ -141,7 +141,7 @@ package com.xvm.vehiclemarkers.ui
                         }),
                         curHealth: newHealth
                     });
-                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATEHEALTH, playerState, exInfo));
+                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
                 }
             }
             catch (ex:Error)
@@ -172,6 +172,29 @@ package com.xvm.vehiclemarkers.ui
                 Logger.err(ex);
             }
             Xvm.swfProfilerEnd("XvmVehicleMarker.setHealth()");
+        }
+
+        override public function setSpeaking(value:Boolean):void
+        {
+            // WORKAROUND: possible bug - marker instance not deletes on MarkersManager.destroyMarker() call.
+            if (!parent) { dispose(); return; }
+            ///
+
+            Xvm.swfProfilerBegin("XvmVehicleMarker.setSpeaking()");
+            super.setSpeaking(value);
+            try
+            {
+                var playerState:VOPlayerState = BattleState.get(vehicleID);
+                if (playerState != null)
+                {
+                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.SET_SPEAKING, playerState, exInfo));
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            Xvm.swfProfilerEnd("XvmVehicleMarker.setSpeaking()");
         }
 
         override public function set markerSettings(value:Object):void
@@ -212,7 +235,7 @@ package com.xvm.vehiclemarkers.ui
         {
             try
             {
-                vehicleIconComponent = new VehicleIconComponent(this);
+                vehicleTypeIconComponent = new VehicleTypeIconComponent(this);
                 contourIconComponent = new ContourIconComponent(this);
                 levelIconComponent = new LevelIconComponent(this);
                 actionMarkerComponent = new ActionMarkerComponent(this);
@@ -230,8 +253,8 @@ package com.xvm.vehiclemarkers.ui
         {
             try
             {
-                vehicleIconComponent.dispose();
-                vehicleIconComponent = null;
+                vehicleTypeIconComponent.dispose();
+                vehicleTypeIconComponent = null;
                 contourIconComponent.dispose();
                 contourIconComponent = null;
                 levelIconComponent.dispose();
