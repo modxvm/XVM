@@ -7,13 +7,40 @@ package com.xvm.vehiclemarkers.ui.components
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.vehiclemarkers.ui.*;
-    import flash.display.*;
+    import com.xvm.types.cfg.*;
 
     public class ContourIconComponent extends VehicleMarkerComponentBase
     {
         public function ContourIconComponent(marker:XvmVehicleMarker)
         {
             super(marker);
+        }
+
+        override protected function update(e:XvmVehicleMarkerEvent):void
+        {
+            try
+            {
+                super.update(e);
+                var cfg:CMarkersContourIcon = e.cfg.contourIcon;
+                marker.vehicleIcon.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
+                if (marker.vehicleIcon.visible)
+                {
+                    marker.vehicleIcon.x = Macros.FormatNumber(cfg.x, e.playerState);
+                    marker.vehicleIcon.y = Macros.FormatNumber(cfg.y, e.playerState);
+                    marker.vehicleIcon.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
+                }
+
+                var tintAmount:Number = Macros.FormatNumber(cfg.amount, e.playerState, -1);
+                if (tintAmount >= 0)
+                {
+                    var tintColor:Number = Macros.FormatNumber(cfg.color || "{{c:system}}", e.playerState, NaN, true);
+                    GraphicsUtil.setColorTransform(marker.vehicleIcon, tintColor, tintAmount / 100.0);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         //private var m_contourIconLoaded:Boolean;
@@ -65,57 +92,6 @@ package com.xvm.vehiclemarkers.ui.components
 //
             //proxy.iconLoader.source = m_iconset.currentIcon;
         //}
-//
-        ///**
-         //* Callback function called when contour icon is loaded
-         //*/
-        //function completeLoadContourIcon()
-        //{
-            //proxy.iconLoader._visible = false;
-            //onEnterFrame = function()
-            //{
-                //delete this.onEnterFrame;
-                //this.m_contourIconLoaded = true;
-                //this.updateState(this.proxy.currentStateConfigRoot);
-            //}
-        //}
-//
-        ///**
-         //* Update contour icon state
-         //* @param	state_cfg Current state config section
-         //* @see	completeLoadContourIcon
-         //* @see	XVMUpdateStyle
-         //*/
-        //function updateState(state_cfg:Object)
-        //{
-            //if (!m_contourIconLoaded)
-                //return;
-//
-            //try
-            //{
-                //var cfg = state_cfg.contourIcon;
-//
-                //if (cfg.amount >= 0)
-                //{
-                    //// TODO: Check performance, not necessary to execute every marker update
-                    //var tintColor: Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color));
-                    //var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
-                    //GraphicsUtil.setColor(proxy.iconLoader, tintColor, tintAmount);
-                //}
-//
-                //var visible = cfg.enabled;
-                //if (visible)
-                //{
-                    //proxy.iconLoader._x = cfg.x - (proxy.iconLoader.content._width / 2.0);
-                    //proxy.iconLoader._y = cfg.y - (proxy.iconLoader.content._height / 2.0);
-                    //proxy.iconLoader._alpha = proxy.formatDynamicAlpha(cfg.alpha);
-                //}
-                //proxy.iconLoader._visible = visible;
-            //}
-            //catch (e)
-            //{
-                //Logger.err(e);
-            //}
-        //}
+
     }
 }
