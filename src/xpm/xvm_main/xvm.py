@@ -9,6 +9,7 @@ from messenger import MessengerEntry
 from gui import SystemMessages
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
+from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 
 from xfw import *
@@ -304,6 +305,12 @@ class Xvm(object):
 
             if cmd == XVM_COMMAND.LOAD_STAT_USER:
                 stats.getUserData(args)
+                return (None, True)
+
+            # profiler
+
+            if cmd in (XVM_PROFILER_COMMAND.BEGIN, XVM_PROFILER_COMMAND.END):
+                g_eventBus.handleEvent(events.HasCtxEvent(cmd, args[0]))
                 return (None, True)
 
         except Exception, ex:

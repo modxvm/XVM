@@ -60,6 +60,20 @@ package com.xvm
             _instance.dispatchEvent(e);
         }
 
+        // SWF Profiler
+
+        public static function swfProfilerBegin(name:String):void
+        {
+            if (Config.IS_DEVELOPMENT)
+                Xfw.cmd(XvmCommandsInternal.XVM_PROFILER_COMMAND_BEGIN, Logger.counterPrefix + ":" + name);
+        }
+
+        public static function swfProfilerEnd(name:String):void
+        {
+            if (Config.IS_DEVELOPMENT)
+                Xfw.cmd(XvmCommandsInternal.XVM_PROFILER_COMMAND_END, Logger.counterPrefix + ":" + name);
+        }
+
         // initialization
 
         private static var _instance:Xvm;

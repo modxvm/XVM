@@ -8,7 +8,7 @@ import weakref
 
 import BigWorld
 import game
-from gui.shared import g_eventBus
+from gui.shared import g_eventBus, events
 from gui.battle_control import g_sessionProvider
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
 
@@ -139,6 +139,9 @@ class VehicleMarkers(object):
                 return getVehCD(BigWorld.player().playerVehicleID)
             elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
                 stats.getBattleStat(args, self.call)
+            # profiler
+            elif cmd in (XVM_PROFILER_COMMAND.BEGIN, XVM_PROFILER_COMMAND.END):
+                g_eventBus.handleEvent(events.HasCtxEvent(cmd, args[0]))
             else:
                 warn('Unknown command: {}'.format(cmd))
         except Exception, ex:

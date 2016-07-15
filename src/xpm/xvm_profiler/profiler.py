@@ -8,63 +8,31 @@ import cProfile, pstats, StringIO
 import BigWorld
 import game
 from Avatar import PlayerAvatar
-from gui.Scaleform.Flash import Flash
+from gui.shared import g_eventBus
 
 from xfw import *
+from xvm_main.python.consts import XVM_PROFILER_COMMAND
 from xvm_main.python.logger import *
 
-import as2profiler
+from swfprofiler import g_swfprofiler
 
 
 #####################################################################
-# constants
+# initialization/finalization
 
-# for AS2
-class XVM_PROFILER_AS2COMMAND(object):
-    PROF_METHOD_START = "prof_method_start"
-    PROF_METHOD_END = "prof_method_end"
+def start():
+    g_eventBus.addListener(XVM_PROFILER_COMMAND.BEGIN, g_swfprofiler.begin)
+    g_eventBus.addListener(XVM_PROFILER_COMMAND.END, g_swfprofiler.end)
 
-
-#####################################################################
-# as2profiler
-
-_BATTLE_SWF = 'battle.swf'
-_VMM_SWF = 'VehicleMarkersManager.swf'
-_SWFS = [_BATTLE_SWF, _VMM_SWF]
-
-
-@registerEvent(Flash, '__init__')
-def FlashInit(self, swf, className='Flash', args=None, path=None):
-    self.swf = swf
-    if self.swf not in _SWFS:
-        return
-    self.addExternalCallback('xvm.cmd', lambda *args: onXvmCommand(self, *args))
-
-
-@registerEvent(Flash, 'beforeDelete')
-def FlashBeforeDelete(self):
-    if self.swf not in _SWFS:
-        return
-    # log("FlashBeforeDelete: " + self.swf)
-    self.removeExternalCallback('xvm.cmd')
-
+BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
+    g_eventBus.removeListener(XVM_PROFILER_COMMAND.BEGIN, g_swfprofiler.begin)
+    g_eventBus.removeListener(XVM_PROFILER_COMMAND.END, g_swfprofiler.end)
+
+    # show results on client close
     showPythonResult()
-
-
-#####################################################################
-# onXvmCommand
-
-def onXvmCommand(proxy, id, cmd, *args):
-    try:
-        if cmd == XVM_PROFILER_AS2COMMAND.PROF_METHOD_START:
-            as2profiler.g_as2profiler.methodStart(args[0])
-        if cmd == XVM_PROFILER_AS2COMMAND.PROF_METHOD_END:
-            as2profiler.g_as2profiler.methodEnd(args[0])
-    except Exception, ex:
-        err(traceback.format_exc())
 
 
 #####################################################################
@@ -73,26 +41,21 @@ def onXvmCommand(proxy, id, cmd, *args):
 _pr = cProfile.Profile()
 _pr.enable()
 
-
 # on map load (battle loading)
 @registerEvent(PlayerAvatar, 'onEnterWorld')
 def PlayerAvatar_onEnterWorld(self, *args):
     def en():
-        as2profiler.g_as2profiler.init()
-
+        g_swfprofiler.init()
         global _pr
         log('xvm_profiler enabled')
         _pr.enable()
     BigWorld.callback(10, en)
 
-
 # on map close
 @registerEvent(PlayerAvatar, 'onLeaveWorld')
 def PlayerAvatar_onLeaveWorld(self, *args):
-    as2profiler.g_as2profiler.showResult()
-
+    g_swfprofiler.showResult()
     showPythonResult()
-
 
 _shown = False
 def showPythonResult():

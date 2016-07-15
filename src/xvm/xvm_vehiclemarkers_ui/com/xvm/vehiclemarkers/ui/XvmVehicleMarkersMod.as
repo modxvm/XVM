@@ -67,10 +67,18 @@ package com.xvm.vehiclemarkers.ui
 
         private function initialize():void
         {
-            Macros.RegisterGlobalMacrosData();
-            Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
-            Stat.clearBattleStat();
-            Stat.loadBattleStat();
+            Xvm.swfProfilerBegin("XvmVehicleMarkersMod.initialize()");
+            try
+            {
+                Macros.RegisterGlobalMacrosData();
+                Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
+                Stat.clearBattleStat();
+                Stat.loadBattleStat();
+            }
+            finally
+            {
+                Xvm.swfProfilerEnd("XvmVehicleMarkersMod.initialize()");
+            }
         }
     }
 }

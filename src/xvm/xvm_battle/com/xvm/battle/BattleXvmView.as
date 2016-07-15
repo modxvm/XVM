@@ -120,7 +120,7 @@ package com.xvm.battle
 
         private function onStatLoaded(e:ObjectEvent):void
         {
-            //Logger.add("onStatLoaded");
+            //Logger.add("BattleXvmView.onStatLoaded()");
             onConfigLoaded(null);
         }
 

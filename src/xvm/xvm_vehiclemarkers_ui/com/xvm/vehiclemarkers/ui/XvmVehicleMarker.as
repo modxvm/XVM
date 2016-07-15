@@ -35,32 +35,39 @@ package com.xvm.vehiclemarkers.ui
 
         public function XvmVehicleMarker()
         {
+            Xvm.swfProfilerBegin("XvmVehicleMarker.ctor()");
             //Logger.add(getQualifiedClassName(this));
             super();
             super.markerSettings = XvmVehicleMarkerConstants.DISABLED_MARKER_SETTINGS;
             Xvm.addEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
             createComponents();
+            Xvm.swfProfilerEnd("XvmVehicleMarker.ctor()");
         }
 
         override protected function configUI():void
         {
+            Xvm.swfProfilerBegin("XvmVehicleMarker.configUI()");
             super.configUI();
             VehicleMarkersManager.getInstance().addEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             // TODO: removeStandardFields();
+            Xvm.swfProfilerEnd("XvmVehicleMarker.configUI()");
         }
 
         override protected function onDispose():void
         {
+            Xvm.swfProfilerBegin("XvmVehicleMarker.onDispose()");
             super.onDispose();
             Xvm.removeEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
             VehicleMarkersManager.getInstance().removeEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             deleteComponents();
+            Xvm.swfProfilerEnd("XvmVehicleMarker.onDispose()");
         }
 
         override public function setVehicleInfo(vClass:String, vIconSource:String, vType:String, vLevel:int,
             pFullName:String, pName:String, pClan:String, pRegion:String,
             maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int):void
         {
+            Xvm.swfProfilerBegin("XvmVehicleMarker.setVehicleInfo()");
             super.setVehicleInfo.apply(this, arguments);
             try
             {
@@ -79,11 +86,15 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
+            Xvm.swfProfilerEnd("XvmVehicleMarker.setVehicleInfo()");
         }
 
         override protected function draw():void
         {
+            Xvm.swfProfilerBegin("XvmVehicleMarker.super.draw()");
             super.draw();
+            Xvm.swfProfilerEnd("XvmVehicleMarker.super.draw()");
+            Xvm.swfProfilerBegin("XvmVehicleMarker.draw()");
             try
             {
                 if (isInvalid(InvalidationType.DATA))
@@ -99,10 +110,12 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
+            Xvm.swfProfilerEnd("XvmVehicleMarker.draw()");
         }
 
         override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
         {
+            Xvm.swfProfilerBegin("XvmVehicleMarker.updateHealth()");
             try
             {
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
@@ -123,10 +136,12 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
+            Xvm.swfProfilerEnd("XvmVehicleMarker.updateHealth()");
         }
 
         override public function setHealth(curHealth:int):void
         {
+            Xvm.swfProfilerBegin("XvmVehicleMarker.setHealth()");
             try
             {
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
@@ -140,6 +155,7 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
+            Xvm.swfProfilerEnd("XvmVehicleMarker.setHealth()");
         }
 
         override public function set markerSettings(value:Object):void
@@ -154,6 +170,7 @@ package com.xvm.vehiclemarkers.ui
 
         private function onShowExInfoHandler(param1:VehicleMarkersManagerEvent):void
         {
+            Xvm.swfProfilerBegin("XvmVehicleMarker.onShowExInfoHandler()");
             try
             {
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
@@ -166,6 +183,7 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
+            Xvm.swfProfilerEnd("XvmVehicleMarker.onShowExInfoHandler()");
         }
 
         // PRIVATE

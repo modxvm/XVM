@@ -69,6 +69,9 @@ class XVM_COMMAND(object):
     AS_UPDATE_CURRENT_VEHICLE = "xvm.as.update_current_vehicle"
     AS_ON_CLAN_ICON_LOADED = "xvm.as.on_clan_icon_loaded"
 
+class XVM_PROFILER_COMMAND(object):
+    BEGIN = "xvm.profiler.begin"
+    END = "xvm.profiler.end"
 
 # Teams
 
