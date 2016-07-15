@@ -9,6 +9,7 @@ package com.xvm.vehiclemarkers.ui.components
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vehiclemarkers.ui.*;
+    import flash.display.*;
     import net.wg.gui.battle.views.vehicleMarkers.*;
 
     public class VehicleTypeIconComponent extends VehicleMarkerComponentBase
@@ -18,6 +19,7 @@ package com.xvm.vehiclemarkers.ui.components
         public function VehicleTypeIconComponent(marker:XvmVehicleMarker)
         {
             super(marker);
+            marker.marker.vehicleTypeIcon = marker.marker.vehicleTypeIcon.addChild(new MovieClip()) as MovieClip;
             marker.addEventListener(XvmVehicleMarkerEvent.SET_SPEAKING, update);
         }
 
@@ -36,19 +38,14 @@ package com.xvm.vehiclemarkers.ui.components
                 marker.marker.visible = (showSpeaker && marker.isSpeaking()) || Macros.FormatBoolean(cfg.enabled, e.playerState, true);
                 if (marker.marker.visible)
                 {
-                    marker.marker.x = Macros.FormatNumber(cfg.x, e.playerState);
-                    marker.marker.y = Macros.FormatNumber(cfg.y, e.playerState);
-                    marker.marker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
-
                     var offsetX:Number = Macros.FormatNumber(cfg.offsetX, e.playerState);
                     var offsetY:Number = Macros.FormatNumber(cfg.offsetY, e.playerState);
                     var maxScale:Number = Macros.FormatNumber(cfg.maxScale, e.playerState) / 100.0;
-
-                    var x:Number = offsetX * maxScale;
-                    var y:Number = offsetY * maxScale;
-                    marker.marker.vehicleTypeIcon.x = x;
-                    marker.marker.vehicleTypeIcon.y = y;
-                    marker.marker.vehicleTypeIcon.scaleX = marker.marker.vehicleTypeIcon.scaleY = maxScale;
+                    marker.marker.x = Macros.FormatNumber(cfg.x, e.playerState) + offsetX * maxScale;
+                    marker.marker.y = Macros.FormatNumber(cfg.y, e.playerState) + offsetY * maxScale;
+                    marker.marker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
+                    marker.marker.vehicleTypeIcon.scaleX = maxScale;
+                    marker.marker.vehicleTypeIcon.scaleY = maxScale;
 
                     // TODO: colorize
                     //var color:Number = Macros.FormatNumber(cfg.color, playerState, NaN, true);
