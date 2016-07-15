@@ -8,8 +8,9 @@ package com.xvm.battle.battleLabels
     import com.xfw.*;
     import com.xfw.events.*;
     import com.xvm.*;
-    import com.xvm.battle.*;
-    import com.xvm.extraFields.*;
+    import com.xvm.battle.events.HitLogEvent;
+
+import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import scaleform.clik.core.*;
@@ -17,24 +18,38 @@ package com.xvm.battle.battleLabels
     public class BattleLabels extends UIComponent
     {
         private var _extraFields:ExtraFields = null;
+        private var _hitLogExtraFields : ExtraFields;
 
         public function BattleLabels()
         {
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
+            Xvm.addEventListener(HitLogEvent.DAMAGE_CAUSED, onDamageCausedHandler);
             onConfigLoaded(null);
+        }
+
+        private function onDamageCausedHandler(event:HitLogEvent):void {
+            //_hitLogExtraFields.update(BattleState.get(event.hitVehicleID));
         }
 
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+            Xvm.removeEventListener(HitLogEvent.DAMAGE_CAUSED, onDamageCausedHandler);
             if (_extraFields)
             {
                 _extraFields.dispose();
                 _extraFields = null;
             }
+            if (_hitLogExtraFields)
+            {
+                removeChild(_hitLogExtraFields);
+                _hitLogExtraFields.dispose();
+                _hitLogExtraFields = null;
+            }
+
             super.onDispose();
         }
 

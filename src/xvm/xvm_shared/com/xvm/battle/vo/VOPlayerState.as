@@ -50,7 +50,7 @@ package com.xvm.battle.vo
         // XVM
         public var marksOnGun:Number = NaN;       // TODO: set & update
         public var spottedStatus:String = null;   // TODO: set & update
-        public var _curHealth:Number = NaN;       // TODO: set & update
+        private var _curHealth:Number = NaN;       // TODO: set & update
         public var _maxHealth:Number = NaN;       // TODO: set & update
 
         public var damageInfo:VODamageInfo;       // TODO: set & update

@@ -6,11 +6,8 @@ package com.xvm.battle
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xfw.events.*;
-    import com.xvm.types.cfg.*;
+    import com.xvm.battle.events.HitLogEvent;
     import com.xvm.battle.vo.*;
-    import flash.events.*;
-    import flash.utils.*;
 
     public class BattleState // implements IBattleComponentDataController
     {
@@ -110,7 +107,7 @@ package com.xvm.battle
         function BattleState()
         {
             Xfw.addCommandListener(BattleCommands.AS_UPDATE_PLAYER_STATE, onUpdatePlayerState);
-            Xfw.addCommandListener(BattleCommands.AS_UPDATE_HITLOG_DATA, onUpdateHitlogData);
+            Xfw.addCommandListener(BattleCommands.AS_UPDATE_HITLOG_DATA, onUpdateHitLogDataHandler);
         }
 
         // IBattleComponentDataController implementation
@@ -345,12 +342,19 @@ package com.xvm.battle
             return null;
         }
 
-        private function onUpdateHitlogData(vehicleID:Number, attackReasonID:Number, newHealth:Number):Object
+        private function onUpdateHitLogDataHandler(vehicleID:Number, attackReasonID:Number, newHealth:Number):Object
         {
-            Logger.add("onUpdateHitlogData: " + [vehicleID, attackReasonID, newHealth]);
-
-            hitlogTotalHits++;
-            //hitlogTotalDamage += TODO
+            var targetPlayerState:VOPlayerState = get(vehicleID);
+            if(targetPlayerState) {
+                var damageDelta : int = targetPlayerState.curHealth - newHealth;
+                targetPlayerState.hitlogDamage += damageDelta;
+                targetPlayerState.hitlogCount++;
+                _hitlogTotalDamage += damageDelta;
+                _hitlogTotalHits++;
+                Xvm.dispatchEvent(new HitLogEvent(HitLogEvent.DAMAGE_CAUSED, vehicleID));
+            } else {
+                DebugUtils.LOG_DEBUG("BattleState#onUpdateHitLogDataHandler targetPlayerState is null");
+            }
 
             return null;
         }
