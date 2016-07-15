@@ -11,27 +11,9 @@ package com.xvm.vehiclemarkers.ui.components
 
     public class ContourIconComponent extends VehicleMarkerComponentBase
     {
-        //// Fix markers centering
-        //private static var MARKER_CENTER_OFFSET_X = -9.5;
-        //private static var MARKER_CENTER_OFFSET_Y = {
-            //$lightTank: -23.5,
-            //$mediumTank: -24.5,
-            //$heavyTank: -29.5,
-            //$AT_SPG: -20.5,
-            //$SPG: -20.5,
-            //$dynamic: -22.5
-        //}
-
-        //private var m_hunt;
-        //private var m_markerLabel;  // [proxy] "green", "gold", "blue", "yellow", "red", "purple"
-        //private var m_markerState;  // [proxy.marker] "dead", "immediate_dead", ...
-        //private var m_vehicleClass; // [proxy.marker.marker.icon] "lightTank", "mediumTank", ..., "dynamic" (speaker)
-
         public function ContourIconComponent(marker:XvmVehicleMarker)
         {
             super(marker);
-            //m_markerLabel = null;
-            //m_markerState = null;
         }
 
         //private var m_contourIconLoaded:Boolean;

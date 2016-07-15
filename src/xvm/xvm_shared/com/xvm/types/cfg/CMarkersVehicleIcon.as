@@ -15,8 +15,8 @@ package com.xvm.types.cfg
         public var alpha:*;
         public var color:*;
         public var maxScale:*;
-        public var scaleX:*;
-        public var scaleY:*;
+        public var offsetX:*;
+        public var offsetY:*;
         public var shadow:CShadow;
 
         public function clone():*

@@ -56,6 +56,8 @@
   * global macros, including {{py:f()}}, can be used in the "battle"/"elements" section
   * changed "carousel"/"scrollingSpeed" value, now it is multiplier for default scrolling rate
   * option "markers"/"useStandardMarkers" renamed to "markers"/"enabled"
+  * option "markers"/*/"vehicleIcon"/"scaleX" renamed to "offsetX"
+  * option "markers"/*/"vehicleIcon"/"scaleY" renamed to "offsetY"
   * config format of the text fields in markers are changed to common extraFields config format
   * option "visible" everywhere changed to "enabled" for unification
 
