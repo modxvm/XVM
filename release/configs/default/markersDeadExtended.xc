@@ -140,20 +140,7 @@
       "scaleX": 0,
       // Offset along the Y axis (?)
       // Смещение по оси Y (?)
-      "scaleY": 16,
-      // Shadow options.
-      // Параметры тени.
-      "shadow": {
-        // false - no shadow
-        // false - без тени
-        "enabled": true,
-        "distance": 0,                  //   дистанция смещения
-        "angle": 45,                    //   угол смещения
-        "color": "0x000000",            //   цвет
-        "alpha": 100,                   //   прозрачность
-        "blur": 6,                      //   размытие
-        "strength": 2                   //   интенсивность
-      }
+      "scaleY": 16
     },
     // Индикатор здоровья.
     "healthBar": {
@@ -247,16 +234,7 @@
       "alpha": 100,
       "maxScale": 100,
       "scaleX": 0,
-      "scaleY": 16,
-      "shadow": {
-        "enabled": true,
-        "distance": 0,
-        "angle": 45,
-        "color": "0x000000",
-        "alpha": 100,
-        "blur": 6,
-        "strength": 2
-      }
+      "scaleY": 16
     },
     // Индикатор здоровья.
     "healthBar": {
