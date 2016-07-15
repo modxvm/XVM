@@ -25,7 +25,7 @@ package com.xvm.extraFields
         private var _isLeftPanel:Boolean;
 
         public function ExtraFields(formats:Array, isLeftPanel:Boolean = true, getSchemeNameForText:Function = null, getSchemeNameForImage:Function = null,
-            bounds:Rectangle = null, layout:String = null, defaultAlign:String = null):void
+            bounds:Rectangle = null, layout:String = null, defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null):void
         {
             mouseEnabled = false;
             mouseChildren = false;
@@ -69,7 +69,7 @@ package com.xvm.extraFields
                 {
                     addChild(format.src != null
                         ? new (App.utils.classFactory.getClass("com.xvm.extraFields::ImageExtraField"))(format, isLeftPanel, getSchemeNameForImage) // TODO: make ImageExtraField shared
-                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds, defaultAlign));
+                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds, defaultAlign, defaultTextFormatConfig));
                 }
             }
         }

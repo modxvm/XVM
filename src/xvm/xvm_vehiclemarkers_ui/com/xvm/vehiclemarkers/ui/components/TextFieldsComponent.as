@@ -33,7 +33,8 @@ package com.xvm.vehiclemarkers.ui.components
             for each (var state:String in XvmVehicleMarkerState.getAllStates(isAlly))
             {
                 var cfg:CMarkers4 = XvmVehicleMarkerState.getConfig(state);
-                var extraFields:ExtraFields = new ExtraFields(cfg.textFields, true, getColorSchemeName, null, new Rectangle(0, 0, 140, 100), null, TextFormatAlign.CENTER);
+                var extraFields:ExtraFields = new ExtraFields(cfg.textFields, true, getColorSchemeName, null, new Rectangle(0, 0, 140, 100), null,
+                    TextFormatAlign.CENTER, CTextFormat.GetDefaultConfigForMarkers());
                 extraFieldsHolders[state] = extraFields;
                 marker.addChild(extraFields);
             }
@@ -102,6 +103,7 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 schemeName += OFFLINE_POSTFIX;
             }
+            //Logger.add("getColorSchemeName: " + schemeName);
             return schemeName;
         }
     }

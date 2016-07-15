@@ -27,7 +27,8 @@
         private var _textValue:String = null;
         private var _colorSchemeNameValue:String = null;
 
-        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null, defaultAlign:String = null)
+        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null,
+            defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null)
         {
             super();
 
@@ -54,6 +55,8 @@
             TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_NONE));
             TextFieldEx.setNoTranslate(this, true);
             defaultTextFormat = Utils.DEFAULT_TEXT_FORMAT;
+            if (cfg.textFormat == null)
+                cfg.textFormat = defaultTextFormatConfig;
         }
 
         public final function dispose():void

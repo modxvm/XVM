@@ -121,7 +121,8 @@
           {
             "enabled": true,
             "name": "HP",
-            "x": 0, "y": -38, "color": "0xD9FFB3",
+            "x": 0, "y": -38,
+            "textFormat": { "color": "0xD9FFB3" },
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11'><b>{{hp}} / {{hp-max}}</b></font>"
           },
