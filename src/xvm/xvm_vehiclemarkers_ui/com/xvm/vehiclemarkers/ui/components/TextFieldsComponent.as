@@ -40,7 +40,7 @@ package com.xvm.vehiclemarkers.ui.components
             super.init(e);
         }
 
-        override public function dispose():void
+        override protected function onDispose():void
         {
             if (extraFieldsHolders != null)
             {
@@ -50,7 +50,7 @@ package com.xvm.vehiclemarkers.ui.components
                 }
                 extraFieldsHolders = null;
             }
-            super.dispose();
+            super.onDispose();
         }
 
         override protected function update(e:XvmVehicleMarkerEvent):void
