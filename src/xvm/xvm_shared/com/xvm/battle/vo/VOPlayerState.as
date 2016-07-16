@@ -389,6 +389,7 @@ package com.xvm.battle.vo
                         break;
                     }
                 }
+                dispatchPlayerStateChangedEvent();
             }
         }
 

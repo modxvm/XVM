@@ -22,7 +22,6 @@ package com.xvm.battle.battleLabels
         {
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
-            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
             onConfigLoaded(null);
         }
 
@@ -39,11 +38,6 @@ package com.xvm.battle.battleLabels
         }
 
         // PRIVATE
-
-        private function onStatLoaded(e:ObjectEvent):void
-        {
-            onConfigLoaded(null);
-        }
 
         public function onConfigLoaded(e:Event):void
         {

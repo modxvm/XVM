@@ -41,6 +41,7 @@ package com.xvm.battle.battleClock
 
         private function setup():void
         {
+            //Xvm.swfProfilerBegin("BattleClock.setup()");
             format = Config.config.battle.clockFormat;
             mouseEnabled = false;
             selectable = false;
@@ -56,6 +57,7 @@ package com.xvm.battle.battleClock
             timer = new Timer(1000, 0);
             timer.addEventListener(TimerEvent.TIMER, onTimer);
             timer.start();
+            //Xvm.swfProfilerEnd("BattleClock.setup()");
         }
 
         private function stop():void

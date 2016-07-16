@@ -3,11 +3,12 @@
 #############################
 # Command
 
-def getBattleStat(args, respondFunc):
+def getBattleStat(args, respondFunc, spaceID):
     _stat.enqueue({
         'func': _stat.getBattleStat,
         'cmd': XVM_COMMAND.AS_STAT_BATTLE_DATA,
         'respondFunc': respondFunc,
+        'spaceID': spaceID,
         'args': args})
     _stat.processQueue()
 
@@ -43,6 +44,7 @@ import uuid
 import imghdr
 
 import BigWorld
+from gui.app_loader import g_appLoader
 from gui.battle_control import g_sessionProvider
 from items.vehicles import VEHICLE_CLASS_TAGS
 
@@ -141,7 +143,7 @@ class _Stat(object):
             if self.thread is not None:
                 self.thread.join(0.01)  # 10 ms
             if self.resp is None:
-                BigWorld.callback(0.05, self._checkResult)
+                BigWorld.callback(0.1, self._checkResult)
                 return
             try:
                 self._respond()
@@ -158,10 +160,12 @@ class _Stat(object):
                     BigWorld.callback(0, self.processQueue)
 
     def _respond(self):
-        debug("respond: " + self.req['cmd'])
-        self.resp = unicode_to_ascii(self.resp)
-        func = self.req.get('respondFunc', as_xfw_cmd)
-        func(self.req['cmd'], self.resp)
+        spaceID = self.req.get('spaceID', None)
+        if spaceID is None or g_appLoader.getSpaceID() == spaceID:
+            debug("respond: " + self.req['cmd'])
+            self.resp = unicode_to_ascii(self.resp)
+            func = self.req.get('respondFunc', as_xfw_cmd)
+            func(self.req['cmd'], self.resp)
 
 
     # Threaded

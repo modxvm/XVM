@@ -42,6 +42,7 @@ package com.xvm.battle.teamBasesPanel
 
         private function onConfigLoaded(e:Event):Object
         {
+            //Xvm.swfProfilerBegin("UI_teamBasesPanel.onConfigLoaded()");
             try
             {
                 if (Macros.FormatBooleanGlobal(Config.config.captureBar.enabled, true))
@@ -63,6 +64,7 @@ package com.xvm.battle.teamBasesPanel
             {
                 Logger.err(ex);
             }
+            //Xvm.swfProfilerEnd("UI_teamBasesPanel.onConfigLoaded()");
             return null;
         }
     }

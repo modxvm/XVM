@@ -52,18 +52,18 @@ package com.xvm.battle.playersPanel
             super();
             PlayersPanelListLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
             PlayersPanelListRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
 
         override protected function configUI():void
         {
             super.configUI();
-            onConfigLoaded(null);
+            setup();
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             super.onDispose();
         }
 
@@ -109,8 +109,9 @@ package com.xvm.battle.playersPanel
 
         // PRIVATE
 
-        private function onConfigLoaded(e:Event):Object
+        private function setup(e:Event = null):Object
         {
+            //Xvm.swfProfilerBegin("UI_PlayersPanel.setup()");
             try
             {
                 Xvm.removeEventListener(BattleEvents.PLAYERS_PANEL_ALT_MODE, setAltMode);
@@ -133,6 +134,7 @@ package com.xvm.battle.playersPanel
             {
                 Logger.err(ex);
             }
+            //Xvm.swfProfilerEnd("UI_PlayersPanel.setup()");
             return null;
         }
 

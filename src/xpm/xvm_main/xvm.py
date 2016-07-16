@@ -96,8 +96,9 @@ class Xvm(object):
         if isReplay():
             self.initializeXvmServices()
 
-        self.respondConfig()
-        wgutils.reloadHangar()
+        if not e or not e.ctx.get('fromInitStage', False):
+            self.respondConfig()
+            wgutils.reloadHangar()
 
 
     def respondConfig(self):
@@ -296,7 +297,7 @@ class Xvm(object):
             # stat
 
             if cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
-                stats.getBattleStat(args, as_xfw_cmd)
+                stats.getBattleStat(args, as_xfw_cmd, g_appLoader.getSpaceID())
                 return (None, True)
 
             if cmd == XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS:

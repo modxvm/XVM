@@ -49,7 +49,7 @@ import pinger
 
 def start():
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
-    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, pinger.update_config)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, pinger.update_config)
     pinger.update_config()
 
 BigWorld.callback(0, start)
@@ -58,7 +58,7 @@ BigWorld.callback(0, start)
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
-    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, pinger.update_config)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, pinger.update_config)
 
 #####################################################################
 # onXfwCommand

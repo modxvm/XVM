@@ -49,13 +49,12 @@ package com.xvm.battle
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
+            //Xvm.swfProfilerBegin("BattleXvmView.onAfterPopulate()");
             super.onAfterPopulate(e);
             try
             {
                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
-
-                Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
 
                 onConfigLoaded(null);
 
@@ -82,10 +81,12 @@ package com.xvm.battle
             {
                 Logger.err(ex);
             }
+            //Xvm.swfProfilerEnd("BattleXvmView.onAfterPopulate()");
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            //Xvm.swfProfilerBegin("BattleXvmView.onBeforeDispose()");
             try
             {
                 Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
@@ -116,19 +117,16 @@ package com.xvm.battle
                 Logger.err(ex);
             }
             super.onBeforeDispose(e);
-        }
-
-        private function onStatLoaded(e:ObjectEvent):void
-        {
-            //Logger.add("BattleXvmView.onStatLoaded()");
-            onConfigLoaded(null);
+            //Xvm.swfProfilerEnd("BattleXvmView.onBeforeDispose()");
         }
 
         public override function onConfigLoaded(e:Event):void
         {
             //Logger.add("BattleXvmView.onConfigLoaded()");
+            Xvm.swfProfilerBegin("BattleXvmView.onConfigLoaded()");
             try
             {
+                super.onConfigLoaded(e);
                 Xfw.cmd(BattleCommands.BATTLE_CTRL_SET_VEHICLE_DATA);
                 page.updateStage(App.appWidth, App.appHeight);
             }
@@ -136,6 +134,7 @@ package com.xvm.battle
             {
                 Logger.err(ex);
             }
+            Xvm.swfProfilerEnd("BattleXvmView.onConfigLoaded()");
         }
 
         // PRIVATE

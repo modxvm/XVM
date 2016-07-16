@@ -51,14 +51,14 @@ PREF_VERSION = '1.0'
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, xvm_equip_init)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, xvm_equip_init)
 
 BigWorld.callback(0, start)
 
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, xvm_equip_init)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, xvm_equip_init)
 
 
 #####################################################################

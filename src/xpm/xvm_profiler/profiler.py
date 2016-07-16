@@ -49,7 +49,8 @@ def PlayerAvatar_onEnterWorld(self, *args):
         global _pr
         log('xvm_profiler enabled')
         _pr.enable()
-    BigWorld.callback(10, en)
+    #BigWorld.callback(10, en)
+    en()
 
 # on map close
 @registerEvent(PlayerAvatar, 'onLeaveWorld')

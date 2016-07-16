@@ -29,14 +29,14 @@ from commands import *
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, update_conf_hp)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, update_conf_hp)
     update_conf_hp()
 
 BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, update_conf_hp)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, update_conf_hp)
 
 #####################################################################
 # globals

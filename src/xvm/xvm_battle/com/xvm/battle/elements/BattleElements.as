@@ -56,6 +56,7 @@ package com.xvm.battle.elements
 
         private function setup():void
         {
+            //Xvm.swfProfilerBegin("BattleElements.setup()");
             try
             {
                 var cfg:Array = Config.config.battle.elements;
@@ -63,10 +64,12 @@ package com.xvm.battle.elements
                 {
                     apply(BattleXvmView.battlePage, XfwUtils.jsonclone(cfg[i]), BattleXvmView.battlePage.name);
                 }
-            } catch (ex:Error)
+            }
+            catch (ex:Error)
             {
                 Logger.err(ex);
             }
+            //Xvm.swfProfilerEnd("BattleElements.setup()");
         }
 
         private function apply(obj:*, opt:*, name:String):void

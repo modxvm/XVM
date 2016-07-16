@@ -30,14 +30,6 @@ package com.xvm.vehiclemarkers.ui.components
             var playerState:VOPlayerState = e.playerState;
             isAlly = playerState.isAlly;
             extraFieldsHolders = { };
-            for each (var state:String in XvmVehicleMarkerState.getAllStates(isAlly))
-            {
-                var cfg:CMarkers4 = XvmVehicleMarkerState.getConfig(state);
-                var extraFields:ExtraFields = new ExtraFields(cfg.textFields, true, getColorSchemeName, null, new Rectangle(0, 0, 140, 100), null,
-                    TextFormatAlign.CENTER, CTextFormat.GetDefaultConfigForMarkers());
-                extraFieldsHolders[state] = extraFields;
-                marker.addChild(extraFields);
-            }
             super.init(e);
         }
 
@@ -68,10 +60,17 @@ package com.xvm.vehiclemarkers.ui.components
                     var extraFields:ExtraFields = extraFieldsHolders[state];
                     if (state != currentState)
                     {
-                        extraFields.visible = false;
+                        if (extraFields != null)
+                        {
+                            extraFields.visible = false;
+                        }
                     }
                     else
                     {
+                        if (extraFields == null)
+                        {
+                            extraFields = initState(currentState, playerState);
+                        }
                         extraFields.visible = true;
                         extraFields.update(playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
                     }
@@ -80,6 +79,16 @@ package com.xvm.vehiclemarkers.ui.components
         }
 
         // PRIVATE
+
+        private function initState(state:String, playerState:VOPlayerState):ExtraFields
+        {
+            var cfg:CMarkers4 = XvmVehicleMarkerState.getConfig(state);
+            var extraFields:ExtraFields = new ExtraFields(cfg.textFields, true, getColorSchemeName, null, new Rectangle(0, 0, 140, 100), null,
+                TextFormatAlign.CENTER, CTextFormat.GetDefaultConfigForMarkers());
+            extraFieldsHolders[state] = extraFields;
+            marker.addChild(extraFields);
+            return extraFields;
+        }
 
         // from net.wg.gui.battle.views.stats.constants::PlayerStatusSchemeName
         public static const NORMAL:String = "normal";

@@ -66,14 +66,14 @@ p_replacement = None # will be something like <font size... color...>
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, tooltips_clear_cache)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
 
 BigWorld.callback(0, start)
 
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, tooltips_clear_cache)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
 
 
 #####################################################################

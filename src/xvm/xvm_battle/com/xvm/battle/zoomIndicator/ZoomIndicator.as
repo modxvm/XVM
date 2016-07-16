@@ -49,6 +49,7 @@ package com.xvm.battle.zoomIndicator
 
         private function onConfigLoaded(e:Event):void
         {
+            //Xvm.swfProfilerBegin("ZoomIndicator.onConfigLoaded()");
             try
             {
                 visible = false;
@@ -67,6 +68,7 @@ package com.xvm.battle.zoomIndicator
             {
                 Logger.err(ex);
             }
+            //Xvm.swfProfilerEnd("ZoomIndicator.onConfigLoaded()");
         }
 
         private function onSniperCamera(enable:Boolean, zoom:int):void

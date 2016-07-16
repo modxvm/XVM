@@ -32,8 +32,8 @@ class XVM_PATH(object):
     XVM_IMG_CFG_ROOT = "../configs/xvm/"
 
 class XVM_EVENT(object):
-    CONFIG_LOADED = 'xvm.config_loaded'
     RELOAD_CONFIG = 'xvm.reload_config'
+    CONFIG_LOADED = 'xvm.config_loaded'
     SYSTEM_MESSAGE = 'xvm.system_message'
     XMQP_CONNECTED = 'xvm.xmqp_connected'
     XMQP_MESSAGE = 'xvm.xmqp_message'
