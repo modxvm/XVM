@@ -43,37 +43,7 @@ package com.xvm.vehiclemarkers.ui.components
             }
         }
 
-        //private var m_contourIconLoaded:Boolean;
-        //private var m_iconset: IconLoader;
-        //public var onEnterFrame:Function;
 
-//        public function init()
-        //{
-            //onEnterFrame = null;
-//
-            //m_contourIconLoaded = false;
-//
-            //if (proxy.initialized)
-            //{
-                //setupContourIconComponent(team);
-            //}
-            //else
-            //{
-                //// if loader is not initialized, wait one frame
-                //onEnterFrame = function()
-                //{
-                    //delete this.onEnterFrame;
-//
-                    //if (!this.proxy.initialized)
-                    //{
-                        //Logger.add("INTERNAL ERROR: setupContourIconLoader(): proxy.iconLoader not initialized");
-                        //return;
-                    //}
-//
-                    //this.setupContourIconComponent(team);
-                //}
-            //}
-        //}
 //
         ///**
          //* @see .ctor
