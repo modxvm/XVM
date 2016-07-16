@@ -66,7 +66,6 @@ clean_sha1()
 create_directories(){
     pushd "$XVMBUILD_REPOSITORY_PATH" > /dev/null
     mkdir -p ~output/~ver/gui/flash
-    mkdir -p ~output/~ver/gui/scaleform
     mkdir -p ~output/~ver/scripts
     mkdir -p ~output/configs/xvm
     mkdir -p ~output/mods/xfw/actionscript
@@ -150,8 +149,10 @@ build_xpm(){
     echo "Building XPM"
 
     pushd "$XVMBUILD_REPOSITORY_PATH"/src/xpm/ >/dev/null
+    export XPM_CLEAR=0
     export XPM_RUN_TEST=0
     ./build-all.sh || exit $?
+    unset XPM_CLEAR
     unset XPM_RUN_TEST
     popd >/dev/null
 }

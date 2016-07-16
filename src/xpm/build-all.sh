@@ -3,6 +3,7 @@
 #############################
 # CONFIG
 
+XPM_CLEAR=${XPM_CLEAR:=0}
 XPM_RUN_TEST=${XPM_RUN_TEST:=1}
 
 #############################
@@ -85,7 +86,9 @@ build()
 
 pushd $(dirname $0) >/dev/null
 
-clear
+if [ "$XPM_CLEAR" = "1" ]; then
+    clear
+fi
 
 make_dirs
 
