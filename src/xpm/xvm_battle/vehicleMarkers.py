@@ -105,6 +105,7 @@ class VehicleMarkers(object):
         manager.addExternalCallback('xvm.cmd', self.onVMCommand)
 
     def destroy(self):
+        self.initialized = False
         self.managerRef = None
 
     #####################################################################
