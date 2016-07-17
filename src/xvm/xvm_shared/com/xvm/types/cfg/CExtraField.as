@@ -33,6 +33,8 @@ package com.xvm.types.cfg
         public var updateEvent:String;
         public var hotKeyCode:*;
         public var onHold:*;
+        public var screenHAlign:String;
+        public var screenVAlign:String;
 
         // legacy configs
         public function set w(value:*):void
@@ -70,6 +72,8 @@ package com.xvm.types.cfg
             cloned.updateEvent = updateEvent;
             cloned.hotKeyCode = hotKeyCode;
             cloned.onHold = onHold;
+            cloned.screenHAlign = screenHAlign;
+            cloned.screenVAlign = screenVAlign;
             return cloned;
         }
     }

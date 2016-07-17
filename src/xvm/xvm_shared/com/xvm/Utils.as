@@ -234,31 +234,31 @@ package com.xvm
         }
 
         // Get relative to screen resolution x or y coordinates for using when applying horizontal align to object
-        public static function HAlign(align:String, value:Number):Number
+        public static function HAlign(align:String, value:Number, maxWidth:Number):Number
         {
             switch (align)
             {
                 case TextFormatAlign.LEFT:
                     return 0;
                 case TextFormatAlign.RIGHT:
-                    return App.appWidth - value;
+                    return maxWidth - value;
                 case TextFormatAlign.CENTER:
-                    return (App.appWidth / 2.0) - (value / 2.0);
+                    return (maxWidth / 2.0) - (value / 2.0);
             }
             return value;
         }
 
         // Get relative to screen resolution x or y coordinates for using when applying vertical align to object
-        public static function VAlign(align:String, value:Number):Number
+        public static function VAlign(align:String, value:Number, maxHeight:Number):Number
         {
             switch (align)
             {
                 case TextFieldEx.VALIGN_TOP:
                     return 0;
                 case TextFieldEx.VALIGN_BOTTOM:
-                    return App.appHeight - value;
+                    return maxHeight - value;
                 case TextFieldEx.VALIGN_CENTER:
-                    return (App.appHeight / 2.0) - (value / 2.0);
+                    return (maxHeight / 2.0) - (value / 2.0);
             }
             return value;
         }

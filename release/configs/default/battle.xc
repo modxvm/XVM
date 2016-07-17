@@ -13,9 +13,6 @@
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
-    // true - enable custom labels on battle interface window
-    // true - показывать пользовательские текстовые поля в окне боевого интерфейса
-    "allowLabelsOnBattleInterface": true,
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
     // http://php.net/date

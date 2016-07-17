@@ -7,6 +7,10 @@
 
     public interface IExtraField extends IDisplayObject, IDisposable
     {
+        function get xValue():Number;
+        function get yValue():Number;
+        function get widthValue():Number;
+        function get heightValue():Number;
         function get cfg():CExtraField;
         function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void;
     }

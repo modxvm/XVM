@@ -52,6 +52,26 @@
             return _cfg;
         }
 
+        public function get xValue():Number
+        {
+            return _xValue;
+        }
+
+        public function get yValue():Number
+        {
+            return _yValue;
+        }
+
+        public function get widthValue():Number
+        {
+            return _widthValue;
+        }
+
+        public function get heightValue():Number
+        {
+            return _heightValue;
+        }
+
         override protected function onImgDataCompleteHandler(param1:Event):void
         {
             super.onImgDataCompleteHandler(param1);

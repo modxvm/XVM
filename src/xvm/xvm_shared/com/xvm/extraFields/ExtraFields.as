@@ -95,28 +95,23 @@ package com.xvm.extraFields
                     if (_bounds && _layout)
                     {
                         var position:Number = (options == null) ? 0 : options.position;
-                        if (_layout == LAYOUT_HORIZONTAL)
+                        switch (_layout)
                         {
-                            var vx:Number = _bounds.x + (position - 1) * _bounds.width;
-                            x = _isLeftPanel ? vx : App.appWidth - vx;
-                            y = _bounds.y;
-                        }
-                        else if (_layout == LAYOUT_VERTICAL)
-                        {
-                            x = _isLeftPanel ? _bounds.x : App.appWidth - _bounds.x;
-                            y = _bounds.y + (position - 1) * _bounds.height;
-                        }
-                        else if (_layout == LAYOUT_ROOT)
-                        {
-                            var cfg:CExtraField = child.cfg;
-
-                            var align:String = Macros.FormatStringGlobal(cfg.align, TextFormatAlign.LEFT);
-                            var width:Number = Macros.FormatNumberGlobal(cfg.width, TextExtraField.DEFAULT_TEXT_FIELD_WIDTH);
-                            child.x = Macros.FormatNumberGlobal(cfg.x, 0) + Utils.HAlign(align, width);
-
-                            var valign:String = Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_TOP);
-                            var height:Number = Macros.FormatNumberGlobal(cfg.height, TextExtraField.DEFAULT_TEXT_FIELD_HEIGHT);
-                            child.y = Macros.FormatNumberGlobal(cfg.y, 0) + Utils.VAlign(valign, height);
+                            case LAYOUT_HORIZONTAL:
+                                var vx:Number = _bounds.x + (position - 1) * _bounds.width;
+                                x = _isLeftPanel ? vx : App.appWidth - vx;
+                                y = _bounds.y;
+                                break;
+                            case LAYOUT_VERTICAL:
+                                x = _isLeftPanel ? _bounds.x : App.appWidth - _bounds.x;
+                                y = _bounds.y + (position - 1) * _bounds.height;
+                                break;
+                            case LAYOUT_ROOT:
+                                var align:String = Macros.FormatStringGlobal(child.cfg.screenHAlign, TextFormatAlign.LEFT);
+                                child.x = child.xValue + Utils.HAlign(align, child.widthValue, _bounds.width);
+                                var valign:String = Macros.FormatStringGlobal(child.cfg.screenVAlign, TextFieldEx.VALIGN_TOP);
+                                child.y = child.yValue + Utils.VAlign(valign, child.heightValue, _bounds.height);
+                                break;
                         }
                     }
                 }

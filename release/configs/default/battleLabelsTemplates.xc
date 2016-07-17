@@ -52,13 +52,16 @@
      │ "scaleY"                   │ scaling axis Y (%, use negative values for mirroring) (default: 100)
      │                            │ масштабирование по оси y (%, используйте отрицательные значения для зеркального отображения) (по-умолчанию: 100)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-TODO:remove?     │ "autoSize"                 │ controls automatic sizing and alignment of text fields ("none", "left" [default], "right", "center")
-     │                            │ управление автоматической настройкой размеров и выравниванием текстовых полей ("none", "left" [по-умолчанию], "right", "center")
-     ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "align"                    │ horizontal alignment ("left" [default], "center", "right")
      │                            │ горизонтальное выравнивание ("left" [по-умолчанию], "center", "right")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "valign"                   │ vertical alignment ("top" [default], "center", "bottom")
+     │                            │ вертикальное выравнивание ("top" [по-умолчанию], "center", "bottom")
+     ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
+TODO:     │ "screenHAlign"             │ horizontal alignment ("left" [default], "center", "right")
+     │                            │ горизонтальное выравнивание ("left" [по-умолчанию], "center", "right")
+     ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
+TODO:     │ "screenVAlign"             │ vertical alignment ("top" [default], "center", "bottom")
      │                            │ вертикальное выравнивание ("top" [по-умолчанию], "center", "bottom")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "borderColor"              │ if set, draw border with specified color (macros allowed) (default: null)
@@ -148,7 +151,6 @@ quality, inner, knockout, hideObject
       "y": 2,
       "width": 50,
       "height": 20,
-      "autoSize": "left",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
       "format": "{{xvm-stat?{{l10n:Chance to win}}: {{chancesStatic}}{{chancesStatic?&nbsp;/&nbsp;|}}{{chancesLive}}}}"
@@ -160,8 +162,8 @@ quality, inner, knockout, hideObject
       "y": 30,
       "width": 200,
       "height": 40,
-      "autoSize": "center",
-      "align": "center",
+      "align": "right",
+      "screenHAlign": "right",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
       "textFormat": { "color": "0xF4EFE8", "size": 18 },
       "format": "{{py:xvm.total_hp.text()}}"
@@ -172,9 +174,9 @@ quality, inner, knockout, hideObject
       "width": 200,
       "height": 50,
       "alpha": 70,
-      "autoSize": "center",
       "align": "center",
-      "valign": "bottom",
+      "screenHAlign": "center",
+      "screenVAlign": "bottom",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 25},
       "textFormat": { "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "leading": -1, "marginLeft": 2, "marginRight": 2 },
       "format": "This is a demo of XVM text fields on battle interface. You may disable it in battle.xc<br/> Press '<font color='#60FF00'>J</font>' hot-key to show info field"
@@ -186,9 +188,9 @@ quality, inner, knockout, hideObject
       "width": 310,
       "height": 50,
       "alpha": 70,
-      "autoSize": "none",
       "align": "center",
-      "valign": "bottom",
+      "screenHAlign": "center",
+      "screenVAlign": "bottom",
       "bgColor": "0x000000",
       "borderColor": "0x101009",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 8},
