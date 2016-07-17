@@ -25,6 +25,7 @@ import xvm_main.python.vehinfo as vehinfo
 
 from commands import *
 from battle import g_battle
+import shared
 
 #####################################################################
 # initialization/finalization
@@ -124,6 +125,8 @@ class VehicleMarkers(object):
                 log('[VM]    initialized')
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()
+            elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
+                self.respondGlobalBattleData()
             elif cmd == XVM_COMMAND.PYTHON_MACRO:
                 return python_macro.process_python_macro(args[0])
             #elif cmd == XVM_COMMAND.GET_PLAYER_NAME:
@@ -172,6 +175,13 @@ class VehicleMarkers(object):
                         None,
                         IS_DEVELOPMENT)
                 self.recreateMarkers()
+        except Exception, ex:
+            err(traceback.format_exc())
+
+    def respondGlobalBattleData(self):
+        try:
+            if self.active:
+                self.call(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
         except Exception, ex:
             err(traceback.format_exc())
 

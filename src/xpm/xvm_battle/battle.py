@@ -24,13 +24,10 @@ from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 
 from xfw import *
 from xvm_main.python.logger import *
-import xvm_main.python.minimap_circles as minimap_circles
-import xvm_main.python.utils as utils
-import xvm_main.python.vehinfo_xtdb as vehinfo_xtdb
 import xvm_main.python.xmqp_events as xmqp_events
 
 from commands import *
-
+import shared
 
 #####################################################################
 # constants
@@ -287,21 +284,7 @@ class Battle(object):
     def onXfwCommand(self, cmd, *args):
         try:
             if cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
-                player = BigWorld.player()
-                vehicleID = player.playerVehicleID
-                arena = player.arena
-                arenaVehicle = arena.vehicles.get(vehicleID)
-                vehCD = getVehCD(vehicleID)
-                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA,
-                    vehicleID,                                  # playerVehicleID
-                    arenaVehicle['name'],                       # playerName
-                    vehCD,                                      # playerVehCD
-                    arena.extraData.get('battleLevel', 0),      # battleLevel
-                    arena.bonusType,                            # battleType
-                    arena.guiType,                              # arenaGuiType
-                    utils.getMapSize(),                         # mapSize
-                    minimap_circles.getMinimapCirclesData(),    # minimapCirclesData
-                    vehinfo_xtdb.vehArrayXTDB(vehCD))           # xtdb_data
+                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
                 return (None, True)
 
             elif cmd == XVM_BATTLE_COMMAND.BATTLE_CTRL_SET_VEHICLE_DATA:
