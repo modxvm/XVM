@@ -43,8 +43,6 @@ class XVM_EVENT(object):
 class XVM_COMMAND(object):
     REQUEST_CONFIG = "xvm.request_config"
     GET_PLAYER_NAME = "xvm.get_player_name"
-    GET_BATTLE_LEVEL = "xvm.get_battle_level"
-    GET_BATTLE_TYPE = "xvm.get_battle_type"
     GET_MAP_SIZE = "xvm.get_map_size"
     GET_CLAN_ICON = "xvm.get_clan_icon"
     GET_MY_VEHCD = "xvm.get_my_vehcd"

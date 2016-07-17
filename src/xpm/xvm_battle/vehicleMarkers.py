@@ -7,6 +7,7 @@ import traceback
 import weakref
 
 import BigWorld
+import constants
 import game
 from gui.shared import g_eventBus, events
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
@@ -86,11 +87,12 @@ class VehicleMarkers(object):
 
     enabled = True
     initialized = False
+    guiType = 0
     managerRef = None
 
     @property
     def active(self):
-        return self.enabled and self.initialized
+        return self.enabled and self.initialized and (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL)
 
     @property
     def manager(self):
@@ -118,6 +120,7 @@ class VehicleMarkers(object):
                 log(*args)
             elif cmd == XVM_VM_COMMAND.INITIALIZED:
                 self.initialized = True
+                self.guiType = BigWorld.player().arena.guiType
                 log('[VM]    initialized')
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()
@@ -158,7 +161,7 @@ class VehicleMarkers(object):
     def respondConfig(self):
         try:
             if self.initialized:
-                if self.enabled:
+                if self.active:
                     self.call(
                         XVM_COMMAND.AS_SET_CONFIG,
                         config.config_data,

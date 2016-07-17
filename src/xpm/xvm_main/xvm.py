@@ -267,18 +267,6 @@ class Xvm(object):
 
             # battleloading, battle
 
-            if cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
-                arena = getattr(BigWorld.player(), 'arena', None)
-                if arena is not None:
-                    return (arena.extraData.get('battleLevel', 0), True)
-                return (None, True)
-
-            if cmd == XVM_COMMAND.GET_BATTLE_TYPE:
-                arena = getattr(BigWorld.player(), 'arena', None)
-                if arena is not None:
-                    return (arena.bonusType, True)
-                return (None, True)
-
             if cmd == XVM_COMMAND.GET_MAP_SIZE:
                 return (utils.getMapSize(), True)
 
