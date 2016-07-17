@@ -5,6 +5,7 @@
 package com.xvm
 {
     import com.xfw.*;
+    import com.xvm.battle.*;
     import com.xvm.types.stat.*;
     import com.xvm.vo.*;
     import flash.utils.*;
@@ -780,25 +781,10 @@ package com.xvm
 
         private static function _RegisterGlobalMacrosData():void
         {
-            var battleTier:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_LEVEL) || NaN;
-            var battleType:Number = Xfw.cmd(XvmCommandsInternal.GET_BATTLE_TYPE) || Defines.BATTLE_TYPE_REGULAR;
-
-            switch (battleType)
-            {
-                case Defines.BATTLE_TYPE_CYBERSPORT:
-                    battleTier = 8;
-                    break;
-                case Defines.BATTLE_TYPE_REGULAR:
-                    break;
-                default:
-                    battleTier = 10;
-                    break;
-            }
-
             // {{battletype}}
-            m_globals["battletype"] = Utils.getBattleTypeText(battleType);
+            m_globals["battletype"] = Utils.getBattleTypeText(BattleGlobalData.battleType);
             // {{battletier}}
-            m_globals["battletier"] = battleTier;
+            m_globals["battletier"] = BattleGlobalData.battleLevel;
 
             // {{cellsize}}
             m_globals["cellsize"] = Math.round(Xfw.cmd(XvmCommandsInternal.GET_MAP_SIZE) / 10);

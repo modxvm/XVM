@@ -30,6 +30,16 @@ package com.xvm.battle
             return instance.getCurentXtdb();
         }
 
+        public static function get battleLevel():Number
+        {
+            return instance._battleLevel;
+        }
+
+        public static function get battleType():Number
+        {
+            return instance._battleType;
+        }
+
         // instance
         instance; // static .ctor
         private static var _instance:BattleGlobalData = null;
@@ -69,6 +79,17 @@ package com.xvm.battle
             _playerVehCD = playerVehCD;
             _battleLevel = battleLevel;
             _battleType = battleType;
+            switch (_battleType)
+            {
+                case Defines.BATTLE_TYPE_CYBERSPORT:
+                    _battleLevel = 8;
+                    break;
+                case Defines.BATTLE_TYPE_REGULAR:
+                    break;
+                default:
+                    //_battleLevel = 10;
+                    break;
+            }
             _arenaGuiType = arenaGuiType;
             _mapSize = mapSize;
             _minimapCirclesData = new VOMinimapCirclesData(minimapCirclesData);

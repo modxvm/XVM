@@ -33,7 +33,7 @@ package com.xvm.lobby.battleresults
         {
             page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
 
-            //Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
+            Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
         }
 
         private function onTabIndexChange(e:IndexEvent):void
