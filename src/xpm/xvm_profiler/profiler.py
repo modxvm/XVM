@@ -42,8 +42,8 @@ _pr = cProfile.Profile()
 _pr.enable()
 
 # on map load (battle loading)
-@registerEvent(PlayerAvatar, 'onEnterWorld')
-def PlayerAvatar_onEnterWorld(self, *args):
+@registerEvent(PlayerAvatar, 'onBecomePlayer')
+def _PlayerAvatar_onBecomePlayer(self):
     def en():
         g_swfprofiler.init()
         global _pr
@@ -53,8 +53,8 @@ def PlayerAvatar_onEnterWorld(self, *args):
     en()
 
 # on map close
-@registerEvent(PlayerAvatar, 'onLeaveWorld')
-def PlayerAvatar_onLeaveWorld(self, *args):
+@registerEvent(PlayerAvatar, 'onBecomeNonPlayer')
+def _PlayerAvatar_onBecomeNonPlayer(self):
     g_swfprofiler.showResult()
     showPythonResult()
 
