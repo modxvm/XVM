@@ -27,6 +27,7 @@ package com.xvm.battle.battleLabels
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
             createExtraFields();
         }
 
@@ -35,6 +36,7 @@ package com.xvm.battle.battleLabels
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+            Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
             removeExtraFields();
             super.onDispose();
         }
@@ -57,8 +59,14 @@ package com.xvm.battle.battleLabels
             createExtraFields();
         }
 
+        private function onStatLoaded(e:ObjectEvent):void
+        {
+            invalidate(InvalidationType.STATE);
+        }
+
         private function onUpdateStage():void
         {
+            _extraFields.updateBounds(new Rectangle(0, 0, App.appWidth, App.appHeight));
             invalidate(InvalidationType.POSITION);
         }
 
@@ -111,7 +119,7 @@ package com.xvm.battle.battleLabels
         {
             if (_extraFields)
             {
-                _extraFields.update();
+                _extraFields.update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target()
             }
         }
     }

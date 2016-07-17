@@ -1,4 +1,8 @@
-﻿package com.xvm.extraFields
+﻿/**
+ * XVM
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
+package com.xvm.extraFields
 {
     import com.xfw.*;
     import com.xvm.*;
@@ -81,7 +85,7 @@
 
         public function get widthValue():Number
         {
-            return _widthValue;
+            return (textWidth <= 0) ? _widthValue : textWidth + 4; // 2 * 2-pixel gutter
         }
 
         public function get heightValue():Number

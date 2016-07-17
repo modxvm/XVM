@@ -356,7 +356,7 @@ package com.xvm.battle.vo
                 _vehCD = _vehicleData.vehCD;
             }
 
-            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
 
             dispatchPlayerStateChangedEvent();
         }

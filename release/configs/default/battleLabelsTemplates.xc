@@ -156,7 +156,7 @@ quality, inner, knockout, hideObject
       "height": 20,
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
-      "format": "{{xvm-stat?{{l10n:Chance to win}}: {{chancesStatic}}{{chancesStatic?&nbsp;/&nbsp;|}}{{chancesLive}}}}"
+      "format": "{{xvm-stat?{{l10n:Chance to win}}: {{chancesStatic}}{{chancesStatic? / |}}{{chancesLive}}}}"
     },
     "totalHP": {
       "enabled": false,
@@ -165,22 +165,20 @@ quality, inner, knockout, hideObject
       "y": 30,
       "width": 200,
       "height": 40,
-      "align": "right",
       "screenHAlign": "right",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
-      "textFormat": { "color": "0xF4EFE8", "size": 18 },
+      "textFormat": { "color": "0xF4EFE8", "size": 18, "align": "right" },
       "format": "{{py:xvm.total_hp.text()}}"
     },
     "test": {
       "enabled": true,
       "y": -170,
       "width": 200,
-      "height": 50,
+      "height": 70,
       "alpha": 70,
-      "align": "center",
       "screenHAlign": "center",
       "screenVAlign": "bottom",
-      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 25},
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 5},
       "textFormat": { "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "leading": -1, "marginLeft": 2, "marginRight": 2 },
       "format": "This is a demo of XVM text fields on battle interface. You may disable it in battle.xc<br/> Press '<font color='#60FF00'>J</font>' hot-key to show info field"
     },
@@ -191,14 +189,13 @@ quality, inner, knockout, hideObject
       "width": 310,
       "height": 50,
       "alpha": 70,
-      "align": "center",
       "screenHAlign": "center",
       "screenVAlign": "bottom",
       "bgColor": "0x000000",
       "borderColor": "0x101009",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 8},
-      "textFormat": { "color": "0x60FF00", "size": 15, "leading": -20, "marginLeft": 2, "marginRight": 2},
-      "format": "<font color='#FFFFFF'><p align='center'><b>Info text field (WN8:&nbsp;<font color='{{c:wn8}}'>{{wn8}}</font>)</b></p></font><br/>Battle tier:<font color='#ff1aff'>&nbsp;{{battletier}}</font><p align='right'>My vehicle:&nbsp;<font color='#ff1aff'>{{my-vehicle}}</font>&nbsp;(<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
+      "textFormat": { "color": "0x60FF00", "size": 15, "align": "center", "marginLeft": 2, "marginRight": 2},
+      "format": "<font color='#FFFFFF'><b>Info text field (WN8: <font color='{{c:wn8}}'>{{wn8}}</font>)</b></font><br/>Battle tier:<font color='#ff1aff'> {{battletier}}</font> <p align='right'>My vehicle: <font color='#ff1aff'>{{my-vehicle}}</font> (<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
     }
   }
 }

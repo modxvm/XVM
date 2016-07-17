@@ -22,7 +22,7 @@ package com.xvm.extraFields
     {
         public static const LAYOUT_HORIZONTAL:String = "horizontal";
         public static const LAYOUT_VERTICAL:String = "vertical";
-        public static const LAYOUT_ROOT:String = "roots";
+        public static const LAYOUT_ROOT:String = "root";
 
         private var _bounds:Rectangle;
         private var _layout:String;
@@ -83,7 +83,7 @@ package com.xvm.extraFields
             super.configUI();
         }
 
-        public function update(options:IVOMacrosOptions = null, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
         {
             var len:int = this.numChildren;
             for (var i:int = 0; i < len; ++i)
@@ -94,7 +94,7 @@ package com.xvm.extraFields
                     child.update(options, bindToIconOffset, offsetX, offsetY);
                     if (_bounds && _layout)
                     {
-                        var position:Number = (options == null) ? 0 : options.position;
+                        var position:Number = options.position;
                         switch (_layout)
                         {
                             case LAYOUT_HORIZONTAL:
@@ -116,6 +116,11 @@ package com.xvm.extraFields
                     }
                 }
             }
+        }
+
+        public function updateBounds(bounds:Rectangle):void
+        {
+            _bounds = bounds;
         }
     }
 }
