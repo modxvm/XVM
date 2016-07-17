@@ -193,13 +193,13 @@ def _init_player(minimap, isRespawn=False):
             arena = player.arena
             vehicleID = player.playerVehicleID
             entryVehicle = arena.vehicles[vehicleID]
-            playerId = entryVehicle['accountDBID']
+            accountDBID = entryVehicle['accountDBID']
             vehCD = getVehCD(vehicleID)
             tags = set(entryVehicle['vehicleType'].type.tags & VEHICLE_CLASS_TAGS)
             vClass = tags.pop() if len(tags) > 0 else ''
             entityName = str(battleCtx.getPlayerGuiProps(vehicleID, entryVehicle['team']))
             minimap._Minimap__callEntryFlash(vehicleID, 'init_xvm',
-                [playerId, False, vehCD, entityName, 'player', vClass, isRespawn])
+                [accountDBID, False, vehCD, entityName, 'player', vClass, isRespawn])
     except Exception as ex:
         if IS_DEVELOPMENT:
             err(traceback.format_exc())

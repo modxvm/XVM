@@ -46,7 +46,7 @@ import xvm_main.python.xvm_scale as xvm_scale
 #####################################################################
 # handlers
 
-_lastPlayerId = None
+_lastAccountDBID = None
 _lastVehCD = None
 
 
@@ -78,8 +78,8 @@ def ProfileTechniqueWindow_sendAccountData(base, self, targetData, accountDossie
 
 def _sendAccountData(base, self, targetData, accountDossier, isProfilePage):
     try:
-        global _lastPlayerId
-        _lastPlayerId = accountDossier.getPlayerDBID()
+        global _lastAccountDBID
+        _lastAccountDBID = accountDossier.getPlayerDBID()
 
         base(self, targetData, accountDossier)
         intVehCD = int(self._selectedData.get('itemCD', -1)) if self._selectedData is not None else -1
@@ -92,11 +92,11 @@ def _sendAccountData(base, self, targetData, accountDossier, isProfilePage):
 def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
     res = base(self, targetData, addVehiclesThatInHangarOnly)
     if config.networkServicesSettings.statAwards:
-        global _lastPlayerId
+        global _lastAccountDBID
         for x in res:
             try:
                 vehCD = x['id']
-                vDossier = dossier.getDossier((self._battlesType, _lastPlayerId, vehCD))
+                vDossier = dossier.getDossier((self._battlesType, _lastAccountDBID, vehCD))
                 x['xvm_xte'] = int(vDossier['xte']) if vDossier is not None else -1
                 x['xvm_xte_flag'] = 0
             except:
@@ -105,15 +105,15 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
 
 
 @overrideMethod(ProfileTechnique, '_receiveVehicleDossier')
-def ProfileTechnique_receiveVehicleDossier(base, self, vehCD, playerId):
+def ProfileTechnique_receiveVehicleDossier(base, self, vehCD, accountDBID):
     global _lastVehCD
     _lastVehCD = vehCD
-    base(self, vehCD, playerId)
+    base(self, vehCD, accountDBID)
     _lastVehCD = None
 
     if config.networkServicesSettings.statAwards:
         if self._isDAAPIInited():
-            vDossier = dossier.getDossier((self._battlesType, playerId, vehCD))
+            vDossier = dossier.getDossier((self._battlesType, accountDBID, vehCD))
             self.flashObject.as_responseVehicleDossierXvm(vDossier)
 
 

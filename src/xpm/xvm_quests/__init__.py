@@ -79,7 +79,7 @@ def _QuestsTileChainsView__updateTileData(self, vehType, questState, selectItemI
 # PRIVATE
 
 def _PREFS_NAME():
-    return 'xvm_quests/%s/filters' % getCurrentPlayerId()
+    return 'xvm_quests/%s/filters' % getCurrentAccountDBID()
 
 
 def _GetSettings():
