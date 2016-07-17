@@ -4,7 +4,7 @@
 # imports
 
 import SoundGroups
-from gui.Scaleform.daapi.view.battle.legacy.damage_panel import DamagePanel
+from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 
 from xfw import *
 import xvm_main.python.config as config

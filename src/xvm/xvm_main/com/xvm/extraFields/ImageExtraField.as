@@ -6,6 +6,7 @@ package com.xvm.extraFields
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import com.xvm.wg.*;
@@ -43,6 +44,8 @@ package com.xvm.extraFields
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             _cfg.align = Macros.FormatStringGlobal(_cfg.align, defaultAlign);
             _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
+
+            ExtraFieldsHelper.setupEvents(this);
         }
 
         override protected function onDispose():void
@@ -289,6 +292,11 @@ package com.xvm.extraFields
             {
                 align();
             }
+        }
+
+        public function updateOnEvent(e:Event):void
+        {
+            update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target(), vehicleID
         }
 
         private function align():void

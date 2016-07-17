@@ -20,6 +20,7 @@ from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
+from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 
 from xfw import *
 from xvm_main.python.logger import *
@@ -171,6 +172,12 @@ def _BattleArenaController_updateVehiclesInfo(self, updated, arenaDP):
     except Exception, ex:
         err(traceback.format_exc())
 
+@registerEvent(DamagePanel, '_updateDeviceState')
+def _DamagePanel_updateDeviceState(self, value):
+    try:
+        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_DEVICE_STATE, *value)
+    except:
+        err(traceback.format_exc())
 
 #####################################################################
 # Battle

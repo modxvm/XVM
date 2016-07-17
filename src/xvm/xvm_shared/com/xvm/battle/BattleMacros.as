@@ -295,19 +295,6 @@ package com.xvm.battle
             }
         }
 
-        /*
-        private function _RegisterGlobalMacrosDataDelayed(eventName:String):void
-        {
-            switch (eventName)
-            {
-                case "ON_STAT_LOADED":
-                    m_globals["chancesStatic"] = Macros.formatWinChancesText(true, false);
-                    m_globals["chancesLive"] = function(o:MacrosOptions):String { return Macros.formatWinChancesText(false, true); }
-                    break;
-            }
-        }
-        */
-
         // helpers
 
         /**

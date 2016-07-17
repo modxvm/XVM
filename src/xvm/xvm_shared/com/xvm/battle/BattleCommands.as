@@ -13,6 +13,7 @@ package com.xvm.battle
 
         public static const AS_RESPONSE_BATTLE_GLOBAL_DATA:String = "xvm.as.response_battle_global_data";
         public static const AS_UPDATE_PLAYER_STATE:String = "xvm.as.update_player_state";
+        public static const AS_UPDATE_DEVICE_STATE:String = "xvm.as.update_device_state";
         public static const AS_UPDATE_HITLOG_DATA:String = "xvm.as.update_hitlog_data";
         public static const AS_TEAMS_HP_CHANGED:String = "xvm.as.teams_hp_changed";
         public static const AS_SNIPER_CAMERA:String = "xvm.as.sniper_camera";

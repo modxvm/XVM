@@ -29,6 +29,7 @@ package com.xvm
             tf.htmlText = (tf.text == "" ? "" : tf.text + " | ") + text;
             return tf.htmlText;
         }
+        */
 
         public static function formatWinChancesText(stats:Dictionary, isShowChance:Boolean, isShowLiveChance:Boolean):String
         {
@@ -45,16 +46,16 @@ package com.xvm
             {
                 playerNames.push(name);
             }
-            var ChancesText:String = Chance.GetChanceText(playerNames, stats, true, false, true);
-            var temp: Array = ChancesText.split('|', 2);
-            var tempA: Array = temp[0].split(':', 2);
+            var chancesText:String = Chance.GetChanceText(playerNames, stats, true, false, true);
+            var temp:Array = chancesText.split('|', 2);
+            var tempA:Array = temp[0].split(':', 2);
             if (isShowChance)
             {
                 return tempA[1];
             }
             else if (isShowLiveChance)
             {
-                var tempB: Array = temp[1].split(':', 2);
+                var tempB:Array = temp[1].split(':', 2);
                 return tempB[1];
             }
             else
@@ -62,7 +63,6 @@ package com.xvm
                 return "";
             }
         }
-        */
 
         public static function ChanceError(text:String):String
         {

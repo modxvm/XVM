@@ -167,6 +167,11 @@ package com.xvm
             _RegisterStatisticsMacros(pname, stat);
         }
 
+        public static function RegisterGlobalStatisticsMacros():void
+        {
+            _RegisterGlobalStatisticsMacros();
+        }
+
         // battle
 
         public static function RegisterBattleGlobalMacrosData(callback:Function):void
@@ -219,6 +224,7 @@ package com.xvm
             "a:xwn6", "a:xwn8", "a:xwn", "a:xwgr", "a:eff", "a:wn6", "a:wn8", "a:wn", "a:wgr", "a:r", "a:xr", "a:winrate", "a:rating", "a:kb", "a:avglvl",
             "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb", "a:xtdb", "a:tdv", "a:tfb", "a:tsb"
         ]
+        private static const ALL_GLOBAL_STAT_MACROS_NAMES:Array = [ "chancesStatic", "chancesLive" ];
 
         private static const PART_NAME:int = 0;
         private static const PART_NORM:int = 1;
@@ -825,6 +831,13 @@ package com.xvm
             m_globals["my-level"] = vdata.level;
             // {{my-rlevel}}
             m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+
+            // Create stubs for statistics macros
+            var __stub__:Function = function(o:IVOMacrosOptions):String { return null; }
+            for each (var macro:String in ALL_GLOBAL_STAT_MACROS_NAMES)
+            {
+                m_globals[macro] = __stub__;
+            }
         }
 
         private static function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isAlly:Boolean):void
@@ -924,7 +937,12 @@ package com.xvm
             {
                 pdata[macro] = __stub__;
             }
+        }
 
+        private static function _RegisterGlobalStatisticsMacros():void
+        {
+            m_globals["chancesStatic"] = Chance.formatWinChancesText(Stat.battleStat, true, false);
+            m_globals["chancesLive"] = function(o:IVOMacrosOptions):String { return Chance.formatWinChancesText(Stat.battleStat, false, true); }
         }
 
         private static function _RegisterStatisticsMacros(pname:String, stat:StatData):void

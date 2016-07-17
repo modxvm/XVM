@@ -39,7 +39,7 @@ package com.xvm.vehiclemarkers.ui
             //Logger.add(getQualifiedClassName(this));
             super();
             super.markerSettings = XvmVehicleMarkerConstants.DISABLED_MARKER_SETTINGS;
-            Xvm.addEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             createComponents();
             Xvm.swfProfilerEnd("XvmVehicleMarker.ctor()");
         }
@@ -57,7 +57,7 @@ package com.xvm.vehiclemarkers.ui
         {
             Xvm.swfProfilerBegin("XvmVehicleMarker.onDispose()");
             super.onDispose();
-            Xvm.removeEventListener(PlayerStateEvent.PLAYER_STATE_CHANGED, onPlayerStateChanged);
+            Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             VehicleMarkersManager.getInstance().removeEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             deleteComponents();
             Xvm.swfProfilerEnd("XvmVehicleMarker.onDispose()");

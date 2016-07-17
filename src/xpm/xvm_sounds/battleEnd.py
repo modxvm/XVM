@@ -9,7 +9,7 @@
 
 import BigWorld
 import SoundGroups
-from gui.Scaleform.daapi.view.battle.legacy.battle_end_warning_panel import BattleEndWarningPanel
+from gui.Scaleform.daapi.view.battle.classic.battle_end_warning_panel import BattleEndWarningPanel
 from constants import ARENA_PERIOD
 
 from xfw import *

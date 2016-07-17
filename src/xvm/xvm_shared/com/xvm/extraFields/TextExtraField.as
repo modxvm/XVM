@@ -6,8 +6,10 @@ package com.xvm.extraFields
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
+    import flash.events.*;
     import flash.text.*;
     import flash.geom.*;
     import scaleform.gfx.*;
@@ -61,6 +63,8 @@ package com.xvm.extraFields
             defaultTextFormat = Utils.DEFAULT_TEXT_FORMAT;
             if (_cfg.textFormat == null)
                 _cfg.textFormat = defaultTextFormatConfig;
+
+            ExtraFieldsHelper.setupEvents(this);
         }
 
         public final function dispose():void
@@ -617,6 +621,11 @@ package com.xvm.extraFields
             }
 
             //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }
+        }
+
+        public function updateOnEvent(e:Event):void
+        {
+            update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target(), vehicleID
         }
     }
 }

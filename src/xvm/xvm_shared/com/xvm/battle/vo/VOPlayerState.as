@@ -228,7 +228,11 @@ package com.xvm.battle.vo
                 dispatchPlayerStateChangedEvent();
                 if (alive && isDead)
                 {
-                    Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.PLAYER_DEAD, vehicleID, accountDBID, playerName));
+                    Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.DEAD, vehicleID, accountDBID, playerName));
+                    if (isCurrentPlayer)
+                    {
+                        Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.SELF_DEAD, vehicleID, accountDBID, playerName));
+                    }
                 }
             }
         }
@@ -300,6 +304,7 @@ package com.xvm.battle.vo
             {
                 _curHealth = value;
                 dispatchPlayerStateChangedEvent();
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.HP_CHANGED, vehicleID, accountDBID, playerName));
             }
         }
 
@@ -363,7 +368,7 @@ package com.xvm.battle.vo
 
         private function dispatchPlayerStateChangedEvent():void
         {
-            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.PLAYER_STATE_CHANGED, vehicleID, accountDBID, playerName));
+            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.CHANGED, vehicleID, accountDBID, playerName));
         }
 
         override public function update(data:Object):Boolean

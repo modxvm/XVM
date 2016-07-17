@@ -7,8 +7,9 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xfw.events.*;
-    import com.xvm.types.cfg.*;
+    import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
+    import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;
 
@@ -110,6 +111,7 @@ package com.xvm.battle
         function BattleState()
         {
             Xfw.addCommandListener(BattleCommands.AS_UPDATE_PLAYER_STATE, onUpdatePlayerState);
+            Xfw.addCommandListener(BattleCommands.AS_UPDATE_DEVICE_STATE, onUpdateDeviceState);
             Xfw.addCommandListener(BattleCommands.AS_UPDATE_HITLOG_DATA, onUpdateHitlogData);
         }
 
@@ -358,7 +360,7 @@ package com.xvm.battle
 
         // XVM calls
 
-        private function onUpdatePlayerState(vehicleID:Number, data:Object):Object
+        private function onUpdatePlayerState(vehicleID:Number, data:Object):void
         {
             Xvm.swfProfilerBegin("BattleState.onUpdatePlayerState()");
             try
@@ -377,17 +379,37 @@ package com.xvm.battle
             {
                 Xvm.swfProfilerEnd("BattleState.onUpdatePlayerState()");
             }
-            return null;
         }
 
-        private function onUpdateHitlogData(vehicleID:Number, attackReasonID:Number, newHealth:Number):Object
+        private function onUpdateDeviceState(moduleName:String, state:String, state2:String):void
+        {
+            try
+            {
+                switch (state)
+                {
+                    case "critical":
+                        Xvm.dispatchEvent(new StringEvent(PlayerStateEvent.MODULE_CRITICAL, moduleName));
+                        break;
+                    case "destroyed":
+                        Xvm.dispatchEvent(new StringEvent(PlayerStateEvent.MODULE_DESTROYED, moduleName));
+                        break;
+                    case "repaired":
+                        Xvm.dispatchEvent(new StringEvent(PlayerStateEvent.MODULE_REPAIRED, moduleName));
+                        break;
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
+        private function onUpdateHitlogData(vehicleID:Number, attackReasonID:Number, newHealth:Number):void
         {
             Logger.add("onUpdateHitlogData: " + [vehicleID, attackReasonID, newHealth]);
 
             hitlogTotalHits++;
             //hitlogTotalDamage += TODO
-
-            return null;
         }
     }
 }
