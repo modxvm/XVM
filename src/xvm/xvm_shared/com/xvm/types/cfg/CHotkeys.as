@@ -12,7 +12,6 @@ package com.xvm.types.cfg
         public var minimapAltMode:CHotkeysParams;
         public var playersPanelAltMode:CHotkeysParams;
         public var markersAltMode:CHotkeysParams;
-        public var battleLabelsHotKeys:*;
 
         public function clone():*
         {

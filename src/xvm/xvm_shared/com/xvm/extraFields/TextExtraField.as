@@ -13,7 +13,7 @@
         public static const DEFAULT_TEXT_FIELD_WIDTH:Number = 300;
         public static const DEFAULT_TEXT_FIELD_HEIGHT:Number = 25;
 
-        private var cfg:CExtraField;
+        private var _cfg:CExtraField;
         private var _isLeftPanel:Boolean;
         private var _getColorSchemeName:Function;
         private var _bounds:Rectangle;
@@ -32,7 +32,7 @@
         {
             super();
 
-            this.cfg = format.clone();
+            this._cfg = format.clone();
             this._isLeftPanel = isLeftPanel;
             this._getColorSchemeName = getColorSchemeName;
             this._bounds = bounds;
@@ -48,132 +48,137 @@
 
             if (defaultAlign == null)
                 defaultAlign = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
-            var align:String = cfg.align != null ? cfg.align : cfg.textFormat != null ? cfg.textFormat.align : null;
-            cfg.align = Macros.FormatStringGlobal(align, defaultAlign);
-            cfg.bindToIcon = Macros.FormatBooleanGlobal(cfg.bindToIcon, false);
-            antiAliasType = Macros.FormatStringGlobal(cfg.antiAliasType, AntiAliasType.ADVANCED);
-            TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_NONE));
+            var align:String = _cfg.align != null ? _cfg.align : _cfg.textFormat != null ? _cfg.textFormat.align : null;
+            _cfg.align = Macros.FormatStringGlobal(align, defaultAlign);
+            _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
+            antiAliasType = Macros.FormatStringGlobal(_cfg.antiAliasType, AntiAliasType.ADVANCED);
+            TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(_cfg.valign, TextFieldEx.VALIGN_NONE));
             TextFieldEx.setNoTranslate(this, true);
             defaultTextFormat = Utils.DEFAULT_TEXT_FORMAT;
-            if (cfg.textFormat == null)
-                cfg.textFormat = defaultTextFormatConfig;
+            if (_cfg.textFormat == null)
+                _cfg.textFormat = defaultTextFormatConfig;
         }
 
         public final function dispose():void
         {
-            cfg = null;
+            _cfg = null;
+        }
+
+        public function get cfg():CExtraField
+        {
+            return _cfg;
         }
 
         private function setup(options:IVOMacrosOptions):void
         {
             var value:*;
 
-            value = Macros.FormatNumber(cfg.x, options, 0);
-            if (Macros.IsCached(cfg.x, options))
+            value = Macros.FormatNumber(_cfg.x, options, 0);
+            if (Macros.IsCached(_cfg.x, options))
             {
                 _xValue = value;
-                cfg.x = null;
+                _cfg.x = null;
             }
 
-            value = Macros.FormatNumber(cfg.y, options, 0);
-            if (Macros.IsCached(cfg.y, options))
+            value = Macros.FormatNumber(_cfg.y, options, 0);
+            if (Macros.IsCached(_cfg.y, options))
             {
                 _yValue = value;
-                cfg.y = null;
+                _cfg.y = null;
             }
 
-            value = Macros.FormatNumber(cfg.width, options);
-            if (Macros.IsCached(cfg.width, options))
+            value = Macros.FormatNumber(_cfg.width, options);
+            if (Macros.IsCached(_cfg.width, options))
             {
                 if (!isNaN(value))
                     _widthValue = value;
-                cfg.width = null;
+                _cfg.width = null;
             }
 
-            value = Macros.FormatNumber(cfg.height, options);
-            if (Macros.IsCached(cfg.height, options))
+            value = Macros.FormatNumber(_cfg.height, options);
+            if (Macros.IsCached(_cfg.height, options))
             {
                 if (!isNaN(value))
                     _heightValue = value;
-                cfg.height = null;
+                _cfg.height = null;
             }
 
-            value = Macros.FormatNumber(cfg.alpha, options, 100);
-            if (Macros.IsCached(cfg.alpha, options))
+            value = Macros.FormatNumber(_cfg.alpha, options, 100);
+            if (Macros.IsCached(_cfg.alpha, options))
             {
                 alpha = value / 100.0;
-                cfg.alpha = null;
+                _cfg.alpha = null;
             }
 
-            value = Macros.FormatNumber(cfg.rotation, options, 0);
-            if (Macros.IsCached(cfg.rotation, options))
+            value = Macros.FormatNumber(_cfg.rotation, options, 0);
+            if (Macros.IsCached(_cfg.rotation, options))
             {
                 rotation = value;
-                cfg.rotation = null;
+                _cfg.rotation = null;
             }
 
-            value = Macros.FormatNumber(cfg.scaleX, options, 1);
-            if (Macros.IsCached(cfg.scaleX, options))
+            value = Macros.FormatNumber(_cfg.scaleX, options, 1);
+            if (Macros.IsCached(_cfg.scaleX, options))
             {
                 scaleX = value;
-                cfg.scaleX = null;
+                _cfg.scaleX = null;
             }
 
-            value = Macros.FormatNumber(cfg.scaleY, options, 1);
-            if (Macros.IsCached(cfg.scaleY, options))
+            value = Macros.FormatNumber(_cfg.scaleY, options, 1);
+            if (Macros.IsCached(_cfg.scaleY, options))
             {
                 scaleY = value;
-                cfg.scaleY = null;
+                _cfg.scaleY = null;
             }
 
-            value = Macros.FormatBoolean(cfg.highlight, options, false);
-            if (Macros.IsCached(cfg.highlights, options))
+            value = Macros.FormatBoolean(_cfg.highlight, options, false);
+            if (Macros.IsCached(_cfg.highlights, options))
             {
-                cfg.highlight = value;
+                _cfg.highlight = value;
             }
 
-            value = Macros.FormatNumber(cfg.borderColor, options, NaN, true);
-            if (Macros.IsCached(cfg.borderColor, options))
+            value = Macros.FormatNumber(_cfg.borderColor, options, NaN, true);
+            if (Macros.IsCached(_cfg.borderColor, options))
             {
                 if (!isNaN(value))
                 {
                     border = true;
                     borderColor = value;
                 }
-                cfg.borderColor = null;
+                _cfg.borderColor = null;
             }
 
-            value = Macros.FormatNumber(cfg.bgColor, options, NaN, true);
-            if (Macros.IsCached(cfg.bgColor, options))
+            value = Macros.FormatNumber(_cfg.bgColor, options, NaN, true);
+            if (Macros.IsCached(_cfg.bgColor, options))
             {
                 if (!isNaN(value))
                 {
                     background = true;
                     backgroundColor = value;
                 }
-                cfg.bgColor = null;
+                _cfg.bgColor = null;
             }
 
-            value = Macros.Format(cfg.format, options) || "";
-            if (Macros.IsCached(cfg.format, options))
+            value = Macros.Format(_cfg.format, options) || "";
+            if (Macros.IsCached(_cfg.format, options))
             {
-                cfg.format = value;
+                _cfg.format = value;
             }
 
-            if (cfg.textFormat != null)
+            if (_cfg.textFormat != null)
             {
-                if (!setupTextFormat(cfg.textFormat, options))
+                if (!setupTextFormat(_cfg.textFormat, options))
                 {
-                    cfg.textFormat = null;
+                    _cfg.textFormat = null;
                 }
             }
 
-            if (cfg.shadow != null)
+            if (_cfg.shadow != null)
             {
-                if (!setupShadow(cfg.shadow, options))
+                if (!setupShadow(_cfg.shadow, options))
                 {
 
-                    cfg.shadow = null;
+                    _cfg.shadow = null;
                 }
             }
         }
@@ -431,93 +436,93 @@
 
             var value:*;
 
-            if (cfg.x != null)
+            if (_cfg.x != null)
             {
-                value = Macros.FormatNumber(cfg.x, options, 0);
+                value = Macros.FormatNumber(_cfg.x, options, 0);
                 if (_xValue != value)
                 {
                     _xValue = value;
                     needAlign = true;
                 }
             }
-            if (cfg.y != null)
+            if (_cfg.y != null)
             {
-                value = Macros.FormatNumber(cfg.y, options, 0);
+                value = Macros.FormatNumber(_cfg.y, options, 0);
                 if (_yValue != value)
                 {
                     _yValue = value;
                     needAlign = true;
                 }
             }
-            if (cfg.width != null)
+            if (_cfg.width != null)
             {
-                value = Macros.FormatNumber(cfg.width, options);
+                value = Macros.FormatNumber(_cfg.width, options);
                 if (!isNaN(value) && _widthValue != value)
                 {
                     _widthValue = value;
                     needAlign = true;
                 }
             }
-            if (cfg.height != null)
+            if (_cfg.height != null)
             {
-                value = Macros.FormatNumber(cfg.height, options);
+                value = Macros.FormatNumber(_cfg.height, options);
                 if (!isNaN(value) && _heightValue != value)
                 {
                     _heightValue = value;
                     needAlign = true;
                 }
             }
-            if (cfg.alpha != null)
+            if (_cfg.alpha != null)
             {
-                value = Macros.FormatNumber(cfg.alpha, options, 100) / 100.0;
+                value = Macros.FormatNumber(_cfg.alpha, options, 100) / 100.0;
                 if (alpha != value)
                 {
                     alpha = value;
                 }
             }
-            if (cfg.rotation != null)
+            if (_cfg.rotation != null)
             {
-                value = Macros.FormatNumber(cfg.rotation, options, 0);
+                value = Macros.FormatNumber(_cfg.rotation, options, 0);
                 if (rotation != value)
                 {
                     rotation = value;
                 }
             }
-            if (cfg.scaleX != null)
+            if (_cfg.scaleX != null)
             {
-                value = Macros.FormatNumber(cfg.scaleX, options, 1);
+                value = Macros.FormatNumber(_cfg.scaleX, options, 1);
                 if (scaleX != value)
                 {
                     scaleX = value;
                 }
             }
-            if (cfg.scaleY != null)
+            if (_cfg.scaleY != null)
             {
-                value = Macros.FormatNumber(cfg.scaleY, options, 1);
+                value = Macros.FormatNumber(_cfg.scaleY, options, 1);
                 if (scaleY != value)
                 {
                     scaleY = value;
                 }
             }
-            if (cfg.borderColor != null)
+            if (_cfg.borderColor != null)
             {
-                value = Macros.FormatNumber(cfg.borderColor, options, NaN, true);
+                value = Macros.FormatNumber(_cfg.borderColor, options, NaN, true);
                 border = !isNaN(value);
                 if (border)
                 {
                     borderColor = value;
                 }
             }
-            if (cfg.bgColor != null)
+            if (_cfg.bgColor != null)
             {
-                value = Macros.FormatNumber(cfg.bgColor, options, NaN, true);
+                value = Macros.FormatNumber(_cfg.bgColor, options, NaN, true);
                 background = !isNaN(value);
                 if (background)
                 {
                     backgroundColor = value;
                 }
             }
-            if (cfg.bindToIcon && !isNaN(bindToIconOffset))
+            if (_cfg.bindToIcon && !isNaN(bindToIconOffset))
             {
                 value = _isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
                 if (x != value)
@@ -529,18 +534,18 @@
             {
                 bindToIconOffset = 0;
             }
-            if (cfg.format != null)
+            if (_cfg.format != null)
             {
-                if (Macros.IsCached(cfg.format, options))
+                if (Macros.IsCached(_cfg.format, options))
                 {
-                    value = cfg.format;
+                    value = _cfg.format;
                 }
                 else
                 {
-                    value = Macros.Format(cfg.format, options) || "";
-                    if (Macros.IsCached(cfg.format, options))
+                    value = Macros.Format(_cfg.format, options) || "";
+                    if (Macros.IsCached(_cfg.format, options))
                     {
-                        cfg.format = value;
+                        _cfg.format = value;
                     }
                 }
                 value = Utils.fixImgTag(value);
@@ -551,9 +556,9 @@
                     htmlText = _textValue;
                     needAlign = true;
                 }
-                if (cfg.highlight && _getColorSchemeName != null)
+                if (_cfg.highlight && _getColorSchemeName != null)
                 {
-                    var highlight:Boolean = cfg.highlight is Boolean ? cfg.highlight : XfwUtils.toBool(Macros.Format(cfg.highlight, options), false);
+                    var highlight:Boolean = _cfg.highlight is Boolean ? _cfg.highlight : XfwUtils.toBool(Macros.Format(_cfg.highlight, options), false);
                     value = highlight ? _getColorSchemeName(options) : null;
                     if (_colorSchemeNameValue != value)
                     {
@@ -562,13 +567,13 @@
                     }
                 }
             }
-            if (cfg.textFormat != null)
+            if (_cfg.textFormat != null)
             {
-                defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, options);
+                defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
             }
-            if (cfg.shadow != null)
+            if (_cfg.shadow != null)
             {
-                filters = Utils.createShadowFiltersFromConfig(cfg.shadow, options);
+                filters = Utils.createShadowFiltersFromConfig(_cfg.shadow, options);
             }
 
             if (needAlign)
@@ -581,9 +586,9 @@
                     height = _heightValue;
                 if (textWidth > 0)
                     width = textWidth + 4; // 2 * 2-pixel gutter
-                if (cfg.align == TextFormatAlign.RIGHT)
+                if (_cfg.align == TextFormatAlign.RIGHT)
                     x -= width;
-                else if (cfg.align == TextFormatAlign.CENTER)
+                else if (_cfg.align == TextFormatAlign.CENTER)
                     x -= width / 2;
             }
 

@@ -359,23 +359,31 @@ class Xvm(object):
             err('onKeyEvent(): ' + traceback.format_exc())
         return True
 
+    def onUpdateStage(self):
+        try:
+            as_xfw_cmd(XVM_COMMAND.AS_ON_UPDATE_STAGE)
+        except Exception, ex:
+            err('onUpdateStage(): ' + traceback.format_exc())
+
     def checkKeyEventBattle(self, key, isDown):
         # do not handle keys when chat is active
         if MessengerEntry.g_instance.gui.isFocused():
             return False
 
-        c = config.get('hotkeys')
+        #c = config.get('hotkeys')
+        #
+        #if c['minimapZoom']['enabled'] is True and c['minimapZoom']['keyCode'] == key:
+        #    return True
+        #if c['minimapAltMode']['enabled'] is True and c['minimapAltMode']['keyCode'] == key:
+        #    return True
+        #if c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key:
+        #    return True
+        #if c['battleLabelsHotKeys'] is True:
+        #    return True
+        #
+        #return False
 
-        if c['minimapZoom']['enabled'] is True and c['minimapZoom']['keyCode'] == key:
-            return True
-        if c['minimapAltMode']['enabled'] is True and c['minimapAltMode']['keyCode'] == key:
-            return True
-        if c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key:
-            return True
-        if c['battleLabelsHotKeys'] is True:
-            return True
-
-        return False
+        return True
 
     def onViewLoaded(self, view=None):
         trace('onViewLoaded: {}'.format('(None)' if not view else view.uniqueName))

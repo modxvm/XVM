@@ -61,6 +61,7 @@
   * default value for "vehicleIcon"/"offsetY" changed fro 16 to 0
   * config format of the text fields in markers are changed to common extraFields config format
   * option "visible" everywhere changed to "enabled" for unification
+  * removed option "hotkeys"/"battleLabelsHotKeys" - not required
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

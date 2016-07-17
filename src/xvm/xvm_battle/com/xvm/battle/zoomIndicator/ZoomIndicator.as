@@ -7,7 +7,7 @@ package com.xvm.battle.zoomIndicator
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
-    import com.xvm.extraFields.TextExtraField;
+    import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.text.*;
@@ -32,7 +32,7 @@ package com.xvm.battle.zoomIndicator
             Xfw.addCommandListener(BattleCommands.AS_SNIPER_CAMERA, onSniperCamera);
             Xfw.addCommandListener(BattleCommands.AS_AIM_OFFSET_UPDATE, onAimOffsetUpdate);
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            onConfigLoaded(null);
+            setup();
         }
 
         override protected function onDispose():void
@@ -49,7 +49,12 @@ package com.xvm.battle.zoomIndicator
 
         private function onConfigLoaded(e:Event):void
         {
-            //Xvm.swfProfilerBegin("ZoomIndicator.onConfigLoaded()");
+            setup();
+        }
+
+        private function setup():void
+        {
+            //Xvm.swfProfilerBegin("ZoomIndicator.setup()");
             try
             {
                 visible = false;
@@ -68,7 +73,7 @@ package com.xvm.battle.zoomIndicator
             {
                 Logger.err(ex);
             }
-            //Xvm.swfProfilerEnd("ZoomIndicator.onConfigLoaded()");
+            //Xvm.swfProfilerEnd("ZoomIndicator.setup()");
         }
 
         private function onSniperCamera(enable:Boolean, zoom:int):void

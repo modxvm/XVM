@@ -56,5 +56,20 @@ package com.xvm.types.cfg
             }
             return _defaultConfigForMarkers;
         }
+
+        private static var _defaultConfigForBattleLabels:CTextFormat = null;
+        public static function GetDefaultConfigForBattleLabels():CTextFormat
+        {
+            if (_defaultConfigForBattleLabels == null)
+            {
+                _defaultConfigForBattleLabels = new CTextFormat();
+                _defaultConfigForBattleLabels.enabled = true;
+                _defaultConfigForBattleLabels.font = "$FieldFont";
+                _defaultConfigForBattleLabels.size = 13;
+                _defaultConfigForBattleLabels.color = 0xFFFFFF;
+                _defaultConfigForBattleLabels.align = TextFormatAlign.LEFT;
+            }
+            return _defaultConfigForBattleLabels;
+        }
     }
 }

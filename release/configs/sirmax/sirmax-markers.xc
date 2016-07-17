@@ -28,12 +28,12 @@
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "enabled": false,
+          //"enabled": true,
           "x": 0,
-          "y": -65,
+          "y": -85,
           "alpha": 100,
           "color": null,
-          "amount": 30
+          "amount": 0
         },
         "healthBar": {
           "enabled": true,
@@ -82,12 +82,12 @@
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "enabled": false,
+          //"enabled": true,
           "x": 0,
-          "y": -65,
-          "alpha": 100,
+          "y": -85,
+          "alpha": 75,
           "color": null,
-          "amount": 50
+          "amount": 30
         },
         "healthBar": {
           "enabled": true,

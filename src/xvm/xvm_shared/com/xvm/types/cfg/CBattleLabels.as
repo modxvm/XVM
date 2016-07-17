@@ -12,7 +12,21 @@ package com.xvm.types.cfg
 
         public function clone():*
         {
-            throw new Error("clone() method is not implemented");
+            var cloned:CBattleLabels = new CBattleLabels();
+            if (formats != null)
+            {
+                cloned.formats = [];
+                var len:uint = formats.length;
+                for (var i:uint = 0; i < len; ++i)
+                {
+                    var format:CExtraField = formats[i] as CExtraField;
+                    if (format != null)
+                    {
+                        cloned.formats.push(format.clone());
+                    }
+                }
+            }
+            return cloned;
         }
     }
 }

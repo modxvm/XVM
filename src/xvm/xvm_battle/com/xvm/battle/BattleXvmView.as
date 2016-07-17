@@ -23,6 +23,7 @@ package com.xvm.battle
     public class BattleXvmView extends XvmViewBase
     {
         private static var _battlePageRef:WeakReference;
+        private var hotkeys_cfg:CHotkeys;
 
         public static function get battlePage():BattlePage
         {
@@ -127,6 +128,7 @@ package com.xvm.battle
             try
             {
                 super.onConfigLoaded(e);
+                hotkeys_cfg = Config.config.hotkeys;
                 Xfw.cmd(BattleCommands.BATTLE_CTRL_SET_VEHICLE_DATA);
                 page.updateStage(App.appWidth, App.appHeight);
             }
@@ -139,16 +141,14 @@ package com.xvm.battle
 
         // PRIVATE
 
-        private function onKeyEvent(key:Number, isDown:Boolean):Object
+        private function onKeyEvent(key:Number, isDown:Boolean):void
         {
-            var cfg:CHotkeys = Config.config.hotkeys;
-            if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
+            if (hotkeys_cfg.minimapZoom.enabled && hotkeys_cfg.minimapZoom.keyCode == key)
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ZOOM, { isDown: isDown }));
-            if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
+            if (hotkeys_cfg.minimapAltMode.enabled && hotkeys_cfg.minimapAltMode.keyCode == key)
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ALT_MODE, { isDown: isDown } ));
-            if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
+            if (hotkeys_cfg.playersPanelAltMode.enabled && hotkeys_cfg.playersPanelAltMode.keyCode == key)
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.PLAYERS_PANEL_ALT_MODE, { isDown: isDown } ));
-            return null;
         }
     }
 }

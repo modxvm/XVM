@@ -39,6 +39,7 @@ from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.shared import g_eventBus, events
+from gui.Scaleform.framework.application import SFApplication
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from gui.Scaleform.daapi.view.battle.legacy.markers import MarkersManager
@@ -104,6 +105,10 @@ def fini():
 @registerEvent(game, 'handleKeyEvent')
 def game_handleKeyEvent(event):
     g_xvm.onKeyEvent(event)
+
+@registerEvent(SFApplication, 'as_updateStageS')
+def SFApplication_as_updateStageS(*args, **kwargs):
+    g_xvm.onUpdateStage()
 
 @overrideMethod(MessageDecorator, 'getListVO')
 def _NotificationDecorator_getListVO(base, self):

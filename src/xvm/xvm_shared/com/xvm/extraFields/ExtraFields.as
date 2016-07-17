@@ -20,6 +20,10 @@ package com.xvm.extraFields
 
     public class ExtraFields extends UIComponent
     {
+        public static const LAYOUT_HORIZONTAL:String = "horizontal";
+        public static const LAYOUT_VERTICAL:String = "vertical";
+        public static const LAYOUT_ROOT:String = "roots";
+
         private var _bounds:Rectangle;
         private var _layout:String;
         private var _isLeftPanel:Boolean;
@@ -79,9 +83,10 @@ package com.xvm.extraFields
             super.configUI();
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
+        public function update(options:IVOMacrosOptions = null, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
         {
-            for (var i:int = 0; i < this.numChildren; ++i)
+            var len:int = this.numChildren;
+            for (var i:int = 0; i < len; ++i)
             {
                 var child:IExtraField = this.getChildAt(i) as IExtraField;
                 if (child)
@@ -89,16 +94,29 @@ package com.xvm.extraFields
                     child.update(options, bindToIconOffset, offsetX, offsetY);
                     if (_bounds && _layout)
                     {
-                        if (_layout == "horizontal")
+                        var position:Number = (options == null) ? 0 : options.position;
+                        if (_layout == LAYOUT_HORIZONTAL)
                         {
-                            var vx:Number = _bounds.x + (options.position - 1) * _bounds.width;
+                            var vx:Number = _bounds.x + (position - 1) * _bounds.width;
                             x = _isLeftPanel ? vx : App.appWidth - vx;
                             y = _bounds.y;
                         }
-                        else
+                        else if (_layout == LAYOUT_VERTICAL)
                         {
                             x = _isLeftPanel ? _bounds.x : App.appWidth - _bounds.x;
-                            y = _bounds.y + (options.position - 1) * _bounds.height;
+                            y = _bounds.y + (position - 1) * _bounds.height;
+                        }
+                        else if (_layout == LAYOUT_ROOT)
+                        {
+                            var cfg:CExtraField = child.cfg;
+
+                            var align:String = Macros.FormatStringGlobal(cfg.align, TextFormatAlign.LEFT);
+                            var width:Number = Macros.FormatNumberGlobal(cfg.width, TextExtraField.DEFAULT_TEXT_FIELD_WIDTH);
+                            child.x = Macros.FormatNumberGlobal(cfg.x, 0) + Utils.HAlign(align, width);
+
+                            var valign:String = Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_TOP);
+                            var height:Number = Macros.FormatNumberGlobal(cfg.height, TextExtraField.DEFAULT_TEXT_FIELD_HEIGHT);
+                            child.y = Macros.FormatNumberGlobal(cfg.y, 0) + Utils.VAlign(valign, height);
                         }
                     }
                 }

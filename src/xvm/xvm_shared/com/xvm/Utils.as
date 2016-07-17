@@ -12,6 +12,7 @@ package com.xvm
     import flash.utils.*;
     import flash.text.*;
     import mx.utils.*;
+    import scaleform.gfx.*;
 
     public class Utils
     {
@@ -232,31 +233,32 @@ package com.xvm
             return v;
         }
 
-        // Get relative to screen resolution x or y coordinates for using when applying horizontal or vertical align to object
-        public static function HVAlign(align:String, value:Number, isVAlign:Boolean):Number
+        // Get relative to screen resolution x or y coordinates for using when applying horizontal align to object
+        public static function HAlign(align:String, value:Number):Number
         {
-            // 'align' allows only 'left', 'right', 'center' values for horizontal alignment and 'top', 'bottom', 'middle' or "center" for vertical
             switch (align)
             {
-                case 'left':
+                case TextFormatAlign.LEFT:
                     return 0;
-                case 'right' :
+                case TextFormatAlign.RIGHT:
                     return App.appWidth - value;
-                case 'center':
-                    if (!isVAlign)
-                    {
-                      return (App.appWidth / 2) - (value / 2);
-                    }
-                    else
-                    {
-                      return (App.appHeight / 2) - (value / 2);
-                    }
-                case 'top':
+                case TextFormatAlign.CENTER:
+                    return (App.appWidth / 2.0) - (value / 2.0);
+            }
+            return value;
+        }
+
+        // Get relative to screen resolution x or y coordinates for using when applying vertical align to object
+        public static function VAlign(align:String, value:Number):Number
+        {
+            switch (align)
+            {
+                case TextFieldEx.VALIGN_TOP:
                     return 0;
-                case 'bottom':
+                case TextFieldEx.VALIGN_BOTTOM:
                     return App.appHeight - value;
-                case 'middle':
-                    return (App.appHeight / 2) - (value / 2);
+                case TextFieldEx.VALIGN_CENTER:
+                    return (App.appHeight / 2.0) - (value / 2.0);
             }
             return value;
         }
