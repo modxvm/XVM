@@ -33,6 +33,7 @@ package com.xvm.types.cfg
         public var updateEvent:String;
         public var hotKeyCode:*;
         public var onHold:*;
+        public var visibleOnHotKey:*;
         public var screenHAlign:String;
         public var screenVAlign:String;
 
@@ -72,6 +73,7 @@ package com.xvm.types.cfg
             cloned.updateEvent = updateEvent;
             cloned.hotKeyCode = hotKeyCode;
             cloned.onHold = onHold;
+            cloned.visibleOnHotKey = visibleOnHotKey;
             cloned.screenHAlign = screenHAlign;
             cloned.screenVAlign = screenVAlign;
             return cloned;

@@ -604,12 +604,18 @@ package com.xvm.battle.playersPanel
         private function createExtraFields():void
         {
             var cfg:CPlayersPanelNoneModeExtraField = isLeftPanel ? ncfg.extraFields.leftPanel : ncfg.extraFields.rightPanel;
-            var size:Rectangle = new Rectangle(
+            var bounds:Rectangle = new Rectangle(
                 Macros.FormatNumberGlobal(cfg.x, 0),
                 Macros.FormatNumberGlobal(cfg.y, 65),
                 Macros.FormatNumberGlobal(cfg.width, 380),
                 Macros.FormatNumberGlobal(cfg.height, 28));
-            extraFieldsHidden = new ExtraFields(cfg.formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, size, Macros.FormatStringGlobal(ncfg.layout, "vertical").toLowerCase());
+            extraFieldsHidden = new ExtraFields(
+                cfg.formats,
+                isLeftPanel,
+                getSchemeNameForPlayer,
+                getSchemeNameForVehicle,
+                bounds,
+                Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase());
             BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmView.battlePage.getChildIndex(BattleXvmView.battlePage.playersPanel));
             //_internal_createMenuForNoneState(mc);
             //createMouseHandler(_root["extraPanels"]);
