@@ -46,7 +46,7 @@ package com.xvm
             {
                 playerNames.push(name);
             }
-            var chancesText:String = Chance.GetChanceText(playerNames, stats, true, false, true);
+            var chancesText:String = Chance.GetChanceText(playerNames, stats, true, false, true, false);
             var temp:Array = chancesText.split('|', 2);
             var tempA:Array = temp[0].split(':', 2);
             if (isShowChance)
@@ -70,15 +70,15 @@ package com.xvm
         }
 
         public static function GetChanceText(playerNames:Vector.<String>, stats:Dictionary,
-            showChance:Boolean, showBattleTier:Boolean, showLive:Boolean = false):String
+            showChance:Boolean, showBattleTier:Boolean, showLive:Boolean = false, showLog:Boolean = false):String
         {
             var teamsCount:Object = null;
-            Logger.add("========== begin chance calculation ===========");
+            if (showLog) Logger.add("========== begin chance calculation ===========");
             try
             {
-                Logger.add("playerNames: " + playerNames.join(", "));
+                if (showLog) Logger.add("playerNames: " + playerNames.join(", "));
                 teamsCount = CalculateTeamPlayersCount(playerNames, stats);
-                Logger.add("teamsCount=" + teamsCount.ally + "/" + teamsCount.enemy);
+                if (showLog) Logger.add("teamsCount=" + teamsCount.ally + "/" + teamsCount.enemy);
                 // non empty teams required
                 if (teamsCount.ally == 0 || teamsCount.enemy == 0)
                     return "";
@@ -88,10 +88,10 @@ package com.xvm
                 Chance.battleTier = Macros.getGlobalValue("battletier");
                 if (isNaN(Chance.battleTier))
                     Chance.battleTier = GuessBattleTier(playerNames, stats);
-                Logger.add("battleTier=" + Chance.battleTier);
+                if (showLog) Logger.add("battleTier=" + Chance.battleTier);
 
-                chanceG = GetChance(playerNames, stats, ChanceFuncG);
-                chanceT = GetChance(playerNames, stats, ChanceFuncT);
+                chanceG = GetChance(playerNames, stats, ChanceFuncG, false, showLog);
+                chanceT = GetChance(playerNames, stats, ChanceFuncT, false, showLog);
 
                 var text:String = "";
 
@@ -106,7 +106,7 @@ package com.xvm
                     //text = Locale.get("Team strength") + ": " + FormatChangeText("", chanceT);
                     if (showLive)
                     {
-                        var chanceLiveT:Object = GetChance(playerNames, stats, ChanceFuncLiveT, true);
+                        var chanceLiveT:Object = GetChance(playerNames, stats, ChanceFuncLiveT, true, showLog);
                         text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chanceLiveT);
                     }
                 }
@@ -118,19 +118,19 @@ package com.xvm
                     text += Locale.get("chanceBattleTier") + ": " + battleTier;
                 }
 
-                Logger.add("RESULT=" + text);
+                if (showLog) Logger.add("RESULT=" + text);
                 return text;
             }
             finally
             {
-                Logger.add("========== end chance calculation ===========");
+                if (showLog) Logger.add("========== end chance calculation ===========");
             }
             return null;
         }
 
         // PRIVATE
 
-        private static function GetChance(playerNames:Vector.<String>, stats:Dictionary, chanceFunc:Function, live:Boolean = false):Object
+        private static function GetChance(playerNames:Vector.<String>, stats:Dictionary, chanceFunc:Function, live:Boolean, showLog:Boolean):Object
         {
             var Ka:Number = 0;
             var Ke:Number = 0;
@@ -157,7 +157,7 @@ package com.xvm
             Ke /= maxTeamsCount;
 
             var result:Object = PrepareChanceResults(Ka, Ke, count);
-            Logger.add("Ka=" + Ka.toFixed(2) + " Ke=" + Ke.toFixed(2) + " raw=" + result.raw + " percent=" + result.percent);
+            if (showLog) Logger.add("Ka=" + Ka.toFixed(2) + " Ke=" + Ke.toFixed(2) + " raw=" + result.raw + " percent=" + result.percent);
             return result;
         }
 

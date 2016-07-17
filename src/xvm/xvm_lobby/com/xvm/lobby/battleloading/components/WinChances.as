@@ -52,7 +52,7 @@ package com.xvm.lobby.battleloading.components
             for (var name:String in Stat.battleStat)
                 playerNames.push(name);
 
-            var chanceText:String = Chance.GetChanceText(playerNames, Stat.battleStat, Config.networkServicesSettings.chance, cfg.showBattleTier);
+            var chanceText:String = Chance.GetChanceText(playerNames, Stat.battleStat, Config.networkServicesSettings.chance, cfg.showBattleTier, false, true);
             if (chanceText)
             {
                 winChanceTF.htmlText = '<span class="chances">' + chanceText + '</span>';
