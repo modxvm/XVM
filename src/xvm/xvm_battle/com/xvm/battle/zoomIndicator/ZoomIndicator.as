@@ -32,6 +32,7 @@ package com.xvm.battle.zoomIndicator
             Xfw.addCommandListener(BattleCommands.AS_SNIPER_CAMERA, onSniperCamera);
             Xfw.addCommandListener(BattleCommands.AS_AIM_OFFSET_UPDATE, onAimOffsetUpdate);
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             setup();
         }
 
@@ -40,6 +41,7 @@ package com.xvm.battle.zoomIndicator
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.removeCommandListener(BattleCommands.AS_SNIPER_CAMERA, onSniperCamera);
             Xfw.removeCommandListener(BattleCommands.AS_AIM_OFFSET_UPDATE, onAimOffsetUpdate);
+            Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             cfg = null;
             indicator = null;
             super.onDispose();
@@ -50,6 +52,12 @@ package com.xvm.battle.zoomIndicator
         private function onConfigLoaded(e:Event):void
         {
             setup();
+        }
+
+        private function onUpdateStage():void
+        {
+            if (cfg && cfg.enabled)
+                invalidate(InvalidationType.POSITION);
         }
 
         private function setup():void
