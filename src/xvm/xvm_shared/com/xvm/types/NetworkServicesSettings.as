@@ -5,10 +5,9 @@
 package com.xvm.types
 {
     import com.xvm.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.daapi.base.*;
+    import com.xvm.vo.*;
 
-    public dynamic class NetworkServicesSettings extends DAAPIDataClass
+    public dynamic class NetworkServicesSettings extends VOBase
     {
         public var servicesActive:Boolean;
         public var statBattle:Boolean;
@@ -18,19 +17,16 @@ package com.xvm.types
         public var chance:Boolean;
         public var chanceLive:Boolean;
         public var chanceResults:Boolean;
-        public var scale:String = Values.EMPTY_STR;
-        public var rating:String = Values.EMPTY_STR;
+        public var scale:String = null;
+        public var rating:String = null;
         public var topClansCount:Number;
-        public var flag:String = Values.EMPTY_STR;
+        public var flag:String = null;
         public var xmqp:Boolean;
         public var x_minimap_clicks_color:Number;
 
         public function NetworkServicesSettings(data:Object)
         {
-            if (data != null)
-            {
-                super(data);
-            }
+            super(data);
         }
     }
 }

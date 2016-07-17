@@ -125,8 +125,6 @@ class VehicleMarkers(object):
                 return python_macro.process_python_macro(args[0])
             #elif cmd == XVM_COMMAND.GET_PLAYER_NAME:
             #    return (BigWorld.player().name, True)
-            #elif cmd == XVM_COMMAND.GET_SVC_SETTINGS:
-            #    return (config.networkServicesSettings.__dict__, True)
             elif cmd == XVM_COMMAND.GET_BATTLE_LEVEL:
                 arena = getattr(BigWorld.player(), 'arena', None)
                 return arena.extraData.get('battleLevel', 0) if arena else None
