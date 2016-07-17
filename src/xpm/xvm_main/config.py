@@ -225,6 +225,8 @@ class XvmServicesToken(object):
         if data is None:
             data = {}
         self.accountDBID = data.get('accountDBID', None)
+        if self.accountDBID is None:
+            self.accountDBID = data.get('_id', None) # returned from XVM API
         self.expires_at = data.get('expires_at', None)
         self.verChkCnt = data.get('verChkCnt', None)
         self.cnt = data.get('cnt', None)
