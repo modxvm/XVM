@@ -37,7 +37,6 @@ class BC(object):
 @registerEvent(BattleStatisticsDataController, 'as_setVehiclesDataS')
 def as_setVehiclesDataS(self, data):
     g_markers.call(BC.setVehiclesData, data)
-    g_markers.recreateMarkers()
 
 @registerEvent(BattleStatisticsDataController, 'as_updatePlayerStatusS')
 def as_updatePlayerStatusS(self, data):

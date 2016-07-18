@@ -192,6 +192,7 @@ package com.xvm.battle
             try
             {
                 _playersDataVO = new VOPlayersData(data);
+                _playersDataVO.dispatchEvents();
                 BattleMacros.RegisterPlayersData();
             }
             catch (ex:Error)
@@ -249,6 +250,7 @@ package com.xvm.battle
             try
             {
                 _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status });
+                _playersDataVO.dispatchEvents();
             }
             catch (ex:Error)
             {
@@ -290,6 +292,7 @@ package com.xvm.battle
                     _playersDataVO.updateVehicleInfos(data.leftVehicleInfos);
                 if (data.rightVehicleInfos)
                     _playersDataVO.updateVehicleInfos(data.rightVehicleInfos);
+                _playersDataVO.dispatchEvents();
             }
             catch (ex:Error)
             {
@@ -319,6 +322,7 @@ package com.xvm.battle
                 {
                     _playersDataVO.updateTotalStats(data.totalStats);
                 }
+                _playersDataVO.dispatchEvents();
             }
             catch (ex:Error)
             {
@@ -347,6 +351,7 @@ package com.xvm.battle
                     _playersDataVO.leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
                 if (data.totalStats)
                     _playersDataVO.updateTotalStats(data.totalStats);
+                _playersDataVO.dispatchEvents();
             }
             catch (ex:Error)
             {
@@ -358,7 +363,7 @@ package com.xvm.battle
             }
         }
 
-        // XVM calls
+        // XVM events
 
         private function onUpdatePlayerState(vehicleID:Number, data:Object):void
         {

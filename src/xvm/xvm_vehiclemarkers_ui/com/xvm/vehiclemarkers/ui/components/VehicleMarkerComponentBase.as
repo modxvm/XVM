@@ -33,7 +33,7 @@ package com.xvm.vehiclemarkers.ui.components
 
         protected function init(e:XvmVehicleMarkerEvent):void
         {
-            update(e);
+            // virtual
         }
 
         protected function update(e:XvmVehicleMarkerEvent):void

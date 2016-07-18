@@ -75,13 +75,11 @@ package com.xvm.battle.vo
             var value:Object;
             for each (value in data.leftVehicleInfos || data.leftItems)
             {
-                playerStates[value.vehicleID] = new VOPlayerState(value);
-                playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                addPlayerState(value);
             }
             for each (value in data.rightVehicleInfos || data.rightItems)
             {
-                playerStates[value.vehicleID] = new VOPlayerState(value);
-                playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                addPlayerState(value);
             }
             leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
             rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
@@ -104,7 +102,7 @@ package com.xvm.battle.vo
             var playerState:VOPlayerState = get(vehicleID);
             if (playerState)
             {
-                playerState.update(data);
+                playerState.updateNoEvent(data);
             }
         }
 
@@ -114,12 +112,11 @@ package com.xvm.battle.vo
             {
                 if (!playerStates.hasOwnProperty(value.vehicleID))
                 {
-                    playerStates[value.vehicleID] = new VOPlayerState(value);
-                    playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                    addPlayerState(value);
                 }
                 else
                 {
-                    (playerStates[value.vehicleID] as VOPlayerState).update(value);
+                    (playerStates[value.vehicleID] as VOPlayerState).updateNoEvent(value);
                 }
             }
         }
@@ -131,7 +128,9 @@ package com.xvm.battle.vo
                 var playerState:VOPlayerState = get(vehicleStats.vehicleID);
                 if (playerState)
                 {
-                    playerState.frags = vehicleStats.frags;
+                    playerState.updateNoEvent({
+                       frags: vehicleStats.frags
+                    });
                 }
             }
         }
@@ -142,7 +141,22 @@ package com.xvm.battle.vo
             rightScope = data.rightScope;
         }
 
+        public function dispatchEvents():void
+        {
+            for each (var playerState:VOPlayerState in playerStates)
+            {
+                playerState.dispatchEvents();
+            }
+        }
+
         // PRIVATE
+
+        private function addPlayerState(value:Object):void
+        {
+            var playerState:VOPlayerState = new VOPlayerState(value);
+            playerStates[value.vehicleID] = playerState;
+            playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+        }
 
         private function updateVehiclesPositionsAndTeam(ids:Vector.<Number>, isAlly:Boolean):void
         {
@@ -153,8 +167,10 @@ package com.xvm.battle.vo
                 playerState = get(ids[i]);
                 if (playerState)
                 {
-                    playerState.isAlly = isAlly;
-                    playerState.position = i + 1;
+                    playerState.updateNoEvent({
+                        isAlly: isAlly,
+                        position: i + 1
+                    });
                 }
             }
         }

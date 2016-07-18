@@ -23,15 +23,16 @@ package com.xvm.vehiclemarkers.ui
     {
         public var vehicleID:Number = NaN;
         private var playerName:String = null;
+        private var curHealth:Number = NaN;
         private var maxHealth:int = 0;
 
-        private var actionMarkerComponent:ActionMarkerComponent;
-        private var contourIconComponent:ContourIconComponent;
-        private var damageTextComponent:DamageTextComponent;
-        private var healthBarComponent:HealthBarComponent;
-        private var levelIconComponent:LevelIconComponent;
-        private var textFieldsComponent:TextFieldsComponent;
-        private var vehicleTypeIconComponent:VehicleTypeIconComponent;
+        private var actionMarkerComponent:ActionMarkerComponent = null;
+        private var contourIconComponent:ContourIconComponent = null;
+        private var damageTextComponent:DamageTextComponent = null;
+        private var healthBarComponent:HealthBarComponent = null;
+        private var levelIconComponent:LevelIconComponent = null;
+        private var textFieldsComponent:TextFieldsComponent = null;
+        private var vehicleTypeIconComponent:VehicleTypeIconComponent = null;
 
         public function XvmVehicleMarker()
         {
@@ -76,14 +77,12 @@ package com.xvm.vehiclemarkers.ui
             try
             {
                 this.playerName = pName;
+                this.maxHealth = maxHealth;
                 var playerState:VOPlayerState = BattleState.getByPlayerName(playerName);
                 if (playerState != null)
                 {
-                    vehicleID = playerState.vehicleID;
-                    this.maxHealth = maxHealth;
-                    playerState.maxHealth = maxHealth;
-                    RegisterVehicleMarkerData();
-                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.INIT, playerState, exInfo));
+                    init(playerState.vehicleID);
+                    //invalidate(InvalidationType.DATA);
                 }
             }
             catch (ex:Error)
@@ -130,6 +129,7 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerBegin("XvmVehicleMarker.updateHealth()");
             try
             {
+                this.curHealth = newHealth;
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
                 if (playerState != null)
                 {
@@ -160,6 +160,8 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerBegin("XvmVehicleMarker.setHealth()");
             try
             {
+                //Logger.add("curHealth=" + curHealth);
+                this.curHealth = curHealth;
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
                 if (playerState != null)
                 {
@@ -253,20 +255,41 @@ package com.xvm.vehiclemarkers.ui
         {
             try
             {
-                vehicleTypeIconComponent.dispose();
-                vehicleTypeIconComponent = null;
-                contourIconComponent.dispose();
-                contourIconComponent = null;
-                levelIconComponent.dispose();
-                levelIconComponent = null;
-                actionMarkerComponent.dispose();
-                actionMarkerComponent = null;
-                healthBarComponent.dispose();
-                healthBarComponent = null;
-                textFieldsComponent.dispose();
-                textFieldsComponent = null;
-                damageTextComponent.dispose();
-                damageTextComponent = null;
+                if (vehicleTypeIconComponent != null)
+                {
+                    vehicleTypeIconComponent.dispose();
+                    vehicleTypeIconComponent = null;
+                }
+                if (contourIconComponent != null)
+                {
+                    contourIconComponent.dispose();
+                    contourIconComponent = null;
+                }
+                if (levelIconComponent != null)
+                {
+                    levelIconComponent.dispose();
+                    levelIconComponent = null;
+                }
+                if (actionMarkerComponent != null)
+                {
+                    actionMarkerComponent.dispose();
+                    actionMarkerComponent = null;
+                }
+                if (healthBarComponent != null)
+                {
+                    healthBarComponent.dispose();
+                    healthBarComponent = null;
+                }
+                if (textFieldsComponent != null)
+                {
+                    textFieldsComponent.dispose();
+                    textFieldsComponent = null;
+                }
+                if (damageTextComponent != null)
+                {
+                    damageTextComponent.dispose();
+                    damageTextComponent = null;
+                }
             }
             catch (ex:Error)
             {
@@ -274,10 +297,31 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
+        private function init(vehicleID:Number):void
+        {
+            this.vehicleID = vehicleID;
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
+            if (!isNaN(this.curHealth))
+            {
+                playerState.updateNoEvent({
+                    curHealth: this.curHealth
+                });
+            }
+            playerState.updateNoEvent({
+                maxHealth: this.maxHealth
+            });
+            RegisterVehicleMarkerData();
+            dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.INIT, playerState, exInfo));
+        }
+
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
             if (e.playerName == playerName)
             {
+                if (isNaN(vehicleID))
+                {
+                    init(e.vehicleID);
+                }
                 invalidate(InvalidationType.DATA);
             }
         }

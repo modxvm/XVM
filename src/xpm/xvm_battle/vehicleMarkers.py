@@ -5,6 +5,7 @@
 
 import traceback
 import weakref
+import time
 
 import BigWorld
 import constants
@@ -152,6 +153,8 @@ class VehicleMarkers(object):
             err(traceback.format_exc())
 
     def respondConfig(self):
+        #debug('vm:respondConfig')
+        #s = time.clock()
         try:
             if self.initialized:
                 if self.active:
@@ -173,15 +176,19 @@ class VehicleMarkers(object):
                 self.recreateMarkers()
         except Exception, ex:
             err(traceback.format_exc())
+        #debug('vm:respondConfig: {:>8.3f} s'.format(time.clock() - s))
 
     def respondGlobalBattleData(self):
+        #s = time.clock()
         try:
             if self.active:
                 self.call(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
         except Exception, ex:
             err(traceback.format_exc())
+        #debug('vm:respondGlobalBattleData: {:>8.3f} s'.format(time.clock() - s))
 
     def recreateMarkers(self):
+        #s = time.clock()
         try:
             if self.plugins:
                 plugin = self.plugins.getPlugin('vehicles')
@@ -192,6 +199,7 @@ class VehicleMarkers(object):
                         plugin.addVehicleInfo(vInfo, arenaDP)
         except Exception, ex:
             err(traceback.format_exc())
+        #debug('vm:recreateMarkers: {:>8.3f} s'.format(time.clock() - s))
 
 g_markers = VehicleMarkers()
 

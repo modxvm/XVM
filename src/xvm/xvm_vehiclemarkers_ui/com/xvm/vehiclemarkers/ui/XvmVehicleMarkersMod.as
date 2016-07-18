@@ -23,7 +23,7 @@ package com.xvm.vehiclemarkers.ui
             Xfw.registerCommandProvider(xvm_cmd);
             Logger.counterPrefix = "V";
             Xfw.cmd(XvmCommands.INITIALIZED);
-            addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            this.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded, false, 0, true);
             Xfw.addCommandListener("BC_addVehiclesInfo", BattleState.instance.addVehiclesInfo);
             Xfw.addCommandListener("BC_setVehicleStats", BattleState.instance.setVehicleStats);
             Xfw.addCommandListener("BC_setVehiclesData", BattleState.instance.setVehiclesData);
@@ -67,17 +67,9 @@ package com.xvm.vehiclemarkers.ui
 
         private function initialize():void
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarkersMod.initialize()");
-            try
-            {
-                BattleGlobalData.init();
-                Stat.clearBattleStat();
-                Stat.loadBattleStat();
-            }
-            finally
-            {
-                Xvm.swfProfilerEnd("XvmVehicleMarkersMod.initialize()");
-            }
+            BattleGlobalData.init();
+            Stat.clearBattleStat();
+            Stat.loadBattleStat();
         }
     }
 }
