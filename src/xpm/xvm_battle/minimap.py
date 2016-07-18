@@ -67,8 +67,9 @@ def updateSymbolName(symbol):
 @overrideMethod(MinimapComponent, 'addEntry')
 def _MinimapComponent_addEntry(
 		base, self, symbol, container, matrix=None, active=False, transformProps=0xffffffff):
-	LOG_DEBUG('_MinimapComponent_addEntry | symbol', symbol)
-	symbol = updateSymbolName(symbol)
+	if config.get('minimap/enabled'):
+		# LOG_DEBUG('_MinimapComponent_addEntry | symbol', symbol)
+		symbol = updateSymbolName(symbol)
 	return base(self, symbol, container, matrix, active, transformProps)
 	# pass
 

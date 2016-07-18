@@ -3,6 +3,8 @@ package com.xvm.battle.minimap
 	import com.xfw.*;
 	import com.xvm.*;
 	import com.xvm.infrastructure.*;
+	import com.xvm.battle.BattleState;
+	import com.xvm.battle.vo.VOPlayerState;
 	import com.xvm.types.cfg.CMinimap;
 	import flash.events.Event;
 	import net.wg.infrastructure.events.*;
@@ -16,9 +18,6 @@ package com.xvm.battle.minimap
 		public function MinimapXvmView(view:IView)
 		{
 			super(view);
-			Logger.add("MinimapXvmView | MinimapXvmView");
-			DebugUtils.LOG_DEBUG("MinimapXvmView | MinimapXvmView");
-		
 		}
 		
 		public function get page():BattlePage
@@ -28,8 +27,6 @@ package com.xvm.battle.minimap
 		
 		public override function onAfterPopulate(e:LifeCycleEvent):void
 		{
-			Logger.add("MinimapXvmView | onAfterPopulate");
-			DebugUtils.LOG_DEBUG("MinimapXvmView | onAfterPopulate");
 			super.onAfterPopulate(e);
 			init();
 		}
@@ -41,7 +38,6 @@ package com.xvm.battle.minimap
 		}
 		private function init():void
 		{	
-			Logger.add("MinimapXvmView | init | ");
 			try
 			{
 				tryToCreateMoMinimap(Config.config.minimap)
@@ -56,7 +52,6 @@ package com.xvm.battle.minimap
 		
 		private function xvmEventConfigLoaded(e:Event):void 
 		{
-			Logger.add("MinimapXvmView | xvmEventConfigLoaded | ");
 			try
 			{
 				tryToCreateMoMinimap(Config.config.minimap)
@@ -70,7 +65,6 @@ package com.xvm.battle.minimap
 	
 		private function tryToCreateMoMinimap(cfg:CMinimap): void {
 			var xvm_enabled:Boolean = Macros.FormatBooleanGlobal(cfg.enabled, true);
-			Logger.add("MinimapXvmView | tryToCreateMoMinimap | "+xvm_enabled);
 			if (xvm_enabled)
 			{
 				page.unregisterComponent(BATTLE_VIEW_ALIASES.MINIMAP);
@@ -81,6 +75,7 @@ package com.xvm.battle.minimap
 				component.y = page.minimap.y;
 				page.minimap = component;
 				page.addChildAt(page.minimap, idx);
+				component.validateNow();
 				page.xfw_registerComponent(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
 			}
 		}
