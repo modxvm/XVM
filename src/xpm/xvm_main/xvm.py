@@ -267,14 +267,8 @@ class Xvm(object):
 
             # battleloading, battle
 
-            if cmd == XVM_COMMAND.GET_MAP_SIZE:
-                return (utils.getMapSize(), True)
-
             if cmd == XVM_COMMAND.GET_CLAN_ICON:
                 return (stats.getClanIcon(args[0]), True)
-
-            if cmd == XVM_COMMAND.GET_MY_VEHCD:
-                return (getVehCD(BigWorld.player().playerVehicleID), True)
 
             # lobby
 

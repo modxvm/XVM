@@ -24,7 +24,15 @@ package com.xvm
          */
         public static function Format(format:*, options:IVOMacrosOptions):*
         {
-            return _Format(format, options, {});
+            //Xvm.swfProfilerBegin("Macros.Format");
+            //try
+            //{
+            return _Format(format, options, { } );
+            //}
+            //finally
+            //{
+            //    Xvm.swfProfilerEnd("Macros.Format");
+            //}
         }
 
         /**
@@ -36,11 +44,20 @@ package com.xvm
          */
         public static function FormatString(format:*, options:IVOMacrosOptions, defaultValue:String = ""):String
         {
+            //Xvm.swfProfilerBegin("Macros.FormatString");
+            //try
+            //{
             if (format == null)
                 return defaultValue;
             var res:String = _Format(format, options, {});
             //Logger.addObject(format + " => " + res);
             return res != null ? res : defaultValue;
+            //}
+            //finally
+            //{
+            //    Xvm.swfProfilerEnd("Macros.FormatString");
+            //}
+            //return "";
         }
 
         /**
@@ -51,7 +68,16 @@ package com.xvm
          */
         public static function FormatStringGlobal(format:*, defaultValue:String = ""):String
         {
+            //Xvm.swfProfilerBegin("Macros.FormatStringGlobal");
+            //try
+            //{
             return FormatString(format, null, defaultValue);
+            //}
+            //finally
+            //{
+            //    Xvm.swfProfilerEnd("Macros.FormatStringGlobal");
+            //}
+            //return "";
         }
 
         /**
@@ -64,6 +90,9 @@ package com.xvm
          */
         public static function FormatNumber(format:*, options:IVOMacrosOptions, defaultValue:Number = NaN, isColorValue:Boolean = false):Number
         {
+            //Xvm.swfProfilerBegin("Macros.FormatNumber");
+            //try
+            //{
             var value:* = format;
             if (value == null)
                 return defaultValue;
@@ -83,6 +112,12 @@ package com.xvm
             if (isNaN(value))
                 return defaultValue;
             return Number(value);
+            //}
+            //finally
+            //{
+            //    Xvm.swfProfilerEnd("Macros.FormatNumber");
+            //}
+            //return NaN;
         }
 
         /**
@@ -95,7 +130,16 @@ package com.xvm
          */
         public static function FormatNumberGlobal(format:*, defaultValue:Number = NaN, isColorValue:Boolean = false):Number
         {
+            //Xvm.swfProfilerBegin("Macros.FormatNumberGlobal");
+            //try
+            //{
             return FormatNumber(format, null, defaultValue, isColorValue);
+            //}
+            //finally
+            //{
+            //    Xvm.swfProfilerEnd("Macros.FormatNumberGlobal");
+            //}
+            //return NaN;
         }
 
         /**
@@ -107,6 +151,9 @@ package com.xvm
          */
         public static function FormatBoolean(format:*, options:IVOMacrosOptions, defaultValue:Boolean = false):Boolean
         {
+            //Xvm.swfProfilerBegin("Macros.FormatBoolean");
+            //try
+            //{
             if (format == null)
                 return defaultValue;
             if (typeof format == "boolean")
@@ -118,6 +165,12 @@ package com.xvm
             if (res == 'false')
                 return false;
             return defaultValue;
+            //}
+            //finally
+            //{
+            //    Xvm.swfProfilerEnd("Macros.FormatBoolean");
+            //}
+            //return false;
         }
 
         /**
@@ -128,7 +181,16 @@ package com.xvm
          */
         public static function FormatBooleanGlobal(format:*, defaultValue:Boolean = false):Boolean
         {
+            //Xvm.swfProfilerBegin("Macros.FormatBooleanGlobal");
+            //try
+            //{
             return FormatBoolean(format, null, defaultValue);
+            //}
+            //finally
+            //{
+            //    Xvm.swfProfilerEnd("Macros.FormatBooleanGlobal");
+            //}
+            //return false;
         }
 
         /**
@@ -139,7 +201,16 @@ package com.xvm
          */
         public static function IsCached(format:*, options:IVOMacrosOptions = null):Boolean
         {
+            //Xvm.swfProfilerBegin("Macros.IsCached");
+            //try
+            //{
             return _IsCached(format, options);
+            //}
+            //finally
+            //{
+            //    Xvm.swfProfilerEnd("Macros.IsCached");
+            //}
+            //return false;
         }
 
         public static function getGlobalValue(key:String):*
@@ -147,16 +218,21 @@ package com.xvm
             return m_globals[key];
         }
 
+        public static function get Globals():Object
+        {
+            return m_globals;
+        }
+
+        public static function get Players():Object
+        {
+            return m_players;
+        }
+
         // common
 
         public static function RegisterXvmServicesMacrosData():void
         {
             _RegisterXvmServicesMacrosData();
-        }
-
-        public static function RegisterGlobalMacrosData():void
-        {
-            _RegisterGlobalMacrosData();
         }
 
         /**
@@ -175,11 +251,6 @@ package com.xvm
 
         // battle
 
-        public static function RegisterBattleGlobalMacrosData(callback:Function):void
-        {
-            callback(m_globals);
-        }
-
         /**
          * Register minimal macros values for player
          * @param vehicleID vehicle id
@@ -193,39 +264,7 @@ package com.xvm
             _RegisterMinimalMacrosData(vehicleID, accountDBID, playerFullName, vehCD, isAlly);
         }
 
-        public static function RegisterPlayersData(callback:Function):void
-        {
-            callback(m_dict);
-        }
-
-        public static function RegisterVehicleMarkerData(callback:Function):void
-        {
-            callback(m_dict);
-        }
-
-        // lobby
-
-        public static function RegisterVehiclesMacros(callback:Function):void
-        {
-            callback(m_globals);
-        }
-
-        public static function RegisterClockMacros(callback:Function):void
-        {
-            callback(m_globals);
-        }
-
         // PRIVATE
-
-        private static const ALL_STAT_MACROS_NAMES:Array = [
-            "xvm-user", "flag", "clanrank", "topclan", "region", "avglvl", "xte", "xeff", "xwn6", "xwn8", "xwn", "xwgr", "eff", "wn6", "wn8", "wn", "wgr",
-            "r", "xr", "winrate", "rating", "battles", "wins", "kb", "t-winrate", "t-rating", "t-battles", "t-wins", "t-kb", "t-hb", "tdb", "xtdb", "tdv",
-            "tfb", "tsb", "c:xte", "c:xeff", "c:xwn6", "c:xwn8", "c:xwn", "c:xwgr", "c:eff", "c:wn6", "c:wn8", "c:wn", "c:wgr", "c:r", "c:xr", "c:winrate",
-            "c:rating", "c:kb", "c:avglvl", "c:t-winrate", "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
-            "a:xwn6", "a:xwn8", "a:xwn", "a:xwgr", "a:eff", "a:wn6", "a:wn8", "a:wn", "a:wgr", "a:r", "a:xr", "a:winrate", "a:rating", "a:kb", "a:avglvl",
-            "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb", "a:xtdb", "a:tdv", "a:tfb", "a:tsb"
-        ]
-        private static const ALL_GLOBAL_STAT_MACROS_NAMES:Array = [ "chancesStatic", "chancesLive" ];
 
         private static const PART_NAME:int = 0;
         private static const PART_NORM:int = 1;
@@ -236,14 +275,11 @@ package com.xvm
         private static const PART_REP:int = 6;
         private static const PART_DEF:int = 7;
 
-        private static var m_macros_cache:Object = { };
-        private static var m_macros_cache_global:Object = { };
-        private static var m_dict:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
-        private static var m_accountDBID_to_playerName:Object = { };
         private static var m_globals:Object = { };
+        private static var m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+        private static var m_macros_cache_globals:Object = { };
+        private static var m_macros_cache_players:Object = { };
         private static var m_contacts:Object = { };
-
-        private static var curent_xtdb:Number = 0;
 
         private static function _Format(format:*, options:IVOMacrosOptions, __out:Object):*
         {
@@ -267,17 +303,17 @@ package com.xvm
                 var cached_value:*;
                 if (playerName != null && playerName != "")
                 {
-                    player_cache = m_macros_cache[playerName];
+                    player_cache = m_macros_cache_players[playerName];
                     if (player_cache == null)
                     {
-                        m_macros_cache[playerName] = { };
-                        player_cache = m_macros_cache[playerName];
+                        m_macros_cache_players[playerName] = { };
+                        player_cache = m_macros_cache_players[playerName];
                     }
                     cached_value = player_cache[format];
                 }
                 else
                 {
-                    cached_value = m_macros_cache_global[format];
+                    cached_value = m_macros_cache_globals[format];
                 }
 
                 if (cached_value !== undefined)
@@ -340,7 +376,7 @@ package com.xvm
                     else
                     {
                         //Logger.add("add to global cache: " + format + " => " + res);
-                        m_macros_cache_global[format] = res;
+                        m_macros_cache_globals[format] = res;
                     }
                 }
                 else
@@ -365,7 +401,7 @@ package com.xvm
         {
             // Process tag
             var playerName:String = options ? options.playerName : null;
-            var pdata:* = (playerName == null || playerName == "") ? m_globals : m_dict[playerName];
+            var pdata:* = (playerName == null || playerName == "") ? m_globals : m_players[playerName];
             if (pdata == null)
                 return "";
 
@@ -418,8 +454,7 @@ package com.xvm
                 else
                 {
                     res += def;
-                    if (dotPos != 0)
-                        __out.isStaticMacro = false;
+                    __out.isStaticMacro = false;
                 }
             }
             else if (value == null)
@@ -761,12 +796,12 @@ package com.xvm
             // Check cached value
             if (playerName != null && playerName != "")
             {
-                var player_cache:Object = m_macros_cache[playerName];
+                var player_cache:Object = m_macros_cache_players[playerName];
                 if (player_cache == null)
                     return false;
                 return player_cache[format] !== undefined;
             }
-            return m_macros_cache_global[format] !== undefined;
+            return m_macros_cache_globals[format] !== undefined;
         }
 
         // Macros registration
@@ -779,53 +814,6 @@ package com.xvm
             m_globals["r_size"] = _getRatingDefaultValue().length;
         }
 
-        private static function _RegisterGlobalMacrosData():void
-        {
-            // {{battletype}}
-            m_globals["battletype"] = Utils.getBattleTypeText(BattleGlobalData.battleType);
-            // {{battletier}}
-            m_globals["battletier"] = BattleGlobalData.battleLevel;
-
-            // {{cellsize}}
-            m_globals["cellsize"] = Math.round(Xfw.cmd(XvmCommandsInternal.GET_MAP_SIZE) / 10);
-
-            var vdata:VOVehicleData = VehicleInfo.get(Xfw.cmd(XvmCommandsInternal.GET_MY_VEHCD));
-
-            // {{my-veh-id}}
-            m_globals["my-veh-id"] = vdata.vehCD;
-            // {{my-vehicle}} - Chaffee
-            m_globals["my-vehicle"] = vdata.localizedName;
-            // {{my-vehiclename}} - usa-M24_Chaffee
-            m_globals["my-vehiclename"] = VehicleInfo.getVIconName(vdata.key);
-            // {{my-vehicle-short}} - Chaff
-            m_globals["my-vehicle-short"] = vdata.shortName || vdata.localizedName;
-            // {{my-vtype-key}} - MT
-            m_globals["my-vtype-key"] = vdata.vtype;
-            // {{my-vtype}}
-            m_globals["my-vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
-            // {{my-vtype-l}} - Medium Tank
-            m_globals["my-vtype-l"] = Locale.get(vdata.vtype);
-            // {{c:my-vtype}}
-            m_globals["c:my-vtype"] = MacrosUtils.getVTypeColorValue(vdata.vehCD);
-            // {{my-battletier-min}}
-            m_globals["my-battletier-min"] = vdata.tierLo;
-            // {{my-battletier-max}}
-            m_globals["my-battletier-max"] = vdata.tierHi;
-            // {{my-nation}}
-            m_globals["my-nation"] = vdata.nation;
-            // {{my-level}}
-            m_globals["my-level"] = vdata.level;
-            // {{my-rlevel}}
-            m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
-
-            // Create stubs for statistics macros
-            var __stub__:Function = function(o:IVOMacrosOptions):String { return null; }
-            for each (var macro:String in ALL_GLOBAL_STAT_MACROS_NAMES)
-            {
-                m_globals[macro] = __stub__;
-            }
-        }
-
         private static function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isAlly:Boolean):void
         {
             if (playerFullName == null || playerFullName == "")
@@ -833,14 +821,12 @@ package com.xvm
 
             var playerName:String = XfwUtils.GetPlayerName(playerFullName);
 
-            if (!m_dict.hasOwnProperty(playerName))
-                m_dict[playerName] = new Object();
+            if (!m_players.hasOwnProperty(playerName))
+                m_players[playerName] = new Object();
 
-            var pdata:Object = m_dict[playerName];
+            var pdata:Object = m_players[playerName];
             if (pdata.hasOwnProperty("name"))
                 return; // already registered
-
-            m_accountDBID_to_playerName[accountDBID] = playerName;
 
             var name:String = getCustomPlayerName(playerName, accountDBID);
             var clanIdx:int = name.indexOf("[");
@@ -916,13 +902,6 @@ package com.xvm
             pdata["squad-num"] = function(o:IVOMacrosOptions):Number { return o.squadIndex <= 0 ? NaN : o.squadIndex; }
             // {{position}}
             pdata["position"] = function(o:IVOMacrosOptions):Number { return o.position <= 0 ? NaN : o.position; }
-
-            // Create stubs for statistics macros
-            var __stub__:Function = function(o:IVOMacrosOptions):String { return null; }
-            for each (var macro:String in ALL_STAT_MACROS_NAMES)
-            {
-                pdata[macro] = __stub__;
-            }
         }
 
         private static function _RegisterGlobalStatisticsMacros():void
@@ -942,11 +921,11 @@ package com.xvm
             if (Config.networkServicesSettings.servicesActive != true)
                 return;
 
-            var pdata:Object = m_dict[pname];
+            var pdata:Object = m_players[pname];
             if (!pdata)
             {
                 RegisterMinimalMacrosData(stat.vehicleID, stat._id, pname + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id, stat.team == XfwConst.TEAM_ALLY);
-                pdata = m_dict[pname];
+                pdata = m_players[pname];
             }
 
             // {{xvm-user}}

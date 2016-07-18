@@ -70,8 +70,7 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerBegin("XvmVehicleMarkersMod.initialize()");
             try
             {
-                Macros.RegisterGlobalMacrosData();
-                Macros.RegisterBattleGlobalMacrosData(BattleMacros.RegisterGlobalMacrosData);
+                BattleGlobalData.init();
                 Stat.clearBattleStat();
                 Stat.loadBattleStat();
             }

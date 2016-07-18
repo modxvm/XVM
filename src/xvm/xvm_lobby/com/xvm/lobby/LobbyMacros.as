@@ -5,22 +5,23 @@
 package com.xvm.lobby
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.vo.*;
 
     internal class LobbyMacros
     {
-        internal static function RegisterVehiclesMacros(m_globals:Object):void
+        internal static function RegisterVehiclesMacros():void
         {
-            m_globals["v"] = function(o:IVOMacrosOptions):* {
+            Macros.Globals["v"] = function(o:IVOMacrosOptions):* {
                 if (o == null || o.getSubname() == null || o.vehicleData == null)
                     return null;
                 return o.vehicleData.__vehicleDossierCut[o.getSubname()]; // TODO: refactor, remove VehicleDossierCut class
             }
         }
 
-        internal static function RegisterClockMacros(m_globals:Object):void
+        internal static function RegisterClockMacros():void
         {
-            m_globals["_clock"] = function(o:IVOMacrosOptions):* {
+            Macros.Globals["_clock"] = function(o:IVOMacrosOptions):* {
                 if (o == null || o.getSubname() == null)
                     return null;
                 var date:Date = App.utils.dateTime.now();

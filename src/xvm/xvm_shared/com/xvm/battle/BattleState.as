@@ -192,7 +192,7 @@ package com.xvm.battle
             try
             {
                 _playersDataVO = new VOPlayersData(data);
-                Macros.RegisterPlayersData(BattleMacros.RegisterPlayersData);
+                BattleMacros.RegisterPlayersData();
             }
             catch (ex:Error)
             {

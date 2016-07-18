@@ -8,9 +8,7 @@ package com.xvm
     {
         internal static const REQUEST_CONFIG:String = "xvm.request_config";
         internal static const GET_ARENA_GUI_TYPE:String = "xvm.get_arena_gui_type";
-        internal static const GET_MAP_SIZE:String = "xvm.get_map_size";
         internal static const GET_CLAN_ICON:String = "xvm.get_clan_icon";
-        internal static const GET_MY_VEHCD:String = "xvm.get_my_vehcd";
         internal static const REQUEST_DOSSIER:String = "xvm.request_dossier";
         internal static const LOAD_STAT_BATTLE:String = "xvm.load_stat_battle";
         internal static const LOAD_STAT_BATTLE_RESULTS:String = "xvm.load_stat_battle_results";

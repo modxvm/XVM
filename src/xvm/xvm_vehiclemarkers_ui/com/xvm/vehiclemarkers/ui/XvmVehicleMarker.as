@@ -82,7 +82,7 @@ package com.xvm.vehiclemarkers.ui
                     vehicleID = playerState.vehicleID;
                     this.maxHealth = maxHealth;
                     playerState.maxHealth = maxHealth;
-                    Macros.RegisterVehicleMarkerData(this.RegisterVehicleMarkerData);
+                    RegisterVehicleMarkerData();
                     dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.INIT, playerState, exInfo));
                 }
             }
@@ -282,11 +282,12 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        private function RegisterVehicleMarkerData(m_dict:Object):void
+        private function RegisterVehicleMarkerData():void
         {
-            if (!m_dict.hasOwnProperty(playerName))
-                m_dict[playerName] = {};
-            var pdata:Object = m_dict[playerName];
+            var dict:Object = Macros.Players;
+            if (!dict.hasOwnProperty(playerName))
+                dict[playerName] = {};
+            var pdata:Object = dict[playerName];
 
             // {{turret}}
             pdata["turret"] = getTurretData();

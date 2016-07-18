@@ -6,6 +6,7 @@ package com.xvm.lobby.battleloading
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.*;
     import com.xvm.lobby.battleloading.components.*;
@@ -33,12 +34,11 @@ package com.xvm.lobby.battleloading
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
 
-            Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
-
+            //Logger.addObject(Config.networkServicesSettings);
+            //Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
             logBriefConfigurationInfo();
 
-            Macros.RegisterGlobalMacrosData();
-
+            BattleGlobalData.init();
             Stat.clearBattleStat();
             Stat.loadBattleStat();
 

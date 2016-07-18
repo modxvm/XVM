@@ -33,6 +33,7 @@ package com.xvm
         public static function set networkServicesSettings(value:NetworkServicesSettings):void
         {
             s_networkServicesSettings = value;
+            Macros.RegisterXvmServicesMacrosData();
         }
     }
 }

@@ -12,16 +12,16 @@ package com.xvm.battle
 
     public class BattleMacros
     {
-        public static function RegisterGlobalMacrosData(m_globals:Object):void
+        public static function RegisterGlobalMacrosData():void
         {
-            _RegisterGlobalMacrosData(m_globals);
+            _RegisterGlobalMacrosData(Macros.Globals);
         }
 
-        public static function RegisterPlayersData(m_dict:Object):void
+        public static function RegisterPlayersData():void
         {
             for each (var playerState:VOPlayerState in BattleState.playersDataVO.playerStates)
             {
-                _RegisterPlayerData(m_dict, playerState);
+                _RegisterPlayerData(Macros.Players, playerState);
             }
         }
 
@@ -29,6 +29,43 @@ package com.xvm.battle
 
         private static function _RegisterGlobalMacrosData(m_globals:Object):void
         {
+            // {{battletype}}
+            m_globals["battletype"] = Utils.getBattleTypeText(BattleGlobalData.battleType);
+            // {{battletier}}
+            m_globals["battletier"] = BattleGlobalData.battleLevel;
+
+            // {{cellsize}}
+            m_globals["cellsize"] = int(BattleGlobalData.mapSize / 10);
+
+            var vdata:VOVehicleData = VehicleInfo.get(BattleGlobalData.playerVehCD);
+
+            // {{my-veh-id}}
+            m_globals["my-veh-id"] = vdata.vehCD;
+            // {{my-vehicle}} - Chaffee
+            m_globals["my-vehicle"] = vdata.localizedName;
+            // {{my-vehiclename}} - usa-M24_Chaffee
+            m_globals["my-vehiclename"] = VehicleInfo.getVIconName(vdata.key);
+            // {{my-vehicle-short}} - Chaff
+            m_globals["my-vehicle-short"] = vdata.shortName || vdata.localizedName;
+            // {{my-vtype-key}} - MT
+            m_globals["my-vtype-key"] = vdata.vtype;
+            // {{my-vtype}}
+            m_globals["my-vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
+            // {{my-vtype-l}} - Medium Tank
+            m_globals["my-vtype-l"] = Locale.get(vdata.vtype);
+            // {{c:my-vtype}}
+            m_globals["c:my-vtype"] = MacrosUtils.getVTypeColorValue(vdata.vehCD);
+            // {{my-battletier-min}}
+            m_globals["my-battletier-min"] = vdata.tierLo;
+            // {{my-battletier-max}}
+            m_globals["my-battletier-max"] = vdata.tierHi;
+            // {{my-nation}}
+            m_globals["my-nation"] = vdata.nation;
+            // {{my-level}}
+            m_globals["my-level"] = vdata.level;
+            // {{my-rlevel}}
+            m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+
             // Capture bar
 
             // {{cap.points}}

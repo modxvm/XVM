@@ -12,66 +12,79 @@ package com.xvm.battle
     {
         public static function get playerVehicleID():Number
         {
-            return instance._playerVehicleID;
+            return _playerVehicleID;
         }
 
         public static function get playerName():String
         {
-            return instance._playerName;
+            return _playerName;
         }
 
         public static function get playerVehCD():Number
         {
-            return instance._playerVehCD;
-        }
-
-        public static function get curentXtdb():Number
-        {
-            return instance.getCurentXtdb();
+            return _playerVehCD;
         }
 
         public static function get battleLevel():Number
         {
-            return instance._battleLevel;
+            return _battleLevel;
         }
 
         public static function get battleType():Number
         {
-            return instance._battleType;
+            return _battleType;
         }
 
-        // instance
-        instance; // static .ctor
-        private static var _instance:BattleGlobalData = null;
-        private static function get instance():BattleGlobalData
+        public static function get arenaGuiType():Number
         {
-            if (_instance == null)
-            {
-                _instance = new BattleGlobalData();
-            }
-            return _instance;
+            return _arenaGuiType;
         }
 
-        private var _playerVehicleID:Number;
-        private var _playerName:String;
-        private var _playerVehCD:Number;
-        private var _battleLevel:Number;
-        private var _battleType:Number;
-        private var _arenaGuiType:Number;
-        private var _mapSize:Number;
-        private var _minimapCirclesData:VOMinimapCirclesData;
-        private var _xtdb_data:Array;
+        public static function get mapSize():Number
+        {
+            return _mapSize;
+        }
 
-        // .ctor should be private for Singleton
-        function BattleGlobalData()
+        public static function get minimapCirclesData():VOMinimapCirclesData
+        {
+            return _minimapCirclesData;
+        }
+
+        public static function get curentXtdb():Number
+        {
+            return getCurentXtdb();
+        }
+
+        public static function init():void
         {
             Xfw.addCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
-            Xfw.cmd(BattleCommands.REQUEST_BATTLE_GLOBAL_DATA);
+            try
+            {
+                Xfw.cmd(BattleCommands.REQUEST_BATTLE_GLOBAL_DATA);
+                _curent_xtdb = 0;
+                BattleMacros.RegisterGlobalMacrosData();
+            }
+            finally
+            {
+                Xfw.removeCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
+            }
         }
 
-        private function onRespondBattleGlobalData(playerVehicleID:Number, playerName:String, playerVehCD:Number,
+        private static var _playerVehicleID:Number;
+        private static var _playerName:String;
+        private static var _playerVehCD:Number;
+        private static var _battleLevel:Number;
+        private static var _battleType:Number;
+        private static var _arenaGuiType:Number;
+        private static var _mapSize:Number;
+        private static var _minimapCirclesData:VOMinimapCirclesData;
+        private static var _xtdb_data:Array;
+
+        private static var _curent_xtdb:Number = 0;
+
+        private static function onRespondBattleGlobalData(playerVehicleID:Number, playerName:String, playerVehCD:Number,
             battleLevel:Number, battleType:Number, arenaGuiType:Number, mapSize:Number,
-            minimapCirclesData:Object, xtdb_data:Array):Object
+            minimapCirclesData:Object, xtdb_data:Array):void
         {
             //Logger.addObject(arguments);
             _playerVehicleID = playerVehicleID;
@@ -94,12 +107,9 @@ package com.xvm.battle
             _mapSize = mapSize;
             _minimapCirclesData = new VOMinimapCirclesData(minimapCirclesData);
             _xtdb_data = xtdb_data;
-            return null;
         }
 
-
-        private var _curent_xtdb:Number = 0;
-        private function getCurentXtdb():Number
+        private static function getCurentXtdb():Number
         {
                 var xtdb_data_len:Number = _xtdb_data.length;
                 while (_curent_xtdb < xtdb_data_len - 1)

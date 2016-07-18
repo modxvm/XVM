@@ -89,8 +89,8 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="Default" />
-    <option testMovieCommand="" />
+    <option testMovie="Custom" />
+    <option testMovieCommand="..\..\utils\test.sh" />
   </options>
   <!-- Plugin storage -->
   <storage />

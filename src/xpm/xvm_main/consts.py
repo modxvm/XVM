@@ -43,9 +43,7 @@ class XVM_EVENT(object):
 class XVM_COMMAND(object):
     REQUEST_CONFIG = "xvm.request_config"
     GET_PLAYER_NAME = "xvm.get_player_name"
-    GET_MAP_SIZE = "xvm.get_map_size"
     GET_CLAN_ICON = "xvm.get_clan_icon"
-    GET_MY_VEHCD = "xvm.get_my_vehcd"
     GET_XTDB_DATA = "xvm.get_xtdb_data"
     REQUEST_DOSSIER = "xvm.request_dossier"
     GET_SVC_SETTINGS = "xvm.get_svc_settings"

@@ -131,12 +131,8 @@ class VehicleMarkers(object):
                 return python_macro.process_python_macro(args[0])
             #elif cmd == XVM_COMMAND.GET_PLAYER_NAME:
             #    return (BigWorld.player().name, True)
-            elif cmd == XVM_COMMAND.GET_MAP_SIZE:
-                return utils.getMapSize()
             elif cmd == XVM_COMMAND.GET_CLAN_ICON:
                 return stats.getClanIcon(args[0])
-            elif cmd == XVM_COMMAND.GET_MY_VEHCD:
-                return getVehCD(BigWorld.player().playerVehicleID)
             elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
                 stats.getBattleStat(args, self.call, GUI_GLOBAL_SPACE_ID.BATTLE)
             # profiler
