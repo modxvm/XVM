@@ -149,12 +149,14 @@ def _PlayerAvatar_setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
     g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
 
 # on any vehicle hit received
-@registerEvent(Vehicle, 'onHealthChanged')
-def _Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    # debug("> _Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
+@overrideMethod(Vehicle, 'onHealthChanged')
+def _Vehicle_onHealthChanged(base, self, newHealth, attackerID, attackReasonID):
+    #debug("> _Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     if attackerID == BigWorld.player().playerVehicleID:
         as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_HITLOG_DATA, self.id, attackReasonID, newHealth)
+
+    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
+    base(self, newHealth, attackerID, attackReasonID)
 
 # on vehicle info updated
 @registerEvent(BattleArenaController, 'updateVehiclesInfo')
