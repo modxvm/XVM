@@ -20,9 +20,9 @@ package com.xvm.battle
             return instance._playersDataVO ? instance._playersDataVO.get(vehicleID) : null;
         }
 
-        public static function getByPlayerName(playerName:String):VOPlayerState
+        public static function getVehicleID(playerName:String):Number
         {
-            return instance._playersDataVO ? instance._playersDataVO.getByPlayerName(playerName) : null;
+            return instance._playersDataVO ? instance._playersDataVO.getVehicleID(playerName) : NaN;
         }
 
         public static function get arenaInfoVO():VOArenaInfo

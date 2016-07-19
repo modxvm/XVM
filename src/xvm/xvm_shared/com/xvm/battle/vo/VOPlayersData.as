@@ -9,7 +9,7 @@ package com.xvm.battle.vo
     import com.xvm.vo.*;
     import flash.utils.*;
 
-    public class VOPlayersData extends VOBase
+    public class VOPlayersData
     {
         public var playerStates:Dictionary;
 
@@ -96,9 +96,9 @@ package com.xvm.battle.vo
             return isNaN(vehicleID) ? null : playerStates[vehicleID];
         }
 
-        public function getByPlayerName(playerName:String):VOPlayerState
+        public function getVehicleID(playerName:String):Number
         {
-            return playerName ? get(playerNameToVehicleIDMap[playerName]) : null;
+            return playerName ? playerNameToVehicleIDMap[playerName] : NaN;
         }
 
         public function updatePlayerState(vehicleID:Number, data:Object):void
