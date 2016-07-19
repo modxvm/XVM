@@ -19,6 +19,7 @@ package com.xvm.vehiclemarkers.ui.components
             this.marker = marker;
             marker.addEventListener(XvmVehicleMarkerEvent.INIT, init);
             marker.addEventListener(XvmVehicleMarkerEvent.UPDATE, update);
+            marker.addEventListener(XvmVehicleMarkerEvent.EX_INFO, onExInfo);
         }
 
         public final function dispose():void
@@ -39,6 +40,11 @@ package com.xvm.vehiclemarkers.ui.components
         protected function update(e:XvmVehicleMarkerEvent):void
         {
             // virtual
+        }
+
+        protected function onExInfo(e:XvmVehicleMarkerEvent):void
+        {
+            update(e);
         }
     }
 }

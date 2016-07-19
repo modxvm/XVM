@@ -18,6 +18,7 @@ package com.xvm.vehiclemarkers.ui.components
     {
         private var extraFieldsHolders:Object;
         private var isAlly:Boolean;
+        private var exInfoDirty:Boolean;
         private var lastState:String;
         private var currentPlayerState:VOPlayerState;
 
@@ -30,6 +31,7 @@ package com.xvm.vehiclemarkers.ui.components
         {
             var playerState:VOPlayerState = e.playerState;
             isAlly = playerState.isAlly;
+            exInfoDirty = true;
             lastState = null;
             extraFieldsHolders = { };
             super.init(e);
@@ -51,30 +53,27 @@ package com.xvm.vehiclemarkers.ui.components
         override protected function update(e:XvmVehicleMarkerEvent):void
         {
             super.update(e);
-
             if (extraFieldsHolders != null)
             {
-                var playerState:VOPlayerState = e.playerState;
-                currentPlayerState = playerState;
-                var currentState:String = XvmVehicleMarkerState.getCurrentState(playerState, e.exInfo);
-                var extraFields:ExtraFields = extraFieldsHolders[lastState];
-                if (lastState != currentState)
+                updateExtraFieldsVisibility(e.playerState, e.exInfo);
+                extraFieldsHolders[lastState].update(e.playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
+                exInfoDirty = true;
+            }
+        }
+
+        override protected function onExInfo(e:XvmVehicleMarkerEvent):void
+        {
+            if (extraFieldsHolders != null)
+            {
+                if (exInfoDirty)
                 {
-                    if (extraFields != null)
-                    {
-                        extraFields.visible = false;
-                    }
-                    extraFields = extraFieldsHolders[currentState];
-                    if (extraFields == null)
-                    {
-                        extraFields = initState(currentState, playerState);
-                        var exState:String = XvmVehicleMarkerState.getCurrentState(playerState, !e.exInfo);
-                        initState(exState, playerState);
-                    }
-                    extraFields.visible = true;
-                    lastState = currentState;
+                    update(e);
+                    exInfoDirty = false;
                 }
-                extraFields.update(playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
+                else
+                {
+                    updateExtraFieldsVisibility(e.playerState, e.exInfo);
+                }
             }
         }
 
@@ -88,6 +87,31 @@ package com.xvm.vehiclemarkers.ui.components
             extraFieldsHolders[state] = extraFields;
             marker.addChild(extraFields);
             return extraFields;
+        }
+
+        private function updateExtraFieldsVisibility(playerState:VOPlayerState, exInfo:Boolean):void
+        {
+            //Xvm.swfProfilerBegin("TextFieldsComponent.updateExtraFieldsVisibility()");
+            currentPlayerState = playerState;
+            var currentState:String = XvmVehicleMarkerState.getCurrentState(playerState, exInfo);
+            var extraFields:ExtraFields = extraFieldsHolders[lastState];
+            if (lastState != currentState)
+            {
+                if (extraFields != null)
+                {
+                    extraFields.visible = false;
+                }
+                extraFields = extraFieldsHolders[currentState];
+                if (extraFields == null)
+                {
+                    extraFields = initState(currentState, playerState);
+                    var exState:String = XvmVehicleMarkerState.getCurrentState(playerState, !exInfo);
+                    initState(exState, playerState);
+                }
+                extraFields.visible = true;
+                lastState = currentState;
+            }
+            //Xvm.swfProfilerEnd("TextFieldsComponent.updateExtraFieldsVisibility()");
         }
 
         // from net.wg.gui.battle.views.stats.constants::PlayerStatusSchemeName

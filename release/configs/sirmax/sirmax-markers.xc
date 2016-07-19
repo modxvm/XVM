@@ -62,7 +62,7 @@
           {
             "enabled": true,
             "name": "Rating marks",
-            "x": 0, "y": -35,
+            "x": 0, "y": -40,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "textFormat": { "name": "Symbol" },
             "format": ${"def.markersStat"}
@@ -230,7 +230,7 @@
           {
             "enabled": true,
             "name": "Rating marks",
-            "x": 0, "y": -35,
+            "x": 0, "y": -40,
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "textFormat": { "name": "Symbol" },
             "format": ${"def.markersStat"}

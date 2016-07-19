@@ -215,7 +215,7 @@ package com.xvm.vehiclemarkers.ui
             if (!parent) { dispose(); return; }
             ///
 
-            Xvm.swfProfilerBegin("XvmVehicleMarker.onShowExInfoHandler()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.onShowExInfoHandler()");
             try
             {
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
@@ -228,7 +228,7 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
-            Xvm.swfProfilerEnd("XvmVehicleMarker.onShowExInfoHandler()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.onShowExInfoHandler()");
         }
 
         // PRIVATE
