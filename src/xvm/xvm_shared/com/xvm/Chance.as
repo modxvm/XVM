@@ -6,13 +6,14 @@ package com.xvm
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.types.stat.*;
-    import com.xvm.vo.VOVehicleData;
-    import flash.utils.Dictionary;
+    import com.xvm.vo.*;
+    import flash.utils.*;
 
     public class Chance
     {
-        private static var battleTier:Number = 0;
+        private static var battleLevel:Number = 0;
         private static var maxTeamsCount:Number = 0;
         private static var chanceG:Object;
         private static var chanceT:Object;
@@ -70,7 +71,7 @@ package com.xvm
         }
 
         public static function GetChanceText(playerNames:Vector.<String>, stats:Dictionary,
-            showChance:Boolean, showBattleTier:Boolean, showLive:Boolean = false, showLog:Boolean = false):String
+            showChance:Boolean, showBattleLevel:Boolean, showLive:Boolean = false, showLog:Boolean = false):String
         {
             var teamsCount:Object = null;
             if (showLog) Logger.add("========== begin chance calculation ===========");
@@ -85,10 +86,10 @@ package com.xvm
 
                 maxTeamsCount = Math.max(teamsCount.ally, teamsCount.enemy);
 
-                Chance.battleTier = Macros.getGlobalValue("battletier");
-                if (isNaN(Chance.battleTier))
-                    Chance.battleTier = GuessBattleTier(playerNames, stats);
-                if (showLog) Logger.add("battleTier=" + Chance.battleTier);
+                Chance.battleLevel = BattleGlobalData.battleLevel;
+                if (isNaN(Chance.battleLevel))
+                    Chance.battleLevel = GuessBattleLevel(playerNames, stats);
+                if (showLog) Logger.add("battleLevel=" + Chance.battleLevel);
 
                 chanceG = GetChance(playerNames, stats, ChanceFuncG, false, showLog);
                 chanceT = GetChance(playerNames, stats, ChanceFuncT, false, showLog);
@@ -111,11 +112,11 @@ package com.xvm
                     }
                 }
 
-                if (showBattleTier && Chance.battleTier != 0)
+                if (showBattleLevel && Chance.battleLevel != 0)
                 {
                     if (text != "")
                         text += ". ";
-                    text += Locale.get("chanceBattleTier") + ": " + battleTier;
+                    text += Locale.get("chanceBattleLevel") + ": " + battleLevel;
                 }
 
                 if (showLog) Logger.add("RESULT=" + text);
@@ -140,7 +141,7 @@ package com.xvm
             {
                 var pname:String = playerNames[i];
                 var stat:StatData = stats[pname];
-                count += live && stat.alive ? 1 : 0;
+                count += live && !stat.alive ? 0 : 1;
                 if (stat.v.data == null) {
                                     //if (stat.icon == "ussr-Observer" || stat.icon == "noImage")
                     //    continue;
@@ -164,7 +165,7 @@ package com.xvm
         // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
         private static function ChanceFuncG(stat:StatData):Number
         {
-            var T:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
+            var T:Number = Chance.battleLevel == 0 ? 8 : Chance.battleLevel; // command battle level = 8
             var Tmin:Number = stat.v.data.tierLo;
             var Tmax:Number = stat.v.data.tierHi;
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
@@ -201,7 +202,7 @@ package com.xvm
 
         private static function ChanceFuncT(stat:StatData):Number
         {
-            var T:Number = Chance.battleTier == 0 ? 8 : Chance.battleTier; // command battle tier = 8
+            var T:Number = Chance.battleLevel == 0 ? 8 : Chance.battleLevel; // command battle level = 8
             var Tmin:Number = stat.v.data.tierLo;
             var Tmax:Number = stat.v.data.tierHi;
             var Bt:Number = stat.v.b || 0;
@@ -272,7 +273,7 @@ package com.xvm
         private static function PrepareChanceResults(Ka:Number, Ke:Number, playersCount:int):Object
         {
             if (Ka == 0 && Ke == 0) Ka = Ke = 1;
-            //Logger.add("Ka=" + Math.round(Ka) + " Ke=" + Math.round(Ke));
+            //Logger.add("Ka=" + Math.round(Ka) + " Ke=" + Math.round(Ke) + " count=" + playersCount);
 
             // Spitfeuer117: http://forum.worldoftanks.eu/index.php?/topic/468409-a-1000-battle-study-on-xvm-win-chance-accuracy/
             // http://www.koreanrandom.com/forum/topic/2598-/page-34#entry223858
@@ -351,7 +352,7 @@ package com.xvm
             return htmlText;
         }
 
-        private static function GuessBattleTier(playerNames:Vector.<String>, stats:Dictionary):Number
+        private static function GuessBattleLevel(playerNames:Vector.<String>, stats:Dictionary):Number
         {
             // 1. Collect all vehicles info
             var vis:Array = [];
@@ -369,7 +370,7 @@ package com.xvm
                 });
             }
 
-            // 2. Sort vehicles info by top tiers descending
+            // 2. Sort vehicles info by top levels descending
             vis.sortOn("Tmax", Array.NUMERIC | Array.DESCENDING);
 
             // 3. Find minimum Tmax and maximum Tmin
@@ -390,9 +391,9 @@ package com.xvm
             }
             //Logger.add("T after=" + Tmin + ".." + Tmax);
 
-            //// 4. Calculate average tier
+            //// 4. Calculate average level
             //return (Tmax + Tmin) / 2.0;
-            // 4. Return max tier
+            // 4. Return max level
             return Tmax;
         }
     }

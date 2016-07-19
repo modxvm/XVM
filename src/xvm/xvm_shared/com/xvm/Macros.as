@@ -213,11 +213,6 @@ package com.xvm
             //return false;
         }
 
-        public static function getGlobalValue(key:String):*
-        {
-            return m_globals[key];
-        }
-
         public static function get Globals():Object
         {
             return m_globals;

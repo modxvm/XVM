@@ -20,7 +20,7 @@
     },
     {
       "enabled": true,
-      "borderColor": "0xFF0000",
+      //"borderColor": "0xFF0000",
       "width": 100,
       "height": 30,
       "format": "{{xvm-stat?{{l10n:Chance to win}}: {{chancesStatic}}{{chancesStatic? / |}}{{chancesLive}}|--}}",
