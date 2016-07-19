@@ -78,10 +78,10 @@ package com.xvm.vehiclemarkers.ui
             {
                 this.playerName = pName;
                 this.maxHealth = maxHealth;
-                var playerState:VOPlayerState = BattleState.getByPlayerName(playerName);
-                if (playerState != null)
+                vehicleID = BattleState.getVehicleID(playerName);
+                if (!isNaN(vehicleID))
                 {
-                    init(playerState.vehicleID);
+                    init(vehicleID);
                     //invalidate(InvalidationType.DATA);
                 }
             }
@@ -221,7 +221,7 @@ package com.xvm.vehiclemarkers.ui
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
                 if (playerState != null)
                 {
-                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
+                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.EX_INFO, playerState, exInfo));
                 }
             }
             catch (ex:Error)
@@ -340,7 +340,7 @@ package com.xvm.vehiclemarkers.ui
         private function getTurretData():String
         {
             var turret:int = XvmVehicleMarkerConstants.TURRET_UNKNOWN_VULN_DATABASE_VAL;
-            var playerState:VOPlayerState = BattleState.getByPlayerName(playerName);
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
             if (playerState != null)
             {
                 var vdata:VOVehicleData = VehicleInfo.get(playerState.vehCD);

@@ -70,6 +70,7 @@ package com.xvm.battle.playersPanel
         private var isLeftPanel:Boolean;
 
         private var _userProps:IUserProps = null;
+        private var _vehicleID:Number = NaN;
 
         private var _standardTextFieldsTexts:Object = {};
 
@@ -123,7 +124,8 @@ package com.xvm.battle.playersPanel
         public function setPlayerNameProps(userProps:IUserProps):void
         {
             _userProps = userProps;
-            currentPlayerState = BattleState.getByPlayerName(_userProps.userName);
+            _vehicleID = BattleState.getVehicleID(_userProps.userName);
+            currentPlayerState = BattleState.get(_vehicleID);
         }
 
         public function setVehicleIcon(vehicleImage:String):void
@@ -192,7 +194,7 @@ package com.xvm.battle.playersPanel
 
                 if (isInvalid(INVALIDATE_PLAYER_STATE))
                 {
-                    currentPlayerState = BattleState.getByPlayerName(_userProps.userName);
+                    currentPlayerState = BattleState.get(_vehicleID);
                 }
                 if (isInvalid(INVALIDATE_UPDATE_COLORS))
                 {

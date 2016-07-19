@@ -11,10 +11,11 @@ package com.xvm.vehiclemarkers.ui
 
     public dynamic class XvmVehicleMarkerEvent extends Event
     {
-        public static const INIT:String = "INIT";
-        public static const UPDATE:String = "UPDATE";
-        public static const UPDATE_HEALTH:String = "UPDATE_HEALTH";
-        public static const SET_SPEAKING:String = "SET_SPEAKING";
+        public static const INIT:String = "VM_INIT";
+        public static const UPDATE:String = "VM_UPDATE";
+        public static const UPDATE_HEALTH:String = "VM_UPDATE_HEALTH";
+        public static const SET_SPEAKING:String = "VM_SET_SPEAKING";
+        public static const EX_INFO:String = "VM_EX_INFO";
 
         private var _playerState:VOPlayerState;
         private var _exInfo:Boolean;
