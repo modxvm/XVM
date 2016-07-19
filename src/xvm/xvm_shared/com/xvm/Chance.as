@@ -116,7 +116,7 @@ package com.xvm
                 {
                     if (text != "")
                         text += ". ";
-                    text += Locale.get("chanceBattleLevel") + ": " + battleLevel;
+                    text += Locale.get("chanceBattleTier") + ": " + battleLevel;
                 }
 
                 if (showLog) Logger.add("RESULT=" + text);
