@@ -349,7 +349,7 @@ package com.xvm.battle.vo
             var updated:Boolean = false;
             for (var key:String in data)
             {
-                if (this[key] != data[key])
+                if (this[key] !== undefined && this[key] != data[key])
                 {
                     updated = true;
                     var k:String = "set_" + key;

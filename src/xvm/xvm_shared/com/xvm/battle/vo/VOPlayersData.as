@@ -68,18 +68,22 @@ package com.xvm.battle.vo
         // private
         private var playerNameToVehicleIDMap:Dictionary;
 
-        public function VOPlayersData(data:Object)
+        public function VOPlayersData()
         {
             playerStates = new Dictionary();
             playerNameToVehicleIDMap = new Dictionary();
+        }
+
+        public function setVehiclesData(data:Object):void
+        {
             var value:Object;
             for each (value in data.leftVehicleInfos || data.leftItems)
             {
-                addPlayerState(value);
+                addOrUpdatePlayerState(value);
             }
             for each (value in data.rightVehicleInfos || data.rightItems)
             {
-                addPlayerState(value);
+                addOrUpdatePlayerState(value);
             }
             leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
             rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
@@ -110,14 +114,7 @@ package com.xvm.battle.vo
         {
             for each (var value:Object in data)
             {
-                if (!playerStates.hasOwnProperty(value.vehicleID))
-                {
-                    addPlayerState(value);
-                }
-                else
-                {
-                    (playerStates[value.vehicleID] as VOPlayerState).updateNoEvent(value);
-                }
+                addOrUpdatePlayerState(value);
             }
         }
 
@@ -151,11 +148,18 @@ package com.xvm.battle.vo
 
         // PRIVATE
 
-        private function addPlayerState(value:Object):void
+        private function addOrUpdatePlayerState(value:Object):void
         {
-            var playerState:VOPlayerState = new VOPlayerState(value);
-            playerStates[value.vehicleID] = playerState;
-            playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+            if (!playerStates.hasOwnProperty(value.vehicleID))
+            {
+                var playerState:VOPlayerState = new VOPlayerState(value);
+                playerStates[value.vehicleID] = playerState;
+                playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+            }
+            else
+            {
+                (playerStates[value.vehicleID] as VOPlayerState).updateNoEvent(value);
+            }
         }
 
         private function updateVehiclesPositionsAndTeam(ids:Vector.<Number>, isAlly:Boolean):void

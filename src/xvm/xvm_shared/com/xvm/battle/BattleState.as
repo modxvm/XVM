@@ -188,10 +188,13 @@ package com.xvm.battle
         public function setVehiclesData(data:Object):void
         {
             Xvm.swfProfilerBegin("BattleState.setVehiclesData()");
-            //Logger.addObject(data, 1, "setVehiclesData");
             try
             {
-                _playersDataVO = new VOPlayersData(data);
+                if (_playersDataVO == null)
+                {
+                    _playersDataVO = new VOPlayersData();
+                }
+                _playersDataVO.setVehiclesData(data);
                 _playersDataVO.dispatchEvents();
                 BattleMacros.RegisterPlayersData();
             }
