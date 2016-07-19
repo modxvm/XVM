@@ -9,6 +9,7 @@ package com.xvm.battle.battleLabels
     import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.events.HitLogEvent;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
@@ -21,6 +22,7 @@ package com.xvm.battle.battleLabels
     public class BattleLabels extends UIComponent
     {
         private var _extraFields:ExtraFields = null;
+        private var _hitLogExtraFields : ExtraFields;
 
         public function BattleLabels()
         {
@@ -28,7 +30,12 @@ package com.xvm.battle.battleLabels
             Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
+            Xvm.addEventListener(HitLogEvent.DAMAGE_CAUSED, onDamageCausedHandler);
             createExtraFields();
+        }
+
+        private function onDamageCausedHandler(event:HitLogEvent):void {
+            //_hitLogExtraFields.update(BattleState.get(event.hitVehicleID));
         }
 
         override protected function onDispose():void
@@ -36,6 +43,7 @@ package com.xvm.battle.battleLabels
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+            Xvm.removeEventListener(HitLogEvent.DAMAGE_CAUSED, onDamageCausedHandler);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
             removeExtraFields();
             super.onDispose();
@@ -49,6 +57,13 @@ package com.xvm.battle.battleLabels
             {
                 update();
             }
+            if (_hitLogExtraFields)
+            {
+                removeChild(_hitLogExtraFields);
+                _hitLogExtraFields.dispose();
+                _hitLogExtraFields = null;
+            }
+
         }
 
         // PRIVATE

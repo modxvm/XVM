@@ -5,13 +5,11 @@
 package com.xvm.battle
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xfw.events.*;
+    import com.xvm.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
-    import flash.events.*;
-    import flash.utils.*;
 
     public class BattleState // implements IBattleComponentDataController
     {
@@ -414,10 +412,19 @@ package com.xvm.battle
 
         private function onUpdateHitlogData(vehicleID:Number, attackReasonID:Number, newHealth:Number):void
         {
-            Logger.add("onUpdateHitlogData: " + [vehicleID, attackReasonID, newHealth]);
+            var targetPlayerState:VOPlayerState = get(vehicleID);
+            if(targetPlayerState) {
+                var damageDelta : int = targetPlayerState.curHealth - newHealth;
+                targetPlayerState.hitlogDamage += damageDelta;
+                targetPlayerState.hitlogCount++;
+                _hitlogTotalDamage += damageDelta;
+                _hitlogTotalHits++;
+                Xvm.dispatchEvent(new HitLogEvent(HitLogEvent.DAMAGE_CAUSED, vehicleID));
+            } else {
+                DebugUtils.LOG_DEBUG("BattleState#onUpdateHitLogDataHandler targetPlayerState is null");
+            }
 
-            hitlogTotalHits++;
-            //hitlogTotalDamage += TODO
+            return null;
         }
     }
 }

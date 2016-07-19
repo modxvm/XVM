@@ -1,6 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2016 """
 
-#####################################################################
+# ####################################################################
 # imports
 
 import Math
@@ -17,7 +17,8 @@ from xfw import *
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-
+from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
+from debug_utils import LOG_DEBUG
 
 #####################################################################
 # handlers
@@ -54,6 +55,25 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
                 err(traceback.format_exc())
 
 
+def updateSymbolName(symbol):
+    if 'xvm_main.swf' in xfw_mods_info.loaded_swfs.keys() and xfw_mods_info.loaded_swfs['xvm_main.swf'] == 1:
+        if symbol == 'VehicleEntry':
+            symbol = "com.xvm.battle.minimap.entries.vehicle::UI_VehicleEntry"
+        if symbol == 'StrategicCameraEntry':
+            symbol = "com.xvm.battle.minimap.entries.vehicle::UI_StrategicCameraEntry"
+    return symbol
+
+
+@overrideMethod(MinimapComponent, 'addEntry')
+def _MinimapComponent_addEntry(
+        base, self, symbol, container, matrix=None, active=False, transformProps=0xffffffff):
+    if config.get('minimap/enabled'):
+        # LOG_DEBUG('_MinimapComponent_addEntry | symbol', symbol)
+        symbol = updateSymbolName(symbol)
+    return base(self, symbol, container, matrix, active, transformProps)
+    # pass
+
+
 # TODO:0.9.15.1
 #@registerEvent(Minimap, '_Minimap__addEntryLit')
 def _Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
@@ -67,7 +87,8 @@ def _Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
             entryVehicle = BigWorld.player().arena.vehicles[vehicleID]
             entityName = str(g_sessionProvider.getCtx().getPlayerGuiProps(id, entryVehicle['team']))
             self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm',
-                [entryVehicle['accountDBID'], True, getVehCD(vehicleID), entityName]))
+                                                               [entryVehicle['accountDBID'], True, getVehCD(vehicleID),
+                                                                entityName]))
         except Exception as ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
@@ -122,7 +143,7 @@ in_updateSettings = False
 
 # TODO:0.9.15.1
 #@overrideMethod(Minimap, 'setupMinimapSettings')
-def _Minimap_setupMinimapSettings(base, self, diff = None):
+def _Minimap_setupMinimapSettings(base, self, diff=None):
     global in_setupMinimapSettings
     in_setupMinimapSettings = True
     base(self, diff)
@@ -161,7 +182,7 @@ def __g_settingsCore_getSetting(base, name):
             elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
                 if not config.get('minimap/useStandardLines'):
                     value = False
-            #debug('getSetting: {} = {}'.format(name, value))
+                    #debug('getSetting: {} = {}'.format(name, value))
     return value
 
 
@@ -176,11 +197,8 @@ def __SettingsContainer_getSetting(base, self, name):
             if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
                 if not config.get('minimap/useStandardLabels'):
                     value._set(0)
-            #debug('getSetting: {} = {}'.format(name, value))
+                    #debug('getSetting: {} = {}'.format(name, value))
     return value
-
-
-
 
 
 # PRIVATE

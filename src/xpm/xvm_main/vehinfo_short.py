@@ -1,5 +1,5 @@
 """ XVM (c) www.modxvm.com 2013-2016 """
-
+# This Python file uses the following encoding: utf-8
 from xfw import *
 
 from logger import *

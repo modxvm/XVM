@@ -6,11 +6,14 @@ package com.xvm.battle
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.battle.sixthSense.SixthSenseXvmView;
+    import com.xfw.events.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.battle.*;
     import com.xvm.battle.fragCorrelationBar.FragCorrelationBarXvmView;
     import com.xvm.battle.fullStats.FullStatsXvmView;
+	import com.xvm.battle.minimap.MinimapXvmView;
     import com.xvm.battle.playersPanel.PlayersPanelXvmView;
+	import com.xvm.battle.sixthSense.SixthSenseXvmView;
     import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
 
     public class BattleXvmMod extends XvmModBase
@@ -27,7 +30,8 @@ package com.xvm.battle
                 FullStatsXvmView,
                 PlayersPanelXvmView,
                 TeamBasesPanelXvmView,
-                SixthSenseXvmView,
+				MinimapXvmView,
+				SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
         }
