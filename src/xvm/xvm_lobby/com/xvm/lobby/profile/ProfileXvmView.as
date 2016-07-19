@@ -20,7 +20,7 @@ package com.xvm.lobby.profile
         {
             //Logger.add("ProfileXvmView");
             super(view);
-            XfwView.try_load_ui_swf("xvm_lobby", "xvm_lobbyprofile_ui.swf");
+            XfwComponent.try_load_ui_swf("xvm_lobby", "xvm_lobbyprofile_ui.swf");
         }
 
         public function get tabNavigator():ProfileTabNavigator

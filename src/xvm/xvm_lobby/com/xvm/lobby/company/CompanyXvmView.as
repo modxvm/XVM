@@ -37,7 +37,7 @@ package com.xvm.lobby.company
 
             App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
 
-            if (XfwView.try_load_ui_swf("xvm_lobby", _swf_name) != XfwConst.SWF_START_LOADING)
+            if (XfwComponent.try_load_ui_swf("xvm_lobby", _swf_name) != XfwConst.SWF_START_LOADING)
             {
                 init();
             }
