@@ -1,6 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2016 """
 
-# ####################################################################
+#####################################################################
 # imports
 
 import Math
@@ -9,16 +9,15 @@ import traceback
 import BigWorld
 from Avatar import PlayerAvatar
 from AvatarInputHandler.control_modes import PostMortemControlMode
+from items.vehicles import VEHICLE_CLASS_TAGS
 from gui.Scaleform.Minimap import Minimap
 from gui.battle_control import g_sessionProvider
-from items.vehicles import VEHICLE_CLASS_TAGS
+from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
 
 from xfw import *
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
-from debug_utils import LOG_DEBUG
 
 #####################################################################
 # handlers
@@ -55,23 +54,21 @@ def _Minimap__callEntryFlash(base, self, id, methodName, args=None):
                 err(traceback.format_exc())
 
 
-def updateSymbolName(symbol):
+def _updateSymbolName(symbol):
     if 'xvm_main.swf' in xfw_mods_info.loaded_swfs.keys() and xfw_mods_info.loaded_swfs['xvm_main.swf'] == 1:
         if symbol == 'VehicleEntry':
             symbol = "com.xvm.battle.minimap.entries.vehicle::UI_VehicleEntry"
-        if symbol == 'StrategicCameraEntry':
+        elif symbol == 'StrategicCameraEntry':
             symbol = "com.xvm.battle.minimap.entries.vehicle::UI_StrategicCameraEntry"
     return symbol
 
 
 @overrideMethod(MinimapComponent, 'addEntry')
-def _MinimapComponent_addEntry(
-        base, self, symbol, container, matrix=None, active=False, transformProps=0xffffffff):
+def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
     if config.get('minimap/enabled'):
-        # LOG_DEBUG('_MinimapComponent_addEntry | symbol', symbol)
-        symbol = updateSymbolName(symbol)
-    return base(self, symbol, container, matrix, active, transformProps)
-    # pass
+        # debug('_MinimapComponent_addEntry | symbol', symbol)
+        symbol = _updateSymbolName(symbol)
+    return base(self, symbol, *args, **kwargs)
 
 
 # TODO:0.9.15.1
@@ -87,8 +84,7 @@ def _Minimap__addEntryLit(self, vInfo, guiProps, matrix, visible=True):
             entryVehicle = BigWorld.player().arena.vehicles[vehicleID]
             entityName = str(g_sessionProvider.getCtx().getPlayerGuiProps(id, entryVehicle['team']))
             self._Minimap__ownUI.entryInvoke(entry['handle'], ('init_xvm',
-                                                               [entryVehicle['accountDBID'], True, getVehCD(vehicleID),
-                                                                entityName]))
+                [entryVehicle['accountDBID'], True, getVehCD(vehicleID), entityName]))
         except Exception as ex:
             if IS_DEVELOPMENT:
                 err(traceback.format_exc())
@@ -182,7 +178,7 @@ def __g_settingsCore_getSetting(base, name):
             elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
                 if not config.get('minimap/useStandardLines'):
                     value = False
-                    #debug('getSetting: {} = {}'.format(name, value))
+            #debug('getSetting: {} = {}'.format(name, value))
     return value
 
 
@@ -197,7 +193,7 @@ def __SettingsContainer_getSetting(base, self, name):
             if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
                 if not config.get('minimap/useStandardLabels'):
                     value._set(0)
-                    #debug('getSetting: {} = {}'.format(name, value))
+            #debug('getSetting: {} = {}'.format(name, value))
     return value
 
 

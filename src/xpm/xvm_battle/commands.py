@@ -16,7 +16,6 @@ class XVM_BATTLE_COMMAND(object):
     AS_TEAMS_HP_CHANGED = "xvm.as.teams_hp_changed"
     AS_SNIPER_CAMERA = "xvm.as.sniper_camera"
     AS_AIM_OFFSET_UPDATE = "xvm.as.aim_offset_update"
-    AS_UPDATE_HITLOG_DATA = "xvm.as.update_hitlog_data"
 
 class XVM_VM_COMMAND(object):
     # Flash -> Python

@@ -412,19 +412,22 @@ package com.xvm.battle
 
         private function onUpdateHitlogData(vehicleID:Number, attackReasonID:Number, newHealth:Number):void
         {
-            var targetPlayerState:VOPlayerState = get(vehicleID);
-            if(targetPlayerState) {
-                var damageDelta : int = targetPlayerState.curHealth - newHealth;
-                targetPlayerState.hitlogDamage += damageDelta;
-                targetPlayerState.hitlogCount++;
+            var playerState:VOPlayerState = get(vehicleID);
+            if (playerState)
+            {
+                var damageDelta:int = playerState.curHealth - newHealth;
+                playerState.update({
+                    hitlogDamage: playerState.hitlogDamage + damageDelta,
+                    hitlogCount: playerState.hitlogCount + 1
+                });
                 _hitlogTotalDamage += damageDelta;
                 _hitlogTotalHits++;
-                Xvm.dispatchEvent(new HitLogEvent(HitLogEvent.DAMAGE_CAUSED, vehicleID));
-            } else {
-                DebugUtils.LOG_DEBUG("BattleState#onUpdateHitLogDataHandler targetPlayerState is null");
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.DAMAGE_CAUSED, vehicleID, playerState.accountDBID, playerState.playerName));
             }
-
-            return null;
+            else
+            {
+                Logger.add("WARNING: BattleState.onUpdateHitLogDataHandler(): playerState is null");
+            }
         }
     }
 }

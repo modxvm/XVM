@@ -15,14 +15,15 @@ package com.xvm.battle.events
         public static const MODULE_CRITICAL:String = "PS_MODULE_CRITICAL";
         public static const MODULE_DESTROYED:String = "PS_MODULE_DESTROYED";
         public static const MODULE_REPAIRED:String = "PS_MODULE_REPAIRED";
+        public static const DAMAGE_CAUSED:String = "PS_DAMAGE_CAUSED";
 
         public var vehicleID:Number;
         public var accountDBID:Number;
         public var playerName:String;
 
-        public function PlayerStateEvent(type:String, vehicleID:Number, accountDBID:Number, playerName:String, bubbles:Boolean=false, cancelable:Boolean=false)
+        public function PlayerStateEvent(type:String, vehicleID:Number, accountDBID:Number, playerName:String)
         {
-            super(type, bubbles, cancelable);
+            super(type, false, false);
             this.vehicleID = vehicleID;
             this.accountDBID = accountDBID;
             this.playerName = playerName;
@@ -30,7 +31,7 @@ package com.xvm.battle.events
 
         public override function clone():Event
         {
-            return new PlayerStateEvent(type, vehicleID, accountDBID, playerName, bubbles, cancelable);
+            return new PlayerStateEvent(type, vehicleID, accountDBID, playerName);
         }
     }
 
