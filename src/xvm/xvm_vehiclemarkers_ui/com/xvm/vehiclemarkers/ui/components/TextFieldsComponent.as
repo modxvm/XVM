@@ -18,6 +18,7 @@ package com.xvm.vehiclemarkers.ui.components
     {
         private var extraFieldsHolders:Object;
         private var isAlly:Boolean;
+        private var lastState:String;
         private var currentPlayerState:VOPlayerState;
 
         public function TextFieldsComponent(marker:XvmVehicleMarker)
@@ -29,6 +30,7 @@ package com.xvm.vehiclemarkers.ui.components
         {
             var playerState:VOPlayerState = e.playerState;
             isAlly = playerState.isAlly;
+            lastState = null;
             extraFieldsHolders = { };
             super.init(e);
         }
@@ -55,26 +57,24 @@ package com.xvm.vehiclemarkers.ui.components
                 var playerState:VOPlayerState = e.playerState;
                 currentPlayerState = playerState;
                 var currentState:String = XvmVehicleMarkerState.getCurrentState(playerState, e.exInfo);
-                for each (var state:String in XvmVehicleMarkerState.getAllStates(isAlly))
+                var extraFields:ExtraFields = extraFieldsHolders[lastState];
+                if (lastState != currentState)
                 {
-                    var extraFields:ExtraFields = extraFieldsHolders[state];
-                    if (state != currentState)
+                    if (extraFields != null)
                     {
-                        if (extraFields != null)
-                        {
-                            extraFields.visible = false;
-                        }
+                        extraFields.visible = false;
                     }
-                    else
+                    extraFields = extraFieldsHolders[currentState];
+                    if (extraFields == null)
                     {
-                        if (extraFields == null)
-                        {
-                            extraFields = initState(currentState, playerState);
-                        }
-                        extraFields.visible = true;
-                        extraFields.update(playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
+                        extraFields = initState(currentState, playerState);
+                        var exState:String = XvmVehicleMarkerState.getCurrentState(playerState, !e.exInfo);
+                        initState(exState, playerState);
                     }
+                    extraFields.visible = true;
+                    lastState = currentState;
                 }
+                extraFields.update(playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
             }
         }
 
