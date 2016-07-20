@@ -177,7 +177,6 @@ copy_files(){
 ####  BUILD PIPELINE  ####
 ##########################
 
-#####
 pushd "$XVMBUILD_ROOT_PATH" >/dev/null
 
 detect_os
