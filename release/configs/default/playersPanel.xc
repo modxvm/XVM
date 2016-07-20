@@ -106,7 +106,7 @@
   "xvmUserMarker": {
     "enabled": false,
     "x": -70, "y": 5, "bindToIcon": true,
-    "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png"
+    "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png"
   },
   // XMQP service marker definition.
   // Шаблон маркера сервиса XMQP.
