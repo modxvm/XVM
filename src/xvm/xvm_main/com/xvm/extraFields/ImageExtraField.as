@@ -264,16 +264,17 @@ package com.xvm.extraFields
                 }
                 else
                 {
-                    value = Macros.Format(_cfg.src, options) || "";
+                    value = Macros.Format(_cfg.src, options);
+                    //Logger.add("format: " + _cfg.src + " => " + value);
                     if (Macros.IsCached(_cfg.src, options))
                     {
                         _cfg.src = value;
                     }
                 }
                 value = Utils.fixImgTagSrc(value);
-                if (source != value)
+                if (value != null && source != value)
                 {
-                    //Logger.add(source + " => " + value);
+                    //Logger.add("source: " + source + " => " + value);
                     source = value;
                 }
                 if (_cfg.highlight && getColorSchemeName != null)

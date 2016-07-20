@@ -844,7 +844,10 @@ package com.xvm
             // {{ally}}
             pdata["ally"] = isAlly ? 'ally' : null;
             // {{clanicon}}
-            pdata["clanicon"] = Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
+            pdata["clanicon"] = function():String
+            {
+                return Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
+            }
 
             // Next macro unique for vehicle
             var vdata:VOVehicleData = VehicleInfo.get(vehCD);
