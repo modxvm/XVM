@@ -197,9 +197,7 @@ detect_python
 load_repositorystats
 load_version
 
-if [[ "$XFW_DEVELOPMENT" == "" ]]; then
-  clean_repodir
-fi
+clean_repodir
 
 create_directories
 
