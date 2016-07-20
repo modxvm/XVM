@@ -25,14 +25,18 @@ package com.xvm.battle.playersPanel
     public class PlayersPanelListItemProxy extends UIComponent
     {
         // from PlayersPanelListItem.as
-        private static const ICONS_AREA_WIDTH:int = 63;
-        private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
         private static const WIDTH:int = 339;
-        private static const PLAYER_NAME_MARGIN:int = 8;
-        private static const VEHICLE_TF_LEFT_X:int = WIDTH - ICONS_AREA_WIDTH;
-        private static const VEHICLE_TF_RIGHT_X:int = -WIDTH + ICONS_AREA_WIDTH;
+        private static const ICONS_AREA_WIDTH:int = 80;
+        private static const XVM_ICONS_AREA_WIDTH:int = 80;
+        private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
 
-        private static const STD_VEHICLE_LEVEL_MIRRORING_SHIFT:int = 35;
+        private static const VEHICLE_TF_LEFT_X:int = WIDTH - 65 /* default ICONS_AREA_WIDTH */;
+        private static const VEHICLE_ICON_LEFT_X:int = VEHICLE_TF_LEFT_X + 15;
+        private static const VEHICLE_LEVEL_LEFT_X:int = VEHICLE_TF_LEFT_X + 30;
+
+        private static const VEHICLE_TF_RIGHT_X:int = -WIDTH + 65 /* default ICONS_AREA_WIDTH */;
+        private static const VEHICLE_ICON_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 17;
+        private static const VEHICLE_LEVEL_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 47;
 
         public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
         public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
@@ -403,8 +407,8 @@ package com.xvm.battle.playersPanel
 
         private function updateVehicleIconPositionLeft():void
         {
-            var vehicleIconX:Number = DEFAULT_VEHICLE_ICON_X + getFieldOffsetXLeft(ui.vehicleIcon);
-            var vehicleLevelX:Number = DEFAULT_VEHICLE_LEVEL_X + getFieldOffsetXLeft(ui.vehicleLevel);
+            var vehicleIconX:Number = VEHICLE_ICON_LEFT_X + getFieldOffsetXLeft(ui.vehicleIcon);
+            var vehicleLevelX:Number = VEHICLE_LEVEL_LEFT_X + getFieldOffsetXLeft(ui.vehicleLevel);
             if (ui.vehicleIcon.x != vehicleIconX)
             {
                 ui.vehicleIcon.x = vehicleIconX;
@@ -417,13 +421,24 @@ package com.xvm.battle.playersPanel
 
         private function updateVehicleIconPositionRight():void
         {
-            var vehicleIconX:Number = DEFAULT_VEHICLE_ICON_X - getFieldOffsetXRight(ui.vehicleIcon);
-            var vehicleLevelX:Number = DEFAULT_VEHICLE_LEVEL_X - getFieldOffsetXRight(ui.vehicleLevel);
-            if (!opt_mirroredVehicleIcons)
+            var vehicleIconScaleX:Number;
+            var vehicleIconX:Number;
+            var vehicleLevelX:Number;
+            if (opt_mirroredVehicleIcons)
             {
-                ui.vehicleIcon.scaleX = -1;
-                vehicleIconX -= ICONS_AREA_WIDTH;
-                vehicleLevelX -= STD_VEHICLE_LEVEL_MIRRORING_SHIFT;
+                vehicleIconScaleX = 1;
+                vehicleIconX = VEHICLE_ICON_RIGHT_X - getFieldOffsetXRight(ui.vehicleIcon);
+                vehicleLevelX = VEHICLE_LEVEL_RIGHT_X - getFieldOffsetXRight(ui.vehicleLevel);
+            }
+            else
+            {
+                vehicleIconScaleX = -1;
+                vehicleIconX =  VEHICLE_ICON_RIGHT_X - getFieldOffsetXRight(ui.vehicleIcon) - ICONS_AREA_WIDTH;
+                vehicleLevelX = VEHICLE_ICON_LEFT_X - getFieldOffsetXRight(ui.vehicleLevel) - ICONS_AREA_WIDTH;
+            }
+            if (ui.vehicleIcon.scaleX != vehicleIconScaleX)
+            {
+                ui.vehicleIcon.scaleX = vehicleIconScaleX;
             }
             if (ui.vehicleIcon.x != vehicleIconX)
             {
@@ -678,7 +693,7 @@ package com.xvm.battle.playersPanel
 
         private function updateExtraFields():void
         {
-            var bindToIconOffset:Number = ui.vehicleIcon.x - x + (isLeftPanel ? ICONS_AREA_WIDTH : 0);
+            var bindToIconOffset:Number = ui.vehicleIcon.x - x + (isLeftPanel ? 0 : ICONS_AREA_WIDTH);
             switch (ui.xfw_state)
             {
                 case PLAYERS_PANEL_STATE.HIDEN:

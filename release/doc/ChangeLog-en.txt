@@ -64,6 +64,7 @@
   * option "visible" everywhere changed to "enabled" for unification
   * removed option "hotkeys"/"battleLabelsHotKeys" - not required
   * removed option "battle"/"allowLabelsOnBattleInterface" - not required
+  * changed anchor for "bindToIcon" option in the extra fields
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

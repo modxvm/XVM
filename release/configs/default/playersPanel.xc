@@ -76,7 +76,7 @@
     "alpha": "{{a:spotted}}",
     // x position.
     // положение по горизонтали.
-    "x": 6,
+    "x": 86,
     // y position.
     // положение по вертикали.
     "y": 1,
@@ -93,11 +93,18 @@
     // настройки тени (см. ниже).
     "shadow": {}
   },
+  // XMQP service marker definition.
+  // Шаблон маркера сервиса XMQP.
+  "xmqpServiceMarker": {
+    "x": 86, "y": 1, "align": "center", "bindToIcon": true,
+    "format": "<font face='xvm' size='23' color='{{alive?{{x-spotted?#FFBB00|{{x-sense-on?#D9D9D9|#BFBFBF}}}}|#FFFFFF}}' alpha='{{alive?#FF|#80}}'>{{alive?{{x-spotted?&#x70;|{{x-sense-on?&#x70;|{{x-enabled?&#x7A;}}}}}}|&#x76;}}</font>",
+    "shadow": {}
+  },
   // Clan icon definition.
   // Шаблон иконки клана.
   "clanIcon": {
     "enabled": true,
-    "x": -16, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90, "bindToIcon": true,
+    "x": 65, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90, "bindToIcon": true,
     "src": "{{clanicon}}"
     //"format": "<img src='{{clanicon}}' width='16' height='16'>"
   },
@@ -105,15 +112,8 @@
   // Шаблон маркера пользователя XVM.
   "xvmUserMarker": {
     "enabled": false,
-    "x": -70, "y": 5, "bindToIcon": true,
+    "x": 10, "y": 5, "bindToIcon": true,
     "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png"
-  },
-  // XMQP service marker definition.
-  // Шаблон маркера сервиса XMQP.
-  "xmqpServiceMarker": {
-    "x": 6, "y": 1, "align": "center", "bindToIcon": true,
-    "format": "<font face='xvm' size='23' color='{{alive?{{x-spotted?#FFBB00|{{x-sense-on?#D9D9D9|#BFBFBF}}}}|#FFFFFF}}' alpha='{{alive?#FF|#80}}'>{{alive?{{x-spotted?&#x70;|{{x-sense-on?&#x70;|{{x-enabled?&#x7A;}}}}}}|&#x76;}}</font>",
-    "shadow": {}
   },
   // Parameters of the Players Panels ("ears").
   // Параметры панелей игроков ("ушей").
