@@ -3,11 +3,13 @@
 # XVM team (c) www.modxvm.com 2014-2016
 # XVM nightly build system
 
-XVMBUILD_ROOT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$XVMBUILD_ROOT_PATH"
+CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$CURRENT_PATH"
+export XVMBUILD_REPOSITORY_PATH="$CURRENT_PATH/../.."
 
-source ../library.sh
-source ../xvm-build.conf
+source /var/xvm/ci_config.sh
+source "$XVMBUILD_REPOSITORY_PATH/build/xvm-build.conf"
+source "$XVMBUILD_REPOSITORY_PATH/build/library.sh"
 
 check_variables(){
   if [ "$XVMBUILD_URL_DOWNLOAD" == "" ]; then
@@ -81,6 +83,8 @@ echo $XVMBUILD_IPB_REQBODY
 curl -sS -H "Content-Type: text/xml" -H "User-Agent: IPS XML-RPC Client Library (\$Revision: 10721 $)\r\n" -X POST --data "$XVMBUILD_IPB_REQBODY" "$XVMBUILD_IPB_REQURL"
 
 }
+
+load_repositorystats
 
 check_variables
 post_ipb

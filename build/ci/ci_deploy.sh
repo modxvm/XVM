@@ -4,11 +4,12 @@
 # XVM nightly build system
 
 CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 cd "$CURRENT_PATH"
-source ../library.sh
-source ../xvm-build.conf
 export XVMBUILD_REPOSITORY_PATH="$CURRENT_PATH/../.."
+
+source /var/xvm/ci_config.sh
+source "$XVMBUILD_REPOSITORY_PATH/build/xvm-build.conf"
+source "$XVMBUILD_REPOSITORY_PATH/build/library.sh"
 
 pack_xvm(){
     echo ""

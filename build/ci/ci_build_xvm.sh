@@ -5,8 +5,8 @@
 
 CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$CURRENT_PATH"
-
-source ../library.sh
 export XVMBUILD_REPOSITORY_PATH="$CURRENT_PATH/../.."
 
-load_repositorystats
+source /var/xvm/ci_config.sh
+
+"$XVMBUILD_REPOSITORY_PATH/build.sh"

@@ -5,43 +5,17 @@ node {
         try { 
 
             stage 'XVM'
-                sh '''
-                    ./build.sh
-                '''
+                sh './build/ci/ci_build_xvm.sh'
 
             stage 'XVM Installer'
-                sh '''
-                    ROOT_PATH=$(pwd)
-
-                    source /var/xvm/ci_config.sh
-                    source "$ROOT_PATH/build/xvm-build.conf"
-                    source "$ROOT_PATH/build/ci/ci_init_variables.sh"
-
-                    hg clone "$XVMINST_REPO" "$ROOT_PATH/xvminst"
-                    cd "$ROOT_PATH/xvminst/"
-                    ./build.sh
-                '''
+                sh './build/ci/ci_build_installer.sh'
 
             stage 'Deploy'
-                sh '''
-                    ROOT_PATH=$(pwd)
-
-                    source /var/xvm/ci_config.sh
-                    source "$ROOT_PATH/build/xvm-build.conf"
-                    source "$ROOT_PATH/build/ci/ci_init_variables.sh"
-
-                    "$ROOT_PATH/build/ci/ci_pack.sh"
-                '''
+                sh './build/ci/ci_deploy.sh'
 
             stage 'Notify'
-                sh '''
-                    ROOT_PATH=$(pwd)
+                sh './build/ci/ci_notify.sh'
 
-                    source /var/xvm/ci_config.sh
-                    source "$ROOT_PATH/build/ci/ci_init_variables.sh"
-
-                   "$ROOT_PATH/build/ci/ci_notify_forum.sh"
-                '''
         } catch (e) {
             currentBuild.result = "FAILED"
             notifyBuild(currentBuild.result)
