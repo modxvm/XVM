@@ -2,12 +2,8 @@ node {
 
     try { 
 
-        stage 'Checkout'         
-            sh '''
-                hg pull
-                hg update --clean
-                hg --config "extensions.purge=" purge --all
-            '''
+        stage 'Checkout'        
+            checkout scm 
         
         stage 'XVM'
             sh '''
