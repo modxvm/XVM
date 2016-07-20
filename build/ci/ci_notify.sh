@@ -77,9 +77,6 @@ XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
   </params>
 </methodCall>"
 
-echo $XVMBUILD_IPB_REQTEXT
-echo $XVMBUILD_IPB_REQBODY
-
 curl -sS -H "Content-Type: text/xml" -H "User-Agent: IPS XML-RPC Client Library (\$Revision: 10721 $)\r\n" -X POST --data "$XVMBUILD_IPB_REQBODY" "$XVMBUILD_IPB_REQURL"
 
 }
