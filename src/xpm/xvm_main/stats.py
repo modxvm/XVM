@@ -572,7 +572,12 @@ class _Stat(object):
 
     def _load_clanIcon(self, pl):
         try:
-            if pl.clanInfo:
+            if hasattr(pl, 'x_emblem'):
+                BigWorld.callback(0,
+                    lambda: as_xfw_cmd(XVM_COMMAND.AS_ON_CLAN_ICON_LOADED, pl.vehicleID, pl.name))
+            elif hasattr(pl, 'x_emblem_loading'):
+                return
+            elif pl.clanInfo:
                 rank = int(pl.clanInfo.get('rank', -1))
                 url = pl.clanInfo.get('emblem', None)
                 # url = 'http://stat.modxvm.com:81'
@@ -580,6 +585,7 @@ class _Stat(object):
                     url = url.replace('{size}', '32x32')
                     tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
                     self._loadingClanIconsCount += 1
+                    pl.x_emblem_loading = True
                     debug('clan={0} rank={1} url={2}'.format(pl.clan, rank, url))
                     filecache.get_url(url, (lambda url, bytes: self._load_clanIcons_callback(pl, tID, bytes)))
         except Exception:
@@ -592,15 +598,16 @@ class _Stat(object):
                 # BigWorld.wg_addTempScaleformTexture(imgid, bytes) # removed after first use?
                 imgid = 'icons/{0}.png'.format(pl.clan)
                 filecache.save(imgid, bytes)
+                del pl.x_emblem_loading
                 pl.x_emblem = 'res_mods/mods/shared_resources/xvm/cache/%s' % imgid
                 if hasattr(pl, 'clanicon'):
                     del pl.clanicon
                 as_xfw_cmd(XVM_COMMAND.AS_ON_CLAN_ICON_LOADED, pl.vehicleID, pl.name)
-            debug('{} {} {} {}'.format(
-                pl.clan,
-                tID,
-                len(bytes) if bytes else '(none)',
-                imghdr.what(None, bytes) if bytes else ''))
+            #debug('{} {} {} {}'.format(
+            #    pl.clan,
+            #    tID,
+            #    len(bytes) if bytes else '(none)',
+            #    imghdr.what(None, bytes) if bytes else ''))
         except Exception:
             err(traceback.format_exc())
         finally:
@@ -611,7 +618,7 @@ class _Player(object):
 
     __slots__ = ('vehicleID', 'accountDBID', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
                  'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready',
-                 'x_emblem', 'clanicon')
+                 'x_emblem', 'x_emblem_loading', 'clanicon')
 
     def __init__(self, vehicleID, vData):
         self.vehicleID = vehicleID
