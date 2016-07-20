@@ -247,6 +247,11 @@ package com.xvm.battle.vo
             return _marksOnGun;
         }
 
+        public function get spottedStatus():String
+        {
+            return _spottedStatus;
+        }
+
         public function get curHealth():Number
         {
             return __curHealth;
