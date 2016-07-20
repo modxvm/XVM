@@ -15,11 +15,6 @@ source ./build/xvm-build.conf
 # $XVMBUILD_MONO_FILENAME
 # $XVMBUILD_FDBUILD_FILEPATH
 
-# $XVMBUILD_OUTPUT_PATH
-if [[ "$XVMBUILD_OUTPUT_PATH" == "" ]]; then
-    export XVMBUILD_OUTPUT_PATH="output"
-fi
-
 # $XVMBUILD_REPOSITORY_PATH
 if [[ "$XVMBUILD_REPOSITORY_PATH" == "" ]]; then
     export XVMBUILD_REPOSITORY_PATH="."
@@ -30,29 +25,9 @@ if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
     export XVMBUILD_L10N_URL="http://translate.by-reservation.com/download/xvm-client/xvm_l10n_json.zip"
 fi
 
-XVMBUILD_XVM_URL="http://nightly.modxvm.com/download"
-
 ##########################
 #### HELPER FUNCTIONS ####
 ##########################
-clean_repodir(){
-    pushd "$XVMBUILD_REPOSITORY_PATH" > /dev/null
-
-    rm -rf src/xvm/lib/*
-    rm -rf src/xvm/obj/
-    rm -rf src/xfw/src/actionscript/lib/*
-    rm -rf src/xfw/src/actionscript/obj/*
-    rm -rf src/xfw/src/actionscript/output/*
-    rm -rf ~output/
-    rm -rf src/xfw/~output/
-
-    popd > /dev/null
-}
-
-clean_outputdir(){
-    rm -rf "$XVMBUILD_OUTPUT_PATH"/
-}
-
 clean_sha1()
 {
     pushd "$XVMBUILD_REPOSITORY_PATH" > /dev/null
@@ -76,24 +51,6 @@ create_directories(){
 
 extend_path(){
     export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build/bin/java/:"$XVMBUILD_ROOT_PATH"/build/bin/msil/:"$XVMBUILD_ROOT_PATH"/build/bin/"$OS"_"$arch"/
-}
-
-load_repositorystats(){
-    #read xvm revision and hash
-    pushd "$XVMBUILD_REPOSITORY_PATH"/ > /dev/null
-        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
-        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
-        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
-        export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
-        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
-    popd > /dev/null
-
-    #read xfw revision and hash
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xfw/ > /dev/null
-        export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
-        export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
-        export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
-    popd > /dev/null
 }
 
 load_version(){
@@ -216,115 +173,11 @@ copy_files(){
 
 }
 
-pack_xfw(){
-    echo ""
-    echo "Packing XFW"
-
-    echo "$XVMBUILD_XFW_REVISION" >> "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
-    echo "$XVMBUILD_XFW_HASH" >> "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
-    echo "$XVMBUILD_XFW_BRANCH" >> "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
-
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/ > /dev/null
-    zip -9 -r -q "$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip ./
-    rm "$XVMBUILD_XFW_REVISION"
-    popd > /dev/null
-}
-
-pack_xvm(){
-    echo ""
-    echo "Packing build"
-
-    echo "$XVMBUILD_XVM_REVISION" >> "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_XVM_REVISION"
-    echo "$XVMBUILD_XVM_HASH" >> "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_XVM_REVISION"
-    echo "$XVMBUILD_XVM_BRANCH" >> "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_XVM_REVISION"
-
-    pushd "$XVMBUILD_REPOSITORY_PATH"/~output/ > /dev/null
-    zip -9 -r -q "$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip ./
-    popd > /dev/null
-}
-
-deploy_xvm(){
-    echo ""
-    echo "Deploying build"
-
-    XVMBUILD_OUTPUT_PATH="$XVMBUILD_OUTPUT_PATH"/"$XVMBUILD_XVM_BRANCH"
-    mkdir -p "$XVMBUILD_OUTPUT_PATH"/
-
-    mv -f "$XVMBUILD_REPOSITORY_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip "$XVMBUILD_OUTPUT_PATH"/
-    mv -f "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip "$XVMBUILD_OUTPUT_PATH"/
-
-    cp -f "$XVMBUILD_OUTPUT_PATH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip "$XVMBUILD_OUTPUT_PATH"/latest_xvm.zip
-    cp -f "$XVMBUILD_OUTPUT_PATH"/"$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip "$XVMBUILD_OUTPUT_PATH"/latest_xfw.zip
-
-    echo $XVMBUILD_XVM_REVISION > "$XVMBUILD_OUTPUT_PATH"/xvm_revision.txt
-    echo $XVMBUILD_XVM_HASH > "$XVMBUILD_OUTPUT_PATH"/xvm_hash.txt
-    echo $XVMBUILD_XVM_BRANCH > "$XVMBUILD_OUTPUT_PATH"/xvm_branch.txt
-    echo $XVMBUILD_XVM_VERSION > "$XVMBUILD_OUTPUT_PATH"/xvm_version.txt
-    echo $XVMBUILD_XFW_REVISION > "$XVMBUILD_OUTPUT_PATH"/xfw_revision.txt
-    echo $XVMBUILD_XFW_HASH > "$XVMBUILD_OUTPUT_PATH"/xfw_hash.txt
-    echo $XVMBUILD_XFW_BRANCH > "$XVMBUILD_OUTPUT_PATH"/xfw_branch.txt
-    echo $XVMBUILD_WOT_VERSION > "$XVMBUILD_OUTPUT_PATH"/wot_version.txt
-}
-
-post_ipb(){
-#!/bin/bash
-
-if [ "$XVMBUILD_IPB_APIKEY" == "" ]; then
-  return 0
-fi
-
-downloadlinkzip="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
-downloadlinkexe="$XVMBUILD_XVM_URL"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
-
-XVMBUILD_IPB_TEXT=$(printf "[b]Build:[/b] [url=https://bitbucket.org/XVM/xvm/commits/$XVMBUILD_XVM_HASH]$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)[/url] \n [b]Download:[/b] [url=$downloadlinkzip].zip archive[/url] | [url=$downloadlinkexe].exe installer[/url]  \n [b]Author:[/b] $XVMBUILD_XVM_COMMITAUTHOR \n [b]Description:[/b] $XVMBUILD_XVM_COMMITMSG [hr]")
-
-XVMBUILD_IPB_REQURL="http://www.koreanrandom.com/forum/interface/board/index.php"
-XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
-<methodCall>
-  <methodName>postReply</methodName>
-  <params>
-    <param>
-      <value>
-        <struct>
-          <member>
-            <name>api_module</name>
-            <value><string>ipb</string></value>
-          </member>
-          <member>
-            <name>api_key</name>
-            <value><string>$XVMBUILD_IPB_APIKEY</string></value>
-          </member>
-          <member>
-            <name>member_field</name>
-            <value><string>member_id</string></value></member>
-          <member>
-            <name>member_key</name>
-            <value><string>$XVMBUILD_IPB_USERID</string></value>
-          </member>
-          <member>
-            <name>topic_id</name>
-            <value><string>$XVMBUILD_IPB_TOPICID</string></value>
-          </member>
-          <member>
-            <name>post_content</name>
-            <value><string>$XVMBUILD_IPB_TEXT</string></value>
-          </member>
-        </struct>
-      </value>
-    </param>
-  </params>
-</methodCall>"
-
-echo $XVMBUILD_IPB_REQTEXT
-echo $XVMBUILD_IPB_REQBODY
-
-curl -sS -H "Content-Type: text/xml" -H "User-Agent: IPS XML-RPC Client Library (\$Revision: 10721 $)\r\n" -X POST --data "$XVMBUILD_IPB_REQBODY" "$XVMBUILD_IPB_REQURL"
-
-}
-
 ##########################
 ####  BUILD PIPELINE  ####
 ##########################
+
+#####
 pushd "$XVMBUILD_ROOT_PATH" >/dev/null
 
 detect_os
@@ -347,7 +200,6 @@ load_version
 
 if [[ "$XFW_DEVELOPMENT" == "" ]]; then
   clean_repodir
-  clean_outputdir
 fi
 
 create_directories
@@ -360,11 +212,6 @@ if [[ "$XFW_DEVELOPMENT" == "" ]]; then
   clean_sha1
   copy_files
   calc_hash_for_xvm_integrity
-  pack_xvm
-  pack_xfw
-  deploy_xvm
-  clean_repodir
-  post_ipb
 fi
 
 popd >/dev/null
