@@ -166,7 +166,7 @@ package com.xvm.vehiclemarkers.ui
                 if (playerState != null)
                 {
                     playerState.update( { damageInfo:null, curHealth: curHealth } );
-                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
+                    invalidate(InvalidationType.DATA);
                 }
             }
             catch (ex:Error)

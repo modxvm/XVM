@@ -341,10 +341,6 @@ package com.xvm.battle.vo
         override public function update(data:Object):Boolean
         {
             var updated:Boolean = updateNoEvent(data);
-            if (updated)
-            {
-                eventsToDispatch[PlayerStateEvent.CHANGED] = true;
-            }
             dispatchEvents();
             return updated;
         }
@@ -367,6 +363,10 @@ package com.xvm.battle.vo
                         this["_" + key] = data[key];
                     }
                 }
+            }
+            if (updated)
+            {
+                eventsToDispatch[PlayerStateEvent.CHANGED] = true;
             }
             return updated;
         }

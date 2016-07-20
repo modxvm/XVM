@@ -41,11 +41,13 @@ package com.xvm.vehiclemarkers.ui.components
                     var offsetX:Number = Macros.FormatNumber(cfg.offsetX, e.playerState);
                     var offsetY:Number = Macros.FormatNumber(cfg.offsetY, e.playerState);
                     var maxScale:Number = Macros.FormatNumber(cfg.maxScale, e.playerState) / 100.0;
+                    maxScale = 1; // TODO
                     marker.marker.x = Macros.FormatNumber(cfg.x, e.playerState) + offsetX * maxScale;
                     marker.marker.y = Macros.FormatNumber(cfg.y, e.playerState) + offsetY * maxScale;
                     marker.marker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
-                    marker.marker.vehicleTypeIcon.scaleX = maxScale;
-                    marker.marker.vehicleTypeIcon.scaleY = maxScale;
+                    // TODO: broken - sometimes icon remains alive for dead vehicles. Touching vehicleTypeIcon kills timeline.
+                    //marker.marker.vehicleTypeIcon.scaleX = maxScale;
+                    //marker.marker.vehicleTypeIcon.scaleY = maxScale;
 
                     // TODO: colorize
                     //var color:Number = Macros.FormatNumber(cfg.color, playerState, NaN, true);
