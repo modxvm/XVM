@@ -1,54 +1,55 @@
 node {
 
-    try { 
+    dir('../workspace@script/') {
 
-        stage 'Checkout'        
-            checkout scm 
-        
-        stage 'XVM'
-            sh '''
-                ./build.sh
-            '''
+        try { 
 
-        stage 'XVM Installer'
-            sh '''
-                ROOT_PATH=$(pwd)
+            stage 'XVM'
+                sh '''
+                    ./build.sh
+                '''
 
-                source /var/xvm/ci_config.sh
-                source "$ROOT_PATH/build/xvm-build.conf"
-                source "$ROOT_PATH/build/ci/ci_init_variables.sh"
+            stage 'XVM Installer'
+                sh '''
+                    ROOT_PATH=$(pwd)
 
-                hg clone "$XVMINST_REPO" "$ROOT_PATH/xvminst"
-                cd "$ROOT_PATH/xvminst/"
-                ./build.sh
-            '''
+                    source /var/xvm/ci_config.sh
+                    source "$ROOT_PATH/build/xvm-build.conf"
+                    source "$ROOT_PATH/build/ci/ci_init_variables.sh"
 
-        stage 'Deploy'
-            sh '''
-                ROOT_PATH=$(pwd)
+                    hg clone "$XVMINST_REPO" "$ROOT_PATH/xvminst"
+                    cd "$ROOT_PATH/xvminst/"
+                    ./build.sh
+                '''
 
-                source /var/xvm/ci_config.sh
-                source "$ROOT_PATH/build/xvm-build.conf"
-                source "$ROOT_PATH/build/ci/ci_init_variables.sh"
+            stage 'Deploy'
+                sh '''
+                    ROOT_PATH=$(pwd)
 
-                "$ROOT_PATH/build/ci/ci_pack.sh"
-            '''
+                    source /var/xvm/ci_config.sh
+                    source "$ROOT_PATH/build/xvm-build.conf"
+                    source "$ROOT_PATH/build/ci/ci_init_variables.sh"
 
-        stage 'Notify'
-            sh '''
-                ROOT_PATH=$(pwd)
+                    "$ROOT_PATH/build/ci/ci_pack.sh"
+                '''
 
-                source /var/xvm/ci_config.sh
-                source "$ROOT_PATH/build/ci/ci_init_variables.sh"
+            stage 'Notify'
+                sh '''
+                    ROOT_PATH=$(pwd)
 
-               "$ROOT_PATH/build/ci/ci_notify_forum.sh"
-            '''
-    } catch (e) {
-        currentBuild.result = "FAILED"
-        notifyBuild(currentBuild.result)
-        throw e
-    } finally {
-        //notifyBuild(currentBuild.result)
+                    source /var/xvm/ci_config.sh
+                    source "$ROOT_PATH/build/ci/ci_init_variables.sh"
+
+                   "$ROOT_PATH/build/ci/ci_notify_forum.sh"
+                '''
+        } catch (e) {
+            currentBuild.result = "FAILED"
+            notifyBuild(currentBuild.result)
+            throw e
+        } finally {
+            //notifyBuild(currentBuild.result)
+        }
+
     }
 
 }
