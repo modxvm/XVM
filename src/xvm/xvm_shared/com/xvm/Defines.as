@@ -139,5 +139,6 @@ package com.xvm
 
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";
+        public static const XVM_EVENT_ATLAS_LOADED:String = "xvm.atlas_loaded";
     }
 }

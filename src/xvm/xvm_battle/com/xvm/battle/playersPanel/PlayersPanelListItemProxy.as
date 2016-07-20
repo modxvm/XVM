@@ -5,28 +5,21 @@
 package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xfw.events.*;
+    import com.xvm.*;
     import com.xvm.extraFields.*;
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.vo.*;
     import flash.events.*;
     import flash.text.*;
-    import flash.display.*;
-    import flash.utils.*;
     import flash.geom.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
     import net.wg.gui.battle.views.stats.constants.*;
-    import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.events.AtlasEvent;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import net.wg.infrastructure.managers.impl.*;
     import scaleform.clik.core.*;
 
     public class PlayersPanelListItemProxy extends UIComponent
@@ -97,6 +90,7 @@ package com.xvm.battle.playersPanel
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
+            Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             onConfigLoaded(null);
 
@@ -115,6 +109,7 @@ package com.xvm.battle.playersPanel
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
+            Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             disposeExtraFields();
             _userProps = null;
@@ -139,43 +134,11 @@ package com.xvm.battle.playersPanel
             var atlasName:String = isLeftPanel ? UI_PlayersPanel.playersPanelLeftAtlas : UI_PlayersPanel.playersPanelRightAtlas;
             if (!App.atlasMgr.isAtlasInitialized(atlasName))
             {
-                var atlas:Atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(atlasName) as Atlas;
-                if (atlas)
-                {
-                    atlas.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler);
-                    atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler)
-                }
                 atlasName = AtlasConstants.BATTLE_ATLAS;
             }
             ui.vehicleIcon.graphics.clear();
             App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
             if (xvm_enabled && _userProps != null)
-            {
-                invalidate(INVALIDATE_UPDATE_POSITIONS);
-            }
-        }
-
-        // XVM events handlers
-
-        private function onPlayerStateChanged(e:PlayerStateEvent):void
-        {
-            if (xvm_enabled && _userProps != null && e.playerName == _userProps.userName)
-            {
-                invalidate(INVALIDATE_PLAYER_STATE);
-            }
-        }
-
-        private function onClanIconLoaded(vehicleID:Number, playerName:String):void
-        {
-            if (xvm_enabled && _userProps != null && playerName == _userProps.userName)
-            {
-                invalidate(INVALIDATE_PLAYER_STATE);
-            }
-        }
-
-        private function onMaxPlayerNameTextWidthChanged(e:BooleanEvent):void
-        {
-            if (xvm_enabled && _userProps != null && e.value == isLeftPanel)
             {
                 invalidate(INVALIDATE_UPDATE_POSITIONS);
             }
@@ -279,10 +242,35 @@ package com.xvm.battle.playersPanel
             return null;
         }
 
-        private function onAtlasInitializedHandler(e:AtlasEvent):void
+        // XVM events handlers
+
+        private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            e.currentTarget.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler);
+            if (xvm_enabled && _userProps != null && e.playerName == _userProps.userName)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
+        }
+
+        private function onMaxPlayerNameTextWidthChanged(e:BooleanEvent):void
+        {
+            if (xvm_enabled && _userProps != null && e.value == isLeftPanel)
+            {
+                invalidate(INVALIDATE_UPDATE_POSITIONS);
+            }
+        }
+
+        private function onAtlasLoaded(e:Event):void
+        {
             setVehicleIcon(_vehicleImage);
+        }
+
+        private function onClanIconLoaded(vehicleID:Number, playerName:String):void
+        {
+            if (xvm_enabled && _userProps != null && playerName == _userProps.userName)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
         }
 
         public function applyState():void

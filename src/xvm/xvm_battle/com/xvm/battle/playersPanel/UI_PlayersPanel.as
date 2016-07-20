@@ -5,17 +5,18 @@
 package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xfw.events.*;
+    import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.gui.battle.random.views.stats.components.playersPanel.events.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
+    import net.wg.gui.components.containers.*;
+    import net.wg.infrastructure.events.*;
+    import net.wg.infrastructure.managers.impl.*;
 
     public dynamic class UI_PlayersPanel extends PlayersPanelUI
     {
@@ -168,36 +169,32 @@ package com.xvm.battle.playersPanel
 
         private function registerVehicleIconAtlases():void
         {
-            var newAtlas:String;
-            try
-            {
-                newAtlas = Macros.FormatStringGlobal(Config.config.iconset.playersPanelLeftAtlas);
-                if (playersPanelLeftAtlas != newAtlas)
-                {
-                    App.atlasMgr.registerAtlas(newAtlas);
-                    playersPanelLeftAtlas = newAtlas;
-                }
-            }
-            catch (ex:Error)
-            {
-                playersPanelLeftAtlas = AtlasConstants.BATTLE_ATLAS;
-                Logger.err(ex);
-            }
-            try
-            {
-                newAtlas = Macros.FormatStringGlobal(Config.config.iconset.playersPanelRightAtlas);
-                if (playersPanelRightAtlas != newAtlas)
-                {
-                    App.atlasMgr.registerAtlas(newAtlas);
-                    playersPanelRightAtlas = newAtlas;
-                }
-            }
-            catch (ex:Error)
-            {
-                playersPanelRightAtlas = AtlasConstants.BATTLE_ATLAS;
-                Logger.err(ex);
-            }
+            playersPanelLeftAtlas = registerVehicleIconAtlas(playersPanelLeftAtlas, Config.config.iconset.playersPanelLeftAtlas);
+            playersPanelRightAtlas = registerVehicleIconAtlas(playersPanelRightAtlas, Config.config.iconset.playersPanelRightAtlas);
         }
+
+        private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String):String
+        {
+            var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
+            if (currentAtlas != newAtlas)
+            {
+                var atlas:Atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(newAtlas) as Atlas;
+                if (atlas == null)
+                {
+                    App.atlasMgr.registerAtlas(newAtlas);
+                    atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(newAtlas) as Atlas;
+                    atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
+                }
+            }
+            return newAtlas;
+        }
+
+        private function onAtlasInitializedHandler(e:AtlasEvent):void
+        {
+            e.currentTarget.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler);
+            Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_ATLAS_LOADED));
+        }
+
 
         private function setAltMode(e:ObjectEvent):void
         {
