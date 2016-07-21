@@ -194,7 +194,7 @@ package com.xvm.extraFields
             if (_cfg.width != null)
             {
                 value = Macros.FormatNumber(_cfg.width, options);
-                if (isNaN(value) && _widthValue != value)
+                if (!isNaN(value) && _widthValue != value)
                 {
                     _widthValue = value;
                     needAlign = true;
@@ -203,7 +203,7 @@ package com.xvm.extraFields
             if (_cfg.height != null)
             {
                 value = Macros.FormatNumber(_cfg.height, options);
-                if (isNaN(value) && _heightValue != value)
+                if (!isNaN(value) && _heightValue != value)
                 {
                     _heightValue = value;
                     needAlign = true;
