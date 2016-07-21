@@ -14,7 +14,7 @@
     {
       //"enabled": false,
       "hotKeyCode": 36,
-      "visibleOnHotKey": "false",
+      "visibleOnHotKey": "true",
       "height": 150,
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
     },

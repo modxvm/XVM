@@ -32,6 +32,7 @@ package com.xvm.extraFields
         private var _heightValue:Number = NaN;
         private var _textValue:String = null;
         private var _colorSchemeNameValue:String = null;
+        private var _keyHolded:Boolean = false;
 
         public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null,
             defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null)
@@ -57,6 +58,11 @@ package com.xvm.extraFields
             var align:String = _cfg.align != null ? _cfg.align : _cfg.textFormat != null ? _cfg.textFormat.align : null;
             _cfg.align = Macros.FormatStringGlobal(align, defaultAlign);
             _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
+            if (_cfg.hotKeyCode != null)
+            {
+                _cfg.visibleOnHotKey = Macros.FormatBooleanGlobal(_cfg.visibleOnHotKey, false);
+                _cfg.onHold = Macros.FormatBooleanGlobal(_cfg.onHold, true);
+            }
             antiAliasType = Macros.FormatStringGlobal(_cfg.antiAliasType, AntiAliasType.ADVANCED);
             TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(_cfg.valign, TextFieldEx.VALIGN_NONE));
             TextFieldEx.setNoTranslate(this, true);
@@ -70,6 +76,7 @@ package com.xvm.extraFields
         public final function dispose():void
         {
             _cfg = null;
+            Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
         }
 
         public function get cfg():CExtraField
@@ -626,6 +633,27 @@ package com.xvm.extraFields
         public function updateOnEvent(e:Event):void
         {
             update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target(), vehicleID
+        }
+
+        public function onKeyEvent(key:Number, isDown:Boolean):void
+        {
+            if (key == _cfg.hotKeyCode)
+            {
+                if (_cfg.onHold)
+                    _keyHolded = isDown;
+                else if (isDown)
+                    _keyHolded = !_keyHolded;
+                else
+                    return;
+                if (_cfg.visibleOnHotKey)
+                {
+                    visible = _keyHolded;
+                }
+                else
+                {
+                    visible = !_keyHolded;
+                }
+            }
         }
     }
 }

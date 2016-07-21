@@ -28,6 +28,11 @@
  *      for right panel default value is "right"
  *   "scaleX", "scaleY" - scaling (use negative values for mirroring)
  *
+ *   "hotKeyCode"        keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
+ *                       when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
+ *   "onHold"            false - take action by key click; true - while key is remains pressed (default: false)
+ *   "visibleOnHotKey"   true - field visible on hot key pressed; false - vice versa (default: true)
+ *
  * fields available for TextField format only:
  *   "valign" - vertical alignment ("top", "center", "bottom")
  *      default value is "top"

@@ -19,5 +19,6 @@ package com.xvm.extraFields
         function get cfg():CExtraField;
         function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void;
         function updateOnEvent(e:Event):void;
+        function onKeyEvent(key:Number, isDown:Boolean):void
     }
 }

@@ -29,6 +29,7 @@ package com.xvm.extraFields
         private var _widthValue:Number = NaN;
         private var _heightValue:Number = NaN;
         private var _colorSchemeNameValue:String = null;
+        private var _keyHolded:Boolean = false;
 
         public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null)
         {
@@ -44,6 +45,11 @@ package com.xvm.extraFields
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             _cfg.align = Macros.FormatStringGlobal(_cfg.align, defaultAlign);
             _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
+            if (_cfg.hotKeyCode != null)
+            {
+                _cfg.visibleOnHotKey = Macros.FormatBooleanGlobal(_cfg.visibleOnHotKey, false);
+                _cfg.onHold = Macros.FormatBooleanGlobal(_cfg.onHold, true);
+            }
 
             ExtraFieldsHelper.setupEvents(this);
         }
@@ -51,6 +57,7 @@ package com.xvm.extraFields
         override protected function onDispose():void
         {
             super.onDispose();
+            Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             _cfg = null;
         }
 
@@ -295,11 +302,6 @@ package com.xvm.extraFields
             }
         }
 
-        public function updateOnEvent(e:Event):void
-        {
-            update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target(), vehicleID
-        }
-
         private function align():void
         {
             x = isLeftPanel ? (_xValue + _bindToIconOffset + _offsetX) : (-_xValue + _bindToIconOffset + _offsetX);
@@ -312,6 +314,32 @@ package com.xvm.extraFields
                 x -= width;
             else if (_cfg.align == TextFormatAlign.CENTER)
                 x -= width / 2;
+        }
+
+        public function updateOnEvent(e:Event):void
+        {
+            update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target(), vehicleID
+        }
+
+        public function onKeyEvent(key:Number, isDown:Boolean):void
+        {
+            if (key == _cfg.hotKeyCode)
+            {
+                if (_cfg.onHold)
+                    _keyHolded = isDown;
+                else if (isDown)
+                    _keyHolded = !_keyHolded;
+                else
+                    return;
+                if (_cfg.visibleOnHotKey)
+                {
+                    visible = _keyHolded;
+                }
+                else
+                {
+                    visible = !_keyHolded;
+                }
+            }
         }
     }
 }

@@ -27,7 +27,6 @@ package com.xvm.battle.battleLabels
         public function BattleLabels()
         {
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
             Xvm.addEventListener(PlayerStateEvent.DAMAGE_CAUSED, onDamageCausedHandler);
@@ -37,7 +36,6 @@ package com.xvm.battle.battleLabels
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             Xvm.removeEventListener(PlayerStateEvent.DAMAGE_CAUSED, onDamageCausedHandler);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
@@ -117,18 +115,6 @@ package com.xvm.battle.battleLabels
             {
                 _extraFields.dispose();
                 _extraFields = null;
-            }
-        }
-
-        private function onKeyEvent(key:Number, isDown:Boolean):void
-        {
-            try
-            {
-                // TODO
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
             }
         }
 
