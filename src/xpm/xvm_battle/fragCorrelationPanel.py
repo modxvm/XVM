@@ -9,12 +9,14 @@ import BigWorld
 import game
 from Avatar import PlayerAvatar
 from gui import g_guiResetters
-from gui.shared import g_eventBus, events, EVENT_BUS_SCOPE
+from gui.app_loader import g_appLoader
+from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import g_sessionProvider
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.Scaleform.Battle import Battle
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 from gui.Scaleform.daapi.view.battle.shared.markers2d.plugins import VehicleMarkerPlugin
+from gui.shared import g_eventBus, events, EVENT_BUS_SCOPE
 
 from xfw import *
 
@@ -29,6 +31,7 @@ from commands import *
 # initialization/finalization
 
 def start():
+    g_appLoader.onGUISpaceEntered += onGUISpaceEntered
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, update_conf_hp)
     update_conf_hp()
 
@@ -36,6 +39,7 @@ BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
+    g_appLoader.onGUISpaceEntered -= onGUISpaceEntered
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, update_conf_hp)
 
 #####################################################################
@@ -53,11 +57,27 @@ hp_colors = {}
 total_hp_color = None
 total_hp_sign = None
 
+def cleanup():
+    global ally_frags, enemy_frags, ally_vehicles, enemy_vehicles, teams_vehicles, teams_totalhp
+    ally_frags = 0
+    enemy_frags = 0
+    ally_vehicles = 0
+    enemy_vehicles = 0
+    teams_vehicles[:] = [{}, {}]
+    teams_totalhp[:] = [0, 0]
+
 #####################################################################
 # handlers
 
 # show quantity of alive instead of dead in frags panel
 # night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>
+
+def onGUISpaceEntered(spaceID):
+    if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
+        cleanup()
+        for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
+            update_hp(vehicleID, vData['vehicleType'].maxHealth)
+
 
 # PRE-BATTLE
 
@@ -65,11 +85,7 @@ total_hp_sign = None
 def _PlayerAvatar_onBecomePlayer(base, self):
     base(self)
     try:
-        player = BigWorld.player()
-        if player is not None and hasattr(player, 'arena'):
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleKilled += onVehicleKilled
+        BigWorld.player().arena.onVehicleKilled += onVehicleKilled
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived += onVehicleFeedbackReceived
@@ -80,38 +96,17 @@ def _PlayerAvatar_onBecomePlayer(base, self):
 @overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
 def _PlayerAvatar_onBecomeNonPlayer(base, self):
     try:
-        player = BigWorld.player()
-        if player is not None and hasattr(player, 'arena'):
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleKilled -= onVehicleKilled
+        BigWorld.player().arena.onVehicleKilled -= onVehicleKilled
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived -= onVehicleFeedbackReceived
         g_guiResetters.discard(update_conf_hp)
-        teams_vehicles[:] = [{}, {}]
-        teams_totalhp[:] = [0, 0]
+        cleanup()
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
 
 # BATTLE
-
-@registerEvent(Battle, 'afterCreate')
-def _Battle_afterCreate(self):
-    try:
-        for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
-            update_hp(vehicleID, vData['vehicleType'].maxHealth)
-    except Exception, ex:
-        err(traceback.format_exc())
-
-@registerEvent(Battle, 'beforeDelete')
-def _Battle_beforeDelete(self):
-    global ally_frags, enemy_frags, ally_vehicles, enemy_vehicles
-    ally_frags = 0
-    enemy_frags = 0
-    ally_vehicles = 0
-    enemy_vehicles = 0
 
 @overrideMethod(FragsCollectableStats, 'getTotalStats')
 def _FragCorrelationPanel_getTotalStats(base, self, arenaDP):
@@ -191,10 +186,8 @@ def color_gradient(color1, color2, ratio):
 
 def update_hp(vehicleID, hp, *args, **kwargs):
     try:
-        if BigWorld.player().team == BigWorld.player().arena.vehicles[vehicleID]['team']:
-            team = 0
-        else:
-            team = 1
+        player = BigWorld.player()
+        team = 0 if player.team == player.arena.vehicles[vehicleID]['team'] else 1
 
         global teams_vehicles, teams_totalhp, total_hp_color, total_hp_sign
 

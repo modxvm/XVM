@@ -30,7 +30,7 @@
       "enabled": true,
       //"borderColor": "0xFF0000",
       //"y":150,
-      "updateEvent": "ON_PLAYERS_HP_CHANGED,ON_BATTLE_STATE_CHANGED,ON_PLAYERS_HP_CHANGED,ON_VEHICLE_DESTROYED,ON_CURRENT_VEHICLE_DESTROYED,ON_MODULE_CRITICAL,ON_MODULE_DESTROYED,ON_MODULE_REPAIRED",
+      "updateEvent": "ON_PLAYERS_HP_CHANGED,ON_VEHICLE_DESTROYED",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.totalHP" }
     }
   ]
