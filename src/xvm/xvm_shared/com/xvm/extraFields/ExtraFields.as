@@ -72,8 +72,8 @@ package com.xvm.extraFields
                 if (Macros.FormatBooleanGlobal(format.enabled, true))
                 {
                     addChild(format.src != null
-                        ? new (App.utils.classFactory.getClass("com.xvm.extraFields::ImageExtraField"))(format, isLeftPanel, getSchemeNameForImage) // TODO: make ImageExtraField shared
-                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds, defaultAlign, defaultTextFormatConfig));
+                        ? new (App.utils.classFactory.getClass("com.xvm.extraFields::ImageExtraField"))(format, isLeftPanel, getSchemeNameForImage, _bounds, layout) // TODO: make ImageExtraField shared
+                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds, layout, defaultAlign, defaultTextFormatConfig));
                 }
             }
         }
@@ -105,12 +105,6 @@ package com.xvm.extraFields
                             case LAYOUT_VERTICAL:
                                 x = _isLeftPanel ? _bounds.x : App.appWidth - _bounds.x;
                                 y = _bounds.y + (position - 1) * _bounds.height;
-                                break;
-                            case LAYOUT_ROOT:
-                                var align:String = Macros.FormatStringGlobal(child.cfg.screenHAlign, TextFormatAlign.LEFT);
-                                child.x = child.xValue + Utils.HAlign(align, child.widthValue, _bounds.width);
-                                var valign:String = Macros.FormatStringGlobal(child.cfg.screenVAlign, TextFieldEx.VALIGN_TOP);
-                                child.y = child.yValue + Utils.VAlign(valign, child.heightValue, _bounds.height);
                                 break;
                         }
                     }

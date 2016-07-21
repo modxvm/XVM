@@ -23,6 +23,7 @@ package com.xvm.extraFields
         private var _isLeftPanel:Boolean;
         private var _getColorSchemeName:Function;
         private var _bounds:Rectangle;
+        private var _layout:String;
 
         private var _initialized:Boolean = false;
 
@@ -34,7 +35,7 @@ package com.xvm.extraFields
         private var _colorSchemeNameValue:String = null;
         private var _keyHolded:Boolean = false;
 
-        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null,
+        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null, layout:String = null,
             defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null)
         {
             super();
@@ -43,6 +44,7 @@ package com.xvm.extraFields
             this._isLeftPanel = isLeftPanel;
             this._getColorSchemeName = getColorSchemeName;
             this._bounds = bounds;
+            this._layout = layout;
 
             mouseEnabled = false;
             selectable = false;
@@ -613,14 +615,31 @@ package com.xvm.extraFields
 
             if (needAlign)
             {
+                align(bindToIconOffset, offsetX, offsetY);
+            }
+
+            //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }
+        }
+
+        private function align(bindToIconOffset:Number, offsetX:Number, offsetY:Number):void
+        {
+            if (textWidth > 0)
+                width = textWidth + 4; // 2 * 2-pixel gutter
+            else if (!isNaN(_widthValue))
+                width = _widthValue;
+            if (!isNaN(_heightValue))
+                height = _heightValue;
+            if (_bounds && _layout && _layout == ExtraFields.LAYOUT_ROOT)
+            {
+                var align:String = Macros.FormatStringGlobal(_cfg.screenHAlign, TextFormatAlign.LEFT);
+                x = xValue + Utils.HAlign(align, widthValue, _bounds.width);
+                var valign:String = Macros.FormatStringGlobal(_cfg.screenVAlign, TextFieldEx.VALIGN_TOP);
+                y = yValue + Utils.VAlign(valign, heightValue, _bounds.height);
+            }
+            else
+            {
                 x = _isLeftPanel ? (_xValue + bindToIconOffset + offsetX) : (-_xValue + bindToIconOffset + offsetX);
                 y = _yValue + offsetY;
-                if (!isNaN(_widthValue))
-                    width = _widthValue;
-                if (!isNaN(_heightValue))
-                    height = _heightValue;
-                if (textWidth > 0)
-                    width = textWidth + 4; // 2 * 2-pixel gutter
                 if (_cfg.align == TextFormatAlign.RIGHT)
                     x -= width;
                 else if (_cfg.align == TextFormatAlign.CENTER)

@@ -12,12 +12,16 @@ package com.xvm.extraFields
     import com.xvm.wg.*;
     import flash.text.*;
     import flash.events.*;
+    import flash.geom.*;
+    import scaleform.gfx.*;
 
     public class ImageExtraField extends ImageWG implements IExtraField
     {
         private var _cfg:CExtraField;
         private var isLeftPanel:Boolean;
-        private var getColorSchemeName:Function;
+        private var _getColorSchemeName:Function;
+        private var _bounds:Rectangle;
+        private var _layout:String;
 
         private var _initialized:Boolean = false;
 
@@ -31,7 +35,7 @@ package com.xvm.extraFields
         private var _colorSchemeNameValue:String = null;
         private var _keyHolded:Boolean = false;
 
-        public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null)
+        public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null, layout:String = null)
         {
             super();
 
@@ -40,7 +44,9 @@ package com.xvm.extraFields
 
             this._cfg = format.clone();
             this.isLeftPanel = isLeftPanel;
-            this.getColorSchemeName = getColorSchemeName;
+            this._getColorSchemeName = getColorSchemeName;
+            this._bounds = bounds;
+            this._layout = layout;
 
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             _cfg.align = Macros.FormatStringGlobal(_cfg.align, defaultAlign);
@@ -284,10 +290,10 @@ package com.xvm.extraFields
                     //Logger.add("source: " + source + " => " + value);
                     source = value;
                 }
-                if (_cfg.highlight && getColorSchemeName != null)
+                if (_cfg.highlight && _getColorSchemeName != null)
                 {
                     var highlight:Boolean = _cfg.highlight is Boolean ? _cfg.highlight : XfwUtils.toBool(Macros.Format(_cfg.highlight, options), false);
-                    value = highlight ? getColorSchemeName(options) : null;
+                    value = highlight ? _getColorSchemeName(options) : null;
                     if (_colorSchemeNameValue != value)
                     {
                         _colorSchemeNameValue = value;
@@ -304,16 +310,26 @@ package com.xvm.extraFields
 
         private function align():void
         {
-            x = isLeftPanel ? (_xValue + _bindToIconOffset + _offsetX) : (-_xValue + _bindToIconOffset + _offsetX);
-            y = _yValue + _offsetY;
             if (!isNaN(_widthValue))
                 width = _widthValue;
             if (!isNaN(_heightValue))
                 height = _heightValue;
-            if (_cfg.align == TextFormatAlign.RIGHT)
-                x -= width;
-            else if (_cfg.align == TextFormatAlign.CENTER)
-                x -= width / 2;
+            if (_bounds && _layout && _layout == ExtraFields.LAYOUT_ROOT)
+            {
+                var align:String = Macros.FormatStringGlobal(_cfg.screenHAlign, TextFormatAlign.LEFT);
+                x = xValue + Utils.HAlign(align, widthValue, _bounds.width);
+                var valign:String = Macros.FormatStringGlobal(_cfg.screenVAlign, TextFieldEx.VALIGN_TOP);
+                y = yValue + Utils.VAlign(valign, heightValue, _bounds.height);
+            }
+            else
+            {
+                x = isLeftPanel ? (_xValue + _bindToIconOffset + _offsetX) : (-_xValue + _bindToIconOffset + _offsetX);
+                y = _yValue + _offsetY;
+                if (_cfg.align == TextFormatAlign.RIGHT)
+                    x -= width;
+                else if (_cfg.align == TextFormatAlign.CENTER)
+                    x -= width / 2;
+            }
         }
 
         public function updateOnEvent(e:Event):void
