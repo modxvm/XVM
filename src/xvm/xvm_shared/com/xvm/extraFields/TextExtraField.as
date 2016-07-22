@@ -460,7 +460,7 @@ package com.xvm.extraFields
             return isDynamic;
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0, bounds:Rectangle = null):void
         {
             var needAlign:Boolean = false;
 
@@ -468,6 +468,12 @@ package com.xvm.extraFields
             {
                 _initialized = true;
                 setup(options);
+                needAlign = true;
+            }
+
+            if (_bounds != bounds)
+            {
+                _bounds = bounds;
                 needAlign = true;
             }
 
@@ -630,7 +636,7 @@ package com.xvm.extraFields
                 width = _widthValue;
             if (!isNaN(_heightValue))
                 height = _heightValue;
-            if (_bounds && _layout && _layout == ExtraFields.LAYOUT_ROOT)
+            if (_bounds && _layout == ExtraFields.LAYOUT_ROOT)
             {
                 var align:String = Macros.FormatStringGlobal(_cfg.screenHAlign, TextFormatAlign.LEFT);
                 x = xValue + Utils.HAlign(align, widthValue, _bounds.width);

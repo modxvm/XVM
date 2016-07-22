@@ -91,7 +91,7 @@ package com.xvm.extraFields
                 var child:IExtraField = this.getChildAt(i) as IExtraField;
                 if (child)
                 {
-                    child.update(options, bindToIconOffset, offsetX, offsetY);
+                    child.update(options, bindToIconOffset, offsetX, offsetY, _bounds);
                     if (_bounds && _layout)
                     {
                         var position:Number = options.position;
