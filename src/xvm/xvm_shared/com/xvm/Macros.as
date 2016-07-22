@@ -295,8 +295,8 @@ package com.xvm
             if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format))
                 return format;
 
-            format = String(format);
-            if (!format)
+            var format_str:String = String(format);
+            if (!format_str)
                 return "";
 
             try
@@ -314,13 +314,12 @@ package com.xvm
                         m_macros_cache_players[playerName] = { };
                         player_cache = m_macros_cache_players[playerName];
                     }
-                    cached_value = player_cache[format];
+                    cached_value = player_cache[format_str];
                 }
                 else
                 {
-                    cached_value = m_macros_cache_globals[format];
+                    cached_value = m_macros_cache_globals[format_str];
                 }
-
                 if (cached_value !== undefined)
                 {
                     //Logger.add("cached: " + cached_value);
@@ -328,23 +327,15 @@ package com.xvm
                 }
 
                 // Split tags
-                var formatArr:Array = format.split("{{");
-
-                var res:String;
-                var len:int = formatArr.length;
-                if (len <= 1)
+                var parts:Vector.<String> = Vector.<String>(format_str.split("{{"));
+                var res:String = parts.shift();
+                if (parts.length)
                 {
-                    res = format;
-                }
-                else
-                {
-                    res = formatArr[0];
-
-                    for (var i:int = 1; i < len; ++i)
+                    while (parts.length)
                     {
-                        var part:String = formatArr[i];
-                        var idx:Number = part.indexOf("}}");
-                        if (idx < 0)
+                        var part:String = parts.shift();
+                        var idx:int = part.indexOf("}}");
+                        if (idx == -1)
                         {
                             res += "{{" + part;
                         }
@@ -352,11 +343,10 @@ package com.xvm
                         {
                             var _FormatPart_out:Object = { };
                             res += _FormatPart(part.slice(0, idx), options, _FormatPart_out) + part.slice(idx + 2);
-                            __out.isStaticMacro = __out.isStaticMacro && _FormatPart_out.isStaticMacro;
+                            __out.isStaticMacro &&= _FormatPart_out.isStaticMacro;
                         }
                     }
-
-                    if (res != format)
+                    if (res != format_str)
                     {
                         var iMacroPos:int = res.indexOf("{{");
                         if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
@@ -364,7 +354,7 @@ package com.xvm
                             //Logger.add("recursive: " + playerName + " " + res);
                             var _Format_out:Object = { };
                             res = _Format(res, options, _Format_out);
-                            __out.isStaticMacro = __out.isStaticMacro && _Format_out.isStaticMacro;
+                            __out.isStaticMacro &&= _Format_out.isStaticMacro;
                         }
                     }
                 }
@@ -375,18 +365,18 @@ package com.xvm
                 {
                     if (playerName)
                     {
-                        //Logger.add("add to cache: " + format + " => " + res);
-                        player_cache[format] = res;
+                        //Logger.add("add to cache: " + playerName + "> " + format_str + " => " + res);
+                        player_cache[format_str] = res;
                     }
                     else
                     {
-                        //Logger.add("add to global cache: " + format + " => " + res);
-                        m_macros_cache_globals[format] = res;
+                        //Logger.add("add to global cache: " + playerName + "> " + format_str + " => " + res);
+                        m_macros_cache_globals[format_str] = res;
                     }
                 }
                 else
                 {
-                    //Logger.add("dynamic " + playerName + "> " + format);
+                    //Logger.add("dynamic " + playerName + "> " + format_str + " => " + res);
                 }
 
                 //Logger.add(playerName + "> " + format);
@@ -412,7 +402,7 @@ package com.xvm
 
             var res:String = "";
 
-            var parts:Array = _GetMacroParts(macro, pdata);
+            var parts:Vector.<String> = _GetMacroParts(macro, pdata);
 
             var macroName:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -471,7 +461,9 @@ package com.xvm
             {
                 // is static macro
                 if (value is Function)
+                {
                     __out.isStaticMacro = false;
+                }
                 else if (vehCD == 0)
                 {
                     switch (macroName)
@@ -501,26 +493,25 @@ package com.xvm
         }
 
         private static var _macro_parts_cache:Object = {};
-        private static function _GetMacroParts(macro:String, pdata:Object):Array
+        private static function _GetMacroParts(macro:String, pdata:Object):Vector.<String>
         {
-            var parts:Array = _macro_parts_cache[macro];
+            var parts:Vector.<String> = _macro_parts_cache[macro];
             if (parts)
                 return parts;
 
             //Logger.add("_GetMacroParts: " + macro);
             //Logger.addObject(pdata);
 
-            parts = [null,null,null,null,null,null,null,null];
+            parts = new Vector.<String>(8, true);
 
             // split parts: name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]
-            var macroArr:Array = macro.split("");
-            var len:int = macroArr.length;
+            var macroArr:Vector.<String> = Vector.<String>(macro.split(""));
             var part:String = "";
             var section:int = 0;
             var nextSection:int = section;
-            for (var i:int = 0; i < len; ++i)
+            while (macroArr.length)
             {
-                var ch:String = macroArr[i];
+                var ch:String = macroArr.shift();
                 switch (ch)
                 {
                     case ":":
@@ -541,10 +532,9 @@ package com.xvm
                     case "<":
                         if (section < 4)
                         {
-                            if (i < len - 1 && macroArr[i + 1] == "=")
+                            if (macroArr.length && macroArr[0] == "=")
                             {
-                                i++;
-                                ch += macroArr[i];
+                                ch += macroArr.shift();
                             }
                             parts[PART_MATCH_OP] = ch;
                             nextSection = 5;
@@ -597,7 +587,7 @@ package com.xvm
         }
 
         private static var _format_macro_fmt_suf_cache:Object = {};
-        private static function _FormatMacro(macro:String, parts:Array, value:*, vehCD:Number, options:IVOMacrosOptions, __out:Object):String
+        private static function _FormatMacro(macro:String, parts:Vector.<String>, value:*, vehCD:Number, options:IVOMacrosOptions, __out:Object):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -776,7 +766,10 @@ package com.xvm
                     var py_result:Array = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, norm);
                     if (py_result != null && py_result.length == 2)
                     {
-                        __out.isStaticMacro = py_result[1];
+                        if (!py_result[1])
+                        {
+                            __out.isStaticMacro = false;
+                        }
                         res = py_result[0];
                         if (res == null)
                             res = def;
