@@ -30,21 +30,19 @@ package com.xvm.battle
             return _battlePageRef.value as BattlePage;
         }
 
+        private var _battleController:BattleXvmComponentController = null;
         private var _battleLabels:BattleLabels = null;
         private var _zoomIndicator:ZoomIndicator = null;
         private var _battleClock:BattleClock = null;
         private var _battleElements:BattleElements = null;
-        //private var _sixthSenseIndicator:SixthSenseIndicator;
 
         public function BattleXvmView(view:IView)
         {
             super(view);
-            _battlePageRef = new WeakReference(page);
-        }
+            _battlePageRef = new WeakReference(super.view);
 
-        public function get page():BattlePage
-        {
-            return super.view as BattlePage;
+            _battleController = new BattleXvmComponentController();
+            battlePage.xfw_battleStatisticDataController.componentControllers.unshift(_battleController);
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
@@ -92,17 +90,22 @@ package com.xvm.battle
             {
                 Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
-                if (_battleLabels)
+                if (_battleController != null)
+                {
+                    _battleController.dispose();
+                    _battleController = null;
+                }
+                if (_battleLabels != null)
                 {
                     _battleLabels.dispose();
                     _battleLabels = null;
                 }
-                if (_zoomIndicator)
+                if (_zoomIndicator != null)
                 {
                     _zoomIndicator.dispose();
                     _zoomIndicator = null;
                 }
-                if (_battleClock)
+                if (_battleClock != null)
                 {
                     _battleClock.dispose();
                     _battleClock = null;
@@ -130,7 +133,7 @@ package com.xvm.battle
                 super.onConfigLoaded(e);
                 hotkeys_cfg = Config.config.hotkeys;
                 Xfw.cmd(BattleCommands.BATTLE_CTRL_SET_VEHICLE_DATA);
-                page.updateStage(App.appWidth, App.appHeight);
+                battlePage.updateStage(App.appWidth, App.appHeight);
             }
             catch (ex:Error)
             {

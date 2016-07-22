@@ -9,7 +9,6 @@ package com.xvm.battle
     import com.xfw.events.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.*;
-    import com.xvm.battle.fragCorrelationBar.FragCorrelationBarXvmView;
     import com.xvm.battle.fullStats.FullStatsXvmView;
     import com.xvm.battle.minimap.MinimapXvmView;
     import com.xvm.battle.playersPanel.PlayersPanelXvmView;
@@ -26,7 +25,6 @@ package com.xvm.battle
         private static const _views:Object =
         {
             "classicBattlePage": [
-                FragCorrelationBarXvmView,      // FragCorrelationBarXvmView should be loaded first (implements battle state update methods)
                 FullStatsXvmView,
                 PlayersPanelXvmView,
                 TeamBasesPanelXvmView,
