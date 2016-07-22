@@ -342,7 +342,7 @@ package com.xvm
                         }
                         else
                         {
-                            var _FormatPart_out:Object = { };
+                            var _FormatPart_out:Object = {isStaticMacro: true};
                             res += _FormatPart(part.slice(0, idx), options, _FormatPart_out) + part.slice(idx + 2);
                             __out.isStaticMacro &&= _FormatPart_out.isStaticMacro;
                         }
@@ -353,7 +353,7 @@ package com.xvm
                         if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
                         {
                             //Logger.add("recursive: " + playerName + " " + res);
-                            var _Format_out:Object = { };
+                            var _Format_out:Object = {isStaticMacro: true};
                             res = _Format(res, options, _Format_out);
                             __out.isStaticMacro &&= _Format_out.isStaticMacro;
                         }
@@ -427,9 +427,7 @@ package com.xvm
                     options.setSubname(macroName.slice(dotPos + 1));
                     macroName = macroName.slice(0, dotPos);
                 }
-
                 value = pdata[macroName];
-
                 if (value === undefined)
                     value = m_globals[macroName];
             }
