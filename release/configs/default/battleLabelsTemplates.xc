@@ -57,17 +57,17 @@
      │ "scaleY"                   │ scaling axis Y (%, use negative values for mirroring) (default: 100)
      │                            │ масштабирование по оси y (%, используйте отрицательные значения для зеркального отображения) (по-умолчанию: 100)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "align"                    │ horizontal alignment ("left" [default], "center", "right")
-     │                            │ горизонтальное выравнивание ("left" [по-умолчанию], "center", "right")
+     │ "align"                    │ horizontal alignment of the text inside the field ("left" [default], "center", "right")
+     │                            │ горизонтальное выравнивание текста внутри поля ("left" [по-умолчанию], "center", "right")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "valign"                   │ vertical alignment ("top" [default], "center", "bottom")
-     │                            │ вертикальное выравнивание ("top" [по-умолчанию], "center", "bottom")
+     │ "valign"                   │ vertical alignment of the text inside the field ("top" [default], "center", "bottom")
+     │                            │ вертикальное выравнивание текста внутри поля ("top" [по-умолчанию], "center", "bottom")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-TODO:     │ "screenHAlign"             │ horizontal alignment ("left" [default], "center", "right")
-     │                            │ горизонтальное выравнивание ("left" [по-умолчанию], "center", "right")
+     │ "screenHAlign"             │ horizontal alignment of the field on the screen ("left" [default], "center", "right")
+     │                            │ горизонтальное выравнивание поля на экране ("left" [по-умолчанию], "center", "right")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-TODO:     │ "screenVAlign"             │ vertical alignment ("top" [default], "center", "bottom")
-     │                            │ вертикальное выравнивание ("top" [по-умолчанию], "center", "bottom")
+     │ "screenVAlign"             │ vertical alignment of the field on the screen ("top" [default], "center", "bottom")
+     │                            │ вертикальное выравнивание поля на экране ("top" [по-умолчанию], "center", "bottom")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "borderColor"              │ if set, draw border with specified color (macros allowed) (default: null)
      │                            │ окрашивает границу в заданный цвет, если установлен (доступно использование макросов) (по-умолчанию: null)
@@ -118,8 +118,8 @@ quality, inner, knockout, hideObject
      │ "size"                     │ font size (default: 12)
      │                            │ размер шрифта (по-умолчанию: 12)
      │----------------------------│--------------------------------------------------------------------------
-     │ "align"                    │ text alignment (left, center, right) (default: "left")
-     │                            │ выравнивание текста (left, center, right) (по-умолчанию: "left")
+     │ "align"                    │ horizontal text alignment of the text inside the field (left [по-умолчанию], center, right) (the same as general "align")
+     │                            │ горизонтальное выравнивание текста текста внутри поля (left [по-умолчанию], center, right) (то же самое, что основной "align")
      │----------------------------│--------------------------------------------------------------------------
      │ "bold"                     │ true - bold (default: false)
      │                            │ true - жирный (по-умолчанию: false)
