@@ -4,6 +4,7 @@
 # imports
 
 import SoundGroups
+from gui.battle_control import g_sessionProvider
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 
 from xfw import *
@@ -24,8 +25,14 @@ class XVM_SOUND_EVENT(object):
 def DamagePanel_updateDeviceState(self, value):
     try:
         if config.get('sounds/enabled'):
-            module, state, _ = value
-            if module == 'ammoBay' and state == 'critical':
-                SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.AMMO_BAY)
+            ctrl = g_sessionProvider.shared.vehicleState
+            if ctrl is not None:
+                vehicle = ctrl.getControllingVehicle()
+                if vehicle is not None:
+                    if not vehicle.isPlayerVehicle or not vehicle.isAlive():
+                        return
+                    module, state, _ = value
+                    if module == 'ammoBay' and state == 'critical':
+                        SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.AMMO_BAY)
     except:
         err(traceback.format_exc())
