@@ -21,7 +21,7 @@ package com.xvm.lobby.ui.techtree
         {
             if (Config.config.hangar.hidePricesInTechTree)
             {
-                if (stateProps != null && stateProps.visible && stateProps.animation == null)
+                if (stateProps && stateProps.visible && stateProps.animation == null)
                 {
                     if (stateProps.label == "creditsPriceLabel")
                         stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
@@ -34,28 +34,28 @@ package com.xvm.lobby.ui.techtree
         override public function showContextMenu():void
         {
             super.showContextMenu();
-            if (button != null)
+            if (button)
                 button.endAnimation(false);
         }
 
         override protected function handleClick(value:uint = 0):void
         {
             super.handleClick(value);
-            if  (button != null)
+            if  (button)
                 button.endAnimation(false);
         }
 
         override protected function handleMouseRollOver(e:MouseEvent):void
         {
             super.handleMouseRollOver(e);
-            if (button != null)
+            if (button)
                 button.startAnimation();
         }
 
         override protected function handleMouseRollOut(e:MouseEvent):void
         {
             super.handleMouseRollOut(e);
-            if (button != null)
+            if (button)
                 button.endAnimation(false);
         }
     }

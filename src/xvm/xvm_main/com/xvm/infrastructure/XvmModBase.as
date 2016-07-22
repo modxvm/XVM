@@ -17,14 +17,15 @@ package com.xvm.infrastructure
             try
             {
                 var mods:Vector.<IXfwView> = super.processView(view, populated);
-                if (mods != null)
+                if (mods)
                 {
-                    for (var i:int = 0; i < mods.length; ++i)
+                    var len:int = mods.length;
+                    for (var i:int = 0; i < len; ++i)
                     {
                         try
                         {
                             var mod:IXvmView = mods[i] as IXvmView;
-                            if (mod != null)
+                            if (mod)
                             {
                                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED,
                                     function(e:Event):void { XfwUtils.safeCall(mod, mod.onConfigLoaded, [e]); });

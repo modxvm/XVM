@@ -39,7 +39,7 @@ package com.xvm.vehiclemarkers.ui.components
 
         override protected function onDispose():void
         {
-            if (extraFieldsHolders != null)
+            if (extraFieldsHolders)
             {
                 for each (var state:String in XvmVehicleMarkerState.getAllStates(isAlly))
                 {
@@ -53,7 +53,7 @@ package com.xvm.vehiclemarkers.ui.components
         override protected function update(e:XvmVehicleMarkerEvent):void
         {
             super.update(e);
-            if (extraFieldsHolders != null)
+            if (extraFieldsHolders)
             {
                 updateExtraFieldsVisibility(e.playerState, e.exInfo);
                 extraFieldsHolders[lastState].update(e.playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
@@ -63,7 +63,7 @@ package com.xvm.vehiclemarkers.ui.components
 
         override protected function onExInfo(e:XvmVehicleMarkerEvent):void
         {
-            if (extraFieldsHolders != null)
+            if (extraFieldsHolders)
             {
                 if (exInfoDirty)
                 {
@@ -97,7 +97,7 @@ package com.xvm.vehiclemarkers.ui.components
             var extraFields:ExtraFields = extraFieldsHolders[lastState];
             if (lastState != currentState)
             {
-                if (extraFields != null)
+                if (extraFields)
                 {
                     extraFields.visible = false;
                 }

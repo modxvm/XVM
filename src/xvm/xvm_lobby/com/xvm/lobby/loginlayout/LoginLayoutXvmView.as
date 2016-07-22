@@ -45,7 +45,7 @@ package com.xvm.lobby.loginlayout
 
         private function setupForm(form:SimpleForm):void
         {
-            if (form != null && form.login != null && form.pass != null)
+            if (form && form.login && form.pass)
             {
                 form.login.textField.restrict = "a-z A-Z 0-9 _ \\- @ .";
                 form.pass.textField.restrict = "a-z A-Z 0-9 _";

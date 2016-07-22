@@ -64,7 +64,7 @@ package com.xvm.lobby.online
         private function remove():void
         {
             OnlineServers.stop();
-            if (onlineControl != null)
+            if (onlineControl)
             {
                 onlineControl.dispose();
                 onlineControl = null;

@@ -61,7 +61,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             var dossier:AccountDossier = Dossier.getAccountDossier();
             //Logger.addObject(dossier);
-            if (dossier != null)
+            if (dossier)
             {
                 for (var vehCD:String in dossier.vehicles)
                     Dossier.requestVehicleDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, parseInt(vehCD));

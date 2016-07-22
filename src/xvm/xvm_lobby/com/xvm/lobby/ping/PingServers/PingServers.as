@@ -44,7 +44,7 @@ package com.xvm.lobby.ping.PingServers
                 instance.pingTimer = 0;
             }
 
-            if (instance.pingTimeouts != null)
+            if (instance.pingTimeouts)
             {
                 for each (var t:uint in instance.pingTimeouts)
                     clearTimeout(t);

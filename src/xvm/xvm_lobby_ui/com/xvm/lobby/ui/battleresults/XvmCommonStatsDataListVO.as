@@ -19,7 +19,8 @@ package com.xvm.lobby.ui.battleresults
         {
             this.data = [];
             var d:Array = data.data;
-            for (var i:int = 0; i < d.length; ++i)
+            var len:int = d.length;
+            for (var i:int = 0; i < len; ++i)
             {
                 this.data.push(new XvmCommonStatsDataVO(d[i]));
             }

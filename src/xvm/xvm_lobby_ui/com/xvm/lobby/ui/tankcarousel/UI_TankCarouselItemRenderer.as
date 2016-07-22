@@ -46,7 +46,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         override protected function onDispose():void
         {
-            if (_extraFields != null)
+            if (_extraFields)
             {
                 _extraFields.dispose();
                 _extraFields = null;
@@ -60,11 +60,11 @@ package com.xvm.lobby.ui.tankcarousel
         {
             try
             {
-                if (_dataVO != null)
+                if (_dataVO)
                 {
                     _dataVO = null;
                 }
-                if (value != null)
+                if (value)
                 {
                     _dataVO = VehicleCarouselVO(value);
                 }
@@ -227,17 +227,17 @@ package com.xvm.lobby.ui.tankcarousel
             try
             {
                 var isExtraFieldsVisible:Boolean = false;
-                if (_dataVO != null)
+                if (_dataVO)
                 {
                     if (!(_dataVO.buySlot || _dataVO.buyTank))
                     {
                         var tankIconVO:TankIconVO = _dataVO.getTankIconVO();
-                        if (tankIconVO != null)
+                        if (tankIconVO)
                         {
                             var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
                             options.vehicleData = VehicleInfo.getByIcon(tankIconVO.image);
                             var dossier:AccountDossier = Dossier.getAccountDossier();
-                            if (dossier != null)
+                            if (dossier)
                             {
                                 var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(options.vehCD);
                                 vdata.elite = tankIconVO.elite ? "elite" : null;

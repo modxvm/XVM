@@ -136,7 +136,7 @@ package com.xvm
         private function loadBattleResultsStat(arenaUniqueId:String):void
         {
             //Logger.add("TRACE: loadBattleResultsStat()");
-            if (arenaUniqueId == null || arenaUniqueId == "" || arenaUniqueId == "0")
+            if (!arenaUniqueId || arenaUniqueId == "0")
             {
                 dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueId));
             }
@@ -198,7 +198,7 @@ package com.xvm
             //Logger.add("TRACE: loadUserData()");
             try
             {
-                if (value == null || value == "")
+                if (!value)
                 {
                     dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, null));
                     return;

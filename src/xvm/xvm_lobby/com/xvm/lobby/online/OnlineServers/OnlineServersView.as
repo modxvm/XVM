@@ -87,9 +87,10 @@ package com.xvm.lobby.online.OnlineServers
 
         private function updatePositions():void
         {
-            if (fields.length == 0)
+            if (!fields.length)
                 return
-            for (var i:int = 1; i < fields.length; i++) // make full width
+            var len:int = fields.length;
+            for (var i:int = 1; i < len; ++i) // make full width
             {
                 var currentField:TextField = fields[i];
                 var prevField:TextField = fields[i - 1];
@@ -99,7 +100,8 @@ package com.xvm.lobby.online.OnlineServers
             var y_offset:int = get_y_offset();
             fields[0].x = cfg.x + get_x_offset();
             fields[0].y = cfg.y + y_offset;
-            for (i = 1; i < fields.length; i++)
+            len = fields.length;
+            for (i = 1; i < len; ++i)
             {
                 currentField = fields[i];
                 prevField = fields[i - 1];
@@ -113,10 +115,11 @@ package com.xvm.lobby.online.OnlineServers
             try
             {
                 var responseTimeList:Array = e.result as Array;
-                if (responseTimeList.length == 0)
+                if (!responseTimeList.length)
                     return;
                 clearAllFields();
-                for (var i:int = 0; i < responseTimeList.length; ++i)
+                var len:int = responseTimeList.length;
+                for (var i:int = 0; i < len; ++i)
                     appendRowToFields(makeStyledRow(responseTimeList[i]));
             }
             catch (ex:Error)
@@ -216,10 +219,11 @@ package com.xvm.lobby.online.OnlineServers
 
         private function getFirstNotFullField():TextField
         {
-            for (var i:int = 0; i < fields.length; i++)
+            var len:int = fields.length;
+            for (var i:int = 0; i < len; ++i)
             {
                 var field:TextField = fields[i];
-                if (field.htmlText == "" || field.numLines < cfg.maxRows)
+                if (!field.htmlText || field.numLines < cfg.maxRows)
                 {
                     return field;
                 }

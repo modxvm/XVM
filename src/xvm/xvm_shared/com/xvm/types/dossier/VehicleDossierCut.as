@@ -26,7 +26,7 @@ package com.xvm.types.dossier
         {
             // Vehicle Data
             var vdata:VOVehicleData = VehicleInfo.get(vehCD);
-            if (vdata != null)
+            if (vdata)
             {
                 fullname = vdata.localizedFullName;
                 name = vdata.localizedName;
@@ -56,7 +56,7 @@ package com.xvm.types.dossier
                 c_winrate = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, winrate, "#");
 
                 var vdossier:VehicleDossier = Dossier.getVehicleDossier(vehCD);
-                if (vdossier != null)
+                if (vdossier)
                 {
                     hitsRatio = vdossier.hitsRatio * 100;
                     c_hitsRatio = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HITSRATIO, hitsRatio, "#");

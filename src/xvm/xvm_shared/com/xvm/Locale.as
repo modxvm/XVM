@@ -61,7 +61,7 @@ package com.xvm
                 macro = stringParts[0];
                 stringParts.shift();
                 macro = Locale.get(macro);
-                if (stringParts.length > 0)
+                if (stringParts.length)
                     macro = StringUtil.substitute.apply(macro, stringParts);
                 res += macro;
 

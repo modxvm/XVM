@@ -103,11 +103,12 @@ package com.xvm.lobby.crew
 
                 for each (var renderer:TankmanRoleVO in (page.crew.list as CoreList).dataProvider)
                 {
-                    if (renderer.tankman.inTank == true)
+                    if (renderer.tankman.inTank)
                         continue;
 
                     var best:Object = null;
-                    for (var i:int = 1; i < renderer.recruitList.length; i++)
+                    var len:int = renderer.recruitList.length;
+                    for (var i:int = 1; i < len; ++i)
                     {
                         var tankman:Object = renderer.recruitList[i];
 
@@ -123,7 +124,7 @@ package com.xvm.lobby.crew
                             best = tankman;
                         }
                     }
-                    if (best != null)
+                    if (best)
                     {
                         selectedTankmans[best.tankmanID] = {tankman: best, slot: renderer.slot};
                     }
@@ -186,8 +187,8 @@ package com.xvm.lobby.crew
 
             //CASE 2.3 : actual tankman has last skill unset
             //conserve the bestTankman
-            var lastSkill:Object = (tankman.skills.length > 0 ? tankman.skills[tankman.skills.length - 1] : null);
-            if (lastSkill != null && !lastSkill.hasOwnProperty("id"))
+            var lastSkill:Object = (tankman.skills.length ? tankman.skills[tankman.skills.length - 1] : null);
+            if (lastSkill && !lastSkill.hasOwnProperty("id"))
                 return false;
 
             //CASE 2.4 : bestTankman has the same number of skills that the actualTankman

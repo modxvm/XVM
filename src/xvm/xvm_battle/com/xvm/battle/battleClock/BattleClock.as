@@ -62,7 +62,7 @@ package com.xvm.battle.battleClock
 
         private function stop():void
         {
-            if (timer != null)
+            if (timer)
             {
                 timer.stop();
                 timer = null;

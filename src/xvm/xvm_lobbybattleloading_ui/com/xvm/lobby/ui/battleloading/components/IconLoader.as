@@ -30,7 +30,7 @@ package com.xvm.lobby.ui.battleloading.components
             for (var i:int = 0; i < numChildren; ++i)
             {
                 var ldr:Loader = getChildAt(i) as Loader;
-                if (ldr != null)
+                if (ldr)
                     return ldr;
             }
             throw new UninitializedError("cannot find loader item");

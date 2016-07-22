@@ -21,10 +21,10 @@ package com.xvm.extraFields
     {
         public static function setupEvents(field:IExtraField):void
         {
-            if (field.cfg.updateEvent != null && field.cfg.updateEvent.length > 0)
+            if (field.cfg.updateEvent)
             {
                 var events:Array = field.cfg.updateEvent.split(",");
-                if (events.length > 0)
+                if (events.length)
                 {
                     for each (var event:String in events)
                     {

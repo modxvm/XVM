@@ -35,7 +35,7 @@ package com.xvm.battle.elements
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             try
             {
-                if (timer != null)
+                if (timer)
                 {
                     timer.stop();
                     timer = null;
@@ -60,7 +60,8 @@ package com.xvm.battle.elements
             try
             {
                 var cfg:Array = Config.config.battle.elements;
-                for (var i:int = 0; i < cfg.length; ++i)
+                var len:int = cfg.length;
+                for (var i:int = 0; i < len; ++i)
                 {
                     apply(BattleXvmView.battlePage, XfwUtils.jsonclone(cfg[i]), BattleXvmView.battlePage.name);
                 }
@@ -145,7 +146,7 @@ package com.xvm.battle.elements
                         Logger.add("[ELEMENTS] WARNING: " + name + " is not a TextField, cannot apply $textFormat");
                     }
                 }
-                else if (typeof opt_value == "object" && !(opt_value is Array) && obj_value != null)
+                else if (typeof opt_value == "object" && !(opt_value is Array) && obj_value)
                 {
                     apply(obj_value, opt_value, name + "." + key);
                 }

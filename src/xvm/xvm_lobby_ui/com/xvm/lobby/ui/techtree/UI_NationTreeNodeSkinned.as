@@ -42,7 +42,7 @@ package com.xvm.lobby.ui.techtree
         {
             if (Config.config.hangar.hidePricesInTechTree)
             {
-                if (stateProps != null && stateProps.visible && stateProps.animation == null)
+                if (stateProps && stateProps.visible && stateProps.animation == null)
                 {
                     if (stateProps.label == "goldPriceLabel" || stateProps.label == "creditsPriceLabel")
                         stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
@@ -63,7 +63,7 @@ package com.xvm.lobby.ui.techtree
                 {
                     var id:Number = getID();
                     var dossier:AccountDossier = Dossier.getAccountDossier();
-                    if (dossier != null)
+                    if (dossier)
                     {
                         var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(id);
                         masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";

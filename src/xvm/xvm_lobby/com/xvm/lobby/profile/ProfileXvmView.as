@@ -26,10 +26,10 @@ package com.xvm.lobby.profile
         public function get tabNavigator():ProfileTabNavigator
         {
             var profile:Profile = view as Profile;
-            if (profile != null)
+            if (profile)
                 return profile.tabNavigator;
             var profileWindow:ProfileWindow = view as ProfileWindow;
-            if (profileWindow != null)
+            if (profileWindow)
                 return profileWindow.tabNavigator;
             return null;
         }

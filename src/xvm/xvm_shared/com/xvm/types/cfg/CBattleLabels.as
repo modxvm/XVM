@@ -13,14 +13,14 @@ package com.xvm.types.cfg
         public function clone():*
         {
             var cloned:CBattleLabels = new CBattleLabels();
-            if (formats != null)
+            if (formats)
             {
                 cloned.formats = [];
                 var len:uint = formats.length;
                 for (var i:uint = 0; i < len; ++i)
                 {
                     var format:CExtraField = formats[i] as CExtraField;
-                    if (format != null)
+                    if (format)
                     {
                         cloned.formats.push(format.clone());
                     }

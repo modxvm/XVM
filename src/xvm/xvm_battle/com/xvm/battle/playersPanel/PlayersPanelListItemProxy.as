@@ -142,7 +142,7 @@ package com.xvm.battle.playersPanel
             }
             ui.vehicleIcon.graphics.clear();
             App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
-            if (xvm_enabled && _userProps != null)
+            if (xvm_enabled && _userProps)
             {
                 invalidate(INVALIDATE_UPDATE_POSITIONS);
             }
@@ -250,7 +250,7 @@ package com.xvm.battle.playersPanel
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (xvm_enabled && _userProps != null && e.playerName == _userProps.userName)
+            if (xvm_enabled && _userProps && e.playerName == _userProps.userName)
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }
@@ -258,7 +258,7 @@ package com.xvm.battle.playersPanel
 
         private function onMaxPlayerNameTextWidthChanged(e:BooleanEvent):void
         {
-            if (xvm_enabled && _userProps != null && e.value == isLeftPanel)
+            if (xvm_enabled && _userProps && e.value == isLeftPanel)
             {
                 invalidate(INVALIDATE_UPDATE_POSITIONS);
             }
@@ -271,7 +271,7 @@ package com.xvm.battle.playersPanel
 
         private function onClanIconLoaded(vehicleID:Number, playerName:String):void
         {
-            if (xvm_enabled && _userProps != null && playerName == _userProps.userName)
+            if (xvm_enabled && _userProps && playerName == _userProps.userName)
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }
@@ -294,7 +294,8 @@ package com.xvm.battle.playersPanel
                     ui.playerNameFullTF.visible = false;
                     if (mcfg.standardFields)
                     {
-                        for (var i:int = 0; i < mcfg.standardFields.length; ++i)
+                        var len:int = mcfg.standardFields.length;
+                        for (var i:int = 0; i < len; ++i)
                         {
                             switch (mcfg.standardFields[i].toLowerCase())
                             {
@@ -455,7 +456,8 @@ package com.xvm.battle.playersPanel
             var field:TextField;
             var lastX:Number = VEHICLE_TF_LEFT_X;
             var newX:Number;
-            for (var i:int = mcfg.standardFields.length - 1; i >= 0; --i)
+            var len:int = mcfg.standardFields.length
+            for (var i:int = len - 1; i >= 0; --i)
             {
                 field = getFieldByConfigName(mcfg.standardFields[i]);
                 if (field)
@@ -480,7 +482,8 @@ package com.xvm.battle.playersPanel
             var field:TextField;
             var lastX:Number = VEHICLE_TF_RIGHT_X;
             var newX:Number;
-            for (var i:int = mcfg.standardFields.length - 1; i >= 0; --i)
+            var len:int = mcfg.standardFields.length;
+            for (var i:int = len - 1; i >= 0; --i)
             {
                 field = getFieldByConfigName(mcfg.standardFields[i]);
                 newX = lastX - getFieldOffsetXRight(field);
@@ -726,7 +729,7 @@ package com.xvm.battle.playersPanel
     private function _internal_createMenuForNoneState(mc:MovieClip)
     {
         var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
-        if (cf.formats == null || cf.formats.length <= 0)
+        if (!cf.formats)
             return;
         var menu_mc:UIComponent = UIComponent.createInstance(mc, "HiddenButton", MENU_MC_NAME, mc.getNextHighestDepth(), {
             _x: isLeftPanel ? 0 : -cf.width,

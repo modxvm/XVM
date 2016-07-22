@@ -76,10 +76,10 @@ package com.xvm
                 if (vehCD != 0)
                 {
                     var adossier:AccountDossier = getAccountDossier(accountDBID);
-                    if (adossier != null)
+                    if (adossier)
                     {
                         var vehicle:VehicleDossierCut = adossier.vehicles[vehCD];
-                        if (vehicle != null)
+                        if (vehicle)
                             vehicle.update();
                     }
                 }
@@ -87,7 +87,7 @@ package com.xvm
                 var targets:Array = _requests[key];
                 delete _requests[key];
 
-                if (targets != null)
+                if (targets)
                 {
                     for each (var target:Object in targets)
                         target.callback.call(target.target, dossier);

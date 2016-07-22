@@ -31,7 +31,8 @@ package com.xvm.battle.minimap.entries.vehicle
 			super.configUI();
 			var iconPath : String = Config.config.minimap.minimapAimIcon;
 			_aimScale = Macros.FormatNumberGlobal(Config.config.minimap.minimapAimIconScale) / 100;
-			if (iconPath || iconPath.length > 0) {
+			if (iconPath)
+			{
 				iconPath = Utils.fixImgTagSrc(Macros.FormatStringGlobal(iconPath));
 				_loader.source = iconPath;
 			} 

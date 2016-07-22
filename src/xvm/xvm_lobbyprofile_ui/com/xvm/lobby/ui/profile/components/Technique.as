@@ -61,10 +61,10 @@ package com.xvm.lobby.ui.profile.components
         public function get currentData():Object
         {
             var p:UI_ProfileTechniquePage = page as UI_ProfileTechniquePage;
-            if (p != null)
+            if (p)
                 return p.currentDataXvm;
             var w:UI_ProfileTechniqueWindow = page as UI_ProfileTechniqueWindow;
-            if (w != null)
+            if (w)
                 return w.currentDataXvm;
             return null;
         }
@@ -72,10 +72,10 @@ package com.xvm.lobby.ui.profile.components
         public function get battlesType():String
         {
             var p:UI_ProfileTechniquePage = page as UI_ProfileTechniquePage;
-            if (p != null)
+            if (p)
                 return p.battlesTypeXvm;
             var w:UI_ProfileTechniqueWindow = page as UI_ProfileTechniqueWindow;
-            if (w != null)
+            if (w)
                 return w.battlesTypeXvm;
             return null;
         }
@@ -153,7 +153,7 @@ package com.xvm.lobby.ui.profile.components
 
             try
             {
-                //if (page.listComponent.techniqueList.dataProvider.length == 0)
+                //if (!page.listComponent.techniqueList.dataProvider.length)
                 //    return;
 
                 if (Config.networkServicesSettings.statAwards)
@@ -294,10 +294,10 @@ package com.xvm.lobby.ui.profile.components
                 page.listComponent.techniqueList.validateNow();
 
                 var dp:IDataProvider = page.listComponent.techniqueList.dataProvider;
-                if (dp.length > 0)
+                if (dp.length)
                 {
                     var pg:ProfileTechniquePage = page as ProfileTechniquePage;
-                    if (pg != null)
+                    if (pg)
                     {
                         if (_selectedItemCD == -1)
                             _selectedItemCD = dp[0].id;
@@ -305,7 +305,7 @@ package com.xvm.lobby.ui.profile.components
                     }
 
                     var pw:ProfileTechniqueWindow = page as ProfileTechniqueWindow;
-                    if (pw != null)
+                    if (pw)
                     {
                         // TODO:0.9.15.1
                         //pw.listComponent.techniqueList.setSelectedVehIntCD(dp[0].id);
@@ -363,10 +363,10 @@ package com.xvm.lobby.ui.profile.components
                     {
                         data.xvm_xte_flag |= 0x01;
                         stat = Stat.getUserDataById(accountDBID);
-                        if (stat != null && stat.v != null)
+                        if (stat && stat.v)
                         {
                             vdata = stat.v[data.id];
-                            if (vdata != null && !isNaN(vdata.xte) && vdata.xte > 0)
+                            if (vdata && !isNaN(vdata.xte) && vdata.xte > 0)
                                 data.xvm_xte = vdata.xte;
                         }
                     }
@@ -374,10 +374,10 @@ package com.xvm.lobby.ui.profile.components
                     {
                         data.xvm_xtdb_flag |= 0x01;
                         stat = Stat.getUserDataById(accountDBID);
-                        if (stat != null && stat.v != null)
+                        if (stat && stat.v)
                         {
                             vdata = stat.v[data.id];
-                            if (vdata != null && !isNaN(vdata.xtdb) && vdata.xtdb > 0)
+                            if (vdata && !isNaN(vdata.xtdb) && vdata.xtdb > 0)
                                 data.xvm_xtdb = vdata.xtdb;
                         }
                     }

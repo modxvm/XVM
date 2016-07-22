@@ -67,7 +67,7 @@ package com.xvm.lobby.ui.profile.components
 //        private function getSummaryItemIndex():int
 //        {
 //            var dp:IDataProvider = list.dataProvider;
-//            if (dp != null)
+//            if (dp)
 //            {
 //                for (var i:int = 0; i < dp.length; ++i)
 //                {

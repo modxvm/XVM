@@ -65,13 +65,13 @@ package com.xvm.battle
                 _zoomIndicator = new ZoomIndicator();
                 battlePage.addChildAt(_zoomIndicator, behindMinimapIndex);
 
-                if (Config.config.battle.clockFormat && Config.config.battle.clockFormat != "")
+                if (Config.config.battle.clockFormat)
                 {
                     _battleClock = new BattleClock();
                     battlePage.debugPanel.addChild(_battleClock);
                 }
 
-                if (Config.config.battle.elements && Config.config.battle.elements.length > 0)
+                if (Config.config.battle.elements && Config.config.battle.elements.length)
                 {
                     _battleElements = new BattleElements();
                 }
@@ -90,27 +90,27 @@ package com.xvm.battle
             {
                 Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
-                if (_battleController != null)
+                if (_battleController)
                 {
                     _battleController.dispose();
                     _battleController = null;
                 }
-                if (_battleLabels != null)
+                if (_battleLabels)
                 {
                     _battleLabels.dispose();
                     _battleLabels = null;
                 }
-                if (_zoomIndicator != null)
+                if (_zoomIndicator)
                 {
                     _zoomIndicator.dispose();
                     _zoomIndicator = null;
                 }
-                if (_battleClock != null)
+                if (_battleClock)
                 {
                     _battleClock.dispose();
                     _battleClock = null;
                 }
-                if (_battleElements != null)
+                if (_battleElements)
                 {
                     _battleElements.dispose();
                     _battleElements = null;

@@ -69,7 +69,7 @@ package com.xvm.vehiclemarkers.ui.components
                     textField.multiline = true;
                     textField.wordWrap = false;
                     textField.alpha = alpha;
-                    if (cfg.textFormat != null && cfg.textFormat.color == null)
+                    if (cfg.textFormat && cfg.textFormat.color == null)
                         cfg.textFormat.color = "{{c:dmg}}";
                     textField.defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, playerState);
                     textField.filters = Utils.createShadowFiltersFromConfig(cfg.shadow, playerState);

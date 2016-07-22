@@ -72,12 +72,12 @@ package com.xvm.lobby.ui.battleresults
             //Logger.add("update");
             try
             {
-                if (data != null)
+                if (data)
                 {
                     // Using first vehicle item for transferring XVM data.
                     // Cannot add to data object because DAAPIDataClass is not dynamic.
                     var vehicles:Array = data.vehicles;
-                    if (vehicles.length > 0 && vehicles[0]['__xvm'])
+                    if (vehicles.length && vehicles[0]['__xvm'])
                     {
                         xdataList = new XvmCommonStatsDataListVO(vehicles.shift());
                     }

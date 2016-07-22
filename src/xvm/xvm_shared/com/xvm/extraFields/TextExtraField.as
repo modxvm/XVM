@@ -57,7 +57,7 @@ package com.xvm.extraFields
 
             if (defaultAlign == null)
                 defaultAlign = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
-            var align:String = _cfg.align != null ? _cfg.align : _cfg.textFormat != null ? _cfg.textFormat.align : null;
+            var align:String = _cfg.align != null ? _cfg.align : _cfg.textFormat ? _cfg.textFormat.align : null;
             _cfg.align = Macros.FormatStringGlobal(align, defaultAlign);
             _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
             if (_cfg.hotKeyCode != null)
@@ -202,7 +202,7 @@ package com.xvm.extraFields
                 _cfg.format = value;
             }
 
-            if (_cfg.textFormat != null)
+            if (_cfg.textFormat)
             {
                 if (!setupTextFormat(_cfg.textFormat, options))
                 {
@@ -210,7 +210,7 @@ package com.xvm.extraFields
                 }
             }
 
-            if (_cfg.shadow != null)
+            if (_cfg.shadow)
             {
                 if (!setupShadow(_cfg.shadow, options))
                 {
@@ -476,6 +476,7 @@ package com.xvm.extraFields
             if (_cfg.x != null)
             {
                 value = Macros.FormatNumber(_cfg.x, options, 0);
+                Logger.add(_cfg.x + " => " + value + " " + (Macros.IsCached(_cfg.x, options) ? "(cached)" : "(-)"));
                 if (_xValue != value)
                 {
                     _xValue = value;
@@ -604,11 +605,11 @@ package com.xvm.extraFields
                     }
                 }
             }
-            if (_cfg.textFormat != null)
+            if (_cfg.textFormat)
             {
                 defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
             }
-            if (_cfg.shadow != null)
+            if (_cfg.shadow)
             {
                 filters = Utils.createShadowFiltersFromConfig(_cfg.shadow, options);
             }

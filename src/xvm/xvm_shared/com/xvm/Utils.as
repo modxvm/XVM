@@ -146,11 +146,13 @@ package com.xvm
         // Fix <img src='cfg://*'> to <img src='img://XVM_IMG_CFG_ROOT/*'> (res_mods/configs/xvm)
         public static function fixImgTag(str:String):String
         {
-            if (str == null || str == "")
-                return null;
-            str = str.split("xvm://").join("img://" + Defines.XVM_IMG_RES_ROOT);
-            str = str.split("cfg://").join("img://" + Defines.XVM_IMG_CFG_ROOT);
-            return str;
+            if (str)
+            {
+                str = str.split("xvm://").join("img://" + Defines.XVM_IMG_RES_ROOT);
+                str = str.split("cfg://").join("img://" + Defines.XVM_IMG_CFG_ROOT);
+                return str;
+            }
+            return null;
         }
 
         // Fix 'img://gui/*' to '../*'> (res_mods/x.x.x)
@@ -158,11 +160,13 @@ package com.xvm
         // Fix 'cfg://*' to '../../XVM_IMG_CFG_ROOT/*'> (res_mods/configs/xvm)
         public static function fixImgTagSrc(str:String):String
         {
-            if (str == null || str == "")
-                return null;
-            if (XfwUtils.startsWith(str.toLowerCase(), "img://gui/"))
-                return "../" + str.slice(10);
-            return "../../" + Utils.fixImgTag(str).split("img://").join("");
+            if (str)
+            {
+                if (XfwUtils.startsWith(str.toLowerCase(), "img://gui/"))
+                    return "../" + str.slice(10);
+                return "../../" + Utils.fixImgTag(str).split("img://").join("");
+            }
+            return null;
         }
 
         // 'RU1', 'RU10', 'RU2' -> 'RU1', 'RU2', 'RU10'

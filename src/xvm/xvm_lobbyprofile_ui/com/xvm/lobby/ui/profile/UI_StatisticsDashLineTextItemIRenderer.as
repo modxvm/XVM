@@ -32,7 +32,7 @@ package com.xvm.lobby.ui.profile
                 var t:String;
                 if (tooltip == "xvm_xte")
                 {
-                    params = _toolTipParams != null ? _toolTipParams.body : null;
+                    params = _toolTipParams ? _toolTipParams.body : null;
                     t = Sprintf.format("{{l10n:profile/xvm_xte_extended_tooltip:%s:%s:%s:%s:%s:%s}}",
                         !params.currentD ? "--" : App.utils.locale.integer(Math.round(params.currentD)),
                         !params.currentF ? "--" : App.utils.locale.float(params.currentF),
@@ -44,7 +44,7 @@ package com.xvm.lobby.ui.profile
                 }
                 else if (tooltip == "xvm_xtdb")
                 {
-                    params = _toolTipParams != null ? _toolTipParams.body : null;
+                    params = _toolTipParams ? _toolTipParams.body : null;
                     t = Sprintf.format("{{l10n:profile/xvm_xtdb_extended_tooltip:%s}}",
                         !params.currentD ? "--" : App.utils.locale.integer(Math.round(params.currentD)));
                     App.toolTipMgr.show(Locale.get(t));

@@ -31,7 +31,7 @@ package com.xvm.lobby.ui.clock
 
         public function dispose():void
         {
-            if (clock != null)
+            if (clock)
             {
                 clock.dispose();
                 clock = null;

@@ -61,7 +61,7 @@ package com.xvm.lobby.ui.squad
                 return;
 
             // Erase field
-            if (vehicleTierField != null)
+            if (vehicleTierField)
                 vehicleTierField.htmlText = "";
 
             // Hide WG field
@@ -77,7 +77,7 @@ package com.xvm.lobby.ui.squad
 
             // Display vehicle info
             var vdata:VehicleData = VehicleInfo.getByLocalizedShortName(proxy.data.vShortName);
-            if (vdata != null)
+            if (vdata)
             {
                 if (vehicleTierField == null)
                     createVehicleTierField();

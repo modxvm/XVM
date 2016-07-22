@@ -50,7 +50,7 @@ package com.xvm.lobby.ui.profile
 
         override protected function onDispose():void
         {
-            if (technique != null)
+            if (technique)
             {
                 removeChild(technique);
                 technique.dispose();
@@ -101,7 +101,7 @@ package com.xvm.lobby.ui.profile
             try
             {
                 var vdossier:VehicleDossier = new VehicleDossier(data);
-                if (vdossier != null)
+                if (vdossier)
                 {
                     Dossier.setVehicleDossier(vdossier);
                     if (technique)

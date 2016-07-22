@@ -56,7 +56,7 @@ package com.xvm.lobby.ui.profile
 
         override protected function onDispose():void
         {
-            if (xteTF != null)
+            if (xteTF)
             {
                 removeChild(xteTF);
                 xteTF = null;
@@ -88,7 +88,7 @@ package com.xvm.lobby.ui.profile
                 if (!isSummary)
                 {
                     var vdata:VOVehicleData = VehicleInfo.get(data.id);
-                    if (vdata != null && vdata.premium == 1)
+                    if (vdata && vdata.premium == 1)
                         vehicleTF.textColor = XfwConst.UICOLOR_GOLD;
                 }
 
@@ -100,14 +100,14 @@ package com.xvm.lobby.ui.profile
                         "</font></p>";
                 }
 
-                if (xteTF != null)
+                if (xteTF)
                 {
                     var xte:Number = data.xvm_xte;
                     var isStat:Boolean = false;
                     if (data.xvm_xte_flag & 0x01 != 0)
                     {
                         var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.accountDBID);
-                        if (vdossier != null)
+                        if (vdossier)
                         {
                             xte = data.xvm_xte = vdossier.xte;
                             data.xvm_xte_flag ^= 0x01;

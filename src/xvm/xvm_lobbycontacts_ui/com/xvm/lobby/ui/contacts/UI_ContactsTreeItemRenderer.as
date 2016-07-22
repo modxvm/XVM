@@ -41,7 +41,7 @@ package com.xvm.lobby.ui.contacts
                 if (isInvalid(InvalidationType.DATA))
                 {
                     var myData:ITreeItemInfo = this.getData() as ITreeItemInfo;
-                    if (myData && !myData.isBrunch && myData.data != null)
+                    if (myData && !myData.isBrunch && myData.data)
                     {
                         if (this.xfw_contactItem == null)
                         {
@@ -60,10 +60,8 @@ package com.xvm.lobby.ui.contacts
                     var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
                     if (d && d.data.xvm_contact_data)
                     {
-                        var nick:String = d.data.xvm_contact_data.nick;
-                        var comment:String = d.data.xvm_contact_data.comment;
-                        nickImg.visible = nick != null && nick != "";
-                        commentImg.visible = comment != null && comment != "";
+                        nickImg.visible = Boolean(d.data.xvm_contact_data.nick);
+                        commentImg.visible = Boolean(d.data.xvm_contact_data.comment);
                     }
                 }
             }

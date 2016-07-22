@@ -65,13 +65,13 @@ package com.xvm.lobby.ui.limits
 
         public function dispose():void
         {
-            if (goldLocker != null)
+            if (goldLocker)
             {
                 goldLocker.dispose();
                 goldLocker = null;
             }
 
-            if (freeXpLocker != null)
+            if (freeXpLocker)
             {
                 freeXpLocker.dispose();
                 freeXpLocker = null;
@@ -84,13 +84,13 @@ package com.xvm.lobby.ui.limits
         {
             try
             {
-                if (goldLocker != null)
+                if (goldLocker)
                 {
                     var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
-                    if (goldControl != null)
+                    if (goldControl)
                     {
                         var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
-                        if (goldContent != null)
+                        if (goldContent)
                         {
                             goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
                             goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 20;
@@ -98,13 +98,13 @@ package com.xvm.lobby.ui.limits
                     }
                 }
 
-                if (freeXpLocker != null)
+                if (freeXpLocker)
                 {
                     var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
-                    if (freeXpControl != null)
+                    if (freeXpControl)
                     {
                         var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
-                        if (freeXpContent != null)
+                        if (freeXpContent)
                         {
                             freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
                             freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 20;

@@ -296,8 +296,8 @@ package com.xvm
                 return format;
 
             format = String(format);
-            if (format == "")
-                return format;
+            if (!format)
+                return "";
 
             try
             {
@@ -306,7 +306,7 @@ package com.xvm
                 // Check cached value
                 var player_cache:Object;
                 var cached_value:*;
-                if (playerName != null && playerName != "")
+                if (playerName)
                 {
                     player_cache = m_macros_cache_players[playerName];
                     if (player_cache == null)
@@ -373,7 +373,7 @@ package com.xvm
 
                 if (__out.isStaticMacro)
                 {
-                    if (playerName != null && playerName != "")
+                    if (playerName)
                     {
                         //Logger.add("add to cache: " + format + " => " + res);
                         player_cache[format] = res;
@@ -406,7 +406,7 @@ package com.xvm
         {
             // Process tag
             var playerName:String = options ? options.playerName : null;
-            var pdata:* = (playerName == null || playerName == "") ? m_globals : m_players[playerName];
+            var pdata:* = playerName ? m_players[playerName] : m_globals;
             if (pdata == null)
                 return "";
 
@@ -576,9 +576,9 @@ package com.xvm
             if (parts[PART_DEF] == null)
                 parts[PART_DEF] = "";
 
-            if (parts[PART_NAME] == "r" && parts[PART_DEF] == "")
+            if (parts[PART_NAME] == "r" && !parts[PART_DEF])
                 parts[PART_DEF] = _getRatingDefaultValue();
-            else if (parts[PART_NAME] == "xr" && parts[PART_DEF] == "")
+            else if (parts[PART_NAME] == "xr" && !parts[PART_DEF])
                 parts[PART_DEF] = _getRatingDefaultValue("xvm");
 
             //Logger.add("[AS3][MACROS][_GetMacroParts]: " + parts.join(", "));
@@ -793,13 +793,13 @@ package com.xvm
                 return true;
 
             format = String(format);
-            if (format == "" || format.indexOf("{{") == -1)
+            if (!format || format.indexOf("{{") == -1)
                 return true;
 
             var playerName:String = options ? options.playerName : null;
 
             // Check cached value
-            if (playerName != null && playerName != "")
+            if (playerName)
             {
                 var player_cache:Object = m_macros_cache_players[playerName];
                 if (player_cache == null)
@@ -821,7 +821,7 @@ package com.xvm
 
         private static function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isAlly:Boolean):void
         {
-            if (playerFullName == null || playerFullName == "")
+            if (!playerFullName)
                 throw new Error("empty name");
 
             var playerName:String = XfwUtils.GetPlayerName(playerFullName);
@@ -932,7 +932,7 @@ package com.xvm
             var pdata:Object = m_players[pname];
             if (!pdata)
             {
-                RegisterMinimalMacrosData(stat.vehicleID, stat._id, pname + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id, stat.team == XfwConst.TEAM_ALLY);
+                RegisterMinimalMacrosData(stat.vehicleID, stat._id, pname + (stat.clan ? "[" + stat.clan + "]" : ""), stat.v.id, stat.team == XfwConst.TEAM_ALLY);
                 pdata = m_players[pname];
             }
 
@@ -1178,7 +1178,7 @@ package com.xvm
                 var cdata:Object = m_contacts[String(accountDBID)];
                 if (cdata != null)
                 {
-                    if (cdata.nick != null && cdata.nick != "")
+                    if (cdata.nick)
                         playerName = cdata.nick;
                 }
             }
@@ -1209,7 +1209,7 @@ package com.xvm
         {
             var name:String = _getRatingName(scale);
             var value:* = pdata[prefix + RATING_MATRIX[name].name + suffix];
-            if (prefix != "" || value == null)
+            if (prefix || value == null)
                 return value;
             value = XfwUtils.leftPad(String(value), _getRatingDefaultValue(scale).length, " ");
             return value;

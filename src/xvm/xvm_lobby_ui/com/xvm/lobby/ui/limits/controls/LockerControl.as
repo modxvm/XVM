@@ -92,7 +92,7 @@ package com.xvm.lobby.ui.limits.controls
             addEventListener(MouseEvent.MOUSE_DOWN, this.handleMousePress);
             addEventListener(MouseEvent.CLICK, this.handleMouseRelease);
 
-            if (App.soundMgr != null)
+            if (App.soundMgr)
                 App.soundMgr.addSoundsHdlrs(this);
         }
 

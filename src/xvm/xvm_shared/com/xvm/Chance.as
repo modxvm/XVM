@@ -27,7 +27,7 @@ package com.xvm
             var text = GetChanceText(showLive);
             if (text == null)
                 return tf.text;
-            tf.htmlText = (tf.text == "" ? "" : tf.text + " | ") + text;
+            tf.htmlText = (tf.text ? tf.text + " | " : "") + text;
             return tf.htmlText;
         }
         */
@@ -114,7 +114,7 @@ package com.xvm
 
                 if (showBattleLevel && Chance.battleLevel != 0)
                 {
-                    if (text != "")
+                    if (text)
                         text += ". ";
                     text += Locale.get("chanceBattleTier") + ": " + battleLevel;
                 }
@@ -135,8 +135,8 @@ package com.xvm
         {
             var Ka:Number = 0;
             var Ke:Number = 0;
-            var len:int = playerNames.length;
             var count:int = 0;
+            var len:int = playerNames.length;
             for (var i:int = 0; i < len; ++i)
             {
                 var pname:String = playerNames[i];
@@ -255,7 +255,8 @@ package com.xvm
         {
             var nally:Number = 0;
             var nenemy:Number = 0;
-            for (var i:int = 0; i < playerNames.length; ++i )
+            var len:int = playerNames.length;
+            for (var i:int = 0; i < len; ++i)
             {
                 var pname:String = playerNames[i];
                 var stat:StatData = stats[pname];
@@ -314,7 +315,7 @@ package com.xvm
 
         private static function FormatChangeText(txt:String, chance:Object):String
         {
-            var htmlText:String = (txt && txt != "") ? txt + ": " : "";
+            var htmlText:String = txt ? txt + ": " : "";
             if (!chance)
                 htmlText += "-";
             else
@@ -356,7 +357,8 @@ package com.xvm
         {
             // 1. Collect all vehicles info
             var vis:Array = [];
-            for (var i:int = 0; i < playerNames.length; ++i )
+            var len:int = playerNames.length;
+            for (var i:int = 0; i < len; ++i)
             {
                 var pname:String = playerNames[i];
                 var stat:StatData = stats[pname];

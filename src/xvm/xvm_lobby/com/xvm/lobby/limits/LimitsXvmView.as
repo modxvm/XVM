@@ -53,7 +53,7 @@ package com.xvm.lobby.limits
             if (cls)
             {
                 limits_ui = new cls() as ILimitsUI;
-                if (limits_ui != null)
+                if (limits_ui)
                 {
                     limits_ui.init(page);
                 }
@@ -62,7 +62,7 @@ package com.xvm.lobby.limits
 
         private function dispose():void
         {
-            if (limits_ui != null)
+            if (limits_ui)
             {
                 limits_ui.dispose();
                 limits_ui = null;

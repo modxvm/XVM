@@ -66,7 +66,7 @@ package com.xvm.lobby.ui.profile
             try
             {
                 var vdossier:VehicleDossier = new VehicleDossier(data);
-                if (vdossier != null)
+                if (vdossier)
                 {
                     Dossier.setVehicleDossier(vdossier);
                     if (technique)

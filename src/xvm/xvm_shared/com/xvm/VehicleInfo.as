@@ -91,13 +91,13 @@ package com.xvm
                 for each (var obj:Object in data_array)
                 {
                     var data:VOVehicleData = new VOVehicleData(obj);
-                    var preferredNames:Object = Config.config.vehicleNames[data.key.split(':').join('-')];
-                    if (preferredNames != null)
+                    var preferredNames:Object = Config.config.vehicleNames[data.key.split(":").join("-")];
+                    if (preferredNames)
                     {
-                        if (preferredNames['name'] != null && preferredNames['name'] != '')
-                            data.localizedName = preferredNames['name'];
-                        if (preferredNames['short'] != null && preferredNames['short'] != '')
-                            data.shortName = preferredNames['short'];
+                        if (preferredNames["name"])
+                            data.localizedName = preferredNames["name"];
+                        if (preferredNames["short"])
+                            data.shortName = preferredNames["short"];
                     }
                     //Logger.addObject(data);
                     vehicles[data.vehCD] = data;

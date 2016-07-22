@@ -101,7 +101,7 @@ class com.xvm.lobby.widgets.WidgetsSettingsDialog
     {
         try
         {
-            dialogSettings = (!event || !event.str || event.str == "") ? Defines.DEFAULT_SETTINGS_WIDGETSSETTINGSDIALOG : JSONx.parse(event.str);
+            dialogSettings = (event && event.str) ? JSONx.parse(event.str) : Defines.DEFAULT_SETTINGS_WIDGETSSETTINGSDIALOG;
         }
         catch (e)
         {

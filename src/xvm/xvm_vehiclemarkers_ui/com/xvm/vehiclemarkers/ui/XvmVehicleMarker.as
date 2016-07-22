@@ -107,7 +107,7 @@ package com.xvm.vehiclemarkers.ui
                 if (isInvalid(InvalidationType.DATA))
                 {
                     var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    if (playerState != null)
+                    if (playerState)
                     {
                         dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
                     }
@@ -131,7 +131,7 @@ package com.xvm.vehiclemarkers.ui
             {
                 this.curHealth = newHealth;
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState != null)
+                if (playerState)
                 {
                     playerState.update({
                         damageInfo: new VODamageInfo({
@@ -163,7 +163,7 @@ package com.xvm.vehiclemarkers.ui
                 //Logger.add("curHealth=" + curHealth);
                 this.curHealth = curHealth;
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState != null)
+                if (playerState)
                 {
                     playerState.update( { damageInfo:null, curHealth: curHealth } );
                     invalidate(InvalidationType.DATA);
@@ -187,7 +187,7 @@ package com.xvm.vehiclemarkers.ui
             try
             {
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState != null)
+                if (playerState)
                 {
                     dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.SET_SPEAKING, playerState, exInfo));
                 }
@@ -219,7 +219,7 @@ package com.xvm.vehiclemarkers.ui
             try
             {
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState != null)
+                if (playerState)
                 {
                     dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.EX_INFO, playerState, exInfo));
                 }
@@ -255,37 +255,37 @@ package com.xvm.vehiclemarkers.ui
         {
             try
             {
-                if (vehicleTypeIconComponent != null)
+                if (vehicleTypeIconComponent)
                 {
                     vehicleTypeIconComponent.dispose();
                     vehicleTypeIconComponent = null;
                 }
-                if (contourIconComponent != null)
+                if (contourIconComponent)
                 {
                     contourIconComponent.dispose();
                     contourIconComponent = null;
                 }
-                if (levelIconComponent != null)
+                if (levelIconComponent)
                 {
                     levelIconComponent.dispose();
                     levelIconComponent = null;
                 }
-                if (actionMarkerComponent != null)
+                if (actionMarkerComponent)
                 {
                     actionMarkerComponent.dispose();
                     actionMarkerComponent = null;
                 }
-                if (healthBarComponent != null)
+                if (healthBarComponent)
                 {
                     healthBarComponent.dispose();
                     healthBarComponent = null;
                 }
-                if (textFieldsComponent != null)
+                if (textFieldsComponent)
                 {
                     textFieldsComponent.dispose();
                     textFieldsComponent = null;
                 }
-                if (damageTextComponent != null)
+                if (damageTextComponent)
                 {
                     damageTextComponent.dispose();
                     damageTextComponent = null;
@@ -341,10 +341,10 @@ package com.xvm.vehiclemarkers.ui
         {
             var turret:int = XvmVehicleMarkerConstants.TURRET_UNKNOWN_VULN_DATABASE_VAL;
             var playerState:VOPlayerState = BattleState.get(vehicleID);
-            if (playerState != null)
+            if (playerState)
             {
                 var vdata:VOVehicleData = VehicleInfo.get(playerState.vehCD);
-                if (vdata != null)
+                if (vdata)
                 {
                     if (vdata.hpStock == playerState.maxHealth)
                     {

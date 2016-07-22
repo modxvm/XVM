@@ -53,7 +53,7 @@ package com.xvm.lobby.clock
             if (cls)
             {
                 clock_ui = new cls() as IClockUI;
-                if (clock_ui != null)
+                if (clock_ui)
                 {
                     clock_ui.init(page);
                 }
@@ -62,7 +62,7 @@ package com.xvm.lobby.clock
 
         private function dispose():void
         {
-            if (clock_ui != null)
+            if (clock_ui)
             {
                 clock_ui.dispose();
                 clock_ui = null;

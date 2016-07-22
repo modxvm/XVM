@@ -58,7 +58,7 @@ package com.xvm.lobby.crew
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
             CrewLoader.dispose(page);
-            if (enablePrevCrewCheckBox != null)
+            if (enablePrevCrewCheckBox)
             {
                 Xfw.removeCommandListener(COMMAND_XVM_CREW_AS_VEHICLE_CHANGED, onVehicleChanged);
                 enablePrevCrewCheckBox.dispose();

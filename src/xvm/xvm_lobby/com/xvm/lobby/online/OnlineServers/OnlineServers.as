@@ -44,7 +44,7 @@ package com.xvm.lobby.online.OnlineServers
                 instance.onlineTimer = 0;
             }
 
-            if (instance.onlineTimeouts != null)
+            if (instance.onlineTimeouts)
             {
                 for each (var t:uint in instance.onlineTimeouts)
                     clearTimeout(t);

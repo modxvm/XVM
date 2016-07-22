@@ -85,7 +85,7 @@ package com.xvm.lobby.widgets
             for (var i = 0; i < m_widgetsSettings.length; ++i)
             {
                 var widget:IWidget = BaseWidget.CreateWidget(m_holder, m_widgetsSettings[i], m_playerName);
-                if (widget != null)
+                if (widget)
                     m_widgets.push(widget);
             }
         }
@@ -128,16 +128,16 @@ package com.xvm.lobby.widgets
         private function answerCallback(event):Void
         {
             var answer:String = event.str;
-            if (answer == null || answer == "")
-                return;
-            if (Strings.startsWith("[ERROR]", answer))
+            if (answer)
             {
-                Logger.add("Dossier answer error: " + answer);
-                return;
+                if (Strings.startsWith("[ERROR]", answer))
+                {
+                    Logger.add("Dossier answer error: " + answer);
+                    return;
+                }
+                var data = parseAnswer(answer);
+                //Logger.addObject(data);
             }
-
-            var data = parseAnswer(answer);
-            //Logger.addObject(data);
         }
 
         private function parseAnswer(answer:String):Object

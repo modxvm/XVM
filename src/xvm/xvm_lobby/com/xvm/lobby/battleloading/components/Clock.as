@@ -28,26 +28,26 @@ package com.xvm.lobby.battleloading.components
             var cfg:CBattleLoading = (page.form as BattleLoadingForm).formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
 
             clockFormat = cfg.clockFormat;
-            if (!clockFormat || clockFormat == "")
-                return;
+            if (clockFormat)
+            {
+                var f:TextField = form.helpTip;
 
-            var f:TextField = form.helpTip;
+                clock = new TextField();
+                clock.x = f.x;
+                clock.y = f.y;
+                clock.autoSize = TextFieldAutoSize.NONE;
+                clock.width = f.width;
+                clock.height = f.height;
+                clock.antiAliasType = AntiAliasType.ADVANCED;
+                var tf:TextFormat = new TextFormat("$TitleFont", 16, 0xFFFFFF, false, false, false, null, null, TextFormatAlign.RIGHT);
+                clock.defaultTextFormat = tf;
+                clock.selectable = false;
+                clock.filters = f.filters;
+                form.addChild(clock);
 
-            clock = new TextField();
-            clock.x = f.x;
-            clock.y = f.y;
-            clock.autoSize = TextFieldAutoSize.NONE;
-            clock.width = f.width;
-            clock.height = f.height;
-            clock.antiAliasType = AntiAliasType.ADVANCED;
-            var tf:TextFormat = new TextFormat("$TitleFont", 16, 0xFFFFFF, false, false, false, null, null, TextFormatAlign.RIGHT);
-            clock.defaultTextFormat = tf;
-            clock.selectable = false;
-            clock.filters = f.filters;
-            form.addChild(clock);
-
-            update();
-            setInterval(update, 1000);
+                update();
+                setInterval(update, 1000);
+            }
         }
 
         // PRIVATE

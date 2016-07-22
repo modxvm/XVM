@@ -56,7 +56,7 @@ package com.xvm.lobby.ui.profile.components
 
         public function onDispose():void
         {
-            if (tech != null)
+            if (tech)
                 tech.removeEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded);
         }
 
@@ -180,7 +180,7 @@ package com.xvm.lobby.ui.profile.components
                 if (dossier.stat == null)
                 {
                     var stat:StatData = Stat.getUserDataByName(tech.playerName);
-                    if (stat != null)
+                    if (stat)
                         dossier.stat = stat;
                 }
 

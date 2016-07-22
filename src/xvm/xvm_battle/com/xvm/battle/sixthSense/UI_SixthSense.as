@@ -75,12 +75,15 @@ public class UI_SixthSense extends sixthSenseUI {
 
     private function onConfigLoaded(event:Event):void {
         var iconPath : String = Config.config.battle.sixthSenseIcon;
-        if (iconPath || iconPath.length > 0) {
+        if (iconPath)
+        {
             iconPath = Utils.fixImgTagSrc(Macros.FormatStringGlobal(iconPath));
             _isPathValid = true;
             _isImageLoading = true;
             _loader.source = iconPath;
-        } else {
+        }
+        else
+        {
             _isPathValid = false;
         }
     }

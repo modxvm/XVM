@@ -64,7 +64,7 @@ package com.xvm.lobby.ping
         private function remove():void
         {
             PingServers.stop();
-            if (pingControl != null)
+            if (pingControl)
             {
                 pingControl.dispose();
                 pingControl = null;

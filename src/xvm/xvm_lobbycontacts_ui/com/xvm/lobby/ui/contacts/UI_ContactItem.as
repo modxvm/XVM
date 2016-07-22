@@ -34,7 +34,7 @@ package com.xvm.lobby.ui.contacts
             }
 
             var nick:String = xvm_contact_data.nick;
-            if (!nick || nick == null || nick == "")
+            if (!nick)
             {
                 super.applyLayout();
                 return;

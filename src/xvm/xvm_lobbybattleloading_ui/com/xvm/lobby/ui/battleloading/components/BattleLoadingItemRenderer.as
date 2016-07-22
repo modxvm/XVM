@@ -135,7 +135,7 @@ package com.xvm.lobby.ui.battleloading.components
 
         public function fixData(data:VehicleInfoVO):Object
         {
-            if (data != null)
+            if (data)
             {
                 try
                 {
@@ -144,7 +144,7 @@ package com.xvm.lobby.ui.battleloading.components
                     var fullPlayerName:String = App.utils.commons.getFullPlayerName(
                         App.utils.commons.getUserProps(_model.playerName, _model.clanAbbrev, _model.region, _model.igrType));
                     var vdata:VOVehicleData = VehicleInfo.getByIcon(_model.vehicleIcon);
-                    if (vdata != null)
+                    if (vdata)
                     {
                         Macros.RegisterMinimalMacrosData(_model.vehicleID, _model.accountDBID, fullPlayerName, vdata.vehCD, team == XfwConst.TEAM_ALLY);
                     }
@@ -181,7 +181,7 @@ package com.xvm.lobby.ui.battleloading.components
         {
             try
             {
-                if (_model != null && proxy.initialized)
+                if (_model && proxy.initialized)
                 {
                     var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
                     options.vehicleID = _model.vehicleID;
@@ -194,7 +194,7 @@ package com.xvm.lobby.ui.battleloading.components
                     options.squadIndex = _model.squadIndex;
                     options.position = proxy.index + 1;
 
-                    var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Macros.FormatBooleanGlobal(cfg.darkenNotReadyIcon) || proxy.enabled) && options.isAlive;
+                    var isIconHighlighted:Boolean = App.colorSchemeMgr && (!Macros.FormatBooleanGlobal(cfg.darkenNotReadyIcon) || proxy.enabled) && options.isAlive;
 
                     proxy.vehicleIconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
@@ -355,7 +355,7 @@ package com.xvm.lobby.ui.battleloading.components
         {
             //Logger.add("onStatLoaded: " + _model.playerName);
             proxy.vehicleField.condenseWhite = false;
-            if (_model != null && proxy.initialized)
+            if (_model && proxy.initialized)
                 proxy.invalidate();
         }
     }
