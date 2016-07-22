@@ -30,7 +30,7 @@ package com.xvm
             var textFormat:TextFormat = new TextFormat(
                 Macros.FormatString(cfg.font, options, DEFAULT_TEXT_FORMAT.font),
                 Macros.FormatNumber(cfg.size, options, Number(DEFAULT_TEXT_FORMAT.size)),
-                Macros.FormatNumber(cfg.color, options, Number(DEFAULT_TEXT_FORMAT.color), true),
+                Macros.FormatNumber(cfg.color, options, Number(DEFAULT_TEXT_FORMAT.color)),
                 Macros.FormatBoolean(cfg.bold, options, Boolean(DEFAULT_TEXT_FORMAT.bold)),
                 Macros.FormatBoolean(cfg.italic, options, Boolean(DEFAULT_TEXT_FORMAT.italic)),
                 Macros.FormatBoolean(cfg.underline, options, Boolean(DEFAULT_TEXT_FORMAT.underline)),
@@ -51,7 +51,7 @@ package com.xvm
             return !Macros.FormatBoolean(cfg.enabled, options, true) ? null : [new DropShadowFilter(
                 Macros.FormatNumber(cfg.distance, options, 0),
                 Macros.FormatNumber(cfg.angle, options, 0),
-                Macros.FormatNumber(cfg.color, options, 0, true),
+                Macros.FormatNumber(cfg.color, options, 0),
                 Macros.FormatNumber(cfg.alpha, options, 70) / 100.0,
                 Macros.FormatNumber(cfg.blur, options, 4),
                 Macros.FormatNumber(cfg.blur, options, 4),

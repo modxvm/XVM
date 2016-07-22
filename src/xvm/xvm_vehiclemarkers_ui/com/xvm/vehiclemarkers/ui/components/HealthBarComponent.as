@@ -62,7 +62,7 @@ package com.xvm.vehiclemarkers.ui.components
                         cfg.border.color = "{{c:system}}";
                     border.graphics.clear();
                     border.graphics.beginFill(
-                        Macros.FormatNumber(cfg.border.color, playerState, 0, true),
+                        Macros.FormatNumber(cfg.border.color, playerState, 0),
                         Macros.FormatNumber(cfg.border.alpha, playerState, 100) / 100.0);
                     border.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
                     border.graphics.endFill();
@@ -71,8 +71,8 @@ package com.xvm.vehiclemarkers.ui.components
                         cfg.color = "{{c:system}}";
                     if (cfg.lcolor == null)
                         cfg.lcolor = "{{c:system}}";
-                    var color:Number = Macros.FormatNumber(cfg.color, playerState, 0, true);
-                    var lcolor:Number = Macros.FormatNumber(cfg.lcolor, playerState, color, true);
+                    var color:Number = Macros.FormatNumber(cfg.color, playerState, 0);
+                    var lcolor:Number = Macros.FormatNumber(cfg.lcolor, playerState, color);
                     var healthRatio:Number = playerState.curHealth / playerState.maxHealth;
                     if (isNaN(healthRatio))
                         healthRatio = 1;
@@ -121,7 +121,7 @@ package com.xvm.vehiclemarkers.ui.components
                     damage.scaleX += playerState.damageInfo.damageDelta / playerState.maxHealth;
                     if (cfg.damage.color == null)
                         cfg.damage.color = "{{c:system}}";
-                    var color:Number = Macros.FormatNumber(cfg.damage.color, playerState, 0, true);
+                    var color:Number = Macros.FormatNumber(cfg.damage.color, playerState, 0);
                     GraphicsUtil.setColorTransform(damage, color);
                     damage.alpha = Macros.FormatNumber(cfg.damage.alpha, playerState) / 100.0;
                     TweenLite.to(damage, cfg.damage.fade, { scaleX: 0, ease: Cubic.easeIn } );

@@ -174,7 +174,7 @@ package com.xvm.extraFields
                 _cfg.highlight = value;
             }
 
-            value = Macros.FormatNumber(_cfg.borderColor, options, NaN, true);
+            value = Macros.FormatNumber(_cfg.borderColor, options);
             if (Macros.IsCached(_cfg.borderColor, options))
             {
                 if (!isNaN(value))
@@ -185,7 +185,7 @@ package com.xvm.extraFields
                 _cfg.borderColor = null;
             }
 
-            value = Macros.FormatNumber(_cfg.bgColor, options, NaN, true);
+            value = Macros.FormatNumber(_cfg.bgColor, options);
             if (Macros.IsCached(_cfg.bgColor, options))
             {
                 if (!isNaN(value))
@@ -255,7 +255,7 @@ package com.xvm.extraFields
 
             if (cfg.color == null)
                 cfg.color = "{{c:system}}";
-            value = Macros.FormatNumber(cfg.color, options, Number(Utils.DEFAULT_TEXT_FORMAT.color), true);
+            value = Macros.FormatNumber(cfg.color, options, Number(Utils.DEFAULT_TEXT_FORMAT.color));
             if (Macros.IsCached(cfg.color, options))
             {
                 cfg.color = value;
@@ -383,7 +383,7 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.color, options, 0, true);
+            value = Macros.FormatNumber(cfg.color, options, 0);
             if (Macros.IsCached(cfg.color, options))
             {
                 cfg.color = value;
@@ -543,7 +543,7 @@ package com.xvm.extraFields
             }
             if (_cfg.borderColor != null)
             {
-                value = Macros.FormatNumber(_cfg.borderColor, options, NaN, true);
+                value = Macros.FormatNumber(_cfg.borderColor, options);
                 border = !isNaN(value);
                 if (border)
                 {
@@ -552,7 +552,7 @@ package com.xvm.extraFields
             }
             if (_cfg.bgColor != null)
             {
-                value = Macros.FormatNumber(_cfg.bgColor, options, NaN, true);
+                value = Macros.FormatNumber(_cfg.bgColor, options);
                 background = !isNaN(value);
                 if (background)
                 {

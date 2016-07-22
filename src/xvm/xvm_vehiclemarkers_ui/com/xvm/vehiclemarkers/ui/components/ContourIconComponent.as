@@ -33,7 +33,7 @@ package com.xvm.vehiclemarkers.ui.components
                 var tintAmount:Number = Macros.FormatNumber(cfg.amount, e.playerState, -1);
                 if (tintAmount >= 0)
                 {
-                    var tintColor:Number = Macros.FormatNumber(cfg.color || "{{c:system}}", e.playerState, NaN, true);
+                    var tintColor:Number = Macros.FormatNumber(cfg.color || "{{c:system}}", e.playerState);
                     GraphicsUtil.setColorTransform(marker.vehicleIcon, tintColor, tintAmount / 100.0);
                 }
             }

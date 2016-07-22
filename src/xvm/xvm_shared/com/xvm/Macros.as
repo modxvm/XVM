@@ -27,7 +27,7 @@ package com.xvm
             //Xvm.swfProfilerBegin("Macros.Format");
             //try
             //{
-            return _Format(format, options, { } );
+            return _Format(format, options, {});
             //}
             //finally
             //{
@@ -88,30 +88,33 @@ package com.xvm
          * @param isColorValue color value expected
          * @return Formatted number value
          */
-        public static function FormatNumber(format:*, options:IVOMacrosOptions, defaultValue:Number = NaN, isColorValue:Boolean = false):Number
+        public static function FormatNumber(format:*, options:IVOMacrosOptions, defaultValue:Number = NaN):Number
         {
             //Xvm.swfProfilerBegin("Macros.FormatNumber");
             //try
             //{
-            var value:* = format;
-            if (value == null)
+            if (format == null)
                 return defaultValue;
-            if (isNaN(value))
+            if (!isNaN(format))
+                return format;
+            var v:* = _Format(format, options, {});
+            //Logger.add(format + " => " + v);
+            if (v == null)
+                return defaultValue;
+            if (!isNaN(v))
+                return v;
+            if (v is String)
             {
-                var v:* = Macros.Format(value, options);
-                //Logger.add(format + " => " + v);
-                if (v != null)
-                {
-                    if (v == "XX")
-                        v = 100;
-                    if (isColorValue)
-                        v = v.split("#").join("0x");
-                }
-                value = v;
+                // fix XVM Scale value
+                if (v == "XX")
+                    return 100;
+                // fix color value
+                if (v.charAt(0) == "#")
+                    v = "0x" + v.substr(1);
+                if (!isNaN(v))
+                    return v;
             }
-            if (isNaN(value))
-                return defaultValue;
-            return Number(value);
+            return defaultValue;
             //}
             //finally
             //{
@@ -128,12 +131,12 @@ package com.xvm
          * @param isColorValue color value expected
          * @return Formatted number value
          */
-        public static function FormatNumberGlobal(format:*, defaultValue:Number = NaN, isColorValue:Boolean = false):Number
+        public static function FormatNumberGlobal(format:*, defaultValue:Number = NaN):Number
         {
             //Xvm.swfProfilerBegin("Macros.FormatNumberGlobal");
             //try
             //{
-            return FormatNumber(format, null, defaultValue, isColorValue);
+            return FormatNumber(format, null, defaultValue);
             //}
             //finally
             //{
@@ -158,12 +161,19 @@ package com.xvm
                 return defaultValue;
             if (typeof format == "boolean")
                 return format;
-            var res:String = String(_Format(format, options, {})).toLowerCase();
-            //Logger.addObject(format + " => " + res);
-            if (res == 'true')
-                return true;
-            if (res == 'false')
-                return false;
+            var v:* = _Format(format, options, {});
+            if (v == null)
+                return defaultValue;
+            if (typeof v == "boolean")
+                return v;
+            if (v is String)
+            {
+                v = v.toLowerCase();
+                if (v == 'true')
+                    return true;
+                if (v == 'false')
+                    return false;
+            }
             return defaultValue;
             //}
             //finally
