@@ -41,9 +41,9 @@ package com.xvm
             var formatParts:Vector.<String> = Vector.<String>(format.split("{{" + MACRO_PREFIX + ":"));
 
             // begin part until first macro start
-            var res:String = formatParts.shift();
+            var res:String = formatParts[0];
             var len:int = formatParts.length;
-            for (var i:int = 0; i < len; ++i)
+            for (var i:int = 1; i < len; ++i)
             {
                 // "macro}} rest of text"
                 var part:String = formatParts[i];

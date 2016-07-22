@@ -328,12 +328,13 @@ package com.xvm
 
                 // Split tags
                 var parts:Vector.<String> = Vector.<String>(format_str.split("{{"));
-                var res:String = parts.shift();
-                if (parts.length)
+                var len:uint = parts.length;
+                var res:String = parts[0];
+                if (len > 1)
                 {
-                    while (parts.length)
+                    for (var i:uint = 1; i < len; ++i)
                     {
-                        var part:String = parts.shift();
+                        var part:String = parts[i];
                         var idx:int = part.indexOf("}}");
                         if (idx == -1)
                         {
@@ -506,12 +507,13 @@ package com.xvm
 
             // split parts: name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]
             var macroArr:Vector.<String> = Vector.<String>(macro.split(""));
+            var len:uint = macroArr.length;
             var part:String = "";
             var section:int = 0;
             var nextSection:int = section;
-            while (macroArr.length)
+            for (var i:uint = 0; i < len; ++i)
             {
-                var ch:String = macroArr.shift();
+                var ch:String = macroArr[i];
                 switch (ch)
                 {
                     case ":":
@@ -532,9 +534,10 @@ package com.xvm
                     case "<":
                         if (section < 4)
                         {
-                            if (macroArr.length && macroArr[0] == "=")
+                            if (i < len - 1 && macroArr[i + 1] == "=")
                             {
-                                ch += macroArr.shift();
+                                ++i;
+                                ch += macroArr[i];
                             }
                             parts[PART_MATCH_OP] = ch;
                             nextSection = 5;
