@@ -105,8 +105,8 @@
       },
       "format": "<font size='{{battletype?13|{{squad?13|0}}}}'>{{name}}</font>"  // формат текста. См. описание макросов в macros.txt
     },
-    // Text field with the remaining / maximum health.
-    // Текстовое поле с оставшимся / максимальным здоровьем.
+    // Text field with the remaining health.
+    // Текстовое поле с оставшимся здоровьем.
     "tankHp": {
       "name": "Tank HP",
       "visible": true,

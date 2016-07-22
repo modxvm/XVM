@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15',
+    'VERSION':       '0.9.15.0.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15'],
+    'GAME_VERSIONS': ['0.9.15.0.1'],
     # optional
 }
 
@@ -179,7 +179,7 @@ def ProfileTechniqueWindow_RequestData(base, self, data):
         base(self, data)
 
 
-# TODO:0.9.15: remove?
+# TODO:0.9.15.0.1: remove?
 ## stereoscope
 #@registerEvent(AmmunitionPanel, 'highlightParams')
 #def AmmunitionPanel_highlightParams(self, type):
@@ -291,38 +291,40 @@ def _Minimap__updateSettings(base, self):
 @overrideMethod(g_settingsCore, 'getSetting')
 def __g_settingsCore_getSetting(base, name):
     value = base(name)
-    global in_setupMinimapSettings
-    global in_updateSettings
-    if in_setupMinimapSettings or in_updateSettings:
-        if name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
-            if not config.get('minimap/useStandardCircles'):
-                value = False
-        elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
-            if not config.get('minimap/useStandardCircles'):
-                value = False
-        elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
-            if not config.get('minimap/useStandardCircles'):
-                value = False
-        elif name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
-            if not config.get('minimap/useStandardLines'):
-                value = False
-        elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
-            if not config.get('minimap/useStandardLines'):
-                value = False
-        #debug('getSetting: {} = {}'.format(name, value))
+    if config.get('minimap/enabled'):
+        global in_setupMinimapSettings
+        global in_updateSettings
+        if in_setupMinimapSettings or in_updateSettings:
+            if name == settings_constants.GAME.MINIMAP_DRAW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.MINIMAP_VIEW_RANGE:
+                if not config.get('minimap/useStandardCircles'):
+                    value = False
+            elif name == settings_constants.GAME.SHOW_VECTOR_ON_MAP:
+                if not config.get('minimap/useStandardLines'):
+                    value = False
+            elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
+                if not config.get('minimap/useStandardLines'):
+                    value = False
+            #debug('getSetting: {} = {}'.format(name, value))
     return value
 
 
 @overrideMethod(SettingsContainer, 'getSetting')
 def __SettingsContainer_getSetting(base, self, name):
     value = base(self, name)
-    global in_setupMinimapSettings
-    global in_updateSettings
-    if in_setupMinimapSettings or in_updateSettings:
-        if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
-            if not config.get('minimap/useStandardLabels'):
-                value._set(0)
-        #debug('getSetting: {} = {}'.format(name, value))
+    if config.get('minimap/enabled'):
+        global in_setupMinimapSettings
+        global in_updateSettings
+        if in_setupMinimapSettings or in_updateSettings:
+            if name == settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP:
+                if not config.get('minimap/useStandardLabels'):
+                    value._set(0)
+            #debug('getSetting: {} = {}'.format(name, value))
     return value
 
 

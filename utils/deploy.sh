@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #############################
 # CONFIG
@@ -27,6 +27,7 @@ check_config()
 
 clear()
 {
+  rm -rf "$WOT_PATH/res_mods/configs/xvm/py_macro/xvm" || err "make_dirs"
   rm -rf "$WOT_PATH/res_mods/mods/packages" || err "clear"
   rm -rf "$WOT_PATH/res_mods/mods/xfw" || err "clear"
   rm -f "$WOT_PATH/res_mods/$TARGET_VERSION/gui/flash/lobby.swf" || err "clear"
@@ -103,8 +104,8 @@ copy_xvm_file()
 }
 
 # MAIN
-
-pushd $(dirname $(realpath $(cygpath --unix $0))) >/dev/null
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+pushd "$CURRENT_DIR" >/dev/null
 
 # load config
 . ../build/xvm-build.conf

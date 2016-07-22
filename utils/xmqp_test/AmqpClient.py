@@ -2,7 +2,7 @@ import pika
 import uuid
 
 credentials = pika.PlainCredentials('xvm', 'xvm')
-lobby_queue = 'com.xvm.xmqp.1v0.lobby'
+lobby_queue = 'com.xvm.xmqp.2v0.lobby'
 
 
 class AmqpClient(object):
@@ -23,11 +23,11 @@ class AmqpClient(object):
         if self.corr_id == props.correlation_id:
             self.response = body
 
-    def call(self, message):
+    def call(self, message, routing_key):
         self.response = None
         self.corr_id = str(uuid.uuid4())
-        self.channel.basic_publish(exchange='',
-                                   routing_key=lobby_queue,
+        self.channel.basic_publish(exchange=lobby_queue,
+                                   routing_key=routing_key,
                                    properties=pika.BasicProperties(
                                        reply_to=self.private_queue,
                                        correlation_id=self.corr_id,
@@ -36,6 +36,11 @@ class AmqpClient(object):
         while self.response is None:
             self.connection.process_data_events()
         return self.response
+
+    def publish_battle_message(self, battle_exchange, message):
+        self.channel.basic_publish(exchange=battle_exchange,
+                                   routing_key='',
+                                   body=str(message))
 
     def bind_channel(self, exchange_name):
         self.channel.queue_bind(exchange=exchange_name,

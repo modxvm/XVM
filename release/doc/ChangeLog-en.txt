@@ -1,4 +1,13 @@
-﻿XVM-6.3.1.1:
+XVM-6.3.2.1:
+  * fix for 6th sense sound
+  * fix for tank carousel filters
+
+﻿XVM-6.3.2:
+  * update for WoT 0.9.15.0.1 micropatch
+  * changed "shadow"/"alpha" parameter values range from 0..1 to 0..100 in the carousel
+    and players panel extra fields
+
+XVM-6.3.1.1:
   * update for WoT 0.9.15 #30 micropatch
   * added option "tooltips"/"hideSimplifiedVehParams" - hide simplified vehicle parameters
   * tooltips:

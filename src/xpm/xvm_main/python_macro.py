@@ -11,6 +11,8 @@ from constants import *
 from logger import *
 
 
+sys.path.append("%s/../configs/xvm/py_macro" % XFW_WORK_DIR)
+
 # Globals
 _container = {}
 
@@ -99,7 +101,7 @@ def load(file_name):
     return parse(source, file_name)
 
 
-def execute(code, context):
+def execute(code, file_name, context):
     try:
         exec(code, context)
     except Exception, e:
@@ -107,7 +109,7 @@ def execute(code, context):
         message = e.args[0]
         cl, exc, tb = sys.exc_info()
         line_number = traceback.extract_tb(tb)[-1][1]
-        raise ExecutionException("{} at line {}: {}".format(error_name, line_number, message))
+        raise ExecutionException("{} at file '{}' line {}: {}".format(error_name, file_name, line_number, message))
 
 
 def initialize():
@@ -120,9 +122,10 @@ def initialize():
 
 
 def load_macros_lib(file_name):
+    debug("[PY_MACRO] load_macros_lib('{}')".format(file_name))
     try:
         code = load(file_name)
-        execute(code, {'xvm': XvmNamespace})
+        execute(code, file_name, {'xvm': XvmNamespace})
     except Exception as ex:
         err(traceback.format_exc())
         return None
@@ -151,5 +154,5 @@ def process_python_macro(arg):
         (func, deterministic) = get_function(arg)
         return (func(), deterministic)
     except Exception as ex:
-        err(traceback.format_exc())
+        err(traceback.format_exc() + "arg='{}'".format(arg))
         return (None, True)

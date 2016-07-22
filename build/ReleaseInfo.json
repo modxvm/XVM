@@ -1,37 +1,37 @@
 ﻿{
     "RU": {
-        "ver": "6.3.1.1",
-        "wot": "0.9.15",
-        "message": "  * WoT 0.9.15\n  * новые возможности\n  * исправлены ошибки"
+        "ver": "6.3.2.1",
+        "wot": "0.9.15.0.1",
+        "message": "  * WoT 0.9.15.0.1\n  * новые возможности\n  * исправлены ошибки"
     },
     "EU": {
-        "ver": "6.3.1.1",
-        "wot": "0.9.15",
-        "message": "  * WoT 0.9.15\n  * new features\n  * bugs fixed"
+        "ver": "6.3.2.1",
+        "wot": "0.9.15.0.1",
+        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
     },
     "US": {
-        "ver": "6.3.1.1",
-        "wot": "0.9.15",
-        "message": "  * WoT 0.9.15\n  * new features\n  * bugs fixed"
+        "ver": "6.3.2.1",
+        "wot": "0.9.15.0.1",
+        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
     },
     "ASIA": {
-        "ver": "6.3.1.1",
-        "wot": "0.9.15",
-        "message": "  * WoT 0.9.15\n  * new features\n  * bugs fixed"
+        "ver": "6.3.2.1",
+        "wot": "0.9.15.0.1",
+        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
     },
     "KR": {
-        "ver": "6.3.1.1",
-        "wot": "0.9.15",
-        "message": "  * WoT 0.9.15\n  * new features\n  * bugs fixed"
+        "ver": "6.3.2.1",
+        "wot": "0.9.15.0.1",
+        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
     },
     "CN": {
-        "ver": "6.3.1.1",
-        "wot": "0.9.15",
-        "message": "  * WoT 0.9.15\n  * new features\n  * bugs fixed"
+        "ver": "6.3.2.1",
+        "wot": "0.9.15.0.1",
+        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
     },
     "CT":  {
-        "ver": "6.3.1.1",
-        "wot": "0.9.15",
-        "message": "  * WoT 0.9.15\n  * new features\n  * bugs fixed"
+        "ver": "6.3.2.1",
+        "wot": "0.9.15.0.1",
+        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
     }
 }
