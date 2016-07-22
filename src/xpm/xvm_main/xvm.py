@@ -212,9 +212,9 @@ class Xvm(object):
     def onBecomePlayer(self):
         trace('onBecomePlayer')
         try:
-            #arena = BigWorld.player().arena
-            #if arena:
-            #    arena.onNewVehicleListReceived += self.xmqp_init
+            arena = BigWorld.player().arena
+            if arena:
+                arena.onNewVehicleListReceived += self.xmqp_init
             if config.get('autoReloadConfig', False) == True:
                 configwatchdog.startConfigWatchdog()
         except Exception, ex:
@@ -223,10 +223,10 @@ class Xvm(object):
     def onBecomeNonPlayer(self):
         trace('onBecomeNonPlayer')
         try:
-            #arena = BigWorld.player().arena
-            #if arena:
-            #    arena.onNewVehicleListReceived -= self.xmqp_init
-            #self.xmqp_stop()
+            arena = BigWorld.player().arena
+            if arena:
+                arena.onNewVehicleListReceived -= self.xmqp_init
+            self.xmqp_stop()
             pass
         except Exception, ex:
             err(traceback.format_exc())
@@ -381,6 +381,8 @@ class Xvm(object):
 
     def xmqp_init(self):
         #debug('xmqp_init')
+        BigWorld.player().arena.onNewVehicleListReceived -= self.xmqp_init
+        return # TODO
         if isReplay() and xmqp.XMQP_DEVELOPMENT:
             config.token = config.XvmServicesToken.restore()
         if config.networkServicesSettings.xmqp or (isReplay() and xmqp.XMQP_DEVELOPMENT):
@@ -401,6 +403,7 @@ class Xvm(object):
                     xmqp.start(players)
 
     def xmqp_stop(self):
+        return # TODO
         xmqp.stop()
 
 g_xvm = Xvm()
