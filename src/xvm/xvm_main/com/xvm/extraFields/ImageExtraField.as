@@ -282,7 +282,7 @@ package com.xvm.extraFields
             }
             else
             {
-                bindToIconOffset = 0;
+                _bindToIconOffset = 0;
             }
             if (_cfg.src)
             {
