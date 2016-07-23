@@ -61,12 +61,14 @@
       // Обнаружение противника (Используйте вместе с отключением оригинального звука обнаружения противника)
       "xvm_enemySighted": "",      
       //"xvm_enemySighted": "xvm_enemySighted",      
-      // Fire alert
-      // Пожар
-      "xvm_fireAlert": "xvm_fireAlert",
-      // Damage ammoBay
-      // Повреждение боеукладки
-      "xvm_ammoBay": "xvm_ammoBay",
+      // Fire alert (Use in together with disable original event)
+      // Пожар (Используйте вместе с отключением оригинального звука)
+      "xvm_fireAlert": "",
+      //"xvm_fireAlert": "xvm_fireAlert",
+      // Damage ammoBay (Use in together with disable original event)
+      // Повреждение боеукладки (Используйте вместе с отключением оригинального звука)
+      "xvm_ammoBay": "",
+      //"xvm_ammoBay": "xvm_ammoBay",
       // Notifications informing about the imminent end of the battle (Use in together with disable original event)
       // Оповещения сообщающие о скором завершении боя (Используйте вместе с отключением оригинального звука)
       "xvm_battleEnd_5_min": "",
