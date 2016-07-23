@@ -5,6 +5,7 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
 
     public dynamic class CMarkersHealthBarDamage extends Object implements ICloneable
     {
@@ -15,6 +16,13 @@ package com.xvm.types.cfg
         public function clone():*
         {
             throw new Error("clone() method is not implemented");
+        }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            alpha = Macros.FormatNumberGlobal(alpha, 80);
+            color = Macros.FormatNumberGlobal(color);
+            fade = Macros.FormatNumberGlobal(fade, 1);
         }
     }
 }

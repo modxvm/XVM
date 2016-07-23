@@ -7,6 +7,7 @@ package com.xvm.vehiclemarkers.ui
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.external.*;
     import flash.events.*;

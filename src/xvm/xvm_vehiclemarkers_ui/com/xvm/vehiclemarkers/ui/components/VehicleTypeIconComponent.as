@@ -35,23 +35,22 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersVehicleIcon = e.cfg.vehicleIcon;
-                marker.marker.visible = (showSpeaker && marker.isSpeaking()) || Macros.FormatBoolean(cfg.enabled, e.playerState, true);
+                marker.marker.visible = cfg.enabled || (showSpeaker && marker.isSpeaking());
                 if (marker.marker.visible)
                 {
-                    var offsetX:Number = Macros.FormatNumber(cfg.offsetX, e.playerState);
-                    var offsetY:Number = Macros.FormatNumber(cfg.offsetY, e.playerState);
-                    var maxScale:Number = Macros.FormatNumber(cfg.maxScale, e.playerState) / 100.0;
+                    var offsetX:Number = cfg.offsetX;
+                    var offsetY:Number = cfg.offsetY;
+                    var maxScale:Number = cfg.maxScale / 100.0;
                     maxScale = 1; // TODO
-                    marker.marker.x = Macros.FormatNumber(cfg.x, e.playerState) + offsetX * maxScale;
-                    marker.marker.y = Macros.FormatNumber(cfg.y, e.playerState) + offsetY * maxScale;
-                    marker.marker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
+                    marker.marker.x = cfg.x + offsetX * maxScale;
+                    marker.marker.y = cfg.y + offsetY * maxScale;
+                    marker.marker.alpha = cfg.alpha / 100.0;
                     // TODO: broken - sometimes icon remains alive for dead vehicles. Touching vehicleTypeIcon kills timeline.
                     //marker.marker.vehicleTypeIcon.scaleX = maxScale;
                     //marker.marker.vehicleTypeIcon.scaleY = maxScale;
 
                     // TODO: colorize
-                    //var color:Number = Macros.FormatNumber(cfg.color, playerState, NaN, true);
-                    // colorizeMarkerIcon(icon, color);
+                    // colorizeMarkerIcon(icon, cfg.color);
 
                     // TODO: change dynamic to vehicle type marker for dead while speaking
                     //if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking

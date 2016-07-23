@@ -50,7 +50,7 @@ package com.xvm.battle.fullStats
             var playerNames:Vector.<String> = new Vector.<String>();
             for (var name:String in Stat.battleStat)
                 playerNames.push(name);
-            var chanceText:String = Chance.GetChanceText(playerNames, Stat.battleStat, Config.networkServicesSettings.chance, cfg.showBattleTier, Config.networkServicesSettings.chanceLive, true);
+            var chanceText:String = Chance.GetChanceText(playerNames, Stat.battleStat, Config.networkServicesSettings.chance, cfg.showBattleTier, Config.networkServicesSettings.chanceLive);
             if (chanceText)
             {
                 winChanceTF.htmlText = '<span class="chances">' + chanceText + '</span>';

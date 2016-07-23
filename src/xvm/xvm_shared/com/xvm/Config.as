@@ -25,6 +25,11 @@ package com.xvm
             s_config = value;
         }
 
+        public static function applyGlobalBattleMacros():void
+        {
+            s_config.applyGlobalBattleMacros();
+        }
+
         public static function get networkServicesSettings():NetworkServicesSettings
         {
             return s_networkServicesSettings;

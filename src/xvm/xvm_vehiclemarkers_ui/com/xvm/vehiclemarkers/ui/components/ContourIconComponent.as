@@ -22,19 +22,18 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersContourIcon = e.cfg.contourIcon;
-                marker.vehicleIcon.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
-                if (marker.vehicleIcon.visible)
+                marker.vehicleIcon.visible = cfg.enabled;
+                if (cfg.enabled)
                 {
-                    marker.vehicleIcon.x = Macros.FormatNumber(cfg.x, e.playerState);
-                    marker.vehicleIcon.y = Macros.FormatNumber(cfg.y, e.playerState);
-                    marker.vehicleIcon.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
+                    marker.vehicleIcon.x = cfg.x;
+                    marker.vehicleIcon.y = cfg.y;
+                    marker.vehicleIcon.alpha = cfg.alpha / 100.0;
                 }
 
-                var tintAmount:Number = Macros.FormatNumber(cfg.amount, e.playerState, -1);
-                if (tintAmount >= 0)
+                if (cfg.amount)
                 {
-                    var tintColor:Number = Macros.FormatNumber(cfg.color || "{{c:system}}", e.playerState);
-                    GraphicsUtil.setColorTransform(marker.vehicleIcon, tintColor, tintAmount / 100.0);
+                    var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", e.playerState) : cfg.color;
+                    GraphicsUtil.setColorTransform(marker.vehicleIcon, color, cfg.amount / 100.0);
                 }
             }
             catch (ex:Error)

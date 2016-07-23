@@ -63,11 +63,19 @@ package com.xvm.battle
                 Xfw.cmd(BattleCommands.REQUEST_BATTLE_GLOBAL_DATA);
                 _curent_xtdb = 0;
                 BattleMacros.RegisterGlobalMacrosData();
+                Config.applyGlobalBattleMacros();
+                _initialized = true;
             }
             finally
             {
                 Xfw.removeCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
             }
+        }
+
+        private static var _initialized:Boolean = false;
+        public static function get initialized():Boolean
+        {
+            return _initialized;
         }
 
         private static var _playerVehicleID:Number;

@@ -5,6 +5,7 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
 
     public dynamic class CMarkersVehicleIcon extends Object implements ICloneable
     {
@@ -17,11 +18,23 @@ package com.xvm.types.cfg
         public var maxScale:*;
         public var offsetX:*;
         public var offsetY:*;
-        public var shadow:CShadow;
 
         public function clone():*
         {
             throw new Error("clone() method is not implemented");
+        }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            enabled = Macros.FormatBooleanGlobal(enabled, true);
+            showSpeaker = Macros.FormatBooleanGlobal(showSpeaker, true);
+            x = Macros.FormatNumberGlobal(x);
+            y = Macros.FormatNumberGlobal(y);
+            alpha = Macros.FormatNumberGlobal(alpha, 100);
+            color = Macros.FormatNumberGlobal(color);
+            maxScale = Macros.FormatNumberGlobal(maxScale, 100);
+            offsetX = Macros.FormatNumberGlobal(offsetX, 0);
+            offsetY = Macros.FormatNumberGlobal(offsetY, 0);
         }
     }
 }

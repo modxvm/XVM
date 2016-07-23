@@ -15,5 +15,17 @@ package com.xvm.types.cfg
         {
             throw new Error("clone() method is not implemented");
         }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            if (alive)
+            {
+                alive.applyGlobalBattleMacros();
+            }
+            if (dead)
+            {
+                dead.applyGlobalBattleMacros();
+            }
+        }
     }
 }

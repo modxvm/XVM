@@ -22,5 +22,29 @@ package com.xvm.types.cfg
         {
             throw new Error("clone() method is not implemented");
         }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            if (vehicleIcon)
+            {
+                vehicleIcon.applyGlobalBattleMacros();
+            }
+            if (healthBar)
+            {
+                healthBar.applyGlobalBattleMacros();
+            }
+            if (contourIcon)
+            {
+                contourIcon.applyGlobalBattleMacros();
+            }
+            if (levelIcon)
+            {
+                levelIcon.applyGlobalBattleMacros();
+            }
+            if (actionMarker)
+            {
+                actionMarker.applyGlobalBattleMacros();
+            }
+        }
     }
 }

@@ -53,33 +53,24 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersHealthBar = e.cfg.healthBar;
-                healthBar.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
-                if (healthBar.visible)
+                healthBar.visible = cfg.enabled;
+                if (cfg.enabled)
                 {
                     var playerState:VOPlayerState = e.playerState;
 
-                    if (cfg.border.color == null)
-                        cfg.border.color = "{{c:system}}";
+                    var border_color:Number = isNaN(cfg.border.color) ? Macros.FormatNumber("{{c:system}}", playerState) : cfg.border.color;
                     border.graphics.clear();
-                    border.graphics.beginFill(
-                        Macros.FormatNumber(cfg.border.color, playerState, 0),
-                        Macros.FormatNumber(cfg.border.alpha, playerState, 100) / 100.0);
+                    border.graphics.beginFill(border_color, cfg.border.alpha / 100.0);
                     border.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
                     border.graphics.endFill();
 
-                    if (cfg.color == null)
-                        cfg.color = "{{c:system}}";
-                    if (cfg.lcolor == null)
-                        cfg.lcolor = "{{c:system}}";
-                    var color:Number = Macros.FormatNumber(cfg.color, playerState, 0);
-                    var lcolor:Number = Macros.FormatNumber(cfg.lcolor, playerState, color);
+                    var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", playerState) : cfg.color;
+                    var lcolor:Number = isNaN(cfg.lcolor) ? Macros.FormatNumber("{{c:system}}", playerState) : cfg.lcolor;
                     var healthRatio:Number = playerState.curHealth / playerState.maxHealth;
                     if (isNaN(healthRatio))
                         healthRatio = 1;
                     fill.graphics.clear();
-                    fill.graphics.beginFill(
-                        GraphicsUtil.colorByRatio(healthRatio, lcolor, color),
-                        Macros.FormatNumber(cfg.fill.alpha, playerState) / 100.0);
+                    fill.graphics.beginFill(GraphicsUtil.colorByRatio(healthRatio, lcolor, color), cfg.fill.alpha / 100.0);
                     fill.graphics.drawRect(cfg.border.size, cfg.border.size, cfg.width * Math.min(healthRatio, 1.0), cfg.height);
                     fill.graphics.endFill();
 
@@ -93,7 +84,7 @@ package com.xvm.vehiclemarkers.ui.components
 
                     healthBar.x = cfg.x;
                     healthBar.y = cfg.y;
-                    healthBar.alpha = Macros.FormatNumber(cfg.alpha, playerState) / 100.0;
+                    healthBar.alpha = cfg.alpha / 100.0;
                 }
             }
             catch (ex:Error)
@@ -119,11 +110,9 @@ package com.xvm.vehiclemarkers.ui.components
                     TweenLite.killTweensOf(damage);
                     damage.x = cfg.border.size + cfg.width * (playerState.curHealth / playerState.maxHealth) - 1;
                     damage.scaleX += playerState.damageInfo.damageDelta / playerState.maxHealth;
-                    if (cfg.damage.color == null)
-                        cfg.damage.color = "{{c:system}}";
-                    var color:Number = Macros.FormatNumber(cfg.damage.color, playerState, 0);
+                    var color:Number = isNaN(cfg.damage.color) ? Macros.FormatNumber("{{c:system}}", playerState) : cfg.damage.color;
                     GraphicsUtil.setColorTransform(damage, color);
-                    damage.alpha = Macros.FormatNumber(cfg.damage.alpha, playerState) / 100.0;
+                    damage.alpha = cfg.damage.alpha / 100.0;
                     TweenLite.to(damage, cfg.damage.fade, { scaleX: 0, ease: Cubic.easeIn } );
                 }
             }

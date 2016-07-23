@@ -22,12 +22,12 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersLevelIcon = e.cfg.levelIcon;
-                marker.levelIcon.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
-                if (marker.levelIcon.visible)
+                marker.levelIcon.visible = cfg.enabled;
+                if (cfg.enabled)
                 {
-                    marker.levelIcon.x = Macros.FormatNumber(cfg.x, e.playerState);
-                    marker.levelIcon.y = Macros.FormatNumber(cfg.y, e.playerState);
-                    marker.levelIcon.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
+                    marker.levelIcon.x = cfg.x;
+                    marker.levelIcon.y = cfg.y;
+                    marker.levelIcon.alpha = cfg.alpha / 100.0;
                 }
             }
             catch (ex:Error)

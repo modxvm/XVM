@@ -106,6 +106,10 @@ package com.xvm
             Locale.setupLanguage(lang_data);
             VehicleInfo.setVehicleInfoData(vehInfo_data);
             Config.networkServicesSettings = new NetworkServicesSettings(networkServicesSettings);
+            if (BattleGlobalData.initialized)
+            {
+                Config.applyGlobalBattleMacros();
+            }
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
         }
 

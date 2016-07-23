@@ -16,18 +16,23 @@ package com.xvm.vehiclemarkers.ui.components
             super(marker);
         }
 
+        override protected function init(e:XvmVehicleMarkerEvent):void
+        {
+            super.init(e);
+        }
+
         override protected function update(e:XvmVehicleMarkerEvent):void
         {
             try
             {
                 super.update(e);
                 var cfg:CMarkersActionMarker = e.cfg.actionMarker;
-                marker.actionMarker.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
-                if (marker.actionMarker.visible)
+                marker.actionMarker.visible = cfg.enabled;
+                if (cfg.enabled)
                 {
-                    marker.actionMarker.x = Macros.FormatNumber(cfg.x, e.playerState);
-                    marker.actionMarker.y = Macros.FormatNumber(cfg.y, e.playerState);
-                    marker.actionMarker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 1) / 100.0;
+                    marker.actionMarker.x = cfg.enabled;
+                    marker.actionMarker.y = cfg.enabled;
+                    marker.actionMarker.alpha = cfg.enabled / 100.0;
                 }
             }
             catch (ex:Error)
