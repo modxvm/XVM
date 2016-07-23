@@ -21,6 +21,7 @@ package com.xvm.battle.fullStats
         {
             var index:int = col * NUM_ITEM_ROWS + row;
             return new StatsTableItemXvm(
+                col == 0,
                 xfw_table.playerNameCollection[index],
                 xfw_table.vehicleNameCollection[index],
                 xfw_table.fragsCollection[index],
@@ -33,6 +34,19 @@ package com.xvm.battle.fullStats
                 xfw_table.speakAnimationCollection[index],
                 xfw_table.vehicleActionMarkerCollection[index],
                 xfw_table.playerStatusCollection[index]);
+        }
+
+        override public function createSquadItem(col:int, row:int):DynamicSquadCtrl
+        {
+            var index:int = col * NUM_ITEM_ROWS + row;
+            return new DynamicSquadCtrlXvm(
+                col == 0,
+                xfw_table.squadStatusCollection[index],
+                xfw_table.squadCollection[index],
+                xfw_table.squadAcceptBt,
+                xfw_table.squadAddBt,
+                xfw_table.hitCollection[index],
+                xfw_table.noSoundCollection[index]);
         }
     }
 }

@@ -61,6 +61,10 @@ package com.xvm.types.cfg
             {
                 markers.applyGlobalBattleMacros();
             }
+            if (statisticForm)
+            {
+                statisticForm.applyGlobalBattleMacros();
+            }
         }
     }
 }

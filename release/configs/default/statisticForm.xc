@@ -72,13 +72,13 @@
     "vehicleIconOffsetXRight": 0,
     // X offset for allies frags
     // Смещение по оси X фрагов союзников
-    "fragsOffsetXLeft": 8,
+    "fragsFieldOffsetXLeft": 8,
     // Width of frags field for allies
     // Ширина поля фрагов союзников
     "fragsFieldWidthLeft": 43,
     // X offset for enemies frags
     // Смещение по оси X фрагов противников
-    "fragsOffsetXRight": 0,
+    "fragsFieldOffsetXRight": 0,
     // Width of frags field for enemies
     // Ширина поля фрагов противников
     "fragsFieldWidthRight": 43,

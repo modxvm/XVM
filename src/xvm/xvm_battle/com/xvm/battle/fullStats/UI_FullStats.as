@@ -14,6 +14,10 @@ package com.xvm.battle.fullStats
 
             // Components
             new WinChances(this); // Winning chance info above players list. // TODO: replace with ExtraField
+
+            // TODO
+            //cfg.extraFieldsLeft
+            //cfg.extraFieldsRight
         }
     }
 }
