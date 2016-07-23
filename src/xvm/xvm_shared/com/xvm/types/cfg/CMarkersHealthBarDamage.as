@@ -20,9 +20,7 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            alpha = Macros.FormatNumberGlobal(alpha, 80);
-            color = Macros.FormatNumberGlobal(color);
-            fade = Macros.FormatNumberGlobal(fade, 1);
+            fade = Macros.FormatNumberGlobal(fade);
         }
     }
 }

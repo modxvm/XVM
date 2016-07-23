@@ -110,9 +110,11 @@ package com.xvm.vehiclemarkers.ui.components
                     TweenLite.killTweensOf(damage);
                     damage.x = cfg.border.size + cfg.width * (playerState.curHealth / playerState.maxHealth) - 1;
                     damage.scaleX += playerState.damageInfo.damageDelta / playerState.maxHealth;
-                    var color:Number = isNaN(cfg.damage.color) ? Macros.FormatNumber("{{c:system}}", playerState) : cfg.damage.color;
+                    if (cfg.damage.color == null)
+                        cfg.damage.color = "{{c:system}}";
+                    var color:Number = Macros.FormatNumber(cfg.damage.color, playerState);
                     GraphicsUtil.setColorTransform(damage, color);
-                    damage.alpha = cfg.damage.alpha / 100.0;
+                    damage.alpha = Macros.FormatNumber(cfg.damage.alpha, playerState, 100) / 100.0;
                     TweenLite.to(damage, cfg.damage.fade, { scaleX: 0, ease: Cubic.easeIn } );
                 }
             }
