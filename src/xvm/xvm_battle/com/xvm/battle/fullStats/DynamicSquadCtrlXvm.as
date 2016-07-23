@@ -18,13 +18,23 @@ package com.xvm.battle.fullStats
 
     public class DynamicSquadCtrlXvm extends DynamicSquadCtrl
     {
+        private var DEFAULT_SQUAD_ICON_X:Number;
+
         private var cfg:CStatisticForm;
+
+        private var _isLeftPanel:Boolean;
+        private var _squadIcon:BattleAtlasSprite;
 
         public function DynamicSquadCtrlXvm(isLeftPanel:Boolean, squadStatus:SquadInviteStatusView, squadIcon:BattleAtlasSprite,
             squadAcceptBt:BattleButton, squadAddBt:BattleButton, hit:Sprite, noSound:BattleAtlasSprite = null)
         {
             //Logger.add("DynamicSquadCtrl");
             super(squadStatus, squadIcon, squadAcceptBt, squadAddBt, hit, noSound);
+
+            _isLeftPanel = isLeftPanel;
+            _squadIcon = squadIcon;
+
+            DEFAULT_SQUAD_ICON_X = squadIcon.x;
 
             cfg = Config.config.statisticForm;
 
@@ -33,14 +43,34 @@ package com.xvm.battle.fullStats
                 squadIcon.alpha = 0;
             }
 
-            /*
-    // X offset for allies squad icons
-    // Cмещение по оси X значка взвода союзников
-    "squadIconOffsetXLeft": 0,
-    // X offset for enemies squad icons field
-    // Cмещение по оси X значка взвода противников
-    "squadIconOffsetXRight": 0,
-    */
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            alignTextFields();
+        }
+
+        override protected function onDispose():void
+        {
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            super.onDispose();
+        }
+
+        // PRIVATE
+
+        private function alignTextFields():void
+        {
+            if (_isLeftPanel)
+            {
+                _squadIcon.x = DEFAULT_SQUAD_ICON_X + cfg.squadIconOffsetXLeft;
+            }
+            else
+            {
+                _squadIcon.x = DEFAULT_SQUAD_ICON_X - cfg.squadIconOffsetXRight;
+            }
+        }
+
+        private function onConfigLoaded():void
+        {
+            cfg = Config.config.statisticForm;
+            alignTextFields();
         }
     }
 }
