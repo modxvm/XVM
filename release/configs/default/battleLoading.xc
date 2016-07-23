@@ -3,6 +3,15 @@
  * Параметры экрана загрузки боя.
  */
 {
+  "templates": {
+    // Clan icon definition.
+    // Шаблон иконки клана.
+    "clanIcon": {
+      "enabled": true,
+      "x": 65, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90,
+      "src": "{{clanicon}}"
+    }
+  },
   "battleLoading": {
     // Format of clock on the Battle Loading Screen.
     // Формат часов на экране загрузки боя.
@@ -83,10 +92,12 @@
     // Set of formats for left panel (extended format supported, see above)
     // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
     "extraFieldsLeft": [
+      ${"templates.clanIcon"}
     ],
     // Set of formats for right panel (extended format supported, see above)
     // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
     "extraFieldsRight": [
+      ${"templates.clanIcon"}
     ]
   }
 }
