@@ -32,11 +32,12 @@ package com.xvm.types.cfg
         public var fragsFieldWidthLeft:*;
         public var fragsFieldOffsetXRight:*;
         public var fragsFieldWidthRight:*;
-        public var clanIcon:CClanIcon;
         public var formatLeftNick:String;
         public var formatLeftVehicle:String;
         public var formatRightNick:String;
         public var formatRightVehicle:String;
+        public var formatLeftFrags:String;
+        public var formatRightFrags:String;
         public var extraFieldsLeft:Array;
         public var extraFieldsRight:Array;
 
@@ -70,6 +71,15 @@ package com.xvm.types.cfg
             fragsFieldWidthLeft = Macros.FormatNumberGlobal(fragsFieldWidthLeft, 43);
             fragsFieldOffsetXRight = Macros.FormatNumberGlobal(fragsFieldOffsetXRight, 0);
             fragsFieldWidthRight = Macros.FormatNumberGlobal(fragsFieldWidthRight, 43);
+            // do not process
+            //formatLeftNick
+            //formatLeftVehicle
+            //formatRightNick
+            //formatRightVehicle
+            //formatLeftFrags
+            //formatRightFrags
+            //extraFieldsLeft
+            //extraFieldsRight
         }
     }
 }

@@ -94,6 +94,12 @@
     // Display format for the right panel (macros allowed, see macros.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
     "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}",
+    // Display format for the left panel (macros allowed, see macros.txt).
+    // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
+    "formatLeftFrags": "{{frags}}",
+    // Display format for the right panel (macros allowed, see macros.txt).
+    // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
+    "formatRightFrags": "{{frags}}",
     // TODO
     // Extra fields. Fields are placed one above the other.
     // Дополнительные поля. Поля располагаются друг над другом.

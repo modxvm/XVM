@@ -18,21 +18,22 @@ package com.xvm.types.cfg
         public var squadIconOffsetXLeft:*;
         public var squadIconOffsetXRight:*;
         public var nameFieldOffsetXLeft:*;
-        public var nameFieldWidthDeltaLeft:*;
         public var nameFieldOffsetXRight:*;
+        public var nameFieldWidthDeltaLeft:*;
         public var nameFieldWidthDeltaRight:*;
         public var vehicleFieldOffsetXLeft:*;
-        public var vehicleFieldWidthDeltaLeft:*;
         public var vehicleFieldOffsetXRight:*;
+        public var vehicleFieldWidthDeltaLeft:*;
         public var vehicleFieldWidthDeltaRight:*;
         public var vehicleIconOffsetXLeft:*;
         public var vehicleIconOffsetXRight:*;
-        public var clanIcon:CClanIcon;
         public var darkenNotReadyIcon:*;
         public var formatLeftNick:String;
-        public var formatLeftVehicle:String;
         public var formatRightNick:String;
+        public var formatLeftVehicle:String;
         public var formatRightVehicle:String;
+        public var formatLeftFrags:String;
+        public var formatRightFrags:String;
         public var extraFieldsLeft:Array;
         public var extraFieldsRight:Array;
 

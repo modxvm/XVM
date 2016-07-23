@@ -6,16 +6,25 @@ package com.xvm.battle.fullStats
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
+    import com.xvm.battle.events.*;
+    import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
     import flash.text.*;
+    import flash.geom.*;
+    import net.wg.data.constants.*;
     import net.wg.gui.battle.components.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
     import net.wg.gui.battle.views.stats.*;
+    import net.wg.gui.battle.views.stats.constants.*;
+    import net.wg.infrastructure.interfaces.*;
     import scaleform.gfx.*;
 
     public class StatsTableItemXvm extends StatsTableItem
     {
         private static const FIELD_HEIGHT:int = 26;
+
+        private static const INVALIDATE_PLAYER_STATE:uint = 1 << 15;
 
         private var DEFAULT_PLAYER_NAME_X:Number;
         private var DEFAULT_PLAYER_NAME_WIDTH:Number;
@@ -34,6 +43,10 @@ package com.xvm.battle.fullStats
         private var _fragsTF:TextField;
         private var _vehicleIcon:BattleAtlasSprite;
         private var _vehicleTypeIcon:BattleAtlasSprite;
+        private var _icoIGR:BattleAtlasSprite;
+        private var _isIGR:Boolean = false;
+
+        private var _vehicleID:Number = NaN;
 
         public function StatsTableItemXvm(isLeftPanel:Boolean, playerNameTF:TextField, vehicleNameTF:TextField, fragsTF:TextField, deadBg:BattleAtlasSprite,
             vehicleTypeIcon:BattleAtlasSprite, icoIGR:BattleAtlasSprite, vehicleIcon:BattleAtlasSprite, vehicleLevelIcon:BattleAtlasSprite,
@@ -45,6 +58,7 @@ package com.xvm.battle.fullStats
             _isLeftPanel = isLeftPanel;
             _playerNameTF = playerNameTF;
             _vehicleNameTF = vehicleNameTF;
+            _icoIGR = icoIGR;
             _fragsTF = fragsTF;
             _vehicleIcon = vehicleIcon;
             _vehicleTypeIcon = vehicleTypeIcon;
@@ -100,12 +114,13 @@ package com.xvm.battle.fullStats
 
             if (cfg.fragsFieldShowBorder)
             {
-                fragsTF.visible = true;
                 fragsTF.border = true;
                 fragsTF.borderColor = 0xFF0000;
             }
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
             alignTextFields();
 
             /*
@@ -119,7 +134,113 @@ package com.xvm.battle.fullStats
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
+            Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
             super.onDispose();
+        }
+
+        override public function setPlayerName(userProps:IUserProps):void
+        {
+            super.setPlayerName(userProps);
+            _vehicleID = BattleState.getVehicleID(userProps.userName);
+        }
+
+        override public function setIsIGR(isIGR:Boolean):void
+        {
+            _isIGR = isIGR;
+        }
+
+        override protected function draw():void
+        {
+            super.draw();
+
+            var updatePlayerNameField:Boolean = false;
+            var updateVehicleNameField:Boolean = false;
+            var updateFragsField:Boolean = false;
+            var updateIgr:Boolean = false;
+            var needAlign:Boolean = false;
+
+            if (isInvalid(FullStatsValidationType.USER_PROPS))
+            {
+                updatePlayerNameField = true;
+            }
+            if (isInvalid(FullStatsValidationType.VEHICLE_NAME))
+            {
+                updateVehicleNameField = true;
+                updateIgr = true;
+            }
+            if (isInvalid(FullStatsValidationType.FRAGS))
+            {
+                updateFragsField = true;
+            }
+            if (isInvalid(FullStatsValidationType.IS_IGR))
+            {
+                updateIgr = true;
+                needAlign = true;
+            }
+            if (isInvalid(INVALIDATE_PLAYER_STATE || FullStatsValidationType.COLORS))
+            {
+                updatePlayerNameField = true;
+                updateVehicleNameField = true;
+                updateFragsField = true;
+            }
+
+            if (updatePlayerNameField || updateVehicleNameField || updateFragsField)
+            {
+                var playerState:VOPlayerState = BattleState.get(_vehicleID);
+                if (playerState)
+                {
+                    if (updatePlayerNameField)
+                    {
+                        _playerNameTF.visible = true;
+                        _playerNameTF.htmlText = Macros.FormatString(_isLeftPanel ? cfg.formatLeftNick : cfg.formatRightNick, playerState);
+                    }
+                    if (updateVehicleNameField)
+                    {
+                        _vehicleNameTF.visible = true;
+                        _vehicleNameTF.htmlText = Macros.FormatString(_isLeftPanel ? cfg.formatLeftVehicle : cfg.formatRightVehicle, playerState);
+                    }
+                    if (updateFragsField)
+                    {
+                        _fragsTF.visible = true;
+                        _fragsTF.htmlText = Macros.FormatString(_isLeftPanel ? cfg.formatLeftFrags : cfg.formatRightFrags, playerState);
+                    }
+                }
+            }
+            if (updateIgr)
+            {
+                if (_isIGR)
+                {
+                    if (_isLeftPanel)
+                    {
+                        var bounds:Rectangle = _vehicleNameTF.getCharBoundaries(0);
+                        _icoIGR.x = _vehicleNameTF.x + (bounds ? bounds.x : 0) - this._icoIGR.width >> 0;
+                    }
+                    else
+                    {
+                        _icoIGR.x = this._vehicleNameTF.x - this._icoIGR.width >> 0;
+                    }
+                }
+            }
+        }
+
+        // XVM events handlers
+
+        private function onConfigLoaded():void
+        {
+            cfg = Config.config.statisticForm;
+            alignTextFields();
+        }
+
+        private function onPlayerStateChanged(e:PlayerStateEvent):void
+        {
+            invalidate(INVALIDATE_PLAYER_STATE);
+        }
+
+        private function onStatLoaded():void
+        {
+            // TODO if (_vehicleID in updatedPlayers)
+            invalidate(INVALIDATE_PLAYER_STATE);
         }
 
         // PRIVATE
@@ -148,12 +269,6 @@ package com.xvm.battle.fullStats
                 _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
-        }
-
-        private function onConfigLoaded():void
-        {
-            cfg = Config.config.statisticForm;
-            alignTextFields();
         }
     }
 }

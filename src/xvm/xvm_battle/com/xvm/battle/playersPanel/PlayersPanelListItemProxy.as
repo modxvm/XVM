@@ -38,12 +38,12 @@ package com.xvm.battle.playersPanel
         private static const VEHICLE_ICON_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 17;
         private static const VEHICLE_LEVEL_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 47;
 
-        public static var INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
-        public static var INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
-        public static var INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
-        public static var INVALIDATE_UPDATE_POSITIONS:String = "UPDATE_POSITIONS";
+        public static const INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
+        public static const INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
+        public static const INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
+        public static const INVALIDATE_UPDATE_POSITIONS:String = "UPDATE_POSITIONS";
 
-        private static var MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED:String = "MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED";
+        private static const MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED:String = "MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED";
 
         private static var s_maxPlayerNameTextWidthLeft:Number = 0;
         private static var s_maxPlayerNameTextWidthRight:Number = 0;
