@@ -11,6 +11,9 @@ package com.xvm.battle.fullStats
             //Logger.add("UI_fullStats");
             super();
             this.xfw_tableCtrl = new FullStatsTableCtrlXvm(this.statsTable, this);
+
+            // Components
+            new WinChances(this); // Winning chance info above players list. // TODO: replace with ExtraField
         }
     }
 }

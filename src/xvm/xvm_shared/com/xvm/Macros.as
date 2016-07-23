@@ -335,7 +335,7 @@ package com.xvm
                     var part:String = parts[i];
                     var idx:int = part.indexOf("}}");
                     if (idx == -1)
-                        {
+                    {
                         res += "{{" + part;
                     }
                     else
