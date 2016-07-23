@@ -58,7 +58,7 @@ package com.xvm.lobby.online.OnlineServers
 
         private function currentServerCallback(name:String):void
         {
-            currentServer = StringUtils.startsWith(name, "WOT ") ? name.substring(4) : name;
+            currentServer = StringUtils.startsWith(name, "WOT ") ? name.slice(4) : name;
         }
 
         private function get_x_offset():int

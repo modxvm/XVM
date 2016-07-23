@@ -162,9 +162,9 @@ package com.xvm
         {
             if (str)
             {
-                if (XfwUtils.startsWith(str.toLowerCase(), "img://gui/"))
+                if (str.slice(0, 10).toLowerCase() == "img://gui/")
                     return "../" + str.slice(10);
-                return "../../" + Utils.fixImgTag(str).split("img://").join("");
+                return "../../" + Utils.fixImgTag(str).slice(6);
             }
             return null;
         }

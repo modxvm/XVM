@@ -123,10 +123,10 @@ package com.xvm
             // key: "ussr:IS-3"
             var n:int = icon.lastIndexOf("/");
             if (n > 0)
-                icon = icon.substring(n + 1);
+                icon = icon.slice(n + 1);
             n = icon.indexOf(".");
             if (n > 0)
-                icon = icon.substring(0, n);
+                icon = icon.slice(0, n);
             icon = icon.replace("-", ":");
             return vehicles[vehiclesMapKey[icon]];
         }
