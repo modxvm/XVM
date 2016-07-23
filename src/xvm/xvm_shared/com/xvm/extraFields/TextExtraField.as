@@ -32,6 +32,7 @@ package com.xvm.extraFields
         private var _widthValue:Number = NaN;
         private var _heightValue:Number = NaN;
         private var _textValue:String = null;
+        private var _highlightValue:Boolean = false;
         private var _colorSchemeNameValue:String = null;
         private var _keyHolded:Boolean = false;
 
@@ -168,12 +169,6 @@ package com.xvm.extraFields
                 _cfg.scaleY = null;
             }
 
-            value = Macros.FormatBoolean(_cfg.highlight, options, false);
-            if (Macros.IsCached(_cfg.highlights, options))
-            {
-                _cfg.highlight = value;
-            }
-
             value = Macros.FormatNumber(_cfg.borderColor, options);
             if (Macros.IsCached(_cfg.borderColor, options))
             {
@@ -196,12 +191,6 @@ package com.xvm.extraFields
                 _cfg.bgColor = null;
             }
 
-            value = Macros.Format(_cfg.format, options) || "";
-            if (Macros.IsCached(_cfg.format, options))
-            {
-                _cfg.format = value;
-            }
-
             if (_cfg.textFormat)
             {
                 if (!setupTextFormat(_cfg.textFormat, options))
@@ -217,6 +206,21 @@ package com.xvm.extraFields
 
                     _cfg.shadow = null;
                 }
+            }
+
+            value = Macros.Format(_cfg.format, options);
+            if (Macros.IsCached(_cfg.format, options))
+            {
+                _textValue = value;
+                _cfg.format = null;
+                htmlText = _textValue;
+            }
+
+            value = Macros.FormatBoolean(_cfg.highlight, options, false);
+            if (Macros.IsCached(_cfg.highlight, options))
+            {
+                _highlightValue = value;
+                _cfg.highlight = null;
             }
         }
 
@@ -471,7 +475,7 @@ package com.xvm.extraFields
                 needAlign = true;
             }
 
-            if (_bounds != bounds)
+            if (bounds && _bounds != bounds)
             {
                 _bounds = bounds;
                 needAlign = true;
@@ -482,7 +486,6 @@ package com.xvm.extraFields
             if (_cfg.x != null)
             {
                 value = Macros.FormatNumber(_cfg.x, options, 0);
-                Logger.add(_cfg.x + " => " + value + " " + (Macros.IsCached(_cfg.x, options) ? "(cached)" : "(-)"));
                 if (_xValue != value)
                 {
                     _xValue = value;
@@ -578,21 +581,19 @@ package com.xvm.extraFields
             {
                 bindToIconOffset = 0;
             }
-            if (_cfg.format != null)
+            if (_cfg.textFormat)
             {
-                if (Macros.IsCached(_cfg.format, options))
-                {
-                    value = _cfg.format;
-                }
-                else
-                {
-                    value = Macros.Format(_cfg.format, options) || "";
-                    if (Macros.IsCached(_cfg.format, options))
-                    {
-                        _cfg.format = value;
-                    }
-                }
-                value = Utils.fixImgTag(value);
+                defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
+                htmlText = _textValue;
+            }
+            if (_cfg.shadow)
+            {
+                filters = Utils.createShadowFiltersFromConfig(_cfg.shadow, options);
+            }
+            if (_cfg.format)
+            {
+                value = Macros.Format(_cfg.format, options);
+                //value = Utils.fixImgTag(value); // is required?
                 if (_textValue != value)
                 {
                     //Logger.add(_textValue + " => " + value);
@@ -600,24 +601,19 @@ package com.xvm.extraFields
                     htmlText = _textValue;
                     needAlign = true;
                 }
-                if (_cfg.highlight && _getColorSchemeName != null)
+            }
+            if (_getColorSchemeName != null)
+            {
+                if (_cfg.highlight)
                 {
-                    var highlight:Boolean = _cfg.highlight is Boolean ? _cfg.highlight : XfwUtils.toBool(Macros.Format(_cfg.highlight, options), false);
-                    value = highlight ? _getColorSchemeName(options) : null;
-                    if (_colorSchemeNameValue != value)
-                    {
-                        _colorSchemeNameValue = value;
-                        textColor = App.colorSchemeMgr.getScheme(value).rgb;
-                    }
+                    _highlightValue = _cfg.highlight is Boolean ? _cfg.highlight : Macros.FormatBoolean(_cfg.highlight, options, false);
                 }
-            }
-            if (_cfg.textFormat)
-            {
-                defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
-            }
-            if (_cfg.shadow)
-            {
-                filters = Utils.createShadowFiltersFromConfig(_cfg.shadow, options);
+                value = _highlightValue ? _getColorSchemeName(options) : null;
+                if (_colorSchemeNameValue != value)
+                {
+                    _colorSchemeNameValue = value;
+                    textColor = App.colorSchemeMgr.getScheme(value).rgb;
+                }
             }
 
             if (needAlign)

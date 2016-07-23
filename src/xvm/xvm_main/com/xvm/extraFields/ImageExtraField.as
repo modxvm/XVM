@@ -32,6 +32,8 @@ package com.xvm.extraFields
         private var _offsetY:Number = 0;
         private var _widthValue:Number = NaN;
         private var _heightValue:Number = NaN;
+        private var _srcValue:String = null;
+        private var _highlightValue:Boolean = false;
         private var _colorSchemeNameValue:String = null;
         private var _keyHolded:Boolean = false;
 
@@ -160,21 +162,32 @@ package com.xvm.extraFields
                 _cfg.scaleY = null;
             }
 
-            value = Macros.FormatBoolean(_cfg.highlight, options, false);
-            if (Macros.IsCached(_cfg.highlights, options))
-            {
-                _cfg.highlight = value;
-            }
-
             value = Macros.Format(_cfg.src, options) || "";
             if (Macros.IsCached(_cfg.src, options))
             {
-                _cfg.src = value;
+                _srcValue = value;
+                _cfg.src = null;
+                if (_srcValue != null && source != _srcValue)
+                {
+                    //Logger.add("source: " + source + " => " + _srcValue);
+                    source = _srcValue;
+                }
+            }
+
+            value = Macros.FormatBoolean(_cfg.highlight, options, false);
+            if (Macros.IsCached(_cfg.highlight, options))
+            {
+                _highlightValue = value;
+                _cfg.highlight = null;
             }
         }
 
         public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0, bounds:Rectangle = null):void
         {
+            _bindToIconOffset = bindToIconOffset;
+            _offsetX = offsetX;
+            _offsetY = offsetY;
+
             var needAlign:Boolean = false;
 
             if (!_initialized)
@@ -184,7 +197,7 @@ package com.xvm.extraFields
                 needAlign = true;
             }
 
-            if (_bounds != bounds)
+            if (bounds && _bounds != bounds)
             {
                 _bounds = bounds;
             }
@@ -271,39 +284,33 @@ package com.xvm.extraFields
             {
                 bindToIconOffset = 0;
             }
-            _bindToIconOffset = bindToIconOffset;
-            _offsetX = offsetX;
-            _offsetY = offsetY;
-            if (_cfg.src != null)
+            if (_cfg.src)
             {
-                if (Macros.IsCached(_cfg.src, options))
+                value = Macros.Format(_cfg.src, options);
+                //value = Utils.fixImgTag(value); // is required?
+                if (_srcValue != value)
                 {
-                    value = _cfg.src;
-                }
-                else
-                {
-                    value = Macros.Format(_cfg.src, options);
-                    //Logger.add("format: " + _cfg.src + " => " + value);
-                    if (Macros.IsCached(_cfg.src, options))
+                    //Logger.add(_srcValue + " => " + value);
+                    _srcValue = value;
+                    if (_srcValue != null && source != _srcValue)
                     {
-                        _cfg.src = value;
+                        //Logger.add("source: " + source + " => " + _srcValue);
+                        source = _srcValue;
                     }
+                    //needAlign = true; // is required?
                 }
-                value = Utils.fixImgTagSrc(value);
-                if (value != null && source != value)
+            }
+            if (_getColorSchemeName != null)
+            {
+                if (_cfg.highlight)
                 {
-                    //Logger.add("source: " + source + " => " + value);
-                    source = value;
+                    _highlightValue = _cfg.highlight is Boolean ? _cfg.highlight : Macros.FormatBoolean(_cfg.highlight, options, false);
                 }
-                if (_cfg.highlight && _getColorSchemeName != null)
+                value = _highlightValue ? _getColorSchemeName(options) : null;
+                if (_colorSchemeNameValue != value)
                 {
-                    var highlight:Boolean = _cfg.highlight is Boolean ? _cfg.highlight : XfwUtils.toBool(Macros.Format(_cfg.highlight, options), false);
-                    value = highlight ? _getColorSchemeName(options) : null;
-                    if (_colorSchemeNameValue != value)
-                    {
-                        _colorSchemeNameValue = value;
-                        this.transform.colorTransform = App.colorSchemeMgr.getScheme(value).colorTransform;
-                    }
+                    _colorSchemeNameValue = value;
+                    this.transform.colorTransform = App.colorSchemeMgr.getScheme(value).colorTransform;
                 }
             }
 
