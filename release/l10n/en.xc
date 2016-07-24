@@ -42,9 +42,6 @@
     "Total": "Total",
     "Last": "Last",
 
-    // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
-
     // Capture
     "enemyBaseCapture": "Base{0} capture by allies!",
     "enemyBaseCaptured": "Base{0} captured by allies!",
