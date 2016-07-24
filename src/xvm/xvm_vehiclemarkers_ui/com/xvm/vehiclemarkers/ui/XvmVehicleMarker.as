@@ -135,7 +135,7 @@ package com.xvm.vehiclemarkers.ui
                 {
                     playerState.update({
                         damageInfo: new VODamageInfo({
-                            damageDelta: playerState.curHealth - Math.max(newHealth, 0),
+                            damageDelta: playerState.getCurHealthValue() - Math.max(newHealth, 0),
                             damageType: damageType,
                             damageFlag: damageFlag
                         }),
