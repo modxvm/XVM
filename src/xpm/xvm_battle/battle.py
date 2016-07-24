@@ -228,7 +228,7 @@ class Battle(object):
     def onVehicleFeedbackReceived(self, eventID, vehicleID, value):
         if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
             (newHealth, aInfo, attackReasonID) = value
-            if aInfo.vehicleID == BigWorld.player().playerVehicleID:
+            if aInfo is not None and aInfo.vehicleID == BigWorld.player().playerVehicleID:
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_HITLOG_DATA,
                            vehicleID,
                            newHealth,
