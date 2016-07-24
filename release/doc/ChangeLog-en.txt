@@ -65,6 +65,7 @@
   * removed option "hotkeys"/"battleLabelsHotKeys" - not required
   * removed option "battle"/"allowLabelsOnBattleInterface" - not required
   * changed anchor for "bindToIcon" option in the extra fields
+  * changed hitlog macros - added "hitlog." prefix (see macros.txt)
 
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch

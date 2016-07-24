@@ -31,7 +31,7 @@ package com.xvm.battle.fullStats
 
                 if (Config.networkServicesSettings.chanceLive)
                 {
-                    Xvm.addEventListener(PlayerStateEvent.DEAD, updateChanceText);
+                    Xvm.addEventListener(PlayerStateEvent.VEHICLE_DESTROYED, updateChanceText);
                 }
 
                 // Load battle stat

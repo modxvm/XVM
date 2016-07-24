@@ -21,7 +21,7 @@ package com.xvm.battle
         {
             for each (var playerState:VOPlayerState in BattleState.playersDataVO.playerStates)
             {
-                _RegisterPlayerData(Macros.Players, playerState);
+                Macros.RegisterMinimalMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isAlly);
             }
         }
 
@@ -80,6 +80,30 @@ package com.xvm.battle
                     case "tanks": return Number(BattleState.captureBarDataVO.vehiclesCount);
                     case "time":  return BattleState.captureBarDataVO.timeLeft;
                     case "time-sec": return Number(BattleState.captureBarDataVO.timeLeftSec);
+                }
+                return null;
+            }
+
+            // Hitlog
+
+            // {{hitlog.n}}
+            // {{hitlog.dmg-total}}
+            // {{hitlog.dmg-total-color}}
+            // {{hitlog.dmg-avg}}
+            // {{hitlog.dead}}
+            // {{hitlog.n-player}}
+            // {{hitlog.dmg-player}}
+            m_globals["hitlog"] = function(o:VOPlayerState):*
+            {
+                switch (o.getSubname())
+                {
+                    case "n": return BattleState.hitlogTotalHits;
+                    case "dmg-total": return BattleState.hitlogTotalDamage;
+                    case "dmg-total-color": return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, "#", false);
+                    case "dmg-avg": return BattleState.hitlogTotalHits == 0 ? NaN : Math.round(BattleState.hitlogTotalDamage / BattleState.hitlogTotalHits);
+                    case "dead": return o.isBlown ? Config.config.hitLog.blowupMarker : o.isDead ? Config.config.hitLog.deadMarker : null;
+                    case "n-player": return o.hitlogCount;
+                    case "dmg-player": return o.hitlogDamage;
                 }
                 return null;
             }
@@ -145,190 +169,175 @@ package com.xvm.battle
                 m_globals["x-drowning"] = null;
                 m_globals["x-spotted"] = null;
             }
-        }
 
-        private static function _RegisterPlayerData(m_dict:Object, playerState:VOPlayerState):void
-        {
-            if (!m_dict.hasOwnProperty(playerState.playerName))
-                m_dict[playerState.playerName] = {};
-            var pdata:Object = m_dict[playerState.playerName];
+            // Dynamic macros
 
-            Macros.RegisterMinimalMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isAlly);
+            // {{ready}}
+            m_globals["ready"] = function(o:IVOMacrosOptions):String
+            {
+                return o.isReady ? 'ready' : null;
+            }
+            // {{alive}}
+            m_globals["alive"] = function(o:IVOMacrosOptions):String
+            {
+                return o.isAlive ? 'alive' : null;
+            }
+            // {{selected}}
+            m_globals["selected"] = function(o:IVOMacrosOptions):String
+            {
+                return o.isSelected ? 'sel' : null;
+            }
+            // {{player}}
+            m_globals["player"] = function(o:IVOMacrosOptions):String
+            {
+                return o.isCurrentPlayer ? 'pl' : null;
+            }
+            // {{tk}}
+            m_globals["tk"] = function(o:IVOMacrosOptions):String
+            {
+                return o.isTeamKiller ? 'tk' : null;
+            }
+            // {{squad}}
+            m_globals["squad"] = function(o:IVOMacrosOptions):String
+            {
+                return o.isSquadPersonal ? 'sq' : null;
+            }
+            // {{squad-num}}
+            m_globals["squad-num"] = function(o:IVOMacrosOptions):Number
+            {
+                return o.squadIndex <= 0 ? NaN : o.squadIndex;
+            }
+            // {{position}}
+            m_globals["position"] = function(o:IVOMacrosOptions):Number
+            {
+                return o.position <= 0 ? NaN : o.position;
+            }
 
             // stats
 
             // {{frags}}
-            pdata["frags"] = function(o:VOPlayerState):Number
+            m_globals["frags"] = function(o:VOPlayerState):Number
             {
                 return o.frags == 0 ? NaN : o.frags;
             }
 
             // {{marksOnGun}}
-            pdata["marksOnGun"] = function(o:VOPlayerState):String
+            m_globals["marksOnGun"] = function(o:VOPlayerState):String
             {
                 return isNaN(o.marksOnGun) || o.vehicleData.level < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun);
             }
 
             // spotted
 
-            var vdata:VOVehicleData = playerState.vehicleData;
-            var isArty:Boolean = (vdata && vdata.vclass == VehicleType.SPG);
-
             // {{spotted}}
-            pdata["spotted"] = function(o:VOPlayerState):String
+            m_globals["spotted"] = function(o:VOPlayerState):String
             {
-                return Utils.getSpottedText(o.getSpottedStatus(), isArty);
+                return Utils.getSpottedText(o.getSpottedStatus(), o.isSPG);
             }
 
             // {{c:spotted}}
-            pdata["c:spotted"] = function(o:VOPlayerState):String
+            m_globals["c:spotted"] = function(o:VOPlayerState):String
             {
-                return getSpottedColorValue(o.getSpottedStatus(), isArty);
+                return getSpottedColorValue(o.getSpottedStatus(), o.isSPG);
             }
 
             // {{a:spotted}}
-            pdata["a:spotted"] = function(o:VOPlayerState):Number
+            m_globals["a:spotted"] = function(o:VOPlayerState):Number
             {
-                return getSpottedAlphaValue(o.getSpottedStatus(), isArty);
+                return getSpottedAlphaValue(o.getSpottedStatus(), o.isSPG);
             }
 
             // hp
 
-            var getMaxHealthFunc:Function = function(o:VOPlayerState):Number
-            {
-                return isNaN(o.maxHealth) ? vdata.hpTop : o.maxHealth;
-            }
-
             var getHpRatioFunc:Function = function(o:VOPlayerState):Number
             {
-                return o.getCurrentHealth() / getMaxHealthFunc(o) * 100;
+                return o.curHealth / o.maxHealth * 100;
             }
 
             // {{hp}}
-            pdata["hp"] = function(o:VOPlayerState):Number
+            m_globals["hp"] = function(o:VOPlayerState):Number
             {
-                return o.getCurrentHealth();
+                return o.curHealth;
             }
 
             // {{hp-max}}
-            pdata["hp-max"] = getMaxHealthFunc;
+            m_globals["hp-max"] = function(o:VOPlayerState):Number
+            {
+                return o.maxHealth;
+            }
 
             // {{hp-ratio}}
-            pdata["hp-ratio"] = function(o:VOPlayerState):Number
+            m_globals["hp-ratio"] = function(o:VOPlayerState):Number
             {
-                return isNaN(o.getCurrentHealth()) ? NaN : Math.round(getHpRatioFunc(o));
+                return isNaN(o.curHealth) ? NaN : Math.round(getHpRatioFunc(o));
             }
 
             // {{c:hp}}
-            pdata["c:hp"] = function(o:VOPlayerState):String
+            m_globals["c:hp"] = function(o:VOPlayerState):String
             {
-                return isNaN(o.getCurrentHealth()) ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.getCurrentHealth());
+                return isNaN(o.curHealth) ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth);
             }
 
             // {{c:hp-ratio}}
-            pdata["c:hp-ratio"] = function(o:VOPlayerState):String
+            m_globals["c:hp-ratio"] = function(o:VOPlayerState):String
             {
-                return isNaN(o.getCurrentHealth()) ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, getHpRatioFunc(o));
+                return isNaN(o.curHealth) ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, getHpRatioFunc(o));
             }
 
             // {{a:hp}}
-            pdata["a:hp"] = function(o:VOPlayerState):Number
+            m_globals["a:hp"] = function(o:VOPlayerState):Number
             {
-                return isNaN(o.getCurrentHealth()) ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.getCurrentHealth());
+                return isNaN(o.curHealth) ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth);
             }
 
             // {{a:hp-ratio}}
-            pdata["a:hp-ratio"] = function(o:VOPlayerState):Number
+            m_globals["a:hp-ratio"] = function(o:VOPlayerState):Number
             {
-                return isNaN(o.getCurrentHealth()) ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, getHpRatioFunc(o));
+                return isNaN(o.curHealth) ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, getHpRatioFunc(o));
             }
 
             // dmg
 
             // {{dmg}}
-            pdata["dmg"] = function(o:VOPlayerState):Number
+            m_globals["dmg"] = function(o:VOPlayerState):Number
             {
                 return o.damageInfo.damageDelta;
             }
 
             // {{dmg-ratio}}
-            pdata["dmg-ratio"] = function(o:VOPlayerState):Number
+            m_globals["dmg-ratio"] = function(o:VOPlayerState):Number
             {
-                return isNaN(o.damageInfo.damageDelta) ? NaN : Math.round(o.damageInfo.damageDelta / getMaxHealthFunc(o) * 100);
+                return isNaN(o.damageInfo.damageDelta) ? NaN : Math.round(o.damageInfo.damageDelta / o.maxHealth * 100);
             }
 
             // {{dmg-kind}}
-            pdata["dmg-kind"] = function(o:VOPlayerState):String
+            m_globals["dmg-kind"] = function(o:VOPlayerState):String
             {
                 return o.damageInfo.damageType == null ? null : Locale.get(o.damageInfo.damageType);
             }
 
             // {{c:dmg}}
-            pdata["c:dmg"] = function(o:VOPlayerState):String
+            m_globals["c:dmg"] = function(o:VOPlayerState):String
             {
                 return XfwUtils.toHtmlColor(getDamageSystemColor(o));
             }
 
             // {{c:dmg-kind}}
-            pdata["c:dmg-kind"] = function(o:VOPlayerState):String
+            m_globals["c:dmg-kind"] = function(o:VOPlayerState):String
             {
                 return o.damageInfo.damageType == null ? null : XfwUtils.toHtmlColor(getDmgKindValue(o.damageInfo.damageType));
             }
 
             // {{sys-color-key}}
-            pdata["sys-color-key"] = function(o:VOPlayerState):String
+            m_globals["sys-color-key"] = function(o:VOPlayerState):String
             {
                 return getSystemColorKey(o);
             }
 
             // {{c:system}}
-            pdata["c:system"] = function(o:VOPlayerState):String
+            m_globals["c:system"] = function(o:VOPlayerState):String
             {
                 return XfwUtils.toHtmlColor(getSystemColor(o));
-            }
-
-            // hitlog
-
-            // {{dead}}
-            pdata["dead"] = function(o:VOPlayerState):String
-            {
-                return o.isBlown ? Config.config.hitLog.blowupMarker : o.isDead ? Config.config.hitLog.deadMarker : null;
-            }
-
-            // {{n}}
-            pdata["n"] = function(o:VOPlayerState):Number
-            {
-                return BattleState.hitlogTotalHits;
-            }
-
-            // {{dmg-total}}
-            pdata["dmg-total"] = function(o:VOPlayerState):Number
-            {
-                return BattleState.hitlogTotalDamage;
-            }
-
-            // {{c:dmg-total}}
-            pdata["c:dmg-total"] = function(o:VOPlayerState):String
-            {
-                return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, "#", false);
-            }
-
-            // {{dmg-avg}}
-            pdata["dmg-avg"] = function(o:VOPlayerState):Number
-            {
-                return BattleState.hitlogTotalHits == 0 ? NaN : Math.round(BattleState.hitlogTotalDamage / BattleState.hitlogTotalHits);
-            }
-
-            // {{n-player}}
-            pdata["n-player"] = function(o:VOPlayerState):Number
-            {
-                return o.hitlogCount;
-            }
-
-            // {{dmg-player}}
-            pdata["dmg-player"] = function(o:VOPlayerState):Number
-            {
-                return o.hitlogDamage;
             }
         }
 

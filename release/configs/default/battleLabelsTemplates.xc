@@ -16,11 +16,19 @@
      │                            │ включить/отключить создание полей: true or false (по-умолчанию: false)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "updateEvent"              │ events on which field updates, use with dynamic macros; to disable define null value or delete parameter;
-     │                            │ allowed events: "ON_BATTLE_STATE_CHANGED", "ON_PLAYERS_HP_CHANGED", "ON_VEHICLE_DESTROYED", "ON_CURRENT_VEHICLE_DESTROYED", "ON_MODULE_CRITICAL", "ON_MODULE_DESTROYED", "ON_MODULE_REPAIRED"
      │                            │ multiple events separated by comma
      │                            │ события по которому обновляется поле, используйте динамические макросы; для отключения используйте значение null или удалите параметр;
-     │                            │ доступные события: "ON_BATTLE_STATE_CHANGED", "ON_PLAYERS_HP_CHANGED", "ON_VEHICLE_DESTROYED", "ON_CURRENT_VEHICLE_DESTROYED", "ON_MODULE_CRITICAL", "ON_MODULE_DESTROYED", "ON_MODULE_REPAIRED"
      │                            │ несколько событий разделяются запятой
+     │                            │ доступные события:
+     │                            │ allowed events:
+                                      ON_BATTLE_STATE_CHANGED
+                                      ON_PLAYERS_HP_CHANGED
+                                      ON_VEHICLE_DESTROYED
+                                      ON_CURRENT_VEHICLE_DESTROYED
+                                      ON_MODULE_CRITICAL
+                                      ON_MODULE_DESTROYED
+                                      ON_MODULE_REPAIRED
+                                      ON_DAMAGE_CAUSED
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
      │                            │ when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
@@ -149,6 +157,15 @@ quality, inner, knockout, hideObject
      │                            │ отображаемые данные в текстовых полях (доступно использование HTML и макросов) (по-умолчанию: "")
      └────────────────────────────┴──────────────────────────────────────────────────────────────────────────
     */
+    "hitlog": {
+      "enabled": true,
+      "updateEvent": "ON_DAMAGE_CAUSED",
+      "x": 270,
+      "y": 40,
+      "width": 500,
+      "height": 1000,
+      "format": "{{hitlog-header}}\n{{hitlog-body}}"
+    },
     "winChance": {
       "enabled": false,
       "updateEvent": "ON_VEHICLE_DESTROYED",

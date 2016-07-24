@@ -390,7 +390,7 @@ package com.xvm
 
             // Process tag
             var playerName:String = options ? options.playerName : null;
-            var pdata:* = playerName ? m_players[playerName] : m_globals;
+            var pdata:* = playerName ? m_players[playerName] || m_globals : m_globals;
             if (pdata == null)
                 return "";
 
@@ -843,6 +843,7 @@ package com.xvm
             // {{clanicon}}
             pdata["clanicon"] = function():String
             {
+                // TODO: make static macro
                 return Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
             }
 
@@ -878,25 +879,6 @@ package com.xvm
             pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
             // {{hp-max}}
             pdata["hp-max"] = vdata.hpTop;
-
-            // Dynamic macros
-
-            // {{ready}}
-            pdata["ready"] = function(o:IVOMacrosOptions):String { return o.isReady ? 'ready' : null; }
-            // {{alive}}
-            pdata["alive"] = function(o:IVOMacrosOptions):String { return o.isAlive ? 'alive' : null; }
-            // {{selected}}
-            pdata["selected"] = function(o:IVOMacrosOptions):String { return o.isSelected ? 'sel' : null; }
-            // {{player}}
-            pdata["player"] = function(o:IVOMacrosOptions):String { return o.isCurrentPlayer ? 'pl' : null; }
-            // {{tk}}
-            pdata["tk"] = function(o:IVOMacrosOptions):String { return o.isTeamKiller ? 'tk' : null; }
-            // {{squad}}
-            pdata["squad"] = function(o:IVOMacrosOptions):String { return o.isSquadPersonal ? 'sq' : null; }
-            // {{squad-num}}
-            pdata["squad-num"] = function(o:IVOMacrosOptions):Number { return o.squadIndex <= 0 ? NaN : o.squadIndex; }
-            // {{position}}
-            pdata["position"] = function(o:IVOMacrosOptions):Number { return o.position <= 0 ? NaN : o.position; }
         }
 
         private static function _RegisterGlobalStatisticsMacros():void

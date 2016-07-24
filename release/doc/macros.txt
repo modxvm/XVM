@@ -67,17 +67,10 @@ Legend:
 │ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
 │ S │ {{turret}}         │   │   │   │   │ X │   │   │   │ stock turret marker
 │ D │ {{dmg}}            │   │   │   │   │ X │ X │   │   │ damage health points / last hit value
-│ D │ {{dmg-ratio}}      │   │   │   │   │ X │   │   │   │ damage health ratio (without '%' sign)
+│ D │ {{dmg-ratio}}      │   │   │   │   │ X │ X │   │   │ damage health ratio (without '%' sign)
 │ D │ {{dmg-kind}}       │   │   │   │   │ X │ X │   │   │ damage kind (attack, fire, ramming, ...)
-│ D │ {{c:dmg}}          │   │   │   │   │ X │   │   │   │ color depending on damage source
+│ D │ {{c:dmg}}          │   │   │   │   │ X │ X │   │   │ color depending on damage source
 │ D │ {{c:dmg-kind}}     │   │   │   │   │ X │ X │   │   │ color depending on damage kind
-│ D │ {{dead}}           │   │   │   │   │   │ X │   │   │ tank's death marker
-│ D │ {{n}}              │   │   │   │   │   │ X │   │   │ total number of hits
-│ D │ {{dmg-total}}      │   │   │   │   │   │ X │   │   │ total sum of hits
-│ D │ {{c:dmg-total}}    │   │   │   │   │   │ X │   │   │ color depending on total sum of hits
-│ D │ {{dmg-avg}}        │   │   │   │   │   │ X │   │   │ average damage during the battle
-│ D │ {{n-player}}       │   │   │   │   │   │ X │   │   │ number of hits for each player
-│ D │ {{dmg-player}}     │   │   │   │   │   │ X │   │   │ sum of hits for each player
 │ D │ {{py:f()}}         │ X │ X │ X │ X │ X │ X │ X │ X │ dynamic python function call
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────
 
@@ -185,6 +178,21 @@ Legend:
 │ {{cap.time}}     │ time left to full capture; minutes and seconds
 │ {{cap.time-sec}} │ time left to full capture; seconds only
 └──────────────────┴───────────────────────────────────────────────────────────────────────────────
+
+  Hitlog macros
+┌────────────────────────────┬─────────────────────────────────────────────────────────────────────
+│ macro                      │ Description
+├────────────────────────────┼─────────────────────────────────────────────────────────────────────
+│ {{hitlog-header}}          │ formatted hitlog header
+│ {{hitlog-body}}            │ formatted hitlog body
+│ {{hitlog.n}}               │ total number of hits
+│ {{hitlog.dmg-total}}       │ total sum of hits
+│ {{hitlog.dmg-total-color}} │ color depending on total sum of hits
+│ {{hitlog.dmg-avg}}         │ average damage during the battle
+│ {{hitlog.dead}}            │ tank's death marker
+│ {{hitlog.n-player}}        │ number of hits for each player
+│ {{hitlog.dmg-player}}      │ sum of hits for each player
+└────────────────────────────┴─────────────────────────────────────────────────────────────────────
 
   Zoom indicator macros
 ┌──────────────────┬───────────────────────────────────────────────────────────────────────────────

@@ -9,6 +9,7 @@ package com.xvm.battle.vo
     import com.xvm.battle.*;
     import com.xvm.battle.wg.*;
     import com.xfw.events.*;
+    import com.xvm.types.*;
     import com.xvm.vo.*;
     import com.xvm.battle.events.*;
     import com.xvm.types.stat.*;
@@ -186,6 +187,11 @@ package com.xvm.battle.vo
             return _vehicleData;
         }
 
+        public function get isSPG():Boolean
+        {
+            return _vehicleData ? _vehicleData.vclass = VehicleClass.SPG : false;
+        }
+
         public function get vehicleStatus():uint
         {
             return __vehicleStatus;
@@ -198,10 +204,10 @@ package com.xvm.battle.vo
             updateStatData();
             if (alive && isDead)
             {
-                eventsToDispatch[PlayerStateEvent.DEAD] = true;
+                eventsToDispatch[PlayerStateEvent.VEHICLE_DESTROYED] = true;
                 if (isCurrentPlayer)
                 {
-                    eventsToDispatch[PlayerStateEvent.SELF_DEAD] = true;
+                    eventsToDispatch[PlayerStateEvent.CURRENT_VEHICLE_DESTROYED] = true;
                 }
             }
         }
@@ -232,11 +238,6 @@ package com.xvm.battle.vo
             return isDead ? "dead" : _spottedStatus == null ? "neverSeen" : _spottedStatus;
         }
 
-        public function getCurrentHealth():Number
-        {
-            return isAlive ? curHealth : 0;
-        }
-
         public function get isBlown():Boolean
         {
             return _isBlown;
@@ -254,7 +255,7 @@ package com.xvm.battle.vo
 
         public function get curHealth():Number
         {
-            return __curHealth;
+            return isAlive ? __curHealth : 0;
         }
 
         internal function set_curHealth(value:Number):void
@@ -265,12 +266,12 @@ package com.xvm.battle.vo
                 value = 0;
             }
             __curHealth = value;
-            eventsToDispatch[PlayerStateEvent.HP_CHANGED] = true;
+            eventsToDispatch[PlayerStateEvent.PLAYERS_HP_CHANGED] = true;
         }
 
         public function get maxHealth():Number
         {
-            return _maxHealth;
+            return _maxHealth || (_vehicleData ? _vehicleData.hpTop : NaN);
         }
 
         public function get damageInfo():VODamageInfo

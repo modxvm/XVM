@@ -13,7 +13,7 @@ package com.xvm.vo
         public var key:String;
 
         public var level:int;
-        public var vclass:String;
+        private var _vclass:String;
         public var nation:String;
         public var premium:Boolean;
         public var isReserved:Boolean;
@@ -56,9 +56,21 @@ package com.xvm.vo
 
         // PROPERTIES
 
+        public function get vclass():String
+        {
+            return _vclass;
+        }
+
+        public function set vclass(value:String):void
+        {
+            _vclass = value;
+            _vtype = VClassToVType(value);
+        }
+
+        private var _vtype:String;
         public function get vtype():String
         {
-            return VClassToVType(vclass);
+            return _vtype;
         }
 
         public function get sysname():String

@@ -1,24 +1,22 @@
-package com.xvm.types.cfg {
-import com.xfw.ICloneable;
+/**
+ * XVM Config
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
+package com.xvm.types.cfg
+{
+    import com.xfw.*;
 
-public class CHpLeft implements ICloneable {
+    public dynamic class CHpLeft implements ICloneable
+    {
+        public var header:String;
+        public var format:String;
 
-    public var enabled : Boolean;
-    public var header : String;
-    public var format : String;
-
-
-    public function clone():* {
-        var result : CHpLeft = new CHpLeft();
-        result.enabled = enabled;
-        result.header = header;
-        result.format = format;
-
-        return result;
+        public function clone():*
+        {
+            var result:CHpLeft = new CHpLeft();
+            result.header = header;
+            result.format = format;
+            return result;
+        }
     }
-
-    public function toString():String {
-        return "CHpLeft string representation: enabled " + enabled + ", header " + header + ", format " + format;
-    }
-}
 }

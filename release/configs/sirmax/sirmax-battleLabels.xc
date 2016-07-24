@@ -1,9 +1,12 @@
 {
   "formats": [
     {
-      //"enabled": false,
-      //"borderColor": "0xFFFF00",
-      "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test" }
+      "x": 235,
+      "y": 0,
+      "width": 500,
+      "height": 230,
+      "screenVAlign": "bottom",
+      "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.hitlog" }
     },
     {
       //"enabled": false,

@@ -34,19 +34,22 @@ package com.xvm.extraFields
                                 Xvm.addEventListener(PlayerStateEvent.CHANGED, field.updateOnEvent);
                                 break;
                             case "ON_PLAYERS_HP_CHANGED":
-                                Xvm.addEventListener(PlayerStateEvent.HP_CHANGED, field.updateOnEvent);
+                                Xvm.addEventListener(PlayerStateEvent.PLAYERS_HP_CHANGED, field.updateOnEvent);
                                 break;
                             case "ON_VEHICLE_DESTROYED":
-                                Xvm.addEventListener(PlayerStateEvent.DEAD, field.updateOnEvent);
+                                Xvm.addEventListener(PlayerStateEvent.VEHICLE_DESTROYED, field.updateOnEvent);
                                 break;
                             case "ON_CURRENT_VEHICLE_DESTROYED":
-                                Xvm.addEventListener(PlayerStateEvent.SELF_DEAD, field.updateOnEvent);
+                                Xvm.addEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, field.updateOnEvent);
                                 break;
                             case "ON_MODULE_DESTROYED":
                                 Xvm.addEventListener(PlayerStateEvent.MODULE_DESTROYED, field.updateOnEvent);
                                 break;
                             case "ON_MODULE_REPAIRED":
                                 Xvm.addEventListener(PlayerStateEvent.MODULE_REPAIRED, field.updateOnEvent);
+                                break;
+                            case "ON_DAMAGE_CAUSED":
+                                Xvm.addEventListener(PlayerStateEvent.DAMAGE_CAUSED, field.updateOnEvent);
                                 break;
                         }
                     }

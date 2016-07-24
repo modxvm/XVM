@@ -22,14 +22,12 @@ package com.xvm.battle.battleLabels
     public class BattleLabels extends UIComponent
     {
         private var _extraFields:ExtraFields = null;
-        private var _hitLogExtraFields : ExtraFields;
 
         public function BattleLabels()
         {
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
-            Xvm.addEventListener(PlayerStateEvent.DAMAGE_CAUSED, onDamageCausedHandler);
             createExtraFields();
         }
 
@@ -37,7 +35,6 @@ package com.xvm.battle.battleLabels
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
-            Xvm.removeEventListener(PlayerStateEvent.DAMAGE_CAUSED, onDamageCausedHandler);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
             removeExtraFields();
             super.onDispose();
@@ -51,13 +48,6 @@ package com.xvm.battle.battleLabels
             {
                 update();
             }
-            if (_hitLogExtraFields)
-            {
-                removeChild(_hitLogExtraFields);
-                _hitLogExtraFields.dispose();
-                _hitLogExtraFields = null;
-            }
-
         }
 
         // PRIVATE
@@ -77,12 +67,6 @@ package com.xvm.battle.battleLabels
         {
             _extraFields.updateBounds(new Rectangle(0, 0, App.appWidth, App.appHeight));
             invalidate(InvalidationType.POSITION);
-        }
-
-        private function onDamageCausedHandler(event:PlayerStateEvent):void
-        {
-            //Logger.add("onDamageCausedHandler");
-            //_hitLogExtraFields.update(BattleState.get(event.hitVehicleID));
         }
 
         private function createExtraFields():void

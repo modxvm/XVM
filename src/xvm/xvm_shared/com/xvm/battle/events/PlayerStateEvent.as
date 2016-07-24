@@ -9,9 +9,9 @@ package com.xvm.battle.events
     public class PlayerStateEvent extends Event
     {
         public static const CHANGED:String = "PS_CHANGED";
-        public static const HP_CHANGED:String = "PS_HP_CHANGED";
-        public static const DEAD:String = "PS_DEAD";
-        public static const SELF_DEAD:String = "PS_SELF_DEAD";
+        public static const PLAYERS_HP_CHANGED:String = "PS_PLAYERS_HP_CHANGED";
+        public static const VEHICLE_DESTROYED:String = "PS_VEHICLE_DESTROYED";
+        public static const CURRENT_VEHICLE_DESTROYED:String = "PS_CURRENT_VEHICLE_DESTROYED";
         public static const MODULE_CRITICAL:String = "PS_MODULE_CRITICAL";
         public static const MODULE_DESTROYED:String = "PS_MODULE_DESTROYED";
         public static const MODULE_REPAIRED:String = "PS_MODULE_REPAIRED";

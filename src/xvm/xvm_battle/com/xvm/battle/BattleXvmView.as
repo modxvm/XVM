@@ -11,6 +11,7 @@ package com.xvm.battle
     import com.xvm.battle.battleClock.BattleClock;
     import com.xvm.battle.battleLabels.BattleLabels;
     import com.xvm.battle.elements.BattleElements;
+    import com.xvm.battle.hitlog.Hitlog;
     import com.xvm.battle.zoomIndicator.ZoomIndicator;
     import com.xvm.types.cfg.*;
     import flash.events.*;
@@ -31,10 +32,11 @@ package com.xvm.battle
         }
 
         private var _battleController:BattleXvmComponentController = null;
-        private var _battleLabels:BattleLabels = null;
-        private var _zoomIndicator:ZoomIndicator = null;
         private var _battleClock:BattleClock = null;
         private var _battleElements:BattleElements = null;
+        private var _battleLabels:BattleLabels = null;
+        private var _hitlog:Hitlog = null;
+        private var _zoomIndicator:ZoomIndicator = null;
 
         public function BattleXvmView(view:IView)
         {
@@ -59,12 +61,6 @@ package com.xvm.battle
 
                 var behindMinimapIndex:int = battlePage.getChildIndex(battlePage.minimap) - 1;
 
-                _battleLabels = new BattleLabels();
-                battlePage.addChildAt(_battleLabels, behindMinimapIndex);
-
-                _zoomIndicator = new ZoomIndicator();
-                battlePage.addChildAt(_zoomIndicator, behindMinimapIndex);
-
                 if (Config.config.battle.clockFormat)
                 {
                     _battleClock = new BattleClock();
@@ -75,6 +71,14 @@ package com.xvm.battle
                 {
                     _battleElements = new BattleElements();
                 }
+
+                _hitlog = new Hitlog(); // must be initialized before BattleLabels
+
+                _battleLabels = new BattleLabels();
+                battlePage.addChildAt(_battleLabels, behindMinimapIndex);
+
+                _zoomIndicator = new ZoomIndicator();
+                battlePage.addChildAt(_zoomIndicator, behindMinimapIndex);
             }
             catch (ex:Error)
             {
@@ -95,16 +99,6 @@ package com.xvm.battle
                     _battleController.dispose();
                     _battleController = null;
                 }
-                if (_battleLabels)
-                {
-                    _battleLabels.dispose();
-                    _battleLabels = null;
-                }
-                if (_zoomIndicator)
-                {
-                    _zoomIndicator.dispose();
-                    _zoomIndicator = null;
-                }
                 if (_battleClock)
                 {
                     _battleClock.dispose();
@@ -114,6 +108,21 @@ package com.xvm.battle
                 {
                     _battleElements.dispose();
                     _battleElements = null;
+                }
+                if (_battleLabels)
+                {
+                    _battleLabels.dispose();
+                    _battleLabels = null;
+                }
+                if (_hitlog)
+                {
+                    _hitlog.dispose();
+                    _hitlog = null;
+                }
+                if (_zoomIndicator)
+                {
+                    _zoomIndicator.dispose();
+                    _zoomIndicator = null;
                 }
             }
             catch (ex:Error)

@@ -240,15 +240,6 @@
   "minimap": ${"sirmax-minimap.xc":"minimap"},
   "minimapAlt": ${"sirmax-minimap.xc":"minimapAlt"},
   "hitLog": {
-    "hpLeft": {
-      "enabled": "false"
-    },
-    "enabled": true,
-    "x": 235,
-    "y": -230,
-    "w": 500,
-    "h": 230,
-    "lines": 20,
     "direction": "down",
     "insertOrder": "end",
     "groupHitsByPlayer": true,
