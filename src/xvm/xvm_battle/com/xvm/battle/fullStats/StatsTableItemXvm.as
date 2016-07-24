@@ -178,7 +178,7 @@ package com.xvm.battle.fullStats
                 updateIgr = true;
                 needAlign = true;
             }
-            if (isInvalid(INVALIDATE_PLAYER_STATE || FullStatsValidationType.COLORS))
+            if (isInvalid(INVALIDATE_PLAYER_STATE) || isInvalid(FullStatsValidationType.COLORS))
             {
                 updatePlayerNameField = true;
                 updateVehicleNameField = true;
