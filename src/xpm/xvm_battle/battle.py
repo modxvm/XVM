@@ -147,13 +147,6 @@ def _PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
 def _PlayerAvatar_setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
     g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
 
-# on any vehicle hit received
-@overrideMethod(Vehicle, 'onHealthChanged')
-def _Vehicle_onHealthChanged(base, self, newHealth, attackerID, attackReasonID):
-    #debug("> _Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
-    base(self, newHealth, attackerID, attackReasonID)
-
 # on vehicle info updated
 @registerEvent(BattleArenaController, 'updateVehiclesInfo')
 def _BattleArenaController_updateVehiclesInfo(self, updated, arenaDP):
