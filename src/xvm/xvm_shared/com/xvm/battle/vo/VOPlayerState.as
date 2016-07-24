@@ -53,8 +53,8 @@ package com.xvm.battle.vo
         private var _damageInfo:VODamageInfo;
         private var _xmqpData:VOXmqpData;
 
-        private var _hitlogCount:int = 0;
         private var _hitlogDamage:int = 0;
+        private var _hitlogHits:Vector.<int> = new Vector.<int>();
 
         private var _position:Number = NaN;
         private var _vehCD:int;
@@ -258,11 +258,20 @@ package com.xvm.battle.vo
             return isAlive ? __curHealth : 0;
         }
 
+        public function getCurHealthValue():Number
+        {
+            return __curHealth;
+        }
+
         internal function set_curHealth(value:Number):void
         {
+            //DESTR_BY_FALL_RAMMING = -2
+            //FUEL_EXPLODED = -3
+            //AMMO_BAY_DESTROYED = -5
+            //TURRET_DETACHED = -13
             if (value < 0)
             {
-                _isBlown = true;
+                _isBlown = value <= -3;
                 value = 0;
             }
             __curHealth = value;
@@ -284,14 +293,14 @@ package com.xvm.battle.vo
             return _xmqpData;
         }
 
-        public function get hitlogCount():int
-        {
-            return _hitlogCount;
-        }
-
         public function get hitlogDamage():int
         {
             return _hitlogDamage;
+        }
+
+        public function get hitlogHits():Vector.<int>
+        {
+            return _hitlogHits;
         }
 
         //
@@ -365,7 +374,7 @@ package com.xvm.battle.vo
                     }
                 }
             }
-            if (updated)
+            if (updated && !data["__i_said_no_event__"])
             {
                 eventsToDispatch[PlayerStateEvent.CHANGED] = true;
             }

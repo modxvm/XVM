@@ -36,5 +36,26 @@ package com.xvm.types.cfg
             cloned.hideObject = hideObject;
             return cloned;
         }
+
+        private static var _defaultConfig:CShadow = null;
+        public static function GetDefaultConfig():CShadow
+        {
+            if (_defaultConfig == null)
+            {
+                _defaultConfig = new CShadow();
+                _defaultConfig.enabled = true;
+                _defaultConfig.distance = 0;
+                _defaultConfig.angle = 0;
+                _defaultConfig.color = 0x000000;
+                _defaultConfig.alpha = 70;
+                _defaultConfig.blur = 4;
+                _defaultConfig.strength = 2;
+                _defaultConfig.quality = 3;
+                _defaultConfig.inner = false;
+                _defaultConfig.knockout = false;
+                _defaultConfig.hideObject = false;
+            }
+            return _defaultConfig;
+        }
     }
 }

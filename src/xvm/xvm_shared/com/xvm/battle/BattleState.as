@@ -65,24 +65,14 @@ package com.xvm.battle
             instance._currentAimZoom = value;
         }
 
-        public static function get hitlogTotalHits():int
+        public static function get hitlogHits():Array
         {
-            return instance._hitlogTotalHits;
-        }
-
-        public static function set hitlogTotalHits(value:int):void
-        {
-            instance._hitlogTotalHits = value;
+            return instance._hitlogHits;
         }
 
         public static function get hitlogTotalDamage():int
         {
             return instance._hitlogTotalDamage;
-        }
-
-        public static function set hitlogTotalDamage(value:int):void
-        {
-            instance._hitlogTotalDamage = value;
         }
 
         // instance
@@ -102,8 +92,6 @@ package com.xvm.battle
         private var _captureBarDataVO:VOCaptureBarData = new VOCaptureBarData();
         private var _playerFrags:int = 0;
         private var _currentAimZoom:int = 0;
-        private var _hitlogTotalHits:int = 0;       // TODO: set & update
-        private var _hitlogTotalDamage:int = 0;     // TODO: set & update
 
         // .ctor should be private for Singleton
         function BattleState()
@@ -410,23 +398,48 @@ package com.xvm.battle
             }
         }
 
-        private function onUpdateHitlogData(vehicleID:Number, attackReasonID:Number, newHealth:Number):void
+        // hitlog
+
+        private var _hitlogTotalDamage:int = 0;
+        private var _hitlogHits:Array = [];
+
+        private function onUpdateHitlogData(vehicleID:Number, newHealth:Number, damageFlag:int, damageType:String):void
         {
+            //Logger.add("onUpdateHitlogData: " + arguments);
             var playerState:VOPlayerState = get(vehicleID);
             if (playerState)
             {
-                var damageDelta:int = playerState.curHealth - newHealth;
-                playerState.update({
-                    hitlogDamage: playerState.hitlogDamage + damageDelta,
-                    hitlogCount: playerState.hitlogCount + 1
+                var damage:int = playerState.getCurHealthValue() - Math.max(0, newHealth);
+
+                _hitlogTotalDamage += damage;
+
+                playerState.updateNoEvent({
+                    hitlogDamage: playerState.hitlogDamage + damage,
+                    damageInfo: new VODamageInfo({
+                        damageDelta: damage,
+                        damageType: damageType,
+                        damageFlag: damageFlag
+                    }),
+                    "__i_said_no_event__": true
                 });
-                _hitlogTotalDamage += damageDelta;
-                _hitlogTotalHits++;
+
+                var lastHit:VOHit = _hitlogHits.length ? _hitlogHits[_hitlogHits.length - 1] : new VOHit();
+                if ((damageType == "fire" || damageType == "ramming") && lastHit.vehicleID == vehicleID && lastHit.damageType == damageType)
+                {
+                    damage += lastHit.damage;
+                    _hitlogHits.pop();
+                    playerState.hitlogHits.pop();
+                }
+
+                var hitIndex:Number = _hitlogHits.push(new VOHit(vehicleID, damage, damageType)) - 1;
+                playerState.hitlogHits.push(hitIndex);
+
+                //Logger.add(_hitlogTotalDamage + " " + _hitlogTotalHits);
                 Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.DAMAGE_CAUSED, vehicleID, playerState.accountDBID, playerState.playerName));
             }
             else
             {
-                Logger.add("WARNING: BattleState.onUpdateHitLogDataHandler(): playerState is null");
+                Logger.add("WARNING: BattleState.onUpdateHitlogData(): playerState is null");
             }
         }
     }

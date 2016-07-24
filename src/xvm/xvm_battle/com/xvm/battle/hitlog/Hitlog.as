@@ -6,6 +6,7 @@ package com.xvm.battle.hitlog
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
@@ -13,7 +14,17 @@ package com.xvm.battle.hitlog
 
     public class Hitlog implements IDisposable
     {
+        private static const DIRECTION_UP:String = "up";
+        private static const DIRECTION_DOWN:String = "down";
+        private static const INSERTORDER_BEGIN:String = "begin";
+        private static const INSERTORDER_END:String = "end";
+
         private var cfg:CHitlog;
+
+        private var _lastTotalDamageHeader:int;
+        private var _lastTotalDamageBody:int;
+        private var _headerText:String;
+        private var _bodyText:String;
 
         public function Hitlog()
         {
@@ -49,17 +60,57 @@ package com.xvm.battle.hitlog
 
         private function setup():void
         {
-            cfg = Config.config.hitLog;
+            cfg = Config.config.hitLog.clone();
+            cfg.defaultHeader = Locale.get(cfg.defaultHeader);
+            cfg.formatHeader = Locale.get(cfg.formatHeader);
+            cfg.formatHistory = Locale.get(cfg.formatHistory);
+            _lastTotalDamageHeader = -1;
+            _lastTotalDamageBody = -1;
         }
 
-        private function getHeader():String
+        private function getHeader(o:VOPlayerState):String
         {
-            return "header";
+            if (_lastTotalDamageHeader != BattleState.hitlogTotalDamage)
+            {
+                _lastTotalDamageHeader = BattleState.hitlogTotalDamage;
+                _headerText = Macros.Format(BattleState.hitlogHits.length ? cfg.formatHeader : cfg.defaultHeader, o);
+            }
+            return _headerText;
         }
 
-        private function getBody():String
+        private function getBody(o:VOPlayerState):String
         {
-            return "body";
+            if (_lastTotalDamageBody != BattleState.hitlogTotalDamage)
+            {
+                _lastTotalDamageBody = BattleState.hitlogTotalDamage;
+
+                var hits:Array = BattleState.hitlogHits;
+                if (!hits.length)
+                {
+                    return null;
+                }
+
+                var hist:String = Macros.Format(cfg.formatHistory, o);
+                hits[hits.length - 1].hist = hist;
+
+                //Logger.addObject(hits, 2);
+
+                var skip:Vector.<Number> = new Vector.<Number>();
+                _bodyText = "";
+                for (var n:int = hits.length - 1; n >= 0; --n)
+                {
+                    var hit:VOHit = hits[n];
+                    if (cfg.groupHitsByPlayer)
+                    {
+                        if (skip.indexOf(hit.vehicleID) != -1)
+                            continue;
+                        skip.push(hit.vehicleID);
+                    }
+                    var br:String = (_bodyText == "") ? "" : "<br/>";
+                    _bodyText = (cfg.direction == cfg.insertOrder) ? _bodyText + br + hit.hist : hit.hist + br + _bodyText;
+                }
+            }
+            return _bodyText;
         }
     }
 }

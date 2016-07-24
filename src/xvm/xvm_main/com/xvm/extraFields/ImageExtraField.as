@@ -7,6 +7,7 @@ package com.xvm.extraFields
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.events.PlayerStateEvent;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import com.xvm.wg.*;
@@ -344,9 +345,9 @@ package com.xvm.extraFields
             }
         }
 
-        public function updateOnEvent(e:Event):void
+        public function updateOnEvent(e:PlayerStateEvent):void
         {
-            update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target(), vehicleID
+            update(BattleState.get(e.vehicleID));
         }
 
         public function onKeyEvent(key:Number, isDown:Boolean):void

@@ -46,7 +46,10 @@ package com.xvm.battle.battleLabels
         {
             if (isInvalid(InvalidationType.STATE, InvalidationType.POSITION))
             {
-                update();
+                if (_extraFields)
+                {
+                    _extraFields.update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target()
+                }
             }
         }
 
@@ -58,15 +61,15 @@ package com.xvm.battle.battleLabels
             createExtraFields();
         }
 
-        private function onStatLoaded(e:ObjectEvent):void
-        {
-            invalidate(InvalidationType.STATE);
-        }
-
         private function onUpdateStage():void
         {
             _extraFields.updateBounds(new Rectangle(0, 0, App.appWidth, App.appHeight));
             invalidate(InvalidationType.POSITION);
+        }
+
+        private function onStatLoaded(e:ObjectEvent):void
+        {
+            invalidate(InvalidationType.STATE);
         }
 
         private function createExtraFields():void
@@ -99,14 +102,6 @@ package com.xvm.battle.battleLabels
             {
                 _extraFields.dispose();
                 _extraFields = null;
-            }
-        }
-
-        private function update():void
-        {
-            if (_extraFields)
-            {
-                _extraFields.update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target()
             }
         }
     }

@@ -15,12 +15,13 @@ from gui.app_loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.shared import g_eventBus, events
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
-from gui.battle_control import g_sessionProvider
+from gui.battle_control import g_sessionProvider, avatar_getter
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
+from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
 
 from xfw import *
 from xvm_main.python.logger import *
@@ -150,9 +151,6 @@ def _PlayerAvatar_setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
 @overrideMethod(Vehicle, 'onHealthChanged')
 def _Vehicle_onHealthChanged(base, self, newHealth, attackerID, attackReasonID):
     #debug("> _Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    if attackerID == BigWorld.player().playerVehicleID:
-        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_HITLOG_DATA, self.id, attackReasonID, newHealth)
-
     g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
     base(self, newHealth, attackerID, attackReasonID)
 
@@ -229,7 +227,14 @@ class Battle(object):
 
     def onVehicleFeedbackReceived(self, eventID, vehicleID, value):
         if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
-          self.updatePlayerState(vehicleID, INV.CUR_HEALTH)
+            (newHealth, aInfo, attackReasonID) = value
+            if aInfo.vehicleID == BigWorld.player().playerVehicleID:
+                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_HITLOG_DATA,
+                           vehicleID,
+                           newHealth,
+                           self._getVehicleDamageType(aInfo),
+                           constants.ATTACK_REASONS[attackReasonID])
+            self.updatePlayerState(vehicleID, INV.CUR_HEALTH)
 
     def updatePlayerState(self, vehicleID, targets):
         try:
@@ -306,5 +311,22 @@ class Battle(object):
             return (None, True)
 
         return (None, False)
+
+    # misc
+
+    def _getVehicleDamageType(self, attackerInfo):
+        if not attackerInfo:
+            return markers2d_settings.DAMAGE_TYPE.FROM_UNKNOWN
+        attackerID = attackerInfo.vehicleID
+        if attackerID == avatar_getter.getPlayerVehicleID():
+            return markers2d_settings.DAMAGE_TYPE.FROM_PLAYER
+        entityName = g_sessionProvider.getCtx().getPlayerGuiProps(attackerID, attackerInfo.team)
+        if entityName == PLAYER_GUI_PROPS.squadman:
+            return markers2d_settings.DAMAGE_TYPE.FROM_SQUAD
+        if entityName == PLAYER_GUI_PROPS.ally:
+            return markers2d_settings.DAMAGE_TYPE.FROM_ALLY
+        if entityName == PLAYER_GUI_PROPS.enemy:
+            return markers2d_settings.DAMAGE_TYPE.FROM_ENEMY
+        return markers2d_settings.DAMAGE_TYPE.FROM_UNKNOWN
 
 g_battle = Battle()

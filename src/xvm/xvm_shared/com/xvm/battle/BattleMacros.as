@@ -97,12 +97,12 @@ package com.xvm.battle
             {
                 switch (o.getSubname())
                 {
-                    case "n": return BattleState.hitlogTotalHits;
+                    case "n": return BattleState.hitlogHits.length;
                     case "dmg-total": return BattleState.hitlogTotalDamage;
                     case "dmg-total-color": return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, "#", false);
-                    case "dmg-avg": return BattleState.hitlogTotalHits == 0 ? NaN : Math.round(BattleState.hitlogTotalDamage / BattleState.hitlogTotalHits);
+                    case "dmg-avg": return BattleState.hitlogHits.length ? Math.round(BattleState.hitlogTotalDamage / BattleState.hitlogHits.length) : NaN;
                     case "dead": return o.isBlown ? Config.config.hitLog.blowupMarker : o.isDead ? Config.config.hitLog.deadMarker : null;
-                    case "n-player": return o.hitlogCount;
+                    case "n-player": return o.hitlogHits.length;
                     case "dmg-player": return o.hitlogDamage;
                 }
                 return null;
@@ -301,19 +301,19 @@ package com.xvm.battle
             // {{dmg}}
             m_globals["dmg"] = function(o:VOPlayerState):Number
             {
-                return o.damageInfo.damageDelta;
+                return o.damageInfo ? o.damageInfo.damageDelta : NaN;
             }
 
             // {{dmg-ratio}}
             m_globals["dmg-ratio"] = function(o:VOPlayerState):Number
             {
-                return isNaN(o.damageInfo.damageDelta) ? NaN : Math.round(o.damageInfo.damageDelta / o.maxHealth * 100);
+                return o.damageInfo && o.damageInfo.damageDelta ? Math.round(o.damageInfo.damageDelta / o.maxHealth * 100) : NaN;
             }
 
             // {{dmg-kind}}
             m_globals["dmg-kind"] = function(o:VOPlayerState):String
             {
-                return o.damageInfo.damageType == null ? null : Locale.get(o.damageInfo.damageType);
+                return o.damageInfo && o.damageInfo.damageType ? Locale.get(o.damageInfo.damageType) : null;
             }
 
             // {{c:dmg}}
@@ -325,7 +325,7 @@ package com.xvm.battle
             // {{c:dmg-kind}}
             m_globals["c:dmg-kind"] = function(o:VOPlayerState):String
             {
-                return o.damageInfo.damageType == null ? null : XfwUtils.toHtmlColor(getDmgKindValue(o.damageInfo.damageType));
+                return o.damageInfo && o.damageInfo.damageType ? XfwUtils.toHtmlColor(getDmgKindValue(o.damageInfo.damageType)) : null;
             }
 
             // {{sys-color-key}}
@@ -361,17 +361,19 @@ package com.xvm.battle
 
         public static function getDamageSystemColor(o:VOPlayerState):Number
         {
-            if (!o.damageInfo || isNaN(o.damageInfo.damageDelta))
-                return NaN;
-            switch (o.damageInfo.damageType)
+            if (o.damageInfo && o.damageInfo.damageDelta)
             {
-                case "world_collision":
-                case "death_zone":
-                case "drowning":
-                    return getDmgKindValue(o.damageInfo.damageType);
-                default:
-                    return getDmgSrcColorValue(o);
+                switch (o.damageInfo.damageType)
+                {
+                    case "world_collision":
+                    case "death_zone":
+                    case "drowning":
+                        return getDmgKindValue(o.damageInfo.damageType);
+                    default:
+                        return getDmgSrcColorValue(o);
+                }
             }
+            return NaN;
         }
 
         private static function getDmgSrcColorValue(o:VOPlayerState):Number

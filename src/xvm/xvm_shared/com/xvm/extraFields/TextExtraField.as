@@ -7,6 +7,7 @@ package com.xvm.extraFields
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.events.PlayerStateEvent;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.events.*;
@@ -24,6 +25,7 @@ package com.xvm.extraFields
         private var _getColorSchemeName:Function;
         private var _bounds:Rectangle;
         private var _layout:String;
+        private var _defaultTextFormatConfig:CTextFormat;
 
         private var _initialized:Boolean = false;
 
@@ -46,6 +48,7 @@ package com.xvm.extraFields
             this._getColorSchemeName = getColorSchemeName;
             this._bounds = bounds;
             this._layout = layout;
+            this._defaultTextFormatConfig = defaultTextFormatConfig;
 
             mouseEnabled = false;
             selectable = false;
@@ -72,7 +75,8 @@ package com.xvm.extraFields
             defaultTextFormat = Utils.DEFAULT_TEXT_FORMAT;
             if (_cfg.textFormat == null)
                 _cfg.textFormat = defaultTextFormatConfig;
-
+            if (_cfg.shadow == null)
+                _cfg.shadow = CShadow.GetDefaultConfig();
             ExtraFieldsHelper.setupEvents(this);
         }
 
@@ -466,162 +470,170 @@ package com.xvm.extraFields
 
         public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0, bounds:Rectangle = null):void
         {
-            var needAlign:Boolean = false;
+            try
+            {
+                var needAlign:Boolean = false;
 
-            if (!_initialized)
-            {
-                _initialized = true;
-                setup(options);
-                needAlign = true;
-            }
+                if (!_initialized)
+                {
+                    _initialized = true;
+                    setup(options);
+                    needAlign = true;
+                }
 
-            if (bounds && _bounds != bounds)
-            {
-                _bounds = bounds;
-                needAlign = true;
-            }
+                if (bounds && _bounds != bounds)
+                {
+                    _bounds = bounds;
+                    needAlign = true;
+                }
 
-            var value:*;
+                var value:*;
 
-            if (_cfg.x != null)
-            {
-                value = Macros.FormatNumber(_cfg.x, options, 0);
-                if (_xValue != value)
+                if (_cfg.x != null)
                 {
-                    _xValue = value;
-                    needAlign = true;
+                    value = Macros.FormatNumber(_cfg.x, options, 0);
+                    if (_xValue != value)
+                    {
+                        _xValue = value;
+                        needAlign = true;
+                    }
                 }
-            }
-            if (_cfg.y != null)
-            {
-                value = Macros.FormatNumber(_cfg.y, options, 0);
-                if (_yValue != value)
+                if (_cfg.y != null)
                 {
-                    _yValue = value;
-                    needAlign = true;
+                    value = Macros.FormatNumber(_cfg.y, options, 0);
+                    if (_yValue != value)
+                    {
+                        _yValue = value;
+                        needAlign = true;
+                    }
                 }
-            }
-            if (_cfg.width != null)
-            {
-                value = Macros.FormatNumber(_cfg.width, options);
-                if (!isNaN(value) && _widthValue != value)
+                if (_cfg.width != null)
                 {
-                    _widthValue = value;
-                    needAlign = true;
+                    value = Macros.FormatNumber(_cfg.width, options);
+                    if (!isNaN(value) && _widthValue != value)
+                    {
+                        _widthValue = value;
+                        needAlign = true;
+                    }
                 }
-            }
-            if (_cfg.height != null)
-            {
-                value = Macros.FormatNumber(_cfg.height, options);
-                if (!isNaN(value) && _heightValue != value)
+                if (_cfg.height != null)
                 {
-                    _heightValue = value;
-                    needAlign = true;
+                    value = Macros.FormatNumber(_cfg.height, options);
+                    if (!isNaN(value) && _heightValue != value)
+                    {
+                        _heightValue = value;
+                        needAlign = true;
+                    }
                 }
-            }
-            if (_cfg.alpha != null)
-            {
-                value = Macros.FormatNumber(_cfg.alpha, options, 100) / 100.0;
-                if (alpha != value)
+                if (_cfg.alpha != null)
                 {
-                    alpha = value;
+                    value = Macros.FormatNumber(_cfg.alpha, options, 100) / 100.0;
+                    if (alpha != value)
+                    {
+                        alpha = value;
+                    }
                 }
-            }
-            if (_cfg.rotation != null)
-            {
-                value = Macros.FormatNumber(_cfg.rotation, options, 0);
-                if (rotation != value)
+                if (_cfg.rotation != null)
                 {
-                    rotation = value;
+                    value = Macros.FormatNumber(_cfg.rotation, options, 0);
+                    if (rotation != value)
+                    {
+                        rotation = value;
+                    }
                 }
-            }
-            if (_cfg.scaleX != null)
-            {
-                value = Macros.FormatNumber(_cfg.scaleX, options, 1);
-                if (scaleX != value)
+                if (_cfg.scaleX != null)
                 {
-                    scaleX = value;
+                    value = Macros.FormatNumber(_cfg.scaleX, options, 1);
+                    if (scaleX != value)
+                    {
+                        scaleX = value;
+                    }
                 }
-            }
-            if (_cfg.scaleY != null)
-            {
-                value = Macros.FormatNumber(_cfg.scaleY, options, 1);
-                if (scaleY != value)
+                if (_cfg.scaleY != null)
                 {
-                    scaleY = value;
+                    value = Macros.FormatNumber(_cfg.scaleY, options, 1);
+                    if (scaleY != value)
+                    {
+                        scaleY = value;
+                    }
                 }
-            }
-            if (_cfg.borderColor != null)
-            {
-                value = Macros.FormatNumber(_cfg.borderColor, options);
-                border = !isNaN(value);
-                if (border)
+                if (_cfg.borderColor != null)
                 {
-                    borderColor = value;
+                    value = Macros.FormatNumber(_cfg.borderColor, options);
+                    border = !isNaN(value);
+                    if (border)
+                    {
+                        borderColor = value;
+                    }
                 }
-            }
-            if (_cfg.bgColor != null)
-            {
-                value = Macros.FormatNumber(_cfg.bgColor, options);
-                background = !isNaN(value);
-                if (background)
+                if (_cfg.bgColor != null)
                 {
-                    backgroundColor = value;
+                    value = Macros.FormatNumber(_cfg.bgColor, options);
+                    background = !isNaN(value);
+                    if (background)
+                    {
+                        backgroundColor = value;
+                    }
                 }
-            }
-            if (_cfg.bindToIcon && !isNaN(bindToIconOffset))
-            {
-                value = _isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
-                if (x != value)
+                if (_cfg.bindToIcon && !isNaN(bindToIconOffset))
                 {
-                    needAlign = true;
+                    value = _isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
+                    if (x != value)
+                    {
+                        needAlign = true;
+                    }
                 }
-            }
-            else
-            {
-                bindToIconOffset = 0;
-            }
-            if (_cfg.textFormat)
-            {
-                defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
-                htmlText = _textValue;
-            }
-            if (_cfg.shadow)
-            {
-                filters = Utils.createShadowFiltersFromConfig(_cfg.shadow, options);
-            }
-            if (_cfg.format)
-            {
-                value = Macros.Format(_cfg.format, options);
-                //value = Utils.fixImgTag(value); // is required?
-                if (_textValue != value)
+                else
                 {
-                    //Logger.add(_textValue + " => " + value);
-                    _textValue = value;
+                    bindToIconOffset = 0;
+                }
+                if (_cfg.textFormat)
+                {
+                    defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
                     htmlText = _textValue;
-                    needAlign = true;
                 }
-            }
-            if (_getColorSchemeName != null)
-            {
-                if (_cfg.highlight)
+                if (_cfg.shadow)
                 {
-                    _highlightValue = _cfg.highlight is Boolean ? _cfg.highlight : Macros.FormatBoolean(_cfg.highlight, options, false);
+                    filters = Utils.createShadowFiltersFromConfig(_cfg.shadow, options);
                 }
-                value = _highlightValue ? _getColorSchemeName(options) : null;
-                if (_colorSchemeNameValue != value)
+                if (_cfg.format)
                 {
-                    _colorSchemeNameValue = value;
-                    textColor = App.colorSchemeMgr.getScheme(value).rgb;
+                    value = Macros.Format(_cfg.format, options);
+
+                    //value = Utils.fixImgTag(value); // is required?
+                    if (_textValue != value)
+                    {
+                        //Logger.add(_textValue + " => " + value);
+                        _textValue = value;
+                        htmlText = _textValue;
+                        needAlign = true;
+                    }
                 }
-            }
+                if (_getColorSchemeName != null)
+                {
+                    if (_cfg.highlight)
+                    {
+                        _highlightValue = _cfg.highlight is Boolean ? _cfg.highlight : Macros.FormatBoolean(_cfg.highlight, options, false);
+                    }
+                    value = _highlightValue ? _getColorSchemeName(options) : null;
+                    if (_colorSchemeNameValue != value)
+                    {
+                        _colorSchemeNameValue = value;
+                        textColor = App.colorSchemeMgr.getScheme(value).rgb;
+                    }
+                }
 
-            if (needAlign)
+                if (needAlign)
+                {
+                    align(bindToIconOffset, offsetX, offsetY);
+                }
+
+                //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }
+            }
+            catch (ex:Error)
             {
-                align(bindToIconOffset, offsetX, offsetY);
+                Logger.err(ex);
             }
-
-            //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }
         }
 
         private function align(bindToIconOffset:Number, offsetX:Number, offsetY:Number):void
@@ -652,9 +664,9 @@ package com.xvm.extraFields
             //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }
         }
 
-        public function updateOnEvent(e:Event):void
+        public function updateOnEvent(e:PlayerStateEvent):void
         {
-            update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target(), vehicleID
+            update(BattleState.get(e.vehicleID));
         }
 
         public function onKeyEvent(key:Number, isDown:Boolean):void
