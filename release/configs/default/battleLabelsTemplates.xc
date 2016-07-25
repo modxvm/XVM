@@ -175,6 +175,7 @@
       "y": 40,
       "width": 500,
       "height": 1000,
+      "textFormat": { "color": "0xF4EFE8", "size": 15 },
       "format": "{{hitlog-header}}\n{{hitlog-body}}"
     },
     "winChance": {
@@ -195,9 +196,9 @@
       "y": 30,
       "width": 200,
       "height": 40,
-      "screenHAlign": "right",
+      "screenHAlign": "center",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
-      "textFormat": { "color": "0xF4EFE8", "size": 18, "align": "right" },
+      "textFormat": { "color": "0xF4EFE8", "size": 18, "align": "center" },
       "format": "{{py:xvm.total_hp.text()}}"
     },
     "test": {
