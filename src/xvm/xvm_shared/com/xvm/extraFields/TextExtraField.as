@@ -72,7 +72,6 @@ package com.xvm.extraFields
             antiAliasType = Macros.FormatStringGlobal(_cfg.antiAliasType, AntiAliasType.ADVANCED);
             TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(_cfg.valign, TextFieldEx.VALIGN_NONE));
             TextFieldEx.setNoTranslate(this, true);
-            defaultTextFormat = Utils.DEFAULT_TEXT_FORMAT;
             if (_cfg.textFormat == null)
                 _cfg.textFormat = defaultTextFormatConfig;
             if (_cfg.shadow == null)
@@ -241,7 +240,9 @@ package com.xvm.extraFields
                     return false;
             }
 
-            value = Macros.FormatString(cfg.font, options, Utils.DEFAULT_TEXT_FORMAT.font);
+            if (cfg.font == null)
+                cfg.font = _defaultTextFormatConfig.font;
+            value = Macros.FormatString(cfg.font, options, _defaultTextFormatConfig.font);
             if (Macros.IsCached(cfg.font, options))
             {
                 cfg.font = value;
@@ -251,7 +252,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.size, options, Number(Utils.DEFAULT_TEXT_FORMAT.size));
+            if (cfg.size == null)
+                cfg.size = _defaultTextFormatConfig.size;
+            value = Macros.FormatNumber(cfg.size, options, Number(_defaultTextFormatConfig.size));
             if (Macros.IsCached(cfg.size, options))
             {
                 cfg.size = value;
@@ -262,8 +265,8 @@ package com.xvm.extraFields
             }
 
             if (cfg.color == null)
-                cfg.color = "{{c:system}}";
-            value = Macros.FormatNumber(cfg.color, options, Number(Utils.DEFAULT_TEXT_FORMAT.color));
+                cfg.color = _defaultTextFormatConfig.color;
+            value = Macros.FormatNumber(cfg.color, options, Number(_defaultTextFormatConfig.color));
             if (Macros.IsCached(cfg.color, options))
             {
                 cfg.color = value;
@@ -273,7 +276,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatBoolean(cfg.bold, options, Boolean(Utils.DEFAULT_TEXT_FORMAT.bold));
+            if (cfg.bold == null)
+                cfg.bold = _defaultTextFormatConfig.bold;
+            value = Macros.FormatBoolean(cfg.bold, options, Boolean(_defaultTextFormatConfig.bold));
             if (Macros.IsCached(cfg.bold, options))
             {
                 cfg.bold = value;
@@ -283,7 +288,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatBoolean(cfg.italic, options, Boolean(Utils.DEFAULT_TEXT_FORMAT.italic));
+            if (cfg.italic == null)
+                cfg.italic = _defaultTextFormatConfig.italic;
+            value = Macros.FormatBoolean(cfg.italic, options, Boolean(_defaultTextFormatConfig.italic));
             if (Macros.IsCached(cfg.italic, options))
             {
                 cfg.italic = value;
@@ -293,7 +300,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatBoolean(cfg.underline, options, Boolean(Utils.DEFAULT_TEXT_FORMAT.underline));
+            if (cfg.underline == null)
+                cfg.underline = _defaultTextFormatConfig.underline;
+            value = Macros.FormatBoolean(cfg.underline, options, Boolean(_defaultTextFormatConfig.underline));
             if (Macros.IsCached(cfg.underline, options))
             {
                 cfg.underline = value;
@@ -303,7 +312,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatString(cfg.align, options, Utils.DEFAULT_TEXT_FORMAT.align);
+            if (cfg.align == null)
+                cfg.align = _defaultTextFormatConfig.align;
+            value = Macros.FormatString(cfg.align, options, _defaultTextFormatConfig.align);
             if (Macros.IsCached(cfg.align, options))
             {
                 cfg.align = value;
@@ -313,7 +324,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.leftMargin, options, Number(Utils.DEFAULT_TEXT_FORMAT.leftMargin));
+            if (cfg.leftMargin == null)
+                cfg.leftMargin = _defaultTextFormatConfig.leftMargin;
+            value = Macros.FormatNumber(cfg.leftMargin, options, Number(_defaultTextFormatConfig.leftMargin));
             if (Macros.IsCached(cfg.leftMargin, options))
             {
                 cfg.leftMargin = value;
@@ -323,7 +336,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.rightMargin, options, Number(Utils.DEFAULT_TEXT_FORMAT.rightMargin));
+            if (cfg.rightMargin == null)
+                cfg.rightMargin = _defaultTextFormatConfig.rightMargin;
+            value = Macros.FormatNumber(cfg.rightMargin, options, Number(_defaultTextFormatConfig.rightMargin));
             if (Macros.IsCached(cfg.rightMargin, options))
             {
                 cfg.rightMargin = value;
@@ -333,7 +348,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.indent, options, Number(Utils.DEFAULT_TEXT_FORMAT.indent));
+            if (cfg.indent == null)
+                cfg.indent = _defaultTextFormatConfig.indent;
+            value = Macros.FormatNumber(cfg.indent, options, Number(_defaultTextFormatConfig.indent));
             if (Macros.IsCached(cfg.indent, options))
             {
                 cfg.indent = value;
@@ -343,7 +360,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.leading, options, Number(Utils.DEFAULT_TEXT_FORMAT.leading));
+            if (cfg.leading == null)
+                cfg.leading = _defaultTextFormatConfig.leading;
+            value = Macros.FormatNumber(cfg.leading, options, Number(_defaultTextFormatConfig.leading));
             if (Macros.IsCached(cfg.leading, options))
             {
                 cfg.leading = value;
@@ -371,7 +390,11 @@ package com.xvm.extraFields
                     return false;
             }
 
-            value = Macros.FormatNumber(cfg.distance, options, 0);
+            var defaultConfig:CShadow = CShadow.GetDefaultConfig();
+
+            if (cfg.distance == null)
+                cfg.distance = defaultConfig.distance;
+            value = Macros.FormatNumber(cfg.distance, options, defaultConfig.distance);
             if (Macros.IsCached(cfg.distance, options))
             {
                 cfg.distance = value;
@@ -381,7 +404,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.angle, options, 0);
+            if (cfg.angle == null)
+                cfg.angle = defaultConfig.angle;
+            value = Macros.FormatNumber(cfg.angle, options, defaultConfig.angle);
             if (Macros.IsCached(cfg.angle, options))
             {
                 cfg.angle = value;
@@ -391,7 +416,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.color, options, 0);
+            if (cfg.color == null)
+                cfg.color = defaultConfig.color;
+            value = Macros.FormatNumber(cfg.color, options, defaultConfig.color);
             if (Macros.IsCached(cfg.color, options))
             {
                 cfg.color = value;
@@ -401,7 +428,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.alpha, options, 70);
+            if (cfg.alpha == null)
+                cfg.alpha = defaultConfig.alpha;
+            value = Macros.FormatNumber(cfg.alpha, options, defaultConfig.alpha);
             if (Macros.IsCached(cfg.alpha, options))
             {
                 cfg.alpha = value;
@@ -411,7 +440,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.blur, options, 4);
+            if (cfg.blur == null)
+                cfg.blur = defaultConfig.blur;
+            value = Macros.FormatNumber(cfg.blur, options, defaultConfig.blur);
             if (Macros.IsCached(cfg.blur, options))
             {
                 cfg.blur = value;
@@ -421,7 +452,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.strength, options, 2);
+            if (cfg.strength == null)
+                cfg.strength = defaultConfig.strength;
+            value = Macros.FormatNumber(cfg.strength, options, defaultConfig.strength);
             if (Macros.IsCached(cfg.strength, options))
             {
                 cfg.strength = value;
@@ -431,7 +464,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatNumber(cfg.quality, options, 3);
+            if (cfg.quality == null)
+                cfg.quality = defaultConfig.quality;
+            value = Macros.FormatNumber(cfg.quality, options, defaultConfig.quality);
             if (Macros.IsCached(cfg.quality, options))
             {
                 cfg.quality = value;
@@ -441,7 +476,9 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatBoolean(cfg.inner, options, false);
+            if (cfg.inner == null)
+                cfg.inner = defaultConfig.inner;
+            value = Macros.FormatBoolean(cfg.inner, options, defaultConfig.inner);
             if (Macros.IsCached(cfg.inner, options))
             {
                 cfg.inner = value;
@@ -451,13 +488,17 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            value = Macros.FormatBoolean(cfg.knockout, options, false);
+            if (cfg.knockout == null)
+                cfg.knockout = defaultConfig.knockout;
+            value = Macros.FormatBoolean(cfg.knockout, options, defaultConfig.knockout);
             if (Macros.IsCached(cfg.knockout, options))
             {
                 cfg.knockout = value;
             }
 
-            value = Macros.FormatBoolean(cfg.hideObject, options, false);
+            if (cfg.hideObject == null)
+                cfg.hideObject = defaultConfig.hideObject;
+            value = Macros.FormatBoolean(cfg.hideObject, options, defaultConfig.hideObject);
             if (Macros.IsCached(cfg.hideObject, options))
             {
                 cfg.hideObject = value;
