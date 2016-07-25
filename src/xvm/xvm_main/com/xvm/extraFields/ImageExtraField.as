@@ -56,7 +56,7 @@ package com.xvm.extraFields
             _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
             if (_cfg.hotKeyCode != null)
             {
-                _cfg.visibleOnHotKey = Macros.FormatBooleanGlobal(_cfg.visibleOnHotKey, false);
+                _cfg.visibleOnHotKey = Macros.FormatBooleanGlobal(_cfg.visibleOnHotKey, true);
                 _cfg.onHold = Macros.FormatBooleanGlobal(_cfg.onHold, true);
             }
 

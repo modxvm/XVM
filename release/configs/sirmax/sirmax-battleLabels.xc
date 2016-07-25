@@ -12,12 +12,12 @@
       //"enabled": false,
       "hotKeyCode": 36,
       //"height": 150,
+      "visibleOnHotKey": "false",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
     },
     {
       //"enabled": false,
       "hotKeyCode": 36,
-      "visibleOnHotKey": "true",
       "height": 150,
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
     },
