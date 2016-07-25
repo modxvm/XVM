@@ -271,8 +271,8 @@
     "battleLoadingEnemy": "../../../../res/contour/Master_XH",
     "playersPanelLeftAtlas": "../../../../res/atlases/playersPanelLeftAtlas",
     "playersPanelRightAtlas": "../../../../res/atlases/playersPanelRightAtlas",
-    "fullStatsLeftAtlas": "../../../../res/atlases/battleAtlasLeft",
-    "fullStatsRightAtlas": "../../../../res/atlases/battleAtlasRight",
+    "fullStatsLeftAtlas": "../../../../res/atlases/atlasLeft",
+    "fullStatsRightAtlas": "../../../../res/atlases/atlasRight",
     "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAllyAtlas",
     "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerEnemyAtlas"
   },

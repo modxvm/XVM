@@ -195,7 +195,6 @@ package com.xvm.battle.playersPanel
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_ATLAS_LOADED));
         }
 
-
         private function setAltMode(e:ObjectEvent):void
         {
             //Logger.add("setAltMode: isDown:" + e.result.isDown + " m_altMode:" + m_altMode + " currentMode:" + listLeft.state + " m_isAltMode:" + m_isAltMode + " m_savedState:" + m_savedState);

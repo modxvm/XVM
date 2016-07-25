@@ -10,10 +10,12 @@ package com.xvm.battle.fullStats
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
-    import flash.text.*;
+    import flash.events.*;
     import flash.geom.*;
+    import flash.text.*;
     import net.wg.data.constants.*;
     import net.wg.gui.battle.components.*;
+    import net.wg.gui.battle.random.views.stats.components.fullStats.constants.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
     import net.wg.gui.battle.views.stats.*;
     import net.wg.gui.battle.views.stats.constants.*;
@@ -47,6 +49,7 @@ package com.xvm.battle.fullStats
         private var _isIGR:Boolean = false;
 
         private var _vehicleID:Number = NaN;
+        private var _vehicleIconName:String = null;
 
         public function StatsTableItemXvm(isLeftPanel:Boolean, playerNameTF:TextField, vehicleNameTF:TextField, fragsTF:TextField, deadBg:BattleAtlasSprite,
             vehicleTypeIcon:BattleAtlasSprite, icoIGR:BattleAtlasSprite, vehicleIcon:BattleAtlasSprite, vehicleLevelIcon:BattleAtlasSprite,
@@ -120,6 +123,8 @@ package com.xvm.battle.fullStats
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
+            Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
+            Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
             alignTextFields();
 
@@ -135,6 +140,8 @@ package com.xvm.battle.fullStats
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
+            Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
+            Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
             super.onDispose();
         }
@@ -150,6 +157,15 @@ package com.xvm.battle.fullStats
             _isIGR = isIGR;
         }
 
+        override public function setVehicleIcon(vehicleIconName:String):void
+        {
+            super.setVehicleIcon(vehicleIconName);
+            if (_vehicleIconName != vehicleIconName)
+            {
+                _vehicleIconName = vehicleIconName;
+            }
+        }
+
         override protected function draw():void
         {
             super.draw();
@@ -157,6 +173,7 @@ package com.xvm.battle.fullStats
             var updatePlayerNameField:Boolean = false;
             var updateVehicleNameField:Boolean = false;
             var updateFragsField:Boolean = false;
+            var updateVehicleIcon:Boolean = false;
             var updateIgr:Boolean = false;
             var needAlign:Boolean = false;
 
@@ -168,6 +185,13 @@ package com.xvm.battle.fullStats
             {
                 updateVehicleNameField = true;
                 updateIgr = true;
+            }
+            if(isInvalid(RandomFullStatsValidationType.VEHICLE_ICON))
+            {
+                if (this._vehicleIconName)
+                {
+                    updateVehicleIcon = true;
+                }
             }
             if (isInvalid(FullStatsValidationType.FRAGS))
             {
@@ -207,6 +231,16 @@ package com.xvm.battle.fullStats
                     }
                 }
             }
+            if (updateVehicleIcon)
+            {
+                var atlasName:String = _isLeftPanel ? UI_FullStats.leftAtlas : UI_FullStats.rightAtlas;
+                if (!App.atlasMgr.isAtlasInitialized(atlasName))
+                {
+                    atlasName = AtlasConstants.BATTLE_ATLAS;
+                }
+                _vehicleIcon.graphics.clear();
+                App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(_vehicleIconName), _vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+            }
             if (updateIgr)
             {
                 if (_isIGR)
@@ -233,6 +267,16 @@ package com.xvm.battle.fullStats
         }
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
+        {
+            invalidate(INVALIDATE_PLAYER_STATE);
+        }
+
+        private function onAtlasLoaded(e:Event):void
+        {
+            invalidate(RandomFullStatsValidationType.VEHICLE_ICON);
+        }
+
+        private function onClanIconLoaded(vehicleID:Number, playerName:String):void
         {
             invalidate(INVALIDATE_PLAYER_STATE);
         }

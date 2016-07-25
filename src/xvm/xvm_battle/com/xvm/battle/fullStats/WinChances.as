@@ -12,22 +12,24 @@ package com.xvm.battle.fullStats
     import flash.text.*;
     import net.wg.infrastructure.interfaces.entity.*;
 
-    public class WinChances
+    public class WinChances implements IDisposable
     {
         private var cfg:CStatisticForm;
+        private var form:UI_FullStats;
         private var winChanceTF:TextField = null;
 
         public function WinChances(form:UI_FullStats)
         {
             cfg = Config.config.statisticForm;
+            this.form = form;
 
             if (Config.networkServicesSettings.chance || Config.networkServicesSettings.chanceLive || cfg.showBattleTier)
             {
                 winChanceTF = createWinChanceTextField(form.battleTF);
-                form.addChild(winChanceTF);
                 winChanceTF.styleSheet = XfwUtils.createTextStyleSheet("chances", form.battleTF.defaultTextFormat);
                 winChanceTF.x = form.battleTF.x - 283;
                 winChanceTF.y = 20;
+                form.addChild(winChanceTF);
 
                 if (Config.networkServicesSettings.chanceLive)
                 {
@@ -43,6 +45,16 @@ package com.xvm.battle.fullStats
             }
         }
 
+        public final function dispose():void
+        {
+            onDispose();
+        }
+
+        protected function onDispose():void
+        {
+            form.removeChild(winChanceTF);
+            winChanceTF = null;
+        }
         // PRIVATE
 
         private function updateChanceText():void
