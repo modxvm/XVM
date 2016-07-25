@@ -21,14 +21,14 @@
      │                            │ несколько событий разделяются запятой
      │                            │ доступные события:
      │                            │ allowed events:
-                                      ON_BATTLE_STATE_CHANGED
-                                      ON_PLAYERS_HP_CHANGED
-                                      ON_VEHICLE_DESTROYED
-                                      ON_CURRENT_VEHICLE_DESTROYED
-                                      ON_MODULE_CRITICAL
-                                      ON_MODULE_DESTROYED
-                                      ON_MODULE_REPAIRED
-                                      ON_DAMAGE_CAUSED
+     │                            │   ON_BATTLE_STATE_CHANGED
+     │                            │   ON_PLAYERS_HP_CHANGED
+     │                            │   ON_VEHICLE_DESTROYED
+     │                            │   ON_CURRENT_VEHICLE_DESTROYED
+     │                            │   ON_MODULE_CRITICAL
+     │                            │   ON_MODULE_DESTROYED
+     │                            │   ON_MODULE_REPAIRED
+     │                            │   ON_DAMAGE_CAUSED
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
      │                            │ when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
@@ -108,16 +108,27 @@
      │----------------------------│--------------------------------------------------------------------------
      │ "strength"                 │ strength shadow (0.0 .. 255.0) (default: 1)
      │                            │ интенсивность тени (0.0 .. 255.0) (по-умолчанию: 1)
-quality, inner, knockout, hideObject
+     │----------------------------│--------------------------------------------------------------------------
+     │ "hideObject"               │ Indicates whether or not the object is hidden. The value true indicates that the object itself is not drawn; only the shadow is visible. The default is false (the object is shown).
+     │                            │ Определяет, является ли объект скрытым. Значение true указывает на то, что сам объект не нарисован, видна только его тень. Значение по умолчанию — false (объект отображается).
+     │----------------------------│--------------------------------------------------------------------------
+     │ "inner"                    │ Indicates whether or not the shadow is an inner shadow. The value true indicates an inner shadow. The default is false, an outer shadow (a shadow around the outer edges of the object).
+     │                            │ Определяет, является ли тень внутренней тенью. Значение true указывает на наличие внутренней тени. Значение по умолчанию false задает внешнюю тень (тень вокруг внешнего контура объекта).
+     │----------------------------│--------------------------------------------------------------------------
+     │ "knockout"                 │ Applies a knockout effect (true), which effectively makes the object's fill transparent and reveals the background color of the document. The default is false (no knockout).
+     │                            │ Применяет эффект выбивки (true), который фактически делает заливку объекта прозрачной и выявляет цвет фона документа. Значение по умолчанию — false (без выбивки).
+     │----------------------------│--------------------------------------------------------------------------
+     │ "quality"                  │ The number of times to apply the filter. The default value is 1 (applying the filter once). Although you can use additional numeric values up to 15 to achieve different effects, higher values are rendered more SLOWLY.
+     │                            │ Заданное число применений фильтра. Значение по умолчанию — 1 (однократное применение фильтра). Можно использовать дополнительные числовые значения до 15 для получения разнообразных эффектов, более высокие значения выполняются ДОЛЬШЕ.
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "textFormat"               │ it applies global style to HTML in "format"; note, that defined font attributes in "format" override those in "textFormat"
      │                            │ применяет глобальный стиль HTML в "format"; обратите внимание, что определенные атрибуты шрифта в "format" переопределяют "textFormat"
      │                            │ field default styles, defaults:
      │                            │ стандартный стиль поля, значение по умолчанию:
      │                            │
-     │                            │ "textFormat": { "name": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "underline": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
+     │                            │ "textFormat": { "font": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "underline": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
      │----------------------------│--------------------------------------------------------------------------
-     │ "name"                     │ font name (default: "$FieldFont")
+     │ "font"                     │ font name (default: "$FieldFont")
      │                            │ наименование шрифта (по-умолчанию: "$FieldFont")
      │----------------------------│--------------------------------------------------------------------------
      │ "color"                    │ font color ("0xXXXXXX") (default: "0xFFFFFF")
