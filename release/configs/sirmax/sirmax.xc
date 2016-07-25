@@ -269,12 +269,12 @@
   "iconset": {
     "battleLoadingAlly": "../../../../res/contour/Master_XH",
     "battleLoadingEnemy": "../../../../res/contour/Master_XH",
-    "playersPanelLeftAtlas": "../../../../res/atlases/playersPanelLeftAtlas",
-    "playersPanelRightAtlas": "../../../../res/atlases/playersPanelRightAtlas",
-    "fullStatsLeftAtlas": "../../../../res/atlases/atlasLeft",
-    "fullStatsRightAtlas": "../../../../res/atlases/atlasRight",
-    "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAllyAtlas",
-    "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerEnemyAtlas"
+    "playersPanelLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
+    "playersPanelRightAtlas": "../../../../res/atlases/BattleAtlasRight",
+    "fullStatsLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
+    "fullStatsRightAtlas": "../../../../res/atlases/BattleAtlasRight",
+    "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAtlasAlly",
+    "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerAtlasEnemy"
   },
   "vehicleNames": {
     "ussr-T-34": { "name": "т-34.", "short": "т-34" },

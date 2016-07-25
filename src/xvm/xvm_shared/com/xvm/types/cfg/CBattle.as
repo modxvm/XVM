@@ -5,6 +5,7 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
 
     public dynamic class CBattle extends Object implements ICloneable
     {
@@ -21,6 +22,19 @@ package com.xvm.types.cfg
         public function clone():*
         {
             throw new Error("clone() method is not implemented");
+        }
+
+        public function applyGlobalBattleMacros():void
+        {
+            mirroredVehicleIcons = Macros.FormatBooleanGlobal(mirroredVehicleIcons, true);
+            showPostmortemTips = Macros.FormatBooleanGlobal(showPostmortemTips, true);
+            highlightVehicleIcon = Macros.FormatBooleanGlobal(highlightVehicleIcon, true);
+            clockFormat = Macros.FormatStringGlobal(clockFormat, "H:i");
+            clanIconsFolder = Macros.FormatStringGlobal(clanIconsFolder, "clanicons/");
+            sixthSenseIcon = Macros.FormatStringGlobal(sixthSenseIcon, "xvm://res/SixthSense.png");
+            //elements:Array;
+            //camera:CCamera;
+            minimapDeadSwitch = Macros.FormatBooleanGlobal(minimapDeadSwitch, true);
         }
     }
 }

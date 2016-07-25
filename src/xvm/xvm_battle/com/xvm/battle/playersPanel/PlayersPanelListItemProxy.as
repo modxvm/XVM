@@ -71,7 +71,6 @@ package com.xvm.battle.playersPanel
 
         private var _standardTextFieldsTexts:Object = {};
 
-        private var opt_mirroredVehicleIcons:Boolean;
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
         private var mopt_removeSquadIcon:Boolean;
@@ -214,7 +213,6 @@ package com.xvm.battle.playersPanel
                 //Logger.add("xvm_enabled = " + xvm_enabled);
                 if (xvm_enabled)
                 {
-                    opt_mirroredVehicleIcons = Macros.FormatBooleanGlobal(bcfg.mirroredVehicleIcons, false)
                     opt_removeSelectedBackground = Macros.FormatBooleanGlobal(pcfg.removeSelectedBackground, false);
                     opt_vehicleIconAlpha = Macros.FormatNumberGlobal(pcfg.iconAlpha, 100) / 100.0;
 
@@ -425,7 +423,7 @@ package com.xvm.battle.playersPanel
             var vehicleIconScaleX:Number;
             var vehicleIconX:Number;
             var vehicleLevelX:Number;
-            if (opt_mirroredVehicleIcons)
+            if (bcfg.mirroredVehicleIcons)
             {
                 vehicleIconScaleX = 1;
                 vehicleIconX = VEHICLE_ICON_RIGHT_X - getFieldOffsetXRight(ui.vehicleIcon);

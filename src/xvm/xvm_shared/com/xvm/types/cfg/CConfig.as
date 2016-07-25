@@ -57,6 +57,10 @@ package com.xvm.types.cfg
 
         public function applyGlobalBattleMacros():void
         {
+            if (battle)
+            {
+                battle.applyGlobalBattleMacros();
+            }
             if (markers)
             {
                 markers.applyGlobalBattleMacros();

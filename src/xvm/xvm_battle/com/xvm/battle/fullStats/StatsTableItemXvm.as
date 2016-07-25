@@ -25,6 +25,7 @@ package com.xvm.battle.fullStats
     public class StatsTableItemXvm extends StatsTableItem
     {
         private static const FIELD_HEIGHT:int = 26;
+        private static const ICONS_AREA_WIDTH:int = 80;
 
         private static const INVALIDATE_PLAYER_STATE:uint = 1 << 15;
 
@@ -44,6 +45,7 @@ package com.xvm.battle.fullStats
         private var _vehicleNameTF:TextField;
         private var _fragsTF:TextField;
         private var _vehicleIcon:BattleAtlasSprite;
+        private var _vehicleLevelIcon:BattleAtlasSprite;
         private var _vehicleTypeIcon:BattleAtlasSprite;
         private var _icoIGR:BattleAtlasSprite;
         private var _isIGR:Boolean = false;
@@ -64,6 +66,7 @@ package com.xvm.battle.fullStats
             _icoIGR = icoIGR;
             _fragsTF = fragsTF;
             _vehicleIcon = vehicleIcon;
+            _vehicleLevelIcon = vehicleLevelIcon;
             _vehicleTypeIcon = vehicleTypeIcon;
 
             DEFAULT_PLAYER_NAME_X = playerNameTF.x;
@@ -74,8 +77,6 @@ package com.xvm.battle.fullStats
             DEFAULT_FRAGS_WIDTH = fragsTF.width;
             DEFAULT_VEHICLE_ICON_X = vehicleIcon.x;
             DEFAULT_VEHICLE_TYPE_ICON_X = vehicleTypeIcon.x;
-
-            cfg = Config.config.statisticForm;
 
             // align fields
             fragsTF.y -= 1;
@@ -93,52 +94,18 @@ package com.xvm.battle.fullStats
             vehicleNameTF.height = FIELD_HEIGHT;
             TextFieldEx.setVerticalAlign(vehicleNameTF, TextFieldEx.VALIGN_CENTER);
 
-            if (cfg.removeVehicleLevel)
-            {
-                vehicleLevelIcon.alpha = 0;
-            }
-
-            if (cfg.removeVehicleTypeIcon)
-            {
-                vehicleTypeIcon.alpha = 0;
-            }
-
-            if (cfg.nameFieldShowBorder)
-            {
-                playerNameTF.border = true;
-                playerNameTF.borderColor = 0x00FF00;
-            }
-
-            if (cfg.vehicleFieldShowBorder)
-            {
-                vehicleNameTF.border = true;
-                vehicleNameTF.borderColor = 0xFFFF00;
-            }
-
-            if (cfg.fragsFieldShowBorder)
-            {
-                fragsTF.border = true;
-                fragsTF.borderColor = 0xFF0000;
-            }
-
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
-            alignTextFields();
 
-            /*
-    "formatLeftNick": "<img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
-    "formatRightNick": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'> <img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'>",
-    "formatLeftVehicle": "{{vehicle}}<font face='mono' size='{{xvm-stat?13|0}}'> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font></font>",
-    "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}"
-    */
+            setup();
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
@@ -260,9 +227,50 @@ package com.xvm.battle.fullStats
 
         // XVM events handlers
 
-        private function onConfigLoaded():void
+        private function setup():void
         {
             cfg = Config.config.statisticForm;
+
+            if (cfg.removeVehicleLevel)
+            {
+                _vehicleLevelIcon.alpha = 0;
+            }
+
+            if (cfg.removeVehicleTypeIcon)
+            {
+                _vehicleTypeIcon.alpha = 0;
+            }
+
+            if (cfg.nameFieldShowBorder)
+            {
+                _playerNameTF.border = true;
+                _playerNameTF.borderColor = 0x00FF00;
+            }
+
+            if (cfg.vehicleFieldShowBorder)
+            {
+                _vehicleNameTF.border = true;
+                _vehicleNameTF.borderColor = 0xFFFF00;
+            }
+
+            if (cfg.fragsFieldShowBorder)
+            {
+                _fragsTF.border = true;
+                _fragsTF.borderColor = 0xFF0000;
+            }
+
+            if (!_isLeftPanel)
+            {
+                if (Config.config.battle.mirroredVehicleIcons)
+                {
+                    _vehicleIcon.scaleX = 1;
+                }
+                else
+                {
+                    _vehicleIcon.scaleX = -1;
+                }
+            }
+
             alignTextFields();
         }
 
@@ -310,7 +318,14 @@ package com.xvm.battle.fullStats
                 _vehicleNameTF.width = cfg.vehicleFieldWidthRight;
                 _fragsTF.x = DEFAULT_FRAGS_X - cfg.fragsFieldOffsetXRight + (DEFAULT_FRAGS_WIDTH - cfg.fragsFieldWidthRight) / 2;
                 _fragsTF.width = cfg.fragsFieldWidthRight;
-                _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
+                if (Config.config.battle.mirroredVehicleIcons)
+                {
+                    _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
+                }
+                else
+                {
+                    _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                }
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
         }
