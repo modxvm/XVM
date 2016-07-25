@@ -32,8 +32,6 @@ package com.xvm.types.cfg
         public var formatRightNick:String;
         public var formatLeftVehicle:String;
         public var formatRightVehicle:String;
-        public var formatLeftFrags:String;
-        public var formatRightFrags:String;
         public var extraFieldsLeft:Array;
         public var extraFieldsRight:Array;
 
