@@ -45,25 +45,25 @@
     "nameFieldOffsetXLeft": 0,
     // X offset for enemies player names field
     // Cмещение по оси X поля ника противников
-    "nameFieldOffsetXRight": 0,
+    "nameFieldOffsetXRight": -9,
     // Width of allies player names field
     // Ширина поля ника союзников
-    "nameFieldWidthLeft": 174,
+    "nameFieldWidthLeft": 200,
     // Width of enemies names field
     // Ширина поля ника противников
-    "nameFieldWidthRight": 168,
+    "nameFieldWidthRight": 200,
     // X offset for "formatLeftVehicle" field
     // Cмещение по оси X поля названия танка союзников
-    "vehicleFieldOffsetXLeft": 0,
+    "vehicleFieldOffsetXLeft": 8,
     // X offset for "formatRightVehicle" field
     // Cмещение по оси X поля названия танка противников
-    "vehicleFieldOffsetXRight": 0,
+    "vehicleFieldOffsetXRight": 5,
     // Width of "formatLeftVehicle" field
     // Ширина поля названия танка союзников
-    "vehicleFieldWidthLeft": 100,
+    "vehicleFieldWidthLeft": 250,
     // Width of "formatRightVehicle" field
     // Ширина поля названия танка противников
-    "vehicleFieldWidthRight": 100,
+    "vehicleFieldWidthRight": 250,
     // X offset for allies vehicle icons
     // Смещение по оси X иконки танка союзников
     "vehicleIconOffsetXLeft": 4,
@@ -72,7 +72,7 @@
     "vehicleIconOffsetXRight": 0,
     // X offset for allies frags
     // Смещение по оси X фрагов союзников
-    "fragsFieldOffsetXLeft": 8,
+    "fragsFieldOffsetXLeft": 5,
     // X offset for enemies frags
     // Смещение по оси X фрагов противников
     "fragsFieldOffsetXRight": 0,
