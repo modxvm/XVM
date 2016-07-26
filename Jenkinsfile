@@ -4,6 +4,8 @@ node {
 
         try { 
 
+            sh 'hg pull'
+
             stage 'XVM'
                 sh './build/ci/ci_build_xvm.sh'
 
