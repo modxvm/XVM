@@ -28,7 +28,7 @@ from gui import SystemMessages
 import simplejson
 
 from xfw import *
-from xvm_main.python.constants import *
+from xvm_main.python.consts import *
 from xvm_main.python.loadurl import loadUrl
 from xvm_main.python.logger import *
 import xvm_main.python.config as config

@@ -42,9 +42,6 @@
     "Total": "Всего",
     "Last": "Последний",
 
-    // Hp Left
-    "hpLeftTitle": "Осталось HP:",
-
     // Capture
     "enemyBaseCapture": "Захват базы{0} союзниками!",
     "enemyBaseCaptured": "База{0} захвачена союзниками!",
@@ -152,6 +149,7 @@
     "china": "Китай",
     "japan": "Япония",
     "czech": "Чехословакия",
+    "swedish": "Швеция",
     
     // Vehicle type
     "HT": "ТТ",

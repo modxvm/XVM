@@ -55,7 +55,7 @@ from gui.shared import g_eventBus, events
 from xfw import *
 
 import config
-from constants import *
+from consts import *
 from logger import *
 import utils
 
@@ -136,7 +136,7 @@ class _XMQP(object):
     def call(self, data):
         if self.is_consuming:
             #self._correlation_id = str(uuid.uuid4())
-            message = simplejson.dumps({'playerId': utils.getPlayerId(), 'data': data})
+            message = simplejson.dumps({'accountDBID': utils.getAccountDBID(), 'data': data})
             debug('[XMQP] call: %s' % utils.hide_guid(message))
             self._channel.basic_publish(
                 exchange=self._exchange_name,

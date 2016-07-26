@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.0.1',
+    'VERSION':       '0.9.15.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.0.1'],
+    'GAME_VERSIONS': ['0.9.15.1'],
     # optional
 }
 
@@ -41,12 +41,12 @@ from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
 from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.Scaleform.framework.ToolTip import ToolTip
-from gui.Scaleform.daapi.view.battle.ConsumablesPanel import ConsumablesPanel
+from gui.Scaleform.daapi.view.battle.shared.consumables_panel import ConsumablesPanel
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from xfw import *
 
 import xvm_main.python.config as config
-from xvm_main.python.constants import *
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
@@ -66,14 +66,14 @@ p_replacement = None # will be something like <font size... color...>
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, tooltips_clear_cache)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
 
 BigWorld.callback(0, start)
 
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, tooltips_clear_cache)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
 
 
 #####################################################################

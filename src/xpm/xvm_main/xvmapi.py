@@ -1,6 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2016 """
 
-from constants import *
+from consts import *
 
 # PUBLIC
 
@@ -60,15 +60,15 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
         for k, v in params.iteritems():
             url = url.replace('{'+k+'}', '' if v is None else str(v))
 
-        playerId = utils.getPlayerId()
-        if playerId is None:
-            playerId = 0
+        accountDBID = utils.getAccountDBID()
+        if accountDBID is None:
+            accountDBID = 0
 
         token = config.token.token
         if token is None:
             token = ''
 
-        url = url.format(id=playerId, token=token)
+        url = url.format(id=accountDBID, token=token)
 
         (response, duration, errStr) = loadUrl(url, None, data)
 

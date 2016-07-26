@@ -63,42 +63,42 @@
     // Dynamic transparency by efficiency
     // Динамическая прозрачность по эффективности
     "eff": [
-      { "value": 615,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 870,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1175, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1525, "alpha": ${"alphaRating.good"     } },
-      { "value": 1850, "alpha": ${"alphaRating.very_good"} },
-      { "value": 9999, "alpha": ${"alphaRating.unique"   } }
+      { "value": 610,  "color": ${"alphaRating.very_bad" } },  //    0 - 609  - very bad   (20% of players)
+      { "value": 875,  "color": ${"alphaRating.bad"      } },  //  610 - 874  - bad        (better than 20% of players)
+      { "value": 1175, "color": ${"alphaRating.normal"   } },  //  875 - 1174 - normal     (better than 60% of players)
+      { "value": 1540, "color": ${"alphaRating.good"     } },  // 1175 - 1539 - good       (better than 90% of players)
+      { "value": 1880, "color": ${"alphaRating.very_good"} },  // 1540 - 1879 - very good  (better than 99% of players)
+      { "value": 9999, "color": ${"alphaRating.unique"   } }   // 1880 - *    - unique     (better than 99.9% of players)
     ],
     // Dynamic transparency by WN6 rating
     // Динамическая прозрачность по рейтингу WN6
     "wn6": [
-      { "value": 460,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 850,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1215, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1620, "alpha": ${"alphaRating.good"     } },
-      { "value": 1960, "alpha": ${"alphaRating.very_good"} },
-      { "value": 9999, "alpha": ${"alphaRating.unique"   } }
+      { "value": 470,  "color": ${"alphaRating.very_bad" } },  //    0 - 469  - very bad   (20% of players)
+      { "value": 860,  "color": ${"alphaRating.bad"      } },  //  470 - 859  - bad        (better than 20% of players)
+      { "value": 1225, "color": ${"alphaRating.normal"   } },  //  860 - 1224 - normal     (better than 60% of players)
+      { "value": 1635, "color": ${"alphaRating.good"     } },  // 1225 - 1634 - good       (better than 90% of players)
+      { "value": 1990, "color": ${"alphaRating.very_good"} },  // 1635 - 1989 - very good  (better than 99% of players)
+      { "value": 9999, "color": ${"alphaRating.unique"   } }   // 1990 - *    - unique     (better than 99.9% of players)
     ],
     // Dynamic transparency by WN8 rating
     // Динамическая прозрачность по рейтингу WN8
     "wn8": [
-      { "value": 380,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 860,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1420, "alpha": ${"alphaRating.normal"   } },
-      { "value": 2105, "alpha": ${"alphaRating.good"     } },
-      { "value": 2770, "alpha": ${"alphaRating.very_good"} },
-      { "value": 9999, "alpha": ${"alphaRating.unique"   } }
+      { "value": 400,  "color": ${"alphaRating.very_bad" } },  //    0 - 399  - very bad   (20% of players)
+      { "value": 900,  "color": ${"alphaRating.bad"      } },  //  400 - 899  - bad        (better than 20% of players)
+      { "value": 1470, "color": ${"alphaRating.normal"   } },  //  900 - 1469 - normal     (better than 60% of players)
+      { "value": 2180, "color": ${"alphaRating.good"     } },  // 1470 - 2179 - good       (better than 90% of players)
+      { "value": 2880, "color": ${"alphaRating.very_good"} },  // 2180 - 2879 - very good  (better than 99% of players)
+      { "value": 9999, "color": ${"alphaRating.unique"   } }   // 2880 - *    - unique     (better than 99.9% of players)
     ],
     // Dynamic transparency by WG rating
     // Динамическая прозрачность по рейтингу WG
     "wgr": [
-      { "value": 2495,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 4345,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 6425,  "alpha": ${"alphaRating.normal"   } },
-      { "value": 8625,  "alpha": ${"alphaRating.good"     } },
-      { "value": 10040, "alpha": ${"alphaRating.very_good"} },
-      { "value": 99999, "alpha": ${"alphaRating.unique"   } }
+      { "value": 2555,  "color": ${"alphaRating.very_bad" } },  //    0 - 2554 - very bad   (20% of players)
+      { "value": 4435,  "color": ${"alphaRating.bad"      } },  // 2555 - 4434 - bad        (better than 20% of players)
+      { "value": 6515,  "color": ${"alphaRating.normal"   } },  // 4435 - 6514 - normal     (better than 60% of players)
+      { "value": 8730,  "color": ${"alphaRating.good"     } },  // 6515 - 8729 - good       (better than 90% of players)
+      { "value": 10175, "color": ${"alphaRating.very_good"} },  // 8730 -10174 - very good  (better than 99% of players)
+      { "value": 99999, "color": ${"alphaRating.unique"   } }   //10175 - *    - unique     (better than 99.9% of players)
     ],
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед

@@ -8,21 +8,21 @@ from logger import *
 
 # PUBLIC
 
-def getReferenceValues(vehId):
-    data = _getData(vehId)
+def getReferenceValues(vehCD):
+    data = _getData(vehCD)
     if data is None or data['td'] == data['ad'] or data['tf'] == data['af']:
         return None
     return {'avgD': data['ad'], 'avgF': data['af'], 'topD': data['td'], 'topF': data['tf']}
 
 
-def calculateXTE(vehId, dmg_per_battle, frg_per_battle):
-    data = _getData(vehId)
+def calculateXTE(vehCD, dmg_per_battle, frg_per_battle):
+    data = _getData(vehCD)
     if data is None or data['td'] == data['ad'] or data['tf'] == data['af']:
-        vdata = vehinfo.getVehicleInfoData(vehId)
+        vdata = vehinfo.getVehicleInfoData(vehCD)
         if vdata is None:
-            debug('NOTE: No vehicle info for vehicle id = {}'.format(vehId))
+            debug('NOTE: No vehicle info for vehicle id = {}'.format(vehCD))
         else:
-            debug('NOTE: No xte data for vehicle [{}] {}'.format(vehId, vdata['key']))
+            debug('NOTE: No xte data for vehicle [{}] {}'.format(vehCD, vdata['key']))
         return -1
 
     # constants
@@ -66,11 +66,11 @@ from logger import *
 _data = None
 
 
-def _getData(vehId):
+def _getData(vehCD):
     global _data
     if _data is None:
         _data = _load()
-    return _data.get(str(vehId), None)
+    return _data.get(str(vehCD), None)
 
 def _load():
     res = load_config('res_mods/mods/shared_resources/xvm/res/data/xte.json')

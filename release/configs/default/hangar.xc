@@ -143,15 +143,18 @@
         // Values above define bad response
         // Значения более считаются плохим откликом
       },
+      // Shadow options
       // Параметры тени
       "shadow": {
+        // false - no shadow
+        // false - без тени
         "enabled": true,
-        "color": "0x000000",
-        "distance": 0,
-        "angle": 0,
-        "alpha": 70,
-        "blur": 4,
-        "strength": 2
+        "distance": 0,             // (in pixels)     / offset distance / дистанция смещения
+        "angle": 0,                // (0.0 .. 360.0)  / offset angle    / угол смещения
+        "color": "0x000000",       // "0xXXXXXX"      / color           / цвет
+        "alpha": 70,               // (0 .. 100)      / opacity         / прозрачность
+        "blur": 4,                 // (0.0 .. 255.0)  / blur            / размытие
+        "strength": 2              // (0.0 .. 255.0)  / intensity       / интенсивность
       }
     },
     "onlineServers": {
@@ -237,12 +240,13 @@
         //below this value the queue might be long
         //ниже этого значения очередь может быть долгой
       },
+      // Shadow options
       // Параметры тени
       "shadow": {
         "enabled": true,
-        "color": "0x000000",
         "distance": 0,
-        "angle": 0,
+        "angle": 0,        
+        "color": "0x000000",
         "alpha": 70,
         "blur": 4,
         "strength": 2

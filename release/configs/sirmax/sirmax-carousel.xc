@@ -10,16 +10,14 @@
     //"enabled": false,
     //"zoom": 0.75,
     "rows": 2,
-    "padding": { "horizontal": 5, "vertical": 5 },
-    //"scrollingSpeed": 30,
-    "backgroundAlpha": 30,
-    "filtersPadding": { "horizontal": 11, "vertical": 10 },
-    "alwaysShowFilters": true,
+    "padding": { "horizontal": 3, "vertical": 3 },
+    "backgroundAlpha": 50,
+    //"scrollingSpeed": 2,
     //"suppressCarouselTooltips": true,
     //"hideBuyTank": true,
     //"hideBuySlot": true,
-    //"showUsedSlots": true,
     "showTotalSlots": true,
+    //"showUsedSlots": true,
     "sorting_criteria": ["level", "nation", "type"],
     "filters": {
       //"params":   { "enabled": false },
@@ -27,23 +25,28 @@
       //"favorite": { "enabled": false },
       "__stub__": {}
     },
+    //"filtersPadding": { "horizontal": 5, "vertical": 5 },
+    //"nations_order": [],
+    //"types_order":   ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
+    //"sorting_criteria": ["nation", "type", "level"],
+    //"suppressCarouselTooltips": false
     "fields": {
-      "tankType":       { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "level":          { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "multiXp":        { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "xp":             { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      //"tankName":       { "visible": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "statusText":     { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "statusTextBuy":  { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "clanLock":       { "visible": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "tankType":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "level":          { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "multiXp":        { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "xp":             { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      //"tankName":       { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "statusText":     { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "statusTextBuy":  { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "clanLock":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "activateButton": { "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "__stub__": {}
     },
     "extraFields": [
-        { "x": 140, "y": 15, "w": 50, "h": 40, "align": "right", "format": "{{v.xpToElite?{{v.earnedXP%'d|0}} {{v.xpToEliteLeft<1000?<font color='#88FF88' size='20'><b>|<font color='#CCCCCC' size='12'>}}({{v.xpToEliteLeft%'d}})</font>}}", "shadow": {} },
+        { "x": 140, "y": 15, "width": 50, "height": 40, "align": "right", "format": "{{v.xpToElite?{{v.earnedXP%'d|0}} {{v.xpToEliteLeft<1000?<font color='#88FF88' size='20'><b>|<font color='#CCCCCC' size='12'>}}({{v.xpToEliteLeft%'d}})</font>}}", "shadow": {} },
         { "x": 140, "y": 17, "src": "img://gui/maps/icons/library/XpIcon.png" },
 
-        { "x": 135, "y": 57, "w": 25, "h": 25, "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png" },
+        { "x": 135, "y": 57, "width": 25, "height": 25, "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png" },
 
         { "x": 140, "y": 40, "src": "cfg://sirmax/img/marksOnGun/{{v.marksOnGun|empty}}.png" },
         { "x": 147, "y": "{{v.marksOnGun?38|37}}", "align": "center",
@@ -60,19 +63,19 @@
           "shadow": ${ "def.textFieldShadow" }
         },
 
-        { "x": 0, "y": 15, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/wins40x32.png" },
+        { "x": 0, "y": 15, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/wins40x32.png" },
         { "x": 21, "y": 15,
           "format": "<b><font size='12' color='{{v.c_winrate}}'>{{v.winrate%2d~%}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }
         },
 
-        { "x": 0, "y": 33, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/avgDamage40x32.png" },
+        { "x": 0, "y": 33, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/avgDamage40x32.png" },
         { "x": 21, "y": 35,
           "format": "<b><font size='12' color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }
         },
 
-        { "x": 0, "y": 51, "w": 22, "h": 22, "src": "img://gui/maps/icons/library/dossier/techRatio40x32.png" },
+        { "x": 0, "y": 51, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/techRatio40x32.png" },
         { "x": 21, "y": 53,
           "format": "<b><font face='mono' size='12' color='{{v.battles>9?{{v.c_xte|#666666}}|#666666}}'>{{v.xte|--}}</font></b>",
           "shadow": ${ "def.textFieldShadow" }
@@ -88,9 +91,9 @@
         //  "shadow": { "color": "0x73734C", "alpha": 0.8, "blur": 6, "strength": 2, "distance": 0, "angle": 0 }
         //},
 
-        //{ "x": -1, "y": -1, "w": 164, "h": 104, "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
+        { "x": 0, "y": 0, "width": "160", "height": 100, "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
 
-        { "x": -1, "y": -1, "h": 104, "w": "164", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
+        //{ "x": 0, "y": 0, "width": 160, "height": 100, "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
 
         {}
     ]

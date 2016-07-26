@@ -1,6 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2016 """
 
-from messenger.gui.Scaleform.view.contact_manage_note_views import ContactEditNoteView
+from messenger.gui.Scaleform.view.lobby.contact_manage_note_views import ContactEditNoteView
 
 from xfw import *
 from xvm_main.python.logger import *

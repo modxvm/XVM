@@ -42,9 +42,6 @@
     "Total": "Total",
     "Last": "Last",
 
-    // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
-
     // Capture
     "enemyBaseCapture": "Base{0} capture by allies!",
     "enemyBaseCaptured": "Base{0} captured by allies!",
@@ -152,6 +149,7 @@
     "china": "China",
     "japan": "Japan",
     "czech": "Сzech",
+    "swedish": "Swedish",
     
     // Vehicle type
     "HT": "HT",

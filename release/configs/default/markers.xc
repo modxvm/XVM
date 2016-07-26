@@ -4,9 +4,9 @@
  */
 {
   "markers": {
-    // true - use standard client vehicle markers.
-    // true - использовать стандартные маркеры клиента.
-    "useStandardMarkers": false,
+    // false - use standard client vehicle markers.
+    // false - использовать стандартные маркеры клиента.
+    "enabled": true,
     // {{turret}} marker display strings.
     // Отображаемые строки {{turret}} маркера.
     "turretMarkers": {

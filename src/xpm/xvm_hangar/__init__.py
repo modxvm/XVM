@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.0.1',
+    'VERSION':       '0.9.15.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.0.1'],
+    'GAME_VERSIONS': ['0.9.15.1'],
     # optional
 }
 
@@ -31,7 +31,7 @@ from gui.prb_control.dispatcher import _PrebattleDispatcher
 from xfw import *
 
 import xvm_main.python.config as config
-from xvm_main.python.constants import *
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 

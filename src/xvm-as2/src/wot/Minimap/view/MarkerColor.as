@@ -20,7 +20,7 @@ class wot.Minimap.view.MarkerColor
             return;
 
         var color = null;
-        if (Config.config.markers.useStandardMarkers)
+        if (!Config.config.markers.enabled)
         {
             if (wr_entryName == MinimapConstants.STATIC_ICON_BASE)
                 return;

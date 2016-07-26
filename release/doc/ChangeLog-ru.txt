@@ -1,8 +1,77 @@
+XVM-6.4.0-dev:
+  * адаптация к WoT 0.9.15.1
+  * полная переделка боевых модов (миграция AS2->AS3)
+  * маркеры и хитлог: параметр тени "size" переименован в "blur"
+    теперь все настройки тени имеют стандарные параметры:
+      "enabled", "distance", "angle", "color", "alpha", "blur", "strength"
+  * переименованы параметры:
+      "playersPanel"/"medium"/"formatLeft" => "playersPanel"/"medium"/"nickFormatLeft"
+      "playersPanel"/"medium"/"formatRight" => "playersPanel"/"medium"/"nickFormatRight"
+      "playersPanel"/"medium2"/"formatLeft" => "playersPanel"/"medium2"/"vehicleFormatLeft"
+      "playersPanel"/"medium2"/"formatRight" => "playersPanel"/"medium2"/"vehicleFormatRight"
+      "camera"/"arcade"/"dynamicCameraEnabled" => "camera"/"arcade"/"shotRecoilEffect"
+      "camera"/"postmortem"/"dynamicCameraEnabled" => "camera"/"postmortem"/"shotRecoilEffect"
+      "camera"/"strategic"/"dynamicCameraEnabled" => "camera"/"strategic"/"shotRecoilEffect"
+      "camera"/"sniper"/"dynamicCameraEnabled" => "camera"/"sniper"/"shotRecoilEffect"
+  * удалены параметры (больше не требуются):
+      "battle"/"allowSpottedStatus"
+      "battle"/"allowHpInPanelsAndMinimap"
+      "battle"/"allowMarksOnGunInPanelsAndMinimap"
+      "carousel"/"alwaysShowFilters"
+  * переименованы параметры в секции "iconset" и изменено значение с каталога на название атласа:
+      "playersPanelAlly" => "playersPanelLeftAtlas"
+      "playersPanelEnemy" => "playersPanelRightAtlas"
+      "statisticFormAlly" => "fullStatsLeftAtlas"
+      "statisticFormEnemy" => "fullStatsRightAtlas"
+      "vehicleMarkerAlly" => "vehicleMarkerAllyAtlas"
+      "vehicleMarkerEnemy" => "vehicleMarkerEnemyAtlas"
+  * добавлен макрос {{clanicon}} со значением пути эмблемы клана
+  * удалена опция "clanIcon" в секциях "battleLoading", "battleLoadingTips", "statisticForm", "playersPanel" и в маркерах
+  * добавлены опции во все режимы в секции "playersPanel":
+      "standardFields" - отображаемые стандартные поля в данном режиме, и их порядок.
+                         допустимые названия: "frags", "vehicle", "nick".
+      "fragsWidth" - ширина поля фрагов
+      "vehicleWidth" - ширина поля названия танка
+      "nickMinWidth" - минимальная ширина поля имени игрока
+      "nickMaxWidth" - максимальная ширина поля имени игрока
+      "expandAreaWidth" - ширина области переключения в режим "large" при наведении мыши
+      "vehicleIconXOffsetLeft" - смещение координаты X для иконки танка для левой стороны
+      "vehicleIconXOffsetRight" - смещение координаты X для иконки танка для правой стороны
+      "vehicleLevelXOffsetLeft" - смещение координаты X для уровня танка для левой стороны
+      "vehicleLevelXOffsetRight" - смещение координаты X для уровня танка для правой стороны
+      "fragsXOffsetLeft" - смещение координаты X для поля фрагов для левой стороны
+      "fragsXOffsetRight" - смещение координаты X для поля фрагов для правой стороны
+      "nickXOffsetLeft" - смещение координаты X для поля имени игрока для левой стороны
+      "nickXOffsetRight" - смещение координаты X для поля имени игрока для правой стороны
+      "vehicleXOffsetLeft" - смещение координаты X для поля названия танка для левой стороны
+      "vehicleXOffsetRight" - смещение координаты X для поля названия танка для правой стороны
+  * удалены опции в секции "playersPanel":
+     "short"/"width"
+     "medium"/"width"
+     "medium2"/"width"
+     "large"/"width"
+  * индикатор зума камеры реализован как дополнительное поле со всеми его опциями
+  * в часах используется php форматирование (http://php.net/date)
+  * в секции "battle"/"elements" можно использовать глобальные макросы, включая {{py:f()}})
+  * изменено значение "carousel"/"scrollingSpeed", теперь это множительн значения по умолчанию
+  * опция "markers"/"useStandardMarkers" переименована в "markers"/"enabled"
+  * опция "markers"/*/"vehicleIcon"/"scaleX" переименована в "offsetX"
+  * опция "markers"/*/"vehicleIcon"/"scaleY" переименована в "offsetY"
+  * значение по умолчанию для "vehicleIcon"/"offsetY" изменено с 16 на 0
+  * формат конфига текстовых полей в маркерах и battleLabels изменен на
+    общий формат конфига для дополнительных полей
+  * опция "visible" везде изменена на "enabled" для однообразия
+  * удалена опция "hotkeys"/"battleLabelsHotKeys" - не требуется
+  * удалена опция "battle"/"allowLabelsOnBattleInterface" - не требуется
+  * изменена привязка координат для опции "bindToIcon" в дополнительных полях
+  * изменены макросы хитлога - добавлен префикс "hitlog." (см. macros_ru.txt)
+  * удалена секция "hpLeft" - используйте макросы {{hp*}}
+
 XVM-6.3.2.1:
   * Исправлен звук лампочки шестого чувства
   * Исправлены фильтры в карусели
 
-﻿XVM-6.3.2:
+XVM-6.3.2:
   * обновление для микропатча WoT 0.9.15.0.1
   * изменен диапазон значений параметра "shadow"/"alpha" с 0..1 до 0..100 в экстра полях
     карусели и ушей

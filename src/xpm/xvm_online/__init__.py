@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.0.1',
+    'VERSION':       '0.9.15.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.0.1'],
+    'GAME_VERSIONS': ['0.9.15.1'],
     # optional
 }
 
@@ -36,8 +36,8 @@ from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
 
 from xfw import *
 
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
-from xvm_main.python.constants import *
 
 import online
 
@@ -47,7 +47,7 @@ import online
 
 def start():
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
-    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, online.update_config)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, online.update_config)
     online.update_config()
 
 BigWorld.callback(0, start)
@@ -56,7 +56,7 @@ BigWorld.callback(0, start)
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
-    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, online.update_config)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, online.update_config)
 
 
 #####################################################################

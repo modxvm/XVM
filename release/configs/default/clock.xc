@@ -73,18 +73,18 @@
     // Clock format.
     // Формат часов.
     "format": "<font face='$FieldFont'><textformat leading='-38'><font size='36'>{{h%02d}}:{{m%02d}}</font><br></textformat><textformat rightMargin='85' leading='-1'>{{WW}}<br><font size='15'>{{D%02d}} {{MM}} {{Y}}</font></textformat></font>",
-    // Shadow.
-    // Тень.
+    // Shadow options.
+    // Параметры тени.
     "shadow": {
-      // false - no shadow.
-      // false - без тени.
+      // false - no shadow
+      // false - без тени
       "enabled": true,
-      "distance": 0,             // (in pixels)     / дистанция смещения
-      "angle": 0,                // (0.0 .. 360.0)  / угол смещения
-      "color": "0x000000",       // "0xXXXXXX"      / цвет
-      "alpha": 70,               // (0 .. 100)      / прозрачность
-      "blur": 4,                 // (0.0 .. 255.0)  / размер
-      "strength": 2              // (0.0 .. 255.0)  / интенсивность
-    }
+      "distance": 0,             // (in pixels)     / offset distance / дистанция смещения
+      "angle": 0,                // (0.0 .. 360.0)  / offset angle    / угол смещения
+      "color": "0x000000",       // "0xXXXXXX"      / color           / цвет
+      "alpha": 70,               // (0 .. 100)      / opacity         / прозрачность
+      "blur": 4,                 // (0.0 .. 255.0)  / blur            / размытие
+      "strength": 2              // (0.0 .. 255.0)  / intensity       / интенсивность
+    }   
   }
 }
