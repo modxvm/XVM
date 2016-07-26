@@ -144,10 +144,10 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 #    # debug("> _PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
 #    pass
 
-# TODO: is required?
-#@registerEvent(PlayerAvatar, 'updateVehicleHealth')
-#def _PlayerAvatar_setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
-#    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
+# update self vehicle health
+@registerEvent(PlayerAvatar, 'updateVehicleHealth')
+def PlayerAvatar_updateVehicleHealth(self, vehicleID, health, *args, **kwargs):
+    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
 
 # on vehicle info updated
 @registerEvent(BattleArenaController, 'updateVehiclesInfo')

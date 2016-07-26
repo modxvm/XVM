@@ -77,10 +77,13 @@ package com.xvm
         // initialization
 
         private static var _instance:Xvm;
+        private var _battleState:BattleState;
 
         public function Xvm():void
         {
             _instance = this;
+            _battleState = BattleState.instance;
+            this.addChild(_battleState);
             Xfw.addCommandListener(XvmCommandsInternal.AS_L10N, onL10n);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
             Xfw.addCommandListener(XvmCommandsInternal.AS_UPDATE_RESERVE, onUpdateReserve);

@@ -106,7 +106,7 @@ package com.xvm.battle.vo
             var playerState:VOPlayerState = get(vehicleID);
             if (playerState)
             {
-                playerState.updateNoEvent(data);
+                playerState.update(data);
             }
         }
 
@@ -125,7 +125,7 @@ package com.xvm.battle.vo
                 var playerState:VOPlayerState = get(vehicleStats.vehicleID);
                 if (playerState)
                 {
-                    playerState.updateNoEvent({
+                    playerState.update({
                        frags: vehicleStats.frags
                     });
                 }
@@ -158,7 +158,7 @@ package com.xvm.battle.vo
             }
             else
             {
-                (playerStates[value.vehicleID] as VOPlayerState).updateNoEvent(value);
+                (playerStates[value.vehicleID] as VOPlayerState).update(value);
             }
         }
 
@@ -171,7 +171,7 @@ package com.xvm.battle.vo
                 playerState = get(ids[i]);
                 if (playerState)
                 {
-                    playerState.updateNoEvent({
+                    playerState.update({
                         isAlly: isAlly,
                         position: i + 1
                     });

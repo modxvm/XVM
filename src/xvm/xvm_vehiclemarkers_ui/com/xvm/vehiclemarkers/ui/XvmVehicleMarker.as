@@ -141,6 +141,7 @@ package com.xvm.vehiclemarkers.ui
                         }),
                         curHealth: newHealth
                     });
+                    playerState.dispatchEvents();
                     dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
                 }
             }
@@ -166,6 +167,7 @@ package com.xvm.vehiclemarkers.ui
                 if (playerState)
                 {
                     playerState.update( { damageInfo:null, curHealth: curHealth } );
+                    playerState.dispatchEvents();
                     invalidate(InvalidationType.DATA);
                 }
             }
@@ -303,15 +305,16 @@ package com.xvm.vehiclemarkers.ui
             var playerState:VOPlayerState = BattleState.get(vehicleID);
             if (!isNaN(this.curHealth))
             {
-                playerState.updateNoEvent({
+                playerState.update({
                     curHealth: this.curHealth
                 });
             }
-            playerState.updateNoEvent({
+            playerState.update({
                 maxHealth: this.maxHealth
             });
             RegisterVehicleMarkerData();
             dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.INIT, playerState, exInfo));
+            playerState.dispatchEvents();
         }
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void

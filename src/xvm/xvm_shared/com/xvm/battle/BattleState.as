@@ -10,8 +10,10 @@ package com.xvm.battle
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
+    import scaleform.clik.constants.*;
+    import scaleform.clik.core.*;
 
-    public class BattleState // implements IBattleComponentDataController
+    public class BattleState extends UIComponent // implements IBattleComponentDataController
     {
         public static function get(vehicleID:Number):VOPlayerState
         {
@@ -76,7 +78,6 @@ package com.xvm.battle
         }
 
         // instance
-        instance; // static .ctor
         private static var _instance:BattleState = null;
         public static function get instance():BattleState
         {
@@ -93,11 +94,35 @@ package com.xvm.battle
         private var _playerFrags:int = 0;
         private var _currentAimZoom:int = 0;
 
+        private var _invalidationStates:Object = {};
+
         // .ctor should be private for Singleton
         function BattleState()
         {
+            focusable = false;
+            visible = false;
             Xfw.addCommandListener(BattleCommands.AS_UPDATE_PLAYER_STATE, onUpdatePlayerState);
             Xfw.addCommandListener(BattleCommands.AS_UPDATE_DEVICE_STATE, onUpdateDeviceState);
+        }
+
+        override protected function draw():void
+        {
+            if (isInvalid(InvalidationType.STATE))
+            {
+                _playersDataVO.dispatchEvents();
+            }
+            if (isInvalid(InvalidationType.DATA))
+            {
+                for (var key:String in _invalidationStates)
+                {
+                    var playerState:VOPlayerState = get(Number(key));
+                    if (playerState)
+                    {
+                        playerState.dispatchEvents();
+                    }
+                }
+                _invalidationStates = {};
+            }
         }
 
         // IBattleComponentDataController implementation
@@ -180,7 +205,6 @@ package com.xvm.battle
                     _playersDataVO = new VOPlayersData();
                 }
                 _playersDataVO.setVehiclesData(data);
-                _playersDataVO.dispatchEvents();
                 BattleMacros.RegisterPlayersData();
             }
             catch (ex:Error)
@@ -237,8 +261,8 @@ package com.xvm.battle
             //Logger.addObject(data, 1, "updatePlayerStatus");
             try
             {
-                _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status });
-                _playersDataVO.dispatchEvents();
+                _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status } );
+                invalidate(InvalidationType.STATE);
             }
             catch (ex:Error)
             {
@@ -280,7 +304,7 @@ package com.xvm.battle
                     _playersDataVO.updateVehicleInfos(data.leftVehicleInfos);
                 if (data.rightVehicleInfos)
                     _playersDataVO.updateVehicleInfos(data.rightVehicleInfos);
-                _playersDataVO.dispatchEvents();
+                invalidate(InvalidationType.STATE);
             }
             catch (ex:Error)
             {
@@ -310,7 +334,7 @@ package com.xvm.battle
                 {
                     _playersDataVO.updateTotalStats(data.totalStats);
                 }
-                _playersDataVO.dispatchEvents();
+                invalidate(InvalidationType.STATE);
             }
             catch (ex:Error)
             {
@@ -339,7 +363,7 @@ package com.xvm.battle
                     _playersDataVO.leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
                 if (data.totalStats)
                     _playersDataVO.updateTotalStats(data.totalStats);
-                _playersDataVO.dispatchEvents();
+                invalidate(InvalidationType.STATE);
             }
             catch (ex:Error)
             {
@@ -367,6 +391,8 @@ package com.xvm.battle
                         delete data.__hitlogData;
                     }
                     playerState.update(data);
+                    _invalidationStates[playerState.vehicleID] = true;
+                    invalidate(InvalidationType.DATA);
                 }
             }
             catch (ex:Error)
@@ -414,7 +440,7 @@ package com.xvm.battle
 
             _hitlogTotalDamage += damage;
 
-            playerState.updateNoEvent( {
+            playerState.update( {
                 hitlogDamage: playerState.hitlogDamage + damage,
                 damageInfo: new VODamageInfo({
                     damageDelta: damage,

@@ -144,20 +144,25 @@ def _FragCorrelationPanel_getTotalStats(base, self, arenaDP):
 
 @registerEvent(PlayerAvatar, 'updateVehicleHealth')
 def setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
+    #log('setVehicleNewHealth: {}, {}'.format(vehicleID, health))
     update_hp(vehicleID, health)
 
 @registerEvent(VehicleMarkerPlugin, '_VehicleMarkerPlugin__addOrUpdateVehicleMarker')
 def _VehicleMarkerPlugin__addOrUpdateVehicleMarker(self, vProxy, vInfo, *args, **kwargs):
+    #log('_VehicleMarkerPlugin__addOrUpdateVehicleMarker: {}, {}'.format(vProxy.id, vProxy.health))
     update_hp(vProxy.id, vProxy.health)
 
-def onVehicleKilled(self, targetID, *args, **kwargs):
-    update_hp(targetID, 0)
+def onVehicleKilled(victimID, *args, **kwargs):
+    #log('onVehicleKilled: {}, {}'.format(victimID, 0))
+    update_hp(victimID, 0)
 
 def onVehicleFeedbackReceived(eventID, vehicleID, value, *args, **kwargs):
     try:
         if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
+            #log('onVehicleFeedbackReceived: {}, {}'.format(vehicleID, value[0]))
             update_hp(vehicleID, value[0])
         elif eventID == FEEDBACK_EVENT_ID.VEHICLE_DEAD:
+            #log('onVehicleFeedbackReceived: {}, {}'.format(vehicleID, 0))
             update_hp(vehicleID, 0)
     except Exception, ex:
         err(traceback.format_exc())
@@ -184,13 +189,14 @@ def color_gradient(color1, color2, ratio):
         err(traceback.format_exc())
         return 'FFFFFF'
 
-def update_hp(vehicleID, hp, *args, **kwargs):
+def update_hp(vehicleID, hp):
     try:
         player = BigWorld.player()
         team = 0 if player.team == player.arena.vehicles[vehicleID]['team'] else 1
 
         global teams_vehicles, teams_totalhp, total_hp_color, total_hp_sign
 
+        #log('update_hp: {} {} => {}'.format(vehicleID, teams_vehicles[team].get(vehicleID, None), hp))
         teams_vehicles[team][vehicleID] = max(hp, 0)
         teams_totalhp[team] = sum(teams_vehicles[team].values())
 

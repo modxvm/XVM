@@ -356,13 +356,6 @@ package com.xvm.battle.vo
 
         override public function update(data:Object):Boolean
         {
-            var updated:Boolean = updateNoEvent(data);
-            dispatchEvents();
-            return updated;
-        }
-
-        public function updateNoEvent(data:Object):Boolean
-        {
             var updated:Boolean = false;
             for (var key:String in data)
             {
