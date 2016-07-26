@@ -285,7 +285,9 @@ class Battle(object):
         if self.battle_page:
             ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
             if ctrl:
-                ctrl.invalidateArenaInfo()
+                arenaDP = ctrl._battleCtx.getArenaDP()
+                ctrl.invalidateVehiclesInfo(arenaDP)
+                ctrl.invalidateVehiclesStats(arenaDP)
             # update vehicles data
             for (vehicleID, vData) in BigWorld.player().arena.vehicles.iteritems():
                 self.updatePlayerState(vehicleID, INV.ALL)
