@@ -89,7 +89,7 @@ package com.xvm.battle.vo
 
         override public function get isAlive():Boolean
         {
-            return VehicleStatus.isAlive(vehicleStatus) && __curHealth > 0;
+            return VehicleStatus.isAlive(vehicleStatus) && (isNaN(__curHealth) || __curHealth > 0);
         }
 
         override public function get isReady():Boolean
