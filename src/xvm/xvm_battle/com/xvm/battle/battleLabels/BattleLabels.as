@@ -86,7 +86,7 @@ package com.xvm.battle.battleLabels
                     new Rectangle(0, 0, App.appWidth, App.appHeight),
                     ExtraFields.LAYOUT_ROOT,
                     TextFormatAlign.LEFT,
-                    CTextFormat.GetDefaultConfigForBattleLabels());
+                    CTextFormat.GetDefaultConfigForBattle());
                 addChild(_extraFields);
                 invalidate(InvalidationType.ALL);
             }

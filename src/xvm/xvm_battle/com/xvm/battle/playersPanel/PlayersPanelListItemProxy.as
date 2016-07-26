@@ -615,31 +615,34 @@ package com.xvm.battle.playersPanel
                 Macros.FormatNumberGlobal(cfg.y, 65),
                 Macros.FormatNumberGlobal(cfg.width, 380),
                 Macros.FormatNumberGlobal(cfg.height, 28));
+                var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
             extraFieldsHidden = new ExtraFields(
                 cfg.formats,
                 isLeftPanel,
                 getSchemeNameForPlayer,
                 getSchemeNameForVehicle,
                 bounds,
-                Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase());
+                Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase(),
+                null,
+                defaultTextFormatConfig);
             BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmView.battlePage.getChildIndex(BattleXvmView.battlePage.playersPanel));
             //_internal_createMenuForNoneState(mc);
             //createMouseHandler(_root["extraPanels"]);
 
             var formats:Array = isLeftPanel ? pcfg.short.extraFieldsLeft : pcfg.short.extraFieldsRight;
-            extraFieldsShort = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
+            extraFieldsShort = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
             addChild(extraFieldsShort);
 
             formats = isLeftPanel ? pcfg.medium.extraFieldsLeft : pcfg.medium.extraFieldsRight;
-            extraFieldsMedium = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
+            extraFieldsMedium = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
             addChild(extraFieldsMedium);
 
             formats = isLeftPanel ? pcfg.medium2.extraFieldsLeft : pcfg.medium2.extraFieldsRight;
-            extraFieldsLong = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
+            extraFieldsLong = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
             addChild(extraFieldsLong);
 
             formats = isLeftPanel ? pcfg.large.extraFieldsLeft : pcfg.large.extraFieldsRight;
-            extraFieldsFull = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle);
+            extraFieldsFull = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
             addChild(extraFieldsFull);
         }
 
