@@ -53,8 +53,8 @@ package com.xvm.battle.vo
         private var _damageInfo:VODamageInfo;
         private var _xmqpData:VOXmqpData;
 
-        private var _hitlogDamage:int = 0;
-        private var _hitlogHits:Vector.<int> = new Vector.<int>();
+        private var __hitlogDamage:int = 0;
+        private var __hitlogHits:Vector.<int> = new Vector.<int>();
 
         private var _position:Number = NaN;
         private var _vehCD:int;
@@ -89,7 +89,7 @@ package com.xvm.battle.vo
 
         override public function get isAlive():Boolean
         {
-            return VehicleStatus.isAlive(vehicleStatus);
+            return VehicleStatus.isAlive(vehicleStatus) && __curHealth > 0;
         }
 
         override public function get isReady():Boolean
@@ -295,12 +295,18 @@ package com.xvm.battle.vo
 
         public function get hitlogDamage():int
         {
-            return _hitlogDamage;
+            return __hitlogDamage;
+        }
+
+        internal function set_hitlogDamage(value:int):void
+        {
+            __hitlogDamage = value;
+            eventsToDispatch[PlayerStateEvent.DAMAGE_CAUSED] = true;
         }
 
         public function get hitlogHits():Vector.<int>
         {
-            return _hitlogHits;
+            return __hitlogHits;
         }
 
         //
@@ -374,7 +380,7 @@ package com.xvm.battle.vo
                     }
                 }
             }
-            if (updated && !data["__i_said_no_event__"])
+            if (updated)
             {
                 eventsToDispatch[PlayerStateEvent.CHANGED] = true;
             }

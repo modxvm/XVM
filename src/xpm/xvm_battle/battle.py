@@ -45,10 +45,11 @@ class INV(object):
     MARKS_ON_GUN        = 0x00000040
     SPOTTED_STATUS      = 0x00000080
     FRAGS               = 0x00000100
+    HITLOG              = 0x00010000
     ALL_VINFO           = VEHICLE_STATUS | SQUAD_INDEX | FRAGS # | PLAYER_STATUS
     ALL_VSTATS          = FRAGS
     ALL_ENTITY          = CUR_HEALTH | MAX_HEALTH | MARKS_ON_GUN
-    ALL                 = 0xFFFFFFFF
+    ALL                 = 0x0000FFFF
 
 class SPOTTED_STATUS(object):
     NEVER_SEEN = 'neverSeen'
@@ -122,14 +123,14 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 # BATTLE
 
 # on current player enters world
-@registerEvent(PlayerAvatar, 'onEnterWorld')
-def _PlayerAvatar_onEnterWorld(self, prereqs):
-    pass
+#@registerEvent(PlayerAvatar, 'onEnterWorld')
+#def _PlayerAvatar_onEnterWorld(self, prereqs):
+#    pass
 
 # on current player leaves world
-@registerEvent(PlayerAvatar, 'onLeaveWorld')
-def _PlayerAvatar_onLeaveWorld(self):
-    pass
+#@registerEvent(PlayerAvatar, 'onLeaveWorld')
+#def _PlayerAvatar_onLeaveWorld(self):
+#    pass
 
 # on any player marker appear
 @registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
@@ -138,14 +139,15 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     g_battle.updatePlayerState(vehicle.id, INV.ALL)
 
 # on any player marker lost
-@registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
-def _PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
-    # debug("> _PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
-    pass
+#@registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
+#def _PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
+#    # debug("> _PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
+#    pass
 
-@registerEvent(PlayerAvatar, 'updateVehicleHealth')
-def _PlayerAvatar_setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
-    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
+# TODO: is required?
+#@registerEvent(PlayerAvatar, 'updateVehicleHealth')
+#def _PlayerAvatar_setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
+#    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
 
 # on vehicle info updated
 @registerEvent(BattleArenaController, 'updateVehiclesInfo')
@@ -220,17 +222,40 @@ class Battle(object):
 
     def onVehicleFeedbackReceived(self, eventID, vehicleID, value):
         if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
+            inv = INV.CUR_HEALTH
+            userData = None
             (newHealth, aInfo, attackReasonID) = value
             if aInfo is not None and aInfo.vehicleID == BigWorld.player().playerVehicleID:
-                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_HITLOG_DATA,
-                           vehicleID,
-                           newHealth,
-                           self._getVehicleDamageType(aInfo),
-                           constants.ATTACK_REASONS[attackReasonID])
-            self.updatePlayerState(vehicleID, INV.CUR_HEALTH)
+                inv |= INV.HITLOG
+                userData = {'damageFlag':self._getVehicleDamageType(aInfo),
+                            'damageType':constants.ATTACK_REASONS[attackReasonID]}
+            self.updatePlayerState(vehicleID, inv, userData)
 
-    def updatePlayerState(self, vehicleID, targets):
+    def updatePlayerState(self, vehicleID, targets, userData=None):
         try:
+            data = {}
+
+            if targets & INV.SPOTTED_STATUS:
+                data['spottedStatus'] = self.getSpottedStatus(vehicleID)
+
+            if targets & INV.HITLOG:
+                data['__hitlogData'] = userData
+
+            if targets & INV.ALL_ENTITY:
+                entity = BigWorld.entity(vehicleID)
+
+                if targets & INV.CUR_HEALTH:
+                    if entity and hasattr(entity, 'health'):
+                        data['curHealth'] = entity.health
+
+                if targets & INV.MAX_HEALTH:
+                    if entity and hasattr(entity, 'typeDescriptor'):
+                        data['maxHealth'] = entity.typeDescriptor.maxHealth
+
+                if targets & INV.MARKS_ON_GUN:
+                    if entity and hasattr(entity, 'publicInfo'):
+                        data['marksOnGun'] = entity.publicInfo.marksOnGun
+
             if targets & (INV.ALL_VINFO | INV.ALL_VSTATS):
                 arenaDP = g_sessionProvider.getArenaDP()
                 if targets & INV.ALL_VINFO:
@@ -238,30 +263,19 @@ class Battle(object):
                 if targets & INV.ALL_VSTATS:
                     vStatsVO = arenaDP.getVehicleStats(vehicleID)
 
-            if targets & INV.ALL_ENTITY:
-                entity = BigWorld.entity(vehicleID)
+                if targets & INV.VEHICLE_STATUS:
+                    data['vehicleStatus'] = vInfoVO.vehicleStatus
 
-            data = {}
-            if targets & INV.VEHICLE_STATUS:
-                data['vehicleStatus'] = vInfoVO.vehicleStatus
-            # why vInfoVO.playerStatus == 0?
-            #if targets & INV.PLAYER_STATUS:
-            #    data['playerStatus'] = vInfoVO.playerStatus
-            if targets & INV.SQUAD_INDEX:
-                data['squadIndex'] = vInfoVO.squadIndex
-            if targets & INV.CUR_HEALTH:
-                if entity and hasattr(entity, 'health'):
-                    data['curHealth'] = entity.health
-            if targets & INV.MAX_HEALTH:
-                if entity and hasattr(entity, 'typeDescriptor'):
-                    data['maxHealth'] = entity.typeDescriptor.maxHealth
-            if targets & INV.MARKS_ON_GUN:
-                if entity and hasattr(entity, 'publicInfo'):
-                    data['marksOnGun'] = entity.publicInfo.marksOnGun
-            if targets & INV.SPOTTED_STATUS:
-                data['spottedStatus'] = self.getSpottedStatus(vehicleID)
-            if targets & INV.FRAGS:
-                data['frags'] = vStatsVO.frags
+                if targets & INV.SQUAD_INDEX:
+                    data['squadIndex'] = vInfoVO.squadIndex
+
+                # why vInfoVO.playerStatus == 0?
+                #if targets & INV.PLAYER_STATUS:
+                #    data['playerStatus'] = vInfoVO.playerStatus
+                
+                if targets & INV.FRAGS:
+                    data['frags'] = vStatsVO.frags
+
             as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
         except Exception, ex:
             err(traceback.format_exc())

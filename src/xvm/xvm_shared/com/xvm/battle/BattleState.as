@@ -98,7 +98,6 @@ package com.xvm.battle
         {
             Xfw.addCommandListener(BattleCommands.AS_UPDATE_PLAYER_STATE, onUpdatePlayerState);
             Xfw.addCommandListener(BattleCommands.AS_UPDATE_DEVICE_STATE, onUpdateDeviceState);
-            Xfw.addCommandListener(BattleCommands.AS_UPDATE_HITLOG_DATA, onUpdateHitlogData);
         }
 
         // IBattleComponentDataController implementation
@@ -362,6 +361,11 @@ package com.xvm.battle
                 var playerState:VOPlayerState = get(vehicleID);
                 if (playerState)
                 {
+                    if (data.__hitlogData)
+                    {
+                        onUpdateHitlogData(playerState, data.curHealth, data.__hitlogData.damageFlag, data.__hitlogData.damageType);
+                        delete data.__hitlogData;
+                    }
                     playerState.update(data);
                 }
             }
@@ -403,44 +407,33 @@ package com.xvm.battle
         private var _hitlogTotalDamage:int = 0;
         private var _hitlogHits:Array = [];
 
-        private function onUpdateHitlogData(vehicleID:Number, newHealth:Number, damageFlag:int, damageType:String):void
+        private function onUpdateHitlogData(playerState:VOPlayerState, newHealth:Number, damageFlag:int, damageType:String):void
         {
             //Logger.add("onUpdateHitlogData: " + arguments);
-            var playerState:VOPlayerState = get(vehicleID);
-            if (playerState)
+            var damage:int = playerState.getCurHealthValue() - Math.max(0, newHealth);
+            //Logger.add("damage=" + damage);
+
+            _hitlogTotalDamage += damage;
+
+            playerState.updateNoEvent( {
+                hitlogDamage: playerState.hitlogDamage + damage,
+                damageInfo: new VODamageInfo({
+                    damageDelta: damage,
+                    damageType: damageType,
+                    damageFlag: damageFlag
+                })
+            });
+
+            var lastHit:VOHit = _hitlogHits.length ? _hitlogHits[_hitlogHits.length - 1] : new VOHit();
+            if ((damageType == "fire" || damageType == "ramming") && lastHit.vehicleID == playerState.vehicleID && lastHit.damageType == damageType)
             {
-                var damage:int = playerState.getCurHealthValue() - Math.max(0, newHealth);
-
-                _hitlogTotalDamage += damage;
-
-                playerState.updateNoEvent({
-                    hitlogDamage: playerState.hitlogDamage + damage,
-                    damageInfo: new VODamageInfo({
-                        damageDelta: damage,
-                        damageType: damageType,
-                        damageFlag: damageFlag
-                    }),
-                    "__i_said_no_event__": true
-                });
-
-                var lastHit:VOHit = _hitlogHits.length ? _hitlogHits[_hitlogHits.length - 1] : new VOHit();
-                if ((damageType == "fire" || damageType == "ramming") && lastHit.vehicleID == vehicleID && lastHit.damageType == damageType)
-                {
-                    damage += lastHit.damage;
-                    _hitlogHits.pop();
-                    playerState.hitlogHits.pop();
-                }
-
-                var hitIndex:Number = _hitlogHits.push(new VOHit(vehicleID, damage, damageType)) - 1;
-                playerState.hitlogHits.push(hitIndex);
-
-                //Logger.add(_hitlogTotalDamage + " " + _hitlogTotalHits);
-                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.DAMAGE_CAUSED, vehicleID, playerState.accountDBID, playerState.playerName));
+                damage += lastHit.damage;
+                _hitlogHits.pop();
+                playerState.hitlogHits.pop();
             }
-            else
-            {
-                Logger.add("WARNING: BattleState.onUpdateHitlogData(): playerState is null");
-            }
+
+            var hitIndex:Number = _hitlogHits.push(new VOHit(playerState.vehicleID, damage, damageType)) - 1;
+            playerState.hitlogHits.push(hitIndex);
         }
     }
 }
