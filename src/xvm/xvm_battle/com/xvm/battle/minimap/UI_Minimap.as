@@ -26,38 +26,6 @@ package com.xvm.battle.minimap
         override protected function configUI():void
         {
             super.configUI();
-            Xfw.addCommandListener(BattleCommands.AS_UPDATE_PLAYER_STATE, updatePlayerState);
-        }
-
-        private function updatePlayerState(vehicleId:Number, data:Object):void
-        {
-            var needDispatch:Boolean = false;
-            var d:VOPlayerState = BattleState.get(vehicleId);
-            if (d && data.hasOwnProperty("curHealth"))
-            {
-                d.updateNoEvent({
-                    curHealth: data["curHealth"]
-                });
-                needDispatch = true;
-            }
-
-            if (d && data.hasOwnProperty("maxHealth") && d.maxHealth != data["maxHealth"])
-            {
-                d.update({
-                    maxHealth: data["maxHealth"]
-                });
-                //if (isNaN(d.curHealth))
-                //{
-                //    d._curHealth = d._maxHealth;
-                //}
-                needDispatch = true;
-            }
-
-            if (needDispatch)
-            {
-                d.dispatchEvents();
-                Xvm.dispatchEvent(new EntryInfoChangeEvent(EntryInfoChangeEvent.INFO_CHANGED, vehicleId, d));
-            }
         }
     }
 }

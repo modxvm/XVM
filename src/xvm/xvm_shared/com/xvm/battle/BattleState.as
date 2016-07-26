@@ -411,7 +411,6 @@ package com.xvm.battle
         {
             //Logger.add("onUpdateHitlogData: " + arguments);
             var damage:int = playerState.getCurHealthValue() - Math.max(0, newHealth);
-            //Logger.add("damage=" + damage);
 
             _hitlogTotalDamage += damage;
 
