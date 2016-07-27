@@ -189,7 +189,7 @@ package com.xvm.battle.vo
 
         public function get isSPG():Boolean
         {
-            return _vehicleData ? _vehicleData.vclass = VehicleClass.SPG : false;
+            return _vehicleData ? _vehicleData.vclass == VehicleClass.SPG : false;
         }
 
         public function get vehicleStatus():uint
