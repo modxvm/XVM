@@ -12,6 +12,7 @@ package com.xvm.lobby.ui.techtree
     import net.wg.gui.lobby.techtree.data.state.*;
     import net.wg.gui.lobby.techtree.data.vo.*;
     import net.wg.gui.lobby.techtree.math.*;
+    import scaleform.gfx.*;
 
     public dynamic class UI_NationTreeNodeSkinned extends NationTreeNodeSkinned
     {
@@ -85,6 +86,10 @@ package com.xvm.lobby.ui.techtree
         private function createControls():void
         {
             masteryTF = new TextField();
+            masteryTF.mouseEnabled = false;
+            masteryTF.selectable = false;
+            TextFieldEx.setNoTranslate(masteryTF, true);
+            masteryTF.antiAliasType = AntiAliasType.ADVANCED;
             masteryTF.x = 3;
             masteryTF.y = 14;
             masteryTF.width = 32;

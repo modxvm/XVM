@@ -15,6 +15,7 @@ package com.xvm.lobby.ui.battleresults
     import net.wg.gui.lobby.battleResults.components.*;
     import net.wg.gui.lobby.battleResults.data.*;
     import scaleform.clik.events.*;
+    import scaleform.gfx.*;
 
     public dynamic class UI_CommonStats extends CommonStats
     {
@@ -344,7 +345,10 @@ package com.xvm.lobby.ui.battleresults
             newTf.alpha = 1;
 
             newTf.styleSheet = XfwUtils.createTextStyleSheet(CSS_FIELD_CLASS, detailsMc.xpTitleLbl.defaultTextFormat);
+            newTf.mouseEnabled = false;
             newTf.selectable = false;
+            TextFieldEx.setNoTranslate(newTf, true);
+            newTf.antiAliasType = AntiAliasType.ADVANCED;
 
             var y_space:Number = detailsMc.xpTitleLbl.height;
             var y_pos:Number = detailsMc.resTitleLbl && detailsMc.resTitleLbl.visible ? detailsMc.resTitleLbl.y : detailsMc.xpTitleLbl.y;

@@ -11,6 +11,7 @@ package com.xvm.vehiclemarkers.ui.components
     import com.xvm.vehiclemarkers.ui.*;
     import flash.display.*;
     import flash.text.*;
+    import scaleform.gfx.*;
 
     public class DamageTextComponent extends VehicleMarkerComponentBase
     {
@@ -61,11 +62,14 @@ package com.xvm.vehiclemarkers.ui.components
 
                     var textField:TextField = new TextField();
                     mc.addChild(textField);
+                    textField.mouseEnabled = false;
+                    textField.selectable = false;
+                    TextFieldEx.setNoTranslate(textField, true);
+                    textField.antiAliasType = AntiAliasType.ADVANCED;
                     textField.x = Macros.FormatNumber(cfg.x, playerState, 0);
                     textField.y = 0;
                     textField.width = 200;
                     textField.height = 100;
-                    textField.antiAliasType = AntiAliasType.ADVANCED;
                     textField.multiline = true;
                     textField.wordWrap = false;
                     textField.alpha = alpha;

@@ -12,7 +12,8 @@ package com.xvm.battle.battleClock
     import flash.text.*;
     import flash.utils.*;
     import net.wg.gui.battle.views.debugPanel.DebugPanel;
-    import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.infrastructure.interfaces.entity.*;
+    import scaleform.gfx.*;
 
     public class BattleClock extends TextField implements IDisposable
     {
@@ -21,6 +22,12 @@ package com.xvm.battle.battleClock
 
         public function BattleClock()
         {
+            mouseEnabled = false;
+            selectable = false;
+            TextFieldEx.setNoTranslate(this, true);
+            antiAliasType = AntiAliasType.ADVANCED;
+            filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 1, 3) ];
+
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             onConfigLoaded(null);
         }
@@ -43,16 +50,12 @@ package com.xvm.battle.battleClock
         {
             //Xvm.swfProfilerBegin("BattleClock.setup()");
             format = Config.config.battle.clockFormat;
-            mouseEnabled = false;
-            selectable = false;
             var debugPanel:DebugPanel = BattleXvmView.battlePage.debugPanel;
             x = debugPanel.lagOnlineSpr.x + debugPanel.lagOnlineSpr.width;
             y = debugPanel.fpsTF.y;
-            antiAliasType = AntiAliasType.ADVANCED;
             var textFormat:TextFormat = debugPanel.fpsTF.defaultTextFormat;
             textFormat.align = "left";
             defaultTextFormat = textFormat;
-            filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 1, 3) ];
 
             timer = new Timer(1000, 0);
             timer.addEventListener(TimerEvent.TIMER, onTimer);

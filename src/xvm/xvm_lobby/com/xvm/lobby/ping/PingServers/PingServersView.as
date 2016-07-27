@@ -12,6 +12,7 @@ package com.xvm.lobby.ping.PingServers
     import flash.events.*;
     import scaleform.clik.core.*;
     import org.idmedia.as3commons.util.*;
+    import scaleform.gfx.*;
 
     public class PingServersView extends UIComponent
     {
@@ -241,6 +242,10 @@ package com.xvm.lobby.ping.PingServers
         public function createField(num:int):TextField
         {
             var tf:TextField = new TextField();
+            tf.mouseEnabled = false;
+            tf.selectable = false;
+            TextFieldEx.setNoTranslate(tf, true);
+            tf.antiAliasType = AntiAliasType.ADVANCED;
             tf.name = "tfPing" + num;
             tf.x = cfg.x + get_x_offset();
             tf.y = cfg.y + get_y_offset();
@@ -249,8 +254,6 @@ package com.xvm.lobby.ping.PingServers
             tf.autoSize = TextFieldAutoSize.LEFT;
             tf.multiline = true;
             tf.wordWrap = false;
-            tf.selectable = false;
-            tf.mouseEnabled = false;
             tf.styleSheet = XfwUtils.createStyleSheet(createCss());
             tf.alpha = cfg.alpha / 100.0;
             tf.htmlText =  "";

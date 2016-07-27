@@ -10,6 +10,7 @@ package com.xvm.lobby.battleloading.components
     import flash.text.*;
     import flash.utils.*;
     import net.wg.gui.lobby.battleloading.*;
+    import scaleform.gfx.*;
 
     public class Clock
     {
@@ -33,15 +34,17 @@ package com.xvm.lobby.battleloading.components
                 var f:TextField = form.helpTip;
 
                 clock = new TextField();
+                clock.mouseEnabled = false;
+                clock.selectable = false;
+                TextFieldEx.setNoTranslate(clock, true);
+                clock.antiAliasType = AntiAliasType.ADVANCED;
                 clock.x = f.x;
                 clock.y = f.y;
                 clock.autoSize = TextFieldAutoSize.NONE;
                 clock.width = f.width;
                 clock.height = f.height;
-                clock.antiAliasType = AntiAliasType.ADVANCED;
                 var tf:TextFormat = new TextFormat("$TitleFont", 16, 0xFFFFFF, false, false, false, null, null, TextFormatAlign.RIGHT);
                 clock.defaultTextFormat = tf;
-                clock.selectable = false;
                 clock.filters = f.filters;
                 form.addChild(clock);
 

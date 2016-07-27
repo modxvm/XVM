@@ -10,6 +10,7 @@ package com.xvm.lobby.battleloading.components
     import com.xvm.types.cfg.*;
     import flash.text.*;
     import net.wg.gui.lobby.battleloading.*;
+    import scaleform.gfx.*;
 
     public class WinChances
     {
@@ -62,17 +63,19 @@ package com.xvm.lobby.battleloading.components
         private function createWinChanceTextField(tpl:TextField):TextField
         {
             var f:TextField = new TextField();
+            f.mouseEnabled = false;
+            f.selectable = false;
+            TextFieldEx.setNoTranslate(f, true);
+            f.antiAliasType = AntiAliasType.ADVANCED;
             f.x = tpl.x;
             f.y = tpl.y;
             f.autoSize = TextFieldAutoSize.NONE;
             f.width = tpl.width;
             f.height = tpl.height;
-            f.antiAliasType = AntiAliasType.ADVANCED;
             var tf:TextFormat = tpl.getTextFormat();
             tf.color = 0xFFFFFF;
             tf.align = TextFormatAlign.CENTER;
             f.defaultTextFormat = tf;
-            f.selectable = false;
             f.filters = tpl.filters;
             return f;
         }

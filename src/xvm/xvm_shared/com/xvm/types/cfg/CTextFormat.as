@@ -60,7 +60,7 @@ package com.xvm.types.cfg
         private static var _defaultConfigForBattle:CTextFormat = null;
         public static function GetDefaultConfigForBattle(align:String = TextFormatAlign.LEFT):CTextFormat
         {
-            if (_defaultConfigForBattle== null)
+            if (_defaultConfigForBattle == null)
             {
                 _defaultConfigForBattle = new CTextFormat();
                 _defaultConfigForBattle.enabled = true;
@@ -70,6 +70,21 @@ package com.xvm.types.cfg
                 _defaultConfigForBattle.align = align;
             }
             return _defaultConfigForBattle;
+        }
+
+        private static var _defaultConfigForLobby:CTextFormat = null;
+        public static function GetDefaultConfigForLobby():CTextFormat
+        {
+            if (_defaultConfigForLobby == null)
+            {
+                _defaultConfigForLobby = new CTextFormat();
+                _defaultConfigForLobby.enabled = true;
+                _defaultConfigForLobby.font = "$FieldFont";
+                _defaultConfigForLobby.size = 13;
+                _defaultConfigForLobby.color = 0xFFFFFF;
+                _defaultConfigForLobby.align = TextFormatAlign.LEFT;
+            }
+            return _defaultConfigForLobby;
         }
     }
 }

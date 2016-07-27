@@ -11,6 +11,7 @@ package com.xvm.lobby.ui.company.renderers
     import flash.events.*;
     import flash.text.*;
     import net.wg.gui.prebattle.controls.*;
+    import scaleform.gfx.*;
 
     public class TeamMemberRenderer
     {
@@ -30,6 +31,10 @@ package com.xvm.lobby.ui.company.renderers
                 vehicleLevelFieldX = proxy.vehicleLevelField.x - 12;
                 proxy.vehicleLevelField.x = vehicleLevelFieldX;
                 effField = new TextField();
+                effField.mouseEnabled = false;
+                effField.selectable = false;
+                TextFieldEx.setNoTranslate(effField, true);
+                effField.antiAliasType = AntiAliasType.ADVANCED;
                 var tf:TextFormat = proxy.vehicleLevelField.defaultTextFormat;
                 tf.align = TextFormatAlign.RIGHT;
                 effField.styleSheet = XfwUtils.createTextStyleSheet("eff", tf);

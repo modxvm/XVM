@@ -12,6 +12,7 @@ package com.xvm.lobby.online.OnlineServers
     import flash.events.*;
     import scaleform.clik.core.*;
     import org.idmedia.as3commons.util.*;
+    import scaleform.gfx.*;
 
     public class OnlineServersView extends UIComponent
     {
@@ -244,6 +245,10 @@ package com.xvm.lobby.online.OnlineServers
         public function createField(num:int):TextField
         {
             var tf:TextField = new TextField();
+            tf.mouseEnabled = false;
+            tf.selectable = false;
+            TextFieldEx.setNoTranslate(tf, true);
+            tf.antiAliasType = AntiAliasType.ADVANCED;
             tf.name = "tfOnline" + num;
             tf.x = cfg.x + get_x_offset();
             tf.y = cfg.y + get_y_offset();
@@ -252,8 +257,6 @@ package com.xvm.lobby.online.OnlineServers
             tf.autoSize = TextFieldAutoSize.LEFT;
             tf.multiline = true;
             tf.wordWrap = false;
-            tf.selectable = false;
-            tf.mouseEnabled = false;
             tf.styleSheet = XfwUtils.createStyleSheet(createCss());
             tf.alpha = cfg.alpha / 100.0;
             tf.htmlText =  "";

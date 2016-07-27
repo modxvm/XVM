@@ -96,7 +96,10 @@ package com.xvm.lobby.ui.squad
         private function createVehicleTierField():void
         {
             vehicleTierField = new TextField();
+            vehicleTierField.mouseEnabled = false;
             vehicleTierField.selectable = false;
+            TextFieldEx.setNoTranslate(vehicleTierField, true);
+            vehicleTierField.antiAliasType = AntiAliasType.ADVANCED;
             vehicleTierField.autoSize = TextFieldAutoSize.RIGHT;
             vehicleTierField.styleSheet = Utils.createTextStyleSheet("xvm_vehicleTier", proxy.vehicleNameField.defaultTextFormat);
 

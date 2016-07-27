@@ -9,8 +9,9 @@ package com.xvm.lobby.battleresults.components
     import com.xfw.events.*;
     import com.xvm.types.stat.*;
     import flash.text.*;
-    import flash.utils.Dictionary;
+    import flash.utils.*;
     import net.wg.gui.lobby.battleResults.*;
+    import scaleform.gfx.*;
 
     public class WinChances
     {
@@ -42,9 +43,10 @@ package com.xvm.lobby.battleresults.components
             if (textField == null)
             {
                 textField = new TextField();
-                textField.antiAliasType = AntiAliasType.ADVANCED;
-                textField.selectable = false;
                 textField.mouseEnabled = false;
+                textField.selectable = false;
+                TextFieldEx.setNoTranslate(textField, true);
+                textField.antiAliasType = AntiAliasType.ADVANCED;
                 textField.x = page.width - 405;
                 textField.y = 2;
                 textField.width = 400;

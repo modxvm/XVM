@@ -15,6 +15,7 @@ package com.xvm.lobby.ui.profile.components
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
+    import scaleform.gfx.*;
 
     public class TechniqueStatisticTab
     {
@@ -136,11 +137,12 @@ package com.xvm.lobby.ui.profile.components
         private function _createTextField(x:Number, y:Number, width:Number, height:Number, fontSize:Number):TextField
         {
             var tf:TextField = new TextField();
+            tf.mouseEnabled = false;
+            tf.selectable = false;
+            TextFieldEx.setNoTranslate(tf, true);
             tf.antiAliasType = AntiAliasType.ADVANCED;
             tf.multiline = true;
             tf.wordWrap = false;
-            tf.selectable = false;
-            tf.mouseEnabled = false;
             tf.x = x;
             tf.y = y;
             tf.width = width;

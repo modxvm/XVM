@@ -12,6 +12,7 @@ package com.xvm.lobby.ui.profile
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;
+    import scaleform.gfx.*;
 
     public dynamic class UI_TechniqueRenderer extends TechniqueRenderer_UI
     {
@@ -30,12 +31,13 @@ package com.xvm.lobby.ui.profile
             {
                 // xTE
                 xteTF = new TextField();
-                xteTF.name = "xteTF";
+                xteTF.mouseEnabled = false;
+                xteTF.selectable = false;
+                TextFieldEx.setNoTranslate(xteTF, true);
                 xteTF.antiAliasType = AntiAliasType.ADVANCED;
+                xteTF.name = "xteTF";
                 xteTF.multiline = true;
                 xteTF.wordWrap = false;
-                xteTF.selectable = false;
-                xteTF.mouseEnabled = false;
                 xteTF.y = winsTF.y;
                 xteTF.width = 50;
                 xteTF.height = 25;

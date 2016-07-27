@@ -11,6 +11,7 @@ package com.xvm.lobby.ui.company.renderers
     import flash.events.*;
     import flash.text.*;
     import net.wg.gui.prebattle.company.*;
+    import scaleform.gfx.*;
 
     public class CompanyDropItemRenderer
     {
@@ -28,6 +29,10 @@ package com.xvm.lobby.ui.company.renderers
                 proxy.numberField.width = 15;
                 proxy.textField.x = 15;
                 effField = new TextField();
+                effField.mouseEnabled = false;
+                effField.selectable = false;
+                TextFieldEx.setNoTranslate(effField, true);
+                effField.antiAliasType = AntiAliasType.ADVANCED;
                 effField.styleSheet = XfwUtils.createTextStyleSheet("eff", proxy.textField.defaultTextFormat);
                 effField.x = 20 + proxy.textField.width;
                 effField.y = proxy.textField.y;

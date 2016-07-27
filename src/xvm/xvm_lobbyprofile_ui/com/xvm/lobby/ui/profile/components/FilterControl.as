@@ -99,8 +99,10 @@ package com.xvm.lobby.ui.profile.components
         private function createLabel(label:String, x:Number, y:Number):TextField
         {
             var l:TextField = new TextField();
-            l.antiAliasType = AntiAliasType.ADVANCED;
+            l.mouseEnabled = false;
             l.selectable = false;
+            TextFieldEx.setNoTranslate(l, true);
+            l.antiAliasType = AntiAliasType.ADVANCED;
             l.x = x;
             l.y = y;
             l.autoSize = TextFieldAutoSize.LEFT;

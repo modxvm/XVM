@@ -13,6 +13,7 @@ package com.xvm.lobby.ui.company.renderers
     import flash.text.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.prebattle.company.*;
+    import scaleform.gfx.*;
 
     public class CompanyOwnerItemRenderer
     {
@@ -28,6 +29,10 @@ package com.xvm.lobby.ui.company.renderers
                 this.proxy = proxy;
 
                 effField = new TextField();
+                effField.mouseEnabled = false;
+                effField.selectable = false;
+                TextFieldEx.setNoTranslate(effField, true);
+                effField.antiAliasType = AntiAliasType.ADVANCED;
                 effField.styleSheet = XfwUtils.createTextStyleSheet("eff", proxy.pCountField.defaultTextFormat);
                 effField.x = proxy.pCountField.x - 15;
                 effField.y = proxy.pCountField.y;

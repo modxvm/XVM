@@ -112,7 +112,7 @@ package com.xvm.lobby.ui.tankcarousel
                 _extraFieldsHolder.mouseChildren = false;
                 addChildAt(_extraFieldsHolder, this.getChildIndex(this.slot) + 1);
 
-                _extraFields = new ExtraFields(cfg.extraFields);
+                _extraFields = new ExtraFields(cfg.extraFields, true, null, null, null, null, null, CTextFormat.GetDefaultConfigForLobby());
                 _extraFields.scaleX = _extraFields.scaleY = 1 / zoom;
                 _extraFieldsHolder.addChild(_extraFields);
                 _extraFieldsHolder.mask = _extraFieldsHolder.addChild(createMask(-2, -2, ITEM_WIDTH + 3, ITEM_HEIGHT + 3));
