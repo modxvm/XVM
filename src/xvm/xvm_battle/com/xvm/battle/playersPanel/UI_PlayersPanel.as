@@ -110,7 +110,6 @@ package com.xvm.battle.playersPanel
 
         override public function setPersonalStatus(param1:uint):void
         {
-            Logger.add("setPersonalStatus");
             if (Config.IS_DEVELOPMENT)
             {
                 param1 |= PersonalStatus.CAN_SEND_INVITE_TO_ALLY;

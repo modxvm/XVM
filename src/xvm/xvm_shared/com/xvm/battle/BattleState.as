@@ -129,7 +129,7 @@ package com.xvm.battle
 
         public function addVehiclesInfo(data:Object):void
         {
-            Logger.addObject(data, 1, "addVehiclesInfo");
+            Logger.addObject(data, 1, "[BattleState] addVehiclesInfo");
             try
             {
             }
@@ -169,7 +169,7 @@ package com.xvm.battle
 
         public function setPersonalStatus(param1:uint):void
         {
-            Logger.add("setPersonalStatus: " + param1);
+            Logger.add("[BattleState] setPersonalStatus: " + param1);
             try
             {
             }
@@ -185,7 +185,7 @@ package com.xvm.battle
 
         public function setUserTags(data:Object):void
         {
-            Logger.addObject(data, 1, "setUserTags");
+            Logger.addObject(data, 1, "[BattleState] setUserTags");
             try
             {
             }
@@ -219,12 +219,19 @@ package com.xvm.battle
 
         public function setVehicleStats(data:Object):void
         {
-            Logger.addObject(data, 1, "setVehicleStats");
+            Logger.addObject(data, 1, "[BattleState] setVehicleStats");
+            try
+            {
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         public function updateInvitationsStatuses(data:Object) : void
         {
-            Logger.addObject(data, 1, "updateInvitationsStatuses");
+            Logger.addObject(data, 1, "[BattleState] updateInvitationsStatuses");
             try
             {
             }
@@ -236,7 +243,7 @@ package com.xvm.battle
 
         public function updatePersonalStatus(param1:uint, param2:uint):void
         {
-            Logger.add("updatePersonalStatus: " + param1 + ", " + param2);
+            Logger.add("[BattleState] updatePersonalStatus: " + param1 + ", " + param2);
             try
             {
             }
@@ -258,7 +265,7 @@ package com.xvm.battle
         public function updatePlayerStatus(data:Object):void
         {
             Xvm.swfProfilerBegin("BattleState.updatePlayerStatus()");
-            //Logger.addObject(data, 1, "updatePlayerStatus");
+            //Logger.addObject(data, 1, "[BattleState] updatePlayerStatus");
             try
             {
                 _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status } );
@@ -276,7 +283,7 @@ package com.xvm.battle
 
         public function updateUserTags(data:Object):void
         {
-            Logger.addObject(data, 1, "updateUserTags");
+            Logger.addObject(data, 1, "[BattleState] updateUserTags");
             try
             {
             }
@@ -289,7 +296,7 @@ package com.xvm.battle
         public function updateVehiclesInfo(data:Object):void
         {
             Xvm.swfProfilerBegin("BattleState.updateVehiclesInfo()");
-            //Logger.addObject(data, 1, "updateVehiclesInfo");
+            //Logger.addObject(data, 1, "[BattleState] updateVehiclesInfo");
             try
             {
                 if (data.leftCorrelationIDs)
@@ -319,7 +326,7 @@ package com.xvm.battle
         public function updateVehiclesStats(data:Object):void
         {
             Xvm.swfProfilerBegin("BattleState.updateVehiclesStats()");
-            //Logger.addObject(data, 1, "updateVehiclesStats");
+            //Logger.addObject(data, 1, "[BattleState] updateVehiclesStats");
             try
             {
                 if (data.leftFrags)
@@ -349,7 +356,7 @@ package com.xvm.battle
         public function updateVehicleStatus(data:Object):void
         {
             Xvm.swfProfilerBegin("BattleState.updateVehicleStatus()");
-            //Logger.addObject(data, 1, "updateVehicleStatus");
+            //Logger.addObject(data, 1, "[BattleState] updateVehicleStatus");
             try
             {
                 _playersDataVO.updatePlayerState(data.vehicleID, { vehicleStatus: data.status });
@@ -435,7 +442,7 @@ package com.xvm.battle
 
         private function onUpdateHitlogData(playerState:VOPlayerState, newHealth:Number, damageFlag:int, damageType:String):void
         {
-            //Logger.add("onUpdateHitlogData: " + arguments);
+            //Logger.add("[BattleState] onUpdateHitlogData: " + arguments);
             var damage:int = playerState.getCurHealthValue() - Math.max(0, newHealth);
 
             _hitlogTotalDamage += damage;
