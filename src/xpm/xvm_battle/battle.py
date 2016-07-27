@@ -224,11 +224,12 @@ class Battle(object):
         if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
             inv = INV.CUR_HEALTH
             userData = None
-            (newHealth, aInfo, attackReasonID) = value
-            if aInfo is not None and aInfo.vehicleID == BigWorld.player().playerVehicleID:
-                inv |= INV.HITLOG
-                userData = {'damageFlag':self._getVehicleDamageType(aInfo),
-                            'damageType':constants.ATTACK_REASONS[attackReasonID]}
+            if g_sessionProvider.getCtx().isEnemy(vID=vehicleID):
+                (newHealth, aInfo, attackReasonID) = value
+                if aInfo is not None and aInfo.vehicleID == BigWorld.player().playerVehicleID:
+                    inv |= INV.HITLOG
+                    userData = {'damageFlag':self._getVehicleDamageType(aInfo),
+                                'damageType':constants.ATTACK_REASONS[attackReasonID]}
             self.updatePlayerState(vehicleID, inv, userData)
 
     def updatePlayerState(self, vehicleID, targets, userData=None):
