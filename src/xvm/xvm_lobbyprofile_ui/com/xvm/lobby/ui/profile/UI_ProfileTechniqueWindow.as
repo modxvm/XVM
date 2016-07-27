@@ -59,6 +59,20 @@ package com.xvm.lobby.ui.profile
             super.onDispose();
         }
 
+        override protected function applyData(param1:Object):void
+        {
+            super.applyData(param1);
+            try
+            {
+                if (technique)
+                    technique.applyData();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
         // PUBLIC
 
         public function get currentDataXvm():Object
@@ -74,22 +88,6 @@ package com.xvm.lobby.ui.profile
         public function get baseDisposed():Boolean
         {
             return _baseDisposed;
-        }
-
-        public function as_xvm_sendAccountData(itemCD:Number):void
-        {
-            if (_baseDisposed)
-                return;
-
-            try
-            {
-                if (technique)
-                    technique.as_xvm_sendAccountData(itemCD);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
         }
 
         public function as_responseVehicleDossierXvm(data:Object):void

@@ -108,6 +108,7 @@ package com.xvm.lobby.ui.profile.components
                 if (Config.networkServicesSettings.statAwards)
                 {
                     Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
+                    Stat.loadUserData(playerName);
 
                     Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, accountDBID);
 
@@ -144,46 +145,45 @@ package com.xvm.lobby.ui.profile.components
             }
         }
 
-        // DAAPI
-
-        public function as_xvm_sendAccountData(itemCD:Number):void
+        public function fixInitData(param1:Object):void
         {
-            if (_disposed)
-                return;
-
-            try
+            if (Config.networkServicesSettings.statAwards)
             {
-                //if (!page.listComponent.techniqueList.dataProvider.length)
-                //    return;
+                var bi:Object = {
+                    id: "xvm_xte",
+                    label: "xTE",
+                    toolTip: "xvm_xte",
+                    buttonWidth: 50,
+                    sortOrder: 8,
+                    defaultSortDirection: SortingInfo.DESCENDING_SORT,
+                    ascendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW,
+                    descendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW,
+                    buttonHeight: 40,
+                    enabled: true
+                };
 
-                if (Config.networkServicesSettings.statAwards)
-                {
-                    setupSortableButtonBar();
-                }
-
-                page.listComponent.xfw_cancelValidation(DEFAULT_SORTING_INVALID);
-
-                // Sort
-                if (!_initialSortDone)
-                {
-                    _selectedItemCD = itemCD;
-                    App.utils.scheduler.scheduleOnNextFrame(makeInitialSort);
-                }
-                else
-                {
-                    App.utils.scheduler.scheduleOnNextFrame(makeSort);
-                }
-
-                if (Config.networkServicesSettings.statAwards)
-                {
-                    initializeListComponentVehicles();
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
+                var tableHeader:Array = param1.tableHeader;
+                tableHeader[4].buttonWidth = 64; // BATTLES_COUNT,74
+                tableHeader[5].buttonWidth = 64; // WINS_EFFICIENCY,74
+                tableHeader[6].buttonWidth = 75; // AVG_EXPERIENCE,90
+                tableHeader.push(tableHeader[7]);
+                tableHeader[7] = bi;             // xvm_xte
+                tableHeader[8].buttonWidth = 68; // MARK_OF_MASTERY,83
             }
         }
+
+        public function applyData():void
+        {
+            makeInitialSort();
+        }
+
+        public function setSelectedVehicleIntCD(itemCD:Number):void
+        {
+            _selectedItemCD = itemCD;
+        }
+
+
+        // DAAPI
 
         public function as_responseVehicleDossierXvm(data:VehicleDossier):void
         {
@@ -213,59 +213,6 @@ package com.xvm.lobby.ui.profile.components
             //filter.addEventListener(Event.CHANGE, applyFilter);
             //page.addChild(filter);
         //}
-
-        // listComponent
-
-        private function initializeListComponentVehicles():void
-        {
-            //Logger.add("initializeListComponentVehicles: " + playerName);
-            try
-            {
-                // Load stat
-                Stat.loadUserData(playerName);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        private function setupSortableButtonBar():void
-        {
-            try
-            {
-                if (Config.config.userInfo.showXTEColumn)
-                {
-                    var bi:NormalSortingBtnVO = new NormalSortingBtnVO({
-                        id: "xvm_xte",
-                        label: "xTE",
-                        toolTip: "xvm_xte",
-                        buttonWidth: 50,
-                        sortOrder: 8,
-                        defaultSortDirection: SortingInfo.DESCENDING_SORT,
-                        ascendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW,
-                        descendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW,
-                        buttonHeight: 40,
-                        enabled: true
-                    });
-
-                    var dp:Array = page.listComponent.sortableButtonBar.dataProvider as Array;
-                    dp[4].buttonWidth = 64; // BATTLES_COUNT,74
-                    dp[5].buttonWidth = 64; // WINS_EFFICIENCY,74
-                    dp[6].buttonWidth = 75; // AVG_EXPERIENCE,90
-                    dp.push(dp[7]);
-                    dp[7] = bi;             // xvm_xte
-                    dp[8].buttonWidth = 68; // MARK_OF_MASTERY,83
-
-                    page.listComponent.sortableButtonBar.dataProvider = new DataProvider(dp);
-                    page.listComponent.techniqueList.columnsData = page.listComponent.sortableButtonBar.dataProvider;
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
 
         // Initial sort
 
@@ -299,16 +246,13 @@ package com.xvm.lobby.ui.profile.components
                     var pg:ProfileTechniquePage = page as ProfileTechniquePage;
                     if (pg)
                     {
-                        if (_selectedItemCD == -1)
-                            _selectedItemCD = dp[0].id;
                         pg.as_setSelectedVehicleIntCD(_selectedItemCD);
                     }
 
                     var pw:ProfileTechniqueWindow = page as ProfileTechniqueWindow;
                     if (pw)
                     {
-                        // TODO:0.9.15.1
-                        //pw.listComponent.techniqueList.setSelectedVehIntCD(dp[0].id);
+                        pw.listComponent.techniqueList.selectVehicleByIndex(0);
                     }
                 }
 

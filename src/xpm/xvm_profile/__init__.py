@@ -24,8 +24,6 @@ from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.meta.ProfileMeta import ProfileMeta
 from gui.Scaleform.daapi.view.meta.ProfileWindowMeta import ProfileWindowMeta
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
-from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniquePage import ProfileTechniquePage
-from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 
@@ -49,14 +47,12 @@ import xvm_main.python.xvm_scale as xvm_scale
 _lastAccountDBID = None
 _lastVehCD = None
 
-
 @overrideMethod(ProfileMeta, 'registerFlashComponent')
 def ProfileMeta_registerFlashComponent(base, self, component, alias, *args):
     startPageAlias = _getStartPageAlias(self, alias, True)
     if startPageAlias is not None:
         args[3]['selectedAlias'] = startPageAlias
     base(self, component, alias, *args)
-
 
 @overrideMethod(ProfileWindowMeta, 'registerFlashComponent')
 def ProfileWindowMeta_registerFlashComponent(base, self, component, alias, *args):
@@ -65,28 +61,14 @@ def ProfileWindowMeta_registerFlashComponent(base, self, component, alias, *args
         args[3]['selectedAlias'] = startPageAlias
     base(self, component, alias, *args)
 
-
-@overrideMethod(ProfileTechniquePage, '_sendAccountData')
-def ProfileTechniquePage_sendAccountData(base, self, targetData, accountDossier):
-    _sendAccountData(base, self, targetData, accountDossier, True)
-
-
-@overrideMethod(ProfileTechniqueWindow, '_sendAccountData')
-def ProfileTechniqueWindow_sendAccountData(base, self, targetData, accountDossier):
-    _sendAccountData(base, self, targetData, accountDossier, False)
-
-
-def _sendAccountData(base, self, targetData, accountDossier, isProfilePage):
+@overrideMethod(ProfileTechnique, '_sendAccountData')
+def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
     try:
         global _lastAccountDBID
         _lastAccountDBID = accountDossier.getPlayerDBID()
-
         base(self, targetData, accountDossier)
-        intVehCD = int(self._selectedData.get('itemCD', -1)) if self._selectedData is not None else -1
-        self.flashObject.as_xvm_sendAccountData(intVehCD)
     except:
         err(traceback.format_exc())
-
 
 @overrideMethod(ProfileTechnique, '_getTechniqueListVehicles')
 def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
@@ -103,7 +85,6 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
                 err(traceback.format_exc())
     return res
 
-
 @overrideMethod(ProfileTechnique, '_receiveVehicleDossier')
 def ProfileTechnique_receiveVehicleDossier(base, self, vehCD, accountDBID):
     global _lastVehCD
@@ -115,7 +96,6 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehCD, accountDBID):
         if self._isDAAPIInited():
             vDossier = dossier.getDossier((self._battlesType, accountDBID, vehCD))
             self.flashObject.as_responseVehicleDossierXvm(vDossier)
-
 
 @overrideStaticMethod(DetailedStatisticsUtils, 'getStatistics')
 def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layout):

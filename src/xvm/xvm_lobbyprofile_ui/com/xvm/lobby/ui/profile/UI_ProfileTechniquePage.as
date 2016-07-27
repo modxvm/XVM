@@ -25,6 +25,41 @@ package com.xvm.lobby.ui.profile
             addChild(technique);
         }
 
+        override public function as_setInitData(param1:Object):void
+        {
+            try
+            {
+                if (technique)
+                    technique.fixInitData(param1);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            super.as_setInitData(param1);
+        }
+
+        override protected function applyData(param1:Object):void
+        {
+            super.applyData(param1);
+            try
+            {
+                if (technique)
+                    technique.applyData();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
+        override public function as_setSelectedVehicleIntCD(itemCD:Number):void
+        {
+            super.as_setSelectedVehicleIntCD(itemCD);
+            if (technique)
+                technique.setSelectedVehicleIntCD(itemCD);
+        }
+
         // PUBLIC
 
         public function get currentDataXvm():Object
@@ -40,22 +75,6 @@ package com.xvm.lobby.ui.profile
         public function get baseDisposed():Boolean
         {
             return _baseDisposed;
-        }
-
-        public function as_xvm_sendAccountData(itemCD:Number):void
-        {
-            if (_baseDisposed)
-                return;
-
-            try
-            {
-                if (technique)
-                    technique.as_xvm_sendAccountData(itemCD);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
         }
 
         public function as_responseVehicleDossierXvm(data:Object):void
