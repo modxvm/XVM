@@ -222,6 +222,7 @@ package com.xvm.battle.playersPanel
                     ui.deadBg.alpha = alpha;
 
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+                    ui.dynamicSquad.squadIcon.alpha = mopt_removeSquadIcon ? 0 : 1;
 
                     createExtraFields();
                 }
@@ -286,6 +287,7 @@ package com.xvm.battle.playersPanel
                 case PLAYERS_PANEL_STATE.SHORT:
                     mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+                    ui.dynamicSquad.squadIcon.alpha = mopt_removeSquadIcon ? 0 : 1;
                     ui.fragsTF.visible = false;
                     ui.vehicleTF.visible = false;
                     ui.playerNameCutTF.visible = false;
@@ -472,7 +474,7 @@ package com.xvm.battle.playersPanel
             }
             ui.x = -(lastX - (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
             //Logger.add("ui.x=" + ui.x);
-            ui.dynamicSquad.x = -ui.x - (mopt_removeSquadIcon ? SQUAD_ITEMS_AREA_WIDTH : 0);
+            ui.dynamicSquad.x = -ui.x;
         }
 
         private function updatePositionsRight():void
@@ -496,7 +498,7 @@ package com.xvm.battle.playersPanel
                 }
             }
             ui.x = -(lastX + (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
-            ui.dynamicSquad.x = -ui.x + (mopt_removeSquadIcon ? SQUAD_ITEMS_AREA_WIDTH : 0);
+            ui.dynamicSquad.x = -ui.x;
         }
 
         private function getFieldByConfigName(fieldName:String):TextField

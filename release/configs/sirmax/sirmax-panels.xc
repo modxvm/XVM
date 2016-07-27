@@ -75,6 +75,7 @@
   },
   "medium": {
     //"enabled": false,
+    "expandAreaWidth": 0,
     "nickMinWidth": 80,
     "nickMaxWidth": 80,
     //"standardFields": [ "nick", "vehicle", "frags" ]
@@ -94,6 +95,7 @@
   },
   "medium2": {
     //"enabled": false,
+    "expandAreaWidth": 0,
     "vehicleWidth": 80,
     //"standardFields": [ "nick", "vehicle", "frags" ]
     //"removeSquadIcon": true,
@@ -112,6 +114,7 @@
   },
   "short": {
     //"enabled": false,
+    "expandAreaWidth": 0,
     "fragsWidth": 20,
     //"standardFields": [ "nick", "vehicle", "frags" ]
     "vehicleIconXOffsetLeft": -15,

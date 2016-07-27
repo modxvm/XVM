@@ -108,6 +108,16 @@ package com.xvm.battle.playersPanel
             xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
         }
 
+        override public function setPersonalStatus(param1:uint):void
+        {
+            Logger.add("setPersonalStatus");
+            if (Config.IS_DEVELOPMENT)
+            {
+                param1 |= PersonalStatus.CAN_SEND_INVITE_TO_ALLY;
+            }
+            super.setPersonalStatus(param1);
+        }
+
         // PRIVATE
 
         private function setup(e:Event = null):Object
