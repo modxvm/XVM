@@ -22,6 +22,7 @@ from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
+from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 
 from xfw import *
 from xvm_main.python.logger import *
@@ -93,8 +94,6 @@ def _PlayerAvatar_onBecomePlayer(base, self):
                 arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
-            ctrl.onMinimapVehicleAdded += g_battle.onMinimapVehicleAdded
-            ctrl.onMinimapVehicleRemoved += g_battle.onMinimapVehicleRemoved
             ctrl.onVehicleFeedbackReceived += g_battle.onVehicleFeedbackReceived
         g_battle.onStartBattle()
     except Exception, ex:
@@ -112,8 +111,6 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
                 arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
-            ctrl.onMinimapVehicleAdded -= g_battle.onMinimapVehicleAdded
-            ctrl.onMinimapVehicleRemoved -= g_battle.onMinimapVehicleRemoved
             ctrl.onVehicleFeedbackReceived -= g_battle.onVehicleFeedbackReceived
     except Exception, ex:
         err(traceback.format_exc())
@@ -171,6 +168,16 @@ def _DamagePanel_updateDeviceState(self, value):
     except:
         err(traceback.format_exc())
 
+@registerEvent(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__setInAoI')
+def _ArenaVehiclesPlugin__setInAoI(self, entry, isInAoI):
+    try:
+        for vehicleID, entry2 in self._entries.iteritems():
+            if entry == entry2:
+                g_battle.updateSpottedStatus(vehicleID, isInAoI)
+    except:
+        err(traceback.format_exc())
+
+
 #####################################################################
 # Battle
 
@@ -212,14 +219,6 @@ class Battle(object):
     def onVehicleStatisticsUpdate(self, vehicleID):
         self.updatePlayerState(vehicleID, INV.FRAGS)
 
-    def onMinimapVehicleAdded(self, vProxy, vInfo, guiProps):
-        self._spotted_cache[vInfo.vehicleID] = SPOTTED_STATUS.SPOTTED
-        self.updatePlayerState(vInfo.vehicleID, INV.SPOTTED_STATUS)
-
-    def onMinimapVehicleRemoved(self, vehicleID):
-        self._spotted_cache[vehicleID] = SPOTTED_STATUS.LOST
-        self.updatePlayerState(vehicleID, INV.SPOTTED_STATUS)
-
     def onVehicleFeedbackReceived(self, eventID, vehicleID, value):
         if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
             inv = INV.CUR_HEALTH
@@ -231,6 +230,12 @@ class Battle(object):
                     userData = {'damageFlag':self._getVehicleDamageType(aInfo),
                                 'damageType':constants.ATTACK_REASONS[attackReasonID]}
             self.updatePlayerState(vehicleID, inv, userData)
+
+    def updateSpottedStatus(self, vehicleID, active):
+        spotted_status = SPOTTED_STATUS.SPOTTED if active else SPOTTED_STATUS.LOST
+        if self.getSpottedStatus(vehicleID) != spotted_status:
+            self._spotted_cache[vehicleID] = spotted_status
+            self.updatePlayerState(vehicleID, INV.SPOTTED_STATUS)
 
     def updatePlayerState(self, vehicleID, targets, userData=None):
         try:
@@ -273,7 +278,7 @@ class Battle(object):
                 # why vInfoVO.playerStatus == 0?
                 #if targets & INV.PLAYER_STATUS:
                 #    data['playerStatus'] = vInfoVO.playerStatus
-                
+
                 if targets & INV.FRAGS:
                     data['frags'] = vStatsVO.frags
 
