@@ -34,6 +34,8 @@ package com.xvm.extraFields
         private var _widthValue:Number = NaN;
         private var _heightValue:Number = NaN;
         private var _srcValue:String = null;
+        private var _scaleXValue:Number = NaN;
+        private var _scaleYValue:Number = NaN;
         private var _highlightValue:Boolean = false;
         private var _colorSchemeNameValue:String = null;
         private var _keyHolded:Boolean = false;
@@ -70,6 +72,12 @@ package com.xvm.extraFields
             _cfg = null;
         }
 
+        override protected function imageDataReady():void
+        {
+            super.imageDataReady();
+            align();
+        }
+
         public function get cfg():CExtraField
         {
             return _cfg;
@@ -93,12 +101,6 @@ package com.xvm.extraFields
         public function get heightValue():Number
         {
             return _heightValue;
-        }
-
-        override protected function onImgDataCompleteHandler(param1:Event):void
-        {
-            super.onImgDataCompleteHandler(param1);
-            align();
         }
 
         private function setup(options:IVOMacrosOptions):void
@@ -149,17 +151,15 @@ package com.xvm.extraFields
                 _cfg.rotation = null;
             }
 
-            value = Macros.FormatNumber(_cfg.scaleX, options, 1);
+            _scaleXValue = Macros.FormatNumber(_cfg.scaleX, options, 1);
             if (Macros.IsCached(_cfg.scaleX, options))
             {
-                scaleX = value;
                 _cfg.scaleX = null;
             }
 
-            value = Macros.FormatNumber(_cfg.scaleY, options, 1);
+            _scaleYValue = Macros.FormatNumber(_cfg.scaleY, options, 1);
             if (Macros.IsCached(_cfg.scaleY, options))
             {
-                scaleY = value;
                 _cfg.scaleY = null;
             }
 
@@ -259,19 +259,19 @@ package com.xvm.extraFields
             }
             if (_cfg.scaleX != null)
             {
-                value = Macros.FormatNumber(_cfg.scaleX, options, 1);
-                if (scaleX != value)
-                {
-                    scaleX = value;
-                }
+                _scaleXValue = Macros.FormatNumber(_cfg.scaleX, options, 1);
+            }
+            if (_bitmap.scaleX != _scaleXValue)
+            {
+                needAlign = true;
             }
             if (_cfg.scaleY != null)
             {
-                value = Macros.FormatNumber(_cfg.scaleY, options, 1);
-                if (scaleY != value)
-                {
-                    scaleY = value;
-                }
+                _scaleYValue = Macros.FormatNumber(_cfg.scaleY, options, 1);
+            }
+            if (_bitmap.scaleY != _scaleXValue)
+            {
+                needAlign = true;
             }
             if (_cfg.bindToIcon && !isNaN(bindToIconOffset))
             {
@@ -323,10 +323,20 @@ package com.xvm.extraFields
 
         private function align():void
         {
+            if (_bitmap.scaleX != _scaleXValue)
+            {
+                _bitmap.scaleX = _scaleXValue;
+            }
+            if (_bitmap.scaleY != _scaleYValue)
+            {
+                _bitmap.scaleY = _scaleYValue;
+            }
             if (!isNaN(_widthValue))
                 width = _widthValue;
             if (!isNaN(_heightValue))
                 height = _heightValue;
+            var x:Number;
+            var y:Number;
             if (_bounds && _layout == ExtraFields.LAYOUT_ROOT)
             {
                 var align:String = Macros.FormatStringGlobal(_cfg.screenHAlign, TextFormatAlign.LEFT);
@@ -342,6 +352,22 @@ package com.xvm.extraFields
                     x -= width;
                 else if (_cfg.align == TextFormatAlign.CENTER)
                     x -= width / 2;
+            }
+            if (_scaleXValue < 0)
+            {
+                x += _bitmap.width;
+            }
+            if (_scaleYValue < 0)
+            {
+                y += _bitmap.height;
+            }
+            if (this.x != x)
+            {
+                this.x = x;
+            }
+            if (this.y != y)
+            {
+                this.y = y;
             }
         }
 

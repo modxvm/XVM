@@ -40,14 +40,15 @@
       //{ "x": 0, "src": "cfg://sirmax/img/MinimapAim.png" },
       //{ "x": 0, "bindToIcon": true, "src": "cfg://sirmax/img/MinimapAim.png" },
 
+      { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" },
       { "y": 2, "width": 3, "height": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
       { "x": "{{r_size=2?13|{{r_size=4?16|19}}}}", "y": 2, "height": 21, "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font>", "shadow": {} },
       { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "height": 21, "width": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
       { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "height": 21, "width": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
-      { "x": -20, "y": 6.7, "bindToIcon": true, "src": "xvm://res/icons/flags/{{flag|default}}.png" },
       ${"../default/playersPanel.xc":"clanIcon"},
       { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "enabled": true },
       ${"../default/playersPanel.xc":"xmqpServiceMarker"},
+      //{ "x": -20, "y": 6.7, "bindToIcon": true, "src": "xvm://res/icons/flags/{{flag|default}}.png" },
       {}
     ],
     "extraFieldsRight": [
@@ -59,14 +60,15 @@
       //{ "x": 0, "src": "cfg://sirmax/img/MinimapAim.png" },
       //{ "x": 0, "bindToIcon": true, "src": "cfg://sirmax/img/MinimapAim.png" },
 
+      { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 },
       { "y": 2, "width": 3, "height": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
       { "x": "{{r_size=2?13|{{r_size=4?20|21}}}}", "y": 2, "height": 21, "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font> </font>", "shadow": {} },
       { "x": "{{r_size=2?23|{{r_size=4?33|38}}}}", "y": 2, "height": 21, "width": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
       { "x": "{{r_size=2?23|{{r_size=4?33|38}}}}", "y": 2, "height": 21, "width": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
-      { "x": -20, "y": 6.7, "bindToIcon": true, "src": "xvm://res/icons/flags/{{flag|default}}.png" },
       ${"../default/playersPanel.xc":"clanIcon"},
       { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "enabled": true },
       ${"../default/playersPanel.xc":"enemySpottedMarker"},
+      //{ "x": -20, "y": 6.7, "bindToIcon": true, "src": "xvm://res/icons/flags/{{flag|default}}.png" },
       {}
     ],
     "nickMinWidth": 120,
@@ -87,10 +89,12 @@
     "vehicleLevelAlpha": 0,
     "nickFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     "nickFormatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
-    //"extraFieldsLeft": [
-    //],
-    //"extraFieldsRight": [
-    //],
+    "extraFieldsLeft": [
+      { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
+    ],
+    "extraFieldsRight": [
+      { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
+    ],
     "__stub__": null
   },
   "medium2": {
@@ -106,10 +110,12 @@
     "vehicleLevelAlpha": 0,
     "vehicleFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "vehicleFormatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
-    //"extraFieldsLeft": [
-    //],
-    //"extraFieldsRight": [
-    //],
+    "extraFieldsLeft": [
+      { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
+    ],
+    "extraFieldsRight": [
+      { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
+    ],
     "__stub__": null
   },
   "short": {
@@ -123,10 +129,12 @@
     "vehicleLevelXOffsetRight": -15,
     "vehicleLevelAlpha": 70,
     //"removeSquadIcon": true,
-    //"extraFieldsLeft": [
-    //],
-    //"extraFieldsRight": [
-    //],
+    "extraFieldsLeft": [
+      { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
+    ],
+    "extraFieldsRight": [
+      { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
+    ],
     "__stub__": null
   },
   "none": {
@@ -135,7 +143,7 @@
     //"layout": "horizontal",
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },
-  "alpha": 50,
+  "alpha": 0,
   //"iconAlpha": 50,
   //"removeSelectedBackground": true,
   "removePanelsModeSwitcher": true

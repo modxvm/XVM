@@ -66,7 +66,7 @@
       //{ "x": 350, "y": 5, "height": 13, "width": 146, "src": "cfg://sirmax/img/hp-bg.png" },
       //{ "x": 350, "y": 5, "height": 14, "width": "{{hp-ratio:150}}", "src": "cfg://sirmax/img/hp-enemy-{{alive}}.png" },
 
-      { "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1, "x": -318 },
+      { "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 },
       { "x": 25, "y": 2, "height": 24, "width": "{{hp-max:230}}", "bgColor": 0, "alpha": "{{alive?50|0}}" },
       { "x": 25, "y": 2, "height": 24, "width": "{{hp:230}}", "bgColor": ${"def.c2"}, "alpha": 60 },
       { "x": 0, "width": 3, "y": 2, "height": 24, "bgColor": ${"def.c2"}, "alpha": "{{alive?80|0}}" },
