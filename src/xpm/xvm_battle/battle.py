@@ -117,12 +117,6 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
         err(traceback.format_exc())
     base(self)
 
-@overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')
-def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
-    if not config.get('battle/showPostmortemTips'):
-        value = False
-    base(self, value)
-
 
 # BATTLE
 
@@ -183,6 +177,12 @@ def _ArenaVehiclesPlugin__setInAoI(self, entry, isInAoI):
                 g_battle.updateSpottedStatus(vehicleID, isInAoI)
     except:
         err(traceback.format_exc())
+
+@overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')
+def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
+    if not config.get('battle/showPostmortemTips'):
+        value = False
+    base(self, value)
 
 
 #####################################################################

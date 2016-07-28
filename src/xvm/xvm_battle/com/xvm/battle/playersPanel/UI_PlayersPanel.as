@@ -46,6 +46,7 @@ package com.xvm.battle.playersPanel
         private var m_altMode:int = PLAYERS_PANEL_STATE.NONE;
         private var m_isAltMode:Boolean = false;
         private var m_savedState:int = PLAYERS_PANEL_STATE.NONE;
+        private var m_startModePending:Number = NaN;
 
         public function UI_PlayersPanel()
         {
@@ -54,11 +55,6 @@ package com.xvm.battle.playersPanel
             PlayersPanelListLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
             PlayersPanelListRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-        }
-
-        override protected function configUI():void
-        {
-            super.configUI();
             setup();
         }
 
@@ -70,11 +66,14 @@ package com.xvm.battle.playersPanel
 
         override public function as_setPanelMode(state:int):void
         {
-            //Logger.add("UI_PlayersPanel.as_setPanelMode(): " + param1);
+            //Logger.add("UI_PlayersPanel.as_setPanelMode(): " + state);
             try
             {
-                if (!cfg)
-                    return;
+                if (!isNaN(m_startModePending))
+                {
+                    state = m_startModePending;
+                    m_startModePending = NaN;
+                }
 
                 if (xvm_enabled)
                 {
@@ -154,7 +153,7 @@ package com.xvm.battle.playersPanel
             if (PLAYERS_PANEL_STATE_MAP[startMode] == null)
                 startMode = "large";
             cfg[startMode].enabled = true;
-            xfw_requestState(PLAYERS_PANEL_STATE_MAP[startMode]);
+            m_startModePending = PLAYERS_PANEL_STATE_MAP[startMode];
 
             m_savedState = PLAYERS_PANEL_STATE.NONE;
 
