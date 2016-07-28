@@ -10,7 +10,7 @@ package com.xvm.wg
     public class ImageWG extends Sprite implements IImage
     {
 
-        private var _bitmap:Bitmap = null;
+        protected var _bitmap:Bitmap = null;
 
         private var _imgData:IImageData = null;
 
@@ -135,7 +135,7 @@ package com.xvm.wg
             }
         }
 
-        private function imageDataReady() : void {
+        protected function imageDataReady() : void {
             this._imgData.showTo(this);
             if(successCallback != null) {
                 successCallback();
