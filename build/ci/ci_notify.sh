@@ -37,8 +37,9 @@ post_ipb(){
 
 downloadlinkzip="$XVMBUILD_URL_DOWNLOAD"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
 downloadlinkexe="$XVMBUILD_URL_DOWNLOAD"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
+builddate=$(date --utc +"%d.%m.%Y %H:%M (UTC)")
 
-XVMBUILD_IPB_TEXT=$(printf "[b]Build:[/b] [url=$XVMBUILD_URL_REPO/$XVMBUILD_XVM_HASH]$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)[/url] \n [b]Download:[/b] [url=$downloadlinkzip].zip archive[/url] | [url=$downloadlinkexe].exe installer[/url]  \n [b]Author:[/b] $XVMBUILD_XVM_COMMITAUTHOR \n [b]Description:[/b] $XVMBUILD_XVM_COMMITMSG [hr]")
+XVMBUILD_IPB_TEXT=$(printf "[b]Build:[/b] [url=$XVMBUILD_URL_REPO/$XVMBUILD_XVM_HASH]$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)[/url] \n [b]Date:[/b] $builddate \n [b]Download:[/b] [url=$downloadlinkzip].zip archive[/url] | [url=$downloadlinkexe].exe installer[/url]  \n [b]Author:[/b] $XVMBUILD_XVM_COMMITAUTHOR \n [b]Description:[/b] $XVMBUILD_XVM_COMMITMSG [hr]")
 
 XVMBUILD_IPB_REQURL="http://www.koreanrandom.com/forum/interface/board/index.php"
 XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
