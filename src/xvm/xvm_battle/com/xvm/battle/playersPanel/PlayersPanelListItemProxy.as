@@ -787,7 +787,7 @@ package com.xvm.battle.playersPanel
 
         private function updateExtraFields():void
         {
-            var bindToIconOffset:Number = ui.vehicleIcon.x - x + (isLeftPanel ? 0 : ICONS_AREA_WIDTH);
+            var bindToIconOffset:Number = ui.vehicleIcon.x - x + (isLeftPanel || bcfg.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
             switch (ui.xfw_state)
             {
                 case PLAYERS_PANEL_STATE.HIDEN:
