@@ -30,9 +30,9 @@ package com.xvm.vehiclemarkers.ui.components
                 marker.actionMarker.visible = cfg.enabled;
                 if (cfg.enabled)
                 {
-                    marker.actionMarker.x = cfg.enabled;
-                    marker.actionMarker.y = cfg.enabled;
-                    marker.actionMarker.alpha = cfg.enabled / 100.0;
+                    marker.actionMarker.x = cfg.x;
+                    marker.actionMarker.y = cfg.y;
+                    marker.actionMarker.alpha = cfg.alpha / 100.0;
                 }
             }
             catch (ex:Error)
