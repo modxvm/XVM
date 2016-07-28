@@ -348,7 +348,7 @@ package com.xvm.battle
          */
         private static function getSystemColorKey(o:VOPlayerState):String
         {
-            return getEntityName(o) + "_" + (/*isBase ? "base" :*/ o.isAlive ? "alive" : o.isBlown ? "blowedup" : "dead");
+            return !o ? null : getEntityName(o) + "_" + (/*isBase ? "base" :*/ o.isAlive ? "alive" : o.isBlown ? "blowedup" : "dead");
         }
 
         /**
