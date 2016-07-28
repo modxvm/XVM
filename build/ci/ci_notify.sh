@@ -5,11 +5,11 @@
 
 CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$CURRENT_PATH"
-export XVMBUILD_REPOSITORY_PATH="$CURRENT_PATH/../.."
+export XVMBUILD_ROOT_PATH="$CURRENT_PATH/../.."
 
 source /var/xvm/ci_config.sh
-source "$XVMBUILD_REPOSITORY_PATH/build/xvm-build.conf"
-source "$XVMBUILD_REPOSITORY_PATH/build/library.sh"
+source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
+source "$XVMBUILD_ROOT_PATH/build/library.sh"
 
 check_variables(){
   if [ "$XVMBUILD_URL_DOWNLOAD" == "" ]; then
