@@ -323,7 +323,7 @@
       //"xvm_sixthSenseRudy": "",
       //"xvm_fireAlert": "",
       //"xvm_ammoBay": "",
-      //"xvm_enemySighted": "enemySighted",
+      "xvm_enemySighted": "xvm_enemySighted",
       //"carousel": "",
       "__stub__": null
     }
