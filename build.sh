@@ -12,13 +12,6 @@ source ./build/xvm-build.conf
 ##########################
 ####      CONFIG      ####
 ##########################
-# $XVMBUILD_MONO_FILENAME
-# $XVMBUILD_FDBUILD_FILEPATH
-
-# $XVMBUILD_REPOSITORY_PATH
-if [[ "$XVMBUILD_REPOSITORY_PATH" == "" ]]; then
-    export XVMBUILD_REPOSITORY_PATH="."
-fi
 
 # $XVMBUILD_L10N_URL
 if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
@@ -30,7 +23,7 @@ fi
 ##########################
 clean_sha1()
 {
-    pushd "$XVMBUILD_REPOSITORY_PATH" > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH" > /dev/null
     rm -rf ~output/sha1/
     rm -rf src/xfw/~output/sha1/
     rm -rf ~output/cmp/
@@ -39,7 +32,7 @@ clean_sha1()
 }
 
 create_directories(){
-    pushd "$XVMBUILD_REPOSITORY_PATH" > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH" > /dev/null
     mkdir -p ~output/~ver/gui/flash
     mkdir -p ~output/~ver/scripts
     mkdir -p ~output/configs/xvm
@@ -66,7 +59,7 @@ build_as3(){
     echo ""
     echo "Building AS3 files"
 
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xvm/ > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/src/xvm/ > /dev/null
 
     top=( "_xvm_shared.as3proj" "_xvm_main.as3proj" "xvm_lobby.as3proj" "xvm_battle.as3proj" )
     for proj in "${top[@]}"; do
@@ -89,11 +82,11 @@ build_xfw(){
     echo ""
     echo "Building XFW"
 
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xfw/ >/dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ >/dev/null
     ./build.sh || exit $?
     popd >/dev/null
 
-    pushd "$XVMBUILD_REPOSITORY_PATH" >/dev/null
+    pushd "$XVMBUILD_ROOT_PATH" >/dev/null
     cp -rf src/xfw/~output/swf_wg/*.swf ~output/~ver/gui/flash/
     cp -rf src/xfw/~output/python/mods/* ~output/mods/
     cp -rf src/xfw/~output/python/scripts/* ~output/~ver/scripts/
@@ -105,7 +98,7 @@ build_xpm(){
     echo ""
     echo "Building XPM"
 
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xpm/ >/dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/src/xpm/ >/dev/null
     export XPM_CLEAR=0
     export XPM_RUN_TEST=0
     ./build-all.sh || exit $?
@@ -133,18 +126,18 @@ calc_hash_for_xvm_integrity(){
 
 copy_files(){
     # rename version-dependent folder
-    mv "$XVMBUILD_REPOSITORY_PATH"/~output/~ver/ "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_WOT_VERSION"
+    mv "$XVMBUILD_ROOT_PATH"/~output/~ver/ "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_WOT_VERSION"
 
     # cp non-binary files
-    mkdir -p "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
-    cp -f "$XVMBUILD_REPOSITORY_PATH"/release/audioww/*.bnk "$XVMBUILD_REPOSITORY_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
-    cp -rf "$XVMBUILD_REPOSITORY_PATH"/release/* "$XVMBUILD_REPOSITORY_PATH"/~output/mods/shared_resources/xvm/
-    mv "$XVMBUILD_REPOSITORY_PATH"/~output/mods/shared_resources/xvm/configs/* "$XVMBUILD_REPOSITORY_PATH"/~output/configs/xvm
-    rm -rf "$XVMBUILD_REPOSITORY_PATH"/~output/mods/shared_resources/xvm/configs/
-    rm -rf "$XVMBUILD_REPOSITORY_PATH"/~output/mods/shared_resources/xvm/audioww/
+    mkdir -p "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
+    cp -f "$XVMBUILD_ROOT_PATH"/release/audioww/*.bnk "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
+    cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/
+    mv "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH"/~output/configs/xvm
+    rm -rf "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/configs/
+    rm -rf "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/audioww/
 
     # get l10n files from translation server
-    pushd "$XVMBUILD_REPOSITORY_PATH"/~output/mods/shared_resources/xvm/l10n/ >/dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/l10n/ >/dev/null
     mkdir -p temp
     cd temp
     wget --quiet --output-document=l10n.zip "$XVMBUILD_L10N_URL"
@@ -157,19 +150,19 @@ copy_files(){
 
     # move all in res_mods
 
-    pushd "$XVMBUILD_REPOSITORY_PATH"/ > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
     mkdir -p res_mods/
     mv ~output/* res_mods/
     mv res_mods ~output/
     popd >/dev/null
 
     # put readmes on root
-    pushd "$XVMBUILD_REPOSITORY_PATH"/~output/res_mods/mods/shared_resources/xvm/doc/ > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/doc/ > /dev/null
     find . -name "readme-*.txt" -exec cp {} ../../../../../ \;
     popd > /dev/null
 
     # remove swc
-    rm -r "$XVMBUILD_REPOSITORY_PATH"/~output/res_mods/swc/
+    rm -r "$XVMBUILD_ROOT_PATH"/~output/res_mods/swc/
 
 }
 
@@ -189,7 +182,6 @@ detect_java
 detect_ffdec
 detect_fdbuild
 detect_flex
-detect_mtasc
 detect_wget
 detect_zip
 detect_python

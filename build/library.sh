@@ -227,6 +227,21 @@ detect_wget(){
     fi
 }
 
+detect_wine(){
+    if [ "$OS" != "Windows" ]; then
+        if hash wine 2>/dev/null; then
+            export WINEDEBUG=-all
+            export XVMBUILD_WINE_FILENAME="wine"
+            return 0
+        else
+            echo "!!! Wine is not found"
+            return 1
+        fi
+    else
+        export XVMBUILD_WINE_FILENAME=
+    fi
+}
+
 detect_zip(){
     if !(hash zip 2>/dev/null); then
         echo "!!! zip is not found"
@@ -234,10 +249,9 @@ detect_zip(){
     fi
 }
 
-
 load_repositorystats(){
     #read xvm revision and hash
-    pushd "$XVMBUILD_REPOSITORY_PATH"/ > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
         export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
         export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
         export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
@@ -246,7 +260,7 @@ load_repositorystats(){
     popd > /dev/null
 
     #read xfw revision and hash
-    pushd "$XVMBUILD_REPOSITORY_PATH"/src/xfw/ > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
         export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
         export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
         export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
@@ -256,7 +270,7 @@ load_repositorystats(){
 #Cleaners
 
 clean_repodir(){
-    pushd "$XVMBUILD_REPOSITORY_PATH" > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH" > /dev/null
 
     rm -rf src/xvm/lib/*
     rm -rf src/xvm/obj/

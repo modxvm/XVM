@@ -8,7 +8,7 @@ export XVMBUILD_URL_REPO=https://bitbucket.org/XVM/xvm/commits
 
 export XVMBUILD_OUTPUT_PATH=/var/download
 
-export XVMINST_REPO=https://bitbucket.org/XVM/xvm.installer
+export XVMINST_SIGN=true
 export XVMINST_SIGN_FILE_KEY='/key.pem'
 export XVMINST_SIGN_FILE_CERT_SHA256='/cert.pem'
 export XVMINST_SIGN_PASS='12345'
