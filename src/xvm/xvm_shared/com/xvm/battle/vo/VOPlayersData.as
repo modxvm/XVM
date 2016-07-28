@@ -118,6 +118,39 @@ package com.xvm.battle.vo
             }
         }
 
+        public function updateUserTags(data:Object):void
+        {
+            var value:Object;
+            var userTags:Array;
+            var playerState:VOPlayerState;
+            if (data.leftUserTags)
+            {
+                for each (value in data.leftUserTags)
+                {
+                    playerState = get(value.vehicleID);
+                    if (playerState)
+                    {
+                        playerState.update( {
+                            userTags:value.userTags.concat()
+                        });
+                    }
+                }
+            }
+            if (data.rightUserTags)
+            {
+                for each (value in data.rightUserTags)
+                {
+                    playerState = get(value.vehicleID);
+                    if (playerState)
+                    {
+                        playerState.update( {
+                            userTags:value.userTags.concat()
+                        });
+                    }
+                }
+            }
+        }
+
         public function updateVehicleFrags(data:*):void
         {
             for each (var vehicleStats:Object in data)

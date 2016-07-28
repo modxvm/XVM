@@ -91,6 +91,7 @@ package com.xvm.battle
         private var _arenaInfoVO:VOArenaInfo = null;
         private var _playersDataVO:VOPlayersData = null;
         private var _captureBarDataVO:VOCaptureBarData = new VOCaptureBarData();
+        private var _personalStatus:uint;
         private var _playerFrags:int = 0;
         private var _currentAimZoom:int = 0;
 
@@ -169,30 +170,21 @@ package com.xvm.battle
 
         public function setPersonalStatus(param1:uint):void
         {
-            Logger.add("[BattleState] setPersonalStatus: " + param1);
+            //Logger.add("[BattleState] setPersonalStatus: " + param1);
             try
             {
+                _personalStatus = param1;
+
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
-            /*
-            var _loc2_:Boolean = PersonalStatus.isVehicleCounterShown(param1);
-            this._allyVehicleMarkersList.isVehicleCounterShown = this._enemyVehicleMarkersList.isVehicleCounterShown = _loc2_;
-            */
         }
 
         public function setUserTags(data:Object):void
         {
-            Logger.addObject(data, 1, "[BattleState] setUserTags");
-            try
-            {
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            updateUserTags(data);
         }
 
         public function setVehiclesData(data:Object):void
@@ -219,14 +211,7 @@ package com.xvm.battle
 
         public function setVehicleStats(data:Object):void
         {
-            Logger.addObject(data, 1, "[BattleState] setVehicleStats");
-            try
-            {
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            updateVehiclesStats(data);
         }
 
         public function updateInvitationsStatuses(data:Object) : void
@@ -283,9 +268,10 @@ package com.xvm.battle
 
         public function updateUserTags(data:Object):void
         {
-            Logger.addObject(data, 1, "[BattleState] updateUserTags");
             try
             {
+                _playersDataVO.updateUserTags(data);
+                invalidate(InvalidationType.STATE);
             }
             catch (ex:Error)
             {

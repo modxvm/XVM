@@ -142,6 +142,11 @@ package com.xvm.battle.vo
             return BattleGlobalData.playerVehicleID == vehicleID;
         }
 
+        public function get userTags():Array
+        {
+            return _userTags;
+        }
+
         public function get isBusy():Boolean
         {
             return UserTags.isBusy(_userTags);

@@ -48,6 +48,8 @@ package com.xvm
                 playerNames.push(name);
             }
             var chancesText:String = Chance.GetChanceText(playerNames, stats, true, false, true, false);
+            if (!chancesText)
+                return "";
             var temp:Array = chancesText.split('|', 2);
             var tempA:Array = temp[0].split(':', 2);
             if (isShowChance)
