@@ -23,6 +23,7 @@ from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
+from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 
 from xfw import *
 from xvm_main.python.logger import *
@@ -115,6 +116,12 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
+
+@overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')
+def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
+    if not config.get('battle/showPostmortemTips'):
+        value = False
+    base(self, value)
 
 
 # BATTLE
