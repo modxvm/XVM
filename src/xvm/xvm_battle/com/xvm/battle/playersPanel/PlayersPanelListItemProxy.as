@@ -77,9 +77,13 @@ package com.xvm.battle.playersPanel
 
         private var extraFieldsHidden:ExtraFields = null;
         private var extraFieldsShort:ExtraFields = null;
+        private var extraFieldsShortSubstrate:ExtraFields = null;
         private var extraFieldsMedium:ExtraFields = null;
+        private var extraFieldsMediumSubstrate:ExtraFields = null;
         private var extraFieldsLong:ExtraFields = null;
+        private var extraFieldsLongSubstrate:ExtraFields = null;
         private var extraFieldsFull:ExtraFields = null;
+        private var extraFieldsFullSubstrate:ExtraFields = null;
 
         private var currentPlayerState:VOPlayerState;
         private var _vehicleImage:String;
@@ -321,12 +325,20 @@ package com.xvm.battle.playersPanel
                 extraFieldsHidden.visible = false;
             if (extraFieldsShort)
                 extraFieldsShort.visible = false;
+            if (extraFieldsShortSubstrate)
+                extraFieldsShortSubstrate.visible = false;
             if (extraFieldsMedium)
                 extraFieldsMedium.visible = false;
+            if (extraFieldsMediumSubstrate)
+                extraFieldsMediumSubstrate.visible = false;
             if (extraFieldsLong)
                 extraFieldsLong.visible = false;
+            if (extraFieldsLongSubstrate)
+                extraFieldsLongSubstrate.visible = false;
             if (extraFieldsFull)
                 extraFieldsFull.visible = false;
+            if (extraFieldsFullSubstrate)
+                extraFieldsFullSubstrate.visible = false;
             invalidate(INVALIDATE_UPDATE_POSITIONS);
         }
 
@@ -617,35 +629,91 @@ package com.xvm.battle.playersPanel
                 Macros.FormatNumberGlobal(cfg.y, 65),
                 Macros.FormatNumberGlobal(cfg.width, 380),
                 Macros.FormatNumberGlobal(cfg.height, 28));
-                var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
-            extraFieldsHidden = new ExtraFields(
-                cfg.formats,
-                isLeftPanel,
-                getSchemeNameForPlayer,
-                getSchemeNameForVehicle,
-                bounds,
-                Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase(),
-                null,
-                defaultTextFormatConfig);
-            BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmView.battlePage.getChildIndex(BattleXvmView.battlePage.playersPanel));
-            //_internal_createMenuForNoneState(mc);
-            //createMouseHandler(_root["extraPanels"]);
+            var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
+            if (cfg.formats && cfg.formats.length)
+            {
+                extraFieldsHidden = new ExtraFields(
+                    cfg.formats,
+                    isLeftPanel,
+                    getSchemeNameForPlayer,
+                    getSchemeNameForVehicle,
+                    bounds,
+                    Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase(),
+                    null,
+                    defaultTextFormatConfig);
+                BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmView.battlePage.getChildIndex(BattleXvmView.battlePage.playersPanel));
+                //_internal_createMenuForNoneState(mc);
+                //createMouseHandler(_root["extraPanels"]);
+            }
 
+            var filteredFormats:Array;
             var formats:Array = isLeftPanel ? pcfg.short.extraFieldsLeft : pcfg.short.extraFieldsRight;
-            extraFieldsShort = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-            addChild(extraFieldsShort);
+            if (formats && formats.length)
+            {
+                filteredFormats = filterFormats(formats, false);
+                if (filteredFormats && filteredFormats.length)
+                {
+                    extraFieldsShort = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    addChild(extraFieldsShort);
+                }
+                filteredFormats = filterFormats(formats, true);
+                if (filteredFormats && filteredFormats.length)
+                {
+                    extraFieldsShortSubstrate = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    ui.addChildAt(extraFieldsShortSubstrate, 0);
+                }
+            }
 
             formats = isLeftPanel ? pcfg.medium.extraFieldsLeft : pcfg.medium.extraFieldsRight;
-            extraFieldsMedium = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-            addChild(extraFieldsMedium);
+            if (formats && formats.length)
+            {
+                filteredFormats = filterFormats(formats, false);
+                if (filteredFormats && filteredFormats.length)
+                {
+                    extraFieldsMedium = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    addChild(extraFieldsMedium);
+                }
+                filteredFormats = filterFormats(formats, true);
+                if (filteredFormats && filteredFormats.length)
+                {
+                    extraFieldsMediumSubstrate = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    ui.addChildAt(extraFieldsMediumSubstrate, 0);
+                }
+            }
 
             formats = isLeftPanel ? pcfg.medium2.extraFieldsLeft : pcfg.medium2.extraFieldsRight;
-            extraFieldsLong = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-            addChild(extraFieldsLong);
+            if (formats && formats.length)
+            {
+                filteredFormats = filterFormats(formats, false);
+                if (filteredFormats && filteredFormats.length)
+                {
+                    extraFieldsLong = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    addChild(extraFieldsLong);
+                }
+                filteredFormats = filterFormats(formats, true);
+                if (filteredFormats && filteredFormats.length)
+                {
+                    extraFieldsLongSubstrate = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    ui.addChildAt(extraFieldsLongSubstrate, 0);
+                }
+            }
 
             formats = isLeftPanel ? pcfg.large.extraFieldsLeft : pcfg.large.extraFieldsRight;
-            extraFieldsFull = new ExtraFields(formats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-            addChild(extraFieldsFull);
+            if (formats && formats.length)
+            {
+                filteredFormats = filterFormats(formats, false);
+                if (filteredFormats && filteredFormats.length)
+                {
+                    extraFieldsFull = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    addChild(extraFieldsFull);
+                }
+                filteredFormats = filterFormats(formats, true);
+                if (filteredFormats && filteredFormats.length)
+                {
+                    extraFieldsFullSubstrate = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    ui.addChildAt(extraFieldsFullSubstrate, 0);
+                }
+            }
         }
 
         private function disposeExtraFields():void
@@ -660,20 +728,40 @@ package com.xvm.battle.playersPanel
                 extraFieldsShort.dispose();
                 extraFieldsShort = null;
             }
+            if (extraFieldsShortSubstrate)
+            {
+                extraFieldsShortSubstrate.dispose();
+                extraFieldsShortSubstrate = null;
+            }
             if (extraFieldsMedium)
             {
                 extraFieldsMedium.dispose();
                 extraFieldsMedium = null;
+            }
+            if (extraFieldsMediumSubstrate)
+            {
+                extraFieldsMediumSubstrate.dispose();
+                extraFieldsMediumSubstrate = null;
             }
             if (extraFieldsLong)
             {
                 extraFieldsLong.dispose();
                 extraFieldsLong = null;
             }
+            if (extraFieldsLongSubstrate)
+            {
+                extraFieldsLongSubstrate.dispose();
+                extraFieldsLongSubstrate = null;
+            }
             if (extraFieldsFull)
             {
                 extraFieldsFull.dispose();
                 extraFieldsFull = null;
+            }
+            if (extraFieldsFullSubstrate)
+            {
+                extraFieldsFullSubstrate.dispose();
+                extraFieldsFullSubstrate = null;
             }
         }
 
@@ -703,25 +791,75 @@ package com.xvm.battle.playersPanel
             switch (ui.xfw_state)
             {
                 case PLAYERS_PANEL_STATE.HIDEN:
-                    extraFieldsHidden.visible = true;
-                    extraFieldsHidden.update(currentPlayerState);
+                    if (extraFieldsHidden)
+                    {
+                        extraFieldsHidden.visible = true;
+                        extraFieldsHidden.update(currentPlayerState);
+                    }
                 case PLAYERS_PANEL_STATE.SHORT:
-                    extraFieldsShort.visible = true;
-                    extraFieldsShort.update(currentPlayerState, bindToIconOffset);
+                    if (extraFieldsShort)
+                    {
+                        extraFieldsShort.visible = true;
+                        extraFieldsShort.update(currentPlayerState, bindToIconOffset);
+                    }
+                    if (extraFieldsShortSubstrate)
+                    {
+                        extraFieldsShortSubstrate.visible = true;
+                        extraFieldsShortSubstrate.update(currentPlayerState, bindToIconOffset);
+                    }
                     break;
                 case PLAYERS_PANEL_STATE.MEDIUM:
-                    extraFieldsMedium.visible = true;
-                    extraFieldsMedium.update(currentPlayerState, bindToIconOffset);
+                    if (extraFieldsMedium)
+                    {
+                        extraFieldsMedium.visible = true;
+                        extraFieldsMedium.update(currentPlayerState, bindToIconOffset);
+                    }
+                    if (extraFieldsMediumSubstrate)
+                    {
+                        extraFieldsMediumSubstrate.visible = true;
+                        extraFieldsMediumSubstrate.update(currentPlayerState, bindToIconOffset);
+                    }
                     break;
                 case PLAYERS_PANEL_STATE.LONG:
-                    extraFieldsLong.visible = true;
-                    extraFieldsLong.update(currentPlayerState, bindToIconOffset);
+                    if (extraFieldsLong)
+                    {
+                        extraFieldsLong.visible = true;
+                        extraFieldsLong.update(currentPlayerState, bindToIconOffset);
+                    }
+                    if (extraFieldsLongSubstrate)
+                    {
+                        extraFieldsLongSubstrate.visible = true;
+                        extraFieldsLongSubstrate.update(currentPlayerState, bindToIconOffset);
+                    }
                     break;
                 case PLAYERS_PANEL_STATE.FULL:
-                    extraFieldsFull.visible = true;
-                    extraFieldsFull.update(currentPlayerState, bindToIconOffset);
+                    if (extraFieldsFull)
+                    {
+                        extraFieldsFull.visible = true;
+                        extraFieldsFull.update(currentPlayerState, bindToIconOffset);
+                    }
+                    if (extraFieldsFullSubstrate)
+                    {
+                        extraFieldsFullSubstrate.visible = true;
+                        extraFieldsFullSubstrate.update(currentPlayerState, bindToIconOffset);
+                    }
                     break;
             }
+        }
+
+        private function filterFormats(formats:Array, isSubstrate:Boolean):Array
+        {
+            var res:Array = [];
+            var len:int = formats.length;
+            for (var i:int = 0; i < len; ++i)
+            {
+                var format:* = formats[i];
+                if (isSubstrate == Boolean(format.substrate))
+                {
+                    res.push(format);
+                }
+            }
+            return res;
         }
     }
 }

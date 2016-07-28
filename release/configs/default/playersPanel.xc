@@ -71,6 +71,8 @@
  *     "hideObject"
  *   }
  *
+ * fields available for players panel only:
+ *   "substrate": put field behind all standard fields, x value depends of players panel width
  */
 {
   // Enemy spotted status marker definition.
