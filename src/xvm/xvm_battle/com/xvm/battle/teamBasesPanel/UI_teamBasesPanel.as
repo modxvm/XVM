@@ -6,9 +6,8 @@ package com.xvm.battle.teamBasesPanel
 {
     import com.xfw.*;
     import com.xvm.*;
-    import flash.events.*;
     import flash.utils.*;
-    import net.wg.data.constants.Linkages;
+    import net.wg.data.constants.*;
 
     public dynamic class UI_teamBasesPanel extends teamBasesPanelUI
     {
@@ -21,60 +20,42 @@ package com.xvm.battle.teamBasesPanel
         {
             //Logger.add("UI_teamBasesPanel()");
             super();
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, setup);
         }
 
         override protected function configUI():void
         {
-            try
-            {
-                super.configUI();
-                DEFAULT_Y = y;
-                onConfigLoaded(null);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            super.configUI();
+            DEFAULT_Y = y;
+            setup();
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, setup);
             super.onDispose();
         }
 
         // PRIVATE
 
-        private function onConfigLoaded(e:Event):void
+        private function setup():void
         {
-            update();
-        }
-
-        private function onUpdateStage():void
-        {
-            update();
-        }
-
-        private function update():void
-        {
-            //Xvm.swfProfilerBegin("UI_teamBasesPanel.onConfigLoaded()");
+            //Xvm.swfProfilerBegin("UI_teamBasesPanel.update()");
             try
             {
                 if (Macros.FormatBooleanGlobal(Config.config.captureBar.enabled, true))
                 {
                     Linkages.CAPTURE_BAR_LINKAGE = XVM_CAPTURE_BAR_LINKAGE;
+                    y = Macros.FormatNumberGlobal(Config.config.captureBar.y, DEFAULT_Y);
                     xfw_RENDERER_HEIGHT = Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH;
-                    // hack to hide useless icons
-                    y = DEFAULT_Y - 1000;
                 }
                 else
                 {
                     Linkages.CAPTURE_BAR_LINKAGE = DEFAULT_CAPTURE_BAR_LINKAGE;
-                    xfw_RENDERER_HEIGHT = DEFAULT_RENDERER_LENGTH;
                     y = DEFAULT_Y;
+                    xfw_RENDERER_HEIGHT = DEFAULT_RENDERER_LENGTH;
                 }
                 xfw_updatePositions();
             }
@@ -82,7 +63,7 @@ package com.xvm.battle.teamBasesPanel
             {
                 Logger.err(ex);
             }
-            //Xvm.swfProfilerEnd("UI_teamBasesPanel.onConfigLoaded()");
+            //Xvm.swfProfilerEnd("UI_teamBasesPanel.update()");
         }
     }
 }

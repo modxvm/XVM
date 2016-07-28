@@ -7,6 +7,9 @@
     // false - Disable
     // false - Отключить
     "enabled": true,
+    // Y value (34 for vanilla client)
+    // Значение Y (34 для чистого клиента)
+    "y": 65,
     // Change the distance between capture bars
     // Изменение расстояния между полосами захвата
     "distanceOffset": 0,

@@ -16,6 +16,8 @@ package com.xvm.battle.teamBasesPanel
 
     public dynamic class UI_TeamCaptureBar extends TeamCaptureBarUI
     {
+        private static const HIDE_ICONS_HACK_OFFSET_Y:Number = -10000;
+
         private var cfg:CCaptureBarTeam;
         private var m_captured:Boolean;
         private var m_baseNumText:String = "";
@@ -32,6 +34,11 @@ package com.xvm.battle.teamBasesPanel
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
 
             initTextFields();
+        }
+
+        override public function set y(value:Number):void
+        {
+            super.y = value - HIDE_ICONS_HACK_OFFSET_Y;
         }
 
         override public function setData(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:String, param7:String):void
@@ -58,14 +65,6 @@ package com.xvm.battle.teamBasesPanel
                 m_points = points;
                 m_timeLeft = timeLeft;
                 m_vehiclesCount = vehiclesCount;
-                // TODO: convert from AS2
-                /*
-                if (!Config.config.captureBar.enabled)
-                {
-                    wrapper.m_playersTF.htmlText = "<font size='15' face='xvm'>&#x113;</font>  " + wrapper.m_vehiclesCount;
-                    wrapper.m_timerTF.htmlText = "<font size='15' face='xvm'>&#x114;</font>  " + wrapper.m_timeLeft;
-                }
-                */
                 updateTextFields();
             }
             catch (ex:Error)
@@ -138,13 +137,12 @@ package com.xvm.battle.teamBasesPanel
             pointsTextField.height = 600;
 
             // hack to hide useless icons
-            y -= 1000;
-            textField.y += 1000;
-            tfVehiclesCount.y += 1000;
-            tfTimeLeft.y += 1000;
-            pointsTextField.y += 1000;
-            bg.y += 1000;
-            progressBar.y += 1000;
+            textField.y += HIDE_ICONS_HACK_OFFSET_Y;
+            tfVehiclesCount.y += HIDE_ICONS_HACK_OFFSET_Y;
+            tfTimeLeft.y += HIDE_ICONS_HACK_OFFSET_Y;
+            pointsTextField.y += HIDE_ICONS_HACK_OFFSET_Y;
+            bg.y += HIDE_ICONS_HACK_OFFSET_Y;
+            progressBar.y += HIDE_ICONS_HACK_OFFSET_Y;
         }
 
         private function setupCaptureBarColor():void
