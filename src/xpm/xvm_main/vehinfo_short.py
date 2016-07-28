@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 25.06.2016
+    # Last update: 28.07.2016
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -159,6 +159,7 @@ _data = {
     "germany:G10_PzIII_AusfJ_training":      'Pz3',
     "germany:G112_KanonenJagdPanzer":        'KnJpz',
     "germany:G113_SP_I_C":                   'sp1c',
+    "germany:G114_Rheinmetall_Skorpian":     'skorp',
     "germany:G114_Skorpian":                 'skorp',
     "germany:G115_Typ_205_4_Jun":            'vk100',
     "germany:G116_Turan_III_prot":           'Turn3',

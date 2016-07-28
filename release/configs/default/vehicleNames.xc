@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 25.06.2016
+    // Last update: 28.07.2016
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -137,6 +137,7 @@
     "germany-G10_PzIII_AusfJ_training":      {"name": null, "short": null},
     "germany-G112_KanonenJagdPanzer":        {"name": null, "short": null},
     "germany-G113_SP_I_C":                   {"name": null, "short": null},
+    "germany-G114_Rheinmetall_Skorpian":     {"name": null, "short": null},
     "germany-G114_Skorpian":                 {"name": null, "short": null},
     "germany-G115_Typ_205_4_Jun":            {"name": null, "short": null},
     "germany-G116_Turan_III_prot":           {"name": null, "short": null},

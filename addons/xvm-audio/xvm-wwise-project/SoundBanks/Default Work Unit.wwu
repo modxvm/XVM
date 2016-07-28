@@ -7,7 +7,6 @@
 					<ObjectInclusionList>
 						<ObjectRef Name="xvm_battleEnd_30_sec" ID="{8ECC7B03-1B57-435D-9104-44322B926124}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="xvm_battleEnd_3_min" ID="{BD0EAF06-B613-4E98-8F95-D4996F14CACF}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="ue_05_arena_exit" ID="{65BE6B0C-A4FC-4863-9144-7DFFC21CB22B}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="xvm_ammoBay" ID="{AEF0B70C-58D2-4808-B7CD-52FBD7CB64A5}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="xvm_battleEnd_5_sec" ID="{3E89952B-61BC-4303-AF6A-B21710AA2F83}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="emptyEvent" ID="{A9C56131-82C7-4427-B318-AED678FDC270}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
@@ -16,7 +15,6 @@
 						<ObjectRef Name="xvm_enemySighted" ID="{9442EA78-5C28-48B8-BF7B-A7528E4B720A}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="xvm_sixthSenseVoice" ID="{6F6C548F-71EF-4B4A-A959-AA7CB1B90C4B}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="sixthSense" ID="{2793AD98-BA13-481F-B222-A8BF02A6A8F6}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="ue_05_arena_enter" ID="{85685DAB-67A0-4EE8-83A7-C78B63714825}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="xvm_enemySightedVoice" ID="{9C4FF5B6-9854-45EA-B9BD-6BED024B1ACF}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="xvm_sixthSenseRudy" ID="{0E13A0CF-F5ED-4CDE-9886-F918BDAF6553}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="xvm_battleEnd_1_min" ID="{30F76BD6-D7E7-4343-81AA-26B38E3A30A5}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
