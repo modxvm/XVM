@@ -28,6 +28,9 @@ clean_directories()
 {
     rm -rf "$XVMINST_ROOT_PATH"/src/l10n_result/
     mkdir -p "$XVMINST_ROOT_PATH"/src/l10n_result/
+
+    rm -rf "$XVMINST_ROOT_PATH"/src/temp_changelogs/
+    mkdir -p  "$XVMINST_ROOT_PATH"/src/temp_changelogs/
 }
 
 download_languages(){
@@ -48,6 +51,12 @@ generate_defines(){
     sed -i "s/XVM_VERSION/${XVM_VERSION}/g" ./xvm_defines.iss
 
     popd >/dev/null
+}
+
+prepare_changelog()
+{
+    cp "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-en.txt "$XVMINST_ROOT_PATH"/src/temp_changelogs/
+    iconv -f utf8 -t cp1251 -o "$XVMINST_ROOT_PATH/src/temp_changelogs/ChangeLog-ru.txt" "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-ru.txt"
 }
 
 generate_languages(){
@@ -75,7 +84,7 @@ generate_languages(){
        fi
        
        if [ -f "$XVMINST_ROOT_PATH"/src/l10n_inno/"$lang".islu ]; then
-           echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,l10n_result\\$lang.islu\"; InfoBeforeFile: \"..\\..\\..\\~output\\res_mods\\mods\\shared_resources\\xvm\\doc\\ChangeLog-$langchg.txt\"" >> lang.iss
+           echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,l10n_result\\$lang.islu\"; InfoBeforeFile: \"temp_changelogs\\ChangeLog-$langchg.txt\"" >> lang.iss
        fi
        
     done
@@ -136,6 +145,9 @@ main(){
 
     extend_path
     clean_directories
+
+    prepare_changelog
+
     download_languages
     generate_defines
     generate_languages
