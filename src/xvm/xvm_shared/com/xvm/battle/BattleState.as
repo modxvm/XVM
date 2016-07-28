@@ -130,25 +130,7 @@ package com.xvm.battle
 
         public function addVehiclesInfo(data:Object):void
         {
-            Logger.addObject(data, 1, "[BattleState] addVehiclesInfo");
-            try
-            {
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            /*
-            var _loc2_:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(param1);
-            if(_loc2_.rightVehicleInfos)
-            {
-                this._enemyVehicleMarkersList.addVehiclesInfo(_loc2_.rightVehicleInfos,_loc2_.rightCorrelationIDs);
-            }
-            if(_loc2_.leftVehicleInfos)
-            {
-                this._allyVehicleMarkersList.addVehiclesInfo(_loc2_.leftVehicleInfos,_loc2_.leftCorrelationIDs);
-            }
-            */
+            setVehiclesData(data);
         }
 
         public function setArenaInfo(data:Object):void
@@ -196,8 +178,8 @@ package com.xvm.battle
                 {
                     _playersDataVO = new VOPlayersData();
                 }
-                _playersDataVO.setVehiclesData(data);
-                BattleMacros.RegisterPlayersData();
+                _playersDataVO.updateVehiclesData(data);
+                invalidate(InvalidationType.STATE);
             }
             catch (ex:Error)
             {
@@ -281,32 +263,7 @@ package com.xvm.battle
 
         public function updateVehiclesInfo(data:Object):void
         {
-            Xvm.swfProfilerBegin("BattleState.updateVehiclesInfo()");
-            //Logger.addObject(data, 1, "[BattleState] updateVehiclesInfo");
-            try
-            {
-                if (data.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
-                if (data.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
-                if (data.leftVehiclesIDs || data.leftItemsIDs)
-                    _playersDataVO.leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
-                if (data.rightVehiclesIDs || data.rightItemsIDs)
-                    _playersDataVO.rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
-                if (data.leftVehicleInfos)
-                    _playersDataVO.updateVehicleInfos(data.leftVehicleInfos);
-                if (data.rightVehicleInfos)
-                    _playersDataVO.updateVehicleInfos(data.rightVehicleInfos);
-                invalidate(InvalidationType.STATE);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            finally
-            {
-                Xvm.swfProfilerEnd("BattleState.updateVehiclesInfo()");
-            }
+            setVehiclesData(data);
         }
 
         public function updateVehiclesStats(data:Object):void

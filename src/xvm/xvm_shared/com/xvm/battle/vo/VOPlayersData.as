@@ -74,23 +74,6 @@ package com.xvm.battle.vo
             playerNameToVehicleIDMap = new Dictionary();
         }
 
-        public function setVehiclesData(data:Object):void
-        {
-            var value:Object;
-            for each (value in data.leftVehicleInfos || data.leftItems)
-            {
-                addOrUpdatePlayerState(value);
-            }
-            for each (value in data.rightVehicleInfos || data.rightItems)
-            {
-                addOrUpdatePlayerState(value);
-            }
-            leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
-            rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
-            leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
-            rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
-        }
-
         public function get(vehicleID:Number):VOPlayerState
         {
             return isNaN(vehicleID) ? null : playerStates[vehicleID];
@@ -99,6 +82,36 @@ package com.xvm.battle.vo
         public function getVehicleID(playerName:String):Number
         {
             return playerName ? playerNameToVehicleIDMap[playerName] : NaN;
+        }
+
+        public function updateVehiclesData(data:Object):void
+        {
+            var value:Object;
+
+            if (data.leftCorrelationIDs)
+            {
+                leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
+            }
+            if (data.rightCorrelationIDs)
+            {
+                rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
+            }
+            if (data.leftVehiclesIDs || data.leftItemsIDs)
+            {
+                leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
+            }
+            if (data.rightVehiclesIDs || data.rightItemsIDs)
+            {
+                rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
+            }
+            if (data.leftVehicleInfos || data.leftItems)
+            {
+                updateVehicleInfos(data.leftVehicleInfos || data.leftItems);
+            }
+            if (data.rightVehicleInfos || data.rightItems)
+            {
+                updateVehicleInfos(data.rightVehicleInfos || data.rightItems);
+            }
         }
 
         public function updatePlayerState(vehicleID:Number, data:Object):void
@@ -188,6 +201,7 @@ package com.xvm.battle.vo
                 var playerState:VOPlayerState = new VOPlayerState(value);
                 playerStates[value.vehicleID] = playerState;
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                Macros.RegisterMinimalMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isAlly);
             }
             else
             {

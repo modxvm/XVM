@@ -17,14 +17,6 @@ package com.xvm.battle
             _RegisterGlobalMacrosData(Macros.Globals);
         }
 
-        public static function RegisterPlayersData():void
-        {
-            for each (var playerState:VOPlayerState in BattleState.playersDataVO.playerStates)
-            {
-                Macros.RegisterMinimalMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isAlly);
-            }
-        }
-
         // PRIVATE
 
         private static function _RegisterGlobalMacrosData(m_globals:Object):void
