@@ -22,18 +22,6 @@ def total_hp_sign():
 def total_hp_text():
     return total_hp.text()
 
-# HitLog
-
-from xvm import hitlog
-
-@xvm.export('xvm.hitlog.header', deterministic=False)
-def hitlog_header():
-    return hitlog.header()
-
-@xvm.export('xvm.hitlog.body', deterministic=False)
-def hitlog_body():
-    return hitlog.body()
-
 # xvm2sup
 
 from xvm import xvm2sup
