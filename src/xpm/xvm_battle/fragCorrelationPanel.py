@@ -8,6 +8,7 @@ import traceback
 import BigWorld
 import game
 from Avatar import PlayerAvatar
+from Vehicle import Vehicle
 from gui import g_guiResetters
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
@@ -142,10 +143,11 @@ def _FragCorrelationPanel_getTotalStats(base, self, arenaDP):
         err(traceback.format_exc())
     base(self)
 
-@registerEvent(PlayerAvatar, 'updateVehicleHealth')
-def setVehicleNewHealth(self, vehicleID, health, *args, **kwargs):
-    #log('setVehicleNewHealth: {}, {}'.format(vehicleID, health))
-    update_hp(vehicleID, health)
+@registerEvent(Vehicle, 'onHealthChanged')
+def onHealthChanged(self, newHealth, attackerID, attackReasonID):
+    # update only for player vehicle, others handled on vehicle feedback event
+    if self.isPlayerVehicle:
+        update_hp(self.id, newHealth)
 
 @registerEvent(VehicleMarkerPlugin, '_VehicleMarkerPlugin__addOrUpdateVehicleMarker')
 def _VehicleMarkerPlugin__addOrUpdateVehicleMarker(self, vProxy, vInfo, *args, **kwargs):

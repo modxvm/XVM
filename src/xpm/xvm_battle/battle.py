@@ -143,10 +143,12 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 #    # debug("> _PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
 #    pass
 
-# update self vehicle health
-@registerEvent(PlayerAvatar, 'updateVehicleHealth')
-def PlayerAvatar_updateVehicleHealth(self, vehicleID, health, *args, **kwargs):
-    g_battle.updatePlayerState(self.id, INV.CUR_HEALTH)
+# any vehicle health changed
+@registerEvent(Vehicle, 'onHealthChanged')
+def onHealthChanged(self, newHealth, attackerID, attackReasonID):
+    # update only for player vehicle, others handled on vehicle feedback event
+    if self.isPlayerVehicle:
+        g_battle.onVehicleHealthChanged(self.id, newHealth, attackerID, attackReasonID)
 
 # on vehicle info updated
 @registerEvent(BattleArenaController, 'updateVehiclesInfo')
@@ -229,15 +231,19 @@ class Battle(object):
 
     def onVehicleFeedbackReceived(self, eventID, vehicleID, value):
         if eventID == FEEDBACK_EVENT_ID.VEHICLE_HEALTH:
-            inv = INV.CUR_HEALTH
-            userData = None
-            if g_sessionProvider.getCtx().isEnemy(vID=vehicleID):
-                (newHealth, aInfo, attackReasonID) = value
-                if aInfo is not None and aInfo.vehicleID == BigWorld.player().playerVehicleID:
-                    inv |= INV.HITLOG
-                    userData = {'damageFlag':self._getVehicleDamageType(aInfo),
-                                'damageType':constants.ATTACK_REASONS[attackReasonID]}
-            self.updatePlayerState(vehicleID, inv, userData)
+            (newHealth, aInfo, attackReasonID) = value
+            attackerID = aInfo.vehicleID if aInfo is not None else -1
+            self.onVehicleHealthChanged(vehicleID, newHealth, attackerID, attackReasonID)
+
+    def onVehicleHealthChanged(self, vehicleID, newHealth, attackerID, attackReasonID):
+        inv = INV.CUR_HEALTH
+        userData = None
+        if g_sessionProvider.getCtx().isEnemy(vID=vehicleID):
+            if attackerID == BigWorld.player().playerVehicleID:
+                inv |= INV.HITLOG
+                userData = {'damageFlag':self._getVehicleDamageType(attackerID),
+                            'damageType':constants.ATTACK_REASONS[attackReasonID]}
+        self.updatePlayerState(vehicleID, inv, userData)
 
     def updateSpottedStatus(self, vehicleID, active):
         spotted_status = SPOTTED_STATUS.SPOTTED if active else SPOTTED_STATUS.LOST
@@ -339,13 +345,13 @@ class Battle(object):
 
     # misc
 
-    def _getVehicleDamageType(self, attackerInfo):
-        if not attackerInfo:
+    def _getVehicleDamageType(self, attackerID):
+        entryVehicle = BigWorld.player().arena.vehicles.get(attackerID, None)
+        if not entryVehicle:
             return markers2d_settings.DAMAGE_TYPE.FROM_UNKNOWN
-        attackerID = attackerInfo.vehicleID
         if attackerID == avatar_getter.getPlayerVehicleID():
             return markers2d_settings.DAMAGE_TYPE.FROM_PLAYER
-        entityName = g_sessionProvider.getCtx().getPlayerGuiProps(attackerID, attackerInfo.team)
+        entityName = g_sessionProvider.getCtx().getPlayerGuiProps(attackerID, entryVehicle['team'])
         if entityName == PLAYER_GUI_PROPS.squadman:
             return markers2d_settings.DAMAGE_TYPE.FROM_SQUAD
         if entityName == PLAYER_GUI_PROPS.ally:
