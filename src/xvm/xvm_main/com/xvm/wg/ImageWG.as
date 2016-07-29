@@ -9,6 +9,7 @@ package com.xvm.wg
 
     public class ImageWG extends Sprite implements IImage
     {
+        private static var EMPTY_BITMAP_DATA:BitmapData = new BitmapData(1, 1, true, 0);
 
         protected var _bitmap:Bitmap = null;
 
@@ -103,7 +104,7 @@ package com.xvm.wg
 
         public function set bitmapData(param1:BitmapData) : void
         {
-            this._bitmap.bitmapData = param1;
+            this._bitmap.bitmapData = param1 || EMPTY_BITMAP_DATA;
             dispatchEvent(new Event(Event.CHANGE));
         }
 
