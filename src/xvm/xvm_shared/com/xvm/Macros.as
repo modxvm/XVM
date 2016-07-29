@@ -284,7 +284,6 @@ package com.xvm
         private static var m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
         private static var m_macros_cache_globals:Object = { };
         private static var m_macros_cache_players:Object = { };
-        private static var m_contacts:Object = { };
 
         private static function _Format(format:*, options:IVOMacrosOptions, __out:Object):*
         {
@@ -892,9 +891,6 @@ package com.xvm
             if (stat == null)
                 return;
 
-            // Register contacts data
-            m_contacts[String(stat._id)] = stat.xvm_contact_data;
-
             if (Config.networkServicesSettings.servicesActive != true)
                 return;
 
@@ -915,6 +911,8 @@ package com.xvm
             pdata["topclan"] = Utils.getTopClanText(stat.rank);
             // {{region}}
             pdata["region"] = Config.config.region;
+            // {{comment}}
+            pdata["comment"] = stat.xvm_contact_data ? stat.xvm_contact_data.comment : null;
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
             // {{xte}}
@@ -1140,16 +1138,6 @@ package com.xvm
                     if (playerName == "xvm_1")
                         return "«xvm»";
                     break;
-            }
-
-            if (m_contacts != null && !isNaN(accountDBID) && accountDBID > 0)
-            {
-                var cdata:Object = m_contacts[String(accountDBID)];
-                if (cdata != null)
-                {
-                    if (cdata.nick)
-                        playerName = cdata.nick;
-                }
             }
 
             return playerName;
