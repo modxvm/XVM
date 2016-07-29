@@ -64,7 +64,7 @@
     "sixthSense"         - Лампа шестого чувства          / Sixth sense lamp
     "endWarningPanel"    - Панель оповещяющая о конце боя / Panel informing about the imminent end of the battle
     "fullStats"          - ?                              / ?
-    "damagePanel"        - Пенель повреждений             / Damage panel
+    "damagePanel"        - Панель повреждений             / Damage panel
     "damageInfoPanel"    - ?                              / ?
     "minimap"            - Миникарта                      / Minimap
     "ribbonsPanel"       - Ленты боевой эффективности     / Battle performance badges
