@@ -16,11 +16,9 @@ package com.xvm.battle.minimap
     UI_StrategicCameraEntry;
     public dynamic class UI_Minimap extends minimapUI
     {
-        private var _cfg:CMinimap;
-
-        public function UI_Minimap(cfg:CMinimap)
+        public function UI_Minimap()
         {
-            _cfg = cfg;
+            super();
         }
 
         override protected function configUI():void
