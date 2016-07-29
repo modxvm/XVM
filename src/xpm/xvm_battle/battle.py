@@ -26,6 +26,7 @@ from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehicles
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 
 from xfw import *
+import xvm_main.python.config as config
 from xvm_main.python.logger import *
 import xvm_main.python.xmqp_events as xmqp_events
 
