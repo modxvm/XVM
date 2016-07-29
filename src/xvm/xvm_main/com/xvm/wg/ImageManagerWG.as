@@ -337,8 +337,6 @@ import net.wg.infrastructure.interfaces.entity.IDisposable;
 
 class ImageData extends EventDispatcher implements IDisposable, IImageData
 {
-    private static var EMPTY_BITMAP_DATA:BitmapData = new BitmapData(1, 1, true, 0);
-
     private static const BYTE_PER_PIXEL:int = 4;
 
     private static const CONTENT_TYPE_SWF:String = "application/x-shockwave-flash";
@@ -448,13 +446,11 @@ class ImageData extends EventDispatcher implements IDisposable, IImageData
     private function onLoaderIOErrorHandler(param1:IOErrorEvent) : void
     {
         this.removeLoaderListeners();
-        //DebugUtils.LOG_ERROR(param1.toString());
-        //dispatchEvent(param1);
-        this._weakBitmapData = new WeakRef(EMPTY_BITMAP_DATA, true);
-        this._size = 1 * 1 * BYTE_PER_PIXEL;
+        DebugUtils.LOG_ERROR(param1.toString());
+        dispatchEvent(param1);
+        this._weakBitmapData = new WeakRef(null);
         this._loader = null;
         this._ready = true;
-        dispatchEvent(new Event(Event.COMPLETE));
     }
 
     private function addLoaderListeners() : void

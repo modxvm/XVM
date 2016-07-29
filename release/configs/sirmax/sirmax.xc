@@ -319,7 +319,7 @@
     //"enabled": false,
     //"logSoundEvents": true,
     "soundMapping": {
-      "xvm_sixthSense": "lightbulb",
+      //"xvm_sixthSense": "lightbulb",
       //"xvm_sixthSenseRudy": "",
       //"xvm_fireAlert": "",
       //"xvm_ammoBay": "",
