@@ -28,7 +28,7 @@ package com.xvm.lobby.limits
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            onConfigLoaded(null);
+            setup();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
@@ -38,34 +38,49 @@ package com.xvm.lobby.limits
 
         override public function onConfigLoaded(e:Event):void
         {
-            dispose();
-            if (Config.config.hangar.enableGoldLocker || Config.config.hangar.enableFreeXpLocker)
-            {
-                init();
-            }
+            setup();
         }
 
         // PRIVATE
 
-        private function init():void
+        private function setup():void
         {
-            var cls:Class = App.utils.classFactory.getClass("com.xvm.lobby.ui.limits::LimitsUIImpl");
-            if (cls)
+            dispose();
+            if (Config.config.hangar.enableGoldLocker || Config.config.hangar.enableFreeXpLocker)
             {
-                limits_ui = new cls() as ILimitsUI;
-                if (limits_ui)
+                var cls:Class = App.utils.classFactory.getClass("com.xvm.lobby.ui.limits::LimitsUIImpl");
+                if (!cls)
                 {
-                    limits_ui.init(page);
+                    App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded, false, 0, true);
+                }
+                else
+                {
+                    limits_ui = new cls() as ILimitsUI;
+                    if (limits_ui)
+                    {
+                        limits_ui.init(page);
+                    }
                 }
             }
         }
 
         private function dispose():void
         {
+            App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
             if (limits_ui)
             {
                 limits_ui.dispose();
                 limits_ui = null;
+            }
+        }
+
+        private function onLibLoaded(e:LibraryLoaderEvent):void
+        {
+            var swf:String = e.url.replace(/^.*\//, '').toLowerCase();
+            if (swf == "xvm_lobby_ui.swf")
+            {
+                App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
+                setup();
             }
         }
     }

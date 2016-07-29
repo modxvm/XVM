@@ -28,7 +28,7 @@ package com.xvm.lobby.clock
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            onConfigLoaded(null);
+            setup();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
@@ -38,34 +38,49 @@ package com.xvm.lobby.clock
 
         override public function onConfigLoaded(e:Event):void
         {
-            dispose();
-            if (Config.config.hangar.clock.enabled)
-            {
-                init();
-            }
+            setup();
         }
 
         // PRIVATE
 
-        private function init():void
+        private function setup():void
         {
-            var cls:Class = App.utils.classFactory.getClass("com.xvm.lobby.ui.clock::ClockUIImpl");
-            if (cls)
+            dispose();
+            if (Config.config.hangar.clock.enabled)
             {
-                clock_ui = new cls() as IClockUI;
-                if (clock_ui)
+                var cls:Class = App.utils.classFactory.getClass("com.xvm.lobby.ui.clock::ClockUIImpl");
+                if (!cls)
                 {
-                    clock_ui.init(page);
+                    App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded, false, 0, true);
+                }
+                else
+                {
+                    clock_ui = new cls() as IClockUI;
+                    if (clock_ui)
+                    {
+                        clock_ui.init(page);
+                    }
                 }
             }
         }
 
         private function dispose():void
         {
+            App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
             if (clock_ui)
             {
                 clock_ui.dispose();
                 clock_ui = null;
+            }
+        }
+
+        private function onLibLoaded(e:LibraryLoaderEvent):void
+        {
+            var swf:String = e.url.replace(/^.*\//, '').toLowerCase();
+            if (swf == "xvm_lobby_ui.swf")
+            {
+                App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
+                setup();
             }
         }
     }
