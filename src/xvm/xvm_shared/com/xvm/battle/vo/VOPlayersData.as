@@ -23,6 +23,8 @@ package com.xvm.battle.vo
         public var leftScope:int = 0;
         public var rightScope:int = 0;
 
+        private var _addedStates:Array = [];
+
         public function get leftCorrelationIDs():Vector.<Number>
         {
             return _leftCorrelationIDs;
@@ -88,6 +90,14 @@ package com.xvm.battle.vo
         {
             var value:Object;
 
+            if (data.leftVehicleInfos || data.leftItems)
+            {
+                updateVehicleInfos(data.leftVehicleInfos || data.leftItems);
+            }
+            if (data.rightVehicleInfos || data.rightItems)
+            {
+                updateVehicleInfos(data.rightVehicleInfos || data.rightItems);
+            }
             if (data.leftCorrelationIDs)
             {
                 leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
@@ -104,13 +114,13 @@ package com.xvm.battle.vo
             {
                 rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
             }
-            if (data.leftVehicleInfos || data.leftItems)
+            if (_addedStates.length)
             {
-                updateVehicleInfos(data.leftVehicleInfos || data.leftItems);
-            }
-            if (data.rightVehicleInfos || data.rightItems)
-            {
-                updateVehicleInfos(data.rightVehicleInfos || data.rightItems);
+                for each (var playerState:VOPlayerState in _addedStates)
+                {
+                    Macros.RegisterMinimalMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isAlly);
+                }
+                _addedStates = [];
             }
         }
 
@@ -201,7 +211,7 @@ package com.xvm.battle.vo
                 var playerState:VOPlayerState = new VOPlayerState(value);
                 playerStates[value.vehicleID] = playerState;
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
-                Macros.RegisterMinimalMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerFullName, playerState.vehCD, playerState.isAlly);
+                _addedStates.push(playerState);
             }
             else
             {
