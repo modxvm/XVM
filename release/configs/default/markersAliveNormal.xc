@@ -148,7 +148,7 @@
     "rating": {
       "name": "Rating",
       "enabled": true,
-      "x": -35,
+      "x": -33,
       "y": -20,
       "alpha": "{{xvm-stat?100|0}}",
       "textFormat": {
@@ -165,7 +165,7 @@
         "angle": 45,
         "color": "0x000000",
         "alpha": 100,
-        "blur": 1,
+        "blur": 2,
         "strength": 1
       },
       "format": "&#x115;"
