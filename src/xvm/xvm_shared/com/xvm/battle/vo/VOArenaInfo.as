@@ -28,9 +28,18 @@ package com.xvm.battle.vo
             mapIcon = data.mapIcon;
             mapName = data.mapName;
             winText = data.winText;
-            questTipsAdditionalCondition = data.getQuestTipsAdditionalCondition();
-            questTipsMainCondition = data.getQuestTipsMainCondition();
-            questTipsTitle = data.getQuestTipsTitle();
+            if (data.getQuestTipsAdditionalCondition != null)
+            {
+                questTipsAdditionalCondition = data.getQuestTipsAdditionalCondition();
+            }
+            if (data.getQuestTipsMainCondition != null)
+            {
+                questTipsMainCondition = data.getQuestTipsMainCondition();
+            }
+            if (data.getQuestTipsTitle != null)
+            {
+                questTipsTitle = data.getQuestTipsTitle();
+            }
         }
     }
 }
