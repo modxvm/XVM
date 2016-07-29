@@ -63,8 +63,8 @@ def as_updateVehiclesStatsS(self, data):
     g_markers.call(BC.updateVehiclesStats, data)
 
 @registerEvent(BattleStatisticsDataController, 'as_updatePersonalStatusS')
-def as_updatePersonalStatusS(self, data):
-    g_markers.call(BC.updatePersonalStatus, data)
+def as_updatePersonalStatusS(self, added, removed):
+    g_markers.call(BC.updatePersonalStatus, added, removed)
 
 @registerEvent(BattleStatisticsDataController, 'as_setArenaInfoS')
 def as_setArenaInfoS(self, data):
