@@ -210,7 +210,6 @@ package com.xvm.battle.vo
 
         internal function set_vehicleIconName(value:String):void
         {
-            //Logger.add(_vehicleIconName + " => " + vehicleIconName);
             _vehicleIconName = value;
             _vehicleData = VehicleInfo.getByIconName(value);
             if (_vehicleData)
@@ -307,7 +306,7 @@ package com.xvm.battle.vo
             //TURRET_DETACHED = -13
             if (value < 0)
             {
-                _isBlown = value <= -3;
+                _isBlown = value < -3;
                 value = 0;
             }
             __curHealth = value;
