@@ -291,7 +291,7 @@ package com.xvm
 
             __out.isStaticMacro = true;
 
-            if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format))
+            if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format) || !isNaN(format))
                 return format;
 
             var format_str:String = String(format);
@@ -775,7 +775,7 @@ package com.xvm
 
         private static function _IsCached(format:*, options:IVOMacrosOptions):Boolean
         {
-            if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format))
+            if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format) || !isNaN(format))
                 return true;
 
             format = String(format);
