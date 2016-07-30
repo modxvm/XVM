@@ -838,7 +838,7 @@ package com.xvm
             if (!pdata)
                 return;
 
-            if (!pdata.hasOwnProperty("veh-id") || (pdata["veh-id"] == 0 && vehCD != 0))
+            if (!pdata.hasOwnProperty("veh-id") || (vehCD != 0 && pdata["veh-id"] is Function))
             {
                 var vdata:VOVehicleData = VehicleInfo.get(vehCD);
                 if (vehCD == 0)
