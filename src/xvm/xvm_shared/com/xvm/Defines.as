@@ -31,17 +31,6 @@ package com.xvm
 
         //public static const MAX_BATTLETIER_HPS:Array = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000];
 
-        //// Field Type
-        //public static const FIELDTYPE_NONE:int = 0;
-        //public static const FIELDTYPE_NICK:int = 1;
-        //public static const FIELDTYPE_VEHICLE:int = 2;
-        //public static const FIELDTYPE_FRAGS:int = 3;
-
-        //// Dead State
-        //public static const DEADSTATE_NONE:int = 0;
-        //public static const DEADSTATE_ALIVE:int = 1;
-        //public static const DEADSTATE_DEAD:int = 2;
-
         // Dynamic color types
         public static const DYNAMIC_COLOR_EFF:int = 1;
         public static const DYNAMIC_COLOR_WINRATE:int = 2;
@@ -86,20 +75,6 @@ package com.xvm
         public static const FROM_ENEMY:int = 2;
         public static const FROM_SQUAD:int = 3;
         public static const FROM_PLAYER:int = 4;
-
-        //// Text direction
-        //public static const DIRECTION_DOWN:int = 1;
-        //public static const DIRECTION_UP:int = 2;
-
-        //// Text insert order
-        //public static const INSERTORDER_BEGIN:int = DIRECTION_DOWN;
-        //public static const INSERTORDER_END:int = DIRECTION_UP;
-
-        //// Load states
-        //public static const LOADSTATE_NONE:int = 1;    // not loaded
-        //public static const LOADSTATE_LOADING:int = 2; // loading
-        //public static const LOADSTATE_DONE:int = 3;    // statistics loaded
-        //public static const LOADSTATE_UNKNOWN:int = 4; // unknown vehicle in FogOfWar
 
         // Level in roman numerals
         public static const ROMAN_LEVEL:Vector.<String> = Vector.<String>([ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ]);

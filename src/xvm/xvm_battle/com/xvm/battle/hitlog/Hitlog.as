@@ -14,8 +14,6 @@ package com.xvm.battle.hitlog
 
     public class Hitlog implements IDisposable
     {
-        private static const DIRECTION_UP:String = "up";
-        private static const DIRECTION_DOWN:String = "down";
         private static const INSERTORDER_BEGIN:String = "begin";
         private static const INSERTORDER_END:String = "end";
 
@@ -107,7 +105,14 @@ package com.xvm.battle.hitlog
                         skip.push(hit.vehicleID);
                     }
                     var br:String = (_bodyText == "") ? "" : "<br/>";
-                    _bodyText = (cfg.direction == cfg.insertOrder) ? _bodyText + br + hit.hist : hit.hist + br + _bodyText;
+                    if (cfg.insertOrder.toLowerCase() == INSERTORDER_BEGIN)
+                    {
+                        _bodyText += br + hit.hist;
+                    }
+                    else
+                    {
+                        _bodyText = hit.hist + br + _bodyText;
+                    }
                 }
             }
             return _bodyText;

@@ -9,7 +9,6 @@ package com.xvm.types.cfg
     public dynamic class CHitlog implements ICloneable
     {
         public var groupHitsByPlayer:*;
-        public var direction:String;
         public var insertOrder:String;
         public var deadMarker:String;
         public var blowupMarker:String;
@@ -21,7 +20,6 @@ package com.xvm.types.cfg
         {
             var result:CHitlog = new CHitlog();
             result.groupHitsByPlayer = groupHitsByPlayer;
-            result.direction = direction;
             result.insertOrder = insertOrder;
             result.deadMarker = deadMarker;
             result.blowupMarker = blowupMarker;

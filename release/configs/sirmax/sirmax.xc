@@ -241,8 +241,7 @@
   "minimap": ${"sirmax-minimap.xc":"minimap"},
   "minimapAlt": ${"sirmax-minimap.xc":"minimapAlt"},
   "hitLog": {
-    "direction": "down",
-    "insertOrder": "end",
+    //"insertOrder": "begin",
     "groupHitsByPlayer": true,
     "deadMarker": "<font face='xvm'>\u002B</font>",
     "blowupMarker": "<font face='xvm'>\u007C</font>",

@@ -10,9 +10,6 @@
     // Group hits by players name.
     // Группировать попадания по имени игрока.
     "groupHitsByPlayer": true,
-    // Log direction: up - lines will be added from up to down, down - from down to up.
-    // Направление лога: up - строки добавляются сверху, down - снизу.
-    "direction": "down",
     // Insert order: begin - insert new values to begin, end - add to end.
     // Сортировка попаданий: begin - новые значения добавляются сверху, end - снизу.
     "insertOrder": "end",
