@@ -22,24 +22,19 @@ package com.xvm.battle.elements
         private static const CMD_TEXT_FORMAT:String = "$textFormat";
 
         private var cfg:Array;
-        private var timer:Timer = null;
+        private var timers:Array = [];
 
         public function BattleElements()
         {
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            onConfigLoaded(null);
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            setup();
         }
 
         public function dispose():void
         {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             try
             {
-                if (timer)
-                {
-                    timer.stop();
-                    timer = null;
-                }
             }
             catch (ex:Error)
             {
@@ -49,13 +44,22 @@ package com.xvm.battle.elements
 
         // PRIVATE
 
-        private function onConfigLoaded(e:Event):void
+        private function stop():void
         {
-            setup();
+            for each (var timer:Timer in timers)
+            {
+                if (timer)
+                {
+                    timer.stop();
+                    timer = null;
+                }
+            }
+            timers = [];
         }
 
         private function setup():void
         {
+            stop();
             //Xvm.swfProfilerBegin("BattleElements.setup()");
             try
             {
@@ -93,13 +97,11 @@ package com.xvm.battle.elements
                 return;
             }
 
+            var timer:Timer;
             if (opt[CMD_DELAY] > 0)
             {
-                if (timer)
-                {
-                    timer.stop();
-                }
                 timer = new Timer(opt[CMD_DELAY], 1);
+                timers.push(timer);
                 timer.addEventListener(TimerEvent.TIMER, function(e:Event):void { apply(obj, opt, name); } );
                 delete opt[CMD_DELAY];
                 timer.start();
@@ -108,11 +110,8 @@ package com.xvm.battle.elements
 
             if (opt[CMD_INTERVAL] > 0)
             {
-                if (timer)
-                {
-                    timer.stop();
-                }
                 timer = new Timer(opt[CMD_INTERVAL], 0);
+                timers.push(timer);
                 timer.addEventListener(TimerEvent.TIMER, function(e:Event):void { apply(obj, opt, name); } );
                 delete opt[CMD_INTERVAL];
                 timer.start();
