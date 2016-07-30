@@ -11,6 +11,7 @@ import BigWorld
 import constants
 import game
 from Avatar import PlayerAvatar
+from messenger import MessengerEntry
 from gui.shared import g_eventBus, events
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import g_sessionProvider
@@ -41,6 +42,10 @@ g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+@registerEvent(game, 'handleKeyEvent')
+def game_handleKeyEvent(event):
+    g_markers.onKeyEvent(event)
 
 @overrideMethod(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(base, self):
@@ -226,6 +231,14 @@ class VehicleMarkers(object):
         except Exception, ex:
             err(traceback.format_exc())
         #debug('vm:respondGlobalBattleData: {:>8.3f} s'.format(time.clock() - s))
+
+    def onKeyEvent(self, event):
+        try:
+            if not event.isRepeatedEvent():
+                if self.active and not MessengerEntry.g_instance.gui.isFocused():
+                    self.call(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
+        except Exception, ex:
+            err(traceback.format_exc())
 
     def updatePlayerState(self, vehicleID, targets, userData=None):
         try:

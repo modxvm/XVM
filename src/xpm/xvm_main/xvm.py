@@ -333,44 +333,19 @@ class Xvm(object):
 
     def onKeyEvent(self, event):
         try:
-            key = event.key
-            isDown = event.isKeyDown()
-            isRepeated = event.isRepeatedEvent()
-            if not isRepeated:
-                # debug("key=" + str(key) + ' ' + ('down' if isDown else 'up'))
+            if not event.isRepeatedEvent():
+                # debug("key=" + str(event.key) + ' ' + ('down' if event.isKeyDown() else 'up'))
                 battle = getBattleApp()
-                if battle:
-                    if self.checkKeyEventBattle(key, isDown):
-                        as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, key, isDown)
+                if battle and not MessengerEntry.g_instance.gui.isFocused():
+                    as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())
-        return True
 
     def onUpdateStage(self):
         try:
             as_xfw_cmd(XVM_COMMAND.AS_ON_UPDATE_STAGE)
         except Exception, ex:
             err('onUpdateStage(): ' + traceback.format_exc())
-
-    def checkKeyEventBattle(self, key, isDown):
-        # do not handle keys when chat is active
-        if MessengerEntry.g_instance.gui.isFocused():
-            return False
-
-        #c = config.get('hotkeys')
-        #
-        #if c['minimapZoom']['enabled'] is True and c['minimapZoom']['keyCode'] == key:
-        #    return True
-        #if c['minimapAltMode']['enabled'] is True and c['minimapAltMode']['keyCode'] == key:
-        #    return True
-        #if c['playersPanelAltMode']['enabled'] is True and c['playersPanelAltMode']['keyCode'] == key:
-        #    return True
-        #if c['battleLabelsHotKeys'] is True:
-        #    return True
-        #
-        #return False
-
-        return True
 
     def onViewLoaded(self, view=None):
         trace('onViewLoaded: {}'.format('(None)' if not view else view.uniqueName))
