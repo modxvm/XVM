@@ -293,6 +293,11 @@ package com.xvm.battle.vo
             return _damageInfo;
         }
 
+        public function set damageInfo(value:VODamageInfo):void
+        {
+            _damageInfo = value;
+        }
+
         public function get xmqpData():VOXmqpData
         {
             return _xmqpData;

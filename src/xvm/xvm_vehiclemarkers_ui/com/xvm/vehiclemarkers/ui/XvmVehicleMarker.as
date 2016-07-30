@@ -21,6 +21,8 @@ package com.xvm.vehiclemarkers.ui
 
     public dynamic class XvmVehicleMarker extends VehicleMarker
     {
+        private static const INVALIDATE_HEALTH:uint = 1 << 30;
+
         public var vehicleID:Number = NaN;
         private var playerName:String = null;
         private var curHealth:Number = NaN;
@@ -82,7 +84,6 @@ package com.xvm.vehiclemarkers.ui
                 if (!isNaN(vehicleID))
                 {
                     init(vehicleID);
-                    //invalidate(InvalidationType.DATA);
                 }
             }
             catch (ex:Error)
@@ -104,12 +105,24 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerBegin("XvmVehicleMarker.draw()");
             try
             {
-                if (isInvalid(InvalidationType.DATA))
+                var playerState:VOPlayerState = null;
+                if (isInvalid(InvalidationType.DATA | INVALIDATE_HEALTH))
                 {
-                    var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    if (playerState)
+                    playerState = BattleState.get(vehicleID);
+                }
+                if (playerState)
+                {
+                    if (isInvalid(InvalidationType.DATA))
                     {
                         dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
+                    }
+                    if (isInvalid(INVALIDATE_HEALTH))
+                    {
+                        if (playerState.damageInfo)
+                        {
+                            dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
+                            playerState.damageInfo = null;
+                        }
                     }
                 }
             }
@@ -133,6 +146,7 @@ package com.xvm.vehiclemarkers.ui
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
                 if (playerState)
                 {
+                    //Logger.add("updateHealth: " + playerState.playerName + " " + newHealth);
                     playerState.update({
                         damageInfo: new VODamageInfo({
                             damageDelta: playerState.getCurHealthValue() - Math.max(newHealth, 0),
@@ -141,8 +155,10 @@ package com.xvm.vehiclemarkers.ui
                         }),
                         curHealth: newHealth
                     });
+                    if (newHealth <= 0 && damageFlag == Defines.FROM_PLAYER)
+                        BattleState.playerFrags += 1;
                     playerState.dispatchEvents();
-                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
+                    invalidate(INVALIDATE_HEALTH);
                 }
             }
             catch (ex:Error)
@@ -168,7 +184,6 @@ package com.xvm.vehiclemarkers.ui
                 {
                     playerState.update( { damageInfo:null, curHealth: curHealth } );
                     playerState.dispatchEvents();
-                    invalidate(InvalidationType.DATA);
                 }
             }
             catch (ex:Error)

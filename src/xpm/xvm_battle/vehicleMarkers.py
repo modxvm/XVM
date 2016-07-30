@@ -146,7 +146,8 @@ class VehicleMarkers(object):
     # event handlers
 
     def onVehicleStatisticsUpdate(self, vehicleID):
-        self.updatePlayerState(vehicleID, INV.FRAGS)
+        # HACK: add delay to make statistics update after health update
+        BigWorld.callback(0.01, lambda: self.updatePlayerState(vehicleID, INV.FRAGS))
 
 
     #####################################################################
@@ -238,12 +239,10 @@ class VehicleMarkers(object):
                         if entity and hasattr(entity, 'publicInfo'):
                             data['marksOnGun'] = entity.publicInfo.marksOnGun
 
-                if targets & INV.ALL_VSTATS:
+                if targets & INV.FRAGS:
                     arenaDP = g_sessionProvider.getArenaDP()
                     vStatsVO = arenaDP.getVehicleStats(vehicleID)
-
-                    if targets & INV.FRAGS:
-                        data['frags'] = vStatsVO.frags
+                    data['frags'] = vStatsVO.frags
 
                 if data:
                     self.call(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
