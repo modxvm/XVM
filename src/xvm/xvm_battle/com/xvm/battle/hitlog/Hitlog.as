@@ -6,6 +6,7 @@ package com.xvm.battle.hitlog
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.ObjectEvent;
     import com.xvm.battle.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
@@ -28,6 +29,7 @@ package com.xvm.battle.hitlog
         {
             registerHitlogMacros();
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.addEventListener(BattleEvents.HITLOG_UPDATED, onHitlogUpdated);
             setup();
         }
 
@@ -76,6 +78,13 @@ package com.xvm.battle.hitlog
             return _headerText;
         }
 
+        private function onHitlogUpdated(e:ObjectEvent):void
+        {
+            var hist:String = Macros.Format(cfg.formatHistory, e.result as VOPlayerState);
+            var hits:Array = BattleState.hitlogHits;
+            hits[hits.length - 1].hist = hist;
+        }
+
         private function getBody(o:VOPlayerState):String
         {
             if (_lastTotalDamageBody != BattleState.hitlogTotalDamage)
@@ -87,9 +96,6 @@ package com.xvm.battle.hitlog
                 {
                     return null;
                 }
-
-                var hist:String = Macros.Format(cfg.formatHistory, o);
-                hits[hits.length - 1].hist = hist;
 
                 //Logger.addObject(hits, 2);
 

@@ -10,6 +10,7 @@ package com.xvm.battle
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
+    import flash.events.Event;
     import scaleform.clik.constants.*;
     import scaleform.clik.core.*;
 
@@ -409,6 +410,8 @@ package com.xvm.battle
 
             var hitIndex:Number = _hitlogHits.push(new VOHit(playerState.vehicleID, damage, damageType)) - 1;
             playerState.hitlogHits.push(hitIndex);
+
+            Xvm.dispatchEvent(new ObjectEvent(BattleEvents.HITLOG_UPDATED, playerState));
         }
     }
 }

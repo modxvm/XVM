@@ -10,6 +10,7 @@ package com.xvm.battle
         public static const MINIMAP_ALT_MODE:String = "MINIMAP_ALT_MODE";
         public static const PLAYERS_PANEL_ALT_MODE:String = "PLAYERS_PANEL_ALT_MODE";
         public static const BATTLE_LABEL_KEY_MODE:String = "BATTLE_LABEL_KEY_MODE";
+        public static const HITLOG_UPDATED:String = "HITLOG_UPDATED";
 
         // XVM EVENTS
         //public static var STEREOSCOPE_TOGGLED:String = "stereoscope_toggled";
