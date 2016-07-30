@@ -377,7 +377,7 @@ package com.xvm.battle.playersPanel
         {
             //if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
 
-            var txt:String = Macros.Format(format, currentPlayerState);
+            var txt:String = Macros.Format(format, currentPlayerState) || "";
             if (_standardTextFieldsTexts[tf.name] == txt)
                 return;
             _standardTextFieldsTexts[tf.name] = txt;
