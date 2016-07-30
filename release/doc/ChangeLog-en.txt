@@ -68,6 +68,7 @@ XVM-6.4.0-dev:
   * changed hitlog macros - added "hitlog." prefix (see macros.txt)
   * removed "hpLeft" section - use {{hp*}} macros
   * added {{comment}} macro to show comment for player from contacts
+  * added option "battle"/"sixthSenseDuration" - duration of the sixth sense indicator
 
 XVM-6.3.2.1:
   * fix for 6th sense sound

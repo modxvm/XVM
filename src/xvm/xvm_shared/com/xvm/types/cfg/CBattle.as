@@ -15,6 +15,7 @@ package com.xvm.types.cfg
         public var clockFormat:String;
         public var clanIconsFolder:String;
         public var sixthSenseIcon:String;
+        public var sixthSenseDuration:Number;
         public var elements:Array;
         public var camera:CCamera;
         public var minimapDeadSwitch:*;

@@ -91,6 +91,7 @@
     "highlightVehicleIcon": false,
     "clanIconsFolder": "../../../../res/clanicons",
     "sixthSenseIcon": "cfg://sirmax/img/SixthSense.png",
+    "sixthSenseDuration": 3000,
     "elements": ${"elements"},
     "minimapDeadSwitch": true,
     "camera": {
