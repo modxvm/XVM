@@ -27,7 +27,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="sixthSense" ID="{2793AD98-BA13-481F-B222-A8BF02A6A8F6}">
+						<Event Name="xvm_sixthSense" ID="{2793AD98-BA13-481F-B222-A8BF02A6A8F6}">
 							<ChildrenList>
 								<Action Name="Play" ID="{A2791B51-D7C9-4319-B3C0-A9FE0776CF57}" ShortID="221220628" Type="Play" Scope="One" Global="false">
 									<ElementList>
