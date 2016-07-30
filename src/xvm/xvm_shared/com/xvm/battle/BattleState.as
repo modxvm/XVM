@@ -340,8 +340,13 @@ package com.xvm.battle
                     {
                         onUpdateHitlogData(playerState, data.curHealth, data.__hitlogData.damageFlag, data.__hitlogData.damageType);
                         delete data.__hitlogData;
+                        playerState.update(data);
+                        Xvm.dispatchEvent(new ObjectEvent(BattleEvents.HITLOG_UPDATED, playerState));
                     }
-                    playerState.update(data);
+                    else
+                    {
+                        playerState.update(data);
+                    }
                     _invalidationStates[playerState.vehicleID] = true;
                     invalidate(InvalidationType.DATA);
                 }
@@ -410,8 +415,6 @@ package com.xvm.battle
 
             var hitIndex:Number = _hitlogHits.push(new VOHit(playerState.vehicleID, damage, damageType)) - 1;
             playerState.hitlogHits.push(hitIndex);
-
-            Xvm.dispatchEvent(new ObjectEvent(BattleEvents.HITLOG_UPDATED, playerState));
         }
     }
 }
