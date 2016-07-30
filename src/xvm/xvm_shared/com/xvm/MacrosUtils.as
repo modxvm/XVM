@@ -95,7 +95,7 @@ package com.xvm
                 var avalue:Number = cfg[i].value;
                 var alpha:Number = cfg[i].alpha;
                 if (value < avalue)
-                    return alpha / 100.0;
+                    return alpha;
             }
 
             return NaN;
