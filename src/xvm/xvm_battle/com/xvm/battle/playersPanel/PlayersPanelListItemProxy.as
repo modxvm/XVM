@@ -30,11 +30,11 @@ package com.xvm.battle.playersPanel
         private static const XVM_ICONS_AREA_WIDTH:int = 80;
         private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
 
-        private static const VEHICLE_TF_LEFT_X:int = WIDTH - 65 /* default ICONS_AREA_WIDTH */;
+        private static const VEHICLE_TF_LEFT_X:int = WIDTH - 63 /* default ICONS_AREA_WIDTH */;
         private static const VEHICLE_ICON_LEFT_X:int = VEHICLE_TF_LEFT_X + 15;
         private static const VEHICLE_LEVEL_LEFT_X:int = VEHICLE_TF_LEFT_X + 30;
 
-        private static const VEHICLE_TF_RIGHT_X:int = -WIDTH + 65 /* default ICONS_AREA_WIDTH */;
+        private static const VEHICLE_TF_RIGHT_X:int = -WIDTH + 63 /* default ICONS_AREA_WIDTH */;
         private static const VEHICLE_ICON_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 17;
         private static const VEHICLE_LEVEL_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 47;
 
@@ -475,7 +475,7 @@ package com.xvm.battle.playersPanel
                 if (field)
                 {
                     updateFieldWidth(field);
-                    lastX -= field.width;
+                    lastX -= field.width - 1;
                     newX = lastX + getFieldOffsetXLeft(field);
                     //Logger.add(field.name + " lastX:" + lastX + " newX:" + newX + " x:" + field.x + " offset:" + getFieldOffsetXLeft(field));
                     if (field.x != newX)
@@ -506,7 +506,7 @@ package com.xvm.battle.playersPanel
                     {
                         field.x = newX;
                     }
-                    lastX += field.width;
+                    lastX += field.width - 1;
                 }
             }
             ui.x = -(lastX + (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
@@ -543,21 +543,27 @@ package com.xvm.battle.playersPanel
                     var maxPlayerNameTextWidth:Number;
                     if (isLeftPanel)
                     {
-                        if (s_maxPlayerNameTextWidthLeft < ui.playerNameFullTF.textWidth + 4)
+                        if (s_maxPlayerNameTextWidthLeft < ui.playerNameFullTF.textWidth)
                         {
-                            s_maxPlayerNameTextWidthLeft = ui.playerNameFullTF.textWidth + 4;
+                            s_maxPlayerNameTextWidthLeft = ui.playerNameFullTF.textWidth;
+                            App.utils.scheduler.scheduleOnNextFrame(function():void
+                            {
                             Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, true));
+                            });
                         }
-                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthLeft;
+                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthLeft + 4;
                     }
                     else
                     {
-                        if (s_maxPlayerNameTextWidthRight < ui.playerNameFullTF.textWidth + 4)
+                        if (s_maxPlayerNameTextWidthRight < ui.playerNameFullTF.textWidth)
                         {
-                            s_maxPlayerNameTextWidthRight = ui.playerNameFullTF.textWidth + 4;
+                            s_maxPlayerNameTextWidthRight = ui.playerNameFullTF.textWidth;
+                            App.utils.scheduler.scheduleOnNextFrame(function():void
+                            {
                             Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, false));
+                            });
                         }
-                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthRight;
+                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthRight + 4;
                     }
                     w = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
                     if (ui.playerNameFullTF.width > w)
