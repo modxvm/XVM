@@ -257,16 +257,25 @@ package com.xvm
         // battle
 
         /**
-         * Register minimal macros values for player
+         * Register macros values for player
          * @param vehicleID vehicle id
-         * @param accountDBID player id
-         * @param playerFullName full player name with extra tags (clan, region, etc)
-         * @param vehCD vehicle compactDescr
+         * @param playerName player name without extra tags (clan, region, etc)
+         * @param clanAbbrev clan abbreviation without brackets
          * @param isAlly is player team
          */
-        public static function RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isAlly:Boolean):void
+        public static function RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean):void
         {
-            _RegisterMinimalMacrosData(vehicleID, accountDBID, playerFullName, vehCD, isAlly);
+            _RegisterPlayerMacrosData(vehicleID, accountDBID, playerName, clanAbbrev, isAlly);
+        }
+
+        /**
+         * Register macros values for vehicle
+         * @param vehicleID vehicle id
+         * @param vehCD vehicle compactDescr
+         */
+        public static function RegisterVehicleMacrosData(playerName:String, vehCD:Number):void
+        {
+            _RegisterVehicleMacrosData(playerName, vehCD);
         }
 
         // PRIVATE
@@ -454,27 +463,6 @@ package com.xvm
                 if (value is Function)
                 {
                     __out.isStaticMacro = false;
-                }
-                else if (vehCD == 0)
-                {
-                    switch (macroName)
-                    {
-                        case "veh-id":
-                        case "vehicle":
-                        case "vehiclename":
-                        case "vehicle-short":
-                        case "vtype-key":
-                        case "vtype":
-                        case "vtype-l":
-                        case "c:vtype":
-                        case "battletier-min":
-                        case "battletier-max":
-                        case "nation":
-                        case "level":
-                        case "rlevel":
-                            __out.isStaticMacro = false;
-                            break;
-                    }
                 }
 
                 res += _FormatMacro(macro, parts, value, vehCD, options, __out);
@@ -805,79 +793,120 @@ package com.xvm
             m_globals["r_size"] = _getRatingDefaultValue().length;
         }
 
-        private static function _RegisterMinimalMacrosData(vehicleID:Number, accountDBID:Number, playerFullName:String, vehCD:Number, isAlly:Boolean):void
+        private static function _RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean):void
         {
-            if (!playerFullName)
+            if (!playerName)
                 throw new Error("empty name");
 
-            var playerName:String = XfwUtils.GetPlayerName(playerFullName);
-
             if (!m_players.hasOwnProperty(playerName))
+            {
                 m_players[playerName] = new Object();
+            }
+
+            // register player macros
 
             var pdata:Object = m_players[playerName];
-            if (pdata.hasOwnProperty("name"))
-                return; // already registered
-
-            var name:String = getCustomPlayerName(playerName, accountDBID);
-            var clanIdx:int = name.indexOf("[");
-            if (clanIdx > 0)
+            if (!pdata.hasOwnProperty("name"))
             {
-                playerFullName = name;
-                name = StringUtil.trim(name.slice(0, clanIdx));
-            }
-            var clanWithoutBrackets:String = XfwUtils.GetClanNameWithoutBrackets(playerFullName);
-            var clanWithBrackets:String = XfwUtils.GetClanNameWithBrackets(playerFullName);
+                var name:String = getCustomPlayerName(playerName, accountDBID);
+                var clanWithoutBrackets:String = clanAbbrev;
+                var clanWithBrackets:String = clanAbbrev ? ("[" + clanAbbrev + "]") : null;
 
-            // {{nick}}
-            pdata["nick"] = name + (clanWithBrackets || "");
-            // {{name}}
-            pdata["name"] = name;
-            // {{clan}}
-            pdata["clan"] = clanWithBrackets;
-            // {{clannb}}
-            pdata["clannb"] = clanWithoutBrackets;
-            // {{ally}}
-            pdata["ally"] = isAlly ? 'ally' : null;
-            // {{clanicon}}
-            pdata["clanicon"] = function():String
+                // {{nick}}
+                pdata["nick"] = name + (clanWithBrackets || "");
+                // {{name}}
+                pdata["name"] = name;
+                // {{clan}}
+                pdata["clan"] = clanWithBrackets;
+                // {{clannb}}
+                pdata["clannb"] = clanWithoutBrackets;
+                // {{ally}}
+                pdata["ally"] = isAlly ? 'ally' : null;
+                // {{clanicon}}
+                pdata["clanicon"] = function():String
+                {
+                    // TODO: make static macro
+                    return Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
+                }
+            }
+        }
+
+        private static function _RegisterVehicleMacrosData(playerName:String, vehCD:Number):void
+        {
+            // register vehicle macros
+            var pdata:Object = m_players[playerName];
+            if (!pdata)
+                return;
+
+            if (!pdata.hasOwnProperty("veh-id") || (pdata["veh-id"] == 0 && vehCD != 0))
             {
-                // TODO: make static macro
-                return Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
+                var vdata:VOVehicleData = VehicleInfo.get(vehCD);
+                if (vehCD == 0)
+                {
+                    // unknown vehicle in the For of War mode - register macros as dynamic
+                    // {{veh-id}}
+                    pdata["veh-id"] = function():Number { return vehCD; }
+                    // {{vehicle}} - Chaffee
+                    pdata["vehicle"] = function():String { return vdata.localizedName; }
+                    // {{vehiclename}} - usa-M24_Chaffee
+                    pdata["vehiclename"] = function():String { return VehicleInfo.getVIconName(vdata.key); }
+                    // {{vehicle-short}} - Chaff
+                    pdata["vehicle-short"] = function():String { return vdata.shortName || vdata.localizedName; }
+                    // {{vtype-key}} - MT
+                    pdata["vtype-key"] = function():String { return vdata.vtype; }
+                    // {{vtype}}
+                    pdata["vtype"] = function():String { return VehicleInfo.getVTypeText(vdata.vtype); }
+                    // {{vtype-l}} - Medium Tank
+                    pdata["vtype-l"] = function():String { return Locale.get(vdata.vtype); }
+                    // {{c:vtype}}
+                    pdata["c:vtype"] = function():String { return MacrosUtils.getVClassColorValue(vdata); }
+                    // {{battletier-min}}
+                    pdata["battletier-min"] = function():Number { return vdata.tierLo; }
+                    // {{battletier-max}}
+                    pdata["battletier-max"] = function():Number { return vdata.tierHi; }
+                    // {{nation}}
+                    pdata["nation"] = function():String { return vdata.nation; }
+                    // {{level}}
+                    pdata["level"] = function():Number { return vdata.level; }
+                    // {{rlevel}}
+                    pdata["rlevel"] = function():String { return Defines.ROMAN_LEVEL[vdata.level - 1]; }
+                }
+                else
+                {
+                    //Logger.addObject(vdata);
+                    if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
+                        m_globals["maxhp"] = vdata.hpTop;
+                    // {{veh-id}}
+                    pdata["veh-id"] = vehCD;
+                    // {{vehicle}} - Chaffee
+                    pdata["vehicle"] = vdata.localizedName;
+                    // {{vehiclename}} - usa-M24_Chaffee
+                    pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
+                    // {{vehicle-short}} - Chaff
+                    pdata["vehicle-short"] = vdata.shortName || vdata.localizedName;
+                    // {{vtype-key}} - MT
+                    pdata["vtype-key"] = vdata.vtype;
+                    // {{vtype}}
+                    pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
+                    // {{vtype-l}} - Medium Tank
+                    pdata["vtype-l"] = Locale.get(vdata.vtype);
+                    // {{c:vtype}}
+                    pdata["c:vtype"] = MacrosUtils.getVClassColorValue(vdata);
+                    // {{battletier-min}}
+                    pdata["battletier-min"] = vdata.tierLo;
+                    // {{battletier-max}}
+                    pdata["battletier-max"] = vdata.tierHi;
+                    // {{nation}}
+                    pdata["nation"] = vdata.nation;
+                    // {{level}}
+                    pdata["level"] = vdata.level;
+                    // {{rlevel}}
+                    pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+                    // TODO: is required?
+                    //// {{hp-max}}
+                    //pdata["hp-max"] = vdata.hpTop;
+                }
             }
-
-            // Next macro unique for vehicle
-            var vdata:VOVehicleData = VehicleInfo.get(vehCD);
-            if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
-                m_globals["maxhp"] = vdata.hpTop;
-            // {{veh-id}}
-            pdata["veh-id"] = vehCD;
-            // {{vehicle}} - Chaffee
-            pdata["vehicle"] = vdata.localizedName;
-            // {{vehiclename}} - usa-M24_Chaffee
-            pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
-            // {{vehicle-short}} - Chaff
-            pdata["vehicle-short"] = vdata.shortName || vdata.localizedName;
-            // {{vtype-key}} - MT
-            pdata["vtype-key"] = vdata.vtype;
-            // {{vtype}}
-            pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
-            // {{vtype-l}} - Medium Tank
-            pdata["vtype-l"] = Locale.get(vdata.vtype);
-            // {{c:vtype}}
-            pdata["c:vtype"] = MacrosUtils.getVClassColorValue(vdata);
-            // {{battletier-min}}
-            pdata["battletier-min"] = vdata.tierLo;
-            // {{battletier-max}}
-            pdata["battletier-max"] = vdata.tierHi;
-            // {{nation}}
-            pdata["nation"] = vdata.nation;
-            // {{level}}
-            pdata["level"] = vdata.level;
-            // {{rlevel}}
-            pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
-            // {{hp-max}}
-            pdata["hp-max"] = vdata.hpTop;
         }
 
         private static function _RegisterGlobalStatisticsMacros():void
@@ -897,7 +926,8 @@ package com.xvm
             var pdata:Object = m_players[pname];
             if (!pdata)
             {
-                RegisterMinimalMacrosData(stat.vehicleID, stat._id, pname + (stat.clan ? "[" + stat.clan + "]" : ""), stat.v.id, stat.team == XfwConst.TEAM_ALLY);
+                RegisterPlayerMacrosData(stat.vehicleID, stat._id, pname, stat.clan, stat.team == XfwConst.TEAM_ALLY);
+                RegisterVehicleMacrosData(pname, stat.v.id);
                 pdata = m_players[pname];
             }
 

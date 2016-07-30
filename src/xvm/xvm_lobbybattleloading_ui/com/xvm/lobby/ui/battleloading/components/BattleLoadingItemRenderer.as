@@ -141,12 +141,11 @@ package com.xvm.lobby.ui.battleloading.components
                 {
                     _model = data;
 
-                    var fullPlayerName:String = App.utils.commons.getFullPlayerName(
-                        App.utils.commons.getUserProps(_model.playerName, _model.clanAbbrev, _model.region, _model.igrType));
                     var vdata:VOVehicleData = VehicleInfo.getByIcon(_model.vehicleIcon);
                     if (vdata)
                     {
-                        Macros.RegisterMinimalMacrosData(_model.vehicleID, _model.accountDBID, fullPlayerName, vdata.vehCD, team == XfwConst.TEAM_ALLY);
+                        Macros.RegisterPlayerMacrosData(_model.vehicleID, _model.accountDBID, _model.playerName, _model.clanAbbrev, team == XfwConst.TEAM_ALLY);
+                        Macros.RegisterVehicleMacrosData(_model.playerName, vdata.vehCD);
                     }
 
                     // Alternative icon set

@@ -14,6 +14,11 @@
             throw new IllegalOperationError("abstract method called");
         }
 
+        public function get clanAbbrev():String
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
         public function get isAlly():Boolean
         {
             throw new IllegalOperationError("abstract method called");

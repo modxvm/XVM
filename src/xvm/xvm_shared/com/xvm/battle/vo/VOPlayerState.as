@@ -20,13 +20,13 @@ package com.xvm.battle.vo
     {
         // DAAPIVehicleInfoVO
         private var _accountDBID:Number = NaN;
-        private var _clanAbbrev:String = null;
         private var _invitationStatus:uint = 0;
         private var _isObserver:Boolean = false;
         private var _isSpeaking:Boolean = false;
         private var _isVehiclePremiumIgr:Boolean = false;
         private var _playerFullName:String = null;
         private var _playerName:String = null;
+        private var _clanAbbrev:String = null;
         private var _playerStatus:uint = 0;
         private var _prebattleID:Number = NaN;
         private var _region:String = null;
@@ -81,6 +81,11 @@ package com.xvm.battle.vo
         override public function get playerName():String
         {
             return _playerName;
+        }
+
+        override public function get clanAbbrev():String
+        {
+            return _clanAbbrev;
         }
 
         override public function get isAlly():Boolean
@@ -205,10 +210,15 @@ package com.xvm.battle.vo
 
         internal function set_vehicleIconName(value:String):void
         {
+            //Logger.add(_vehicleIconName + " => " + vehicleIconName);
             _vehicleIconName = value;
             _vehicleData = VehicleInfo.getByIconName(value);
             if (_vehicleData)
             {
+                if (_vehCD == 0 && _vehicleData.vehCD != 0)
+                {
+                    Macros.RegisterVehicleMacrosData(playerName, _vehicleData.vehCD);
+                }
                 _vehCD = _vehicleData.vehCD;
             }
         }
