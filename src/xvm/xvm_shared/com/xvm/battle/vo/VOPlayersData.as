@@ -23,6 +23,9 @@ package com.xvm.battle.vo
         public var leftScope:int = 0;
         public var rightScope:int = 0;
 
+        private var lastPositionAlly:int = 0;
+        private var lastPositionEnemy:int = 0;
+
         private var _addedStates:Array = [];
 
         public function get leftCorrelationIDs():Vector.<Number>
@@ -53,7 +56,6 @@ package com.xvm.battle.vo
         public function set leftVehiclesIDs(value:Vector.<Number>):void
         {
             _leftVehiclesIDs = value.concat(); // clone vector
-            updateVehiclesPositionsAndTeam(value, true);
         }
 
         public function get rightVehiclesIDs():Vector.<Number>
@@ -64,7 +66,6 @@ package com.xvm.battle.vo
         public function set rightVehiclesIDs(value:Vector.<Number>):void
         {
             _rightVehiclesIDs = value.concat(); // clone vector
-            updateVehiclesPositionsAndTeam(value, false);
         }
 
         // private
@@ -90,14 +91,6 @@ package com.xvm.battle.vo
         {
             var value:Object;
 
-            if (data.leftVehicleInfos || data.leftItems)
-            {
-                updateVehicleInfos(data.leftVehicleInfos || data.leftItems);
-            }
-            if (data.rightVehicleInfos || data.rightItems)
-            {
-                updateVehicleInfos(data.rightVehicleInfos || data.rightItems);
-            }
             if (data.leftCorrelationIDs)
             {
                 leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
@@ -113,6 +106,14 @@ package com.xvm.battle.vo
             if (data.rightVehiclesIDs || data.rightItemsIDs)
             {
                 rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
+            }
+            if (data.leftVehicleInfos || data.leftItems)
+            {
+                updateVehicleInfos(leftVehiclesIDs, data.leftVehicleInfos || data.leftItems, true);
+            }
+            if (data.rightVehicleInfos || data.rightItems)
+            {
+                updateVehicleInfos(rightVehiclesIDs, data.rightVehicleInfos || data.rightItems, false);
             }
             if (_addedStates.length)
             {
@@ -133,11 +134,23 @@ package com.xvm.battle.vo
             }
         }
 
-        public function updateVehicleInfos(data:*):void
+        public function updateVehicleInfos(vehiclesIds:Vector.<Number>, data:*, isAlly:Boolean):void
         {
-            for each (var value:Object in data)
+            var vehicleID:Number;
+            var ids_len:int = vehiclesIds.length;
+            var data_len:int = data.length;
+            for (var pos:int = 0; pos < ids_len; ++pos)
             {
-                addOrUpdatePlayerState(value);
+                vehicleID = vehiclesIds[pos];
+                for (var i:int = 0; i < data_len; ++i)
+                {
+                    var value:Object = data[i];
+                    if (value.vehicleID == vehicleID)
+                    {
+                        addOrUpdatePlayerState(value, isAlly);
+                        break;
+                    }
+                }
             }
         }
 
@@ -153,7 +166,7 @@ package com.xvm.battle.vo
                     playerState = get(value.vehicleID);
                     if (playerState)
                     {
-                        playerState.update( {
+                        playerState.update({
                             userTags:value.userTags.concat()
                         });
                     }
@@ -204,11 +217,15 @@ package com.xvm.battle.vo
 
         // PRIVATE
 
-        private function addOrUpdatePlayerState(value:Object):void
+        private function addOrUpdatePlayerState(value:Object, isAlly:Boolean):void
         {
             if (!playerStates.hasOwnProperty(value.vehicleID))
             {
                 var playerState:VOPlayerState = new VOPlayerState(value);
+                playerState.update({
+                   isAlly: isAlly,
+                   position: isAlly ? ++lastPositionAlly : ++lastPositionEnemy
+                });
                 playerStates[value.vehicleID] = playerState;
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
                 _addedStates.push(playerState);
@@ -216,23 +233,6 @@ package com.xvm.battle.vo
             else
             {
                 (playerStates[value.vehicleID] as VOPlayerState).update(value);
-            }
-        }
-
-        private function updateVehiclesPositionsAndTeam(ids:Vector.<Number>, isAlly:Boolean):void
-        {
-            var playerState:VOPlayerState;
-            var len:int = ids.length;
-            for (var i:int = 0; i < len; ++i)
-            {
-                playerState = get(ids[i]);
-                if (playerState)
-                {
-                    playerState.update({
-                        isAlly: isAlly,
-                        position: i + 1
-                    });
-                }
             }
         }
     }

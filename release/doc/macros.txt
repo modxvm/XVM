@@ -48,7 +48,7 @@ Legend:
 │ D │ {{c:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic color by vehicle spotted status
 │ D │ {{a:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic transparency by vehicle spotted status
 │ D │ {{selected}}       │ X │ X │ X │ X │   │   │   │ value 'sel' for selected player, empty for others
-│ D │ {{position}}       │ X │ X │ X │ X │   │   │   │ position of the player in the beginning of the battle (1-15)
+│ D │ {{position}}       │ X │ X │ X │ X │ X │ X │   │ position of the player in the beginning of the battle (1-15)
 │ D │ {{hp}}             │   │ X │ X │ X │ X │ X │   │ current health points
 │ D │ {{hp-max}}         │ X │ X │ X │ X │ X │ X │   │ maximum health points
 │ D │ {{hp-ratio}}       │   │ X │ X │ X │ X │ X │   │ current health ratio (without '%' sign)
