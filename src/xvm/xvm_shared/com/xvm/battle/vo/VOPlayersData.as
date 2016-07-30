@@ -167,7 +167,7 @@ package com.xvm.battle.vo
                     if (playerState)
                     {
                         playerState.update({
-                            userTags:value.userTags.concat()
+                            userTags:value.userTags
                         });
                     }
                 }
@@ -179,8 +179,8 @@ package com.xvm.battle.vo
                     playerState = get(value.vehicleID);
                     if (playerState)
                     {
-                        playerState.update( {
-                            userTags:value.userTags.concat()
+                        playerState.update({
+                            userTags:value.userTags
                         });
                     }
                 }

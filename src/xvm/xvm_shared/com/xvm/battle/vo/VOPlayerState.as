@@ -14,32 +14,33 @@ package com.xvm.battle.vo
     import com.xvm.battle.events.*;
     import com.xvm.types.stat.*;
     import flash.errors.*;
+    import flash.utils.*;
 
     public class VOPlayerState extends VOMacrosOptions
     {
         // DAAPIVehicleInfoVO
-        private var _accountDBID:Number;
-        private var _clanAbbrev:String;
-        private var _invitationStatus:uint;
-        private var _isObserver:Boolean;
-        private var _isSpeaking:Boolean;
-        private var _isVehiclePremiumIgr:Boolean;
-        private var _playerFullName:String;
-        private var _playerName:String;
-        private var _playerStatus:uint;
-        private var _prebattleID:Number;
-        private var _region:String;
-        private var _squadIndex:uint;
-        private var _teamColor:String;
-        private var _userTags:Array;
-        private var _vehicleAction:uint;
-        private var _vehicleGuiName:String;
-        private var _vehicleIcon:String;
-        private var _vehicleIconName:String;
-        private var _vehicleID:Number;
-        private var __vehicleStatus:uint;
-        private var _isAlly:Boolean;
-        private var _isBlown:Boolean;
+        private var _accountDBID:Number = NaN;
+        private var _clanAbbrev:String = null;
+        private var _invitationStatus:uint = 0;
+        private var _isObserver:Boolean = false;
+        private var _isSpeaking:Boolean = false;
+        private var _isVehiclePremiumIgr:Boolean = false;
+        private var _playerFullName:String = null;
+        private var _playerName:String = null;
+        private var _playerStatus:uint = 0;
+        private var _prebattleID:Number = NaN;
+        private var _region:String = null;
+        private var _squadIndex:uint = 0;
+        private var _teamColor:String = null;
+        private var _userTags:Array = null;
+        private var _vehicleAction:uint = 0;
+        private var _vehicleGuiName:String = null;
+        private var _vehicleIcon:String = null;
+        private var _vehicleIconName:String = null;
+        private var _vehicleID:Number = NaN;
+        private var __vehicleStatus:uint = 0;
+        private var _isAlly:Boolean = false;
+        private var _isBlown:Boolean = false;
 
         // DAAPIVehicleStatsVO
         private var __frags:int = 0;
@@ -50,15 +51,15 @@ package com.xvm.battle.vo
         private var __curHealth:Number = NaN;
         private var _maxHealth:Number = NaN;
 
-        private var _damageInfo:VODamageInfo;
-        private var _xmqpData:VOXmqpData;
+        private var _damageInfo:VODamageInfo = null;
+        private var _xmqpData:VOXmqpData = null;
 
         private var __hitlogDamage:int = 0;
         private var __hitlogHits:Vector.<int> = new Vector.<int>();
 
         private var _position:Number = NaN;
-        private var _vehCD:int;
-        private var _vehicleData:VOVehicleData;
+        private var _vehCD:int = 0;
+        private var _vehicleData:VOVehicleData = null;
 
         // IMacrosOptionsVO implementation
 
@@ -147,6 +148,11 @@ package com.xvm.battle.vo
             return _userTags;
         }
 
+        internal function set_userTags(value:Array):void
+        {
+            _userTags = value.concat();
+        }
+
         public function get isBusy():Boolean
         {
             return UserTags.isBusy(_userTags);
@@ -190,6 +196,21 @@ package com.xvm.battle.vo
         override public function get vehicleData():VOVehicleData
         {
             return _vehicleData;
+        }
+
+        public function get vehicleIconName():String
+        {
+            return _vehicleIconName;
+        }
+
+        internal function set_vehicleIconName(value:String):void
+        {
+            _vehicleIconName = value;
+            _vehicleData = VehicleInfo.getByIconName(value);
+            if (_vehicleData)
+            {
+                _vehCD = _vehicleData.vehCD;
+            }
         }
 
         public function get isSPG():Boolean
@@ -327,60 +348,35 @@ package com.xvm.battle.vo
         {
             if (!data)
                 return;
-            _accountDBID = data.accountDBID;
-            _clanAbbrev = data.clanAbbrev;
-            _invitationStatus = data.invitationStatus;
-            _isObserver = data.isObserver;
-            _isSpeaking = data.isSpeaking;
-            _isVehiclePremiumIgr = data.isVehiclePremiumIgr;
-            _playerFullName = data.playerFullName;
-            _playerName = data.playerName;
-            _playerStatus = data.playerStatus;
-            _prebattleID = data.prebattleID;
-            _region = data.region;
-            _squadIndex = data.squadIndex;
-            _teamColor = data.teamColor;
-            if (data.userTags)
-            {
-                _userTags = data.userTags.concat();
-            }
-            _vehicleAction = data.vehicleAction;
-            _vehicleGuiName = data.vehicleGuiName;
-            _vehicleIcon = data.vehicleIcon;
-            _vehicleIconName = data.vehicleIconName;
-            _vehicleID = data.vehicleID;
-
-            set_vehicleStatus(data.vehicleStatus);
-
-            // TODO: refactor
-            _vehicleData = VehicleInfo.getByLocalizedShortName(data.vehicleName);
-            if (_vehicleData)
-            {
-                _vehCD = _vehicleData.vehCD;
-            }
 
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
 
-            eventsToDispatch[PlayerStateEvent.CHANGED] = true;
+            update(data);
         }
 
         override public function update(data:Object):Boolean
         {
             var updated:Boolean = false;
-            for (var key:String in data)
+            for (var name:String in data)
             {
-                if (this[key] !== undefined && this[key] != data[key])
-                {
+                if (_updateValue(name, data[name]))
                     updated = true;
-                    var k:String = "set_" + key;
-                    if (this[k] !== undefined)
+            }
+            if (getQualifiedClassName(data) != "Object")
+            {
+                var describeTypeXML:XML = describeType(data);
+                for each (var accessor:XML in describeTypeXML..accessor)
+                {
+                    if (accessor.@access == "readwrite")
                     {
-                        this[k](data[key]);
+                        if (_updateValue(accessor.@name, data[accessor.@name]))
+                            updated = true;
                     }
-                    else
-                    {
-                        this["_" + key] = data[key];
-                    }
+                }
+                for each (var variable:XML in describeTypeXML..variable)
+                {
+                    if (_updateValue(variable.@name, data[variable.@name]))
+                        updated = true;
                 }
             }
             if (updated)
@@ -388,6 +384,24 @@ package com.xvm.battle.vo
                 eventsToDispatch[PlayerStateEvent.CHANGED] = true;
             }
             return updated;
+        }
+
+        private function _updateValue(name:String, value:*):Boolean
+        {
+            if (this[name] !== undefined && this[name] != value)
+            {
+                var k:String = "set_" + name;
+                if (this[k] !== undefined)
+                {
+                    this[k](value);
+                }
+                else
+                {
+                    this["_" + name] = value;
+                }
+                return true;
+            }
+            return false;
         }
 
         public function dispatchEvents():void
