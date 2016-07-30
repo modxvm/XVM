@@ -30,35 +30,8 @@ import xvm_main.python.config as config
 from xvm_main.python.logger import *
 import xvm_main.python.xmqp_events as xmqp_events
 
-from commands import *
+from consts import *
 import shared
-
-#####################################################################
-# constants
-
-# Invalidation targets
-
-class INV(object):
-    NONE                = 0x00000000
-    VEHICLE_STATUS      = 0x00000001 # ready, alive, not_available, stop_respawn
-    #PLAYER_STATUS       = 0x00000002 # isActionDisabled, isSelected, isSquadMan, isSquadPersonal, isTeamKiller, isVoipDisabled
-    SQUAD_INDEX         = 0x00000008
-    CUR_HEALTH          = 0x00000010
-    MAX_HEALTH          = 0x00000020
-    MARKS_ON_GUN        = 0x00000040
-    SPOTTED_STATUS      = 0x00000080
-    FRAGS               = 0x00000100
-    HITLOG              = 0x00010000
-    ALL_VINFO           = VEHICLE_STATUS | SQUAD_INDEX | FRAGS # | PLAYER_STATUS
-    ALL_VSTATS          = FRAGS
-    ALL_ENTITY          = CUR_HEALTH | MAX_HEALTH | MARKS_ON_GUN
-    ALL                 = 0x0000FFFF
-
-class SPOTTED_STATUS(object):
-    NEVER_SEEN = 'neverSeen'
-    SPOTTED = 'spotted'
-    LOST = 'lost'
-    DEAD = 'dead'
 
 
 #####################################################################
@@ -296,7 +269,8 @@ class Battle(object):
                 if targets & INV.FRAGS:
                     data['frags'] = vStatsVO.frags
 
-            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
+            if data:
+                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
         except Exception, ex:
             err(traceback.format_exc())
 

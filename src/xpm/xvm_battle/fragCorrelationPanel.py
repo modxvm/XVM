@@ -25,7 +25,7 @@ from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 from xvm_main.python import config
 
-from commands import *
+from consts import *
 
 
 #####################################################################

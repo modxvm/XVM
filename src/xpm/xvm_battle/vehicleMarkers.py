@@ -10,6 +10,7 @@ import time
 import BigWorld
 import constants
 import game
+from Avatar import PlayerAvatar
 from gui.shared import g_eventBus, events
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import g_sessionProvider
@@ -24,9 +25,9 @@ import xvm_main.python.stats as stats
 import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 
-from commands import *
-from battle import g_battle
+from consts import *
 import shared
+
 
 #####################################################################
 # initialization/finalization
@@ -40,6 +41,35 @@ g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+@overrideMethod(PlayerAvatar, 'onBecomePlayer')
+def _PlayerAvatar_onBecomePlayer(base, self):
+    base(self)
+    try:
+        player = BigWorld.player()
+        if player is not None and hasattr(player, 'arena'):
+            arena = BigWorld.player().arena
+            if arena:
+                arena.onVehicleStatisticsUpdate += g_markers.onVehicleStatisticsUpdate
+    except Exception, ex:
+        err(traceback.format_exc())
+
+@overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
+def _PlayerAvatar_onBecomeNonPlayer(base, self):
+    try:
+        player = BigWorld.player()
+        if player is not None and hasattr(player, 'arena'):
+            arena = BigWorld.player().arena
+            if arena:
+                arena.onVehicleStatisticsUpdate -= g_markers.onVehicleStatisticsUpdate
+    except Exception, ex:
+        err(traceback.format_exc())
+    base(self)
+
+# on any player marker appear
+@registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
+def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
+    g_markers.updatePlayerState(vehicle.id, INV.ALL)
 
 
 #####################################################################
@@ -113,6 +143,13 @@ class VehicleMarkers(object):
         self.managerRef = None
 
     #####################################################################
+    # event handlers
+
+    def onVehicleStatisticsUpdate(self, vehicleID):
+        self.updatePlayerState(vehicleID, INV.FRAGS)
+
+
+    #####################################################################
     # onVMCommand
 
     # returns: (result, status)
@@ -183,9 +220,35 @@ class VehicleMarkers(object):
         try:
             if self.active:
                 self.call(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
+                for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
+                    self.updatePlayerState(vehicleID, INV.ALL)
         except Exception, ex:
             err(traceback.format_exc())
         #debug('vm:respondGlobalBattleData: {:>8.3f} s'.format(time.clock() - s))
+
+    def updatePlayerState(self, vehicleID, targets, userData=None):
+        try:
+            if self.active:
+                data = {}
+
+                if targets & INV.ALL_ENTITY:
+                    entity = BigWorld.entity(vehicleID)
+
+                    if targets & INV.MARKS_ON_GUN:
+                        if entity and hasattr(entity, 'publicInfo'):
+                            data['marksOnGun'] = entity.publicInfo.marksOnGun
+
+                if targets & INV.ALL_VSTATS:
+                    arenaDP = g_sessionProvider.getArenaDP()
+                    vStatsVO = arenaDP.getVehicleStats(vehicleID)
+
+                    if targets & INV.FRAGS:
+                        data['frags'] = vStatsVO.frags
+
+                if data:
+                    self.call(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
+        except Exception, ex:
+            err(traceback.format_exc())
 
     def recreateMarkers(self):
         #s = time.clock()
@@ -202,150 +265,3 @@ class VehicleMarkers(object):
         #debug('vm:recreateMarkers: {:>8.3f} s'.format(time.clock() - s))
 
 g_markers = VehicleMarkers()
-
-## TODO:0.9.15.1
-##@overrideMethod(MarkersManager, 'invokeMarker')
-#def MarkersManager_invokeMarker(base, self, handle, function, args=None):
-#    # debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
-#    base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
-#
-#    def extendVehicleMarkerArgs(self, handle, function, args):
-#        try:
-#            if function == 'init':
-#                if len(args) > 5:
-#                    #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
-#                    v = utils.getVehicleByName(args[5])
-#                    if hasattr(v, 'publicInfo'):
-#                        vInfo = utils.getVehicleInfo(v.id)
-#                        vStats = utils.getVehicleStats(v.id)
-#                        squadIndex = vInfo.squadIndex
-#                        arenaDP = g_sessionProvider.getArenaDP()
-#                        if arenaDP.isSquadMan(v.id):
-#                            squadIndex += 10
-#                        args.extend([
-#                            vInfo.player.accountDBID,
-#                            vInfo.vehicleType.compactDescr,
-#                            v.publicInfo.marksOnGun,
-#                            vInfo.vehicleStatus,
-#                            vStats.frags,
-#                            squadIndex,
-#                        ])
-#            elif function not in ['showExInfo']:
-#                # debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))
-#                pass
-#        except Exception, ex:
-#            err('extendVehicleMarkerArgs(): ' + traceback.format_exc())
-#        return args
-#
-#    def updateMarker(self, vehicleID, targets):
-#        #trace('updateMarker: {0} {1}'.format(targets, vehicleID))
-#
-#        battle = getBattleApp()
-#        if not battle:
-#            return
-#
-#        markersManager = battle.markersManager
-#        if vehicleID not in markersManager._MarkersManager__markers:
-#            return
-#        marker = markersManager._MarkersManager__markers[vehicleID]
-#
-#        player = BigWorld.player()
-#        arena = player.arena
-#        arenaVehicle = arena.vehicles.get(vehicleID, None)
-#        if arenaVehicle is None:
-#            return
-#
-#        stat = arena.statistics.get(vehicleID, None)
-#        if stat is None:
-#            return
-#
-#        isAlive = arenaVehicle['isAlive']
-#        isAvatarReady = arenaVehicle['isAvatarReady']
-#        status = VEHICLE_STATUS.NOT_AVAILABLE
-#        if isAlive is not None and isAvatarReady is not None:
-#            if isAlive:
-#                status |= VEHICLE_STATUS.IS_ALIVE
-#            if isAvatarReady:
-#                status |= VEHICLE_STATUS.IS_READY
-#
-#        frags = stat['frags']
-#
-#        my_frags = 0
-#        stat = arena.statistics.get(player.playerVehicleID, None)
-#        if stat is not None:
-#            my_frags = stat['frags']
-#
-#        vInfo = utils.getVehicleInfo(vehicleID)
-#        squadIndex = vInfo.squadIndex
-#        arenaDP = g_sessionProvider.getArenaDP()
-#        if arenaDP.isSquadMan(vehicleID):
-#            squadIndex += 10
-#            markersManager.invokeMarker(marker.id, 'setEntityName', [PLAYER_GUI_PROPS.squadman.name()])
-#
-#        #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vehicleID, status, frags, squadIndex))
-#        markersManager.invokeMarker(marker.id, 'as_xvm_setMarkerState', [targets, status, frags, my_frags, squadIndex])
-#
-#    def updateMinimapEntry(self, vehicleID, targets):
-#        #trace('updateMinimapEntry: {0} {1}'.format(targets, vehicleID))
-#
-#        battle = getBattleApp()
-#        if not battle:
-#            return
-#
-#        minimap = battle.minimap
-#
-#        if targets & INV.MINIMAP_SQUAD:
-#            arenaDP = g_sessionProvider.getArenaDP()
-#            if vehicleID != BigWorld.player().playerVehicleID and arenaDP.isSquadMan(vehicleID):
-#                minimap._Minimap__callEntryFlash(vehicleID, 'setEntryName', [PLAYER_GUI_PROPS.squadman.name()])
-#                g_xvm.invalidate(vehicleID, INV.BATTLE_SQUAD)
-#            else:
-#                minimap._Minimap__callEntryFlash(vehicleID, 'update')
-#    def updateMarker(self, vehicleID, targets):
-#        #trace('updateMarker: {0} {1}'.format(targets, vehicleID))
-#
-#        battle = getBattleApp()
-#        if not battle:
-#            return
-#
-#        markersManager = battle.markersManager
-#        if vehicleID not in markersManager._MarkersManager__markers:
-#            return
-#        marker = markersManager._MarkersManager__markers[vehicleID]
-#
-#        player = BigWorld.player()
-#        arena = player.arena
-#        arenaVehicle = arena.vehicles.get(vehicleID, None)
-#        if arenaVehicle is None:
-#            return
-#
-#        stat = arena.statistics.get(vehicleID, None)
-#        if stat is None:
-#            return
-#
-#        isAlive = arenaVehicle['isAlive']
-#        isAvatarReady = arenaVehicle['isAvatarReady']
-#        status = VEHICLE_STATUS.NOT_AVAILABLE
-#        if isAlive is not None and isAvatarReady is not None:
-#            if isAlive:
-#                status |= VEHICLE_STATUS.IS_ALIVE
-#            if isAvatarReady:
-#                status |= VEHICLE_STATUS.IS_READY
-#
-#        frags = stat['frags']
-#
-#        my_frags = 0
-#        stat = arena.statistics.get(player.playerVehicleID, None)
-#        if stat is not None:
-#            my_frags = stat['frags']
-#
-#        vInfo = utils.getVehicleInfo(vehicleID)
-#        squadIndex = vInfo.squadIndex
-#        arenaDP = g_sessionProvider.getArenaDP()
-#        if arenaDP.isSquadMan(vehicleID):
-#            squadIndex += 10
-#            markersManager.invokeMarker(marker.id, 'setEntityName', [PLAYER_GUI_PROPS.squadman.name()])
-#
-#        #debug('updateMarker: {0} st={1} fr={2} sq={3}'.format(vehicleID, status, frags, squadIndex))
-#        markersManager.invokeMarker(marker.id, 'as_xvm_setMarkerState', [targets, status, frags, my_frags, squadIndex])
-#
