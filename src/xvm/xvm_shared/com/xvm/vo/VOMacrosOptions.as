@@ -99,6 +99,11 @@
             throw new IllegalOperationError("abstract method called");
         }
 
+        public function get marksOnGun():Number
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
         // internal
 
         public function getSubname():String

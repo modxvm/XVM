@@ -52,7 +52,7 @@ package com.xvm.battle.vo
         private var _maxHealth:Number = NaN;
 
         private var _damageInfo:VODamageInfo = null;
-        private var _xmqpData:VOXmqpData = null;
+        private var _xmqpData:VOXmqpData = new VOXmqpData();
 
         private var __hitlogDamage:int = 0;
         private var __hitlogHits:Vector.<int> = new Vector.<int>();
@@ -278,7 +278,7 @@ package com.xvm.battle.vo
             return _isBlown;
         }
 
-        public function get marksOnGun():Number
+        override public function get marksOnGun():Number
         {
             return _marksOnGun;
         }

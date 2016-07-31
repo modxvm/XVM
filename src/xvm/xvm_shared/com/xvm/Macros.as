@@ -6,6 +6,7 @@ package com.xvm
 {
     import com.xfw.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.vo.VOPlayerState;
     import com.xvm.types.stat.*;
     import com.xvm.vo.*;
     import flash.utils.*;
@@ -289,10 +290,79 @@ package com.xvm
         private static const PART_REP:int = 6;
         private static const PART_DEF:int = 7;
 
+        private static const CACHE_MASK_ALIVE:uint =        0x0001;
+        private static const CACHE_MASK_READY:uint =        0x0002;
+        private static const CACHE_MASK_SELECTED:uint =     0x0004;
+        private static const CACHE_MASK_PLAYER:uint =       0x0008;
+        private static const CACHE_MASK_TEAMKILLER:uint =   0x0010;
+        private static const CACHE_MASK_SQUAD:uint =        0x0020;
+        private static const CACHE_MASK_POSITION:uint =     0x0040;
+        private static const CACHE_MASK_MARKSONGUN:uint =   0x0080;
+        private static const CACHE_MASK_X_ENABLED:uint =    0x0100;
+        private static const CACHE_MASK_X_SPOTTED:uint =    0x0200;
+        private static const CACHE_MASK_X_FIRE:uint =       0x0400;
+        private static const CACHE_MASK_X_OVERTURNED:uint = 0x0800;
+        private static const CACHE_MASK_X_DROWNING:uint =   0x1000;
+        private static const CACHE_MASK_SIZE:uint =         0x2000;
+
+        // special case for dynamic macros converted to static
+        private static const FORCE_STATIC_MACROS:Vector.<String> = Vector.<String>(["alive", "ready", "selected", "player", "tk",
+            "squad", "squad-num", "position", "sys-color-key", "c:system", "marksOnGun",
+            "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"]);
+
         private static var m_globals:Object = { };
         private static var m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
         private static var m_macros_cache_globals:Object = { };
-        private static var m_macros_cache_players:Vector.<Object> = Vector.<Object>([{}, {}]); // alive, dead
+        private static var m_macros_cache_players:Vector.<Object> = new Vector.<Object>(CACHE_MASK_SIZE, true);
+
+        private static function _getPlayerCache(options:IVOMacrosOptions):Object
+        {
+            var idx:uint = 0;
+            if (options.isAlive)
+                idx |= CACHE_MASK_ALIVE;
+            if (options.isReady)
+                idx |= CACHE_MASK_READY;
+            if (options.isSelected)
+                idx |= CACHE_MASK_SELECTED;
+            if (options.isCurrentPlayer)
+                idx |= CACHE_MASK_PLAYER;
+            if (options.isTeamKiller)
+                idx |= CACHE_MASK_TEAMKILLER;
+            if (options.squadIndex)
+                idx |= CACHE_MASK_SQUAD;
+            if (isNaN(options.position))
+                idx |= CACHE_MASK_POSITION;
+            if (isNaN(options.marksOnGun))
+                idx |= CACHE_MASK_MARKSONGUN;
+            var ps:VOPlayerState = options as VOPlayerState;
+            if (ps != null)
+            {
+                if (ps.xmqpData.x_enabled)
+                    idx |= CACHE_MASK_X_ENABLED;
+                if (ps.xmqpData.x_spotted)
+                    idx |= CACHE_MASK_X_SPOTTED;
+                if (ps.xmqpData.x_fire)
+                    idx |= CACHE_MASK_X_FIRE;
+                if (ps.xmqpData.x_overturned)
+                    idx |= CACHE_MASK_X_OVERTURNED;
+                if (ps.xmqpData.x_drowning)
+                    idx |= CACHE_MASK_X_DROWNING;
+            }
+
+            var cache:Object = m_macros_cache_players[idx];
+            if (cache == null)
+            {
+                m_macros_cache_players[idx] = { };
+                cache = m_macros_cache_players[idx];
+            }
+            var player_cache:Object = cache[options.playerName];
+            if (player_cache == null)
+            {
+                cache[options.playerName] = { };
+                player_cache = cache[options.playerName];
+            }
+            return player_cache;
+        }
 
         private static function _Format(format:*, options:IVOMacrosOptions, __out:Object):*
         {
@@ -314,13 +384,7 @@ package com.xvm
             var cached_value:*;
             if (playerName)
             {
-                var cache:Object = m_macros_cache_players[options.isAlive ? 0 : 1];
-                player_cache = cache[playerName];
-                if (player_cache == null)
-                {
-                    cache[playerName] = { };
-                    player_cache = cache[playerName];
-                }
+                player_cache = _getPlayerCache(options);
                 cached_value = player_cache[format_str];
             }
             else
@@ -469,7 +533,7 @@ package com.xvm
             else
             {
                 // is static macro
-                if (value is Function && macroName != "alive") // {{alive}} macro is the special case
+                if (value is Function && FORCE_STATIC_MACROS.indexOf(macroName) == -1)
                 {
                     __out.isStaticMacro = false;
                 }
@@ -784,9 +848,7 @@ package com.xvm
             // Check cached value
             if (playerName)
             {
-                var player_cache:Object = m_macros_cache_players[options.isAlive ? 0 : 1][playerName];
-                if (player_cache == null)
-                    return false;
+                var player_cache:Object = _getPlayerCache(options);
                 return player_cache.hasOwnProperty(format);
             }
             return m_macros_cache_globals.hasOwnProperty(format);

@@ -38,17 +38,17 @@ Legend:
 │ S │ {{nation}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle nation
 │ S │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
 │ S │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
-│ D │ {{squad}}          │ X │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
+│ S │ {{squad}}          │ X │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
 │ D │ {{frags}}          │   │ X │ X │ X │ X │   │   │ current frags
-│ D │ {{ready}}          │ X │ X │ X │ X │ X │   │   │ value 'ready' if player loaded to the game, '' if not
+│ S │ {{ready}}          │ X │ X │ X │ X │ X │   │   │ value 'ready' if player loaded to the game, '' if not
 │ S │ {{alive}}          │ X │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
-│ D │ {{tk}}             │ X │ X │ X │ X │ X │   │   │ value 'tk' for teamkiller, empty for others
-│ D │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │   │ marks on gun (only for spotted vehicles)
+│ S │ {{tk}}             │ X │ X │ X │ X │ X │   │   │ value 'tk' for teamkiller, empty for others
+│ S │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │   │ marks on gun (only for spotted vehicles)
 │ D │ {{spotted}}        │   │ X │ X │ X │   │   │   │ Vehicle spotted status with values from texts/spotted section
 │ D │ {{c:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic color by vehicle spotted status
 │ D │ {{a:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic transparency by vehicle spotted status
-│ D │ {{selected}}       │ X │ X │ X │ X │   │   │   │ value 'sel' for selected player, empty for others
-│ D │ {{position}}       │ X │ X │ X │ X │ X │ X │   │ position of the player in the beginning of the battle (1-15)
+│ S │ {{selected}}       │ X │ X │ X │ X │   │   │   │ value 'sel' for selected player, empty for others
+│ S │ {{position}}       │ X │ X │ X │ X │ X │ X │   │ position of the player in the beginning of the battle (1-15)
 │ D │ {{hp}}             │   │ X │ X │ X │ X │ X │   │ current health points
 │ D │ {{hp-max}}         │ X │ X │ X │ X │ X │ X │   │ maximum health points
 │ D │ {{hp-ratio}}       │   │ X │ X │ X │ X │ X │   │ current health ratio (without '%' sign)
@@ -56,9 +56,9 @@ Legend:
 │ D │ {{c:hp-ratio}}     │   │ X │ X │ X │ X │ X │   │ color depending on current health ratio (only in vehicle markers)
 │ D │ {{a:hp}}           │   │ X │ X │ X │ X │ X │   │ transparency depending on current health points (only in vehicle markers)
 │ D │ {{a:hp-ratio}}     │   │ X │ X │ X │ X │ X │   │ transparency depending on current health ratio (only in vehicle markers)
-│ D │ {{sys-color-key}}  │   │ X │ X │ X │ X │   │   │ key value for system color table
-│ D │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
-│ D │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
+│ S │ {{sys-color-key}}  │   │ X │ X │ X │ X │   │   │ key value for system color table
+│ S │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
+│ S │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ Flag for player selected in the personal cabinet or determined from the client language
 │ D │ {{clanicon}}       │ X │ X │ X │ X │ X │ X │ X │ macro with clan embled image path value
@@ -71,7 +71,7 @@ Legend:
 │ D │ {{dmg-kind}}       │   │   │   │   │ X │ X │   │ damage kind (attack, fire, ramming, ...)
 │ D │ {{c:dmg}}          │   │   │   │   │ X │ X │   │ color depending on damage source
 │ D │ {{c:dmg-kind}}     │   │   │   │   │ X │ X │   │ color depending on damage kind
-│ D │ {{py:f()}}         │ X │ X │ X │ X │ X │ X │ X │ dynamic python function call
+│S/D│ {{py:f()}}         │ X │ X │ X │ X │ X │ X │ X │ dynamic python function call
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────
 
   Global macros (does not depend on the player)
@@ -161,12 +161,12 @@ Legend:
 ┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
 │S/D│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
-│ D │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ xmqp services enabled
-│ D │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ player studied "sixth sense" perk
-│ D │ {{x-spotted}}      │   │   │   │ X │ X │   │ player vehicle is spotted
-│ D │ {{x-fire}}         │   │   │   │ X │ X │   │ fire in vehicle
-│ D │ {{x-overturned}}   │   │   │   │ X │ X │   │ player vehicle is overturned
-│ D │ {{x-drowning}}     │   │   │   │ X │ X │   │ player vehicle is drowning
+│ S │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ xmqp services enabled
+│ S │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ player studied "sixth sense" perk
+│ S │ {{x-spotted}}      │   │   │   │ X │ X │   │ player vehicle is spotted
+│ S │ {{x-fire}}         │   │   │   │ X │ X │   │ fire in vehicle
+│ S │ {{x-overturned}}   │   │   │   │ X │ X │   │ player vehicle is overturned
+│ S │ {{x-drowning}}     │   │   │   │ X │ X │   │ player vehicle is drowning
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
 
   Capture bar macros

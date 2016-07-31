@@ -1,6 +1,7 @@
 //${"test/@xvm.xc":"."}
 //${"default/@xvm.xc":"."}
-${"sirmax/sirmax.xc":"."}
+//${"sirmax/sirmax.xc":"."}
+${"Kapany3uk/@xvm.xc":"."}
 /*{
   "minimap": {
     "enabled": false

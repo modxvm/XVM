@@ -21,6 +21,7 @@
         function get position():Number;
         function get vehCD():int;
         function get vehicleData():VOVehicleData;
+        function get marksOnGun():Number;
 
         // internal use
 

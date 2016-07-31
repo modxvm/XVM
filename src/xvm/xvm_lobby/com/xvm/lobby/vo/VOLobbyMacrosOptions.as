@@ -155,5 +155,10 @@
                 vehCD = _vehicleData.vehCD;
             }
         }
+
+        override public function get marksOnGun():Number
+        {
+            return NaN;
+        }
     }
 }
