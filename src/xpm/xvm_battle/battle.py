@@ -160,6 +160,11 @@ def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
         value = False
     base(self, value)
 
+@overrideMethod(SharedPage, '_switchToPostmortem')
+def _switchToPostmortem(base, self):
+    if config.get('battle/showPostmortemTips'):
+        base(self)
+
 
 #####################################################################
 # Battle
