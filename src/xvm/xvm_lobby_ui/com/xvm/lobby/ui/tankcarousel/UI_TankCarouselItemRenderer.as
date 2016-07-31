@@ -135,6 +135,12 @@ package com.xvm.lobby.ui.tankcarousel
                 var w:int = int(ITEM_WIDTH * zoom);
                 var h:int = int(ITEM_HEIGHT * zoom);
 
+                setupStandardField(slot.tankIcon.multyXp, cfg.fields.multiXp);
+                slot.tankIcon.multyXp.x = w - slot.tankIcon.multyXp.width + cfg.fields.multiXp.dx;
+
+                setupStandardField(slot.tankIcon.xp, cfg.fields.xp);
+                slot.tankIcon.xp.x = w - slot.tankIcon.xp.width + cfg.fields.xp.dx;
+
                 setupStandardField(slot.tankIcon.tankTypeMc, cfg.fields.tankType);
 
                 slot.tankIcon.levelMc.visible = false;
@@ -145,12 +151,6 @@ package com.xvm.lobby.ui.tankcarousel
                     slot.tankIcon.levelMc.visible = true;
                 });
 
-                setupStandardField(slot.tankIcon.xp, cfg.fields.xp);
-                slot.tankIcon.xp.x = w - slot.tankIcon.xp.width + cfg.fields.xp.dx;
-
-                setupStandardField(slot.tankIcon.multyXp, cfg.fields.multiXp);
-                slot.tankIcon.multyXp.x = w - slot.tankIcon.multyXp.width + cfg.fields.multiXp.dx;
-
                 setupTankNameField(cfg.fields.tankName);
 
                 setupInfoTextField(cfg.fields.statusText);
@@ -159,8 +159,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function setupStandardField(mc:MovieClip, cfg:Object):void
         {
-            slot.tankIcon.removeChild(mc);
-            _extraFields.addChild(mc);
+            _extraFields.addChildAt(mc, 0);
 
             mc.scaleX = mc.scaleY = cfg.scale;
             mc.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
