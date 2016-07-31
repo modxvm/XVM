@@ -21,8 +21,8 @@ from gui.shared.utils.HangarSpace import g_hangarSpace
 
 from xfw import *
 from xfw.constants import URLS
+from xvm_main.python.consts import XVM
 from xvm_main.python.logger import *
-from xvm_main.python.constants import XVM
 from xvm_main.python.xvm import l10n
 import xvm_main.python.config as config
 import xvm_main.python.xvmapi as xvmapi

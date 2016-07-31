@@ -31,7 +31,7 @@ from gui.LobbyContext import g_lobbyContext
 
 from xfw import *
 
-from constants import *
+from consts import *
 from logger import *
 import vehinfo_xtdb
 import vehinfo_xte
@@ -51,43 +51,43 @@ class _Dossier(object):
         self.__dataReceiver = None
 
     def requestDossier(self, args):
-        (self._battlesType, playerId, vehId) = args
-        if vehId == 0 or self.__isVehicleDossierCached(playerId, vehId):
-            self.__requestedDataReceived(playerId, vehId)
+        (self._battlesType, accountDBID, vehCD) = args
+        if vehCD == 0 or self.__isVehicleDossierCached(accountDBID, vehCD):
+            self.__requestedDataReceived(accountDBID, vehCD)
         else:
-            self.__dataReceiver.invoke(playerId, vehId)
+            self.__dataReceiver.invoke(accountDBID, vehCD)
 
-    def __requestedDataReceived(self, playerId, vehId):
+    def __requestedDataReceived(self, accountDBID, vehCD):
         # respond
-        res = self.getDossier((self._battlesType, playerId, vehId))
+        res = self.getDossier((self._battlesType, accountDBID, vehCD))
         #log(res)
-        as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, playerId, vehId, res)
+        as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, accountDBID, vehCD, res)
 
 
     def getDossier(self, args):
         #log(str(args))
 
-        (self._battlesType, self.playerId, self.vehId) = args
+        (self._battlesType, self.accountDBID, self.vehCD) = args
 
-        if self.playerId == 0:
-            self.playerId = None
+        if self.accountDBID == 0:
+            self.accountDBID = None
 
-        if self.vehId == 0:
-            dossier = g_itemsCache.items.getAccountDossier(self.playerId)
+        if self.vehCD == 0:
+            dossier = g_itemsCache.items.getAccountDossier(self.accountDBID)
             res = self.__prepareAccountResult(dossier)
         else:
-            vehId = int(self.vehId)
-            if not self.__isVehicleDossierCached(self.playerId, vehId):
+            vehCD = int(self.vehCD)
+            if not self.__isVehicleDossierCached(self.accountDBID, vehCD):
                 return None
-            dossier = g_itemsCache.items.getVehicleDossier(vehId, self.playerId)
+            dossier = g_itemsCache.items.getVehicleDossier(vehCD, self.accountDBID)
             xpVehs = g_itemsCache.items.stats.vehiclesXPs
-            earnedXP = xpVehs.get(vehId, 0)
+            earnedXP = xpVehs.get(vehCD, 0)
             freeXP = g_itemsCache.items.stats.actualFreeXP
-            #log('vehId: {0} pVehXp: {1}'.format(vehId, earnedXP))
+            #log('vehCD: {0} pVehXp: {1}'.format(vehCD, earnedXP))
 
             xpToElite = 0
             unlocks = g_itemsCache.items.stats.unlocks
-            _, nID, invID = vehicles.parseIntCompactDescr(vehId)
+            _, nID, invID = vehicles.parseIntCompactDescr(vehCD)
             vType = vehicles.g_cache.vehicle(nID, invID)
             for data in vType.unlocksDescrs:
                 if data[1] not in unlocks:
@@ -102,8 +102,8 @@ class _Dossier(object):
                 dmg = stats.getDamageDealt()
                 frg = stats.getFragsCount()
                 if battles > 0 and dmg > 0 and frg > 0:
-                    xtdb = vehinfo_xtdb.calculateXTDB(vehId, float(dmg) / battles)
-                    xte = vehinfo_xte.calculateXTE(vehId, float(dmg) / battles, float(frg) / battles)
+                    xtdb = vehinfo_xtdb.calculateXTDB(vehCD, float(dmg) / battles)
+                    xte = vehinfo_xte.calculateXTE(vehCD, float(dmg) / battles, float(frg) / battles)
                 if xtdb is None:
                     xtdb = 0
                 if xte is None:
@@ -117,12 +117,12 @@ class _Dossier(object):
     # PRIVATE
 
     # check vehicle dossier already loaded and cached
-    def __isVehicleDossierCached(self, playerId, vehId):
-        if playerId is None or playerId == 0:
+    def __isVehicleDossierCached(self, accountDBID, vehCD):
+        if accountDBID is None or accountDBID == 0:
             return True
 
         container = g_itemsCache.items._ItemsRequester__itemsCache[GUI_ITEM_TYPE.VEHICLE_DOSSIER]
-        dossier = container.get((playerId, vehId))
+        dossier = container.get((accountDBID, vehCD))
         return dossier is not None
 
     def __getStatsBlock(self, dossier):
@@ -156,7 +156,7 @@ class _Dossier(object):
         stats = self.__getStatsBlock(dossier)
         glob = dossier.getGlobalStats()
         return {
-            'playerId': 0 if self.playerId is None else int(self.playerId),
+            'accountDBID': 0 if self.accountDBID is None else int(self.accountDBID),
 
             'battles': stats.getBattlesCount(),
             'wins': stats.getWinsCount(),
@@ -204,9 +204,9 @@ class _Dossier(object):
 
         lbt = glob.getLastBattleTime()
         res.update({
-            'maxXPVehId': stats.getMaxXpVehicle(),
-            'maxFragsVehId': stats.getMaxFragsVehicle(),
-            'maxDamageVehId': stats.getMaxDamageVehicle(),
+            'maxXPVehCD': stats.getMaxXpVehicle(),
+            'maxFragsVehCD': stats.getMaxFragsVehicle(),
+            'maxDamageVehCD': stats.getMaxDamageVehicle(),
 
             'creationTime': glob.getCreationTime(),
             'lastBattleTime': lbt,
@@ -216,8 +216,8 @@ class _Dossier(object):
         })
 
         vehicles = stats.getVehicles()
-        for (vehId, vdata) in vehicles.iteritems():
-            res['vehicles'][str(vehId)] = {
+        for (vehCD, vdata) in vehicles.iteritems():
+            res['vehicles'][str(vehCD)] = {
                 'battles': vdata.battlesCount,
                 'wins': vdata.wins,
                 'mastery': vdata.markOfMastery,
@@ -234,7 +234,7 @@ class _Dossier(object):
         res = self.__prepareCommonResult(dossier)
 
         res.update({
-            'vehId': int(self.vehId),
+            'vehCD': int(self.vehCD),
             'xtdb': xtdb,
             'xte': xte,
             'earnedXP': earnedXP,

@@ -1,0 +1,335 @@
+﻿; *** Inno Setup version 5.5.0+ Belarusian messages ***
+;
+; To download user-contributed translations of this file, go to:
+;   http://www.jrsoftware.org/files/istrans/
+;
+; Note: When translating this text, do not add periods (.) to the end of
+; messages that didn't have them already, because on those messages Inno
+; Setup adds the periods automatically (appending a period would result in
+; two periods being displayed).
+
+[LangOptions]
+; The following three entries are very important. Be sure to read and 
+; understand the '[LangOptions] section' topic in the help file.
+LanguageName=Беларуская
+LanguageID=$0423
+LanguageCodePage=0
+; If the language you are translating to requires special font faces or
+; sizes, uncomment any of the following entries and change them accordingly.
+;DialogFontName=
+;DialogFontSize=8
+;WelcomeFontName=Verdana
+;WelcomeFontSize=12
+;TitleFontName=Arial
+;TitleFontSize=29
+;CopyrightFontName=Arial
+;CopyrightFontSize=8
+
+[Messages]
+
+; *** Application titles
+SetupAppTitle=Усталяванне
+SetupWindowTitle=Усталяванне %1
+UninstallAppTitle=Высталяванне
+UninstallAppFullTitle=Высталяванне %1
+
+; *** Misc. common
+InformationTitle=Інфармацыя
+ConfirmTitle=Пацвердзіць
+ErrorTitle=Памылка
+
+; *** SetupLdr messages
+SetupLdrStartupMessage=Гэтая праграма ўсталюе %1. Працягнуць?
+LdrCannotCreateTemp=Немагчыма стварыць часовы файл. Усталяванне перарванае
+LdrCannotExecTemp=Немагчыма выканаць файл у часовым каталогу. Усталяванне перарванае
+
+; *** Startup error messages
+LastErrorMessage=%1.%n%nПамылка %2: %3
+SetupFileMissing=Фпйл %1 страчаны з каталога ўсталявання. Калі ласка, вырашыце праблему ці атрымайце новую копію праграмы.
+SetupFileCorrupt=Файлы ўсталёўніка пашкоджаныя. Калі ласка, атрымайце новую копію праграмы.
+SetupFileCorruptOrWrongVer=Файлы ўсталявання пашкоджаныя ці несумяшчальныя з гэтай версіяй усталёўніка. Калі ласка, вырашыце праблему ці атрымайце новую копію праграмы.
+InvalidParameter=Недапушчальны параметр быў перададзены ў загадным радку:%n%n%1
+SetupAlreadyRunning=Усталёўнік ўжо працуе.
+WindowsVersionNotSupported=Гэтая праграма не падтрымлівае версію Windows, якую выкарыстоўвае ваш камп’ютар.
+WindowsServicePackRequired=Гэтая праграма патрабуе %1 са службовым пакункам %2 ці пазнейшую.
+NotOnThisPlatform=Гэтая праграма не працуе на %1.
+OnlyOnThisPlatform=Гэтая праграма павінна быць запушчаная на %1.
+OnlyOnTheseArchitectures=Гэтая праграма можа быць усталяваная толькі для версіяў Windows, распрацаваных для наступных архітэктураў працэсараў:%n%n%1
+MissingWOW64APIs=Версія Windows, якую вы запусцілі, не ўлучае функцыянальнасць, запатрабаваную усталёўнікам для выканання 64-бітнага ўсталявання. Каб вырашыць гэтую праблему, калі ласка, усталюйце службовы пакунак %1.
+WinVersionTooLowError=Гэтая праграма патрабуе %1 версіі %2 ці пазнейшай.
+WinVersionTooHighError=Гэтая праграма не можа быць усталяваная на %1 версіі %2 ці пазнейшай.
+AdminPrivilegesRequired=Вы павінны ўвайсці як адміністратар падчас усталявання гэтай праграмы.
+PowerUserPrivilegesRequired=Вы павінны ўвайсці як адміністратар ці чалец моцных карыстальнікаў падчас усталявання гэтай праграмы.
+SetupAppRunningError=Усталёўнік выявіў, што %1 зараз працуе.%n%nКалі ласка, зачыніце ўсе копіі гэтай праграмы і націсніце «Добра», каб працягнуць, ці «Скасаваць», каб выйсці.
+UninstallAppRunningError=Высталёўнік выявіў, што %1 зараз працуе.%n%nКалі ласка, зачыніце ўсе копіі гэтай праграмы і націсніце «Добра», каб працягнуць, ці «Скасаваць», каб выйсці.
+
+; *** Misc. errors
+ErrorCreatingDir=Усталёўнік не змог стварыць каталог «%1»
+ErrorTooManyFilesInDir=Немагчыма стварыць файл у каталогу «%1», бо ён змяшчае зашмат файлаў
+
+; *** Setup common messages
+ExitSetupTitle=Выйсці з усталёўніка
+ExitSetupMessage=Усталяванне не скончанае. Калі вы выйдзеце зараз, праграма не будзе ўсталяваная.%n%nВы можаце запусціць усталёўнік зноў у іншы час, каб скончыць усталяванне.%n%nВыйсці з усталёўніка?
+AboutSetupMenuItem=Аб усталёўніку…
+AboutSetupTitle=Аб усталёўніку
+AboutSetupMessage=%1 версіі %2%n%3%n%n%1 пачатковая старонка:%n%4
+AboutSetupNote=
+TranslatorNote=
+
+; *** Buttons
+ButtonBack=Назад
+ButtonNext=Далей
+ButtonInstall=Усталяваць
+ButtonOK=Добра
+ButtonCancel=Скасаваць
+ButtonYes=Так
+ButtonYesToAll=Так для ўсіх
+ButtonNo=Не
+ButtonNoToAll=Не для ўсіх
+ButtonFinish=Скончыць
+ButtonBrowse=Агляд…
+ButtonWizardBrowse=Агляд…
+ButtonNewFolder=Стварыць новы каталог
+
+; *** "Select Language" dialog messages
+SelectLanguageTitle=Абярыце мову ўсталявання
+SelectLanguageLabel=Абярыце мову, якая будзе скарыстаная цягам усталявання:
+
+; *** Common wizard text
+ClickNext=Пстрыкніце «Далей», каб працягнуць, ці «Скасаваць», каб выйсці з усталёўніка.
+BeveledLabel=
+BrowseDialogTitle=Агляд каталогаў
+BrowseDialogLabel=Абярыце каталог у спісе і пстрыкніце «Добра».
+NewFolderName=Новы каталог
+
+; *** "Welcome" wizard page
+WelcomeLabel1=Вас вітае ўсталёўнік [name]
+WelcomeLabel2=Гэтая праграма ўсталюе [name/ver] на ваш камп’ютар.%n%nМы рэкамендуем вам зачыніць усе іншыя праграмы, перш чым працягваць.
+
+; *** "Password" wizard page
+WizardPassword=Пароль
+PasswordLabel1=Усталяванне абаронена паролем.
+PasswordLabel3=Калі ласка, увядзіце пароль, і пстрыкніце «Далей», каб працягнуць. Паролі адчувальныя да рэгістру.
+PasswordEditLabel=Пароль:
+IncorrectPassword=Уведзены вамі пароль няправільны. Калі ласка, паўтарыце спробу.
+
+; *** "License Agreement" wizard page
+WizardLicense=Ліцэнзійнае пагадненне
+LicenseLabel=Калі ласка, прачытайце наступную важную інфармацыю, перш чым працягваць.
+LicenseLabel3=Калі ласка, прачытайце наступнае ліцэнзійнае пагадненне. Вы павінны прыняць ліцэнзійнае пагадненне, перш чым працягваць усталяванне.
+LicenseAccepted=Я прымаю пагадненне
+LicenseNotAccepted=Я не прымаю пагадненне
+
+; *** "Information" wizard pages
+WizardInfoBefore=Інфармацыя
+InfoBeforeLabel=Калі ласка, прачытайце наступную важную інфармацыю, перш чым працягваць.
+InfoBeforeClickLabel=Калі вы будзеце гатовыя да працягу ўсталявання, пстрыкніце «Далей».
+WizardInfoAfter=Інфармацыя
+InfoAfterLabel=Калі ласка, прачытайце наступную важную інфармацыю, перш чым працягваць.
+InfoAfterClickLabel=Калі вы будзеце гатовыя да працягу ўсталявання, пстрыкніце «Далей».
+
+; *** "User Information" wizard page
+WizardUserInfo=Інфармацыя карыстальніка
+UserInfoDesc=Калі ласка, увядзіце вашую інфармацыю.
+UserInfoName=Імя карыстальніка:
+UserInfoOrg=Арганізацыя:
+UserInfoSerial=Серыйны нумар:
+UserInfoNameRequired=Вы павінны ўвесці імя.
+
+; *** "Select Destination Location" wizard page
+WizardSelectDir=Абярыце мэтавае размяшчэнне
+SelectDirDesc=Куды ўсталёўваць [name]?
+SelectDirLabel3=Праграма ўсталюе [name] у наступны каталог.
+SelectDirBrowseLabel=Каб працягнуць, пстрыкніце «Далей». Калі вы жадаеце абраць іншы каталог, пстрыкніце «Агляд».
+DiskSpaceMBLabel=Патрабуецца прынамсі [mb] МБ вольнай дыскавай прасторы.
+CannotInstallToNetworkDrive=Праграма не можа ўсталяваць на сеткавы дыск.
+CannotInstallToUNCPath=Праграма не можа ўсталяваць у размяшчэнне UNC.
+InvalidPath=Вы павінны ўвесці поўны шлях з літарай дыска; напрыклад::%n%nC:\APP%n%n ці UNC-шлях у форме:%n%n\\server\share
+InvalidDrive=Дыск ці UNC-абагуленне, якое вы азначылі, не існуе ці недаступнае. Калі ласка, абярыце іншае.
+DiskSpaceWarningTitle=Бракуе дыскавай прасторы
+DiskSpaceWarning=Усталёўнік патрабуе прынамсі %1 кБ вольнай дыскавай прасторы для ўсталявання, але на абраным дыску толькі %2 кБ даступна.%n%nУсё роўна працягнуць?
+DirNameTooLong=Назва каталога ці шлях задоўгі.
+InvalidDirName=Назва каталога недапушчальная.
+BadDirName32=Назвы каталогаў не могуць змяшчаць ніякія з наступных знакаў: %n%n%1
+DirExistsTitle=Каталог існуе
+DirExists=Каталог:%n%n%1%n%nужо існуе. Усё роўна ўсталяваць у гэты каталог?
+DirDoesntExistTitle=Каталог не існуе
+DirDoesntExist=Каталог:%n%n%1%n%nне існуе. Стварыць каталог?
+
+; *** "Select Components" wizard page
+WizardSelectComponents=Абярыце кампаненты
+SelectComponentsDesc=Якія кампаненты павінны быць усталяваныя?
+SelectComponentsLabel2=Вылучыце кампаненты, якія жадаеце ўсталяваць і не вылучайце тых, якія не жадаеце ўсталёўваць.  Пстрыкніце «Далей», калі вы будзеце гатовы працягнуць.
+FullInstallation=Поўнае ўсталяванне
+; if possible don't translate 'Compact' as 'Minimal' (I mean 'Minimal' in your language)
+CompactInstallation=Кампактнае ўсталяванне
+CustomInstallation=Дапасаванае ўсталяванне
+NoUninstallWarningTitle=Кампаненты існуюць
+NoUninstallWarning=Усталёўнік выявіў, што наступныя кампаненты ўжо ўсталяваныя на вашым камп’ютары:%n%n%1%n%nЗняццё вылучэння з гэтых кампанентаў не высталюе іх.%n%nУсё роўна працягнуць?
+ComponentSize1=%1 кБ
+ComponentSize2=%1 МБ
+ComponentsDiskSpaceMBLabel=Дзейнае размяшчэнне патрабуе прынамсі [mb] МБ дыскавай прасторы.
+
+; *** "Select Additional Tasks" wizard page
+WizardSelectTasks=Абраць дадатковыя задачы
+SelectTasksDesc=Якія дадатковыя задачы павінны быць выкананыя?
+SelectTasksLabel2=Абярыце дадатковыя задачы, якія павінен выканаць усталёўнік падчас усталявання [name], і пстрыкніце «Далей».
+
+; *** "Select Start Menu Folder" wizard page
+WizardSelectProgramGroup=Абярыце каталог Пачатковага меню
+SelectStartMenuFolderDesc=Дзе павінен усталёўнік размясціць пускальнікі праграмы?
+SelectStartMenuFolderLabel3=Усталёўнік створыць пускальнікі праграмы ў наступным каталогу Пачатковага меню.
+SelectStartMenuFolderBrowseLabel=Каб працягнуць, пстрыкніце «Далей». Калі вы жадаеце абраць іншы каталог, пстрыкніце «Агляд».
+MustEnterGroupName=Вы павінны ўвесці назву каталога.
+GroupNameTooLong=Назва каталога ці шлях задоўгі.
+InvalidGroupName=Назва каталога недапушчальная.
+BadGroupName=Назва каталога не можа змяшчаць наступныя знакі:%n%n%1
+NoProgramGroupCheck2=Не ствараць каталог у Пачатковым меню
+
+; *** "Ready to Install" wizard page
+WizardReady=Гатовы да ўсталявання
+ReadyLabel1=Усталёўнік цяпер гатовы да пачатку ўсталявання [name] на ваш камп’ютар. 
+ReadyLabel2a=Пстрыкніце «Усталяваць», каб працягнуць усталяванне, ці «Назад», калі вы жадаеце прагледзець ці змяніць некаторыя налады.
+ReadyLabel2b=Пстрыкніце «Усталяваць», каб працягнуць усталяванне.
+ReadyMemoUserInfo=Інфармацыя карыстальніка:
+ReadyMemoDir=Мэтавае размяшчэнне:
+ReadyMemoType=Тып усталявання:
+ReadyMemoComponents=Вылучаныя кампаненты:
+ReadyMemoGroup=Каталог Пачатковага меню:
+ReadyMemoTasks=Дадатковыя задачы:
+
+; *** "Preparing to Install" wizard page
+WizardPreparing=Падрыхтоўка да ўсталявання
+PreparingDesc=Усталёўнік рыхтуецца да ўсталявання [name] на ваш камп’ютар.
+PreviousInstallNotCompleted=Усталяванне ці высталяванне папярэдняй праграмы не скончанае. Вам неабходна перазапусціць ваш камп’ютар, каб скончыць усталяванне.%n%nПасля перазапуску вашага камп’ютара запусціце усталёўнік зноў, каб скончыць усталяванне [name].
+CannotContinue=Усталёўнік не можа працягваць. Калі ласка, пстрыкніце «Скасаваць», каб выйсці.
+ApplicationsFound=Наступныя праграмы выкарыстоўваюць файлы, якія трэба абнавіць усталёўніку. Рэкамендавана дазволіць усталёўніку аўтаматычна зачыніць гэтыя праграмы.
+ApplicationsFound2=Наступныя праграмы выкарыстоўваюць файлы, якія трэба абнавіць усталёўніку. Рэкамендавана дазволіць усталёўніку аўтаматычна зачыніць гэтыя праграмы. Пасля сканчэння ўсталявання будзе здзейсненая спроба перазапусціць гэтыя праграмы.
+CloseApplications=Аўтаматычна зачыніць праграмы
+DontCloseApplications=Не зачыняць праграмы
+
+; *** "Installing" wizard page
+WizardInstalling=Усталёўванне
+InstallingLabel=Калі ласка, пачакайце, пакуль [name] усталюецца на ваш камп’ютар.
+
+; *** "Setup Completed" wizard page
+FinishedHeadingLabel=Заканчэнне усталявання [name]
+FinishedLabelNoIcons=Усталёўнік скончыў усталёўванне [name] на ваш камп’ютар.
+FinishedLabel=Усталёўнік скончыў усталёўванне [name] на ваш камп’ютар. Праграма можа быць запушчаная праз усталяваныя пускальнікі.
+ClickFinish=Пстрыкніце «Скончыць», каб выйсці з усталёўніка.
+FinishedRestartLabel=Каб скончыць усталяванне [name], усталёўнік павінен перазапусціць ваш камп’ютар. Перазапусціць зараз?
+FinishedRestartMessage=Каб скончыць усталяванне [name], усталёўнік павінен перазапусціць ваш камп’ютар.%n%nПеразапусціць зараз?
+ShowReadmeCheck=Так, я жадаю прагледзець файл README
+YesRadio=Так, перазапусціць камп’ютар зараз
+NoRadio=Не, я перазапушчу камп’ютар пазней
+; used for example as 'Run MyProg.exe'
+RunEntryExec=Запусціць %1
+; used for example as 'View Readme.txt'
+RunEntryShellExec=Прагледзець %1
+
+; *** "Setup Needs the Next Disk" stuff
+ChangeDiskTitle=Усталёўніку неабходны наступны дыск
+SelectDiskLabel2=Калі ласка, устаўце дыск %1 і пстрыкніце «Добра».%n%nКалі файлы на гэтым дыску размяшчаюцца не ў тым каталогу, які адлюстраваны ніжэй, азначце правільны шлях ці пстрыкніце «Агляд».
+PathLabel=Шлях:
+FileNotInDir2=Файл «%1» не можа быць знойдзены ў «%2». Калі ласка, устаўце правільны дыск ці абярыце іншы каталог.
+SelectDirectoryLabel=Калі ласка, азначце размяшчэнне наступнага дыска.
+
+; *** Installation phase messages
+SetupAborted=Усталяванне не скончана.%n%nКалі ласка,  вырашыце праблему і запусціце ўсталёўнік зноў.
+EntryAbortRetryIgnore=Пстрыкніце «Паўтарыць», каб паўтарыць спробу, «Ігнараваць», каб працягнуць, ці «Перарваць», каб скасаваць усталяванне.
+
+; *** Installation status messages
+StatusClosingApplications=Зачыненне праграмаў…
+StatusCreateDirs=Стварэнне каталогаў…
+StatusExtractFiles=Выманне файлаў…
+StatusCreateIcons=Стварэнне пускальнікаў…
+StatusCreateIniEntries=Стварэнне INI-запісаў…
+StatusCreateRegistryEntries=Стварэнне запісаў рэестру…
+StatusRegisterFiles=Рэгістраванне файлаў…
+StatusSavingUninstall=Захванне інфармацыі высталявання…
+StatusRunProgram=Сканчэнне ўсталявання…
+StatusRestartingApplications=Перазапусканне праграмаў…
+StatusRollback=Касацыя зменаў…
+
+; *** Misc. errors
+ErrorInternal2=Унутраная памылка: %1
+ErrorFunctionFailedNoCode=Няўдала: %1
+ErrorFunctionFailed=Няўдала: %1; код %2
+ErrorFunctionFailedWithMessage=Няўдала: %1; код %2.%n%3
+ErrorExecutingProgram=Нмагчыма выканаць файл:%n%1
+
+; *** Registry errors
+ErrorRegOpenKey=Памылка адчынення ключа рэестра:%n%1\%2
+ErrorRegCreateKey=Памылка стварэння ключа рэестра:%n%1\%2
+ErrorRegWriteKey=Памылка запісу ў ключ рэестра:%n%1\%2
+
+; *** INI errors
+ErrorIniEntry=Памылка стварэння INI-запісу ў файл «%1».
+
+; *** File copying errors
+FileAbortRetryIgnore=Пстрыкніце «Паўтарыць», каб паўтарыць спробу, «Ігнараваць», каб прапусціць гэты файл (не рэкамендавана), ці «Перарваць», каб скасаваць усталяванне.
+FileAbortRetryIgnore2=Пстрыкніце «Паўтарыць», каб паўтарыць спробу, «Ігнараваць», каб працягнуць (не рэкамендавана), ці «Перарваць», каб скасаваць усталяванне.
+SourceIsCorrupted=Зыходны файл пашкоджаны
+SourceDoesntExist=Зыходны файл «%1» не існуе
+ExistingFileReadOnly=Існы файл пазначаны як файл толькі для чытання.%n%nПстрыкніце «Паўтарыць», каб выдаліць атрыбут «толькі для чытання» і паўтарыць спробу, «Ігнараваць», каб прапусціць гэты файл, ці «Перарваць», каб скасаваць усталяванне.
+ErrorReadingExistingDest=Адбылася памылка падчас спробы чытання існага файла:
+FileExists=Файл ужо існуе.%n%nПеразапісаць яго?
+ExistingFileNewer=Існы файл навейшы за той, які спрабуе ўсталяваць праграма. Рэкамендавана захаваць існы файл.%n%nЗахаваць існы файл?
+ErrorChangingAttr=Адбылася памылка падчас спробы змянення атрыбута існага файла:
+ErrorCreatingTemp=Адбылася памылка падчас спробы стварэння файла ў мэтавым каталогу:
+ErrorReadingSource=Адбылася памылка падчас спробы чытання зыходнага файла:
+ErrorCopying=Адбылася памылка падчас спробы капіявання файла:
+ErrorReplacingExistingFile=Адбылася памылка падчас спробы замены існага файла:
+ErrorRestartReplace=Няўдача RestartReplace:
+ErrorRenamingTemp=Адбылася памылка падчас спробы пераназвання файла ў мэтавым каталогу:
+ErrorRegisterServer=Немагчыма зарэгістраваць DLL/OCX: %1
+ErrorRegSvr32Failed=Няўдача RegSvr32 з кодам %1
+ErrorRegisterTypeLib=Немагчыма зарэгістраваць бібліятэку тыпаў: %1
+
+; *** Post-installation errors
+ErrorOpeningReadme=Адбылася памылка падчас спробы адчынення файла README.
+ErrorRestartingComputer=Усталёўнік не змог перазапусціць камп’ютар. Калі ласка, зрабіце гэта ўручную.
+
+; *** Uninstaller messages
+UninstallNotFound=Файл «%1» не існуе. Немагчыма высталяваць.
+UninstallOpenError=Файл «%1» не можа быць адчынены. Немагчыма высталяваць
+UninstallUnsupportedVer=Файл журналу высталявання «%1» у фармаце, які не распазнаецца гэтай версіяй высталёўніка. Немагчыма высталяваць
+UninstallUnknownEntry=Невядомы запіс (%1) сустрэты ў журнале высталёўніка
+ConfirmUninstall=Вы сапраўды жадаеце высталяваць %1 і ўсе ягоныя кампаненты?
+UninstallOnlyOnWin64=Гэтае ўсталяванне можа быць высталявана толькі на 64-бітнай Windows.
+OnlyAdminCanUninstall=Гэтае ўсталяванне можа быць высталявана толькі карыстальнікам з адміністратарскімі прывілеямі..
+UninstallStatusLabel=Калі ласка, пачакайце, пакуль %1 будзе выдаленая з вашага камп’ютара.
+UninstalledAll=%1 была паспяхова выдаленая з вашага камп’ютара.
+UninstalledMost=Высталяванне %1 скончанае.%n%nНекаторыя элементы не могуць быць выдаленыя. Гэтыя могуць быць выдаленыя ўручную.
+UninstalledAndNeedsRestart=Каб скончыць высталяванне %1, ваш камп’ютар павінен быць перазапушчаны.%n%nПеразапусціць зараз?
+UninstallDataCorrupted=Файл «%1» пашкоджаны. Немагчыма высталяваць
+
+; *** Uninstallation phase messages
+ConfirmDeleteSharedFileTitle=Выдаліць абагуленыя файлы?
+ConfirmDeleteSharedFile2=Сістэма паведамляе, што наступны абагулены файл больш не выкарыстоўваецца ніякімі праграмамі. Выдаліць гэты абагулены файл?%n%nКалі якія-небудзь праграмы яшчэ карыстаюць гэты файл, а ён будзе выдалены, яны могуць перастаць функцыянаваць правільна,  Калі вы не ўпэўнены, абярыце «Не». Пакіданне файла ў вашай сістэме не выкліча аніякай шкоды.
+SharedFileNameLabel=Назва файла:
+SharedFileLocationLabel=Размяшчэнне:
+WizardUninstalling=Стан высталявання
+StatusUninstalling=Высталёўванне %1…
+
+; *** Shutdown block reasons
+ShutdownBlockReasonInstallingApp=Усталёўванне %1.
+ShutdownBlockReasonUninstallingApp=Высталёўванне %1.
+
+; The custom messages below aren't used by Setup itself, but if you make
+; use of them in your scripts, you'll want to translate them.
+
+[CustomMessages]
+
+NameAndVersion=%1 версіі %2
+AdditionalIcons=Дадатковыя значкі:
+CreateDesktopIcon=Стварыць пускальнік на стальніцы
+CreateQuickLaunchIcon=Стварыць пускальнік на паліцы хуткага запуску
+ProgramOnTheWeb=%1 у сеціве
+UninstallProgram=Высталяванне %1
+LaunchProgram=Запуск %1
+AssocFileExtension=Асацыяваць %1 з пашырэннем %2
+AssocingFileExtension=Асацыяванне %1 з пашырэннем %2…
+AutoStartProgramGroupDescription=Запуск:
+AutoStartProgram=Аўтаматычна запусціць %1
+AddonHostProgramNotFound=%1 не можа размяшчацца ў абраны вамі каталогу.%n%nУсё роўна працягнуць?

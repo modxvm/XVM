@@ -28,3 +28,6 @@ utils/replays/*.wotreplay
 utils/xmqp_test/data/
 utils/xmqp_test/*.pyc
 output/*
+src/installer/src/xvm_defines.iss
+src/installer/src/l10n_result/
+src/installer/src/temp_changelogs/

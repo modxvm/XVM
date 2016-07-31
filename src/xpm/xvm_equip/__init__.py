@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.0.1',
+    'VERSION':       '0.9.15.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.0.1'],
+    'GAME_VERSIONS': ['0.9.15.1'],
     # optional
 }
 
@@ -33,7 +33,7 @@ from xfw import *
 import xvm_main.python.userprefs as userprefs
 import xvm_main.python.config as config
 from xvm_main.python.logger import err, debug
-from xvm_main.python.constants import *
+from xvm_main.python.consts import *
 
 import wg_compat
 
@@ -51,14 +51,14 @@ PREF_VERSION = '1.0'
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, xvm_equip_init)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, xvm_equip_init)
 
 BigWorld.callback(0, start)
 
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, xvm_equip_init)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, xvm_equip_init)
 
 
 #####################################################################
@@ -90,7 +90,8 @@ def PlayerAccount_onBecomePlayer(*args, **kwargs):
 
 
 # device is changed on vehicle, remember the setting
-@registerEvent(AmmunitionPanel, 'setVehicleModule')
+# TODO:0.9.15.1
+#@registerEvent(AmmunitionPanel, 'setVehicleModule')
 def AmmunitionPanel_setVehicleModule(self, newId, slotIdx, oldId, isRemove):
     try:
         if not player_name:

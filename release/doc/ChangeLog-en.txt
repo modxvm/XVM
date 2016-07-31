@@ -1,8 +1,81 @@
+XVM-6.4.0-dev:
+  * adaptation to WoT 0.9.15.1
+  * complete refactoring of battle mods (AS2->AS3 migration)
+  * markers and hitlog: shadow parameter "size" renamed to "blur"
+    now all shadow sections have standard parameters:
+      "enabled", "distance", "angle", "color", "alpha", "blur", "strength"
+  * renamed parameters:
+      "playersPanel"/"medium"/"formatLeft" => "playersPanel"/"medium"/"nickFormatLeft"
+      "playersPanel"/"medium"/"formatRight" => "playersPanel"/"medium"/"nickFormatRight"
+      "playersPanel"/"medium2"/"formatLeft" => "playersPanel"/"medium2"/"vehicleFormatLeft"
+      "playersPanel"/"medium2"/"formatRight" => "playersPanel"/"medium2"/"vehicleFormatRight"
+      "camera"/"arcade"/"dynamicCameraEnabled" => "camera"/"arcade"/"shotRecoilEffect"
+      "camera"/"postmortem"/"dynamicCameraEnabled" => "camera"/"postmortem"/"shotRecoilEffect"
+      "camera"/"strategic"/"dynamicCameraEnabled" => "camera"/"strategic"/"shotRecoilEffect"
+      "camera"/"sniper"/"dynamicCameraEnabled" => "camera"/"sniper"/"shotRecoilEffect"
+  * removed parameters (not required):
+      "battle"/"allowSpottedStatus"
+      "battle"/"allowHpInPanelsAndMinimap"
+      "battle"/"allowMarksOnGunInPanelsAndMinimap"
+      "carousel"/"alwaysShowFilters"
+  * renamed parameters in the "iconset" section and changed value from folder to atlas name:
+      "playersPanelAlly" => "playersPanelLeftAtlas"
+      "playersPanelEnemy" => "playersPanelRightAtlas"
+      "statisticFormAlly" => "fullStatsLeftAtlas"
+      "statisticFormEnemy" => "fullStatsRightAtlas"
+      "vehicleMarkerAlly" => "vehicleMarkerAllyAtlas"
+      "vehicleMarkerEnemy" => "vehicleMarkerEnemyAtlas"
+  * added macro {{clanicon}} with clan embled image path value
+  * removed "clanIcon" section in the "battleLoading", "battleLoadingTips", "statisticForm" and "playersPanel" sections
+    and in the markers
+  * added options in all modes in the "playersPanel" section:
+      "standardFields" - displayed standard fields in this mode and their order.
+                         available names: "frags", "vehicle", "nick".
+      "fragsWidth" - width of the frags column
+      "vehicleWidth" - width of the vehicle name column
+      "nickMinWidth" - minimum width of the player's name column
+      "nickMaxWidth" - maximum width of the player's name column
+      "expandAreaWidth" - width of area for switching to "large" mode on mouse over
+      "vehicleIconXOffsetLeft" - offset of X value for vehicle icon for left side
+      "vehicleIconXOffsetRight" - offset of X value for vehicle icon for right side
+      "vehicleLevelXOffsetLeft" - offset of X value for vehicle level for left side
+      "vehicleLevelXOffsetRight" - offset of X value for vehicle level for right side
+      "fragsXOffsetLeft" - offset of X value for frags column for left side
+      "fragsXOffsetRight" - offset of X value for frags column for right side
+      "nickXOffsetLeft" - offset of X value for player name column for left side
+      "nickXOffsetRight" - offset of X value for player name column for right side
+      "vehicleXOffsetLeft" - offset of X value for vehicle name column for left side
+      "vehicleXOffsetRight" - offset of X value for vehicle name column for right side
+  * removed options in the "playersPanel" section:
+     "short"/"width"
+     "medium"/"width"
+     "medium2"/"width"
+     "large"/"width"
+  * camera zoom indicator implemented as extra field with all its options
+  * clock are using php formatting (http://php.net/date)
+  * global macros, including {{py:f()}}, can be used in the "battle"/"elements" section
+  * changed "carousel"/"scrollingSpeed" value, now it is multiplier for default scrolling rate
+  * option "markers"/"useStandardMarkers" renamed to "markers"/"enabled"
+  * option "markers"/*/"vehicleIcon"/"scaleX" renamed to "offsetX"
+  * option "markers"/*/"vehicleIcon"/"scaleY" renamed to "offsetY"
+  * default value for "vehicleIcon"/"offsetY" changed fro 16 to 0
+  * config format of the text fields in markers and battleLabels are changed to
+    common extraFields config format
+  * option "visible" everywhere changed to "enabled" for unification
+  * removed option "hotkeys"/"battleLabelsHotKeys" - not required
+  * removed option "battle"/"allowLabelsOnBattleInterface" - not required
+  * changed anchor for "bindToIcon" option in the extra fields
+  * changed hitlog macros - added "hitlog." prefix (see macros.txt)
+  * removed "hpLeft" section - use {{hp*}} macros
+  * added {{comment}} macro to show comment for player from contacts
+  * added option "battle"/"sixthSenseDuration" - duration of the sixth sense indicator
+  * removed option "hitLog"/"direction" - not required
+
 XVM-6.3.2.1:
   * fix for 6th sense sound
   * fix for tank carousel filters
 
-﻿XVM-6.3.2:
+XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch
   * changed "shadow"/"alpha" parameter values range from 0..1 to 0..100 in the carousel
     and players panel extra fields
@@ -36,7 +109,7 @@ XVM-6.3.1:
       "minimap"/"lines"/"enabled"   - duplicates "minimap"/"useStandardLabels"
       "minimap"/"labels"/"enabled"  - duplicates "minimap"/"useStandardLines"
   * moved color settings option for total hp indicator:
-      "battle"/"totalHP"/"colors" > "colors"/"totalHP"      
+      "battle"/"totalHP"/"colors" > "colors"/"totalHP"
   * removed obsolete config section "battle"/"totalHP"
 
 XVM-6.3.0:

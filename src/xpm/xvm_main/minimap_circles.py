@@ -7,22 +7,16 @@
 def getMinimapCirclesData():
     return _g_minimap_circles.minimapCirclesData
 
-
-def setMinimapCirclesData(value):
-    _g_minimap_circles.minimapCirclesData = value
-
-
 def updateCurrentVehicle():
     _g_minimap_circles.updateCurrentVehicle()
 
-
-def updateMinimapCirclesData(descr):
-    _g_minimap_circles.updateMinimapCirclesData(descr)
-
+def save_or_restore():
+    _g_minimap_circles.save_or_restore()
 
 # PRIVATE
 
 import math
+import traceback
 
 import BigWorld
 from adisp import async, process
@@ -30,14 +24,13 @@ from CurrentVehicle import g_currentVehicle
 from gui.shared import g_itemsCache
 
 from xfw import *
-
 from logger import *
+import userprefs
 
 
 class _MinimapCircles(object):
     def __init__(self):
         self.clear()
-
 
     def clear(self):
         self.minimapCirclesData = None
@@ -60,6 +53,8 @@ class _MinimapCircles(object):
         self.radioman_inventor = 0.0
         self.camouflage = []
 
+    def setMinimapCirclesData(self, value):
+        self.minimapCirclesData = value
 
     def updateCurrentVehicle(self):
         # debug('updateCurrentVehicle')
@@ -155,7 +150,6 @@ class _MinimapCircles(object):
 
         self.updateMinimapCirclesData(self.vehicleItem.descriptor)
 
-
     def updateMinimapCirclesData(self, descr):
         # debug(vars(descr))
         # debug(vars(descr.type))
@@ -182,7 +176,7 @@ class _MinimapCircles(object):
 
         # Set values
         self.minimapCirclesData = {
-            'vehId': descr.type.compactDescr,
+            'vehCD': descr.type.compactDescr,
             'is_full_crew': self.is_full_crew,
             'base_commander_skill': self.base_commander_skill,
             'base_radioman_skill': self.base_radioman_skill,
@@ -204,6 +198,31 @@ class _MinimapCircles(object):
             'base_radio_distance': descr.radio['distance'],
             'commander_sixthSense': self.commander_sixthSense,
         }
+
+    def save_or_restore(self):
+        try:
+            # Save/restore arena data
+            player = BigWorld.player()
+            fileName = 'arenas_data.zip/{0}'.format(player.arenaUniqueID)
+            vehCD = player.vehicleTypeDescriptor.type.compactDescr
+            if vehCD and self.minimapCirclesData and vehCD == self.minimapCirclesData.get('vehCD', None):
+                # Normal battle start. Update data and save to userprefs cache
+                userprefs.set(fileName, {
+                    'ver': '1.1',
+                    'minimap_circles': self.minimapCirclesData,
+                })
+            else:
+                # Replay, training or restarted battle after crash. Try to restore data.
+                arena_data = userprefs.get(fileName)
+                if arena_data is None:
+                    # Set default vehicle data if it is not available.in the cache.
+                    self.updateMinimapCirclesData(player.vehicleTypeDescriptor)
+                else:
+                    # Apply restored data.
+                    self.setMinimapCirclesData(arena_data['minimap_circles'])
+
+        except Exception, ex:
+            err(traceback.format_exc())
 
 
     # PRIVATE
@@ -239,7 +258,6 @@ class _MinimapCircles(object):
                     # debug(tankman.descriptor.role + " " + str(crew_member['level']))
                     self.crew.append({'name': tankman.descriptor.role, 'data': crew_member})
 
-
     def _isOptionalEquipped(self, optional_name):
         for item in self.vehicleItem.descriptor.optionalDevices:
             # debug(vars(item))
@@ -262,6 +280,5 @@ class _MinimapCircles(object):
             if item is not None and item.isStimulator:
                 return True
         return False
-
 
 _g_minimap_circles = _MinimapCircles()

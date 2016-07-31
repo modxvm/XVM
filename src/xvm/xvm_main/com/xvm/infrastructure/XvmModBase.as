@@ -12,19 +12,38 @@ package com.xvm.infrastructure
 
     public class XvmModBase extends XfwModBase
     {
-        override protected function processView(view:IView, populated:Boolean):IXfwView
+        override protected function processView(view:IView, populated:Boolean):Vector.<IXfwView>
         {
-            var mod:IXfwView = super.processView(view, populated);
-            if (mod != null)
+            try
             {
-                var xmod:IXvmView = mod as IXvmView;
-                if (xmod != null)
+                var mods:Vector.<IXfwView> = super.processView(view, populated);
+                if (mods)
                 {
-                    Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED,
-                        function(e:Event):void { XfwUtils.safeCall(xmod, xmod.onConfigLoaded, [e]); });
+                    var len:int = mods.length;
+                    for (var i:int = 0; i < len; ++i)
+                    {
+                        try
+                        {
+                            var mod:IXvmView = mods[i] as IXvmView;
+                            if (mod)
+                            {
+                                Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED,
+                                    function(e:Event):void { XfwUtils.safeCall(mod, mod.onConfigLoaded, [e]); });
+                            }
+                        }
+                        catch (ex:Error)
+                        {
+                            Logger.err(ex);
+                        }
+                    }
                 }
+                return mods;
             }
-            return mod;
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            return null;
         }
     }
 }

@@ -7,6 +7,9 @@
     // false - Disable
     // false - Отключить
     "enabled": true,
+    // Y value (34 for vanilla client)
+    // Значение Y (34 для чистого клиента)
+    "y": 65,
     // Change the distance between capture bars
     // Изменение расстояния между полосами захвата
     "distanceOffset": 0,
@@ -34,20 +37,18 @@
         // Full capture text format
         // Формат текста при полном захвате
         "done": "<font size='15' color='#FFCC66'>{{l10n:allyBaseCaptured}}</font>",
-        // Fields shadow
-        // Тень полей
+        // Shadow options
+        // Параметры тени
         "shadow": {
-          // Цвет.
-          "color": "0x000000",
-          // Opacity 0-100
-          // Прозрачность 0-100
-          "alpha": 75,
-          // Blur 0-255;
-          // Размытие 0-255;
-          "blur": 5,
-          // Intensity 0-255;
-          // Интенсивность 0-255;
-          "strength": 2
+          // false - no shadow
+          // false - без тени
+          "enabled": true,
+          "distance": 0,             // (in pixels)     / offset distance / дистанция смещения
+          "angle": 0,                // (0.0 .. 360.0)  / offset angle    / угол смещения
+          "color": "0x000000",       // "0xXXXXXX"      / color           / цвет
+          "alpha": 75,               // (0 .. 100)      / opacity         / прозрачность
+          "blur": 5,                 // (0.0 .. 255.0)  / blur            / размытие
+          "strength": 2              // (0.0 .. 255.0)  / intensity       / интенсивность
         }
       },
       // Vehicles count textfield (upper-left)

@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.0.1',
+    'VERSION':       '0.9.15.1',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.0.1'],
+    'GAME_VERSIONS': ['0.9.15.1'],
     # optional
 }
 
@@ -79,7 +79,7 @@ def _QuestsTileChainsView__updateTileData(self, vehType, questState, selectItemI
 # PRIVATE
 
 def _PREFS_NAME():
-    return 'xvm_quests/%s/filters' % getCurrentPlayerId()
+    return 'xvm_quests/%s/filters' % getCurrentAccountDBID()
 
 
 def _GetSettings():

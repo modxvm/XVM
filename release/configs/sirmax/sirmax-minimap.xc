@@ -11,7 +11,7 @@
     "minimapAimIconScale": 200,
     "zoom": { "pixelsBack": 150, "centered": true },
     //"useStandardCircles": true,
-    "useStandardLabels": true,
+    //"useStandardLabels": true,
     //"useStandardLines": true,
     "circles": {
         "view": [
@@ -44,8 +44,8 @@
       "traverseAngle": [
         { "enabled": true, "from": 50,  "to": 1463,  "inmeters": true, "thickness": 0.5,   "alpha": 65, "color": "0xFFFFFF"}
       ]
-    },
-    "labels": ${"sirmax-minimapLabels.xc":"labels"}
+    }//,
+    //"labels": ${"sirmax-minimapLabels.xc":"labels"}
   },
   "minimapAlt": {
     "$ref": { "path": "minimap" },

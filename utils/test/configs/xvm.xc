@@ -5,12 +5,9 @@ ${"sirmax/sirmax.xc":"."}
   "minimap": {
     "enabled": false
   },
-//  "markers": { "useStandardMarkers": true },
+//  "markers": { "enabled": false },
   "hitLog": { "visible": false },
   "battle": {
-    "allowSpottedStatus": false,
-    "allowHpInPanelsAndMinimap": false,
-    "allowMarksOnGunInPanelsAndMinimap": false,
     "elements": []
   },
   "statisticForm": {

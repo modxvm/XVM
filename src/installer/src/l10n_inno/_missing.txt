@@ -1,0 +1,4 @@
+es_AR: Argentinian Spanish
+es_MX: Mexican Spanish
+fil: Filipino
+zh_*: Chinese

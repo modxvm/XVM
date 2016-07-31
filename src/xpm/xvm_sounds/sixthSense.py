@@ -5,7 +5,7 @@
 
 import BigWorld
 import SoundGroups
-from gui.Scaleform.Battle import Battle
+from gui.Scaleform.daapi.view.battle.shared.indicators import SixthSenseIndicator
 
 from xfw import *
 import xvm_main.python.config as config
@@ -22,13 +22,13 @@ class XVM_SOUND_EVENT(object):
 #####################################################################
 # handlers
 
-@registerEvent(Battle, '_showSixthSenseIndicator')
-def Battle_showSixthSenseIndicator(self, isShow):
+@registerEvent(SixthSenseIndicator, 'as_showS')
+def SixthSenseIndicator_as_showS(self):
     try:
         if config.get('sounds/enabled'):
-            vehId = BigWorld.entities[BigWorld.player().playerVehicleID].typeDescriptor.type.compactDescr
+            vehCD = getVehCD(BigWorld.player().playerVehicleID)
             # 59393 => Rudy
-            soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehId == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
+            soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehCD == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
             SoundGroups.g_instance.playSound2D(soundId)
     except:
         err(traceback.format_exc())

@@ -7,7 +7,7 @@ from gui.shared import g_eventBus, events
 
 from xfw import *
 
-from constants import *
+from consts import *
 import config
 from logger import *
 import utils

@@ -3,7 +3,8 @@
 #############################
 # CONFIG
 
-RUN_TEST=1
+XPM_CLEAR=${XPM_CLEAR:=0}
+XPM_RUN_TEST=${XPM_RUN_TEST:=1}
 
 #############################
 # INTERNAL
@@ -85,7 +86,9 @@ build()
 
 pushd $(dirname $0) >/dev/null
 
-clear
+if [ "$XPM_CLEAR" = "1" ]; then
+    clear
+fi
 
 make_dirs
 
@@ -113,7 +116,6 @@ done
 #echo "$(($(date +%s%N)-$st))"
 
 # generate default config from .xc files and xvm.xc.sample
-# TODO: review and refactor
 echo 'generate default_config.pyc and xvm.xc.sample'
 dc_fn=../../~output/mods/packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
@@ -144,6 +146,6 @@ rm -f "$xvm_xc_sample_trgt"
 popd >/dev/null
 
 # run test
-if [ "$OS" = "Windows_NT" -a "$XFW_DEVELOPMENT" = "1" -a "$RUN_TEST" = "1" ]; then
+if [ "$OS" = "Windows_NT" -a "$XFW_DEVELOPMENT" = "1" -a "$XPM_RUN_TEST" = "1" ]; then
   sh "$(dirname $(realpath $(cygpath --unix $0)))/../../utils/test.sh"
 fi

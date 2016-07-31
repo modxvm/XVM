@@ -7,7 +7,7 @@ import os
 import glob
 
 from xfw import *
-from constants import *
+from consts import *
 from logger import *
 
 

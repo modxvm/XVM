@@ -13,27 +13,19 @@
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
-    // true - enable {{spotted}} macro in players panels and minimap. WARNING: performance expensive
-    // true - включить макрос {{spotted}} в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
-    "allowSpottedStatus": true,
-    // true - enable {{hp*}} macros ability in players panels and minimap. WARNING: performance expensive
-    // true - включить возможность {{hp*}} макросов в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
-    "allowHpInPanelsAndMinimap": false,
-    // true - enable {{marksOnGun}} macro in players panels and minimap. WARNING: performance expensive
-    // true - включить макрос {{marksOnGun}} в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
-    "allowMarksOnGunInPanelsAndMinimap": false,
-    // true - enable custom labels on battle interface window
-    // true - показывать пользовательские текстовые поля в окне боевого интерфейса
-    "allowLabelsOnBattleInterface": true,
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
-    "clockFormat": "H:N", // TODO: "H:i"
+    // http://php.net/date
+    "clockFormat": "H:i",
     // Path to clan icons folder relative to res_mods/mods/shared_resources/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/mods/shared_resources/xvm/res.
     "clanIconsFolder": "clanicons/",
     // Path to sixth sense icon ("" for original icon).
     // Путь к иконке 6-го чувства ("" для оригинальной иконки).
     "sixthSenseIcon": "xvm://res/SixthSense.png",
+    // Duration of the sixth sense indicator (msec).
+    // Длительность отображения индикатора 6-го чувства (мсек).
+    "sixthSenseDuration": 2000,
     // GUI elements settings (experts only)
     // Настройки графических элементов (только для экспертов!)
     "elements": ${"elements.xc":"elements"},

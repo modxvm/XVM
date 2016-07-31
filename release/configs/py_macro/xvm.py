@@ -22,7 +22,6 @@ def total_hp_sign():
 def total_hp_text():
     return total_hp.text()
 
-
 # xvm2sup
 
 from xvm import xvm2sup

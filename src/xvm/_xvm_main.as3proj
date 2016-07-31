@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_main\actionscript\xvm_main.swf" />
+    <movie path="..\..\~output\mods\packages\xvm_main\as_common\xvm_main.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />
@@ -48,7 +48,7 @@
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
-    <!-- example: <element path="..." /> -->
+    <element path="..\..\~output\swc\xvm_shared.swc" />
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
@@ -56,7 +56,7 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\xfw\~output\swc\wg.swc" />
+    <element path="..\xfw\~output\swc\wg_lobby.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
@@ -73,17 +73,19 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="xvm_main\com\xvm\Xvm.as" />
+    <compile path="xvm_main\com\xvm\XvmMain.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="obj" />
     <hidden path="src" />
+    <hidden path="xvm_battle" />
+    <hidden path="xvm_lobby" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="True">bash .build-swc-xvm_main.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="True">bash .build-xvm_main.swc.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />

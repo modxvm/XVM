@@ -23,7 +23,7 @@ import traceback
 import BigWorld
 from gui.shared import g_eventBus, events
 
-from constants import *
+from consts import *
 from logger import *
 
 class _ConfigWatchdog(object):
@@ -37,17 +37,17 @@ class _ConfigWatchdog(object):
         self.configWatchdogTimerId = None
 
         try:
-            x = [(nm, os.path.getmtime(nm)) for nm in [os.path.join(p, f)
-                                                       for p, n, fn in os.walk(XVM.CONFIG_DIR)
-                                                       for f in fn]]
+            x = [(nm, os.path.getmtime(nm))
+                 for nm in [os.path.join(p, f)
+                            for p, n, fn in os.walk(XVM.CONFIG_DIR)
+                            for f in fn]
+                 if nm[-4:].lower() != '.pyc']
             if self.lastConfigDirState is None:
                 self.lastConfigDirState = x
             elif self.lastConfigDirState != x:
                 self.lastConfigDirState = x
-
-                # debug('reload config')
+                debug('configWatchdog(): reload config')
                 g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
-                
                 return
 
         except Exception, ex:

@@ -8958,6 +8958,11 @@
 								<Value>0</Value>
 							</ValueList>
 						</Property>
+						<Property Name="Reverb" Type="bool">
+							<ValueList>
+								<Value>True</Value>
+							</ValueList>
+						</Property>
 						<Property Name="Reverb_alpha" Type="Real32">
 							<ValueList>
 								<Value>0.5</Value>

@@ -3,22 +3,22 @@
 	<SoundBanks>
 		<WorkUnit Name="Default Work Unit" ID="{A4AC5395-D8B4-42C5-BFD6-8AE495007A44}" PersistMode="Standalone">
 			<ChildrenList>
-				<SoundBank Name="xvm" ID="{EBD93C0F-162B-4C39-A0FF-DBC4089BC045}">
+				<SoundBank Name="xvm" ID="{A3EF5E1D-C092-4DB8-8295-67694ABAA876}">
 					<ObjectInclusionList>
-						<ObjectRef Name="enemySighted" ID="{8E8DA620-C8E3-4F9C-BDF8-4C105E339EA9}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="ammoBay" ID="{E7A0552E-11EE-4B01-8FF4-5B3EDEF4BAFA}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_battleEnd_30_sec" ID="{8ECC7B03-1B57-435D-9104-44322B926124}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_battleEnd_3_min" ID="{BD0EAF06-B613-4E98-8F95-D4996F14CACF}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_ammoBay" ID="{AEF0B70C-58D2-4808-B7CD-52FBD7CB64A5}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_battleEnd_5_sec" ID="{3E89952B-61BC-4303-AF6A-B21710AA2F83}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="emptyEvent" ID="{A9C56131-82C7-4427-B318-AED678FDC270}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="battleEnd_5_sec" ID="{7170DA41-CE65-43A0-B83A-0BB0204A5665}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="battleEnd_30_sec" ID="{A5C8CB53-5E1B-4463-A7A6-0A2EFA9A8586}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="sixthSense" ID="{CD164467-95FE-492B-BA07-48AD52EC7268}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="sixthSenseRudy" ID="{C46FB176-DA9B-4431-A668-36D72F7644AB}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="battleEnd_3_min" ID="{8E5AE7CC-3567-47AC-84F3-6E657640EF18}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="battleEnd_5_min" ID="{70B611D5-46F6-4BB3-B028-19339E36292A}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="sixthSenseVoice" ID="{AD7211DF-2DC9-46EE-965C-223689AB2988}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="fireAlert" ID="{D2853CE0-DF37-4875-B1DB-F0A23E6E2A7F}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="enemySightedVoice" ID="{46AD0FF8-A1FD-453E-AAAF-DBC143473258}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="battleEnd_1_min" ID="{EF66C9FA-B340-446B-99D0-2A47DA386641}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
-						<ObjectRef Name="battleEnd_2_min" ID="{BB5BB0FE-6710-4891-B6A7-796B1C07FC97}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_battleEnd_2_min" ID="{AF8CA960-0588-4391-99C2-A11C4BF734E7}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_fireAlert" ID="{79764677-761F-4C11-9308-AAFDB14B990F}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_enemySighted" ID="{9442EA78-5C28-48B8-BF7B-A7528E4B720A}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_sixthSenseVoice" ID="{6F6C548F-71EF-4B4A-A959-AA7CB1B90C4B}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_sixthSense" ID="{2793AD98-BA13-481F-B222-A8BF02A6A8F6}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_enemySightedVoice" ID="{9C4FF5B6-9854-45EA-B9BD-6BED024B1ACF}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_sixthSenseRudy" ID="{0E13A0CF-F5ED-4CDE-9886-F918BDAF6553}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_battleEnd_1_min" ID="{30F76BD6-D7E7-4343-81AA-26B38E3A30A5}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="xvm_battleEnd_5_min" ID="{A68429DE-53A6-48F3-8C55-CF2D36106108}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Filter="7" Origin="Manual"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

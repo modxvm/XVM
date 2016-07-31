@@ -1,8 +1,8 @@
 ﻿{
-  //"useStandardMarkers": true,
+  //"enabled": false,
   "def": {
     "markersStat": "<b><font face='$TitleFont' size='8' color='{{t-battles>19?#FFFFFF|#666666}}'>{{marksOnGun|*}}</font> <font face='Symbol' color='#CCCCCC' size='11'><font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></font></b>",
-    "markersStatAlt": "<b><font face='$TitleFont' size='8' color='{{t-battles>19?#FFFFFF|#666666}}'>{{marksOnGun|*}}</font> <font face='$FieldFont' size='12'><font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}({{py:xvm.xvm2sup({{xte}})|--}})</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font></font></b>",
+    "markersStatAlt": "<b><font face='$TitleFont' size='8' color='{{t-battles>19?#FFFFFF|#666666}}'>{{marksOnGun|*}}</font> <font face='$FieldFont' size='12'><font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}({{py:xvm.xvm2sup('{{xte}}')|--}})</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font></font></b>",
 
     "damageMessageAlive": "{{dmg}}",
     "damageMessageAllyDead": "({{dmg}})",
@@ -23,21 +23,20 @@
   "ally": {
     "alive": {
       "normal": {
-        //"clanIcon": { "visible": true, "x": 0, "y": -67 },
         "vehicleIcon": {
-          "maxScale": 100,
+          //"maxScale": 50,
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "visible": false,
+          //"enabled": true,
           "x": 0,
-          "y": -65,
+          "y": -85,
           "alpha": 100,
           "color": null,
-          "amount": 30
+          "amount": 0
         },
         "healthBar": {
-          "visible": true,
+          "enabled": true,
           "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
           "border": { "color": "0x000000", "alpha": 50, "size": 1 },
           "fill": { "alpha": 80 },
@@ -54,44 +53,44 @@
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -26,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'>{{vehicle}}{{turret}}</font>"
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
+            "format": "<font face='$FieldFont' size='13'><img src='cfg://sirmax/img/icons/{{comment}}.png'>{{vehicle}}{{turret}}</font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Rating marks",
-            "x": 0, "y": -35,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-            "font": { "name": "Symbol" },
+            "x": 0, "y": -40,
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
+            "textFormat": { "name": "Symbol" },
             "format": ${"def.markersStat"}
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Dynamic HP",
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
           }
         ]
       },
       "extended": {
         "vehicleIcon": {
-          "maxScale": 100,
+          //"maxScale": 75,
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "visible": false,
+          //"enabled": true,
           "x": 0,
-          "y": -65,
-          "alpha": 100,
+          "y": -85,
+          "alpha": 75,
           "color": null,
-          "amount": 50
+          "amount": 30
         },
         "healthBar": {
-          "visible": true,
+          "enabled": true,
           "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
           "border": { "color": "0x000000", "alpha": 50, "size": 1 },
           "fill": { "alpha": 80 },
@@ -107,30 +106,31 @@
           "y": -55
         },
         "clanIcon": {
-          "visible": true,
+          "enabled": true,
           "x": 0,
           "y": -67
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -26,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'>{{nick}}</font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "HP",
-            "x": 0, "y": -38, "color": "0xD9FFB3",
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "x": 0, "y": -38,
+            "textFormat": { "color": "0xD9FFB3" },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11'><b>{{hp}} / {{hp-max}}</b></font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Tank Rating",
             "x": 0, "y": -52, "alpha": 75,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": ${"def.markersStatAlt"}
           }
         ]
@@ -170,17 +170,17 @@
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -18, "alpha": 80,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'><font color='#7BEC37'>{{vehicle}}</font></font>"
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
+            "format": "<font face='$FieldFont' size='13'><font color='#7BEC37'><img src='cfg://sirmax/img/icons/{{comment}}.png'>{{vehicle}}</font></font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -32, "alpha": 80,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'><font color='#B2EE37'>{{nick}}</font></font>"
           }
         ]
@@ -191,11 +191,11 @@
     "alive": {
       "normal": {
         "vehicleIcon": {
-          "maxScale": 100,
+          //"maxScale": 50,
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "visible": false,
+          "enabled": false,
           "x": 0,
           "y": -65,
           "alpha": 100,
@@ -203,7 +203,7 @@
           "amount": 50
         },
         "healthBar": {
-          "visible": true,
+          "enabled": true,
           "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
           "border": { "color": "0x000000", "alpha": 50, "size": 1 },
           "fill": { "alpha": 80 },
@@ -221,36 +221,36 @@
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -26,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'>{{vehicle}}{{turret}}</font>"
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
+            "format": "<font face='$FieldFont' size='13'><img src='cfg://sirmax/img/icons/{{comment}}.png'>{{vehicle}}{{turret}}</font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Rating marks",
-            "x": 0, "y": -35,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-            "font": { "name": "Symbol" },
+            "x": 0, "y": -40,
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
+            "textFormat": { "name": "Symbol" },
             "format": ${"def.markersStat"}
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "HP",
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
           }
         ]
       },
       "extended": {
         "vehicleIcon": {
-          "maxScale": 100,
+          //"maxScale": 75,
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "visible": false,
+          "enabled": false,
           "x": 0,
           "y": -65,
           "alpha": 100,
@@ -258,7 +258,7 @@
           "amount": 50
         },
         "healthBar": {
-          "visible": true,
+          "enabled": true,
           "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
           "border": { "color": "0x000000", "alpha": 50, "size": 1 },
           "fill": { "alpha": 80 },
@@ -274,30 +274,30 @@
           "y": -55
         },
         "clanIcon": {
-          "visible": true,
+          "enabled": true,
           "x": 0,
           "y": -67
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -26,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'>{{nick}}</font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "HP",
             "x": 0, "y": -38,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11' color='{{c:hp-ratio}}'><b>{{hp}} / {{hp-max}}</b></font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Tank Rating",
             "x": 0, "y": -52, "alpha": 75,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": ${"def.markersStatAlt"}
           }
         ]
@@ -337,17 +337,17 @@
         },
         "textFields": [
           {
-            "visible": true,
+            "enabled": true,
             "name": "Vehicle Name",
             "x": 0, "y": -18, "alpha": 80,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-            "format": "<font face='$FieldFont' size='13'><font color='#EC3737'>{{vehicle}}</font></font>"
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
+            "format": "<font face='$FieldFont' size='13'><font color='#EC3737'><img src='cfg://sirmax/img/icons/{{comment}}.png'>{{vehicle}}</font></font>"
           },
           {
-            "visible": true,
+            "enabled": true,
             "name": "Player Name",
             "x": 0, "y": -32, "alpha": 80,
-            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+            "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 2, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='13'><font color='#FF6E0C'>{{nick}}</font></font>"
           }
         ]

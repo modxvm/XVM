@@ -17,9 +17,9 @@ from gui.battle_control import g_sessionProvider
 from xfw import *
 
 import config
+from consts import XVM_PATH
 from logger import *
 import userprefs
-from xvm_main.python.constants import XVM_PATH
 
 
 def touch(fname, times=None):
@@ -65,12 +65,12 @@ def getVehicleByHandle(handle):
     return None
 
 
-def getVehicleInfo(vehId):
-    return g_sessionProvider.getArenaDP().getVehicleInfo(vehId)
+def getVehicleInfo(vehicleID):
+    return g_sessionProvider.getArenaDP().getVehicleInfo(vehicleID)
 
 
-def getVehicleStats(vehId):
-    return g_sessionProvider.getArenaDP().getVehicleStats(vehId)
+def getVehicleStats(vehicleID):
+    return g_sessionProvider.getArenaDP().getVehicleStats(vehicleID)
 
 
 # 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
@@ -129,11 +129,11 @@ def fixPath(path):
     return path
 
 
-def getPlayerId():
-    playerId = getCurrentPlayerId() if not isReplay() else None
-    if playerId is None:
-        playerId = userprefs.get('tokens.lastPlayerId')
-    return playerId
+def getAccountDBID():
+    accountDBID = getCurrentAccountDBID() if not isReplay() else None
+    if accountDBID is None:
+        accountDBID = userprefs.get('tokens/lastAccountDBID')
+    return accountDBID
 
 
 def getMapSize():

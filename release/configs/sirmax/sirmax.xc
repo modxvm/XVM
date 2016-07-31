@@ -4,7 +4,7 @@
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user}}.png'><img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
+    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'><img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
 
     "pingServers": {
@@ -26,9 +26,9 @@
     "__stub__": null
   },
   "hotkeys": {
-    //"minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
-    //"minimapAltMode": { "enabled": true, "keyCode": 29, "onHold": true },
-    "playersPanelAltMode": { "enabled": true, "keyCode": 56 }, // LAlt
+    "minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
+    "minimapAltMode": { "enabled": true, "keyCode": 29, "onHold": true },
+    "playersPanelAltMode": { "enabled": true, "keyCode": 56, "onHold": true }, // LAlt
     //"markersAltMode":      { "enabled": false, "onHold": false },
     "__stub__": {}
   },
@@ -89,11 +89,9 @@
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
     "highlightVehicleIcon": false,
-    //"allowSpottedStatus": false,
-    "allowHpInPanelsAndMinimap": true,
-    "allowMarksOnGunInPanelsAndMinimap": true,
-    "clanIconsFolder": "clanicons",
+    "clanIconsFolder": "../../../../res/clanicons",
     "sixthSenseIcon": "cfg://sirmax/img/SixthSense.png",
+    "sixthSenseDuration": 3000,
     "elements": ${"elements"},
     "minimapDeadSwitch": true,
     "camera": {
@@ -116,6 +114,7 @@
       },
       "sniper": {
         "zooms": [2, 4, 8, 16],
+        //"zooms": [2, 4, 5, 6, 8, 13, 16, 22, 33, 44],
         //"startZoom": 4,
         "dynamicCameraEnabled": false,
         "zoomIndicator": {
@@ -125,7 +124,6 @@
           //"height": 40,
           //"alpha": 100,
           //"align": "left",
-          //"valign": "center",
           //"bgColor": null,
           //"borderColor": "0xFFFF00",
           //"shadow": { "distance": 0, "angle": 45, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 4 },
@@ -178,8 +176,6 @@
     //"vehicleFieldWidthDeltaRight": 10,
     //"vehicleIconOffsetXLeft": 4,
     //"vehicleIconOffsetXRight": 4,
-    "clanIcon": { "show": true, "x": -345, "xr": -345, "y": 4, "h": 16, "w": 16, "alpha": 90 },
-    //"clanIcon": { "show": true, "x": 4, "xr": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "formatLeftNick":  ${"def.formatNick"},
     "formatRightNick":  ${"def.formatNick"},
     "formatLeftVehicle":  ${"def.formatVehicle"},
@@ -201,8 +197,7 @@
     //"vehicleFieldOffsetXLeft": 10,
     "vehicleFieldWidthDeltaLeft": 10,
     //"vehicleFieldOffsetXRight": 10,
-    "vehicleFieldWidthDeltaRight": 10,
-    "clanIcon": { "show": true }
+    "vehicleFieldWidthDeltaRight": 10
   },
   "statisticForm": {
     "showBattleTier": true,
@@ -212,20 +207,28 @@
     //"nameFieldShowBorder": true,
     //"vehicleFieldShowBorder": true,
     //"fragsFieldShowBorder": true,
-    //"squadIconOffsetXLeft": -32,
-    //"squadIconOffsetXRight": -32,
-    //"nameFieldOffsetXLeft": -10,
-    //"nameFieldOffsetXRight": -10,
-    //"vehicleFieldOffsetXLeft": 8,
-    //"vehicleFieldOffsetXRight": 8,
+    "nameFieldOffsetXLeft": -20,
+    "nameFieldOffsetXRight": -20,
+    "nameFieldWidthLeft": 200,
+    "nameFieldWidthRight": 200,
+    "vehicleFieldOffsetXLeft": 30,
+    "vehicleFieldOffsetXRight": 30,
+    "vehicleFieldWidthLeft": 200,
+    "vehicleFieldWidthRight": 200,
+    //"fragsFieldOffsetXLeft": 30,
+    //"fragsFieldOffsetXRight": 30,
+    //"fragsFieldWidthLeft": 100,
+    //"fragsFieldWidthRight": 100,
+    "squadIconOffsetXLeft": -18,
+    "squadIconOffsetXRight": -10,
     //"vehicleIconOffsetXLeft": 4,
     //"vehicleIconOffsetXRight": 4,
-    "clanIcon": { "show": true, "x": -345, "xr": -345, "y": 4, "h": 16, "w": 16, "alpha": 90 },
-    //"clanIcon": { "show": true, "x": 4, "xr": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "formatLeftNick":  ${"def.formatNick"},
     "formatRightNick":  ${"def.formatNick"},
     "formatLeftVehicle":  ${"def.formatVehicle"},
-    "formatRightVehicle": ${"def.formatVehicle"}
+    "formatRightVehicle": ${"def.formatVehicle"},
+    "formatLeftFrags": "{{frags}}",
+    "formatRightFrags": "{{frags}}"
   },
   "playersPanel": ${"sirmax-panels.xc":"."},
   "battleResults": {
@@ -238,25 +241,15 @@
   "minimap": ${"sirmax-minimap.xc":"minimap"},
   "minimapAlt": ${"sirmax-minimap.xc":"minimapAlt"},
   "hitLog": {
-    "hpLeft": {
-      "enabled": "{{.battle.allowHpInPanelsAndMinimap=true?false|true}}"
-    },
-    "visible": true,
-    "x": 235,
-    "y": -230,
-    "w": 500,
-    "h": 230,
-    "lines": 20,
-    "direction": "down",
-    "insertOrder": "end",
+    //"insertOrder": "begin",
     "groupHitsByPlayer": true,
     "deadMarker": "<font face='xvm'>\u002B</font>",
     "blowupMarker": "<font face='xvm'>\u007C</font>",
 //  TEST
-//    "formatHistory": "<textformat tabstops='[20,50,90,150]'><font size='12'>#19</font>:<tab>9999<tab>| 2222<tab>| ramming<tab>| {{n}} {{n-player}} {{nick}}</textformat>",
+//    "formatHistory": "<textformat tabstops='[20,50,90,150]'><font size='12'>#19</font>:<tab>9999<tab>| 2222<tab>| ramming<tab>| {{hitlog.n}} {{hitlog.n-player}} {{nick}}</textformat>",
     "defaultHeader": "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='13'>#0</font></textformat>",
-    "formatHeader":  "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font></textformat>",
-    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
+    "formatHeader":  "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='13'>#{{hitlog.n}}</font> <b>{{hitlog.dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font></textformat>",
+    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{hitlog.n-player}}:</font><tab>{{hitlog.dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{hitlog.dead}}</font></textformat>"
   },
   "markers": ${"sirmax-markers.xc":"."},
   "alpha": {
@@ -276,15 +269,12 @@
   "iconset": {
     "battleLoadingAlly": "../../../../res/contour/Master_XH",
     "battleLoadingEnemy": "../../../../res/contour/Master_XH",
-    //"battleLoadingAlly": "../../../../res/contour/block",
-    //"battleLoadingEnemy": "../../../../res/contour/block",
-    "statisticFormAlly": "../../../../res/contour/Master_XH",
-    "statisticFormEnemy": "../../../../res/contour/Master_XH",
-    //"statisticFormAlly": "../../../../res/contour/block",
-    //"statisticFormEnemy": "../../../../res/contour/block",
-    "playersPanelAlly":  "../../../../res/contour/Master_XH",
-    "playersPanelEnemy":  "../../../../res/contour/Master_XH",
-    "vehicleMarker": "../../../../res/contour/Aslain"
+    "playersPanelLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
+    "playersPanelRightAtlas": "../../../../res/atlases/BattleAtlasRight",
+    "fullStatsLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
+    "fullStatsRightAtlas": "../../../../res/atlases/BattleAtlasRight",
+    "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAtlasAlly",
+    "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerAtlasEnemy"
   },
   "vehicleNames": {
     "ussr-T-34": { "name": "т-34.", "short": "т-34" },
@@ -293,7 +283,10 @@
   },
   "texts": {
     //"vtype": { "LT":  "ЛТ" },
-    "marksOnGun": { "_0": "*", "_1": "1", "_2": "2", "_3": "3" }
+    "marksOnGun": { "_0": "*", "_1": "1", "_2": "2", "_3": "3" },
+    "battletype": {
+      "rated_sandbox": "rated_sandbox"
+    }
   },
   "colors": {
     "system": {
@@ -326,11 +319,11 @@
     //"enabled": false,
     //"logSoundEvents": true,
     "soundMapping": {
-      "xvm_sixthSense": "lightbulb",
+      //"xvm_sixthSense": "lightbulb",
       //"xvm_sixthSenseRudy": "",
       //"xvm_fireAlert": "",
       //"xvm_ammoBay": "",
-      //"xvm_enemySighted": "enemySighted",
+      "xvm_enemySighted": "xvm_enemySighted",
       //"carousel": "",
       "__stub__": null
     }

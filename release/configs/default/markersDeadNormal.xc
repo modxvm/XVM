@@ -10,7 +10,7 @@
     // Всплывающий урон.
     "damageText": {
       // false - disable / не отображать.
-      "visible": true,
+      "enabled": true,
       // Axis field coordinates
       // Положение поля по осям
       "x": 0,
@@ -18,25 +18,30 @@
       // Opacity (dynamic transparency allowed, see macros.txt).
       // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       "alpha": 100,
-      // Color (dynamic colors allowed, see macros.txt).
-      // Цвет (допускается использование динамического цвета, см. macros.txt)
-      "color": null,
+      // Font options.
       // Параметры шрифта.
-      "font": {
-        "name": "$FieldFont",           // Font name      / Название
+      "textFormat": {
+        "font": "$FieldFont",           // Font name      / Название
         "size": 18,                     // Font size      / Размер
+        // Color (dynamic colors allowed, see macros.txt).
+        // Цвет (допускается использование динамического цвета, см. macros.txt)
+        "color": null,
         "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
         "bold": false,                  // True - bold    / Жирный.
         "italic": false                 // True - italic  / Курсив.
       },
+      // Shadow options.
       // Параметры тени.
       "shadow": {
-        "alpha": 100,                   // Opacity          / Прозрачность.
-        "color": "0x000000",            //                    Цвет.
-        "angle": 45,                    // Offset angle     / Угол смещения.
-        "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "size": 6,                      //                    Размер.
-        "strength": 200                 // Intensity        / Интенсивность.
+        // false - no shadow
+        // false - без тени
+        "enabled": true,
+        "distance": 0,                  // (in pixels)     / offset distance / дистанция смещения
+        "angle": 45,                    // (0.0 .. 360.0)  / offset angle    / угол смещения
+        "color": "0x000000",            // "0xXXXXXX"      / color           / цвет
+        "alpha": 100,                   // (0 .. 100)      / opacity         / прозрачность
+        "blur": 3,                      // (0.0 .. 255.0)  / blur            / размытие
+        "strength": 1                   // (0.0 .. 255.0)  / intensity       / интенсивность
       },
       // Rising speed of displayed damage (float up speed).
       // Время отображения отлетающего урона.
@@ -58,9 +63,9 @@
     // Иконка типа танка (ТТ/СТ/ЛТ/ПТ/Арта).
     "vehicleIcon": {
       // false - disable / не отображать
-      "visible": true,
-      // true - show speaker even if visible=false
-      // true - показывать спикер, даже если visible=false
+      "enabled": true,
+      // true - show speaker even if enabled=false
+      // true - показывать спикер, даже если enabled=false
       "showSpeaker": false,
       // Axis field coordinates
       // Положение поля по осям
@@ -69,31 +74,19 @@
       // Opacity.
       // Прозрачность.
       "alpha": 100,
-      // Color (currently not in use).
-      // Цвет (в данный момент не используется).
-      "color": null,
       // Maximum scale (default is 100).
       // Максимальный масштаб (по умолчанию 100).
       "maxScale": 100,
       // Offset along the X axis (?)
       // Смещение по оси X (?)
-      "scaleX": 0,
+      "offsetX": 0,
       // Offset along the Y axis (?)
       // Смещение по оси Y (?)
-      "scaleY": 16,
-      // Параметры тени.
-      "shadow": {
-        "alpha": 100,                   // Opacity          / Прозрачность.
-        "color": "0x000000",            //                    Цвет.
-        "angle": 45,                    // Offset angle     / Угол смещения.
-        "distance": 0,                  // Offset distance  / Дистанция смещения.
-        "size": 6,                      //                    Размер.
-        "strength": 200                 // Intensity        / Интенсивность.
-      }
+      "offsetY": 0
     },
     // Индикатор здоровья.
     "healthBar": {
-      "visible": false,                 //   false - не отображать
+      "enabled": false,                 //   false - не отображать
       "x": -41,                         //   положение по оси X
       "y": -33,                         //   положение по оси Y
       "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. macros.txt)
@@ -133,7 +126,7 @@
     // Контурная иконка танка.
     "contourIcon": {
       // false - disable / не отображать.
-      "visible": false,
+      "enabled": false,
       // Axis field coordinates.
       // Положение поля по осям.
       "x": 6,
@@ -148,22 +141,10 @@
       // Интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
       "amount": 0
     },
-    // Player or clan icon.
-    // Иконка игрока или клана.
-    "clanIcon": {
-      "visible": false,  // false - disable        / не отображать.
-      "x": 0,            // Position on the X axis / Положение по оси X.
-      "y": -67,          // Position on the Y axis / Положение по оси Y.
-      "w": 16,           // Width                  / Ширина.
-      "h": 16,           // Height                 / Высота.
-      // Opacity (dynamic transparency allowed, see macros.txt).
-      // Прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-      "alpha": 100
-    },
     // Vehicle tier.
     // Уровень танка.
     "levelIcon": {
-      "visible": false,  // false - disable        / не отображать.
+      "enabled": false,  // false - disable        / не отображать.
       "x": 0,            // Position on the X axis / Положение по оси X.
       "y": -21,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
@@ -171,7 +152,7 @@
     // Markers "Help!" and "Attack!".
     // Маркеры "Нужна помощь" и "Атакую".
     "actionMarker": {
-      "visible": true,   // false - disable        / не отображать.
+      "enabled": true,   // false - disable        / не отображать.
       "x": 0,            // Position on the X axis / Положение по оси X.
       "y": -67,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
@@ -185,27 +166,18 @@
     // Type of vehicle icon (HT/MT/LT/TD/Arty).
     // Иконка типа танка (ТТ/СТ/ЛТ/ПТ/Арта).
     "vehicleIcon": {
-      "visible": true,
+      "enabled": true,
       "showSpeaker": false,
       "x": 0,
       "y": -16,
       "alpha": 100,
-      "color": null,
       "maxScale": 100,
-      "scaleX": 0,
-      "scaleY": 16,
-      "shadow": {
-        "alpha": 100,
-        "color": "0x000000",
-        "angle": 45,
-        "distance": 0,
-        "size": 6,
-        "strength": 200
-      }
+      "offsetX": 0,
+      "offsetY": 0
     },
     // Индикатор здоровья.
     "healthBar": {
-      "visible": false,
+      "enabled": false,
       "x": -41,
       "y": -33,
       "alpha": 100,
@@ -241,27 +213,17 @@
     // Vehicle contour icon.
     // Контурная иконка танка.
     "contourIcon": {
-      "visible": false,
+      "enabled": false,
       "x": 6,
       "y": -65,
       "alpha": 100,
       "color": null,
       "amount": 0
     },
-    // Player or clan icon.
-    // Иконка игрока или клана.
-    "clanIcon": {
-      "visible": false,
-      "x": 0,
-      "y": -67,
-      "w": 16,
-      "h": 16,
-      "alpha": 100
-    },
     // Vehicle tier.
     // Уровень танка.
     "levelIcon": {
-      "visible": false,
+      "enabled": false,
       "x": 0,
       "y": -21,
       "alpha": 100
@@ -269,7 +231,7 @@
     // Markers "Help!" and "Attack!".
     // Маркеры "Нужна помощь" и "Атакую".
     "actionMarker": {
-      "visible": true,
+      "enabled": true,
       "x": 0,
       "y": -67,
       "alpha": 100
