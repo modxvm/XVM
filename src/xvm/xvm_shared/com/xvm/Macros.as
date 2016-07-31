@@ -292,7 +292,7 @@ package com.xvm
         private static var m_globals:Object = { };
         private static var m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
         private static var m_macros_cache_globals:Object = { };
-        private static var m_macros_cache_players:Object = { };
+        private static var m_macros_cache_players:Vector.<Object> = Vector.<Object>([{}, {}]); // alive, dead
 
         private static function _Format(format:*, options:IVOMacrosOptions, __out:Object):*
         {
@@ -314,11 +314,12 @@ package com.xvm
             var cached_value:*;
             if (playerName)
             {
-                player_cache = m_macros_cache_players[playerName];
+                var cache:Object = m_macros_cache_players[options.isAlive ? 0 : 1];
+                player_cache = cache[playerName];
                 if (player_cache == null)
                 {
-                    m_macros_cache_players[playerName] = { };
-                    player_cache = m_macros_cache_players[playerName];
+                    cache[playerName] = { };
+                    player_cache = cache[playerName];
                 }
                 cached_value = player_cache[format_str];
             }
@@ -460,7 +461,7 @@ package com.xvm
             else
             {
                 // is static macro
-                if (value is Function)
+                if (value is Function && macroName != "alive") // {{alive}} macro is the special case
                 {
                     __out.isStaticMacro = false;
                 }
@@ -775,7 +776,7 @@ package com.xvm
             // Check cached value
             if (playerName)
             {
-                var player_cache:Object = m_macros_cache_players[playerName];
+                var player_cache:Object = m_macros_cache_players[options.isAlive ? 0 : 1][playerName];
                 if (player_cache == null)
                     return false;
                 return player_cache.hasOwnProperty(format);
