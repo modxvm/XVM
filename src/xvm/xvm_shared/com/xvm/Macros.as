@@ -28,7 +28,7 @@ package com.xvm
             //Xvm.swfProfilerBegin("Macros.Format");
             //try
             //{
-            return _Format(format, options, {});
+            return _Format(format, options, new MacrosResult());
             //}
             //finally
             //{
@@ -50,7 +50,7 @@ package com.xvm
             //{
             if (format == null)
                 return defaultValue;
-            var res:String = _Format(format, options, {});
+            var res:String = _Format(format, options, new MacrosResult());
             //Logger.addObject(format + " => " + res);
             return res != null ? res : defaultValue;
             //}
@@ -98,7 +98,7 @@ package com.xvm
                 return defaultValue;
             if (!isNaN(format))
                 return format;
-            var v:* = _Format(format, options, {});
+            var v:* = _Format(format, options, new MacrosResult());
             //Logger.add(format + " => " + v);
             if (v == null)
                 return defaultValue;
@@ -162,7 +162,7 @@ package com.xvm
                 return defaultValue;
             if (typeof format == "boolean")
                 return format;
-            var v:* = _Format(format, options, {});
+            var v:* = _Format(format, options, new MacrosResult());
             if (v == null)
                 return defaultValue;
             if (typeof v == "boolean")
@@ -306,14 +306,16 @@ package com.xvm
         private static const CACHE_MASK_SIZE:uint =         0x2000;
 
         // special case for dynamic macros converted to static
-        private static const FORCE_STATIC_MACROS:Vector.<String> = Vector.<String>(["alive", "ready", "selected", "player", "tk",
+        private static const HYBRID_MACROS:Vector.<String> = new <String>["alive", "ready", "selected", "player", "tk",
             "squad", "squad-num", "position", "sys-color-key", "c:system", "marksOnGun",
-            "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"]);
+            "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"];
+        HYBRID_MACROS.fixed = true;
 
-        private static var m_globals:Object = { };
-        private static var m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
-        private static var m_macros_cache_globals:Object = { };
-        private static var m_macros_cache_players:Vector.<Object> = new Vector.<Object>(CACHE_MASK_SIZE, true);
+        private static const m_globals:Object = { };
+        private static const m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+        private static const m_macros_cache_globals:Object = { };
+        private static const m_macros_cache_players:Vector.<Object> = new Vector.<Object>(CACHE_MASK_SIZE, true);
+        private static const m_macros_cache_players_hybrid:Object = { };
 
         private static function _getPlayerCache(options:IVOMacrosOptions):Object
         {
@@ -364,11 +366,12 @@ package com.xvm
             return player_cache;
         }
 
-        private static function _Format(format:*, options:IVOMacrosOptions, __out:Object):*
+        private static function _Format(format:*, options:IVOMacrosOptions, __out:MacrosResult):*
         {
             //Logger.add("format:" + format + " player:" + (options ? options.playerName : null));
 
             __out.isStaticMacro = true;
+            __out.isHybridMacro = false;
 
             if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format) || !isNaN(format))
                 return format;
@@ -413,9 +416,10 @@ package com.xvm
                     }
                     else
                     {
-                        var _FormatPart_out:Object = {};
+                        var _FormatPart_out:MacrosResult = new MacrosResult();
                         res += _FormatPart(part.slice(0, idx), options, _FormatPart_out) + part.slice(idx + 2);
                         __out.isStaticMacro &&= _FormatPart_out.isStaticMacro;
+                        __out.isHybridMacro ||= _FormatPart_out.isHybridMacro;
                     }
                 }
                 if (res != format_str)
@@ -424,9 +428,10 @@ package com.xvm
                     if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
                     {
                         //Logger.add("recursive: " + playerName + " " + res);
-                        var _Format_out:Object = {};
+                        var _Format_out:MacrosResult = new MacrosResult();
                         res = _Format(res, options, _Format_out);
                         __out.isStaticMacro &&= _Format_out.isStaticMacro;
+                        __out.isHybridMacro ||= _FormatPart_out.isHybridMacro;
                     }
                 }
             }
@@ -439,6 +444,17 @@ package com.xvm
                 {
                     //Logger.add("add to cache: " + playerName + "> " + format_str + " => " + res);
                     player_cache[format_str] = res;
+                    if (__out.isHybridMacro)
+                    {
+                        //Logger.add("add to hybrid: " + playerName + "> " + format_str + " => " + res);
+                        var hybrid_cache:Object = m_macros_cache_players_hybrid[options.playerName];
+                        if (hybrid_cache == null)
+                        {
+                            m_macros_cache_players_hybrid[options.playerName] = { };
+                            hybrid_cache = m_macros_cache_players_hybrid[options.playerName];
+                        }
+                        hybrid_cache[format_str] = 1;
+                    }
                 }
                 else
                 {
@@ -457,9 +473,10 @@ package com.xvm
             return res;
         }
 
-        private static function _FormatPart(macro:String, options:IVOMacrosOptions, __out:Object):String
+        private static function _FormatPart(macro:String, options:IVOMacrosOptions, __out:MacrosResult):String
         {
             __out.isStaticMacro = true;
+            __out.isHybridMacro = false;
 
             // Process tag
             var playerName:String = options ? options.playerName : null;
@@ -533,9 +550,16 @@ package com.xvm
             else
             {
                 // is static macro
-                if (value is Function && FORCE_STATIC_MACROS.indexOf(macroName) == -1)
+                if (value is Function)
                 {
-                    __out.isStaticMacro = false;
+                    if (HYBRID_MACROS.indexOf(macroName) == -1)
+                    {
+                        __out.isStaticMacro = false;
+                    }
+                    else
+                    {
+                        __out.isHybridMacro = true;
+                    }
                 }
 
                 res += _FormatMacro(macro, parts, value, vehCD, options, __out);
@@ -641,7 +665,7 @@ package com.xvm
         }
 
         private static var _format_macro_fmt_suf_cache:Object = {};
-        private static function _FormatMacro(macro:String, parts:Vector.<String>, value:*, vehCD:Number, options:IVOMacrosOptions, __out:Object):String
+        private static function _FormatMacro(macro:String, parts:Vector.<String>, value:*, vehCD:Number, options:IVOMacrosOptions, __out:MacrosResult):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -757,7 +781,7 @@ package com.xvm
         }
 
         private static var _prepare_value_cache:Object = {};
-        private static function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number, __out:Object):String
+        private static function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number, __out:MacrosResult):String
         {
             if (norm == null)
                 return def;
@@ -839,8 +863,8 @@ package com.xvm
             if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format) || !isNaN(format))
                 return true;
 
-            format = String(format);
-            if (!format)
+            var format_str:String = String(format);
+            if (!format_str)
                 return true;
 
             var playerName:String = options ? options.playerName : null;
@@ -848,10 +872,18 @@ package com.xvm
             // Check cached value
             if (playerName)
             {
+                var hybrid_cache:Object = m_macros_cache_players_hybrid[playerName];
+                if (hybrid_cache != null)
+                {
+                    if (hybrid_cache.hasOwnProperty(format_str))
+                    {
+                        return false;
+                    }
+                }
                 var player_cache:Object = _getPlayerCache(options);
-                return player_cache.hasOwnProperty(format);
+                return player_cache.hasOwnProperty(format_str);
             }
-            return m_macros_cache_globals.hasOwnProperty(format);
+            return m_macros_cache_globals.hasOwnProperty(format_str);
         }
 
         // Macros registration
@@ -1291,4 +1323,10 @@ package com.xvm
             return name;
         }
     }
+}
+
+class MacrosResult
+{
+    public var isStaticMacro:Boolean = true;
+    public var isHybridMacro:Boolean = false;
 }

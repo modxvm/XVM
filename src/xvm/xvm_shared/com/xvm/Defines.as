@@ -76,9 +76,6 @@ package com.xvm
         public static const FROM_SQUAD:int = 3;
         public static const FROM_PLAYER:int = 4;
 
-        // Level in roman numerals
-        public static const ROMAN_LEVEL:Vector.<String> = Vector.<String>([ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ]);
-
         //// Widgets
         //public static const WIDGET_MODE_HIDE:int =     0x01;
         //public static const WIDGET_MODE_1:int =        0x02;
@@ -115,5 +112,9 @@ package com.xvm
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";
         public static const XVM_EVENT_ATLAS_LOADED:String = "xvm.atlas_loaded";
+
+        // Level in roman numerals
+        public static const ROMAN_LEVEL:Vector.<String> = new <String>[ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
+        ROMAN_LEVEL.fixed = true;
     }
 }

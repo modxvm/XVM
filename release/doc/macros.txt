@@ -1,7 +1,7 @@
 ﻿Macros available
 
 Legend:
-  S/D - Static (S) or Dynamic (D) macro. Dynamic macros are slow.
+  SDH - Static (S), Dynamic (D) or Hybrid (H) macro. Dynamic macros are slow.
   BL  - battle loading screen
   PP  - players panel
   SF  - statistic form (Tab)
@@ -17,14 +17,14 @@ Legend:
 
   Personal macros (applied for player)
 ┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────
-│S/D│ macro              │ BL│ PP│ SF│ MM│ VM│ HI│BLb│ Description
+│SDH│ macro              │ BL│ PP│ SF│ MM│ VM│ HI│BLb│ Description
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────
 │ S │ {{nick}}           │ X │ X │ X │ X │ X │ X │ X │ player nickname with clan name
 │ S │ {{name}}           │ X │ X │ X │ X │ X │ X │ X │ player nickname without clan name
 │ S │ {{clan}}           │ X │ X │ X │ X │ X │ X │ X │ clan name with brackets (empty if no clan)
 │ S │ {{clannb}}         │ X │ X │ X │ X │ X │ X │ X │ clan name without brackets
 │ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, '' for enemy team
-│ S │ {{player}}         │ X │ X │ X │ X │   │   │ X │ value 'pl' for current player, empty for others
+│ H │ {{player}}         │ X │ X │ X │ X │   │   │ X │ value 'pl' for current player, empty for others
 │ S │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle id
 │ S │ {{vehicle}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle name
 │ S │ {{vehiclename}}    │ X │ X │ X │ X │ X │ X │ X │ vehicle system name (usa-M24_Chaffee)
@@ -38,17 +38,17 @@ Legend:
 │ S │ {{nation}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle nation
 │ S │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
 │ S │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
-│ S │ {{squad}}          │ X │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
+│ H │ {{squad}}          │ X │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
 │ D │ {{frags}}          │   │ X │ X │ X │ X │   │   │ current frags
-│ S │ {{ready}}          │ X │ X │ X │ X │ X │   │   │ value 'ready' if player loaded to the game, '' if not
-│ S │ {{alive}}          │ X │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
-│ S │ {{tk}}             │ X │ X │ X │ X │ X │   │   │ value 'tk' for teamkiller, empty for others
-│ S │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │   │ marks on gun (only for spotted vehicles)
+│ H │ {{ready}}          │ X │ X │ X │ X │ X │   │   │ value 'ready' if player loaded to the game, '' if not
+│ H │ {{alive}}          │ X │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
+│ H │ {{tk}}             │ X │ X │ X │ X │ X │   │   │ value 'tk' for teamkiller, empty for others
+│ H │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │   │ marks on gun (only for spotted vehicles)
 │ D │ {{spotted}}        │   │ X │ X │ X │   │   │   │ Vehicle spotted status with values from texts/spotted section
 │ D │ {{c:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic color by vehicle spotted status
 │ D │ {{a:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic transparency by vehicle spotted status
-│ S │ {{selected}}       │ X │ X │ X │ X │   │   │   │ value 'sel' for selected player, empty for others
-│ S │ {{position}}       │ X │ X │ X │ X │ X │ X │   │ position of the player in the beginning of the battle (1-15)
+│ H │ {{selected}}       │ X │ X │ X │ X │   │   │   │ value 'sel' for selected player, empty for others
+│ H │ {{position}}       │ X │ X │ X │ X │ X │ X │   │ position of the player in the beginning of the battle (1-15)
 │ D │ {{hp}}             │   │ X │ X │ X │ X │ X │   │ current health points
 │ D │ {{hp-max}}         │ X │ X │ X │ X │ X │ X │   │ maximum health points
 │ D │ {{hp-ratio}}       │   │ X │ X │ X │ X │ X │   │ current health ratio (without '%' sign)
@@ -56,9 +56,9 @@ Legend:
 │ D │ {{c:hp-ratio}}     │   │ X │ X │ X │ X │ X │   │ color depending on current health ratio (only in vehicle markers)
 │ D │ {{a:hp}}           │   │ X │ X │ X │ X │ X │   │ transparency depending on current health points (only in vehicle markers)
 │ D │ {{a:hp-ratio}}     │   │ X │ X │ X │ X │ X │   │ transparency depending on current health ratio (only in vehicle markers)
-│ S │ {{sys-color-key}}  │   │ X │ X │ X │ X │   │   │ key value for system color table
-│ S │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
-│ S │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
+│ H │ {{sys-color-key}}  │   │ X │ X │ X │ X │   │   │ key value for system color table
+│ H │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
+│ H │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │ X │ number of squad (1,2,...), empty if not in squad
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ Flag for player selected in the personal cabinet or determined from the client language
 │ D │ {{clanicon}}       │ X │ X │ X │ X │ X │ X │ X │ macro with clan embled image path value
@@ -76,7 +76,7 @@ Legend:
 
   Global macros (does not depend on the player)
 ┌───┬───────────────────────┬───┬───┬───┬───┬───┬───┬───┬───┬──────────────────────────────────────
-│S/D│ macro                 │ BL│ PP│ SF│ MM│ VM│ HI│ HL│BLb│ Description
+│SDH│ macro                 │ BL│ PP│ SF│ MM│ VM│ HI│ HL│BLb│ Description
 ├───┼───────────────────────┼───┼───┼───┼───┼───┼───┼───┼───┼──────────────────────────────────────
 │ S │ {{xvm-stat}}          │ X │ X │ X │ X │ X │ X │ X │ X │ value 'stat' is statistic is active, empty if not
 │ S │ {{r_size}}            │ X │ X │ X │ X │ X │ X │ X │ X │ size of the {{r}} macro value (can be useful for fields formatting)
@@ -105,7 +105,7 @@ Legend:
 
   Statistic macros
 ┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
-│S/D│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
+│SDH│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ S │ {{avglvl}}         │ X │ X │ X │ X │ X │ X │ average level (tier) of tanks
 │ S │ {{r}}              │ X │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
@@ -159,14 +159,14 @@ Legend:
 
   XVM services macros (applied for player)
 ┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
-│S/D│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
+│SDH│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
-│ S │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ xmqp services enabled
-│ S │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ player studied "sixth sense" perk
-│ S │ {{x-spotted}}      │   │   │   │ X │ X │   │ player vehicle is spotted
-│ S │ {{x-fire}}         │   │   │   │ X │ X │   │ fire in vehicle
-│ S │ {{x-overturned}}   │   │   │   │ X │ X │   │ player vehicle is overturned
-│ S │ {{x-drowning}}     │   │   │   │ X │ X │   │ player vehicle is drowning
+│ H │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ xmqp services enabled
+│ H │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ player studied "sixth sense" perk
+│ H │ {{x-spotted}}      │   │   │   │ X │ X │   │ player vehicle is spotted
+│ H │ {{x-fire}}         │   │   │   │ X │ X │   │ fire in vehicle
+│ H │ {{x-overturned}}   │   │   │   │ X │ X │   │ player vehicle is overturned
+│ H │ {{x-drowning}}     │   │   │   │ X │ X │   │ player vehicle is drowning
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
 
   Capture bar macros
@@ -203,7 +203,7 @@ Legend:
 
   Special macros
 ┌───┬──────────┬───┬───┬───┬───┬───┬───┬───┬───────────────────────────────────────────────────────
-│S/D│ macro    │ BL│ PP│ SF│ MM│ VM│ HI│ HL│ Description
+│SDH│ macro    │ BL│ PP│ SF│ MM│ VM│ HI│ HL│ Description
 ├───┼──────────┼───┼───┼───┼───┼───┼───┼───┼───────────────────────────────────────────────────────
 │ S │ {{.}}    │ X │ X │ X │ X │ X │ X │ X │ config value substitution: {{.path.to.config.value}}
 └───┴──────────┴───┴───┴───┴───┴───┴───┴───┴───────────────────────────────────────────────────────
