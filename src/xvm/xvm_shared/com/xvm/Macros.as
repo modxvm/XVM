@@ -418,7 +418,15 @@ package com.xvm
             var dotPos:int = macroName.indexOf(".");
             if (dotPos == 0)
             {
-                value = _SubstituteConfigPart(macroName.slice(1));
+                try
+                {
+                    value = _SubstituteConfigPart(macroName.slice(1));
+                }
+                catch (ex:Error)
+                {
+                    Logger.add("[SubstituteConfigPart] ERROR: " + ex.message + "\nmacro: " + macroName);
+                    throw ex;
+                }
             }
             else
             {
