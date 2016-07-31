@@ -6,6 +6,8 @@ package com.xvm.battle.fullStats
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
+    import com.xvm.battle.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.text.*;
@@ -50,6 +52,11 @@ package com.xvm.battle.fullStats
             super.onDispose();
         }
 
+        override public function setCompVisible(value:Boolean):void
+        {
+            Xvm.dispatchEvent(new BooleanEvent(BattleEvents.FULL_STATS_VISIBLE, value));
+            super.setCompVisible(value);
+        }
 
         // PRIVATE
 

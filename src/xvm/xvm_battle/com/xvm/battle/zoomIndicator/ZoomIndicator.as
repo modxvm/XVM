@@ -5,6 +5,7 @@
 package com.xvm.battle.zoomIndicator
 {
     import com.xfw.*;
+    import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.extraFields.*;
@@ -29,9 +30,10 @@ package com.xvm.battle.zoomIndicator
             visible = false;
             mouseEnabled = false;
 
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.addEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
             Xfw.addCommandListener(BattleCommands.AS_SNIPER_CAMERA, onSniperCamera);
             Xfw.addCommandListener(BattleCommands.AS_AIM_OFFSET_UPDATE, onAimOffsetUpdate);
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             setup();
         }
@@ -39,6 +41,7 @@ package com.xvm.battle.zoomIndicator
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.removeEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
             Xfw.removeCommandListener(BattleCommands.AS_SNIPER_CAMERA, onSniperCamera);
             Xfw.removeCommandListener(BattleCommands.AS_AIM_OFFSET_UPDATE, onAimOffsetUpdate);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
@@ -52,6 +55,11 @@ package com.xvm.battle.zoomIndicator
         private function onConfigLoaded(e:Event):void
         {
             setup();
+        }
+
+        private function onFullStatsVisible(e:BooleanEvent):void
+        {
+            visible = !e.value && _enable;
         }
 
         private function onUpdateStage():void

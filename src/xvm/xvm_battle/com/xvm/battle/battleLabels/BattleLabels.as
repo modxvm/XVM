@@ -26,6 +26,7 @@ package com.xvm.battle.battleLabels
         public function BattleLabels()
         {
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.addEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
             createExtraFields();
@@ -34,6 +35,7 @@ package com.xvm.battle.battleLabels
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.removeEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
             removeExtraFields();
@@ -59,6 +61,11 @@ package com.xvm.battle.battleLabels
         {
             removeExtraFields();
             createExtraFields();
+        }
+
+        private function onFullStatsVisible(e:BooleanEvent):void
+        {
+            visible = !e.value;
         }
 
         private function onUpdateStage():void
