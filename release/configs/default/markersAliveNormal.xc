@@ -176,7 +176,7 @@
       "name": "xmqp event",           //  название текстового поля, ни на что не влияет
       "enabled": true,                //  false - не отображать
       "x": 0,                         //  положение по оси X
-      "y": "{{ally?{{battletype?-71|{{squad?-71|-56}}}}|-56}}",  //  положение по оси Y
+      "y": "{{battletype?-71|{{squad?-71|-56}}}}",  //  положение по оси Y
       "alpha": 100,                   //  прозрачность (допускается использование динамической прозрачности, см. macros.txt)
       // Font options.
       // Параметры шрифта.
@@ -201,6 +201,35 @@
         "strength": 1                 //  интенсивность
       },
       "format": "<font color='{{x-spotted?#FFBB00|#FFFFFF}}' alpha='{{x-spotted?#FF|#80}}'>{{x-spotted?&#x70;|{{x-sense-on?&#x70;}}}}</font> {{x-overturned?&#x112;}}"  //  формат текста. См. описание макросов в macros.txt
+    },
+    // Position of the player
+    // Порядковый номер игрока
+    "position": {
+      "name": "position",             //  название текстового поля, ни на что не влияет
+      "enabled": true,                //  false - не отображать
+      "x": 0,                         //  положение по оси X
+      "y": -51,                       //  положение по оси Y
+      "alpha": 100,                   //  прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "textFormat": {                 //  параметры шрифта
+        "font": "$FieldFont",         //  название
+        "size": 13,                   //  размер
+        "color": "0xEDEDED",          //  цвет (допускается использование динамического цвета, см. macros.txt)
+        "align": "center",            //  выравнивание текста (left, center, right)
+        "bold": false,                //  обычный (false) или жирный (true)
+        "italic": false               //  обычный (false) или курсив (true)
+      },
+      "shadow": {                     //  параметры тени
+        // false - no shadow
+        // false - без тени
+        "enabled": true,
+        "distance": 0,                //   дистанция смещения
+        "angle": 45,                  //   угол смещения
+        "color": "{{c:system}}",      //   цвет
+        "alpha": 100,                 //   прозрачность
+        "blur": 6,                    //   размытие
+        "strength": 2                 //   интенсивность
+      },
+      "format": "<font size='{{battletype?13|0}}'>{{position}}</font>"  //  формат текста. См. описание макросов в macros.txt
     }
   },
   // Настройки для союзников.
@@ -393,7 +422,8 @@
     "textFields": [
       ${ "def.tankName" },
       ${ "def.tankHp" },
-      ${ "def.rating" }
+      ${ "def.rating" },
+      ${ "def.position" }
     ]
   }
 }

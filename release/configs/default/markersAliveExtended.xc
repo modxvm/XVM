@@ -122,11 +122,11 @@
       "name": "Rating",
       "enabled": true,
       "x": 0,
-      "y": -48,
+      "y": -51,
       "alpha": 100,
       "textFormat": {
         "font": "$FieldFont",
-        "size": 12,
+        "size": 13,
         "color": "{{c:r}}",
         "align": "center",
         "bold": false,
