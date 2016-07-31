@@ -41,7 +41,7 @@ Legend:
 │ D │ {{squad}}          │ X │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
 │ D │ {{frags}}          │   │ X │ X │ X │ X │   │   │ current frags
 │ D │ {{ready}}          │ X │ X │ X │ X │ X │   │   │ value 'ready' if player loaded to the game, '' if not
-│ D │ {{alive}}          │ X │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
+│ S │ {{alive}}          │ X │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
 │ D │ {{tk}}             │ X │ X │ X │ X │ X │   │   │ value 'tk' for teamkiller, empty for others
 │ D │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │   │ marks on gun (only for spotted vehicles)
 │ D │ {{spotted}}        │   │ X │ X │ X │   │   │   │ Vehicle spotted status with values from texts/spotted section
