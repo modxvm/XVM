@@ -78,6 +78,7 @@ class _Stat(object):
         self.players = None
         self.cacheBattle = {}
         self.cacheUser = {}
+        self._loadingClanIconsCount = 0
 
     def enqueue(self, req):
         with self.lock:
