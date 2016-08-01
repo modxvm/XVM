@@ -164,6 +164,11 @@ def _tuneup_config(config):
     config['__wotVersion'] = XVM.WOT_VERSION
     config['__xvmIntro'] = XVM.XVM_INTRO
     config['__wgApiAvailable'] = GAME_REGION in xfw_constants.URLS.WG_API_SERVERS
+    try:
+        from __version__ import __revision__
+        config['__xvmRevision'] = __revision__
+    except Exception as ex:
+        pass
 
     # Cleanup empty vehicle names
     config['vehicleNames'] = {k:v for k,v in config['vehicleNames'].iteritems() \

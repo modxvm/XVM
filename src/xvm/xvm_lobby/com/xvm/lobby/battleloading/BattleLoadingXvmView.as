@@ -51,7 +51,7 @@ package com.xvm.lobby.battleloading
         {
             Logger.add(
                 "[BattleLoading]\n" +
-                "                               XVM_VERSION=" + Config.config.__xvmVersion + " for WoT " + Config.config.__wotVersion +"\n" +
+                "                               XVM_VERSION=" + Config.config.__xvmVersion + " #" + Config.config.__xvmRevision + " for WoT " + Config.config.__wotVersion +"\n" +
                 "                               gameRegion=" + Config.config.region + "\n" +
                 "                               configVersion=" + Config.config.configVersion + "\n" +
                 "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +

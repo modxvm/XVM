@@ -11,6 +11,7 @@ package com.xvm.types.cfg
         // internal
         public var __stateInfo:Object;
         public var __xvmVersion:String;
+        public var __xvmRevision:String;
         public var __wotVersion:String;
         public var __xvmIntro:String;
         public var __wgApiAvailable:Boolean;

@@ -15,11 +15,14 @@ package com.xvm.battle
     import com.xvm.battle.zoomIndicator.ZoomIndicator;
     import com.xvm.types.cfg.*;
     import flash.events.*;
+    import flash.display.*;
+    import flash.text.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.*;
     import scaleform.clik.utils.*;
+    import scaleform.gfx.*;
 
     public class BattleXvmView extends XvmViewBase
     {
@@ -37,6 +40,7 @@ package com.xvm.battle
         private var _battleLabels:BattleLabels = null;
         private var _hitlog:Hitlog = null;
         private var _zoomIndicator:ZoomIndicator = null;
+        private var _watermark:MovieClip = null;
 
         public function BattleXvmView(view:IView)
         {
@@ -56,6 +60,7 @@ package com.xvm.battle
             {
                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+                Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
 
                 onConfigLoaded(null);
 
@@ -79,6 +84,11 @@ package com.xvm.battle
 
                 _zoomIndicator = new ZoomIndicator();
                 battlePage.addChildAt(_zoomIndicator, behindMinimapIndex);
+
+                if (XfwUtils.endsWith(Config.config.__xvmVersion, "-dev"))
+                {
+                    createWatermark();
+                }
             }
             catch (ex:Error)
             {
@@ -94,6 +104,7 @@ package com.xvm.battle
             {
                 Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+                Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
                 if (_battleController)
                 {
                     _battleController.dispose();
@@ -123,6 +134,10 @@ package com.xvm.battle
                 {
                     _zoomIndicator.dispose();
                     _zoomIndicator = null;
+                }
+                if (_watermark)
+                {
+                    _watermark = null;
                 }
             }
             catch (ex:Error)
@@ -161,6 +176,45 @@ package com.xvm.battle
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ALT_MODE, { isDown: isDown } ));
             if (hotkeys_cfg.playersPanelAltMode.enabled && hotkeys_cfg.playersPanelAltMode.keyCode == key)
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.PLAYERS_PANEL_ALT_MODE, { isDown: isDown } ));
+        }
+
+        private function onUpdateStage():void
+        {
+            alignWatermark();
+        }
+
+        private function alignWatermark():void
+        {
+            if (_watermark)
+            {
+                _watermark.x = -battlePage.prebattleTimer.x + (App.appWidth - 1024) / 2;
+                _watermark.y = -battlePage.prebattleTimer.y + (App.appHeight - 768)/ 2;
+            }
+        }
+
+        private function createWatermark():void
+        {
+            const HALIGN:Vector.<String> = new <String>[TextFieldAutoSize.LEFT, TextFieldAutoSize.CENTER, TextFieldAutoSize.RIGHT];
+            const VALIGN:Vector.<String> = new <String>[TextFieldEx.VAUTOSIZE_TOP, TextFieldEx.VAUTOSIZE_CENTER, TextFieldEx.VAUTOSIZE_BOTTOM];
+            _watermark = new MovieClip();
+            for (var i:Number = 0; i < 9; ++i)
+            {
+                var textField:TextField = new TextField();
+                textField.alpha = 0.2;
+                textField.width = 1024;
+                textField.height = 768;
+                textField.mouseEnabled = false;
+                textField.selectable = false;
+                textField.multiline = true;
+                textField.wordWrap = false;
+                textField.defaultTextFormat = new TextFormat("$FieldFont", 20, 0xFFFFFF, true, null, null, null, null, TextFormatAlign.CENTER);
+                textField.autoSize = HALIGN[int(i / 3)];
+                TextFieldEx.setVerticalAutoSize(textField, VALIGN[i % 3]);
+                textField.text = "XVM Nightly Build #" + Config.config.__xvmRevision + "\n" + "get stable version on\nwww.ModXVM.com";
+                _watermark.addChild(textField);
+            }
+            battlePage.prebattleTimer.addChildAt(_watermark, 0);
+            alignWatermark();
         }
     }
 }
