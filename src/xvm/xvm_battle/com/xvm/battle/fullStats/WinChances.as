@@ -28,8 +28,10 @@ package com.xvm.battle.fullStats
             {
                 winChanceTF = createWinChanceTextField(form.battleTF);
                 winChanceTF.styleSheet = XfwUtils.createTextStyleSheet("chances", form.battleTF.defaultTextFormat);
-                winChanceTF.x = form.battleTF.x - 283;
+                winChanceTF.x = 200;
+                winChanceTF.width = 1024;
                 winChanceTF.y = 20;
+                winChanceTF.height = form.battleTF.height;
                 form.addChild(winChanceTF);
 
                 if (Config.networkServicesSettings.chanceLive)
@@ -77,11 +79,7 @@ package com.xvm.battle.fullStats
             f.selectable = false;
             TextFieldEx.setNoTranslate(f, true);
             f.antiAliasType = AntiAliasType.ADVANCED;
-            f.x = tpl.x;
-            f.y = tpl.y;
             f.autoSize = TextFieldAutoSize.NONE;
-            f.width = tpl.width;
-            f.height = tpl.height;
             var tf:TextFormat = tpl.getTextFormat();
             tf.color = 0xFFFFFF;
             tf.align = TextFormatAlign.CENTER;

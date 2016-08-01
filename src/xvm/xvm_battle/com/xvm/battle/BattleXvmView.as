@@ -200,7 +200,7 @@ package com.xvm.battle
             for (var i:Number = 0; i < 9; ++i)
             {
                 var textField:TextField = new TextField();
-                textField.alpha = 0.1;
+                textField.alpha = 0.2;
                 textField.width = 1024;
                 textField.height = 768;
                 textField.mouseEnabled = false;
