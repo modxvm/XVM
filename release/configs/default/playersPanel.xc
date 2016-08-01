@@ -27,11 +27,9 @@
  *      for left panel default value is "left"
  *      for right panel default value is "right"
  *   "scaleX", "scaleY" - scaling (use negative values for mirroring)
- *
- *   "hotKeyCode"        keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
- *                       when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
- *   "onHold"            false - take action by key click; true - while key is remains pressed (default: false)
- *   "visibleOnHotKey"   true - field visible on hot key pressed; false - vice versa (default: true)
+ *   "hotKeyCode" - keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide; when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
+ *   "onHold" - take action by key click (false) or while key is remains pressed (true); (default: false)
+ *   "visibleOnHotKey" - field visible on hot key pressed (true) or vice versa (false); (default: true)
  *
  * fields available for TextField format only:
  *   "valign" - vertical alignment ("top", "center", "bottom")
@@ -39,6 +37,17 @@
  *   "borderColor" - if set, draw border with specified color (macros allowed)
  *   "bgColor" - if set, draw background with specified color (macros allowed)
  *   "antiAliasType" - anti aliasing mode ("advanced" or "normal")
+ *
+ * fields available for MovieClip format only:
+ *   "highlight" - highlight icon depending on the player state, default false
+ *
+ * fields available for players panel only:
+ *   "layer": field z-order
+ *     values:
+ *     "substrate": put field behind all standard fields, x value depends on the players panel width
+ *     "bottom": put field behind all standard fields, x value does not depend on the players panel width
+ *     "normal": put field between vehicle icon and standard text fields (default)
+ *     "top": put field above standard fields
  *
  *   http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
  *   "textFormat": {
@@ -70,14 +79,6 @@
  *     "knockout"
  *     "hideObject"
  *   }
- *
- * fields available for players panel only:
- *   "layer": field z-order
- *     values:
- *     "substrate": put field behind all standard fields, x value depends on the players panel width
- *     "bottom": put field behind all standard fields, x value does not depend on the players panel width
- *     "normal": put field between vehicle icon and standard text fields (default)
- *     "top": put field above standard fields
  */
 {
   // Enemy spotted status marker definition.
@@ -179,11 +180,10 @@
           //   "<img src='xvm://res/img/panel-bg-l-{{alive|dead}}.png' width='318' height='28'>",
           //   // extended format
           //   { "x": 20, "y": 10, "borderColor": "0xFFFFFF", "format": "{{nick}}" },
-          //   { "x": 200, "src": "xvm://res/contour/{{vehiclename}}.png" }
+          //   { "x": 200, "src": "xvm://res/contour/{{vehiclename}}.png" },
+          //   { "x": 200, "src": "img://gui/maps/icons/vehicle/{{vehiclename}}.png" }
+          //   { "x": 200, "src": "cfg://user/img/{{vehiclename}}.png" }
           // ]
-          //
-          // fields available for MovieClip format only:
-          //     "highlight" - highlight icon depending on the player state, default false
           //
           // * all fields are optional
           //
