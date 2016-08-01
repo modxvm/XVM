@@ -236,6 +236,15 @@ package com.xvm
 
         // common
 
+        public static function clear():void
+        {
+            m_globals = { };
+            m_players = { };
+            m_macros_cache_globals = { };
+            m_macros_cache_players = new Vector.<Object>(CACHE_MASK_SIZE, true);
+            m_macros_cache_players_hybrid = { };
+        }
+
         public static function RegisterXvmServicesMacrosData():void
         {
             _RegisterXvmServicesMacrosData();
@@ -311,11 +320,11 @@ package com.xvm
             "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"];
         HYBRID_MACROS.fixed = true;
 
-        private static const m_globals:Object = { };
-        private static const m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
-        private static const m_macros_cache_globals:Object = { };
-        private static const m_macros_cache_players:Vector.<Object> = new Vector.<Object>(CACHE_MASK_SIZE, true);
-        private static const m_macros_cache_players_hybrid:Object = { };
+        private static var m_globals:Object = { };
+        private static var m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+        private static var m_macros_cache_globals:Object = { };
+        private static var m_macros_cache_players:Vector.<Object> = new Vector.<Object>(CACHE_MASK_SIZE, true);
+        private static var m_macros_cache_players_hybrid:Object = { };
 
         private static function _getPlayerCache(options:IVOMacrosOptions):Object
         {

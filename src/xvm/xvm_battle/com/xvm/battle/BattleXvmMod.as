@@ -40,6 +40,7 @@ package com.xvm.battle
             {
                 super.entryPoint();
                 Logger.counterPrefix = "B";
+                Macros.clear();
                 BattleGlobalData.init();
                 Stat.clearBattleStat();
                 Stat.loadBattleStat();
