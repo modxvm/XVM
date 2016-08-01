@@ -72,7 +72,12 @@
  *   }
  *
  * fields available for players panel only:
- *   "substrate": put field behind all standard fields, x value depends of players panel width
+ *   "layer": field z-order
+ *     values:
+ *     "substrate": put field behind all standard fields, x value depends on the players panel width
+ *     "bottom": put field behind all standard fields, x value does not depend on the players panel width
+ *     "normal": put field between vehicle icon and standard text fields (default)
+ *     "top": put field above standard fields
  */
 {
   // Enemy spotted status marker definition.

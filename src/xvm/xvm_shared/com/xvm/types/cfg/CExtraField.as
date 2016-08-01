@@ -38,7 +38,7 @@ package com.xvm.types.cfg
         public var screenVAlign:String;
 
         // for PlayersPanel
-        public var substrate:Boolean;
+        public var layer:String;
 
         // legacy configs
         public function set w(value:*):void
@@ -79,7 +79,7 @@ package com.xvm.types.cfg
             cloned.visibleOnHotKey = visibleOnHotKey;
             cloned.screenHAlign = screenHAlign;
             cloned.screenVAlign = screenVAlign;
-            cloned.substrate = substrate;
+            cloned.layer = layer;
             return cloned;
         }
     }

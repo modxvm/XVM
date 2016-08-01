@@ -18,7 +18,7 @@ package com.xvm.battle.playersPanel
         {
             super();
             proxy = new PlayersPanelListItemProxy(this, false);
-            addChildAt(proxy, getChildIndex(vehicleLevel) + 1);
+            addChildAt(proxy, getChildIndex(vehicleTF) - 1);
         }
 
         override protected function onDispose():void

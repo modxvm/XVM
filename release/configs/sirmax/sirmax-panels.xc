@@ -41,7 +41,7 @@
       //{ "x": 0, "src": "cfg://sirmax/img/MinimapAim.png" },
       //{ "x": 0, "bindToIcon": true, "src": "cfg://sirmax/img/MinimapAim.png" },
 
-      //{ "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" },
+      //{ "layer": "substrate", "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" },
       { "y": 2, "width": 3, "height": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
       { "x": "{{r_size=2?13|{{r_size=4?16|19}}}}", "y": 2, "height": 21, "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font>", "shadow": {} },
       { "x": "{{r_size=2?23|{{r_size=4?32|36}}}}", "y": 2, "height": 21, "width": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
@@ -61,7 +61,7 @@
       //{ "x": 0, "src": "cfg://sirmax/img/MinimapAim.png" },
       //{ "x": 0, "bindToIcon": true, "src": "cfg://sirmax/img/MinimapAim.png" },
 
-      //{ "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 },
+      //{ "layer": "substrate", "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 },
       { "y": 2, "width": 3, "height": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
       { "x": "{{r_size=2?13|{{r_size=4?20|21}}}}", "y": 2, "height": 21, "align": "center", "format": "<font color='{{t-battles>19?{{c:r|#666666}}|#666666}}' alpha='{{alive?#FF|#80}}'>{{r_size=2?{{r}}|{{r%d}}}}</font> </font>", "shadow": {} },
       { "x": "{{r_size=2?23|{{r_size=4?33|38}}}}", "y": 2, "height": 21, "width": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
@@ -91,10 +91,10 @@
     "nickFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     "nickFormatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     //"extraFieldsLeft": [
-    //  { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
+    //  { "layer": "substrate", "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
     //],
     //"extraFieldsRight": [
-    //  { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
+    //  { "layer": "substrate", "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
     //],
     "__stub__": null
   },
@@ -112,10 +112,10 @@
     "vehicleFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "vehicleFormatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     //"extraFieldsLeft": [
-    //  { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
+    //  { "layer": "substrate", "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
     //],
     //"extraFieldsRight": [
-    //  { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
+    //  { "layer": "substrate", "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
     //],
     "__stub__": null
   },
@@ -131,10 +131,10 @@
     "vehicleLevelAlpha": 70,
     //"removeSquadIcon": true,
     //"extraFieldsLeft": [
-    //  { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
+    //  { "layer": "substrate", "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png" }
     //],
     //"extraFieldsRight": [
-    //  { "substrate": true, "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
+    //  { "layer": "substrate", "height": 25, "src": "cfg://sirmax/img/panel-bg-{{alive|dead}}.png", "scaleX": -1 }
     //],
     "__stub__": null
   },

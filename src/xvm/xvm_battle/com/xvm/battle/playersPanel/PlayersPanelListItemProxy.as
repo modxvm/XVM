@@ -15,6 +15,7 @@ package com.xvm.battle.playersPanel
     import flash.events.*;
     import flash.text.*;
     import flash.geom.*;
+    import flash.display.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
@@ -48,7 +49,12 @@ package com.xvm.battle.playersPanel
         private static var s_maxPlayerNameTextWidthLeft:Number = 0;
         private static var s_maxPlayerNameTextWidthRight:Number = 0;
 
+        public var isLeftPanel:Boolean;
         public var xvm_enabled:Boolean;
+
+        public var substrateHolder:MovieClip;
+        public var bottomHolder:MovieClip;
+        public var topHolder:MovieClip;
 
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
@@ -64,7 +70,6 @@ package com.xvm.battle.playersPanel
         private var mcfg:CPlayersPanelMode;
         private var ncfg:CPlayersPanelNoneMode;
         private var ui:PlayersPanelListItem;
-        private var isLeftPanel:Boolean;
 
         private var _userProps:IUserProps = null;
         private var _vehicleID:Number = NaN;
@@ -76,14 +81,10 @@ package com.xvm.battle.playersPanel
         private var mopt_removeSquadIcon:Boolean;
 
         private var extraFieldsHidden:ExtraFields = null;
-        private var extraFieldsShort:ExtraFields = null;
-        private var extraFieldsShortSubstrate:ExtraFields = null;
-        private var extraFieldsMedium:ExtraFields = null;
-        private var extraFieldsMediumSubstrate:ExtraFields = null;
-        private var extraFieldsLong:ExtraFields = null;
-        private var extraFieldsLongSubstrate:ExtraFields = null;
-        private var extraFieldsFull:ExtraFields = null;
-        private var extraFieldsFullSubstrate:ExtraFields = null;
+        private var extraFieldsShort:ExtraFieldsGroup = null;
+        private var extraFieldsMedium:ExtraFieldsGroup = null;
+        private var extraFieldsLong:ExtraFieldsGroup = null;
+        private var extraFieldsFull:ExtraFieldsGroup = null;
 
         private var currentPlayerState:VOPlayerState;
         private var _vehicleImage:String;
@@ -94,13 +95,18 @@ package com.xvm.battle.playersPanel
             mouseEnabled = false;
             mouseChildren = false;
             this.isLeftPanel = isLeftPanel;
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+
+            substrateHolder = ui.addChildAt(new MovieClip(), 0) as MovieClip;
+            bottomHolder = ui.addChildAt(new MovieClip(), 1) as MovieClip;
+            topHolder = ui.addChild(new MovieClip()) as MovieClip;
+
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xvm.addEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
-            onConfigLoaded(null);
+            setup();
 
             DEFAULT_BG_ALPHA = ui.bg.alpha;
             DEFAULT_SELFBG_ALPHA = ui.selfBg.alpha;
@@ -114,13 +120,18 @@ package com.xvm.battle.playersPanel
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xvm.removeEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             disposeExtraFields();
+
+            substrateHolder = null;
+            bottomHolder = null;
+            topHolder = null;
+
             _userProps = null;
             super.onDispose();
         }
@@ -200,7 +211,7 @@ package com.xvm.battle.playersPanel
 
         // XVM events handlers
 
-        private function onConfigLoaded(e:Event):Object
+        private function setup():void
         {
             try
             {
@@ -250,7 +261,6 @@ package com.xvm.battle.playersPanel
             {
                 Logger.err(ex);
             }
-            return null;
         }
 
         private function onFullStatsVisible(e:BooleanEvent):void
@@ -335,20 +345,12 @@ package com.xvm.battle.playersPanel
                 extraFieldsHidden.visible = false;
             if (extraFieldsShort)
                 extraFieldsShort.visible = false;
-            if (extraFieldsShortSubstrate)
-                extraFieldsShortSubstrate.visible = false;
             if (extraFieldsMedium)
                 extraFieldsMedium.visible = false;
-            if (extraFieldsMediumSubstrate)
-                extraFieldsMediumSubstrate.visible = false;
             if (extraFieldsLong)
                 extraFieldsLong.visible = false;
-            if (extraFieldsLongSubstrate)
-                extraFieldsLongSubstrate.visible = false;
             if (extraFieldsFull)
                 extraFieldsFull.visible = false;
-            if (extraFieldsFullSubstrate)
-                extraFieldsFullSubstrate.visible = false;
             invalidate(INVALIDATE_UPDATE_POSITIONS);
         }
 
@@ -425,7 +427,7 @@ package com.xvm.battle.playersPanel
                     }
                 }
             }
-            this.x = -ui.x;
+            this.x = bottomHolder.x = topHolder.x = -ui.x;
         }
 
         private function updateVehicleIconPositionLeft():void
@@ -639,13 +641,13 @@ package com.xvm.battle.playersPanel
 
         private function createExtraFields():void
         {
+            var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
             var cfg:CPlayersPanelNoneModeExtraField = isLeftPanel ? ncfg.extraFields.leftPanel : ncfg.extraFields.rightPanel;
             var bounds:Rectangle = new Rectangle(
                 Macros.FormatNumberGlobal(cfg.x, 0),
                 Macros.FormatNumberGlobal(cfg.y, 65),
                 Macros.FormatNumberGlobal(cfg.width, 380),
                 Macros.FormatNumberGlobal(cfg.height, 28));
-            var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
             if (cfg.formats && cfg.formats.length)
             {
                 extraFieldsHidden = new ExtraFields(
@@ -662,73 +664,28 @@ package com.xvm.battle.playersPanel
                 //createMouseHandler(_root["extraPanels"]);
             }
 
-            var filteredFormats:Array;
             var formats:Array = isLeftPanel ? pcfg.short.extraFieldsLeft : pcfg.short.extraFieldsRight;
             if (formats && formats.length)
             {
-                filteredFormats = filterFormats(formats, false);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    extraFieldsShort = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                    addChild(extraFieldsShort);
-                }
-                filteredFormats = filterFormats(formats, true);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    extraFieldsShortSubstrate = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                    ui.addChildAt(extraFieldsShortSubstrate, 0);
-                }
+                extraFieldsShort = new ExtraFieldsGroup(this, formats);
             }
 
             formats = isLeftPanel ? pcfg.medium.extraFieldsLeft : pcfg.medium.extraFieldsRight;
             if (formats && formats.length)
             {
-                filteredFormats = filterFormats(formats, false);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    extraFieldsMedium = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                    addChild(extraFieldsMedium);
-                }
-                filteredFormats = filterFormats(formats, true);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    extraFieldsMediumSubstrate = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                    ui.addChildAt(extraFieldsMediumSubstrate, 0);
-                }
+                extraFieldsMedium = new ExtraFieldsGroup(this, formats);
             }
 
             formats = isLeftPanel ? pcfg.medium2.extraFieldsLeft : pcfg.medium2.extraFieldsRight;
             if (formats && formats.length)
             {
-                filteredFormats = filterFormats(formats, false);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    extraFieldsLong = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                    addChild(extraFieldsLong);
-                }
-                filteredFormats = filterFormats(formats, true);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    extraFieldsLongSubstrate = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                    ui.addChildAt(extraFieldsLongSubstrate, 0);
-                }
+                extraFieldsLong = new ExtraFieldsGroup(this, formats);
             }
 
             formats = isLeftPanel ? pcfg.large.extraFieldsLeft : pcfg.large.extraFieldsRight;
             if (formats && formats.length)
             {
-                filteredFormats = filterFormats(formats, false);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    extraFieldsFull = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                    addChild(extraFieldsFull);
-                }
-                filteredFormats = filterFormats(formats, true);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    extraFieldsFullSubstrate = new ExtraFields(filteredFormats, isLeftPanel, getSchemeNameForPlayer, getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                    ui.addChildAt(extraFieldsFullSubstrate, 0);
-                }
+                extraFieldsFull = new ExtraFieldsGroup(this, formats);
             }
         }
 
@@ -744,44 +701,24 @@ package com.xvm.battle.playersPanel
                 extraFieldsShort.dispose();
                 extraFieldsShort = null;
             }
-            if (extraFieldsShortSubstrate)
-            {
-                extraFieldsShortSubstrate.dispose();
-                extraFieldsShortSubstrate = null;
-            }
             if (extraFieldsMedium)
             {
                 extraFieldsMedium.dispose();
                 extraFieldsMedium = null;
-            }
-            if (extraFieldsMediumSubstrate)
-            {
-                extraFieldsMediumSubstrate.dispose();
-                extraFieldsMediumSubstrate = null;
             }
             if (extraFieldsLong)
             {
                 extraFieldsLong.dispose();
                 extraFieldsLong = null;
             }
-            if (extraFieldsLongSubstrate)
-            {
-                extraFieldsLongSubstrate.dispose();
-                extraFieldsLongSubstrate = null;
-            }
             if (extraFieldsFull)
             {
                 extraFieldsFull.dispose();
                 extraFieldsFull = null;
             }
-            if (extraFieldsFullSubstrate)
-            {
-                extraFieldsFullSubstrate.dispose();
-                extraFieldsFullSubstrate = null;
-            }
         }
 
-        private function getSchemeNameForVehicle():String
+        public function getSchemeNameForVehicle():String
         {
             return PlayerStatusSchemeName.getSchemeNameForVehicle(
                 currentPlayerState.isCurrentPlayer && bcfg.highlightVehicleIcon,
@@ -791,7 +728,7 @@ package com.xvm.battle.playersPanel
                 currentPlayerState.isOffline);
         }
 
-        private function getSchemeNameForPlayer():String
+        public function getSchemeNameForPlayer():String
         {
             return PlayerStatusSchemeName.getSchemeNameForPlayer(
                 currentPlayerState.isCurrentPlayer,
@@ -818,22 +755,12 @@ package com.xvm.battle.playersPanel
                         extraFieldsShort.visible = true;
                         extraFieldsShort.update(currentPlayerState, bindToIconOffset);
                     }
-                    if (extraFieldsShortSubstrate)
-                    {
-                        extraFieldsShortSubstrate.visible = true;
-                        extraFieldsShortSubstrate.update(currentPlayerState, bindToIconOffset);
-                    }
                     break;
                 case PLAYERS_PANEL_STATE.MEDIUM:
                     if (extraFieldsMedium)
                     {
                         extraFieldsMedium.visible = true;
                         extraFieldsMedium.update(currentPlayerState, bindToIconOffset);
-                    }
-                    if (extraFieldsMediumSubstrate)
-                    {
-                        extraFieldsMediumSubstrate.visible = true;
-                        extraFieldsMediumSubstrate.update(currentPlayerState, bindToIconOffset);
                     }
                     break;
                 case PLAYERS_PANEL_STATE.LONG:
@@ -842,11 +769,6 @@ package com.xvm.battle.playersPanel
                         extraFieldsLong.visible = true;
                         extraFieldsLong.update(currentPlayerState, bindToIconOffset);
                     }
-                    if (extraFieldsLongSubstrate)
-                    {
-                        extraFieldsLongSubstrate.visible = true;
-                        extraFieldsLongSubstrate.update(currentPlayerState, bindToIconOffset);
-                    }
                     break;
                 case PLAYERS_PANEL_STATE.FULL:
                     if (extraFieldsFull)
@@ -854,32 +776,146 @@ package com.xvm.battle.playersPanel
                         extraFieldsFull.visible = true;
                         extraFieldsFull.update(currentPlayerState, bindToIconOffset);
                     }
-                    if (extraFieldsFullSubstrate)
-                    {
-                        extraFieldsFullSubstrate.visible = true;
-                        extraFieldsFullSubstrate.update(currentPlayerState, bindToIconOffset);
-                    }
                     break;
             }
-        }
-
-        private function filterFormats(formats:Array, isSubstrate:Boolean):Array
-        {
-            var res:Array = [];
-            var len:int = formats.length;
-            for (var i:int = 0; i < len; ++i)
-            {
-                var format:* = formats[i];
-                if (isSubstrate == Boolean(format.substrate))
-                {
-                    res.push(format);
-                }
-            }
-            return res;
         }
     }
 }
 
+import com.xvm.battle.playersPanel.PlayersPanelListItemProxy;
+import com.xvm.extraFields.ExtraFields;
+import com.xvm.types.cfg.CTextFormat;
+import com.xvm.vo.IVOMacrosOptions;
+import flash.text.TextFormatAlign;
+import net.wg.infrastructure.interfaces.entity.IDisposable;
+
+class ExtraFieldsGroup implements IDisposable
+{
+    private const SUBSTRATE:String = "substrate";
+    private const BOTTOM:String = "bottom";
+    private const NORMAL:String = "normal";
+    private const TOP:String = "top";
+
+    public var substrate:ExtraFields = null;
+    public var bottom:ExtraFields = null;
+    public var normal:ExtraFields = null;
+    public var top:ExtraFields = null;
+
+    public function ExtraFieldsGroup(item:PlayersPanelListItemProxy, formats:Array)
+    {
+        var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(item.isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
+        var filteredFormats:Array;
+        if (formats && formats.length)
+        {
+            filteredFormats = filterFormats(formats, SUBSTRATE);
+            if (filteredFormats && filteredFormats.length)
+            {
+                substrate = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                item.substrateHolder.addChild(substrate);
+            }
+            filteredFormats = filterFormats(formats, BOTTOM);
+            if (filteredFormats && filteredFormats.length)
+            {
+                bottom = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                item.bottomHolder.addChild(bottom);
+            }
+            filteredFormats = filterFormats(formats, NORMAL);
+            if (filteredFormats && filteredFormats.length)
+            {
+                normal = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                item.addChild(normal);
+            }
+            filteredFormats = filterFormats(formats, TOP);
+            if (filteredFormats && filteredFormats.length)
+            {
+                top = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                item.topHolder.addChild(top);
+            }
+        }
+    }
+
+    public function dispose():void
+    {
+        if (substrate)
+        {
+            substrate.dispose();
+            substrate = null;
+        }
+        if (bottom)
+        {
+            bottom.dispose();
+            bottom = null;
+        }
+        if (normal)
+        {
+            normal.dispose();
+            normal = null;
+        }
+        if (top)
+        {
+            top.dispose();
+            top = null;
+        }
+    }
+
+    public function set visible(value:Boolean):void
+    {
+        if (substrate)
+        {
+            substrate.visible = value;
+        }
+        if (bottom)
+        {
+            bottom.visible = value;
+        }
+        if (normal)
+        {
+            normal.visible = value;
+        }
+        if (top)
+        {
+            top.visible = value;
+        }
+    }
+
+    public function update(options:IVOMacrosOptions, bindToIconOffset:Number):void
+    {
+        if (substrate)
+        {
+            substrate.update(options, bindToIconOffset);
+        }
+        if (bottom)
+        {
+            bottom.update(options, bindToIconOffset);
+        }
+        if (normal)
+        {
+            normal.update(options, bindToIconOffset);
+        }
+        if (top)
+        {
+            top.update(options, bindToIconOffset);
+        }
+    }
+
+    // PRIVATE
+
+
+    private function filterFormats(formats:Array, layer:String):Array
+    {
+        var res:Array = [];
+        var len:int = formats.length;
+        for (var i:int = 0; i < len; ++i)
+        {
+            var format:* = formats[i];
+            if (layer == (format.layer ? format.layer.toLowerCase() : "normal"))
+            {
+                res.push(format);
+            }
+        }
+        return res;
+    }
+}
 
 /* TODO
 
