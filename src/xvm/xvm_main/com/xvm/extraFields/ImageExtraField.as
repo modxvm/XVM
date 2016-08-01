@@ -355,11 +355,11 @@ package com.xvm.extraFields
             }
             if (_scaleXValue < 0)
             {
-                x += _bitmap.width;
+                x += isNaN(_widthValue) ? _bitmap.width : _widthValue;
             }
             if (_scaleYValue < 0)
             {
-                y += _bitmap.height;
+                y += isNaN(_heightValue) ? _bitmap.height : _heightValue;
             }
             if (this.x != x)
             {

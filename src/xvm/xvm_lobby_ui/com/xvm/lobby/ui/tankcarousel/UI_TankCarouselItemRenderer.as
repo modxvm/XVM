@@ -247,6 +247,19 @@ package com.xvm.lobby.ui.tankcarousel
                             }
                         }
                     }
+                    else
+                    {
+                        // Add used slots count
+                        if (_dataVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
+                        {
+                            additionalText.visible = true;
+                            additionalText.text = Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT);
+                        }
+                        if (_dataVO.buyTank && Config.config.hangar.carousel.showTotalSlots)
+                        {
+                            additionalText.text += " " + Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT);
+                        }
+                    }
                 }
                 if (_extraFieldsHolder.visible != isExtraFieldsVisible)
                 {
