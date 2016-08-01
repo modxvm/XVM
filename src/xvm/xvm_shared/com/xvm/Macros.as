@@ -379,9 +379,6 @@ package com.xvm
         {
             //Logger.add("format:" + format + " player:" + (options ? options.playerName : null));
 
-            __out.isStaticMacro = true;
-            __out.isHybridMacro = false;
-
             if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format) || !isNaN(format))
                 return format;
 
@@ -440,7 +437,7 @@ package com.xvm
                         var _Format_out:MacrosResult = new MacrosResult();
                         res = _Format(res, options, _Format_out);
                         __out.isStaticMacro &&= _Format_out.isStaticMacro;
-                        __out.isHybridMacro ||= _FormatPart_out.isHybridMacro;
+                        __out.isHybridMacro ||= _Format_out.isHybridMacro;
                     }
                 }
             }
@@ -484,9 +481,6 @@ package com.xvm
 
         private static function _FormatPart(macro:String, options:IVOMacrosOptions, __out:MacrosResult):String
         {
-            __out.isStaticMacro = true;
-            __out.isHybridMacro = false;
-
             // Process tag
             var playerName:String = options ? options.playerName : null;
             var pdata:* = playerName ? m_players[playerName] || m_globals : m_globals;
