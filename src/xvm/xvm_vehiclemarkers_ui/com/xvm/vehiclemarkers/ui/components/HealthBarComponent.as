@@ -108,6 +108,8 @@ package com.xvm.vehiclemarkers.ui.components
                     var cfg:CMarkersHealthBar = e.cfg.healthBar;
                     var playerState:VOPlayerState = e.playerState;
                     TweenLite.killTweensOf(damage);
+                    if (!playerState.damageInfo || playerState.damageInfo.damageDelta <= 0)
+                        return;
                     damage.x = cfg.border.size + cfg.width * (playerState.curHealth / playerState.maxHealth) - 1;
                     damage.scaleX += playerState.damageInfo.damageDelta / playerState.maxHealth;
                     if (cfg.damage.color == null)

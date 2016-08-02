@@ -47,6 +47,8 @@ package com.xvm.vehiclemarkers.ui.components
             try
             {
                 var playerState:VOPlayerState = e.playerState;
+                if (!playerState.damageInfo || playerState.damageInfo.damageDelta <= 0)
+                    return;
                 var damageFlag:Number = playerState.damageInfo.damageFlag;
                 var cfg:CMarkersDamageText = damageFlag == Defines.FROM_PLAYER ? e.cfg.damageTextPlayer : damageFlag == Defines.FROM_SQUAD ? e.cfg.damageTextSquadman : e.cfg.damageText;
                 damage.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
