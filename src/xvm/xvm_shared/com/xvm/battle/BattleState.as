@@ -109,21 +109,31 @@ package com.xvm.battle
 
         override protected function draw():void
         {
-            if (isInvalid(InvalidationType.STATE))
+            try
             {
-                _playersDataVO.dispatchEvents();
-            }
-            if (isInvalid(InvalidationType.DATA))
-            {
-                for (var key:String in _invalidationStates)
+                if (isInvalid(InvalidationType.STATE))
                 {
-                    var playerState:VOPlayerState = get(Number(key));
-                    if (playerState)
+                    if (_playersDataVO)
                     {
-                        playerState.dispatchEvents();
+                        _playersDataVO.dispatchEvents();
                     }
                 }
-                _invalidationStates = {};
+                if (isInvalid(InvalidationType.DATA))
+                {
+                    for (var key:String in _invalidationStates)
+                    {
+                        var playerState:VOPlayerState = get(Number(key));
+                        if (playerState)
+                        {
+                            playerState.dispatchEvents();
+                        }
+                    }
+                    _invalidationStates = {};
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 
