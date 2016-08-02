@@ -95,12 +95,12 @@ package com.xvm.extraFields
 
         public function get widthValue():Number
         {
-            return _widthValue;
+            return isNaN(_widthValue) ? _bitmap.width : _widthValue;
         }
 
         public function get heightValue():Number
         {
-            return _heightValue;
+            return isNaN(_heightValue) ? _bitmap.height : _heightValue;
         }
 
         private function setup(options:IVOMacrosOptions):void
@@ -355,11 +355,11 @@ package com.xvm.extraFields
             }
             if (_scaleXValue < 0)
             {
-                x += isNaN(_widthValue) ? _bitmap.width : _widthValue;
+                x += widthValue;
             }
             if (_scaleYValue < 0)
             {
-                y += isNaN(_heightValue) ? _bitmap.height : _heightValue;
+                y += heightValue;
             }
             if (this.x != x)
             {

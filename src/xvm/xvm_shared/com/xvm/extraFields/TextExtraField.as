@@ -102,7 +102,7 @@ package com.xvm.extraFields
 
         public function get widthValue():Number
         {
-            return (textWidth <= 0) ? _widthValue : textWidth + 4; // 2 * 2-pixel gutter
+            return isNaN(_widthValue) ? ((textWidth > 0) ? textWidth + 4 : NaN) : _widthValue; // 2 * 2-pixel gutter
         }
 
         public function get heightValue():Number
@@ -679,12 +679,10 @@ package com.xvm.extraFields
 
         private function align(bindToIconOffset:Number, offsetX:Number, offsetY:Number):void
         {
-            if (textWidth > 0)
-                width = textWidth + 4; // 2 * 2-pixel gutter
-            else if (!isNaN(_widthValue))
-                width = _widthValue;
-            if (!isNaN(_heightValue))
-                height = _heightValue;
+            if (!isNaN(widthValue))
+                width = widthValue;
+            if (!isNaN(heightValue))
+                height = heightValue;
             if (_bounds && _layout == ExtraFields.LAYOUT_ROOT)
             {
                 var align:String = Macros.FormatStringGlobal(_cfg.screenHAlign, TextFormatAlign.LEFT);
