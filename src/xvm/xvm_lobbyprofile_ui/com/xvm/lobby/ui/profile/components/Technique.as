@@ -116,9 +116,6 @@ package com.xvm.lobby.ui.profile.components
                     page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
                     page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
 
-                    // add event handlers
-                    Linkages.TECHNIQUE_STATISTIC_TAB = getQualifiedClassName(UI_TechniqueStatisticTab);
-
                     // create filter controls
                     //filter = null;
                     //if (Config.config.userInfo.showFilters)
