@@ -8,7 +8,7 @@ package com.xvm.lobby.profile
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import net.wg.data.*;
-    import net.wg.gui.events.ViewStackEvent;
+    import net.wg.data.constants.*;
     import net.wg.gui.lobby.profile.*;
     import net.wg.gui.lobby.window.*;
     import net.wg.infrastructure.events.*;
@@ -38,6 +38,10 @@ package com.xvm.lobby.profile
         {
             tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "com.xvm.lobby.ui.profile::UI_ProfileTechniquePage");
             tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "com.xvm.lobby.ui.profile::UI_ProfileTechniqueWindow");
+            if (Config.networkServicesSettings.statAwards)
+            {
+                Linkages.TECHNIQUE_STATISTIC_TAB = "com.xvm.lobby.ui.profile::UI_TechniqueStatisticTab";
+            }
         }
     }
 }
