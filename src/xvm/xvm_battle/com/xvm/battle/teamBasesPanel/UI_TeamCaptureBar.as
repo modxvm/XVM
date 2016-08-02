@@ -18,6 +18,15 @@ package com.xvm.battle.teamBasesPanel
     {
         private static const HIDE_ICONS_HACK_OFFSET_Y:Number = -10000;
 
+        private var DEFAULT_TEXTFIELD_X:Number;
+        private var DEFAULT_TEXTFIELD_Y:Number;
+        private var DEFAULT_TFVEHICLESCOUNT_X:Number;
+        private var DEFAULT_TFVEHICLESCOUNT_Y:Number;
+        private var DEFAULT_TFTIMELEFT_X:Number;
+        private var DEFAULT_TFTIMELEFT_Y:Number;
+        private var DEFAULT_POINTSTEXTFIELD_X:Number;
+        private var DEFAULT_POINTSTEXTFIELD_Y:Number;
+
         private var cfg:CCaptureBarTeam;
         private var m_captured:Boolean;
         private var m_baseNumText:String = "";
@@ -102,10 +111,10 @@ package com.xvm.battle.teamBasesPanel
             {
                 cfg = Config.config.captureBar[team];
                 setupCaptureBarColor();
-                setupTextField(textField, "title");
-                setupTextField(tfVehiclesCount, "timer");
-                setupTextField(tfTimeLeft, "players");
-                setupTextField(pointsTextField, "points");
+                setupTextField(textField, "title", DEFAULT_TEXTFIELD_X, DEFAULT_TEXTFIELD_Y);
+                setupTextField(tfVehiclesCount, "timer", DEFAULT_TFVEHICLESCOUNT_X, DEFAULT_TFVEHICLESCOUNT_Y);
+                setupTextField(tfTimeLeft, "players", DEFAULT_TFTIMELEFT_X, DEFAULT_TFTIMELEFT_Y);
+                setupTextField(pointsTextField, "points", DEFAULT_POINTSTEXTFIELD_X, DEFAULT_POINTSTEXTFIELD_Y);
                 setupProgressBar();
                 m_baseNumText = Xfw.cmd(BattleCommands.CAPTURE_BAR_GET_BASE_NUM_TEXT, id);
                 updateTextFields();
@@ -143,6 +152,15 @@ package com.xvm.battle.teamBasesPanel
             pointsTextField.y += HIDE_ICONS_HACK_OFFSET_Y;
             bg.y += HIDE_ICONS_HACK_OFFSET_Y;
             progressBar.y += HIDE_ICONS_HACK_OFFSET_Y;
+
+            DEFAULT_TEXTFIELD_X = textField.x;
+            DEFAULT_TEXTFIELD_Y = textField.y;
+            DEFAULT_TFVEHICLESCOUNT_X = tfVehiclesCount.x;
+            DEFAULT_TFVEHICLESCOUNT_Y = tfVehiclesCount.y;
+            DEFAULT_TFTIMELEFT_X = tfTimeLeft.x;
+            DEFAULT_TFTIMELEFT_Y = tfTimeLeft.y;
+            DEFAULT_POINTSTEXTFIELD_X = pointsTextField.x;
+            DEFAULT_POINTSTEXTFIELD_Y = pointsTextField.y;
         }
 
         private function setupCaptureBarColor():void
@@ -168,13 +186,13 @@ package com.xvm.battle.teamBasesPanel
             */
         }
 
-        private function setupTextField(tf:TextField, name:String):void
+        private function setupTextField(tf:TextField, name:String, defaultX:Number, defaultY:Number):void
         {
             var c:CCaptureBarTextField = cfg[name];
             //tf.border = true; tf.borderColor = 0xFF0000;
             tf.selectable = false;
-            tf.x += Macros.FormatNumberGlobal(c.x, 0);
-            tf.y += Macros.FormatNumberGlobal(c.y, 0);
+            tf.x = defaultX + Macros.FormatNumberGlobal(c.x, 0);
+            tf.y = defaultY + Macros.FormatNumberGlobal(c.y, 0);
             tf.filters = Utils.createShadowFiltersFromConfig(c.shadow);
         }
 

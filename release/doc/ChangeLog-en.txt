@@ -52,7 +52,7 @@ XVM-6.4.0-dev:
      "medium2"/"width"
      "large"/"width"
   * camera zoom indicator implemented as extra field with all its options
-  * clock are using php formatting (http://php.net/date)
+  * clock is using php format (http://php.net/date)
   * global macros, including {{py:f()}}, can be used in the "battle"/"elements" section
   * changed "carousel"/"scrollingSpeed" value, now it is multiplier for default scrolling rate
   * option "markers"/"useStandardMarkers" renamed to "markers"/"enabled"
