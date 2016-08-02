@@ -32,11 +32,11 @@
       "neverSeen": "",
       "lost": "<font face='xvm' size='23'>&#x70;</font>",
       "spotted": "<font face='xvm' size='23'>&#x70;</font>",
-      "dead": "<font face='xvm' size='23' alpha='#80'>&#x76;</font>",
+      "dead": "",
       "neverSeen_arty": "",
       "lost_arty": "<font face='xvm' size='23'>&#x70;</font>",
       "spotted_arty": "<font face='xvm' size='23'>&#x70;</font>",
-      "dead_arty": "<font face='xvm' size='23' alpha='#80'>&#x76;</font>"
+      "dead_arty": ""
     },
     // Text for {{xvm-user}} macro.
     // Текст для макроса {{xvm-user}}
