@@ -130,7 +130,7 @@ package com.xvm.battle.vo
 
         override public function get isSquadPersonal():Boolean
         {
-            return PlayerStatus.isSquadPersonal(playerStatus);
+            return squadIndex && squadIndex == BattleGlobalData.playerSquad;
         }
 
         override public function get isTeamKiller():Boolean
@@ -186,6 +186,15 @@ package com.xvm.battle.vo
         override public function get squadIndex():Number
         {
             return _squadIndex;
+        }
+
+        internal function set_squadIndex(value:Number):void
+        {
+            _squadIndex = value;
+            if (isCurrentPlayer)
+            {
+                BattleGlobalData.playerSquad = value;
+            }
         }
 
         override public function get position():Number
@@ -402,10 +411,12 @@ package com.xvm.battle.vo
                 var k:String = "set_" + name;
                 if (this[k] !== undefined)
                 {
+                    //Logger.add(playerName + ": " + k + "(" + value + ")");
                     this[k](value);
                 }
                 else
                 {
+                    //Logger.add(playerName + ": _" + name + " = " + value);
                     this["_" + name] = value;
                 }
                 return true;
@@ -417,6 +428,7 @@ package com.xvm.battle.vo
         {
             for (var eventName:String in eventsToDispatch)
             {
+                //Logger.add(playerName + " " + eventName);
                 Xvm.dispatchEvent(new PlayerStateEvent(eventName, vehicleID, accountDBID, playerName));
             }
             eventsToDispatch = { };

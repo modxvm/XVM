@@ -639,7 +639,7 @@ package com.xvm.extraFields
                 }
                 if (_cfg.format)
                 {
-                    value = Macros.Format(_cfg.format, options);
+                    value = Macros.FormatString(_cfg.format, options);
 
                     //value = Utils.fixImgTag(value); // is required?
                     if (_textValue != value)
@@ -654,7 +654,7 @@ package com.xvm.extraFields
                 {
                     if (_cfg.highlight)
                     {
-                        _highlightValue = _cfg.highlight is Boolean ? _cfg.highlight : Macros.FormatBoolean(_cfg.highlight, options, false);
+                        _highlightValue = Macros.FormatBoolean(_cfg.highlight, options, false);
                     }
                     value = _highlightValue ? _getColorSchemeName(options) : null;
                     if (_colorSchemeNameValue != value)
