@@ -53,6 +53,8 @@ package com.xvm.battle.fullStats
         private var _vehicleID:Number = NaN;
         private var _vehicleIconName:String = null;
 
+        private var currentPlayerState:VOPlayerState;
+
         public function StatsTableItemXvm(isLeftPanel:Boolean, playerNameTF:TextField, vehicleNameTF:TextField, fragsTF:TextField, deadBg:BattleAtlasSprite,
             vehicleTypeIcon:BattleAtlasSprite, icoIGR:BattleAtlasSprite, vehicleIcon:BattleAtlasSprite, vehicleLevelIcon:BattleAtlasSprite,
             muteIcon:BattleAtlasSprite, speakAnimation:SpeakAnimation, vehicleActionIcon:BattleAtlasSprite, playerStatus:PlayerStatusView)
@@ -117,6 +119,7 @@ package com.xvm.battle.fullStats
         {
             super.setPlayerName(userProps);
             _vehicleID = BattleState.getVehicleID(userProps.userName);
+            currentPlayerState = BattleState.get(_vehicleID);
         }
 
         override public function setIsIGR(isIGR:Boolean):void
@@ -147,6 +150,12 @@ package com.xvm.battle.fullStats
             if (isInvalid(FullStatsValidationType.USER_PROPS))
             {
                 updatePlayerNameField = true;
+            }
+            if (isInvalid(FullStatsValidationType.COLORS))
+            {
+                var schemeName:String = getSchemeNameForVehicle();
+                var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
+                _vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
             }
             if (isInvalid(FullStatsValidationType.VEHICLE_NAME))
             {
@@ -223,6 +232,17 @@ package com.xvm.battle.fullStats
                     }
                 }
             }
+        }
+
+        public function getSchemeNameForVehicle():String
+        {
+            var highlightVehicleIcon:Boolean = Config.config.battle.highlightVehicleIcon;
+            return PlayerStatusSchemeName.getSchemeNameForVehicle(
+                currentPlayerState.isCurrentPlayer && highlightVehicleIcon,
+                currentPlayerState.isSquadPersonal && highlightVehicleIcon,
+                currentPlayerState.isTeamKiller && highlightVehicleIcon,
+                currentPlayerState.isDead,
+                currentPlayerState.isOffline);
         }
 
         // XVM events handlers
