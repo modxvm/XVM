@@ -71,7 +71,6 @@ package com.xvm.vehiclemarkers.ui
 
         private function initialize():void
         {
-            Macros.clear();
             BattleGlobalData.init();
             Stat.clearBattleStat();
             Stat.loadBattleStat();

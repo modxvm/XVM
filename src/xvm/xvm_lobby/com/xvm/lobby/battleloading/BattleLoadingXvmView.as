@@ -33,12 +33,11 @@ package com.xvm.lobby.battleloading
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
-
-            //Logger.addObject(Config.networkServicesSettings);
-            //Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
             logBriefConfigurationInfo();
 
             Macros.clear();
+            Macros.RegisterXvmServicesMacrosData();
+
             BattleGlobalData.init();
             Stat.clearBattleStat();
             Stat.loadBattleStat();

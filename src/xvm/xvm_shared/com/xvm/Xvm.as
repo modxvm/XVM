@@ -84,6 +84,7 @@ package com.xvm
             _instance = this;
             _battleState = BattleState.instance;
             this.addChild(_battleState);
+            Macros.clear();
             Xfw.addCommandListener(XvmCommandsInternal.AS_L10N, onL10n);
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
             Xfw.addCommandListener(XvmCommandsInternal.AS_UPDATE_RESERVE, onUpdateReserve);
@@ -118,7 +119,7 @@ package com.xvm
 
         private function onUpdateReserve(vehInfo_data:Array):void
         {
-            Logger.add("onUpdateReserve");
+            //Logger.add("onUpdateReserve");
             VehicleInfo.setVehicleInfoData(vehInfo_data);
         }
     }
