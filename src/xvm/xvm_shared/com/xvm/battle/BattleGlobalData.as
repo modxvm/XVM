@@ -25,6 +25,16 @@ package com.xvm.battle
             return _playerVehCD;
         }
 
+        public static function get playerSquad():Number
+        {
+            return _playerSquad;
+        }
+
+        public static function set playerSquad(value:Number):void
+        {
+            _playerSquad = value;
+        }
+
         public static function get battleLevel():Number
         {
             return _battleLevel;
@@ -81,6 +91,7 @@ package com.xvm.battle
         private static var _playerVehicleID:Number;
         private static var _playerName:String;
         private static var _playerVehCD:Number;
+        private static var _playerSquad:Number;
         private static var _battleLevel:Number;
         private static var _battleType:Number;
         private static var _arenaGuiType:Number;
