@@ -105,6 +105,6 @@ Some functionality may work incorrectly or may not work at all.
 
 If you are testing XVM, you can ignore this message.
 
-<b>If you're just a player and not a tester of XVM, please use stable version instead of nightly builds. Download stable version from the official website of XVM: <a href='#XVM_SITE_DL#'>www.ModXVM.com</a></b>
+<b>If you're just a player and not a tester of XVM, please use a stable version instead of nightly builds. Download the stable version from the official website of XVM: <a href='#XVM_SITE_DL#'>www.ModXVM.com</a></b>
 """
     return msg
