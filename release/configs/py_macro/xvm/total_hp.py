@@ -13,4 +13,4 @@ def sign():
     return '&lt;' if panel.total_hp_sign == '<' else '&gt;' if panel.total_hp_sign == '>' else panel.total_hp_sign
 
 def text():
-    return "<font color='#%s'>%6s %s %-6s</font>" % (color(), ally(), sign(), enemy())
+    return "<font face='mono' color='#%s'>&nbsp;%6s %s %-6s&nbsp;</font>" % (color(), ally(), sign(), enemy())
