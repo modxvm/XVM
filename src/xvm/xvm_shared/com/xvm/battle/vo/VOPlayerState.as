@@ -130,9 +130,7 @@ package com.xvm.battle.vo
 
         override public function get isSquadPersonal():Boolean
         {
-            return
-                PlayerStatus.isSquadPersonal(playerStatus) || // pre-battle squad
-                (squadIndex && squadIndex == BattleGlobalData.playerSquad); // dynamic squad
+            return PlayerStatus.isSquadPersonal(playerStatus) /* pre-battle squad */ || (squadIndex && squadIndex == BattleGlobalData.playerSquad); // dynamic squad
         }
 
         override public function get isTeamKiller():Boolean
