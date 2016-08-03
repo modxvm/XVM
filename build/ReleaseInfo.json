@@ -2,36 +2,36 @@
     "RU": {
         "ver": "6.4.0",
         "wot": "0.9.15.1",
-        "message": "Адаптация для WoT 0.9.15.1, подробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "message": " • XVM адаптирован для WoT 0.9.15.1\n • Исправлены ошибки\n • Частично изменен формат конфигураций\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
         "ver": "6.4.0",
         "wot": "0.9.15.1",
-        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "message": " • XVM was adapted for WoT 0.9.15.1\n • Bugs fixed\n • Some options and structures of configuration were changed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "US": {
         "ver": "6.4.0",
         "wot": "0.9.15.1",
-        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "message": " • XVM was adapted for WoT 0.9.15.1\n • Bugs fixed\n • Some options and structures of configuration were changed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
         "ver": "6.4.0",
         "wot": "0.9.15.1",
-        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "message": " • XVM was adapted for WoT 0.9.15.1\n • Bugs fixed\n • Some options and structures of configuration were changed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "KR": {
         "ver": "6.4.0",
         "wot": "0.9.15.1",
-        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "message": " • XVM was adapted for WoT 0.9.15.1\n • Bugs fixed\n • Some options and structures of configuration were changed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
         "ver": "6.4.0",
         "wot": "0.9.15.1",
-        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "message": " • XVM was adapted for WoT 0.9.15.1\n • Bugs fixed\n • Some options and structures of configuration were changed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT":  {
         "ver": "6.4.0",
         "wot": "0.9.15.1",
-        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "message": " • XVM was adapted for WoT 0.9.15.1\n • Bugs fixed\n • Some options and structures of configuration were changed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
