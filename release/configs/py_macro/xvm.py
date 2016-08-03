@@ -1,3 +1,9 @@
+# Import from config file
+
+import xvm_main.python.config as config
+
+# Example: config.get('definition/author', 'XVM team')
+
 # TotalHP
 
 from xvm import total_hp

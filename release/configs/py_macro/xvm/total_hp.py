@@ -1,4 +1,3 @@
-import xvm_main.python.config as config
 import xvm_battle.python.fragCorrelationPanel as panel
 
 def ally():
