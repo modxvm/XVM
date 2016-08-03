@@ -1,37 +1,37 @@
 ﻿{
     "RU": {
-        "ver": "6.3.2.1",
-        "wot": "0.9.15.0.1",
-        "message": "  * WoT 0.9.15.0.1\n  * новые возможности\n  * исправлены ошибки"
+        "ver": "6.4.0",
+        "wot": "0.9.15.1",
+        "message": "Адаптация для WoT 0.9.15.1, подробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "6.3.2.1",
-        "wot": "0.9.15.0.1",
-        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
+        "ver": "6.4.0",
+        "wot": "0.9.15.1",
+        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "US": {
-        "ver": "6.3.2.1",
-        "wot": "0.9.15.0.1",
-        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
+        "ver": "6.4.0",
+        "wot": "0.9.15.1",
+        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "ASIA": {
-        "ver": "6.3.2.1",
-        "wot": "0.9.15.0.1",
-        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
+        "ver": "6.4.0",
+        "wot": "0.9.15.1",
+        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "KR": {
-        "ver": "6.3.2.1",
-        "wot": "0.9.15.0.1",
-        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
+        "ver": "6.4.0",
+        "wot": "0.9.15.1",
+        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CN": {
-        "ver": "6.3.2.1",
-        "wot": "0.9.15.0.1",
-        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
+        "ver": "6.4.0",
+        "wot": "0.9.15.1",
+        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CT":  {
-        "ver": "6.3.2.1",
-        "wot": "0.9.15.0.1",
-        "message": "  * WoT 0.9.15.0.1\n  * new features\n  * bugs fixed"
+        "ver": "6.4.0",
+        "wot": "0.9.15.1",
+        "message": "Adaptation for WoT 0.9.15.1, details on the <a href='#XVM_SITE#'>official XVM site</a>"
     }
 }
