@@ -9,7 +9,7 @@ package com.xvm.battle.wg
 
         public static const IS_SQUAD_MAN:uint = 2;
 
-        //public static const IS_SQUAD_PERSONAL:uint = 4; // don't work?
+        public static const IS_SQUAD_PERSONAL:uint = 4; // don't work?
 
         public static const IS_PLAYER_SELECTED:uint = 8;
 
@@ -37,10 +37,10 @@ package com.xvm.battle.wg
             return (param1 & IS_VOIP_DISABLED) > 0;
         }
 
-        /*public static function isSquadPersonal(param1:uint) : Boolean
+        public static function isSquadPersonal(param1:uint) : Boolean
         {
             return (param1 & IS_SQUAD_PERSONAL) > 0;
-        }*/
+        }
 
         public static function isActionDisabled(param1:uint) : Boolean
         {
