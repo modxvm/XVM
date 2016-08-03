@@ -31,7 +31,7 @@ package com.xvm.lobby.squad
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //page.squadView.memberList.itemRenderer = UI_SquadItemRenderer;
-            //page.memberList.addEventListener(Defines.E_ITEM_UPDATED, onMemberListItemUpdated);
+            //page.memberList.addEventListener(Defines.E_ITEM_UPDATED, onMemberListItemUpdated, false, 0, true);
             Xfw.addCommandListener(XVM_SQUAD_UPDATE_TIERS, updateTiers);
             Xfw.cmd(XVM_SQUAD_WINDOW_POPULATED);
         }

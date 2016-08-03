@@ -35,7 +35,7 @@ package com.xvm.lobby.company
             if (!Config.networkServicesSettings.statCompany)
                 return;
 
-            App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
+            App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded, false, 0, true);
 
             if (XfwComponent.try_load_ui_swf("xvm_lobby", _swf_name) != XfwConst.SWF_START_LOADING)
             {
@@ -62,7 +62,7 @@ package com.xvm.lobby.company
 
         private function init():void
         {
-            page.stack.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
+            page.stack.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged, false, 0, true);
         }
 
         private function onViewChanged(e:ViewStackEvent):void

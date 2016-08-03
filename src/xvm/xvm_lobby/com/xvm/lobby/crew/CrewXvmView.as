@@ -77,8 +77,8 @@ package com.xvm.lobby.crew
                 xpToTmenCheckbox_y = page.tmenXpPanel.xpToTmenCheckbox.y;
                 enablePrevCrewCheckBox = page.tmenXpPanel.addChild(new CheckBoxTankers()) as CheckBox;
                 enablePrevCrewCheckBox.autoSize = "left";
-                enablePrevCrewCheckBox.addEventListener(MouseEvent.ROLL_OVER, handleMouseRollOver);
-                enablePrevCrewCheckBox.addEventListener(Event.SELECT, onEnablePrevCrewSwitched);
+                enablePrevCrewCheckBox.addEventListener(MouseEvent.ROLL_OVER, handleMouseRollOver, false, 0, true);
+                enablePrevCrewCheckBox.addEventListener(Event.SELECT, onEnablePrevCrewSwitched, false, 0, true);
                 enablePrevCrewCheckBox.x = page.tmenXpPanel.xpToTmenCheckbox.x;
                 enablePrevCrewCheckBox.label = Locale.get(L10N_ENABLE_PREV_CREW);
                 enablePrevCrewCheckBox.toolTip = Locale.get(L10N_ENABLE_PREV_CREW_TOOLTIP);

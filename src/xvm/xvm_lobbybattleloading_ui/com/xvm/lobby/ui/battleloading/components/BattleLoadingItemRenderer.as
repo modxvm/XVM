@@ -78,10 +78,10 @@ package com.xvm.lobby.ui.battleloading.components
 
         public function configUI():void
         {
-            proxy.vehicleIconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
+            proxy.vehicleIconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete, false, 0, true);
 
             // Load battle stat
-            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true)
             if (Stat.battleStatLoaded)
             {
                 onStatLoaded(null);

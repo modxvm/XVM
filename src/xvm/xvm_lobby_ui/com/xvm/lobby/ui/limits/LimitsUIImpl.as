@@ -47,7 +47,7 @@ package com.xvm.lobby.ui.limits
             if (Config.config.hangar.enableGoldLocker)
             {
                 goldLocker = page.header.addChild(new LockerControl()) as LockerControl;
-                goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched);
+                goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched, false, 0, true);
                 goldLocker.toolTip = Locale.get(L10N_GOLD_UNLOCKED_TOOLTIP);
                 goldLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, false);
             }
@@ -55,12 +55,12 @@ package com.xvm.lobby.ui.limits
             if (Config.config.hangar.enableFreeXpLocker)
             {
                 freeXpLocker = page.header.addChild(new LockerControl()) as LockerControl;
-                freeXpLocker.addEventListener(Event.SELECT, onFreeXpLockerSwitched);
+                freeXpLocker.addEventListener(Event.SELECT, onFreeXpLockerSwitched, false, 0, true);
                 freeXpLocker.toolTip = Locale.get(L10N_FREEXP_UNLOCKED_TOOLTIP);
                 freeXpLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, false);
             }
 
-            page.header.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION, this.onHeaderButtonsReposition);
+            page.header.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION, this.onHeaderButtonsReposition, false, 0, true);
         }
 
         public function dispose():void

@@ -44,8 +44,8 @@ package com.xvm.lobby.ui.contacts
 
             createControls();
 
-            nickTextInput.addEventListener(Event.CHANGE, onDataChange);
-            commentTextArea.addEventListener(Event.CHANGE, onDataChange);
+            nickTextInput.addEventListener(Event.CHANGE, onDataChange, false, 0, true);
+            commentTextArea.addEventListener(Event.CHANGE, onDataChange, false, 0, true);
         }
 
         override protected function onDispose():void

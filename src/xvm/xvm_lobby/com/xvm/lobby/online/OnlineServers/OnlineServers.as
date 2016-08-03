@@ -54,7 +54,7 @@ package com.xvm.lobby.online.OnlineServers
 
         public static function addEventListener(listener:Function):void
         {
-            instance.addEventListener(Event.COMPLETE, listener);
+            instance.addEventListener(Event.COMPLETE, listener, false, 0, true);
         }
 
         public static function removeEventListener(listener:Function):void

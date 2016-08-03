@@ -102,7 +102,7 @@ package com.xvm.battle.elements
             {
                 timer = new Timer(opt[CMD_DELAY], 1);
                 timers.push(timer);
-                timer.addEventListener(TimerEvent.TIMER, function(e:Event):void { apply(obj, opt, name); } );
+                timer.addEventListener(TimerEvent.TIMER, function(e:Event):void { apply(obj, opt, name); }, false, 0, true);
                 delete opt[CMD_DELAY];
                 timer.start();
                 return;
@@ -112,7 +112,7 @@ package com.xvm.battle.elements
             {
                 timer = new Timer(opt[CMD_INTERVAL], 0);
                 timers.push(timer);
-                timer.addEventListener(TimerEvent.TIMER, function(e:Event):void { apply(obj, opt, name); } );
+                timer.addEventListener(TimerEvent.TIMER, function(e:Event):void { apply(obj, opt, name); }, false, 0, true);
                 delete opt[CMD_INTERVAL];
                 timer.start();
                 return;

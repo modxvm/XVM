@@ -58,7 +58,7 @@ package com.xvm.battle.battleClock
             defaultTextFormat = textFormat;
 
             timer = new Timer(1000, 0);
-            timer.addEventListener(TimerEvent.TIMER, onTimer);
+            timer.addEventListener(TimerEvent.TIMER, onTimer, false, 0, true)
             timer.start();
             //Xvm.swfProfilerEnd("BattleClock.setup()");
         }

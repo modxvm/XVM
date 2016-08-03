@@ -40,7 +40,7 @@ package com.xvm.battle.fullStats
                 }
 
                 // Load battle stat
-                Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, updateChanceText)
+                Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, updateChanceText, false, 0, true)
                 if (Stat.battleStatLoaded)
                 {
                     updateChanceText();

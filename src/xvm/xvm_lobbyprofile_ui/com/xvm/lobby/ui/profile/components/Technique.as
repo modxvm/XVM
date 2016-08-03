@@ -107,7 +107,7 @@ package com.xvm.lobby.ui.profile.components
 
                 if (Config.networkServicesSettings.statAwards)
                 {
-                    Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
+                    Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded, false, 0, true);
                     Stat.loadUserData(playerName);
 
                     Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, accountDBID);
@@ -207,7 +207,7 @@ package com.xvm.lobby.ui.profile.components
         //protected function createFilters():void
         //{
             //filter = new FilterControl();
-            //filter.addEventListener(Event.CHANGE, applyFilter);
+            //filter.addEventListener(Event.CHANGE, applyFilter, false, 0, true);
             //page.addChild(filter);
         //}
 

@@ -100,7 +100,7 @@ package com.xvm.battle.fullStats
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
-            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true)
 
             setup();
         }

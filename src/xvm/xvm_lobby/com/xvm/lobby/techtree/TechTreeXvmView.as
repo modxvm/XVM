@@ -36,7 +36,7 @@ package com.xvm.lobby.techtree
         {
             Dossier.requestAccountDossier(page.nationTree, page.nationTree.invalidateData, PROFILE_DROPDOWN_KEYS.ALL);
 
-            page.nationsBar.addEventListener(IndexEvent.INDEX_CHANGE, this.handleIndexChange);
+            page.nationsBar.addEventListener(IndexEvent.INDEX_CHANGE, this.handleIndexChange, false, 0, true);
             handleIndexChange();
         }
 

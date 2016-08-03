@@ -107,7 +107,7 @@ package com.xvm.lobby.ui.clock
                 var loader:Loader = img.getChildAt(1) as Loader;
                 img.width = loader.contentLoaderInfo.content.width / scaleX;
                 img.height = loader.contentLoaderInfo.content.height / scaleY;
-            });
+            }, false, 0, true);
         }
 
         private function updatePosition():void

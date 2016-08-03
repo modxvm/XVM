@@ -43,7 +43,7 @@ package com.xvm.lobby.online.OnlineServers
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), people_online: "..." } );
             updatePositions();
             OnlineServers.addEventListener(update);
-            this.addEventListener(Event.RESIZE, updatePositions);
+            this.addEventListener(Event.RESIZE, updatePositions, false, 0, true);
             Xfw.addCommandListener(COMMAND_AS_CURRENTSERVER, currentServerCallback);
             Xfw.cmd(COMMAND_GETCURRENTSERVER);
         }

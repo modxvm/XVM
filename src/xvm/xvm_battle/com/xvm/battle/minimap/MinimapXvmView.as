@@ -45,8 +45,8 @@ package com.xvm.battle.minimap
             page.addChildAt(page.minimap, idx);
             page.xfw_registerComponent(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
             // restore event handlers setted up in the BaseBattlePage.configUI()
-            component.addEventListener(MinimapEvent.SIZE_CHANGED, page.xfw_onMiniMapChangeHandler);
-            component.addEventListener(MinimapEvent.VISIBILITY_CHANGED, page.xfw_onMiniMapChangeHandler);
+            component.addEventListener(MinimapEvent.SIZE_CHANGED, page.xfw_onMiniMapChangeHandler, false, 0, true);
+            component.addEventListener(MinimapEvent.VISIBILITY_CHANGED, page.xfw_onMiniMapChangeHandler, false, 0, true);
         }
     }
 }

@@ -43,7 +43,7 @@ package com.xvm.lobby.ping.PingServers
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );
             updatePositions();
             PingServers.addEventListener(update);
-            this.addEventListener(Event.RESIZE, updatePositions);
+            this.addEventListener(Event.RESIZE, updatePositions, false, 0, true);
             Xfw.addCommandListener(COMMAND_AS_CURRENTSERVER, currentServerCallback);
             Xfw.cmd(COMMAND_GETCURRENTSERVER);
         }

@@ -165,10 +165,10 @@ package com.xvm.lobby.ui.company.renderers
             b._alpha = 0;
             b.addEventListener("rollOver", function() {
                 ToolTipManager.instance.show(Locale.get(tipName));
-            });
+            }, false, 0, true);
             b.addEventListener("rollOut", function() {
                 ToolTipManager.instance.hide();
-            });
+            }, false, 0, true);
 
             return res;
         }*/

@@ -45,7 +45,7 @@ package com.xvm.lobby.ui.company.renderers
                 effField.htmlText = "";
                 proxy.addChild(effField);
 
-                Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
+                Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded, false, 0, true);
             }
             catch (ex:Error)
             {

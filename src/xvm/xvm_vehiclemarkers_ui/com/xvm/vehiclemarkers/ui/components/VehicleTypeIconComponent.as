@@ -20,7 +20,7 @@ package com.xvm.vehiclemarkers.ui.components
         {
             super(marker);
             marker.marker.vehicleTypeIcon = marker.marker.vehicleTypeIcon.addChild(new MovieClip()) as MovieClip;
-            marker.addEventListener(XvmVehicleMarkerEvent.SET_SPEAKING, update);
+            marker.addEventListener(XvmVehicleMarkerEvent.SET_SPEAKING, update, false, 0, true);
         }
 
         override protected function init(e:XvmVehicleMarkerEvent):void

@@ -22,7 +22,7 @@ package com.xvm.lobby.ui.battleloading.components
             this.background = new Sprite();
             super();
             addEventListener(UILoaderEvent.COMPLETE, onLoadComplete);
-            loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+            loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onIOError, false, 0, true);
         }
 
         public function get loader():Loader

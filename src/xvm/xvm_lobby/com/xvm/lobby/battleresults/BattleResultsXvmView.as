@@ -31,7 +31,7 @@ package com.xvm.lobby.battleresults
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
+            page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange, false, 0, true);
             Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
         }
 

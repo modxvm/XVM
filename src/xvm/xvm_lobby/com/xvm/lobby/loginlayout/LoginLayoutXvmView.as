@@ -27,7 +27,7 @@ package com.xvm.lobby.loginlayout
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            page.loginViewStack.addEventListener(LoginViewStackEvent.VIEW_CHANGED, onViewChanged);
+            page.loginViewStack.addEventListener(LoginViewStackEvent.VIEW_CHANGED, onViewChanged, false, 0, true);
             setupForm(page.loginViewStack.currentView as SimpleForm);
         }
 

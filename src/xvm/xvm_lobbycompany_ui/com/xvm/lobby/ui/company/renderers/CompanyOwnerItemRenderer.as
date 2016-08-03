@@ -43,7 +43,7 @@ package com.xvm.lobby.ui.company.renderers
 
                 proxy.dd.itemRenderer = UI_CompanyDropItemRenderer;
 
-                Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
+                Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded, false, 0, true);
 
                 playerName = null;
             }
@@ -56,7 +56,7 @@ package com.xvm.lobby.ui.company.renderers
 
         public function configUI():void
         {
-            updateCheckBox.addEventListener(Event.SELECT, onUpdateClick);
+            updateCheckBox.addEventListener(Event.SELECT, onUpdateClick, false, 0, true);
         }
 
         public function setData(data:Object):void

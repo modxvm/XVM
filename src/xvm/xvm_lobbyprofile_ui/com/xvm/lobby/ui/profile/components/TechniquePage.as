@@ -14,7 +14,7 @@ package com.xvm.lobby.ui.profile.components
         public function TechniquePage(page:ProfileTechniquePage, playerName:String):void
         {
             super(page, playerName, 0);
-            page.listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
+            page.listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox, false, 0, true);
         }
 
 //        override protected function createFilters():void

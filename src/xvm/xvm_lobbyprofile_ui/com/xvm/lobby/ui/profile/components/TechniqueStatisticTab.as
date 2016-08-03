@@ -46,7 +46,7 @@ package com.xvm.lobby.ui.profile.components
         {
             try
             {
-                tech.addEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded);
+                tech.addEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded, false, 0, true);
                 createControls();
             }
             catch (ex:Error)

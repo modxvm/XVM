@@ -34,43 +34,43 @@ package com.xvm.lobby.ui.profile.components
             filterTextInput.y = 17;
             filterTextInput.width = 250; //65;
             filterTextInput.text = Config.config.userInfo.defaultFilterValue;
-            filterTextInput.addEventListener(Event.CHANGE, onChange);
-            filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+            filterTextInput.addEventListener(Event.CHANGE, onChange, false, 0, true);
+            filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, false, 0, true);
             addChild(filterTextInput);
 
             /*addChild(createLabel("Nation", 65, 0));
             nationFilter = new NationMultiSelectionDropDown();
             nationFilter.x = 65;
             nationFilter.y = 17;
-            nationFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
+            nationFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange, false, 0, true);
             addChild(nationFilter);
 
             addChild(createLabel("Class", 120, 0));
             classFilter = new ClassMultiSelectionDropDown();
             classFilter.x = 120;
             classFilter.y = 17;
-            classFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
+            classFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange, false, 0, true);
             addChild(classFilter);
 
             addChild(createLabel("Level", 175, 0));
             levelFilter = new LevelMultiSelectionDropDown();
             levelFilter.x = 175;
             levelFilter.y = 17;
-            levelFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
+            levelFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange, false, 0, true);
             addChild(levelFilter);
 
             addChild(createLabel("Mastery", 230, 0));
             masteryFilter = new MasteryMultiSelectionDropDown();
             masteryFilter.x = 230;
             masteryFilter.y = 17;
-            masteryFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
+            masteryFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange, false, 0, true);
             addChild(masteryFilter);
 
             addChild(createLabel("Type", 285, 0));
             prefFilter = new PrefMultiSelectionDropDown();
             prefFilter.x = 285;
             prefFilter.y = 17;
-            prefFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
+            prefFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange, false, 0, true);
             addChild(prefFilter);
 
             saveButton = App.utils.classFactory.getComponent("ButtonNormal", Button);

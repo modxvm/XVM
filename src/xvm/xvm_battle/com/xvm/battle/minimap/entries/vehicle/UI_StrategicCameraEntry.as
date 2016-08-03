@@ -45,7 +45,7 @@ package com.xvm.battle.minimap.entries.vehicle
 			_previousScale = _loader.parent.scaleX;
 			_loader.scaleX = 1/_loader.parent.scaleX* _aimScale;
 			_loader.scaleY = 1 / _loader.parent.scaleY * _aimScale;
-			App.stage.addEventListener(Event.ENTER_FRAME, enterFrame);
+			App.stage.addEventListener(Event.ENTER_FRAME, enterFrame, false, 0, true);
 
 		}
 		

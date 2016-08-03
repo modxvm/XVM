@@ -55,7 +55,7 @@ package com.xvm.lobby.ui.battleresults
         {
             super.configUI();
             tooltips = { };
-            tankSlot.addEventListener(ListEvent.INDEX_CHANGE, onDropDownIndexChangeHandler);
+            tankSlot.addEventListener(ListEvent.INDEX_CHANGE, onDropDownIndexChangeHandler, false, 0, true);
         }
 
         override protected function onDispose():void
@@ -159,13 +159,13 @@ package com.xvm.lobby.ui.battleresults
 
             damageAssistedValue = createTextField(FIELD_POS_NON_PREM, 2);
             damageAssistedValue.name = BATTLE_EFFICIENCY_TYPES.ASSIST;
-            damageAssistedValue.addEventListener(MouseEvent.ROLL_OVER, onRollHandler);
-            damageAssistedValue.addEventListener(MouseEvent.ROLL_OUT, onRollHandler);
+            damageAssistedValue.addEventListener(MouseEvent.ROLL_OVER, onRollHandler, false, 0, true);
+            damageAssistedValue.addEventListener(MouseEvent.ROLL_OUT, onRollHandler, false, 0, true);
 
             damageValue = createTextField(FIELD_POS_PREM, 2);
             damageValue.name = BATTLE_EFFICIENCY_TYPES.DAMAGE;
-            damageValue.addEventListener(MouseEvent.ROLL_OVER, onRollHandler);
-            damageValue.addEventListener(MouseEvent.ROLL_OUT, onRollHandler);
+            damageValue.addEventListener(MouseEvent.ROLL_OVER, onRollHandler, false, 0, true);
+            damageValue.addEventListener(MouseEvent.ROLL_OUT, onRollHandler, false, 0, true);
         }
 
         private function initTotals():void
@@ -363,8 +363,8 @@ package com.xvm.lobby.ui.battleresults
         private function createTotalItem(params:Object = null):EfficiencyIconRenderer
         {
             var icon:EfficiencyIconRenderer = App.utils.classFactory.getComponent("EfficiencyIconRendererGUI", EfficiencyIconRenderer, params);
-            icon.addEventListener(MouseEvent.ROLL_OVER, onRollHandler);
-            icon.addEventListener(MouseEvent.ROLL_OUT, onRollHandler);
+            icon.addEventListener(MouseEvent.ROLL_OVER, onRollHandler, false, 0, true);
+            icon.addEventListener(MouseEvent.ROLL_OUT, onRollHandler, false, 0, true);
             return icon;
         }
 

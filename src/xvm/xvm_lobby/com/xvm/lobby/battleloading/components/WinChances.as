@@ -27,7 +27,7 @@ package com.xvm.lobby.battleloading.components
                 return;
 
             // Load battle stat
-            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true)
             if (Stat.battleStatLoaded)
             {
                 onStatLoaded(null);
