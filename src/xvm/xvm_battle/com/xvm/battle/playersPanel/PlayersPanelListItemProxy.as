@@ -16,6 +16,7 @@ package com.xvm.battle.playersPanel
     import flash.text.*;
     import flash.geom.*;
     import flash.display.*;
+    import flash.utils.Dictionary;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
@@ -46,8 +47,8 @@ package com.xvm.battle.playersPanel
 
         private static const MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED:String = "MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED";
 
-        private static var s_maxPlayerNameTextWidthLeft:Number = 0;
-        private static var s_maxPlayerNameTextWidthRight:Number = 0;
+        private static var s_maxPlayerNameTextWidthsLeft:Dictionary = new Dictionary();
+        private static var s_maxPlayerNameTextWidthsRight:Dictionary = new Dictionary();
 
         public var isLeftPanel:Boolean;
         public var xvm_enabled:Boolean;
@@ -555,27 +556,27 @@ package com.xvm.battle.playersPanel
                     var maxPlayerNameTextWidth:Number;
                     if (isLeftPanel)
                     {
-                        if (s_maxPlayerNameTextWidthLeft < ui.playerNameFullTF.textWidth)
+                        if (int(s_maxPlayerNameTextWidthsLeft[ui.xfw_state]) < ui.playerNameFullTF.textWidth)
                         {
-                            s_maxPlayerNameTextWidthLeft = ui.playerNameFullTF.textWidth;
+                            s_maxPlayerNameTextWidthsLeft[ui.xfw_state] = ui.playerNameFullTF.textWidth;
                             App.utils.scheduler.scheduleOnNextFrame(function():void
                             {
-                            Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, true));
+                                Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, true));
                             });
                         }
-                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthLeft + 4;
+                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthsLeft[ui.xfw_state] + 4;
                     }
                     else
                     {
-                        if (s_maxPlayerNameTextWidthRight < ui.playerNameFullTF.textWidth)
+                        if (int(s_maxPlayerNameTextWidthsRight[ui.xfw_state]) < ui.playerNameFullTF.textWidth)
                         {
-                            s_maxPlayerNameTextWidthRight = ui.playerNameFullTF.textWidth;
+                            s_maxPlayerNameTextWidthsRight[ui.xfw_state] = ui.playerNameFullTF.textWidth;
                             App.utils.scheduler.scheduleOnNextFrame(function():void
                             {
-                            Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, false));
+                                Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, false));
                             });
                         }
-                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthRight + 4;
+                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthsRight[ui.xfw_state] + 4;
                     }
                     w = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
                     if (ui.playerNameFullTF.width > w)

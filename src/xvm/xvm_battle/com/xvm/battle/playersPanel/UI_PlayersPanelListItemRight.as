@@ -61,7 +61,7 @@ package com.xvm.battle.playersPanel
             else
             {
                 // set static value to send only one event
-                super.setPlayerNameFullWidth(200);
+                super.setPlayerNameFullWidth(0);
             }
         }
 
