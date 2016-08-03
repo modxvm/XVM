@@ -209,7 +209,7 @@ package com.xvm.battle
 
         public function updateInvitationsStatuses(data:Object) : void
         {
-            Logger.addObject(data, 1, "[BattleState] updateInvitationsStatuses");
+            //Logger.addObject(data, 1, "[BattleState] updateInvitationsStatuses");
             try
             {
             }

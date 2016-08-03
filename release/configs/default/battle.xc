@@ -34,11 +34,7 @@
     "camera": ${"camera.xc":"camera"},
     // Switching between players on the minimap after death
     // Переключение между игроками по миникарте после смерти
-    "minimapDeadSwitch": true,
-    // Options for totalHP BattleLabels
-    "totalHP": {
-      "fontName": "mono"
-    }
+    "minimapDeadSwitch": true
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.

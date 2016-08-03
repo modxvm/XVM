@@ -556,7 +556,7 @@ package com.xvm.battle.playersPanel
                     var maxPlayerNameTextWidth:Number;
                     if (isLeftPanel)
                     {
-                        if (int(s_maxPlayerNameTextWidthsLeft[ui.xfw_state]) < ui.playerNameFullTF.textWidth)
+                        if (Number(s_maxPlayerNameTextWidthsLeft[ui.xfw_state]) < ui.playerNameFullTF.textWidth)
                         {
                             s_maxPlayerNameTextWidthsLeft[ui.xfw_state] = ui.playerNameFullTF.textWidth;
                             App.utils.scheduler.scheduleOnNextFrame(function():void
@@ -568,7 +568,7 @@ package com.xvm.battle.playersPanel
                     }
                     else
                     {
-                        if (int(s_maxPlayerNameTextWidthsRight[ui.xfw_state]) < ui.playerNameFullTF.textWidth)
+                        if (Number(s_maxPlayerNameTextWidthsRight[ui.xfw_state]) < ui.playerNameFullTF.textWidth)
                         {
                             s_maxPlayerNameTextWidthsRight[ui.xfw_state] = ui.playerNameFullTF.textWidth;
                             App.utils.scheduler.scheduleOnNextFrame(function():void
