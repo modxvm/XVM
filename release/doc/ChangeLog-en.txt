@@ -70,6 +70,12 @@ XVM-6.4.0-dev:
   * added {{comment}} macro to show comment for player from contacts
   * added option "battle"/"sixthSenseDuration" - duration of the sixth sense indicator
   * removed option "hitLog"/"direction" - not required
+  
+  [KNOWN ISSUES]
+  * Minimap is not ready. Some functionality may work incorrectly or may not work at all. (will be fixed in future releases)
+  * Option "carousel"/"rows" does not implemented. (postponed because it may be implemented by WG)
+  * Some functionality may work incorrectly with "autoReloadConfig": true
+  * Service record: List of tanks may scroll to the middle in some configurations
 
 XVM-6.3.2.1:
   * fix for 6th sense sound
