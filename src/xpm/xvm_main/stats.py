@@ -300,7 +300,7 @@ class _Stat(object):
             # pprint(players)
 
             with self.lock:
-                self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players}
+                self.resp = {'arenaUniqueId': str(value['arenaUniqueID']), 'players': players}
 
         except Exception:
             err(traceback.format_exc())

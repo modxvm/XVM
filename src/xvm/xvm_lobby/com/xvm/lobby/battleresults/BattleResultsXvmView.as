@@ -19,6 +19,8 @@ package com.xvm.lobby.battleresults
     {
         private static const UI_COMMON_STATS:String = "com.xvm.lobby.ui.battleresults::UI_CommonStats";
 
+        private var _winChances:WinChances;
+
         public function BattleResultsXvmView(view:IView)
         {
             super(view);
@@ -33,6 +35,12 @@ package com.xvm.lobby.battleresults
         {
             page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange, false, 0, true);
             Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
+        }
+
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            _winChances = null;
+            super.onBeforeDispose(e);
         }
 
         private function onTabIndexChange(e:IndexEvent):void
@@ -58,7 +66,7 @@ package com.xvm.lobby.battleresults
             }
 
             // display win chance
-            new WinChances(page); // Winning chance info above players list.
+            _winChances = new WinChances(page); // Winning chance info above players list.
         }
     }
 }
