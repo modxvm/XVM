@@ -4,9 +4,6 @@
  */
 {
   "hitLog": {
-    // false - Disable.
-    // false - отключить.
-    "enabled": true,
     // Group hits by players name.
     // Группировать попадания по имени игрока.
     "groupHitsByPlayer": true,

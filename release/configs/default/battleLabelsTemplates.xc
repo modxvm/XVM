@@ -187,7 +187,7 @@
       "height": 40,
       "screenHAlign": "center",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
-      "textFormat": { "font": "mono", "color": "0xF4EFE8", "size": 18, "align": "center" },
+      "textFormat": { "font": "mono", "size": 18, "align": "center" },
       "format": "{{py:xvm.total_hp.text()}}"
     },
     "winChance": {
