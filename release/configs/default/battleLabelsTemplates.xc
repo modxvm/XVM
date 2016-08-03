@@ -195,7 +195,7 @@
       "updateEvent": "ON_VEHICLE_DESTROYED",
       "x": 230,
       "y": 2,
-      "width": 50,
+      "width": 200,
       "height": 20,
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
       "textFormat": { "color": "0xF4EFE8", "size": 15 },

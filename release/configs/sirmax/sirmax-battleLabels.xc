@@ -24,8 +24,8 @@
     {
       "enabled": true,
       //"borderColor": "0xFF0000",
-      "width": 100,
-      "height": 30,
+      //"width": 200,
+      //"height": 20,
       "format": "{{xvm-stat?{{l10n:Chance to win}}: {{chancesStatic}}{{chancesStatic? / |}}{{chancesLive}}|--}}",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.winChance" }
     },
