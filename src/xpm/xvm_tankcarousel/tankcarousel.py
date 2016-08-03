@@ -20,11 +20,12 @@ from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
+from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic import carousel_data_provider
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, _SUPPLY_ITEMS
 
 from xfw import *
 
-from xvm_main.python.consts import XVM_COMMAND
+from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 from xvm_main.python.vehinfo_tiers import getTiers
@@ -51,12 +52,15 @@ class VEHICLE(object):
 
 def start():
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, update_config)
+    update_config()
 
 BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, update_config)
 
 HANGAR_ALIASES.TANK_CAROUSEL_UI = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
 HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI = 'com.xvm.lobby.ui.tankcarousel::UI_FalloutTankCarousel'
@@ -81,74 +85,60 @@ def onXfwCommand(cmd, *args):
 #####################################################################
 # handlers
 
+carousel_config = {}
+
 # added sorting orders for tanks in carousel
-# TODO:0.9.15.1
-#@overrideMethod(TankCarouselMeta, 'as_showVehiclesS')
-def TankCarouselMeta_as_showVehiclesS(base, self, compactDescrList):
+@overrideMethod(carousel_data_provider, '_vehicleComparisonKey')
+def carousel_data_provider_vehicleComparisonKey(base, vehicle):
     try:
-        myconfig = config.get('hangar/carousel')
-        filteredVehs = g_itemsCache.items.getVehicles(REQ_CRITERIA.IN_CD_LIST(compactDescrList))
-        vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
+        global carousel_config
+        if not 'sorting_criteria' in carousel_config:
+            return base(vehicle)
 
-        def sorting(v1, v2):
-            if v1.isEvent and not v2.isEvent: return -1
-            if not v1.isEvent and v2.isEvent: return 1
-            if v1.isFavorite and not v2.isFavorite: return -1
-            if not v1.isFavorite and v2.isFavorite: return 1
-            if 'sorting_criteria' in myconfig:
-                for sort_criterion in myconfig['sorting_criteria']:
-                    if sort_criterion.find('-') == 0:
-                        sort_criterion = sort_criterion[1:] #remove minus sign
-                        factor = -1
-                    else:
-                        factor = 1
-                    if sort_criterion == 'winRate':
-                        v1_stats = vehicles_stats.get(v1.intCD)
-                        v2_stats = vehicles_stats.get(v2.intCD)
-                        if v1_stats and not v2_stats: return factor
-                        if not v1_stats and v2_stats: return -factor
-                        if v1_stats and v2_stats:
-                            v1_winrate = float(v1_stats.wins) / v1_stats.battlesCount
-                            v2_winrate = float(v2_stats.wins) / v2_stats.battlesCount
-                            if v1_winrate > v2_winrate: return factor
-                            if v1_winrate < v2_winrate: return -factor
-                    if sort_criterion == 'nation':
-                        if 'nations_order' in myconfig and len(myconfig['nations_order']):
-                            custom_nations_order = myconfig['nations_order']
-                            if v1.nationName not in custom_nations_order and v2.nationName in custom_nations_order: return 1
-                            if v1.nationName in custom_nations_order and v2.nationName not in custom_nations_order: return -1
-                            if v1.nationName in custom_nations_order and v2.nationName in custom_nations_order:
-                                if custom_nations_order.index(v1.nationName) > custom_nations_order.index(v2.nationName): return 1
-                                if custom_nations_order.index(v1.nationName) < custom_nations_order.index(v2.nationName): return -1
-                        if GUI_NATIONS_ORDER_INDEX[v1.nationName] > GUI_NATIONS_ORDER_INDEX[v2.nationName]: return 1
-                        if GUI_NATIONS_ORDER_INDEX[v1.nationName] < GUI_NATIONS_ORDER_INDEX[v2.nationName]: return -1
-                    if sort_criterion == 'premium':
-                        if not v1.isPremium and v2.isPremium: return factor
-                        if v1.isPremium and not v2.isPremium: return -factor
-                    if sort_criterion == 'level':
-                        if v1.level > v2.level: return factor
-                        if v1.level < v2.level: return -factor
-                    if sort_criterion == 'maxBattleTier':
-                        if getTiers(v1.level, v1.type, v1.name)[1] > getTiers(v2.level, v2.type, v2.name)[1]: return factor
-                        if getTiers(v1.level, v1.type, v1.name)[1] < getTiers(v2.level, v2.type, v2.name)[1]: return -factor
-                    if sort_criterion == 'type':
-                        if 'types_order' in myconfig and len(myconfig['types_order']):
-                            custom_types_order = myconfig['types_order']
-                            if v1.type not in custom_types_order and v2.type in custom_types_order: return 1
-                            if v1.type in custom_types_order and v2.type not in custom_types_order: return -1
-                            if v1.type in custom_types_order and v2.type in custom_types_order:
-                                if custom_types_order.index(v1.type) > custom_types_order.index(v2.type): return 1
-                                if custom_types_order.index(v1.type) < custom_types_order.index(v2.type): return -1
-                        if VEHICLE_TYPES_ORDER_INDICES[v1.type] > VEHICLE_TYPES_ORDER_INDICES[v2.type]: return 1
-                        if VEHICLE_TYPES_ORDER_INDICES[v1.type] < VEHICLE_TYPES_ORDER_INDICES[v2.type]: return -1
-            return v1.__cmp__(v2)
+        comparisonKey = [
+            not vehicle.isEvent,
+            not vehicle.isFavorite]
 
-        compactDescrList = map(attrgetter('intCD'), sorted(filteredVehs.itervalues(), sorting))
+        for sort_criterion in carousel_config['sorting_criteria']:
+            if sort_criterion.find('-') == 0:
+                sort_criterion = sort_criterion[1:] #remove minus sign
+                factor = -1
+            else:
+                factor = 1
+
+            if sort_criterion == 'winRate':
+                stats = vehicles_stats.get(vehicle.intCD)
+                comparisonKey.append(factor if stats else 0)
+                if stats:
+                    winrate = float(stats.wins) / stats.battlesCount
+                    comparisonKey.append(winrate * factor)
+            elif sort_criterion == 'nation':
+                if 'nations_order' in carousel_config and len(carousel_config['nations_order']):
+                    custom_nations_order = carousel_config['nations_order']
+                    comparisonKey.append(vehicle.nationName not in custom_nations_order)
+                    if vehicle.nationName in custom_nations_order:
+                        comparisonKey.append(custom_nations_order.index(vehicle.nationName))
+                comparisonKey.append(GUI_NATIONS_ORDER_INDEX[vehicle.nationName])
+            elif sort_criterion == 'type':
+                if 'types_order' in carousel_config and len(carousel_config['types_order']):
+                    custom_types_order = carousel_config['types_order']
+                    comparisonKey.append(vehicle.type not in custom_types_order)
+                    if vehicle.type in custom_types_order:
+                        comparisonKey.append(custom_types_order.index(vehicle.type))
+                comparisonKey.append(VEHICLE_TYPES_ORDER_INDICES[vehicle.type])
+            elif sort_criterion == 'premium':
+                comparisonKey.append(int(not vehicle.isPremium) * factor)
+            elif sort_criterion == 'level':
+                comparisonKey.append(vehicle.level * factor)
+            elif sort_criterion == 'maxBattleTier':
+                comparisonKey.append(getTiers(vehicle.level, vehicle.type, vehicle.name)[1] * factor)
+
+        comparisonKey.extend([vehicle.buyPrice.gold, vehicle.buyPrice.credits, vehicle.userName])
+
+        return tuple(comparisonKey)
 
     except Exception as ex:
         err(traceback.format_exc())
-
-    base(self, compactDescrList)
 
 @overrideMethod(hangar_cm_handlers.SimpleVehicleCMHandler, '__init__')
 def _SimpleVehicleCMHandler__init__(base, self, cmProxy, ctx=None, handlers = None):
@@ -187,6 +177,13 @@ def _CarouselDataProvider__getSupplyIndices(base, self):
 
 #####################################################################
 # internal
+
+def update_config(*args, **kwargs):
+    try:
+        global carousel_config
+        carousel_config = config.get('hangar/carousel')
+    except Exception, ex:
+        err(traceback.format_exc())
 
 def confirmReserveVehicle(self):
     try:

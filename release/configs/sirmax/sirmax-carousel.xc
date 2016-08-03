@@ -18,6 +18,9 @@
     //"hideBuySlot": true,
     "showTotalSlots": true,
     //"showUsedSlots": true,
+    //"nations_order": ["ussr", "germany", "usa", "france", "uk", "china", "japan", "czech"],
+    //"types_order":   ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
+    //"sorting_criteria": ["nation", "level", "type"],
     "sorting_criteria": ["level", "nation", "type"],
     "filters": {
       //"params":   { "enabled": false },
