@@ -22,6 +22,7 @@ package com.xvm
     Config;
     Dossier;
     ExtraFields;
+    ExtraFieldsGroup;
     Locale;
     Stat;
     VehicleInfo;

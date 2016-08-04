@@ -41,7 +41,7 @@
  * fields available for MovieClip format only:
  *   "highlight" - highlight icon depending on the player state, default false
  *
- * fields available for players panel only:
+ * fields available for players panel and statistic form only:
  *   "layer": field z-order
  *     values:
  *     "substrate": put field behind all standard fields, x value depends on the players panel width
@@ -49,6 +49,7 @@
  *     "normal": put field between vehicle icon and standard text fields (default)
  *     "top": put field above standard fields
  *
+ * text format and shadow:
  *   http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
  *   "textFormat": {
  *     "font"

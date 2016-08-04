@@ -1,3 +1,7 @@
+XVM-6.4.0.1-dev:
+  * some bugs fixed
+  * statisticForm: extraFields added
+
 XVM-6.4.0:
   * adaptation to WoT 0.9.15.1
   * complete refactoring of battle mods (AS2->AS3 migration)

@@ -8,7 +8,7 @@
     // Шаблон иконки клана.
     "clanIcon": {
       "enabled": true,
-      "x": 65, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90,
+      "x": 65, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90, "bindToIcon": true,
       "src": "{{clanicon}}"
     }
   },
@@ -100,16 +100,15 @@
     // Display format for the right panel (macros allowed, see macros.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
     "formatRightFrags": "{{frags}}",
-    // TODO
     // Extra fields. Fields are placed one above the other.
     // Дополнительные поля. Поля располагаются друг над другом.
-    // Set of formats for left panel (extended format supported, see above)
-    // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
+    // Set of formats for left panel (extended format supported, see playersPanel.xc)
+    // Набор форматов для левой панели (поддерживается расширенный формат, см. playersPanel.xc)
     "extraFieldsLeft": [
       ${"templates.clanIcon"}
     ],
-    // Set of formats for right panel (extended format supported, see above)
-    // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
+    // Set of formats for right panel (extended format supported, see playersPanel.xc)
+    // Набор форматов для правой панели (поддерживается расширенный формат, см. playersPanel.xc)
     "extraFieldsRight": [
       ${"templates.clanIcon"}
     ]

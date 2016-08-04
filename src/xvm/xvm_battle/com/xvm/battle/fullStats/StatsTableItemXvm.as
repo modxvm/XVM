@@ -9,8 +9,10 @@ package com.xvm.battle.fullStats
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
+    import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
+    import flash.display.*;
     import flash.geom.*;
     import flash.text.*;
     import net.wg.data.constants.*;
@@ -22,10 +24,11 @@ package com.xvm.battle.fullStats
     import net.wg.infrastructure.interfaces.*;
     import scaleform.gfx.*;
 
-    public class StatsTableItemXvm extends StatsTableItem
+    public class StatsTableItemXvm extends StatsTableItem implements IExtraFieldGroupHolder
     {
         private static const FIELD_HEIGHT:int = 26;
         private static const ICONS_AREA_WIDTH:int = 80;
+        private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
 
         private static const INVALIDATE_PLAYER_STATE:uint = 1 << 15;
 
@@ -52,6 +55,13 @@ package com.xvm.battle.fullStats
 
         private var _vehicleID:Number = NaN;
         private var _vehicleIconName:String = null;
+
+        public var _substrateHolder:MovieClip;
+        public var _bottomHolder:MovieClip;
+        public var _normalHolder:MovieClip;
+        public var _topHolder:MovieClip;
+
+        private var extraFields:ExtraFieldsGroup = null;
 
         private var currentPlayerState:VOPlayerState;
 
@@ -100,7 +110,12 @@ package com.xvm.battle.fullStats
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
-            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true)
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
+
+            _substrateHolder = playerNameTF.parent.addChildAt(new MovieClip(), 0) as MovieClip;
+            _bottomHolder = _substrateHolder;
+            _normalHolder = playerNameTF.parent.addChildAt(new MovieClip(), playerNameTF.parent.getChildIndex(icoIGR) + 1) as MovieClip;
+            _topHolder = playerNameTF.parent.addChild(new MovieClip()) as MovieClip;
 
             setup();
         }
@@ -112,6 +127,14 @@ package com.xvm.battle.fullStats
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
+
+            disposeExtraFields();
+
+            _substrateHolder = null;
+            _bottomHolder = null;
+            _normalHolder = null;
+            _topHolder = null;
+
             super.onDispose();
         }
 
@@ -144,6 +167,7 @@ package com.xvm.battle.fullStats
             var updateVehicleNameField:Boolean = false;
             var updateFragsField:Boolean = false;
             var updateVehicleIcon:Boolean = false;
+            var updateExtraFields:Boolean = false;
             var updateIgr:Boolean = false;
             var needAlign:Boolean = false;
 
@@ -183,6 +207,7 @@ package com.xvm.battle.fullStats
                 updatePlayerNameField = true;
                 updateVehicleNameField = true;
                 updateFragsField = true;
+                updateExtraFields = true;
             }
 
             if (updatePlayerNameField || updateVehicleNameField || updateFragsField)
@@ -232,6 +257,37 @@ package com.xvm.battle.fullStats
                     }
                 }
             }
+            if (updateExtraFields)
+            {
+                this.updateExtraFields();
+            }
+        }
+
+        // IExtraFieldGroupHolder
+
+        public function get isLeftPanel():Boolean
+        {
+            return _isLeftPanel;
+        }
+
+        public function get substrateHolder():MovieClip
+        {
+            return _substrateHolder;
+        }
+
+        public function get bottomHolder():MovieClip
+        {
+            return _bottomHolder;
+        }
+
+        public function get normalHolder():MovieClip
+        {
+            return _normalHolder;
+        }
+
+        public function get topHolder():MovieClip
+        {
+            return _topHolder;
         }
 
         public function getSchemeNameForVehicle():String
@@ -245,11 +301,23 @@ package com.xvm.battle.fullStats
                 currentPlayerState.isOffline);
         }
 
+        public function getSchemeNameForPlayer():String
+        {
+            return PlayerStatusSchemeName.getSchemeNameForPlayer(
+                currentPlayerState.isCurrentPlayer,
+                currentPlayerState.isSquadPersonal,
+                currentPlayerState.isTeamKiller,
+                currentPlayerState.isDead,
+                currentPlayerState.isOffline);
+        }
+
         // XVM events handlers
 
         private function setup():void
         {
             cfg = Config.config.statisticForm;
+
+            disposeExtraFields();
 
             if (cfg.removeVehicleLevel)
             {
@@ -290,6 +358,8 @@ package com.xvm.battle.fullStats
                     _vehicleIcon.scaleX = -1;
                 }
             }
+
+            createExtraFields();
 
             alignTextFields();
         }
@@ -347,6 +417,42 @@ package com.xvm.battle.fullStats
                     _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
                 }
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
+            }
+        }
+
+        // extra fields
+
+        private function createExtraFields():void
+        {
+            var formats:Array = _isLeftPanel ? cfg.extraFieldsLeft : cfg.extraFieldsRight;
+            if (formats && formats.length)
+            {
+                extraFields = new ExtraFieldsGroup(this, formats);
+            }
+        }
+
+        private function disposeExtraFields():void
+        {
+            if (extraFields)
+            {
+                extraFields.dispose();
+                extraFields = null;
+            }
+        }
+
+        private function updateExtraFields():void
+        {
+            var offsetX:Number = 0;
+            var bindToIconOffset:Number = _vehicleIcon.x;
+            if (!_isLeftPanel)
+            {
+                offsetX = _playerNameTF.x + _playerNameTF.width + SQUAD_ITEMS_AREA_WIDTH;
+                bindToIconOffset += Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH - offsetX;
+            }
+            if (extraFields)
+            {
+                extraFields.visible = true;
+                extraFields.update(currentPlayerState, bindToIconOffset, offsetX, _vehicleIcon.y);
             }
         }
     }

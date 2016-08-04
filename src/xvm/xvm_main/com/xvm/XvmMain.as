@@ -11,6 +11,7 @@ package com.xvm
     // extraFields
     IExtraField;
     ExtraFields;
+    ExtraFieldsGroup;
     ImageExtraField;
     TextExtraField;
 

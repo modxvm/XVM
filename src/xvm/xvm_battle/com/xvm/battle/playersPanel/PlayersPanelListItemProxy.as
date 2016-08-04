@@ -16,7 +16,7 @@ package com.xvm.battle.playersPanel
     import flash.text.*;
     import flash.geom.*;
     import flash.display.*;
-    import flash.utils.Dictionary;
+    import flash.utils.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
@@ -24,7 +24,7 @@ package com.xvm.battle.playersPanel
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.core.*;
 
-    public class PlayersPanelListItemProxy extends UIComponent
+    public class PlayersPanelListItemProxy extends UIComponent implements IExtraFieldGroupHolder
     {
         // from PlayersPanelListItem.as
         private static const WIDTH:int = 339;
@@ -50,12 +50,8 @@ package com.xvm.battle.playersPanel
         private static var s_maxPlayerNameTextWidthsLeft:Dictionary = new Dictionary();
         private static var s_maxPlayerNameTextWidthsRight:Dictionary = new Dictionary();
 
-        public var isLeftPanel:Boolean;
+        public var _isLeftPanel:Boolean;
         public var xvm_enabled:Boolean;
-
-        public var substrateHolder:MovieClip;
-        public var bottomHolder:MovieClip;
-        public var topHolder:MovieClip;
 
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
@@ -81,6 +77,11 @@ package com.xvm.battle.playersPanel
         private var opt_vehicleIconAlpha:Number;
         private var mopt_removeSquadIcon:Boolean;
 
+        public var _substrateHolder:MovieClip;
+        public var _bottomHolder:MovieClip;
+        public var _normalHolder:MovieClip;
+        public var _topHolder:MovieClip;
+
         private var extraFieldsHidden:ExtraFields = null;
         private var extraFieldsShort:ExtraFieldsGroup = null;
         private var extraFieldsMedium:ExtraFieldsGroup = null;
@@ -95,11 +96,7 @@ package com.xvm.battle.playersPanel
             this.ui = ui;
             mouseEnabled = false;
             mouseChildren = false;
-            this.isLeftPanel = isLeftPanel;
-
-            substrateHolder = ui.addChildAt(new MovieClip(), 0) as MovieClip;
-            bottomHolder = ui.addChildAt(new MovieClip(), 1) as MovieClip;
-            topHolder = ui.addChild(new MovieClip()) as MovieClip;
+            _isLeftPanel = isLeftPanel;
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xvm.addEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
@@ -107,6 +104,12 @@ package com.xvm.battle.playersPanel
             Xvm.addEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
+
+            _substrateHolder = ui.addChildAt(new MovieClip(), 0) as MovieClip;
+            _bottomHolder = ui.addChildAt(new MovieClip(), 1) as MovieClip;
+            _normalHolder = this;
+            _topHolder = ui.addChild(new MovieClip()) as MovieClip;
+
             setup();
 
             DEFAULT_BG_ALPHA = ui.bg.alpha;
@@ -127,13 +130,16 @@ package com.xvm.battle.playersPanel
             Xvm.removeEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
+
             disposeExtraFields();
 
-            substrateHolder = null;
-            bottomHolder = null;
-            topHolder = null;
+            _substrateHolder = null;
+            _bottomHolder = null;
+            _normalHolder = null;
+            _topHolder = null;
 
             _userProps = null;
+
             super.onDispose();
         }
 
@@ -206,6 +212,54 @@ package com.xvm.battle.playersPanel
             {
                 Logger.err(ex);
             }
+        }
+
+        // IExtraFieldGroupHolder
+
+        public function get isLeftPanel():Boolean
+        {
+            return _isLeftPanel;
+        }
+
+        public function get substrateHolder():MovieClip
+        {
+            return _substrateHolder;
+        }
+
+        public function get bottomHolder():MovieClip
+        {
+            return _bottomHolder;
+        }
+
+        public function get normalHolder():MovieClip
+        {
+            return _normalHolder;
+        }
+
+        public function get topHolder():MovieClip
+        {
+            return _topHolder;
+        }
+
+        public function getSchemeNameForVehicle():String
+        {
+            var highlightVehicleIcon:Boolean = bcfg.highlightVehicleIcon;
+            return PlayerStatusSchemeName.getSchemeNameForVehicle(
+                currentPlayerState.isCurrentPlayer && highlightVehicleIcon,
+                currentPlayerState.isSquadPersonal && highlightVehicleIcon,
+                currentPlayerState.isTeamKiller && highlightVehicleIcon,
+                currentPlayerState.isDead,
+                currentPlayerState.isOffline);
+        }
+
+        public function getSchemeNameForPlayer():String
+        {
+            return PlayerStatusSchemeName.getSchemeNameForPlayer(
+                currentPlayerState.isCurrentPlayer,
+                currentPlayerState.isSquadPersonal,
+                currentPlayerState.isTeamKiller,
+                currentPlayerState.isDead,
+                currentPlayerState.isOffline);
         }
 
         // PRIVATE
@@ -713,26 +767,6 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        public function getSchemeNameForVehicle():String
-        {
-            return PlayerStatusSchemeName.getSchemeNameForVehicle(
-                currentPlayerState.isCurrentPlayer && bcfg.highlightVehicleIcon,
-                currentPlayerState.isSquadPersonal && bcfg.highlightVehicleIcon,
-                currentPlayerState.isTeamKiller && bcfg.highlightVehicleIcon,
-                currentPlayerState.isDead,
-                currentPlayerState.isOffline);
-        }
-
-        public function getSchemeNameForPlayer():String
-        {
-            return PlayerStatusSchemeName.getSchemeNameForPlayer(
-                currentPlayerState.isCurrentPlayer,
-                currentPlayerState.isSquadPersonal,
-                currentPlayerState.isTeamKiller,
-                currentPlayerState.isDead,
-                currentPlayerState.isOffline);
-        }
-
         private function updateExtraFields():void
         {
             var bindToIconOffset:Number = ui.vehicleIcon.x - x + (isLeftPanel || bcfg.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
@@ -774,141 +808,6 @@ package com.xvm.battle.playersPanel
                     break;
             }
         }
-    }
-}
-
-import com.xvm.battle.playersPanel.PlayersPanelListItemProxy;
-import com.xvm.extraFields.ExtraFields;
-import com.xvm.types.cfg.CTextFormat;
-import com.xvm.vo.IVOMacrosOptions;
-import flash.text.TextFormatAlign;
-import net.wg.infrastructure.interfaces.entity.IDisposable;
-
-class ExtraFieldsGroup implements IDisposable
-{
-    private const SUBSTRATE:String = "substrate";
-    private const BOTTOM:String = "bottom";
-    private const NORMAL:String = "normal";
-    private const TOP:String = "top";
-
-    public var substrate:ExtraFields = null;
-    public var bottom:ExtraFields = null;
-    public var normal:ExtraFields = null;
-    public var top:ExtraFields = null;
-
-    public function ExtraFieldsGroup(item:PlayersPanelListItemProxy, formats:Array)
-    {
-        var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(item.isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
-        var filteredFormats:Array;
-        if (formats && formats.length)
-        {
-            filteredFormats = filterFormats(formats, SUBSTRATE);
-            if (filteredFormats && filteredFormats.length)
-            {
-                substrate = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                item.substrateHolder.addChild(substrate);
-            }
-            filteredFormats = filterFormats(formats, BOTTOM);
-            if (filteredFormats && filteredFormats.length)
-            {
-                bottom = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                item.bottomHolder.addChild(bottom);
-            }
-            filteredFormats = filterFormats(formats, NORMAL);
-            if (filteredFormats && filteredFormats.length)
-            {
-                normal = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                item.addChild(normal);
-            }
-            filteredFormats = filterFormats(formats, TOP);
-            if (filteredFormats && filteredFormats.length)
-            {
-                top = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
-                item.topHolder.addChild(top);
-            }
-        }
-    }
-
-    public function dispose():void
-    {
-        if (substrate)
-        {
-            substrate.dispose();
-            substrate = null;
-        }
-        if (bottom)
-        {
-            bottom.dispose();
-            bottom = null;
-        }
-        if (normal)
-        {
-            normal.dispose();
-            normal = null;
-        }
-        if (top)
-        {
-            top.dispose();
-            top = null;
-        }
-    }
-
-    public function set visible(value:Boolean):void
-    {
-        if (substrate)
-        {
-            substrate.visible = value;
-        }
-        if (bottom)
-        {
-            bottom.visible = value;
-        }
-        if (normal)
-        {
-            normal.visible = value;
-        }
-        if (top)
-        {
-            top.visible = value;
-        }
-    }
-
-    public function update(options:IVOMacrosOptions, bindToIconOffset:Number):void
-    {
-        if (substrate)
-        {
-            substrate.update(options, bindToIconOffset);
-        }
-        if (bottom)
-        {
-            bottom.update(options, bindToIconOffset);
-        }
-        if (normal)
-        {
-            normal.update(options, bindToIconOffset);
-        }
-        if (top)
-        {
-            top.update(options, bindToIconOffset);
-        }
-    }
-
-    // PRIVATE
-
-
-    private function filterFormats(formats:Array, layer:String):Array
-    {
-        var res:Array = [];
-        var len:int = formats.length;
-        for (var i:int = 0; i < len; ++i)
-        {
-            var format:* = formats[i];
-            if (layer == (format.layer ? format.layer.toLowerCase() : "normal"))
-            {
-                res.push(format);
-            }
-        }
-        return res;
     }
 }
 
