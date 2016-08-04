@@ -143,6 +143,9 @@ package com.xvm.lobby.ui.tankcarousel
 
                 setupStandardField(slot.tankIcon.tankTypeMc, cfg.fields.tankType);
 
+                additionalText.x -= 10;
+                additionalText.width += 20;
+
                 slot.tankIcon.levelMc.visible = false;
                 App.utils.scheduler.scheduleOnNextFrame(function():void {
                     if (slot.tankIcon == null)
