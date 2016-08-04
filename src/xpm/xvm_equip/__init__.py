@@ -30,10 +30,10 @@ from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
 
 from xfw import *
 
-import xvm_main.python.userprefs as userprefs
-import xvm_main.python.config as config
-from xvm_main.python.logger import err, debug
 from xvm_main.python.consts import *
+from xvm_main.python.logger import *
+import xvm_main.python.config as config
+import xvm_main.python.userprefs as userprefs
 
 import wg_compat
 
@@ -89,25 +89,24 @@ def PlayerAccount_onBecomePlayer(*args, **kwargs):
     xvm_equip_init(*args, **kwargs)
 
 
-# device is changed on vehicle, remember the setting
-# TODO:0.9.15.1
-#@registerEvent(AmmunitionPanel, 'setVehicleModule')
-def AmmunitionPanel_setVehicleModule(self, newId, slotIdx, oldId, isRemove):
+# devices are changed on vehicle, save the setting
+@registerEvent(AmmunitionPanel, 'as_setDataS')
+def AmmunitionPanel_as_setDataS(self, data):
     try:
         if not player_name:
             return
         global equip_settings
         veh_name = g_currentVehicle.item.name
         settings_changed = False
-        if isRemove and veh_name in equip_settings:
-            equip_settings[veh_name][slotIdx] = None
-            settings_changed = True
-        else:
-            newId = int(newId)
-            new_device = g_itemsCache.items.getItemByCD(newId)
-            if new_device and new_device.isRemovable and new_device.itemTypeName == 'optionalDevice':
-                equip_settings[veh_name][slotIdx] = new_device.intCD
-                settings_changed = True
+        for info in data['devices']:
+            if info['slotType'] == 'optionalDevice':
+                slotIndex = info['slotIndex']
+                id = info['id'] if info['removable'] else -1
+                if id == -1:
+                    id = None
+                if equip_settings[veh_name][slotIndex] != id:
+                    settings_changed = True
+                    equip_settings[veh_name][slotIndex] = id
         if settings_changed:
             debug('xvm_equip: devices changed on %s, new set: %s' % (veh_name, equip_settings[veh_name]))
             save_settings()
