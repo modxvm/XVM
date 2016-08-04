@@ -20,6 +20,9 @@ package com.xvm.lobby.battleloading
 
     public class BattleLoadingXvmView extends XvmViewBase
     {
+        private var _winChances:WinChances;
+        private var _clock:Clock;
+
         public function BattleLoadingXvmView(view:IView)
         {
             super(view);
@@ -30,7 +33,7 @@ package com.xvm.lobby.battleloading
             return super.view as BattleLoading;
         }
 
-        public override function onAfterPopulate(e:LifeCycleEvent):void
+        override public function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
             logBriefConfigurationInfo();
@@ -43,6 +46,13 @@ package com.xvm.lobby.battleloading
             Stat.loadBattleStat();
 
             waitInit();
+        }
+
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            _winChances = null;
+            _clock = null;
+            super.onBeforeDispose(e);
         }
 
         // PRIVATE
@@ -81,8 +91,8 @@ package com.xvm.lobby.battleloading
                 initRenderers();
 
                 // Components
-                new WinChances(page); // Winning chance info above players list.
-                new Clock(page);  // Realworld time at right side of TipField.
+                _winChances = new WinChances(page); // Winning chance info above players list.
+                _clock = new Clock(page);  // Realworld time at right side of TipField.
             }
             catch (ex:Error)
             {
