@@ -481,7 +481,7 @@ package com.xvm.battle.playersPanel
             var field:TextField;
             var lastX:Number = VEHICLE_TF_LEFT_X;
             var newX:Number;
-            var len:int = mcfg.standardFields.length
+            var len:int = mcfg.standardFields.length;
             for (var i:int = len - 1; i >= 0; --i)
             {
                 field = getFieldByConfigName(mcfg.standardFields[i]);
@@ -578,18 +578,12 @@ package com.xvm.battle.playersPanel
                         }
                         maxPlayerNameTextWidth = s_maxPlayerNameTextWidthsRight[ui.xfw_state] + 4;
                     }
-                    w = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
-                    if (ui.playerNameFullTF.width > w)
+                    var minW:Number = Macros.FormatNumber(mcfg.nickMinWidth, currentPlayerState, 0);
+                    var maxW:Number = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
+                    w = Math.min(Math.max(maxPlayerNameTextWidth, minW), maxW);
+                    if (ui.playerNameFullTF.width != w)
                     {
                         ui.playerNameFullTF.width = w;
-                    }
-                    else
-                    {
-                        w = Math.min(w, Math.max(maxPlayerNameTextWidth, Macros.FormatNumber(mcfg.nickMinWidth, currentPlayerState, 0)));
-                        if (ui.playerNameFullTF.width != w)
-                        {
-                            ui.playerNameFullTF.width = w;
-                        }
                     }
                     break;
                 case ui.vehicleTF:
