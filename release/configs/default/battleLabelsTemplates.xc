@@ -198,7 +198,7 @@
       "width": 200,
       "height": 20,
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
-      "textFormat": { "color": "0xF4EFE8", "size": 15 },
+      "textFormat": { "size": 15 },
       "format": "{{xvm-stat?{{l10n:Chance to win}}: {{chancesStatic}}{{chancesStatic? / |}}{{chancesLive}}}}"
     },
     "test": {
