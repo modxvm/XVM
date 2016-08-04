@@ -199,6 +199,8 @@ package com.xvm.battle
             _watermark = new MovieClip();
             for (var i:Number = 0; i < 9; ++i)
             {
+                if (i == 4)
+                    continue;
                 var textField:TextField = new TextField();
                 textField.alpha = 0.1;
                 textField.width = 1024;
