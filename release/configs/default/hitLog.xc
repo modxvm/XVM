@@ -1,6 +1,8 @@
 ﻿/**
  * Hit log (my hits calculator).
+ * For additional settings see battleLabelsTemplates.xc/hitlog
  * Лог попаданий (счетчик своих попаданий).
+ * Дополнительные настройки см. в battleLabelsTemplates.xc/hitlog
  */
 {
   "hitLog": {
