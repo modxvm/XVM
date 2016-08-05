@@ -193,6 +193,7 @@
       "shadow": {
         // false - no shadow
         // false - без тени
+        "enabled": true,
         "distance": 0,                //  дистанция смещения
         "angle": 45,                  //  угол смещения
         "color": "0x000000",          //  цвет
