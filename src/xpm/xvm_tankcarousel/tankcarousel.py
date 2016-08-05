@@ -107,6 +107,7 @@ def carousel_data_provider_vehicleComparisonKey(base, vehicle):
                 factor = 1
 
             if sort_criterion == 'winRate':
+                vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
                 stats = vehicles_stats.get(vehicle.intCD)
                 comparisonKey.append(factor if stats else 0)
                 if stats:
