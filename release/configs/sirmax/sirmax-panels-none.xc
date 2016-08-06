@@ -40,9 +40,9 @@
       { "x": 31, "height": 28, "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 275, "height": 28, "align": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 300, "src": "cfg://../../res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
-      { "$ref": { "file":"../default/playersPanel.xc", "path":"clanIcon" }, "x": 349 },
-      { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "x": 295, "enabled": true },
-      { "$ref": { "file":"../default/playersPanel.xc", "path":"xmqpServiceMarker" }, "x": 371 },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"def.clanIcon" }, "x": 349 },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"def.xvmUserMarker" }, "x": 295, "enabled": true },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"def.xmqpServiceMarker" }, "x": 371 },
       {}
     ]
   },
@@ -74,9 +74,9 @@
       { "x": 31, "height": 28, "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 275, "height": 28, "align": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 300, "src": "cfg://../../res/contour/Master_XH/{{vehiclename}}.png", "highlight": "{{tk?true|false}}", "alpha": "{{alive?100|50}}" },
-      { "$ref": { "file":"../default/playersPanel.xc", "path":"clanIcon" }, "x": 354 },
-      { "$ref": { "file":"../default/playersPanel.xc", "path":"xvmUserMarker" }, "x": 300, "enabled": true },
-      { "$ref": { "file":"../default/playersPanel.xc", "path":"enemySpottedMarker" }, "x": 376 },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"def.clanIcon" }, "x": 354 },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"def.xvmUserMarker" }, "x": 300, "enabled": true },
+      { "$ref": { "file":"../default/playersPanel.xc", "path":"def.enemySpottedMarker" }, "x": 376 },
       {}
     ]
   }
