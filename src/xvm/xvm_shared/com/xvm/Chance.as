@@ -15,8 +15,9 @@ package com.xvm
     {
         private static var battleLevel:Number = 0;
         private static var maxTeamsCount:Number = 0;
-        private static var chanceG:Object;
-        private static var chanceT:Object;
+        private static var chanceG:Object = null;
+        private static var chanceT:Object = null;
+        private static var chanceLiveT:Object = null;
 
         public static function formatWinChancesText(stats:Dictionary, isShowChance:Boolean, isShowLiveChance:Boolean):String
         {
@@ -33,19 +34,22 @@ package com.xvm
             {
                 playerNames.push(name);
             }
-            var chancesText:String = Chance.GetChanceText(playerNames, stats, true, false, true, false);
-            if (!chancesText)
-                return "";
-            var temp:Array = chancesText.split('|', 2);
-            var tempA:Array = temp[0].split(':', 2);
+
             if (isShowChance)
             {
-                return tempA[1];
+                if (chanceT == null)
+                {
+                    GetChanceText(playerNames, stats, true, false, false);
+                }
+                return FormatChangeText(chanceT) || "";
             }
             else if (isShowLiveChance)
             {
-                var tempB:Array = temp[1].split(':', 2);
-                return tempB[1];
+                if (chanceLiveT == null)
+                {
+                    GetChanceText(playerNames, stats, false, false, true);
+                }
+                return FormatChangeText(chanceLiveT) || "";
             }
             else
             {
@@ -91,12 +95,12 @@ package com.xvm
 
                 if (showChance)
                 {
-                    //text = Locale.get("Chance to win") + ": " + FormatChangeText("", chanceT);
-                    text = Locale.get("Team strength") + ": " + FormatChangeText("", chanceT);
+                    //text = Locale.get("Chance to win") + ": " + FormatChangeText(chanceT);
+                    text = Locale.get("Team strength") + ": " + FormatChangeText(chanceT);
                     if (showLive)
                     {
-                        var chanceLiveT:Object = GetChance(playerNames, stats, ChanceFuncLiveT, true, showLog);
-                        text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chanceLiveT);
+                        chanceLiveT = GetChance(playerNames, stats, ChanceFuncLiveT, true, showLog);
+                        text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText(chanceLiveT);
                     }
                 }
 
@@ -301,46 +305,41 @@ package com.xvm
             return 0.5 * (1.0 + sign*y);
         }
 
-        private static function FormatChangeText(txt:String, chance:Object):String
+        private static function FormatChangeText(chance:Object):String
         {
-            var htmlText:String = txt ? txt + ": " : "";
             if (!chance)
-                htmlText += "-";
-            else
-            {
-                var s:String = "";
+                return "-";
 
-                //var color:Number = GraphicsUtil.brightenColor(MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
-                //s = "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
+            var htmlText:String = "";
 
-                /*
-                var n:int = 10;
-                var maxValue:Number = Math.max(chance.ally, chance.enemy);
-                var a:Number = Math.round(chance.ally / maxValue * n);
-                var e:Number = Math.round(chance.enemy / maxValue * n);
-                s += "  <font face='Arial' color='#444444' alpha='#CC'>" +
-                    XfwUtils.leftPad("", n - a, "\u2588") +
-                    "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
-                    XfwUtils.leftPad("", a, "\u2588") +
-                    "</font>" +
-                    "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
-                    XfwUtils.leftPad("", e, "\u2588") +
-                    "</font>" +
-                    XfwUtils.leftPad("", n - e, "\u2588") +
-                    "</font>";
-                */
+            //var color:Number = GraphicsUtil.brightenColor(MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
+            //htmlText = "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
 
-                s += "  " +
-                    "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
-                    chance.ally.toFixed() +
-                    "</font>" +
-                    " : " +
-                    "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
-                    chance.enemy.toFixed() +
-                    "</font>";
+            /*
+            var n:int = 10;
+            var maxValue:Number = Math.max(chance.ally, chance.enemy);
+            var a:Number = Math.round(chance.ally / maxValue * n);
+            var e:Number = Math.round(chance.enemy / maxValue * n);
+            htmlText += "  <font face='Arial' color='#444444' alpha='#CC'>" +
+                XfwUtils.leftPad("", n - a, "\u2588") +
+                "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
+                XfwUtils.leftPad("", a, "\u2588") +
+                "</font>" +
+                "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
+                XfwUtils.leftPad("", e, "\u2588") +
+                "</font>" +
+                XfwUtils.leftPad("", n - e, "\u2588") +
+                "</font>";
+            */
 
-                htmlText += s;
-            }
+            htmlText += "  " +
+                "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
+                chance.ally.toFixed() +
+                "</font>" +
+                " : " +
+                "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
+                chance.enemy.toFixed() +
+                "</font>";
 
             return htmlText;
         }
