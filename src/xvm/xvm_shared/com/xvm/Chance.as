@@ -18,20 +18,6 @@ package com.xvm
         private static var chanceG:Object;
         private static var chanceT:Object;
 
-        //public static var lastChances:Object = null;
-
-        // TODO: is required?
-        /*
-        public static function ShowChance(tf:TextField, showLive:Boolean):String
-        {
-            var text = GetChanceText(showLive);
-            if (text == null)
-                return tf.text;
-            tf.htmlText = (tf.text ? tf.text + " | " : "") + text;
-            return tf.htmlText;
-        }
-        */
-
         public static function formatWinChancesText(stats:Dictionary, isShowChance:Boolean, isShowLiveChance:Boolean):String
         {
             if (!Config.networkServicesSettings.chance)
@@ -105,8 +91,8 @@ package com.xvm
 
                 if (showChance)
                 {
-                    text = Locale.get("Chance to win") + ": " + FormatChangeText("", chanceT);
-                    //text = Locale.get("Team strength") + ": " + FormatChangeText("", chanceT);
+                    //text = Locale.get("Chance to win") + ": " + FormatChangeText("", chanceT);
+                    text = Locale.get("Team strength") + ": " + FormatChangeText("", chanceT);
                     if (showLive)
                     {
                         var chanceLiveT:Object = GetChance(playerNames, stats, ChanceFuncLiveT, true, showLog);
@@ -322,32 +308,36 @@ package com.xvm
                 htmlText += "-";
             else
             {
-                var color:Number = GraphicsUtil.brightenColor(MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
-                var s:String = "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
+                var s:String = "";
 
-                /*var n:int = 5;
-                var maxValue:Number = Math.max(chanceG.ally, chanceG.enemy);
+                //var color:Number = GraphicsUtil.brightenColor(MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
+                //s = "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
+
+                /*
+                var n:int = 10;
+                var maxValue:Number = Math.max(chance.ally, chance.enemy);
                 var a:Number = Math.round(chance.ally / maxValue * n);
                 var e:Number = Math.round(chance.enemy / maxValue * n);
-                var s:String = "<font face='Arial' color='#444444' alpha='#CC'>" +
-                    StringUtils.leftPad("", n - a, "\u2588") +
-                    "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
-                    StringUtils.leftPad("", a, "\u2588") +
+                s += "  <font face='Arial' color='#444444' alpha='#CC'>" +
+                    XfwUtils.leftPad("", n - a, "\u2588") +
+                    "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
+                    XfwUtils.leftPad("", a, "\u2588") +
                     "</font>" +
-                    "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
-                    StringUtils.leftPad("", e, "\u2588") +
+                    "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
+                    XfwUtils.leftPad("", e, "\u2588") +
                     "</font>" +
-                    StringUtils.leftPad("", n - e, "\u2588") +
-                    "</font>";*/
+                    XfwUtils.leftPad("", n - e, "\u2588") +
+                    "</font>";
+                */
 
-                /*var s:String =
-                    "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
-                    chanceG.ally.toFixed() +
+                s += "  " +
+                    "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
+                    chance.ally.toFixed() +
                     "</font>" +
                     " : " +
-                    "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
-                    chanceG.enemy.toFixed() +
-                    "</font>";*/
+                    "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
+                    chance.enemy.toFixed() +
+                    "</font>";
 
                 htmlText += s;
             }
