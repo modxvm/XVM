@@ -150,7 +150,7 @@ package com.xvm
             Ke /= maxTeamsCount;
 
             var result:Object = PrepareChanceResults(Ka, Ke, count);
-            if (showLog) Logger.add("Ka=" + Ka.toFixed(2) + " Ke=" + Ke.toFixed(2) + " raw=" + result.raw + " percent=" + result.percent);
+            if (showLog) Logger.add("Ka=" + result.ally.toFixed(2) + " Ke=" + result.enemy.toFixed(2) + " raw=" + result.raw + " percent=" + result.percent);
             return result;
         }
 
@@ -276,8 +276,8 @@ package com.xvm
 
             // Normalize (5..95)
             return {
-                ally: Ka,
-                enemy: Ke,
+                ally: Ka / 2.0,
+                enemy: Ke / 2.0,
                 percent: Math.round(Math.max(5, Math.min(95, p))),
                 raw: p,
                 percentF: p.toFixed(2)
