@@ -19,9 +19,9 @@
       "horizontal": 10,   // по горизонтали
       "vertical": 2       // по вертикали
     },
-    // Background transparency (default - 60)
-    // Прозрачность подложки (по умолчанию - 60)
-    "backgroundAlpha": 60,
+    // Background transparency (default - 80)
+    // Прозрачность подложки (по умолчанию - 80)
+    "backgroundAlpha": 80,
     // Mouse wheel scrolling speed multiplier (default - 1)
     // Множитель скорости прокрутки колесом мыши (по умолчанию - 1)
     "scrollingSpeed": 1,

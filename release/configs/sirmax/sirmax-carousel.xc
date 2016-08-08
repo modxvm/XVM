@@ -11,7 +11,7 @@
     //"zoom": 0.75,
     "rows": 2,
     "padding": { "horizontal": 3, "vertical": 3 },
-    "backgroundAlpha": 50,
+    //"backgroundAlpha": 50,
     //"scrollingSpeed": 2,
     //"suppressCarouselTooltips": true,
     //"hideBuyTank": true,
