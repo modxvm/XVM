@@ -13,13 +13,17 @@ package com.xvm
 
     public class Chance
     {
+        public static const CHANCE_TYPE_WIN_CHANCE:int = 1;
+        public static const CHANCE_TYPE_TEAM_POWER_ALLY:int = 2;
+        public static const CHANCE_TYPE_TEAM_POWER_ENEMY:int = 3;
+
         private static var battleLevel:Number = 0;
         private static var maxTeamsCount:Number = 0;
         private static var chanceG:Object = null;
         private static var chanceT:Object = null;
         private static var chanceLiveT:Object = null;
 
-        public static function formatWinChancesText(stats:Dictionary, isShowChance:Boolean, isShowLiveChance:Boolean):String
+        public static function formatWinChancesText(stats:Dictionary, type:int, isShowChance:Boolean, isShowLiveChance:Boolean):String
         {
             if (!Config.networkServicesSettings.chance)
             {
@@ -41,7 +45,7 @@ package com.xvm
                 {
                     GetChanceText(playerNames, stats, true, false, false);
                 }
-                return FormatChangeText(chanceT) || "";
+                return FormatChangeText(chanceT, type) || "";
             }
             else if (isShowLiveChance)
             {
@@ -49,7 +53,7 @@ package com.xvm
                 {
                     GetChanceText(playerNames, stats, false, false, true);
                 }
-                return FormatChangeText(chanceLiveT) || "";
+                return FormatChangeText(chanceLiveT, type) || "";
             }
             else
             {
@@ -95,12 +99,12 @@ package com.xvm
 
                 if (showChance)
                 {
-                    //text = Locale.get("Chance to win") + ": " + FormatChangeText(chanceT);
-                    text = Locale.get("Team strength") + ": " + FormatChangeText(chanceT);
+                    text = Locale.get("Chance to win") + ": " + FormatChangeText(chanceT, CHANCE_TYPE_WIN_CHANCE);
+                    //text = Locale.get("Team strength") + ": " + FormatChangeText(chanceT);
                     if (showLive)
                     {
                         chanceLiveT = GetChance(playerNames, stats, ChanceFuncLiveT, true, showLog);
-                        text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText(chanceLiveT);
+                        text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText(chanceLiveT, CHANCE_TYPE_WIN_CHANCE);
                     }
                 }
 
@@ -305,15 +309,23 @@ package com.xvm
             return 0.5 * (1.0 + sign*y);
         }
 
-        private static function FormatChangeText(chance:Object):String
+        private static function FormatChangeText(chance:Object, type:int):String
         {
             if (!chance)
                 return "-";
 
-            var htmlText:String = "";
+            switch (type)
+            {
+                case CHANCE_TYPE_WIN_CHANCE:
+                    var color:Number = GraphicsUtil.brightenColor(MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
+                    return "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
 
-            //var color:Number = GraphicsUtil.brightenColor(MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
-            //htmlText = "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
+                case CHANCE_TYPE_TEAM_POWER_ALLY:
+                    return chance.ally.toFixed();
+
+                case CHANCE_TYPE_TEAM_POWER_ENEMY:
+                    return chance.enemy.toFixed();
+            }
 
             /*
             var n:int = 10;
@@ -332,6 +344,7 @@ package com.xvm
                 "</font>";
             */
 
+            /*
             htmlText += "  " +
                 "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
                 chance.ally.toFixed() +
@@ -340,8 +353,9 @@ package com.xvm
                 "<font color='" + XfwUtils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
                 chance.enemy.toFixed() +
                 "</font>";
+             */
 
-            return htmlText;
+            return "-";
         }
 
         private static function GuessBattleLevel(playerNames:Vector.<String>, stats:Dictionary):Number

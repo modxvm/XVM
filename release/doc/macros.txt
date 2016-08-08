@@ -101,6 +101,10 @@ Legend:
 │ S │ {{cellsize}}          │   │ X │ X │ X │ X │ X │ X │ X │ minimap cell side size
 │ S │ {{chancesStatic}}     │   │ X │ X │ X │   │   │   │ X │ win chances at battle (static)
 │ D │ {{chancesLive}}       │   │ X │ X │ X │   │   │   │ X │ win chances at battle (live)
+│ S │ {{allyPowerStatic}}   │   │ X │ X │ X │   │   │   │ X │ ally team strength (static)
+│ S │ {{enemyPowerStatic}}  │   │ X │ X │ X │   │   │   │ X │ enemy team strength (static
+│ D │ {{allyPowerLive}}     │   │ X │ X │ X │   │   │   │ X │ ally team strength (live)
+│ D │ {{enemyPowerLive}}    │   │ X │ X │ X │   │   │   │ X │ enemy team strength (live)
 └───┴───────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴──────────────────────────────────────
 
   Statistic macros

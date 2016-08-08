@@ -25,8 +25,6 @@
     "Chance error": "Chance error",
     "Chance to win": "Chance to win",
     "Team strength": "Team strength",
-    //"global": "global",
-    //"per-vehicle": "per-vehicle",
     "chanceLive": "For alive",
     "chanceBattleTier": "Battle tier",
 

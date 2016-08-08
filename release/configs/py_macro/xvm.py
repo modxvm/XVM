@@ -1,8 +1,26 @@
 # Import from config file
 
+from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
 # Example: config.get('definition/author', 'XVM team')
+
+from xvm import utils
+
+# Team power
+
+@xvm.export('xvm.team_power')
+def xvm_team_power(a, e):
+    try:
+        sign = '&gt;' if float(a) > float(e) else '&lt;' if float(a) < float(e) else '='
+        ca = utils.brighten_color(int(config.get('colors/system/ally_alive'), 0), 50)
+        ce = utils.brighten_color(int(config.get('colors/system/enemy_alive'), 0), 50)
+        value = '<font color="#{:06x}">{}</font> {} <font color="#{:06x}">{}</font>'.format(ca, a, sign, ce, e)
+        return value
+    except Exception as ex:
+        debug(ex)
+        return ''
+
 
 # TotalHP
 

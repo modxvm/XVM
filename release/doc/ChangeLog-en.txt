@@ -1,6 +1,11 @@
 XVM-6.4.0.1-dev:
   * some bugs fixed
   * statisticForm: extraFields added
+  * added macros:
+      {{allyPowerStatic}} - ally team strength (static)
+      {{enemyPowerStatic}} - enemy team strength (static)
+      {{allyPowerLive}} - ally team strength (live)
+      {{enemyPowerLive}} - enemy team strength (live)
 
 XVM-6.4.0:
   * adaptation to WoT 0.9.15.1

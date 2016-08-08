@@ -1017,8 +1017,27 @@ package com.xvm
 
         private static function _RegisterGlobalStatisticsMacros():void
         {
-            m_globals["chancesStatic"] = Chance.formatWinChancesText(Stat.battleStat, true, false);
-            m_globals["chancesLive"] = function(o:IVOMacrosOptions):String { return Chance.formatWinChancesText(Stat.battleStat, false, true); }
+            // {{chancesStatic}}
+            m_globals["chancesStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_WIN_CHANCE, true, false);
+            // {{chancesLive}}
+            m_globals["chancesLive"] = function(o:IVOMacrosOptions):String
+            {
+                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_WIN_CHANCE, false, true);
+            }
+            // {{allyPowerStatic}}
+            m_globals["allyPowerStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_POWER_ALLY, true, false);
+            // {{enemyPowerStatic}}
+            m_globals["enemyPowerStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_POWER_ENEMY, true, false);
+            // {{allyPowerLive}}
+            m_globals["allyPowerLive"] = function(o:IVOMacrosOptions):String
+            {
+                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_POWER_ALLY, false, true);
+            }
+            // {{enemyPowerLive}}
+            m_globals["enemyPowerLive"] = function(o:IVOMacrosOptions):String
+            {
+                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_POWER_ENEMY, false, true);
+            }
         }
 
         private static function _RegisterStatisticsMacros(pname:String, stat:StatData):void
