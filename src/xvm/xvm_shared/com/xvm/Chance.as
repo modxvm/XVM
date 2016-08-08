@@ -139,7 +139,7 @@ package com.xvm
                 var stat:StatData = stats[pname];
                 count += live && !stat.alive ? 0 : 1;
                 if (stat.v.data == null) {
-                                    //if (stat.icon == "ussr-Observer" || stat.icon == "noImage")
+                    //if (stat.icon == "ussr-Observer" || stat.icon == "noImage")
                     //    continue;
                     return { error: "[1] No data for: " + stat.v.id };
                 }

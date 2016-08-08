@@ -31,8 +31,7 @@ package com.xvm.lobby.ui.tankcarousel
 
             this.cfg = Config.config.hangar.carousel;
 
-            cfg.zoom = 1;
-            cfg.rows = 1;
+            //cfg.zoom = 1; // TODO
 
             _enabled = Macros.FormatBooleanGlobal(Config.config.hangar.carousel.enabled, true);
             if (_enabled)
@@ -95,11 +94,6 @@ package com.xvm.lobby.ui.tankcarousel
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
                 itemRenderer = getQualifiedClassName(UI_TankCarouselItemRenderer);
 
-//                var a:* = new MultiRowsScroller();
-//                addChildAt(a, getChildIndex(scrollList));
-//                removeChild(scrollList);
-//                scrollList = a;
-
                 _carousel_height = (UI_TankCarouselItemRenderer.ITEM_HEIGHT * cfg.zoom + cfg.padding.vertical) * cfg.rows - cfg.padding.vertical + 3;
                 scrollList.height = (leftArrow as MovieClip).height = (rightArrow as MovieClip).height = _carousel_height;
                 (rightArrow as MovieClip).y = (leftArrow as MovieClip).y + _carousel_height; // FIXIT: why vertically aligned to bottom?
@@ -139,16 +133,15 @@ package com.xvm.lobby.ui.tankcarousel
             var horizontalPadding:Number = Macros.FormatNumberGlobal(cfg.padding.horizontal, scrollList.gap);
             scrollList.gap = horizontalPadding;
 
-//            scrollList.validateNow();
-//
-//            Logger.addObject(scrollList.viewPort);
-//            var viewPort:MultiRowsScrollerViewPort = new MultiRowsScrollerViewPort();
-//            viewPort.owner = scrollList;
-//            viewPort.gap = horizontalPadding;
-//            viewPort.setSelectedIndex(scrollList.selectedIndex);
-//            viewPort.tooltipDecorator = scrollList.xfw_tooltipDecorator;
-//            Logger.addObject(scrollList.viewPort);
-//            scrollList.viewPort = viewPort;
+            scrollList.validateNow();
+
+            var viewPort:MultiRowsScrollerViewPort = new MultiRowsScrollerViewPort();
+            viewPort.owner = scrollList;
+            viewPort.gap = horizontalPadding;
+            viewPort.setSelectedIndex(scrollList.selectedIndex);
+            viewPort.tooltipDecorator = scrollList.xfw_tooltipDecorator;
+            scrollList.viewPort = viewPort;
+            scrollList.invalidate();
         }
 
         // config: "filters"
