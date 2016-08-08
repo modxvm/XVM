@@ -1,6 +1,7 @@
 XVM-6.4.0.1-dev:
   * some bugs fixed
   * statisticForm: extraFields added
+  * carousel: restored multi rows
   * added macros:
       {{allyPowerStatic}} - ally team strength (static)
       {{enemyPowerStatic}} - enemy team strength (static)
