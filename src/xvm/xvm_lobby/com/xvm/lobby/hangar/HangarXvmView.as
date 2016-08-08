@@ -31,6 +31,9 @@ package com.xvm.lobby.hangar
             //Logger.add("onAfterPopulate: " + view.as_alias);
             //Logger.addObject(page);
 
+            // fix bottomBg height - original is too high and affects carousel
+            page.bottomBg.height = 45; // MESSENGER_BAR_PADDING
+
             initVehicleParams();
             initServerInfo();
         }
