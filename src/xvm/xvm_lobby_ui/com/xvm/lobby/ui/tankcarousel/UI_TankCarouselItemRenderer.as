@@ -37,6 +37,7 @@ package com.xvm.lobby.ui.tankcarousel
             cfg = Config.config.hangar.carousel;
             try
             {
+                scaleX = scaleY = cfg.zoom;
                 createExtraFields();
                 setupStandardFields();
             }
