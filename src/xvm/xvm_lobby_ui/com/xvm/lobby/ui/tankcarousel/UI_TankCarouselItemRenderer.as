@@ -154,7 +154,6 @@ package com.xvm.lobby.ui.tankcarousel
                 });
 
                 setupTankNameField(cfg.fields.tankName);
-
                 setupInfoTextField(cfg.fields.statusText);
                 setupClanLockField(cfg.fields.clanLock);
         }
@@ -232,6 +231,7 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     if (!(_dataVO.buySlot || _dataVO.buyTank))
                     {
+                        setupInfoTextField(cfg.fields.statusText);
                         var tankIconVO:TankIconVO = _dataVO.getTankIconVO();
                         if (tankIconVO)
                         {
@@ -251,6 +251,7 @@ package com.xvm.lobby.ui.tankcarousel
                     }
                     else
                     {
+                        setupInfoTextField(cfg.fields.statusTextBuy);
                         // Add used slots count
                         if (_dataVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
                         {
