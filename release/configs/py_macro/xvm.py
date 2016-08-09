@@ -7,10 +7,10 @@ import xvm_main.python.config as config
 
 from xvm import utils
 
-# Team power
+# Team Strength
 
-@xvm.export('xvm.team_power')
-def xvm_team_power(a, e):
+@xvm.export('xvm.team_strength')
+def xvm_team_strength(a, e):
     try:
         sign = '&gt;' if float(a) > float(e) else '&lt;' if float(a) < float(e) else '='
         ca = utils.brighten_color(int(config.get('colors/system/ally_alive'), 0), 50)

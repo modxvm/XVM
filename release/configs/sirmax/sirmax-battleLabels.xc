@@ -26,7 +26,7 @@
       //"borderColor": "0xFF0000",
       //"width": 200,
       //"height": 20,
-      "format": "{{xvm-stat?{{l10n:Team strength}}: {{py:xvm.team_power('{{allyPowerStatic}}','{{enemyPowerStatic}}')}} / {{py:xvm.team_power('{{allyPowerLive}}','{{enemyPowerLive}}')}}|--}}",
+      "format": "{{xvm-stat?{{l10n:Team strength}}: {{py:xvm.team_strength('{{allyStrengthStatic}}','{{enemyStrengthStatic}}')}} / {{py:xvm.team_strength('{{allyStrengthLive}}','{{enemyStrengthLive}}')}}|--}}",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.winChance" }
     },
     {

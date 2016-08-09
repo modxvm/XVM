@@ -1024,19 +1024,19 @@ package com.xvm
             {
                 return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_WIN_CHANCE, false, true);
             }
-            // {{allyPowerStatic}}
-            m_globals["allyPowerStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_POWER_ALLY, true, false);
-            // {{enemyPowerStatic}}
-            m_globals["enemyPowerStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_POWER_ENEMY, true, false);
-            // {{allyPowerLive}}
-            m_globals["allyPowerLive"] = function(o:IVOMacrosOptions):String
+            // {{allyStrengthStatic}}
+            m_globals["allyStrengthStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_STRENGTH_ALLY, true, false);
+            // {{enemyStrengthStatic}}
+            m_globals["enemyStrengthStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_STRENGTH_ENEMY, true, false);
+            // {{allyStrengthLive}}
+            m_globals["allyStrengthLive"] = function(o:IVOMacrosOptions):String
             {
-                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_POWER_ALLY, false, true);
+                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_STRENGTH_ALLY, false, true);
             }
-            // {{enemyPowerLive}}
-            m_globals["enemyPowerLive"] = function(o:IVOMacrosOptions):String
+            // {{enemyStrengthLive}}
+            m_globals["enemyStrengthLive"] = function(o:IVOMacrosOptions):String
             {
-                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_POWER_ENEMY, false, true);
+                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_STRENGTH_ENEMY, false, true);
             }
         }
 

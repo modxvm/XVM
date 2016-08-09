@@ -14,8 +14,8 @@ package com.xvm
     public class Chance
     {
         public static const CHANCE_TYPE_WIN_CHANCE:int = 1;
-        public static const CHANCE_TYPE_TEAM_POWER_ALLY:int = 2;
-        public static const CHANCE_TYPE_TEAM_POWER_ENEMY:int = 3;
+        public static const CHANCE_TYPE_TEAM_STRENGTH_ALLY:int = 2;
+        public static const CHANCE_TYPE_TEAM_STRENGTH_ENEMY:int = 3;
 
         private static var battleLevel:Number = 0;
         private static var maxTeamsCount:Number = 0;
@@ -320,10 +320,10 @@ package com.xvm
                     var color:Number = GraphicsUtil.brightenColor(MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINCHANCE, chance.raw), 50);
                     return "<font color='" + XfwUtils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
 
-                case CHANCE_TYPE_TEAM_POWER_ALLY:
+                case CHANCE_TYPE_TEAM_STRENGTH_ALLY:
                     return chance.ally.toFixed();
 
-                case CHANCE_TYPE_TEAM_POWER_ENEMY:
+                case CHANCE_TYPE_TEAM_STRENGTH_ENEMY:
                     return chance.enemy.toFixed();
             }
 
