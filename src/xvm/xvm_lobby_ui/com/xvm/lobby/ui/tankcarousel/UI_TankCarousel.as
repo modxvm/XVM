@@ -31,8 +31,6 @@ package com.xvm.lobby.ui.tankcarousel
 
             this.cfg = Config.config.hangar.carousel;
 
-            //cfg.zoom = 1; // TODO
-
             _enabled = Macros.FormatBooleanGlobal(Config.config.hangar.carousel.enabled, true);
             if (_enabled)
             {
@@ -94,7 +92,7 @@ package com.xvm.lobby.ui.tankcarousel
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
                 itemRenderer = getQualifiedClassName(UI_TankCarouselItemRenderer);
 
-                _carousel_height = (UI_TankCarouselItemRenderer.ITEM_HEIGHT * cfg.zoom + cfg.padding.vertical) * cfg.rows - cfg.padding.vertical + 3;
+                _carousel_height = (UI_TankCarouselItemRenderer.ITEM_HEIGHT * cfg.zoom + cfg.padding.vertical) * cfg.rows - cfg.padding.vertical + 4;
                 scrollList.height = (leftArrow as MovieClip).height = (rightArrow as MovieClip).height = _carousel_height;
                 (rightArrow as MovieClip).y = (leftArrow as MovieClip).y + _carousel_height; // FIXIT: why vertically aligned to bottom?
                 //leftFadeEndItem.visible = rightFadeEndItem.visible = false;

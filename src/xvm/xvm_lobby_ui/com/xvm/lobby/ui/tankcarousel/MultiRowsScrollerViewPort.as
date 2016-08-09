@@ -61,8 +61,8 @@ package com.xvm.lobby.ui.tankcarousel
             for each (renderer in this.xfw_activeRenderers)
             {
                 var idx:int = renderer.index;
-                renderer.x = int(idx / cfg.rows) * (w + cfg.padding.horizontal) - cfg.padding.horizontal / 2;
-                renderer.y = int(idx % cfg.rows) * (h + cfg.padding.vertical) - cfg.padding.vertical / 2;
+                renderer.x = int(int(idx / cfg.rows) * (w + cfg.padding.horizontal) - cfg.padding.horizontal / 2);
+                renderer.y = int(int(idx % cfg.rows) * (h + cfg.padding.vertical) - cfg.padding.vertical / 2 + 2);
             }
         }
     }
