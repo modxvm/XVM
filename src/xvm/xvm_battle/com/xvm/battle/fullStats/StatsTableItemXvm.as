@@ -6,6 +6,7 @@ package com.xvm.battle.fullStats
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
@@ -26,11 +27,12 @@ package com.xvm.battle.fullStats
 
     public class StatsTableItemXvm extends StatsTableItem implements IExtraFieldGroupHolder
     {
+        public static const ORDER_CHANGED:String = "StatsTableItemXvm.ORDER_CHANGED";
+        private static const INVALIDATE_PLAYER_STATE:uint = 1 << 15;
+
         private static const FIELD_HEIGHT:int = 26;
         private static const ICONS_AREA_WIDTH:int = 80;
         private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
-
-        private static const INVALIDATE_PLAYER_STATE:uint = 1 << 15;
 
         private var DEFAULT_PLAYER_NAME_X:Number;
         private var DEFAULT_PLAYER_NAME_WIDTH:Number;
@@ -110,6 +112,7 @@ package com.xvm.battle.fullStats
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
+            Xvm.addEventListener(ORDER_CHANGED, onOrderChanged);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
 
             _substrateHolder = playerNameTF.parent.addChildAt(new MovieClip(), 0) as MovieClip;
@@ -126,6 +129,7 @@ package com.xvm.battle.fullStats
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
+            Xvm.removeEventListener(ORDER_CHANGED, onOrderChanged);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
 
             disposeExtraFields();
@@ -377,6 +381,14 @@ package com.xvm.battle.fullStats
         private function onClanIconLoaded(vehicleID:Number, playerName:String):void
         {
             invalidate(INVALIDATE_PLAYER_STATE);
+        }
+
+        private function onOrderChanged(e:IntEvent):void
+        {
+            if (e.value == _vehicleID)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
         }
 
         private function onStatLoaded():void

@@ -33,10 +33,6 @@ package com.xvm.battle.fullStats
             this.xfw_tableCtrl = new FullStatsTableCtrlXvm(this.statsTable, this);
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-
-            // TODO
-            //cfg.extraFieldsLeft
-            //cfg.extraFieldsRight
         }
 
         override protected function configUI():void
