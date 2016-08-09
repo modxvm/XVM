@@ -36,7 +36,8 @@ package com.xvm.lobby.ui.tankcarousel
 
         override public function resize():void
         {
-            var w:Number = (rendererWidth + gap) * Math.ceil(_dataCount / cfg.rows * cfg.zoom) - gap;
+            var w:int = Math.ceil(UI_TankCarouselItemRenderer.ITEM_WIDTH * cfg.zoom) + UI_TankCarouselItemRenderer.ITEM_MARGIN * 2;
+            w = Math.ceil(_dataCount / cfg.rows) * (w + cfg.padding.horizontal);
             if (_width !== w || _height !== visibleHeight)
             {
                 _width = w;
