@@ -56,8 +56,8 @@ package com.xvm.lobby.ui.tankcarousel
                 return;
             }
             var zoom:Number = cfg.zoom;
-            var w:int = int(UI_TankCarouselItemRenderer.ITEM_WIDTH * zoom);
-            var h:int = int(UI_TankCarouselItemRenderer.ITEM_HEIGHT * zoom);
+            var w:int = int(UI_TankCarouselItemRenderer.ITEM_WIDTH_FULL * zoom);
+            var h:int = int(UI_TankCarouselItemRenderer.ITEM_HEIGHT_FULL * zoom);
             for each (renderer in this.xfw_activeRenderers)
             {
                 var idx:int = renderer.index;

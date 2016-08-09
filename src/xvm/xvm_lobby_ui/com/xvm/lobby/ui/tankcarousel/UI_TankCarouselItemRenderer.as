@@ -18,6 +18,8 @@ package com.xvm.lobby.ui.tankcarousel
     {
         public static const ITEM_WIDTH:int = 160;
         public static const ITEM_HEIGHT:int = 100;
+        public static const ITEM_WIDTH_FULL:int = ITEM_WIDTH + 2;
+        public static const ITEM_HEIGHT_FULL:int = ITEM_HEIGHT + 2;
 
         private static const COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT:String = 'xvm_carousel.get_used_slots_count';
         private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
@@ -115,7 +117,7 @@ package com.xvm.lobby.ui.tankcarousel
                 _extraFields = new ExtraFields(cfg.extraFields, true, null, null, null, null, null, CTextFormat.GetDefaultConfigForLobby());
                 _extraFields.scaleX = _extraFields.scaleY = 1 / zoom;
                 _extraFieldsHolder.addChild(_extraFields);
-                _extraFieldsHolder.mask = _extraFieldsHolder.addChild(createMask(-2, -2, ITEM_WIDTH + 3, ITEM_HEIGHT + 3));
+                _extraFieldsHolder.mask = _extraFieldsHolder.addChild(createMask(-2, -2, ITEM_WIDTH + 4, ITEM_HEIGHT + 4));
             }
             catch (ex:Error)
             {
