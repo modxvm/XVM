@@ -56,6 +56,7 @@ package com.xvm.battle.vo
         public function set leftVehiclesIDs(value:Vector.<Number>):void
         {
             _leftVehiclesIDs = value.concat(); // clone vector
+            updateIndexes(_leftVehiclesIDs);
         }
 
         public function get rightVehiclesIDs():Vector.<Number>
@@ -66,6 +67,7 @@ package com.xvm.battle.vo
         public function set rightVehiclesIDs(value:Vector.<Number>):void
         {
             _rightVehiclesIDs = value.concat(); // clone vector
+            updateIndexes(_rightVehiclesIDs);
         }
 
         // private
@@ -148,7 +150,7 @@ package com.xvm.battle.vo
                     var value:Object = data[i];
                     if (value.vehicleID == vehicleID)
                     {
-                        addOrUpdatePlayerState(value, isAlly);
+                        addOrUpdatePlayerState(value, isAlly, pos);
                         break;
                     }
                 }
@@ -218,14 +220,16 @@ package com.xvm.battle.vo
 
         // PRIVATE
 
-        private function addOrUpdatePlayerState(value:Object, isAlly:Boolean):void
+        private function addOrUpdatePlayerState(value:Object, isAlly:Boolean, index:int):void
         {
+            var playerState:VOPlayerState;
             if (!playerStates.hasOwnProperty(value.vehicleID))
             {
-                var playerState:VOPlayerState = new VOPlayerState(value);
+                playerState = new VOPlayerState(value);
                 playerState.update({
                    isAlly: isAlly,
-                   position: isAlly ? ++lastPositionAlly : ++lastPositionEnemy
+                   position: isAlly ? ++lastPositionAlly : ++lastPositionEnemy,
+                   index:index
                 });
                 playerStates[value.vehicleID] = playerState;
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
@@ -233,7 +237,24 @@ package com.xvm.battle.vo
             }
             else
             {
-                (playerStates[value.vehicleID] as VOPlayerState).update(value);
+                playerState = playerStates[value.vehicleID] as VOPlayerState;
+                playerState.update(value);
+                playerState.update({
+                   index: index
+                });
+            }
+        }
+
+        private function updateIndexes(ids:Vector.<Number>):void
+        {
+            var len:int = ids.length;
+            for (var i:int = 0; i < len; ++i)
+            {
+                var playerState:VOPlayerState = get(ids[i]);
+                if (playerState)
+                {
+                    playerState.update({index: i});
+                }
             }
         }
     }

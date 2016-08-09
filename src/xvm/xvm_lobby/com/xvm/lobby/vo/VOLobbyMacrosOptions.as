@@ -16,6 +16,7 @@
         private var _isCurrentPlayer:Boolean;
         private var _isSquadPersonal:Boolean;
         private var _squadIndex:Number;
+        private var _index:int;
         private var _position:Number;
 
         private var _vehCD:int;
@@ -116,6 +117,11 @@
         public function set squadIndex(value:Number):void
         {
             _squadIndex = value;
+        }
+
+        override public function get index():int
+        {
+            return _index;
         }
 
         override public function get position():Number

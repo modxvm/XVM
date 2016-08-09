@@ -57,6 +57,7 @@ package com.xvm.battle.vo
         private var __hitlogDamage:int = 0;
         private var __hitlogHits:Vector.<int> = new Vector.<int>();
 
+        private var _index:int = -1;
         private var _position:Number = NaN;
         private var _vehCD:int = 0;
         private var _vehicleData:VOVehicleData = null;
@@ -200,6 +201,11 @@ package com.xvm.battle.vo
         override public function get position():Number
         {
             return _position;
+        }
+
+        override public function get index():int
+        {
+            return _index;
         }
 
         override public function get vehCD():int

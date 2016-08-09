@@ -6,6 +6,7 @@ package com.xvm.extraFields
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.types.*;
     import com.xvm.types.dossier.*;
     import com.xvm.vo.*;
@@ -22,10 +23,13 @@ package com.xvm.extraFields
     {
         public static const LAYOUT_HORIZONTAL:String = "horizontal";
         public static const LAYOUT_VERTICAL:String = "vertical";
+        public static const LAYOUT_HORIZONTAL_FIXED:String = "horizontal_fixed";
+        public static const LAYOUT_VERTICAL_FIXED:String = "vertical_fixed";
         public static const LAYOUT_ROOT:String = "root";
 
         private var _bounds:Rectangle;
         private var _layout:String;
+        private var _isFixedLayout:Boolean;
         private var _isLeftPanel:Boolean;
 
         public function ExtraFields(formats:Array, isLeftPanel:Boolean = true, getSchemeNameForText:Function = null, getSchemeNameForImage:Function = null,
@@ -35,7 +39,21 @@ package com.xvm.extraFields
             mouseChildren = false;
 
             _bounds = bounds;
-            _layout = layout;
+            if (layout == LAYOUT_HORIZONTAL_FIXED)
+            {
+                _layout = LAYOUT_HORIZONTAL;
+                _isFixedLayout = true;
+            }
+            else if (layout == LAYOUT_VERTICAL_FIXED)
+            {
+                _layout = LAYOUT_VERTICAL;
+                _isFixedLayout = true;
+            }
+            else
+            {
+                _layout = layout;
+                _isFixedLayout = false;
+            }
             _isLeftPanel = isLeftPanel;
 
             var len:int = formats.length;
@@ -94,7 +112,7 @@ package com.xvm.extraFields
                     child.update(options, bindToIconOffset, offsetX, offsetY, _bounds);
                     if (_bounds && _layout)
                     {
-                        var position:Number = options.position;
+                        var position:Number = _isFixedLayout ? options.position : options.index;
                         switch (_layout)
                         {
                             case LAYOUT_HORIZONTAL:

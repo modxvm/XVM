@@ -142,6 +142,7 @@
     //"enabled": false,
     "expandAreaWidth": 40,
     //"layout": "horizontal",
+    "fixedPosition": true,
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },
   "alpha": 50,

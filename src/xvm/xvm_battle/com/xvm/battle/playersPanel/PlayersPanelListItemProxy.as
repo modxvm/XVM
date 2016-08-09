@@ -697,6 +697,7 @@ package com.xvm.battle.playersPanel
                 Macros.FormatNumberGlobal(cfg.y, 65),
                 Macros.FormatNumberGlobal(cfg.width, 380),
                 Macros.FormatNumberGlobal(cfg.height, 28));
+            var isFixedLayout:Boolean = Macros.FormatBooleanGlobal(ncfg.fixedPosition, false);
             if (cfg.formats && cfg.formats.length)
             {
                 extraFieldsHidden = new ExtraFields(
@@ -705,7 +706,7 @@ package com.xvm.battle.playersPanel
                     getSchemeNameForPlayer,
                     getSchemeNameForVehicle,
                     bounds,
-                    Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase(),
+                    Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase() + (isFixedLayout ? "_fixed" : ""),
                     null,
                     defaultTextFormatConfig);
                 BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmView.battlePage.getChildIndex(BattleXvmView.battlePage.playersPanel));

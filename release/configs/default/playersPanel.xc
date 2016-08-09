@@ -168,6 +168,9 @@
       // Layout ("vertical" or "horizontal")
       // Размещение ("vertical" - вертикально, или "horizontal" - горизонтально)
       "layout": "vertical",
+      // true - don't change players positions on dead (default false)
+      // true - не изменять позиции игроков при уничтожении (по умолчанию false)
+      "fixedPosition": false,
       // Extra fields.
       // Дополнительные поля.
       "extraFields": {

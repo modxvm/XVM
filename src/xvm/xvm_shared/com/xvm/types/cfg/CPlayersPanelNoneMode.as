@@ -10,6 +10,7 @@ package com.xvm.types.cfg
     {
         public var enabled:*;
         public var layout:String;
+        public var fixedPosition:*;
         public var extraFields:CPlayersPanelNoneModeExtraFields;
 
         public function clone():*

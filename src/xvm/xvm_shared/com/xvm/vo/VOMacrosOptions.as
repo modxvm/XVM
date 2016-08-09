@@ -84,6 +84,11 @@
             throw new IllegalOperationError("abstract method called");
         }
 
+        public function get index():int
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
         public function get position():Number
         {
             throw new IllegalOperationError("abstract method called");
