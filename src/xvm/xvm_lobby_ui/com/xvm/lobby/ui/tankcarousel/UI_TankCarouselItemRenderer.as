@@ -243,7 +243,10 @@ package com.xvm.lobby.ui.tankcarousel
                                 var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(options.vehCD);
                                 vdata.elite = tankIconVO.elite ? "elite" : null;
                                 vdata.selected = this.selected ? "sel" : null;
-                                options.vehicleData.__vehicleDossierCut = vdata;
+                                if (options.vehicleData)
+                                {
+                                    options.vehicleData.__vehicleDossierCut = vdata;
+                                }
                                 _extraFields.update(options);
                                 isExtraFieldsVisible = true;
                             }

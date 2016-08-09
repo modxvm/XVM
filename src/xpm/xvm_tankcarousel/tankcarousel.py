@@ -87,6 +87,12 @@ def onXfwCommand(cmd, *args):
 
 carousel_config = {}
 
+# for debug purposes - add all tanks to the carousel
+#@overrideMethod(carousel_data_provider.CarouselDataProvider, 'updateVehicles')
+#def updateVehicles(base, self, vehicles = None, filterCriteria = None):
+#    self._baseCriteria = REQ_CRITERIA.CUSTOM(lambda x: True)
+#    base(self, vehicles, filterCriteria)
+
 # added sorting orders for tanks in carousel
 @overrideMethod(carousel_data_provider, '_vehicleComparisonKey')
 def carousel_data_provider_vehicleComparisonKey(base, vehicle):
