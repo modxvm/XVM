@@ -25,7 +25,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         override public function set visibleWidth(value:Number):void
         {
-            super.visibleWidth = value + Math.ceil(value / (rendererWidth + gap)) * (rendererWidth + gap) * cfg.rows;
+            super.visibleWidth = value + Math.ceil(Math.ceil(value / (rendererWidth + gap)) * (rendererWidth + gap) * cfg.rows / cfg.zoom);
         }
 
         override public function updateDataCount():void
@@ -36,7 +36,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         override public function resize():void
         {
-            var w:Number = (rendererWidth + gap) * int((_dataCount + cfg.rows - 1) / cfg.rows) - gap;
+            var w:Number = (rendererWidth + gap) * Math.ceil(_dataCount / cfg.rows * cfg.zoom) - gap;
             if (_width !== w || _height !== visibleHeight)
             {
                 _width = w;
@@ -56,13 +56,13 @@ package com.xvm.lobby.ui.tankcarousel
                 return;
             }
             var zoom:Number = cfg.zoom;
-            var w:int = int(UI_TankCarouselItemRenderer.ITEM_WIDTH_FULL * zoom);
-            var h:int = int(UI_TankCarouselItemRenderer.ITEM_HEIGHT_FULL * zoom);
+            var w:int = Math.ceil(UI_TankCarouselItemRenderer.ITEM_WIDTH * zoom) + UI_TankCarouselItemRenderer.ITEM_MARGIN * 2;
+            var h:int = Math.ceil(UI_TankCarouselItemRenderer.ITEM_HEIGHT * zoom) + UI_TankCarouselItemRenderer.ITEM_MARGIN * 2;
             for each (renderer in this.xfw_activeRenderers)
             {
                 var idx:int = renderer.index;
-                renderer.x = int(int(idx / cfg.rows) * (w + cfg.padding.horizontal) - cfg.padding.horizontal / 2);
-                renderer.y = int(int(idx % cfg.rows) * (h + cfg.padding.vertical) - cfg.padding.vertical / 2 + 2);
+                renderer.x = int(idx / cfg.rows) * (w + cfg.padding.horizontal);
+                renderer.y = int(idx % cfg.rows) * (h + cfg.padding.vertical) + UI_TankCarousel.VERTICAL_MARGIN;
             }
         }
     }

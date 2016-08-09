@@ -18,8 +18,7 @@ package com.xvm.lobby.ui.tankcarousel
     {
         public static const ITEM_WIDTH:int = 160;
         public static const ITEM_HEIGHT:int = 100;
-        public static const ITEM_WIDTH_FULL:int = ITEM_WIDTH + 2;
-        public static const ITEM_HEIGHT_FULL:int = ITEM_HEIGHT + 2;
+        public static const ITEM_MARGIN:int = 1;
 
         private static const COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT:String = 'xvm_carousel.get_used_slots_count';
         private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
@@ -105,9 +104,6 @@ package com.xvm.lobby.ui.tankcarousel
             try
             {
                 var zoom:Number = cfg.zoom;
-                var w:int = int(ITEM_WIDTH * zoom);
-                var h:int = int(ITEM_HEIGHT * zoom);
-
                 _extraFieldsHolder = new MovieClip();
                 _extraFieldsHolder.x = this.slot.x + 1;
                 _extraFieldsHolder.y = this.slot.y + 1;
@@ -135,8 +131,8 @@ package com.xvm.lobby.ui.tankcarousel
         private function setupStandardFields():void
         {
                 var zoom:Number = cfg.zoom;
-                var w:int = int(ITEM_WIDTH * zoom);
-                var h:int = int(ITEM_HEIGHT * zoom);
+                var w:int = Math.ceil(ITEM_WIDTH * zoom);
+                var h:int = Math.ceil(ITEM_HEIGHT * zoom);
 
                 setupStandardField(slot.tankIcon.multyXp, cfg.fields.multiXp);
                 slot.tankIcon.multyXp.x = w - slot.tankIcon.multyXp.width + cfg.fields.multiXp.dx;
