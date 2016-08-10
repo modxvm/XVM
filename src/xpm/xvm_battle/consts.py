@@ -3,7 +3,7 @@
 #####################################################################
 # constants
 
-# Shared commands 
+# Shared commands
 
 class XVM_BATTLE_COMMAND(object):
     REQUEST_BATTLE_GLOBAL_DATA = "xvm_battle.request_battle_global_data"
@@ -24,6 +24,7 @@ class XVM_VM_COMMAND(object):
     # Flash -> Python
     LOG = "xfw.log"
     INITIALIZED = "initialized"
+    AS_CMD_RESPONSE = "xvm_vm.as.cmd_response"
 
 # Invalidation targets
 

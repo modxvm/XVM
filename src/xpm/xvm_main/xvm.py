@@ -273,7 +273,7 @@ class Xvm(object):
             # battleloading, battle
 
             if cmd == XVM_COMMAND.GET_CLAN_ICON:
-                return (stats.getClanIcon(args[0]), True)
+                return (stats.getClanIcon(int(args[0])), True)
 
             # lobby
 

@@ -29,6 +29,7 @@ package com.xvm.vehiclemarkers.ui
 
             super();
 
+            Xfw.addCommandListener("xvm_vm.as.cmd_response", as_cmd_response);
             Xfw.addCommandListener("BC_setVehiclesData", BattleState.instance.setVehiclesData);
             Xfw.addCommandListener("BC_addVehiclesInfo", BattleState.instance.addVehiclesInfo);
             Xfw.addCommandListener("BC_updateVehiclesInfo", BattleState.instance.updateVehiclesInfo);
@@ -44,10 +45,18 @@ package com.xvm.vehiclemarkers.ui
             Xfw.addCommandListener("BC_updateInvitationsStatuses", BattleState.instance.updateInvitationsStatuses);
         }
 
+        private var _lastCmdResponse:*;
         private function xvm_cmd(... rest):*
         {
             rest.unshift("xvm.cmd");
-            return ExternalInterface.call.apply(null, rest);
+            _lastCmdResponse = undefined;
+            ExternalInterface.call.apply(null, rest);
+            return _lastCmdResponse;
+        }
+
+        private function as_cmd_response(value:*):void
+        {
+            _lastCmdResponse = value;
         }
 
         private var _initialized:Boolean = false;

@@ -173,11 +173,9 @@ class VehicleMarkers(object):
             elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.respondGlobalBattleData()
             elif cmd == XVM_COMMAND.PYTHON_MACRO:
-                return python_macro.process_python_macro(args[0])
-            #elif cmd == XVM_COMMAND.GET_PLAYER_NAME:
-            #    return (BigWorld.player().name, True)
+                self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, python_macro.process_python_macro(args[0]))
             elif cmd == XVM_COMMAND.GET_CLAN_ICON:
-                return stats.getClanIcon(args[0])
+                self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, stats.getClanIcon(int(args[0])))
             elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
                 stats.getBattleStat(args, self.call, GUI_GLOBAL_SPACE_ID.BATTLE)
             # profiler
