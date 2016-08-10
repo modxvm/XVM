@@ -11,6 +11,7 @@ package com.xvm.types.cfg
         public var clockFormat:String;
         public var showBattleTier:*;
         public var removeSquadIcon:*;
+        public var vehicleIconAlpha:*;
         public var removeVehicleLevel:*;
         public var removeVehicleTypeIcon:*;
         public var nameFieldShowBorder:*;

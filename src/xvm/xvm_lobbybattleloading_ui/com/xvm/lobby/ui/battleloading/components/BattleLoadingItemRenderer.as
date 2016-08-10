@@ -201,6 +201,7 @@ package com.xvm.lobby.ui.battleloading.components
                     // controls visibility
                     if (Macros.FormatBooleanGlobal(cfg.removeSquadIcon))
                         proxy.squad.visible = false;
+                    proxy.vehicleIconLoader.alpha = Macros.FormatNumberGlobal(cfg.vehicleIconAlpha, 100) / 100.0;
                     if (Macros.FormatBooleanGlobal(cfg.removeVehicleLevel))
                         proxy.vehicleLevelIcon.visible = false;
                     if (Macros.FormatBooleanGlobal(cfg.removeVehicleTypeIcon))

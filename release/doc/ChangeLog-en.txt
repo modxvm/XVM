@@ -7,6 +7,8 @@ XVM-6.4.0.1-dev:
       {{enemyStrengthStatic}} - enemy team strength (static)
       {{allyStrengthLive}} - ally team strength (live)
       {{enemyStrengthLive}} - enemy team strength (live)
+  * added option in "battleLoading" and "statisticForm" sections:
+      "vehicleIconAlpha" - opacity percentage of vehicle icon
 
 XVM-6.4.0:
   * adaptation to WoT 0.9.15.1

@@ -186,6 +186,7 @@ package com.xvm.battle.fullStats
                 var schemeName:String = getSchemeNameForVehicle();
                 var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
                 _vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
+                _vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
             }
             if (isInvalid(FullStatsValidationType.VEHICLE_NAME))
             {
