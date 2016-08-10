@@ -436,11 +436,13 @@ class _Stat(object):
                     stat['vehicleID'] = pl.vehicleID
                     if pl.clan:
                         stat['clan'] = pl.clan
-                        if stat.get('cid', None) is not None and stat.get('rank') is not None and stat.get('emblem') is not None:
-                            pl.clanInfo = {'cid': stat['cid'], 'rank': stat['rank'], 'emblem': stat['emblem']}
+                        cid = pl.clanInfo.get('cid', None) if pl.clanInfo else None
+                        scid = stat.get('cid', None)
+                        if (scid is None or scid == cid) and stat.get('rank') is not None and stat.get('emblem') is not None:
+                            pl.clanInfo = {'cid': scid, 'rank': stat['rank'], 'emblem': stat['emblem']}
                             self._load_clanIcon(pl)
                         else:
-                            stat['cid'] = pl.clanInfo.get('cid', None) if pl.clanInfo else None
+                            stat['cid'] = cid
                             stat['rank'] = pl.clanInfo.get('rank', None) if pl.clanInfo else None
                             stat['emblem'] = pl.clanInfo.get('emblem', None) if pl.clanInfo else None
                     stat['name'] = pl.name
@@ -579,7 +581,7 @@ class _Stat(object):
             elif hasattr(pl, 'x_emblem_loading'):
                 return
             elif pl.clanInfo:
-                rank = int(pl.clanInfo.get('rank', -1))
+                rank = pl.clanInfo.get('rank', -1)
                 url = pl.clanInfo.get('emblem', None)
                 # url = 'http://stat.modxvm.com:81'
                 if url and 0 <= rank <= config.networkServicesSettings.topClansCount:
