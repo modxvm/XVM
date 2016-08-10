@@ -61,8 +61,9 @@
     "types_order":   ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
     // Tank sorting criteria, available options: (minus = reverse order)
     // Критерии сортировки танков, доступные значения: (минус = в обратном порядке)
-    // "nation", "type", "level", "-level", "maxBattleTier", "-maxBattleTier",
-    // "premium", "-premium", "winRate", "-winRate", "markOfMastery", "-markOfMastery"
+    // "nation", "type", "level", "-level", "maxBattleTier", "-maxBattleTier", "premium", "-premium",
+    // "winRate", "-winRate", "markOfMastery", "-markOfMastery", "xtdb", "-xtdb", "xte", "-xte",
+    // "damageRating", "-damageRating", "marksOnGun", "-marksOnGun"
     "sorting_criteria": ["nation", "type", "level"],
     // Suppress the tooltips for tanks in carousel
     // Убрать подсказки к танкам в карусели

@@ -9,6 +9,7 @@ XVM-6.4.0.1-dev:
       {{enemyStrengthLive}} - сила команды противников (динамическая)
   * добавлена опция в секции battleLoading и statisticForm:
       "vehicleIconAlpha" - прозрачность в процентах иконки танка
+  * карусель: добавлена сортировка по markOfMastery, xtdb, xte, damageRating и marksOnGun
 
 XVM-6.4.0:
   * адаптация к WoT 0.9.15.1

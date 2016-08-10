@@ -9,6 +9,7 @@ import weakref
 
 import BigWorld
 import game
+from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as ACHIEVEMENT_BLOCK
 from gui import GUI_NATIONS_ORDER_INDEX
 from gui.shared import g_eventBus, g_itemsCache
 from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
@@ -17,6 +18,7 @@ from gui.DialogsInterface import showDialog
 from gui.Scaleform.framework import ViewTypes
 from gui.Scaleform.framework.managers.containers import POP_UP_CRITERIA
 from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
+from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
@@ -28,8 +30,9 @@ from xfw import *
 from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-from xvm_main.python.vehinfo_tiers import getTiers
+import xvm_main.python.dossier as dossier
 import xvm_main.python.vehinfo as vehinfo
+from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
 
 import reserve
@@ -112,19 +115,20 @@ def carousel_data_provider_vehicleComparisonKey(base, vehicle):
             else:
                 factor = 1
 
-            if sort_criterion == 'winRate':
+            if sort_criterion in ['winRate', 'markOfMastery']:
                 vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
                 stats = vehicles_stats.get(vehicle.intCD)
                 comparisonKey.append(factor if stats else 0)
                 if stats:
-                    winrate = float(stats.wins) / stats.battlesCount
-                    comparisonKey.append(winrate * factor)
-            if sort_criterion == 'markOfMastery':
-                vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
-                stats = vehicles_stats.get(vehicle.intCD)
-                comparisonKey.append(factor if stats else 0)
-                if stats:
-                    comparisonKey.append(stats.markOfMastery * factor)
+                    if sort_criterion == 'winRate':
+                        comparisonKey.append(float(stats.wins) / stats.battlesCount * factor)
+                    elif sort_criterion == 'markOfMastery':
+                        comparisonKey.append(stats.markOfMastery * factor)
+            elif sort_criterion in ['xtdb', 'xte', 'marksOnGun', 'damageRating']:
+                vDossier = dossier.getDossier((PROFILE_DROPDOWN_KEYS.ALL, None, vehicle.intCD))
+                comparisonKey.append(factor if vDossier else 0)
+                if vDossier:
+                    comparisonKey.append(vDossier[sort_criterion] * factor)
             elif sort_criterion == 'nation':
                 if 'nations_order' in carousel_config and len(carousel_config['nations_order']):
                     custom_nations_order = carousel_config['nations_order']

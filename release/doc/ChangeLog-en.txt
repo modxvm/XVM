@@ -9,6 +9,7 @@ XVM-6.4.0.1-dev:
       {{enemyStrengthLive}} - enemy team strength (live)
   * added option in "battleLoading" and "statisticForm" sections:
       "vehicleIconAlpha" - opacity percentage of vehicle icon
+  * carousel: added sorting on markOfMastery, xtdb, xte, damageRating and marksOnGun
 
 XVM-6.4.0:
   * adaptation to WoT 0.9.15.1
