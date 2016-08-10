@@ -41,6 +41,7 @@ package com.xvm.battle.fullStats
         private var DEFAULT_FRAGS_X:Number;
         private var DEFAULT_FRAGS_WIDTH:Number;
         private var DEFAULT_VEHICLE_ICON_X:Number;
+        private var DEFAULT_VEHICLE_LEVEL_X:Number;
         private var DEFAULT_VEHICLE_TYPE_ICON_X:Number;
 
         private var cfg:CStatisticForm;
@@ -90,6 +91,7 @@ package com.xvm.battle.fullStats
             DEFAULT_FRAGS_X = fragsTF.x;
             DEFAULT_FRAGS_WIDTH = fragsTF.width;
             DEFAULT_VEHICLE_ICON_X = vehicleIcon.x;
+            DEFAULT_VEHICLE_LEVEL_X = vehicleLevelIcon.x;
             DEFAULT_VEHICLE_TYPE_ICON_X = vehicleTypeIcon.x;
 
             // align fields
@@ -410,6 +412,7 @@ package com.xvm.battle.fullStats
                 _fragsTF.x = DEFAULT_FRAGS_X + cfg.fragsFieldOffsetXLeft + (DEFAULT_FRAGS_WIDTH - cfg.fragsFieldWidthLeft) / 2;
                 _fragsTF.width = cfg.fragsFieldWidthLeft;
                 _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
             }
             else
@@ -423,10 +426,12 @@ package com.xvm.battle.fullStats
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
                     _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
+                    _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight;
                 }
                 else
                 {
                     _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                    _vehicleLevelIcon.x = 46 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
                 }
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
