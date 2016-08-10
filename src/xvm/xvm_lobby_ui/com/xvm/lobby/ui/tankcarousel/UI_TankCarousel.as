@@ -145,6 +145,12 @@ package com.xvm.lobby.ui.tankcarousel
             scrollList.invalidate();
         }
 
+        override public function goToItem(param1:int, param2:Boolean = false):void
+        {
+            param1 /= cfg.rows;
+            super.goToItem(param1, param2);
+        }
+
         // config: "filters"
         private function setupFilters():void
         {
