@@ -31,6 +31,9 @@ package com.xvm.extraFields
 
         private var _xValue:Number = 0;
         private var _yValue:Number = 0;
+        private var _bindToIconOffset:int = 0;
+        private var _offsetX:int = 0;
+        private var _offsetY:int = 0;
         private var _widthValue:Number = NaN;
         private var _heightValue:Number = NaN;
         private var _textValue:String = null;
@@ -509,7 +512,7 @@ package com.xvm.extraFields
             return isDynamic;
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0, bounds:Rectangle = null):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:int = 0, offsetX:int = 0, offsetY:int = 0, bounds:Rectangle = null):void
         {
             try
             {
@@ -547,6 +550,16 @@ package com.xvm.extraFields
                         _yValue = value;
                         needAlign = true;
                     }
+                }
+                if (_offsetX != offsetX)
+                {
+                    _offsetX = offsetX;
+                    needAlign = true;
+                }
+                if (_offsetX != offsetY)
+                {
+                    _offsetY = offsetY;
+                    needAlign = true;
                 }
                 if (_cfg.width != null)
                 {
@@ -616,17 +629,10 @@ package com.xvm.extraFields
                         backgroundColor = value;
                     }
                 }
-                if (_cfg.bindToIcon && !isNaN(bindToIconOffset))
+                if (_cfg.bindToIcon && _bindToIconOffset != bindToIconOffset)
                 {
-                    value = _isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
-                    if (x != value)
-                    {
-                        needAlign = true;
-                    }
-                }
-                else
-                {
-                    bindToIconOffset = 0;
+                    _bindToIconOffset = bindToIconOffset;
+                    needAlign = true;
                 }
                 if (_cfg.textFormat)
                 {
@@ -666,7 +672,7 @@ package com.xvm.extraFields
 
                 if (needAlign)
                 {
-                    align(bindToIconOffset, offsetX, offsetY);
+                    align();
                 }
 
                 //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }
@@ -677,7 +683,9 @@ package com.xvm.extraFields
             }
         }
 
-        private function align(bindToIconOffset:Number, offsetX:Number, offsetY:Number):void
+        // PRIVATE
+
+        private function align():void
         {
             if (!isNaN(widthValue))
                 width = widthValue;
@@ -692,8 +700,8 @@ package com.xvm.extraFields
             }
             else
             {
-                x = _isLeftPanel ? (_xValue + bindToIconOffset + offsetX) : (-_xValue + bindToIconOffset + offsetX);
-                y = _yValue + offsetY;
+                x = _isLeftPanel ? (_xValue + _bindToIconOffset + _offsetX) : (-_xValue + _bindToIconOffset + _offsetX);
+                y = _yValue + _offsetY;
                 if (_cfg.align == TextFormatAlign.RIGHT)
                     x -= width;
                 else if (_cfg.align == TextFormatAlign.CENTER)

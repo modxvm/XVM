@@ -29,8 +29,8 @@ package com.xvm.extraFields
         private var _xValue:Number = 0;
         private var _yValue:Number = 0;
         private var _bindToIconOffset:Number = 0;
-        private var _offsetX:Number = 0;
-        private var _offsetY:Number = 0;
+        private var _offsetX:int = 0;
+        private var _offsetY:int = 0;
         private var _widthValue:Number = NaN;
         private var _heightValue:Number = NaN;
         private var _srcValue:String = null;
@@ -183,12 +183,8 @@ package com.xvm.extraFields
             }
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0, bounds:Rectangle = null):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:int = 0, offsetX:int = 0, offsetY:int = 0, bounds:Rectangle = null):void
         {
-            _bindToIconOffset = bindToIconOffset;
-            _offsetX = offsetX;
-            _offsetY = offsetY;
-
             var needAlign:Boolean = false;
 
             if (!_initialized)
@@ -222,6 +218,16 @@ package com.xvm.extraFields
                     _yValue = value;
                     needAlign = true;
                 }
+            }
+            if (_offsetX != offsetX)
+            {
+                _offsetX = offsetX;
+                needAlign = true;
+            }
+            if (_offsetX != offsetY)
+            {
+                _offsetY = offsetY;
+                needAlign = true;
             }
             if (_cfg.width != null)
             {
@@ -273,17 +279,10 @@ package com.xvm.extraFields
             {
                 needAlign = true;
             }
-            if (_cfg.bindToIcon && !isNaN(bindToIconOffset))
+            if (_cfg.bindToIcon && _bindToIconOffset != bindToIconOffset)
             {
-                value = isLeftPanel ? (_xValue + bindToIconOffset) : (-_xValue + bindToIconOffset);
-                if (x != value)
-                {
-                    needAlign = true;
-                }
-            }
-            else
-            {
-                _bindToIconOffset = 0;
+                _bindToIconOffset = bindToIconOffset;
+                needAlign = true;
             }
             if (_cfg.src)
             {

@@ -19,7 +19,7 @@ package com.xvm.extraFields
         function get widthValue():Number;
         function get heightValue():Number;
         function get cfg():CExtraField;
-        function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0, bounds:Rectangle = null):void;
+        function update(options:IVOMacrosOptions, bindToIconOffset:int = 0, offsetX:int = 0, offsetY:int = 0, bounds:Rectangle = null):void;
         function updateOnEvent(e:PlayerStateEvent):void;
         function onKeyEvent(key:Number, isDown:Boolean):void
     }

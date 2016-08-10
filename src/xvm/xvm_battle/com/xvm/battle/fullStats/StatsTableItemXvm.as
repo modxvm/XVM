@@ -465,12 +465,12 @@ package com.xvm.battle.fullStats
                 var bindToIconOffset:Number;
                 if (_isLeftPanel)
                 {
-                    offsetX = _playerNameTF.x - SQUAD_ITEMS_AREA_WIDTH;
+                    offsetX = DEFAULT_PLAYER_NAME_X - SQUAD_ITEMS_AREA_WIDTH;
                     bindToIconOffset = _vehicleIcon.x - offsetX;
                 }
                 else
                 {
-                    offsetX = _playerNameTF.x + _playerNameTF.width + SQUAD_ITEMS_AREA_WIDTH;
+                    offsetX = DEFAULT_PLAYER_NAME_X + DEFAULT_PLAYER_NAME_WIDTH + SQUAD_ITEMS_AREA_WIDTH;
                     bindToIconOffset = _vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
                 }
                 extraFields.visible = true;
