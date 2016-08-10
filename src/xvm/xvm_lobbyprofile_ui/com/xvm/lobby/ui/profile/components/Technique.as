@@ -144,7 +144,7 @@ package com.xvm.lobby.ui.profile.components
 
         public function fixInitData(param1:Object):void
         {
-            if (Config.networkServicesSettings.statAwards)
+            if (Config.networkServicesSettings.statAwards && Config.config.userInfo.showXTEColumn)
             {
                 var bi:Object = {
                     id: "xvm_xte",
