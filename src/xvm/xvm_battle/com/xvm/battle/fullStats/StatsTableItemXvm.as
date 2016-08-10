@@ -459,15 +459,20 @@ package com.xvm.battle.fullStats
 
         private function updateExtraFields():void
         {
-            var offsetX:Number = 0;
-            var bindToIconOffset:Number = _vehicleIcon.x;
-            if (!_isLeftPanel)
-            {
-                offsetX = _playerNameTF.x + _playerNameTF.width + SQUAD_ITEMS_AREA_WIDTH;
-                bindToIconOffset += Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH - offsetX;
-            }
             if (extraFields)
             {
+                var offsetX:Number;
+                var bindToIconOffset:Number;
+                if (_isLeftPanel)
+                {
+                    offsetX = _playerNameTF.x - SQUAD_ITEMS_AREA_WIDTH;
+                    bindToIconOffset = _vehicleIcon.x - offsetX;
+                }
+                else
+                {
+                    offsetX = _playerNameTF.x + _playerNameTF.width + SQUAD_ITEMS_AREA_WIDTH;
+                    bindToIconOffset = _vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
+                }
                 extraFields.visible = true;
                 extraFields.update(currentPlayerState, bindToIconOffset, offsetX, _vehicleIcon.y);
             }

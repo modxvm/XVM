@@ -229,26 +229,30 @@
     "formatRightVehicle": ${"def.formatVehicle"},
     "formatLeftFrags": "{{frags}}",
     "formatRightFrags": "{{frags}}",
-    //"extraFieldsLeft": [
+    "extraFieldsLeft": [
       // for tests
       //{ "width": 1, "height": 23, "bgColor": "0xFFFFFF" },
+      //{ "x": 25, "width": 1, "height": 23, "bgColor": "0xFFFFFF" },
       //{ "x": -1, "y": 2, "width": 5, "height": 22, "bgColor": "0x800600", "borderColor": "0x000000", "bindToIcon": true },
       //{ "width": 1, "height": 23, "bindToIcon": true, "bgColor": "0xFFFFFF" },
       //{ "x": 100, "scaleX": 1, "src": "img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png" },
       //{ "x": 0, "src": "cfg://sirmax/img/MinimapAim.png" },
       //{ "x": 0, "bindToIcon": true, "src": "cfg://sirmax/img/MinimapAim.png" },
-      //${"../default/statisticForm.xc":"templates.clanIcon"}
-    //],
-    //"extraFieldsRight": [
+      //
+      ${"../default/statisticForm.xc":"templates.clanIcon"}
+    ],
+    "extraFieldsRight": [
       // for tests
       //{ "width": 1, "height": 23, "bgColor": "0xFFFFFF" },
+      //{ "x": 25, "width": 1, "height": 23, "bgColor": "0xFFFFFF" },
       //{ "x": -1, "y": 2, "width": 5, "height": 22, "bgColor": "0x800600", "borderColor": "0x000000", "bindToIcon": true },
       //{ "width": 1, "height": 23, "bindToIcon": true, "bgColor": "0xFFFFFF" },
       //{ "x": 100, "y":15, "scaleX": -1, "src": "img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png" },
       //{ "x": 0, "src": "cfg://sirmax/img/MinimapAim.png" },
       //{ "x": 0, "bindToIcon": true, "src": "cfg://sirmax/img/MinimapAim.png" },
-      //${"../default/statisticForm.xc":"templates.clanIcon"}
-    //]
+      //
+      ${"../default/statisticForm.xc":"templates.clanIcon"}
+    ],
     "__stub__": {}
   },
   "playersPanel": ${"sirmax-panels.xc":"."},
