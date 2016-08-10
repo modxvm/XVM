@@ -119,6 +119,12 @@ def carousel_data_provider_vehicleComparisonKey(base, vehicle):
                 if stats:
                     winrate = float(stats.wins) / stats.battlesCount
                     comparisonKey.append(winrate * factor)
+            if sort_criterion == 'markOfMastery':
+                vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
+                stats = vehicles_stats.get(vehicle.intCD)
+                comparisonKey.append(factor if stats else 0)
+                if stats:
+                    comparisonKey.append(stats.markOfMastery * factor)
             elif sort_criterion == 'nation':
                 if 'nations_order' in carousel_config and len(carousel_config['nations_order']):
                     custom_nations_order = carousel_config['nations_order']
