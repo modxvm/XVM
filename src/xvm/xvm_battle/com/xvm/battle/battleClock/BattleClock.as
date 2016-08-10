@@ -24,6 +24,7 @@ package com.xvm.battle.battleClock
         {
             mouseEnabled = false;
             selectable = false;
+            width = 300;
             TextFieldEx.setNoTranslate(this, true);
             antiAliasType = AntiAliasType.ADVANCED;
             filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 1, 3) ];
