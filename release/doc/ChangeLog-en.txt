@@ -1,4 +1,8 @@
 XVM-6.4.2-dev:
+  * added options in the "playersPanel" modes sections:
+      "fragsShadowLeft", "fragsShadowRight" - shadow for frags field
+      "nickShadowLeft", "nickShadowRight" - shadow for player name field
+      "vehicleShadowLeft", "vehicleShadowRight" - shadow for vehicle name field
 
 XVM-6.4.1.1:
   * fix minimap

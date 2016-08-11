@@ -426,21 +426,21 @@ package com.xvm.battle.playersPanel
             {
                 if (ui.fragsTF.visible)
                 {
-                    updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight);
+                    updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, isLeftPanel ? mcfg.fragsShadowLeft : mcfg.fragsShadowRight);
                 }
                 if (ui.playerNameFullTF.visible)
                 {
-                    updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight);
+                    updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, isLeftPanel ? mcfg.nickShadowLeft : mcfg.nickShadowRight);
                 }
                 if (ui.vehicleTF.visible)
                 {
-                    updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight);
+                    updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, isLeftPanel ? mcfg.vehicleShadowLeft : mcfg.vehicleShadowRight);
                 }
                 updateVehicleLevel();
             }
         }
 
-        private function updateStandardTextField(tf:TextField, format:String):void
+        private function updateStandardTextField(tf:TextField, format:String, shadowConfig:CShadow):void
         {
             //if (Config.IS_DEVELOPMENT) tf.border = true; tf.borderColor = 0xFF0000;
 
@@ -451,6 +451,14 @@ package com.xvm.battle.playersPanel
             var schemeName:String = getSchemeNameForPlayer();
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             tf.htmlText = "<font color='" + XfwUtils.toHtmlColor(colorScheme.rgb) + "'>" + txt + "</font>";
+            if (shadowConfig)
+            {
+                tf.filters = Utils.createShadowFiltersFromConfig(shadowConfig, currentPlayerState);
+            }
+            else
+            {
+                tf.filters = null;
+            }
             invalidate(INVALIDATE_UPDATE_POSITIONS);
         }
 

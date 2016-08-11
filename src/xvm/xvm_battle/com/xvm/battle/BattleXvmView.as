@@ -202,7 +202,7 @@ package com.xvm.battle
                 if (i == 4)
                     continue;
                 var textField:TextField = new TextField();
-                textField.alpha = 0.1;
+                textField.alpha = 0.15;
                 textField.width = 1024;
                 textField.height = 768;
                 textField.mouseEnabled = false;

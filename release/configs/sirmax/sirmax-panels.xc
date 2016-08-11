@@ -32,6 +32,12 @@
     //"vehicleFormatRight": "<img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png' width='9' height='9'>",
     //"fragsFormatLeft": "{{frags|0}}",
     //"fragsFormatRight": "{{frags|0}}",
+    //"fragsShadowLeft": {},
+    //"fragsShadowRight": {},
+    //"nickShadowLeft": {},
+    //"nickShadowRight": {},
+    //"vehicleShadowLeft": {},
+    //"vehicleShadowRight": {},
     "extraFieldsLeft": [
       // for tests
       //{ "width": 1, "height": 23, "bgColor": "0xFFFFFF" },
