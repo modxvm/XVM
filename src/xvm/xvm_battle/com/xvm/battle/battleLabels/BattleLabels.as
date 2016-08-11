@@ -25,6 +25,7 @@ package com.xvm.battle.battleLabels
 
         public function BattleLabels()
         {
+            mouseEnabled = false;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             Xvm.addEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);

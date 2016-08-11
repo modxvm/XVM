@@ -27,7 +27,7 @@ package com.xvm.battle.battleClock
             width = 300;
             TextFieldEx.setNoTranslate(this, true);
             antiAliasType = AntiAliasType.ADVANCED;
-            filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 1, 3) ];
+            filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 1, 3)];
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             onConfigLoaded(null);
