@@ -1,3 +1,6 @@
+XVM-6.4.1.1:
+  * fix minimap
+
 XVM-6.4.1:
   * adaptation to WoT 0.9.15.1.1
   * some bugs fixed

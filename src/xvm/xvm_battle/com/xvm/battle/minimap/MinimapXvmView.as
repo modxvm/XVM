@@ -11,6 +11,7 @@ package com.xvm.battle.minimap
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.*;
+    import net.wg.gui.battle.views.minimap.*;
     import net.wg.gui.battle.views.minimap.events.*;
 
     public class MinimapXvmView extends XvmViewBase
@@ -36,6 +37,10 @@ package com.xvm.battle.minimap
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.MINIMAP);
+            while (MinimapEntryController.instance.xfw_scalableEntries.length)
+            {
+                MinimapEntryController.instance.unregisterScalableEntry(MinimapEntryController.instance.xfw_scalableEntries[0], true);
+            }
             var idx:int = page.getChildIndex(page.minimap);
             page.removeChild(page.minimap);
             var component:UI_Minimap = new UI_Minimap();
@@ -43,6 +48,7 @@ package com.xvm.battle.minimap
             component.y = page.minimap.y;
             page.minimap = component;
             page.addChildAt(page.minimap, idx);
+            page.minimap.validateNow();
             page.xfw_registerComponent(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
             // restore event handlers setted up in the BaseBattlePage.configUI()
             component.addEventListener(MinimapEvent.SIZE_CHANGED, page.xfw_onMiniMapChangeHandler, false, 0, true);
