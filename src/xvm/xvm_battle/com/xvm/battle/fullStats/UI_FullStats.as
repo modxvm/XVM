@@ -68,7 +68,10 @@ package com.xvm.battle.fullStats
                 registerVehicleIconAtlases();
 
                 // Components
-                _winChance = new WinChances(this); // Winning chance info above players list. // TODO: replace with ExtraField
+                if ((Config.networkServicesSettings.statBattle && (Config.networkServicesSettings.chance || Config.networkServicesSettings.chanceLive)) || cfg.showBattleTier)
+                {
+                    _winChance = new WinChances(this); // Winning chance info above players list. // TODO: replace with ExtraField
+                }
             }
             catch (ex:Error)
             {

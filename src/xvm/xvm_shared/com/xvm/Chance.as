@@ -25,7 +25,11 @@ package com.xvm
 
         public static function formatWinChancesText(stats:Dictionary, type:int, isShowChance:Boolean, isShowLiveChance:Boolean):String
         {
-            if (!Config.networkServicesSettings.chance)
+            if (!Config.networkServicesSettings.statBattle)
+            {
+                return "";
+            }
+            if (!Config.networkServicesSettings.chance && isShowChance)
             {
                 return "";
             }

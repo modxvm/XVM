@@ -23,8 +23,6 @@ package com.xvm.lobby.battleresults.components
 
         public function WinChances(page:BattleResults)
         {
-            if (Config.networkServicesSettings.chanceResults == false && Config.config.battleResults.showBattleTier == false)
-                return;
             this.page = page;
 
             // Add stat loading handler
@@ -76,8 +74,8 @@ package com.xvm.lobby.battleresults.components
                 }
             }
 
-            var chanceText:String = Chance.GetChanceText(playerNames, stats,
-                Config.networkServicesSettings.chanceResults, Config.config.battleResults.showBattleTier);
+            var chanceResults:Boolean = Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chanceResults;
+            var chanceText:String = Chance.GetChanceText(playerNames, stats, chanceResults, Config.config.battleResults.showBattleTier);
             if (chanceText)
             {
                 chanceText = "<p class='txt' align='right'>" + chanceText + '</p>';

@@ -23,9 +23,6 @@ package com.xvm.lobby.battleloading.components
 
             cfg = (page.form as BattleLoadingForm).formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
 
-            if (Config.networkServicesSettings.chance == false && cfg.showBattleTier == false)
-                return;
-
             // Load battle stat
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true)
             if (Stat.battleStatLoaded)
@@ -53,7 +50,8 @@ package com.xvm.lobby.battleloading.components
             for (var name:String in Stat.battleStat)
                 playerNames.push(name);
 
-            var chanceText:String = Chance.GetChanceText(playerNames, Stat.battleStat, Config.networkServicesSettings.chance, cfg.showBattleTier, false, true);
+            var chanceBattle:Boolean = Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chance;
+            var chanceText:String = Chance.GetChanceText(playerNames, Stat.battleStat, chanceBattle, cfg.showBattleTier, false, true);
             if (chanceText)
             {
                 winChanceTF.htmlText = '<span class="chances">' + chanceText + '</span>';

@@ -91,7 +91,10 @@ package com.xvm.lobby.battleloading
                 initRenderers();
 
                 // Components
-                _winChances = new WinChances(page); // Winning chance info above players list.
+                if ((Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chanceResults) || Config.config.battleResults.showBattleTier)
+                {
+                    _winChances = new WinChances(page); // Winning chance info above players list.
+                }
                 _clock = new Clock(page);  // Realworld time at right side of TipField.
             }
             catch (ex:Error)

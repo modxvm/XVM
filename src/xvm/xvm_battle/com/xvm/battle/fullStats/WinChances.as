@@ -24,27 +24,24 @@ package com.xvm.battle.fullStats
             cfg = Config.config.statisticForm;
             this.form = form;
 
-            if (Config.networkServicesSettings.chance || Config.networkServicesSettings.chanceLive || cfg.showBattleTier)
+            winChanceTF = createWinChanceTextField(form.battleTF);
+            winChanceTF.styleSheet = XfwUtils.createTextStyleSheet("chances", form.battleTF.defaultTextFormat);
+            winChanceTF.x = 200;
+            winChanceTF.width = 1024;
+            winChanceTF.y = 20;
+            winChanceTF.height = form.battleTF.height;
+            form.addChild(winChanceTF);
+
+            if (Config.networkServicesSettings.chanceLive)
             {
-                winChanceTF = createWinChanceTextField(form.battleTF);
-                winChanceTF.styleSheet = XfwUtils.createTextStyleSheet("chances", form.battleTF.defaultTextFormat);
-                winChanceTF.x = 200;
-                winChanceTF.width = 1024;
-                winChanceTF.y = 20;
-                winChanceTF.height = form.battleTF.height;
-                form.addChild(winChanceTF);
+                Xvm.addEventListener(PlayerStateEvent.VEHICLE_DESTROYED, updateChanceText);
+            }
 
-                if (Config.networkServicesSettings.chanceLive)
-                {
-                    Xvm.addEventListener(PlayerStateEvent.VEHICLE_DESTROYED, updateChanceText);
-                }
-
-                // Load battle stat
-                Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, updateChanceText, false, 0, true)
-                if (Stat.battleStatLoaded)
-                {
-                    updateChanceText();
-                }
+            // Load battle stat
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, updateChanceText, false, 0, true)
+            if (Stat.battleStatLoaded)
+            {
+                updateChanceText();
             }
         }
 
@@ -65,7 +62,9 @@ package com.xvm.battle.fullStats
             var playerNames:Vector.<String> = new Vector.<String>();
             for (var name:String in Stat.battleStat)
                 playerNames.push(name);
-            var chanceText:String = Chance.GetChanceText(playerNames, Stat.battleStat, Config.networkServicesSettings.chance, cfg.showBattleTier, Config.networkServicesSettings.chanceLive);
+            var chanceStatic:Boolean = Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chance;
+            var chanceLive:Boolean = Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chanceLive;
+            var chanceText:String = Chance.GetChanceText(playerNames, Stat.battleStat, chanceStatic, cfg.showBattleTier, chanceLive);
             if (chanceText)
             {
                 winChanceTF.htmlText = '<span class="chances">' + chanceText + '</span>';

@@ -66,7 +66,10 @@ package com.xvm.lobby.battleresults
             }
 
             // display win chance
-            _winChances = new WinChances(page); // Winning chance info above players list.
+            if ((Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chanceResults) || Config.config.battleResults.showBattleTier)
+            {
+                _winChances = new WinChances(page); // Winning chance info above players list.
+            }
         }
     }
 }
