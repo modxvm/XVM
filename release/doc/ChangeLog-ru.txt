@@ -1,15 +1,15 @@
-XVM-6.4.0.1-dev:
+XVM-6.4.1:
   * исправлены некоторые ошибки
   * statisticForm: добавлены extraFields
   * карусель: восстановлена многорядность
+  * карусель: добавлена сортировка по markOfMastery, xtdb, xte, damageRating и marksOnGun
+  * добавлена опция в секции battleLoading и statisticForm:
+      "vehicleIconAlpha" - прозрачность в процентах иконки танка
   * добавлены макросы:
       {{allyStrengthStatic}} - сила команды союзников (статическая)
       {{enemyStrengthStatic}} - сила команды противников (статическая)
       {{allyStrengthLive}} - сила команды союзников (динамическая)
       {{enemyStrengthLive}} - сила команды противников (динамическая)
-  * добавлена опция в секции battleLoading и statisticForm:
-      "vehicleIconAlpha" - прозрачность в процентах иконки танка
-  * карусель: добавлена сортировка по markOfMastery, xtdb, xte, damageRating и marksOnGun
 
 XVM-6.4.0:
   * адаптация к WoT 0.9.15.1
