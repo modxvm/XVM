@@ -89,7 +89,7 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, tankmenInSlots, places
                         tankman_role_arr[-1] += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
                     if len(tankman_full_info.skills):
                         tankman_role_arr[-1] += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
-                    if tankman_full_info.hasNewSkill:
+                    if tankman_full_info.hasNewSkill and tankman_full_info.newSkillCount[0] > 0:
                         tankman_role_arr[-1] += "<img src='%s/skills/new_skill.png' vspace='-3'>x%s" % (imgPath, tankman_full_info.newSkillCount[0])
                     if not tankman_role_arr[-1]:
                         tankman_role_arr[-1] = l10n('noSkills')
