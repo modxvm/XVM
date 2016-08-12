@@ -176,7 +176,10 @@
       "width": 500,
       "height": 1000,
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
-      "format": "{{hitlog-header}}\n{{hitlog-body}}"
+      "format": "{{hitlog-header}}"
+      // Format of the full hitlog (header and body)
+      // Формат полного полный хит-лога (шапка и тело)
+      // "format": "{{hitlog-header}}\n{{hitlog-body}}"
     },
     "totalHP": {
       "enabled": true,
