@@ -62,7 +62,10 @@ package com.xvm
                 stringParts.shift();
                 macro = Locale.get(macro);
                 if (stringParts.length)
-                    macro = StringUtil.substitute.apply(macro, stringParts);
+                {
+                    stringParts.unshift(macro);
+                    macro = StringUtil.substitute.apply(null, stringParts);
+                }
                 res += macro;
 
                 // write rest of text after macro, without }}
