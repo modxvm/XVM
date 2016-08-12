@@ -28,6 +28,7 @@ package com.xvm.battle.playersPanel
     {
         // from PlayersPanelListItem.as
         private static const WIDTH:int = 339;
+        private static const ICONS_AREA_WIDTH_WG:int = 65;
         private static const ICONS_AREA_WIDTH:int = 80;
         private static const XVM_ICONS_AREA_WIDTH:int = 80;
         private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
@@ -522,7 +523,7 @@ package com.xvm.battle.playersPanel
             {
                 vehicleIconScaleX = -1;
                 vehicleIconX =  VEHICLE_ICON_RIGHT_X - getFieldOffsetXRight(ui.vehicleIcon) - ICONS_AREA_WIDTH;
-                vehicleLevelX = VEHICLE_ICON_LEFT_X - getFieldOffsetXRight(ui.vehicleLevel) - ICONS_AREA_WIDTH;
+                vehicleLevelX = VEHICLE_ICON_RIGHT_X - getFieldOffsetXRight(ui.vehicleLevel) - ICONS_AREA_WIDTH_WG;
             }
             if (ui.vehicleIcon.scaleX != vehicleIconScaleX)
             {

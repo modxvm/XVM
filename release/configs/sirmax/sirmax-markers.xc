@@ -195,7 +195,7 @@
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "enabled": false,
+          //"enabled": true,
           "x": 0,
           "y": -65,
           "alpha": 100,
@@ -250,7 +250,7 @@
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
-          "enabled": false,
+          //"enabled": true,
           "x": 0,
           "y": -65,
           "alpha": 100,
