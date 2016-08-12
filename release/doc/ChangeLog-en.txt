@@ -5,7 +5,7 @@ XVM-6.4.2-dev:
       "vehicleShadowLeft", "vehicleShadowRight" - shadow for vehicle name field
 
 XVM-6.4.1.1:
-  * fix minimap
+  * fix minimap (Only compatibility. Extended functionality not implemented yet.)
 
 XVM-6.4.1:
   * adaptation to WoT 0.9.15.1.1
