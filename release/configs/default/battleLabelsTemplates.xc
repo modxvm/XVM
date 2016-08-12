@@ -178,7 +178,7 @@
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
       "format": "{{hitlog-header}}"
       // Format of the full hitlog (header and body)
-      // Формат полного полный хит-лога (шапка и тело)
+      // Формат полного хит-лога (шапка и тело)
       // "format": "{{hitlog-header}}\n{{hitlog-body}}"
     },
     "totalHP": {
