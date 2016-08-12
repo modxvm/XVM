@@ -30,7 +30,9 @@ package com.xvm.lobby.ui.profile
             try
             {
                 if (technique)
+                {
                     technique.fixInitData(param1);
+                }
             }
             catch (ex:Error)
             {

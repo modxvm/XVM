@@ -59,6 +59,22 @@ package com.xvm.lobby.ui.profile
             super.onDispose();
         }
 
+        override public function as_setInitData(param1:Object):void
+        {
+            try
+            {
+                if (technique)
+                {
+                    technique.fixInitData(param1);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            super.as_setInitData(param1);
+        }
+
         override protected function applyData(param1:Object):void
         {
             super.applyData(param1);
