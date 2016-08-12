@@ -57,19 +57,21 @@ package com.xvm.types.cfg
             return _defaultConfigForMarkers;
         }
 
-        private static var _defaultConfigForBattle:CTextFormat = null;
+        private static var _defaultConfigForBattle:Object = {};
         public static function GetDefaultConfigForBattle(align:String = TextFormatAlign.LEFT):CTextFormat
         {
-            if (_defaultConfigForBattle == null)
+            var cfg:CTextFormat = _defaultConfigForBattle[align];
+            if (cfg == null)
             {
-                _defaultConfigForBattle = new CTextFormat();
-                _defaultConfigForBattle.enabled = true;
-                _defaultConfigForBattle.font = "$FieldFont";
-                _defaultConfigForBattle.size = 13;
-                _defaultConfigForBattle.color = 0xFFFFFF;
-                _defaultConfigForBattle.align = align;
+                cfg = new CTextFormat();
+                cfg.enabled = true;
+                cfg.font = "$FieldFont";
+                cfg.size = 13;
+                cfg.color = 0xFFFFFF;
+                cfg.align = align;
+                _defaultConfigForBattle[align] = cfg;
             }
-            return _defaultConfigForBattle;
+            return cfg;
         }
 
         private static var _defaultConfigForLobby:CTextFormat = null;
