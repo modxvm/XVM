@@ -242,6 +242,13 @@ detect_wine(){
     fi
 }
 
+detect_unzip(){
+    if !(hash unzip 2>/dev/null); then
+        echo "!!! unzip is not found"
+        exit 1
+    fi
+}
+
 detect_zip(){
     if !(hash zip 2>/dev/null); then
         echo "!!! zip is not found"
