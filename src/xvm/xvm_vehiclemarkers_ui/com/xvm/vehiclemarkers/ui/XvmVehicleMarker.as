@@ -364,9 +364,9 @@ package com.xvm.vehiclemarkers.ui
                 var vdata:VOVehicleData = VehicleInfo.get(playerState.vehCD);
                 if (vdata)
                 {
-                    if (vdata.hpStock == playerState.maxHealth)
+                    if (vdata.hpTop != playerState.maxHealth)
                     {
-                        switch (turret)
+                        switch (vdata.turret)
                         {
                             case XvmVehicleMarkerConstants.TURRET_HIGH_VULN_DATABASE_VAL:
                                 return Macros.Format(Config.config.markers.turretMarkers.highVulnerability, playerState);
