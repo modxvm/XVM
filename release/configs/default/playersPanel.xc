@@ -131,6 +131,18 @@
       "enabled": false,
       "x": 10, "y": 5, "bindToIcon": true,
       "src": "xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png"
+    },
+    // HP bar background.
+    // Подложка индикатора HP.
+    "hpBarBg": { "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": true, "x": 96, "y": 6, "width": 72, "bindToIcon": true, "height": 14, "bgColor": "0x000000", "alpha": "{{alive?35|0}}" },
+    // HP bar.
+    // Индикатор HP.
+    "hpBar": { "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": true, "x": 97, "y": 7, "bindToIcon": true, "width": "{{hp-ratio:70}}", "height": 12, "bgColor": "{{player?#FFDD33|{{c:system}}}}", "alpha": "{{alive?50|0}}" },
+    // Remaining HP.
+    // Оставшиеся HP.
+    "hp": { "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": true, "x": 132, "y": 4, "bindToIcon": true, "align": "center", "alpha": "{{alive?100|0}}",
+      "format": "<font face='$FieldFont' size='11' color='#D9D9D9' alpha='{{alive?{{ready?#FF|#80}}|#80}}'><b>{{alive?{{hp|{{l10n:No data}}}}|{{l10n:Destroyed}}}}</b></font>",
+      "shadow": { "enabled": true, "color": "0x000000", "alpha": 100, "blur": 4, "strength": 1, "distance": 0, "angle": 0 }
     }
   },
   // Parameters of the Players Panels ("ears").
@@ -290,6 +302,9 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
+        ${"def.hpBarBg"},
+        ${"def.hpBar"},
+        ${"def.hp"},
         ${"def.clanIcon"},
         ${"def.xvmUserMarker"},
         ${"def.xmqpServiceMarker"}
@@ -297,6 +312,9 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
+        ${"def.hpBarBg"},
+        ${"def.hpBar"},
+        ${"def.hp"},
         ${"def.clanIcon"},
         ${"def.xvmUserMarker"},
         ${"def.enemySpottedMarker"}
@@ -382,6 +400,9 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
+        ${"def.hpBarBg"},
+        ${"def.hpBar"},
+        ${"def.hp"},
         ${"def.clanIcon"},
         ${"def.xvmUserMarker"},
         ${"def.xmqpServiceMarker"}
@@ -389,6 +410,9 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
+        ${"def.hpBarBg"},
+        ${"def.hpBar"},
+        ${"def.hp"},
         ${"def.clanIcon"},
         ${"def.xvmUserMarker"},
         ${"def.enemySpottedMarker"}
@@ -474,6 +498,9 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
+        ${"def.hpBarBg"},
+        ${"def.hpBar"},
+        ${"def.hp"},
         ${"def.clanIcon"},
         ${"def.xvmUserMarker"},
         ${"def.xmqpServiceMarker"}
@@ -481,6 +508,9 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
+        ${"def.hpBarBg"},
+        ${"def.hpBar"},
+        ${"def.hp"},
         ${"def.clanIcon"},
         ${"def.xvmUserMarker"},
         ${"def.enemySpottedMarker"}
@@ -563,6 +593,9 @@
       // Set of formats for left panel (extended format supported, see above)
       // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsLeft": [
+        ${"def.hpBarBg"},
+        ${"def.hpBar"},
+        ${"def.hp"},
         ${"def.clanIcon"},
         ${"def.xvmUserMarker"},
         ${"def.xmqpServiceMarker"}
@@ -570,6 +603,9 @@
       // Set of formats for right panel (extended format supported, see above)
       // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraFieldsRight": [
+        ${"def.hpBarBg"},
+        ${"def.hpBar"},
+        ${"def.hp"},
         ${"def.clanIcon"},
         ${"def.xvmUserMarker"},
         ${"def.enemySpottedMarker"}
