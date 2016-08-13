@@ -357,7 +357,6 @@ package com.xvm.vehiclemarkers.ui
 
         private function getTurretData():String
         {
-            var turret:int = XvmVehicleMarkerConstants.TURRET_UNKNOWN_VULN_DATABASE_VAL;
             var playerState:VOPlayerState = BattleState.get(vehicleID);
             if (playerState)
             {
