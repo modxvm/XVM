@@ -292,6 +292,7 @@ class Battle(object):
             # update vehicles data
             for (vehicleID, vData) in BigWorld.player().arena.vehicles.iteritems():
                 self.updatePlayerState(vehicleID, INV.ALL)
+            g_eventBus.handleEvent(events.HasCtxEvent(XVM_BATTLE_EVENT.ARENA_INFO_INVALIDATED))
 
 
     #####################################################################
