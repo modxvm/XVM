@@ -1,3 +1,9 @@
+/**
+ * XVM Native ping module
+ * @author Mikhail Paulyshka <mixail(at)modxvm.com>
+ * @author Fecell
+ */
+
 #include "pythonwrapper.h"
 
 #include <Tlhelp32.h>

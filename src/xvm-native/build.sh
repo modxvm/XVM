@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# XVM Native ping module
+
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "$currentdir"/../../build/library.sh
 

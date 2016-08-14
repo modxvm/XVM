@@ -1,3 +1,9 @@
+/**
+ * XVM Native ping module
+ * @author Mikhail Paulyshka <mixail(at)modxvm.com>
+ * @author Fecell
+ */
+
 #pragma once
 
 #define Py_BUILD_CORE 1

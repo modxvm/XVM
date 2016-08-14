@@ -1,3 +1,9 @@
+/**
+ * XVM Native ping module
+ * @author Mikhail Paulyshka <mixail(at)modxvm.com>
+ * @author Microsoft Corporation
+ */
+
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iphlpapi.h>

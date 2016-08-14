@@ -1,3 +1,8 @@
+/**
+ * XVM Native ping module
+ * @author Mikhail Paulyshka <mixail(at)modxvm.com>
+ */
+ 
 #include "pythonmodule.h"
 #include "ping.h"
 

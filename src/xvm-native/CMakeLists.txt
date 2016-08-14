@@ -1,3 +1,5 @@
+# XVM Native ping module
+
 project(xvm-ping)
 cmake_minimum_required (VERSION 3.0)
 
