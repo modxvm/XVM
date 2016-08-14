@@ -50,7 +50,9 @@ int ping(char* address)
     // Allocate space for at a single reply
     ReplySize = sizeof (ICMP_ECHO_REPLY) + sizeof (SendData) + 8;
     ReplyBuffer = (VOID *) malloc(ReplySize);
-    if (ReplyBuffer == NULL) {
+    if (ReplyBuffer == NULL) 
+    {
+        IcmpCloseHandle(hIcmpFile);
         return -3;
     }
 
@@ -67,22 +69,22 @@ int ping(char* address)
         {
             case IP_DEST_HOST_UNREACHABLE:
             case IP_DEST_NET_UNREACHABLE:
-            case IP_REQ_TIMED_OUT:
-                free(ReplyBuffer);
-                ReplyBuffer = NULL;
-                return -4;
-            default:
+                ping = -4;
                 break;
-        }
-
-      
-       ping = pEchoReply->RoundTripTime;
-       free(ReplyBuffer);
-       ReplyBuffer = NULL;
-       return ping;
+            case IP_REQ_TIMED_OUT:
+                ping = -5;
+                break;
+            default:
+                ping = pEchoReply->RoundTripTime;
+                break;
+        }    
+    }
+    else
+    {
+        ping = -6;
     }
 
     free(ReplyBuffer);
-    ReplyBuffer = NULL;
-    return -5;
+    IcmpCloseHandle(hIcmpFile);
+    return ping;
 }
