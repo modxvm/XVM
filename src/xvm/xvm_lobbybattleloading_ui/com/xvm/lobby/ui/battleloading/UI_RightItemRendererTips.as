@@ -8,16 +8,16 @@ package com.xvm.lobby.ui.battleloading
     import com.xvm.lobby.ui.battleloading.components.*;
     import net.wg.gui.lobby.battleloading.vo.*;
 
-    public dynamic class UI_RightItemRendererTips extends RightItemRendererTipsUI
+    public /*dynamic*/ class UI_RightItemRendererTips extends RightItemRendererTipsUI
     {
-        private var worker:BattleLoadingItemRenderer;
+        private var proxy:BattleLoadingItemRendererProxy;
 
         public function UI_RightItemRendererTips()
         {
             try
             {
                 super();
-                worker = new BattleLoadingItemRenderer(this, BattleLoadingItemRenderer.PROXY_TYPE_TIPS);
+                proxy = new BattleLoadingItemRendererProxy(this, BattleLoadingItemRendererProxy.UI_TYPE_TIPS, false);
             }
             catch (ex:Error)
             {
@@ -30,7 +30,7 @@ package com.xvm.lobby.ui.battleloading
             try
             {
                 super.configUI();
-                worker.configUI();
+                proxy.configUI();
             }
             catch (ex:Error)
             {
@@ -42,7 +42,7 @@ package com.xvm.lobby.ui.battleloading
         {
             try
             {
-                worker.onDispose();
+                proxy.onDispose();
                 super.onDispose();
             }
             catch (ex:Error)
@@ -55,7 +55,7 @@ package com.xvm.lobby.ui.battleloading
         {
             try
             {
-                super.setData(worker.fixData(data as VehicleInfoVO));
+                super.setData(proxy.fixData(data as VehicleInfoVO));
             }
             catch (ex:Error)
             {
@@ -68,7 +68,7 @@ package com.xvm.lobby.ui.battleloading
             try
             {
                 super.draw();
-                worker.draw();
+                proxy.draw();
             }
             catch (ex:Error)
             {

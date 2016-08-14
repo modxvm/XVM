@@ -59,10 +59,10 @@ package com.xvm.battle.fullStats
         private var _vehicleID:Number = NaN;
         private var _vehicleIconName:String = null;
 
-        public var _substrateHolder:MovieClip;
-        public var _bottomHolder:MovieClip;
-        public var _normalHolder:MovieClip;
-        public var _topHolder:MovieClip;
+        private var _substrateHolder:MovieClip;
+        private var _bottomHolder:MovieClip;
+        private var _normalHolder:MovieClip;
+        private var _topHolder:MovieClip;
 
         private var extraFields:ExtraFieldsGroup = null;
 
