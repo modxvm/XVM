@@ -64,7 +64,7 @@ package com.xvm.lobby.ui.battleloading.components
 
         private var extraFields:ExtraFieldsGroup = null;
 
-        private var currentPlayerState:VOPlayerState;
+        private var currentOptions:VOLobbyMacrosOptions;
 
         // for debug
         public function _debug():void
@@ -219,20 +219,18 @@ package com.xvm.lobby.ui.battleloading.components
             {
                 if (_model && ui.initialized)
                 {
-                    currentPlayerState = BattleState.get(_model.vehicleID);
+                    currentOptions = new VOLobbyMacrosOptions();
+                    currentOptions.vehicleID = _model.vehicleID;
+                    currentOptions.playerName = _model.playerName;
+                    currentOptions.vehicleStatus = _model.vehicleStatus;
+                    currentOptions.playerStatus = _model.playerStatus;
+                    currentOptions.isSelected = _model.isCurrentPlayer;
+                    currentOptions.isCurrentPlayer = _model.isCurrentPlayer;
+                    currentOptions.isSquadPersonal = _model.isCurrentSquad;
+                    currentOptions.squadIndex = _model.squadIndex;
+                    currentOptions.position = ui.index + 1;
 
-                    var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
-                    options.vehicleID = _model.vehicleID;
-                    options.playerName = _model.playerName;
-                    options.vehicleStatus = _model.vehicleStatus;
-                    options.playerStatus = _model.playerStatus;
-                    options.isSelected = _model.isCurrentPlayer;
-                    options.isCurrentPlayer = _model.isCurrentPlayer;
-                    options.isSquadPersonal = _model.isCurrentSquad;
-                    options.squadIndex = _model.squadIndex;
-                    options.position = ui.index + 1;
-
-                    var isIconHighlighted:Boolean = App.colorSchemeMgr && (!Macros.FormatBooleanGlobal(cfg.darkenNotReadyIcon) || ui.enabled) && options.isAlive;
+                    var isIconHighlighted:Boolean = App.colorSchemeMgr && (!Macros.FormatBooleanGlobal(cfg.darkenNotReadyIcon) || ui.enabled) && currentOptions.isAlive;
 
                     ui.vehicleIconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
@@ -306,10 +304,10 @@ package com.xvm.lobby.ui.battleloading.components
                     // Set Text Fields
                     var textFieldColorString:String = ui.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
 
-                    var nickFieldText:String = Macros.Format(team == XfwConst.TEAM_ALLY ? cfg.formatLeftNick : cfg.formatRightNick, options);
+                    var nickFieldText:String = Macros.Format(team == XfwConst.TEAM_ALLY ? cfg.formatLeftNick : cfg.formatRightNick, currentOptions);
                     ui.textField.htmlText = "<font color='" + textFieldColorString + "'>" + nickFieldText + "</font>";
 
-                    var vehicleFieldText:String = Macros.Format(team == XfwConst.TEAM_ALLY ? cfg.formatLeftVehicle : cfg.formatRightVehicle, options);
+                    var vehicleFieldText:String = Macros.Format(team == XfwConst.TEAM_ALLY ? cfg.formatLeftVehicle : cfg.formatRightVehicle, currentOptions);
                     ui.vehicleField.htmlText = "<font color='" + textFieldColorString + "'>" + vehicleFieldText + "</font>";
 
                     // Extra Fields
@@ -351,25 +349,18 @@ package com.xvm.lobby.ui.battleloading.components
 
         public function getSchemeNameForVehicle():String
         {
-            return null;
-            /*var highlightVehicleIcon:Boolean = Config.config.battle.highlightVehicleIcon;
-            return PlayerStatusSchemeName.getSchemeNameForVehicle(
-                currentPlayerState.isCurrentPlayer && highlightVehicleIcon,
-                currentPlayerState.isSquadPersonal && highlightVehicleIcon,
-                currentPlayerState.isTeamKiller && highlightVehicleIcon,
-                currentPlayerState.isDead,
-                currentPlayerState.isOffline);*/
+            var isAvailable:Boolean = true;
+            if (!_model.isNotAvailable())
+            {
+                isAvailable = _model.isAlive() && _model.isReady();
+            }
+            return BattleLoadingHelper.instance.getColorSchemeName(_model, isAvailable);
         }
 
+        // TODO
         public function getSchemeNameForPlayer():String
         {
             return null;
-            /*return PlayerStatusSchemeName.getSchemeNameForPlayer(
-                currentPlayerState.isCurrentPlayer,
-                currentPlayerState.isSquadPersonal,
-                currentPlayerState.isTeamKiller,
-                currentPlayerState.isDead,
-                currentPlayerState.isOffline);*/
         }
 
         // PRIVATE
@@ -487,8 +478,7 @@ package com.xvm.lobby.ui.battleloading.components
                     offsetX = DEFAULT_PLAYER_NAME_X + DEFAULT_PLAYER_NAME_WIDTH + SQUAD_ITEMS_AREA_WIDTH;
                     bindToIconOffset = ui.vehicleIconLoader.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
                 }
-                extraFields.visible = true;
-                extraFields.update(currentPlayerState, bindToIconOffset, offsetX, ui.vehicleIconLoader.y);
+                extraFields.update(currentOptions, bindToIconOffset, offsetX, ui.vehicleIconLoader.y);
             }
         }
     }
