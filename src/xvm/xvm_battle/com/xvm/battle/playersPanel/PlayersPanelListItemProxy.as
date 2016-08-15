@@ -393,6 +393,8 @@ package com.xvm.battle.playersPanel
                     }
                     break;
                 case PLAYERS_PANEL_STATE.HIDEN:
+                    BattleState.playersPanelWidthLeft = 0;
+                    BattleState.playersPanelWidthRight = 0;
                     ui.visible = false;
                     //ui.x = isLeftPanel ? -WIDTH : WIDTH;
                     break;

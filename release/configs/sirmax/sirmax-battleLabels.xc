@@ -21,6 +21,7 @@
       "width": 500,
       "height": 230,
       "screenVAlign": "bottom",
+      //"updateEvent": "ON_PANEL_MODE_CHANGED", "x": "{{pp.widthLeft}}", "y": 65, "screenVAlign": "top"
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.hitlog" }
     },
     {
