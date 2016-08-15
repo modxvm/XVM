@@ -16,22 +16,27 @@ package com.xvm.battle.events
         public static const MODULE_DESTROYED:String = "PS_MODULE_DESTROYED";
         public static const MODULE_REPAIRED:String = "PS_MODULE_REPAIRED";
         public static const DAMAGE_CAUSED:String = "PS_DAMAGE_CAUSED";
+        public static const ON_HOTKEY_PRESSED:String = "PS_ON_HOTKEY_PRESSED";
+        public static const ON_TARGET_CHANGED:String = "PS_ON_TARGET_CHANGED";
+        public static const ON_PANEL_MODE_CHANGED:String = "PS_ON_PANEL_MODE_CHANGED";
+        public static const ON_EVERY_FRAME:String = "PS_ON_EVERY_FRAME";
+        public static const ON_EVERY_SECOND:String = "PS_ON_EVERY_SECOND";
 
         public var vehicleID:Number;
-        public var accountDBID:Number;
         public var playerName:String;
+        public var userData:Object;
 
-        public function PlayerStateEvent(type:String, vehicleID:Number, accountDBID:Number, playerName:String)
+        public function PlayerStateEvent(type:String, vehicleID:Number = NaN, playerName:String = null, userData:Object = null)
         {
             super(type, false, false);
             this.vehicleID = vehicleID;
-            this.accountDBID = accountDBID;
             this.playerName = playerName;
+            this.userData = userData;
         }
 
         public override function clone():Event
         {
-            return new PlayerStateEvent(type, vehicleID, accountDBID, playerName);
+            return new PlayerStateEvent(type, vehicleID, playerName, userData);
         }
     }
 

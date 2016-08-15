@@ -14,6 +14,7 @@ package com.xvm.extraFields
     import flash.events.*;
     import flash.text.*;
     import flash.geom.*;
+    import flash.utils.Timer;
     import mx.utils.*;
     import scaleform.gfx.*;
 
@@ -51,6 +52,26 @@ package com.xvm.extraFields
                             case "ON_DAMAGE_CAUSED":
                                 Xvm.addEventListener(PlayerStateEvent.DAMAGE_CAUSED, field.updateOnEvent);
                                 break;
+                            case "ON_TARGET_CHANGED":
+                                Xvm.addEventListener(PlayerStateEvent.ON_TARGET_CHANGED, field.updateOnEvent);
+                                break;
+                            case "ON_PANEL_MODE_CHANGED":
+                                Xvm.addEventListener(PlayerStateEvent.ON_PANEL_MODE_CHANGED, field.updateOnEvent);
+                                break;
+                            case "ON_EVERY_FRAME":
+                                Xvm.addEventListener(PlayerStateEvent.ON_EVERY_FRAME, field.updateOnEvent);
+                                if (!timerFrame)
+                                {
+                                    initTimerFrame();
+                                }
+                                break;
+                            case "ON_EVERY_SECOND":
+                                Xvm.addEventListener(PlayerStateEvent.ON_EVERY_SECOND, field.updateOnEvent);
+                                if (!timerSec)
+                                {
+                                    initTimerSec();
+                                }
+                                break;
                         }
                     }
                 }
@@ -61,6 +82,31 @@ package com.xvm.extraFields
                 Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, field.onKeyEvent);
                 field.visible = !field.cfg.visibleOnHotKey;
             }
+        }
+
+        // PRIVATE
+
+        private static var timerFrame:Timer = null;
+        private static var timerSec:Timer = null;
+
+        private static function initTimerFrame():void
+        {
+            timerFrame = new Timer(1);
+            timerFrame.addEventListener(TimerEvent.TIMER, function():void
+            {
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_EVERY_FRAME));
+            });
+            timerFrame.start();
+        }
+
+        private static function initTimerSec():void
+        {
+            timerSec = new Timer(1000);
+            timerSec.addEventListener(TimerEvent.TIMER, function():void
+            {
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_EVERY_SECOND));
+            });
+            timerSec.start();
         }
     }
 }

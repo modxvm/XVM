@@ -55,6 +55,7 @@ class XVM_COMMAND(object):
     SAVE_SETTINGS = "xvm.save_settings"
     MINIMAP_CLICK = "xvm.minimap_click"
     AS_ON_KEY_EVENT = "xvm.as.on_key_event"
+    AS_ON_TARGET_CHANGED = "xvm.as.on_target_changed"
     AS_ON_UPDATE_STAGE = "xvm.as.on_update_stage"
     AS_DOSSIER = "xvm.as.dossier"
     AS_L10N = "xvm.as.l10n"

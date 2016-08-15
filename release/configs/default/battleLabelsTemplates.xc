@@ -29,6 +29,10 @@
      │                            │   ON_MODULE_DESTROYED
      │                            │   ON_MODULE_REPAIRED
      │                            │   ON_DAMAGE_CAUSED
+     │                            │   ON_TARGET_CHANGED
+     │                            │   ON_PANEL_MODE_CHANGED
+     │                            │   ON_EVERY_FRAME           * can reduce performance
+     │                            │   ON_EVERY_SECOND          * can reduce performance
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
      │                            │ when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter

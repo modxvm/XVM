@@ -9,6 +9,7 @@ package com.xvm.battle.playersPanel
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.vo.*;
+    import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;
@@ -117,6 +118,8 @@ package com.xvm.battle.playersPanel
                 xfw_expandRectLeft.width = expandAreaWidth;
                 xfw_expandRectRight.width = expandAreaWidth;
                 xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
+
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_PANEL_MODE_CHANGED));
             }
             catch (ex:Error)
             {
