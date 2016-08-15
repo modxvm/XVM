@@ -10,6 +10,10 @@ XVM-6.4.2-dev:
       ON_PANEL_MODE_CHANGED
       ON_EVERY_FRAME           * can reduce performance
       ON_EVERY_SECOND          * can reduce performance
+  * added global macros:
+      {{pp.mode}}       - current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
+      {{pp.widthLeft}}  - current left players panel width
+      {{pp.widthRight}} - current right players panel width
 
 XVM-6.4.1.1:
   * fix minimap (Only compatibility. Extended functionality not implemented yet.)

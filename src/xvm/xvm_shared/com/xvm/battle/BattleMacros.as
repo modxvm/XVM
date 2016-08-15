@@ -58,6 +58,18 @@ package com.xvm.battle
             // {{my-rlevel}}
             m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
 
+            // {{my-frags}}
+            m_globals["my-frags"] = function(o:IVOMacrosOptions):Number
+            {
+                return BattleState.playerFrags == 0 ? NaN : BattleState.playerFrags;
+            }
+
+            // {{zoom}}
+            m_globals["zoom"] = function(o:IVOMacrosOptions):int
+            {
+                return BattleState.currentAimZoom;
+            }
+
             // Capture bar
 
             // {{cap.points}}
@@ -100,16 +112,18 @@ package com.xvm.battle
                 return null;
             }
 
-            // {{my-frags}}
-            m_globals["my-frags"] = function(o:IVOMacrosOptions):Number
+            // {{pp.mode}}
+            // {{pp.widthLeft}}
+            // {{pp.widthRight}}
+            m_globals["pp"] = function(o:IVOMacrosOptions):*
             {
-                return BattleState.playerFrags == 0 ? NaN : BattleState.playerFrags;
-            }
-
-            // {{zoom}}
-            m_globals["zoom"] = function(o:IVOMacrosOptions):int
-            {
-                return BattleState.currentAimZoom;
+                switch (o.getSubname())
+                {
+                    case "mode": return BattleState.playersPanelMode;
+                    case "widthLeft": return BattleState.playersPanelWidthLeft;
+                    case "widthRight": return BattleState.playersPanelWidthRight;
+                }
+                return null;
             }
 
             // xmqp events macros

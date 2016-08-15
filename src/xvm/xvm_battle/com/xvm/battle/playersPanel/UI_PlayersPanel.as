@@ -119,7 +119,7 @@ package com.xvm.battle.playersPanel
                 xfw_expandRectRight.width = expandAreaWidth;
                 xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
 
-                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_PANEL_MODE_CHANGED));
+                BattleState.playersPanelMode = state;
             }
             catch (ex:Error)
             {

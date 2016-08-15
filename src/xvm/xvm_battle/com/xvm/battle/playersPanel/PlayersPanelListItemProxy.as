@@ -563,6 +563,7 @@ package com.xvm.battle.playersPanel
             ui.x = -(lastX - (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
             //Logger.add("ui.x=" + ui.x);
             ui.dynamicSquad.x = -ui.x;
+            BattleState.playersPanelWidthLeft = WIDTH + ui.x;
         }
 
         private function updatePositionsRight():void
@@ -587,6 +588,7 @@ package com.xvm.battle.playersPanel
             }
             ui.x = -(lastX + (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
             ui.dynamicSquad.x = -ui.x;
+            BattleState.playersPanelWidthRight = WIDTH - ui.x;
         }
 
         private function getFieldByConfigName(fieldName:String):TextField
