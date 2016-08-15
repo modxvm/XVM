@@ -6,7 +6,8 @@ XVM-6.4.2-dev:
       "fixedPosition" - true - не изменять позиции игроков при уничтожении (по умолчанию false)
   * battleLoading: добавлены extraFields
   * battleLabels: добавлены события:
-      ON_TARGET_CHANGED
+      ON_TARGET_IN  - при наведении на танк
+      ON_TARGET_OUT - при наведении не на танк
       ON_PANEL_MODE_CHANGED
       ON_EVERY_FRAME           * может понизить производительность
       ON_EVERY_SECOND          * может понизить производительность

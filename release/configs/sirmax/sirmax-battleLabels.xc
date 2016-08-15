@@ -10,7 +10,7 @@
     {
       //"enabled": false,
       "hotKeyCode": 36, // J
-      "updateEvent": "ON_TARGET_CHANGED",
+      "updateEvent": "ON_TARGET_IN",
       "height": 150,
       "format": "{{py:vinfo.name()}}\nRT: {{py:vinfo.gun_reload()}}\nVR: {{py:vinfo.vision_radius()}}",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }

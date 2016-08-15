@@ -183,7 +183,14 @@ package com.xvm.battle
 
         private function onTargetChanged(vehicleID:Number):void
         {
-            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_TARGET_CHANGED, vehicleID));
+            if (vehicleID)
+            {
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_TARGET_IN, vehicleID));
+            }
+            else
+            {
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_TARGET_OUT));
+            }
         }
 
         private function onUpdateStage():void

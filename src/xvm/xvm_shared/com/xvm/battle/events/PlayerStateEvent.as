@@ -4,6 +4,7 @@
  */
 package com.xvm.battle.events
 {
+    import com.xvm.battle.*;
     import flash.events.*;
 
     public class PlayerStateEvent extends Event
@@ -17,7 +18,8 @@ package com.xvm.battle.events
         public static const MODULE_REPAIRED:String = "PS_MODULE_REPAIRED";
         public static const DAMAGE_CAUSED:String = "PS_DAMAGE_CAUSED";
         public static const ON_HOTKEY_PRESSED:String = "PS_ON_HOTKEY_PRESSED";
-        public static const ON_TARGET_CHANGED:String = "PS_ON_TARGET_CHANGED";
+        public static const ON_TARGET_IN:String = "PS_ON_TARGET_IN";
+        public static const ON_TARGET_OUT:String = "PS_ON_TARGET_OUT";
         public static const ON_PANEL_MODE_CHANGED:String = "PS_ON_PANEL_MODE_CHANGED";
         public static const ON_EVERY_FRAME:String = "PS_ON_EVERY_FRAME";
         public static const ON_EVERY_SECOND:String = "PS_ON_EVERY_SECOND";
@@ -29,7 +31,7 @@ package com.xvm.battle.events
         public function PlayerStateEvent(type:String, vehicleID:Number = NaN, playerName:String = null, userData:Object = null)
         {
             super(type, false, false);
-            this.vehicleID = vehicleID;
+            this.vehicleID = isNaN(vehicleID) ? BattleGlobalData.playerVehicleID : vehicleID;
             this.playerName = playerName;
             this.userData = userData;
         }
