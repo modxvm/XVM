@@ -359,6 +359,7 @@ package com.xvm.battle.playersPanel
         public function applyState():void
         {
             //Logger.add("applyState: " + ui.xfw_state);
+            BattleState.playersPanelMode = ui.xfw_state;
             switch (ui.xfw_state)
             {
                 case PLAYERS_PANEL_STATE.FULL:
