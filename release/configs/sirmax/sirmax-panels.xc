@@ -10,6 +10,7 @@
   },
   "large": {
     //"enabled": false,
+    //"fixedPosition": true,
     "removeSquadIcon": true,
     "vehicleIconXOffsetLeft": -15,
     "vehicleIconXOffsetRight": -15,
@@ -84,6 +85,7 @@
   },
   "medium": {
     //"enabled": false,
+    //"fixedPosition": true,
     "expandAreaWidth": 0,
     "nickMinWidth": 80,
     "nickMaxWidth": 80,
@@ -148,7 +150,7 @@
     //"enabled": false,
     "expandAreaWidth": 40,
     //"layout": "horizontal",
-    "fixedPosition": true,
+    //"fixedPosition": true,
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },
   "alpha": 50,

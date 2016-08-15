@@ -3,6 +3,7 @@ XVM-6.4.2-dev:
       "fragsShadowLeft", "fragsShadowRight" - тень для поля фрагов
       "nickShadowLeft", "nickShadowRight" - тень для поля имени игрока
       "vehicleShadowLeft", "vehicleShadowRight" - тень для поля названия танка
+      "fixedPosition" - true - не изменять позиции игроков при уничтожении (по умолчанию false)
   * battleLoading: добавлены extraFields
 
 XVM-6.4.1.1:

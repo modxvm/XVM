@@ -39,6 +39,7 @@ package com.xvm.types.cfg
         public var vehicleFormatRight:String;
         public var vehicleShadowLeft:CShadow;
         public var vehicleShadowRight:CShadow;
+        public var fixedPosition:*;
         public var extraFieldsLeft:Array;
         public var extraFieldsRight:Array;
 
