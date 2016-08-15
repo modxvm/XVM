@@ -120,6 +120,11 @@ package com.xvm.battle.playersPanel
                 xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
 
                 BattleState.playersPanelMode = state;
+                if (state == PLAYERS_PANEL_STATE.HIDEN)
+                {
+                    BattleState.playersPanelWidthLeft = 0;
+                    BattleState.playersPanelWidthRight = 0;
+                }
             }
             catch (ex:Error)
             {
