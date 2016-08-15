@@ -334,12 +334,15 @@ package com.xvm.vehiclemarkers.ui
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (e.playerName == playerName)
+            if (isNaN(vehicleID))
             {
-                if (isNaN(vehicleID))
+                if (e.playerName == playerName)
                 {
                     init(e.vehicleID);
                 }
+            }
+            if (e.vehicleID == vehicleID)
+            {
                 invalidate(InvalidationType.DATA);
             }
         }
