@@ -373,7 +373,10 @@ package com.xvm.battle.fullStats
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            invalidate(INVALIDATE_PLAYER_STATE);
+            if (currentPlayerState && e.vehicleID == currentPlayerState.vehicleID)
+            {
+                invalidate(INVALIDATE_PLAYER_STATE);
+            }
         }
 
         private function onAtlasLoaded(e:Event):void

@@ -329,7 +329,7 @@ package com.xvm.battle.playersPanel
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (xvm_enabled && _userProps && e.playerName == _userProps.userName)
+            if (xvm_enabled && _userProps && e.vehicleID == _vehicleID)
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }
