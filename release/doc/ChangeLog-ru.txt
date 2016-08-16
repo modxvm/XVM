@@ -3,8 +3,15 @@ XVM-6.4.2-dev:
       "fragsShadowLeft", "fragsShadowRight" - тень для поля фрагов
       "nickShadowLeft", "nickShadowRight" - тень для поля имени игрока
       "vehicleShadowLeft", "vehicleShadowRight" - тень для поля названия танка
+      "fixedPosition" - true - не изменять позиции игроков при уничтожении (по умолчанию false)
   * ping: исправлена утечка памяти при включенном пинге в ангаре, которая могла возникнуть на устаревших версиях Windows
   * ping: для работы под Wine больше не требуется дополнительная настройка
+  * battleLoading: добавлены extraFields
+  * battleLabels: добавлены события:
+      ON_TARGET_CHANGED
+      ON_PANEL_MODE_CHANGED
+      ON_EVERY_FRAME           * может понизить производительность
+      ON_EVERY_SECOND          * может понизить производительность
 
 XVM-6.4.1.1:
   * исправлена миникарта (Только совместимость. Расширенная функциональность ещё не реализована.)

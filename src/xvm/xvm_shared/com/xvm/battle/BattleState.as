@@ -375,17 +375,22 @@ package com.xvm.battle
         {
             try
             {
+                var eventType:String = null;
                 switch (state)
                 {
                     case "critical":
-                        Xvm.dispatchEvent(new StringEvent(PlayerStateEvent.MODULE_CRITICAL, moduleName));
+                        eventType = PlayerStateEvent.MODULE_CRITICAL;
                         break;
                     case "destroyed":
-                        Xvm.dispatchEvent(new StringEvent(PlayerStateEvent.MODULE_DESTROYED, moduleName));
+                        eventType = PlayerStateEvent.MODULE_DESTROYED;
                         break;
                     case "repaired":
-                        Xvm.dispatchEvent(new StringEvent(PlayerStateEvent.MODULE_REPAIRED, moduleName));
+                        eventType = PlayerStateEvent.MODULE_REPAIRED;
                         break;
+                }
+                if (eventType)
+                {
+                    Xvm.dispatchEvent(new PlayerStateEvent(eventType, NaN, null, { moduleName: moduleName }));
                 }
             }
             catch (ex:Error)

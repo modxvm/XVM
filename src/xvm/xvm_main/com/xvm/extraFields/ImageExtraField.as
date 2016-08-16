@@ -393,6 +393,7 @@ package com.xvm.extraFields
                 {
                     visible = !_keyHolded;
                 }
+                updateOnEvent(new PlayerStateEvent(PlayerStateEvent.ON_HOTKEY_PRESSED));
             }
         }
     }

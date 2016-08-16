@@ -10,6 +10,7 @@
   },
   "large": {
     //"enabled": false,
+    //"fixedPosition": true,
     "removeSquadIcon": true,
     "vehicleIconXOffsetLeft": -15,
     "vehicleIconXOffsetRight": -15,
@@ -32,12 +33,12 @@
     //"vehicleFormatRight": "<img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png' width='9' height='9'>",
     //"fragsFormatLeft": "{{frags|0}}",
     //"fragsFormatRight": "{{frags|0}}",
-    //"fragsShadowLeft": {},
-    //"fragsShadowRight": {},
-    //"nickShadowLeft": {},
-    //"nickShadowRight": {},
-    //"vehicleShadowLeft": {},
-    //"vehicleShadowRight": {},
+    //"fragsShadowLeft": { "color": "0xFF0000" },
+    //"fragsShadowRight": { "color": "0xFF0000" },
+    //"nickShadowLeft": { "color": "0x0000FF" },
+    //"nickShadowRight": { "color": "0x0000FF" },
+    //"vehicleShadowLeft": { "color": "0x00FF00" },
+    //"vehicleShadowRight": { "color": "0x00FF00" },
     "extraFieldsLeft": [
       // for tests
       //{ "width": 1, "height": 23, "bgColor": "0xFFFFFF" },
@@ -84,6 +85,7 @@
   },
   "medium": {
     //"enabled": false,
+    //"fixedPosition": true,
     "expandAreaWidth": 0,
     "nickMinWidth": 80,
     "nickMaxWidth": 80,
@@ -148,7 +150,7 @@
     //"enabled": false,
     "expandAreaWidth": 40,
     //"layout": "horizontal",
-    "fixedPosition": true,
+    //"fixedPosition": true,
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },
   "alpha": 50,

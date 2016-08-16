@@ -12,6 +12,8 @@ from xvm import utils
 @xvm.export('xvm.team_strength')
 def xvm_team_strength(a, e):
     try:
+        if a == '' or e == '':
+            return ''
         sign = '&gt;' if float(a) > float(e) else '&lt;' if float(a) < float(e) else '='
         ca = utils.brighten_color(int(config.get('colors/system/ally_alive'), 0), 50)
         ce = utils.brighten_color(int(config.get('colors/system/enemy_alive'), 0), 50)

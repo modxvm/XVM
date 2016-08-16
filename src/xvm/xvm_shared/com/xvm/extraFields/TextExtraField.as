@@ -7,7 +7,7 @@ package com.xvm.extraFields
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
-    import com.xvm.battle.events.PlayerStateEvent;
+    import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.events.*;
@@ -734,6 +734,7 @@ package com.xvm.extraFields
                 {
                     visible = !_keyHolded;
                 }
+                updateOnEvent(new PlayerStateEvent(PlayerStateEvent.ON_HOTKEY_PRESSED));
             }
         }
     }

@@ -11,6 +11,7 @@ package com.xvm.battle
     import com.xvm.battle.battleClock.BattleClock;
     import com.xvm.battle.battleLabels.BattleLabels;
     import com.xvm.battle.elements.BattleElements;
+    import com.xvm.battle.events.*;
     import com.xvm.battle.hitlog.Hitlog;
     import com.xvm.battle.zoomIndicator.ZoomIndicator;
     import com.xvm.types.cfg.*;
@@ -60,6 +61,7 @@ package com.xvm.battle
             {
                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+                Xfw.addCommandListener(XvmCommands.AS_ON_TARGET_CHANGED, onTargetChanged);
                 Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
 
                 onConfigLoaded(null);
@@ -104,6 +106,7 @@ package com.xvm.battle
             {
                 Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+                Xfw.removeCommandListener(XvmCommands.AS_ON_TARGET_CHANGED, onTargetChanged);
                 Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
                 if (_battleController)
                 {
@@ -176,6 +179,11 @@ package com.xvm.battle
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ALT_MODE, { isDown: isDown } ));
             if (hotkeys_cfg.playersPanelAltMode.enabled && hotkeys_cfg.playersPanelAltMode.keyCode == key)
                 Xvm.dispatchEvent(new ObjectEvent(BattleEvents.PLAYERS_PANEL_ALT_MODE, { isDown: isDown } ));
+        }
+
+        private function onTargetChanged(vehicleID:Number):void
+        {
+            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_TARGET_CHANGED, vehicleID));
         }
 
         private function onUpdateStage():void

@@ -78,10 +78,10 @@ package com.xvm.battle.playersPanel
         private var opt_vehicleIconAlpha:Number;
         private var mopt_removeSquadIcon:Boolean;
 
-        public var _substrateHolder:MovieClip;
-        public var _bottomHolder:MovieClip;
-        public var _normalHolder:MovieClip;
-        public var _topHolder:MovieClip;
+        private var _substrateHolder:MovieClip;
+        private var _bottomHolder:MovieClip;
+        private var _normalHolder:MovieClip;
+        private var _topHolder:MovieClip;
 
         private var extraFieldsHidden:ExtraFields = null;
         private var extraFieldsShort:ExtraFieldsGroup = null;
@@ -329,7 +329,7 @@ package com.xvm.battle.playersPanel
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (xvm_enabled && _userProps && e.playerName == _userProps.userName)
+            if (xvm_enabled && _userProps && e.vehicleID == _vehicleID)
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }

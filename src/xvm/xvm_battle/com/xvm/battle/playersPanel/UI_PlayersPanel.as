@@ -8,14 +8,18 @@ package com.xvm.battle.playersPanel
     import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.vo.*;
+    import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
+    import net.wg.data.VO.daapi.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.*;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.events.*;
+    import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.managers.impl.*;
 
     public dynamic class UI_PlayersPanel extends PlayersPanelUI
@@ -47,6 +51,7 @@ package com.xvm.battle.playersPanel
         private var m_isAltMode:Boolean = false;
         private var m_savedState:int = PLAYERS_PANEL_STATE.NONE;
         private var m_startModePending:Number = NaN;
+        private var mopt_fixedPosition:Boolean = false;
 
         public function UI_PlayersPanel()
         {
@@ -90,10 +95,31 @@ package com.xvm.battle.playersPanel
 
                 super.as_setPanelMode(state);
 
-                var expandAreaWidth:Number = Macros.FormatNumberGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].expandAreaWidth, EXPAND_AREA_WIDTH);
+                var mcfg:* = cfg[PLAYERS_PANEL_STATE_NAMES[state]];
+                var new_mopt_fixedPosition:Boolean = Macros.FormatBooleanGlobal(mcfg.fixedPosition, false);
+                if (mopt_fixedPosition != new_mopt_fixedPosition)
+                {
+                    mopt_fixedPosition = new_mopt_fixedPosition;
+                    var playersDataVO:VOPlayersData = BattleState.playersDataVO;
+                    if (playersDataVO)
+                    {
+                        if (playersDataVO.leftVehiclesIDs)
+                        {
+                            listLeft.updateOrder(mopt_fixedPosition ? fixIdxOrder(playersDataVO.leftVehiclesIDs) : playersDataVO.leftVehiclesIDs);
+                        }
+                        if (playersDataVO.rightVehiclesIDs)
+                        {
+                            listRight.updateOrder(mopt_fixedPosition ? fixIdxOrder(playersDataVO.rightVehiclesIDs) : playersDataVO.rightVehiclesIDs);
+                        }
+                    }
+                }
+
+                var expandAreaWidth:Number = Macros.FormatNumberGlobal(mcfg.expandAreaWidth, EXPAND_AREA_WIDTH);
                 xfw_expandRectLeft.width = expandAreaWidth;
                 xfw_expandRectRight.width = expandAreaWidth;
                 xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
+
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_PANEL_MODE_CHANGED));
             }
             catch (ex:Error)
             {
@@ -114,6 +140,56 @@ package com.xvm.battle.playersPanel
                 param1 |= PersonalStatus.CAN_SEND_INVITE_TO_ALLY;
             }
             super.setPersonalStatus(param1);
+        }
+
+        override public function setVehiclesData(data:IDAAPIDataClass) : void
+        {
+            super.setVehiclesData(data);
+            if (mopt_fixedPosition)
+            {
+                setFixedOrder(DAAPIVehiclesDataVO(data));
+            }
+        }
+
+        override public function updateVehiclesInfo(data:IDAAPIDataClass) : void
+        {
+            super.updateVehiclesInfo(data);
+            if (mopt_fixedPosition)
+            {
+                setFixedOrder(DAAPIVehiclesDataVO(data));
+            }
+        }
+
+        override public function addVehiclesInfo(data:IDAAPIDataClass) : void
+        {
+            super.addVehiclesInfo(data);
+            if (mopt_fixedPosition)
+            {
+                setFixedOrder(DAAPIVehiclesDataVO(data));
+            }
+        }
+
+        override public function updateVehicleStatus(data:IDAAPIDataClass):void
+        {
+            super.updateVehicleStatus(data);
+            if (mopt_fixedPosition)
+            {
+                var vehicleStatus:DAAPIVehicleStatusVO = DAAPIVehicleStatusVO(data);
+                if (!vehicleStatus.isEnemy)
+                {
+                    if (vehicleStatus.leftVehiclesIDs)
+                    {
+                        listLeft.updateOrder(fixIdxOrder(vehicleStatus.leftVehiclesIDs));
+                    }
+                }
+                else
+                {
+                    if (vehicleStatus.rightVehiclesIDs)
+                    {
+                        listRight.updateOrder(fixIdxOrder(vehicleStatus.rightVehiclesIDs));
+                    }
+                }
+            }
         }
 
         // PRIVATE
@@ -233,6 +309,33 @@ package com.xvm.battle.playersPanel
                 }
                 m_savedState = PLAYERS_PANEL_STATE.NONE;
             }
+        }
+
+        private function setFixedOrder(data:DAAPIVehiclesDataVO):void
+        {
+            if (data != null)
+            {
+                if (data.leftVehiclesIDs)
+                {
+                    listLeft.updateOrder(fixIdxOrder(data.leftVehiclesIDs));
+                }
+                if (data.rightVehiclesIDs)
+                {
+                    listRight.updateOrder(fixIdxOrder(data.rightVehiclesIDs));
+                }
+            }
+        }
+
+        private function fixIdxOrder(ids:Vector.<Number>):Vector.<Number>
+        {
+            var playerState:VOPlayerState;
+            var res:Vector.<Number> = new Vector.<Number>(ids.length);
+            for each (var id:Number in ids)
+            {
+                playerState = BattleState.get(id);
+                res[playerState.position - 1] = id;
+            }
+            return res;
         }
     }
 }

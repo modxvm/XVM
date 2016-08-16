@@ -26,6 +26,11 @@ class XVM_VM_COMMAND(object):
     INITIALIZED = "initialized"
     AS_CMD_RESPONSE = "xvm_vm.as.cmd_response"
 
+# Battle events
+
+class XVM_BATTLE_EVENT(object):
+    ARENA_INFO_INVALIDATED = "arena_info_invalidated"
+
 # Invalidation targets
 
 class INV(object):

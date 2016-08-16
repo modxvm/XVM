@@ -435,7 +435,7 @@ package com.xvm.battle.vo
             for (var eventName:String in eventsToDispatch)
             {
                 //Logger.add(playerName + " " + eventName);
-                Xvm.dispatchEvent(new PlayerStateEvent(eventName, vehicleID, accountDBID, playerName));
+                Xvm.dispatchEvent(new PlayerStateEvent(eventName, vehicleID, playerName));
             }
             eventsToDispatch = { };
         }

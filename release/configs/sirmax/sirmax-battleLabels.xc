@@ -1,25 +1,27 @@
 {
   "formats": [
     {
-      "x": 235,
-      "y": 0,
-      "width": 500,
-      "height": 230,
-      "screenVAlign": "bottom",
-      "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.hitlog" }
-    },
-    {
       //"enabled": false,
-      "hotKeyCode": 36,
+      "hotKeyCode": 36, // J
       //"height": 150,
       "visibleOnHotKey": "false",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
     },
     {
       //"enabled": false,
-      "hotKeyCode": 36,
+      "hotKeyCode": 36, // J
+      "updateEvent": "ON_TARGET_CHANGED",
       "height": 150,
+      "format": "{{py:vinfo.name()}}\nRT: {{py:vinfo.gun_reload()}}\nVR: {{py:vinfo.vision_radius()}}",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
+    },
+    {
+      "x": 235,
+      "y": 0,
+      "width": 500,
+      "height": 230,
+      "screenVAlign": "bottom",
+      "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.hitlog" }
     },
     {
       "enabled": true,

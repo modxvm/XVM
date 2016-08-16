@@ -334,12 +334,15 @@ package com.xvm.vehiclemarkers.ui
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (e.playerName == playerName)
+            if (isNaN(vehicleID))
             {
-                if (isNaN(vehicleID))
+                if (e.playerName == playerName)
                 {
                     init(e.vehicleID);
                 }
+            }
+            if (e.vehicleID == vehicleID)
+            {
                 invalidate(InvalidationType.DATA);
             }
         }
@@ -357,16 +360,15 @@ package com.xvm.vehiclemarkers.ui
 
         private function getTurretData():String
         {
-            var turret:int = XvmVehicleMarkerConstants.TURRET_UNKNOWN_VULN_DATABASE_VAL;
             var playerState:VOPlayerState = BattleState.get(vehicleID);
             if (playerState)
             {
                 var vdata:VOVehicleData = VehicleInfo.get(playerState.vehCD);
                 if (vdata)
                 {
-                    if (vdata.hpStock == playerState.maxHealth)
+                    if (vdata.hpTop != playerState.maxHealth)
                     {
-                        switch (turret)
+                        switch (vdata.turret)
                         {
                             case XvmVehicleMarkerConstants.TURRET_HIGH_VULN_DATABASE_VAL:
                                 return Macros.Format(Config.config.markers.turretMarkers.highVulnerability, playerState);
