@@ -30,7 +30,6 @@ package com.xvm.types.cfg
             showSpeaker = Macros.FormatBooleanGlobal(showSpeaker, true);
             x = Macros.FormatNumberGlobal(x);
             y = Macros.FormatNumberGlobal(y);
-            alpha = Macros.FormatNumberGlobal(alpha, 100);
             color = Macros.FormatNumberGlobal(color);
             maxScale = Macros.FormatNumberGlobal(maxScale, 100);
             offsetX = Macros.FormatNumberGlobal(offsetX, 0);

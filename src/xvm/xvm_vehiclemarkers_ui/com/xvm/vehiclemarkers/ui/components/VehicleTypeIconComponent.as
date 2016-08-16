@@ -44,7 +44,7 @@ package com.xvm.vehiclemarkers.ui.components
                     maxScale = 1; // TODO
                     marker.marker.x = cfg.x + offsetX * maxScale;
                     marker.marker.y = cfg.y + offsetY * maxScale;
-                    marker.marker.alpha = cfg.alpha / 100.0;
+                    marker.marker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState, 100) / 100.0;
                     // TODO: broken - sometimes icon remains alive for dead vehicles. Touching vehicleTypeIcon kills timeline.
                     //marker.marker.vehicleTypeIcon.scaleX = maxScale;
                     //marker.marker.vehicleTypeIcon.scaleY = maxScale;

@@ -25,6 +25,7 @@
       "normal": {
         "vehicleIcon": {
           //"maxScale": 50,
+          "alpha": "{{ready?100|50}}",
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
@@ -79,6 +80,7 @@
       "extended": {
         "vehicleIcon": {
           //"maxScale": 75,
+          "alpha": "{{ready?100|50}}",
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
@@ -192,6 +194,7 @@
       "normal": {
         "vehicleIcon": {
           //"maxScale": 50,
+          "alpha": "{{ready?100|50}}",
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
@@ -247,6 +250,7 @@
       "extended": {
         "vehicleIcon": {
           //"maxScale": 75,
+          "alpha": "{{ready?100|50}}",
           "color": ${"def.markers.vehicleIconColor"}
         },
         "contourIcon": {
