@@ -57,11 +57,11 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
         private var DEFAULT_DEADBG_ALPHA:Number;
-        private var DEFAULT_VEHICLE_ICON_X:Number;
-        private var DEFAULT_VEHICLE_LEVEL_X:Number;
-        private var DEFAULT_FRAGS_WIDTH:Number;
-        private var DEFAULT_VEHICLE_WIDTH:Number;
-        private var DEFAULT_PLAYERNAMECUT_WIDTH:Number;
+        private var DEFAULT_VEHICLE_ICON_X:int;
+        private var DEFAULT_VEHICLE_LEVEL_X:int;
+        private var DEFAULT_FRAGS_WIDTH:int;
+        private var DEFAULT_VEHICLE_WIDTH:int;
+        private var DEFAULT_PLAYERNAMECUT_WIDTH:int;
 
         private var bcfg:CBattle;
         private var pcfg:CPlayersPanel;
@@ -496,13 +496,13 @@ package com.xvm.battle.playersPanel
 
         private function updateVehicleIconPositionLeft():void
         {
-            var vehicleIconX:Number = VEHICLE_ICON_LEFT_X + getFieldOffsetXLeft(ui.vehicleIcon);
-            var vehicleLevelX:Number = VEHICLE_LEVEL_LEFT_X + getFieldOffsetXLeft(ui.vehicleLevel);
-            if (ui.vehicleIcon.x != vehicleIconX)
+            var vehicleIconX:int = VEHICLE_ICON_LEFT_X + getFieldOffsetXLeft(ui.vehicleIcon);
+            var vehicleLevelX:int = VEHICLE_LEVEL_LEFT_X + getFieldOffsetXLeft(ui.vehicleLevel);
+            if (int(ui.vehicleIcon.x) != vehicleIconX)
             {
                 ui.vehicleIcon.x = vehicleIconX;
             }
-            if (ui.vehicleLevel.x != vehicleLevelX)
+            if (int(ui.vehicleLevel.x) != vehicleLevelX)
             {
                 ui.vehicleLevel.x = vehicleLevelX;
             }
@@ -511,8 +511,8 @@ package com.xvm.battle.playersPanel
         private function updateVehicleIconPositionRight():void
         {
             var vehicleIconScaleX:Number;
-            var vehicleIconX:Number;
-            var vehicleLevelX:Number;
+            var vehicleIconX:int;
+            var vehicleLevelX:int;
             if (bcfg.mirroredVehicleIcons)
             {
                 vehicleIconScaleX = 1;
@@ -529,11 +529,11 @@ package com.xvm.battle.playersPanel
             {
                 ui.vehicleIcon.scaleX = vehicleIconScaleX;
             }
-            if (ui.vehicleIcon.x != vehicleIconX)
+            if (int(ui.vehicleIcon.x) != vehicleIconX)
             {
                 ui.vehicleIcon.x = vehicleIconX;
             }
-            if (ui.vehicleLevel.x != vehicleLevelX)
+            if (int(ui.vehicleLevel.x) != vehicleLevelX)
             {
                 ui.vehicleLevel.x = vehicleLevelX;
             }
@@ -542,8 +542,8 @@ package com.xvm.battle.playersPanel
         private function updatePositionsLeft():void
         {
             var field:TextField;
-            var lastX:Number = VEHICLE_TF_LEFT_X;
-            var newX:Number;
+            var lastX:int = VEHICLE_TF_LEFT_X;
+            var newX:int;
             var len:int = mcfg.standardFields.length;
             for (var i:int = len - 1; i >= 0; --i)
             {
@@ -554,22 +554,22 @@ package com.xvm.battle.playersPanel
                     lastX -= field.width - 1;
                     newX = lastX + getFieldOffsetXLeft(field);
                     //Logger.add(field.name + " lastX:" + lastX + " newX:" + newX + " x:" + field.x + " offset:" + getFieldOffsetXLeft(field));
-                    if (field.x != newX)
+                    if (int(field.x) != newX)
                     {
                         field.x = newX;
                     }
                 }
             }
             ui.x = -(lastX - (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
-            //Logger.add("ui.x=" + ui.x);
+            //Logger.add("ui.x=" + ui.x + " ui.vehicleIcon.x=" + ui.vehicleIcon.x);
             ui.dynamicSquad.x = -ui.x;
         }
 
         private function updatePositionsRight():void
         {
             var field:TextField;
-            var lastX:Number = VEHICLE_TF_RIGHT_X;
-            var newX:Number;
+            var lastX:int = VEHICLE_TF_RIGHT_X;
+            var newX:int;
             var len:int = mcfg.standardFields.length;
             for (var i:int = len - 1; i >= 0; --i)
             {
@@ -578,7 +578,7 @@ package com.xvm.battle.playersPanel
                 if (field)
                 {
                     updateFieldWidth(field);
-                    if (field.x != newX)
+                    if (int(field.x) != newX)
                     {
                         field.x = newX;
                     }
@@ -605,23 +605,23 @@ package com.xvm.battle.playersPanel
 
         private function updateFieldWidth(field:TextField):void
         {
-            var w:Number;
+            var w:int;
             switch (field)
             {
                 case ui.fragsTF:
                     w = Macros.FormatNumber(mcfg.fragsWidth, currentPlayerState, 0);
-                    if (ui.fragsTF.width != w)
+                    if (int(ui.fragsTF.width) != w)
                     {
                         ui.fragsTF.width = w;
                     }
                     break;
                 case ui.playerNameFullTF:
-                    var maxPlayerNameTextWidth:Number;
+                    var maxPlayerNameTextWidth:int;
                     if (isLeftPanel)
                     {
-                        if (Number(s_maxPlayerNameTextWidthsLeft[ui.xfw_state]) < ui.playerNameFullTF.textWidth)
+                        if (s_maxPlayerNameTextWidthsLeft[ui.xfw_state] < int(ui.playerNameFullTF.textWidth))
                         {
-                            s_maxPlayerNameTextWidthsLeft[ui.xfw_state] = ui.playerNameFullTF.textWidth;
+                            s_maxPlayerNameTextWidthsLeft[ui.xfw_state] = int(ui.playerNameFullTF.textWidth);
                             App.utils.scheduler.scheduleOnNextFrame(function():void
                             {
                                 Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, true));
@@ -631,9 +631,9 @@ package com.xvm.battle.playersPanel
                     }
                     else
                     {
-                        if (Number(s_maxPlayerNameTextWidthsRight[ui.xfw_state]) < ui.playerNameFullTF.textWidth)
+                        if (s_maxPlayerNameTextWidthsRight[ui.xfw_state] < int(ui.playerNameFullTF.textWidth))
                         {
-                            s_maxPlayerNameTextWidthsRight[ui.xfw_state] = ui.playerNameFullTF.textWidth;
+                            s_maxPlayerNameTextWidthsRight[ui.xfw_state] = int(ui.playerNameFullTF.textWidth);
                             App.utils.scheduler.scheduleOnNextFrame(function():void
                             {
                                 Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, false));
@@ -641,17 +641,17 @@ package com.xvm.battle.playersPanel
                         }
                         maxPlayerNameTextWidth = s_maxPlayerNameTextWidthsRight[ui.xfw_state] + 4;
                     }
-                    var minW:Number = Macros.FormatNumber(mcfg.nickMinWidth, currentPlayerState, 0);
-                    var maxW:Number = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
+                    var minW:int = Macros.FormatNumber(mcfg.nickMinWidth, currentPlayerState, 0);
+                    var maxW:int = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
                     w = Math.min(Math.max(maxPlayerNameTextWidth, minW), maxW);
-                    if (ui.playerNameFullTF.width != w)
+                    if (int(ui.playerNameFullTF.width) != w)
                     {
                         ui.playerNameFullTF.width = w;
                     }
                     break;
                 case ui.vehicleTF:
                     w = Macros.FormatNumber(mcfg.vehicleWidth, currentPlayerState, 0);
-                    if (ui.vehicleTF.width != w)
+                    if (int(ui.vehicleTF.width) != w)
                     {
                         ui.vehicleTF.width = w;
                     }
@@ -779,7 +779,7 @@ package com.xvm.battle.playersPanel
 
         private function updateExtraFields():void
         {
-            var bindToIconOffset:Number = ui.vehicleIcon.x - x + (isLeftPanel || bcfg.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
+            var bindToIconOffset:int = ui.vehicleIcon.x - x + (isLeftPanel || bcfg.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
             switch (ui.xfw_state)
             {
                 case PLAYERS_PANEL_STATE.HIDEN:
