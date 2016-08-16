@@ -177,6 +177,8 @@ package com.xvm.battle.fullStats
             var updateIgr:Boolean = false;
             var needAlign:Boolean = false;
 
+            currentPlayerState = BattleState.get(_vehicleID);
+
             if (isInvalid(FullStatsValidationType.USER_PROPS))
             {
                 updatePlayerNameField = true;
@@ -219,23 +221,26 @@ package com.xvm.battle.fullStats
 
             if (updatePlayerNameField || updateVehicleNameField || updateFragsField)
             {
-                var playerState:VOPlayerState = BattleState.get(_vehicleID);
-                if (playerState)
+                if (currentPlayerState)
                 {
+                    var textColor:String = XfwUtils.toHtmlColor(App.colorSchemeMgr.getScheme(getSchemeNameForPlayer()).rgb);
                     if (updatePlayerNameField)
                     {
                         _playerNameTF.visible = true;
-                        _playerNameTF.htmlText = Macros.FormatString(_isLeftPanel ? cfg.formatLeftNick : cfg.formatRightNick, playerState);
+                        _playerNameTF.htmlText = "<font color='" + textColor + "'>" +
+                            Macros.FormatString(_isLeftPanel ? cfg.formatLeftNick : cfg.formatRightNick, currentPlayerState) + "</font>";
                     }
                     if (updateVehicleNameField)
                     {
                         _vehicleNameTF.visible = true;
-                        _vehicleNameTF.htmlText = Macros.FormatString(_isLeftPanel ? cfg.formatLeftVehicle : cfg.formatRightVehicle, playerState);
+                        _vehicleNameTF.htmlText =  "<font color='" + textColor + "'>" +
+                            Macros.FormatString(_isLeftPanel ? cfg.formatLeftVehicle : cfg.formatRightVehicle, currentPlayerState) + "</font>";
                     }
                     if (updateFragsField)
                     {
                         _fragsTF.visible = true;
-                        _fragsTF.htmlText = Macros.FormatString(_isLeftPanel ? cfg.formatLeftFrags : cfg.formatRightFrags, playerState);
+                        _fragsTF.htmlText =  "<font color='" + textColor + "'>" +
+                            Macros.FormatString(_isLeftPanel ? cfg.formatLeftFrags : cfg.formatRightFrags, currentPlayerState) + "</font>";
                     }
                 }
             }
@@ -373,7 +378,7 @@ package com.xvm.battle.fullStats
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (currentPlayerState && e.vehicleID == currentPlayerState.vehicleID)
+            if (e.vehicleID == _vehicleID)
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }
