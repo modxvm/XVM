@@ -18,11 +18,12 @@
     {
       "x": 235,
       "y": 0,
-      "width": 500,
       "height": 230,
       "screenVAlign": "bottom",
+      "updateEvent": "ON_DAMAGE_CAUSED",
+      "format": "{{hitlog-header}}\n{{hitlog-body}}",
       //"updateEvent": "ON_PANEL_MODE_CHANGED", "x": "{{pp.mode=0?400|{{py:math.sum({{pp.widthLeft}},50)}}}}", "y": 65, "screenVAlign": "top",
-      "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.hitlog" }
+      "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.hitlogHeader" }
     },
     {
       "enabled": true,
