@@ -173,11 +173,11 @@
      │                            │ отображаемые данные в текстовых полях (доступно использование HTML и макросов) (по-умолчанию: "")
      └────────────────────────────┴──────────────────────────────────────────────────────────────────────────
     */
-    "hitlog": {
+    "hitlogHeader": {
       "enabled": true,
-      "updateEvent": "ON_DAMAGE_CAUSED",
-      "x": 270,
-      "y": 40,
+      "updateEvent": "ON_DAMAGE_CAUSED, ON_PANEL_MODE_CHANGED",
+      "x": "{{pp.mode=0?5|{{py:math.sum({{pp.widthLeft}},50)}}}}",
+      "y": "{{pp.mode=0?65|40}}",
       "width": 500,
       "height": 1000,
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
@@ -185,6 +185,17 @@
       // Format of the full hitlog (header and body)
       // Формат полного хит-лога (шапка и тело)
       // "format": "{{hitlog-header}}\n{{hitlog-body}}"
+    },
+    "hitlogBody": {
+      "enabled": true,
+      "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": false,
+      "updateEvent": "ON_DAMAGE_CAUSED, ON_PANEL_MODE_CHANGED",
+      "x": "{{pp.mode=0?5|{{py:math.sum({{pp.widthLeft}},50)}}}}",
+      "y": "{{pp.mode=0?85|60}}",
+      "width": 500,
+      "height": 1000,
+      "textFormat": { "color": "0xF4EFE8", "size": 15 },
+      "format": "{{hitlog-body}}"
     },
     "totalHP": {
       "enabled": true,
