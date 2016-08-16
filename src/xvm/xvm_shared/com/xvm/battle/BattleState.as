@@ -16,6 +16,8 @@ package com.xvm.battle
 
     public class BattleState extends UIComponent // implements IBattleComponentDataController
     {
+        private static var INVALIDATE_PLAYERS_PANEL_MODE:String = "INVALIDATE_PLAYERS_PANEL_MODE";
+
         public static function get(vehicleID:Number):VOPlayerState
         {
             return instance._playersDataVO ? instance._playersDataVO.get(vehicleID) : null;
@@ -58,6 +60,8 @@ package com.xvm.battle
             instance._playerFrags = value;
         }
 
+        // zoom
+
         public static function get currentAimZoom():int
         {
             return instance._currentAimZoom;
@@ -67,6 +71,52 @@ package com.xvm.battle
         {
             instance._currentAimZoom = value;
         }
+
+        // players panel
+
+        public static function get playersPanelMode():int
+        {
+            return instance._playersPanelMode;
+        }
+
+        public static function set playersPanelMode(value:int):void
+        {
+            if (instance._playersPanelMode != value)
+            {
+                instance._playersPanelMode = value;
+                instance.invalidate(INVALIDATE_PLAYERS_PANEL_MODE);
+            }
+        }
+
+        public static function get playersPanelWidthLeft():int
+        {
+            return instance._playersPanelWidthLeft;
+        }
+
+        public static function set playersPanelWidthLeft(value:int):void
+        {
+            if (instance._playersPanelWidthLeft != value)
+            {
+                instance._playersPanelWidthLeft = value;
+                instance.invalidate(INVALIDATE_PLAYERS_PANEL_MODE);
+            }
+        }
+
+        public static function get playersPanelWidthRight():int
+        {
+            return instance._playersPanelWidthRight;
+        }
+
+        public static function set playersPanelWidthRight(value:int):void
+        {
+            if (instance._playersPanelWidthRight != value)
+            {
+                instance._playersPanelWidthRight = value;
+                instance.invalidate(INVALIDATE_PLAYERS_PANEL_MODE);
+            }
+        }
+
+        // hitlog
 
         public static function get hitlogHits():Array
         {
@@ -95,6 +145,9 @@ package com.xvm.battle
         private var _personalStatus:uint;
         private var _playerFrags:int = 0;
         private var _currentAimZoom:int = 0;
+        private var _playersPanelMode:int = 0;
+        private var _playersPanelWidthLeft:int = 0;
+        private var _playersPanelWidthRight:int = 0;
 
         private var _invalidationStates:Object = {};
 
@@ -129,6 +182,10 @@ package com.xvm.battle
                         }
                     }
                     _invalidationStates = {};
+                }
+                if (isInvalid(INVALIDATE_PLAYERS_PANEL_MODE))
+                {
+                    Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_PANEL_MODE_CHANGED));
                 }
             }
             catch (ex:Error)

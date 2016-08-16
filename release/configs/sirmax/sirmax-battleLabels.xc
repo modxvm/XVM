@@ -10,7 +10,7 @@
     {
       //"enabled": false,
       "hotKeyCode": 36, // J
-      "updateEvent": "ON_TARGET_CHANGED",
+      "updateEvent": "ON_TARGET_IN",
       "height": 150,
       "format": "{{py:vinfo.name()}}\nRT: {{py:vinfo.gun_reload()}}\nVR: {{py:vinfo.vision_radius()}}",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
@@ -21,6 +21,7 @@
       "width": 500,
       "height": 230,
       "screenVAlign": "bottom",
+      //"updateEvent": "ON_PANEL_MODE_CHANGED", "x": "{{pp.mode=0?400|{{py:math.sum({{pp.widthLeft}},50)}}}}", "y": 65, "screenVAlign": "top",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.hitlog" }
     },
     {

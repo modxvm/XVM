@@ -29,7 +29,8 @@
      │                            │   ON_MODULE_DESTROYED
      │                            │   ON_MODULE_REPAIRED
      │                            │   ON_DAMAGE_CAUSED
-     │                            │   ON_TARGET_CHANGED
+     │                            │   ON_TARGET_IN  - aim at the vehicle
+     │                            │   ON_TARGET_OUT - aim not at the vehicle
      │                            │   ON_PANEL_MODE_CHANGED
      │                            │   ON_EVERY_FRAME           * can reduce performance
      │                            │   ON_EVERY_SECOND          * can reduce performance
@@ -172,11 +173,11 @@
      │                            │ отображаемые данные в текстовых полях (доступно использование HTML и макросов) (по-умолчанию: "")
      └────────────────────────────┴──────────────────────────────────────────────────────────────────────────
     */
-    "hitlog": {
+    "hitlogHeader": {
       "enabled": true,
-      "updateEvent": "ON_DAMAGE_CAUSED",
-      "x": 270,
-      "y": 40,
+      "updateEvent": "ON_DAMAGE_CAUSED, ON_PANEL_MODE_CHANGED",
+      "x": "{{pp.mode=0?5|{{py:math.sum({{pp.widthLeft}},50)}}}}",
+      "y": "{{pp.mode=0?65|40}}",
       "width": 500,
       "height": 1000,
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
@@ -184,6 +185,17 @@
       // Format of the full hitlog (header and body)
       // Формат полного хит-лога (шапка и тело)
       // "format": "{{hitlog-header}}\n{{hitlog-body}}"
+    },
+    "hitlogBody": {
+      "enabled": true,
+      "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": false,
+      "updateEvent": "ON_DAMAGE_CAUSED, ON_PANEL_MODE_CHANGED",
+      "x": "{{pp.mode=0?5|{{py:math.sum({{pp.widthLeft}},50)}}}}",
+      "y": "{{pp.mode=0?85|60}}",
+      "width": 500,
+      "height": 1000,
+      "textFormat": { "color": "0xF4EFE8", "size": 15 },
+      "format": "{{hitlog-body}}"
     },
     "totalHP": {
       "enabled": true,
@@ -223,6 +235,7 @@
     "test2": {
       "enabled": true,
       "hotKeyCode": 36,
+      "updateEvent": "ON_TARGET_IN,ON_TARGET_OUT",
       "y": -70,
       "width": 310,
       "height": 50,
@@ -233,7 +246,7 @@
       "borderColor": "0x101009",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 8},
       "textFormat": { "color": "0x60FF00", "size": 15, "align": "center", "marginLeft": 2, "marginRight": 2},
-      "format": "<font color='#FFFFFF'><b>Info text field (WN8: <font color='{{c:wn8}}'>{{wn8}}</font>)</b></font><br/>Battle tier:<font color='#ff1aff'> {{battletier}}</font> <p align='right'>My vehicle: <font color='#ff1aff'>{{my-vehicle}}</font> (<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
+      "format": "<font color='#FFFFFF'><b>Info text field (XTE: <font color='{{c:xte}}'>{{xte}}</font>)</b></font><br/>Battle tier:<font color='#ff1aff'> {{battletier}}</font> <p align='right'>Vehicle: <font color='#ff1aff'>{{vehicle}}</font> (<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
     }
   }
 }

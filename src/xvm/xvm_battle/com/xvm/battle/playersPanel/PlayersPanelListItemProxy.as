@@ -359,6 +359,7 @@ package com.xvm.battle.playersPanel
         public function applyState():void
         {
             //Logger.add("applyState: " + ui.xfw_state);
+            BattleState.playersPanelMode = ui.xfw_state;
             switch (ui.xfw_state)
             {
                 case PLAYERS_PANEL_STATE.FULL:
@@ -393,6 +394,8 @@ package com.xvm.battle.playersPanel
                     }
                     break;
                 case PLAYERS_PANEL_STATE.HIDEN:
+                    BattleState.playersPanelWidthLeft = 0;
+                    BattleState.playersPanelWidthRight = 0;
                     ui.visible = false;
                     //ui.x = isLeftPanel ? -WIDTH : WIDTH;
                     break;
@@ -563,6 +566,7 @@ package com.xvm.battle.playersPanel
             ui.x = -(lastX - (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
             //Logger.add("ui.x=" + ui.x + " ui.vehicleIcon.x=" + ui.vehicleIcon.x);
             ui.dynamicSquad.x = -ui.x;
+            BattleState.playersPanelWidthLeft = WIDTH + ui.x;
         }
 
         private function updatePositionsRight():void
@@ -587,6 +591,7 @@ package com.xvm.battle.playersPanel
             }
             ui.x = -(lastX + (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
             ui.dynamicSquad.x = -ui.x;
+            BattleState.playersPanelWidthRight = WIDTH - ui.x;
         }
 
         private function getFieldByConfigName(fieldName:String):TextField

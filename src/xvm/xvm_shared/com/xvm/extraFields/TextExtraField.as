@@ -734,7 +734,7 @@ package com.xvm.extraFields
                 {
                     visible = !_keyHolded;
                 }
-                updateOnEvent(new PlayerStateEvent(PlayerStateEvent.ON_HOTKEY_PRESSED));
+                //updateOnEvent(new PlayerStateEvent(PlayerStateEvent.ON_HOTKEY_PRESSED)); // need current vehicle id for players panel
             }
         }
     }

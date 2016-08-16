@@ -105,6 +105,9 @@ Legend:
 │ S │ {{enemyStrengthStatic}}│   │ X │ X │ X │   │   │   │ X │ enemy team strength (static
 │ D │ {{allyStrengthLive}}   │   │ X │ X │ X │   │   │   │ X │ ally team strength (live)
 │ D │ {{enemyStrengthLive}}  │   │ X │ X │ X │   │   │   │ X │ enemy team strength (live)
+│ D │ {{pp.mode}}            │   │ X │ X │ X │   │   │   │ X │ current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
+│ D │ {{pp.widthLeft}}       │   │ X │ X │ X │   │   │   │ X │ current left players panel width
+│ D │ {{pp.widthRight}}      │   │ X │ X │ X │   │   │   │ X │ current right players panel width
 └───┴────────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴──────────────────────────────────────
 
   Statistic macros

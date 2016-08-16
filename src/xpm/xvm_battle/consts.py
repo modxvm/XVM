@@ -17,6 +17,7 @@ class XVM_BATTLE_COMMAND(object):
     AS_TEAMS_HP_CHANGED = "xvm.as.teams_hp_changed"
     AS_SNIPER_CAMERA = "xvm.as.sniper_camera"
     AS_AIM_OFFSET_UPDATE = "xvm.as.aim_offset_update"
+    AS_ON_TARGET_CHANGED = "xvm.as.on_target_changed"
 
 # Markers only commands
 

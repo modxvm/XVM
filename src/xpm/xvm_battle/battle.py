@@ -172,6 +172,8 @@ def _switchToPostmortem(base, self):
 class Battle(object):
 
     battle_page = None
+    updateTargetCallbackID = None
+    targetVehicleID = None
 
     def onAppInitialized(self, event):
         app = g_appLoader.getApp(event.ns)
@@ -212,6 +214,13 @@ class Battle(object):
             (newHealth, aInfo, attackReasonID) = value
             attackerID = aInfo.vehicleID if aInfo is not None else -1
             self.onVehicleHealthChanged(vehicleID, newHealth, attackerID, attackReasonID)
+        elif eventID == FEEDBACK_EVENT_ID.VEHICLE_IN_FOCUS:
+            self.targetVehicleID = vehicleID
+            if self.updateTargetCallbackID:
+                BigWorld.cancelCallback(self.updateTargetCallbackID)
+            self.updateTargetCallbackID = BigWorld.callback(0, self.updateTarget)
+        #else:
+        #    debug('onVehicleFeedbackReceived: {} {} {} '.format(eventID, vehicleID, value))
 
     def onVehicleHealthChanged(self, vehicleID, newHealth, attackerID, attackReasonID):
         inv = INV.CUR_HEALTH
@@ -278,6 +287,10 @@ class Battle(object):
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
         except Exception, ex:
             err(traceback.format_exc())
+
+    def updateTarget(self):
+        self.updateTargetCallbackID = None
+        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_ON_TARGET_CHANGED, self.targetVehicleID)
 
     def invalidateArenaInfo(self):
         #debug('battle: invalidateArenaInfo')

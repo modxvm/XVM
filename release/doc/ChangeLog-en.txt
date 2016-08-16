@@ -6,10 +6,15 @@ XVM-6.4.2-dev:
       "fixedPosition" - true - don't change players positions on dead (default false)
   * battleLoading: extraFields added
   * battleLabels: added events:
-      ON_TARGET_CHANGED
+      ON_TARGET_IN  - aim at the vehicle
+      ON_TARGET_OUT - aim not at the vehicle
       ON_PANEL_MODE_CHANGED
       ON_EVERY_FRAME           * can reduce performance
       ON_EVERY_SECOND          * can reduce performance
+  * added global macros:
+      {{pp.mode}}       - current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
+      {{pp.widthLeft}}  - current left players panel width
+      {{pp.widthRight}} - current right players panel width
 
 XVM-6.4.1.1:
   * fix minimap (Only compatibility. Extended functionality not implemented yet.)
@@ -100,7 +105,7 @@ XVM-6.4.0:
   * added {{comment}} macro to show comment for player from contacts
   * added option "battle"/"sixthSenseDuration" - duration of the sixth sense indicator
   * removed option "hitLog"/"direction" - not required
-  
+
   [KNOWN ISSUES]
   * Minimap is not ready. Some functionality may work incorrectly or may not work at all. (will be fixed in future releases)
   * Option "carousel"/"rows" does not implemented. (postponed because it may be implemented by WG)
