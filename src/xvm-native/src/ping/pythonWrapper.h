@@ -8,14 +8,9 @@
 
 #define Py_BUILD_CORE 1
 
-#include "python.h"
-#include <Windows.h>
+#include "Python.h"
 
-long GetModuleSize(const char* lpFilename);
-BOOL DataCompare(const char* pData, const char* bMask, const char * szMask);
-DWORD FindPattern2(DWORD dwAddress, DWORD dwLen, const char* bMask, const char* szMask);
-DWORD FindPattern(const char* pattern, const char* mask);
-void pythonwrapper_init(void);
+void pythonWrapperInit(void);
 
 //Py_BuildValue
 typedef PyAPI_FUNC(PyObject *) wrp_Py_BuildValue_typedef(const char *, ...);

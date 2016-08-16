@@ -11,7 +11,7 @@ BOOL WINAPI DllMain(IN HINSTANCE hDllHandle, IN DWORD nReason, IN LPVOID Reserve
     switch ( nReason ) 
     {
         case DLL_PROCESS_ATTACH:
-            pythonwrapper_init();
+            pythonWrapperInit();
             break;
         default:
             break;

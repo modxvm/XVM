@@ -1,6 +1,5 @@
-# XVM Native ping module
-
-project(xvm-ping)
+# XVM Native
+project(xvm-native)
 cmake_minimum_required (VERSION 3.0)
 
 #cmake includes
@@ -9,7 +8,7 @@ include(GenerateExportHeader)
 #cmake settings
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/binaries/)
 
-#Static runtime linking on MSVC
+#static runtime linking on MSVC
 if(MSVC)
   add_definitions("-D_WINSOCK_DEPRECATED_NO_WARNINGS")
 
@@ -21,37 +20,31 @@ if(MSVC)
   endforeach()
 endif()
 
-#Static runtime linking on GCC
+#static runtime linking on GCC
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   list(APPEND CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "-static-libgcc")
   list(APPEND CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "-static-libgcc -static-libstdc++")
 endif()
 
-#C includes
-include_directories("include/python-2.7.7")
+#common includes
 include_directories("${CMAKE_BINARY_DIR}")
 
 ##########################
 # XVM.Native-Ping Module #
 ##########################
-
-add_library(XVMNativePing SHARED "src/ping/common/ping.c"
-                                 "src/ping/dll/dllmain.c" 
-                                 "src/ping/dll/pythonmodule.c"
-                                 "src/ping/dll/pythonwrapper.c" )  
+add_library(XVMNativePing SHARED "src/common/pythonWrapperHelper.c"
+                                 "src/ping/ping.c"
+                                 "src/ping/dllmain.c" 
+                                 "src/ping/pythonModule.c"
+                                 "src/ping/pythonWrapper.c" )  
 
 generate_export_header(XVMNativePing)
+target_include_directories(XVMNativePing PRIVATE "include/python-2.7.7" "src/common/" "src/ping/" )
+target_link_libraries(XVMNativePing  "iphlpapi" "ws2_32" )
 
-#suppress warning on MSVC
 if(MSVC)
     set_target_properties(XVMNativePing PROPERTIES COMPILE_FLAGS "/wd4005")
 endif()
-
-target_include_directories(XVMNativePing PRIVATE "src/ping/common"
-                                                 "src/ping/dll" )
-
-target_link_libraries(XVMNativePing  "iphlpapi" 
-                                     "ws2_32" )
 
 install(TARGETS  XVMNativePing
         RUNTIME DESTINATION "./packages/xvm_ping/native/" COMPONENT Runtime
@@ -61,9 +54,14 @@ install(TARGETS  XVMNativePing
 ########################
 # XVM.Native-Ping Test #
 ########################
-add_executable(XVMNativePing-test "src/ping/common/ping.c"
-                                  "src/ping/test/main.c" )                   
-set_target_properties(XVMNativePing-test PROPERTIES COMPILE_FLAGS "/wd4005")
-target_include_directories(XVMNativePing-test PRIVATE "src/ping/common")
+add_executable(XVMNativePing-test "src/ping/ping.c"
+                                  "src/ping/pingTest.c" )
+                  
+target_include_directories(XVMNativePing-test PRIVATE "src/ping/")
 target_link_libraries(XVMNativePing-test  "iphlpapi" "ws2_32")
+
+if(MSVC)
+    set_target_properties(XVMNativePing-test PROPERTIES COMPILE_FLAGS "/wd4005")
+endif()
+
 install(TARGETS XVMNativePing-test DESTINATION ./tests/xvm_ping/)
