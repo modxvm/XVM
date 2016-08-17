@@ -148,7 +148,7 @@ package com.xvm.battle.playersPanel
         {
             _userProps = userProps;
             _vehicleID = BattleState.getVehicleID(_userProps.userName);
-            currentPlayerState = BattleState.get(_vehicleID);
+            invalidate(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE);
         }
 
         public function setVehicleIcon(vehicleImage:String):void
@@ -166,7 +166,7 @@ package com.xvm.battle.playersPanel
             }
             ui.vehicleIcon.graphics.clear();
             App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
-            if (xvm_enabled && _userProps)
+            if (_userProps)
             {
                 invalidate(INVALIDATE_UPDATE_POSITIONS);
             }

@@ -37,18 +37,13 @@ package com.xvm.battle.playersPanel
 
         override public function setPlayerNameProps(userProps:IUserProps):void
         {
-            try
+            if (!proxy.xvm_enabled)
             {
                 super.setPlayerNameProps(userProps);
-                proxy.setPlayerNameProps(userProps);
-                if (proxy.xvm_enabled)
-                {
-                    proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PLAYER_STATE);
-                }
             }
-            catch (ex:Error)
+            else
             {
-                Logger.err(ex);
+                proxy.setPlayerNameProps(userProps);
             }
         }
 
