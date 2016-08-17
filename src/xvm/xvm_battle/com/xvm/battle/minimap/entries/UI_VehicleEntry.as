@@ -8,8 +8,10 @@ package com.xvm.battle.minimap.entries
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.*;
     import com.xvm.battle.vo.*;
+    import net.wg.gui.battle.views.minimap.components.entries.vehicle.*;
 
     public class UI_VehicleEntry extends VehicleEntry
     {
@@ -22,40 +24,38 @@ package com.xvm.battle.minimap.entries
             _useStandartLabels = Macros.FormatBooleanGlobal(Config.config.minimap.useStandardLabels, false);
             if (!_useStandartLabels)
             {
-                Xvm.addEventListener(EntryInfoChangeEvent.INFO_CHANGED, playerStateChanged);
-            }
-        }
-
-        override protected function draw():void
-        {
-            super.draw();
-            if(!_useStandartLabels)
-            {
-                vehicleNameTextFieldAlt.visible = false;
-                vehicleNameTextFieldClassic.visible = true;
-                var playerState:VOPlayerState = BattleState.get(vehicleID);
-                var res:Object = Macros.Format(Config.config.minimap.labels.formats[0].format, playerState);
-                _formattedString = String(res);
-                vehicleNameTextFieldClassic.htmlText = _formattedString;
+                Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             }
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(EntryInfoChangeEvent.INFO_CHANGED, playerStateChanged);
+            Xvm.removeEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             super.onDispose();
+        }
+
+        override protected function draw():void
+        {
+            super.draw();
+            if (!_useStandartLabels)
+            {
+                if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
+                {
+                    vehicleNameTextFieldAlt.visible = false;
+                    vehicleNameTextFieldClassic.visible = true;
+                    var playerState:VOPlayerState = BattleState.get(vehicleID);
+                    vehicleNameTextFieldClassic.htmlText = Macros.Format(Config.config.minimap.labels.formats[0].format, playerState);
+                }
+            }
         }
 
         // PRIVATE
 
-        private function playerStateChanged(e:EntryInfoChangeEvent):void
+        private function playerStateChanged(e:PlayerStateEvent):void
         {
             if (e.vehicleID == vehicleID)
             {
-                var res:Object = Macros.Format(Config.config.minimap.labels.formats[0].format, e.playerState);
-                _formattedString = String(res);
-                vehicleNameTextFieldClassic.visible = true;
-                vehicleNameTextFieldClassic.htmlText = _formattedString;
+                invalidate(VehicleMinimapEntry.INVALID_VEHICLE_LABEL);
             }
         }
     }
