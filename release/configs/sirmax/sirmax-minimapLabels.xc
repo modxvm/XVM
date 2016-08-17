@@ -10,6 +10,7 @@
   },
   "labels": {
     "formats": [
+      ${ "../default/minimapLabelsTemplates.xc":"def.vehicleSpotted" },
       // txt
       ${"my_items.txt_player_alive_mog"},
       {

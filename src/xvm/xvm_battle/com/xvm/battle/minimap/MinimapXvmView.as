@@ -1,12 +1,13 @@
+/**
+ * XVM
+ * @author s_sorochich
+ * @author Maxim Schedriviy <max(at)modxvm.com>
+ */
 package com.xvm.battle.minimap
 {
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.BattleState;
-    import com.xvm.battle.vo.VOPlayerState;
-    import com.xvm.types.cfg.CMinimap;
-    import flash.events.Event;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
