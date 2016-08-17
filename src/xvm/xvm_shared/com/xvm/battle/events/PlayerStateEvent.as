@@ -23,6 +23,7 @@ package com.xvm.battle.events
         public static const ON_PANEL_MODE_CHANGED:String = "PS_ON_PANEL_MODE_CHANGED";
         public static const ON_EVERY_FRAME:String = "PS_ON_EVERY_FRAME";
         public static const ON_EVERY_SECOND:String = "PS_ON_EVERY_SECOND";
+        public static const ON_MINIMAP_ALT_MODE_CHANGED:String = "PS_ON_MINIMAP_ALT_MODE_CHANGED";
 
         public var vehicleID:Number;
         public var playerName:String;
