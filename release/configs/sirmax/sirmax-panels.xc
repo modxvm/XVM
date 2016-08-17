@@ -151,6 +151,9 @@
     "expandAreaWidth": 40,
     //"layout": "horizontal",
     //"fixedPosition": true,
+    //"inviteIndicatorAlpha": 50,
+    //"inviteIndicatorX": 100,
+    //"inviteIndicatorY": 100,
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },
   "alpha": 50,

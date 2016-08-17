@@ -9,8 +9,12 @@ package com.xvm.types.cfg
     public dynamic class CPlayersPanelNoneMode extends Object implements ICloneable
     {
         public var enabled:*;
+        public var expandAreaWidth:*;
         public var layout:String;
         public var fixedPosition:*;
+        public var inviteIndicatorAlpha:*;
+        public var inviteIndicatorX:*;
+        public var inviteIndicatorY:*;
         public var extraFields:CPlayersPanelNoneModeExtraFields;
 
         public function clone():*

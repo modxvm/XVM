@@ -4,6 +4,10 @@ XVM-6.4.2-dev:
       "nickShadowLeft", "nickShadowRight" - shadow for player name field
       "vehicleShadowLeft", "vehicleShadowRight" - shadow for vehicle name field
       "fixedPosition" - true - don't change players positions on dead (default false)
+  * added options in the "playersPanel"/"none" mode:
+      "inviteIndicatorAlpha" - opacity of dynamic squad invite indicator
+      "inviteIndicatorX" - X position offset of dynamic squad invite indicator
+      "inviteIndicatorY" - Y position offset of dynamic squad invite indicator
   * battleLoading: extraFields added
   * battleLabels: added events:
       ON_DAMAGE_CAUSED_ALLY - damage to ally

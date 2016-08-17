@@ -44,6 +44,11 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE:String = PlayersPanelListRight.LINKAGE;
         private var XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE:String = getQualifiedClassName(UI_PlayersPanelListItemRight);
 
+        private var DEFAULT_INVITE_INDICATOR_X_LEFT:int;
+        private var DEFAULT_INVITE_INDICATOR_Y_LEFT:int;
+        private var DEFAULT_INVITE_INDICATOR_X_RIGHT:int;
+        private var DEFAULT_INVITE_INDICATOR_Y_RIGHT:int;
+
         private var cfg:CPlayersPanel;
         private var xvm_enabled:Boolean;
 
@@ -60,6 +65,12 @@ package com.xvm.battle.playersPanel
             PlayersPanelListLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
             PlayersPanelListRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+
+            DEFAULT_INVITE_INDICATOR_X_LEFT = (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.x;
+            DEFAULT_INVITE_INDICATOR_Y_LEFT = (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.y;
+            DEFAULT_INVITE_INDICATOR_X_RIGHT = (listRight as PlayersPanelListRight).inviteReceivedIndicator.x;
+            DEFAULT_INVITE_INDICATOR_Y_RIGHT = (listRight as PlayersPanelListRight).inviteReceivedIndicator.y;
+
             setup();
         }
 
@@ -207,10 +218,22 @@ package com.xvm.battle.playersPanel
                     initPanelModes();
                     registerVehicleIconAtlases();
                     panelSwitch.visible = !Macros.FormatBooleanGlobal(cfg.removePanelsModeSwitcher, false);
+                    (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.alpha = Macros.FormatNumberGlobal(cfg.none.inviteIndicatorAlpha, 100) / 100.0;
+                    (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_X_LEFT + Macros.FormatNumberGlobal(cfg.none.inviteIndicatorX, 0);
+                    (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.y = DEFAULT_INVITE_INDICATOR_Y_LEFT + Macros.FormatNumberGlobal(cfg.none.inviteIndicatorY, 0);
+                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.alpha = Macros.FormatNumberGlobal(cfg.none.inviteIndicatorAlpha, 100) / 100.0;
+                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_X_RIGHT - Macros.FormatNumberGlobal(cfg.none.inviteIndicatorX, 0);
+                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_Y_RIGHT + Macros.FormatNumberGlobal(cfg.none.inviteIndicatorY, 0);
                 }
                 else
                 {
                     panelSwitch.visible = true;
+                    (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.alpha = 1;
+                    (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_X_LEFT;
+                    (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.y = DEFAULT_INVITE_INDICATOR_Y_LEFT;
+                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.alpha = 1;
+                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_X_RIGHT;
+                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_Y_RIGHT;
                 }
             }
             catch (ex:Error)

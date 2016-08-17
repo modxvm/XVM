@@ -1,9 +1,13 @@
 XVM-6.4.2-dev:
-  * добавлена опция в секциях режимов "playersPanel":
+  * добавлены опции в секциях режимов "playersPanel":
       "fragsShadowLeft", "fragsShadowRight" - тень для поля фрагов
       "nickShadowLeft", "nickShadowRight" - тень для поля имени игрока
       "vehicleShadowLeft", "vehicleShadowRight" - тень для поля названия танка
       "fixedPosition" - true - не изменять позиции игроков при уничтожении (по умолчанию false)
+  * добавлены опции в режиме "playersPanel"/"none":
+      "inviteIndicatorAlpha" - прозрачность индикатора приглашения в динамический взвод
+      "inviteIndicatorX" - позиция X индикатора приглашения в динамический взвод
+      "inviteIndicatorY" - позиция Y индикатора приглашения в динамический взвод
   * battleLoading: добавлены extraFields
   * battleLabels: добавлены события:
       ON_TARGET_IN  - при наведении на танк

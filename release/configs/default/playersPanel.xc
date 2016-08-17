@@ -183,6 +183,15 @@
       // true - don't change players positions on dead (default false)
       // true - не изменять позиции игроков при уничтожении (по умолчанию false)
       "fixedPosition": false,
+      // Opacity of dynamic squad invite indicator
+      // Прозрачность индикатора приглашения в динамический взвод
+      "inviteIndicatorAlpha": 100,
+      // X position offset of dynamic squad invite indicator
+      // Позиция X индикатора приглашения в динамический взвод
+      "inviteIndicatorX": 0,
+      // Y position offset of dynamic squad invite indicator
+      // Позиция Y индикатора приглашения в динамический взвод
+      "inviteIndicatorY": 0,
       // Extra fields.
       // Дополнительные поля.
       "extraFields": {
