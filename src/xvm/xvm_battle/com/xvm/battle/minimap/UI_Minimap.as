@@ -84,7 +84,7 @@ package com.xvm.battle.minimap
 
             setCfg();
             update();
-            dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED));
+            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED));
         }
 
         private function update():void

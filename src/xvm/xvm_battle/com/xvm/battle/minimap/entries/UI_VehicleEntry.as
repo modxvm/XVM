@@ -25,12 +25,14 @@ package com.xvm.battle.minimap.entries
             if (!_useStandartLabels)
             {
                 Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
+                Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
             }
         }
 
         override protected function onDispose():void
         {
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
+            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
             super.onDispose();
         }
 
@@ -44,18 +46,23 @@ package com.xvm.battle.minimap.entries
                     vehicleNameTextFieldAlt.visible = false;
                     vehicleNameTextFieldClassic.visible = true;
                     var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    vehicleNameTextFieldClassic.htmlText = Macros.Format(Config.config.minimap.labels.formats[0].format, playerState);
+                    vehicleNameTextFieldClassic.htmlText = Macros.Format(UI_Minimap.cfg.labels.formats[0].format, playerState);
                 }
             }
         }
 
         // PRIVATE
 
+        private function update():void
+        {
+            invalidate(VehicleMinimapEntry.INVALID_VEHICLE_LABEL);
+        }
+
         private function playerStateChanged(e:PlayerStateEvent):void
         {
             if (e.vehicleID == vehicleID)
             {
-                invalidate(VehicleMinimapEntry.INVALID_VEHICLE_LABEL);
+                update();
             }
         }
     }
