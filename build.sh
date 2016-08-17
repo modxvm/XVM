@@ -107,6 +107,16 @@ build_xpm(){
     popd >/dev/null
 }
 
+build_native()
+{
+    echo ""
+    echo "Building C Python modules"
+
+    pushd "$XVMBUILD_ROOT_PATH"/src/xvm-native/ >/dev/null
+    ./build.sh || exit $?
+    popd >/dev/null
+}
+
 calc_hash_for_xvm_integrity(){
     echo ""
     echo "Calculating hashes for xvm_integrity"
@@ -177,14 +187,16 @@ detect_arch
 
 extend_path
 
-detect_mono
-detect_java
-detect_ffdec
 detect_fdbuild
+detect_ffdec
 detect_flex
+detect_java
+detect_mono
+detect_patch
+detect_python
+detect_unzip
 detect_wget
 detect_zip
-detect_python
 
 load_repositorystats
 load_version
@@ -196,6 +208,7 @@ create_directories
 build_xfw
 build_xpm
 build_as3
+build_native
 
 if [[ "$XFW_DEVELOPMENT" == "" ]]; then
   clean_sha1
