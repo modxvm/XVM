@@ -225,11 +225,10 @@ class Battle(object):
     def onVehicleHealthChanged(self, vehicleID, newHealth, attackerID, attackReasonID):
         inv = INV.CUR_HEALTH
         userData = None
-        if g_sessionProvider.getCtx().isEnemy(vID=vehicleID):
-            if attackerID == BigWorld.player().playerVehicleID:
-                inv |= INV.HITLOG
-                userData = {'damageFlag':self._getVehicleDamageType(attackerID),
-                            'damageType':constants.ATTACK_REASONS[attackReasonID]}
+        if attackerID == BigWorld.player().playerVehicleID:
+            inv |= INV.HITLOG
+            userData = {'damageFlag':self._getVehicleDamageType(attackerID),
+                        'damageType':constants.ATTACK_REASONS[attackReasonID]}
         self.updatePlayerState(vehicleID, inv, userData)
 
     def updateSpottedStatus(self, vehicleID, active):

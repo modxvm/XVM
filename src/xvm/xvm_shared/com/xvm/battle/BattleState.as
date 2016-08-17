@@ -405,10 +405,21 @@ package com.xvm.battle
                 {
                     if (data.__hitlogData)
                     {
-                        onUpdateHitlogData(playerState, data.curHealth, data.__hitlogData.damageFlag, data.__hitlogData.damageType);
+                        if (playerState.isEnemy)
+                        {
+                            onUpdateHitlogData(playerState, data.curHealth, data.__hitlogData.damageFlag, data.__hitlogData.damageType);
+                        }
                         delete data.__hitlogData;
                         playerState.update(data);
-                        Xvm.dispatchEvent(new ObjectEvent(BattleEvents.HITLOG_UPDATED, playerState));
+                        if (playerState.isEnemy)
+                        {
+                            Xvm.dispatchEvent(new ObjectEvent(BattleEvents.HITLOG_UPDATED, playerState));
+                        }
+                        else
+                        {
+                            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.DAMAGE_CAUSED_ALLY));
+                        }
+                        delete data.__hitlogData;
                     }
                     else
                     {

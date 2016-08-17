@@ -29,6 +29,7 @@
      │                            │   ON_MODULE_DESTROYED
      │                            │   ON_MODULE_REPAIRED
      │                            │   ON_DAMAGE_CAUSED
+     │                            │   ON_DAMAGE_CAUSED_ALLY
      │                            │   ON_TARGET_IN  - aim at the vehicle
      │                            │   ON_TARGET_OUT - aim not at the vehicle
      │                            │   ON_PANEL_MODE_CHANGED

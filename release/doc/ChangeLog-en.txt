@@ -6,6 +6,7 @@ XVM-6.4.2-dev:
       "fixedPosition" - true - don't change players positions on dead (default false)
   * battleLoading: extraFields added
   * battleLabels: added events:
+      ON_DAMAGE_CAUSED_ALLY - damage to ally
       ON_TARGET_IN  - aim at the vehicle
       ON_TARGET_OUT - aim not at the vehicle
       ON_PANEL_MODE_CHANGED

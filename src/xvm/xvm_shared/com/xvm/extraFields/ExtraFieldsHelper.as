@@ -52,6 +52,9 @@ package com.xvm.extraFields
                             case "ON_DAMAGE_CAUSED":
                                 Xvm.addEventListener(PlayerStateEvent.DAMAGE_CAUSED, field.updateOnEvent);
                                 break;
+                            case "ON_DAMAGE_CAUSED_ALLY":
+                                Xvm.addEventListener(PlayerStateEvent.DAMAGE_CAUSED_ALLY, field.updateOnEvent);
+                                break;
                             case "ON_TARGET_IN":
                                 Xvm.addEventListener(PlayerStateEvent.ON_TARGET_IN, field.updateOnEvent);
                                 break;
