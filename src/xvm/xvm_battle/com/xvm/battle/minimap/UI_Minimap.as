@@ -74,17 +74,19 @@ package com.xvm.battle.minimap
         private function setAltMode(e:ObjectEvent):void
         {
             //Logger.add("setAltMode: isDown:" + e.result.isDown + " isAltMode:" + isAltMode);
+            if (xvm_enabled)
+            {
+                if (Config.config.hotkeys.minimapAltMode.onHold)
+                    isAltMode = e.result.isDown;
+                else if (e.result.isDown)
+                    isAltMode = !isAltMode;
+                else
+                    return;
 
-            if (Config.config.hotkeys.minimapAltMode.onHold)
-                isAltMode = e.result.isDown;
-            else if (e.result.isDown)
-                isAltMode = !isAltMode;
-            else
-                return;
-
-            setCfg();
-            update();
-            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED));
+                setCfg();
+                update();
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED));
+            }
         }
 
         private function update():void
