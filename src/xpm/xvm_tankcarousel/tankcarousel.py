@@ -21,6 +21,7 @@ from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
+from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic import carousel_data_provider
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, _SUPPLY_ITEMS
@@ -65,9 +66,6 @@ def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, update_config)
 
-HANGAR_ALIASES.TANK_CAROUSEL_UI = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
-HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI = 'com.xvm.lobby.ui.tankcarousel::UI_FalloutTankCarousel'
-
 
 #####################################################################
 # onXfwCommand
@@ -87,6 +85,18 @@ def onXfwCommand(cmd, *args):
 
 #####################################################################
 # handlers
+
+@overrideMethod(Hangar, 'as_setCarouselS')
+def _Hangar_as_setCarouselS(base, self, linkage, alias):
+    if xfw_mods_info.loaded_swfs.get('xvm_lobby_ui.swf', 0):
+        if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
+            linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
+        if linkage == HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI:
+            linkage = 'com.xvm.lobby.ui.tankcarousel::UI_FalloutTankCarousel'
+    else:
+        log('WARNING: as_setCarouselS: {} xvm_lobby_ui.swf is not loaded'.format(linkage, alias))
+    base(self, linkage, alias)
+
 
 carousel_config = {}
 
