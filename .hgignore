@@ -20,10 +20,6 @@ src/xpm/*/__version__.py
 src/xvm/obj/
 src/xpm/.vscode/
 
-src/xvm-as2/include/
-src/xvm-as2/obj
-src/xvm-as2/swf/*.swf
-
 utils/replays/*.wotreplay
 utils/xmqp_test/data/
 utils/xmqp_test/*.pyc
