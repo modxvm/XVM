@@ -76,7 +76,7 @@ class Minimap(object):
     @property
     def active(self):
         if not self.swf_loaded:
-            if not xfw_mods_info.loaded_swfs.get('xvm_main.swf', 0):
+            if not xfw_mods_info.loaded_swfs.get('xvm_battle.swf', 0):
                 return False
             self.swf_loaded = True
         return self.enabled and self.initialized and (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL)

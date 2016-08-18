@@ -4,8 +4,6 @@
  */
 package com.xvm.lobby
 {
-    import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.lobby.battleloading.BattleLoadingXvmView;
     import com.xvm.lobby.battleresults.BattleResultsXvmView;
@@ -18,10 +16,8 @@ package com.xvm.lobby
     import com.xvm.lobby.loginlayout.LoginLayoutXvmView;
     import com.xvm.lobby.online.OnlineLoginXvmView;
     import com.xvm.lobby.online.OnlineLobbyXvmView;
-    import com.xvm.lobby.online.OnlineServers.OnlineServers;
     import com.xvm.lobby.ping.PingLoginXvmView;
     import com.xvm.lobby.ping.PingLobbyXvmView;
-    import com.xvm.lobby.ping.PingServers.PingServers;
     import com.xvm.lobby.profile.ProfileXvmView;
     import com.xvm.lobby.squad.SquadXvmView;
     import com.xvm.lobby.techtree.ResearchXvmView;
@@ -50,28 +46,6 @@ package com.xvm.lobby
             "prb_windows/squadWindow": [ SquadXvmView ],
             "techtree": [ TechTreeXvmView ],
             "research": [ ResearchXvmView ]
-        }
-
-        override public function entryPoint():void
-        {
-            super.entryPoint();
-
-            Logger.counterPrefix = "L";
-
-            // loading ui mods
-            XfwComponent.try_load_ui_swf("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf" ]);
-            XfwComponent.try_load_ui_swf("xvm_lobby", "xvm_lobbybattleloading_ui.swf", [ "battleloading.swf" ]);
-
-            // mod: online
-            // init as earlier as possible
-            OnlineServers.initFeature((Config.config.login.onlineServers.enabled || Config.config.hangar.onlineServers.enabled) && Config.config.__wgApiAvailable);
-
-            // mod: ping
-            // init pinger as earlier as possible
-            PingServers.initFeature(Config.config.login.pingServers.enabled || Config.config.hangar.pingServers.enabled);
-
-            LobbyMacros.RegisterVehiclesMacros();
-            LobbyMacros.RegisterClockMacros();
         }
 
         public override function get views():Object

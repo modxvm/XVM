@@ -2,9 +2,9 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie outputType="CustomBuild" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_main\as_common\xvm_main.swf" />
+    <movie path="" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />
@@ -15,7 +15,7 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="xvm_main" />
+    <class path="xvm_app" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -48,7 +48,7 @@
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
-    <element path="..\..\~output\swc\xvm_shared.swc" />
+    <!-- example: <element path="..." /> -->
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
@@ -56,8 +56,9 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\xfw\~output\swc\wg_lobby.swc" />
+    <element path="..\xfw\~output\swc\wg_shared.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
+    <element path="..\..\~output\swc\xvm_shared.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
@@ -65,7 +66,7 @@
   </rslPaths>
   <!-- Intrinsic Libraries -->
   <intrinsics>
-    <element path="" />
+    <!-- example: <element path="..." /> -->
   </intrinsics>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -73,19 +74,16 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="xvm_main\com\xvm\XvmMain.as" />
+    <compile path="xvm_main\com\xvm\XvmAppBase.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="obj" />
-    <hidden path="src" />
-    <hidden path="xvm_battle" />
-    <hidden path="xvm_lobby" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="True">bash .build-xvm_main.swc.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="True">bash .build-xvm_app.swc.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />

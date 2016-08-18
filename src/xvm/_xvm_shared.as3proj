@@ -56,8 +56,8 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\xfw\~output\swc\xfw_shared.swc" />
     <element path="..\xfw\~output\swc\wg_shared.swc" />
+    <element path="..\xfw\~output\swc\xfw_shared.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
@@ -65,7 +65,7 @@
   </rslPaths>
   <!-- Intrinsic Libraries -->
   <intrinsics>
-    <element path="" />
+    <!-- example: <element path="..." /> -->
   </intrinsics>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -78,9 +78,6 @@
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="obj" />
-    <hidden path="src" />
-    <hidden path="xvm_battle" />
-    <hidden path="xvm_lobby" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
