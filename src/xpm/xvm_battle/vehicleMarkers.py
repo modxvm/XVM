@@ -109,7 +109,7 @@ def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
 _exInfo = False
 @overrideMethod(MarkersManager, 'as_setShowExInfoFlagS')
 def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
-    if config.get('hotkeys/markersAltMode/enabled'):
+    if g_markers.active and config.get('hotkeys/markersAltMode/enabled'):
         global _exInfo
         if config.get('hotkeys/markersAltMode/onHold'):
             _exInfo = flag
