@@ -9,10 +9,10 @@ package com.xvm.battle
 
         public function BattleXvmApp():void
         {
+            Logger.counterPrefix = "B";
+
             battleXvmMod = new BattleXvmMod();
             addChild(battleXvmMod);
-
-            Logger.counterPrefix = "B";
 
             BattleGlobalData.init();
             Stat.clearBattleStat();
