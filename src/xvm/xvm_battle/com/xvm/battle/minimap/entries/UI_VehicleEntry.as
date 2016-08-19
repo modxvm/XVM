@@ -16,14 +16,14 @@ package com.xvm.battle.minimap.entries
     public class UI_VehicleEntry extends VehicleEntry
     {
         private var _formattedString:String = "";
-        private var _useStandartLabels:Boolean;
+        private var _useStandardLabels:Boolean;
 
         public function UI_VehicleEntry()
         {
             //Logger.add("UI_VehicleEntry | UI_VehicleEntry");
-            _useStandartLabels = Macros.FormatBooleanGlobal(Config.config.minimap.useStandardLabels, false);
-            _useStandartLabels = true; // TODO
-            if (!_useStandartLabels)
+            _useStandardLabels = Macros.FormatBooleanGlobal(Config.config.minimap.useStandardLabels, false);
+            _useStandardLabels = true; // TODO
+            if (!_useStandardLabels)
             {
                 Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
                 Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
@@ -40,7 +40,7 @@ package com.xvm.battle.minimap.entries
         override protected function draw():void
         {
             super.draw();
-            if (!_useStandartLabels)
+            if (!_useStandardLabels)
             {
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
