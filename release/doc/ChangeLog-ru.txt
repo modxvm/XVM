@@ -1,3 +1,5 @@
+XVM-6.4.3-dev:
+
 XVM-6.4.2:
   * добавлены опции в секциях режимов "playersPanel":
       "fragsShadowLeft", "fragsShadowRight" - тень для поля фрагов
