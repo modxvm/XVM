@@ -595,8 +595,18 @@ package com.xvm
                 switch (ch)
                 {
                     case ":":
-                        if (section < 1 && (part != "c" && part != "a"))
-                            nextSection = 1;
+                        if (section < 1)
+                        {
+                            if (part == "l10n" || part == "py")
+                            {
+                                parts[PART_NAME] = part;
+                                parts[PART_NORM] = macro.substr(i + 1);
+                                _macro_parts_cache[macro] = parts;
+                                return parts;
+                            }
+                            if (part != "c" && part != "a")
+                                nextSection = 1;
+                        }
                         break;
                     case "%":
                         if (section < 2)
