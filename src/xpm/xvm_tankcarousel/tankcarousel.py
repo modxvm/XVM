@@ -33,6 +33,7 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 import xvm_main.python.dossier as dossier
 import xvm_main.python.vehinfo as vehinfo
+import xvm_main.python.wgutils as wgutils
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
 
@@ -86,17 +87,26 @@ def onXfwCommand(cmd, *args):
 #####################################################################
 # handlers
 
+XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
+
 @overrideMethod(Hangar, 'as_setCarouselS')
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
-    if xfw_mods_info.loaded_swfs.get('xvm_lobby_ui.swf', 0):
+    if xfw_mods_info.loaded_swfs.get(XVM_LOBBY_UI_SWF, 0):
         if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
             linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
         if linkage == HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI:
             linkage = 'com.xvm.lobby.ui.tankcarousel::UI_FalloutTankCarousel'
     else:
-        log('WARNING: as_setCarouselS: {} xvm_lobby_ui.swf is not loaded'.format(linkage, alias))
+        log('WARNING: as_setCarouselS: ({}) {} is not loaded'.format(linkage, XVM_LOBBY_UI_SWF))
+        g_eventBus.removeListener(XFWEVENT.SWF_LOADED, onSwfLoaded)
+        g_eventBus.addListener(XFWEVENT.SWF_LOADED, onSwfLoaded)
     base(self, linkage, alias)
 
+def onSwfLoaded(e):
+    log('onSwfLoaded: {}'.format(e.ctx))
+    if e.ctx.lower() == XVM_LOBBY_UI_SWF:
+        g_eventBus.removeListener(XFWEVENT.SWF_LOADED, onSwfLoaded)
+        wgutils.reloadHangar()
 
 carousel_config = {}
 

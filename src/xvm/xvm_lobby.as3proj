@@ -48,7 +48,8 @@
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
-    <!-- example: <element path="..." /> -->
+    <element path="..\..\~output\swc\xvm_shared.swc" />
+    <element path="..\..\~output\swc\xvm_app.swc" />
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
@@ -58,7 +59,6 @@
   <externalLibraryPaths>
     <element path="..\xfw\~output\swc\wg_lobby.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
-    <element path="..\..\~output\swc\xvm_main.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
@@ -66,7 +66,7 @@
   </rslPaths>
   <!-- Intrinsic Libraries -->
   <intrinsics>
-    <element path="" />
+    <!-- example: <element path="..." /> -->
   </intrinsics>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -74,14 +74,12 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="xvm_lobby\com\xvm\lobby\LobbyXvmMod.as" />
+    <compile path="xvm_lobby\com\xvm\lobby\LobbyXvmApp.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="obj" />
-    <hidden path="xvm_main" />
     <hidden path="xvm_battle" />
-    <hidden path="src" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

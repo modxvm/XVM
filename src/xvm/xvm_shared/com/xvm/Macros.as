@@ -12,7 +12,7 @@ package com.xvm
     import flash.utils.*;
     import mx.utils.*;
 
-    public class Macros
+    public class Macros extends Object
     {
         // PUBLIC STATIC
 
@@ -28,7 +28,7 @@ package com.xvm
             //Xvm.swfProfilerBegin("Macros.Format");
             //try
             //{
-            return _Format(format, options, new MacrosResult());
+            return instance._Format(format, options, new MacrosResult());
             //}
             //finally
             //{
@@ -50,7 +50,7 @@ package com.xvm
             //{
             if (format == null)
                 return defaultValue;
-            var res:String = _Format(format, options, new MacrosResult());
+            var res:String = instance._Format(format, options, new MacrosResult());
             //Logger.addObject(format + " => " + res);
             return res != null ? res : defaultValue;
             //}
@@ -98,7 +98,7 @@ package com.xvm
                 return defaultValue;
             if (!isNaN(format))
                 return format;
-            var v:* = _Format(format, options, new MacrosResult());
+            var v:* = instance._Format(format, options, new MacrosResult());
             //Logger.add(format + " => " + v);
             if (v == null)
                 return defaultValue;
@@ -162,7 +162,7 @@ package com.xvm
                 return defaultValue;
             if (typeof format == "boolean")
                 return format;
-            var v:* = _Format(format, options, new MacrosResult());
+            var v:* = instance._Format(format, options, new MacrosResult());
             if (v == null)
                 return defaultValue;
             if (typeof v == "boolean")
@@ -215,7 +215,7 @@ package com.xvm
             //Xvm.swfProfilerBegin("Macros.IsCached");
             //try
             //{
-            return _IsCached(format, options);
+            return instance._IsCached(format, options);
             //}
             //finally
             //{
@@ -226,28 +226,24 @@ package com.xvm
 
         public static function get Globals():Object
         {
-            return m_globals;
+            return instance.m_globals;
         }
 
         public static function get Players():Object
         {
-            return m_players;
+            return instance.m_players;
         }
 
         // common
 
         public static function clear():void
         {
-            m_globals = { };
-            m_players = { };
-            m_macros_cache_globals = { };
-            m_macros_cache_players = new Vector.<Object>(CACHE_MASK_SIZE, true);
-            m_macros_cache_players_hybrid = { };
+            instance._clear();
         }
 
         public static function RegisterXvmServicesMacrosData():void
         {
-            _RegisterXvmServicesMacrosData();
+            instance._RegisterXvmServicesMacrosData();
         }
 
         /**
@@ -256,12 +252,12 @@ package com.xvm
          */
         public static function RegisterStatisticsMacros(pname:String, stat:StatData):void
         {
-            _RegisterStatisticsMacros(pname, stat);
+            instance._RegisterStatisticsMacros(pname, stat);
         }
 
         public static function RegisterGlobalStatisticsMacros():void
         {
-            _RegisterGlobalStatisticsMacros();
+            instance._RegisterGlobalStatisticsMacros();
         }
 
         // battle
@@ -275,7 +271,7 @@ package com.xvm
          */
         public static function RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean):void
         {
-            _RegisterPlayerMacrosData(vehicleID, accountDBID, playerName, clanAbbrev, isAlly);
+            instance._RegisterPlayerMacrosData(vehicleID, accountDBID, playerName, clanAbbrev, isAlly);
         }
 
         /**
@@ -285,48 +281,82 @@ package com.xvm
          */
         public static function RegisterVehicleMacrosData(playerName:String, vehCD:Number):void
         {
-            _RegisterVehicleMacrosData(playerName, vehCD);
+            instance._RegisterVehicleMacrosData(playerName, vehCD);
+        }
+
+        // INSTANCE
+
+        private static var _instance:Macros = null;
+
+        public static function get instance():Macros
+        {
+            if (!_instance)
+            {
+                _instance = new Macros();
+            }
+            return _instance;
         }
 
         // PRIVATE
 
-        private static const PART_NAME:int = 0;
-        private static const PART_NORM:int = 1;
-        private static const PART_FMT:int = 2;
-        private static const PART_SUF:int = 3;
-        private static const PART_MATCH_OP:int = 4;
-        private static const PART_MATCH:int = 5;
-        private static const PART_REP:int = 6;
-        private static const PART_DEF:int = 7;
+        private const PART_NAME:int = 0;
+        private const PART_NORM:int = 1;
+        private const PART_FMT:int = 2;
+        private const PART_SUF:int = 3;
+        private const PART_MATCH_OP:int = 4;
+        private const PART_MATCH:int = 5;
+        private const PART_REP:int = 6;
+        private const PART_DEF:int = 7;
 
-        private static const CACHE_MASK_ALIVE:uint =        0x0001;
-        private static const CACHE_MASK_READY:uint =        0x0002;
-        private static const CACHE_MASK_SELECTED:uint =     0x0004;
-        private static const CACHE_MASK_PLAYER:uint =       0x0008;
-        private static const CACHE_MASK_TEAMKILLER:uint =   0x0010;
-        private static const CACHE_MASK_SQUAD:uint =        0x0020;
-        private static const CACHE_MASK_POSITION:uint =     0x0040;
-        private static const CACHE_MASK_MARKSONGUN:uint =   0x0080;
-        private static const CACHE_MASK_X_ENABLED:uint =    0x0100;
-        private static const CACHE_MASK_X_SPOTTED:uint =    0x0200;
-        private static const CACHE_MASK_X_FIRE:uint =       0x0400;
-        private static const CACHE_MASK_X_OVERTURNED:uint = 0x0800;
-        private static const CACHE_MASK_X_DROWNING:uint =   0x1000;
-        private static const CACHE_MASK_SIZE:uint =         0x2000;
+        private const CACHE_MASK_ALIVE:uint =        0x0001;
+        private const CACHE_MASK_READY:uint =        0x0002;
+        private const CACHE_MASK_SELECTED:uint =     0x0004;
+        private const CACHE_MASK_PLAYER:uint =       0x0008;
+        private const CACHE_MASK_TEAMKILLER:uint =   0x0010;
+        private const CACHE_MASK_SQUAD:uint =        0x0020;
+        private const CACHE_MASK_POSITION:uint =     0x0040;
+        private const CACHE_MASK_MARKSONGUN:uint =   0x0080;
+        private const CACHE_MASK_X_ENABLED:uint =    0x0100;
+        private const CACHE_MASK_X_SPOTTED:uint =    0x0200;
+        private const CACHE_MASK_X_FIRE:uint =       0x0400;
+        private const CACHE_MASK_X_OVERTURNED:uint = 0x0800;
+        private const CACHE_MASK_X_DROWNING:uint =   0x1000;
+        private const CACHE_MASK_SIZE:uint =         0x2000;
 
         // special case for dynamic macros converted to static
-        private static const HYBRID_MACROS:Vector.<String> = new <String>["alive", "ready", "selected", "player", "tk",
+        private const HYBRID_MACROS:Vector.<String> = new <String>["alive", "ready", "selected", "player", "tk",
             "squad", "squad-num", "position", "sys-color-key", "c:system", "marksOnGun",
             "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"];
-        HYBRID_MACROS.fixed = true;
 
-        private static var m_globals:Object = { };
-        private static var m_players:Object = { }; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
-        private static var m_macros_cache_globals:Object = { };
-        private static var m_macros_cache_players:Vector.<Object> = new Vector.<Object>(CACHE_MASK_SIZE, true);
-        private static var m_macros_cache_players_hybrid:Object = { };
+        private var m_globals:Object;
+        private var m_players:Object; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+        private var m_macros_cache_globals:Object;
+        private var m_macros_cache_players:Vector.<Object>;
+        private var m_macros_cache_players_hybrid:Object;
+        private var m_macro_parts_cache:Object;
+        private var m_format_macro_fmt_suf_cache:Object;
+        private var m_prepare_value_cache:Object;
 
-        private static function _getPlayerCache(options:IVOMacrosOptions):Object
+        // .ctor() should be private
+        function Macros()
+        {
+            super();
+            _clear();
+        }
+
+        private function _clear():void
+        {
+            m_globals = { };
+            m_players = { };
+            m_macros_cache_globals = { };
+            m_macros_cache_players = new Vector.<Object>(CACHE_MASK_SIZE, true);
+            m_macros_cache_players_hybrid = { };
+            m_macro_parts_cache = {};
+            m_format_macro_fmt_suf_cache = {};
+            m_prepare_value_cache = {};
+        }
+
+        private function _getPlayerCache(options:IVOMacrosOptions):Object
         {
             var idx:uint = 0;
             if (options.isAlive)
@@ -375,7 +405,7 @@ package com.xvm
             return player_cache;
         }
 
-        private static function _Format(format:*, options:IVOMacrosOptions, __out:MacrosResult):*
+        private function _Format(format:*, options:IVOMacrosOptions, __out:MacrosResult):*
         {
             //Logger.add("format:" + format + " player:" + (options ? options.playerName : null));
 
@@ -479,7 +509,7 @@ package com.xvm
             return res;
         }
 
-        private static function _FormatPart(macro:String, options:IVOMacrosOptions, __out:MacrosResult):String
+        private function _FormatPart(macro:String, options:IVOMacrosOptions, __out:MacrosResult):String
         {
             // Process tag
             var playerName:String = options ? options.playerName : null;
@@ -571,10 +601,9 @@ package com.xvm
             return res;
         }
 
-        private static var _macro_parts_cache:Object = {};
-        private static function _GetMacroParts(macro:String, pdata:Object):Vector.<String>
+        private function _GetMacroParts(macro:String, pdata:Object):Vector.<String>
         {
-            var parts:Vector.<String> = _macro_parts_cache[macro];
+            var parts:Vector.<String> = m_macro_parts_cache[macro];
             if (parts)
                 return parts;
 
@@ -595,8 +624,18 @@ package com.xvm
                 switch (ch)
                 {
                     case ":":
-                        if (section < 1 && (part != "c" && part != "a"))
-                            nextSection = 1;
+                        if (section < 1)
+                        {
+                            if (part == "l10n" || part == "py")
+                            {
+                                parts[PART_NAME] = part;
+                                parts[PART_NORM] = macro.substr(i + 1);
+                                m_macro_parts_cache[macro] = parts;
+                                return parts;
+                            }
+                            if (part != "c" && part != "a")
+                                nextSection = 1;
+                        }
                         break;
                     case "%":
                         if (section < 2)
@@ -653,11 +692,11 @@ package com.xvm
                 parts[PART_DEF] = _getRatingDefaultValue("xvm");
 
             //Logger.add("[AS3][MACROS][_GetMacroParts]: " + parts.join(", "));
-            _macro_parts_cache[macro] = parts;
+            m_macro_parts_cache[macro] = parts;
             return parts;
         }
 
-        private static function _SubstituteConfigPart(path:String):String
+        private function _SubstituteConfigPart(path:String):String
         {
             var res:* = XfwUtils.getObjectValueByPath(Config.config, path);
             if (res == null)
@@ -667,8 +706,7 @@ package com.xvm
             return String(res);
         }
 
-        private static var _format_macro_fmt_suf_cache:Object = {};
-        private static function _FormatMacro(macro:String, parts:Vector.<String>, value:*, vehCD:Number, options:IVOMacrosOptions, __out:MacrosResult):String
+        private function _FormatMacro(macro:String, parts:Vector.<String>, value:*, vehCD:Number, options:IVOMacrosOptions, __out:MacrosResult):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
@@ -737,7 +775,7 @@ package com.xvm
                 return res;
 
             var fmt_suf_key:String = fmt + "," + suf + "," + res;
-            var fmt_suf_res:String = _format_macro_fmt_suf_cache[fmt_suf_key];
+            var fmt_suf_res:String = m_format_macro_fmt_suf_cache[fmt_suf_key];
             if (fmt_suf_res)
                 return fmt_suf_res;
 
@@ -779,12 +817,11 @@ package com.xvm
             }
 
             //Logger.add(res);
-            _format_macro_fmt_suf_cache[fmt_suf_key] = res;
+            m_format_macro_fmt_suf_cache[fmt_suf_key] = res;
             return res;
         }
 
-        private static var _prepare_value_cache:Object = {};
-        private static function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number, __out:MacrosResult):String
+        private function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number, __out:MacrosResult):String
         {
             if (norm == null)
                 return def;
@@ -795,7 +832,7 @@ package com.xvm
                 case "hp":
                 case "hp-max":
                     var key:String = name + "," + norm + "," + value + "," + vehCD;
-                    res = _prepare_value_cache[key];
+                    res = m_prepare_value_cache[key];
                     if (res)
                         return res;
                     if (isNaN(value))
@@ -810,7 +847,7 @@ package com.xvm
                         var maxHp:Number = m_globals["maxhp"];
                         res = Math.round(parseInt(norm) * value / maxHp).toString();
                     }
-                    _prepare_value_cache[key] = res;
+                    m_prepare_value_cache[key] = res;
                     //Logger.add(key + " => " + res);
                     break;
                 case "hp-ratio":
@@ -861,7 +898,7 @@ package com.xvm
             return res;
         }
 
-        private static function _IsCached(format:*, options:IVOMacrosOptions):Boolean
+        private function _IsCached(format:*, options:IVOMacrosOptions):Boolean
         {
             if (format === undefined || XfwUtils.isPrimitiveTypeAndNotString(format) || !isNaN(format))
                 return true;
@@ -891,7 +928,7 @@ package com.xvm
 
         // Macros registration
 
-        private static function _RegisterXvmServicesMacrosData():void
+        private function _RegisterXvmServicesMacrosData():void
         {
             // {{xvm-stat}}
             m_globals["xvm-stat"] = Config.networkServicesSettings.statBattle == true ? 'stat' : null;
@@ -899,7 +936,7 @@ package com.xvm
             m_globals["r_size"] = _getRatingDefaultValue().length;
         }
 
-        private static function _RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean):void
+        private function _RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean):void
         {
             if (!playerName)
                 throw new Error("empty name");
@@ -937,7 +974,7 @@ package com.xvm
             }
         }
 
-        private static function _RegisterVehicleMacrosData(playerName:String, vehCD:Number):void
+        private function _RegisterVehicleMacrosData(playerName:String, vehCD:Number):void
         {
             // register vehicle macros
             var pdata:Object = m_players[playerName];
@@ -1015,7 +1052,7 @@ package com.xvm
             }
         }
 
-        private static function _RegisterGlobalStatisticsMacros():void
+        private function _RegisterGlobalStatisticsMacros():void
         {
             // {{chancesStatic}}
             m_globals["chancesStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_WIN_CHANCE, true, false);
@@ -1040,7 +1077,7 @@ package com.xvm
             }
         }
 
-        private static function _RegisterStatisticsMacros(pname:String, stat:StatData):void
+        private function _RegisterStatisticsMacros(pname:String, stat:StatData):void
         {
             if (stat == null)
                 return;
@@ -1243,7 +1280,7 @@ package com.xvm
          * @param playerName player name
          * @return personal name
          */
-        private static function getCustomPlayerName(playerName:String, accountDBID:Number):String
+        private function getCustomPlayerName(playerName:String, accountDBID:Number):String
         {
             switch (Config.config.region)
             {
@@ -1300,7 +1337,7 @@ package com.xvm
 
         // rating
 
-        private static var RATING_MATRIX:Object =
+        private const RATING_MATRIX:Object =
         {
             xvm_wgr:   { name: "xwgr", def: "--" },
             xvm_wn6:   { name: "xwn6", def: "--" },
@@ -1317,7 +1354,7 @@ package com.xvm
         /**
          * Returns rating according settings in the personal cabinet
          */
-        private static function _getRating(pdata:Object, prefix:String, suffix:String, scale:String):*
+        private function _getRating(pdata:Object, prefix:String, suffix:String, scale:String):*
         {
             var name:String = _getRatingName(scale);
             var value:* = pdata[prefix + RATING_MATRIX[name].name + suffix];
@@ -1330,13 +1367,13 @@ package com.xvm
         /**
          * Returns default value for rating according settings in the personal cabinet
          */
-        private static function _getRatingDefaultValue(scale:String = null):String
+        private function _getRatingDefaultValue(scale:String = null):String
         {
             var name:String = _getRatingName(scale);
             return RATING_MATRIX[name].def;
         }
 
-        private static function _getRatingName(scale:String):String
+        private function _getRatingName(scale:String):String
         {
             var sc:String = (scale == null) ? Config.networkServicesSettings.scale : scale;
             var name:String = sc + "_" + Config.networkServicesSettings.rating;

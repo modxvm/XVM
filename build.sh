@@ -61,7 +61,7 @@ build_as3(){
 
     pushd "$XVMBUILD_ROOT_PATH"/src/xvm/ > /dev/null
 
-    top=( "_xvm_shared.as3proj" "_xvm_main.as3proj" "xvm_lobby.as3proj" "xvm_battle.as3proj" )
+    top=( "_xvm_shared.as3proj" "_xvm_app.as3proj" "xvm_lobby.as3proj" "xvm_battle.as3proj" )
     for proj in "${top[@]}"; do
         echo "Building $proj"
         build_as3_h "$proj" || exit $?

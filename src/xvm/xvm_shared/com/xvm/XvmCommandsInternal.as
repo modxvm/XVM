@@ -1,5 +1,5 @@
 ﻿/**
- * XVM DAAPI commands (internal for xvm_main)
+ * XVM DAAPI commands (internal for xvm_shared)
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm

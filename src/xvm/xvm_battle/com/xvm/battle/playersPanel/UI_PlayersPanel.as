@@ -162,25 +162,24 @@ package com.xvm.battle.playersPanel
 
         override public function updateVehiclesInfo(data:IDAAPIDataClass) : void
         {
-            super.updateVehiclesInfo(data);
             if (mopt_fixedPosition)
             {
                 setFixedOrder(DAAPIVehiclesDataVO(data));
             }
+            super.updateVehiclesInfo(data);
         }
 
         override public function addVehiclesInfo(data:IDAAPIDataClass) : void
         {
-            super.addVehiclesInfo(data);
             if (mopt_fixedPosition)
             {
                 setFixedOrder(DAAPIVehiclesDataVO(data));
             }
+            super.addVehiclesInfo(data);
         }
 
         override public function updateVehicleStatus(data:IDAAPIDataClass):void
         {
-            super.updateVehicleStatus(data);
             if (mopt_fixedPosition)
             {
                 var vehicleStatus:DAAPIVehicleStatusVO = DAAPIVehicleStatusVO(data);
@@ -199,6 +198,7 @@ package com.xvm.battle.playersPanel
                     }
                 }
             }
+            super.updateVehicleStatus(data);
         }
 
         // PRIVATE

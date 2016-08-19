@@ -24,7 +24,7 @@ package com.xvm
     ImageManagerWG;
     ImageWG;
 
-    public class XvmMain extends Xvm
+    public class XvmAppBase extends Xvm
     {
         // stub
     }

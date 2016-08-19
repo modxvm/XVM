@@ -42,6 +42,11 @@ package com.xvm.battle.minimap
             {
                 MinimapEntryController.instance.unregisterScalableEntry(MinimapEntryController.instance.xfw_scalableEntries[0], true);
             }
+            while (MinimapEntryController.instance.xfw_vehicleEntries.length)
+            {
+                MinimapEntryController.instance.unregisterVehicleEntry(MinimapEntryController.instance.xfw_vehicleEntries[0]);
+            }
+            MinimapEntryController.instance.xfw_vehicleLabelsEntries.splice(0, MinimapEntryController.instance.xfw_vehicleLabelsEntries.length);
             var idx:int = page.getChildIndex(page.minimap);
             page.removeChild(page.minimap);
             var component:UI_Minimap = new UI_Minimap();

@@ -34,22 +34,6 @@ package com.xvm.battle
             ]
         }
 
-        override public function entryPoint():void
-        {
-            try
-            {
-                super.entryPoint();
-                Logger.counterPrefix = "B";
-                BattleGlobalData.init();
-                Stat.clearBattleStat();
-                Stat.loadBattleStat();
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
         public override function get views():Object
         {
             return _views;

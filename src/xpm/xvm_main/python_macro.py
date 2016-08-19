@@ -134,7 +134,7 @@ def load_macros_lib(file_name):
 def get_function(function):
     try:
         left_bracket_pos = function.index('(')
-        right_bracket_pos = function.index(')')
+        right_bracket_pos = function.rindex(')')
         func_name = function[0:left_bracket_pos]
         args_string = function[left_bracket_pos: right_bracket_pos + 1]
     except ValueError:

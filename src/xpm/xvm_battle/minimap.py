@@ -24,6 +24,8 @@ from xvm_main.python.logger import *
 from xvm_main.python.consts import *
 import xvm_main.python.config as config
 
+from battle import g_battle
+
 
 #####################################################################
 # initialization/finalization
@@ -71,24 +73,20 @@ class Minimap(object):
     enabled = True
     initialized = False
     guiType = 0
-    swf_loaded = False
 
     @property
     def active(self):
-        if not self.swf_loaded:
-            if not xfw_mods_info.loaded_swfs.get('xvm_main.swf', 0):
-                return False
-            self.swf_loaded = True
-        return self.enabled and self.initialized and (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL)
+        return g_battle.xvm_battle_swf_initialized and \
+               self.enabled and \
+               self.initialized and \
+               (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL)
 
     def init(self):
         self.initialized = True
-        self.swf_loaded = False
         self.guiType = BigWorld.player().arena.guiType
 
     def destroy(self):
         self.initialized = False
-        self.swf_loaded = False
 
 
     #####################################################################

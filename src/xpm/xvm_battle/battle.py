@@ -174,13 +174,16 @@ class Battle(object):
     battle_page = None
     updateTargetCallbackID = None
     targetVehicleID = None
+    xvm_battle_swf_initialized = False
 
     def onAppInitialized(self, event):
+        self.xvm_battle_swf_initialized = False
         app = g_appLoader.getApp(event.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded += self.onViewLoaded
 
     def onAppDestroyed(self, event):
+        self.xvm_battle_swf_initialized = False
         if event.ns == APP_NAME_SPACE.SF_BATTLE:
             self.battle_page = None
         app = g_appLoader.getApp(event.ns)
@@ -314,6 +317,7 @@ class Battle(object):
     def onXfwCommand(self, cmd, *args):
         try:
             if cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
+                self.xvm_battle_swf_initialized = True
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
                 return (None, True)
 
