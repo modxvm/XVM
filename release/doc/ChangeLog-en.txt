@@ -1,4 +1,5 @@
-XVM-6.4.3-dev:
+XVM-6.4.2.1:
+  * fix Alt mode in the standard markers
 
 XVM-6.4.2:
   * added options in the "playersPanel" modes sections:
@@ -10,7 +11,7 @@ XVM-6.4.2:
       "inviteIndicatorAlpha" - opacity of dynamic squad invite indicator
       "inviteIndicatorX" - X position offset of dynamic squad invite indicator
       "inviteIndicatorY" - Y position offset of dynamic squad invite indicator
-  * ping: fixed a memory leak on old Windows versions if ping in hangar was enabled 
+  * ping: fixed a memory leak on old Windows versions if ping in hangar was enabled
   * ping: no longer requires additional configuration to work under Wine
   * battleLoading: extraFields added
   * battleLabels: added events:
