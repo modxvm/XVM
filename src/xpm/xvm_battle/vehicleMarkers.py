@@ -117,7 +117,7 @@ def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
             _exInfo = not _exInfo
         base(self, _exInfo)
     else:
-        base(self, _exInfo)
+        base(self, flag)
 
 def as_xvm_cmdS(self, *args):
     if self._isDAAPIInited():
