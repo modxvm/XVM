@@ -51,7 +51,8 @@ package com.xvm.vehiclemarkers.ui
         {
             Xvm.swfProfilerBegin("XvmVehicleMarker.configUI()");
             super.configUI();
-            VehicleMarkersManager.getInstance().addEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler, false, 0, true);
+            var vmManager:VehicleMarkersManager = VehicleMarkersManager.getInstance();
+            vmManager.addEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler, false, 0, true);
             // TODO: removeStandardFields();
             Xvm.swfProfilerEnd("XvmVehicleMarker.configUI()");
         }
@@ -61,7 +62,8 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerBegin("XvmVehicleMarker.onDispose()");
             super.onDispose();
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
-            VehicleMarkersManager.getInstance().removeEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
+            var vmManager:VehicleMarkersManager = VehicleMarkersManager.getInstance();
+            vmManager.removeEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             deleteComponents();
             Xvm.swfProfilerEnd("XvmVehicleMarker.onDispose()");
         }
@@ -191,6 +193,12 @@ package com.xvm.vehiclemarkers.ui
                 Logger.err(ex);
             }
             Xvm.swfProfilerEnd("XvmVehicleMarker.setHealth()");
+        }
+
+        override public function updateState(state:String, param2:Boolean):void
+        {
+            super.updateState(state, param2);
+            invalidate(InvalidationType.DATA);
         }
 
         override public function setSpeaking(value:Boolean):void

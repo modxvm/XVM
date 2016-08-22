@@ -22,7 +22,6 @@ package com.xvm.battle.minimap.entries
         {
             //Logger.add("UI_VehicleEntry | UI_VehicleEntry");
             _useStandardLabels = Macros.FormatBooleanGlobal(Config.config.minimap.useStandardLabels, false);
-            _useStandardLabels = true; // TODO
             if (!_useStandardLabels)
             {
                 Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
