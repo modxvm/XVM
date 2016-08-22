@@ -55,7 +55,7 @@ package com.xvm.battle.minimap
                 }
                 else
                 {
-                    background.alpha = 100;
+                    background.alpha = 1;
                 }
             }
             catch (ex:Error)
