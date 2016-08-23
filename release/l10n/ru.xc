@@ -46,6 +46,10 @@
     "allyBaseCapture": "Захват базы{0} врагами!",
     "allyBaseCaptured": "База{0} захвачена врагами!",
 
+    // Battle interface labels
+    "avgDamage": "Средний урон",
+    "mainGun": "Основной калибр",
+
     // BattleResults
     "Hit percent": "Процент попаданий",
     "Damage (assisted / own)": "Урон (с вашей помощью / свой)",

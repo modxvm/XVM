@@ -46,6 +46,10 @@
     "allyBaseCapture": "Base{0} capture by enemies!",
     "allyBaseCaptured": "Base{0} captured by enemies!",
 
+    // Battle interface labels
+    "avgDamage": "Avg damage",
+    "mainGun": "High caliber",
+
     // BattleResults
     "Hit percent": "Hit percent",
     "Damage (assisted / own)": "Damage (assisted / own)",

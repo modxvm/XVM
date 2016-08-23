@@ -210,6 +210,30 @@
       "textFormat": { "font": "mono", "size": 18, "align": "center" },
       "format": "{{py:xvm.total_hp.text()}}"
     },
+    "avgDamage": {
+      "enabled": true,
+      "updateEvent": "ON_DAMAGE_CAUSED",
+      "x": -150,
+      "y": 30,
+      "width": 200,
+      "height": 40,
+      "screenHAlign": "center",
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
+      "textFormat": { "size": 15, "align": "center" },
+      "format": "{{py:xvm.total_hp.avgDamage('{{l10n:avgDamage}}: ',{{hitlog.dmg-total}})}}"
+    },
+    "mainGun": {
+      "enabled": true,
+      "updateEvent": "ON_DAMAGE_CAUSED, ON_DAMAGE_CAUSED_ALLY",
+      "x": 150,
+      "y": 30,
+      "width": 200,
+      "height": 40,
+      "screenHAlign": "center",
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
+      "textFormat": { "size": 15, "align": "center" },
+      "format": "{{py:xvm.total_hp.mainGun('{{l10n:mainGun}}: ',{{hitlog.dmg-total}})}}"
+    },
     "winChance": {
       "enabled": false,
       "updateEvent": "ON_VEHICLE_DESTROYED",
