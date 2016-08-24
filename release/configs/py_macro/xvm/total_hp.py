@@ -33,7 +33,6 @@ def Hangar__updateParams(self):
     try:
         global playerAvgDamage
         playerAvgDamage = g_itemsCache.items.getVehicleDossier(g_currentVehicle.item.intCD).getRandomStats().getAvgDamage()
-        playerAvgDamage = 0 if not playerAvgDamage else playerAvgDamage
         return playerAvgDamage
     except:
         err(traceback.format_exc())
@@ -52,7 +51,6 @@ def avgDamage(dmg_total):
     return avgDamage
 
 from Avatar import PlayerAvatar
-from Vehicle import Vehicle
 from constants import VEHICLE_HIT_FLAGS
 
 actual_arenaUniqueID = None

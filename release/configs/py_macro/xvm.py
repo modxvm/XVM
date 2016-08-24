@@ -56,6 +56,14 @@ def total_hp_avgDamage(header, dmg_total):
 def total_hp_mainGun(header, dmg_total):
     return "%s%s" % (header, total_hp.mainGun(dmg_total)) if total_hp.mainGun(dmg_total) is not None else ''
 
+@xvm.export('xvm.total_hp.getAvgDamage', deterministic=False)
+def total_hp_getAvgDamage(a, b, dmg_total):
+    return a if total_hp.avgDamage(dmg_total) is not None else b
+
+@xvm.export('xvm.total_hp.getMainGun', deterministic=False)
+def total_hp_getMainGun(a, b, dmg_total):
+    return a if total_hp.mainGun(dmg_total) is not None else b
+
 # xvm2sup
 
 from xvm import xvm2sup
