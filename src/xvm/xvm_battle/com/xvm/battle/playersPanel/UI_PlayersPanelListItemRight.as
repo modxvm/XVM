@@ -86,6 +86,16 @@ package com.xvm.battle.playersPanel
             }
         }
 
+        // TODO: remove after fix
+        override public function setIsInteractive(isInteractive:Boolean):void
+        {
+            super.setIsInteractive(isInteractive);
+            if (proxy.xvm_enabled)
+            {
+                proxy.setIsInteractive(isInteractive);
+            }
+        }
+
         override public function setVehicleIcon(vehicleImage:String):void
         {
             try

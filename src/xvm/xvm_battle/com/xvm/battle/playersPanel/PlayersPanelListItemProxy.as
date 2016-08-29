@@ -151,6 +151,16 @@ package com.xvm.battle.playersPanel
             invalidate(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE);
         }
 
+        // TODO: remove after fix
+        public function setIsInteractive(isInteractive:Boolean):void
+        {
+            // fix WG bug (WoT 0.9.15.1) - cursor position remains on the item when Ctrl key unpressed.
+            if (isInteractive)
+            {
+                ui.dynamicSquad.onItemOut();
+            }
+        }
+
         public function setVehicleIcon(vehicleImage:String):void
         {
             if (_vehicleImage != vehicleImage)
