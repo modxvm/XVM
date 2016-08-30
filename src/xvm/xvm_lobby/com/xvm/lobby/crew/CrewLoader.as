@@ -31,12 +31,15 @@ package com.xvm.lobby.crew
 
         public static function init(page:Hangar):void
         {
+            //Logger.add("init");
+            instance.init();
             instance.page = page;
             page.crew.addEventListener(MouseEvent.CLICK, instance.handleMouseRelease, false, 0, true);
         }
 
         public static function dispose(page:Hangar):void
         {
+            //Logger.add("dispose");
             instance.dispose();
             page.crew.removeEventListener(MouseEvent.CLICK, instance.handleMouseRelease);
         }
@@ -48,6 +51,10 @@ package com.xvm.lobby.crew
         function CrewLoader():void
         {
             page = null;
+        }
+
+        public function init():void
+        {
             Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_OWN_CREW, PutOwnCrew);
             Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_BEST_CREW, PutBestCrew);
             Xfw.addCommandListener(COMMAND_XVM_CREW_PUT_CLASS_CREW, PutClassCrew);
