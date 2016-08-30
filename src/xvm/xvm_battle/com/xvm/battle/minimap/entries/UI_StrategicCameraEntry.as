@@ -52,7 +52,6 @@ package com.xvm.battle.minimap.entries
 
         private function update():void
         {
-            App.stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
             _aimScale = Macros.FormatNumberGlobal(UI_Minimap.cfg.minimapAimIconScale) / 100.0;
             var iconPath:String = Macros.FormatStringGlobal(UI_Minimap.cfg.minimapAimIcon);
             if (iconPath)
@@ -63,26 +62,25 @@ package com.xvm.battle.minimap.entries
                     _loader = new ImageWG();
                     _loader.successCallback = onImageSuccessLoadHandler;
                     _loader.errorCallback = onImageFaultLoadHandler;
-                }
-                if (_loader.source != iconPath)
-                {
-                    _loader.source = iconPath;
+                    parent.addChild(_loader);
                 }
             }
             else
             {
-                _loader.source = null;
+                iconPath = null;
+            }
+            if (_loader && _loader.source != iconPath)
+            {
+                App.stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+                _previousScale = 0;
+                _previousVisible = false;
+                _loader.visible = false;
+                _loader.source = iconPath;
             }
         }
 
         private function onImageSuccessLoadHandler():void
         {
-            parent.addChild(_loader);
-            _loader.visible = false;
-            _previousVisible = false;
-            _previousScale = _loader.parent.scaleX;
-            _loader.scaleX = 1 / _loader.parent.scaleX * _aimScale;
-            _loader.scaleY = 1 / _loader.parent.scaleY * _aimScale;
             App.stage.addEventListener(Event.ENTER_FRAME, onEnterFrame, false, 0, true);
         }
 
@@ -91,23 +89,23 @@ package com.xvm.battle.minimap.entries
             _loader.x = x - _loader.width / 2;
             _loader.y = y - _loader.height / 2;
 
-            if (visible != _previousVisible)
-            {
-                _loader.visible = visible;
-                _previousVisible = visible;
-            }
-
             if (_previousScale != _loader.parent.scaleX)
             {
                 _previousScale = _loader.parent.scaleX;
                 _loader.scaleX = 1 / _loader.parent.scaleX * _aimScale;
                 _loader.scaleY = 1 / _loader.parent.scaleY * _aimScale;
             }
+
+            if (visible != _previousVisible)
+            {
+                _loader.visible = visible;
+                _previousVisible = visible;
+            }
         }
 
         private function onImageFaultLoadHandler():void
         {
-           Logger.add("Can't resolve path: " + _loader.source);
+           Logger.add("minimapAimIcon: can't resolve path: " + _loader.source);
         }
     }
 }
