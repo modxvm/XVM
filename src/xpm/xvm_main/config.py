@@ -204,7 +204,7 @@ class NetworkServicesSettings(object):
         self.chanceResults = data.get('chanceResults', False) if active else False
         self.scale = data.get('scale', 'xvm')
         self.rating = data.get('rating', 'wgr')
-        self.topClansCount = data.get('topClansCount', 50)
+        self.topClansCount = int(data.get('topClansCount', 50))
         self.flag = data.get('flag', None)
         self.xmqp = data.get('xmqp', True) if active else False
         # TODO: configure color in the personal cabinet
