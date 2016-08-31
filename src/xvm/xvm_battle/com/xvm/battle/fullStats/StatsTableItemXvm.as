@@ -33,6 +33,8 @@ package com.xvm.battle.fullStats
         private static const FIELD_HEIGHT:int = 26;
         private static const ICONS_AREA_WIDTH:int = 80;
         private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
+        private static const EXTRA_FIELDS_X_LEFT:int = 10;
+        private static const EXTRA_FIELDS_X_RIGHT:int = 1011;
 
         private var DEFAULT_PLAYER_NAME_X:Number;
         private var DEFAULT_PLAYER_NAME_WIDTH:Number;
@@ -474,12 +476,12 @@ package com.xvm.battle.fullStats
                 var bindToIconOffset:Number;
                 if (_isLeftPanel)
                 {
-                    offsetX = DEFAULT_PLAYER_NAME_X - SQUAD_ITEMS_AREA_WIDTH;
+                    offsetX = EXTRA_FIELDS_X_LEFT;
                     bindToIconOffset = _vehicleIcon.x - offsetX;
                 }
                 else
                 {
-                    offsetX = DEFAULT_PLAYER_NAME_X + DEFAULT_PLAYER_NAME_WIDTH + SQUAD_ITEMS_AREA_WIDTH;
+                    offsetX = EXTRA_FIELDS_X_RIGHT;
                     bindToIconOffset = _vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
                 }
                 extraFields.visible = true;
