@@ -26,8 +26,8 @@
     "__stub__": null
   },
   "hotkeys": {
-    "minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
-    "minimapAltMode": { "enabled": true, "keyCode": 29, "onHold": true },
+    //"minimapZoom": { "enabled": true, "keyCode": 56, "onHold": true },
+    //"minimapAltMode": { "enabled": true, "keyCode": 56, "onHold": true },
     "playersPanelAltMode": { "enabled": true, "keyCode": 56, "onHold": true }, // LAlt
     //"markersAltMode":      { "enabled": false, "onHold": false },
     "__stub__": {}

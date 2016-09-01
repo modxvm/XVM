@@ -9,6 +9,7 @@ package com.xvm.battle
         public static const REQUEST_BATTLE_GLOBAL_DATA:String = "xvm_battle.request_battle_global_data";
         public static const BATTLE_CTRL_SET_VEHICLE_DATA:String = "xvm_battle.battle_ctrl_set_vehicle_data";
         public static const CAPTURE_BAR_GET_BASE_NUM_TEXT:String = "xvm_battle.capture_bar_get_base_num_text";
+        public static const SET_MINIMAP_MAX_SIZE_INDEX:String = "xvm_battle.set_minimap_max_size_index";
         public static const MINIMAP_CLICK:String = "xvm_battle.minimap_click";
 
         public static const AS_RESPONSE_BATTLE_GLOBAL_DATA:String = "xvm.as.response_battle_global_data";

@@ -8,7 +8,7 @@ package com.xvm.types.cfg
 
     public dynamic class CMinimapZoom extends Object implements ICloneable
     {
-        public var pixelsBack:*;
+        public var index:*;
         public var centered:*;
 
         public function clone():*

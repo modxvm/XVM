@@ -40,9 +40,9 @@
     // Map zoom by key pressing. Key is defined at file "hotkeys.xc".
     // Увеличение миникарты по нажатию кнопки. Кнопка задается в файле "hotkeys.xc".
     "zoom": {
-      // Number of pixels to get back from maximum size (screen height-minimap height).
-      // Число пикселей для уменьшения миникарты от максимального размера (высота экрана-высота миникарты).
-      "pixelsBack": 449,
+      // Zoom index value for minimap zoom key (0..5).
+      // Значение масштаба миникарты при нажатии клавиши масштаба (0..5).
+      "index": 5,
       // false - does not set zoomed minimap at display center.
       // false - не устанавливать увеличенную миникарту по центру экрана.
       "centered": false
