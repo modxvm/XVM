@@ -3,7 +3,7 @@
     //"enabled": false,
     //"mapBackgroundImageAlpha": 50,
     //"selfIconAlpha": 70,
-    "iconAlpha": 0,
+    //"iconAlpha": 10,
     "hideCameraTriangle": true,
     //"showCameraLineAfterDeath": false,
     "cameraAlpha": 90,
