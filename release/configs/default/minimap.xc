@@ -13,9 +13,15 @@
     // Self icon transparency. White pointing arrow.
     // Прозрачность своей иконки. Белая стрелка.
     "selfIconAlpha": 75,
+    // Self icon scale. White pointing arrow.
+    // Масштаб своей иконки. Белая стрелка.
+    "selfIconScale": 1,
     // Vehicle type icons transparency.
     // Прозрачность иконок типа техники.
     "iconAlpha": 100,
+    // Vehicles icon scale. Does not affect attached geometry and textfields. Floating point allowed: 0.7, 1.4.
+    // Масштаб иконки техники. Не влияет на прикрепленную к геометрию и текстовые поля. Можно дробные: 0.7, 1.4.
+    "iconScale": 1,
     // Hide camera direction green triangle (also hides WG camera direction line).
     // Спрятать зеленый треугольник направления камеры (также скрывает луч направления камеры WG).
     "hideCameraTriangle": false,
@@ -25,9 +31,6 @@
     // Camera transparency and its attached geometry (green triangle).
     // Прозрачность камеры и прикрепленной геометрии (зеленый треугольник).
     "cameraAlpha": 100,
-    // Vehicles icon size. Does not affect attached geometry and textfields. Floating point allowed: 0.7, 1.4.
-    // Размер иконки техники. Не влияет на прикрепленную к геометрию и текстовые поля. Можно дробные: 0.7, 1.4.
-    "iconScale": 1,
     // Path to icon for arty aim
     // Путь к иконке для артиллерийского прицела
     "minimapAimIcon": "xvm://res/MinimapAim.png",

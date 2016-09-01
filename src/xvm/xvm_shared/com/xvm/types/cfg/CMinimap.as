@@ -11,6 +11,7 @@ package com.xvm.types.cfg
         public var enabled:*;
         public var mapBackgroundImageAlpha:*;
         public var selfIconAlpha:*;
+        public var selfIconScale:*;
         public var iconAlpha:*;
         public var hideCameraTriangle:*;
         public var showCameraLineAfterDeath:*;

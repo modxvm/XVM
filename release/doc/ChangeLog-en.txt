@@ -2,6 +2,8 @@ XVM-6.4.3-dev:
   * added new elements in sections "battleLabels" and "battleLabelsTemplates":
       "avgDamage" - avg damage on current vehicle
       "mainGun" - threshold necessary for achievements "High caliber"
+  * added options in the "minimap" and "minimapAlt" sections:
+      "selfIconScale" - self icon scale
 
 XVM-6.4.2.1:
   * fix Alt mode in the standard markers

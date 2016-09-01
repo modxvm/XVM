@@ -15,7 +15,9 @@ package com.xvm.battle.minimap.entries.vehicle
 
     public class UI_VehicleEntry extends VehicleEntry
     {
-        private static const VEHICLE_ICON_SCALE:Number = 0.4;
+        private static const DEFAULT_VEHICLE_ICON_WIDTH:Number = 16;
+        private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 20;
+        private static const DEFAULT_VEHICLE_ICON_SCALE:Number = 0.4;
 
         private var _formattedString:String = "";
         private var _useStandardLabels:Boolean;
@@ -73,8 +75,9 @@ package com.xvm.battle.minimap.entries.vehicle
         {
             xfw_currVehicleAnimation.alpha = Macros.FormatNumber(UI_Minimap.cfg.iconAlpha, playerState, 100) / 100.0;
             var iconScale:Number = Macros.FormatNumber(UI_Minimap.cfg.iconScale, playerState, 1);
-            xfw_currVehicleAnimation.scaleX = VEHICLE_ICON_SCALE * iconScale;
-            xfw_currVehicleAnimation.scaleY = VEHICLE_ICON_SCALE * iconScale;
+            xfw_currVehicleAnimation.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 2.0;
+            xfw_currVehicleAnimation.y = -DEFAULT_VEHICLE_ICON_HEIGHT * iconScale / 2.0;
+            xfw_currVehicleAnimation.scaleX = xfw_currVehicleAnimation.scaleY = DEFAULT_VEHICLE_ICON_SCALE * iconScale;
         }
 
         private function updateLabels(playerState:VOPlayerState):void
