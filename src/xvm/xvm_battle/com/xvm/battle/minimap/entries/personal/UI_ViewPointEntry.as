@@ -14,7 +14,7 @@ package com.xvm.battle.minimap.entries.personal
 
     public class UI_ViewPointEntry extends ViewPointEntry
     {
-        private static const INVALID_ALT_MODE:int = InvalidationType.SYSTEM_FLAGS_BORDER << 10;
+        private static const INVALID_UPDATE_XVM:int = InvalidationType.SYSTEM_FLAGS_BORDER << 10;
 
         private static const DEFAULT_VEHICLE_ICON_WIDTH:Number = 188;
         private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 226;
@@ -38,7 +38,7 @@ package com.xvm.battle.minimap.entries.personal
         override protected function draw() : void
         {
             super.draw();
-            if (isInvalid(INVALID_ALT_MODE))
+            if (isInvalid(INVALID_UPDATE_XVM))
             {
                 var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
                 updateVehicleIcon(playerState);
@@ -50,7 +50,7 @@ package com.xvm.battle.minimap.entries.personal
 
         private function update():void
         {
-            invalidate(INVALID_ALT_MODE);
+            invalidate(INVALID_UPDATE_XVM);
         }
 
         private function playerStateChanged(e:PlayerStateEvent):void

@@ -4,6 +4,13 @@ XVM-6.4.3-dev:
       "mainGun" - порог необходимый для получения достижения "Основной калибр"
   * добавлены опции в секциях "minimap" и "minimapAlt":
       "selfIconScale" - масштаб своей иконки
+      "directionTriangleAlpha" - прозрачность зеленого треугольника направления камеры
+      "directionLineAlpha" - прозрачность стандартного луча направления камеры
+  * удалены опции в секциях "minimap" и "minimapAlt":
+      "hideCameraTriangle"
+      "cameraAlpha"
+  * переименованы опции в секциях "minimap" и "minimapAlt":
+      "showCameraLineAfterDeath" => "showDirectionLineAfterDeath"
 
 XVM-6.4.2.1:
   * исправлен Alt режим в стандартных маркерах

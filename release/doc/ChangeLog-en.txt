@@ -4,6 +4,13 @@ XVM-6.4.3-dev:
       "mainGun" - threshold necessary for achievements "High caliber"
   * added options in the "minimap" and "minimapAlt" sections:
       "selfIconScale" - self icon scale
+      "directionTriangleAlpha" - camera direction green triangle transparency 
+      "directionLineAlpha" - standard camera direction line transparency 
+  * removed options in the "minimap" and "minimapAlt" sections:
+      "hideCameraTriangle"
+      "cameraAlpha"
+  * renamed options in the "minimap" and "minimapAlt" sections:
+      "showCameraLineAfterDeath" => "showDirectionLineAfterDeath"
 
 XVM-6.4.2.1:
   * fix Alt mode in the standard markers

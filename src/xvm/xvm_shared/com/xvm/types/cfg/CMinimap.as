@@ -13,10 +13,10 @@ package com.xvm.types.cfg
         public var selfIconAlpha:*;
         public var selfIconScale:*;
         public var iconAlpha:*;
-        public var hideCameraTriangle:*;
-        public var showCameraLineAfterDeath:*;
-        public var cameraAlpha:*;
         public var iconScale:*;
+        public var directionTriangleAlpha:*;
+        public var directionLineAlpha:*;
+        public var showDirectionLineAfterDeath:*;
         public var minimapAimIcon:String;
         public var minimapAimIconScale:*;
         public var zoom:CMinimapZoom;

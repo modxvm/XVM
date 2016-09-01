@@ -22,15 +22,15 @@
     // Vehicles icon scale. Does not affect attached geometry and textfields. Floating point allowed: 0.7, 1.4.
     // Масштаб иконки техники. Не влияет на прикрепленную к геометрию и текстовые поля. Можно дробные: 0.7, 1.4.
     "iconScale": 1,
-    // Hide camera direction green triangle (also hides WG camera direction line).
-    // Спрятать зеленый треугольник направления камеры (также скрывает луч направления камеры WG).
-    "hideCameraTriangle": false,
+    // Camera direction green triangle transparency.
+    // Прозрачность зеленого треугольника направления камеры.
+    "directionTriangleAlpha": 100,
+    // Standard camera direction line transparency.
+    // Прозрачность стандартного луча направления камеры.
+    "directionLineAlpha": 100,
     // Show camera line after death
     // Отображать линию направления камеры после смерти
-    "showCameraLineAfterDeath": true,
-    // Camera transparency and its attached geometry (green triangle).
-    // Прозрачность камеры и прикрепленной геометрии (зеленый треугольник).
-    "cameraAlpha": 100,
+    "showDirectionLineAfterDeath": true,
     // Path to icon for arty aim
     // Путь к иконке для артиллерийского прицела
     "minimapAimIcon": "xvm://res/MinimapAim.png",
