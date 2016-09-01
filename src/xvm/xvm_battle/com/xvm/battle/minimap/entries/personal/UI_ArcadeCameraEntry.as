@@ -38,6 +38,7 @@ package com.xvm.battle.minimap.entries.personal
             {
                 var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
                 updateDirectionAlpha(playerState);
+                updateDirectionLineVisibility(playerState);
             }
         }
 
@@ -60,6 +61,14 @@ package com.xvm.battle.minimap.entries.personal
         {
             directionPlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.directionTriangleAlpha, playerState, 100) / 100.0;
             directionLinePlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.directionLineAlpha, playerState, 100) / 100.0;
+        }
+
+        private function updateDirectionLineVisibility(playerState:VOPlayerState):void
+        {
+            if (playerState.isDead)
+            {
+                directionLinePlaceholder.visible = Macros.FormatBoolean(UI_Minimap.cfg.showDirectionLineAfterDeath, playerState);
+            }
         }
     }
 }

@@ -31,7 +31,6 @@
     "directionTriangleAlpha": 50,
     "directionLineAlpha": 50,
     "showDirectionLineAfterDeath": false,
-    "cameraAlpha": 50,
     "minimapAimIcon": "cfg://sirmax/img/MinimapAim2.png",
     "minimapAimIconScale": 200,
     "zoom": { "pixelsBack": 300, "centered": false },
