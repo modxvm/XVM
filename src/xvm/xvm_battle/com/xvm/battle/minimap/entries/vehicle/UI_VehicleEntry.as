@@ -3,7 +3,7 @@
  * @author s_sorochich
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.battle.minimap.entries
+package com.xvm.battle.minimap.entries.vehicle
 {
     import com.xfw.*;
     import com.xvm.*;
@@ -20,7 +20,8 @@ package com.xvm.battle.minimap.entries
 
         public function UI_VehicleEntry()
         {
-            //Logger.add("UI_VehicleEntry | UI_VehicleEntry");
+            //Logger.add("UI_VehicleEntry");
+            super();
             _useStandardLabels = Macros.FormatBooleanGlobal(Config.config.minimap.useStandardLabels, false);
             if (!_useStandardLabels)
             {

@@ -3,7 +3,7 @@
  * @author s_sorochich
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.battle.minimap.entries
+package com.xvm.battle.minimap.entries.personal
 {
     import com.xfw.*;
     import com.xvm.*;

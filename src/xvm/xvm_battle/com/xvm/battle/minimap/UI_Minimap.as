@@ -9,13 +9,20 @@ package com.xvm.battle.minimap
     import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.*;
-    import com.xvm.battle.events.PlayerStateEvent;
-    import com.xvm.battle.minimap.entries.*;
+    import com.xvm.battle.events.*;
+    import com.xvm.battle.minimap.entries.personal.*;
+    import com.xvm.battle.minimap.entries.vehicle.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
 
-    UI_VehicleEntry;
+    UI_ArcadeCameraEntry;
+    UI_CellFlashEntry;
+    UI_DeadPointEntry;
     UI_StrategicCameraEntry;
+    UI_VideoCameraEntry;
+    UI_ViewPointEntry;
+    UI_ViewRangeCirclesEntry;
+    UI_VehicleEntry;
 
     public dynamic class UI_Minimap extends minimapUI
     {

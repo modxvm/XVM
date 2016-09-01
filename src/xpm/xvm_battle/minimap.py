@@ -59,9 +59,23 @@ def _MinimapComponent_dispose(base, self):
 def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
     if g_minimap.active:
         if symbol == ENTRY_SYMBOL_NAME.VEHICLE:
-            symbol = "com.xvm.battle.minimap.entries::UI_VehicleEntry"
+            symbol = "com.xvm.battle.minimap.entries.vehicle::UI_VehicleEntry"
+        elif symbol == ENTRY_SYMBOL_NAME.VIEW_POINT:
+            symbol = "com.xvm.battle.minimap.entries.personal::UI_ViewPointEntry"
+        elif symbol == ENTRY_SYMBOL_NAME.DEAD_POINT:
+            symbol = "com.xvm.battle.minimap.entries.personal::UI_DeadPointEntry"
+        elif symbol == ENTRY_SYMBOL_NAME.VIDEO_CAMERA:
+            symbol = "com.xvm.battle.minimap.entries.personal::UI_VideoCameraEntry"
+        elif symbol == ENTRY_SYMBOL_NAME.ARCADE_CAMERA:
+            symbol = "com.xvm.battle.minimap.entries.personal::UI_ArcadeCameraEntry"
         elif symbol == ENTRY_SYMBOL_NAME.STRATEGIC_CAMERA:
-            symbol = "com.xvm.battle.minimap.entries::UI_StrategicCameraEntry"
+            symbol = "com.xvm.battle.minimap.entries.personal::UI_StrategicCameraEntry"
+        elif symbol == ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES:
+           symbol = "com.xvm.battle.minimap.entries.personal::UI_ViewRangeCirclesEntry"
+        elif symbol == ENTRY_SYMBOL_NAME.MARK_CELL:
+            symbol = "com.xvm.battle.minimap.entries.personal::UI_CellFlashEntry"
+        #else:
+        #    debug('add minimap entry: ' + symbol)
     return base(self, symbol, *args, **kwargs)
 
 
