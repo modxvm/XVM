@@ -7,7 +7,6 @@ XVM-6.4.3-dev:
       "directionTriangleAlpha" - прозрачность зеленого треугольника направления камеры
       "directionLineAlpha" - прозрачность стандартного луча направления камеры
       "zoom"/"index" - значение масштаба миникарты при нажатии клавиши масштаба
-zoom index value for minimap zoom key
   * удалены опции в секциях "minimap" и "minimapAlt":
       "hideCameraTriangle"
       "cameraAlpha"
