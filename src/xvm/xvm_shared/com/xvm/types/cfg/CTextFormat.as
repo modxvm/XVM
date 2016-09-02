@@ -6,6 +6,7 @@ package com.xvm.types.cfg
 {
     import com.xfw.*;
     import flash.text.*;
+    import scaleform.gfx.*;
 
     public dynamic class CTextFormat extends Object implements ICloneable
     {
@@ -17,6 +18,7 @@ package com.xvm.types.cfg
         public var italic:*;
         public var underline:*;
         public var align:String;
+        public var valign:String;
         public var leftMargin:*;
         public var rightMargin:*;
         public var indent:*;
@@ -34,6 +36,7 @@ package com.xvm.types.cfg
             cloned.italic = italic;
             cloned.underline = undefined;
             cloned.align = align;
+            cloned.valign = valign;
             cloned.leftMargin = leftMargin;
             cloned.rightMargin = rightMargin;
             cloned.indent = indent;
@@ -53,6 +56,7 @@ package com.xvm.types.cfg
                 _defaultConfigForMarkers.size = 13;
                 _defaultConfigForMarkers.color = "{{c:system}}";
                 _defaultConfigForMarkers.align = TextFormatAlign.CENTER;
+                _defaultConfigForMarkers.valign = TextFieldEx.VALIGN_NONE;
             }
             return _defaultConfigForMarkers;
         }
@@ -69,6 +73,7 @@ package com.xvm.types.cfg
                 cfg.size = 13;
                 cfg.color = 0xFFFFFF;
                 cfg.align = align;
+                cfg.valign = TextFieldEx.VALIGN_NONE;
                 _defaultConfigForBattle[align] = cfg;
             }
             return cfg;
@@ -85,6 +90,7 @@ package com.xvm.types.cfg
                 _defaultConfigForLobby.size = 13;
                 _defaultConfigForLobby.color = 0xFFFFFF;
                 _defaultConfigForLobby.align = TextFormatAlign.LEFT;
+                _defaultConfigForLobby.valign = TextFieldEx.VALIGN_NONE;
             }
             return _defaultConfigForLobby;
         }

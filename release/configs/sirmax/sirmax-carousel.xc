@@ -52,35 +52,41 @@
         { "x": 135, "y": 57, "width": 25, "height": 25, "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png" },
 
         { "x": 140, "y": 40, "src": "cfg://sirmax/img/marksOnGun/{{v.marksOnGun|empty}}.png" },
-        { "x": 147, "y": "{{v.marksOnGun?38|37}}", "align": "center",
-          "format": "<b><font size='9' color='#C8C8B5'>{{v.marksOnGun}}</font></b></font>",
+        { "x": 147, "y": "{{v.marksOnGun?38|37}}",
+          "textFormat": { "size": 9, "color": "0xC8C8B5", "bold": true, "align": "center" },
+          "format": "{{v.marksOnGun}}",
           "shadow": {}
         },
-        { "x": 140, "y": "{{v.marksOnGun?38|37}}", "align": "right",
-          "format": "<font size='13' color='{{v.c_damageRating}}'>{{v.damageRating%.2f~%}}</font>",
+        { "x": 140, "y": "{{v.marksOnGun?38|37}}",
+          "textFormat": { "size": 13, "align": "right" },
+          "format": "<font color='{{v.c_damageRating}}'>{{v.damageRating%.2f~%}}</font>",
           "shadow": ${ "def.textFieldShadow" }
         },
 
         { "x": 21, "y": 0,
-          "format": "<b><font size='12' color='#C8C8B5'><font face='Arial'>{{v.rlevel}}</font>  {{v.battletiermin}}-{{v.battletiermax}}</font></b>",
+          "textFormat": { "size": 12, "color": "0xC8C8B5", "bold": true },
+          "format": "<font face='Arial'>{{v.rlevel}}</font>  {{v.battletiermin}}-{{v.battletiermax}}",
           "shadow": ${ "def.textFieldShadow" }
         },
 
         { "x": 0, "y": 15, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/wins40x32.png" },
         { "x": 21, "y": 15,
-          "format": "<b><font size='12' color='{{v.c_winrate}}'>{{v.winrate%2d~%}}</font></b>",
+          "textFormat": { "size": 12, "bold": true },
+          "format": "<font color='{{v.c_winrate}}'>{{v.winrate%2d~%}}</font>",
           "shadow": ${ "def.textFieldShadow" }
         },
 
         { "x": 0, "y": 33, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/avgDamage40x32.png" },
         { "x": 21, "y": 35,
-          "format": "<b><font size='12' color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font></b>",
+          "textFormat": { "size": 12, "bold": true },
+          "format": "<font color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font>",
           "shadow": ${ "def.textFieldShadow" }
         },
 
         { "x": 0, "y": 51, "width": 22, "height": 22, "src": "img://gui/maps/icons/library/dossier/techRatio40x32.png" },
         { "x": 21, "y": 53,
-          "format": "<b><font face='mono' size='12' color='{{v.battles>9?{{v.c_xte|#666666}}|#666666}}'>{{v.xte|--}}</font></b>",
+          "textFormat": { "font": "mono", "size": 12, "bold": true },
+          "format": "<font color='{{v.battles>9?{{v.c_xte|#666666}}|#666666}}'>{{v.xte|--}}</font>",
           "shadow": ${ "def.textFieldShadow" }
         },
 

@@ -12,7 +12,12 @@
     "y": 0,
     "width": 100,
     "height": 30,
-    "format": "<font size='10' color='#FFCC66'><b>{{cellsize}}0 m</b></font>",
+    "textFormat": {
+      "size": 10,
+      "color": "0xFFCC66",
+      "bold": true
+    },
+    "format": "{{cellsize}}0 m",
     "shadow": {
       "enabled": true,
       "distance": 0,

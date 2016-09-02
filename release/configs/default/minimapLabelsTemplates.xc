@@ -31,7 +31,7 @@
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "spotted", "alive" ],
       "layer": "top",
-      "textFormat": { "font": "xvm", "size": 13, "align": "center" },
+      "textFormat": { "font": "xvm", "size": 13, "align": "center", "valign": "center" },
       "format": "<font color='{{.minimap.labelsData.colors.dot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
       "align": "center",
       "valign": "center"
@@ -67,7 +67,6 @@
     "nickSpottedCompany": {
       "$ref": { "path": "def.nickSpotted" },
       "flags": [ "ally", "squadman", "teamKiller", "spotted", "alive" ],
-      "textFormat": { "size": 13, "align": "center" },
       "format": "<font size='{{battletype?8|{{squad?8|0}}}}' color='{{squad?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|{{tk?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|#BFBFBF}}}}'><i>{{name%.7s~..}}</i></font>"
     },
     // XMQP event marker.
@@ -86,7 +85,7 @@
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "lost", "alive" ],
       "layer": "bottom",
-      "textFormat": { "font": "xvm", "size": 13, "align": "center" },
+      "textFormat": { "font": "xvm", "size": 13, "align": "center", "valign": "center" },
       "format": "<font color='{{.minimap.labelsData.colors.lostDot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
       "align": "center",
       "valign": "center",
@@ -122,7 +121,7 @@
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "dead" ],
       "layer": "substrate",
-      "textFormat": { "font": "xvm", "size": 8, "align": "center" },
+      "textFormat": { "font": "xvm", "size": 8, "align": "center", "valign": "center" },
       "format": "<font color='{{.minimap.labelsData.colors.lostDot.{{sys-color-key}}}}'>&#x44;</font>",
       "shadow": { "$ref": { "path":"def.defaultItem.shadow" }, "strength": 3 },
       "align": "center",

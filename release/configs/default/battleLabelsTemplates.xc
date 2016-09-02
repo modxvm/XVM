@@ -71,11 +71,11 @@
      │ "scaleY"                   │ scaling axis Y (%, use negative values for mirroring) (default: 100)
      │                            │ масштабирование по оси y (%, используйте отрицательные значения для зеркального отображения) (по-умолчанию: 100)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "align"                    │ horizontal alignment of the text inside the field ("left" [default], "center", "right")
-     │                            │ горизонтальное выравнивание текста внутри поля ("left" [по-умолчанию], "center", "right")
+     │ "align"                    │ horizontal alignment of the text field relative to its position ("left" [default], "center", "right")
+     │                            │ горизонтальное выравнивание текстового поля относительно его позиции ("left" [по-умолчанию], "center", "right")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "valign"                   │ vertical alignment of the text inside the field ("top" [default], "center", "bottom")
-     │                            │ вертикальное выравнивание текста внутри поля ("top" [по-умолчанию], "center", "bottom")
+     │ "valign"                   │ vertical alignment of the text field relative to its position ("top" [default], "center", "bottom")
+     │                            │ вертикальное выравнивание текстового поля относительно его позиции ("top" [по-умолчанию], "center", "bottom")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "screenHAlign"             │ horizontal alignment of the field on the screen ("left" [default], "center", "right")
      │                            │ горизонтальное выравнивание поля на экране ("left" [по-умолчанию], "center", "right")
@@ -132,7 +132,7 @@
      │                            │ field default styles, defaults:
      │                            │ стандартный стиль поля, значение по умолчанию:
      │                            │
-     │                            │ "textFormat": { "font": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "bold": false, "italic": false, "underline": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
+     │                            │ "textFormat": { "font": "$FieldFont", "color": "0xFFFFFF", "size": 12, "align": "left", "valign": "top", "bold": false, "italic": false, "underline": false, "display": "block", "leading": 0, "marginLeft": 0, "marginRight": 0 },
      │----------------------------│--------------------------------------------------------------------------
      │ "font"                     │ font name (default: "$FieldFont")
      │                            │ наименование шрифта (по-умолчанию: "$FieldFont")
@@ -143,8 +143,11 @@
      │ "size"                     │ font size (default: 12)
      │                            │ размер шрифта (по-умолчанию: 12)
      │----------------------------│--------------------------------------------------------------------------
-     │ "align"                    │ horizontal text alignment of the text inside the field (left [по-умолчанию], center, right) (the same as general "align")
-     │                            │ горизонтальное выравнивание текста текста внутри поля (left [по-умолчанию], center, right) (то же самое, что основной "align")
+     │ "align"                    │ horizontal alignment of the text inside the field (left [по-умолчанию], center, right)
+     │                            │ горизонтальное выравнивание текста текста внутри поля (left [по-умолчанию], center, right)
+     │----------------------------│--------------------------------------------------------------------------
+     │ "valign"                   │ vertical alignment of the text inside the field ("top" [default], "center", "bottom")
+     │                            │ вертикальное выравнивание текста внутри поля ("none" [по-умолчанию], "top", "center", "bottom")
      │----------------------------│--------------------------------------------------------------------------
      │ "bold"                     │ true - bold (default: false)
      │                            │ true - жирный (по-умолчанию: false)

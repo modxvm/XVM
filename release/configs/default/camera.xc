@@ -82,12 +82,6 @@
         "rotation": 0,
         "scaleX": 1,
         "scaleY": 1,
-        // Horizonatal text alignment (left, center, right)
-        // Горизонтальное выравнивание текста (left, center, right)
-        "align": "left",
-        // Vertical text alignment (top, center, bottom)
-        // Вертикальное выравнивание текста (top, center, bottom)
-        "valign": "center",
         // Background color
         // Цвет фона
         "bgColor": null,
@@ -95,9 +89,16 @@
         // Цвет рамки
         "borderColor": null,
         "antiAliasType": "advanced",
+        "textFormat": {
+          "font": "$TitleFont",
+          "size": 16,
+          "color": "0x95CB29",
+          "align": "left",
+          "valign": "center"
+        },
         // Text format
         // Формат текста
-        "format": "<font face='$TitleFont' color='#95CB29' size='16'>x{{zoom}}</font>",
+        "format": "x{{zoom}}",
         // Shadow options
         // Параметры тени
         "shadow": {

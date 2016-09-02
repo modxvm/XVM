@@ -26,6 +26,7 @@
  *   "align" - horizontal alignment ("left", "center", "right")
  *      for left panel default value is "left"
  *      for right panel default value is "right"
+ *   "valign" - vertical alignment ("none", "top", "center", "bottom")
  *   "scaleX", "scaleY" - scaling (use negative values for mirroring)
  *   "hotKeyCode" - keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide; when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
  *   "onHold" - take action by key click (false) or while key is remains pressed (true); (default: false)
@@ -42,8 +43,6 @@
  *      Если не указаны "alive", "dead", то используются оба - и "alive", и "dead".
  *
  * fields available for TextField format only:
- *   "valign" - vertical alignment ("top", "center", "bottom")
- *      default value is "top"
  *   "borderColor" - if set, draw border with specified color (macros allowed)
  *   "bgColor" - if set, draw background with specified color (macros allowed)
  *   "antiAliasType" - anti aliasing mode ("advanced" or "normal")
@@ -69,6 +68,7 @@
  *     "italic"
  *     "underline"
  *     "align"
+ *     "valign"
  *     "leftMargin"
  *     "rightMargin"
  *     "indent"
@@ -107,12 +107,16 @@
       // y position.
       // положение по вертикали.
       "y": 1,
-      // Horizontal alignment
-      // Выравнивание по горизонтали
-      "align": "center",
       // true - x position is binded to vehicle icon, false - binded to edge of the screen.
       // true - положение по горизонтали отсчитывается от иконки танка, false - от края экрана.
       "bindToIcon": true,
+      // Text format
+      // Формат текста
+      "textFormat": {
+        // Horizontal alignment
+        // Выравнивание по горизонтали
+        "align": "center"
+      },
       // enemy spotted status marker format.
       // формат маркера статуса засвета.
       "format": "<font color='{{c:spotted}}'>{{spotted}}</font>",
@@ -123,15 +127,21 @@
     // XMQP service marker definition.
     // Шаблон маркера сервиса XMQP.
     "xmqpServiceMarker": {
-      "x": 88, "y": 1, "align": "center", "bindToIcon": true,
-      "format": "<font face='xvm' size='23' color='{{alive?{{x-spotted?#FFBB00|{{x-sense-on?#D9D9D9|#BFBFBF}}}}|#FFFFFF}}' alpha='{{alive?#FF|#80}}'>{{alive?{{x-spotted?&#x70;|{{x-sense-on?&#x70;|{{x-enabled?&#x7A;}}}}}}}}</font>",
+      "x": 88, "y": 1, "bindToIcon": true,
+      "textFormat": {
+        "font": "xvm",
+        "size": 23,
+        "align": "center"
+      },
+      "format": "<font color='{{alive?{{x-spotted?#FFBB00|{{x-sense-on?#D9D9D9|#BFBFBF}}}}|#FFFFFF}}' alpha='{{alive?#FF|#80}}'>{{alive?{{x-spotted?&#x70;|{{x-sense-on?&#x70;|{{x-enabled?&#x7A;}}}}}}}}</font>",
       "shadow": {}
     },
     // Clan icon.
     // Иконка клана.
     "clanIcon": {
       "enabled": true,
-      "x": 65, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90, "bindToIcon": true,
+      "x": 65, "y": 6, "width": 16, "height": 16, "alpha": 90, "bindToIcon": true,
+      "textFormat": { "align": "center" },
       "src": "{{clanicon}}"
       //"format": "<img src='{{clanicon}}' width='16' height='16'>"
     },
@@ -150,8 +160,10 @@
     "hpBar": { "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": true, "x": 97, "y": 7, "bindToIcon": true, "width": "{{hp-ratio:70}}", "height": 12, "bgColor": "{{player?#FFDD33|{{c:system}}}}", "alpha": "{{alive?50|0}}" },
     // Remaining HP.
     // Оставшиеся HP.
-    "hp": { "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": true, "x": 132, "y": 4, "bindToIcon": true, "align": "center", "alpha": "{{alive?100|0}}",
-      "format": "<font face='$FieldFont' size='11' color='#D9D9D9' alpha='{{alive?{{ready?#FF|#80}}|#80}}'><b>{{alive?{{hp|{{l10n:No data}}}}|{{l10n:Destroyed}}}}</b></font>",
+    "hp": {
+      "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": true, "x": 132, "y": 4, "bindToIcon": true, "alpha": "{{alive?100|0}}",
+      "textFormat": { "font": "$FieldFont", "size": 11, "color": "0xD9D9D9", "bold": "true", "align": "center" },
+      "format": "<font alpha='{{alive?{{ready?#FF|#80}}|#80}}'>{{alive?{{hp|{{l10n:No data}}}}|{{l10n:Destroyed}}}}</font>",
       "shadow": { "enabled": true, "color": "0x000000", "alpha": 100, "blur": 4, "strength": 1, "distance": 0, "angle": 0 }
     }
   },

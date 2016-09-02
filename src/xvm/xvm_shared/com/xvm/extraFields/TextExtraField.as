@@ -51,7 +51,7 @@ package com.xvm.extraFields
             this._getColorSchemeName = getColorSchemeName;
             this._bounds = bounds;
             this._layout = layout;
-            this._defaultTextFormatConfig = defaultTextFormatConfig;
+            this._defaultTextFormatConfig = defaultTextFormatConfig || CTextFormat.GetDefaultConfigForBattle();
 
             mouseEnabled = false;
             selectable = false;
@@ -64,8 +64,7 @@ package com.xvm.extraFields
 
             if (defaultAlign == null)
                 defaultAlign = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
-            var align:String = _cfg.align != null ? _cfg.align : _cfg.textFormat ? _cfg.textFormat.align : null;
-            _cfg.align = Macros.FormatStringGlobal(align, defaultAlign);
+            _cfg.align = Macros.FormatStringGlobal(_cfg.align, defaultAlign);
             _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
             if (_cfg.hotKeyCode != null)
             {
@@ -73,7 +72,7 @@ package com.xvm.extraFields
                 _cfg.onHold = Macros.FormatBooleanGlobal(_cfg.onHold, true);
             }
             antiAliasType = Macros.FormatStringGlobal(_cfg.antiAliasType, AntiAliasType.ADVANCED);
-            TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(_cfg.valign, TextFieldEx.VALIGN_NONE));
+            TextFieldEx.setVerticalAlign(this, TextFieldEx.VALIGN_NONE);
             TextFieldEx.setNoTranslate(this, true);
             if (_cfg.textFormat == null)
                 _cfg.textFormat = defaultTextFormatConfig;
@@ -327,6 +326,18 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
+            if (cfg.valign == null)
+                cfg.valign = _defaultTextFormatConfig.valign;
+            value = Macros.FormatString(cfg.valign, options, _defaultTextFormatConfig.valign);
+            if (Macros.IsCached(cfg.valign, options))
+            {
+                cfg.valign = value;
+            }
+            else
+            {
+                isDynamic = true;
+            }
+
             if (cfg.leftMargin == null)
                 cfg.leftMargin = _defaultTextFormatConfig.leftMargin;
             value = Macros.FormatNumber(cfg.leftMargin, options, Number(_defaultTextFormatConfig.leftMargin));
@@ -376,6 +387,7 @@ package com.xvm.extraFields
             }
 
             defaultTextFormat = Utils.createTextFormatFromConfig(cfg, options);
+            TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_NONE));
 
             return isDynamic;
         }
@@ -641,6 +653,7 @@ package com.xvm.extraFields
                 if (_cfg.textFormat)
                 {
                     defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
+                    TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(_cfg.textFormat.valign, TextFieldEx.VALIGN_NONE));
                     htmlText = _textValue;
                 }
                 if (_cfg.shadow)
@@ -712,7 +725,7 @@ package com.xvm.extraFields
                     x -= width / 2;
                 if (_cfg.valign == TextFieldEx.VALIGN_BOTTOM)
                     y -= height;
-                else if (_cfg.align == TextFieldEx.VALIGN_CENTER)
+                else if (_cfg.valign == TextFieldEx.VALIGN_CENTER)
                     y -= height / 2;
             }
 

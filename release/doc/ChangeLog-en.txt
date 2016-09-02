@@ -13,6 +13,11 @@ XVM-6.4.3-dev:
       "zoom"/"pixelsBack"
   * renamed options in the "minimap" and "minimapAlt" sections:
       "showCameraLineAfterDeath" => "showDirectionLineAfterDeath"
+  * extra fields alignment options behavior changed:
+      "align"               - horizontal alignment of the text field relative to its position
+      "valign"              - vertical alignment of the text field relative to its position
+      "textFormat"/"align"  - horizontal alignment of the text inside the field
+      "textFormat"/"valign" - vertical alignment of the text inside the field
 
 XVM-6.4.2.1:
   * fix Alt mode in the standard markers
