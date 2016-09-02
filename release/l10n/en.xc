@@ -15,6 +15,7 @@
     "No": "No",
     "Not available short": "n/a",
     "from": "from",
+    "m": "m",
 
     // Ping & Online
     "Initialization": "Initialization",

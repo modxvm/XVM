@@ -15,6 +15,7 @@
     "No": "Нет",
     "Not available short": "н/д",
     "from": "из",
+    "m": "м",
 
     // Ping & Online
     "Initialization": "Инициализация",

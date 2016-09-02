@@ -7,12 +7,12 @@
   // Настройки соответствуют параметрам дополнительных полей
   "mapSize": {
     "enabled": true,
-    "alpha": 80,
+    "alpha": 40,
     "x": 0,
     "y": 0,
     "width": 100,
     "height": 30,
-    "format": "<font size='10' color='#FFCC66'><b>{{cellsize}}0 m</b></font>",
+    "format": "<font size='10' color='#FFCC66'><b>{{cellsize}}0 {{l10n:m}}</b></font>",
     "shadow": {
       "enabled": true,
       "distance": 0,
