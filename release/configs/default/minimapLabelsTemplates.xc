@@ -30,7 +30,9 @@
     "vtypeSpotted": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "spotted", "alive" ],
-      "format": "<font size='13' color='{{.minimap.labelsData.colors.dot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
+      "layer": "top",
+      "textFormat": { "font": "xvm", "size": 13, "align": "center" },
+      "format": "<font color='{{.minimap.labelsData.colors.dot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
       "align": "center",
       "valign": "center"
     },
@@ -39,7 +41,8 @@
     "vehicleSpotted": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "spotted", "alive" ],
-      "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'>{{vehicle}}</font>",
+      "textFormat": { "size": 8 },
+      "format": "<font color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'>{{vehicle}}</font>",
       "x": 2,
       "y": "{{squad?7|-1}}"
     },
@@ -54,7 +57,8 @@
     "nickSpotted": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "squadman", "spotted", "alive" ],
-      "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
+      "textFormat": { "size": 8 },
+      "format": "<font color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
       "x": 2,
       "y": -1
     },
@@ -63,6 +67,7 @@
     "nickSpottedCompany": {
       "$ref": { "path": "def.nickSpotted" },
       "flags": [ "ally", "squadman", "teamKiller", "spotted", "alive" ],
+      "textFormat": { "size": 13, "align": "center" },
       "format": "<font size='{{battletype?8|{{squad?8|0}}}}' color='{{squad?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|{{tk?{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}|#BFBFBF}}}}'><i>{{name%.7s~..}}</i></font>"
     },
     // XMQP event marker.
@@ -70,7 +75,8 @@
     "xmqpEvent": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "squadman", "teamKiller", "spotted", "alive" ],
-      "format": "<font face='xvm' size='8' color='#FFBB00'>{{x-spotted?&#x70;&nbsp;}}{{x-overturned?&#x112;}}</font>",
+      "textFormat": { "font": "xvm", "size": 8, "color": "0xFFBB00" },
+      "format": "{{x-spotted?&#x70;&nbsp;}}{{x-overturned?&#x112;}}",
       "x": 3,
       "y": -7
     },
@@ -79,7 +85,9 @@
     "vtypeLost": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "lost", "alive" ],
-      "format": "<font size='13' color='{{.minimap.labelsData.colors.lostDot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
+      "layer": "bottom",
+      "textFormat": { "font": "xvm", "size": 13, "align": "center" },
+      "format": "<font color='{{.minimap.labelsData.colors.lostDot.{{sys-color-key}}}}'>{{.minimap.labelsData.vtype.{{vtype-key}}}}</font>",
       "align": "center",
       "valign": "center",
       "alpha": 75
@@ -89,7 +97,9 @@
     "vehicleLost": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "lost", "alive" ],
-      "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{vehicle}}</i></font>",
+      "layer": "bottom",
+      "textFormat": { "size": 8 },
+      "format": "<font color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{vehicle}}</i></font>",
       "alpha": 85,
       "x": 2,
       "y": -1
@@ -99,7 +109,9 @@
     "nickLost": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "squadman", "lost", "alive" ],
-      "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
+      "layer": "bottom",
+      "textFormat": { "size": 8 },
+      "format": "<font color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
       "alpha": 85,
       "x": 2,
       "y": -9
@@ -109,7 +121,9 @@
     "vtypeDead": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "ally", "enemy", "squadman", "teamKiller", "dead" ],
-      "format": "<font face='xvm' size='8' color='{{.minimap.labelsData.colors.lostDot.{{sys-color-key}}}}'>&#x44;</font>",
+      "layer": "substrate",
+      "textFormat": { "font": "xvm", "size": 8, "align": "center" },
+      "format": "<font color='{{.minimap.labelsData.colors.lostDot.{{sys-color-key}}}}'>&#x44;</font>",
       "shadow": { "$ref": { "path":"def.defaultItem.shadow" }, "strength": 3 },
       "align": "center",
       "valign": "center",
@@ -120,7 +134,9 @@
     "vehicleDead": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "squadman", "dead" ],
-      "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'>{{vehicle}}</font>",
+      "layer": "substrate",
+      "textFormat": { "size": 8 },
+      "format": "<font color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'>{{vehicle}}</font>",
       "alpha": 85,
       "x": 2,
       "y": -1
@@ -130,7 +146,9 @@
     "nickDead": {
       "$ref": { "path":"def.defaultItem" },
       "flags": [ "squadman", "dead" ],
-      "format": "<font size='8' color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
+      "layer": "substrate",
+      "textFormat": { "size": 8 },
+      "format": "<font color='{{.minimap.labelsData.colors.txt.{{sys-color-key}}}}'><i>{{name%.7s~..}}</i></font>",
       "shadow": { "$ref": { "path":"def.defaultItem.shadow" }, "strength": 3 },
       "x": 2,
       "y": -9

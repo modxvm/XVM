@@ -10,6 +10,11 @@
   },
   "labels": {
     "formats": [
+      // for debug
+      ${ "../default/minimapLabelsTemplates.xc":"def.vtypeSpotted" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.vehicleDead" },
+      ${ "../default/minimapLabelsTemplates.xc":"def.nickDead" },
+
       ${"my_items.txt_player_alive_mog"},
       {
         "$ref": { "file":"../default/minimapLabelsTemplates.xc", "path":"def.vehicleSpotted" },
