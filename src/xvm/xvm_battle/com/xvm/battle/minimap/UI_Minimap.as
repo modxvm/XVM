@@ -79,8 +79,8 @@ package com.xvm.battle.minimap
 
             _substrateHolder = entriesContainer.addChildAt(new MovieClip(), 0) as MovieClip;
             _bottomHolder = entriesContainer.addChildAt(new MovieClip(), 1) as MovieClip;
-            _normalHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles) - 1) as MovieClip;;
-            _topHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.aliveVehicles)) as MovieClip;;
+            _normalHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
+            _topHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.aliveVehicles) + 1) as MovieClip;;
 
             setup();
         }
