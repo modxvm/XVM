@@ -20,7 +20,7 @@ package com.xvm.types.cfg
         public var minimapAimIcon:String;
         public var minimapAimIconScale:*;
         public var zoom:CMinimapZoom;
-        public var mapSize:CMinimapMapSize;
+        public var mapSize:CExtraField;
         public var useStandardCircles:*;
         public var useStandardLabels:*;
         public var useStandardLines:*;

@@ -12,6 +12,7 @@ package com.xvm.battle.minimap
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.entries.personal.*;
     import com.xvm.battle.minimap.entries.vehicle.*;
+    import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import flash.geom.*;
     import flash.events.*;
@@ -36,6 +37,9 @@ package com.xvm.battle.minimap
         private var currentSizeIndex:int = 0;
         private var savedSizeIndex:int = -1;
 
+        private var mapSize:TextExtraField;
+        private var mapSizeAlt:TextExtraField;
+
         public function UI_Minimap()
         {
             super();
@@ -56,6 +60,16 @@ package com.xvm.battle.minimap
             Xvm.addEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             setup();
+        }
+
+        override protected function onDispose():void
+        {
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            Xvm.removeEventListener(BattleEvents.MINIMAP_ALT_MODE, setAltMode);
+            Xvm.removeEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
+            Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+            disposeMapSize();
+            super.onDispose();
         }
 
         override public function as_setSize(sizeIndex:int):void
@@ -84,15 +98,6 @@ package com.xvm.battle.minimap
             }
         }
 
-        override protected function onDispose():void
-        {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-            Xvm.removeEventListener(BattleEvents.MINIMAP_ALT_MODE, setAltMode);
-            Xvm.removeEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
-            Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
-            super.onDispose();
-        }
-
         // PRIVATE
 
         private function setup(e:Event = null):Object
@@ -100,15 +105,20 @@ package com.xvm.battle.minimap
             //Xvm.swfProfilerBegin("UI_Minimap.setup()");
             try
             {
+                disposeMapSize();
+
                 setCfg();
                 xvm_enabled = Macros.FormatBooleanGlobal(Config.config.minimap.enabled, true);
 
                 if (xvm_enabled)
                 {
+                    mapHit.visible = true;
+                    setupMapSize();
                     update();
                 }
                 else
                 {
+                    mapHit.visible = false;
                     background.alpha = 1;
                 }
             }
@@ -181,6 +191,7 @@ package com.xvm.battle.minimap
         {
             setBGMapImageAlpha();
             alignMinimap();
+            updateMapSize();
         }
 
         /**
@@ -208,6 +219,44 @@ package com.xvm.battle.minimap
             {
                 x = App.appWidth - initedWidth;
                 y = App.appHeight - initedHeight;
+            }
+        }
+
+        private function setupMapSize():void
+        {
+            mapSize = new TextExtraField(Config.config.minimap.mapSize);
+            mapHit.addChild(mapSize);
+            mapSizeAlt = new TextExtraField(Config.config.minimapAlt.mapSize);
+            mapHit.addChild(mapSizeAlt);
+        }
+
+        private function disposeMapSize():void
+        {
+            if (mapSize)
+            {
+                mapHit.removeChild(mapSize);
+                mapSize.dispose();
+                mapSize = null;
+            }
+            if (mapSizeAlt)
+            {
+                mapHit.removeChild(mapSizeAlt);
+                mapSizeAlt.dispose();
+                mapSizeAlt = null;
+            }
+        }
+
+        private function updateMapSize():void
+        {
+            if (mapSize)
+            {
+                mapSize.visible = !isAltMode;
+                mapSize.update(null);
+            }
+            if (mapSizeAlt)
+            {
+                mapSizeAlt.visible = isAltMode;
+                mapSizeAlt.update(null);
             }
         }
     }

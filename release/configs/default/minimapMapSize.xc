@@ -1,15 +1,19 @@
 ﻿/**
- * Textfield for map side size. 1000m, 700m, 600m.
- * Поле размера стороны карты. Например, 1000м, 700м, 600м.
+ * Textfield for map side size. 1000 m, 700 m, 600 m.
+ * Поле размера стороны карты. Например, 1000 m, 700 m, 600 m.
  */
 {
+  // The settings correspond to the extra fields parameters
+  // Настройки соответствуют параметрам дополнительных полей
   "mapSize": {
     "enabled": true,
-    "format": "<font size='10' color='#FFCC66'><b>{{cellsize}}0 m</b></font>",
     "alpha": 80,
-    "offsetX": 0,
-    "offsetY": 0,
-    "shadow": { // Тень.
+    "x": 0,
+    "y": 0,
+    "width": 100,
+    "height": 30,
+    "format": "<font size='10' color='#FFCC66'><b>{{cellsize}}0 m</b></font>",
+    "shadow": {
       "enabled": true,
       "distance": 0,
       "angle": 0,
@@ -17,13 +21,6 @@
       "alpha": 80,
       "blur": 2,
       "strength": 3
-    },
-    // Decrease sizes in case of map image weird shrinking while map resize.
-    // Increase sizes in case of field being partially cut off.
-    // -------------------------------------------------------------------------------------
-    // Уменьшайте размеры, если при изменении размера миникарты изображение карты сжимается.
-    // Увеличивайте размеры, если содержимое поля обрезается.
-    "width": 100,
-    "height": 30
+    }
   }
 }
