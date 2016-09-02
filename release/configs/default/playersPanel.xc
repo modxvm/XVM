@@ -162,6 +162,7 @@
     // Оставшиеся HP.
     "hp": {
       "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": true, "x": 132, "y": 4, "bindToIcon": true, "alpha": "{{alive?100|0}}",
+      "x": 96, "width": 72,
       "textFormat": { "font": "$FieldFont", "size": 11, "color": "0xD9D9D9", "bold": "true", "align": "center" },
       "format": "<font alpha='{{alive?{{ready?#FF|#80}}|#80}}'>{{alive?{{hp|{{l10n:No data}}}}|{{l10n:Destroyed}}}}</font>",
       "shadow": { "enabled": true, "color": "0x000000", "alpha": 100, "blur": 4, "strength": 1, "distance": 0, "angle": 0 }
