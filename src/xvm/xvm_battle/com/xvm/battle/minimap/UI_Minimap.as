@@ -33,7 +33,7 @@ package com.xvm.battle.minimap
         private var xvm_enabled:Boolean;
         private var isAltMode:Boolean = false;
         private var isZoomed:Boolean = false;
-        private var currentSizeIndex:int = -1;
+        private var currentSizeIndex:int = 0;
         private var savedSizeIndex:int = -1;
 
         public function UI_Minimap()
