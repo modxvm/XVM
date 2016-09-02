@@ -7,7 +7,7 @@
   // Настройки соответствуют параметрам дополнительных полей
   "mapSize": {
     "enabled": true,
-    "alpha": 80,
+    "alpha": 40,
     "x": 0,
     "y": 0,
     "width": 100,
@@ -17,7 +17,7 @@
       "color": "0xFFCC66",
       "bold": true
     },
-    "format": "{{cellsize}}0 m",
+    "format": "{{cellsize}}0 {{l10n:m}}",
     "shadow": {
       "enabled": true,
       "distance": 0,
