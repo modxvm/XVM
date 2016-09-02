@@ -40,6 +40,8 @@ package com.xvm.extraFields
         private var _highlightValue:Boolean = false;
         private var _colorSchemeNameValue:String = null;
         private var _keyHolded:Boolean = false;
+        private var _visibleOnHotKeyEnabled:Boolean = true;
+        private var _visibilityFlag:Boolean = true;
 
         public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null, layout:String = null,
             defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null)
@@ -69,6 +71,7 @@ package com.xvm.extraFields
             if (_cfg.hotKeyCode != null)
             {
                 _cfg.visibleOnHotKey = Macros.FormatBooleanGlobal(_cfg.visibleOnHotKey, true);
+                _visibleOnHotKeyEnabled = !_cfg.visibleOnHotKey;
                 _cfg.onHold = Macros.FormatBooleanGlobal(_cfg.onHold, true);
             }
             antiAliasType = Macros.FormatStringGlobal(_cfg.antiAliasType, AntiAliasType.ADVANCED);
@@ -528,9 +531,13 @@ package com.xvm.extraFields
         {
             try
             {
-                visible = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
-                if (!visible)
+                _visibilityFlag = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
+                if (!_visibilityFlag)
+                {
+                    visible = false;
                     return;
+                }
+                visible = _visibleOnHotKeyEnabled && _visibilityFlag;
 
                 var needAlign:Boolean = false;
 
@@ -749,12 +756,13 @@ package com.xvm.extraFields
                     return;
                 if (_cfg.visibleOnHotKey)
                 {
-                    visible = _keyHolded;
+                    _visibleOnHotKeyEnabled = _keyHolded;
                 }
                 else
                 {
-                    visible = !_keyHolded;
+                    _visibleOnHotKeyEnabled = !_keyHolded;
                 }
+                visible = _visibleOnHotKeyEnabled && _visibilityFlag;
                 //updateOnEvent(new PlayerStateEvent(PlayerStateEvent.ON_HOTKEY_PRESSED)); // need current vehicle id for players panel
             }
         }
