@@ -194,13 +194,11 @@ package com.xvm.battle.minimap
 
                 if (xvm_enabled)
                 {
-                    mapHit.visible = true;
                     setupMapSize();
                     update();
                 }
                 else
                 {
-                    mapHit.visible = false;
                     background.alpha = 1;
                 }
             }
@@ -307,22 +305,22 @@ package com.xvm.battle.minimap
         private function setupMapSize():void
         {
             mapSize = new TextExtraField(Config.config.minimap.mapSize);
-            mapHit.addChild(mapSize);
+            background.addChild(mapSize);
             mapSizeAlt = new TextExtraField(Config.config.minimapAlt.mapSize);
-            mapHit.addChild(mapSizeAlt);
+            background.addChild(mapSizeAlt);
         }
 
         private function disposeMapSize():void
         {
             if (mapSize)
             {
-                mapHit.removeChild(mapSize);
+                background.removeChild(mapSize);
                 mapSize.dispose();
                 mapSize = null;
             }
             if (mapSizeAlt)
             {
-                mapHit.removeChild(mapSizeAlt);
+                background.removeChild(mapSizeAlt);
                 mapSizeAlt.dispose();
                 mapSizeAlt = null;
             }
