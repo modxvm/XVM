@@ -9,6 +9,7 @@ package com.xvm.types.cfg
     public dynamic class CExtraField extends Object implements ICloneable
     {
         public var enabled:*;
+        public var flags:Array;
         public var x:*;
         public var y:*;
         public var width:*;
@@ -34,8 +35,8 @@ package com.xvm.types.cfg
         public var hotKeyCode:*;
         public var onHold:*;
         public var visibleOnHotKey:*;
-        public var screenHAlign:String;
         public var screenVAlign:String;
+        public var screenHAlign:String;
 
         // for PlayersPanel
         public var layer:String;
@@ -54,6 +55,7 @@ package com.xvm.types.cfg
         {
             var cloned:CExtraField = new CExtraField();
             cloned.enabled = enabled;
+            cloned.flags = flags ? flags.concat() : null;
             cloned.x = x;
             cloned.y = y;
             cloned.width = width;

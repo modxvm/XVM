@@ -5,24 +5,6 @@
 {
   // Textfields for units on minimap.
   // Текстовые поля юнитов на миникарте.
-  // TODO: documentation
-  //  {
-  //    If don't set "ally", "squadman", "player", "enemy", "teamKiller", they are not used.
-  //    If don't set "lost" and "spotted", it uses both - and "lost", and "spotted"
-  //    If don't set "alive", "dead", it uses both - and "alive", and "dead"
-  // -------------------------------------------------------------------------------------
-  //    Если не указаны "ally", "squadman", "player", "enemy", "teamKiller", то они не используются.
-  //    Если не указаны "lost" и "spotted", то используются оба - и "lost", и "spotted".
-  //    Если не указаны "alive", "dead", то используются оба - и "alive", и "dead".
-  //    "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "lost", "spotted", "alive", "dead" ],
-  //    "enabled" - enable/disable field creation (global macros allowed)
-  //    "format": "...",
-  //    "shadow": { ... },
-  //    "alpha": "...",
-  //    "x": { ... },
-  //    "y": { ... },
-  //    "antiAliasType": "normal" // normal/advanced
-  //  }
   // Definitions
   // Шаблоны
   "def": {

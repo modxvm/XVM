@@ -12,6 +12,7 @@ package com.xvm.battle.fullStats
     import com.xvm.battle.vo.*;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.vo.*;
     import flash.events.*;
     import flash.display.*;
     import flash.geom.*;
@@ -187,7 +188,7 @@ package com.xvm.battle.fullStats
             }
             if (isInvalid(FullStatsValidationType.COLORS))
             {
-                var schemeName:String = getSchemeNameForVehicle();
+                var schemeName:String = getSchemeNameForVehicle(currentPlayerState);
                 var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
                 _vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
                 _vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
@@ -225,7 +226,7 @@ package com.xvm.battle.fullStats
             {
                 if (currentPlayerState)
                 {
-                    var textColor:String = XfwUtils.toHtmlColor(App.colorSchemeMgr.getScheme(getSchemeNameForPlayer()).rgb);
+                    var textColor:String = XfwUtils.toHtmlColor(App.colorSchemeMgr.getScheme(getSchemeNameForPlayer(currentPlayerState)).rgb);
                     if (updatePlayerNameField)
                     {
                         _playerNameTF.visible = true;
@@ -304,25 +305,25 @@ package com.xvm.battle.fullStats
             return _topHolder;
         }
 
-        public function getSchemeNameForVehicle():String
+        public function getSchemeNameForVehicle(options:IVOMacrosOptions):String
         {
             var highlightVehicleIcon:Boolean = Config.config.battle.highlightVehicleIcon;
             return PlayerStatusSchemeName.getSchemeNameForVehicle(
-                currentPlayerState.isCurrentPlayer && highlightVehicleIcon,
-                currentPlayerState.isSquadPersonal && highlightVehicleIcon,
-                currentPlayerState.isTeamKiller && highlightVehicleIcon,
-                currentPlayerState.isDead,
-                currentPlayerState.isOffline);
+                options.isCurrentPlayer && highlightVehicleIcon,
+                options.isSquadPersonal && highlightVehicleIcon,
+                options.isTeamKiller && highlightVehicleIcon,
+                options.isDead,
+                options.isOffline);
         }
 
-        public function getSchemeNameForPlayer():String
+        public function getSchemeNameForPlayer(options:IVOMacrosOptions):String
         {
             return PlayerStatusSchemeName.getSchemeNameForPlayer(
-                currentPlayerState.isCurrentPlayer,
-                currentPlayerState.isSquadPersonal,
-                currentPlayerState.isTeamKiller,
-                currentPlayerState.isDead,
-                currentPlayerState.isOffline);
+                options.isCurrentPlayer,
+                options.isSquadPersonal,
+                options.isTeamKiller,
+                options.isDead,
+                options.isOffline);
         }
 
         // XVM events handlers

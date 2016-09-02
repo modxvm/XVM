@@ -4,6 +4,7 @@
  */
 package com.xvm.extraFields
 {
+    import com.xvm.vo.*;
     import flash.display.*;
 
     public interface IExtraFieldGroupHolder
@@ -13,7 +14,7 @@ package com.xvm.extraFields
         function get bottomHolder():MovieClip;
         function get normalHolder():MovieClip;
         function get topHolder():MovieClip;
-        function getSchemeNameForPlayer():String;
-        function getSchemeNameForVehicle():String;
+        function getSchemeNameForPlayer(options:IVOMacrosOptions):String;
+        function getSchemeNameForVehicle(options:IVOMacrosOptions):String;
     }
 }

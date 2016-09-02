@@ -22,6 +22,9 @@ package com.xvm.extraFields
         public var normal:ExtraFields = null;
         public var top:ExtraFields = null;
 
+        private var _x:Number = 0;
+        private var _y:Number = 0;
+
         public function ExtraFieldsGroup(item:IExtraFieldGroupHolder, formats:Array)
         {
             var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(item.isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
@@ -96,6 +99,52 @@ package com.xvm.extraFields
             if (top)
             {
                 top.visible = value;
+            }
+        }
+
+        public function set x(value:Number):void
+        {
+            if (_x == value)
+                return;
+            _x = value;
+            if (substrate)
+            {
+                substrate.x = _x;
+            }
+            if (bottom)
+            {
+                bottom.x = _x;
+            }
+            if (normal)
+            {
+                normal.x = _x;
+            }
+            if (top)
+            {
+                top.x = _x;
+            }
+        }
+
+        public function set y(value:Number):void
+        {
+            if (_y == value)
+                return;
+            _y = value;
+            if (substrate)
+            {
+                substrate.y = _y;
+            }
+            if (bottom)
+            {
+                bottom.y = _y;
+            }
+            if (normal)
+            {
+                normal.y = _y;
+            }
+            if (top)
+            {
+                top.y = _y;
             }
         }
 

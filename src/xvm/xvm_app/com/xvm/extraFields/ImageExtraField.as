@@ -185,6 +185,10 @@ package com.xvm.extraFields
 
         public function update(options:IVOMacrosOptions, bindToIconOffset:int = 0, offsetX:int = 0, offsetY:int = 0, bounds:Rectangle = null):void
         {
+            visible = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
+            if (!visible)
+                return;
+
             var needAlign:Boolean = false;
 
             if (!_initialized)

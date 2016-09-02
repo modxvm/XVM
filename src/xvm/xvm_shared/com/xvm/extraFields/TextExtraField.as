@@ -516,6 +516,10 @@ package com.xvm.extraFields
         {
             try
             {
+                visible = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
+                if (!visible)
+                    return;
+
                 var needAlign:Boolean = false;
 
                 if (!_initialized)
@@ -706,6 +710,10 @@ package com.xvm.extraFields
                     x -= width;
                 else if (_cfg.align == TextFormatAlign.CENTER)
                     x -= width / 2;
+                if (_cfg.valign == TextFieldEx.VALIGN_BOTTOM)
+                    y -= height;
+                else if (_cfg.align == TextFieldEx.VALIGN_CENTER)
+                    y -= height / 2;
             }
 
             //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }

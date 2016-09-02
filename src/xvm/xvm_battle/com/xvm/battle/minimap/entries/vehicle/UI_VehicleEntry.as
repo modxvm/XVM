@@ -11,6 +11,8 @@ package com.xvm.battle.minimap.entries.vehicle
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.*;
     import com.xvm.battle.vo.*;
+    import com.xvm.extraFields.*;
+    import flash.events.*;
     import net.wg.gui.battle.views.minimap.components.entries.vehicle.*;
 
     public class UI_VehicleEntry extends VehicleEntry
@@ -22,6 +24,9 @@ package com.xvm.battle.minimap.entries.vehicle
         private var _formattedString:String = "";
         private var _useStandardLabels:Boolean;
 
+        private var extraFields:ExtraFieldsGroup = null;
+        private var extraFieldsAlt:ExtraFieldsGroup = null;
+
         public function UI_VehicleEntry()
         {
             //Logger.add("UI_VehicleEntry");
@@ -32,6 +37,9 @@ package com.xvm.battle.minimap.entries.vehicle
             {
                 Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
                 Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
+                addEventListener(Event.ENTER_FRAME, onEnterFrame, false, 0, true);
+
+                createExtraFields();
             }
         }
 
@@ -39,6 +47,10 @@ package com.xvm.battle.minimap.entries.vehicle
         {
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
+            removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+
+            disposeExtraFields();
+
             super.onDispose();
         }
 
@@ -53,6 +65,20 @@ package com.xvm.battle.minimap.entries.vehicle
                     updateVehicleIcon(playerState);
                     updateLabels(playerState);
                 }
+            }
+        }
+
+        private function onEnterFrame():void
+        {
+            if (extraFields)
+            {
+                extraFields.x = x;
+                extraFields.y = y;
+            }
+            if (extraFieldsAlt)
+            {
+                extraFieldsAlt.x = x;
+                extraFieldsAlt.y = y;
             }
         }
 
@@ -83,8 +109,59 @@ package com.xvm.battle.minimap.entries.vehicle
         private function updateLabels(playerState:VOPlayerState):void
         {
             vehicleNameTextFieldAlt.visible = false;
-            vehicleNameTextFieldClassic.visible = true;
-            vehicleNameTextFieldClassic.htmlText = Macros.FormatString(UI_Minimap.cfg.labels.formats[0].format, playerState);
+            vehicleNameTextFieldClassic.visible = false;
+            updateExtraFields(playerState);
+        }
+
+        // extra fields
+
+        private function createExtraFields():void
+        {
+            var formats:Array = Config.config.minimap.labels.formats;
+            if (formats && formats.length)
+            {
+                extraFields = new ExtraFieldsGroup(UI_Minimap.instance, formats);
+            }
+            formats = Config.config.minimapAlt.labels.formats;
+            if (formats && formats.length)
+            {
+                extraFieldsAlt = new ExtraFieldsGroup(UI_Minimap.instance, formats);
+            }
+        }
+
+        private function disposeExtraFields():void
+        {
+            if (extraFields)
+            {
+                extraFields.dispose();
+                extraFields = null;
+            }
+            if (extraFieldsAlt)
+            {
+                extraFieldsAlt.dispose();
+                extraFieldsAlt = null;
+            }
+        }
+
+        private function updateExtraFields(playerState:VOPlayerState):void
+        {
+            var isAltMode:Boolean = UI_Minimap.instance.isAltMode;
+            if (extraFields)
+            {
+                extraFields.visible = !isAltMode;
+                if (!isAltMode)
+                {
+                    extraFields.update(playerState, 0);
+                }
+            }
+            if (extraFieldsAlt)
+            {
+                extraFieldsAlt.visible = isAltMode;
+                if (isAltMode)
+                {
+                    extraFieldsAlt.update(playerState, 0);
+                }
+            }
         }
     }
 }

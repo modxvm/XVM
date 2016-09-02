@@ -30,6 +30,16 @@
  *   "hotKeyCode" - keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide; when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
  *   "onHold" - take action by key click (false) or while key is remains pressed (true); (default: false)
  *   "visibleOnHotKey" - field visible on hot key pressed (true) or vice versa (false); (default: true)
+ *   "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "neverSeen", "lost", "spotted", "alive", "dead" ],
+ *      Field visibility flag
+ *      If don't set "ally", "squadman", "player", "enemy", "teamKiller", they are not used.
+ *      If don't set "neverSeen", "lost" and "spotted", it uses all - and "neverSeen", and "lost", and "spotted"
+ *      If don't set "alive", "dead", it uses both - and "alive", and "dead"
+ *      -------------------------------------------------------------------------------------
+ *      Флаг видимости поля
+ *      Если не указаны "ally", "squadman", "player", "enemy", "teamKiller", то они не используются.
+ *      Если не указаны "neverSeen", "lost" и "spotted", то используются все - и "neverSeen", и "lost", и "spotted".
+ *      Если не указаны "alive", "dead", то используются оба - и "alive", и "dead".
  *
  * fields available for TextField format only:
  *   "valign" - vertical alignment ("top", "center", "bottom")

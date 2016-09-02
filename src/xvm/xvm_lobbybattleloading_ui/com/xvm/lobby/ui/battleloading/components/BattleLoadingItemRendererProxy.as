@@ -347,7 +347,7 @@ package com.xvm.lobby.ui.battleloading.components
             return _topHolder;
         }
 
-        public function getSchemeNameForVehicle():String
+        public function getSchemeNameForVehicle(options:IVOMacrosOptions):String
         {
             var isAvailable:Boolean = true;
             if (!_model.isNotAvailable())
@@ -358,7 +358,7 @@ package com.xvm.lobby.ui.battleloading.components
         }
 
         // TODO
-        public function getSchemeNameForPlayer():String
+        public function getSchemeNameForPlayer(options:IVOMacrosOptions):String
         {
             return null;
         }

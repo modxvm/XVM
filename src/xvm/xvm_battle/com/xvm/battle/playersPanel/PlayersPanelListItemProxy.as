@@ -12,6 +12,7 @@ package com.xvm.battle.playersPanel
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.vo.*;
     import flash.events.*;
     import flash.text.*;
     import flash.geom.*;
@@ -252,25 +253,25 @@ package com.xvm.battle.playersPanel
             return _topHolder;
         }
 
-        public function getSchemeNameForVehicle():String
+        public function getSchemeNameForVehicle(options:IVOMacrosOptions):String
         {
             var highlightVehicleIcon:Boolean = bcfg.highlightVehicleIcon;
             return PlayerStatusSchemeName.getSchemeNameForVehicle(
-                currentPlayerState.isCurrentPlayer && highlightVehicleIcon,
-                currentPlayerState.isSquadPersonal && highlightVehicleIcon,
-                currentPlayerState.isTeamKiller && highlightVehicleIcon,
-                currentPlayerState.isDead,
-                currentPlayerState.isOffline);
+                options.isCurrentPlayer && highlightVehicleIcon,
+                options.isSquadPersonal && highlightVehicleIcon,
+                options.isTeamKiller && highlightVehicleIcon,
+                options.isDead,
+                options.isOffline);
         }
 
-        public function getSchemeNameForPlayer():String
+        public function getSchemeNameForPlayer(options:IVOMacrosOptions):String
         {
             return PlayerStatusSchemeName.getSchemeNameForPlayer(
-                currentPlayerState.isCurrentPlayer,
-                currentPlayerState.isSquadPersonal,
-                currentPlayerState.isTeamKiller,
-                currentPlayerState.isDead,
-                currentPlayerState.isOffline);
+                options.isCurrentPlayer,
+                options.isSquadPersonal,
+                options.isTeamKiller,
+                options.isDead,
+                options.isOffline);
         }
 
         // PRIVATE
@@ -427,7 +428,7 @@ package com.xvm.battle.playersPanel
 
         private function updateVehicleIcon():void
         {
-            var schemeName:String = getSchemeNameForVehicle();
+            var schemeName:String = getSchemeNameForVehicle(currentPlayerState);
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             ui.vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
             ui.vehicleIcon.alpha *= opt_vehicleIconAlpha;
@@ -462,7 +463,7 @@ package com.xvm.battle.playersPanel
             if (_standardTextFieldsTexts[tf.name] == txt)
                 return;
             _standardTextFieldsTexts[tf.name] = txt;
-            var schemeName:String = getSchemeNameForPlayer();
+            var schemeName:String = getSchemeNameForPlayer(currentPlayerState);
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             tf.htmlText = "<font color='" + XfwUtils.toHtmlColor(colorScheme.rgb) + "'>" + txt + "</font>";
             if (shadowConfig)

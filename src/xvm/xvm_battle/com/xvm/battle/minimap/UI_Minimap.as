@@ -14,9 +14,13 @@ package com.xvm.battle.minimap
     import com.xvm.battle.minimap.entries.vehicle.*;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
-    import flash.geom.*;
+    import com.xvm.vo.*;
+    import flash.display.*;
     import flash.events.*;
+    import flash.geom.*;
+    import net.wg.gui.battle.views.minimap.components.entries.constants.*;
     import net.wg.gui.battle.views.minimap.constants.*;
+    import net.wg.gui.battle.views.stats.constants.*;
 
     UI_ArcadeCameraEntry;
     UI_CellFlashEntry;
@@ -27,21 +31,34 @@ package com.xvm.battle.minimap
     UI_ViewRangeCirclesEntry;
     UI_VehicleEntry;
 
-    public dynamic class UI_Minimap extends minimapUI
+    public /*dynamic*/ class UI_Minimap extends minimapUI implements IExtraFieldGroupHolder
     {
         public static var cfg:CMinimap;
 
         private var xvm_enabled:Boolean;
-        private var isAltMode:Boolean = false;
-        private var isZoomed:Boolean = false;
-        private var currentSizeIndex:int = 0;
-        private var savedSizeIndex:int = -1;
+        private var _isAltMode:Boolean = false;
+        private var _isZoomed:Boolean = false;
+        private var _currentSizeIndex:int = 0;
+        private var _savedSizeIndex:int = -1;
 
         private var mapSize:TextExtraField;
         private var mapSizeAlt:TextExtraField;
 
+        private var _substrateHolder:MovieClip;
+        private var _bottomHolder:MovieClip;
+        private var _normalHolder:MovieClip;
+        private var _topHolder:MovieClip;
+
+        private static var _instance:UI_Minimap = null;
+        public static function get instance():UI_Minimap
+        {
+            return _instance;
+        }
+
         public function UI_Minimap()
         {
+            _instance = this;
+
             super();
 
             /* TODO: add zoom steps
@@ -59,7 +76,18 @@ package com.xvm.battle.minimap
             Xvm.addEventListener(BattleEvents.MINIMAP_ALT_MODE, setAltMode);
             Xvm.addEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+
+            _substrateHolder = entriesContainer.addChildAt(new MovieClip(), 0) as MovieClip;
+            _bottomHolder = entriesContainer.addChildAt(new MovieClip(), 1) as MovieClip;
+            _normalHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles) - 1) as MovieClip;;
+            _topHolder = entriesContainer.addChild(new MovieClip()) as MovieClip;
+
             setup();
+        }
+
+        public function get isAltMode():Boolean
+        {
+            return _isAltMode;
         }
 
         override protected function onDispose():void
@@ -68,7 +96,14 @@ package com.xvm.battle.minimap
             Xvm.removeEventListener(BattleEvents.MINIMAP_ALT_MODE, setAltMode);
             Xvm.removeEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+
             disposeMapSize();
+
+            _substrateHolder = null;
+            _bottomHolder = null;
+            _normalHolder = null;
+            _topHolder = null;
+
             super.onDispose();
         }
 
@@ -78,7 +113,7 @@ package com.xvm.battle.minimap
             {
                 sizeIndex = Math.max(0, Math.min(MinimapSizeConst.MAP_SIZE.length - 1, sizeIndex));
                 super.as_setSize(sizeIndex);
-                currentSizeIndex = sizeIndex;
+                _currentSizeIndex = sizeIndex;
 
                 /* TODO: add zoom steps
                 if (param1 == 5)
@@ -96,6 +131,53 @@ package com.xvm.battle.minimap
             {
                 Logger.err(ex);
             }
+        }
+
+        // IExtraFieldGroupHolder
+
+        public function get isLeftPanel():Boolean
+        {
+            return true;
+        }
+
+        public function get substrateHolder():MovieClip
+        {
+            return _substrateHolder;
+        }
+
+        public function get bottomHolder():MovieClip
+        {
+            return _bottomHolder;
+        }
+
+        public function get normalHolder():MovieClip
+        {
+            return _normalHolder;
+        }
+
+        public function get topHolder():MovieClip
+        {
+            return _topHolder;
+        }
+
+        public function getSchemeNameForVehicle(options:IVOMacrosOptions):String
+        {
+            return PlayerStatusSchemeName.getSchemeNameForVehicle(
+                options.isCurrentPlayer,
+                options.isSquadPersonal,
+                options.isTeamKiller,
+                options.isDead,
+                options.isOffline);
+        }
+
+        public function getSchemeNameForPlayer(options:IVOMacrosOptions):String
+        {
+            return PlayerStatusSchemeName.getSchemeNameForPlayer(
+                options.isCurrentPlayer,
+                options.isSquadPersonal,
+                options.isTeamKiller,
+                options.isDead,
+                options.isOffline);
         }
 
         // PRIVATE
@@ -141,14 +223,14 @@ package com.xvm.battle.minimap
             if (xvm_enabled)
             {
                 if (Config.config.hotkeys.minimapAltMode.onHold)
-                    isAltMode = e.result.isDown;
+                    _isAltMode = e.result.isDown;
                 else if (e.result.isDown)
-                    isAltMode = !isAltMode;
+                    _isAltMode = !_isAltMode;
                 else
                     return;
 
                 setCfg();
-                if (isZoomed)
+                if (_isZoomed)
                 {
                     as_setSize(Macros.FormatNumberGlobal(cfg.zoom.index));
                 }
@@ -162,27 +244,27 @@ package com.xvm.battle.minimap
             if (xvm_enabled)
             {
                 if (Config.config.hotkeys.minimapZoom.onHold)
-                    isZoomed = e.result.isDown;
+                    _isZoomed = e.result.isDown;
                 else if (e.result.isDown)
-                    isZoomed = !isZoomed;
+                    _isZoomed = !_isZoomed;
                 else
                     return;
 
-                if (isZoomed)
+                if (_isZoomed)
                 {
-                    if (savedSizeIndex == -1)
+                    if (_savedSizeIndex == -1)
                     {
-                        savedSizeIndex = currentSizeIndex;
+                        _savedSizeIndex = _currentSizeIndex;
                     }
                     as_setSize(Macros.FormatNumberGlobal(cfg.zoom.index));
                 }
                 else
                 {
-                    if (savedSizeIndex != -1)
+                    if (_savedSizeIndex != -1)
                     {
-                        as_setSize(savedSizeIndex);
+                        as_setSize(_savedSizeIndex);
                     }
-                    savedSizeIndex = -1;
+                    _savedSizeIndex = -1;
                 }
             }
         }
@@ -210,7 +292,7 @@ package com.xvm.battle.minimap
 
         private function alignMinimap():void
         {
-            if (isZoomed && cfg.zoom.centered)
+            if (_isZoomed && cfg.zoom.centered)
             {
                 x = (App.appWidth - initedWidth) / 2;
                 y = (App.appHeight - initedHeight) / 2;
