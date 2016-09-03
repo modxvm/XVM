@@ -56,6 +56,7 @@
  *     "substrate": put field behind all fields (for the players panel x value depends on the players panel width)
  *     "bottom": put field behind all standard fields but above substrate fields (for the players panel x value does not depend on the players panel width)
  *     "normal": put field above bottom fields (for the players panel etc- above vehicle icon but behind standard text fields) (default)
+ *     "top": put field above all fields
  *
  * text format and shadow:
  *   http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
