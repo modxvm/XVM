@@ -50,13 +50,12 @@
  * fields available for MovieClip format only:
  *   "highlight" - highlight icon depending on the player state, default false
  *
- * fields available for players panel and statistic form only:
+ * fields available for players panel, statistic form, battle loading and minimap:
  *   "layer": field z-order
  *     values:
- *     "substrate": put field behind all standard fields, x value depends on the players panel width
- *     "bottom": put field behind all standard fields, x value does not depend on the players panel width
- *     "normal": put field above vehicle icon but behind standard text fields (default)
- *     "top": put field above standard fields
+ *     "substrate": put field behind all fields (for the players panel x value depends on the players panel width)
+ *     "bottom": put field behind all standard fields but above substrate fields (for the players panel x value does not depend on the players panel width)
+ *     "normal": put field above bottom fields (for the players panel etc- above vehicle icon but behind standard text fields) (default)
  *
  * text format and shadow:
  *   http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
@@ -107,16 +106,12 @@
       // y position.
       // положение по вертикали.
       "y": 1,
+      // Horizontal alignment
+      // Выравнивание по горизонтали
+      "align": "center",
       // true - x position is binded to vehicle icon, false - binded to edge of the screen.
       // true - положение по горизонтали отсчитывается от иконки танка, false - от края экрана.
       "bindToIcon": true,
-      // Text format
-      // Формат текста
-      "textFormat": {
-        // Horizontal alignment
-        // Выравнивание по горизонтали
-        "align": "center"
-      },
       // enemy spotted status marker format.
       // формат маркера статуса засвета.
       "format": "<font color='{{c:spotted}}'>{{spotted}}</font>",
@@ -127,11 +122,10 @@
     // XMQP service marker definition.
     // Шаблон маркера сервиса XMQP.
     "xmqpServiceMarker": {
-      "x": 88, "y": 1, "bindToIcon": true,
+      "x": 88, "y": 1, "align": "center", "bindToIcon": true,
       "textFormat": {
         "font": "xvm",
-        "size": 23,
-        "align": "center"
+        "size": 23
       },
       "format": "<font color='{{alive?{{x-spotted?#FFBB00|{{x-sense-on?#D9D9D9|#BFBFBF}}}}|#FFFFFF}}' alpha='{{alive?#FF|#80}}'>{{alive?{{x-spotted?&#x70;|{{x-sense-on?&#x70;|{{x-enabled?&#x7A;}}}}}}}}</font>",
       "shadow": {}
@@ -140,8 +134,7 @@
     // Иконка клана.
     "clanIcon": {
       "enabled": true,
-      "x": 65, "y": 6, "width": 16, "height": 16, "alpha": 90, "bindToIcon": true,
-      "textFormat": { "align": "center" },
+      "x": 65, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90, "bindToIcon": true,
       "src": "{{clanicon}}"
       //"format": "<img src='{{clanicon}}' width='16' height='16'>"
     },
