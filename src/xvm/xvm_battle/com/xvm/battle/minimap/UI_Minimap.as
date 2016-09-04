@@ -78,9 +78,11 @@ package com.xvm.battle.minimap
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
 
             _substrateHolder = entriesContainer.addChildAt(new MovieClip(), 0) as MovieClip;
-            _bottomHolder = entriesContainer.addChildAt(new MovieClip(), 1) as MovieClip;
+            _bottomHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
             _normalHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
             _topHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.aliveVehicles) + 1) as MovieClip;;
+
+            //XfwUtils.logChilds(entriesContainer);
 
             setup();
         }
