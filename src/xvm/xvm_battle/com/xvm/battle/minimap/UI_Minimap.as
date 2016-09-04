@@ -294,8 +294,9 @@ package com.xvm.battle.minimap
         {
             if (_isZoomed && cfg.zoom.centered)
             {
-                x = (App.appWidth - initedWidth) / 2;
-                y = (App.appHeight - initedHeight) / 2;
+                var r:Rectangle = MinimapSizeConst.MAP_SIZE[_currentSizeIndex];
+                x = (App.appWidth - initedWidth + r.x) / 2;
+                y = (App.appHeight - initedHeight + r.y) / 2;
             }
             else
             {
