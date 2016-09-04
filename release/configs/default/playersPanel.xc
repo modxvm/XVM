@@ -34,12 +34,12 @@
  *   "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "neverSeen", "lost", "spotted", "alive", "dead" ],
  *      Field visibility flag
  *      If don't set "ally", "squadman", "player", "enemy", "teamKiller", they are not used.
- *      If don't set "neverSeen", "lost" and "spotted", it uses all - and "neverSeen", and "lost", and "spotted"
+ *      If don't set "neverSeen", "lost" and "spotted", it uses all - and "neverSeen", and "lost", and "spotted". Note: "neverSeen" status disabled for the minimap.
  *      If don't set "alive", "dead", it uses both - and "alive", and "dead"
  *      -------------------------------------------------------------------------------------
  *      Флаг видимости поля
  *      Если не указаны "ally", "squadman", "player", "enemy", "teamKiller", то они не используются.
- *      Если не указаны "neverSeen", "lost" и "spotted", то используются все - и "neverSeen", и "lost", и "spotted".
+ *      Если не указаны "neverSeen", "lost" и "spotted", то используются все - и "neverSeen", и "lost", и "spotted". Примечание: статус "neverSeen" для миникарты отключен.
  *      Если не указаны "alive", "dead", то используются оба - и "alive", и "dead".
  *
  * fields available for TextField format only:
