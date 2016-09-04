@@ -7,25 +7,26 @@
   // Настройки соответствуют параметрам дополнительных полей
   "mapSize": {
     "enabled": true,
-    "alpha": 40,
     "x": 0,
     "y": 0,
-    "width": 100,
-    "height": 30,
+    "alpha": 70,
     "textFormat": {
+      "font": "Times New Roman",
       "size": 10,
       "color": "0xFFCC66",
-      "bold": true
+      "align": "left",
+      "bold": true,
+      "italic": false
     },
     "format": "{{cellsize}}0 {{l10n:m}}",
     "shadow": {
       "enabled": true,
-      "distance": 0,
-      "angle": 0,
       "color": "0x000000",
-      "alpha": 80,
+      "alpha": 70,
       "blur": 2,
-      "strength": 3
+      "strength": 3,
+      "distance": 0,
+      "angle": 0
     }
   }
 }
