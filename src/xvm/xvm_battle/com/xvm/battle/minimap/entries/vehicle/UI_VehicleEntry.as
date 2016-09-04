@@ -62,8 +62,12 @@ package com.xvm.battle.minimap.entries.vehicle
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
                     var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    updateVehicleIcon(playerState);
-                    updateLabels(playerState);
+                    visible = playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
+                    if (visible)
+                    {
+                        updateVehicleIcon(playerState);
+                        updateLabels(playerState);
+                    }
                 }
             }
         }

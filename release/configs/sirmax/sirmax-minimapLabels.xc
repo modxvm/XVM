@@ -11,6 +11,13 @@
   "labels": {
     "formats": [
       // for debug
+      //{
+      //  "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "neverSeen", "lost", "spotted", "alive", "dead" ],
+      //  "x": 0, "y": 0, "align": "center", "valign": "center", "layer": "top", "antiAliasType": "normal", "shadow": { },
+      //  "borderColor": null,
+      //  "textFormat": { "font": "xvm", "size": 8, "align": "center", "valign": "center" },
+      //  "format": "<font color='{{.minimap.labelsData.colors.dot.{{sys-color-key}}}}'>&#x44;</font>"
+      //},
       //${ "../default/minimapLabelsTemplates.xc":"def.vtypeSpotted" },
       //${ "../default/minimapLabelsTemplates.xc":"def.vehicleDead" },
       //${ "../default/minimapLabelsTemplates.xc":"def.nickDead" },
