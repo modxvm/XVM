@@ -10,6 +10,7 @@ package com.xvm.battle.minimap.entries.vehicle
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.*;
+    import com.xvm.battle.minimap.entries.*;
     import com.xvm.battle.vo.*;
     import com.xvm.extraFields.*;
     import flash.events.*;
@@ -31,6 +32,11 @@ package com.xvm.battle.minimap.entries.vehicle
         {
             //Logger.add("UI_VehicleEntry");
             super();
+
+            // Workaround: Label stays at creation point some time before first move.
+            // It makes unpleasant label positioning at map center.
+            x = MinimapEntriesConstants.OFFMAP_COORDINATE;
+            y = MinimapEntriesConstants.OFFMAP_COORDINATE;
 
             _useStandardLabels = Macros.FormatBooleanGlobal(Config.config.minimap.useStandardLabels, false);
             if (!_useStandardLabels)
