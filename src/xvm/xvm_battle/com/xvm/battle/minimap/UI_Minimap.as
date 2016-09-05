@@ -135,6 +135,11 @@ package com.xvm.battle.minimap
             }
         }
 
+        override public function getMessageCoordinate():Number
+        {
+            return (_isZoomed && cfg.zoom.centered) ? 0 : super.getMessageCoordinate();
+        }
+
         // IExtraFieldGroupHolder
 
         public function get isLeftPanel():Boolean
