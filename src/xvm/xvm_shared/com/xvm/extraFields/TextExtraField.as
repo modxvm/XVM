@@ -67,6 +67,7 @@ package com.xvm.extraFields
             if (defaultAlign == null)
                 defaultAlign = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             _cfg.align = Macros.FormatStringGlobal(_cfg.align, defaultAlign);
+            _cfg.valign = Macros.FormatStringGlobal(_cfg.valign, TextFieldEx.VALIGN_NONE);
             _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
             if (_cfg.hotKeyCode != null)
             {

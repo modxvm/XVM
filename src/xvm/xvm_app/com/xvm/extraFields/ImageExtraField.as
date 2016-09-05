@@ -7,7 +7,7 @@ package com.xvm.extraFields
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
-    import com.xvm.battle.events.PlayerStateEvent;
+    import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import com.xvm.wg.*;
@@ -55,6 +55,7 @@ package com.xvm.extraFields
 
             var defaultAlign:String = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
             _cfg.align = Macros.FormatStringGlobal(_cfg.align, defaultAlign);
+            _cfg.valign = Macros.FormatStringGlobal(_cfg.valign, TextFieldEx.VALIGN_NONE);
             _cfg.bindToIcon = Macros.FormatBooleanGlobal(_cfg.bindToIcon, false);
             if (_cfg.hotKeyCode != null)
             {
@@ -355,6 +356,10 @@ package com.xvm.extraFields
                     x -= width;
                 else if (_cfg.align == TextFormatAlign.CENTER)
                     x -= width / 2;
+                if (_cfg.valign == TextFieldEx.VALIGN_BOTTOM)
+                    y -= height;
+                else if (_cfg.valign == TextFieldEx.VALIGN_CENTER)
+                    y -= height / 2;
             }
             if (_scaleXValue < 0)
             {
