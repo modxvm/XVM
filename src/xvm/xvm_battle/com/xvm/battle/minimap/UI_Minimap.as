@@ -77,7 +77,7 @@ package com.xvm.battle.minimap
             Xvm.addEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
 
-            _substrateHolder = entriesContainer.addChildAt(new MovieClip(), 0) as MovieClip;
+            _substrateHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
             _bottomHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
             _normalHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
             _topHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.aliveVehicles) + 1) as MovieClip;;
