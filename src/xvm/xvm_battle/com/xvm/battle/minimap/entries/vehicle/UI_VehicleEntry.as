@@ -66,10 +66,9 @@ package com.xvm.battle.minimap.entries.vehicle
             super.draw();
             if (!_useStandardLabels)
             {
-                var playerState:VOPlayerState = null;
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
-                    playerState = BattleState.get(vehicleID);
+                    var playerState:VOPlayerState = BattleState.get(vehicleID);
                     if (_active)
                     {
                         visible = playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
@@ -134,8 +133,11 @@ package com.xvm.battle.minimap.entries.vehicle
         {
             xfw_currVehicleAnimation.alpha = Macros.FormatNumber(UI_Minimap.cfg.iconAlpha, playerState, 100) / 100.0;
             var iconScale:Number = Macros.FormatNumber(UI_Minimap.cfg.iconScale, playerState, 1);
-            xfw_currVehicleAnimation.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 2.0;
-            xfw_currVehicleAnimation.y = -DEFAULT_VEHICLE_ICON_HEIGHT * iconScale / 2.0;
+            if (xfw_currVehicleAnimation != deadAnimation && xfw_currVehicleAnimation != deadPermanentAnimation)
+            {
+                xfw_currVehicleAnimation.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 2.0;
+                xfw_currVehicleAnimation.y = -DEFAULT_VEHICLE_ICON_HEIGHT * iconScale / 2.0;
+            }
             xfw_currVehicleAnimation.scaleX = xfw_currVehicleAnimation.scaleY = DEFAULT_VEHICLE_ICON_SCALE * iconScale;
         }
 
