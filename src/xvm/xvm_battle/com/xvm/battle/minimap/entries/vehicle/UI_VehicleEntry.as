@@ -24,6 +24,7 @@ package com.xvm.battle.minimap.entries.vehicle
 
         private var _formattedString:String = "";
         private var _useStandardLabels:Boolean;
+        private var _active:Boolean = true;
 
         private var extraFields:ExtraFieldsGroup = null;
         private var extraFieldsAlt:ExtraFieldsGroup = null;
@@ -67,16 +68,36 @@ package com.xvm.battle.minimap.entries.vehicle
             {
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
-                    var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    visible = playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
-                    if (visible)
+                    if (_active)
                     {
-                        updateVehicleIcon(playerState);
-                        updateLabels(playerState);
+                        var playerState:VOPlayerState = BattleState.get(vehicleID);
+                        visible = playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
+                        if (visible)
+                        {
+                            updateVehicleIcon(playerState);
+                            updateLabels(playerState);
+                        }
+                        else
+                        {
+                            hideLabels();
+                        }
+                    }
+                    else
+                    {
+                        visible = false;
+                        hideLabels();
                     }
                 }
             }
         }
+
+        public function setActive(value:Boolean):void
+        {
+            _active = value;
+            update();
+        }
+
+        // PRIVATE
 
         private function onEnterFrame():void
         {
@@ -91,8 +112,6 @@ package com.xvm.battle.minimap.entries.vehicle
                 extraFieldsAlt.y = y;
             }
         }
-
-        // PRIVATE
 
         private function update():void
         {
@@ -172,6 +191,12 @@ package com.xvm.battle.minimap.entries.vehicle
                     extraFieldsAlt.update(playerState, 0);
                 }
             }
+        }
+
+        private function hideLabels():void
+        {
+            extraFields.visible = false;
+            extraFieldsAlt.visible = false;
         }
     }
 }

@@ -17,6 +17,7 @@ from gui.battle_control import g_sessionProvider
 from gui.Scaleform.Minimap import Minimap
 from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
 from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME
+from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 
 from xfw import *
 
@@ -78,6 +79,12 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
         #    debug('add minimap entry: ' + symbol)
     return base(self, symbol, *args, **kwargs)
 
+@overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__setActive')
+def _ArenaVehiclesPlugin__setActive(base, self, entry, active):
+    base(self, entry, active)
+    if g_minimap.active:
+        self._invoke(entry.getID(), 'setActive', active)
+
 
 #####################################################################
 # Minimap
@@ -101,10 +108,6 @@ class Minimap(object):
 
     def destroy(self):
         self.initialized = False
-
-
-    #####################################################################
-    # event handlers
 
 g_minimap = Minimap()
 
