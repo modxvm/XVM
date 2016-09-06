@@ -66,11 +66,12 @@ package com.xvm.battle.minimap.entries.vehicle
             super.draw();
             if (!_useStandardLabels)
             {
+                var playerState:VOPlayerState = null;
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
+                    playerState = BattleState.get(vehicleID);
                     if (_active)
                     {
-                        var playerState:VOPlayerState = BattleState.get(vehicleID);
                         visible = playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
                         if (visible)
                         {
@@ -84,8 +85,11 @@ package com.xvm.battle.minimap.entries.vehicle
                     }
                     else
                     {
-                        visible = false;
-                        hideLabels();
+                        if (playerState.isAlive)
+                        {
+                            visible = false;
+                            hideLabels();
+                        }
                     }
                 }
             }
