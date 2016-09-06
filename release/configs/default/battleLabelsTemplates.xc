@@ -71,10 +71,10 @@
      │ "scaleY"                   │ scaling axis Y (%, use negative values for mirroring) (default: 100)
      │                            │ масштабирование по оси y (%, используйте отрицательные значения для зеркального отображения) (по-умолчанию: 100)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "align"                    │ horizontal alignment of the text field relative to its position ("left" [default], "center", "right")
+     │ "align"                    │ horizontal alignment of the field relative to its position ("left" [default], "center", "right")
      │                            │ горизонтальное выравнивание текстового поля относительно его позиции ("left" [по-умолчанию], "center", "right")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
-     │ "valign"                   │ vertical alignment of the text field relative to its position ("top" [default], "center", "bottom")
+     │ "valign"                   │ vertical alignment of the field relative to its position ("top" [default], "center", "bottom")
      │                            │ вертикальное выравнивание текстового поля относительно его позиции ("top" [по-умолчанию], "center", "bottom")
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "screenHAlign"             │ horizontal alignment of the field on the screen ("left" [default], "center", "right")
@@ -143,7 +143,7 @@
      │ "size"                     │ font size (default: 12)
      │                            │ размер шрифта (по-умолчанию: 12)
      │----------------------------│--------------------------------------------------------------------------
-     │ "align"                    │ horizontal alignment of the text inside the field (left [по-умолчанию], center, right)
+     │ "align"                    │ horizontal alignment of the text inside the field (left [default], center, right)
      │                            │ горизонтальное выравнивание текста текста внутри поля (left [по-умолчанию], center, right)
      │----------------------------│--------------------------------------------------------------------------
      │ "valign"                   │ vertical alignment of the text inside the field ("top" [default], "center", "bottom")
