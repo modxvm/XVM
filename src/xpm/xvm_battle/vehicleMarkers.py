@@ -96,6 +96,7 @@ def _MarkersManager__init__(base, self, parentUI):
 @overrideMethod(MarkersManager, 'beforeDelete')
 def _MarkersManager_beforeDelete(base, self):
     g_markers.destroy()
+    base(self)
 
 @overrideMethod(MarkersManager, 'createMarker')
 def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
@@ -132,27 +133,24 @@ class VehicleMarkers(object):
     enabled = True
     initialized = False
     guiType = 0
-    managerRef = None
+    manager = None
 
     @property
     def active(self):
         return self.enabled and self.initialized and (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL)
 
     @property
-    def manager(self):
-        return self.managerRef() if self.managerRef else None
-
-    @property
     def plugins(self):
         return self.manager._MarkersManager__plugins if self.manager else None
 
     def init(self, manager):
-        self.managerRef = weakref.ref(manager)
-        manager.addExternalCallback('xvm.cmd', self.onVMCommand)
+        self.manager = manager
+        self.manager.addExternalCallback('xvm.cmd', self.onVMCommand)
 
     def destroy(self):
         self.initialized = False
-        self.managerRef = None
+        self.manager.removeExternalCallback('xvm.cmd')
+        self.manager = None
 
     #####################################################################
     # event handlers
