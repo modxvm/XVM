@@ -11,7 +11,7 @@ package com.xvm.battle.minimap.entries.personal
     {
         public function UI_DeadPointEntry()
         {
-            Logger.add("UI_DeadPointEntry");
+            //Logger.add("UI_DeadPointEntry");
             super();
         }
     }

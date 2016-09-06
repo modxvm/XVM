@@ -11,7 +11,7 @@ package com.xvm.battle.minimap.entries.personal
     {
         public function UI_CellFlashEntry()
         {
-            Logger.add("UI_CellFlashEntry");
+            //Logger.add("UI_CellFlashEntry");
             super();
         }
     }
