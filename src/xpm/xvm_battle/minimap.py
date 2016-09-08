@@ -33,6 +33,9 @@ from battle import g_battle
 
 def onConfigLoaded(self, e=None):
     g_minimap.enabled = config.get('minimap/enabled', True)
+    g_minimap.useStandardLabels = config.get('minimap/useStandardLabels', False)
+    g_minimap.useStandardLines = config.get('minimap/useStandardLines', False)
+    g_minimap.useStandardCircles = config.get('minimap/useStandardCircles', False)
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
@@ -79,11 +82,22 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
         #    debug('add minimap entry: ' + symbol)
     return base(self, symbol, *args, **kwargs)
 
+@overrideMethod(ArenaVehiclesPlugin, '__init__')
+def _ArenaVehiclesPlugin__init__(base, self, parent):
+    base(self, parent)
+    if g_minimap.enabled and not g_minimap.useStandardLabels:
+        self._ArenaVehiclesPlugin__showDestroyEntries = True
+        self._ArenaVehiclesPlugin__isDestroyImmediately = True
+
 @overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__setActive')
 def _ArenaVehiclesPlugin__setActive(base, self, entry, active):
     base(self, entry, active)
-    if g_minimap.active:
+    if g_minimap.active and not g_minimap.useStandardLabels:
         self._invoke(entry.getID(), 'setActive', active)
+        if not active:
+            activateID = self._ArenaVehiclesPlugin__cameraIDs[ENTRY_SYMBOL_NAME.ARCADE_CAMERA]
+            if entry.getID() == activateID:
+                self._invoke(entry.getID(), 'setCamera')
 
 
 #####################################################################
@@ -94,6 +108,9 @@ class Minimap(object):
     enabled = True
     initialized = False
     guiType = 0
+    useStandardLabels = False
+    useStandardLines = False
+    useStandardCircles = False
 
     @property
     def active(self):
@@ -249,6 +266,7 @@ g_minimap = Minimap()
 #                if not config.get('minimap/useStandardLines'):
 #                    value = False
 #            elif name == settings_constants.GAME.SHOW_SECTOR_ON_MAP:
+#                if not config.get('minimap/useStandardCircles'):
 #                if not config.get('minimap/useStandardLines'):
 #                    value = False
 #            #debug('getSetting: {} = {}'.format(name, value))

@@ -25,6 +25,7 @@ package com.xvm.battle.minimap.entries.vehicle
         private var _formattedString:String = "";
         private var _useStandardLabels:Boolean;
         private var _active:Boolean = true;
+        private var _isCameraBinded:Boolean = false;
 
         private var extraFields:ExtraFieldsGroup = null;
         private var extraFieldsAlt:ExtraFieldsGroup = null;
@@ -39,7 +40,7 @@ package com.xvm.battle.minimap.entries.vehicle
             x = MinimapEntriesConstants.OFFMAP_COORDINATE;
             y = MinimapEntriesConstants.OFFMAP_COORDINATE;
 
-            _useStandardLabels = Macros.FormatBooleanGlobal(Config.config.minimap.useStandardLabels, false);
+            _useStandardLabels = Config.config.minimap.useStandardLabels;
             if (!_useStandardLabels)
             {
                 Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
@@ -69,26 +70,23 @@ package com.xvm.battle.minimap.entries.vehicle
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
                     var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    if (_active)
+                    var isVisible:Boolean = false;
+                    if (!_isCameraBinded)
                     {
-                        visible = playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
-                        if (visible)
-                        {
-                            updateVehicleIcon(playerState);
-                            updateLabels(playerState);
-                        }
-                        else
+                        isVisible = playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
+                    }
+                    if (visible != isVisible)
+                    {
+                        visible = isVisible;
+                        if (!isVisible)
                         {
                             hideLabels();
                         }
                     }
-                    else
+                    if (isVisible)
                     {
-                        if (playerState.isAlive)
-                        {
-                            visible = false;
-                            hideLabels();
-                        }
+                        updateVehicleIcon(playerState);
+                        updateLabels(playerState);
                     }
                 }
             }
@@ -97,6 +95,13 @@ package com.xvm.battle.minimap.entries.vehicle
         public function setActive(value:Boolean):void
         {
             _active = value;
+            _isCameraBinded = false;
+            update();
+        }
+
+        public function setCamera():void
+        {
+            _isCameraBinded = true;
             update();
         }
 
