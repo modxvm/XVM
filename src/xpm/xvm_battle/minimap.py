@@ -89,15 +89,14 @@ def _ArenaVehiclesPlugin__init__(base, self, parent):
         self._ArenaVehiclesPlugin__showDestroyEntries = True
         self._ArenaVehiclesPlugin__isDestroyImmediately = True
 
-@overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__setActive')
-def _ArenaVehiclesPlugin__setActive(base, self, entry, active):
-    base(self, entry, active)
+@overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__switchToVehicle')
+def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
+    base(self, prevCtrlID)
     if g_minimap.active and not g_minimap.useStandardLabels:
-        self._invoke(entry.getID(), 'setActive', active)
-        if not active:
-            activateID = self._ArenaVehiclesPlugin__cameraIDs[ENTRY_SYMBOL_NAME.ARCADE_CAMERA]
-            if entry.getID() == activateID:
-                self._invoke(entry.getID(), 'setCamera')
+        if prevCtrlID and prevCtrlID != self._ArenaVehiclesPlugin__playerVehicleID and prevCtrlID in self._entries:
+            self._invoke(self._entries[prevCtrlID].getID(), 'setControlMode', False)
+        if self._ctrlVehicleID and self._ctrlVehicleID != self._ArenaVehiclesPlugin__playerVehicleID and self._ctrlVehicleID in self._entries:
+            self._invoke(self._entries[self._ctrlVehicleID].getID(), 'setControlMode', True)
 
 
 #####################################################################
