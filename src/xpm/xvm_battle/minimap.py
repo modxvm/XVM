@@ -17,7 +17,7 @@ from gui.battle_control import g_sessionProvider
 from gui.Scaleform.Minimap import Minimap
 from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
 from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME, ADDITIONAL_FEATURES
-from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
+from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin, PersonalEntriesPlugin
 
 from xfw import *
 
@@ -91,8 +91,8 @@ def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
         if self._ctrlVehicleID:
             if self._ctrlVehicleID != self._getPlayerVehicleID() and self._ctrlVehicleID in self._entries:
                 self._invoke(self._entries[self._ctrlVehicleID].getID(), 'setControlMode', True)
-            if self._getViewPointID():
-                self._invoke(self._getViewPointID(), 'setVehicleID', self._ctrlVehicleID)
+            if g_minimap.viewPointID:
+                self._invoke(g_minimap.viewPointID, 'setVehicleID', self._ctrlVehicleID)
 
 # Disable standard features if XVM minimap is active
 
@@ -104,10 +104,10 @@ def _ADDITIONAL_FEATURES_isOn(base, cls, mask):
 def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
     return False if g_minimap.active and not g_minimap.useStandardLabels else base(mask)
 
-#@overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__createViewPointEntry')
-#def _ArenaVehiclesPlugin__createViewPointEntry(base, self, avatar):
-#    base(self, avatar)
-#    self._invoke(self._getViewPointID(), 'setVehicleID', self._ctrlVehicleID)
+@overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__createViewPointEntry')
+def _PersonalEntriesPlugin__createViewPointEntry(base, self, avatar):
+   base(self, avatar)
+   g_minimap.viewPointID = self._getViewPointID()
 
 
 #####################################################################
@@ -121,6 +121,7 @@ class Minimap(object):
     useStandardLabels = False
     useStandardLines = False
     useStandardCircles = False
+    viewPointID = 0
 
     @property
     def active(self):

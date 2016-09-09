@@ -59,9 +59,12 @@ package com.xvm.battle.minimap.entries.personal
 
         public function setVehicleID(vehicleID:Number):void
         {
-            Logger.add("setVehicleID: " + vehicleID);
-            _vehicleID = vehicleID;
-            invalidate(INVALID_UPDATE_XVM);
+            if (_vehicleID != vehicleID)
+            {
+                Logger.add("setVehicleID: " + vehicleID);
+                _vehicleID = vehicleID;
+                invalidate(INVALID_UPDATE_XVM);
+            }
         }
 
         // PRIVATE
