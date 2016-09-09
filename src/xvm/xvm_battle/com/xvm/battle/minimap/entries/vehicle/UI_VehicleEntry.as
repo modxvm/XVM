@@ -16,7 +16,7 @@ package com.xvm.battle.minimap.entries.vehicle
     import flash.events.*;
     import net.wg.gui.battle.views.minimap.components.entries.vehicle.*;
 
-    public class UI_VehicleEntry extends VehicleEntry
+    public class UI_VehicleEntry extends VehicleEntry implements IMinimapVehicleEntry
     {
         private static const DEFAULT_VEHICLE_ICON_WIDTH:Number = 16;
         private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 20;
@@ -26,38 +26,21 @@ package com.xvm.battle.minimap.entries.vehicle
         private var _useStandardLabels:Boolean;
         private var _isControlMode:Boolean = false;
 
-        private var extraFields:ExtraFieldsGroup = null;
-        private var extraFieldsAlt:ExtraFieldsGroup = null;
+        private var _extraFields:ExtraFieldsGroup = null;
+        private var _extraFieldsAlt:ExtraFieldsGroup = null;
 
         public function UI_VehicleEntry()
         {
             //Logger.add("UI_VehicleEntry");
             super();
 
-            // Workaround: Label stays at creation point some time before first move.
-            // It makes unpleasant label positioning at map center.
-            x = MinimapEntriesConstants.OFFMAP_COORDINATE;
-            y = MinimapEntriesConstants.OFFMAP_COORDINATE;
-
             _useStandardLabels = Config.config.minimap.useStandardLabels;
-            if (!_useStandardLabels)
-            {
-                Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
-                Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
-                addEventListener(Event.ENTER_FRAME, onEnterFrame, false, 0, true);
-
-                createExtraFields();
-            }
+            MinimapEntriesLabelsHelper.init(this);
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
-            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
-            removeEventListener(Event.ENTER_FRAME, onEnterFrame);
-
-            disposeExtraFields();
-
+            MinimapEntriesLabelsHelper.dispose(this);
             super.onDispose();
         }
 
@@ -92,34 +75,47 @@ package com.xvm.battle.minimap.entries.vehicle
             _isControlMode = value;
         }
 
-        // PRIVATE
+        // IMinimapVehicleEntry
 
-        private function onEnterFrame():void
+        public function get extraFields():ExtraFieldsGroup
         {
-            if (extraFields)
-            {
-                extraFields.x = x;
-                extraFields.y = y;
-            }
-            if (extraFieldsAlt)
-            {
-                extraFieldsAlt.x = x;
-                extraFieldsAlt.y = y;
-            }
+            return _extraFields;
         }
 
-        private function update():void
+        public function set extraFields(value:ExtraFieldsGroup):void
         {
-            invalidate(VehicleMinimapEntry.INVALID_VEHICLE_LABEL);
+            _extraFields = value;
         }
 
-        private function playerStateChanged(e:PlayerStateEvent):void
+        public function get extraFieldsAlt():ExtraFieldsGroup
+        {
+            return _extraFieldsAlt;
+        }
+
+        public function set extraFieldsAlt(value:ExtraFieldsGroup):void
+        {
+            _extraFieldsAlt = value;
+        }
+
+        public function playerStateChanged(e:PlayerStateEvent):void
         {
             if (e.vehicleID == vehicleID)
             {
                 update();
             }
         }
+
+        public function update():void
+        {
+            invalidate(VehicleMinimapEntry.INVALID_VEHICLE_LABEL);
+        }
+
+        public function onEnterFrame():void
+        {
+            MinimapEntriesLabelsHelper.onEnterFrameHandler(this);
+        }
+
+        // PRIVATE
 
         private function updateVehicleIcon(playerState:VOPlayerState):void
         {
@@ -137,58 +133,7 @@ package com.xvm.battle.minimap.entries.vehicle
         {
             vehicleNameTextFieldAlt.visible = false;
             vehicleNameTextFieldClassic.visible = false;
-            updateExtraFields(playerState);
-        }
-
-        // extra fields
-
-        private function createExtraFields():void
-        {
-            var formats:Array = Config.config.minimap.labels.formats;
-            if (formats && formats.length)
-            {
-                extraFields = new ExtraFieldsGroup(UI_Minimap.instance, formats);
-            }
-            formats = Config.config.minimapAlt.labels.formats;
-            if (formats && formats.length)
-            {
-                extraFieldsAlt = new ExtraFieldsGroup(UI_Minimap.instance, formats);
-            }
-        }
-
-        private function disposeExtraFields():void
-        {
-            if (extraFields)
-            {
-                extraFields.dispose();
-                extraFields = null;
-            }
-            if (extraFieldsAlt)
-            {
-                extraFieldsAlt.dispose();
-                extraFieldsAlt = null;
-            }
-        }
-
-        private function updateExtraFields(playerState:VOPlayerState):void
-        {
-            var isAltMode:Boolean = UI_Minimap.instance.isAltMode;
-            if (extraFields)
-            {
-                extraFields.visible = !isAltMode;
-                if (!isAltMode)
-                {
-                    extraFields.update(playerState, 0);
-                }
-            }
-            if (extraFieldsAlt)
-            {
-                extraFieldsAlt.visible = isAltMode;
-                if (isAltMode)
-                {
-                    extraFieldsAlt.update(playerState, 0);
-                }
-            }
+            MinimapEntriesLabelsHelper.updateLabels(this, playerState);
         }
 
         private function hideLabels():void

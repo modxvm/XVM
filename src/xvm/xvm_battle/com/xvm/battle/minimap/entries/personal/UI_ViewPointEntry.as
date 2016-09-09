@@ -10,10 +10,11 @@ package com.xvm.battle.minimap.entries.personal
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.*;
     import com.xvm.battle.minimap.entries.*;
+    import com.xvm.extraFields.*;
     import com.xvm.battle.vo.*;
     import net.wg.data.constants.*;
 
-    public class UI_ViewPointEntry extends ViewPointEntry
+    public class UI_ViewPointEntry extends ViewPointEntry implements IMinimapVehicleEntry
     {
         private static const INVALID_UPDATE_XVM:int = InvalidationType.SYSTEM_FLAGS_BORDER << 10;
 
@@ -23,26 +24,22 @@ package com.xvm.battle.minimap.entries.personal
 
         private var _vehicleID:Number;
 
+        private var _extraFields:ExtraFieldsGroup = null;
+        private var _extraFieldsAlt:ExtraFieldsGroup = null;
+
         public function UI_ViewPointEntry()
         {
             //Logger.add("UI_ViewPointEntry");
             super();
 
-            // Workaround: Label stays at creation point some time before first move.
-            // It makes unpleasant label positioning at map center.
-            x = MinimapEntriesConstants.OFFMAP_COORDINATE;
-            y = MinimapEntriesConstants.OFFMAP_COORDINATE;
-
-            Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
-            Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
-
             _vehicleID = BattleGlobalData.playerVehicleID;
+
+            MinimapEntriesLabelsHelper.init(this);
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
-            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
+            MinimapEntriesLabelsHelper.dispose(this);
             super.onDispose();
         }
 
@@ -61,26 +58,52 @@ package com.xvm.battle.minimap.entries.personal
         {
             if (_vehicleID != vehicleID)
             {
-                Logger.add("setVehicleID: " + vehicleID);
                 _vehicleID = vehicleID;
                 invalidate(INVALID_UPDATE_XVM);
             }
         }
 
-        // PRIVATE
+        // IMinimapVehicleEntry
 
-        private function update():void
+        public function get extraFields():ExtraFieldsGroup
         {
-            invalidate(INVALID_UPDATE_XVM);
+            return _extraFields;
         }
 
-        private function playerStateChanged(e:PlayerStateEvent):void
+        public function set extraFields(value:ExtraFieldsGroup):void
+        {
+            _extraFields = value;
+        }
+
+        public function get extraFieldsAlt():ExtraFieldsGroup
+        {
+            return _extraFieldsAlt;
+        }
+
+        public function set extraFieldsAlt(value:ExtraFieldsGroup):void
+        {
+            _extraFieldsAlt = value;
+        }
+
+        public function playerStateChanged(e:PlayerStateEvent):void
         {
             if (e.vehicleID == _vehicleID)
             {
                 update();
             }
         }
+
+        public function update():void
+        {
+            invalidate(INVALID_UPDATE_XVM);
+        }
+
+        public function onEnterFrame():void
+        {
+            MinimapEntriesLabelsHelper.onEnterFrameHandler(this);
+        }
+
+        // PRIVATE
 
         private function updateVehicleIcon(playerState:VOPlayerState):void
         {
@@ -93,7 +116,7 @@ package com.xvm.battle.minimap.entries.personal
 
         private function updateLabels(playerState:VOPlayerState):void
         {
-            // TODO
+            MinimapEntriesLabelsHelper.updateLabels(this, playerState);
         }
    }
 }
