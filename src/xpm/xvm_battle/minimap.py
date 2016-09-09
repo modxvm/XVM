@@ -16,7 +16,7 @@ from gui.shared import g_eventBus, events
 from gui.battle_control import g_sessionProvider
 from gui.Scaleform.Minimap import Minimap
 from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
-from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME
+from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME, ADDITIONAL_FEATURES
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 
 from xfw import *
@@ -86,10 +86,28 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
 def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
     base(self, prevCtrlID)
     if g_minimap.active and not g_minimap.useStandardLabels:
-        if prevCtrlID and prevCtrlID != self._ArenaVehiclesPlugin__playerVehicleID and prevCtrlID in self._entries:
+        if prevCtrlID and prevCtrlID != self._getPlayerVehicleID() and prevCtrlID in self._entries:
             self._invoke(self._entries[prevCtrlID].getID(), 'setControlMode', False)
-        if self._ctrlVehicleID and self._ctrlVehicleID != self._ArenaVehiclesPlugin__playerVehicleID and self._ctrlVehicleID in self._entries:
-            self._invoke(self._entries[self._ctrlVehicleID].getID(), 'setControlMode', True)
+        if self._ctrlVehicleID:
+            if self._ctrlVehicleID != self._getPlayerVehicleID() and self._ctrlVehicleID in self._entries:
+                self._invoke(self._entries[self._ctrlVehicleID].getID(), 'setControlMode', True)
+            if self._getViewPointID():
+                self._invoke(self._getViewPointID(), 'setVehicleID', self._ctrlVehicleID)
+
+# Disable standard features if XVM minimap is active
+
+@overrideClassMethod(ADDITIONAL_FEATURES, 'isOn')
+def _ADDITIONAL_FEATURES_isOn(base, cls, mask):
+    return False if g_minimap.active and not g_minimap.useStandardLabels else base(mask)
+
+@overrideClassMethod(ADDITIONAL_FEATURES, 'isChanged')
+def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
+    return False if g_minimap.active and not g_minimap.useStandardLabels else base(mask)
+
+#@overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__createViewPointEntry')
+#def _ArenaVehiclesPlugin__createViewPointEntry(base, self, avatar):
+#    base(self, avatar)
+#    self._invoke(self._getViewPointID(), 'setVehicleID', self._ctrlVehicleID)
 
 
 #####################################################################
@@ -121,14 +139,6 @@ class Minimap(object):
 g_minimap = Minimap()
 
 
-## TODO:0.9.15.1
-##@registerEvent(Minimap, 'start')
-#def _Minimap_start(self):
-#    #log('Minimap_start')
-#    if config.get('minimap/enabled'):
-#        _init_player(self)
-#
-#
 ## TODO:0.9.15.1
 ##@overrideMethod(Minimap, '_Minimap__callEntryFlash')
 #def _Minimap__callEntryFlash(base, self, id, methodName, args=None):

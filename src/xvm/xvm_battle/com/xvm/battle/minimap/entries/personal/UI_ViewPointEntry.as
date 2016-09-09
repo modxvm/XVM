@@ -21,6 +21,8 @@ package com.xvm.battle.minimap.entries.personal
         private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 226;
         private static const DEFAULT_VEHICLE_ICON_SCALE:Number = 0.5;
 
+        private var _vehicleID:Number;
+
         public function UI_ViewPointEntry()
         {
             //Logger.add("UI_ViewPointEntry");
@@ -33,6 +35,8 @@ package com.xvm.battle.minimap.entries.personal
 
             Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
+
+            _vehicleID = BattleGlobalData.playerVehicleID;
         }
 
         override protected function onDispose():void
@@ -42,15 +46,22 @@ package com.xvm.battle.minimap.entries.personal
             super.onDispose();
         }
 
-        override protected function draw() : void
+        override protected function draw():void
         {
             super.draw();
             if (isInvalid(INVALID_UPDATE_XVM))
             {
-                var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
+                var playerState:VOPlayerState = BattleState.get(_vehicleID);
                 updateVehicleIcon(playerState);
                 updateLabels(playerState);
             }
+        }
+
+        public function setVehicleID(vehicleID:Number):void
+        {
+            Logger.add("setVehicleID: " + vehicleID);
+            _vehicleID = vehicleID;
+            invalidate(INVALID_UPDATE_XVM);
         }
 
         // PRIVATE
@@ -62,7 +73,7 @@ package com.xvm.battle.minimap.entries.personal
 
         private function playerStateChanged(e:PlayerStateEvent):void
         {
-            if (e.vehicleID == BattleGlobalData.playerVehicleID)
+            if (e.vehicleID == _vehicleID)
             {
                 update();
             }
