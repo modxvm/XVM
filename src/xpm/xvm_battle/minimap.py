@@ -82,13 +82,6 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
         #    debug('add minimap entry: ' + symbol)
     return base(self, symbol, *args, **kwargs)
 
-@overrideMethod(ArenaVehiclesPlugin, '__init__')
-def _ArenaVehiclesPlugin__init__(base, self, parent):
-    base(self, parent)
-    if g_minimap.enabled and not g_minimap.useStandardLabels:
-        self._ArenaVehiclesPlugin__showDestroyEntries = True
-        self._ArenaVehiclesPlugin__isDestroyImmediately = True
-
 @overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__switchToVehicle')
 def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
     base(self, prevCtrlID)
