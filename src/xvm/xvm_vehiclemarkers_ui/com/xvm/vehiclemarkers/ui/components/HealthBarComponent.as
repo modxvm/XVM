@@ -115,7 +115,7 @@ package com.xvm.vehiclemarkers.ui.components
                     if (cfg.damage.color == null)
                         cfg.damage.color = "{{c:system}}";
                     var color:Number = Macros.FormatNumber(cfg.damage.color, playerState);
-                    GraphicsUtil.setColorTransform(damage, color);
+                    GraphicsUtil.tint(damage, color);
                     damage.alpha = Macros.FormatNumber(cfg.damage.alpha, playerState, 100) / 100.0;
                     TweenLite.to(damage, cfg.damage.fade, { scaleX: 0, ease: Cubic.easeIn } );
                 }

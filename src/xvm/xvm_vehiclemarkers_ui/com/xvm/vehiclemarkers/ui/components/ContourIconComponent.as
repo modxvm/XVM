@@ -33,7 +33,7 @@ package com.xvm.vehiclemarkers.ui.components
                 if (cfg.amount)
                 {
                     var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", e.playerState) : cfg.color;
-                    GraphicsUtil.setColorTransform(marker.vehicleIcon, color, cfg.amount / 100.0);
+                    GraphicsUtil.tint(marker.vehicleIcon, color, cfg.amount / 100.0);
                 }
             }
             catch (ex:Error)

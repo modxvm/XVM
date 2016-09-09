@@ -107,6 +107,10 @@ package com.xvm.battle.minimap.entries.personal
 
         private function updateVehicleIcon(playerState:VOPlayerState):void
         {
+            if (_vehicleID != BattleGlobalData.playerVehicleID)
+            {
+                GraphicsUtil.colorize(arrowPlaceholder, Macros.FormatNumber("{{c:system}}", playerState));
+            }
             arrowPlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.selfIconAlpha, playerState, 100) / 100.0;
             var iconScale:Number = Macros.FormatNumber(UI_Minimap.cfg.selfIconScale, playerState, 1);
             arrowPlaceholder.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 4.0;
