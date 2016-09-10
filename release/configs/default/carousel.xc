@@ -3,6 +3,13 @@
  * Параметры карусели танков
  */
 {
+  // Definitions
+  // Шаблоны
+  "def": {
+    // Text fields shadow.
+    // Тень текстовых полей.
+    "textFieldShadow": { "enabled": true, "color": "0x000000", "alpha": 80, "blur": 2, "strength": 2, "distance": 0, "angle": 0 }
+  },
   "carousel": {
     // false - Disable customizable carousel.
     // false - Отключить настраиваемую карусель.
@@ -110,7 +117,24 @@
     "extraFields": [
       // Sign of mastery.
       // Знак мастерства.
-      { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" }
+      { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>"
+      },
+      { "x": 21, "y": 13,
+        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_winrate|#C8C8B5}}'>{{v.winrate%2d~%}}</font></b>",
+        "shadow": ${ "def.textFieldShadow" }
+      },
+      { "x": 21, "y": 27,
+        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_xte|#C8C8B5}}'>{{v.xte%s}}</font></b>",
+        "shadow": ${ "def.textFieldShadow" }
+      },
+      { "x": 158, "y": 13, "align": "right",
+        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_xtdb|#C8C8B5}}'>{{v.tdb%d}}</font></b>",
+        "shadow": ${ "def.textFieldShadow" }
+      },
+      { "x": 158, "y": 27, "align": "right",
+        "format": "<b><font face='$FieldFont' size='12' color='#C8C8B5' alpha='#B2'>{{v.battles}}</font></b>",
+        "shadow": ${ "def.textFieldShadow" }
+      }
     ]
   }
 }
