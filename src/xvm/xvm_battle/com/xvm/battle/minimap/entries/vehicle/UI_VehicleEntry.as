@@ -52,7 +52,7 @@ package com.xvm.battle.minimap.entries.vehicle
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
                     var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    var isVisible:Boolean = _isControlMode ? false : playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
+                    var isVisible:Boolean = _isControlMode || !playerState ? false : playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
                     if (visible != isVisible)
                     {
                         visible = isVisible;
