@@ -77,7 +77,8 @@ def onGUISpaceEntered(spaceID):
     if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
         cleanup()
         for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
-            update_hp(vehicleID, vData['vehicleType'].maxHealth)
+            if vData['vehicleType']:
+                update_hp(vehicleID, vData['vehicleType'].maxHealth)
 
 
 # PRE-BATTLE
