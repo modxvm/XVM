@@ -117,22 +117,37 @@
     "extraFields": [
       // Sign of mastery.
       // Знак мастерства.
-      { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>"
+      { "x": -1, "y": 10, 
+      "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>"
       },
-      { "x": 21, "y": 13,
-        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_winrate|#C8C8B5}}'>{{v.winrate%2d~%}}</font></b>",
+      // Процент побед
+	  // Winrate
+	  { "x": 1, "y": 32, 
+        "w": 13, "h": 13, "alpha": "{{v.winrate?|0}}", 
+        "src": "img://gui/maps/icons/statistic/fights.png"
+	  },
+      { "x": 13, "y": 28, 
+        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_winrate|#CFCFCF}}'>{{v.winrate%2d~%}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       },
-      { "x": 21, "y": 27,
-        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_xte|#C8C8B5}}'>{{v.xte%s}}</font></b>",
+	  // Средний урон
+	  // Average damage
+	  { "x": 158, "y": 16, "align": "right",
+        "w": 16, "h": 16, "alpha": "{{v.tdb?|0}}", 
+        "src": "img://gui/maps/icons/vehParams/damage.png"
+	  },
+      { "x": 145, "y": 14, "align": "right",
+        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_xtdb|#CFCFCF}}'>{{v.tdb%d}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       },
-      { "x": 158, "y": 13, "align": "right",
-        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_xtdb|#C8C8B5}}'>{{v.tdb%d}}</font></b>",
-        "shadow": ${ "def.textFieldShadow" }
-      },
-      { "x": 158, "y": 27, "align": "right",
-        "format": "<b><font face='$FieldFont' size='12' color='#C8C8B5' alpha='#B2'>{{v.battles}}</font></b>",
+	  // Количество боёв
+	  // Battles count
+	  { "x": 158, "y": 31, "align": "right",
+        "w": 13, "h": 13, "alpha": "{{v.battles?|0}}", 
+        "src": "img://gui/maps/icons/library/BattleResultIcon-1.png"
+	  },
+      { "x": 145, "y": 28, "align": "right",
+        "format": "<b><font face='$FieldFont' size='12' color='#CFCFCF' alpha='#F0'>{{v.battles}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       }
     ]
