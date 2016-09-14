@@ -78,6 +78,7 @@ package com.xvm.battle.playersPanel
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
         private var mopt_removeSquadIcon:Boolean;
+        private var mopt_squadIconAlpha:Number;
 
         private var _substrateHolder:MovieClip;
         private var _bottomHolder:MovieClip;
@@ -308,7 +309,8 @@ package com.xvm.battle.playersPanel
                     ui.deadBg.alpha = alpha;
 
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
-                    ui.dynamicSquad.squadIcon.alpha = mopt_removeSquadIcon ? 0 : 1;
+                    mopt_squadIconAlpha = Macros.FormatNumberGlobal(mcfg.squadIconAlpha, 100);
+                    ui.dynamicSquad.squadIcon.alpha = mopt_removeSquadIcon ? 0 : mopt_squadIconAlpha / 100.0;
 
                     createExtraFields();
                 }
@@ -379,7 +381,8 @@ package com.xvm.battle.playersPanel
                 case PLAYERS_PANEL_STATE.SHORT:
                     mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
-                    ui.dynamicSquad.squadIcon.alpha = mopt_removeSquadIcon ? 0 : 1;
+                    mopt_squadIconAlpha = Macros.FormatNumberGlobal(mcfg.squadIconAlpha, 100);
+                    ui.dynamicSquad.squadIcon.alpha = mopt_removeSquadIcon ? 0 : mopt_squadIconAlpha / 100.0;
                     ui.fragsTF.visible = false;
                     ui.vehicleTF.visible = false;
                     ui.playerNameCutTF.visible = false;

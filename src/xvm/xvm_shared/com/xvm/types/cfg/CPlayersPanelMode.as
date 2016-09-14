@@ -12,6 +12,7 @@ package com.xvm.types.cfg
         public var standardFields:Array;
         public var expandAreaWidth:*;
         public var removeSquadIcon:*;
+        public var squadIconAlpha:*;
         public var vehicleIconXOffsetLeft:*;
         public var vehicleIconXOffsetRight:*;
         public var vehicleLevelXOffsetLeft:*;

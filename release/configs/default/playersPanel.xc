@@ -262,6 +262,9 @@
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
+      // transparency of the squad icon
+      // прозрачность иконки взвода
+      "squadIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconXOffsetLeft": 0,
@@ -365,6 +368,9 @@
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
+      // transparency of the squad icon
+      // прозрачность иконки взвода
+      "squadIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconXOffsetLeft": 0,
@@ -466,6 +472,9 @@
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
+      // transparency of the squad icon
+      // прозрачность иконки взвода
+      "squadIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconXOffsetLeft": 0,
@@ -564,6 +573,9 @@
       // true - disable platoon icons
       // true - убрать отображение иконок взвода
       "removeSquadIcon": false,
+      // transparency of the squad icon
+      // прозрачность иконки взвода
+      "squadIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconXOffsetLeft": 0,

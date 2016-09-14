@@ -21,6 +21,8 @@ XVM-6.4.3-dev:
       "valign"              - vertical alignment of the text field relative to its position
       "textFormat"/"align"  - horizontal alignment of the text inside the field
       "textFormat"/"valign" - vertical alignment of the text inside the field
+  * added options in the "playersPanel" modes sections:
+      "squadIconAlpha" - transparency of the squad icon
 
 XVM-6.4.2.1:
   * fix Alt mode in the standard markers
