@@ -302,13 +302,23 @@ package com.xvm.lobby.ui.profile.components
                     var vdata:Object;
                     if (data.xvm_xte < 0)
                     {
-                        data.xvm_xte_flag |= 0x01;
+                        var setFlag:Boolean = true;
                         stat = Stat.getUserDataById(accountDBID);
                         if (stat && stat.v)
                         {
                             vdata = stat.v[data.id];
                             if (vdata && !isNaN(vdata.xte) && vdata.xte > 0)
+                            {
                                 data.xvm_xte = vdata.xte;
+                                if (vdata.b == data.battlesCount)
+                                {
+                                    setFlag = false;
+                                }
+                            }
+                        }
+                        if (setFlag)
+                        {
+                            data.xvm_xte_flag |= 0x01;
                         }
                     }
                     if (data.xvm_xtdb < 0)
