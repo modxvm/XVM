@@ -117,33 +117,47 @@
     "extraFields": [
       // Средний урон
       // Average damage
-      { "x": 1, "y": 28, "width": 18, "height": 18, "alpha": "{{v.tdb?|0}}", 
+      {
+        "enabled": true,
+        "x": 1, "y": 28, "width": 18, "height": 18, "alpha": "{{v.tdb?|0}}", 
         "src": "xvm://res/icons/carousel/damage.png"
       },
-      { "x": 17, "y": 28,
+      {
+        "enabled": true,
+        "x": 17, "y": 28,
         "format": "<b><font face='$FieldFont' size='12' color='{{v.c_xtdb|#CFCFCF}}'>{{v.tdb%d}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       },
       // Sign of mastery.
       // Знак мастерства.
-      { "x": -1, "y": 10, 
-	"format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>"
+      {
+        "enabled": true,
+        "x": -1, "y": 10, width='23' height='23',
+	"src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png"
       },
       // Количество боёв
       // Battles count
-      { "x": 158, "y": 17, "align": "right", "width": 13, "height": 13, "alpha": "{{v.battles?|0}}", 
+      {
+        "enabled": true,
+        "x": 158, "y": 17, "align": "right", "width": 13, "height": 13, "alpha": "{{v.battles?|0}}", 
         "src": "xvm://res/icons/carousel/battles.png"
       },
-      { "x": 145, "y": 14, "align": "right",
+      {
+        "enabled": true,
+        "x": 145, "y": 14, "align": "right",
         "format": "<b><font face='$FieldFont' size='12' color='#CFCFCF' alpha='#F0'>{{v.battles}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       },
       // Процент побед
       // Winrate
-      { "x": 158, "y": 32, "align": "right", "width": 13, "height": 13, "alpha": "{{v.winrate?|0}}", 
+      {
+        "enabled": true,
+        "x": 158, "y": 32, "align": "right", "width": 13, "height": 13, "alpha": "{{v.winrate?|0}}", 
         "src": "xvm://res/icons/carousel/wins.png"
       },
-      { "x": 145, "y": 28, "align": "right",
+      {
+        "enabled": true,
+        "x": 145, "y": 28, "align": "right",
         "format": "<b><font face='$FieldFont' size='12' color='{{v.c_winrate|#CFCFCF}}'>{{v.winrate%2d~%}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       }
