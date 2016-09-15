@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 28.07.2016
+    # Last update: 15.09.2016
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -367,6 +367,8 @@ _data = {
     "uk:GB86_Centurion_Action_X":            'CentAX',
     "uk:GB87_Chieftain_T95_turret":          'Chief/T95',
     "uk:GB88_T95_Chieftain_turret":          'T95/Chief',
+    "uk:GB89_Mark_I_Male":                   'MarkI',
+    "uk:GB90_Lanchester_Armored_Car":        'Lanch',
     "usa:A01_T1_Cunningham":                 'T1',
     "usa:A01_T1_Cunningham_bot":             'T1',
     "usa:A02_M2_lt":                         'M2lt',
