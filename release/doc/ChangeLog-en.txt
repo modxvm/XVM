@@ -1,4 +1,5 @@
 XVM-6.4.3:
+  * adaptation to WoT 0.9.15.2
   * labels on minimap are implemented (circles and lines are not yet)
   * added new elements in sections "battleLabels" and "battleLabelsTemplates":
       "avgDamage" - avg damage on current vehicle
