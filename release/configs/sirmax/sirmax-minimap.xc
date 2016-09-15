@@ -22,7 +22,6 @@
   },
   "minimapAlt": {
     "$ref": { "path": "minimap" },
-    "enabled": true,
     "mapBackgroundImageAlpha": 50,
     "selfIconAlpha": 50,
     "selfIconScale": 1.2,
