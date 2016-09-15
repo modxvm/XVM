@@ -6,6 +6,7 @@
 import itertools
 import simplejson
 
+import constants
 from account_helpers.AccountSettings import DEFAULT_VALUES, KEY_FILTERS, CAROUSEL_FILTER_2, FALLOUT_CAROUSEL_FILTER_2
 from account_helpers.settings_core.ServerSettingsManager import ServerSettingsManager
 from gui.shared import g_itemsCache
@@ -14,7 +15,7 @@ from gui.shared.utils.functions import makeTooltip
 from gui.shared.utils.requesters.ItemsRequester import REQ_CRITERIA
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.lobby.hangar import filter_popover
-from gui.Scaleform.daapi.view.lobby.hangar.filter_popover import FilterPopover, _SECTIONS, _SECTIONS_MAP
+from gui.Scaleform.daapi.view.lobby.hangar.filter_popover import FilterPopover, _SECTION
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_filter import BasicCriteriesGroup
 
 from xfw import *
@@ -54,20 +55,6 @@ USERPREFS_CAROUSEL_FILTERS_KEY = "tankcarousel/filters"
 DEFAULT_VALUES[KEY_FILTERS][CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
 DEFAULT_VALUES[KEY_FILTERS][FALLOUT_CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
 
-is_event = PREFS.EVENT in _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT]
-is_igr = PREFS.IGR in _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT]
-
-_SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT] = (PREFS.PREMIUM, PREFS.ELITE, PREFS.FULL_CREW, PREFS.RESERVE,)
-_SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT] = (PREFS.NORMAL, PREFS.NON_ELITE, PREFS.NO_MASTER,)
-
-if is_event:
-    _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT] += (PREFS.EVENT,)
-
-if is_igr:
-    _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT] += (PREFS.IGR,)
-
-filter_popover._POPOVER_FILERS = set(itertools.chain.from_iterable(_SECTIONS_MAP.values()))
-
 
 #####################################################################
 # handlers
@@ -98,41 +85,51 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
 #   Elite		NonElite
 #   CompleteCrew	NoMaster
 #   Reserve		[igr]
-#   [event]
 @overrideMethod(filter_popover, '_getInitialVO')
-def _filter_popover_getInitialVO(base, filters, hasRentedVehicles):
-    data = base(filters, hasRentedVehicles)
-    #debug(data)
+def _filter_popover_getInitialVO(base, filters, mapping):
+    data = base(filters, mapping)
+    #debug(data['specials'])
+    #debug(mapping)
     try:
-        premium = data['specialTypeLeft'][0]
+        premium = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.PREMIUM)]
         normal = {'label': l10n('Normal'), 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
-        elite = data['specialTypeRight'][0]
+        elite = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.ELITE)]
         non_elite = {'label': l10n('NonElite'), 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
         complete_crew = {'label': l10n('CompleteCrew'), 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
         no_master = {'label': l10n('NoMaster'), 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
         reserve = {'label': l10n('ReserveFilter'), 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
 
-        is_event = PREFS.EVENT in _SECTIONS_MAP[_SECTIONS.SPECIAL_LEFT]
-        if is_event:
-            event = data['specialTypeLeft'][1]
-
-        is_igr = PREFS.IGR in _SECTIONS_MAP[_SECTIONS.SPECIAL_RIGHT]
+        is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
         if is_igr:
-            igr = data['specialTypeRight'][1]
+            igr = data['specials'][-1]
 
-        data['specialTypeLeft'] = [premium, elite, complete_crew, reserve]
-        data['specialTypeRight'] = [normal, non_elite, no_master]
-
-        if is_event:
-            data['specialTypeLeft'] += [event]
+        data['specials'] = [
+            premium,       normal, 
+            elite,         non_elite, 
+            complete_crew, no_master,
+            reserve]
 
         if is_igr:
-            data['specialTypeRight'] += [igr]
+            data['specials'].append(igr)
 
         return data
     except Exception as ex:
         err('_filter_popover_getInitialVO() exception: ' + traceback.format_exc())
-        return base(filters, hasRentedVehicles)
+        return base(filters, mapping)
+
+@overrideMethod(FilterPopover, '_FilterPopover__generateMapping')
+def _FilterPopover__generateMapping(base, self, hasRented, hasEvent):
+    base(self, hasRented, hasEvent)
+
+    is_igr = PREFS.IGR in self._FilterPopover__mapping[_SECTION.SPECIALS]
+    self._FilterPopover__mapping[_SECTION.SPECIALS] = [
+        PREFS.PREMIUM,     PREFS.NORMAL, 
+        PREFS.ELITE,       PREFS.NON_ELITE, 
+        PREFS.FULL_CREW,   PREFS.NO_MASTER,
+        PREFS.RESERVE]
+    if is_igr:
+        self._FilterPopover__mapping[_SECTION.SPECIALS].append(PREFS.IGR)
+    self._FilterPopover__usedFilters = list(itertools.chain.from_iterable(self._FilterPopover__mapping.itervalues()))
 
 # Apply XVM filters
 @overrideMethod(BasicCriteriesGroup, 'update')

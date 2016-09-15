@@ -229,7 +229,7 @@ package com.xvm.vehiclemarkers.ui
             // stub
         }
 
-        override public function layoutParts(param1:Vector.<Boolean>):void
+        override protected function layoutParts(param1:Vector.<Boolean>):void
         {
             // stub
         }
