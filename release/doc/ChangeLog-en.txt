@@ -1,4 +1,5 @@
-XVM-6.4.3-dev:
+XVM-6.4.3:
+  * labels on minimap are implemented (circles and lines are not yet)
   * added new elements in sections "battleLabels" and "battleLabelsTemplates":
       "avgDamage" - avg damage on current vehicle
       "mainGun" - threshold necessary for achievements "High caliber"
