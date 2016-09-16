@@ -11,7 +11,7 @@ package com.xvm.battle.minimap.entries.personal
     {
         public function UI_ViewRangeCirclesEntry()
         {
-            Logger.add("UI_ViewRangeCirclesEntry");
+            //Logger.add("UI_ViewRangeCirclesEntry");
             super();
         }
     }

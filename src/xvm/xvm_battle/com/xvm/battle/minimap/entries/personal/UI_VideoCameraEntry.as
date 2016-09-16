@@ -41,10 +41,17 @@ package com.xvm.battle.minimap.entries.personal
         override protected function draw() : void
         {
             super.draw();
-            if (isInvalid(INVALID_UPDATE_XVM))
+            try
             {
-                var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
-                updateDirectionAlpha(playerState);
+                if (isInvalid(INVALID_UPDATE_XVM))
+                {
+                    var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
+                    updateDirectionAlpha(playerState);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 

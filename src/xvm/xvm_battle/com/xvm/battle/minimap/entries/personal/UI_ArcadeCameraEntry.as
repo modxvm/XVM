@@ -9,12 +9,20 @@ package com.xvm.battle.minimap.entries.personal
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.*;
+    import com.xvm.battle.minimap.entries.*;
     import com.xvm.battle.vo.*;
+    import flash.display.*;
     import net.wg.data.constants.*;
+    import net.wg.gui.battle.views.minimap.constants.*;
 
     public class UI_ArcadeCameraEntry extends ArcadeCameraEntry
     {
         private static const INVALID_UPDATE_XVM:int = InvalidationType.SYSTEM_FLAGS_BORDER << 10;
+
+        private var _useStandardLines:Boolean;
+
+        private var _cameraLine:MovieClip = null;
+        private var _cameraLineAlt:MovieClip = null;
 
         public function UI_ArcadeCameraEntry()
         {
@@ -22,23 +30,66 @@ package com.xvm.battle.minimap.entries.personal
             super();
             Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
+
+            _useStandardLines = Config.config.minimap.useStandardLines;
+            if (!_useStandardLines)
+            {
+                Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED, updateLinesScale);
+                directionLinePlaceholder.visible = false;
+                try
+                {
+                    var idx:int = getChildIndex(directionLinePlaceholder);
+                    _cameraLineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.camera);
+                    if (_cameraLineAlt != null)
+                    {
+                        addChildAt(_cameraLineAlt, idx + 1);
+                    }
+                    _cameraLine = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.camera);
+                    if (_cameraLine != null)
+                    {
+                        addChildAt(_cameraLine, idx + 1);
+                    }
+                }
+                catch (ex:Error)
+                {
+                    Logger.err(ex);
+                }
+            }
         }
 
         override protected function onDispose():void
         {
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
+            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED, updateLinesScale);
+            if (_cameraLine)
+            {
+                removeChild(_cameraLine);
+                _cameraLine = null;
+            }
+            if (_cameraLineAlt)
+            {
+                removeChild(_cameraLineAlt);
+                _cameraLineAlt = null;
+            }
             super.onDispose();
         }
 
         override protected function draw() : void
         {
             super.draw();
-            if (isInvalid(INVALID_UPDATE_XVM))
+            try
             {
-                var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
-                updateDirectionAlpha(playerState);
-                updateDirectionLineVisibility(playerState);
+                if (isInvalid(INVALID_UPDATE_XVM))
+                {
+                    var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
+                    updateDirectionAlpha(playerState);
+                    updateDirectionLineVisibility(playerState);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 
@@ -60,15 +111,35 @@ package com.xvm.battle.minimap.entries.personal
         private function updateDirectionAlpha(playerState:VOPlayerState):void
         {
             directionPlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.directionTriangleAlpha, playerState, 100) / 100.0;
-            directionLinePlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.directionLineAlpha, playerState, 100) / 100.0;
+            if (_useStandardLines)
+            {
+                directionLinePlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.directionLineAlpha, playerState, 100) / 100.0;
+            }
         }
 
         private function updateDirectionLineVisibility(playerState:VOPlayerState):void
         {
-            if (playerState.isDead)
+            var showCameraLine:Boolean = playerState.isAlive || Macros.FormatBoolean(UI_Minimap.cfg.showDirectionLineAfterDeath, playerState);
+            if (_useStandardLines)
             {
-                directionLinePlaceholder.visible = Macros.FormatBoolean(UI_Minimap.cfg.showDirectionLineAfterDeath, playerState);
+                if (playerState.isDead)
+                {
+                    directionLinePlaceholder.visible = showCameraLine;
+                }
             }
+            else
+            {
+                var isAltMode:Boolean = UI_Minimap.instance.isAltMode;
+                _cameraLine.visible = showCameraLine && !isAltMode;
+                _cameraLineAlt.visible = showCameraLine && isAltMode;
+            }
+        }
+
+        private function updateLinesScale():void
+        {
+            var idx:int = UI_Minimap.instance.currentSizeIndex;
+            _cameraLine.scaleX = _cameraLine.scaleY = _cameraLineAlt.scaleX = _cameraLineAlt.scaleY =
+                MinimapSizeConst.ENTRY_INTERNAL_CONTENT_CONTR_SCALES[idx] * MinimapSizeConst.MAP_SIZE[idx].width / MinimapSizeConst.MAP_SIZE[0].width;
         }
     }
 }

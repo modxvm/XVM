@@ -92,6 +92,11 @@ package com.xvm.battle.minimap
             return _isAltMode;
         }
 
+        public function get currentSizeIndex():int
+        {
+            return _currentSizeIndex;
+        }
+
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
@@ -128,6 +133,7 @@ package com.xvm.battle.minimap
                 }*/
 
                 alignMinimap();
+                Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED));
             }
             catch (ex:Error)
             {

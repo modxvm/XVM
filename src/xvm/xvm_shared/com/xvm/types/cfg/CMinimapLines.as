@@ -6,6 +6,8 @@ package com.xvm.types.cfg
 {
     import com.xfw.*;
 
+    CMinimapLine;
+
     public dynamic class CMinimapLines extends Object implements ICloneable
     {
         public var vehicle:Array;

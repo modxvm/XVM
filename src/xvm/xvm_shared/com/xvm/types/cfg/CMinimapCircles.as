@@ -6,6 +6,8 @@ package com.xvm.types.cfg
 {
     import com.xfw.*;
 
+    CMinimapCircle;
+
     public dynamic class CMinimapCircles extends Object implements ICloneable
     {
         public var view:Array;
