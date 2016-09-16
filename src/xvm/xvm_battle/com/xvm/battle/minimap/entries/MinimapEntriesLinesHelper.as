@@ -35,7 +35,7 @@ package com.xvm.battle.minimap.entries
                             from *= scaleFactor;
                             to   *= scaleFactor;
                         }
-                        sprite.graphics.lineStyle(lineCfg.thickness, lineCfg.color, lineCfg.alpha);
+                        sprite.graphics.lineStyle(lineCfg.thickness, lineCfg.color, lineCfg.alpha / 100.0);
                         sprite.graphics.moveTo(0, -from);
                         sprite.graphics.lineTo(0, -to);
                     }
