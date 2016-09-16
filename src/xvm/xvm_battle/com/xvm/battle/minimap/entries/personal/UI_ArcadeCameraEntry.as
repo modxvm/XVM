@@ -21,8 +21,8 @@ package com.xvm.battle.minimap.entries.personal
 
         private var _useStandardLines:Boolean;
 
-        private var _cameraLine:MovieClip = null;
-        private var _cameraLineAlt:MovieClip = null;
+        private var _cameraLine:Sprite = null;
+        private var _cameraLineAlt:Sprite = null;
 
         public function UI_ArcadeCameraEntry()
         {
@@ -38,17 +38,11 @@ package com.xvm.battle.minimap.entries.personal
                 directionLinePlaceholder.visible = false;
                 try
                 {
-                    var idx:int = getChildIndex(directionLinePlaceholder);
-                    _cameraLineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.camera);
-                    if (_cameraLineAlt != null)
-                    {
-                        addChildAt(_cameraLineAlt, idx + 1);
-                    }
                     _cameraLine = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.camera);
-                    if (_cameraLine != null)
-                    {
-                        addChildAt(_cameraLine, idx + 1);
-                    }
+                    _cameraLineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.camera);
+                    var idx:int = getChildIndex(directionLinePlaceholder);
+                    addChildAt(_cameraLine, idx + 1);
+                    addChildAt(_cameraLineAlt, idx + 2);
                 }
                 catch (ex:Error)
                 {

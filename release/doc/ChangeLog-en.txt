@@ -1,4 +1,5 @@
 XVM-6.4.4-dev:
+  * lines on minimap are implemented (circles are not yet)
 
 XVM-6.4.3:
   * adaptation to WoT 0.9.15.2

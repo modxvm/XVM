@@ -14,41 +14,34 @@ package com.xvm.battle.minimap.entries
 
     public class MinimapEntriesLinesHelper
     {
-        public static function createLines(linesCfg:Array, angle:Number = 0):MovieClip
+        public static function createLines(linesCfg:Array):Sprite
         {
             var scaleFactor:Number = MinimapSizeConst.MAP_SIZE[0].width / BattleGlobalData.mapSize;
-            var mc:MovieClip = new MovieClip();
-            var len:int = linesCfg.length;
-            for (var i:int = 0; i < len; ++i)
+            var sprite:Sprite = new Sprite();
+            if (linesCfg)
             {
-                var lineCfg:CMinimapLine = CMinimapLine.parse(linesCfg[i]);
-                if (lineCfg.enabled)
+                var len:int = linesCfg.length;
+                for (var i:int = 0; i < len; ++i)
                 {
-                    var from:Point = horAnglePoint(lineCfg.from, angle);
-                    var to:Point = horAnglePoint(lineCfg.to, angle);
-
-                    // Translate absolute minimap distance in points to game meters
-                    if (lineCfg.inmeters)
+                    var lineCfg:CMinimapLine = CMinimapLine.parse(linesCfg[i]);
+                    if (lineCfg.enabled)
                     {
-                        from.y *= scaleFactor;
-                        to.y   *= scaleFactor;
-                        from.x *= scaleFactor;
-                        to.x   *= scaleFactor;
+                        var from:Number = lineCfg.from;
+                        var to:Number = lineCfg.to;
+
+                        // Translate absolute minimap distance in points to game meters
+                        if (lineCfg.inmeters)
+                        {
+                            from *= scaleFactor;
+                            to   *= scaleFactor;
+                        }
+                        sprite.graphics.lineStyle(lineCfg.thickness, lineCfg.color, lineCfg.alpha);
+                        sprite.graphics.moveTo(0, -from);
+                        sprite.graphics.lineTo(0, -to);
                     }
-                    mc.graphics.lineStyle(lineCfg.thickness, lineCfg.color, lineCfg.alpha);
-                    mc.graphics.moveTo(from.x, -from.y);
-                    mc.graphics.lineTo(to.x, -to.y);
                 }
             }
-            return mc;
-        }
-
-        // PRIVATE
-
-        private static function horAnglePoint(R:Number, angle:Number):Point
-        {
-            angle = angle * (Math.PI / 180);
-            return new Point(R * Math.sin(angle), R * Math.cos(angle));
+            return sprite;
         }
     }
 }
