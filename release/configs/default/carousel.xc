@@ -132,8 +132,8 @@
       // Знак мастерства.
       {
         "enabled": true,
-        "x": -1, "y": 10, width='23' height='23',
-	"src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png"
+        "x": -1, "y": 10, "width": 23, "height": 23,
+        "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png"
       },
       // Количество боёв
       // Battles count
