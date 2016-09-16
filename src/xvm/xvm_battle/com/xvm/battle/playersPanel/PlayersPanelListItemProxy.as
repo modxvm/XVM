@@ -78,7 +78,6 @@ package com.xvm.battle.playersPanel
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
         private var mopt_removeSquadIcon:Boolean;
-        private var mopt_squadIconAlpha:Number;
 
         private var _substrateHolder:MovieClip;
         private var _bottomHolder:MovieClip;
@@ -309,8 +308,6 @@ package com.xvm.battle.playersPanel
                     ui.deadBg.alpha = alpha;
 
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
-                    mopt_squadIconAlpha = Macros.FormatNumberGlobal(mcfg.squadIconAlpha, 100);
-                    ui.dynamicSquad.squadIcon.alpha = mopt_removeSquadIcon ? 0 : mopt_squadIconAlpha / 100.0;
 
                     createExtraFields();
                 }
@@ -321,6 +318,7 @@ package com.xvm.battle.playersPanel
                     ui.deadBg.alpha = DEFAULT_DEADBG_ALPHA;
                     ui.fragsTF.width = DEFAULT_FRAGS_WIDTH;
                     ui.vehicleIcon.width = DEFAULT_VEHICLE_WIDTH;
+                    ui.dynamicSquad.squadIcon.alpha = 1;
                     ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
                 }
 
@@ -381,8 +379,6 @@ package com.xvm.battle.playersPanel
                 case PLAYERS_PANEL_STATE.SHORT:
                     mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
-                    mopt_squadIconAlpha = Macros.FormatNumberGlobal(mcfg.squadIconAlpha, 100);
-                    ui.dynamicSquad.squadIcon.alpha = mopt_removeSquadIcon ? 0 : mopt_squadIconAlpha / 100.0;
                     ui.fragsTF.visible = false;
                     ui.vehicleTF.visible = false;
                     ui.playerNameCutTF.visible = false;
@@ -455,6 +451,7 @@ package com.xvm.battle.playersPanel
                     updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, isLeftPanel ? mcfg.vehicleShadowLeft : mcfg.vehicleShadowRight);
                 }
                 updateVehicleLevel();
+                updateSquadIcon();
             }
         }
 
@@ -486,6 +483,18 @@ package com.xvm.battle.playersPanel
             var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
             ui.vehicleLevel.transform.colorTransform = colorScheme.colorTransform;
             ui.vehicleLevel.alpha *= Macros.FormatNumber(mcfg.vehicleLevelAlpha, currentPlayerState, 100) / 100.0;
+        }
+
+        private function updateSquadIcon():void
+        {
+            if (mopt_removeSquadIcon)
+            {
+                ui.dynamicSquad.squadIcon.alpha = 0;
+            }
+            else
+            {
+                ui.dynamicSquad.squadIcon.alpha = Macros.FormatNumber(mcfg.squadIconAlpha, currentPlayerState, 100) / 100.0;
+            }
         }
 
         // update positions

@@ -91,6 +91,7 @@
     "nickMaxWidth": 80,
     //"standardFields": [ "nick", "vehicle", "frags" ]
     //"removeSquadIcon": true,
+    //"squadIconAlpha": "{{alive?60|30}}",
     "vehicleIconXOffsetLeft": -15,
     "vehicleIconXOffsetRight": -15,
     "vehicleLevelXOffsetLeft": -15,
