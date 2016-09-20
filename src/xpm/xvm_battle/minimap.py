@@ -4,6 +4,7 @@
 # imports
 
 import Math
+import math
 import traceback
 
 import BigWorld
@@ -153,6 +154,16 @@ def _g_settingsCore_getSetting(base, name):
                     value = _DEFAULTS[name]
         #debug('getSetting: {} = {}'.format(name, value))
     return value
+
+@overrideMethod(PersonalEntriesPlugin, 'start')
+def _PersonalEntriesPlugin_start(base, self):
+    base(self)
+    if g_minimap.active and not g_minimap.useStandardLines:
+        if not self._PersonalEntriesPlugin__yawLimits:
+            vInfo = g_sessionProvider.getArenaDP().getVehicleInfo()
+            yawLimits = vInfo.vehicleType.turretYawLimits
+            if yawLimits:
+                self._PersonalEntriesPlugin__yawLimits = (math.degrees(yawLimits[0]), math.degrees(yawLimits[1]))
 
 @overrideMethod(PersonalEntriesPlugin, 'setSettings')
 def _PersonalEntriesPlugin_setSettings(base, self):
