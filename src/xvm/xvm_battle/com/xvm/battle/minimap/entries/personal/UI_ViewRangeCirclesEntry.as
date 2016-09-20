@@ -7,22 +7,23 @@ package com.xvm.battle.minimap.entries.personal
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.events.*;
+    import com.xvm.battle.minimap.*;
     import com.xvm.battle.minimap.entries.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
 
     public class UI_ViewRangeCirclesEntry extends ViewRangeCirclesEntry
     {
+        public static var destroyedCrew:Object;
+        public static var surveyingDeviceDestroyed:Boolean;
+        public static var stereoscope_exists:Boolean;
+        public static var stereoscope_enabled:Boolean;
+
         private var _useStandardCircles:Boolean;
 
-        private var circles:Circles;
-        private var circlesAlt:Circles;
-
-        private var destroyedCrew:Object;
-        private var surveyingDeviceDestroyed:Boolean;
-        private var stereoscope_exists:Boolean;
-        private var stereoscope_enabled:Boolean;
-        private var moving_state:int;
+        private var _circles:Circles;
+        private var _circlesAlt:Circles;
 
         public function UI_ViewRangeCirclesEntry()
         {
@@ -32,25 +33,44 @@ package com.xvm.battle.minimap.entries.personal
             _useStandardCircles = Config.config.minimap.useStandardCircles;
             if (!_useStandardCircles)
             {
-                Xvm.addEventListener(BattleEvents.MOVING_STATE_CHANGED, onMovingStateChanged);
-                Xvm.addEventListener(BattleEvents.MODULE_DESTROYED, onModuleDestroyed);
-                Xvm.addEventListener(BattleEvents.MODULE_REPAIRED, onModuleRepaired);
-                Xvm.addEventListener(BattleEvents.STEREOSCOPE_TOGGLED, onStereoscopeToggled);
+                Xfw.addCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
+                Xfw.addCommandListener(XvmCommands.AS_MODULE_STATE_CHANGED, onModuleStateChanged);
+                Xfw.addCommandListener(XvmCommands.AS_STEREOSCOPE_TOGGLED, onStereoscopeToggled);
+                Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, onMinimapAltModeChanged);
 
                 destroyedCrew = {};
                 surveyingDeviceDestroyed = false;
-                moving_state = MinimapEntriesConstants.MOVING_STATE_STOPPED;
                 stereoscope_exists = stereoscope_enabled = BattleGlobalData.minimapCirclesData.view_stereoscope == true;
 
-                circles = new Circles(Config.config.minimap.circles);
+                _circles = new Circles(Config.config.minimap.circles);
                 //circles.visible = false;
-                addChild(circles);
-                circlesAlt = new Circles(Config.config.minimapAlt.circles);
-                circlesAlt.visible = false;
-                addChild(circlesAlt);
-
-                onViewRangeChanged();
+                addChild(_circles);
+                _circlesAlt = new Circles(Config.config.minimapAlt.circles);
+                _circlesAlt.visible = false;
+                addChild(_circlesAlt);
             }
+        }
+
+        override public function dispose():void
+        {
+            Xfw.removeCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
+            Xfw.removeCommandListener(XvmCommands.AS_MODULE_STATE_CHANGED, onModuleStateChanged);
+            Xfw.removeCommandListener(XvmCommands.AS_STEREOSCOPE_TOGGLED, onStereoscopeToggled);
+            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, onMinimapAltModeChanged);
+
+            if (_circles)
+            {
+                _circles.dispose();
+                _circles = null;
+            }
+
+            if (_circlesAlt)
+            {
+                _circlesAlt.dispose();
+                _circlesAlt = null;
+            }
+
+            super.dispose();
         }
 
         override public function as_addDrawRange(param1:Number, param2:Number, param3:Number):void
@@ -77,53 +97,42 @@ package com.xvm.battle.minimap.entries.personal
             }
         }
 
-        override public function dispose():void
-        {
-            Xvm.removeEventListener(BattleEvents.MOVING_STATE_CHANGED, onMovingStateChanged);
-            Xvm.removeEventListener(BattleEvents.MODULE_DESTROYED, onModuleDestroyed);
-            Xvm.removeEventListener(BattleEvents.MODULE_REPAIRED, onModuleRepaired);
-            Xvm.removeEventListener(BattleEvents.STEREOSCOPE_TOGGLED, onStereoscopeToggled);
-
-            if (circles)
-            {
-                circles.dispose();
-                circles = null;
-            }
-
-            if (circlesAlt)
-            {
-                circlesAlt.dispose();
-                circlesAlt = null;
-            }
-
-            super.dispose();
-        }
-
         // PRIVATE
 
-        private function onModuleDestroyed(event):void
+        private function onMinimapAltModeChanged():void
         {
-            //Logger.add("onModuleDestroyed: " + event.value);
-            Logger.addObject(event);
+            var isAltMode:Boolean = UI_Minimap.instance.isAltMode;
+            _circles.visible = !isAltMode;
+            _circlesAlt.visible = isAltMode;
+        }
 
-            switch (event.value)
+        private function onMovingStateChanged(isMoving:Boolean):void
+        {
+            //Logger.add("onMovingStateChanged: " + isMoving);
+            var moving_state:int = isMoving ? MinimapEntriesConstants.MOVING_STATE_MOVING : MinimapEntriesConstants.MOVING_STATE_STOPPED;
+            _circles.updateCirclesMovingState(moving_state);
+            _circlesAlt.updateCirclesMovingState(moving_state);
+        }
+
+        private function onModuleStateChanged(deviceName:String, deviceState:String, realState:String):void
+        {
+            Logger.add("onModuleStateChanged: " + arguments);
+            /*switch (event.value)
             {
                 case "surveyingDevice":
                     surveyingDeviceDestroyed = true;
-                    onViewRangeChanged();
+                    _circles.update();
+                    _circlesAlt.update();
                     break;
 
                 case "commander":
                 case "radioman1":
                 case "radioman2":
                     destroyedCrew[event.value] = true;
-                    onViewRangeChanged();
+                    _circles.update();
+                    _circlesAlt.update();
                     break;
             }
-        }
-
-        private function onModuleRepaired(event):void
-        {
             Logger.addObject(event);
             //Logger.add("onModuleRepaired: " + event.value);
 
@@ -131,151 +140,32 @@ package com.xvm.battle.minimap.entries.personal
             {
                 case "surveyingDevice":
                     surveyingDeviceDestroyed = false;
-                    onViewRangeChanged();
+                    _circles.update();
+                    _circlesAlt.update();
                     break;
 
                 case "commander":
                 case "radioman1":
                 case "radioman2":
                     delete destroyedCrew[event.value];
-                    onViewRangeChanged();
+                    _circles.update();
+                    _circlesAlt.update();
                     break;
-            }
+            }*/
         }
 
-        private function onMovingStateChanged(event):void
+        private function onStereoscopeToggled(isOn:int):void
         {
-            Logger.addObject(event);
-            //Logger.add("onMovingStateChanged: " + event.value);
-            //moving_state = event.value ? MinimapEntriesConstants.MOVING_STATE_MOVING : MinimapEntriesConstants.MOVING_STATE_STOPPED;
-            //updateCirclesMovingState(staticCircles);
-            //updateCirclesMovingState(dynamicCircles);
-        }
-
-        private function onStereoscopeToggled(event):void
-        {
-            Logger.addObject(event);
-            //Logger.add("onStereoscopeToggled: " + event.value);
+            //Logger.add("onStereoscopeToggled: " + isOn);
 
             // workaround for stereoscope
-            //if (stereoscope_exists == false && event.value == true)
-                //stereoscope_exists = true;
-//
-            //stereoscope_enabled = event.value;
-            //onViewRangeChanged();
-        }
+            if (!stereoscope_exists)
+                stereoscope_exists = true;
 
-        // http://forum.worldoftanks.ru/index.php?/topic/1047590-/
-        private function onViewRangeChanged():void
-        {
-            //var cfg:Object = Minimap.config.circles;
-//
-            //// Calculations
-            //var ci:Object = Config.minimapCirclesData;
-//
-            //var view_distance_vehicle:Number = ci.view_distance_vehicle;
-            //var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
-            //var vent:Number = ci.view_ventilation ? 5 : 0;
-            //var cons:Number = ci.view_consumable ? 10 : 0;
-//
-            //var K:Number = ci.base_commander_skill + bia + vent + cons;
-            //var Kcom:Number = K / 10.0;
-            //var Kee = ci.view_commander_eagleEye <= 0 ? 0 : ci.view_commander_eagleEye + bia + vent + cons;
-            //var Krf = ci.view_radioman_finder <= 0 ? 0 : ci.view_radioman_finder + bia + vent + cons + (ci.base_radioman_skill > 0 ? Kcom : 0);
-            ////var M = ci.view_camouflage <= 0 ? 0 : ci.view_camouflage + bia + vent + cons;
-//
-            //if (destroyedCrew["commander"])
-                //K = 0;
-            //if (destroyedCrew["radioman1"])
-                //Krf = 0;
-            //// TODO radioman2, gunner1, gunner2
-//
-            //var Kn1 = surveyingDeviceDestroyed ? 10 : 1;
-            //var Kn2 = surveyingDeviceDestroyed ? 0.5 : 1;
-//
-            //// Calculate final values
-            //var view_distance:Number = view_distance_vehicle * (K * 0.0043 + 0.57) * (1 + Kn1 * 0.0002 * Kee) * (1 + 0.0003 * Krf) * Kn2;
-            //var stereoscope_distance:Number = view_distance * 1.25;
-            //if (ci.view_coated_optics == true)
-                //view_distance = view_distance * 1.1
-//
-            ////Logger.addObject(Config.minimapCirclesData, 2);
-            ////Logger.add("K=" + K + " view_distance=" + view_distance);
-//
-            //// Drawing
-//
-            //// view
-            //var len:Number = dynamicCircles.length;
-            //for (var i:Number = 0; i < len; ++i)
-            //{
-                //var dc = dynamicCircles[i];
-                ////Logger.addObject(dc);
-//
-                //var radius:Number = 0;
-                //switch (dc.distance)
-                //{
-                    //case "dynamic":
-                        //radius = (stereoscope_exists && stereoscope_enabled) ? stereoscope_distance : view_distance;
-                        //break;
-                    //case "motion":
-                        //radius = view_distance;
-                        //break;
-                    //case "standing":
-                        //if (stereoscope_exists)
-                            //radius = stereoscope_distance;
-                        //break;
-                    //case "blindarea":
-                        //radius = (stereoscope_exists && stereoscope_enabled) ? stereoscope_distance : view_distance;
-                        //if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
-                        //break;
-                    //case "blindarea_motion":
-                        //radius = view_distance;
-                        //if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
-                        //break;
-                    //case "blindarea_standing":
-                        //if (stereoscope_exists)
-                        //{
-                            //radius = stereoscope_distance;
-                            //if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
-                        //}
-                        //break;
-                //}
-//
-                //if (radius <= 0)
-                    //continue;
-//
-                //radius *= scaleFactor;
-                //if (dc.scale != null)
-                    //radius *= dc.scale;
-//
-                //var mc:MovieClip = dc.$shape;
-                //if (mc == null || Math.abs(dc.$radius - radius) > 0.1)
-                //{
-                    //var visible:Boolean = true;
-                    //if (mc != null)
-                    //{
-                        //if (!mc._visible)
-                            //visible = false;
-                        //mc.removeMovieClip();
-                    //}
-                    //dc.$shape = drawCircle(radius, dc.thickness, dc.color, dc.alpha);
-                    //dc.$shape._visible = visible;
-                    //dc.$radius = radius;
-                //}
-            //}
-        }
+            stereoscope_enabled = isOn != 0;
 
-        private function updateCirclesMovingState(circles:Array):void
-        {
-            //var len:Number = circles.length;
-            //for (var i:Number = 0; i < len; ++i)
-            //{
-                //var c = circles[i];
-                //var mc:MovieClip = c.$shape;
-                ////Logger.add(c.state + " " + moving_state + " " + (c.state & moving_state));
-                //if (mc != null)
-                    //mc._visible = (c.state & moving_state != 0);
-            //}
+            _circles.update();
+            _circlesAlt.update();
         }
     }
 }
@@ -286,64 +176,72 @@ import com.xvm.battle.*;
 import com.xvm.battle.vo.*;
 import com.xvm.types.cfg.*;
 import com.xvm.battle.minimap.entries.*;
+import com.xvm.battle.minimap.entries.personal.*;
 import flash.display.*;
 import net.wg.infrastructure.interfaces.entity.*;
+import net.wg.gui.battle.views.minimap.constants.*;
 
 class Circles extends Sprite implements IDisposable
 {
-    public var staticCircles:Vector.<CMinimapCircle>;
-    public var dynamicCircles:Vector.<CMinimapCircle>;
-    public var artilleryCircle:Shape = null;
-    public var shellRangeCircle:Shape = null;
+    private var cfg:CMinimapCircles;
+
     private var _mapSizeCoeff:Number = 0;
-    import net.wg.gui.battle.views.minimap.constants.*;
+
+    private var _staticCircles:Vector.<CMinimapCircle>;
+    private var _dynamicCircles:Vector.<CMinimapCircle>;
+    private var _artilleryCircle:Shape = null;
+    private var _shellRangeCircle:Shape = null;
 
     public function Circles(cfg:CMinimapCircles)
     {
+        this.cfg = cfg;
+
         var radius:Number;
 
         _mapSizeCoeff = MinimapSizeConst.MAP_SIZE[0].width / BattleGlobalData.mapSize;
 
-        staticCircles = defineStaticCirclesCfg(cfg);
-        var len:int = staticCircles.length;
+        _staticCircles = _defineStaticCirclesCfg(cfg);
+        var len:int = _staticCircles.length;
         for (var i:int = 0; i < len; ++i)
         {
-            var circleCfg:CMinimapCircle = staticCircles[i];
+            var circleCfg:CMinimapCircle = _staticCircles[i];
             radius = circleCfg.distance;
             if (circleCfg.scale)
                 radius *= circleCfg.scale;
             circleCfg.$radius = radius;
-            circleCfg.$shape = drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
+            circleCfg.$shape = _drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
             addChild(circleCfg.$shape);
         }
 
         //Logger.addObject(cfg, 2);
         //Logger.addObject(ci);
 
-        dynamicCircles = defineDynamicCirclesCfg(cfg);
+        _dynamicCircles = _defineDynamicCirclesCfg(cfg);
 
-        artilleryCircle = null;
+        _artilleryCircle = null;
         if (cfg.artillery.enabled)
         {
             radius = BattleGlobalData.minimapCirclesData.artillery_range;
-            Logger.add("arty: " + radius);
+            //Logger.add("arty: " + radius);
             if (radius > 0)
             {
-                artilleryCircle = drawCircle(radius, cfg.artillery.thickness, cfg.artillery.color, cfg.artillery.alpha);
-                addChild(artilleryCircle);
+                _artilleryCircle = _drawCircle(radius, cfg.artillery.thickness, cfg.artillery.color, cfg.artillery.alpha);
+                addChild(_artilleryCircle);
             }
         }
 
         if (cfg.shell.enabled)
         {
             radius = BattleGlobalData.minimapCirclesData.shell_range;
-            Logger.add("shell: " + radius);
+            //Logger.add("shell: " + radius);
             if (radius > 0)
             {
-                shellRangeCircle = drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
-                addChild(shellRangeCircle);
+                _shellRangeCircle = _drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
+                addChild(_shellRangeCircle);
             }
         }
+
+        update();
     }
 
     public function dispose():void
@@ -351,9 +249,110 @@ class Circles extends Sprite implements IDisposable
         removeChildren();
     }
 
+    // http://forum.worldoftanks.ru/index.php?/topic/1047590-/
+    public function update():void
+    {
+        // Calculations
+        var minimapCirclesData:VOMinimapCirclesData = BattleGlobalData.minimapCirclesData;
+
+        var view_distance_vehicle:Number = minimapCirclesData.view_distance_vehicle;
+        var bia:Number = minimapCirclesData.view_brothers_in_arms ? 5 : 0;
+        var vent:Number = minimapCirclesData.view_ventilation ? 5 : 0;
+        var cons:Number = minimapCirclesData.view_consumable ? 10 : 0;
+
+        var K:Number = minimapCirclesData.base_commander_skill + bia + vent + cons;
+        var Kcom:Number = K / 10.0;
+        var Kee:Number = minimapCirclesData.view_commander_eagleEye <= 0 ? 0 : minimapCirclesData.view_commander_eagleEye + bia + vent + cons;
+        var Krf:Number = minimapCirclesData.view_radioman_finder <= 0 ? 0 : minimapCirclesData.view_radioman_finder + bia + vent + cons + (minimapCirclesData.base_radioman_skill > 0 ? Kcom : 0);
+        //var M:Number = minimapCirclesData.view_camouflage <= 0 ? 0 : minimapCirclesData.view_camouflage + bia + vent + cons;
+
+        if (UI_ViewRangeCirclesEntry.destroyedCrew["commander"])
+            K = 0;
+        if (UI_ViewRangeCirclesEntry.destroyedCrew["radioman1"])
+            Krf = 0;
+        // TODO radioman2, gunner1, gunner2
+
+        var Kn1:Number = UI_ViewRangeCirclesEntry.surveyingDeviceDestroyed ? 10 : 1;
+        var Kn2:Number = UI_ViewRangeCirclesEntry.surveyingDeviceDestroyed ? 0.5 : 1;
+
+        // Calculate final values
+        var view_distance:Number = view_distance_vehicle * (K * 0.0043 + 0.57) * (1 + Kn1 * 0.0002 * Kee) * (1 + 0.0003 * Krf) * Kn2;
+        var stereoscope_distance:Number = view_distance * 1.25;
+        if (minimapCirclesData.view_coated_optics == true)
+            view_distance = view_distance * 1.1
+
+        // Drawing
+
+        // view
+        var len:int = _dynamicCircles.length;
+        for (var i:int = 0; i < len; ++i)
+        {
+            var dc:CMinimapCircle = _dynamicCircles[i];
+            //Logger.addObject(dc);
+
+            var radius:Number = 0;
+            switch (dc.distance)
+            {
+                case "dynamic":
+                    radius = (UI_ViewRangeCirclesEntry.stereoscope_exists && UI_ViewRangeCirclesEntry.stereoscope_enabled) ? stereoscope_distance : view_distance;
+                    break;
+                case "motion":
+                    radius = view_distance;
+                    break;
+                case "standing":
+                    if (UI_ViewRangeCirclesEntry.stereoscope_exists)
+                        radius = stereoscope_distance;
+                    break;
+                case "blindarea":
+                    radius = (UI_ViewRangeCirclesEntry.stereoscope_exists && UI_ViewRangeCirclesEntry.stereoscope_enabled) ? stereoscope_distance : view_distance;
+                    if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
+                    break;
+                case "blindarea_motion":
+                    radius = view_distance;
+                    if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
+                    break;
+                case "blindarea_standing":
+                    if (UI_ViewRangeCirclesEntry.stereoscope_exists)
+                    {
+                        radius = stereoscope_distance;
+                        if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
+                    }
+                    break;
+            }
+
+            if (radius <= 0)
+                continue;
+
+            if (dc.scale != null)
+                radius *= dc.scale;
+
+            var shape:Shape = dc.$shape;
+            if (shape == null || Math.abs(dc.$radius - radius) > 0.1)
+            {
+                var visible:Boolean = true;
+                if (shape != null)
+                {
+                    visible = shape.visible;
+                    removeChild(shape);
+                    shape = null;
+                }
+                dc.$radius = radius;
+                dc.$shape = _drawCircle(radius, dc.thickness, dc.color, dc.alpha);
+                dc.$shape.visible = visible;
+                addChild(dc.$shape);
+            }
+        }
+    }
+
+    public function updateCirclesMovingState(moving_state:int):void
+    {
+        _updateCirclesMovingState(_staticCircles, moving_state);
+        _updateCirclesMovingState(_dynamicCircles, moving_state);
+    }
+
     // PRIVATE
 
-    private function defineStaticCirclesCfg(cfg:CMinimapCircles):Vector.<CMinimapCircle>
+    private function _defineStaticCirclesCfg(cfg:CMinimapCircles):Vector.<CMinimapCircle>
     {
         var res:Vector.<CMinimapCircle> = new Vector.<CMinimapCircle>();
 
@@ -391,7 +390,7 @@ class Circles extends Sprite implements IDisposable
         return res;
     }
 
-    private function defineDynamicCirclesCfg(cfg:CMinimapCircles):Vector.<CMinimapCircle>
+    private function _defineDynamicCirclesCfg(cfg:CMinimapCircles):Vector.<CMinimapCircle>
     {
         var res:Vector.<CMinimapCircle> = new Vector.<CMinimapCircle>();
 
@@ -411,7 +410,7 @@ class Circles extends Sprite implements IDisposable
         return res;
     }
 
-    private function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number):Shape
+    private function _drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number):Shape
     {
         radius *= _mapSizeCoeff;
         var circle:Shape = new Shape();
@@ -420,5 +419,19 @@ class Circles extends Sprite implements IDisposable
         g.drawCircle(0, 0, radius);
         g.endFill();
         return circle;
+    }
+
+    private function _updateCirclesMovingState(circles:Vector.<CMinimapCircle>, moving_state:int):void
+    {
+        var len:int = circles.length;
+        for (var i:int = 0; i < len; ++i)
+        {
+            var cfg:CMinimapCircle = circles[i];
+            var shape:Shape = cfg.$shape;
+            if (shape)
+            {
+                shape.visible = (int(cfg.state) & moving_state) != 0;
+            }
+        }
     }
 }

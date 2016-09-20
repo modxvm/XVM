@@ -18,6 +18,7 @@ from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 from gui.battle_control import g_sessionProvider, avatar_getter
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.battle_control.battle_arena_ctrl import BattleArenaController
+from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
@@ -71,6 +72,13 @@ def _PlayerAvatar_onBecomePlayer(base, self):
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived += g_battle.onVehicleFeedbackReceived
+        ctrl = g_sessionProvider.shared.vehicleState
+        if ctrl:
+            ctrl.onVehicleStateUpdated += g_battle.onVehicleStateUpdated
+        ctrl = g_sessionProvider.shared.optionalDevices
+        if ctrl:
+            ctrl.onOptionalDeviceAdded += g_battle.onOptionalDeviceAdded
+            ctrl.onOptionalDeviceUpdated += g_battle.onOptionalDeviceUpdated
         g_battle.onStartBattle()
     except Exception, ex:
         err(traceback.format_exc())
@@ -88,6 +96,13 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived -= g_battle.onVehicleFeedbackReceived
+        ctrl = g_sessionProvider.shared.vehicleState
+        if ctrl:
+            ctrl.onVehicleStateUpdated -= g_battle.onVehicleStateUpdated
+        ctrl = g_sessionProvider.shared.optionalDevices
+        if ctrl:
+            ctrl.onOptionalDeviceAdded -= g_battle.onOptionalDeviceAdded
+            ctrl.onOptionalDeviceUpdated -= g_battle.onOptionalDeviceUpdated
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
@@ -176,6 +191,7 @@ class Battle(object):
     updateTargetCallbackID = None
     targetVehicleID = None
     xvm_battle_swf_initialized = False
+    is_moving = False
 
     def onAppInitialized(self, event):
         self.xvm_battle_swf_initialized = False
@@ -225,6 +241,24 @@ class Battle(object):
             self.updateTargetCallbackID = BigWorld.callback(0, self.updateTarget)
         #else:
         #    debug('onVehicleFeedbackReceived: {} {} {} '.format(eventID, vehicleID, value))
+
+    def onVehicleStateUpdated(self, state, value):
+        if state == VEHICLE_VIEW_STATE.SPEED:
+            is_moving = value != 0
+            if is_moving != self.is_moving:
+                self.is_moving = is_moving
+                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_MOVING_STATE_CHANGED, is_moving)
+        elif state == VEHICLE_VIEW_STATE.DEVICES:
+            (deviceName, deviceState, realState) = value
+            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_MODULE_STATE_CHANGED, deviceName, deviceState, realState)
+
+    def onOptionalDeviceAdded(self, intCD, descriptor, isOn):
+        if intCD == INT_CD.STEREOSCOPE:
+            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_STEREOSCOPE_TOGGLED, isOn)
+
+    def onOptionalDeviceUpdated(self, intCD, isOn):
+        if intCD == INT_CD.STEREOSCOPE:
+            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_STEREOSCOPE_TOGGLED, isOn)
 
     def onVehicleHealthChanged(self, vehicleID, newHealth, attackerID, attackReasonID):
         inv = INV.CUR_HEALTH

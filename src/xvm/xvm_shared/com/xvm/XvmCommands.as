@@ -17,5 +17,8 @@ package com.xvm
         public static const AS_ON_UPDATE_STAGE:String = "xvm.as.on_update_stage";
         public static const AS_UPDATE_CURRENT_VEHICLE:String = "xvm.as.update_current_vehicle";
         public static const AS_ON_CLAN_ICON_LOADED:String = "xvm.as.on_clan_icon_loaded";
+        public static const AS_MOVING_STATE_CHANGED:String = "xvm.as.as_moving_state_changed";
+        public static const AS_MODULE_STATE_CHANGED:String = "xvm.as.as_module_state_changed";
+        public static const AS_STEREOSCOPE_TOGGLED:String = "xvm.as.as_stereoscope_toggled";
     }
 }

@@ -19,6 +19,9 @@ class XVM_BATTLE_COMMAND(object):
     AS_SNIPER_CAMERA = "xvm.as.sniper_camera"
     AS_AIM_OFFSET_UPDATE = "xvm.as.aim_offset_update"
     AS_ON_TARGET_CHANGED = "xvm.as.on_target_changed"
+    AS_MOVING_STATE_CHANGED = "xvm.as.as_moving_state_changed"
+    AS_MODULE_STATE_CHANGED = "xvm.as.as_module_state_changed"
+    AS_STEREOSCOPE_TOGGLED = "xvm.as.as_stereoscope_toggled"
 
 # Markers only commands
 
@@ -58,3 +61,6 @@ class SPOTTED_STATUS(object):
     SPOTTED = 'spotted'
     LOST = 'lost'
     DEAD = 'dead'
+
+class INT_CD(object):
+    STEREOSCOPE = 1273

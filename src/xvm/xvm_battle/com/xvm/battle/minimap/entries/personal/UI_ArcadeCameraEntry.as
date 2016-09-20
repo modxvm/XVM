@@ -28,6 +28,7 @@ package com.xvm.battle.minimap.entries.personal
         {
             //Logger.add("UI_ArcadeCameraEntry");
             super();
+
             Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
 
