@@ -246,8 +246,8 @@ package com.xvm.battle.minimap.entries.personal
         {
             var idx:int = UI_Minimap.instance.currentSizeIndex;
             _vehicleLine.scaleX = _vehicleLine.scaleY = _vehicleLineAlt.scaleX = _vehicleLineAlt.scaleY =
-            _traverseAngle1Line.scaleX = _traverseAngle1Line.scaleY = _traverseAngle1LineAlt.scaleX = _traverseAngle1Line.scaleY =
-            _traverseAngle2Line.scaleX = _traverseAngle2Line.scaleY = _traverseAngle2LineAlt.scaleX = _traverseAngle2Line.scaleY =
+            _traverseAngle1Line.scaleX = _traverseAngle1Line.scaleY = _traverseAngle1LineAlt.scaleX = _traverseAngle1LineAlt.scaleY =
+            _traverseAngle2Line.scaleX = _traverseAngle2Line.scaleY = _traverseAngle2LineAlt.scaleX = _traverseAngle2LineAlt.scaleY =
                 MinimapSizeConst.ENTRY_INTERNAL_CONTENT_CONTR_SCALES[idx] * MinimapSizeConst.MAP_SIZE[idx].width / MinimapSizeConst.MAP_SIZE[0].width;
         }
 
