@@ -55,6 +55,7 @@ package com.xvm.battle.fullStats
         private var _fragsTF:TextField;
         private var _vehicleIcon:BattleAtlasSprite;
         private var _vehicleLevelIcon:BattleAtlasSprite;
+        private var _playerStatus:PlayerStatusView;
         private var _vehicleTypeIcon:BattleAtlasSprite;
         private var _icoIGR:BattleAtlasSprite;
         private var _isIGR:Boolean = false;
@@ -86,6 +87,7 @@ package com.xvm.battle.fullStats
             _vehicleIcon = vehicleIcon;
             _vehicleLevelIcon = vehicleLevelIcon;
             _vehicleTypeIcon = vehicleTypeIcon;
+            _playerStatus = playerStatus;
 
             DEFAULT_PLAYER_NAME_X = playerNameTF.x;
             DEFAULT_PLAYER_NAME_WIDTH = playerNameTF.width;
@@ -342,6 +344,11 @@ package com.xvm.battle.fullStats
             if (cfg.removeVehicleTypeIcon)
             {
                 _vehicleTypeIcon.alpha = 0;
+            }
+
+            if (cfg.removePlayerStatusIcon)
+            {
+               _playerStatus.alpha = 0;
             }
 
             if (cfg.nameFieldShowBorder)

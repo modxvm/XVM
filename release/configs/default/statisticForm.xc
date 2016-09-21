@@ -28,6 +28,9 @@
     // true - disable vehicle type icon. This space will be used for formatted vehicle field.
     // true - убрать отображение типа танка. Пустое место будет использовано под форматируемое поле.
     "removeVehicleTypeIcon": false,
+    // true - disable player status icon.
+    // true - убрать отображение иконки статуса игрока.
+    "removePlayerStatusIcon": false,
     // Show border for name field (useful for config tuning)
     // Показывать рамку для поля имени игрока (полезно для настройки конфига)
     "nameFieldShowBorder": false,

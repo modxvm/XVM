@@ -3,6 +3,7 @@ XVM-6.4.5-dev:
       "useStandardCircles" -> "circlesEnabled"
       "useStandardLabels" -> "labelsEnabled"
       "useStandardLines" -> "linesEnabled"
+  * added option "statisticForm"/"removePlayerStatusIcon" - disable player status icon
 
 XVM-6.4.4:
   * lines on the minimap implemented (circles are not yet)

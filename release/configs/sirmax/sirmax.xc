@@ -207,6 +207,7 @@
     //"vehicleIconAlpha": 30,
     "removeVehicleLevel": true,
     "removeVehicleTypeIcon": true,
+    //"removePlayerStatusIcon": true,
     //"nameFieldShowBorder": true,
     //"vehicleFieldShowBorder": true,
     //"fragsFieldShowBorder": true,

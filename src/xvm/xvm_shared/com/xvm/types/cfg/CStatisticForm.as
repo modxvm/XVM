@@ -14,6 +14,7 @@ package com.xvm.types.cfg
         public var vehicleIconAlpha:*;
         public var removeVehicleLevel:*;
         public var removeVehicleTypeIcon:*;
+        public var removePlayerStatusIcon:*;
         public var nameFieldShowBorder:*;
         public var vehicleFieldShowBorder:*;
         public var fragsFieldShowBorder:*;
@@ -54,6 +55,7 @@ package com.xvm.types.cfg
             vehicleIconAlpha = Macros.FormatNumberGlobal(vehicleIconAlpha, 100);
             removeVehicleLevel = Macros.FormatBooleanGlobal(removeVehicleLevel, false);
             removeVehicleTypeIcon = Macros.FormatBooleanGlobal(removeVehicleTypeIcon, false);
+            removePlayerStatusIcon = Macros.FormatBooleanGlobal(removePlayerStatusIcon, false);
             nameFieldShowBorder = Macros.FormatBooleanGlobal(nameFieldShowBorder, false);
             vehicleFieldShowBorder = Macros.FormatBooleanGlobal(vehicleFieldShowBorder, false);
             fragsFieldShowBorder = Macros.FormatBooleanGlobal(fragsFieldShowBorder, false);
