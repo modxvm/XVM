@@ -319,8 +319,10 @@ package com.xvm.battle.minimap
         private function setupMapSize():void
         {
             mapSize = new TextExtraField(Config.config.minimap.mapSize);
+            mapSize.update(null);
             background.addChild(mapSize);
             mapSizeAlt = new TextExtraField(Config.config.minimapAlt.mapSize);
+            mapSizeAlt.update(null);
             background.addChild(mapSizeAlt);
         }
 
@@ -345,12 +347,18 @@ package com.xvm.battle.minimap
             if (mapSize)
             {
                 mapSize.visible = !isAltMode;
-                mapSize.update(null);
+                if (mapSize.visible)
+                {
+                    mapSize.update(null);
+                }
             }
             if (mapSizeAlt)
             {
                 mapSizeAlt.visible = isAltMode;
-                mapSizeAlt.update(null);
+                if (mapSizeAlt.visible)
+                {
+                    mapSizeAlt.update(null);
+                }
             }
         }
     }
