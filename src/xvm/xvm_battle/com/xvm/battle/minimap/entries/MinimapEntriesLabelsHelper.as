@@ -22,7 +22,7 @@ package com.xvm.battle.minimap.entries
             entry.x = MinimapEntriesConstants.OFFMAP_COORDINATE;
             entry.y = MinimapEntriesConstants.OFFMAP_COORDINATE;
 
-            if (!Config.config.minimap.useStandardLabels)
+            if (Config.config.minimap.labelsEnabled)
             {
                 Xvm.addEventListener(PlayerStateEvent.CHANGED, entry.playerStateChanged);
                 Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, entry.update);

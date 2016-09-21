@@ -13,9 +13,9 @@
     "minimapAimIconScale": 100,
     //"zoom": { "index": 5, "centered": true },
     "mapSize": ${"../default/minimapMapSize.xc":"mapSize"},
-    //"useStandardCircles": true,
-    //"useStandardLabels": true,
-    //"useStandardLines": true,
+    //"circlesEnabled": false,
+    //"labelsEnabled": false,
+    //"linesEnabled": false,
     "labels": ${"sirmax-minimapLabels.xc":"labels"},
     "circles": ${"sirmax-minimapCircles.xc":"circles"},
     "lines": ${"sirmax-minimapLines.xc":"lines"}

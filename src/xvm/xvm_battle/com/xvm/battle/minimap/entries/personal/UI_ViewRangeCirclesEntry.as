@@ -20,7 +20,7 @@ package com.xvm.battle.minimap.entries.personal
         public static var stereoscope_exists:Boolean;
         public static var stereoscope_enabled:Boolean;
 
-        private var _useStandardCircles:Boolean;
+        private var _circlesEnabled:Boolean;
 
         private var _circles:Circles;
         private var _circlesAlt:Circles;
@@ -30,8 +30,8 @@ package com.xvm.battle.minimap.entries.personal
             //Logger.add("UI_ViewRangeCirclesEntry");
             super();
 
-            _useStandardCircles = Config.config.minimap.useStandardCircles;
-            if (!_useStandardCircles)
+            _circlesEnabled = Config.config.minimap.circlesEnabled;
+            if (_circlesEnabled)
             {
                 Xfw.addCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
                 Xfw.addCommandListener(XvmCommands.AS_MODULE_STATE_CHANGED, onModuleStateChanged);
@@ -75,7 +75,7 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_addDrawRange(param1:Number, param2:Number, param3:Number):void
         {
-            if (_useStandardCircles)
+            if (!_circlesEnabled)
             {
                 super.as_addDrawRange(param1, param2, param3);
             }
@@ -83,7 +83,7 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_addDynamicViewRange(param1:Number, param2:Number, param3:Number):void
         {
-            if (_useStandardCircles)
+            if (!_circlesEnabled)
             {
                 super.as_addDynamicViewRange(param1, param2, param3);
             }
@@ -91,7 +91,7 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_addMaxViewRage(param1:Number, param2:Number, param3:Number):void
         {
-            if (_useStandardCircles)
+            if (!_circlesEnabled)
             {
                 super.as_addMaxViewRage(param1, param2, param3);
             }

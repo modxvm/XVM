@@ -19,7 +19,7 @@ package com.xvm.battle.minimap.entries.personal
     {
         private static const INVALID_UPDATE_XVM:int = InvalidationType.SYSTEM_FLAGS_BORDER << 10;
 
-        private var _useStandardLines:Boolean;
+        private var _linesEnabled:Boolean;
 
         private var _cameraLine:Sprite = null;
         private var _cameraLineAlt:Sprite = null;
@@ -32,8 +32,8 @@ package com.xvm.battle.minimap.entries.personal
             Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
 
-            _useStandardLines = Config.config.minimap.useStandardLines;
-            if (!_useStandardLines)
+            _linesEnabled = Config.config.minimap.linesEnabled;
+            if (_linesEnabled)
             {
                 Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED, updateLinesScale);
                 directionLinePlaceholder.visible = false;
@@ -106,7 +106,7 @@ package com.xvm.battle.minimap.entries.personal
         private function updateDirectionAlpha(playerState:VOPlayerState):void
         {
             directionPlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.directionTriangleAlpha, playerState, 100) / 100.0;
-            if (_useStandardLines)
+            if (!_linesEnabled)
             {
                 directionLinePlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.directionLineAlpha, playerState, 100) / 100.0;
             }
@@ -115,7 +115,7 @@ package com.xvm.battle.minimap.entries.personal
         private function updateDirectionLineVisibility(playerState:VOPlayerState):void
         {
             var showCameraLine:Boolean = playerState.isAlive || Macros.FormatBoolean(UI_Minimap.cfg.showDirectionLineAfterDeath, playerState);
-            if (_useStandardLines)
+            if (!_linesEnabled)
             {
                 if (playerState.isDead)
                 {

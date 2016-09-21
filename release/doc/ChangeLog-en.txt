@@ -1,4 +1,8 @@
 XVM-6.4.5-dev:
+  * renamed option in the "minimap" and "minimapAlt" sections (with inverted values):
+      "useStandardCircles" -> "circlesEnabled"
+      "useStandardLabels" -> "labelsEnabled"
+      "useStandardLines" -> "linesEnabled"
 
 XVM-6.4.4:
   * lines on the minimap implemented (circles are not yet)

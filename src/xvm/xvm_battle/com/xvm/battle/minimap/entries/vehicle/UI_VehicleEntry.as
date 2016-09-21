@@ -23,7 +23,7 @@ package com.xvm.battle.minimap.entries.vehicle
         private static const DEFAULT_VEHICLE_ICON_SCALE:Number = 0.4;
 
         private var _formattedString:String = "";
-        private var _useStandardLabels:Boolean;
+        private var _labelsEnabled:Boolean;
         private var _isControlMode:Boolean = false;
 
         private var _extraFields:ExtraFieldsGroup = null;
@@ -34,7 +34,7 @@ package com.xvm.battle.minimap.entries.vehicle
             //Logger.add("UI_VehicleEntry");
             super();
 
-            _useStandardLabels = Config.config.minimap.useStandardLabels;
+            _labelsEnabled = Config.config.minimap.labelsEnabled;
             MinimapEntriesLabelsHelper.init(this);
         }
 
@@ -47,7 +47,7 @@ package com.xvm.battle.minimap.entries.vehicle
         override protected function draw():void
         {
             super.draw();
-            if (!_useStandardLabels)
+            if (_labelsEnabled)
             {
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {

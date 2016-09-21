@@ -35,9 +35,9 @@ from battle import g_battle
 
 def onConfigLoaded(self, e=None):
     g_minimap.enabled = config.get('minimap/enabled', True)
-    g_minimap.useStandardLabels = config.get('minimap/useStandardLabels', False)
-    g_minimap.useStandardLines = config.get('minimap/useStandardLines', False)
-    g_minimap.useStandardCircles = config.get('minimap/useStandardCircles', False)
+    g_minimap.labelsEnabled = config.get('minimap/labelsEnabled', True)
+    g_minimap.linesEnabled = config.get('minimap/linesEnabled', True)
+    g_minimap.circlesEnabled = config.get('minimap/circlesEnabled', True)
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
@@ -87,7 +87,7 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
 @overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__switchToVehicle')
 def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
     base(self, prevCtrlID)
-    if g_minimap.active and not g_minimap.useStandardLabels:
+    if g_minimap.active and g_minimap.labelsEnabled:
         if prevCtrlID and prevCtrlID != self._getPlayerVehicleID() and prevCtrlID in self._entries:
             self._invoke(self._entries[prevCtrlID].getID(), 'setControlMode', False)
         if self._ctrlVehicleID:
@@ -100,11 +100,11 @@ def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
 
 @overrideClassMethod(ADDITIONAL_FEATURES, 'isOn')
 def _ADDITIONAL_FEATURES_isOn(base, cls, mask):
-    return False if g_minimap.active and not g_minimap.useStandardLabels else base(mask)
+    return False if g_minimap.active and g_minimap.labelsEnabled else base(mask)
 
 @overrideClassMethod(ADDITIONAL_FEATURES, 'isChanged')
 def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
-    return False if g_minimap.active and not g_minimap.useStandardLabels else base(mask)
+    return False if g_minimap.active and g_minimap.labelsEnabled else base(mask)
 
 @overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__createViewPointEntry')
 def _PersonalEntriesPlugin__createViewPointEntry(base, self, avatar):
@@ -142,15 +142,15 @@ def _g_settingsCore_getSetting(base, name):
         global _in_PersonalEntriesPlugin_setSettings
         if _in_PersonalEntriesPlugin_setSettings:
             if name in _LINES_SETTINGS:
-                if not g_minimap.useStandardLines:
+                if g_minimap.linesEnabled:
                     value = _DEFAULTS[name]
             elif name in _CIRCLES_SETTINGS:
-                if not g_minimap.useStandardLines:
+                if g_minimap.linesEnabled:
                     value = _DEFAULTS[name]
         global _in_ArenaVehiclesPlugin_setSettings
         if _in_ArenaVehiclesPlugin_setSettings:
             if name in _LABELS_SETTINGS:
-                if not g_minimap.useStandardLabels:
+                if g_minimap.labelsEnabled:
                     value = _DEFAULTS[name]
         #debug('getSetting: {} = {}'.format(name, value))
     return value
@@ -158,7 +158,7 @@ def _g_settingsCore_getSetting(base, name):
 @overrideMethod(PersonalEntriesPlugin, 'start')
 def _PersonalEntriesPlugin_start(base, self):
     base(self)
-    if g_minimap.active and not g_minimap.useStandardLines:
+    if g_minimap.active and g_minimap.linesEnabled:
         if not self._PersonalEntriesPlugin__yawLimits:
             vInfo = g_sessionProvider.getArenaDP().getVehicleInfo()
             yawLimits = vInfo.vehicleType.turretYawLimits
@@ -175,12 +175,12 @@ def _PersonalEntriesPlugin_setSettings(base, self):
 @overrideMethod(PersonalEntriesPlugin, 'updateSettings')
 def _PersonalEntriesPlugin_updateSettings(base, self, diff):
     if g_minimap.active:
-        if not g_minimap.useStandardLines:
+        if g_minimap.linesEnabled:
             if settings_constants.GAME.SHOW_VECTOR_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_VECTOR_ON_MAP] = _DEFAULTS[settings_constants.GAME.SHOW_VECTOR_ON_MAP]
             if settings_constants.GAME.SHOW_SECTOR_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_SECTOR_ON_MAP] = _DEFAULTS[settings_constants.GAME.SHOW_SECTOR_ON_MAP]
-        if not g_minimap.useStandardCircles:
+        if g_minimap.circlesEnabled:
             if settings_constants.GAME.MINIMAP_DRAW_RANGE in diff:
                 diff[settings_constants.GAME.MINIMAP_DRAW_RANGE] = _DEFAULTS[settings_constants.GAME.MINIMAP_DRAW_RANGE]
             if settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE in diff:
@@ -199,7 +199,7 @@ def _ArenaVehiclesPlugin_setSettings(base, self):
 @overrideMethod(ArenaVehiclesPlugin, 'updateSettings')
 def _ArenaVehiclesPlugin_updateSettings(base, self, diff):
     if g_minimap.active:
-        if not g_minimap.useStandardLabels:
+        if g_minimap.labelsEnabled:
             if settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP] = _DEFAULTS[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP]
     base(self, diff)
@@ -213,9 +213,9 @@ class Minimap(object):
     enabled = True
     initialized = False
     guiType = 0
-    useStandardLabels = False
-    useStandardLines = False
-    useStandardCircles = False
+    labelsEnabled = True
+    linesEnabled = True
+    circlesEnabled = True
     viewPointID = 0
 
     @property

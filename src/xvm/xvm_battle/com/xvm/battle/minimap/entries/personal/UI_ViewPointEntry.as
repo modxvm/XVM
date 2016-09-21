@@ -30,7 +30,7 @@ package com.xvm.battle.minimap.entries.personal
         private var _rightYawLimit:Number = NaN;
         private var _isLimitUpdated:Boolean = false;
 
-        private var _useStandardLines:Boolean;
+        private var _linesEnabled:Boolean;
 
         private var _vehicleLine:Sprite = null;
         private var _vehicleLineAlt:Sprite = null;
@@ -49,8 +49,8 @@ package com.xvm.battle.minimap.entries.personal
 
             _vehicleID = BattleGlobalData.playerVehicleID;
 
-            _useStandardLines = Config.config.minimap.useStandardLines;
-            if (!_useStandardLines)
+            _linesEnabled = Config.config.minimap.linesEnabled;
+            if (_linesEnabled)
             {
                 Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED, updateLinesScale);
                 sectorLeft.visible = false;
@@ -220,7 +220,7 @@ package com.xvm.battle.minimap.entries.personal
 
         private function updateLines(playerState:VOPlayerState):void
         {
-            if (!_useStandardLines)
+            if (_linesEnabled)
             {
                 sectorLeft.visible = false;
                 sectorRight.visible = false;

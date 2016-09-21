@@ -1,4 +1,8 @@
 XVM-6.4.5-dev:
+  * переименованы опции в секциях "minimap" и "minimapAlt" (с инвертированными значениями):
+      "useStandardCircles" -> "circlesEnabled"
+      "useStandardLabels" -> "labelsEnabled"
+      "useStandardLines" -> "linesEnabled"
 
 XVM-6.4.4:
   * реализованы линии на миникарте (круги пока еще нет)

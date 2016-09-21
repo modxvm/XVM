@@ -21,9 +21,9 @@ package com.xvm.types.cfg
         public var minimapAimIconScale:*;
         public var zoom:CMinimapZoom;
         public var mapSize:CExtraField;
-        public var useStandardCircles:*;
-        public var useStandardLabels:*;
-        public var useStandardLines:*;
+        public var circlesEnabled:*;
+        public var labelsEnabled:*;
+        public var linesEnabled:*;
         public var labels:CMinimapLabels;
         public var labelsData:*;
         public var circles:CMinimapCircles;
