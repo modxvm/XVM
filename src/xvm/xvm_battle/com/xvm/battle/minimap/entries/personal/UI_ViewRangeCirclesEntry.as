@@ -10,6 +10,7 @@ package com.xvm.battle.minimap.entries.personal
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.*;
     import com.xvm.battle.minimap.entries.*;
+    import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
 
@@ -36,7 +37,8 @@ package com.xvm.battle.minimap.entries.personal
                 Xfw.addCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
                 Xfw.addCommandListener(XvmCommands.AS_MODULE_STATE_CHANGED, onModuleStateChanged);
                 Xfw.addCommandListener(XvmCommands.AS_STEREOSCOPE_TOGGLED, onStereoscopeToggled);
-                Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, onMinimapAltModeChanged);
+                Xvm.addEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, updateCirclesVisibility);
+                Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, updateCirclesVisibility);
 
                 destroyedCrew = {};
                 surveyingDeviceDestroyed = false;
@@ -56,7 +58,8 @@ package com.xvm.battle.minimap.entries.personal
             Xfw.removeCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
             Xfw.removeCommandListener(XvmCommands.AS_MODULE_STATE_CHANGED, onModuleStateChanged);
             Xfw.removeCommandListener(XvmCommands.AS_STEREOSCOPE_TOGGLED, onStereoscopeToggled);
-            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, onMinimapAltModeChanged);
+            Xvm.removeEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, updateCirclesVisibility);
+            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, updateCirclesVisibility);
 
             if (_circles)
             {
@@ -99,11 +102,20 @@ package com.xvm.battle.minimap.entries.personal
 
         // PRIVATE
 
-        private function onMinimapAltModeChanged():void
+        private function updateCirclesVisibility():void
         {
-            var isAltMode:Boolean = UI_Minimap.instance.isAltMode;
-            _circles.visible = !isAltMode;
-            _circlesAlt.visible = isAltMode;
+            var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
+            if (playerState.isDead)
+            {
+                _circles.visible = false;
+                _circlesAlt.visible = false;
+            }
+            else
+            {
+                var isAltMode:Boolean = UI_Minimap.instance.isAltMode;
+                _circles.visible = !isAltMode;
+                _circlesAlt.visible = isAltMode;
+            }
         }
 
         private function onMovingStateChanged(isMoving:Boolean):void
