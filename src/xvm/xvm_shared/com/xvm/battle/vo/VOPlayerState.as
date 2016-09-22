@@ -249,10 +249,10 @@ package com.xvm.battle.vo
 
         internal function set_vehicleStatus(value:uint):void
         {
-            var alive:Boolean = isAlive;
+            var wasAlive:Boolean = VehicleStatus.isAlive(vehicleStatus);
             __vehicleStatus = value;
             updateStatData();
-            if (alive && isDead)
+            if (wasAlive && isDead)
             {
                 eventsToDispatch[PlayerStateEvent.VEHICLE_DESTROYED] = true;
                 if (isCurrentPlayer)
