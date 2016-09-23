@@ -128,11 +128,25 @@ package com.xvm.battle.minimap.entries.personal
 
         private function onModuleStateChanged(deviceName:String, deviceState:String, realState:String):void
         {
+            var destroyedValue:Boolean;
+            if (deviceState == "destroyed")
+            {
+                destroyedValue = true;
+            }
+            else if (deviceState == "repaired")
+            {
+                destroyedValue = false;
+            }
+            else
+            {
+                return;
+            }
+
             Logger.add("onModuleStateChanged: " + arguments);
-            /*switch (event.value)
+            switch (deviceName)
             {
                 case "surveyingDevice":
-                    surveyingDeviceDestroyed = true;
+                    surveyingDeviceDestroyed = destroyedValue;
                     _circles.update();
                     _circlesAlt.update();
                     break;
@@ -140,30 +154,18 @@ package com.xvm.battle.minimap.entries.personal
                 case "commander":
                 case "radioman1":
                 case "radioman2":
-                    destroyedCrew[event.value] = true;
+                    if (destroyedValue)
+                    {
+                        destroyedCrew[deviceName] = destroyedValue;
+                    }
+                    else
+                    {
+                        delete destroyedCrew[deviceName];
+                    }
                     _circles.update();
                     _circlesAlt.update();
                     break;
             }
-            Logger.addObject(event);
-            //Logger.add("onModuleRepaired: " + event.value);
-
-            switch (event.value)
-            {
-                case "surveyingDevice":
-                    surveyingDeviceDestroyed = false;
-                    _circles.update();
-                    _circlesAlt.update();
-                    break;
-
-                case "commander":
-                case "radioman1":
-                case "radioman2":
-                    delete destroyedCrew[event.value];
-                    _circles.update();
-                    _circlesAlt.update();
-                    break;
-            }*/
         }
 
         private function onStereoscopeToggled(isOn:int):void
