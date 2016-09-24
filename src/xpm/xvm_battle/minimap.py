@@ -10,6 +10,7 @@ import traceback
 import BigWorld
 import constants
 import game
+from constants import VISIBILITY
 from account_helpers.settings_core import g_settingsCore, settings_constants
 from Avatar import PlayerAvatar
 from AvatarInputHandler.control_modes import PostMortemControlMode
@@ -110,6 +111,15 @@ def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
 def _PersonalEntriesPlugin__createViewPointEntry(base, self, avatar):
    base(self, avatar)
    g_minimap.viewPointID = self._getViewPointID()
+
+@overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__onVehicleFeedbackReceived')
+def _PersonalEntriesPlugin__onVehicleFeedbackReceived(base, self, eventID, _, value):
+    if g_minimap.active and g_minimap.circlesEnabled:
+        VISIBILITY.MAX_RADIUS = 1000
+        base(self, eventID, _, value)
+        VISIBILITY.MAX_RADIUS = 445
+    else:
+        base(self, eventID, _, value)
 
 # Minimap settings
 

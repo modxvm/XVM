@@ -248,9 +248,6 @@ class Battle(object):
             if is_moving != self.is_moving:
                 self.is_moving = is_moving
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_MOVING_STATE_CHANGED, is_moving)
-        elif state == VEHICLE_VIEW_STATE.DEVICES:
-            (deviceName, deviceState, realState) = value
-            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_MODULE_STATE_CHANGED, deviceName, deviceState, realState)
 
     def onOptionalDeviceAdded(self, intCD, descriptor, isOn):
         if intCD == INT_CD.STEREOSCOPE:
