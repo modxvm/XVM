@@ -81,6 +81,7 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_addDynamicViewRange(color:Number, alpha:Number, visionRadius:Number):void
         {
+            //Logger.add("as_addDynamicViewRange: " + visionRadius);
             if (!_circlesEnabled)
             {
                 super.as_addDynamicViewRange(color, alpha, visionRadius);
@@ -88,6 +89,8 @@ package com.xvm.battle.minimap.entries.personal
             else
             {
                 UI_ViewRangeCirclesEntry.visionRadius = visionRadius;
+                _circles.update();
+                _circlesAlt.update();
             }
         }
 
@@ -101,6 +104,7 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_updateDynRange(visionRadius:Number):void
         {
+            //Logger.add("as_updateDynRange: " + visionRadius);
             if (!_circlesEnabled)
             {
                 super.as_updateDynRange(visionRadius);
