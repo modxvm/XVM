@@ -203,7 +203,7 @@ package com.xvm.battle.minimap
                 disposeMapSize();
 
                 setCfg();
-                xvm_enabled = Macros.FormatBooleanGlobal(Config.config.minimap.enabled, true);
+                xvm_enabled = Config.config.minimap.enabled;
 
                 if (xvm_enabled)
                 {
@@ -243,7 +243,7 @@ package com.xvm.battle.minimap
                 setCfg();
                 if (_isZoomed)
                 {
-                    as_setSize(Macros.FormatNumberGlobal(cfg.zoom.index));
+                    as_setSize(cfg.zoom.index);
                 }
                 update();
                 Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED));
@@ -267,7 +267,7 @@ package com.xvm.battle.minimap
                     {
                         _savedSizeIndex = _currentSizeIndex;
                     }
-                    as_setSize(Macros.FormatNumberGlobal(cfg.zoom.index));
+                    as_setSize(cfg.zoom.index);
                 }
                 else
                 {
@@ -293,7 +293,7 @@ package com.xvm.battle.minimap
          */
         private function setBGMapImageAlpha():void
         {
-            background.alpha = Macros.FormatNumberGlobal(cfg.mapBackgroundImageAlpha) / 100.0;
+            background.alpha = cfg.mapBackgroundImageAlpha / 100.0;
         }
 
         private function onUpdateStage():void

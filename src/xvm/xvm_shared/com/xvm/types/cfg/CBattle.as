@@ -25,7 +25,7 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        public function applyGlobalBattleMacros():void
+        internal function applyGlobalBattleMacros():void
         {
             mirroredVehicleIcons = Macros.FormatBooleanGlobal(mirroredVehicleIcons, true);
             showPostmortemTips = Macros.FormatBooleanGlobal(showPostmortemTips, true);

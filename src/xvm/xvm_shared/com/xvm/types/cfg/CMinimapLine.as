@@ -5,6 +5,7 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
 
     public dynamic class CMinimapLine extends Object implements ICloneable
     {
@@ -21,9 +22,20 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        public static function parse(format:Object):CMinimapLine
+        internal static function parse(format:Object):CMinimapLine
         {
             return ObjectConverter.convertData(format, CMinimapLine);
+        }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            enabled = Macros.FormatBooleanGlobal(enabled, true);
+            inmeters = Macros.FormatBooleanGlobal(inmeters, true);
+            color = Macros.FormatNumberGlobal(color);
+            from = Macros.FormatNumberGlobal(from);
+            to = Macros.FormatNumberGlobal(to);
+            thickness = Macros.FormatNumberGlobal(thickness);
+            alpha = Macros.FormatNumberGlobal(alpha);
         }
     }
 }

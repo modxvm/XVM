@@ -39,8 +39,8 @@ package com.xvm.battle.minimap.entries.personal
                 directionLinePlaceholder.visible = false;
                 try
                 {
-                    _cameraLine = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.camera);
-                    _cameraLineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.camera);
+                    _cameraLine = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.parsedCamera);
+                    _cameraLineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.parsedCamera);
                     var idx:int = getChildIndex(directionLinePlaceholder);
                     addChildAt(_cameraLine, idx + 1);
                     addChildAt(_cameraLineAlt, idx + 2);

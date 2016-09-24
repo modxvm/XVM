@@ -5,6 +5,7 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
 
     public dynamic class CMinimap extends Object implements ICloneable
     {
@@ -32,6 +33,40 @@ package com.xvm.types.cfg
         public function clone():*
         {
             throw new Error("clone() method is not implemented");
+        }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            enabled = Macros.FormatBooleanGlobal(enabled, true);
+            mapBackgroundImageAlpha = Macros.FormatNumberGlobal(mapBackgroundImageAlpha);
+            minimapAimIcon = Macros.FormatStringGlobal(minimapAimIcon);
+            minimapAimIconScale = Macros.FormatNumberGlobal(minimapAimIconScale);
+            if (zoom)
+            {
+                zoom.applyGlobalBattleMacros();
+            }
+            if (circles)
+            {
+                circles.applyGlobalBattleMacros();
+            }
+            if (lines)
+            {
+                lines.applyGlobalBattleMacros();
+            }
+            // do not apply global macros:
+            //directionTriangleAlpha
+            //directionLineAlpha
+            //showDirectionLineAfterDeath
+            //selfIconAlpha
+            //selfIconScale
+            //iconAlpha
+            //iconScale
+            //mapSize
+            //labels
+            //labelsData
+            //circlesEnabled
+            //labelsEnabled
+            //linesEnabled
         }
     }
 }

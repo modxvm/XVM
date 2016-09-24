@@ -5,6 +5,7 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
 
     public dynamic class CMinimapZoom extends Object implements ICloneable
     {
@@ -14,6 +15,12 @@ package com.xvm.types.cfg
         public function clone():*
         {
             throw new Error("clone() method is not implemented");
+        }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            index = Macros.FormatNumberGlobal(index);
+            centered = Macros.FormatBooleanGlobal(centered, false);
         }
     }
 }

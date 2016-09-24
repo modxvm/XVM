@@ -5,6 +5,7 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
 
     public dynamic class CMinimapCircle extends Object implements ICloneable
     {
@@ -21,9 +22,20 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        public static function parse(format:Object):CMinimapCircle
+        internal static function parse(format:Object):CMinimapCircle
         {
             return ObjectConverter.convertData(format, CMinimapCircle);
+        }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            enabled = Macros.FormatBooleanGlobal(enabled, true);
+            distance = Macros.Format(distance, null);
+            scale = Macros.FormatNumberGlobal(scale);
+            thickness = Macros.FormatNumberGlobal(thickness);
+            alpha = Macros.FormatNumberGlobal(alpha);
+            color = Macros.FormatNumberGlobal(color);
+            state = Macros.FormatNumberGlobal(state, 0);
         }
     }
 }

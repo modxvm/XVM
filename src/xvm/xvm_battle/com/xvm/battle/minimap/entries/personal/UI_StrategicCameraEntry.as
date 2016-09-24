@@ -52,8 +52,8 @@ package com.xvm.battle.minimap.entries.personal
 
         private function update():void
         {
-            _aimScale = Macros.FormatNumberGlobal(UI_Minimap.cfg.minimapAimIconScale) / 100.0;
-            var iconPath:String = Macros.FormatStringGlobal(UI_Minimap.cfg.minimapAimIcon);
+            _aimScale = UI_Minimap.cfg.minimapAimIconScale / 100.0;
+            var iconPath:String = UI_Minimap.cfg.minimapAimIcon;
             if (iconPath)
             {
                 iconPath = Utils.fixImgTagSrc(iconPath);

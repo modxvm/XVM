@@ -346,27 +346,27 @@ class Circles extends Sprite implements IDisposable
 
         var i:int;
         var c:CMinimapCircle;
-        var len:int = cfg.view.length;
+        var len:int = cfg.parsedView.length;
         for (i = 0; i < len; ++i)
         {
-            c = CMinimapCircle.parse(cfg.view[i]);
-            if (c.enabled == null || !Macros.FormatBooleanGlobal(c.enabled, true) || isNaN(Macros.FormatNumberGlobal(c.distance)))
+            c = cfg.parsedView[i];
+            if (c.enabled == null || !c.enabled || isNaN(c.distance))
                 continue;
-            if (!Macros.FormatNumberGlobal(c.state, 0))
+            if (!c.state)
                 c.state = MinimapEntriesConstants.MOVING_STATE_ALL;
             res.push(c);
         }
 
         // Special vehicle key dependent circle configs
         var vehicleKey:String = VehicleInfo.get(BattleGlobalData.playerVehCD).key;
-        len = cfg.special.length;
+        len = cfg.parsedSpecial.length;
         for (i = 0; i < len; ++i)
         {
-            var rule:Object = cfg.special[i];
+            var rule:Object = cfg.parsedSpecial[i];
             if (rule && rule[vehicleKey])
             {
-                c = CMinimapCircle.parse(cfg.special[i][vehicleKey]);
-                if (c.enabled == null || !Macros.FormatBooleanGlobal(c.enabled, true))
+                c = CMinimapCircle(cfg.parsedSpecial[i][vehicleKey]);
+                if (!c.enabled)
                     continue;
                 if (!c.state)
                     c.state = MinimapEntriesConstants.MOVING_STATE_ALL;
@@ -382,15 +382,15 @@ class Circles extends Sprite implements IDisposable
     {
         var res:Vector.<CMinimapCircle> = new Vector.<CMinimapCircle>();
 
-        var len:int = cfg.view.length;
+        var len:int = cfg.parsedView.length;
         for (var i:int = 0; i < len; ++i)
         {
-            var c:CMinimapCircle = CMinimapCircle.parse(cfg.view[i]);
-            if (c.enabled == null || !Macros.FormatBooleanGlobal(c.enabled, true))
+            var c:CMinimapCircle = cfg.parsedView[i];
+            if (!c.enabled)
                 continue;
             if (!c.state)
                 c.state = MinimapEntriesConstants.MOVING_STATE_ALL;
-            if (isNaN(Macros.FormatNumberGlobal(c.distance)))
+            if (isNaN(c.distance))
                 res.push(c);
         }
 

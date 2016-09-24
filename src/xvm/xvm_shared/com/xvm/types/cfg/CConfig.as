@@ -66,6 +66,14 @@ package com.xvm.types.cfg
             {
                 markers.applyGlobalBattleMacros();
             }
+            if (minimap)
+            {
+                minimap.applyGlobalBattleMacros();
+            }
+            if (minimapAlt)
+            {
+                minimapAlt.applyGlobalBattleMacros();
+            }
             if (statisticForm)
             {
                 statisticForm.applyGlobalBattleMacros();

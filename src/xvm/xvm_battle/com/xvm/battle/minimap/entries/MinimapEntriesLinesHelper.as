@@ -14,7 +14,7 @@ package com.xvm.battle.minimap.entries
 
     public class MinimapEntriesLinesHelper
     {
-        public static function createLines(linesCfg:Array):Sprite
+        public static function createLines(linesCfg:Vector.<CMinimapLine>):Sprite
         {
             var scaleFactor:Number = MinimapSizeConst.MAP_SIZE[0].width / BattleGlobalData.mapSize;
             var sprite:Sprite = new Sprite();
@@ -23,7 +23,7 @@ package com.xvm.battle.minimap.entries
                 var len:int = linesCfg.length;
                 for (var i:int = 0; i < len; ++i)
                 {
-                    var lineCfg:CMinimapLine = CMinimapLine.parse(linesCfg[i]);
+                    var lineCfg:CMinimapLine = linesCfg[i];
                     if (lineCfg.enabled)
                     {
                         var from:Number = lineCfg.from;

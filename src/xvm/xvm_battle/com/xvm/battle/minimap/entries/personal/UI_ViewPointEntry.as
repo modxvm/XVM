@@ -57,12 +57,12 @@ package com.xvm.battle.minimap.entries.personal
                 sectorRight.visible = false;
                 try
                 {
-                    _vehicleLine = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.vehicle);
-                    _vehicleLineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.vehicle);
-                    _traverseAngle1Line = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.traverseAngle);
-                    _traverseAngle1LineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.traverseAngle);
-                    _traverseAngle2Line = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.traverseAngle);
-                    _traverseAngle2LineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.traverseAngle);
+                    _vehicleLine = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.parsedVehicle);
+                    _vehicleLineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.parsedVehicle);
+                    _traverseAngle1Line = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.parsedTraverseAngle);
+                    _traverseAngle1LineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.parsedTraverseAngle);
+                    _traverseAngle2Line = MinimapEntriesLinesHelper.createLines(Config.config.minimap.lines.parsedTraverseAngle);
+                    _traverseAngle2LineAlt = MinimapEntriesLinesHelper.createLines(Config.config.minimapAlt.lines.parsedTraverseAngle);
                     var idx:int = getChildIndex(sectorRight);
                     addChildAt(_vehicleLine, idx + 1);
                     addChildAt(_vehicleLineAlt, idx + 2);
