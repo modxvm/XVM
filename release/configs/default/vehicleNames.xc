@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 15.09.2016
+    // Last update: 25.09.2016
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -108,7 +108,9 @@
     "france-F72_AMX_30":                     {"name": null, "short": null},
     "france-F73_M4A1_Revalorise":            {"name": null, "short": null},
     "france-F74_AMX_M4_1949":                {"name": null, "short": null},
+    "france-F74_AMX_M4_1949_Liberte":        {"name": null, "short": null},
     "france-F75_Char_de_25t":                {"name": null, "short": null},
+    "france-F84_Somua_SM":                   {"name": null, "short": null},
     "germany-Env_Artillery":                 {"name": null, "short": null},
     "germany-G02_Hummel":                    {"name": null, "short": null},
     "germany-G03_PzV_Panther":               {"name": null, "short": null},
@@ -126,6 +128,7 @@
     "germany-G09_Hetzer":                    {"name": null, "short": null},
     "germany-G100_Gtraktor_Krupp":           {"name": null, "short": null},
     "germany-G101_StuG_III":                 {"name": null, "short": null},
+    "germany-G102_Pz_III":                   {"name": null, "short": null},
     "germany-G103_RU_251":                   {"name": null, "short": null},
     "germany-G104_Stug_IV":                  {"name": null, "short": null},
     "germany-G105_T-55_NVA_DDR":             {"name": null, "short": null},
@@ -153,7 +156,6 @@
     "germany-G12_Ltraktor":                  {"name": null, "short": null},
     "germany-G12_Ltraktor_bot":              {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
-    "germany-G14_PzIII_A":                   {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_IGR":        {"name": null, "short": null},
@@ -269,6 +271,7 @@
     "japan-J27_O_I_120":                     {"name": null, "short": null},
     "japan-J28_O_I_100":                     {"name": null, "short": null},
     "sweden-S01_Strv_74_A2":                 {"name": null, "short": null},
+    "sweden-S15_L_60":                       {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I":                 {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_bot":             {"name": null, "short": null},
     "uk-GB03_Cruiser_Mk_I":                  {"name": null, "short": null},
@@ -345,8 +348,6 @@
     "uk-GB86_Centurion_Action_X":            {"name": null, "short": null},
     "uk-GB87_Chieftain_T95_turret":          {"name": null, "short": null},
     "uk-GB88_T95_Chieftain_turret":          {"name": null, "short": null},
-    "uk-GB89_Mark_I_Male":                   {"name": null, "short": null},
-    "uk-GB90_Lanchester_Armored_Car":        {"name": null, "short": null},
     "usa-A01_T1_Cunningham":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham_bot":             {"name": null, "short": null},
     "usa-A02_M2_lt":                         {"name": null, "short": null},
@@ -442,6 +443,7 @@
     "usa-A94_T37":                           {"name": null, "short": null},
     "usa-A95_T95_E6":                        {"name": null, "short": null},
     "usa-A97_M41_Bulldog":                   {"name": null, "short": null},
+    "usa-A99_T92_LT":                        {"name": null, "short": null},
     "usa-Sexton_I":                          {"name": null, "short": null},
     "ussr-Observer":                         {"name": null, "short": null},
     "ussr-R01_IS":                           {"name": null, "short": null},
@@ -510,7 +512,7 @@
     "ussr-R33_Churchill_LL":                 {"name": null, "short": null},
     "ussr-R34_BT-SV":                        {"name": null, "short": null},
     "ussr-R38_KV-220":                       {"name": null, "short": null},
-    "ussr-R38_KV-220_action":                {"name": null, "short": null},
+    "ussr-R38_KV-220_beta":                  {"name": null, "short": null},
     "ussr-R39_KV-3":                         {"name": null, "short": null},
     "ussr-R40_T-54":                         {"name": null, "short": null},
     "ussr-R41_T-50":                         {"name": null, "short": null},

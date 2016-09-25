@@ -14,7 +14,7 @@ from gui.shared.utils.requesters import REQ_CRITERIA
 
 _special = {
     # Data from http://forum.worldoftanks.ru/index.php?/topic/41221-
-    # Last update: 27.08.2016
+    # Last update: 25.09.2016
 
     # level 2
     'germany:G53_PzI':                   [ 2, 2 ],
@@ -55,7 +55,7 @@ _special = {
     'ussr:R32_Matilda_II_LL':            [ 5, 6 ],
     'ussr:R33_Churchill_LL':             [ 5, 6 ],
     'ussr:R38_KV-220':                   [ 5, 6 ],
-    'ussr:R38_KV-220_action':            [ 5, 6 ],
+    'ussr:R38_KV-220_beta':              [ 5, 6 ],
     'ussr:R78_SU_85I':                   [ 5, 6 ],
 
     # level 6
