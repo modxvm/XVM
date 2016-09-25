@@ -17,8 +17,8 @@ from gui.shared import g_eventBus, events
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 from gui.battle_control import g_sessionProvider, avatar_getter
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
-from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
+from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
@@ -140,8 +140,8 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
         g_battle.onVehicleHealthChanged(self.id, newHealth, attackerID, attackReasonID)
 
 # on vehicle info updated
-@registerEvent(BattleArenaController, 'updateVehiclesInfo')
-def _BattleArenaController_updateVehiclesInfo(self, updated, arenaDP):
+@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
+def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
     # debug("> _BattleArenaController_updateVehiclesInfo")
     try:
         # is dynamic squad created

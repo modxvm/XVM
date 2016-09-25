@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.2',
+    'VERSION':       '0.9.16',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.2'],
+    'GAME_VERSIONS': ['0.9.16'],
     # optional
 }
 
@@ -37,7 +37,6 @@ from notification.settings import NOTIFICATION_TYPE
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
-from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.shared import g_eventBus, events
 from gui.Scaleform.framework.application import SFApplication
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
