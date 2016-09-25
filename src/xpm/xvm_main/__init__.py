@@ -41,7 +41,6 @@ from gui.shared import g_eventBus, events
 from gui.Scaleform.framework.application import SFApplication
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
-from gui.Scaleform.Minimap import Minimap
 
 from xfw import *
 
