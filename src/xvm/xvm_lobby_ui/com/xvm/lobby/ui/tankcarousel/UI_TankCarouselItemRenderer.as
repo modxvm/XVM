@@ -103,6 +103,8 @@ package com.xvm.lobby.ui.tankcarousel
         {
             try
             {
+                // TODO:0.9.16
+                /*
                 var zoom:Number = cfg.zoom;
                 _extraFieldsHolder = new MovieClip();
                 _extraFieldsHolder.x = this.slot.x + 1;
@@ -115,6 +117,7 @@ package com.xvm.lobby.ui.tankcarousel
                 _extraFields.scaleX = _extraFields.scaleY = 1 / zoom;
                 _extraFieldsHolder.addChild(_extraFields);
                 _extraFieldsHolder.mask = _extraFieldsHolder.addChild(createMask(-2, -2, ITEM_WIDTH + 4, ITEM_HEIGHT + 4));
+                */
             }
             catch (ex:Error)
             {
@@ -130,32 +133,35 @@ package com.xvm.lobby.ui.tankcarousel
         // slot:TankCarouselRendererSlot = null;
         private function setupStandardFields():void
         {
-                var zoom:Number = cfg.zoom;
-                var w:int = Math.ceil(ITEM_WIDTH * zoom);
-                var h:int = Math.ceil(ITEM_HEIGHT * zoom);
+            // TODO:0.9.16
+            /*
+            var zoom:Number = cfg.zoom;
+            var w:int = Math.ceil(ITEM_WIDTH * zoom);
+            var h:int = Math.ceil(ITEM_HEIGHT * zoom);
 
-                setupStandardField(slot.tankIcon.multyXp, cfg.fields.multiXp);
-                slot.tankIcon.multyXp.x = w - slot.tankIcon.multyXp.width + cfg.fields.multiXp.dx;
+            setupStandardField(slot.tankIcon.multyXp, cfg.fields.multiXp);
+            slot.tankIcon.multyXp.x = w - slot.tankIcon.multyXp.width + cfg.fields.multiXp.dx;
 
-                setupStandardField(slot.tankIcon.xp, cfg.fields.xp);
-                slot.tankIcon.xp.x = w - slot.tankIcon.xp.width + cfg.fields.xp.dx;
+            setupStandardField(slot.tankIcon.xp, cfg.fields.xp);
+            slot.tankIcon.xp.x = w - slot.tankIcon.xp.width + cfg.fields.xp.dx;
 
-                setupStandardField(slot.tankIcon.tankTypeMc, cfg.fields.tankType);
+            setupStandardField(slot.tankIcon.tankTypeMc, cfg.fields.tankType);
 
-                additionalText.x -= 10;
-                additionalText.width += 20;
+            additionalText.x -= 10;
+            additionalText.width += 20;
 
-                slot.tankIcon.levelMc.visible = false;
-                App.utils.scheduler.scheduleOnNextFrame(function():void {
-                    if (slot.tankIcon == null)
-                        return;
-                    setupStandardField(slot.tankIcon.levelMc, cfg.fields.level);
-                    slot.tankIcon.levelMc.visible = true;
-                });
+            slot.tankIcon.levelMc.visible = false;
+            App.utils.scheduler.scheduleOnNextFrame(function():void {
+                if (slot.tankIcon == null)
+                    return;
+                setupStandardField(slot.tankIcon.levelMc, cfg.fields.level);
+                slot.tankIcon.levelMc.visible = true;
+            });
 
-                setupTankNameField(cfg.fields.tankName);
-                setupInfoTextField(cfg.fields.statusText);
-                setupClanLockField(cfg.fields.clanLock);
+            setupTankNameField(cfg.fields.tankName);
+            setupInfoTextField(cfg.fields.statusText);
+            setupClanLockField(cfg.fields.clanLock);
+            */
         }
 
         private function setupStandardField(mc:MovieClip, cfg:Object):void
@@ -171,6 +177,8 @@ package com.xvm.lobby.ui.tankcarousel
         private var orig_tankIcon_tankNameField_y:Number = NaN;
         private function setupTankNameField(cfg:Object):void
         {
+            // TODO:0.9.16
+            /*
             slot.tankIcon.tankNameField.scaleX = slot.tankIcon.tankNameField.scaleY =
                 slot.tankIcon.tankNameBg.scaleX = slot.tankIcon.tankNameBg.scaleY = cfg.scale;
             slot.tankIcon.tankNameField.alpha = slot.tankIcon.tankNameBg.alpha =
@@ -182,12 +190,15 @@ package com.xvm.lobby.ui.tankcarousel
             slot.tankIcon.tankNameField.y = orig_tankIcon_tankNameField_y + cfg.dy;
             slot.tankIcon.tankNameBg.x = slot.tankIcon.tankNameField.x + slot.tankIcon.tankNameField.width - slot.tankIcon.tankNameBg.width;
             slot.tankIcon.tankNameBg.y = slot.tankIcon.tankNameField.y + slot.tankIcon.tankNameField.height - slot.tankIcon.tankNameBg.height;
+            */
         }
 
         private var orig_infoText_x:Number = NaN;
         private var orig_infoText_y:Number = NaN;
         private function setupInfoTextField(cfg:Object):void
         {
+            // TODO:0.9.16
+            /*
             infoText.scaleX = infoText.scaleY = cfg.scale;
             infoText.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             if (isNaN(orig_infoText_x))
@@ -196,12 +207,15 @@ package com.xvm.lobby.ui.tankcarousel
             if (isNaN(orig_infoText_y))
                 orig_infoText_y = infoText.y;
             infoText.y = orig_infoText_y + cfg.dy;
+            */
         }
 
         private var orig_clanLock_x:Number = NaN;
         private var orig_clanLock_y:Number = NaN;
         private function setupClanLockField(cfg:Object):void
         {
+            // TODO:0.9.16
+            /*
             clanLock.scaleX = clanLock.scaleY = cfg.scale;
             clanLock.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             if (isNaN(orig_clanLock_x))
@@ -210,6 +224,7 @@ package com.xvm.lobby.ui.tankcarousel
             if (isNaN(orig_clanLock_y))
                 orig_clanLock_y = clanLock.y;
             clanLock.y = orig_clanLock_y + cfg.dy;
+            */
         }
 
         private function createMask(x:Number, y:Number, width:Number, height:Number):Shape
@@ -224,6 +239,8 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function updateDataXvm():void
         {
+            // TODO:0.9.16
+            /*
             try
             {
                 var isExtraFieldsVisible:Boolean = false;
@@ -276,6 +293,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 Logger.err(ex);
             }
+            */
         }
     }
 }

@@ -65,6 +65,8 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
+        // TODO:0.9.16
+        /*
         override public function layoutItemRenderers():void
         {
             var renderer:IScrollerItemRenderer = null;
@@ -80,5 +82,6 @@ package com.xvm.lobby.ui.tankcarousel
                 renderer.y = int(idx % cfg.rows) * _itemHeightWithPadding + UI_TankCarousel.VERTICAL_MARGIN;
             }
         }
+        */
     }
 }

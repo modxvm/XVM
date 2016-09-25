@@ -80,16 +80,18 @@ package com.xvm.lobby.hangar
             var cfg:CHangarServerInfo = Config.config.hangar.serverInfo;
             if (!cfg.enabled)
             {
-                page.serverInfo.alpha = page.serverInfoBg.alpha = 0;
-                page.serverInfo.mouseEnabled = page.serverInfoBg.mouseEnabled = false;
-                page.serverInfo.mouseChildren = page.serverInfoBg.mouseChildren = false;
+                // TODO:0.9.16
+                //page.serverInfo.alpha = page.serverInfoBg.alpha = 0;
+                //page.serverInfo.mouseEnabled = page.serverInfoBg.mouseEnabled = false;
+                //page.serverInfo.mouseChildren = page.serverInfoBg.mouseChildren = false;
             }
             else
             {
-                page.serverInfo.y += cfg.shiftY;
-                page.serverInfoBg.y += cfg.shiftY;
-                page.serverInfo.alpha = page.serverInfoBg.alpha = cfg.alpha / 100.0;
-                page.serverInfo.rotation = page.serverInfoBg.rotation = cfg.rotation;
+                // TODO:0.9.16
+                //page.serverInfo.y += cfg.shiftY;
+                //page.serverInfoBg.y += cfg.shiftY;
+                //page.serverInfo.alpha = page.serverInfoBg.alpha = cfg.alpha / 100.0;
+                //page.serverInfo.rotation = page.serverInfoBg.rotation = cfg.rotation;
             }
         }
     }

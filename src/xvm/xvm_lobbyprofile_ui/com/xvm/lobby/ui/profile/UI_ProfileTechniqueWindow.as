@@ -42,7 +42,7 @@ package com.xvm.lobby.ui.profile
             var playerName:String = XfwUtils.GetPlayerName((profileWindow.window as Window).title);
 
             // get player id from the view name.
-            var accountDBID:int = parseInt(profileWindow.as_name.replace("profileWindow_", ""));
+            var accountDBID:int = parseInt(profileWindow.as_config.name.replace("profileWindow_", ""));
 
             technique = new TechniqueWindow(this, playerName, accountDBID)
             addChild(technique);

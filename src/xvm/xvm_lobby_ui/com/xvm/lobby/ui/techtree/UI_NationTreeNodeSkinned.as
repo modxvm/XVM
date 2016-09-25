@@ -8,7 +8,7 @@ package com.xvm.lobby.ui.techtree
     import com.xvm.*;
     import com.xvm.types.dossier.*;
     import flash.text.*;
-    import net.wg.gui.lobby.techtree.constants.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.techtree.data.state.*;
     import net.wg.gui.lobby.techtree.data.vo.*;
     import net.wg.gui.lobby.techtree.math.*;
@@ -32,8 +32,8 @@ package com.xvm.lobby.ui.techtree
             {
                 if (nodeData.shopPrice.gold == 0)
                 {
-                    if ((nodeData.state & NodeState.UNLOCKED) != 0)
-                        nodeData.state |= NodeState.WAS_IN_BATTLE;
+                    if ((nodeData.state & NODE_STATE_FLAGS.UNLOCKED) != 0)
+                        nodeData.state |= NODE_STATE_FLAGS.WAS_IN_BATTLE;
                 }
             }
             super.setup(index, nodeData, entityType, matrixPosition);

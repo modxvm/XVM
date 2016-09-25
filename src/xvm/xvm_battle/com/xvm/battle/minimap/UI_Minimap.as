@@ -38,7 +38,6 @@ package com.xvm.battle.minimap
         private var xvm_enabled:Boolean;
         private var _isAltMode:Boolean = false;
         private var _isZoomed:Boolean = false;
-        private var _currentSizeIndex:int = 0;
         private var _savedSizeIndex:int = -1;
 
         private var mapSize:TextExtraField;
@@ -92,11 +91,6 @@ package com.xvm.battle.minimap
             return _isAltMode;
         }
 
-        public function get currentSizeIndex():int
-        {
-            return _currentSizeIndex;
-        }
-
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
@@ -120,7 +114,6 @@ package com.xvm.battle.minimap
             {
                 sizeIndex = Math.max(0, Math.min(MinimapSizeConst.MAP_SIZE.length - 1, sizeIndex));
                 super.as_setSize(sizeIndex);
-                _currentSizeIndex = sizeIndex;
 
                 /* TODO: add zoom steps
                 if (param1 == 5)
@@ -265,7 +258,7 @@ package com.xvm.battle.minimap
                 {
                     if (_savedSizeIndex == -1)
                     {
-                        _savedSizeIndex = _currentSizeIndex;
+                        _savedSizeIndex = currentSizeIndex;
                     }
                     as_setSize(cfg.zoom.index);
                 }
@@ -305,7 +298,7 @@ package com.xvm.battle.minimap
         {
             if (_isZoomed && cfg.zoom.centered)
             {
-                var r:Rectangle = MinimapSizeConst.MAP_SIZE[_currentSizeIndex];
+                var r:Rectangle = MinimapSizeConst.MAP_SIZE[currentSizeIndex];
                 x = (App.appWidth - initedWidth + r.x) / 2;
                 y = (App.appHeight - initedHeight + r.y) / 2;
             }
