@@ -27,7 +27,8 @@ from xvm_main.python.logger import *
 #####################################################################
 # handlers
 
-@overrideMethod(WWISE, 'WG_loadBanks')
+# TODO:0.9.16
+#@overrideMethod(WWISE, 'WG_loadBanks')
 def _WWISE_WG_loadBanks(base, xmlPath, banks, isHangar, *args, **kwargs):
     if config.get('sounds/enabled'):
         extraBanks = config.get('sounds/soundBanks/%s' % ('hangar' if isHangar else 'battle'))
