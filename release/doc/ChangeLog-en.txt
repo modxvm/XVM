@@ -1,4 +1,7 @@
 XVM-6.4.6-dev:
+  * added new options in the "carousel" section:
+      "cellType" - type of cells - "default" (depends from window size), "normal" or "small"
+  * added default value for "carousel"/"rows" option: 0 - use client settings
 
 XVM-6.4.5:
   * circles on the minimap implemented

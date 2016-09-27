@@ -8,8 +8,9 @@
   },
   "carousel": {
     //"enabled": false,
+    "cellType": "normal",
     //"zoom": 0.75,
-    "rows": 2,
+    "rows": 0,
     "padding": { "horizontal": 3, "vertical": 3 },
     //"backgroundAlpha": 50,
     //"scrollingSpeed": 2,

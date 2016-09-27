@@ -9,6 +9,7 @@ package com.xvm.types.cfg
     public dynamic class CCarousel extends Object implements ICloneable
     {
         public var enabled:*;
+        public var cellType:String;
         public var zoom:*;
         public var rows:*;
         public var padding:CPadding;

@@ -8,23 +8,17 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xvm.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.cfg.*;
-    import flash.utils.*;
     import flash.display.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.components.carousels.HorizontalScrollerViewPort;
-    import net.wg.gui.components.controls.SoundButton;
-    import net.wg.gui.components.controls.scroller.IViewPort;
+    import net.wg.gui.lobby.hangar.tcarousel.helper.*;
     import scaleform.clik.constants.*;
+    import scaleform.clik.utils.*;
+    import org.idmedia.as3commons.util.*;
 
-    public dynamic class UI_TankCarousel extends TankCarouselUI
+    public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
     {
-        public static const VERTICAL_MARGIN:int = 1;
-
         private var cfg:CCarousel;
         private var _enabled:Boolean = false;
-
-        private var _bg:MovieClip = null;
-        private var _carousel_height:int;
 
         public function UI_TankCarousel()
         {
@@ -48,7 +42,6 @@ package com.xvm.lobby.ui.tankcarousel
                 try
                 {
                     setupMouseWheelScrollingSpeed();
-                    setupScrollList();
                     setupFilters();
                 }
                 catch (ex:Error)
@@ -58,31 +51,60 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
-        override protected function onDispose():void
+        override public function as_rowCount(rows:int):void
         {
-            if (_bg)
+            if (_enabled)
             {
-                _bg = null;
+                if (!isNaN(cfg.rows) && cfg.rows > 0)
+                {
+                    rows = cfg.rows;
+                }
             }
-
-            super.onDispose();
+            super.as_rowCount(rows);
         }
 
-        override protected function draw() : void
+        override protected function getNewHelper():ITankCarouselHelper
         {
-            super.draw();
-            if (isInvalid(InvalidationType.SIZE))
+            if (_enabled)
             {
-                _bg.graphics.clear();
-                _bg.graphics.beginFill(0x000000, cfg.backgroundAlpha / 100.0);
-                _bg.graphics.drawRect(0, 0, width, getBottom());
-                _bg.graphics.endFill();
-            }
-        }
+                var cellType:String = StringUtils.trim(cfg.cellType.toLowerCase());
+                if (cellType != "small" && cellType != "normal")
+                {
+                    if (super.getNewHelper().linkRenderer == "SmallTankCarouselItemRendererUI")
+                    {
+                        cellType = "small";
+                    }
+                    else
+                    {
+                        cellType = "normal";
+                    }
+                }
 
-        override public function getBottom():Number
-        {
-            return _carousel_height + 16;
+                var newHelper:ITankCarouselHelper = this.helper;
+                switch (cellType)
+                {
+                    case "small":
+                        if (!(newHelper is SmallTankCarouselHelper))
+                        {
+                            newHelper = new SmallTankCarouselHelper();
+                            invalidate(InvalidationType.SETTINGS);
+                        }
+                        break;
+                    case "normal":
+                        if (!(newHelper is TankCarouselHelper))
+                        {
+                            newHelper = new TankCarouselHelper();
+                            invalidate(InvalidationType.SETTINGS);
+                        }
+                        break;
+                }
+
+                return newHelper;
+            }
+            else
+            {
+                return super.getNewHelper();
+            }
         }
 
         // PRIVATE
@@ -92,17 +114,13 @@ package com.xvm.lobby.ui.tankcarousel
             try
             {
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
-                itemRenderer = getQualifiedClassName(UI_TankCarouselItemRenderer);
 
-                var rendererHeight:int = Math.ceil(UI_TankCarouselItemRenderer.ITEM_HEIGHT * cfg.zoom) + UI_TankCarouselItemRenderer.ITEM_MARGIN * 2;
-                _carousel_height = (rendererHeight + cfg.padding.vertical) * cfg.rows - cfg.padding.vertical + VERTICAL_MARGIN * 2;
-                scrollList.height = (leftArrow as MovieClip).height = (rightArrow as MovieClip).height = _carousel_height;
-                (rightArrow as MovieClip).y = (leftArrow as MovieClip).y + _carousel_height; // FIXIT: why vertically aligned to bottom?
-                //leftFadeEndItem.visible = rightFadeEndItem.visible = false;
+                leftFadeEndItem.visible = rightFadeEndItem.visible = false;
+                background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, 100) / 100.0;
 
-                background.alpha = 0;
-                _bg = new MovieClip();
-                addChildAt(_bg, 0);
+                TankCarouselHelper.PADDING = SmallTankCarouselHelper.PADDING = new Padding(
+                    Macros.FormatNumberGlobal(cfg.padding.vertical, TankCarouselHelper.PADDING.vertical) / 2.0,
+                    Macros.FormatNumberGlobal(cfg.padding.horizontal, TankCarouselHelper.PADDING.horizontal) / 2.0);
             }
             catch (ex:Error)
             {
@@ -129,28 +147,6 @@ package com.xvm.lobby.ui.tankcarousel
             scrollList.scrollConfig = scrollList.scrollConfig; // reinitialize
         }
 
-        private function setupScrollList():void
-        {
-            var horizontalPadding:Number = Macros.FormatNumberGlobal(cfg.padding.horizontal, scrollList.gap);
-            scrollList.gap = horizontalPadding;
-
-            scrollList.validateNow();
-
-            var viewPort:MultiRowsScrollerViewPort = new MultiRowsScrollerViewPort();
-            viewPort.owner = scrollList;
-            viewPort.gap = horizontalPadding;
-            viewPort.setSelectedIndex(scrollList.selectedIndex);
-            viewPort.tooltipDecorator = scrollList.xfw_tooltipDecorator;
-            scrollList.viewPort = viewPort;
-            scrollList.invalidate();
-        }
-
-        override public function goToItem(param1:int, param2:Boolean = false):void
-        {
-            param1 /= cfg.rows;
-            super.goToItem(param1, param2);
-        }
-
         // config: "filters"
         private function setupFilters():void
         {
@@ -166,5 +162,85 @@ package com.xvm.lobby.ui.tankcarousel
             call_setVehiclesFilter();
             */
         }
+    }
+}
+
+import com.xvm.lobby.ui.tankcarousel.*;
+import flash.utils.*;
+import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
+import scaleform.clik.utils.Padding;
+
+class TankCarouselHelper extends Object implements ITankCarouselHelper
+{
+    public static var PADDING:Padding = new Padding(10);
+
+    function TankCarouselHelper()
+    {
+        super();
+    }
+
+    public function get linkRenderer() : String
+    {
+        return getQualifiedClassName(UI_TankCarouselItemRenderer);
+    }
+
+    public function get rendererWidth() : Number
+    {
+        return 162;
+    }
+
+    public function get rendererHeight() : Number
+    {
+        return 102;
+    }
+
+    public function get gap() : Number
+    {
+        return PADDING.horizontal / 2;
+    }
+
+    public function get padding() : Padding
+    {
+        return PADDING;
+    }
+}
+
+import com.xvm.lobby.ui.tankcarousel.*;
+import flash.utils.*;
+import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
+import scaleform.clik.utils.Padding;
+
+class SmallTankCarouselHelper extends Object implements ITankCarouselHelper
+{
+    public static var PADDING:Padding = new Padding(10);
+
+    function SmallTankCarouselHelper()
+    {
+        super();
+    }
+
+    public function get linkRenderer() : String
+    {
+        return getQualifiedClassName(UI_SmallTankCarouselItemRenderer);
+    }
+
+    public function get rendererWidth() : Number
+    {
+        return 162;
+    }
+
+    public function get rendererHeight() : Number
+    {
+        return 37;
+    }
+
+    public function get gap() : Number
+    {
+        return PADDING.horizontal / 2;
+    }
+
+    public function get padding() : Padding
+    {
+        return PADDING;
     }
 }

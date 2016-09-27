@@ -14,21 +14,24 @@
     // false - Disable customizable carousel.
     // false - Отключить настраиваемую карусель.
     "enabled": true,
+    // Type of cells - "default" (depends from window size), "normal" or "small"
+    // Вид ячеек - "default" (в зависимости от размера окна), "normal" (обычные), "small" (маленькие)
+    "cellType": "default",
     // Scale of carousel cells.
     // Масштаб ячеек карусели.
     "zoom": 1,
-    // Number of rows at carousel.
-    // Количество рядов карусели.
-    "rows": 1,
+    // Number of rows at carousel. 0 - use client settings
+    // Количество рядов карусели. 0 - использовать настройки клиента
+    "rows": 0,
     // Spacing between carousel cells.
     // Отступ между ячейками карусели.
     "padding": {
       "horizontal": 10,   // по горизонтали
       "vertical": 2       // по вертикали
     },
-    // Background transparency (default - 80)
-    // Прозрачность подложки (по умолчанию - 80)
-    "backgroundAlpha": 80,
+    // Background transparency (default - 100)
+    // Прозрачность подложки (по умолчанию - 100)
+    "backgroundAlpha": 100,
     // Mouse wheel scrolling speed multiplier (default - 1)
     // Множитель скорости прокрутки колесом мыши (по умолчанию - 1)
     "scrollingSpeed": 1,

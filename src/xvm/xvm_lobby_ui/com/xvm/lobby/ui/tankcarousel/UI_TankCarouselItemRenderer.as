@@ -24,7 +24,6 @@ package com.xvm.lobby.ui.tankcarousel
         private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
 
         private var cfg:CCarousel;
-        private var _lastSelectedState:Boolean;
         private var _extraFieldsHolder:MovieClip = null;
         private var _extraFields:ExtraFields = null;
         private var _dataVO:VehicleCarouselVO = null;
