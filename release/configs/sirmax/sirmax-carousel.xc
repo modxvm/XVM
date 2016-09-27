@@ -37,7 +37,6 @@
     "fields": {
       "tankType":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "level":          { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      "multiXp":        { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "xp":             { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       //"tankName":       { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "statusText":     { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },

@@ -94,9 +94,6 @@
       // Уровень техники
       "level":    { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // todo: english description
-      // Иконка не сбитого кратного опыта за первую победу в день.
-      "multiXp":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      // todo: english description
       // Иконка не сбитого опыта за первую победу в день.
       "xp":       { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Vehicle name.
