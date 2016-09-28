@@ -3,6 +3,9 @@ XVM-6.4.6-dev:
       "cellType" - type of cells - "default" (depends from window size), "normal" or "small"
   * added default value for "carousel"/"rows" option: 0 - use client settings
 
+XVM-6.4.5.1:
+  * fix client crash when "minimap"/"circles"/"special" section is not empty
+
 XVM-6.4.5:
   * circles on the minimap implemented
   * renamed option in the "minimap" and "minimapAlt" sections (with inverted values):
