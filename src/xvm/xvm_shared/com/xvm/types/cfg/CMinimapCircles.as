@@ -20,11 +20,6 @@ package com.xvm.types.cfg
             return Vector.<CMinimapCircle>(view);
         }
 
-        public function get parsedSpecial():Vector.<CMinimapCircle>
-        {
-            return Vector.<CMinimapCircle>(special);
-        }
-
         public function clone():*
         {
             throw new Error("clone() method is not implemented");

@@ -363,13 +363,13 @@ class Circles extends Sprite implements IDisposable
 
         // Special vehicle key dependent circle configs
         var vehicleKey:String = VehicleInfo.get(BattleGlobalData.playerVehCD).key;
-        len = cfg.parsedSpecial.length;
+        len = cfg.special.length;
         for (i = 0; i < len; ++i)
         {
-            var rule:Object = cfg.parsedSpecial[i];
+            var rule:Object = cfg.special[i];
             if (rule && rule[vehicleKey])
             {
-                c = CMinimapCircle(cfg.parsedSpecial[i][vehicleKey]);
+                c = CMinimapCircle(cfg.special[i][vehicleKey]);
                 if (!c.enabled)
                     continue;
                 if (!c.state)

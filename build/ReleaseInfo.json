@@ -1,37 +1,37 @@
 ﻿{
     "RU": {
-        "ver": "6.4.5",
+        "ver": "6.4.5.1",
         "wot": "0.9.15.2",
         "message": " • добавлены круги на миникарте\n • WoT 0.9.15.2\n • Исправлены ошибки\n • Добавлены новые возможности\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "6.4.5",
+        "ver": "6.4.5.1",
         "wot": "0.9.15.2",
         "message": " • added circles on minimap\n • WoT 0.9.15.2\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "US": {
-        "ver": "6.4.5",
+        "ver": "6.4.5.1",
         "wot": "0.9.15.2",
         "message": " • added circles on minimap\n • WoT 0.9.15.2\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "6.4.5",
+        "ver": "6.4.5.1",
         "wot": "0.9.15.2",
         "message": " • added circles on minimap\n • WoT 0.9.15.2\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "KR": {
-        "ver": "6.4.5",
+        "ver": "6.4.5.1",
         "wot": "0.9.15.2",
         "message": " • added circles on minimap\n • WoT 0.9.15.2\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "6.4.5",
+        "ver": "6.4.5.1",
         "wot": "0.9.15.2",
         "message": " • added circles on minimap\n • WoT 0.9.15.2\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT":  {
-        "ver": "6.4.5",
+        "ver": "6.4.5.1",
         "wot": "0.9.15.2",
-        "message": " • added circles on minimap\n • WoT 0.9.15.2\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "message": "  • added circles on minimap\n • WoT 0.9.15.2\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
