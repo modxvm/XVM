@@ -12,19 +12,17 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xvm.types.dossier.*;
     import flash.display.*;
     import flash.utils.*;
+    import flash.geom.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
 
     public /*dynamic*/ class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
-        public static const ITEM_WIDTH:int = 160;
-        public static const ITEM_HEIGHT:int = 100;
-
         private static const COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT:String = 'xvm_carousel.get_used_slots_count';
         private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
 
         private var cfg:CCarousel;
-        private var _extraFieldsHolder:MovieClip = null;
+        private var _extraFieldsHolder:Sprite = null;
         private var _extraFields:ExtraFields = null;
 
         public function UI_TankCarouselItemRenderer()
@@ -86,18 +84,19 @@ package com.xvm.lobby.ui.tankcarousel
             try
             {
                 var zoom:Number = cfg.zoom;
-                _extraFieldsHolder = new MovieClip();
-                _extraFieldsHolder.x = this.content.x + 1;
-                _extraFieldsHolder.y = this.content.y + 1;
+                _extraFieldsHolder = new Sprite();
+                _extraFieldsHolder.x = 0;
+                _extraFieldsHolder.y = 0;
                 _extraFieldsHolder.mouseEnabled = false;
                 _extraFieldsHolder.mouseChildren = false;
+                _extraFieldsHolder.scrollRect = new Rectangle(0, 0, width, height);
                 addChildAt(_extraFieldsHolder, this.getChildIndex(this.content) + 1);
 
                 _extraFields = new ExtraFields(cfg.extraFields, true, null, null, null, null, null, CTextFormat.GetDefaultConfigForLobby());
+                _extraFields.x = 0;
+                _extraFields.y = 0;
                 _extraFields.scaleX = _extraFields.scaleY = 1 / zoom;
-                // TODO
-                //_extraFieldsHolder.addChild(_extraFields);
-                _extraFieldsHolder.mask = _extraFieldsHolder.addChild(createMask(-2, -2, ITEM_WIDTH + 4, ITEM_HEIGHT + 4));
+                _extraFieldsHolder.addChild(_extraFields);
             }
             catch (ex:Error)
             {
@@ -108,8 +107,8 @@ package com.xvm.lobby.ui.tankcarousel
         private function setupStandardFields():void
         {
             var zoom:Number = cfg.zoom;
-            var w:int = Math.ceil(ITEM_WIDTH * zoom);
-            var h:int = Math.ceil(ITEM_HEIGHT * zoom);
+            var w:int = Math.ceil((width - 2) * zoom);
+            var h:int = Math.ceil((height - 2) * zoom);
 
             setupStandardField(content.imgXp, cfg.fields.multiXp);
             content.imgXp.x = w - content.imgXp.width + cfg.fields.multiXp.dx;
@@ -149,7 +148,7 @@ package com.xvm.lobby.ui.tankcarousel
             content.txtTankName.scaleX = content.txtTankName.scaleY = cfg.scale;
             content.txtTankName.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             content.txtTankName.x = 2 + cfg.dx;
-            content.txtTankName.width = ITEM_WIDTH - 4;
+            content.txtTankName.width = width - 6;
             if (isNaN(orig_tankIcon_txtTankName_y))
                 orig_tankIcon_txtTankName_y = content.txtTankName.y;
             content.txtTankName.y = orig_tankIcon_txtTankName_y + cfg.dy;
@@ -189,16 +188,6 @@ package com.xvm.lobby.ui.tankcarousel
             */
         }
 
-        private function createMask(x:Number, y:Number, width:Number, height:Number):Shape
-        {
-            var mask:Shape = new Shape();
-            mask.graphics.beginFill(0xFFFFFF, 1);
-            mask.graphics.drawRect(x, y, width, height);
-            mask.graphics.endFill();
-            mask.visible = false;
-            return mask;
-        }
-
         private function updateDataXvm():void
         {
             try
@@ -209,10 +198,10 @@ package com.xvm.lobby.ui.tankcarousel
                     if (!(dataVO.buySlot || dataVO.buyTank))
                     {
                         setupInfoTextField(cfg.fields.statusText);
-                        if (dataVO.id)
+                        if (dataVO.icon)
                         {
                             var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
-                            options.vehicleData = VehicleInfo.get(dataVO.id);
+                            options.vehicleData = VehicleInfo.getByIcon(dataVO.icon);
                             var dossier:AccountDossier = Dossier.getAccountDossier();
                             if (dossier)
                             {
