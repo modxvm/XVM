@@ -158,8 +158,8 @@ def _BattleResultsWindow__populateAccounting(self, commonData, personalCommonDat
 
 # get string 'damageAssistedNames'
 @overrideMethod(BattleResultsWindow, '_BattleResultsWindow__getAssistInfo')
-def _BattleResultsWindow__getAssistInfo(base, self, vehicle, iInfo, valsStr):
-    result = base(self, vehicle, iInfo, valsStr)
+def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
+    result = base(self, iInfo, valsStr)
     if 'damageAssistedNames' in result:
         self._xvm_data['damageAssistedNames'] = result['damageAssistedNames']
     return result
