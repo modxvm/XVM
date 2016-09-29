@@ -21,7 +21,7 @@ package com.xvm.lobby.ui.tankcarousel
         private static const COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT:String = 'xvm_carousel.get_used_slots_count';
         private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
 
-        private var cfg:CCarousel;
+        private var cfg:CCarouselCell;
         private var _extraFieldsHolder:Sprite = null;
         private var _extraFields:ExtraFields = null;
 
@@ -29,10 +29,9 @@ package com.xvm.lobby.ui.tankcarousel
         {
             //Logger.add(getQualifiedClassName(this));
             super();
-            cfg = Config.config.hangar.carousel;
+            cfg = Config.config.hangar.carousel.normal;
             try
             {
-                scaleX = scaleY = cfg.zoom;
                 createExtraFields();
                 setupStandardFields();
             }
@@ -83,7 +82,6 @@ package com.xvm.lobby.ui.tankcarousel
         {
             try
             {
-                var zoom:Number = cfg.zoom;
                 _extraFieldsHolder = new Sprite();
                 _extraFieldsHolder.x = 0;
                 _extraFieldsHolder.y = 0;
@@ -95,7 +93,7 @@ package com.xvm.lobby.ui.tankcarousel
                 _extraFields = new ExtraFields(cfg.extraFields, true, null, null, null, null, null, CTextFormat.GetDefaultConfigForLobby());
                 _extraFields.x = 0;
                 _extraFields.y = 0;
-                _extraFields.scaleX = _extraFields.scaleY = 1 / zoom;
+                //_extraFields.scaleX = _extraFields.scaleY = 1 / zoom;
                 _extraFieldsHolder.addChild(_extraFields);
             }
             catch (ex:Error)
@@ -106,12 +104,11 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function setupStandardFields():void
         {
-            var zoom:Number = cfg.zoom;
-            var w:int = Math.ceil((width - 2) * zoom);
-            var h:int = Math.ceil((height - 2) * zoom);
+            var w:int = width - 2;
+            var h:int = height - 2;
 
-            setupStandardField(content.imgXp, cfg.fields.multiXp);
-            content.imgXp.x = w - content.imgXp.width + cfg.fields.multiXp.dx;
+            setupStandardField(content.imgXp, cfg.fields.xp);
+            content.imgXp.x = w - content.imgXp.width + cfg.fields.xp.dx;
 
             setupStandardField(content.mcTankType, cfg.fields.tankType);
 

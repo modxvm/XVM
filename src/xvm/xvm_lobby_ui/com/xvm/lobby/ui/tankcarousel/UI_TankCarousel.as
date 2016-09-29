@@ -86,14 +86,14 @@ package com.xvm.lobby.ui.tankcarousel
                     case "small":
                         if (!(newHelper is SmallTankCarouselHelper))
                         {
-                            newHelper = new SmallTankCarouselHelper();
+                            newHelper = new SmallTankCarouselHelper(cfg.small);
                             invalidate(InvalidationType.SETTINGS);
                         }
                         break;
                     case "normal":
                         if (!(newHelper is TankCarouselHelper))
                         {
-                            newHelper = new TankCarouselHelper();
+                            newHelper = new TankCarouselHelper(cfg.normal);
                             invalidate(InvalidationType.SETTINGS);
                         }
                         break;
@@ -117,10 +117,6 @@ package com.xvm.lobby.ui.tankcarousel
 
                 leftFadeEndItem.visible = rightFadeEndItem.visible = false;
                 background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, 100) / 100.0;
-
-                TankCarouselHelper.PADDING = SmallTankCarouselHelper.PADDING = new Padding(
-                    Macros.FormatNumberGlobal(cfg.padding.vertical, TankCarouselHelper.PADDING.vertical) / 2.0,
-                    Macros.FormatNumberGlobal(cfg.padding.horizontal, TankCarouselHelper.PADDING.horizontal) / 2.0);
             }
             catch (ex:Error)
             {
@@ -165,82 +161,87 @@ package com.xvm.lobby.ui.tankcarousel
     }
 }
 
+import com.xvm.*;
 import com.xvm.lobby.ui.tankcarousel.*;
+import com.xvm.types.cfg.*;
 import flash.utils.*;
 import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
 import scaleform.clik.utils.Padding;
 
 class TankCarouselHelper extends Object implements ITankCarouselHelper
 {
-    public static var PADDING:Padding = new Padding(10);
+    private var _padding:Padding;
+    private var _width:int;
+    private var _height:int;
 
-    function TankCarouselHelper()
+    function TankCarouselHelper(cfg:CCarouselCell)
     {
-        super();
+        _padding = new Padding(
+            Macros.FormatNumberGlobal(cfg.padding.vertical, DEFAULT_PADDING.vertical) / 2.0,
+            Macros.FormatNumberGlobal(cfg.padding.horizontal, DEFAULT_PADDING.horizontal) / 2.0);
+        _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2;
+        _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2;
     }
 
-    public function get linkRenderer() : String
+    public function get linkRenderer():String
     {
         return getQualifiedClassName(UI_TankCarouselItemRenderer);
     }
 
-    public function get rendererWidth() : Number
+    public function get rendererWidth():Number
+    {
+        return _width;
+    }
+
+    public function get rendererHeight():Number
+    {
+        return _height;
+    }
+
+    public function get gap():Number
+    {
+        return _padding.horizontal / 2;
+    }
+
+    public function get padding():Padding
+    {
+        return _padding;
+    }
+
+    // protected
+
+    protected function get DEFAULT_PADDING():Padding
+    {
+        return new Padding(10);
+    }
+
+    protected function get DEFAULT_WIDTH():int
     {
         return 162;
     }
 
-    public function get rendererHeight() : Number
+    protected function get DEFAULT_HEIGHT():int
     {
         return 102;
     }
-
-    public function get gap() : Number
-    {
-        return PADDING.horizontal / 2;
-    }
-
-    public function get padding() : Padding
-    {
-        return PADDING;
-    }
 }
 
-import com.xvm.lobby.ui.tankcarousel.*;
-import flash.utils.*;
-import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
-import scaleform.clik.utils.Padding;
-
-class SmallTankCarouselHelper extends Object implements ITankCarouselHelper
+class SmallTankCarouselHelper extends TankCarouselHelper implements ITankCarouselHelper
 {
-    public static var PADDING:Padding = new Padding(10);
-
-    function SmallTankCarouselHelper()
+    function SmallTankCarouselHelper(cfg:CCarouselCell)
     {
-        super();
+        super(cfg);
     }
 
-    public function get linkRenderer() : String
+    override public function get linkRenderer():String
     {
         return getQualifiedClassName(UI_SmallTankCarouselItemRenderer);
     }
 
-    public function get rendererWidth() : Number
-    {
-        return 162;
-    }
+    // PROTECTED
 
-    public function get rendererHeight() : Number
+    override protected function get DEFAULT_HEIGHT():int
     {
         return 37;
-    }
-
-    public function get gap() : Number
-    {
-        return PADDING.horizontal / 2;
-    }
-
-    public function get padding() : Padding
-    {
-        return PADDING;
     }
 }
