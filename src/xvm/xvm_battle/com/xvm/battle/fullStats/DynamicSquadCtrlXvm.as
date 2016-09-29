@@ -18,11 +18,13 @@ package com.xvm.battle.fullStats
 
     public class DynamicSquadCtrlXvm extends DynamicSquadCtrl
     {
+        private var DEFAULT_SQUAD_STATUS_X:Number;
         private var DEFAULT_SQUAD_ICON_X:Number;
 
         private var cfg:CStatisticForm;
 
         private var _isLeftPanel:Boolean;
+        private var _squadStatus:SquadInviteStatusView;
         private var _squadIcon:BattleAtlasSprite;
 
         public function DynamicSquadCtrlXvm(isLeftPanel:Boolean, squadStatus:SquadInviteStatusView, squadIcon:BattleAtlasSprite,
@@ -32,14 +34,17 @@ package com.xvm.battle.fullStats
             super(squadStatus, squadIcon, squadAcceptBt, squadAddBt, hit, noSound);
 
             _isLeftPanel = isLeftPanel;
+            _squadStatus = squadStatus;
             _squadIcon = squadIcon;
 
+            DEFAULT_SQUAD_STATUS_X = squadStatus.x;
             DEFAULT_SQUAD_ICON_X = squadIcon.x;
 
             cfg = Config.config.statisticForm;
 
             if (cfg.removeSquadIcon)
             {
+                squadStatus.alpha = 0;
                 squadIcon.alpha = 0;
             }
 
@@ -59,10 +64,12 @@ package com.xvm.battle.fullStats
         {
             if (_isLeftPanel)
             {
+                _squadStatus.x = DEFAULT_SQUAD_STATUS_X + cfg.squadIconOffsetXLeft;
                 _squadIcon.x = DEFAULT_SQUAD_ICON_X + cfg.squadIconOffsetXLeft;
             }
             else
             {
+                _squadStatus.x = DEFAULT_SQUAD_STATUS_X - cfg.squadIconOffsetXRight;
                 _squadIcon.x = DEFAULT_SQUAD_ICON_X - cfg.squadIconOffsetXRight;
             }
         }
