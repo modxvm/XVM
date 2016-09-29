@@ -57,8 +57,21 @@ package com.xvm.battle.minimap
             page.minimap.validateNow();
             page.xfw_registerComponent(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
             // restore event handlers setted up in the BaseBattlePage.configUI()
+            component.addEventListener(MinimapEvent.TRY_SIZE_CHANGED, onMiniMapTrySizeChangeHandler, false, 0, true);
             component.addEventListener(MinimapEvent.SIZE_CHANGED, page.xfw_onMiniMapChangeHandler, false, 0, true);
             component.addEventListener(MinimapEvent.VISIBILITY_CHANGED, page.xfw_onMiniMapChangeHandler, false, 0, true);
+        }
+
+        private function onMiniMapTrySizeChangeHandler(e:MinimapEvent):void
+        {
+            if (Config.config.minimap.enabled)
+            {
+                page.minimap.setAllowedSizeIndex(e.sizeIndex);
+            }
+            else
+            {
+                page.xfw_onMiniMapTrySizeChangeHandler(e);
+            }
         }
     }
 }
