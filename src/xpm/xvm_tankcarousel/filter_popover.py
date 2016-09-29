@@ -86,8 +86,8 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
 #   CompleteCrew	NoMaster
 #   Reserve		[igr]
 @overrideMethod(filter_popover, '_getInitialVO')
-def _filter_popover_getInitialVO(base, filters, mapping):
-    data = base(filters, mapping)
+def _filter_popover_getInitialVO(base, filters, mapping, xpRateMultiplier):
+    data = base(filters, mapping, xpRateMultiplier)
     #debug(data['specials'])
     #debug(mapping)
     try:
@@ -111,11 +111,9 @@ def _filter_popover_getInitialVO(base, filters, mapping):
 
         if is_igr:
             data['specials'].append(igr)
-
-        return data
     except Exception as ex:
         err('_filter_popover_getInitialVO() exception: ' + traceback.format_exc())
-        return base(filters, mapping)
+    return data
 
 @overrideMethod(FilterPopover, '_FilterPopover__generateMapping')
 def _FilterPopover__generateMapping(base, self, hasRented, hasEvent):
