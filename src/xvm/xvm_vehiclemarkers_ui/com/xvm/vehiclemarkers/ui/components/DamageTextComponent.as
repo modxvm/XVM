@@ -75,12 +75,23 @@ package com.xvm.vehiclemarkers.ui.components
                     textField.multiline = true;
                     textField.wordWrap = false;
                     textField.alpha = alpha;
-                    if (cfg.textFormat && cfg.textFormat.color == null)
+                    if (!cfg.textFormat)
+                    {
+                        cfg.textFormat = CTextFormat.GetDefaultConfigForMarkers();
                         cfg.textFormat.color = "{{c:dmg}}";
+                    }
+                    if (cfg.textFormat.color == null)
+                    {
+                        cfg.textFormat.color = "{{c:dmg}}";
+                    }
+                    if (cfg.textFormat.leading == null)
+                    {
+                        cfg.textFormat.leading = -2;
+                    }
                     textField.defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, playerState);
                     textField.filters = Utils.createShadowFiltersFromConfig(cfg.shadow, playerState);
                     textField.x -= (textField.width / 2.0);
-                    textField.htmlText = "<textformat leading='-2'>" + text + "</textformat>";
+                    textField.htmlText = text;
 
                     new DamageTextAnimation(cfg, mc); // defines and starts
                 }
