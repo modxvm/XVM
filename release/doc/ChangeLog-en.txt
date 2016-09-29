@@ -12,6 +12,8 @@ XVM-6.4.6-dev:
       "height" - cell height
   * option "carousel"/"zoom" removed ("width" and "height" allow to do the same)
   * created separate files for carousel cell types: "carouselNormal.xc", "carouselSmall.xc"
+  * battleLabels: added events:
+      PY(event_name)  - event from python, sent by as_event(event_name)
 
 XVM-6.4.5.1:
   * fix client crash when "minimap"/"circles"/"special" section is not empty

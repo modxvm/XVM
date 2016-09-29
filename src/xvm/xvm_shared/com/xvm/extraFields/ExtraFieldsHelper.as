@@ -48,7 +48,8 @@ package com.xvm.extraFields
                 {
                     for each (var event:String in events)
                     {
-                        switch (StringUtil.trim(event).toUpperCase())
+                        event = StringUtil.trim(event);
+                        switch (event.toUpperCase())
                         {
                             case "ON_BATTLE_STATE_CHANGED":
                                 Xvm.addEventListener(PlayerStateEvent.CHANGED, field.updateOnEvent);
@@ -95,6 +96,23 @@ package com.xvm.extraFields
                                 if (!timerSec)
                                 {
                                     initTimerSec();
+                                }
+                                break;
+                            default:
+                                // "PY(event_name)"
+                                var pattern:RegExp = /PY\s*\(\s*(\w+)\s*\)/i;
+                                var matches:Array = event.match(pattern);
+                                //Logger.addObject(matches, 1, event);
+                                if (matches && matches.length > 1)
+                                {
+                                    var name:String = matches[1];
+                                    Xfw.addCommandListener(XvmCommands.AS_PY_EVENT, function(eventName:String):void
+                                    {
+                                        if (eventName == name)
+                                        {
+                                            field.updateOnEvent(new PlayerStateEvent(XvmCommands.AS_PY_EVENT));
+                                        }
+                                    });
                                 }
                                 break;
                         }
