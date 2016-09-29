@@ -16,6 +16,7 @@ from gui.app_loader.settings import APP_NAME_SPACE
 from gui.shared import g_eventBus, events
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 from gui.battle_control import g_sessionProvider, avatar_getter
+from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
 from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
