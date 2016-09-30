@@ -36,7 +36,6 @@ from notification.decorators import MessageDecorator
 from notification.settings import NOTIFICATION_TYPE
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
-from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.shared import g_eventBus, events
 from gui.Scaleform.framework.application import SFApplication
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
