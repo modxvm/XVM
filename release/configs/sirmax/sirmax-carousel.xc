@@ -33,20 +33,20 @@
     "normal": {
       "width": 120,
       "height": 75,
-      "padding": { "horizontal": 4, "vertical": 4 },
+      "padding": { "horizontal": 4, "vertical": 10 },
       "fields": {
-        "tankType":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "level":          { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "xp":             { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        //"tankName":       { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "statusText":     { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "statusTextBuy":  { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "clanLock":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "activateButton": { "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"tankType":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"level":          { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"xp":             { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        ////"tankName":       { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"statusText":     { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"statusTextBuy":  { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"clanLock":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"activateButton": { "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         "__stub__": {}
       },
       "extraFields": [
-        // left side
+/*        // left side
 
         // level, battle tiers
         { "x": 21, "y": 0, "shadow": ${ "def.textFieldShadow" },
@@ -93,10 +93,10 @@
         //  "format": "<font size='15' color='#C8C8B5'>{{v.name}}</font>",
         //  "shadow": { "color": "0x73734C", "alpha": 0.8, "blur": 6, "strength": 2, "distance": 0, "angle": 0 }
         //},
-
+*/
         // border
         { "x": 0, "y": 0, "width": 122, "height": 77, "layer":"top", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
-        { "x": 0, "y": 0, "width": 122, "height": 77, "layer":"top", "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
+        //{ "x": 0, "y": 0, "width": 122, "height": 77, "layer":"top", "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
         {}
       ]
     },
@@ -165,8 +165,8 @@
         //},
 
         // border
-        { "x": 0, "y": 0, "width": "160", "height": 100, "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
-        { "x": 0, "y": 0, "width": 160, "height": 100, "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
+        { "x": 0, "y": 0, "width": 162, "height": 37, "layer":"top", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
+        //{ "x": 0, "y": 0, "width": 162, "height": 37, "layer":"top", "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
         {}
       ]
     }
