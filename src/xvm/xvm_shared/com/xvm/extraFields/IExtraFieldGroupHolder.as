@@ -10,10 +10,10 @@ package com.xvm.extraFields
     public interface IExtraFieldGroupHolder
     {
         function get isLeftPanel():Boolean;
-        function get substrateHolder():MovieClip;
-        function get bottomHolder():MovieClip;
-        function get normalHolder():MovieClip;
-        function get topHolder():MovieClip;
+        function get substrateHolder():Sprite;
+        function get bottomHolder():Sprite;
+        function get normalHolder():Sprite;
+        function get topHolder():Sprite;
         function getSchemeNameForPlayer(options:IVOMacrosOptions):String;
         function getSchemeNameForVehicle(options:IVOMacrosOptions):String;
     }

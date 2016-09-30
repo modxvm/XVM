@@ -17,8 +17,11 @@ package com.xvm.lobby.ui.tankcarousel
 
     public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
     {
+        private static const THRESHOLD:int = 650;
+
         private var cfg:CCarousel;
         private var _enabled:Boolean = false;
+        private var _rowCount:int = 1;
 
         public function UI_TankCarousel()
         {
@@ -60,6 +63,7 @@ package com.xvm.lobby.ui.tankcarousel
                     rows = cfg.rows;
                 }
             }
+            _rowCount = rows;
             super.as_rowCount(rows);
         }
 
@@ -67,10 +71,14 @@ package com.xvm.lobby.ui.tankcarousel
         {
             if (_enabled)
             {
+                try
+                {
                 var cellType:String = StringUtils.trim(cfg.cellType.toLowerCase());
                 if (cellType != "small" && cellType != "normal")
                 {
-                    if (super.getNewHelper().linkRenderer == "SmallTankCarouselItemRendererUI")
+                    var normalHelper:TankCarouselHelper = new TankCarouselHelper(cfg.normal);
+                    var h:int = (normalHelper.gap + normalHelper.rendererHeight) * _rowCount - normalHelper.gap;
+                    if (App.appHeight - h < THRESHOLD)
                     {
                         cellType = "small";
                     }
@@ -98,7 +106,11 @@ package com.xvm.lobby.ui.tankcarousel
                         }
                         break;
                 }
-
+                }
+                catch (ex:Error)
+                {
+                        Logger.err(ex);
+                }
                 return newHelper;
             }
             else
@@ -165,16 +177,18 @@ import com.xvm.*;
 import com.xvm.lobby.ui.tankcarousel.*;
 import com.xvm.types.cfg.*;
 import flash.utils.*;
+import net.wg.data.constants.*;
 import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
+import net.wg.infrastructure.exceptions.*;
 import scaleform.clik.utils.Padding;
 
-class TankCarouselHelper extends Object implements ITankCarouselHelper
+class TankCarouselHelperBase extends Object implements ITankCarouselHelper
 {
     private var _padding:Padding;
     private var _width:int;
     private var _height:int;
 
-    function TankCarouselHelper(cfg:CCarouselCell)
+    function TankCarouselHelperBase(cfg:CCarouselCell)
     {
         _padding = new Padding(
             Macros.FormatNumberGlobal(cfg.padding.vertical, DEFAULT_PADDING.vertical) / 2.0,
@@ -185,7 +199,7 @@ class TankCarouselHelper extends Object implements ITankCarouselHelper
 
     public function get linkRenderer():String
     {
-        return getQualifiedClassName(UI_TankCarouselItemRenderer);
+        throw new AbstractException("TankCarouselHelperBase.linkRenderer " + Errors.ABSTRACT_INVOKE);
     }
 
     public function get rendererWidth():Number
@@ -217,16 +231,41 @@ class TankCarouselHelper extends Object implements ITankCarouselHelper
 
     protected function get DEFAULT_WIDTH():int
     {
-        return 162;
+        throw new AbstractException("TankCarouselHelperBase.DEFAULT_WIDTH " + Errors.ABSTRACT_INVOKE);
     }
 
     protected function get DEFAULT_HEIGHT():int
     {
-        return 102;
+        throw new AbstractException("TankCarouselHelperBase.DEFAULT_HEIGHT " + Errors.ABSTRACT_INVOKE);
     }
 }
 
-class SmallTankCarouselHelper extends TankCarouselHelper implements ITankCarouselHelper
+class TankCarouselHelper extends TankCarouselHelperBase implements ITankCarouselHelper
+{
+    function TankCarouselHelper(cfg:CCarouselCell)
+    {
+        super(cfg);
+    }
+
+    override public function get linkRenderer():String
+    {
+        return getQualifiedClassName(UI_TankCarouselItemRenderer);
+    }
+
+    // PROTECTED
+
+    override protected function get DEFAULT_WIDTH():int
+    {
+        return UI_TankCarouselItemRenderer.DEFAULT_WIDTH;
+    }
+
+    override protected function get DEFAULT_HEIGHT():int
+    {
+        return UI_TankCarouselItemRenderer.DEFAULT_HEIGHT;
+    }
+}
+
+class SmallTankCarouselHelper extends TankCarouselHelperBase implements ITankCarouselHelper
 {
     function SmallTankCarouselHelper(cfg:CCarouselCell)
     {
@@ -240,8 +279,13 @@ class SmallTankCarouselHelper extends TankCarouselHelper implements ITankCarouse
 
     // PROTECTED
 
+    override protected function get DEFAULT_WIDTH():int
+    {
+        return UI_SmallTankCarouselItemRenderer.DEFAULT_WIDTH;
+    }
+
     override protected function get DEFAULT_HEIGHT():int
     {
-        return 37;
+        return UI_SmallTankCarouselItemRenderer.DEFAULT_HEIGHT;
     }
 }

@@ -8,7 +8,7 @@
   },
   "carousel": {
     //"enabled": false,
-    "cellType": "normal",
+    //"cellType": "normal",
     //"zoom": 0.75,
     "rows": 0,
     //"backgroundAlpha": 50,
@@ -28,12 +28,12 @@
       //"favorite": { "enabled": false },
       "__stub__": {}
     },
+    //"filtersPadding": { "horizontal": 5, "vertical": 5 },
     //"suppressCarouselTooltips": false
     "normal": {
-      "width": 160,
-      "height": 100,
-      //"filtersPadding": { "horizontal": 5, "vertical": 5 },
-      "padding": { "horizontal": 3, "vertical": 3 },
+      "width": 120,
+      "height": 75,
+      "padding": { "horizontal": 4, "vertical": 4 },
       "fields": {
         "tankType":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         "level":          { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
@@ -68,22 +68,22 @@
         // right side
 
         // xp
-        { "x": 140, "y": 17,
+        { "x": 100, "y": 17,
           "src": "img://gui/maps/icons/library/XpIcon.png" },
-        { "x": 140, "y": 15, "width": 100, "height": 40, "shadow": {},
+        { "x": 100, "y": 15, "width": 100, "height": 40, "shadow": {},
           "align": "right", "textFormat": { "align": "right" },
           "format": "{{v.xpToElite?{{v.earnedXP%'d|0}} {{v.xpToEliteLeft<1000?<font color='#88FF88' size='20'><b>|<font color='#CCCCCC' size='12'>}}({{v.xpToEliteLeft%'d}})</font>}}" },
         // mog
-        { "x": 140, "y": 40,
+        { "x": 100, "y": 40,
           "src": "cfg://sirmax/img/marksOnGun/{{v.marksOnGun=*?-|{{v.marksOnGun|empty}}}}.png" },
-        { "x": 147, "y": 40, "width":14, "height":17, "shadow": {},
+        { "x": 107, "y": 40, "width":14, "height":17, "shadow": {},
           "align":"center", "valign":"center", "textFormat": { "size": 11, "color": "0xC8C8B5", "bold": true, "align": "center", "valign":"center" },
           "format": "{{v.marksOnGun}}" },
-        { "x": 140, "y": 35, "shadow": ${ "def.textFieldShadow" },
+        { "x": 100, "y": 35, "shadow": ${ "def.textFieldShadow" },
           "align": "right", "textFormat": { "size": 13, "align": "right" },
           "format": "<font color='{{v.c_damageRating}}'>{{v.damageRating%.2f~%}}</font>" },
         // mastery
-        { "x": 135, "y": 57, "width": 25, "height": 25,
+        { "x": 95, "y": 57, "width": 25, "height": 25,
           "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png" },
         //{ "x": 158, "y": 77, "align": "right", "alpha": "{{v.premium?100|0}}",
         //  "format": "<font size='15' color='#FEA659'>{{v.name}}</font>",
@@ -95,16 +95,15 @@
         //},
 
         // border
-        { "x": 0, "y": 0, "width": "160", "height": 100, "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
-        { "x": 0, "y": 0, "width": 160, "height": 100, "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
+        { "x": 0, "y": 0, "width": 122, "height": 77, "layer":"top", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
+        { "x": 0, "y": 0, "width": 122, "height": 77, "layer":"top", "borderColor": "0xFFFFFF", "alpha": "{{v.selected?100|0}}" },
         {}
       ]
     },
     "small": {
-      "width": 100,
+      "width": 160,
       "height": 35,
-      //"filtersPadding": { "horizontal": 5, "vertical": 5 },
-      "padding": { "horizontal": 3, "vertical": 3 },
+      "padding": { "horizontal": 4, "vertical": 4 },
       "fields": {
         "tankType":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         "level":          { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },

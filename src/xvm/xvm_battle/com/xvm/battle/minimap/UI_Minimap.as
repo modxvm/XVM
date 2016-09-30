@@ -43,10 +43,10 @@ package com.xvm.battle.minimap
         private var mapSize:TextExtraField;
         private var mapSizeAlt:TextExtraField;
 
-        private var _substrateHolder:MovieClip;
-        private var _bottomHolder:MovieClip;
-        private var _normalHolder:MovieClip;
-        private var _topHolder:MovieClip;
+        private var _substrateHolder:Sprite;
+        private var _bottomHolder:Sprite;
+        private var _normalHolder:Sprite;
+        private var _topHolder:Sprite;
 
         private static var _instance:UI_Minimap = null;
         public static function get instance():UI_Minimap
@@ -76,10 +76,10 @@ package com.xvm.battle.minimap
             Xvm.addEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
 
-            _substrateHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
-            _bottomHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
-            _normalHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as MovieClip;;
-            _topHolder = entriesContainer.addChildAt(new MovieClip(), entriesContainer.getChildIndex(entriesContainer.aliveVehicles) + 1) as MovieClip;;
+            _substrateHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as Sprite;;
+            _bottomHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as Sprite;;
+            _normalHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as Sprite;;
+            _topHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.aliveVehicles) + 1) as Sprite;;
 
             //XfwUtils.logChilds(entriesContainer);
 
@@ -146,22 +146,22 @@ package com.xvm.battle.minimap
             return true;
         }
 
-        public function get substrateHolder():MovieClip
+        public function get substrateHolder():Sprite
         {
             return _substrateHolder;
         }
 
-        public function get bottomHolder():MovieClip
+        public function get bottomHolder():Sprite
         {
             return _bottomHolder;
         }
 
-        public function get normalHolder():MovieClip
+        public function get normalHolder():Sprite
         {
             return _normalHolder;
         }
 
-        public function get topHolder():MovieClip
+        public function get topHolder():Sprite
         {
             return _topHolder;
         }

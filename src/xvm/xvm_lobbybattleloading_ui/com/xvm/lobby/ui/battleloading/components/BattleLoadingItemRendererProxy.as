@@ -57,10 +57,10 @@ package com.xvm.lobby.ui.battleloading.components
         private var vehicleLevelIcon_x:Number;
         private var vehicleTypeIcon_x:Number;
 
-        private var _substrateHolder:MovieClip;
-        private var _bottomHolder:MovieClip;
-        private var _normalHolder:MovieClip;
-        private var _topHolder:MovieClip;
+        private var _substrateHolder:Sprite;
+        private var _bottomHolder:Sprite;
+        private var _normalHolder:Sprite;
+        private var _topHolder:Sprite;
 
         private var extraFields:ExtraFieldsGroup = null;
 
@@ -96,10 +96,10 @@ package com.xvm.lobby.ui.battleloading.components
             DEFAULT_PLAYER_NAME_X = ui.textField.x;
             DEFAULT_PLAYER_NAME_WIDTH = ui.textField.width;
 
-            _substrateHolder = ui.addChildAt(new MovieClip(), 0) as MovieClip;
+            _substrateHolder = ui.addChildAt(new Sprite(), 0) as Sprite;
             _bottomHolder = _substrateHolder;
-            _normalHolder = ui.addChildAt(new MovieClip(), ui.getChildIndex(ui.playerActionMarker) + 1) as MovieClip;
-            _topHolder = ui.addChild(new MovieClip()) as MovieClip;
+            _normalHolder = ui.addChildAt(new Sprite(), ui.getChildIndex(ui.playerActionMarker) + 1) as Sprite;
+            _topHolder = ui.addChild(new Sprite()) as Sprite;
 
             createExtraFields();
 
@@ -327,22 +327,22 @@ package com.xvm.lobby.ui.battleloading.components
             return _isLeftPanel;
         }
 
-        public function get substrateHolder():MovieClip
+        public function get substrateHolder():Sprite
         {
             return _substrateHolder;
         }
 
-        public function get bottomHolder():MovieClip
+        public function get bottomHolder():Sprite
         {
             return _bottomHolder;
         }
 
-        public function get normalHolder():MovieClip
+        public function get normalHolder():Sprite
         {
             return _normalHolder;
         }
 
-        public function get topHolder():MovieClip
+        public function get topHolder():Sprite
         {
             return _topHolder;
         }

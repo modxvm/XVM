@@ -25,9 +25,12 @@ package com.xvm.extraFields
         private var _x:Number = 0;
         private var _y:Number = 0;
 
-        public function ExtraFieldsGroup(item:IExtraFieldGroupHolder, formats:Array)
+        public function ExtraFieldsGroup(item:IExtraFieldGroupHolder, formats:Array, defaultTextFormatConfig:CTextFormat = null)
         {
-            var defaultTextFormatConfig:CTextFormat = CTextFormat.GetDefaultConfigForBattle(item.isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
+            if (!defaultTextFormatConfig)
+            {
+                defaultTextFormatConfig = CTextFormat.GetDefaultConfigForBattle(item.isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
+            }
             var filteredFormats:Array;
             if (formats && formats.length)
             {
