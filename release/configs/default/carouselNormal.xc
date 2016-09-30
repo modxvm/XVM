@@ -38,24 +38,30 @@
       // Vehicle level.
       // Уровень техники
       "level":    { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      // todo: english description
+      // Double XP icon
       // Иконка не сбитого опыта за первую победу в день.
       "xp":       { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Vehicle name.
       // Название танка.
       "tankName": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      // Status text (Crew incomplete, Repairs required)
-      // Статусный текст (Неполный экипаж, Требуется ремонт).
-      "statusText": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      // Status text for "Buy vehicle" and "Buy slot" slots.
-      // Статусный текст для слотов "Купить машину" и "Купить слот".
-      "statusTextBuy": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Vehicle rent info text.
+      // Инфо текст аренды танка.
+      "rentInfo": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Clan lock timer
       // Таймер блокировки танка
-      "clanLock":   { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      // Activate / deactivate button.
-      // Кнопка активации / деактивации.
-      "activateButton": { "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
+      "clanLock": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Info text (Crew incomplete, Repairs required)
+      // Инфо текст (Неполный экипаж, Требуется ремонт).
+      "info":     { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Info text for "Buy vehicle" and "Buy slot" slots.
+      // Инфо текст для слотов "Купить машину" и "Купить слот".
+      "infoBuy":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Price
+      // Цена
+      "price":    { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Action price
+      // Акционная цена
+      "actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
     },
     // Extra cell fields (see playersPanel.xc).
     // Дополнительные поля ячеек (см. playersPanel.xc).

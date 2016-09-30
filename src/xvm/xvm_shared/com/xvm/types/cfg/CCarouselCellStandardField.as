@@ -6,13 +6,13 @@ package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CCarouselCell extends Object implements ICloneable
+    public dynamic class CCarouselCellStandardField extends Object implements ICloneable
     {
-        public var width:*;
-        public var height:*;
-        public var padding:CPadding;
-        public var fields:CCarouselCellStandardFields;
-        public var extraFields:Array;
+        public var enabled:*;
+        public var dx:*;
+        public var dy:*;
+        public var alpha:*;
+        public var scale:*;
 
         public function clone():*
         {

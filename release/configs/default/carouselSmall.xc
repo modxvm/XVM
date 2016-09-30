@@ -52,10 +52,7 @@
       "statusTextBuy": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Clan lock timer
       // Таймер блокировки танка
-      "clanLock":   { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      // Activate / deactivate button.
-      // Кнопка активации / деактивации.
-      "activateButton": { "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
+      "clanLock":   { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
     },
     // Extra cell fields (see playersPanel.xc).
     // Дополнительные поля ячеек (см. playersPanel.xc).

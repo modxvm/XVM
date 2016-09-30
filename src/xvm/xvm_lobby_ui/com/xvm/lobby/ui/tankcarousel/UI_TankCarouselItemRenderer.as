@@ -12,10 +12,12 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xvm.types.dossier.*;
     import com.xvm.vo.*;
     import flash.display.*;
-    import flash.utils.*;
     import flash.geom.*;
+    import flash.text.*;
+    import flash.utils.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
+    import scaleform.gfx.TextFieldEx;
 
     public /*dynamic*/ class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI implements IExtraFieldGroupHolder
     {
@@ -40,6 +42,7 @@ package com.xvm.lobby.ui.tankcarousel
             cfg = Config.config.hangar.carousel.normal;
             width = int(Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2);
             height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2);
+            scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
             try
             {
                 _substrateHolder = createExtraFieldsHolder(this, 0);
@@ -48,8 +51,9 @@ package com.xvm.lobby.ui.tankcarousel
                 _topHolder = createExtraFieldsHolder(this, getChildIndex(focusIndicator) + 1);
 
                 createExtraFields();
-
+                //App.utils.scheduler.scheduleTask(function():void {
                 setupStandardFields();
+                //}, 3000);
             }
             catch (ex:Error)
             {
@@ -139,39 +143,98 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function setupStandardFields():void
         {
-//            var w:int = width - 2;
-//            var h:int = height - 2;
-//
-//            setupStandardField(content.imgXp, cfg.fields.xp);
-//            content.imgXp.x = w - content.imgXp.width + cfg.fields.xp.dx;
-//
-//            setupStandardField(content.mcTankType, cfg.fields.tankType);
-//
-//            // TODO
-//            /*
-//            content.txtInfo.x -= 10;
-//            content.txtInfo.width += 20;*/
-//
-//            //content.mcLevel.visible = false;
-//            //App.utils.scheduler.scheduleOnNextFrame(function():void {
-//            //    if (content == null)
-//            //        return;
-//                setupStandardField(content.mcLevel, cfg.fields.level);
-//            //    content.mcLevel.visible = true;
-//            //});
-//
-//            setupTankNameField(cfg.fields.tankName);
-//            setupInfoTextField(cfg.fields.statusText);
-//            setupClanLockField(cfg.fields.clanLock);
+            setupStandardFieldTankType();
+            setupStandardFieldLevel();
+            setupStandardFieldXp();
+            setupStandardFieldTankName();
+            setupStandardFieldRentInfo();
+            setupStandardFieldClanLock();
+            setupStandardFieldInfo();
+            setupStandardFieldPrice();
+            setupStandardFieldActionPrice();
         }
 
-        private function setupStandardField(sprite:Sprite, cfg:Object):void
+        private function setupStandardFieldAlpha(field:InteractiveObject, cfg:Object):void
         {
-//            _extraFields.addChildAt(sprite, 0);
-//            sprite.scaleX = sprite.scaleY = cfg.scale;
-//            sprite.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
-//            sprite.x += cfg.dx;
-//            sprite.y += cfg.dy;
+            field.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha, 100), 0) / 100.0 : 0;
+        }
+
+        private function setupStandardFieldScale(field:InteractiveObject, cfg:Object):void
+        {
+            field.scaleX = DEFAULT_WIDTH / width * cfg.scale;
+            field.scaleY = DEFAULT_HEIGHT / height * cfg.scale;
+            field.x = (field.x * field.scaleX) + cfg.dx;
+            field.y = (field.y * field.scaleY) + cfg.dy;
+        }
+
+        private function setupStandardFieldTankType():void
+        {
+            setupStandardFieldAlpha(content.mcTankType, cfg.fields.tankType);
+            setupStandardFieldScale(content.mcTankType, cfg.fields.tankType);
+        }
+
+        private function setupStandardFieldLevel():void
+        {
+            setupStandardFieldAlpha(content.mcLevel, cfg.fields.level);
+            setupStandardFieldScale(content.mcLevel, cfg.fields.level);
+        }
+
+        private function setupStandardFieldXp():void
+        {
+            var dx:Number = DEFAULT_WIDTH - content.imgXp.x - 2;
+            setupStandardFieldAlpha(content.imgXp, cfg.fields.xp);
+            setupStandardFieldScale(content.imgXp, cfg.fields.xp);
+            content.imgXp.x = DEFAULT_WIDTH - dx * content.imgXp.scaleX + cfg.fields.xp.dx;
+        }
+
+        private function setupStandardFieldTankName():void
+        {
+            setupStandardFieldAlpha(content.txtTankName, cfg.fields.tankName);
+            content.txtTankName.scaleX = cfg.fields.tankName.scale;
+            content.txtTankName.scaleY = cfg.fields.tankName.scale;
+            content.txtTankName.antiAliasType = AntiAliasType.ADVANCED;
+            content.txtTankName.x = 0;
+            content.txtTankName.y = 0;
+            content.txtTankName.width = DEFAULT_WIDTH / content.txtTankName.scaleX - 2 + cfg.fields.tankName.dx;
+            content.txtTankName.height = DEFAULT_HEIGHT / content.txtTankName.scaleY - 2 + cfg.fields.tankName.dy;
+            content.txtTankName.autoSize = TextFieldAutoSize.NONE;
+            content.txtTankName.defaultTextFormat.align = TextFormatAlign.RIGHT;
+            TextFieldEx.setVerticalAlign(content.txtTankName, TextFieldEx.VALIGN_BOTTOM);
+        }
+
+        private function setupStandardFieldRentInfo():void
+        {
+            setupStandardFieldAlpha((content as TankIcon).txtRentInfo, cfg.fields.rentInfo);
+            //(content as TankIcon).txtRentInfo.visible = true;
+            //(content as TankIcon).txtRentInfo.htmlText = "<font color='#ffffff'>txtRentInfo</font>";
+        }
+
+        private function setupStandardFieldClanLock():void
+        {
+            setupStandardFieldAlpha(content.clanLock, cfg.fields.clanLock);
+            //content.clanLock.visible = true;
+            //content.clanLock.textField.htmlText = "<font color='#ffffff'>clanLock</font>";
+        }
+
+        private function setupStandardFieldInfo():void
+        {
+            setupStandardFieldAlpha(content.txtInfo, cfg.fields.info);
+            //content.txtInfo.visible = true;
+            //content.txtInfo.htmlText = "<font color='#ffffff'>txtInfo</font>";
+        }
+
+        private function setupStandardFieldPrice():void
+        {
+            setupStandardFieldAlpha(content.price, cfg.fields.price);
+            //content.price.visible = true;
+            //content.price.text = "price";
+        }
+
+        private function setupStandardFieldActionPrice():void
+        {
+            setupStandardFieldAlpha(content.actionPrice, cfg.fields.actionPrice);
+            //content.actionPrice.visible = true;
+            //content.actionPrice.iconText.text = "act";
         }
 
         private var orig_tankIcon_txtTankName_y:Number = NaN;
@@ -231,7 +294,6 @@ package com.xvm.lobby.ui.tankcarousel
             sprite.mouseChildren = false;
             sprite.scaleX = DEFAULT_WIDTH / width;
             sprite.scaleY = DEFAULT_HEIGHT / height;
-            sprite.scrollRect = new Rectangle(0, 0, width, height);
             owner.addChildAt(sprite, index);
             return sprite;
         }
