@@ -149,7 +149,7 @@ package com.xvm.lobby.ui.tankcarousel
             setupStandardFieldTankName();
             setupStandardFieldRentInfo();
             setupStandardFieldClanLock();
-            setupStandardFieldInfo();
+            setupStandardFieldInfo(cfg.fields.info);
             setupStandardFieldPrice();
             setupStandardFieldActionPrice();
         }
@@ -198,6 +198,7 @@ package com.xvm.lobby.ui.tankcarousel
             field.autoSize = TextFieldAutoSize.NONE;
             field.defaultTextFormat.align = TextFormatAlign.RIGHT;
             TextFieldEx.setVerticalAlign(field, TextFieldEx.VALIGN_BOTTOM);
+            //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
         }
 
         private function setupStandardFieldTankName():void
@@ -238,28 +239,20 @@ package com.xvm.lobby.ui.tankcarousel
             //content.actionPrice.visible = true; content.actionPrice.iconText.text = "act"; // DEBUG
         }
 
-        private function setupStandardFieldInfo():void
+        private var orig_txtInfo_y:Number = NaN;
+        private function setupStandardFieldInfo(cfg:CCarouselCellStandardField):void
         {
-            setupStandardFieldAlpha(content.txtInfo, cfg.fields.info);
-            //content.txtInfo.visible = true;
-            //content.txtInfo.htmlText = "<font color='#ffffff'>txtInfo</font>";
-        }
-
-        private var orig_infoText_x:Number = NaN;
-        private var orig_infoText_y:Number = NaN;
-        private function setupInfoTextField(cfg:Object):void
-        {
-            // TODO
-            /*
-            infoText.scaleX = infoText.scaleY = cfg.scale;
-            infoText.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
-            if (isNaN(orig_infoText_x))
-                orig_infoText_x = infoText.x;
-            infoText.x = orig_infoText_x + cfg.dx;
-            if (isNaN(orig_infoText_y))
-                orig_infoText_y = infoText.y;
-            infoText.y = orig_infoText_y + cfg.dy;
-            */
+            var field:TextField = content.txtInfo;
+            if (isNaN(orig_txtInfo_y))
+                orig_txtInfo_y = field.y;
+            setupStandardFieldAlpha(field, cfg);
+            field.scaleX = field.scaleY = cfg.scale;
+            field.antiAliasType = AntiAliasType.ADVANCED;
+            field.x = cfg.dx;
+            field.y = orig_txtInfo_y + cfg.dy;
+            field.width = DEFAULT_WIDTH / cfg.scale;
+            field.defaultTextFormat.align = TextFormatAlign.CENTER;
+            //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
         }
 
         // extra fields
@@ -304,7 +297,7 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     if (!(dataVO.buySlot || dataVO.buyTank))
                     {
-                        setupInfoTextField(cfg.fields.statusText);
+                        setupStandardFieldInfo(cfg.fields.info);
                         if (dataVO.icon)
                         {
                             var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
@@ -326,20 +319,18 @@ package com.xvm.lobby.ui.tankcarousel
                     }
                     else
                     {
-                        setupInfoTextField(cfg.fields.statusTextBuy);
+                        setupStandardFieldInfo(cfg.fields.infoBuy);
                         // Add used slots count
-                        // TODO
-                        /*
                         if (dataVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
                         {
-                            additionalText.visible = true;
-                            additionalText.text = Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT);
+                            content.txtInfo.htmlText = dataVO.infoText +
+                                "\n<font face='$TextFont' size='12' color='#8C8C7E'>" + Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font>";
                         }
                         if (dataVO.buyTank && Config.config.hangar.carousel.showTotalSlots)
                         {
-                            additionalText.text += " " + Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT);
+                            content.txtInfo.htmlText = dataVO.infoText +
+                                " <font face='$TextFont' size='12' color='#8C8C7E'>" + Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font>";
                         }
-                        */
                     }
                 }
                 _extraFields.visible = isExtraFieldsVisible;
