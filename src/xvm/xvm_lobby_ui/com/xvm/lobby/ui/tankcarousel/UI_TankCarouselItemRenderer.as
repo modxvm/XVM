@@ -53,7 +53,7 @@ package com.xvm.lobby.ui.tankcarousel
                 createExtraFields();
                 //App.utils.scheduler.scheduleTask(function():void {
                 setupStandardFields();
-                //}, 3000);
+                //}, 1000);
             }
             catch (ex:Error)
             {
@@ -154,12 +154,12 @@ package com.xvm.lobby.ui.tankcarousel
             setupStandardFieldActionPrice();
         }
 
-        private function setupStandardFieldAlpha(field:InteractiveObject, cfg:Object):void
+        private function setupStandardFieldAlpha(field:InteractiveObject, cfg:CCarouselCellStandardField):void
         {
             field.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha, 100), 0) / 100.0 : 0;
         }
 
-        private function setupStandardFieldScale(field:InteractiveObject, cfg:Object):void
+        private function setupStandardFieldScale(field:InteractiveObject, cfg:CCarouselCellStandardField):void
         {
             field.scaleX = DEFAULT_WIDTH / width * cfg.scale;
             field.scaleY = DEFAULT_HEIGHT / height * cfg.scale;
@@ -187,33 +187,55 @@ package com.xvm.lobby.ui.tankcarousel
             content.imgXp.x = DEFAULT_WIDTH - dx * content.imgXp.scaleX + cfg.fields.xp.dx;
         }
 
+        private function setupStandardTextField(field:TextField, cfg:CCarouselCellStandardField, dy:Number):void
+        {
+            field.scaleX = field.scaleY = cfg.scale;
+            field.antiAliasType = AntiAliasType.ADVANCED;
+            field.x = 0;
+            field.y = -dy;
+            field.width = DEFAULT_WIDTH / field.scaleX - 2 + cfg.dx;
+            field.height = DEFAULT_HEIGHT / field.scaleY - 2 + cfg.dy;
+            field.autoSize = TextFieldAutoSize.NONE;
+            field.defaultTextFormat.align = TextFormatAlign.RIGHT;
+            TextFieldEx.setVerticalAlign(field, TextFieldEx.VALIGN_BOTTOM);
+        }
+
         private function setupStandardFieldTankName():void
         {
             setupStandardFieldAlpha(content.txtTankName, cfg.fields.tankName);
-            content.txtTankName.scaleX = cfg.fields.tankName.scale;
-            content.txtTankName.scaleY = cfg.fields.tankName.scale;
-            content.txtTankName.antiAliasType = AntiAliasType.ADVANCED;
-            content.txtTankName.x = 0;
-            content.txtTankName.y = 0;
-            content.txtTankName.width = DEFAULT_WIDTH / content.txtTankName.scaleX - 2 + cfg.fields.tankName.dx;
-            content.txtTankName.height = DEFAULT_HEIGHT / content.txtTankName.scaleY - 2 + cfg.fields.tankName.dy;
-            content.txtTankName.autoSize = TextFieldAutoSize.NONE;
-            content.txtTankName.defaultTextFormat.align = TextFormatAlign.RIGHT;
-            TextFieldEx.setVerticalAlign(content.txtTankName, TextFieldEx.VALIGN_BOTTOM);
+            setupStandardTextField(content.txtTankName, cfg.fields.tankName, 0);
         }
 
         private function setupStandardFieldRentInfo():void
         {
-            setupStandardFieldAlpha((content as TankIcon).txtRentInfo, cfg.fields.rentInfo);
-            //(content as TankIcon).txtRentInfo.visible = true;
-            //(content as TankIcon).txtRentInfo.htmlText = "<font color='#ffffff'>txtRentInfo</font>";
+            var field:TextField = (content as TankIcon).txtRentInfo;
+            setupStandardFieldAlpha(field, cfg.fields.rentInfo);
+            setupStandardTextField(field, cfg.fields.rentInfo, DEFAULT_HEIGHT - field.y - field.height - 2);
+            //field.visible = true; field.htmlText = "<font color='#ffffff'>txtRentInfo</font>"; // DEBUG
         }
 
         private function setupStandardFieldClanLock():void
         {
             setupStandardFieldAlpha(content.clanLock, cfg.fields.clanLock);
-            //content.clanLock.visible = true;
-            //content.clanLock.textField.htmlText = "<font color='#ffffff'>clanLock</font>";
+            content.clanLock.x += cfg.fields.clanLock.dx;
+            content.clanLock.y += cfg.fields.clanLock.dy;
+            //content.clanLock.visible = true; content.clanLock.textField.htmlText = "<font color='#ffffff'>clanLock</font>"; // DEBUG
+        }
+
+        private function setupStandardFieldPrice():void
+        {
+            setupStandardFieldAlpha(content.price, cfg.fields.price);
+            content.price.x += cfg.fields.price.dx;
+            content.price.y += cfg.fields.price.dy;
+            //content.price.visible = true; content.price.text = "price"; // DEBUG
+        }
+
+        private function setupStandardFieldActionPrice():void
+        {
+            setupStandardFieldAlpha(content.actionPrice, cfg.fields.actionPrice);
+            content.actionPrice.x += cfg.fields.actionPrice.dx;
+            content.actionPrice.y += cfg.fields.actionPrice.dy;
+            //content.actionPrice.visible = true; content.actionPrice.iconText.text = "act"; // DEBUG
         }
 
         private function setupStandardFieldInfo():void
@@ -221,32 +243,6 @@ package com.xvm.lobby.ui.tankcarousel
             setupStandardFieldAlpha(content.txtInfo, cfg.fields.info);
             //content.txtInfo.visible = true;
             //content.txtInfo.htmlText = "<font color='#ffffff'>txtInfo</font>";
-        }
-
-        private function setupStandardFieldPrice():void
-        {
-            setupStandardFieldAlpha(content.price, cfg.fields.price);
-            //content.price.visible = true;
-            //content.price.text = "price";
-        }
-
-        private function setupStandardFieldActionPrice():void
-        {
-            setupStandardFieldAlpha(content.actionPrice, cfg.fields.actionPrice);
-            //content.actionPrice.visible = true;
-            //content.actionPrice.iconText.text = "act";
-        }
-
-        private var orig_tankIcon_txtTankName_y:Number = NaN;
-        private function setupTankNameField(cfg:Object):void
-        {
-//            content.txtTankName.scaleX = content.txtTankName.scaleY = cfg.scale;
-//            content.txtTankName.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
-//            content.txtTankName.x = 2 + cfg.dx;
-//            content.txtTankName.width = width - 6;
-//            if (isNaN(orig_tankIcon_txtTankName_y))
-//                orig_tankIcon_txtTankName_y = content.txtTankName.y;
-//            content.txtTankName.y = orig_tankIcon_txtTankName_y + cfg.dy;
         }
 
         private var orig_infoText_x:Number = NaN;
@@ -263,23 +259,6 @@ package com.xvm.lobby.ui.tankcarousel
             if (isNaN(orig_infoText_y))
                 orig_infoText_y = infoText.y;
             infoText.y = orig_infoText_y + cfg.dy;
-            */
-        }
-
-        private var orig_clanLock_x:Number = NaN;
-        private var orig_clanLock_y:Number = NaN;
-        private function setupClanLockField(cfg:Object):void
-        {
-            // TODO
-            /*
-            clanLock.scaleX = clanLock.scaleY = cfg.scale;
-            clanLock.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
-            if (isNaN(orig_clanLock_x))
-                orig_clanLock_x = clanLock.x;
-            clanLock.x = orig_clanLock_x + cfg.dx;
-            if (isNaN(orig_clanLock_y))
-                orig_clanLock_y = clanLock.y;
-            clanLock.y = orig_clanLock_y + cfg.dy;
             */
         }
 

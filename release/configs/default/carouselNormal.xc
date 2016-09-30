@@ -47,21 +47,21 @@
       // Vehicle rent info text.
       // Инфо текст аренды танка.
       "rentInfo": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-      // Clan lock timer
-      // Таймер блокировки танка
-      "clanLock": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Info text (Crew incomplete, Repairs required)
       // Инфо текст (Неполный экипаж, Требуется ремонт).
       "info":     { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Info text for "Buy vehicle" and "Buy slot" slots.
       // Инфо текст для слотов "Купить машину" и "Купить слот".
       "infoBuy":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Clan lock timer
+      // Таймер блокировки танка
+      "clanLock": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
       // Price
       // Цена
-      "price":    { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      "price":    { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
       // Action price
       // Акционная цена
-      "actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
+      "actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 }
     },
     // Extra cell fields (see playersPanel.xc).
     // Дополнительные поля ячеек (см. playersPanel.xc).
