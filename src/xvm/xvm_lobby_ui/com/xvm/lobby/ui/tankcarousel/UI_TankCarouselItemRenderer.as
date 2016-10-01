@@ -17,17 +17,14 @@ package com.xvm.lobby.ui.tankcarousel
     import flash.utils.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
-    import scaleform.gfx.TextFieldEx;
+    import scaleform.gfx.*;
 
-    public /*dynamic*/ class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI implements IExtraFieldGroupHolder
+    public /*dynamic*/ class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI implements IExtraFieldGroupHolder, ITankCarouselItemRenderer
     {
         public static const DEFAULT_WIDTH:int = 162;
         public static const DEFAULT_HEIGHT:int = 102;
 
-        private static const COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT:String = 'xvm_carousel.get_used_slots_count';
-        private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
-
-        private var cfg:CCarouselCell;
+        private var _helper:TankCarouselItemRendererHelper;
 
         private var _substrateHolder:Sprite;
         private var _bottomHolder:Sprite;
@@ -39,21 +36,9 @@ package com.xvm.lobby.ui.tankcarousel
         {
             //Logger.add(getQualifiedClassName(this));
             super();
-            cfg = Config.config.hangar.carousel.normal;
-            width = int(Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2);
-            height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2);
-            scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
             try
             {
-                _substrateHolder = createExtraFieldsHolder(this, 0);
-                _substrateHolder = createExtraFieldsHolder(this, getChildIndex(content));
-                _normalHolder = createExtraFieldsHolder(content, content.getChildIndex(content.clanLock));
-                _topHolder = createExtraFieldsHolder(this, getChildIndex(focusIndicator) + 1);
-
-                createExtraFields();
-                //App.utils.scheduler.scheduleTask(function():void {
-                setupStandardFields();
-                //}, 1000);
+                _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.normal, DEFAULT_WIDTH, DEFAULT_HEIGHT);
             }
             catch (ex:Error)
             {
@@ -61,20 +46,17 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
-        override protected function configUI():void
-        {
-            super.configUI();
-        }
-
         override protected function onDispose():void
         {
-            disposeExtraFields();
-
-            _substrateHolder = null;
-            _bottomHolder = null;
-            _normalHolder = null;
-            _topHolder = null;
-
+            try
+            {
+                _helper.dispose();
+                _helper = null;
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
             super.onDispose();
         }
 
@@ -82,7 +64,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             if (!value)
             {
-                _extraFields.visible = false;
+                extraFields.visible = false;
             }
             super.data = value;
         }
@@ -92,14 +74,14 @@ package com.xvm.lobby.ui.tankcarousel
             if (selected != value)
             {
                 super.selected = value;
-                updateDataXvm();
+                _helper.updateDataXvm();
             }
         }
 
         override protected function updateData():void
         {
             super.updateData();
-            updateDataXvm();
+            _helper.updateDataXvm();
         }
 
         // IExtraFieldGroupHolder
@@ -139,206 +121,41 @@ package com.xvm.lobby.ui.tankcarousel
             return null;
         }
 
-        // PRIVATE
+        // ITankCarouselItemRenderer
 
-        private function setupStandardFields():void
+        public function set substrateHolder(value:Sprite):void
         {
-            setupStandardFieldTankType();
-            setupStandardFieldLevel();
-            setupStandardFieldXp();
-            setupStandardFieldTankName();
-            setupStandardFieldRentInfo();
-            setupStandardFieldClanLock();
-            setupStandardFieldInfo(cfg.fields.info);
-            setupStandardFieldPrice();
-            setupStandardFieldActionPrice();
+            _substrateHolder = value;
         }
 
-        private function setupStandardFieldAlpha(field:InteractiveObject, cfg:CCarouselCellStandardField):void
+        public function set bottomHolder(value:Sprite):void
         {
-            field.alpha = cfg.enabled ? Math.max(Math.min(cfg.alpha, 100), 0) / 100.0 : 0;
+            _bottomHolder = value;
         }
 
-        private function setupStandardFieldScale(field:InteractiveObject, cfg:CCarouselCellStandardField):void
+        public function set normalHolder(value:Sprite):void
         {
-            field.scaleX = DEFAULT_WIDTH / width * cfg.scale;
-            field.scaleY = DEFAULT_HEIGHT / height * cfg.scale;
-            field.x = (field.x * field.scaleX) + cfg.dx;
-            field.y = (field.y * field.scaleY) + cfg.dy;
+            _normalHolder = value;
         }
 
-        private function setupStandardFieldTankType():void
+        public function set topHolder(value:Sprite):void
         {
-            setupStandardFieldAlpha(content.mcTankType, cfg.fields.tankType);
-            setupStandardFieldScale(content.mcTankType, cfg.fields.tankType);
+            _topHolder = value;
         }
 
-        private function setupStandardFieldLevel():void
+        public function get extraFields():ExtraFieldsGroup
         {
-            setupStandardFieldAlpha(content.mcLevel, cfg.fields.level);
-            setupStandardFieldScale(content.mcLevel, cfg.fields.level);
+            return _extraFields;
         }
 
-        private function setupStandardFieldXp():void
+        public function set extraFields(value:ExtraFieldsGroup):void
         {
-            var dx:Number = DEFAULT_WIDTH - content.imgXp.x - 2;
-            setupStandardFieldAlpha(content.imgXp, cfg.fields.xp);
-            setupStandardFieldScale(content.imgXp, cfg.fields.xp);
-            content.imgXp.x = DEFAULT_WIDTH - dx * content.imgXp.scaleX + cfg.fields.xp.dx;
+            _extraFields = value;
         }
 
-        private function setupStandardTextField(field:TextField, cfg:CCarouselCellStandardField, dy:Number):void
+        public function get vehicleCarouselVO():VehicleCarouselVO
         {
-            field.scaleX = field.scaleY = cfg.scale;
-            field.antiAliasType = AntiAliasType.ADVANCED;
-            field.x = 0;
-            field.y = -dy;
-            field.width = DEFAULT_WIDTH / field.scaleX - 2 + cfg.dx;
-            field.height = DEFAULT_HEIGHT / field.scaleY - 2 + cfg.dy;
-            field.autoSize = TextFieldAutoSize.NONE;
-            field.defaultTextFormat.align = TextFormatAlign.RIGHT;
-            TextFieldEx.setVerticalAlign(field, TextFieldEx.VALIGN_BOTTOM);
-            //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
-        }
-
-        private function setupStandardFieldTankName():void
-        {
-            setupStandardFieldAlpha(content.txtTankName, cfg.fields.tankName);
-            setupStandardTextField(content.txtTankName, cfg.fields.tankName, 0);
-        }
-
-        private function setupStandardFieldRentInfo():void
-        {
-            var field:TextField = (content as TankIcon).txtRentInfo;
-            setupStandardFieldAlpha(field, cfg.fields.rentInfo);
-            setupStandardTextField(field, cfg.fields.rentInfo, DEFAULT_HEIGHT - field.y - field.height - 2);
-            //field.visible = true; field.htmlText = "<font color='#ffffff'>txtRentInfo</font>"; // DEBUG
-        }
-
-        private function setupStandardFieldClanLock():void
-        {
-            setupStandardFieldAlpha(content.clanLock, cfg.fields.clanLock);
-            content.clanLock.x += cfg.fields.clanLock.dx;
-            content.clanLock.y += cfg.fields.clanLock.dy;
-            //content.clanLock.visible = true; content.clanLock.textField.htmlText = "<font color='#ffffff'>clanLock</font>"; // DEBUG
-        }
-
-        private function setupStandardFieldPrice():void
-        {
-            setupStandardFieldAlpha(content.price, cfg.fields.price);
-            content.price.x += cfg.fields.price.dx;
-            content.price.y += cfg.fields.price.dy;
-            //content.price.visible = true; content.price.text = "price"; // DEBUG
-        }
-
-        private function setupStandardFieldActionPrice():void
-        {
-            setupStandardFieldAlpha(content.actionPrice, cfg.fields.actionPrice);
-            content.actionPrice.x += cfg.fields.actionPrice.dx;
-            content.actionPrice.y += cfg.fields.actionPrice.dy;
-            //content.actionPrice.visible = true; content.actionPrice.iconText.text = "act"; // DEBUG
-        }
-
-        private var orig_txtInfo_y:Number = NaN;
-        private function setupStandardFieldInfo(cfg:CCarouselCellStandardField):void
-        {
-            var field:TextField = content.txtInfo;
-            if (isNaN(orig_txtInfo_y))
-                orig_txtInfo_y = field.y;
-            setupStandardFieldAlpha(field, cfg);
-            field.scaleX = field.scaleY = cfg.scale;
-            field.antiAliasType = AntiAliasType.ADVANCED;
-            field.x = cfg.dx;
-            field.y = orig_txtInfo_y + cfg.dy;
-            field.width = DEFAULT_WIDTH / cfg.scale;
-            field.defaultTextFormat.align = TextFormatAlign.CENTER;
-            //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
-        }
-
-        // extra fields
-
-        private function createExtraFieldsHolder(owner:Sprite, index:int):Sprite
-        {
-            var sprite:Sprite = new Sprite();
-            sprite.x = 0;
-            sprite.y = 0;
-            sprite.mouseEnabled = false;
-            sprite.mouseChildren = false;
-            sprite.scaleX = DEFAULT_WIDTH / width;
-            sprite.scaleY = DEFAULT_HEIGHT / height;
-            owner.addChildAt(sprite, index);
-            return sprite;
-        }
-
-        private function createExtraFields():void
-        {
-            var formats:Array = cfg.extraFields;
-            if (formats && formats.length)
-            {
-                _extraFields = new ExtraFieldsGroup(this, formats, CTextFormat.GetDefaultConfigForLobby());
-            }
-        }
-
-        private function disposeExtraFields():void
-        {
-            if (_extraFields)
-            {
-                _extraFields.dispose();
-                _extraFields = null;
-            }
-        }
-
-        private function updateDataXvm():void
-        {
-            try
-            {
-                var isExtraFieldsVisible:Boolean = false;
-                if (dataVO)
-                {
-                    if (!(dataVO.buySlot || dataVO.buyTank))
-                    {
-                        setupStandardFieldInfo(cfg.fields.info);
-                        if (dataVO.icon)
-                        {
-                            var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
-                            options.vehicleData = VehicleInfo.getByIcon(dataVO.icon);
-                            var dossier:AccountDossier = Dossier.getAccountDossier();
-                            if (dossier)
-                            {
-                                var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(options.vehCD);
-                                vdata.elite = dataVO.elite ? "elite" : null;
-                                vdata.selected = this.selected ? "sel" : null;
-                                if (options.vehicleData)
-                                {
-                                    options.vehicleData.__vehicleDossierCut = vdata;
-                                }
-                                _extraFields.update(options, 0);
-                                isExtraFieldsVisible = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        setupStandardFieldInfo(cfg.fields.infoBuy);
-                        // Add used slots count
-                        if (dataVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
-                        {
-                            content.txtInfo.htmlText = dataVO.infoText +
-                                "\n<font face='$TextFont' size='12' color='#8C8C7E'>" + Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font>";
-                        }
-                        if (dataVO.buyTank && Config.config.hangar.carousel.showTotalSlots)
-                        {
-                            content.txtInfo.htmlText = dataVO.infoText +
-                                " <font face='$TextFont' size='12' color='#8C8C7E'>" + Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font>";
-                        }
-                    }
-                }
-                _extraFields.visible = isExtraFieldsVisible;
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            return dataVO;
         }
     }
 }
