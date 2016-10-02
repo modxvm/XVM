@@ -19,10 +19,7 @@
     "height": 100,
     // Spacing between carousel cells.
     // Отступ между ячейками карусели.
-    "padding": {
-      "horizontal": 10,   // по горизонтали
-      "vertical": 2       // по вертикали
-    },
+    "gap": 10,
     // Standard cell elements.
     // Стандартные элементы ячеек.
     "fields": {

@@ -10,7 +10,7 @@ package com.xvm.types.cfg
     {
         public var width:*;
         public var height:*;
-        public var padding:CPadding;
+        public var gap:*;
         public var fields:CCarouselCellStandardFields;
         public var extraFields:Array;
 

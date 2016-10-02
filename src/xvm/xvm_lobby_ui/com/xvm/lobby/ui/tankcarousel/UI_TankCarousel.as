@@ -184,15 +184,15 @@ import scaleform.clik.utils.Padding;
 
 class TankCarouselHelperBase extends Object implements ITankCarouselHelper
 {
+    private var _gap:int;
     private var _padding:Padding;
     private var _width:int;
     private var _height:int;
 
     function TankCarouselHelperBase(cfg:CCarouselCell)
     {
-        _padding = new Padding(
-            Macros.FormatNumberGlobal(cfg.padding.vertical, DEFAULT_PADDING.vertical) / 2.0,
-            Macros.FormatNumberGlobal(cfg.padding.horizontal, DEFAULT_PADDING.horizontal) / 2.0);
+        _gap = Macros.FormatNumberGlobal(cfg.gap, DEFAULT_GAP);
+        _padding = new Padding(gap);
         _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2;
         _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2;
     }
@@ -214,7 +214,7 @@ class TankCarouselHelperBase extends Object implements ITankCarouselHelper
 
     public function get gap():Number
     {
-        return _padding.horizontal / 2;
+        return _gap;
     }
 
     public function get padding():Padding
@@ -224,9 +224,9 @@ class TankCarouselHelperBase extends Object implements ITankCarouselHelper
 
     // protected
 
-    protected function get DEFAULT_PADDING():Padding
+    protected function get DEFAULT_GAP():int
     {
-        return new Padding(10);
+        return 10;
     }
 
     protected function get DEFAULT_WIDTH():int

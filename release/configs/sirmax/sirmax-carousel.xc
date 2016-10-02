@@ -33,7 +33,7 @@
     "normal": {
       "width": 160,
       "height": 100,
-      "padding": { "horizontal": 4, "vertical": 10 },
+      "gap": 4,
       "fields": {
         //"tankType": { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         "level":    { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
@@ -71,7 +71,7 @@
 
         // xp
         { "x": 140, "y": 17,
-          "src": "img://gui/maps/icons/library/XpIcon.png" },
+          "src": "{{v.xpToElite?img://gui/maps/icons/library/XpIcon.png}}" },
         { "x": 140, "y": 15, "width": 100, "height": 40, "shadow": ${ "def.textFieldShadow" },
           "align": "right", "textFormat": { "align": "right" }, "antiAliasType": "advanced",
           "format": "{{v.xpToElite?{{v.earnedXP%'d|0}} {{v.xpToEliteLeft<1000?<font color='#88FF88' size='20'><b>|<font color='#CCCCCC' size='12'>}}({{v.xpToEliteLeft%'d}})</font>}}" },
@@ -106,7 +106,7 @@
     "small": {
       "width": 160,
       "height": 35,
-      "padding": { "horizontal": 4, "vertical": 4 },
+      "gap": 4,
       "fields": {
         //"tankType": { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         //"level":    { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },

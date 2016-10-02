@@ -12,6 +12,7 @@ XVM-6.4.6-dev:
       "width" - ширина ячейки
       "height" - высота ячейки
   * опция "carousel"/"zoom" удалена ("width" и "height" позволяют делать то же самое)
+  * секция "padding" заменена на опцию "gap"
   * созданы отдельные файлы для разных типов ячеек карусели: "carouselNormal.xc", "carouselSmall.xc"
   * battleLabels: добавлены события:
       PY(event_name)  - событие из питона, отправленное через as_event(event_name)
