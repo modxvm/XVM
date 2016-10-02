@@ -101,11 +101,21 @@ package com.xvm.lobby.ui.battleresults
                         initTextFields();
                     }
 
+                    efficiencyHeader.summArmorTF.visible =
+                        efficiencyHeader.summAssistTF.visible =
+                        efficiencyHeader.summCritsTF.visible =
+                        efficiencyHeader.summDamageTF.visible =
+                        efficiencyHeader.summKillTF.visible =
+                        efficiencyHeader.summSpottedTF.visible = !Config.config.battleResults.showTotals;
                     if (Config.config.battleResults.showTotals)
+                    {
                         initTotals();
+                    }
 
                     if (Config.config.battleResults.showCrewExperience)
+                    {
                         initCrewExperience();
+                    }
 
                     updateValues();
                 }
@@ -222,19 +232,29 @@ package com.xvm.lobby.ui.battleresults
         private function updateValues():void
         {
             if (Config.config.battleResults.showExtendedInfo)
+            {
                 showExtendedInfo();
+            }
 
             if (Config.config.battleResults.showTotals)
+            {
                 showTotals();
+            }
 
             if (Config.config.battleResults.showTotalExperience)
+            {
                 showTotalExperience();
+            }
 
             if (Config.config.battleResults.showCrewExperience)
+            {
                 showCrewExperience();
+            }
 
             if (Config.config.battleResults.showNetIncome)
+            {
                 showNetIncome();
+            }
         }
 
         private function showExtendedInfo():void
