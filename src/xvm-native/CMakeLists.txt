@@ -51,6 +51,28 @@ install(TARGETS  XVMNativePing
         LIBRARY DESTINATION "./packages/xvm_ping/native/" COMPONENT Runtime)
 
 
+##########################
+# XVM.Native-XPFIX Module #
+##########################
+add_library(XVMNativeXPFix SHARED "src/common/pythonWrapperHelper.c"
+                                  "src/xpfix/findmodule.c"
+                                  "src/xpfix/dllmain.c" 
+                                  "src/xpfix/pythonModule.c"
+                                  "src/xpfix/pythonWrapper.c" )  
+
+generate_export_header(XVMNativeXPFix)
+target_include_directories(XVMNativeXPFix PRIVATE "include/python-2.7.7" "src/common/" "src/xpfix/" )
+
+if(MSVC)
+    set_target_properties(XVMNativeXPFix PROPERTIES COMPILE_FLAGS "/wd4005")
+endif()
+
+install(TARGETS  XVMNativeXPFix
+        RUNTIME DESTINATION "./xfw/native/" COMPONENT Runtime
+        LIBRARY DESTINATION "./xfw/native/" COMPONENT Runtime)
+
+
+
 ########################
 # XVM.Native-Ping Test #
 ########################
