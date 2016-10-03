@@ -63,6 +63,9 @@
     // Extra cell fields (see playersPanel.xc).
     // Дополнительные поля ячеек (см. playersPanel.xc).
     "extraFields": [
+      // Подложка слота
+      // Slot background
+      { "x": 1, "y": 1, "layer": "substrate", "width": 160, "height": 100, "bgColor": "0x0A0A0A" },
       // Средний урон
       // Average damage
       {

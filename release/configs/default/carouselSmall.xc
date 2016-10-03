@@ -60,11 +60,14 @@
     // Extra cell fields (see playersPanel.xc).
     // Дополнительные поля ячеек (см. playersPanel.xc).
     "extraFields": [
+      // Подложка слота
+      // Slot background
+      { "x": 1, "y": 1, "layer": "substrate", "width": 160, "height": 35, "bgColor": "0x0A0A0A" },
       // Sign of mastery.
       // Знак мастерства.
       {
         "enabled": true,
-        "x": -1, "y": 10, "width": 23, "height": 23,
+        "x": 4, "y": 14, "width": 23, "height": 23,
         "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png"
       }
     ]
