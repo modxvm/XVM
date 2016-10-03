@@ -1,4 +1,5 @@
 XVM-6.4.6-dev:
+  * adaptation to WoT 0.9.16
   * fixed WorldOfTanks mods compatibility with Microsoft Windows XP
   * added default value for "carousel"/"rows" option: 0 - use client settings
   * added new options in the "carousel" section:

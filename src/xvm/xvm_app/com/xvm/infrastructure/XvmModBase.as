@@ -19,23 +19,7 @@ package com.xvm.infrastructure
                 var mods:Vector.<IXfwView> = super.processView(view, populated);
                 if (mods)
                 {
-                    var len:int = mods.length;
-                    for (var i:int = 0; i < len; ++i)
-                    {
-                        try
-                        {
-                            var mod:IXvmView = mods[i] as IXvmView;
-                            if (mod)
-                            {
-                                Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED,
-                                    function(e:Event):void { XfwUtils.safeCall(mod, mod.onConfigLoaded, [e]); });
-                            }
-                        }
-                        catch (ex:Error)
-                        {
-                            Logger.err(ex);
-                        }
-                    }
+                    Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, function(e:Event):void { onConfigLoaded(e, mods); }, false);
                 }
                 return mods;
             }
@@ -44,6 +28,19 @@ package com.xvm.infrastructure
                 Logger.err(ex);
             }
             return null;
+        }
+
+        private function onConfigLoaded(e:Event, mods:Vector.<IXfwView>):void
+        {
+            var len:int = mods.length;
+            for (var i:int = 0; i < len; ++i)
+            {
+                var mod:IXvmView = mods[i] as IXvmView;
+                if (mod)
+                {
+                    XfwUtils.safeCall(mod, mod.onConfigLoaded, [e]);
+                }
+            }
         }
     }
 }

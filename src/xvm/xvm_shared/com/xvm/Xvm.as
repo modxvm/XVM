@@ -46,9 +46,9 @@ package com.xvm
 
     public class Xvm extends Sprite
     {
-        public static function addEventListener(type:String, listener:Function):void
+        public static function addEventListener(type:String, listener:Function, useWeakReference:Boolean = true):void
         {
-            _instance.addEventListener(type, listener, false, 0, true);
+            _instance.addEventListener(type, listener, false, 0, useWeakReference);
         }
 
         public static function removeEventListener(type:String, listener:Function):void

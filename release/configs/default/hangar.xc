@@ -264,6 +264,9 @@
       // Rotation in degrees [0..360].
       // Угол поворота в градусах [0..360].
       "rotation": 0,
+      // Shift X position
+      // Сдвиг по оси X
+      "shiftX": 0,
       // Shift Y position
       // Сдвиг по оси Y
       "shiftY": 0
