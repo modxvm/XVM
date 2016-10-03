@@ -18,6 +18,9 @@ XVM-6.4.6-dev:
   * battleLabels: added events:
       PY(event_name)  - event from python, sent by as_event(event_name)
 
+  [KNOWN ISSUES]
+  * The module disabled by default: Extra sounds settings. (will be reprocessed in future releases)
+
 XVM-6.4.5.1:
   * fix client crash when "minimap"/"circles"/"special" section is not empty
 
