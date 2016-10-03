@@ -8,6 +8,7 @@ include(GenerateExportHeader)
 #cmake settings
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/binaries/)
 
+#[[
 #static runtime linking on MSVC
 if(MSVC)
   add_definitions("-D_WINSOCK_DEPRECATED_NO_WARNINGS")
@@ -20,11 +21,13 @@ if(MSVC)
   endforeach()
 endif()
 
+
 #static runtime linking on GCC
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   list(APPEND CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "-static-libgcc")
   list(APPEND CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "-static-libgcc -static-libstdc++")
 endif()
+]]
 
 #common includes
 include_directories("${CMAKE_BINARY_DIR}")
@@ -51,28 +54,6 @@ install(TARGETS  XVMNativePing
         LIBRARY DESTINATION "./packages/xvm_ping/native/" COMPONENT Runtime)
 
 
-##########################
-# XVM.Native-XPFIX Module #
-##########################
-add_library(XVMNativeXPFix SHARED "src/common/pythonWrapperHelper.c"
-                                  "src/xpfix/findmodule.c"
-                                  "src/xpfix/dllmain.c" 
-                                  "src/xpfix/pythonModule.c"
-                                  "src/xpfix/pythonWrapper.c" )  
-
-generate_export_header(XVMNativeXPFix)
-target_include_directories(XVMNativeXPFix PRIVATE "include/python-2.7.7" "src/common/" "src/xpfix/" )
-
-if(MSVC)
-    set_target_properties(XVMNativeXPFix PROPERTIES COMPILE_FLAGS "/wd4005")
-endif()
-
-install(TARGETS  XVMNativeXPFix
-        RUNTIME DESTINATION "./xfw/native/" COMPONENT Runtime
-        LIBRARY DESTINATION "./xfw/native/" COMPONENT Runtime)
-
-
-
 ########################
 # XVM.Native-Ping Test #
 ########################
@@ -87,3 +68,27 @@ if(MSVC)
 endif()
 
 install(TARGETS XVMNativePing-test DESTINATION ./tests/xvm_ping/)
+
+##########################
+# XVM.Native-XPFIX Module #
+##########################
+add_library(XVMNativeXPFix SHARED "src/common/pythonWrapperHelper.c"
+                                  
+                                  "src/xpfix/dllmain.c" 
+                                  "src/xpfix/injector.c"
+                                  "src/xpfix/pythonModule.c"
+                                  "src/xpfix/pythonWrapper.c"
+
+                                  "src/xpfix/impl/find_init_module.c"
+                                  "src/xpfix/impl/load_source_module.c")  
+
+generate_export_header(XVMNativeXPFix)
+target_include_directories(XVMNativeXPFix PRIVATE "include/python-2.7.7" "src/common/" "src/xpfix/" "src/xpfix/impl" )
+
+if(MSVC)
+    set_target_properties(XVMNativeXPFix PROPERTIES COMPILE_FLAGS "/wd4005")
+endif()
+
+install(TARGETS  XVMNativeXPFix
+        RUNTIME DESTINATION "./xfw/native/" COMPONENT Runtime
+        LIBRARY DESTINATION "./xfw/native/" COMPONENT Runtime)

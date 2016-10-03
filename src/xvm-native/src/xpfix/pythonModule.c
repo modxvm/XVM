@@ -1,5 +1,5 @@
 /**
- * XVM Native xpfix module
+ * XVM Native XPFix module
  * @author Mikhail Paulyshka <mixail(at)modxvm.com>
  */
  

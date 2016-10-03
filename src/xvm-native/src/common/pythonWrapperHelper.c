@@ -73,3 +73,30 @@ DWORD FindStructure(DWORD address, DWORD offset)
     char* b = (DWORD)(address+offset);
     return MAKELONG(MAKEWORD(b[0],b[1]), MAKEWORD(b[2],b[3]));
 }
+
+BOOL ReplaceFunction(DWORD originAddress, DWORD replacementAddress)
+{
+    char* originFunction;
+    DWORD dwProtect;
+    if ((originAddress <= 0) || (replacementAddress <= 0) )
+    {
+        return FALSE;
+    }
+
+    originFunction = originAddress;
+
+    //turn off protection
+    VirtualProtect(originFunction, 6, PAGE_EXECUTE_READWRITE, &dwProtect);
+    
+    //write
+    // push replacement_address
+    // retn
+    originFunction[0] = 0x68;
+    memcpy(originFunction + 1, &replacementAddress, sizeof(int));
+    originFunction[5] = 0xC3;
+
+    //restore protection
+    VirtualProtect(originFunction, 6, dwProtect, NULL);
+
+    return TRUE;
+}
