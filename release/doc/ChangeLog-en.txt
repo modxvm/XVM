@@ -1,4 +1,4 @@
-XVM-6.4.6-dev:
+XVM-6.4.6:
   * adaptation to WoT 0.9.16
   * fixed WorldOfTanks mods compatibility with Microsoft Windows NT 5.x (XP, XP 64-bit, Server 2003)
   * added default value for "carousel"/"rows" option: 0 - use client settings
