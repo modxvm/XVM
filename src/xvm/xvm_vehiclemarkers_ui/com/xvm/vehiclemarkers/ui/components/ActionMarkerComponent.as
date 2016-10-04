@@ -27,12 +27,12 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersActionMarker = e.cfg.actionMarker;
-                marker.actionMarker.visible = cfg.enabled;
+                marker.actionMarker.visible = Macros.FormatBoolean(cfg.enabled, e.playerState);
                 if (cfg.enabled)
                 {
-                    marker.actionMarker.x = cfg.x;
-                    marker.actionMarker.y = cfg.y;
-                    marker.actionMarker.alpha = cfg.alpha / 100.0;
+                    marker.actionMarker.x = Macros.FormatNumber(cfg.x, e.playerState);
+                    marker.actionMarker.y = Macros.FormatNumber(cfg.y, e.playerState);
+                    marker.actionMarker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState) / 100.0;
                 }
             }
             catch (ex:Error)

@@ -11,6 +11,7 @@ package com.xvm.types.cfg
         public var enabled:*;
         public var alpha:*;
         public var rotation:*;
+        public var shiftX:*;
         public var shiftY:*;
 
         public function clone():*

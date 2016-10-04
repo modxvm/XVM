@@ -9,9 +9,10 @@ package com.xvm.types.cfg
     public dynamic class CCarousel extends Object implements ICloneable
     {
         public var enabled:*;
-        public var zoom:*;
+        public var cellType:String;
+        public var normal:CCarouselCell;
+        public var small:CCarouselCell;
         public var rows:*;
-        public var padding:CPadding;
         public var backgroundAlpha:*;
         public var scrollingSpeed:*;
         public var hideBuyTank:Boolean;
@@ -19,9 +20,7 @@ package com.xvm.types.cfg
         public var showTotalSlots:Boolean;
         public var showUsedSlots:Boolean;
         public var filters:Object; // TODO
-        public var filtersPadding:Object; // TODO
-        public var fields:Object; // TODO
-        public var extraFields:Array;
+        public var filtersPadding:CPadding;
         public var nations_order:Array;
         public var types_order:Array;
         public var sorting_criteria:Array;

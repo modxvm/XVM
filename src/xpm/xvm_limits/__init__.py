@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.2',
+    'VERSION':       '0.9.16',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.2'],
+    'GAME_VERSIONS': ['0.9.16'],
     # optional
 }
 
@@ -34,8 +34,6 @@ from gui.shared.gui_items.Vehicle import Vehicle
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.TechTree import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.Research import Research
-# TODO:0.9.15.0.1
-#from gui.Scaleform.daapi.view.lobby.customization.VehicleCustomization import VehicleCustomization
 from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
 from gui.Scaleform.daapi.view.lobby.PremiumWindow import PremiumWindow
 from gui.Scaleform.daapi.view.lobby.store.Shop import Shop
@@ -82,8 +80,6 @@ def onXfwCommand(cmd, *args):
             global gold_enable
             gold_enable = not args[0]
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
-            # TODO:0.9.15.0.1
-            #handlersInvalidate('as_setGoldS(g_itemsCache.items.stats.gold)', VehicleCustomization_handler, TechnicalMaintenance_handler)
             handlersInvalidate('_PremiumWindow__onUpdateHandler()', PremiumWindow_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
             handlersInvalidate('_update()', Shop_handler)
@@ -126,7 +122,6 @@ gold_enable = True
 freeXP_enable = True
 TechTree_handler = None
 Research_handler = None
-VehicleCustomization_handler = None
 TechnicalMaintenance_handler = None
 PremiumWindow_handler = None
 Shop_handler = None
@@ -207,18 +202,6 @@ def Research_populate(self, *args, **kwargs):
 def Research_dispose(self, *args, **kwargs):
     global Research_handler
     Research_handler = None
-
-# TODO:0.9.15.0.1
-#@registerEvent(VehicleCustomization, '_populate')
-#def VehicleCustomization_populate(self, *args, **kwargs):
-#    global VehicleCustomization_handler
-#    VehicleCustomization_handler = self
-#
-#
-#@registerEvent(VehicleCustomization, '_dispose')
-#def VehicleCustomization_dispose(self, *args, **kwargs):
-#    global VehicleCustomization_handler
-#    VehicleCustomization_handler = None
 
 
 @registerEvent(TechnicalMaintenance, '_populate')

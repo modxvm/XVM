@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.2',
+    'VERSION':       '0.9.16',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.2'],
+    'GAME_VERSIONS': ['0.9.16'],
     # optional
 }
 
@@ -69,13 +69,13 @@ def Vehicle_isAmmoFull(base, self):
 
 #barracks: add nation flag and skills for tanksman
 @overrideMethod(BarracksMeta, 'as_setTankmenS')
-def BarracksMeta_as_setTankmenS(base, self, tankmenCount, tankmenInSlots, placesCount, tankmenInBarracks, tankmanArr):
+def BarracksMeta_as_setTankmenS(base, self, data):
     try:
         show_flags = config.get('hangar/barracksShowFlags', True)
         show_skills = config.get('hangar/barracksShowSkills', True)
         if show_flags or show_skills:
             imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
-            for tankman in tankmanArr:
+            for tankman in data['tankmenData']:
                 if 'role' not in tankman:
                     continue
                 tankman['rank'] = tankman['role']
@@ -96,7 +96,7 @@ def BarracksMeta_as_setTankmenS(base, self, tankmenCount, tankmenInSlots, places
                 tankman['role'] = ' '.join(tankman_role_arr)
     except Exception as ex:
         err(traceback.format_exc())
-    return base(self, tankmenCount, tankmenInSlots, placesCount, tankmenInBarracks, tankmanArr)
+    return base(self, data)
 
 
 # low ammo => vehicle not ready

@@ -19,5 +19,9 @@ package com.xvm
         public static const AS_ON_CLAN_ICON_LOADED:String = "xvm.as.on_clan_icon_loaded";
         public static const AS_MOVING_STATE_CHANGED:String = "xvm.as.as_moving_state_changed";
         public static const AS_STEREOSCOPE_TOGGLED:String = "xvm.as.as_stereoscope_toggled";
+
+        // XFW
+
+        public static const AS_PY_EVENT:String = "xfw.as.py_event";
     }
 }

@@ -16,9 +16,10 @@ from gui.app_loader.settings import APP_NAME_SPACE
 from gui.shared import g_eventBus, events
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 from gui.battle_control import g_sessionProvider, avatar_getter
+from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
-from gui.battle_control.battle_arena_ctrl import BattleArenaController
 from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
+from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
@@ -140,17 +141,17 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
         g_battle.onVehicleHealthChanged(self.id, newHealth, attackerID, attackReasonID)
 
 # on vehicle info updated
-@registerEvent(BattleArenaController, 'updateVehiclesInfo')
-def _BattleArenaController_updateVehiclesInfo(self, updated, arenaDP):
+@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
+def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
     # debug("> _BattleArenaController_updateVehiclesInfo")
     try:
         # is dynamic squad created
         if BigWorld.player().arena.guiType == constants.ARENA_GUI_TYPE.RANDOM:
             for flags, vo in updated:
                 if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
-                    for index, (vInfoVO, vStatsVO, viStatsVO) in enumerate(arenaDP.getTeamIterator(vo.team)):
-                        if vInfoVO.squadIndex > 0:
-                            g_battle.updatePlayerState(vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
+                    for vInfoVO in arenaDP.getVehiclesInfoIterator():
+                        if vInfoVO.team == vo.team and vInfoVO.squadIndex == vo.squadIndex:
+                            g_battle.updatePlayerState(vInfoVO.vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
     except Exception, ex:
         err(traceback.format_exc())
 

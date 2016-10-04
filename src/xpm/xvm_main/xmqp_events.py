@@ -21,8 +21,6 @@ from gui.shared import g_eventBus, events
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import g_sessionProvider
-from gui.Scaleform.Battle import Battle
-from gui.Scaleform.Minimap import Minimap
 
 from xfw import *
 
@@ -138,7 +136,8 @@ _event_handlers[EVENTS.XMQP_HOLA] = _onXmqpHola
 # fire in vehicle:
 #   enable: True, False
 
-@registerEvent(Battle, '_setFireInVehicle')
+# TODO:0.9.16
+#@registerEvent(Battle, '_setFireInVehicle')
 def _Battle_setFireInVehicle(self, isFire):
     if xmqp.is_active():
         xmqp.call({'event':EVENTS.XMQP_FIRE,'enable':isFire})
@@ -150,7 +149,8 @@ _event_handlers[EVENTS.XMQP_FIRE] = _as_xmqp_event
 #   code: drown, overturn, ALL
 #   enable: True, False
 
-@registerEvent(Battle, '_showVehicleTimer')
+# TODO:0.9.16
+#@registerEvent(Battle, '_showVehicleTimer')
 def _Battle_showVehicleTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
         code, time, warnLvl = value
@@ -161,7 +161,8 @@ def _Battle_showVehicleTimer(self, value):
             'time':time,
             'warnLvl':warnLvl})
 
-@registerEvent(Battle, '_hideVehicleTimer')
+# TODO:0.9.16
+#@registerEvent(Battle, '_hideVehicleTimer')
 def _Battle_hideVehicleTimer(self, code = None):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
         if code is None:
@@ -178,7 +179,8 @@ _event_handlers[EVENTS.XMQP_VEHICLE_TIMER] = _as_xmqp_event
 #   zoneID: death_zone, gas_attack, ALL
 #   enable: True, False
 
-@registerEvent(Battle, 'showDeathzoneTimer')
+# TODO:0.9.16
+#@registerEvent(Battle, 'showDeathzoneTimer')
 def _Battle_showDeathzoneTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
         zoneID, time, warnLvl = value
@@ -189,7 +191,8 @@ def _Battle_showDeathzoneTimer(self, value):
             'time':time,
             'warnLvl':warnLvl})
 
-@registerEvent(Battle, 'hideDeathzoneTimer')
+# TODO:0.9.16
+#@registerEvent(Battle, 'hideDeathzoneTimer')
 def _Battle_hideDeathzoneTimer(self, zoneID = None):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
         if zoneID is None:
@@ -204,7 +207,8 @@ _event_handlers[EVENTS.XMQP_DEATH_ZONE_TIMER] = _as_xmqp_event
 
 # sixth sense indicator
 
-@registerEvent(Battle, '_showSixthSenseIndicator')
+# TODO:0.9.16
+#@registerEvent(Battle, '_showSixthSenseIndicator')
 def _Battle_showSixthSenseIndicator(self, isShow):
     if xmqp.is_active():
         xmqp.call({'event': EVENTS.XMQP_SPOTTED})

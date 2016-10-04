@@ -9,7 +9,6 @@ package com.xvm.lobby.hangar
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
     import com.xvm.lobby.hangar.components.*;
-    import net.wg.gui.events.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -35,7 +34,6 @@ package com.xvm.lobby.hangar
             page.bottomBg.height = 45; // MESSENGER_BAR_PADDING
 
             initVehicleParams();
-            initServerInfo();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
@@ -71,26 +69,6 @@ package com.xvm.lobby.hangar
             }
 
             return null;
-        }
-
-        // server info
-
-        private function initServerInfo():void
-        {
-            var cfg:CHangarServerInfo = Config.config.hangar.serverInfo;
-            if (!cfg.enabled)
-            {
-                page.serverInfo.alpha = page.serverInfoBg.alpha = 0;
-                page.serverInfo.mouseEnabled = page.serverInfoBg.mouseEnabled = false;
-                page.serverInfo.mouseChildren = page.serverInfoBg.mouseChildren = false;
-            }
-            else
-            {
-                page.serverInfo.y += cfg.shiftY;
-                page.serverInfoBg.y += cfg.shiftY;
-                page.serverInfo.alpha = page.serverInfoBg.alpha = cfg.alpha / 100.0;
-                page.serverInfo.rotation = page.serverInfoBg.rotation = cfg.rotation;
-            }
         }
     }
 }

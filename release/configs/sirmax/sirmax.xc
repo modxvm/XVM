@@ -67,8 +67,11 @@
       //"format": "<font face='$FieldFont'><font size='26'> {{H}}:{{m%02d}} {{AM?a.m.|p.m.}}</font></font>"
     },
     "serverInfo": {
-      //"enabled": false,
-      "alpha": 75
+      "enabled": false
+      //"alpha": 75,
+      //"rotation": 0,
+      //"shiftX": 0,
+      //"shiftY": 0
     }
   },
   "userInfo": {
@@ -264,7 +267,7 @@
     "startPage": 1,
     "sortColumn": 5,
     "showCrewExperience": true,
-    "showTotals": true,
+    //"showTotals": false,
     "showBattleTier": true
   },
   "minimap": ${"sirmax-minimap.xc":"minimap"},

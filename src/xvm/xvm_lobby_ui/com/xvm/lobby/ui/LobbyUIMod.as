@@ -32,6 +32,7 @@ package com.xvm.lobby.ui
     UI_FalloutTankCarouselItemRenderer;
     UI_MultiselectionSlotRenderer;
     UI_MultiselectionSlots;
+    UI_SmallTankCarouselItemRenderer;
     UI_TankCarousel;
     UI_TankCarouselFilters;
     UI_TankCarouselItemRenderer;

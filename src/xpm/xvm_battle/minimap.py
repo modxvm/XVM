@@ -17,7 +17,6 @@ from AvatarInputHandler.control_modes import PostMortemControlMode
 from items.vehicles import VEHICLE_CLASS_TAGS
 from gui.shared import g_eventBus, events
 from gui.battle_control import g_sessionProvider
-from gui.Scaleform.Minimap import Minimap
 from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
 from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME, ADDITIONAL_FEATURES
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin, PersonalEntriesPlugin
@@ -218,7 +217,7 @@ def _ArenaVehiclesPlugin_updateSettings(base, self, diff):
 #####################################################################
 # Minimap
 
-class Minimap(object):
+class _Minimap(object):
 
     enabled = True
     initialized = False
@@ -242,7 +241,7 @@ class Minimap(object):
     def destroy(self):
         self.initialized = False
 
-g_minimap = Minimap()
+g_minimap = _Minimap()
 
 
 ## Minimap dead switch

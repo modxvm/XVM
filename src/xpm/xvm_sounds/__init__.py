@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.2',
+    'VERSION':       '0.9.16',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.2'],
+    'GAME_VERSIONS': ['0.9.16'],
     # optional
 }
 
@@ -27,7 +27,8 @@ from xvm_main.python.logger import *
 #####################################################################
 # handlers
 
-@overrideMethod(WWISE, 'WG_loadBanks')
+# TODO:0.9.16
+#@overrideMethod(WWISE, 'WG_loadBanks')
 def _WWISE_WG_loadBanks(base, xmlPath, banks, isHangar, *args, **kwargs):
     if config.get('sounds/enabled'):
         extraBanks = config.get('sounds/soundBanks/%s' % ('hangar' if isHangar else 'battle'))

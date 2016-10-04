@@ -8,23 +8,20 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xvm.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.cfg.*;
-    import flash.utils.*;
     import flash.display.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.components.carousels.HorizontalScrollerViewPort;
-    import net.wg.gui.components.controls.SoundButton;
-    import net.wg.gui.components.controls.scroller.IViewPort;
+    import net.wg.gui.lobby.hangar.tcarousel.helper.*;
     import scaleform.clik.constants.*;
+    import scaleform.clik.utils.*;
+    import org.idmedia.as3commons.util.*;
 
-    public dynamic class UI_TankCarousel extends TankCarouselUI
+    public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
     {
-        public static const VERTICAL_MARGIN:int = 1;
+        private static const THRESHOLD:int = 650;
 
         private var cfg:CCarousel;
         private var _enabled:Boolean = false;
-
-        private var _bg:MovieClip = null;
-        private var _carousel_height:int;
+        private var _rowCount:int = 1;
 
         public function UI_TankCarousel()
         {
@@ -48,7 +45,6 @@ package com.xvm.lobby.ui.tankcarousel
                 try
                 {
                     setupMouseWheelScrollingSpeed();
-                    setupScrollList();
                     setupFilters();
                 }
                 catch (ex:Error)
@@ -58,31 +54,69 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
-        override protected function onDispose():void
+        override public function as_rowCount(rows:int):void
         {
-            if (_bg)
+            if (_enabled)
             {
-                _bg = null;
+                if (!isNaN(cfg.rows) && cfg.rows > 0)
+                {
+                    rows = cfg.rows;
+                }
             }
-
-            super.onDispose();
+            _rowCount = rows;
+            super.as_rowCount(rows);
         }
 
-        override protected function draw() : void
+        override protected function getNewHelper():ITankCarouselHelper
         {
-            super.draw();
-            if (isInvalid(InvalidationType.SIZE))
+            if (_enabled)
             {
-                _bg.graphics.clear();
-                _bg.graphics.beginFill(0x000000, cfg.backgroundAlpha / 100.0);
-                _bg.graphics.drawRect(0, 0, width, getBottom());
-                _bg.graphics.endFill();
-            }
-        }
+                try
+                {
+                var cellType:String = StringUtils.trim(cfg.cellType.toLowerCase());
+                if (cellType != "small" && cellType != "normal")
+                {
+                    var normalHelper:TankCarouselHelper = new TankCarouselHelper(cfg.normal);
+                    var h:int = (normalHelper.gap + normalHelper.rendererHeight) * _rowCount - normalHelper.gap;
+                    if (App.appHeight - h < THRESHOLD)
+                    {
+                        cellType = "small";
+                    }
+                    else
+                    {
+                        cellType = "normal";
+                    }
+                }
 
-        override public function getBottom():Number
-        {
-            return _carousel_height + 16;
+                var newHelper:ITankCarouselHelper = this.helper;
+                switch (cellType)
+                {
+                    case "small":
+                        if (!(newHelper is SmallTankCarouselHelper))
+                        {
+                            newHelper = new SmallTankCarouselHelper(cfg.small);
+                            invalidate(InvalidationType.SETTINGS);
+                        }
+                        break;
+                    case "normal":
+                        if (!(newHelper is TankCarouselHelper))
+                        {
+                            newHelper = new TankCarouselHelper(cfg.normal);
+                            invalidate(InvalidationType.SETTINGS);
+                        }
+                        break;
+                }
+                }
+                catch (ex:Error)
+                {
+                        Logger.err(ex);
+                }
+                return newHelper;
+            }
+            else
+            {
+                return super.getNewHelper();
+            }
         }
 
         // PRIVATE
@@ -92,17 +126,9 @@ package com.xvm.lobby.ui.tankcarousel
             try
             {
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
-                itemRenderer = getQualifiedClassName(UI_TankCarouselItemRenderer);
 
-                var rendererHeight:int = Math.ceil(UI_TankCarouselItemRenderer.ITEM_HEIGHT * cfg.zoom) + UI_TankCarouselItemRenderer.ITEM_MARGIN * 2;
-                _carousel_height = (rendererHeight + cfg.padding.vertical) * cfg.rows - cfg.padding.vertical + VERTICAL_MARGIN * 2;
-                scrollList.height = (leftArrow as MovieClip).height = (rightArrow as MovieClip).height = _carousel_height;
-                (rightArrow as MovieClip).y = (leftArrow as MovieClip).y + _carousel_height; // FIXIT: why vertically aligned to bottom?
-                //leftFadeEndItem.visible = rightFadeEndItem.visible = false;
-
-                background.alpha = 0;
-                _bg = new MovieClip();
-                addChildAt(_bg, 0);
+                leftFadeEndItem.visible = rightFadeEndItem.visible = false;
+                background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, 100) / 100.0;
             }
             catch (ex:Error)
             {
@@ -129,28 +155,6 @@ package com.xvm.lobby.ui.tankcarousel
             scrollList.scrollConfig = scrollList.scrollConfig; // reinitialize
         }
 
-        private function setupScrollList():void
-        {
-            var horizontalPadding:Number = Macros.FormatNumberGlobal(cfg.padding.horizontal, scrollList.gap);
-            scrollList.gap = horizontalPadding;
-
-            scrollList.validateNow();
-
-            var viewPort:MultiRowsScrollerViewPort = new MultiRowsScrollerViewPort();
-            viewPort.owner = scrollList;
-            viewPort.gap = horizontalPadding;
-            viewPort.setSelectedIndex(scrollList.selectedIndex);
-            viewPort.tooltipDecorator = scrollList.xfw_tooltipDecorator;
-            scrollList.viewPort = viewPort;
-            scrollList.invalidate();
-        }
-
-        override public function goToItem(param1:int, param2:Boolean = false):void
-        {
-            param1 /= cfg.rows;
-            super.goToItem(param1, param2);
-        }
-
         // config: "filters"
         private function setupFilters():void
         {
@@ -166,5 +170,122 @@ package com.xvm.lobby.ui.tankcarousel
             call_setVehiclesFilter();
             */
         }
+    }
+}
+
+import com.xvm.*;
+import com.xvm.lobby.ui.tankcarousel.*;
+import com.xvm.types.cfg.*;
+import flash.utils.*;
+import net.wg.data.constants.*;
+import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
+import net.wg.infrastructure.exceptions.*;
+import scaleform.clik.utils.Padding;
+
+class TankCarouselHelperBase extends Object implements ITankCarouselHelper
+{
+    private var _gap:int;
+    private var _padding:Padding;
+    private var _width:int;
+    private var _height:int;
+
+    function TankCarouselHelperBase(cfg:CCarouselCell)
+    {
+        _gap = Macros.FormatNumberGlobal(cfg.gap, DEFAULT_GAP);
+        _padding = new Padding(gap);
+        _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2;
+        _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2;
+    }
+
+    public function get linkRenderer():String
+    {
+        throw new AbstractException("TankCarouselHelperBase.linkRenderer " + Errors.ABSTRACT_INVOKE);
+    }
+
+    public function get rendererWidth():Number
+    {
+        return _width;
+    }
+
+    public function get rendererHeight():Number
+    {
+        return _height;
+    }
+
+    public function get gap():Number
+    {
+        return _gap;
+    }
+
+    public function get padding():Padding
+    {
+        return _padding;
+    }
+
+    // protected
+
+    protected function get DEFAULT_GAP():int
+    {
+        return 10;
+    }
+
+    protected function get DEFAULT_WIDTH():int
+    {
+        throw new AbstractException("TankCarouselHelperBase.DEFAULT_WIDTH " + Errors.ABSTRACT_INVOKE);
+    }
+
+    protected function get DEFAULT_HEIGHT():int
+    {
+        throw new AbstractException("TankCarouselHelperBase.DEFAULT_HEIGHT " + Errors.ABSTRACT_INVOKE);
+    }
+}
+
+class TankCarouselHelper extends TankCarouselHelperBase implements ITankCarouselHelper
+{
+    function TankCarouselHelper(cfg:CCarouselCell)
+    {
+        super(cfg);
+    }
+
+    override public function get linkRenderer():String
+    {
+        return getQualifiedClassName(UI_TankCarouselItemRenderer);
+    }
+
+    // PROTECTED
+
+    override protected function get DEFAULT_WIDTH():int
+    {
+        return UI_TankCarouselItemRenderer.DEFAULT_WIDTH;
+    }
+
+    override protected function get DEFAULT_HEIGHT():int
+    {
+        return UI_TankCarouselItemRenderer.DEFAULT_HEIGHT;
+    }
+}
+
+class SmallTankCarouselHelper extends TankCarouselHelperBase implements ITankCarouselHelper
+{
+    function SmallTankCarouselHelper(cfg:CCarouselCell)
+    {
+        super(cfg);
+    }
+
+    override public function get linkRenderer():String
+    {
+        return getQualifiedClassName(UI_SmallTankCarouselItemRenderer);
+    }
+
+    // PROTECTED
+
+    override protected function get DEFAULT_WIDTH():int
+    {
+        return UI_SmallTankCarouselItemRenderer.DEFAULT_WIDTH;
+    }
+
+    override protected function get DEFAULT_HEIGHT():int
+    {
+        return UI_SmallTankCarouselItemRenderer.DEFAULT_HEIGHT;
     }
 }

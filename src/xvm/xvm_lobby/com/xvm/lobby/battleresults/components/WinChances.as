@@ -28,7 +28,7 @@ package com.xvm.lobby.battleresults.components
             // Add stat loading handler
             // Load battle stat
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLERESULTS, onStatLoaded, false, 0, true);
-            arenaUniqueID = page.as_name.replace("battleResults_", "");
+            arenaUniqueID = page.as_config.name.replace("battleResults_", "");
             Stat.loadBattleResultsStat(arenaUniqueID);
         }
 

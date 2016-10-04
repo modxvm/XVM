@@ -126,9 +126,10 @@ package com.xvm.battle.playersPanel
                 }
 
                 var expandAreaWidth:Number = Macros.FormatNumberGlobal(mcfg.expandAreaWidth, EXPAND_AREA_WIDTH);
-                xfw_expandRectLeft.width = expandAreaWidth;
-                xfw_expandRectRight.width = expandAreaWidth;
-                xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
+                // TODO:0.9.16
+                //xfw_expandRectLeft.width = expandAreaWidth;
+                //xfw_expandRectRight.width = expandAreaWidth;
+                //xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
             }
             catch (ex:Error)
             {
@@ -139,7 +140,8 @@ package com.xvm.battle.playersPanel
         override public function updateStageSize(param1:Number, param2:Number):void
         {
             super.updateStageSize(param1, param2);
-            xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
+            // TODO:0.9.16
+            //xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
         }
 
         override public function setPersonalStatus(param1:uint):void

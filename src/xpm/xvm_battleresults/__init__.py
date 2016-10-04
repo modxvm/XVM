@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.15.2',
+    'VERSION':       '0.9.16',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.15.2'],
+    'GAME_VERSIONS': ['0.9.16'],
     # optional
 }
 
@@ -158,8 +158,8 @@ def _BattleResultsWindow__populateAccounting(self, commonData, personalCommonDat
 
 # get string 'damageAssistedNames'
 @overrideMethod(BattleResultsWindow, '_BattleResultsWindow__getAssistInfo')
-def _BattleResultsWindow__getAssistInfo(base, self, vehicle, iInfo, valsStr):
-    result = base(self, vehicle, iInfo, valsStr)
+def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
+    result = base(self, iInfo, valsStr)
     if 'damageAssistedNames' in result:
         self._xvm_data['damageAssistedNames'] = result['damageAssistedNames']
     return result

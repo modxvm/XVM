@@ -1,3 +1,26 @@
+XVM-6.4.6-dev:
+  * adaptation to WoT 0.9.16
+  * fixed WorldOfTanks mods compatibility with Microsoft Windows NT 5.x (XP, XP 64-bit, Server 2003)
+  * added default value for "carousel"/"rows" option: 0 - use client settings
+  * added new options in the "carousel" section:
+      "cellType" - type of cells - "default" (depends from window size), "normal" or "small"
+  * added new sections in the "carousel" section:
+      "normal" - normal cells settings
+      "small" - small cells settings
+  * sections "padding", "fields" and "extraFields" moved from "carousel" to
+    "carousel"/"normal" and "carousel"/"small" sections to allow separate settings
+  * added new options in the "carousel"/"normal" and "carousel"/"small" sections:
+      "width" - cell width
+      "height" - cell height
+  * option "carousel"/"zoom" removed ("width" and "height" allow to do the same)
+  * section "padding" replaced with option "gap"
+  * created separate files for carousel cell types: "carouselNormal.xc", "carouselSmall.xc"
+  * battleLabels: added events:
+      PY(event_name)  - event from python, sent by as_event(event_name)
+
+  [KNOWN ISSUES]
+  * The module disabled by default: Extra sounds settings. (will be reprocessed in future releases)
+
 XVM-6.4.5.1:
   * fix client crash when "minimap"/"circles"/"special" section is not empty
 

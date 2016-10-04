@@ -32,8 +32,8 @@ package com.xvm.lobby.techtree
 
         private function init():void
         {
-            page.researchItems.itemNodeName = "com.xvm.lobby.ui.techtree::UI_ResearchItemNode";
-            page.researchItems.vehicleNodeName = "com.xvm.lobby.ui.techtree::UI_NationTreeNodeSkinned";
+            page.researchItems.itemNodeClass = App.utils.classFactory.getClass("com.xvm.lobby.ui.techtree::UI_ResearchItemNode");
+            page.researchItems.vehicleNodeClass = App.utils.classFactory.getClass("com.xvm.lobby.ui.techtree::UI_NationTreeNodeSkinned");
         }
     }
 }

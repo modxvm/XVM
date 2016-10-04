@@ -71,22 +71,6 @@ package com.xvm.lobby.ui.profile.components
                 _raw_data = raw_data;
                 if (!raw_data)
                     return;
-
-                // TODO:0.9.15.1
-                /*
-                var vehCD:int = page.listComponent.selectedItem.id;
-
-                //Logger.add("vehCD: " + vehCD)
-
-                if (vehCD == 0)
-                {
-                    updateSummaryData();
-                }
-                else
-                {
-                    lastBattleTimeTF.htmlText = "";
-                    updateVehicleData(vehCD);
-                }*/
             }
             catch (ex:Error)
             {

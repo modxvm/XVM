@@ -63,10 +63,10 @@ package com.xvm.battle.fullStats
         private var _vehicleID:Number = NaN;
         private var _vehicleIconName:String = null;
 
-        private var _substrateHolder:MovieClip;
-        private var _bottomHolder:MovieClip;
-        private var _normalHolder:MovieClip;
-        private var _topHolder:MovieClip;
+        private var _substrateHolder:Sprite;
+        private var _bottomHolder:Sprite;
+        private var _normalHolder:Sprite;
+        private var _topHolder:Sprite;
 
         private var extraFields:ExtraFieldsGroup = null;
 
@@ -122,10 +122,10 @@ package com.xvm.battle.fullStats
             Xvm.addEventListener(ORDER_CHANGED, onOrderChanged);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
 
-            _substrateHolder = playerNameTF.parent.addChildAt(new MovieClip(), 0) as MovieClip;
+            _substrateHolder = playerNameTF.parent.addChildAt(new Sprite(), 0) as Sprite;
             _bottomHolder = _substrateHolder;
-            _normalHolder = playerNameTF.parent.addChildAt(new MovieClip(), playerNameTF.parent.getChildIndex(icoIGR) + 1) as MovieClip;
-            _topHolder = playerNameTF.parent.addChild(new MovieClip()) as MovieClip;
+            _normalHolder = playerNameTF.parent.addChildAt(new Sprite(), playerNameTF.parent.getChildIndex(icoIGR) + 1) as Sprite;
+            _topHolder = playerNameTF.parent.addChild(new Sprite()) as Sprite;
 
             setup();
         }
@@ -287,22 +287,22 @@ package com.xvm.battle.fullStats
             return _isLeftPanel;
         }
 
-        public function get substrateHolder():MovieClip
+        public function get substrateHolder():Sprite
         {
             return _substrateHolder;
         }
 
-        public function get bottomHolder():MovieClip
+        public function get bottomHolder():Sprite
         {
             return _bottomHolder;
         }
 
-        public function get normalHolder():MovieClip
+        public function get normalHolder():Sprite
         {
             return _normalHolder;
         }
 
-        public function get topHolder():MovieClip
+        public function get topHolder():Sprite
         {
             return _topHolder;
         }
