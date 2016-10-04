@@ -1,3 +1,6 @@
+XVM-6.4.6.1:
+  * fixed development version notification
+
 XVM-6.4.6:
   * adaptation to WoT 0.9.16
   * fixed WorldOfTanks mods compatibility with Microsoft Windows NT 5.x (XP, XP 64-bit, Server 2003)
