@@ -28,9 +28,11 @@
       // Для отключения звукового события используйте пустую строку для значения
       //"originalEventName": ""
       //
-      // Disable original sixth sense light bulb sound event
-      // Отключить оригинальный звук лампы шестого чувства
+      // Disable original sixth sense light bulb sound event (Variant 1, Variant 2, User sound)
+      // Отключить оригинальный звук лампы шестого чувства (Вариант 1, Вариант 1, Пользовательский)
       "lightbulb": "",
+      "lightbulb_02": "",
+      "sixthSense": "",
       //
       // Disable original enemy detection event      
       // Отключить оригинальный звук обнаружения противника
