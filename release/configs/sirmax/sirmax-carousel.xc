@@ -8,7 +8,7 @@
   },
   "carousel": {
     //"enabled": false,
-    //"cellType": "normal",
+    "cellType": "normal",
     //"zoom": 0.75,
     "rows": 0,
     //"backgroundAlpha": 50,
