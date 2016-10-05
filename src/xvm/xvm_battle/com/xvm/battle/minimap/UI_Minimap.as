@@ -115,16 +115,6 @@ package com.xvm.battle.minimap
                 sizeIndex = Math.max(0, Math.min(MinimapSizeConst.MAP_SIZE.length - 1, sizeIndex));
                 super.as_setSize(sizeIndex);
 
-                /* TODO: add zoom steps
-                if (param1 == 5)
-                {
-                    foreground5.scaleX = foreground5.scaleY = 1;
-                }
-                else if (param1 > 5)
-                {
-                    foreground5.scaleX = foreground5.scaleY = 1.1;
-                }*/
-
                 alignMinimap();
                 Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED));
             }

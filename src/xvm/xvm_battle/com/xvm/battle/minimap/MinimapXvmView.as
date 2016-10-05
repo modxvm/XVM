@@ -54,7 +54,7 @@ package com.xvm.battle.minimap
             component.y = page.minimap.y;
             page.minimap = component;
             page.addChildAt(page.minimap, idx);
-            page.minimap.validateNow();
+            //page.minimap.validateNow(); // TODO: remove? brokes initial sise restoring
             page.xfw_registerComponent(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
             // restore event handlers setted up in the BaseBattlePage.configUI()
             component.addEventListener(MinimapEvent.TRY_SIZE_CHANGED, onMiniMapTrySizeChangeHandler, false, 0, true);
