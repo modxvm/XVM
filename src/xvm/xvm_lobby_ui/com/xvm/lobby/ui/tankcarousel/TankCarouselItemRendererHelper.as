@@ -104,7 +104,8 @@ package com.xvm.lobby.ui.tankcarousel
                             if (dossier)
                             {
                                 var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(options.vehCD);
-                                vdata.elite = item.vehicleCarouselVO.elite ? "elite" : null;
+                                //Logger.addObject(item.vehicleCarouselVO);
+                                vdata.elite = XfwUtils.endsWith(item.vehicleCarouselVO.tankType, "_elite") ? "elite" : null; // FIXIT: why item.vehicleCarouselVO.elite altays false?
                                 vdata.selected = renderer.selected ? "sel" : null;
                                 if (options.vehicleData)
                                 {

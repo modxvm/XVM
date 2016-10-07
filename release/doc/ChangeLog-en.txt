@@ -2,6 +2,7 @@ XVM-6.4.6.3-dev:
   * added new options in the "carousel"/"normal"/"fields" and "carousel"/"small"/"fields" sections:
       "flag" - nation flag
       "tankIcon" - vehicle icon
+  * carousel: fixed {{v.elite}} macro
 
 XVM-6.4.6.2:
   * fixed initial minimap size restoring
