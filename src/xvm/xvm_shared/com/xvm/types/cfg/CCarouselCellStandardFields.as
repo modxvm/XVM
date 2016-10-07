@@ -8,6 +8,8 @@ package com.xvm.types.cfg
 
     public dynamic class CCarouselCellStandardFields extends Object implements ICloneable
     {
+        public var flag:CCarouselCellStandardField;
+        public var tankIcon:CCarouselCellStandardField;
         public var tankType:CCarouselCellStandardField;
         public var level:CCarouselCellStandardField;
         public var xp:CCarouselCellStandardField;

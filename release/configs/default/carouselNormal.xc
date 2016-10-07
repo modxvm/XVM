@@ -29,6 +29,12 @@
       // "alpha"    - transparency                  / прозрачность
       // "scale"    - scale                         / масштаб
       //
+      // Nation flag.
+      // Флаг нации.
+      "flag": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Vehicle icon.
+      // Иконка танка.
+      "tankIcon": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Vehicle class icon.
       // Иконка типа техники.
       "tankType": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },

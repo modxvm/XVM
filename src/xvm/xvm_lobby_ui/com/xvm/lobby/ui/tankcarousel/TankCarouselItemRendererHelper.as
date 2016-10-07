@@ -56,6 +56,8 @@ package com.xvm.lobby.ui.tankcarousel
             }
 
             //App.utils.scheduler.scheduleTask(function():void {
+            _setupStandardFieldFlag();
+            _setupStandardFieldTankIcon();
             _setupStandardFieldTankType();
             _setupStandardFieldLevel();
             _setupStandardFieldXp();
@@ -167,6 +169,18 @@ package com.xvm.lobby.ui.tankcarousel
             field.y = (field.y * field.scaleY) + cfg.dy;
         }
 
+        public function _setupStandardFieldFlag():void
+        {
+            _setupStandardFieldAlpha(renderer.content.mcFlag, cfg.fields.flag);
+            _setupStandardFieldScale(renderer.content.mcFlag, cfg.fields.flag);
+        }
+
+        public function _setupStandardFieldTankIcon():void
+        {
+            _setupStandardFieldAlpha(renderer.content.imgIcon, cfg.fields.tankIcon);
+            _setupStandardFieldScale(renderer.content.imgIcon, cfg.fields.tankIcon);
+        }
+
         private function _setupStandardFieldTankType():void
         {
             _setupStandardFieldAlpha(renderer.content.mcTankType, cfg.fields.tankType);
@@ -189,21 +203,18 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function _setupStandardTextField(field:TextField, cfg:CCarouselCellStandardField, dy:Number):void
         {
-            field.scaleX = field.scaleY = cfg.scale;
             field.antiAliasType = AntiAliasType.ADVANCED;
-            field.x = 0;
-            field.y = -dy;
-            field.width = DEFAULT_WIDTH / field.scaleX - 2 + cfg.dx;
-            field.height = DEFAULT_HEIGHT / field.scaleY - 2 + cfg.dy;
+            field.x = cfg.dx + 2;
+            field.width = (DEFAULT_WIDTH - 4) / field.scaleX;
             field.autoSize = TextFieldAutoSize.NONE;
             field.defaultTextFormat.align = TextFormatAlign.RIGHT;
-            TextFieldEx.setVerticalAlign(field, TextFieldEx.VALIGN_BOTTOM);
             //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
         }
 
         public function _setupStandardFieldTankName():void
         {
             _setupStandardFieldAlpha(renderer.content.txtTankName, cfg.fields.tankName);
+            _setupStandardFieldScale(renderer.content.txtTankName, cfg.fields.tankName);
             _setupStandardTextField(renderer.content.txtTankName, cfg.fields.tankName, 0);
         }
 
@@ -214,6 +225,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 var field:TextField = tankicon.txtRentInfo;
                 _setupStandardFieldAlpha(field, cfg.fields.rentInfo);
+                _setupStandardFieldScale(field, cfg.fields.rentInfo);
                 _setupStandardTextField(field, cfg.fields.rentInfo, DEFAULT_HEIGHT - field.y - field.height - 2);
                 //field.visible = true; field.htmlText = "<font color='#ffffff'>txtRentInfo</font>"; // DEBUG
             }
@@ -248,12 +260,16 @@ package com.xvm.lobby.ui.tankcarousel
         {
             var field:TextField = renderer.content.txtInfo;
             if (isNaN(orig_txtInfo_y))
+            {
                 orig_txtInfo_y = field.y;
+            }
+            else
+            {
+                field.y = orig_txtInfo_y;
+            }
             _setupStandardFieldAlpha(field, cfg);
-            field.scaleX = field.scaleY = cfg.scale;
+            _setupStandardFieldScale(field, cfg);
             field.antiAliasType = AntiAliasType.ADVANCED;
-            field.x = cfg.dx;
-            field.y = orig_txtInfo_y + cfg.dy;
             field.width = DEFAULT_WIDTH / cfg.scale;
             field.defaultTextFormat.align = TextFormatAlign.CENTER;
             //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
