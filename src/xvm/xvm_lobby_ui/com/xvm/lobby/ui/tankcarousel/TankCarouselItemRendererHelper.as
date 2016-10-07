@@ -270,6 +270,7 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldAlpha(field, cfg);
             _setupStandardFieldScale(field, cfg);
             field.antiAliasType = AntiAliasType.ADVANCED;
+            field.x = cfg.dx;
             field.width = DEFAULT_WIDTH / cfg.scale;
             field.defaultTextFormat.align = TextFormatAlign.CENTER;
             //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
