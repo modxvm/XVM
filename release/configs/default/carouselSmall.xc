@@ -83,6 +83,12 @@
         "x": 159, "y": 14, "align": "right",
         "format": "<font face='$FieldFont' size='15' color='{{v.premium?#FFA759|#C8C8B5}}'>{{v.name}}</font>",
         "shadow": { "$ref": { "path": "def.textFieldShadow" }, "color": "{{v.premium?0xFC3700|0xC8C8B5}}", "alpha": "{{v.premium?85|35}}", "blur": "{{v.premium?10|8}}" }
+      },
+      {
+        "enabled": true,
+        "x": 24, "y": 16,
+        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_winrate|#C8C8B5}}'>{{v.winrate%2d~%}}</font></b>",
+        "shadow": ${ "def.textFieldShadow" }
       }
     ]
   }
