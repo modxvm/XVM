@@ -69,11 +69,11 @@
     // Extra cell fields (see playersPanel.xc).
     // Дополнительные поля ячеек (см. playersPanel.xc).
     "extraFields": [
-      // Подложка слота
       // Slot background
+      // Подложка слота
       { "x": 1, "y": 1, "layer": "substrate", "width": 160, "height": 100, "bgColor": "0x0A0A0A" },
-      // Средний урон
       // Average damage
+      // Средний урон
       {
         "enabled": true,
         "x": 1, "y": 28, "width": 18, "height": 18, "alpha": "{{v.tdb?|0}}",
@@ -85,15 +85,15 @@
         "format": "<b><font face='$FieldFont' size='12' color='{{v.c_xtdb|#CFCFCF}}'>{{v.tdb%d}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       },
-      // Sign of mastery.
-      // Знак мастерства.
+      // Sign of mastery
+      // Знак мастерства
       {
         "enabled": true,
         "x": 1, "y": 12, "width": 23, "height": 23,
         "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png"
       },
-      // Количество боёв
       // Battles count
+      // Количество боёв
       {
         "enabled": true,
         "x": 158, "y": 17, "align": "right", "width": 13, "height": 13, "alpha": "{{v.battles?|0}}",
@@ -105,8 +105,8 @@
         "format": "<b><font face='$FieldFont' size='12' color='#CFCFCF' alpha='#F0'>{{v.battles}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       },
-      // Процент побед
       // Winrate
+      // Процент побед
       {
         "enabled": true,
         "x": 158, "y": 32, "align": "right", "width": 13, "height": 13, "alpha": "{{v.winrate?|0}}",
