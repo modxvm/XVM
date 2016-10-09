@@ -60,8 +60,8 @@
       "updateInterval": 10000,
       // Axis field coordinates
       // Положение поля по осям
-      "x": 3,
-      "y": 51,
+      "x": 85,
+      "y": 52,
       // Horizontal alignment of field at screen ("left", "center", "right").
       // Горизонтальное выравнивание поля на экране ("left", "center", "right").
       "hAlign": "left",
@@ -82,7 +82,7 @@
       "columnGap": 3,
       // Leading between lines.
       // Пространство между строками
-      "leading": 0,
+      "leading": 2,
       // true - place at top of other windows, false - at bottom.
       // true - отображать поверх остальных окон, false - под.
       "topmost": true,
