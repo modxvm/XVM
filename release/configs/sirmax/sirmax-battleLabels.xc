@@ -13,7 +13,7 @@
       "updateEvent": "ON_TARGET_IN",
       //"updateEvent": "PY(test)",
       "height": 150,
-      "format": "{{py:vinfo.name()}}\nRT: {{py:vinfo.gun_reload()}}\nVR: {{py:vinfo.vision_radius()}}",
+      "format": "{{py:vinfo.name}}\nRT: {{py:vinfo.gun_reload}}\nVR: {{py:vinfo.vision_radius}}",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
     },
     {

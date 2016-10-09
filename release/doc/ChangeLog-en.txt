@@ -3,6 +3,7 @@ XVM-6.4.6.3-dev:
       "flag" - nation flag
       "tankIcon" - vehicle icon
   * carousel: fixed {{v.elite}} macro
+  * py_macro: braces for functions without arguments can be omitted
 
 XVM-6.4.6.2:
   * fixed initial minimap size restoring

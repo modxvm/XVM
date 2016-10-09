@@ -133,6 +133,8 @@ def load_macros_lib(file_name):
 
 def get_function(function):
     try:
+        if function.find('(') == -1:
+            function += '()'
         left_bracket_pos = function.index('(')
         right_bracket_pos = function.rindex(')')
         func_name = function[0:left_bracket_pos]
