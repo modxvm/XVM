@@ -16,8 +16,7 @@ package com.xvm.lobby.ui.profile.components
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.events.*;
-    import net.wg.gui.components.controls.SortableScrollingList;
-    import net.wg.gui.components.controls.NormalSortingBtnVO;
+    import net.wg.gui.components.controls.events.*;
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
@@ -84,62 +83,45 @@ package com.xvm.lobby.ui.profile.components
 
         private var _disposed:Boolean = false;
         private var _selectedItemCD:Number = -1;
-        private var _initialSortDone:Boolean = false;
         //protected var filter:FilterControl;
 
         // CTOR
 
         public function Technique(page:ProfileTechnique, playerName:String, accountDBID:int):void
         {
-            try
+            this.name = "xvm_extension";
+            this._page = page;
+            this._playerName = playerName;
+            this._accountDBID = accountDBID;
+
+            // Change row height: 34 -> 32
+            page.listComponent.techniqueList.rowHeight = 32;
+
+            // remove upper/lower shadow
+            page.listComponent.upperShadow.visible = false;
+            page.listComponent.lowerShadow.visible = false;
+
+            if (Config.networkServicesSettings.statAwards)
             {
-                this.name = "xvm_extension";
-                this._page = page;
-                this._playerName = playerName;
-                this._accountDBID = accountDBID;
+                Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded, false, 0, true);
+                Stat.loadUserData(playerName);
 
-                // Change row height: 34 -> 32
-                page.listComponent.techniqueList.rowHeight = 32;
+                Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, accountDBID);
 
-                // remove upper/lower shadow
-                page.listComponent.upperShadow.visible = false;
-                page.listComponent.lowerShadow.visible = false;
+                // override renderers
+                page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
+                page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
 
-                if (Config.networkServicesSettings.statAwards)
-                {
-                    Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded, false, 0, true);
-                    Stat.loadUserData(playerName);
-
-                    Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, accountDBID);
-
-                    // override renderers
-                    page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
-                    page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
-
-                    // create filter controls
-                    //filter = null;
-                    //if (Config.config.userInfo.showFilters)
-                    //    createFilters();
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
+                // create filter controls
+                //filter = null;
+                //if (Config.config.userInfo.showFilters)
+                //    createFilters();
             }
         }
 
         public function dispose():void
         {
-            try
-            {
-                _disposed = true;
-                App.utils.scheduler.cancelTask(makeInitialSort);
-                App.utils.scheduler.cancelTask(makeSort);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            _disposed = true;
         }
 
         public function fixInitData(param1:Object):void
@@ -169,16 +151,10 @@ package com.xvm.lobby.ui.profile.components
             }
         }
 
-        public function applyData():void
-        {
-            makeInitialSort();
-        }
-
         public function setSelectedVehicleIntCD(itemCD:Number):void
         {
             _selectedItemCD = itemCD;
         }
-
 
         // DAAPI
 
@@ -187,92 +163,48 @@ package com.xvm.lobby.ui.profile.components
             if (_disposed)
                 return;
 
-            try
-            {
-                //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
-                page.listComponent.techniqueList.invalidateData();
-                dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
+            page.listComponent.techniqueList.invalidateData();
+            dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
         }
-
-        // PRIVATE
-
-        // filters
-
-        // virtual
-        //protected function createFilters():void
-        //{
-            //filter = new FilterControl();
-            //filter.addEventListener(Event.CHANGE, applyFilter, false, 0, true);
-            //page.addChild(filter);
-        //}
 
         // Initial sort
 
         // TODO: save sort order to userprofile
-        private function makeInitialSort():void
+        public function makeInitialSort():void
         {
-            try
+            var idx:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
+            var buttonBar:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
+            if (Config.config.userInfo.showXTEColumn)
             {
-                var idx:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
-                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-                if (Config.config.userInfo.showXTEColumn)
-                {
-                    if (bb.dataProvider.length > 8)
-                        idx = idx == 7 ? 8 : idx == 8 ? 7 : idx; // swap 8 and 9 positions (mastery and xTE columns)
-                }
-                if (idx > bb.dataProvider.length - 1)
-                    idx = 5;
-                bb.selectedIndex = idx;
-                var button:SortingButton = SortingButton(bb.getButtonAt(bb.selectedIndex));
-                if (button == null)
-                    return;
-                button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
-                button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
-                page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
-
-                page.listComponent.techniqueList.validateNow();
-
-                var dp:IDataProvider = page.listComponent.techniqueList.dataProvider;
-                if (dp.length)
-                {
-                    var pg:ProfileTechniquePage = page as ProfileTechniquePage;
-                    if (pg)
-                    {
-                        pg.as_setSelectedVehicleIntCD(_selectedItemCD);
-                    }
-
-                    var pw:ProfileTechniqueWindow = page as ProfileTechniqueWindow;
-                    if (pw)
-                    {
-                        pw.listComponent.techniqueList.selectVehicleByIndex(0);
-                    }
-                }
-
-                page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
-
-                _initialSortDone = true;
+                if (buttonBar.dataProvider.length > 8)
+                    idx = idx == 7 ? 8 : idx == 8 ? 7 : idx; // swap 8 and 9 positions (mastery and xTE columns)
             }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            if (idx > buttonBar.dataProvider.length - 1)
+                idx = 5;
+
+            var button:SortingButton = SortingButton(buttonBar.getButtonAt(idx));
+            if (button == null)
+                return;
+            button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
+
+            buttonBar.selectedIndex = idx;
+            page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
+
+            page.listComponent.techniqueList.removeEventListener(SortableScrollingListEvent.SORT_APPLIED, onListSortAppliedHandler);
+            page.listComponent.techniqueList.addEventListener(SortableScrollingListEvent.SORT_APPLIED, onListSortAppliedHandler, false, 0, true);
         }
 
-        private function makeSort():void
+        // PRIVATE
+
+        // sort
+
+        private function onListSortAppliedHandler(e:SortableScrollingListEvent):void
         {
             try
             {
-                var buttonBar:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-                var button:SortingButton = SortingButton(buttonBar.getButtonAt(buttonBar.selectedIndex));
-                if (button.sortDirection != SortingInfo.WITHOUT_SORT)
-                {
-                    page.listComponent.techniqueList.sortByField(button.id, button.sortDirection == SortingInfo.ASCENDING_SORT);
-                }
+                page.listComponent.techniqueList.removeEventListener(SortableScrollingListEvent.SORT_APPLIED, onListSortAppliedHandler);
+                page.listComponent.selectVehicleById(_selectedItemCD);
             }
             catch (ex:Error)
             {
@@ -291,6 +223,8 @@ package com.xvm.lobby.ui.profile.components
 
             if (e.result != playerName)
                 return;
+
+            Stat.instance.removeEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
 
             try
             {
@@ -340,5 +274,15 @@ package com.xvm.lobby.ui.profile.components
                 Logger.err(ex);
             }
         }
+
+        // filters
+
+        // virtual
+        //protected function createFilters():void
+        //{
+            //filter = new FilterControl();
+            //filter.addEventListener(Event.CHANGE, applyFilter, false, 0, true);
+            //page.addChild(filter);
+        //}
     }
 }

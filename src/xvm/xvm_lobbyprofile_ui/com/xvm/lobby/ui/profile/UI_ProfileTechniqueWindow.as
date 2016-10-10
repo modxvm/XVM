@@ -23,24 +23,30 @@ package com.xvm.lobby.ui.profile
 
         override protected function onPopulate():void
         {
-            //Logger.add("onPopulate");
+            //Logger.add("UI_ProfileTechniqueWindow.onPopulate");
             super.onPopulate();
-
-            var profileWindow:ProfileWindow = this.parent.parent.parent.parent as ProfileWindow;
-            if (profileWindow == null)
+            try
             {
-                Logger.add("WARNING: [UI_ProfileTechniqueWindow] Cannot find ProfileWindow");
-                return;
+                var profileWindow:ProfileWindow = this.parent.parent.parent.parent as ProfileWindow;
+                if (profileWindow == null)
+                {
+                    Logger.add("WARNING: [UI_ProfileTechniqueWindow] Cannot find ProfileWindow");
+                    return;
+                }
+
+                // get player name from window title
+                var playerName:String = XfwUtils.GetPlayerName((profileWindow.window as Window).title);
+
+                // get player id from the view name.
+                var accountDBID:int = parseInt(profileWindow.as_config.name.replace("profileWindow_", ""));
+
+                technique = new TechniqueWindow(this, playerName, accountDBID)
+                addChild(technique);
             }
-
-            // get player name from window title
-            var playerName:String = XfwUtils.GetPlayerName((profileWindow.window as Window).title);
-
-            // get player id from the view name.
-            var accountDBID:int = parseInt(profileWindow.as_config.name.replace("profileWindow_", ""));
-
-            technique = new TechniqueWindow(this, playerName, accountDBID)
-            addChild(technique);
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override protected function onDispose():void
@@ -76,7 +82,9 @@ package com.xvm.lobby.ui.profile
             try
             {
                 if (technique)
-                    technique.applyData();
+                {
+                    technique.makeInitialSort();
+                }
             }
             catch (ex:Error)
             {

@@ -20,9 +20,17 @@ package com.xvm.lobby.ui.profile
 
         override protected function onPopulate():void
         {
+            //Logger.add("UI_ProfileTechniquePage.onPopulate");
             super.onPopulate();
-            technique = new TechniquePage(this, Xfw.cmd(XvmCommands.GET_PLAYER_NAME));
-            addChild(technique);
+            try
+            {
+                technique = new TechniquePage(this, Xfw.cmd(XvmCommands.GET_PLAYER_NAME));
+                addChild(technique);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override protected function onDispose():void
@@ -58,7 +66,9 @@ package com.xvm.lobby.ui.profile
             try
             {
                 if (technique)
-                    technique.applyData();
+                {
+                    technique.makeInitialSort();
+                }
             }
             catch (ex:Error)
             {
@@ -70,7 +80,9 @@ package com.xvm.lobby.ui.profile
         {
             super.as_setSelectedVehicleIntCD(itemCD);
             if (technique)
+            {
                 technique.setSelectedVehicleIntCD(itemCD);
+            }
         }
 
         // PUBLIC
