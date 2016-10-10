@@ -183,12 +183,13 @@ package com.xvm.lobby.ui.profile.components
             if (idx > buttonBar.dataProvider.length - 1)
                 idx = 5;
 
+            buttonBar.selectedIndex = idx;
+
             var button:SortingButton = SortingButton(buttonBar.getButtonAt(idx));
             if (button == null)
                 return;
             button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
 
-            buttonBar.selectedIndex = idx;
             page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
 
             page.listComponent.techniqueList.removeEventListener(SortableScrollingListEvent.SORT_APPLIED, onListSortAppliedHandler);
