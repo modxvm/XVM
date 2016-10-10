@@ -38,7 +38,7 @@ package com.xvm.battle.minimap.entries.personal
                 Xvm.addEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, updateCirclesVisibility);
                 Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, updateCirclesVisibility);
 
-                stereoscope_exists = stereoscope_enabled = BattleGlobalData.minimapCirclesData.view_stereoscope == true;
+                UI_ViewRangeCirclesEntry.stereoscope_exists = UI_ViewRangeCirclesEntry.stereoscope_enabled = BattleGlobalData.minimapCirclesData.view_stereoscope == true;
 
                 _circles = new Circles(Config.config.minimap.circles);
                 //circles.visible = false;
@@ -156,11 +156,10 @@ package com.xvm.battle.minimap.entries.personal
             try
             {
                 // workaround for stereoscope
-                if (!stereoscope_exists)
-                    stereoscope_exists = true;
+                if (!UI_ViewRangeCirclesEntry.stereoscope_exists)
+                    UI_ViewRangeCirclesEntry.stereoscope_exists = true;
 
-                stereoscope_enabled = isOn != 0;
-
+                UI_ViewRangeCirclesEntry.stereoscope_enabled = isOn != 0;
                 UI_ViewRangeCirclesEntry.visionRadius = visionRadius;
 
                 _circles.update();
@@ -273,6 +272,10 @@ class Circles extends Sprite implements IDisposable
             stereoscopeVisionRadius = UI_ViewRangeCirclesEntry.visionRadius * 1.25;
             circularVisionRadius = UI_ViewRangeCirclesEntry.visionRadius;
         }
+
+        //Logger.add("stereoscope_enabled = " + UI_ViewRangeCirclesEntry.stereoscope_enabled);
+        //Logger.add("stereoscopeVisionRadius = " + stereoscopeVisionRadius);
+        //Logger.add("circularVisionRadius = " + circularVisionRadius);
 
         var len:int = _dynamicCircles.length;
         for (var i:int = 0; i < len; ++i)
