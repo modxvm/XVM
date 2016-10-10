@@ -19,6 +19,7 @@ package com.xvm.lobby.ui.company.renderers
 
         private var vehicleLevelFieldX:Number = 0;
         private var effField:TextField;
+        private var playerName:String;
 
         public function TeamMemberRenderer(proxy:net.wg.gui.prebattle.controls.TeamMemberRenderer)
         {
@@ -59,13 +60,23 @@ package com.xvm.lobby.ui.company.renderers
             App.toolTipMgr.hide();
             effField.htmlText = "";
 
-            if (data == null || !data.fullName)
+            if (!data || !data.fullName)
+            {
+                playerName = null;
                 return;
+            }
 
-            var pname:String = XfwUtils.GetPlayerName(data.fullName);
+            playerName = XfwUtils.GetPlayerName(data.fullName);
             App.utils.scheduler.scheduleTask(function():void
             {
-                Stat.loadUserData(pname);
+                if (!Stat.isUserDataCachedByName(playerName))
+                {
+                    Stat.loadUserData(playerName);
+                }
+                else
+                {
+                    setEffFieldText();
+                }
             }, 10);
         }
 
@@ -80,8 +91,7 @@ package com.xvm.lobby.ui.company.renderers
             {
                 if (proxy.data == null || !proxy.data.fullName)
                     return;
-                var pname:String = XfwUtils.GetPlayerName(proxy.data.fullName);
-                var sd:StatData = Stat.getUserDataByName(pname);
+                var sd:StatData = Stat.getUserDataByName(playerName);
                 if (sd == null)
                     return;
                 var tip:String = TeamRendererHelper.getToolTipData(proxy.data.fullName, proxy.data);
@@ -103,6 +113,17 @@ package com.xvm.lobby.ui.company.renderers
         // PRIVATE
 
         private function onStatLoaded(e:ObjectEvent):void
+        {
+            if (e == null)
+                return;
+            var s:String = e.result as String;
+            if (s == playerName)
+            {
+                setEffFieldText();
+            }
+        }
+
+        private function setEffFieldText():void
         {
             effField.htmlText = (proxy.data == null || !proxy.data.fullName) ? "--"
                 : "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(proxy.data.fullName) + "</span>";

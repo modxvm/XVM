@@ -101,11 +101,22 @@ package com.xvm.lobby.ui.company.renderers
         {
             playerName = XfwUtils.GetPlayerName(proxy.data.creatorName);
             if (Stat.isUserDataCachedByName(playerName))
+            {
                 setEffFieldText();
+            }
             else
             {
                 if (updateCheckBox.selected)
-                    Stat.loadUserData(playerName);
+                {
+                    if (!Stat.isUserDataCachedByName(playerName))
+                    {
+                        Stat.loadUserData(playerName);
+                    }
+                    else
+                    {
+                        setEffFieldText();
+                    }
+                }
             }
         }
 
@@ -114,8 +125,10 @@ package com.xvm.lobby.ui.company.renderers
             if (e == null)
                 return;
             var s:String = e.result as String;
-            if (s != null && s == playerName)
+            if (s == playerName)
+            {
                 setEffFieldText();
+            }
         }
 
         private function setEffFieldText():void
