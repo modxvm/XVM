@@ -21,11 +21,6 @@ package com.xvm.lobby.ui.profile
             super();
         }
 
-        override protected function configUI():void
-        {
-            super.configUI();
-        }
-
         override protected function onPopulate():void
         {
             //Logger.add("onPopulate");

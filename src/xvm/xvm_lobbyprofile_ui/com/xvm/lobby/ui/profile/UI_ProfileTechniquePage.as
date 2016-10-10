@@ -25,6 +25,17 @@ package com.xvm.lobby.ui.profile
             addChild(technique);
         }
 
+        override protected function onDispose():void
+        {
+            if (technique)
+            {
+                removeChild(technique);
+                technique.dispose();
+                technique = null;
+            }
+            super.onDispose();
+        }
+
         override public function as_setInitData(param1:Object):void
         {
             try
