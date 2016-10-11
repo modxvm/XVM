@@ -746,6 +746,11 @@ package com.xvm.battle.playersPanel
                     Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase() + (isFixedLayout ? "_fixed" : ""),
                     null,
                     defaultTextFormatConfig);
+                extraFieldsHidden.mouseEnabled = true;
+                extraFieldsHidden.mouseChildren = false;
+                extraFieldsHidden.addEventListener(MouseEvent.MOUSE_MOVE, (BattleXvmView.battlePage.playersPanel as UI_PlayersPanel).onMouseMoveHandler);
+                extraFieldsHidden.addEventListener(MouseEvent.ROLL_OVER, (BattleXvmView.battlePage.playersPanel as UI_PlayersPanel).onMouseRollOverHandler);
+                extraFieldsHidden.addEventListener(MouseEvent.ROLL_OUT, (BattleXvmView.battlePage.playersPanel as UI_PlayersPanel).onMouseRollOutHandler);
                 BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmView.battlePage.getChildIndex(BattleXvmView.battlePage.playersPanel));
                 //_internal_createMenuForNoneState(mc);
                 //createMouseHandler(_root["extraPanels"]);

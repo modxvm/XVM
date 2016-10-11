@@ -130,7 +130,7 @@
   },
   "short": {
     //"enabled": false,
-    "expandAreaWidth": 0,
+    "expandAreaWidth": 40,
     "fragsWidth": 20,
     //"standardFields": [ "nick", "vehicle", "frags" ]
     "vehicleIconXOffsetLeft": -15,

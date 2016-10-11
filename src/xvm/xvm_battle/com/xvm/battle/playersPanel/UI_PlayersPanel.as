@@ -22,7 +22,7 @@ package com.xvm.battle.playersPanel
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.managers.impl.*;
 
-    public dynamic class UI_PlayersPanel extends PlayersPanelUI
+    public /*dynamic*/ class UI_PlayersPanel extends PlayersPanelUI
     {
         // from PlayersPanel.as
         private static const EXPAND_AREA_WIDTH:Number = 230;
@@ -57,6 +57,11 @@ package com.xvm.battle.playersPanel
         private var m_savedState:int = PLAYERS_PANEL_STATE.NONE;
         private var m_startModePending:Number = NaN;
         private var mopt_fixedPosition:Boolean = false;
+        private var mopt_expandAreaWidth:Number = EXPAND_AREA_WIDTH;
+
+        private var _isStateRequested:Boolean = false;
+        private var _isInteractive:Boolean = false;
+        private var _isMouseRollOver:Boolean = false;
 
         public function UI_PlayersPanel()
         {
@@ -74,10 +79,25 @@ package com.xvm.battle.playersPanel
             setup();
         }
 
+        override protected function configUI():void
+        {
+            super.configUI();
+            listLeft.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
+            listRight.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
+        }
+
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            listLeft.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
+            listRight.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
             super.onDispose();
+        }
+
+        override public function as_setIsIntaractive(value:Boolean):void
+        {
+            _isInteractive = value;
+            super.as_setIsIntaractive(value);
         }
 
         override public function as_setPanelMode(state:int):void
@@ -104,6 +124,8 @@ package com.xvm.battle.playersPanel
                     }
                 }
 
+                _isStateRequested = false;
+
                 super.as_setPanelMode(state);
 
                 var mcfg:* = cfg[PLAYERS_PANEL_STATE_NAMES[state]];
@@ -125,23 +147,12 @@ package com.xvm.battle.playersPanel
                     }
                 }
 
-                var expandAreaWidth:Number = Macros.FormatNumberGlobal(mcfg.expandAreaWidth, EXPAND_AREA_WIDTH);
-                // TODO:0.9.16
-                //xfw_expandRectLeft.width = expandAreaWidth;
-                //xfw_expandRectRight.width = expandAreaWidth;
-                //xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
+                mopt_expandAreaWidth = state == PLAYERS_PANEL_STATE.FULL ? 0 : Macros.FormatNumberGlobal(mcfg.expandAreaWidth, EXPAND_AREA_WIDTH);
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
-        }
-
-        override public function updateStageSize(param1:Number, param2:Number):void
-        {
-            super.updateStageSize(param1, param2);
-            // TODO:0.9.16
-            //xfw_expandRectRight.x = App.appWidth - xfw_expandRectRight.width;
         }
 
         override public function setPersonalStatus(param1:uint):void
@@ -199,6 +210,50 @@ package com.xvm.battle.playersPanel
                     {
                         listRight.updateOrder(fixIdxOrder(vehicleStatus.rightVehiclesIDs));
                     }
+                }
+            }
+        }
+
+        override protected function onListRollOverHandler(e:MouseEvent):void
+        {
+            _isMouseRollOver = true;
+        }
+
+        override protected function onListRollOutHandler(e:MouseEvent):void
+        {
+            _isMouseRollOver = false;
+        }
+
+        override public function tryToSetPanelModeByMouseS(state:int):void
+        {
+            _isStateRequested = true;
+            super.tryToSetPanelModeByMouseS(state);
+        }
+
+        // for extraFields in the "none" mode
+        public function onMouseRollOverHandler(e:MouseEvent):void
+        {
+            onListRollOverHandler(e);
+        }
+
+        // for extraFields in the "none" mode
+        public function onMouseRollOutHandler(e:MouseEvent):void
+        {
+            onListRollOutHandler(e);
+        }
+
+        public function onMouseMoveHandler(e:MouseEvent):void
+        {
+            if (_isInteractive && _isMouseRollOver && !_isStateRequested && mopt_expandAreaWidth > 0)
+            {
+                var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
+                if (this.xfw_expandState == PLAYERS_PANEL_STATE.NONE && isInExpandArea)
+                {
+                    super.onListRollOverHandler(e);
+                }
+                else if (this.xfw_expandState != PLAYERS_PANEL_STATE.NONE && !isInExpandArea)
+                {
+                    super.onListRollOutHandler(e);
                 }
             }
         }
