@@ -244,7 +244,7 @@
       "format": "{{xvm-stat?{{l10n:Team strength}}: {{py:xvm.team_strength('{{allyStrengthStatic}}','{{enemyStrengthStatic}}')}} / {{py:xvm.team_strength('{{allyStrengthLive}}','{{enemyStrengthLive}}')}}}}"
     },
     
-    "DamageLog": {
+    "damageLog": {
       "enabled": true,
       "updateEvent": "PY(ON_HIT)",
       "x": 240,
@@ -257,7 +257,7 @@
       "format": "{{py:xvm.myDamageLog.dLog}}"
     },  
     
-    "TimerReload": {
+    "timerReload": {
       "enabled": true,
       "updateEvent": "PY(ON_TIMER_RELOAD)",
       "x": 240,
@@ -270,7 +270,7 @@
       "format": "{{py:xvm.myDamageLog.timerReload}}"
     },      
     
-    "LastHit": {
+    "lastHit": {
       "enabled": true,
       "updateEvent": "PY(ON_LAST_HIT)",
       "x": -120,
