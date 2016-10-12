@@ -243,6 +243,46 @@
       "textFormat": { "size": 15 },
       "format": "{{xvm-stat?{{l10n:Team strength}}: {{py:xvm.team_strength('{{allyStrengthStatic}}','{{enemyStrengthStatic}}')}} / {{py:xvm.team_strength('{{allyStrengthLive}}','{{enemyStrengthLive}}')}}}}"
     },
+    
+    "DamageLog": {
+      "enabled": true,
+      "updateEvent": "PY(ON_HIT)",
+      "x": 240,
+      "y": 0,
+      "width": 300,
+      "height": 233,
+      "screenVAlign": "bottom",
+      "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
+      "textFormat": { "color": "0xF4EFE8", "size": 16 },
+      "format": "{{py:xvm.myDamageLog.dLog}}"
+    },  
+    
+    "TimerReload": {
+      "enabled": true,
+      "updateEvent": "PY(ON_TIMER_RELOAD)",
+      "x": 240,
+      "y": 0,
+      "width": 300,
+      "height": 252,
+      "screenVAlign": "bottom",
+      "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
+      "textFormat": { "color": "0xF4EFE8", "size": 16 },
+      "format": "{{py:xvm.myDamageLog.timerReload}}"
+    },      
+    
+    "LastHit": {
+      "enabled": true,
+      "updateEvent": "PY(ON_LAST_HIT)",
+      "x": -120,
+      "y": 200,
+      "width": 200,
+      "height": 100,
+      "screenHAlign": "center",
+      "screenVAlign": "center",
+      "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
+      "textFormat": { "color": "0xF4EFE8", "size": 16 },
+      "format": "{{py:xvm.myDamageLog.lastHit}}"
+    },     
     "test": {
       "enabled": true,
       "y": -170,

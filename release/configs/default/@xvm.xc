@@ -72,6 +72,8 @@
   // Parameters for login screen.
   // Параметры экрана логина.
   "login": ${"login.xc":"login"},
+  
+  "damageLog": ${"damageLog.xc":"damageLog"},
 
   // Parameters for hangar.
   // Параметры ангара.
