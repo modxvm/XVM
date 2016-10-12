@@ -73,6 +73,9 @@
   // Параметры экрана логина.
   "login": ${"login.xc":"login"},
   
+  
+  // Log of the received hits.
+  // Лог полученных попаданий.
   "damageLog": ${"damageLog.xc":"damageLog"},
 
   // Parameters for hangar.
