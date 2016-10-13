@@ -51,6 +51,13 @@
     "avgDamage": "Средний урон",
     "mainGun": "Основной калибр",
 
+    // Shell kind (macro {{type-shell}})
+    "AP": "ББ",
+    "HE": "ОФ",
+    "APC": "БП",
+    "APH": "ХФ",
+    "HC": "КС",
+
     // BattleResults
     "Hit percent": "Процент попаданий",
     "Damage (assisted / own)": "Урон (с вашей помощью / свой)",
