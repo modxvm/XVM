@@ -53,11 +53,11 @@
 
     // DamageLog:
     // Shell kind (macro {{type-shell}})
-    "AP": "ББ",
-    "HE": "ОФ",
-    "APC": "БП",
-    "APH": "ХФ",
-    "HC": "КС",
+    "armor_piercing": "ББ",
+    "high_explosive": "ОФ",
+    "armor_piercing_cr": "БП",
+    "armor_piercing_he": "ХФ",
+    "hollow_charge": "КС",
     // Text at hits no damage (ricochet, no penetration, no damage) (macro {{dmg}})
     "intermediate_ricochet": "рикошет",
     "final_ricochet": "рикошет",
