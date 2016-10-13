@@ -1,19 +1,18 @@
 ﻿import traceback
-from xvm import utils
-from xvm import myDamageLog
+from xvm import damageLog
 
 
-@xvm.export('xvm.myDamageLog.dLog', deterministic=False)
-def myDamageLog_dLog():
-    return myDamageLog.dLog()
+@xvm.export('xvm.damageLog.dLog', deterministic=False)
+def damageLog_dLog():
+    return damageLog.dLog()
 
 
-@xvm.export('xvm.myDamageLog.lastHit', deterministic=False)
-def myDamageLog_lastHit():
-    return myDamageLog.lastHit()
+@xvm.export('xvm.damageLog.lastHit', deterministic=False)
+def damageLog_lastHit():
+    return damageLog.lastHit()
 
 
-@xvm.export('xvm.myDamageLog.timerReload', deterministic=False)
-def myDamageLog_timerReload():
-    return myDamageLog.timerReload()
+@xvm.export('xvm.damageLog.timerReload', deterministic=False)
+def damageLog_timerReload():
+    return damageLog.timerReload()
 

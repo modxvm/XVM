@@ -1,11 +1,10 @@
-﻿# Addons: "DamageLog"
-# ktulho <http://www.koreanrandom.com/forum/user/17624-ktulho/>
-
-import BigWorld
+﻿import BigWorld
 import Keys
 import xvm_main.python.config as config
+from xvm_main.python.stats import _stat
 import xvm_main.python.stats as stats
 import xvm_main.python.vehinfo as vehinfo
+import xvm_main.python.vehinfo_wn8 as vehinfo_wn8
 from items import vehicles, _xml
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
@@ -30,58 +29,6 @@ ATTACK_REASONS = {
     25: 'air_strike'
 }
 
-SHELL_TYPES_DEFAULT = {
-    'ARMOR_PIERCING': 'ББ',
-    'HIGH_EXPLOSIVE': 'ОФ',
-    'ARMOR_PIERCING_CR': 'БП',
-    'ARMOR_PIERCING_HE': 'ХФ',
-    'HOLLOW_CHARGE': 'КС'
-}
-
-VEHICLE_CLASS = {
-    'mediumtank': "<font face='xvm'>&#x3B;</font>",
-    'lighttank': "<font face='xvm'>&#x3A;</font>",
-    'heavytank': "<font face='xvm'>&#x3F;</font>",
-    'at-spg': "<font face='xvm'>&#x2E;</font>",
-    'spg': "<font face ='xvm'>&#x2D;</font>"
-}
-
-COLOR_VEHICLE_CLASS = {
-    'mediumtank': '#E9D600',
-    'lighttank': '#0FD711',
-    'heavytank': '#BBBBBB',
-    'at-spg': '#2E9FFF',
-    'spg': '#FF2120'
-}
-
-TYPE_HIT_DEFAULT = {
-    'shot': "<font face='xvm'>&#x50;</font>",
-    'fire': "<font face='xvm'>&#x51;</font>",
-    'ramming': "<font face='xvm'>&#x52;</font>",
-    'world_collision': "<font face='xvm'>&#x53;</font>",
-    'death_zone': "DZ",
-    'drowning': "Dr",
-    'gas_attack': "GA",
-    'overturn': "<font face='xvm'>&#x112;</font>",
-    'art_attack': "<font face='xvm'>&#x110;</font>",
-    'air_strike': "<font face='xvm'>&#x111;</font>"
-}
-
-COLOR_TYPE_HIT_DEFAULT = {
-    'shot': '#E3E3E3',
-    'fire': '#FF211C',
-    'ramming': '#E3E3E3',
-    'world_collision': '#E3E3E3',
-    'death_zone': '#E3E3E3',
-    'drowning': '#E3E3E3',
-    'gas_attack': '#E3E3E3',
-    'overturn': '#E3E3E3',
-    'art_attack': '#E3E3E3',
-    'air_strike': '#E3E3E3'
-}
-
-COLOR_TEAM_DAMAGE = '#34A0FF'
-
 VEHICLE_CLASSES = frozenset(['mediumTank', 'lightTank', 'heavyTank', 'AT-SPG', 'SPG'])
 
 HIT_EFFECT_CODES = {
@@ -93,24 +40,9 @@ HIT_EFFECT_CODES = {
     5: 'critical_hit'
 }
 
-HIT_EFFECTS = {
-    'intermediate_ricochet': 'рикошет',
-    'final_ricochet': 'рикошет',
-    'armor_not_pierced': 'не пробито',
-    'armor_pierced_no_damage': 'без урона'
-}
-
 MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShell', 'costShell', 'comp-name', 'clan',
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'timer', 'c:team-dmg', 'c:hit-effects',
-               'splash-hit', 'level', 'clanicon', 'clannb', 'marksOnGun']
-
-TANK_PART_NAMES = {
-    'turret': 'башня',
-    'hull': 'корпус',
-    'chassis': 'шасси',
-    'gun': 'орудие',
-    'none': ''
-}
+               'splash-hit', 'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num']
 
 def keyLower(_dict):
     dict_return = {}
@@ -139,7 +71,7 @@ class DamageLog(object):
         self.macros = {'number': 0, 'critical-hit': '', 'vehicle': '', 'name': '', 'vtype': '', 'clan': '',
                        'c:costShell': '', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
-                       'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': ''}
+                       'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
         self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False}
         self.config = {}
 
@@ -158,13 +90,12 @@ class DamageLog(object):
         self.macros = {'number': 0, 'critical-hit': '', 'vehicle': '', 'name': '', 'vtype': '', 'clan': '',
                        'c:costShell': '', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
-                       'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': ''}
+                       'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
         self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False}
         self.config = {}
 
     def parser(self, strHTML):
         old_strHTML = ''
-        # log('log = %s' % strHTML)
         while old_strHTML != strHTML:
             old_strHTML = strHTML
             for s in MACROS_NAME:
@@ -172,9 +103,8 @@ class DamageLog(object):
         return strHTML
 
     def addStringLog(self):
-        self.msgNoAlt.insert(0, self.parser(config.get('damageLog/log/formatHistory', '')))
-        self.msgAlt.insert(0, self.parser(config.get('damageLog/log/formatHistoryAlt', '')))
-        # log('log = %s' % self.msgNoAlt.insert(0, self.parser(config.get('damageLog/formatHistory', ''))))
+        self.msgNoAlt.insert(0, self.parser(config.get('damageLog/log/formatHistory')))
+        self.msgAlt.insert(0, self.parser(config.get('damageLog/log/formatHistoryAlt')))
         as_event('ON_HIT')
 
     def hideLastHit (self):
@@ -183,8 +113,8 @@ class DamageLog(object):
         as_event('ON_LAST_HIT')
 
     def updateLastHit(self):
-        timeDisplayLastHit = float(config.get('damageLog/lastHit/timeDisplayLastHit', 7))
-        self.lastHit = self.parser(config.get('damageLog/lastHit/formatLastHit', ''))
+        timeDisplayLastHit = float(config.get('damageLog/lastHit/timeDisplayLastHit'))
+        self.lastHit = self.parser(config.get('damageLog/lastHit/formatLastHit'))
         if self.lastHit:
             if (self.timerLastHit is not None) and (self.timerLastHit.isStarted):
                 self.timerLastHit.stop()
@@ -199,14 +129,14 @@ class DamageLog(object):
 
     def currentTimeReload(self):
         self.macros['timer'] = round(self.finishTime - BigWorld.serverTime(), 1)
-        self.config['timeTextAfterReload'] = float(config.get('damageLog/timeReload/timeTextAfterReload', 3))
+        self.config['timeTextAfterReload'] = float(config.get('damageLog/timeReload/timeTextAfterReload'))
         if self.macros['timer'] > 0:
-            self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimer', ''))
+            self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimer'))
         else:
             self.timerReloadAttacker.stop()
             if self.config['timeTextAfterReload'] > 0:
                 self.timerReloadAttacker = TimeInterval(self.config['timeTextAfterReload'], self, 'afterTimerReload')
-                self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimerAfterReload', ''))
+                self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimerAfterReload'))
                 self.timerReloadAttacker.start()
             else:
                 self.currentTime = ''
@@ -220,7 +150,7 @@ class DamageLog(object):
         else:
             rammer = 1
         self.macros['timer'] = round(reload_orig * crew * rammer, 1)
-        self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimer', ''))
+        self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimer'))
         as_event('ON_TIMER_RELOAD')
         self.finishTime = self.macros['timer'] + BigWorld.serverTime()
         if (self.timerReloadAttacker is not None) and (self.timerReloadAttacker.isStarted):
@@ -229,52 +159,47 @@ class DamageLog(object):
         self.timerReloadAttacker.start()
 
     def readyConfig(self, section):
-        self.config['vehicleClass'] = keyLower(config.get(section + 'vtype', VEHICLE_CLASS))
-        self.config['colorGoldShell'] = config.get(section + 'c:costShell/gold-shell', '#EEDE00')
-        self.config['colorSilverShell'] = config.get(section + 'c:costShell/silver-shell', '#E3E3E3')
-        self.config['goldShell'] = config.get(section + 'costShell/gold-shell', '')
-        self.config['silverShell'] = config.get(section + 'costShell/silver-shell', '')
-        self.config['color_type_hit'] = keyLower(config.get(section + 'c:dmg-kind', COLOR_TYPE_HIT_DEFAULT))
-        self.config['colorVehicleClass'] = keyLower(config.get(section + 'c:vtype', {}))
-        self.config['type_hit'] = keyLower(config.get(section + 'dmg-kind', TYPE_HIT_DEFAULT))
+        self.config['vehicleClass'] = keyLower(config.get(section + 'vtype'))
+        self.config['colorGoldShell'] = config.get(section + 'c:costShell/gold-shell')
+        self.config['colorSilverShell'] = config.get(section + 'c:costShell/silver-shell')
+        self.config['goldShell'] = config.get(section + 'costShell/gold-shell')
+        self.config['silverShell'] = config.get(section + 'costShell/silver-shell')
+        self.config['color_type_hit'] = keyLower(config.get(section + 'c:dmg-kind'))
+        self.config['colorVehicleClass'] = keyLower(config.get(section + 'c:vtype'))
+        self.config['type_hit'] = keyLower(config.get(section + 'dmg-kind'))
         if self.data['isEnemyAttacker']:
-            self.config['c:team-dmg'] = config.get(section + 'c:team-dmg/no-team-dmg', '#E3E3E3')
+            self.config['c:team-dmg'] = config.get(section + 'c:team-dmg/no-team-dmg')
         elif self.data['playerAttacker']:
-            self.config['c:team-dmg'] = config.get(section + 'c:team-dmg/player', '#34A0FF')
+            self.config['c:team-dmg'] = config.get(section + 'c:team-dmg/player')
         else:
-            self.config['c:team-dmg'] = config.get(section + 'c:team-dmg/team-dmg', '#34A0FF')
-        self.config['no-splash'] = config.get(section + 'splash-hit/no-splash', '')
-        self.config['splash'] = config.get(section + 'splash-hit/splash', '')
-        self.config['compNames'] = keyLower(config.get(section + 'comp-name', TANK_PART_NAMES))
+            self.config['c:team-dmg'] = config.get(section + 'c:team-dmg/team-dmg')
+        self.config['no-splash'] = config.get(section + 'splash-hit/no-splash')
+        self.config['splash'] = config.get(section + 'splash-hit/splash')
+        self.config['compNames'] = keyLower(config.get(section + 'comp-name'))
         if self.data['maxHitEffectCode'] == 5:
-            self.config['critical-hit'] = config.get(section + 'critical-hit/critical', '*')
+            self.config['critical-hit'] = config.get(section + 'critical-hit/critical')
         else:
-            self.config['critical-hit'] = config.get(section + 'critical-hit/no-critical', '')
-        self.config['showHitNoDamage'] = config.get(section + 'showHitNoDamage', True)
-        self.config['hitEffect'] = keyLower(config.get(section + 'hit-effects', HIT_EFFECTS))
+            self.config['critical-hit'] = config.get(section + 'critical-hit/no-critical')
+        self.config['showHitNoDamage'] = config.get(section + 'showHitNoDamage')
+        self.config['hitEffect'] = keyLower(config.get(section + 'hit-effects'))
         self.config['colorHitEffect'] = keyLower(config.get(section + 'c:hit-effects'))
-        self.config['type-shell'] = config.get(section + 'type-shell', SHELL_TYPES_DEFAULT)
+        self.config['type-shell'] = config.get(section + 'type-shell')
 
     def setMacros(self):
         self.macros['c:team-dmg'] = self.config['c:team-dmg']
-        self.macros['vtype'] = self.config['vehicleClass'].get(self.data['attackerVehicleType'], '')
+        self.macros['vtype'] = self.config['vehicleClass'].get(self.data['attackerVehicleType'])
         self.macros['c:costShell'] = self.config['colorGoldShell'] if self.data['isGoldShell'] else self.config['colorSilverShell']
         self.macros['costShell'] = self.config['goldShell'] if self.data['isGoldShell'] else self.config['silverShell']
-        self.macros['c:dmg-kind'] = self.config['color_type_hit'].get(ATTACK_REASONS[self.data['attackReasonID']], '#E3E3E3')
+        self.macros['c:dmg-kind'] = self.config['color_type_hit'].get(ATTACK_REASONS[self.data['attackReasonID']])
         self.macros['dmg-kind'] = self.config['type_hit'].get(ATTACK_REASONS[self.data['attackReasonID']], 'reason: %s' % self.data['attackReasonID'])
-        self.macros['c:vtype'] = self.config['colorVehicleClass'].get(self.data['attackerVehicleType'], '#E3E3E3')
+        self.macros['c:vtype'] = self.config['colorVehicleClass'].get(self.data['attackerVehicleType'])
         self.macros['splash-hit'] = self.config['splash'] if self.data['isSplash'] else self.config['no-splash']
         self.macros['comp-name'] = self.config['compNames'][self.data['compName']]
         self.macros['critical-hit'] = self.config['critical-hit']
         self.macros['type-shell'] = self.config['type-shell'][self.data['shellKind']]
-        self.macros['c:hit-effects'] = self.config['colorHitEffect'].get(self.data['HIT_EFFECT_CODE'], '#E3E3E3')
+        self.macros['c:hit-effects'] = self.config['colorHitEffect'].get(self.data['HIT_EFFECT_CODE'])
         if not self.data['isDamage']:
-            # if self.data['maxHitEffectCode'] < 4:
             self.macros['dmg'] = self.config['hitEffect'][self.data['HIT_EFFECT_CODE']]
-                # self.macros['c:hit-effects'] = self.config['colorHitEffect'].get(self.data['HIT_EFFECT_CODE'], '#E3E3E3')
-            # elif (self.data['maxHitEffectCode'] == 5):
-            #     self.macros['dmg'] = self.config['hitEffect']['armor_pierced_no_damage']
-            #     self.macros['c:hit-effects'] = self.config['colorHitEffect'].get('armor_pierced_no_damage', '#E3E3E3')
         else:
             self.macros['dmg'] = self.data['dmg']
 
@@ -282,15 +207,14 @@ class DamageLog(object):
         player = BigWorld.player()
         attacker = player.arena.vehicles.get(self.data['attackerID'])
         entity = BigWorld.entity(self.data['attackerID'])
-        # log('attacker = %s' % attacker['vehicleType'].level)
-        # log('entity= %s' % (filter(lambda x: not x.startswith('_'), dir(entity))))
         self.data['isEnemyAttacker'] = attacker['team'] != player.team
         self.data['playerAttacker'] = attacker['name'] == player.name
         self.data['typeDescriptor'] = attacker['vehicleType']
+        self.data['vehCD'] = attacker['vehicleType'].type.compactDescr
+        statXVM = _stat.players.get(self.data['attackerID'])
         self.data['attackerVehicleType'] = list(attacker['vehicleType'].type.tags.intersection(VEHICLE_CLASSES))[0].lower()
         if entity is not None:
             self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun'])
-            log('entity = %s [%s]' % (entity.publicInfo['marksOnGun'], entity.publicInfo['name']))
         else:
             self.data['marksOnGun'] = ''
 
@@ -302,8 +226,12 @@ class DamageLog(object):
         self.macros['clannb'] = attacker['clanAbbrev']
         self.macros['clan'] = '[' + attacker['clanAbbrev'] + ']' if attacker['clanAbbrev'] else ''
         self.macros['level'] = self.data['typeDescriptor'].level
-        self.macros['clanicon'] = stats.getClanIcon(self.data['attackerID'])
+        self.macros['clanicon'] = statXVM.clanicon
         self.macros['marksOnGun'] = self.config['marksOnGun'][self.data['marksOnGun']] if self.data['marksOnGun'] else ''
+        self.macros['squad-num'] = statXVM.squadnum + 1
+
+        # log('vehinfo_wn8 = %s [%s]' % (statXVM.clanicon, statXVM.vn))
+        # log('players= %s' % (filter(lambda x: not x.startswith('_'), dir(_stat.players.get(self.data['attackerID'], None)))))
 
         self.readyConfig('damageLog/log/')
         self.setMacros()
@@ -345,7 +273,6 @@ class DamageLog(object):
             self.data['isSplash'] = False
             maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
             self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'none'
-            # log('decodedPoints= %s {%s} %s' % (decodedPoints, compName, maxHitEffectCode))
             self.data['maxHitEffectCode'] = maxHitEffectCode
             self.data['attackReasonID'] = 0
             self.data['attackerID'] = attackerID
@@ -371,14 +298,12 @@ class DamageLog(object):
                 self.updateMacros()
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
-        # log('attackerID= %s' % attackerID)
         if vehicle.isPlayerVehicle:
             self.data['attackReasonID'] = attackReasonID
             self.data['isDamage'] = True
             if attackReasonID == 1:
                 self.data['isFire'] = True
             self.data['attackerID'] = attackerID
-            # log('PlayerID= %s' % attackerID)
             self.data['dmg'] = self.oldHealth - newHealth
             self.oldHealth = newHealth
             self.data['HIT_EFFECT_CODE'] = 'armor_pierced'

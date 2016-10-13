@@ -251,9 +251,9 @@
       "width": 300,
       "height": 233,
       "screenVAlign": "bottom",
-      "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
-      "format": "{{py:xvm.myDamageLog.dLog}}"
+      "format": "{{py:xvm.damageLog.dLog}}"
     },
     "timerReload": {
       "enabled": true,
@@ -263,9 +263,9 @@
       "width": 300,
       "height": 252,
       "screenVAlign": "bottom",
-      "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
-      "format": "{{py:xvm.myDamageLog.timerReload}}"
+      "format": "{{py:xvm.damageLog.timerReload}}"
     },
     "lastHit": {
       "enabled": true,
@@ -276,9 +276,9 @@
       "height": 100,
       "screenHAlign": "center",
       "screenVAlign": "center",
-      "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
-      "textFormat": { "color": "0xF4EFE8", "size": 16 },
-      "format": "{{py:xvm.myDamageLog.lastHit}}"
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
+      "textFormat": {"align": "center", "color": "0xF4EFE8", "size": 16 },
+      "format": "{{py:xvm.damageLog.lastHit}}"
     },
     "test": {
       "enabled": true,
