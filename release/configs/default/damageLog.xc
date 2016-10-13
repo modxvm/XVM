@@ -1,5 +1,4 @@
-﻿
-/**
+﻿/**
   * Macros used in damageLog:
   * Макросы используемые в damageLog:
    
@@ -11,7 +10,7 @@
     {{vtype}}             - vehicle type / тип техники.
     {{vehicle}}           - vehicle name / название техники.
     {{c:vtype}}           - color depending on vehicle type / цвет в зависимости от типа техники.
-    {{c:team-dmg}}     - color depending on damage source (ally , enemy) / цвет в зависимости от источника урона (союзник, противник).
+    {{c:team-dmg}}        - color depending on damage source (ally , enemy) / цвет в зависимости от источника урона (союзник, противник).
     {{c:costShell}}       - color depending on shell kind (gold, credits) / цвет в зависимости от типа снаряда (золото, кредиты).
     {{name}}              - nickname player who caused the damage / никнейм игрока, нанесшего урон.
     {{critical-hit}}      - critical hit / критическое попадание.
@@ -25,23 +24,22 @@
     {{clanicon}}          - macro with clan embed image path value / макрос со значением пути эмблемы клана.
 */
 
-
 {
   "damageLog": {
     "log": {
       // Received damage kind (macro {{dmg-kind}}).
       // Вид полученного урона (макрос {{dmg-kind}}).
       "dmg-kind": {
-        "shot": "{{type-shell}}",//"<font face = 'xvm'>&#x50;</font>",
-        "fire": "<font face = 'xvm'>&#x51;</font>", 
-        "ramming": "<font face = 'xvm'>&#x52;</font>",
-        "world_collision": "<font face = 'xvm'>&#x53;</font>",
+        "shot": "{{type-shell}}", //"<font face='xvm'>&#x50;</font>",
+        "fire": "<font face='xvm'>&#x51;</font>", 
+        "ramming": "<font face='xvm'>&#x52;</font>",
+        "world_collision": "<font face='xvm'>&#x53;</font>",
         "death_zone": "DZ",
         "drowning": "Dr",
         "gas_attack": "GA",
-        "overturn": "<font face = 'xvm'>&#x112;</font>",
-        "art_attack": "<font face = 'xvm'>&#x110;</font>",
-        "air_strike": "<font face = 'xvm'>&#x111;</font>"
+        "overturn": "<font face='xvm'>&#x112;</font>",
+        "art_attack": "<font face='xvm'>&#x110;</font>",
+        "air_strike": "<font face='xvm'>&#x111;</font>"
       },
       // Color depending on received damage kind (macro {{c:dmg-kind}}).
       // Цвет в зависимости от вида полученного урона (макрос {{c:dmg-kind}}).
@@ -64,7 +62,7 @@
         "high_explosive": "оф",
         "armor_piercing_cr": "бп",
         "armor_piercing_he": "хф",
-        "hollow_charge": "кс"      
+        "hollow_charge": "кс"
       },
       // Vehicle type (macro {{vtype}}).
       // Тип техники (макрос {{vtype}}).
@@ -106,13 +104,13 @@
       "critical-hit":{
         "critical": "*",
         "no-critical": ""
-      },    
+      },
       // Designation of hit by splash of shell (HE). (macro {{splash-hit}}).
       // Обозначение попадание осколков снаряда (ОФ). (макрос {{splash-hit}}).
       "splash-hit":{
-        "splash": "<font face = 'xvm'>&#x2C;</font>",
+        "splash": "<font face='xvm'>&#x2C;</font>",
         "no-splash": ""
-      },    
+      },
       // Name part of vehicle (macro {{comp-name}}).
       // Название частей техники (макрос {{comp-name}}).
       "comp-name":{
@@ -120,7 +118,7 @@
         "hull": "корпус",
         "chassis": "шасси",
         "gun": "орудие"
-      },    
+      },
       // Color depending on damage source (ally , enemy) (macro {{c:team-dmg}}).
       // Цвет в зависимости от источника урона (союзник, противник, сам себе) (макрос {{c:team-dmg}}).
       "c:team-dmg":{
@@ -133,22 +131,22 @@
       "costShell":{
         "gold-shell": "",
         "silver-shell": ""
-      },    
+      },
       // Color depending on shell kind (gold, credits) (macro {{c:costShell}}).
       // Цвет в зависимости от типа снаряда (золото, кредиты) (макрос {{c:costShell}}).
       "c:costShell":{
         "gold-shell": "#FFCC66",
         "silver-shell": "#CCCCCC"
       },
-
+      
       // true - show hits without damage in log, false - not to show.
       // true - отображать в логе попадания без урона, false - не отображать.
       "showHitNoDamage": true, 
-     
+      
       // Damage log format.
       // Формат лога повреждений.
       "formatHistory": "<textformat tabstops='[30,115,150,163]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>",
-
+      
       // Damage log format with the left Alt key.
       // Формат лога повреждений c нажатой левой клавиши Alt.
       "formatHistoryAlt": "<textformat tabstops='[30,115,150]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
@@ -177,7 +175,7 @@
       
       // Display time "formatTimerAfterReload".
       // Время отображения "formatTimerAfterReload".
-      "timeTextAfterReload": 5      
+      "timeTextAfterReload": 5
     }
   }
 }

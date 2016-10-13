@@ -243,7 +243,6 @@
       "textFormat": { "size": 15 },
       "format": "{{xvm-stat?{{l10n:Team strength}}: {{py:xvm.team_strength('{{allyStrengthStatic}}','{{enemyStrengthStatic}}')}} / {{py:xvm.team_strength('{{allyStrengthLive}}','{{enemyStrengthLive}}')}}}}"
     },
-    
     "damageLog": {
       "enabled": true,
       "updateEvent": "PY(ON_HIT)",
@@ -255,8 +254,7 @@
       "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.myDamageLog.dLog}}"
-    },  
-    
+    },
     "timerReload": {
       "enabled": true,
       "updateEvent": "PY(ON_TIMER_RELOAD)",
@@ -268,8 +266,7 @@
       "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.myDamageLog.timerReload}}"
-    },      
-    
+    },
     "lastHit": {
       "enabled": true,
       "updateEvent": "PY(ON_LAST_HIT)",
@@ -282,7 +279,7 @@
       "shadow": { "align": "center", "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.myDamageLog.lastHit}}"
-    },     
+    },
     "test": {
       "enabled": true,
       "y": -170,

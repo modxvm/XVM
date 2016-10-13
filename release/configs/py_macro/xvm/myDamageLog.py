@@ -1,4 +1,7 @@
-﻿import BigWorld
+﻿# Addons: "DamageLog"
+# ktulho <http://www.koreanrandom.com/forum/user/17624-ktulho/>
+
+import BigWorld
 import Keys
 import xvm_main.python.config as config
 import xvm_main.python.stats as stats
@@ -36,11 +39,11 @@ SHELL_TYPES_DEFAULT = {
 }
 
 VEHICLE_CLASS = {
-    'mediumtank': "<font face = 'xvm'>&#x3B;</font>",
-    'lighttank': "<font face = 'xvm'>&#x3A;</font>",
-    'heavytank': "<font face = 'xvm'>&#x3F;</font>",
-    'at-spg': "<font face = 'xvm'>&#x2E;</font>",
-    'spg': "<font face = 'xvm'>&#x2D;</font>"
+    'mediumtank': "<font face='xvm'>&#x3B;</font>",
+    'lighttank': "<font face='xvm'>&#x3A;</font>",
+    'heavytank': "<font face='xvm'>&#x3F;</font>",
+    'at-spg': "<font face='xvm'>&#x2E;</font>",
+    'spg': "<font face ='xvm'>&#x2D;</font>"
 }
 
 COLOR_VEHICLE_CLASS = {
@@ -52,16 +55,16 @@ COLOR_VEHICLE_CLASS = {
 }
 
 TYPE_HIT_DEFAULT = {
-    'shot': "<font face = 'xvm'>&#x50;</font>",
-    'fire': "<font face = 'xvm'>&#x51;</font>",
-    'ramming': "<font face = 'xvm'>&#x52;</font>",
-    'world_collision': "<font face = 'xvm'>&#x53;</font>",
+    'shot': "<font face='xvm'>&#x50;</font>",
+    'fire': "<font face='xvm'>&#x51;</font>",
+    'ramming': "<font face='xvm'>&#x52;</font>",
+    'world_collision': "<font face='xvm'>&#x53;</font>",
     'death_zone': "DZ",
     'drowning': "Dr",
     'gas_attack': "GA",
-    'overturn': "<font face = 'xvm'>&#x112;</font>",
-    'art_attack': "<font face = 'xvm'>&#x110;</font>",
-    'air_strike': "<font face = 'xvm'>&#x111;</font>"
+    'overturn': "<font face='xvm'>&#x112;</font>",
+    'art_attack': "<font face='xvm'>&#x110;</font>",
+    'air_strike': "<font face='xvm'>&#x111;</font>"
 }
 
 COLOR_TYPE_HIT_DEFAULT = {
