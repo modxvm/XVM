@@ -72,7 +72,8 @@ class DamageLog(object):
                        'c:costShell': '', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
-        self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False}
+        self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
+                     'compName': ''}
         self.config = {}
 
     def reset(self):
@@ -91,7 +92,8 @@ class DamageLog(object):
                        'c:costShell': '', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
-        self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False}
+        self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
+                     'compName': ''}
         self.config = {}
 
     def parser(self, strHTML):
@@ -187,16 +189,16 @@ class DamageLog(object):
 
     def setMacros(self):
         self.macros['c:team-dmg'] = self.config['c:team-dmg']
-        self.macros['vtype'] = self.config['vehicleClass'].get(self.data['attackerVehicleType'])
+        self.macros['vtype'] = self.config['vehicleClass'].get(self.data['attackerVehicleType']) if self.data['attackerVehicleType'] else ''
         self.macros['c:costShell'] = self.config['colorGoldShell'] if self.data['isGoldShell'] else self.config['colorSilverShell']
         self.macros['costShell'] = self.config['goldShell'] if self.data['isGoldShell'] else self.config['silverShell']
         self.macros['c:dmg-kind'] = self.config['color_type_hit'].get(ATTACK_REASONS[self.data['attackReasonID']])
         self.macros['dmg-kind'] = self.config['type_hit'].get(ATTACK_REASONS[self.data['attackReasonID']], 'reason: %s' % self.data['attackReasonID'])
         self.macros['c:vtype'] = self.config['colorVehicleClass'].get(self.data['attackerVehicleType'])
         self.macros['splash-hit'] = self.config['splash'] if self.data['isSplash'] else self.config['no-splash']
-        self.macros['comp-name'] = self.config['compNames'][self.data['compName']]
+        self.macros['comp-name'] = self.config['compNames'][self.data['compName']] if self.data['compName'] else ''
         self.macros['critical-hit'] = self.config['critical-hit']
-        self.macros['type-shell'] = self.config['type-shell'][self.data['shellKind']]
+        self.macros['type-shell'] = self.config['type-shell'][self.data['shellKind']] if self.data['shellKind'] else ''
         self.macros['c:hit-effects'] = self.config['colorHitEffect'].get(self.data['HIT_EFFECT_CODE'])
         if not self.data['isDamage']:
             self.macros['dmg'] = self.config['hitEffect'][self.data['HIT_EFFECT_CODE']]
@@ -205,34 +207,51 @@ class DamageLog(object):
 
     def updateMacros(self):
         player = BigWorld.player()
-        attacker = player.arena.vehicles.get(self.data['attackerID'])
-        entity = BigWorld.entity(self.data['attackerID'])
-        self.data['isEnemyAttacker'] = attacker['team'] != player.team
-        self.data['playerAttacker'] = attacker['name'] == player.name
-        self.data['typeDescriptor'] = attacker['vehicleType']
-        self.data['vehCD'] = attacker['vehicleType'].type.compactDescr
-        statXVM = _stat.players.get(self.data['attackerID'])
-        self.data['attackerVehicleType'] = list(attacker['vehicleType'].type.tags.intersection(VEHICLE_CLASSES))[0].lower()
-        if entity is not None:
-            self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun'])
+        self.data['n'] += 1
+        if self.data['attackerID'] != 0:
+            attacker = player.arena.vehicles.get(self.data['attackerID'])
+            entity = BigWorld.entity(self.data['attackerID'])
+            statXVM = _stat.players.get(self.data['attackerID'])
+            self.data['isEnemyAttacker'] = attacker['team'] != player.team
+            self.data['playerAttacker'] = attacker['name'] == player.name
+            self.data['typeDescriptor'] = attacker['vehicleType']
+            self.data['vehCD'] = attacker['vehicleType'].type.compactDescr
+            self.data['attackerVehicleType'] = list(attacker['vehicleType'].type.tags.intersection(VEHICLE_CLASSES))[0].lower()
+            self.data['shortUserString'] = self.data['typeDescriptor'].type.shortUserString
+            self.data['name'] = attacker['name']
+            self.data['clanAbbrev'] = attacker['clanAbbrev']
+            self.data['level'] = self.data['typeDescriptor'].level
+            self.data['clanicon'] = statXVM.clanicon
+            self.data['squadnum'] = statXVM.squadnum if statXVM.squadnum > 0 else ''
+            if entity is not None:
+                self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun'])
+            else:
+                self.data['marksOnGun'] = ''
         else:
+            self.data['isEnemyAttacker'] = True
+            self.data['playerAttacker'] = False
+            self.data['typeDescriptor'] = None
+            self.data['vehCD'] = None
+            self.data['attackerVehicleType'] = ''
+            self.data['shortUserString'] = ''
+            self.data['name'] = ''
+            self.data['clanAbbrev'] = ''
+            self.data['level'] = ''
+            self.data['clanicon'] = ''
+            self.data['squadnum'] = ''
             self.data['marksOnGun'] = ''
 
         self.config['marksOnGun'] = config.get('texts/marksOnGun')
 
-        self.macros['number'] += 1
-        self.macros['vehicle'] = self.data['typeDescriptor'].type.shortUserString
-        self.macros['name'] = attacker['name']
-        self.macros['clannb'] = attacker['clanAbbrev']
-        self.macros['clan'] = '[' + attacker['clanAbbrev'] + ']' if attacker['clanAbbrev'] else ''
-        self.macros['level'] = self.data['typeDescriptor'].level
-        self.macros['clanicon'] = statXVM.clanicon
+        self.macros['number'] = '{:0>2}'.format(self.data['n'])
+        self.macros['vehicle'] = self.data['shortUserString']
+        self.macros['name'] = self.data['name']
+        self.macros['clannb'] = self.data['clanAbbrev']
+        self.macros['clan'] = '[' + self.data['clanAbbrev'] + ']' if self.data['clanAbbrev'] else ''
+        self.macros['level'] = self.data['level']
+        self.macros['clanicon'] = self.data['clanicon']
         self.macros['marksOnGun'] = self.config['marksOnGun'][self.data['marksOnGun']] if self.data['marksOnGun'] else ''
-        self.macros['squad-num'] = statXVM.squadnum + 1
-
-        # log('vehinfo_wn8 = %s [%s]' % (statXVM.clanicon, statXVM.vn))
-        # log('players= %s' % (filter(lambda x: not x.startswith('_'), dir(_stat.players.get(self.data['attackerID'], None)))))
-
+        self.macros['squad-num'] = self.data['squadnum']
         self.readyConfig('damageLog/log/')
         self.setMacros()
         if self.config['showHitNoDamage']:
@@ -242,7 +261,7 @@ class DamageLog(object):
         self.readyConfig('damageLog/lastHit/')
         self.setMacros()
         self.updateLastHit()
-        if self.data['attackReasonID'] == 0:
+        if (self.data['attackReasonID'] == 0) and (self.data['attackerID'] != 0):
             self.readyConfig('damageLog/timeReload/')
             self.setMacros()
             self.timeReload()
@@ -271,14 +290,19 @@ class DamageLog(object):
         if vehicle.isPlayerVehicle and self.isAlive:
             self.isAlive = vehicle.health > 0
             self.data['isSplash'] = False
+            self.data['isDamage'] = damageFactor > 0
             maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
-            self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'none'
+            self.data['compName'] = decodedPoints[0].componentName if decodedPoints else ''
             self.data['maxHitEffectCode'] = maxHitEffectCode
             self.data['attackReasonID'] = 0
             self.data['attackerID'] = attackerID
             self.data['damageFactor'] = damageFactor
-            self.typeShell(effectsIndex)
-            if maxHitEffectCode < 4:
+            if attackerID != 0:
+                self.typeShell(effectsIndex)
+            else:
+                self.data['isGoldShell'] = False
+                self.data['shellKind'] = ''
+            if (maxHitEffectCode < 4):
                 self.data['isDamage'] = False
                 self.data['HIT_EFFECT_CODE'] = HIT_EFFECT_CODES[maxHitEffectCode]
                 self.updateMacros()
@@ -286,20 +310,30 @@ class DamageLog(object):
                 self.data['isDamage'] = False
                 self.data['HIT_EFFECT_CODE'] = 'armor_pierced_no_damage'
                 self.updateMacros()
+            if (effectsIndex == 24) or (effectsIndex == 25):
+                self.data['attackReasonID'] = effectsIndex
 
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
         if vehicle.isPlayerVehicle and self.isAlive:
             self.isAlive = vehicle.health > 0
             self.data['isSplash'] = True
+            self.data['isDamage'] = damageFactor > 0
             self.data['attackerID'] = attackerID
-            self.typeShell(effectsIndex)
+            if attackerID != 0:
+                self.typeShell(effectsIndex)
+            else:
+                self.data['isGoldShell'] = False
+                self.data['shellKind'] = ''
+            if (effectsIndex == 24) or (effectsIndex == 25):
+                self.data['attackReasonID'] = effectsIndex
             if (damageFactor == 0):
                 self.data['HIT_EFFECT_CODE'] = 'armor_pierced_no_damage'
                 self.updateMacros()
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
         if vehicle.isPlayerVehicle:
-            self.data['attackReasonID'] = attackReasonID
+            if (attackReasonID != 0) or (self.data['attackReasonID'] != 24 and self.data['attackReasonID'] != 25):
+                self.data['attackReasonID'] = attackReasonID
             self.data['isDamage'] = True
             if attackReasonID == 1:
                 self.data['isFire'] = True
