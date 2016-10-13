@@ -51,6 +51,13 @@
     "avgDamage": "Avg damage",
     "mainGun": "High caliber",
 
+    // Shell kind (macro {{type-shell}})
+    "AP": "AP",
+    "HE": "HE",
+    "APC": "APC",
+    "APH": "APH",
+    "HC": "HC",
+
     // BattleResults
     "Hit percent": "Hit percent",
     "Damage (assisted / own)": "Damage (assisted / own)",
