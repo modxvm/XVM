@@ -51,12 +51,23 @@
     "avgDamage": "Средний урон",
     "mainGun": "Основной калибр",
 
+    // DamageLog:
     // Shell kind (macro {{type-shell}})
     "AP": "ББ",
     "HE": "ОФ",
     "APC": "БП",
     "APH": "ХФ",
     "HC": "КС",
+    // Text at hits no damage (ricochet, no penetration, no damage) (macro {{dmg}})
+    "intermediate_ricochet": "рикошет",
+    "final_ricochet": "рикошет",
+    "armor_not_pierced": "не пробито",
+    "armor_pierced_no_damage": "без урона",
+    // Name part of vehicle (macro {{comp-name}})
+    "turret": "башня",
+    "hull": "корпус",
+    "chassis": "шасси",
+    "gun": "орудие",
 
     // BattleResults
     "Hit percent": "Процент попаданий",

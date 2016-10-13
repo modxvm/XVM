@@ -85,10 +85,10 @@
       // Text at hits no damage (ricochet, no penetration, no damage) (macro {{dmg}}).
       // Текст при попаданиях без урона (рикошет, не пробито, без урона) (макрос {{dmg}}).
       "hit-effects": {
-        "intermediate_ricochet": "рикошет",
-        "final_ricochet": "рикошет",
-        "armor_not_pierced": "не пробито",
-        "armor_pierced_no_damage": "без урона"
+        "intermediate_ricochet": "{{l10n:intermediate_ricochet}}",
+        "final_ricochet": "{{l10n:final_ricochet}}",
+        "armor_not_pierced": "{{l10n:armor_not_pierced}}",
+        "armor_pierced_no_damage": "{{l10n:armor_pierced_no_damage}}"
       },
       // Color depending on hit kind (with damage, ricochet, no penetration, no damage) (macro {{c:hit-effects}}).
       // Цвет в зависимости от вида попадания (с уроном, рикошет, не пробито, без урона) (макрос {{c:hit-effects}}).
@@ -114,10 +114,10 @@
       // Name part of vehicle (macro {{comp-name}}).
       // Название частей техники (макрос {{comp-name}}).
       "comp-name":{
-        "turret": "башня",
-        "hull": "корпус",
-        "chassis": "шасси",
-        "gun": "орудие"
+        "turret": "{{l10n:turret}}",
+        "hull": "{{l10n:hull}}",
+        "chassis": "{{l10n:chassis}}",
+        "gun": "{{l10n:gun}}"
       },
       // Color depending on damage source (ally , enemy) (macro {{c:team-dmg}}).
       // Цвет в зависимости от источника урона (союзник, противник, сам себе) (макрос {{c:team-dmg}}).

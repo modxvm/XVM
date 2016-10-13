@@ -51,12 +51,23 @@
     "avgDamage": "Avg damage",
     "mainGun": "High caliber",
 
+    // DamageLog:
     // Shell kind (macro {{type-shell}})
     "AP": "AP",
     "HE": "HE",
-    "APC": "APC",
-    "APH": "APH",
-    "HC": "HC",
+    "APC": "APCR",
+    "APH": "HESH",
+    "HC": "HEAT",
+    // Text at hits no damage (ricochet, no penetration, no damage) (macro {{dmg}})
+    "intermediate_ricochet": "ricochet",
+    "final_ricochet": "ricochet",
+    "armor_not_pierced": "bounce",
+    "armor_pierced_no_damage": "blocked",
+    // Name part of vehicle (macro {{comp-name}})
+    "turret": "turret",
+    "hull": "hull",
+    "chassis": "chassis",
+    "gun": "gun",
 
     // BattleResults
     "Hit percent": "Hit percent",

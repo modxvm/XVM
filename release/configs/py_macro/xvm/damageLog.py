@@ -1,4 +1,7 @@
-﻿import BigWorld
+﻿# Addons: "DamageLog"
+# ktulho <http://www.koreanrandom.com/forum/user/17624-ktulho/>
+
+import BigWorld
 import Keys
 import xvm_main.python.config as config
 from xvm_main.python.stats import _stat
