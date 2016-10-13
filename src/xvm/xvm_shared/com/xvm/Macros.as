@@ -529,31 +529,48 @@ package com.xvm
 
             var value:*;
 
-            var dotPos:int = macroName.indexOf(".");
-            if (dotPos == 0)
+            var colonPos:int = macroName.indexOf(":");
+            if (colonPos > 0)
             {
-                try
+                if (options == null)
                 {
-                    value = _SubstituteConfigPart(macroName.slice(1));
+                    options = new VOMacrosOptions();
                 }
-                catch (ex:Error)
-                {
-                    Logger.add("[SubstituteConfigPart] ERROR: " + ex.message + "\nmacro: " + macroName);
-                    throw ex;
-                }
+                options.setSubname(macroName.slice(colonPos + 1));
+                macroName = macroName.slice(0, colonPos);
             }
             else
             {
-                if (dotPos > 0)
+                var dotPos:int = macroName.indexOf(".");
+                if (dotPos == 0)
                 {
-                    if (options == null)
-                        options = new VOMacrosOptions();
-                    options.setSubname(macroName.slice(dotPos + 1));
-                    macroName = macroName.slice(0, dotPos);
+                    try
+                    {
+                        value = _SubstituteConfigPart(macroName.slice(1));
+                    }
+                    catch (ex:Error)
+                    {
+                        Logger.add("[SubstituteConfigPart] ERROR: " + ex.message + "\nmacro: " + macroName);
+                        throw ex;
+                    }
                 }
-                value = pdata[macroName];
-                if (value === undefined)
-                    value = m_globals[macroName];
+                else
+                {
+                    if (dotPos > 0)
+                    {
+                        if (options == null)
+                        {
+                            options = new VOMacrosOptions();
+                        }
+                        options.setSubname(macroName.slice(dotPos + 1));
+                        macroName = macroName.slice(0, dotPos);
+                    }
+                    value = pdata[macroName];
+                    if (value === undefined)
+                    {
+                        value = m_globals[macroName];
+                    }
+                }
             }
 
             //Logger.add("macro:" + macro + " | macroname:" + macroName + " | norm:" + norm + " | def:" + def + " | value:" + value);
@@ -563,11 +580,34 @@ package com.xvm
                 //process l10n macro
                 if (macroName == "l10n")
                 {
-                    res += prepareValue(NaN, macroName, norm, def, vehCD, __out);
+                    if (norm != null)
+                    {
+                        value = Locale.get(norm);
+                    }
+                    if (value == null)
+                    {
+                        value = def;
+                    }
+                    res += value;
                 }
+                // process py macro
                 else if (macroName == "py")
                 {
-                    res += prepareValue(NaN, macroName, norm, def, vehCD, __out);
+                    //Logger.add(parts + " | " + options.getSubname());
+                    var py_result:Array = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, options.getSubname());
+                    if (py_result && py_result.length == 2)
+                    {
+                        if (!py_result[1])
+                        {
+                            __out.isStaticMacro = false;
+                        }
+                        value = py_result[0];
+                        if (value == null)
+                        {
+                            value = def;
+                        }
+                        res += _FormatMacro(parts, value, vehCD, options);
+                    }
                 }
                 else
                 {
@@ -578,7 +618,7 @@ package com.xvm
             else if (value == null)
             {
                 //Logger.add(macroName + " " + norm + " " + def + "  " + format);
-                res += prepareValue(NaN, macroName, norm, def, vehCD, __out);
+                res += prepareValue(NaN, macroName, norm, def, vehCD);
             }
             else
             {
@@ -595,7 +635,7 @@ package com.xvm
                     }
                 }
 
-                res += _FormatMacro(macro, parts, value, vehCD, options, __out);
+                res += _FormatMacro(parts, value, vehCD, options);
             }
 
             return res;
@@ -605,7 +645,9 @@ package com.xvm
         {
             var parts:Vector.<String> = m_macro_parts_cache[macro];
             if (parts)
+            {
                 return parts;
+            }
 
             //Logger.add("_GetMacroParts: " + macro);
             //Logger.addObject(pdata);
@@ -626,24 +668,40 @@ package com.xvm
                     case ":":
                         if (section < 1)
                         {
-                            if (part == "l10n" || part == "py")
-                            {
-                                parts[PART_NAME] = part;
-                                parts[PART_NORM] = macro.substr(i + 1);
-                                m_macro_parts_cache[macro] = parts;
-                                return parts;
-                            }
                             if (part != "c" && part != "a")
-                                nextSection = 1;
+                            {
+                                if (part == "l10n")
+                                {
+                                    parts[PART_NAME] = part;
+                                    parts[PART_NORM] = macro.substr(i + 1);
+                                    m_macro_parts_cache[macro] = parts;
+                                    return parts;
+                                }
+                                else if (part == "py")
+                                {
+                                    var matches:Array = /py(:[\w\.\s]+(\(.*\))?)/.exec(macro);
+                                    ch = matches[1];
+                                    i = ch.length + 1;
+                                    //Logger.add(macro + " => " + part + ch);
+                                }
+                                else
+                                {
+                                    nextSection = 1;
+                                }
+                            }
                         }
                         break;
                     case "%":
                         if (section < 2)
+                        {
                             nextSection = 2;
+                        }
                         break;
                     case "~":
                         if (section < 3)
+                        {
                             nextSection = 3;
+                        }
                         break;
                     case "!":
                     case "=":
@@ -662,11 +720,15 @@ package com.xvm
                         break;
                     case "?":
                         if (section < 6)
+                        {
                             nextSection = 6;
+                        }
                         break;
                     case "|":
                         if (section < 7)
+                        {
                             nextSection = 7;
+                        }
                         break;
                 }
 
@@ -684,12 +746,18 @@ package com.xvm
             parts[section] = part;
 
             if (parts[PART_DEF] == null)
+            {
                 parts[PART_DEF] = "";
+            }
 
             if (parts[PART_NAME] == "r" && !parts[PART_DEF])
+            {
                 parts[PART_DEF] = _getRatingDefaultValue();
+            }
             else if (parts[PART_NAME] == "xr" && !parts[PART_DEF])
+            {
                 parts[PART_DEF] = _getRatingDefaultValue("xvm");
+            }
 
             //Logger.add("[AS3][MACROS][_GetMacroParts]: " + parts.join(", "));
             m_macro_parts_cache[macro] = parts;
@@ -700,44 +768,49 @@ package com.xvm
         {
             var res:* = XfwUtils.getObjectValueByPath(Config.config, path);
             if (res == null)
+            {
                 return res;
+            }
             if (typeof(res) == "object")
+            {
                 return JSONx.stringify(res, "", true);
+            }
             return String(res);
         }
 
-        private function _FormatMacro(macro:String, parts:Vector.<String>, value:*, vehCD:Number, options:IVOMacrosOptions, __out:MacrosResult):String
+        private function _FormatMacro(parts:Vector.<String>, value:*, vehCD:Number, options:IVOMacrosOptions):String
         {
             var name:String = parts[PART_NAME];
             var norm:String = parts[PART_NORM];
-            var fmt:String = parts[PART_FMT];
-            var suf:String = parts[PART_SUF];
-            var match_op:String = parts[PART_MATCH_OP];
-            var match:String = parts[PART_MATCH];
-            var rep:String = parts[PART_REP];
             var def:String = parts[PART_DEF];
 
             // substitute
-            //Logger.add("name:" + name + " norm:" + norm + " fmt:" + fmt + " suf:" + suf + " rep:" + rep + " def:" + def);
-
-            //Logger.add("type:" + (typeof value) + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
+            //Logger.add("type:" + (typeof value) + " value:" + value + "name:" + name + " norm:" + norm + " def:" + def);
 
             if (typeof value == "number" && isNaN(value))
-                return prepareValue(NaN, name, norm, def, vehCD, __out);
+            {
+                return prepareValue(NaN, name, norm, def, vehCD);
+            }
 
             var res:String = value;
             if (value is Function)
             {
                 value = value(options);
                 if (value == null)
-                    return prepareValue(NaN, name, norm, def, vehCD, __out);
+                {
+                    return prepareValue(NaN, name, norm, def, vehCD);
+                }
                 if (typeof value == "number" && isNaN(value))
-                    return prepareValue(NaN, name, norm, def, vehCD, __out);
+                {
+                    return prepareValue(NaN, name, norm, def, vehCD);
+                }
                 res = value;
             }
 
+            var match:String = parts[PART_MATCH];
             if (match != null)
             {
+                var match_op:String = parts[PART_MATCH_OP];
                 var matched:Boolean = false;
                 switch (match_op)
                 {
@@ -762,22 +835,35 @@ package com.xvm
                         break;
                 }
                 if (!matched)
-                    return prepareValue(NaN, name, norm, def, vehCD, __out);
+                {
+                    return prepareValue(NaN, name, norm, def, vehCD);
+                }
             }
 
+            var rep:String = parts[PART_REP];
             if (rep != null)
+            {
                 return rep;
+            }
 
             if (norm != null)
-                res = prepareValue(value, name, norm, def, vehCD, __out);
+            {
+                res = prepareValue(value, name, norm, def, vehCD);
+            }
 
+            var fmt:String = parts[PART_FMT];
+            var suf:String = parts[PART_SUF];
             if (fmt == null && suf == null)
+            {
                 return res;
+            }
 
             var fmt_suf_key:String = fmt + "," + suf + "," + res;
             var fmt_suf_res:String = m_format_macro_fmt_suf_cache[fmt_suf_key];
             if (fmt_suf_res)
+            {
                 return fmt_suf_res;
+            }
 
             if (fmt != null)
             {
@@ -821,10 +907,12 @@ package com.xvm
             return res;
         }
 
-        private function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number, __out:MacrosResult):String
+        private function prepareValue(value:*, name:String, norm:String, def:String, vehCD:Number):String
         {
             if (norm == null)
+            {
                 return def;
+            }
 
             var res:String = def;
             switch (name)
@@ -834,7 +922,9 @@ package com.xvm
                     var key:String = name + "," + norm + "," + value + "," + vehCD;
                     res = m_prepare_value_cache[key];
                     if (res)
+                    {
                         return res;
+                    }
                     if (isNaN(value))
                     {
                         var vdata:VOVehicleData = VehicleInfo.get(vehCD);
@@ -866,7 +956,9 @@ package com.xvm
                     if (name == "r" && Config.networkServicesSettings.scale != "xvm")
                         break;
                     if (value == 'XX')
+                    {
                         value = 100;
+                    }
                     else
                     {
                         value = parseInt(value);
@@ -874,24 +966,6 @@ package com.xvm
                             value = 0;
                     }
                     res = Math.round(parseInt(norm) * value / 100).toString();
-                    break;
-                case "l10n":
-                    res = Locale.get(norm);
-                    if (res == null)
-                        res = def;
-                    break;
-                case "py":
-                    var py_result:Array = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, norm);
-                    if (py_result != null && py_result.length == 2)
-                    {
-                        if (!py_result[1])
-                        {
-                            __out.isStaticMacro = false;
-                        }
-                        res = py_result[0];
-                        if (res == null)
-                            res = def;
-                    }
                     break;
             }
 
