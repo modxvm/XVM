@@ -58,11 +58,11 @@
       // Shell kind (macro {{type-shell}}).
       // Тип снарядов (макрос {{type-shell}}).
       "type-shell": {
-        "armor_piercing": "{{l10n:AP}}",
-        "high_explosive": "{{l10n:HE}}",
-        "armor_piercing_cr": "{{l10n:APC}}",
-        "armor_piercing_he": "{{l10n:APH}}",
-        "hollow_charge": "{{l10n:HC}}"
+        "armor_piercing": "{{l10n:armor_piercing}}",
+        "high_explosive": "{{l10n:high_explosive}}",
+        "armor_piercing_cr": "{{l10n:armor_piercing_cr}}",
+        "armor_piercing_he": "{{l10n:armor_piercing_he}}",
+        "hollow_charge": "{{l10n:hollow_charge}}"
       },
       // Vehicle type (macro {{vtype}}).
       // Тип техники (макрос {{vtype}}).
