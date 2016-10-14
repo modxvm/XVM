@@ -20,6 +20,11 @@ package com.xvm.battle
             return _playerName;
         }
 
+        public static function get playerClan():String
+        {
+            return _playerClan;
+        }
+
         public static function get playerVehCD():Number
         {
             return _playerVehCD;
@@ -90,6 +95,7 @@ package com.xvm.battle
 
         private static var _playerVehicleID:Number;
         private static var _playerName:String;
+        private static var _playerClan:String;
         private static var _playerVehCD:Number;
         private static var _playerSquad:Number;
         private static var _battleLevel:Number;
@@ -101,13 +107,14 @@ package com.xvm.battle
 
         private static var _curent_xtdb:Number = 0;
 
-        private static function onRespondBattleGlobalData(playerVehicleID:Number, playerName:String, playerVehCD:Number,
+        private static function onRespondBattleGlobalData(playerVehicleID:Number, playerName:String, playerClan:String, playerVehCD:Number,
             battleLevel:Number, battleType:Number, arenaGuiType:Number, mapSize:Number,
             minimapCirclesData:Object, xtdb_data:Array):void
         {
             //Logger.addObject(arguments);
             _playerVehicleID = playerVehicleID;
             _playerName = playerName;
+            _playerClan = playerClan;
             _playerVehCD = playerVehCD;
             _battleLevel = battleLevel;
             _battleType = battleType;

@@ -58,6 +58,9 @@ package com.xvm.battle
             // {{my-rlevel}}
             m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
 
+            // {{my-clan}}
+            m_globals["my-clan"] = BattleGlobalData.playerClan;
+
             // {{my-frags}}
             m_globals["my-frags"] = function(o:IVOMacrosOptions):Number
             {

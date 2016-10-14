@@ -10,6 +10,8 @@ XVM-6.4.6.3-dev:
   * carousel: fixed {{v.elite}} macro
   * py_macro: braces for functions without arguments can be omitted
   * py_macro: macros formatting implemented
+  * added global macros:
+      {{my-clan}} - my clan
 
 XVM-6.4.6.2:
   * fixed initial minimap size restoring

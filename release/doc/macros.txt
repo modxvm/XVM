@@ -98,6 +98,7 @@ Legend:
 │ S │ {{my-nation}}          │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle nation
 │ S │ {{my-level}}           │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle level (Arabic numerals)
 │ S │ {{my-rlevel}}          │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle level (Roman numerals)
+│ S │ {{my-clan}}            │ X │ X │ X │ X │ X │ X │ X │ X │ my clan
 │ S │ {{cellsize}}           │   │ X │ X │ X │ X │ X │ X │ X │ minimap cell side size
 │ S │ {{chancesStatic}}      │   │ X │ X │ X │   │   │   │ X │ win chances at battle (static)
 │ D │ {{chancesLive}}        │   │ X │ X │ X │   │   │   │ X │ win chances at battle (live)
