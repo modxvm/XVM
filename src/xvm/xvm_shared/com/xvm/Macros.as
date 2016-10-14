@@ -580,15 +580,9 @@ package com.xvm
                 //process l10n macro
                 if (macroName == "l10n")
                 {
-                    if (norm != null)
-                    {
-                        value = Locale.get(norm);
-                    }
-                    if (value == null)
-                    {
-                        value = def;
-                    }
-                    res += value;
+                    //Logger.add(macroName + " : " + options.getSubname() + " => " + (Locale.get(options.getSubname()) || ""));
+                    res += Locale.get(options.getSubname()) || "";
+                    return res;
                 }
                 // process py macro
                 else if (macroName == "py")
@@ -671,8 +665,7 @@ package com.xvm
                                     break;
 
                                 case "l10n":
-                                    parts[PART_NAME] = part;
-                                    parts[PART_NORM] = macro.substr(i + 1);
+                                    parts[PART_NAME] = macro;
                                     m_macro_parts_cache[macro] = parts;
                                     return parts;
 
