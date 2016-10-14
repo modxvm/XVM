@@ -59,7 +59,9 @@ package com.xvm.lobby.online
             cfg.updateInterval = 60000; // currently data is updated once per minute on XVM server
             OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, cfg.updateInterval);
             if (cfg.enabled && Config.config.__wgApiAvailable)
+            {
                 onlineControl = page.addChild(new OnlineServersView(cfg)) as OnlineServersView;
+            }
         }
 
         private function remove():void
@@ -67,6 +69,7 @@ package com.xvm.lobby.online
             OnlineServers.stop();
             if (onlineControl)
             {
+                page.removeChild(onlineControl);
                 onlineControl.dispose();
                 onlineControl = null;
             }

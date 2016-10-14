@@ -20,9 +20,9 @@ package com.xvm.lobby.hangar
             super(view);
         }
 
-        public function get page():net.wg.gui.lobby.hangar.Hangar
+        public function get page():Hangar
         {
-            return super.view as net.wg.gui.lobby.hangar.Hangar;
+            return super.view as Hangar;
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void

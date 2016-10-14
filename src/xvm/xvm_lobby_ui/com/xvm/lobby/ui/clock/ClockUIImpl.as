@@ -33,6 +33,7 @@ package com.xvm.lobby.ui.clock
         {
             if (clock)
             {
+                page.removeChild(clock);
                 clock.dispose();
                 clock = null;
             }

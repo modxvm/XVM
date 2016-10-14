@@ -58,7 +58,9 @@ package com.xvm.lobby.ping
             cfg.fontStyle.markCurrentServer = "none" // at login screen it's not relevant
             PingServers.initFeature(cfg.enabled, cfg.updateInterval);
             if (cfg.enabled)
+            {
                 pingControl = page.addChild(new PingServersView(cfg)) as PingServersView;
+            }
         }
 
         private function remove():void
@@ -66,6 +68,7 @@ package com.xvm.lobby.ping
             PingServers.stop();
             if (pingControl)
             {
+                page.removeChild(pingControl);
                 pingControl.dispose();
                 pingControl = null;
             }
