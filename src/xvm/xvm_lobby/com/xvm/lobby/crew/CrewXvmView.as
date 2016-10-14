@@ -95,7 +95,12 @@ package com.xvm.lobby.crew
         private function handleMouseRollOver(e:MouseEvent):void
         {
             if (e.target.toolTip)
-                setTimeout(function():void { App.toolTipMgr.show(e.target.toolTip); }, 1);
+            {
+                setTimeout(function():void
+                {
+                    App.toolTipMgr.show(e.target.toolTip);
+                }, 1);
+            }
         }
 
         private function onVehicleChanged(invID:Number, isElite:Boolean):Object

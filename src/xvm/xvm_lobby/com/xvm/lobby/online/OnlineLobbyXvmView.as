@@ -11,12 +11,14 @@ package com.xvm.lobby.online
     import com.xvm.lobby.online.OnlineServers.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
+    import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
     public class OnlineLobbyXvmView extends XvmViewBase
     {
         private var _initialized:Boolean = false;
+        private var cfg:COnlineServers;
 
         public function OnlineLobbyXvmView(view:IView)
         {
@@ -48,17 +50,29 @@ package com.xvm.lobby.online
             remove();
         }
 
+        public function setVisibility(isHangar:Boolean):void
+        {
+            if (onlineControl)
+            {
+                onlineControl.visible = isHangar || (cfg.layer.toLowerCase() == "top");
+            }
+        }
+
         // PRIVATE
 
         private var onlineControl:OnlineServersView = null;
 
         private function init():void
         {
-            var cfg:COnlineServers = Config.config.hangar.onlineServers;
+            cfg = Config.config.hangar.onlineServers;
             cfg.updateInterval = 60000; // currently data is updated once per minute on XVM server
             OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, cfg.updateInterval);
             if (cfg.enabled && Config.config.__wgApiAvailable)
-                onlineControl = page.addChildAt(new OnlineServersView(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as OnlineServersView;
+            {
+                var layer:String = cfg.layer.toLowerCase();
+                var index:int = (layer == "bottom") ? 0 : (layer == "top") ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
+                onlineControl = page.addChildAt(new OnlineServersView(cfg), index) as OnlineServersView;
+            }
         }
 
         private function remove():void
@@ -71,5 +85,4 @@ package com.xvm.lobby.online
             }
         }
     }
-
 }

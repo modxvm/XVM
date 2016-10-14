@@ -6,14 +6,17 @@ package com.xvm.lobby.ui.clock
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.lobby.clock.IClockUI;
-    import com.xvm.lobby.ui.clock.ClockControl;
+    import com.xvm.lobby.clock.*;
     import com.xvm.types.cfg.*;
+    import flash.display.*;
     import net.wg.gui.lobby.*;
+    import net.wg.gui.lobby.hangar.*;
+    import net.wg.infrastructure.interfaces.*;
 
     public class ClockUIImpl implements IClockUI
     {
         private var page:LobbyPage = null;
+        private var cfg:CHangarClock;
         private var clock:ClockControl = null;
 
         public function ClockUIImpl()
@@ -24,9 +27,11 @@ package com.xvm.lobby.ui.clock
         public function init(page:LobbyPage):void
         {
             this.page = page;
+            this.cfg = Config.config.hangar.clock;
 
-            var cfg:CHangarClock = Config.config.hangar.clock;
-            clock = page.addChildAt(new ClockControl(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as ClockControl;
+            var layer:String = cfg.layer.toLowerCase();
+            var index:int = (layer == "bottom") ? 0 : (layer == "top") ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
+            clock = page.addChildAt(new ClockControl(cfg), index) as ClockControl;
         }
 
         public function dispose():void
@@ -39,7 +44,12 @@ package com.xvm.lobby.ui.clock
             }
         }
 
-        // PRIVATE
+        public function setVisibility(isHangar:Boolean):void
+        {
+            if (clock)
+            {
+                clock.visible = isHangar || (cfg.layer.toLowerCase() == "top");
+            }
+        }
     }
-
 }

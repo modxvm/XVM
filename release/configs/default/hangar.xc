@@ -83,9 +83,9 @@
       // Leading between lines.
       // Пространство между строками
       "leading": 2,
-      // true - place at top of other windows, false - at bottom.
-      // true - отображать поверх остальных окон, false - под.
-      "topmost": true,
+      // layer - "bottom", "normal" (default), "top".
+      // слой - "bottom", "normal" (по-умолчанию), "top".
+      "layer": "normal",
       // true - show title "Ping"
       // true - показывать заголовок "Пинг"
       "showTitle": true,
@@ -186,9 +186,9 @@
       // Leading between lines.
       // Пространство между строками
       "leading": 0,
-      // true - place at top of other windows, false - at bottom.
-      // true - отображать поверх остальных окон, false - под.
-      "topmost": true,
+      // layer - "bottom", "normal" (default), "top".
+      // слой - "bottom", "normal" (по-умолчанию), "top".
+      "layer": "normal",
       // true - show title "Online"
       // true - показывать заголовок "Онлайн"
       "showTitle": true,

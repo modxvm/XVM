@@ -19,9 +19,9 @@
     // Height.
     // Высота.
     "height": 60,
-    // true - place at top of other windows, false - at bottom.
-    // true - отображать поверх остальных окон, false - под.
-    "topmost": true,
+    // layer - "bottom", "normal" (default), "top".
+    // слой - "bottom", "normal" (по-умолчанию), "top".
+    "layer": "normal",
     // Horizontal alignment of field at screen ("left", "center", "right").
     // Горизонтальное выравнивание поля на экране ("left", "center", "right").
     "align": "right",

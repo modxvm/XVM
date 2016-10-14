@@ -19,7 +19,7 @@ package com.xvm.types.cfg
         public var maxRows:*;
         public var columnGap:*;
         public var leading:*;
-        public var topmost:*;
+        public var layer:String;
         public var showTitle:*;
         public var showServerName:*;
         public var minimalNameLength:*;

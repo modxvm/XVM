@@ -41,6 +41,14 @@ package com.xvm.lobby.clock
             setup();
         }
 
+        public function setVisibility(isHangar:Boolean):void
+        {
+            if (clock_ui)
+            {
+                clock_ui.setVisibility(isHangar);
+            }
+        }
+
         // PRIVATE
 
         private function setup():void

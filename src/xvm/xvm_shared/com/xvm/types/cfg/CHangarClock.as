@@ -13,7 +13,7 @@ package com.xvm.types.cfg
         public var y:*;
         public var width:*;
         public var height:*;
-        public var topmost:*;
+        public var layer:String;
         public var align:String;
         public var valign:String;
         public var textAlign:String;

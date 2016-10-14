@@ -11,12 +11,14 @@ package com.xvm.lobby.ping
     import com.xvm.lobby.ping.PingServers.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
+    import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
     public class PingLobbyXvmView extends XvmViewBase
     {
         private var _initialized:Boolean = false;
+        private var cfg:CPingServers;
 
         public function PingLobbyXvmView(view:IView)
         {
@@ -48,16 +50,28 @@ package com.xvm.lobby.ping
             remove();
         }
 
+        public function setVisibility(isHangar:Boolean):void
+        {
+            if (pingControl)
+            {
+                pingControl.visible = isHangar || (cfg.layer.toLowerCase() == "top");
+            }
+        }
+
         // PRIVATE
 
         private var pingControl:PingServersView = null;
 
         private function init():void
         {
-            var cfg:CPingServers = Config.config.hangar.pingServers;
+            cfg = Config.config.hangar.pingServers;
             PingServers.initFeature(cfg.enabled, cfg.updateInterval);
             if (cfg.enabled)
-                pingControl = page.addChildAt(new PingServersView(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as PingServersView;
+            {
+                var layer:String = cfg.layer.toLowerCase();
+                var index:int = (layer == "bottom") ? 0 : (layer == "top") ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
+                pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
+            }
         }
 
         private function remove():void
@@ -70,5 +84,4 @@ package com.xvm.lobby.ping
             }
         }
     }
-
 }

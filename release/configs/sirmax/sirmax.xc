@@ -20,7 +20,7 @@
       "y": 80,
       "hAlign": "left",
       "ignoredServers": ["RU4", "RU8", "RU9"],
-      //"topmost": true,
+      "layer": "top",
       "showTitle": false
     },
     "__stub__": null
@@ -62,8 +62,9 @@
     },
     "carousel": ${"sirmax-carousel.xc":"carousel"},
     "clock": {
-      //"x": 100,
-      //"y": 5,
+      //"layer": "bottom",
+      //"x": -200,
+      //"y": 70
       //"format": "<font face='$FieldFont'><font size='26'> {{H}}:{{m%02d}} {{AM?a.m.|p.m.}}</font></font>"
     },
     "serverInfo": {

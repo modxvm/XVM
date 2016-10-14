@@ -12,6 +12,7 @@ XVM-6.4.6.3-dev:
   * py_macro: macros formatting implemented
   * added global macros:
       {{my-clan}} - my clan
+  * in sections "clock", "pingServers", "onlineServers" option "topmost" replaced with "layer"
 
 XVM-6.4.6.2:
   * fixed initial minimap size restoring

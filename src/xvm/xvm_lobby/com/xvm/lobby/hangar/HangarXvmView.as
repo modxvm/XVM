@@ -9,12 +9,16 @@ package com.xvm.lobby.hangar
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
     import com.xvm.lobby.hangar.components.*;
+    import flash.events.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
     public class HangarXvmView extends XvmViewBase
     {
+        public static const ON_HANGAR_AFTER_POPULATE:String = "ON_HANGAR_AFTER_POPULATE";
+        public static const ON_HANGAR_BEFORE_DISPOSE:String = "ON_HANGAR_BEFORE_DISPOSE";
+
         public function HangarXvmView(view:IView)
         {
             super(view);
@@ -34,10 +38,15 @@ package com.xvm.lobby.hangar
             page.bottomBg.height = 45; // MESSENGER_BAR_PADDING
 
             initVehicleParams();
+
+            //Logger.add("ON_HANGAR_AFTER_POPULATE");
+            Xvm.dispatchEvent(new Event(ON_HANGAR_AFTER_POPULATE));
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            //Logger.add("ON_HANGAR_BEFORE_DISPOSE");
+            Xvm.dispatchEvent(new Event(ON_HANGAR_BEFORE_DISPOSE));
             Xfw.removeCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
         }
 
