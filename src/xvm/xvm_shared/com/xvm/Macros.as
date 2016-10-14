@@ -602,11 +602,6 @@ package com.xvm
                             __out.isStaticMacro = false;
                         }
                         value = py_result[0];
-                        if (value == null)
-                        {
-                            value = def;
-                        }
-                        res += _FormatMacro(parts, value, vehCD, options);
                     }
                 }
                 else
@@ -615,7 +610,8 @@ package com.xvm
                     __out.isStaticMacro = false;
                 }
             }
-            else if (value == null)
+
+            if (value == null)
             {
                 //Logger.add(macroName + " " + norm + " " + def + "  " + format);
                 res += prepareValue(NaN, macroName, norm, def, vehCD);
