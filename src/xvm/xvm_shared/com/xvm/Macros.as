@@ -529,15 +529,15 @@ package com.xvm
 
             var value:*;
 
-            var colonPos:int = macroName.indexOf(":");
-            if (colonPos > 0)
+            var colonSplitted:Array = macroName.split(":", 2);
+            if (colonSplitted.length == 2 && colonSplitted[0] != "c" && colonSplitted[0] != "a")
             {
                 if (options == null)
                 {
                     options = new VOMacrosOptions();
                 }
-                options.setSubname(macroName.slice(colonPos + 1));
-                macroName = macroName.slice(0, colonPos);
+                macroName = colonSplitted[0];
+                options.setSubname(colonSplitted[1]);
             }
             else
             {
@@ -668,26 +668,28 @@ package com.xvm
                     case ":":
                         if (section < 1)
                         {
-                            if (part != "c" && part != "a")
+                            switch (part)
                             {
-                                if (part == "l10n")
-                                {
+                                case "c":
+                                case "a":
+                                    break;
+
+                                case "l10n":
                                     parts[PART_NAME] = part;
                                     parts[PART_NORM] = macro.substr(i + 1);
                                     m_macro_parts_cache[macro] = parts;
                                     return parts;
-                                }
-                                else if (part == "py")
-                                {
+
+                                case "py":
                                     var matches:Array = /py(:[\w\.\s]+(\(.*\))?)/.exec(macro);
                                     ch = matches[1];
                                     i = ch.length + 1;
                                     //Logger.add(macro + " => " + part + ch);
-                                }
-                                else
-                                {
+                                    break;
+
+                                default:
                                     nextSection = 1;
-                                }
+                                    break;
                             }
                         }
                         break;
