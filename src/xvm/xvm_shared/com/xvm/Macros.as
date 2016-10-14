@@ -529,15 +529,16 @@ package com.xvm
 
             var value:*;
 
-            var colonSplitted:Array = macroName.split(":", 2);
-            if (colonSplitted.length == 2 && colonSplitted[0] != "c" && colonSplitted[0] != "a")
+            var colonPos:int = macroName.indexOf(":");
+            var macroNameColon:String = (colonPos > 0) ? macroName.slice(0, colonPos) : null;
+            if (colonPos > 0 && macroNameColon != "c" && macroNameColon != "a")
             {
                 if (options == null)
                 {
                     options = new VOMacrosOptions();
                 }
-                macroName = colonSplitted[0];
-                options.setSubname(colonSplitted[1]);
+                options.setSubname(macroName.slice(colonPos + 1));
+                macroName = macroNameColon;
             }
             else
             {
