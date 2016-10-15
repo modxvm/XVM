@@ -257,7 +257,7 @@ class DamageLog(object):
         self.macros['clannb'] = self.data['clanAbbrev']
         self.macros['clan'] = '[' + self.data['clanAbbrev'] + ']' if self.data['clanAbbrev'] else ''
         self.macros['level'] = self.data['level']
-        self.macros['clanicon'] = '' if self.data['clanicon'] is None else self.data['clanicon']
+        self.macros['clanicon'] = self.data.get('clanicon', '')
         self.macros['marksOnGun'] = self.config['marksOnGun'][self.data['marksOnGun']] if self.data['marksOnGun'] else ''
         self.macros['squad-num'] = self.data['squadnum']
         self.readyConfig('damageLog/log/')
