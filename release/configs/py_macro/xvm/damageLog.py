@@ -76,7 +76,7 @@ class DamageLog(object):
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
         self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
-                     'compName': ''}
+                     'compName': '', 'isSplash': False}
         self.config = {}
 
     def reset(self):
@@ -96,7 +96,7 @@ class DamageLog(object):
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
         self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
-                     'compName': ''}
+                     'compName': '', 'isSplash': False}
         self.config = {}
 
     def parser(self, strHTML):
