@@ -76,7 +76,7 @@ class DamageLog(object):
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
         self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
-                     'compName': ''}
+                     'compName': '', 'isSplash': False}
         self.config = {}
 
     def reset(self):
@@ -96,7 +96,7 @@ class DamageLog(object):
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
         self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
-                     'compName': ''}
+                     'compName': '', 'isSplash': False}
         self.config = {}
 
     def parser(self, strHTML):
@@ -257,7 +257,7 @@ class DamageLog(object):
         self.macros['clannb'] = self.data['clanAbbrev']
         self.macros['clan'] = '[' + self.data['clanAbbrev'] + ']' if self.data['clanAbbrev'] else ''
         self.macros['level'] = self.data['level']
-        self.macros['clanicon'] = '' if self.data['clanicon'] is None else self.data['clanicon']
+        self.macros['clanicon'] = self.data.get('clanicon', '')
         self.macros['marksOnGun'] = self.config['marksOnGun'][self.data['marksOnGun']] if self.data['marksOnGun'] else ''
         self.macros['squad-num'] = self.data['squadnum']
         self.readyConfig('damageLog/log/')
