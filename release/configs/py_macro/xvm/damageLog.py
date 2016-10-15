@@ -76,7 +76,7 @@ class DamageLog(object):
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
         self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
-                     'compName': ''}
+                     'compName': '', 'isSplash': False}
         self.config = {}
 
     def reset(self):
@@ -96,7 +96,7 @@ class DamageLog(object):
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
         self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
-                     'compName': ''}
+                     'compName': '', 'isSplash': False}
         self.config = {}
 
     def parser(self, strHTML):
@@ -215,6 +215,8 @@ class DamageLog(object):
             attacker = player.arena.vehicles.get(self.data['attackerID'])
             entity = BigWorld.entity(self.data['attackerID'])
             statXVM = _stat.players.get(self.data['attackerID'])
+            # log('statXVM= %s' % [arg for arg in dir(statXVM) if not arg.startswith('vn')])
+            # log('statXVM= %s' % (statXVM))
             self.data['isEnemyAttacker'] = attacker['team'] != player.team
             self.data['playerAttacker'] = attacker['name'] == player.name
             self.data['typeDescriptor'] = attacker['vehicleType']
@@ -224,8 +226,11 @@ class DamageLog(object):
             self.data['name'] = attacker['name']
             self.data['clanAbbrev'] = attacker['clanAbbrev']
             self.data['level'] = self.data['typeDescriptor'].level
-            self.data['clanicon'] = statXVM.clanicon
-            self.data['squadnum'] = statXVM.squadnum if statXVM.squadnum > 0 else ''
+            self.data['clanicon'] = _stat.getClanIcon(self.data['attackerID'])
+            if (statXVM is not None) and (statXVM.squadnum > 0):
+                self.data['squadnum'] = statXVM.squadnum
+            else:
+                self.data['squadnum'] = ''
             if entity is not None:
                 self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun'])
             else:
@@ -252,7 +257,7 @@ class DamageLog(object):
         self.macros['clannb'] = self.data['clanAbbrev']
         self.macros['clan'] = '[' + self.data['clanAbbrev'] + ']' if self.data['clanAbbrev'] else ''
         self.macros['level'] = self.data['level']
-        self.macros['clanicon'] = self.data['clanicon']
+        self.macros['clanicon'] = self.data.get('clanicon', '')
         self.macros['marksOnGun'] = self.config['marksOnGun'][self.data['marksOnGun']] if self.data['marksOnGun'] else ''
         self.macros['squad-num'] = self.data['squadnum']
         self.readyConfig('damageLog/log/')
