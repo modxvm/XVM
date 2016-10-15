@@ -245,7 +245,7 @@
       "shadow": {
         "enabled": true,
         "distance": 0,
-        "angle": 0,        
+        "angle": 0,
         "color": "0x000000",
         "alpha": 70,
         "blur": 4,
@@ -271,6 +271,12 @@
       // Сдвиг по оси Y
       "shiftY": 0
     },
+    // Show "Buy premium" button
+    // Показать кнопку "Купить премиум"
+    "showBuyPremiumButton": true,
+    // Show "Premium shop" button
+    // Показать кнопку "Премиум магазин"
+    "showPremiumShopButton": true,
     // Parameters for tank carousel
     // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"},

@@ -26,6 +26,8 @@ package com.xvm.types.cfg
         public var pingServers:CPingServers;
         public var onlineServers:COnlineServers;
         public var serverInfo:CHangarServerInfo;
+        public var showBuyPremiumButton:*;
+        public var showPremiumShopButton:*;
         public var carousel:CCarousel;
         public var clock:CHangarClock;
 

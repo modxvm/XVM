@@ -11,6 +11,7 @@ package com.xvm.lobby
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
+    import net.wg.gui.lobby.header.headerButtonBar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
@@ -35,11 +36,13 @@ package com.xvm.lobby
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
             initServerInfo();
+            setupHeaderButtons();
         }
 
         override public function onConfigLoaded(e:Event):void
         {
             initServerInfo();
+            setupHeaderButtons();
         }
 
         // server info
@@ -69,6 +72,27 @@ package com.xvm.lobby
                 page.header.onlineCounter.alpha = cfg.alpha / 100.0;
                 page.header.onlineCounter.rotation = cfg.rotation;
             }
+        }
+
+        private function setupHeaderButtons():void
+        {
+            App.utils.scheduler.scheduleOnNextFrame(function():void
+            {
+                var prem:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREM);
+                if (prem)
+                {
+                    prem.mouseEnabled = Config.config.hangar.showBuyPremiumButton;
+                    prem.mouseChildren = Config.config.hangar.showBuyPremiumButton;
+                    prem.alpha = Config.config.hangar.showBuyPremiumButton ? 1 : 0;
+                }
+                var premShop:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREMSHOP);
+                if (premShop)
+                {
+                    premShop.mouseEnabled = Config.config.hangar.showPremiumShopButton;
+                    premShop.mouseChildren = Config.config.hangar.showPremiumShopButton;
+                    premShop.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
+                }
+            });
         }
     }
 }
