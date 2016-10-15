@@ -167,11 +167,11 @@
       
       // Reload timer format.
       // Формат таймера перезарядки.
-      "formatTimer": "<font face='xvm'>&#x114;</font>  {{timer}} сек.   [ <font color='{{c:team-dmg}}'>{{vehicle}}</font> ]",
+      "formatTimer": "<font face='xvm'>&#x114;</font>  {{timer}} {{l10n:sec}}.   [ <font color='{{c:team-dmg}}'>{{vehicle}}</font> ]",
       
       // Reload timer format (after reload).
       // Формат таймера перезарядки (после перезарядки).
-      "formatTimerAfterReload": "<font face='xvm'>&#x114;</font>   [ <font color='{{c:team-dmg}}'>{{vehicle}}</font> ]  перезаряжен",
+      "formatTimerAfterReload": "<font face='xvm'>&#x114;</font>   [ <font color='{{c:team-dmg}}'>{{vehicle}}</font> ]  {{l10n:reloaded}}",
       
       // Display time "formatTimerAfterReload".
       // Время отображения "formatTimerAfterReload".
