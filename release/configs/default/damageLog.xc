@@ -22,6 +22,7 @@
     {{level}}             - vehicle level / уровень техники.
     {{clannb}}            - clan name without brackets / название клана без скобок.
     {{clanicon}}          - macro with clan embed image path value / макрос со значением пути эмблемы клана.
+    {{squad-num}}         - number of squad (1,2,...), empty if not in squad / номер взвода (1,2,...), пусто - если игрок не во взводе
 */
 
 {
@@ -143,6 +144,9 @@
       // true - show hits without damage in log, false - not to show.
       // true - отображать в логе попадания без урона, false - не отображать.
       "showHitNoDamage": true, 
+      // true - to add and display in a log in one line of damage from the fire
+      // true - суммировать и отображать в логе в одной строке повреждения от пожара
+      "groupDamagesFromFire": true,
       // Damage log format.
       // Формат лога повреждений.
       "formatHistory": "<textformat tabstops='[30,115,150,163]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>",

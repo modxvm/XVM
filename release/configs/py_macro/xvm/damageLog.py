@@ -18,6 +18,7 @@ import ResMgr
 from constants import ITEM_DEFS_PATH
 import nations
 from gui.shared.utils.TimeInterval import TimeInterval
+from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 
 ATTACK_REASONS = {
     0: 'shot',
@@ -69,13 +70,18 @@ class DamageLog(object):
         self.currentTime = ''
         self.isAlive = True
         self.oldHealth = None
+        self.lineFire = -1
+        self.totalFireDmg = 0
+        self.notFirstDmgFire = False
+        self.lineFireOld = -1
+        self.numberFire = 0
         self.timerLastHit = None
         self.timerReloadAttacker = None
         self.macros = {'number': 0, 'critical-hit': '', 'vehicle': '', 'name': '', 'vtype': '', 'clan': '',
                        'c:costShell': '', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
-        self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
+        self.data = {'attackReasonID': 0, 'isGoldShell': False, 'n': 0, 'maxHitEffectCode': -1,
                      'compName': '', 'isSplash': False}
         self.config = {}
 
@@ -87,6 +93,11 @@ class DamageLog(object):
         self.currentTime = ''
         self.isAlive = True
         self.oldHealth = None
+        self.lineFire = -1
+        self.totalFireDmg = 0
+        self.notFirstDmgFire = False
+        self.lineFireOld = -1
+        self.numberFire = 0
         if (self.timerLastHit is not None) and (self.timerLastHit.isStarted):
             self.timerLastHit.stop()
         if (self.timerReloadAttacker is not None) and (self.timerReloadAttacker.isStarted):
@@ -95,7 +106,7 @@ class DamageLog(object):
                        'c:costShell': '', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '', 'comp-name': '',
                        'splash-hit': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None}
-        self.data = {'attackReasonID': 0, 'isGoldShell': False, 'isFire': False, 'n': 0, 'maxHitEffectCode': -1,
+        self.data = {'attackReasonID': 0, 'isGoldShell': False, 'n': 0, 'maxHitEffectCode': -1,
                      'compName': '', 'isSplash': False}
         self.config = {}
 
@@ -108,8 +119,26 @@ class DamageLog(object):
         return strHTML
 
     def addStringLog(self):
-        self.msgNoAlt.insert(0, self.parser(config.get('damageLog/log/formatHistory')))
-        self.msgAlt.insert(0, self.parser(config.get('damageLog/log/formatHistoryAlt')))
+        if self.data['attackReasonID'] == 1 and ((self.lineFire > -1) or (self.lineFireOld > -1)):
+            if self.notFirstDmgFire:
+                if self.lineFire > -1:
+                    self.lineFireOld = self.lineFire
+                numberFire = '{:0>2}'.format(int(self.data['n']) - self.lineFireOld)
+                numberFire, self.macros['number'] = self.macros['number'], numberFire
+                self.notFirstDmgFire = self.lineFire > -1
+                self.msgNoAlt[self.lineFireOld] = self.parser(config.get('damageLog/log/formatHistory'))
+                self.msgAlt[self.lineFireOld] = self.parser(config.get('damageLog/log/formatHistoryAlt'))
+                self.macros['number'] = numberFire
+                if self.lineFire == -1:
+                    self.lineFireOld = self.lineFire
+            else:
+                self.msgNoAlt.insert(0, self.parser(config.get('damageLog/log/formatHistory')))
+                self.msgAlt.insert(0, self.parser(config.get('damageLog/log/formatHistoryAlt')))
+                self.notFirstDmgFire = True
+        else:
+            self.msgNoAlt.insert(0, self.parser(config.get('damageLog/log/formatHistory')))
+            self.msgAlt.insert(0, self.parser(config.get('damageLog/log/formatHistoryAlt')))
+            self.numberFire += 1
         as_event('ON_HIT')
 
     def hideLastHit (self):
@@ -210,7 +239,19 @@ class DamageLog(object):
 
     def updateMacros(self):
         player = BigWorld.player()
-        self.data['n'] += 1
+        if self.data['attackReasonID'] == 1 and config.get('damageLog/log/groupDamagesFromFire'):
+            if (self.lineFire == -1) and (self.lineFireOld == -1):
+                self.lineFire = 0
+                self.data['n'] += 1
+                self.totalFireDmg = self.data['dmg']
+            else:
+                self.totalFireDmg += self.data['dmg']
+                self.data['dmg'] = self.totalFireDmg
+        else:
+            self.data['n'] += 1
+            if self.lineFire > -1:
+                self.lineFire += 1
+
         if self.data['attackerID'] != 0:
             attacker = player.arena.vehicles.get(self.data['attackerID'])
             entity = BigWorld.entity(self.data['attackerID'])
@@ -343,8 +384,6 @@ class DamageLog(object):
             if (attackReasonID != 0) or (self.data['attackReasonID'] != 24 and self.data['attackReasonID'] != 25):
                 self.data['attackReasonID'] = attackReasonID
             self.data['isDamage'] = True
-            if attackReasonID == 1:
-                self.data['isFire'] = True
             self.data['attackerID'] = attackerID
             self.data['dmg'] = self.oldHealth - newHealth
             self.oldHealth = newHealth
@@ -374,6 +413,12 @@ def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
 @registerEvent(Vehicle, 'showDamageFromExplosion')
 def showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor):
     data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
+
+
+@registerEvent(DamagePanel, 'as_setFireInVehicleS')
+def as_setFireInVehicleS(self, isInFire):
+    if not isInFire and config.get('damageLog/log/groupDamagesFromFire'):
+        data.lineFire = -1
 
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
