@@ -1,6 +1,6 @@
 node {
 
-    dir('../workspace@script/') {
+    dir("$WORKSPACE@script") {
 
         try { 
 
