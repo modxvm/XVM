@@ -53,7 +53,7 @@ def fini():
 
 @overrideMethod(MinimapComponent, '_populate')
 def _MinimapComponent_populate(base, self):
-    g_minimap.init()
+    g_minimap.init(self)
     base(self)
 
 @overrideMethod(MinimapComponent, '_dispose')
@@ -213,6 +213,40 @@ def _ArenaVehiclesPlugin_updateSettings(base, self, diff):
                 diff[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP] = _DEFAULTS[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP]
     base(self, diff)
 
+# Minimap dead switch
+@registerEvent(PostMortemControlMode, 'onMinimapClicked')
+def _PostMortemControlMode_onMinimapClicked(self, worldPos):
+    #log('_PostMortemControlMode_onMinimapClicked')
+    if g_minimap.active and config.get('battle/minimapDeadSwitch'):
+        try:
+            battle = getBattleApp()
+            if not battle:
+                return
+
+            if isReplay() and not IS_DEVELOPMENT:
+                return
+
+            minDistance = None
+            toID = None
+            player = BigWorld.player()
+            plugin = g_minimap.minimapComponent.getPlugin('vehicles')
+            for vehicleID, entry in plugin._entries.iteritems():
+                vData = player.arena.vehicles[vehicleID]
+                if player.team != vData['team'] or not vData['isAlive']:
+                    continue
+                matrix = entry.getMatrix()
+                if matrix is not None:
+                    pos = Math.Matrix(matrix).translation
+                    distance = Math.Vector3(worldPos - pos).length
+                    if minDistance is None or minDistance > distance:
+                        minDistance = distance
+                        toID = vehicleID
+            if toID is not None:
+                self.selectPlayer(toID)
+        except Exception as ex:
+            if IS_DEVELOPMENT:
+                err(traceback.format_exc())
+
 
 #####################################################################
 # Minimap
@@ -226,6 +260,7 @@ class _Minimap(object):
     linesEnabled = True
     circlesEnabled = True
     viewPointID = 0
+    minimapComponent = None
 
     @property
     def active(self):
@@ -234,44 +269,13 @@ class _Minimap(object):
                self.initialized and \
                (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL)
 
-    def init(self):
+    def init(self, minimapComponent):
         self.initialized = True
         self.guiType = BigWorld.player().arena.guiType
+        self.minimapComponent = minimapComponent
 
     def destroy(self):
         self.initialized = False
+        self.minimapComponent = None
 
 g_minimap = _Minimap()
-
-
-## Minimap dead switch
-## TODO:0.9.15.1
-##@registerEvent(PostMortemControlMode, 'onMinimapClicked')
-#def _PostMortemControlMode_onMinimapClicked(self, worldPos):
-#    if config.get('battle/minimapDeadSwitch'):
-#        try:
-#            battle = getBattleApp()
-#            if not battle:
-#                return
-#
-#            if isReplay():
-#                return
-#
-#            player = BigWorld.player()
-#            minDistance = None
-#            toID = None
-#            for vehicleID, entry in battle.minimap._Minimap__entries.iteritems():
-#                vData = player.arena.vehicles[vehicleID]
-#                if player.team != vData['team'] or not vData['isAlive']:
-#                    continue
-#                pos = Math.Matrix(entry['matrix']).translation
-#                distance = Math.Vector3(worldPos - pos).length
-#                if minDistance is None or minDistance > distance:
-#                    minDistance = distance
-#                    toID = vehicleID
-#            if toID is not None:
-#                BigWorld.player().positionControl.bindToVehicle(vehicleID=toID)
-#                self._PostMortemControlMode__switchViewpoint(False, toID)
-#        except Exception as ex:
-#            if IS_DEVELOPMENT:
-#                err(traceback.format_exc())

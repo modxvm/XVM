@@ -99,7 +99,7 @@
     "sixthSenseIcon": "cfg://sirmax/img/SixthSense.png",
     "sixthSenseDuration": 3000,
     "elements": ${"elements"},
-    "minimapDeadSwitch": true,
+    //"minimapDeadSwitch": false,
     "camera": {
       "enabled": true,
       "arcade": {
