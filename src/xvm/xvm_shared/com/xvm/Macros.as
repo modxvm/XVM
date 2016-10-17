@@ -517,8 +517,6 @@ package com.xvm
             if (pdata == null)
                 return "";
 
-            var res:String = "";
-
             var parts:Vector.<String> = _GetMacroParts(macro, pdata);
 
             var macroName:String = parts[PART_NAME];
@@ -582,8 +580,7 @@ package com.xvm
                 if (macroName == "l10n")
                 {
                     //Logger.add(macroName + " : " + options.getSubname() + " => " + (Locale.get(options.getSubname()) || ""));
-                    res += Locale.get(options.getSubname()) || "";
-                    return res;
+                    return Locale.get(options.getSubname()) || "";
                 }
                 // process py macro
                 else if (macroName == "py")
@@ -601,35 +598,24 @@ package com.xvm
                 }
                 else
                 {
-                    res += def;
                     __out.isStaticMacro = false;
+                    return def;
                 }
             }
 
             if (value == null)
             {
                 //Logger.add(macroName + " " + norm + " " + def + "  " + format);
-                res += prepareValue(NaN, macroName, norm, def, vehCD);
+                return prepareValue(NaN, macroName, norm, def, vehCD);
             }
-            else
+
+            // is static macro
+            if (value is Function)
             {
-                // is static macro
-                if (value is Function)
-                {
-                    if (HYBRID_MACROS.indexOf(macroName) == -1)
-                    {
-                        __out.isStaticMacro = false;
-                    }
-                    else
-                    {
-                        __out.isHybridMacro = true;
-                    }
-                }
-
-                res += _FormatMacro(parts, value, vehCD, options);
+                __out.isStaticMacro = HYBRID_MACROS.indexOf(macroName) != -1;
             }
 
-            return res;
+            return _FormatMacro(parts, value, vehCD, options);
         }
 
         private function _GetMacroParts(macro:String, pdata:Object):Vector.<String>
