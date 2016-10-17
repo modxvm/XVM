@@ -48,17 +48,20 @@ MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShel
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'timer', 'c:team-dmg', 'c:hit-effects',
                'splash-hit', 'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num']
 
+
 def keyLower(_dict):
     dict_return = {}
     for key, value in _dict.items():
         dict_return[key.lower()] = value
     return dict_return
 
+
 def keyUpper(_dict):
     dict_return = {}
     for key, value in _dict.items():
         dict_return[key.upper()] = value
     return dict_return
+
 
 class DamageLog(object):
 
@@ -237,8 +240,7 @@ class DamageLog(object):
         else:
             self.macros['dmg'] = self.data['dmg']
 
-    def updateMacros(self):
-        player = BigWorld.player()
+    def groupDamageFire(self):
         if self.data['attackReasonID'] == 1 and config.get('damageLog/log/groupDamagesFromFire'):
             if (self.lineFire == -1) and (self.lineFireOld == -1):
                 self.lineFire = 0
@@ -252,6 +254,8 @@ class DamageLog(object):
             if self.lineFire > -1:
                 self.lineFire += 1
 
+    def updateMacros(self):
+        player = BigWorld.player()
         if self.data['attackerID'] != 0:
             attacker = player.arena.vehicles.get(self.data['attackerID'])
             entity = BigWorld.entity(self.data['attackerID'])
@@ -289,6 +293,11 @@ class DamageLog(object):
             self.data['clanicon'] = ''
             self.data['squadnum'] = ''
             self.data['marksOnGun'] = ''
+        self.readyConfig('damageLog/log/')
+        if config.get('damageLog/log/showHitNoDamage'):
+            self.groupDamageFire()
+        elif self.data['isDamage']:
+            self.groupDamageFire()
 
         self.config['marksOnGun'] = config.get('texts/marksOnGun')
 
@@ -301,7 +310,7 @@ class DamageLog(object):
         self.macros['clanicon'] = self.data.get('clanicon', '')
         self.macros['marksOnGun'] = self.config['marksOnGun'][self.data['marksOnGun']] if self.data['marksOnGun'] else ''
         self.macros['squad-num'] = self.data['squadnum']
-        self.readyConfig('damageLog/log/')
+
         self.setMacros()
         if self.config['showHitNoDamage']:
             self.addStringLog()
