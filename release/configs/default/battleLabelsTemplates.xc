@@ -280,6 +280,20 @@
       "textFormat": {"align": "center", "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.damageLog.lastHit}}"
     },
+    "fire": {
+      "enabled": false,
+      "updateEvent": "PY(ON_FIRE)",
+      "x": 120,
+      "y": 200,
+      "width": 200,
+      "height": 100,
+      "alpha": "{{py:xvm.damageLog.fire}}",
+      "screenHAlign": "center",
+      "screenVAlign": "center",
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
+      "textFormat": {"align": "center", "color": "0xF4EFE8", "size": 16 },
+      "format": "ПОЖАР"
+    },      
     "test": {
       "enabled": true,
       "y": -170,
