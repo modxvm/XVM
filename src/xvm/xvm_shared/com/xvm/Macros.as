@@ -520,10 +520,6 @@ package com.xvm
             var parts:Vector.<String> = _GetMacroParts(macro, pdata);
 
             var macroName:String = parts[PART_NAME];
-            var norm:String = parts[PART_NORM];
-            var def:String = parts[PART_DEF];
-
-            var vehCD:Number = pdata["veh-id"];
 
             var value:*;
 
@@ -572,7 +568,7 @@ package com.xvm
                 }
             }
 
-            //Logger.add("macro:" + macro + " | macroname:" + macroName + " | norm:" + norm + " | def:" + def + " | value:" + value);
+            //Logger.add("macro:" + macro + " | macroname:" + macroName + " | norm:" + parts[PART_NORM] + " | def:" + parts[PART_DEF] + " | value:" + value);
 
             if (value === undefined)
             {
@@ -599,20 +595,29 @@ package com.xvm
                 else
                 {
                     __out.isStaticMacro = false;
-                    return def;
                 }
             }
 
+            var vehCD:Number = pdata["veh-id"];
+
             if (value == null)
             {
-                //Logger.add(macroName + " " + norm + " " + def + "  " + format);
-                return prepareValue(NaN, macroName, norm, def, vehCD);
+                //Logger.add(macroName + " " + parts[PART_NORM] + " " + parts[PART_DEF] + "  " + format);
+                return prepareValue(NaN, macroName, parts[PART_NORM], parts[PART_DEF], vehCD);
             }
 
             // is static macro
             if (value is Function)
             {
-                __out.isStaticMacro = HYBRID_MACROS.indexOf(macroName) != -1;
+                //__out.isStaticMacro = HYBRID_MACROS.indexOf(macroName) != -1;
+                if (HYBRID_MACROS.indexOf(macroName) == -1)
+                {
+                    __out.isStaticMacro = false;
+                }
+                else
+                {
+                    __out.isHybridMacro = true;
+                }
             }
 
             return _FormatMacro(parts, value, vehCD, options);
