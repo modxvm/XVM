@@ -17,11 +17,13 @@
     {{c:hit-effects}}     - color depending on hit kind (with damage, ricochet, not penetrated, no damage) / цвет в зависимости от вида попадания (с уроном, рикошет, не пробито, без урона).
     {{costShell}}         - text depending on shell kind (gold, credits) / текст в зависимости от типа снаряда (золото, кредиты).
     {{comp-name}}         - name part of vehicle that was hit (turret, body, suspension, gun) / название части техники, в которую было попадание (башня, корпус, ходовая, орудие).
-    {{splash-hit}}        - text when hit by splash damage from shell (HE/HESH) / текст при попадание осколков снаряда (ОФ/ХФ).
     {{clan}}              - clan name with brackets (empty if no clan) / название клана в скобках (пусто, если игрок не в клане).
     {{level}}             - vehicle level / уровень техники.
     {{clannb}}            - clan name without brackets / название клана без скобок.
     {{clanicon}}          - macro with clan embed image path value / макрос со значением пути эмблемы клана.
+    {{squad-num}}         - number of squad (1,2,...), empty if not in squad / номер взвода (1,2,...), пусто - если игрок не во взводе
+    {{hit-effects}}       - TO DO / вид попадания
+    {{dmg-ratio}}         - TO DO / полученный урон в процентах
 */
 
 {
@@ -40,6 +42,7 @@
         "overturn": "<font face='xvm'>&#x112;</font>",                // overturn / опрокидывание
         "death_zone": "DZ",                                           // death zone / смертельная зона
         "gas_attack": "GA",                                           // gas attack / газовая атака
+        "splash": "<font face='xvm'>&#x2C;</font>",                   // TO DO / урон оскоками
         "art_attack": "<font face='xvm'>&#x110;</font>",              // art attack / артиллерийская поддержка
         "air_strike": "<font face='xvm'>&#x111;</font>"               // air strike / поддержка авиации
       },
@@ -54,6 +57,7 @@
         "overturn": "#CCCCCC",        // overturn / опрокидывание
         "death_zone": "#CCCCCC",      // death zone / смертельная зона
         "gas_attack": "#CCCCCC",      // gas attack / газовая атака
+        "splash": "#CCCCCC",
         "art_attack": "#CCCCCC",      // art attack / артиллерийская поддержка
         "air_strike": "#CCCCCC"       // air strike / поддержка авиации
       },   
@@ -64,7 +68,8 @@
         "high_explosive": "{{l10n:high_explosive}}",       // high explosive / осколочно-фугасный
         "armor_piercing_cr": "{{l10n:armor_piercing_cr}}", // armor piercing composite rigid / бронебойный подкалиберный
         "armor_piercing_he": "{{l10n:armor_piercing_he}}", // armor piercing high explosive / бронебойно-фугасный
-        "hollow_charge": "{{l10n:hollow_charge}}"          // high explosive anti-tank / кумулятивный
+        "hollow_charge": "{{l10n:hollow_charge}}",          // high explosive anti-tank / кумулятивный
+        "not_shell": ""
       },
       // Vehicle type (macro {{vtype}}).
       // Тип техники (макрос {{vtype}}).
@@ -73,7 +78,8 @@
         "lightTank": "<font face='xvm'>&#x3A;</font>",  // light tank / лёгкий танк
         "heavyTank": "<font face='xvm'>&#x3F;</font>",  // heavy tank / тяжёлый танк
         "AT-SPG": "<font face='xvm'>&#x2E;</font>",     // tank destroyer / ПТ-САУ
-        "SPG": "<font face='xvm'>&#x2D;</font>"         // SPG / САУ
+        "SPG": "<font face='xvm'>&#x2D;</font>",         // SPG / САУ
+        "not_vehicle": ""                               // TO DO / другая техника
       },
       // Color depending on vehicle type (macro {{c:vtype}}).
       // Цвет в зависимости от типа техники (макрос {{c:vtype}}).
@@ -82,11 +88,13 @@
         "lightTank": "#A2FF9A",  // light tank / лёгкий танк
         "heavyTank": "#FFACAC",  // heavy tank / тяжёлый танк
         "AT-SPG": "#A0CFFF",     // tank destroyer / ПТ-САУ
-        "SPG": "#EFAEFF"         // SPG / САУ
+        "SPG": "#EFAEFF",         // SPG / САУ
+        "not_vehicle": "#CCCCCC" // TO DO / другая техника
       },
-      // Text at hits no damage (ricochet, no penetration, no damage) (macro {{dmg}}).
-      // Текст при попаданиях без урона (рикошет, не пробито, без урона) (макрос {{dmg}}).
+      // TO DO
+      // вид попадания (макрос {{hit-effects}}).
       "hit-effects": {
+        "armor_pierced": "{{dmg}}",                                   // TO DO / пробитие
         "intermediate_ricochet": "{{l10n:intermediate_ricochet}}",    // ricochet (intermediate) / рикошет (промежуточный)
         "final_ricochet": "{{l10n:final_ricochet}}",                  // ricochet / рикошет
         "armor_not_pierced": "{{l10n:armor_not_pierced}}",            // not penetrated / не пробито
@@ -106,12 +114,6 @@
       "critical-hit":{
         "critical": "*",  // critical hit / попадание с критическим повреждением
         "no-critical": "" // without critical hit / попадание без критического повреждения
-      },
-      // Designation of hit by splash damage from shell (HE/HESH). (macro {{splash-hit}}).
-      // Обозначение попадание осколков снаряда (ОФ/ХФ). (макрос {{splash-hit}}).
-      "splash-hit":{
-        "splash": "<font face='xvm'>&#x2C;</font>",  // splash damage / попадание осколков
-        "no-splash": ""                              // no splash damage / нет попадания осколков
       },
       // Name part of vehicle (macro {{comp-name}}).
       // Название частей техники (макрос {{comp-name}}).
@@ -143,12 +145,15 @@
       // true - show hits without damage in log, false - not to show.
       // true - отображать в логе попадания без урона, false - не отображать.
       "showHitNoDamage": true, 
+      // true - to add and display in a log in one line of damage from the fire
+      // true - суммировать и отображать в логе в одной строке повреждения от пожара
+      "groupDamagesFromFire": true,
       // Damage log format.
       // Формат лога повреждений.
-      "formatHistory": "<textformat tabstops='[30,115,150,163]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>",
+      "formatHistory": "<textformat tabstops='[30,115,150,163]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>",
       // Damage log format with the left Alt key.
       // Формат лога повреждений c нажатой левой клавиши Alt.
-      "formatHistoryAlt": "<textformat tabstops='[30,115,150]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
+      "formatHistoryAlt": "<textformat tabstops='[30,115,150]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
     },
     // Display the last damage (hit).
     // Отображение последнего урона (попадания).
@@ -159,7 +164,7 @@
       "timeDisplayLastHit": 7,
       // Last damage format.
       // Формат последнего урона.
-      "formatLastHit": "<font size='36' color='{{c:dmg-kind}}'>{{dmg}}</font>"
+      "formatLastHit": "<font size='36' color='{{c:dmg-kind}}'>{{hit-effects}}</font>"
     },
     // Timer reload (value is not accurate, and consistent with the standard characteristics of vehicle).
     // Таймер перезарядки (значение не точное, и соответствует стандартным характеристикам техники).

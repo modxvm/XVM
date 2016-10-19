@@ -16,6 +16,7 @@ XVM-6.4.6.3-dev:
   * added new options in the "hangar" section:
       "showBuyPremiumButton" - show "Buy premium" button
       "showPremiumShopButton" - show "Premium shop" button
+  * fixed "minimapDeadSwitch" option
 
 XVM-6.4.6.2:
   * fixed initial minimap size restoring
