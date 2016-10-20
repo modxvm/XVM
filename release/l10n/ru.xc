@@ -172,7 +172,7 @@
     "china": "Китай",
     "japan": "Япония",
     "czech": "Чехословакия",
-    "swedish": "Швеция",
+    "sweden": "Швеция",
     
     // Vehicle type
     "HT": "ТТ",

@@ -140,7 +140,7 @@
         "enemy-dmg": "#CCCCCC",   // enemy / противник
         "player": "#228855",       // self damage / урон по себе
         "do_not_know": "#CCCCCC"  // do not know / неизвестно
-      },      
+      },
       // Text depending on cost shell (gold, credits) (macro {{costShell}}).
       // Текст в зависимости от стоимости снаряда (золото, кредиты) (макрос {{costShell}}).
       "costShell":{
