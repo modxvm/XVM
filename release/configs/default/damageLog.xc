@@ -128,18 +128,18 @@
       // TO DO   damage source (ally , enemy, self damage) (macro {{team-dmg}}).
       // Источник урона (союзник, противник, урон по себе) (макрос {{team-dmg}}).
       "team-dmg":{
-        "ally-dmg": "",    // ally / союзник
-        "enemy-dmg": "", // enemy / противник
-        "player": "",       // self damage / урон по себе
-        "do_not_know": ""              // do not know / неизвестно
+        "ally-dmg": "",   // ally / союзник
+        "enemy-dmg": "",  // enemy / противник
+        "player": "",     // self damage / урон по себе
+        "do_not_know": "" // do not know / неизвестно
       },
       // Color depending on damage source (ally , enemy, self damage) (macro {{c:team-dmg}}).
       // Цвет в зависимости от источника урона (союзник, противник, урон по себе) (макрос {{c:team-dmg}}).
       "c:team-dmg":{
-        "ally-dmg": "#00EAFF",    // ally / союзник
-        "enemy-dmg": "#CCCCCC",   // enemy / противник
-        "player": "#228855",       // self damage / урон по себе
-        "do_not_know": "#CCCCCC"  // do not know / неизвестно
+        "ally-dmg": "#00EAFF",   // ally / союзник
+        "enemy-dmg": "#CCCCCC",  // enemy / противник
+        "player": "#228855",     // self damage / урон по себе
+        "do_not_know": "#CCCCCC" // do not know / неизвестно
       },
       // Text depending on cost shell (gold, credits) (macro {{costShell}}).
       // Текст в зависимости от стоимости снаряда (золото, кредиты) (макрос {{costShell}}).
@@ -151,9 +151,9 @@
       // Color depending on shell kind (gold, credits) (macro {{c:costShell}}).
       // Цвет в зависимости от типа снаряда (золото, кредиты) (макрос {{c:costShell}}).
       "c:costShell":{
-        "gold-shell": "#FFCC66",  // gold / золото
+        "gold-shell": "#FFCC66",   // gold / золото
         "silver-shell": "#CCCCCC", // credits / кредиты
-        "do_not_know": ""   // do not know / неизвестно
+        "do_not_know": ""          // do not know / неизвестно
       },
       // true - show hits without damage in log, false - not to show.
       // true - отображать в логе попадания без урона, false - не отображать.
