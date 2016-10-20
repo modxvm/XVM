@@ -19,6 +19,7 @@ from constants import ITEM_DEFS_PATH
 import nations
 from gui.shared.utils.TimeInterval import TimeInterval
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
+from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 
 
 on_fire = 0
@@ -34,7 +35,7 @@ ATTACK_REASONS = {
     7: 'overturn',
     24: 'art_attack',
     25: 'air_strike',
-    100: 'splash'
+    # 100: 'splash'
 }
 
 VEHICLE_CLASSES = frozenset(['mediumTank', 'lightTank', 'heavyTank', 'AT-SPG', 'SPG'])
@@ -50,7 +51,8 @@ HIT_EFFECT_CODES = {
 
 MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShell', 'costShell', 'comp-name', 'clan',
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'timer', 'c:team-dmg', 'c:hit-effects',
-               'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects']
+               'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
+               'splash-hit']
 
 
 def keyLower(_dict):
@@ -80,7 +82,6 @@ class DamageLog(object):
         self.maxHealth = None
         self.lineFire = -1
         self.totalFireDmg = 0
-        # self.notFirstDmgFire = False
         self.lineFireOld = -1
         self.numberFire = 0
         self.timerLastHit = None
@@ -90,7 +91,7 @@ class DamageLog(object):
                        'c:costShell': 'do_not_know', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'costShell': 'do_not_know', 'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '',
                        'comp-name': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None,
-                       'dmg-ratio': '', 'hit-effects': '', 'team-dmg': ''}
+                       'dmg-ratio': '', 'hit-effects': '', 'team-dmg': '', 'c:type-shell': '', 'splash-hit': ''}
         self.data = {'attackReasonID': 0, 'n': 0, 'maxHitEffectCode': -1, 'isFire': False,
                      'compName': 'do_not_know', 'dmg': 0}
         self.config = {}
@@ -106,7 +107,6 @@ class DamageLog(object):
         self.maxHealth = None
         self.lineFire = -1
         self.totalFireDmg = 0
-        # self.notFirstDmgFire = False
         self.lineFireOld = -1
         self.numberFire = 0
         if (self.timerLastHit is not None) and (self.timerLastHit.isStarted):
@@ -118,7 +118,7 @@ class DamageLog(object):
                        'c:costShell': 'do_not_know', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'costShell': 'do_not_know', 'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '',
                        'comp-name': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None,
-                       'dmg-ratio': '', 'hit-effects': '', 'team-dmg': ''}
+                       'dmg-ratio': '', 'hit-effects': '', 'team-dmg': '', 'c:type-shell': '', 'splash-hit': ''}
         self.data = {'attackReasonID': 0, 'n': 0, 'maxHitEffectCode': -1, 'isFire': False,
                      'compName': 'do_not_know', 'dmg': 0}
         self.config = {}
@@ -220,6 +220,7 @@ class DamageLog(object):
         self.config['c:team-dmg'] = config.get(section + 'c:team-dmg')
         self.config['team-dmg'] = config.get(section + 'team-dmg')
         self.config['compNames'] = keyLower(config.get(section + 'comp-name'))
+        self.config['splash-hit'] = keyLower(config.get(section + 'splash-hit'))
         if self.data['maxHitEffectCode'] == 5:
             self.config['critical-hit'] = config.get(section + 'critical-hit/critical')
         else:
@@ -228,6 +229,7 @@ class DamageLog(object):
         self.config['hitEffect'] = keyLower(config.get(section + 'hit-effects'))
         self.config['colorHitEffect'] = keyLower(config.get(section + 'c:hit-effects'))
         self.config['type-shell'] = config.get(section + 'type-shell')
+        self.config['c:type-shell'] = config.get(section + 'c:type-shell')
 
     def setMacros(self):
         self.macros['c:team-dmg'] = self.config['c:team-dmg'].get(self.data['team-dmg'], '')
@@ -239,8 +241,10 @@ class DamageLog(object):
         self.macros['dmg-kind'] = self.config['type_hit'].get(ATTACK_REASONS[self.data['attackReasonID']], 'reason: %s' % self.data['attackReasonID'])
         self.macros['c:vtype'] = self.config['colorVehicleClass'].get(self.data['attackerVehicleType'], 'not_vehicle')
         self.macros['comp-name'] = self.config['compNames'].get(self.data['compName'], '')
+        self.macros['splash-hit'] = self.config['splash-hit'].get(self.data['splash-hit'], '')
         self.macros['critical-hit'] = self.config['critical-hit']
         self.macros['type-shell'] = self.config['type-shell'].get(self.data['shellKind'], '')
+        self.macros['c:type-shell'] = self.config['c:type-shell'].get(self.data['shellKind'], '')
         self.macros['c:hit-effects'] = self.config['colorHitEffect'].get(self.data['HIT_EFFECT_CODE'])
         self.macros['hit-effects'] = self.config['hitEffect'][self.data['HIT_EFFECT_CODE']]
         self.macros['dmg'] = self.data['dmg']
@@ -255,11 +259,7 @@ class DamageLog(object):
                 self.copyMacros['dmg'] += self.data['dmg']
                 self.copyMacros['dmg-ratio'] += self.data['dmg-ratio']
         else:
-            if self.config['showHitNoDamage']:
-                self.data['n'] += 1
-                if self.lineFire > -1:
-                    self.lineFire += 1
-            elif self.data['isDamage']:
+            if (self.config['showHitNoDamage']) or (self.data['isDamage']):
                 self.data['n'] += 1
                 if self.lineFire > -1:
                     self.lineFire += 1
@@ -318,6 +318,7 @@ class DamageLog(object):
         if self.data['isFire'] and (self.data['attackReasonID'] == 1):
             self.macros['dmg'] = self.copyMacros['dmg']
         else:
+
             self.macros['dmg'] = self.data['dmg']
             self.macros['number'] = '{:0>2}'.format(self.data['n'])
             self.macros['vehicle'] = self.data['shortUserString']
@@ -346,7 +347,7 @@ class DamageLog(object):
             self.readyConfig('damageLog/timeReload/')
             self.setMacros()
             self.timeReload()
-        if self.data['attackReasonID'] == 1:
+        if self.data['attackReasonID'] == 1 and config.get('damageLog/log/groupDamagesFromFire'):
             self.data['isFire'] = True
         if self.lineFireOld == -1:
             self.data['isFire'] = False
@@ -383,6 +384,7 @@ class DamageLog(object):
             self.data['attackReasonID'] = 0
             self.data['attackerID'] = attackerID
             self.data['isDamage'] = damageFactor > 0
+            self.data['splash-hit'] = 'no-splash'
             if (effectsIndex == 24) or (effectsIndex == 25):
                 self.data['attackReasonID'] = effectsIndex
             self.typeShell(effectsIndex)
@@ -402,7 +404,7 @@ class DamageLog(object):
             self.isAlive = vehicle.health > 0
             self.data['isDamage'] = damageFactor > 0
             # log('damageFactor = %s' % damageFactor)
-            self.data['attackReasonID'] = 100
+            self.data['splash-hit'] = 'splash'
             self.data['attackerID'] = attackerID
             if (effectsIndex == 24) or (effectsIndex == 25):
                 self.data['attackReasonID'] = effectsIndex
@@ -414,11 +416,12 @@ class DamageLog(object):
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
         if vehicle.isPlayerVehicle:
-            if (attackReasonID != 0) or (self.data['attackReasonID'] not in [24, 25, 100]):
+            if (attackReasonID != 0) or (self.data['attackReasonID'] not in [24, 25]): # [24, 25, 100]):
                 self.data['attackReasonID'] = attackReasonID
             self.data['isDamage'] = True
-            if (attackReasonID != 0) and (attackReasonID != 100):
+            if (attackReasonID != 0):# and (attackReasonID != 100):
                 self.data['costShell'] = 'do_not_know'
+                self.data['shellKind'] = 'not_shell'
             self.data['attackerID'] = attackerID
             self.data['dmg'] = self.oldHealth - newHealth
             self.oldHealth = newHealth
@@ -427,6 +430,26 @@ class DamageLog(object):
 
 
 data = DamageLog()
+
+
+@overrideMethod(DamageLogPanel, 'as_detailStatsS')
+def as_detailStatsS(base, self, isVisible, messages):
+    if not config.get('damageLog/disabledDetailStats'):
+        return base(self, isVisible, messages)
+    else:
+        return base(self, False, messages)
+
+
+@overrideMethod(DamageLogPanel, 'as_summaryStatsS')
+def as_summaryStatsS(base, self, damage, blocked, assist):
+    if not config.get('damageLog/disabledSummaryStats'):
+        return base(self, damage, blocked, assist)
+
+
+@overrideMethod(DamageLogPanel, '_onTotalEfficiencyUpdated')
+def _onTotalEfficiencyUpdated(base, self, diff):
+    if not config.get('damageLog/disabledSummaryStats'):
+        return base(self, diff)
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
