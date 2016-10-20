@@ -155,8 +155,8 @@
         "silver-shell": "#CCCCCC", // credits / кредиты
         "do_not_know": ""          // do not know / неизвестно
       },
-      // true - show hits without damage in log, false - not to show.
-      // true - отображать в логе попадания без урона, false - не отображать.
+      // true - show hits without damage, false - not to show.
+      // true - отображать попадания без урона, false - не отображать.
       "showHitNoDamage": true,
       // true - to add and display in a log in one line of damage from the fire.
       // true - суммировать и отображать в логе в одной строке повреждения от пожара.
