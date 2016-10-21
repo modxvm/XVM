@@ -34,7 +34,7 @@ ATTACK_REASONS = {
     6: 'gas_attack',
     7: 'overturn',
     24: 'art_attack',
-    25: 'air_strike',
+    25: 'air_strike'
     # 100: 'splash'
 }
 
@@ -455,6 +455,10 @@ def _onTotalEfficiencyUpdated(base, self, diff):
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
+    if newHealth <= 0:
+        global on_fire
+        on_fire = 0
+        as_event('ON_FIRE')
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
