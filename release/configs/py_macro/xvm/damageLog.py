@@ -271,8 +271,6 @@ class DamageLog(object):
             attacker = player.arena.vehicles.get(self.data['attackerID'])
             entity = BigWorld.entity(self.data['attackerID'])
             statXVM = _stat.players.get(self.data['attackerID'])
-            self.data['isEnemyAttacker'] = attacker['team'] != player.team
-            self.data['playerAttacker'] = attacker['name'] == player.name
             self.data['team-dmg'] = 'do_not_know'
             if attacker['team'] != player.team:
                 self.data['team-dmg'] = 'enemy-dmg'
@@ -297,8 +295,7 @@ class DamageLog(object):
             else:
                 self.data['marksOnGun'] = ''
         else:
-            self.data['isEnemyAttacker'] = True
-            self.data['playerAttacker'] = False
+            self.data['team-dmg'] = 'do_not_know'
             self.data['typeDescriptor'] = None
             self.data['vehCD'] = None
             self.data['attackerVehicleType'] = ''
