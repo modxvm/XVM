@@ -17,6 +17,15 @@ XVM-6.4.6.3-dev:
       "showBuyPremiumButton" - show "Buy premium" button
       "showPremiumShopButton" - show "Premium shop" button
   * fixed "minimapDeadSwitch" option
+  * added mouse events in the battle labels which can be handled in py_macro using the function as_callback(event_name):
+      "mouseEvents":
+        "click" - event is sent when the mouse button clicked inside the field
+        "mouseDown" - event is sent when the mouse button pressed inside the field
+        "mouseUp" - event is sent when the mouse button released inside the field
+        "mouseOver" - event is sent when the mouse pointer enters the field
+        "mouseOut" - event is sent when the mouse pointer leaves the field
+        "mouseMove" - event is sent when mouse pointer moves inside the field
+        "mouseWheel" - event is sent when mouse wheel rolled inside the field
 
 XVM-6.4.6.2:
   * fixed initial minimap size restoring

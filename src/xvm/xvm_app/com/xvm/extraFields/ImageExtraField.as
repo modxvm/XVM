@@ -46,6 +46,7 @@ package com.xvm.extraFields
 
             mouseEnabled = false;
             mouseChildren = false;
+            buttonMode = false;
 
             this._cfg = format.clone();
             this.isLeftPanel = isLeftPanel;

@@ -37,6 +37,23 @@
      │                            │   ON_EVERY_SECOND          * can reduce performance
      │                            │   PY(event_name)  - event from python, sent by as_event(event_name)
      ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
+     │ "mouseEvents"              │ the events handlers must be binded using the function as_callback(event_name)
+     │ {                          │ обработчики событий должны быть привязаны с помощью функции as_callback(event_name)
+     │   "click"                  │ event is sent when the mouse button clicked inside the field
+     │                            │ событие отправляется при клике мышкой внутри поля
+     │   "mouseDown"              │ event is sent when the mouse button pressed inside the field
+     │                            │ событие отправляется при нажатии кнопки мышки внутри поля
+     │   "mouseUp"                │ event is sent when the mouse button released inside the field
+     │                            │ событие отправляется при отжатии кнопки мышки внутри поля
+     │   "mouseOver"              │ event is sent when the mouse pointer enters the field
+     │                            │ событие отправляется при перемещении курсора мыши на поле
+     │   "mouseOut"               │ event is sent when the mouse pointer leaves the field
+     │                            │ событие отправляется при перемещении курсора мыши из поля
+     │   "mouseMove"              │ event is sent when mouse pointer moves inside the field
+     │                            │ событие отправляется при перемещении курсора мыши внутри поля
+     │   "mouseWheel"             │ event is sent when mouse wheel rolled inside the field
+     │ }                          │ событие отправляется при прокручивании колеса мыши внутри поля
+     ├────────────────────────────┼──────────────────────────────────────────────────────────────────────────
      │ "hotKeyCode"               │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
      │                            │ when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
      │                            │ горячие клавиши клавиатуры (список в hotkeys.xc), при нажатии - выводится текстовое поле и применяются параметры html в "format", или скрывается поле;
@@ -293,7 +310,7 @@
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": {"align": "center", "color": "0xF4EFE8", "size": 16 },
       "format": "ПОЖАР"
-    },      
+    },
     "test": {
       "enabled": true,
       "y": -170,
