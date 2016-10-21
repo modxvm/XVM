@@ -92,7 +92,7 @@ class DamageLog(object):
                        'costShell': 'do_not_know', 'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '',
                        'comp-name': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None,
                        'dmg-ratio': '', 'hit-effects': '', 'team-dmg': '', 'c:type-shell': '', 'splash-hit': ''}
-        self.data = {'attackReasonID': 0, 'n': 0, 'maxHitEffectCode': -1, 'isFire': False,
+        self.data = {'attackReasonID': 0, 'n': 0, 'maxHitEffectCode': -1, 'isFire': False, 'splash-hit': 'no-splash',
                      'compName': 'do_not_know', 'dmg': 0}
         self.config = {}
 
@@ -119,7 +119,7 @@ class DamageLog(object):
                        'costShell': 'do_not_know', 'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '',
                        'comp-name': '', 'level': '', 'clanicon': '', 'clannb': '', 'marksOnGun': '', 'squad-num': None,
                        'dmg-ratio': '', 'hit-effects': '', 'team-dmg': '', 'c:type-shell': '', 'splash-hit': ''}
-        self.data = {'attackReasonID': 0, 'n': 0, 'maxHitEffectCode': -1, 'isFire': False,
+        self.data = {'attackReasonID': 0, 'n': 0, 'maxHitEffectCode': -1, 'isFire': False, 'splash-hit': 'no-splash',
                      'compName': 'do_not_know', 'dmg': 0}
         self.config = {}
 
