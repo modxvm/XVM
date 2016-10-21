@@ -13,13 +13,15 @@ package com.xvm.extraFields
     import flash.events.*;
     import flash.text.*;
     import flash.geom.*;
+    import flash.display.*;
     import scaleform.gfx.*;
 
-    public class TextExtraField extends TextField implements IExtraField
+    public class TextExtraField extends Sprite implements IExtraField
     {
         public static const DEFAULT_TEXT_FIELD_WIDTH:Number = 300;
         public static const DEFAULT_TEXT_FIELD_HEIGHT:Number = 25;
 
+        private var _textField:TextField;
         private var _cfg:CExtraField;
         private var _isLeftPanel:Boolean;
         private var _getColorSchemeName:Function;
@@ -48,6 +50,10 @@ package com.xvm.extraFields
         {
             super();
 
+            mouseEnabled = false;
+            mouseChildren = false;
+            buttonMode = false;
+
             this._cfg = format.clone();
             this._isLeftPanel = isLeftPanel;
             this._getColorSchemeName = getColorSchemeName;
@@ -55,14 +61,16 @@ package com.xvm.extraFields
             this._layout = layout;
             this._defaultTextFormatConfig = defaultTextFormatConfig || CTextFormat.GetDefaultConfigForBattle();
 
-            mouseEnabled = false;
-            selectable = false;
-            multiline = true;
-            wordWrap = false;
-            autoSize = TextFieldAutoSize.NONE;
+            _textField = new TextField();
+            _textField.mouseEnabled = false;
+            _textField.selectable = false;
+            _textField.multiline = true;
+            _textField.wordWrap = false;
+            _textField.autoSize = TextFieldAutoSize.NONE;
+            addChild(_textField);
 
-            width = _bounds == null ? DEFAULT_TEXT_FIELD_WIDTH : _bounds.width;
-            height = _bounds == null ? DEFAULT_TEXT_FIELD_HEIGHT : _bounds.height;
+            _textField.width = _bounds == null ? DEFAULT_TEXT_FIELD_WIDTH : _bounds.width;
+            _textField.height = _bounds == null ? DEFAULT_TEXT_FIELD_HEIGHT : _bounds.height;
 
             if (defaultAlign == null)
                 defaultAlign = isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT;
@@ -75,9 +83,9 @@ package com.xvm.extraFields
                 _visibleOnHotKeyEnabled = !_cfg.visibleOnHotKey;
                 _cfg.onHold = Macros.FormatBooleanGlobal(_cfg.onHold, true);
             }
-            antiAliasType = Macros.FormatStringGlobal(_cfg.antiAliasType, AntiAliasType.ADVANCED);
-            TextFieldEx.setVerticalAlign(this, TextFieldEx.VALIGN_NONE);
-            TextFieldEx.setNoTranslate(this, true);
+            _textField.antiAliasType = Macros.FormatStringGlobal(_cfg.antiAliasType, AntiAliasType.ADVANCED);
+            TextFieldEx.setVerticalAlign(_textField, TextFieldEx.VALIGN_NONE);
+            TextFieldEx.setNoTranslate(_textField, true);
             if (_cfg.textFormat == null)
                 _cfg.textFormat = defaultTextFormatConfig;
             if (_cfg.shadow == null)
@@ -108,7 +116,7 @@ package com.xvm.extraFields
 
         public function get widthValue():Number
         {
-            return isNaN(_widthValue) ? ((textWidth > 0) ? textWidth + 4 : NaN) : _widthValue; // 2 * 2-pixel gutter
+            return isNaN(_widthValue) ? ((_textField.textWidth > 0) ? _textField.textWidth + 4 : NaN) : _widthValue; // 2 * 2-pixel gutter
         }
 
         public function get heightValue():Number
@@ -153,28 +161,28 @@ package com.xvm.extraFields
             value = Macros.FormatNumber(_cfg.alpha, options, 100);
             if (Macros.IsCached(_cfg.alpha, options))
             {
-                alpha = value / 100.0;
+                _textField.alpha = value / 100.0;
                 _cfg.alpha = null;
             }
 
             value = Macros.FormatNumber(_cfg.rotation, options, 0);
             if (Macros.IsCached(_cfg.rotation, options))
             {
-                rotation = value;
+                _textField.rotation = value;
                 _cfg.rotation = null;
             }
 
             value = Macros.FormatNumber(_cfg.scaleX, options, 1);
             if (Macros.IsCached(_cfg.scaleX, options))
             {
-                scaleX = value;
+                _textField.scaleX = value;
                 _cfg.scaleX = null;
             }
 
             value = Macros.FormatNumber(_cfg.scaleY, options, 1);
             if (Macros.IsCached(_cfg.scaleY, options))
             {
-                scaleY = value;
+                _textField.scaleY = value;
                 _cfg.scaleY = null;
             }
 
@@ -183,8 +191,8 @@ package com.xvm.extraFields
             {
                 if (!isNaN(value))
                 {
-                    border = true;
-                    borderColor = value;
+                    _textField.border = true;
+                    _textField.borderColor = value;
                 }
                 _cfg.borderColor = null;
             }
@@ -194,8 +202,8 @@ package com.xvm.extraFields
             {
                 if (!isNaN(value))
                 {
-                    background = true;
-                    backgroundColor = value;
+                    _textField.background = true;
+                    _textField.backgroundColor = value;
                 }
                 _cfg.bgColor = null;
             }
@@ -222,7 +230,7 @@ package com.xvm.extraFields
             {
                 _textValue = value;
                 _cfg.format = null;
-                htmlText = _textValue;
+                _textField.htmlText = _textValue;
             }
 
             value = Macros.FormatBoolean(_cfg.highlight, options, false);
@@ -390,8 +398,8 @@ package com.xvm.extraFields
                 isDynamic = true;
             }
 
-            defaultTextFormat = Utils.createTextFormatFromConfig(cfg, options);
-            TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_NONE));
+            _textField.defaultTextFormat = Utils.createTextFormatFromConfig(cfg, options);
+            TextFieldEx.setVerticalAlign(_textField, Macros.FormatStringGlobal(cfg.valign, TextFieldEx.VALIGN_NONE));
 
             return isDynamic;
         }
@@ -523,7 +531,7 @@ package com.xvm.extraFields
                 cfg.hideObject = value;
             }
 
-            filters = Utils.createShadowFiltersFromConfig(cfg, options);
+            _textField.filters = Utils.createShadowFiltersFromConfig(cfg, options);
 
             return isDynamic;
         }
@@ -606,51 +614,51 @@ package com.xvm.extraFields
                 if (_cfg.alpha != null)
                 {
                     value = Macros.FormatNumber(_cfg.alpha, options, 100) / 100.0;
-                    if (alpha != value)
+                    if (_textField.alpha != value)
                     {
-                        alpha = value;
+                        _textField.alpha = value;
                     }
                 }
                 if (_cfg.rotation != null)
                 {
                     value = Macros.FormatNumber(_cfg.rotation, options, 0);
-                    if (rotation != value)
+                    if (_textField.rotation != value)
                     {
-                        rotation = value;
+                        _textField.rotation = value;
                     }
                 }
                 if (_cfg.scaleX != null)
                 {
                     value = Macros.FormatNumber(_cfg.scaleX, options, 1);
-                    if (scaleX != value)
+                    if (_textField.scaleX != value)
                     {
-                        scaleX = value;
+                        _textField.scaleX = value;
                     }
                 }
                 if (_cfg.scaleY != null)
                 {
                     value = Macros.FormatNumber(_cfg.scaleY, options, 1);
-                    if (scaleY != value)
+                    if (_textField.scaleY != value)
                     {
-                        scaleY = value;
+                        _textField.scaleY = value;
                     }
                 }
                 if (_cfg.borderColor != null)
                 {
                     value = Macros.FormatNumber(_cfg.borderColor, options);
-                    border = !isNaN(value);
-                    if (border)
+                    _textField.border = !isNaN(value);
+                    if (_textField.border)
                     {
-                        borderColor = value;
+                        _textField.borderColor = value;
                     }
                 }
                 if (_cfg.bgColor != null)
                 {
                     value = Macros.FormatNumber(_cfg.bgColor, options);
-                    background = !isNaN(value);
-                    if (background)
+                    _textField.background = !isNaN(value);
+                    if (_textField.background)
                     {
-                        backgroundColor = value;
+                        _textField.backgroundColor = value;
                     }
                 }
                 if (_cfg.bindToIcon && _bindToIconOffset != bindToIconOffset)
@@ -660,13 +668,13 @@ package com.xvm.extraFields
                 }
                 if (_cfg.textFormat)
                 {
-                    defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
-                    TextFieldEx.setVerticalAlign(this, Macros.FormatStringGlobal(_cfg.textFormat.valign, TextFieldEx.VALIGN_NONE));
-                    htmlText = _textValue;
+                    _textField.defaultTextFormat = Utils.createTextFormatFromConfig(_cfg.textFormat, options);
+                    TextFieldEx.setVerticalAlign(_textField, Macros.FormatStringGlobal(_cfg.textFormat.valign, TextFieldEx.VALIGN_NONE));
+                    _textField.htmlText = _textValue;
                 }
                 if (_cfg.shadow)
                 {
-                    filters = Utils.createShadowFiltersFromConfig(_cfg.shadow, options);
+                    _textField.filters = Utils.createShadowFiltersFromConfig(_cfg.shadow, options);
                 }
                 if (_cfg.format)
                 {
@@ -677,7 +685,7 @@ package com.xvm.extraFields
                     {
                         //Logger.add(_textValue + " => " + value);
                         _textValue = value;
-                        htmlText = _textValue;
+                        _textField.htmlText = _textValue;
                         needAlign = true;
                     }
                 }
@@ -691,7 +699,7 @@ package com.xvm.extraFields
                     if (_colorSchemeNameValue != value)
                     {
                         _colorSchemeNameValue = value;
-                        textColor = App.colorSchemeMgr.getScheme(value).rgb;
+                        _textField.textColor = App.colorSchemeMgr.getScheme(value).rgb;
                     }
                 }
 
@@ -713,9 +721,9 @@ package com.xvm.extraFields
         private function align():void
         {
             if (!isNaN(widthValue))
-                width = widthValue;
+                _textField.width = widthValue;
             if (!isNaN(heightValue))
-                height = heightValue;
+                _textField.height = heightValue;
             if (_bounds && _layout == ExtraFields.LAYOUT_ROOT)
             {
                 var align:String = Macros.FormatStringGlobal(_cfg.screenHAlign, TextFormatAlign.LEFT);
@@ -728,13 +736,13 @@ package com.xvm.extraFields
                 x = _isLeftPanel ? (_xValue + _bindToIconOffset + _offsetX) : (-_xValue + _bindToIconOffset + _offsetX);
                 y = _yValue + _offsetY;
                 if (_cfg.align == TextFormatAlign.RIGHT)
-                    x -= width;
+                    x -= _textField.width;
                 else if (_cfg.align == TextFormatAlign.CENTER)
-                    x -= width / 2;
+                    x -= _textField.width / 2;
                 if (_cfg.valign == TextFieldEx.VALIGN_BOTTOM)
-                    y -= height;
+                    y -= _textField.height;
                 else if (_cfg.valign == TextFieldEx.VALIGN_CENTER)
-                    y -= height / 2;
+                    y -= _textField.height / 2;
             }
 
             //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }

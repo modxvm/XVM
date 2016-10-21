@@ -1,4 +1,4 @@
-{
+﻿{
   "formats": [
     {
       //"enabled": false,
@@ -36,8 +36,18 @@
     },
     {
       "enabled": true,
+      //"mouseEvents": {
+      //  "click": "xvm_debug_click",
+      //  "mouseDown": "xvm_debug_mouseDown",
+      //  "mouseUp": "xvm_debug_mouseUp",
+      //  "mouseOver": "xvm_debug_mouseOver",
+      //  "mouseOut": "xvm_debug_mouseOut",
+      //  "mouseMove": "xvm_debug_mouseMove",
+      //  "mouseWheel": "xvm_debug_mouseWheel"
+      //},
       //"borderColor": "0xFF0000",
       //"y":150,
+      "height": 30,
       "updateEvent": "ON_PLAYERS_HP_CHANGED,ON_VEHICLE_DESTROYED",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.totalHP" }
     }

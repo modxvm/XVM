@@ -1,4 +1,4 @@
-﻿/**
+/**
  * XVM Config
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
@@ -32,6 +32,7 @@ package com.xvm.types.cfg
 
         // for BattleLabels
         public var updateEvent:String;
+        public var mouseEvents:CMouseEvents;
         public var hotKeyCode:*;
         public var onHold:*;
         public var visibleOnHotKey:*;
@@ -76,6 +77,7 @@ package com.xvm.types.cfg
             cloned.shadow = shadow ? shadow.clone() : null;
             cloned.highlight = highlight;
             cloned.updateEvent = updateEvent;
+            cloned.mouseEvents = mouseEvents ? mouseEvents.clone() : null;
             cloned.hotKeyCode = hotKeyCode;
             cloned.onHold = onHold;
             cloned.visibleOnHotKey = visibleOnHotKey;

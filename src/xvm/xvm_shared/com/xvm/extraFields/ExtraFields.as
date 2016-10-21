@@ -36,8 +36,6 @@ package com.xvm.extraFields
             bounds:Rectangle = null, layout:String = null, defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null):void
         {
             mouseEnabled = false;
-            mouseChildren = false;
-
             _bounds = bounds;
             if (layout == LAYOUT_HORIZONTAL_FIXED)
             {

@@ -18,3 +18,18 @@ def as_tankmenResponseS(base, self, data):
                 t['skills'][0]['level'] = 100
     #log(data)
     base(self, data)
+
+
+#######################################
+# test as_callback()
+def _handler(data):
+    log(data)
+def _register_as_callback():
+    as_callback("xvm_debug_click", _handler)
+    as_callback("xvm_debug_mouseDown", _handler)
+    as_callback("xvm_debug_mouseUp", _handler)
+    as_callback("xvm_debug_mouseOver", _handler)
+    as_callback("xvm_debug_mouseOut", _handler)
+    as_callback("xvm_debug_mouseMove", _handler)
+    as_callback("xvm_debug_mouseWheel", _handler)
+#_register_as_callback()
