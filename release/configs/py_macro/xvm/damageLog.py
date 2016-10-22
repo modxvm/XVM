@@ -452,7 +452,7 @@ def _onTotalEfficiencyUpdated(base, self, diff):
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
-    if newHealth <= 0:
+    if (newHealth <= 0) and self.isPlayerVehicle:
         global on_fire
         on_fire = 0
         as_event('ON_FIRE')
