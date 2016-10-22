@@ -39,6 +39,8 @@ package com.xvm.extraFields
         private var _highlightValue:Boolean = false;
         private var _colorSchemeNameValue:String = null;
         private var _keyHolded:Boolean = false;
+        private var _visibleOnHotKeyEnabled:Boolean = true;
+        private var _visibilityFlag:Boolean = true;
 
         public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null, layout:String = null)
         {
@@ -46,6 +48,7 @@ package com.xvm.extraFields
 
             mouseEnabled = false;
             mouseChildren = false;
+            buttonMode = false;
 
             this._cfg = format.clone();
             this.isLeftPanel = isLeftPanel;
@@ -60,6 +63,7 @@ package com.xvm.extraFields
             if (_cfg.hotKeyCode != null)
             {
                 _cfg.visibleOnHotKey = Macros.FormatBooleanGlobal(_cfg.visibleOnHotKey, true);
+                _visibleOnHotKeyEnabled = !_cfg.visibleOnHotKey;
                 _cfg.onHold = Macros.FormatBooleanGlobal(_cfg.onHold, true);
             }
 
@@ -186,142 +190,153 @@ package com.xvm.extraFields
 
         public function update(options:IVOMacrosOptions, bindToIconOffset:int = 0, offsetX:int = 0, offsetY:int = 0, bounds:Rectangle = null):void
         {
-            visible = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
-            if (!visible)
-                return;
-
-            var needAlign:Boolean = false;
-
-            if (!_initialized)
+            try
             {
-                _initialized = true;
-                setup(options);
-                needAlign = true;
-            }
-
-            if (bounds && _bounds != bounds)
-            {
-                _bounds = bounds;
-            }
-
-            var value:*;
-
-            if (_cfg.x != null)
-            {
-                value = Macros.FormatNumber(_cfg.x, options, 0);
-                if (_xValue != value)
+                _visibilityFlag = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
+                if (!_visibilityFlag)
                 {
-                    _xValue = value;
+                    visible = false;
+                    return;
+                }
+                visible = _visibleOnHotKeyEnabled && _visibilityFlag;
+
+                var needAlign:Boolean = false;
+
+                if (!_initialized)
+                {
+                    _initialized = true;
+                    setup(options);
                     needAlign = true;
                 }
-            }
-            if (_cfg.y != null)
-            {
-                value = Macros.FormatNumber(_cfg.y, options, 0);
-                if (_yValue != value)
+
+                if (bounds && _bounds != bounds)
                 {
-                    _yValue = value;
-                    needAlign = true;
+                    _bounds = bounds;
                 }
-            }
-            if (_offsetX != offsetX)
-            {
-                _offsetX = offsetX;
-                needAlign = true;
-            }
-            if (_offsetX != offsetY)
-            {
-                _offsetY = offsetY;
-                needAlign = true;
-            }
-            if (_cfg.width != null)
-            {
-                value = Macros.FormatNumber(_cfg.width, options);
-                if (!isNaN(value) && _widthValue != value)
+
+                var value:*;
+
+                if (_cfg.x != null)
                 {
-                    _widthValue = value;
-                    needAlign = true;
-                }
-            }
-            if (_cfg.height != null)
-            {
-                value = Macros.FormatNumber(_cfg.height, options);
-                if (!isNaN(value) && _heightValue != value)
-                {
-                    _heightValue = value;
-                    needAlign = true;
-                }
-            }
-            if (_cfg.alpha != null)
-            {
-                value = Macros.FormatNumber(_cfg.alpha, options, 100) / 100.0;
-                if (alpha != value)
-                {
-                    alpha = value;
-                }
-            }
-            if (_cfg.rotation != null)
-            {
-                value = Macros.FormatNumber(_cfg.rotation, options, 0);
-                if (rotation != value)
-                {
-                    rotation = value;
-                }
-            }
-            if (_cfg.scaleX != null)
-            {
-                _scaleXValue = Macros.FormatNumber(_cfg.scaleX, options, 1);
-            }
-            if (_bitmap.scaleX != _scaleXValue)
-            {
-                needAlign = true;
-            }
-            if (_cfg.scaleY != null)
-            {
-                _scaleYValue = Macros.FormatNumber(_cfg.scaleY, options, 1);
-            }
-            if (_bitmap.scaleY != _scaleXValue)
-            {
-                needAlign = true;
-            }
-            if (_cfg.bindToIcon && _bindToIconOffset != bindToIconOffset)
-            {
-                _bindToIconOffset = bindToIconOffset;
-                needAlign = true;
-            }
-            if (_cfg.src)
-            {
-                value = Macros.Format(_cfg.src, options);
-                //value = Utils.fixImgTag(value); // is required?
-                if (_srcValue != value)
-                {
-                    //Logger.add(_srcValue + " => " + value);
-                    _srcValue = value;
-                    if (_srcValue != null && source != _srcValue)
+                    value = Macros.FormatNumber(_cfg.x, options, 0);
+                    if (_xValue != value)
                     {
-                        //Logger.add("source: " + source + " => " + _srcValue);
-                        source = _srcValue;
+                        _xValue = value;
+                        needAlign = true;
                     }
-                    //needAlign = true; // is required?
                 }
-            }
-            if (_getColorSchemeName != null)
-            {
-                if (_cfg.highlight)
+                if (_cfg.y != null)
                 {
-                    _highlightValue = _cfg.highlight is Boolean ? _cfg.highlight : Macros.FormatBoolean(_cfg.highlight, options, false);
+                    value = Macros.FormatNumber(_cfg.y, options, 0);
+                    if (_yValue != value)
+                    {
+                        _yValue = value;
+                        needAlign = true;
+                    }
                 }
-                value = _highlightValue ? _getColorSchemeName(options) : null;
-                if (_colorSchemeNameValue != value)
+                if (_offsetX != offsetX)
                 {
-                    _colorSchemeNameValue = value;
-                    this.transform.colorTransform = App.colorSchemeMgr.getScheme(value).colorTransform;
+                    _offsetX = offsetX;
+                    needAlign = true;
                 }
-            }
+                if (_offsetX != offsetY)
+                {
+                    _offsetY = offsetY;
+                    needAlign = true;
+                }
+                if (_cfg.width != null)
+                {
+                    value = Macros.FormatNumber(_cfg.width, options);
+                    if (!isNaN(value) && _widthValue != value)
+                    {
+                        _widthValue = value;
+                        needAlign = true;
+                    }
+                }
+                if (_cfg.height != null)
+                {
+                    value = Macros.FormatNumber(_cfg.height, options);
+                    if (!isNaN(value) && _heightValue != value)
+                    {
+                        _heightValue = value;
+                        needAlign = true;
+                    }
+                }
+                if (_cfg.alpha != null)
+                {
+                    value = Macros.FormatNumber(_cfg.alpha, options, 100) / 100.0;
+                    if (alpha != value)
+                    {
+                        alpha = value;
+                    }
+                }
+                if (_cfg.rotation != null)
+                {
+                    value = Macros.FormatNumber(_cfg.rotation, options, 0);
+                    if (rotation != value)
+                    {
+                        rotation = value;
+                    }
+                }
+                if (_cfg.scaleX != null)
+                {
+                    _scaleXValue = Macros.FormatNumber(_cfg.scaleX, options, 1);
+                }
+                if (_bitmap.scaleX != _scaleXValue)
+                {
+                    needAlign = true;
+                }
+                if (_cfg.scaleY != null)
+                {
+                    _scaleYValue = Macros.FormatNumber(_cfg.scaleY, options, 1);
+                }
+                if (_bitmap.scaleY != _scaleXValue)
+                {
+                    needAlign = true;
+                }
+                if (_cfg.bindToIcon && _bindToIconOffset != bindToIconOffset)
+                {
+                    _bindToIconOffset = bindToIconOffset;
+                    needAlign = true;
+                }
+                if (_cfg.src)
+                {
+                    value = Macros.Format(_cfg.src, options);
+                    //value = Utils.fixImgTag(value); // is required?
+                    if (_srcValue != value)
+                    {
+                        //Logger.add(_srcValue + " => " + value);
+                        _srcValue = value;
+                        if (_srcValue != null && source != _srcValue)
+                        {
+                            //Logger.add("source: " + source + " => " + _srcValue);
+                            source = _srcValue;
+                        }
+                        //needAlign = true; // is required?
+                    }
+                }
+                if (_getColorSchemeName != null)
+                {
+                    if (_cfg.highlight)
+                    {
+                        _highlightValue = _cfg.highlight is Boolean ? _cfg.highlight : Macros.FormatBoolean(_cfg.highlight, options, false);
+                    }
+                    value = _highlightValue ? _getColorSchemeName(options) : null;
+                    if (_colorSchemeNameValue != value)
+                    {
+                        _colorSchemeNameValue = value;
+                        this.transform.colorTransform = App.colorSchemeMgr.getScheme(value).colorTransform;
+                    }
+                }
 
-            if (needAlign)
+                if (needAlign)
+                {
+                    align();
+                }
+            }
+            catch (ex:Error)
             {
-                align();
+                Logger.err(ex);
             }
         }
 
@@ -396,12 +411,13 @@ package com.xvm.extraFields
                     return;
                 if (_cfg.visibleOnHotKey)
                 {
-                    visible = _keyHolded;
+                    _visibleOnHotKeyEnabled = _keyHolded;
                 }
                 else
                 {
-                    visible = !_keyHolded;
+                    _visibleOnHotKeyEnabled = !_keyHolded;
                 }
+                visible = _visibleOnHotKeyEnabled && _visibilityFlag;
                 //updateOnEvent(new PlayerStateEvent(PlayerStateEvent.ON_HOTKEY_PRESSED)); // need current vehicle id for players panel
             }
         }

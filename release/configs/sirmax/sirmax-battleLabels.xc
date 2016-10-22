@@ -1,5 +1,24 @@
-{
+﻿{
   "formats": [
+    {
+      //"enabled": false,
+      "x": "{{py:xvm_debug_get_x|0}}",
+      "y": "{{py:xvm_debug_get_y|0}}",
+      "width": 250,
+      "height": 160,
+      "alpha": 70,
+      "updateEvent": "PY(xvm_debug_update)",
+      "src": "img://gui/maps/icons/vehicle/unique/germany-G105_T-55_NVA_DDR.png",
+      "mouseEvents": {
+        //"click": "xvm_debug_click",
+        "mouseDown": "xvm_debug_mouseDown",
+        "mouseUp": "xvm_debug_mouseUp",
+        //"mouseOver": "xvm_debug_mouseOver",
+        //"mouseOut": "xvm_debug_mouseOut",
+        //"mouseWheel": "xvm_debug_mouseWheel",
+        "mouseMove": "xvm_debug_mouseMove"
+      }
+    },
     {
       //"enabled": false,
       "hotKeyCode": 36, // J
@@ -38,6 +57,7 @@
       "enabled": true,
       //"borderColor": "0xFF0000",
       //"y":150,
+      "height": 30,
       "updateEvent": "ON_PLAYERS_HP_CHANGED,ON_VEHICLE_DESTROYED",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.totalHP" }
     }

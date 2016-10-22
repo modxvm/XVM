@@ -11,6 +11,7 @@ package com.xvm.extraFields
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
+    import flash.display.*;
     import flash.events.*;
     import flash.text.*;
     import flash.geom.*;
@@ -124,6 +125,17 @@ package com.xvm.extraFields
             {
                 Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, field.onKeyEvent);
                 field.visible = !field.cfg.visibleOnHotKey;
+            }
+
+            if (field.cfg.mouseEvents)
+            {
+                registerMouseEvent(field, field.cfg.mouseEvents.click, MouseEvent.CLICK, true);
+                registerMouseEvent(field, field.cfg.mouseEvents.mouseDown, MouseEvent.MOUSE_DOWN, true);
+                registerMouseEvent(field, field.cfg.mouseEvents.mouseMove, MouseEvent.MOUSE_MOVE, false);
+                registerMouseEvent(field, field.cfg.mouseEvents.mouseOut, MouseEvent.MOUSE_OUT, false);
+                registerMouseEvent(field, field.cfg.mouseEvents.mouseOver, MouseEvent.MOUSE_OVER, false);
+                registerMouseEvent(field, field.cfg.mouseEvents.mouseUp, MouseEvent.MOUSE_UP, true);
+                registerMouseEvent(field, field.cfg.mouseEvents.mouseWheel, MouseEvent.MOUSE_WHEEL, false);
             }
         }
 
@@ -251,6 +263,38 @@ package com.xvm.extraFields
                 Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_EVERY_SECOND));
             });
             timerSec.start();
+        }
+
+        private static function registerMouseEvent(field:IExtraField, cfgEventName:String, eventName:String, buttonMode:Boolean):void
+        {
+            if (cfgEventName != null)
+            {
+                (field as Sprite).mouseEnabled = true;
+                if (buttonMode)
+                {
+                    (field as Sprite).buttonMode = true;
+                }
+                field.addEventListener(eventName, handleMouseEvent);
+            }
+        }
+
+        private static function handleMouseEvent(e:MouseEventEx):void
+        {
+            if (e.ctrlKey)
+            {
+                //Logger.addObject(e);
+                var eventName:String = e.target.cfg.mouseEvents[e.type];
+                Xfw.cmd(XfwConst.XFW_COMMAND_CALLBACK,
+                    eventName,          // 0
+                    e.type,             // 1
+                    int(e.localX),      // 2
+                    int(e.localY),      // 3
+                    int(e.stageX),      // 4
+                    int(e.stageY),      // 5
+                    int(e.buttonIdx),   // 6
+                    int(e.delta)        // 7
+                );
+            }
         }
     }
 }
