@@ -31,6 +31,9 @@
     // true - Return crew check box is selected by default
     // true - Включить галочку возврата экипажа по умолчанию
     "crewReturnByDefault": false,
+    // Number of perks to show without grouping
+    // Количество перков, которые отображаются без группировки
+    "crewMaxPerksCount": 8,
     // true - Show flags in barracks
     // true - Показывать флаги в казарме
     "barracksShowFlags": true,

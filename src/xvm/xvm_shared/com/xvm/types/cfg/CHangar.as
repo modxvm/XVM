@@ -17,6 +17,7 @@ package com.xvm.types.cfg
         public var allowExchangeXPInTechTree:*;
         public var enableCrewAutoReturn:*;
         public var crewReturnByDefault:*;
+        public var crewMaxPerksCount:*;
         public var barracksShowFlags:*;
         public var barracksShowSkills:*;
         public var enableEquipAutoReturn:*;

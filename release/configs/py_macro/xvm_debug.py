@@ -6,7 +6,7 @@ import xvm_main.python.config as config
 
 #######################################
 # add perks for every tankman in the crew
-ADD_PERKS_COUNT = 5
+ADD_PERKS_COUNT = 8
 from gui.Scaleform.daapi.view.lobby.hangar.Crew import Crew
 #@overrideMethod(Crew, 'as_tankmenResponseS')
 def as_tankmenResponseS(base, self, data):

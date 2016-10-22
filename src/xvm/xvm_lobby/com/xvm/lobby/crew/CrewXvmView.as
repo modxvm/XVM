@@ -9,6 +9,7 @@ package com.xvm.lobby.crew
     import com.xvm.infrastructure.*;
     import flash.events.*;
     import flash.utils.*;
+    import net.wg.data.constants.*;
     import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.interfaces.*;
@@ -42,6 +43,8 @@ package com.xvm.lobby.crew
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
+            page.addEventListener(Event.RESIZE, onHangarResize);
+
             //Logger.add("onBeforePopulate");
             if (Config.config.hangar.enableCrewAutoReturn)
             {
@@ -147,8 +150,29 @@ package com.xvm.lobby.crew
         private function tryPutPrevCrew():void
         {
             if (savedValue)
+            {
                 Xfw.cmd(COMMAND_XVM_CREW_PUT_PREVIOUS_CREW);
+            }
         }
 
+        private function onHangarResize():void
+        {
+            var updated:Boolean = false;
+            if (page.crew.list.itemRendererName == Linkages.CREW_DEFAULT_RENDERER_LINKAGE)
+            {
+                page.crew.list.itemRendererName = "com.xvm.lobby.ui.crew::UI_CrewItemRenderer";
+                updated = true;
+            }
+            else if (page.crew.list.itemRendererName == Linkages.CREW_SMALL_RENDERER_LINKAGE)
+            {
+                page.crew.list.itemRendererName = "com.xvm.lobby.ui.crew::UI_CrewItemRendererSmall";
+                updated = true;
+            }
+            if (updated)
+            {
+                page.crew.list.validateNow();
+                page.crew.list.invalidateData();
+            }
+        }
     }
 }

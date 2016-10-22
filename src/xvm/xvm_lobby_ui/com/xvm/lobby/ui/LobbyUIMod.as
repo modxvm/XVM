@@ -5,6 +5,7 @@ package com.xvm.lobby.ui
      */
     import com.xvm.lobby.ui.battleresults.*;
     import com.xvm.lobby.ui.clock.*;
+    import com.xvm.lobby.ui.crew.*;
     import com.xvm.lobby.ui.limits.*;
     import com.xvm.lobby.ui.squad.*;
     import com.xvm.lobby.ui.tankcarousel.*;
@@ -19,6 +20,10 @@ package com.xvm.lobby.ui
 
     // clock
     ClockUIImpl;
+
+    // crew
+    UI_CrewItemRenderer;
+    UI_CrewItemRendererSmall;
 
     // limits
     LimitsUIImpl;

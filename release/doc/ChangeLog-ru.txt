@@ -16,6 +16,7 @@ XVM-6.4.6.3-dev:
   * добавлены новые опции в секции "hangar":
       "showBuyPremiumButton" - показать кнопку "Купить премиум"
       "showPremiumShopButton" - показать кнопку "Премиум магазин"
+      "crewMaxPerksCount" - количество перков, которые отображаются без группировки
   * исправлена опция "minimapDeadSwitch"
   * в battle labels добавлены события мыши, которые могут быть обработаны в py_macro using с помощью функции as_callback(event_name):
       "mouseEvents":

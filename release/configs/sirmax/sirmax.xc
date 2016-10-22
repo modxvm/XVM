@@ -54,6 +54,7 @@
     "blockVehicleIfNoAmmo": true,
     //"enableCrewAutoReturn": false,
     //"crewReturnByDefault": true,
+    "crewMaxPerksCount": 10,
     "enableEquipAutoReturn": true,
     "widgetsEnabled": true,
     "pingServers": {
