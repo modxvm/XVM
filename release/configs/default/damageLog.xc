@@ -180,20 +180,23 @@
       // true - show hits without damage, false - not to show.
       // true - отображать попадания без урона, false - не отображать.
       "showHitNoDamage": true,
-      // true - to add and display in a log in one line of damage from the fire.
-      // true - суммировать и отображать в логе в одной строке повреждения от пожара.
+      // true - to add of damage from the fire.
+      // true - суммировать повреждения от пожара.
       "groupDamagesFromFire": true,
       // Damage log format.
       // Формат лога повреждений.
       "formatHistory": "<textformat tabstops='[30,135,170,185]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>",
       // Damage log format with the left Alt key.
       // Формат лога повреждений c нажатой левой клавишей Alt.
-      "formatHistoryAlt": "<textformat tabstops='[30,135,170]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}</font><tab>{{dmg-kind}}<tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
+      "formatHistoryAlt": "<textformat tabstops='[30,135,170]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
     },
     // Display the last damage (hit).
     // Отображение последнего урона (попадания).
     "lastHit": {
       "$ref": { "path":"damageLog.log" },
+      // true - show hits without damage, false - not to show.
+      // true - отображать попадания без урона, false - не отображать.
+      "showHitNoDamage": true,
       // Display duration (seconds).
       // Продолжительность отображения (секунды).
       "timeDisplayLastHit": 7,
