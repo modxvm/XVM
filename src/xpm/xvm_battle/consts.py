@@ -34,6 +34,8 @@ class XVM_VM_COMMAND(object):
 
 class XVM_BATTLE_EVENT(object):
     ARENA_INFO_INVALIDATED = "arena_info_invalidated"
+    XMQP_CONNECTED = 'xvm_battle.xmqp_connected'
+    XMQP_MESSAGE = 'xvm_battle.xmqp_message'
 
 # Invalidation targets
 

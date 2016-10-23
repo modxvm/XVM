@@ -35,8 +35,6 @@ class XVM_EVENT(object):
     RELOAD_CONFIG = 'xvm.reload_config'
     CONFIG_LOADED = 'xvm.config_loaded'
     SYSTEM_MESSAGE = 'xvm.system_message'
-    XMQP_CONNECTED = 'xvm.xmqp_connected'
-    XMQP_MESSAGE = 'xvm.xmqp_message'
 
 # PY<->AS3 commands
 

@@ -24,20 +24,18 @@ from gui.battle_control import g_sessionProvider
 
 from xfw import *
 
-from logger import *
-import config
-import minimap_circles
-import utils
+import xvm_main.python.config as config
+from xvm_main.python.logger import *
+import xvm_main.python.minimap_circles as minimap_circles
+import xvm_main.python.utils as utils
 import xmqp
 
 def onXmqpConnected(e):
-    global _players_xmqp_status
-    _players_xmqp_status = {}
-    _send_xmqp_hola()
+    #_send_xmqp_hola()
+    pass
 
 def onStateBattle():
-    global _players_xmqp_status
-    for accountDBID, data in _players_xmqp_status.iteritems():
+    for accountDBID, data in xmqp.players_capabilities.iteritems():
         _as_xmqp_event(accountDBID, data)
 
 def onXmqpMessage(e):
@@ -104,31 +102,31 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 
 # WG events hooks
 
-_players_xmqp_status = {}
-
 def _send_xmqp_hola():
-    mcdata = minimap_circles.getMinimapCirclesData()
-    if mcdata is None:
-        mcdata = {}
-    data = {'event': EVENTS.XMQP_HOLA,
-            'sixthSense': mcdata.get('commander_sixthSense', None)}
-    if xmqp.is_active():
-        xmqp.call(data)
-
-    global _players_xmqp_status
-    accountDBID = getCurrentAccountDBID()
-    if accountDBID not in _players_xmqp_status:
-        _players_xmqp_status[accountDBID] = data
+    #mcdata = minimap_circles.getMinimapCirclesData()
+    #if mcdata is None:
+    #    mcdata = {}
+    #data = {'event': EVENTS.XMQP_HOLA,
+    #        'sixthSense': mcdata.get('commander_sixthSense', None)}
+    #if xmqp.is_active():
+    #    xmqp.call(data)
+    #
+    #global xmqp.players_capabilities
+    #accountDBID = getCurrentAccountDBID()
+    #if accountDBID not in xmqp.players_capabilities:
+    #    xmqp.players_capabilities[accountDBID] = data
+    pass
 
 def _onXmqpHola(accountDBID, data):
-    if xmqp.XMQP_DEVELOPMENT:
-        if accountDBID == utils.getAccountDBID():
-            accountDBID = getCurrentAccountDBID()
+    #if xmqp.XMQP_DEVELOPMENT:
+    #    if accountDBID == utils.getAccountDBID():
+    #        accountDBID = getCurrentAccountDBID()
     #debug('_onXmqpHola: {} {}'.format(accountDBID, data))
-    #if accountDBID not in _players_xmqp_status:
-    #    _players_xmqp_status[accountDBID] = data
+    #if accountDBID not in xmqp.players_capabilities:
+    #    xmqp.players_capabilities[accountDBID] = data
     #    _send_xmqp_hola()
     #    _as_xmqp_event(accountDBID, data)
+    pass
 
 _event_handlers[EVENTS.XMQP_HOLA] = _onXmqpHola
 

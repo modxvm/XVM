@@ -12,7 +12,7 @@ import constants
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
 from gui.app_loader import g_appLoader
-from gui.app_loader.settings import APP_NAME_SPACE
+from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
 from gui.shared import g_eventBus, events
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
 from gui.battle_control import g_sessionProvider, avatar_getter
@@ -31,31 +31,43 @@ from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
-import xvm_main.python.xmqp_events as xmqp_events
 
 from consts import *
 import shared
+import xmqp
+import xmqp_events
 
 
 #####################################################################
 # initialization/finalization
 
 def start():
+    g_appLoader.onGUISpaceEntered += onGUISpaceEntered
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
     g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
     g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
+    g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
+    g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
 BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
+    g_appLoader.onGUISpaceEntered -= onGUISpaceEntered
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
     g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
     g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
+    g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
+    g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
 
 #####################################################################
 # handlers
+
+def onGUISpaceEntered(spaceID):
+    if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
+        xmqp_events.onStateBattle()
+
 
 # PRE-BATTLE
 
@@ -70,6 +82,7 @@ def _PlayerAvatar_onBecomePlayer(base, self):
                 arena.onVehicleKilled += g_battle.onVehicleKilled
                 arena.onAvatarReady += g_battle.onAvatarReady
                 arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
+                arena.onNewVehicleListReceived += xmqp.start
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived += g_battle.onVehicleFeedbackReceived
@@ -94,6 +107,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
                 arena.onVehicleKilled -= g_battle.onVehicleKilled
                 arena.onAvatarReady -= g_battle.onAvatarReady
                 arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
+                arena.onNewVehicleListReceived -= xmqp.start
         ctrl = g_sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived -= g_battle.onVehicleFeedbackReceived
@@ -104,6 +118,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
         if ctrl:
             ctrl.onOptionalDeviceAdded -= g_battle.onOptionalDeviceAdded
             ctrl.onOptionalDeviceUpdated -= g_battle.onOptionalDeviceUpdated
+        xmqp.stop()
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
