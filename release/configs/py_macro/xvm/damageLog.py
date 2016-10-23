@@ -52,7 +52,7 @@ HIT_EFFECT_CODES = {
 MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShell', 'costShell', 'comp-name', 'clan',
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'timer', 'c:team-dmg', 'c:hit-effects',
                'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
-               'splash-hit']
+               'splash-hit', 'team-dmg']
 
 
 def keyLower(_dict):
@@ -162,10 +162,7 @@ class DamageLog(object):
 
     def updateLastHit(self):
         timeDisplayLastHit = float(config.get('damageLog/lastHit/timeDisplayLastHit'))
-        if self.data['isFire'] and (self.data['attackReasonID'] == 1):
-            self.lastHit = self.parser(config.get('damageLog/lastHit/formatLastHit'), True)
-        else:
-            self.lastHit = self.parser(config.get('damageLog/lastHit/formatLastHit'))
+        self.lastHit = self.parser(config.get('damageLog/lastHit/formatLastHit'))#, True)
         if self.lastHit:
             if (self.timerLastHit is not None) and (self.timerLastHit.isStarted):
                 self.timerLastHit.stop()
@@ -212,13 +209,13 @@ class DamageLog(object):
 
     def readyConfig(self, section):
         self.config['vehicleClass'] = keyLower(config.get(section + 'vtype'))
-        self.config['colorShell'] = config.get(section + 'c:costShell')
-        self.config['costShell'] = config.get(section + 'costShell')
-        self.config['color_type_hit'] = keyLower(config.get(section + 'c:dmg-kind'))
+        self.config['colorShell'] = keyLower(config.get(section + 'c:costShell'))
+        self.config['costShell'] = keyLower(config.get(section + 'costShell'))
+        self.config['color_type_hit'] = keyLower(keyLower(config.get(section + 'c:dmg-kind')))
         self.config['colorVehicleClass'] = keyLower(config.get(section + 'c:vtype'))
         self.config['type_hit'] = keyLower(config.get(section + 'dmg-kind'))
-        self.config['c:team-dmg'] = config.get(section + 'c:team-dmg')
-        self.config['team-dmg'] = config.get(section + 'team-dmg')
+        self.config['c:team-dmg'] = keyLower(config.get(section + 'c:team-dmg'))
+        self.config['team-dmg'] = keyLower(config.get(section + 'team-dmg'))
         self.config['compNames'] = keyLower(config.get(section + 'comp-name'))
         self.config['splash-hit'] = keyLower(config.get(section + 'splash-hit'))
         if self.data['maxHitEffectCode'] == 5:
@@ -228,8 +225,8 @@ class DamageLog(object):
         self.config['showHitNoDamage'] = config.get(section + 'showHitNoDamage')
         self.config['hitEffect'] = keyLower(config.get(section + 'hit-effects'))
         self.config['colorHitEffect'] = keyLower(config.get(section + 'c:hit-effects'))
-        self.config['type-shell'] = config.get(section + 'type-shell')
-        self.config['c:type-shell'] = config.get(section + 'c:type-shell')
+        self.config['type-shell'] = keyLower(config.get(section + 'type-shell'))
+        self.config['c:type-shell'] = keyLower(config.get(section + 'c:type-shell'))
 
     def setMacros(self):
         self.macros['c:team-dmg'] = self.config['c:team-dmg'].get(self.data['team-dmg'], '')
@@ -332,10 +329,9 @@ class DamageLog(object):
         elif self.data['isDamage']:
             self.addStringLog()
         self.readyConfig('damageLog/lastHit/')
+        self.setMacros()
         if self.data['isFire'] and (self.data['attackReasonID'] == 1):
             self.macros['dmg'] = self.copyMacros['dmg']
-        else:
-            self.setMacros()
         if self.config['showHitNoDamage']:
             self.updateLastHit()
         elif self.data['isDamage']:
