@@ -27,6 +27,7 @@ XVM-6.4.7:
   * добавлены новые опции в секции "hangar":
       "showBuyPremiumButton" - показать кнопку "Купить премиум"
       "showPremiumShopButton" - показать кнопку "Премиум магазин"
+      "crewMaxPerksCount" - количество перков, которые отображаются без группировки
   * исправлен макрос {{v.elite}} в карусели
   * добавлены новые опции в секции "carousel"/"normal"/"fields" и "carousel"/"small"/"fields":
       "flag" - флаг нации
