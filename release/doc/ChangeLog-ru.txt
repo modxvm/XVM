@@ -1,3 +1,5 @@
+XVM-6.4.8-dev:
+
 XVM-6.4.7:
   [DAMAGE LOG]
   * добавлен "damageLog", реализованный на py_macro
