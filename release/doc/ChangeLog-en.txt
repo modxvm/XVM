@@ -1,4 +1,5 @@
-XVM-6.4.8-dev:
+XVM-6.4.7.1:
+  * fixed "crewMaxPerksCount" option
 
 XVM-6.4.7:
   [DAMAGE LOG]
