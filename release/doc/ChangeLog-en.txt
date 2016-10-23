@@ -1,23 +1,18 @@
-XVM-6.4.6.3-dev:
+XVM-6.4.7:
+  [DAMAGE LOG]
+  * added "damageLog" implementation using py_macro
+      Forum thread: http://www.koreanrandom.com/forum/topic/35169-damagelog/
   * added new section "damageLog"
   * added new elements in sections "battleLabels" and "battleLabelsTemplates":
-      "damageLog" - log received Damage
+      "damageLog" - received damage log
       "timerReload" - cooldown timer for the last damager
       "lastHit" - pop up with the received damage
-  * added new options in the "carousel"/"normal"/"fields" and "carousel"/"small"/"fields" sections:
-      "flag" - nation flag
-      "tankIcon" - vehicle icon
-  * carousel: fixed {{v.elite}} macro
-  * py_macro: braces for functions without arguments can be omitted
-  * py_macro: macros formatting implemented
-  * added global macros:
-      {{my-clan}} - my clan
-  * in sections "clock", "pingServers", "onlineServers" option "topmost" replaced with "layer"
-  * added new options in the "hangar" section:
-      "showBuyPremiumButton" - show "Buy premium" button
-      "showPremiumShopButton" - show "Premium shop" button
-  * fixed "minimapDeadSwitch" option
-  * added mouse events in the battle labels which can be handled in py_macro using the function as_callback(event_name):
+
+  [PY_MACRO]
+  * braces for functions without arguments can be omitted
+  * macros formatting implemented
+  * added mouse events in the battle labels which can be
+    handled in py_macro using the function as_callback(event_name):
       "mouseEvents":
         "click" - event is sent when the mouse button clicked inside the field
         "mouseDown" - event is sent when the mouse button pressed inside the field
@@ -27,6 +22,21 @@ XVM-6.4.6.3-dev:
         "mouseMove" - event is sent when mouse pointer moves inside the field
         "mouseWheel" - event is sent when mouse wheel rolled inside the field
 
+  [HANGAR]
+  * in sections "clock", "pingServers", "onlineServers" option "topmost" replaced with "layer"
+  * added new options in the "hangar" section:
+      "showBuyPremiumButton" - show "Buy premium" button
+      "showPremiumShopButton" - show "Premium shop" button
+  * fixed {{v.elite}} macro in the carousel
+  * added new options in the "carousel"/"normal"/"fields" and "carousel"/"small"/"fields" sections:
+      "flag" - nation flag
+      "tankIcon" - vehicle icon
+
+  [MISC]
+  * fixed "minimapDeadSwitch" option
+  * added global macros:
+      {{my-clan}} - my clan
+  
 XVM-6.4.6.2:
   * fixed initial minimap size restoring
 
