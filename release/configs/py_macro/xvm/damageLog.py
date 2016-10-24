@@ -87,6 +87,7 @@ class DamageLog(object):
         self.timerLastHit = None
         self.timerReloadAttacker = None
         self.copyMacros = {}
+        self.copyMacros1 = None
         self.macros = {'number': 0, 'critical-hit': '', 'vehicle': '', 'name': '', 'vtype': '', 'clan': '',
                        'c:costShell': 'do_not_know', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'costShell': 'do_not_know', 'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '',
@@ -123,16 +124,19 @@ class DamageLog(object):
                      'compName': 'do_not_know', 'dmg': 0}
         self.config = {}
 
-    def parser(self, strHTML, fire=False):
+    def parser(self, strHTML, fire=0):
         old_strHTML = ''
         while old_strHTML != strHTML:
             old_strHTML = strHTML
-            if fire:
+            if fire == 1:
                 for s in MACROS_NAME:
                     strHTML = strHTML.replace('{{' + s + '}}', str(self.copyMacros[s]))
-            else:
+            elif fire == 0:
                 for s in MACROS_NAME:
                     strHTML = strHTML.replace('{{' + s + '}}', str(self.macros[s]))
+            elif fire == 2:
+                for s in MACROS_NAME:
+                    strHTML = strHTML.replace('{{' + s + '}}', str(self.copyMacros1[s]))
         return strHTML
 
     def addStringLog(self):
@@ -140,10 +144,11 @@ class DamageLog(object):
             if self.lineFireOld > -1:
                 if self.lineFire > -1:
                     self.lineFireOld = self.lineFire
-                self.msgNoAlt[self.lineFireOld] = self.parser(config.get('damageLog/log/formatHistory'), True)
-                self.msgAlt[self.lineFireOld] = self.parser(config.get('damageLog/log/formatHistoryAlt'), True)
+                self.msgNoAlt[self.lineFireOld] = self.parser(config.get('damageLog/log/formatHistory'), 1)
+                self.msgAlt[self.lineFireOld] = self.parser(config.get('damageLog/log/formatHistoryAlt'), 1)
                 if self.lineFire == -1:
                     self.lineFireOld = self.lineFire
+                    self.copyMacros1 = None
             else:
                 self.copyMacros = self.macros.copy()
                 self.msgNoAlt.insert(0, self.parser(config.get('damageLog/log/formatHistory')))
@@ -162,7 +167,13 @@ class DamageLog(object):
 
     def updateLastHit(self):
         timeDisplayLastHit = float(config.get('damageLog/lastHit/timeDisplayLastHit'))
-        self.lastHit = self.parser(config.get('damageLog/lastHit/formatLastHit'))#, True)
+        if (self.lineFire == 0) and self.copyMacros1 is None:
+            self.copyMacros1 = self.macros.copy()
+        if self.data['isFire'] and (self.data['attackReasonID'] == 1):
+            self.copyMacros1['dmg'] = self.copyMacros['dmg']
+            self.lastHit = self.parser(config.get('damageLog/lastHit/formatLastHit'), 2)
+        else:
+            self.lastHit = self.parser(config.get('damageLog/lastHit/formatLastHit'))  # , True)
         if self.lastHit:
             if (self.timerLastHit is not None) and (self.timerLastHit.isStarted):
                 self.timerLastHit.stop()
@@ -330,8 +341,8 @@ class DamageLog(object):
             self.addStringLog()
         self.readyConfig('damageLog/lastHit/')
         self.setMacros()
-        if self.data['isFire'] and (self.data['attackReasonID'] == 1):
-            self.macros['dmg'] = self.copyMacros['dmg']
+        # if self.data['isFire'] and (self.data['attackReasonID'] == 1):
+        #     self.macros['dmg'] = self.copyMacros['dmg']
         if self.config['showHitNoDamage']:
             self.updateLastHit()
         elif self.data['isDamage']:
