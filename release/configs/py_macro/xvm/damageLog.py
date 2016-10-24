@@ -88,6 +88,7 @@ class DamageLog(object):
         self.timerReloadAttacker = None
         self.copyMacros = {}
         self.copyMacros1 = None
+        self.copyMacros2 = None
         self.macros = {'number': 0, 'critical-hit': '', 'vehicle': '', 'name': '', 'vtype': '', 'clan': '',
                        'c:costShell': 'do_not_know', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'costShell': 'do_not_know', 'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '',
@@ -115,6 +116,8 @@ class DamageLog(object):
         if (self.timerReloadAttacker is not None) and (self.timerReloadAttacker.isStarted):
             self.timerReloadAttacker.stop()
         self.copyMacros = {}
+        self.copyMacros1 = None
+        self.copyMacros2 = None
         self.macros = {'number': 0, 'critical-hit': '', 'vehicle': '', 'name': '', 'vtype': '', 'clan': '',
                        'c:costShell': 'do_not_know', 'dmg-kind': '', 'c:dmg-kind': '', 'c:vtype': '', 'type-shell': '',
                        'costShell': 'do_not_know', 'dmg': '', 'timer': 0, 'c:team-dmg': '', 'c:hit-effects': '',
@@ -137,6 +140,9 @@ class DamageLog(object):
             elif fire == 2:
                 for s in MACROS_NAME:
                     strHTML = strHTML.replace('{{' + s + '}}', str(self.copyMacros1[s]))
+            elif fire == 3:
+                for s in MACROS_NAME:
+                    strHTML = strHTML.replace('{{' + s + '}}', str(self.copyMacros2[s]))
         return strHTML
 
     def addStringLog(self):
@@ -187,15 +193,15 @@ class DamageLog(object):
         as_event('ON_TIMER_RELOAD')
 
     def currentTimeReload(self):
-        self.macros['timer'] = round(self.finishTime - BigWorld.serverTime(), 1)
+        self.copyMacros2['timer'] = round(self.finishTime - BigWorld.serverTime(), 1)
         self.config['timeTextAfterReload'] = float(config.get('damageLog/timeReload/timeTextAfterReload'))
-        if self.macros['timer'] > 0:
-            self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimer'))
+        if self.copyMacros2['timer'] > 0:
+            self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimer'), 3)
         else:
             self.timerReloadAttacker.stop()
             if self.config['timeTextAfterReload'] > 0:
                 self.timerReloadAttacker = TimeInterval(self.config['timeTextAfterReload'], self, 'afterTimerReload')
-                self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimerAfterReload'))
+                self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimerAfterReload'), 3)
                 self.timerReloadAttacker.start()
             else:
                 self.currentTime = ''
@@ -209,10 +215,10 @@ class DamageLog(object):
         else:
             rammer = 1
         self.macros['timer'] = round(reload_orig * crew * rammer, 1)
-
-        self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimer'))
+        self.copyMacros2 = self.macros.copy()
+        self.currentTime = self.parser(config.get('damageLog/timeReload/formatTimer'), 3)
         as_event('ON_TIMER_RELOAD')
-        self.finishTime = self.macros['timer'] + BigWorld.serverTime()
+        self.finishTime = self.copyMacros2['timer'] + BigWorld.serverTime()
         if (self.timerReloadAttacker is not None) and (self.timerReloadAttacker.isStarted):
             self.timerReloadAttacker.stop()
         self.timerReloadAttacker = TimeInterval(0.1, self, 'currentTimeReload')
