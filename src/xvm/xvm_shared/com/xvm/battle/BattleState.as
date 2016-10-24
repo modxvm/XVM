@@ -10,7 +10,7 @@ package com.xvm.battle
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
-    import flash.events.Event;
+    import flash.events.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.core.*;
 
@@ -23,9 +23,14 @@ package com.xvm.battle
             return instance._playersDataVO ? instance._playersDataVO.get(vehicleID) : null;
         }
 
-        public static function getVehicleID(playerName:String):Number
+        public static function getVehicleIDByPlayerName(playerName:String):Number
         {
-            return instance._playersDataVO ? instance._playersDataVO.getVehicleID(playerName) : NaN;
+            return instance._playersDataVO ? instance._playersDataVO.getVehicleIDByPlayerName(playerName) : NaN;
+        }
+
+        public static function getVehicleIDByAccountDBID(accountDBID:Number):Number
+        {
+            return instance._playersDataVO ? instance._playersDataVO.getVehicleIDByAccountDBID(accountDBID) : NaN;
         }
 
         public static function get arenaInfoVO():VOArenaInfo

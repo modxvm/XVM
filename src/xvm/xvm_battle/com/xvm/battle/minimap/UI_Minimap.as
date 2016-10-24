@@ -74,6 +74,7 @@ package com.xvm.battle.minimap
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xvm.addEventListener(BattleEvents.MINIMAP_ALT_MODE, setAltMode);
             Xvm.addEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
+            Xvm.addEventListener(XmqpEvent.XMQP_MINIMAP_CLICK, onXmqpMinimapClickEvent);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
 
             _substrateHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as Sprite;;
@@ -344,5 +345,120 @@ package com.xvm.battle.minimap
                 }
             }
         }
+
+        // XMQP
+
+        private function onXmqpMinimapClickEvent(e:XmqpEvent):void
+        {
+            Logger.addObject(e.data, 3, "onXmqpMinimapClickEvent");
+            /*var color:Number;
+            if (!Config.config.xmqp.minimapClicksColor || Config.config.xmqp.minimapClicksColor == "")
+            {
+                color = e.data.color;
+            }
+            else
+            {
+                color = Number(Macros.FormatByPlayerId(e.value, Config.config.xmqp.minimapClicksColor).split("#").join("0x")) || e.data.color;
+            }
+
+            var alpha:Number = 80;
+
+            var depth:Number = wrapper.mapHit.getNextHighestDepth();
+            var mc:MovieClip = wrapper.mapHit.createEmptyMovieClip("xmqp_mc_" + depth, depth);
+            _global.setTimeout(function() { mc.removeMovieClip() }, Config.config.xmqp.minimapClicksTime * 1000);
+
+            if (e.data.path != undefined)
+            {
+                var len:Number = e.data.path.length;
+                if (len > 0)
+                {
+                    mc.lineStyle(3, color, alpha);
+                    var pos:Array = e.data.path[0];
+                    var x:Number = pos[0];
+                    var y:Number = pos[1];
+                    mc.moveTo(x, y);
+                    mc.lineTo(x + 0.1, y + 0.1);
+
+                    mc.lineStyle(1, color, alpha);
+                    for (var i:Number = 1; i < len; ++i)
+                    {
+                        pos = e.data.path[i];
+                        mc.lineTo(pos[0], pos[1]);
+                    }
+
+                    if (len > 1)
+                    {
+                        // draw arrow head
+                        x = pos[0];
+                        y = pos[1];
+                        var prevPos:Array = e.data.path[len - 2];
+                        var angle:Number = Math.atan2(y - prevPos[1], x - prevPos[0]) * 180 / Math.PI;
+                        mc.beginFill(color, alpha);
+                        mc.moveTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
+                        mc.lineTo(x + (1 * Math.cos((angle) * Math.PI / 180)), y + (1 * Math.sin((angle) * Math.PI / 180)));
+                        mc.lineTo(x - (5 * Math.cos((angle + 15) * Math.PI / 180)), y - (5 * Math.sin((angle + 15) * Math.PI / 180)));
+                        mc.lineTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
+                        mc.endFill();
+                    }
+                }
+            }*/
+        }
+
+        /*
+
+        private var minimap_path:Array;
+        private var minimap_path_mc:MovieClip;
+
+        private function onMouseDown(button:Number, target, mouseIdx:Number, x:Number, y:Number, dblClick:Boolean)
+        {
+            if (target == wrapper.mapHit && !dblClick && button == Mouse.LEFT && _root.g_cursorVisible && Config.networkServicesSettings.xmqp)
+            {
+                //Logger.addObject(arguments, 1, "onMouseDown");
+                x = int(wrapper.mapHit._xmouse);
+                y = int(wrapper.mapHit._ymouse);
+                minimap_path = [[x, y]];
+                if (minimap_path_mc != null)
+                    minimap_path_mc.removeMovieClip();
+                minimap_path_mc = wrapper.mapHit.createEmptyMovieClip("xmqp_mc_path", wrapper.mapHit.getNextHighestDepth());
+                minimap_path_mc.lineStyle(1, Config.networkServicesSettings.x_minimap_clicks_color, 30);
+                minimap_path_mc.moveTo(x, y);
+                minimap_path_mc.lineTo(x + 0.1, y + 0.1);
+            }
+        }
+
+        private function onMouseMove(mouseIdx:Number, x:Number, y:Number)
+        {
+            if (minimap_path != null && minimap_path.length < 20 && y != undefined)
+            {
+                //Logger.addObject(arguments, 1, "onMouseMove");
+                if (wrapper.mapHit.hitTest(_root._xmouse, _root._ymouse))
+                {
+                    x = int(wrapper.mapHit._xmouse);
+                    y = int(wrapper.mapHit._ymouse);
+
+                    var lastpos:Array = minimap_path[minimap_path.length - 1];
+                    var distance:Number = Math.sqrt(Math.pow(lastpos[0] - x, 2) + Math.pow(lastpos[1] - y, 2));
+                    if (distance > 10)
+                    {
+                        minimap_path.push([x, y]);
+                        minimap_path_mc.lineTo(x, y);
+                    }
+                }
+            }
+        }
+
+        private function onMouseUp(button:Number, target, mouseIdx:Number, x:Number, y:Number)
+        {
+            if (minimap_path != null)
+            {
+                if (button == Mouse.LEFT)
+                {
+                    //Logger.addObject(arguments, 1, "onMouseUp");
+                    DAAPI.py_xvm_minimapClick(minimap_path);
+                    minimap_path = null;
+                    minimap_path_mc.removeMovieClip();
+                }
+            }
+        }*/
     }
 }

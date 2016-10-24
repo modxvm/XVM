@@ -152,7 +152,7 @@ package com.xvm.battle.fullStats
         override public function setPlayerName(userProps:IUserProps):void
         {
             super.setPlayerName(userProps);
-            _vehicleID = BattleState.getVehicleID(userProps.userName);
+            _vehicleID = BattleState.getVehicleIDByPlayerName(userProps.userName);
             currentPlayerState = BattleState.get(_vehicleID);
         }
 

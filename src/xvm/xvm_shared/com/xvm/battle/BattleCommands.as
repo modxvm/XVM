@@ -13,6 +13,7 @@ package com.xvm.battle
         public static const MINIMAP_CLICK:String = "xvm_battle.minimap_click";
 
         public static const AS_RESPONSE_BATTLE_GLOBAL_DATA:String = "xvm.as.response_battle_global_data";
+        public static const AS_XMQP_EVENT:String = "xvm.as.as_xmqp_event";
         public static const AS_UPDATE_PLAYER_STATE:String = "xvm.as.update_player_state";
         public static const AS_UPDATE_DEVICE_STATE:String = "xvm.as.update_device_state";
         public static const AS_TEAMS_HP_CHANGED:String = "xvm.as.teams_hp_changed";

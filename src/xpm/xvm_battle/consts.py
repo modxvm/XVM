@@ -13,6 +13,7 @@ class XVM_BATTLE_COMMAND(object):
     MINIMAP_CLICK = "xvm_battle.minimap_click"
 
     AS_RESPONSE_BATTLE_GLOBAL_DATA = "xvm.as.response_battle_global_data"
+    AS_XMQP_EVENT = "xvm.as.as_xmqp_event"
     AS_UPDATE_PLAYER_STATE = "xvm.as.update_player_state"
     AS_UPDATE_DEVICE_STATE = "xvm.as.update_device_state"
     AS_TEAMS_HP_CHANGED = "xvm.as.teams_hp_changed"

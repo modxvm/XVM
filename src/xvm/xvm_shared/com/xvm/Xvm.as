@@ -36,6 +36,7 @@ package com.xvm
     BattleMacros;
     BattleState;
     PlayerStateEvent;
+    Xmqp;
     VOArenaInfo;
     VOCaptureBarData;
     VODamageInfo;
