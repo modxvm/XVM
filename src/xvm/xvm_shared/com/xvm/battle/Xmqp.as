@@ -54,8 +54,10 @@ package com.xvm.battle
         private static function onHolaEvent(accountDBID:Number, data:Object):void
         {
             var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
-                x_enabled: true,
-                x_sense_on: Boolean(data.sixthSense)
+                xmqpData: {
+                    x_enabled: true,
+                    x_sense_on: Boolean(data.sixthSense)
+                }
             });
             if (updated)
             {
@@ -68,7 +70,11 @@ package com.xvm.battle
 
         private static function onFireEvent(accountDBID:Number, data:Object):void
         {
-            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({ x_fire: data.enable });
+            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update( {
+                xmqpData: {
+                    x_fire: data.enable
+                }
+            });
             if (updated)
             {
                 BattleState.instance.invalidate(InvalidationType.STATE);
@@ -87,16 +93,32 @@ package com.xvm.battle
             switch (data.code)
             {
                 case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
-                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({ x_overturned: data.enable });
+                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
+                        xmqpData: {
+                            x_overturned: data.enable
+                        }
+                    });
                     break;
 
                 case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
-                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({ x_drowning: data.enable });
+                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
+                        xmqpData: {
+                            x_drowning: data.enable
+                        }
+                    });
                     break;
 
                 case Defines.VEHICLE_MISC_STATUS_ALL:
-                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({ x_overturned: data.enable });
-                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({ x_drowning: data.enable }) || updated;
+                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
+                        xmqpData: {
+                            x_overturned: data.enable
+                        }
+                    });
+                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
+                        xmqpData: {
+                            x_drowning: data.enable
+                        }
+                    }) || updated;
                     break;
 
                 default:
@@ -117,7 +139,11 @@ package com.xvm.battle
 
         private static function onSpottedEvent(accountDBID:Number):void
         {
-            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({ x_spotted: true });
+            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
+                xmqpData: {
+                    x_spotted: true
+                }
+            });
             if (updated)
             {
                 BattleState.instance.invalidate(InvalidationType.STATE);
@@ -133,7 +159,11 @@ package com.xvm.battle
         private static function onSpottedEventDone(accountDBID:Number):void
         {
             delete _sixSenseIndicatorTimeoutIds[accountDBID];
-            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({ x_spotted: false });
+            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
+                xmqpData: {
+                    x_spotted: false
+                }
+            });
             if (updated)
             {
                 BattleState.instance.invalidate(InvalidationType.STATE);

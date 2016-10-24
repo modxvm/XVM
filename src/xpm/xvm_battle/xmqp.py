@@ -6,15 +6,24 @@ __all__ = ['start', 'stop', 'call']
 
 import os
 import threading
+import simplejson
+import traceback
+import uuid
 
 import BigWorld
+from gui.shared import g_eventBus, events
 
+import pika
 from pika import exceptions as pika_exceptions
 
 from xfw import *
 
-import xvm_main.python.config as config
 from xvm_main.python.logger import *
+import xvm_main.python.config as config
+import xvm_main.python.minimap_circles as minimap_circles
+import xvm_main.python.utils as utils
+
+from consts import *
 
 
 XMQP_DEVELOPMENT = os.environ.get('XMQP_DEVELOPMENT') == '1'
@@ -70,22 +79,17 @@ def call(message):
     if _xmqp:
         _xmqp.call(message)
 
+def getCapabilitiesData():
+    capabilities = {}
+    mcdata = minimap_circles.getMinimapCirclesData()
+    if mcdata:
+        capabilities['sixthSense'] = mcdata.get('commander_sixthSense', None)
+    return capabilities
+
 players_capabilities = {}
 
+
 # PRIVATE
-
-import pika
-import simplejson
-import traceback
-import uuid
-
-from gui.shared import g_eventBus, events
-
-import xvm_main.python.minimap_circles as minimap_circles
-import xvm_main.python.utils as utils
-
-from consts import *
-
 
 class _XMQP(object):
     """This is an xmqp consumer that will handle unexpected interactions
@@ -202,7 +206,8 @@ class _XMQP(object):
                 if 'exchange' in response:
                     self._exchange_name = response['exchange']
                     global players_capabilities
-                    players_capabilities = response['users']
+                    for accountDBID, data in response['users'].iteritems():
+                        players_capabilities[accountDBID] = simplejson.loads(data) if data else {}
                     self.bind_channel()
                 else:
                     log("[XMQP] ERROR: response='{}'".format(body))
@@ -378,14 +383,10 @@ class _XMQP(object):
     def get_exchange_name(self):
         debug('[XMQP] Getting exchange name')
         self._exchange_correlation_id = str(uuid.uuid4())
-        capabilities = {}
-        mcdata = minimap_circles.getMinimapCirclesData()
-        if mcdata is not None:
-            capabilities['sixthSense'] = mcdata.get('commander_sixthSense', None)
         message = simplejson.dumps({
             'token': config.token.token,
             'players': self._players,
-            'capabilities': capabilities})
+            'capabilities': simplejson.dumps(getCapabilitiesData())})
         #debug(utils.hide_guid(message))
         self._channel.basic_publish(
             exchange=XVM.XMQP_LOBBY_EXCHANGE,
