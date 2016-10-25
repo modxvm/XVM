@@ -42,10 +42,7 @@ def onXmqpConnected(e):
         xmqp.call(data)
 
 def onBattleInit():
-    _sendCapabilities(TARGETS.BATTLE)
-
-def onVehicleMarkersInit():
-    _sendCapabilities(TARGETS.VMM)
+    _sendCapabilities()
 
 def onXmqpMessage(e):
     try:
@@ -65,7 +62,7 @@ def onXmqpMessage(e):
 
 def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 
-    log('_as_xmqp_event: {} => {}'.format(accountDBID, data))
+    #debug('_as_xmqp_event: {} => {}'.format(accountDBID, data))
 
     if xmqp.XMQP_DEVELOPMENT:
         if accountDBID == utils.getAccountDBID():
@@ -101,9 +98,12 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 
 # battle init
 
-def _sendCapabilities(targets):
+def _sendCapabilities():
     for accountDBID, data in xmqp.players_capabilities.iteritems():
-        _as_xmqp_event(accountDBID, {'event': EVENTS.XMQP_HOLA, 'capabilities': data}, targets)
+        if xmqp.XMQP_DEVELOPMENT:
+            if accountDBID == utils.getAccountDBID():
+                accountDBID = getCurrentAccountDBID()
+        _as_xmqp_event(accountDBID, {'event': EVENTS.XMQP_HOLA, 'capabilities': data})
 
 # "hola" xmqp event handler
 
@@ -122,11 +122,11 @@ def _onXmqpHola(accountDBID, data):
 # fire in vehicle:
 #   enable: True, False
 
-# TODO:0.9.16
-#@registerEvent(Battle, '_setFireInVehicle')
-def _Battle_setFireInVehicle(self, isFire):
+from gui.Scaleform.daapi.view.battle.shared.destroy_timers_panel import DestroyTimersPanel
+@registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__setFireInVehicle')
+def _DestroyTimersPanel__setFireInVehicle(self, isInFire):
     if xmqp.is_active():
-        xmqp.call({'event':EVENTS.XMQP_FIRE,'enable':isFire})
+        xmqp.call({'event':EVENTS.XMQP_FIRE,'enable':isInFire})
 
 # vehicle death timer
 #   code: drown, overturn, ALL
@@ -184,9 +184,10 @@ def _Battle_hideDeathzoneTimer(self, zoneID = None):
 
 # sixth sense indicator
 
-# TODO:0.9.16
-#@registerEvent(Battle, '_showSixthSenseIndicator')
-def _Battle_showSixthSenseIndicator(self, isShow):
+from gui.Scaleform.daapi.view.battle.shared.indicators import SixthSenseIndicator
+
+@registerEvent(SixthSenseIndicator, 'as_showS')
+def _SixthSenseIndicator_as_showS(self):
     if xmqp.is_active():
         xmqp.call({'event': EVENTS.XMQP_SPOTTED})
 

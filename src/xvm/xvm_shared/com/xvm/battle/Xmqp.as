@@ -7,6 +7,7 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.events.*;
+    import com.xvm.battle.vo.*;
     import flash.utils.*;
     import scaleform.clik.constants.*;
 
@@ -15,12 +16,11 @@ package com.xvm.battle
         public static function init():void
         {
             Xfw.addCommandListener(BattleCommands.AS_XMQP_EVENT, onXmqpEvent);
-            Xfw.cmd(BattleCommands.XMQP_INIT);
         }
 
         private static function onXmqpEvent(accountDBID:Number, eventName:String, data:Object):void
         {
-            Logger.add(eventName + " " + accountDBID + " " + JSONx.stringify(data));
+            //Logger.add(eventName + " " + accountDBID + " " + JSONx.stringify(data));
             switch (eventName)
             {
                 case XmqpEvent.XMQP_HOLA:
@@ -54,11 +54,11 @@ package com.xvm.battle
 
         private static function onHolaEvent(accountDBID:Number, data:Object):void
         {
-            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
-                xmqpData: {
-                    x_enabled: true,
-                    x_sense_on: Boolean(data.sixthSense)
-                }
+            //Logger.addObject(data, 3, String(accountDBID));
+            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
+            var updated:Boolean = playerState && playerState.updateXmqpData({
+                x_enabled: true,
+                x_sense_on: data.capabilities.sixthSense
             });
             if (updated)
             {
@@ -71,10 +71,9 @@ package com.xvm.battle
 
         private static function onFireEvent(accountDBID:Number, data:Object):void
         {
-            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update( {
-                xmqpData: {
-                    x_fire: data.enable
-                }
+            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
+            var updated:Boolean = playerState && playerState.updateXmqpData({
+                x_fire: data.enable
             });
             if (updated)
             {
@@ -90,35 +89,30 @@ package com.xvm.battle
         {
             // TODO
             /*
+            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
+            if (!playerState)
+                return;
             var updated:Boolean = false;
             switch (data.code)
             {
                 case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
-                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
-                        xmqpData: {
-                            x_overturned: data.enable
-                        }
+                    updated = playerState.updateXmqpData({
+                        x_overturned: data.enable
                     });
                     break;
 
                 case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
-                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
-                        xmqpData: {
-                            x_drowning: data.enable
-                        }
+                    updated = playerState.updateXmqpData({
+                        x_drowning: data.enable
                     });
                     break;
 
                 case Defines.VEHICLE_MISC_STATUS_ALL:
-                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
-                        xmqpData: {
-                            x_overturned: data.enable
-                        }
+                    updated = playerState.updateXmqpData({
+                        x_overturned: data.enable
                     });
-                    updated = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
-                        xmqpData: {
-                            x_drowning: data.enable
-                        }
+                    updated = playerState.updateXmqpData({
+                        x_drowning: data.enable
                     }) || updated;
                     break;
 
@@ -140,10 +134,9 @@ package com.xvm.battle
 
         private static function onSpottedEvent(accountDBID:Number):void
         {
-            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
-                xmqpData: {
-                    x_spotted: true
-                }
+            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
+            var updated:Boolean = playerState && playerState.updateXmqpData({
+                x_spotted: true
             });
             if (updated)
             {
@@ -160,10 +153,9 @@ package com.xvm.battle
         private static function onSpottedEventDone(accountDBID:Number):void
         {
             delete _sixSenseIndicatorTimeoutIds[accountDBID];
-            var updated:Boolean = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID)).update({
-                xmqpData: {
-                    x_spotted: false
-                }
+            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
+            var updated:Boolean = playerState && playerState.updateXmqpData({
+                x_spotted: false
             });
             if (updated)
             {

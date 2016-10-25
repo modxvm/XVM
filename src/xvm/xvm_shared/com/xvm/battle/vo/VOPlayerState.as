@@ -410,6 +410,16 @@ package com.xvm.battle.vo
             return updated;
         }
 
+        public function updateXmqpData(data:Object):Boolean
+        {
+            var updated:Boolean = _xmqpData.update(data);
+            if (updated)
+            {
+                eventsToDispatch[PlayerStateEvent.CHANGED] = true;
+            }
+            return updated;
+        }
+
         private function _updateValue(name:String, value:*):Boolean
         {
             if (this[name] !== undefined && this[name] != value)
