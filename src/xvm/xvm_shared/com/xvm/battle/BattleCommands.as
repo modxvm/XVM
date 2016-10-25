@@ -7,6 +7,7 @@ package com.xvm.battle
     public class BattleCommands
     {
         public static const REQUEST_BATTLE_GLOBAL_DATA:String = "xvm_battle.request_battle_global_data";
+        public static const XMQP_INIT:String = "xvm_battle.xmqp_init";
         public static const BATTLE_CTRL_SET_VEHICLE_DATA:String = "xvm_battle.battle_ctrl_set_vehicle_data";
         public static const CAPTURE_BAR_GET_BASE_NUM_TEXT:String = "xvm_battle.capture_bar_get_base_num_text";
         public static const SET_MINIMAP_MAX_SIZE_INDEX:String = "xvm_battle.set_minimap_max_size_index";

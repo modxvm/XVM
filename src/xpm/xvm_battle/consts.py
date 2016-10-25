@@ -7,6 +7,7 @@
 
 class XVM_BATTLE_COMMAND(object):
     REQUEST_BATTLE_GLOBAL_DATA = "xvm_battle.request_battle_global_data"
+    XMQP_INIT = "xvm_battle.xmqp_init"
     BATTLE_CTRL_SET_VEHICLE_DATA = "xvm_battle.battle_ctrl_set_vehicle_data"
     CAPTURE_BAR_GET_BASE_NUM_TEXT = "xvm_battle.capture_bar_get_base_num_text"
     SET_MINIMAP_MAX_SIZE_INDEX = "xvm_battle.set_minimap_max_size_index"

@@ -28,6 +28,7 @@ import xvm_main.python.vehinfo as vehinfo
 
 from consts import *
 import shared
+import xmqp_events
 
 
 #####################################################################
@@ -176,6 +177,9 @@ class VehicleMarkers(object):
                 self.respondConfig()
             elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.respondGlobalBattleData()
+            elif cmd == XVM_BATTLE_COMMAND.XMQP_INIT:
+                xmqp_events.onVehicleMarkersInit()
+                return (None, True)
             elif cmd == XVM_COMMAND.PYTHON_MACRO:
                 self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, python_macro.process_python_macro(args[0]))
             elif cmd == XVM_COMMAND.GET_CLAN_ICON:

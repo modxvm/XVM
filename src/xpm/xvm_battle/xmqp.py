@@ -23,6 +23,7 @@ import xvm_main.python.config as config
 import xvm_main.python.minimap_circles as minimap_circles
 import xvm_main.python.utils as utils
 
+from xvm_main.python.consts import *
 from consts import *
 
 
@@ -37,13 +38,12 @@ def is_active():
 
 def start():
     BigWorld.player().arena.onNewVehicleListReceived -= start
-    return # TODO
     if isReplay() and XMQP_DEVELOPMENT:
         config.token = config.XvmServicesToken.restore()
     if config.networkServicesSettings.xmqp or (isReplay() and XMQP_DEVELOPMENT):
         if not isReplay() or XMQP_DEVELOPMENT:
             token = config.token.token
-            if token is not None and token != '':
+            if token:
                 players = []
                 player = BigWorld.player()
                 player_team = player.team if hasattr(player, 'team') else 0
@@ -56,9 +56,8 @@ def start():
                     if accountDBID not in players:
                         players.append(accountDBID)
                 # start
+                stop()
                 global _xmqp_thread, _xmqp
-                if _xmqp:
-                    stop()
                 _xmqp = _XMQP(players)
                 _xmqp_thread = threading.Thread(target=_xmqp.start, name='xmqp')
                 _xmqp_thread.setDaemon(True)
@@ -84,6 +83,7 @@ def getCapabilitiesData():
     mcdata = minimap_circles.getMinimapCirclesData()
     if mcdata:
         capabilities['sixthSense'] = mcdata.get('commander_sixthSense', None)
+    capabilities['sixthSense'] = True # for debug
     return capabilities
 
 players_capabilities = {}
@@ -216,7 +216,7 @@ class _XMQP(object):
             #elif basic_deliver.exchange:
                 #debug('[XMQP] recv: {} {}'.format(properties.headers.get('userId', None), body))
                 response = simplejson.loads(body)
-                g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_MESSAGE, response))
+                g_eventBus.handleEvent(events.HasCtxEvent(XVM_BATTLE_EVENT.XMQP_MESSAGE, response))
         except Exception as ex:
             err(traceback.format_exc())
 

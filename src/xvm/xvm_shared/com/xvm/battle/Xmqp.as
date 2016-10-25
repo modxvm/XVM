@@ -15,6 +15,7 @@ package com.xvm.battle
         public static function init():void
         {
             Xfw.addCommandListener(BattleCommands.AS_XMQP_EVENT, onXmqpEvent);
+            Xfw.cmd(BattleCommands.XMQP_INIT);
         }
 
         private static function onXmqpEvent(accountDBID:Number, eventName:String, data:Object):void

@@ -14,6 +14,7 @@ import xvm_main.python.config as config
 from xvm_main.python.logger import *
 import xvm_main.python.utils as utils
 
+from consts import *
 import xmqp
 from vehicleMarkers import g_markers
 
@@ -34,14 +35,17 @@ class TARGETS(object):
 
 
 def onXmqpConnected(e):
+    #debug('onXmqpConnected')
+    # send "hola" broadcast
     data = {'event': EVENTS.XMQP_HOLA, 'capabilities': xmqp.getCapabilitiesData()}
     if xmqp.is_active():
         xmqp.call(data)
-    _onXmqpHola(getCurrentAccountDBID(), data)
 
-def onStateBattle():
-    for accountDBID, data in xmqp.players_capabilities.iteritems():
-        _as_xmqp_event(accountDBID, {'event': EVENTS.XMQP_HOLA, 'capabilities': data})
+def onBattleInit():
+    _sendCapabilities(TARGETS.BATTLE)
+
+def onVehicleMarkersInit():
+    _sendCapabilities(TARGETS.VMM)
 
 def onXmqpMessage(e):
     try:
@@ -60,6 +64,9 @@ def onXmqpMessage(e):
 # XMQP default event handler
 
 def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
+
+    log('_as_xmqp_event: {} => {}'.format(accountDBID, data))
+
     if xmqp.XMQP_DEVELOPMENT:
         if accountDBID == utils.getAccountDBID():
             accountDBID = getCurrentAccountDBID()
@@ -92,6 +99,11 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
         if g_markers.active:
             g_markers.call(XVM_BATTLE_COMMAND.AS_XMQP_EVENT, accountDBID, event, data)
 
+# battle init
+
+def _sendCapabilities(targets):
+    for accountDBID, data in xmqp.players_capabilities.iteritems():
+        _as_xmqp_event(accountDBID, {'event': EVENTS.XMQP_HOLA, 'capabilities': data}, targets)
 
 # "hola" xmqp event handler
 

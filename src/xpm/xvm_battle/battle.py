@@ -42,18 +42,17 @@ import xmqp_events
 # initialization/finalization
 
 def start():
-    g_appLoader.onGUISpaceEntered += onGUISpaceEntered
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
     g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
     g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
-    g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
-    g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
 BigWorld.callback(0, start)
 
+g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
+g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
+
 @registerEvent(game, 'fini')
 def fini():
-    g_appLoader.onGUISpaceEntered -= onGUISpaceEntered
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
     g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
     g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
@@ -63,11 +62,6 @@ def fini():
 
 #####################################################################
 # handlers
-
-def onGUISpaceEntered(spaceID):
-    if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
-        xmqp_events.onStateBattle()
-
 
 # PRE-BATTLE
 
@@ -367,6 +361,10 @@ class Battle(object):
             if cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.xvm_battle_swf_initialized = True
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
+                return (None, True)
+
+            elif cmd == XVM_BATTLE_COMMAND.XMQP_INIT:
+                xmqp_events.onBattleInit()
                 return (None, True)
 
             elif cmd == XVM_BATTLE_COMMAND.BATTLE_CTRL_SET_VEHICLE_DATA:
