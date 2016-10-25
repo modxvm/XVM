@@ -83,7 +83,7 @@ def getCapabilitiesData():
     mcdata = minimap_circles.getMinimapCirclesData()
     if mcdata:
         capabilities['sixthSense'] = mcdata.get('commander_sixthSense', None)
-    capabilities['sixthSense'] = True # for debug
+    #capabilities['sixthSense'] = True # for debug
     return capabilities
 
 players_capabilities = {}
