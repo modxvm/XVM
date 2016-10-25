@@ -38,6 +38,9 @@ def is_active():
 
 def start():
     BigWorld.player().arena.onNewVehicleListReceived -= start
+    BigWorld.callback(0, _start)
+
+def _start():
     if isReplay() and XMQP_DEVELOPMENT:
         config.token = config.XvmServicesToken.restore()
     if config.networkServicesSettings.xmqp or (isReplay() and XMQP_DEVELOPMENT):
@@ -46,15 +49,16 @@ def start():
             if token:
                 players = []
                 player = BigWorld.player()
-                player_team = player.team if hasattr(player, 'team') else 0
                 for (vehicleID, vData) in player.arena.vehicles.iteritems():
                     # ally team only
-                    if vData['team'] == player_team:
+                    if vData['team'] == player.team:
                         players.append(vData['accountDBID'])
                 if XMQP_DEVELOPMENT:
                     accountDBID = utils.getAccountDBID()
                     if accountDBID not in players:
                         players.append(accountDBID)
+                    players.append(42)
+                    players.append(43)
                 # start
                 stop()
                 global _xmqp_thread, _xmqp
@@ -387,7 +391,7 @@ class _XMQP(object):
             'token': config.token.token,
             'players': self._players,
             'capabilities': simplejson.dumps(getCapabilitiesData())})
-        #debug(utils.hide_guid(message))
+        debug(utils.hide_guid(message))
         self._channel.basic_publish(
             exchange=XVM.XMQP_LOBBY_EXCHANGE,
             routing_key=XVM.XMQP_LOBBY_ROUTING_KEY,
