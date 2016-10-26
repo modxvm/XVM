@@ -82,7 +82,7 @@ package com.xvm.vehiclemarkers.ui
             {
                 this.playerName = pName;
                 this.maxHealth = maxHealth;
-                vehicleID = BattleState.getVehicleID(playerName);
+                vehicleID = BattleState.getVehicleIDByPlayerName(playerName);
                 if (!isNaN(vehicleID))
                 {
                     init(vehicleID);

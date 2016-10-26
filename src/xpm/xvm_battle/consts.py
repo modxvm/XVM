@@ -7,12 +7,14 @@
 
 class XVM_BATTLE_COMMAND(object):
     REQUEST_BATTLE_GLOBAL_DATA = "xvm_battle.request_battle_global_data"
+    XMQP_INIT = "xvm_battle.xmqp_init"
     BATTLE_CTRL_SET_VEHICLE_DATA = "xvm_battle.battle_ctrl_set_vehicle_data"
     CAPTURE_BAR_GET_BASE_NUM_TEXT = "xvm_battle.capture_bar_get_base_num_text"
     SET_MINIMAP_MAX_SIZE_INDEX = "xvm_battle.set_minimap_max_size_index"
     MINIMAP_CLICK = "xvm_battle.minimap_click"
 
     AS_RESPONSE_BATTLE_GLOBAL_DATA = "xvm.as.response_battle_global_data"
+    AS_XMQP_EVENT = "xvm.as.as_xmqp_event"
     AS_UPDATE_PLAYER_STATE = "xvm.as.update_player_state"
     AS_UPDATE_DEVICE_STATE = "xvm.as.update_device_state"
     AS_TEAMS_HP_CHANGED = "xvm.as.teams_hp_changed"
@@ -34,6 +36,8 @@ class XVM_VM_COMMAND(object):
 
 class XVM_BATTLE_EVENT(object):
     ARENA_INFO_INVALIDATED = "arena_info_invalidated"
+    XMQP_CONNECTED = 'xvm_battle.xmqp_connected'
+    XMQP_MESSAGE = 'xvm_battle.xmqp_message'
 
 # Invalidation targets
 

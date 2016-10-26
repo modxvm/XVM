@@ -50,7 +50,6 @@ import filecache
 import svcmsg
 import utils
 from xvm import g_xvm
-import xmqp_events
 
 
 #####################################################################
@@ -67,8 +66,6 @@ def start():
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
     g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, g_xvm.onAppInitialized)
     g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, g_xvm.onAppDestroyed)
-    g_eventBus.addListener(XVM_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
-    g_eventBus.addListener(XVM_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
     # config already loaded, just send event to apply required code
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED, {'fromInitStage':True}))
@@ -87,8 +84,6 @@ def fini():
     g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
     g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, g_xvm.onAppInitialized)
     g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, g_xvm.onAppDestroyed)
-    g_eventBus.removeListener(XVM_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
-    g_eventBus.removeListener(XVM_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
     filecache.fin()
 

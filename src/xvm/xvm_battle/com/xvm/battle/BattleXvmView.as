@@ -160,6 +160,7 @@ package com.xvm.battle
                 super.onConfigLoaded(e);
                 hotkeys_cfg = Config.config.hotkeys;
                 Xfw.cmd(BattleCommands.BATTLE_CTRL_SET_VEHICLE_DATA);
+                Xfw.cmd(BattleCommands.XMQP_INIT);
                 battlePage.updateStage(App.appWidth, App.appHeight);
             }
             catch (ex:Error)

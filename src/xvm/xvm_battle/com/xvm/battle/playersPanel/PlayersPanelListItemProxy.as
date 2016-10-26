@@ -148,7 +148,7 @@ package com.xvm.battle.playersPanel
         public function setPlayerNameProps(userProps:IUserProps):void
         {
             _userProps = userProps;
-            _vehicleID = BattleState.getVehicleID(_userProps.userName);
+            _vehicleID = BattleState.getVehicleIDByPlayerName(_userProps.userName);
             invalidate(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE);
         }
 

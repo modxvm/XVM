@@ -6,8 +6,26 @@ __all__ = ['start', 'stop', 'call']
 
 import os
 import threading
+import simplejson
+import traceback
+import uuid
 
+import BigWorld
+from gui.shared import g_eventBus, events
+
+import pika
 from pika import exceptions as pika_exceptions
+
+from xfw import *
+
+from xvm_main.python.logger import *
+import xvm_main.python.config as config
+import xvm_main.python.minimap_circles as minimap_circles
+import xvm_main.python.utils as utils
+
+from xvm_main.python.consts import *
+from consts import *
+
 
 XMQP_DEVELOPMENT = os.environ.get('XMQP_DEVELOPMENT') == '1'
 
@@ -18,15 +36,37 @@ def is_active():
     global _xmqp_thread, _xmqp
     return _xmqp_thread and _xmqp.is_consuming
 
-def start(players):
-    global _xmqp_thread, _xmqp
-    if _xmqp:
-        stop()
-    _xmqp = _XMQP(players)
-    _xmqp_thread = threading.Thread(target=_xmqp.start, name='xmqp')
-    _xmqp_thread.setDaemon(True)
-    _xmqp_thread.start()
-    debug('[XMQP] Thread started')
+def start():
+    BigWorld.player().arena.onNewVehicleListReceived -= start
+    BigWorld.callback(0, _start)
+
+def _start():
+    if isReplay() and XMQP_DEVELOPMENT:
+        config.token = config.XvmServicesToken.restore()
+    if config.networkServicesSettings.xmqp or (isReplay() and XMQP_DEVELOPMENT):
+        if not isReplay() or XMQP_DEVELOPMENT:
+            token = config.token.token
+            if token:
+                players = []
+                player = BigWorld.player()
+                for (vehicleID, vData) in player.arena.vehicles.iteritems():
+                    # ally team only
+                    if vData['team'] == player.team:
+                        players.append(vData['accountDBID'])
+                if XMQP_DEVELOPMENT:
+                    accountDBID = utils.getAccountDBID()
+                    if accountDBID not in players:
+                        players.append(accountDBID)
+                    players.append(42)
+                    players.append(43)
+                # start
+                stop()
+                global _xmqp_thread, _xmqp
+                _xmqp = _XMQP(players)
+                _xmqp_thread = threading.Thread(target=_xmqp.start, name='xmqp')
+                _xmqp_thread.setDaemon(True)
+                _xmqp_thread.start()
+                debug('[XMQP] Thread started')
 
 def stop():
     global _xmqp_thread, _xmqp
@@ -42,23 +82,18 @@ def call(message):
     if _xmqp:
         _xmqp.call(message)
 
+def getCapabilitiesData():
+    capabilities = {}
+    mcdata = minimap_circles.getMinimapCirclesData()
+    if mcdata:
+        capabilities['sixthSense'] = mcdata.get('commander_sixthSense', None)
+    #capabilities['sixthSense'] = True # for debug
+    return capabilities
+
+players_capabilities = {}
+
 
 # PRIVATE
-
-import pika
-import simplejson
-import traceback
-import uuid
-
-from gui.shared import g_eventBus, events
-
-from xfw import *
-
-import config
-from consts import *
-from logger import *
-import utils
-
 
 class _XMQP(object):
     """This is an xmqp consumer that will handle unexpected interactions
@@ -174,7 +209,9 @@ class _XMQP(object):
                 response = simplejson.loads(body)
                 if 'exchange' in response:
                     self._exchange_name = response['exchange']
-                    #TODO: read players and params
+                    global players_capabilities
+                    for accountDBID, data in response['users'].iteritems():
+                        players_capabilities[accountDBID] = simplejson.loads(data) if data else {}
                     self.bind_channel()
                 else:
                     log("[XMQP] ERROR: response='{}'".format(body))
@@ -183,7 +220,7 @@ class _XMQP(object):
             #elif basic_deliver.exchange:
                 #debug('[XMQP] recv: {} {}'.format(properties.headers.get('userId', None), body))
                 response = simplejson.loads(body)
-                g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_MESSAGE, response))
+                g_eventBus.handleEvent(events.HasCtxEvent(XVM_BATTLE_EVENT.XMQP_MESSAGE, response))
         except Exception as ex:
             err(traceback.format_exc())
 
@@ -352,8 +389,9 @@ class _XMQP(object):
         self._exchange_correlation_id = str(uuid.uuid4())
         message = simplejson.dumps({
             'token': config.token.token,
-            'players': self._players})
-        #debug(utils.hide_guid(message))
+            'players': self._players,
+            'capabilities': simplejson.dumps(getCapabilitiesData())})
+        debug(utils.hide_guid(message))
         self._channel.basic_publish(
             exchange=XVM.XMQP_LOBBY_EXCHANGE,
             routing_key=XVM.XMQP_LOBBY_ROUTING_KEY,
@@ -378,7 +416,7 @@ class _XMQP(object):
         """
         debug('[XMQP] Queue bound')
         self._reconnect_attempts = 0
-        g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XMQP_CONNECTED))
+        g_eventBus.handleEvent(events.HasCtxEvent(XVM_BATTLE_EVENT.XMQP_CONNECTED))
 
 
     # service methods

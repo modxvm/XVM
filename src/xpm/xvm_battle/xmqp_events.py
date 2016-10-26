@@ -1,5 +1,24 @@
 """ XVM (c) www.modxvm.com 2013-2016 """
 
+import traceback
+import simplejson
+
+from gui.shared import g_eventBus, events
+from gui.app_loader import g_appLoader
+from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
+from gui.battle_control import g_sessionProvider
+
+from xfw import *
+
+import xvm_main.python.config as config
+from xvm_main.python.logger import *
+import xvm_main.python.utils as utils
+
+from consts import *
+import xmqp
+from vehicleMarkers import g_markers
+
+
 class EVENTS(object):
     XMQP_HOLA = 'xmqp_hola'
     XMQP_FIRE = 'xmqp_fire'
@@ -14,31 +33,16 @@ class TARGETS(object):
     VMM    = 0x02
     ALL    = 0xFF
 
-import traceback
-import simplejson
-
-from gui.shared import g_eventBus, events
-from gui.app_loader import g_appLoader
-from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
-from gui.battle_control import g_sessionProvider
-
-from xfw import *
-
-from logger import *
-import config
-import minimap_circles
-import utils
-import xmqp
 
 def onXmqpConnected(e):
-    global _players_xmqp_status
-    _players_xmqp_status = {}
-    _send_xmqp_hola()
+    #debug('onXmqpConnected')
+    # send "hola" broadcast
+    data = {'event': EVENTS.XMQP_HOLA, 'capabilities': xmqp.getCapabilitiesData()}
+    if xmqp.is_active():
+        xmqp.call(data)
 
-def onStateBattle():
-    global _players_xmqp_status
-    for accountDBID, data in _players_xmqp_status.iteritems():
-        _as_xmqp_event(accountDBID, data)
+def onBattleInit():
+    _sendCapabilities()
 
 def onXmqpMessage(e):
     try:
@@ -56,18 +60,18 @@ def onXmqpMessage(e):
 
 # XMQP default event handler
 
-_event_handlers = {}
-
 def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
+
+    #debug('_as_xmqp_event: {} => {}'.format(accountDBID, data))
 
     if xmqp.XMQP_DEVELOPMENT:
         if accountDBID == utils.getAccountDBID():
             accountDBID = getCurrentAccountDBID()
 
-    arenaDP = g_sessionProvider.getArenaDP()
-    vehicleID = arenaDP.getVehIDByAccDBID(accountDBID)
-    if not vehicleID:
-        return
+    #arenaDP = g_sessionProvider.getArenaDP()
+    #vehicleID = arenaDP.getVehIDByAccDBID(accountDBID)
+    #if not vehicleID:
+    #    return
 
     battle = getBattleApp()
     if not battle:
@@ -78,7 +82,7 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
         return
 
     if 'event' not in data:
-        warn('[XMQP] no event in data: %s' % str(data))
+        warn('[XMQP] no "event" field in data: %s' % str(data))
         return
 
     event = data['event']
@@ -86,64 +90,43 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
     data = None if not data else unicode_to_ascii(data)
 
     if targets & TARGETS.BATTLE:
-        movie = battle.movie
-        if movie is not None:
-            movie.as_xvm_onXmqpEvent(accountDBID, event, data)
+        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_XMQP_EVENT, accountDBID, event, data)
 
     if targets & TARGETS.VMM:
-        markersManager = battle.markersManager
-        marker = markersManager._MarkersManager__markers.get(vehicleID, None)
-        if marker is None:
-            if not xmqp.XMQP_DEVELOPMENT:
-                return
-            marker = markersManager._MarkersManager__markers.itervalues().next()
-        if marker is not None:
-            jdata = None if data is None else simplejson.dumps(data)
-            markersManager.invokeMarker(marker.id, 'as_xvm_onXmqpEvent', [event, jdata])
+        if g_markers.active:
+            g_markers.call(XVM_BATTLE_COMMAND.AS_XMQP_EVENT, accountDBID, event, data)
 
+# battle init
 
-# WG events hooks
+def _sendCapabilities():
+    for accountDBID, data in xmqp.players_capabilities.iteritems():
+        if xmqp.XMQP_DEVELOPMENT:
+            if accountDBID == utils.getAccountDBID():
+                accountDBID = getCurrentAccountDBID()
+        _as_xmqp_event(accountDBID, {'event': EVENTS.XMQP_HOLA, 'capabilities': data})
 
-_players_xmqp_status = {}
-
-def _send_xmqp_hola():
-    mcdata = minimap_circles.getMinimapCirclesData()
-    if mcdata is None:
-        mcdata = {}
-    data = {'event': EVENTS.XMQP_HOLA,
-            'sixthSense': mcdata.get('commander_sixthSense', None)}
-    if xmqp.is_active():
-        xmqp.call(data)
-
-    global _players_xmqp_status
-    accountDBID = getCurrentAccountDBID()
-    if accountDBID not in _players_xmqp_status:
-        _players_xmqp_status[accountDBID] = data
+# "hola" xmqp event handler
 
 def _onXmqpHola(accountDBID, data):
     if xmqp.XMQP_DEVELOPMENT:
         if accountDBID == utils.getAccountDBID():
             accountDBID = getCurrentAccountDBID()
     #debug('_onXmqpHola: {} {}'.format(accountDBID, data))
-    #if accountDBID not in _players_xmqp_status:
-    #    _players_xmqp_status[accountDBID] = data
-    #    _send_xmqp_hola()
-    #    _as_xmqp_event(accountDBID, data)
+    if accountDBID not in xmqp.players_capabilities:
+        xmqp.players_capabilities[accountDBID] = data['capabilities']
+        _as_xmqp_event(accountDBID, data)
 
-_event_handlers[EVENTS.XMQP_HOLA] = _onXmqpHola
 
+# WG events hooks
 
 # fire in vehicle:
 #   enable: True, False
 
-# TODO:0.9.16
-#@registerEvent(Battle, '_setFireInVehicle')
-def _Battle_setFireInVehicle(self, isFire):
+from gui.Scaleform.daapi.view.battle.shared.destroy_timers_panel import DestroyTimersPanel
+@registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__setFireInVehicle')
+def _DestroyTimersPanel__setFireInVehicle(self, isInFire):
     if xmqp.is_active():
-        xmqp.call({'event':EVENTS.XMQP_FIRE,'enable':isFire})
-
-_event_handlers[EVENTS.XMQP_FIRE] = _as_xmqp_event
-
+        xmqp.call({'event':EVENTS.XMQP_FIRE,'enable':isInFire})
 
 # vehicle death timer
 #   code: drown, overturn, ALL
@@ -172,9 +155,6 @@ def _Battle_hideVehicleTimer(self, code = None):
             'enable':False,
             'code':code})
 
-_event_handlers[EVENTS.XMQP_VEHICLE_TIMER] = _as_xmqp_event
-
-
 # death zone timers
 #   zoneID: death_zone, gas_attack, ALL
 #   enable: True, False
@@ -202,19 +182,14 @@ def _Battle_hideDeathzoneTimer(self, zoneID = None):
             'enable':False,
             'zoneID':zoneID})
 
-_event_handlers[EVENTS.XMQP_DEATH_ZONE_TIMER] = _as_xmqp_event
-
-
 # sixth sense indicator
 
-# TODO:0.9.16
-#@registerEvent(Battle, '_showSixthSenseIndicator')
-def _Battle_showSixthSenseIndicator(self, isShow):
+from gui.Scaleform.daapi.view.battle.shared.indicators import SixthSenseIndicator
+
+@registerEvent(SixthSenseIndicator, 'as_showS')
+def _SixthSenseIndicator_as_showS(self):
     if xmqp.is_active():
         xmqp.call({'event': EVENTS.XMQP_SPOTTED})
-
-_event_handlers[EVENTS.XMQP_SPOTTED] = _as_xmqp_event
-
 
 # minimap click
 
@@ -228,5 +203,13 @@ def send_minimap_click(path):
             'path': path,
             'color': config.networkServicesSettings.x_minimap_clicks_color})
 
-_event_handlers[EVENTS.XMQP_MINIMAP_CLICK] = lambda id, data: \
-    _as_xmqp_event(id, data, targets=TARGETS.BATTLE)
+
+# register event handlers
+
+_event_handlers = {
+    EVENTS.XMQP_HOLA: _onXmqpHola,
+    EVENTS.XMQP_FIRE: _as_xmqp_event,
+    EVENTS.XMQP_VEHICLE_TIMER: _as_xmqp_event,
+    EVENTS.XMQP_DEATH_ZONE_TIMER: _as_xmqp_event,
+    EVENTS.XMQP_SPOTTED: _as_xmqp_event,
+    EVENTS.XMQP_MINIMAP_CLICK: lambda id, data: _as_xmqp_event(id, data, targets=TARGETS.BATTLE)}

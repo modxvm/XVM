@@ -72,11 +72,13 @@ package com.xvm.battle.vo
 
         // private
         private var playerNameToVehicleIDMap:Dictionary;
+        private var accountDBIDToVehicleIDMap:Dictionary;
 
         public function VOPlayersData()
         {
             playerStates = new Dictionary();
             playerNameToVehicleIDMap = new Dictionary();
+            accountDBIDToVehicleIDMap = new Dictionary();
         }
 
         public function get(vehicleID:Number):VOPlayerState
@@ -84,9 +86,14 @@ package com.xvm.battle.vo
             return isNaN(vehicleID) ? null : playerStates[vehicleID];
         }
 
-        public function getVehicleID(playerName:String):Number
+        public function getVehicleIDByPlayerName(playerName:String):Number
         {
             return playerName ? playerNameToVehicleIDMap[playerName] : NaN;
+        }
+
+        public function getVehicleIDByAccountDBID(accountDBID:Number):Number
+        {
+            return !isNaN(accountDBID) ? accountDBIDToVehicleIDMap[accountDBID] : NaN;
         }
 
         public function updateVehiclesData(data:Object):void
@@ -233,6 +240,7 @@ package com.xvm.battle.vo
                 });
                 playerStates[value.vehicleID] = playerState;
                 playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                accountDBIDToVehicleIDMap[value.accountDBID] = value.vehicleID;
                 _addedStates.push(playerState);
             }
             else

@@ -56,6 +56,11 @@
       ${"../default/playersPanel.xc":"def.clanIcon"},
       { "$ref": { "file":"../default/playersPanel.xc", "path":"def.xvmUserMarker" }, "enabled": true },
       ${"../default/playersPanel.xc":"def.xmqpServiceMarker"},
+      //{ "$ref": { "file":"../default/playersPanel.xc", "path":"def.xmqpServiceMarker" },
+      //  "x":100,
+      //  "textFormat": { "font": "$FieldFont" },
+      //  "format": "e:{{x-enabled?1|0}} 6:{{x-sense-on?1|0}} s:{{x-spotted?1|0}} f:{{x-fire?1|0}} o:{{x-overturned?1|0}} d:{{x-drowning?1|0}}"
+      //},
       //{ "x": -20, "y": 6.7, "bindToIcon": true, "src": "xvm://res/icons/flags/{{flag|default}}.png" },
       {}
     ],
