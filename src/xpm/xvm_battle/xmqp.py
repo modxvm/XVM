@@ -180,7 +180,6 @@ class _XMQP(object):
                 #    reply_to=self._queue_name,
                 #    correlation_id=self._correlation_id),
                 body=message)
-            debug('[XMQP] basic_publish done')
 
     # INTERNAL
 
@@ -201,7 +200,8 @@ class _XMQP(object):
         if self._closing:
             return
         try:
-            debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
+            #debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
+            debug('[XMQP] recv: %s' % body)
             #debug(basic_deliver)
             #if body != 'ok':
             #    debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
@@ -400,7 +400,6 @@ class _XMQP(object):
                 correlation_id=self._exchange_correlation_id,
             ),
             body=message)
-        debug('[XMQP] basic_publish done')
 
     def bind_channel(self):
         debug('[XMQP] Binding %s to %s' % (self._exchange_name, self._queue_name))

@@ -1,4 +1,5 @@
 XVM-6.4.8-dev:
+  * xmqp enabled
 
 XVM-6.4.7.1:
   * fixed "crewMaxPerksCount" option
@@ -42,7 +43,7 @@ XVM-6.4.7:
   * fixed "minimapDeadSwitch" option
   * added global macros:
       {{my-clan}} - my clan
-  
+
 XVM-6.4.6.2:
   * fixed initial minimap size restoring
 

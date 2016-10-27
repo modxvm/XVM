@@ -874,10 +874,6 @@ package com.xvm.battle.playersPanel
 
         GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Events.XMQP_HOLA, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Events.XMQP_FIRE, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Events.XMQP_VEHICLE_TIMER, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Events.XMQP_SPOTTED, this, invalidate);
         GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
 
     private static function createMouseHandler(extraPanels:MovieClip):Void

@@ -26,20 +26,20 @@ package com.xvm.battle
                 case XmqpEvent.XMQP_HOLA:
                     onHolaEvent(accountDBID, data);
                     break;
+                case XmqpEvent.XMQP_SPOTTED:
+                    onSpottedEvent(accountDBID);
+                    break;
                 case XmqpEvent.XMQP_FIRE:
                     onFireEvent(accountDBID, data);
                     break;
                 case XmqpEvent.XMQP_VEHICLE_TIMER:
                     onVehicleTimerEvent(accountDBID, data);
                     break;
-                case XmqpEvent.XMQP_SPOTTED:
-                    onSpottedEvent(accountDBID);
+                case XmqpEvent.XMQP_DEATH_ZONE_TIMER:
+                    onDeathZoneTimerEvent(accountDBID, data);
                     break;
                 case XmqpEvent.XMQP_MINIMAP_CLICK:
                     Xvm.dispatchEvent(new XmqpEvent(eventName, accountDBID, data));
-                    break;
-                case XmqpEvent.XMQP_DEATH_ZONE_TIMER:
-                    onDeathZoneTimerEvent(accountDBID, data);
                     break;
                 default:
                     Logger.add("WARNING: unknown xmqp event: " + eventName);
@@ -65,67 +65,6 @@ package com.xvm.battle
                 BattleState.instance.invalidate(InvalidationType.STATE);
                 Xvm.dispatchEvent(new XmqpEvent(XmqpEvent.XMQP_HOLA, accountDBID));
             }
-        }
-
-        // {{x-fire}}
-
-        private static function onFireEvent(accountDBID:Number, data:Object):void
-        {
-            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
-            var updated:Boolean = playerState && playerState.updateXmqpData({
-                x_fire: data.enable
-            });
-            if (updated)
-            {
-                BattleState.instance.invalidate(InvalidationType.STATE);
-                Xvm.dispatchEvent(new XmqpEvent(XmqpEvent.XMQP_FIRE, accountDBID));
-            }
-        }
-
-        // {{x-overturned}}
-        // {{x-drowning}}
-
-        private static function onVehicleTimerEvent(accountDBID:Number, data:Object):void
-        {
-            // TODO
-            /*
-            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
-            if (!playerState)
-                return;
-            var updated:Boolean = false;
-            switch (data.code)
-            {
-                case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
-                    updated = playerState.updateXmqpData({
-                        x_overturned: data.enable
-                    });
-                    break;
-
-                case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
-                    updated = playerState.updateXmqpData({
-                        x_drowning: data.enable
-                    });
-                    break;
-
-                case Defines.VEHICLE_MISC_STATUS_ALL:
-                    updated = playerState.updateXmqpData({
-                        x_overturned: data.enable
-                    });
-                    updated = playerState.updateXmqpData({
-                        x_drowning: data.enable
-                    }) || updated;
-                    break;
-
-                default:
-                    Logger.add("WARNING: unknown vehicle timer code: " + data.code);
-            }
-
-            if (updated)
-            {
-                BattleState.instance.invalidate(InvalidationType.STATE);
-                Xvm.dispatchEvent(new XmqpEvent(XmqpEvent.XMQP_VEHICLE_TIMER, accountDBID));
-            }
-            */
         }
 
         // {{x-spotted}}
@@ -161,6 +100,64 @@ package com.xvm.battle
             {
                 BattleState.instance.invalidate(InvalidationType.STATE);
                 Xvm.dispatchEvent(new XmqpEvent(XmqpEvent.XMQP_SPOTTED, accountDBID));
+            }
+        }
+
+        // {{x-fire}}
+
+        private static function onFireEvent(accountDBID:Number, data:Object):void
+        {
+            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
+            var updated:Boolean = playerState && playerState.updateXmqpData({
+                x_fire: data.enable
+            });
+            if (updated)
+            {
+                BattleState.instance.invalidate(InvalidationType.STATE);
+                Xvm.dispatchEvent(new XmqpEvent(XmqpEvent.XMQP_FIRE, accountDBID));
+            }
+        }
+
+        // {{x-overturned}}
+        // {{x-drowning}}
+
+        private static function onVehicleTimerEvent(accountDBID:Number, data:Object):void
+        {
+            var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
+            if (!playerState)
+                return;
+            var updated:Boolean = false;
+            switch (data.code)
+            {
+                case Defines.VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:
+                    updated = playerState.updateXmqpData({
+                        x_overturned: data.enable
+                    });
+                    break;
+
+                case Defines.VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:
+                    updated = playerState.updateXmqpData({
+                        x_drowning: data.enable
+                    });
+                    break;
+
+                case Defines.VEHICLE_MISC_STATUS_ALL:
+                    updated = playerState.updateXmqpData({
+                        x_overturned: data.enable
+                    });
+                    updated = playerState.updateXmqpData({
+                        x_drowning: data.enable
+                    }) || updated;
+                    break;
+
+                default:
+                    Logger.add("WARNING: unknown vehicle timer code: " + data.code);
+            }
+
+            if (updated)
+            {
+                BattleState.instance.invalidate(InvalidationType.STATE);
+                Xvm.dispatchEvent(new XmqpEvent(XmqpEvent.XMQP_VEHICLE_TIMER, accountDBID));
             }
         }
 

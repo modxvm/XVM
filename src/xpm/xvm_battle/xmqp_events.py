@@ -119,10 +119,11 @@ def _onXmqpHola(accountDBID, data):
 
 # WG events hooks
 
+from gui.Scaleform.daapi.view.battle.shared.destroy_timers_panel import DestroyTimersPanel
+
 # fire in vehicle:
 #   enable: True, False
 
-from gui.Scaleform.daapi.view.battle.shared.destroy_timers_panel import DestroyTimersPanel
 @registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__setFireInVehicle')
 def _DestroyTimersPanel__setFireInVehicle(self, isInFire):
     if xmqp.is_active():
@@ -132,22 +133,21 @@ def _DestroyTimersPanel__setFireInVehicle(self, isInFire):
 #   code: drown, overturn, ALL
 #   enable: True, False
 
-# TODO:0.9.16
-#@registerEvent(Battle, '_showVehicleTimer')
-def _Battle_showVehicleTimer(self, value):
+@registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__showDestroyTimer')
+def _DestroyTimersPanel__showDestroyTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
-        code, time, warnLvl = value
+        code, totalTime, level = value
         xmqp.call({
             'event':EVENTS.XMQP_VEHICLE_TIMER,
             'enable':True,
             'code':code,
-            'time':time,
-            'warnLvl':warnLvl})
+            'totalTime':totalTime,
+            'level':level})
 
-# TODO:0.9.16
-#@registerEvent(Battle, '_hideVehicleTimer')
-def _Battle_hideVehicleTimer(self, code = None):
+@registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__hideDestroyTimer')
+def _DestroyTimersPanel__hideDestroyTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
+        code = value
         if code is None:
             code = 'ALL'
         xmqp.call({
@@ -159,28 +159,27 @@ def _Battle_hideVehicleTimer(self, code = None):
 #   zoneID: death_zone, gas_attack, ALL
 #   enable: True, False
 
-# TODO:0.9.16
-#@registerEvent(Battle, 'showDeathzoneTimer')
-def _Battle_showDeathzoneTimer(self, value):
+@registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__showDeathZoneTimer')
+def _DestroyTimersPanel__showDeathZoneTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
-        zoneID, time, warnLvl = value
+        code, totalTime, level = value
         xmqp.call({
             'event':EVENTS.XMQP_DEATH_ZONE_TIMER,
             'enable':True,
-            'zoneID':zoneID,
-            'time':time,
-            'warnLvl':warnLvl})
+            'code':code,
+            'totalTime':totalTime,
+            'level':level})
 
-# TODO:0.9.16
-#@registerEvent(Battle, 'hideDeathzoneTimer')
-def _Battle_hideDeathzoneTimer(self, zoneID = None):
+@registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__hideDeathZoneTimer')
+def _DestroyTimersPanel__hideDeathZoneTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
-        if zoneID is None:
-            zoneID = 'ALL'
+        code = value
+        if code is None:
+            code = 'ALL'
         xmqp.call({
             'event':EVENTS.XMQP_DEATH_ZONE_TIMER,
             'enable':False,
-            'zoneID':zoneID})
+            'code':code})
 
 # sixth sense indicator
 

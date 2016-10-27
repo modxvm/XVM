@@ -116,5 +116,20 @@ package com.xvm
         // Level in roman numerals
         public static const ROMAN_LEVEL:Vector.<String> = new <String>[ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
         ROMAN_LEVEL.fixed = true;
+
+        // constants.VEHICLE_MISC_STATUS
+        public static const VEHICLE_MISC_STATUS_OTHER_VEHICLE_DAMAGED_DEVICES_VISIBLE:int = 0;
+        public static const VEHICLE_MISC_STATUS_IS_OBSERVED_BY_ENEMY:int = 1;
+        public static const VEHICLE_MISC_STATUS_LOADER_INTUITION_WAS_USED:int = 2;
+        public static const VEHICLE_MISC_STATUS_VEHICLE_IS_OVERTURNED:int = 3;
+        public static const VEHICLE_MISC_STATUS_VEHICLE_DROWN_WARNING:int = 4;
+        public static const VEHICLE_MISC_STATUS_IN_DEATH_ZONE:int = 5;
+        public static const VEHICLE_MISC_STATUS_HORN_BANNED:int = 6;
+        public static const VEHICLE_MISC_STATUS_DESTROYED_DEVICE_IS_REPAIRING:int = 7;
+        public static const VEHICLE_MISC_STATUS_ALL:String = "ALL";
+
+        // constants.DEATH_ZONES
+        public static const DEATH_ZONES_STATIC:int = 0;
+        public static const DEATH_ZONES_GAS_ATTACK:int = 1;
     }
 }
