@@ -13,6 +13,7 @@ package com.xvm.battle.minimap
     import com.xvm.battle.minimap.entries.personal.*;
     import com.xvm.battle.minimap.entries.vehicle.*;
     import com.xvm.extraFields.*;
+    import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.display.*;
@@ -21,6 +22,7 @@ package com.xvm.battle.minimap
     import net.wg.gui.battle.views.minimap.components.entries.constants.*;
     import net.wg.gui.battle.views.minimap.constants.*;
     import net.wg.gui.battle.views.stats.constants.*;
+    import scaleform.gfx.*;
 
     UI_ArcadeCameraEntry;
     UI_CellFlashEntry;
@@ -85,6 +87,16 @@ package com.xvm.battle.minimap
             //XfwUtils.logChilds(entriesContainer);
 
             setup();
+        }
+
+        override protected function configUI():void
+        {
+            super.configUI();
+
+            this.mapHit.visible = true; // to show minimap clicks and paths
+            this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown, false, 0, true);
+            stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove, false, 0, true);
+            stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp, false, 0, true);
         }
 
         public function get isAltMode():Boolean
@@ -348,117 +360,141 @@ package com.xvm.battle.minimap
 
         // XMQP
 
-        private function onXmqpMinimapClickEvent(e:XmqpEvent):void
+        private var minimap_path:Array = null;
+        private var minimap_path_mc:Sprite = null;
+
+        private function onMouseDown(e:MouseEventEx):void
         {
-            Logger.addObject(e.data, 3, "onXmqpMinimapClickEvent");
-            /*var color:Number;
-            if (!Config.config.xmqp.minimapClicksColor || Config.config.xmqp.minimapClicksColor == "")
+            try
             {
-                color = e.data.color;
-            }
-            else
-            {
-                color = Number(Macros.FormatByPlayerId(e.value, Config.config.xmqp.minimapClicksColor).split("#").join("0x")) || e.data.color;
-            }
-
-            var alpha:Number = 80;
-
-            var depth:Number = wrapper.mapHit.getNextHighestDepth();
-            var mc:MovieClip = wrapper.mapHit.createEmptyMovieClip("xmqp_mc_" + depth, depth);
-            _global.setTimeout(function() { mc.removeMovieClip() }, Config.config.xmqp.minimapClicksTime * 1000);
-
-            if (e.data.path != undefined)
-            {
-                var len:Number = e.data.path.length;
-                if (len > 0)
+                var target:Sprite = e.target as Sprite;
+                if (target != null && target.hitArea == mapHit && e.buttonIdx == MouseEventEx.LEFT_BUTTON && Config.networkServicesSettings.xmqp)
                 {
-                    mc.lineStyle(3, color, alpha);
-                    var pos:Array = e.data.path[0];
-                    var x:Number = pos[0];
-                    var y:Number = pos[1];
-                    mc.moveTo(x, y);
-                    mc.lineTo(x + 0.1, y + 0.1);
-
-                    mc.lineStyle(1, color, alpha);
-                    for (var i:Number = 1; i < len; ++i)
+                    //Logger.addObject(e);
+                    var minimap_mouse_x:int = int(mapHit.mouseX);
+                    var minimap_mouse_y:int = int(mapHit.mouseY);
+                    minimap_path = [[minimap_mouse_x, minimap_mouse_y]];
+                    if (!minimap_path_mc)
                     {
-                        pos = e.data.path[i];
-                        mc.lineTo(pos[0], pos[1]);
+                        minimap_path_mc = new Sprite();
                     }
-
-                    if (len > 1)
+                    else
                     {
-                        // draw arrow head
-                        x = pos[0];
-                        y = pos[1];
-                        var prevPos:Array = e.data.path[len - 2];
-                        var angle:Number = Math.atan2(y - prevPos[1], x - prevPos[0]) * 180 / Math.PI;
-                        mc.beginFill(color, alpha);
-                        mc.moveTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
-                        mc.lineTo(x + (1 * Math.cos((angle) * Math.PI / 180)), y + (1 * Math.sin((angle) * Math.PI / 180)));
-                        mc.lineTo(x - (5 * Math.cos((angle + 15) * Math.PI / 180)), y - (5 * Math.sin((angle + 15) * Math.PI / 180)));
-                        mc.lineTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
-                        mc.endFill();
+                        minimap_path_mc.graphics.clear();
                     }
+                    minimap_path_mc.graphics.lineStyle(1, Config.networkServicesSettings.x_minimap_clicks_color, 0.3);
+                    minimap_path_mc.graphics.moveTo(minimap_mouse_x, minimap_mouse_y);
+                    minimap_path_mc.graphics.lineTo(minimap_mouse_x + 0.1, minimap_mouse_y + 0.1);
+                    mapHit.addChild(minimap_path_mc);
                 }
-            }*/
-        }
-
-        /*
-
-        private var minimap_path:Array;
-        private var minimap_path_mc:MovieClip;
-
-        private function onMouseDown(button:Number, target, mouseIdx:Number, x:Number, y:Number, dblClick:Boolean)
-        {
-            if (target == wrapper.mapHit && !dblClick && button == Mouse.LEFT && _root.g_cursorVisible && Config.networkServicesSettings.xmqp)
+            }
+            catch (ex:Error)
             {
-                //Logger.addObject(arguments, 1, "onMouseDown");
-                x = int(wrapper.mapHit._xmouse);
-                y = int(wrapper.mapHit._ymouse);
-                minimap_path = [[x, y]];
-                if (minimap_path_mc != null)
-                    minimap_path_mc.removeMovieClip();
-                minimap_path_mc = wrapper.mapHit.createEmptyMovieClip("xmqp_mc_path", wrapper.mapHit.getNextHighestDepth());
-                minimap_path_mc.lineStyle(1, Config.networkServicesSettings.x_minimap_clicks_color, 30);
-                minimap_path_mc.moveTo(x, y);
-                minimap_path_mc.lineTo(x + 0.1, y + 0.1);
+                Logger.err(ex);
             }
         }
 
-        private function onMouseMove(mouseIdx:Number, x:Number, y:Number)
+        private function onMouseMove(e:MouseEventEx):void
         {
-            if (minimap_path != null && minimap_path.length < 20 && y != undefined)
+            if (minimap_path != null && minimap_path.length < 20)
             {
-                //Logger.addObject(arguments, 1, "onMouseMove");
-                if (wrapper.mapHit.hitTest(_root._xmouse, _root._ymouse))
+                var target:Sprite = e.target as Sprite;
+                if (target != null && target.hitArea == mapHit)
                 {
-                    x = int(wrapper.mapHit._xmouse);
-                    y = int(wrapper.mapHit._ymouse);
+                    //Logger.addObject(e);
+                    var minimap_mouse_x:int = int(mapHit.mouseX);
+                    var minimap_mouse_y:int = int(mapHit.mouseY);
 
                     var lastpos:Array = minimap_path[minimap_path.length - 1];
-                    var distance:Number = Math.sqrt(Math.pow(lastpos[0] - x, 2) + Math.pow(lastpos[1] - y, 2));
+                    var distance:Number = Math.sqrt(Math.pow(lastpos[0] - minimap_mouse_x, 2) + Math.pow(lastpos[1] - minimap_mouse_y, 2));
                     if (distance > 10)
                     {
-                        minimap_path.push([x, y]);
-                        minimap_path_mc.lineTo(x, y);
+                        minimap_path.push([minimap_mouse_x, minimap_mouse_y]);
+                        minimap_path_mc.graphics.lineTo(minimap_mouse_x, minimap_mouse_y);
                     }
                 }
             }
         }
 
-        private function onMouseUp(button:Number, target, mouseIdx:Number, x:Number, y:Number)
+        private function onMouseUp(e:MouseEventEx):void
         {
             if (minimap_path != null)
             {
-                if (button == Mouse.LEFT)
+                if (e.buttonIdx == MouseEventEx.LEFT_BUTTON)
                 {
-                    //Logger.addObject(arguments, 1, "onMouseUp");
-                    DAAPI.py_xvm_minimapClick(minimap_path);
+                    //Logger.addObject(e);
+                    Xfw.cmd(BattleCommands.MINIMAP_CLICK, minimap_path);
                     minimap_path = null;
-                    minimap_path_mc.removeMovieClip();
+                    mapHit.removeChild(minimap_path_mc);
                 }
             }
-        }*/
+        }
+
+        private function onXmqpMinimapClickEvent(e:XmqpEvent):void
+        {
+            try
+            {
+                //Logger.addObject(e.data, 2, "onXmqpMinimapClickEvent");
+                var color:Number;
+                if (!Config.config.xmqp.minimapClicksColor)
+                {
+                    color = e.data.color;
+                }
+                else
+                {
+                    var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(e.accountDBID));
+                    color = Macros.FormatNumber(Config.config.xmqp.minimapClicksColor, playerState, e.data.color);
+                }
+
+                var alpha:Number = 0.8;
+
+                if (e.data.path != undefined)
+                {
+                    var mc:Sprite = new Sprite();
+                    mapHit.addChild(mc);
+                    App.utils.scheduler.scheduleTask(function():void
+                    {
+                        mapHit.removeChild(mc);
+                    }, Config.config.xmqp.minimapClicksTime * 1000);
+
+                    var len:int = e.data.path.length;
+                    if (len > 0)
+                    {
+                        mc.graphics.lineStyle(3, color, alpha);
+                        var pos:Array = e.data.path[0];
+                        var x:Number = pos[0];
+                        var y:Number = pos[1];
+                        mc.graphics.moveTo(x, y);
+                        mc.graphics.lineTo(x + 0.1, y + 0.1);
+
+                        mc.graphics.lineStyle(1, color, alpha);
+                        for (var i:Number = 1; i < len; ++i)
+                        {
+                            pos = e.data.path[i];
+                            mc.graphics.lineTo(pos[0], pos[1]);
+                        }
+
+                        if (len > 1)
+                        {
+                            // draw arrow head
+                            x = pos[0];
+                            y = pos[1];
+                            var prevPos:Array = e.data.path[len - 2];
+                            var angle:Number = Math.atan2(y - prevPos[1], x - prevPos[0]) * 180 / Math.PI;
+                            mc.graphics.beginFill(color, alpha);
+                            mc.graphics.moveTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
+                            mc.graphics.lineTo(x + (1 * Math.cos((angle) * Math.PI / 180)), y + (1 * Math.sin((angle) * Math.PI / 180)));
+                            mc.graphics.lineTo(x - (5 * Math.cos((angle + 15) * Math.PI / 180)), y - (5 * Math.sin((angle + 15) * Math.PI / 180)));
+                            mc.graphics.lineTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
+                            mc.graphics.endFill();
+                        }
+                    }
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
     }
 }
