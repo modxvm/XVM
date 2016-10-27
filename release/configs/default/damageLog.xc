@@ -43,7 +43,7 @@
       // Kind of the received damage (macro {{dmg-kind}}).
       // Вид полученного урона (макрос {{dmg-kind}}).
       "dmg-kind": {
-        "shot": "{{type-shell}}", //"<font face='xvm'>&#x50;</font>", // shot / попадание
+        "shot": "{{type-shell}}",                                     // shot / попадание
         "fire": "<font face='xvm'>&#x51;</font>",                     // fire / пожар
         "ramming": "<font face='xvm'>&#x52;</font>",                  // ramming / таран
         "world_collision": "<font face='xvm'>&#x53;</font>",          // world collision / столкновение с объектами, падение
@@ -57,16 +57,16 @@
       // Color depending on the kind of damage (macro {{c:dmg-kind}}).
       // Цвет в зависимости от вида полученного урона (макрос {{c:dmg-kind}}).
       "c:dmg-kind": {
-        "shot": "{{c:hit-effects}}",   // shot / попадание
-        "fire": "#FF6655",             // fire / пожар
-        "ramming": "#998855",          // ramming / таран
-        "world_collision": "#228855",  // world collision / столкновение с объектами, падение
-        "drowning": "#CCCCCC",         // drowning / утопление
-        "overturn": "#CCCCCC",         // overturn / опрокидывание
-        "death_zone": "#CCCCCC",       // death zone / смертельная зона
-        "gas_attack": "#CCCCCC",       // gas attack / газовая атака
-        "art_attack": "#CCCCCC",       // art attack / артиллерийская поддержка
-        "air_strike": "#CCCCCC"        // air strike / поддержка авиации
+        "shot": "{{c:hit-effects}}",       // shot / попадание
+        "fire": "#FF6655",                 // fire / пожар
+        "ramming": "#998855",              // ramming / таран
+        "world_collision": "#228855",      // world collision / столкновение с объектами, падение
+        "drowning": "#CCCCCC",             // drowning / утопление
+        "overturn": "#CCCCCC",             // overturn / опрокидывание
+        "death_zone": "#CCCCCC",           // death zone / смертельная зона
+        "gas_attack": "#CCCCCC",           // gas attack / газовая атака
+        "art_attack": "{{c:hit-effects}}", // art attack / артиллерийская поддержка
+        "air_strike": "{{c:hit-effects}}"  // air strike / поддержка авиации
       },
       // Designation of hit by splash damage from shell (HE/HESH). (macro {{splash-hit}}).
       // Обозначение попадание осколков снаряда (ОФ/ХФ). (макрос {{splash-hit}}).
@@ -117,20 +117,22 @@
       // Kind of hit (macro {{hit-effects}}).
       // Вид попадания (макрос {{hit-effects}}).
       "hit-effects": {
-        "armor_pierced": "{{dmg}}",                                   // penetrated / пробито
-        "intermediate_ricochet": "{{l10n:intermediate_ricochet}}",    // ricochet (intermediate) / рикошет (промежуточный)
-        "final_ricochet": "{{l10n:final_ricochet}}",                  // ricochet / рикошет
-        "armor_not_pierced": "{{l10n:armor_not_pierced}}",            // not penetrated / не пробито
-        "armor_pierced_no_damage": "{{l10n:armor_pierced_no_damage}}" // no damage / без урона
+        "armor_pierced": "{{dmg}}",                                    // penetrated / пробито
+        "intermediate_ricochet": "{{l10n:intermediate_ricochet}}",     // ricochet (intermediate) / рикошет (промежуточный)
+        "final_ricochet": "{{l10n:final_ricochet}}",                   // ricochet / рикошет
+        "armor_not_pierced": "{{l10n:armor_not_pierced}}",             // not penetrated / не пробито
+        "armor_pierced_no_damage": "{{l10n:armor_pierced_no_damage}}", // no damage / без урона
+        "unknown": "{{l10n:armor_pierced_no_damage}}"                  // unknown / неизвестно
       },
       // Color depending on hit kind (with damage, ricochet, no penetration, no damage) (macro {{c:hit-effects}}).
       // Цвет в зависимости от вида попадания (с уроном, рикошет, не пробито, без урона) (макрос {{c:hit-effects}}).
       "c:hit-effects": {
-        "armor_pierced": "#FF4D3C",          // penetrated (damage) / пробито (урон)
-        "intermediate_ricochet": "#CCCCCC",  // ricochet (intermediate) / рикошет (промежуточный)
-        "final_ricochet": "#CCCCCC",         // ricochet / рикошет
-        "armor_not_pierced": "#CCCCCC",      // not penetrated / не пробито
-        "armor_pierced_no_damage": "#CCCCCC" // no damage / без урона
+        "armor_pierced": "#FF4D3C",           // penetrated (damage) / пробито (урон)
+        "intermediate_ricochet": "#CCCCCC",   // ricochet (intermediate) / рикошет (промежуточный)
+        "final_ricochet": "#CCCCCC",          // ricochet / рикошет
+        "armor_not_pierced": "#CCCCCC",       // not penetrated / не пробито
+        "armor_pierced_no_damage": "#CCCCCC", // no damage / без урона
+        "unknown": "#CCCCCC"                  // unknown / неизвестно
       },
       // Designation of critical hit (macro {{critical-hit}}).
       // Обозначение критического попадания (макрос {{critical-hit}}).
@@ -145,7 +147,7 @@
         "hull": "{{l10n:hull}}",       // body / корпус
         "chassis": "{{l10n:chassis}}", // suspension / ходовая
         "gun": "{{l10n:gun}}",         // gun / орудие
-        "do_not_know": ""              // unknown / неизвестно
+        "unknown": ""              // unknown / неизвестно
       },
       // Source of damage (ally , enemy, self damage) (macro {{team-dmg}}).
       // Источник урона (союзник, противник, урон по себе) (макрос {{team-dmg}}).
@@ -153,7 +155,7 @@
         "ally-dmg": "",   // ally / союзник
         "enemy-dmg": "",  // enemy / противник
         "player": "",     // self damage / урон по себе
-        "do_not_know": "" // unknown / неизвестно
+        "unknown": "" // unknown / неизвестно
       },
       // Color depending on damage source (ally , enemy, self damage) (macro {{c:team-dmg}}).
       // Цвет в зависимости от источника урона (союзник, противник, урон по себе) (макрос {{c:team-dmg}}).
@@ -161,21 +163,21 @@
         "ally-dmg": "#00EAFF",    // ally / союзник
         "enemy-dmg": "#CCCCCC",   // enemy / противник
         "player": "#228855",      // self damage / урон по себе
-        "do_not_know": "#CCCCCC"  // unknown / неизвестно
+        "unknown": "#CCCCCC"  // unknown / неизвестно
       },
       // Text depending on cost shell (gold, credits) (macro {{costShell}}).
       // Текст в зависимости от стоимости снаряда (золото, кредиты) (макрос {{costShell}}).
       "costShell":{
         "gold-shell": "",   // gold / золото
         "silver-shell": "", // credits / кредиты
-        "do_not_know": ""   // unknown / неизвестно
+        "unknown": ""   // unknown / неизвестно
       },
       // Color depending on shell kind (gold, credits) (macro {{c:costShell}}).
       // Цвет в зависимости от типа снаряда (золото, кредиты) (макрос {{c:costShell}}).
       "c:costShell":{
         "gold-shell": "#FFCC66",   // gold / золото
         "silver-shell": "#CCCCCC", // credits / кредиты
-        "do_not_know": ""          // unknown / неизвестно
+        "unknown": ""          // unknown / неизвестно
       },
       // true - show hits without damage, false - not to show.
       // true - отображать попадания без урона, false - не отображать.
@@ -183,12 +185,22 @@
       // true - to add of damage from the fire.
       // true - суммировать повреждения от пожара.
       "groupDamagesFromFire": true,
+      // true - TO DO.
+      // true - суммировать повреждения от тарана и столкновения с объектами, падение. 
+      //        Урон суммируется, если наносится чаще одного раза в секунду.
+      "groupDamagesFromRamming_WorldCollision": true,
       // Damage log format.
       // Формат лога повреждений.
-      "formatHistory": "<textformat tabstops='[30,135,170,185]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>",
-      // Damage log format with the left Alt key.
-      // Формат лога повреждений c нажатой левой клавишей Alt.
-      "formatHistoryAlt": "<textformat tabstops='[30,135,170]'><font size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
+      "formatHistory": "<textformat tabstops='[30,135,170,185]'><font face='mono' size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>"
+    },
+    // Log of the received damage with the left Alt key.
+    // Лог полученного урона c нажатой левой клавишей Alt.
+    "logAlt": {
+      "$ref": { "path":"damageLog.log" },
+      "showHitNoDamage": true,
+      // Damage log format.
+      // Формат лога повреждений.
+      "formatHistory": "<textformat tabstops='[30,135,170]'><font face='mono' size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
     },
     // Display the last damage (hit).
     // Отображение последнего урона (попадания).
