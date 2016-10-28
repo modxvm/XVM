@@ -364,12 +364,12 @@ class Log(object):
                 self.dataLogFire['number'] = '{:>2}'.format(len(self.listLog) + 1)
                 macroes = getValueMacroes(self.section, self.dataLogFire)
                 self.listLog.insert(0, parser(config.get(self.section + 'formatHistory'), macroes))
-                self.addLine(None, None)
+                # self.addLine(None, None)
             elif data.data['fireStage'] in [1, 2]:
                 self.dataLogFire['damage'] += data.data['damage']
                 macroes = getValueMacroes(self.section, self.dataLogFire)
                 self.listLog[self.numberLine] = parser(config.get(self.section + 'formatHistory'), macroes)
-        elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming'):
+        elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
             self.dataLog = data.data.copy()
             attackerID = data.data['attackerID']
             attackReasonID = data.data['attackReasonID']
@@ -434,7 +434,7 @@ class LastHit(object):
                 self.dataFire['damage'] += data.data['damage']
                 macroes = getValueMacroes(self.section, self.dataFire)
                 self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
-        elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming'):
+        elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
             self.dataLog = data.data.copy()
             attackerID = data.data['attackerID']
             attackReasonID = data.data['attackReasonID']
