@@ -16,19 +16,19 @@ package com.xvm.battle.events
         public static var XMQP_SPOTTED:String = "xmqp_spotted";
         public static var XMQP_MINIMAP_CLICK:String = "xmqp_minimap_click";
 
-        public var playerId:Number;
+        public var accountDBID:Number;
         public var data:Object;
 
-        public function XmqpEvent(type:String, playerId:Number, data:Object = null)
+        public function XmqpEvent(type:String, accountDBID:Number, data:Object = null)
         {
             super(type, false, false);
-            this.playerId = playerId;
+            this.accountDBID = accountDBID;
             this.data = data;
         }
 
         public override function clone():Event
         {
-            return new XmqpEvent(type, playerId, data);
+            return new XmqpEvent(type, accountDBID, data);
         }
     }
 
