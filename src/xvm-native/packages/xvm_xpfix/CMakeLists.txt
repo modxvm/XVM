@@ -17,6 +17,7 @@ add_library(XVMNativeXPFix SHARED "src/dllmain.c"
                                   "src/impl/load_source_module.c")  
 
 target_compile_definitions(XVMNativeXPFix PRIVATE "_CRT_SECURE_NO_WARNINGS")
+set_target_properties(XVMNativeXPFix PROPERTIES SUFFIX ".pyd")
 
 install(TARGETS  XVMNativeXPFix
         RUNTIME DESTINATION "./xfw/native/" COMPONENT Runtime

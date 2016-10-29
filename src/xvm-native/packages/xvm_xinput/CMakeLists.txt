@@ -17,6 +17,7 @@ target_link_libraries(XVMNativeXInput "XInput" "python27")
 if(MSVC)
     set_target_properties(XVMNativeXInput PROPERTIES COMPILE_FLAGS "/wd4005")
 endif()
+set_target_properties(XVMNativeXInput PROPERTIES SUFFIX ".pyd")
 
 install(TARGETS  XVMNativeXInput
         RUNTIME DESTINATION "./packages/xvm_xinput/native/" COMPONENT Runtime

@@ -17,6 +17,8 @@ if(MSVC)
     set_target_properties(XVMNativePing PROPERTIES COMPILE_FLAGS "/wd4005")
 endif()
 
+set_target_properties(XVMNativePing PROPERTIES SUFFIX ".pyd")
+
 install(TARGETS  XVMNativePing
         RUNTIME DESTINATION "./packages/xvm_ping/native/" COMPONENT Runtime
         LIBRARY DESTINATION "./packages/xvm_ping/native/" COMPONENT Runtime)
