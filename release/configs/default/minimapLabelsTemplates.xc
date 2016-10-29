@@ -74,9 +74,9 @@
     "xmqpEvent": {
       "$ref": { "path":"def.defaultItem" },
       "x": 3,
-      "y": -7,
+      "y": -8,
       "flags": [ "ally", "squadman", "teamKiller", "spotted", "alive" ],
-      "textFormat": { "font": "xvm", "size": 8, "color": "0xFFBB00" },
+      "textFormat": { "font": "xvm", "size": 9, "color": "0xFFBB00" },
       "format": "{{x-spotted?&#x70;&nbsp;}}{{x-overturned?&#x112;}}"
     },
     // Vehicle type, missing

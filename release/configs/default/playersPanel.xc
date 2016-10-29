@@ -106,7 +106,7 @@
       "x": 88,
       // y position.
       // положение по вертикали.
-      "y": 1,
+      "y": -2,
       // Horizontal alignment
       // Выравнивание по горизонтали
       "align": "center",
@@ -123,10 +123,10 @@
     // XMQP service marker definition.
     // Шаблон маркера сервиса XMQP.
     "xmqpServiceMarker": {
-      "x": 88, "y": 1, "align": "center", "bindToIcon": true,
+      "x": 88, "y": -2, "align": "center", "bindToIcon": true,
       "textFormat": {
         "font": "xvm",
-        "size": 23
+        "size": 24
       },
       "format": "<font color='{{alive?{{x-spotted?#FFBB00|{{x-sense-on?#D9D9D9|#BFBFBF}}}}|#FFFFFF}}' alpha='{{alive?#FF|#80}}'>{{alive?{{x-spotted?&#x70;|{{x-sense-on?&#x70;|{{x-enabled?&#x7A;}}}}}}}}</font>",
       "shadow": {}
