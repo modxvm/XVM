@@ -154,7 +154,7 @@ def _g_settingsCore_getSetting(base, name):
                 if g_minimap.linesEnabled:
                     value = _DEFAULTS[name]
             elif name in _CIRCLES_SETTINGS:
-                if g_minimap.linesEnabled:
+                if g_minimap.circlesEnabled:
                     value = _DEFAULTS[name]
         global _in_ArenaVehiclesPlugin_setSettings
         if _in_ArenaVehiclesPlugin_setSettings:
