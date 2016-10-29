@@ -13,7 +13,7 @@ copy()
     mkdir -p "$currentdir/../../~output/mods/xfw/"
     cp -rf "$currentdir/release/xfw/" "$currentdir/../../~output/mods/"
 
-    cp -rf "$currentdir/libpython/release/libpython/bin/python27.pyd" "$currentdir/../../~output/mods/xfw/native/python27.pyd"
+    cp -rf "$currentdir/libpython/release/libpython/bin/python27.dll" "$currentdir/../../~output/mods/xfw/native/python27.dll"
     cp -rf "$currentdir/libpython/release/modules/bin/_ctypes.pyd" "$currentdir/../../~output/mods/xfw/native/_ctypes.pyd"
 }
 
