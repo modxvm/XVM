@@ -14,7 +14,7 @@ copy()
     cp -rf "$currentdir/release/xfw/" "$currentdir/../../~output/mods/"
 
     cp -rf "$currentdir/libpython/release/libpython/bin/python27.pyd" "$currentdir/../../~output/mods/xfw/native/python27.pyd"
-    cp -rf "$currentdir/libpython/release/module/bin/_ctypes.pyd" "$currentdir/../../~output/mods/xfw/native/_ctypes.pyd"
+    cp -rf "$currentdir/libpython/release/modules/bin/_ctypes.pyd" "$currentdir/../../~output/mods/xfw/native/_ctypes.pyd"
 }
 
 copy
