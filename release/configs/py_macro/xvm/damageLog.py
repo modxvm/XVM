@@ -367,6 +367,7 @@ class Log(object):
                 # self.addLine(None, None)
             elif data.data['fireStage'] in [1, 2]:
                 self.dataLogFire['damage'] += data.data['damage']
+                self.dataLogFire['dmgRatio'] = self.dataLogFire['damage'] * 100 // data.data['maxHealth']
                 macroes = getValueMacroes(self.section, self.dataLogFire)
                 self.listLog[self.numberLine] = parser(config.get(self.section + 'formatHistory'), macroes)
         elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
@@ -381,6 +382,7 @@ class Log(object):
                     self.dictVehicle[attackerID][attackReasonID]['time'] = BigWorld.serverTime()
                     self.dictVehicle[attackerID][attackReasonID]['damage'] += data.data['damage']
                     self.dataLog['damage'] = self.dictVehicle[attackerID][attackReasonID]['damage']
+                    self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
                     self.dataLog['number'] = '{:>2}'.format(len(self.listLog))
                     numberLine = self.dictVehicle[attackerID][attackReasonID]['numberLine']
                     macroes = getValueMacroes(self.section, self.dataLog)
@@ -432,6 +434,7 @@ class LastHit(object):
                 self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
             elif data.data['fireStage'] in [1, 2]:
                 self.dataFire['damage'] += data.data['damage']
+                self.dataLog['dmgRatio'] = self.dataFire['damage'] * 100 // data.data['maxHealth']
                 macroes = getValueMacroes(self.section, self.dataFire)
                 self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
         elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
@@ -446,6 +449,7 @@ class LastHit(object):
                     self.dictVehicle[attackerID][attackReasonID]['time'] = BigWorld.serverTime()
                     self.dictVehicle[attackerID][attackReasonID]['damage'] += data.data['damage']
                     self.dataLog['damage'] = self.dictVehicle[attackerID][attackReasonID]['damage']
+                    self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': data.data['damage']}
