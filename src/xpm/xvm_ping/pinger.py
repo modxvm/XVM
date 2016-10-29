@@ -28,7 +28,7 @@ from xvm_main.python.xvm import l10n
 
 #Native module
 import imp
-XVMNativePing = imp.load_dynamic('XVMNativePing', './res_mods/mods/packages/xvm_ping/native/XVMNativePing.dll')
+XVMNativePing = imp.load_dynamic('XVMNativePing', './res_mods/mods/packages/xvm_ping/native/XVMNativePing.pyd')
 
 #############################
 
