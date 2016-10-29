@@ -15,7 +15,7 @@ void injector(void)
 	DWORD OriginFunctionAddress;
 	DWORD ReplaceFunctionAddress;
 
-	dllHandle = GetModuleHandle(TEXT("XVMNativeXPFix.dll"));
+	dllHandle = GetModuleHandle(TEXT("XVMNativeXPFix.pyd"));
 
 	//1. find_init_module
 	OriginFunctionAddress = WRAPPER_GetFunctionRealAddress("find_init_module");
