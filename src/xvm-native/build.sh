@@ -8,10 +8,15 @@ source "$currentdir"/../../build/library.sh
 copy()
 {
     mkdir -p "$currentdir/../../~output/mods/packages/"
-    cp -rf "$currentdir/binaries/packages/" "$currentdir/../../~output/mods/"
+    cp -rf "$currentdir/release/packages/" "$currentdir/../../~output/mods/"
 
     mkdir -p "$currentdir/../../~output/mods/xfw/"
-    cp -rf "$currentdir/binaries/xfw/" "$currentdir/../../~output/mods/"
+    cp -rf "$currentdir/release/xfw/" "$currentdir/../../~output/mods/"
+
+    cp -rf "$currentdir/libpython/release/libpython/bin/python27.dll" "$currentdir/../../~output/mods/xfw/native/python27.dll"
+
+    mkdir -p "$currentdir/../../~output/mods/xfw/native/lib"
+    cp -rf "$currentdir/libpython/release/modules/bin/_ctypes.pyd" "$currentdir/../../~output/mods/xfw/native/lib/_ctypes.pyd"
 }
 
 copy
