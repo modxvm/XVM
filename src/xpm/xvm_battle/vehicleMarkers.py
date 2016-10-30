@@ -28,7 +28,6 @@ import xvm_main.python.vehinfo as vehinfo
 
 from consts import *
 import shared
-import xmqp_events
 
 
 #####################################################################
