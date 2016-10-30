@@ -4,8 +4,8 @@ XVM-6.4.8-dev:
   * options added:
       "minimapDrawLineWidth" - width of the lines for minimap drawings
   * options renamed:
-      "minimapDrawTime" => "minimapDrawTime"
-      "minimapDrawColor" => "minimapDrawColor"
+      "minimapClicksTime" => "minimapDrawTime"
+      "minimapClicksColor" => "minimapDrawColor"
 
   [MISC]
   * Added Python C Extensions (.pyd) support 
