@@ -29,3 +29,4 @@ src/installer/src/l10n_result/
 src/installer/src/temp_changelogs/
 src/xvm-native/build/
 src/xvm-native/binaries/tests/
+src/xvm-native/packages/xvm_*/build/
