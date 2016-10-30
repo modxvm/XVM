@@ -1,5 +1,6 @@
 ﻿{
   "formats": [
+    /*
     {
       //"enabled": false,
       "x": "{{py:xvm_debug_get_x|0}}",
@@ -35,6 +36,7 @@
       "format": "{{py:vinfo.name}}\nRT: {{py:vinfo.gun_reload}}\nVR: {{py:vinfo.vision_radius}}",
       "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
     },
+    */
     {
       "x": 235,
       "y": 0,

@@ -368,7 +368,7 @@
     //"minimapDrawLineThickness": 2.5,
     //"minimapDrawColor": null,
     //"minimapDrawAlpha": 80,
-    "minimapDrawTime": 7
+    //"minimapDrawTime": 7
   },
   "tooltips": {
     //"hideSimplifiedVehParams": false
