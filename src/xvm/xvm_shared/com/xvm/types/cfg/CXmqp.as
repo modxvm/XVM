@@ -10,7 +10,7 @@ package com.xvm.types.cfg
     {
         public var spottedTime:*;
         public var minimapDrawTime:*;
-        public var minimapDrawLineWidth:*;
+        public var minimapDrawLineThickness:*;
         public var minimapDrawColor:*;
         public var minimapDrawAlpha:*;
 

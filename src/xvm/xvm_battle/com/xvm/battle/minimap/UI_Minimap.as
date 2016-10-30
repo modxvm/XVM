@@ -448,7 +448,7 @@ package com.xvm.battle.minimap
                     color = Macros.FormatNumber(Config.config.xmqp.minimapDrawColor, playerState, e.data.color);
                 }
 
-                var lineWidth:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawLineWidth, playerState, 1);
+                var thickness:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawLineThickness, playerState, 1);
                 var alpha:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawAlpha, playerState, 100) / 100.0;
 
                 if (e.data.path != undefined)
@@ -464,7 +464,7 @@ package com.xvm.battle.minimap
                     if (len > 0)
                     {
                         // draw dot
-                        mc.graphics.lineStyle(lineWidth * 3, color, alpha);
+                        mc.graphics.lineStyle(thickness * 3, color, alpha);
                         var pos:Array = e.data.path[0];
                         var x:Number = pos[0];
                         var y:Number = pos[1];
@@ -474,7 +474,7 @@ package com.xvm.battle.minimap
                         if (len > 1)
                         {
                             // draw lines
-                            mc.graphics.lineStyle(lineWidth, color, alpha);
+                            mc.graphics.lineStyle(thickness, color, alpha);
                             var commands:Vector.<int> = new <int>[];
                             var data:Vector.<Number> = new <Number>[];
 
@@ -494,10 +494,10 @@ package com.xvm.battle.minimap
                             mc.graphics.beginFill(color, alpha);
                             commands = new <int>[GraphicsPathCommand.MOVE_TO, GraphicsPathCommand.LINE_TO, GraphicsPathCommand.LINE_TO, GraphicsPathCommand.LINE_TO];
                             data = new <Number>[
-                                x - (5 * lineWidth * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * lineWidth * Math.sin((angle - 15) * Math.PI / 180)),
-                                x + (1 * lineWidth * Math.cos((angle) * Math.PI / 180)),      y + (1 * lineWidth * Math.sin((angle) * Math.PI / 180)),
-                                x - (5 * lineWidth * Math.cos((angle + 15) * Math.PI / 180)), y - (5 * lineWidth * Math.sin((angle + 15) * Math.PI / 180)),
-                                x - (5 * lineWidth * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * lineWidth * Math.sin((angle - 15) * Math.PI / 180))];
+                                x - (5 * thickness * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * thickness * Math.sin((angle - 15) * Math.PI / 180)),
+                                x + (1 * thickness * Math.cos((angle) * Math.PI / 180)),      y + (1 * thickness * Math.sin((angle) * Math.PI / 180)),
+                                x - (5 * thickness * Math.cos((angle + 15) * Math.PI / 180)), y - (5 * thickness * Math.sin((angle + 15) * Math.PI / 180)),
+                                x - (5 * thickness * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * thickness * Math.sin((angle - 15) * Math.PI / 180))];
                             mc.graphics.drawPath(commands, data, GraphicsPathWinding.NON_ZERO);
                             mc.graphics.endFill();
                         }

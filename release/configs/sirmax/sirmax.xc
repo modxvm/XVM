@@ -365,7 +365,7 @@
     }
   },
   "xmqp": {
-    //"minimapDrawLineWidth": 2.5,
+    //"minimapDrawLineThickness": 2.5,
     //"minimapDrawColor": null,
     //"minimapDrawAlpha": 80,
     "minimapDrawTime": 7

@@ -2,7 +2,7 @@ XVM-6.4.8-dev:
   [XMQP]
   * Initial implementation
   * options added:
-      "minimapDrawLineWidth" - width of the lines for minimap drawings
+      "minimapDrawLineThickness" - thickness of the lines for minimap drawings
       "minimapDrawAlpha" - opacity of the minimap drawings
   * options renamed:
       "minimapClicksTime" => "minimapDrawTime"
