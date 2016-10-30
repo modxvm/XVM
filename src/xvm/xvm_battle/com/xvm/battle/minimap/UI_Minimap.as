@@ -435,16 +435,20 @@ package com.xvm.battle.minimap
             try
             {
                 //Logger.addObject(e.data, 2, "onXmqpMinimapClickEvent");
+
+                var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(e.accountDBID));
+
                 var color:Number;
-                if (!Config.config.xmqp.minimapClicksColor)
+                if (!Config.config.xmqp.minimapDrawColor)
                 {
                     color = e.data.color;
                 }
                 else
                 {
-                    var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(e.accountDBID));
-                    color = Macros.FormatNumber(Config.config.xmqp.minimapClicksColor, playerState, e.data.color);
+                    color = Macros.FormatNumber(Config.config.xmqp.minimapDrawColor, playerState, e.data.color);
                 }
+
+                var lineWidth:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawLineWidth, playerState, 1);
 
                 var alpha:Number = 0.8;
 
@@ -455,37 +459,47 @@ package com.xvm.battle.minimap
                     App.utils.scheduler.scheduleTask(function():void
                     {
                         mapHit.removeChild(mc);
-                    }, Config.config.xmqp.minimapClicksTime * 1000);
+                    }, Config.config.xmqp.minimapDrawTime * 1000);
 
                     var len:int = e.data.path.length;
                     if (len > 0)
                     {
-                        mc.graphics.lineStyle(3, color, alpha);
+                        // draw dot
+                        mc.graphics.lineStyle(lineWidth * 3, color, alpha);
                         var pos:Array = e.data.path[0];
                         var x:Number = pos[0];
                         var y:Number = pos[1];
                         mc.graphics.moveTo(x, y);
                         mc.graphics.lineTo(x + 0.1, y + 0.1);
 
-                        mc.graphics.lineStyle(1, color, alpha);
-                        for (var i:Number = 1; i < len; ++i)
-                        {
-                            pos = e.data.path[i];
-                            mc.graphics.lineTo(pos[0], pos[1]);
-                        }
-
                         if (len > 1)
                         {
+                            // draw lines
+                            mc.graphics.lineStyle(lineWidth, color, alpha);
+                            var commands:Vector.<int> = new <int>[];
+                            var data:Vector.<Number> = new <Number>[];
+
+                            for (var i:Number = 1; i < len; ++i)
+                            {
+                                pos = e.data.path[i];
+                                commands.push(GraphicsPathCommand.LINE_TO);
+                                data.push(pos[0], pos[1]);
+                            }
+                            mc.graphics.drawPath(commands, data);
+
                             // draw arrow head
                             x = pos[0];
                             y = pos[1];
                             var prevPos:Array = e.data.path[len - 2];
                             var angle:Number = Math.atan2(y - prevPos[1], x - prevPos[0]) * 180 / Math.PI;
                             mc.graphics.beginFill(color, alpha);
-                            mc.graphics.moveTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
-                            mc.graphics.lineTo(x + (1 * Math.cos((angle) * Math.PI / 180)), y + (1 * Math.sin((angle) * Math.PI / 180)));
-                            mc.graphics.lineTo(x - (5 * Math.cos((angle + 15) * Math.PI / 180)), y - (5 * Math.sin((angle + 15) * Math.PI / 180)));
-                            mc.graphics.lineTo(x - (5 * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * Math.sin((angle - 15) * Math.PI / 180)));
+                            commands = new <int>[GraphicsPathCommand.MOVE_TO, GraphicsPathCommand.LINE_TO, GraphicsPathCommand.LINE_TO, GraphicsPathCommand.LINE_TO];
+                            data = new <Number>[
+                                x - (5 * lineWidth * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * lineWidth * Math.sin((angle - 15) * Math.PI / 180)),
+                                x + (1 * lineWidth * Math.cos((angle) * Math.PI / 180)),      y + (1 * lineWidth * Math.sin((angle) * Math.PI / 180)),
+                                x - (5 * lineWidth * Math.cos((angle + 15) * Math.PI / 180)), y - (5 * lineWidth * Math.sin((angle + 15) * Math.PI / 180)),
+                                x - (5 * lineWidth * Math.cos((angle - 15) * Math.PI / 180)), y - (5 * lineWidth * Math.sin((angle - 15) * Math.PI / 180))];
+                            mc.graphics.drawPath(commands, data, GraphicsPathWinding.NON_ZERO);
                             mc.graphics.endFill();
                         }
                     }

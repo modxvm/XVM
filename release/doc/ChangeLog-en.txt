@@ -1,6 +1,11 @@
 XVM-6.4.8-dev:
   [XMQP]
   * Initial implementation
+  * options added:
+      "minimapDrawLineWidth" - width of the lines for minimap drawings
+  * options renamed:
+      "minimapDrawTime" => "minimapDrawTime"
+      "minimapDrawColor" => "minimapDrawColor"
 
   [MISC]
   * Added Python C Extensions (.pyd) support 

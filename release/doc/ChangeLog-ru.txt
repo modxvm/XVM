@@ -1,6 +1,11 @@
 XVM-6.4.8-dev:
   [XMQP]
   * Начальная реализация
+  * добавлены опции:
+      "minimapDrawLineWidth" - ширина линий в рисовании по миникарте
+  * переименованы опции:
+      "minimapDrawTime" => "minimapDrawTime"
+      "minimapDrawColor" => "minimapDrawColor"
 
   [Разное]
   * Добавлена поддержка Python C Extensions (.pyd)
@@ -33,7 +38,7 @@ XVM-6.4.7:
         "mouseOut" - событие отправляется при перемещении курсора мыши из поля
         "mouseMove" - событие отправляется при перемещении курсора мыши внутри поля
         "mouseWheel" - событие отправляется при прокручивании колеса мыши внутри поля
-  
+
   [АНГАР]
   * в секциях "clock", "pingServers", "onlineServers" опция "topmost" заменена на "layer"
   * добавлены новые опции в секции "hangar":

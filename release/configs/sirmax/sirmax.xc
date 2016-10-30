@@ -365,8 +365,9 @@
     }
   },
   "xmqp": {
-    //"minimapClicksColor": null,
-    "minimapClicksTime": 7
+    //"minimapDrawLineWidth": 2.5,
+    //"minimapDrawColor": null,
+    "minimapDrawTime": 7
   },
   "tooltips": {
     //"hideSimplifiedVehParams": false
