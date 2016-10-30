@@ -12,6 +12,7 @@ package com.xvm.types.cfg
         public var minimapDrawTime:*;
         public var minimapDrawLineWidth:*;
         public var minimapDrawColor:*;
+        public var minimapDrawAlpha:*;
 
         public function clone():*
         {

@@ -449,8 +449,7 @@ package com.xvm.battle.minimap
                 }
 
                 var lineWidth:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawLineWidth, playerState, 1);
-
-                var alpha:Number = 0.8;
+                var alpha:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawAlpha, playerState, 100) / 100.0;
 
                 if (e.data.path != undefined)
                 {

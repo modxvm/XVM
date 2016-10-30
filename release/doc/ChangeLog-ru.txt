@@ -3,6 +3,7 @@ XVM-6.4.8-dev:
   * Начальная реализация
   * добавлены опции:
       "minimapDrawLineWidth" - ширина линий в рисовании по миникарте
+      "minimapDrawAlpha" - прозрачность рисования по миникарте
   * переименованы опции:
       "minimapClicksTime" => "minimapDrawTime"
       "minimapClicksColor" => "minimapDrawColor"

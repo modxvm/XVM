@@ -3,12 +3,13 @@ XVM-6.4.8-dev:
   * Initial implementation
   * options added:
       "minimapDrawLineWidth" - width of the lines for minimap drawings
+      "minimapDrawAlpha" - opacity of the minimap drawings
   * options renamed:
       "minimapClicksTime" => "minimapDrawTime"
       "minimapClicksColor" => "minimapDrawColor"
 
   [MISC]
-  * Added Python C Extensions (.pyd) support 
+  * Added Python C Extensions (.pyd) support
   * Added ability to use uncompiled XFW-based mods (/mods/packages/)
   * Fix ctypes library
 
