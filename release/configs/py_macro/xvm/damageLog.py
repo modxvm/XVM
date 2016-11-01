@@ -253,8 +253,9 @@ class Data(object):
                 self.data['hitEffect'] = HIT_EFFECT_CODES[4]
             else:
                 self.data['isDamage'] = False
+                maxHitEffectCode = min(3, maxHitEffectCode)
                 if maxHitEffectCode < 4:
-                    self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
+                    self.data['hitEffect'] = HIT_EFFECT_CODES[maxHitEffectCode]
                 self.updateData()
                 self.updateLabels()
                 as_event('ON_HIT')
