@@ -126,6 +126,9 @@ class _XMQP(object):
         self._exchange_correlation_id = None
         self._reconnect_attempts = 0
 
+        global players_capabilities
+        players_capabilities = {}
+
     @property
     def is_consuming(self):
         return self._consuming
@@ -208,7 +211,7 @@ class _XMQP(object):
                     self._exchange_name = response['exchange']
                     global players_capabilities
                     for accountDBID, data in response['users'].iteritems():
-                        players_capabilities[accountDBID] = simplejson.loads(data) if data else {}
+                        players_capabilities[int(accountDBID)] = simplejson.loads(data) if data else {}
                     self.bind_channel()
                 else:
                     log("[XMQP] ERROR: response='{}'".format(body))

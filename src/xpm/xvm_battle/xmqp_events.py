@@ -108,6 +108,7 @@ def _sendCapabilities():
 # "hola" xmqp event handler
 
 def _onXmqpHola(accountDBID, data):
+    accountDBID = int(accountDBID)
     if xmqp.XMQP_DEVELOPMENT:
         if accountDBID == utils.getAccountDBID():
             accountDBID = getCurrentAccountDBID()
