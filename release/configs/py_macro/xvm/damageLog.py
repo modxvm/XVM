@@ -138,6 +138,7 @@ class Data(object):
                      'squadnum': 0,
                      'fireStage': -1,
                      'isInFire': False,
+                     'isBeginFire': False,
                      'number': None,
                      'timer': 0
                      }
@@ -251,6 +252,7 @@ class Data(object):
             if damageFactor:
                 self.data['hitEffect'] = HIT_EFFECT_CODES[4]
             else:
+                self.data['isDamage'] = False
                 maxHitEffectCode = min(3, maxHitEffectCode)
                 if maxHitEffectCode < 4:
                     self.data['hitEffect'] = HIT_EFFECT_CODES[maxHitEffectCode]
@@ -268,13 +270,14 @@ class Data(object):
                 self.data['hitEffect'] = HIT_EFFECT_CODES[3]
                 self.updateData()
                 self.updateLabels()
+                self.data['isDamage'] = False
                 as_event('ON_HIT')
             else:
                 self.data['hitEffect'] = HIT_EFFECT_CODES[4]
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
         if vehicle.isPlayerVehicle:
-            if (attackReasonID == 1) and (self.data['fireStage'] < 0) and self.data['isInFire']:
+            if (attackReasonID == 1) and (self.data['fireStage'] < 0) and self.data['isBeginFire']:
                 self.data['fireStage'] = 0
             elif (attackReasonID == 1) and (self.data['fireStage'] == 0) and self.data['isInFire']:
                 self.data['fireStage'] = 1
@@ -295,6 +298,7 @@ class Data(object):
             self.data['oldHealth'] = newHealth
             self.updateData()
             self.updateLabels()
+            self.data['isBeginFire'] = self.data['isInFire']
             as_event('ON_HIT')
 
 
@@ -589,6 +593,7 @@ def as_setFireInVehicleS(self, isInFire):
     global on_fire
     if isInFire:
         on_fire = 100
+        data.data['isBeginFire'] = True
     else:
         on_fire = 0
     data.data['isInFire'] = isInFire
