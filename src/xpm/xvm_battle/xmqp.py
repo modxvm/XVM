@@ -154,13 +154,10 @@ class _XMQP(object):
             self._connection.ioloop.stop()
             if self.is_consuming:
                 self.stop_consuming()
-                self._connection.ioloop.start()
             if self._channel and self._channel.is_open:
                 self.close_channel()
-                #self._connection.ioloop.start()
             if self._connection and self._connection.is_open:
                 self.close_connection()
-                #self._connection.ioloop.start()
             self._connection.ioloop.stop()
             debug('[XMQP] Stopped')
         except (pika_exceptions.ChannelClosed, pika_exceptions.ConnectionClosed):
@@ -495,10 +492,6 @@ class _XMQP(object):
         self.close_channel()
 
     def close_channel(self):
-        """Call to close the channel with RabbitMQ cleanly by issuing the
-        Channel.Close RPC command.
-
-        """
         debug('[XMQP] Closing the channel')
         self._consuming = False
         self._closing = True
