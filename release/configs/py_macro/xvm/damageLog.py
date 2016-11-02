@@ -285,6 +285,8 @@ class Data(object):
                 self.data['costShell'] = 'unknown'
                 self.data['shellKind'] = 'not_shell'
                 self.data['timer'] = 0
+            else:
+                self.data['timer'] = self.timeReload(attackerID)
             self.data['attackerID'] = attackerID
             self.data['damage'] = self.data['oldHealth'] - max(0, newHealth)
             self.data['oldHealth'] = newHealth
