@@ -230,10 +230,16 @@ class Data(object):
         if self.data['fireStage'] == 2:
             self.data['fireStage'] = -1
         self.data['attackerID'] = attackerID
-        self.data['damage'] = 0
         self.data['attackReasonID'] = effectsIndex if effectsIndex in [24, 25] else 0
         self.data['timer'] = self.timeReload(attackerID)
         self.typeShell(effectsIndex)
+        if damageFactor:
+            self.data['hitEffect'] = HIT_EFFECT_CODES[4]
+        else:
+            self.data['damage'] = 0
+            self.updateData()
+            self.updateLabels()
+            as_event('ON_HIT')
 
     def updateLabels(self):
         _logAlt.output()
@@ -248,32 +254,18 @@ class Data(object):
             self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
             self.data['splashHit'] = 'no-splash'
             self.data['criticalHit'] = (maxHitEffectCode == 5)
+            if damageFactor == 0:
+                self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
             self.hitShell(attackerID, effectsIndex, damageFactor)
-            if damageFactor:
-                self.data['hitEffect'] = HIT_EFFECT_CODES[4]
-            else:
-                self.data['isDamage'] = False
-                maxHitEffectCode = min(3, maxHitEffectCode)
-                if maxHitEffectCode < 4:
-                    self.data['hitEffect'] = HIT_EFFECT_CODES[maxHitEffectCode]
-                self.updateData()
-                self.updateLabels()
-                as_event('ON_HIT')
 
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
         if vehicle.isPlayerVehicle and self.data['isAlive']:
             self.data['isAlive'] = vehicle.health > 0
             self.data['splashHit'] = 'splash'
             self.data['criticalHit'] = False
-            self.hitShell(attackerID, effectsIndex, damageFactor)
-            if (damageFactor == 0):
+            if damageFactor == 0:
                 self.data['hitEffect'] = HIT_EFFECT_CODES[3]
-                self.updateData()
-                self.updateLabels()
-                self.data['isDamage'] = False
-                as_event('ON_HIT')
-            else:
-                self.data['hitEffect'] = HIT_EFFECT_CODES[4]
+            self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
         if vehicle.isPlayerVehicle:
@@ -292,8 +284,8 @@ class Data(object):
             if self.data['attackReasonID'] != 0:
                 self.data['costShell'] = 'unknown'
                 self.data['shellKind'] = 'not_shell'
-                self.data['attackerID'] = attackerID
                 self.data['timer'] = 0
+            self.data['attackerID'] = attackerID
             self.data['damage'] = self.data['oldHealth'] - max(0, newHealth)
             self.data['oldHealth'] = newHealth
             self.updateData()
