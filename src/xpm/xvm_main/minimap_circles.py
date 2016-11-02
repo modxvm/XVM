@@ -88,17 +88,17 @@ class _MinimapCircles(object):
 
             if 'commander' in crewRoles_arr[position]:
                 self.base_commander_skill = data['level']
-                self.commander_sixthSense = 'commander_sixthSense' in skills
-                if 'commander_eagleEye' in skills and self.commander_eagleEye < skills['commander_eagleEye']:
+                self.commander_sixthSense = skills.get('commander_sixthSense', -1) == 100
+                if self.commander_eagleEye < skills.get('commander_eagleEye', -1):
                     self.commander_eagleEye = skills['commander_eagleEye']
 
             if 'radioman' in crewRoles_arr[position]:
                 skill = data['level']
                 if self.base_radioman_skill < skill:
                     self.base_radioman_skill = skill
-                if 'radioman_finder' in skills and self.radioman_finder < skills['radioman_finder']:
+                if self.radioman_finder < skills.get('radioman_finder', -1):
                     self.radioman_finder = skills['radioman_finder']
-                if 'radioman_inventor' in skills and self.radioman_inventor < skills['radioman_inventor']:
+                if self.radioman_inventor < skills.get('radioman_inventor', -1):
                     self.radioman_inventor = skills['radioman_inventor']
 
             if 'loader' in crewRoles_arr[position]:
@@ -111,7 +111,7 @@ class _MinimapCircles(object):
                 female_count += 1
             else:
                 male_count += 1
-            if 'brotherhood' not in skills or skills['brotherhood'] != 100:
+            if skills.get('brotherhood', -1) != 100:
                 self.brothers_in_arms = False
 
         if loaders_count > 1:

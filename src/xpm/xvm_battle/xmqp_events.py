@@ -100,6 +100,7 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 
 def _sendCapabilities():
     for accountDBID, data in xmqp.players_capabilities.iteritems():
+        #debug('_sendCapabilities: {} {}'.format(accountDBID, data))
         if xmqp.XMQP_DEVELOPMENT:
             if accountDBID == utils.getAccountDBID():
                 accountDBID = getCurrentAccountDBID()
@@ -112,9 +113,9 @@ def _onXmqpHola(accountDBID, data):
     if xmqp.XMQP_DEVELOPMENT:
         if accountDBID == utils.getAccountDBID():
             accountDBID = getCurrentAccountDBID()
-    #debug('_onXmqpHola: {} {}'.format(accountDBID, data))
     if accountDBID not in xmqp.players_capabilities:
         xmqp.players_capabilities[accountDBID] = data['capabilities']
+        #debug('_onXmqpHola: {} {}'.format(accountDBID, data))
         _as_xmqp_event(accountDBID, data)
 
 
