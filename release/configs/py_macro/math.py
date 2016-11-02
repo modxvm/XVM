@@ -16,7 +16,7 @@ def math_mul(*a):
 # Division. Деление.
 @xvm.export('math.div')
 def math_div(a, b):
-    return a / b
+    return a / float(b)
 
 # Raise to power. Возведение в степень.
 @xvm.export('math.pow')
