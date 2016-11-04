@@ -157,8 +157,8 @@
       "y": -67,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
     },
-    // Block of text fields.
-    // Блок текстовых полей.
+    // Block of text fields (extended format supported, see extra-field.txt).
+    // Блок текстовых полей (поддерживается расширенный формат, см. extra-field.txt).
     "textFields": []
   },
   // Настройки для противников.
@@ -236,8 +236,8 @@
       "y": -67,
       "alpha": 100
     },
-    // Block of text fields.
-    // Блок текстовых полей.
+    // Block of text fields (extended format supported, see extra-field.txt).
+    // Блок текстовых полей (поддерживается расширенный формат, см. extra-field.txt).
     "textFields": []
   }
 }

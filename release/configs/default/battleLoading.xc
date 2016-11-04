@@ -92,12 +92,12 @@
     // Extra fields. Fields are placed one above the other.
     // Дополнительные поля. Поля располагаются друг над другом.
     // Set of formats for left panel (extended format supported, see above)
-    // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
+    // Набор форматов для левой панели (поддерживается расширенный формат, см. extra-field.txt)
     "extraFieldsLeft": [
       ${"templates.clanIcon"}
     ],
     // Set of formats for right panel (extended format supported, see above)
-    // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
+    // Набор форматов для правой панели (поддерживается расширенный формат, см. extra-field.txt)
     "extraFieldsRight": [
       ${"templates.clanIcon"}
     ]
