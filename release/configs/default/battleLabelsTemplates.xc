@@ -30,6 +30,8 @@
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
       "format": "{{hitlog-body}}"
     },
+    // Total hp indicator.
+    // Индикатор общего HP команд.
     "totalHP": {
       "enabled": true,
       "updateEvent": "ON_PLAYERS_HP_CHANGED",
@@ -41,6 +43,8 @@
       "textFormat": { "font": "mono", "size": 18, "align": "center" },
       "format": "{{py:xvm.total_hp.text}}"
     },
+    // Avg damage on current vehicle.
+    // Средний урон на текущей технике.
     "avgDamage": {
       "enabled": true,
       "updateEvent": "ON_DAMAGE_CAUSED",
@@ -52,6 +56,8 @@
       "textFormat": { "size": 15, "align": "center" },
       "format": "{{py:xvm.total_hp.avgDamage('{{l10n:avgDamage}}: ',{{hitlog.dmg-total}})}}"
     },
+    // Threshold necessary for achievements "High caliber".
+    // Порог необходимый для получения достижения "Основной калибр".
     "mainGun": {
       "enabled": true,
       "updateEvent": "ON_DAMAGE_CAUSED, ON_DAMAGE_CAUSED_ALLY",
@@ -62,6 +68,8 @@
       "textFormat": { "size": 15, "align": "center" },
       "format": "{{py:xvm.total_hp.mainGun('{{l10n:mainGun}}: ',{{hitlog.dmg-total}})}}"
     },
+    // Chance of winning.
+    // Шанс на победу.
     "winChance": {
       "enabled": false,
       "updateEvent": "ON_VEHICLE_DESTROYED",
@@ -71,6 +79,8 @@
       "textFormat": { "size": 15 },
       "format": "{{xvm-stat?{{l10n:Team strength}}: {{py:xvm.team_strength('{{allyStrengthStatic}}','{{enemyStrengthStatic}}')}} / {{py:xvm.team_strength('{{allyStrengthLive}}','{{enemyStrengthLive}}')}}}}"
     },
+    // Log of the received damage (see damageLog.xc).
+    // Лог полученного урона (см. damageLog.xc).
     "damageLog": {
       "enabled": true,
       "updateEvent": "PY(ON_HIT)",
@@ -83,6 +93,8 @@
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.damageLog.dLog}}"
     },
+    // Timer reload (see damageLog.xc).
+    // Таймер перезарядки (см. damageLog.xc).
     "timerReload": {
       "enabled": true,
       "updateEvent": "PY(ON_TIMER_RELOAD)",
@@ -95,6 +107,8 @@
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.damageLog.timerReload}}"
     },
+    // Display the last damage (hit) (see damageLog.xc).
+    // Отображение последнего урона (попадания) (см. damageLog.xc).
     "lastHit": {
       "enabled": true,
       "updateEvent": "PY(ON_LAST_HIT)",
@@ -121,34 +135,6 @@
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": {"align": "center", "color": "0xF4EFE8", "size": 16 },
       "format": "ПОЖАР"
-    },
-    "test": {
-      "enabled": true,
-      "y": -170,
-      "width": 200,
-      "height": 70,
-      "alpha": 70,
-      "screenHAlign": "center",
-      "screenVAlign": "bottom",
-      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 5},
-      "textFormat": { "color": "{{battleType=1?0x00FFFF|0xFFFF00}}", "size": 25, "align": "center", "bold": true, "leading": -1, "marginLeft": 2, "marginRight": 2 },
-      "format": "This is a demo of XVM text fields on battle interface. You may disable it in battle.xc<br/> Press '<font color='#60FF00'>J</font>' hot-key to show info field"
-    },
-    "test2": {
-      "enabled": true,
-      "hotKeyCode": 36,
-      "updateEvent": "ON_TARGET_IN,ON_TARGET_OUT",
-      "y": -70,
-      "width": 310,
-      "height": 50,
-      "alpha": 70,
-      "screenHAlign": "center",
-      "screenVAlign": "bottom",
-      "bgColor": "0x000000",
-      "borderColor": "0x101009",
-      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 8},
-      "textFormat": { "color": "0x60FF00", "size": 15, "align": "center", "marginLeft": 2, "marginRight": 2},
-      "format": "<font color='#FFFFFF'><b>Info text field (XTE: <font color='{{c:xte}}'>{{xte}}</font>)</b></font><br/>Battle tier:<font color='#ff1aff'> {{battletier}}</font> <p align='right'>Vehicle: <font color='#ff1aff'>{{vehicle}}</font> (<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
     }
   }
 }

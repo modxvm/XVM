@@ -1,4 +1,22 @@
 ﻿{
+  "def": {
+    "test": {
+      "enabled": true,
+      "hotKeyCode": 36,
+      "updateEvent": "ON_TARGET_IN,ON_TARGET_OUT",
+      "y": -70,
+      "width": 310,
+      "height": 50,
+      "alpha": 70,
+      "screenHAlign": "center",
+      "screenVAlign": "bottom",
+      "bgColor": "0x000000",
+      "borderColor": "0x101009",
+      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "strength": 8},
+      "textFormat": { "color": "0x60FF00", "size": 15, "align": "center", "marginLeft": 2, "marginRight": 2},
+      "format": "<font color='#FFFFFF'><b>Info text field (XTE: <font color='{{c:xte}}'>{{xte}}</font>)</b></font><br/>Battle tier:<font color='#ff1aff'> {{battletier}}</font> <p align='right'>Vehicle: <font color='#ff1aff'>{{vehicle}}</font> (<font color='{{c:t-winrate}}'>{{t-winrate%2d}}%</font>)</p>"
+    }
+  },
   "formats": [
     /*
     {
@@ -25,7 +43,7 @@
       "hotKeyCode": 36, // J
       //"height": 150,
       "visibleOnHotKey": "false",
-      "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
+      "$ref": { "path":"def.test" }
     },
     {
       //"enabled": false,
@@ -34,7 +52,7 @@
       //"updateEvent": "PY(test)",
       "height": 150,
       "format": "{{py:vinfo.name}}\nRT: {{py:vinfo.gun_reload}}\nVR: {{py:vinfo.vision_radius}}",
-      "$ref": { "file":"../default/battleLabelsTemplates.xc", "path":"def.test2" }
+      "$ref": { "path":"def.test" }
     },
     */
     {
