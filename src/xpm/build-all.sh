@@ -65,7 +65,7 @@ build()
     return 0
   fi
 
-  if [ "${1##*/}" != "__version__.py" ]; then
+  if [[ $1 != */__version__.py ]]; then
     echo "Building: $1"
   fi
   result="$("$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$1')" 2>&1)"
@@ -112,6 +112,9 @@ for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}
   build $f mods/packages/$m
+  if [[ $fn = */__version__.py ]]; then
+      rm -f "$fn"
+  fi
 done
 #echo "$(($(date +%s%N)-$st))"
 
