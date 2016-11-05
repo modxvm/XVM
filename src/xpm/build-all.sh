@@ -56,12 +56,12 @@ build()
 
   [ "$d" = "$f" ] && d=""
 
-  pyc_dir="../../~output/$2/python/$d"
-  pyc_file="../../~output/$2/python/${f}c"
+  py_dir="../../~output/$2/python/$d"
+  py_file="../../~output/$2/python/$f"
   cmp_dir="../../~output/cmp/$2/python/$d"
   cmp_file="../../~output/cmp/$2/python/$f.tmp"
 
-  if [ -f "$pyc_file" ] && [ -f "$cmp_file" ] && cmp "$1" "$cmp_file" >/dev/null 2>&1; then
+  if [ -f "$py_file" ] && [ -f "$cmp_file" ] && cmp "$1" "$cmp_file" >/dev/null 2>&1; then
     return 0
   fi
 
@@ -77,8 +77,8 @@ build()
   fi
 
   [ ! -f $1c ] && exit 1
-  mkdir -p "$pyc_dir"
-  cp $1c "$pyc_file"
+  mkdir -p "$py_dir"
+  cp $1 "$py_file"
   rm -f $1c
 }
 
@@ -116,7 +116,7 @@ done
 #echo "$(($(date +%s%N)-$st))"
 
 # generate default config from .xc files and xvm.xc.sample
-echo 'generate default_config.pyc and xvm.xc.sample'
+echo 'generate default_config.py and xvm.xc.sample'
 dc_fn=../../~output/mods/packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
 "$XVMBUILD_PYTHON_FILEPATH" -c "
@@ -128,20 +128,21 @@ en = JSONxLoader.load('../../release/l10n/en.xc')
 ru = JSONxLoader.load('../../release/l10n/ru.xc')
 print('DEFAULT_CONFIG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg, en, ru))
 " > $dc_fn 2>&1
+rm -f ../xfw/~output/python/mods/xfw/python/lib/JSONx/*.pyc
+rm -f ../xfw/~output/python/mods/xfw/python/lib/JSONxLoader/*.pyc
 "$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$dc_fn')" 2>&1
-[ ! -f ${dc_fn}c ] && cat "$dc_fn"
-rm -f "$dc_fn"
-[ ! -f ${dc_fn}c ] && exit
+[ ! -f ${dc_fn}c ] && { cat "$dc_fn"; rm -f "$dc_fn"; }
+rm -f "${dc_fn}c"
+[ ! -f ${dc_fn} ] && exit
 
 xvm_xc_sample_src=../../release/configs/xvm.xc.sample
 xvm_xc_sample_trgt=../../~output/mods/packages/xvm_main/python/default_xvm_xc.py
-rm -f "${xvm_xc_sample_trgt}c"
-echo -e -n "''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''" > $xvm_xc_sample_trgt
+echo -e -n "# -*- coding: utf-8 -*-\n''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''" > $xvm_xc_sample_trgt
 cat $xvm_xc_sample_src >> $xvm_xc_sample_trgt
 echo "'''" >> $xvm_xc_sample_trgt
 "$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$xvm_xc_sample_trgt')"
-[ ! -f ${xvm_xc_sample_trgt}c ] && exit
-rm -f "$xvm_xc_sample_trgt"
+[ ! -f ${xvm_xc_sample_trgt}c ] && { rm -f "$xvm_xc_sample_trgt"; exit; }
+rm -f "${xvm_xc_sample_trgt}c"
 
 popd >/dev/null
 

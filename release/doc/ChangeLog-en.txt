@@ -10,7 +10,7 @@ XVM-6.4.8-dev:
 
   [MISC]
   * Added Python C Extensions (.pyd) support
-  * Added ability to use uncompiled XFW-based mods (/mods/packages/)
+  * Use uncompiled XFW-based mods (/mods/packages/)
   * Fix ctypes library
 
 XVM-6.4.7.1:
