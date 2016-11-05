@@ -43,8 +43,13 @@ Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: 
 Source: "..\..\..\~output\*"; DestDir: "{app}"; Flags: createallsubdirs recursesubdirs
 
 [InstallDelete]
+;ver\gui\flash
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battle.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battleVehicleMarkers.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\Lobby.swf"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\flash"
+
+;ver\gui\scaleform
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\battle.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\Minimap.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\PlayersPanel.swf"
@@ -53,24 +58,37 @@ Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\TeamBase
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\VehicleMarkersManager.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\xvm.swf"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform"
+
+;ver\gui
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui"
 
-
+;ver\scripts\client\gui\scaleform
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\scaleform\locale"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\clients\gui\scaleform"
+
+;ver\scripts\client\gui\mods
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\mods\mod_.pyc"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\mods"
+
+;ver\scripts\client\gui
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
 
-Type: filesandordirs; Name: "{app}\res_mods\mods"
+Type: filesandordirs; Name: "{app}\res_mods\mods\packages\xvm-*"
+Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
+
 Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
 
 [UninstallDelete]
+;ver\gui\flash
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battle.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battleVehicleMarkers.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\Lobby.swf"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\flash"
+
+;ver\gui\scaleform
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\battle.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\Minimap.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\PlayersPanel.swf"
@@ -79,18 +97,26 @@ Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\TeamBase
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\VehicleMarkersManager.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\xvm.swf"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform"
+
+;ver\gui
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui"
 
-
+;ver\scripts\client\gui\scaleform
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\scaleform\locale"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\clients\gui\scaleform"
+
+;ver\scripts\client\gui\mods
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\mods\mod_.pyc"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\mods"
+
+;ver\scripts\client\gui
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
 
-Type: filesandordirs; Name: "{app}\res_mods\mods"
+Type: filesandordirs; Name: "{app}\res_mods\mods\packages\xvm-*"
+Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
+
 Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
 
