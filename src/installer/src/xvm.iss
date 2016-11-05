@@ -75,8 +75,16 @@ Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
 
+;mods\packages
 Type: filesandordirs; Name: "{app}\res_mods\mods\packages\xvm_*"
+Type: dirifempty; Name: "{app}\res_mods\mods\packages\"
+
+;mods\xfw
 Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
+
+;configs\xvm\py_macro
+Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*\*.pyc"
+Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*.pyc"
 
 Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
@@ -114,8 +122,16 @@ Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
 
+;mods\packages
 Type: filesandordirs; Name: "{app}\res_mods\mods\packages\xvm_*"
+Type: dirifempty; Name: "{app}\res_mods\mods\packages\"
+
+;mods\xfw
 Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
+
+;configs\xvm\py_macro
+Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*\*.pyc"
+Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*.pyc"
 
 Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
