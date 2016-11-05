@@ -75,7 +75,7 @@ Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
 
-Type: filesandordirs; Name: "{app}\res_mods\mods\packages\xvm-*"
+Type: filesandordirs; Name: "{app}\res_mods\mods\packages\xvm_*"
 Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
 
 Type: filesandordirs; Name: "{app}\xvm_uninst"
