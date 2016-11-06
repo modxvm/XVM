@@ -17,10 +17,12 @@ static PyObject* LoadBank(PyObject* self, PyObject* args)
 	if (!PyArg_ParseTuple(args, "s", &filename))
 	{
 		PySys_WriteStderr("[XVM][Sounds/LoadBank] Cannot parse tuple\n");
-		Py_RETURN_FALSE;
+		return NULL;
 	}
 
 	returnCode = AK_SoundEngine_LoadBank(filename, AK_DEFAULT_POOL_ID, &bankID);
+	PyMem_Free(&filename);
+
 	if (returnCode != AK_Success)
 	{
 		PySys_WriteStderr("[XVM][Sounds/LoadBank] Cannot load sound bank. Audiokinetic error code: %d \n", returnCode);
@@ -38,10 +40,12 @@ static PyObject* UnloadBank(PyObject* self, PyObject* args)
 	if (!PyArg_ParseTuple(args, "s", &filename))
 	{
 		PySys_WriteStderr("[XVM][Sounds/UnloadBank] Cannot parse tuple\n");
-		Py_RETURN_FALSE;
+		return NULL;
 	}
 
 	returnCode = AK_SoundEngine_UnloadBank(filename, NULL, NULL);
+	PyMem_Free(&filename);
+
 	if (returnCode != AK_Success)
 	{
 		PySys_WriteStderr("[XVM][Sounds/UnoadBank] Cannot unload sound bank. Audiokinetic error code: %d \n", returnCode);
