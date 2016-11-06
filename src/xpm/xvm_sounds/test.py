@@ -30,9 +30,8 @@ def _test():
 try:
     XVMNativeSounds = imp.load_dynamic('XVMNativeSounds','./res_mods/mods/packages/xvm_sounds/native/XVMNativeSounds.pyd')
     XVMNativeSounds.load_bank('XVM.bnk')
+    BigWorld.callback(10, _test)
 except Exception:
     print("=============================")
     traceback.print_exc()
     print("=============================")
-
-BigWorld.callback(10, _test)
