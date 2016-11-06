@@ -103,19 +103,8 @@ enum AKRESULT
 	AK_DLLCannotLoad = 84
 };
 
-//Load Bank
-enum AKRESULT __cdecl AK_SoundEngine_LoadBank_ByFilename(const char * in_pszString, AkMemPoolId in_memPoolId, AkBankID* out_bankID);
-typedef enum AKRESULT (__cdecl *AK_SoundEngine_LoadBank_ByFilename_typedef)(const char * in_pszString, AkMemPoolId in_memPoolId, AkBankID* out_bankID);
+enum AKRESULT __cdecl AK_SoundEngine_LoadBank(const void * in_pInMemoryBankPtr, AkUInt32 in_uInMemoryBankSize, AkMemPoolId in_uPoolForBankMedia, AkBankID* out_bankID);
+typedef enum AKRESULT(__cdecl *AK_SoundEngine_LoadBank_typedef)(const void * in_pInMemoryBankPtr, AkUInt32 in_uInMemoryBankSize, AkMemPoolId in_uPoolForBankMedia, AkBankID* out_bankID);
 
-enum AKRESULT __cdecl AK_SoundEngine_LoadBank_ByMemory_InPlace(const void * in_pInMemoryBankPtr, AkUInt32 in_uInMemoryBankSize, AkBankID* out_bankID);
-typedef enum AKRESULT (__cdecl *AK_SoundEngine_LoadBank_ByMemory_InPlace_typedef)(const void * in_pInMemoryBankPtr, AkUInt32 in_uInMemoryBankSize, AkBankID* out_bankID);
-
-enum AKRESULT __cdecl AK_SoundEngine_LoadBank_ByMemory_OutOfPlace(const void * in_pInMemoryBankPtr, AkUInt32 in_uInMemoryBankSize, AkMemPoolId in_uPoolForBankMedia, AkBankID* out_bankID);
-typedef enum AKRESULT(__cdecl *AK_SoundEngine_LoadBank_ByMemory_OutOfPlace_typedef)(const void * in_pInMemoryBankPtr, AkUInt32 in_uInMemoryBankSize, AkMemPoolId in_uPoolForBankMedia, AkBankID* out_bankID);
-
-//Unload Bank
-enum AKRESULT __cdecl AK_SoundEngine_UnloadBank_ByFilename(const char * in_pszString, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId);
-typedef enum AKRESULT(__cdecl *AK_SoundEngine_UnloadBank_ByFilename_typedef)(const char * in_pszString, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId);
-
-enum AKRESULT __cdecl AK_SoundEngine_UnloadBank_ByBankID(AkBankID in_bankID, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId);
-typedef enum AKRESULT(__cdecl *AK_SoundEngine_UnloadBank_ByBankID_typedef)(AkBankID in_bankID, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId);
+enum AKRESULT __cdecl AK_SoundEngine_UnloadBank(AkBankID in_bankID, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId);
+typedef enum AKRESULT(__cdecl *AK_SoundEngine_UnloadBank_typedef)(AkBankID in_bankID, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId);
