@@ -29,7 +29,15 @@ def _test():
 
 try:
     XVMNativeSounds = imp.load_dynamic('XVMNativeSounds','./res_mods/mods/packages/xvm_sounds/native/XVMNativeSounds.pyd')
-    XVMNativeSounds.load_bank('XVM.bnk')
+    
+    #method 1: using filename
+    #bankID = XVMNativeSounds.bank_load_by_filename('XVM.bnk')
+    #XVMNativeSounds.bank_unload_by_filename('XVM.bnk')
+
+    #method 2: using memory and bankID
+    bankID = XVMNativeSounds.bank_load_by_memory('./res_mods/0.9.16/audioww/XVM.bnk')
+    #XVMNativeSounds.bank_unload_by_bankid(bankID)
+
     BigWorld.callback(10, _test)
 except Exception:
     print("=============================")
