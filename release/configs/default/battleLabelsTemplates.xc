@@ -3,8 +3,8 @@
  * Текстовые поля боевого интерфейса.
  */
 {
-  // Definitions (extended format supported, see extra-field.txt).
-  // Шаблоны (поддерживается расширенный формат, см. extra-field.txt).
+  // Definitions.
+  // Шаблоны.
   "def": {
     "hitlogHeader": {
       "enabled": true,
