@@ -60,6 +60,5 @@ static PyMethodDef XVMNativeSoundsMethods[] = {
 
 PyMODINIT_FUNC initXVMNativeSounds(void)
 {
-	MessageBoxA(NULL, "Time to attach", "Time to attach", MB_OK);
 	Py_InitModule("XVMNativeSounds", XVMNativeSoundsMethods);
 }
