@@ -1,4 +1,6 @@
 ﻿XVM-6.4.9-dev:
+  [MISC]
+  * Python part of XVM now distributed in source code (.py files)
 
 XVM-6.4.8:
   [XMQP]
