@@ -46,13 +46,6 @@ check_xvm_dirs = [
     'res_mods/mods/xfw',
     'res_mods/mods/packages',
     ]
-# check incorrect hash and missing files
-check_general_dirs = [
-    PATH.GENERAL_MODS_DIR + '/gui/flash',
-    PATH.GENERAL_MODS_DIR + '/gui/scaleform',
-    PATH.GENERAL_MODS_DIR + '/scripts/client/gui/mods',
-    PATH.GENERAL_MODS_DIR + '/scripts/client/gui/scaleform/locale',
-    ]
 
 
 #####################################################################
@@ -99,13 +92,13 @@ def _checkIntegrityAsync(*args, **kwargs):
             from hash_table import HASH_DATA
         except:
             with lock:
-                integrity_result = ['hash_table.pyc is missing/corrupt']
+                integrity_result = ['hash_table.py is missing/corrupt']
             return
         result = []
         for path in check_xvm_dirs:
             for folder, _, files_arr in os.walk(path):
                 for filename in files_arr:
-                    if (filename.endswith('.swf') or filename.endswith('.pyc')) and filename != '__version__.pyc' and filename != 'hash_table.pyc':
+                    if (filename.endswith('.swf') or filename.endswith('.py')) and filename != '__version__.py' and filename != 'hash_table.py':
                         file_fullpath = (folder + '/' + filename).replace('\\', '/')
                         if file_fullpath in HASH_DATA:
                             with open(file_fullpath, 'rb') as f:
@@ -114,19 +107,14 @@ def _checkIntegrityAsync(*args, **kwargs):
                             del HASH_DATA[file_fullpath]
                         else:
                             result.append('extra file %s' % file_fullpath)
-        for path in check_general_dirs:
-            for folder, _, files_arr in os.walk(path):
-                for filename in files_arr:
-                    if (filename.endswith('.swf') or filename.endswith('.pyc')):
-                        file_fullpath = (folder + '/' + filename).replace('\\', '/')
-                        if file_fullpath in HASH_DATA:
-                            with open(file_fullpath, 'rb') as f:
-                                if sha1(f.read()).hexdigest() != HASH_DATA[file_fullpath]:
-                                    result.append('hash mismatch in file: %s' % file_fullpath)
-                            del HASH_DATA[file_fullpath]
         for file_fullpath in HASH_DATA.keys():
-            if not (file_fullpath.endswith('__version__.pyc') or file_fullpath.endswith('hash_table.pyc')):
-                result.append('file is missing: %s' % file_fullpath)
+            if not (file_fullpath.endswith('__version__.py') or file_fullpath.endswith('hash_table.py')):
+                if not os.path.isfile(file_fullpath):
+                    result.append('file is missing: %s' % file_fullpath)
+                else:
+                    with open(file_fullpath, 'rb') as f:
+                        if sha1(f.read()).hexdigest() != HASH_DATA[file_fullpath]:
+                            result.append('hash mismatch in file: %s' % file_fullpath)
         with lock:
             integrity_result = result
     except Exception, ex:
