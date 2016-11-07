@@ -63,8 +63,8 @@
       // Акционная цена
       "actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 }
     },
-    // Extra cell fields (see playersPanel.xc).
-    // Дополнительные поля ячеек (см. playersPanel.xc).
+    // Extra cell fields (extended format supported, see extra-field.txt).
+    // Дополнительные поля ячеек (поддерживается расширенный формат, см. extra-field.txt).
     "extraFields": [
       // Slot background
       // Подложка слота

@@ -60,9 +60,9 @@
       // Start zoom value (null for default behavior - last used state)
       // Начальное значение кратности (null для поведения по умолчанию - последнее использовавшееся значение)
       "startZoom": null,
-      // Zoom Indicator (see playersPanel.xc for parameters description)
+      // Zoom Indicator (see extra-field.txt for parameters description)
       // Global macros allowed in all fields
-      // Индикатор масштаба (см. playersPanel.xc для описания параметров)
+      // Индикатор масштаба (см. extra-field.txt для описания параметров)
       // Можно использовать глобальные макросы во всех полях
       "zoomIndicator": {
         // false - disable.

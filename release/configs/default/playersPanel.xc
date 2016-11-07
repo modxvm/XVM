@@ -1,99 +1,10 @@
 ﻿/**
  * Parameters of the Players Panels ("ears").
  * Параметры панелей игроков ("ушей").
- *
- * Extra field parameters:
- *
- * types of formats available for extended format:
- *   - MovieClip (for loading image)
- *   - TextField (for writing text and creating rectangles)
- * if "src" field is present, MovieClip format will be used
- * if "src" field is absent, TextField format will be used
- *
- * fields available for extended format:
- *   "src" - resource path ("xvm://res/contour/{{vehiclename}}.png")
- *   "format" - text format (macros allowed)
- *
- * fields available for both MovieClip and TextField formats:
- *   "enabled" - enable/disable field creation (global macros allowed)
- *   "x" - x position (macros allowed)
- *   "y" - y position (macros allowed)
- *   "width" - width (macros allowed)
- *   "height" - height (macros allowed)
- *   "bindToIcon" - if enabled, x position is binded to vehicle icon (default false)
- *   "alpha" - transparency in percents (0..100) (macros allowed)
- *   "rotation" - rotation in degrees (0..360) (macros allowed)
- *   "align" - horizontal alignment ("left", "center", "right")
- *      for left panel default value is "left"
- *      for right panel default value is "right"
- *   "valign" - vertical alignment ("none", "top", "center", "bottom")
- *   "scaleX", "scaleY" - scaling (use negative values for mirroring)
- *   "hotKeyCode" - keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide; when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
- *   "onHold" - take action by key click (false) or while key is remains pressed (true); (default: false)
- *   "visibleOnHotKey" - field visible on hot key pressed (true) or vice versa (false); (default: true)
- *   "flags": [ "player", "ally", "squadman", "enemy", "teamKiller", "neverSeen", "lost", "spotted", "alive", "dead" ],
- *      Field visibility flag
- *      If don't set "ally", "squadman", "player", "enemy", "teamKiller", they are not used.
- *      If don't set "neverSeen", "lost" and "spotted", it uses all - and "neverSeen", and "lost", and "spotted". Note: "neverSeen" status disabled for the minimap.
- *      If don't set "alive", "dead", it uses both - and "alive", and "dead"
- *      -------------------------------------------------------------------------------------
- *      Флаг видимости поля
- *      Если не указаны "ally", "squadman", "player", "enemy", "teamKiller", то они не используются.
- *      Если не указаны "neverSeen", "lost" и "spotted", то используются все - и "neverSeen", и "lost", и "spotted". Примечание: статус "neverSeen" для миникарты отключен.
- *      Если не указаны "alive", "dead", то используются оба - и "alive", и "dead".
- *
- * fields available for TextField format only:
- *   "borderColor" - if set, draw border with specified color (macros allowed)
- *   "bgColor" - if set, draw background with specified color (macros allowed)
- *   "antiAliasType" - anti aliasing mode ("advanced" or "normal")
- *
- * fields available for MovieClip format only:
- *   "highlight" - highlight icon depending on the player state, default false
- *
- * fields available for players panel, statistic form, battle loading and minimap:
- *   "layer": field z-order
- *     values:
- *     "substrate": put field behind all fields (for the players panel x value depends on the players panel width)
- *     "bottom": put field behind all standard fields but above substrate fields (for the players panel x value does not depend on the players panel width)
- *     "normal": put field above bottom fields (for the players panel etc- above vehicle icon but behind standard text fields) (default)
- *     "top": put field above all fields
- *
- * text format and shadow:
- *   http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
- *   "textFormat": {
- *     "font"
- *     "size"
- *     "color"
- *     "bold"
- *     "italic"
- *     "underline"
- *     "align"
- *     "valign"
- *     "leftMargin"
- *     "rightMargin"
- *     "indent"
- *     "leading"
- *     "tabStops"
- *   }
- *
- *   http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filters/DropShadowFilter.html
- *   "shadow": {
- *     "enabled"
- *     "distance" (in pixels)
- *     "angle"    (0.0 .. 360.0)
- *     "color"    "0xXXXXXX"
- *     "alpha"    (0.0 .. 100.0)
- *     "blur"     (0.0 .. 255.0)
- *     "strength" (0.0 .. 255.0)
- *     "quality"
- *     "inner"
- *     "knockout"
- *     "hideObject"
- *   }
  */
 {
-  // Definitions
-  // Шаблоны
+  // Definitions (extended format supported, see extra-field.txt).
+  // Шаблоны (поддерживается расширенный формат, см. extra-field.txt).
   "def": {
     // Enemy spotted status marker.
     // Маркер статуса засвета противника.

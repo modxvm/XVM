@@ -1,4 +1,8 @@
-XVM-6.4.8-dev:
+﻿XVM-6.4.9-dev:
+  [MISC]
+  * Python part of XVM now distributed in source code (.py files)
+
+XVM-6.4.8:
   [XMQP]
   * Initial implementation
   * options added:
@@ -8,10 +12,16 @@ XVM-6.4.8-dev:
       "minimapClicksTime" => "minimapDrawTime"
       "minimapClicksColor" => "minimapDrawColor"
 
-  [MISC]
+  [XFW]
   * Added Python C Extensions (.pyd) support
   * Use uncompiled XFW-based mods (/mods/packages/)
   * Fix ctypes library
+
+  [MISC]
+  * Various bugs fixes
+  
+  [DOC]
+  * Added description for the parameters used in setting extra field (see extra-field.txt)
 
 XVM-6.4.7.1:
   * fixed "crewMaxPerksCount" option

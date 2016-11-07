@@ -5,8 +5,8 @@
 {
   // Textfields for units on minimap.
   // Текстовые поля юнитов на миникарте.
-  // Definitions
-  // Шаблоны
+  // Definitions.
+  // Шаблоны.
   "def": {
     // Fields default format
     // Формат поля по умолчанию
