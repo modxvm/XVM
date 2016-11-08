@@ -189,10 +189,10 @@ def formatMacro(macro, macroes):
                     fm['prec'] = int(_prec)
                 elif isinstance(_macro, basestring):
                     _macro = _macro[:int(_prec)]
-            log('type_macro = %s' % type(_macro))
-            log('fm = %s' % fm)
+            # log('type_macro = %s' % type(_macro))
+            # log('fm = %s' % fm)
             _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
-        log('_macro = %s' % _macro)
+        # log('_macro = %s' % _macro)
         return str(_macro)
     else:
         return macro
@@ -219,13 +219,13 @@ def parser(strHTML, macroes):
             else:
                 # old_strHTML = strHTML
                 s = strHTML[start:end]
-                log('s = %s' % s)
+                #log('s = %s' % s)
                 strHTML = strHTML.replace(s, formatMacro(s, macroes))
     while notMacroesDL:
         _notMacroesDL = notMacroesDL.copy()
         for s in _notMacroesDL:
             strHTML = strHTML.replace(s, notMacroesDL.pop(s, ''))
-    log('strHTML = %s' % strHTML)
+    # log('strHTML = %s' % strHTML)
     return strHTML
 
 
@@ -408,6 +408,7 @@ class Data(object):
             self.data['timer'] = self.timeReload(attackerID)
         self.data['attackerID'] = attackerID
         self.data['damage'] = self.data['oldHealth'] - max(0, newHealth)
+        self.data['isAlive'] = newHealth > 0
         self.data['oldHealth'] = newHealth
         self.updateData()
         self.updateLabels()
@@ -675,7 +676,7 @@ def _onTotalEfficiencyUpdated(base, self, diff):
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    if self.isPlayerVehicle:
+    if self.isPlayerVehicle and data.data['isAlive']:
         data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
         if (newHealth <= 0):
             global on_fire
