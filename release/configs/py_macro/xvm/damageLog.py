@@ -101,13 +101,131 @@ def readyConfig(section):
     return res
 
 
+def comparing(_macro, _operator, _math):
+    if isinstance(_macro, (float, int)) and isinstance(_math, (float, int)):
+        if _operator == '>=':
+            return _macro >= _math
+        elif _operator == '<=':
+            return _macro <= _math
+        elif _operator == '!=':
+            return _macro != _math
+        elif _operator in ('==', '='):
+            return _macro == _math
+        elif _operator == '<':
+            return _macro < _math
+        elif _operator == '>':
+            return _macro > _math
+    elif isinstance(_macro, basestring) and isinstance(_math, basestring):
+        if _operator in ('==', '='):
+            return _macro == _math
+        elif _operator == '!=':
+            return _macro != _math
+    else:
+        return False
+
+
+def flag(_flag):
+    if _flag in ('', "'"):
+        _flag = '>'
+    elif _flag in ('-', "-'"):
+        _flag = '<'
+    elif _flag in ('0', "0'"):
+        _flag = '0'
+    elif _flag in ("-0", "-0'"):
+        _flag = '0<'
+    return _flag
+
+
+def formatMacro(macro, macroes):
+    _macro = macro[2:-2]
+    _macro, _, _def = _macro.partition('|')
+    _macro, _, _rep = _macro.partition('?')
+    fm = {}
+    _operator = ''
+    _flag = ''
+    _type = ''
+    _width = ''
+    _suf = ''
+    for s in ('>=', '<=', '!=', '==', '=', '<', '>'):
+        if s in _macro:
+            _macro, _operator, _math = _macro.partition(s)
+            break
+    _macro, _, _suf = _macro.partition('~')
+    _macro, _, t = _macro.partition('%')
+    if t[-1:] in ('s', 'd', 'f', 'x', 'a'):
+        _type = t[-1:]
+        t = t[:-1]
+    t, _, _prec = t.partition('.')
+    _prec = int(_prec) if _prec.isdigit() else 0
+    for s in ("-0'", "-0", "-'", "0'", '-', '0', "'"):
+        if s in t:
+            _, _flag, _width = t.rpartition(s)
+            break
+    if not _width and t.isdigit():
+        _width = int(t)
+    # _macro, _, _norm = _macro.partition(':')
+    tempMacro = _macro
+    if _macro in macroes:
+        _macro = macroes[_macro]
+        if _operator:
+            if _rep and comparing(_macro, _operator, _math):
+                _macro = _rep
+            elif not comparing(_macro, _operator, _math):
+                _macro = _def
+        elif _rep and _macro:
+            _macro = _rep
+        elif _def and not _macro:
+            _macro = _def
+        if _macro == macroes[tempMacro]:
+            fm['flag'] = flag(_flag)
+            fm['width'] = _width
+            fm['prec'] = ''
+            fm['type'] = _type
+            fm['suf'] = _suf
+            if _prec:
+                if isinstance(_macro, int):
+                    _macro = int(_macro) + int(_prec)
+                elif isinstance(_macro, float):
+                    fm['prec'] = int(_prec)
+                elif isinstance(_macro, basestring):
+                    _macro = _macro[:int(_prec)]
+            log('type_macro = %s' % type(_macro))
+            log('fm = %s' % fm)
+            _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
+        log('_macro = %s' % _macro)
+        return str(_macro)
+    else:
+        return macro
+
+
 def parser(strHTML, macroes):
-    old_strHTML = ''
-    while old_strHTML != strHTML:
-        old_strHTML = strHTML
-        for s in MACROS_NAME:
-            if s in macroes:
-                strHTML = strHTML.replace('{{' + s + '}}', str(macroes[s]))
+    notMacroesDL = {}
+    i = 0
+    b = True
+    while b:
+        dl = True
+        start = strHTML.rfind('{{')
+        end = strHTML.find('}}', start) + 2
+        b = (start >= 0) and (end >= 2)
+        if b:
+            for s in MACROS_NAME:
+                if strHTML[start:end].find(s) >= 0:
+                    dl = False
+                    break
+            if dl:
+                i += 1
+                notMacroesDL['dl' + str(i)] = strHTML[start:end]
+                strHTML = strHTML.replace(notMacroesDL['dl' + str(i)], ('dl' + str(i)))
+            else:
+                # old_strHTML = strHTML
+                s = strHTML[start:end]
+                log('s = %s' % s)
+                strHTML = strHTML.replace(s, formatMacro(s, macroes))
+    while notMacroesDL:
+        _notMacroesDL = notMacroesDL.copy()
+        for s in _notMacroesDL:
+            strHTML = strHTML.replace(s, notMacroesDL.pop(s, ''))
+    log('strHTML = %s' % strHTML)
     return strHTML
 
 
@@ -248,7 +366,7 @@ class Data(object):
         _timerReload.output()
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
-        if vehicle.isPlayerVehicle and self.data['isAlive']:
+        if self.data['isAlive']:
             self.data['isAlive'] = vehicle.health > 0
             maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
             self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
@@ -259,7 +377,7 @@ class Data(object):
             self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
-        if vehicle.isPlayerVehicle and self.data['isAlive']:
+        if self.data['isAlive']:
             self.data['isAlive'] = vehicle.health > 0
             self.data['splashHit'] = 'splash'
             self.data['criticalHit'] = False
@@ -268,32 +386,33 @@ class Data(object):
             self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
-        if vehicle.isPlayerVehicle:
-            if (attackReasonID == 1) and (self.data['fireStage'] < 0) and self.data['isBeginFire']:
-                self.data['fireStage'] = 0
-            elif (attackReasonID == 1) and (self.data['fireStage'] == 0) and self.data['isInFire']:
-                self.data['fireStage'] = 1
-            elif (self.data['fireStage'] in [0, 1]) and not self.data['isInFire']:
-                self.data['fireStage'] = 2
-            elif self.data['fireStage'] == 2:
-                self.data['fireStage'] = -1
-            if self.data['attackReasonID'] not in [24, 25]:
-                self.data['attackReasonID'] = attackReasonID
-            self.data['isDamage'] = True
-            self.data['hitEffect'] = HIT_EFFECT_CODES[4]
-            if self.data['attackReasonID'] != 0:
-                self.data['costShell'] = 'unknown'
-                self.data['shellKind'] = 'not_shell'
-                self.data['timer'] = 0
-            else:
-                self.data['timer'] = self.timeReload(attackerID)
-            self.data['attackerID'] = attackerID
-            self.data['damage'] = self.data['oldHealth'] - max(0, newHealth)
-            self.data['oldHealth'] = newHealth
-            self.updateData()
-            self.updateLabels()
-            self.data['isBeginFire'] = self.data['isInFire']
-            as_event('ON_HIT')
+        if (attackReasonID == 1) and (self.data['fireStage'] < 0) and self.data['isBeginFire']:
+            self.data['fireStage'] = 0
+        elif (attackReasonID == 1) and (self.data['fireStage'] == 0) and self.data['isInFire']:
+            self.data['fireStage'] = 1
+        elif (self.data['fireStage'] in [0, 1]) and not self.data['isInFire']:
+            self.data['fireStage'] = 2
+        elif self.data['fireStage'] == 2:
+            self.data['fireStage'] = -1
+        if self.data['attackReasonID'] not in [24, 25]:
+            self.data['attackReasonID'] = attackReasonID
+        self.data['isDamage'] = True
+        self.data['hitEffect'] = HIT_EFFECT_CODES[4]
+        if self.data['attackReasonID'] != 0:
+            self.data['costShell'] = 'unknown'
+            self.data['criticalHit'] = False
+            self.data['shellKind'] = 'not_shell'
+            self.data['splashHit'] = 'no-splash'
+            self.data['timer'] = 0
+        else:
+            self.data['timer'] = self.timeReload(attackerID)
+        self.data['attackerID'] = attackerID
+        self.data['damage'] = self.data['oldHealth'] - max(0, newHealth)
+        self.data['oldHealth'] = newHealth
+        self.updateData()
+        self.updateLabels()
+        self.data['isBeginFire'] = self.data['isInFire']
+        as_event('ON_HIT')
 
 
 data = Data()
@@ -316,7 +435,7 @@ def getValueMacroes(section, value):
              'c:type-shell': conf['c_typeShell'].get(value['shellKind']),
              'c:hit-effects': conf['c_HitEffect'].get(value['hitEffect']),
              'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
-             'number': '{:0>2}'.format(value['number']) if value['number'] is not None else None,
+             'number': value['number'] if value['number'] is not None else None,
              'dmg': value['damage'],
              'dmg-ratio': value['dmgRatio'],
              'vehicle': value['shortUserString'],
@@ -345,7 +464,7 @@ class Log(object):
         self.__init__(self.section)
 
     def addLine(self, attackerID, attackReasonID):
-        self.dataLog['number'] = '{:>2}'.format(len(self.listLog) + 1)
+        self.dataLog['number'] = len(self.listLog) + 1
         macroes = getValueMacroes(self.section, self.dataLog)
         self.listLog.insert(0, parser(config.get(self.section + 'formatHistory'), macroes))
         self.numberLine += 1
@@ -359,7 +478,7 @@ class Log(object):
             if data.data['fireStage'] == 0:
                 self.dataLogFire = data.data.copy()
                 self.numberLine = 0
-                self.dataLogFire['number'] = '{:>2}'.format(len(self.listLog) + 1)
+                self.dataLogFire['number'] = len(self.listLog) + 1
                 macroes = getValueMacroes(self.section, self.dataLogFire)
                 self.listLog.insert(0, parser(config.get(self.section + 'formatHistory'), macroes))
                 # self.addLine(None, None)
@@ -381,7 +500,7 @@ class Log(object):
                     self.dictVehicle[attackerID][attackReasonID]['damage'] += data.data['damage']
                     self.dataLog['damage'] = self.dictVehicle[attackerID][attackReasonID]['damage']
                     self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
-                    self.dataLog['number'] = '{:>2}'.format(len(self.listLog))
+                    self.dataLog['number'] = len(self.listLog)
                     numberLine = self.dictVehicle[attackerID][attackReasonID]['numberLine']
                     macroes = getValueMacroes(self.section, self.dataLog)
                     self.listLog[numberLine] = parser(config.get(self.section + 'formatHistory'), macroes)
@@ -516,7 +635,7 @@ class TimerReload(object):
         as_event('ON_TIMER_RELOAD')
 
     def output(self):
-        if (data.data['attackReasonID'] == 0) and (data.data['timer'] > 0):
+        if (data.data['attackReasonID'] == 0) and (data.data['timer'] > 0) and data.data['teamDmg'] != 'player':
             self.data = data.data.copy()
             macroes = getValueMacroes(self.section, self.data)
             self.strTime = parser(config.get(self.section + 'formatTimer'), macroes)
@@ -556,11 +675,12 @@ def _onTotalEfficiencyUpdated(base, self, diff):
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
-    if (newHealth <= 0) and self.isPlayerVehicle:
-        global on_fire
-        on_fire = 0
-        as_event('ON_FIRE')
+    if self.isPlayerVehicle:
+        data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
+        if (newHealth <= 0):
+            global on_fire
+            on_fire = 0
+            as_event('ON_FIRE')
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
@@ -574,12 +694,14 @@ def onEnterWorld(self, prereqs):
 
 @registerEvent(Vehicle, 'showDamageFromShot')
 def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
-    data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
+    if self.isPlayerVehicle:
+        data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')
 def showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor):
-    data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
+    if self.isPlayerVehicle:
+        data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
 
 
 @registerEvent(DamagePanel, 'as_setFireInVehicleS')
