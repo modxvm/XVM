@@ -551,7 +551,7 @@ class LastHit(object):
                 self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
             elif data.data['fireStage'] in [1, 2]:
                 self.dataFire['damage'] += data.data['damage']
-                self.dataLog['dmgRatio'] = self.dataFire['damage'] * 100 // data.data['maxHealth']
+                self.dataFire['dmgRatio'] = self.dataFire['damage'] * 100 // data.data['maxHealth']
                 macroes = getValueMacroes(self.section, self.dataFire)
                 self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
         elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
