@@ -142,27 +142,27 @@ def formatMacro(macro, macroes):
     _macro, _, _rep = _macro.partition('?')
     fm = {}
     _operator = ''
-    _flag = ''
-    _type = ''
-    _width = ''
-    _suf = ''
+    fm['flag'] = ''
+    fm['type'] = ''
+    fm['width'] = ''
+    fm['suf'] = ''
     for s in ('>=', '<=', '!=', '==', '=', '<', '>'):
         if s in _macro:
             _macro, _operator, _math = _macro.partition(s)
             break
-    _macro, _, _suf = _macro.partition('~')
+    _macro, _, fm['suf'] = _macro.partition('~')
     _macro, _, t = _macro.partition('%')
     if t[-1:] in ('s', 'd', 'f', 'x', 'a'):
-        _type = t[-1:]
+        fm['type'] = t[-1:]
         t = t[:-1]
     t, _, _prec = t.partition('.')
     _prec = int(_prec) if _prec.isdigit() else 0
     for s in ("-0'", "-0", "-'", "0'", '-', '0', "'"):
         if s in t:
-            _, _flag, _width = t.rpartition(s)
+            _, fm['flag'], fm['width'] = t.rpartition(s)
             break
-    if not _width and t.isdigit():
-        _width = int(t)
+    if not fm['width'] and t.isdigit():
+        fm['width'] = int(t)
     # _macro, _, _norm = _macro.partition(':')
     tempMacro = _macro
     if _macro in macroes:
@@ -177,20 +177,22 @@ def formatMacro(macro, macroes):
         elif _def and not _macro:
             _macro = _def
         if _macro == macroes[tempMacro]:
-            fm['flag'] = flag(_flag)
-            fm['width'] = _width
+            fm['flag'] = flag(fm['flag'])
             fm['prec'] = ''
-            fm['type'] = _type
-            fm['suf'] = _suf
             if _prec:
                 if isinstance(_macro, int):
                     _macro = int(_macro) + int(_prec)
                 elif isinstance(_macro, float):
                     fm['prec'] = int(_prec)
                 elif isinstance(_macro, basestring):
-                    _macro = _macro[:int(_prec)]
-            # log('type_macro = %s' % type(_macro))
-            # log('fm = %s' % fm)
+                    if len(unicode(_macro, 'utf8')) > int(_prec):
+                        if (int(_prec) - len(unicode(fm['suf'], 'utf8'))) > 0:
+                            _macro = unicode(_macro, 'utf8')[:(int(_prec) - len(fm['suf']))]
+                        else:
+                            _macro = unicode(_macro, 'utf8')[:(int(_prec))]
+                            fm['suf'] = ''
+                    else:
+                        fm['suf'] = ''
             _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
         # log('_macro = %s' % _macro)
         return str(_macro)
@@ -209,13 +211,14 @@ def parser(strHTML, macroes):
         b = (start >= 0) and (end >= 2)
         if b:
             for s in MACROS_NAME:
-                if strHTML[start:end].find(s) >= 0:
+                begin = strHTML[start:end].find(s)
+                if (begin == 2) and (strHTML[(start + begin + len(s))] in ('|', '?', '~', '%', '>', '<', '!', '=', '}')):
                     dl = False
                     break
             if dl:
                 i += 1
-                notMacroesDL['dl' + str(i)] = strHTML[start:end]
-                strHTML = strHTML.replace(notMacroesDL['dl' + str(i)], ('dl' + str(i)))
+                notMacroesDL['<dl>' + str(i)] = strHTML[start:end]
+                strHTML = strHTML.replace(notMacroesDL['<dl>' + str(i)], ('<dl>' + str(i)))
             else:
                 # old_strHTML = strHTML
                 s = strHTML[start:end]
@@ -366,24 +369,20 @@ class Data(object):
         _timerReload.output()
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
-        if self.data['isAlive']:
-            self.data['isAlive'] = vehicle.health > 0
-            maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
-            self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
-            self.data['splashHit'] = 'no-splash'
-            self.data['criticalHit'] = (maxHitEffectCode == 5)
-            if damageFactor == 0:
-                self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
-            self.hitShell(attackerID, effectsIndex, damageFactor)
+        maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
+        self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
+        self.data['splashHit'] = 'no-splash'
+        self.data['criticalHit'] = (maxHitEffectCode == 5)
+        if damageFactor == 0:
+            self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
+        self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
-        if self.data['isAlive']:
-            self.data['isAlive'] = vehicle.health > 0
-            self.data['splashHit'] = 'splash'
-            self.data['criticalHit'] = False
-            if damageFactor == 0:
-                self.data['hitEffect'] = HIT_EFFECT_CODES[3]
-            self.hitShell(attackerID, effectsIndex, damageFactor)
+        self.data['splashHit'] = 'splash'
+        self.data['criticalHit'] = False
+        if damageFactor == 0:
+            self.data['hitEffect'] = HIT_EFFECT_CODES[3]
+        self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
         if (attackReasonID == 1) and (self.data['fireStage'] < 0) and self.data['isBeginFire']:
@@ -695,13 +694,13 @@ def onEnterWorld(self, prereqs):
 
 @registerEvent(Vehicle, 'showDamageFromShot')
 def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
-    if self.isPlayerVehicle:
+    if self.isPlayerVehicle and data.data['isAlive']:
         data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')
 def showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor):
-    if self.isPlayerVehicle:
+    if self.isPlayerVehicle and data.data['isAlive']:
         data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
 
 
