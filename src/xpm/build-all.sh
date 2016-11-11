@@ -97,7 +97,7 @@ build_xfw
 
 echo 'updating versions'
 #st=$(date +%s%N)
-version_template=$(hg parent --template "__revision__ = '{rev}'\n__branch__ = '{branch}'")
+version_template=$(hg parent --template "__revision__ = '{rev}'\n__branch__ = '{branch}'\n__node__ = '{node}'")
 # create __version__.py files
 for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
