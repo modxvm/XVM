@@ -17,7 +17,7 @@ enum AKRESULT AK_SoundEngine_LoadBank(const void * in_pInMemoryBankPtr, AkUInt32
 	{
 		return func(in_pInMemoryBankPtr, in_uInMemoryBankSize, in_uPoolForBankMedia, out_bankID);
 	}
-	return AK_Fail;
+	return AK_DLLCannotLoad;
 }
 
 enum AKRESULT __cdecl AK_SoundEngine_UnloadBank(AkBankID in_bankID, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId)
@@ -29,5 +29,5 @@ enum AKRESULT __cdecl AK_SoundEngine_UnloadBank(AkBankID in_bankID, const void *
 	{
 		return func(in_bankID, in_pInMemoryBankPtr, out_pMemPoolId);
 	}
-	return AK_Fail;
+	return AK_DLLCannotLoad;
 }

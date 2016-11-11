@@ -32,6 +32,8 @@ static PyObject* LoadBank(PyObject* self, PyObject* args)
 		return NULL;
 	}
 
+	Py_BEGIN_ALLOW_THREADS
+
 	fseek(file_stream, 0, SEEK_END);
 	file_size = ftell(file_stream);
 	fseek(file_stream, 0, SEEK_SET);
@@ -43,12 +45,15 @@ static PyObject* LoadBank(PyObject* self, PyObject* args)
 
 	returnCode = AK_SoundEngine_LoadBank(file_content, file_size, AK_DEFAULT_POOL_ID, &bankID);
 
-	PyMem_Free(&file_name);
 	free(file_content);
+
+	Py_END_ALLOW_THREADS
+
+	PyMem_Free(&file_name);
 
 	if (returnCode != AK_Success)
 	{
-		PySys_WriteStderr("[XVM][Sounds/LoadBank/ByMemory] Cannot load sound bank. Audiokinetic error code: %d \n", returnCode);
+		PySys_WriteStderr("[XVM][Sounds/LoadBank] Cannot load sound bank. Audiokinetic error code: %d \n", returnCode);
 		Py_RETURN_FALSE;
 	}
 
@@ -66,7 +71,11 @@ static PyObject* UnloadBank(PyObject* self, PyObject* args)
 		return NULL;
 	}
 
+	Py_BEGIN_ALLOW_THREADS
+
 	returnCode = AK_SoundEngine_UnloadBank(bankID, NULL, NULL);
+
+	Py_END_ALLOW_THREADS
 
 	if (returnCode != AK_Success)
 	{
