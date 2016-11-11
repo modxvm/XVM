@@ -12,11 +12,11 @@
     {{vehicle}}           - vehicle name / название техники.
     {{c:vtype}}           - color depending on vehicle type / цвет в зависимости от типа техники.
     {{c:team-dmg}}        - color depending on damage source (ally , enemy, self damage) / цвет в зависимости от источника урона (союзник, противник, урон по себе).
-    {{c:costShell}}       - color depending on shell kind (gold, credits) / цвет в зависимости от типа снаряда (золото, кредиты).
+    {{c:costShell}}       - color depending on cost shell (gold, credits) / цвет в зависимости от стоимости снаряда (золото, кредиты).
     {{name}}              - nickname player who caused the damage / никнейм игрока, нанесшего урон.
     {{critical-hit}}      - critical hit / критическое попадание.
     {{c:hit-effects}}     - color depending on hit kind (with damage, ricochet, not penetrated, no damage) / цвет в зависимости от вида попадания (с уроном, рикошет, не пробито, без урона).
-    {{costShell}}         - text depending on shell kind (gold, credits) / текст в зависимости от типа снаряда (золото, кредиты).
+    {{costShell}}         - text depending on cost shell (gold, credits) / текст в зависимости от стоимости снаряда (золото, кредиты).
     {{comp-name}}         - name part of vehicle that was hit (turret, body, suspension, gun) / название части техники, в которую было попадание (башня, корпус, ходовая, орудие).
     {{clan}}              - clan name with brackets (empty if no clan) / название клана в скобках (пусто, если игрок не в клане).
     {{level}}             - vehicle level / уровень техники.
@@ -192,7 +192,7 @@
       "groupDamagesFromRamming_WorldCollision": true,
       // Damage log format.
       // Формат лога повреждений.
-      "formatHistory": "<textformat tabstops='[30,135,170,185]'><font face='mono' size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>"
+      "formatHistory": "<textformat tabstops='[30,135,170,185]'><font face='mono' size='12'>{{number%2d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>"
     },
     // Log of the received damage with the left Alt key.
     // Лог полученного урона c нажатой левой клавишей Alt.
@@ -203,7 +203,7 @@
       "showHitNoDamage": true,
       // Damage log format.
       // Формат лога повреждений.
-      "formatHistory": "<textformat tabstops='[30,135,170]'><font face='mono' size='12'>{{number}}.</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
+      "formatHistory": "<textformat tabstops='[30,135,170]'><font face='mono' size='12'>{{number%2d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
     },
     // Display the last damage (hit).
     // Отображение последнего урона (попадания).

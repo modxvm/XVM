@@ -91,12 +91,12 @@
     "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:r}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}",
     // Extra fields. Fields are placed one above the other.
     // Дополнительные поля. Поля располагаются друг над другом.
-    // Set of formats for left panel (extended format supported, see above)
+    // Set of formats for left panel (extended format supported, see extra-field.txt)
     // Набор форматов для левой панели (поддерживается расширенный формат, см. extra-field.txt)
     "extraFieldsLeft": [
       ${"templates.clanIcon"}
     ],
-    // Set of formats for right panel (extended format supported, see above)
+    // Set of formats for right panel (extended format supported, see extra-field.txt)
     // Набор форматов для правой панели (поддерживается расширенный формат, см. extra-field.txt)
     "extraFieldsRight": [
       ${"templates.clanIcon"}

@@ -24,6 +24,7 @@ import time
 import traceback
 
 import BigWorld
+import ResMgr
 import game
 from account_helpers.settings_core import settings_constants
 from account_helpers.settings_core.options import SettingsContainer
@@ -40,6 +41,7 @@ from gui.shared import g_eventBus, events
 from gui.Scaleform.framework.application import SFApplication
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
+from helpers import VERSION_FILE_PATH
 
 from xfw import *
 
@@ -50,7 +52,6 @@ import filecache
 import svcmsg
 import utils
 from xvm import g_xvm
-
 
 #####################################################################
 # initialization/finalization
@@ -156,13 +157,29 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 #####################################################################
 # Log version info + warn about installed XVM fonts
 
-log("xvm %s (%s) for WoT %s" % (XFW_MOD_INFO['VERSION'], XFW_MOD_INFO['URL'], ", ".join(XFW_MOD_INFO['GAME_VERSIONS'])))
+log("XVM: eXtended Visualisation Mod ( %s )" % XFW_MOD_INFO['URL'])
+
 try:
-    from __version__ import __branch__, __revision__
-    log("Branch: %s, Revision: %s" % (__branch__, __revision__))
+    from __version__ import __branch__, __revision__, __node__
+    
+    wot_ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
+    if 'Supertest v.ST ' in wot_ver:
+        wot_ver = wot_ver.replace('Supertest v.ST ', 'v.')
+    wot_ver = wot_ver[2:wot_ver.index('#') - 1]
+    wot_ver = wot_ver if not ' ' in wot_ver else wot_ver[:wot_ver.index(' ')]  # X.Y.Z or X.Y.Z.a
+
+    log("    XVM Version   : %s" % XVM.XVM_VERSION)
+    log("    XVM Revision  : %s" % __revision__)
+    log("    XVM Branch    : %s" % __branch__)
+    log("    XVM Hash      : %s" % __node__)
+    log("    WoT Supported : %s" % ", ".join(XFW_MOD_INFO['GAME_VERSIONS']))
+    log("    WoT Current   : %s" % wot_ver)
+
     xvm_fonts_arr = glob(os.environ['WINDIR'] + '/Fonts/*xvm*')
     if len(xvm_fonts_arr):
         warn('Following XVM fonts installed: %s' % xvm_fonts_arr)
+
+    log("---------------------------")
 except Exception, ex:
     err(traceback.format_exc())
 
