@@ -7,10 +7,10 @@
   "sounds": {
     "enabled": false,
     // List of extra banks to load
-    // Use comma for multiple values: ["bank1.bnk", "bank2.bnk"]
+    // Use comma for multiple values: ["bank1.bnk", "bank2.bnk"]. Path is relative to game root (directory where WorldOfTanks.exe is located)
     // You can use xvm:// (path relative to /res_mods/mods/shared_resources/xvm/ ) and cfg:// (path relative to /res_mods/configs/xvm/ )
     // Список дополнительных банков для загрузки
-    // Несколько банков необходимо указывать через запятую: ["bank1.bnk", "bank2.bnk"]
+    // Несколько банков необходимо указывать через запятую: ["bank1.bnk", "bank2.bnk"]. Путь относителен корню игры (расположению WorldOfTanks.exe)
     // Разрешено использование xvm:// (путь относительно /res_mods/mods/shared_resources/xvm/ ) и cfg:// (относительно /res_mods/configs/xvm/ )
     "soundBanks": {
       "battle": ["xvm://audioww/xvm.bnk"],
