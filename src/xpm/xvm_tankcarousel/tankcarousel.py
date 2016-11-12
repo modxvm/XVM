@@ -211,6 +211,14 @@ def _CarouselDataProvider__getSupplyIndices(base, self):
         self._supplyItems = [x for x in self._supplyItems if not x.get('buyTank', False)]
     return supplyIndices
 
+@overrideMethod(CarouselDataProvider, '_getVehicleDataVO')
+def _CarouselDataProvider_getVehicleDataVO(base, self, vehicle):
+    res = base(self, vehicle)
+    #log(res)
+    if not config.get('hangar/carousel/enableLockBackground', True):
+        res['lockBackground'] = False
+    return res
+
 
 #####################################################################
 # internal
