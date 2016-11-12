@@ -27,9 +27,9 @@ def _test():
     SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.SIXTH_SENSE_RUDY)
     BigWorld.callback(3, _test)
 
-try:
-    BigWorld.callback(10, _test)
-except Exception:
-    print("=============================")
-    traceback.print_exc()
-    print("=============================")
+#try:
+#    BigWorld.callback(10, _test)
+#except Exception:
+#    print("=============================")
+#    traceback.print_exc()
+#    print("=============================")

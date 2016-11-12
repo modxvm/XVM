@@ -6,29 +6,30 @@
 import imp
 import traceback
 
-import game
-import WWISE
+from Avatar import PlayerAvatar
 
 from xfw import *
 
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
+from xvm_main.python.utils import fixXvmPath
 
+#####################################################################
+# bank manager
+ 
 class BankManager(object):
     def __init__(self):
         self.XVMNativeSounds = imp.load_dynamic('XVMNativeSounds','./res_mods/mods/packages/xvm_sounds/native/XVMNativeSounds.pyd')
 
         extraBanksBattle = config.get('sounds/soundBanks/battle')
         if extraBanksBattle:
-            self.banks_battle = extraBanksBattle.split(';')
-            self.banks_battle = set([x.strip() for x in self.banks_battle if x and x.strip()])
+            self.banks_battle = set([fixXvmPath(x.strip().lower()) for x in extraBanksBattle if x and x.strip()])
         else:
             self.banks_battle=set()
 
         extraBanksHangar = config.get('sounds/soundBanks/hangar')
-        if extraBanksBattle:
-            self.banks_hangar = extraBanksHangar.split(';')
-            self.banks_hangar = set([x.strip() for x in self.banks_hangar if x and x.strip()])
+        if extraBanksHangar:
+            self.banks_hangar = set([fixXvmPath(x.strip().lower()) for x in extraBanksHangar if x and x.strip()])
         else:
             self.banks_hangar=set()
 
@@ -39,42 +40,67 @@ class BankManager(object):
             self.bank_unload(value)
 
     def bank_load(self, bankName):
+        log('BankManager/BankLoad: bankName=%s' % bankName)
+        bankName=fixXvmPath(bankName).lower()
+
         try:
             bankID = self.XVMNativeSounds.bank_load(bankName)
             if bankID:
                 self.banks_loaded[bankName]=bankID
-        except:
-             warn('[Sounds] Error occured when trying to load bank %s' % bankName)
+        except Exception, e:
+            warn(e)
 
     def bank_unload(self, bankName):
+        log('BankManager/BankUnload: bankName=%s' % bankName)
+        bankName=fixXvmPath(bankName).lower()
+
         try:
             bankID = self.banks_loaded.pop(bankName)
             if bankID:
                 self.XVMNativeSounds.bank_unload(bankID)
-        except:
-            warn('[Sounds] Error occured when trying to unload bank %s' % bankName)
+        except Exception, e:
+            warn(e)
 
-    def refresh(self, battle, hangar):
+    def reload(self, loadBattleBanks, loadHangarBanks):
+        log('BankManager/Reload: battle=%s, hangar=%s' % (loadBattleBanks, loadHangarBanks) )
         banksToLoad = set()
+        banksToUnload = set()
 
-        if battle:
+        if loadBattleBanks:
             banksToLoad = banksToLoad.union(self.banks_battle)
 
-        if hangar:
+        if loadHangarBanks:
             banksToLoad = banksToLoad.union(self.banks_hangar)
 
-        for key, value in self.banks_loaded:
+        for key in self.banks_loaded.iterkeys():
             if key not in banksToLoad:
-                self.bank_unload(value)
+                banksToUnload.add(key)
+
+        for x in banksToUnload:
+            self.bank_unload(x)
 
         for x in banksToLoad:
             if x not in self.banks_loaded:
                 self.bank_load(x)
 
+#####################################################################
+# handlers
 
-g_xvmBankManager = BankManager()
-g_xvmBankManager.refresh(False,True)
+g_xvmBankManager = None
+if config.get('sounds/enabled'):
+    g_xvmBankManager = BankManager()
+    g_xvmBankManager.reload(False,True)
 
-@registerEvent(game, 'fini')
-def game_fini():
-    g_xvmBankManager.__fini__()
+@overrideMethod(PlayerAvatar, 'onBecomePlayer')
+def _PlayerAvatar_onBecomePlayer(base, self):
+    if config.get('sounds/enabled'):
+        g_xvmBankManager.reload(True,False)
+
+    base(self)
+
+@overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
+def _PlayerAvatar_onBecomeNonPlayer(base, self):
+    if config.get('sounds/enabled'):
+        g_xvmBankManager.reload(False,True)
+
+    base(self)
