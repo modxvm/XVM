@@ -41,32 +41,29 @@ def start():
     BigWorld.callback(0, _start)
 
 def _start():
-    if isReplay() and XMQP_DEVELOPMENT:
-        config.token = config.XvmServicesToken.restore()
     if config.networkServicesSettings.xmqp or (isReplay() and XMQP_DEVELOPMENT):
-        if not isReplay() or XMQP_DEVELOPMENT:
-            token = config.token.token
-            if token:
-                players = []
-                player = BigWorld.player()
-                for (vehicleID, vData) in player.arena.vehicles.iteritems():
-                    # ally team only
-                    if vData['team'] == player.team:
-                        players.append(vData['accountDBID'])
-                if XMQP_DEVELOPMENT:
-                    accountDBID = utils.getAccountDBID()
-                    if accountDBID not in players:
-                        players.append(accountDBID)
-                    #players.append(42)
-                    #players.append(43)
-                # start
-                stop()
-                global _xmqp_thread, _xmqp
-                _xmqp = _XMQP(players)
-                _xmqp_thread = threading.Thread(target=_xmqp.start, name='xmqp')
-                _xmqp_thread.setDaemon(True)
-                _xmqp_thread.start()
-                debug('[XMQP] Thread started')
+        token = config.token.token
+        if token:
+            players = []
+            player = BigWorld.player()
+            for (vehicleID, vData) in player.arena.vehicles.iteritems():
+                # ally team only
+                if vData['team'] == player.team:
+                    players.append(vData['accountDBID'])
+            if XMQP_DEVELOPMENT:
+                accountDBID = utils.getAccountDBID()
+                if accountDBID not in players:
+                    players.append(accountDBID)
+                #players.append(42)
+                #players.append(43)
+            # start
+            stop()
+            global _xmqp_thread, _xmqp
+            _xmqp = _XMQP(players)
+            _xmqp_thread = threading.Thread(target=_xmqp.start, name='xmqp')
+            _xmqp_thread.setDaemon(True)
+            _xmqp_thread.start()
+            debug('[XMQP] Thread started')
 
 def stop():
     global _xmqp_thread, _xmqp
