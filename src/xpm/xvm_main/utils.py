@@ -146,15 +146,16 @@ def getMapSize():
 def fixImgTag(path):
     return path.replace('xvm://', 'img://' + XVM_PATH.XVM_IMG_RES_ROOT).replace('cfg://', 'img://' + XVM_PATH.XVM_IMG_CFG_ROOT)
 
-# Fix 'xvm://*' to './res_mods/mods/shared_resources/xvm/'
-# Fix 'cfg://*' to './res_mods/configs/xvm/'
-def fixXvmPath(path):
+# Fix 'xvm://*' to './res_mods/mods/shared_resources/xvm/*'
+# Fix 'cfg://*' to './res_mods/configs/xvm/*'
+# Fix '*' to 'basepath/*'
+def fixXvmPath(path, basepath = None):
     if path[:6].lower() == "xvm://":
         path = path.replace("xvm://","./res_mods/mods/shared_resources/xvm/", 1)
-
-    if path[:6].lower() == "cfg://":
+    elif path[:6].lower() == "cfg://":
         path = path.replace("cfg://","./res_mods/configs/xvm/", 1)
-
+    elif basepath:
+        path = fixPath(basepath)+path
     return path.replace('\\', '/')
 
 def takeClosest(myList, myNumber):

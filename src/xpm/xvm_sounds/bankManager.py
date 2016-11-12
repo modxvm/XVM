@@ -9,6 +9,7 @@ import traceback
 from Avatar import PlayerAvatar
 
 from xfw import *
+from xfw.constants import PATH
 
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
@@ -23,13 +24,13 @@ class BankManager(object):
 
         extraBanksBattle = config.get('sounds/soundBanks/battle')
         if extraBanksBattle:
-            self.banks_battle = set([fixXvmPath(x.strip().lower()) for x in extraBanksBattle if x and x.strip()])
+            self.banks_battle = set([x.strip() for x in extraBanksBattle if x and x.strip()])
         else:
             self.banks_battle=set()
 
         extraBanksHangar = config.get('sounds/soundBanks/hangar')
         if extraBanksHangar:
-            self.banks_hangar = set([fixXvmPath(x.strip().lower()) for x in extraBanksHangar if x and x.strip()])
+            self.banks_hangar = set([x.strip() for x in extraBanksHangar if x and x.strip()])
         else:
             self.banks_hangar=set()
 
@@ -41,7 +42,7 @@ class BankManager(object):
 
     def bank_load(self, bankName):
         #log('BankManager/BankLoad: bankName=%s' % bankName)
-        bankName=fixXvmPath(bankName).lower()
+        bankName=fixXvmPath(bankName,PATH.GENERAL_MODS_DIR + '/audioww/').lower()
 
         try:
             bankID = self.XVMNativeSounds.bank_load(bankName)
@@ -52,7 +53,7 @@ class BankManager(object):
 
     def bank_unload(self, bankName):
         #log('BankManager/BankUnload: bankName=%s' % bankName)
-        bankName=fixXvmPath(bankName).lower()
+        bankName=fixXvmPath(bankName,PATH.GENERAL_MODS_DIR + '/audioww/').lower()
 
         try:
             bankID = self.banks_loaded.pop(bankName)
