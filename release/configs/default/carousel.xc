@@ -37,6 +37,9 @@
     // true - show used slots count in the "Buy slot" cell.
     // true - показывать количество занятых слотов в ячейке "Купить слот".
     "showUsedSlots": true,
+    // set to false to remove background for locked vehicles (default: true)
+    // поставить false, чтобы отключить фон для заблокированной техники (по-умолчанию: true)
+    "enableLockBackground": true,
     // Visibility filters.
     // Видимость фильтров.
     "filters": {
