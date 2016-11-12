@@ -21,6 +21,7 @@ static PyObject* PingFunction(PyObject* self, PyObject* args)
     pingValue = ping(address);
     Py_END_ALLOW_THREADS
 
+    PyMem_Free(&address);
     return Py_BuildValue("i", pingValue);
 }
 

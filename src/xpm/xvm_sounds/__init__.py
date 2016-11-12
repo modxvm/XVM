@@ -27,18 +27,6 @@ from xvm_main.python.logger import *
 #####################################################################
 # handlers
 
-# TODO:0.9.16
-#@overrideMethod(WWISE, 'WG_loadBanks')
-def _WWISE_WG_loadBanks(base, xmlPath, banks, isHangar, *args, **kwargs):
-    if config.get('sounds/enabled'):
-        extraBanks = config.get('sounds/soundBanks/%s' % ('hangar' if isHangar else 'battle'))
-        if extraBanks:
-            banks_list = (banks + ';' + extraBanks).split(';')
-            banks_list = set([x.strip() for x in banks_list if x and x.strip()])
-            banks = '; '.join(banks_list)
-        log('WWISE.WG_loadBanks: %s' % banks)
-    base(xmlPath, banks, isHangar, *args, **kwargs)
-
 @overrideMethod(WWISE, 'WW_eventGlobal')
 def _WWISE_WW_eventGlobal(base, event):
     return base(_checkAndReplace(event))
@@ -83,6 +71,8 @@ def _checkAndReplace(event):
 
 #####################################################################
 # imports new sound events dispatchers
+
+import bankManager
 
 import sixthSense
 import fireAlert

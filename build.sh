@@ -137,12 +137,9 @@ copy_files(){
     mv "$XVMBUILD_ROOT_PATH"/~output/~ver/ "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_WOT_VERSION"
 
     # cp non-binary files
-    mkdir -p "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
-    cp -f "$XVMBUILD_ROOT_PATH"/release/audioww/*.bnk "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_WOT_VERSION"/audioww/
     cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/
     mv "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH"/~output/configs/xvm
     rm -rf "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/configs/
-    rm -rf "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/audioww/
 
     # get l10n files from translation server
     pushd "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/l10n/ >/dev/null

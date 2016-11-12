@@ -5,15 +5,16 @@
  */
 {
   "sounds": {
-    // TODO:0.9.16
-    "enabled": false,
-    // List of extra banks to load from folder res_mods/X.Y.Z/audioww.
-    // Use semicolon for multiple values: "bank1.bnk; bank2.bnk;..."
-    // Список дополнительных банков для загрузки из папки res_mods/X.Y.Z/audioww.
-    // Несколько банков необходимо указывать через точку с запятой: "bank1.bnk; bank2.bnk;..."
+    "enabled": true,
+    // List of extra banks to load
+    // Use comma for multiple values: ["bank1.bnk", "bank2.bnk"]. Path is relative to ./res_mods/x.x.x/audioww/
+    // You can use xvm:// (path relative to /res_mods/mods/shared_resources/xvm/ ) and cfg:// (path relative to /res_mods/configs/xvm/ )
+    // Список дополнительных банков для загрузки
+    // Несколько банков необходимо указывать через запятую: ["bank1.bnk", "bank2.bnk"]. Путь относителен к ./res_mods/x.x.x/audioww/
+    // Разрешено использование xvm:// (путь относительно /res_mods/mods/shared_resources/xvm/ ) и cfg:// (относительно /res_mods/configs/xvm/ )
     "soundBanks": {
-      "hangar": "xvm.bnk",
-      "battle": "xvm.bnk"
+      "battle": ["xvm://audioww/xvm.bnk"],
+      "hangar": ["xvm://audioww/xvm.bnk"]
     },
     // Enable sound events logging in the xvm.log
     // Включить логгирование звуковых событий в xvm.log

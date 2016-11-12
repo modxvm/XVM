@@ -74,15 +74,6 @@ copy_configs()
   fi
 }
 
-copy_xvm_audioww_dir()
-{
-  [ -d "../release/audioww" ] && {
-    echo "=> audioww"
-    mkdir -p "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
-    cp -f ../release/audioww/*.bnk "$TARGET_VERSION_PATH/audioww" || err "copy_xvm_audioww_dir"
-  }
-}
-
 copy_xvm_dir()
 {
   [ -e "$SHARED_RESOURCES_PATH/$1" ] && rm -rf "$SHARED_RESOURCES_PATH/$1"
@@ -126,8 +117,6 @@ copy_xfw
 copy_output
 
 copy_configs
-
-copy_xvm_audioww_dir
 
 for n in $XVM_DIRS; do
   copy_xvm_dir $n
