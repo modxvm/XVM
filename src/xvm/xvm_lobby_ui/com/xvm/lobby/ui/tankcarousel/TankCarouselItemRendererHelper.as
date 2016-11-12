@@ -237,7 +237,13 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldAlpha(renderer.content.clanLock, cfg.fields.clanLock);
             renderer.content.clanLock.x += cfg.fields.clanLock.dx;
             renderer.content.clanLock.y += cfg.fields.clanLock.dy;
-            //renderer.content.clanLock.visible = true; renderer.content.clanLock.textField.htmlText = "<font color='#ffffff'>clanLock</font>"; // DEBUG
+            // DEBUG
+            /*
+            App.utils.scheduler.scheduleTask(function():void {
+                renderer.content.clanLock.visible = true;
+                renderer.content.clanLock.textField.htmlText = "<font color='#ffffff'>clanLock</font>";
+            }, 1000);
+            */
         }
 
         public function _setupStandardFieldPrice():void
