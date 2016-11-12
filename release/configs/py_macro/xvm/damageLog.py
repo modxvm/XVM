@@ -348,8 +348,6 @@ class Data(object):
 
     def hitShell(self, attackerID, effectsIndex, damageFactor):
         self.data['isDamage'] = damageFactor > 0
-        if self.data['fireStage'] == 2:
-            self.data['fireStage'] = -1
         self.data['attackerID'] = attackerID
         self.data['attackReasonID'] = effectsIndex if effectsIndex in [24, 25] else 0
         self.data['timer'] = self.timeReload(attackerID)
@@ -385,14 +383,6 @@ class Data(object):
         self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
-        if (attackReasonID == 1) and (self.data['fireStage'] < 0) and self.data['isBeginFire']:
-            self.data['fireStage'] = 0
-        elif (attackReasonID == 1) and (self.data['fireStage'] == 0) and self.data['isInFire']:
-            self.data['fireStage'] = 1
-        elif (self.data['fireStage'] in [0, 1]) and not self.data['isInFire']:
-            self.data['fireStage'] = 2
-        elif self.data['fireStage'] == 2:
-            self.data['fireStage'] = -1
         if self.data['attackReasonID'] not in [24, 25]:
             self.data['attackReasonID'] = attackReasonID
         self.data['isDamage'] = True
@@ -411,7 +401,6 @@ class Data(object):
         self.data['oldHealth'] = newHealth
         self.updateData()
         self.updateLabels()
-        self.data['isBeginFire'] = self.data['isInFire']
         as_event('ON_HIT')
 
 
@@ -474,20 +463,7 @@ class Log(object):
                     self.dictVehicle[attacker][attack]['numberLine'] += 1
 
     def output(self):
-        if (data.data['attackReasonID'] == 1) and config.get(self.section + 'groupDamagesFromFire'):
-            if data.data['fireStage'] == 0:
-                self.dataLogFire = data.data.copy()
-                self.numberLine = 0
-                self.dataLogFire['number'] = len(self.listLog) + 1
-                macroes = getValueMacroes(self.section, self.dataLogFire)
-                self.listLog.insert(0, parser(config.get(self.section + 'formatHistory'), macroes))
-                # self.addLine(None, None)
-            elif data.data['fireStage'] in [1, 2]:
-                self.dataLogFire['damage'] += data.data['damage']
-                self.dataLogFire['dmgRatio'] = self.dataLogFire['damage'] * 100 // data.data['maxHealth']
-                macroes = getValueMacroes(self.section, self.dataLogFire)
-                self.listLog[self.numberLine] = parser(config.get(self.section + 'formatHistory'), macroes)
-        elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
+        if (data.data['attackReasonID'] in [1, 2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
             self.dataLog = data.data.copy()
             attackerID = data.data['attackerID']
             attackReasonID = data.data['attackReasonID']
@@ -544,17 +520,7 @@ class LastHit(object):
         as_event('ON_LAST_HIT')
 
     def output(self):
-        if (data.data['attackReasonID'] == 1) and config.get(self.section + 'groupDamagesFromFire'):
-            if data.data['fireStage'] == 0:
-                self.dataFire = data.data.copy()
-                macroes = getValueMacroes(self.section, self.dataFire)
-                self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
-            elif data.data['fireStage'] in [1, 2]:
-                self.dataFire['damage'] += data.data['damage']
-                self.dataFire['dmgRatio'] = self.dataFire['damage'] * 100 // data.data['maxHealth']
-                macroes = getValueMacroes(self.section, self.dataFire)
-                self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
-        elif (data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
+        if (data.data['attackReasonID'] in [1, 2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
             self.dataLog = data.data.copy()
             attackerID = data.data['attackerID']
             attackReasonID = data.data['attackReasonID']
@@ -709,7 +675,6 @@ def as_setFireInVehicleS(self, isInFire):
     global on_fire
     if isInFire:
         on_fire = 100
-        data.data['isBeginFire'] = True
     else:
         on_fire = 0
     data.data['isInFire'] = isInFire
