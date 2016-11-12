@@ -8,6 +8,8 @@
 
 #include <Windows.h>
 
+#define BUF_SIZE 128
+
 static PyObject* LoadBank(PyObject* self, PyObject* args)
 {
 	char * file_name;
@@ -15,20 +17,23 @@ static PyObject* LoadBank(PyObject* self, PyObject* args)
 	long file_size;
 	FILE* file_stream;
 
+	char buf[BUF_SIZE];
+
 	enum AKRESULT returnCode;
 	AkBankID bankID;
 
 	if (!PyArg_ParseTuple(args, "s", &file_name))
 	{
-		PySys_WriteStderr("[XVM][Sounds/LoadBank] Cannot parse tuple\n");
+		PyErr_SetString(PyExc_RuntimeError, "[LoadBank] Cannot parse tuple\n");
 		return NULL;
 	}
 
 	file_stream = fopen(file_name, "rb");
 
 	if (file_stream == NULL)
-	{
-		PySys_WriteStderr("[XVM][Sounds/LoadBank] Cannot open file %s\n",file_name);
+	{		
+		snprintf(&buf, BUF_SIZE, "[LoadBank] Cannot open file %s\n", file_name);
+		PyErr_SetString(PyExc_RuntimeError, buf);
 		return NULL;
 	}
 
@@ -49,8 +54,9 @@ static PyObject* LoadBank(PyObject* self, PyObject* args)
 
 	if (returnCode != AK_Success)
 	{
-		PySys_WriteStderr("[XVM][Sounds/LoadBank] Cannot load sound bank. Audiokinetic error code: %d \n", returnCode);
-		Py_RETURN_FALSE;
+		snprintf(&buf, BUF_SIZE, "[LoadBank] Cannot load sound bank. Audiokinetic error code: %d \n", returnCode);
+		PyErr_SetString(PyExc_RuntimeError, buf);
+		return NULL;
 	}
 
 	return Py_BuildValue("I", bankID);
@@ -61,9 +67,11 @@ static PyObject* UnloadBank(PyObject* self, PyObject* args)
 	AkBankID bankID;
 	enum AKRESULT returnCode;
 
+	char buf[BUF_SIZE];
+
 	if (!PyArg_ParseTuple(args, "I", &bankID))
 	{
-		PySys_WriteStderr("[XVM][Sounds/UnloadBank] Cannot parse tuple\n");
+		PyErr_SetString(PyExc_RuntimeError, "[UnloadBank] Cannot parse tuple\n");
 		return NULL;
 	}
 
@@ -71,8 +79,9 @@ static PyObject* UnloadBank(PyObject* self, PyObject* args)
 
 	if (returnCode != AK_Success)
 	{
-		PySys_WriteStderr("[XVM][Sounds/UnloadBank] Cannot unload sound bank. Audiokinetic error code: %d \n", returnCode);
-		Py_RETURN_FALSE;
+		snprintf(&buf, BUF_SIZE, "[UnloadBank] Cannot unload sound bank. Audiokinetic error code: %d \n", returnCode);
+		PyErr_SetString(PyExc_RuntimeError, buf);
+		return NULL;
 	}
 
 	Py_RETURN_TRUE;
