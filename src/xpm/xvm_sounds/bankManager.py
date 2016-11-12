@@ -40,7 +40,7 @@ class BankManager(object):
             self.bank_unload(value)
 
     def bank_load(self, bankName):
-        log('BankManager/BankLoad: bankName=%s' % bankName)
+        #log('BankManager/BankLoad: bankName=%s' % bankName)
         bankName=fixXvmPath(bankName).lower()
 
         try:
@@ -51,7 +51,7 @@ class BankManager(object):
             warn(e)
 
     def bank_unload(self, bankName):
-        log('BankManager/BankUnload: bankName=%s' % bankName)
+        #log('BankManager/BankUnload: bankName=%s' % bankName)
         bankName=fixXvmPath(bankName).lower()
 
         try:
@@ -62,7 +62,7 @@ class BankManager(object):
             warn(e)
 
     def reload(self, loadBattleBanks, loadHangarBanks):
-        log('BankManager/Reload: battle=%s, hangar=%s' % (loadBattleBanks, loadHangarBanks) )
+        #log('BankManager/Reload: battle=%s, hangar=%s' % (loadBattleBanks, loadHangarBanks) )
         banksToLoad = set()
         banksToUnload = set()
 
