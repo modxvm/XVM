@@ -28,11 +28,9 @@ static PyObject* LoadBank(PyObject* self, PyObject* args)
 
 	if (file_stream == NULL)
 	{
-		PySys_WriteStderr("[XVM][Sounds/LoadBank] Cannot open file\n");
+		PySys_WriteStderr("[XVM][Sounds/LoadBank] Cannot open file %s\n",file_name);
 		return NULL;
 	}
-
-	Py_BEGIN_ALLOW_THREADS
 
 	fseek(file_stream, 0, SEEK_END);
 	file_size = ftell(file_stream);
@@ -46,8 +44,6 @@ static PyObject* LoadBank(PyObject* self, PyObject* args)
 	returnCode = AK_SoundEngine_LoadBank(file_content, file_size, AK_DEFAULT_POOL_ID, &bankID);
 
 	free(file_content);
-
-	Py_END_ALLOW_THREADS
 
 	PyMem_Free(&file_name);
 
@@ -71,11 +67,7 @@ static PyObject* UnloadBank(PyObject* self, PyObject* args)
 		return NULL;
 	}
 
-	Py_BEGIN_ALLOW_THREADS
-
 	returnCode = AK_SoundEngine_UnloadBank(bankID, NULL, NULL);
-
-	Py_END_ALLOW_THREADS
 
 	if (returnCode != AK_Success)
 	{
