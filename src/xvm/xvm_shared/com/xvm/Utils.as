@@ -142,7 +142,7 @@ package com.xvm
             return v;
         }
 
-        // Fix <img src='xvm://*'> to <img src='img://XVM_IMG_RES_ROOT/*'> (res_mods/mods/shared_resources/xvm/res)
+        // Fix <img src='xvm://*'> to <img src='img://XVM_IMG_RES_ROOT/*'> (res_mods/mods/shared_resources/xvm)
         // Fix <img src='cfg://*'> to <img src='img://XVM_IMG_CFG_ROOT/*'> (res_mods/configs/xvm)
         public static function fixImgTag(str:String):String
         {
@@ -156,7 +156,7 @@ package com.xvm
         }
 
         // Fix 'img://gui/*' to '../*'> (res_mods/x.x.x)
-        // Fix 'xvm://*' to '../../XVM_IMG_RES_ROOT/*'> (res_mods/mods/shared_resources/xvm/res)
+        // Fix 'xvm://*' to '../../XVM_IMG_RES_ROOT/*'> (res_mods/mods/shared_resources/xvm)
         // Fix 'cfg://*' to '../../XVM_IMG_CFG_ROOT/*'> (res_mods/configs/xvm)
         public static function fixImgTagSrc(str:String):String
         {
