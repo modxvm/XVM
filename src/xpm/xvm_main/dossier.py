@@ -101,13 +101,9 @@ class _Dossier(object):
                 battles = stats.getBattlesCount()
                 dmg = stats.getDamageDealt()
                 frg = stats.getFragsCount()
-                if battles > 0 and dmg > 0 and frg > 0:
+                if battles > 0 and dmg >= 0 and frg >= 0:
                     xtdb = vehinfo_xtdb.calculateXTDB(vehCD, float(dmg) / battles)
                     xte = vehinfo_xte.calculateXTE(vehCD, float(dmg) / battles, float(frg) / battles)
-                if xtdb is None:
-                    xtdb = 0
-                if xte is None:
-                    xte = 0
 
             res = self.__prepareVehicleResult(dossier, xtdb, xte, earnedXP, freeXP, xpToElite)
 

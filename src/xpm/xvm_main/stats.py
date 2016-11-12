@@ -549,16 +549,16 @@ class _Stat(object):
 
     # calculate xTDB
     def _calculateXTDB(self, v):
-        if 'db' not in v or v['db'] <= 0:
+        if 'db' not in v or v['db'] < 0:
             return
         v['xtdb'] = vehinfo_xtdb.calculateXTDB(v['id'], float(v['db']))
         #log(v['xtdb'])
 
     # calculate xTE
     def _calculateXTE(self, v):
-        if 'db' not in v or v['db'] <= 0:
+        if 'db' not in v or v['db'] < 0:
             return
-        if 'fb' not in v or v['fb'] <= 0:
+        if 'fb' not in v or v['fb'] < 0:
             return
         v['xte'] = vehinfo_xte.calculateXTE(v['id'], float(v['db']), float(v['fb']))
         #log(v['xte'])

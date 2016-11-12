@@ -46,8 +46,6 @@ def calculateXTE(vehCD, dmg_per_battle, frg_per_battle):
     t = (d * CD + f * CF) / (CD + CF) * 1000.0
 
     # calculate XVM Scale
-    if t < 1:
-        return 0
     return next((i for i,v in enumerate(data['x']) if v > t), 100)
 
 

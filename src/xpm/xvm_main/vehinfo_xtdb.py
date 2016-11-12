@@ -14,8 +14,6 @@ def calculateXTDB(vehCD, dmg_per_battle):
         return -1
 
     # calculate XVM Scale
-    if dmg_per_battle < 1:
-        return 0
     return next((i for i,v in enumerate(data['x']) if v > dmg_per_battle), 100)
 
 def vehArrayXTDB(vehCD):

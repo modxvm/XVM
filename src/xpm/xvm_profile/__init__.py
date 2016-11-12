@@ -120,14 +120,14 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
             if ref is None:
                 ref = {}
             data = -1
-            #log('b:{} d:{} f:{}'.format(battles, dmg, frg))
-            if battles > 0 and dmg > 0 and frg > 0:
+            #log('vehCD: {} b:{} d:{} f:{}'.format(_lastVehCD, battles, dmg, frg))
+            if battles > 0 and dmg >= 0 and frg >= 0:
                 ref['currentD'] = float(dmg) / battles
                 ref['currentF'] = float(frg) / battles
                 x = vehinfo_xte.calculateXTE(_lastVehCD, float(dmg) / battles, float(frg) / battles)
                 ref['xte'] = x
                 ref['xte_sup'] = xvm_scale.XvmScaleToSup(x)
-                if x > 0:
+                if x >= 0:
                     color = utils.getDynamicColorValue(consts.DYNAMIC_VALUE_TYPE.X, x)
                     xStr = 'XX' if x == 100 else ('0' if x < 10 else '') + str(x)
                     data = '<font color="#{}" size="12">({} {}%)</font>  <font color="{}">{}</font>'.format(
@@ -141,10 +141,10 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
 
             # xTDB
             item = res[1]['data'][2]
-            if battles > 0 and dmg > 0:
+            if battles > 0 and dmg >= 0:
                 x = vehinfo_xtdb.calculateXTDB(_lastVehCD, float(dmg) / battles)
                 sup = xvm_scale.XvmScaleToSup(x)
-                if x > 0:
+                if x >= 0:
                     color = utils.getDynamicColorValue(consts.DYNAMIC_VALUE_TYPE.X, x)
                     item['data'] = '<font color="#{}" size="12">({} {}%)</font>  <font color="{}">{}</font>'.format(
                         XFWCOLORS.UICOLOR_LABEL, l10n('better than'), sup, color, item['data'])
