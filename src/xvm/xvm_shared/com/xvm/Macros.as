@@ -351,9 +351,9 @@ package com.xvm
             m_macros_cache_globals = { };
             m_macros_cache_players = new Vector.<Object>(CACHE_MASK_SIZE, true);
             m_macros_cache_players_hybrid = { };
-            m_macro_parts_cache = {};
-            m_format_macro_fmt_suf_cache = {};
-            m_prepare_value_cache = {};
+            m_macro_parts_cache = { };
+            m_format_macro_fmt_suf_cache = { };
+            m_prepare_value_cache = { };
         }
 
         private function _getPlayerCache(options:IVOMacrosOptions):Object
@@ -1162,6 +1162,20 @@ package com.xvm
             pdata["region"] = Config.config.region;
             // {{comment}}
             pdata["comment"] = stat.xvm_contact_data ? stat.xvm_contact_data.comment : null;
+            if (stat.xvm_contact_data && stat.xvm_contact_data.nick)
+            {
+                // ugly hack: update static macros {{nick}} and {{name}} and clear static and hybrid cache
+                for (var idx:uint = 0; idx < CACHE_MASK_SIZE; ++idx)
+                {
+                    if (m_macros_cache_players[idx] && m_macros_cache_players[idx][pname])
+                    {
+                        m_macros_cache_players[idx][pname] = {};
+                    }
+                }
+                m_macros_cache_players_hybrid[pname] = { };
+                pdata["nick"] = stat.xvm_contact_data.nick + (pdata["clan"] || "");
+                pdata["name"] = stat.xvm_contact_data.nick;
+            }
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
             // {{xte}}

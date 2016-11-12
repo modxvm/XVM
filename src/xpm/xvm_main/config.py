@@ -224,7 +224,6 @@ class XvmServicesToken(object):
         self.errStr = None
         self.online = False
 
-
     def _apply(self, data):
         #trace('config.token._apply')
         if data is None:
@@ -258,7 +257,11 @@ class XvmServicesToken(object):
             accountDBID = utils.getAccountDBID()
             if accountDBID is None:
                 return XvmServicesToken()
-            return XvmServicesToken(userprefs.get('tokens/{0}'.format(accountDBID)))
+            new_token = XvmServicesToken(userprefs.get('tokens/{0}'.format(accountDBID)))
+            global token
+            if token:
+                new_token.online = token.online
+            return new_token
         except Exception:
             err(traceback.format_exc())
 

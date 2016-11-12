@@ -104,7 +104,7 @@ class _Contacts:
 
         return {'nick':nick,'comment':comment}
 
-    
+
     def setXvmContactData(self, uid, value):
         try:
             if self.cached_data is None or 'players' not in self.cached_data:
@@ -136,7 +136,7 @@ class _Contacts:
 
             return False
 
-    
+
     # PRIVATE
 
     def _doRequest(self, cmd, body=None):
