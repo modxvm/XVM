@@ -57,7 +57,7 @@ HIT_EFFECT_CODES = {
 MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShell', 'costShell', 'comp-name', 'clan',
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'timer', 'c:team-dmg', 'c:hit-effects',
                'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
-               'splash-hit', 'team-dmg']
+               'splash-hit', 'team-dmg', 'my-alive']
 
 
 def keyLower(_dict):
@@ -222,7 +222,6 @@ def parser(strHTML, macroes):
             else:
                 # old_strHTML = strHTML
                 s = strHTML[start:end]
-                #log('s = %s' % s)
                 strHTML = strHTML.replace(s, formatMacro(s, macroes))
     while notMacroesDL:
         _notMacroesDL = notMacroesDL.copy()
@@ -258,7 +257,6 @@ class Data(object):
                      'clanicon': '',
                      'squadnum': 0,
                      'fireStage': -1,
-                     'isInFire': False,
                      'isBeginFire': False,
                      'number': None,
                      'timer': 0
@@ -434,7 +432,8 @@ def getValueMacroes(section, value):
              'level': value['level'],
              'clanicon': value['clanicon'],
              'squad-num': value['squadnum'],
-             'timer': round(value['timer'], 1)
+             'timer': round(value['timer'], 1),
+             'my-alive': 'alive' if value['isAlive'] else None
              }
     return macro
 
@@ -647,6 +646,13 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
             global on_fire
             on_fire = 0
             as_event('ON_FIRE')
+    elif hasattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID'):
+        if ((self.id == BigWorld.entity(BigWorld.player().inputHandler.ctrl.curVehicleID).id) and
+                not BigWorld.entity(BigWorld.player().inputHandler.ctrl.curVehicleID).isAlive()):
+            global on_fire
+            on_fire = 0
+            log('isAlive')
+            as_event('ON_FIRE')
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
@@ -677,7 +683,6 @@ def as_setFireInVehicleS(self, isInFire):
         on_fire = 100
     else:
         on_fire = 0
-    data.data['isInFire'] = isInFire
     as_event('ON_FIRE')
 
 
