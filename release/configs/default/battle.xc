@@ -10,8 +10,8 @@
     // false - Disable pop-up panel at the bottom after death.
     // false - отключить всплывающую внизу панель после смерти.
     "showPostmortemTips": true,
-    // false - disable highlighting of own vehicle icon, squad and team killer.
-    // false - отключить подсветку иконки своего танка, взвода и тимкиллера.
+    // false - disable highlighting of own vehicle icon and squad.
+    // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).

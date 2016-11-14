@@ -259,7 +259,7 @@ package com.xvm.battle.playersPanel
             return PlayerStatusSchemeName.getSchemeNameForVehicle(
                 options.isCurrentPlayer && highlightVehicleIcon,
                 options.isSquadPersonal && highlightVehicleIcon,
-                options.isTeamKiller && highlightVehicleIcon,
+                options.isTeamKiller,
                 options.isDead,
                 options.isOffline);
         }

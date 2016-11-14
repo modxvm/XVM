@@ -313,7 +313,7 @@ package com.xvm.battle.fullStats
             return PlayerStatusSchemeName.getSchemeNameForVehicle(
                 options.isCurrentPlayer && highlightVehicleIcon,
                 options.isSquadPersonal && highlightVehicleIcon,
-                options.isTeamKiller && highlightVehicleIcon,
+                options.isTeamKiller,
                 options.isDead,
                 options.isOffline);
         }
