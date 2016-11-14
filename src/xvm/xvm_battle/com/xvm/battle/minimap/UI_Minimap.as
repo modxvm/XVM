@@ -314,12 +314,18 @@ package com.xvm.battle.minimap
 
         private function setupMapSize():void
         {
-            mapSize = new TextExtraField(Config.config.minimap.mapSize);
-            mapSize.update(null);
-            background.addChild(mapSize);
-            mapSizeAlt = new TextExtraField(Config.config.minimapAlt.mapSize);
-            mapSizeAlt.update(null);
-            background.addChild(mapSizeAlt);
+            if (Macros.FormatBooleanGlobal(Config.config.minimap.mapSize.enabled, true))
+            {
+                mapSize = new TextExtraField(Config.config.minimap.mapSize);
+                mapSize.update(null);
+                background.addChild(mapSize);
+            }
+            if (Macros.FormatBooleanGlobal(Config.config.minimap.mapSizeAlt.enabled, true))
+            {
+                mapSizeAlt = new TextExtraField(Config.config.minimapAlt.mapSize);
+                mapSizeAlt.update(null);
+                background.addChild(mapSizeAlt);
+            }
         }
 
         private function disposeMapSize():void
