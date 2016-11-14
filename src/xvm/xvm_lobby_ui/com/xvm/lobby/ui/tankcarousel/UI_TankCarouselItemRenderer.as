@@ -64,7 +64,10 @@ package com.xvm.lobby.ui.tankcarousel
         {
             if (!value)
             {
-                extraFields.visible = false;
+                if (extraFields)
+                {
+                    extraFields.visible = false;
+                }
             }
             content.clanLock.validateNow();
             super.data = value;

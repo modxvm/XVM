@@ -44,14 +44,13 @@ package com.xvm.lobby.ui.tankcarousel
             renderer.height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2);
             renderer.scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-            item.substrateHolder = _createExtraFieldsHolder(renderer, 0);
-            item.bottomHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.content));
-            item.normalHolder = _createExtraFieldsHolder(renderer.content, renderer.content.getChildIndex(renderer.content.clanLock));
-            item.topHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.focusIndicator) + 1);
-
             var formats:Array = cfg.extraFields;
             if (formats && formats.length)
             {
+                item.substrateHolder = _createExtraFieldsHolder(renderer, 0);
+                item.bottomHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.content));
+                item.normalHolder = _createExtraFieldsHolder(renderer.content, renderer.content.getChildIndex(renderer.content.clanLock));
+                item.topHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.focusIndicator) + 1);
                 item.extraFields = new ExtraFieldsGroup(item as IExtraFieldGroupHolder, formats, CTextFormat.GetDefaultConfigForLobby());
             }
 
@@ -96,23 +95,26 @@ package com.xvm.lobby.ui.tankcarousel
                     if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank))
                     {
                         _setupStandardFieldInfo(cfg.fields.info);
-                        if (item.vehicleCarouselVO.icon)
+                        if (item.extraFields)
                         {
-                            var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
-                            options.vehicleData = VehicleInfo.getByIcon(item.vehicleCarouselVO.icon);
-                            var dossier:AccountDossier = Dossier.getAccountDossier();
-                            if (dossier)
+                            if (item.vehicleCarouselVO.icon)
                             {
-                                var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(options.vehCD);
-                                //Logger.addObject(item.vehicleCarouselVO);
-                                vdata.elite = XfwUtils.endsWith(item.vehicleCarouselVO.tankType, "_elite") ? "elite" : null; // FIXIT: why item.vehicleCarouselVO.elite altays false?
-                                vdata.selected = renderer.selected ? "sel" : null;
-                                if (options.vehicleData)
+                                var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
+                                options.vehicleData = VehicleInfo.getByIcon(item.vehicleCarouselVO.icon);
+                                var dossier:AccountDossier = Dossier.getAccountDossier();
+                                if (dossier)
                                 {
-                                    options.vehicleData.__vehicleDossierCut = vdata;
+                                    var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(options.vehCD);
+                                    //Logger.addObject(item.vehicleCarouselVO);
+                                    vdata.elite = XfwUtils.endsWith(item.vehicleCarouselVO.tankType, "_elite") ? "elite" : null; // FIXIT: why item.vehicleCarouselVO.elite altays false?
+                                    vdata.selected = renderer.selected ? "sel" : null;
+                                    if (options.vehicleData)
+                                    {
+                                        options.vehicleData.__vehicleDossierCut = vdata;
+                                    }
+                                    item.extraFields.update(options, 0);
+                                    isExtraFieldsVisible = true;
                                 }
-                                item.extraFields.update(options, 0);
-                                isExtraFieldsVisible = true;
                             }
                         }
                     }
@@ -132,7 +134,10 @@ package com.xvm.lobby.ui.tankcarousel
                         }
                     }
                 }
-                item.extraFields.visible = isExtraFieldsVisible;
+                if (item.extraFields)
+                {
+                    item.extraFields.visible = isExtraFieldsVisible;
+                }
             }
             catch (ex:Error)
             {
