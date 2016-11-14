@@ -57,7 +57,7 @@ HIT_EFFECT_CODES = {
 MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShell', 'costShell', 'comp-name', 'clan',
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'timer', 'c:team-dmg', 'c:hit-effects',
                'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
-               'splash-hit', 'team-dmg']
+               'splash-hit', 'team-dmg', 'my-alive']
 
 
 def keyLower(_dict):
@@ -204,6 +204,8 @@ def parser(strHTML, macroes):
     notMacroesDL = {}
     i = 0
     b = True
+    if not isinstance(strHTML, str):
+        strHTML = str(strHTML)
     while b:
         dl = True
         start = strHTML.rfind('{{')
@@ -222,7 +224,6 @@ def parser(strHTML, macroes):
             else:
                 # old_strHTML = strHTML
                 s = strHTML[start:end]
-                #log('s = %s' % s)
                 strHTML = strHTML.replace(s, formatMacro(s, macroes))
     while notMacroesDL:
         _notMacroesDL = notMacroesDL.copy()
@@ -258,7 +259,6 @@ class Data(object):
                      'clanicon': '',
                      'squadnum': 0,
                      'fireStage': -1,
-                     'isInFire': False,
                      'isBeginFire': False,
                      'number': None,
                      'timer': 0
@@ -434,7 +434,8 @@ def getValueMacroes(section, value):
              'level': value['level'],
              'clanicon': value['clanicon'],
              'squad-num': value['squadnum'],
-             'timer': round(value['timer'], 1)
+             'timer': round(value['timer'], 1),
+             'my-alive': 'alive' if value['isAlive'] else None
              }
     return macro
 
@@ -448,6 +449,7 @@ class Log(object):
         self.dataLogFire = None
         self.numberLine = 0
         self.dictVehicle = {}
+        self.dataLog = {}
 
     def reset(self):
         self.__init__(self.section)
@@ -463,7 +465,8 @@ class Log(object):
                     self.dictVehicle[attacker][attack]['numberLine'] += 1
 
     def output(self):
-        if (data.data['attackReasonID'] in [1, 2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
+        if (((data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'))
+                or ((data.data['attackReasonID'] == 1) and config.get(self.section + 'groupDamagesFromFire'))):
             self.dataLog = data.data.copy()
             attackerID = data.data['attackerID']
             attackReasonID = data.data['attackReasonID']
@@ -520,8 +523,9 @@ class LastHit(object):
         as_event('ON_LAST_HIT')
 
     def output(self):
-        if (data.data['attackReasonID'] in [1, 2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'):
-            self.dataLog = data.data.copy()
+        if (((data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'))
+                or ((data.data['attackReasonID'] == 1) and config.get(self.section + 'groupDamagesFromFire'))):
+            dataLog = data.data.copy()
             attackerID = data.data['attackerID']
             attackReasonID = data.data['attackReasonID']
             if attackerID in self.dictVehicle:
@@ -531,8 +535,8 @@ class LastHit(object):
                    ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1)):
                     self.dictVehicle[attackerID][attackReasonID]['time'] = BigWorld.serverTime()
                     self.dictVehicle[attackerID][attackReasonID]['damage'] += data.data['damage']
-                    self.dataLog['damage'] = self.dictVehicle[attackerID][attackReasonID]['damage']
-                    self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
+                    dataLog['damage'] = self.dictVehicle[attackerID][attackReasonID]['damage']
+                    dataLog['dmgRatio'] = dataLog['damage'] * 100 // data.data['maxHealth']
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': data.data['damage']}
@@ -540,7 +544,7 @@ class LastHit(object):
                 self.dictVehicle[attackerID] = {}
                 self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                 'damage': data.data['damage']}
-            macroes = getValueMacroes(self.section, self.dataLog)
+            macroes = getValueMacroes(self.section, dataLog)
             self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
         else:
             if config.get(self.section + 'showHitNoDamage') or data.data['isDamage']:
@@ -551,7 +555,7 @@ class LastHit(object):
         if self.strLastHit:
             if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
                 self.timerLastHit.stop()
-            timeDisplayLastHit = float(config.get(self.section + 'timeDisplayLastHit'))
+            timeDisplayLastHit = float(parser(config.get(self.section + 'timeDisplayLastHit'), macroes))
             self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
             self.timerLastHit.start()
         as_event('ON_LAST_HIT')
@@ -641,10 +645,15 @@ def _onTotalEfficiencyUpdated(base, self, diff):
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
+    global on_fire
     if self.isPlayerVehicle and data.data['isAlive']:
         data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
         if (newHealth <= 0):
-            global on_fire
+            on_fire = 0
+            as_event('ON_FIRE')
+    elif hasattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID'):
+        if ((self.id == BigWorld.entity(BigWorld.player().inputHandler.ctrl.curVehicleID).id) and
+                not BigWorld.entity(BigWorld.player().inputHandler.ctrl.curVehicleID).isAlive()):
             on_fire = 0
             as_event('ON_FIRE')
 
@@ -677,7 +686,6 @@ def as_setFireInVehicleS(self, isInFire):
         on_fire = 100
     else:
         on_fire = 0
-    data.data['isInFire'] = isInFire
     as_event('ON_FIRE')
 
 

@@ -27,6 +27,7 @@
     {{dmg-ratio}}         - received damage in percent / полученный урон в процентах.
     {{team-dmg}}          - source of damage (ally , enemy, self damage) / источник урона (союзник, противник, урон по себе).
     {{splash-hit}}        - text when hit by splash damage from shell (HE/HESH) / текст при попадание осколков снаряда (ОФ/ХФ).
+    {{my-alive}}          - TO DO / возвращает 'alive', если я живой, '', если не живой
 */
 
 {
