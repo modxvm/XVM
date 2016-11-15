@@ -320,7 +320,7 @@ package com.xvm.battle.minimap
                 mapSize.update(null);
                 background.addChild(mapSize);
             }
-            if (Macros.FormatBooleanGlobal(Config.config.minimap.mapSizeAlt.enabled, true))
+            if (Macros.FormatBooleanGlobal(Config.config.minimapAlt.mapSize.enabled, true))
             {
                 mapSizeAlt = new TextExtraField(Config.config.minimapAlt.mapSize);
                 mapSizeAlt.update(null);
