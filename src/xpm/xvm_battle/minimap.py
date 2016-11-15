@@ -88,13 +88,14 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
 def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
     base(self, prevCtrlID)
     if g_minimap.active and g_minimap.labelsEnabled:
-        if prevCtrlID and prevCtrlID != self._getPlayerVehicleID() and prevCtrlID in self._entries:
-            self._invoke(self._entries[prevCtrlID].getID(), 'setControlMode', False)
-        if self._ctrlVehicleID:
-            if self._ctrlVehicleID != self._getPlayerVehicleID() and self._ctrlVehicleID in self._entries:
-                self._invoke(self._entries[self._ctrlVehicleID].getID(), 'setControlMode', True)
-            if g_minimap.viewPointID:
-                self._invoke(g_minimap.viewPointID, 'setVehicleID', self._ctrlVehicleID)
+        if prevCtrlID != self._ctrlVehicleID:
+            if prevCtrlID and prevCtrlID != self._getPlayerVehicleID() and prevCtrlID in self._entries:
+                self._invoke(self._entries[prevCtrlID].getID(), 'setControlMode', False)
+            if self._ctrlVehicleID:
+                if self._ctrlVehicleID != self._getPlayerVehicleID() and self._ctrlVehicleID in self._entries:
+                    self._invoke(self._entries[self._ctrlVehicleID].getID(), 'setControlMode', True)
+                if g_minimap.viewPointID:
+                    self._invoke(g_minimap.viewPointID, 'setVehicleID', self._ctrlVehicleID)
 
 # Disable standard features if XVM minimap is active
 

@@ -73,6 +73,7 @@ package com.xvm.battle.minimap.entries.vehicle
         public function setControlMode(value:Boolean):void
         {
             _isControlMode = value;
+            invalidate(VehicleMinimapEntry.INVALID_VEHICLE_LABEL);
         }
 
         // IMinimapVehicleEntry
