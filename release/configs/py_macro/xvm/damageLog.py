@@ -364,7 +364,6 @@ class Data(object):
         _logAlt.output()
         _log.output()
         _lastHit.output()
-        _timerReload.output()
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
         maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
@@ -561,67 +560,9 @@ class LastHit(object):
         as_event('ON_LAST_HIT')
         return
 
-
-class TimerReload(object):
-
-    def __init__(self):
-        self.strTime = ''
-        self.section = 'damageLog/timeReload/'
-        self.currentTime = 0
-        self.finishTime = 0
-        self.data = None
-        self.timerReloadAttacker = None
-
-    def reset(self):
-        self.strTime = ''
-        self.section = 'damageLog/timeReload/'
-        self.currentTime = 0
-        self.finishTime = 0
-        self.data = None
-        if (self.timerReloadAttacker is not None) and self.timerReloadAttacker.isStarted:
-            self.timerReloadAttacker.stop()
-
-    def afterTimerReload(self):
-        self.strTime = ''
-        if (self.timerReloadAttacker is not None) and self.timerReloadAttacker.isStarted:
-            self.timerReloadAttacker.stop()
-        as_event('ON_TIMER_RELOAD')
-
-    def currentTimeReload(self):
-        self.data['timer'] = self.finishTime - BigWorld.serverTime()
-        timeTextAfterReload = float(config.get(self.section + 'timeTextAfterReload'))
-        if self.data['timer'] > 0:
-            macroes = getValueMacroes(self.section, self.data)
-            self.strTime = parser(config.get(self.section + 'formatTimer'), macroes)
-        else:
-            self.timerReloadAttacker.stop()
-            if timeTextAfterReload > 0:
-                self.timerReloadAttacker = TimeInterval(timeTextAfterReload, self, 'afterTimerReload')
-                macroes = getValueMacroes(self.section, self.data)
-                self.strTime = parser(config.get(self.section + 'formatTimerAfterReload'), macroes)
-                self.timerReloadAttacker.start()
-            else:
-                self.strTime = ''
-        as_event('ON_TIMER_RELOAD')
-
-    def output(self):
-        if (data.data['attackReasonID'] == 0) and (data.data['timer'] > 0) and data.data['teamDmg'] != 'player':
-            self.data = data.data.copy()
-            macroes = getValueMacroes(self.section, self.data)
-            self.strTime = parser(config.get(self.section + 'formatTimer'), macroes)
-            as_event('ON_TIMER_RELOAD')
-            self.finishTime = self.data['timer'] + BigWorld.serverTime()
-            if (self.timerReloadAttacker is not None) and (self.timerReloadAttacker.isStarted):
-                self.timerReloadAttacker.stop()
-            self.timerReloadAttacker = TimeInterval(0.1, self, 'currentTimeReload')
-            self.timerReloadAttacker.start()
-
-
 _log = Log('damageLog/log/')
 _logAlt = Log('damageLog/logAlt/')
 _lastHit = LastHit()
-_timerReload = TimerReload()
-
 
 @overrideMethod(DamageLogPanel, 'as_detailStatsS')
 def as_detailStatsS(base, self, isVisible, messages):
@@ -697,7 +638,6 @@ def destroyGUI(self):
     _log.reset()
     _logAlt.reset()
     _lastHit.reset()
-    _timerReload.reset()
 
 @registerEvent(PlayerAvatar, 'handleKey')
 def handleKey(self, isDown, key, mods):
@@ -716,10 +656,6 @@ def dLog():
 
 def lastHit():
     return _lastHit.strLastHit
-
-
-def timerReload():
-    return _timerReload.strTime
 
 
 def fire():

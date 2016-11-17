@@ -93,20 +93,6 @@
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.damageLog.dLog}}"
     },
-    // Timer reload (see damageLog.xc).
-    // Таймер перезарядки (см. damageLog.xc).
-    "timerReload": {
-      "enabled": true,
-      "updateEvent": "PY(ON_TIMER_RELOAD)",
-      "x": 240,
-      "y": 0,
-      "width": 300,
-      "height": 252,
-      "screenVAlign": "bottom",
-      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
-      "textFormat": { "color": "0xF4EFE8", "size": 16 },
-      "format": "{{py:xvm.damageLog.timerReload}}"
-    },
     // Display the last damage (hit) (see damageLog.xc).
     // Отображение последнего урона (попадания) (см. damageLog.xc).
     "lastHit": {

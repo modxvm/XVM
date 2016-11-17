@@ -1,4 +1,7 @@
-﻿XVM-6.4.9-dev:
+﻿XVM-6.4.9:
+  [DAMAGE LOG]
+  * Reloading timer was removed due to new "fair play" policy  
+
   [MISC]
   * Python part of XVM now distributed in source code (.py files)
 

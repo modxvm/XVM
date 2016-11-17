@@ -12,11 +12,6 @@ def damageLog_lastHit():
     return damageLog.lastHit()
 
 
-@xvm.export('xvm.damageLog.timerReload', deterministic=False)
-def damageLog_timerReload():
-    return damageLog.timerReload()
-
-
 @xvm.export('xvm.damageLog.fire', deterministic=False)
 def damageLog_fire():
     return damageLog.fire()
