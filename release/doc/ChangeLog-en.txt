@@ -1,5 +1,8 @@
 ﻿XVM-6.5.0-dev:
 
+XVM-6.4.9.1:
+  [INSTALLER]
+  * Fix installer building
 
 XVM-6.4.9:
   [DAMAGE LOG]
