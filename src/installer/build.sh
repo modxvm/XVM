@@ -56,7 +56,7 @@ generate_defines(){
 prepare_changelog()
 {
     cp "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-en.txt "$XVMINST_ROOT_PATH"/src/temp_changelogs/
-    iconv -f utf8 -t cp1251 -o "$XVMINST_ROOT_PATH/src/temp_changelogs/ChangeLog-ru.txt" "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-ru.txt"
+    iconv -f utf8 -t cp1251 -o "$XVMINST_ROOT_PATH/src/temp_changelogs/ChangeLog-ru.txt" "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-ru.txt" || exit 1
 }
 
 generate_languages(){
