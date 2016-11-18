@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 27.10.2016
+    # Last update: 18.11.2016
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -293,7 +293,26 @@ _data = {
     "japan:J27_O_I_120":                     'O·ho',
     "japan:J28_O_I_100":                     'O·ni',
     "sweden:S01_Strv_74_A2":                 'm42·57',
+    "sweden:S02_Strv_M42":                   'm/42',
+    "sweden:S03_Strv_M38":                   'm/38',
+    "sweden:S04_Lago_I":                     'lago',
+    "sweden:S05_Strv_M21_29":                'fm/21',
+    "sweden:S06_Ikv_90_Typ_B_Bofors":        'lkv90·b',
+    "sweden:S07_Strv_74":                    'strv74',
+    "sweden:S08_Ikv_65_Alt_2":               'lkv60·2',
+    "sweden:S09_L_120_TD":                   'fm/42',
+    "sweden:S10_Strv_103_0_Series":          '103·0',
+    "sweden:S11_Strv_103B":                  '103·b',
+    "sweden:S12_Strv_M40":                   'm/40L',
+    "sweden:S13_Leo":                        'leo',
+    "sweden:S14_Ikv_103":                    'lkv103',
     "sweden:S15_L_60":                       'L60',
+    "sweden:S16_Kranvagn":                   'kranv',
+    "sweden:S17_EMIL_1952_E2":               'emil·II',
+    "sweden:S18_EMIL_1951_E1":               'emil·I',
+    "sweden:S19_Sav_M43":                    'm/43',
+    "sweden:S20_Ikv_72":                     'lkv72',
+    "sweden:S21_UDES_03":                    'udes·03',
     "uk:GB01_Medium_Mark_I":                 'Med1',
     "uk:GB01_Medium_Mark_I_bot":             'Med1',
     "uk:GB03_Cruiser_Mk_I":                  'Crus1',
