@@ -150,9 +150,9 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
         g_battle.onVehicleHealthChanged(self.id, newHealth, attackerID, attackReasonID)
 
 # on vehicle info updated
-@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
-def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
-    # debug("> _BattleArenaController_updateVehiclesInfo")
+@registerEvent(DynSquadFunctional, 'updateVehiclesData')
+def _DynSquadFunctional_updateVehiclesData(self, updated, arenaDP):
+    # debug("> _DynSquadFunctional_updateVehiclesData")
     try:
         # is dynamic squad created
         if BigWorld.player().arena.guiType == constants.ARENA_GUI_TYPE.RANDOM:

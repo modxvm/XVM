@@ -173,9 +173,9 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        override public function updateVehiclesInfo(data:IDAAPIDataClass) : void
+        override public function updateVehiclesData(data:IDAAPIDataClass) : void
         {
-            super.updateVehiclesInfo(data);
+            super.updateVehiclesData(data);
             if (mopt_fixedPosition)
             {
                 setFixedOrder(DAAPIVehiclesDataVO(data));

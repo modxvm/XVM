@@ -2,8 +2,6 @@
 {
     import com.xvm.*;
     import com.xvm.vo.*;
-    import flash.errors.*;
-    import net.wg.gui.lobby.battleloading.constants.*;
 
     public class VOLobbyMacrosOptions extends VOMacrosOptions
     {
@@ -56,17 +54,17 @@
 
         override public function get isAlive():Boolean
         {
-            return (vehicleStatus & VehicleStatus.IS_ALIVE) != 0;
+            return false;
         }
 
         override public function get isReady():Boolean
         {
-            return (vehicleStatus & VehicleStatus.IS_READY) != 0;
+            return false;
         }
 
         override public function get isNotAvailable():Boolean
         {
-            return (vehicleStatus & VehicleStatus.NOT_AVAILABLE) != 0;
+            return false;
         }
 
         override public function get isStopRespawn():Boolean
@@ -96,7 +94,7 @@
 
         override public function get isTeamKiller():Boolean
         {
-            return (playerStatus & PlayerStatus.IS_TEAM_KILLER) != 0;
+            return false;
         }
 
         override public function get isCurrentPlayer():Boolean

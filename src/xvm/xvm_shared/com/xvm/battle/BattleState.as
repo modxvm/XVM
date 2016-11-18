@@ -201,50 +201,19 @@ package com.xvm.battle
 
         // IBattleComponentDataController implementation
 
-        public function addVehiclesInfo(data:Object):void
-        {
-            setVehiclesData(data);
-        }
-
-        public function setArenaInfo(data:Object):void
-        {
-            Xvm.swfProfilerBegin("BattleState.setArenaInfo()");
-            try
-            {
-                _arenaInfoVO = new VOArenaInfo(data);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            finally
-            {
-                Xvm.swfProfilerEnd("BattleState.setArenaInfo()");
-            }
-        }
-
-        public function setPersonalStatus(param1:uint):void
-        {
-            //Logger.add("[BattleState] setPersonalStatus: " + param1);
-            try
-            {
-                _personalStatus = param1;
-
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        public function setUserTags(data:Object):void
-        {
-            updateUserTags(data);
-        }
-
         public function setVehiclesData(data:Object):void
         {
-            Xvm.swfProfilerBegin("BattleState.setVehiclesData()");
+            updateVehiclesData(data);
+        }
+
+        public function addVehiclesInfo(data:Object):void
+        {
+            updateVehiclesData(data);
+        }
+
+        public function updateVehiclesData(data:Object):void
+        {
+            Xvm.swfProfilerBegin("BattleState.updateVehiclesData()");
             try
             {
                 if (_playersDataVO == null)
@@ -260,112 +229,7 @@ package com.xvm.battle
             }
             finally
             {
-                Xvm.swfProfilerEnd("BattleState.setVehiclesData()");
-            }
-        }
-
-        public function setVehicleStats(data:Object):void
-        {
-            updateVehiclesStats(data);
-        }
-
-        public function updateInvitationsStatuses(data:Object) : void
-        {
-            //Logger.addObject(data, 1, "[BattleState] updateInvitationsStatuses");
-            try
-            {
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        public function updatePersonalStatus(param1:uint, param2:uint):void
-        {
-            Logger.add("[BattleState] updatePersonalStatus: " + param1 + ", " + param2);
-            try
-            {
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            /*
-            {
-                this._allyVehicleMarkersList.isVehicleCounterShown = this._enemyVehicleMarkersList.isVehicleCounterShown = true;
-            }
-            else if(PersonalStatus.IS_VEHICLE_COUNTER_SHOWN == param2)
-            {
-                this._allyVehicleMarkersList.isVehicleCounterShown = this._enemyVehicleMarkersList.isVehicleCounterShown = false;
-            }
-            */
-        }
-
-        public function updatePlayerStatus(data:Object):void
-        {
-            Xvm.swfProfilerBegin("BattleState.updatePlayerStatus()");
-            //Logger.addObject(data, 1, "[BattleState] updatePlayerStatus");
-            try
-            {
-                _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status } );
-                invalidate(InvalidationType.STATE);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            finally
-            {
-                Xvm.swfProfilerEnd("BattleState.updatePlayerStatus()");
-            }
-        }
-
-        public function updateUserTags(data:Object):void
-        {
-            try
-            {
-                _playersDataVO.updateUserTags(data);
-                invalidate(InvalidationType.STATE);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
-        public function updateVehiclesInfo(data:Object):void
-        {
-            setVehiclesData(data);
-        }
-
-        public function updateVehiclesStats(data:Object):void
-        {
-            Xvm.swfProfilerBegin("BattleState.updateVehiclesStats()");
-            //Logger.addObject(data, 1, "[BattleState] updateVehiclesStats");
-            try
-            {
-                if (data.leftFrags)
-                {
-                    _playersDataVO.updateVehicleFrags(data.leftFrags);
-                }
-                if (data.rightFrags)
-                {
-                    _playersDataVO.updateVehicleFrags(data.rightFrags);
-                }
-                if (data.totalStats)
-                {
-                    _playersDataVO.updateTotalStats(data.totalStats);
-                }
-                invalidate(InvalidationType.STATE);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            finally
-            {
-                Xvm.swfProfilerEnd("BattleState.updateVehiclesStats()");
+                Xvm.swfProfilerEnd("BattleState.updateVehiclesData()");
             }
         }
 
@@ -395,6 +259,142 @@ package com.xvm.battle
             finally
             {
                 Xvm.swfProfilerEnd("BattleState.updateVehicleStatus()");
+            }
+        }
+
+        public function updatePersonalStatus(param1:uint, param2:uint):void
+        {
+            Logger.add("[BattleState] updatePersonalStatus: " + param1 + ", " + param2);
+            try
+            {
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            /*
+            {
+                this._allyVehicleMarkersList.isVehicleCounterShown = this._enemyVehicleMarkersList.isVehicleCounterShown = true;
+            }
+            else if(PersonalStatus.IS_VEHICLE_COUNTER_SHOWN == param2)
+            {
+                this._allyVehicleMarkersList.isVehicleCounterShown = this._enemyVehicleMarkersList.isVehicleCounterShown = false;
+            }
+            */
+        }
+
+        public function setVehicleStats(data:Object):void
+        {
+            updateVehiclesStat(data);
+        }
+
+        public function updateVehiclesStat(data:Object):void
+        {
+            Xvm.swfProfilerBegin("BattleState.updateVehiclesStat()");
+            //Logger.addObject(data, 1, "[BattleState] updateVehiclesStat");
+            try
+            {
+                if (data.leftFrags)
+                {
+                    _playersDataVO.updateVehicleFrags(data.leftFrags);
+                }
+                if (data.rightFrags)
+                {
+                    _playersDataVO.updateVehicleFrags(data.rightFrags);
+                }
+                if (data.totalStats)
+                {
+                    _playersDataVO.updateTotalStats(data.totalStats);
+                }
+                invalidate(InvalidationType.STATE);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            finally
+            {
+                Xvm.swfProfilerEnd("BattleState.updateVehiclesStat()");
+            }
+        }
+
+        public function updatePlayerStatus(data:Object):void
+        {
+            Xvm.swfProfilerBegin("BattleState.updatePlayerStatus()");
+            //Logger.addObject(data, 1, "[BattleState] updatePlayerStatus");
+            try
+            {
+                _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status } );
+                invalidate(InvalidationType.STATE);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            finally
+            {
+                Xvm.swfProfilerEnd("BattleState.updatePlayerStatus()");
+            }
+        }
+
+        public function setArenaInfo(data:Object):void
+        {
+            Xvm.swfProfilerBegin("BattleState.setArenaInfo()");
+            try
+            {
+                _arenaInfoVO = new VOArenaInfo(data);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+            finally
+            {
+                Xvm.swfProfilerEnd("BattleState.setArenaInfo()");
+            }
+        }
+
+        public function setUserTags(data:Object):void
+        {
+            updateUserTags(data);
+        }
+
+        public function updateUserTags(data:Object):void
+        {
+            try
+            {
+                _playersDataVO.updateUserTags(data);
+                invalidate(InvalidationType.STATE);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
+        public function setPersonalStatus(param1:uint):void
+        {
+            //Logger.add("[BattleState] setPersonalStatus: " + param1);
+            try
+            {
+                _personalStatus = param1;
+
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
+        public function updateInvitationsStatuses(data:Object) : void
+        {
+            //Logger.addObject(data, 1, "[BattleState] updateInvitationsStatuses");
+            try
+            {
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 

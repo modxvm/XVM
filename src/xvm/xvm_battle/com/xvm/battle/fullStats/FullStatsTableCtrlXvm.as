@@ -50,6 +50,8 @@ package com.xvm.battle.fullStats
                 xfw_table.noSoundCollection[index]);
         }
 
+        // TODO:9.17
+        /*
         override public function updateOrder(param1:Vector.<Number>, param2:Boolean):void
         {
             var old_order:Vector.<Number> = param2 ? rightOrder.concat() : leftOrder.concat();
@@ -65,5 +67,6 @@ package com.xvm.battle.fullStats
                 }
             }
         }
+        */
     }
 }

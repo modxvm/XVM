@@ -32,11 +32,11 @@ package com.xvm.vehiclemarkers.ui
             Xfw.addCommandListener("xvm_vm.as.cmd_response", as_cmd_response);
             Xfw.addCommandListener("BC_setVehiclesData", BattleState.instance.setVehiclesData);
             Xfw.addCommandListener("BC_addVehiclesInfo", BattleState.instance.addVehiclesInfo);
-            Xfw.addCommandListener("BC_updateVehiclesInfo", BattleState.instance.updateVehiclesInfo);
+            Xfw.addCommandListener("BC_updateVehiclesData", BattleState.instance.updateVehiclesData);
             Xfw.addCommandListener("BC_updateVehicleStatus", BattleState.instance.updateVehicleStatus);
             Xfw.addCommandListener("BC_updatePlayerStatus", BattleState.instance.updatePlayerStatus);
             Xfw.addCommandListener("BC_setVehiclesStats", BattleState.instance.setVehicleStats);
-            Xfw.addCommandListener("BC_updateVehiclesStats", BattleState.instance.updateVehiclesStats);
+            Xfw.addCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
             Xfw.addCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
             Xfw.addCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
             Xfw.addCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
