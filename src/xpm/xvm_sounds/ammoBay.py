@@ -4,7 +4,8 @@
 # imports
 
 import SoundGroups
-from gui.battle_control import g_sessionProvider
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 
 from xfw import *
@@ -25,7 +26,8 @@ class XVM_SOUND_EVENT(object):
 def DamagePanel_updateDeviceState(self, value):
     try:
         if config.get('sounds/enabled'):
-            ctrl = g_sessionProvider.shared.vehicleState
+            sessionProvider = dependency.instance(IBattleSessionProvider)
+            ctrl = sessionProvider.shared.vehicleState
             if ctrl is not None:
                 vehicle = ctrl.getControllingVehicle()
                 if vehicle is not None:

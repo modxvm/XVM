@@ -42,8 +42,8 @@ def as_setVehiclesDataS(self, data):
 def as_addVehiclesInfoS(self, data):
     g_markers.call(BC.addVehiclesInfo, data)
 
-@registerEvent(BattleStatisticsDataController, 'as_updateVehiclesDataS')
-def as_updateVehiclesDataS(self, data):
+@registerEvent(BattleStatisticsDataController, 'as_updateVehiclesInfoS')
+def as_updateVehiclesInfoS(self, data):
     g_markers.call(BC.updateVehiclesData, data)
 
 @registerEvent(BattleStatisticsDataController, 'as_updateVehicleStatusS')
@@ -58,8 +58,8 @@ def as_updatePlayerStatusS(self, data):
 def as_setVehiclesStatsS(self, data):
     g_markers.call(BC.setVehiclesStats, data)
 
-@registerEvent(BattleStatisticsDataController, 'as_updateVehiclesStatS')
-def as_updateVehiclesStatS(self, data):
+@registerEvent(BattleStatisticsDataController, 'as_updateVehiclesStatsS')
+def as_updateVehiclesStatsS(self, data):
     g_markers.call(BC.updateVehiclesStat, data)
 
 @registerEvent(BattleStatisticsDataController, 'as_updatePersonalStatusS')

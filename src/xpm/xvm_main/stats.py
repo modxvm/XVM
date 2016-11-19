@@ -44,8 +44,9 @@ import uuid
 import imghdr
 
 import BigWorld
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.app_loader import g_appLoader
-from gui.battle_control import g_sessionProvider
 from items.vehicles import VEHICLE_CLASS_TAGS
 
 from xfw import *
@@ -623,6 +624,8 @@ class _Player(object):
                  'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready',
                  'x_emblem', 'x_emblem_loading', 'clanicon')
 
+    sessionProvider = dependency.descriptor(IBattleSessionProvider)
+
     def __init__(self, vehicleID, vData):
         self.vehicleID = vehicleID
         self.accountDBID = vData['accountDBID']
@@ -640,7 +643,7 @@ class _Player(object):
             self.vehCD = 0
         self.team = vData['team']
         self.squadnum = 0
-        arenaDP = g_sessionProvider.getArenaDP()
+        arenaDP = self.sessionProvider.getArenaDP()
         if arenaDP is not None:
             vInfo = arenaDP.getVehicleInfo(vID=vehicleID)
             self.squadnum = vInfo.squadIndex

@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.16',
+    'VERSION':       '0.9.17.0',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.16'],
+    'GAME_VERSIONS': ['0.9.17.0'],
     # optional
 }
 
@@ -26,7 +26,7 @@ from gui.shared import g_eventBus, g_itemsCache
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
 from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
 from gui.shared.gui_items.Vehicle import Vehicle
-from gui.prb_control.dispatcher import _PrebattleDispatcher
+from gui.prb_control.entities.base.limits import VehicleIsValid
 
 from xfw import *
 
@@ -122,15 +122,16 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
 
 
 # low ammo => vehicle not ready (disable red button)
-@overrideMethod(_PrebattleDispatcher, 'canPlayerDoAction')
-def _PrebattleDispatcher_canPlayerDoAction(base, self, *args, **kwargs):
-    try:
-        if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
-            return (False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
-    except Exception as ex:
-        err(traceback.format_exc())
-    return base(self, *args, **kwargs)
-
+@overrideMethod(VehicleIsValid, 'check')
+def _VehicleIsValid_check(base, self, *args, **kwargs):
+    res = base(self, *args, **kwargs)
+    if res[0] == True:
+        try:
+            if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
+                res = (False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
+        except Exception as ex:
+            err(traceback.format_exc())
+    return res
 
 # low ammo => write on carousel's vehicle 'low ammo'
 @overrideMethod(helpers.i18n, 'makeString')

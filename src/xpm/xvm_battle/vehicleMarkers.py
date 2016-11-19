@@ -12,9 +12,10 @@ import constants
 import game
 from Avatar import PlayerAvatar
 from messenger import MessengerEntry
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.shared import g_eventBus, events
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
-from gui.battle_control import g_sessionProvider
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
 
 from xfw import *
@@ -134,6 +135,7 @@ class VehicleMarkers(object):
     initialized = False
     guiType = 0
     manager = None
+    sessionProvider = dependency.descriptor(IBattleSessionProvider)
 
     @property
     def active(self):
@@ -254,7 +256,7 @@ class VehicleMarkers(object):
                             data['marksOnGun'] = entity.publicInfo.marksOnGun
 
                 if targets & INV.FRAGS:
-                    arenaDP = g_sessionProvider.getArenaDP()
+                    arenaDP = self.sessionProvider.getArenaDP()
                     vStatsVO = arenaDP.getVehicleStats(vehicleID)
                     data['frags'] = vStatsVO.frags
 
@@ -269,7 +271,7 @@ class VehicleMarkers(object):
             if self.plugins:
                 plugin = self.plugins.getPlugin('vehicles')
                 if plugin:
-                    arenaDP = g_sessionProvider.getArenaDP()
+                    arenaDP = self.sessionProvider.getArenaDP()
                     for vInfo in arenaDP.getVehiclesInfoIterator():
                         plugin._destroyVehicleMarker(vInfo.vehicleID)
                         plugin.addVehicleInfo(vInfo, arenaDP)

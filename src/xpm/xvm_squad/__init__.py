@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.16',
+    'VERSION':       '0.9.17.0',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.16'],
+    'GAME_VERSIONS': ['0.9.17.0'],
     # optional
 }
 
@@ -21,7 +21,7 @@ import game
 from gui.shared import g_eventBus, g_itemsCache
 from gui.Scaleform.daapi.view.lobby.prb_windows.squad_view import SquadView
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
-from gui.prb_control.functional.action_handlers import SquadActionsHandler
+from gui.prb_control.entities.base.squad.actions_handler import SquadActionsHandler
 from gui.DialogsInterface import showDialog
 from functools import partial
 

@@ -11,11 +11,13 @@ import game
 import constants
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
 from gui.shared import g_eventBus, events
 from gui.shared.utils.functions import getBattleSubTypeBaseNumder
-from gui.battle_control import g_sessionProvider, avatar_getter
+from gui.battle_control import avatar_getter
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
@@ -77,13 +79,14 @@ def _PlayerAvatar_onBecomePlayer(base, self):
                 arena.onAvatarReady += g_battle.onAvatarReady
                 arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
                 arena.onNewVehicleListReceived += xmqp.start
-        ctrl = g_sessionProvider.shared.feedback
+        sessionProvider = dependency.instance(IBattleSessionProvider)
+        ctrl = sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived += g_battle.onVehicleFeedbackReceived
-        ctrl = g_sessionProvider.shared.vehicleState
+        ctrl = sessionProvider.shared.vehicleState
         if ctrl:
             ctrl.onVehicleStateUpdated += g_battle.onVehicleStateUpdated
-        ctrl = g_sessionProvider.shared.optionalDevices
+        ctrl = sessionProvider.shared.optionalDevices
         if ctrl:
             ctrl.onOptionalDeviceAdded += g_battle.onOptionalDeviceAdded
             ctrl.onOptionalDeviceUpdated += g_battle.onOptionalDeviceUpdated
@@ -102,13 +105,14 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
                 arena.onAvatarReady -= g_battle.onAvatarReady
                 arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
                 arena.onNewVehicleListReceived -= xmqp.start
-        ctrl = g_sessionProvider.shared.feedback
+        sessionProvider = dependency.instance(IBattleSessionProvider)
+        ctrl = sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived -= g_battle.onVehicleFeedbackReceived
-        ctrl = g_sessionProvider.shared.vehicleState
+        ctrl = sessionProvider.shared.vehicleState
         if ctrl:
             ctrl.onVehicleStateUpdated -= g_battle.onVehicleStateUpdated
-        ctrl = g_sessionProvider.shared.optionalDevices
+        ctrl = sessionProvider.shared.optionalDevices
         if ctrl:
             ctrl.onOptionalDeviceAdded -= g_battle.onOptionalDeviceAdded
             ctrl.onOptionalDeviceUpdated -= g_battle.onOptionalDeviceUpdated
@@ -150,9 +154,9 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
         g_battle.onVehicleHealthChanged(self.id, newHealth, attackerID, attackReasonID)
 
 # on vehicle info updated
-@registerEvent(DynSquadFunctional, 'updateVehiclesData')
-def _DynSquadFunctional_updateVehiclesData(self, updated, arenaDP):
-    # debug("> _DynSquadFunctional_updateVehiclesData")
+@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
+def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
+    # debug("> _DynSquadFunctional_updateVehiclesInfo")
     try:
         # is dynamic squad created
         if BigWorld.player().arena.guiType == constants.ARENA_GUI_TYPE.RANDOM:
@@ -202,6 +206,8 @@ class Battle(object):
     targetVehicleID = None
     xvm_battle_swf_initialized = False
     is_moving = False
+
+    sessionProvider = dependency.descriptor(IBattleSessionProvider)
 
     def onAppInitialized(self, event):
         self.xvm_battle_swf_initialized = False
@@ -308,7 +314,7 @@ class Battle(object):
                         data['marksOnGun'] = entity.publicInfo.marksOnGun
 
             if targets & (INV.ALL_VINFO | INV.ALL_VSTATS):
-                arenaDP = g_sessionProvider.getArenaDP()
+                arenaDP = self.sessionProvider.getArenaDP()
                 if targets & INV.ALL_VINFO:
                     vInfoVO = arenaDP.getVehicleInfo(vehicleID)
                 if targets & INV.ALL_VSTATS:
@@ -397,7 +403,7 @@ class Battle(object):
             return markers2d_settings.DAMAGE_TYPE.FROM_UNKNOWN
         if attackerID == avatar_getter.getPlayerVehicleID():
             return markers2d_settings.DAMAGE_TYPE.FROM_PLAYER
-        entityName = g_sessionProvider.getCtx().getPlayerGuiProps(attackerID, entryVehicle['team'])
+        entityName = self.sessionProvider.getCtx().getPlayerGuiProps(attackerID, entryVehicle['team'])
         if entityName == PLAYER_GUI_PROPS.squadman:
             return markers2d_settings.DAMAGE_TYPE.FROM_SQUAD
         if entityName == PLAYER_GUI_PROPS.ally:

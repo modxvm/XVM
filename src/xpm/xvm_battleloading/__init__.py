@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.16',
+    'VERSION':       '0.9.17.0',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.16'],
+    'GAME_VERSIONS': ['0.9.17.0'],
     # optional
 }
 
@@ -20,7 +20,7 @@ import re
 import traceback
 
 import BigWorld
-from gui.Scaleform.daapi.view.battle_loading import BattleLoading
+from gui.Scaleform.daapi.view.battle.shared.battle_loading import BattleLoading
 
 from xfw import *
 

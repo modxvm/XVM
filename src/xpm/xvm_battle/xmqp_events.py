@@ -6,7 +6,6 @@ import simplejson
 from gui.shared import g_eventBus, events
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
-from gui.battle_control import g_sessionProvider
 
 from xfw import *
 
@@ -67,11 +66,6 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
     if xmqp.XMQP_DEVELOPMENT:
         if accountDBID == utils.getAccountDBID():
             accountDBID = getCurrentAccountDBID()
-
-    #arenaDP = g_sessionProvider.getArenaDP()
-    #vehicleID = arenaDP.getVehIDByAccDBID(accountDBID)
-    #if not vehicleID:
-    #    return
 
     battle = getBattleApp()
     if not battle:

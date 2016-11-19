@@ -9,10 +9,11 @@ import BigWorld
 import game
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
 from gui import g_guiResetters
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
-from gui.battle_control import g_sessionProvider
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 from gui.Scaleform.daapi.view.battle.shared.markers2d.plugins import VehicleMarkerPlugin
@@ -87,7 +88,8 @@ def _PlayerAvatar_onBecomePlayer(base, self):
     base(self)
     try:
         BigWorld.player().arena.onVehicleKilled += onVehicleKilled
-        ctrl = g_sessionProvider.shared.feedback
+        sessionProvider = dependency.instance(IBattleSessionProvider)
+        ctrl = sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived += onVehicleFeedbackReceived
         g_guiResetters.add(update_conf_hp)
@@ -98,7 +100,8 @@ def _PlayerAvatar_onBecomePlayer(base, self):
 def _PlayerAvatar_onBecomeNonPlayer(base, self):
     try:
         BigWorld.player().arena.onVehicleKilled -= onVehicleKilled
-        ctrl = g_sessionProvider.shared.feedback
+        sessionProvider = dependency.instance(IBattleSessionProvider)
+        ctrl = sessionProvider.shared.feedback
         if ctrl:
             ctrl.onVehicleFeedbackReceived -= onVehicleFeedbackReceived
         g_guiResetters.discard(update_conf_hp)
@@ -149,9 +152,9 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     if self.isPlayerVehicle:
         update_hp(self.id, newHealth)
 
-@registerEvent(VehicleMarkerPlugin, '_VehicleMarkerPlugin__addOrUpdateVehicleMarker')
-def _VehicleMarkerPlugin__addOrUpdateVehicleMarker(self, vProxy, vInfo, *args, **kwargs):
-    #log('_VehicleMarkerPlugin__addOrUpdateVehicleMarker: {}, {}'.format(vProxy.id, vProxy.health))
+@registerEvent(VehicleMarkerPlugin, '_VehicleMarkerPlugin__onVehicleMarkerAdded')
+def _VehicleMarkerPlugin__onVehicleMarkerAdded(self, vProxy, vInfo, *args, **kwargs):
+    #log('_VehicleMarkerPlugin__onVehicleMarkerAdded: {}, {}'.format(vProxy.id, vProxy.health))
     update_hp(vProxy.id, vProxy.health)
 
 def onVehicleKilled(victimID, *args, **kwargs):

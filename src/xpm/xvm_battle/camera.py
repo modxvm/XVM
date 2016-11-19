@@ -13,9 +13,10 @@ from AvatarInputHandler.control_modes import ArcadeControlMode, SniperControlMod
 from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera, MinMax
 from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
 from AvatarInputHandler.DynamicCameras.StrategicCamera import StrategicCamera
-from gui.battle_control import g_sessionProvider
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.battle_control.battle_constants import CROSSHAIR_VIEW_ID
-from gui.Scaleform.daapi.view.battle.shared.crosshair_panel import CrosshairPanel
+from gui.Scaleform.daapi.view.battle.shared.crosshair.container import CrosshairPanelContainer
 
 from xfw import *
 
@@ -33,7 +34,8 @@ from consts import *
 def _PlayerAvatar_onBecomePlayer(base, self):
     base(self)
     try:
-        ctrl = g_sessionProvider.shared.crosshair
+        sessionProvider = dependency.instance(IBattleSessionProvider)
+        ctrl = sessionProvider.shared.crosshair
         if ctrl:
             ctrl.onCrosshairPositionChanged += onCrosshairPositionChanged
             ctrl.onCrosshairZoomFactorChanged += onCrosshairZoomFactorChanged
@@ -45,7 +47,8 @@ def _PlayerAvatar_onBecomePlayer(base, self):
 @overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
 def _PlayerAvatar_onBecomeNonPlayer(base, self):
     try:
-        ctrl = g_sessionProvider.shared.crosshair
+        sessionProvider = dependency.instance(IBattleSessionProvider)
+        ctrl = sessionProvider.shared.crosshair
         if ctrl:
             ctrl.onCrosshairPositionChanged -= onCrosshairPositionChanged
             ctrl.onCrosshairZoomFactorChanged -= onCrosshairZoomFactorChanged
@@ -156,8 +159,8 @@ def _sendSniperCameraFlash(enable, zoom):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zoomIndicator/enabled'):
         as_xfw_cmd(XVM_BATTLE_COMMAND.AS_SNIPER_CAMERA, enable, zoom)
 
-@overrideMethod(CrosshairPanel, 'as_setSettingsS')
-def _CrosshairPanel_as_setSettingsS(base, self, data):
+@overrideMethod(CrosshairPanelContainer, 'as_setSettingsS')
+def _CrosshairPanelContainer_as_setSettingsS(base, self, data):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zoomIndicator/enabled'):
         sniperData = data.get(CROSSHAIR_VIEW_ID.SNIPER, None)
         if sniperData:

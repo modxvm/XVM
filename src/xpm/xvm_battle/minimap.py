@@ -11,12 +11,14 @@ import BigWorld
 import constants
 import game
 from constants import VISIBILITY
-from account_helpers.settings_core import g_settingsCore, settings_constants
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
+from account_helpers.settings_core.SettingsCore import SettingsCore
+from account_helpers.settings_core import settings_constants
 from Avatar import PlayerAvatar
 from AvatarInputHandler.control_modes import PostMortemControlMode
 from items.vehicles import VEHICLE_CLASS_TAGS
 from gui.shared import g_eventBus, events
-from gui.battle_control import g_sessionProvider
 from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
 from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME, ADDITIONAL_FEATURES
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin, PersonalEntriesPlugin
@@ -145,9 +147,9 @@ _DEFAULTS = {
 _in_PersonalEntriesPlugin_setSettings = False
 _in_ArenaVehiclesPlugin_setSettings = False
 
-@overrideMethod(g_settingsCore, 'getSetting')
-def _g_settingsCore_getSetting(base, name):
-    value = base(name)
+@overrideMethod(SettingsCore, 'getSetting')
+def _SettingsCore_getSetting(base, self, name):
+    value = base(self, name)
     if g_minimap.active:
         global _in_PersonalEntriesPlugin_setSettings
         if _in_PersonalEntriesPlugin_setSettings:
@@ -170,7 +172,8 @@ def _PersonalEntriesPlugin_start(base, self):
     base(self)
     if g_minimap.active and g_minimap.linesEnabled:
         if not self._PersonalEntriesPlugin__yawLimits:
-            vInfo = g_sessionProvider.getArenaDP().getVehicleInfo()
+            sessionProvider = dependency.instance(IBattleSessionProvider)
+            vInfo = sessionProvider.getArenaDP().getVehicleInfo()
             yawLimits = vInfo.vehicleType.turretYawLimits
             if yawLimits:
                 self._PersonalEntriesPlugin__yawLimits = (math.degrees(yawLimits[0]), math.degrees(yawLimits[1]))

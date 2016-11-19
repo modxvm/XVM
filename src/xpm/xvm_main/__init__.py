@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.16',
+    'VERSION':       '0.9.17.0',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.16'],
+    'GAME_VERSIONS': ['0.9.17.0'],
     # optional
 }
 
@@ -28,7 +28,6 @@ import ResMgr
 import game
 from account_helpers.settings_core import settings_constants
 from account_helpers.settings_core.options import SettingsContainer
-from account_helpers.settings_core.SettingsCore import g_settingsCore
 from Avatar import PlayerAvatar
 from BattleReplay import g_replayCtrl
 from PlayerEvents import g_playerEvents
@@ -41,7 +40,7 @@ from gui.shared import g_eventBus, events
 from gui.Scaleform.framework.application import SFApplication
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
-from helpers import VERSION_FILE_PATH
+from helpers import dependency, VERSION_FILE_PATH
 
 from xfw import *
 

@@ -11,8 +11,9 @@ from bisect import bisect_left
 
 import BigWorld
 import Vehicle
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
 from gui import game_control
-from gui.battle_control import g_sessionProvider
 
 from xfw import *
 
@@ -66,11 +67,13 @@ def getVehicleByHandle(handle):
 
 
 def getVehicleInfo(vehicleID):
-    return g_sessionProvider.getArenaDP().getVehicleInfo(vehicleID)
+    sessionProvider = dependency.instance(IBattleSessionProvider)
+    return sessionProvider.getArenaDP().getVehicleInfo(vehicleID)
 
 
 def getVehicleStats(vehicleID):
-    return g_sessionProvider.getArenaDP().getVehicleStats(vehicleID)
+    sessionProvider = dependency.instance(IBattleSessionProvider)
+    return sessionProvider.getArenaDP().getVehicleStats(vehicleID)
 
 
 # 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
