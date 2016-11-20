@@ -1,6 +1,6 @@
 ﻿XVM-6.5.0-dev:
   * added option:
-      "hangar"/"showNotificationsCounter" - show counter on the system channel button
+      "hangar"/"notificationsButtonType" - behavior of the system channel notifications button on new notifications
 
 XVM-6.4.9.1:
   [INSTALLER]
