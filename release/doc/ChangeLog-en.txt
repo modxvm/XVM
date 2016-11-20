@@ -1,4 +1,7 @@
-﻿XVM-6.4.9.1:
+﻿  * added option:
+      "hangar"/"showNotificationsCounter" - show counter on the system channel button
+
+XVM-6.4.9.1:
   [INSTALLER]
   * Fix installer building
 
