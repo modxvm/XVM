@@ -90,8 +90,8 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 # VMM
 
 @overrideMethod(MarkersManager, '__init__')
-def _MarkersManager__init__(base, self, parentUI):
-    base(self, parentUI)
+def _MarkersManager__init__(base, self):
+    base(self)
     g_markers.init(self)
 
 @overrideMethod(MarkersManager, 'beforeDelete')
@@ -100,12 +100,12 @@ def _MarkersManager_beforeDelete(base, self):
     base(self)
 
 @overrideMethod(MarkersManager, 'createMarker')
-def _MarkersManager_createMarker(base, self, mProv, symbol, active = True):
+def _MarkersManager_createMarker(base, self, symbol, *args, **kwargs):
     if g_markers.active:
         if symbol == 'VehicleMarker':
             symbol = 'com.xvm.vehiclemarkers.ui::XvmVehicleMarker'
     #debug('createMarker: ' + str(symbol))
-    handle = base(self, mProv, symbol, active)
+    handle = base(self, symbol, *args, **kwargs)
     return handle
 
 _exInfo = False
@@ -135,6 +135,7 @@ class VehicleMarkers(object):
     initialized = False
     guiType = 0
     manager = None
+    vehiclesData = None
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
 
     @property
@@ -231,6 +232,8 @@ class VehicleMarkers(object):
         try:
             if self.active:
                 self.call(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
+                if self.vehiclesData:
+                    self.call('BC_setVehiclesData', self.vehiclesData)
         except Exception, ex:
             err(traceback.format_exc())
         #debug('vm:respondGlobalBattleData: {:>8.3f} s'.format(time.clock() - s))

@@ -3,7 +3,7 @@
 #############################
 # CONFIG
 
-XVM_DIRS="res/icons res/data"
+XVM_DIRS="res/icons res/data audioww"
 XVM_FILES="l10n/en.xc l10n/ru.xc"
 
 #############################

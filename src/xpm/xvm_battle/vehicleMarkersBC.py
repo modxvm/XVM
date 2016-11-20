@@ -36,6 +36,7 @@ class BC(object):
 
 @registerEvent(BattleStatisticsDataController, 'as_setVehiclesDataS')
 def as_setVehiclesDataS(self, data):
+    g_markers.vehiclesData = data
     g_markers.call(BC.setVehiclesData, data)
 
 @registerEvent(BattleStatisticsDataController, 'as_addVehiclesInfoS')

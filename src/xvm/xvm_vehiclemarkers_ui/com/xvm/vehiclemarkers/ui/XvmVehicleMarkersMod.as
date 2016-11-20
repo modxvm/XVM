@@ -23,11 +23,8 @@ package com.xvm.vehiclemarkers.ui
         {
             Xfw.registerCommandProvider(xvm_cmd);
             Logger.counterPrefix = "V";
-            Xfw.cmd(XvmCommands.INITIALIZED);
 
             this.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded, false, 0, true);
-
-            super();
 
             Xfw.addCommandListener("xvm_vm.as.cmd_response", as_cmd_response);
             Xfw.addCommandListener("BC_setVehiclesData", BattleState.instance.setVehiclesData);
@@ -43,6 +40,10 @@ package com.xvm.vehiclemarkers.ui
             Xfw.addCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
             Xfw.addCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);
             Xfw.addCommandListener("BC_updateInvitationsStatuses", BattleState.instance.updateInvitationsStatuses);
+
+            Xfw.cmd(XvmCommands.INITIALIZED);
+
+            super();
         }
 
         private var _lastCmdResponse:*;

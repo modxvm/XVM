@@ -36,8 +36,8 @@ def _WWISE_WW_eventGlobalPos(base, event, pos):
     return base(_checkAndReplace(event), pos)
 
 @overrideMethod(WWISE, 'WW_getSoundObject')
-def _WWISE_WW_getSoundObject(base, event, matrix, local):
-    return base(_checkAndReplace(event), matrix, local)
+def _WWISE_WW_getSoundObject(base, objectName, *args, **kwargs):
+    return base(_checkAndReplace(objectName), *args, **kwargs)
 
 @overrideMethod(WWISE, 'WW_getSound')
 def _WWISE_WW_getSound(base, eventName, objectName, matrix, local):
