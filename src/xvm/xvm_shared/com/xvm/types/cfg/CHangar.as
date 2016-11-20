@@ -29,6 +29,7 @@ package com.xvm.types.cfg
         public var serverInfo:CHangarServerInfo;
         public var showBuyPremiumButton:*;
         public var showPremiumShopButton:*;
+        public var showNotificationsCounter:*;
         public var carousel:CCarousel;
         public var clock:CHangarClock;
 

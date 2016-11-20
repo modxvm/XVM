@@ -280,6 +280,9 @@
     // Show "Premium shop" button
     // Показать кнопку "Премиум магазин"
     "showPremiumShopButton": true,
+    // Show counter on the system channel button
+    // Показывать счетчик на кнопке системного канала
+    "showNotificationsCounter": true,
     // Parameters for tank carousel
     // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"},

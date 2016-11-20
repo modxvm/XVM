@@ -35,6 +35,7 @@ from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 
+import svcmsg
 
 #####################################################################
 # initialization/finalization
