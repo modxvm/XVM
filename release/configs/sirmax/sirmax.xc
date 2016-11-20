@@ -56,7 +56,7 @@
     //"crewReturnByDefault": true,
     "crewMaxPerksCount": 10,
     "enableEquipAutoReturn": true,
-    "showNotificationsCounter": false,
+    "notificationsButtonType": "blink",
     "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },

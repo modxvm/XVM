@@ -11,6 +11,10 @@ from xvm_main.python.logger import *
 
 @overrideMethod(NotificationListButton, 'as_setStateS')
 def _NotificationListButton_as_setStateS(base, self, isBlinking, counterValue):
-    if not config.get('hangar/showNotificationsCounter', True):
+    notificationsButtonType = config.get('hangar/notificationsButtonType', 'full').lower()
+    if notificationsButtonType == 'none':
+        isBlinking = False
+        counterValue = ''
+    elif notificationsButtonType == 'blink':
         counterValue = ''
     base(self, isBlinking, counterValue)
