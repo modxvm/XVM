@@ -125,7 +125,7 @@ def _SniperCamera__onSettingsChanged(base, self, diff):
     base(self, diff)
 
 @overrideMethod(SniperCamera, 'enable')
-def _SniperCamera_enable(base, self, targetPos, saveZoom):
+def _SniperCamera_enable(base, self, targetPos, saveZoom, isRemoteCamera=False):
     #debug('_SniperCamera_enable')
     if config.get('battle/camera/enabled'):
         zoom = config.get('battle/camera/sniper/startZoom')
@@ -135,7 +135,7 @@ def _SniperCamera_enable(base, self, targetPos, saveZoom):
             zoom = self._SniperCamera__cfg['zoom']
         self._SniperCamera__cfg['zoom'] = utils.takeClosest(self._SniperCamera__cfg['zooms'], zoom)
 
-    base(self, targetPos, saveZoom)
+    base(self, targetPos, saveZoom, isRemoteCamera)
     _sendSniperCameraFlash(True, self._SniperCamera__zoom)
 
 @registerEvent(SniperCamera, 'disable')
