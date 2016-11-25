@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 27.10.2016
+    # Last update: 25.11.2016
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -169,6 +169,7 @@ _data = {
     "germany:G117_Toldi_III":                'Told3',
     "germany:G118_VK4503":                   '4503',
     "germany:G119_Panzer58":                 'Pz58',
+    "germany:G119_Panzer58_BF":              'Pz58bf',    
     "germany:G119_Pz58_Mutz":                'mutz',
     "germany:G11_Bison_I":                   'Bison',
     "germany:G120_M41_90":                   'M41·90',
@@ -401,6 +402,7 @@ _data = {
     "usa:A11_T29_IGR":                       'T29',
     "usa:A12_T32":                           'T32',
     "usa:A13_T34_hvy":                       'T34',
+    "usa:A13_T34_hvy_BF":                    'T34bf',
     "usa:A13_T34_hvy_IGR":                   'T34',
     "usa:A14_T30":                           'T30',
     "usa:A15_T57":                           'T57',
@@ -563,6 +565,7 @@ _data = {
     "ussr:R59_A44":                          'A·44',
     "ussr:R60_Object416":                    'obj416',
     "ussr:R61_Object252":                    'Is·6',
+    "ussr:R61_Object252_BF":                 'Is·6bf',
     "ussr:R63_ST_I":                         'ST·I',
     "ussr:R66_SU-26":                        'Su·26',
     "ussr:R67_M3_LL":                        'M3lght',

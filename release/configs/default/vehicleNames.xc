@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 27.10.2016
+    // Last update: 25.11.2016
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -147,6 +147,7 @@
     "germany-G117_Toldi_III":                {"name": null, "short": null},
     "germany-G118_VK4503":                   {"name": null, "short": null},
     "germany-G119_Panzer58":                 {"name": null, "short": null},
+    "germany-G119_Panzer58_BF":              {"name": null, "short": null},
     "germany-G119_Pz58_Mutz":                {"name": null, "short": null},
     "germany-G11_Bison_I":                   {"name": null, "short": null},
     "germany-G120_M41_90":                   {"name": null, "short": null},
@@ -379,6 +380,7 @@
     "usa-A11_T29_IGR":                       {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
     "usa-A13_T34_hvy":                       {"name": null, "short": null},
+    "usa-A13_T34_hvy_BF":                    {"name": null, "short": null},
     "usa-A13_T34_hvy_IGR":                   {"name": null, "short": null},
     "usa-A14_T30":                           {"name": null, "short": null},
     "usa-A15_T57":                           {"name": null, "short": null},
@@ -541,6 +543,7 @@
     "ussr-R59_A44":                          {"name": null, "short": null},
     "ussr-R60_Object416":                    {"name": null, "short": null},
     "ussr-R61_Object252":                    {"name": null, "short": null},
+    "ussr-R61_Object252_BF":                 {"name": null, "short": null},
     "ussr-R63_ST_I":                         {"name": null, "short": null},
     "ussr-R66_SU-26":                        {"name": null, "short": null},
     "ussr-R67_M3_LL":                        {"name": null, "short": null},
