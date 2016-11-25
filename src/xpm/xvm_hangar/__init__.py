@@ -54,6 +54,8 @@ def fini():
 #####################################################################
 # handlers
 
+import svcmsg
+
 # original function in 9.10 does not take into account NOT_FULL_AMMO_MULTIPLIER
 @overrideMethod(Vehicle, 'isAmmoFull')
 def Vehicle_isAmmoFull(base, self):

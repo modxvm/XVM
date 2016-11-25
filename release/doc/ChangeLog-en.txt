@@ -1,4 +1,11 @@
-﻿XVM-6.4.9:
+﻿  * added option:
+      "hangar"/"notificationsButtonType" - behavior of the system channel notifications button on new notifications
+
+XVM-6.4.9.1:
+  [INSTALLER]
+  * Fix installer building
+
+XVM-6.4.9:
   [DAMAGE LOG]
   * Reloading timer was removed due to new "fair play" policy  
 
