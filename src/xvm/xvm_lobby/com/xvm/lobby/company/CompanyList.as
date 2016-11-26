@@ -51,7 +51,7 @@ package com.xvm.lobby.company
             view.addChild(updateCheckBox);
             App.utils.scheduler.scheduleTask(function():void
             {
-                //TODO:0.9.14
+                //TODO:9.14
                 /*
                 var dx:Number = updateCheckBox.x + updateCheckBox.width - view.filterTextField.x;
                 if (dx > 0)

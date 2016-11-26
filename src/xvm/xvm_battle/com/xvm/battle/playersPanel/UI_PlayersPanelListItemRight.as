@@ -86,7 +86,7 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        // TODO: remove after fix
+        // TODO:9.15 remove after fix
         override public function setIsInteractive(isInteractive:Boolean):void
         {
             super.setIsInteractive(isInteractive);

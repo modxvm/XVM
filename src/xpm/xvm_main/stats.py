@@ -431,7 +431,6 @@ class _Stat(object):
         team = player.team if hasattr(player, 'team') else 0
 
         if self.players is not None:
-            # TODO: optimize
             for (vehicleID, pl) in self.players.iteritems():
                 if pl.accountDBID == stat['_id']:
                     stat['vehicleID'] = pl.vehicleID

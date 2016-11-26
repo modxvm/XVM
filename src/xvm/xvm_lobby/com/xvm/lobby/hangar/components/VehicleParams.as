@@ -19,8 +19,8 @@ package com.xvm.lobby.hangar.components
             //Logger.add("updateVehicleParams");
             //Logger.addObject(Config.config.minimap.circles._internal);
 
-            Logger.add("TODO:0.9.15: xvm.hangar.components.VehicleParams.updateVehicleParams()");
-            // TODO:0.9.15
+            Logger.add("TODO:9.15: xvm.hangar.components.VehicleParams.updateVehicleParams()");
+            // TODO:9.15
             /*
             if (params == null)
                 return;

@@ -49,8 +49,6 @@ package com.xvm.lobby
             "login": [ LoginLayoutXvmView, OnlineLoginXvmView, PingLoginXvmView/*, WidgetsXvmView*/ ],
             "lobby": [ LobbyXvmView, ClockXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView/*, WidgetsXvmView*/ ],
             "hangar": [ CrewXvmView, HangarXvmView ],
-            // TODO:9.17
-            //"battleLoading": [ BattleLoadingXvmView ],
             "battleResults": [ BattleResultsXvmView ],
             "prb_windows/companyWindow": [ CompanyXvmView ],
             "ContactsPopover": [ ContactsXvmView ],

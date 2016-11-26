@@ -51,7 +51,7 @@ package com.xvm.battle.battleLabels
             {
                 if (_extraFields)
                 {
-                    _extraFields.update(BattleState.get(BattleGlobalData.playerVehicleID)); // TODO: BigWorld.target()
+                    _extraFields.update(BattleState.get(BattleGlobalData.playerVehicleID));
                 }
             }
         }
