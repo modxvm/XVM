@@ -92,7 +92,7 @@ package com.xvm.battle.fullStats
             DEFAULT_PLAYER_NAME_X = playerNameTF.x;
             DEFAULT_PLAYER_NAME_WIDTH = playerNameTF.width;
             DEFAULT_VEHICLE_NAME_X = vehicleNameTF.x;
-            DEFAULT_VEHICLE_NAME_WIDTH = vehicleNameTF.width;
+            DEFAULT_VEHICLE_NAME_WIDTH = 105; // vehicleNameTF.width;
             DEFAULT_FRAGS_X = fragsTF.x;
             DEFAULT_FRAGS_WIDTH = fragsTF.width;
             DEFAULT_VEHICLE_ICON_X = vehicleIcon.x;
@@ -113,6 +113,7 @@ package com.xvm.battle.fullStats
             vehicleNameTF.y = fragsTF.y;
             vehicleNameTF.scaleX = vehicleNameTF.scaleY = 1;
             vehicleNameTF.height = FIELD_HEIGHT;
+            vehicleNameTF.autoSize = TextFieldAutoSize.NONE;
             TextFieldEx.setVerticalAlign(vehicleNameTF, TextFieldEx.VALIGN_CENTER);
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
@@ -240,6 +241,7 @@ package com.xvm.battle.fullStats
                         _vehicleNameTF.visible = true;
                         _vehicleNameTF.htmlText =  "<font color='" + textColor + "'>" +
                             Macros.FormatString(_isLeftPanel ? cfg.formatLeftVehicle : cfg.formatRightVehicle, currentPlayerState) + "</font>";
+                        alignVehicleNameTF();
                     }
                     if (updateFragsField)
                     {
@@ -272,6 +274,10 @@ package com.xvm.battle.fullStats
                     {
                         _icoIGR.x = this._vehicleNameTF.x - this._icoIGR.width >> 0;
                     }
+                }
+                else
+                {
+                    alignVehicleNameTF();
                 }
             }
             if (updateExtraFields)
@@ -422,26 +428,64 @@ package com.xvm.battle.fullStats
 
         private function alignTextFields():void
         {
+            alignPlayerNameTF();
+            alignVehicleNameTF();
+            alignFragsTF();
+            alignVehicleIcon();
+        }
+
+        private function alignPlayerNameTF():void
+        {
             if (_isLeftPanel)
             {
                 _playerNameTF.x = DEFAULT_PLAYER_NAME_X + cfg.nameFieldOffsetXLeft;
                 _playerNameTF.width = cfg.nameFieldWidthLeft;
+            }
+            else
+            {
+                _playerNameTF.x = DEFAULT_PLAYER_NAME_X - cfg.nameFieldOffsetXRight + (DEFAULT_PLAYER_NAME_WIDTH - cfg.nameFieldWidthRight);
+                _playerNameTF.width = cfg.nameFieldWidthRight;
+            }
+        }
+
+        private function alignVehicleNameTF():void
+        {
+            if (_isLeftPanel)
+            {
                 _vehicleNameTF.x = DEFAULT_VEHICLE_NAME_X + cfg.vehicleFieldOffsetXLeft + (DEFAULT_VEHICLE_NAME_WIDTH - cfg.vehicleFieldWidthLeft);
                 _vehicleNameTF.width = cfg.vehicleFieldWidthLeft;
+            }
+            else
+            {
+                _vehicleNameTF.x = DEFAULT_VEHICLE_NAME_X - cfg.vehicleFieldOffsetXRight;
+                _vehicleNameTF.width = cfg.vehicleFieldWidthRight;
+            }
+        }
+
+        private function alignFragsTF():void
+        {
+            if (_isLeftPanel)
+            {
                 _fragsTF.x = DEFAULT_FRAGS_X + cfg.fragsFieldOffsetXLeft + (DEFAULT_FRAGS_WIDTH - cfg.fragsFieldWidthLeft) / 2;
                 _fragsTF.width = cfg.fragsFieldWidthLeft;
+            }
+            else
+            {
+                _fragsTF.x = DEFAULT_FRAGS_X - cfg.fragsFieldOffsetXRight + (DEFAULT_FRAGS_WIDTH - cfg.fragsFieldWidthRight) / 2;
+                _fragsTF.width = cfg.fragsFieldWidthRight;
+            }
+        }
+
+        private function alignVehicleIcon():void
+        {
+            if (_isLeftPanel)
+            {
                 _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
                 _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
             }
             else
             {
-                _playerNameTF.x = DEFAULT_PLAYER_NAME_X - cfg.nameFieldOffsetXRight + (DEFAULT_PLAYER_NAME_WIDTH - cfg.nameFieldWidthRight);
-                _playerNameTF.width = cfg.nameFieldWidthRight;
-                _vehicleNameTF.x = DEFAULT_VEHICLE_NAME_X - cfg.vehicleFieldOffsetXRight;
-                _vehicleNameTF.width = cfg.vehicleFieldWidthRight;
-                _fragsTF.x = DEFAULT_FRAGS_X - cfg.fragsFieldOffsetXRight + (DEFAULT_FRAGS_WIDTH - cfg.fragsFieldWidthRight) / 2;
-                _fragsTF.width = cfg.fragsFieldWidthRight;
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
                     _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;

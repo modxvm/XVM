@@ -223,7 +223,7 @@
     "nameFieldOffsetXRight": -20,
     "nameFieldWidthLeft": 200,
     "nameFieldWidthRight": 200,
-    "vehicleFieldOffsetXLeft": 30,
+    "vehicleFieldOffsetXLeft": 10,
     "vehicleFieldOffsetXRight": 30,
     "vehicleFieldWidthLeft": 200,
     "vehicleFieldWidthRight": 200,
