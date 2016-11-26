@@ -188,7 +188,7 @@ class VehicleMarkers(object):
             elif cmd == XVM_COMMAND.GET_CLAN_ICON:
                 self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, stats.getClanIcon(int(args[0])))
             elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
-                stats.getBattleStat(args, self.call, GUI_GLOBAL_SPACE_ID.BATTLE)
+                stats.getBattleStat(args, self.call)
             # profiler
             elif cmd in (XVM_PROFILER_COMMAND.BEGIN, XVM_PROFILER_COMMAND.END):
                 g_eventBus.handleEvent(events.HasCtxEvent(cmd, args[0]))

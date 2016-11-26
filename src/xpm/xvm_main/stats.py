@@ -3,12 +3,11 @@
 #############################
 # Command
 
-def getBattleStat(args, respondFunc, spaceID):
+def getBattleStat(args, respondFunc):
     _stat.enqueue({
         'func': _stat.getBattleStat,
         'cmd': XVM_COMMAND.AS_STAT_BATTLE_DATA,
         'respondFunc': respondFunc,
-        'spaceID': spaceID,
         'args': args})
     _stat.processQueue()
 
@@ -162,12 +161,10 @@ class _Stat(object):
                     BigWorld.callback(0, self.processQueue)
 
     def _respond(self):
-        spaceID = self.req.get('spaceID', None)
-        if spaceID is None or g_appLoader.getSpaceID() == spaceID:
-            debug("respond: " + self.req['cmd'])
-            self.resp = unicode_to_ascii(self.resp)
-            func = self.req.get('respondFunc', as_xfw_cmd)
-            func(self.req['cmd'], self.resp)
+        debug("respond: " + self.req['cmd'])
+        self.resp = unicode_to_ascii(self.resp)
+        func = self.req.get('respondFunc', as_xfw_cmd)
+        func(self.req['cmd'], self.resp)
 
 
     # Threaded
