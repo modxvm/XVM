@@ -30,7 +30,7 @@ OutputBaseFilename=setup_xvm
 
 UninstallFilesDir={app}\xvm_uninst
 
-DefaultDirName={reg:HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%7b%7b1EAC1D02-C6AC-4FA6-9A44-96258C37C812RU%7d_is1,InstallLocation|{reg:HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%7b%7b1EAC1D02-C6AC-4FA6-9A44-96258C37C812RU%7d_is1,Path|C:\Games\World_of_Tanks}}
+DefaultDirName=C:\
 
 [Tasks]
 Name: "xvmbackup"; Description: "{cm:backupXVM}"; Flags: unchecked
@@ -41,6 +41,7 @@ Filename: http://modxvm.com/; Description: "{cm:websiteXVM}"; Flags: postinstall
 [Files]
 Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall
 Source: "..\..\..\~output\*"; DestDir: "{app}"; Flags: createallsubdirs recursesubdirs
+Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy                                             
 
 [InstallDelete]
 ;ver\gui\flash
@@ -143,6 +144,20 @@ Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
 
 [Code]
+procedure FindWotA(Buffer: AnsiString; Max: Cardinal);
+external 'FindWotA@files:findwot.dll cdecl';
+
+procedure InitializeWizard();
+var
+  Max: Cardinal;
+  Buffer: AnsiString;
+begin
+  Max := 512;
+  Buffer := StringOfChar(#0, Max);
+  FindWotA(Buffer, Max);
+  WizardForm.DirEdit.Text := Buffer;
+end;
+
 function NextButtonClick(CurPage: Integer): Boolean;
 begin                      
   Result := True;
