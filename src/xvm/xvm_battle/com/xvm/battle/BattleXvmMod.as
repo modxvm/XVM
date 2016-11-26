@@ -9,6 +9,7 @@ package com.xvm.battle
     import com.xfw.events.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.*;
+    import com.xvm.battle.battleloading.BattleLoadingXvmView;
     import com.xvm.battle.fullStats.FullStatsXvmView;
     import com.xvm.battle.minimap.MinimapXvmView;
     import com.xvm.battle.playersPanel.PlayersPanelXvmView;
@@ -30,6 +31,7 @@ package com.xvm.battle
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
                 SixthSenseXvmView,
+                // TODO:9.17 BattleLoadingXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
         }

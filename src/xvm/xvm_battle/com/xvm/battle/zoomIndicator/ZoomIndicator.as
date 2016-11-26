@@ -31,7 +31,7 @@ package com.xvm.battle.zoomIndicator
             mouseEnabled = false;
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xvm.addEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
+            Xvm.addEventListener(BattleEvents.TEAM_BASES_PANEL_VISIBLE, onBattleComponentsVisible);
             Xfw.addCommandListener(BattleCommands.AS_SNIPER_CAMERA, onSniperCamera);
             Xfw.addCommandListener(BattleCommands.AS_AIM_OFFSET_UPDATE, onAimOffsetUpdate);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
@@ -41,7 +41,7 @@ package com.xvm.battle.zoomIndicator
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xvm.removeEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
+            Xvm.removeEventListener(BattleEvents.TEAM_BASES_PANEL_VISIBLE, onBattleComponentsVisible);
             Xfw.removeCommandListener(BattleCommands.AS_SNIPER_CAMERA, onSniperCamera);
             Xfw.removeCommandListener(BattleCommands.AS_AIM_OFFSET_UPDATE, onAimOffsetUpdate);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
@@ -57,9 +57,9 @@ package com.xvm.battle.zoomIndicator
             setup();
         }
 
-        private function onFullStatsVisible(e:BooleanEvent):void
+        private function onBattleComponentsVisible(e:BooleanEvent):void
         {
-            visible = !e.value && _enable;
+            visible = e.value && _enable;
         }
 
         private function onUpdateStage():void

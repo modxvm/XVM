@@ -101,7 +101,7 @@ package com.xvm.battle.playersPanel
             _isLeftPanel = isLeftPanel;
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-            Xvm.addEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
+            Xvm.addEventListener(BattleEvents.TEAM_BASES_PANEL_VISIBLE, onBattleComponentsVisible);
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
@@ -127,7 +127,7 @@ package com.xvm.battle.playersPanel
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-            Xvm.removeEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
+            Xvm.removeEventListener(BattleEvents.TEAM_BASES_PANEL_VISIBLE, onBattleComponentsVisible);
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, onMaxPlayerNameTextWidthChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
@@ -330,11 +330,11 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        private function onFullStatsVisible(e:BooleanEvent):void
+        private function onBattleComponentsVisible(e:BooleanEvent):void
         {
             if (extraFieldsHidden)
             {
-                extraFieldsHidden.visible = !e.value && (ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN);
+                extraFieldsHidden.visible = e.value && (ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN);
             }
         }
 

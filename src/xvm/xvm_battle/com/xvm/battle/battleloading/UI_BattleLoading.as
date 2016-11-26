@@ -2,10 +2,12 @@
  * XVM
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
-package com.xvm.battle.fullStats
+package com.xvm.battle.battleloading
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xfw.events.*;
+    import com.xvm.battle.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.text.*;
@@ -14,25 +16,26 @@ package com.xvm.battle.fullStats
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.managers.impl.*;
 
-    public dynamic class UI_FullStats extends FullStatsUI
+    public dynamic class UI_BattleLoading extends BattleLoadingUI
     {
         public static var leftAtlas:String = AtlasConstants.BATTLE_ATLAS;
         public static var rightAtlas:String = AtlasConstants.BATTLE_ATLAS;
 
         private var cfg:CStatisticForm;
 
-        private var _winChance:WinChances = null;
+        //private var _winChance:WinChances = null;
 
-        public function UI_FullStats()
+        public function UI_BattleLoading()
         {
-            //Logger.add("UI_fullStats");
+            //Logger.add("UI_BattleLoading");
             super();
 
-            this.xfw_tableCtrl = new FullStatsTableCtrlXvm(this.statsTable, this);
+            //this.xfw_tableCtrl = new BattleLoadingTableCtrlXvm(this.statsTable, this);
 
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            //Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
 
+        /*
         override protected function configUI():void
         {
             super.configUI();
@@ -45,12 +48,18 @@ package com.xvm.battle.fullStats
             deleteComponents();
             super.onDispose();
         }
+*/
+        override public function setCompVisible(value:Boolean):void
+        {
+            Xvm.dispatchEvent(new BooleanEvent(BattleEvents.BATTLE_LOADING_VISIBLE, value));
+            super.setCompVisible(value);
+        }
 
         // PRIVATE
 
         private function setup(e:Event = null):Object
         {
-            //Xvm.swfProfilerBegin("UI_FullStats.setup()");
+            //Xvm.swfProfilerBegin("UI_BattleLoading.setup()");
             try
             {
                 deleteComponents();
@@ -62,30 +71,30 @@ package com.xvm.battle.fullStats
                 // Components
                 if ((Config.networkServicesSettings.statBattle && (Config.networkServicesSettings.chance || Config.networkServicesSettings.chanceLive)) || cfg.showBattleTier)
                 {
-                    _winChance = new WinChances(this); // Winning chance info above players list. // TODO: replace with ExtraField
+                    //_winChance = new WinChances(this); // Winning chance info above players list. // TODO: replace with ExtraField
                 }
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
-            //Xvm.swfProfilerEnd("UI_FullStats.setup()");
+            //Xvm.swfProfilerEnd("UI_BattleLoading.setup()");
             return null;
         }
 
         private function deleteComponents():void
         {
-            if (_winChance != null)
+            /*if (_winChance != null)
             {
                 _winChance.dispose();
                 _winChance = null;
-            }
+            }*/
         }
 
         private function registerVehicleIconAtlases():void
         {
-            leftAtlas = registerVehicleIconAtlas(leftAtlas, Config.config.iconset.fullStatsLeftAtlas);
-            rightAtlas = registerVehicleIconAtlas(rightAtlas, Config.config.iconset.fullStatsRightAtlas);
+            leftAtlas = registerVehicleIconAtlas(leftAtlas, Config.config.iconset.battleLoadingLeftAtlas);
+            rightAtlas = registerVehicleIconAtlas(rightAtlas, Config.config.iconset.battleLoadingRightAtlas);
         }
 
         private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String):String

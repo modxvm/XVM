@@ -82,9 +82,11 @@ package com.xvm.battle
                 _hitlog = new Hitlog(); // must be initialized before BattleLabels
 
                 _battleLabels = new BattleLabels();
+                _battleLabels.visible = battlePage.teamBasesPanelUI.visible;
                 battlePage.addChildAt(_battleLabels, behindMinimapIndex);
 
                 _zoomIndicator = new ZoomIndicator();
+                _zoomIndicator.visible = battlePage.teamBasesPanelUI.visible;
                 battlePage.addChildAt(_zoomIndicator, behindMinimapIndex);
 
                 if (XfwUtils.endsWith(Config.config.__xvmVersion, "-dev"))

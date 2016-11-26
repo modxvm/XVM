@@ -304,8 +304,8 @@
     ]
   },
   "iconset": {
-    "battleLoadingAlly": "../../../../res/contour/Master_XH",
-    "battleLoadingEnemy": "../../../../res/contour/Master_XH",
+    "battleLoadingAlly": "../../../../res/atlases/BattleAtlasLeft",
+    "battleLoadingEnemy": "../../../../res/atlases/BattleAtlasRight",
     "playersPanelLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
     "playersPanelRightAtlas": "../../../../res/atlases/BattleAtlasRight",
     "fullStatsLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",

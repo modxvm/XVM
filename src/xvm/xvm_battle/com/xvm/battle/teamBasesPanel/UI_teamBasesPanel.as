@@ -5,7 +5,9 @@
 package com.xvm.battle.teamBasesPanel
 {
     import com.xfw.*;
+    import com.xfw.events.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
 
@@ -36,6 +38,12 @@ package com.xvm.battle.teamBasesPanel
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, setup);
             super.onDispose();
+        }
+
+        override public function setCompVisible(value:Boolean):void
+        {
+            Xvm.dispatchEvent(new BooleanEvent(BattleEvents.TEAM_BASES_PANEL_VISIBLE, value));
+            super.setCompVisible(value);
         }
 
         // PRIVATE

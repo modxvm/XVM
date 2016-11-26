@@ -41,6 +41,7 @@ package com.xvm.battle.teamBasesPanel
             var component:UI_teamBasesPanel = new UI_teamBasesPanel();
             component.x = page.teamBasesPanelUI.x;
             component.y = page.teamBasesPanelUI.y;
+            component.visible = page.teamBasesPanelUI.visible;
             page.teamBasesPanelUI = component;
             page.addChildAt(page.teamBasesPanelUI, idx);
             page.xfw_registerComponent(page.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);

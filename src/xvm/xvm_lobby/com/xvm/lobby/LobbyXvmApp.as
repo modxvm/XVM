@@ -18,7 +18,6 @@ package com.xvm.lobby
 
             // loading ui mods
             XfwComponent.try_load_ui_swf("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf", "crew.swf" ]);
-            XfwComponent.try_load_ui_swf("xvm_lobby", "xvm_lobbybattleloading_ui.swf", [ "battleloading.swf" ]);
 
             // mod: online
             // init as earlier as possible

@@ -27,7 +27,7 @@ package com.xvm.battle.battleLabels
         {
             mouseEnabled = false;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xvm.addEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
+            Xvm.addEventListener(BattleEvents.TEAM_BASES_PANEL_VISIBLE, onBattleComponentsVisible);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
             createExtraFields();
@@ -36,7 +36,7 @@ package com.xvm.battle.battleLabels
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
-            Xvm.removeEventListener(BattleEvents.FULL_STATS_VISIBLE, onFullStatsVisible);
+            Xvm.removeEventListener(BattleEvents.TEAM_BASES_PANEL_VISIBLE, onBattleComponentsVisible);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded);
             removeExtraFields();
@@ -64,9 +64,9 @@ package com.xvm.battle.battleLabels
             createExtraFields();
         }
 
-        private function onFullStatsVisible(e:BooleanEvent):void
+        private function onBattleComponentsVisible(e:BooleanEvent):void
         {
-            visible = !e.value;
+            visible = e.value;
         }
 
         private function onUpdateStage():void

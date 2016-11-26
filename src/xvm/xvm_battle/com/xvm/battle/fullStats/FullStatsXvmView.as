@@ -41,6 +41,7 @@ package com.xvm.battle.fullStats
             var component:UI_FullStats = new UI_FullStats();
             component.x = page.fullStats.x;
             component.y = page.fullStats.y;
+            component.visible = page.fullStats.visible;
             page.fullStats = component;
             page.addChildAt(page.fullStats, idx);
             page.xfw_battleStatisticDataController.registerComponentController(page.fullStats);

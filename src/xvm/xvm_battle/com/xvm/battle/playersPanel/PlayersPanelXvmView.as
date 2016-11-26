@@ -41,6 +41,7 @@ package com.xvm.battle.playersPanel
             var component:UI_PlayersPanel = new UI_PlayersPanel();
             component.x = page.playersPanel.x;
             component.y = page.playersPanel.y;
+            component.visible = page.playersPanel.visible;
             page.playersPanel = component;
             page.addChildAt(page.playersPanel, idx);
             page.xfw_battleStatisticDataController.registerComponentController(page.playersPanel);

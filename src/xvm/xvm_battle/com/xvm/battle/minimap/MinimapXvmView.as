@@ -52,6 +52,7 @@ package com.xvm.battle.minimap
             var component:UI_Minimap = new UI_Minimap();
             component.x = page.minimap.x;
             component.y = page.minimap.y;
+            component.visible = page.minimap.visible;
             page.minimap = component;
             page.addChildAt(page.minimap, idx);
             //page.minimap.validateNow(); // TODO: remove? brokes initial sise restoring
