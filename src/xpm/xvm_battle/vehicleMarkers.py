@@ -133,7 +133,8 @@ class VehicleMarkers(object):
 
     enabled = True
     initialized = False
-    guiType = 0
+    guiType = None
+    playerVehicleID = None
     manager = None
     vehiclesData = None
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
@@ -149,9 +150,12 @@ class VehicleMarkers(object):
     def init(self, manager):
         self.manager = manager
         self.manager.addExternalCallback('xvm.cmd', self.onVMCommand)
+        self.playerVehicleID = self.sessionProvider.getArenaDP().getPlayerVehicleID()
 
     def destroy(self):
         self.initialized = False
+        self.guiType = None
+        self.playerVehicleID = None
         self.manager.removeExternalCallback('xvm.cmd')
         self.manager = None
 
@@ -276,6 +280,9 @@ class VehicleMarkers(object):
                 if plugin:
                     arenaDP = self.sessionProvider.getArenaDP()
                     for vInfo in arenaDP.getVehiclesInfoIterator():
+                        vehicleID = vInfo.vehicleID
+                        if vehicleID == self.playerVehicleID or vInfo.isObserver():
+                            continue
                         plugin._destroyVehicleMarker(vInfo.vehicleID)
                         plugin.addVehicleInfo(vInfo, arenaDP)
         except Exception, ex:
