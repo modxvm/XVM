@@ -8,7 +8,6 @@ package com.xvm.lobby
     import com.xvm.*;
     import com.xfw.infrastructure.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.lobby.battleloading.BattleLoadingXvmView;
     import com.xvm.lobby.battleresults.BattleResultsXvmView;
     import com.xvm.lobby.clock.ClockXvmView;
     import com.xvm.lobby.company.CompanyXvmView;
