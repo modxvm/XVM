@@ -149,6 +149,11 @@ package com.xvm.battle.vo
             return BattleGlobalData.playerVehicleID == vehicleID;
         }
 
+        public function set_isCurrentPlayer(value:Boolean):void
+        {
+            //Logger.add("WARNING: attempt to set value for read only property isCurrentPlayer");
+        }
+
         public function get userTags():Array
         {
             return _userTags;
