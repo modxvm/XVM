@@ -40,7 +40,7 @@ def _init_callback(url, bytes):
             #log('loaded ' + str(len(str(bytes))) + ' bytes')
             global _wg_event_1_data
             _wg_event_1_data = cPickle.loads(bytes)
-            _wg_event_1_data[3921][46815695] = 1
+            #_wg_event_1_data[3921][46815695] = 1 # DEBUG
     except Exception, ex:
         err(traceback.format_exc())
 
