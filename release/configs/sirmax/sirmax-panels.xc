@@ -56,6 +56,7 @@
       ${"../default/playersPanel.xc":"def.clanIcon"},
       { "$ref": { "file":"../default/playersPanel.xc", "path":"def.xvmUserMarker" }, "enabled": true },
       ${"../default/playersPanel.xc":"def.xmqpServiceMarker"},
+      ${"../default/playersPanel.xc":"def.topTankers"},
       //{ "$ref": { "file":"../default/playersPanel.xc", "path":"def.xmqpServiceMarker" },
       //  "x":100,
       //  "textFormat": { "font": "$FieldFont" },
@@ -81,6 +82,7 @@
       ${"../default/playersPanel.xc":"def.clanIcon"},
       { "$ref": { "file":"../default/playersPanel.xc", "path":"def.xvmUserMarker" }, "enabled": true },
       ${"../default/playersPanel.xc":"def.enemySpottedMarker"},
+      ${"../default/playersPanel.xc":"def.topTankers"},
       //{ "x": -20, "y": 6.7, "bindToIcon": true, "src": "xvm://res/icons/flags/{{flag|default}}.png" },
       {}
     ],

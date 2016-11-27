@@ -52,6 +52,7 @@ import filecache
 import svcmsg
 import utils
 from xvm import g_xvm
+import wg_event_1
 
 #####################################################################
 # initialization/finalization
