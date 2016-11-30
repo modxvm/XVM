@@ -45,7 +45,7 @@
     // "Top tankers" rank definition.
     // Шаблон позиции в "Танковых асах".
     "topTankers": {
-      "x": 111, "y": 4, "width": 20, "height": 20, "align": "center", "bindToIcon": true,
+      "x": 65, "y": 6, "width": 16, "height": 16, "align": "center", "bindToIcon": true,
       "src": "{{top_tankers_emblem}}"
     },
     // Clan icon.

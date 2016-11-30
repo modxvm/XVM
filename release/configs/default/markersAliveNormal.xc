@@ -237,8 +237,8 @@
     "topTankers": {
       "name": "topTankers",
       "enabled": true,
-      "x": 40,
-      "y": -20,
+      "x": 33,
+      "y": -21,
       "alpha": 100,
       "align": "left",
       "format": "<img src='{{top_tankers_emblem}}' width='16' height='16'>"
