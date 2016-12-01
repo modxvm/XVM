@@ -1344,6 +1344,33 @@ package com.xvm
             pdata["a:tfb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
             // {{a:tsb}}
             pdata["a:tsb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
+
+            // {{top_tankers_rank}}
+            pdata["top_tankers_rank"] = stat.top_tankers_rank;
+
+            // {{top_tankers_emblem}}
+            var emblem:String = null;
+            if (stat.top_tankers_rank > 100)
+            {
+                emblem = "xvm://res/icons/top_tankers/rank1000.png";
+            }
+            else if (stat.top_tankers_rank > 3)
+            {
+                emblem = "xvm://res/icons/top_tankers/rank100.png";
+            }
+            else if (stat.top_tankers_rank == 3)
+            {
+                emblem = "xvm://res/icons/top_tankers/rank3.png";
+            }
+            else if (stat.top_tankers_rank == 2)
+            {
+                emblem = "xvm://res/icons/top_tankers/rank2.png";
+            }
+            else if (stat.top_tankers_rank == 1)
+            {
+                emblem = "xvm://res/icons/top_tankers/rank1.png";
+            }
+            pdata["top_tankers_emblem"] = emblem;
         }
 
         /**
@@ -1361,7 +1388,7 @@ package com.xvm
                     if (playerName == "M_r_A")
                         return "Флаттершай - лучшая пони!";
                     if (playerName == "sirmax2" || playerName == "0x01" || playerName == "_SirMax_")
-                        return "«сэр Макс» (XVM)";
+                        return "www.modxvm.com";
                     if (playerName == "Mixailos")
                         return "Михаил";
                     if (playerName == "STL1te")
@@ -1378,7 +1405,7 @@ package com.xvm
                     if (playerName == "M_r_A_RU" || playerName == "M_r_A_EU")
                         return "Fluttershy is best pony!";
                     if (playerName == "sirmax2_RU" || playerName == "sirmax2_EU" || playerName == "sirmax_NA" || playerName == "0x01_RU" || playerName == "0x01_EU")
-                        return "«sir Max» (XVM)";
+                        return "www.modxvm.com";
                     if (playerName == "seriych_RU")
                         return "Be Happy :)";
                     break;
@@ -1387,14 +1414,14 @@ package com.xvm
                     if (playerName == "M_r_A")
                         return "Fluttershy is best pony!";
                     if (playerName == "sirmax2" || playerName == "0x01" || playerName == "_SirMax_")
-                        return "«sir Max» (XVM)";
+                        return "www.modxvm.com";
                     if (playerName == "seriych")
                         return "Be Happy :)";
                     break;
 
                 case "US":
                     if (playerName == "sirmax" || playerName == "0x01" || playerName == "_SirMax_")
-                        return "«sir Max» (XVM)";
+                        return "www.modxvm.com";
                     break;
 
                 case "ST":

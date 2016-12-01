@@ -22,10 +22,10 @@
   },
   "minimapAlt": {
     "$ref": { "path": "minimap" },
-    "mapBackgroundImageAlpha": 50,
+    "mapBackgroundImageAlpha": 75,
     "selfIconAlpha": 50,
     "selfIconScale": 1.2,
-    "iconAlpha": 50,
+    "iconAlpha": 75,
     "iconScale": 1.2,
     "directionTriangleAlpha": 50,
     "directionLineAlpha": 50,

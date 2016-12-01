@@ -61,7 +61,7 @@ import vehinfo_xtdb
 import vehinfo_xte
 import xvm_scale
 import xvmapi
-
+import wg_event_1
 
 #############################
 
@@ -451,6 +451,7 @@ class _Stat(object):
                         stat['ready'] = pl.ready
                     if 'id' not in stat['v']:
                         stat['v']['id'] = pl.vehCD
+                    stat['top_tankers_rank'] = pl.top_tankers_rank
                     break
 
         self._fix_common2(stat, orig_name, False)
@@ -618,7 +619,7 @@ class _Player(object):
 
     __slots__ = ('vehicleID', 'accountDBID', 'name', 'clan', 'clanInfo', 'team', 'squadnum',
                  'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready',
-                 'x_emblem', 'x_emblem_loading', 'clanicon')
+                 'x_emblem', 'x_emblem_loading', 'clanicon', 'top_tankers_rank')
 
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
 
@@ -645,6 +646,7 @@ class _Player(object):
             self.squadnum = vInfo.squadIndex
             # if self.squadnum > 0:
             #    log("team=%d, squad=%d %s" % (self.team, self.squadnum, self.name))
+        self.top_tankers_rank = wg_event_1.getWGEvent1Rank(self.vehCD, self.accountDBID)
 
     def update(self, vData):
         vtype = vData['vehicleType']
