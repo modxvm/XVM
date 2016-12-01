@@ -32,6 +32,7 @@ package com.xvm.battle.fullStats
                 xfw_table.vehicleIconCollection[index],
                 xfw_table.vehicleLevelCollection[index],
                 xfw_table.muteCollection[index],
+                xfw_table.disableCommunicationCollection[index],
                 xfw_table.speakAnimationCollection[index],
                 xfw_table.vehicleActionMarkerCollection[index],
                 xfw_table.playerStatusCollection[index]);
