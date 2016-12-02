@@ -118,8 +118,8 @@ def squad_update_tiers(self, *args, **kwargs):
     except Exception, ex:
         err(traceback.format_exc())
 
-@overrideMethod(SquadActionsHandler, '_setCreatorReady')
-def setCreatorReady_confirm_battletier_diff(base, self, result):
+@overrideMethod(SquadActionsHandler, '_confirmCallback')
+def _SquadActionsHandler_confirmCallback(base, self, result):
     if not result:
         return
     try:
