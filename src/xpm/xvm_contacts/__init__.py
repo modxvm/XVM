@@ -67,16 +67,14 @@ def ContactsListPopover_populate(self):
     #log('ContactsListPopover_populate')
     contacts.initialize()
 
-
-@overrideMethod(ContactConverter, 'makeVO')
-def ContactConverter_makeVO(base, self, contact, includeIcons = True):
+@overrideClassMethod(ContactConverter, 'makeVO')
+def ContactConverter_makeVO(base, cls, contact, useBigIcons = False):
     #log('ContactConverter_makeVO')
-    res = base(self, contact, includeIcons)
+    res = base(contact, useBigIcons)
     if contacts.isAvailable():
         res.update({'xvm_contact_data':contacts.getXvmContactData(contact.getID())})
     #log(res)
     return res
-
 
 @overrideMethod(PlayerContactsCMHandler, '_getHandlers')
 def PlayerContactsCMHandler_getHandlers(base, self):
@@ -85,7 +83,6 @@ def PlayerContactsCMHandler_getHandlers(base, self):
     handlers.update({MENU.XVM_EDIT_CONTACT_DATA: '_XvmEditContactData'})
     return handlers
 
-
 @overrideMethod(PlayerContactsCMHandler, '_generateOptions')
 def PlayerContactsCMHandler_generateOptions(base, self, ctx = None):
     #log('PlayerContactsCMHandler_generateOptions')
@@ -93,13 +90,11 @@ def PlayerContactsCMHandler_generateOptions(base, self, ctx = None):
     options.append(self._makeItem(MENU.XVM_EDIT_CONTACT_DATA, l10n('Edit data'), optInitData={'enabled': contacts.isAvailable()}))
     return options
 
-
 def _XvmEditContactData(self):
     #log('_XvmEditContactData')
     as_xfw_cmd(COMMANDS.AS_EDIT_CONTACT_DATA, self.userName, self.databaseID)
 
 PlayerContactsCMHandler._XvmEditContactData = _XvmEditContactData
-
 
 @overrideMethod(ContactTooltipData, 'getDisplayableData')
 def ContactTooltipData_getDisplayableData(base, self, dbID, defaultName):
