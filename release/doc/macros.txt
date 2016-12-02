@@ -84,6 +84,7 @@ Legend:
 │ S │ {{battletype}}         │ X │ X │ X │ X │ X │ X │ X │ X │ current battle type (values from texts/battletype section)
 │ S │ {{region}}             │ X │ X │ X │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, ASIA, KR, CN, CT)
 │ S │ {{l10n:ID}}            │ X │ X │ X │ X │ X │ X │ X │ X │ localizated text, see en.xc for id
+│ D │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ X │ X │ is my vehicle alive
 │ D │ {{my-frags}}           │   │ X │ X │ X │ X │ X │ X │ X │ my frags
 │ S │ {{my-veh-id}}          │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle id
 │ S │ {{my-vehicle}}         │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle name

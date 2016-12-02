@@ -262,6 +262,7 @@ package com.xvm.battle.vo
                 eventsToDispatch[PlayerStateEvent.VEHICLE_DESTROYED] = true;
                 if (isCurrentPlayer)
                 {
+                    BattleState.playerIsAlive = false;
                     eventsToDispatch[PlayerStateEvent.CURRENT_VEHICLE_DESTROYED] = true;
                 }
             }

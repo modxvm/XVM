@@ -61,6 +61,12 @@ package com.xvm.battle
             // {{my-clan}}
             m_globals["my-clan"] = BattleGlobalData.playerClan;
 
+            // {{my-alive}}
+            m_globals["my-alive"] = function(o:IVOMacrosOptions):Boolean
+            {
+                return BattleState.playerIsAlive;
+            }
+
             // {{my-frags}}
             m_globals["my-frags"] = function(o:IVOMacrosOptions):Number
             {

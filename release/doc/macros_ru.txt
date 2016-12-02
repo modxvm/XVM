@@ -85,6 +85,7 @@ Legend:
 │ S │ {{battletype}}         │ X │ X │ X │ X │ X │ X │ X │ X │ тип текущего боя (значения из секции texts/battletype)
 │ S │ {{region}}             │ X │ X │ X │ X │ X │ X │ X │ X │ игровой регион (RU, EU, NA, CN, ASIA, VTC, KR, CT)
 │ S │ {{l10n:ID}}            │ X │ X │ X │ X │ X │ X │ X │ X │ текстовое значение из файла перевода, см. папку l10n
+│ D │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ X │ X │ мой танк жив
 │ D │ {{my-frags}}           │   │ X │ X │ X │ X │ X │ X │ X │ мои фраги
 │ S │ {{my-veh-id}}          │ X │ X │ X │ X │ X │ X │ X │ X │ id моей техники
 │ S │ {{my-vehicle}}         │ X │ X │ X │ X │ X │ X │ X │ X │ название моей техники

@@ -55,6 +55,16 @@ package com.xvm.battle
             instance._captureBarDataVO = value;
         }
 
+        public static function get playerIsAlive():Boolean
+        {
+            return instance._playerIsAlive;
+        }
+
+        public static function set playerIsAlive(value:Boolean):void
+        {
+            instance._playerIsAlive = value;
+        }
+
         public static function get playerFrags():int
         {
             return instance._playerFrags;
@@ -148,6 +158,7 @@ package com.xvm.battle
         private var _playersDataVO:VOPlayersData = null;
         private var _captureBarDataVO:VOCaptureBarData = new VOCaptureBarData();
         private var _personalStatus:uint;
+        private var _playerIsAlive:Boolean = true;
         private var _playerFrags:int = 0;
         private var _currentAimZoom:int = 0;
         private var _playersPanelMode:int = 0;
@@ -378,7 +389,6 @@ package com.xvm.battle
             try
             {
                 _personalStatus = param1;
-
             }
             catch (ex:Error)
             {
