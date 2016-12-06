@@ -1346,27 +1346,27 @@ package com.xvm
             pdata["a:tsb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
 
             // {{top_tankers_rank}}
-            pdata["top_tankers_rank"] = stat.top_tankers_rank;
+            pdata["top_tankers_rank"] = stat.v.top_tankers_rank;
 
             // {{top_tankers_emblem}}
             var emblem:String = null;
-            if (stat.top_tankers_rank > 100)
+            if (stat.v.top_tankers_rank > 100)
             {
                 emblem = "xvm://res/icons/top_tankers/rank1000.png";
             }
-            else if (stat.top_tankers_rank > 3)
+            else if (stat.v.top_tankers_rank > 3)
             {
                 emblem = "xvm://res/icons/top_tankers/rank100.png";
             }
-            else if (stat.top_tankers_rank == 3)
+            else if (stat.v.top_tankers_rank == 3)
             {
                 emblem = "xvm://res/icons/top_tankers/rank3.png";
             }
-            else if (stat.top_tankers_rank == 2)
+            else if (stat.v.top_tankers_rank == 2)
             {
                 emblem = "xvm://res/icons/top_tankers/rank2.png";
             }
-            else if (stat.top_tankers_rank == 1)
+            else if (stat.v.top_tankers_rank == 1)
             {
                 emblem = "xvm://res/icons/top_tankers/rank1.png";
             }

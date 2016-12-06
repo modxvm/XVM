@@ -58,8 +58,5 @@ package com.xvm.types.stat
         public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
         public var xwgr:Number = NaN;          // WG rating in XVM Scale (int)
-
-        // WG Events
-        public var top_tankers_rank:Number = NaN;
     }
 }

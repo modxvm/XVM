@@ -28,5 +28,8 @@ package com.xvm.types.stat
         public var xte:Number = NaN;     // xTE tank eff (int, 1-100)
 
         public var data:VOVehicleData = null;
+
+        // WG Events
+        public var top_tankers_rank:Number = NaN;
     }
 }

@@ -1,8 +1,9 @@
-﻿  * added option:
+﻿XVM-6.4.10:
+  * added macros for "Top Tankers" event:
+      {{top_tankers_rank}} - player's rank on current vehicle in the "Top Tankers" game event
+      {{top_tankers_emblem}} - emblem for player's rank on current vehicle  in the "Top Tankers" game event
+  * added option:
       "hangar"/"notificationsButtonType" - behavior of the system channel notifications button on new notifications
-  * added macros:
-      {{top_tankers_rank}} - player's rank in the "Top Tankers" game event
-      {{top_tankers_emblem}} - emblem for player's rank in the "Top Tankers" game event
 
 XVM-6.4.9.1:
   [INSTALLER]
