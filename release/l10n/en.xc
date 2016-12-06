@@ -195,9 +195,8 @@
     "token/services_inactive": "Network services inactive.&nbsp;&nbsp;<a href='#XVM_SITE_INACTIVE#'><font size='11'>enable</font></a>",
     "token/blocked": "Status: <font color='#FF0000'>Blocked</font>&nbsp;&nbsp;<a href='#XVM_SITE_BLOCKED#'><font size='11'>more info</font></a>",
     "token/active": "Status:<tab/><font color='#00FF00'>Active</font>",
-    "token/time_left": "Time left:<tab/><font color='#EEEEEE'>{0}d. {1}h. {2}m.</font>",
-    "token/time_left_warn": "Time left:<tab/><font color='#EEEE00'>{0}d. {1}h. {2}m.</font>",
-    "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",
+    "token/time_left": "<tab/><font color='#EEEEEE'>{0}d. {1}h. {2}m.</font>",
+    "token/time_left_warn": "<tab/><font color='#EEEEEE'>{0}d. {1}h. {2}m.</font>\n<tab/><a href='#XVM_SITE#'>Prolong</a>",
     "token/unknown_status": "Unknown status",
 
     // Lobby

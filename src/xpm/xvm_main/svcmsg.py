@@ -32,9 +32,8 @@ def tokenUpdated():
         days_left = int((e - s) / 86400)
         hours_left = int((e - s) / 3600) % 24
         mins_left = int((e - s) / 60) % 60
-        token_name = 'time_left' if days_left >= 3 else 'time_left_warn'
-        msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
-        msg += '{{l10n:token/cnt:%d}}' % config.token.cnt
+        token_name = 'time_left' if days_left >= 8 else 'time_left_warn'
+        msg += '{{l10n:token/%s:%d:%02d:%02d}}' % (token_name, days_left, hours_left, mins_left)
     else:
         type = SystemMessages.SM_TYPE.Error
         msg += '{{l10n:token/unknown_status}}\n%s' % status
@@ -66,7 +65,7 @@ def fixData(value):
 # PRIVATE
 
 def _getXvmMessageHeader():
-    msg = '<textformat tabstops="[130]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" ' \
+    msg = '<textformat tabstops="[100]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" ' \
           'vspace="-5">&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
     rev = ''
     try:
