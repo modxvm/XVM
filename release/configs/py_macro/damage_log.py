@@ -7,9 +7,19 @@ def damageLog_dLog():
     return damageLog.dLog()
 
 
+@xvm.export('xvm.damageLog.dLog_shadow', deterministic=False)
+def damageLog_dLog_shadow(setting):
+    return damageLog.dLog_shadow(setting)
+
+
 @xvm.export('xvm.damageLog.lastHit', deterministic=False)
 def damageLog_lastHit():
     return damageLog.lastHit()
+
+
+@xvm.export('xvm.damageLog.lastHit_shadow', deterministic=False)
+def damageLog_lastHit_shadow(setting):
+    return damageLog.lastHit_shadow(setting)
 
 
 @xvm.export('xvm.damageLog.fire', deterministic=False)
