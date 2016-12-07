@@ -6,6 +6,7 @@ import Keys
 import copy
 import GUI
 import xvm_main.python.config as config
+import xvm_main.python.userprefs as userprefs
 from xvm_main.python.stats import _stat
 import xvm_main.python.stats as stats
 import xvm_main.python.vehinfo as vehinfo
@@ -479,9 +480,39 @@ class Log(object):
         self.dictVehicle = {}
         self.dataLog = {}
         self.shadow = {}
+        self._data = None
+        _data = userprefs.get('DamageLog/dLog', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
+        self.x = _data['x']
+        self.y = _data['y']
+        as_callback("dLog_mouseDown", self.mouse_down)
+        as_callback("dLog_mouseUp", self.mouse_up)
+        as_callback("dLog_mouseMove", self.mouse_move)
 
-    def reset(self):
-        self.__init__(self.section)
+    def reset(self, section):
+        self.listLog = []
+        self.listIndents = []
+        self.section = section
+        self.sumFireDmg = 0
+        self.dataLogFire = None
+        self.numberLine = 0
+        self.dictVehicle = {}
+        self.dataLog = {}
+        self.shadow = {}
+        userprefs.set('DamageLog/dLog', {'x': self.x, 'y': self.y})
+
+    def mouse_down(self, _data):
+        if _data['buttonIdx'] == 0:
+            self._data = _data
+
+    def mouse_up(self, _data):
+        if _data['buttonIdx'] == 0:
+            self._data = None
+
+    def mouse_move(self, _data):
+        if self._data:
+            self.x += (_data['x'] - self._data['x'])
+            self.y += (_data['y'] - self._data['y'])
+            as_event('ON_HIT')
 
     def addLine(self, attackerID, attackReasonID):
         self.dataLog['number'] = len(self.listLog) + 1
@@ -535,18 +566,47 @@ class Log(object):
 
 class LastHit(object):
 
-    def __init__(self):
+    def __init__(self, section):
         self.dataFire = None
-        self.section = 'damageLog/lastHit/'
+        self.section = section
+        self.strLastHit = ''
+        self.timerLastHit = None
+        self.dictVehicle = {}
+        self.shadow = {}
+        self._data = None
+        _data = userprefs.get('DamageLog/lastHit', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
+        self.x = _data['x']
+        self.y = _data['y']
+        as_callback("lastHit_mouseDown", self.mouse_down)
+        as_callback("lastHit_mouseUp", self.mouse_up)
+        as_callback("lastHit_mouseMove", self.mouse_move)
+        if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
+            self.timerLastHit.stop()
+
+    def reset(self, section):
+        self.dataFire = None
+        self.section = section
         self.strLastHit = ''
         self.timerLastHit = None
         self.dictVehicle = {}
         self.shadow = {}
         if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
             self.timerLastHit.stop()
+        userprefs.set('DamageLog/lastHit', {'x': self.x, 'y': self.y})
 
-    def reset(self):
-        self.__init__()
+    def mouse_down(self, _data):
+        if _data['buttonIdx'] == 0:
+            self._data = _data
+
+    def mouse_up(self, _data):
+        if _data['buttonIdx'] == 0:
+            self._data = None
+
+    def mouse_move(self, _data):
+        if self._data:
+            self.x += (_data['x'] - self._data['x'])
+            self.y += (_data['y'] - self._data['y'])
+            as_event('ON_LAST_HIT')
 
     def hideLastHit (self):
         self.strLastHit = ''
@@ -597,7 +657,7 @@ class LastHit(object):
 
 _log = Log('damageLog/log/')
 _logAlt = Log('damageLog/logAlt/')
-_lastHit = LastHit()
+_lastHit = LastHit('damageLog/lastHit/')
 
 
 @overrideMethod(DamageLogPanel, 'as_detailStatsS')
@@ -671,9 +731,9 @@ def destroyGUI(self):
     global on_fire
     on_fire = 0
     data.reset()
-    _log.reset()
-    _logAlt.reset()
-    _lastHit.reset()
+    _log.reset(_log.section)
+    _logAlt.reset(_logAlt.section)
+    _lastHit.reset(_lastHit.section)
 
 @registerEvent(PlayerAvatar, 'handleKey')
 def handleKey(self, isDown, key, mods):

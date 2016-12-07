@@ -84,8 +84,8 @@
     "damageLog": {
       "enabled": true,
       "updateEvent": "PY(ON_HIT)",
-      "x": 240,
-      "y": 23,
+      "x": "{{py:xvm.damageLog.dLog_x}}",
+      "y": "{{py:xvm.damageLog.dLog_y}}",
       "width": 300,
       "height": 210,
       "screenVAlign": "bottom",
@@ -102,15 +102,20 @@
         "quality": "{{py:xvm.damageLog.dLog_shadow('quality')}}" 
       },
       "textFormat": { "color": "0xF4EFE8", "size": 16},
-      "format": "{{py:xvm.damageLog.dLog}}"
+      "format": "{{py:xvm.damageLog.dLog}}",
+      "mouseEvents": {
+        "mouseDown": "dLog_mouseDown",
+        "mouseUp": "dLog_mouseUp",
+        "mouseMove": "dLog_mouseMove"
+      }
     },
     // Display the last damage (hit) (see damageLog.xc).
     // Отображение последнего урона (попадания) (см. damageLog.xc).
     "lastHit": {
       "enabled": true,
       "updateEvent": "PY(ON_LAST_HIT)",
-      "x": -120,
-      "y": 200,
+      "x": "{{py:xvm.damageLog.lastHit_x}}",
+      "y": "{{py:xvm.damageLog.lastHit_y}}",
       "width": 200,
       "height": 100,
       "screenHAlign": "center",
@@ -128,7 +133,12 @@
         "quality": "{{py:xvm.damageLog.lastHit_shadow('quality')}}" 
       },
       "textFormat": {"align": "center", "color": "0xF4EFE8", "size": 16 },
-      "format": "{{py:xvm.damageLog.lastHit}}"
+      "format": "{{py:xvm.damageLog.lastHit}}",
+      "mouseEvents": {
+        "mouseDown": "lastHit_mouseDown",
+        "mouseUp": "lastHit_mouseUp",
+        "mouseMove": "lastHit_mouseMove"
+      }
     },
     "fire": {
       "enabled": false,

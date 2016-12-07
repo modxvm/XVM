@@ -43,6 +43,8 @@
     // Log of the received damage.
     // Лог полученного урона.
     "log": {
+      "x": 240,
+      "y": 23,
       // Kind of the received damage (macro {{dmg-kind}}).
       // Вид полученного урона (макрос {{dmg-kind}}).
       "dmg-kind": {
@@ -226,6 +228,8 @@
     // Отображение последнего урона (попадания).
     "lastHit": {
       "$ref": { "path":"damageLog.log" },
+      "x": -120,
+      "y": 200,
       // true - show hits without damage, false - not to show.
       // true - отображать попадания без урона, false - не отображать.
       "showHitNoDamage": true,
