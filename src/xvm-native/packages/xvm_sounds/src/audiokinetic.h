@@ -108,3 +108,6 @@ typedef enum AKRESULT(__cdecl *AK_SoundEngine_LoadBank_typedef)(const void * in_
 
 enum AKRESULT __cdecl AK_SoundEngine_UnloadBank(AkBankID in_bankID, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId);
 typedef enum AKRESULT(__cdecl *AK_SoundEngine_UnloadBank_typedef)(AkBankID in_bankID, const void * in_pInMemoryBankPtr, AkMemPoolId * out_pMemPoolId);
+
+char _cdecl AK_SoundEngine_IsInitialized();
+typedef char(__cdecl *AK_SoundEngine_IsInitialized_typedef)();

@@ -31,3 +31,15 @@ enum AKRESULT __cdecl AK_SoundEngine_UnloadBank(AkBankID in_bankID, const void *
 	}
 	return AK_DLLCannotLoad;
 }
+
+char _cdecl AK_SoundEngine_IsInitialized()
+{
+	AK_SoundEngine_IsInitialized_typedef func;
+
+	func = (AK_SoundEngine_IsInitialized_typedef)GetProcAddress(GetModuleHandle(NULL), "?IsInitialized@SoundEngine@AK@@YA_NXZ");
+	if (func != NULL)
+	{
+		return func();
+	}
+	return 0;
+}
