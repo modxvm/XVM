@@ -498,7 +498,8 @@ class Log(object):
         self.dictVehicle = {}
         self.dataLog = {}
         self.shadow = {}
-        userprefs.set('DamageLog/dLog', {'x': self.x, 'y': self.y})
+        if None not in [self.x,  self.y]:
+            userprefs.set('DamageLog/dLog', {'x': self.x, 'y': self.y})
 
     def mouse_down(self, _data):
         if _data['buttonIdx'] == 0:
@@ -689,8 +690,8 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
             on_fire = 0
             as_event('ON_FIRE')
     elif hasattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID'):
-        if ((self.id == BigWorld.entity(BigWorld.player().inputHandler.ctrl.curVehicleID).id) and
-                not BigWorld.entity(BigWorld.player().inputHandler.ctrl.curVehicleID).isAlive()):
+        v = BigWorld.entity(BigWorld.player().inputHandler.ctrl.curVehicleID)
+        if (v is not None) and ((self.id == v.id) and not v.isAlive()):
             on_fire = 0
             as_event('ON_FIRE')
 
