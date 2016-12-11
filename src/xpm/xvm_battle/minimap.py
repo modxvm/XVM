@@ -11,8 +11,6 @@ import BigWorld
 import constants
 import game
 from constants import VISIBILITY
-from helpers import dependency
-from skeletons.gui.battle_session import IBattleSessionProvider
 from account_helpers.settings_core.SettingsCore import SettingsCore
 from account_helpers.settings_core import settings_constants
 from Avatar import PlayerAvatar
@@ -172,11 +170,13 @@ def _PersonalEntriesPlugin_start(base, self):
     base(self)
     if g_minimap.active and g_minimap.linesEnabled:
         if not self._PersonalEntriesPlugin__yawLimits:
-            sessionProvider = dependency.instance(IBattleSessionProvider)
-            vInfo = sessionProvider.getArenaDP().getVehicleInfo()
-            yawLimits = vInfo.vehicleType.turretYawLimits
-            if yawLimits:
-                self._PersonalEntriesPlugin__yawLimits = (math.degrees(yawLimits[0]), math.degrees(yawLimits[1]))
+            vehicle = BigWorld.player().arena.vehicles.get(BigWorld.player().playerVehicleID)
+            staticTurretYaw = vehicle['vehicleType'].gun['staticTurretYaw']
+            if staticTurretYaw is None:
+                vInfoVO = self._arenaDP.getVehicleInfo()
+                yawLimits = vInfoVO.vehicleType.turretYawLimits
+                if yawLimits:
+                    self._PersonalEntriesPlugin__yawLimits = (math.degrees(yawLimits[0]), math.degrees(yawLimits[1]))
 
 @overrideMethod(PersonalEntriesPlugin, 'setSettings')
 def _PersonalEntriesPlugin_setSettings(base, self):
