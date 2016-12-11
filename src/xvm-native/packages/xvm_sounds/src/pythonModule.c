@@ -22,6 +22,11 @@ static PyObject* LoadBank(PyObject* self, PyObject* args)
 	enum AKRESULT returnCode;
 	AkBankID bankID;
 
+	if (!AK_SoundEngine_IsInitialized())
+	{
+		Py_RETURN_FALSE;
+	}
+
 	if (!PyArg_ParseTuple(args, "s", &file_name))
 	{
 		PyErr_SetString(PyExc_RuntimeError, "[LoadBank] Cannot parse tuple\n");
@@ -70,6 +75,11 @@ static PyObject* UnloadBank(PyObject* self, PyObject* args)
 	enum AKRESULT returnCode;
 
 	char buf[BUF_SIZE];
+
+	if (!AK_SoundEngine_IsInitialized())
+	{
+		Py_RETURN_FALSE;
+	}
 
 	if (!PyArg_ParseTuple(args, "I", &bankID))
 	{
