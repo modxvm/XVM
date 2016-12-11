@@ -29,6 +29,12 @@ package com.xvm.vehiclemarkers.ui.components
             showSpeaker = XfwUtils.toBool(e.cfg.showSpeaker, false);
         }
 
+        override protected function onDispose():void
+        {
+            marker.removeEventListener(XvmVehicleMarkerEvent.SET_SPEAKING, update);
+            super.onDispose();
+        }
+
         override protected function update(e:XvmVehicleMarkerEvent):void
         {
             try

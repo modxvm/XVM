@@ -16,11 +16,6 @@ package com.xvm.vehiclemarkers.ui.components
             super(marker);
         }
 
-        override protected function init(e:XvmVehicleMarkerEvent):void
-        {
-            super.init(e);
-        }
-
         override protected function update(e:XvmVehicleMarkerEvent):void
         {
             try

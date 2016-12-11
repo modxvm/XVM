@@ -22,7 +22,7 @@ package com.xvm.vehiclemarkers.ui.components
             marker.addEventListener(XvmVehicleMarkerEvent.UPDATE_HEALTH, showDamage, false, 0, true);
         }
 
-        private var healthBar:Sprite;
+        private var healthBar:Sprite = null;
         private var border:Sprite;
         private var fill:Sprite;
         private var damage:MovieClip;
@@ -45,6 +45,16 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 Logger.err(ex);
             }
+        }
+
+        override protected function onDispose():void
+        {
+            if (healthBar)
+            {
+                marker.removeChild(healthBar);
+                healthBar = null;
+            }
+            super.onDispose();
         }
 
         override protected function update(e:XvmVehicleMarkerEvent):void
@@ -102,7 +112,6 @@ package com.xvm.vehiclemarkers.ui.components
         {
             try
             {
-                update(e);
                 if (healthBar.visible)
                 {
                     var cfg:CMarkersHealthBar = e.cfg.healthBar;

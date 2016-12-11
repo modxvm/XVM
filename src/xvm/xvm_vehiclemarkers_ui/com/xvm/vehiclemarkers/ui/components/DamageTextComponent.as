@@ -37,6 +37,12 @@ package com.xvm.vehiclemarkers.ui.components
             }
         }
 
+        override protected function onDispose():void
+        {
+            marker.removeEventListener(XvmVehicleMarkerEvent.UPDATE_HEALTH, showDamage);
+            super.onDispose();
+        }
+
         // PRIVATE
 
         /**

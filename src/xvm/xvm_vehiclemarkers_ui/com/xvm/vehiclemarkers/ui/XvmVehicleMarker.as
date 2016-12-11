@@ -21,7 +21,7 @@ package com.xvm.vehiclemarkers.ui
 
     public dynamic class XvmVehicleMarker extends VehicleMarker
     {
-        private static const INVALIDATE_HEALTH:uint = 1 << 30;
+        private static const INVALIDATE_DATA:uint = 1 << 29;
 
         public var vehicleID:Number = NaN;
         private var playerName:String = null;
@@ -107,20 +107,13 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerBegin("XvmVehicleMarker.draw()");
             try
             {
-                var playerState:VOPlayerState = null;
-                if (isInvalid(InvalidationType.DATA | INVALIDATE_HEALTH))
+                if (isInvalid(INVALIDATE_DATA))
                 {
-                    playerState = BattleState.get(vehicleID);
-                }
-                if (playerState)
-                {
-                    if (isInvalid(InvalidationType.DATA))
+                    var playerState:VOPlayerState = BattleState.get(vehicleID);
+                    if (playerState)
                     {
                         dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
-                    }
-                    if (isInvalid(INVALIDATE_HEALTH))
-                    {
-                        if (playerState.damageInfo)
+                        if (playerState.damageInfo != null)
                         {
                             dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
                             playerState.damageInfo = null;
@@ -160,7 +153,7 @@ package com.xvm.vehiclemarkers.ui
                     if (newHealth <= 0 && damageFlag == Defines.FROM_PLAYER)
                         BattleState.playerFrags += 1;
                     playerState.dispatchEvents();
-                    invalidate(INVALIDATE_HEALTH);
+                    invalidate(INVALIDATE_DATA);
                 }
             }
             catch (ex:Error)
@@ -198,7 +191,7 @@ package com.xvm.vehiclemarkers.ui
         override public function updateState(state:String, param2:Boolean):void
         {
             super.updateState(state, param2);
-            invalidate(InvalidationType.DATA);
+            invalidate(INVALIDATE_DATA);
         }
 
         override public function setSpeaking(value:Boolean):void
@@ -351,7 +344,7 @@ package com.xvm.vehiclemarkers.ui
             }
             if (e.vehicleID == vehicleID)
             {
-                invalidate(InvalidationType.DATA);
+                invalidate(INVALIDATE_DATA);
             }
         }
 
