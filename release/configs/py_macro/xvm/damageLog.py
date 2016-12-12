@@ -690,7 +690,8 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
             on_fire = 0
             as_event('ON_FIRE')
     elif hasattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID'):
-        v = BigWorld.entity(BigWorld.player().inputHandler.ctrl.curVehicleID)
+        vId = BigWorld.player().inputHandler.ctrl.curVehicleID
+        v = vId if isinstance(vId, Vehicle) else BigWorld.entity(vId)
         if (v is not None) and ((self.id == v.id) and not v.isAlive()):
             on_fire = 0
             as_event('ON_FIRE')
