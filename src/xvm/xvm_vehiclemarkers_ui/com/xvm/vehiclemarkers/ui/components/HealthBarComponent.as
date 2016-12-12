@@ -29,32 +29,26 @@ package com.xvm.vehiclemarkers.ui.components
 
         override protected function init(e:XvmVehicleMarkerEvent):void
         {
-            try
-            {
-                healthBar = new Sprite();
-                marker.addChild(healthBar);
-                border = new Sprite();
-                healthBar.addChild(border);
-                fill = new Sprite();
-                healthBar.addChild(fill);
-                damage = new MovieClip();
-                healthBar.addChild(damage);
-                super.init(e);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            deinit();
+            healthBar = new Sprite();
+            marker.addChild(healthBar);
+            border = new Sprite();
+            healthBar.addChild(border);
+            fill = new Sprite();
+            healthBar.addChild(fill);
+            damage = new MovieClip();
+            healthBar.addChild(damage);
+            super.init(e);
         }
 
-        override protected function onDispose():void
+        override protected function deinit():void
         {
             if (healthBar)
             {
                 marker.removeChild(healthBar);
                 healthBar = null;
             }
-            super.onDispose();
+            super.deinit();
         }
 
         override protected function update(e:XvmVehicleMarkerEvent):void

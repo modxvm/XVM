@@ -29,6 +29,7 @@ package com.xvm.vehiclemarkers.ui.components
 
         override protected function init(e:XvmVehicleMarkerEvent):void
         {
+            deinit();
             var playerState:VOPlayerState = e.playerState;
             isAlly = playerState.isAlly;
             exInfoDirty = true;
@@ -37,17 +38,20 @@ package com.xvm.vehiclemarkers.ui.components
             super.init(e);
         }
 
-        override protected function onDispose():void
+        override protected function deinit():void
         {
             if (extraFieldsHolders)
             {
                 for each (var state:String in XvmVehicleMarkerState.getAllStates(isAlly))
                 {
-                    marker.removeChild(extraFieldsHolders[state]);
+                    if (extraFieldsHolders[state])
+                    {
+                        marker.removeChild(extraFieldsHolders[state]);
+                    }
                 }
                 extraFieldsHolders = null;
             }
-            super.onDispose();
+            super.deinit();
         }
 
         override protected function update(e:XvmVehicleMarkerEvent):void

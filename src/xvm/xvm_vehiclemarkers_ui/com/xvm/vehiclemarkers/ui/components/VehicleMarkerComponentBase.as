@@ -30,12 +30,18 @@ package com.xvm.vehiclemarkers.ui.components
         protected function onDispose():void
         {
             // virtual
+            deinit();
             marker.removeEventListener(XvmVehicleMarkerEvent.INIT, init);
             marker.removeEventListener(XvmVehicleMarkerEvent.UPDATE, update);
             marker.removeEventListener(XvmVehicleMarkerEvent.EX_INFO, onExInfo);
         }
 
         protected function init(e:XvmVehicleMarkerEvent):void
+        {
+            // virtual
+        }
+
+        protected function deinit():void
         {
             // virtual
         }

@@ -25,14 +25,9 @@ package com.xvm.vehiclemarkers.ui.components
 
         override protected function init(e:XvmVehicleMarkerEvent):void
         {
-            super.init(e);
+            deinit();
             showSpeaker = XfwUtils.toBool(e.cfg.showSpeaker, false);
-        }
-
-        override protected function onDispose():void
-        {
-            marker.removeEventListener(XvmVehicleMarkerEvent.SET_SPEAKING, update);
-            super.onDispose();
+            super.init(e);
         }
 
         override protected function update(e:XvmVehicleMarkerEvent):void
