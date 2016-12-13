@@ -1,7 +1,12 @@
-﻿XVM-6.5.0-dev:
+﻿XVM-6.5.0:
+  [MACROSES]
   * added global macros:
       {{my-alive}} - is my vehicle alive
+
+  [OTHER]
+  * adaptation to WoT 0.9.17
   * removed "token/cnt" parameter in the localization files (no longer used)
+  * various bug fixes
 
 ﻿XVM-6.4.10:
   * added macros for "Top Tankers" event:
