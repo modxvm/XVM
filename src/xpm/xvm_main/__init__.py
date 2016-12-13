@@ -103,8 +103,8 @@ def SFApplication_as_updateStageS(*args, **kwargs):
     g_xvm.onUpdateStage()
 
 @overrideMethod(MessageDecorator, 'getListVO')
-def _NotificationDecorator_getListVO(base, self):
-    return svcmsg.fixData(base(self))
+def _MessageDecorator_getListVO(base, self, newId=None):
+    return svcmsg.fixData(base(self, newId))
 
 @overrideMethod(NotificationsActionsHandlers, 'handleAction')
 def _NotificationsActionsHandlers_handleAction(base, self, model, typeID, entityID, actionName):
