@@ -15,6 +15,10 @@ def sign():
 def text():
     return "<font color='#%s'>&nbsp;%6s %s %-6s&nbsp;</font>" % (color(), ally(), sign(), enemy())
 
+@registerEvent(panel, 'update_hp')
+def update_hp(vehicleID, hp):
+    as_event('ON_UPDATE_HP')
+	
 # Addons: "avgDamage" and "mainGun"
 # night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>
 # ktulho <http://www.koreanrandom.com/forum/user/17624-ktulho/>
@@ -88,9 +92,11 @@ def mainGun(dmg_total):
     arenaUniqueID = BigWorld.player().arenaUniqueID
     if actual_arenaUniqueID != arenaUniqueID:
       actual_arenaUniqueID = arenaUniqueID
-      max_hp_enemy = panel.teams_totalhp[1]
+      max_hp_enemy = None
+    if max_hp_enemy is None:
+        max_hp_enemy = panel.teams_totalhp[1] if panel.teams_totalhp[1] != 0 else None
     battletype = BigWorld.player().arena.guiType
-    if battletype != 1:
+    if (battletype != 1) and (max_hp_enemy is None):
         return
     else:
         threshold = max_hp_enemy * 0.2 if max_hp_enemy > 5000 else 1000

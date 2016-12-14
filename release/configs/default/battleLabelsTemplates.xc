@@ -34,7 +34,7 @@
     // Индикатор общего HP команд.
     "totalHP": {
       "enabled": true,
-      "updateEvent": "ON_PLAYERS_HP_CHANGED",
+      "updateEvent": "PY(ON_UPDATE_HP)",
       "x": 0,
       "y": 30,
       "screenHAlign": "center",
