@@ -44,7 +44,7 @@
     // Лог полученного урона.
     "log": {
       "x": 240,
-      "y": 23,
+      "y": -23,
       // Kind of the received damage (macro {{dmg-kind}}).
       // Вид полученного урона (макрос {{dmg-kind}}).
       "dmg-kind": {
