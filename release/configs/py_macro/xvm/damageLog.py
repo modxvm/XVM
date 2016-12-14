@@ -481,7 +481,10 @@ class Log(object):
         self.dataLog = {}
         self.shadow = {}
         self._data = None
-        _data = userprefs.get('DamageLog/dLog', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
+        if config.get('damageLog/saveLocationInBattle'):
+            _data = userprefs.get('DamageLog/dLog', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
+        else:
+            _data = {'x': config.get(section + 'x'), 'y': config.get(section + 'y')}
         self.x = _data['x']
         self.y = _data['y']
         as_callback("dLog_mouseDown", self.mouse_down)
@@ -575,7 +578,10 @@ class LastHit(object):
         self.dictVehicle = {}
         self.shadow = {}
         self._data = None
-        _data = userprefs.get('DamageLog/lastHit', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
+        if config.get('damageLog/saveLocationInBattle'):
+            _data = userprefs.get('DamageLog/lastHit', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
+        else:
+            _data = {'x': config.get(section + 'x'), 'y': config.get(section + 'y')}
         self.x = _data['x']
         self.y = _data['y']
         as_callback("lastHit_mouseDown", self.mouse_down)

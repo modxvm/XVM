@@ -40,6 +40,9 @@
     // true - disable standard summarized damage.
     // true - отключить стандартный суммарный урон.
     "disabledSummaryStats": true,
+    //TO DO
+    //true - запоминать местоположение лога и последенего урона в бою
+    "saveLocationInBattle": false,
     // Log of the received damage.
     // Лог полученного урона.
     "log": {
