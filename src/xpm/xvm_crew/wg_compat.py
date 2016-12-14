@@ -14,7 +14,7 @@ class _WGCompat():
             return
         result = yield TankmanReturn(g_currentVehicle.item).request()
         if len(result.userMsg) and print_message:
-            SystemMessages.g_instance.pushI18nMessage(result.userMsg, type=result.sysMsgType)
+            SystemMessages.pushI18nMessage(result.userMsg, type=result.sysMsgType)
 
 
     @process('crewReturning')
