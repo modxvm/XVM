@@ -1,4 +1,5 @@
 import xvm_battle.python.fragCorrelationPanel as panel
+from xfw import *
 
 def ally():
     return panel.teams_totalhp[0]
