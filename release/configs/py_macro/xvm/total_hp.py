@@ -28,7 +28,6 @@ import BigWorld
 from CurrentVehicle import g_currentVehicle
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from gui.shared import g_itemsCache
-from xfw import *
 import traceback
 
 playerAvgDamage = None
