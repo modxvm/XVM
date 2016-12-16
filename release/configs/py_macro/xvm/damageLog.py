@@ -269,7 +269,7 @@ class Data(object):
                      'fireStage': -1,
                      'isBeginFire': False,
                      'number': None,
-                     'reloadGun': 0,
+                     'reloadGun': 0.0,
 					 'caliber': None
                      }
 
@@ -354,11 +354,11 @@ class Data(object):
                     rammer = attacker['vehicleType'].miscAttrs['gunReloadTimeFactor']
                 else:
                     rammer = 1
-                return reload_orig * crew * rammer
+                return float(reload_orig * crew * rammer)
             else:
-                return 0
+                return 0.0
         else:
-            return 0
+            return 0.0
 
     def hitShell(self, attackerID, effectsIndex, damageFactor):
         self.data['isDamage'] = damageFactor > 0
@@ -405,7 +405,7 @@ class Data(object):
             self.data['criticalHit'] = False
             self.data['shellKind'] = 'not_shell'
             self.data['splashHit'] = 'no-splash'
-            self.data['reloadGun'] = 0
+            self.data['reloadGun'] = 0.0
         else:
             self.data['reloadGun'] = self.timeReload(attackerID)
         self.data['attackerID'] = attackerID
