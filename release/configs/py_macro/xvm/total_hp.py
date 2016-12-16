@@ -92,11 +92,11 @@ def mainGun(dmg_total):
     arenaUniqueID = BigWorld.player().arenaUniqueID
     if actual_arenaUniqueID != arenaUniqueID:
       actual_arenaUniqueID = arenaUniqueID
-      max_hp_enemy = None
-    if max_hp_enemy is None:
-        max_hp_enemy = panel.teams_totalhp[1] if panel.teams_totalhp[1] != 0 else None
+      max_hp_enemy = 0
+    if panel.teams_totalhp[1] > max_hp_enemy:
+        max_hp_enemy = panel.teams_totalhp[1]
     battletype = BigWorld.player().arena.guiType
-    if (battletype != 1) and (max_hp_enemy is None):
+    if (battletype != 1) and (max_hp_enemy == 0):
         return
     else:
         threshold = max_hp_enemy * 0.2 if max_hp_enemy > 5000 else 1000
