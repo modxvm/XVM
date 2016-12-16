@@ -1,4 +1,6 @@
-﻿XVM-6.5.0.1:
+﻿XVM-6.5.1-dev:
+
+XVM-6.5.0.1:
   * adaptation to WoT 0.9.17.0.1
 
 XVM-6.5.0:
