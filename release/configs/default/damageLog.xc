@@ -26,10 +26,10 @@
     {{hit-effects}}       - kind of hit / вид попадания.
     {{dmg-ratio}}         - received damage in percent / полученный урон в процентах.
     {{team-dmg}}          - source of damage (ally , enemy, self damage) / источник урона (союзник, противник, урон по себе).
-    {{splash-hit}}        - text when hit by splash damage from shell (HE/HESH) / текст при попадание осколков снаряда (ОФ/ХФ).
-    {{my-alive}}          - TO DO / возвращает 'alive', если я живой, '', если не живой
-    {{reloadGun}}         - TO DO / время перезарядки орудия 
-    {{gun-caliber}}       - TO DO / калибр орудия
+    {{splash-hit}}        - text when hit by splash damage from shell (HE/HESH) / текст при попадании осколков снаряда (ОФ/ХФ).
+    {{my-alive}}          - value 'alive' if my vehicle is alive, '' for dead / возвращает 'alive', если я живой, '', если не живой
+    {{reloadGun}}         - reloading time of a gun / время перезарядки орудия 
+    {{gun-caliber}}       - caliber of a gun / калибр орудия
 */
 
 {
