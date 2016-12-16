@@ -53,7 +53,8 @@ def total_hp_text():
 
 @xvm.export('xvm.total_hp.avgDamage', deterministic=False)
 def total_hp_avgDamage(header, dmg_total):
-    return "%s%s" % (header, total_hp.avgDamage(dmg_total)) if total_hp.avgDamage(dmg_total) is not None else ''
+    _avgDamage = total_hp.avgDamage(dmg_total)
+    return "%s%s" % (header, _avgDamage) if _avgDamage is not None else ''
 
 @xvm.export('xvm.total_hp.mainGun', deterministic=False)
 def total_hp_mainGun(header, dmg_total):
