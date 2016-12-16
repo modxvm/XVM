@@ -1,6 +1,9 @@
-﻿XVM-6.5.0:
-  [MACROSES]
-  * added global macros:
+﻿XVM-6.5.0.1:
+  * adaptation to WoT 0.9.17.0.1
+
+XVM-6.5.0:
+  [MACROS]
+  * added global macro:
       {{my-alive}} - is my vehicle alive
 
   [OTHER]
