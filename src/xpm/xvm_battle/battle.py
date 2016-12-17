@@ -210,14 +210,17 @@ class Battle(object):
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
 
     def onAppInitialized(self, event):
-        self.xvm_battle_swf_initialized = False
+        #log('onAppInitialized: ' + str(event.ns))
+        if event.ns == APP_NAME_SPACE.SF_BATTLE:
+            self.xvm_battle_swf_initialized = False
         app = g_appLoader.getApp(event.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded += self.onViewLoaded
 
     def onAppDestroyed(self, event):
-        self.xvm_battle_swf_initialized = False
+        #log('onAppDestroyed: ' + str(event.ns))
         if event.ns == APP_NAME_SPACE.SF_BATTLE:
+            self.xvm_battle_swf_initialized = False
             self.battle_page = None
         app = g_appLoader.getApp(event.ns)
         if app is not None and app.loaderManager is not None:

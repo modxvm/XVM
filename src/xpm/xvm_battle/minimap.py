@@ -220,7 +220,7 @@ def _ArenaVehiclesPlugin_updateSettings(base, self, diff):
 # Minimap dead switch
 @registerEvent(PostMortemControlMode, 'onMinimapClicked')
 def _PostMortemControlMode_onMinimapClicked(self, worldPos):
-    #log('_PostMortemControlMode_onMinimapClicked')
+    #log('_PostMortemControlMode_onMinimapClicked active=' + str(g_minimap.active))
     if g_minimap.active and config.get('battle/minimapDeadSwitch'):
         try:
             battle = getBattleApp()
@@ -268,6 +268,7 @@ class _Minimap(object):
 
     @property
     def active(self):
+        #log('g_battle.xvm_battle_swf_initialized: ' + str(g_battle.xvm_battle_swf_initialized))
         return g_battle.xvm_battle_swf_initialized and \
                self.enabled and \
                self.initialized and \
