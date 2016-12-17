@@ -272,50 +272,55 @@ package com.xvm.lobby.ui.battleresults
 
         private function showTotals():void
         {
+            var tooltipData:IconEfficiencyTooltipData;
+
             // spotted
             spottedTotalField.value = xdata.spotted;
             spottedTotalField.enabled = xdata.spotted > 0;
-            tooltips[BATTLE_EFFICIENCY_TYPES.DETECTION] = { };
-
-            // damage assisted (radio/tracks)
-            damageAssistedTotalField.value = xdata.damageAssistedCount;
-            damageAssistedTotalField.enabled = xdata.damageAssistedCount > 0;
-            tooltips[BATTLE_EFFICIENCY_TYPES.ASSIST] = {
-                totalAssistedDamage: xdata.damageAssisted,
-                values: App.utils.locale.integer(xdata.damageAssistedRadio) + "<br/>" +
-                    App.utils.locale.integer(xdata.damageAssistedTrack) + "<br/>" +
-                    App.utils.locale.integer(xdata.damageAssisted),
-                discript: xdataList.damageAssistedNames,
-                totalItemsCount: 2
-            };
-
-            // armor
-            armorTotalField.value = xdata.armorCount;
-            armorTotalField.enabled = xdata.armorCount > 0;
-            tooltips[BATTLE_EFFICIENCY_TYPES.ARMOR] = {
-                values: xdata.ricochetsCount + "<br/>" + xdata.nonPenetrationsCount + "<br/>" + App.utils.locale.integer(xdata.damageBlockedByArmor),
-                discript: xdataList.armorNames,
-                totalItemsCount: 3
-            };
-
-            // crits
-            critsTotalField.value = xdata.critsCount;
-            critsTotalField.enabled = xdata.critsCount > 0;
-            tooltips[BATTLE_EFFICIENCY_TYPES.CRITS] = { };
-
-            // piercings
-            damageTotalField.value = xdata.piercings;
-            damageTotalField.enabled = xdata.piercings > 0;
-            tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = {
-                values: App.utils.locale.integer(xdata.damageDealt) + "<br/>" + xdata.piercings,
-                discript: xdataList.damageDealtNames,
-                totalItemsCount: 2
-            };
+            tooltips[BATTLE_EFFICIENCY_TYPES.DETECTION] = new IconEfficiencyTooltipData();
 
             // kills
             killsTotalField.value = xdata.kills;
             killsTotalField.enabled = xdata.kills > 0;
-            tooltips[BATTLE_EFFICIENCY_TYPES.DESTRUCTION] = { };
+            tooltips[BATTLE_EFFICIENCY_TYPES.DESTRUCTION] = new IconEfficiencyTooltipData();
+
+            // damage
+            damageTotalField.value = xdata.piercings;
+            damageTotalField.enabled = xdata.piercings > 0;
+            tooltipData = new IconEfficiencyTooltipData();
+            tooltipData.setBaseValues(
+                [App.utils.locale.integer(xdata.damageDealt), xdata.piercings],
+                xdataList.damageDealtNames,
+                2);
+            tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = tooltipData;
+
+            // armor
+            armorTotalField.value = xdata.armorCount;
+            armorTotalField.enabled = xdata.armorCount > 0;
+            tooltipData = new IconEfficiencyTooltipData();
+            tooltipData.setBaseValues(
+                [xdata.ricochetsCount, xdata.nonPenetrationsCount, App.utils.locale.integer(xdata.damageBlockedByArmor)],
+                xdataList.armorNames,
+                3);
+            tooltips[BATTLE_EFFICIENCY_TYPES.ARMOR] = tooltipData;
+
+            // assist (radio/tracks)
+            damageAssistedTotalField.value = xdata.damageAssistedCount;
+            damageAssistedTotalField.enabled = xdata.damageAssistedCount > 0;
+            tooltipData = new IconEfficiencyTooltipData();
+            tooltipData.totalAssistedDamage = xdata.damageAssisted;
+            tooltipData.setBaseValues(
+                [App.utils.locale.integer(xdata.damageAssistedRadio), App.utils.locale.integer(xdata.damageAssistedTrack), App.utils.locale.integer(xdata.damageAssisted)],
+                xdataList.damageAssistedNames,
+                3);
+            tooltips[BATTLE_EFFICIENCY_TYPES.ASSIST] = tooltipData;
+
+            // crits
+            critsTotalField.value = xdata.critsCount;
+            critsTotalField.enabled = xdata.critsCount > 0;
+            tooltipData = new IconEfficiencyTooltipData();
+            //tooltipData.setCritValues(xdata.criticalDevices, xdata.destroyedTankmen, xdata.destroyedDevices, xdata.critsCount);
+            tooltips[BATTLE_EFFICIENCY_TYPES.CRITS] = tooltipData;
         }
 
         private function showTotalExperience():void
@@ -400,15 +405,13 @@ package com.xvm.lobby.ui.battleresults
             {
                 var icon:EfficiencyIconRenderer = e.currentTarget as EfficiencyIconRenderer;
                 var kind:String = icon != null ? icon.kind : e.currentTarget.name;
-                var tooltip:* = tooltips[kind];
+                var tooltip:IconEfficiencyTooltipData = tooltips[kind];
                 if (tooltip == null)
                     return;
-                var data:Object = merge(tooltip, {
-                    isGarage: _data.common.playerVehicles.length > 1,
-                    type:kind,
-                    disabled:icon == null ? false : icon.value <= 0
-                });
-                App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.EFFICIENCY_PARAM, null, data);
+                tooltip.type = kind;
+                tooltip.disabled = icon == null ? false : icon.value <= 0;
+                tooltip.isGarage = _data.common.playerVehicles.length > 1;
+                App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.EFFICIENCY_PARAM, null, tooltip);
             }
             else
             {

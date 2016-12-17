@@ -10,9 +10,9 @@ package com.xvm.lobby.ui.battleresults
     public dynamic class XvmCommonStatsDataListVO extends DAAPIDataClass
     {
         public var __xvm:Boolean = false; // XVM data marker
-        public var damageDealtNames:String = Values.EMPTY_STR;
-        public var damageAssistedNames:String = Values.EMPTY_STR;
-        public var armorNames:String = Values.EMPTY_STR;
+        public var damageDealtNames:Array;
+        public var damageAssistedNames:Array;
+        public var armorNames:Array;
         public var data:Array = null;
 
         public function XvmCommonStatsDataListVO(data:Object)
