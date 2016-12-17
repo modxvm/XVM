@@ -246,7 +246,9 @@ package com.xvm.battle.vo
             else
             {
                 playerState = playerStates[value.vehicleID] as VOPlayerState;
-                playerState.update(value);
+                var value_obj:Object = ObjectConverter.toRawData(value);
+                delete value_obj.frags;
+                playerState.update(value_obj);
                 playerState.update({
                    index: index
                 });
