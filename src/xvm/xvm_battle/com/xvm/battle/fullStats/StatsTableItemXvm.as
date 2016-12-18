@@ -175,6 +175,9 @@ package com.xvm.battle.fullStats
         {
             super.draw();
 
+            if (!_vehicleID)
+                return;
+
             var updatePlayerNameField:Boolean = false;
             var updateVehicleNameField:Boolean = false;
             var updateFragsField:Boolean = false;

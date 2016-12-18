@@ -388,7 +388,7 @@ class _XMQP(object):
             'token': config.token.token,
             'players': self._players,
             'capabilities': simplejson.dumps(getCapabilitiesData())})
-        debug(utils.hide_guid(message))
+        debug('[XMQP] %s' % utils.hide_guid(message))
         self._channel.basic_publish(
             exchange=XVM.XMQP_LOBBY_EXCHANGE,
             routing_key=XVM.XMQP_LOBBY_ROUTING_KEY,
