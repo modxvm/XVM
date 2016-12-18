@@ -23,10 +23,11 @@ import helpers
 import nations
 from CurrentVehicle import g_currentVehicle
 from gui.shared import g_eventBus, g_itemsCache
+from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
+from gui.prb_control.items import ValidationResult
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
 from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
 from gui.shared.gui_items.Vehicle import Vehicle
-from gui.prb_control.entities.base.limits import VehicleIsValid
 
 from xfw import *
 
@@ -123,13 +124,13 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
 
 
 # low ammo => vehicle not ready (disable red button)
-@overrideMethod(VehicleIsValid, 'check')
-def _VehicleIsValid_check(base, self, *args, **kwargs):
-    res = base(self, *args, **kwargs)
-    if res[0] == True:
+@overrideMethod(CurrentVehicleActionsValidator, '_validate')
+def _CurrentVehicleActionsValidator_validate(base, self):
+    res = base(self)
+    if not res or res[0] == True:
         try:
             if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
-                res = (False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
+                res = ValidationResult(False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
         except Exception as ex:
             err(traceback.format_exc())
     return res

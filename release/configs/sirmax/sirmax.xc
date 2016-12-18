@@ -58,6 +58,7 @@
     "enableEquipAutoReturn": true,
     "notificationsButtonType": "blink",
     "widgetsEnabled": true,
+    "blockVehicleIfLowAmmo": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },
       "x": 5
