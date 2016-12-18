@@ -51,7 +51,7 @@ package com.xvm.battle.battleloading
 */
         override public function setCompVisible(value:Boolean):void
         {
-            Xvm.dispatchEvent(new BooleanEvent(BattleEvents.BATTLE_LOADING_VISIBLE, value));
+            //value = true; // DEBUG
             super.setCompVisible(value);
         }
 

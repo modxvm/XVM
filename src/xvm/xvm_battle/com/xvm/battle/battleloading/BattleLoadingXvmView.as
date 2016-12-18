@@ -41,22 +41,10 @@ package com.xvm.battle.battleloading
             var component:UI_BattleLoading = new UI_BattleLoading();
             component.x = page.battleLoading.x;
             component.y = page.battleLoading.y;
-
-            setup_component(component, page.battleLoading as BattleLoadingUI);
-
             page.battleLoading = component;
             page.addChildAt(page.battleLoading, idx);
             page.xfw_battleStatisticDataController.registerComponentController(page.battleLoading);
             page.xfw_registerComponent(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
-        }
-
-        private function setup_component(new_component:UI_BattleLoading, old_component:BattleLoadingUI):void
-        {
-            //new_component.as_setMapIcon(old_component.form.mapIcon.source);
-            //new_component.as_setPlayerData(param1:Number, param2:Number) : void
-            //new_component.as_setProgress(param1:Number) : void
-            //new_component.as_setTip(param1:String) : void
-            //new_component.as_setTipTitle(param1:String) : void
         }
     }
 }

@@ -24,6 +24,7 @@ from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
 from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
+from gui.Scaleform.daapi.view.battle.shared import battle_loading
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
 from gui.Scaleform.daapi.view.battle.shared.minimap import settings as minimap_settings
@@ -348,6 +349,10 @@ class Battle(object):
     def invalidateArenaInfo(self):
         #debug('battle: invalidateArenaInfo')
         if self.battle_page:
+            battleLoading = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING)
+            if battleLoading:
+                battle_loading._setBattleLoading(False)
+                battleLoading.invalidateArenaInfo()
             ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
             if ctrl:
                 ctrl._BattleStatisticsDataController__setPersonalStatus()

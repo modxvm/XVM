@@ -261,7 +261,7 @@ class Xvm(object):
                 userprefs.set(args[0], args[1])
                 return (None, True)
 
-            # battleloading, battle
+            # battle
 
             if cmd == XVM_COMMAND.GET_CLAN_ICON:
                 return (stats.getClanIcon(int(args[0])), True)
