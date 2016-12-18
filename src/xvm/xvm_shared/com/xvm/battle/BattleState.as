@@ -214,16 +214,19 @@ package com.xvm.battle
 
         public function setVehiclesData(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] setVehiclesData');
             updateVehiclesData(data);
         }
 
         public function addVehiclesInfo(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] addVehiclesInfo');
             updateVehiclesData(data);
         }
 
         public function updateVehiclesData(data:Object):void
         {
+            //Logger.addObject(data, 3, '[BattleState] updateVehiclesData');
             Xvm.swfProfilerBegin("BattleState.updateVehiclesData()");
             try
             {
@@ -246,8 +249,8 @@ package com.xvm.battle
 
         public function updateVehicleStatus(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] updateVehicleStatus');
             Xvm.swfProfilerBegin("BattleState.updateVehicleStatus()");
-            //Logger.addObject(data, 1, "[BattleState] updateVehicleStatus");
             try
             {
                 _playersDataVO.updatePlayerState(data.vehicleID, { vehicleStatus: data.status });
@@ -275,7 +278,7 @@ package com.xvm.battle
 
         public function updatePersonalStatus(param1:uint, param2:uint):void
         {
-            Logger.add("[BattleState] updatePersonalStatus: " + param1 + ", " + param2);
+            //Logger.add("[BattleState] updatePersonalStatus: " + param1 + ", " + param2);
             try
             {
             }
@@ -296,13 +299,14 @@ package com.xvm.battle
 
         public function setVehicleStats(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] setVehicleStats');
             updateVehiclesStat(data);
         }
 
         public function updateVehiclesStat(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] updateVehiclesStat');
             Xvm.swfProfilerBegin("BattleState.updateVehiclesStat()");
-            //Logger.addObject(data, 1, "[BattleState] updateVehiclesStat");
             try
             {
                 if (data.leftFrags)
@@ -331,8 +335,8 @@ package com.xvm.battle
 
         public function updatePlayerStatus(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] updatePlayerStatus');
             Xvm.swfProfilerBegin("BattleState.updatePlayerStatus()");
-            //Logger.addObject(data, 1, "[BattleState] updatePlayerStatus");
             try
             {
                 _playersDataVO.updatePlayerState(data.vehicleID, { playerStatus: data.status } );
@@ -350,6 +354,7 @@ package com.xvm.battle
 
         public function setArenaInfo(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] setArenaInfo');
             Xvm.swfProfilerBegin("BattleState.setArenaInfo()");
             try
             {
@@ -367,11 +372,13 @@ package com.xvm.battle
 
         public function setUserTags(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] setUserTags');
             updateUserTags(data);
         }
 
         public function updateUserTags(data:Object):void
         {
+            //Logger.addObject(data, 2, '[BattleState] updateUserTags');
             try
             {
                 _playersDataVO.updateUserTags(data);
@@ -398,7 +405,7 @@ package com.xvm.battle
 
         public function updateInvitationsStatuses(data:Object) : void
         {
-            //Logger.addObject(data, 1, "[BattleState] updateInvitationsStatuses");
+            //Logger.addObject(data, 2, "[BattleState] updateInvitationsStatuses");
             try
             {
             }
@@ -412,6 +419,7 @@ package com.xvm.battle
 
         private function onUpdatePlayerState(vehicleID:Number, data:Object):void
         {
+            //Logger.addObject(data, 2, "[BattleState] onUpdatePlayerState: " + vehicleID);
             Xvm.swfProfilerBegin("BattleState.onUpdatePlayerState()");
             try
             {
@@ -456,6 +464,7 @@ package com.xvm.battle
 
         private function onUpdateDeviceState(moduleName:String, state:String, state2:String):void
         {
+            //Logger.add("[BattleState] onUpdateDeviceState: " + arguments);
             try
             {
                 var eventType:String = null;
