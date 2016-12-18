@@ -29,7 +29,8 @@ package com.xvm.vehiclemarkers.ui.components
 
         override protected function init(e:XvmVehicleMarkerEvent):void
         {
-            deinit();
+            if (this.initialized)
+                return;
             var playerState:VOPlayerState = e.playerState;
             isAlly = playerState.isAlly;
             exInfoDirty = true;
@@ -38,7 +39,7 @@ package com.xvm.vehiclemarkers.ui.components
             super.init(e);
         }
 
-        override protected function deinit():void
+        override protected function onDispose():void
         {
             if (extraFieldsHolders)
             {
@@ -51,11 +52,12 @@ package com.xvm.vehiclemarkers.ui.components
                 }
                 extraFieldsHolders = null;
             }
-            super.deinit();
+            super.onDispose();
         }
 
         override protected function update(e:XvmVehicleMarkerEvent):void
         {
+            //Logger.addObject(e, 1, "update: " + (currentPlayerState ? currentPlayerState.playerName : "null"));
             super.update(e);
             if (extraFieldsHolders)
             {

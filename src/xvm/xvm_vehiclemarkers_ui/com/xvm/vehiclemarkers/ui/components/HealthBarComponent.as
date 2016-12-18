@@ -29,7 +29,8 @@ package com.xvm.vehiclemarkers.ui.components
 
         override protected function init(e:XvmVehicleMarkerEvent):void
         {
-            deinit();
+            if (this.initialized)
+                return;
             healthBar = new Sprite();
             marker.addChild(healthBar);
             border = new Sprite();
@@ -41,14 +42,14 @@ package com.xvm.vehiclemarkers.ui.components
             super.init(e);
         }
 
-        override protected function deinit():void
+        override protected function onDispose():void
         {
             if (healthBar)
             {
                 marker.removeChild(healthBar);
                 healthBar = null;
             }
-            super.deinit();
+            super.onDispose();
         }
 
         override protected function update(e:XvmVehicleMarkerEvent):void

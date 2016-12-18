@@ -25,20 +25,21 @@ package com.xvm.vehiclemarkers.ui.components
 
         override protected function init(e:XvmVehicleMarkerEvent):void
         {
-            deinit();
+            if (this.initialized)
+                return;
             damage = new MovieClip();
             marker.addChild(damage);
             super.init(e);
         }
 
-        override protected function deinit():void
+        override protected function onDispose():void
         {
             if (damage)
             {
                 marker.removeChild(damage);
                 damage = null;
             }
-            super.deinit();
+            super.onDispose();
         }
 
         // PRIVATE
