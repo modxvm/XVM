@@ -35,6 +35,8 @@ package com.xvm.battle.minimap
 
     public /*dynamic*/ class UI_Minimap extends minimapUI implements IExtraFieldGroupHolder
     {
+        private static const MAX_MINIMAP_PATH_LENGTH:int = 20;
+
         public static var cfg:CMinimap;
 
         private var xvm_enabled:Boolean;
@@ -402,7 +404,7 @@ package com.xvm.battle.minimap
 
         private function onMouseMove(e:MouseEventEx):void
         {
-            if (minimap_path != null && minimap_path.length < 20)
+            if (minimap_path != null && minimap_path.length < MAX_MINIMAP_PATH_LENGTH)
             {
                 var target:Sprite = e.target as Sprite;
                 if (target != null && target.hitArea == mapHit)
