@@ -501,6 +501,7 @@ package com.xvm.battle.fullStats
                 }
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
+            _vehicleLevelIcon.isCetralize = true;
         }
 
         // extra fields
