@@ -98,8 +98,6 @@ package com.xvm.battle.vo
 
         public function updateVehiclesData(data:Object):void
         {
-            var value:Object;
-
             if (data.leftCorrelationIDs)
             {
                 leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
