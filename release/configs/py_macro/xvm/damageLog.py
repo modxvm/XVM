@@ -59,7 +59,8 @@ HIT_EFFECT_CODES = {
 MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShell', 'costShell', 'comp-name', 'clan',
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'reloadGun', 'c:team-dmg', 'c:hit-effects',
                'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
-               'splash-hit', 'team-dmg', 'my-alive', 'gun-caliber']
+               'splash-hit', 'team-dmg', 'my-alive', 'gun-caliber', 'wn8', 'xwn8', 'eff', 'xeff', 'wgr', 'xwgr', 'xte',
+               'c:wn8', 'c:xwn8', 'c:eff', 'c:xeff', 'c:wgr', 'c:xwgr', 'c:xte']
 
 
 def keyLower(_dict):
@@ -300,6 +301,14 @@ class Data(object):
                     self.data['shortUserString'] = ''
                     self.data['level'] = ''
                 self.data['name'] = attacker['name']
+                stats = _stat.resp['players'][attacker['name']]
+                self.data['wn8'] = stats.get('wn8', None)
+                self.data['xwn8'] = stats.get('xwn8', None)
+                self.data['eff'] = stats.get('e', None)
+                self.data['xeff'] = stats.get('xeff', None)
+                self.data['wgr'] = stats.get('wgr', None)
+                self.data['xwgr'] = stats.get('xwgr', None)
+                self.data['xte'] = stats.get('v').get('xte', None)
                 self.data['clanAbbrev'] = attacker['clanAbbrev']
             self.data['clanicon'] = _stat.getClanIcon(self.data['attackerID'])
             if statXVM is not None:
@@ -388,6 +397,7 @@ class Data(object):
             self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
         self.hitShell(attackerID, effectsIndex, damageFactor)
 
+
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
         self.data['splashHit'] = 'splash'
         self.data['criticalHit'] = False
@@ -421,6 +431,15 @@ data = Data()
 
 
 def getValueMacroes(section, value):
+
+    def readColor(sec, m):
+        if m != '':
+            for val in config.get('colors/' + sec):
+                if val['value'] > m:
+                    return '#' + val['color'][2:]
+        else:
+            return '0xFFFFFF'
+
     conf = readyConfig(section)#.copy()
     macro = {'c:team-dmg': conf['c_teamDmg'].get(value['teamDmg']),
              'team-dmg': conf['teamDmg'].get(value['teamDmg'], ''),
@@ -449,7 +468,21 @@ def getValueMacroes(section, value):
              'squad-num': value['squadnum'],
              'reloadGun': value['reloadGun'],
              'my-alive': 'alive' if value['isAlive'] else None,
-             'gun-caliber': value['caliber']
+             'gun-caliber': value['caliber'],
+             'wn8': value.get('wn8', ''),
+             'xwn8': value.get('xwn8', ''),
+             'eff': value.get('eff', ''),
+             'xeff': value.get('xeff', ''),
+             'wgr': value.get('wgr', ''),
+             'xwgr': value.get('xwgr', ''),
+             'xte': value.get('xte', ''),
+             'c:wn8': readColor('wn8', value.get('wn8', '')),
+             'c:xwn8': readColor('x', value.get('xwn8', '')),
+             'c:eff': readColor('eff', value.get('eff', '')),
+             'c:xeff': readColor('x', value.get('xeff', '')),
+             'c:wgr': readColor('wgr', value.get('wgr', '')),
+             'c:xwgr': readColor('x', value.get('xwgr', '')),
+             'c:xte': readColor('x', value.get('xte', ''))
              }
     return macro
 
