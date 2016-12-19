@@ -253,18 +253,21 @@ package com.xvm.battle
             Xvm.swfProfilerBegin("BattleState.updateVehicleStatus()");
             try
             {
-                _playersDataVO.updatePlayerState(data.vehicleID, { vehicleStatus: data.status });
-                if (data.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
-                if (data.rightVehiclesIDs || data.rightItemsIDs)
-                    _playersDataVO.rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
-                if (data.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
-                if (data.leftVehiclesIDs || data.leftItemsIDs)
-                    _playersDataVO.leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
-                if (data.totalStats)
-                    _playersDataVO.updateTotalStats(data.totalStats);
-                invalidate(InvalidationType.STATE);
+                if (_playersDataVO != null)
+                {
+                    _playersDataVO.updatePlayerState(data.vehicleID, { vehicleStatus: data.status });
+                    if (data.rightCorrelationIDs)
+                        _playersDataVO.rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
+                    if (data.rightVehiclesIDs || data.rightItemsIDs)
+                        _playersDataVO.rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
+                    if (data.leftCorrelationIDs)
+                        _playersDataVO.leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
+                    if (data.leftVehiclesIDs || data.leftItemsIDs)
+                        _playersDataVO.leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
+                    if (data.totalStats)
+                        _playersDataVO.updateTotalStats(data.totalStats);
+                    invalidate(InvalidationType.STATE);
+                }
             }
             catch (ex:Error)
             {
