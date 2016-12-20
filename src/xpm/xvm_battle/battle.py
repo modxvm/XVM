@@ -46,6 +46,7 @@ import xmqp_events
 
 def start():
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
+    g_eventBus.addListener(XVM_BATTLE_EVENT.VM_INVALIDATE_ARENA_INFO, g_battle.onVMInvalidateArenaInfo)
     g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
     g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
 
@@ -57,6 +58,7 @@ g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
+    g_eventBus.removeListener(XVM_BATTLE_EVENT.VM_INVALIDATE_ARENA_INFO, g_battle.onVMInvalidateArenaInfo)
     g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
     g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
     g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
@@ -403,6 +405,9 @@ class Battle(object):
             return (None, True)
 
         return (None, False)
+
+    def onVMInvalidateArenaInfo(self, e=None):
+        self.invalidateArenaInfo()
 
     # misc
 
