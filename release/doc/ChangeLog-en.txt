@@ -1,5 +1,7 @@
 ﻿XVM-6.5.1-dev:
   * fixed switching vehicles on minimap click
+  * updated xTE values
+  * many bugs fixed
 
 XVM-6.5.0.1:
   * adaptation to WoT 0.9.17.0.1
