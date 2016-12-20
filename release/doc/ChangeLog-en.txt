@@ -1,4 +1,7 @@
-﻿XVM-6.5.1:
+﻿XVM-6.5.1.1:
+  * re-release
+
+XVM-6.5.1:
   * fixed switching vehicles on minimap click
   * updated xTE values
   * many bugs fixed
