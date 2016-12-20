@@ -458,6 +458,7 @@ package com.xvm.battle.minimap
 
                 var thickness:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawLineThickness, playerState, 1);
                 var alpha:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawAlpha, playerState, 100) / 100.0;
+                var minimapDrawTime:Number = Macros.FormatNumber(Config.config.xmqp.minimapDrawTime, playerState, 5);
 
                 if (e.data.path != undefined)
                 {
@@ -466,7 +467,7 @@ package com.xvm.battle.minimap
                     App.utils.scheduler.scheduleTask(function():void
                     {
                         mapHit.removeChild(mc);
-                    }, Config.config.xmqp.minimapDrawTime * 1000);
+                    }, minimapDrawTime * 1000);
 
                     var len:int = e.data.path.length;
                     if (len > 0)
