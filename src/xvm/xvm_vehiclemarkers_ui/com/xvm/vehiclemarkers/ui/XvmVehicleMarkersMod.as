@@ -27,19 +27,8 @@ package com.xvm.vehiclemarkers.ui
             this.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded, false, 0, true);
 
             Xfw.addCommandListener("xvm_vm.as.cmd_response", as_cmd_response);
-            Xfw.addCommandListener("BC_setVehiclesData", BattleState.instance.setVehiclesData);
-            Xfw.addCommandListener("BC_addVehiclesInfo", BattleState.instance.addVehiclesInfo);
-            Xfw.addCommandListener("BC_updateVehiclesData", BattleState.instance.updateVehiclesData);
-            Xfw.addCommandListener("BC_updateVehicleStatus", BattleState.instance.updateVehicleStatus);
-            Xfw.addCommandListener("BC_updatePlayerStatus", BattleState.instance.updatePlayerStatus);
-            Xfw.addCommandListener("BC_setVehiclesStats", BattleState.instance.setVehicleStats);
-            Xfw.addCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
-            Xfw.addCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
-            Xfw.addCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
-            Xfw.addCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
-            Xfw.addCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
-            Xfw.addCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);
-            Xfw.addCommandListener("BC_updateInvitationsStatuses", BattleState.instance.updateInvitationsStatuses);
+
+            createBattleControllerListeners();
 
             Xfw.cmd(XvmCommands.INITIALIZED);
 
@@ -67,16 +56,55 @@ package com.xvm.vehiclemarkers.ui
             try
             {
                 //Logger.add("onConfigLoaded: enabled=" + Config.config.markers.enabled);
-                if (!_initialized && Config.config.markers.enabled)
+                removeBattleControllerListeners();
+                if (Config.config.markers.enabled)
                 {
-                    _initialized = true;
-                    initialize();
+                    createBattleControllerListeners();
+                    if (!_initialized)
+                    {
+                        _initialized = true;
+                        initialize();
+                    }
                 }
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
+        }
+
+        private function createBattleControllerListeners():void
+        {
+            Xfw.addCommandListener("BC_setVehiclesData", BattleState.instance.setVehiclesData);
+            Xfw.addCommandListener("BC_addVehiclesInfo", BattleState.instance.addVehiclesInfo);
+            Xfw.addCommandListener("BC_updateVehiclesData", BattleState.instance.updateVehiclesData);
+            Xfw.addCommandListener("BC_updateVehicleStatus", BattleState.instance.updateVehicleStatus);
+            Xfw.addCommandListener("BC_updatePlayerStatus", BattleState.instance.updatePlayerStatus);
+            Xfw.addCommandListener("BC_setVehiclesStats", BattleState.instance.setVehicleStats);
+            Xfw.addCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
+            Xfw.addCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
+            Xfw.addCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
+            Xfw.addCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
+            Xfw.addCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
+            Xfw.addCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);
+            Xfw.addCommandListener("BC_updateInvitationsStatuses", BattleState.instance.updateInvitationsStatuses);
+        }
+
+        private function removeBattleControllerListeners():void
+        {
+            Xfw.removeCommandListener("BC_setVehiclesData", BattleState.instance.setVehiclesData);
+            Xfw.removeCommandListener("BC_addVehiclesInfo", BattleState.instance.addVehiclesInfo);
+            Xfw.removeCommandListener("BC_updateVehiclesData", BattleState.instance.updateVehiclesData);
+            Xfw.removeCommandListener("BC_updateVehicleStatus", BattleState.instance.updateVehicleStatus);
+            Xfw.removeCommandListener("BC_updatePlayerStatus", BattleState.instance.updatePlayerStatus);
+            Xfw.removeCommandListener("BC_setVehiclesStats", BattleState.instance.setVehicleStats);
+            Xfw.removeCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
+            Xfw.removeCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
+            Xfw.removeCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
+            Xfw.removeCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
+            Xfw.removeCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
+            Xfw.removeCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);
+            Xfw.removeCommandListener("BC_updateInvitationsStatuses", BattleState.instance.updateInvitationsStatuses);
         }
 
         private function initialize():void
