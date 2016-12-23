@@ -24,6 +24,7 @@ import xvm_main.python.minimap_circles as minimap_circles
 import xvm_main.python.utils as utils
 
 from xvm_main.python.consts import *
+from xvm_main.python.xvm import g_xvm
 from consts import *
 
 
@@ -41,6 +42,11 @@ def start():
     BigWorld.callback(0, _start)
 
 def _start():
+    g_eventBus.removeListener(XVM_EVENT.XVM_SERVICES_INITIALIZED, _start)
+    if not g_xvm.xvmServicesInitialized:
+        g_eventBus.addListener(XVM_EVENT.XVM_SERVICES_INITIALIZED, _start)
+        return
+
     if config.networkServicesSettings.xmqp or (isReplay() and XMQP_DEVELOPMENT):
         token = config.token.token
         if token:
