@@ -214,7 +214,7 @@
     "showBattleTier": true,
     //"removeSquadIcon": true,
     //"vehicleIconAlpha": 30,
-    //"removeVehicleLevel": true,
+    "removeVehicleLevel": true,
     "removeVehicleTypeIcon": true,
     //"removePlayerStatusIcon": true,
     //"nameFieldShowBorder": true,
@@ -243,18 +243,6 @@
     "formatLeftFrags": "{{frags}}",
     "formatRightFrags": "{{frags}}",
     "extraFieldsLeft": [
-      {
-        "enabled": true,
-        "hotKeyCode": 56, "visibleOnHotKey": true, "onHold": false,
-        "x": 95, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90, "bindToIcon": true,
-        "format": "<font color='#FFFFFF'>XXX</font>"
-      },
-      {
-        "enabled": true,
-        "hotKeyCode": 56, "visibleOnHotKey": false, "onHold": false,
-        "x": 95, "y": 6, "width": 16, "height": 16, "align": "center", "alpha": 90, "bindToIcon": true,
-        "format": "<font color='#FFFFFF'>YYY</font>"
-      },
       // for tests
       //{ "width": 1, "height": 23, "bgColor": "0xFFFFFF" },
       //{ "x": 25, "width": 1, "height": 23, "bgColor": "0xFFFFFF" },
