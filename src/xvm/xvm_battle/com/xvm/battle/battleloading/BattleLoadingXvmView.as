@@ -41,6 +41,7 @@ package com.xvm.battle.battleloading
             var component:UI_BattleLoading = new UI_BattleLoading();
             component.x = page.battleLoading.x;
             component.y = page.battleLoading.y;
+            component.setCompVisible(page.battleLoading.visible);
             page.battleLoading = component;
             page.addChildAt(page.battleLoading, idx);
             page.xfw_battleStatisticDataController.registerComponentController(page.battleLoading);
