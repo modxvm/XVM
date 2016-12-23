@@ -41,7 +41,7 @@ def start():
     BigWorld.player().arena.onNewVehicleListReceived -= start
     BigWorld.callback(0, _start)
 
-def _start():
+def _start(e=None):
     g_eventBus.removeListener(XVM_EVENT.XVM_SERVICES_INITIALIZED, _start)
     if not g_xvm.xvmServicesInitialized:
         g_eventBus.addListener(XVM_EVENT.XVM_SERVICES_INITIALIZED, _start)
