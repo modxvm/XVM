@@ -202,7 +202,10 @@ def formatMacro(macro, macroes):
                             fm['suf'] = ''
                     else:
                         fm['suf'] = ''
-            _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
+            if _macro is None:
+                _macro = ''
+            else:
+                _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
         # log('_macro = %s' % _macro)
         return str(_macro)
     else:
@@ -271,7 +274,7 @@ class Data(object):
                      'isBeginFire': False,
                      'number': None,
                      'reloadGun': 0.0,
-					 'caliber': None
+                     'caliber': None
                      }
 
     def reset(self):
@@ -301,14 +304,23 @@ class Data(object):
                     self.data['shortUserString'] = ''
                     self.data['level'] = ''
                 self.data['name'] = attacker['name']
-                stats = _stat.resp['players'][attacker['name']]
-                self.data['wn8'] = stats.get('wn8', None)
-                self.data['xwn8'] = stats.get('xwn8', None)
-                self.data['eff'] = stats.get('e', None)
-                self.data['xeff'] = stats.get('xeff', None)
-                self.data['wgr'] = stats.get('wgr', None)
-                self.data['xwgr'] = stats.get('xwgr', None)
-                self.data['xte'] = stats.get('v').get('xte', None)
+                if attacker['name'] in _stat.resp['players']:
+                    stats = _stat.resp['players'][attacker['name']]
+                    self.data['wn8'] = stats.get('wn8', None)
+                    self.data['xwn8'] = stats.get('xwn8', None)
+                    self.data['eff'] = stats.get('e', None)
+                    self.data['xeff'] = stats.get('xeff', None)
+                    self.data['wgr'] = stats.get('wgr', None)
+                    self.data['xwgr'] = stats.get('xwgr', None)
+                    self.data['xte'] = stats.get('v').get('xte', None)
+                else:
+                    self.data['wn8'] = None
+                    self.data['xwn8'] = None
+                    self.data['eff'] = None
+                    self.data['xeff'] = None
+                    self.data['wgr'] = None
+                    self.data['xwgr'] = None
+                    self.data['xte'] = None
                 self.data['clanAbbrev'] = attacker['clanAbbrev']
             self.data['clanicon'] = _stat.getClanIcon(self.data['attackerID'])
             if statXVM is not None:
@@ -433,10 +445,10 @@ data = Data()
 def getValueMacroes(section, value):
 
     def readColor(sec, m):
-        if m != '':
+        if m is not None:
             for val in config.get('colors/' + sec):
                 if val['value'] > m:
-                    return '#' + val['color'][2:]
+                    return val['color']
         else:
             return '0xFFFFFF'
 
@@ -469,20 +481,20 @@ def getValueMacroes(section, value):
              'reloadGun': value['reloadGun'],
              'my-alive': 'alive' if value['isAlive'] else None,
              'gun-caliber': value['caliber'],
-             'wn8': value.get('wn8', ''),
-             'xwn8': value.get('xwn8', ''),
-             'eff': value.get('eff', ''),
-             'xeff': value.get('xeff', ''),
-             'wgr': value.get('wgr', ''),
-             'xwgr': value.get('xwgr', ''),
-             'xte': value.get('xte', ''),
-             'c:wn8': readColor('wn8', value.get('wn8', '')),
-             'c:xwn8': readColor('x', value.get('xwn8', '')),
-             'c:eff': readColor('eff', value.get('eff', '')),
-             'c:xeff': readColor('x', value.get('xeff', '')),
-             'c:wgr': readColor('wgr', value.get('wgr', '')),
-             'c:xwgr': readColor('x', value.get('xwgr', '')),
-             'c:xte': readColor('x', value.get('xte', ''))
+             'wn8': value.get('wn8', None),
+             'xwn8': value.get('xwn8', None),
+             'eff': value.get('eff', None),
+             'xeff': value.get('xeff', None),
+             'wgr': value.get('wgr', None),
+             'xwgr': value.get('xwgr', None),
+             'xte': value.get('xte', None),
+             'c:wn8': readColor('wn8', value.get('wn8', None)),
+             'c:xwn8': readColor('x', value.get('xwn8', None)),
+             'c:eff': readColor('eff', value.get('eff', None)),
+             'c:xeff': readColor('x', value.get('xeff', None)),
+             'c:wgr': readColor('wgr', value.get('wgr', None)),
+             'c:xwgr': readColor('x', value.get('xwgr', None)),
+             'c:xte': readColor('x', value.get('xte', None))
              }
     return macro
 
@@ -498,7 +510,7 @@ def shadow_value(section, macroes):
               'inner': parser(config.get(section + 'shadow/inner'), macroes),
               'knockout': parser(config.get(section + 'shadow/knockout'), macroes),
               'quality': parser(config.get(section + 'shadow/quality'), macroes)
-                           }
+              }
     return shadow
 
 
@@ -534,7 +546,7 @@ class Log(object):
         self.dictVehicle = {}
         self.dataLog = {}
         self.shadow = {}
-        if None not in [self.x,  self.y]:
+        if None not in [self.x, self.y]:
             userprefs.set('DamageLog/dLog', {'x': self.x, 'y': self.y})
 
     def mouse_down(self, _data):
@@ -570,9 +582,9 @@ class Log(object):
             attackReasonID = data.data['attackReasonID']
             if attackerID in self.dictVehicle:
                 if (attackReasonID in self.dictVehicle[attackerID] and
-                   ('time' in self.dictVehicle[attackerID][attackReasonID]) and
-                   ('damage' in self.dictVehicle[attackerID][attackReasonID]) and
-                   ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1)):
+                        ('time' in self.dictVehicle[attackerID][attackReasonID]) and
+                        ('damage' in self.dictVehicle[attackerID][attackReasonID]) and
+                        ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1)):
                     self.dictVehicle[attackerID][attackReasonID]['time'] = BigWorld.serverTime()
                     self.dictVehicle[attackerID][attackReasonID]['damage'] += data.data['damage']
                     self.dataLog['damage'] = self.dictVehicle[attackerID][attackReasonID]['damage']
@@ -648,7 +660,7 @@ class LastHit(object):
             self.y += (_data['y'] - self._data['y'])
             as_event('ON_LAST_HIT')
 
-    def hideLastHit (self):
+    def hideLastHit(self):
         self.strLastHit = ''
         if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
             self.timerLastHit.stop()
@@ -662,9 +674,9 @@ class LastHit(object):
             attackReasonID = data.data['attackReasonID']
             if attackerID in self.dictVehicle:
                 if (attackReasonID in self.dictVehicle[attackerID] and
-                   ('time' in self.dictVehicle[attackerID][attackReasonID]) and
-                   ('damage' in self.dictVehicle[attackerID][attackReasonID]) and
-                   ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1)):
+                        ('time' in self.dictVehicle[attackerID][attackReasonID]) and
+                        ('damage' in self.dictVehicle[attackerID][attackReasonID]) and
+                        ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1)):
                     self.dictVehicle[attackerID][attackReasonID]['time'] = BigWorld.serverTime()
                     self.dictVehicle[attackerID][attackReasonID]['damage'] += data.data['damage']
                     dataLog['damage'] = self.dictVehicle[attackerID][attackReasonID]['damage']
@@ -776,6 +788,7 @@ def destroyGUI(self):
     _logAlt.reset(_logAlt.section)
     _lastHit.reset(_lastHit.section)
 
+
 @registerEvent(PlayerAvatar, 'handleKey')
 def handleKey(self, isDown, key, mods):
     global isDownAlt
@@ -811,5 +824,4 @@ def lastHit_shadow(setting):
 
 def fire():
     return on_fire
-
 
