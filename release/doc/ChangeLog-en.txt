@@ -1,4 +1,6 @@
-﻿XVM-6.5.1.1:
+﻿XVM-6.5.2-dev:
+
+XVM-6.5.1.1:
   * re-release
 
 XVM-6.5.1:
