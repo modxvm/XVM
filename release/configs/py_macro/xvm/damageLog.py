@@ -802,12 +802,21 @@ def destroyGUI(self):
 @registerEvent(PlayerAvatar, 'handleKey')
 def handleKey(self, isDown, key, mods):
     global isDownAlt
-    if (key == Keys.KEY_LALT) and isDown and not isDownAlt:
-        isDownAlt = True
-        as_event('ON_HIT')
-    elif not ((key == Keys.KEY_LALT) and isDown) and isDownAlt:
-        isDownAlt = False
-        as_event('ON_HIT')
+    hotkey = config.get('hotkeys/damageLogAltMode')
+    if hotkey['enabled'] and (key == hotkey['keyCode']):
+        if isDown:
+            if hotkey['onHold']:
+                if not isDownAlt:
+                    isDownAlt = True
+                    as_event('ON_HIT')
+            else:
+                isDownAlt = not isDownAlt
+                as_event('ON_HIT')
+        else:
+            if hotkey['onHold']:
+                if isDownAlt:
+                    isDownAlt = False
+                    as_event('ON_HIT')
 
 
 def dLog():
