@@ -30,8 +30,9 @@
     {{my-alive}}          - value 'alive' if my vehicle is alive, '' for dead / возвращает 'alive', если я живой, '', если не живой
     {{reloadGun}}         - reloading time of a gun / время перезарядки орудия 
     {{gun-caliber}}       - caliber of a gun / калибр орудия
-    {{wn8}}, {{xwn8}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}                - TO DO / макросы статистика (смотрите macros_ru.txt)
-    {{c:wn8}}, {{c:xwn8}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}  - TO DO / макросы статистика (смотрите macros_ru.txt)
+    {{wn8}}, {{xwn8}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}                - statistics macros (see macros.txt) / макросы статистика (смотрите macros_ru.txt)
+    {{c:wn8}}, {{c:xwn8}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}  - statistics macros (see macros.txt) / макросы статистика (смотрите macros_ru.txt)
+    {{fire-duration}}     - TO DO / продолжительность пожара (работает только при включонной опции "groupDamagesFromFire")
 */
 
 {
