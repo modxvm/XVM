@@ -9,8 +9,6 @@ import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
 from xvm_main.python.stats import _stat
 import xvm_main.python.stats as stats
-import xvm_main.python.vehinfo as vehinfo
-import xvm_main.python.vehinfo_wn8 as vehinfo_wn8
 from items import vehicles, _xml
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
@@ -24,7 +22,6 @@ from gui.shared.utils.TimeInterval import TimeInterval
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from items import vehicles
-import time
 
 
 on_fire = 0
@@ -449,7 +446,7 @@ def getValueMacroes(section, value):
         if m is not None:
             for val in config.get('colors/' + sec):
                 if val['value'] > m:
-                    return val['color']
+                    return '#' + val['color'][2:]
         else:
             return '0xFFFFFF'
 
@@ -690,7 +687,6 @@ class LastHit(object):
                         dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
                     else:
                         dataLog['fireDuration'] = None
-
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': data.data['damage'],
