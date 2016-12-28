@@ -446,9 +446,7 @@ def getValueMacroes(section, value):
         if m is not None:
             for val in config.get('colors/' + sec):
                 if val['value'] > m:
-                    return '#' + val['color'][2:]
-        else:
-            return '0xFFFFFF'
+                    return '#' + val['color'][2:] if val['color'][:2] == '0x' else val['color']
 
     conf = readyConfig(section)
     macro = {'c:team-dmg': conf['c_teamDmg'].get(value['teamDmg']),
