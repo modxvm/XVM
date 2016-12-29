@@ -16,6 +16,7 @@ damageReceived = 0
 vehiclesHealth = {}
 damagesSquad = 0
 detection = 0
+countBlockedHits = 0
 
 ribbonTypes = {
     'armor': 0,
@@ -36,15 +37,17 @@ ribbonTypes = {
 
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def _onTotalEfficiencyUpdated(self, diff):
-    global totalDamage
-    global totalAssist
-    global totalBlocked
+    global totalDamage, totalAssist, totalBlocked, countBlockedHits
     if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
         totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
     if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
         totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
     if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
         totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
+        if totalBlocked == 0:
+            countBlockedHits = 0
+        else:
+            countBlockedHits += 1
     as_event('ON_TOTAL_EFFICIENCY')
 
 
@@ -91,14 +94,8 @@ def onEnterWorld(self, prereqs):
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
-    global vehiclesHealth
-    global totalDamage
-    global totalAssist
-    global totalBlocked
-    global damageReceived
-    global damagesSquad
-    global detection
-    global ribbonTypes
+    global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection
+    global ribbonTypes, countBlockedHits
     vehiclesHealth = {}
     totalDamage = 0
     totalAssist = 0
@@ -106,6 +103,7 @@ def destroyGUI(self):
     damageReceived = 0
     damagesSquad = 0
     detection = 0
+    countBlockedHits = 0
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
@@ -201,3 +199,8 @@ def xvm_assistSpot():
 @xvm.export('xvm.crits', deterministic=False)
 def xvm_crits():
     return ribbonTypes['crits']
+
+
+@xvm.export('xvm.countBlockedHits', deterministic=False)
+def xvm_countBlockedHits():
+    return countBlockedHits
