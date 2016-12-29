@@ -59,7 +59,8 @@ MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShel
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'reloadGun', 'c:team-dmg', 'c:hit-effects',
                'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
                'splash-hit', 'team-dmg', 'my-alive', 'gun-caliber', 'wn8', 'xwn8', 'eff', 'xeff', 'wgr', 'xwgr', 'xte',
-               'c:wn8', 'c:xwn8', 'c:eff', 'c:xeff', 'c:wgr', 'c:xwgr', 'c:xte', 'fire-duration']
+               'c:wn8', 'c:xwn8', 'c:eff', 'c:xeff', 'c:wgr', 'c:xwgr', 'c:xte', 'fire-duration', 'diff-masses',
+               'nation']
 
 
 def keyLower(_dict):
@@ -272,7 +273,9 @@ class Data(object):
                      'number': None,
                      'reloadGun': 0.0,
                      'caliber': None,
-                     'fireDuration': None
+                     'fireDuration': None,
+                     'diff-masses': None,
+                     'nation': None
                      }
 
     def reset(self):
@@ -282,10 +285,20 @@ class Data(object):
         player = BigWorld.player()
         self.data['dmgRatio'] = self.data['damage'] * 100 // self.data['maxHealth']
         if self.data['attackerID']:
-            attacker = player.arena.vehicles.get(self.data['attackerID'])
             entity = BigWorld.entity(self.data['attackerID'])
-            statXVM = _stat.players.get(self.data['attackerID'], None)
+            if entity is not None:
+                self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun'])
+                self.data['nation'] = nations.NAMES[entity.typeDescriptor.type.customizationNationID]
+                if self.data['attackReasonID'] == 2:
+                    self.data['diff-masses'] = player.vehicleTypeDescriptor.physics['weight'] - entity.typeDescriptor.physics['weight']
+                elif self.data['diff-masses'] is not None:
+                    self.data['diff-masses'] = None
+            else:
+                self.data['marksOnGun'] = None
+                self.data['diff-masses'] = None
+                self.data['nation'] = None
             self.data['teamDmg'] = 'unknown'
+            attacker = player.arena.vehicles.get(self.data['attackerID'])
             if attacker is not None:
                 if attacker['team'] != player.team:
                     self.data['teamDmg'] = 'enemy-dmg'
@@ -321,19 +334,18 @@ class Data(object):
                     self.data['xte'] = None
                 self.data['clanAbbrev'] = attacker['clanAbbrev']
             self.data['clanicon'] = _stat.getClanIcon(self.data['attackerID'])
-            if statXVM is not None:
-                self.data['squadnum'] = statXVM.squadnum
-            self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun']) if entity is not None else ''
+            statXVM = _stat.players.get(self.data['attackerID'], None)
+            self.data['squadnum'] = statXVM.squadnum if statXVM is not None else None
         else:
             self.data['teamDmg'] = 'unknown'
-            self.data['attackerVehicleType'] = ''
-            self.data['shortUserString'] = ''
-            self.data['name'] = ''
-            self.data['clanAbbrev'] = ''
-            self.data['level'] = ''
-            self.data['clanicon'] = ''
-            self.data['squadnum'] = ''
-            self.data['marksOnGun'] = ''
+            self.data['attackerVehicleType'] = None
+            self.data['shortUserString'] = None
+            self.data['name'] = None
+            self.data['clanAbbrev'] = None
+            self.data['level'] = None
+            self.data['clanicon'] = None
+            self.data['squadnum'] = None
+            self.data['marksOnGun'] = None
 
     def typeShell(self, effectsIndex):
         self.data['costShell'] = 'unknown'
@@ -406,7 +418,6 @@ class Data(object):
         if damageFactor == 0:
             self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
         self.hitShell(attackerID, effectsIndex, damageFactor)
-
 
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
         self.data['splashHit'] = 'splash'
@@ -492,6 +503,8 @@ def getValueMacroes(section, value):
              'c:xwgr': readColor('x', value.get('xwgr', None)),
              'c:xte': readColor('x', value.get('xte', None)),
              'fire-duration': value.get('fireDuration', None),
+             'diff-masses': value.get('diff-masses', None),
+             'nation': value.get('nation', None)
              }
     return macro
 
