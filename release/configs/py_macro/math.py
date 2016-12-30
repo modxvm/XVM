@@ -24,7 +24,7 @@ def math_pow(a, n):
     return a ** n
 
 #  Absolute value. Абсолютная величина
-@xvm.export('math.pow')
+@xvm.export('math.abs')
 def math_abs(a):
     return abs(a)
 
