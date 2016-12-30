@@ -290,7 +290,7 @@ class Data(object):
                 self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun'])
                 self.data['nation'] = nations.NAMES[entity.typeDescriptor.type.customizationNationID]
                 if self.data['attackReasonID'] == 2:
-                    self.data['diff-masses'] = player.vehicleTypeDescriptor.physics['weight'] - entity.typeDescriptor.physics['weight']
+                    self.data['diff-masses'] = (player.vehicleTypeDescriptor.physics['weight'] - entity.typeDescriptor.physics['weight']) / 1000.0
                 elif self.data['diff-masses'] is not None:
                     self.data['diff-masses'] = None
             else:

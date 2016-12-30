@@ -23,6 +23,11 @@ def math_div(a, b):
 def math_pow(a, n):
     return a ** n
 
+#  Absolute value. Абсолютная величина
+@xvm.export('math.pow')
+def math_abs(a):
+    return abs(a)
+
 # Random numbers
 
 import random
