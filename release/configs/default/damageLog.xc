@@ -33,7 +33,7 @@
     {{wn8}}, {{xwn8}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}                - statistics macros (see macros.txt) / макросы статистика (смотрите macros_ru.txt)
     {{c:wn8}}, {{c:xwn8}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}  - statistics macros (see macros.txt) / макросы статистика (смотрите macros_ru.txt)
     {{fire-duration}}     - duration of fire ("groupDamagesFromFire" must be enabled to work) / продолжительность пожара (работает только при включенной опции "groupDamagesFromFire")
-    {{diff-masses}}       - TO DO / разность масс техники при столкновении
+    {{diff-masses}}       - vehicles weights difference during collision / разность масс техники при столкновении
     {{nation}}            - vehicle nation / нация техники
 */
 
