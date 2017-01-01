@@ -14,7 +14,7 @@ void ReplacePythonFunction(const char* original_name, const char* forward_name, 
 
     OriginFunctionAddress = WRAPPER_GetFunctionRealAddress(original_name);
     ReplaceFunctionAddress = (DWORD)GetProcAddress(forward_dll, forward_name);
-    if (OriginFunctionAddress > 0 && ReplaceFunctionAddress > 0)
+    if ( (OriginFunctionAddress>0) && (ReplaceFunctionAddress>0) )
     {
         WRAPPER_ReplaceFunction(OriginFunctionAddress, ReplaceFunctionAddress);
     }
@@ -29,7 +29,7 @@ PyObject* Py_Fix_Common(PyObject* self, PyObject* args)
 PyObject* Py_Fix_XP(PyObject* self, PyObject* args)
 {
     ReplacePythonFunction("load_source_module", "load_source_module_replacement", GetModuleHandle(TEXT("XVMNativeWOTFix.pyd")));
-    ReplacePythonFunction("find_init_module"  , "find_init_module"              , GetModuleHandle(TEXT("XVMNativeWOTFix.pyd")));
+    ReplacePythonFunction("find_init_module"  , "find_init_module_replacement"  , GetModuleHandle(TEXT("XVMNativeWOTFix.pyd")));
     Py_RETURN_NONE;
 }
 
