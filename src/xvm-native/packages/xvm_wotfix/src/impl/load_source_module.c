@@ -1,19 +1,25 @@
-#include "load_source_module.h"
+/**
+* XVM Native WOTFix module
+* @author Mikhail Paulyshka <mixail(at)modxvm.com>
+*/
+
 #include <Windows.h>
+
+#include "Python.h"
+#include "PythonInternal.h"
 
 #define MAXPATHLEN 256
 
 time_t filetime_to_timet(FILETIME ft)
 {
-	ULARGE_INTEGER ull;
-	ull.LowPart = ft.dwLowDateTime;
-	ull.HighPart = ft.dwHighDateTime;
+    ULARGE_INTEGER ull;
+    ull.LowPart = ft.dwLowDateTime;
+    ull.HighPart = ft.dwHighDateTime;
 
-	return ull.QuadPart / 10000000ULL - 11644473600ULL;
+    return ull.QuadPart / 10000000ULL - 11644473600ULL;
 }
 
-PyObject *
-load_source_module_replacement(char *name, char *pathname, FILE *fp)
+__declspec(dllexport) PyObject * load_source_module_replacement(char *name, char *pathname, FILE *fp)
 {
     struct stat st;
     FILE *fpc;
@@ -23,16 +29,16 @@ load_source_module_replacement(char *name, char *pathname, FILE *fp)
     PyObject *m;
     time_t mtime;
 
-	WIN32_FILE_ATTRIBUTE_DATA lpFileData;
-	if (GetFileAttributesEx(pathname, GetFileExInfoStandard, &lpFileData) == 0)
-	{
-		PyErr_Format(PyExc_RuntimeError, "unable to get file status from '%s'", pathname);
-	}
+    WIN32_FILE_ATTRIBUTE_DATA lpFileData;
+    if (GetFileAttributesEx(pathname, GetFileExInfoStandard, &lpFileData) == 0)
+    {
+        PyErr_Format(PyExc_RuntimeError, "unable to get file status from '%s'", pathname);
+    }
 
-	st.st_atime = filetime_to_timet(lpFileData.ftLastAccessTime);
-	st.st_ctime = filetime_to_timet(lpFileData.ftLastWriteTime);
-	st.st_mtime = filetime_to_timet(lpFileData.ftLastWriteTime);
-	st.st_size =  lpFileData.nFileSizeLow;
+    st.st_atime = filetime_to_timet(lpFileData.ftLastAccessTime);
+    st.st_ctime = filetime_to_timet(lpFileData.ftLastWriteTime);
+    st.st_mtime = filetime_to_timet(lpFileData.ftLastWriteTime);
+    st.st_size =  lpFileData.nFileSizeLow;
 
 #ifdef MS_WINDOWS
     mtime = win32_mtime(fp, pathname);

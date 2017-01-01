@@ -31,3 +31,6 @@ src/xvm-native/build/
 src/xvm-native/binaries/tests/
 src/xvm-native/packages/xvm_*/build/
 src/installer/src/dll/findwot/build/
+*/build/
+*/.vs/
+CMakeSettings.json

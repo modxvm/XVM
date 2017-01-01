@@ -6,6 +6,11 @@
 #include <Windows.h>
 #include <Xinput.h>
 
+//fix build for XP target
+#ifndef XUSER_MAX_COUNT
+#define XUSER_MAX_COUNT 4
+#endif
+
 #include "pythonmodule.h"
 
 static PyObject* set_state(PyObject* self, PyObject* args)

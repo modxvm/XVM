@@ -1,16 +1,15 @@
 /**
- * XVM Native XPFix module
+ * XVM Native WOTFix module
  * @author Mikhail Paulyshka <mixail(at)modxvm.com>
  */
 
-#include "find_init_module.h"
 #include <Windows.h>
 
 #define SEP L'\\'
 #define ALTSEP L'/'
 #define MAXPATHLEN 256
 
-int _cdecl find_init_module_replacement(char *buf)
+__declspec(dllexport) int _cdecl find_init_module_replacement(char *buf)
 {
     const size_t save_len = strlen(buf);
     size_t i = save_len;
