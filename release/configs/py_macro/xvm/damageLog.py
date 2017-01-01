@@ -286,17 +286,7 @@ class Data(object):
         self.data['dmgRatio'] = self.data['damage'] * 100 // self.data['maxHealth']
         if self.data['attackerID']:
             entity = BigWorld.entity(self.data['attackerID'])
-            if entity is not None:
-                self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun'])
-                self.data['nation'] = nations.NAMES[entity.typeDescriptor.type.customizationNationID]
-                if self.data['attackReasonID'] == 2:
-                    self.data['diff-masses'] = (player.vehicleTypeDescriptor.physics['weight'] - entity.typeDescriptor.physics['weight']) / 1000.0
-                elif self.data['diff-masses'] is not None:
-                    self.data['diff-masses'] = None
-            else:
-                self.data['marksOnGun'] = None
-                self.data['diff-masses'] = None
-                self.data['nation'] = None
+            self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun']) if (entity is not None) else None
             self.data['teamDmg'] = 'unknown'
             attacker = player.arena.vehicles.get(self.data['attackerID'])
             if attacker is not None:
@@ -310,10 +300,17 @@ class Data(object):
                     self.data['attackerVehicleType'] = list(attacker['vehicleType'].type.tags.intersection(VEHICLE_CLASSES))[0].lower()
                     self.data['shortUserString'] = attacker['vehicleType'].type.shortUserString
                     self.data['level'] = attacker['vehicleType'].level
+                    self.data['nation'] = nations.NAMES[attacker['vehicleType'].type.customizationNationID]
+                    if self.data['attackReasonID'] == 2:
+                        self.data['diff-masses'] = (player.vehicleTypeDescriptor.physics['weight'] - attacker['vehicleType'].physics['weight']) / 1000.0
+                    elif self.data['diff-masses'] is not None:
+                        self.data['diff-masses'] = None
                 else:
-                    self.data['attackerVehicleType'] = ''
-                    self.data['shortUserString'] = ''
-                    self.data['level'] = ''
+                    self.data['attackerVehicleType'] = None
+                    self.data['shortUserString'] = None
+                    self.data['level'] = None
+                    self.data['nation'] = None
+                    self.data['diff-masses'] = None
                 self.data['name'] = attacker['name']
                 if attacker['name'] in _stat.resp['players']:
                     stats = _stat.resp['players'][attacker['name']]
@@ -836,10 +833,7 @@ def dLog():
 
 
 def dLog_shadow(setting):
-    if (setting in _logAlt.shadow) and (setting in _log.shadow):
-        return _logAlt.shadow[setting] if isDownAlt else _log.shadow[setting]
-    else:
-        return None
+    return _logAlt.shadow.get(setting, None) if isDownAlt else _log.shadow.get(setting, None)
 
 
 def lastHit():
@@ -847,10 +841,7 @@ def lastHit():
 
 
 def lastHit_shadow(setting):
-    if setting in _lastHit.shadow:
-        return _lastHit.shadow[setting]
-    else:
-        return None
+    return _lastHit.shadow.get(setting, None)
 
 
 def fire():
