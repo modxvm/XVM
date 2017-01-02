@@ -414,6 +414,7 @@ class Data(object):
         self.data['criticalHit'] = (maxHitEffectCode == 5)
         if damageFactor == 0:
             self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
+            self.data['isAlive'] = bool(vehicle.isCrewActive)
         self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
@@ -421,6 +422,7 @@ class Data(object):
         self.data['criticalHit'] = False
         if damageFactor == 0:
             self.data['hitEffect'] = HIT_EFFECT_CODES[3]
+            self.data['isAlive'] = bool(vehicle.isCrewActive)
         self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
@@ -438,7 +440,7 @@ class Data(object):
             self.data['reloadGun'] = self.timeReload(attackerID)
         self.data['attackerID'] = attackerID
         self.data['damage'] = self.data['oldHealth'] - max(0, newHealth)
-        self.data['isAlive'] = newHealth > 0
+        self.data['isAlive'] = (newHealth > 0) and bool(vehicle.isCrewActive)
         self.data['oldHealth'] = newHealth
         self.updateData()
         self.updateLabels()
