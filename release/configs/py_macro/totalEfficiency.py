@@ -1,6 +1,8 @@
 ﻿import BigWorld
 from xfw import *
 from xvm_main.python.logger import *
+import xvm_main.python.vehinfo_xtdb as vehinfo_xtdb
+import xvm_main.python.config as config
 from Vehicle import Vehicle
 from Avatar import PlayerAvatar
 # from gui.battle_control import g_sessionProvider
@@ -17,6 +19,7 @@ vehiclesHealth = {}
 damagesSquad = 0
 detection = 0
 countBlockedHits = 0
+vehCD = None
 
 ribbonTypes = {
     'armor': 0,
@@ -88,7 +91,8 @@ def onEnterWorld(self, prereqs):
         global vehiclesHealth
         vehiclesHealth[self.id] = self.health
     if self.isPlayerVehicle:
-        global maxHealth
+        global maxHealth, vehCD
+        vehCD = self.typeDescriptor.type.compactDescr
         maxHealth = self.health
 
 
@@ -119,6 +123,14 @@ def destroyGUI(self):
         'defence': 0,
         'assist': 0
     }
+
+
+@xvm.export('xvm.totalDamageColor', deterministic=False)
+def xvm_totalDamageColor():
+    x = vehinfo_xtdb.calculateXTDB(vehCD, totalDamage)
+    for val in config.get('colors/x'):
+        if val['value'] > x:
+            return '#' + val['color'][2:] if val['color'][:2] == '0x' else val['color']
 
 
 @xvm.export('xvm.totalDamage', deterministic=False)
