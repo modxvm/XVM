@@ -28,7 +28,6 @@ package com.xvm.battle.fullStats
 
     public class StatsTableItemXvm extends StatsTableItem implements IExtraFieldGroupHolder
     {
-        public static const ORDER_CHANGED:String = "StatsTableItemXvm.ORDER_CHANGED";
         private static const INVALIDATE_PLAYER_STATE:uint = 1 << 15;
 
         private static const FIELD_HEIGHT:int = 26;
@@ -120,7 +119,7 @@ package com.xvm.battle.fullStats
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
-            Xvm.addEventListener(ORDER_CHANGED, onOrderChanged);
+            Xvm.addEventListener(BattleEvents.PLAYERS_ORDER_CHANGED, onOrderChanged);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
 
             _substrateHolder = playerNameTF.parent.addChildAt(new Sprite(), 0) as Sprite;
@@ -137,7 +136,7 @@ package com.xvm.battle.fullStats
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
-            Xvm.removeEventListener(ORDER_CHANGED, onOrderChanged);
+            Xvm.removeEventListener(BattleEvents.PLAYERS_ORDER_CHANGED, onOrderChanged);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLE, onStatLoaded)
 
             disposeExtraFields();

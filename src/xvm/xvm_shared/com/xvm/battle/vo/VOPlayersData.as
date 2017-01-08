@@ -5,7 +5,9 @@
 package com.xvm.battle.vo
 {
     import com.xfw.*;
+    import com.xfw.events.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.vo.*;
     import flash.utils.*;
 
@@ -55,8 +57,10 @@ package com.xvm.battle.vo
 
         public function set leftVehiclesIDs(value:Vector.<Number>):void
         {
+            var old_ids:Vector.<Number> = _leftVehiclesIDs ? _leftVehiclesIDs.concat() : null;
             _leftVehiclesIDs = value.concat(); // clone vector
             updateIndexes(_leftVehiclesIDs);
+            checkOrderChanged(old_ids, value);
         }
 
         public function get rightVehiclesIDs():Vector.<Number>
@@ -66,8 +70,10 @@ package com.xvm.battle.vo
 
         public function set rightVehiclesIDs(value:Vector.<Number>):void
         {
+            var old_ids:Vector.<Number> = _rightVehiclesIDs ? _rightVehiclesIDs.concat() : null;
             _rightVehiclesIDs = value.concat(); // clone vector
             updateIndexes(_rightVehiclesIDs);
+            checkOrderChanged(old_ids, value);
         }
 
         // private
@@ -250,6 +256,22 @@ package com.xvm.battle.vo
                 playerState.update({
                    index: index
                 });
+            }
+        }
+
+        private function checkOrderChanged(old_order:Vector.<Number>, new_order:Vector.<Number>):void
+        {
+            if (!old_order || !new_order)
+                return;
+
+            var len:int = new_order.length;
+            for (var i:int = 0; i < len; ++i)
+            {
+                var vehicleID:Number = new_order[i];
+                if (old_order[i] != vehicleID)
+                {
+                    Xvm.dispatchEvent(new IntEvent(BattleEvents.PLAYERS_ORDER_CHANGED, vehicleID));
+                }
             }
         }
 
