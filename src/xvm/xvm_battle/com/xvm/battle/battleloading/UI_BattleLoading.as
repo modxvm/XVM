@@ -6,11 +6,8 @@ package com.xvm.battle.battleloading
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xfw.events.*;
-    import com.xvm.battle.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
-    import flash.text.*;
     import net.wg.data.constants.*;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.events.*;
@@ -21,21 +18,20 @@ package com.xvm.battle.battleloading
         public static var leftAtlas:String = AtlasConstants.BATTLE_ATLAS;
         public static var rightAtlas:String = AtlasConstants.BATTLE_ATLAS;
 
-        private var cfg:CStatisticForm;
+        private var cfg:CBattleLoading;
 
-        //private var _winChance:WinChances = null;
+        private var _winChance:WinChances = null;
 
         public function UI_BattleLoading()
         {
             //Logger.add("UI_BattleLoading");
             super();
 
-            //this.xfw_tableCtrl = new BattleLoadingTableCtrlXvm(this.statsTable, this);
+            //this.xfw_tableCtrl = new BattleLoadingTableCtrlXvm(this.form.statsTable, this);
 
-            //Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
 
-        /*
         override protected function configUI():void
         {
             super.configUI();
@@ -48,7 +44,7 @@ package com.xvm.battle.battleloading
             deleteComponents();
             super.onDispose();
         }
-*/
+
         override public function setCompVisible(value:Boolean):void
         {
             //value = true; // DEBUG
@@ -64,14 +60,14 @@ package com.xvm.battle.battleloading
             {
                 deleteComponents();
 
-                cfg = Config.config.statisticForm;
+                cfg = form.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
 
                 registerVehicleIconAtlases();
 
                 // Components
-                if ((Config.networkServicesSettings.statBattle && (Config.networkServicesSettings.chance || Config.networkServicesSettings.chanceLive)) || cfg.showBattleTier)
+                if ((Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chance) || cfg.showBattleTier)
                 {
-                    //_winChance = new WinChances(this); // Winning chance info above players list. // TODO: replace with ExtraField
+                    _winChance = new WinChances(this.form); // Winning chance info above players list. // TODO: replace with ExtraField
                 }
             }
             catch (ex:Error)
@@ -84,11 +80,11 @@ package com.xvm.battle.battleloading
 
         private function deleteComponents():void
         {
-            /*if (_winChance != null)
+            if (_winChance != null)
             {
                 _winChance.dispose();
                 _winChance = null;
-            }*/
+            }
         }
 
         private function registerVehicleIconAtlases():void

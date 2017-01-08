@@ -8,7 +8,6 @@ package com.xvm.battle.fullStats
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
-    import flash.text.*;
     import net.wg.data.constants.*;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.events.*;
