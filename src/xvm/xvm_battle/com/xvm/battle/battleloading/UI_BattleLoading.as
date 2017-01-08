@@ -27,8 +27,6 @@ package com.xvm.battle.battleloading
             //Logger.add("UI_BattleLoading");
             super();
 
-            //this.xfw_tableCtrl = new BattleLoadingTableCtrlXvm(this.form.statsTable, this);
-
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
 
@@ -58,9 +56,9 @@ package com.xvm.battle.battleloading
             //Xvm.swfProfilerBegin("UI_BattleLoading.setup()");
             try
             {
-                deleteComponents();
-
                 cfg = form.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+
+                deleteComponents();
 
                 registerVehicleIconAtlases();
 
