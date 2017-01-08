@@ -47,6 +47,7 @@ package com.xvm.extraFields
                 var events:Array = field.cfg.updateEvent.split(",");
                 if (events.length)
                 {
+                    var py_events:Array = [];
                     for each (var event:String in events)
                     {
                         event = StringUtil.trim(event);
@@ -106,17 +107,21 @@ package com.xvm.extraFields
                                 //Logger.addObject(matches, 1, event);
                                 if (matches && matches.length > 1)
                                 {
-                                    var name:String = matches[1];
-                                    Xfw.addCommandListener(XvmCommands.AS_PY_EVENT, function(eventName:String):void
-                                    {
-                                        if (eventName == name)
-                                        {
-                                            field.updateOnEvent(new PlayerStateEvent(XvmCommands.AS_PY_EVENT));
-                                        }
-                                    });
+                                    py_events.push(matches[1]);
                                 }
                                 break;
                         }
+                    }
+
+                    if (py_events.length > 0)
+                    {
+                        Xfw.addCommandListener(XvmCommands.AS_PY_EVENT, function(eventName:String):void
+                        {
+                            if (py_events.indexOf(eventName) >= 0)
+                            {
+                                field.updateOnEvent(new PlayerStateEvent(XvmCommands.AS_PY_EVENT));
+                            }
+                        });
                     }
                 }
             }
