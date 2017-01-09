@@ -11,6 +11,8 @@ from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPan
 from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
 
 totalDamage = 0
+damage = 0
+old_totalDamage = 0
 totalAssist = 0
 totalBlocked = 0
 maxHealth = 0
@@ -42,9 +44,11 @@ ribbonTypes = {
 
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def _onTotalEfficiencyUpdated(self, diff):
-    global totalDamage, totalAssist, totalBlocked, countBlockedHits
+    global totalDamage, totalAssist, totalBlocked, countBlockedHits, old_totalDamage, damage
     if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
         totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
+        damage = totalDamage - old_totalDamage
+        old_totalDamage = totalDamage
     if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
         totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
     if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
@@ -106,9 +110,11 @@ def onEnterWorld(self, prereqs):
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection
-    global ribbonTypes, countBlockedHits, player, numberPutHits
+    global ribbonTypes, countBlockedHits, player, numberPutHits, old_totalDamage, damage
     vehiclesHealth = {}
     totalDamage = 0
+    damage = 0
+    old_totalDamage = 0
     totalAssist = 0
     totalBlocked = 0
     damageReceived = 0
@@ -230,3 +236,8 @@ def xvm_countBlockedHits():
 @xvm.export('xvm.numberPutHits', deterministic=False)
 def xvm_numberPutHits():
     return numberPutHits
+
+
+@xvm.export('xvm.dmg', deterministic=False)
+def xvm_dmg():
+    return damage
