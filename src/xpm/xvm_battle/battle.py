@@ -352,10 +352,11 @@ class Battle(object):
         #debug('battle: invalidateArenaInfo')
         if self.battle_page:
             if battle_loading.isBattleLoadingShowed():
-                battleLoading = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING)
-                if battleLoading:
-                    battle_loading._setBattleLoading(False)
-                    battleLoading.invalidateArenaInfo()
+                if 'battleLoading' in self.battle_page.as_getComponentsVisibilityS():
+                    battleLoading = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING)
+                    if battleLoading:
+                        battle_loading._setBattleLoading(False)
+                        battleLoading.invalidateArenaInfo()
             ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
             if ctrl:
                 ctrl._BattleStatisticsDataController__setPersonalStatus()

@@ -16,6 +16,7 @@ XFW_MOD_INFO = {
 # imports
 
 import battle
+import battleloading
 import fragCorrelationPanel
 import minimap
 import camera

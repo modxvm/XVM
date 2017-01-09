@@ -9,6 +9,8 @@ package com.xvm.battle.battleloading
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.*;
+    import net.wg.gui.battle.battleloading.renderers.*;
+    import net.wg.gui.battle.battleloading.vo.*;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.managers.impl.*;
@@ -22,6 +24,9 @@ package com.xvm.battle.battleloading
 
         private var _winChance:WinChances = null;
         private var _clock:Clock = null;
+
+        private var defaultVehicleFieldXPosition:Number = NaN;
+        private var defaultVehicleFieldWidth:Number = NaN;
 
         public function UI_BattleLoading()
         {
@@ -44,6 +49,13 @@ package com.xvm.battle.battleloading
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             deleteComponents();
             super.onDispose();
+        }
+
+        override protected function setVisualTipInfo(data:VisualTipInfoVO):void
+        {
+            //Logger.addObject(param1);
+            super.setVisualTipInfo(data);
+            initRenderers();
         }
 
         override public function setCompVisible(value:Boolean):void
@@ -134,6 +146,29 @@ package com.xvm.battle.battleloading
         {
             e.currentTarget.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler);
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_ATLAS_LOADED));
+        }
+
+        private function initRenderers():void
+        {
+            var renderer:BasePlayerItemRenderer;
+            for each(renderer in form.xfw_allyRenderers)
+            {
+                renderer.dispose();
+            }
+            form.xfw_allyRenderers.splice(0, form.xfw_allyRenderers.length);
+
+            for each(renderer in form.xfw_enemyRenderers)
+            {
+                renderer.dispose();
+            }
+            form.xfw_enemyRenderers.splice(0, form.xfw_enemyRenderers.length);
+
+            var cls:Class = form.formBackgroundTable.visible ? XvmTablePlayerItemRenderer : XvmTipPlayerItemRenderer;
+            for (var i:int = 0; i < 15; ++i)
+            {
+                form.xfw_allyRenderers.push(new cls(form.xfw_renderersContainer, i, false));
+                form.xfw_enemyRenderers.push(new cls(form.xfw_renderersContainer, i, true));
+            }
         }
     }
 }

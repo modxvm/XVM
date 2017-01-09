@@ -31,7 +31,7 @@ import xvm_main.python.config as config
 #####################################################################
 # handlers
 
-#@overrideMethod(BattleLoading, 'as_setTipTitleS')
+@overrideMethod(BattleLoading, 'as_setTipTitleS')
 def BattleLoading_as_setTipTitleS(base, self, title):
     title = cgi.escape('XVM v{}     {}'.format(config.get('__xvmVersion'), config.get('__xvmIntro')))
     stateInfo = config.get('__stateInfo')
@@ -42,8 +42,7 @@ def BattleLoading_as_setTipTitleS(base, self, title):
     title = '<p align="left"><font size="16">{}</font></p>'.format(title)
     return base(self, title)
 
-
-#@overrideMethod(BattleLoading, 'as_setTipS')
+@overrideMethod(BattleLoading, 'as_setTipS')
 def BattleLoading_as_setTipS(base, self, val):
     stateInfo = config.get('__stateInfo')
     if 'error' in stateInfo and stateInfo['error']:
@@ -51,7 +50,6 @@ def BattleLoading_as_setTipS(base, self, val):
     elif 'warning' in stateInfo and stateInfo['warning']:
         val = getTipText(stateInfo['warning'])
     return base(self, val)
-
 
 def getTipText(text, isError=False):
     text = cgi.escape(text)
