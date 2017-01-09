@@ -154,7 +154,7 @@ package com.xvm.vehiclemarkers.ui
                         BattleState.playerFrags += 1;
                     playerState.dispatchEvents();
                     invalidate(INVALIDATE_DATA);
-                    validateNow(); // reqiured to handle simultaneous shots
+                    validateNow(); // required to handle simultaneous shots
                 }
             }
             catch (ex:Error)
