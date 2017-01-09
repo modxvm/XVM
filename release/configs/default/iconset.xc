@@ -6,8 +6,8 @@
   "iconset": {
     // Path to the atlas with icons for the battle loading screen.
     // Путь к атласу с иконками для экрана загрузки боя.
-    "battleLoadingAlly": "battleAtlas",
-    "battleLoadingEnemy": "battleAtlas",
+    "battleLoadingLeftAtlas": "battleAtlas",
+    "battleLoadingRightAtlas": "battleAtlas",
     // Path to the atlas with icons for the players panels.
     // Путь к атласу с иконками для "ушей".
     "playersPanelLeftAtlas": "battleAtlas",

@@ -5,6 +5,7 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
 
     public dynamic class CBattleLoading extends Object implements ICloneable
     {
@@ -39,6 +40,38 @@ package com.xvm.types.cfg
         public function clone():*
         {
             throw new Error("clone() method is not implemented");
+        }
+
+        internal function applyGlobalBattleMacros():void
+        {
+            showBattleTier = Macros.FormatBooleanGlobal(showBattleTier, true);
+            removeSquadIcon = Macros.FormatBooleanGlobal(removeSquadIcon, false);
+            vehicleIconAlpha = Macros.FormatNumberGlobal(vehicleIconAlpha, 100);
+            removeVehicleLevel = Macros.FormatBooleanGlobal(removeVehicleLevel, false);
+            removeVehicleTypeIcon = Macros.FormatBooleanGlobal(removeVehicleTypeIcon, false);
+            nameFieldShowBorder = Macros.FormatBooleanGlobal(nameFieldShowBorder, false);
+            vehicleFieldShowBorder = Macros.FormatBooleanGlobal(vehicleFieldShowBorder, false);
+            squadIconOffsetXLeft = Macros.FormatNumberGlobal(squadIconOffsetXLeft, 0);
+            squadIconOffsetXRight = Macros.FormatNumberGlobal(squadIconOffsetXRight, 0);
+            nameFieldOffsetXLeft = Macros.FormatNumberGlobal(nameFieldOffsetXLeft, 0);
+            nameFieldOffsetXRight = Macros.FormatNumberGlobal(nameFieldOffsetXRight, 0);
+            nameFieldWidthDeltaLeft = Macros.FormatNumberGlobal(nameFieldWidthDeltaLeft, 0);
+            nameFieldWidthDeltaRight = Macros.FormatNumberGlobal(nameFieldWidthDeltaRight, 0);
+            vehicleFieldOffsetXLeft = Macros.FormatNumberGlobal(vehicleFieldOffsetXLeft, 0);
+            vehicleFieldOffsetXRight = Macros.FormatNumberGlobal(vehicleFieldOffsetXRight, 0);
+            vehicleFieldWidthDeltaLeft = Macros.FormatNumberGlobal(vehicleFieldWidthDeltaLeft, 0);
+            vehicleFieldWidthDeltaRight = Macros.FormatNumberGlobal(vehicleFieldWidthDeltaRight, 0);
+            vehicleIconOffsetXLeft = Macros.FormatNumberGlobal(vehicleIconOffsetXLeft, 0);
+            vehicleIconOffsetXRight = Macros.FormatNumberGlobal(vehicleIconOffsetXRight, 0);
+            // do not process
+            //clockFormat
+            //darkenNotReadyIcon
+            //formatLeftNick
+            //formatLeftVehicle
+            //formatRightNick
+            //formatRightVehicle
+            //extraFieldsLeft
+            //extraFieldsRight
         }
     }
 }

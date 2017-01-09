@@ -1,4 +1,7 @@
 ﻿XVM-6.5.2-dev:
+  * renamed parameters in the "iconset" section and changed value from folder to atlas name:
+      "battleLoadingAlly" => "battleLoadingLeftAtlas"
+      "battleLoadingEnemy" => "battleLoadingRightAtlas"
 
 XVM-6.5.1.1:
   * re-release

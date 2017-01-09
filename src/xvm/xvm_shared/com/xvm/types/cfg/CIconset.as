@@ -8,8 +8,8 @@ package com.xvm.types.cfg
 
     public dynamic class CIconset extends Object implements ICloneable
     {
-        public var battleLoadingAlly:String;
-        public var battleLoadingEnemy:String;
+        public var battleLoadingLeftAtlas:String;
+        public var battleLoadingRightAtlas:String;
         public var playersPanelLeftAtlas:String;
         public var playersPanelRightAtlas:String;
         public var fullStatsLeftAtlas:String;

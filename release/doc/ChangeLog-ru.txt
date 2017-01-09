@@ -1,4 +1,7 @@
 XVM-6.5.2-dev:
+  * переименованы параметры в секции "iconset" и изменено значение с каталога на название атласа:
+      "battleLoadingAlly" => "battleLoadingLeftAtlas"
+      "battleLoadingEnemy" => "battleLoadingRightAtlas"
 
 XVM-6.5.1.1:
   * Исправлена ошибка, приводящая к неверному определению текущей версии XVM
