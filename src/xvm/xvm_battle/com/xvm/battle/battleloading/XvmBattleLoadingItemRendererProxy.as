@@ -185,7 +185,6 @@ package com.xvm.battle.battleloading
 
                 ui.vehicleIcon.graphics.clear();
                 App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(_model.vehicleIconName), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
-                ui.vehicleIcon.alpha = cfg.vehicleIconAlpha / 100.0;
 
                 var schemeName:String = PlayerStatusSchemeName.getSchemeNameForVehicle(_model.isCurrentPlayer, _model.isSquadPersonal(), _model.isTeamKiller(), !_model.isAlive(),
                     cfg.darkenNotReadyIcon && !_model.isReady());
@@ -200,6 +199,8 @@ package com.xvm.battle.battleloading
                 {
                     ui.vehicleLevelIcon.transform.colorTransform = scheme.colorTransform;
                 }
+                ui.vehicleIcon.alpha = cfg.vehicleIconAlpha / 100.0;
+                ui.vehicleLevelIcon.alpha = cfg.removeVehicleLevel ? 0 : cfg.vehicleIconAlpha / 100.0;
 
                 updateExtraFields();
             }
@@ -258,11 +259,6 @@ package com.xvm.battle.battleloading
             if (cfg.removeSquadIcon)
             {
                 ui.squad.alpha = 0;
-            }
-
-            if (cfg.removeVehicleLevel)
-            {
-                ui.vehicleLevelIcon.alpha = 0;
             }
 
             if (cfg.removeVehicleTypeIcon)

@@ -307,7 +307,7 @@ package com.xvm.extraFields
                     {
                         //Logger.add(_srcValue + " => " + value);
                         _srcValue = value;
-                        if (_srcValue != null && source != _srcValue)
+                        if (source != _srcValue)
                         {
                             //Logger.add("source: " + source + " => " + _srcValue);
                             source = _srcValue;

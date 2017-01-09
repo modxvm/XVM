@@ -167,6 +167,7 @@
     "__stub__": null
   },
   "battleLoading": {
+    //"clockFormat": "H:i",
     "showBattleTier": true,
     //"removeSquadIcon": true,
     //"vehicleIconAlpha": 30,
@@ -180,16 +181,24 @@
     //"nameFieldWidthDeltaLeft": 10,
     //"nameFieldOffsetXRight": "{{xvm-stat?-32|0}}",
     //"nameFieldWidthDeltaRight": 10,
-    //"vehicleFieldOffsetXLeft": 10,
-    //"vehicleFieldWidthDeltaLeft": 10,
-    //"vehicleFieldOffsetXRight": 10,
-    //"vehicleFieldWidthDeltaRight": 10,
-    //"vehicleIconOffsetXLeft": 4,
-    //"vehicleIconOffsetXRight": 4,
+    "vehicleFieldOffsetXLeft": 20,
+    //"vehicleFieldWidthDeltaLeft": 50,
+    "vehicleFieldOffsetXRight": 20,
+    //"vehicleFieldWidthDeltaRight": 50,
+    "vehicleIconOffsetXLeft": 4,
+    "vehicleIconOffsetXRight": 4,
+    //"darkenNotReadyIcon": false,
     "formatLeftNick":  ${"def.formatNick"},
     "formatRightNick":  ${"def.formatNick"},
     "formatLeftVehicle":  ${"def.formatVehicle"},
-    "formatRightVehicle": ${"def.formatVehicle"}
+    "formatRightVehicle": ${"def.formatVehicle"},
+    //"extraFieldsLeft": [
+    //  ${"templates.clanIcon"}
+    //],
+    //"extraFieldsRight": [
+    //  ${"templates.clanIcon"}
+    //],
+    "__stub__": {}
   },
   "battleLoadingTips": {
     "showBattleTier": true,
@@ -205,9 +214,9 @@
     "nameFieldWidthDeltaLeft": 40,
     "nameFieldOffsetXRight": -80,
     "nameFieldWidthDeltaRight": 40,
-    //"vehicleFieldOffsetXLeft": 10,
+    "vehicleFieldOffsetXLeft": 20,
     "vehicleFieldWidthDeltaLeft": 10,
-    //"vehicleFieldOffsetXRight": 10,
+    "vehicleFieldOffsetXRight": 20,
     "vehicleFieldWidthDeltaRight": 10
   },
   "statisticForm": {
@@ -305,8 +314,8 @@
     ]
   },
   "iconset": {
-    "battleLoadingAlly": "../../../../res/atlases/BattleAtlasLeft",
-    "battleLoadingEnemy": "../../../../res/atlases/BattleAtlasRight",
+    "battleLoadingLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
+    "battleLoadingRightAtlas": "../../../../res/atlases/BattleAtlasRight",
     "playersPanelLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
     "playersPanelRightAtlas": "../../../../res/atlases/BattleAtlasRight",
     "fullStatsLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
