@@ -20,6 +20,8 @@ damagesSquad = 0
 detection = 0
 countBlockedHits = 0
 vehCD = None
+player = None
+numberPutHits = 0
 
 ribbonTypes = {
     'armor': 0,
@@ -68,24 +70,29 @@ def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName =
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    global vehiclesHealth
+    global vehiclesHealth, numberPutHits, damageReceived
+    isUpdate = False
     if self.id in vehiclesHealth:
         damage = vehiclesHealth[self.id] - max(0, newHealth)
         vehiclesHealth[self.id] = newHealth
-        player = BigWorld.player()
         attacker = player.arena.vehicles.get(attackerID)
         if player.guiSessionProvider.getArenaDP().isSquadMan(vID=attackerID) and attacker['name'] != player.name:
             global damagesSquad
             damagesSquad += damage
-            as_event('ON_TOTAL_EFFICIENCY')
-    global damageReceived
+            isUpdate = True
     if self.isPlayerVehicle:
         damageReceived = maxHealth - max(0, newHealth)
+        isUpdate = True
+    if (attackerID == player.playerVehicleID) and (attackReasonID == 0):
+        numberPutHits += 1
+        isUpdate = True
+    if isUpdate:
         as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
+    global player
     player = BigWorld.player()
     if self.publicInfo['team'] != player.team:
         global vehiclesHealth
@@ -99,7 +106,7 @@ def onEnterWorld(self, prereqs):
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection
-    global ribbonTypes, countBlockedHits
+    global ribbonTypes, countBlockedHits, player, numberPutHits
     vehiclesHealth = {}
     totalDamage = 0
     totalAssist = 0
@@ -108,6 +115,8 @@ def destroyGUI(self):
     damagesSquad = 0
     detection = 0
     countBlockedHits = 0
+    player = None
+    numberPutHits = 0
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
@@ -216,3 +225,8 @@ def xvm_crits():
 @xvm.export('xvm.countBlockedHits', deterministic=False)
 def xvm_countBlockedHits():
     return countBlockedHits
+
+
+@xvm.export('xvm.numberPutHits', deterministic=False)
+def xvm_numberPutHits():
+    return numberPutHits
