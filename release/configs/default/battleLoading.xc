@@ -46,13 +46,13 @@
     "squadIconOffsetXRight": 0,
     // X offset for allies player names field
     // Смещение по оси X поля ника союзников
-    "nameFieldOffsetXLeft": -11,
+    "nameFieldOffsetXLeft": 0,
     // Width delta for allies player names field
     // Изменение ширины поля ника союзников
     "nameFieldWidthDeltaLeft": 0,
     // X offset for enemies player names field
     // Смещение по оси X поля ника противников
-    "nameFieldOffsetXRight": -14,
+    "nameFieldOffsetXRight": 0,
     // Width delta for enemies player names field
     // Изменение ширины поля ника противников
     "nameFieldWidthDeltaRight": 0,

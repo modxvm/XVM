@@ -46,13 +46,12 @@ package com.xvm.battle.battleloading
             proxy.draw();
         }
 
-        /*override public function setData(param1:Object):void
+        override public function setData(param1:Object):void
         {
-            var model:DAAPIVehicleInfoVO = DAAPIVehicleInfoVO(param1);
-            param1.squadIndex = 1;
-            param1.playerStatus |= PlayerStatus.IS_SQUAD_MAN;
+            //param1.squadIndex = 1; param1.playerStatus |= PlayerStatus.IS_SQUAD_MAN; // DEBUG
             super.setData(param1);
-        }*/
+            proxy.setData(DAAPIVehicleInfoVO(param1));
+        }
 
         // IXvmBattleLoadingItemRenderer
 

@@ -496,7 +496,7 @@ package com.xvm.battle.fullStats
                 else
                 {
                     _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
-                    _vehicleLevelIcon.x = 46 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                    _vehicleLevelIcon.x = 39 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
                 }
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }

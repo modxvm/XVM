@@ -24,7 +24,9 @@ package com.xvm.battle.battleloading
     import net.wg.data.VO.daapi.*;
     import net.wg.gui.battle.battleloading.*;
     import net.wg.gui.battle.battleloading.renderers.*;
+    import net.wg.gui.battle.views.stats.constants.*;
     import net.wg.gui.events.*;
+    import net.wg.infrastructure.interfaces.*;
     import scaleform.gfx.*;
 
     public class XvmBattleLoadingItemRendererProxy implements IExtraFieldGroupHolder
@@ -87,8 +89,8 @@ package com.xvm.battle.battleloading
                 if (_isLeftPanel)
                 {
                     DEFAULT_SQUAD_X = 65;
-                    DEFAULT_NAME_FIELD_X = 97;
-                    DEFAULT_VEHICLE_FIELD_X = 366;
+                    DEFAULT_NAME_FIELD_X = 86;
+                    DEFAULT_VEHICLE_FIELD_X = 120;
                     DEFAULT_VEHICLE_ICON_X = 402;
                     DEFAULT_VEHICLE_LEVEL_X = 421;
                     DEFAULT_VEHICLE_TYPE_ICON_X = 371;
@@ -96,8 +98,8 @@ package com.xvm.battle.battleloading
                 else
                 {
                     DEFAULT_SQUAD_X = 934;
-                    DEFAULT_NAME_FIELD_X = 666;
-                    DEFAULT_VEHICLE_FIELD_X = 543;
+                    DEFAULT_NAME_FIELD_X = 680;
+                    DEFAULT_VEHICLE_FIELD_X = 644;
                     DEFAULT_VEHICLE_ICON_X = 612;
                     DEFAULT_VEHICLE_LEVEL_X = 592;
                     DEFAULT_VEHICLE_TYPE_ICON_X = 618;
@@ -151,6 +153,11 @@ package com.xvm.battle.battleloading
             _topHolder = null;
         }
 
+        public function setData(model:DAAPIVehicleInfoVO):void
+        {
+            _model = model;
+        }
+
         public function draw():void
         {
             try
@@ -161,10 +168,6 @@ package com.xvm.battle.battleloading
                     return;
 
                 currentPlayerState = BattleState.get(_model.vehicleID);
-
-                //var isIconHighlighted:Boolean = App.colorSchemeMgr && (!cfg.darkenNotReadyIcon || ui.enabled) && currentOptions.isAlive;
-                //ui.vehicleIcon.transform.colorTransform = App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
-                ui.vehicleIcon.alpha = cfg.vehicleIconAlpha / 100.0;
 
                 var textColor:String = XfwUtils.toHtmlColor(App.colorSchemeMgr.getScheme(getSchemeNameForPlayer(currentPlayerState)).rgb);
                 ui.nameField.visible = true;
@@ -179,8 +182,24 @@ package com.xvm.battle.battleloading
                 {
                     atlasName = AtlasConstants.BATTLE_ATLAS;
                 }
+
                 ui.vehicleIcon.graphics.clear();
                 App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(_model.vehicleIconName), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+                ui.vehicleIcon.alpha = cfg.vehicleIconAlpha / 100.0;
+
+                var schemeName:String = PlayerStatusSchemeName.getSchemeNameForVehicle(_model.isCurrentPlayer, _model.isSquadPersonal(), _model.isTeamKiller(), !_model.isAlive(),
+                    cfg.darkenNotReadyIcon && !_model.isReady());
+                var scheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
+                if (scheme)
+                {
+                    ui.vehicleIcon.transform.colorTransform = scheme.colorTransform;
+                }
+                schemeName = PlayerStatusSchemeName.getSchemeForVehicleLevel(!_model.isAlive());
+                scheme = App.colorSchemeMgr.getScheme(schemeName);
+                if (scheme)
+                {
+                    ui.vehicleLevelIcon.transform.colorTransform = scheme.colorTransform;
+                }
 
                 updateExtraFields();
             }
@@ -219,18 +238,13 @@ package com.xvm.battle.battleloading
 
         public function getSchemeNameForVehicle(options:IVOMacrosOptions):String
         {
-            var isAvailable:Boolean = true;
-            if (!_model.isNotAvailable())
-            {
-                isAvailable = _model.isAlive() && _model.isReady();
-            }
-            return BattleLoadingHelper.instance.getColorSchemeName(_model, isAvailable);
+            return PlayerStatusSchemeName.getSchemeNameForVehicle(_model.isCurrentPlayer, _model.isSquadPersonal(), _model.isTeamKiller(),!_model.isAlive(), !_model.isReady());
         }
 
         // TODO
         public function getSchemeNameForPlayer(options:IVOMacrosOptions):String
         {
-            return null;
+            return PlayerStatusSchemeName.getSchemeNameForPlayer(_model.isCurrentPlayer, _model.isSquadPersonal(), _model.isTeamKiller(), !_model.isAlive(), !_model.isReady());
         }
 
         // XVM events handlers
@@ -415,7 +429,7 @@ package com.xvm.battle.battleloading
                 else
                 {
                     ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
-                    ui.vehicleLevelIcon.x = 46 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                    ui.vehicleLevelIcon.x = 39 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
                 }
                 ui.vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
