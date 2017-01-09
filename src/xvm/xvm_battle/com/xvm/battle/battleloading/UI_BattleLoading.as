@@ -21,11 +21,14 @@ package com.xvm.battle.battleloading
         private var cfg:CBattleLoading;
 
         private var _winChance:WinChances = null;
+        private var _clock:Clock = null;
 
         public function UI_BattleLoading()
         {
             //Logger.add("UI_BattleLoading");
             super();
+
+            logBriefConfigurationInfo();
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
@@ -51,6 +54,20 @@ package com.xvm.battle.battleloading
 
         // PRIVATE
 
+        private function logBriefConfigurationInfo():void
+        {
+            Logger.add(
+                "[BattleLoading]\n" +
+                "                               XVM_VERSION=" + Config.config.__xvmVersion + " #" + Config.config.__xvmRevision + " for WoT " + Config.config.__wotVersion +"\n" +
+                "                               gameRegion=" + Config.config.region + "\n" +
+                "                               configVersion=" + Config.config.configVersion + "\n" +
+                "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +
+                "                               markers.enabled=" + Config.config.markers.enabled + "\n" +
+                "                               servicesActive=" + Config.networkServicesSettings.servicesActive + "\n" +
+                "                               xmqp=" + Config.networkServicesSettings.xmqp + "\n" +
+                "                               statBattle=" + Config.networkServicesSettings.statBattle);
+        }
+
         private function setup(e:Event = null):Object
         {
             //Xvm.swfProfilerBegin("UI_BattleLoading.setup()");
@@ -67,6 +84,7 @@ package com.xvm.battle.battleloading
                 {
                     _winChance = new WinChances(this.form); // Winning chance info above players list. // TODO: replace with ExtraField
                 }
+                _clock = new Clock(this.form); // Realworld time at right side of TipField.
             }
             catch (ex:Error)
             {
@@ -82,6 +100,11 @@ package com.xvm.battle.battleloading
             {
                 _winChance.dispose();
                 _winChance = null;
+            }
+            if (_clock != null)
+            {
+                _clock.dispose();
+                _clock = null;
             }
         }
 

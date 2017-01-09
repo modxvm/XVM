@@ -5,9 +5,7 @@
 package com.xvm.battle.battleloading
 {
     import com.xfw.*;
-    import com.xfw.events.*;
     import com.xvm.*;
-    import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import flash.text.*;
     import net.wg.gui.battle.battleloading.*;
@@ -51,6 +49,7 @@ package com.xvm.battle.battleloading
             form.removeChild(winChanceTF);
             winChanceTF = null;
         }
+
         // PRIVATE
 
         private function updateChanceText():void
