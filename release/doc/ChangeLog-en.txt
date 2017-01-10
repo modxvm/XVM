@@ -1,4 +1,5 @@
 ﻿XVM-6.5.2-dev:
+  * adaptation of the battle loading screen
   * renamed parameters in the "iconset" section and changed value from folder to atlas name:
       "battleLoadingAlly" => "battleLoadingLeftAtlas"
       "battleLoadingEnemy" => "battleLoadingRightAtlas"
