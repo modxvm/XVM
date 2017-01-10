@@ -36,26 +36,8 @@ package com.xvm.battle.battleloading
 
         private static const INVALIDATE_PLAYER_STATE:uint = 1 << 15;
 
-        private static const NAME_FIELD_WIDTH_TABLE:int = 250;
-        private static const NAME_FIELD_WIDTH_TIPS:int = 100;
-        private static const VEHICLE_FIELD_WIDTH_TABLE:int = 250;
-        private static const VEHICLE_FIELD_WIDTH_TIPS:int = 100;
-        private static const VEHICLE_TYPE_ICON_WIDTH:Number = 25;
-
         private static const FIELD_HEIGHT:int = 26;
         private static const ICONS_AREA_WIDTH:int = 80;
-        private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
-        private static const EXTRA_FIELDS_X_LEFT:int = 10;
-        private static const EXTRA_FIELDS_X_RIGHT:int = 1011;
-
-        private var DEFAULT_SQUAD_X:Number;
-        private var DEFAULT_NAME_FIELD_X:Number;
-        private var DEFAULT_NAME_FIELD_WIDTH:Number;
-        private var DEFAULT_VEHICLE_FIELD_X:Number;
-        private var DEFAULT_VEHICLE_FIELD_WIDTH:Number;
-        private var DEFAULT_VEHICLE_ICON_X:Number;
-        private var DEFAULT_VEHICLE_LEVEL_X:Number;
-        private var DEFAULT_VEHICLE_TYPE_ICON_X:Number;
 
         private var ui:IXvmBattleLoadingItemRenderer;
         private var uiType:String;
@@ -83,27 +65,6 @@ package com.xvm.battle.battleloading
                 this.ui = ui;
                 this.uiType = uiType;
                 this._isLeftPanel = isLeftPanel;
-
-                DEFAULT_NAME_FIELD_WIDTH = (uiType == UI_TYPE_TABLE) ? NAME_FIELD_WIDTH_TABLE : NAME_FIELD_WIDTH_TIPS;
-                DEFAULT_VEHICLE_FIELD_WIDTH = (uiType == UI_TYPE_TABLE) ? VEHICLE_FIELD_WIDTH_TABLE : VEHICLE_FIELD_WIDTH_TIPS;
-                if (_isLeftPanel)
-                {
-                    DEFAULT_SQUAD_X = 65;
-                    DEFAULT_NAME_FIELD_X = 86;
-                    DEFAULT_VEHICLE_FIELD_X = 120;
-                    DEFAULT_VEHICLE_ICON_X = 402;
-                    DEFAULT_VEHICLE_LEVEL_X = 421;
-                    DEFAULT_VEHICLE_TYPE_ICON_X = 371;
-                }
-                else
-                {
-                    DEFAULT_SQUAD_X = 934;
-                    DEFAULT_NAME_FIELD_X = 680;
-                    DEFAULT_VEHICLE_FIELD_X = 644;
-                    DEFAULT_VEHICLE_ICON_X = 612;
-                    DEFAULT_VEHICLE_LEVEL_X = 592;
-                    DEFAULT_VEHICLE_TYPE_ICON_X = 618;
-                }
 
                 // align fields
 
@@ -326,7 +287,7 @@ package com.xvm.battle.battleloading
 
         private function getNameFieldWidth():int
         {
-            var w:Number =  (uiType == UI_TYPE_TABLE) ? NAME_FIELD_WIDTH_TABLE : NAME_FIELD_WIDTH_TIPS;
+            var w:Number = ui.DEFAULTS.NAME_FIELD_WIDTH;
             if (isLeftPanel)
             {
                 w += cfg.nameFieldWidthDeltaLeft;
@@ -340,7 +301,7 @@ package com.xvm.battle.battleloading
 
         private function getVehicleFieldWidth():int
         {
-            var w:Number = (uiType == UI_TYPE_TABLE) ? VEHICLE_FIELD_WIDTH_TABLE : VEHICLE_FIELD_WIDTH_TIPS;
+            var w:Number = ui.DEFAULTS.VEHICLE_FIELD_WIDTH;
             if (isLeftPanel)
             {
                 w += cfg.vehicleFieldWidthDeltaLeft;
@@ -364,11 +325,11 @@ package com.xvm.battle.battleloading
         {
             if (_isLeftPanel)
             {
-                ui.squad.x = DEFAULT_SQUAD_X + cfg.squadIconOffsetXLeft;
+                ui.squad.x = ui.DEFAULTS.SQUAD_X + cfg.squadIconOffsetXLeft;
             }
             else
             {
-                ui.squad.x = DEFAULT_SQUAD_X - cfg.squadIconOffsetXRight;
+                ui.squad.x = ui.DEFAULTS.SQUAD_X - cfg.squadIconOffsetXRight;
             }
         }
 
@@ -377,11 +338,11 @@ package com.xvm.battle.battleloading
             ui.nameField.width = getNameFieldWidth();
             if (_isLeftPanel)
             {
-                ui.nameField.x = DEFAULT_NAME_FIELD_X + cfg.nameFieldOffsetXLeft;
+                ui.nameField.x = ui.DEFAULTS.NAME_FIELD_X + cfg.nameFieldOffsetXLeft;
             }
             else
             {
-                ui.nameField.x = DEFAULT_NAME_FIELD_X - cfg.nameFieldOffsetXRight + (DEFAULT_NAME_FIELD_WIDTH - ui.nameField.width);
+                ui.nameField.x = ui.DEFAULTS.NAME_FIELD_X - cfg.nameFieldOffsetXRight + (ui.DEFAULTS.NAME_FIELD_WIDTH - ui.nameField.width);
             }
         }
 
@@ -390,7 +351,7 @@ package com.xvm.battle.battleloading
             ui.vehicleField.width = getVehicleFieldWidth();
             if (_isLeftPanel)
             {
-                ui.vehicleField.x = DEFAULT_VEHICLE_FIELD_X + cfg.vehicleFieldOffsetXLeft + (DEFAULT_VEHICLE_FIELD_WIDTH - ui.vehicleField.width);
+                ui.vehicleField.x = ui.DEFAULTS.VEHICLE_FIELD_X + cfg.vehicleFieldOffsetXLeft + (ui.DEFAULTS.VEHICLE_FIELD_WIDTH - ui.vehicleField.width);
                 if (_model && _model.isIGR)
                 {
                     var bounds:Rectangle = ui.vehicleField.getCharBoundaries(0);
@@ -399,7 +360,7 @@ package com.xvm.battle.battleloading
             }
             else
             {
-                ui.vehicleField.x = DEFAULT_VEHICLE_FIELD_X - cfg.vehicleFieldOffsetXRight;
+                ui.vehicleField.x = ui.DEFAULTS.VEHICLE_FIELD_X - cfg.vehicleFieldOffsetXRight;
                 if (_model && _model.isIGR)
                 {
                     ui.icoIGR.x = ui.vehicleField.x - ui.icoIGR.width >> 0;
@@ -411,23 +372,23 @@ package com.xvm.battle.battleloading
         {
             if (_isLeftPanel)
             {
-                ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
-                ui.vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
-                ui.vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                ui.vehicleIcon.x = ui.DEFAULTS.VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                ui.vehicleLevelIcon.x = ui.DEFAULTS.VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
+                ui.vehicleTypeIcon.x = ui.DEFAULTS.VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
             }
             else
             {
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
-                    ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
-                    ui.vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight;
+                    ui.vehicleIcon.x = ui.DEFAULTS.VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
+                    ui.vehicleLevelIcon.x = ui.DEFAULTS.VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight;
                 }
                 else
                 {
-                    ui.vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
-                    ui.vehicleLevelIcon.x = 39 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                    ui.vehicleIcon.x = ui.DEFAULTS.VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                    ui.vehicleLevelIcon.x = 39 + ui.DEFAULTS.VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
                 }
-                ui.vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
+                ui.vehicleTypeIcon.x = ui.DEFAULTS.VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
             ui.vehicleLevelIcon.isCetralize = true;
         }
@@ -456,16 +417,14 @@ package com.xvm.battle.battleloading
         {
             if (extraFields)
             {
-                var offsetX:Number;
+                var offsetX:int = ui.DEFAULTS.EXTRA_FIELDS_X;
                 var bindToIconOffset:Number;
                 if (_isLeftPanel)
                 {
-                    offsetX = EXTRA_FIELDS_X_LEFT;
                     bindToIconOffset = ui.vehicleIcon.x - offsetX;
                 }
                 else
                 {
-                    offsetX = EXTRA_FIELDS_X_RIGHT;
                     bindToIconOffset = ui.vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
                 }
                 extraFields.visible = true;

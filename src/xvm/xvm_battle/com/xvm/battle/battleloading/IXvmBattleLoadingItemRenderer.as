@@ -11,6 +11,8 @@ package com.xvm.battle.battleloading
 
     public interface IXvmBattleLoadingItemRenderer
     {
+        function get DEFAULTS():XvmItemRendererDefaults;
+
         function get squad():BattleAtlasSprite;
         function get nameField():TextField;
         function get vehicleField():TextField;

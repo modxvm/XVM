@@ -16,12 +16,38 @@ package com.xvm.battle.battleloading
 
     public class XvmTablePlayerItemRenderer extends TablePlayerItemRenderer implements IXvmBattleLoadingItemRenderer
     {
-        private var container:RendererContainer = null;
+        private const _DEFAULTS_LEFT:XvmItemRendererDefaults = ObjectConverter.convertData({
+            NAME_FIELD_WIDTH: 250,
+            VEHICLE_FIELD_WIDTH: 250,
+            SQUAD_X: 65,
+            NAME_FIELD_X: 86,
+            VEHICLE_FIELD_X: 120,
+            VEHICLE_ICON_X: 402,
+            VEHICLE_LEVEL_X: 421,
+            VEHICLE_TYPE_ICON_X: 371,
+            EXTRA_FIELDS_X: 10
+        }, XvmItemRendererDefaults);
+
+        private const _DEFAULTS_RIGHT:XvmItemRendererDefaults = ObjectConverter.convertData({
+            NAME_FIELD_WIDTH: 250,
+            VEHICLE_FIELD_WIDTH: 250,
+            SQUAD_X: 934,
+            NAME_FIELD_X: 680,
+            VEHICLE_FIELD_X: 644,
+            VEHICLE_ICON_X: 612,
+            VEHICLE_LEVEL_X: 592,
+            VEHICLE_TYPE_ICON_X: 618,
+            EXTRA_FIELDS_X: 1011
+        }, XvmItemRendererDefaults);
+
+        private var container:RendererContainer;
+        private var isEnemy:Boolean;
         private var proxy:XvmBattleLoadingItemRendererProxy;
 
         public function XvmTablePlayerItemRenderer(container:RendererContainer, position:int, isEnemy:Boolean)
         {
             this.container = container;
+            this.isEnemy = isEnemy;
 
             //Logger.add("XvmTablePlayerItemRenderer");
             var vehicleField:TextField = container.vehicleFieldsAlly[position];
@@ -54,6 +80,11 @@ package com.xvm.battle.battleloading
         }
 
         // IXvmBattleLoadingItemRenderer
+
+        public function get DEFAULTS():XvmItemRendererDefaults
+        {
+            return isEnemy ? _DEFAULTS_RIGHT : _DEFAULTS_LEFT;
+        }
 
         public function get squad():BattleAtlasSprite
         {

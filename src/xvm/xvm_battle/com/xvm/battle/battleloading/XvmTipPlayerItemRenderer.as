@@ -8,6 +8,7 @@ package com.xvm.battle.battleloading
     import com.xvm.*;
     import flash.display.*;
     import flash.text.*;
+    import net.wg.data.constants.*;
     import net.wg.data.VO.daapi.*;
     import net.wg.gui.battle.battleloading.renderers.*;
     import net.wg.gui.battle.components.*;
@@ -15,12 +16,38 @@ package com.xvm.battle.battleloading
 
     public class XvmTipPlayerItemRenderer extends TipPlayerItemRenderer implements IXvmBattleLoadingItemRenderer
     {
-        private var container:RendererContainer = null;
+        private const _DEFAULTS_LEFT:XvmItemRendererDefaults = ObjectConverter.convertData({
+            NAME_FIELD_WIDTH: 100,
+            VEHICLE_FIELD_WIDTH: 100,
+            SQUAD_X: 8,
+            NAME_FIELD_X: 29,
+            VEHICLE_FIELD_X: 84,
+            VEHICLE_ICON_X: 204,
+            VEHICLE_LEVEL_X: 223,
+            VEHICLE_TYPE_ICON_X: 183,
+            EXTRA_FIELDS_X: 0
+        }, XvmItemRendererDefaults);
+
+        private const _DEFAULTS_RIGHT:XvmItemRendererDefaults = ObjectConverter.convertData({
+            NAME_FIELD_WIDTH: 100,
+            VEHICLE_FIELD_WIDTH: 100,
+            SQUAD_X: 992,
+            NAME_FIELD_X: 888,
+            VEHICLE_FIELD_X: 831,
+            VEHICLE_ICON_X: 815,
+            VEHICLE_LEVEL_X: 797,
+            VEHICLE_TYPE_ICON_X: 811,
+            EXTRA_FIELDS_X: 1011
+        }, XvmItemRendererDefaults);
+
+        private var container:RendererContainer;
+        private var isEnemy:Boolean;
         private var proxy:XvmBattleLoadingItemRendererProxy;
 
         public function XvmTipPlayerItemRenderer(container:RendererContainer, position:int, isEnemy:Boolean)
         {
             this.container = container;
+            this.isEnemy = isEnemy;
 
             //Logger.add("XvmTipPlayerItemRenderer");
             var vehicleField:TextField = container.vehicleFieldsAlly[position];
@@ -53,6 +80,11 @@ package com.xvm.battle.battleloading
         }
 
         // IXvmBattleLoadingItemRenderer
+
+        public function get DEFAULTS():XvmItemRendererDefaults
+        {
+            return isEnemy ? _DEFAULTS_RIGHT : _DEFAULTS_LEFT;
+        }
 
         public function get squad():BattleAtlasSprite
         {

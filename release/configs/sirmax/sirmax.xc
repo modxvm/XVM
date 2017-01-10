@@ -4,7 +4,7 @@
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'><img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
+    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'><img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13' vspace='-2'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
 
     "pingServers": {
@@ -201,6 +201,7 @@
     "__stub__": {}
   },
   "battleLoadingTips": {
+    //"clockFormat": "H:i",
     "showBattleTier": true,
     //"removeSquadIcon": true,
     //"vehicleIconAlpha": 30,
@@ -208,16 +209,30 @@
     "removeVehicleTypeIcon": true,
     //"nameFieldShowBorder": true,
     //"vehicleFieldShowBorder": true,
-    "squadIconOffsetXLeft": -80,
-    "squadIconOffsetXRight": -80,
-    "nameFieldOffsetXLeft": -80,
-    "nameFieldWidthDeltaLeft": 40,
-    "nameFieldOffsetXRight": -80,
-    "nameFieldWidthDeltaRight": 40,
-    "vehicleFieldOffsetXLeft": 20,
-    "vehicleFieldWidthDeltaLeft": 10,
-    "vehicleFieldOffsetXRight": 20,
-    "vehicleFieldWidthDeltaRight": 10
+    "squadIconOffsetXLeft": -100,
+    "squadIconOffsetXRight": -100,
+    "nameFieldOffsetXLeft": -100,
+    "nameFieldWidthDeltaLeft": 70,
+    "nameFieldOffsetXRight": -100,
+    "nameFieldWidthDeltaRight": 70,
+    "vehicleFieldOffsetXLeft": 24,
+    "vehicleFieldWidthDeltaLeft": 50,
+    "vehicleFieldOffsetXRight": 24,
+    "vehicleFieldWidthDeltaRight": 50,
+    "vehicleIconOffsetXLeft": 4,
+    "vehicleIconOffsetXRight": 4,
+    //"darkenNotReadyIcon": false,
+    //"formatLeftNick":  ${"def.formatNick"},
+    //"formatRightNick":  ${"def.formatNick"},
+    //"formatLeftVehicle":  ${"def.formatVehicle"},
+    //"formatRightVehicle": ${"def.formatVehicle"},
+    //"extraFieldsLeft": [
+    //  ${"templates.clanIcon"}
+    //],
+    //"extraFieldsRight": [
+    //  ${"templates.clanIcon"}
+    //],
+    "__stub__": {}
   },
   "statisticForm": {
     "showBattleTier": true,
