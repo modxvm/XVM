@@ -1,4 +1,8 @@
-﻿XVM-6.5.2:
+﻿XVM-6.5.2-CIS:
+  * ONLY FOR CIS(RU) CLUSTER
+  * adaptation to WoT 0.9.17.0.2
+
+XVM-6.5.2:
   * adaptation of the battle loading screen
   * renamed parameters in the "iconset" section and changed value from folder to atlas name:
       "battleLoadingAlly" => "battleLoadingLeftAtlas"
