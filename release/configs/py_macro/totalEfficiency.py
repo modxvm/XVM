@@ -24,7 +24,6 @@ countBlockedHits = 0
 vehCD = None
 player = None
 numberPutHits = 0
-isAlive = False
 
 ribbonTypes = {
     'armor': 0,
@@ -46,54 +45,59 @@ ribbonTypes = {
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def _onTotalEfficiencyUpdated(self, diff):
     global totalDamage, totalAssist, totalBlocked, countBlockedHits, old_totalDamage, damage
-    if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
-        totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
-        damage = totalDamage - old_totalDamage
-        old_totalDamage = totalDamage
-    if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
-        totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
-    if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
-        totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
-        if totalBlocked == 0:
-            countBlockedHits = 0
-        else:
-            countBlockedHits += 1
-    as_event('ON_TOTAL_EFFICIENCY')
+    if player is not None:
+        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+            if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
+                totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
+                damage = totalDamage - old_totalDamage
+                old_totalDamage = totalDamage
+            if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
+                totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
+            if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
+                totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
+                if totalBlocked == 0:
+                    countBlockedHits = 0
+                else:
+                    countBlockedHits += 1
+            as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__addBattleEfficiencyEvent')
 def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName = '', vehType = '', rightFieldStr = ''):
     global ribbonTypes
-    if ribbonType in ['assistTrack']:
-        ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
-    if ribbonType in ['assistSpot']:
-        ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
-    if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
-        ribbonTypes[ribbonType] += 1
-    as_event('ON_TOTAL_EFFICIENCY')
+    if player is not None:
+        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+            if ribbonType in ['assistTrack']:
+                ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
+            if ribbonType in ['assistSpot']:
+                ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
+            if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
+                ribbonTypes[ribbonType] += 1
+            as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    global vehiclesHealth, numberPutHits, damageReceived, isAlive
-    isUpdate = False
-    if self.id in vehiclesHealth:
-        damage = vehiclesHealth[self.id] - max(0, newHealth)
-        vehiclesHealth[self.id] = newHealth
-        attacker = player.arena.vehicles.get(attackerID)
-        if player.guiSessionProvider.getArenaDP().isSquadMan(vID=attackerID) and attacker['name'] != player.name:
-            global damagesSquad
-            damagesSquad += damage
-            isUpdate = True
-    if self.isPlayerVehicle:
-        damageReceived = maxHealth - max(0, newHealth)
-        isAlive = self.isAlive
-        isUpdate = True
-    if (attackerID == player.playerVehicleID) and (attackReasonID == 0):
-        numberPutHits += 1
-        isUpdate = True
-    if isUpdate:
-        as_event('ON_TOTAL_EFFICIENCY')
+    global vehiclesHealth, numberPutHits, damageReceived
+    if player is not None:
+        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+            isUpdate = False
+            if self.id in vehiclesHealth:
+                damage = vehiclesHealth[self.id] - max(0, newHealth)
+                vehiclesHealth[self.id] = newHealth
+                attacker = player.arena.vehicles.get(attackerID)
+                if player.guiSessionProvider.getArenaDP().isSquadMan(vID=attackerID) and attacker['name'] != player.name:
+                    global damagesSquad
+                    damagesSquad += damage
+                    isUpdate = True
+            if self.isPlayerVehicle:
+                damageReceived = maxHealth - max(0, newHealth)
+                isUpdate = True
+            if (attackerID == player.playerVehicleID) and (attackReasonID == 0):
+                numberPutHits += 1
+                isUpdate = True
+            if isUpdate:
+                as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
@@ -112,7 +116,7 @@ def onEnterWorld(self, prereqs):
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection
-    global ribbonTypes, countBlockedHits, player, numberPutHits, old_totalDamage, damage, isAlive
+    global ribbonTypes, countBlockedHits, player, numberPutHits, old_totalDamage, damage
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -125,7 +129,6 @@ def destroyGUI(self):
     countBlockedHits = 0
     player = None
     numberPutHits = 0
-    isAlive = False
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
@@ -153,94 +156,94 @@ def xvm_totalDamageColor():
 
 @xvm.export('xvm.totalDamage', deterministic=False)
 def xvm_totalDamage():
-    return totalDamage if isAlive else 0
+    return totalDamage
 
 
 @xvm.export('xvm.totalAssist', deterministic=False)
 def xvm_totalAssist():
-    return totalAssist if isAlive else 0
+    return totalAssist
 
 
 @xvm.export('xvm.totalBlocked', deterministic=False)
 def xvm_totalBlocked():
-    return totalBlocked if isAlive else 0
+    return totalBlocked
 
 
 @xvm.export('xvm.damageReceived', deterministic=False)
 def xvm_damageReceived():
-    return damageReceived if isAlive else 0
+    return damageReceived
 
 
 @xvm.export('xvm.totalDamagesBlocked', deterministic=False)
 def xvm_totalDamagesBlocked():
-    return (totalDamage + totalBlocked) if isAlive else 0
+    return totalDamage + totalBlocked
 
 
 @xvm.export('xvm.totalDamagesAssist', deterministic=False)
 def xvm_totalDamagesAssist():
-    return (totalDamage + totalAssist) if isAlive else 0
+    return totalDamage + totalAssist
 
 
 @xvm.export('xvm.totalDamagesBlockedAssist', deterministic=False)
 def xvm_totalDamagesBlockedAssist():
-    return (totalDamage + totalAssist + totalBlocked) if isAlive else 0
+    return totalDamage + totalAssist + totalBlocked
 
 
 @xvm.export('xvm.totalDamagesBlockedReceived', deterministic=False)
 def xvm_totalDamagesBlockedReceived():
-    return (totalDamage + totalBlocked + damageReceived) if isAlive else 0
+    return totalDamage + totalBlocked + damageReceived
 
 
 @xvm.export('xvm.totalBlockedReceived', deterministic=False)
 def xvm_totalBlockedReceived():
-    return (totalBlocked + damageReceived) if isAlive else 0
+    return totalBlocked + damageReceived
 
 
 @xvm.export('xvm.totalDamagesSquad', deterministic=False)
 def xvm_totalDamagesSquad():
-    return (damagesSquad + totalDamage) if isAlive else 0
+    return damagesSquad + totalDamage
 
 
 @xvm.export('xvm.damagesSquad', deterministic=False)
 def xvm_damagesSquad():
-    return damagesSquad if isAlive else 0
+    return damagesSquad
 
 
 @xvm.export('xvm.detection', deterministic=False)
 def xvm_detection():
-    return ribbonTypes['spotted'] if isAlive else 0
+    return ribbonTypes['spotted']
 
 
 @xvm.export('xvm.frags', deterministic=False)
 def xvm_frags():
-    return ribbonTypes['kill'] if isAlive else 0
+    return ribbonTypes['kill']
 
 
 @xvm.export('xvm.assistTrack', deterministic=False)
 def xvm_assistTrack():
-    return ribbonTypes['assistTrack'] if isAlive else 0
+    return ribbonTypes['assistTrack']
 
 
 @xvm.export('xvm.assistSpot', deterministic=False)
 def xvm_assistSpot():
-    return ribbonTypes['assistSpot'] if isAlive else 0
+    return ribbonTypes['assistSpot']
 
 
 @xvm.export('xvm.crits', deterministic=False)
 def xvm_crits():
-    return ribbonTypes['crits'] if isAlive else 0
+    return ribbonTypes['crits']
 
 
 @xvm.export('xvm.countBlockedHits', deterministic=False)
 def xvm_countBlockedHits():
-    return countBlockedHits if isAlive else 0
+    return countBlockedHits
 
 
 @xvm.export('xvm.numberPutHits', deterministic=False)
 def xvm_numberPutHits():
-    return numberPutHits if isAlive else 0
+    return numberPutHits
 
 
 @xvm.export('xvm.dmg', deterministic=False)
 def xvm_dmg():
-    return damage if isAlive else 0
+    return damage
