@@ -62,7 +62,7 @@
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "0.9.17.0.1",
+    "gameVersion": "0.9.17.0.2",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
