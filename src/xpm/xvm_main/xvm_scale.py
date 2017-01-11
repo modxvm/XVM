@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2016 """
+""" XVM (c) www.modxvm.com 2013-2017 """
 """
  XVM Scale for ratings
  http://www.koreanrandom.com/forum/topic/2625-/
