@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2016 """
+""" XVM (c) www.modxvm.com 2013-2017 """
 """
 @author Omegaice
 @author Maxim Schedriviy <max(at)modxvm.com>

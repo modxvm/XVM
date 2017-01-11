@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2016 """
+""" XVM (c) www.modxvm.com 2013-2017 """
 
 from CurrentVehicle import g_currentVehicle
 from gui import SystemMessages

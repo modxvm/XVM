@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2016 """
+""" XVM (c) www.modxvm.com 2013-2017 """
 
 from helpers import dependency
 from account_helpers.AccountSettings import AccountSettings, CONTACTS
