@@ -45,53 +45,59 @@ ribbonTypes = {
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def _onTotalEfficiencyUpdated(self, diff):
     global totalDamage, totalAssist, totalBlocked, countBlockedHits, old_totalDamage, damage
-    if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
-        totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
-        damage = totalDamage - old_totalDamage
-        old_totalDamage = totalDamage
-    if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
-        totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
-    if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
-        totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
-        if totalBlocked == 0:
-            countBlockedHits = 0
-        else:
-            countBlockedHits += 1
-    as_event('ON_TOTAL_EFFICIENCY')
+    if player is not None:
+        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+            if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
+                totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
+                damage = totalDamage - old_totalDamage
+                old_totalDamage = totalDamage
+            if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
+                totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
+            if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
+                totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
+                if totalBlocked == 0:
+                    countBlockedHits = 0
+                else:
+                    countBlockedHits += 1
+            as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__addBattleEfficiencyEvent')
 def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName = '', vehType = '', rightFieldStr = ''):
     global ribbonTypes
-    if ribbonType in ['assistTrack']:
-        ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
-    if ribbonType in ['assistSpot']:
-        ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
-    if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
-        ribbonTypes[ribbonType] += 1
-    as_event('ON_TOTAL_EFFICIENCY')
+    if player is not None:
+        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+            if ribbonType in ['assistTrack']:
+                ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
+            if ribbonType in ['assistSpot']:
+                ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
+            if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
+                ribbonTypes[ribbonType] += 1
+            as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     global vehiclesHealth, numberPutHits, damageReceived
-    isUpdate = False
-    if self.id in vehiclesHealth:
-        damage = vehiclesHealth[self.id] - max(0, newHealth)
-        vehiclesHealth[self.id] = newHealth
-        attacker = player.arena.vehicles.get(attackerID)
-        if player.guiSessionProvider.getArenaDP().isSquadMan(vID=attackerID) and attacker['name'] != player.name:
-            global damagesSquad
-            damagesSquad += damage
-            isUpdate = True
-    if self.isPlayerVehicle:
-        damageReceived = maxHealth - max(0, newHealth)
-        isUpdate = True
-    if (attackerID == player.playerVehicleID) and (attackReasonID == 0):
-        numberPutHits += 1
-        isUpdate = True
-    if isUpdate:
-        as_event('ON_TOTAL_EFFICIENCY')
+    if player is not None:
+        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+            isUpdate = False
+            if self.id in vehiclesHealth:
+                damage = vehiclesHealth[self.id] - max(0, newHealth)
+                vehiclesHealth[self.id] = newHealth
+                attacker = player.arena.vehicles.get(attackerID)
+                if player.guiSessionProvider.getArenaDP().isSquadMan(vID=attackerID) and attacker['name'] != player.name:
+                    global damagesSquad
+                    damagesSquad += damage
+                    isUpdate = True
+            if self.isPlayerVehicle:
+                damageReceived = maxHealth - max(0, newHealth)
+                isUpdate = True
+            if (attackerID == player.playerVehicleID) and (attackReasonID == 0):
+                numberPutHits += 1
+                isUpdate = True
+            if isUpdate:
+                as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
