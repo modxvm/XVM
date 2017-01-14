@@ -82,6 +82,7 @@ _special = {
     'usa:A80_T26_E4_SuperPershing':      [ 8, 9 ],
     'ussr:R54_KV-5':                     [ 8, 9 ],
     'ussr:R61_Object252':                [ 8, 9 ],
+    'ussr:R61_Object252_BF':             [ 8, 9 ],
 }
 
 def _getTiers(level, cls, key):
