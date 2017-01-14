@@ -46,7 +46,12 @@ ribbonTypes = {
 def _onTotalEfficiencyUpdated(self, diff):
     global totalDamage, totalAssist, totalBlocked, countBlockedHits, old_totalDamage, damage
     if player is not None:
-        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
+            vId = player.inputHandler.ctrl.curVehicleID
+            v = vId.id if isinstance(vId, Vehicle) else vId
+        else:
+            v = player.playerVehicleID
+        if player.playerVehicleID == v:
             if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
                 totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
                 damage = totalDamage - old_totalDamage
@@ -66,7 +71,12 @@ def _onTotalEfficiencyUpdated(self, diff):
 def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName = '', vehType = '', rightFieldStr = ''):
     global ribbonTypes
     if player is not None:
-        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
+            vId = player.inputHandler.ctrl.curVehicleID
+            v = vId.id if isinstance(vId, Vehicle) else vId
+        else:
+            v = player.playerVehicleID
+        if player.playerVehicleID == v:
             if ribbonType in ['assistTrack']:
                 ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
             if ribbonType in ['assistSpot']:
@@ -80,7 +90,12 @@ def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName =
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     global vehiclesHealth, numberPutHits, damageReceived
     if player is not None:
-        if not (hasattr(player.inputHandler.ctrl, 'curVehicleID') and (player.playerVehicleID != player.inputHandler.ctrl.curVehicleID)):
+        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
+            vId = player.inputHandler.ctrl.curVehicleID
+            v = vId.id if isinstance(vId, Vehicle) else vId
+        else:
+            v = player.playerVehicleID
+        if player.playerVehicleID == v:
             isUpdate = False
             if self.id in vehiclesHealth:
                 damage = vehiclesHealth[self.id] - max(0, newHealth)
