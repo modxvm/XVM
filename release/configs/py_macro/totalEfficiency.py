@@ -82,7 +82,10 @@ def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName =
             if ribbonType in ['assistSpot']:
                 ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
             if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
-                ribbonTypes[ribbonType][1] = ribbonTypes[ribbonType][0] + int(leftFieldStr[1:])
+                if leftFieldStr:
+                    ribbonTypes[ribbonType][1] = ribbonTypes[ribbonType][0] + int(leftFieldStr[1:])
+                else:
+                    ribbonTypes[ribbonType][1] += 1
             as_event('ON_TOTAL_EFFICIENCY')
 
 
