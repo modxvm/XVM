@@ -111,11 +111,6 @@ package com.xvm.lobby.ui.profile.components
                 // override renderers
                 page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
                 page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
-
-                // create filter controls
-                //filter = null;
-                //if (Config.config.userInfo.showFilters)
-                //    createFilters();
             }
         }
 
@@ -275,15 +270,5 @@ package com.xvm.lobby.ui.profile.components
                 Logger.err(ex);
             }
         }
-
-        // filters
-
-        // virtual
-        //protected function createFilters():void
-        //{
-            //filter = new FilterControl();
-            //filter.addEventListener(Event.CHANGE, applyFilter, false, 0, true);
-            //page.addChild(filter);
-        //}
     }
 }
