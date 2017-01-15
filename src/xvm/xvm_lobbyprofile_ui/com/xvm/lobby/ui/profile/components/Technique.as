@@ -191,6 +191,42 @@ package com.xvm.lobby.ui.profile.components
             page.listComponent.techniqueList.addEventListener(SortableScrollingListEvent.SORT_APPLIED, onListSortAppliedHandler, false, 0, true);
         }
 
+        public function fixStatData():void
+        {
+            if (_disposed)
+                return;
+
+            try
+            {
+                var stat:StatData = Stat.getUserDataById(accountDBID);
+                if (!stat || !stat.v)
+                    return;
+
+                for each (var data:Object in currentData)
+                {
+                    if (data == null)
+                        continue;
+                    var vdata:Object = stat.v[data.id];
+                    if (data.xvm_xte < 0)
+                    {
+                        if (vdata && !isNaN(vdata.xte) && vdata.xte > 0)
+                        {
+                            data.xvm_xte = vdata.xte;
+                            if (vdata.b != data.battlesCount)
+                            {
+                                data.xvm_xte_flag |= 0x01;
+                            }
+                        }
+                    }
+                }
+                page.invalidate("ddInvalid");
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
         // PRIVATE
 
         // sort
@@ -222,53 +258,7 @@ package com.xvm.lobby.ui.profile.components
 
             Stat.instance.removeEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
 
-            try
-            {
-                for each (var data:Object in currentData)
-                {
-                    if (data == null)
-                        continue;
-                    var stat:StatData;
-                    var vdata:Object;
-                    if (data.xvm_xte < 0)
-                    {
-                        var setFlag:Boolean = true;
-                        stat = Stat.getUserDataById(accountDBID);
-                        if (stat && stat.v)
-                        {
-                            vdata = stat.v[data.id];
-                            if (vdata && !isNaN(vdata.xte) && vdata.xte > 0)
-                            {
-                                data.xvm_xte = vdata.xte;
-                                if (vdata.b == data.battlesCount)
-                                {
-                                    setFlag = false;
-                                }
-                            }
-                        }
-                        if (setFlag)
-                        {
-                            data.xvm_xte_flag |= 0x01;
-                        }
-                    }
-                    if (data.xvm_xtdb < 0)
-                    {
-                        data.xvm_xtdb_flag |= 0x01;
-                        stat = Stat.getUserDataById(accountDBID);
-                        if (stat && stat.v)
-                        {
-                            vdata = stat.v[data.id];
-                            if (vdata && !isNaN(vdata.xtdb) && vdata.xtdb > 0)
-                                data.xvm_xtdb = vdata.xtdb;
-                        }
-                    }
-                }
-                page.invalidate("ddInvalid");
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            fixStatData();
         }
     }
 }
