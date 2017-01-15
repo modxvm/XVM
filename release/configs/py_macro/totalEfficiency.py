@@ -30,12 +30,12 @@ ribbonTypes = {
     'damage': 0,
     'ram': 0,
     'burn': 0,
-    'kill': 0,
-    'teamKill': 0,
-    'spotted': 0,
+    'kill': [0, 0],
+    'teamKill': [0, 0],
+    'spotted': [0, 0],
     'assistTrack': 0,
     'assistSpot': 0,
-    'crits': 0,
+    'crits': [0, 0],
     'capture': 0,
     'defence': 0,
     'assist': 0
@@ -82,8 +82,22 @@ def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName =
             if ribbonType in ['assistSpot']:
                 ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
             if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
-                ribbonTypes[ribbonType] += 1
+                ribbonTypes[ribbonType][1] = ribbonTypes[ribbonType][0] + int(leftFieldStr[1:])
             as_event('ON_TOTAL_EFFICIENCY')
+
+
+@registerEvent(BattleRibbonsPanel, 'onHide')
+def _onHide(self, ribbonType):
+    global ribbonTypes
+    if player is not None:
+        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
+            vId = player.inputHandler.ctrl.curVehicleID
+            v = vId.id if isinstance(vId, Vehicle) else vId
+        else:
+            v = player.playerVehicleID
+        if player.playerVehicleID == v:
+            if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
+                ribbonTypes[ribbonType][0] = ribbonTypes[ribbonType][1]
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
@@ -149,12 +163,12 @@ def destroyGUI(self):
         'damage': 0,
         'ram': 0,
         'burn': 0,
-        'kill': 0,
-        'teamKill': 0,
-        'spotted': 0,
+        'kill': [0, 0],
+        'teamKill': [0, 0],
+        'spotted': [0, 0],
         'assistTrack': 0,
         'assistSpot': 0,
-        'crits': 0,
+        'crits': [0, 0],
         'capture': 0,
         'defence': 0,
         'assist': 0
@@ -226,12 +240,12 @@ def xvm_damagesSquad():
 
 @xvm.export('xvm.detection', deterministic=False)
 def xvm_detection():
-    return ribbonTypes['spotted']
+    return ribbonTypes['spotted'][1]
 
 
 @xvm.export('xvm.frags', deterministic=False)
 def xvm_frags():
-    return ribbonTypes['kill']
+    return ribbonTypes['kill'][1]
 
 
 @xvm.export('xvm.assistTrack', deterministic=False)
@@ -246,7 +260,7 @@ def xvm_assistSpot():
 
 @xvm.export('xvm.crits', deterministic=False)
 def xvm_crits():
-    return ribbonTypes['crits']
+    return ribbonTypes['crits'][1]
 
 
 @xvm.export('xvm.countBlockedHits', deterministic=False)
