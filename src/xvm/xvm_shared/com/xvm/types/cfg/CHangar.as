@@ -26,7 +26,10 @@ package com.xvm.types.cfg
         public var widgetsEnabled:*;
         public var pingServers:CPingServers;
         public var onlineServers:COnlineServers;
-        public var serverInfo:CHangarServerInfo;
+        public var serverInfo:CHangarElement;
+        public var commonQuests: CHangarElement;
+        public var personalQuests: CHangarElement;
+        public var vehicleName: CHangarElement;
         public var showBuyPremiumButton:*;
         public var showPremiumShopButton:*;
         public var notificationsButtonType:String;

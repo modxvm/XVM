@@ -1,4 +1,10 @@
-﻿XVM-6.5.2-CIS:
+﻿XVM-6.5.3-dev:
+  * added new options in "hangar" section:
+      "commonQuests" - show/hide common quests button or change its parameters
+      "personalQuests" - show/hide personal quests button or change its parameters
+      "vehicleName" - show/hide current vehicle name, type and level or change their parameters
+
+XVM-6.5.2-CIS:
   * ONLY FOR CIS(RU) CLUSTER
   * adaptation to WoT 0.9.17.0.2
 

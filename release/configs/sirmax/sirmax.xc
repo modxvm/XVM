@@ -77,6 +77,27 @@
       //"alpha": 75,
       //"rotation": 0,
       //"shiftX": 0,
+      //"shiftY": 50
+    },
+    "commonQuests": {
+      //"enabled": false,
+      //"alpha": 100,
+      //"rotation": 0,
+      //"shiftX": 0,
+      //"shiftY": 0
+    },
+    "personalQuests": {
+      //"enabled": false,
+      //"alpha": 100,
+      //"rotation": 0,
+      //"shiftX": 0,
+      //"shiftY": 0
+    },
+    "vehicleName": {
+      //"enabled": false,
+      //"alpha": 100,
+      //"rotation": 0,
+      //"shiftX": 0,
       //"shiftY": 0
     }
   },
