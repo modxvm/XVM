@@ -91,7 +91,7 @@ def _onTotalEfficiencyUpdated(self, diff):
 
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__addBattleEfficiencyEvent')
 def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName = '', vehType = '', rightFieldStr = ''):
-    global ribbonTypes
+    global ribbonTypes, numberDamagesDealt
     if player is not None:
         if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
             vId = player.inputHandler.ctrl.curVehicleID
@@ -108,6 +108,8 @@ def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName =
                     ribbonTypes[ribbonType][1] = ribbonTypes[ribbonType][0] + int(leftFieldStr[1:])
                 else:
                     ribbonTypes[ribbonType][1] += 1
+            if ribbonType in ['damage', 'ram', 'burn']:
+                numberDamagesDealt += 1
             as_event('ON_TOTAL_EFFICIENCY')
 
 
@@ -299,9 +301,9 @@ def xvm_numberHitsDealt():
     return numberHitsDealt
 
 
-# @xvm.export('xvm.numberDamagesDealt', deterministic=False)
-# def xvm_numberDamagesDealt():
-#     return numberDamagesDealt
+@xvm.export('xvm.numberDamagesDealt', deterministic=False)
+def xvm_numberDamagesDealt():
+    return numberDamagesDealt
 
 
 @xvm.export('xvm.numberShotsDealt', deterministic=False)
