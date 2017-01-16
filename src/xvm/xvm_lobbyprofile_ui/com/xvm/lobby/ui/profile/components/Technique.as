@@ -198,23 +198,23 @@ package com.xvm.lobby.ui.profile.components
 
             try
             {
-                var stat:StatData = Stat.getUserDataById(accountDBID);
-                if (!stat || !stat.v)
-                    return;
-
-                for each (var data:Object in currentData)
+                var stat:StatData = accountDBID == 0 ? Stat.getUserDataByName(playerName) : Stat.getUserDataById(accountDBID);
+                if (stat && stat.v)
                 {
-                    if (data == null)
-                        continue;
-                    var vdata:Object = stat.v[data.id];
-                    if (data.xvm_xte < 0)
+                    for each (var data:Object in currentData)
                     {
-                        if (vdata && !isNaN(vdata.xte) && vdata.xte > 0)
+                        if (data == null)
+                            continue;
+                        var vdata:Object = stat.v[data.id];
+                        if (data.xvm_xte < 0)
                         {
-                            data.xvm_xte = vdata.xte;
-                            if (vdata.b != data.battlesCount)
+                            if (vdata && !isNaN(vdata.xte) && vdata.xte > 0)
                             {
-                                data.xvm_xte_flag |= 0x01;
+                                data.xvm_xte = vdata.xte;
+                                if (vdata.b != data.battlesCount)
+                                {
+                                    data.xvm_xte_flag |= 0x01;
+                                }
                             }
                         }
                     }
@@ -248,7 +248,7 @@ package com.xvm.lobby.ui.profile.components
 
         private function onStatLoaded(e:ObjectEvent):void
         {
-            //Logger.add("onStatLoaded: " + playerName);
+            //Logger.add("onStatLoaded: " + playerName + " " + e.result);
 
             if (_disposed)
                 return;
