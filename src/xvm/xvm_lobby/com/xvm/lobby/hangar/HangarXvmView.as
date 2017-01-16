@@ -19,6 +19,8 @@ package com.xvm.lobby.hangar
         public static const ON_HANGAR_AFTER_POPULATE:String = "ON_HANGAR_AFTER_POPULATE";
         public static const ON_HANGAR_BEFORE_DISPOSE:String = "ON_HANGAR_BEFORE_DISPOSE";
 
+        private var _disposed:Boolean = false;
+
         public function HangarXvmView(view:IView)
         {
             super(view);
@@ -31,11 +33,14 @@ package com.xvm.lobby.hangar
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
+            _disposed = false;
             //Logger.add("onAfterPopulate: " + view.as_alias);
             //Logger.addObject(page);
 
             // fix bottomBg height - original is too high and affects carousel
             page.bottomBg.height = 45; // MESSENGER_BAR_PADDING
+
+            //XfwUtils.logChilds(page);
 
             initVehicleParams();
 
@@ -45,6 +50,11 @@ package com.xvm.lobby.hangar
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            // This method is called twice on config reload
+            if (_disposed)
+                return;
+            _disposed = true;
+
             //Logger.add("ON_HANGAR_BEFORE_DISPOSE");
             Xvm.dispatchEvent(new Event(ON_HANGAR_BEFORE_DISPOSE));
             Xfw.removeCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
