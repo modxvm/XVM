@@ -53,7 +53,7 @@ def _showShooting(self, burstCount, isPredictedShot=False):
     if self.isPlayerVehicle and self.isStarted and not blockShooting:
         global numberShotsDealt
         numberShotsDealt += 1
-
+        as_event('ON_TOTAL_EFFICIENCY')
 
 @registerEvent(Vehicle, 'showDamageFromShot')
 def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
@@ -62,6 +62,7 @@ def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
         numberShotsReceived += 1
         if damageFactor != 0:
             numberHitsReceived += 1
+        as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
