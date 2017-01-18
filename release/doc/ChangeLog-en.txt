@@ -1,8 +1,11 @@
-﻿XVM-6.5.3-dev:
+﻿XVM-6.5.3-CIS:
+  * ONLY FOR CIS(RU) CLUSTER
+  * fix clan wars
   * added new options in "hangar" section:
       "commonQuests" - show/hide common quests button or change its parameters
       "personalQuests" - show/hide personal quests button or change its parameters
       "vehicleName" - show/hide current vehicle name, type and level or change their parameters
+  * various bug fixes
  
 XVM-6.5.2.1:
   * ONLY FOR EU, NA, ASIA, KR
