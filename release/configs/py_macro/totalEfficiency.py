@@ -10,6 +10,7 @@ from constants import VEHICLE_SIEGE_STATE
 from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
+from vehicle_extras import ShowShooting
 
 totalDamage = 0
 damage = 0
@@ -47,13 +48,14 @@ ribbonTypes = {
 }
 
 
-@registerEvent(Vehicle, 'showShooting')
-def _showShooting(self, burstCount, isPredictedShot=False):
-    blockShooting = self.siegeState is not None and self.siegeState != VEHICLE_SIEGE_STATE.ENABLED and self.siegeState != VEHICLE_SIEGE_STATE.DISABLED
-    if self.isPlayerVehicle and self.isStarted and not blockShooting:
-        global numberShotsDealt
+@registerEvent(ShowShooting, '_start')
+def ShowShooting_start(self, data, burstCount):
+    global numberShotsDealt
+    vehicle = data['entity']
+    if vehicle.isAlive() and vehicle.isPlayerVehicle:
         numberShotsDealt += 1
         as_event('ON_TOTAL_EFFICIENCY')
+
 
 @registerEvent(Vehicle, 'showDamageFromShot')
 def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
