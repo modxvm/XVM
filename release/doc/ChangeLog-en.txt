@@ -3,6 +3,10 @@
       "commonQuests" - show/hide common quests button or change its parameters
       "personalQuests" - show/hide personal quests button or change its parameters
       "vehicleName" - show/hide current vehicle name, type and level or change their parameters
+ 
+XVM-6.5.2.1:
+  * ONLY FOR EU, NA, ASIA, KR
+  * fix clan wars
 
 XVM-6.5.2-CIS:
   * ONLY FOR CIS(RU) CLUSTER
