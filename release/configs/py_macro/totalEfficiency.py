@@ -11,6 +11,8 @@ from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
 from vehicle_extras import ShowShooting
+from constants import VEHICLE_HIT_FLAGS as VHF
+
 
 totalDamage = 0
 damage = 0
@@ -30,6 +32,7 @@ numberShotsDealt = 0
 numberDamagesDealt = 0
 numberShotsReceived = 0
 numberHitsReceived = 0
+numberHits = 0
 
 ribbonTypes = {
     'armor': 0,
@@ -46,6 +49,16 @@ ribbonTypes = {
     'defence': 0,
     'assist': 0
 }
+
+
+@registerEvent(PlayerAvatar, 'showShotResults')
+def PlayerAvatar_showShotResults(self, results):
+    global numberHits
+    for r in results:
+        if self.playerVehicleID != (r & 4294967295L):
+            flags = r >> 32 & 4294967295L
+            if flags & VHF.ATTACK_IS_DIRECT_PROJECTILE:
+                numberHits += 1
 
 
 @registerEvent(ShowShooting, '_start')
@@ -136,8 +149,6 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     isUpdate = False
     if self.isPlayerVehicle:
         damageReceived = maxHealth - max(0, newHealth)
-        # if attackReasonID in [0, 2]:
-        #     numberDamagesDealt += 1
         isUpdate = True
     if player is not None:
         if self.id in vehiclesHealth:
@@ -172,7 +183,7 @@ def onEnterWorld(self, prereqs):
 def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt
-    global numberDamagesDealt, numberShotsReceived, numberHitsReceived
+    global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -189,6 +200,7 @@ def destroyGUI(self):
     numberDamagesDealt = 0
     numberShotsReceived = 0
     numberHitsReceived = 0
+    numberHits = 0
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
@@ -322,6 +334,11 @@ def xvm_numberShotsReceived():
 @xvm.export('xvm.numberHitsReceived', deterministic=False)
 def xvm_numberHitsReceived():
     return numberHitsReceived
+
+
+@xvm.export('xvm.numberHits', deterministic=False)
+def xvm_numberHits():
+    return numberHits
 
 
 @xvm.export('xvm.dmg', deterministic=False)
