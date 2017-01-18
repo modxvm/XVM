@@ -65,7 +65,7 @@ def PlayerAvatar_showShotResults(self, results):
 def ShowShooting_start(self, data, burstCount):
     global numberShotsDealt
     vehicle = data['entity']
-    if vehicle.isAlive() and vehicle.isPlayerVehicle:
+    if vehicle is not None and vehicle.isPlayerVehicle and vehicle.isAlive():
         numberShotsDealt += 1
         as_event('ON_TOTAL_EFFICIENCY')
 
