@@ -264,7 +264,7 @@ package com.xvm.battle.vo
             if (!old_order || !new_order)
                 return;
 
-            var len:int = new_order.length;
+            var len:int = old_order.length;
             for (var i:int = 0; i < len; ++i)
             {
                 var vehicleID:Number = new_order[i];
