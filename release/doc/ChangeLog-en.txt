@@ -1,4 +1,7 @@
-﻿XVM-6.5.2:
+﻿XVM-6.5.2.1:
+  * fix clan wars
+
+XVM-6.5.2:
   * adaptation of the battle loading screen
   * renamed parameters in the "iconset" section and changed value from folder to atlas name:
       "battleLoadingAlly" => "battleLoadingLeftAtlas"
