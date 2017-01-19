@@ -277,8 +277,8 @@
     // Show/hide common quests button or change its parameters
     // Показать/спрятать кнопку общих задач, или изменить ее параметры
     "commonQuests": {
-      // Show server info in hangar.
-      // Показывать информацию о сервере в ангаре.
+      // Show common quests button in hangar.
+      // Показывать кнопку общих задач в ангаре.
       "enabled": true,
       // Transparency in percents [0..100].
       // Прозрачность в процентах [0..100].
