@@ -12,6 +12,7 @@ from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPan
 from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
 from vehicle_extras import ShowShooting
 from constants import VEHICLE_HIT_FLAGS as VHF
+from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
 
 
 totalDamage = 0
@@ -33,6 +34,8 @@ numberDamagesDealt = 0
 numberShotsReceived = 0
 numberHitsReceived = 0
 numberHits = 0
+fragsSquad = 0
+fragsSquad_dict = {}
 
 ribbonTypes = {
     'armor': 0,
@@ -51,6 +54,19 @@ ribbonTypes = {
 }
 
 
+@overrideMethod(ArenaDataProvider, 'updateVehicleStats')
+def ArenaDataProvider_updateVehicleStats(base, self, vID, vStats):
+    result = base(self, vID, vStats)
+    global fragsSquad, fragsSquad_dict
+    if vID and player.guiSessionProvider.getArenaDP().isSquadMan(vID=vID) and vID != player.playerVehicleID:
+        fragsSquad_dict[vID] = vStats.get('frags', 0)
+        fragsSquad = 0
+        for value in fragsSquad_dict.itervalues():
+            fragsSquad += value
+        as_event('ON_TOTAL_EFFICIENCY')
+    return result
+
+
 @registerEvent(PlayerAvatar, 'showShotResults')
 def PlayerAvatar_showShotResults(self, results):
     global numberHits
@@ -59,6 +75,7 @@ def PlayerAvatar_showShotResults(self, results):
             flags = r >> 32 & 4294967295L
             if flags & VHF.ATTACK_IS_DIRECT_PROJECTILE:
                 numberHits += 1
+                as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(ShowShooting, '_start')
@@ -154,8 +171,7 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
         if self.id in vehiclesHealth:
             damage = vehiclesHealth[self.id] - max(0, newHealth)
             vehiclesHealth[self.id] = newHealth
-            attacker = player.arena.vehicles.get(attackerID)
-            if player.guiSessionProvider.getArenaDP().isSquadMan(vID=attackerID) and attacker['name'] != player.name:
+            if player.guiSessionProvider.getArenaDP().isSquadMan(vID=attackerID) and attackerID != player.playerVehicleID:
                 global damagesSquad
                 damagesSquad += damage
                 isUpdate = True
@@ -183,7 +199,7 @@ def onEnterWorld(self, prereqs):
 def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt
-    global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits
+    global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -201,6 +217,8 @@ def destroyGUI(self):
     numberShotsReceived = 0
     numberHitsReceived = 0
     numberHits = 0
+    fragsSquad = 0
+    fragsSquad_dict = {}
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
@@ -279,6 +297,16 @@ def xvm_totalDamagesSquad():
 @xvm.export('xvm.damagesSquad', deterministic=False)
 def xvm_damagesSquad():
     return damagesSquad
+
+
+@xvm.export('xvm.fragsSquad', deterministic=False)
+def xvm_fragsSquad():
+    return fragsSquad
+
+
+@xvm.export('xvm.totalFragsSquad', deterministic=False)
+def xvm_totalFragsSquad():
+    return fragsSquad + ribbonTypes['kill'][1]
 
 
 @xvm.export('xvm.detection', deterministic=False)
