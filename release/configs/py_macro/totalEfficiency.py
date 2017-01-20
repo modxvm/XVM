@@ -13,6 +13,7 @@ from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPa
 from vehicle_extras import ShowShooting
 from constants import VEHICLE_HIT_FLAGS as VHF
 from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
+from gui.battle_control.battle_ctx import BattleContext
 
 
 totalDamage = 0
@@ -36,6 +37,8 @@ numberHitsReceived = 0
 numberHits = 0
 fragsSquad = 0
 fragsSquad_dict = {}
+isPlayerInSquad = False
+
 
 ribbonTypes = {
     'armor': 0,
@@ -54,9 +57,18 @@ ribbonTypes = {
 }
 
 
-@overrideMethod(ArenaDataProvider, 'updateVehicleStats')
-def ArenaDataProvider_updateVehicleStats(base, self, vID, vStats):
-    result = base(self, vID, vStats)
+@overrideMethod(BattleContext, 'hasSquadRestrictions')
+def _hasSquadRestrictions(base, self):
+    result = base(self)
+    global isPlayerInSquad
+    if result:
+        isPlayerInSquad = True
+        as_event('ON_TOTAL_EFFICIENCY')
+    return result
+
+
+@registerEvent(ArenaDataProvider, 'updateVehicleStats')
+def ArenaDataProvider_updateVehicleStats(self, vID, vStats):
     global fragsSquad, fragsSquad_dict
     if vID and player.guiSessionProvider.getArenaDP().isSquadMan(vID=vID) and vID != player.playerVehicleID:
         fragsSquad_dict[vID] = vStats.get('frags', 0)
@@ -64,7 +76,6 @@ def ArenaDataProvider_updateVehicleStats(base, self, vID, vStats):
         for value in fragsSquad_dict.itervalues():
             fragsSquad += value
         as_event('ON_TOTAL_EFFICIENCY')
-    return result
 
 
 @registerEvent(PlayerAvatar, 'showShotResults')
@@ -184,20 +195,21 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
-    global player
+    global player, isPlayerInSquad
     player = BigWorld.player()
     if self.publicInfo['team'] != player.team:
         global vehiclesHealth
         vehiclesHealth[self.id] = self.health
     if self.isPlayerVehicle:
         global maxHealth, vehCD
+        isPlayerInSquad = player.guiSessionProvider.getArenaDP().isSquadMan(player.playerVehicleID)
         vehCD = self.typeDescriptor.type.compactDescr
         maxHealth = self.health
 
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
-    global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection
+    global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection, isPlayerInSquad
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict
     vehiclesHealth = {}
@@ -219,6 +231,7 @@ def destroyGUI(self):
     numberHits = 0
     fragsSquad = 0
     fragsSquad_dict = {}
+    isPlayerInSquad = False
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
@@ -367,6 +380,11 @@ def xvm_numberHitsReceived():
 @xvm.export('xvm.numberHits', deterministic=False)
 def xvm_numberHits():
     return numberHits
+
+
+@xvm.export('xvm.isPlayerInSquad', deterministic=False)
+def xvm_isPlayerInSquad():
+    return 'sq' if isPlayerInSquad else None
 
 
 @xvm.export('xvm.dmg', deterministic=False)
