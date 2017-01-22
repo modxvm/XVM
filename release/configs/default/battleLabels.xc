@@ -21,7 +21,7 @@
       ${ "battleLabelsTemplates.xc":"def.lastHit" },
       ${ "battleLabelsTemplates.xc":"def.fire" },
       ${ "battleLabelsTemplates.xc":"def.totalEfficiency" },
-	  ${ "battleLabelsTemplates.xc":"def.repairTimeEngine" },
+      ${ "battleLabelsTemplates.xc":"def.repairTimeEngine" },
       ${ "battleLabelsTemplates.xc":"def.repairTimeGun" },
       ${ "battleLabelsTemplates.xc":"def.repairTimeTurret" },
       ${ "battleLabelsTemplates.xc":"def.repairTimeTracks" }, 
