@@ -17,6 +17,7 @@
       ${ "battleLabelsTemplates.xc":"def.totalHP" },
       ${ "battleLabelsTemplates.xc":"def.avgDamage" },
       ${ "battleLabelsTemplates.xc":"def.mainGun" },
+      ${ "battleLabelsTemplates.xc":"def.damageLogBackground"},
       ${ "battleLabelsTemplates.xc":"def.damageLog" },
       ${ "battleLabelsTemplates.xc":"def.lastHit" },
       ${ "battleLabelsTemplates.xc":"def.fire" },

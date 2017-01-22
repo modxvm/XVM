@@ -109,6 +109,13 @@
         "mouseMove": "dLog_mouseMove"
       }
     },
+    //TODO (see damageLog.xc).
+    // Подложка лога полученного урона (см. damageLog.xc).    
+    "damageLogBackground": {
+      "enabled": false,
+      "$ref": { "path":"def.damageLog" },
+      "format": "{{py:xvm.damageLog.dLogBackground}}"
+    },    
     // Display the last damage (hit) (see damageLog.xc).
     // Отображение последнего урона (попадания) (см. damageLog.xc).
     "lastHit": {
