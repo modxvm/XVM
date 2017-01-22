@@ -112,8 +112,6 @@ package com.xvm.battle.playersPanel
             _normalHolder = this;
             _topHolder = ui.addChild(new Sprite()) as Sprite;
 
-            setup();
-
             DEFAULT_BG_ALPHA = ui.bg.alpha;
             DEFAULT_SELFBG_ALPHA = ui.selfBg.alpha;
             DEFAULT_DEADBG_ALPHA = ui.deadBg.alpha;
@@ -122,6 +120,8 @@ package com.xvm.battle.playersPanel
             DEFAULT_FRAGS_WIDTH = ui.fragsTF.width;
             DEFAULT_VEHICLE_WIDTH = ui.vehicleTF.width;
             DEFAULT_PLAYERNAMECUT_WIDTH = ui.playerNameCutTF.width;
+
+            setup();
         }
 
         override protected function onDispose():void
@@ -191,7 +191,7 @@ package com.xvm.battle.playersPanel
             {
                 super.draw();
 
-                if (mcfg == null || _userProps == null)
+                if (!xvm_enabled || mcfg == null || _userProps == null)
                     return;
 
                 if (isInvalid(INVALIDATE_PLAYER_STATE))
@@ -317,7 +317,7 @@ package com.xvm.battle.playersPanel
                     ui.selfBg.alpha = DEFAULT_SELFBG_ALPHA;
                     ui.deadBg.alpha = DEFAULT_DEADBG_ALPHA;
                     ui.fragsTF.width = DEFAULT_FRAGS_WIDTH;
-                    ui.vehicleIcon.width = DEFAULT_VEHICLE_WIDTH;
+                    ui.vehicleTF.width = DEFAULT_VEHICLE_WIDTH;
                     ui.dynamicSquad.squadIcon.alpha = 1;
                     ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
                 }
@@ -356,7 +356,10 @@ package com.xvm.battle.playersPanel
 
         private function onAtlasLoaded(e:Event):void
         {
-            setVehicleIcon(_vehicleImage);
+            if (xvm_enabled)
+            {
+                setVehicleIcon(_vehicleImage);
+            }
         }
 
         private function onClanIconLoaded(vehicleID:Number, playerName:String):void
@@ -367,7 +370,7 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        public function applyState():void
+        private function applyState():void
         {
             //Logger.add("applyState: " + ui.xfw_state);
             BattleState.playersPanelMode = ui.xfw_state;
