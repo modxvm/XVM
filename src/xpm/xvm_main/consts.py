@@ -2,7 +2,7 @@
 
 class XVM(object):
     XVM_VERSION    = '6.5.4-dev'
-    WOT_VERSION    = '0.9.17.0.2'
+    WOT_VERSION    = '0.9.17.0.3'
     XVM_INTRO      = 'www.modxvm.com'
 
     API_VERSION = '4.0'
