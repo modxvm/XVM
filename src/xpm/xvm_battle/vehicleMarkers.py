@@ -138,6 +138,7 @@ class VehicleMarkers(object):
     manager = None
     vehiclesData = None
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
+    pending_commands = []
 
     @property
     def active(self):
@@ -153,6 +154,7 @@ class VehicleMarkers(object):
         self.playerVehicleID = self.sessionProvider.getArenaDP().getPlayerVehicleID()
 
     def destroy(self):
+        self.pending_commands = []
         self.initialized = False
         self.guiType = None
         self.playerVehicleID = None
@@ -202,6 +204,8 @@ class VehicleMarkers(object):
         try:
             if self.manager and self.initialized:
                 self.manager.as_xvm_cmdS(*args)
+            elif self.enabled:
+                self.pending_commands.append(args)
         except Exception, ex:
             err(traceback.format_exc())
 
@@ -236,10 +240,16 @@ class VehicleMarkers(object):
         try:
             if self.active:
                 self.call(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
-                g_eventBus.handleEvent(events.HasCtxEvent(XVM_BATTLE_EVENT.VM_INVALIDATE_ARENA_INFO))
+                self.process_pending_commands()
         except Exception, ex:
             err(traceback.format_exc())
         #debug('vm:respondGlobalBattleData: {:>8.3f} s'.format(time.clock() - s))
+
+    def process_pending_commands(self):
+        for args in self.pending_commands:
+            #debug('pending_command: ' + str(args))
+            self.call(*args)
+        self.pending_commands = []
 
     def onKeyEvent(self, event):
         try:
