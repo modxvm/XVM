@@ -634,7 +634,6 @@ class LastHit(object):
     def __init__(self, section):
         self.section = section
         self.strLastHit = ''
-        self.timerLastHit = None
         self.dictVehicle = {}
         self.shadow = {}
         self._data = None
@@ -647,13 +646,10 @@ class LastHit(object):
         as_callback("lastHit_mouseDown", self.mouse_down)
         as_callback("lastHit_mouseUp", self.mouse_up)
         as_callback("lastHit_mouseMove", self.mouse_move)
-        if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
-            self.timerLastHit.stop()
-
-    def reset(self, section):
-        self.section = section
-        self.strLastHit = ''
         self.timerLastHit = None
+
+    def reset(self):
+        self.strLastHit = ''
         self.dictVehicle = {}
         self.shadow = {}
         if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
@@ -817,7 +813,7 @@ def destroyGUI(self):
     _logAlt.reset(_logAlt.section)
     _logBackground.reset(_logBackground.section)
     _logAltBackground.reset(_logAltBackground.section)
-    _lastHit.reset(_lastHit.section)
+    _lastHit.reset()
 
 
 @registerEvent(PlayerAvatar, 'handleKey')
