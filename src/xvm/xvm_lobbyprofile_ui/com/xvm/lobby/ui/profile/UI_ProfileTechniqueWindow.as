@@ -92,6 +92,23 @@ package com.xvm.lobby.ui.profile
             }
         }
 
+        override public function as_responseDossier(param1:String, param2:Object, param3:String, param4:String):void
+        {
+            //Logger.add("as_responseDossier");
+            super.as_responseDossier(param1, param2, param3, param4);
+            try
+            {
+                if (technique)
+                {
+                    technique.fixStatData();
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
+        }
+
         // PUBLIC
 
         public function get currentDataXvm():Object

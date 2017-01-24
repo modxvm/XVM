@@ -7,6 +7,11 @@ def damageLog_dLog():
     return damageLog.dLog()
 
 
+@xvm.export('xvm.damageLog.dLogBackground', deterministic=False)
+def damageLog_dLogBackground():
+    return damageLog.dLogBackground()
+
+
 @xvm.export('xvm.damageLog.dLog_shadow', deterministic=False)
 def damageLog_dLog_shadow(setting):
     return damageLog.dLog_shadow(setting)

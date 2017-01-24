@@ -35,13 +35,19 @@ package com.xvm.lobby
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            initServerInfo();
-            setupHeaderButtons();
+            setup();
         }
 
         override public function onConfigLoaded(e:Event):void
         {
-            initServerInfo();
+            setup();
+        }
+
+        // PRIVATE
+
+        public function setup():void
+        {
+            setupServerInfo();
             setupHeaderButtons();
         }
 
@@ -49,9 +55,9 @@ package com.xvm.lobby
 
         private var _orig_onlineCounter_x:Number = NaN;
         private var _orig_onlineCounter_y:Number = NaN;
-        private function initServerInfo():void
+        private function setupServerInfo():void
         {
-            var cfg:CHangarServerInfo = Config.config.hangar.serverInfo;
+            var cfg:CHangarElement = Config.config.hangar.serverInfo;
             if (!cfg.enabled)
             {
                 page.header.onlineCounter.mouseEnabled = false;
@@ -73,6 +79,8 @@ package com.xvm.lobby
                 page.header.onlineCounter.rotation = cfg.rotation;
             }
         }
+
+        // prem and premShop buttons
 
         private function setupHeaderButtons():void
         {

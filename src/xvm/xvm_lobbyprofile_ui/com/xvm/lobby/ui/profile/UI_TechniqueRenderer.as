@@ -105,18 +105,14 @@ package com.xvm.lobby.ui.profile
                 if (xteTF)
                 {
                     var xte:Number = data.xvm_xte;
-                    var isStat:Boolean = false;
-                    if (data.xvm_xte_flag & 0x01 != 0)
+                    //Logger.add("id=" + data.id + " xte=" + data.xvm_xte + " flag=" + data.xvm_xte_flag);
+                    if (xte < 0 || data.xvm_xte_flag & 0x01 != 0)
                     {
                         var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.accountDBID);
                         if (vdossier)
                         {
                             xte = data.xvm_xte = vdossier.xte;
-                            data.xvm_xte_flag ^= 0x01;
-                        }
-                        else
-                        {
-                            isStat = true;
+                            data.xvm_xte_flag &= ~0x01;
                         }
                     }
 
@@ -133,7 +129,7 @@ package com.xvm.lobby.ui.profile
                     else
                     {
                         var value:String = xte == 100 ? "XX" : (xte < 10 ? "0" : "") + xte;
-                        if (isStat)
+                        if (data.xvm_xte_flag & 0x01 != 0)
                             value = "<font alpha='#50'>(</font>" + value + "<font alpha='#50'>)</font>";
                         xteTF.htmlText = Sprintf.format("<p align='center'><font face='$FieldFont' size='15' color='%s'>%s</font></p>",
                             MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, xte), value);

@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.17.0.1',
+    'VERSION':       '0.9.17.0.2',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.17.0.1'],
+    'GAME_VERSIONS': ['0.9.17.0.2'],
     # optional
 }
 
@@ -41,6 +41,7 @@ from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.Scaleform.framework.ToolTip import ToolTip
 from gui.Scaleform.daapi.view.battle.shared.consumables_panel import ConsumablesPanel
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
+from gui.shared.tooltips.module import ModuleBlockTooltipData
 from xfw import *
 
 import xvm_main.python.config as config
@@ -57,7 +58,7 @@ shells_vehicles_compatibility = {}
 carousel_tooltips_cache = {}
 styles_templates = {}
 toolTipDelayIntervalId = None
-weightTooHeavy = None  # will be localized red 'weight (kg)'
+weightTooHeavy = False  
 p_replacement = None # will be something like <font size... color...>
 
 #####################################################################
@@ -453,38 +454,44 @@ def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
         err(traceback.format_exc())
     base(self, moduleInfo)
 
-# add '#menu:moduleInfo/params/weightTooHeavy' (red 'weight (kg)')
-@overrideMethod(i18n, 'makeString')
-def makeString(base, key, *args, **kwargs):
-    if key == '#menu:moduleInfo/params/weightTooHeavy':
-        global weightTooHeavy
-        if weightTooHeavy is None:
-            weightTooHeavy = '<h>%s</h>' % red_pad(strip_html_tags(i18n.makeString('#menu:moduleInfo/params/weight'))) # localized red 'weight (kg)'
-        return weightTooHeavy
-    return base(key, *args, **kwargs)
+# # add '#menu:moduleInfo/params/weightTooHeavy' (red 'weight (kg)')
+# @overrideMethod(i18n, 'makeString')
+# def makeString(base, key, *args, **kwargs):
+#     if key == '#menu:moduleInfo/params/weightTooHeavy':
+#         global weightTooHeavy
+#         if weightTooHeavy is None:
+#             weightTooHeavy = '<h>%s</h>' % red_pad(strip_html_tags(i18n.makeString('#menu:moduleInfo/params/weight'))) # localized red 'weight (kg)'
+#         return weightTooHeavy
+#     return base(key, *args, **kwargs)
 
-# TODO:9.15
-## paint 'weight (kg)' with red if module does not fit due to overweight
-#@overrideMethod(ModuleParamsField, '_getValue')
-#def ModuleParamsField_getValue(base, self, *args, **kwargs):
-#    result = base(self, *args, **kwargs)
-#    try:
-#        try:
-#            param_name = result[0][-1][0]
-#        except:
-#            param_name = 'wrong item'
-#        if param_name == 'weight':
-#            module = self._tooltip.item
-#            configuration = self._tooltip.context.getStatusConfiguration(module)
-#            vehicle = configuration.vehicle
-#            slotIdx = configuration.slotIdx
-#            if vehicle is not None:
-#                isFit, reason = module.mayInstall(vehicle, slotIdx)
-#                if not isFit and reason == 'too heavy':
-#                    result[0][-1][0] = 'weightTooHeavy'
-#    except Exception as ex:
-#        err(traceback.format_exc())
-#    return result
+##########################################################################
+# paint 'weight (kg)' with red if module does not fit due to overweight
+
+@overrideMethod(param_formatter, 'formatModuleParamName')
+def formatters_formatModuleParamName(base, paramName):
+    builder = text_styles.builder()
+    if weightTooHeavy and paramName == 'weight':
+        builder.addStyledText(text_styles.error, MENU.moduleinfo_params(paramName))
+        builder.addStyledText(text_styles.error, param_formatter.MEASURE_UNITS.get(paramName, ''))
+    else:
+        builder.addStyledText(text_styles.main, MENU.moduleinfo_params(paramName))
+        builder.addStyledText(text_styles.standard, param_formatter.MEASURE_UNITS.get(paramName, ''))
+    return builder.render()
+
+@overrideMethod(ModuleBlockTooltipData, '_packBlocks')
+def ModuleBlockTooltipData_packBlocks(base, self, *args, **kwargs):
+    try:
+        global weightTooHeavy
+        module = self.context.buildItem(*args, **kwargs)
+        statusConfig = self.context.getStatusConfiguration(module)
+        vehicle = statusConfig.vehicle
+        slotIdx = statusConfig.slotIdx
+        if vehicle is not None:
+            isFit, reason = module.mayInstall(vehicle, slotIdx)
+            weightTooHeavy = not isFit and reason == 'too heavy'
+    except Exception as ex:
+        err(traceback.format_exc())
+    return base(self, *args, **kwargs)
 
 
 #####################################################################

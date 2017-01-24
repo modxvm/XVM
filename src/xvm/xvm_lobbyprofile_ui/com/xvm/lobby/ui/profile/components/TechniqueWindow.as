@@ -14,14 +14,5 @@ package com.xvm.lobby.ui.profile.components
         {
             super(window, playerName, accountDBID);
         }
-
-//        override protected function createFilters():void
-//        {
-//            super.createFilters();
-//
-//            filter.visible = false;
-//            filter.x = 680;
-//            filter.y = -47;
-//        }
     }
 }

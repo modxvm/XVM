@@ -42,13 +42,6 @@ package com.xvm.lobby.ui.profile
                         !params.topF ? "--" : App.utils.locale.float(params.topF));
                     App.toolTipMgr.show(Locale.get(t));
                 }
-                else if (tooltip == "xvm_xtdb")
-                {
-                    params = _toolTipParams ? _toolTipParams.body : null;
-                    t = Sprintf.format("{{l10n:profile/xvm_xtdb_extended_tooltip:%s}}",
-                        !params.currentD ? "--" : App.utils.locale.integer(Math.round(params.currentD)));
-                    App.toolTipMgr.show(Locale.get(t));
-                }
                 else
                 {
                     super.showToolTip();

@@ -6,7 +6,7 @@ package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CHangarServerInfo extends Object implements ICloneable
+    public dynamic class CHangarElement extends Object implements ICloneable
     {
         public var enabled:*;
         public var alpha:*;

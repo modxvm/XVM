@@ -17,10 +17,16 @@
       ${ "battleLabelsTemplates.xc":"def.totalHP" },
       ${ "battleLabelsTemplates.xc":"def.avgDamage" },
       ${ "battleLabelsTemplates.xc":"def.mainGun" },
+      ${ "battleLabelsTemplates.xc":"def.damageLogBackground"},
       ${ "battleLabelsTemplates.xc":"def.damageLog" },
       ${ "battleLabelsTemplates.xc":"def.lastHit" },
       ${ "battleLabelsTemplates.xc":"def.fire" },
-      ${ "battleLabelsTemplates.xc":"def.totalEfficiency" }
+      ${ "battleLabelsTemplates.xc":"def.totalEfficiency" },
+      ${ "battleLabelsTemplates.xc":"def.repairTimeEngine" },
+      ${ "battleLabelsTemplates.xc":"def.repairTimeGun" },
+      ${ "battleLabelsTemplates.xc":"def.repairTimeTurret" },
+      ${ "battleLabelsTemplates.xc":"def.repairTimeTracks" }, 
+      ${ "battleLabelsTemplates.xc":"def.repairTimeSurveying" }
     ]
   }
 }

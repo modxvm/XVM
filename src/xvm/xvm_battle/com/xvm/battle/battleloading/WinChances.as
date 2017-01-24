@@ -25,9 +25,9 @@ package com.xvm.battle.battleloading
 
             winChanceTF = createWinChanceTextField(form.battleText);
             winChanceTF.styleSheet = XfwUtils.createTextStyleSheet("chances", form.battleText.defaultTextFormat);
-            winChanceTF.x = form.battleText.x - 283;
+            winChanceTF.x = -512;
             winChanceTF.width = 1024;
-            winChanceTF.y = -50;
+            winChanceTF.y = -57;
             winChanceTF.height = form.battleText.height;
             form.addChild(winChanceTF);
 

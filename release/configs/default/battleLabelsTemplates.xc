@@ -109,6 +109,13 @@
         "mouseMove": "dLog_mouseMove"
       }
     },
+    //TODO (see damageLog.xc).
+    // Подложка лога полученного урона (см. damageLog.xc).    
+    "damageLogBackground": {
+      "enabled": false,
+      "$ref": { "path":"def.damageLog" },
+      "format": "{{py:xvm.damageLog.dLogBackground}}"
+    },    
     // Display the last damage (hit) (see damageLog.xc).
     // Отображение последнего урона (попадания) (см. damageLog.xc).
     "lastHit": {
@@ -165,6 +172,66 @@
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": { "color": "0xE3E3E3", "size": 16 },
       "format": "<textformat tabstops='[65,130,196]' leading='-2' ><img src='xvm://res/icons/Efficiency/damage.png'> {{py:xvm.totalDamage}}<tab><img src='xvm://res/icons/Efficiency/assist.png'> {{py:xvm.totalAssist}}<tab><img src='xvm://res/icons/Efficiency/reflect.png'> {{py:xvm.totalBlocked}}<tab><img src='xvm://res/icons/Efficiency/discover.png'> {{py:xvm.detection}}</textformat>"
+    },
+    // Rewritable timer format
+    // Перезаписываемый формат таймера
+    "defaultTimeItem": {
+      "width": 47,
+      "height": 40,
+      "screenHAlign": "left",
+      "screenVAlign": "bottom",
+      "shadow": { "distance": 1, "angle": 90, "alpha": 90, "blur": 5, "strength": 4 },
+      "textFormat": { "color": "0xF4EFE8", "size": 17, "align": "center", "valign": "center" }
+    },
+    // Repair timer for engine
+    // Таймер ремонта двигателя
+    "repairTimeEngine": {
+      "$ref": { "path":"def.defaultTimeItem" },
+      "enabled": true,
+      "updateEvent": "PY(ON_ENGINE_UPDATE)",
+      "x": 4,
+      "y": -146,
+      "format": "<b>{{py:repairTimeEngine%0.1f}}</b>"
+    },
+    // Repair timer for gun
+    // Таймер ремонта орудия
+    "repairTimeGun": {
+      "$ref": { "path":"def.defaultTimeItem" },
+      "enabled": true,
+      "updateEvent": "PY(ON_GUN_UPDATE)",
+      "x": 4,
+      "y": -69,
+      "format": "<b>{{py:repairTimeGun%0.1f}}</b>"
+    },
+    // Repair timer for turret rotator
+    // Таймер ремонта механизма поворота башни
+    "repairTimeTurret": {
+      "$ref": { "path":"def.defaultTimeItem" },
+      "enabled": true,
+      "updateEvent": "PY(ON_TURRET_UPDATE)",
+      "x": 4,
+      "y": -30,
+      "format": "<b>{{py:repairTimeTurret%0.1f}}</b>"
+    },
+    // Repair timer for tracks
+    // Таймер ремонта сбитых гусениц
+    "repairTimeTracks": {
+      "$ref": { "path":"def.defaultTimeItem" },
+      "enabled": true,
+      "updateEvent": "PY(ON_TRACKS_UPDATE)",
+      "x": 177,
+      "y": -146,
+      "format": "<b>{{py:repairTimeTracks%0.1f}}</b>"
+    },
+    // Repair timer for surveying device
+    // Таймер ремонта приборов наблюдения
+    "repairTimeSurveying": {
+      "$ref": { "path":"def.defaultTimeItem" },
+      "enabled": true,
+      "updateEvent": "PY(ON_SURVEYING_UPDATE)",
+      "x": 177,
+      "y": -107,
+      "format": "<b>{{py:repairTimeSurveying%0.1f}}</b>"
     }
   }
 }

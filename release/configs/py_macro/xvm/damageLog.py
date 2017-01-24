@@ -406,6 +406,9 @@ class Data(object):
         _logAlt.output()
         _log.output()
         _lastHit.output()
+        _logBackground.output()
+        _logAltBackground.output()
+
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
         maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
@@ -441,7 +444,7 @@ class Data(object):
         self.data['attackerID'] = attackerID
         self.data['damage'] = self.data['oldHealth'] - max(0, newHealth)
         self.data['isAlive'] = (newHealth > 0) and bool(vehicle.isCrewActive)
-        self.data['oldHealth'] = newHealth
+        self.data['oldHealth'] = max(0, newHealth)
         self.updateData()
         self.updateLabels()
         as_event('ON_HIT')
@@ -678,6 +681,7 @@ class LastHit(object):
         as_event('ON_LAST_HIT')
 
     def output(self):
+        macroes = None
         if (((data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'))
                 or ((data.data['attackReasonID'] == 1) and config.get(self.section + 'groupDamagesFromFire'))):
             dataLog = data.data.copy()
@@ -717,6 +721,8 @@ class LastHit(object):
             else:
                 self.strLastHit = ''
         if self.strLastHit:
+            if macroes is None:
+                macroes = getValueMacroes(self.section, data.data)
             if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
                 self.timerLastHit.stop()
             timeDisplayLastHit = float(parser(config.get(self.section + 'timeDisplayLastHit'), macroes))
@@ -729,6 +735,8 @@ class LastHit(object):
 
 _log = Log('damageLog/log/')
 _logAlt = Log('damageLog/logAlt/')
+_logBackground = Log('damageLog/logBackground/')
+_logAltBackground = Log('damageLog/logAltBackground/')
 _lastHit = LastHit('damageLog/lastHit/')
 
 
@@ -807,6 +815,8 @@ def destroyGUI(self):
     data.reset()
     _log.reset(_log.section)
     _logAlt.reset(_logAlt.section)
+    _logBackground.reset(_logBackground.section)
+    _logAltBackground.reset(_logAltBackground.section)
     _lastHit.reset(_lastHit.section)
 
 
@@ -832,6 +842,10 @@ def handleKey(self, isDown, key, mods):
 
 def dLog():
     return '\n'.join(_logAlt.listLog) if isDownAlt else '\n'.join(_log.listLog)
+
+
+def dLogBackground():
+    return '\n'.join(_logAltBackground.listLog) if isDownAlt else '\n'.join(_logBackground.listLog)
 
 
 def dLog_shadow(setting):
