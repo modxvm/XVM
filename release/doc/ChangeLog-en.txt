@@ -1,4 +1,6 @@
-﻿XVM-6.5.4-dev:
+﻿XVM-6.5.4:
+ * adaptation to WoT 0.9.17.0.3
+ * various bug fixes
 
 XVM-6.5.3-CIS:
   * ONLY FOR CIS(RU) CLUSTER
