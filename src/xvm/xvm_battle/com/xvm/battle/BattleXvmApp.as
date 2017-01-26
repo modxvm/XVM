@@ -14,8 +14,8 @@ package com.xvm.battle
             battleXvmMod = new BattleXvmMod();
             addChild(battleXvmMod);
 
-            BattleGlobalData.init();
             Xmqp.init();
+            BattleGlobalData.init();
             Stat.clearBattleStat();
             Stat.loadBattleStat();
         }

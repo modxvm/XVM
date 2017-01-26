@@ -109,8 +109,8 @@ package com.xvm.vehiclemarkers.ui
 
         private function initialize():void
         {
-            BattleGlobalData.init();
             Xmqp.init();
+            BattleGlobalData.init();
             Stat.clearBattleStat();
             Stat.loadBattleStat();
         }
