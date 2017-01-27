@@ -66,6 +66,7 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldInfo(cfg.fields.info);
             _setupStandardFieldPrice();
             _setupStandardFieldActionPrice();
+            _setupStandardFieldFavorite();
             //}, 1000);
         }
 
@@ -265,6 +266,12 @@ package com.xvm.lobby.ui.tankcarousel
             renderer.content.actionPrice.x += cfg.fields.actionPrice.dx;
             renderer.content.actionPrice.y += cfg.fields.actionPrice.dy;
             //renderer.content.actionPrice.visible = true; renderer.content.actionPrice.iconText.text = "act"; // DEBUG
+        }
+
+        public function _setupStandardFieldFavorite():void
+        {
+            _setupStandardFieldAlpha(renderer.content.imgFavorite, cfg.fields.favorite);
+            _setupStandardFieldScale(renderer.content.imgFavorite, cfg.fields.favorite);
         }
 
         private var orig_txtInfo_y:Number = NaN;

@@ -20,6 +20,7 @@ package com.xvm.types.cfg
         public var infoBuy:CCarouselCellStandardField;
         public var price:CCarouselCellStandardField;
         public var actionPrice:CCarouselCellStandardField;
+        public var favorite:CCarouselCellStandardField;
 
         public function clone():*
         {

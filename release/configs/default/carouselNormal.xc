@@ -64,7 +64,10 @@
       "price":    { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
       // Action price
       // Акционная цена
-      "actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 }
+      "actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
+      // Favorite vehicle mark
+      // Маркер основной техники
+      "favorite": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 }
     },
     // Extra cell fields (extended format supported, see extra-field.txt).
     // Дополнительные поля ячеек (поддерживается расширенный формат, см. extra-field.txt).
