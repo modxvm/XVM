@@ -331,9 +331,15 @@ class Xvm(object):
         try:
             if not event.isRepeatedEvent():
                 # debug("key=" + str(event.key) + ' ' + ('down' if event.isKeyDown() else 'up'))
-                battle = getBattleApp()
-                if battle and not MessengerEntry.g_instance.gui.isFocused():
-                    as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
+                spaceID = g_appLoader.getSpaceID()
+                if spaceID == GUI_GLOBAL_SPACE_ID.LOBBY:
+                    app = getLobbyApp()
+                    if app:
+                        as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
+                if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
+                    app = getBattleApp()
+                    if app and not MessengerEntry.g_instance.gui.isFocused():
+                        as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())
 
