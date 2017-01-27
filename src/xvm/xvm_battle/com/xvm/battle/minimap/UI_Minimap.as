@@ -446,6 +446,11 @@ package com.xvm.battle.minimap
 
                 var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(e.accountDBID));
 
+                if (playerState.isIgnored)
+                {
+                    return;
+                }
+
                 var color:Number;
                 if (!Config.config.xmqp.minimapDrawColor)
                 {
