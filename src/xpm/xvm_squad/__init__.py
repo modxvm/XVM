@@ -85,11 +85,9 @@ def onXfwCommand(cmd, *args):
 def SquadView__init__(self, *args, **kwargs):
     squad_update_tiers(self, *args, **kwargs)
 
-
 @registerEvent(SquadView, 'onUnitVehiclesChanged')
 def SquadView_onUnitVehiclesChanged(self, *args, **kwargs):
     squad_update_tiers(self, *args, **kwargs)
-
 
 def squad_update_tiers(self, *args, **kwargs):
     try:
@@ -99,11 +97,11 @@ def squad_update_tiers(self, *args, **kwargs):
             return
         min_tier = 0
         max_tiers = []
-        squad_unitFunctional = self.unitFunctional.getUnit()[1]
-        if not squad_unitFunctional:
+        entity = self.prbEntity.getUnit()[1]
+        if not entity:
             as_xfw_cmd(COMMANDS.AS_UPDATE_TIERS, '')
             return
-        for squad_vehicle in squad_unitFunctional.getVehicles().values():
+        for squad_vehicle in entity.getVehicles().values():
             veh = g_itemsCache.items.getItemByCD(squad_vehicle[0].vehTypeCompDescr)
             (veh_tier_low, veh_tier_high) = getTiers(veh.level, veh.type, veh.name)
             min_tier = max(veh_tier_low, min_tier)
