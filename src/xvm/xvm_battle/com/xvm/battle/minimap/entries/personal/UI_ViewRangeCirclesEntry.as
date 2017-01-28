@@ -261,8 +261,6 @@ class Circles extends Sprite implements IDisposable
         {
             stereoscopeVisionRadius = UI_ViewRangeCirclesEntry.visionRadius;
             circularVisionRadius = UI_ViewRangeCirclesEntry.visionRadius / 1.25;
-            if (BattleGlobalData.minimapCirclesData.view_coated_optics)
-                circularVisionRadius *= 1.1;
         }
         else
         {
