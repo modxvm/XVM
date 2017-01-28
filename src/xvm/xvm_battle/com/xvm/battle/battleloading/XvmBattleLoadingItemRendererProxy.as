@@ -147,8 +147,7 @@ package com.xvm.battle.battleloading
                 ui.vehicleIcon.graphics.clear();
                 App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(_model.vehicleIconName), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
 
-                var schemeName:String = PlayerStatusSchemeName.getSchemeNameForVehicle(_model.isCurrentPlayer, _model.isSquadPersonal(), _model.isTeamKiller(), !_model.isAlive(),
-                    cfg.darkenNotReadyIcon && !_model.isReady());
+                var schemeName:String = getSchemeNameForVehicle(currentPlayerState);
                 var scheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
                 if (scheme)
                 {
@@ -200,7 +199,13 @@ package com.xvm.battle.battleloading
 
         public function getSchemeNameForVehicle(options:IVOMacrosOptions):String
         {
-            return PlayerStatusSchemeName.getSchemeNameForVehicle(_model.isCurrentPlayer, _model.isSquadPersonal(), _model.isTeamKiller(),!_model.isAlive(), !_model.isReady());
+            var highlightVehicleIcon:Boolean = Config.config.battle.highlightVehicleIcon;
+            return PlayerStatusSchemeName.getSchemeNameForVehicle(
+                _model.isCurrentPlayer && highlightVehicleIcon,
+                _model.isSquadPersonal() && highlightVehicleIcon,
+                _model.isTeamKiller(),
+                !_model.isAlive(),
+                cfg.darkenNotReadyIcon && !_model.isReady());
         }
 
         // TODO
