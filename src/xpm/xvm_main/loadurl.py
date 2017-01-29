@@ -35,10 +35,11 @@ def loadUrl(url, req=None, body=None, showLog=True, api=XVM.API_VERSION):
         # hide some chars of token in the log
         path_log = utils.hide_guid(u.path) if not XFW_NO_TOKEN_MASKING else u.path
         log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
-    # import time
-    # time.sleep(3)
 
     startTime = datetime.datetime.now()
+
+    #import time
+    #time.sleep(3)
 
     (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, XVM.FINGERPRINTS, body)
 
@@ -117,8 +118,8 @@ def _loadUrl(u, timeout, fingerprints, body):  # timeout in msec
         tb = traceback.format_exc(1).split('\n')
         err('loadUrl failed: %s%s' % (utils.hide_guid(errStr), tb[1]))
 
-    # finally:
-        # if conn is not None:
-        #    conn.close()
+    #finally:
+    #    if conn is not None:
+    #       conn.close()
 
     return (response, compressedSize, errStr)

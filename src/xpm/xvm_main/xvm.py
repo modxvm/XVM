@@ -90,10 +90,6 @@ class Xvm(object):
 
         python_macro.initialize()
 
-        # initialize XVM services in replay
-        if isReplay():
-            self.initializeXvmServices()
-
         if not e or not e.ctx.get('fromInitStage', False):
             self.respondConfig()
             wgutils.reloadHangar()
@@ -123,6 +119,9 @@ class Xvm(object):
         app = g_appLoader.getApp(event.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded += self.onViewLoaded
+        # initialize XVM services if game restarted after crash or in replay
+        if event.ns == APP_NAME_SPACE.SF_BATTLE:
+            self.initializeXvmServices()
 
     def onAppDestroyed(self, event):
         trace('onAppDestroyed: {}'.format(event.ns))
@@ -197,8 +196,6 @@ class Xvm(object):
 
     def onStateBattleLoading(self):
         trace('onStateBattleLoading')
-        # initialize XVM services if game restarted after crash
-        self.initializeXvmServices()
 
     def onArenaCreated(self):
         trace('onArenaCreated')
@@ -326,19 +323,18 @@ class Xvm(object):
 
         g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XVM_SERVICES_INITIALIZED))
 
-
     def onKeyEvent(self, event):
         try:
             if not event.isRepeatedEvent():
                 # debug("key=" + str(event.key) + ' ' + ('down' if event.isKeyDown() else 'up'))
                 spaceID = g_appLoader.getSpaceID()
-                if spaceID == GUI_GLOBAL_SPACE_ID.LOBBY:
-                    app = getLobbyApp()
-                    if app:
-                        as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
                 if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
                     app = getBattleApp()
                     if app and not MessengerEntry.g_instance.gui.isFocused():
+                        as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
+                elif spaceID == GUI_GLOBAL_SPACE_ID.LOBBY:
+                    app = getLobbyApp()
+                    if app:
                         as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
         except Exception, ex:
             err('onKeyEvent(): ' + traceback.format_exc())

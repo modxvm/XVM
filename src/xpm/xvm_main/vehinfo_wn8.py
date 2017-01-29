@@ -8,6 +8,11 @@ def getWN8ExpectedData(vehCD):
         _wn8ExpectedData = _load()
     return _wn8ExpectedData.get(str(vehCD), None)
 
+def init():
+    global _wn8ExpectedData
+    if _wn8ExpectedData is None:
+        _wn8ExpectedData = _load()
+
 
 # PRIVATE
 
@@ -48,10 +53,3 @@ def _load():
         err(traceback.format_exc())
 
     return res
-
-
-def _init():
-    global _wn8ExpectedData
-    if _wn8ExpectedData is None:
-        _wn8ExpectedData = _load()
-BigWorld.callback(0, _init)
