@@ -312,7 +312,7 @@ class Data(object):
                     self.data['nation'] = None
                     self.data['diff-masses'] = None
                 self.data['name'] = attacker['name']
-                if attacker['name'] in _stat.resp['players']:
+                if (_stat.resp is not None) and (attacker['name'] in _stat.resp['players']):
                     stats = _stat.resp['players'][attacker['name']]
                     self.data['wn8'] = stats.get('wn8', None)
                     self.data['xwn8'] = stats.get('xwn8', None)
