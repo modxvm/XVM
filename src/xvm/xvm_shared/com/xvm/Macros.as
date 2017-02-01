@@ -314,14 +314,15 @@ package com.xvm
         private const CACHE_MASK_PLAYER:uint =       0x0008;
         private const CACHE_MASK_TEAMKILLER:uint =   0x0010;
         private const CACHE_MASK_SQUAD:uint =        0x0020;
-        private const CACHE_MASK_POSITION:uint =     0x0040;
-        private const CACHE_MASK_MARKSONGUN:uint =   0x0080;
-        private const CACHE_MASK_X_ENABLED:uint =    0x0100;
-        private const CACHE_MASK_X_SPOTTED:uint =    0x0200;
-        private const CACHE_MASK_X_FIRE:uint =       0x0400;
-        private const CACHE_MASK_X_OVERTURNED:uint = 0x0800;
-        private const CACHE_MASK_X_DROWNING:uint =   0x1000;
-        private const CACHE_MASK_SIZE:uint =         0x2000;
+        private const CACHE_MASK_PERSONAL_SQ:uint =  0x0040;
+        private const CACHE_MASK_POSITION:uint =     0x0080;
+        private const CACHE_MASK_MARKSONGUN:uint =   0x0100;
+        private const CACHE_MASK_X_ENABLED:uint =    0x0200;
+        private const CACHE_MASK_X_SPOTTED:uint =    0x0400;
+        private const CACHE_MASK_X_FIRE:uint =       0x0800;
+        private const CACHE_MASK_X_OVERTURNED:uint = 0x1000;
+        private const CACHE_MASK_X_DROWNING:uint =   0x2000;
+        private const CACHE_MASK_SIZE:uint =         0x4000;
 
         // special case for dynamic macros converted to static
         private const HYBRID_MACROS:Vector.<String> = new <String>["alive", "ready", "selected", "player", "tk",
@@ -331,7 +332,7 @@ package com.xvm
         private var m_globals:Object;
         private var m_players:Object; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
         private var m_macros_cache_globals:Object;
-        private var m_macros_cache_players:Vector.<Object>;
+        private var m_macros_cache_players:Array; // Sparse array
         private var m_macros_cache_players_hybrid:Object;
         private var m_macro_parts_cache:Object;
         private var m_format_macro_fmt_suf_cache:Object;
@@ -349,7 +350,7 @@ package com.xvm
             m_globals = { };
             m_players = { };
             m_macros_cache_globals = { };
-            m_macros_cache_players = new Vector.<Object>(CACHE_MASK_SIZE, true);
+            m_macros_cache_players = [];
             m_macros_cache_players_hybrid = { };
             m_macro_parts_cache = { };
             m_format_macro_fmt_suf_cache = { };
@@ -371,6 +372,8 @@ package com.xvm
                 idx |= CACHE_MASK_TEAMKILLER;
             if (options.squadIndex)
                 idx |= CACHE_MASK_SQUAD;
+            if (options.isSquadPersonal)
+                idx |= CACHE_MASK_PERSONAL_SQ;
             if (isNaN(options.position))
                 idx |= CACHE_MASK_POSITION;
             if (isNaN(options.marksOnGun))
