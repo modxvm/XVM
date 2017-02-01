@@ -34,11 +34,11 @@ import shared
 #####################################################################
 # initialization/finalization
 
-def onConfigLoaded(self, e=None):
+def onConfigLoaded(e=None):
     g_markers.enabled = config.get('markers/enabled', True)
     g_markers.respondConfig()
 
-def onArenaInfoInvalidated(self, e=None):
+def onArenaInfoInvalidated(e=None):
     for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
         g_markers.updatePlayerState(vehicleID, INV.ALL)
 
@@ -271,10 +271,13 @@ class VehicleMarkers(object):
                         if entity and hasattr(entity, 'publicInfo'):
                             data['marksOnGun'] = entity.publicInfo.marksOnGun
 
-                if targets & INV.FRAGS:
+                if targets & (INV.ALL_VINFO | INV.ALL_VSTATS):
                     arenaDP = self.sessionProvider.getArenaDP()
-                    vStatsVO = arenaDP.getVehicleStats(vehicleID)
-                    data['frags'] = vStatsVO.frags
+                    if targets & INV.ALL_VSTATS:
+                        vStatsVO = arenaDP.getVehicleStats(vehicleID)
+
+                    if targets & INV.FRAGS:
+                        data['frags'] = vStatsVO.frags
 
                 if data:
                     self.call(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)

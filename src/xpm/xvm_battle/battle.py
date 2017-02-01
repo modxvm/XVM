@@ -163,9 +163,7 @@ def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
         if BigWorld.player().arena.guiType == constants.ARENA_GUI_TYPE.RANDOM:
             for flags, vo in updated:
                 if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
-                    for vInfoVO in arenaDP.getVehiclesInfoIterator():
-                        if vInfoVO.team == vo.team and vInfoVO.squadIndex == vo.squadIndex:
-                            g_battle.updatePlayerState(vInfoVO.vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
+                    g_battle.updatePlayerState(vo.vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
     except Exception, ex:
         err(traceback.format_exc())
 
