@@ -124,14 +124,9 @@ package com.xvm.battle.vo
             return PlayerStatus.isSelected(playerStatus);
         }
 
-        public function get isSquadMan():Boolean
-        {
-            return PlayerStatus.isSquadMan(playerStatus);
-        }
-
         override public function get isSquadPersonal():Boolean
         {
-            return PlayerStatus.isSquadPersonal(playerStatus) /* pre-battle squad */ || (squadIndex && squadIndex == BattleGlobalData.playerSquad); // dynamic squad
+            return PlayerStatus.isSquadPersonal(playerStatus) /* pre-battle squad */ || (isAlly && squadIndex && squadIndex == BattleGlobalData.playerSquad); // dynamic squad
         }
 
         override public function get isTeamKiller():Boolean
