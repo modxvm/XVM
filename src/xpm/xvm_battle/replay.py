@@ -63,9 +63,8 @@ def _PlayerAvatar_onBecomePlayer(self):
                                 'value': None,
                                 'period': -1
                             }
+                            g_playerEvents.onArenaPeriodChange += onArenaPeriodChange
                             next_data_timing()
-
-            g_playerEvents.onArenaPeriodChange += onArenaPeriodChange
         except Exception as ex:
             err(traceback.format_exc())
 
