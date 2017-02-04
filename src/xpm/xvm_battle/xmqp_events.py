@@ -81,7 +81,6 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
         return
 
     event = data['event']
-    del data['event']
     data = None if not data else unicode_to_ascii(data)
 
     if targets & TARGETS.BATTLE:

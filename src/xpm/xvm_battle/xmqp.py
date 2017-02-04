@@ -47,7 +47,7 @@ def _start(e=None):
         g_eventBus.addListener(XVM_EVENT.XVM_SERVICES_INITIALIZED, _start)
         return
 
-    if config.networkServicesSettings.xmqp or (isReplay() and XMQP_DEVELOPMENT):
+    if (config.networkServicesSettings.xmqp and not isReplay()) or XMQP_DEVELOPMENT:
         token = config.token.token
         if token:
             players = []

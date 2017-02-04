@@ -224,7 +224,6 @@ class Xvm(object):
 
     def onStateBattle(self):
         trace('onStateBattle')
-        minimap_circles.save_or_restore()
 
 
     # PRIVATE

@@ -17,8 +17,9 @@ XFW_MOD_INFO = {
 
 import battle
 import battleloading
+import camera
 import fragCorrelationPanel
 import minimap
-import camera
+import replay
 import vehicleMarkers
 import vehicleMarkersBC
