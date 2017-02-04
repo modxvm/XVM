@@ -96,6 +96,16 @@ package com.xvm.battle.playersPanel
             }
         }
 
+        override public function setState(param1:int):void
+        {
+            if (xfw_state != param1)
+            {
+                super.setState(param1);
+                proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
+                proxy.validateNow();
+            }
+        }
+
         override public function setVehicleIcon(vehicleImage:String):void
         {
             try
