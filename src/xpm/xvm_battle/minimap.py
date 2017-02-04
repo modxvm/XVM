@@ -107,9 +107,8 @@ def _ADDITIONAL_FEATURES_isOn(base, cls, mask):
 def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
     return False if g_minimap.active and g_minimap.labelsEnabled else base(mask)
 
-@overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__createViewPointEntry')
-def _PersonalEntriesPlugin__createViewPointEntry(base, self, avatar):
-   base(self, avatar)
+@registerEvent(PersonalEntriesPlugin, '_PersonalEntriesPlugin__updateViewPointEntry')
+def _PersonalEntriesPlugin__updateViewPointEntry(self, avatar):
    g_minimap.viewPointID = self._getViewPointID()
 
 @overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__onVehicleFeedbackReceived')

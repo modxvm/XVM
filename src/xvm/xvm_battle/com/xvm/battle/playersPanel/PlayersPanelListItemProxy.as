@@ -285,7 +285,7 @@ package com.xvm.battle.playersPanel
                 //Logger.add("PlayersPanelListItemProxy.onConfigLoaded()");
                 bcfg = Config.config.battle;
                 pcfg = Config.config.playersPanel;
-                mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN ? PLAYERS_PANEL_STATE.LONG : ui.xfw_state]];
+                mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[(ui.xfw_state == -1 || ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN) ? PLAYERS_PANEL_STATE.LONG : ui.xfw_state]];
                 ncfg = pcfg.none;
 
                 // revert mirrored icon and X offset
@@ -334,7 +334,7 @@ package com.xvm.battle.playersPanel
         {
             if (extraFieldsHidden)
             {
-                extraFieldsHidden.visible = e.value && (ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN);
+                extraFieldsHidden.visible = e.value && (ui.xfw_state == -1 || ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN);
             }
         }
 
@@ -407,6 +407,7 @@ package com.xvm.battle.playersPanel
                     }
                     break;
                 case PLAYERS_PANEL_STATE.HIDEN:
+                case -1:
                     BattleState.playersPanelWidthLeft = 0;
                     BattleState.playersPanelWidthRight = 0;
                     ui.visible = false;
@@ -439,7 +440,7 @@ package com.xvm.battle.playersPanel
         private function updateStandardFields():void
         {
             //Logger.add("update: " + ui.xfw_state);
-            if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
+            if (ui.xfw_state != -1 && ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
             {
                 if (ui.fragsTF.visible)
                 {
@@ -504,7 +505,7 @@ package com.xvm.battle.playersPanel
 
         private function updatePositions():void
         {
-            if (ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
+            if (ui.xfw_state != -1 && ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
             {
                 if (mcfg.standardFields)
                 {
@@ -818,6 +819,7 @@ package com.xvm.battle.playersPanel
             var bindToIconOffset:int = ui.vehicleIcon.x - x + (isLeftPanel || bcfg.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
             switch (ui.xfw_state)
             {
+                case -1:
                 case PLAYERS_PANEL_STATE.HIDEN:
                     if (extraFieldsHidden)
                     {
