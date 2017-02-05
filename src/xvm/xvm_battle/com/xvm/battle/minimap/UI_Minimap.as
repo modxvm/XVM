@@ -446,7 +446,7 @@ package com.xvm.battle.minimap
 
                 var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(e.accountDBID));
 
-                if (playerState.isIgnored)
+                if (playerState.isIgnored || playerState.isChatBan)
                 {
                     return;
                 }
