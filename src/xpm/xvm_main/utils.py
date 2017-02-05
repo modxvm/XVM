@@ -178,3 +178,16 @@ def takeClosest(myList, myNumber):
        return after
     else:
        return before
+
+class PrettyFloat(float):
+    def __repr__(self):
+        return '%.15g' % self
+
+def pretty_floats(obj):
+    if isinstance(obj, float):
+        return PrettyFloat(obj)
+    elif isinstance(obj, dict):
+        return dict((k, pretty_floats(v)) for k, v in obj.items())
+    elif isinstance(obj, (list, tuple)):
+        return map(pretty_floats, obj)             
+    return obj
