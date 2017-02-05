@@ -25,7 +25,7 @@
     "vehicleLevelAlpha": 0,
     "nickFormatLeft": "        {{r_size=2?|{{r_size=4?   |    }}}}<img src='cfg://sirmax/img/icons/{{comment}}.png'>{{name%.18s~..}}<font alpha='#A0'>{{clan}}</font>",
     "nickFormatRight": "{{name%.18s~..}}<font alpha='#A0'>{{clan}}</font><img src='cfg://sirmax/img/icons/{{comment}}.png'>{{r_size=2?|{{r_size=4?   |    }}}}       &nbsp;",
-    "vehicleFormatLeft": "{{hp|---}} / {{hp-max}} {{{{py:random.randint()}}==0?1|0}}",
+    "vehicleFormatLeft": "{{hp|---}} / {{hp-max}}",
     "vehicleFormatRight": "{{hp|---}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:winrate}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     //"vehicleFormatRight": "<font color='{{c:winrate}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
