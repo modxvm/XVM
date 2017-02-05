@@ -329,6 +329,17 @@ package com.xvm
             "squad", "squad-num", "position", "sys-color-key", "c:system", "marksOnGun",
             "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"];
 
+        private const STAT_MACROS:Vector.<String> = new <String>[
+            "xvm-user", "flag", "clanrank", "topclan", "region", "comment", "avglvl", "xte", "xeff", "xwn6",
+            "xwn8", "xwn", "xwgr", "eff", "wn6", "wn8", "wn", "wgr", "r", "xr", "winrate", "rating", "battles",
+            "wins", "kb", "t-winrate", "t-rating", "t-battles", "t-wins", "t-kb", "t-hb", "tdb", "xtdb", "tdv",
+            "tfb", "tsb", "c:xte", "c:xeff", "c:xwn6", "c:xwn8", "c:xwn", "c:xwgr", "c:eff", "c:wn6", "c:wn8",
+            "c:wn", "c:wgr", "c:r", "c:xr", "c:winrate", "c:rating", "c:kb", "c:avglvl", "c:t-winrate",
+            "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
+            "a:xwn6", "a:xwn8", "a:xwn", "a:xwgr", "a:eff", "a:wn6", "a:wn8", "a:wn", "a:wgr", "a:r", "a:xr",
+            "a:winrate", "a:rating", "a:kb", "a:avglvl", "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb",
+            "a:xtdb", "a:tdv", "a:tfb", "a:tsb", "top_tankers_rank", "top_tankers_emblem"];
+
         private var m_globals:Object;
         private var m_players:Object; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
         private var m_macros_cache_globals:Object;
@@ -345,6 +356,8 @@ package com.xvm
             _clear();
         }
 
+        private const nullFunc:Function = function():* { return null; }
+
         private function _clear():void
         {
             m_globals = { };
@@ -355,6 +368,10 @@ package com.xvm
             m_macro_parts_cache = { };
             m_format_macro_fmt_suf_cache = { };
             m_prepare_value_cache = { };
+            for each (var macros:String in STAT_MACROS)
+            {
+                m_globals[macros] = nullFunc;
+            }
         }
 
         private function _getPlayerCache(options:IVOMacrosOptions):Object
@@ -598,6 +615,7 @@ package com.xvm
                 else
                 {
                     __out.isStaticMacro = false;
+                    value = macroName;
                 }
             }
 

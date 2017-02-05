@@ -45,7 +45,6 @@ def _PlayerAvatar_onBecomePlayer(self):
             xvm_data = simplejson.loads(g_replayCtrl._BattleReplay__replayCtrl.getArenaInfoStr()).get('xvm', None)
             if xvm_data:
                 xvm_data = unicode_to_ascii(xvm_data)
-                log(xvm_data)
                 if xvm_data.get('ver', None) == '1.0':
                     minimap_circles.setMinimapCirclesData(xvm_data['global']['minimap_circles'])
                     global _xvm_play_data
