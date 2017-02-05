@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 01.12.2016
+    # Last update: 05.02.2017
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -161,10 +161,12 @@ _data = {
     "germany:G109_Steyr_WT":                 'WTstr',
     "germany:G10_PzIII_AusfJ":               'Pz3',
     "germany:G10_PzIII_AusfJ_training":      'Pz3',
+    "germany:G110_Typ_205":                  'Mausch',
     "germany:G112_KanonenJagdPanzer":        'KnJpz',
     "germany:G113_SP_I_C":                   'sp1c',
     "germany:G114_Rheinmetall_Skorpian":     'skorp',
     "germany:G114_Skorpian":                 'skorp',
+    "germany:G115_Typ_205B":                 '100.01p',
     "germany:G115_Typ_205_4_Jun":            'vk100',
     "germany:G116_Turan_III_prot":           'Turn3',
     "germany:G117_Toldi_III":                'Told3',
@@ -182,6 +184,7 @@ _data = {
     "germany:G13_VK3001H":                   '3001h',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
+    "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',
     "germany:G16_PzVIB_Tiger_II_IGR":        'Tig2',
     "germany:G16_PzVIB_Tiger_II_training":   'Tig2',
     "germany:G17_JagdPzIV":                  'Jpz4',
@@ -213,6 +216,7 @@ _data = {
     "germany:G42_Maus_IGR":                  'Maus',
     "germany:G43_Sturer_Emil":               'Emil',
     "germany:G44_JagdTiger":                 'JagT',
+    "germany:G44_JagdTigerH":                'JagT·h',
     "germany:G45_G_Tiger":                   'GWT',
     "germany:G46_T-25":                      'T·25',
     "germany:G48_E-25":                      'E·25',
@@ -256,6 +260,7 @@ _data = {
     "germany:G90_DW_II":                     'DW2',
     "germany:G91_Pro_Ag_A":                  'LeoPrA',
     "germany:G92_VK7201":                    'vk7201',
+    "germany:G92_VK7201P":                   'PzKf·VII',
     "germany:G93_GW_Mk_VIe":                 'Gpz·VI',
     "germany:G94_GW_Tiger_P":                'GWTP',
     "germany:G95_Pz_Sfl_IVb":                'PzS4b',
@@ -300,7 +305,7 @@ _data = {
     "sweden:S04_Lago_I":                     'lago',
     "sweden:S05_Strv_M21_29":                'fm/21',
     "sweden:S06_Ikv_90_Typ_B_Bofors":        'lkv90·b',
-    "sweden:S07_Strv_74":                    'strv74',
+    "sweden:S07_Strv_74":                    'strv·74',
     "sweden:S08_Ikv_65_Alt_2":               'lkv60·2',
     "sweden:S09_L_120_TD":                   'fm/42',
     "sweden:S10_Strv_103_0_Series":          '103·0',
@@ -315,6 +320,8 @@ _data = {
     "sweden:S19_Sav_M43":                    'm/43',
     "sweden:S20_Ikv_72":                     'lkv72',
     "sweden:S21_UDES_03":                    'udes·03',
+    "sweden:S22_Strv_S1":                    'strv·S1',
+    "sweden:S23_Strv_81":                    'strv·81',
     "uk:GB01_Medium_Mark_I":                 'Med1',
     "uk:GB01_Medium_Mark_I_bot":             'Med1',
     "uk:GB03_Cruiser_Mk_I":                  'Crus1',
@@ -529,6 +536,7 @@ _data = {
     "ussr:R120_T22SR_A22":                   't22sr',
     "ussr:R121_KV4_KTT":                     'Kv·4ktts',
     "ussr:R122_T44_100":                     't44·100',
+    "ussr:R122_T44_100B":                    't44·100m',
     "ussr:R123_Kirovets_1":                  'Kirov1',
     "ussr:R125_T_45":                        't45',
     "ussr:R126_Object_730_5":                'obj268v5',
@@ -617,5 +625,6 @@ _data = {
     "ussr:R96_Object_430":                   'obj430',
     "ussr:R97_Object_140":                   'obj140',
     "ussr:R98_T44_85":                       't44·85',
+    "ussr:R98_T44_85M":                      't44·85m',
     "ussr:R99_T44_122":                      't44·122'
 }
