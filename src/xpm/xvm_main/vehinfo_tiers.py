@@ -14,7 +14,7 @@ from gui.shared.utils.requesters import REQ_CRITERIA
 
 _special = {
     # Data from http://forum.worldoftanks.ru/index.php?/topic/41221-
-    # Last update: 25.09.2016
+    # Last update: 05.02.2017
 
     # level 2
     'germany:G53_PzI':                   [ 2, 2 ],

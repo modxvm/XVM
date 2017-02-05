@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 01.12.2016
+    // Last update: 05.02.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -139,10 +139,12 @@
     "germany-G109_Steyr_WT":                 {"name": null, "short": null},
     "germany-G10_PzIII_AusfJ":               {"name": null, "short": null},
     "germany-G10_PzIII_AusfJ_training":      {"name": null, "short": null},
+    "germany-G110_Typ_205":                  {"name": null, "short": null},
     "germany-G112_KanonenJagdPanzer":        {"name": null, "short": null},
     "germany-G113_SP_I_C":                   {"name": null, "short": null},
     "germany-G114_Rheinmetall_Skorpian":     {"name": null, "short": null},
     "germany-G114_Skorpian":                 {"name": null, "short": null},
+    "germany-G115_Typ_205B":                 {"name": null, "short": null},
     "germany-G115_Typ_205_4_Jun":            {"name": null, "short": null},
     "germany-G116_Turan_III_prot":           {"name": null, "short": null},
     "germany-G117_Toldi_III":                {"name": null, "short": null},
@@ -160,6 +162,7 @@
     "germany-G13_VK3001H":                   {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
+    "germany-G16_PzVIB_Tiger_II_F":          {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_IGR":        {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_training":   {"name": null, "short": null},
     "germany-G17_JagdPzIV":                  {"name": null, "short": null},
@@ -191,6 +194,7 @@
     "germany-G42_Maus_IGR":                  {"name": null, "short": null},
     "germany-G43_Sturer_Emil":               {"name": null, "short": null},
     "germany-G44_JagdTiger":                 {"name": null, "short": null},
+    "germany-G44_JagdTigerH":                {"name": null, "short": null},
     "germany-G45_G_Tiger":                   {"name": null, "short": null},
     "germany-G46_T-25":                      {"name": null, "short": null},
     "germany-G48_E-25":                      {"name": null, "short": null},
@@ -234,6 +238,7 @@
     "germany-G90_DW_II":                     {"name": null, "short": null},
     "germany-G91_Pro_Ag_A":                  {"name": null, "short": null},
     "germany-G92_VK7201":                    {"name": null, "short": null},
+    "germany-G92_VK7201P":                   {"name": null, "short": null},
     "germany-G93_GW_Mk_VIe":                 {"name": null, "short": null},
     "germany-G94_GW_Tiger_P":                {"name": null, "short": null},
     "germany-G95_Pz_Sfl_IVb":                {"name": null, "short": null},
@@ -293,6 +298,8 @@
     "sweden-S19_Sav_M43":                    {"name": null, "short": null},
     "sweden-S20_Ikv_72":                     {"name": null, "short": null},
     "sweden-S21_UDES_03":                    {"name": null, "short": null},
+    "sweden-S22_Strv_S1":                    {"name": null, "short": null},
+    "sweden-S23_Strv_81":                    {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I":                 {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_bot":             {"name": null, "short": null},
     "uk-GB03_Cruiser_Mk_I":                  {"name": null, "short": null},
@@ -507,6 +514,7 @@
     "ussr-R120_T22SR_A22":                   {"name": null, "short": null},
     "ussr-R121_KV4_KTT":                     {"name": null, "short": null},
     "ussr-R122_T44_100":                     {"name": null, "short": null},
+    "ussr-R122_T44_100B":                    {"name": null, "short": null},
     "ussr-R123_Kirovets_1":                  {"name": null, "short": null},
     "ussr-R125_T_45":                        {"name": null, "short": null},
     "ussr-R126_Object_730_5":                {"name": null, "short": null},
@@ -595,6 +603,7 @@
     "ussr-R96_Object_430":                   {"name": null, "short": null},
     "ussr-R97_Object_140":                   {"name": null, "short": null},
     "ussr-R98_T44_85":                       {"name": null, "short": null},
+    "ussr-R98_T44_85M":                      {"name": null, "short": null},
     "ussr-R99_T44_122":                      {"name": null, "short": null}
   }
 }
