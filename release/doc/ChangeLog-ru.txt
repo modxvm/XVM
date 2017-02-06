@@ -3,6 +3,9 @@ XVM-6.5.5-dev:
   * добавлены новые опции в секции "carousel"/"normal"/"fields" и "carousel"/"small"/"fields":
       "favorite" - маркер основной техники
   * добавлена поддержка горячих клавиш для экстраполей в карусели
+  * удалена опция "saveLocationInBattle" из секции "damageLog"
+    добавлена новая опция в секции "damageLog"/"log" и "damageLog"/"lastHit":
+      "moveInBattle" - разрешить перемещение battleLabels мышью в бою
 
 XVM-6.5.4:
   * адаптация для WoT 0.9.17.0.3

@@ -45,12 +45,13 @@
     // true - disable standard summarized damage.
     // true - отключить стандартный суммарный урон.
     "disabledSummaryStats": true,
-    //TO DO
-    //true - запоминать местоположение лога и последенего урона в бою
-    "saveLocationInBattle": false,
     // Log of the received damage.
     // Лог полученного урона.
     "log": {
+      //TO DO
+      //true - разрешено перемещать в бою лог полученного урона, макросы в "x" и "y" не работают
+      //false - запрещено перемещать в бою лог полученного урона, макросы в "x" и "y" работают
+      "moveInBattle": false,
       "x": 240,
       "y": -23,
       // Kind of the received damage (macro {{dmg-kind}}).
@@ -252,6 +253,10 @@
     // Отображение последнего урона (попадания).
     "lastHit": {
       "$ref": { "path":"damageLog.log" },
+      //TO DO
+      //true - разрешено перемещать поле последнего урона в бою, макросы в "x" и "y" не работают
+      //false - запрещено перемещать поле последнего урона в бою, макросы в "x" и "y" работают
+      "moveInBattle": false,
       "x": -120,
       "y": 200,
       // true - show hits without damage, false - not to show.

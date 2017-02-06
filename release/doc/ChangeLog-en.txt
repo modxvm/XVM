@@ -3,7 +3,10 @@
   * added new options in the "carousel"/"normal"/"fields" and "carousel"/"small"/"fields" sections:
       "favorite" - favorite vehicle mark
   * added hotkeys support for the extraFields in the carousel
-
+  * option "damageLog"/"saveLocationInBattle" removed
+    added new options in the "damageLog"/"log" and "damageLog"/"lastHit": sections:
+      "moveInBattle" - to allow movement of battleLabels by a mouse in battle
+  
 XVM-6.5.4:
   * adaptation to WoT 0.9.17.0.3
   * various bug fixes
