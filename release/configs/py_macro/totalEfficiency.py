@@ -133,8 +133,8 @@ def _onTotalEfficiencyUpdated(self, diff):
             as_event('ON_TOTAL_EFFICIENCY')
 
 
-@registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__addBattleEfficiencyEvent')
-def addBattleEfficiencyEvent(self, ribbonType = '', leftFieldStr = '', vehName = '', vehType = '', rightFieldStr = ''):
+@registerEvent(BattleRibbonsPanel, '_addRibbon')
+def _addRibbon(self, ribbonID, ribbonType='', leftFieldStr='', vehName='', vehType='', rightFieldStr=''):
     global ribbonTypes, numberDamagesDealt
     if player is not None:
         if hasattr(player.inputHandler.ctrl, 'curVehicleID'):

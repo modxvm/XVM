@@ -736,12 +736,16 @@ _logAltBackground = Log('damageLog/logAltBackground/')
 _lastHit = LastHit('damageLog/lastHit/')
 
 
-@overrideMethod(DamageLogPanel, 'as_detailStatsS')
-def as_detailStatsS(base, self, isVisible, messages):
+@overrideMethod(DamageLogPanel, '_addToTopLog')
+def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
     if not config.get('damageLog/disabledDetailStats'):
-        return base(self, isVisible, messages)
-    else:
-        return base(self, False, messages)
+        return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
+
+
+@overrideMethod(DamageLogPanel, '_addToBottomLog')
+def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
+    if not config.get('damageLog/disabledDetailStats'):
+        return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
 
 
 @overrideMethod(DamageLogPanel, 'as_summaryStatsS')
