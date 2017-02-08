@@ -23,7 +23,7 @@ def smooth_transition_color(rules, color_100, color_0, percent, maximum=100):
     :param color_0: int color if percent == 0.
     :param percent: float current value.
     :param maximum: float maximum value.
-    :return: str hex "0xFFFFFF".
+    :return: str hex "FFFFFF".
     """
     if percent >= maximum:
         return color_100
@@ -40,48 +40,48 @@ def smooth_transition_color(rules, color_100, color_0, percent, maximum=100):
     if rules == 'RGB':
         if r_k <= k:
             if (r_k + g_k) <= k:
-                return '0x{:06x}'.format(rgb_to_hex(r_100, g_100, int(b_0 + (k - r_k - g_k) * b_delta / b_k)))
+                return '{:06x}'.format(rgb_to_hex(r_100, g_100, int(b_0 + (k - r_k - g_k) * b_delta / b_k)))
             else:
-                return '0x{:06x}'.format(rgb_to_hex(r_100, int(g_0 + (k - r_k) * g_delta / g_k), b_0))
+                return '{:06x}'.format(rgb_to_hex(r_100, int(g_0 + (k - r_k) * g_delta / g_k), b_0))
         else:
-            return '0x{:06x}'.format(rgb_to_hex(int(r_0 + k * r_delta / r_k), g_0, b_0))
+            return '{:06x}'.format(rgb_to_hex(int(r_0 + k * r_delta / r_k), g_0, b_0))
     elif rules == 'RBG':
         if r_k <= k:
             if (r_k + b_k) <= k:
-                return '0x{:06x}'.format(rgb_to_hex(r_100, int(g_0 + (k - r_k - b_k) * g_delta / g_k), b_100))
+                return '{:06x}'.format(rgb_to_hex(r_100, int(g_0 + (k - r_k - b_k) * g_delta / g_k), b_100))
             else:
-                return '0x{:06x}'.format(rgb_to_hex(r_100, g_0, int(b_0 + (k - r_k) * b_delta / b_k)))
+                return '{:06x}'.format(rgb_to_hex(r_100, g_0, int(b_0 + (k - r_k) * b_delta / b_k)))
         else:
-            return '0x{:06x}'.format(rgb_to_hex(int(r_0 + k * r_delta / r_k), g_0, b_0))
+            return '{:06x}'.format(rgb_to_hex(int(r_0 + k * r_delta / r_k), g_0, b_0))
     elif rules == 'GRB':
         if g_k <= k:
             if (g_k + r_k) <= k:
-                return '0x{:06x}'.format(rgb_to_hex(r_100, g_100, int(b_0 + (k - r_k - g_k) * b_delta / b_k)))
+                return '{:06x}'.format(rgb_to_hex(r_100, g_100, int(b_0 + (k - r_k - g_k) * b_delta / b_k)))
             else:
-                return '0x{:06x}'.format(rgb_to_hex(int(r_0 + (k - g_k) * r_delta / r_k), g_100, b_0))
+                return '{:06x}'.format(rgb_to_hex(int(r_0 + (k - g_k) * r_delta / r_k), g_100, b_0))
         else:
-            return '0x{:06x}'.format(rgb_to_hex(r_0, int(g_0 + k * g_delta / g_k), b_0))
+            return '{:06x}'.format(rgb_to_hex(r_0, int(g_0 + k * g_delta / g_k), b_0))
     elif rules == 'GBR':
         if g_k <= k:
             if (g_k + b_k) <= k:
-                return '0x{:06x}'.format(rgb_to_hex(int(r_0 + (k - g_k - b_k) * r_delta / r_k), g_100, b_100))
+                return '{:06x}'.format(rgb_to_hex(int(r_0 + (k - g_k - b_k) * r_delta / r_k), g_100, b_100))
             else:
-                return '0x{:06x}'.format(rgb_to_hex(r_0, g_100, int(b_0 + (k - g_k) * b_delta / b_k)))
+                return '{:06x}'.format(rgb_to_hex(r_0, g_100, int(b_0 + (k - g_k) * b_delta / b_k)))
         else:
-            return '0x{:06x}'.format(rgb_to_hex(r_0, int(g_0 + k * g_delta / g_k), b_0))
+            return '{:06x}'.format(rgb_to_hex(r_0, int(g_0 + k * g_delta / g_k), b_0))
     elif rules == 'BRG':
         if b_k <= k:
             if (r_k + b_k) <= k:
-                return '0x{:06x}'.format(rgb_to_hex(r_100, int(g_0 + (k - r_k - b_k) * g_delta / g_k), b_100))
+                return '{:06x}'.format(rgb_to_hex(r_100, int(g_0 + (k - r_k - b_k) * g_delta / g_k), b_100))
             else:
-                return '0x{:06x}'.format(rgb_to_hex(int(r_0 + (k - b_k) * r_delta / r_k), g_0, b_100))
+                return '{:06x}'.format(rgb_to_hex(int(r_0 + (k - b_k) * r_delta / r_k), g_0, b_100))
         else:
-            return '0x{:06x}'.format(rgb_to_hex(r_0, g_0, int(b_0 + k * b_delta / b_k)))
+            return '{:06x}'.format(rgb_to_hex(r_0, g_0, int(b_0 + k * b_delta / b_k)))
     elif rules == 'BGR':
         if b_k <= k:
             if (g_k + b_k) <= k:
-                return '0x{:06x}'.format(rgb_to_hex(int(r_0 + (k - g_k - b_k) * r_delta / r_k), g_100, b_100))
+                return '{:06x}'.format(rgb_to_hex(int(r_0 + (k - g_k - b_k) * r_delta / r_k), g_100, b_100))
             else:
-                return '0x{:06x}'.format(rgb_to_hex(r_0, int(g_0 + (k - b_k) * g_delta / g_k), b_100))
+                return '{:06x}'.format(rgb_to_hex(r_0, int(g_0 + (k - b_k) * g_delta / g_k), b_100))
         else:
-            return '0x{:06x}'.format(rgb_to_hex(r_0, g_0, int(b_0 + k * b_delta / b_k)))
+            return '{:06x}'.format(rgb_to_hex(r_0, g_0, int(b_0 + k * b_delta / b_k)))
