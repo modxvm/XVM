@@ -77,3 +77,9 @@ from xvm import xvm2sup
 def xvm2sup_xvm2sup(x=None, default=''):
     res = xvm2sup.xvm2sup(x)
     return res if res is not None else default
+
+# Dynamic color
+
+@xvm.export('xvm.dynamic_color_rating', deterministic=False)
+def dynamic_color_rating(rating, value):
+    return utils.dynamic_color_rating(rating, value)

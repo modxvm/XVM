@@ -1,4 +1,5 @@
 import struct
+import xvm_main.python.config as config
 
 def brighten_color(color, percent):
     r, g, b = hex_to_rgb(color)
@@ -85,3 +86,27 @@ def smooth_transition_color(rules, color_100, color_0, percent, maximum=100):
                 return '{:06x}'.format(rgb_to_hex(r_0, int(g_0 + (k - b_k) * g_delta / g_k), b_100))
         else:
             return '{:06x}'.format(rgb_to_hex(r_0, g_0, int(b_0 + k * b_delta / b_k)))
+
+def dynamic_color_rating(rating, value):
+    """
+    Dynamic color by various statistical parameters. (file color.xc)
+    :param rating: str the name of dynamic color from the color.xc file.
+    :param value: int value.
+    :return: str hex "FFFFFF".
+    """
+    colors = config.get('colors')
+    rating = 'x' if rating in ['xeff', 'xte', 'xeff', 'xwn6', 'xwn8', 'xwgr', 'xtdb'] else rating
+    if rating not in colors:
+        return
+    l = colors[rating]
+    if value >= l[len(l) - 2]['value']:
+        return l[len(l) - 1]['color'][2:]
+    for v in reversed(l):
+        if value > v['value']:
+            l_c = v['color']
+            l_v = v['value']
+            return smooth_transition_color('RGB', int(r_c, 16), int(l_c, 16), (value - l_v), (r_v - l_v))
+        else:
+            r_c = v['color']
+            r_v = v['value']
+    return l[0]['color'][2:]
