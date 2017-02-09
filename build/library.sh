@@ -273,3 +273,23 @@ load_repositorystats(){
         export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
     popd > /dev/null
 }
+
+#used in: /build.sh
+#used in: /build/ci/ci_deploy.sh
+clean_repodir(){
+    pushd "$XVMBUILD_ROOT_PATH" > /dev/null
+
+    rm -rf src/xvm/lib/*
+    rm -rf src/xvm/obj/
+    rm -rf src/xfw/src/actionscript/lib/*
+    rm -rf src/xfw/src/actionscript/obj/*
+    rm -rf src/xfw/src/actionscript/output/*
+    rm -rf ~output/
+    rm -rf src/xfw/~output/
+    rm -rf src/xfw/~output_package/
+    rm -rf src/xfw/~output_wotmod/
+
+    rm -rf xvminst/
+
+    popd > /dev/null
+}

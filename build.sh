@@ -21,24 +21,6 @@ fi
 ##########################
 #### HELPER FUNCTIONS ####
 ##########################
-clean_repodir(){
-    pushd "$XVMBUILD_ROOT_PATH" > /dev/null
-
-    rm -rf src/xvm/lib/*
-    rm -rf src/xvm/obj/
-    rm -rf src/xfw/src/actionscript/lib/*
-    rm -rf src/xfw/src/actionscript/obj/*
-    rm -rf src/xfw/src/actionscript/output/*
-    rm -rf ~output/
-    rm -rf src/xfw/~output/
-    rm -rf src/xfw/~output_package/
-    rm -rf src/xfw/~output_wotmod/
-
-    rm -rf xvminst/
-
-    popd > /dev/null
-}
-
 clean_sha1()
 {
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
