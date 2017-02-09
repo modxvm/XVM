@@ -34,3 +34,8 @@ src/installer/src/dll/findwot/build/
 */build/
 */.vs/
 CMakeSettings.json
+.backup/
+.cache/
+*.validationcache
+*.log
+*.wsettings
