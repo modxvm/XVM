@@ -37,6 +37,7 @@ create_directories(){
     mkdir -p ~output/~ver/scripts
     mkdir -p ~output/configs/xvm
     mkdir -p ~output/mods/xfw/actionscript
+    mkdir -p ~output/mods/xfw/native
     mkdir -p ~output/mods/xfw/python
     mkdir -p ~output/mods/shared_resources/xvm/
     popd > /dev/null
@@ -91,6 +92,7 @@ build_xfw(){
     cp -rf src/xfw/~output/python/mods/* ~output/mods/
     cp -rf src/xfw/~output/python/scripts/* ~output/~ver/scripts/
     cp -rf src/xfw/~output/swf/*.swf ~output/mods/xfw/actionscript/
+    cp -rf src/xfw/~output/native/* ~output/mods/xfw/native/
     popd >/dev/null
 }
 
