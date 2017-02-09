@@ -32,7 +32,7 @@ pack_xfw(){
     echo "$XVMBUILD_XFW_HASH" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
     echo "$XVMBUILD_XFW_BRANCH" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
 
-    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/~output/ > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/~output_package/ > /dev/null
     zip -9 -r -q "$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip ./
     rm "$XVMBUILD_XFW_REVISION"
     popd > /dev/null
@@ -45,7 +45,7 @@ deploy_xvm(){
 
     mkdir -p "$XVMBUILD_OUTPUT_PATH"/
 
-    mv -f "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip "$XVMBUILD_OUTPUT_PATH"/
+    mv -f "$XVMBUILD_ROOT_PATH"/src/xfw/~output_package/"$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip "$XVMBUILD_OUTPUT_PATH"/
     mv -f "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip "$XVMBUILD_OUTPUT_PATH"/
 
     cp -f "$XVMBUILD_OUTPUT_PATH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip "$XVMBUILD_OUTPUT_PATH"/latest_xvm.zip

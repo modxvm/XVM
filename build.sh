@@ -21,6 +21,24 @@ fi
 ##########################
 #### HELPER FUNCTIONS ####
 ##########################
+clean_repodir(){
+    pushd "$XVMBUILD_ROOT_PATH" > /dev/null
+
+    rm -rf src/xvm/lib/*
+    rm -rf src/xvm/obj/
+    rm -rf src/xfw/src/actionscript/lib/*
+    rm -rf src/xfw/src/actionscript/obj/*
+    rm -rf src/xfw/src/actionscript/output/*
+    rm -rf ~output/
+    rm -rf src/xfw/~output/
+    rm -rf src/xfw/~output_package/
+    rm -rf src/xfw/~output_wotmod/
+
+    rm -rf xvminst/
+
+    popd > /dev/null
+}
+
 clean_sha1()
 {
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
@@ -94,6 +112,13 @@ build_xfw(){
     popd >/dev/null
 }
 
+build_xfw_fixversion()
+{
+    pushd "$XVMBUILD_ROOT_PATH" >/dev/null
+    mv "src/xfw/~output_package/res_mods/~ver/" "src/xfw/~output_package/res_mods/$XVMBUILD_WOT_VERSION/"
+    popd >/dev/null
+}
+
 build_xpm(){
     echo ""
     echo "Building XPM"
@@ -113,7 +138,10 @@ build_native()
     echo "Building C Python modules"
 
     pushd "$XVMBUILD_ROOT_PATH"/src/xvm-native/ >/dev/null
-    ./build.sh || exit $?
+   
+    mkdir -p "../../~output/mods/packages/"
+    cp -rf "./release/packages/" "../../~output/mods/"
+
     popd >/dev/null
 }
 
@@ -201,6 +229,7 @@ clean_repodir
 create_directories
 
 build_xfw
+build_xfw_fixversion
 build_xpm
 build_as3
 build_native
