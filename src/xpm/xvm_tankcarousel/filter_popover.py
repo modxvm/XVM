@@ -86,8 +86,8 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
 #   CompleteCrew	NoMaster
 #   Reserve		[igr]
 @overrideMethod(filter_popover, '_getInitialVO')
-def _filter_popover_getInitialVO(base, filters, mapping, xpRateMultiplier, switchCarouselSelected):
-    data = base(filters, mapping, xpRateMultiplier, switchCarouselSelected)
+def _filter_popover_getInitialVO(base, filters, mapping, xpRateMultiplier):
+    data = base(filters, mapping, xpRateMultiplier)
     #debug(data['specials'])
     #debug(mapping)
     try:
