@@ -129,9 +129,9 @@ g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVe
 # LOBBY
 
 @overrideMethod(ProfileTechniqueWindow, 'requestData')
-def ProfileTechniqueWindow_RequestData(base, self, data):
-    if data.vehicleId:
-        base(self, data)
+def ProfileTechniqueWindow_RequestData(base, self, vehicleId):
+    if vehicleId:
+        base(self, vehicleId)
 
 
 # PRE-BATTLE
