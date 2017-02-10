@@ -7,10 +7,34 @@
 					<PropertyList>
 						<Property Name="Volume" Type="Real64">
 							<RTPCList>
+								<RTPC Name="" ID="{8D51BA52-155B-4F5F-9BB6-C4FA008E8D3C}" ShortID="147145178">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="RTPC_ext_menu_volume_master" ID="{C4B8E61C-FCBC-49C1-8049-A9AE667D2985}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{41AEC19D-DCEB-4B79-8A71-E4D92EB8839C}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
 								<RTPC Name="" ID="{9863F166-58CA-4E16-AFBE-2A208AB3D504}" ShortID="48095402">
 									<ReferenceList>
 										<Reference Name="ControlInput">
-											<ObjectRef Name="RTPC_ext_menu_volume_gui" ID="{133C3CF3-84D8-4D9C-8850-70AE79D45FBC}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+											<ObjectRef Name="RTPC_ext_menu_volume_gui" ID="{133C3CF3-84D8-4D9C-8850-70AE79D45FBC}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
 										</Reference>
 									</ReferenceList>
 									<Curve Name="" ID="{2E3AB9A3-B76B-44FE-9414-D265EFB7E8B9}">
@@ -330,10 +354,34 @@
 								<RTPC Name="" ID="{BE3C5E42-9F65-41CD-8F83-D631A1D62181}" ShortID="735346373">
 									<ReferenceList>
 										<Reference Name="ControlInput">
-											<ObjectRef Name="RTPC_ext_menu_volume_ambient" ID="{E9A1F0DE-2EC0-44B6-AA6F-B5212CE7F66B}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+											<ObjectRef Name="RTPC_ext_menu_volume_ambient" ID="{E9A1F0DE-2EC0-44B6-AA6F-B5212CE7F66B}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
 										</Reference>
 									</ReferenceList>
 									<Curve Name="" ID="{75F65184-1B2B-4792-ADA3-79103DFFF6BF}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+								<RTPC Name="" ID="{5D1909F7-F92B-44B8-A8E5-D89B96848FE1}" ShortID="887628444">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="RTPC_ext_menu_volume_master" ID="{C4B8E61C-FCBC-49C1-8049-A9AE667D2985}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{25D9DD25-246F-4FD9-A2CF-7BE88A091C8D}">
 										<PropertyList>
 											<Property Name="Flags" Type="int32" Value="3"/>
 										</PropertyList>
@@ -367,13 +415,13 @@
 					<PropertyList>
 						<Property Name="Volume" Type="Real64">
 							<RTPCList>
-								<RTPC Name="" ID="{65EE484F-DCD7-41D6-AA1C-CEABF0F7F22D}" ShortID="911491208">
+								<RTPC Name="" ID="{E1DDEF18-28BF-4AD9-823A-3C38457B6C88}" ShortID="200501368">
 									<ReferenceList>
 										<Reference Name="ControlInput">
-											<ObjectRef Name="RTPC_ext_menu_volume_effects" ID="{83E0AF15-642A-4CC5-836A-FC0D04781720}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+											<ObjectRef Name="RTPC_ext_menu_volume_master" ID="{C4B8E61C-FCBC-49C1-8049-A9AE667D2985}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
 										</Reference>
 									</ReferenceList>
-									<Curve Name="" ID="{C37F5522-9143-4081-9F00-F9F0F242B2CF}">
+									<Curve Name="" ID="{52F7E597-D286-4E70-AF0F-F73BEF194BB0}">
 										<PropertyList>
 											<Property Name="Flags" Type="int32" Value="3"/>
 										</PropertyList>
@@ -391,29 +439,13 @@
 										</PointList>
 									</Curve>
 								</RTPC>
-							</RTPCList>
-						</Property>
-					</PropertyList>
-					<ReferenceList>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{8BF591CD-EB37-4BF0-9F2C-077A75B221F8}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{A38A5176-86E4-4A8E-B718-F05FE8F8F0FE}"/>
-						</Reference>
-					</ReferenceList>
-				</ActorMixer>
-				<ActorMixer Name="master" ID="{F24F57F2-56DE-439C-BF0B-1697385CFD9F}" ShortID="1012470469">
-					<PropertyList>
-						<Property Name="Volume" Type="Real64">
-							<RTPCList>
-								<RTPC Name="" ID="{5FC60882-72CA-4062-A64E-C6D115B3E9A8}" ShortID="404768550">
+								<RTPC Name="" ID="{65EE484F-DCD7-41D6-AA1C-CEABF0F7F22D}" ShortID="911491208">
 									<ReferenceList>
 										<Reference Name="ControlInput">
-											<ObjectRef Name="RTPC_ext_menu_volume_master" ID="{C4B8E61C-FCBC-49C1-8049-A9AE667D2985}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+											<ObjectRef Name="RTPC_ext_menu_volume_effects" ID="{83E0AF15-642A-4CC5-836A-FC0D04781720}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
 										</Reference>
 									</ReferenceList>
-									<Curve Name="" ID="{76C5D691-2F7D-4264-8635-09CD754C189E}">
+									<Curve Name="" ID="{C37F5522-9143-4081-9F00-F9F0F242B2CF}">
 										<PropertyList>
 											<Property Name="Flags" Type="int32" Value="3"/>
 										</PropertyList>
@@ -447,10 +479,34 @@
 					<PropertyList>
 						<Property Name="Volume" Type="Real64">
 							<RTPCList>
+								<RTPC Name="" ID="{1CCE1304-FF81-4502-9774-C129C9717774}" ShortID="880616956">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="RTPC_ext_menu_volume_master" ID="{C4B8E61C-FCBC-49C1-8049-A9AE667D2985}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{7B04A4CE-ADC0-4D23-A485-FFDC5286188C}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
 								<RTPC Name="" ID="{F7AF9BE5-80EE-4435-A4E5-E951AAAF4D57}" ShortID="766137507">
 									<ReferenceList>
 										<Reference Name="ControlInput">
-											<ObjectRef Name="RTPC_ext_menu_volume_music" ID="{8EEFDB57-AE63-4FA4-8617-49C31265B2DF}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+											<ObjectRef Name="RTPC_ext_menu_volume_music" ID="{8EEFDB57-AE63-4FA4-8617-49C31265B2DF}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
 										</Reference>
 									</ReferenceList>
 									<Curve Name="" ID="{B271ECB2-214A-46CD-A337-B0B2A098B8AA}">
@@ -490,10 +546,34 @@
 								<RTPC Name="" ID="{84CE91DE-1A6E-448C-9E89-A9959799D87A}" ShortID="663193412">
 									<ReferenceList>
 										<Reference Name="ControlInput">
-											<ObjectRef Name="RTPC_ext_menu_volume_vehicles" ID="{5A3D86FD-2C19-4914-B7C6-40006E8ADDB5}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+											<ObjectRef Name="RTPC_ext_menu_volume_vehicles" ID="{5A3D86FD-2C19-4914-B7C6-40006E8ADDB5}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
 										</Reference>
 									</ReferenceList>
 									<Curve Name="" ID="{881E1BA8-69ED-4D8D-935F-CD3240DEAF28}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+								<RTPC Name="" ID="{6A3DBCE4-DF83-437F-8783-EBADFF37973D}" ShortID="976829714">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="RTPC_ext_menu_volume_master" ID="{C4B8E61C-FCBC-49C1-8049-A9AE667D2985}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{DF424BC7-5400-4D64-AC09-5248857372DB}">
 										<PropertyList>
 											<Property Name="Flags" Type="int32" Value="3"/>
 										</PropertyList>
@@ -530,10 +610,34 @@
 								<RTPC Name="" ID="{623B7E61-75E8-40F5-9411-A9B147C8CC2C}" ShortID="1071393127">
 									<ReferenceList>
 										<Reference Name="ControlInput">
-											<ObjectRef Name="RTPC_ext_menu_volume_music_hangar" ID="{AB880157-6695-428B-8B4A-03879918136D}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+											<ObjectRef Name="RTPC_ext_menu_volume_music_hangar" ID="{AB880157-6695-428B-8B4A-03879918136D}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
 										</Reference>
 									</ReferenceList>
 									<Curve Name="" ID="{7EC34712-A929-49FC-B335-61EEEA0E9B98}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+								<RTPC Name="" ID="{2EEA3ED3-4A01-4B7B-ADFF-3BD288756E5C}" ShortID="400852321">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="RTPC_ext_menu_volume_master" ID="{C4B8E61C-FCBC-49C1-8049-A9AE667D2985}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{EE86E2AC-2705-4BB4-9DE1-FEBE4788323F}">
 										<PropertyList>
 											<Property Name="Flags" Type="int32" Value="3"/>
 										</PropertyList>
@@ -570,10 +674,34 @@
 								<RTPC Name="" ID="{50315F1E-F740-4A7A-B373-35BD2B35B37F}" ShortID="1044357680">
 									<ReferenceList>
 										<Reference Name="ControlInput">
-											<ObjectRef Name="RTPC_ext_menu_volume_voice" ID="{CBE06477-B4E7-448E-B6EB-A7F887D0FDE7}" WorkUnitID="{EB0FE814-5314-4DBE-A97D-1537671EA4AC}"/>
+											<ObjectRef Name="RTPC_ext_menu_volume_voice" ID="{CBE06477-B4E7-448E-B6EB-A7F887D0FDE7}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
 										</Reference>
 									</ReferenceList>
 									<Curve Name="" ID="{900EFE4B-DDC1-405F-B91B-F4942938C769}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+								<RTPC Name="" ID="{B4933D9E-AA5E-49D6-BCA9-62C94E1E964D}" ShortID="136975984">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="RTPC_ext_menu_volume_gui" ID="{133C3CF3-84D8-4D9C-8850-70AE79D45FBC}" WorkUnitID="{973ACEFE-55FD-4FB3-810A-5568870FCCB5}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{EBC21902-E0C7-4507-BC8E-6F95A604DE88}">
 										<PropertyList>
 											<Property Name="Flags" Type="int32" Value="3"/>
 										</PropertyList>

@@ -21,7 +21,7 @@
 				<Property Name="GenerateSoundBankXML" Type="bool" Value="False"/>
 				<Property Name="GlobalVoiceInstancesLimit" Type="int16">
 					<ValueList>
-						<Value Platform="Windows">256</Value>
+						<Value Platform="Windows">110</Value>
 					</ValueList>
 				</Property>
 				<Property Name="LicenseKey" Type="string" Value="PHByb2plY3QgaWQ9IjE0NTMiIG1hc2s9IlBBWEc2NTgzIiBlbmM9IjMiPjxsaWNlbnNlIGlkPSIxIiBuYW1lPSJXd2lzZSIgdHlwZT0iMiIgcGxhdGZvcm1zPSI1LDEwLDExLDEyIiBleHBpcmVzPSIyMDE4LTA3LTMxIiAgLz48bGljZW5zZSBpZD0iMiIgbmFtZT0iU3VwcG9ydCIgdHlwZT0iMiIgIGV4cGlyZXM9IjIwMTctMDUtMzEiICAvPjxsaWNlbnNlIGlkPSIyMSIgbmFtZT0iTWFpbnRlbmFuY2UiIHR5cGU9IjIiIHBsYXRmb3Jtcz0iNSwxMCwxMSwxMiIgZXhwaXJlcz0iMjAxOC0wNy0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjI0IiBuYW1lPSJMZXZlbCBDIExpY2Vuc2UiIHR5cGU9IjIiIHBsYXRmb3Jtcz0iNSwxMCwxMiIgZXhwaXJlcz0iMjAxOC0wNy0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjE0IiBuYW1lPSJpWm90b3BlIFRyYXNoIEJveCBNb2RlbHMiIHR5cGU9IjIiIHBsYXRmb3Jtcz0iMTAiIGV4cGlyZXM9IjIwMTgtMDctMzEiICAvPjxsaWNlbnNlIGlkPSIxMiIgbmFtZT0iaVpvdG9wZSBUcmFzaCBNdWx0aS1iYW5kIERpc3RvcnRpb25zIiB0eXBlPSIyIiBwbGF0Zm9ybXM9IjEwIiBleHBpcmVzPSIyMDE4LTA3LTMxIiAgLz48bGljZW5zZSBpZD0iMTAiIG5hbWU9Ik1jRFNQIEJ1bmRsZSAoTUwxLCBGdXR6Qm94KSIgdHlwZT0iMiIgcGxhdGZvcm1zPSIxMCIgZXhwaXJlcz0iMjAxOC0wNy0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjciIG5hbWU9IlNvdW5kU2VlZCBCdW5kbGUgKEltcGFjdCwgQWlyKSIgdHlwZT0iMiIgcGxhdGZvcm1zPSIxMCIgZXhwaXJlcz0iMjAxOC0wNy0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjYiIG5hbWU9Ild3aXNlIENvbnZvbHV0aW9uIFJldmVyYiIgdHlwZT0iMiIgcGxhdGZvcm1zPSIxMCIgZXhwaXJlcz0iMjAxOC0wNy0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjMiIG5hbWU9IlNvdXJjZSBDb2RlIExldmVsIDIiIHR5cGU9IjIiIHBsYXRmb3Jtcz0iNSwxMCwxMSwxMiIgZXhwaXJlcz0iMjAxNy0wNS0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjE0IiBuYW1lPSJpWm90b3BlIFRyYXNoIEJveCBNb2RlbHMiIHR5cGU9IjEiIHBsYXRmb3Jtcz0iNSwxMSwxMiIgZXhwaXJlcz0iMjAxNi0wNS0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjEyIiBuYW1lPSJpWm90b3BlIFRyYXNoIE11bHRpLWJhbmQgRGlzdG9ydGlvbnMiIHR5cGU9IjEiIHBsYXRmb3Jtcz0iNSwxMSwxMiIgZXhwaXJlcz0iMjAxNi0wNS0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjEwIiBuYW1lPSJNY0RTUCBCdW5kbGUgKE1MMSwgRnV0ekJveCkiIHR5cGU9IjEiIHBsYXRmb3Jtcz0iNSwxMSwxMiIgZXhwaXJlcz0iMjAxNi0wNS0zMSIgIC8+PGxpY2Vuc2UgaWQ9IjciIG5hbWU9IlNvdW5kU2VlZCBCdW5kbGUgKEltcGFjdCwgQWlyKSIgdHlwZT0iMSIgcGxhdGZvcm1zPSI1LDExLDEyIiBleHBpcmVzPSIyMDE2LTA1LTMxIiAgLz48bGljZW5zZSBpZD0iNiIgbmFtZT0iV3dpc2UgQ29udm9sdXRpb24gUmV2ZXJiIiB0eXBlPSIxIiBwbGF0Zm9ybXM9IjUsMTEsMTIiIGV4cGlyZXM9IjIwMTYtMDUtMzEiICAvPjxsaWNlbnNlIGlkPSIyMyIgbmFtZT0iTGV2ZWwgQiBMaWNlbnNlIiB0eXBlPSIyIiBwbGF0Zm9ybXM9IjExIiBleHBpcmVzPSIyMDE4LTA3LTMxIiAgLz48L3Byb2plY3Q+|JdlXgGvX86tKNLF2gtSLN134zFhtjr6Vz3HCxwfUnedB/5qi8aB9evQyS153GtwpmVocTHRXH5DtyrmxybsUWoLARzWL5o5FmL7Q5b4Ql3LvjdVfD42XLj5RC8VD87YLvRZT49JZG1k20i3NOMul0zZ2u+fTZZeK7doqttT2NDZOMI1Cyv9PEPplUsWl09B7o4LmulBkSWHSvBnxtWvmJP+Rj6jJQeocK6oNfFbfKfR2Ws01XS917VYSWId1EIyfIGb87xI9XEaR96l1gNLrs5clpSoOOypARy7DAmHkov/gmK4WErnAZO8uJTn3R8262ZCWrTo9FrUY8oELRLysIg=="/>
@@ -54,7 +54,7 @@
 				</Property>
 				<Property Name="VolumeThreshold" Type="Real64">
 					<ValueList>
-						<Value Platform="Windows">-80</Value>
+						<Value Platform="Windows">-50</Value>
 					</ValueList>
 				</Property>
 				<Property Name="WwiseVersionWhenCreated" Type="string" Value="Branch=wwise_v2015.1|Build=5533|VersionName=v2015.1.5|Config=Release"/>
@@ -563,7 +563,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="IOSONO Proximity" PluginType="6" CompanyID="262" PluginID="1">
+				<SharedPropertyList ClassName="" PluginType="6" CompanyID="262" PluginID="1">
 					<PropertyList>
 						<Property Name="Bypass" Type="bool">
 							<ValueList>
@@ -600,7 +600,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="iZotope Hybrid Reverb" PluginType="3" CompanyID="259" PluginID="2">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="259" PluginID="2">
 					<PropertyList>
 						<Property Name="DecayHighFrequency" Type="Real32">
 							<ValueList>
@@ -689,7 +689,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="AttachableMixerInput" PluginType="3" CompanyID="262" PluginID="2">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="262" PluginID="2">
 					<PropertyList>
 						<Property Name="ProximityGain" Type="Real32">
 							<ValueList>
@@ -912,7 +912,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="iZotope Trash Distortion" PluginType="3" CompanyID="259" PluginID="3">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="259" PluginID="3">
 					<PropertyList>
 						<Property Name="Distortion1InputGain" Type="Real32">
 							<ValueList>
@@ -1046,7 +1046,7 @@
 					</PropertyList>
 				</SharedPropertyList>
 				<SharedPropertyList ClassName="Event" PluginType="0" CompanyID="1" PluginID="4"/>
-				<SharedPropertyList ClassName="iZotope Trash Delay" PluginType="3" CompanyID="259" PluginID="4">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="259" PluginID="4">
 					<PropertyList>
 						<Property Name="DelayType" Type="int32">
 							<ValueList>
@@ -1224,7 +1224,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="iZotope Trash Dynamics Mono" PluginType="3" CompanyID="259" PluginID="5">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="259" PluginID="5">
 					<PropertyList>
 						<Property Name="Bypass" Type="int32">
 							<ValueList>
@@ -1317,7 +1317,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="iZotope Trash Filters" PluginType="3" CompanyID="259" PluginID="6">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="259" PluginID="6">
 					<PropertyList>
 						<Property Name="Filter1Frequency" Type="Real32">
 							<ValueList>
@@ -1515,7 +1515,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="iZotope Trash Box Modeler" PluginType="3" CompanyID="259" PluginID="7">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="259" PluginID="7">
 					<PropertyList>
 						<Property Name="BoxModel" Type="int32">
 							<ValueList>
@@ -2377,7 +2377,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="iZotope Trash Multiband Distortion" PluginType="3" CompanyID="259" PluginID="9">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="259" PluginID="9">
 					<PropertyList>
 						<Property Name="Distortion1Band1InputGain" Type="Real32">
 							<ValueList>
@@ -6920,7 +6920,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="McDSP ML1" PluginType="3" CompanyID="256" PluginID="103">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="256" PluginID="103">
 					<PropertyList>
 						<Property Name="Ceiling" Type="Real32">
 							<ValueList>
@@ -7219,7 +7219,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="McDSP FutzBox" PluginType="3" CompanyID="256" PluginID="110">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="256" PluginID="110">
 					<PropertyList>
 						<Property Name="Balance" Type="Real32">
 							<ValueList>
@@ -8484,7 +8484,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="Wwise Convolution Reverb" PluginType="3" CompanyID="0" PluginID="127">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="0" PluginID="127">
 					<PropertyList>
 						<Property Name="AlgoTypeSelect" Type="int32">
 							<ValueList>
@@ -9224,7 +9224,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="Microsoft HRTF" PluginType="3" CompanyID="0" PluginID="170">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="0" PluginID="170">
 					<PropertyList>
 						<Property Name="Inclusion" Type="bool">
 							<ValueList>
@@ -9419,7 +9419,7 @@
 					</PropertyList>
 				</SharedPropertyList>
 				<SharedPropertyList ClassName="Controller" PluginType="4" CompanyID="0" PluginID="406"/>
-				<SharedPropertyList ClassName="CrankcaseAudio REV" PluginType="2" CompanyID="261" PluginID="416">
+				<SharedPropertyList ClassName="" PluginType="2" CompanyID="261" PluginID="416">
 					<PropertyList>
 						<Property Name="EnableShifting" Type="int32">
 							<ValueList>
@@ -9458,7 +9458,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="EngineSimulationControlData" PluginType="0" CompanyID="261" PluginID="417">
+				<SharedPropertyList ClassName="" PluginType="0" CompanyID="261" PluginID="417">
 					<PropertyList>
 						<Property Name="ClutchRPMMergeTime" Type="Real32">
 							<ValueList>
@@ -9542,7 +9542,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="AccelDecelModelControlData" PluginType="0" CompanyID="261" PluginID="418">
+				<SharedPropertyList ClassName="" PluginType="0" CompanyID="261" PluginID="418">
 					<PropertyList>
 						<Property Name="AccelVolume_Off" Type="Real32">
 							<ValueList>
@@ -9745,7 +9745,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="Auro Headphone" PluginType="3" CompanyID="263" PluginID="1100">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="263" PluginID="1100">
 					<PropertyList>
 						<Property Name="Bypass" Type="bool">
 							<ValueList>
@@ -9849,7 +9849,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="Auro Panner" PluginType="6" CompanyID="263" PluginID="1101">
+				<SharedPropertyList ClassName="" PluginType="6" CompanyID="263" PluginID="1101">
 					<PropertyList>
 						<Property Name="EnableDefaultSpatialization" Type="bool">
 							<ValueList>
@@ -9868,7 +9868,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="AttachableMixerInput" PluginType="3" CompanyID="263" PluginID="1102">
+				<SharedPropertyList ClassName="" PluginType="3" CompanyID="263" PluginID="1102">
 					<PropertyList>
 						<Property Name="CenterFactorFC" Type="Real32">
 							<ValueList>
