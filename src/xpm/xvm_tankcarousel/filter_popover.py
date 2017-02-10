@@ -37,12 +37,12 @@ class PREFS(object):
     ELITE = 'elite'
     IGR = 'igr'
     # added by XVM
-    FULL_CREW = 'fullCrew'
-    RESERVE = 'reserve'
     NORMAL = 'normal'
     NON_ELITE = 'nonelite'
+    FULL_CREW = 'fullCrew'
     NO_MASTER = 'noMaster'
-    XVM_KEYS = (FULL_CREW, RESERVE, NORMAL, NON_ELITE, NO_MASTER)
+    RESERVE = 'reserve'
+    XVM_KEYS = (NORMAL, NON_ELITE, FULL_CREW, NO_MASTER, RESERVE)
 
 USERPREFS_CAROUSEL_FILTERS_KEY = "tankcarousel/filters"
 
@@ -81,10 +81,8 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
     return base(self, sections, settings)
 
 # Filters:
-#   Premium		Normal
-#   Elite		NonElite
-#   CompleteCrew	NoMaster
-#   Reserve		[igr]
+#   Premium   Normal   Elite    NonElite    CompleteCrew
+#   NoMaster  Reserve  [igr]
 @overrideMethod(filter_popover, '_getInitialVO')
 def _filter_popover_getInitialVO(base, filters, mapping, xpRateMultiplier, switchCarouselSelected):
     data = base(filters, mapping, xpRateMultiplier, switchCarouselSelected)
@@ -92,23 +90,19 @@ def _filter_popover_getInitialVO(base, filters, mapping, xpRateMultiplier, switc
     #debug(mapping)
     try:
         premium = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.PREMIUM)]
-        normal = {'label': l10n('Normal'), 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
+        normal = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/normal.png', 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
         elite = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.ELITE)]
-        non_elite = {'label': l10n('NonElite'), 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
-        complete_crew = {'label': l10n('CompleteCrew'), 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
-        no_master = {'label': l10n('NoMaster'), 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
-        reserve = {'label': l10n('ReserveFilter'), 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
+        non_elite = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nonelite.png', 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
+        complete_crew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/fullcrew.png', 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
+        no_master = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nomaster.png', 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
+        reserve = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/reserve.png', 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
 
         is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
         if is_igr:
             igr = data['specials'][-1]
-
         data['specials'] = [
-            premium,       normal, 
-            elite,         non_elite, 
-            complete_crew, no_master,
-            reserve]
-
+            premium, normal, elite, non_elite, complete_crew,
+            no_master, reserve]
         if is_igr:
             data['specials'].append(igr)
     except Exception as ex:
@@ -121,10 +115,8 @@ def _FilterPopover__generateMapping(base, self, hasRented, hasEvent):
 
     is_igr = PREFS.IGR in self._FilterPopover__mapping[_SECTION.SPECIALS]
     self._FilterPopover__mapping[_SECTION.SPECIALS] = [
-        PREFS.PREMIUM,     PREFS.NORMAL, 
-        PREFS.ELITE,       PREFS.NON_ELITE, 
-        PREFS.FULL_CREW,   PREFS.NO_MASTER,
-        PREFS.RESERVE]
+        PREFS.PREMIUM,   PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE, PREFS.FULL_CREW,
+        PREFS.NO_MASTER, PREFS.RESERVE]
     if is_igr:
         self._FilterPopover__mapping[_SECTION.SPECIALS].append(PREFS.IGR)
     self._FilterPopover__usedFilters = list(itertools.chain.from_iterable(self._FilterPopover__mapping.itervalues()))

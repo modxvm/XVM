@@ -239,7 +239,10 @@ def CommonStatsBlockConstructor_construct(base, self):
                 params_list = values # overriding parameters
             else:
                 params_list = self.PARAMS.get(vehicle.type, 'default') # original parameters
+            paramInfo = None
             for paramName in params_list:
+                if paramName is None:
+                    continue
                 if paramName in vehicleCommonParams:
                     paramInfo = comparator.getExtendedData(paramName)
                 if paramName == 'turretArmor' and not vehicle.hasTurrets:
@@ -379,7 +382,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
                     tooltip_add_param(self, result, l10n(customtext), '')
-                elif paramName in paramInfo.name:
+                elif paramInfo is not None and paramName in paramInfo.name:
                     valueStr = str(param_formatter.baseFormatParameter(paramName, paramInfo.value))
                     tooltip_add_param(self, result, getParameterValue(paramName), valueStr)
         if vehicle.isInInventory:

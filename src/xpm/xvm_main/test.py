@@ -34,7 +34,7 @@ import traceback
 import BigWorld
 import AccountCommands
 from account_helpers import BattleResultsCache
-from gui.shared import event_dispatcher as shared_events
+from gui.shared import event_dispatcher
 
 from xfw import *
 
@@ -45,8 +45,7 @@ from logger import *
 # BattleResults
 
 def _showBattleResults(arenaUniqueID):
-    shared_events.showMyBattleResults(arenaUniqueID)
-
+    event_dispatcher.showBattleResultsWindow(arenaUniqueID)
 
 @overrideMethod(BattleResultsCache.BattleResultsCache, 'get')
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
