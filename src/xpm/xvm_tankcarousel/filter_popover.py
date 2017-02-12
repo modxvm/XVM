@@ -90,8 +90,10 @@ def _filter_popover_getInitialVO(base, filters, mapping, xpRateMultiplier, switc
     #debug(mapping)
     try:
         premium = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.PREMIUM)]
+        premium['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/premium.png'
         normal = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/normal.png', 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
         elite = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.ELITE)]
+        elite['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/elite.png'
         non_elite = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nonelite.png', 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
         complete_crew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/fullcrew.png', 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
         no_master = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nomaster.png', 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
