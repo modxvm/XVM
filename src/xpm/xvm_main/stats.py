@@ -49,6 +49,7 @@ from gui.app_loader import g_appLoader
 from items.vehicles import VEHICLE_CLASS_TAGS
 
 from xfw import *
+import xfw.utils as xfwutils
 
 import config
 from consts import *
@@ -100,7 +101,7 @@ class _Stat(object):
         def paths_gen():
             # Search icons
             prefix = 'res_mods/mods/shared_resources/xvm/res/{}'.format(
-                utils.fixPath(config.get('battle/clanIconsFolder')))
+                xfwutils.fix_path_slashes(config.get('battle/clanIconsFolder')))
             yield '{}ID/{}.png'.format(prefix, pl.accountDBID)
             yield '{}{}/nick/{}.png'.format(prefix, GAME_REGION, pl.name)
             if hasattr(pl, 'x_emblem'):
