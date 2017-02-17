@@ -64,8 +64,8 @@ def BattleResultsWindow_as_setDataS(base, self, data):
         isFallout = 0 if data['common']['falloutMode'] is None else 1
         if isFallout:
             xdata_fallout_total = {
-                'origXP': self._xvm_data['xpTotal'][0],
-                'premXP': self._xvm_data['xpPremTotal'][0],
+                #'origXP': self._xvm_data['xpTotal'][0],
+                #'premXP': self._xvm_data['xpPremTotal'][0],
                 'shots': 0,
                 'hits': 0,
                 'damageDealt': 0,
@@ -87,62 +87,62 @@ def BattleResultsWindow_as_setDataS(base, self, data):
                 'creditsPremTotalStr': data['personal']['creditsData'][0][-1]['col3'],
             }
 
-        for index, (typeCompDescr, personalData) in enumerate(self._xvm_data['personalData']):
-            origCrewXP = personalData['tmenXP']
-            premCrewXP = personalData['tmenXP']
-            if personalData['isPremium']:
-                origCrewXP = personalData['tmenXP'] / (personalData['premiumXPFactor10'] / 10.0)
-            else:
-                premCrewXP = personalData['tmenXP'] * (personalData['premiumXPFactor10'] / 10.0)
-            ownVehicle = g_itemsCache.items.getItemByCD(typeCompDescr)
-            if ownVehicle and ownVehicle.isPremium:
-                origCrewXP = int(origCrewXP * 1.5)
-                premCrewXP = int(premCrewXP * 1.5)
-
-            if isFallout:
-                xdata_fallout_total['shots'] += personalData['shots']
-                xdata_fallout_total['hits'] += personalData['directHits']
-                xdata_fallout_total['damageDealt'] += personalData['damageDealt']
-                xdata_fallout_total['damageAssisted'] += (personalData['damageAssistedRadio'] + personalData['damageAssistedTrack'])
-                xdata_fallout_total['damageAssistedRadio'] += personalData['damageAssistedRadio']
-                xdata_fallout_total['damageAssistedTrack'] += personalData['damageAssistedTrack']
-                xdata_fallout_total['piercings'] += personalData['piercings']
-                xdata_fallout_total['kills'] += personalData['kills']
-                xdata_fallout_total['origCrewXP'] += origCrewXP
-                xdata_fallout_total['premCrewXP'] += premCrewXP
-                xdata_fallout_total['spotted'] += personalData['spotted']
-                xdata_fallout_total['damageBlockedByArmor'] += personalData['damageBlockedByArmor']
-                xdata_fallout_total['armorCount'] += personalData['noDamageDirectHitsReceived'] #number on picture
-                xdata_fallout_total['ricochetsCount'] += getTotalRicochetsCount(personalData)
-                xdata_fallout_total['nonPenetrationsCount'] += personalData['noDamageDirectHitsReceived']
-            xdataList['data'].append({
-                'origXP': self._xvm_data['xpTotal'][index + isFallout],
-                'premXP': self._xvm_data['xpPremTotal'][index + isFallout],
-                'shots': personalData['shots'],
-                'hits': personalData['directHits'],
-                'damageDealt': personalData['damageDealt'],
-                'damageAssisted': personalData['damageAssistedRadio'] + personalData['damageAssistedTrack'],
-                'damageAssistedCount': getTotalAssistCount(data['personal']['details'][index + isFallout]),
-                'damageAssistedRadio': personalData['damageAssistedRadio'],
-                'damageAssistedTrack': personalData['damageAssistedTrack'],
-                'piercings': personalData['piercings'],
-                'kills': personalData['kills'],
-                'origCrewXP': origCrewXP,
-                'premCrewXP': premCrewXP,
-                'spotted': personalData['spotted'],
-                'damageBlockedByArmor': personalData['damageBlockedByArmor'],
-                'armorCount': personalData['noDamageDirectHitsReceived'], #number on picture
-                'ricochetsCount': getTotalRicochetsCount(personalData),
-                'nonPenetrationsCount': personalData['noDamageDirectHitsReceived'],
-                'critsCount': calcDetails(data['personal']['details'][index + isFallout], 'critsCount'),
-                'creditsNoPremTotalStr': data['personal']['creditsData'][index + isFallout][-1]['col1'],
-                'creditsPremTotalStr': data['personal']['creditsData'][index + isFallout][-1]['col3'],
-            })
-        if isFallout:
-            xdataList['data'].insert(0, xdata_fallout_total)
+        #for index, (typeCompDescr, personalData) in enumerate(self._xvm_data['personalData']):
+        #    origCrewXP = personalData['tmenXP']
+        #    premCrewXP = personalData['tmenXP']
+        #    if personalData['isPremium']:
+        #        origCrewXP = personalData['tmenXP'] / (personalData['premiumXPFactor10'] / 10.0)
+        #    else:
+        #        premCrewXP = personalData['tmenXP'] * (personalData['premiumXPFactor10'] / 10.0)
+        #    ownVehicle = g_itemsCache.items.getItemByCD(typeCompDescr)
+        #    if ownVehicle and ownVehicle.isPremium:
+        #        origCrewXP = int(origCrewXP * 1.5)
+        #        premCrewXP = int(premCrewXP * 1.5)
+        #
+        #    if isFallout:
+        #        xdata_fallout_total['shots'] += personalData['shots']
+        #        xdata_fallout_total['hits'] += personalData['directHits']
+        #        xdata_fallout_total['damageDealt'] += personalData['damageDealt']
+        #        xdata_fallout_total['damageAssisted'] += (personalData['damageAssistedRadio'] + personalData['damageAssistedTrack'])
+        #        xdata_fallout_total['damageAssistedRadio'] += personalData['damageAssistedRadio']
+        #        xdata_fallout_total['damageAssistedTrack'] += personalData['damageAssistedTrack']
+        #        xdata_fallout_total['piercings'] += personalData['piercings']
+        #        xdata_fallout_total['kills'] += personalData['kills']
+        #        xdata_fallout_total['origCrewXP'] += origCrewXP
+        #        xdata_fallout_total['premCrewXP'] += premCrewXP
+        #        xdata_fallout_total['spotted'] += personalData['spotted']
+        #        xdata_fallout_total['damageBlockedByArmor'] += personalData['damageBlockedByArmor']
+        #        xdata_fallout_total['armorCount'] += personalData['noDamageDirectHitsReceived'] #number on picture
+        #        xdata_fallout_total['ricochetsCount'] += getTotalRicochetsCount(personalData)
+        #        xdata_fallout_total['nonPenetrationsCount'] += personalData['noDamageDirectHitsReceived']
+        #    xdataList['data'].append({
+        #        'origXP': self._xvm_data['xpTotal'][index + isFallout],
+        #        'premXP': self._xvm_data['xpPremTotal'][index + isFallout],
+        #        'shots': personalData['shots'],
+        #        'hits': personalData['directHits'],
+        #        'damageDealt': personalData['damageDealt'],
+        #        'damageAssisted': personalData['damageAssistedRadio'] + personalData['damageAssistedTrack'],
+        #        'damageAssistedCount': getTotalAssistCount(data['personal']['details'][index + isFallout]),
+        #        'damageAssistedRadio': personalData['damageAssistedRadio'],
+        #        'damageAssistedTrack': personalData['damageAssistedTrack'],
+        #        'piercings': personalData['piercings'],
+        #        'kills': personalData['kills'],
+        #        'origCrewXP': origCrewXP,
+        #        'premCrewXP': premCrewXP,
+        #        'spotted': personalData['spotted'],
+        #        'damageBlockedByArmor': personalData['damageBlockedByArmor'],
+        #        'armorCount': personalData['noDamageDirectHitsReceived'], #number on picture
+        #        'ricochetsCount': getTotalRicochetsCount(personalData),
+        #        'nonPenetrationsCount': personalData['noDamageDirectHitsReceived'],
+        #        'critsCount': calcDetails(data['personal']['details'][index + isFallout], 'critsCount'),
+        #        'creditsNoPremTotalStr': data['personal']['creditsData'][index + isFallout][-1]['col1'],
+        #        'creditsPremTotalStr': data['personal']['creditsData'][index + isFallout][-1]['col3'],
+        #    })
+        #if isFallout:
+        #    xdataList['data'].insert(0, xdata_fallout_total)
         # Use first vehicle item for transferring XVM data.
         # Cannot add to data object because DAAPIDataClass is not dynamic.
-        data['vehicles'].insert(0, xdataList)
+        #data['vehicles'].insert(0, xdataList)
     except Exception as ex:
         err(traceback.format_exc())
     return base(self, data)

@@ -18,6 +18,10 @@ package com.xvm.battle
             BattleGlobalData.init();
             Stat.clearBattleStat();
             Stat.loadBattleStat();
+
+            //App.utils.scheduler.scheduleTask(function():void {
+            //    App.voiceChatMgr.as_onPlayerSpeak(24246126, true, true);
+            //}, 5000);
         }
     }
 }

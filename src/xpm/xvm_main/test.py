@@ -12,16 +12,13 @@ def onHangarInit():
             for fn in files:
                 log('[TEST]  battle result: {}'.format(fn))
                 runTest(('battleResults', fn))
-    pass
 
 
 def runTest(args):
-    if args is None:
-        return
-    cmd = args[0]
-
-    if cmd == 'battleResults':
-        _showBattleResults(int(args[1][:-4]))
+    if args is not None:
+        cmd = args[0]
+        if cmd == 'battleResults':
+            _showBattleResults(int(args[1][:-4]))
 
 
 #############################
@@ -31,10 +28,12 @@ import os
 import cPickle
 import traceback
 
-import BigWorld
 import AccountCommands
 from account_helpers import BattleResultsCache
-from gui.shared import event_dispatcher
+from helpers import dependency
+from gui.shared.utils import decorators
+from gui.battle_results import RequestResultsContext
+from skeletons.gui.battle_results import IBattleResultsService
 
 from xfw import *
 
@@ -44,13 +43,17 @@ from logger import *
 #############################
 # BattleResults
 
+@decorators.process('loadStats')
 def _showBattleResults(arenaUniqueID):
-    event_dispatcher.showBattleResultsWindow(arenaUniqueID)
+    battleResults = dependency.instance(IBattleResultsService)
+    ctx = RequestResultsContext(arenaUniqueID, showImmediately=False, showIfPosted=True, resetCache=False)
+    yield battleResults.requestResults(ctx)
 
 @overrideMethod(BattleResultsCache.BattleResultsCache, 'get')
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
     fileHandler = None
     try:
+        #log('get: ' + str(callback))
         filename = '{0}.dat'.format(arenaUniqueID)
         if not os.path.exists(filename):
             base(self, arenaUniqueID, callback)
@@ -59,6 +62,7 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
             version, battleResults = cPickle.load(fileHandler)
             if battleResults is not None:
                 if callback is not None:
+                    #log('callback: ' + str(callback))
                     callback(AccountCommands.RES_CACHE, BattleResultsCache.convertToFullForm(battleResults))
     except Exception, ex:
         err(traceback.format_exc())
