@@ -1,4 +1,4 @@
-﻿XVM-6.5.5-dev:
+XVM-6.5.5-dev:
   * адаптация для WoT 0.9.17.1
   * добавлены новые опции в секции "carousel"/"normal"/"fields" и "carousel"/"small"/"fields":
       "favorite" - маркер основной техники
