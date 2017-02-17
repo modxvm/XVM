@@ -1,4 +1,4 @@
-XVM-6.5.5-dev:
+﻿XVM-6.5.5-dev:
   * адаптация для WoT 0.9.17.1
   * добавлены новые опции в секции "carousel"/"normal"/"fields" и "carousel"/"small"/"fields":
       "favorite" - маркер основной техники
@@ -6,6 +6,7 @@ XVM-6.5.5-dev:
   * удалена опция "saveLocationInBattle" из секции "damageLog"
     добавлена новая опция в секции "damageLog"/"log" и "damageLog"/"lastHit":
       "moveInBattle" - разрешить перемещение battleLabels мышью в бою
+  * улучшена поддержка экранов с высокой плотностью точек в Microsoft Windows Vista или новее
 
 XVM-6.5.4:
   * адаптация для WoT 0.9.17.0.3
