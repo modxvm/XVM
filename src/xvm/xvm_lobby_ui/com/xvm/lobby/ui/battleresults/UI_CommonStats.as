@@ -29,6 +29,10 @@ package com.xvm.lobby.ui.battleresults
         private var xdataList:XvmCommonStatsDataListVO = null;
         private var currentTankIndex:int = 0;
 
+        private var armorNames:Array = null;
+        private var damageAssistedNames:Array = null;
+        private var damageDealtNames:Array = null;
+
         private var shotsTitle:TextField;
         private var shotsCount:TextField;
         private var shotsPercent:TextField;
@@ -75,15 +79,54 @@ package com.xvm.lobby.ui.battleresults
             {
                 if (data)
                 {
-                    //Logger.addObject(data, 2);
-                    // TODO:9.17.1
-                    // Using first vehicle item for transferring XVM data.
-                    // Cannot add to data object because DAAPIDataClass is not dynamic.
-                    //var vehicles:Array = data.vehicles;
-                    //if (vehicles.length && vehicles[0]['__xvm'])
-                    //{
-                    //    xdataList = new XvmCommonStatsDataListVO(vehicles.shift());
-                    //}
+                    // Use data['common']['regionNameStr'] value to transfer XVM data.
+                    // Cannot add in data object because DAAPIDataClass is not dynamic.
+                    var xdataStr:String = data.common.regionNameStr;
+                    if (xdataStr.indexOf("\"__xvm\"") > 0)
+                    {
+                        xdataList = new XvmCommonStatsDataListVO(JSONx.parse(xdataStr));
+                        data.common.regionNameStr = xdataList.regionNameStr;
+                    }
+                    //Logger.addObject(data, 3);
+                    //Logger.addObject(data.personal, 5);
+                    //Logger.addObject(data.personal.details, 2);
+                    //Logger.addObject(data.common);
+                    //Logger.addObject(xdataList, 2);
+
+                    // search localized strings for tooltips and calculate total values
+                    var personal:PersonalDataVO = data.personal;
+                    for (var i:String in personal.details)
+                    {
+                        for each (var detail:Object in personal.details[i])
+                        {
+                            if (armorNames == null)
+                            {
+                                armorNames = detail.armorNames;
+                            }
+                            if (damageAssistedNames == null)
+                            {
+                                damageAssistedNames = detail.damageAssistedNames;
+                            }
+                            if (damageDealtNames == null)
+                            {
+                                damageDealtNames = detail.damageDealtNames;
+                            }
+                            var d:XvmCommonStatsDataVO = xdataList.data[i];
+                            d.damageDealt += detail.damageDealt;
+                            d.damageAssisted += detail.damageAssisted;
+                            d.damageAssistedCount += detail.damageAssisted > 0 ? 1 : 0;
+                            d.piercings += detail.piercings;
+                            d.kills += detail.killCount;
+                            d.spotted += detail.spotted;
+                            d.critsCount += detail.critsCount;
+                            d.armorCount += detail.armorVals ? 1 : 0;
+                            //d.ricochetsCount += detail.;
+                            //d.nonPenetrationsCount += detail.;
+                        }
+                        //'creditsNoPremTotalStr': data['personal']['creditsData'][0][-1]['col1'],
+                        //'creditsPremTotalStr': data['personal']['creditsData'][0][-1]['col3'],
+                        //Logger.addObject(personal.creditsData[0], 2);
+                    }
                 }
 
                 super.update(data);
@@ -292,7 +335,7 @@ package com.xvm.lobby.ui.battleresults
             tooltipData = new IconEfficiencyTooltipData();
             tooltipData.setBaseValues(
                 [App.utils.locale.integer(xdata.damageDealt), xdata.piercings],
-                xdataList.damageDealtNames,
+                damageDealtNames,
                 2);
             tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = tooltipData;
 
@@ -302,7 +345,7 @@ package com.xvm.lobby.ui.battleresults
             tooltipData = new IconEfficiencyTooltipData();
             tooltipData.setBaseValues(
                 [xdata.ricochetsCount, xdata.nonPenetrationsCount, App.utils.locale.integer(xdata.damageBlockedByArmor)],
-                xdataList.armorNames,
+                armorNames,
                 3);
             tooltips[BATTLE_EFFICIENCY_TYPES.ARMOR] = tooltipData;
 
@@ -313,7 +356,7 @@ package com.xvm.lobby.ui.battleresults
             tooltipData.totalAssistedDamage = xdata.damageAssisted;
             tooltipData.setBaseValues(
                 [App.utils.locale.integer(xdata.damageAssistedRadio), App.utils.locale.integer(xdata.damageAssistedTrack), App.utils.locale.integer(xdata.damageAssisted)],
-                xdataList.damageAssistedNames,
+                damageAssistedNames,
                 3);
             tooltips[BATTLE_EFFICIENCY_TYPES.ASSIST] = tooltipData;
 

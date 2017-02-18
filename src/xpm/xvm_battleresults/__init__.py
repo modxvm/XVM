@@ -17,19 +17,20 @@ XFW_MOD_INFO = {
 # imports
 
 import traceback
+import simplejson
 
 import BigWorld
 from gui.shared import event_dispatcher, g_itemsCache
 from gui.Scaleform.daapi.view.battle_results_window import BattleResultsWindow
+from gui.battle_results import composer
+from gui.battle_results.components import base
+from gui.battle_results.settings import BATTLE_RESULTS_RECORD
 
 from xfw import *
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
-
-#####################################################################
-# handlers
 
 # wait for loading xvm_battleresults_ui.swf
 @overrideMethod(event_dispatcher, 'showBattleResultsWindow')
@@ -43,138 +44,102 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
     else:
         base(arenaUniqueID)
 
-@registerEvent(BattleResultsWindow, '_populate', True)
-def BattleResultsWindow_populate(self):
-    if not hasattr(self, '_xvm_data'):
-        self._xvm_data = {}
-    self._xvm_data['xpTotal'] = []
-    self._xvm_data['xpPremTotal'] = []
-    self._xvm_data['personalData'] = None
-
 @overrideMethod(BattleResultsWindow, 'as_setDataS')
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
-        xdataList = {
-            '__xvm': True, # XVM data marker
-            'damageAssistedNames': self._xvm_data.get('damageAssistedNames', None),
-            'damageDealtNames': self._xvm_data.get('damageDealtNames', None),
-            'armorNames': self._xvm_data.get('armorNames', None),
-            'data': [],
-        }
-        isFallout = 0 if data['common']['falloutMode'] is None else 1
-        if isFallout:
-            xdata_fallout_total = {
-                #'origXP': self._xvm_data['xpTotal'][0],
-                #'premXP': self._xvm_data['xpPremTotal'][0],
-                'shots': 0,
-                'hits': 0,
-                'damageDealt': 0,
-                'damageAssisted': 0,
-                'damageAssistedCount': getTotalAssistCount(data['personal']['details'][0]),
-                'damageAssistedRadio': 0,
-                'damageAssistedTrack': 0,
-                'piercings': 0,
-                'kills': 0,
-                'origCrewXP': 0,
-                'premCrewXP': 0,
-                'spotted': 0,
-                'damageBlockedByArmor': 0,
-                'armorCount': 0, #number on picture
-                'ricochetsCount': 0,
-                'nonPenetrationsCount': 0,
-                'critsCount': calcDetails(data['personal']['details'][0], 'critsCount'),
-                'creditsNoPremTotalStr': data['personal']['creditsData'][0][-1]['col1'],
-                'creditsPremTotalStr': data['personal']['creditsData'][0][-1]['col3'],
-            }
-
-        #for index, (typeCompDescr, personalData) in enumerate(self._xvm_data['personalData']):
-        #    origCrewXP = personalData['tmenXP']
-        #    premCrewXP = personalData['tmenXP']
-        #    if personalData['isPremium']:
-        #        origCrewXP = personalData['tmenXP'] / (personalData['premiumXPFactor10'] / 10.0)
-        #    else:
-        #        premCrewXP = personalData['tmenXP'] * (personalData['premiumXPFactor10'] / 10.0)
-        #    ownVehicle = g_itemsCache.items.getItemByCD(typeCompDescr)
-        #    if ownVehicle and ownVehicle.isPremium:
-        #        origCrewXP = int(origCrewXP * 1.5)
-        #        premCrewXP = int(premCrewXP * 1.5)
-        #
-        #    if isFallout:
-        #        xdata_fallout_total['shots'] += personalData['shots']
-        #        xdata_fallout_total['hits'] += personalData['directHits']
-        #        xdata_fallout_total['damageDealt'] += personalData['damageDealt']
-        #        xdata_fallout_total['damageAssisted'] += (personalData['damageAssistedRadio'] + personalData['damageAssistedTrack'])
-        #        xdata_fallout_total['damageAssistedRadio'] += personalData['damageAssistedRadio']
-        #        xdata_fallout_total['damageAssistedTrack'] += personalData['damageAssistedTrack']
-        #        xdata_fallout_total['piercings'] += personalData['piercings']
-        #        xdata_fallout_total['kills'] += personalData['kills']
-        #        xdata_fallout_total['origCrewXP'] += origCrewXP
-        #        xdata_fallout_total['premCrewXP'] += premCrewXP
-        #        xdata_fallout_total['spotted'] += personalData['spotted']
-        #        xdata_fallout_total['damageBlockedByArmor'] += personalData['damageBlockedByArmor']
-        #        xdata_fallout_total['armorCount'] += personalData['noDamageDirectHitsReceived'] #number on picture
-        #        xdata_fallout_total['ricochetsCount'] += getTotalRicochetsCount(personalData)
-        #        xdata_fallout_total['nonPenetrationsCount'] += personalData['noDamageDirectHitsReceived']
-        #    xdataList['data'].append({
-        #        'origXP': self._xvm_data['xpTotal'][index + isFallout],
-        #        'premXP': self._xvm_data['xpPremTotal'][index + isFallout],
-        #        'shots': personalData['shots'],
-        #        'hits': personalData['directHits'],
-        #        'damageDealt': personalData['damageDealt'],
-        #        'damageAssisted': personalData['damageAssistedRadio'] + personalData['damageAssistedTrack'],
-        #        'damageAssistedCount': getTotalAssistCount(data['personal']['details'][index + isFallout]),
-        #        'damageAssistedRadio': personalData['damageAssistedRadio'],
-        #        'damageAssistedTrack': personalData['damageAssistedTrack'],
-        #        'piercings': personalData['piercings'],
-        #        'kills': personalData['kills'],
-        #        'origCrewXP': origCrewXP,
-        #        'premCrewXP': premCrewXP,
-        #        'spotted': personalData['spotted'],
-        #        'damageBlockedByArmor': personalData['damageBlockedByArmor'],
-        #        'armorCount': personalData['noDamageDirectHitsReceived'], #number on picture
-        #        'ricochetsCount': getTotalRicochetsCount(personalData),
-        #        'nonPenetrationsCount': personalData['noDamageDirectHitsReceived'],
-        #        'critsCount': calcDetails(data['personal']['details'][index + isFallout], 'critsCount'),
-        #        'creditsNoPremTotalStr': data['personal']['creditsData'][index + isFallout][-1]['col1'],
-        #        'creditsPremTotalStr': data['personal']['creditsData'][index + isFallout][-1]['col3'],
-        #    })
-        #if isFallout:
-        #    xdataList['data'].insert(0, xdata_fallout_total)
-        # Use first vehicle item for transferring XVM data.
-        # Cannot add to data object because DAAPIDataClass is not dynamic.
-        #data['vehicles'].insert(0, xdataList)
+        # Use data['common']['regionNameStr'] value to transfer XVM data.
+        # Cannot add in data object because DAAPIDataClass is not dynamic.
+        #log(data['xvm_data'])
+        data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
+        data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'])
+        del data['xvm_data']
     except Exception as ex:
         err(traceback.format_exc())
     return base(self, data)
+
+
+#####################################################################
+# collect data for XVM
+
+class XvmDataBlock(base.StatsBlock):
+    __slots__ = ('xvm_data')
+
+    def __init__(self, meta = None, field = '', *path):
+        super(XvmDataBlock, self).__init__(meta, field, *path)
+        self.xvm_data = []
+
+    def getVO(self):
+        return {
+            '__xvm': True, # XVM data marker
+            'regionNameStr':'',
+            'data': self.xvm_data}
+
+    def setRecord(self, result, reusable):
+        isMultiTeamMode = 1 if reusable.common.isMultiTeamMode else 0
+        if isMultiTeamMode:
+            xdata_multiteam_total = {
+                #'origXP': self._xvm_data['xpTotal'][0],
+                #'premXP': self._xvm_data['xpPremTotal'][0],
+                'origCrewXP': 0,
+                'premCrewXP': 0,
+                'shots': 0,
+                'hits': 0,
+                'damageAssistedRadio': 0,
+                'damageAssistedTrack': 0,
+                'damageBlockedByArmor': 0
+            }
+        
+        for bases, enemies in reusable.getPersonalDetailsIterator(result):
+            for info in bases:
+                log(info)
+                #origCrewXP = personalData['tmenXP']
+                #premCrewXP = personalData['tmenXP']
+                #if personalData['isPremium']:
+                #    origCrewXP = personalData['tmenXP'] / (personalData['premiumXPFactor10'] / 10.0)
+                #else:
+                #    premCrewXP = personalData['tmenXP'] * (personalData['premiumXPFactor10'] / 10.0)
+                #ownVehicle = g_itemsCache.items.getItemByCD(typeCompDescr)
+                #if ownVehicle and ownVehicle.isPremium:
+                #    origCrewXP = int(origCrewXP * 1.5)
+                #    premCrewXP = int(premCrewXP * 1.5)
+                #if isMultiTeamMode:
+                #    xdata_multiteam_total['origCrewXP'] += origCrewXP
+                #    xdata_multiteam_total['premCrewXP'] += premCrewXP
+                #    xdata_multiteam_total['shots'] += personalData['shots']
+                #    xdata_multiteam_total['hits'] += personalData['directHits']
+                #    xdata_multiteam_total['damageAssistedRadio'] += personalData['damageAssistedRadio']
+                #    xdata_multiteam_total['damageAssistedTrack'] += personalData['damageAssistedTrack']
+                #    xdata_multiteam_total['damageBlockedByArmor'] += personalData['damageBlockedByArmor']
+                self.xvm_data.append({
+                    'origXP': 0, #self._xvm_data['xpTotal'][index + isMultiTeamMode],
+                    'premXP': 0, #self._xvm_data['xpPremTotal'][index + isMultiTeamMode],
+                    'origCrewXP': 0, #origCrewXP,
+                    'premCrewXP': 0, #premCrewXP,
+                    'shots': 0, #personalData['shots'],
+                    'hits': 0, #personalData['directHits'],
+                    'damageAssistedRadio': 0, #personalData['damageAssistedRadio'],
+                    'damageAssistedTrack': 0, #personalData['damageAssistedTrack'],
+                    'damageBlockedByArmor': 0 #personalData['damageBlockedByArmor']
+                })
+        if isMultiTeamMode:
+            self.xvm_data.insert(0, xdata_multiteam_total)
+
+_XVM_DATA_STATS_BLOCK = XvmDataBlock(base.DictMeta(), 'xvm_data', BATTLE_RESULTS_RECORD.PERSONAL)
+
+@overrideMethod(composer.StatsComposer, '__init__')
+def _StatsComposer__init__(base, self, *args):
+    try:
+        base(self, *args)
+        self._block._meta._meta.update({'xvm_data':{}})
+        self._block._meta._unregistered.add('xvm_data')
+        self._block.addNextComponent(_XVM_DATA_STATS_BLOCK.clone())
+    except:
+        err(traceback.format_exc())
 
 ## save personalCommonData: more info there
 #@registerEvent(BattleResultsWindow, '_BattleResultsWindow__populateAccounting')
 #def _BattleResultsWindow__populateAccounting(self, commonData, personalCommonData, personalData, *args):
 #    self._xvm_data['personalData'] = personalData
-#
-## get string 'damageAssistedNames'
-#@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__getAssistInfo')
-#def _BattleResultsWindow__getAssistInfo(base, self, iInfo, valsStr):
-#    result = base(self, iInfo, valsStr)
-#    if 'damageAssistedNames' in result:
-#        self._xvm_data['damageAssistedNames'] = result['damageAssistedNames']
-#    return result
-#
-## get string 'armorNames'
-#@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__getArmorUsingInfo')
-#def _BattleResultsWindow__getArmorUsingInfo(base, self, iInfo, valsStr):
-#    result = base(self, iInfo, valsStr)
-#    if 'armorNames' in result:
-#        self._xvm_data['armorNames'] = result['armorNames']
-#    return result
-#
-## get string 'getDamageInfo'
-#@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__getDamageInfo')
-#def _BattleResultsWindow__getDamageInfo(base, self, iInfo, valsStr):
-#    result = base(self, iInfo, valsStr)
-#    if 'damageDealtNames' in result:
-#        self._xvm_data['damageDealtNames'] = result['damageDealtNames']
-#    return result
 #
 ## save xp
 #@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__buildPersonalDataSource')
@@ -184,39 +149,3 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 #        self._xvm_data['xpTotal'].append(data[1]['xpWithoutPremTotal'])
 #        self._xvm_data['xpPremTotal'].append(data[1]['xpWithPremTotal'])
 #    return result
-
-
-#####################################################################
-# utility
-
-def calcDetails(personal_details_list, field):
-    try:
-        n = 0
-        for detail in personal_details_list:
-            if field in detail:
-                n += int(detail[field])
-        return n
-    except Exception as ex:
-        err(traceback.format_exc())
-        return 0
-
-def getTotalAssistCount(personal_details_list):
-    try:
-        n = 0
-        for detail in personal_details_list:
-            if 'damageAssisted' in detail and detail['damageAssisted'] > 0:
-                n += 1
-        return n
-    except Exception as ex:
-        err(traceback.format_exc())
-        return 0
-
-def getTotalRicochetsCount(personalCommonData):
-    try:
-        n = 0
-        for detail in personalCommonData['details'].values():
-            n += detail['rickochetsReceived']
-        return n
-    except Exception as ex:
-        err(traceback.format_exc())
-        return 0
