@@ -39,8 +39,7 @@ def onConfigLoaded(e=None):
     g_markers.respondConfig()
 
 def onArenaInfoInvalidated(e=None):
-    for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
-        g_markers.updatePlayerState(vehicleID, INV.ALL)
+    g_markers.updatePlayerStates()
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 g_eventBus.addListener(XVM_BATTLE_EVENT.ARENA_INFO_INVALIDATED, onArenaInfoInvalidated)
@@ -241,6 +240,7 @@ class VehicleMarkers(object):
             if self.active:
                 self.call(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
                 self.process_pending_commands()
+                self.updatePlayerStates()
         except Exception, ex:
             err(traceback.format_exc())
         #debug('vm:respondGlobalBattleData: {:>8.3f} s'.format(time.clock() - s))
@@ -258,6 +258,10 @@ class VehicleMarkers(object):
                     self.call(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
         except Exception, ex:
             err(traceback.format_exc())
+
+    def updatePlayerStates(self):
+        for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
+            g_markers.updatePlayerState(vehicleID, INV.ALL)
 
     def updatePlayerState(self, vehicleID, targets, userData=None):
         try:
