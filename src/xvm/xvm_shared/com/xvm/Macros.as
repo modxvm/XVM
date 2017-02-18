@@ -326,7 +326,7 @@ package com.xvm
 
         // special case for dynamic macros converted to static
         private const HYBRID_MACROS:Vector.<String> = new <String>["alive", "ready", "selected", "player", "tk",
-            "squad", "squad-num", "position", "sys-color-key", "c:system", "marksOnGun",
+            "squad", "squad-num", "position", "sys-color-key", "c:system", "marksOnGun", "my-alive",
             "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"];
 
         private const STAT_MACROS:Vector.<String> = new <String>[
