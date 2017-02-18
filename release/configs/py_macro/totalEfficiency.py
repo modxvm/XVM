@@ -147,11 +147,13 @@ def _addRibbon(self, ribbonID, ribbonType='', leftFieldStr='', vehName='', vehTy
                 ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
             if ribbonType in ['assistSpot']:
                 ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
-            if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
+            if ribbonType in ['spotted', 'crits']:
                 if leftFieldStr:
                     ribbonTypes[ribbonType][1] = ribbonTypes[ribbonType][0] + int(leftFieldStr[1:])
                 else:
                     ribbonTypes[ribbonType][1] += 1
+            if ribbonType in ['kill', 'teamKill']:
+                ribbonTypes[ribbonType][1] += 1
             if ribbonType in ['damage', 'ram', 'burn']:
                 numberDamagesDealt += 1
             as_event('ON_TOTAL_EFFICIENCY')
