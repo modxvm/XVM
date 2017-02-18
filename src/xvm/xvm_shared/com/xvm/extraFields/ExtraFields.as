@@ -87,9 +87,37 @@ package com.xvm.extraFields
 
                 if (Macros.FormatBooleanGlobal(format.enabled, true))
                 {
-                    addChild(format.src != null
-                        ? new (App.utils.classFactory.getClass("com.xvm.extraFields::ImageExtraField"))(format, isLeftPanel, getSchemeNameForImage, _bounds, layout) // TODO: make ImageExtraField shared
-                        : new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds, layout, defaultAlign, defaultTextFormatConfig));
+                    if (format.src != null)
+                    {
+                        // TODO: make ImageExtraField shared
+                        var cls:Class;
+                        try
+                        {
+                            cls = getDefinitionByName("com.xvm.extraFields::ImageExtraField") as Class;
+                        }
+                        catch (ex:Error)
+                        {
+                            if (!(ex is ReferenceError))
+                            {
+                                Logger.err(ex);
+                            }
+                            cls = null;
+                        }
+                        if (cls != null)
+                        {
+                            addChild(new cls(format, isLeftPanel, getSchemeNameForImage, _bounds, layout));
+                        }
+                        else
+                        {
+                            // Class ImageExtraField is not available in the markers
+                            format.format = "<img src=\"" + format.src + "\">";
+                            format.src = null;
+                        }
+                    }
+                    if (format.src == null)
+                    {
+                        addChild(new TextExtraField(format, isLeftPanel, getSchemeNameForText, _bounds, layout, defaultAlign, defaultTextFormatConfig));
+                    }
                 }
             }
         }
