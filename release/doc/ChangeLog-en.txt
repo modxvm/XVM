@@ -7,6 +7,8 @@
     added new options in the "damageLog"/"log" and "damageLog"/"lastHit": sections:
       "moveInBattle" - to allow movement of battleLabels by a mouse in battle
   * enable DPI-Aware mode for Microsoft Windows Vista or newer
+  * added new option "carousel"/"normal"/"fields" and "carousel"/"small"/"fields" sections:
+      "stats" - settings for the stats field that appears on the mouse hover
   
 XVM-6.5.4:
   * adaptation to WoT 0.9.17.0.3

@@ -67,6 +67,7 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldPrice();
             _setupStandardFieldActionPrice();
             _setupStandardFieldFavorite();
+            _setupStandardFieldStats();
             //}, 1000);
         }
 
@@ -272,6 +273,15 @@ package com.xvm.lobby.ui.tankcarousel
         {
             _setupStandardFieldAlpha(renderer.content.imgFavorite, cfg.fields.favorite);
             _setupStandardFieldScale(renderer.content.imgFavorite, cfg.fields.favorite);
+        }
+
+        public function _setupStandardFieldStats():void
+        {
+            _setupStandardFieldAlpha(renderer.content.statsBg, cfg.fields.stats);
+            _setupStandardFieldScale(renderer.content.statsBg, cfg.fields.stats);
+            _setupStandardFieldAlpha(renderer.content.statsTF, cfg.fields.stats);
+            _setupStandardFieldScale(renderer.content.statsTF, cfg.fields.stats);
+            _setupStandardTextField(renderer.content.statsTF, cfg.fields.stats, 0);
         }
 
         private var orig_txtInfo_y:Number = NaN;

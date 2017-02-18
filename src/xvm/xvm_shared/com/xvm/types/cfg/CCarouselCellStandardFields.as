@@ -21,6 +21,7 @@ package com.xvm.types.cfg
         public var price:CCarouselCellStandardField;
         public var actionPrice:CCarouselCellStandardField;
         public var favorite:CCarouselCellStandardField;
+        public var stats:CCarouselCellStandardField;
 
         public function clone():*
         {

@@ -7,6 +7,8 @@ XVM-6.5.5-dev:
     добавлена новая опция в секции "damageLog"/"log" и "damageLog"/"lastHit":
       "moveInBattle" - разрешить перемещение battleLabels мышью в бою
   * улучшена поддержка экранов с высокой плотностью точек в Microsoft Windows Vista или новее
+  * добавлена новая опция в секции "carousel"/"normal"/"fields" и "carousel"/"small"/"fields":
+      "stats" - настройки для поля статистики, отображаемого при наведении мыши
 
 XVM-6.5.4:
   * адаптация для WoT 0.9.17.0.3
