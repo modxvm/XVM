@@ -338,7 +338,8 @@ package com.xvm
             "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
             "a:xwn6", "a:xwn8", "a:xwn", "a:xwgr", "a:eff", "a:wn6", "a:wn8", "a:wn", "a:wgr", "a:r", "a:xr",
             "a:winrate", "a:rating", "a:kb", "a:avglvl", "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb",
-            "a:xtdb", "a:tdv", "a:tfb", "a:tsb", "top_tankers_rank", "top_tankers_emblem"];
+            "a:xtdb", "a:tdv", "a:tfb", "a:tsb", "top_tankers_rank", "top_tankers_emblem", "chancesStatic",
+            "chancesLive", "allyStrengthStatic", "enemyStrengthStatic", "allyStrengthLive", "enemyStrengthLive"];
 
         private var m_globals:Object;
         private var m_players:Object; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }

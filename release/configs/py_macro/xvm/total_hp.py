@@ -30,7 +30,14 @@ def color():
 
 
 def sign():
-    return '&lt;' if panel.total_hp_sign == '<' else '&gt;' if panel.total_hp_sign == '>' else panel.total_hp_sign
+    if panel.total_hp_sign == '<':
+        return '&lt;'
+    elif panel.total_hp_sign == '>':
+        return '&gt;';
+    elif panel.total_hp_sign is None:
+        return ''
+    else:
+        return panel.total_hp_sign
 
 
 def text():
