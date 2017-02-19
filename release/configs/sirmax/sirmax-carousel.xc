@@ -49,7 +49,7 @@
         //"price":    { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100 },
         //"actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
         //"favorite": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
-        //"stats":    { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
+        "stats":    { "enabled": false, "dx": 0, "dy": 0, "alpha": 100 },
         "__stub__": {}
       },
       "extraFields": [
@@ -123,7 +123,7 @@
         //"price":    { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100 },
         //"actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
         //"favorite": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
-        //"stats": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
+        "stats": { "enabled": false, "dx": 0, "dy": 0, "alpha": 100 },
         "__stub__": {}
       },
       "extraFields": [

@@ -91,7 +91,7 @@ package com.xvm.lobby.ui.battleresults
                     //Logger.addObject(data.personal, 5);
                     //Logger.addObject(data.personal.details, 2);
                     //Logger.addObject(data.common);
-                    //Logger.addObject(xdataList, 2);
+                    //Logger.addObject(xdataList, 3);
 
                     // search localized strings for tooltips and calculate total values
                     var personal:PersonalDataVO = data.personal;
@@ -111,21 +111,7 @@ package com.xvm.lobby.ui.battleresults
                             {
                                 damageDealtNames = detail.damageDealtNames;
                             }
-                            var d:XvmCommonStatsDataVO = xdataList.data[i];
-                            d.damageDealt += detail.damageDealt;
-                            d.damageAssisted += detail.damageAssisted;
-                            d.damageAssistedCount += detail.damageAssisted > 0 ? 1 : 0;
-                            d.piercings += detail.piercings;
-                            d.kills += detail.killCount;
-                            d.spotted += detail.spotted;
-                            d.critsCount += detail.critsCount;
-                            d.armorCount += detail.armorVals ? 1 : 0;
-                            //d.ricochetsCount += detail.;
-                            //d.nonPenetrationsCount += detail.;
                         }
-                        //'creditsNoPremTotalStr': data['personal']['creditsData'][0][-1]['col1'],
-                        //'creditsPremTotalStr': data['personal']['creditsData'][0][-1]['col3'],
-                        //Logger.addObject(personal.creditsData[0], 2);
                     }
                 }
 
@@ -340,8 +326,8 @@ package com.xvm.lobby.ui.battleresults
             tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = tooltipData;
 
             // armor
-            armorTotalField.value = xdata.armorCount;
-            armorTotalField.enabled = xdata.armorCount > 0;
+            armorTotalField.value = xdata.nonPenetrationsCount;
+            armorTotalField.enabled = xdata.nonPenetrationsCount > 0;
             tooltipData = new IconEfficiencyTooltipData();
             tooltipData.setBaseValues(
                 [xdata.ricochetsCount, xdata.nonPenetrationsCount, App.utils.locale.integer(xdata.damageBlockedByArmor)],
