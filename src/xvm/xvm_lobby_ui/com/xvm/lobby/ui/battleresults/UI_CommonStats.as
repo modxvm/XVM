@@ -91,12 +91,14 @@ package com.xvm.lobby.ui.battleresults
                     //Logger.addObject(data.personal, 5);
                     //Logger.addObject(data.personal.details, 2);
                     //Logger.addObject(data.common);
-                    //Logger.addObject(xdataList, 3);
 
                     // search localized strings for tooltips and calculate total values
                     var personal:PersonalDataVO = data.personal;
                     for (var i:String in personal.details)
                     {
+                        var creditsData:Vector.<DetailedStatsItemVO> = personal.creditsData[i] as Vector.<DetailedStatsItemVO>;
+                        xdataList.data[i].creditsNoPremTotalStr = creditsData[creditsData.length - 1]["col1"];
+                        xdataList.data[i].creditsPremTotalStr = creditsData[creditsData.length - 1]["col3"];
                         for each (var detail:Object in personal.details[i])
                         {
                             if (armorNames == null)
@@ -113,6 +115,7 @@ package com.xvm.lobby.ui.battleresults
                             }
                         }
                     }
+                    //Logger.addObject(xdataList, 3);
                 }
 
                 super.update(data);

@@ -93,9 +93,7 @@ class XvmDataBlock(base.StatsBlock):
             'spotted': 0,
             'critsCount': 0,
             'ricochetsCount': 0,
-            'nonPenetrationsCount': 0,
-            'creditsNoPremTotalStr': 0, #data['personal']['creditsData'][0][-1]['col1'],
-            'creditsPremTotalStr': 0} #data['personal']['creditsData'][0][-1]['col3']}
+            'nonPenetrationsCount': 0}
 
         for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result):
             #log(vData)
@@ -128,9 +126,7 @@ class XvmDataBlock(base.StatsBlock):
                 'spotted': vData['spotted'],
                 'critsCount': calcDetailsSum(vData['details'], 'crits'),
                 'ricochetsCount': calcDetailsSum(vData['details'], 'rickochetsReceived'),
-                'nonPenetrationsCount': vData['noDamageDirectHitsReceived'],
-                'creditsNoPremTotalStr': '', #data['personal']['creditsData'][0][-1]['col1'],
-                'creditsPremTotalStr': '', #data['personal']['creditsData'][0][-1]['col3']}
+                'nonPenetrationsCount': vData['noDamageDirectHitsReceived']
             }
             self.xvm_data.append(data)
             appendTotalData(xdata_total, data)
@@ -195,7 +191,6 @@ def calcDetailsCount(details, fields):
         n = 0
         for detail in details.values():
             for field in fields:
-                log(detail[field])
                 if field in detail and detail[field] > 0:
                     n += 1
                     break;
