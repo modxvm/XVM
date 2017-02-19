@@ -75,9 +75,10 @@ class XvmDataBlock(base.StatsBlock):
             'data': self.xvm_data}
 
     def setRecord(self, result, reusable):
+        #log(result)
         xdata_total = {
-            'origXP': 0, #self._xvm_data['xpTotal'][0],
-            'premXP': 0, #self._xvm_data['xpPremTotal'][0],
+            'origXP': 0,
+            'premXP': 0,
             'origCrewXP': 0,
             'premCrewXP': 0,
             'damageDealt': 0,
@@ -97,20 +98,26 @@ class XvmDataBlock(base.StatsBlock):
 
         for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result):
             #log(vData)
+            origXP = vData['xp']
+            premXP = vData['xp']
             origCrewXP = vData['tmenXP']
             premCrewXP = vData['tmenXP']
             if vData['isPremium']:
+                origXP = vData['xp'] / (vData['premiumXPFactor10'] / 10.0)
                 origCrewXP = vData['tmenXP'] / (vData['premiumXPFactor10'] / 10.0)
             else:
+                premXP = vData['xp'] * (vData['premiumXPFactor10'] / 10.0)
                 premCrewXP = vData['tmenXP'] * (vData['premiumXPFactor10'] / 10.0)
             ownVehicle = g_itemsCache.items.getItemByCD(typeCompDescr)
             if ownVehicle and ownVehicle.isPremium:
+                origXP = int(origXP * 1.5)
+                premXP = int(premXP * 1.5)
                 origCrewXP = int(origCrewXP * 1.5)
                 premCrewXP = int(premCrewXP * 1.5)
 
             data = {
-                'origXP': 0, #self._xvm_data['xpTotal'][index + 1],
-                'premXP': 0, #self._xvm_data['xpPremTotal'][index + 1],
+                'origXP': origXP,
+                'premXP': premXP,
                 'origCrewXP': origCrewXP,
                 'premCrewXP': premCrewXP,
                 'damageDealt': vData['damageDealt'],
@@ -134,6 +141,8 @@ class XvmDataBlock(base.StatsBlock):
         self.xvm_data.insert(0, xdata_total)
 
 def appendTotalData(total, data):
+    total['origXP'] += data['origXP']
+    total['premXP'] += data['premXP']
     total['origCrewXP'] += data['origCrewXP']
     total['premCrewXP'] += data['premCrewXP']
     total['damageDealt'] += data['damageDealt']
