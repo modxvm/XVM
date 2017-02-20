@@ -18,6 +18,9 @@
   * added new options in the "damageLog"/"log" and "damageLog"/"lastHit": sections:
       "moveInBattle" - to allow movement of battleLabels by a mouse in battle
 
+  [MARKERS]
+  * added image scaling for extrafields
+
   [MINIMAP]
   * save circles data in replay
   * fixed drawing of "motion" and "blindarea_motion" circles
