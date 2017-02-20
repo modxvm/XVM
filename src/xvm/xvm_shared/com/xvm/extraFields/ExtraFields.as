@@ -110,7 +110,10 @@ package com.xvm.extraFields
                         else
                         {
                             // Class ImageExtraField is not available in the markers
-                            format.format = "<img src=\"" + format.src + "\">";
+                            format.format = "<img src=\"" + format.src + "\"";
+                                (format.width != null  ? " width='" + format.width + "'" : "") +
+                                (format.height != null  ? " height='" + format.height + "'" : "") +
+                                ">";
                             format.src = null;
                         }
                     }
