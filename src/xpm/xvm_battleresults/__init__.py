@@ -131,7 +131,7 @@ class XvmDataBlock(base.StatsBlock):
                 'piercings': vData['piercings'],
                 'kills': vData['kills'],
                 'spotted': vData['spotted'],
-                'critsCount': calcDetailsSum(vData['details'], 'crits'),
+                'critsCount': calcDetailsCount(vData['details'], ['crits']),
                 'ricochetsCount': calcDetailsSum(vData['details'], 'rickochetsReceived'),
                 'nonPenetrationsCount': vData['noDamageDirectHitsReceived']
             }
