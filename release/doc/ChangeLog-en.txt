@@ -7,6 +7,7 @@
   [XFW]
   * part of the functionality (bank loading, Microsoft Windows XP fixes) was moved from XVM to XFW
   * make XFW more independent from XVM
+  * add python console (based on Hedger's py4wot). Use Alt+~ to enable it.
 
   [XMQP]
   * ignoring clicks and lines from blocked players
