@@ -1,4 +1,4 @@
-﻿XVM-6.5.5-dev:
+﻿XVM-6.5.5:
   [GENERAL]
   * adaptation to WoT 0.9.17.1
   * enable DPI-Aware mode for high pixel density displays for Microsoft Windows Vista or later
