@@ -110,8 +110,6 @@ class XvmDataBlock(base.StatsBlock):
                 premCrewXP = vData['tmenXP'] * (vData['premiumXPFactor10'] / 10.0)
             ownVehicle = g_itemsCache.items.getItemByCD(typeCompDescr)
             if ownVehicle and ownVehicle.isPremium:
-                origXP = int(origXP * 1.5)
-                premXP = int(premXP * 1.5)
                 origCrewXP = int(origCrewXP * 1.5)
                 premCrewXP = int(premCrewXP * 1.5)
 
