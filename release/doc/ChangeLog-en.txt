@@ -1,4 +1,14 @@
-﻿XVM-6.5.5:
+﻿XVM-6.5.6-dev:
+  [XFW]
+  * python console shortcut was changed to Ctrl+Alt+~
+
+  [HANGAR]
+  * fixed critical hits counter
+
+  [PYTHON MACROSES]
+  * added the macro {{py:xvm.dynamic_color_rating(rating, value)}}
+
+XVM-6.5.5:
   [GENERAL]
   * adaptation to WoT 0.9.17.1
   * enable DPI-Aware mode for high pixel density displays for Microsoft Windows Vista or later
@@ -44,9 +54,8 @@
   * allow formatting for recursive macros like `{{{{py:random.randint()}}==0?zero|one}}`
   
   [PYTHON MACROSES]
-  * Added xvm.utils.smooth_transition_color() function
-  * Added the macro {{py:xvm.dynamic_color_rating(rating, value)}}
-  * Added list of available macroses with their description (/res_mods/mods/shared_resources/xvm/docs/py_macros.txt)
+  * added xvm.utils.smooth_transition_color() function
+  * added list of available macroses with their description (/res_mods/mods/shared_resources/xvm/docs/py_macros.txt)
 
 XVM-6.5.4:
   * adaptation to WoT 0.9.17.0.3
