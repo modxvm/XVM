@@ -158,7 +158,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 #####################################################################
 # Log version info + warn about installed XVM fonts
 
-log("XVM: eXtended Visualisation Mod ( %s )" % XFW_MOD_INFO['URL'])
+log("XVM: eXtended Visualization Mod ( %s )" % XFW_MOD_INFO['URL'])
 
 try:
     from __version__ import __branch__, __revision__, __node__
