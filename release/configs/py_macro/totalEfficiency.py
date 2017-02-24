@@ -152,6 +152,7 @@ def _addRibbon(self, ribbonID, ribbonType='', leftFieldStr='', vehName='', vehTy
                     ribbonTypes[ribbonType][1] = ribbonTypes[ribbonType][0] + int(leftFieldStr[1:])
                 else:
                     ribbonTypes[ribbonType][1] += 1
+                    ribbonTypes[ribbonType][0] = ribbonTypes[ribbonType][1]
             if ribbonType in ['kill', 'teamKill']:
                 ribbonTypes[ribbonType][1] += 1
             if ribbonType in ['damage', 'ram', 'burn']:
