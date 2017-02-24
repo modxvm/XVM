@@ -4,9 +4,11 @@
 
   [HANGAR]
   * fixed critical hits counter
+  * fixed premium XP counter
 
   [PYTHON MACROSES]
   * added the macro {{py:xvm.dynamic_color_rating(rating, value)}}
+  * fixed macroses {{py:xvm.crits}} and {{py:xvm.detection}}
 
 XVM-6.5.5:
   [GENERAL]
