@@ -175,7 +175,7 @@
     },
     // Rewritable timer format
     // Перезаписываемый формат таймера
-    "defaultTimeItem": {
+    "repairTimeItem": {
       "width": 47,
       "height": 40,
       "screenHAlign": "left",
@@ -186,7 +186,7 @@
     // Repair timer for engine
     // Таймер ремонта двигателя
     "repairTimeEngine": {
-      "$ref": { "path":"def.defaultTimeItem" },
+      "$ref": { "path":"def.repairTimeItem" },
       "enabled": true,
       "updateEvent": "PY(ON_ENGINE_UPDATE)",
       "x": 4,
@@ -196,7 +196,7 @@
     // Repair timer for gun
     // Таймер ремонта орудия
     "repairTimeGun": {
-      "$ref": { "path":"def.defaultTimeItem" },
+      "$ref": { "path":"def.repairTimeItem" },
       "enabled": true,
       "updateEvent": "PY(ON_GUN_UPDATE)",
       "x": 4,
@@ -206,7 +206,7 @@
     // Repair timer for turret rotator
     // Таймер ремонта механизма поворота башни
     "repairTimeTurret": {
-      "$ref": { "path":"def.defaultTimeItem" },
+      "$ref": { "path":"def.repairTimeItem" },
       "enabled": true,
       "updateEvent": "PY(ON_TURRET_UPDATE)",
       "x": 4,
@@ -216,7 +216,7 @@
     // Repair timer for tracks
     // Таймер ремонта сбитых гусениц
     "repairTimeTracks": {
-      "$ref": { "path":"def.defaultTimeItem" },
+      "$ref": { "path":"def.repairTimeItem" },
       "enabled": true,
       "updateEvent": "PY(ON_TRACKS_UPDATE)",
       "x": 177,
@@ -226,7 +226,7 @@
     // Repair timer for surveying device
     // Таймер ремонта приборов наблюдения
     "repairTimeSurveying": {
-      "$ref": { "path":"def.defaultTimeItem" },
+      "$ref": { "path":"def.repairTimeItem" },
       "enabled": true,
       "updateEvent": "PY(ON_SURVEYING_UPDATE)",
       "x": 177,
@@ -236,7 +236,7 @@
     // Repair timer for radio
     // Таймер ремонта радиостанции
     "repairTimeRadio": {
-      "$ref": { "path":"def.defaultTimeItem" },
+      "$ref": { "path":"def.repairTimeItem" },
       "enabled": true,
       "updateEvent": "PY(ON_RADIO_UPDATE)",
       "x": 177,

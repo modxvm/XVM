@@ -144,6 +144,10 @@ def repairTimeRadio():
 
 #REGISTERS
 
+@registerEvent(DamagePanel, '_switching')
+def _switching(self, _):
+    resetAll()
+
 @registerEvent(DamagePanel, '_updateRepairingDevice')
 def _updateRepairingDevice(self, value):
     device = value[0]
